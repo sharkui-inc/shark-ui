@@ -38,12 +38,12 @@ interface SelectTriggerProps
    *
    * @default false
    */
-  showClearTrigger?: boolean;
+  showClear?: boolean;
 }
 
 export const SelectTrigger = (props: SelectTriggerProps) => {
   const {
-    showClearTrigger = false,
+    showClear = false,
     size = "md",
     className,
     children,
@@ -69,7 +69,7 @@ export const SelectTrigger = (props: SelectTriggerProps) => {
         {children}
 
         <div className="ms-auto flex items-center gap-1 rtl:me-auto">
-          {showClearTrigger && (
+          {showClear && (
             <SelectClearTrigger>
               <XIcon />
             </SelectClearTrigger>
