@@ -54,7 +54,7 @@ export const ScrollArea = (props: ScrollAreaProps) => {
         className={cn(scrollAreaVariants({ scrollFade }))}
         data-slot="scroll-area-viewport"
       >
-        <ArkScrollArea.Content data-slot="scroll-area-content ">
+        <ArkScrollArea.Content data-slot="scroll-area-content">
           {children}
         </ArkScrollArea.Content>
       </ArkScrollArea.Viewport>
