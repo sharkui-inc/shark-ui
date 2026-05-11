@@ -60,5 +60,5 @@ Floating layers use Ark `Portal` internally. See [`../portal.md`](../portal.md).
 ## Anti-patterns
 
 - Putting raw interactive elements where a trigger part expects **`asChild`** with a single child—follow Shark examples so focus and semantics stay correct.
-- Mixing Radix-only part names (`DropdownMenuContent`, …) with Shark exports.
+- Mixing Radix-only part names (`MenuContent`, …) with Shark exports.
 - Omitting required sections (`DialogHeader` patterns, menu content wrappers) documented in MDX.

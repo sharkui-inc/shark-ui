@@ -1,6 +1,6 @@
 ---
 name: shark
-description: Helps implement Shark UI components correctly. Use when building UIs with Shark primitives (buttons, dialogs, sheets, selects, forms, menus, tabs, inputs, toasts, sidebars, etc.), migrating from shadcn/Radix mental models to Shark/Ark UI, composing overlays and collection-based controls, or troubleshooting Shark component behavior. Covers imports, accessibility, Tailwind styling, registry examples, and common pitfalls.
+description: Shark UI skill for the Ark UI–based shadcn-style registry. Use when implementing or debugging components (overlays, menus, popovers, sheets, dialogs), collection-driven controls (combobox, select, list patterns), Field/forms, sidebar or chart docs patterns, Tailwind v4 tokens, or migrating Radix/shadcn examples to Shark.
 compatibility: Requires Tailwind CSS v4 and @ark-ui/react. Designed for React projects using the Shark UI registry (shadcn-style workflow).
 license: MIT
 metadata:
