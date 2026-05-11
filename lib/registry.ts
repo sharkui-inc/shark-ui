@@ -7,17 +7,19 @@ export const registryItemFileTypes = z.enum([
   "registry:ui",
   "registry:hook",
   "registry:style",
+  "registry:lib",
 ]);
 
 export const registryItemSchema = z.object({
   name: z.string(),
   type: registryItemFileTypes,
+  description: z.string().optional(),
+  extends: z.string().optional(),
   dependencies: z.array(z.string()),
+  devDependencies: z.array(z.string()).optional(),
   registryDependencies: z.array(z.string()).optional(),
   cssVars: z.record(z.string(), z.record(z.string(), z.string())).optional(),
-  css: z
-    .record(z.string(), z.record(z.string(), z.record(z.string(), z.string())))
-    .optional(),
+  css: z.record(z.string(), z.unknown()).optional(),
 });
 
 export interface RegistryItemType extends z.infer<typeof registryItemSchema> {}

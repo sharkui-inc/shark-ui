@@ -1,0 +1,59 @@
+---
+title: useIsMobile
+description: Reports whether the viewport is below the mobile breakpoint.
+---
+
+`useIsMobile` tells you if the viewport is less than **768px**. It uses `matchMedia`, so it reacts instantly to browser zoom and device rotation, not just window resizing.
+
+## Installation
+
+<CodeTabs>
+  <TabsList defaultValue="cli">
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/use-is-mobile
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+<Steps>
+  <Step>This hook has no package dependencies beyond React.</Step>
+
+  <Step>Copy and paste the following code into your project.</Step>
+
+  <ComponentSource title="hooks/use-is-mobile.tsx" src="../hooks/use-is-mobile.tsx" />
+
+  <Step>Update the import paths to match your project setup.</Step>
+</Steps>
+
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { useIsMobile } from "@/registry/react/hooks/use-is-mobile";
+```
+
+## Example
+
+```tsx showLineNumbers
+"use client";
+
+import { useIsMobile } from "@/registry/react/hooks/use-is-mobile";
+
+export function Example() {
+  const isMobile = useIsMobile();
+
+  return (
+    <p className="text-muted-foreground text-sm">
+      {isMobile ? "Mobile layout" : "Desktop layout"}
+    </p>
+  );
+}
+```

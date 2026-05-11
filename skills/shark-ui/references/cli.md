@@ -26,6 +26,12 @@ npx shadcn@latest add @shark/combobox
 npx shadcn@latest add @shark/sidebar
 ```
 
+Install the full component catalog in one step (meta item with `registryDependencies`):
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
 ### URL-based add (fallback)
 
 From manual installation docs:

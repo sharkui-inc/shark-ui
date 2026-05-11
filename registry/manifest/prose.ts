@@ -247,7 +247,7 @@ const css = {
 
 const manifest: RegistryItemType = {
   name: "prose",
-  type: "registry:style",
+  type: "registry:ui",
   dependencies,
   cssVars,
   css,

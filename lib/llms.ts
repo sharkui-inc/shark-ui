@@ -25,6 +25,7 @@ const SECTIONS = [
   "components",
   "installation",
   "utilities",
+  "hooks",
   "forms",
   "changelog",
 ] as const;
@@ -33,6 +34,7 @@ const SECTION_LABELS: Record<(typeof SECTIONS)[number], string> = {
   components: "Components",
   installation: "Installation",
   utilities: "Utilities",
+  hooks: "Hooks",
   forms: "Forms",
   changelog: "Changelog",
 };

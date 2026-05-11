@@ -1,8 +1,10 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "prose",
-  "type": "registry:style",
-  "dependencies": ["@ark-ui/react"],
+  "type": "registry:ui",
+  "dependencies": [
+    "@ark-ui/react"
+  ],
   "cssVars": {},
   "css": {
     "@layer components": {
