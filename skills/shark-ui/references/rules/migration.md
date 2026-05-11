@@ -2,6 +2,41 @@
 
 Shark feels similar to shadcn ergonomically, but behavior and props come from **Ark UI** roots in `registry/react/components`.
 
+## From `render={...}` to `asChild`
+
+Some headless kits attach the trigger to a host element with a **`render`** prop (often `render={<Button … />}`). **Shark / Ark** does not use that pattern on triggers. Use **`asChild`** instead: the trigger stays as the wrapper, and you pass **one child** that is the real interactive element (`Button`, `a`, etc.). Ark merges trigger props onto that child.
+
+**Steps**
+
+1. Remove the **`render={…}`** prop entirely.
+2. Add **`asChild`** on the Shark trigger (or close) part **only if** that part’s MDX or source documents it.
+3. Put the **`Button`** (or link) as the **only child** of the trigger; move **`variant`**, **`className`**, **`type`**, and label text onto that child.
+4. Inside forms, set **`type="button"`** on button triggers so they do not submit accidentally.
+
+**Before (illustrative `render` style)**
+
+```tsx
+<DialogTrigger render={<Button variant="outline" />}>Open</DialogTrigger>
+```
+
+**After (Shark / Ark style)**
+
+```tsx
+<DialogTrigger asChild>
+  <Button variant="outline" type="button">
+    Open
+  </Button>
+</DialogTrigger>
+```
+
+Apply the same idea to **`DialogClose`**, **`MenuTrigger`**, **`PopoverTrigger`**, and similar parts: **`asChild`** + one child component, not **`render`**.
+
+**Pitfalls**
+
+- **`asChild` needs exactly one** child element that can receive merged props (typically one `Button` or `a`). Multiple sibling children will not work.
+- If **`asChild`** is omitted, you may get nested interactive nodes or broken focus; match the examples in MDX.
+- Not every part supports **`asChild`**; confirm for the specific export before converting.
+
 ## High-impact differences
 
 - **Verify composition** in Shark MDX—do not assume 1:1 parity with old Radix demos.

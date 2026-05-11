@@ -1,5 +1,5 @@
 ---
-name: shark
+name: shark-ui
 description: Shark UI skill for the Ark UI–based shadcn-style registry. Use when implementing or debugging components (overlays, menus, popovers, sheets, dialogs), collection-driven controls (combobox, select, list patterns), Field/forms, sidebar or chart docs patterns, Tailwind v4 tokens, or migrating Radix/shadcn examples to Shark.
 compatibility: Requires Tailwind CSS v4 and @ark-ui/react. Designed for React projects using the Shark UI registry (shadcn-style workflow).
 license: MIT
@@ -53,6 +53,7 @@ Additional components may exist under `registry/react/components/` and `content/
 
 Always apply before returning Shark code:
 
+- When a snippet uses **`render={...}`** on a trigger (patterns from other headless libraries), rewrite to **`asChild`** plus a single child element (`Button`, link, etc.). See `./references/rules/migration.md` (“From `render={...}` to `asChild`”).
 - Do not invent Shark or Ark APIs. Confirm exports and structure from `content/docs/components/<name>.mdx` and/or `registry/react/components/<name>.tsx`.
 - For **combobox** (and similar list primitives): use `useFilter` + `useListCollection` from `@ark-ui/react`, pass a `collection` (not a raw `items` array where the docs use collection), call `filter(inputValue)` from `onInputValueChange`, and render `collection.items.map(...)` inside the list (see `AGENTS.md` and combobox examples).
 - For **select/listbox** patterns that use collections: prefer `createListCollection` / `useListCollection` as shown in component examples.

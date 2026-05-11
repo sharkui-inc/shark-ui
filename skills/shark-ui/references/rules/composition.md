@@ -1,6 +1,6 @@
 # Composition rules (Shark UI / Ark)
 
-Shark wraps **Ark UI** primitives. Composition follows **React component trees** and Ark’s **`asChild`** prop where a part supports merging props onto a single child (e.g. wrapping a `Button` in `DialogTrigger`). Check MDX or source for which parts expose `asChild`; not every part does.
+Shark wraps **Ark UI** primitives. Composition follows **React component trees** and Ark’s **`asChild`** prop where a part supports merging props onto a single child (e.g. wrapping a `Button` in `DialogTrigger`). Check MDX or source for which parts expose `asChild`; not every part does. If you are converting **`render={...}`** triggers from another kit, read the section **From `render={...}` to `asChild`** in [`migration.md`](./migration.md) (same folder: `rules/`).
 
 ## Core rules
 

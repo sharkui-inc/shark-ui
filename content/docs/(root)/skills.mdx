@@ -1,63 +1,60 @@
 ---
 title: Skills
-description: Let AI assistants build UIs using Shark UI components with skills and context.
+description: Give your agent knowledge to ship correct components, patterns, and migrations.
 ---
 
-Skills give AI assistants like Claude Code project-aware context about Shark UI. When installed, your AI assistant knows how to find, install, compose, and customize components using the correct APIs and patterns for your project.
+This skill covers Shark UI components, patterns, and styling. Your assistant uses it to implement those pieces correctly in your project.
 
-For example, you can ask your AI assistant to:
+You can ask for something concrete:
 
-- "Add a login form with email and password fields."
-- "Create a settings page with a form for updating profile information."
-- "Build a dashboard with a sidebar, stats cards, and a data table."
-- "Add the dialog component from the Shark registry."
-- "Can you add a hero block from the Shark blocks?"
+- _“Add a settings dialog with a form and save/cancel buttons.”_
+- _“Add a combobox with search filtering.”_
+- _“Migrate this shadcn dropdown to Shark’s Menu.”_
+- _“Add a Select with grouped options and a placeholder.”_
 
-## Setup
-
-Run the installer script (works with Claude Code, Cursor, OpenCode, Codex, and Antigravity):
+## Installation
 
 ```bash
-curl -fsSL https://shark.vini.one/install | bash -s shark-ui
+npx skills add vinihvc/shark-ui
 ```
 
-Alternatively, install via the skills CLI:
+The public directory and leaderboard live at [skills.sh](https://skills.sh).
 
-```bash
-npx skills add shark-ui
-```
+## What you get
 
-## Using Skills
+The layout matches other mature UI skills: a compact entry file and deeper material you load only when the task needs it.
 
-Agents discover skills automatically, or you can invoke the skill with `/shark-ui`.
+### Component knowledge
 
-You can instruct your assistant to:
+Your assistant gets a map of the registry: what to import, how parts nest, and where the sharp edges are. Overlays (**Dialog** vs **Sheet**), menus (**Menu** vs **Context Menu**), list controls (**Select** vs **Combobox** with collections and filters), **Field**-driven forms, and **Sidebar** shells each have a short guide in the skill pack. That material stays aligned with the published component list in this project and the MDX on this site, so “what the skill says” and “what the docs say” stay in sync.
 
-- Implement UIs with Shark UI components
-- Create screens and flows using the component set
-- Adjust themes, tokens, and styling
-- Look up component APIs and examples
+### Styling conventions
 
-For broader AI context, see [llms.txt](/docs/llms-txt) for documentation bundled for agents.
+Tailwind CSS v4, semantic tokens, and the small habits that keep Shark visually consistent (`data-slot` usage, spacing, borders), plus the editorial rules we keep for examples and previews (thumbs, field widths, chart tooltips, sidebar preview framing, and similar detail).
 
-## What You Get
+### Migration patterns
 
-- Shark UI setup and installation instructions
-- Component catalog with props, variants, and usage
-- Theming and styling notes
-- Design principles and composition patterns
+When someone pastes Radix- or shadcn-shaped code, the skill nudges the rewrite toward **Shark UI**: collection objects for list primitives, `asChild` where Shark UI documents it, and the chart or sidebar patterns we actually ship, not a generic “swap the import path” pass.
 
-## Skill Layout
+### CLI and registry
 
-```bash
-skills/shark-ui/
-├── SKILL.md              # Skill entry point
-├── LICENSE.txt
-└── scripts/
-    ├── list_components.mjs
-    ├── get_component_docs.mjs
-    ├── get_source.mjs
-    ├── get_styles.mjs
-    ├── get_theme.mjs
-    └── get_docs.mjs
-```
+The same workflow this site documents for adding components (shadcn-style CLI and the public registry JSON hosted here). The skill reminds agents to follow each component’s installation section, dependency list, and registry entry.
+
+### Registry examples
+
+Every serious answer should look at the shipped examples that sit beside each component in source. Those snippets are the library’s own compositions; matching them keeps generated UI aligned with how Shark is maintained, not a one-line stub from a model’s training cut-off.
+
+## How it works
+
+1. **Activation:** After install, your agent discovers the skill the same way it discovers other Agent Skills.
+2. **Progressive depth:** The **SKILL.md** file links into the registry index, shared rule files, and per-component notes only when the prompt touches that surface.
+3. **Pattern enforcement:** The assistant follows Shark composition, combobox collection and filtering, chart tooltip wiring where applicable, sidebar preview layout, and the import conventions.
+4. **Examples before invention:** The workflow tells the model to read the MDX for the component and the matching example snippets.
+
+## Supported agents
+
+Any editor or CLI that implements the [Agent Skills](https://agentskills.io) layout can consume this bundle: Claude Code, Cursor, Codex, Cline, Windsurf, GitHub Copilot, and the rest of the list on [skills.sh](https://skills.sh).
+
+## In the repository
+
+The skill is versioned in the same open-source project as Shark UI. If you want to read or change it, open the project on [GitHub](https://github.com/vinihvc/shark-ui).
