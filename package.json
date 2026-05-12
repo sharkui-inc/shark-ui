@@ -1,8 +1,8 @@
 {
   "name": "shark-ui",
-  "description": "components library powered by ark-ui",
+  "description": "shadcn-style components built on Ark",
   "version": "1.0.0",
-  "packageManager": "pnpm@11.1.0",
+  "packageManager": "pnpm@11.1.1",
   "private": true,
   "author": "Vinicius Vicentini <viniciusvicentini@live.com>",
   "license": "MIT",
@@ -31,7 +31,7 @@
     }
   ],
   "scripts": {
-    "prebuild": "bun run registry:build",
+    "prebuild": "pnpm registry:build",
     "build": "next build",
     "typecheck": "next build",
     "dev": "next dev",
@@ -54,7 +54,7 @@
     "date-fns": "^4.1.0",
     "front-matter": "^4.0.2",
     "fumadocs-core": "16.8.10",
-    "fumadocs-mdx": "15.0.3",
+    "fumadocs-mdx": "15.0.4",
     "fumadocs-ui": "16.8.10",
     "jotai": "^2.20.0",
     "lru-cache": "^11.3.6",
@@ -88,14 +88,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,jsonc,css,scss,md,mdx}": [
-      "pnpm registry:build",
       "pnpm lint:fix"
     ]
-  },
-  "pnpm": {
-    "overrides": {
-      "@types/react": "19.2.14",
-      "@types/react-dom": "19.2.3"
-    }
   }
 }

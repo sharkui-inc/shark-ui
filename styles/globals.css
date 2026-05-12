@@ -356,7 +356,7 @@
   }
 
   body {
-    @apply bg-background text-foreground flex min-h-svh flex-col;
+    @apply bg-background text-foreground flex min-h-svh flex-col overflow-x-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20;
   }
 
   main {

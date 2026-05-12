@@ -114,7 +114,7 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
         for (const item of group.children) {
           if (item.type === "page") {
             const isComponent =
-              ["/components/", "/utilities/"].some((path) =>
+              ["/components/", "/utilities/", "/hooks/"].some((path) =>
                 item.url.includes(path)
               ) ?? false;
             const itemName = item.name?.toString() || "";

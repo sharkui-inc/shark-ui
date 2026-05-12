@@ -78,7 +78,7 @@ const SidebarBlock = () => {
 
   return (
     <SidebarProvider>
-      <Sidebar>
+      <Sidebar defaultOpen={true}>
         <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>

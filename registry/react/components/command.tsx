@@ -142,10 +142,9 @@ export const CommandContent = (
       className={cn(
         "flex flex-1 flex-col",
         "max-h-(--available-height) min-h-0",
+        "-mr-2",
         "outline-none",
-        "overflow-auto",
-        "scroll-pr-1 overscroll-contain",
-        "[-webkit-scrollbar-track:--spacing(2)] [-webkit-scrollbar:--spacing(2)] [scrollbar-width:thin]",
+        "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20 overflow-auto overscroll-contain",
         "[:not(.has-[+[data-slot=command-footer]])]:rounded-b-2xl [:not(.has-[+[data-slot=command-footer]])]:border-b",
         className
       )}
@@ -184,7 +183,7 @@ export const CommandList = (props: CommandListProps) => {
   return (
     <div className="max-h-72 min-h-0 flex-1">
       <ComboboxList
-        className={cn("flex-1 pr-3", className)}
+        className={cn("flex-1 pr-2.5", className)}
         data-slot="command-list"
         {...rest}
       />
