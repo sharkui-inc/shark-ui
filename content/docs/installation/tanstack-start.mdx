@@ -3,32 +3,221 @@ title: TanStack Start
 description: Install Shark UI in a TanStack Start project.
 ---
 
-TanStack Start with the shadcn add-on ships with Tailwind and the shadcn CLI preconfigured. You only need to add components from the Shark registry.
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/registry/react/components/card";
 
-## Create project
+<div className="mt-6 grid gap-4 sm:grid-cols-3 sm:gap-6">
+  <a
+    href="#use-the-shark-preset"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Use the Shark preset" description="Initialize a TanStack Start project with the Shark registry preset." />
+    </Card>
+  </a>
+  <a
+    href="#use-the-cli"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Use the CLI" description="Scaffold a new TanStack Start project from the terminal." />
+    </Card>
+  </a>
+  <a
+    href="#existing-project"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Existing Project" description="Configure Shark UI manually in an existing TanStack Start project." />
+    </Card>
+  </a>
+</div>
+
+## Use the Shark Preset
+
+<Steps>
+
+### Create Project
+
+Run the `init` command with the Shark preset and the TanStack Start template:
 
 ```bash
-npm create @tanstack/start@latest --tailwind --add-ons shadcn
+npx shadcn@latest init @shark/style -t start
 ```
 
-## Add components
+### Add Components
 
-Add components from the Shark registry:
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
 
 ```bash
-pnpm dlx shadcn@latest add https://shark.vini.one/r/button.json
+npx shadcn@latest add @shark/button
 ```
 
-Import and use them in your routes:
+You can also install every component at once:
 
-```tsx title="app/routes/index.tsx" showLineNumbers
-import { Button } from "@/components/ui/button"
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components like this:
+
+```tsx title="src/routes/index.tsx" showLineNumbers
+import { createFileRoute } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+
+export const Route = createFileRoute("/")({
+  component: App,
+});
 
 function App() {
   return (
-    <div>
+    <div className="flex min-h-svh items-center justify-center p-6">
       <Button>Click me</Button>
     </div>
-  )
+  );
 }
 ```
+
+</Steps>
+
+<div id="use-the-cli" className="scroll-mt-24" />
+
+## Use the CLI
+
+<Steps>
+
+### Create Project
+
+Run the `init` command to scaffold a new TanStack Start project and configure Shark UI:
+
+```bash
+npx shadcn@latest init @shark/style -t start
+```
+
+For a monorepo project, use the `--monorepo` flag:
+
+```bash
+npx shadcn@latest init @shark/style -t start --monorepo
+```
+
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add @shark/button
+```
+
+If you created a monorepo, run the command from `apps/web` or specify the workspace from the repo root:
+
+```bash
+npx shadcn@latest add @shark/button -c apps/web
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components like this:
+
+```tsx title="src/routes/index.tsx" showLineNumbers
+import { createFileRoute } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+
+export const Route = createFileRoute("/")({
+  component: App,
+});
+
+function App() {
+  return (
+    <div className="flex min-h-svh items-center justify-center p-6">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+```
+
+If you created a monorepo, update `apps/web/src/routes/index.tsx` and import from your workspace UI package instead.
+
+</Steps>
+
+<div id="existing-project" className="scroll-mt-24" />
+
+## Existing Project
+
+<Steps>
+
+### Create Project
+
+If you need a new TanStack Start project, create one first. Otherwise, skip this step.
+
+```bash
+npx @tanstack/cli@latest create
+```
+
+Choose TanStack Start, the React framework, and the recommended defaults so Tailwind CSS and the `@/*` import alias are configured for you.
+
+Do not add the `shadcn` add-on when prompted. The `shadcn` CLI will configure Shark UI later in this guide.
+
+The TanStack CLI already configures Tailwind CSS and the default `@/*` import alias for you. If you're adding Shark UI to an older or custom TanStack Start app, make sure both are configured before continuing.
+
+### Run the CLI
+
+Run the `shadcn` init command with the Shark preset to set up your project.
+
+```bash
+npx shadcn@latest init @shark/style
+```
+
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add @shark/button
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components like this:
+
+```tsx title="src/routes/index.tsx" showLineNumbers
+import { createFileRoute } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+
+export const Route = createFileRoute("/")({
+  component: App,
+});
+
+function App() {
+  return (
+    <div className="flex min-h-svh items-center justify-center p-6">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+```
+
+</Steps>

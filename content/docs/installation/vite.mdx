@@ -3,27 +3,178 @@ title: Vite
 description: Install Shark UI in a Vite project.
 ---
 
-## Create project
+import {
+  Card,
+  CardHeader,
+} from "@/registry/react/components/card";
 
-Create a new Vite project:
+<div className="mt-6 grid gap-4 sm:grid-cols-3 sm:gap-6">
+  <a
+    href="#use-the-shark-preset"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Use the Shark preset" description="Initialize a Vite project with the Shark registry preset." />
+    </Card>
+  </a>
+  <a
+    href="#use-the-cli"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Use the CLI" description="Scaffold a new Vite project directly from the terminal." />
+    </Card>
+  </a>
+  <a
+    href="#existing-project"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Existing Project" description="Configure Shark UI manually in an existing Vite project." />
+    </Card>
+  </a>
+</div>
+
+## Use the Shark Preset
+
+<Steps>
+
+### Create Project
+
+Run the `init` command with the Shark preset and the Vite template:
+
+```bash
+npx shadcn@latest init @shark/style -t vite
+```
+
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add @shark/button
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components like this:
+
+```tsx title="src/App.tsx" showLineNumbers
+import { Button } from "@/components/ui/button";
+
+function App() {
+  return (
+    <div className="flex min-h-svh flex-col items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+</Steps>
+
+<div id="use-the-cli" className="scroll-mt-24" />
+
+## Use the CLI
+
+<Steps>
+
+### Create Project
+
+Run the `init` command to scaffold a new Vite project and configure Shark UI:
+
+```bash
+npx shadcn@latest init @shark/style -t vite
+```
+
+For a monorepo project, use the `--monorepo` flag:
+
+```bash
+npx shadcn@latest init @shark/style -t vite --monorepo
+```
+
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add @shark/button
+```
+
+If you created a monorepo, run the command from `apps/web` or specify the workspace from the repo root:
+
+```bash
+npx shadcn@latest add @shark/button -c apps/web
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components like this:
+
+```tsx title="src/App.tsx" showLineNumbers
+import { Button } from "@/components/ui/button";
+
+function App() {
+  return (
+    <div className="flex min-h-svh flex-col items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+If you created a monorepo, update `apps/web/src/App.tsx` and import from your workspace UI package instead.
+
+</Steps>
+
+<div id="existing-project" className="scroll-mt-24" />
+
+## Existing Project
+
+<Steps>
+
+### Create Project
+
+If you need a new Vite project, create one first and select the **React + TypeScript** template. Otherwise, skip this step.
 
 ```bash
 npm create vite@latest
 ```
 
-## Add Tailwind CSS
+### Add Tailwind CSS
+
+If your project already has Tailwind CSS configured, skip this step.
 
 ```bash
 npm install tailwindcss @tailwindcss/vite
 ```
 
-Create a file `styles/globals.css` with:
+Replace everything in `src/index.css` with the following:
 
-```css title="styles/globals.css"
+```css title="src/index.css"
 @import "tailwindcss";
 ```
 
-## Edit tsconfig.json
+### Edit tsconfig.json
 
 Vite splits TypeScript config across multiple files. Add `baseUrl` and `paths` to the `compilerOptions` in both `tsconfig.json` and `tsconfig.app.json`:
 
@@ -47,7 +198,7 @@ Vite splits TypeScript config across multiple files. Add `baseUrl` and `paths` t
 }
 ```
 
-## Edit tsconfig.app.json
+### Edit tsconfig.app.json
 
 Add the same path resolution so your IDE resolves imports correctly:
 
@@ -62,7 +213,7 @@ Add the same path resolution so your IDE resolves imports correctly:
 }
 ```
 
-## Update vite.config.ts
+### Update vite.config.ts
 
 Add the path alias so Vite resolves `@/` at build time:
 
@@ -86,36 +237,47 @@ export default defineConfig({
 })
 ```
 
-## Run the CLI
+### Run the CLI
 
-Run the shadcn init command to set up your project:
-
-```bash
-npx shadcn@latest init
-```
-
-The CLI creates a `components.json` file. When asked for base color, choose **Neutral** to match Shark UI defaults.
-
-## Add components
-
-Add components from the Shark registry:
+Run the `shadcn` init command with the Shark preset to set up your project.
 
 ```bash
-pnpm dlx shadcn@latest add https://shark.vini.one/r/button.json
+npx shadcn@latest init @shark/style
 ```
 
-Import and use them:
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add @shark/button
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components like this:
 
 ```tsx title="src/App.tsx" showLineNumbers
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 
 function App() {
   return (
     <div className="flex min-h-svh flex-col items-center justify-center">
       <Button>Click me</Button>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
+
+</Steps>

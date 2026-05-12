@@ -1,0 +1,150 @@
+---
+title: Laravel
+description: Install Shark UI in a Laravel project.
+---
+
+import {
+  Card,
+  CardHeader,
+} from "@/registry/react/components/card";
+
+The shadcn CLI does not scaffold a new Laravel app. Start by creating a Laravel app with the React starter kit, then choose how you want to configure Shark UI.
+
+### Create Project
+
+Create a new Laravel app using the Laravel installer:
+
+```bash
+laravel new my-app
+```
+
+If you already have a Laravel app with React and Inertia configured, skip this step.
+
+Choose the **React** starter kit when prompted. For more information, see the official [Laravel frontend documentation](https://laravel.com/docs/starter-kits#react).
+
+Then move into your project directory:
+
+```bash
+cd my-app
+```
+
+<div className="mt-6 grid gap-4 sm:grid-cols-2 sm:gap-6">
+  <a
+    href="#use-the-shark-preset"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Use the Shark preset" description="Initialize Shark UI in your Laravel app with the registry preset." />
+    </Card>
+  </a>
+  <a
+    href="#use-the-cli"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Use the CLI" description="Configure Shark UI in your Laravel app directly from the terminal." />
+    </Card>
+  </a>
+</div>
+
+## Use the Shark Preset
+
+<Steps>
+
+### Run the Command
+
+Run the `init` command with the Shark preset and the Laravel template from the root of your Laravel app:
+
+```bash
+npx shadcn@latest init @shark/style -t laravel
+```
+
+When asked to overwrite `components.json` and components, choose `Yes`.
+
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Switch` component to your project:
+
+```bash
+npx shadcn@latest add @shark/switch
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components like this:
+
+```tsx title="resources/js/pages/index.tsx" showLineNumbers
+import { Switch } from "@/components/ui/switch";
+
+const MyPage = () => {
+  return (
+    <div>
+      <Switch />
+    </div>
+  );
+};
+
+export default MyPage;
+```
+
+</Steps>
+
+<div id="use-the-cli" className="scroll-mt-24" />
+
+## Use the CLI
+
+<Steps>
+
+### Run the CLI
+
+Run the `shadcn` init command with the Shark preset from the root of your Laravel app:
+
+```bash
+npx shadcn@latest init @shark/style
+```
+
+When asked to overwrite `components.json` and components, choose `Yes`.
+
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Switch` component to your project:
+
+```bash
+npx shadcn@latest add @shark/switch
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components like this:
+
+```tsx title="resources/js/pages/index.tsx" showLineNumbers
+import { Switch } from "@/components/ui/switch";
+
+const MyPage = () => {
+  return (
+    <div>
+      <Switch />
+    </div>
+  );
+};
+
+export default MyPage;
+```
+
+</Steps>

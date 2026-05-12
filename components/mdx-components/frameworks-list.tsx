@@ -1,4 +1,5 @@
 import { AstroIcon } from "@/components/icons/astro";
+import { LaravelIcon } from "@/components/icons/laravel";
 import { NextIcon } from "@/components/icons/next";
 import { ReactIcon } from "@/components/icons/react";
 import { ReactRouterIcon } from "@/components/icons/react-router";
@@ -13,14 +14,16 @@ import {
 } from "@/registry/react/components/item";
 
 export const FrameworksList = () => (
-  <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3">
+  <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-2">
     {FRAMEWORKS.map((framework) => (
-      <Item asChild key={framework.name}>
-        <NavLink
-          className="w-full border-input transition-all"
-          href={framework.href}
-        >
-          <ItemMedia>{framework.icon}</ItemMedia>
+      <Item
+        asChild
+        className="border-input [--space:--spacing(4)]"
+        key={framework.name}
+        variant="muted"
+      >
+        <NavLink href={framework.href}>
+          <ItemMedia variant="image">{framework.icon}</ItemMedia>
           <ItemContent>
             <ItemTitle>{framework.name}</ItemTitle>
           </ItemContent>
@@ -34,31 +37,36 @@ const FRAMEWORKS = [
   {
     name: "Next.js",
     href: "/docs/installation/next",
-    icon: <NextIcon className="size-10" />,
+    icon: <NextIcon className="size-8" />,
   },
   {
     name: "Vite",
     href: "/docs/installation/vite",
-    icon: <ViteIcon className="size-10" />,
+    icon: <ViteIcon className="size-8" />,
   },
   {
     name: "TanStack Start",
     href: "/docs/installation/tanstack-start",
-    icon: <TanstackIcon className="size-10" />,
+    icon: <TanstackIcon className="size-8" />,
   },
   {
     name: "Astro",
     href: "/docs/installation/astro",
-    icon: <AstroIcon className="size-10" />,
+    icon: <AstroIcon className="size-8" />,
   },
   {
     name: "React Router",
     href: "/docs/installation/react-router",
-    icon: <ReactRouterIcon className="size-10" />,
+    icon: <ReactRouterIcon className="size-8" />,
+  },
+  {
+    name: "Laravel",
+    href: "/docs/installation/laravel",
+    icon: <LaravelIcon className="size-8" />,
   },
   {
     name: "Manual",
     href: "/docs/installation/manual",
-    icon: <ReactIcon className="size-10" />,
+    icon: <ReactIcon className="size-8" />,
   },
 ];

@@ -52,41 +52,85 @@ npm install @ark-ui/react lucide-react
 ```text
 Timer
 ├── TimerArea
-│   ├── TimerItem
+│   ├── TimerItemGroup
+│   │   ├── TimerItem
+│   │   └── TimerItemLabel
 │   ├── TimerSeparator
-│   └── TimerItem …
-├── TimerControl
-└── TimerActionTrigger
+│   └── TimerItemGroup …
+└── TimerControl
+    ├── TimerActionTrigger
+    ├── TimerStart
+    ├── TimerPause
+    ├── TimerResume
+    ├── TimerReset
+    ├── TimerRestart
+    └── TimerPlay
 ```
 
 ## Usage
 
 ```tsx
-import { 
-  Timer, 
-  TimerArea, 
-  TimerItem, 
-  TimerSeparator, 
-  TimerControl, 
+import {
+  Timer,
+  TimerArea,
+  TimerItem,
+  TimerItemGroup,
+  TimerItemLabel,
+  TimerSeparator,
+  TimerControl,
   TimerActionTrigger,
+  TimerStart,
+  TimerPause,
+  TimerResume,
+  TimerReset,
+  TimerRestart,
+  TimerPlay,
 } from "@/components/ui/timer";
 ```
 
 ```tsx showLineNumbers
 <Timer targetMs={3600000} startMs={2400000}>
   <TimerArea>
-    <TimerItem type="hours" />
-    <TimerSeparator>:</TimerSeparator>
-    <TimerItem type="minutes" />
-    <TimerSeparator>:</TimerSeparator>
-    <TimerItem type="seconds" />
+    <TimerItemGroup>
+      <TimerItem type="hours" />
+      <TimerItemLabel>Hours</TimerItemLabel>
+    </TimerItemGroup>
+    <TimerSeparator />
+    <TimerItemGroup>
+      <TimerItem type="minutes" />
+      <TimerItemLabel>Minutes</TimerItemLabel>
+    </TimerItemGroup>
+    <TimerSeparator />
+    <TimerItemGroup>
+      <TimerItem type="seconds" />
+      <TimerItemLabel>Seconds</TimerItemLabel>
+    </TimerItemGroup>
   </TimerArea>
   <TimerControl>
-    <TimerActionTrigger action="start">Start</TimerActionTrigger>
-    <TimerActionTrigger action="pause">Pause</TimerActionTrigger>
+    <TimerPlay>Go</TimerPlay>
+    <TimerPause>Pause</TimerPause>
+    <TimerReset>Reset</TimerReset>
   </TimerControl>
 </Timer>
 ```
+
+## Controlled
+
+Handle `onTick` and `onComplete` to react to timer progress and completion.
+
+<ComponentPreview componentName="timer" fileName="example-controlled" />
+
+## Orientation
+
+Use the `orientation` prop on `<TimerItemGroup />` to change the orientation of the timer.
+
+### Vertical
+
+<ComponentPreview componentName="timer" fileName="example-orientation-vertical" />
+
+### Horizontal
+
+<ComponentPreview componentName="timer" fileName="example-orientation-horizontal" />
 
 ## Examples
 
@@ -96,17 +140,17 @@ Create a countdown by setting `countdown` to `true` and `startMs` to the initial
 
 <ComponentPreview componentName="timer" fileName="example-countdown" />
 
+### Date-based
+
+Use `remainingMsUntilDate` to derive `startMs` from a calendar date (here, seven days from when the example mounts).
+
+<ComponentPreview componentName="timer" fileName="example-countdown-date" />
+
 ### Interval
 
 Use the `interval` prop to control update frequency.
 
 <ComponentPreview componentName="timer" fileName="example-interval" />
-
-### Events
-
-Listen to `onTick` and `onComplete` for timer events.
-
-<ComponentPreview componentName="timer" fileName="example-events" />
 
 ### Pomodoro
 
@@ -114,9 +158,25 @@ Alternate between work and break sessions using `onComplete`.
 
 <ComponentPreview componentName="timer" fileName="example-pomodoro" />
 
+<Alert>
+<InfoIcon />
+<AlertTitle>Trigger Behavior</AlertTitle>
+  <AlertDescription>
+    Triggers hide when their action is not available. To keep a control in the layout, pass `hidden={false}`.
+  </AlertDescription>
+</Alert>
+
+### Custom separator
+
+Pass children to `TimerSeparator` to override the default colon (`:`).
+
+<ComponentPreview componentName="timer" fileName="example-custom-separator" />
+
 ## API Reference
 
 ### Timer
+
+Root component. Runs a stopwatch or countdown and provides timer state to child parts.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -124,38 +184,142 @@ Alternate between work and break sessions using `onComplete`.
 | `startMs` | `number` | `0` |
 | `countdown` | `boolean` | `false` |
 | `interval` | `number` | `1000` |
+| `autoStart` | `boolean` | `false` |
 | `onTick` | `(details: TickDetails) => void` | `-` |
 | `onComplete` | `() => void` | `-` |
 
 ### TimerArea
 
+Live region that exposes the formatted time to assistive tech and lays out digit groups.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### TimerItemGroup
+
+Groups a `TimerItem` with its `TimerItemLabel` and sets stack direction via `orientation`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `orientation` | `"horizontal" \| "vertical"` | `"vertical"` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### TimerItemLabel
+
+Caption for the adjacent `TimerItem` (for example, “minutes”).
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
 
 ### TimerItem
 
+Renders one time field from the current timer value.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `type` | `"days"` \| `"hours"` \| `"minutes"` \| `"seconds"` \| `"milliseconds"` | `"seconds"` |
+| `type` | `"days" \| "hours" \| "minutes" \| "seconds" \| "milliseconds"` | `"seconds"` |
+| `asChild` | `boolean` | `false` |
 
 ### TimerSeparator
 
+Visual delimiter between item groups (defaults to `:` when children are omitted).
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
 
 ### TimerControl
 
+Toolbar row for timer action controls.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
 
 ### TimerActionTrigger
 
+Button that dispatches a timer action.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `action` | `"start"` \| `"pause"` \| `"resume"` \| `"reset"` | `"start"` |
+| `action` | `"start" \| "pause" \| "resume" \| "reset" \| "restart"` | `"start"` |
+| `hidden` | `boolean` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### TimerStart
+
+Starts the timer. Wraps `TimerActionTrigger` with `action="start"`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `hidden` | `boolean` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### TimerPause
+
+Pauses a running timer. Wraps `TimerActionTrigger` with `action="pause"`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `hidden` | `boolean` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### TimerResume
+
+Resumes from paused. Wraps `TimerActionTrigger` with `action="resume"`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `hidden` | `boolean` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### TimerReset
+
+Resets the timer to its initial `startMs` / idle state.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `hidden` | `boolean` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### TimerRestart
+
+Restarts the timer. Wraps `TimerActionTrigger` with `action="restart"`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `hidden` | `boolean` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### TimerPlay
+
+Shorthand for a single “go” control: renders `TimerResume` when the timer is `paused`, otherwise `TimerStart`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `hidden` | `boolean` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### `remainingMsUntilDate`
+
+| Parameter | Type |
+| --- | --- |
+| `date` | `Date` |
+
+Returns a **`number`**: milliseconds until `date`, or **`0`** if `date` is in the past. Use with a [`countdown`](#date-based) `Timer` as `startMs`.
 
 ---
 

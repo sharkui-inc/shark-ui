@@ -3,13 +3,164 @@ title: Astro
 description: Install Shark UI in an Astro project.
 ---
 
-## Create project
+import {
+  Card,
+  CardHeader,
+} from "@/registry/react/components/card";
 
-Create a new Astro project with Tailwind and React:
+<div className="mt-6 grid gap-4 sm:grid-cols-3 sm:gap-6">
+  <a
+    href="#use-the-shark-preset"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Use the Shark preset" description="Initialize an Astro project with the Shark registry preset." />
+    </Card>
+  </a>
+  <a
+    href="#use-the-cli"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Use the CLI" description="Scaffold a new Astro project directly from the terminal." />
+    </Card>
+  </a>
+  <a
+    href="#existing-project"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Existing Project" description="Configure Shark UI manually in an existing Astro project." />
+    </Card>
+  </a>
+</div>
+
+## Use the Shark Preset
+
+<Steps>
+
+### Create Project
+
+Run the `init` command with the Shark preset and the Astro template:
 
 ```bash
-pnpm dlx create-astro@latest astro-app --template with-tailwindcss --install --add react --git
+npx shadcn@latest init @shark/style -t astro
 ```
+
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add @shark/button
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components in an Astro page with a React client directive:
+
+```astro title="src/pages/index.astro" showLineNumbers
+---
+import Layout from "@/layouts/main.astro";
+import { Button } from "@/components/ui/button";
+---
+
+<Layout>
+  <div class="grid h-screen place-items-center content-center">
+    <Button client:load>Button</Button>
+  </div>
+</Layout>
+```
+
+</Steps>
+
+<div id="use-the-cli" className="scroll-mt-24" />
+
+## Use the CLI
+
+<Steps>
+
+### Create Project
+
+Run the `init` command to scaffold a new Astro project and configure Shark UI:
+
+```bash
+npx shadcn@latest init @shark/style -t astro
+```
+
+For a monorepo project, use the `--monorepo` flag:
+
+```bash
+npx shadcn@latest init @shark/style -t astro --monorepo
+```
+
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add @shark/button
+```
+
+If you created a monorepo, run the command from `apps/web` or specify the workspace from the repo root:
+
+```bash
+npx shadcn@latest add @shark/button -c apps/web
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components in an Astro page with a React client directive:
+
+```astro title="src/pages/index.astro" showLineNumbers
+---
+import Layout from "@/layouts/main.astro";
+import { Button } from "@/components/ui/button";
+---
+
+<Layout>
+  <div class="grid h-screen place-items-center content-center">
+    <Button client:load>Button</Button>
+  </div>
+</Layout>
+```
+
+If you created a monorepo, update `apps/web/src/pages/index.astro` and import from your workspace UI package instead. The monorepo layout at `apps/web/src/layouts/main.astro` already imports your shared global CSS for you.
+
+</Steps>
+
+<div id="existing-project" className="scroll-mt-24" />
+
+## Existing Project
+
+<Steps>
+
+### Create Project
+
+If you need a new Astro project, create one first. Otherwise, skip this step.
+
+```bash
+npm create astro@latest astro-app -- --template with-tailwindcss --install --add react --git
+```
+
+This command sets up Tailwind CSS and the React integration for you. If you're adding Shark UI to an older or custom Astro app, make sure both are configured before continuing.
+
+The Tailwind starter loads your global stylesheet through `src/layouts/main.astro`. Keep that layout in place, or make sure your page imports `@/styles/global.css`.
 
 ### Edit tsconfig.json
 
@@ -28,39 +179,44 @@ Add path aliases so imports resolve correctly:
 
 ### Run the CLI
 
-Run the shadcn init command to set up your project:
+Run the `shadcn` init command with the Shark preset to set up your project.
 
 ```bash
-npx shadcn@latest init
+npx shadcn@latest init @shark/style
 ```
 
-### Add components
+### Add Components
 
-Add components from the Shark registry:
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
 
 ```bash
-pnpm dlx shadcn@latest add https://shark.vini.one/r/button.json
+npx shadcn@latest add @shark/button
 ```
 
-Use them in an Astro page with a React client directive:
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components in an Astro page with a React client directive:
 
 ```astro title="src/pages/index.astro" showLineNumbers
 ---
-import { Button } from "@/components/ui/button"
+import Layout from "@/layouts/main.astro";
+import { Button } from "@/components/ui/button";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro + TailwindCSS</title>
-  </head>
-  <body>
-    <div className="grid place-items-center h-screen content-center">
-      <Button client:load>Button</Button>
-    </div>
-  </body>
-</html>
+<Layout>
+  <div class="grid h-screen place-items-center content-center">
+    <Button client:load>Button</Button>
+  </div>
+</Layout>
 ```
+
+</Steps>

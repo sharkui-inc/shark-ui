@@ -387,7 +387,7 @@
 
   &:before {
     content: counter(step);
-    @apply border border-border bg-code mr-2 inline-flex size-6 items-center justify-center rounded-full text-center -indent-px font-mono text-xs font-medium md:absolute md:mt-[-4px] md:ml-[-50px] md:size-8;
+    @apply border border-border bg-code mr-2 inline-flex size-6 tabular-nums items-center justify-center rounded-full text-center -indent-px font-mono text-xs font-medium md:absolute md:mt-[-4px] md:ml-[-50px] md:size-8;
   }
 }
 

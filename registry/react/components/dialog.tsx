@@ -110,7 +110,7 @@ export const dialogContentVariants = tv({
     "text-popover-foreground",
     "rounded-2xl border shadow-lg/5",
     "outline-none",
-    "-translate-y-[calc(1.25rem*var(--nested-layer-count))]",
+    "translate-y-[calc(-1.25rem*var(--nested-layer-count))]",
     "transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform",
     "data-[nested=dialog]:data-[state=closed]:slide-in-from-bottom-10 data-[nested=dialog]:data-[state=open]:slide-in-from-bottom-10 data-[has-nested=dialog]:origin-top",
     "scale-[calc(1-0.1*var(--nested-layer-count))] opacity-[calc(1-0.1*var(--nested-layer-count))]",

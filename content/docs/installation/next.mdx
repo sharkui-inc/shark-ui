@@ -3,46 +3,218 @@ title: Next.js
 description: Install Shark UI in a Next.js project.
 ---
 
-## Create project
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/registry/react/components/card";
 
-Create a new Next.js project:
+<div className="mt-6 grid gap-4 sm:grid-cols-3 sm:gap-6">
+  <a
+    href="#use-the-shark-preset"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Use the Shark preset" description="Initialize a Next.js project with the Shark registry preset." />
+    </Card>
+  </a>
+  <a
+    href="#use-the-cli"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Use the CLI" description="Scaffold a new Next.js project directly from the terminal." />
+    </Card>
+  </a>
+  <a
+    href="#existing-next-project"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Existing Project" description="Configure Shark UI manually in an existing Next.js project." />
+    </Card>
+  </a>
+</div>
+
+## Use the Shark Preset
+
+<Steps>
+
+### Create Project
+
+Run the `init` command with the Shark preset and the Next.js template:
 
 ```bash
-pnpm create next-app@latest my-app --yes
+npx shadcn@latest init @shark/style -t next
 ```
 
-## Add CSS
+### Add Components
 
-Create a file `styles/globals.css` with:
+You can add components with the CLI or copy them manually from the component docs:
 
-```css title="styles/globals.css"
-@import "tailwindcss";
-```
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
 
-## Run the CLI
-
-Run the shadcn init command to set up your project:
+For example, add the `Button` component to your project:
 
 ```bash
-npx shadcn@latest init
+npx shadcn@latest add @shark/button
 ```
 
-The CLI asks a few questions and creates a `components.json` file with path aliases, style options, and Tailwind config.
-
-## Add components
-
-Add components from the Shark registry by URL:
+You can also install every component at once:
 
 ```bash
-pnpm dlx shadcn@latest add https://shark.vini.one/r/button.json
+npx shadcn@latest add @shark/ui
 ```
 
-Then import and use them:
+Then import and use components like this:
 
-```tsx
+```tsx title="app/page.tsx" showLineNumbers
 import { Button } from "@/components/ui/button";
 
-export default function Page() {
-  return <Button>Click me</Button>;
+export default function Home() {
+  return (
+    <div className="flex min-h-svh items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
 }
 ```
+
+</Steps>
+
+<div id="use-the-cli" className="scroll-mt-24" />
+
+## Use the CLI
+
+<Steps>
+
+### Create Project
+
+Run the `init` command to scaffold a new Next.js project and configure Shark UI:
+
+```bash
+npx shadcn@latest init @shark/style -t next
+```
+
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add @shark/button
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components like this:
+
+```tsx title="app/page.tsx" showLineNumbers
+import { Button } from "@/components/ui/button";
+
+export default function Home() {
+  return (
+    <div className="flex min-h-svh items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+```
+
+</Steps>
+
+<div id="existing-next-project" className="scroll-mt-24" />
+
+## Existing Project
+
+<Steps>
+
+### Create Project
+
+If you need a new Next.js project, create one with `create-next-app`. Otherwise, skip this step.
+
+```bash
+npx create-next-app@latest
+```
+
+Choose the recommended defaults so Tailwind CSS, the App Router, and the default `@/*` import alias are configured for you.
+
+If you prefer a `src/` directory, use `--src-dir` or choose `Yes` when prompted:
+
+```bash
+npx create-next-app@latest --src-dir
+```
+
+With `--src-dir`, Next.js places your app in `src/app` and configures the `@/*` alias to point to `./src/*`.
+
+### Configure Tailwind CSS and Import Aliases
+
+If you created your project with the recommended `create-next-app` defaults, you can skip this step.
+
+If you're adding Shark UI to an older or custom Next.js app, make sure Tailwind CSS is installed first. You can follow the official [Next.js installation guide](https://nextjs.org/docs/app/getting-started).
+
+Then make sure your `tsconfig.json` includes the `@/*` import alias:
+
+```json title="tsconfig.json" showLineNumbers
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
+```
+
+If you used `--src-dir`, point the alias to `./src/*` instead.
+
+### Run the CLI
+
+Run the `shadcn` init command with the Shark preset to set up your project.
+
+```bash
+npx shadcn@latest init @shark/style
+```
+
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add @shark/button
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components like this:
+
+```tsx title="app/page.tsx" showLineNumbers
+import { Button } from "@/components/ui/button";
+
+export default function Home() {
+  return (
+    <div className="flex min-h-svh items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+```
+
+If you used `--src-dir`, add the component to `src/app/page.tsx` instead.
+
+</Steps>

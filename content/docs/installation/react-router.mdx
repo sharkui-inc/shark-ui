@@ -3,46 +3,220 @@ title: React Router
 description: Install Shark UI in a React Router project.
 ---
 
-## Create project
+import {
+  Card,
+  CardHeader,
+} from "@/registry/react/components/card";
+
+<div className="mt-6 grid gap-4 sm:grid-cols-3 sm:gap-6">
+  <a
+    href="#use-the-shark-preset"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Use the Shark preset" description="Initialize a React Router project with the Shark registry preset." />
+    </Card>
+  </a>
+  <a
+    href="#use-the-cli"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Use the CLI" description="Scaffold a new React Router project directly from the terminal." />
+    </Card>
+  </a>
+  <a
+    href="#existing-project"
+  >
+    <Card className="h-full transition-colors hover:bg-muted">
+      <CardHeader title="Existing Project" description="Configure Shark UI manually in an existing React Router project." />
+    </Card>
+  </a>
+</div>
+
+## Use the Shark Preset
+
+<Steps>
+
+### Create Project
 
 ```bash
-npx create-react-router@latest my-app
+npx shadcn@latest init @shark/style -t react-router
 ```
 
-## Run the CLI
+### Add Components
 
-Run the shadcn init command to set up `components.json` and path aliases:
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
 
 ```bash
-npx shadcn@latest init
+npx shadcn@latest add @shark/button
 ```
 
-## Add components
-
-Add components from the Shark registry:
+You can also install every component at once:
 
 ```bash
-pnpm dlx shadcn@latest add https://shark.vini.one/r/button.json
+npx shadcn@latest add @shark/ui
 ```
 
-Import and use them in your routes:
+Then import and use components like this:
 
 ```tsx title="app/routes/home.tsx" showLineNumbers
-import { Button } from "~/components/ui/button"
-import type { Route } from "./+types/home"
+import { Button } from "~/components/ui/button";
+import type { Route } from "./+types/home";
 
 export const meta = ({}: Route.MetaArgs) => {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
-  ]
-}
+  ];
+};
 
 export default function Home() {
   return (
     <div className="flex min-h-svh flex-col items-center justify-center">
       <Button>Click me</Button>
     </div>
-  )
+  );
 }
 ```
+
+</Steps>
+
+<div id="use-the-cli" className="scroll-mt-24" />
+
+## Use the CLI
+
+<Steps>
+
+### Create Project
+
+Run the `init` command to scaffold a new React Router project and configure Shark UI:
+
+```bash
+npx shadcn@latest init @shark/style -t react-router
+```
+
+For a monorepo project, use the `--monorepo` flag:
+
+```bash
+npx shadcn@latest init @shark/style -t react-router --monorepo
+```
+
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add @shark/button
+```
+
+If you created a monorepo, run the command from `apps/web` or specify the workspace from the repo root:
+
+```bash
+npx shadcn@latest add @shark/button -c apps/web
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components like this:
+
+```tsx title="app/routes/home.tsx" showLineNumbers
+import { Button } from "~/components/ui/button";
+import type { Route } from "./+types/home";
+
+export const meta = ({}: Route.MetaArgs) => {
+  return [
+    { title: "New React Router App" },
+    { name: "description", content: "Welcome to React Router!" },
+  ];
+};
+
+export default function Home() {
+  return (
+    <div className="flex min-h-svh flex-col items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+```
+
+If you created a monorepo, update `apps/web/app/routes/home.tsx` and import from your workspace UI package instead.
+
+</Steps>
+
+<div id="existing-project" className="scroll-mt-24" />
+
+## Existing Project
+
+<Steps>
+
+### Create Project
+
+If you need a new React Router project, create one first. Otherwise, skip this step.
+
+```bash
+npx create-react-router@latest my-app
+```
+
+### Run the CLI
+
+Run the `shadcn` init command with the Shark preset to set up your project.
+
+```bash
+npx shadcn@latest init @shark/style
+```
+
+### Add Components
+
+You can add components with the CLI or copy them manually from the component docs:
+
+- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
+- **Manual**: Copy component source from Manual tab in the component docs.
+
+For example, add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add @shark/button
+```
+
+You can also install every component at once:
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Then import and use components like this:
+
+```tsx title="app/routes/home.tsx" showLineNumbers
+import { Button } from "~/components/ui/button";
+import type { Route } from "./+types/home";
+
+export const meta = ({}: Route.MetaArgs) => {
+  return [
+    { title: "New React Router App" },
+    { name: "description", content: "Welcome to React Router!" },
+  ];
+};
+
+export default function Home() {
+  return (
+    <div className="flex min-h-svh flex-col items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+```
+
+</Steps>

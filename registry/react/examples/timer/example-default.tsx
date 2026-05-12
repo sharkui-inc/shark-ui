@@ -1,58 +1,38 @@
-import { PauseIcon, PlayIcon } from "lucide-react";
-import { Button } from "@/registry/react/components/button";
+"use client";
+
 import {
   Timer,
-  TimerActionTrigger,
   TimerArea,
-  TimerControl,
   TimerItem,
+  TimerItemGroup,
+  TimerItemLabel,
   TimerSeparator,
 } from "@/registry/react/components/timer";
 
-const TimerDemo = () => (
-  <Timer startMs={40 * 60 * 1000} targetMs={60 * 60 * 1000}>
+const Example = () => (
+  <Timer autoStart>
     <TimerArea>
-      <div className="flex flex-col items-center gap-0">
+      <TimerItemGroup>
         <TimerItem type="days" />
-        <span className="text-muted-foreground text-xs">days</span>
-      </div>
-      <TimerSeparator>:</TimerSeparator>
-      <div className="flex flex-col items-center gap-0">
+        <TimerItemLabel>Days</TimerItemLabel>
+      </TimerItemGroup>
+      <TimerSeparator />
+      <TimerItemGroup>
         <TimerItem type="hours" />
-        <span className="text-muted-foreground text-xs">hours</span>
-      </div>
-      <TimerSeparator>:</TimerSeparator>
-      <div className="flex flex-col items-center gap-0">
+        <TimerItemLabel>Hours</TimerItemLabel>
+      </TimerItemGroup>
+      <TimerSeparator />
+      <TimerItemGroup>
         <TimerItem type="minutes" />
-        <span className="text-muted-foreground text-xs">minutes</span>
-      </div>
-      <TimerSeparator>:</TimerSeparator>
-      <div className="flex flex-col items-center gap-0">
+        <TimerItemLabel>Minutes</TimerItemLabel>
+      </TimerItemGroup>
+      <TimerSeparator />
+      <TimerItemGroup>
         <TimerItem type="seconds" />
-        <span className="text-muted-foreground text-xs">seconds</span>
-      </div>
+        <TimerItemLabel>Seconds</TimerItemLabel>
+      </TimerItemGroup>
     </TimerArea>
-    <TimerControl className="flex gap-2">
-      <TimerActionTrigger action="start" asChild>
-        <Button size="sm" variant="outline">
-          <PlayIcon />
-          Play
-        </Button>
-      </TimerActionTrigger>
-      <TimerActionTrigger action="resume" asChild>
-        <Button size="sm" variant="outline">
-          <PlayIcon />
-          Resume
-        </Button>
-      </TimerActionTrigger>
-      <TimerActionTrigger action="pause" asChild>
-        <Button size="sm" variant="outline">
-          <PauseIcon />
-          Pause
-        </Button>
-      </TimerActionTrigger>
-    </TimerControl>
   </Timer>
 );
 
-export default TimerDemo;
+export default Example;

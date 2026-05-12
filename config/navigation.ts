@@ -1,5 +1,10 @@
 export const NAV_ITEMS = [
   {
+    href: "/docs/installation",
+    label: "Docs",
+    showOnHeader: true,
+  },
+  {
     href: "/docs/components",
     label: "Components",
     showOnHeader: true,

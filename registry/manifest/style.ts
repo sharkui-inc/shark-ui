@@ -5,10 +5,7 @@ const dependencies = ["@base-ui/react", "tailwind-variants", "lucide-react"];
 
 const devDependencies = ["tw-animate-css"];
 
-const registryDependencies = [
-  absoluteUrl("/r/ui.json"),
-  absoluteUrl("/r/utils.json"),
-];
+const registryDependencies = [absoluteUrl("/r/utils.json")];
 
 const cssVars = {
   theme: {

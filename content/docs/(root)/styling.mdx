@@ -5,13 +5,13 @@ description: Guide to styling components with the color system.
 
 ## Overview
 
-Styling uses CSS variables for crisp borders and clear stacking. See [Colors](/docs/colors) for tokens and utility mapping. You can use your own palette, but the defaults are tuned for layered depth and clarity.
+Styling uses CSS variables for crisp borders and clear stacking. See [Colors](/docs/colors) for tokens and utility mapping. 
 
 ## CSS Configuration
 
-See [Get Started](/docs/installation) for setup. To add the theme yourself, paste the following into `globals.css`:
+See [Installation](/docs/installation#new-project-setup) for setup. To add the theme yourself, paste the following into `globals.css`:
 
-```css
+```css title="globals.css"
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -220,8 +220,6 @@ export default function RootLayout({ children }) {
 }
 ```
 
-Apply the variables on `html` or `body` so they cascade. 
-
 ## Customizing Colors
 
-To customize colors interactively, use the [Themes](/themes) page: pick primary and gray bases, adjust border radius, preview light and dark, then copy the generated CSS variables into your `globals.css` (or merge them with the snippet below).
+To customize colors interactively, use the [Themes](/themes) page: pick primary and gray bases, adjust border radius, preview light and dark, then copy the generated CSS variables into your `globals.css`.

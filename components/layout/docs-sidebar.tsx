@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@registry/react/components/badge";
 import { usePathname } from "next/navigation";
 import { NavLink } from "@/components/nav-link";
 import type { source } from "@/lib/fumadocs";
@@ -22,6 +23,10 @@ interface DocsSidebarProps extends React.ComponentProps<typeof Sidebar> {
    */
   tree: typeof source.pageTree;
 }
+
+const NEW_ITEMS = [""];
+
+const UPDATED_ITEMS = ["/docs/components/timer"];
 
 export const DocsSidebar = (props: DocsSidebarProps) => {
   const { tree, className, ...rest } = props;
@@ -53,7 +58,17 @@ export const DocsSidebar = (props: DocsSidebarProps) => {
                             className="ps-3.5 text-muted-foreground hover:bg-muted [.active]:bg-muted [.active]:text-foreground"
                             isActive={item.url === pathname}
                           >
-                            <NavLink href={item.url}>{item.name}</NavLink>
+                            <NavLink href={item.url}>
+                              {item.name}
+
+                              {UPDATED_ITEMS.includes(item.url) && (
+                                <Badge variant="secondary">Updated</Badge>
+                              )}
+
+                              {NEW_ITEMS.includes(item.url) && (
+                                <Badge variant="info">New</Badge>
+                              )}
+                            </NavLink>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
                       )

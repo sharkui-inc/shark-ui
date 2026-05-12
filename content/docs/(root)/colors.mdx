@@ -3,7 +3,7 @@ title: Colors
 description: Color palette and theming with CSS variables for Shark UI.
 ---
 
-Shark UI relies on CSS custom properties for its color system. For layout setup and the full styling guide, see [Styling](/docs/styling). These variables toggle between light and dark themes automatically when you add the `dark` class to your root element. All definitions live in `globals.css` and stick to the [shadcn/ui](https://ui.shadcn.com) naming style.
+Shark UI relies on CSS custom properties for its color system. For layout setup and the full styling guide, see [Styling](/docs/styling). These variables toggle between light and dark themes automatically when you add the `dark` class to your root element. All definitions live in `globals.css`.
 
 ## How It Works
 
@@ -14,7 +14,7 @@ Naming rules:
 - Names with `foreground` define text (or icon) color on top of that background (e.g. `--primary-foreground`).
 - Names without `foreground` define backgrounds (e.g. `--primary`, `--card`, `--popover`).
 
-Typical usage:
+### How to Use Colors
 
 ```tsx
 <html className="dark">
@@ -82,18 +82,6 @@ Typical usage:
 - <span className="inline-block size-5 rounded border border-border bg-chart-4 mr-2 align-middle" /> `--chart-4` — Chart series color 4
 - <span className="inline-block size-5 rounded border border-border bg-chart-5 mr-2 align-middle" /> `--chart-5` — Chart series color 5
 
-## How to Use Colors
-
-In JSX with Tailwind classes:
-
-```tsx
-<div className="bg-background text-foreground">
-  <button className="bg-primary text-primary-foreground hover:bg-primary/90">
-    Click me
-  </button>
-</div>
-```
-
 For full setup, see the [manual installation guide](/docs/installation/manual).
 
 ## Customizing Colors
@@ -119,4 +107,4 @@ Shark UI ships preset themes, check [Styling](/docs/styling) for more informatio
 - Apply the `dark` class on the root so dark mode styles take effect.
 - Check both light and dark appearances when changing colors.
 - Keep using foreground/background pairs so contrast stays safe.
-- Prefer color variables over hardcoded hex or rgb values.
+- Prefer color variables over hardcoded hex or rgb values. e.g. `text-[#000]` -> `text-foreground`.

@@ -1,13 +1,20 @@
 "use client";
 
+import { ark } from "@ark-ui/react/factory";
 import {
   Timer as ArkTimer,
-  useTimer as useArkTimer,
+  useTimerContext as useArkTimer,
 } from "@ark-ui/react/timer";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
 export const useTimer = useArkTimer;
+
+export const remainingMsUntilDate = (date: Date): number => {
+  const end = new Date(date).getTime();
+
+  return Math.max(0, end - Date.now());
+};
 
 export const Timer = (props: React.ComponentProps<typeof ArkTimer.Root>) => {
   const { className, ...rest } = props;
@@ -15,7 +22,9 @@ export const Timer = (props: React.ComponentProps<typeof ArkTimer.Root>) => {
   return (
     <ArkTimer.Root
       className={cn(
-        "flex flex-col items-start gap-4 text-foreground",
+        "min-w-0",
+        "flex flex-col items-start gap-4",
+        "text-foreground",
         className
       )}
       data-slot="timer"
@@ -31,8 +40,39 @@ export const TimerArea = (
 
   return (
     <ArkTimer.Area
-      className={cn("flex items-center gap-2", className)}
+      className={cn(
+        "flex items-center gap-2",
+        "has-data-[slot=timer-item-label]:items-start",
+        className
+      )}
       data-slot="timer-area"
+      {...rest}
+    />
+  );
+};
+
+interface TimerItemGroupProps extends React.ComponentProps<typeof ark.div> {
+  /**
+   * The orientation of the timer item group.
+   *
+   * @default "vertical"
+   */
+  orientation?: "horizontal" | "vertical";
+}
+
+export const TimerItemGroup = (props: TimerItemGroupProps) => {
+  const { orientation = "vertical", className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn(
+        "flex items-center",
+        "data-[orientation=horizontal]:flex-row",
+        "data-[orientation=vertical]:flex-col",
+        className
+      )}
+      data-orientation={orientation}
+      data-slot="timer-item-group"
       {...rest}
     />
   );
@@ -46,7 +86,8 @@ export const TimerItem = (
   return (
     <ArkTimer.Item
       className={cn(
-        "min-w-[2ch] text-center font-semibold text-2xl text-foreground tabular-nums",
+        "w-fit min-w-[2.5ch]",
+        "text-center font-semibold text-3xl text-foreground tabular-nums tracking-wider",
         className
       )}
       data-slot="timer-item"
@@ -55,17 +96,31 @@ export const TimerItem = (
   );
 };
 
+export const TimerItemLabel = (props: React.ComponentProps<typeof ark.div>) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn("text-muted-foreground text-xs", className)}
+      data-slot="timer-item-label"
+      {...rest}
+    />
+  );
+};
+
 export const TimerSeparator = (
   props: React.ComponentProps<typeof ArkTimer.Separator>
 ) => {
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ArkTimer.Separator
       className={cn("font-semibold text-2xl text-muted-foreground", className)}
       data-slot="timer-separator"
       {...rest}
-    />
+    >
+      {children ?? ":"}
+    </ArkTimer.Separator>
   );
 };
 
@@ -85,21 +140,62 @@ export const TimerControl = (
 
 export const TimerActionTrigger = (
   props: React.ComponentProps<typeof ArkTimer.ActionTrigger>
-) => {
-  const { className, ...rest } = props;
+) => <ArkTimer.ActionTrigger data-slot="timer-action" {...props} />;
 
-  return (
-    <ArkTimer.ActionTrigger
-      className={cn(
-        "inline-flex cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-transparent px-4 py-2 font-medium text-foreground text-sm transition-colors",
-        "hover:bg-muted",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        "data-disabled:opacity-64 data-disabled:grayscale",
-        "[&_svg]:size-4",
-        className
-      )}
-      data-slot="timer-action"
-      {...rest}
-    />
-  );
+interface TimerActionProps
+  extends Omit<React.ComponentProps<typeof ArkTimer.ActionTrigger>, "action"> {}
+
+export const TimerPause = (props: TimerActionProps) => (
+  <ArkTimer.ActionTrigger
+    aria-label="Pause"
+    data-slot="timer-pause"
+    {...props}
+    action="pause"
+  />
+);
+
+export const TimerResume = (props: TimerActionProps) => (
+  <ArkTimer.ActionTrigger
+    aria-label="Resume"
+    data-slot="timer-resume"
+    {...props}
+    action="resume"
+  />
+);
+
+export const TimerStart = (props: TimerActionProps) => (
+  <ArkTimer.ActionTrigger
+    aria-label="Start"
+    data-slot="timer-start"
+    {...props}
+    action="start"
+  />
+);
+
+export const TimerReset = (props: TimerActionProps) => (
+  <ArkTimer.ActionTrigger
+    aria-label="Reset"
+    data-slot="timer-reset"
+    {...props}
+    action="reset"
+  />
+);
+
+export const TimerRestart = (props: TimerActionProps) => (
+  <ArkTimer.ActionTrigger
+    aria-label="Restart"
+    data-slot="timer-restart"
+    {...props}
+    action="restart"
+  />
+);
+
+export const TimerPlay = (props: TimerActionProps) => {
+  const { paused } = useArkTimer();
+
+  if (paused) {
+    return <TimerResume {...props} />;
+  }
+
+  return <TimerStart {...props} />;
 };
