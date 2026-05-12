@@ -9,7 +9,9 @@
     "recharts",
     "tailwind-variants"
   ],
-  "devDependencies": ["tw-animate-css"],
+  "devDependencies": [
+    "tw-animate-css"
+  ],
   "registryDependencies": [
     "http://localhost:3000/r/accordion.json",
     "http://localhost:3000/r/action-bar.json",

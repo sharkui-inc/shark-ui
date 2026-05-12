@@ -6,7 +6,7 @@ import {
   NativeSelectOption,
 } from "@registry/react/components/native-select";
 import { useIsMobile } from "@registry/react/hooks/use-is-mobile";
-import { useTheme } from "next-themes";
+import { useTheme } from "@teispace/next-themes";
 import { PRIMARY_COLORS } from "@/lib/themes";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/registry/react/components/badge";

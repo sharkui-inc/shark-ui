@@ -1,5 +1,6 @@
 "use client";
 
+import { useTheme } from "@teispace/next-themes";
 import {
   CheckIcon,
   ClipboardIcon,
@@ -7,7 +8,6 @@ import {
   Undo,
   WandSparklesIcon,
 } from "lucide-react";
-import { useTheme } from "next-themes";
 import React from "react";
 import { CopyThemeCodeDialog } from "@/components/dialog/copy-theme";
 import { useHotKeys } from "@/hooks/use-hot-keys";
