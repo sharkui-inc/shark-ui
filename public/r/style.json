@@ -4,10 +4,15 @@
   "name": "style",
   "type": "registry:style",
   "description": "Complete Shark theme: colors, sidebar, fonts, and base styles. Use with the shadcn CLI after `init` (e.g. `npx shadcn@latest init @shark/style`).",
-  "dependencies": ["@base-ui/react", "tailwind-variants", "lucide-react"],
-  "devDependencies": ["tw-animate-css"],
+  "dependencies": [
+    "@base-ui/react",
+    "tailwind-variants",
+    "lucide-react"
+  ],
+  "devDependencies": [
+    "tw-animate-css"
+  ],
   "registryDependencies": [
-    "http://localhost:3000/r/ui.json",
     "http://localhost:3000/r/utils.json"
   ],
   "cssVars": {
