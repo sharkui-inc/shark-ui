@@ -3,9 +3,9 @@
 import { ark } from "@ark-ui/react/factory";
 import { PanelLeftIcon } from "lucide-react";
 import React from "react";
-import { tv, type VariantProps } from "tailwind-variants";
+import type { VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/react/components/button";
+import { Button, buttonVariants } from "@/registry/react/components/button";
 import { Input } from "@/registry/react/components/input";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
@@ -82,6 +82,7 @@ export const SidebarProvider = (props: SidebarProviderProps) => {
         _setOpen(openState);
       }
 
+      // biome-ignore lint/suspicious/noDocumentCookie: Persist the sidebar state across reloads.
       document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
     },
     [setOpenProp, open]
@@ -136,6 +137,7 @@ export const SidebarProvider = (props: SidebarProviderProps) => {
           "has-data-[variant=inset]:bg-sidebar",
           className
         )}
+        data-slot="sidebar-wrapper"
         style={
           {
             "--sidebar-width": SIDEBAR_WIDTH,
@@ -178,6 +180,7 @@ export const Sidebar = (props: SidebarProps) => {
           "text-sidebar-foreground",
           className
         )}
+        data-slot="sidebar"
         {...rest}
       >
         {children}
@@ -202,6 +205,7 @@ export const Sidebar = (props: SidebarProps) => {
           )}
           data-mobile="true"
           data-sidebar="sidebar"
+          data-slot="sidebar"
           placement={placement === "left" ? "left" : "right"}
           style={
             {
@@ -225,6 +229,7 @@ export const Sidebar = (props: SidebarProps) => {
       className={cn("group peer", "hidden md:block", "text-sidebar-foreground")}
       data-collapsible={state === "collapsed" ? collapsible : ""}
       data-placement={placement}
+      data-slot="sidebar"
       data-state={state}
       data-variant={variant}
     >
@@ -240,6 +245,7 @@ export const Sidebar = (props: SidebarProps) => {
             ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]"
             : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)"
         )}
+        data-slot="sidebar-gap"
       />
       <ark.div
         className={cn(
@@ -249,13 +255,14 @@ export const Sidebar = (props: SidebarProps) => {
           "h-svh",
           "transition-[inset-inline-start,inset-inline-end,width] duration-200 ease-linear",
           placement === "left"
-            ? "inset-s-0 group-data-[collapsible=offcanvas]:inset-s-[calc(var(--sidebar-width)*-1)]"
-            : "inset-e-0 group-data-[collapsible=offcanvas]:inset-e-[calc(var(--sidebar-width)*-1)]",
+            ? "inset-s-0 group-data-[collapsible=offcanvas]:-inset-s-(--sidebar-width)"
+            : "inset-e-0 group-data-[collapsible=offcanvas]:-inset-e-(--sidebar-width)",
           variant === "floating" || variant === "inset"
             ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
             : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[placement=right]:border-s group-data-[placement=left]:border-e",
           className
         )}
+        data-slot="sidebar-container"
         {...props}
       >
         <ark.div
@@ -266,6 +273,7 @@ export const Sidebar = (props: SidebarProps) => {
             "group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow-sm"
           )}
           data-sidebar="sidebar"
+          data-slot="sidebar-inner"
         >
           {children}
         </ark.div>
@@ -283,6 +291,7 @@ export const SidebarTrigger = (props: React.ComponentProps<typeof Button>) => {
     <Button
       className={cn("size-7", className)}
       data-sidebar="trigger"
+      data-slot="sidebar-trigger"
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
@@ -315,12 +324,13 @@ export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
         "group-data-[placement=left]:-inset-e-4 group-data-[placement=right]:inset-s-0",
         "in-data-[placement=left]:cursor-w-resize in-data-[placement=right]:cursor-e-resize",
         "[[data-placement=left][data-state=collapsed]_&]:cursor-e-resize [[data-placement=right][data-state=collapsed]_&]:cursor-w-resize",
-        "group-data-[collapsible=offcanvas]:translate-x-0 hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:after:start-full",
+        "group-data-[collapsible=offcanvas]:translate-x-0 hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:after:inset-s-full",
         "[[data-placement=left][data-collapsible=offcanvas]_&]:-inset-e-2",
         "[[data-placement=right][data-collapsible=offcanvas]_&]:-inset-s-2",
         className
       )}
       data-sidebar="rail"
+      data-slot="sidebar-rail"
       onClick={toggleSidebar}
       tabIndex={-1}
       title="Toggle Sidebar"
@@ -342,6 +352,7 @@ export const SidebarInset = (props: React.ComponentProps<typeof ark.main>) => {
         "md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm",
         className
       )}
+      data-slot="sidebar-inset"
       {...rest}
     />
   );
@@ -354,6 +365,7 @@ export const SidebarInput = (props: React.ComponentProps<typeof Input>) => {
     <Input
       className={cn("h-8 w-full bg-background shadow-none", className)}
       data-sidebar="input"
+      data-slot="sidebar-input"
       {...rest}
     />
   );
@@ -366,6 +378,7 @@ export const SidebarHeader = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn("flex flex-col gap-2 p-2", className)}
       data-sidebar="header"
+      data-slot="sidebar-header"
       {...rest}
     />
   );
@@ -378,6 +391,7 @@ export const SidebarFooter = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn("flex flex-col gap-2 p-2", className)}
       data-sidebar="footer"
+      data-slot="sidebar-footer"
       {...rest}
     />
   );
@@ -392,6 +406,7 @@ export const SidebarSeparator = (
     <Separator
       className={cn("mx-2 w-auto bg-sidebar-border", className)}
       data-sidebar="separator"
+      data-slot="sidebar-separator"
       {...rest}
     />
   );
@@ -416,7 +431,7 @@ export const SidebarContent = (props: SidebarContentProps) => {
       <ark.div
         className={cn(
           "min-h-0",
-          "flex flex-1 flex-col gap-2",
+          "flex flex-1 flex-col gap-0",
           "overflow-auto",
           "group-data-[collapsible=icon]:overflow-hidden",
           className
@@ -436,6 +451,7 @@ export const SidebarGroup = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
       data-sidebar="group"
+      data-slot="sidebar-group"
       {...rest}
     />
   );
@@ -461,6 +477,7 @@ export const SidebarGroupLabel = (
         className
       )}
       data-sidebar="group-label"
+      data-slot="sidebar-group-label"
       {...rest}
     />
   );
@@ -474,22 +491,22 @@ export const SidebarGroupAction = (
   return (
     <ark.button
       className={cn(
+        buttonVariants({
+          variant: "ghost",
+          size: "icon-xs",
+          clickEffect: false,
+        }),
         "absolute inset-e-3 top-3.5",
-        "aspect-square w-5",
-        "p-0",
-        "flex items-center justify-center",
-        "rounded-md",
         "text-sidebar-foreground",
         "transition-transform",
-        "outline-hidden ring-sidebar-ring",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-        "focus-visible:ring-2",
         "[&_svg]:size-4 [&_svg]:shrink-0",
         "after:absolute after:-inset-2 md:after:hidden",
         "group-data-[collapsible=icon]:hidden",
         className
       )}
       data-sidebar="group-action"
+      data-slot="sidebar-group-action"
       type="button"
       {...rest}
     />
@@ -505,6 +522,7 @@ export const SidebarGroupContent = (
     <ark.div
       className={cn("w-full text-sm", className)}
       data-sidebar="group-content"
+      data-slot="sidebar-group-content"
       {...rest}
     />
   );
@@ -515,8 +533,9 @@ export const SidebarMenu = (props: React.ComponentProps<typeof ark.ul>) => {
 
   return (
     <ark.ul
-      className={cn("w-full min-w-0", "flex flex-col gap-1", className)}
+      className={cn("w-full min-w-0", "flex flex-col gap-0", className)}
       data-sidebar="menu"
+      data-slot="sidebar-menu"
       {...rest}
     />
   );
@@ -529,33 +548,23 @@ export const SidebarMenuItem = (props: React.ComponentProps<typeof ark.li>) => {
     <ark.li
       className={cn("group/menu-item relative", className)}
       data-sidebar="menu-item"
+      data-slot="sidebar-menu-item"
       {...rest}
     />
   );
 };
 
-const sidebarMenuSubButtonVariants = tv({
-  base: [
-    "flex h-7 min-w-0 items-center gap-2 overflow-hidden rounded-md px-2 text-sidebar-foreground outline-hidden ring-sidebar-ring ltr:-translate-x-px rtl:translate-x-px",
-    "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground",
-    "disabled:pointer-events-none disabled:opacity-64 aria-disabled:pointer-events-none aria-disabled:opacity-64",
-    "data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground",
-    "[&>span:last-child]:truncate [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-sidebar-accent-foreground",
-    "group-data-[collapsible=icon]:hidden",
-  ],
-  variants: {
-    size: {
-      sm: "text-xs",
-      md: "text-sm",
-    },
-  },
-  defaultVariants: {
-    size: "md",
-  },
-});
-
 interface SidebarMenuButtonProps extends React.ComponentProps<typeof Button> {
+  /**
+   * Whether the button is active.
+   *
+   * @default false
+   */
   isActive?: boolean;
+  /**
+   * The tooltip to display when hovering over the button.
+   *
+   */
   tooltip?: string | React.ComponentProps<typeof TooltipContent>;
 }
 
@@ -576,20 +585,29 @@ export const SidebarMenuButton = ({
   const button = (
     <Button
       className={cn(
-        "peer/menu-button w-full",
+        "peer/menu-button group/menu-button",
+        "w-full",
         "justify-start gap-2",
+        "p-2",
         "overflow-hidden",
         "transition-[width,height,padding]",
+        "data-[size=sm]:text-xs",
+        "data-[size=lg]:h-12",
+        "group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2!",
+        "data-[size=lg]:group-data-[collapsible=icon]:p-0!",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         "focus-visible:sidebar-ring-[3px] outline-none focus-visible:ring-sidebar-ring/32",
         "active:bg-sidebar-accent active:text-sidebar-accent-foreground",
+        "data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground",
         "group-has-data-[sidebar=menu-action]/menu-item:pe-8",
+        "[&>span:last-child]:truncate",
         className
       )}
       clickEffect={false}
       data-active={isActive}
       data-sidebar="menu-button"
       data-size={size}
+      data-slot="sidebar-menu-button"
       size={size}
       variant={variant}
       {...rest}
@@ -607,7 +625,7 @@ export const SidebarMenuButton = ({
   }
 
   return (
-    <Tooltip>
+    <Tooltip positioning={{ placement: "right" }}>
       <TooltipTrigger asChild>{button}</TooltipTrigger>
       <TooltipContent hidden={state !== "collapsed" || isMobile} {...tooltip} />
     </Tooltip>
@@ -625,15 +643,15 @@ export const SidebarMenuAction = (props: SidebarMenuActionProps) => {
   return (
     <ark.button
       className={cn(
+        buttonVariants({
+          variant: "ghost",
+          size: "icon-xs",
+          clickEffect: false,
+        }),
         "absolute inset-e-1 top-1.5",
-        "aspect-square w-5",
-        "p-0",
-        "flex items-center justify-center",
-        "rounded-md",
         "text-sidebar-foreground",
         "transition-transform",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-        "outline-hidden ring-sidebar-ring focus-visible:ring-2",
         "peer-hover/menu-button:text-sidebar-accent-foreground",
         "after:absolute after:-inset-2 md:after:hidden",
         "peer-data-[size=lg]/menu-button:top-2.5 peer-data-[size=md]/menu-button:top-1.5 peer-data-[size=sm]/menu-button:top-1",
@@ -644,6 +662,7 @@ export const SidebarMenuAction = (props: SidebarMenuActionProps) => {
         className
       )}
       data-sidebar="menu-action"
+      data-slot="sidebar-menu-action"
       type="button"
       {...rest}
     />
@@ -658,7 +677,7 @@ export const SidebarMenuBadge = (
   return (
     <ark.div
       className={cn(
-        "absolute inset-s-1",
+        "absolute inset-e-1",
         "flex items-center justify-center",
         "px-1",
         "h-5 min-w-5",
@@ -674,6 +693,7 @@ export const SidebarMenuBadge = (
         className
       )}
       data-sidebar="menu-badge"
+      data-slot="sidebar-menu-badge"
       {...rest}
     />
   );
@@ -696,6 +716,7 @@ export const SidebarMenuSkeleton = (props: SidebarMenuSkeletonProps) => {
     <ark.div
       className={cn("flex h-8 items-center gap-2 rounded-md px-2", className)}
       data-sidebar="menu-skeleton"
+      data-slot="sidebar-menu-skeleton"
       {...rest}
     >
       {!!showIcon && (
@@ -729,6 +750,7 @@ export const SidebarMenuSub = (props: React.ComponentProps<typeof ark.ul>) => {
         className
       )}
       data-sidebar="menu-sub"
+      data-slot="sidebar-menu-sub"
       {...rest}
     />
   );
@@ -741,13 +763,14 @@ export const SidebarMenuSubItem = ({
   <ark.li
     className={cn("group/menu-sub-item relative", className)}
     data-sidebar="menu-sub-item"
+    data-slot="sidebar-menu-sub-item"
     {...props}
   />
 );
 
 interface SidebarMenuSubButtonProps
   extends React.ComponentProps<typeof ark.a>,
-    VariantProps<typeof sidebarMenuSubButtonVariants> {
+    VariantProps<typeof buttonVariants> {
   isActive?: boolean;
 }
 
@@ -756,10 +779,26 @@ export const SidebarMenuSubButton = (props: SidebarMenuSubButtonProps) => {
 
   return (
     <ark.a
-      className={cn(sidebarMenuSubButtonVariants({ size }), className)}
+      className={cn(
+        buttonVariants({ size, variant: "ghost", clickEffect: false }),
+        "w-full min-w-0",
+        "justify-start",
+        "px-2",
+        "text-sidebar-foreground",
+        "overflow-hidden",
+        "ltr:-translate-x-px rtl:translate-x-px",
+        "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+        "active:bg-sidebar-accent active:text-sidebar-accent-foreground",
+        "data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground",
+        "focus-visible:sidebar-ring-[3px] outline-none focus-visible:ring-sidebar-ring/32",
+        "[&>span:last-child]:truncate",
+        "[&_svg]:text-sidebar-accent-foreground",
+        className
+      )}
       data-active={isActive}
       data-sidebar="menu-sub-button"
       data-size={size}
+      data-slot="sidebar-menu-sub-button"
       {...rest}
     />
   );

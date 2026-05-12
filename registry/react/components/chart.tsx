@@ -1,7 +1,16 @@
 "use client";
 
 import React from "react";
-import * as RechartsPrimitive from "recharts";
+import {
+  Legend,
+  type LegendPayload,
+  type LegendProps,
+  ResponsiveContainer,
+  Tooltip,
+  type TooltipContentProps,
+  type TooltipPayloadEntry,
+  type TooltipValueType,
+} from "recharts";
 import { cn } from "@/lib/utils";
 
 const THEMES = { dark: ".dark", light: "" } as const;
@@ -21,15 +30,12 @@ export interface ChartLegendContentProps {
   className?: string;
   hideIcon?: boolean;
   nameKey?: string;
-  payload?: RechartsPrimitive.LegendPayload[];
-  verticalAlign?: RechartsPrimitive.LegendProps["verticalAlign"];
+  payload?: LegendPayload[];
+  verticalAlign?: LegendProps["verticalAlign"];
 }
 
 export type CustomTooltipProps = Partial<
-  RechartsPrimitive.TooltipContentProps<
-    RechartsPrimitive.TooltipValueType,
-    NameType
-  >
+  TooltipContentProps<TooltipValueType, NameType>
 > & {
   className?: string;
   color?: string;
@@ -39,23 +45,22 @@ export type CustomTooltipProps = Partial<
   indicator?: "dashed" | "dot" | "line";
   labelClassName?: string;
   labelFormatter?: (
-    label: RechartsPrimitive.TooltipContentProps<number, string>["label"],
-    payload: RechartsPrimitive.TooltipContentProps<number, string>["payload"]
+    label: TooltipContentProps<number, string>["label"],
+    payload: TooltipContentProps<number, string>["payload"]
   ) => React.ReactNode;
   labelKey?: string;
   nameKey?: string;
 };
 
 export type Formatter<
-  TValue extends
-    RechartsPrimitive.TooltipValueType = RechartsPrimitive.TooltipValueType,
+  TValue extends TooltipValueType = TooltipValueType,
   TName extends NameType = NameType,
 > = (
   value: TValue | undefined,
   name: TName | undefined,
-  item: RechartsPrimitive.TooltipPayloadEntry<TValue, TName>,
+  item: TooltipPayloadEntry<TValue, TName>,
   index: number,
-  payload: readonly RechartsPrimitive.TooltipPayloadEntry<TValue, TName>[]
+  payload: readonly TooltipPayloadEntry<TValue, TName>[]
 ) => [React.ReactNode, TName] | React.ReactNode;
 
 export type NameType = number | string;
@@ -69,9 +74,7 @@ interface ChartContextProps {
 const ChartContext = React.createContext<ChartContextProps | null>(null);
 
 interface ChartContainerProps extends React.ComponentProps<"div"> {
-  children: React.ComponentProps<
-    typeof RechartsPrimitive.ResponsiveContainer
-  >["children"];
+  children: React.ComponentProps<typeof ResponsiveContainer>["children"];
   config: ChartConfig;
 }
 
@@ -93,9 +96,7 @@ export const ChartContainer = (props: ChartContainerProps) => {
         {...rest}
       >
         <ChartStyle config={config} id={chartId} />
-        <RechartsPrimitive.ResponsiveContainer>
-          {children}
-        </RechartsPrimitive.ResponsiveContainer>
+        <ResponsiveContainer>{children}</ResponsiveContainer>
       </div>
     </ChartContext.Provider>
   );
@@ -140,7 +141,7 @@ export const ChartStyle = ({
   );
 };
 
-export const ChartTooltip = RechartsPrimitive.Tooltip;
+export const ChartTooltip = Tooltip;
 
 export const ChartTooltipContent = (props: CustomTooltipProps) => {
   const {
@@ -285,7 +286,7 @@ export const ChartTooltipContent = (props: CustomTooltipProps) => {
   );
 };
 
-export const ChartLegend = RechartsPrimitive.Legend;
+export const ChartLegend = Legend;
 
 export const ChartLegendContent = (props: ChartLegendContentProps) => {
   const {

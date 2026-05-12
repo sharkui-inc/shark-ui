@@ -45,6 +45,7 @@ export const TooltipContent = (
   props: React.ComponentProps<typeof ArkTooltip.Content>
 ) => {
   const { className, children, ...rest } = props;
+
   return (
     <Portal>
       <ArkTooltip.Positioner data-slot="tooltip-positioner">
@@ -68,9 +69,9 @@ export const TooltipContent = (
           data-slot="tooltip-content"
           {...rest}
         >
-          {children}
-
           <TooltipArrow />
+
+          {children}
         </ArkTooltip.Content>
       </ArkTooltip.Positioner>
     </Portal>

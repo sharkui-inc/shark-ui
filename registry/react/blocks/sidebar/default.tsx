@@ -1,41 +1,34 @@
 "use client";
 
 import {
-  BadgeCheckIcon,
-  BellIcon,
-  BookOpenIcon,
-  BotIcon,
-  ChevronRightIcon,
-  ChevronsUpDownIcon,
-  CreditCardIcon,
-  FolderIcon,
-  FrameIcon,
-  LifeBuoyIcon,
-  LogOutIcon,
-  MapIcon,
-  MoreHorizontalIcon,
-  PieChartIcon,
-  SendIcon,
-  Settings2Icon,
-  ShareIcon,
-  SparklesIcon,
-  SquareTerminalIcon,
-  Trash2Icon,
+  BadgeCheck,
+  Bell,
+  BookOpen,
+  Bot,
+  ChevronRight,
+  ChevronsUpDown,
+  CreditCard,
+  Folder,
+  Forward,
+  Frame,
+  GalleryVerticalEnd,
+  LogOut,
+  Map as MapIcon,
+  MoreHorizontal,
+  PieChart,
+  Plus,
+  Settings2,
+  Sparkles,
+  SquareTerminal,
+  Trash2,
 } from "lucide-react";
+import React, { type ElementType } from "react";
 import { SharkIcon } from "@/components/icons/shark";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/registry/react/components/avatar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/registry/react/components/breadcrumb";
 import {
   Collapsible,
   CollapsibleContent,
@@ -48,15 +41,14 @@ import {
   MenuGroupLabel,
   MenuItem,
   MenuSeparator,
+  MenuShortcut,
   MenuTrigger,
 } from "@/registry/react/components/menu";
-import { Separator } from "@/registry/react/components/separator";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarInset,
@@ -70,273 +62,32 @@ import {
   SidebarProvider,
   SidebarRail,
   SidebarTrigger,
+  useSidebar,
 } from "@/registry/react/components/sidebar";
-import { useIsMobile } from "@/registry/react/hooks/use-is-mobile";
-
-const SidebarBlock = () => {
-  const isMobile = useIsMobile();
-
-  return (
-    <SidebarProvider>
-      <Sidebar defaultOpen={true}>
-        <SidebarHeader>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild size="lg">
-                <a href="#">
-                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                    <SharkIcon />
-                  </div>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-medium">Shark UI</span>
-                    <span className="truncate text-xs">Enterprise</span>
-                  </div>
-                </a>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarHeader>
-        <SidebarContent>
-          <SidebarGroup>
-            <SidebarGroupLabel>Platform</SidebarGroupLabel>
-            <SidebarMenu>
-              {data.navMain.map((item) => (
-                <Collapsible
-                  asChild
-                  defaultOpen={item.isActive}
-                  key={item.title}
-                >
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild tooltip={item.title}>
-                      <a href={item.url}>
-                        <item.icon />
-                        <span>{item.title}</span>
-                      </a>
-                    </SidebarMenuButton>
-                    {item.items?.length ? (
-                      <>
-                        <CollapsibleTrigger asChild>
-                          <SidebarMenuAction className="data-[state=open]:rotate-90">
-                            <ChevronRightIcon />
-                            <span className="sr-only">Toggle</span>
-                          </SidebarMenuAction>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent>
-                          <SidebarMenuSub>
-                            {item.items?.map((subItem) => (
-                              <SidebarMenuSubItem key={subItem.title}>
-                                <SidebarMenuSubButton asChild>
-                                  <a href={subItem.url}>
-                                    <span>{subItem.title}</span>
-                                  </a>
-                                </SidebarMenuSubButton>
-                              </SidebarMenuSubItem>
-                            ))}
-                          </SidebarMenuSub>
-                        </CollapsibleContent>
-                      </>
-                    ) : null}
-                  </SidebarMenuItem>
-                </Collapsible>
-              ))}
-            </SidebarMenu>
-          </SidebarGroup>
-          <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-            <SidebarGroupLabel>Projects</SidebarGroupLabel>
-            <SidebarMenu>
-              {data.projects.map((item) => (
-                <SidebarMenuItem key={item.name}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.name}</span>
-                    </a>
-                  </SidebarMenuButton>
-                  <Menu
-                    positioning={{
-                      placement: isMobile ? "bottom-end" : "bottom-start",
-                    }}
-                  >
-                    <MenuTrigger asChild>
-                      <SidebarMenuAction showOnHover>
-                        <MoreHorizontalIcon />
-                        <span className="sr-only">More</span>
-                      </SidebarMenuAction>
-                    </MenuTrigger>
-                    <MenuContent className="w-48">
-                      <MenuItem value="view-project">
-                        <FolderIcon className="text-muted-foreground" />
-                        <span>View Project</span>
-                      </MenuItem>
-                      <MenuItem value="share-project">
-                        <ShareIcon className="text-muted-foreground" />
-                        <span>Share Project</span>
-                      </MenuItem>
-                      <MenuSeparator />
-                      <MenuItem value="delete-project" variant="destructive">
-                        <Trash2Icon className="text-muted-foreground" />
-                        <span>Delete Project</span>
-                      </MenuItem>
-                    </MenuContent>
-                  </Menu>
-                </SidebarMenuItem>
-              ))}
-              <SidebarMenuItem>
-                <SidebarMenuButton>
-                  <MoreHorizontalIcon />
-                  <span>More</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroup>
-          <SidebarGroup className="mt-auto">
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {data.navSecondary.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild size="sm">
-                      <a href={item.url}>
-                        <item.icon />
-                        <span>{item.title}</span>
-                      </a>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        </SidebarContent>
-        <SidebarFooter>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <Menu
-                positioning={{
-                  placement: isMobile ? "top-start" : "right-end",
-                }}
-              >
-                <MenuTrigger asChild>
-                  <SidebarMenuButton
-                    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                    size="lg"
-                  >
-                    <Avatar>
-                      <AvatarImage
-                        alt={data.user.name}
-                        src={data.user.avatar}
-                      />
-                      <AvatarFallback>VV</AvatarFallback>
-                    </Avatar>
-                    <div className="grid flex-1 text-left text-sm leading-tight">
-                      <span className="truncate font-medium">
-                        {data.user.name}
-                      </span>
-                      <span className="truncate text-xs">
-                        {data.user.email}
-                      </span>
-                    </div>
-                    <ChevronsUpDownIcon className="ml-auto" />
-                  </SidebarMenuButton>
-                </MenuTrigger>
-                <MenuContent className="w-(--reference-width) min-w-56 rounded-lg">
-                  <MenuGroup>
-                    <MenuGroupLabel className="p-0 font-normal">
-                      <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                        <Avatar>
-                          <AvatarImage
-                            alt={data.user.name}
-                            src={data.user.avatar}
-                          />
-                          <AvatarFallback>VV</AvatarFallback>
-                        </Avatar>
-                        <div className="grid flex-1 text-left text-sm leading-tight">
-                          <span className="truncate font-medium">
-                            {data.user.name}
-                          </span>
-                          <span className="truncate text-xs">
-                            {data.user.email}
-                          </span>
-                        </div>
-                      </div>
-                    </MenuGroupLabel>
-                  </MenuGroup>
-                  <MenuSeparator />
-                  <MenuGroup>
-                    <MenuItem value="upgrade">
-                      <SparklesIcon />
-                      Upgrade to Pro
-                    </MenuItem>
-                  </MenuGroup>
-                  <MenuSeparator />
-                  <MenuGroup>
-                    <MenuItem value="account">
-                      <BadgeCheckIcon />
-                      Account
-                    </MenuItem>
-                    <MenuItem value="billing">
-                      <CreditCardIcon />
-                      Billing
-                    </MenuItem>
-                    <MenuItem value="notifications">
-                      <BellIcon />
-                      Notifications
-                    </MenuItem>
-                  </MenuGroup>
-                  <MenuSeparator />
-                  <MenuItem value="logout">
-                    <LogOutIcon />
-                    Log out
-                  </MenuItem>
-                </MenuContent>
-              </Menu>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarFooter>
-        <SidebarRail />
-      </Sidebar>
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2">
-          <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1" />
-            <Separator className="my-1 mr-2" orientation="vertical" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Build Your Application
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-        </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-          </div>
-          <div className="min-h-svh flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
-  );
-};
 
 const data = {
   user: {
-    name: "vinihvc",
+    name: "vini",
     email: "m@example.com",
     avatar: "https://github.com/vinihvc.png",
   },
+  teams: [
+    {
+      name: "Acme Inc",
+      logo: GalleryVerticalEnd,
+      plan: "Enterprise",
+    },
+    {
+      name: "Shark Corp.",
+      logo: SharkIcon,
+      plan: "Startup",
+    },
+  ],
   navMain: [
     {
       title: "Playground",
       url: "#",
-      icon: SquareTerminalIcon,
+      icon: SquareTerminal,
       isActive: true,
       items: [
         {
@@ -356,7 +107,7 @@ const data = {
     {
       title: "Models",
       url: "#",
-      icon: BotIcon,
+      icon: Bot,
       items: [
         {
           title: "Genesis",
@@ -375,7 +126,7 @@ const data = {
     {
       title: "Documentation",
       url: "#",
-      icon: BookOpenIcon,
+      icon: BookOpen,
       items: [
         {
           title: "Introduction",
@@ -398,7 +149,7 @@ const data = {
     {
       title: "Settings",
       url: "#",
-      icon: Settings2Icon,
+      icon: Settings2,
       items: [
         {
           title: "General",
@@ -419,28 +170,16 @@ const data = {
       ],
     },
   ],
-  navSecondary: [
-    {
-      title: "Support",
-      url: "#",
-      icon: LifeBuoyIcon,
-    },
-    {
-      title: "Feedback",
-      url: "#",
-      icon: SendIcon,
-    },
-  ],
   projects: [
     {
       name: "Design Engineering",
       url: "#",
-      icon: FrameIcon,
+      icon: Frame,
     },
     {
       name: "Sales & Marketing",
       url: "#",
-      icon: PieChartIcon,
+      icon: PieChart,
     },
     {
       name: "Travel",
@@ -450,4 +189,306 @@ const data = {
   ],
 };
 
-export default SidebarBlock;
+interface TeamSwitcherProps {
+  teams: {
+    name: string;
+    logo: ElementType;
+    plan: string;
+  }[];
+}
+
+const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
+  const [activeTeam, setActiveTeam] = React.useState(teams[0]);
+
+  if (!activeTeam) {
+    return null;
+  }
+
+  return (
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <Menu
+          positioning={{
+            placement: "right-start",
+          }}
+        >
+          <MenuTrigger asChild>
+            <SidebarMenuButton
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              size="lg"
+            >
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                <activeTeam.logo className="size-4" />
+              </div>
+              <div className="grid flex-1 text-left text-sm leading-tight">
+                <span className="truncate font-medium">{activeTeam.name}</span>
+                <span className="truncate text-xs">{activeTeam.plan}</span>
+              </div>
+              <ChevronsUpDown className="ms-auto" />
+            </SidebarMenuButton>
+          </MenuTrigger>
+          <MenuContent className="w-(--reference-width) min-w-56 rounded-lg">
+            <MenuGroup>
+              <MenuGroupLabel className="text-muted-foreground text-xs">
+                Teams
+              </MenuGroupLabel>
+              {teams.map((team, index) => (
+                <MenuItem
+                  className="gap-2 p-2"
+                  key={team.name}
+                  onClick={() => setActiveTeam(team)}
+                  value={team.name}
+                >
+                  <div className="flex size-6 items-center justify-center rounded-md border border-input">
+                    <team.logo className="size-3.5 shrink-0" />
+                  </div>
+                  {team.name}
+                  <MenuShortcut>⌘{index + 1}</MenuShortcut>
+                </MenuItem>
+              ))}
+            </MenuGroup>
+            <MenuSeparator />
+            <MenuGroup>
+              <MenuItem className="gap-2 p-2" value="add-team">
+                <div className="flex size-6 items-center justify-center rounded-md border border-input bg-transparent">
+                  <Plus className="size-4" />
+                </div>
+                <div className="font-medium text-muted-foreground">
+                  Add team
+                </div>
+              </MenuItem>
+            </MenuGroup>
+          </MenuContent>
+        </Menu>
+      </SidebarMenuItem>
+    </SidebarMenu>
+  );
+};
+
+interface NavMainProps {
+  items: {
+    title: string;
+    url: string;
+    icon?: ElementType;
+    isActive?: boolean;
+    items?: {
+      title: string;
+      url: string;
+    }[];
+  }[];
+}
+
+const NavMain = ({ items }: NavMainProps) => (
+  <SidebarGroup>
+    <SidebarGroupLabel>Platform</SidebarGroupLabel>
+    <SidebarMenu>
+      {items.map((item) => (
+        <Collapsible
+          asChild
+          className="group/collapsible"
+          defaultOpen={item.isActive}
+          key={item.title}
+        >
+          <SidebarMenuItem>
+            <CollapsibleTrigger asChild>
+              <SidebarMenuButton tooltip={item.title}>
+                {item.icon && <item.icon />}
+                <span>{item.title}</span>
+                <ChevronRight className="ms-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+              </SidebarMenuButton>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <SidebarMenuSub>
+                {item.items?.map((subItem) => (
+                  <SidebarMenuSubItem key={subItem.title}>
+                    <SidebarMenuSubButton asChild>
+                      <a href={subItem.url}>
+                        <span>{subItem.title}</span>
+                      </a>
+                    </SidebarMenuSubButton>
+                  </SidebarMenuSubItem>
+                ))}
+              </SidebarMenuSub>
+            </CollapsibleContent>
+          </SidebarMenuItem>
+        </Collapsible>
+      ))}
+    </SidebarMenu>
+  </SidebarGroup>
+);
+
+interface NavProjectsProps {
+  projects: {
+    name: string;
+    url: string;
+    icon: ElementType;
+  }[];
+}
+
+const NavProjects = ({ projects }: NavProjectsProps) => (
+  <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+    <SidebarGroupLabel>Projects</SidebarGroupLabel>
+    <SidebarMenu>
+      {projects.map((item) => (
+        <SidebarMenuItem key={item.name}>
+          <SidebarMenuButton asChild>
+            <a href={item.url}>
+              <item.icon />
+              <span>{item.name}</span>
+            </a>
+          </SidebarMenuButton>
+          <Menu
+            positioning={{
+              placement: "right-start",
+            }}
+          >
+            <MenuTrigger asChild>
+              <SidebarMenuAction showOnHover>
+                <MoreHorizontal />
+                <span className="sr-only">More</span>
+              </SidebarMenuAction>
+            </MenuTrigger>
+            <MenuContent className="w-48 rounded-lg">
+              <MenuGroup>
+                <MenuItem value={`${item.name}-view`}>
+                  <Folder />
+                  View Project
+                </MenuItem>
+                <MenuItem value={`${item.name}-share`}>
+                  <Forward />
+                  Share Project
+                </MenuItem>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value={`${item.name}-delete`} variant="destructive">
+                  <Trash2 />
+                  Delete Project
+                </MenuItem>
+              </MenuGroup>
+            </MenuContent>
+          </Menu>
+        </SidebarMenuItem>
+      ))}
+      <SidebarMenuItem>
+        <SidebarMenuButton className="text-sidebar-foreground/70">
+          <MoreHorizontal className="text-sidebar-foreground/70" />
+          <span>More</span>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    </SidebarMenu>
+  </SidebarGroup>
+);
+
+interface NavUserProps {
+  user: {
+    name: string;
+    email: string;
+    avatar: string;
+  };
+}
+
+const NavUser = ({ user }: NavUserProps) => {
+  const { isMobile } = useSidebar();
+
+  return (
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <Menu
+          positioning={{
+            placement: isMobile ? "bottom-end" : "right-end",
+          }}
+        >
+          <MenuTrigger asChild>
+            <SidebarMenuButton
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              size="lg"
+            >
+              <Avatar className="h-8 w-8 rounded-lg">
+                <AvatarImage alt={user.name} src={user.avatar} />
+                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+              </Avatar>
+              <div className="grid flex-1 text-left text-sm leading-tight">
+                <span className="truncate font-medium">{user.name}</span>
+                <span className="truncate text-xs">{user.email}</span>
+              </div>
+              <ChevronsUpDown className="ms-auto size-4" />
+            </SidebarMenuButton>
+          </MenuTrigger>
+          <MenuContent className="w-(--reference-width) min-w-56 rounded-lg">
+            <MenuGroup>
+              <MenuGroupLabel className="p-0 font-normal">
+                <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                  <Avatar className="h-8 w-8 rounded-lg">
+                    <AvatarImage alt={user.name} src={user.avatar} />
+                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  </Avatar>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-medium">{user.name}</span>
+                    <span className="truncate text-xs">{user.email}</span>
+                  </div>
+                </div>
+              </MenuGroupLabel>
+            </MenuGroup>
+            <MenuSeparator />
+            <MenuGroup>
+              <MenuItem value="upgrade">
+                <Sparkles />
+                Upgrade to Pro
+              </MenuItem>
+            </MenuGroup>
+            <MenuSeparator />
+            <MenuGroup>
+              <MenuItem value="account">
+                <BadgeCheck />
+                Account
+              </MenuItem>
+              <MenuItem value="billing">
+                <CreditCard />
+                Billing
+              </MenuItem>
+              <MenuItem value="notifications">
+                <Bell />
+                Notifications
+              </MenuItem>
+            </MenuGroup>
+            <MenuSeparator />
+            <MenuGroup>
+              <MenuItem value="logout">
+                <LogOut />
+                Log out
+              </MenuItem>
+            </MenuGroup>
+          </MenuContent>
+        </Menu>
+      </SidebarMenuItem>
+    </SidebarMenu>
+  );
+};
+
+const AppSidebar = () => (
+  <SidebarProvider>
+    <Sidebar collapsible="icon" defaultOpen>
+      <SidebarHeader>
+        <TeamSwitcher teams={data.teams} />
+      </SidebarHeader>
+      <SidebarContent>
+        <NavMain items={data.navMain} />
+        <NavProjects projects={data.projects} />
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={data.user} />
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
+    <SidebarInset>
+      <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+        <div className="flex items-center gap-2 px-4">
+          <SidebarTrigger className="-ms-1" />
+        </div>
+      </header>
+    </SidebarInset>
+  </SidebarProvider>
+);
+
+export default AppSidebar;

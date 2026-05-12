@@ -69,7 +69,7 @@ const ViewRegistryPage = async (
   }
 
   return (
-    <div className="min-h-svh bg-background **:data-[slot=card]:rounded-none **:data-[slot=card]:border-0 **:data-[slot=card]:shadow-none">
+    <div className="**:data-[slot=card]:rounded-none **:data-[slot=card]:border-0 **:data-[slot=card]:shadow-none">
       <Component.default />
     </div>
   );
