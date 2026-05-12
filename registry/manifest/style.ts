@@ -72,7 +72,7 @@ const cssVars = {
     "accent-foreground": "var(--color-neutral-100)",
     background:
       "color-mix(in srgb, var(--color-neutral-950) 100%, var(--color-neutral-50))",
-    border: "color-mix(in srgb, var(--color-neutral-50) 6%, var(--background))",
+    border: "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
     card: "color-mix(in srgb, var(--background) 98%, var(--color-neutral-50))",
     "card-foreground": "var(--color-neutral-100)",
     destructive:
@@ -81,7 +81,7 @@ const cssVars = {
     foreground: "var(--color-neutral-100)",
     info: "var(--color-blue-500)",
     "info-foreground": "var(--color-blue-400)",
-    input: "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
+    input: "color-mix(in srgb, var(--color-neutral-50) 10%, var(--background))",
     muted: "color-mix(in srgb, var(--color-neutral-50) 4%, var(--background))",
     "muted-foreground":
       "color-mix(in srgb, var(--color-neutral-500) 90%, var(--color-neutral-50))",

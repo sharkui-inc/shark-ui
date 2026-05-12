@@ -302,8 +302,8 @@
   --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-400);
 
-  --border: color-mix(in srgb, var(--color-neutral-50) 6%, var(--background));
-  --input: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
+  --border: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
+  --input: color-mix(in srgb, var(--color-neutral-50) 10%, var(--background));
   --ring: var(--color-neutral-500);
 
   --sidebar: color-mix(
@@ -403,6 +403,18 @@
       top: calc(var(--spacing) * 1.5);
     }
 
+    &:has([data-language="text"]) {
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        Liberation Mono,
+        Courier New,
+        monospace;
+    }
+
     :where(*[data-tab="code"]) & {
       border-width: 0px;
     }
@@ -448,6 +460,38 @@
     min-height: calc(var(--spacing) * 1);
     padding-top: calc(var(--spacing) * 0.5);
     padding-bottom: calc(var(--spacing) * 0.5);
+  }
+
+  /*
+   * ```text composition trees use box-drawing characters; per-line padding makes
+   * vertical connectors look broken. rehype-pretty-code sets `data-language` on
+   * `pre`/`code` (not `language-*` classes). It also sets `code { display: grid }`,
+   * which can add visible row separation — reset to a normal pre stack for text.
+   */
+  [data-rehype-pretty-code-figure] pre[data-language="text"] code,
+  [data-rehype-pretty-code-figure] pre[data-language="plaintext"] code,
+  [data-slot="docs"] pre[data-language="text"] code,
+  [data-slot="docs"] pre[data-language="plaintext"] code {
+    display: block !important;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    font-variant-ligatures: none;
+    line-height: 0.95;
+    white-space: pre;
+  }
+
+  [data-rehype-pretty-code-figure] pre[data-language="text"] [data-line],
+  [data-rehype-pretty-code-figure] pre[data-language="plaintext"] [data-line],
+  [data-rehype-pretty-code-figure] code[data-language="text"] [data-line],
+  [data-rehype-pretty-code-figure] code[data-language="plaintext"] [data-line],
+  [data-slot="docs"] pre[data-language="text"] [data-line],
+  [data-slot="docs"] pre[data-language="plaintext"] [data-line] {
+    display: block;
+    min-height: unset;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 0.95;
   }
 
   [data-line] span {

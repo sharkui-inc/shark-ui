@@ -245,8 +245,8 @@
       var(--color-slate-50)
     );
 
-    --border: color-mix(in srgb, var(--color-slate-50) 6%, var(--background));
-    --input: color-mix(in srgb, var(--color-slate-50) 8%, var(--background));
+    --border: color-mix(in srgb, var(--color-slate-50) 8%, var(--background));
+    --input: color-mix(in srgb, var(--color-slate-50) 10%, var(--background));
 
     --sidebar: color-mix(
       in srgb,
@@ -373,8 +373,8 @@
       var(--color-gray-50)
     );
 
-    --border: color-mix(in srgb, var(--color-gray-50) 6%, var(--background));
-    --input: color-mix(in srgb, var(--color-gray-50) 8%, var(--background));
+    --border: color-mix(in srgb, var(--color-gray-50) 8%, var(--background));
+    --input: color-mix(in srgb, var(--color-gray-50) 10%, var(--background));
 
     --sidebar: color-mix(
       in srgb,
@@ -501,8 +501,8 @@
       var(--color-zinc-50)
     );
 
-    --border: color-mix(in srgb, var(--color-zinc-50) 6%, var(--background));
-    --input: color-mix(in srgb, var(--color-zinc-50) 8%, var(--background));
+    --border: color-mix(in srgb, var(--color-zinc-50) 8%, var(--background));
+    --input: color-mix(in srgb, var(--color-zinc-50) 10%, var(--background));
 
     --sidebar: color-mix(
       in srgb,
@@ -637,8 +637,8 @@
       var(--color-stone-50)
     );
 
-    --border: color-mix(in srgb, var(--color-stone-50) 6%, var(--background));
-    --input: color-mix(in srgb, var(--color-stone-50) 8%, var(--background));
+    --border: color-mix(in srgb, var(--color-stone-50) 8%, var(--background));
+    --input: color-mix(in srgb, var(--color-stone-50) 10%, var(--background));
 
     --sidebar: color-mix(
       in srgb,
@@ -773,8 +773,8 @@
       var(--color-mauve-50)
     );
 
-    --border: color-mix(in srgb, var(--color-mauve-50) 6%, var(--background));
-    --input: color-mix(in srgb, var(--color-mauve-50) 8%, var(--background));
+    --border: color-mix(in srgb, var(--color-mauve-50) 8%, var(--background));
+    --input: color-mix(in srgb, var(--color-mauve-50) 10%, var(--background));
 
     --sidebar: color-mix(
       in srgb,
@@ -909,8 +909,8 @@
       var(--color-olive-50)
     );
 
-    --border: color-mix(in srgb, var(--color-olive-50) 6%, var(--background));
-    --input: color-mix(in srgb, var(--color-olive-50) 8%, var(--background));
+    --border: color-mix(in srgb, var(--color-olive-50) 8%, var(--background));
+    --input: color-mix(in srgb, var(--color-olive-50) 10%, var(--background));
 
     --sidebar: color-mix(
       in srgb,
@@ -1037,8 +1037,8 @@
       var(--color-mist-50)
     );
 
-    --border: color-mix(in srgb, var(--color-mist-50) 6%, var(--background));
-    --input: color-mix(in srgb, var(--color-mist-50) 8%, var(--background));
+    --border: color-mix(in srgb, var(--color-mist-50) 8%, var(--background));
+    --input: color-mix(in srgb, var(--color-mist-50) 10%, var(--background));
 
     --sidebar: color-mix(
       in srgb,
@@ -1175,8 +1175,8 @@
       var(--color-taupe-50)
     );
 
-    --border: color-mix(in srgb, var(--color-taupe-50) 6%, var(--background));
-    --input: color-mix(in srgb, var(--color-taupe-50) 8%, var(--background));
+    --border: color-mix(in srgb, var(--color-taupe-50) 8%, var(--background));
+    --input: color-mix(in srgb, var(--color-taupe-50) 10%, var(--background));
 
     --sidebar: color-mix(
       in srgb,

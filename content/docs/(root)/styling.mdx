@@ -1,13 +1,13 @@
 ---
 title: Styling
-description: Guide to styling components with the color system and layout setup.
+description: Guide to styling components with the color system.
 ---
 
 ## Overview
 
-Everything here is driven by CSS variables, which is what keeps borders crisp and stacking clear on screen. If you need the token list and how colors map to utilities, read [Colors](/docs/colors). Borders are deliberately a little see-through and sit next to light shadows so surfaces read as separate layers. You can swap in your own palette, but the defaults are balanced for that recipe—typical flat themes often end up with muddier edges or flatter depth.
+Styling uses CSS variables for crisp borders and clear stacking. See [Colors](/docs/colors) for tokens and utility mapping. You can use your own palette, but the defaults are tuned for layered depth and clarity.
 
-## Installation
+## CSS Setup
 
 See [Get Started](/docs/installation) for setup. To add the theme yourself, paste the following into `globals.css`:
 
@@ -112,7 +112,7 @@ See [Get Started](/docs/installation) for setup. To add the theme yourself, past
   --sidebar-accent-foreground: var(--color-neutral-800);
   --sidebar-border: color-mix(
     in srgb,
-    var(--color-neutral-950) 6%,
+    var(--color-neutral-950) 8%,
     var(--sidebar)
   );
   --sidebar-ring: var(--color-neutral-400);
@@ -162,8 +162,8 @@ See [Get Started](/docs/installation) for setup. To add the theme yourself, past
   --success-foreground: var(--color-emerald-400);
   --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-400);
-  --border: color-mix(in srgb, var(--color-neutral-50) 6%, var(--background));
-  --input: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
+  --border: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
+  --input: color-mix(in srgb, var(--color-neutral-50) 10%, var(--background));
   --ring: var(--color-neutral-500);
   --sidebar: color-mix(
     in srgb,

@@ -482,9 +482,9 @@ export const GRAY_COLORS = [
           "color-mix(in srgb, var(--color-slate-50) 4%, var(--background))",
         "accent-foreground": "var(--color-slate-100)",
         border:
-          "color-mix(in srgb, var(--color-slate-50) 6%, var(--background))",
-        input:
           "color-mix(in srgb, var(--color-slate-50) 8%, var(--background))",
+        input:
+          "color-mix(in srgb, var(--color-slate-50) 10%, var(--background))",
         ring: "var(--color-slate-500)",
         destructive:
           "color-mix(in srgb, var(--color-red-600) 90%, var(--color-slate-50))",
@@ -572,8 +572,9 @@ export const GRAY_COLORS = [
           "color-mix(in srgb, var(--color-gray-50) 4%, var(--background))",
         "accent-foreground": "var(--color-gray-100)",
         border:
-          "color-mix(in srgb, var(--color-gray-50) 6%, var(--background))",
-        input: "color-mix(in srgb, var(--color-gray-50) 8%, var(--background))",
+          "color-mix(in srgb, var(--color-gray-50) 8%, var(--background))",
+        input:
+          "color-mix(in srgb, var(--color-gray-50) 10%, var(--background))",
         ring: "var(--color-gray-500)",
         destructive:
           "color-mix(in srgb, var(--color-red-600) 90%, var(--color-gray-50))",
@@ -661,8 +662,9 @@ export const GRAY_COLORS = [
           "color-mix(in srgb, var(--color-zinc-50) 4%, var(--background))",
         "accent-foreground": "var(--color-zinc-100)",
         border:
-          "color-mix(in srgb, var(--color-zinc-50) 6%, var(--background))",
-        input: "color-mix(in srgb, var(--color-zinc-50) 8%, var(--background))",
+          "color-mix(in srgb, var(--color-zinc-50) 8%, var(--background))",
+        input:
+          "color-mix(in srgb, var(--color-zinc-50) 10%, var(--background))",
         ring: "var(--color-zinc-500)",
         destructive:
           "color-mix(in srgb, var(--color-red-600) 90%, var(--color-zinc-50))",
@@ -751,9 +753,9 @@ export const GRAY_COLORS = [
           "color-mix(in srgb, var(--color-neutral-50) 4%, var(--background))",
         "accent-foreground": "var(--color-neutral-100)",
         border:
-          "color-mix(in srgb, var(--color-neutral-50) 6%, var(--background))",
-        input:
           "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
+        input:
+          "color-mix(in srgb, var(--color-neutral-50) 10%, var(--background))",
         ring: "var(--color-neutral-500)",
         destructive:
           "color-mix(in srgb, var(--color-red-600) 90%, var(--color-neutral-50))",
@@ -842,9 +844,9 @@ export const GRAY_COLORS = [
           "color-mix(in srgb, var(--color-stone-50) 4%, var(--background))",
         "accent-foreground": "var(--color-stone-100)",
         border:
-          "color-mix(in srgb, var(--color-stone-50) 6%, var(--background))",
-        input:
           "color-mix(in srgb, var(--color-stone-50) 8%, var(--background))",
+        input:
+          "color-mix(in srgb, var(--color-stone-50) 10%, var(--background))",
         ring: "var(--color-stone-500)",
         destructive:
           "color-mix(in srgb, var(--color-red-600) 90%, var(--color-stone-50))",
@@ -933,9 +935,9 @@ export const GRAY_COLORS = [
           "color-mix(in srgb, var(--color-mauve-50) 4%, var(--background))",
         "accent-foreground": "var(--color-mauve-100)",
         border:
-          "color-mix(in srgb, var(--color-mauve-50) 6%, var(--background))",
-        input:
           "color-mix(in srgb, var(--color-mauve-50) 8%, var(--background))",
+        input:
+          "color-mix(in srgb, var(--color-mauve-50) 10%, var(--background))",
         ring: "var(--color-mauve-500)",
         destructive:
           "color-mix(in srgb, var(--color-red-600) 90%, var(--color-mauve-50))",
@@ -1024,9 +1026,9 @@ export const GRAY_COLORS = [
           "color-mix(in srgb, var(--color-olive-50) 4%, var(--background))",
         "accent-foreground": "var(--color-olive-100)",
         border:
-          "color-mix(in srgb, var(--color-olive-50) 6%, var(--background))",
-        input:
           "color-mix(in srgb, var(--color-olive-50) 8%, var(--background))",
+        input:
+          "color-mix(in srgb, var(--color-olive-50) 10%, var(--background))",
         ring: "var(--color-olive-500)",
         destructive:
           "color-mix(in srgb, var(--color-red-600) 90%, var(--color-olive-50))",
@@ -1114,8 +1116,9 @@ export const GRAY_COLORS = [
           "color-mix(in srgb, var(--color-mist-50) 4%, var(--background))",
         "accent-foreground": "var(--color-mist-100)",
         border:
-          "color-mix(in srgb, var(--color-mist-50) 6%, var(--background))",
-        input: "color-mix(in srgb, var(--color-mist-50) 8%, var(--background))",
+          "color-mix(in srgb, var(--color-mist-50) 8%, var(--background))",
+        input:
+          "color-mix(in srgb, var(--color-mist-50) 10%, var(--background))",
         ring: "var(--color-mist-500)",
         destructive:
           "color-mix(in srgb, var(--color-red-600) 90%, var(--color-mist-50))",
@@ -1204,9 +1207,9 @@ export const GRAY_COLORS = [
           "color-mix(in srgb, var(--color-taupe-50) 4%, var(--background))",
         "accent-foreground": "var(--color-taupe-100)",
         border:
-          "color-mix(in srgb, var(--color-taupe-50) 6%, var(--background))",
-        input:
           "color-mix(in srgb, var(--color-taupe-50) 8%, var(--background))",
+        input:
+          "color-mix(in srgb, var(--color-taupe-50) 10%, var(--background))",
         ring: "var(--color-taupe-500)",
         destructive:
           "color-mix(in srgb, var(--color-red-600) 90%, var(--color-taupe-50))",
