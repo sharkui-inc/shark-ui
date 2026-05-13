@@ -31,7 +31,13 @@ const NotFoundPage = () => (
         <span className="text-muted-foreground">or</span>
 
         <Button asChild variant="outline">
-          <NavLink href={`${SITE_CONFIG.repoUrl}/issues`}>Report Issue</NavLink>
+          <a
+            href={`${SITE_CONFIG.repoUrl}/issues`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Report Issue
+          </a>
         </Button>
       </div>
     </div>
