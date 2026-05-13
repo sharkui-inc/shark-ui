@@ -2,7 +2,9 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "frame",
   "type": "registry:ui",
-  "dependencies": [],
+  "dependencies": [
+    "@ark-ui/react"
+  ],
   "files": [
     {
       "path": "registry/react/components/frame.tsx",

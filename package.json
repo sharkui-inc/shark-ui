@@ -87,7 +87,7 @@
     "ultracite": "7.7.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,jsonc,css,scss,md,mdx}": [
+    "*.{js,jsx,ts,tsx,json,jsonc,mts,css,md,mdx}": [
       "pnpm lint:fix"
     ]
   }
