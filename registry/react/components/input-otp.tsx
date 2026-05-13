@@ -6,11 +6,11 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 import { Input, type InputProps } from "@/registry/react/components/input";
 
-interface InputOtpProps
+interface InputOTPProps
   extends React.ComponentProps<typeof ArkPinInput.Root>,
     Pick<InputProps, "size"> {}
 
-export const InputOtp = (props: InputOtpProps) => {
+export const InputOTP = (props: InputOTPProps) => {
   const { placeholder, otp = true, className, children, ...rest } = props;
 
   return (
@@ -37,7 +37,7 @@ export const InputOtp = (props: InputOtpProps) => {
   );
 };
 
-export const InputOtpSlot = (
+export const InputOTPSlot = (
   props: React.ComponentProps<typeof ArkPinInput.Input>
 ) => {
   const { className, ...rest } = props;
@@ -54,7 +54,7 @@ export const InputOtpSlot = (
   );
 };
 
-export const InputOtpSeparator = (
+export const InputOTPSeparator = (
   props: React.ComponentProps<typeof ark.hr>
 ) => {
   const { className, ...rest } = props;

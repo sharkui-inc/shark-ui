@@ -2,11 +2,8 @@
 
 ## When to use
 
-Use **scroll-area** when Shark docs describe this primitive for the task.
-
-## When not to use
-
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- Constrained-height scroll containers with styled viewport.
+- Scrollable lists/logs/panels embedded in fixed layouts.
 
 ## Install
 
@@ -14,31 +11,70 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/scroll-area
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/scroll-area.mdx`](../../content/docs/components/scroll-area.mdx) |
-| Examples | [`registry/react/examples/scroll-area/`](../../registry/react/examples/scroll-area/) |
-| Source | [`registry/react/components/scroll-area.tsx`](../../registry/react/components/scroll-area.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/scroll-area";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import { ScrollArea } from "@/components/ui/scroll-area"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<ScrollArea className="h-64 rounded-md border">
+  <div className="p-4">
+    Just as suddenly as it had begun, the sensation stopped, leaving Alice
+    feeling slightly disoriented. She looked around and realized that the room
+    hadn't changed at all - it was she who had grown smaller, shrinking down to
+    a fraction of her previous size. Alice felt herself growing larger and
+    larger, filling up the entire room until she feared she might burst. The
+    sensation was both thrilling and terrifying, as if she were expanding beyond
+    the confines of her own body. She wondered if this was what it felt like to
+    be a balloon, swelling with air until it could hold no more.
+  </div>
+</ScrollArea>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Horizontal scrolling (use wide inner content, not an `orientation` prop):
 
-## See also
+```tsx
+<ScrollArea className="max-w-96 rounded-lg border">
+  <div className="flex w-max gap-4 p-4">
+    {items.map((item) => (
+      <div key={item} className="w-32 shrink-0">{item}</div>
+    ))}
+  </div>
+</ScrollArea>
+```
 
-- [Component registry](../component-registry.md)
+Scroll fade edges:
+
+```tsx
+<ScrollArea className="h-64" scrollFade>
+  <div className="p-4">{/* Long content */}</div>
+</ScrollArea>
+```
+
+`ScrollArea` always renders both scrollbars internally -- horizontal scroll is driven by inner content width exceeding the container, not by a prop. Also supports `scrollbarGutter` for reserving scrollbar space.
+
+
+## Common pitfalls
+
+- Forgetting explicit height/constraint, resulting in non-scrollable container.
+- Nesting multiple scroll areas that compete for wheel/touch events.
+- Using scroll area where native page scrolling is simpler and clearer.
+
+## Registry example files
+
+- [`example-both-directions.tsx`](/registry/react/examples/scroll-area/example-both-directions.tsx)
+- [`example-default.tsx`](/registry/react/examples/scroll-area/example-default.tsx)
+- [`example-horizontal.tsx`](/registry/react/examples/scroll-area/example-horizontal.tsx)
+- [`example-nested.tsx`](/registry/react/examples/scroll-area/example-nested.tsx)
+- [`example-scroll-fade.tsx`](/registry/react/examples/scroll-area/example-scroll-fade.tsx)

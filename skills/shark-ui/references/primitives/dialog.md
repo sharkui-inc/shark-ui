@@ -2,14 +2,14 @@
 
 ## When to use
 
-- Modal flows that trap focus and block the page until dismissed.
-- Forms or multi-step content where `DialogHeader` / `DialogBody` / `DialogFooter` structure matches the design.
+- Modal overlays that require user focus and explicit action.
+- Multi-section popup flows with header/body/footer structure.
 
-## When not to use
+## When NOT to use
 
-- **Edge sheet / mobile-first panel** → prefer [`sheet.md`](./sheet.md).
-- **Destructive confirmation** → prefer **Alert Dialog** (`content/docs/components/alert-dialog.mdx` — may ship outside `registry.json`; follow docs).
-- **Non-blocking contextual panel** → prefer [`popover.md`](./popover.md).
+- If the overlay should slide from the edge -> use Sheet or Drawer instead.
+- If the interaction is a destructive confirmation -> use AlertDialog instead.
+- If the content is non-blocking contextual info -> use Popover instead.
 
 ## Install
 
@@ -17,72 +17,105 @@
 npx shadcn@latest add @shark/dialog
 ```
 
-Dependencies and manual copy steps live in [`content/docs/components/dialog.mdx`](../../content/docs/components/dialog.mdx) (includes Button + Scroll Area notes).
+Manual deps from docs:
 
-## Canonical imports (shark-ui repo)
+```bash
+npm install @ark-ui/react
+```
+
+## Canonical imports
 
 ```tsx
 import {
   Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogBody,
-  DialogFooter,
   DialogClose,
-} from "@/registry/react/components/dialog";
-import { Button } from "@/registry/react/components/button";
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogBody,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 ```
 
 ## Minimal pattern
 
-`DialogTrigger` / `DialogClose` commonly use **`asChild`** with a `Button`. `DialogHeader` supports either **`title` / `description` props** or nested `DialogTitle` / `DialogDescription` children (see MDX).
-
 ```tsx
 <Dialog>
   <DialogTrigger asChild>
-    <Button variant="outline" type="button">
-      Open
-    </Button>
+    <Button variant="outline">Open Dialog</Button>
   </DialogTrigger>
   <DialogContent>
-    <DialogHeader
-      title="Edit project"
-      description="Make changes to your project settings."
-    />
-    <DialogBody>{/* content */}</DialogBody>
+    <DialogHeader>
+      <DialogTitle>Dialog Title</DialogTitle>
+      <DialogDescription>Dialog Description</DialogDescription>
+    </DialogHeader>
+    <DialogBody>Content</DialogBody>
     <DialogFooter>
       <DialogClose asChild>
-        <Button variant="outline" type="button">
-          Cancel
-        </Button>
+        <Button variant="ghost">Close</Button>
       </DialogClose>
     </DialogFooter>
   </DialogContent>
 </Dialog>
 ```
 
-## Registry examples (read next)
+### Key patterns
 
-- [`example-default.tsx`](../../registry/react/examples/dialog/example-default.tsx) — header props + `Field` form in body.
-- [`example-nested.tsx`](../../registry/react/examples/dialog/example-nested.tsx), [`example-open-from-menu.tsx`](../../registry/react/examples/dialog/example-open-from-menu.tsx) — controlled `open` / cross-widget triggers.
-- [`example-scroll-area.tsx`](../../registry/react/examples/dialog/example-scroll-area.tsx) — long content + scroll.
-- [`example-non-modal.tsx`](../../registry/react/examples/dialog/example-non-modal.tsx), [`example-close-behavior.tsx`](../../registry/react/examples/dialog/example-close-behavior.tsx) — `modal` / close interaction edge cases.
+Shorthand Title and Description
 
-## Ark mapping
+```tsx
+// …
+<DialogHeader 
+  title="Are you absolutely sure?" 
+  description="This action cannot be undone." 
+/>
+// …
+```
 
-- Root: `@ark-ui/react/dialog` `Dialog.Root` (see `registry/react/components/dialog.tsx`).
-- Backdrop / portaled content: `Portal` + `Backdrop` / `Positioner` / `Content` parts as wrapped by Shark exports.
+- Section structure invariant: keep `DialogHeader`, `DialogBody`, and `DialogFooter` as direct sections in `DialogContent` to preserve built-in layout/styling behavior.
+
+Scrollable content:
+
+```tsx
+// …
+<DialogBody>
+  {/* content */}
+</DialogBody>
+// …
+```
+
+Controlled open state:
+
+```tsx
+const [open, setOpen] = useState(false)
+
+// …
+<Dialog open={open} onOpenChange={({ open }) => setOpen(open)}>
+  {/* content */}
+</Dialog>
+// …
+```
 
 ## Common pitfalls
 
-- Omitting `type="button"` on triggers inside forms (defaults to submit).
-- Breaking flex layout by wrapping `DialogHeader`, `DialogBody`, and `DialogFooter` in extra divs—MDX documents using **`className="contents"`** on a `Form` when needed so sections stay direct layout children.
-- Assuming Radix-only prop names—verify MDX + `dialog.tsx` for lazy mount defaults (`lazyMount`, `unmountOnExit`, `modal`).
+- Omitting `asChild` composition on trigger/close actions.
+- Forgetting title/description structure in real dialogs.
+- Wrapping dialog sections with extra containers that break `DialogHeader`/`DialogBody`/`DialogFooter` layout; prefer `DialogHeader` outside, `<form className="contents">` around `DialogBody` + `DialogFooter` only.
+- Putting large body content outside `DialogBody` when scrolling is needed.
+- Missing explicit button `type` inside dialog forms/actions.
+- Using uncontrolled dialog patterns when the flow requires cross-component state coordination.
+- Using non-Shark composition APIs without verifying docs.
 
-## Further reading
+## Registry example files
 
-- [Ark UI Dialog](https://ark-ui.com/docs/components/dialog)
-- [`../../registry/react/components/dialog.tsx`](../../registry/react/components/dialog.tsx)
+- [`example-close-behavior.tsx`](/registry/react/examples/dialog/example-close-behavior.tsx)
+- [`example-custom-spacing.tsx`](/registry/react/examples/dialog/example-custom-spacing.tsx)
+- [`example-default.tsx`](/registry/react/examples/dialog/example-default.tsx)
+- [`example-initial-focus.tsx`](/registry/react/examples/dialog/example-initial-focus.tsx)
+- [`example-nested.tsx`](/registry/react/examples/dialog/example-nested.tsx)
+- [`example-no-close-button.tsx`](/registry/react/examples/dialog/example-no-close-button.tsx)
+- [`example-non-modal.tsx`](/registry/react/examples/dialog/example-non-modal.tsx)
+- [`example-open-from-menu.tsx`](/registry/react/examples/dialog/example-open-from-menu.tsx)
+- [`example-scroll-area.tsx`](/registry/react/examples/dialog/example-scroll-area.tsx)

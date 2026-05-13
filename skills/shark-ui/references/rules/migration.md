@@ -1,102 +1,133 @@
-# Migration: shadcn/Radix mental models → Shark / Ark
+# ark-ui vs shadcn/Radix assumptions
 
-Shark feels similar to shadcn ergonomically, but behavior and props come from **Ark UI** roots in `registry/react/components`.
+Use this guide when adapting snippets that were originally written with shadcn/Radix mental models.
 
-## From `render={...}` to `asChild`
+## Core idea
 
-Some headless kits attach the trigger to a host element with a **`render`** prop (often `render={<Button … />}`). **Shark / Ark** does not use that pattern on triggers. Use **`asChild`** instead: the trigger stays as the wrapper, and you pass **one child** that is the real interactive element (`Button`, `a`, etc.). Ark merges trigger props onto that child.
-
-**Steps**
-
-1. Remove the **`render={…}`** prop entirely.
-2. Add **`asChild`** on the Shark trigger (or close) part **only if** that part’s MDX or source documents it.
-3. Put the **`Button`** (or link) as the **only child** of the trigger; move **`variant`**, **`className`**, **`type`**, and label text onto that child.
-4. Inside forms, set **`type="button"`** on button triggers so they do not submit accidentally.
-
-**Before (illustrative `render` style)**
-
-```tsx
-<DialogTrigger render={<Button variant="outline" />}>Open</DialogTrigger>
-```
-
-**After (Shark / Ark style)**
-
-```tsx
-<DialogTrigger asChild>
-  <Button variant="outline" type="button">
-    Open
-  </Button>
-</DialogTrigger>
-```
-
-Apply the same idea to **`DialogClose`**, **`MenuTrigger`**, **`PopoverTrigger`**, and similar parts: **`asChild`** + one child component, not **`render`**.
-
-**Pitfalls**
-
-- **`asChild` needs exactly one** child element that can receive merged props (typically one `Button` or `a`). Multiple sibling children will not work.
-- If **`asChild`** is omitted, you may get nested interactive nodes or broken focus; match the examples in MDX.
-- Not every part supports **`asChild`**; confirm for the specific export before converting.
+Shark UI is close to shadcn ergonomically (also uses `asChild` prop for composition), but its primitives and composition model are aligned to Ark UI patterns.
 
 ## High-impact differences
 
-- **Verify composition** in Shark MDX—do not assume 1:1 parity with old Radix demos.
-- **Triggers**: prefer Ark/Shark patterns (`asChild` where supported) instead of legacy `asChild` + different content part names.
-- **List components**: many Shark examples use **`createListCollection`**, **`useListCollection`**, and **`useFilter`** instead of static child-only option lists.
-- **Combobox**: pass a **`collection`**, update filtering in **`onInputValueChange`**, render **`collection.items.map(...)`** in the list (see `registry/react/examples/combobox/example-controlled.tsx`).
-- **Charts**: wire tooltip content as `content={(props) => <ChartTooltipContent {...props} />}`; avoid stubbing tooltip props; for static chart previews consider `accessibilityLayer={false}` on the chart root (`AGENTS.md`).
-- **Sidebar docs-style previews**: `absolute inset-0 overflow-hidden`, `Sidebar` with `className="absolute"`, `SidebarProvider` with `h-full`, and prefer native `overflow-y-auto` over `ScrollArea` when it breaks layout (`AGENTS.md`).
+- Do not assume every shadcn pattern translates 1:1.
+- Verify trigger and popup composition from Ark UI docs before coding.
 
-## Collections: combobox sketch
+## Practical migration examples
+
+Use these snippets as fast conversion templates when migrating shadcn/Radix code, 
+
+### Select: `items`-first + placeholder on `SelectValue`
 
 ```tsx
-import { useFilter, useListCollection } from "@ark-ui/react";
-import {
-  Combobox,
-  ComboboxContent,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from "@/registry/react/components/combobox";
-
-const { contains } = useFilter({ sensitivity: "base" });
-const { collection, filter } = useListCollection({
-  initialItems: [
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
-  ],
-  filter: contains,
-});
-
-<Combobox
-  collection={collection}
-  onInputValueChange={({ inputValue }) => filter(inputValue)}
->
-  <ComboboxInput />
-  <ComboboxContent>
-    <ComboboxList>
-      {collection.items.map((item) => (
-        <ComboboxItem item={item} key={item.value}>
-          {item.label}
-        </ComboboxItem>
-      ))}
-    </ComboboxList>
-  </ComboboxContent>
-</Combobox>;
+// shadcn/Radix
+<Select>
+  <SelectTrigger>
+    <SelectValue placeholder="Select a framework" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="next">Next.js</SelectItem>
+    <SelectItem value="vite">Vite</SelectItem>
+  </SelectContent>
+</Select>
 ```
 
-## Select / listbox
+```tsx
+// shark-ui/ark-ui
+const collection = createListCollection({
+  items: ["Banana", "Apple", "Orange", "Pineapple"],
+});
 
-Prefer patterns in `registry/react/examples/select/` and `content/docs/components/select.mdx`—often `createListCollection` with `collection` prop on the root.
+<Select collection={collection}>
+  <SelectTrigger>
+    <SelectValue placeholder="Select a framework" />
+  </SelectTrigger>
+  <SelectContent>
+    {collection.items.map((item) => (
+      <SelectItem key={item} value={item}>
+        {item}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>
+```
+
+### Toggle Group: `type` -> `multiple`
+
+```tsx
+// shadcn/Radix
+<ToggleGroup type="single" defaultValue="daily">
+  <ToggleGroupItem value="daily">Daily</ToggleGroupItem>
+  <ToggleGroupItem value="weekly">Weekly</ToggleGroupItem>
+</ToggleGroup>
+```
+
+```tsx
+// shark-ui/ark-ui
+<ToggleGroup defaultValue={["daily"]}>
+  <ToggleGroupItem value="daily">Daily</ToggleGroupItem>
+  <ToggleGroupItem value="weekly">Weekly</ToggleGroupItem>
+</ToggleGroup>
+```
+
+### Accordion: `type/collapsible` -> shark-ui defaults
+
+```tsx
+// shadcn/Radix
+<Accordion type="single" collapsible defaultValue="item-1">
+  <AccordionItem value="item-1">...</AccordionItem>
+</Accordion>
+```
+
+```tsx
+// shark-ui/ark-ui
+<Accordion defaultValue={["item-1"]}>
+  <AccordionItem value="item-1">...</AccordionItem>
+</Accordion>
+```
+
+### OTP Field: `input-otp` package → `@shark/input-otp`
+
+Shark UI wraps [Ark UI OTP Field](https://ark-ui.com/docs/components/pin-input) (`InputOTP`). Remove the `input-otp` dependency and align with the new names and root props.
+
+```tsx
+// shadcn / input-otp
+<InputOTP maxLength={6} value={value} onChange={setValue}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+  </InputOTPGroup>
+   <InputOTPSeparator />
+   <InputOTPSlot index={2} />
+   <InputOTPSlot index={3} />
+</InputOTP>
+```
+
+```tsx
+// shark-ui/ark-ui
+ <InputOTP onValueChange={({ value }) => setValue(value)} value={value}>
+  <InputOTPSlot index={0} />
+  <InputOTPSlot index={1} />
+  <InputOTPSeparator />
+  <InputOTPSlot index={2} />
+  <InputOTPSlot index={3} />
+</InputOTP>
+```
+
+- `InputOTPGroup` is not used.
+- Render one `InputOTPSlot` per character in order; need to pass `index`.
 
 ## Migration checklist
 
-1. Confirm imports from Shark docs for the target app alias.
-2. Confirm Ark-specific props (`lazyMount`, `unmountOnExit`, value shape arrays vs scalars) from MDX / examples.
-3. Run through keyboard focus and screen reader labels for overlays.
-4. Cross-check at least one registry example file for the component family.
+1. Confirm the exact shark-ui imports from docs.
+2. Confirm child structure requirements (trigger/header/panel/footer/items/groups).
+3. Confirm prop names and semantics from the shark-ui docs page.
+4. Validate with at least one shark-ui particle example.
+
+## Per-component migration notes
+
+For the full component registry, see `../component-registry.md`.
 
 ## Anti-patterns
 
-- Changing only the import path while leaving Radix structure intact.
-- Using undocumented props because they existed in a different library version.
-- Ignoring collection/filter requirements for combobox/autocomplete-style controls.
+- Copy/paste shadcn examples and only change import path.
+- Using undocumented props because they exist in other ecosystems.
+- Omitting required subcomponents in overlays/forms because the source snippet did.

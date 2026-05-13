@@ -20,6 +20,7 @@ import { SkipNavContent } from "@/registry/react/components/skip-nav";
 
 export const revalidate = false;
 export const dynamic = "force-static";
+export const dynamicParams = false;
 
 export const generateStaticParams = () => source.generateParams();
 
@@ -53,6 +54,7 @@ export const generateMetadata = async (
 
 const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
   const params = await props.params;
+
   const page = source.getPage(params.slug);
 
   if (!page) {
@@ -60,6 +62,8 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
   }
 
   const rawContent = await page.data.getText("raw");
+
+  const isIndexPage = params.slug?.[0] === undefined;
 
   const isChangelog = params.slug?.[0] === "changelog";
   const neighbours = isChangelog
@@ -90,58 +94,59 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                       >
                         {page.data.title}
                       </h1>
-
-                      <div className="flex items-center gap-2">
-                        <DocsCopyPage data={rawContent} url={page.url} />
-
+                      {!isIndexPage && (
                         <div className="flex items-center gap-2">
-                          {neighbours.previous ? (
-                            <Button
-                              aria-label="Previous"
-                              asChild
-                              size="icon-sm"
-                              variant="outline"
-                            >
-                              <Link href={neighbours.previous.url}>
+                          <DocsCopyPage data={rawContent} url={page.url} />
+
+                          <div className="flex items-center gap-2">
+                            {neighbours.previous ? (
+                              <Button
+                                aria-label="Previous"
+                                asChild
+                                size="icon-sm"
+                                variant="outline"
+                              >
+                                <Link href={neighbours.previous.url}>
+                                  <ChevronLeftIcon
+                                    aria-hidden
+                                    className="rtl:rotate-180"
+                                  />
+                                </Link>
+                              </Button>
+                            ) : (
+                              <Button disabled size="icon-sm" variant="outline">
                                 <ChevronLeftIcon
                                   aria-hidden
                                   className="rtl:rotate-180"
                                 />
-                              </Link>
-                            </Button>
-                          ) : (
-                            <Button disabled size="icon-sm" variant="outline">
-                              <ChevronLeftIcon
-                                aria-hidden
-                                className="rtl:rotate-180"
-                              />
-                            </Button>
-                          )}
+                              </Button>
+                            )}
 
-                          {neighbours.next ? (
-                            <Button
-                              aria-label="Next"
-                              asChild
-                              size="icon-sm"
-                              variant="outline"
-                            >
-                              <Link href={neighbours.next.url}>
+                            {neighbours.next ? (
+                              <Button
+                                aria-label="Next"
+                                asChild
+                                size="icon-sm"
+                                variant="outline"
+                              >
+                                <Link href={neighbours.next.url}>
+                                  <ChevronRightIcon
+                                    aria-hidden
+                                    className="rtl:rotate-180"
+                                  />
+                                </Link>
+                              </Button>
+                            ) : (
+                              <Button disabled size="icon-sm" variant="outline">
                                 <ChevronRightIcon
                                   aria-hidden
                                   className="rtl:rotate-180"
                                 />
-                              </Link>
-                            </Button>
-                          ) : (
-                            <Button disabled size="icon-sm" variant="outline">
-                              <ChevronRightIcon
-                                aria-hidden
-                                className="rtl:rotate-180"
-                              />
-                            </Button>
-                          )}
+                              </Button>
+                            )}
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
 
                     {page.data.description && (

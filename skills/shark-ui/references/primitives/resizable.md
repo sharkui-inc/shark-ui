@@ -2,11 +2,13 @@
 
 ## When to use
 
-Use **resizable** when Shark docs describe this primitive for the task.
+- Split panes editors, previews, and dashboards with draggable dividers.
+- Nested horizontal + vertical split layouts using multiple `Resizable` roots.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If layout should reflow responsively without user-driven splits → use CSS grid/flex only.
+- If the interaction is a one-off modal resize → prefer `Dialog` / `Sheet` sizing props.
 
 ## Install
 
@@ -14,31 +16,59 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/resizable
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/resizable.mdx`](../../content/docs/components/resizable.mdx) |
-| Examples | [`registry/react/examples/resizable/`](../../registry/react/examples/resizable/) |
-| Source | [`registry/react/components/resizable.tsx`](../../registry/react/components/resizable.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/resizable";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  Resizable,
+  ResizablePanel,
+  ResizableResizeTrigger,
+  useResizable,
+} from "@/components/ui/resizable"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Resizable
+  className="h-48 rounded-md border"
+  defaultSize={[50, 50]}
+  panels={[
+    { id: "a", minSize: 10 },
+    { id: "b", minSize: 10 },
+  ]}
+>
+  <ResizablePanel className="flex items-center justify-center" id="a">
+    A
+  </ResizablePanel>
+  <ResizableResizeTrigger id="a:b" />
+  <ResizablePanel className="flex items-center justify-center" id="b">
+    B
+  </ResizablePanel>
+</Resizable>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+`orientation="vertical"` on nested splitters; `ResizableResizeTrigger` with `withHandle` for a visible grip; `minSize` / `maxSize` on panel definitions for constraints.
 
-## See also
+## Common pitfalls
 
-- [Component registry](../component-registry.md)
+- Mismatched `id` strings between panels and triggers (`"left:right"` style ids must align with Ark splitter rules).
+- Omitting `minSize` on panels that should not collapse to zero.
+- Nesting resizables without giving inner roots explicit height/width constraints.
+
+## Registry example files
+
+- [`example-default.tsx`](/registry/react/examples/resizable/example-default.tsx)
+- [`example-handle.tsx`](/registry/react/examples/resizable/example-handle.tsx)
+- [`example-min-max.tsx`](/registry/react/examples/resizable/example-min-max.tsx)
+- [`example-multiple-panels.tsx`](/registry/react/examples/resizable/example-multiple-panels.tsx)
+- [`example-orientation-horizontal.tsx`](/registry/react/examples/resizable/example-orientation-horizontal.tsx)
+- [`example-orientation-vertical.tsx`](/registry/react/examples/resizable/example-orientation-vertical.tsx)

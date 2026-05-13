@@ -2,13 +2,10 @@
 
 ## When to use
 
-- Labeled inputs, descriptions, and error text for form controls using Ark **Field** primitives underneath Shark styling.
-- Any screen where multiple controls need consistent vertical rhythm and validation affordances.
-
-## When not to use
-
-- Standalone decorative labels without controls—consider typography components or simple text.
-- When MDX recommends a simpler primitive-only pattern for special cases—follow docs.
+- Accessible field wrappers with labels, descriptions, and errors.
+- Form control state wiring (`invalid`, `required`, touched/error messaging).
+- Grouped related controls under one legend/description.
+- Complex forms requiring semantic grouping for radios/checkboxes.
 
 ## Install
 
@@ -16,47 +13,94 @@
 npx shadcn@latest add @shark/field
 ```
 
-Often co-installed with **`input`**, **`select`**, **`textarea`**, etc.
+Manual deps from docs:
 
-## Canonical imports (shark-ui repo)
+```bash
+npm install @ark-ui/react
+```
+
+## Canonical imports
 
 ```tsx
 import {
   Field,
-  FieldLabel,
+  FieldSet,
+  FieldLegend,
+  FieldGroup,
   FieldDescription,
   FieldError,
-  FieldGroup,
-  FieldSet,
-} from "@/registry/react/components/field";
+  FieldTitle,
+  FieldSeparator,
+  FieldHelper,
+  FieldRequiredIndicator,
+  FieldLabel,
+} from "@/registry/react/components/field"
 ```
-
-`FieldLabel` wraps Ark `@ark-ui/react/field` label parts—see [`../../registry/react/components/field.tsx`](../../registry/react/components/field.tsx).
 
 ## Minimal pattern
 
 ```tsx
+import { Input } from "@/registry/react/components/input"
+
 <Field>
-  <FieldLabel htmlFor="email">Email</FieldLabel>
-  <Input id="email" type="email" />
-  <FieldDescription>We will never share your email.</FieldDescription>
-  <FieldError />
+  <FieldLabel>Name</FieldLabel>
+  <Input type="text" placeholder="Enter your name" />
+  <FieldDescription>Visible on your profile</FieldDescription>
+  <FieldError>Please enter a valid name</FieldError>
 </Field>
 ```
 
-Wire **`invalid`** / error messages per MDX when using schema validation libraries.
+### Key patterns
 
-## Registry examples
+Required field with error:
 
-[`../../registry/react/examples/field/`](../../registry/react/examples/field/) — grouped fields, descriptions, error states.
+```tsx
+<Field name="email" required>
+  <FieldLabel>Email <FieldRequiredIndicator /></FieldLabel>
+  <Input type="email" placeholder="name@company.com" />
+  <FieldDescription>We'll never share your email.</FieldDescription>
+  <FieldError>Please enter a valid email.</FieldError>
+</Field>
+```
 
-## Pitfalls
+FieldSet grouping related fields:
 
-- Using `placeholder` instead of an accessible label.
-- Mismatched `htmlFor` / `id` pairs when composing custom slots.
+```tsx
+<FieldSet>
+  <FieldLegend>Personal Information</FieldLegend>
+  <Field name="firstName">
+    <FieldLabel>First name</FieldLabel>
+    <Input type="text" />
+  </Field>
+  <Field name="lastName">
+    <FieldLabel>Last name</FieldLabel>
+    <Input type="text" />
+  </Field>
+</FieldSet>
+```
 
-## Further reading
+Always include `FieldLegend` as the accessible group heading.
 
-- [Ark UI Field](https://ark-ui.com/docs/components/field)
-- [`../../content/docs/components/field.mdx`](../../content/docs/components/field.mdx)
-- Forms rules: [`../rules/forms.md`](../rules/forms.md)
+## Common pitfalls
+
+- Rendering errors detached from the related control, breaking context.
+- Missing `name` in form flows, causing silent submit omissions.
+- Using field wrapper without corresponding label/description/error semantics.
+- Using ad-hoc div wrappers instead of semantic fieldset for grouped controls.
+- Omitting `FieldLegend`, reducing accessibility context.
+- Placing unrelated controls inside one fieldset, hurting form clarity.
+
+## Registry example files
+
+- [`example-autocomplete-field.tsx`](/registry/react/examples/field/example-autocomplete-field.tsx)
+- [`example-checkbox-field.tsx`](/registry/react/examples/field/example-checkbox-field.tsx)
+- [`example-checkbox-group-field.tsx`](/registry/react/examples/field/example-checkbox-group-field.tsx)
+- [`example-combobox-field.tsx`](/registry/react/examples/field/example-combobox-field.tsx)
+- [`example-combobox-multiple-field.tsx`](/registry/react/examples/field/example-combobox-multiple-field.tsx)
+- [`example-default.tsx`](/registry/react/examples/field/example-default.tsx)
+- [`example-disabled-field.tsx`](/registry/react/examples/field/example-disabled-field.tsx)
+- [`example-field-group.tsx`](/registry/react/examples/field/example-field-group.tsx)
+- [`example-input-group.tsx`](/registry/react/examples/field/example-input-group.tsx)
+- [`example-number-input.tsx`](/registry/react/examples/field/example-number-input.tsx)
+- [`example-orientation-horizontal.tsx`](/registry/react/examples/field/example-orientation-horizontal.tsx)
+- [`example-orientation-vertical.tsx`](/registry/react/examples/field/example-orientation-vertical.tsx)

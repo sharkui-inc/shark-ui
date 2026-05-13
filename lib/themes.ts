@@ -436,7 +436,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-slate-950) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-slate-500) 90%, var(--color-slate-950))",
+          "color-mix(in srgb, var(--color-slate-500) 80%, var(--color-slate-950))",
         accent:
           "color-mix(in srgb, var(--color-slate-950) 4%, var(--background))",
         "accent-foreground": "var(--color-slate-800)",
@@ -477,7 +477,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-slate-50) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-slate-500) 90%, var(--color-slate-50))",
+          "color-mix(in srgb, var(--color-slate-500) 70%, var(--color-slate-50))",
         accent:
           "color-mix(in srgb, var(--color-slate-50) 4%, var(--background))",
         "accent-foreground": "var(--color-slate-100)",
@@ -527,7 +527,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-gray-950) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-gray-500) 90%, var(--color-gray-950))",
+          "color-mix(in srgb, var(--color-gray-500) 80%, var(--color-gray-950))",
         accent:
           "color-mix(in srgb, var(--color-gray-950) 4%, var(--background))",
         "accent-foreground": "var(--color-gray-800)",
@@ -567,7 +567,7 @@ export const GRAY_COLORS = [
         "secondary-foreground": "var(--color-gray-100)",
         muted: "color-mix(in srgb, var(--color-gray-50) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-gray-500) 90%, var(--color-gray-50))",
+          "color-mix(in srgb, var(--color-gray-500) 70%, var(--color-gray-50))",
         accent:
           "color-mix(in srgb, var(--color-gray-50) 4%, var(--background))",
         "accent-foreground": "var(--color-gray-100)",
@@ -617,7 +617,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-zinc-950) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-zinc-500) 90%, var(--color-zinc-950))",
+          "color-mix(in srgb, var(--color-zinc-500) 80%, var(--color-zinc-950))",
         accent:
           "color-mix(in srgb, var(--color-zinc-950) 4%, var(--background))",
         "accent-foreground": "var(--color-zinc-800)",
@@ -657,7 +657,7 @@ export const GRAY_COLORS = [
         "secondary-foreground": "var(--color-zinc-100)",
         muted: "color-mix(in srgb, var(--color-zinc-50) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-zinc-500) 90%, var(--color-zinc-50))",
+          "color-mix(in srgb, var(--color-zinc-500) 70%, var(--color-zinc-50))",
         accent:
           "color-mix(in srgb, var(--color-zinc-50) 4%, var(--background))",
         "accent-foreground": "var(--color-zinc-100)",
@@ -707,7 +707,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-neutral-950) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-neutral-500) 90%, var(--color-neutral-950))",
+          "color-mix(in srgb, var(--color-neutral-500) 80%, var(--color-neutral-950))",
         accent:
           "color-mix(in srgb, var(--color-neutral-950) 4%, var(--background))",
         "accent-foreground": "var(--color-neutral-800)",
@@ -748,7 +748,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-neutral-50) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-neutral-500) 90%, var(--color-neutral-50))",
+          "color-mix(in srgb, var(--color-neutral-500) 70%, var(--color-neutral-50))",
         accent:
           "color-mix(in srgb, var(--color-neutral-50) 4%, var(--background))",
         "accent-foreground": "var(--color-neutral-100)",
@@ -798,7 +798,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-stone-950) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-stone-500) 90%, var(--color-stone-950))",
+          "color-mix(in srgb, var(--color-stone-500) 80%, var(--color-stone-950))",
         accent:
           "color-mix(in srgb, var(--color-stone-950) 4%, var(--background))",
         "accent-foreground": "var(--color-stone-800)",
@@ -839,7 +839,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-stone-50) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-stone-500) 90%, var(--color-stone-50))",
+          "color-mix(in srgb, var(--color-stone-500) 70%, var(--color-stone-50))",
         accent:
           "color-mix(in srgb, var(--color-stone-50) 4%, var(--background))",
         "accent-foreground": "var(--color-stone-100)",
@@ -889,7 +889,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-mauve-950) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-mauve-500) 90%, var(--color-mauve-950))",
+          "color-mix(in srgb, var(--color-mauve-500) 80%, var(--color-mauve-950))",
         accent:
           "color-mix(in srgb, var(--color-mauve-950) 4%, var(--background))",
         "accent-foreground": "var(--color-mauve-800)",
@@ -930,7 +930,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-mauve-50) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-mauve-500) 90%, var(--color-mauve-50))",
+          "color-mix(in srgb, var(--color-mauve-500) 70%, var(--color-mauve-50))",
         accent:
           "color-mix(in srgb, var(--color-mauve-50) 4%, var(--background))",
         "accent-foreground": "var(--color-mauve-100)",
@@ -980,7 +980,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-olive-950) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-olive-500) 90%, var(--color-olive-950))",
+          "color-mix(in srgb, var(--color-olive-500) 80%, var(--color-olive-950))",
         accent:
           "color-mix(in srgb, var(--color-olive-950) 4%, var(--background))",
         "accent-foreground": "var(--color-olive-800)",
@@ -1021,7 +1021,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-olive-50) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-olive-500) 90%, var(--color-olive-50))",
+          "color-mix(in srgb, var(--color-olive-500) 70%, var(--color-olive-50))",
         accent:
           "color-mix(in srgb, var(--color-olive-50) 4%, var(--background))",
         "accent-foreground": "var(--color-olive-100)",
@@ -1071,7 +1071,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-mist-950) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-mist-500) 90%, var(--color-mist-950))",
+          "color-mix(in srgb, var(--color-mist-500) 80%, var(--color-mist-950))",
         accent:
           "color-mix(in srgb, var(--color-mist-950) 4%, var(--background))",
         "accent-foreground": "var(--color-mist-800)",
@@ -1111,7 +1111,7 @@ export const GRAY_COLORS = [
         "secondary-foreground": "var(--color-mist-100)",
         muted: "color-mix(in srgb, var(--color-mist-50) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-mist-500) 90%, var(--color-mist-50))",
+          "color-mix(in srgb, var(--color-mist-500) 70%, var(--color-mist-50))",
         accent:
           "color-mix(in srgb, var(--color-mist-50) 4%, var(--background))",
         "accent-foreground": "var(--color-mist-100)",
@@ -1161,7 +1161,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-taupe-950) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-taupe-500) 90%, var(--color-taupe-950))",
+          "color-mix(in srgb, var(--color-taupe-500) 80%, var(--color-taupe-950))",
         accent:
           "color-mix(in srgb, var(--color-taupe-950) 4%, var(--background))",
         "accent-foreground": "var(--color-taupe-800)",
@@ -1202,7 +1202,7 @@ export const GRAY_COLORS = [
         muted:
           "color-mix(in srgb, var(--color-taupe-50) 4%, var(--background))",
         "muted-foreground":
-          "color-mix(in srgb, var(--color-taupe-500) 90%, var(--color-taupe-50))",
+          "color-mix(in srgb, var(--color-taupe-500) 70%, var(--color-taupe-50))",
         accent:
           "color-mix(in srgb, var(--color-taupe-50) 4%, var(--background))",
         "accent-foreground": "var(--color-taupe-100)",

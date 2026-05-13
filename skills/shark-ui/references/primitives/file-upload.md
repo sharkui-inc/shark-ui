@@ -2,11 +2,13 @@
 
 ## When to use
 
-Use **file-upload** when Shark docs describe this primitive for the task.
+- Drag-and-drop zones, browse triggers, and file lists with previews.
+- Constraining MIME types, max files, and clearing selections.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If you only need a single hidden `<input type="file">` without drop UX → use native input + button.
+- If uploads should go straight to cloud without listing → consider a minimal custom flow.
 
 ## Install
 
@@ -14,31 +16,75 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/file-upload
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/file-upload.mdx`](../../content/docs/components/file-upload.mdx) |
-| Examples | [`registry/react/examples/file-upload/`](../../registry/react/examples/file-upload/) |
-| Source | [`registry/react/components/file-upload.tsx`](../../registry/react/components/file-upload.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/file-upload";
+```bash
+npm install @ark-ui/react lucide-react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  FileUpload,
+  FileUploadClearTrigger,
+  FileUploadDescription,
+  FileUploadDropzone,
+  FileUploadDropzoneIcon,
+  FileUploadHelper,
+  FileUploadItem,
+  FileUploadItemDeleteTrigger,
+  FileUploadItemGroup,
+  FileUploadItemName,
+  FileUploadItemPreview,
+  FileUploadItemPreviewImage,
+  FileUploadItemSize,
+  FileUploadList,
+  FileUploadTitle,
+  FileUploadTrigger,
+  useFileUpload,
+} from "@/components/ui/file-upload"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<FileUpload className="w-full max-w-xs">
+  <FileUploadDropzone>
+    <FileUploadDropzoneIcon />
+    <FileUploadTitle>Drop files here</FileUploadTitle>
+    <FileUploadDescription>or</FileUploadDescription>
+    <FileUploadTrigger asChild>
+      <Button>Browse files</Button>
+    </FileUploadTrigger>
+    <FileUploadHelper>Up to 2 files.</FileUploadHelper>
+  </FileUploadDropzone>
+  <FileUploadList />
+</FileUpload>
+```
 
-## Pitfalls
+Import `Button` from `@/components/ui/button` when using `FileUploadTrigger asChild` with a button.
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+### Key patterns
 
-## See also
+`accept`, `maxFiles`, and `directory` props on `FileUpload` root; `FileUploadItemPreviewImage` for image thumbs; `FileUploadClearTrigger` to reset; pair with `Field` via `example-with-field`.
 
-- [Component registry](../component-registry.md)
+## Common pitfalls
+
+- Forgetting `asChild` on `FileUploadTrigger` when composing with `Button`.
+- Missing client boundary (`"use client"`) in consumer files that call upload callbacks.
+- Listing files without rendering `FileUploadList` / item components—root alone does not show picks.
+
+## Registry example files
+
+- [`example-accepted-file-types.tsx`](/registry/react/examples/file-upload/example-accepted-file-types.tsx)
+- [`example-clear-trigger.tsx`](/registry/react/examples/file-upload/example-clear-trigger.tsx)
+- [`example-custom-preview.tsx`](/registry/react/examples/file-upload/example-custom-preview.tsx)
+- [`example-custom-spacing.tsx`](/registry/react/examples/file-upload/example-custom-spacing.tsx)
+- [`example-default.tsx`](/registry/react/examples/file-upload/example-default.tsx)
+- [`example-directory-upload.tsx`](/registry/react/examples/file-upload/example-directory-upload.tsx)
+- [`example-dropzone.tsx`](/registry/react/examples/file-upload/example-dropzone.tsx)
+- [`example-media-capture.tsx`](/registry/react/examples/file-upload/example-media-capture.tsx)
+- [`example-multiple-files.tsx`](/registry/react/examples/file-upload/example-multiple-files.tsx)
+- [`example-trigger.tsx`](/registry/react/examples/file-upload/example-trigger.tsx)
+- [`example-with-field.tsx`](/registry/react/examples/file-upload/example-with-field.tsx)

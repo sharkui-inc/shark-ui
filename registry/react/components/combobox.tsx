@@ -78,10 +78,6 @@ interface ComboboxInputProps
    * @default true
    */
   showTrigger?: boolean;
-  /**
-   * Addon to display at the start of the input (e.g. search icon).
-   */
-  startAddon?: React.ReactNode;
 }
 
 export const ComboboxInput = (props: ComboboxInputProps) => {
@@ -89,7 +85,6 @@ export const ComboboxInput = (props: ComboboxInputProps) => {
     size = "md",
     showTrigger = true,
     showClear = false,
-    startAddon,
     className,
     children,
     ...rest
@@ -100,9 +95,6 @@ export const ComboboxInput = (props: ComboboxInputProps) => {
   return (
     <ComboboxControl>
       <InputGroup className={cn(className)} size={size}>
-        {startAddon && (
-          <InputGroupAddon align="inline-start">{startAddon}</InputGroupAddon>
-        )}
         {children}
         <ArkCombobox.Input asChild>
           <InputGroupInput {...rest} />

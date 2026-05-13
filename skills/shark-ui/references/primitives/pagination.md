@@ -2,11 +2,8 @@
 
 ## When to use
 
-Use **pagination** when Shark docs describe this primitive for the task.
-
-## When not to use
-
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- Paged navigation over long result sets.
+- Prev/next and index controls paired with data tables/lists.
 
 ## Install
 
@@ -14,31 +11,87 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/pagination
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/pagination.mdx`](../../content/docs/components/pagination.mdx) |
-| Examples | [`registry/react/examples/pagination/`](../../registry/react/examples/pagination/) |
-| Source | [`registry/react/components/pagination.tsx`](../../registry/react/components/pagination.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/pagination";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Full pagination with active page:
 
-## See also
+```tsx
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#" isActive>2</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">3</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+```
 
-- [Component registry](../component-registry.md)
+
+## Common pitfalls
+
+- Using pagination controls without synchronizing data/page state.
+- Mixing pagination with infinite-scroll UX in the same surface.
+- Missing disabled-state handling on prev/next boundaries.
+
+## Registry example files
+
+- [`example-controlled.tsx`](/registry/react/examples/pagination/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/pagination/example-default.tsx)
+- [`example-links.tsx`](/registry/react/examples/pagination/example-links.tsx)
+- [`example-page-range.tsx`](/registry/react/examples/pagination/example-page-range.tsx)
+- [`example-table.tsx`](/registry/react/examples/pagination/example-table.tsx)

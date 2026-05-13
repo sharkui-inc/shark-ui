@@ -16,9 +16,9 @@ import {
 
 const Example = () => (
   <InputGroup className="max-w-64">
-    <InputGroupInput id="username" placeholder="John Doe" />
+    <InputGroupInput placeholder="John Doe" />
     <InputGroupAddon align="block-start">
-      <FieldLabel htmlFor="username">Username</FieldLabel>
+      <FieldLabel>Username</FieldLabel>
 
       <Tooltip>
         <TooltipTrigger asChild>

@@ -52,31 +52,31 @@ npm install @ark-ui/react
 ## Anatomy
 
 ```text
-InputOtp
-├── InputOtpSlot
-└── InputOtpSeparator
+InputOTP
+├── InputOTPSlot
+└── InputOTPSeparator
 ```
 
 ## Usage
 
 ```tsx
 import {
-  InputOtp,
-  InputOtpSeparator,
-  InputOtpSlot,
+  InputOTP,
+  InputOTPSeparator,
+  InputOTPSlot,
 } from "@/components/ui/input-otp";
 ```
 
 ```tsx showLineNumbers
-<InputOtp>
-  <InputOtpSlot index={0} />
-  <InputOtpSlot index={1} />
-  <InputOtpSlot index={2} />
-  <InputOtpSeparator />
-  <InputOtpSlot index={3} />
-  <InputOtpSlot index={4} />
-  <InputOtpSlot index={5} />
-</InputOtp>
+<InputOTP>
+  <InputOTPSlot index={0} />
+  <InputOTPSlot index={1} />
+  <InputOTPSlot index={2} />
+  <InputOTPSeparator />
+  <InputOTPSlot index={3} />
+  <InputOTPSlot index={4} />
+  <InputOTPSlot index={5} />
+</InputOTP>
 ```
 
 ## Controlled
@@ -103,13 +103,13 @@ Use the `invalid` prop to mark the input as invalid and show error styling.
 
 ### Four Digits
 
-Use four `<InputOtpSlot />` elements for a 4-digit OTP.
+Use four `<InputOTPSlot />` elements for a 4-digit OTP.
 
 <ComponentPreview componentName="input-otp" fileName="example-four-digits" />
 
 ### Separator
 
-Add `<InputOtpSeparator />` between groups of slots.
+Add `<InputOTPSeparator />` between groups of slots.
 
 <ComponentPreview componentName="input-otp" fileName="example-separator" />
 
@@ -133,13 +133,13 @@ Use the `mask` prop to mask the input value.
 
 ### Custom Size
 
-Pass `className` to `<InputOtp />` to override slot dimensions and text size.
+Pass `className` to `<InputOTP />` to override slot dimensions and text size.
 
 <ComponentPreview componentName="input-otp" fileName="example-custom-size" />
 
 ## API Reference
 
-### InputOtp
+### InputOTP
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -153,7 +153,7 @@ Pass `className` to `<InputOtp />` to override slot dimensions and text size.
 | `blurOnComplete` | `boolean` | - |
 | `mask` | `boolean` | - |
 
-### InputOtpSlot
+### InputOTPSlot
 
 Single OTP slot. Use `index` to specify position (0-based).
 
@@ -161,7 +161,7 @@ Single OTP slot. Use `index` to specify position (0-based).
 | --- | --- | --- |
 | `index` | `number` | **required** |
 
-### InputOtpSeparator
+### InputOTPSeparator
 
 Visual separator between slots. Extends native `<hr>` props.
 

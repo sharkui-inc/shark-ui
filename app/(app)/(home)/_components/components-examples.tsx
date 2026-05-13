@@ -9,7 +9,7 @@ import { ExerciseMinutesChartExample } from "@/components/examples/exercise-minu
 import { FieldSliderExample } from "@/components/examples/field-slider-example";
 import { FormControlsExample } from "@/components/examples/form-controls-example";
 import { IconsGridExample } from "@/components/examples/icons-grid-example";
-import { InputOtpExample } from "@/components/examples/input-otp-example";
+import { InputOTPExample } from "@/components/examples/input-otp-example";
 import { ItemExample } from "@/components/examples/item-example";
 import { LoginFormExample } from "@/components/examples/login-form-example";
 import { StyleOverviewExample } from "@/components/examples/style-overview-example";
@@ -28,7 +28,7 @@ export const ComponentsExamples = (props: React.ComponentProps<"div">) => {
       {...rest}
     >
       <div className="flex flex-col gap-6 *:[div]:w-full *:[div]:max-w-full lg:*:[div]:max-w-xs">
-        <InputOtpExample />
+        <InputOTPExample />
         <FormControlsExample />
         <ButtonExample />
         <IconsGridExample />

@@ -8,8 +8,8 @@ import {
   AutocompleteEmpty,
   AutocompleteInput,
   AutocompleteItem,
+  AutocompleteList,
 } from "@/registry/react/components/autocomplete";
-import { ComboboxList } from "@/registry/react/components/combobox";
 import { InputGroupAddon } from "@/registry/react/components/input-group";
 
 const Example = () => {
@@ -33,13 +33,13 @@ const Example = () => {
       </AutocompleteInput>
       <AutocompleteContent>
         <AutocompleteEmpty />
-        <ComboboxList>
+        <AutocompleteList>
           {collection.items.map((item) => (
             <AutocompleteItem item={item} key={item.value}>
               {item.label}
             </AutocompleteItem>
           ))}
-        </ComboboxList>
+        </AutocompleteList>
       </AutocompleteContent>
     </Autocomplete>
   );

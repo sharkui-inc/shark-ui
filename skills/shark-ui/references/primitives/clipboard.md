@@ -2,11 +2,14 @@
 
 ## When to use
 
-Use **clipboard** when Shark docs describe this primitive for the task.
+- Copying a fixed string (URL, invite code, API token, share link) into the system clipboard with clear feedback.
+- Read-only value display next to a dedicated copy control (`ClipboardInput` + trigger + indicator).
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If the action should save a file to disk instead of copying text -> use DownloadTrigger (or a file link) instead.
+- If the user is selecting and copying arbitrary text inside an editor -> rely on native selection / editor behavior instead of this primitive.
+- If the secret must never appear in the DOM as plain text -> avoid rendering the value in `ClipboardInput` / `ClipboardValue`; use a server-mediated flow or masked UI.
 
 ## Install
 
@@ -14,31 +17,73 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/clipboard
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/clipboard.mdx`](../../content/docs/components/clipboard.mdx) |
-| Examples | [`registry/react/examples/clipboard/`](../../registry/react/examples/clipboard/) |
-| Source | [`registry/react/components/clipboard.tsx`](../../registry/react/components/clipboard.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/clipboard";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  Clipboard,
+  ClipboardIndicator,
+  ClipboardInput,
+  ClipboardTrigger,
+  ClipboardValue,
+} from "@/components/ui/clipboard"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Clipboard value="https://example.com/share/abc123">
+  <ClipboardInput />
+  <ClipboardTrigger asChild>
+    <Button size="icon-md">
+      <ClipboardIndicator />
+    </Button>
+  </ClipboardTrigger>
+</Clipboard>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Read-only value:
 
-## See also
+```tsx
+<Clipboard value="https://example.com">
+  <ClipboardValue />
+  <ClipboardTrigger asChild>
+    <Button size="icon-md">
+      <ClipboardIndicator />
+    </Button>
+  </ClipboardTrigger>
+</Clipboard>
+```
 
-- [Component registry](../component-registry.md)
+Icon-only copy:
+```tsx
+<Clipboard value="https://example.com">
+  <ClipboardTrigger asChild>
+    <Button size="icon-md">
+      <ClipboardIndicator />
+    </Button>
+  </ClipboardTrigger>
+</Clipboard>
+```
+
+## Common pitfalls
+
+- Omitting `value` on `Clipboard` so nothing is written to the clipboard.
+- Nesting triggers without `asChild` where a single focusable control is required (duplicate buttons / focus traps).
+
+## Registry example files
+
+- [`example-controlled.tsx`](/registry/react/examples/clipboard/example-controlled.tsx)
+- [`example-custom-timeout.tsx`](/registry/react/examples/clipboard/example-custom-timeout.tsx)
+- [`example-default.tsx`](/registry/react/examples/clipboard/example-default.tsx)
+- [`example-different-icon.tsx`](/registry/react/examples/clipboard/example-different-icon.tsx)
+- [`example-icon-only.tsx`](/registry/react/examples/clipboard/example-icon-only.tsx)
+- [`example-value-text.tsx`](/registry/react/examples/clipboard/example-value-text.tsx)

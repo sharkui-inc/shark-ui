@@ -4,7 +4,6 @@ const data = {
   name: "John Doe",
   age: 30,
   email: "john.doe@example.com",
-  tags: ["tag1", "tag2", "tag3"],
   address: {
     street: "123 Main St",
     city: "Anytown",
@@ -13,6 +12,10 @@ const data = {
   },
 };
 
-const Example = () => <JsonTreeView data={data} defaultExpandedDepth={1} />;
+const Example = () => (
+  <div className="w-full max-w-md">
+    <JsonTreeView data={data} defaultExpandedDepth={1} />
+  </div>
+);
 
 export default Example;

@@ -86,12 +86,11 @@ export const BugReportForm = () => {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-title">
+                  <FieldLabel >
                     Bug Title
                   </FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-demo-title"
                     invalid={fieldState.invalid}
                     placeholder="Login button not working on mobile"
                     autoComplete="off"
@@ -107,13 +106,12 @@ export const BugReportForm = () => {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-description">
+                  <FieldLabel >
                     Description
                   </FieldLabel>
                   <InputGroup>
                     <InputGroupTextarea
                       {...field}
-                      id="form-rhf-demo-description"
                       placeholder="I'm having an issue with the login button on mobile."
                       rows={6}
                       className="min-h-24 resize-none"
@@ -338,13 +336,12 @@ const { register, handleSubmit, formState: { errors } } = useForm()
 
 <form onSubmit={handleSubmit(onSubmit)}>
   <Field invalid={!!errors.email}>
-    <FieldLabel htmlFor="email">Email</FieldLabel>
+    <FieldLabel >Email</FieldLabel>
     <Input
       {...register("email", {
         required: "Email is required",
         pattern: { value: /^\S+@\S+$/i, message: "Invalid email" },
       })}
-      id="email"
       invalid={!!errors.email}
     />
     <FieldError>{errors.email?.message}</FieldError>
@@ -382,10 +379,9 @@ Same idea as Input: spread `field` onto `Textarea` or `InputGroupTextarea`, and 
   control={form.control}
   render={({ field, fieldState }) => (
     <Field invalid={fieldState.invalid}>
-      <FieldLabel htmlFor="form-rhf-textarea-about">More about you</FieldLabel>
+      <FieldLabel>More about you</FieldLabel>
       <Textarea
         {...field}
-        id="form-rhf-textarea-about"
         invalid={fieldState.invalid}
         placeholder="I'm a software engineer..."
         className="min-h-[120px]"
@@ -416,7 +412,7 @@ const { register, formState: { errors } } = form
 
 <Field orientation="horizontal" invalid={!!errors.language}>
   <FieldContent>
-    <FieldLabel htmlFor="form-rhf-native-select-language">
+    <FieldLabel >
       Spoken Language
     </FieldLabel>
     <FieldDescription>
@@ -428,7 +424,6 @@ const { register, formState: { errors } } = form
   </FieldContent>
   <NativeSelect
     {...register("language", { required: "Select a language" })}
-    id="form-rhf-native-select-language"
     invalid={!!errors.language}
   >
     <NativeSelectOption value="">Select</NativeSelectOption>
@@ -589,7 +584,7 @@ Use `field.value` and `field.onChange` with `Switch`; pass `invalid` to both `Fi
   render={({ field, fieldState }) => (
     <Field orientation="horizontal" invalid={fieldState.invalid}>
       <FieldContent>
-        <FieldLabel htmlFor="form-rhf-switch-twoFactor">
+        <FieldLabel >
           Multi-factor authentication
         </FieldLabel>
         <FieldDescription>
@@ -600,7 +595,6 @@ Use `field.value` and `field.onChange` with `Switch`; pass `invalid` to both `Fi
         )}
       </FieldContent>
       <Switch
-        id="form-rhf-switch-twoFactor"
         name={field.name}
         checked={field.value}
         onCheckedChange={field.onChange}
@@ -621,7 +615,7 @@ Use `field.value` and `field.onChange` with `NumberField`; the `onValueChange` c
   control={form.control}
   render={({ field, fieldState }) => (
     <Field invalid={fieldState.invalid}>
-      <FieldLabel htmlFor="form-rhf-number-quantity">Quantity</FieldLabel>
+      <FieldLabel>Quantity</FieldLabel>
       <NumberField
         value={field.value ?? ""}
         onValueChange={({ value }) => field.onChange(value)}
@@ -631,7 +625,7 @@ Use `field.value` and `field.onChange` with `NumberField`; the `onValueChange` c
       >
         <NumberFieldGroup>
           <NumberFieldDecrement />
-          <NumberFieldInput id="form-rhf-number-quantity" />
+          <NumberFieldInput />
           <NumberFieldIncrement />
         </NumberFieldGroup>
       </NumberField>
@@ -774,7 +768,7 @@ import { parseDate } from "@/registry/react/components/calendar"
 
 ### Input OTP
 
-Use `field.value` (as `string[]`) and `field.onChange` with `InputOtp`; the `onValueChange` callback provides `{ value }`. Join the array for submission (e.g. `value.join("")`).
+Use `field.value` (as `string[]`) and `field.onChange` with `InputOTP`; the `onValueChange` callback provides `{ value }`. Join the array for submission (e.g. `value.join("")`).
 
 ```tsx
 <Controller
@@ -783,15 +777,15 @@ Use `field.value` (as `string[]`) and `field.onChange` with `InputOtp`; the `onV
   render={({ field, fieldState }) => (
     <Field invalid={fieldState.invalid}>
       <FieldLabel>Verification code</FieldLabel>
-      <InputOtp
+      <InputOTP
         value={field.value ?? ["", "", "", ""]}
         onValueChange={({ value }) => field.onChange(value)}
       >
-        <InputOtpSlot index={0} />
-        <InputOtpSlot index={1} />
-        <InputOtpSlot index={2} />
-        <InputOtpSlot index={3} />
-      </InputOtp>
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
+        <InputOTPSlot index={2} />
+        <InputOTPSlot index={3} />
+      </InputOTP>
       {fieldState.invalid && (
         <FieldError>{fieldState.error?.message}</FieldError>
       )}

@@ -400,9 +400,8 @@ Bind `field.state.value` and `field.handleChange` to `Input`; pass `invalid` to 
       field.state.meta.isTouched && !field.state.meta.isValid
     return (
       <Field invalid={isInvalid}>
-        <FieldLabel htmlFor="form-tanstack-input-username">Username</FieldLabel>
+        <FieldLabel>Username</FieldLabel>
         <Input
-          id="form-tanstack-input-username"
           name={field.name}
           value={field.state.value}
           onBlur={field.handleBlur}
@@ -436,11 +435,10 @@ Same pattern: bind `field.state.value` and `field.handleChange` to `Textarea`, a
       field.state.meta.isTouched && !field.state.meta.isValid
     return (
       <Field invalid={isInvalid}>
-        <FieldLabel htmlFor="form-tanstack-textarea-about">
+        <FieldLabel>
           More about you
         </FieldLabel>
         <Textarea
-          id="form-tanstack-textarea-about"
           name={field.name}
           value={field.state.value}
           onBlur={field.handleBlur}
@@ -480,7 +478,7 @@ import {
     return (
       <Field orientation="horizontal" invalid={isInvalid}>
         <FieldContent>
-          <FieldLabel htmlFor="form-tanstack-native-select-language">
+          <FieldLabel>
             Spoken Language
           </FieldLabel>
           <FieldDescription>
@@ -491,7 +489,6 @@ import {
           )}
         </FieldContent>
         <NativeSelect
-          id="form-tanstack-native-select-language"
           name={field.name}
           value={field.state.value}
           onChange={(e) => field.handleChange(e.target.value)}
@@ -681,7 +678,7 @@ Use `field.state.value` and `field.handleChange` with `Switch`; pass `invalid` t
     return (
       <Field orientation="horizontal" invalid={isInvalid}>
         <FieldContent>
-          <FieldLabel htmlFor="form-tanstack-switch-twoFactor">
+          <FieldLabel>
             Multi-factor authentication
           </FieldLabel>
           <FieldDescription>
@@ -692,7 +689,6 @@ Use `field.state.value` and `field.handleChange` with `Switch`; pass `invalid` t
           )}
         </FieldContent>
         <Switch
-          id="form-tanstack-switch-twoFactor"
           name={field.name}
           checked={field.state.value}
           onCheckedChange={field.handleChange}
@@ -716,7 +712,7 @@ Use `field.state.value` and `field.handleChange` with `NumberField`; the `onValu
       field.state.meta.isTouched && !field.state.meta.isValid
     return (
       <Field invalid={isInvalid}>
-        <FieldLabel htmlFor="form-tanstack-number-quantity">
+        <FieldLabel>
           Quantity
         </FieldLabel>
         <NumberField
@@ -728,7 +724,7 @@ Use `field.state.value` and `field.handleChange` with `NumberField`; the `onValu
         >
           <NumberFieldGroup>
             <NumberFieldDecrement />
-            <NumberFieldInput id="form-tanstack-number-quantity" />
+            <NumberFieldInput />
             <NumberFieldIncrement />
           </NumberFieldGroup>
         </NumberField>
@@ -884,7 +880,7 @@ import { parseDate } from "@/registry/react/components/calendar"
 
 ### Input OTP
 
-Use `field.state.value` (as `string[]`) and `field.handleChange` with `InputOtp`; the `onValueChange` callback provides `{ value }`. Join the array for submission (e.g. `value.join("")`).
+Use `field.state.value` (as `string[]`) and `field.handleChange` with `InputOTP`; the `onValueChange` callback provides `{ value }`. Join the array for submission (e.g. `value.join("")`).
 
 ```tsx
 <form.Field
@@ -895,15 +891,15 @@ Use `field.state.value` (as `string[]`) and `field.handleChange` with `InputOtp`
     return (
       <Field invalid={isInvalid}>
         <FieldLabel>Verification code</FieldLabel>
-        <InputOtp
+        <InputOTP
           value={field.state.value ?? ["", "", "", ""]}
           onValueChange={({ value }) => field.handleChange(value)}
         >
-          <InputOtpSlot index={0} />
-          <InputOtpSlot index={1} />
-          <InputOtpSlot index={2} />
-          <InputOtpSlot index={3} />
-        </InputOtp>
+          <InputOTPSlot index={0} />
+          <InputOTPSlot index={1} />
+          <InputOTPSlot index={2} />
+          <InputOTPSlot index={3} />
+        </InputOTP>
         {isInvalid && (
           <FieldError>{field.state.meta.errors.join(", ")}</FieldError>
         )}

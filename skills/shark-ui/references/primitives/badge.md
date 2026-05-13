@@ -2,11 +2,8 @@
 
 ## When to use
 
-Use **badge** when Shark docs describe this primitive for the task.
-
-## When not to use
-
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- Short status/category labels and counts.
+- Inline metadata chips paired with buttons, tables, and cards.
 
 ## Install
 
@@ -14,31 +11,74 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/badge
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/badge.mdx`](../../content/docs/components/badge.mdx) |
-| Examples | [`registry/react/examples/badge/`](../../registry/react/examples/badge/) |
-| Source | [`registry/react/components/badge.tsx`](../../registry/react/components/badge.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/badge";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import { Badge } from "@/components/ui/badge"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Badge>Badge</Badge>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Variants via the `variant` prop:
 
-## See also
+```tsx
+<Badge>Default</Badge>
+<Badge variant="outline">Outline</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="destructive">Destructive</Badge>
+<Badge variant="info">Info</Badge>
+<Badge variant="success">Success</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="error">Error</Badge>
+```
 
-- [Component registry](../component-registry.md)
+Badge with decorative icon:
+
+```tsx
+<Badge variant="outline">
+  <CheckIcon aria-hidden="true" />
+  Verified
+</Badge>
+```
+
+Badge inside a button (use negative margin for alignment):
+
+```tsx
+<Button variant="outline">
+  Messages
+  <Badge className="-me-1" variant="outline">18</Badge>
+</Button>
+```
+
+## Common pitfalls
+
+- Using badge as interactive button without proper button semantics.
+- Applying raw palette classes instead of semantic tokens/variants for status.
+- Overloading badge content with long text that should be normal body copy.
+
+## Registry example files
+
+- [`example-custom-color.tsx`](/registry/react/examples/badge/example-custom-color.tsx)
+- [`example-default.tsx`](/registry/react/examples/badge/example-default.tsx)
+- [`example-pill.tsx`](/registry/react/examples/badge/example-pill.tsx)
+- [`example-size-lg.tsx`](/registry/react/examples/badge/example-size-lg.tsx)
+- [`example-size-md.tsx`](/registry/react/examples/badge/example-size-md.tsx)
+- [`example-size-sm.tsx`](/registry/react/examples/badge/example-size-sm.tsx)
+- [`example-variant-default.tsx`](/registry/react/examples/badge/example-variant-default.tsx)
+- [`example-variant-destructive.tsx`](/registry/react/examples/badge/example-variant-destructive.tsx)
+- [`example-variant-info.tsx`](/registry/react/examples/badge/example-variant-info.tsx)
+- [`example-variant-outline.tsx`](/registry/react/examples/badge/example-variant-outline.tsx)
+- [`example-variant-secondary.tsx`](/registry/react/examples/badge/example-variant-secondary.tsx)
+- [`example-variant-success.tsx`](/registry/react/examples/badge/example-variant-success.tsx)

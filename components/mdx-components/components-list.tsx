@@ -41,7 +41,7 @@ import { HoverCardThumb } from "@/components/thumbs/hover-card";
 import { ImageCropperThumb } from "@/components/thumbs/image-cropper";
 import { InputThumb } from "@/components/thumbs/input";
 import { InputGroupThumb } from "@/components/thumbs/input-group";
-import { InputOtpThumb } from "@/components/thumbs/input-otp";
+import { InputOTPThumb } from "@/components/thumbs/input-otp";
 import { ItemThumb } from "@/components/thumbs/item";
 import { KbdThumb } from "@/components/thumbs/kbd";
 import { LinkOverlayThumb } from "@/components/thumbs/link-overlay";
@@ -128,7 +128,7 @@ const THUMB_MAP: Record<string, React.ComponentType<ThumbCardProps>> = {
   "hover-card": HoverCardThumb,
   "image-cropper": ImageCropperThumb,
   "input-group": InputGroupThumb,
-  "input-otp": InputOtpThumb,
+  "input-otp": InputOTPThumb,
   input: InputThumb,
   item: ItemThumb,
   kbd: KbdThumb,

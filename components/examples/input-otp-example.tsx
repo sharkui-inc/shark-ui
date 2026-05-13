@@ -5,27 +5,27 @@ import {
   CardHeader,
 } from "@/registry/react/components/card";
 import {
-  InputOtp,
-  InputOtpSeparator,
-  InputOtpSlot,
+  InputOTP,
+  InputOTPSeparator,
+  InputOTPSlot,
 } from "@/registry/react/components/input-otp";
 
-export const InputOtpExample = () => (
+export const InputOTPExample = () => (
   <Card>
     <CardHeader
       description="We've sent a code to a****@gmail.com"
       title="Verify account"
     />
     <CardContent className="flex flex-col items-center gap-4">
-      <InputOtp defaultValue={["5", "5", "1", "6"]}>
-        <InputOtpSlot index={0} tabIndex={-1} />
-        <InputOtpSlot index={1} tabIndex={-1} />
-        <InputOtpSlot index={2} tabIndex={-1} />
-        <InputOtpSeparator />
-        <InputOtpSlot index={3} tabIndex={-1} />
-        <InputOtpSlot index={4} tabIndex={-1} />
-        <InputOtpSlot index={5} tabIndex={-1} />
-      </InputOtp>
+      <InputOTP defaultValue={["5", "5", "1", "6"]}>
+        <InputOTPSlot index={0} tabIndex={-1} />
+        <InputOTPSlot index={1} tabIndex={-1} />
+        <InputOTPSlot index={2} tabIndex={-1} />
+        <InputOTPSeparator />
+        <InputOTPSlot index={3} tabIndex={-1} />
+        <InputOTPSlot index={4} tabIndex={-1} />
+        <InputOTPSlot index={5} tabIndex={-1} />
+      </InputOTP>
       <p className="text-muted-foreground text-sm">
         Didn&apos;t receive a code?{" "}
         <Button

@@ -1,31 +1,215 @@
-## Learned User Preferences
+# Agent guide: Shark UI
 
-- When asked for code, write it only; do not install packages or run install commands
-- Prefer simple divs over data arrays for thumb/preview components
-- Thumbs should match the component's actual use case, not generic placeholder UI
-- Component thumbs: use accordion-style fills (`bg-muted-foreground/16`, `bg-muted-foreground/8`); bordered wrapper containers use `bg-muted`; any element with `border*` utilities must include explicit `border-input` in its `className` (do not rely on parent selector tricks in `ThumbCard`); field-style thumbs (input, select, native-select, combobox, autocomplete, command) use `h-8` with no vertical padding on the control row
-- API reference: no Description column in component tables
-- Hero preview cards: no rotation or hover scale; keep cards side by side
-- Pattern components (DotPattern, GridPattern): no animation or motion
-- When removing an example, delete the example file as well
-- Field examples: use `className="w-full max-w-xs"` and export as default `Example`
-- ScrollArea in menus: use native `overflow-y-auto` when ScrollArea causes layout issues
-- Link overlay is a utility: div with `position: relative` and overlay link covering it, not a card-style component
-- Example components: prefer minimal logic; avoid runtime resolution when static display suffices
+This document is the **in-repo** source of truth for contributors and coding agents working on [Shark UI](https://shark.vini.one): a **shadcn-style component registry** built on [**Ark UI**](https://ark-ui.com) (`@ark-ui/react`), **Tailwind CSS v4**, and **Next.js**.
 
-## Learned Workspace Facts
+Use it when adding or editing primitives, registry examples, docs MDX, or when adapting snippets from Radix/shadcn ecosystems.
 
-- Import registry components with `@/registry/react/components/<component-name>`, never `./` or `../../components/`
-- Component thumbs live in `components/thumbs/`; no barrel file—derive thumb types from `ThumbCardProps`
-- Registry examples in `registry/react/examples/<component>/` use `example-*.tsx` naming
-- Sidebar examples: wrap in `absolute inset-0 overflow-hidden`, add `className="absolute"` to Sidebar, use `h-full` on SidebarProvider to prevent overflow outside preview; pass showBorders={false} to ComponentPreview
-- Footer: `components/layout/footer.tsx` for shared site chrome; home uses `app/(app)/(home)/_components/footer.tsx`. Blocks/Templates are omitted from header, command palette, and mobile nav via commented entries in `config/navigation.ts` (`NAV_ITEMS`)
-- Charts: wire `ChartTooltip` with `content={(props) => <ChartTooltipContent {...props} />}` (extra props after the spread if needed) so Recharts supplies tooltip state; do not stub `active`, `payload`, or coordinates on `ChartTooltipContent`; for non-interactive previews, set `accessibilityLayer={false}` on the chart root to avoid tabindex
-- Combobox examples: use useFilter + useListCollection from @ark-ui/react; pass collection (not items); onInputValueChange calls filter(inputValue); ComboboxList children use collection.items.map()
-- When a component exposes user-customizable CSS variables in `className` (e.g. `[--ratio:1]`, `[--space:…]`), document them in the component MDX API Reference using an Attribute | Default table (see aspect-ratio.mdx); for surfaces that declare `[--space:…]`, also add `registry/react/examples/<component>/example-custom-spacing.tsx` and a `### Custom spacing` section with `ComponentPreview` `fileName="example-custom-spacing"`
-- Ark UI components: add "For a complete list of props, see the [Ark UI documentation](<api-url>)" at end of MDX file
-- Blocks/templates: block sources `registry/react/blocks/{category}/*.tsx` (e.g. `chart`, `sidebar`); import `@/registry/react/blocks/{category}/{fileBase}`; `registry/react/blocks/chart/*` default-exports the component and named-exports `description` (optional `iframeHeight`, `containerClassName`). Private folders `app/(app)/_blocks` → public `/blocks` and `/blocks/[category]` (`app/(app)/_blocks/layout.tsx` + `BlocksSidebar` from `getAllRegistryItems({ folderType: "blocks" })`, optional `app/(app)/_blocks/_components/block-card.tsx`); `app/(app)/_templates` → `/templates`. Previews `/view/blocks/{category}/{file}`; `app/sitemap.ts` lists blocks via `getAllRegistryItems` and templates via `MOCK_TEMPLATES` from `app/(app)/_templates/_data/mock-templates.ts`. Chart/sidebar MDX use plain “Browse … (soon).” copy, not `/blocks` links. `app/view/[type]/[category]/[file]/page.tsx`: validate `type` with a runtime allowlist before `getRegistryItem`, prefer `dynamicParams = false` when the type set is closed
-- Page metadata: use `createMetadata` from `@/lib/metadata` for standard app pages (default social image `/opengraph-image.png`); docs `[[...slug]]` and changelog use dynamic `/og?title=...&description=...` for Open Graph; LLM `.txt` routes and registry-example text helpers live in `@/lib/llms`; `@/lib/fumadocs` exports only the docs `source` loader
-- RTL: prefer logical positioning and spacing (`start`/`end`, `border-s`/`border-e`, `ms`/`me`, `inset-inline-*`) over physical `left`/`right`/`ml`/`mr`; use `ltr:`/`rtl:` variants for `translate-x` when Tailwind has no logical translate utilities
+---
 
-<!-- NEXT-AGENTS-MD-START -->[Next.js Docs Index]|root: ./.next-docs|STOP. What you remember about Next.js is WRONG for this project. Always search docs and read before any task.|If docs missing, run this command first: npx @next/codemod agents-md --output AGENTS.md|01-app:{04-glossary.mdx}|01-app/01-getting-started:{01-installation.mdx,02-project-structure.mdx,03-layouts-and-pages.mdx,04-linking-and-navigating.mdx,05-server-and-client-components.mdx,06-fetching-data.mdx,07-mutating-data.mdx,08-caching.mdx,09-revalidating.mdx,10-error-handling.mdx,11-css.mdx,12-images.mdx,13-fonts.mdx,14-metadata-and-og-images.mdx,15-route-handlers.mdx,16-proxy.mdx,17-deploying.mdx,18-upgrading.mdx}|01-app/02-guides:{ai-agents.mdx,analytics.mdx,authentication.mdx,backend-for-frontend.mdx,caching-without-cache-components.mdx,ci-build-caching.mdx,content-security-policy.mdx,css-in-js.mdx,custom-server.mdx,data-security.mdx,debugging.mdx,draft-mode.mdx,environment-variables.mdx,forms.mdx,incremental-static-regeneration.mdx,instant-navigation.mdx,instrumentation.mdx,internationalization.mdx,json-ld.mdx,lazy-loading.mdx,local-development.mdx,mcp.mdx,mdx.mdx,memory-usage.mdx,migrating-to-cache-components.mdx,multi-tenant.mdx,multi-zones.mdx,open-telemetry.mdx,package-bundling.mdx,prefetching.mdx,preserving-ui-state.mdx,production-checklist.mdx,progressive-web-apps.mdx,public-static-pages.mdx,redirecting.mdx,sass.mdx,scripts.mdx,self-hosting.mdx,single-page-applications.mdx,static-exports.mdx,streaming.mdx,tailwind-v3-css.mdx,third-party-libraries.mdx,videos.mdx}|01-app/02-guides/migrating:{app-router-migration.mdx,from-create-react-app.mdx,from-vite.mdx}|01-app/02-guides/testing:{cypress.mdx,jest.mdx,playwright.mdx,vitest.mdx}|01-app/02-guides/upgrading:{codemods.mdx,version-14.mdx,version-15.mdx,version-16.mdx}|01-app/03-api-reference:{07-edge.mdx,08-turbopack.mdx}|01-app/03-api-reference/01-directives:{use-cache-private.mdx,use-cache-remote.mdx,use-cache.mdx,use-client.mdx,use-server.mdx}|01-app/03-api-reference/02-components:{font.mdx,form.mdx,image.mdx,link.mdx,script.mdx}|01-app/03-api-reference/03-file-conventions/01-metadata:{app-icons.mdx,manifest.mdx,opengraph-image.mdx,robots.mdx,sitemap.mdx}|01-app/03-api-reference/03-file-conventions/02-route-segment-config:{dynamicParams.mdx,instant.mdx,maxDuration.mdx,preferredRegion.mdx,runtime.mdx}|01-app/03-api-reference/03-file-conventions:{default.mdx,dynamic-routes.mdx,error.mdx,forbidden.mdx,instrumentation-client.mdx,instrumentation.mdx,intercepting-routes.mdx,layout.mdx,loading.mdx,mdx-components.mdx,not-found.mdx,page.mdx,parallel-routes.mdx,proxy.mdx,public-folder.mdx,route-groups.mdx,route.mdx,src-folder.mdx,template.mdx,unauthorized.mdx}|01-app/03-api-reference/04-functions:{after.mdx,cacheLife.mdx,cacheTag.mdx,catchError.mdx,connection.mdx,cookies.mdx,draft-mode.mdx,fetch.mdx,forbidden.mdx,generate-image-metadata.mdx,generate-metadata.mdx,generate-sitemaps.mdx,generate-static-params.mdx,generate-viewport.mdx,headers.mdx,image-response.mdx,next-request.mdx,next-response.mdx,not-found.mdx,permanentRedirect.mdx,redirect.mdx,refresh.mdx,revalidatePath.mdx,revalidateTag.mdx,unauthorized.mdx,unstable_cache.mdx,unstable_noStore.mdx,unstable_rethrow.mdx,updateTag.mdx,use-link-status.mdx,use-params.mdx,use-pathname.mdx,use-report-web-vitals.mdx,use-router.mdx,use-search-params.mdx,use-selected-layout-segment.mdx,use-selected-layout-segments.mdx,userAgent.mdx}|01-app/03-api-reference/05-config/01-next-config-js:{adapterPath.mdx,allowedDevOrigins.mdx,appDir.mdx,assetPrefix.mdx,authInterrupts.mdx,basePath.mdx,cacheComponents.mdx,cacheHandlers.mdx,cacheLife.mdx,compress.mdx,crossOrigin.mdx,cssChunking.mdx,deploymentId.mdx,devIndicators.mdx,distDir.mdx,env.mdx,expireTime.mdx,exportPathMap.mdx,generateBuildId.mdx,generateEtags.mdx,headers.mdx,htmlLimitedBots.mdx,httpAgentOptions.mdx,images.mdx,incrementalCacheHandlerPath.mdx,inlineCss.mdx,logging.mdx,mdxRs.mdx,onDemandEntries.mdx,optimizePackageImports.mdx,output.mdx,pageExtensions.mdx,poweredByHeader.mdx,productionBrowserSourceMaps.mdx,proxyClientMaxBodySize.mdx,reactCompiler.mdx,reactMaxHeadersLength.mdx,reactStrictMode.mdx,redirects.mdx,rewrites.mdx,sassOptions.mdx,serverActions.mdx,serverComponentsHmrCache.mdx,serverExternalPackages.mdx,staleTimes.mdx,staticGeneration.mdx,taint.mdx,trailingSlash.mdx,transpilePackages.mdx,turbopack.mdx,turbopackFileSystemCache.mdx,turbopackIgnoreIssue.mdx,typedRoutes.mdx,typescript.mdx,urlImports.mdx,useLightningcss.mdx,viewTransition.mdx,webVitalsAttribution.mdx,webpack.mdx}|01-app/03-api-reference/05-config:{02-typescript.mdx,03-eslint.mdx}|01-app/03-api-reference/06-cli:{create-next-app.mdx,next.mdx}|02-pages/01-getting-started:{01-installation.mdx,02-project-structure.mdx,04-images.mdx,05-fonts.mdx,06-css.mdx,11-deploying.mdx}|02-pages/02-guides:{analytics.mdx,authentication.mdx,babel.mdx,ci-build-caching.mdx,content-security-policy.mdx,css-in-js.mdx,custom-server.mdx,debugging.mdx,draft-mode.mdx,environment-variables.mdx,forms.mdx,incremental-static-regeneration.mdx,instrumentation.mdx,internationalization.mdx,lazy-loading.mdx,mdx.mdx,multi-zones.mdx,open-telemetry.mdx,package-bundling.mdx,post-css.mdx,preview-mode.mdx,production-checklist.mdx,redirecting.mdx,sass.mdx,scripts.mdx,self-hosting.mdx,static-exports.mdx,tailwind-v3-css.mdx,third-party-libraries.mdx}|02-pages/02-guides/migrating:{app-router-migration.mdx,from-create-react-app.mdx,from-vite.mdx}|02-pages/02-guides/testing:{cypress.mdx,jest.mdx,playwright.mdx,vitest.mdx}|02-pages/02-guides/upgrading:{codemods.mdx,version-10.mdx,version-11.mdx,version-12.mdx,version-13.mdx,version-14.mdx,version-9.mdx}|02-pages/03-building-your-application/01-routing:{01-pages-and-layouts.mdx,02-dynamic-routes.mdx,03-linking-and-navigating.mdx,05-custom-app.mdx,06-custom-document.mdx,07-api-routes.mdx,08-custom-error.mdx}|02-pages/03-building-your-application/02-rendering:{01-server-side-rendering.mdx,02-static-site-generation.mdx,04-automatic-static-optimization.mdx,05-client-side-rendering.mdx}|02-pages/03-building-your-application/03-data-fetching:{01-get-static-props.mdx,02-get-static-paths.mdx,03-forms-and-mutations.mdx,03-get-server-side-props.mdx,05-client-side.mdx}|02-pages/03-building-your-application/06-configuring:{12-error-handling.mdx}|02-pages/04-api-reference:{06-edge.mdx,08-turbopack.mdx}|02-pages/04-api-reference/01-components:{font.mdx,form.mdx,head.mdx,image-legacy.mdx,image.mdx,link.mdx,script.mdx}|02-pages/04-api-reference/02-file-conventions:{instrumentation.mdx,proxy.mdx,public-folder.mdx,src-folder.mdx}|02-pages/04-api-reference/03-functions:{get-initial-props.mdx,get-server-side-props.mdx,get-static-paths.mdx,get-static-props.mdx,next-request.mdx,next-response.mdx,use-params.mdx,use-report-web-vitals.mdx,use-router.mdx,use-search-params.mdx,userAgent.mdx}|02-pages/04-api-reference/04-config/01-next-config-js:{adapterPath.mdx,allowedDevOrigins.mdx,assetPrefix.mdx,basePath.mdx,bundlePagesRouterDependencies.mdx,compress.mdx,crossOrigin.mdx,deploymentId.mdx,devIndicators.mdx,distDir.mdx,env.mdx,exportPathMap.mdx,generateBuildId.mdx,generateEtags.mdx,headers.mdx,httpAgentOptions.mdx,images.mdx,logging.mdx,onDemandEntries.mdx,optimizePackageImports.mdx,output.mdx,pageExtensions.mdx,poweredByHeader.mdx,productionBrowserSourceMaps.mdx,proxyClientMaxBodySize.mdx,reactStrictMode.mdx,redirects.mdx,rewrites.mdx,serverExternalPackages.mdx,trailingSlash.mdx,transpilePackages.mdx,turbopack.mdx,typescript.mdx,urlImports.mdx,useLightningcss.mdx,webVitalsAttribution.mdx,webpack.mdx}|02-pages/04-api-reference/04-config:{01-typescript.mdx,02-eslint.mdx}|02-pages/04-api-reference/05-cli:{create-next-app.mdx,next.mdx}|03-architecture:{accessibility.mdx,fast-refresh.mdx,nextjs-compiler.mdx,supported-browsers.mdx}|04-community:{01-contribution-guide.mdx,02-rspack.mdx}<!-- NEXT-AGENTS-MD-END -->
+## 1. What to read first
+
+| Need | Location |
+|------|----------|
+| Public API, anatomy, install | `content/docs/components/<name>.mdx`, `content/docs/utilities/<name>.mdx` |
+| Working compositions | `registry/react/examples/<name>/example-*.tsx` |
+| Implementation & Ark wiring | `registry/react/components/<name>.tsx` |
+| Published registry index | `registry.json` |
+| Per-item build metadata | `registry/manifest/<name>.ts` |
+| LLM-oriented surfaces | `app/(llms)/`, `lib/llms.ts`, `lib/llms-registry-examples.ts` |
+| Deeper agent rules | `skills/shark-ui/SKILL.md` and `skills/shark-ui/references/` |
+
+Extended detail for agents: `skills/shark-ui/references/component-registry.md`, `skills/shark-ui/references/rules/composition.md`, `skills/shark-ui/references/rules/forms.md`, `skills/shark-ui/references/rules/styling.md`, `skills/shark-ui/references/rules/migration.md`.
+
+---
+
+## 2. Import paths (this repository)
+
+- **Components and examples in this repo:** `@/registry/react/components/<name>` (not deep relative imports like `../../components/...`).
+- **Utilities:** `@/lib/utils` (`cn`, etc.) unless a doc specifies otherwise.
+- **Consumer projects** after `npx shadcn@latest add @shark/<name>`: follow the installation section in docs (commonly `@/components/ui/...`).
+
+---
+
+## 3. Registry examples
+
+Examples live under:
+
+`registry/react/examples/<component>/example-<topic>.tsx`
+
+Conventions:
+
+- Prefer a **default export** that is a small demo component (e.g. `ButtonDemo`, `ComboboxDemo`), matching existing files in the same folder.
+- Add **`"use client"`** when the example uses hooks, browser APIs, or interactive state that is not purely static markup.
+- Keep each file focused on **one** scenario; split variants across `example-*.tsx` files.
+- **Mirror docs and source:** exports, child structure, and prop names must match `content/docs/components/<name>.mdx` and `registry/react/components/<name>.tsx`.
+
+CLI install pattern for consumers (from docs):
+
+```bash
+npx shadcn@latest add @shark/<component>
+```
+
+Registry build (maintainers):
+
+```bash
+pnpm registry:build
+```
+
+Prebuild runs `registry:build` automatically via `package.json` `prebuild`.
+
+---
+
+## 4. Ark UI composition: triggers and `asChild`
+
+Shark follows **Ark UI** patterns. For triggers and items that should merge onto a host element (e.g. `Button`, `NextLink`), use **`asChild`** with a **single** child, as in the Menu examples:
+
+```tsx
+<MenuTrigger asChild>
+  <Button variant="outline">Open</Button>
+</MenuTrigger>
+```
+
+Do **not** assume other headless libraries’ APIs (e.g. `render={...}` on triggers) without verifying Shark docs and source.
+
+Overlay surfaces use Shark’s named parts (e.g. `DialogContent`, `DialogHeader`, `SheetContent`, …) — follow each component’s MDX anatomy, not another design system’s `*Popup` / `*Panel` naming.
+
+---
+
+## 5. Collections: Select, Combobox, Listbox
+
+Many list primitives expect an Ark **collection** (`createListCollection`, `useListCollection`, …), not a loose `items` prop where the docs show a collection.
+
+**Combobox:** use `useFilter` + `useListCollection`, pass `collection` to the root, call `filter(inputValue)` from `onInputValueChange`, and render `collection.items.map(...)` inside the list. See `registry/react/examples/combobox/example-default.tsx`.
+
+**Select:** pass `collection={...}` and map `collection.items` inside the content, inside **`SelectGroup`** when grouping (see `skills/shark-ui/references/rules/composition.md`).
+
+---
+
+## 6. Migrating from shadcn / Radix mental models
+
+High-level rules:
+
+1. **Do not** change only import paths on a shadcn snippet and assume it works.
+2. Confirm **child structure**, **controlled vs uncontrolled** defaults, and **lazy mount** behavior from MDX + source.
+3. Use `skills/shark-ui/references/rules/migration.md` for side-by-side patterns (Select, Toggle Group, Accordion, Input OTP, etc.).
+
+Examples of common shifts:
+
+- **Toggle group:** `type="single"` / `multiple` from Radix map to Shark’s value arrays and API — see migration doc.
+- **Accordion:** Shark defaults differ from Radix `type="single"` / `collapsible` — see migration doc.
+- **Input OTP:** no `input-otp` package; use Shark `InputOTP` / `InputOTPSlot` / `InputOTPSeparator` (no `InputOTPGroup`).
+
+---
+
+## 7. Icons (`lucide-react`)
+
+- Import **specific** icons: `import { PlusIcon, XIcon } from "lucide-react"`.
+- Do **not** use numeric **`size`** on icons; use Tailwind `className="size-4"` (or parent styles) when needed.
+- **Decorative** icons (label or button text already explains the action): `aria-hidden="true"`.
+- **Semantic** icons (e.g. alert severity): do **not** hide them from assistive tech unless the same information is exposed in text.
+
+---
+
+## 8. Accessibility
+
+### `aria-label`
+
+Use when the control has no visible text (icon-only buttons, unlabeled search fields where appropriate).
+
+Prefer **`aria-label`** on the interactive element over duplicating meaning with `sr-only` spans when the pattern matches existing registry examples.
+
+### Inputs
+
+- Prefer **`type="text"`**, **`type="email"`**, **`type="search"`**, etc. explicitly on `Input` / `InputGroupInput`.
+- For inputs without a visible label, set **`aria-label`** (or use `FieldLabel` with `className="sr-only"` per forms rules).
+
+### Labels and controls
+
+- Use **`Label`** wrapping control + text, or **`Field` / `FieldLabel`** for form layouts (see `skills/shark-ui/references/rules/forms.md`).
+- For checkbox / radio / switch groups, follow patterns in docs; Ark often wires **`id` / `htmlFor`** when you use the documented Field APIs — do not fight the primitive unless you have extra content outside the label.
+
+### Overlays
+
+- **`DialogTitle` / `SheetTitle` / `DrawerTitle`** (and equivalents) are required for accessibility; use `className="sr-only"` when the title should be visually hidden but still exposed to assistive tech.
+
+---
+
+## 9. Forms and `Field`
+
+- Prefer **`FieldGroup`** + **`Field`** for stacked fields instead of ad-hoc `div` + `space-y-*` (use `flex flex-col gap-*` when you need generic spacing).
+- **`InputGroup`:** use **`InputGroupInput`** / **`InputGroupTextarea`**, not raw `Input` / `Textarea` inside the group.
+- **`InputGroupAddon`:** place **after** the input/textarea in **DOM order** when the addon focuses the field (implementation uses `querySelector("input")` on the parent). Visual position can still be adjusted with props like `align` where supported.
+
+**Dialog / sheet / drawer forms:** keep headers outside a collapsing flex issue — follow examples in docs; when wrapping body + footer in a `<form>`, using `className="contents"` on the form is a common pattern so layout matches design.
+
+---
+
+## 10. Styling
+
+- Use **semantic** Tailwind tokens (`text-muted-foreground`, `bg-destructive`, `border-input`, …), not raw palette classes.
+- Prefer **`flex` + `gap-*`** over `space-x-*` / `space-y-*` for layout in new code.
+- Prefer **`data-slot`** and existing **`in-*` / `peer`** patterns already used in components over inventing new `group/` chains when extending registry styles.
+- Merge classes with **`cn()`** from `@/lib/utils`.
+- Follow **Tailwind v4** setup described in installation / styling docs.
+
+Charts (docs previews):
+
+- Wire **`ChartTooltip`** with `content={(props) => <ChartTooltipContent {...props} />}`; do not invent parallel tooltip state on `ChartTooltipContent`.
+- For static previews, **`accessibilityLayer={false}`** on the chart root may be appropriate — follow component MDX.
+
+Sidebar (docs previews):
+
+- For embedded previews, patterns like **`absolute inset-0 overflow-hidden`**, **`className="absolute"`** on `Sidebar`, **`h-full`** on `SidebarProvider`, and native **`overflow-y-auto`** instead of `ScrollArea` can avoid layout glitches — follow `AGENTS.md` callouts in sidebar docs when present.
+
+---
+
+## 11. State and data in examples
+
+- Define **static** lists and constants **outside** the component when they do not depend on props or hooks.
+- Use **clear handler names** and minimal state for interactive demos.
+
+---
+
+## 12. Registry manifests (`registry/manifest`)
+
+Each published item has a **`registry/manifest/<name>.ts`** default export used by `scripts/build-registry.mts` to emit `public/r/<name>.json`.
+
+- Do **not** hand-edit generated **`public/r/*.json`** unless you know the pipeline; prefer editing manifest + component source and running **`pnpm registry:build`**.
+- **`registryDependencies`** in manifests should list **full registry JSON URLs** or paths as already used in this repo (see existing manifests for the pattern).
+
+---
+
+## 13. Quality checks
+
+From repo root:
+
+```bash
+pnpm lint:fix      # ultracite fix
+pnpm lint:check    # ultracite check
+pnpm typecheck     # next build (includes types)
+```
+
+---
+
+## 14. Anti-patterns (summary)
+
+- Porting shadcn/Radix snippets by **imports only**.
+- Inventing **Ark or Shark props** not shown in MDX or `registry/react/components/*.tsx`.
+- Using **`render={...}`** on triggers where Shark uses **`asChild`**.
+- **Combobox / select** without the **collection + filter** patterns when the component docs require them.
+- **`Icon size={n}`** or **raw** `gray-500` / `blue-600` classes for theme-driven UI.
+
+---
+
+## 15. Quick checklist (new or updated example)
+
+- [ ] Default export demo component; `"use client"` only when needed.
+- [ ] Imports from `@/registry/react/components/...` and `lucide-react` as usual in-repo.
+- [ ] Structure and props match **MDX** + **component source**.
+- [ ] Triggers use **`asChild`** where Shark does; overlays include **title** (visible or `sr-only`).
+- [ ] Lists use **collections** when required; **Select** items live under **`SelectGroup`** where applicable.
+- [ ] **a11y:** labels, `aria-label` for icon-only controls, `type` on inputs, decorative **`aria-hidden`** on icons.
+- [ ] **Styling:** semantic tokens, `cn()`, gaps over space utilities for new layout.
+- [ ] **`pnpm registry:build`** if manifest or registry-facing files changed.
+
+For broader discovery and install URLs, see **`skills/shark-ui/SKILL.md`** and **`config/site.ts`**.

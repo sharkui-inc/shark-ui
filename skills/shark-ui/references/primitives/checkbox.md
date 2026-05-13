@@ -2,11 +2,14 @@
 
 ## When to use
 
-Use **checkbox** when Shark docs describe this primitive for the task.
+- Single boolean consent/selection controls.
+- Standalone yes/no options with explicit labeling.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If the control is a preference toggle (on/off) in settings -> use Switch instead.
+- If selecting from mutually exclusive options -> use RadioGroup instead.
+- If multiple checkboxes share grouped state -> use CheckboxGroup instead.
 
 ## Install
 
@@ -14,31 +17,65 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/checkbox
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/checkbox.mdx`](../../content/docs/components/checkbox.mdx) |
-| Examples | [`registry/react/examples/checkbox/`](../../registry/react/examples/checkbox/) |
-| Source | [`registry/react/components/checkbox.tsx`](../../registry/react/components/checkbox.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/checkbox";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import { Checkbox } from "@/components/ui/checkbox"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Label>
+  <Checkbox value="terms" />
+  Accept terms and conditions
+</Label>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+CheckboxGroup with label-wrapped options:
 
-## See also
+```tsx
+ <CheckboxGroup defaultValue={["checkbox-1"]}>
+  <Field orientation="horizontal">
+    <Checkbox value="checkbox-1" />
+    <FieldLabel />
+  </Field>
+  <Field orientation="horizontal">
+    <Checkbox value="checkbox-2" />
+    <FieldLabel />
+  </Field>
+  <Field orientation="horizontal">
+    <Checkbox value="checkbox-3" />
+    <FieldLabel />
+  </Field>
+  <Field orientation="horizontal">
+    <Checkbox value="checkbox-4" />
+    <FieldLabel />
+  </Field>
+</CheckboxGroup>
+```
 
-- [Component registry](../component-registry.md)
+## Common pitfalls
+
+- Using checkbox for exclusive single-choice options that should be radios.
+- Missing visible label association (`FieldLabel` within `Field`) for each checkbox.
+- Treating `onCheckedChange` values as plain boolean without handling indeterminate where relevant.
+
+## Registry example files
+
+- [`example-card.tsx`](/registry/react/examples/checkbox/example-card.tsx)
+- [`example-checkbox-group.tsx`](/registry/react/examples/checkbox/example-checkbox-group.tsx)
+- [`example-controlled.tsx`](/registry/react/examples/checkbox/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/checkbox/example-default.tsx)
+- [`example-disabled.tsx`](/registry/react/examples/checkbox/example-disabled.tsx)
+- [`example-indeterminate.tsx`](/registry/react/examples/checkbox/example-indeterminate.tsx)
+- [`example-invalid.tsx`](/registry/react/examples/checkbox/example-invalid.tsx)
+- [`example-with-description.tsx`](/registry/react/examples/checkbox/example-with-description.tsx)

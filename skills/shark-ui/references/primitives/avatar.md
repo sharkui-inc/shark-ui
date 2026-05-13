@@ -2,11 +2,8 @@
 
 ## When to use
 
-Use **avatar** when Shark docs describe this primitive for the task.
-
-## When not to use
-
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- Identity visuals for users/teams in compact spaces.
+- Image + fallback initials patterns in cards, lists, and menus.
 
 ## Install
 
@@ -14,31 +11,109 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/avatar
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/avatar.mdx`](../../content/docs/components/avatar.mdx) |
-| Examples | [`registry/react/examples/avatar/`](../../registry/react/examples/avatar/) |
-| Source | [`registry/react/components/avatar.tsx`](../../registry/react/components/avatar.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/avatar";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage,
+  useAvatar,
+} from "@/components/ui/avatar"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Avatar>
+  <AvatarImage alt="@user" src="/avatars/01.png" />
+  <AvatarFallback>VV</AvatarFallback>
+</Avatar>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Size via the `size` prop (`sm|md|lg`):
 
-## See also
+```tsx
+<Avatar size="lg">
+  <AvatarImage alt="…" src="…" />
+  <AvatarFallback>VV</AvatarFallback>
+</Avatar>
+```
 
-- [Component registry](../component-registry.md)
+Status with badge:
+
+```tsx
+<Avatar>
+  <AvatarImage alt="…" src="…" />
+  <AvatarFallback>VV</AvatarFallback>
+  <AvatarBadge variant="success" />
+</Avatar>
+```
+
+Stack of avatars:
+
+```tsx
+<AvatarGroup>
+  <Avatar>…</Avatar>
+  <Avatar>…</Avatar>
+  <Avatar>…</Avatar>
+</AvatarGroup>
+```
+
+Stack of avatars with count:
+
+```tsx
+<AvatarGroup>
+  <Avatar>…</Avatar>
+  <Avatar>…</Avatar>
+  <AvatarGroupCount>+5</AvatarGroupCount>
+</AvatarGroup>
+```
+
+Stack of avatars with count as popover:
+
+```tsx
+<AvatarGroupCount asChild>
+  <PopoverTrigger asChild>
+    <Button pill size="icon-md" variant="ghost">
+      +5
+    </Button>
+  </PopoverTrigger>
+</AvatarGroupCount>
+```
+
+## Common pitfalls
+
+- Omitting `AvatarFallback`, causing broken image states with no identity fallback.
+- Using non-descriptive `alt` text on `AvatarImage` in accessible contexts.
+- Relying on oversized custom wrappers instead of built-in size variants/classes.
+- Recreating stacked avatars with raw `flex` / negative margin instead of `AvatarGroup`, which owns overlap and ring styling.
+
+## Registry example files
+
+- [`example-badge-with-icon.tsx`](/registry/react/examples/avatar/example-badge-with-icon.tsx)
+- [`example-custom-colors.tsx`](/registry/react/examples/avatar/example-custom-colors.tsx)
+- [`example-custom-radius.tsx`](/registry/react/examples/avatar/example-custom-radius.tsx)
+- [`example-default.tsx`](/registry/react/examples/avatar/example-default.tsx)
+- [`example-fallback-icon.tsx`](/registry/react/examples/avatar/example-fallback-icon.tsx)
+- [`example-group-count-icon.tsx`](/registry/react/examples/avatar/example-group-count-icon.tsx)
+- [`example-group-count.tsx`](/registry/react/examples/avatar/example-group-count.tsx)
+- [`example-group-popover.tsx`](/registry/react/examples/avatar/example-group-popover.tsx)
+- [`example-group.tsx`](/registry/react/examples/avatar/example-group.tsx)
+- [`example-hover-card.tsx`](/registry/react/examples/avatar/example-hover-card.tsx)
+- [`example-size-custom.tsx`](/registry/react/examples/avatar/example-size-custom.tsx)
+- [`example-size-lg.tsx`](/registry/react/examples/avatar/example-size-lg.tsx)
+- [`example-size-md.tsx`](/registry/react/examples/avatar/example-size-md.tsx)
+- [`example-size-sm.tsx`](/registry/react/examples/avatar/example-size-sm.tsx)
+- [`example-with-status.tsx`](/registry/react/examples/avatar/example-with-status.tsx)

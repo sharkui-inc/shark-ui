@@ -7,8 +7,8 @@ import {
   AutocompleteEmpty,
   AutocompleteInput,
   AutocompleteItem,
+  AutocompleteList,
 } from "@/registry/react/components/autocomplete";
-import { ComboboxList } from "@/registry/react/components/combobox";
 import {
   Field,
   FieldError,
@@ -35,13 +35,13 @@ const Example = () => {
         <AutocompleteInput placeholder="Select a country..." />
         <AutocompleteContent>
           <AutocompleteEmpty />
-          <ComboboxList>
+          <AutocompleteList>
             {collection.items.map((item) => (
               <AutocompleteItem item={item} key={item.value}>
                 {item.label}
               </AutocompleteItem>
             ))}
-          </ComboboxList>
+          </AutocompleteList>
         </AutocompleteContent>
       </Autocomplete>
       <FieldHelper>We'll use this for shipping estimates</FieldHelper>

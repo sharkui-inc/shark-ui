@@ -2,11 +2,13 @@
 
 ## When to use
 
-Use **toggle** when Shark docs describe this primitive for the task.
+- Pressable two-state commands (formatting/tool modes).
+- Single-command active/inactive interactions without group state.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If the control is a binary preference setting -> use Switch instead.
+- If multiple toggles share state -> use ToggleGroup instead.
 
 ## Install
 
@@ -14,31 +16,67 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/toggle
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/toggle.mdx`](../../content/docs/components/toggle.mdx) |
-| Examples | [`registry/react/examples/toggle/`](../../registry/react/examples/toggle/) |
-| Source | [`registry/react/components/toggle.tsx`](../../registry/react/components/toggle.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/toggle";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import { Toggle } from "@/components/ui/toggle"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Toggle>Toggle</Toggle>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Icon toggle with `aria-label` (always required for icon-only):
 
-## See also
+```tsx
+<Toggle aria-label="Toggle bold" value="bold">
+  <BoldIcon />
+</Toggle>
+```
 
-- [Component registry](../component-registry.md)
+ToggleGroup with icon toggles:
+
+```tsx
+<ToggleGroup defaultValue={["bold"]}>
+  <Toggle aria-label="Toggle bold" value="bold">
+    <BoldIcon />
+  </Toggle>
+  <Toggle aria-label="Toggle italic" value="italic">
+    <ItalicIcon />
+  </Toggle>
+  <Toggle aria-label="Toggle underline" value="underline">
+    <UnderlineIcon />
+  </Toggle>
+</ToggleGroup>
+```
+
+Variants: `default`, `outline`. Sizes: `sm`, `default`, `lg`.
+
+
+## Common pitfalls
+
+- Using toggle for destructive/submit actions better represented by `Button`.
+- Missing pressed-state semantics in controlled toggle flows.
+- Using standalone toggles when mutually exclusive behavior needs `ToggleGroup`.
+
+## Registry example files
+
+- [`example-controlled.tsx`](/registry/react/examples/toggle/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/toggle/example-default.tsx)
+- [`example-disabled.tsx`](/registry/react/examples/toggle/example-disabled.tsx)
+- [`example-icon-group.tsx`](/registry/react/examples/toggle/example-icon-group.tsx)
+- [`example-outline.tsx`](/registry/react/examples/toggle/example-outline.tsx)
+- [`example-size-lg.tsx`](/registry/react/examples/toggle/example-size-lg.tsx)
+- [`example-size-md.tsx`](/registry/react/examples/toggle/example-size-md.tsx)
+- [`example-size-sm.tsx`](/registry/react/examples/toggle/example-size-sm.tsx)
+- [`example-with-icon.tsx`](/registry/react/examples/toggle/example-with-icon.tsx)

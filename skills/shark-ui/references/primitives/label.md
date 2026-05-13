@@ -2,12 +2,8 @@
 
 ## When to use
 
-- Standalone **`Label`** from CLI install: plain styled `<label>` for simple `htmlFor` / `id` pairing.
-- Rich Ark semantics + errors: prefer **`Field` + `FieldLabel`** ([`field.md`](./field.md)) instead of using this registry item alone.
-
-## When not to use
-
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- Visible accessible labels for inputs and controls.
+- Simple `htmlFor`/`id` associations in forms and settings UIs.
 
 ## Install
 
@@ -15,31 +11,70 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/label
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/field.mdx`](../../content/docs/components/field.mdx) |
-| Examples | [`registry/react/examples/field/`](../../registry/react/examples/field/) |
-| Source | `label.tsx` is created in consumer projects via CLI; in-repo work often uses **`FieldLabel`** in [`../../registry/react/components/field.tsx`](../../registry/react/components/field.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/label";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import { Label } from "@/components/ui/label"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Label htmlFor="email">Email</Label>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Label paired with input:
 
-## See also
+```tsx
+const id = useId()
 
-- [Component registry](../component-registry.md)
+<div className="flex flex-col gap-2">
+  <Label htmlFor={id}>Email</Label>
+  <Input id={id} type="email" placeholder="name@example.com" />
+</div>
+```
+
+Label wrapping a checkbox:
+
+```tsx
+<Label>
+  <Checkbox />
+  Accept terms and conditions
+</Label>
+```
+
+Prefer `FieldLabel` within `Field` for validation-aware forms.
+
+
+## Common pitfalls
+
+- Using `aria-label` when visible `Label` text exists and can be associated.
+- Mismatching `htmlFor`/`id` between label and control.
+- Using label component as generic typography instead of form labeling.
+
+## Useful example references
+
+- with checkbox: `checkbox-demo`
+
+## Registry example files
+
+- [`example-autocomplete-field.tsx`](/registry/react/examples/field/example-autocomplete-field.tsx)
+- [`example-checkbox-field.tsx`](/registry/react/examples/field/example-checkbox-field.tsx)
+- [`example-checkbox-group-field.tsx`](/registry/react/examples/field/example-checkbox-group-field.tsx)
+- [`example-combobox-field.tsx`](/registry/react/examples/field/example-combobox-field.tsx)
+- [`example-combobox-multiple-field.tsx`](/registry/react/examples/field/example-combobox-multiple-field.tsx)
+- [`example-default.tsx`](/registry/react/examples/field/example-default.tsx)
+- [`example-disabled-field.tsx`](/registry/react/examples/field/example-disabled-field.tsx)
+- [`example-field-group.tsx`](/registry/react/examples/field/example-field-group.tsx)
+- [`example-input-group.tsx`](/registry/react/examples/field/example-input-group.tsx)
+- [`example-number-input.tsx`](/registry/react/examples/field/example-number-input.tsx)
+- [`example-orientation-horizontal.tsx`](/registry/react/examples/field/example-orientation-horizontal.tsx)
+- [`example-orientation-vertical.tsx`](/registry/react/examples/field/example-orientation-vertical.tsx)

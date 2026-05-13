@@ -2,11 +2,13 @@
 
 ## When to use
 
-Use **hover-card** when Shark docs describe this primitive for the task.
+- Rich preview cards on hover/focus (profiles, summaries, maps).
+- Lightweight disclosure that is not interactive like a full popover surface.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If the surface contains buttons, links that must receive clicks, or forms → use `Popover` instead.
+- If the copy is a single short phrase → use `Tooltip` instead.
 
 ## Install
 
@@ -14,31 +16,53 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/hover-card
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/hover-card.mdx`](../../content/docs/components/hover-card.mdx) |
-| Examples | [`registry/react/examples/hover-card/`](../../registry/react/examples/hover-card/) |
-| Source | [`registry/react/components/hover-card.tsx`](../../registry/react/components/hover-card.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/hover-card";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  HoverCard,
+  HoverCardArrow,
+  HoverCardContent,
+  HoverCardTrigger,
+  useHoverCard,
+} from "@/components/ui/hover-card"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<HoverCard>
+  <HoverCardTrigger asChild>
+    <Button variant="link">Hover here</Button>
+  </HoverCardTrigger>
+  <HoverCardContent>
+    <p className="text-sm">Preview content</p>
+  </HoverCardContent>
+</HoverCard>
+```
 
-## Pitfalls
+Import `Button` from `@/components/ui/button` when using `HoverCardTrigger asChild` with a button.
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+### Key patterns
 
-## See also
+Tune `openDelay` / `closeDelay`, `positioning`, and `lazyMount` on `HoverCard` root; optional `portalProps` on `HoverCardContent` map to Ark’s portal (`keepMounted`, `container`, …); keep hover card content non-interactive or move to `Popover`.
 
-- [Component registry](../component-registry.md)
+## Common pitfalls
+
+- Placing critical actions only inside hover content (keyboard/touch users may never open it reliably).
+- Omitting `asChild` on `HoverCardTrigger` when wrapping `Button` or links.
+- Expecting click-to-pin behavior—hover cards dismiss when pointer leaves.
+
+## Registry example files
+
+- [`example-controlled.tsx`](/registry/react/examples/hover-card/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/hover-card/example-default.tsx)
+- [`example-disabled.tsx`](/registry/react/examples/hover-card/example-disabled.tsx)
+- [`example-positioning.tsx`](/registry/react/examples/hover-card/example-positioning.tsx)
+- [`example-triggers-delays.tsx`](/registry/react/examples/hover-card/example-triggers-delays.tsx)

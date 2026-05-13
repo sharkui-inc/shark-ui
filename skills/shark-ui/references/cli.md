@@ -26,18 +26,10 @@ npx shadcn@latest add @shark/combobox
 npx shadcn@latest add @shark/sidebar
 ```
 
-Install the full component catalog in one step (meta item with `registryDependencies`):
+Install the full component catalog in one step:
 
 ```bash
 npx shadcn@latest add @shark/ui
-```
-
-### URL-based add (fallback)
-
-From manual installation docs:
-
-```bash
-pnpm dlx shadcn@latest add https://shark.vini.one/r/<component>.json
 ```
 
 ### Preview before writing (when supported)
@@ -62,7 +54,7 @@ Use preview mode when the user asks what will change, a component may already ex
 ## Discovery (public)
 
 - Site and docs base: `https://shark.vini.one` (see `config/site.ts`)
-- Registry JSON per item: `https://shark.vini.one/r/<component>.json`
+- Registry JSON per item: `@shark/<component>.json`
 
 ## Manual install path
 

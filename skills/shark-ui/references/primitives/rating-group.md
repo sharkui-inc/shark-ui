@@ -1,44 +1,58 @@
-# Shark Rating Group
+# Shark Rating
 
 ## When to use
 
-Use **rating-group** when Shark docs describe this primitive for the task.
+- Star (or custom icon) ratings for reviews, feedback, and testimonials.
+- Optional half-star precision and read-only display modes.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If the choice is a single option from a short list → use RadioGroup instead.
+- If you need numeric entry with exact decimals → use NumberInput instead.
 
 ## Install
 
 ```bash
-npx shadcn@latest add @shark/rating-group
+npx shadcn@latest add @shark/rating
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/rating.mdx`](../../content/docs/components/rating.mdx) |
-| Examples | [`registry/react/examples/rating/`](../../registry/react/examples/rating/) |
-| Source | [`registry/react/components/rating.tsx`](../../registry/react/components/rating.tsx) |
+```bash
+npm install @ark-ui/react lucide-react
+```
 
-## Imports (shark-ui repo)
+## Canonical imports
 
 ```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/rating";
+import { Rating, RatingItem } from "@/components/ui/rating"
 ```
-
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Rating />
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Controlled value with `value` / `onValueChange`; `allowHalf` for half steps; `count` for non-five scales; `readOnly` for display-only; custom `icon` node (defaults to `StarIcon`).
 
-## See also
+## Common pitfalls
 
-- [Component registry](../component-registry.md)
+- Treating the control as uncontrolled when the parent needs the score for submit—wire `value` explicitly.
+- Using `RatingItem` manually unless you are customizing the default control composition from examples.
+- Missing accessible labeling for the group when no visible text explains the scale.
+
+## Registry example files
+
+- [`example-controlled.tsx`](/registry/react/examples/rating/example-controlled.tsx)
+- [`example-count.tsx`](/registry/react/examples/rating/example-count.tsx)
+- [`example-custom-color.tsx`](/registry/react/examples/rating/example-custom-color.tsx)
+- [`example-custom-icon.tsx`](/registry/react/examples/rating/example-custom-icon.tsx)
+- [`example-custom-size.tsx`](/registry/react/examples/rating/example-custom-size.tsx)
+- [`example-default.tsx`](/registry/react/examples/rating/example-default.tsx)
+- [`example-disabled.tsx`](/registry/react/examples/rating/example-disabled.tsx)
+- [`example-half-star.tsx`](/registry/react/examples/rating/example-half-star.tsx)
+- [`example-readonly.tsx`](/registry/react/examples/rating/example-readonly.tsx)
+- [`example-testimonial.tsx`](/registry/react/examples/rating/example-testimonial.tsx)

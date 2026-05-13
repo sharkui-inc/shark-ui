@@ -1,7 +1,6 @@
 import { Badge } from "@registry/react/components/badge";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, SparklesIcon } from "lucide-react";
 import Link from "next/link";
-import { SharkIcon } from "@/components/icons/shark";
 import { cn } from "@/lib/utils";
 import {
   Announcement,
@@ -24,13 +23,12 @@ export const HeroSection = (props: HeroSectionProps) => {
       <div className="flex max-w-2xl flex-col gap-4">
         <div>
           <Announcement asChild className="bg-background">
-            <Link href="/docs/components">
-              <Badge variant="default">
-                <SharkIcon />
-                <span className="max-sm:sr-only">Welcome</span>
+            <Link href="/docs/skills">
+              <Badge>
+                <SparklesIcon />
               </Badge>
               <AnnouncementTitle>
-                Shark UI is a new component library.
+                New skills to help agents write better code.
               </AnnouncementTitle>
             </Link>
           </Announcement>

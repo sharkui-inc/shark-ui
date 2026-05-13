@@ -2,13 +2,14 @@
 
 ## When to use
 
-- Slide-over panels from screen edges (filters, detail panes, secondary navigation).
-- Responsive patterns where MDX suggests sheet instead of centered dialog on small viewports.
+- Side-panel overlays for settings, details, and workflows.
+- Persistent context panels opened from the main content area.
 
-## When not to use
+## When NOT to use
 
-- Centered modal emphasis → [`dialog.md`](./dialog.md).
-- Lightweight hover/focus popovers → [`popover.md`](./popover.md).
+- If the overlay should be centered and modal-like → use `Dialog` instead.
+- If the overlay is a mobile-first bottom panel → use `Drawer` instead.
+- If the flow is a destructive confirmation → use `AlertDialog` instead.
 
 ## Install
 
@@ -16,40 +17,76 @@
 npx shadcn@latest add @shark/sheet
 ```
 
-See [`content/docs/components/sheet.mdx`](../../content/docs/components/sheet.mdx) for dependencies (Ark Dialog primitives are reused for sheet behavior in Shark) and anatomy.
+Manual deps from docs:
 
-## Canonical imports (shark-ui repo)
+```bash
+npm install @ark-ui/react
+```
+
+## Canonical imports
 
 ```tsx
 import {
   Sheet,
-  SheetTrigger,
+  SheetBody,
+  SheetClose,
   SheetContent,
+  SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetDescription,
-  SheetBody,
-  SheetFooter,
-  SheetClose,
-} from "@/registry/react/components/sheet";
+  SheetTrigger,
+} from "@/components/ui/sheet";
 ```
 
-## Composition notes
+## Minimal pattern
 
-- Shark `Sheet` builds on the same Ark dialog family as `Dialog`—follow MDX for **trigger → content** structure.
-- `Portal` from `@ark-ui/react/portal` wraps portaled sheet content in the implementation—see [`../portal.md`](../portal.md).
-- Use **`asChild`** on triggers/closes with `Button`; dismiss actions typically **`variant="ghost"`** per styling rules.
+```tsx
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetBody,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
-## Registry examples
+<Sheet>
+  <SheetTrigger asChild>
+    <Button variant="outline">Open</Button>
+  </SheetTrigger>
+  <SheetContent>
+    <SheetHeader
+      description="Supporting copy for the sheet."
+      title="Sheet title"
+    />
+    <SheetBody>Content</SheetBody>
+    <SheetFooter>
+      <SheetClose asChild>
+        <Button variant="outline">Close</Button>
+      </SheetClose>
+    </SheetFooter>
+  </SheetContent>
+</Sheet>
+```
 
-Browse [`../../registry/react/examples/sheet/`](../../registry/react/examples/sheet/) for side, default open, and interaction patterns.
+### Key patterns
 
-## Pitfalls
+- **Portal forwarding**: optional `portalProps` on `SheetContent` → Ark `Dialog.Portal` (`keepMounted`, `container`, …).
+- **Forms**: keep the header outside the `<form>` when possible; wrap `SheetBody` + primary actions in a native `<form className="contents">` so layout sections stay direct children of `SheetContent`.
+- **Sides**: `SheetContent` accepts `side` (`top` | `right` | `bottom` | `left`) for placement.
 
-- Treating sheet as a generic div with manual transform—prefer Shark exports so focus trap and aria attributes stay correct.
-- Forgetting lazy mount / unmount defaults when mixing controlled `open` state—mirror examples when driving from menus or route changes.
+## Common pitfalls
 
-## Further reading
+- Using a sheet for lightweight hints → prefer `Tooltip` or `Popover`.
+- Omitting `SheetClose` or focus management on close.
+- Nesting extra wrappers that break `SheetHeader` / `SheetBody` / `SheetFooter` layout.
 
-- [`../../registry/react/components/sheet.tsx`](../../registry/react/components/sheet.tsx)
-- [`../../content/docs/components/sheet.mdx`](../../content/docs/components/sheet.mdx)
+## Registry example files
+
+- [`example-default.tsx`](/registry/react/examples/sheet/example-default.tsx)
+- [`example-custom-spacing.tsx`](/registry/react/examples/sheet/example-custom-spacing.tsx)
+- [`example-inset.tsx`](/registry/react/examples/sheet/example-inset.tsx)
+- [`example-non-modal.tsx`](/registry/react/examples/sheet/example-non-modal.tsx)

@@ -2,13 +2,14 @@
 
 ## When to use
 
-- Choosing one (or more, per MDX) options from a finite list with a closed trigger + listbox pattern.
-- When you want Ark collection semantics (`createListCollection`, `collection` prop) as implemented in Shark.
+- Single-choice selection from a predefined list.
+- Select-style triggers with popup options.
 
-## When not to use
+## When NOT to use
 
-- Free text with suggestions / typeahead → [`combobox.md`](./combobox.md) or **Autocomplete** docs.
-- Native platform picker without custom listbox → **Native Select** (`native-select` stub / docs).
+- If the user needs to type/filter options -> use Combobox instead.
+- If the list is very short (2-3 items) with visible options -> consider RadioGroup.
+- If the selection drives complex search/autocomplete -> use Autocomplete instead.
 
 ## Install
 
@@ -16,54 +17,86 @@
 npx shadcn@latest add @shark/select
 ```
 
-## Collection-first pattern
+Manual deps from docs:
 
-Shark examples commonly use **`createListCollection`** from `@ark-ui/react` and pass **`collection`** to `Select`:
-
-```tsx
-import { createListCollection } from "@ark-ui/react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/registry/react/components/select";
-
-const collection = createListCollection({
-  items: ["Banana", "Apple", "Orange"],
-});
-
-export function FruitSelect() {
-  return (
-    <Select collection={collection}>
-      <SelectTrigger className="w-48">
-        <SelectValue placeholder="Select a fruit" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup heading="Fruits">
-          {collection.items.map((item) => (
-            <SelectItem item={item} key={item}>
-              {item}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-  );
-}
+```bash
+npm install @ark-ui/react
 ```
 
-Source: [`../../registry/react/examples/select/example-default.tsx`](../../registry/react/examples/select/example-default.tsx).
+## Canonical imports
 
-## Pitfalls
+```tsx
+import {
+  Select,
+  SelectGroup,
+  SelectGroupLabel,
+  SelectItem,
+  SelectLabel,
+  SelectContent,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+```
 
-- Passing raw string children without `collection` / `SelectItem` `item` prop alignment—always mirror a working example.
-- Using Radix `SelectItem` `value`-only patterns without verifying Shark’s Ark item API.
+## Minimal pattern
 
-## Further reading
+```tsx
+const items = [
+  { label: "Next.js", value: "next" },
+  { label: "Vite", value: "vite" },
+]
 
-- [Ark UI Select](https://ark-ui.com/docs/components/select)
-- [`../../content/docs/components/select.mdx`](../../content/docs/components/select.mdx)
-- Additional examples under [`../../registry/react/examples/select/`](../../registry/react/examples/select/)
+<Select items={items}>
+  <SelectTrigger>
+    <SelectValue placeholder="Select framework" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectLabel>Frameworks</SelectLabel>
+    {items.map((item) => (
+      <SelectItem key={item.value} value={item}>
+        {item.label}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>
+```
+
+Prefer this `items`-first pattern for migration work to keep options known before hydration and avoid SSR mismatch edge cases.
+
+For form-bound selects, prefer wrapping with `Field` + `FieldLabel` + `FieldError` so value, label, and validation stay semantically linked.
+
+### Key patterns
+
+- **Portal forwarding**: optional `portalProps` on `SelectContent` → Ark UI `Select.Portal` (`keepMounted`, `container`, …).
+- **Trigger composition**: keep `SelectTrigger` as the interaction entry point; where you need a custom trigger element, use `asChild` on supported parts per the component MDX and examples.
+- **Multiple selection**: use `multiple` with array values (for example `defaultValue={["javascript", "typescript"]}`) and a custom `SelectValue` render function for compact summaries.
+- **Object values**: use full objects in `SelectItem value={item}` with `itemToStringValue` for stable form value serialization.
+- **Grouped options**: use `SelectGroup` + `SelectGroupLabel`; combine with `SelectSeparator` between groups when needed.
+- **Disabled options**: pass `disabled` on individual `SelectItem` rows (for unavailable choices).
+- **Rich row/trigger rendering**: render custom content (icons, avatars, secondary text) in both `SelectValue` and `SelectItem`; adjust row density via `className` where needed.
+- **Alignment tuning**: use `alignItemWithTrigger={false}` only when the default selected-item alignment causes layout issues.
+
+## Common pitfalls
+
+- Keeping children-only Radix select patterns without adding `items`.
+- Forgetting to render `SelectValue` inside `SelectTrigger`.
+- Placing placeholder on the wrong part; use `placeholder` on `SelectValue` when needed.
+- Using object item values without `itemToStringValue` when stable string value serialization is required.
+- Treating `multiple` select values as scalars instead of arrays.
+- Mixing select and combobox APIs without validating docs.
+
+## Registry example files
+
+- [`example-controlled.tsx`](/registry/react/examples/select/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/select/example-default.tsx)
+- [`example-disabled.tsx`](/registry/react/examples/select/example-disabled.tsx)
+- [`example-empty.tsx`](/registry/react/examples/select/example-empty.tsx)
+- [`example-grouping.tsx`](/registry/react/examples/select/example-grouping.tsx)
+- [`example-invalid.tsx`](/registry/react/examples/select/example-invalid.tsx)
+- [`example-max-selection.tsx`](/registry/react/examples/select/example-max-selection.tsx)
+- [`example-multiple.tsx`](/registry/react/examples/select/example-multiple.tsx)
+- [`example-size-lg.tsx`](/registry/react/examples/select/example-size-lg.tsx)
+- [`example-size-md.tsx`](/registry/react/examples/select/example-size-md.tsx)
+- [`example-size-sm.tsx`](/registry/react/examples/select/example-size-sm.tsx)
+- [`example-with-field.tsx`](/registry/react/examples/select/example-with-field.tsx)

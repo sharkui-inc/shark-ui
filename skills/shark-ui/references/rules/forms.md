@@ -1,42 +1,205 @@
-# Forms and inputs (Shark UI)
+# Forms & Inputs
 
-Use for field composition, validation UI, input groups, and form-heavy examples.
+## Contents
 
-## Core rules
+- Forms use FieldGroup + Field
+- InputGroup requires InputGroupInput/InputGroupTextarea
+- Buttons inside inputs use InputGroup + InputGroupAddon
+- Option sets (2–7 choices) use ToggleGroup
+- FieldSet + FieldLegend for grouping related fields
+- Field validation and disabled states
 
-- Prefer **`Field`**, **`FieldLabel`**, **`FieldDescription`**, **`FieldError`** (and related exports) from Shark’s field primitive instead of unlabeled bare inputs.
-- Set **`type`** on inputs (`text`, `email`, `number`, …) and on buttons (`button`, `submit`, `reset`) explicitly in forms.
-- Preserve accessible naming: associate labels with controls (`htmlFor` / `id`), or provide `aria-label` / `aria-labelledby` when there is no visible label.
-- Align invalid state: use `invalid` / `aria-invalid` patterns documented on `Field` and input MDX so error text and borders stay in sync.
+## Core Rules
 
-## Input group
+- Prefer composing existing primitives over custom wrappers with duplicated behavior.
+- For trigger-based primitives (Dialog, Menu, Select, Popover, Tooltip), follow each primitive's documented trigger/content hierarchy and composition API; do not mix patterns across components.
 
-- Follow **`InputGroup`** docs: respect DOM order for addons vs input so focus behavior matches the implementation in `registry/react/components/input-group.tsx`.
+---
 
-## OTP
+## Forms use FieldGroup + Field
 
-- Follow **`InputOTP`** / MDX for length, controlled values, and slot structure specific to Shark’s Ark-based OTP implementation.
-
-## Textarea
-
-- Use **`Textarea`** inside `Field` like other controls unless MDX shows a different composition for custom controls.
-
-## Further reading
-
-- Ark UI Field: [Field documentation](https://ark-ui.com/docs/components/field)
-- Shark `field` MDX: `content/docs/components/field.mdx`
-- Shark source: `registry/react/components/field.tsx`
-
-## Do / don’t
+Always use `FieldGroup` + `Field` — never raw `div` with `space-y-*`:
 
 ```tsx
-// Do
-<Field>
+<FieldGroup>
+  <Field>
+    <FieldLabel>Email</FieldLabel>
+    <Input type="email" />
+  </Field>
+  <Field>
+    <FieldLabel>Password</FieldLabel>
+    <Input type="password" />
+  </Field>
+</FieldGroup>
+```
+
+Use `Field orientation="horizontal"` for settings pages. Use `FieldLabel className="sr-only"` for visually hidden labels.
+
+Don't need to use htmlFor and id, Ark UI will handle this for you.
+
+**Choosing form controls:**
+
+- Simple text input → `Input`
+- Dropdown with predefined options → `Select`
+- Searchable dropdown → `Combobox`
+- Native HTML select (no JS) → `native-select`
+- Boolean toggle → `Switch` (for settings) or `Checkbox` (for forms)
+- Single choice from few options → `RadioGroup`
+- Toggle between 2–5 options → `ToggleGroup` + `ToggleGroupItem`
+- OTP/verification code → `InputOTP`
+- Multi-line text → `Textarea`
+
+---
+
+## InputGroup requires InputGroupInput/InputGroupTextarea
+
+Never use raw `Input` or `Textarea` inside an `InputGroup`.
+
+**Incorrect:**
+
+```tsx
+<InputGroup>
+  <Input placeholder="Search..." />
+</InputGroup>
+```
+
+**Correct:**
+
+```tsx
+import { InputGroup, InputGroupInput } from "@/components/ui/input-group"
+
+<InputGroup>
+  <InputGroupInput placeholder="Search..." />
+</InputGroup>
+```
+
+---
+
+## Buttons inside inputs use InputGroup + InputGroupAddon
+
+Never place a `Button` directly inside or adjacent to an `Input` with custom positioning.
+
+**Incorrect:**
+
+```tsx
+<div className="relative">
+  <Input placeholder="Search..." className="pr-10" />
+  <Button className="absolute right-0 top-0" size="icon">
+    <SearchIcon />
+  </Button>
+</div>
+```
+
+**Correct:**
+
+```tsx
+import { InputGroup, InputGroupInput, InputGroupAddon } from "@/components/ui/input-group"
+
+<InputGroup>
+  <InputGroupInput placeholder="Search..." />
+  <InputGroupAddon>
+    <Button size="icon">
+      <SearchIcon data-icon="inline-start" />
+    </Button>
+  </InputGroupAddon>
+</InputGroup>
+```
+
+---
+
+## Option sets (2–7 choices) use ToggleGroup
+
+Don't manually loop `Button` components with active state.
+
+**Incorrect:**
+
+```tsx
+const [selected, setSelected] = useState("daily")
+
+<div className="flex gap-2">
+  {["daily", "weekly", "monthly"].map((option) => (
+    <Button
+      key={option}
+      variant={selected === option ? "default" : "outline"}
+      onClick={() => setSelected(option)}
+    >
+      {option}
+    </Button>
+  ))}
+</div>
+```
+
+**Correct:**
+
+```tsx
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+
+<ToggleGroup spacing={2}>
+  <ToggleGroupItem value="daily">Daily</ToggleGroupItem>
+  <ToggleGroupItem value="weekly">Weekly</ToggleGroupItem>
+  <ToggleGroupItem value="monthly">Monthly</ToggleGroupItem>
+</ToggleGroup>
+```
+
+Combine with `Field` for labelled toggle groups:
+
+```tsx
+<Field orientation="horizontal">
+  <FieldTitle id="theme-label">Theme</FieldTitle>
+  <ToggleGroup aria-labelledby="theme-label" spacing={2}>
+    <ToggleGroupItem value="light">Light</ToggleGroupItem>
+    <ToggleGroupItem value="dark">Dark</ToggleGroupItem>
+    <ToggleGroupItem value="system">System</ToggleGroupItem>
+  </ToggleGroup>
+</Field>
+```
+
+> **Note:** `defaultValue` and `type`/`multiple` props differ between base and radix. See [base-vs-radix.md](./base-vs-radix.md#togglegroup).
+
+---
+
+## FieldSet + FieldLegend for grouping related fields
+
+Use `FieldSet` + `FieldLegend` for related checkboxes, radios, or switches — not `div` with a heading:
+
+```tsx
+<FieldSet>
+  <FieldLegend variant="label">Preferences</FieldLegend>
+  <FieldDescription>Select all that apply.</FieldDescription>
+  <FieldGroup className="gap-3">
+    <Field orientation="horizontal">
+      <Checkbox />
+      <FieldLabel className="font-normal">Dark mode</FieldLabel>
+    </Field>
+  </FieldGroup>
+</FieldSet>
+```
+
+---
+
+## Field validation and disabled states
+
+Use `invalid` and `disabled` just in the `Field` component, it will be passed to the control automatically.
+
+```tsx
+// Invalid.
+<Field invalid>
   <FieldLabel>Email</FieldLabel>
-  <Input type="email" />
-  <FieldError />
+  <Input  />
+  <FieldDescription>Invalid email address.</FieldDescription>
 </Field>
 
-// Don’t
-<input placeholder="Email" className="w-full" />
+// Disabled.
+<Field disabled>
+  <FieldLabel>Email</FieldLabel>
+  <Input  />
+</Field>
 ```
+
+Works for all controls: `Input`, `Textarea`, `Select`, `Checkbox`, `RadioGroupItem`, `Switch`, `Slider`, `NativeSelect`, `InputOTP`.
+
+## Anti-patterns
+
+- Building bespoke dropdown/dialog behavior instead of using primitives.
+- Mixing APIs from other ecosystems (radix-ui/base-ui) without checking ark-ui equivalents.
+- Omitting key subcomponents that preserve accessibility and layout conventions.

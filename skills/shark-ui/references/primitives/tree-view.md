@@ -2,11 +2,13 @@
 
 ## When to use
 
-Use **tree-view** when Shark docs describe this primitive for the task.
+- Hierarchical data: file trees, outlines, nested settings.
+- Selection and expansion state driven by an Ark tree collection.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If the list is flat and short → use `Listbox` or a simple stacked list.
+- If you need spreadsheet-style grid editing → use `Table` instead.
 
 ## Install
 
@@ -14,31 +16,73 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/tree-view
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/tree-view.mdx`](../../content/docs/components/tree-view.mdx) |
-| Examples | [`registry/react/examples/tree-view/`](../../registry/react/examples/tree-view/) |
-| Source | [`registry/react/components/tree-view.tsx`](../../registry/react/components/tree-view.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/tree-view";
+```bash
+npm install @ark-ui/react lucide-react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  createFileIcons,
+  createTreeCollection,
+  TreeView,
+  TreeViewBranch,
+  TreeViewBranchContent,
+  TreeViewBranchIndicator,
+  TreeViewBranchItem,
+  TreeViewCheckbox,
+  TreeViewContent,
+  TreeViewItem,
+  TreeViewLabel,
+  TreeViewNode,
+  TreeViewTree,
+  useTreeView,
+  type TreeCollection,
+  type TreeNodeType,
+} from "@/components/ui/tree-view"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+Build a `collection` with `createTreeCollection`, pass it to `TreeView`, render the root’s children with `TreeViewTree` + `TreeViewNode`, and branch with `TreeViewBranch` / `TreeViewBranchContent` vs leaf `TreeViewContent` + `TreeViewItem` (see `example-default.tsx`).
 
-## Pitfalls
+```tsx
+const collection = createTreeCollection({
+  rootNode: {
+    id: "ROOT",
+    name: "",
+    children: [{ id: "a", name: "Item A" }],
+  },
+})
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+<TreeView collection={collection}>
+  <TreeViewTree>{/* map root children to TreeViewNode */}</TreeViewTree>
+</TreeView>
+```
 
-## See also
+### Key patterns
 
-- [Component registry](../component-registry.md)
+Recursive `TreeViewNode` render prop pattern from examples; `TreeViewCheckbox` for multi-select trees; `createFileIcons` + `fileIcons` on `TreeView` for per-extension icons; context menus / rename flows in dedicated examples.
+
+## Common pitfalls
+
+- Passing a collection whose `id` values are not stable across renders.
+- Forgetting `indexPath` when recursing nodes (expansion/selection breaks).
+- Treating `TreeViewItem` as a branch container—branches must use `TreeViewBranch` + `TreeViewBranchContent`.
+
+## Registry example files
+
+- [`example-checkbox-tree.tsx`](/registry/react/examples/tree-view/example-checkbox-tree.tsx)
+- [`example-context-menu.tsx`](/registry/react/examples/tree-view/example-context-menu.tsx)
+- [`example-controlled.tsx`](/registry/react/examples/tree-view/example-controlled.tsx)
+- [`example-custom-icons-folder.tsx`](/registry/react/examples/tree-view/example-custom-icons-folder.tsx)
+- [`example-custom-icons-item.tsx`](/registry/react/examples/tree-view/example-custom-icons-item.tsx)
+- [`example-custom-icons.tsx`](/registry/react/examples/tree-view/example-custom-icons.tsx)
+- [`example-default.tsx`](/registry/react/examples/tree-view/example-default.tsx)
+- [`example-editor.tsx`](/registry/react/examples/tree-view/example-editor.tsx)
+- [`example-links.tsx`](/registry/react/examples/tree-view/example-links.tsx)
+- [`example-multiple-selection.tsx`](/registry/react/examples/tree-view/example-multiple-selection.tsx)
+- [`example-rename.tsx`](/registry/react/examples/tree-view/example-rename.tsx)

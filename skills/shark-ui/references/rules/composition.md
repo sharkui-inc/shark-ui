@@ -1,64 +1,181 @@
-# Composition rules (Shark UI / Ark)
+# Component Composition
 
-Shark wraps **Ark UI** primitives. Composition follows **React component trees** and Ark’s **`asChild`** prop where a part supports merging props onto a single child (e.g. wrapping a `Button` in `DialogTrigger`). Check MDX or source for which parts expose `asChild`; not every part does. If you are converting **`render={...}`** triggers from another kit, read the section **From `render={...}` to `asChild`** in [`migration.md`](./migration.md) (same folder: `rules/`).
+## Contents
 
-## Core rules
+- Items always inside their Group component
+- Empty states use Empty component
+- Choosing between overlay components
+- Dialog, Sheet, and Drawer always need a Title
+- Card structure
+- Button has no isPending or isLoading prop
+- TabsTrigger must be inside TabsList
+- Avatar always needs AvatarFallback
+- Use Separator instead of raw hr or border divs
+- Use Skeleton for loading placeholders
+- Use Badge instead of custom styled spans
+- You are not using shadcn/radix, you are using ark-ui
 
-- Prefer composing Shark exports over reimplementing Ark behavior.
-- For overlays and floating surfaces (**Dialog**, **Sheet**, **Menu**, **Popover**, **Combobox**, **Select**, **HoverCard**, …), follow the **anatomy sections** in MDX: trigger → content hierarchy, required sections, and optional slots.
-- Use Ark **`asChild`** only where the Shark or Ark part documents it (e.g. some triggers / items). Do not assume `asChild` exists on every part—verify in MDX or `registry/react/components/<name>.tsx`.
-- Preserve title/description patterns for dialogs and sheets when they carry semantics for screen readers.
+---
 
-## Example: dialog (Shark)
+## Items always inside their Group component
 
-Consumer-style imports (after CLI):
+Never render items directly inside the content container.
+
+**Incorrect:**
 
 ```tsx
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogBody,
-  DialogFooter,
-  DialogClose,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-
-export function Example() {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline" type="button">
-          Open
-        </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader title="Title" description="Short description" />
-        <DialogBody>Body content</DialogBody>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="ghost" type="button">
-              Close
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-}
+<SelectContent>
+  <SelectItem value="apple">Apple</SelectItem>
+  <SelectItem value="banana">Banana</SelectItem>
+</SelectContent>
 ```
 
-Inside the **shark-ui** repo, swap imports to `@/registry/react/components/...` and read `registry/react/examples/dialog/` for full patterns (nested dialogs, scroll area, menus opening dialogs, etc.).
+**Correct:**
 
-## Portals
+```tsx
+<SelectContent>
+  <SelectGroup>
+    <SelectItem value="apple">Apple</SelectItem>
+    <SelectItem value="banana">Banana</SelectItem>
+  </SelectGroup>
+</SelectContent>
+```
 
-Floating layers use Ark `Portal` internally. See [`../portal.md`](../portal.md).
+This applies to all group-based components:
 
-## Anti-patterns
+| Item | Group |
+|------|-------|
+| `SelectItem`, `SelectLabel` | `SelectGroup` |
+| `MenuItem`, `MenuLabel`, `MenuSub` | `MenuGroup` |
+| `MenubarItem` | `MenubarGroup` |
+| `ContextMenuItem` | `ContextMenuGroup` |
+| `CommandItem` | `CommandGroup` |
 
-- Putting raw interactive elements where a trigger part expects **`asChild`** with a single child—follow Shark examples so focus and semantics stay correct.
-- Mixing Radix-only part names (`MenuContent`, …) with Shark exports.
-- Omitting required sections (`DialogHeader` patterns, menu content wrappers) documented in MDX.
+---
+
+## Toast notifications
+
+```tsx
+import { toast } from "@/components/ui/toast"
+
+toast.success({
+  title: "Changes saved.",
+})
+toast.error({
+  title: "Something went wrong.",
+})
+toast.info({
+  title: "File deleted.",
+  action: { label: "Undo", onClick: () => undoDelete() },
+})
+```
+
+---
+
+## Choosing between overlay components
+
+| Use case | Component |
+|----------|-----------|
+| Focused task that requires input | `Dialog` |
+| Destructive action confirmation | `AlertDialog` |
+| Side panel with details or filters | `Sheet` |
+| Mobile-first bottom panel | `Drawer` |
+| Quick info on hover | `HoverCard` |
+| Small contextual content on click | `Popover` |
+
+---
+
+## Dialog, Sheet, and Drawer always need a Title
+
+`DialogTitle`, `SheetTitle`, `DrawerTitle` are required for accessibility. Use `className="sr-only"` if visually hidden.
+
+```tsx
+<DialogContent>
+  <DialogHeader>
+    <DialogTitle>Edit Profile</DialogTitle>
+    <DialogDescription>Update your profile.</DialogDescription>
+  </DialogHeader>
+  ...
+</DialogContent>
+```
+
+You can use a shorthand version of the DialogHeader component:
+
+```tsx
+<DialogHeader title="Edit Profile" description="Update your profile." />
+```
+
+---
+
+## Card structure
+
+Use full composition — don't dump everything into `CardContent`:
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Team Members</CardTitle>
+    <CardDescription>Manage your team.</CardDescription>
+  </CardHeader>
+  <CardContent>...</CardContent>
+  <CardFooter>
+    <Button>Invite</Button>
+  </CardFooter>
+</Card>
+```
+
+You can use a shorthand version of the CardHeader component:
+
+```tsx
+<CardHeader title="Team Members" description="Manage your team." />
+```
+
+---
+
+## Button has isLoading prop
+
+```tsx
+<Button isLoading>
+  Submit
+</Button>
+```
+
+---
+
+## TabsTrigger must be inside TabsList
+
+Never render `TabsTrigger` directly inside `Tabs` — always wrap in `TabsList`:
+
+```tsx
+<Tabs defaultValue="account">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">...</TabsContent>
+</Tabs>
+```
+
+---
+
+## Avatar always needs AvatarFallback
+
+Always include `AvatarFallback` for when the image fails to load:
+
+```tsx
+<Avatar>
+  <AvatarImage src="/avatar.png" alt="User" />
+  <AvatarFallback>VV</AvatarFallback>
+</Avatar>
+```
+
+---
+
+## Use existing components instead of custom markup
+
+| Instead of | Use |
+|---|---|
+| `<hr>` or `<div className="border-t">` | `<Separator />` |
+| `<div className="animate-pulse">` with styled divs | `<Skeleton className="h-4 w-3/4" />` |
+| `<span className="rounded-full bg-green-100 ...">` | `<Badge variant="secondary">` |
+| `<div className="text-[#000000]">` | `<div className="text-black" />` |

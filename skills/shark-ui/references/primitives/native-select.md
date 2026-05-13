@@ -2,11 +2,13 @@
 
 ## When to use
 
-Use **native-select** when Shark docs describe this primitive for the task.
+- Native `<select>` UX with Shark styling (chevron, sizes, invalid state).
+- Forms where you want browser-native option rendering and accessibility without a custom listbox.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If the user must type to filter a long list → use Combobox or Autocomplete instead.
+- If you need rich row content, virtualization, or multi-select in a popup → use Select or Listbox patterns instead.
 
 ## Install
 
@@ -14,31 +16,52 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/native-select
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/native-select.mdx`](../../content/docs/components/native-select.mdx) |
-| Examples | [`registry/react/examples/native-select/`](../../registry/react/examples/native-select/) |
-| Source | [`registry/react/components/native-select.tsx`](../../registry/react/components/native-select.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/native-select";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  NativeSelect,
+  NativeSelectOption,
+  NativeSelectOptGroup,
+} from "@/components/ui/native-select"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<NativeSelect className="w-full max-w-40">
+  <NativeSelectOption value="">Select an option</NativeSelectOption>
+  <NativeSelectOption value="a">Option A</NativeSelectOption>
+  <NativeSelectOption value="b">Option B</NativeSelectOption>
+</NativeSelect>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Grouped options with `NativeSelectOptGroup` and a `label` prop; pair with `Field` + `FieldLabel` + `FieldError` for forms (see `example-with-field`).
 
-## See also
+Sizes `sm` | `md` | `lg` via `size` on `NativeSelect`; set `invalid` when validation fails.
 
-- [Component registry](../component-registry.md)
+## Common pitfalls
+
+- Expecting the same collection-driven API as Shark `Select`—native select uses real `<option>` children.
+- Omitting an empty-value option when you need an explicit “placeholder” row.
+- Skipping `name` / controlled `value` wiring on the underlying select when used inside forms.
+
+## Registry example files
+
+- [`example-controlled.tsx`](/registry/react/examples/native-select/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/native-select/example-default.tsx)
+- [`example-disabled.tsx`](/registry/react/examples/native-select/example-disabled.tsx)
+- [`example-groups.tsx`](/registry/react/examples/native-select/example-groups.tsx)
+- [`example-invalid.tsx`](/registry/react/examples/native-select/example-invalid.tsx)
+- [`example-size-lg.tsx`](/registry/react/examples/native-select/example-size-lg.tsx)
+- [`example-size-md.tsx`](/registry/react/examples/native-select/example-size-md.tsx)
+- [`example-size-sm.tsx`](/registry/react/examples/native-select/example-size-sm.tsx)
+- [`example-with-field.tsx`](/registry/react/examples/native-select/example-with-field.tsx)

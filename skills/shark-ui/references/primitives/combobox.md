@@ -2,13 +2,14 @@
 
 ## When to use
 
-- Filterable lists tied to an input (typeahead, search-as-you-type).
-- When Ark **`useListCollection`** + **`useFilter`** match the interaction model.
+- Searchable selection combining text input and list selection.
+- Rich option rows with filtering and custom trigger behavior.
 
-## When not to use
+## When NOT to use
 
-- Simple static pickers without filtering → often **Select** is simpler ([`select.md`](./select.md)).
-- Native `<select>` → **Native Select**.
+- If options are few and fixed (no search needed) -> use Select instead.
+- If you need free-form text suggestions without strict selection -> use Autocomplete instead.
+- If the user picks from a simple short list -> use RadioGroup or Select.
 
 ## Install
 
@@ -16,37 +17,136 @@
 npx shadcn@latest add @shark/combobox
 ```
 
-## Critical collection + filter pattern
+Manual deps from docs:
 
-From repository conventions (`AGENTS.md`) and examples such as [`../../registry/react/examples/combobox/example-controlled.tsx`](../../registry/react/examples/combobox/example-controlled.tsx):
+```bash
+npm install @ark-ui/react
+```
+
+## Canonical imports
+
+Typical usage pulls Ark collection helpers plus combobox primitives from the registry:
 
 ```tsx
-"use client";
-
-import { useFilter, useListCollection } from "@ark-ui/react";
+import { useFilter, useListCollection } from "@ark-ui/react"
 import {
   Combobox,
+  ComboboxClear,
   ComboboxContent,
+  ComboboxControl,
+  ComboboxEmpty,
+  ComboboxGroup,
+  ComboboxGroupLabel,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
-} from "@/registry/react/components/combobox";
+  ComboboxPositioner,
+  ComboboxTrigger,
+  ComboboxContext,
+} from "@/components/ui/combobox"
+```
 
-const { contains } = useFilter({ sensitivity: "base" });
+`comboboxItemVariants` is also exported for advanced item styling.
+
+## Minimal pattern
+
+```tsx
+const initialItems = [
+  { label: "Apple", value: "apple" },
+  { label: "Banana", value: "banana" },
+  { label: "Cherry", value: "cherry" },
+  { label: "Date", value: "date" },
+]
+
+function Example() {
+  const { contains } = useFilter({ sensitivity: "base" })
+  const { collection, filter } = useListCollection({
+    initialItems,
+    filter: contains,
+  })
+
+  return (
+    <Combobox
+      className="max-w-xs"
+      collection={collection}
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
+    >
+      <ComboboxInput placeholder="Select an option" />
+      <ComboboxContent>
+        <ComboboxList>
+          {collection.items.map((item) => (
+            <ComboboxItem item={item} key={item.value}>
+              {item.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  )
+}
+```
+
+For form-bound comboboxes, prefer `Field` composition (`Field` + `FieldLabel` + `FieldError`) instead of standalone controls.
+
+### Key patterns
+
+With Field:
+
+```tsx
+import { Field, FieldLabel, FieldHelper, FieldError } from "@/components/ui/field";
+
+<Field className="w-64">
+  <FieldLabel>Country</FieldLabel>
+  <Combobox
+    collection={collection}
+    onInputValueChange={({ inputValue }) => filter(inputValue)}
+    required
+  >
+    <ComboboxInput placeholder="Select a country..." />
+    <ComboboxContent>
+      <ComboboxList>
+        {collection.items.map((item) => (
+          <ComboboxItem item={item} key={item.value}>
+            {item.label}
+          </ComboboxItem>
+        ))}
+      </ComboboxList>
+    </ComboboxContent>
+  </Combobox>
+  <FieldHelper>We'll use this for shipping estimates</FieldHelper>
+  <FieldError>Please select a valid country</FieldError>
+</Field>
+```
+
+Grouped items:
+
+```tsx
 const { collection, filter } = useListCollection({
-  initialItems: [
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
-  ],
   filter: contains,
-});
+  groupBy: (item) => item.continent,
+  initialItems,
+})
 
-<Combobox
-  className="w-full"
-  collection={collection}
-  onInputValueChange={({ inputValue }) => filter(inputValue)}
->
-  <ComboboxInput placeholder="Select a fruit..." />
+// …
+
+<ComboboxList>
+  {collection.group().map(([heading, group]) => (
+    <ComboboxGroup heading={heading} key={heading}>
+      {group.map((item) => (
+        <ComboboxItem item={item} key={item.value}>
+          {item.label}
+        </ComboboxItem>
+      ))}
+    </ComboboxGroup>
+  ))}
+</ComboboxList>
+```
+
+Multiple selection:
+
+```tsx
+<Combobox multiple>
+  <ComboboxInput placeholder="Select items..." />
   <ComboboxContent>
     <ComboboxList>
       {collection.items.map((item) => (
@@ -56,30 +156,61 @@ const { collection, filter } = useListCollection({
       ))}
     </ComboboxList>
   </ComboboxContent>
-</Combobox>;
+</Combobox>
 ```
 
-Key points:
+Clear button:
 
-- Pass **`collection`**, not a bespoke `items` prop unless MDX shows otherwise.
-- Call **`filter(inputValue)`** inside **`onInputValueChange`**.
-- Render **`collection.items.map(...)`** inside `ComboboxList`.
+```tsx
+//...
+<ComboboxInput showClear />
+//...
+```
 
-## Optional `ComboboxControl` / input group
+Trigger button:
 
-`ComboboxInput` supports addons and clear/trigger UI—see `combobox.tsx` and larger examples under [`../../registry/react/examples/combobox/`](../../registry/react/examples/combobox/).
+```tsx
+//...
+<ComboboxInput showTrigger />
+//...
+```
 
-## Portal
+With start icon:
 
-`ComboboxContent` uses `Portal` from `@ark-ui/react/portal`—see [`../portal.md`](../portal.md).
+```tsx
+import { SearchIcon } from "lucide-react";
+import { InputGroupAddon } from "@/components/ui/input-group";
 
-## Pitfalls
+//...
+ <ComboboxInput placeholder="Search...">
+  <InputGroupAddon align="inline-start">
+    <SearchIcon />
+  </InputGroupAddon>
+</ComboboxInput>
+//...
+```
 
-- Static children only (no collection) while trying to get filtering behavior.
-- Forgetting `item` prop on `ComboboxItem` when using collection objects.
+## Common pitfalls
 
-## Further reading
+- Passing `items` or a render-prop on `ComboboxList`; Shark combobox expects a `collection` from `useListCollection` and `collection.items.map` (or `collection.group()` for groups).
+- Using `value={item}` on `ComboboxItem`; use `item={item}` with the collection model.
+- Mixing Select and Combobox wiring without checking Ark combobox props in source or MDX.
+- Missing empty or loading feedback for remote or slow filters.
+- Omitting `onInputValueChange` → `filter` so the typed query never updates the list.
 
-- [Ark UI Combobox](https://ark-ui.com/docs/components/combobox)
-- [`../../registry/react/components/combobox.tsx`](../../registry/react/components/combobox.tsx)
-- [`../../content/docs/components/combobox.mdx`](../../content/docs/components/combobox.mdx)
+## Registry example files
+
+- [`example-autohighlight.tsx`](/registry/react/examples/combobox/example-autohighlight.tsx)
+- [`example-controlled.tsx`](/registry/react/examples/combobox/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/combobox/example-default.tsx)
+- [`example-disabled.tsx`](/registry/react/examples/combobox/example-disabled.tsx)
+- [`example-group.tsx`](/registry/react/examples/combobox/example-group.tsx)
+- [`example-invalid.tsx`](/registry/react/examples/combobox/example-invalid.tsx)
+- [`example-multiple.tsx`](/registry/react/examples/combobox/example-multiple.tsx)
+- [`example-size-lg.tsx`](/registry/react/examples/combobox/example-size-lg.tsx)
+- [`example-size-md.tsx`](/registry/react/examples/combobox/example-size-md.tsx)
+- [`example-size-sm.tsx`](/registry/react/examples/combobox/example-size-sm.tsx)
+- [`example-with-clear-button.tsx`](/registry/react/examples/combobox/example-with-clear-button.tsx)
+- [`example-with-field.tsx`](/registry/react/examples/combobox/example-with-field.tsx)
+- [`example-with-scroll.tsx`](/registry/react/examples/combobox/example-with-scroll.tsx)
+- [`example-with-start-icon.tsx`](/registry/react/examples/combobox/example-with-start-icon.tsx)

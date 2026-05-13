@@ -1,19 +1,19 @@
 import {
-  InputOtp,
-  InputOtpSeparator,
-  InputOtpSlot,
+  InputOTP,
+  InputOTPSeparator,
+  InputOTPSlot,
 } from "@/registry/react/components/input-otp";
 
 const Example = () => (
-  <InputOtp>
-    <InputOtpSlot index={0} />
-    <InputOtpSlot index={1} />
-    <InputOtpSlot index={2} />
-    <InputOtpSeparator />
-    <InputOtpSlot index={3} />
-    <InputOtpSlot index={4} />
-    <InputOtpSlot index={5} />
-  </InputOtp>
+  <InputOTP>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+    <InputOTPSeparator />
+    <InputOTPSlot index={3} />
+    <InputOTPSlot index={4} />
+    <InputOTPSlot index={5} />
+  </InputOTP>
 );
 
 export default Example;

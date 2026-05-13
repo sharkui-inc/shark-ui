@@ -3,7 +3,9 @@
 import { Field } from "@/registry/react/components/field";
 import {
   NumberField,
+  NumberFieldDecrement,
   NumberFieldGroup,
+  NumberFieldIncrement,
   NumberFieldInput,
   NumberFieldScrubber,
 } from "@/registry/react/components/number-input";
@@ -13,7 +15,9 @@ const Example = () => (
     <NumberField defaultValue="50" max={100} min={1}>
       <NumberFieldScrubber>Quantity</NumberFieldScrubber>
       <NumberFieldGroup>
+        <NumberFieldDecrement />
         <NumberFieldInput />
+        <NumberFieldIncrement />
       </NumberFieldGroup>
     </NumberField>
   </Field>

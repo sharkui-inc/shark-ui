@@ -2,11 +2,8 @@
 
 ## When to use
 
-Use **slider** when Shark docs describe this primitive for the task.
-
-## When not to use
-
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- Continuous or ranged numeric tuning interactions.
+- Volume/brightness/threshold controls with immediate feedback.
 
 ## Install
 
@@ -14,31 +11,59 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/slider
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/slider.mdx`](../../content/docs/components/slider.mdx) |
-| Examples | [`registry/react/examples/slider/`](../../registry/react/examples/slider/) |
-| Source | [`registry/react/components/slider.tsx`](../../registry/react/components/slider.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/slider";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import { Slider, SliderValue } from "@/components/ui/slider"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Slider aria-label="Volume" defaultValue={40} max={100} min={0} />
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Slider with label and live value display:
 
-## See also
+```tsx
+<div className="flex flex-col gap-2">
+  <div className="flex justify-between text-sm">
+    <Label>Volume</Label>
+    <SliderValue />
+  </div>
+  <Slider aria-label="Volume" defaultValue={50} min={0} max={100} />
+</div>
+```
 
-- [Component registry](../component-registry.md)
+Range slider (two thumbs):
+
+```tsx
+<Slider aria-label="Price range" defaultValue={[20, 80]} min={0} max={100} />
+```
+
+
+## Common pitfalls
+
+- Using slider for discrete option labels where select/radio is clearer.
+- Not exposing current value context in nearby UI text when needed.
+- Confusing single-value vs range value shapes in controlled mode.
+
+## Registry example files
+
+- [`example-controlled.tsx`](/registry/react/examples/slider/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/slider/example-default.tsx)
+- [`example-disabled.tsx`](/registry/react/examples/slider/example-disabled.tsx)
+- [`example-marks.tsx`](/registry/react/examples/slider/example-marks.tsx)
+- [`example-min-max.tsx`](/registry/react/examples/slider/example-min-max.tsx)
+- [`example-range.tsx`](/registry/react/examples/slider/example-range.tsx)
+- [`example-step.tsx`](/registry/react/examples/slider/example-step.tsx)
+- [`example-vertical.tsx`](/registry/react/examples/slider/example-vertical.tsx)
+- [`example-with-label.tsx`](/registry/react/examples/slider/example-with-label.tsx)

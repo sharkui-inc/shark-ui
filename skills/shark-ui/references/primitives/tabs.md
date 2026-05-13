@@ -2,11 +2,8 @@
 
 ## When to use
 
-Use **tabs** when Shark docs describe this primitive for the task.
-
-## When not to use
-
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- Mutually exclusive content panels in one region.
+- Settings/detail screens split into scoped views.
 
 ## Install
 
@@ -14,31 +11,76 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/tabs
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/tabs.mdx`](../../content/docs/components/tabs.mdx) |
-| Examples | [`registry/react/examples/tabs/`](../../registry/react/examples/tabs/) |
-| Source | [`registry/react/components/tabs.tsx`](../../registry/react/components/tabs.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/tabs";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Tabs defaultValue="tab-1">
+  <TabsList>
+    <TabsTab value="tab-1">Tab 1</TabsTab>
+    <TabsTab value="tab-2">Tab 2</TabsTab>
+    <TabsTab value="tab-3">Tab 3</TabsTab>
+  </TabsList>
+  <TabsPanel value="tab-1">Tab 1 content</TabsPanel>
+  <TabsPanel value="tab-2">Tab 2 content</TabsPanel>
+  <TabsPanel value="tab-3">Tab 3 content</TabsPanel>
+</Tabs>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Controlled tabs with external state:
 
-## See also
+```tsx
+const [value, setValue] = useState("tab-1")
 
-- [Component registry](../component-registry.md)
+<Tabs value={value} onValueChange={setValue}>
+  <TabsList>
+    <TabsTab value="tab-1">Tab 1</TabsTab>
+    <TabsTab value="tab-2">Tab 2</TabsTab>
+  </TabsList>
+  <TabsPanel value="tab-1">Content 1</TabsPanel>
+  <TabsPanel value="tab-2">Content 2</TabsPanel>
+</Tabs>
+```
+
+Underline variant:
+
+```tsx
+<Tabs defaultValue="tab-1" variant="underline">
+  <TabsList>
+    <TabsTab value="tab-1">Tab 1</TabsTab>
+    <TabsTab value="tab-2">Tab 2</TabsTab>
+  </TabsList>
+  ...
+</Tabs>
+```
+
+## Common pitfalls
+
+- Mismatching `TabsTab value` and `TabsPanel value` pairs.
+- Using tabs for workflows that require route-level navigation instead.
+- Mounting expensive panel content without considering visibility/performance.
+
+## Registry example files
+
+- [`example-controlled.tsx`](/registry/react/examples/tabs/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/tabs/example-default.tsx)
+- [`example-disabled.tsx`](/registry/react/examples/tabs/example-disabled.tsx)
+- [`example-orientation-horizontal.tsx`](/registry/react/examples/tabs/example-orientation-horizontal.tsx)
+- [`example-orientation-vertical.tsx`](/registry/react/examples/tabs/example-orientation-vertical.tsx)
+- [`example-variant-default.tsx`](/registry/react/examples/tabs/example-variant-default.tsx)
+- [`example-variant-underline-orientation-vertical.tsx`](/registry/react/examples/tabs/example-variant-underline-orientation-vertical.tsx)
+- [`example-variant-underline.tsx`](/registry/react/examples/tabs/example-variant-underline.tsx)
+- [`example-with-icons.tsx`](/registry/react/examples/tabs/example-with-icons.tsx)

@@ -19,14 +19,10 @@ const Example = () => (
         Choose how you want to receive updates about new features and product
         releases.
       </FieldDescription>
-      <CheckboxGroup className="gap-3" defaultValue={["weekly"]}>
-        <Field className="w-full max-w-xs" orientation="horizontal">
-          <Checkbox disabled id="weekly" value="weekly" />
-          <FieldLabel className="font-normal" htmlFor="weekly">
-            Weekly digest
-          </FieldLabel>
-        </Field>
-      </CheckboxGroup>
+      <Field className="w-full max-w-xs" orientation="horizontal">
+        <Checkbox defaultChecked disabled value="weekly" />
+        <FieldLabel>Weekly digest</FieldLabel>
+      </Field>
     </FieldSet>
     <FieldSeparator />
     <FieldSet>
@@ -35,18 +31,14 @@ const Example = () => (
         Get notified about important account activity.{" "}
         <a href="#">View activity log</a>
       </FieldDescription>
-      <CheckboxGroup className="gap-3">
+      <CheckboxGroup>
         <Field className="w-full max-w-xs" orientation="horizontal">
-          <Checkbox id="security" value="security" />
-          <FieldLabel className="font-normal" htmlFor="security">
-            Security alerts
-          </FieldLabel>
+          <Checkbox value="security" />
+          <FieldLabel>Security alerts</FieldLabel>
         </Field>
         <Field className="w-full max-w-xs" orientation="horizontal">
-          <Checkbox id="billing" value="billing" />
-          <FieldLabel className="font-normal" htmlFor="billing">
-            Billing reminders
-          </FieldLabel>
+          <Checkbox value="billing" />
+          <FieldLabel>Billing reminders</FieldLabel>
         </Field>
       </CheckboxGroup>
     </FieldSet>

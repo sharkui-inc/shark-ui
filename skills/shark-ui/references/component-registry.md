@@ -1,56 +1,109 @@
-# Shark UI component registry
+# shark-ui Component Registry Index
 
-Authoritative component names from [`registry.json`](../../registry.json). Each row links the primitive reference, docs, examples, and implementation.
+Use this file to quickly identify the right shark-ui primitive for a UI task. Each entry includes the component name, a one-line purpose, and the path to its reference guide (relative to the skill root `skills/shark-ui/`).
 
-| Component | Primitive guide | Docs | Examples | Source |
-|-----------|-----------------|------|----------|--------|
-| accordion | [./primitives/accordion.md](./primitives/accordion.md) | [`content/docs/components/accordion.mdx`](../../content/docs/components/accordion.mdx) | [`registry/react/examples/accordion/`](../../registry/react/examples/accordion/) | [`registry/react/components/accordion.tsx`](../../registry/react/components/accordion.tsx) |
-| alert | [./primitives/alert.md](./primitives/alert.md) | [`content/docs/components/alert.mdx`](../../content/docs/components/alert.mdx) | [`registry/react/examples/alert/`](../../registry/react/examples/alert/) | [`registry/react/components/alert.tsx`](../../registry/react/components/alert.tsx) |
-| avatar | [./primitives/avatar.md](./primitives/avatar.md) | [`content/docs/components/avatar.mdx`](../../content/docs/components/avatar.mdx) | [`registry/react/examples/avatar/`](../../registry/react/examples/avatar/) | [`registry/react/components/avatar.tsx`](../../registry/react/components/avatar.tsx) |
-| badge | [./primitives/badge.md](./primitives/badge.md) | [`content/docs/components/badge.mdx`](../../content/docs/components/badge.mdx) | [`registry/react/examples/badge/`](../../registry/react/examples/badge/) | [`registry/react/components/badge.tsx`](../../registry/react/components/badge.tsx) |
-| button | [./primitives/button.md](./primitives/button.md) | [`content/docs/components/button.mdx`](../../content/docs/components/button.mdx) | [`registry/react/examples/button/`](../../registry/react/examples/button/) | [`registry/react/components/button.tsx`](../../registry/react/components/button.tsx) |
-| card | [./primitives/card.md](./primitives/card.md) | [`content/docs/components/card.mdx`](../../content/docs/components/card.mdx) | [`registry/react/examples/card/`](../../registry/react/examples/card/) | [`registry/react/components/card.tsx`](../../registry/react/components/card.tsx) |
-| carousel | [./primitives/carousel.md](./primitives/carousel.md) | [`content/docs/components/carousel.mdx`](../../content/docs/components/carousel.mdx) | [`registry/react/examples/carousel/`](../../registry/react/examples/carousel/) | [`registry/react/components/carousel.tsx`](../../registry/react/components/carousel.tsx) |
-| checkbox | [./primitives/checkbox.md](./primitives/checkbox.md) | [`content/docs/components/checkbox.mdx`](../../content/docs/components/checkbox.mdx) | [`registry/react/examples/checkbox/`](../../registry/react/examples/checkbox/) | [`registry/react/components/checkbox.tsx`](../../registry/react/components/checkbox.tsx) |
-| clipboard | [./primitives/clipboard.md](./primitives/clipboard.md) | [`content/docs/components/clipboard.mdx`](../../content/docs/components/clipboard.mdx) | [`registry/react/examples/clipboard/`](../../registry/react/examples/clipboard/) | [`registry/react/components/clipboard.tsx`](../../registry/react/components/clipboard.tsx) |
-| collapsible | [./primitives/collapsible.md](./primitives/collapsible.md) | [`content/docs/components/collapsible.mdx`](../../content/docs/components/collapsible.mdx) | [`registry/react/examples/collapsible/`](../../registry/react/examples/collapsible/) | [`registry/react/components/collapsible.tsx`](../../registry/react/components/collapsible.tsx) |
-| combobox | [./primitives/combobox.md](./primitives/combobox.md) | [`content/docs/components/combobox.mdx`](../../content/docs/components/combobox.mdx) | [`registry/react/examples/combobox/`](../../registry/react/examples/combobox/) | [`registry/react/components/combobox.tsx`](../../registry/react/components/combobox.tsx) |
-| context-menu | [./primitives/context-menu.md](./primitives/context-menu.md) | [`content/docs/components/context-menu.mdx`](../../content/docs/components/context-menu.mdx) | [`registry/react/examples/context-menu/`](../../registry/react/examples/context-menu/) | [`registry/react/components/context-menu.tsx`](../../registry/react/components/context-menu.tsx) |
-| dialog | [./primitives/dialog.md](./primitives/dialog.md) | [`content/docs/components/dialog.mdx`](../../content/docs/components/dialog.mdx) | [`registry/react/examples/dialog/`](../../registry/react/examples/dialog/) | [`registry/react/components/dialog.tsx`](../../registry/react/components/dialog.tsx) |
-| editable | [./primitives/editable.md](./primitives/editable.md) | [`content/docs/components/editable.mdx`](../../content/docs/components/editable.mdx) | [`registry/react/examples/editable/`](../../registry/react/examples/editable/) | [`registry/react/components/editable.tsx`](../../registry/react/components/editable.tsx) |
-| field | [./primitives/field.md](./primitives/field.md) | [`content/docs/components/field.mdx`](../../content/docs/components/field.mdx) | [`registry/react/examples/field/`](../../registry/react/examples/field/) | [`registry/react/components/field.tsx`](../../registry/react/components/field.tsx) |
-| file-upload | [./primitives/file-upload.md](./primitives/file-upload.md) | [`content/docs/components/file-upload.mdx`](../../content/docs/components/file-upload.mdx) | [`registry/react/examples/file-upload/`](../../registry/react/examples/file-upload/) | [`registry/react/components/file-upload.tsx`](../../registry/react/components/file-upload.tsx) |
-| hover-card | [./primitives/hover-card.md](./primitives/hover-card.md) | [`content/docs/components/hover-card.mdx`](../../content/docs/components/hover-card.mdx) | [`registry/react/examples/hover-card/`](../../registry/react/examples/hover-card/) | [`registry/react/components/hover-card.tsx`](../../registry/react/components/hover-card.tsx) |
-| input | [./primitives/input.md](./primitives/input.md) | [`content/docs/components/input.mdx`](../../content/docs/components/input.mdx) | [`registry/react/examples/input/`](../../registry/react/examples/input/) | [`registry/react/components/input.tsx`](../../registry/react/components/input.tsx) |
-| input-otp | [./primitives/input-otp.md](./primitives/input-otp.md) | [`content/docs/components/input-otp.mdx`](../../content/docs/components/input-otp.mdx) | [`registry/react/examples/input-otp/`](../../registry/react/examples/input-otp/) | [`registry/react/components/input-otp.tsx`](../../registry/react/components/input-otp.tsx) |
-| label | [./primitives/label.md](./primitives/label.md) | [`content/docs/components/field.mdx`](../../content/docs/components/field.mdx) *(use `FieldLabel` for Ark field layout; standalone `Label` is a styled HTML `label` from CLI install)* | *(no examples dir — see field examples)* | [`registry/react/components/field.tsx`](../../registry/react/components/field.tsx) *(related)* / generated `label.tsx` via CLI |
-| menu | [./primitives/menu.md](./primitives/menu.md) | [`content/docs/components/menu.mdx`](../../content/docs/components/menu.mdx) | [`registry/react/examples/menu/`](../../registry/react/examples/menu/) | [`registry/react/components/menu.tsx`](../../registry/react/components/menu.tsx) |
-| native-select | [./primitives/native-select.md](./primitives/native-select.md) | [`content/docs/components/native-select.mdx`](../../content/docs/components/native-select.mdx) | [`registry/react/examples/native-select/`](../../registry/react/examples/native-select/) | [`registry/react/components/native-select.tsx`](../../registry/react/components/native-select.tsx) |
-| pagination | [./primitives/pagination.md](./primitives/pagination.md) | [`content/docs/components/pagination.mdx`](../../content/docs/components/pagination.mdx) | [`registry/react/examples/pagination/`](../../registry/react/examples/pagination/) | [`registry/react/components/pagination.tsx`](../../registry/react/components/pagination.tsx) |
-| popover | [./primitives/popover.md](./primitives/popover.md) | [`content/docs/components/popover.mdx`](../../content/docs/components/popover.mdx) | [`registry/react/examples/popover/`](../../registry/react/examples/popover/) | [`registry/react/components/popover.tsx`](../../registry/react/components/popover.tsx) |
-| progress | [./primitives/progress.md](./primitives/progress.md) | [`content/docs/components/progress.mdx`](../../content/docs/components/progress.mdx) | [`registry/react/examples/progress/`](../../registry/react/examples/progress/) | [`registry/react/components/progress.tsx`](../../registry/react/components/progress.tsx) |
-| qr-code | [./primitives/qr-code.md](./primitives/qr-code.md) | [`content/docs/components/qr-code.mdx`](../../content/docs/components/qr-code.mdx) | [`registry/react/examples/qr-code/`](../../registry/react/examples/qr-code/) | [`registry/react/components/qr-code.tsx`](../../registry/react/components/qr-code.tsx) |
-| radio-group | [./primitives/radio-group.md](./primitives/radio-group.md) | [`content/docs/components/radio-group.mdx`](../../content/docs/components/radio-group.mdx) | [`registry/react/examples/radio-group/`](../../registry/react/examples/radio-group/) | [`registry/react/components/radio-group.tsx`](../../registry/react/components/radio-group.tsx) |
-| rating-group | [./primitives/rating-group.md](./primitives/rating-group.md) | [`content/docs/components/rating.mdx`](../../content/docs/components/rating.mdx) *(docs title “Rating”; registry id `rating-group`)* | [`registry/react/examples/rating/`](../../registry/react/examples/rating/) | [`registry/react/components/rating.tsx`](../../registry/react/components/rating.tsx) *(in-repo implementation name)* |
-| resizable | [./primitives/resizable.md](./primitives/resizable.md) | [`content/docs/components/resizable.mdx`](../../content/docs/components/resizable.mdx) | [`registry/react/examples/resizable/`](../../registry/react/examples/resizable/) | [`registry/react/components/resizable.tsx`](../../registry/react/components/resizable.tsx) |
-| scroll-area | [./primitives/scroll-area.md](./primitives/scroll-area.md) | [`content/docs/components/scroll-area.mdx`](../../content/docs/components/scroll-area.mdx) | [`registry/react/examples/scroll-area/`](../../registry/react/examples/scroll-area/) | [`registry/react/components/scroll-area.tsx`](../../registry/react/components/scroll-area.tsx) |
-| select | [./primitives/select.md](./primitives/select.md) | [`content/docs/components/select.mdx`](../../content/docs/components/select.mdx) | [`registry/react/examples/select/`](../../registry/react/examples/select/) | [`registry/react/components/select.tsx`](../../registry/react/components/select.tsx) |
-| separator | [./primitives/separator.md](./primitives/separator.md) | [`content/docs/components/separator.mdx`](../../content/docs/components/separator.mdx) | [`registry/react/examples/separator/`](../../registry/react/examples/separator/) | [`registry/react/components/separator.tsx`](../../registry/react/components/separator.tsx) |
-| sheet | [./primitives/sheet.md](./primitives/sheet.md) | [`content/docs/components/sheet.mdx`](../../content/docs/components/sheet.mdx) | [`registry/react/examples/sheet/`](../../registry/react/examples/sheet/) | [`registry/react/components/sheet.tsx`](../../registry/react/components/sheet.tsx) |
-| sidebar | [./primitives/sidebar.md](./primitives/sidebar.md) | [`content/docs/components/sidebar.mdx`](../../content/docs/components/sidebar.mdx) | [`registry/react/blocks/sidebar/`](../../registry/react/blocks/sidebar/) *(block examples; no `examples/sidebar/` yet)* | [`registry/react/components/sidebar.tsx`](../../registry/react/components/sidebar.tsx) |
-| skeleton | [./primitives/skeleton.md](./primitives/skeleton.md) | [`content/docs/components/skeleton.mdx`](../../content/docs/components/skeleton.mdx) | [`registry/react/examples/skeleton/`](../../registry/react/examples/skeleton/) | [`registry/react/components/skeleton.tsx`](../../registry/react/components/skeleton.tsx) |
-| slider | [./primitives/slider.md](./primitives/slider.md) | [`content/docs/components/slider.mdx`](../../content/docs/components/slider.mdx) | [`registry/react/examples/slider/`](../../registry/react/examples/slider/) | [`registry/react/components/slider.tsx`](../../registry/react/components/slider.tsx) |
-| steps | [./primitives/steps.md](./primitives/steps.md) | [`content/docs/components/steps.mdx`](../../content/docs/components/steps.mdx) | [`registry/react/examples/steps/`](../../registry/react/examples/steps/) | [`registry/react/components/steps.tsx`](../../registry/react/components/steps.tsx) |
-| switch | [./primitives/switch.md](./primitives/switch.md) | [`content/docs/components/switch.mdx`](../../content/docs/components/switch.mdx) | [`registry/react/examples/switch/`](../../registry/react/examples/switch/) | [`registry/react/components/switch.tsx`](../../registry/react/components/switch.tsx) |
-| tabs | [./primitives/tabs.md](./primitives/tabs.md) | [`content/docs/components/tabs.mdx`](../../content/docs/components/tabs.mdx) | [`registry/react/examples/tabs/`](../../registry/react/examples/tabs/) | [`registry/react/components/tabs.tsx`](../../registry/react/components/tabs.tsx) |
-| textarea | [./primitives/textarea.md](./primitives/textarea.md) | [`content/docs/components/textarea.mdx`](../../content/docs/components/textarea.mdx) | [`registry/react/examples/textarea/`](../../registry/react/examples/textarea/) | [`registry/react/components/textarea.tsx`](../../registry/react/components/textarea.tsx) |
-| toggle | [./primitives/toggle.md](./primitives/toggle.md) | [`content/docs/components/toggle.mdx`](../../content/docs/components/toggle.mdx) | [`registry/react/examples/toggle/`](../../registry/react/examples/toggle/) | [`registry/react/components/toggle.tsx`](../../registry/react/components/toggle.tsx) |
-| toggle-group | [./primitives/toggle-group.md](./primitives/toggle-group.md) | [`content/docs/components/toggle-group.mdx`](../../content/docs/components/toggle-group.mdx) | [`registry/react/examples/toggle-group/`](../../registry/react/examples/toggle-group/) | [`registry/react/components/toggle-group.tsx`](../../registry/react/components/toggle-group.tsx) |
-| tooltip | [./primitives/tooltip.md](./primitives/tooltip.md) | [`content/docs/components/tooltip.mdx`](../../content/docs/components/tooltip.mdx) | [`registry/react/examples/tooltip/`](../../registry/react/examples/tooltip/) | [`registry/react/components/tooltip.tsx`](../../registry/react/components/tooltip.tsx) |
-| tour | [./primitives/tour.md](./primitives/tour.md) | [`content/docs/components/tour.mdx`](../../content/docs/components/tour.mdx) | [`registry/react/examples/tour/`](../../registry/react/examples/tour/) | [`registry/react/components/tour.tsx`](../../registry/react/components/tour.tsx) |
-| tree-view | [./primitives/tree-view.md](./primitives/tree-view.md) | [`content/docs/components/tree-view.mdx`](../../content/docs/components/tree-view.mdx) | [`registry/react/examples/tree-view/`](../../registry/react/examples/tree-view/) | [`registry/react/components/tree-view.tsx`](../../registry/react/components/tree-view.tsx) |
+## Overlays & Popups
+- **Dialog** — Centered modal requiring user focus. `./references/primitives/dialog.md`
+- **AlertDialog** — Destructive/critical confirmation modal. `./references/primitives/alert-dialog.md`
+- **Sheet** — Side-panel overlay for settings/details. `./references/primitives/sheet.md`
+- **Drawer** — Bottom/side drawer, often mobile-responsive. `./references/primitives/drawer.md`
+- **Popover** — Anchored non-modal floating content. `./references/primitives/popover.md`
+- **Tooltip** — Short hover/focus hint text. `./references/primitives/tooltip.md`
+- **Menu** — Dropdown action list with groups/submenus. `./references/primitives/menu.md`
+- **Command** — Searchable command palette (not cmdk). `./references/primitives/command.md`
+- **ContextMenu** — Right-click / long-press contextual menu. `./references/primitives/context-menu.md`
+- **HoverCard** — Rich preview card on hover/focus. `./references/primitives/hover-card.md`
+- **FloatingPanel** — Draggable, resizable floating window. `./references/primitives/floating-panel.md`
+- **Float** — Lightweight anchored positioning helper. `./references/primitives/float.md`
+- **ToggleTooltip** — Click/tap popover styled like a tooltip. `./references/primitives/toggle-tooltip.md`
+- **Hint** — Minimal hover/focus hint surface. `./references/primitives/hint.md`
 
-## Notes
+## Selection & Input
+- **Select** — Single-choice from predefined list (no search). `./references/primitives/select.md`
+- **Combobox** — Searchable selection with filtering. `./references/primitives/combobox.md`
+- **Autocomplete** — Free-text with suggestions. `./references/primitives/autocomplete.md`
+- **Input** — Single-line text entry. `./references/primitives/input.md`
+- **Textarea** — Multi-line text entry. `./references/primitives/textarea.md`
+- **InputGroup** — Input with addons (icons, buttons, badges). `./references/primitives/input-group.md`
+- **InputOTP** — One-time passcode segmented slots. `./references/primitives/input-otp.md`
+- **NumberInput** — Numeric entry with stepper controls. `./references/primitives/number-input.md`
+- **Slider** — Continuous/ranged numeric control. `./references/primitives/slider.md`
+- **Calendar** — Date picker / calendar views. `./references/primitives/calendar.md`
+- **Listbox** — List selection (single/multi) with rich items. `./references/primitives/listbox.md`
+- **NativeSelect** — Styled native `<select>` control. `./references/primitives/native-select.md`
+- **DatePicker** — Calendar popover + input for dates/ranges/time. `./references/primitives/date-picker.md`
+- **ColorPicker** — Area, sliders, swatches, and channel inputs. `./references/primitives/color-picker.md`
 
-- **`label`**: Registry ships a small `Label` wrapper; prefer **`Field` + `FieldLabel`** when using Ark field semantics. See [`field.md`](./primitives/field.md).
-- **`rating-group`**: CLI/registry id vs on-disk **`rating.tsx`** / **`rating.mdx`** may differ; follow the docs page and source file linked above when names disagree.
+## Forms & Validation
+- **Form** — Native `<form>` + Field patterns (see Field guide). `./references/primitives/field.md`
+- **Field** — Label + description + error wiring. `./references/primitives/field.md`
+- **Fieldset** — FieldSet / FieldLegend grouping (see Field guide). `./references/primitives/field.md`
+- **Label** — Accessible label for controls. `./references/primitives/label.md`
+- **FileUpload** — File picking with drag-and-drop and capture. `./references/primitives/file-upload.md`
+- **Editable** — Inline editable text region. `./references/primitives/editable.md`
+
+## Toggle & Choice
+- **Checkbox** — Single boolean toggle. `./references/primitives/checkbox.md`
+- **CheckboxGroup** — Multiple-selection set (exports on checkbox). `./references/primitives/checkbox.md`
+- **RadioGroup** — Mutually exclusive single choice. `./references/primitives/radio-group.md`
+- **Switch** — Binary on/off preference toggle. `./references/primitives/switch.md`
+- **Toggle** — Pressable two-state command button. `./references/primitives/toggle.md`
+- **ToggleGroup** — Grouped pressed-state controls. `./references/primitives/toggle-group.md`
+- **SegmentControl** — Segmented control (segment group). `./references/primitives/segment-control.md`
+
+## Layout & Navigation
+- **Tabs** — Mutually exclusive tabbed panels. `./references/primitives/tabs.md`
+- **Accordion** — Collapsible content sections. `./references/primitives/accordion.md`
+- **Collapsible** — Single expand/collapse region. `./references/primitives/collapsible.md`
+- **Sidebar** — Persistent app shell navigation. `./references/primitives/sidebar.md`
+- **Breadcrumb** — Hierarchical navigation trail. `./references/primitives/breadcrumb.md`
+- **Pagination** — Paged navigation controls. `./references/primitives/pagination.md`
+- **ScrollArea** — Styled scroll container. `./references/primitives/scroll-area.md`
+- **BottomNavigation** — Fixed mobile bottom tab bar. `./references/primitives/bottom-navigation.md`
+- **Carousel** — Slideshow / carousel track and controls. `./references/primitives/carousel.md`
+- **Resizable** — Split panes with draggable resize handles. `./references/primitives/resizable.md`
+- **Steps** — Stepper / wizard progress UI. `./references/primitives/steps.md`
+- **Tour** — Guided product tour steps. `./references/primitives/tour.md`
+- **TreeView** — Hierarchical expandable tree. `./references/primitives/tree-view.md`
+
+## Content & Display
+- **Card** — Content container with sections. `./references/primitives/card.md`
+- **Frame** — Bordered content surface. `./references/primitives/frame.md`
+- **Table** — Tabular data presentation. `./references/primitives/table.md`
+- **Avatar** — User/entity profile image. `./references/primitives/avatar.md`
+- **Badge** — Status indicator / label. `./references/primitives/badge.md`
+- **Kbd** — Keyboard shortcut hints. `./references/primitives/kbd.md`
+- **Separator** — Visual/semantic divider. `./references/primitives/separator.md`
+- **Group** — Connected control cluster (see ButtonGroup). `./references/primitives/button-group.md`
+- **Prose** — Typography wrapper for rich / CMS HTML. `./references/primitives/prose.md`
+- **LinkOverlay** — Card hit-area with one primary link. `./references/primitives/link-overlay.md`
+- **Announcement** — Inline prominent notice / banner. `./references/primitives/announcement.md`
+- **Item** — List row / media object building block. `./references/primitives/item.md`
+- **Marquee** — Infinite scrolling ticker strip. `./references/primitives/marquee.md`
+- **DataList** — Key/value metadata rows. `./references/primitives/data-list.md`
+- **QrCode** — QR code image and download helpers. `./references/primitives/qr-code.md`
+- **ImageCropper** — Crop and zoom images before upload. `./references/primitives/image-cropper.md`
+
+## Feedback & Status
+- **Alert** — Inline persistent status message. `./references/primitives/alert.md`
+- **Toast** — Transient notification (toastManager). `./references/primitives/toast.md`
+- **Progress** — Task completion / async progress bar. `./references/primitives/progress.md`
+- **Spinner** — Indeterminate loading indicator. `./references/primitives/spinner.md`
+- **Skeleton** — Loading placeholder. `./references/primitives/skeleton.md`
+- **CircularProgress** — Radial determinate/indeterminate progress. `./references/primitives/circular-progress.md`
+- **CircularSlider** — Angular dial / knob control. `./references/primitives/circular-slider.md`
+- **Status** — Compact status pill with variants. `./references/primitives/status.md`
+- **Timer** — Countdown, stopwatch, and interval displays. `./references/primitives/timer.md`
+- **SignaturePad** — Handwritten signature capture. `./references/primitives/signature-pad.md`
+- **Rating** — Star ratings (reviews, forms). `./references/primitives/rating.md`
+- **RatingGroup** — Alternate rating primitive guide. `./references/primitives/rating-group.md`
+- **Chart** — Recharts + Shark chart helpers. `./references/primitives/chart.md`
+
+## Actions
+- **Button** — Primary/secondary action trigger. `./references/primitives/button.md`
+- **ActionBar** — Bulk selection action toolbar. `./references/primitives/action-bar.md`
+- **ButtonGroup** — Visually connected button cluster. `./references/primitives/button-group.md`
+- **Clipboard** — Copy-to-clipboard trigger and feedback. `./references/primitives/clipboard.md`
+
+## Utilities & accessibility
+- **SkipNav** — Skip link to main content. `./references/primitives/skip-nav.md`

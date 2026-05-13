@@ -1,6 +1,6 @@
 import type { RegistryItemType } from "@/lib/registry";
 
-const dependencies: string[] = [];
+const dependencies = [];
 
 const manifest: RegistryItemType = {
   name: "frame",

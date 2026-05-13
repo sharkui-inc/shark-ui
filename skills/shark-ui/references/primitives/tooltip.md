@@ -2,11 +2,14 @@
 
 ## When to use
 
-Use **tooltip** when Shark docs describe this primitive for the task.
+- Short helper text on hover or keyboard focus.
+- Non-blocking hints for controls and icon buttons.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If the content is interactive (links, buttons) → use `Popover` instead.
+- If the content is rich (forms, media) → use `Popover` instead.
+- If the hint must stay open until explicitly dismissed → use `Popover` instead.
 
 ## Install
 
@@ -14,31 +17,52 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/tooltip
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/tooltip.mdx`](../../content/docs/components/tooltip.mdx) |
-| Examples | [`registry/react/examples/tooltip/`](../../registry/react/examples/tooltip/) |
-| Source | [`registry/react/components/tooltip.tsx`](../../registry/react/components/tooltip.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/tooltip";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  Tooltip,
+  TooltipArrow,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-## Pitfalls
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="outline">Hover</Button>
+  </TooltipTrigger>
+  <TooltipContent>Helpful hint</TooltipContent>
+</Tooltip>
+```
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+### Key patterns
 
-## See also
+- **Portal forwarding**: optional `portalProps` on `TooltipContent` → Ark `Tooltip.Portal` (`keepMounted`, `container`, …).
+- **Icon-only triggers**: always set `aria-label` on the trigger `Button` and mark decorative icons `aria-hidden`.
 
-- [Component registry](../component-registry.md)
+## Common pitfalls
+
+- Putting interactive content inside a tooltip.
+- Missing `aria-label` on icon-only triggers.
+
+## Registry example files
+
+- [`example-default.tsx`](/registry/react/examples/tooltip/example-default.tsx)
+- [`example-positioning.tsx`](/registry/react/examples/tooltip/example-positioning.tsx)

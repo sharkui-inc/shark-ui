@@ -2,11 +2,14 @@
 
 ## When to use
 
-Use **alert** when Shark docs describe this primitive for the task.
+- Inline status messaging in content flows.
+- Semantic feedback variants (`info`, `success`, `warning`, `error`) with optional icons and actions.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If the message is transient and should auto-dismiss -> use Toast instead.
+- If the message requires user action before proceeding -> use AlertDialog instead.
+- If it's a brief hover hint -> use Tooltip instead.
 
 ## Install
 
@@ -14,31 +17,71 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/alert
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/alert.mdx`](../../content/docs/components/alert.mdx) |
-| Examples | [`registry/react/examples/alert/`](../../registry/react/examples/alert/) |
-| Source | [`registry/react/components/alert.tsx`](../../registry/react/components/alert.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/alert";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import { Alert, AlertAction, AlertDescription, AlertTitle } from "@/components/ui/alert"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Alert>
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>
+    You can add components and dependencies to your app using the cli.
+  </AlertDescription>
+</Alert>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Alert with semantic icon (do NOT use `aria-hidden` — icon conveys status):
 
-## See also
+```tsx
+<Alert variant="info">
+  <InfoIcon />
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>You can add components using the CLI.</AlertDescription>
+</Alert>
+```
 
-- [Component registry](../component-registry.md)
+Variants: `default`, `info`, `success`, `warning`, `error`.
+
+Alert with action buttons (use `AlertAction`):
+
+```tsx
+<Alert>
+  <InfoIcon />
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>Describe what can be done about it here.</AlertDescription>
+  <AlertAction>
+    <Button size="xs" variant="ghost">Dismiss</Button>
+    <Button size="xs">Ok</Button>
+  </AlertAction>
+</Alert>
+```
+
+## Common pitfalls
+
+- Using alert variants for passive decoration instead of meaningful semantic status.
+- Missing title/description structure in complex alerts, reducing scannability.
+- Hiding semantic alert icons with `aria-hidden` when they convey status meaning.
+
+## Registry example files
+
+- [`example-custom-color.tsx`](/registry/react/examples/alert/example-custom-color.tsx)
+- [`example-default.tsx`](/registry/react/examples/alert/example-default.tsx)
+- [`example-variant-default.tsx`](/registry/react/examples/alert/example-variant-default.tsx)
+- [`example-variant-destructive.tsx`](/registry/react/examples/alert/example-variant-destructive.tsx)
+- [`example-variant-info.tsx`](/registry/react/examples/alert/example-variant-info.tsx)
+- [`example-variant-success.tsx`](/registry/react/examples/alert/example-variant-success.tsx)
+- [`example-variant-warning.tsx`](/registry/react/examples/alert/example-variant-warning.tsx)
+- [`example-with-action.tsx`](/registry/react/examples/alert/example-with-action.tsx)
+- [`example-with-icon.tsx`](/registry/react/examples/alert/example-with-icon.tsx)

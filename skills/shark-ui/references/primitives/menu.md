@@ -2,13 +2,14 @@
 
 ## When to use
 
-- Dropdown actions attached to a button or control.
-- Nested submenus, checkbox/radio items, shortcuts, and grouped sections.
+- Contextual action lists and dropdown commands.
+- Mixed item types (regular, checkbox, radio, nested submenu).
 
-## When not to use
+## When NOT to use
 
-- **Right-click / context surface** → [`context-menu.md`](./context-menu.md) (different trigger pattern).
-- **Command palette / typeahead list** → **Command** component docs (`content/docs/components/command.mdx`) if installed in the project.
+- If the user needs to search/filter actions -> use Command instead.
+- If the content is rich informational (not actions) -> use Popover instead.
+- If the overlay is a full modal flow -> use Dialog instead.
 
 ## Install
 
@@ -16,60 +17,80 @@
 npx shadcn@latest add @shark/menu
 ```
 
-## Canonical imports (shark-ui repo)
+Manual deps from docs:
+
+```bash
+npm install @ark-ui/react
+```
+
+Also include the destructive foreground CSS variable snippet from the Shark menu docs when doing manual setup.
+
+## Canonical imports
 
 ```tsx
 import {
   Menu,
-  MenuTrigger,
-  MenuContent,
-  MenuItem,
-  MenuGroup,
-  MenuSeparator,
-  MenuSub,
-  MenuSubTrigger,
-  MenuSubContent,
   MenuCheckboxItem,
+  MenuGroup,
+  MenuGroupLabel,
+  MenuItem,
+  MenuContent,
   MenuRadioGroup,
   MenuRadioItem,
+  MenuSeparator,
   MenuShortcut,
-} from "@/registry/react/components/menu";
+  MenuSub,
+  MenuSubContent,
+  MenuSubTrigger,
+  MenuTrigger,
+} from "@/components/ui/menu"
 ```
 
 ## Minimal pattern
 
 ```tsx
 <Menu>
-  <MenuTrigger asChild>
-    <Button variant="outline" type="button">
-      Open
-    </Button>
-  </MenuTrigger>
-  <MenuContent className="w-40">
-    <MenuGroup>
-      <MenuItem value="copy">Copy</MenuItem>
-      <MenuItem value="paste">Paste</MenuItem>
-    </MenuGroup>
+  <MenuTrigger>Open</MenuTrigger>
+  <MenuContent>
+    <MenuItem>Profile</MenuItem>
+    <MenuSeparator />
+    <MenuCheckboxItem>Shuffle</MenuCheckboxItem>
   </MenuContent>
 </Menu>
 ```
 
-## Registry examples
+Use popup positioning props like `align` / `sideOffset` only when a layout needs explicit tuning.
 
-- [`../../registry/react/examples/menu/example-default.tsx`](../../registry/react/examples/menu/example-default.tsx) — submenus, shortcuts, radio + checkbox patterns.
+### Key patterns
 
-## Ark / portal notes
+- **Portal forwarding**: optional `portalProps` on `MenuContent` → Ark UI `Menu.Portal` (`keepMounted`, `container`, …).
+- Use `<MenuTrigger asChild><Button ... /></MenuTrigger>` as the default trigger composition.
+- Use `openOnHover` on `MenuTrigger` only for explicit hover-driven UX.
+- Use `<MenuItem asChild value="..."><Link ... /></MenuItem>` for navigational entries.
+- Use `MenuItem closeOnClick` for action menus where selection should always dismiss the popup.
+- Use `MenuCheckboxItem variant="switch"` for toggle-style preferences.
+- Use `MenuRadioGroup` + `MenuRadioItem` with a `defaultValue` when enforcing single-choice selection.
+- Use `MenuShortcut` to display keyboard hints in dense command menus.
+- Use `variant="destructive"` on dangerous actions.
+- For responsive action menus, keep desktop on `Menu` and switch mobile to `Drawer` + list-style actions as needed (see drawer examples).
 
-- `MenuContent` and submenu content are portaled in Shark (`Portal` from `@ark-ui/react`)—see [`../portal.md`](../portal.md).
-- Prefer **`overflow-y-auto`** on long menus if `ScrollArea` causes layout issues (`AGENTS.md`).
+## Common pitfalls
 
-## Pitfalls
+- Forgetting `MenuGroup` around grouped structures.
+- Missing submenu pair (`MenuSubTrigger` + `MenuSubContent`) for nested actions.
+- Mixing navigation and action items without clear close behavior (`closeOnClick`) and semantics.
 
-- Using Radix `onSelect` semantics—prefer patterns from MDX / examples for Ark menu item events.
-- Missing `value` on items when the collection API requires it—confirm in `menu.tsx` + MDX.
+## Registry example files
 
-## Further reading
-
-- [Ark UI Menu](https://ark-ui.com/docs/components/menu)
-- [`../../registry/react/components/menu.tsx`](../../registry/react/components/menu.tsx)
-- [`../../content/docs/components/menu.mdx`](../../content/docs/components/menu.mdx)
+- [`example-checkboxes.tsx`](/registry/react/examples/menu/example-checkboxes.tsx)
+- [`example-default.tsx`](/registry/react/examples/menu/example-default.tsx)
+- [`example-destructive.tsx`](/registry/react/examples/menu/example-destructive.tsx)
+- [`example-dialog.tsx`](/registry/react/examples/menu/example-dialog.tsx)
+- [`example-group-label.tsx`](/registry/react/examples/menu/example-group-label.tsx)
+- [`example-icons.tsx`](/registry/react/examples/menu/example-icons.tsx)
+- [`example-link.tsx`](/registry/react/examples/menu/example-link.tsx)
+- [`example-nested.tsx`](/registry/react/examples/menu/example-nested.tsx)
+- [`example-positioning.tsx`](/registry/react/examples/menu/example-positioning.tsx)
+- [`example-quick-item.tsx`](/registry/react/examples/menu/example-quick-item.tsx)
+- [`example-radio-group.tsx`](/registry/react/examples/menu/example-radio-group.tsx)
+- [`example-shortcuts.tsx`](/registry/react/examples/menu/example-shortcuts.tsx)

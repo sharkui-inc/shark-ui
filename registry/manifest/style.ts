@@ -29,7 +29,7 @@ const cssVars = {
       "color-mix(in srgb, var(--color-neutral-950) 10%, var(--background))",
     muted: "color-mix(in srgb, var(--color-neutral-950) 4%, var(--background))",
     "muted-foreground":
-      "color-mix(in srgb, var(--color-neutral-500) 90%, var(--color-neutral-950))",
+      "color-mix(in srgb, var(--color-neutral-500) 80%, var(--color-neutral-950))",
     popover: "var(--color-neutral-50)",
     "popover-foreground": "var(--color-neutral-800)",
     primary: "var(--color-neutral-800)",
@@ -81,7 +81,7 @@ const cssVars = {
     input: "color-mix(in srgb, var(--color-neutral-50) 10%, var(--background))",
     muted: "color-mix(in srgb, var(--color-neutral-50) 4%, var(--background))",
     "muted-foreground":
-      "color-mix(in srgb, var(--color-neutral-500) 90%, var(--color-neutral-50))",
+      "color-mix(in srgb, var(--color-neutral-500) 70%, var(--color-neutral-50))",
     popover:
       "color-mix(in srgb, var(--background) 100%, var(--color-neutral-50))",
     "popover-foreground": "var(--color-neutral-100)",

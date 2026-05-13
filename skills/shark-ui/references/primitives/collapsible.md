@@ -2,11 +2,8 @@
 
 ## When to use
 
-Use **collapsible** when Shark docs describe this primitive for the task.
-
-## When not to use
-
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- Progressive disclosure of optional content.
+- Expandable help/settings sections without leaving the page.
 
 ## Install
 
@@ -14,31 +11,68 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/collapsible
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/collapsible.mdx`](../../content/docs/components/collapsible.mdx) |
-| Examples | [`registry/react/examples/collapsible/`](../../registry/react/examples/collapsible/) |
-| Source | [`registry/react/components/collapsible.tsx`](../../registry/react/components/collapsible.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/collapsible";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  Collapsible,
+  CollapsiblePanel,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Collapsible>
+  <CollapsibleTrigger>Can I access the file in the cloud?</CollapsibleTrigger>
+  <CollapsiblePanel>
+    Yes, you can access the file in the cloud.
+  </CollapsiblePanel>
+</Collapsible>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Controlled collapsible:
 
-## See also
+```tsx
+const [open, setOpen] = useState(false)
 
-- [Component registry](../component-registry.md)
+<Collapsible open={open} onOpenChange={setOpen}>
+  <CollapsibleTrigger>
+    {open ? "Hide details" : "Show details"}
+  </CollapsibleTrigger>
+  <CollapsiblePanel>Hidden content here.</CollapsiblePanel>
+</Collapsible>
+```
+
+Partial collapse:
+```tsx
+<Collapsible collapsedHeight="100px">
+  <CollapsibleTrigger>
+    {open ? "Hide details" : "Show details"}
+  </CollapsibleTrigger>
+  <CollapsiblePanel>Hidden content here.</CollapsiblePanel>
+</Collapsible>
+```
+
+## Common pitfalls
+
+- Placing trigger/panel outside the same collapsible root.
+- Assuming panel content is always visible/mounted for dependent logic.
+- Using modal-like interactions where collapsible disclosure is more appropriate.
+
+## Registry example files
+
+- [`example-controlled.tsx`](/registry/react/examples/collapsible/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/collapsible/example-default.tsx)
+- [`example-disabled.tsx`](/registry/react/examples/collapsible/example-disabled.tsx)
+- [`example-nested.tsx`](/registry/react/examples/collapsible/example-nested.tsx)
+- [`example-partial-collapse.tsx`](/registry/react/examples/collapsible/example-partial-collapse.tsx)

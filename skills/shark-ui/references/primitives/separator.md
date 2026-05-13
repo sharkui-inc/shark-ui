@@ -2,11 +2,8 @@
 
 ## When to use
 
-Use **separator** when Shark docs describe this primitive for the task.
-
-## When not to use
-
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- Visual/semantic separation between related blocks.
+- Section dividers in menus, cards, and grouped controls.
 
 ## Install
 
@@ -14,31 +11,56 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/separator
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/separator.mdx`](../../content/docs/components/separator.mdx) |
-| Examples | [`registry/react/examples/separator/`](../../registry/react/examples/separator/) |
-| Source | [`registry/react/components/separator.tsx`](../../registry/react/components/separator.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/separator";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import { Separator } from "@/components/ui/separator"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<div className="flex flex-col gap-2">
+  <span className="text-sm">Section A</span>
+  <Separator />
+  <span className="text-sm">Section B</span>
+</div>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Horizontal separator (default):
 
-## See also
+```tsx
+<Separator />
+```
 
-- [Component registry](../component-registry.md)
+Vertical separator inline:
+
+```tsx
+<div className="flex items-center gap-4">
+  <span>Home</span>
+  <Separator orientation="vertical" className="h-4" />
+  <span>Settings</span>
+</div>
+```
+
+
+## Common pitfalls
+
+- Adding separators between every small element, creating visual clutter.
+- Using separators where spacing alone communicates grouping better.
+- Forgetting orientation/context in dense vertical command layouts.
+
+## Registry example files
+
+- [`example-default.tsx`](/registry/react/examples/separator/example-default.tsx)
+- [`example-list.tsx`](/registry/react/examples/separator/example-list.tsx)
+- [`example-menu.tsx`](/registry/react/examples/separator/example-menu.tsx)
+- [`example-vertical.tsx`](/registry/react/examples/separator/example-vertical.tsx)

@@ -7,8 +7,8 @@ import {
   AutocompleteEmpty,
   AutocompleteInput,
   AutocompleteItem,
+  AutocompleteList,
 } from "@/registry/react/components/autocomplete";
-import { ComboboxList } from "@/registry/react/components/combobox";
 
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
@@ -27,13 +27,13 @@ const Example = () => {
       <AutocompleteInput size="lg" />
       <AutocompleteContent>
         <AutocompleteEmpty>No items found.</AutocompleteEmpty>
-        <ComboboxList>
+        <AutocompleteList>
           {collection.items.map((item) => (
             <AutocompleteItem item={item} key={item.value}>
               {item.label}
             </AutocompleteItem>
           ))}
-        </ComboboxList>
+        </AutocompleteList>
       </AutocompleteContent>
     </Autocomplete>
   );

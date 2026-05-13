@@ -8,8 +8,8 @@ import {
   AutocompleteGroup,
   AutocompleteInput,
   AutocompleteItem,
+  AutocompleteList,
 } from "@/registry/react/components/autocomplete";
-import { ComboboxList } from "@/registry/react/components/combobox";
 
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
@@ -29,7 +29,7 @@ const Example = () => {
       <AutocompleteInput placeholder="Select a timezone" />
       <AutocompleteContent className="w-60">
         <AutocompleteEmpty />
-        <ComboboxList>
+        <AutocompleteList>
           {collection.group().map(([continent, group]) => (
             <AutocompleteGroup heading={continent} key={continent}>
               {group.map((item) => (
@@ -39,7 +39,7 @@ const Example = () => {
               ))}
             </AutocompleteGroup>
           ))}
-        </ComboboxList>
+        </AutocompleteList>
       </AutocompleteContent>
     </Autocomplete>
   );

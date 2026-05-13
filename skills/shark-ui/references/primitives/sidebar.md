@@ -2,13 +2,13 @@
 
 ## When to use
 
-- Application shells with persistent navigation, rail collapse/expand, and grouped sections (`SidebarProvider` + `Sidebar` tree).
-- Patterns described in [`../../content/docs/components/sidebar.mdx`](../../content/docs/components/sidebar.mdx) (anatomy, keyboard shortcuts, composition with `Sheet` / `Tooltip`).
+- Persistent app shell navigation and grouped links.
+- Collapsible/structured side navigation for dashboard layouts.
 
-## When not to use
+## When NOT to use
 
-- One-off static nav bars without provider state—simpler layout components may suffice.
-- Marketing footers / simple link rows—use layout primitives or MDX-specific guidance.
+- If the navigation should be a temporary overlay on small screens only → consider `Drawer` + list actions instead of a persistent `Sidebar`.
+- If you only need a single slide-over panel (not app chrome) → use `Sheet`.
 
 ## Install
 
@@ -16,49 +16,118 @@
 npx shadcn@latest add @shark/sidebar
 ```
 
-Install registry dependencies listed in MDX first (**Button**, **Input**, **Scroll Area**, **Separator**, **Sheet**, **Skeleton**, **Tooltip**).
+Manual deps from docs:
 
-## Source of truth
-
-| Kind | Path |
-|------|------|
-| Docs | [`../../content/docs/components/sidebar.mdx`](../../content/docs/components/sidebar.mdx) |
-| Block examples | [`../../registry/react/blocks/sidebar/`](../../registry/react/blocks/sidebar/) |
-| Source | [`../../registry/react/components/sidebar.tsx`](../../registry/react/components/sidebar.tsx) |
-
-## Doc / preview conventions (`AGENTS.md`)
-
-When reproducing **docs-style previews** for sidebar:
-
-- Wrap preview: `absolute inset-0 overflow-hidden`.
-- Pass `className="absolute"` to `Sidebar`.
-- Use `h-full` on `SidebarProvider` to avoid overflow bleed.
-- Pass `showBorders={false}` to `ComponentPreview` when applicable.
-- Prefer native **`overflow-y-auto`** instead of `ScrollArea` when scroll layout fights the preview.
-
-## Composition sketch
-
-Follow the MDX anatomy:
-
-```text
-SidebarProvider
-├── Sidebar
-│   ├── SidebarHeader
-│   ├── SidebarContent
-│   │   └── SidebarGroup …
-│   └── SidebarFooter
-├── SidebarTrigger
-└── …
+```bash
+npm install @ark-ui/react
 ```
 
-Use block sources as working references: [`../../registry/react/blocks/sidebar/`](../../registry/react/blocks/sidebar/).
+## Canonical imports
 
-## Pitfalls
+```tsx
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupAction,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarRail,
+  SidebarSeparator,
+  SidebarTrigger,
+  useSidebar,
+} from "@/components/ui/sidebar"
+```
 
-- Omitting `SidebarProvider` context—many subcomponents expect provider state.
-- Mixing shadcn-only prop names without verifying Shark’s sidebar source (large surface area—diff MDX carefully).
+## Minimal pattern
 
-## Further reading
+```tsx
+<SidebarProvider>
+  <Sidebar>
+    <SidebarHeader>Workspace</SidebarHeader>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton>Dashboard</SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+  <SidebarInset>{/* Main page content */}</SidebarInset>
+</SidebarProvider>
+```
 
-- [`../../content/docs/components/sidebar.mdx`](../../content/docs/components/sidebar.mdx)
-- [`../../registry/react/components/sidebar.tsx`](../../registry/react/components/sidebar.tsx)
+### Key patterns
+
+Sidebar with grouped navigation and footer:
+
+```tsx
+<SidebarProvider>
+  <Sidebar>
+    <SidebarHeader>
+      <h2 className="text-lg font-semibold">App Name</h2>
+    </SidebarHeader>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Main</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <a href="/dashboard">Dashboard</a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <a href="/projects">Projects</a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+    <SidebarFooter>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton>Settings</SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarFooter>
+    <SidebarRail />
+  </Sidebar>
+  <SidebarInset>{/* Page content */}</SidebarInset>
+</SidebarProvider>
+```
+
+Key composition rules:
+- Wrap app with `SidebarProvider` at the layout level.
+- Use `SidebarContent` (not "SidebarPanel") as the scrollable body between header/footer.
+- Navigation items use `SidebarMenu` > `SidebarMenuItem` > `SidebarMenuButton`.
+- For link items, use `asChild` on `SidebarMenuButton` with a single child (for example `<SidebarMenuButton asChild><a href="...">...</a></SidebarMenuButton>`).
+- Use `SidebarTrigger` for the collapse/expand toggle.
+- Use `SidebarInset` for the main content area next to the sidebar.
+- `SidebarRail` adds a slim hover-to-expand rail in collapsed state.
+
+
+## Common pitfalls
+
+- Using non-existent parts like "SidebarPanel" or "SidebarItem" -- the correct names are `SidebarContent` and `SidebarMenuItem`.
+- Forgetting `SidebarProvider` wrapper, which manages collapse state and mobile responsiveness.
+- Skipping the `SidebarMenu` > `SidebarMenuItem` > `SidebarMenuButton` hierarchy for nav items.
+- Missing responsive collapse strategy for narrow/mobile layouts.
+
+## Registry example files
+
+- Full app-shell references: [`registry/react/blocks/sidebar/`](/registry/react/blocks/sidebar/)

@@ -2,11 +2,13 @@
 
 ## When to use
 
-Use **steps** when Shark docs describe this primitive for the task.
+- Multi-step flows with a visible progress rail (horizontal or vertical).
+- Wizards where each step has its own panel content and next/previous navigation.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If steps are really routes → use real URL segments or Tabs instead.
+- If you only need a static numbered list without interaction → use ordered markup, not `Steps`.
 
 ## Install
 
@@ -14,31 +16,66 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/steps
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/steps.mdx`](../../content/docs/components/steps.mdx) |
-| Examples | [`registry/react/examples/steps/`](../../registry/react/examples/steps/) |
-| Source | [`registry/react/components/steps.tsx`](../../registry/react/components/steps.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/steps";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  Steps,
+  StepsCompletedContent,
+  StepsContent,
+  StepsDescription,
+  StepsIndicator,
+  StepsItem,
+  StepsList,
+  StepsNext,
+  StepsPrevious,
+  StepsSeparator,
+  StepsTitle,
+  StepsTrigger,
+  useSteps,
+} from "@/components/ui/steps"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Steps count={3}>
+  <StepsList>
+    <StepsItem index={0}>
+      <StepsTrigger>
+        <StepsIndicator>1</StepsIndicator>
+      </StepsTrigger>
+      <StepsSeparator />
+    </StepsItem>
+    {/* …repeat for each index */}
+  </StepsList>
+  <StepsContent index={0}>Step 1 body</StepsContent>
+  <StepsCompletedContent>Done</StepsCompletedContent>
+</Steps>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Drive `count` and render `StepsItem` + `StepsContent` per index; use `StepsNext` / `StepsPrevious` with `asChild` + `Button`; add `StepsTitle` / `StepsDescription` inside triggers when you need labels; `orientation="vertical"` for vertical rails.
 
-## See also
+## Common pitfalls
 
-- [Component registry](../component-registry.md)
+- Mismatching `StepsItem` index and `StepsContent` index (panels will not line up).
+- Forgetting `StepsSeparator` between items when you expect a continuous rail.
+- Omitting `StepsCompletedContent` when the flow should show a finished state.
+
+## Registry example files
+
+- [`example-controlled.tsx`](/registry/react/examples/steps/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/steps/example-default.tsx)
+- [`example-description.tsx`](/registry/react/examples/steps/example-description.tsx)
+- [`example-icon.tsx`](/registry/react/examples/steps/example-icon.tsx)
+- [`example-loading.tsx`](/registry/react/examples/steps/example-loading.tsx)
+- [`example-title.tsx`](/registry/react/examples/steps/example-title.tsx)
+- [`example-vertical.tsx`](/registry/react/examples/steps/example-vertical.tsx)

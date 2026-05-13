@@ -1,12 +1,14 @@
-# Shark Qr Code
+# Shark QR Code
 
 ## When to use
 
-Use **qr-code** when Shark docs describe this primitive for the task.
+- Encoding URLs or short strings as a scannable QR image.
+- Pairing a code with optional center overlay (logo) or download affordance.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If you only need a static asset generated server-side once → pre-render an image instead.
+- If the payload is very large or non-string binary → QR is the wrong format.
 
 ## Install
 
@@ -14,31 +16,48 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/qr-code
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/qr-code.mdx`](../../content/docs/components/qr-code.mdx) |
-| Examples | [`registry/react/examples/qr-code/`](../../registry/react/examples/qr-code/) |
-| Source | [`registry/react/components/qr-code.tsx`](../../registry/react/components/qr-code.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/qr-code";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  QrCode,
+  QrCodeDownload,
+  QrCodeFrame,
+  QrCodeOverlay,
+  useQrCode,
+} from "@/components/ui/qr-code"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<QrCode value="https://example.com">
+  <QrCodeFrame />
+</QrCode>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Size and framing use CSS variables on the root (for example `[--qr-code-size:…]`); add `QrCodeOverlay` for a centered logo; use `QrCodeDownload` when you need a file download trigger.
 
-## See also
+Error correction and pixel shape are controlled via Ark `QrCode.Root` props—see component MDX.
 
-- [Component registry](../component-registry.md)
+## Common pitfalls
+
+- Forgetting the `value` string (nothing renders meaningfully without it).
+- Using extreme overlay size relative to the code (scanning can fail).
+- Assuming print contrast without testing light/dark theme fills.
+
+## Registry example files
+
+- [`example-default.tsx`](/registry/react/examples/qr-code/example-default.tsx)
+- [`example-download.tsx`](/registry/react/examples/qr-code/example-download.tsx)
+- [`example-error-correction.tsx`](/registry/react/examples/qr-code/example-error-correction.tsx)
+- [`example-overlay.tsx`](/registry/react/examples/qr-code/example-overlay.tsx)
+- [`example-size.tsx`](/registry/react/examples/qr-code/example-size.tsx)

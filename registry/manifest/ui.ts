@@ -52,6 +52,7 @@ const SHARK_UI_BUNDLE = [
   "format",
   "frame",
   "highlight",
+  "hitbox",
   "hint",
   "hover-card",
   "image-cropper",

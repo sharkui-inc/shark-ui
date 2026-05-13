@@ -7,17 +7,43 @@ links:
 
 <ComponentPreview componentName="highlight" />
 
-
 ## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/highlight
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+<Steps>
+  <Step>Install the following dependencies:</Step>
 
 ```bash
 npm install @ark-ui/react
 ```
 
+  <Step>Copy and paste the following code into your project.</Step>
+
+  <ComponentSource title="components/ui/highlight.tsx" src="/highlight.tsx" />
+
+  <Step>Update the import paths to match your project setup.</Step>
+</Steps>
+
+  </TabsContent>
+</CodeTabs>
+
 ## Usage
 
 ```tsx
-import { Highlight } from "@/components/ui/highlight";
+import { Highlight } from "@/registry/react/components/highlight";
 ```
 
 ```tsx

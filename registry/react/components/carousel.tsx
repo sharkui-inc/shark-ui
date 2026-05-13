@@ -14,7 +14,7 @@ export const useCarousel = useCarouselContext;
 export const Carousel = (
   props: React.ComponentProps<typeof ArkCarousel.Root>
 ) => {
-  const { className, ...rest } = props;
+  const { spacing = "16px", className, ...rest } = props;
 
   return (
     <ArkCarousel.Root
@@ -25,6 +25,7 @@ export const Carousel = (
         className
       )}
       data-slot="carousel"
+      spacing={spacing}
       {...rest}
     />
   );
@@ -159,7 +160,7 @@ export const CarouselContent = (
       className={cn(
         "min-w-0",
         "-my-4 py-4",
-        "flex flex-1",
+        "flex flex-1 gap-4",
         "overflow-hidden rounded-lg",
         className
       )}

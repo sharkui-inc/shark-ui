@@ -2,11 +2,13 @@
 
 ## When to use
 
-Use **progress** when Shark docs describe this primitive for the task.
+- Task completion and async operation progress bars.
+- Indeterminate or determinate status during loading pipelines.
 
-## When not to use
+## When NOT to use
 
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- If displaying a bounded measurement (not task completion) -> use Meter instead.
+- If the loading state is indeterminate with no percentage -> consider Spinner.
 
 ## Install
 
@@ -14,31 +16,56 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/progress
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/progress.mdx`](../../content/docs/components/progress.mdx) |
-| Examples | [`registry/react/examples/progress/`](../../registry/react/examples/progress/) |
-| Source | [`registry/react/components/progress.tsx`](../../registry/react/components/progress.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/progress";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  Progress,
+  ProgressLabel,
+  ProgressValue,
+} from "@/components/ui/progress"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Progress value={40} />
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Progress with label and value display:
 
-## See also
+```tsx
+<Progress value={60}>
+  <div className="flex justify-between text-sm">
+    <ProgressLabel>Uploading...</ProgressLabel>
+    <ProgressValue />
+  </div>
+</Progress>
+```
 
-- [Component registry](../component-registry.md)
+Determinate progress: bind a numeric `value` (0-100) for known completion states.
+Indeterminate loading: omit `value` or pass `null` when progress cannot be measured.
+
+
+## Common pitfalls
+
+- Using progress without text/context for what operation is progressing.
+- Using determinate values when state is actually unknown/indeterminate.
+- Using progress for static score displays that should use `Meter`.
+
+## Registry example files
+
+- [`example-controlled.tsx`](/registry/react/examples/progress/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/progress/example-default.tsx)
+- [`example-indeterminate.tsx`](/registry/react/examples/progress/example-indeterminate.tsx)
+- [`example-orientation-horizontal.tsx`](/registry/react/examples/progress/example-orientation-horizontal.tsx)
+- [`example-orientation-vertical.tsx`](/registry/react/examples/progress/example-orientation-vertical.tsx)
+- [`example-with-label.tsx`](/registry/react/examples/progress/example-with-label.tsx)

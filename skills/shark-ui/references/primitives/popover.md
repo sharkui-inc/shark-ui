@@ -2,13 +2,14 @@
 
 ## When to use
 
-- Non-modal contextual panels anchored to a trigger (filters, icon pickers, inline forms).
-- When content should not use full-screen sheet/dialog metaphors.
+- Contextual floating content anchored to a trigger.
+- Inline help or compact forms without full modal focus lock.
 
-## When not to use
+## When NOT to use
 
-- Modal / focus-trap workflows → [`dialog.md`](./dialog.md) or [`sheet.md`](./sheet.md).
-- Hover-only transient hints → **Tooltip** (`tooltip.md` stub / docs).
+- If the content requires full modal focus and dismissal discipline → use `Dialog` instead.
+- If the content is a single short hint → use `Tooltip` instead.
+- If the overlay is a command/action list → use `Menu` instead.
 
 ## Install
 
@@ -16,33 +17,73 @@
 npx shadcn@latest add @shark/popover
 ```
 
-## Canonical imports (shark-ui repo)
+Manual deps from docs:
+
+```bash
+npm install @ark-ui/react
+```
+
+## Canonical imports
 
 ```tsx
 import {
   Popover,
-  PopoverTrigger,
+  PopoverAnchor,
+  PopoverArrow,
+  PopoverBody,
+  PopoverClose,
   PopoverContent,
-} from "@/registry/react/components/popover";
+  PopoverDescription,
+  PopoverFooter,
+  PopoverHeader,
+  PopoverPositioner,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 ```
 
-Use **`asChild`** on `PopoverTrigger` when composing with `Button` (see MDX).
+## Minimal pattern
 
-## Ark / portal
+```tsx
+import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverClose,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
-`PopoverContent` is portaled via `@ark-ui/react/portal` in the implementation—see [`../portal.md`](../portal.md).
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline">Open</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <PopoverTitle>Title</PopoverTitle>
+    <PopoverDescription>Description</PopoverDescription>
+    <PopoverClose asChild>
+      <Button variant="outline">Close</Button>
+    </PopoverClose>
+  </PopoverContent>
+</Popover>
+```
 
-## Registry examples
+### Key patterns
 
-[`../../registry/react/examples/popover/`](../../registry/react/examples/popover/) — controlled `open`, placement, and content layouts.
+- **Portal forwarding**: optional `portalProps` on `PopoverContent` → Ark `Popover.Portal` (`keepMounted`, `container`, …).
+- **Forms**: `PopoverContent` can wrap short forms using native `<form>` plus `Field` primitives.
+- **Dismiss controls**: use `PopoverClose` with `asChild` + `Button` (set `aria-label` on icon-only closes).
 
-## Pitfalls
+## Common pitfalls
 
-- Nesting interactive widgets without checking focus behavior—validate against MDX + examples.
-- Omitting anchor props (`side`, `align`, offsets) then fighting CSS—prefer documented positioning props first.
+- Using `Popover` as a full modal replacement.
+- Forgetting `asChild` when composing triggers/closes with `Button` or links.
+- Missing accessible names on icon-only triggers.
 
-## Further reading
+## Registry example files
 
-- [Ark UI Popover](https://ark-ui.com/docs/components/popover)
-- [`../../registry/react/components/popover.tsx`](../../registry/react/components/popover.tsx)
-- [`../../content/docs/components/popover.mdx`](../../content/docs/components/popover.mdx)
+- [`example-default.tsx`](/registry/react/examples/popover/example-default.tsx)
+- [`example-anchor.tsx`](/registry/react/examples/popover/example-anchor.tsx)
+- [`example-close-button.tsx`](/registry/react/examples/popover/example-close-button.tsx)
+- [`example-positioning.tsx`](/registry/react/examples/popover/example-positioning.tsx)

@@ -198,7 +198,7 @@ const main = async () => {
     await processKind(kind);
   }
 
-  await processStandaloneManifests(["ui", "style"]);
+  await processStandaloneManifests(["ui", "style", "hitbox"]);
   await formatRegistryJson();
 };
 

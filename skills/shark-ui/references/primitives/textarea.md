@@ -2,11 +2,8 @@
 
 ## When to use
 
-Use **textarea** when Shark docs describe this primitive for the task.
-
-## When not to use
-
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- Multi-line text entry (notes, feedback, descriptions).
+- Comment/message inputs where text length is variable.
 
 ## Install
 
@@ -14,31 +11,58 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/textarea
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/textarea.mdx`](../../content/docs/components/textarea.mdx) |
-| Examples | [`registry/react/examples/textarea/`](../../registry/react/examples/textarea/) |
-| Source | [`registry/react/components/textarea.tsx`](../../registry/react/components/textarea.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/textarea";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import { Textarea } from "@/components/ui/textarea"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Textarea aria-label="Message" placeholder="Write your message" />
+```
 
-## Pitfalls
+For form fields, prefer wrapping `Textarea` with `Field` + `FieldLabel` + `FieldError` so labels, validation, and errors stay semantically linked.
+`Textarea` already integrates with Ark field control semantics, so it can sit directly inside `Field` without extra wrappers.
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+### Key patterns
 
-## See also
+Textarea in a field with label:
 
-- [Component registry](../component-registry.md)
+```tsx
+<Field name="bio">
+  <FieldLabel>Bio</FieldLabel>
+  <Textarea placeholder="Tell us about yourself..." />
+  <FieldDescription>Max 500 characters.</FieldDescription>
+  <FieldError />
+</Field>
+```
+
+Sizes: `sm`, `default`, `lg` on `Textarea`.
+
+`Textarea` wraps Ark UI `Field.Control` internally, so it works as a form control directly inside `Field`.
+
+
+## Common pitfalls
+
+- Using textarea when a constrained single-line input is expected.
+- Missing labels/descriptions for required long-form fields.
+- Forgetting explicit submit button type handling in textarea forms.
+- Wrapping `Textarea` in unnecessary control wrappers when it already composes cleanly inside `Field`.
+
+## Registry example files
+
+- [`example-autoresize.tsx`](/registry/react/examples/textarea/example-autoresize.tsx)
+- [`example-controlled.tsx`](/registry/react/examples/textarea/example-controlled.tsx)
+- [`example-default.tsx`](/registry/react/examples/textarea/example-default.tsx)
+- [`example-disabled.tsx`](/registry/react/examples/textarea/example-disabled.tsx)
+- [`example-form.tsx`](/registry/react/examples/textarea/example-form.tsx)
+- [`example-invalid.tsx`](/registry/react/examples/textarea/example-invalid.tsx)
+- [`example-with-field.tsx`](/registry/react/examples/textarea/example-with-field.tsx)

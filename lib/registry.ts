@@ -10,6 +10,12 @@ export const registryItemFileTypes = z.enum([
   "registry:lib",
 ]);
 
+export const registryItemFileEntrySchema = z.object({
+  path: z.string(),
+  content: z.string(),
+  type: registryItemFileTypes,
+});
+
 export const registryItemSchema = z.object({
   name: z.string(),
   type: registryItemFileTypes,
@@ -20,18 +26,13 @@ export const registryItemSchema = z.object({
   registryDependencies: z.array(z.string()).optional(),
   cssVars: z.record(z.string(), z.record(z.string(), z.string())).optional(),
   css: z.record(z.string(), z.unknown()).optional(),
+  files: z.array(registryItemFileEntrySchema).optional(),
 });
 
 export interface RegistryItemType extends z.infer<typeof registryItemSchema> {}
 
 export const registrySchema = registryItemSchema.extend({
-  files: z.array(
-    z.object({
-      path: z.string(),
-      content: z.string(),
-      type: registryItemFileTypes,
-    })
-  ),
+  files: z.array(registryItemFileEntrySchema),
 });
 
 export interface RegistryType extends z.infer<typeof registrySchema> {}

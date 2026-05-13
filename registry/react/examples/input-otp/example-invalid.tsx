@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { InputOtp, InputOtpSlot } from "@/registry/react/components/input-otp";
+import { InputOTP, InputOTPSlot } from "@/registry/react/components/input-otp";
 
 const Example = () => {
   const [value, setValue] = React.useState([""]);
@@ -9,16 +9,16 @@ const Example = () => {
   const isCorrect = value.join("") === "1234";
 
   return (
-    <InputOtp
+    <InputOTP
       invalid={!isCorrect}
       onValueChange={({ value }) => setValue(value)}
       value={value}
     >
-      <InputOtpSlot index={0} />
-      <InputOtpSlot index={1} />
-      <InputOtpSlot index={2} />
-      <InputOtpSlot index={3} />
-    </InputOtp>
+      <InputOTPSlot index={0} />
+      <InputOTPSlot index={1} />
+      <InputOTPSlot index={2} />
+      <InputOTPSlot index={3} />
+    </InputOTP>
   );
 };
 

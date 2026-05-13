@@ -9,9 +9,7 @@
     "recharts",
     "tailwind-variants"
   ],
-  "devDependencies": [
-    "tw-animate-css"
-  ],
+  "devDependencies": ["tw-animate-css"],
   "registryDependencies": [
     "http://localhost:3000/r/accordion.json",
     "http://localhost:3000/r/action-bar.json",
@@ -53,6 +51,7 @@
     "http://localhost:3000/r/format.json",
     "http://localhost:3000/r/frame.json",
     "http://localhost:3000/r/highlight.json",
+    "http://localhost:3000/r/hitbox.json",
     "http://localhost:3000/r/hint.json",
     "http://localhost:3000/r/hover-card.json",
     "http://localhost:3000/r/image-cropper.json",

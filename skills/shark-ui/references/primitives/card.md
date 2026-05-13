@@ -2,11 +2,8 @@
 
 ## When to use
 
-Use **card** when Shark docs describe this primitive for the task.
-
-## When not to use
-
-Pick another registry row from [component-registry.md](../component-registry.md) if MDX points you elsewhere.
+- Structured surface sections for grouped content.
+- Settings, dashboard, and preview layouts with header/panel/footer semantics.
 
 ## Install
 
@@ -14,31 +11,106 @@ Pick another registry row from [component-registry.md](../component-registry.md)
 npx shadcn@latest add @shark/card
 ```
 
-## Source of truth
+Manual deps from docs:
 
-| Kind | Path |
-|------|------|
-| Docs | [`content/docs/components/card.mdx`](../../content/docs/components/card.mdx) |
-| Examples | [`registry/react/examples/card/`](../../registry/react/examples/card/) |
-| Source | [`registry/react/components/card.tsx`](../../registry/react/components/card.tsx) |
-
-## Imports (shark-ui repo)
-
-```tsx
-import { /* named exports from MDX */ } from "@/registry/react/components/card";
+```bash
+npm install @ark-ui/react
 ```
 
-Consumer apps: use paths from installation docs (often `@/components/ui/...`).
+## Canonical imports
+
+```tsx
+import {
+  Card,
+  CardMedia,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardContent,
+  CardTitle,
+  CardAction,
+} from "@/components/ui/card"
+```
 
 ## Minimal pattern
 
-Follow **Anatomy** and **Usage** in the MDX file; copy structure from an `example-*.tsx` under the examples path when present.
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Title</CardTitle>
+    <CardDescription>Description</CardDescription>
+  </CardHeader>
+  <CardContent>Content</CardContent>
+  <CardFooter>Footer</CardFooter>
+</Card>
+```
 
-## Pitfalls
+### Key patterns
 
-- Do not assume Radix-only APIs; confirm Ark/Shark props in MDX and source.
-- Prefer registry examples over inventing markup.
+Shorthand Title and Description
 
-## See also
+```tsx
+// …
+<CardHeader 
+  title="Title" 
+  description="Description" 
+>
+  <CardAction>Action</CardAction>
+</CardHeader>
+// …
+```
 
-- [Component registry](../component-registry.md)
+Card with form content:
+
+```tsx
+<Card className="w-full max-w-sm">
+  <CardHeader>
+    <CardTitle>Create project</CardTitle>
+    <CardDescription>Deploy your new project in one click.</CardDescription>
+  </CardHeader>
+  <CardContent className="flex flex-col gap-4">
+    <Field>
+      <FieldLabel>Name</FieldLabel>
+      <Input placeholder="My project" />
+    </Field>
+  </CardContent>
+  <CardFooter className="flex justify-end gap-2">
+    <Button variant="ghost">Cancel</Button>
+    <Button>Create</Button>
+  </CardFooter>
+</Card>
+```
+
+Card with `CardMedia` via the `variant` prop (`icon`|`image`|`default`):
+
+```tsx
+<Card>
+  <CardMedia variant="image">
+    <img src="https://via.placeholder.com/150" alt="Card image" />
+  </CardMedia>
+  {/* … */}
+</Card>
+```
+
+Custom spacing via the `className` prop:
+
+```tsx
+<Card className="[--space:--spacing(8)]">
+   {/* … */}
+</Card>
+```
+
+Keep `CardHeader`, `CardContent`, and `CardFooter` as direct children of `Card` to preserve built-in spacing and layout.
+
+## Common pitfalls
+
+- Skipping `CardHeader`/`CardContent`/`CardFooter` structure in composed cards.
+- Mixing unrelated layout wrappers that break spacing between card sections.
+- Using cards as generic wrappers when `Frame` or plain layout would be clearer.
+
+## Registry example files
+
+- [`example-custom-spacing.tsx`](/registry/react/examples/card/example-custom-spacing.tsx)
+- [`example-default.tsx`](/registry/react/examples/card/example-default.tsx)
+- [`example-icon.tsx`](/registry/react/examples/card/example-icon.tsx)
+- [`example-product.tsx`](/registry/react/examples/card/example-product.tsx)
