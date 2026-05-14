@@ -19,7 +19,6 @@ const Example = () => (
         </FieldContent>
       </Field>
     </FieldLabel>
-
     <FieldLabel>
       <Field>
         <FieldContent>
@@ -28,7 +27,6 @@ const Example = () => (
         </FieldContent>
       </Field>
     </FieldLabel>
-
     <FieldLabel>
       <Field>
         <FieldContent>

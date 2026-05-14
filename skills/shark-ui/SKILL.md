@@ -63,6 +63,8 @@ These rules are always enforced for Shark output. Each section links to longer g
 - **`FieldSet` + `FieldLegend`** for grouped checkboxes/radios — see Field docs.
 - **Validation** — `invalid` on `Field`, it will be passed to the control automatically; disabled patterns per forms guide.
 
+### Forms & validation → [`references/rules/forms.md`](references/rules/forms.md)
+
 ### Component structure & composition → [`references/rules/composition.md`](references/rules/composition.md)
 
 - **Items inside the correct parent** — follow each primitive’s anatomy (e.g. list rows inside collection/list parts as documented).

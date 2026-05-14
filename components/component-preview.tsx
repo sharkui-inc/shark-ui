@@ -27,6 +27,12 @@ interface ComponentPreviewProps
    */
   fileName?: string;
   /**
+   * The height of the preview
+   *
+   * @default true
+   */
+  hasMaxHeight?: boolean;
+  /**
    * Whether to show the dashed padding guide borders around the preview
    *
    * @default true
@@ -40,6 +46,7 @@ export const ComponentPreview = async (props: ComponentPreviewProps) => {
     fileName = "example-default",
     align = "center",
     showBorders,
+    hasMaxHeight = true,
     ...rest
   } = props;
 
@@ -68,6 +75,7 @@ export const ComponentPreview = async (props: ComponentPreviewProps) => {
   return (
     <ComponentPreviewTabs
       component={<Example.default />}
+      hasMaxHeight={hasMaxHeight}
       showBorders={showBorders}
       source={<ComponentSource code={sourceCode} isCollapsible={false} />}
       {...rest}

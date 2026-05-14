@@ -78,7 +78,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
     <div className="size-full">
       <div className="flex items-stretch xl:w-full" data-slot="docs">
         <div className="relative flex w-full min-w-0 flex-1 flex-col lg:me-4 lg:mt-8 lg:mb-8">
-          <div className="relative flex w-full flex-col border bg-card text-card-foreground shadow-lg/5 max-lg:border-none lg:rounded-2xl">
+          <div className="relative flex w-full flex-col border bg-card/64 text-card-foreground shadow-lg/5 max-lg:border-none lg:rounded-2xl">
             <div className="flex-1 px-4 py-6 sm:px-6 lg:p-8">
               <div
                 className={cn("mx-auto w-full", {
@@ -158,7 +158,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                     {links && (
                       <div className="flex items-center gap-2 pt-4">
                         {links?.doc && (
-                          <Badge asChild size="lg" variant="secondary">
+                          <Badge asChild size="lg" variant="outline">
                             <a
                               href={links.doc}
                               rel="noreferrer"
@@ -170,7 +170,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                         )}
 
                         {links?.api && (
-                          <Badge asChild size="lg" variant="secondary">
+                          <Badge asChild size="lg" variant="outline">
                             <a
                               href={links.api}
                               rel="noreferrer"
@@ -185,7 +185,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                   </div>
 
                   <SkipNavContent className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
-                    <MDX components={mdxComponents()} />
+                    <MDX components={mdxComponents} />
                   </SkipNavContent>
                 </div>
               </div>

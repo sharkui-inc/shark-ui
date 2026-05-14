@@ -24,9 +24,25 @@ interface DocsSidebarProps extends React.ComponentProps<typeof Sidebar> {
   tree: typeof source.pageTree;
 }
 
-const NEW_ITEMS = [""];
+const NEW_ITEMS = [
+  "/docs/skills",
+  "/docs/changelog",
+  "/docs/hooks/use-is-mobile",
+];
 
-const UPDATED_ITEMS = ["/docs/components/timer"];
+const UPDATED_ITEMS = [
+  "/docs/forms",
+  "/docs/components/badge",
+  "/docs/components/calendar",
+  "/docs/components/card",
+  "/docs/components/drawer",
+  "/docs/components/table",
+  "/docs/components/field",
+  "/docs/components/number-input",
+  "/docs/components/timer",
+  "/docs/components/marquee",
+  "/docs/utilities/json-tree-view",
+];
 
 export const DocsSidebar = (props: DocsSidebarProps) => {
   const { tree, className, ...rest } = props;
@@ -62,7 +78,7 @@ export const DocsSidebar = (props: DocsSidebarProps) => {
                               {item.name}
 
                               {UPDATED_ITEMS.includes(item.url) && (
-                                <Badge variant="secondary">Updated</Badge>
+                                <Badge variant="outline">Updated</Badge>
                               )}
 
                               {NEW_ITEMS.includes(item.url) && (

@@ -11,10 +11,8 @@ const CheckboxDemo = () => (
   <FieldGroup className="max-w-sm">
     <Field orientation="horizontal">
       <Checkbox defaultChecked />
-
       <FieldLabel>Accept terms and conditions</FieldLabel>
     </Field>
-
     <Field orientation="horizontal">
       <Checkbox />
       <FieldContent>
@@ -24,9 +22,8 @@ const CheckboxDemo = () => (
         </FieldDescription>
       </FieldContent>
     </Field>
-
     <Field orientation="horizontal">
-      <Checkbox disabled />
+      <Checkbox />
       <FieldContent>
         <FieldLabel>Receive marketing emails</FieldLabel>
       </FieldContent>

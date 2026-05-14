@@ -40,13 +40,13 @@ Toggle group with icon buttons:
 ```tsx
 <ToggleGroup defaultValue={["bold"]}>
   <ToggleGroupItem aria-label="Toggle bold" value="bold">
-    <BoldIcon aria-hidden="true" />
+    <BoldIcon />
   </ToggleGroupItem>
   <ToggleGroupItem aria-label="Toggle italic" value="italic">
-    <ItalicIcon aria-hidden="true" />
+    <ItalicIcon />
   </ToggleGroupItem>
   <ToggleGroupItem aria-label="Toggle underline" value="underline">
-    <UnderlineIcon aria-hidden="true" />
+    <UnderlineIcon />
   </ToggleGroupItem>
 </ToggleGroup>
 ```

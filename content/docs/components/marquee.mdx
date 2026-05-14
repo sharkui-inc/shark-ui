@@ -95,13 +95,6 @@ import {
 </Marquee>
 ```
 
-## Accessibility
-
-- **Enable pause-on-interaction:** Use `pauseOnInteraction` so users can pause the animation on hover or focus, improving accessibility and readability.
-- **Use descriptive labels:** Add a meaningful `aria-label` that describes the marquee content.
-- **Avoid for critical information:** Do not use marquees for content users must read. Moving text is hard to process; use static content for important information.
-
-
 ## Orientation
 
 Use the `orientation` prop to control the orientation of the marquee.
@@ -161,7 +154,7 @@ Root component. Manages the scrolling viewport and animation.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `orientation` | `horizontal`, `vertical` | `horizontal` |
-| `speed` | `number` (px/s) | `50` |
+| `speed` | `number` | `50` |
 | `spacing` | `string` | `"16px"` |
 | `showEdges` | `boolean` | `true` |
 | `autoFill` | `boolean` | `false` |

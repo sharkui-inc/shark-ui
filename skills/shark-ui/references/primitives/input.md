@@ -50,7 +50,7 @@ Input with addon (InputGroup):
 <InputGroup>
   <InputGroupInput aria-label="Search" placeholder="Search" type="search" />
   <InputGroupAddon>
-    <SearchIcon aria-hidden="true" />
+    <SearchIcon />
   </InputGroupAddon>
 </InputGroup>
 ```

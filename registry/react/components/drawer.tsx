@@ -130,7 +130,7 @@ export const DrawerPositioner = (props: DrawerPositionerProps) => {
 
 const drawerContentVariants = tv({
   base: [
-    "[--bleed:3rem] [--space:--spacing(4)]",
+    "[--bleed:3rem] [--space:--spacing(6)]",
     "group/drawer",
     "relative",
     "z-[calc(50+var(--layer-index,0))]",

@@ -259,7 +259,7 @@ Set `disabled` to prevent user interaction.
 
 #### Custom Size
 
-Customize swatch size using the `size-*` utility class on `<ColorPickerSwatchTrigger />`.
+Customize swatch size using the `size-*` on `<ColorPickerSwatchTrigger />`.
 
 <ComponentPreview componentName="color-picker" fileName="example-swatch-picker-custom-size" />
 
@@ -356,7 +356,9 @@ import {
 
 ### Custom spacing
 
-Use `[--space:--spacing("value")]` on `<ColorPickerContent />` to adjust popover padding (default `--spacing(3)`).
+Use `[--space:--spacing("value")]` on `<ColorPickerContent />` to adjust internal spacing.
+
+Default spacing is `--spacing(3)`.
 
 <ComponentPreview componentName="color-picker" fileName="example-custom-spacing" />
 

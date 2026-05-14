@@ -44,11 +44,13 @@ export const CodeCollapsibleWrapper = (props: CodeCollapsibleWrapperProps) => {
       <CollapsibleTrigger
         className={cn(
           "absolute inset-x-0 -bottom-4",
-          "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/32",
-          "flex h-20 cursor-pointer items-center justify-center",
-          "bg-linear-to-b from-transparent via-50% via-card to-card",
+          "h-20",
+          "flex items-center justify-center",
+          "bg-linear-to-b from-transparent via-card/64 to-card",
           "font-medium text-muted-foreground text-sm",
-          "rounded-b-lg transition-colors",
+          "rounded-b-lg border border-t-0",
+          "transition-colors",
+          "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/32",
           "hover:text-foreground",
           "data-[state=open]:hidden"
         )}

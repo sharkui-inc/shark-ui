@@ -22,11 +22,11 @@ npm install @ark-ui/react
 ```tsx
 import {
   NumberInput,
-  NumberFieldDecrement,
-  NumberFieldGroup,
-  NumberFieldIncrement,
-  NumberFieldInput,
-  NumberFieldScrubArea,
+  NumberInputDecrement,
+  NumberInputGroup,
+  NumberInputIncrement,
+  NumberInputInput,
+  NumberInputScrubArea,
 } from "@/components/ui/number-input"
 ```
 
@@ -34,12 +34,12 @@ import {
 
 ```tsx
 <NumberInput defaultValue={0}>
-  <NumberFieldScrubArea label="Quantity" />
-  <NumberFieldGroup>
-    <NumberFieldDecrement />
-    <NumberFieldInput />
-    <NumberFieldIncrement />
-  </NumberFieldGroup>
+  <NumberInputScrubArea label="Quantity" />
+  <NumberInputGroup>
+    <NumberInputDecrement />
+    <NumberInputInput />
+    <NumberInputIncrement />
+  </NumberInputGroup>
 </NumberInput>
 ```
 
@@ -53,11 +53,11 @@ Number field with external label and bounds:
 <Field name="quantity">
   <FieldLabel>Quantity</FieldLabel>
   <NumberInput defaultValue={1} min={0} max={99}>
-    <NumberFieldGroup>
-      <NumberFieldDecrement />
-      <NumberFieldInput />
-      <NumberFieldIncrement />
-    </NumberFieldGroup>
+    <NumberInputGroup>
+      <NumberInputDecrement />
+      <NumberInputInput />
+      <NumberInputIncrement />
+    </NumberInputGroup>
   </NumberInput>
   <FieldError />
 </Field>
@@ -67,16 +67,16 @@ Number field with scrub area (drag to adjust):
 
 ```tsx
 <NumberInput defaultValue={50}>
-  <NumberFieldScrubArea label="Brightness" />
-  <NumberFieldGroup>
-    <NumberFieldDecrement />
-    <NumberFieldInput />
-    <NumberFieldIncrement />
-  </NumberFieldGroup>
+  <NumberInputScrubArea label="Brightness" />
+  <NumberInputGroup>
+    <NumberInputDecrement />
+    <NumberInputInput />
+    <NumberInputIncrement />
+  </NumberInputGroup>
 </NumberInput>
 ```
 
-Sizes: `sm`, `default`, `lg` on `NumberFieldGroup`.
+Sizes: `sm`, `default`, `lg` on `NumberInputGroup`.
 
 
 ## Common pitfalls

@@ -52,34 +52,34 @@ npm install @ark-ui/react lucide-react
 ## Anatomy
 
 ```text
-NumberField
-└── NumberFieldGroup
-    ├── NumberFieldDecrement
-    ├── NumberFieldInput
-    ├── NumberFieldIncrement
-    └── NumberFieldScrubber
+NumberInput
+└── NumberInputGroup
+    ├── NumberInputDecrement
+    ├── NumberInputInput
+    ├── NumberInputIncrement
+    └── NumberInputScrubber
 ```
 
 ## Usage
 
 ```tsx
 import { 
-  NumberField, 
-  NumberFieldGroup, 
-  NumberFieldInput, 
-  NumberFieldIncrement, 
-  NumberFieldDecrement 
+  NumberInput, 
+  NumberInputGroup, 
+  NumberInputInput, 
+  NumberInputIncrement, 
+  NumberInputDecrement 
 } from "@/comopnents/ui/number-input";
 ```
 
 ```tsx showLineNumbers
-<NumberField>
-  <NumberFieldGroup>
-    <NumberFieldInput />
-    <NumberFieldIncrement />
-    <NumberFieldDecrement />
-  </NumberFieldGroup>
-</NumberField>
+<NumberInput>
+  <NumberInputGroup>
+    <NumberInputInput />
+    <NumberInputIncrement />
+    <NumberInputDecrement />
+  </NumberInputGroup>
+</NumberInput>
 ```
 
 ## Controlled
@@ -87,6 +87,20 @@ import {
 Use `value` and `onValueChange` to control the number input. Keep the value as a string when using `formatOptions` to preserve locale formatting.
 
 <ComponentPreview componentName="number-input" fileName="example-controlled" />
+
+## State
+
+### Disabled
+
+Use the `disabled` prop to disable the number input.
+
+<ComponentPreview componentName="number-input" fileName="example-disabled" />
+
+### Invalid
+
+Use the `invalid` prop to mark the number input as invalid.
+
+<ComponentPreview componentName="number-input" fileName="example-invalid" />
 
 ## Sizes
 
@@ -104,26 +118,9 @@ Use the `size` prop to change the input height.
 
 <ComponentPreview componentName="number-input" fileName="example-size-lg" />
 
-## State
-
-### Disabled
-
-Use the `disabled` prop to disable the number input.
-
-<ComponentPreview componentName="number-input" fileName="example-disabled" />
-
-### Invalid
-
-Use the `invalid` prop to mark the number input as invalid.
-
-<ComponentPreview componentName="number-input" fileName="example-invalid" />
-
-
 ## Examples
 
 ### Field Only
-
-Render the input field without stepper buttons.
 
 <ComponentPreview componentName="number-input" fileName="example-field-only" />
 
@@ -135,19 +132,19 @@ Use `<Field />`, `<FieldLabel />`, and `<FieldDescription />` for a labeled numb
 
 ### With Input Group
 
-Use `<InputGroup />`, `<InputGroupAddon />`, and `<InputGroupText />` to add prefix or suffix content like currency symbols or units.
+Use `<InputGroup />`, `<InputGroupAddon />`, and `<InputGroupText />` to add prefix or suffix.
 
 <ComponentPreview componentName="number-input" fileName="example-with-input-group" />
 
 ### With Scrub
 
-Use the `<NumberFieldScrubber />` to enable the scrubber interaction—drag the label to change the value.
+Use the `<NumberInputScrubber />` to drag the label to change the value.
 
 <ComponentPreview componentName="number-input" fileName="example-scrub" />
 
 ### With Range
 
-Pass `min` and `max` to clamp the value. The input restricts the value to the specified range 
+Pass `min` and `max` to restrict the value to the specified range.
 
 Use `clampValueOnBlur={false}` to allow typing outside range until blur.
 
@@ -167,13 +164,13 @@ Use the `step` prop to set the increment/decrement amount.
 
 ### Mouse Wheel
 
-Use the `allowMouseWheel` prop to increment or decrement the value with the mouse wheel when the input is focused.
+Use the `allowMouseWheel` prop to increment or decrement the value with the mouse wheel.
 
 <ComponentPreview componentName="number-input" fileName="example-mouse-wheel" />
 
 ## API Reference
 
-### NumberField
+### NumberInput
 
 Root component. Manages numeric value and stepper controls.
 
@@ -194,32 +191,36 @@ Root component. Manages numeric value and stepper controls.
 | `allowMouseWheel` | `boolean` | `false` |
 | `onValueChange` | `(details: ValueChangeDetails) => void` | - |
 | `className` | `string` | - |
+| `asChild` | `boolean` | `false` |
 
-### NumberFieldGroup
+### NumberInputGroup
 
 Wraps the input and increment/decrement buttons.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | - |
+| `asChild` | `boolean` | `false` |
 
-### NumberFieldDecrement
+### NumberInputDecrement
 
 Decreases the value by the step amount.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | - |
+| `asChild` | `boolean` | `false` |
 
-### NumberFieldIncrement
+### NumberInputIncrement
 
 Increases the value by the step amount.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | - |
+| `asChild` | `boolean` | `false` |
 
-### NumberFieldInput
+### NumberInputInput
 
 Numeric input. Accepts number or direct typing.
 
@@ -227,15 +228,16 @@ Numeric input. Accepts number or direct typing.
 | --- | --- | --- |
 | `size` | `sm` \| `md` \| `lg` | `md` |
 | `className` | `string` | - |
+| `asChild` | `boolean` | `false` |
 
-### NumberFieldScrubber
+### NumberInputScrubber
 
-Drag area for scrubbing the value (like slider). Wraps the input for label association.
+Drag area for scrubbing the value.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `children` | `ReactNode` | - |
 | `className` | `string` | - |
+| `asChild` | `boolean` | `false` |
 
 ---
 

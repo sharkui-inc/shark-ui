@@ -23,7 +23,7 @@ const Example = () => (
   <DatePicker>
     <DatePickerTrigger asChild>
       <Button className="min-w-56" variant="outline">
-        <CalendarIcon aria-hidden="true" />
+        <CalendarIcon />
         <DatePickerValue placeholder="Pick a date" />
       </Button>
     </DatePickerTrigger>

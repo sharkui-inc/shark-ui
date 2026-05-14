@@ -47,7 +47,7 @@ export const FileUploadDropzone = (
   return (
     <ArkFileUpload.Dropzone
       className={cn(
-        "[--space:--spacing(8)]",
+        "[--space:--spacing(6)]",
         "p-(--space)",
         "flex flex-col items-center justify-center gap-2",
         "text-center",
@@ -153,6 +153,8 @@ export const FileUploadList = (props: FileUploadListProps) => {
       {files.map((file, index) => {
         const isImage = file.type.startsWith("image/");
 
+        const key = `${file.name}-${index}`;
+
         const extension = file.name.split(".").pop();
 
         return (
@@ -166,7 +168,7 @@ export const FileUploadList = (props: FileUploadListProps) => {
               className
             )}
             file={file}
-            key={`${file.name}-${index}`}
+            key={key}
             {...rest}
           >
             <FileUploadItemPreview

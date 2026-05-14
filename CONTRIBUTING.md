@@ -51,7 +51,6 @@ Thanks for your interest in contributing to shark-ui. This document covers how t
 - Use `cn()` from `@/lib/utils` for class merging.
 - Use `tailwind-variants` for variant-based styling.
 - Add `data-slot` on component wrappers.
-- Use named exports (not default) for components.
 
 ## Pull Requests
 

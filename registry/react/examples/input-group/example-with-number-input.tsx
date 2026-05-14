@@ -6,15 +6,15 @@ import {
   InputGroupText,
 } from "@/registry/react/components/input-group";
 import {
-  NumberField,
-  NumberFieldInput,
+  NumberInput,
+  NumberInputInput,
 } from "@/registry/react/components/number-input";
 
 const Example = () => (
   <InputGroup className="max-w-64">
-    <NumberField aria-label="Enter the amount" defaultValue="10">
-      <NumberFieldInput className="text-start" />
-    </NumberField>
+    <NumberInput aria-label="Enter the amount" defaultValue="10">
+      <NumberInputInput />
+    </NumberInput>
     <InputGroupAddon>
       <InputGroupText>€</InputGroupText>
     </InputGroupAddon>

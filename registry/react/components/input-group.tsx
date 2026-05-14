@@ -180,7 +180,9 @@ export const InputGroupText = (
   return (
     <ark.span
       className={cn(
-        "flex items-center gap-2 text-muted-foreground text-sm [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
+        "flex items-center gap-2",
+        "text-muted-foreground text-sm",
+        "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
         className
       )}
       data-slot="input-group-text"
@@ -221,7 +223,9 @@ export const InputGroupTextarea = (
         "py-3",
         "bg-transparent",
         "resize-none rounded-none border-0 shadow-none",
-        "focus-visible:ring-0 dark:bg-transparent",
+        "focus-visible:ring-0",
+        "disabled:bg-transparent aria-invalid:ring-0 data-invalid:ring-0",
+        "dark:bg-transparent dark:disabled:bg-transparent",
         className
       )}
       data-slot="input-group-control"

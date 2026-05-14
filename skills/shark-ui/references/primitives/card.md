@@ -92,7 +92,9 @@ Card with `CardMedia` via the `variant` prop (`icon`|`image`|`default`):
 </Card>
 ```
 
-Custom spacing via the `className` prop:
+Use `[--space:--spacing("value")]` on `<Card />` to adjust internal spacing.
+
+Default spacing is `--spacing(4)`.
 
 ```tsx
 <Card className="[--space:--spacing(8)]">

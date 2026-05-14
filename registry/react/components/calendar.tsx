@@ -23,7 +23,7 @@ export const Calendar = (
 
   return (
     <ArkCalendar.Root
-      className={cn("[--cell-size:--spacing(8)]", "w-fit", className)}
+      className={cn("[--cell-size:--spacing(10)]", "w-fit", className)}
       data-slot="calendar"
       inline
       lazyMount={lazyMount}
@@ -59,17 +59,9 @@ export const CalendarTrigger = (
 
 export const CalendarPresetTrigger = (
   props: React.ComponentProps<typeof ArkCalendar.PresetTrigger>
-) => {
-  const { className, ...rest } = props;
-
-  return (
-    <ArkCalendar.PresetTrigger
-      className={cn(className)}
-      data-slot="calendar-preset-trigger"
-      {...rest}
-    />
-  );
-};
+) => (
+  <ArkCalendar.PresetTrigger data-slot="calendar-preset-trigger" {...props} />
+);
 
 export const CalendarViewDate = (
   props: React.ComponentProps<typeof ArkCalendar.RangeText>
@@ -109,17 +101,7 @@ export const CalendarTodayTrigger = (
 
 export const CalendarClearTrigger = (
   props: React.ComponentProps<typeof ArkCalendar.ClearTrigger>
-) => {
-  const { className, ...rest } = props;
-
-  return (
-    <ArkCalendar.ClearTrigger
-      className={cn(className)}
-      data-slot="calendar-clear-trigger"
-      {...rest}
-    />
-  );
-};
+) => <ArkCalendar.ClearTrigger data-slot="calendar-clear-trigger" {...props} />;
 
 export const CalendarYearSelect = (
   props: React.ComponentProps<typeof ArkCalendar.YearSelect>
@@ -261,16 +243,12 @@ interface CalendarWeekDaysProps
 }
 
 export const CalendarWeekDays = (props: CalendarWeekDaysProps) => {
-  const { format = "narrow", className, ...rest } = props;
+  const { format = "narrow", ...rest } = props;
 
   return (
     <CalendarContext>
       {(calendar) => (
-        <CalendarTableHead
-          className={cn(className)}
-          data-slot="calendar-table-head"
-          {...rest}
-        >
+        <CalendarTableHead data-slot="calendar-table-head" {...props}>
           <CalendarTableRow>
             {calendar.weekDays.map((weekDay) => (
               <CalendarTableHeader key={weekDay.short}>

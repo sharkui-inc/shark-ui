@@ -1,0 +1,465 @@
+---
+title: Formisch
+description: Build forms in React using Formisch and Valibot.
+links:
+  doc: https://formisch.dev
+  api: https://formisch.dev/react/api/useForm/
+  ark: https://ark-ui.com/docs/guides/forms
+---
+
+This guide will cover building forms using the [`<Field />`](/docs/components/field) component, adding schema validation with [Valibot](https://valibot.dev), handling errors, ensuring accessibility, and more.
+
+## Demo
+
+We’ll build a form with a text input and textarea. When you submit, the form data is validated and any errors will be shown.
+
+<Alert>
+  <InfoIcon />
+  <AlertTitle>Browser validation disabled</AlertTitle>
+  <AlertDescription>
+    For the purposes of this demo, browser validation is disabled to illustrate schema validation. In production, keep native validation enabled when appropriate.
+  </AlertDescription>
+</Alert>
+
+<ComponentPreview componentName="form/formisch" fileName="example-demo" showBorders={false} hasMaxHeight={false} />
+
+## Approach
+
+This form uses Formisch for state and Valibot for validation. We'll build forms using the `<Field />` component, which gives you complete flexibility over the markup and styling.
+
+- Uses Formisch's `useForm` hook for form state management.
+- Uses the `<Form />` component for submit handling.
+- Import Formisch’s `<Field />` under an alias (`FormischField`) for controlled inputs.
+- Uses Shark `<Field />` components for building accessible forms.
+- Uses client-side validation by passing your Valibot schema into `schema`.
+
+
+## Anatomy
+
+Typical structure: wrap each field with `<FormischField />`, and the `<Field />` component.
+
+```tsx showLineNumbers {5-12}
+<Form of={form} onSubmit={onSubmit}>
+  <FieldGroup>
+    <FormischField of={form} path={["title"]}>
+      {(field) => (
+        <Field invalid={Boolean(field.errors?.length)}>
+          <FieldLabel>Bug Title</FieldLabel>
+          <Input {...field.props} value={field.input} />
+           <FieldDescription>
+            Provide a concise title for your bug report.
+          </FieldDescription>
+          <FieldError>{field.errors?.[0]}</FieldError>
+        </Field>
+      )}
+    </FormischField>
+  </FieldGroup>
+  <Button type="submit">Submit</Button>
+</Form>
+```
+
+## Form
+
+### Create a schema
+
+Define your form shape with a Valibot schema.
+
+<Alert>
+  <InfoIcon />
+  <AlertDescription>
+    **Note:** Formisch only supports [Valibot](https://formisch.dev/react/guides/installation/#install-valibot) for validation.
+  </AlertDescription>
+</Alert>
+
+<ComponentSource src="../examples/form/formisch/example-schema-bug-report.ts" language="ts" />
+
+### Setup
+
+- Create the form with `useForm` from Formisch and pass your schema to the `schema` option, 
+- Wrap fields in `<Form />` and pass the form to the `onSubmit` option.
+
+```tsx showLineNumbers title="form.tsx" {9-15,18-20}
+import { Form, Field as FormischField, useForm } from "@formisch/react";
+import * as v from "valibot";
+
+const formSchema = v.object({
+  // ...
+});
+
+export const BugReportForm = () => {
+  const form = useForm({
+    schema: formSchema,
+    initialInput: {
+      title: "",
+      description: "",
+    },
+  });
+
+  return (
+    <Form of={form} onSubmit={(output) => console.log(output)}>
+      {/* Build the form here */}
+    </Form>
+  );
+};
+```
+
+### Build
+
+Build the form using the `<FormischField />` from Formisch and the Shark `<Field />`.
+
+<ComponentSource src="../examples/form/formisch/example-demo.tsx" />
+
+### Done
+
+That's it. You now have a fully accessible form with client-side validation.
+
+When you submit the form, the `onSubmit` handler on `<Form />` receives validated output. If the form data is invalid, Formisch will display the errors on `field.errors` for `<FieldError />`.
+
+## Validation
+
+### Client-side
+
+Formisch validates your form data using the Valibot schema. Define a schema and pass it to the `schema` option of the `useForm` hook.
+
+```tsx showLineNumbers title="example-form.tsx" {4-7,11}
+import { useForm } from "@formisch/react"
+import * as v from "valibot"
+
+const formSchema = v.object({
+  title: v.string(),
+  description: v.optional(v.string()),
+})
+
+export const ExampleForm = () => {
+  const form = useForm({
+    schema: formSchema,
+    initialInput: {
+      title: "",
+      description: "",
+    },
+  })
+}
+```
+
+### Modes
+
+Configure when validation runs via the `validate` and `revalidate` options:
+
+```tsx showLineNumbers title="form.tsx" {3-4}
+const form = useForm({
+  schema: formSchema,
+  validate: "submit",
+  revalidate: "input",
+})
+```
+
+| Option | Role |
+| --- | --- |
+| `"initial"` | Validation triggers on initial render. |
+| `"touch"` | Validation triggers on field touch. |
+| `"input"` | Validation triggers on field input. |
+| `"change"` | Validation triggers on field change. |
+| `"blur"` | Validation triggers on field blur. |
+| `"submit"` | Validation triggers on form submit. |
+
+## Displaying Errors
+
+Display errors next to the field using `<FieldError />`. For styling and accessibility:
+
+- Add the `invalid` prop to the `<Field />` component.
+- Don't need to add the `invalid` prop to the form control such as `<Input />`, `<Checkbox />`, etc.
+
+```tsx showLineNumbers title="form.tsx" {3,6}
+<FormischField of={form} path={["email"]}>
+  {(field) => (
+    <Field invalid={Boolean(field.errors?.length)}>
+      <FieldLabel>Email</FieldLabel>
+      <Input {...field.props} type="email" value={field.input} />
+      <FieldError>{field.errors?.[0]}</FieldError>
+    </Field>
+  )}
+</FormischField>
+```
+
+## Different types of fields
+
+### Input
+
+- Spread `field.props` on `<Input />` and set `value={field.input}`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-input" showBorders={false} hasMaxHeight={false} />
+
+### Textarea
+
+- Spread `field.props` on `<Textarea />` and set `value={field.input}`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-textarea" showBorders={false} hasMaxHeight={false} />
+
+### NativeSelect
+
+- Spread `field.props` on `<NativeSelect />` and set `value={field.input}`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-native-select" showBorders={false} hasMaxHeight={false} />
+
+### Select
+
+- Wire `field.input` and `field.onChange` to `<Select />`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-select" showBorders={false} hasMaxHeight={false} />
+
+### Checkbox
+
+- Wire `field.input` and `field.onChange` to `<Checkbox />`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Remember to add `data-slot="checkbox-group"` to the `<FieldGroup />` component for proper styling and spacing.
+
+<ComponentPreview componentName="form/formisch" fileName="example-checkbox" showBorders={false} hasMaxHeight={false} />
+
+### Radio group
+
+- Wire `field.input` and `field.onChange` to `<RadioGroup />`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-radio-group" showBorders={false} hasMaxHeight={false} />
+
+### Switch
+
+- Wire `field.input` and `field.onChange` to `<Switch />`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-switch" showBorders={false} hasMaxHeight={false} />
+
+### NumberInput
+
+- Wire `field.input` and `field.onChange` to `<NumberInput />`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-number-input" showBorders={false} hasMaxHeight={false} />
+
+### Slider
+
+- Wire `field.input` and `field.onChange` to `<Slider />`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-slider" showBorders={false} hasMaxHeight={false} />
+
+### Combobox
+
+- Wire `field.input` and `field.onChange` to `<Combobox />`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-combobox" showBorders={false} hasMaxHeight={false} />
+
+### Autocomplete
+
+- Wire `field.input` and `field.onChange` to `<Autocomplete />`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-autocomplete" showBorders={false} hasMaxHeight={false} />
+
+### Date Picker
+
+- Wire `field.input` and `field.onChange` to `<DatePicker />`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-date-picker" showBorders={false} hasMaxHeight={false} />
+
+### Input OTP
+
+- Wire `field.input` and `field.onChange` to `<InputOTP />`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-input-otp" showBorders={false} hasMaxHeight={false} />
+
+### Rating
+
+- Use `field.onChange` with `<Rating />`’s `onValueChange` and bind `value` from `field.input`.
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-rating" showBorders={false} hasMaxHeight={false} />
+
+### File Upload
+
+- Use `<FileUpload />` `onFileAccept` to push files into the field value (`field.onChange`).
+- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+
+<ComponentPreview componentName="form/formisch" fileName="example-file-upload" showBorders={false} hasMaxHeight={false} />
+
+### Complex Forms
+
+Here is an example of a more complex form with multiple fields and validation.
+
+<ComponentPreview componentName="form/formisch" fileName="example-complex" showBorders={false} hasMaxHeight={false} />
+
+## Resetting the Form
+
+Import `reset` and pass the form to reset the form to its default values.
+
+```tsx showLineNumbers
+import { reset } from "@formisch/react";
+
+<Button
+  type="button"
+  variant="outline"
+  onClick={() => reset(form)}
+>
+  Reset
+</Button>
+```
+
+## Array Fields
+
+Formisch provides a `<FieldArray />` component for managing dynamic array fields. Also provides helpers like `insert` and `remove` for dynamic lists. This is useful when you need to add or remove fields dynamically.
+
+<ComponentPreview componentName="form/formisch" fileName="example-array-emails" showBorders={false} hasMaxHeight={false} />
+
+### Array Field Structure
+
+Use `<FieldArray />` component and pass the form to the `of` prop.
+
+```tsx showLineNumbers title="form.tsx" {9-15}
+import { FieldArray, Field as FormischField, useForm } from "@formisch/react";
+
+export const ExampleForm = () => {
+  const form = useForm({
+    // ... form config
+  });
+
+  return (
+    <FieldArray of={form} path={["emails"]}>
+      {(arrayField) => (
+        arrayField.items.map((itemId, index) => (
+          // Nested field for each array item
+        ))
+      )}
+    </FieldArray>
+  );
+}
+```
+
+### Nested Fields
+
+Use `arrayField.items` to render each nested field, passing the correct path for each item.
+
+```tsx showLineNumbers title="form.tsx"
+{
+  arrayField.items.map((itemId, index) => (
+    <FormischField 
+      key={itemId} 
+      of={form} 
+      path={["emails", index, "contact", "address"]}
+    >
+      {(field) => (
+        <Field invalid={Boolean(field.errors?.length)} orientation="horizontal">
+          <FieldContent>
+            <InputGroup>
+              <InputGroupInput
+                {...field.props}
+                autoComplete="email"
+                onChange={(e) => field.onChange(e.target.value)}
+                placeholder="name@example.com"
+                type="email"
+                value={field.input}
+              />
+              {arrayField.items.length > 1 && (
+                <InputGroupAddon align="inline-end">
+                  <InputGroupButton
+                    aria-label={`Remove email ${String(index + 1)}`}
+                    onClick={() =>
+                      remove(form, { path: ["emails"], at: index })
+                    }
+                    size="icon-xs"
+                    type="button"
+                    variant="ghost"
+                  >
+                    <XIcon aria-hidden className="size-4" />
+                  </InputGroupButton>
+                </InputGroupAddon>
+              )}
+            </InputGroup>
+            <FieldError>{field.errors?.[0]}</FieldError>
+          </FieldContent>
+        </Field>
+      )}
+    </FormischField>
+  ))
+}
+```
+
+### Adding items
+
+- Use `insert` to add a new array item.
+- Provide `initialInput` matching the nested structure of the array element.
+
+```tsx showLineNumbers title="form.tsx"
+import { insert } from "@formisch/react";
+
+<Button
+  type="button"
+  variant="outline"
+  size="sm"
+  onClick={() =>
+    insert(form, {
+      path: ["emails"],
+      initialInput: { contact: { address: "" } },
+    })
+  }
+  disabled={arrayField.items.length >= 5}
+>
+  Add Email Address
+</Button>
+```
+
+### Removing items
+
+Use `remove` with the array path and index.
+
+```tsx showLineNumbers title="form.tsx"
+import { remove } from "@formisch/react";
+
+{
+  arrayField.items.length > 1 && (
+    <InputGroupAddon align="inline-end">
+      <InputGroupButton
+        type="button"
+        variant="ghost"
+        size="icon-xs"
+        onClick={() => remove(form, { path: ["emails"], at: index })}
+        aria-label={`Remove email ${index + 1}`}
+      >
+        <XIcon />
+      </InputGroupButton>
+    </InputGroupAddon>
+  );
+}
+```
+
+### Array validation
+
+Use Valibot's `array` method to validate array fields.
+
+```tsx showLineNumbers title="form.tsx"
+import * as v from "valibot";
+
+const formSchema = v.object({
+  emails: v.pipe(
+    v.array(
+      v.object({
+        contact: v.object({
+          address: v.pipe(
+            v.string(),
+            v.nonEmpty("Enter an email address."),
+            v.email("Enter a valid email address.")
+          ),
+        }),
+      })
+    ),
+    v.minLength(1, "Add at least one email address."),
+    v.maxLength(5, "You can add up to 5 email addresses.")
+  ),
+});
+```

@@ -164,12 +164,12 @@ const hintContentVariants = tv({
         "data-[state=open]:slide-in-from-top-5 origin-bottom",
       ],
       right: [
-        "start-full top-1/2 ms-(--gutter) -translate-y-1/2",
+        "inset-s-full top-1/2 ms-(--gutter) -translate-y-1/2",
         "ms-(--gutter)",
         "data-[state=open]:slide-in-from-start-5 origin-end",
       ],
       left: [
-        "end-full top-1/2 me-(--gutter) -translate-y-1/2",
+        "inset-e-full top-1/2 me-(--gutter) -translate-y-1/2",
         "me-(--gutter)",
         "data-[state=open]:slide-in-from-end-5 origin-start",
       ],

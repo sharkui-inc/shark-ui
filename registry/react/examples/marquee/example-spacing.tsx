@@ -1,3 +1,11 @@
+import { AppleIcon } from "@/components/icons/apple";
+import { ChatGptIcon } from "@/components/icons/chat-gpt";
+import { ClaudeIcon } from "@/components/icons/claude";
+import { GoogleIcon } from "@/components/icons/google";
+import { NextIcon } from "@/components/icons/next";
+import { ReactIcon } from "@/components/icons/react";
+import { ViteIcon } from "@/components/icons/vite";
+import { VueIcon } from "@/components/icons/vue";
 import { Card, CardContent } from "@/registry/react/components/card";
 import {
   Marquee,
@@ -5,22 +13,33 @@ import {
   MarqueeItem,
 } from "@/registry/react/components/marquee";
 
-const items = Array.from({ length: 10 });
-
 const Example = () => (
-  <Marquee pauseOnInteraction spacing="40px">
-    <MarqueeContent>
-      {items.map((_, index) => (
-        <MarqueeItem key={index}>
-          <Card className="shadow-none">
-            <CardContent>
-              <p>Sponsor {index + 1}</p>
-            </CardContent>
-          </Card>
-        </MarqueeItem>
-      ))}
-    </MarqueeContent>
-  </Marquee>
+  <div className="flex size-full items-center justify-center border border-border bg-background p-4">
+    <Marquee pauseOnInteraction spacing="40px">
+      <MarqueeContent>
+        {items.map((Icon, index) => (
+          <MarqueeItem key={index}>
+            <Card>
+              <CardContent>
+                <Icon className="size-10" />
+              </CardContent>
+            </Card>
+          </MarqueeItem>
+        ))}
+      </MarqueeContent>
+    </Marquee>
+  </div>
 );
+
+const items = [
+  GoogleIcon,
+  AppleIcon,
+  NextIcon,
+  ChatGptIcon,
+  ClaudeIcon,
+  ViteIcon,
+  VueIcon,
+  ReactIcon,
+];
 
 export default Example;

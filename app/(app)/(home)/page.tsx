@@ -1,6 +1,7 @@
 import { ComponentsExamples } from "@/app/(app)/(home)/_components/components-examples";
 import { DotPattern } from "@/components/background/dot-pattern";
 import { source } from "@/lib/fumadocs";
+import type { LLMPage } from "@/lib/llms";
 import { HomeFooter } from "./_components/footer";
 import { HeroSection } from "./_components/hero";
 import { Supports } from "./_components/supports";
@@ -8,8 +9,13 @@ import { Supports } from "./_components/supports";
 export const dynamic = "force-static";
 export const revalidate = false;
 
+const rawCount = source
+  .getPages()
+  .filter(
+    (p: LLMPage) => p.slugs[0] === "components" || p.slugs[0] === "utilities"
+  ).length;
+
 const HomePage = () => {
-  const rawCount = source.getPages().length;
   const componentsCount = rawCount - (rawCount % 10);
 
   return (

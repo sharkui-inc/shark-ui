@@ -1,23 +1,23 @@
 import {
-  NumberField,
-  NumberFieldDecrement,
-  NumberFieldGroup,
-  NumberFieldIncrement,
-  NumberFieldInput,
+  NumberInput,
+  NumberInputDecrement,
+  NumberInputGroup,
+  NumberInputIncrement,
+  NumberInputInput,
 } from "@/registry/react/components/number-input";
 
 const Example = () => (
-  <NumberField
+  <NumberInput
     className="w-full max-w-40"
     defaultValue="19.00"
     formatOptions={{ currency: "USD", style: "currency" }}
   >
-    <NumberFieldGroup>
-      <NumberFieldDecrement />
-      <NumberFieldInput />
-      <NumberFieldIncrement />
-    </NumberFieldGroup>
-  </NumberField>
+    <NumberInputGroup>
+      <NumberInputDecrement />
+      <NumberInputInput />
+      <NumberInputIncrement />
+    </NumberInputGroup>
+  </NumberInput>
 );
 
 export default Example;

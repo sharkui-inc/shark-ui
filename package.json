@@ -1,6 +1,6 @@
 {
   "name": "shark-ui",
-  "description": "shadcn-style components built on Ark",
+  "description": "shadcn/ui-style components built on Ark UI.",
   "version": "1.0.0",
   "packageManager": "pnpm@11.1.1",
   "private": true,
@@ -43,11 +43,15 @@
   },
   "dependencies": {
     "@ark-ui/react": "^5.36.2",
+    "@formisch/react": "^0.4.5",
+    "@hookform/resolvers": "^5.2.2",
     "@shikijs/langs": "^4.0.2",
     "@shikijs/themes": "^4.0.2",
     "@shikijs/transformers": "^4.0.2",
     "@takumi-rs/core": "^1.1.2",
+    "@tanstack/react-form": "^1.32.0",
     "@tanstack/react-table": "^8.21.3",
+    "@tanstack/zod-form-adapter": "^0.42.1",
     "@teispace/next-themes": "^0.4.2",
     "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
@@ -62,12 +66,14 @@
     "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6",
+    "react-hook-form": "^7.75.0",
     "recharts": "^3.8.1",
     "rehype-pretty-code": "^0.14.3",
     "shiki": "^4.0.2",
     "tailwind-merge": "^3.6.0",
     "tailwind-variants": "^3.2.2",
     "takumi-js": "^1.1.2",
+    "valibot": "^1.4.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {

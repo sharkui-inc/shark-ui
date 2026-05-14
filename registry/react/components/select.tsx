@@ -8,6 +8,7 @@ import type React from "react";
 import type { VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { inputVariants } from "@/registry/react/components/input";
+import { Separator } from "@/registry/react/components/separator";
 
 export const useSelect = useSelectContext;
 
@@ -83,6 +84,20 @@ export const SelectTrigger = (props: SelectTriggerProps) => {
   );
 };
 
+export const SelectSeparator = (
+  props: React.ComponentProps<typeof Separator>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <Separator
+      className={cn("pointer-events-none -mx-1 my-1 h-px bg-border", className)}
+      data-slot="select-separator"
+      {...rest}
+    />
+  );
+};
+
 export const SelectValue = (
   props: React.ComponentProps<typeof ArkSelect.ValueText>
 ) => {
@@ -148,14 +163,10 @@ interface SelectGroupProps
 }
 
 export const SelectGroup = (props: SelectGroupProps) => {
-  const { heading, className, children, ...rest } = props;
+  const { heading, children, ...rest } = props;
 
   return (
-    <ArkSelect.ItemGroup
-      className={cn(className)}
-      data-slot="select-group"
-      {...rest}
-    >
+    <ArkSelect.ItemGroup data-slot="select-group" {...rest}>
       {!!heading && <SelectGroupLabel>{heading}</SelectGroupLabel>}
 
       {children}

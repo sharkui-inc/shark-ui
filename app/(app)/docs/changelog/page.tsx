@@ -79,7 +79,7 @@ const ChangelogPage = () => {
                             {data.title}
                           </h2>
                           <div className="prose-changelog mt-6 *:first:mt-0">
-                            <MDX components={mdxComponents()} />
+                            <MDX components={mdxComponents} />
                           </div>
                         </article>
                       );

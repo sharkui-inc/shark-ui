@@ -121,9 +121,8 @@ export const HeaderCustomize = () => {
                       "w-full",
                       "flex items-center justify-between",
                       "px-3.5 py-2.5",
-                      "bg-background",
-                      "rounded-lg border border-input shadow-xs/5",
-                      "data-[state=checked]:bg-input/32"
+                      "rounded-lg border shadow-xs/5",
+                      "data-[state=checked]:bg-accent"
                     )}
                     key={color.value}
                     value={color.value}
@@ -174,9 +173,8 @@ export const HeaderCustomize = () => {
                         "w-full",
                         "flex items-center justify-between",
                         "px-3.5 py-2.5",
-                        "bg-background",
-                        "rounded-lg border border-input shadow-xs/5",
-                        "data-[state=checked]:bg-input/32"
+                        "rounded-lg border shadow-xs/5",
+                        "data-[state=checked]:bg-accent"
                       )}
                       key={color.value}
                       value={color.value}

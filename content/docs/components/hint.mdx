@@ -69,7 +69,7 @@ import { Hint, HintTrigger, HintContent } from "@/components/ui/hint";
 
 ## Hint vs Tooltip
 
-- **Hint**: A lightweight, minimal tooltip that shows information
+- **Hint**: A lightweight, minimal tooltip that shows information, no external dependencies.
 
 - **Tooltip**: A more complex component that provides a more full-featured tooltip with a variety of options.
 
@@ -99,9 +99,9 @@ Root wrapper. Provides hint context to trigger and content.
 | `positioning` | `Positioning` | `"{ placement: 'top', gutter: '10px' }"` |
 | `className` | `string` | - |
 
-| Attribute | Default |
-| --- | --- |
-| `--gutter` | From `positioning.gutter` (default `10px`) |
+| Attribute | Type | Default |
+| --- | --- | --- |
+| `--gutter` | `string` | `10px` |
 
 ### HintTrigger
 
@@ -110,6 +110,7 @@ Shows the hint on hover or focus. Button by default; use `asChild` for custom el
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | - |
+| `asChild` | `boolean` | - |
 
 ### HintContent
 
@@ -120,6 +121,7 @@ Hint content shown in a popover on hover or focus.
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
 | `className` | `string` | - |
+| `asChild` | `boolean` | - |
 
 ### HintArrow
 

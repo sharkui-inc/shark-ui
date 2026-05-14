@@ -152,7 +152,7 @@ export const FieldLabel = (
     <ArkField.Label
       className={cn(
         "group/field-label peer/field-label",
-        "font-medium text-sm leading-snug",
+        "select-none font-medium text-sm leading-snug",
         "flex w-fit gap-1",
         "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-2.5",
         "has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/5",
@@ -211,6 +211,7 @@ export const FieldDescription = (props: React.ComponentProps<typeof ark.p>) => {
   return (
     <ark.p
       className={cn(
+        "pointer-events-none",
         "font-normal text-muted-foreground text-sm leading-normal",
         "group-has-data-[orientation=horizontal]/field:",
         "nth-last-2:-mt-1 last:mt-0 [[data-variant=legend]+&]:-mt-1.5",

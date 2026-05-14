@@ -25,7 +25,7 @@ const Example = () => (
   <DatePicker defaultValue={[parseDate(new Date())]}>
     <DatePickerTrigger asChild>
       <Button className="min-w-40" variant="outline">
-        <CalendarIcon aria-hidden="true" />
+        <CalendarIcon />
         <DatePickerValue />
       </Button>
     </DatePickerTrigger>

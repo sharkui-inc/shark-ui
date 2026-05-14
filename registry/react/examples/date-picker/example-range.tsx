@@ -24,7 +24,7 @@ const Example = () => (
   <DatePicker focusedValue={parseDate(new Date())} selectionMode="range">
     <DatePickerTrigger asChild>
       <Button className="min-w-56" variant="outline">
-        <CalendarIcon aria-hidden="true" />
+        <CalendarIcon />
         <DatePickerValue placeholder="Pick a date range" />
       </Button>
     </DatePickerTrigger>

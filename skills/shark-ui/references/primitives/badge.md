@@ -48,7 +48,7 @@ Badge with decorative icon:
 
 ```tsx
 <Badge variant="outline">
-  <CheckIcon aria-hidden="true" />
+  <CheckIcon />
   Verified
 </Badge>
 ```

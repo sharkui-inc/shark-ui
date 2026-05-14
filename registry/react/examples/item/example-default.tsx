@@ -19,7 +19,7 @@ const ItemDemo = () => (
         </ItemDescription>
       </ItemContent>
       <ItemActions>
-        <Button size="sm" variant="outline">
+        <Button size="icon-sm" variant="outline">
           <Ellipsis />
         </Button>
       </ItemActions>

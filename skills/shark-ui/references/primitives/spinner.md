@@ -34,15 +34,6 @@ import { Spinner } from "@/components/ui/spinner"
 
 ### Key patterns
 
-Spinner inside a button:
-
-```tsx
-<Button disabled>
-  <Spinner aria-hidden="true" />
-  Loading...
-</Button>
-```
-
 Standalone spinner with label:
 
 ```tsx

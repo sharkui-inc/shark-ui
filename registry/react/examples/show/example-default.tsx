@@ -2,11 +2,11 @@
 
 import React from "react";
 import {
-  NumberField,
-  NumberFieldDecrement,
-  NumberFieldGroup,
-  NumberFieldIncrement,
-  NumberFieldInput,
+  NumberInput,
+  NumberInputDecrement,
+  NumberInputGroup,
+  NumberInputIncrement,
+  NumberInputInput,
 } from "@/registry/react/components/number-input";
 import { Show } from "@/registry/react/components/show";
 
@@ -17,16 +17,16 @@ const ShowDemo = () => {
 
   return (
     <div className="flex max-w-48 flex-col gap-4 text-center text-sm">
-      <NumberField
+      <NumberInput
         min={0}
         onValueChange={({ value }) => setValue(Number(value))}
       >
-        <NumberFieldGroup>
-          <NumberFieldDecrement />
-          <NumberFieldInput />
-          <NumberFieldIncrement />
-        </NumberFieldGroup>
-      </NumberField>
+        <NumberInputGroup>
+          <NumberInputDecrement />
+          <NumberInputInput />
+          <NumberInputIncrement />
+        </NumberInputGroup>
+      </NumberInput>
 
       <Show fallback={<Fallback />} when={isGreaterThan2}>
         <Content />

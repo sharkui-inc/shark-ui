@@ -8,7 +8,7 @@ export const Card = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "[--space:--spacing(4)]",
+        "[--space:--spacing(6)]",
         "group/card",
         "py-(--space)",
         "flex flex-col gap-4",

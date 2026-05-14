@@ -26,17 +26,7 @@ export const Resizable = (
 
 export const ResizablePanel = (
   props: React.ComponentProps<typeof ArkSplitter.Panel>
-) => {
-  const { className, ...rest } = props;
-
-  return (
-    <ArkSplitter.Panel
-      className={cn(className)}
-      data-slot="resizable-panel"
-      {...rest}
-    />
-  );
-};
+) => <ArkSplitter.Panel data-slot="resizable-panel" {...props} />;
 
 interface ResizableResizeTriggerProps
   extends React.ComponentProps<typeof ArkSplitter.ResizeTrigger> {

@@ -36,6 +36,8 @@ Examples live under:
 
 `registry/react/examples/<component>/example-<topic>.tsx`
 
+**Form guides** (React Hook Form, TanStack Form, Formisch) use a second level: `registry/react/examples/form/<rhf|tanstack|formisch>/example-<topic>.tsx`.
+
 Conventions:
 
 - Prefer a **default export** that is a small demo component (e.g. `ButtonDemo`, `ComboboxDemo`), matching existing files in the same folder.

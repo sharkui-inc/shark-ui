@@ -13,27 +13,28 @@ import { Input, type InputProps } from "@/registry/react/components/input";
 
 export const useNumberInput = useNumberInputContext;
 
-interface NumberFieldProps
+interface NumberInputProps
   extends React.ComponentProps<typeof ArkNumberInput.Root>,
     Pick<InputProps, "size"> {}
 
-export const NumberField = (props: NumberFieldProps) => {
+export const NumberInput = (props: NumberInputProps) => {
   const { size = "md", className, ...rest } = props;
 
   return (
     <ArkNumberInput.Root
       className={cn(
-        "group/number-input flex w-full flex-col items-start gap-2",
+        "group/number-field flex w-full flex-col items-start gap-2",
+        "has-data-[slot=number-field-increment]:has-data-[slot=number-field-decrement]:**:data-[slot=number-field-input]:text-center",
         className
       )}
       data-size={size}
-      data-slot="number-input"
+      data-slot="number-field"
       {...rest}
     />
   );
 };
 
-export const NumberFieldGroup = (
+export const NumberInputGroup = (
   props: React.ComponentProps<typeof ArkNumberInput.Control>
 ) => {
   const { className, ...rest } = props;
@@ -53,13 +54,13 @@ export const NumberFieldGroup = (
         "dark:aria-invalid:border-destructive-foreground dark:aria-invalid:text-destructive-foreground dark:aria-invalid:ring-destructive-foreground/20",
         className
       )}
-      data-slot="number-input-group"
+      data-slot="number-field-group"
       {...rest}
     />
   );
 };
 
-export const NumberFieldDecrement = (
+export const NumberInputDecrement = (
   props: React.ComponentProps<typeof ArkNumberInput.DecrementTrigger>
 ) => {
   const { className, ...rest } = props;
@@ -77,7 +78,7 @@ export const NumberFieldDecrement = (
         "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
         className
       )}
-      data-slot="number-input-decrement"
+      data-slot="number-field-decrement"
       {...rest}
     >
       <Button aria-label="Decrement" variant="ghost">
@@ -87,7 +88,7 @@ export const NumberFieldDecrement = (
   );
 };
 
-export const NumberFieldIncrement = (
+export const NumberInputIncrement = (
   props: React.ComponentProps<typeof ArkNumberInput.IncrementTrigger>
 ) => {
   const { className, ...rest } = props;
@@ -105,7 +106,7 @@ export const NumberFieldIncrement = (
         "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
         className
       )}
-      data-slot="number-input-increment"
+      data-slot="number-field-increment"
       {...rest}
     >
       <Button aria-label="Increment" variant="ghost">
@@ -115,16 +116,16 @@ export const NumberFieldIncrement = (
   );
 };
 
-export const NumberFieldInput = (props: React.ComponentProps<typeof Input>) => {
+export const NumberInputInput = (props: React.ComponentProps<typeof Input>) => {
   const { size, className, ...rest } = props;
 
   return (
-    <ArkNumberInput.Input asChild data-slot="number-input-input" {...rest}>
+    <ArkNumberInput.Input asChild data-slot="number-field-input" {...rest}>
       <Input
         className={cn(
           "grow",
           "dark:bg-transparent",
-          "text-center tabular-nums",
+          "tabular-nums",
           "border-0 shadow-none ring-0",
           "focus-visible:ring-0 aria-invalid:ring-0 data-invalid:ring-0",
           className
@@ -135,7 +136,7 @@ export const NumberFieldInput = (props: React.ComponentProps<typeof Input>) => {
   );
 };
 
-export const NumberFieldScrubber = (
+export const NumberInputScrubber = (
   props: React.ComponentProps<typeof ArkNumberInput.Scrubber>
 ) => {
   const { className, children, ...rest } = props;
@@ -144,7 +145,7 @@ export const NumberFieldScrubber = (
     <ArkNumberInput.Scrubber
       asChild
       className={cn("flex cursor-ew-resize", className)}
-      data-slot="number-input-scrubber"
+      data-slot="number-field-scrubber"
       {...rest}
     >
       <ArkNumberInput.Label asChild>

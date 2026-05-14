@@ -14,6 +14,12 @@ interface ComponentPreviewTabsProps extends React.ComponentProps<"div"> {
    */
   component: React.ReactNode;
   /**
+   * Whether to show the max height on the preview
+   *
+   * @default true
+   */
+  hasMaxHeight?: boolean;
+  /**
    * Whether to show the dashed padding guide borders around the preview
    *
    * @default true
@@ -27,7 +33,14 @@ interface ComponentPreviewTabsProps extends React.ComponentProps<"div"> {
 }
 
 export const ComponentPreviewTabs = (props: ComponentPreviewTabsProps) => {
-  const { component, source, showBorders = true, className, ...rest } = props;
+  const {
+    component,
+    source,
+    showBorders = true,
+    hasMaxHeight,
+    className,
+    ...rest
+  } = props;
 
   return (
     <div
@@ -41,11 +54,13 @@ export const ComponentPreviewTabs = (props: ComponentPreviewTabsProps) => {
         </TabsList>
 
         <div className={cn("relative", "overflow-hidden rounded-2xl border")}>
-          <TabsContent value="preview">
+          <TabsContent data-slot="tab-preview" value="preview">
             <div
               className={cn(
-                "relative flex h-[450px] w-full items-center justify-center overflow-y-auto p-4 sm:p-10"
+                { "h-[450px]": hasMaxHeight },
+                "relative flex w-full items-center justify-center overflow-y-auto p-4 sm:p-10"
               )}
+              data-slot="preview"
             >
               {showBorders && (
                 <>
@@ -59,9 +74,11 @@ export const ComponentPreviewTabs = (props: ComponentPreviewTabsProps) => {
             </div>
           </TabsContent>
 
-          <TabsContent value="code">
+          <TabsContent data-slot="tab-code" value="code">
             <div
-              className="overflow-hidden **:[figure]:m-0! **:[figure]:border-0 **:[pre]:min-h-[450px]"
+              className={cn(
+                "min-h-[450px] overflow-hidden **:[figure]:m-0! **:[figure]:border-0"
+              )}
               data-slot="code"
             >
               {source}

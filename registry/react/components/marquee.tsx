@@ -23,7 +23,7 @@ export const Marquee = (props: MarqueeProps) => {
   const {
     speed = 50,
     showEdges = true,
-    spacing = 4,
+    spacing = "16px",
     orientation = "horizontal",
     className,
     children,
@@ -37,13 +37,14 @@ export const Marquee = (props: MarqueeProps) => {
       className={cn(
         "group/marquee",
         "relative",
-        "group",
         "w-full max-w-full",
+        "isolate",
         className
       )}
       data-orientation={orientation}
       data-slot="marquee"
       side={side}
+      spacing={spacing}
       speed={speed}
       {...rest}
     >
@@ -74,12 +75,10 @@ export const MarqueeContent = (
           "flex",
           "min-w-max",
           "delay-(--marquee-delay)",
-          "data-[orientation=vertical]:animate-marquee-y",
-          "data-[orientation=horizontal]:animate-marquee-x",
-          "data-[orientation=horizontal]:flex-row",
-          "data-[orientation=vertical]:flex-col",
+          "data-[orientation=vertical]:animate-marquee-y data-[orientation=vertical]:flex-col",
+          "data-[orientation=horizontal]:animate-marquee-x data-[orientation=horizontal]:flex-row",
           "data-reverse:direction-[reverse]!",
-          "group-data-paused:paused!",
+          "group-data-paused/marquee:paused!",
           className
         )}
         data-slot="marquee-content"
@@ -112,14 +111,14 @@ export const MarqueeEdge = (
     <ArkMarquee.Edge
       className={cn(
         "absolute z-10",
-        "group-data-[orientation=horizontal]/marquee:h-full group-data-[orientation=horizontal]/marquee:w-1/5",
-        "group-data-[orientation=vertical]/marquee:h-1/5 group-data-[orientation=vertical]/marquee:w-full",
+        "group-data-[orientation=horizontal]/marquee:h-full group-data-[orientation=horizontal]/marquee:w-1/4",
+        "group-data-[orientation=vertical]/marquee:h-1/4 group-data-[orientation=vertical]/marquee:w-full",
         "pointer-events-none",
         "from-background to-transparent",
-        "data-[placement=start]:bg-linear-to-r",
-        "data-[placement=end]:bg-linear-to-l",
-        "data-[placement=top]:bg-linear-to-b",
-        "data-[placement=bottom]:bg-linear-to-t",
+        "data-[side=start]:bg-linear-to-r",
+        "data-[side=end]:bg-linear-to-l",
+        "data-[side=top]:bg-linear-to-b",
+        "data-[side=bottom]:bg-linear-to-t",
         className
       )}
       data-slot="marquee-edge"

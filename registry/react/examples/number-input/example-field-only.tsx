@@ -1,15 +1,15 @@
 import {
-  NumberField,
-  NumberFieldGroup,
-  NumberFieldInput,
+  NumberInput,
+  NumberInputGroup,
+  NumberInputInput,
 } from "@/registry/react/components/number-input";
 
 const Example = () => (
-  <NumberField className="w-full max-w-40" defaultValue="0">
-    <NumberFieldGroup>
-      <NumberFieldInput className="text-start" />
-    </NumberFieldGroup>
-  </NumberField>
+  <NumberInput className="w-full max-w-40" defaultValue="0">
+    <NumberInputGroup>
+      <NumberInputInput />
+    </NumberInputGroup>
+  </NumberInput>
 );
 
 export default Example;

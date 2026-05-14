@@ -1,6 +1,4 @@
-import defaultMdxComponents from "fumadocs-ui/mdx";
 import { InfoIcon } from "lucide-react";
-import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import type React from "react";
 import { CodeBlockCommand } from "@/components/code-block-command";
@@ -34,9 +32,120 @@ import {
   TableRow,
 } from "./registry/react/components/table";
 
-export const mdxComponents = (components?: MDXComponents): MDXComponents => ({
-  ...defaultMdxComponents,
-  ...components,
+export const mdxComponents = {
+  h1: ({ className, ...props }: React.ComponentProps<"h1">) => (
+    <h1
+      className={cn(
+        "mt-2 scroll-m-28",
+        "font-bold font-heading text-3xl tracking-tight",
+        className
+      )}
+      {...props}
+    />
+  ),
+  h2: ({ id, className, children, ...props }: React.ComponentProps<"h2">) => {
+    const headingId = id ?? getHeadingId(children);
+
+    return (
+      <h2
+        {...props}
+        className={cn(
+          "mt-10 scroll-m-28",
+          "font-heading font-medium text-xl tracking-tight",
+          "first:mt-0",
+          "lg:mt-12",
+          "[&+.steps>h3]:mt-4!",
+          "[&+.steps]:mt-0!",
+          "[&+h3]:mt-6!",
+          "[&+p]:mt-4!",
+          "[&+]*:[code]:text-xl",
+          className
+        )}
+        id={headingId}
+      >
+        <HeadingAnchor id={headingId}>{children}</HeadingAnchor>
+      </h2>
+    );
+  },
+  h3: ({ id, className, children, ...props }: React.ComponentProps<"h3">) => {
+    const headingId = id ?? getHeadingId(children);
+
+    return (
+      <h3
+        className={cn(
+          "mt-12 scroll-m-28",
+          "font-heading text-lg",
+          "font-medium tracking-tight",
+          "[&+p]:mt-4!",
+          "*:[code]:text-xl",
+          className
+        )}
+        id={headingId}
+        {...props}
+      >
+        <HeadingAnchor id={headingId}>{children}</HeadingAnchor>
+      </h3>
+    );
+  },
+  h4: ({ className, children, ...props }: React.ComponentProps<"h4">) => {
+    const headingId = getHeadingId(children);
+
+    return (
+      <h4
+        className={cn(
+          "mt-8 scroll-m-28",
+          "font-heading font-medium text-base tracking-tight",
+          className
+        )}
+        id={headingId}
+        {...props}
+      >
+        <HeadingAnchor id={headingId}>{children}</HeadingAnchor>
+      </h4>
+    );
+  },
+  h5: ({ id, className, children, ...props }: React.ComponentProps<"h5">) => {
+    const headingId = id ?? getHeadingId(children);
+
+    return (
+      <h5
+        className={cn(
+          "mt-8 scroll-m-28",
+          "font-heading font-medium text-base tracking-tight",
+          className
+        )}
+        {...props}
+      >
+        <HeadingAnchor id={headingId}>{children}</HeadingAnchor>
+      </h5>
+    );
+  },
+  h6: ({ id, className, children, ...props }: React.ComponentProps<"h6">) => {
+    const headingId = id ?? getHeadingId(children);
+
+    return (
+      <h6
+        className={cn(
+          "mt-8 scroll-m-28",
+          "font-medium text-base tracking-tight",
+          className
+        )}
+        id={headingId}
+        {...props}
+      >
+        <HeadingAnchor id={headingId}>{children}</HeadingAnchor>
+      </h6>
+    );
+  },
+  p: ({ className, ...props }: React.ComponentProps<"p">) => (
+    <p
+      className={cn(
+        "not-first:mt-6 text-muted-foreground leading-relaxed",
+        className
+      )}
+      {...props}
+    />
+  ),
   a: ({ className, href, ...props }: React.ComponentProps<"a">) => {
     const isExternal = typeof href === "string" && href.startsWith("http");
 
@@ -89,7 +198,6 @@ export const mdxComponents = (components?: MDXComponents): MDXComponents => ({
         <code
           className={cn(
             "relative",
-            "px-1.5 py-0.5",
             "bg-primary/5",
             "font-mono text-primary text-sm",
             "rounded-md",
@@ -152,169 +260,11 @@ export const mdxComponents = (components?: MDXComponents): MDXComponents => ({
       </figcaption>
     );
   },
-  figure: ({ className, ...props }: React.ComponentProps<"figure">) => (
-    <figure className={cn(className)} {...props} />
-  ),
-  h1: ({ className, ...props }: React.ComponentProps<"h1">) => (
-    <h1
-      className={cn("mt-2 scroll-m-20 font-semibold text-3xl", className)}
-      {...props}
-    />
-  ),
-  h2: ({ className, children, ...props }: React.ComponentProps<"h2">) => {
-    const id =
-      (props as { id?: string }).id ||
-      children
-        ?.toString()
-        .replace(/ /g, "-")
-        .replace(/'/g, "")
-        .replace(/\?/g, "")
-        .toLowerCase();
-
-    return (
-      <h2
-        {...props}
-        className={cn(
-          "mt-12 lg:mt-16",
-          "font-semibold text-2xl",
-          "first:mt-0",
-          "scroll-m-20",
-          "[&+p]:mt-4!",
-          "*:[code]:text-2xl",
-          className
-        )}
-        id={id}
-      >
-        <a
-          className={cn(
-            "-mx-2 px-2",
-            "rounded-md",
-            "no-underline underline-offset-4",
-            "hover:underline",
-            "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-            "border border-transparent"
-          )}
-          href={`#${id}`}
-        >
-          {children}
-        </a>
-      </h2>
-    );
-  },
-  h3: ({ className, children, ...props }: React.ComponentProps<"h3">) => {
-    const id =
-      (props as { id?: string }).id ||
-      children
-        ?.toString()
-        .replace(/ /g, "-")
-        .replace(/'/g, "")
-        .replace(/\?/g, "")
-        .toLowerCase();
-
-    return (
-      <h3
-        className={cn(
-          "mt-8",
-          "font-semibold text-lg",
-          "scroll-m-20",
-          "*:[code]:text-lg",
-          className
-        )}
-        id={id}
-        {...props}
-      >
-        <a
-          className={cn(
-            "-mx-2 px-2",
-            "rounded-md",
-            "no-underline underline-offset-4",
-            "hover:underline",
-            "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-            "border border-transparent"
-          )}
-          href={`#${id}`}
-        >
-          {children}
-        </a>
-      </h3>
-    );
-  },
-  h4: ({ className, children, ...props }: React.ComponentProps<"h4">) => {
-    const id =
-      (props as { id?: string }).id ||
-      children
-        ?.toString()
-        .replace(/ /g, "-")
-        .replace(/'/g, "")
-        .replace(/\?/g, "")
-        .toLowerCase();
-
-    return (
-      <h4
-        className={cn(
-          "mt-8 scroll-m-20 font-medium text-lg tracking-tight",
-          className
-        )}
-        id={id}
-        {...props}
-      >
-        <a
-          className={cn(
-            "-mx-2 px-2",
-            "rounded-md",
-            "no-underline underline-offset-4",
-            "hover:underline",
-            "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-            "border border-transparent"
-          )}
-          href={`#${id}`}
-        >
-          {children}
-        </a>
-      </h4>
-    );
-  },
-  h5: ({ className, ...props }: React.ComponentProps<"h5">) => (
-    <h5
-      className={cn(
-        "mt-8 scroll-m-20 font-medium text-lg tracking-tight",
-        className
-      )}
-      {...props}
-    />
-  ),
-  h6: ({ className, ...props }: React.ComponentProps<"h6">) => (
-    <h6
-      className={cn(
-        "mt-8 scroll-m-20 font-medium text-base tracking-tight",
-        className
-      )}
-      {...props}
-    />
-  ),
   hr: ({ ...props }: React.ComponentProps<"hr">) => (
     <hr className="my-4 md:my-8" {...props} />
   ),
   img: ({ className, ...props }: React.ComponentProps<"img">) => (
-    <img className={cn("rounded-md", className)} {...props} />
-  ),
-  li: ({ className, ...props }: React.ComponentProps<"li">) => (
-    <li className={cn("mt-2", className)} {...props} />
-  ),
-  ol: ({ className, ...props }: React.ComponentProps<"ol">) => (
-    <ol
-      className={cn("my-6 ms-6 list-decimal text-muted-foreground", className)}
-      {...props}
-    />
-  ),
-  p: ({ className, ...props }: React.ComponentProps<"p">) => (
-    <p
-      className={cn(
-        "not-first:mt-6 text-muted-foreground leading-relaxed",
-        className
-      )}
-      {...props}
-    />
+    <img className={cn("rounded-lg", className)} {...props} />
   ),
   pre: ({
     className,
@@ -348,7 +298,7 @@ export const mdxComponents = (components?: MDXComponents): MDXComponents => ({
     />
   ),
   strong: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-    <strong className={cn("font-medium text-inherit", className)} {...props} />
+    <strong className={cn("font-medium", className)} {...props} />
   ),
   table: ({ className, ...props }: React.ComponentProps<typeof Table>) => (
     <ScrollArea className="my-6 rounded-xl border">
@@ -378,10 +328,7 @@ export const mdxComponents = (components?: MDXComponents): MDXComponents => ({
     <TableHeader className={cn("bg-muted", className)} {...props} />
   ),
   th: ({ className, ...props }: React.ComponentProps<typeof TableHead>) => (
-    <TableHead
-      className={cn("font-medium text-foreground", className)}
-      {...props}
-    />
+    <TableHead className={cn("font-medium", className)} {...props} />
   ),
   tr: (props: React.ComponentProps<typeof TableRow>) => <TableRow {...props} />,
   ul: ({ className, ...props }: React.ComponentProps<"ul">) => (
@@ -389,6 +336,15 @@ export const mdxComponents = (components?: MDXComponents): MDXComponents => ({
       className={cn("my-6 ms-6 list-disc text-muted-foreground", className)}
       {...props}
     />
+  ),
+  ol: ({ className, ...props }: React.ComponentProps<"ol">) => (
+    <ol
+      className={cn("my-6 ms-6 list-decimal text-muted-foreground", className)}
+      {...props}
+    />
+  ),
+  li: ({ className, ...props }: React.ComponentProps<"li">) => (
+    <li className={cn("mt-2", className)} {...props} />
   ),
   Alert: ({ className, ...props }: React.ComponentProps<typeof Alert>) => (
     <Alert className={cn("my-6", className)} {...props} />
@@ -417,4 +373,42 @@ export const mdxComponents = (components?: MDXComponents): MDXComponents => ({
   CodeTabs,
   PreviewIframe,
   CodeCollapsibleWrapper,
-});
+};
+
+const getHeadingId = (children: React.ReactNode) =>
+  children
+    ?.toString()
+    .replace(/ /g, "-")
+    .replace(/'/g, "")
+    .replace(/\?/g, "")
+    .toLowerCase();
+
+const HeadingAnchor = ({ id, children }: React.ComponentProps<"a">) => {
+  if (!id) {
+    return children;
+  }
+
+  return (
+    <a
+      className={cn(
+        "group",
+        "-mx-2 px-2",
+        "rounded-md",
+        "no-underline underline-offset-4",
+        "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "border border-transparent"
+      )}
+      href={`#${id}`}
+    >
+      <span className="underline-offset-4 group-hover:underline">
+        {children}
+      </span>
+      <span
+        aria-hidden="true"
+        className="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100"
+      >
+        #
+      </span>
+    </a>
+  );
+};

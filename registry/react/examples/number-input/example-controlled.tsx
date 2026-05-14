@@ -2,11 +2,11 @@
 
 import React from "react";
 import {
-  NumberField,
-  NumberFieldDecrement,
-  NumberFieldGroup,
-  NumberFieldIncrement,
-  NumberFieldInput,
+  NumberInput,
+  NumberInputDecrement,
+  NumberInputGroup,
+  NumberInputIncrement,
+  NumberInputInput,
 } from "@/registry/react/components/number-input";
 
 const Example = () => {
@@ -17,13 +17,13 @@ const Example = () => {
   return (
     <div className="flex w-full max-w-40 flex-col gap-4 text-center text-sm">
       <p>Select the number 3</p>
-      <NumberField onValueChange={({ value }) => setValue(value)} value={value}>
-        <NumberFieldGroup>
-          <NumberFieldDecrement />
-          <NumberFieldInput />
-          <NumberFieldIncrement />
-        </NumberFieldGroup>
-      </NumberField>
+      <NumberInput onValueChange={({ value }) => setValue(value)} value={value}>
+        <NumberInputGroup>
+          <NumberInputDecrement />
+          <NumberInputInput />
+          <NumberInputIncrement />
+        </NumberInputGroup>
+      </NumberInput>
       <p className="text-center">{isNumberFive ? "✅" : "❌"}</p>
     </div>
   );

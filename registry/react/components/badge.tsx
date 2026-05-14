@@ -33,6 +33,7 @@ export const badgeVariants = tv({
         "[a&]:hover:bg-secondary/90",
       ],
       outline: [
+        "text-foreground",
         "border-border",
         "[a&]:hover:bg-accent",
         "[a&]:hover:text-accent-foreground",

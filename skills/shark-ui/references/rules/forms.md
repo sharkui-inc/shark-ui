@@ -196,10 +196,17 @@ Use `invalid` and `disabled` just in the `Field` component, it will be passed to
 </Field>
 ```
 
-Works for all controls: `Input`, `Textarea`, `Select`, `Checkbox`, `RadioGroupItem`, `Switch`, `Slider`, `NativeSelect`, `InputOTP`.
+Works for all controls: `Input`, `Textarea`, `Select`, `Checkbox`, `RadioGroupItem`, `Switch`, `Slider`, `NativeSelect`, `InputOTP`, `Autocomplete`, `Combobox`, `NumberInput`, `DatePicker`, `ColorPicker`, `FileUpload`, `Editable`.
 
 ## Anti-patterns
 
 - Building bespoke dropdown/dialog behavior instead of using primitives.
 - Mixing APIs from other ecosystems (radix-ui/base-ui) without checking ark-ui equivalents.
 - Omitting key subcomponents that preserve accessibility and layout conventions.
+
+## Form validation
+
+- [React-Hook-Form](@/content/docs/forms/react-hook-form.mdx)
+- [TanStack Form](@/content/docs/forms/tanstack-form.mdx)
+- [Formisch](@/content/docs/forms/formisch.mdx)
+

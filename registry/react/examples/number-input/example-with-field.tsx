@@ -6,24 +6,24 @@ import {
   FieldLabel,
 } from "@/registry/react/components/field";
 import {
-  NumberField,
-  NumberFieldDecrement,
-  NumberFieldGroup,
-  NumberFieldIncrement,
-  NumberFieldInput,
+  NumberInput,
+  NumberInputDecrement,
+  NumberInputGroup,
+  NumberInputIncrement,
+  NumberInputInput,
 } from "@/registry/react/components/number-input";
 
 const Example = () => (
   <Field className="w-full max-w-52">
     <FieldLabel>Quantity</FieldLabel>
-    <NumberField defaultValue="1" max={99} min={0}>
-      <NumberFieldGroup>
-        <NumberFieldDecrement />
-        <NumberFieldInput />
-        <NumberFieldIncrement />
-      </NumberFieldGroup>
-    </NumberField>
-    <FieldDescription>Enter a value between 0 and 99</FieldDescription>
+    <NumberInput defaultValue="1" max={100} min={0}>
+      <NumberInputGroup>
+        <NumberInputDecrement />
+        <NumberInputInput />
+        <NumberInputIncrement />
+      </NumberInputGroup>
+    </NumberInput>
+    <FieldDescription>0 - 100 only</FieldDescription>
   </Field>
 );
 

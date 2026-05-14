@@ -15,60 +15,34 @@ For detailed guides with examples, validation, and field-type-specific patterns,
 
 ## Field Context
 
-Form components in Shark UI automatically integrate with `Field` through context. When nested inside a `Field`, they inherit `disabled`, `invalid`, `required`, and `readOnly` states automatically.
+Form components automatically integrate with `Field` through context. When nested inside a `Field`, they inherit `disabled`, `invalid`, `required`, and `readOnly` states automatically.
+
+Also `htmlFor` and `id` are automatically handled by the `Field` component. Never use them directly.
 
 ```tsx
 import { Field } from "@/registry/react/components/field"
-import { NumberField } from "@/registry/react/components/number-input"
+import { NumberInput } from "@/registry/react/components/number-input"
 
 const Demo = () => (
   <Field disabled>
-    <NumberField>
-      <NumberFieldGroup>
-        <NumberFieldInput />
-        <NumberFieldIncrement />
-        <NumberFieldDecrement />
-      </NumberFieldGroup>
-    </NumberField>
+    <NumberInput>
+      <NumberInputGroup>
+        <NumberInputInput />
+        <NumberInputIncrement />
+        <NumberInputDecrement />
+      </NumberInputGroup>
+    </NumberInput>
   </Field>
 )
 ```
 
-### Accessible Labels
+## Input states
 
-When building accessible forms, you need to ensure that they are properly labeled and described.
+### Invalid
 
-- `FieldHelper`: Used to provide additional instructions about the input.
-- `FieldLabel`: Used to provide an accessible label for the input.
+Pass the `invalid` prop to the `Field` component. 
 
-These components are automatically linked to the input element via the `aria-describedby` attribute.
-
-> **Best practice:** Make sure that labels are visible (and not just used as placeholders) for screen readers to read them.
-
-```tsx
-import {
-  Field,
-  FieldLabel,
-  FieldHelper,
-} from "@/registry/react/components/field"
-import { Input } from "@/registry/react/components/input"
-
-const Demo = () => (
-  <form>
-    <Field>
-      <FieldLabel>Username</FieldLabel>
-      <Input placeholder="Enter your username" />
-      <FieldHelper>This will be your public display name.</FieldHelper>
-    </Field>
-  </form>
-)
-```
-
-### Error Handling and Validation
-
-When the input is invalid, you can use the `FieldError` component to provide an error message for the input, and pass the `invalid` prop to the `Field` component.
-
-> **Best practice:** Make sure to provide clear, specific error messages that are easy to understand and fix.
+The `FieldError` is only visible when the `invalid` prop is `true`.
 
 ```tsx
 import {
@@ -89,9 +63,9 @@ const Demo = () => (
 )
 ```
 
-### Required Fields
+### Required
 
-To indicate that a field is required, you can pass the `required` prop to the `Field` component. 
+Pass the `required` prop to the `Field` component. 
 
 Optionally, you can use the `<FieldRequiredIndicator />` to indicate that the field is required.
 
@@ -109,87 +83,11 @@ export const Demo = () => (
     <Field required>
       <FieldLabel>
         Username
-        <FieldRequiredIndicator>(required)</FieldRequiredIndicator>
+        <FieldRequiredIndicator />
       </FieldLabel>
       <Input placeholder="Enter your username" />
       <FieldError>Username is required.</FieldError>
     </Field>
   </form>
-)
-```
-
-## Fieldset Context
-
-When you have multiple fields in a form or a component that renders multiple `input` elements, you can use the `FieldSet` component to group them together.
-
-Common use cases: checkbox group, radio group, input + select composition, etc.
-
-### Checkbox Group
-
-```tsx
-import {
-  FieldSet,
-  FieldLegend,
-  FieldDescription,
-  FieldGroup,
-  Field,
-  FieldLabel,
-} from "@/registry/react/components/field"
-import { Checkbox, CheckboxGroup } from "@/registry/react/components/checkbox"
-
-const items = [
-  { label: "React", value: "react" },
-  { label: "Solid", value: "solid" },
-  { label: "Vue", value: "vue" },
-  { label: "Svelte", value: "svelte" },
-]
-
-const Demo = () => (
-  <FieldSet>
-    <FieldLegend variant="label">Frameworks</FieldLegend>
-    <FieldDescription>Choose your preferred frameworks</FieldDescription>
-    <FieldGroup>
-      <CheckboxGroup name="framework">
-        {items.map((item) => (
-          <Field key={item.value} orientation="horizontal">
-            <Checkbox value={item.value} />
-            <FieldLabel className="font-normal">{item.label}</FieldLabel>
-          </Field>
-        ))}
-      </CheckboxGroup>
-    </FieldGroup>
-  </FieldSet>
-)
-```
-
-### Radio Group
-
-```tsx
-import {
-  FieldSet,
-  FieldLegend,
-  FieldDescription,
-} from "@/registry/react/components/field"
-import { RadioGroup, RadioGroupItem } from "@/registry/react/components/radio-group"
-
-const items = [
-  { label: "React", value: "react" },
-  { label: "Solid", value: "solid" },
-  { label: "Vue", value: "vue" },
-  { label: "Svelte", value: "svelte" },
-]
-
-const Demo = () => (
-  <FieldSet>
-    <FieldLegend variant="label">Frameworks</FieldLegend>
-    <FieldDescription>Choose your preferred framework</FieldDescription>
-    <RadioGroup name="framework">
-      {items.map((item) => (
-        <RadioGroupItem key={item.value} value={item.value}>
-          {item.label}
-        </RadioGroupItem>
-      ))}
-    </RadioGroup>
-  </FieldSet>
 )
 ```

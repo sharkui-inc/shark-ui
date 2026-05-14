@@ -10,11 +10,11 @@ import {
   FieldSet,
 } from "@/registry/react/components/field";
 import {
-  NumberField,
-  NumberFieldDecrement,
-  NumberFieldGroup,
-  NumberFieldIncrement,
-  NumberFieldInput,
+  NumberInput,
+  NumberInputDecrement,
+  NumberInputGroup,
+  NumberInputIncrement,
+  NumberInputInput,
 } from "@/registry/react/components/number-input";
 import {
   RadioGroup,
@@ -62,13 +62,13 @@ export const ComputeEnvironmentExample = (
           <FieldLabel>Number of GPUs</FieldLabel>
           <FieldDescription>You can add more later.</FieldDescription>
         </FieldContent>
-        <NumberField className="max-w-40" defaultValue="4" max={99} min={1}>
-          <NumberFieldGroup>
-            <NumberFieldDecrement tabIndex={-1} />
-            <NumberFieldInput tabIndex={-1} />
-            <NumberFieldIncrement tabIndex={-1} />
-          </NumberFieldGroup>
-        </NumberField>
+        <NumberInput className="max-w-40" defaultValue="4" max={99} min={1}>
+          <NumberInputGroup>
+            <NumberInputDecrement tabIndex={-1} />
+            <NumberInputInput tabIndex={-1} />
+            <NumberInputIncrement tabIndex={-1} />
+          </NumberInputGroup>
+        </NumberInput>
       </Field>
 
       <Field className="w-full" orientation="horizontal" reverse>
