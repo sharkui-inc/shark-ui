@@ -86,6 +86,9 @@
   --animate-expand: expand 0.2s ease-out;
   --animate-collapse: collapse 0.2s ease-out;
 
+  --animate-flip-in: flip-in 0.2s ease-out;
+  --animate-flip-out: flip-out 0.2s ease-out;
+
   @keyframes slideUp {
     from {
       height: var(--height);

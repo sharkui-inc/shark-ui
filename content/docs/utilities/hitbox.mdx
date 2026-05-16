@@ -24,9 +24,9 @@ npx shadcn@latest add @shark/hitbox
   <TabsContent value="manual">
 
 <Steps>
-  <Step>Copy the hitbox utilities into a new file (e.g. `styles/hitbox.css`).</Step>
+<Step>Import the following CSS rules into your `globals.css`</Step>
 
-```css title="styles/hitbox.css" showLineNumbers
+```css title="globals.css" showLineNumbers
 @utility hitbox-debug {
   position: relative;
   &::before {
@@ -105,12 +105,7 @@ npx shadcn@latest add @shark/hitbox
 }
 ```
 
-  <Step>Import it in your main stylesheet.</Step>
-
-```css title="styles/globals.css" showLineNumbers {2}
-@import "tailwindcss";
-@import "./hitbox.css";
-```
+<Step>Update the import paths to match your project setup.</Step>
 
 </Steps>
 

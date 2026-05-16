@@ -27,14 +27,16 @@ npx shadcn@latest add @shark/swap
   <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @ark-ui/react lucide-react
+npm install @ark-ui/react tailwind-variants
 ```
 
   <Step>Add the following keyframes to your `globals.css` for the flip variant:</Step>
 
-```css title="styles/globals.css"
+```css title="globals.css"
 @theme inline {
-  /* ... */
+  --animate-flip-in: flip-in 0.2s ease-out;
+  --animate-flip-out: flip-out 0.2s ease-out;
+
   @keyframes flip-in {
     from {
       transform: rotateY(180deg);

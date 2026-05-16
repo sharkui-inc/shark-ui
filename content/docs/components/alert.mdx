@@ -36,8 +36,9 @@ npx shadcn@latest add @shark/alert
 npm install @ark-ui/react tailwind-variants
 ```
 
-<Step>Add the following CSS variables to your CSS file:</Step>
+<Step>Import the following variables into your CSS file</Step>
 
+<CodeCollapsibleWrapper>
 ```css
 @theme inline {
   --color-destructive-foreground: var(--destructive-foreground);
@@ -48,9 +49,9 @@ npm install @ark-ui/react tailwind-variants
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
 }
- 
+
 :root {
-  --destructive-foreground: var(--color-red-400);
+  --destructive-foreground: var(--color-red-700);
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-700);
   --success: var(--color-emerald-500);
@@ -58,7 +59,7 @@ npm install @ark-ui/react tailwind-variants
   --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-700);
 }
- 
+
 .dark {
   --destructive-foreground: var(--color-red-400);
   --info: var(--color-blue-500);
@@ -69,6 +70,7 @@ npm install @ark-ui/react tailwind-variants
   --warning-foreground: var(--color-amber-400);
 }
 ```
+</CodeCollapsibleWrapper>
 
 <Step>Copy and paste the following code into your project.</Step>
 

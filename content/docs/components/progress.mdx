@@ -34,14 +34,13 @@ npx shadcn@latest add @shark/progress
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @ark-ui/react tailwind-variants
+npm install @ark-ui/react
 ```
 
   <Step>Add the following animations to your `globals.css`.</Step>
 
-```css title="styles/globals.css" showLineNumbers
+```css title="globals.css" showLineNumbers
 @theme inline {
-  /* ... */
   --animate-indeterminate: indeterminate 1.5s ease-in-out infinite;
 
   @keyframes indeterminate {
@@ -62,15 +61,6 @@ npm install @ark-ui/react tailwind-variants
 </TabsContent>
 
 </CodeTabs>
-
-## Anatomy
-
-```text
-Progress
-├── ProgressValue
-└── ProgressTrack
-    └── ProgressRange
-```
 
 ## Usage
 

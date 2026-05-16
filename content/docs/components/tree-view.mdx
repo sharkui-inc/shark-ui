@@ -29,17 +29,18 @@ npx shadcn@latest add @shark/tree-view
 
 <Steps>
 
+<Step>This component depends on [Checkbox](/docs/components/checkbox). Install it first if you haven't already.</Step>
+
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @ark-ui/react lucide-react
+npm install @ark-ui/react tailwind-variants lucide-react
 ```
 
   <Step>Add the following to your `globals.css` for the tree-view expand/collapse animation:</Step>
 
-```css title="styles/globals.css"
+```css title="globals.css"
 @theme inline {
-  /* ... */
   @keyframes expand {
     from { height: var(--collapsed-height, 0); }
     to { height: var(--height); }

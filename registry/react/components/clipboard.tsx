@@ -15,13 +15,13 @@ export const useClipboard = useClipboardContext;
 interface ClipboardProps
   extends React.ComponentProps<typeof ArkClipboard.Root> {
   /**
-   * The children of the clipboard
+   * Styles for the root element
    */
   rootClassName?: string;
 }
 
 export const Clipboard = (props: ClipboardProps) => {
-  const { rootClassName, asChild, className, children, ...rest } = props;
+  const { rootClassName, className, children, ...rest } = props;
 
   return (
     <ArkClipboard.Root
