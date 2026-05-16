@@ -6,7 +6,7 @@ export const AccordionThumb = (props: ThumbCardProps) => (
       <div className="flex items-center gap-2 border-input border-b p-3">
         <span
           aria-hidden="true"
-          className="rotate-180 text-muted-foreground/64 text-xs"
+          className="shrink-0 rotate-180 text-muted-foreground/64 text-xs"
         >
           ⌃
         </span>

@@ -14,21 +14,19 @@ import {
 } from "@/registry/react/components/marquee";
 
 const MarqueeDemo = () => (
-  <div className="flex size-full items-center justify-center border border-border bg-background p-4">
-    <Marquee>
-      <MarqueeContent>
-        {items.map((Icon, index) => (
-          <MarqueeItem key={index}>
-            <Card className="[--space:--spacing(8)]">
-              <CardContent>
-                <Icon className="size-10" />
-              </CardContent>
-            </Card>
-          </MarqueeItem>
-        ))}
-      </MarqueeContent>
-    </Marquee>
-  </div>
+  <Marquee>
+    <MarqueeContent>
+      {items.map((Icon, index) => (
+        <MarqueeItem key={index}>
+          <Card className="[--space:--spacing(8)]">
+            <CardContent>
+              <Icon className="size-10" />
+            </CardContent>
+          </Card>
+        </MarqueeItem>
+      ))}
+    </MarqueeContent>
+  </Marquee>
 );
 
 const items = [

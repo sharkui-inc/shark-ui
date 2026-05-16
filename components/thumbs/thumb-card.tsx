@@ -23,12 +23,15 @@ export const ThumbCard = (props: ThumbCardProps) => {
   return (
     <Card
       aria-label={title}
-      className={cn("size-full bg-muted/48 pb-0", className)}
+      className={cn(
+        "size-full bg-muted/48 pb-0 [--space:--spacing(4)]",
+        className
+      )}
       {...rest}
     >
       <CardHeader
         aria-hidden="true"
-        className="flex h-16 flex-col"
+        className="flex h-auto flex-col"
         description={description}
         title={title}
       />

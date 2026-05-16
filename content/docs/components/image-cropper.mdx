@@ -1,6 +1,6 @@
 ---
 title: Image Cropper
-description: Crop images with zoom, rotation, and aspect ratio.
+description: Crop and transform images.
 links:
   doc: https://ark-ui.com/docs/components/image-cropper
   api: https://ark-ui.com/docs/components/image-cropper#api-reference
@@ -127,7 +127,7 @@ Root wrapper. Manages crop state and handles.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `aspectRatio` | `number` | - |
-| `cropShape` | `'circle' \| 'rectangle'` | `'rectangle'` |
+| `cropShape` | `"circle" \| "rectangle"` | `"rectangle"` |
 | `fixedCropArea` | `boolean` | `false` |
 | `initialCrop` | `{ x: number; y: number; width: number; height: number }` | - |
 | `maxHeight` | `number` | `Infinity` |
@@ -164,7 +164,7 @@ Crop selection overlay with resize handles and optional grid.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `axis` | `'horizontal' \| 'vertical' \| 'both'` | `'both'` |
+| `axis` | `"horizontal" \| "vertical" \| "both"` | `"both"` |
 | `className` | `string` | - |
 
 ---

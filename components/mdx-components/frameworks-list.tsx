@@ -14,7 +14,7 @@ import {
 } from "@/registry/react/components/item";
 
 export const FrameworksList = () => (
-  <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-2">
+  <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {FRAMEWORKS.map((framework) => (
       <Item
         asChild

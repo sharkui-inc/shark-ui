@@ -1,110 +1,59 @@
 ---
 title: Colors
-description: Color palette and theming with CSS variables for Shark UI.
+description: Color palette and theming system.
+links:
+  doc: https://ui.shadcn.com/docs/theming#theme-tokens
+  api: https://tailwindcss.com/docs/colors#core-concepts
 ---
+import { ColorsConcept } from "@/components/mdx-components/colors-concept";
 
-Shark UI relies on CSS custom properties for its color system. For layout setup and the full styling guide, see [Styling](/docs/styling). These variables toggle between light and dark themes automatically when you add the `dark` class to your root element. All definitions live in `globals.css`.
+## Overview
 
-## How It Works
+Tokens mirror [Tailwind color conventions](https://tailwindcss.com/docs/colors#core-concepts), so names align with utility classes and stay predictable in your project.
 
-Colors are wired up through Tailwind's theme. The `@theme inline` block in `globals.css` maps semantic variables into Tailwind utilities so you can use classes like `bg-primary` and `text-muted-foreground`.
+## Core concepts
 
-Naming rules:
+The UI draws from one of nine neutral gray scales. The scale you choose sets backgrounds, borders, and muted tones for the whole theme.
 
-- Names with `foreground` define text (or icon) color on top of that background (e.g. `--primary-foreground`).
-- Names without `foreground` define backgrounds (e.g. `--primary`, `--card`, `--popover`).
+The default palette is `neutral`, anchored at `neutral-50` in light mode and `neutral-950` in dark mode. Preview another scale with the swatches below:
 
-### How to Use Colors
+<ColorsConcept />
 
-```tsx
-<html className="dark">
-  <body className="bg-background text-foreground">
-    {/* Your app */}
-  </body>
-</html>
-```
+Click a swatch to switch the neutral scale and preview the theme across the docs. Subtle differences between grays are easiest to judge in dark mode.
 
-```tsx
-<div className="bg-primary text-primary-foreground">
-  Primary action
-</div>
-```
+<Alert variant="info">
+<InfoIcon />
+<AlertTitle>Customize Colors to Match Your Brand</AlertTitle>
+<AlertDescription>
+  Try the [Theme editor](/themes) to visually customize primary, neutral colors and radius.
+</AlertDescription>
+</Alert>
 
-## Variable Reference
+## Theme Tokens
 
-### Base Layout
+These tokens live in your CSS file under `:root` and `.dark`.
 
-- <span className="inline-block size-5 rounded border border-border bg-background mr-2 align-middle" /> `--background` — Page background
-- <span className="inline-block size-5 rounded border border-border bg-foreground mr-2 align-middle" /> `--foreground` — Default text on that background
+| Token                                            | What it controls                                       | Used by                                                                      |
+| ------------------------------------------------ | ------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| `background` / `foreground`                      | The default app background and text color.             | The page shell, page sections, and default text.                             |
+| `card` / `card-foreground`                       | Elevated surfaces and the content inside them.         | `Card`, dashboard panels, settings panels.                                   |
+| `popover` / `popover-foreground`                 | Floating surfaces and the content inside them.         | `Popover`, `DropdownMenu`, `ContextMenu`, and other overlays.                |
+| `primary` / `primary-foreground`                 | High-emphasis actions and brand surfaces.              | Default `Button`, selected states, badges, and active accents.               |
+| `secondary` / `secondary-foreground`             | Lower-emphasis filled actions and supporting surfaces. | Secondary buttons, secondary badges, and supporting UI.                      |
+| `muted` / `muted-foreground`                     | Subtle surfaces and lower-emphasis content.            | Descriptions, placeholders, empty states, helper text, and subdued surfaces. |
+| `accent` / `accent-foreground`                   | Interactive hover, focus, and active surfaces.         | Ghost buttons, menu highlight states, hovered rows, and selected items.      |
+| `destructive` / `destructive-foreground`         | Destructive actions and error emphasis.                | Destructive buttons, invalid states, and destructive menu items.             |
+| `info` / `info-foreground`                       | Informational actions and emphasis.                    | Informational buttons, informational menu items, and informational CTAs.     |
+| `success` / `success-foreground`                 | Success actions and emphasis.                          | Success buttons, success menu items, and success CTAs.                       |
+| `warning` / `warning-foreground`                 | Warning actions and emphasis.                          | Warning buttons, warning menu items, and warning CTAs.                       |
+| `border`                                         | Default borders and separators.                        | Cards, menus, tables, separators, and layout dividers.                       |
+| `input`                                          | Form control borders and input surface treatment.      | `Input`, `Textarea`, `Select`, and outline-style controls.                   |
+| `ring`                                           | Focus rings and outlines.                              | Buttons, inputs, checkboxes, menus, and other focusable controls.            |
+| `sidebar` / `sidebar-foreground`                 | The base sidebar surface and default sidebar text.     | The `Sidebar` container and its default content.                             |
+| `sidebar-primary` / `sidebar-primary-foreground` | High-emphasis actions inside the sidebar.              | Active items, icon tiles, badges, and sidebar CTAs.                          |
+| `sidebar-accent` / `sidebar-accent-foreground`   | Hover and selected states inside the sidebar.          | Sidebar menu hover states, open items, and interactive rows.                 |
+| `sidebar-border`                                 | Sidebar-specific borders and separators.               | Sidebar headers, groups, and internal dividers.                              |
+| `sidebar-ring`                                   | Sidebar-specific focus rings.                          | Focused controls inside the sidebar.                                         |
+| `radius`                                         | The base corner radius scale.                          | Cards, inputs, buttons, popovers, and the derived `radius-*` tokens.         |
 
-### Cards and Surfaces
-
-- <span className="inline-flex gap-1 mr-2 align-middle"><span className="inline-block size-5 rounded border border-border bg-card" /><span className="inline-block size-5 rounded border border-border bg-card-foreground" /></span> `--card` / `--card-foreground` — Card backgrounds and their text
-- <span className="inline-flex gap-1 mr-2 align-middle"><span className="inline-block size-5 rounded border border-border bg-popover" /><span className="inline-block size-5 rounded border border-border bg-popover-foreground" /></span> `--popover` / `--popover-foreground` — Popovers, dropdowns, menus
-
-### Primary Actions
-
-- <span className="inline-flex gap-1 mr-2 align-middle"><span className="inline-block size-5 rounded border border-border bg-primary" /><span className="inline-block size-5 rounded border border-border bg-primary-foreground" /></span> `--primary` / `--primary-foreground` — Main buttons and links
-
-### Secondary and Muted
-
-- <span className="inline-flex gap-1 mr-2 align-middle"><span className="inline-block size-5 rounded border border-border bg-secondary" /><span className="inline-block size-5 rounded border border-border bg-secondary-foreground" /></span> `--secondary` / `--secondary-foreground` — Secondary controls
-- <span className="inline-flex gap-1 mr-2 align-middle"><span className="inline-block size-5 rounded border border-border bg-muted" /><span className="inline-block size-5 rounded border border-border bg-muted-foreground" /></span> `--muted` / `--muted-foreground` — Softer backgrounds and de‑emphasized text
-- <span className="inline-flex gap-1 mr-2 align-middle"><span className="inline-block size-5 rounded border border-border bg-accent" /><span className="inline-block size-5 rounded border border-border bg-accent-foreground" /></span> `--accent` / `--accent-foreground` — Hover and active states
-
-### Status Colors
-
-- <span className="inline-flex gap-1 mr-2 align-middle"><span className="inline-block size-5 rounded border border-border bg-success" /><span className="inline-block size-5 rounded border border-border bg-success-foreground" /></span> `--success` / `--success-foreground`
-- <span className="inline-flex gap-1 mr-2 align-middle"><span className="inline-block size-5 rounded border border-border bg-info" /><span className="inline-block size-5 rounded border border-border bg-info-foreground" /></span> `--info` / `--info-foreground`
-- <span className="inline-flex gap-1 mr-2 align-middle"><span className="inline-block size-5 rounded border border-border bg-warning" /><span className="inline-block size-5 rounded border border-border bg-warning-foreground" /></span> `--warning` / `--warning-foreground`
-- <span className="inline-flex gap-1 mr-2 align-middle"><span className="inline-block size-5 rounded border border-border bg-destructive" /><span className="inline-block size-5 rounded border border-border bg-destructive-foreground" /></span> `--destructive` / `--destructive-foreground`
-
-### Form and UI
-
-- <span className="inline-block size-5 rounded bg-border mr-2 align-middle" /> `--border` — Borders
-- <span className="inline-block size-5 rounded border border-border bg-input mr-2 align-middle" /> `--input` — Input backgrounds
-- <span className="inline-block size-5 rounded border border-border bg-ring mr-2 align-middle" /> `--ring` — Focus rings
-
-### Sidebar
-
-- <span className="inline-block size-5 rounded border border-border bg-sidebar mr-2 align-middle" /> `--sidebar` — Sidebar background
-- <span className="inline-block size-5 rounded border border-border bg-sidebar-foreground mr-2 align-middle" /> `--sidebar-foreground` — Sidebar text
-- <span className="inline-block size-5 rounded border border-border bg-sidebar-primary mr-2 align-middle" /> `--sidebar-primary` — Active item background
-- <span className="inline-block size-5 rounded border border-border bg-sidebar-accent mr-2 align-middle" /> `--sidebar-accent` — Hover and active states
-- <span className="inline-block size-5 rounded border border-border bg-sidebar-border mr-2 align-middle" /> `--sidebar-border` — Sidebar borders
-- <span className="inline-block size-5 rounded border border-border bg-sidebar-ring mr-2 align-middle" /> `--sidebar-ring` — Focus rings
-
-### Charts
-
-- <span className="inline-block size-5 rounded border border-border bg-chart-1 mr-2 align-middle" /> `--chart-1` — Chart series color 1
-- <span className="inline-block size-5 rounded border border-border bg-chart-2 mr-2 align-middle" /> `--chart-2` — Chart series color 2
-- <span className="inline-block size-5 rounded border border-border bg-chart-3 mr-2 align-middle" /> `--chart-3` — Chart series color 3
-- <span className="inline-block size-5 rounded border border-border bg-chart-4 mr-2 align-middle" /> `--chart-4` — Chart series color 4
-- <span className="inline-block size-5 rounded border border-border bg-chart-5 mr-2 align-middle" /> `--chart-5` — Chart series color 5
-
-For full setup, see the [manual installation guide](/docs/installation/manual).
-
-## Customizing Colors
-
-Override variables in `:root` for light mode and `.dark` for dark mode:
-
-```css
-:root {
-  --primary: var(--color-blue-600);
-  --primary-foreground: var(--color-blue-50);
-}
-
-.dark {
-  --primary: var(--color-blue-500);
-  --primary-foreground: var(--color-blue-50);
-}
-```
-
-Shark UI ships preset themes, check [Styling](/docs/styling) for more information.
-
-## Quick Tips
-
-- Apply the `dark` class on the root so dark mode styles take effect.
-- Check both light and dark appearances when changing colors.
-- Keep using foreground/background pairs so contrast stays safe.
-- Prefer color variables over hardcoded hex or rgb values. e.g. `text-[#000]` -> `text-foreground`.
+Preset theme classes are documented in [Styling](/docs/styling).

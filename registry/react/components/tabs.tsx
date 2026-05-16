@@ -44,7 +44,7 @@ const tabsListVariants = tv({
     variant: {
       default: {
         base: ["rounded-lg"],
-        indicator: ["-z-1 rounded-lg bg-input/64 dark:bg-input"],
+        indicator: ["-z-1 rounded-lg bg-accent"],
       },
       underline: {
         base: [

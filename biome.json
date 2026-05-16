@@ -37,6 +37,16 @@
           }
         }
       }
+    },
+    {
+      "includes": ["scripts/normalize-component-mdx-prop-unions.mts"],
+      "linter": {
+        "rules": {
+          "performance": {
+            "useTopLevelRegex": "off"
+          }
+        }
+      }
     }
   ]
 }

@@ -1,15 +1,16 @@
+import Link from "next/link";
 import { GithubIcon } from "@/components/icons/github";
 import { SharkIcon } from "@/components/icons/shark";
 import { HeaderCommand } from "@/components/layout/header/header.command";
 import { MainNav } from "@/components/layout/header/header.main";
 import { MobileNav } from "@/components/layout/header/header.mobile";
 import { ModeSwitcher } from "@/components/layout/mode-switcher";
-import { NavLink } from "@/components/nav-link";
 import { NAV_ITEMS } from "@/config/navigation";
 import { source } from "@/lib/fumadocs";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Separator } from "@/registry/react/components/separator";
+import { HeaderBrand } from "./header.brand";
 import { HeaderCustomize } from "./header.customize";
 
 export const SiteHeader = (props: React.ComponentProps<"header">) => {
@@ -24,36 +25,23 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
         "sticky top-0",
         "w-full",
         "bg-background/80 backdrop-blur-sm",
-
         className
       )}
       {...rest}
     >
-      <div className="container px-6">
+      <div className="container">
         <div className="flex h-(--header-height) items-center gap-4">
-          <MobileNav
-            className="flex lg:hidden"
-            items={NAV_ITEMS}
-            tree={pageTree}
-          />
-
-          <NavLink
-            className={cn(
-              "hidden gap-2 lg:flex",
-              "font-bold text-base",
-              "rounded-md border border-transparent",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            )}
-            href="/"
-          >
-            <SharkIcon className="size-5 shrink-0" />
-            Shark
-          </NavLink>
+          <HeaderBrand asChild>
+            <Link aria-label="Shark UI, back to home" href="/">
+              <SharkIcon className="size-5 shrink-0" />
+              Shark
+            </Link>
+          </HeaderBrand>
 
           <MainNav className="hidden lg:flex" items={NAV_ITEMS} />
 
           <div className="ms-auto flex items-center gap-2 md:flex-1 md:justify-end">
-            <div className="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+            <div className="hidden w-full flex-1 sm:flex md:w-auto md:flex-none">
               <HeaderCommand
                 navItems={NAV_ITEMS.filter((item) => item.label !== "Docs")}
                 tree={pageTree}
@@ -82,6 +70,14 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
             <Separator orientation="vertical" />
 
             <ModeSwitcher />
+
+            <Separator className="lg:hidden" orientation="vertical" />
+
+            <MobileNav
+              className="flex lg:hidden"
+              items={NAV_ITEMS}
+              tree={pageTree}
+            />
           </div>
         </div>
       </div>

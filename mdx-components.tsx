@@ -1,4 +1,4 @@
-import { InfoIcon } from "lucide-react";
+import { ExternalLinkIcon, InfoIcon } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
 import { CodeBlockCommand } from "@/components/code-block-command";
@@ -146,12 +146,13 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  a: ({ className, href, ...props }: React.ComponentProps<"a">) => {
+  a: ({ href, className, children, ...props }: React.ComponentProps<"a">) => {
     const isExternal = typeof href === "string" && href.startsWith("http");
 
     return (
       <Link
         className={cn(
+          "inline-flex items-center gap-1",
           "font-medium text-foreground",
           "rounded-md border border-transparent",
           "underline underline-offset-4",
@@ -165,7 +166,12 @@ export const mdxComponents = {
           target: "_blank",
         })}
         {...props}
-      />
+      >
+        {children}
+        {isExternal && (
+          <ExternalLinkIcon className="size-3.5 text-muted-foreground" />
+        )}
+      </Link>
     );
   },
   Button,
@@ -198,6 +204,7 @@ export const mdxComponents = {
         <code
           className={cn(
             "relative",
+            "px-1",
             "bg-primary/5",
             "font-mono text-primary text-sm",
             "rounded-md",
@@ -298,7 +305,10 @@ export const mdxComponents = {
     />
   ),
   strong: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-    <strong className={cn("font-medium", className)} {...props} />
+    <strong
+      className={cn("font-medium text-foreground", className)}
+      {...props}
+    />
   ),
   table: ({ className, ...props }: React.ComponentProps<typeof Table>) => (
     <ScrollArea className="my-6 rounded-xl border">

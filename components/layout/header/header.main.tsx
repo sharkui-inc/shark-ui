@@ -19,7 +19,12 @@ export const MainNav = (props: MainNavProps) => {
       {items.map((item) => (
         <Button asChild key={item.href} variant="ghost">
           <NavLink
-            className="px-2 text-muted-foreground hover:text-foreground [&.active]:text-foreground"
+            className={cn(
+              "px-2",
+              "text-muted-foreground",
+              "hover:text-foreground",
+              "[&.active]:text-foreground"
+            )}
             href={item.href}
           >
             {item.label}

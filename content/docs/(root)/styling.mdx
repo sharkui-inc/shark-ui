@@ -5,36 +5,37 @@ description: Guide to styling components with the color system.
 
 ## Overview
 
-Styling uses CSS variables for crisp borders and clear stacking. See [Colors](/docs/colors) for tokens and utility mapping. 
+Shark UI’s styling system is built for clarity and consistent theming. It follows [shadcn/ui theme tokens](https://ui.shadcn.com/docs/theming#theme-tokens) and adds three extra tokens: `success`, `warning`, and `info` to cover status states.
 
 ## CSS Configuration
 
-See [Installation](/docs/installation#new-project-setup) for setup. To add the theme yourself, paste the following into `globals.css`:
+See [Installation](/docs/installation#new-project-setup) for installing with CLI. To add the theme yourself, paste the following into `globals.css`:
 
+<CodeCollapsibleWrapper>
 ```css title="globals.css"
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
-  --color-info: var(--info);
-  --color-info-foreground: var(--info-foreground);
-  --color-warning: var(--warning);
-  --color-warning-foreground: var(--warning-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -73,17 +74,17 @@ See [Installation](/docs/installation#new-project-setup) for setup. To add the t
   --primary-foreground: var(--color-neutral-50);
   --secondary: color-mix(
     in srgb,
-    var(--color-neutral-950) 8%,
+    var(--color-neutral-950) 6%,
     var(--background)
   );
   --secondary-foreground: var(--color-neutral-800);
-  --muted: color-mix(in srgb, var(--color-neutral-950) 8%, var(--background));
+  --muted: color-mix(in srgb, var(--color-neutral-950) 6%, var(--background));
   --muted-foreground: color-mix(
     in srgb,
     var(--color-neutral-500) 80%,
     var(--color-neutral-950)
   );
-  --accent: color-mix(in srgb, var(--color-neutral-950) 8%, var(--background));
+  --accent: color-mix(in srgb, var(--color-neutral-950) 6%, var(--background));
   --accent-foreground: var(--color-neutral-800);
   --destructive: var(--color-red-500);
   --destructive-foreground: var(--color-red-700);
@@ -106,7 +107,7 @@ See [Installation](/docs/installation#new-project-setup) for setup. To add the t
   --sidebar-primary-foreground: var(--color-neutral-50);
   --sidebar-accent: color-mix(
     in srgb,
-    var(--color-neutral-950) 8%,
+    var(--color-neutral-950) 6%,
     var(--sidebar)
   );
   --sidebar-accent-foreground: var(--color-neutral-800);
@@ -124,11 +125,7 @@ See [Installation](/docs/installation#new-project-setup) for setup. To add the t
 }
 
 .dark {
-  --background: color-mix(
-    in srgb,
-    var(--color-neutral-950) 100%,
-    var(--color-neutral-50)
-  );
+  --background: var(--color-neutral-950);
   --foreground: var(--color-neutral-100);
   --card: color-mix(in srgb, var(--background) 98%, var(--color-neutral-50));
   --card-foreground: var(--color-neutral-100);
@@ -195,14 +192,15 @@ See [Installation](/docs/installation#new-project-setup) for setup. To add the t
   --chart-4: var(--color-purple-500);
   --chart-5: var(--color-rose-500);
 }
-
 ```
+</CodeCollapsibleWrapper>
 
+{/* TODO: work on font-heading
 ## Font Variables
 
 The theme preset defines `--font-sans` with system fallbacks. To use custom typefaces, set this variable in your layout via `next/font` or `@fontsource-variable`:
 
-```tsx
+```tsx title="app/layout.tsx"
 import { Inter } from "next/font/google";
 
 const fontSans = Inter({ variable: "--font-sans", subsets: ["latin"] });
@@ -218,8 +216,79 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+``` */}
+
+## Token convention
+
+Each color has two tokens: the base name is the **fill**. The same name with **`-foreground`** is the **text** and **icon** color meant to sit on that fill. Use both together on every new surface so content stays readable.
+
+```tsx /bg-background/ /text-foreground/
+<div className="bg-primary text-primary-foreground" />
 ```
 
-## Customizing Colors
+## Adding new tokens
 
-To customize colors interactively, use the [Themes](/themes) page: pick primary and gray bases, adjust border radius, preview light and dark, then copy the generated CSS variables into your `globals.css`.
+New variables must be wired through **`@theme inline`** as `--color-*` entries. See [Tailwind CSS](https://tailwindcss.com/docs/theme)
+
+```css title="globals.css"
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+}
+
+:root {
+  --brand: oklch(0.55 0.18 250);
+  --brand-foreground: oklch(0.99 0 0);
+}
+```
+
+## Customizing colors
+
+Override variables on `:root` and `.dark`. Always update foreground when you change a fill.
+
+```css title="globals.css"
+:root {
+  --primary: oklch(76.8% 0.233 130.85);
+  --primary-foreground: oklch(98.6% 0.031 120.757);
+}
+
+.dark {
+  --primary: oklch(53.2% 0.157 131.589);
+  --primary-foreground: oklch(96.7% 0.067 122.328);
+}
+```
+
+## Radius Scale
+
+`--radius` is the base radius token for your theme.
+
+We derive a small radius scale from it so components can use consistent corner sizes while still sharing a single source of truth.
+
+```css title="app/globals.css" showLineNumbers
+@theme inline {
+  --radius-xs: calc(var(--radius) * 0.25);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: calc(var(--radius) * 1);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 3);
+  --radius-4xl: calc(var(--radius) * 4);
+}
+
+:root {
+  --radius: 0.5rem;
+}
+```
+
+This means:
+
+- `radius-lg` is the base value.
+- Smaller radius scale down from `--radius`.
+- Larger radius scale up from `--radius`.
+- Changing `--radius` updates the entire radius scale.
+
+## Color system
+
+See [Colors](/docs/colors) for the full token reference, and naming rules.
+

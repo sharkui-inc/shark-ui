@@ -7,12 +7,12 @@ export const CollapsibleThumb = (props: ThumbCardProps) => (
         <div className="h-2 w-2/3 rounded-full bg-muted-foreground/16" />
         <span
           aria-hidden="true"
-          className="rotate-180 text-muted-foreground text-xs"
+          className="shrink-0 rotate-180 text-muted-foreground text-xs"
         >
           ⌃
         </span>
       </div>
-      <div className="flex flex-col gap-1.5 border-border border-input border-b p-3">
+      <div className="flex flex-col gap-1.5 border-input border-b p-3">
         <div className="flex w-full flex-col gap-1">
           <div className="h-2 w-full rounded-full bg-muted-foreground/16" />
           <div className="h-2 w-2/3 rounded-full bg-muted-foreground/8" />

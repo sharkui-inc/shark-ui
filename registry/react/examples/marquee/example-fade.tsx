@@ -14,36 +14,34 @@ import {
 } from "@/registry/react/components/marquee";
 
 const Example = () => (
-  <div className="flex size-full items-center justify-center border border-border bg-background p-4">
-    <div className="flex w-full flex-col gap-6 overflow-hidden">
-      <Marquee pauseOnInteraction showEdges={false}>
-        <MarqueeContent>
-          {items.map((Icon, index) => (
-            <MarqueeItem key={index}>
-              <Card>
-                <CardContent>
-                  <Icon className="size-10" />
-                </CardContent>
-              </Card>
-            </MarqueeItem>
-          ))}
-        </MarqueeContent>
-      </Marquee>
+  <div className="flex w-full flex-col gap-6 overflow-hidden">
+    <Marquee pauseOnInteraction showEdges={false}>
+      <MarqueeContent>
+        {items.map((Icon, index) => (
+          <MarqueeItem key={index}>
+            <Card>
+              <CardContent>
+                <Icon className="size-10" />
+              </CardContent>
+            </Card>
+          </MarqueeItem>
+        ))}
+      </MarqueeContent>
+    </Marquee>
 
-      <Marquee pauseOnInteraction reverse>
-        <MarqueeContent>
-          {items.map((Icon, index) => (
-            <MarqueeItem key={index}>
-              <Card>
-                <CardContent>
-                  <Icon className="size-10" />
-                </CardContent>
-              </Card>
-            </MarqueeItem>
-          ))}
-        </MarqueeContent>
-      </Marquee>
-    </div>
+    <Marquee pauseOnInteraction reverse>
+      <MarqueeContent>
+        {items.map((Icon, index) => (
+          <MarqueeItem key={index}>
+            <Card>
+              <CardContent>
+                <Icon className="size-10" />
+              </CardContent>
+            </Card>
+          </MarqueeItem>
+        ))}
+      </MarqueeContent>
+    </Marquee>
   </div>
 );
 

@@ -58,7 +58,12 @@ export const ComponentPreviewTabs = (props: ComponentPreviewTabsProps) => {
             <div
               className={cn(
                 { "h-[450px]": hasMaxHeight },
-                "relative flex w-full items-center justify-center overflow-y-auto p-4 sm:p-10"
+                "relative",
+                "w-full",
+                "p-4 sm:p-10",
+                "flex items-center justify-center",
+                "bg-code",
+                "overflow-y-auto"
               )}
               data-slot="preview"
             >

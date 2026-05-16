@@ -137,7 +137,7 @@ const menuItemVariants = tv({
     "outline-hidden",
     "group-data-[date=open]/trigger-item:bg-accent group-data-[date=open]/trigger-item:text-accent-foreground",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
-    "[&_svg:not([class*='size-'])]:size-3.5 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   ],
   variants: {
     variant: {

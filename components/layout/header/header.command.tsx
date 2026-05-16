@@ -80,6 +80,7 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
   const { navItems, tree, ...rest } = props;
 
   const router = useRouter();
+
   const isMac = useIsMac();
   const [{ packageManager }] = useConfig();
   const { copyToClipboard, isCopied } = useCopyToClipboard({ timeout: 400 });
@@ -196,19 +197,18 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
       <CommandDialogTrigger asChild>
         <Button
           className={cn(
-            "justify-start",
-            "h-8 w-full shadow-none md:w-48 lg:w-40"
+            "justify-between",
+            "bg-white dark:bg-input/48",
+            "h-8 w-full md:w-48 lg:w-40"
           )}
           clickEffect={false}
           variant="outline"
         >
           <span className="inline-flex">Search...</span>
-          <div className="absolute inset-e-1.5 top-1.5 hidden sm:flex">
-            <KbdGroup>
-              <Kbd variant="outline">⌘</Kbd>
-              <Kbd variant="outline">K</Kbd>
-            </KbdGroup>
-          </div>
+          <KbdGroup>
+            <Kbd variant="outline">⌘</Kbd>
+            <Kbd variant="outline">K</Kbd>
+          </KbdGroup>
         </Button>
       </CommandDialogTrigger>
       <CommandDialogContent>

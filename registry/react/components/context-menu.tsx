@@ -2,7 +2,6 @@
 
 import { Menu as ArkMenu, useMenuContext } from "@ark-ui/react/menu";
 import type React from "react";
-import { cn } from "@/lib/utils";
 import {
   Menu,
   MenuContent,
@@ -23,17 +22,7 @@ export const ContextMenu = (props: React.ComponentProps<typeof Menu>) => (
 
 export const ContextMenuTrigger = (
   props: React.ComponentProps<typeof ArkMenu.ContextTrigger>
-) => {
-  const { className, ...rest } = props;
-
-  return (
-    <ArkMenu.ContextTrigger
-      className={cn("cursor-default select-none", className)}
-      data-slot="context-menu"
-      {...rest}
-    />
-  );
-};
+) => <ArkMenu.ContextTrigger data-slot="context-menu" {...props} />;
 
 export const ContextMenuContent = (
   props: React.ComponentProps<typeof MenuContent>

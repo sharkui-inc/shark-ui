@@ -3,17 +3,33 @@ title: Installation
 description: Get Shark UI running in your project.
 ---
 
-This guide walks through installing Shark UI with your framework of choice. You will end up with components in your project, styled with Tailwind, and ready to customize.
-
 import { FrameworksList } from "@/components/mdx-components/frameworks-list";
 
 ## Prerequisites
 
-Components require [Tailwind CSS](https://tailwindcss.com) and [Ark UI](https://ark-ui.com). When you add components via the shadcn CLI, those dependencies are installed automatically. For manual setup, you add them yourself.
+Components require [Tailwind CSS v4](https://tailwindcss.com). Before you begin, make sure you have a project set up with Tailwind CSS installed.
+
+## Adding components
+
+### CLI
+
+```bash
+npx shadcn@latest add @shark/<component>
+```
+
+### Manual
+
+Copy component source from the component docs via the Manual tab.
+
+### All at once
+
+```bash
+npx shadcn@latest add @shark/ui
+```
 
 ## New Project Setup
 
-For new projects, you have the CLI and manual setup.
+For new projects, you have the `CLI` and `Manual` setup.
 
 ### CLI
 
@@ -25,30 +41,10 @@ npx shadcn@latest init @shark/style
 
 <FrameworksList />
 
-## Adding components
-
-You can add components with the CLI or copy them manually from the component docs:
-
-- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
-- **Manual**: Copy component source from Manual tab in the component docs.
-
-You can also install every component at once:
-
-```bash
-npx shadcn@latest add @shark/ui
-```
-
 ## Styling
 
 For theming and layout setup, see [Styling](/docs/styling).
 
-## Extended colors
+## Color system
 
-See [Colors](/docs/colors) for the full palette and variable reference. Extra variables extend the base palette for components that need state-specific colors (badges, alerts, status indicators):
-
-- `--destructive-foreground` — Foreground for destructive actions
-- `--info` / `--info-foreground` — Information states
-- `--success` / `--success-foreground` — Success states
-- `--warning` / `--warning-foreground` — Warning states
-
-These keep styling consistent across components that show different states or levels of severity.
+See [Colors](/docs/colors) for the full palette and variable reference.
