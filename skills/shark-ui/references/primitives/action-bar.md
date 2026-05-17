@@ -27,7 +27,7 @@ import {
   ActionBarBody,
   ActionBarClose,
   ActionBarContent,
-  ActionBarSelectionTrigger,
+  ActionBarValue,
   ActionBarTrigger,
 } from "@/components/ui/action-bar"
 ```
@@ -45,7 +45,7 @@ import {
         <XIcon />
       </Button>
     </ActionBarClose>
-    <ActionBarSelectionTrigger count={3} />
+    <ActionBarValue count={3} />
     <ActionBarBody>{/* action buttons */}</ActionBarBody>
   </ActionBarContent>
 </ActionBar>
@@ -53,13 +53,13 @@ import {
 
 ### Key patterns
 
-`ActionBarSelectionTrigger` shows selection count; `ActionBarBody` holds the action row. Prefer `asChild` on triggers and close controls so real `Button` elements handle focus and keyboard.
+`ActionBarValue` shows selection count; `ActionBarBody` holds the action row. Prefer `asChild` on triggers and close controls so real `Button` elements handle focus and keyboard.
 
 ## Common pitfalls
 
 - Missing **Button** dependency or imports when copying examples.
 - Putting `ActionBarClose` / `ActionBarBody` outside `ActionBarContent`—keep the documented hierarchy.
-- Omitting `count` (or wrong type) on `ActionBarSelectionTrigger` when you need selection feedback.
+- Omitting `count` (or wrong type) on `ActionBarValue` when you need selection feedback.
 - Skipping `asChild` and ending up with nested interactive elements or wrong roles.
 
 ## Registry example files

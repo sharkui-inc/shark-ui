@@ -88,9 +88,9 @@ export const ClipboardValue = (props: ClipboardValueProps) => {
 
   return (
     <ArkClipboard.ValueText
+      className={cn(clipboardValueVariants({ size }), className)}
       data-slot="clipboard-value"
       {...rest}
-      className={cn(clipboardValueVariants({ size }), className)}
     />
   );
 };

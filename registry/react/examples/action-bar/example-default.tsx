@@ -10,8 +10,8 @@ import {
   ActionBarBody,
   ActionBarClose,
   ActionBarContent,
-  ActionBarSelectionTrigger,
   ActionBarTrigger,
+  ActionBarValue,
 } from "@/registry/react/components/action-bar";
 import { Button } from "@/registry/react/components/button";
 
@@ -26,7 +26,7 @@ const ActionBarDemo = () => (
           <XIcon />
         </Button>
       </ActionBarClose>
-      <ActionBarSelectionTrigger count={3} />
+      <ActionBarValue count={3} />
       <ActionBarBody>
         <Button asChild size="sm" variant="secondary">
           <SendIcon />

@@ -49,7 +49,11 @@ export const ComboboxControl = (
 
   return (
     <ArkCombobox.Control
-      className={cn("relative flex flex-wrap items-center gap-1", className)}
+      className={cn(
+        "group/combobox-control",
+        "relative flex flex-wrap items-center gap-1",
+        className
+      )}
       data-slot="combobox-control"
       {...rest}
     />
@@ -93,7 +97,7 @@ export const ComboboxInput = (props: ComboboxInputProps) => {
   const { inputValue } = useCombobox();
 
   return (
-    <ComboboxControl>
+    <ComboboxControl data-size={size}>
       <InputGroup className={cn(className)} size={size}>
         {children}
         <ArkCombobox.Input asChild>
@@ -110,7 +114,13 @@ export const ComboboxInput = (props: ComboboxInputProps) => {
               <ComboboxTrigger />
             </InputGroupButton>
           )}
-          {showClear && inputValue && <ComboboxClear />}
+          {showClear && inputValue && (
+            <ComboboxClear asChild>
+              <InputGroupButton size="icon-xs" variant="ghost">
+                <XIcon />
+              </InputGroupButton>
+            </ComboboxClear>
+          )}
         </InputGroupAddon>
       </InputGroup>
     </ComboboxControl>
@@ -140,13 +150,7 @@ export const ComboboxTrigger = (
 
 export const ComboboxClear = (
   props: React.ComponentProps<typeof ArkCombobox.ClearTrigger>
-) => (
-  <ArkCombobox.ClearTrigger data-slot="combobox-clear" {...props} asChild>
-    <InputGroupButton size="icon-xs" variant="ghost">
-      <XIcon />
-    </InputGroupButton>
-  </ArkCombobox.ClearTrigger>
-);
+) => <ArkCombobox.ClearTrigger data-slot="combobox-clear" {...props} />;
 
 export const ComboboxPositioner = (
   props: React.ComponentProps<typeof ArkCombobox.Positioner>

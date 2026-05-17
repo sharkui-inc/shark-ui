@@ -71,7 +71,7 @@ import {
 } from "@/components/ui/bottom-navigation";
 ```
 
-```tsx showLineNumbers
+```tsx
 <BottomNavigation defaultValue="home">
   <BottomNavigationList>
     <BottomNavigationItem value="home">
@@ -98,21 +98,15 @@ import {
 
 ### Icon only
 
-Show only icons without labels for a minimalist layout.
+Use `aria-label` on the `BottomNavigationItem` to give the item a label for screen readers.
 
 <ComponentPreview componentName="bottom-navigation" fileName="example-icon-only" />
 
 ### With links
 
-Use the `asChild` prop on `<BottomNavigationItem />` with `<Link />`. 
-
-Sync the active state with `value={pathname}` on the `<BottomNavigation />`.
+Use the `asChild` prop on `BottomNavigationItem` with `Link`. 
 
 <ComponentPreview componentName="bottom-navigation" fileName="example-with-links" />
-
-## Accessibility
-
-- Use `aria-label` on `<BottomNavigationItem />` when using icon-only items so screen readers can read the label.
 
 ## API Reference
 
@@ -126,6 +120,7 @@ Root wrapper for the bottom navigation bar.
 | `defaultValue` | `string` | `-` |
 | `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
 
 ### BottomNavigationList
 
@@ -133,8 +128,8 @@ Fixed bar at the bottom. Typically holds nav items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `aria-label` | `string` | `"Main navigation"` |
 | `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
 
 ### BottomNavigationItem
 
@@ -144,7 +139,6 @@ Single navigation link or button.
 | --- | --- | --- |
 | `value` | `string` | **required** |
 | `disabled` | `boolean` | `false` |
-| `aria-label` | `string` | `-` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 

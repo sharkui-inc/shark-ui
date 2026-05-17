@@ -47,14 +47,6 @@ npm install @ark-ui/react tailwind-variants lucide-react
 
 </CodeTabs>
 
-## Anatomy
-
-```text
-CheckboxGroup
-└── Checkbox
-    └── CheckboxIndicator
-```
-
 ## Usage
 
 ```tsx
@@ -67,11 +59,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 ## Controlled
 
-Use the `checked` prop to control the checkbox.
+Use the `checked` and `onCheckedChange` props to control the checkbox state programmatically.
 
 <ComponentPreview componentName="checkbox" fileName="example-controlled" />
 
-## State
+## States
 
 ### Invalid
 
@@ -89,25 +81,17 @@ Use the `disabled` prop to disable the checkbox.
 
 ### With Description
 
-Use `<FieldDescription />` to add a description to the checkbox.
-
 <ComponentPreview componentName="checkbox" fileName="example-with-description" />
 
 ### Indeterminate
-
-Use the `checked="indeterminate"` prop to set the checkbox to an indeterminate state.
 
 <ComponentPreview componentName="checkbox" fileName="example-indeterminate" />
 
 ### Group
 
-Use `<CheckboxGroup />` to group multiple checkboxes together.
-
 <ComponentPreview componentName="checkbox" fileName="example-checkbox-group" />
 
 ### Card Style
-
-Use `<FieldLabel />` to add a label to the checkbox.
 
 <ComponentPreview componentName="checkbox" fileName="example-card" />
 
@@ -122,8 +106,7 @@ Checkbox control for boolean or multi-select state.
 | `checked` | `boolean \| 'indeterminate'` | `-` |
 | `defaultChecked` | `boolean` | `false` |
 | `disabled` | `boolean` | `false` |
-| `name` | `string` | `-` |
-| `value` | `string` | `-` |
+| `checked` | `boolean \| 'indeterminate'` | `-` |
 | `onCheckedChange` | `({ checked }: CheckedChangeDetails) => void` | `-` |
 | `className` | `string` | `-` |
 
@@ -134,9 +117,8 @@ Groups related checkboxes with consistent layout.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `value` | `string[]` | `-` |
-| `defaultValue` | `string[]` | `-` |
-| `onValueChange` | `(checkedValues: string[]) => void` | `-` |
-| `name` | `string` | `-` |
+| `defaultValue` | `string[]` | `[]` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `className` | `string` | `-` |
 
 ---

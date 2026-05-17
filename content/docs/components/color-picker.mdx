@@ -49,27 +49,6 @@ npm install @ark-ui/react lucide-react
 
 </CodeTabs>
 
-## Anatomy
-
-```text
-ColorPicker
-├── ColorPickerControl
-│   └── ColorPickerTrigger
-└── ColorPickerContent
-    ├── ColorPickerTransparencyGrid
-    ├── ColorPickerView
-    ├── ColorPickerSlider
-    ├── ColorPickerArea
-    │   └── ColorPickerAreaThumb
-    ├── ColorPickerSwatchGroup
-    │   └── ColorPickerSwatchTrigger
-    │       ├── ColorPickerSwatch
-    │       └── ColorPickerSwatchIndicator
-    ├── ColorPickerValue / ColorPickerValueSwatch
-    ├── ColorPickerInput
-    └── ColorPickerSwatchPreview
-```
-
 ## Modes
 
 You can use multiple modes to build the color picker that fits your needs:
@@ -82,6 +61,22 @@ You can use multiple modes to build the color picker that fits your needs:
 
 ## Input
 
+### Anatomy
+
+```text
+ColorPicker
+├── ColorPickerControl
+│   └── InputGroup
+│       ├── ColorPickerTrigger
+│       │   └── ColorPickerSwatchPreview
+│       └── ColorPickerInput
+└── ColorPickerContent
+    ├── ColorPickerArea
+    │   └── ColorPickerAreaThumb
+    └── ColorPickerView
+        └── ColorPickerSlider
+```
+
 ### Usage
 
 ```tsx
@@ -91,7 +86,7 @@ import {
 } from "@/components/ui/color-picker";
 ```
 
-```tsx showLineNumbers
+```tsx
 <ColorPicker>
   <ColorPickerInput asChild channel="hex">
     <Input />
@@ -105,7 +100,7 @@ Use the `value` and `onValueChange` props to programmatically control the color 
 
 <ComponentPreview componentName="color-picker" fileName="example-input-controlled" />
 
-### State
+### States
 
 #### Invalid
 
@@ -127,7 +122,7 @@ Use the `value` and `onValueChange` props to programmatically control the color 
 
 #### With Swatch
 
-Input with `<ColorPickerSwatchPreview />` showing the current color alongside the hex input.
+Input with `ColorPickerSwatchPreview` showing the current color alongside the hex input.
 
 <ComponentPreview componentName="color-picker" fileName="example-input-with-swatch-preview" />
 
@@ -147,6 +142,24 @@ Inspired by Figma's color input.
 
 Color picker with trigger and popover content.
 
+### Anatomy
+
+```text
+ColorPicker
+├── ColorPickerControl
+│   └── ColorPickerTrigger
+└── ColorPickerContent
+    ├── ColorPickerArea
+    │   └── ColorPickerAreaThumb
+    ├── ColorPickerView
+    │   ├── ColorPickerEyeDropperTrigger
+    │   └── ColorPickerSlider
+    │       └── ColorPickerTransparencyGrid
+    └── ColorPickerSwatchGroup
+        └── ColorPickerSwatchTrigger
+            └── ColorPickerSwatch
+```
+
 ### Usage
 
 ```tsx
@@ -163,7 +176,7 @@ import {
 } from "@/components/ui/color-picker";
 ```
 
-```tsx showLineNumbers
+```tsx
 <ColorPicker>
   <ColorPickerTrigger />
   <ColorPickerContent>
@@ -181,7 +194,7 @@ import {
 </ColorPicker>
 ```
 
-### State
+### States
 
 #### Disabled
 
@@ -215,6 +228,18 @@ Popover with preset color swatches for quick selection.
 
 ## Color Swatch Picker
 
+### Anatomy
+
+Set `inline` on `ColorPicker` so swatches render without a popover.
+
+```text
+ColorPicker
+└── ColorPickerSwatchGroup
+    └── ColorPickerSwatchTrigger
+        └── ColorPickerSwatch
+            └── ColorPickerSwatchIndicator
+```
+
 ### Usage
 
 ```tsx
@@ -227,7 +252,7 @@ import {
 } from "@/components/ui/color-picker";
 ```
 
-```tsx showLineNumbers
+```tsx 
 <ColorPicker>
   <ColorPickerSwatchGroup>
     <ColorPickerSwatchTrigger value="#0485F7">
@@ -245,7 +270,7 @@ Use the `value` and `onValueChange` props to programmatically control the swatch
 
 <ComponentPreview componentName="color-picker" fileName="example-swatch-picker-controlled" />
 
-### State
+### States
 
 #### Disabled
 
@@ -257,13 +282,13 @@ Set `disabled` to prevent user interaction.
 
 #### Custom Size
 
-Customize swatch size using the `size-*` on `<ColorPickerSwatchTrigger />`.
+Customize swatch size using the `size-*` on `ColorPickerSwatchTrigger`.
 
 <ComponentPreview componentName="color-picker" fileName="example-swatch-picker-custom-size" />
 
 #### Custom Radius
 
-Override the default rounded style on `<ColorPickerSwatchTrigger />` using the `rounded-*` utility class.
+Override the default rounded style on `ColorPickerSwatchTrigger` using the `rounded-*` utility class.
 
 <ComponentPreview componentName="color-picker" fileName="example-swatch-picker-custom-radius" />
 
@@ -275,6 +300,16 @@ Replace the default check icon with a custom indicator via the children of `Colo
 
 ## Area
 
+### Anatomy
+
+Set `inline` on `ColorPicker` for a standalone color area.
+
+```text
+ColorPicker
+└── ColorPickerArea
+    └── ColorPickerAreaThumb
+```
+
 ### Usage
 
 ```tsx
@@ -285,7 +320,7 @@ import {
 } from "@/components/ui/color-picker";
 ```
 
-```tsx showLineNumbers
+```tsx 
 <ColorPicker>
   <ColorPickerArea>
     <ColorPickerAreaThumb />
@@ -305,6 +340,17 @@ import {
 
 ## Slider
 
+### Anatomy
+
+Set `inline` on `ColorPicker` for standalone sliders. Wrap multiple sliders in `ColorPickerView`.
+
+```text
+ColorPicker
+└── ColorPickerView
+    └── ColorPickerSlider
+        └── ColorPickerTransparencyGrid
+```
+
 ### Usage
 
 ```tsx
@@ -314,7 +360,7 @@ import {
 } from "@/components/ui/color-picker";
 ```
 
-```tsx showLineNumbers
+```tsx 
 <ColorPicker>
   <ColorPickerSlider channel="hue" />
 </ColorPicker>
@@ -324,7 +370,7 @@ import {
 
 <ComponentPreview componentName="color-picker" fileName="example-slider-controlled" />
 
-### State
+### States
 
 #### Disabled
 
@@ -354,11 +400,17 @@ import {
 
 ### Custom spacing
 
-Use `[--space:--spacing("value")]` on `<ColorPickerContent />` to adjust internal spacing.
+Use `[--space:--spacing("value")]` on `ColorPickerContent` to adjust internal spacing.
 
 Default spacing is `--spacing(3)`.
 
 <ComponentPreview componentName="color-picker" fileName="example-custom-spacing" />
+
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
+
+```css
+  md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
+```
 
 ## API Reference
 
@@ -462,7 +514,7 @@ Button that activates the native Eye Dropper API to sample colors from the scree
 | --- | --- | --- |
 | `variant` | `ButtonProps["variant"]` | `"outline"` |
 | `size` | `ButtonProps["size"]` | `"icon-md"` |
-| `children` | `ReactNode` | `<Pipette />` |
+| `children` | `ReactNode` | `Pipette` |
 | `className` | `string` | - |
 
 ### ColorPickerInput
@@ -514,7 +566,7 @@ Check mark or custom icon shown when a swatch is selected. Pass children to cust
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `children` | `ReactNode` | `<CheckIcon />` |
+| `children` | `ReactNode` | `CheckIcon` |
 | `className` | `string` | - |
 
 ### ColorPickerValue

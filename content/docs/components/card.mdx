@@ -72,7 +72,7 @@ import {
 } from "@/components/ui/card";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Card>
   <CardMedia />
   <CardHeader>
@@ -85,15 +85,13 @@ import {
 </Card>
 ```
 
-## Title and Description
+## Title & Description
 
-`<CardHeader />` supports two usage patterns:
+`CardHeader` supports two usage patterns:
 
 ### Using props
 
-Pass `title` and `description` props directly to `<CardHeader />`. 
-
-> This approach does not require `<CardTitle />` or `<CardDescription />` components.
+Pass `title` and `description` props directly to `CardHeader`. 
 
 ```tsx showLineNumbers
 <CardHeader title="Card Title" description="Card description">
@@ -101,9 +99,11 @@ Pass `title` and `description` props directly to `<CardHeader />`.
 </CardHeader>
 ```
 
+> This approach does not require `CardTitle` or `CardDescription` components.
+
 ### Using components
 
-Alternatively, use `<CardTitle />` and `<CardDescription />` as children for more control.
+Use `CardTitle` and `CardDescription` as children for more control.
 
 ```tsx showLineNumbers
 <CardHeader>
@@ -117,29 +117,21 @@ Alternatively, use `<CardTitle />` and `<CardDescription />` as children for mor
 
 ### Product card
 
-A product card with image, title, description, price, and action buttons.
-
 <ComponentPreview componentName="card" fileName="example-product" />
 
 ### Icon card
 
-A card with an icon at the top and title, description, and action button at the bottom.
-
 <ComponentPreview componentName="card" fileName="example-icon" />
-
-### Clickable cards
-
-For fully clickable cards, wrap the card with [Link Overlay](/docs/components/link-overlay).
 
 ### Custom spacing
 
-The `[--space:--spacing("value")]` on `<CardContent />` controls the internal spacing.
+The `[--space:--spacing("value")]` on `Card` controls the internal spacing.
 
 Default spacing is `--spacing(6)`.
 
 <ComponentPreview componentName="card" fileName="example-custom-spacing" />
 
-Breakpoint utilities change the card spacing at different screen sizes.
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
 
 ```css
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
@@ -149,16 +141,16 @@ Breakpoint utilities change the card spacing at different screen sizes.
 
 ### Card
 
-Root wrapper for card layout. Supports header, body, footer.
+Root wrapper for card layout.
 
 | Prop | Type | Default | 
 | --- | --- | --- | 
 | `className` | `string` | `-` | 
 | `asChild` | `boolean` | `false` |
 
-| Attribute | Default |
+| CSS Variable | Default |
 | --- | --- |
-| `--space` | `--spacing(4)` |
+| `--space` | `--spacing(6)` |
 
 ### CardMedia
 

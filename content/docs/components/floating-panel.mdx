@@ -82,7 +82,7 @@ import {
 } from "@/components/ui/floating-panel";
 ```
 
-```tsx showLineNumbers
+```tsx
 <FloatingPanel>
   <FloatingPanelTrigger />
   <FloatingPanelContent>
@@ -115,6 +115,12 @@ Use `[--space:--spacing("value")]` on `<FloatingPanelContent />` to adjust inter
 Default spacing is `--spacing(4)`.
 
 <ComponentPreview componentName="floating-panel" fileName="example-custom-spacing" />
+
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
+
+```css
+  md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
+```
 
 ## API Reference
 
@@ -181,7 +187,7 @@ Title for the panel.
 
 ### FloatingPanelBody
 
-Scrollable body. Uses [`ScrollArea`](/docs/components/scroll-area) for overflow.
+Scrollable body content. Uses [ScrollArea](/docs/components/scroll-area) for overflow.
 
 | Prop | Type | Default |
 | --- | --- | --- |

@@ -12,7 +12,7 @@ import React from "react";
 import {
   ActionBar,
   ActionBarContent,
-  ActionBarSelectionTrigger,
+  ActionBarValue,
 } from "@/registry/react/components/action-bar";
 import {
   AlertDialog,
@@ -128,7 +128,7 @@ const Example = () => {
         </Table>
 
         <ActionBarContent className="w-full max-w-xl">
-          <ActionBarSelectionTrigger count={selectedIds.length} />
+          <ActionBarValue count={selectedIds.length} />
           <div className="ml-auto flex gap-2">
             <Button className="max-sm:hidden" size="sm" variant="secondary">
               <SendIcon />

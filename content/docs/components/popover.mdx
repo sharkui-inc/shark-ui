@@ -82,7 +82,7 @@ import {
 } from "@/components/ui/popover";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Popover>
   <PopoverTrigger />
   <PopoverContent>
@@ -182,6 +182,12 @@ Use `[--space:--spacing("value")]` on `<PopoverContent />` to adjust internal pa
 Default spacing is `--spacing(4)`.
 
 <ComponentPreview componentName="popover" fileName="example-custom-spacing" />
+
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
+
+```css
+  md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
+```
 
 ## API Reference
 

@@ -10,8 +10,8 @@ import {
   ActionBarBody,
   ActionBarClose,
   ActionBarContent,
-  ActionBarSelectionTrigger,
   ActionBarTrigger,
+  ActionBarValue,
 } from "@/registry/react/components/action-bar";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -32,7 +32,7 @@ const Example = () => (
           <XIcon />
         </Button>
       </ActionBarClose>
-      <ActionBarSelectionTrigger count={3} />
+      <ActionBarValue count={3} />
       <ActionBarBody>
         <Menu positioning={{ placement: "top" }}>
           <MenuTrigger asChild>

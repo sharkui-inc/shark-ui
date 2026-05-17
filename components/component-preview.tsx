@@ -1,6 +1,3 @@
-/** biome-ignore-all lint/correctness/noConstAssign: it's ok */
-/** biome-ignore-all lint/style/noParameterAssign: it's ok */
-
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ComponentPreviewTabs } from "./component-preview-tabs";

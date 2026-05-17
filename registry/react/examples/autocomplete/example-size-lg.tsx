@@ -24,7 +24,7 @@ const Example = () => {
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <AutocompleteInput size="lg" />
+      <AutocompleteInput showClear showTrigger size="lg" />
       <AutocompleteContent>
         <AutocompleteEmpty>No items found.</AutocompleteEmpty>
         <AutocompleteList>

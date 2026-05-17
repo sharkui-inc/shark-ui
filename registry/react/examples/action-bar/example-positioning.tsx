@@ -6,7 +6,7 @@ import {
   ActionBar,
   ActionBarClose,
   ActionBarContent,
-  ActionBarSelectionTrigger,
+  ActionBarValue,
 } from "@/registry/react/components/action-bar";
 import { Button } from "@/registry/react/components/button";
 
@@ -50,7 +50,7 @@ const Example = () => {
             <XIcon />
           </Button>
         </ActionBarClose>
-        <ActionBarSelectionTrigger count={5} />
+        <ActionBarValue count={5} />
       </ActionBarContent>
     </ActionBar>
   );

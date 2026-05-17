@@ -88,7 +88,7 @@ import {
 } from "@/components/ui/tour";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Tour steps={steps}>
   <TourTrigger>Open Tour</TourTrigger>
   <TourContent>
@@ -168,6 +168,12 @@ Use `[--space:--spacing("value")]` on `<TourContent />` to adjust internal spaci
 Default spacing is `--spacing(4)`.
 
 <ComponentPreview componentName="tour" fileName="example-custom-spacing" />
+
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
+
+```css
+  md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
+```
 
 ## API Reference
 

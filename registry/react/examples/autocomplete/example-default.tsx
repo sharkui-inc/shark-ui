@@ -1,6 +1,7 @@
 "use client";
 
 import { useFilter, useListCollection } from "@ark-ui/react";
+import { Field, FieldLabel } from "@registry/react/components/field";
 import {
   Autocomplete,
   AutocompleteContent,
@@ -19,23 +20,25 @@ const AutocompleteDemo = () => {
   });
 
   return (
-    <Autocomplete
-      className="w-64"
-      collection={collection}
-      onInputValueChange={({ inputValue }) => filter(inputValue)}
-    >
-      <AutocompleteInput />
-      <AutocompleteContent>
-        <AutocompleteEmpty />
-        <AutocompleteList>
-          {collection.items.map((item) => (
-            <AutocompleteItem item={item} key={item.value}>
-              {item.label}
-            </AutocompleteItem>
-          ))}
-        </AutocompleteList>
-      </AutocompleteContent>
-    </Autocomplete>
+    <Field className="w-64">
+      <FieldLabel>Search fruits</FieldLabel>
+      <Autocomplete
+        collection={collection}
+        onInputValueChange={({ inputValue }) => filter(inputValue)}
+      >
+        <AutocompleteInput placeholder="e.g. Apple" showClear />
+        <AutocompleteContent>
+          <AutocompleteEmpty />
+          <AutocompleteList>
+            {collection.items.map((item) => (
+              <AutocompleteItem item={item} key={item.value}>
+                {item.label}
+              </AutocompleteItem>
+            ))}
+          </AutocompleteList>
+        </AutocompleteContent>
+      </Autocomplete>
+    </Field>
   );
 };
 

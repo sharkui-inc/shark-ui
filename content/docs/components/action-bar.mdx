@@ -47,7 +47,7 @@ ActionBar
 ├── ActionBarTrigger
 └── ActionBarContent
     ├── ActionBarClose
-    ├── ActionBarSelectionTrigger
+    ├── ActionBarValue
     └── ActionBarBody
 ```
 
@@ -59,20 +59,24 @@ import {
   ActionBarBody,
   ActionBarClose,
   ActionBarContent,
-  ActionBarSelectionTrigger,
+  ActionBarValue,
   ActionBarSeparator,
   ActionBarTrigger,
 } from "@/components/ui/action-bar";
 ```
 
-```tsx showLineNumbers
+```tsx
 <ActionBar>
-  <ActionBarTrigger />
+  <ActionBarTrigger asChild>
+    <Button variant="outline">Open</Button>
+  </ActionBarTrigger>
   <ActionBarContent>
     <ActionBarClose />
-    <ActionBarSelectionTrigger count={3} />
+    <ActionBarValue count={3} />
     <ActionBarBody>
-      {/* Your action buttons */}
+      <Button size="icon-md" variant="secondary" aria-label="Send">
+        <SendIcon />
+      </Button>
     </ActionBarBody>
   </ActionBarContent>
 </ActionBar>
@@ -114,13 +118,13 @@ Use `positioning.gutter` to control the distance from the bottom edge.
 
 ### Custom Spacing
 
-The `[--space:--spacing("value")]` on `<ActionBarContent />` controls the internal spacing.
+The `[--space:--spacing("value")]` on `ActionBarContent` controls the internal spacing.
 
 Default spacing is `--spacing(4)`.
 
 <ComponentPreview componentName="action-bar" fileName="example-custom-spacing" />
 
-Breakpoint utilities change the action bar spacing at different screen sizes.
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
 
 ```css
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
@@ -130,7 +134,7 @@ Breakpoint utilities change the action bar spacing at different screen sizes.
 
 ### ActionBar
 
-Root context provider. Wraps the trigger and floating toolbar.
+Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -152,14 +156,8 @@ Floating toolbar positioned above selected items.
 | `className` | `string` | - |
 | `asChild` | `boolean` | `false` |
 
-| Data attribute | Value |
+| CSS Variable | Default |
 | --- | --- |
-| `data-slot` | `"action-bar-content"` |
-| `data-state` | `"open" \| "closed"` |
-
-| Attribute | Default |
-| --- | --- |
-| `--gutter` | `16px` |
 | `--space` | `--spacing(4)` |
 
 ### ActionBarTrigger
@@ -181,7 +179,7 @@ Closes the action bar and clears the selection.
 | `className` | `string` | - |
 | `asChild` | `boolean` | `false` |
 
-### ActionBarSelectionTrigger
+### ActionBarValue
 
 Shows the number of selected items or a custom label.
 

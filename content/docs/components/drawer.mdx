@@ -71,7 +71,7 @@ import {
 } from "@/components/ui/drawer";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Drawer>
   <DrawerTrigger />
   <DrawerContent>
@@ -126,6 +126,12 @@ Use `[--space:--spacing("value")]` on `<DrawerContent />` to adjust internal spa
 Default spacing is `--spacing(6)`.
 
 <ComponentPreview componentName="drawer" fileName="example-custom-spacing" />
+
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
+
+```css
+  md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
+```
 
 ## API Reference
 

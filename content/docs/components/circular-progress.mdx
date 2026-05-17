@@ -47,27 +47,17 @@ npm install @ark-ui/react
 
 </CodeTabs>
 
-## Anatomy
-
-```text
-CircularProgress
-├── CircularProgressTrack
-└── CircularProgressValue
-```
-
 ## Usage
 
 ```tsx
 import { CircularProgress } from "@/components/ui/circular-progress";
 ```
 
-```tsx showLineNumbers
+```tsx
 <CircularProgress value={66} />
 ```
 
 ## Controlled
-
-Use `value` to control the progress manually.
 
 <ComponentPreview componentName="circular-progress" fileName="example-controlled" />
 
@@ -75,19 +65,15 @@ Use `value` to control the progress manually.
 
 ### With value
 
-Use `<CircularProgressValue />` to render the current value text.
-
 <ComponentPreview componentName="circular-progress" fileName="example-with-value" />
 
 ### Indeterminate
-
-Use the `indeterminate` prop when the completion percentage is unknown.
 
 <ComponentPreview componentName="circular-progress" fileName="example-indeterminate" />
 
 ### Custom Size
 
-Use the `size` prop to set the circle diameter in pixels.
+Use the `size` prop to change the circular progress indicator size.
 
 <ComponentPreview componentName="circular-progress" fileName="example-size" />
 
@@ -96,7 +82,6 @@ Use the `size` prop to set the circle diameter in pixels.
 Use the `thickness` prop to control the ring stroke width.
 
 <ComponentPreview componentName="circular-progress" fileName="example-thickness" />
-
 
 ## API Reference
 

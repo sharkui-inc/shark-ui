@@ -76,7 +76,7 @@ import {
 } from "@/components/ui/sheet";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Sheet>
   <SheetTrigger>Open</SheetTrigger>
   <SheetContent>
@@ -134,6 +134,12 @@ Default spacing is `--spacing(6)`.
 
 <ComponentPreview componentName="sheet" fileName="example-custom-spacing" />
 
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
+
+```css
+  md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
+```
+
 ## API Reference
 
 ### Sheet
@@ -190,7 +196,7 @@ Header area for title and description.
 
 ### SheetBody
 
-Scrollable body. Uses [ScrollArea](/docs/components/scroll-area) for overflow.
+Scrollable body content. Uses [ScrollArea](/docs/components/scroll-area) for overflow.
 
 | Prop | Type | Default |
 | --- | --- | --- |

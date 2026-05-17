@@ -86,13 +86,11 @@ npm install @ark-ui/react tailwind-variants
 import { Badge } from "@/components/ui/badge";
 ```
 
-```tsx showLineNumbers
-<Badge>Badge</Badge>
+```tsx
+<Badge>Favorite</Badge>
 ```
 
 ## Variants
-
-The `variant` prop controls the badge's visual style.
 
 ### Default
 
@@ -154,13 +152,9 @@ The [asChild](/docs/as-child) prop renders another element with badge styling.
 
 ### With icon
 
-Icons can be added to badges for visual context.
-
 <ComponentPreview componentName="badge" fileName="example-with-icon" />
 
 ### With spinner
-
-The `<Spinner />` component indicates loading states when placed inside a badge.
 
 <ComponentPreview componentName="badge" fileName="example-with-spinner" />
 
@@ -180,8 +174,3 @@ Label, count, or status badge. Supports variants.
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `className` | `string` | `-` | 
 | `asChild` | `boolean` | `false` |
-
----
-
-For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/badge#api-reference).
-

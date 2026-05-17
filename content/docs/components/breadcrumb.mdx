@@ -69,7 +69,7 @@ import {
 } from "@/components/ui/breadcrumb";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Breadcrumb>
   <BreadcrumbList>
     <BreadcrumbItem>
@@ -77,7 +77,11 @@ import {
     </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>
-      <BreadcrumbPage>Current Page</BreadcrumbPage>
+      <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
     </BreadcrumbItem>
   </BreadcrumbList>
 </Breadcrumb>
@@ -151,17 +155,17 @@ Current page. Not a link; marked with `aria-current="page"` for accessibility.
 
 ### BreadcrumbSeparator
 
-Visual separator between segments. ChevronRight by default; customizable via children.
+Visual separator between segments.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `children` | `React.ReactNode` | `<ChevronRight />` |
+| `children` | `React.ReactNode` | `ChevronRight` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### BreadcrumbEllipsis
 
-Shows when middle segments are collapsed. MoreHorizontal icon by default; use with dropdown.
+Shows when middle segments are collapsed.
 
 | Prop | Type | Default |
 | --- | --- | --- |

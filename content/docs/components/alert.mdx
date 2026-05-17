@@ -99,21 +99,24 @@ Alert
 ```tsx
 import { 
   Alert, 
+  AlertTitle,
   AlertDescription, 
-  AlertTitle 
+  AlertAction,
 } from "@/components/ui/alert";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Alert>
   <AlertTitle>Heads up!</AlertTitle>
   <AlertDescription>You can add icons to alerts.</AlertDescription>
+  <AlertAction>
+    <Button size="xs" variant="ghost">Dismiss</Button>
+    <Button size="xs">Update</Button>
+  </AlertAction>
 </Alert>
 ```
 
 ## Variants
-
-The `variant` prop controls the alert's visual style. 
 
 ### Default
 
@@ -139,8 +142,6 @@ The `variant` prop controls the alert's visual style.
 
 ### With icon
 
-Icons can be added to alerts for visual context and improved user experience.
-
 <ComponentPreview componentName="alert" fileName="example-with-icon" />
 
 ### With action
@@ -155,7 +156,7 @@ Icons can be added to alerts for visual context and improved user experience.
 
 ### Alert
 
-Root wrapper for alert messages. Supports variants (info, warning, etc.).
+Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -165,7 +166,7 @@ Root wrapper for alert messages. Supports variants (info, warning, etc.).
 
 ### AlertTitle
 
-Alert title or heading. Bold by default.
+Title text.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -174,7 +175,7 @@ Alert title or heading. Bold by default.
 
 ### AlertDescription
 
-Alert body or description. Muted foreground for hierarchy.
+Description text.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -183,7 +184,7 @@ Alert body or description. Muted foreground for hierarchy.
 
 ### AlertAction
 
-Holds action buttons (e.g. dismiss, retry).
+Container for action buttons. Automatically positioned to the right on larger screens.
 
 | Prop | Type | Default |
 | --- | --- | --- |

@@ -70,7 +70,6 @@ npm install @ark-ui/react lucide-react
 ```text
 Collapsible
 ├── CollapsibleTrigger
-│   └── CollapsibleIndicator
 └── CollapsibleContent
 ```
 
@@ -84,10 +83,13 @@ import {
 } from "@/components/ui/collapsible";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Collapsible>
-  <CollapsibleTrigger>Open Collapsible</CollapsibleTrigger>
-  <CollapsibleContent>Collapsible Content</CollapsibleContent>
+  <CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>
+  <CollapsibleContent>
+    Yes. Free to use for personal and commercial projects. No attribution
+    required.
+  </CollapsibleContent>
 </Collapsible>
 ```
 
@@ -97,11 +99,9 @@ Use the `open` and `onOpenChange` props to control the collapsible state program
 
 <ComponentPreview componentName="collapsible" fileName="example-controlled" />
 
-## State
+## States
 
 ### Disabled
-
-Use the `disabled` prop on the collapsible to disable it.
 
 <ComponentPreview componentName="collapsible" fileName="example-disabled" />
 

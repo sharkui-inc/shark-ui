@@ -30,7 +30,11 @@ const Example = () => (
           You don't have any forks of this repository.
         </p>
         <Separator className="my-0" />
-        <Button className="w-full justify-start rounded-t-none" variant="ghost">
+        <Button
+          className="w-full justify-start rounded-t-none"
+          clickEffect={false}
+          variant="ghost"
+        >
           <PlusIcon />
           Create a new fork
         </Button>

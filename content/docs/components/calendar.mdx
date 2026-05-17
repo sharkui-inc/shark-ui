@@ -55,6 +55,8 @@ npm install @ark-ui/react lucide-react
 Calendar
 ├── CalendarViewControl
 │   ├── CalendarPrevTrigger
+│   ├── CalendarMonthSelect
+│   ├── CalendarYearSelect
 │   ├── CalendarViewDate
 │   └── CalendarNextTrigger
 └── CalendarTable
@@ -107,7 +109,7 @@ import {
 
 ### With Presets
 
-<ComponentPreview componentName="calendar" fileName="example-presets" />
+<ComponentPreview componentName="calendar" fileName="example-presets" hasMaxHeight={false} />
 
 ### Multiple Months
 
@@ -115,23 +117,17 @@ import {
 
 ### Min and Max
 
-Use the `min` and `max` props with `parseDate` to restrict the selectable date range.
-
 <ComponentPreview componentName="calendar" fileName="example-min-max" />
 
 ### Select Today
 
-<ComponentPreview componentName="calendar" fileName="example-select-today" />
+<ComponentPreview componentName="calendar" fileName="example-select-today" hasMaxHeight={false} />
 
 ### Fixed Weeks
-
-Use the `fixedWeeks` prop to always display 6 weeks in the calendar, preventing layout shifts when navigating between months.
 
 <ComponentPreview componentName="calendar" fileName="example-fixed-weeks" />
 
 ### Booked Dates
-
-Use the `isDateUnavailable` prop to mark specific dates as unavailable.
 
 <ComponentPreview componentName="calendar" fileName="example-booked-dates" />
 
@@ -139,9 +135,11 @@ Use the `isDateUnavailable` prop to mark specific dates as unavailable.
 
 Use `[--cell-size:--spacing("value")]` to set the size of the calendar cells.
 
+Default value is `--spacing(9)`.
+
 <ComponentPreview componentName="calendar" fileName="example-custom-cell-size" />
 
-Breakpoint utilities change the cell size at different screen sizes.
+> You can use breakpoint utilities to change the cell size at different screen sizes.
 
 ```css
   md:[--cell-size:--spacing(10)] lg:[--cell-size:--spacing(12)]
@@ -168,9 +166,9 @@ Root component. Manages date view, selection, and navigation.
 | `className` | `string` | - |
 | `asChild` | `boolean` | `false` |
 
-| Attribute | Default |
+| CSS Variable | Default |
 | --- | --- |
-| `--cell-size` | `--spacing(8)` |
+| `--cell-size` | `--spacing(9)` |
 
 ### CalendarViewControl
 
@@ -189,7 +187,6 @@ Month selector dropdown. Uses NativeSelect internally.
 | --- | --- | --- |
 | `format` | `"short" \| "long"` | `"short"` |
 | `className` | `string` | - |
-| `asChild` | `boolean` | `false` |
 
 ### CalendarYearSelect
 
@@ -198,7 +195,6 @@ Year selector dropdown.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | - |
-| `asChild` | `boolean` | `false` |
 
 ### CalendarTable
 
@@ -217,7 +213,6 @@ Header row with week day names (Sun–Sat).
 | --- | --- | --- |
 | `format` | `"narrow" \| "short" \| "long"` | `"narrow"` |
 | `className` | `string` | - |
-| `asChild` | `boolean` | `false` |
 
 ### CalendarTableDays
 
@@ -226,17 +221,15 @@ Body with day cells for the current month.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | - |
-| `asChild` | `boolean` | `false` |
 
 ### CalendarTableNextMonth
 
-Body for additional month(s). Use with `numOfMonths` for multi-month layout.
+Body for additional month(s).
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `months` | `number` | `1` |
 | `className` | `string` | - |
-| `asChild` | `boolean` | `false` |
 
 ### CalendarTableCell
 
@@ -246,16 +239,14 @@ Single day cell. Clickable for selection. Shows disabled/outside styling.
 | --- | --- | --- |
 | `value` | `DateValue` | - |
 | `className` | `string` | - |
-| `asChild` | `boolean` | `false` |
 
 ### parseDate
 
-Utility for parsing dates. Use with `min`, `max`, `value`, and `defaultValue`.
+Utility for parsing dates.
 
 ```tsx
 import { parseDate } from "@/components/ui/calendar";
 
-// Parse from Date, string, or timestamp
 parseDate(new Date());
 parseDate("2024-01-15");
 parseDate(Date.now());

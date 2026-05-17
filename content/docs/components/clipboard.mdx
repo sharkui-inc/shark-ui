@@ -68,17 +68,17 @@ import {
 } from "@/components/ui/clipboard";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Clipboard value="https://x.com/vinihvc">
-  <ClipboardTrigger>
-    <ClipboardIndicator />
+  <ClipboardTrigger asChild>
+    <Button size="icon-md">
+      <ClipboardIndicator />
+    </Button>
   </ClipboardTrigger>
 </Clipboard>
 ```
 
 ## Controlled
-
-Use the `onStatusChange` prop to control the clipboard value programmatically.
 
 <ComponentPreview componentName="clipboard" fileName="example-controlled" />
 
@@ -90,21 +90,17 @@ Use the `onStatusChange` prop to control the clipboard value programmatically.
 
 ### Different Icons
 
-Use the `copied` prop on `<ClipboardIndicator />` to customize the icon shown when copied.
-
-Add a `children` to the `<ClipboardIndicator />` to customize the icon shown when not copied.
-
 <ComponentPreview componentName="clipboard" fileName="example-different-icon" />
 
 ### Value Text
 
-Use `<ClipboardValue />` to display the value as text instead of an input field.
+Use `ClipboardValue` component to display the value as text instead of an input field.
 
 <ComponentPreview componentName="clipboard" fileName="example-value-text" />
 
 ### Custom Timeout
 
-Use the `timeout` prop on `<Clipboard />` to customize how long the copied state is shown.
+Use the `timeout` prop on `Clipboard` to customize how long the copied state is shown.
 
 <ComponentPreview componentName="clipboard" fileName="example-custom-timeout" />
 
@@ -118,7 +114,6 @@ Root wrapper. Manages copy state and value.
 | --- | --- | --- |
 | `value` | `string` | **required** |
 | `timeout` | `number` | `2000` |
-| `onStatusChange` | `({ copied }: StatusChangeDetails) => void` | `-` |
 | `className` | `string` | `-` |
 
 ### ClipboardTrigger
@@ -137,6 +132,7 @@ Input showing the value to copy. Often hidden or read-only.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
 
 ### ClipboardIndicator
 
@@ -146,7 +142,6 @@ Icon that changes based on copy state (e.g. copy vs check).
 | --- | --- | --- |
 | `copied` | `ReactNode` | `<CheckIcon />` |
 | `className` | `string` | `-` |
-| `asChild` | `boolean` | `false` |
 
 ### ClipboardValue
 

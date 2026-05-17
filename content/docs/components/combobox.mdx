@@ -53,18 +53,13 @@ npm install @ark-ui/react lucide-react tailwind-variants
 
 ```text
 Combobox
-├── ComboboxControl
-│   ├── ComboboxInput
-│   ├── ComboboxTrigger
-│   └── ComboboxClear
-└── ComboboxPositioner
-    └── ComboboxContent
-        ├── ComboboxEmpty
-        ├── ComboboxList
-        ├── ComboboxGroup
-        │   ├── ComboboxGroupLabel
-        │   └── ComboboxItem
-        └── ComboboxSeparator
+  ├── ComboboxInput
+  └── ComboboxContent
+      ├── ComboboxEmpty
+      └── ComboboxList
+        └── ComboboxGroup
+          ├── ComboboxGroupLabel
+          └── ComboboxItem
 ```
 
 ## Usage
@@ -81,15 +76,14 @@ import {
 } from "@/components/ui/combobox";
 ```
 
-```tsx showLineNumbers
+```tsx
 const { contains } = useFilter({ sensitivity: "base" });
 const { collection, filter } = useListCollection({
   initialItems: [
-    { label: "Apple", value: "apple", group: "Fruits" },
-    { label: "Banana", value: "banana", group: "Fruits" },
+    { label: "Apple", value: "apple" },
+    { label: "Banana", value: "banana" },
   ],
   filter: contains,
-  groupBy: (item) => item.group, // optional
 });
 
 <Combobox
@@ -99,14 +93,10 @@ const { collection, filter } = useListCollection({
   <ComboboxInput placeholder="Select an option" />
   <ComboboxContent>
     <ComboboxList>
-      {collection.group().map(([group, items]) => (
-        <ComboboxGroup heading={group} key={group}>
-          {items.map((item) => (
-            <ComboboxItem item={item} key={item.value}>
-              {item.label}
-            </ComboboxItem>
-          ))}
-        </ComboboxGroup>
+      {items.map((item) => (
+        <ComboboxItem item={item} key={item.value}>
+          {item.label}
+        </ComboboxItem>
       ))}
     </ComboboxList>
   </ComboboxContent>
@@ -133,7 +123,7 @@ Control the selected value with `inputValue` and `onValueChange` props.
 
 <ComponentPreview componentName="combobox" fileName="example-size-lg" />
 
-## State
+## States
 
 ### Invalid
 
@@ -147,7 +137,7 @@ Control the selected value with `inputValue` and `onValueChange` props.
 
 ### Auto highlight
 
-Automatically highlight the first matching item as the user types by setting `inputBehavior="autohighlight"`.
+Automatically highlight the first matching item as the user types.
 
 <ComponentPreview componentName="combobox" fileName="example-autohighlight" />
 
@@ -157,7 +147,7 @@ Automatically highlight the first matching item as the user types by setting `in
 
 ### With Field
 
-Use Combobox with `<Field />` components to style the combobox with the field components.
+Use Combobox with `Field` components to style the combobox with the field components.
 
 <ComponentPreview componentName="combobox" fileName="example-with-field" />
 
@@ -167,13 +157,13 @@ Use Combobox with `<Field />` components to style the combobox with the field co
 
 ### Multiple
 
-Enable multiple selection by setting the `multiple` prop to `<Combobox />`.
+Enable multiple selection by setting the `multiple` prop to `Combobox`.
 
 <ComponentPreview componentName="combobox" fileName="example-multiple" />
 
 ### With clear button
 
-Pass `showClear` to `<ComboboxInput />` to show a clear button.
+Pass `showClear` to `ComboboxInput` to show a clear button.
 
 <ComponentPreview componentName="combobox" fileName="example-with-clear-button" />
 
@@ -185,7 +175,7 @@ Pass `showClear` to `<ComboboxInput />` to show a clear button.
 
 ### Combobox
 
-Root component. Use with `useListCollection` and `useFilter` for filtering.
+Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -203,7 +193,7 @@ Root component. Use with `useListCollection` and `useFilter` for filtering.
 
 ### ComboboxControl
 
-Optional wrapper for custom layouts. Use `ComboboxInput` for the standard input-with-trigger layout.
+Optional wrapper for custom layouts.
 
 | Prop | Type | Default |
 | --- | --- | --- |

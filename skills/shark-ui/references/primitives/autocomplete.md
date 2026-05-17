@@ -178,7 +178,6 @@ import { InputGroupAddon } from "@/components/ui/input-group";
 - [`example-default.tsx`](/registry/react/examples/autocomplete/example-default.tsx)
 - [`example-disabled.tsx`](/registry/react/examples/autocomplete/example-disabled.tsx)
 - [`example-group.tsx`](/registry/react/examples/autocomplete/example-group.tsx)
-- [`example-inline-autocomplete.tsx`](/registry/react/examples/autocomplete/example-inline-autocomplete.tsx)
 - [`example-invalid.tsx`](/registry/react/examples/autocomplete/example-invalid.tsx)
 - [`example-size-lg.tsx`](/registry/react/examples/autocomplete/example-size-lg.tsx)
 - [`example-size-md.tsx`](/registry/react/examples/autocomplete/example-size-md.tsx)

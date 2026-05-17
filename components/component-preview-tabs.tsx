@@ -82,7 +82,7 @@ export const ComponentPreviewTabs = (props: ComponentPreviewTabsProps) => {
           <TabsContent data-slot="tab-code" value="code">
             <div
               className={cn(
-                "min-h-[450px] overflow-hidden **:[figure]:m-0! **:[figure]:border-0"
+                "min-h-[450px] overflow-hidden bg-code **:[figure]:m-0! **:[figure]:border-0"
               )}
               data-slot="code"
             >

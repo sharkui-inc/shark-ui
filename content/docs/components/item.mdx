@@ -74,7 +74,7 @@ import {
 } from "@/components/ui/item";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Item>
   <ItemMedia />
   <ItemContent>
@@ -86,8 +86,6 @@ import {
 ```
 
 ## Variant
-
-Use the `variant` prop to change the visual style of the item.
 
 ### Default
 
@@ -109,10 +107,10 @@ Default spacing is `--spacing(3)`.
 
 <ComponentPreview componentName="item" fileName="example-custom-spacing" />
 
-Breakpoint utilities change the spacing at different screen sizes.
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
 
 ```css
-  md:[--space:--spacing(4)] lg:[--space:--spacing(6)]
+  md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
 
 ## Examples

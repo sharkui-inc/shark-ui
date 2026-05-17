@@ -8,21 +8,16 @@ import { cn } from "@/lib/utils";
 export const BottomNavigation = (
   props: React.ComponentProps<typeof ArkTabs.Root>
 ) => {
-  const {
-    "aria-label": ariaLabel = "Main navigation",
-    className,
-    ...rest
-  } = props;
+  const { className, ...rest } = props;
 
   return (
     <ArkTabs.Root
-      aria-label={ariaLabel}
-      className={cn("w-full", className)}
+      className={cn(
+        "w-full",
+        "min-h-[calc(var(--spacing)*14+env(safe-area-inset-bottom,0))]",
+        className
+      )}
       data-slot="bottom-navigation"
-      style={{
-        height:
-          "calc(calc(var(--spacing)*14) + env(safe-area-inset-bottom, 0px))",
-      }}
       {...rest}
     />
   );
@@ -35,7 +30,6 @@ export const BottomNavigationList = (
 
   return (
     <ArkTabs.List
-      aria-label={ariaLabel ?? "Main navigation"}
       className={cn(
         "fixed inset-x-0 bottom-0 z-10",
         "flex w-full items-center justify-around",

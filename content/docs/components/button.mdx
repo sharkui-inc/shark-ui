@@ -88,13 +88,9 @@ npm install @ark-ui/react tailwind-variants lucide-react
 import { Button } from "@/components/ui/button";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Button>Button</Button>
 ```
-
-## Accessibility
-
-- When using icon-only, add an `aria-label` prop so screen readers can identify the button’s purpose.
 
 ## Link
 
@@ -102,9 +98,17 @@ The [asChild](/docs/as-child) prop renders another element with button styling.
 
 <ComponentPreview componentName="button" fileName="example-state-as-child" />
 
-## Variants
+## States
 
-The `variant` prop controls the button's visual style.
+### Disabled
+
+<ComponentPreview componentName="button" fileName="example-disabled" />
+
+### Loading
+
+<ComponentPreview componentName="button" fileName="example-loading" />
+
+## Variants
 
 ### Default
 
@@ -132,8 +136,6 @@ The `variant` prop controls the button's visual style.
 
 ## Sizes
 
-The `size` prop controls the button dimensions.
-
 ### Extra Small
 
 <ComponentPreview componentName="button" fileName="example-size-xs" />
@@ -152,47 +154,27 @@ The `size` prop controls the button dimensions.
 
 ## Pill
 
-The `pill` prop creates fully rounded buttons.
-
 <ComponentPreview componentName="button" fileName="example-pill" />
 
 ## Disabling click effect
 
-The `clickEffect` prop disables the click animation.
-
 <ComponentPreview componentName="button" fileName="example-no-click-effect" />
-
-## State
-
-### Disabled
-
-The `disabled` prop disables user interaction.
-
-<ComponentPreview componentName="button" fileName="example-disabled" />
-
-### Loading
-
-The `isLoading` prop displays a loading indicator.
-
-<ComponentPreview componentName="button" fileName="example-loading" />
 
 ## Examples
 
 ### Icon only
 
-Create icon-only buttons using the `icon-*` size variants.
+Add `aria-label` prop to the button so screen readers can identify the button.
 
 <ComponentPreview componentName="button" fileName="example-icon" />
 
 ### With icon
 
-Icons can be placed alongside text for visual context.
-
 <ComponentPreview componentName="button" fileName="example-with-icon" />
 
 ### Touch hitbox
 
-For a larger tap target without changing how the button looks, use the [Hitbox](/docs/utilities/hitbox).
+For increasing the tap target area, use [Hitbox](/docs/utilities/hitbox).
 
 <ComponentPreview componentName="button" fileName="example-hitbox" />
 
@@ -208,3 +190,5 @@ For a larger tap target without changing how the button looks, use the [Hitbox](
 | `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon-xs" \| "icon-sm" \| "icon-md" \| "icon-lg" \| "icon-xl"` | `"md"` |
 | `clickEffect` | `boolean` | `true` | 
 | `isLoading` | `boolean` | `false` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |

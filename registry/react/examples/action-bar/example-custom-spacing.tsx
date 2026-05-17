@@ -7,8 +7,8 @@ import {
   ActionBarBody,
   ActionBarClose,
   ActionBarContent,
-  ActionBarSelectionTrigger,
   ActionBarTrigger,
+  ActionBarValue,
 } from "@/registry/react/components/action-bar";
 import { Button } from "@/registry/react/components/button";
 
@@ -26,7 +26,7 @@ const Example = () => {
             <XIcon />
           </Button>
         </ActionBarClose>
-        <ActionBarSelectionTrigger count={2} />
+        <ActionBarValue count={2} />
         <ActionBarBody>
           <Button size="sm" variant="secondary">
             <PencilIcon />

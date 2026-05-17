@@ -49,29 +49,25 @@ npm install @ark-ui/react
 
 </CodeTabs>
 
-## Anatomy
-
-```text
-CircularSlider
-├── CircularSliderValue
-├── CircularSliderThumb
-└── CircularSliderMarkerGroup
-    └── CircularSliderMarker
-```
-
 ## Usage
 
 ```tsx
 import { CircularSlider } from "@/components/ui/circular-slider";
 ```
 
-```tsx showLineNumbers
+```tsx
 <CircularSlider defaultValue={45} />
 ```
 
 ## Controlled
 
 <ComponentPreview componentName="circular-slider" fileName="example-controlled" />
+
+## States
+
+### Disabled
+
+<ComponentPreview componentName="circular-slider" fileName="example-disabled" />
 
 ## Examples
 
@@ -86,10 +82,6 @@ Use the `size` prop to change the slider dimensions.
 Use the `thickness` prop to change the progress ring thickness.
 
 <ComponentPreview componentName="circular-slider" fileName="example-thickness" />
-
-### Disabled
-
-<ComponentPreview componentName="circular-slider" fileName="example-disabled" />
 
 ### With markers
 

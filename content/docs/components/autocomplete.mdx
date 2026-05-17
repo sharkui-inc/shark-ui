@@ -77,15 +77,14 @@ import {
 } from "@/components/ui/autocomplete";
 ```
 
-```tsx showLineNumbers
+```tsx
 const { contains } = useFilter({ sensitivity: "base" });
 const { collection, filter } = useListCollection({
   initialItems: [
-    { label: "Apple", value: "apple", group: "Fruits" },
-    { label: "Banana", value: "banana", group: "Fruits" },
+    { label: "Apple", value: "apple" },
+    { label: "Banana", value: "banana" },
   ],
   filter: contains,
-  groupBy: (item) => item.group, // optional
 });
 
 <Autocomplete
@@ -96,14 +95,10 @@ const { collection, filter } = useListCollection({
   <AutocompleteContent>
     <AutocompleteEmpty />
     <AutocompleteList>
-      {collection.group().map(([group, items]) => (
-        <AutocompleteGroup heading={group} key={group}>
-          {items.map((item) => (
-            <AutocompleteItem item={item} key={item.value}>
-              {item.label}
-            </AutocompleteItem>
-          ))}
-        </AutocompleteGroup>
+      {items.map((item) => (
+        <AutocompleteItem item={item} key={item.value}>
+          {item.label}
+        </AutocompleteItem>
       ))}
     </AutocompleteList>
   </AutocompleteContent>
@@ -112,11 +107,11 @@ const { collection, filter } = useListCollection({
 
 ## Controlled
 
-Control the selected value with `value` and `onValueChange` props. Use `inputValue` and `onInputValueChange` for controlling the input text.
+Control the selected value with `value` and `onValueChange` props.
 
 <ComponentPreview componentName="autocomplete" fileName="example-controlled" />
 
-## State
+## States
 
 ### Invalid
 
@@ -142,35 +137,31 @@ Control the selected value with `value` and `onValueChange` props. Use `inputVal
 
 ## Examples
 
-### Inline autocomplete
-
-Autofill the input with the highlighted item while navigating with arrow keys.
-
-<ComponentPreview componentName="autocomplete" fileName="example-inline-autocomplete" />
-
 ### Group
 
 <ComponentPreview componentName="autocomplete" fileName="example-group" />
 
 ### With Field
 
-Use Autocomplete with `<Field />` components to style with the field components.
+Use `Field` components to style with the field components.
 
 <ComponentPreview componentName="autocomplete" fileName="example-with-field" />
 
 ### With clear button
 
-Pass `showClear` to `<AutocompleteInput />` to show a clear button.
+Pass `showClear` to `AutocompleteInput` to show a clear button.
 
 <ComponentPreview componentName="autocomplete" fileName="example-with-clear-button" />
 
 ### With trigger
 
-Pass `showTrigger` to `<AutocompleteInput />` to show the dropdown trigger button.
+Pass `showTrigger` to `AutocompleteInput` to show the dropdown trigger button.
 
 <ComponentPreview componentName="autocomplete" fileName="example-with-trigger" />
 
 ### With start icon
+
+Use `InputGroupAddon` to add a start icon to the input.
 
 <ComponentPreview componentName="autocomplete" fileName="example-with-start-icon" />
 
@@ -178,13 +169,13 @@ Pass `showTrigger` to `<AutocompleteInput />` to show the dropdown trigger butto
 
 ### Autocomplete
 
-Combines input, dropdown trigger, and list into a searchable select.
+Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `collection` | `ListCollection<T>` | **required** |
-| `value` | `string \| string[]` | - |
-| `defaultValue` | `string \| string[]` | - |
+| `value` | `string[]` | - |
+| `defaultValue` | `string[]` | - |
 | `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
 | `onInputValueChange` | `(details: InputValueChangeDetails) => void` | - |
 | `disabled` | `boolean` | - |
@@ -195,7 +186,7 @@ Combines input, dropdown trigger, and list into a searchable select.
 
 ### AutocompleteInput
 
-Text input with optional dropdown trigger and clear button. Supports size variants.
+Input with dropdown trigger and clear button.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -204,24 +195,13 @@ Text input with optional dropdown trigger and clear button. Supports size varian
 | `showClear` | `boolean` | `false` |
 | `disabled` | `boolean` | - |
 | `className` | `string` | - |
-| `asChild` | `boolean` | - |
 
 ### AutocompleteContent
 
-Dropdown that displays filtered suggestions. Portaled to overlay other content.
+Holds the dropdown options. Displayed in a portal.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
-
-### AutocompleteItem
-
-Single selectable option in the suggestion list. Pass `item` from the collection.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `item` | `T` | **required** |
 | `className` | `string` | - |
 | `asChild` | `boolean` | - |
 
@@ -233,28 +213,34 @@ Groups related items. Use with `groupBy` on the collection.
 | --- | --- | --- |
 | `heading` | `string \| ReactNode` | - |
 | `className` | `string` | - |
-| `asChild` | `boolean` | - |
 
 ### AutocompleteGroupLabel
 
-Heading for a group of items. Use inside `AutocompleteGroup`.
+Label for a group of options. Use inside `AutocompleteGroup`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `className` | `string` | - |
+| `asChild` | `boolean` | - |
+
+### AutocompleteItem
+
+Single selectable option in the dropdown list.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `item` | `T` | **required** |
 | `className` | `string` | - |
 | `asChild` | `boolean` | - |
 
 ### AutocompleteEmpty
 
-Content when no items match the filter. Default: "No results found."
+Shown when no options match the current filter. Use for empty state.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | - |
-
-### AutocompleteControl / AutocompleteTrigger / AutocompleteClear
-
-Optional building blocks for custom layouts. Use `AutocompleteInput` for the standard layout.
+| `asChild` | `boolean` | - |
 
 ---
 

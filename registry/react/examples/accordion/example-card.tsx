@@ -1,22 +1,30 @@
-"use client";
-
-import React from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/registry/react/components/accordion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/registry/react/components/card";
 
-const Example = () => {
-  const [value, setValue] = React.useState(["item-1"]);
-
-  return (
-    <div className="w-full max-w-lg">
-      <Accordion onValueChange={({ value }) => setValue(value)} value={value}>
+const AccordionCardDemo = () => (
+  <Card className="w-full max-w-md">
+    <CardHeader>
+      <CardTitle>Product Information</CardTitle>
+      <CardDescription>
+        Common questions about our products, shipping, and returns.
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <Accordion defaultValue={["item-1"]}>
         <AccordionItem value="item-1">
           <AccordionTrigger>Product Information</AccordionTrigger>
-          <AccordionContent className="text-muted-foreground">
+          <AccordionContent className="flex flex-col gap-4 text-muted-foreground">
             <p>
               Our flagship product combines cutting-edge technology with sleek
               design. Built with premium materials, it offers unparalleled
@@ -27,17 +35,18 @@ const Example = () => {
 
         <AccordionItem value="item-2">
           <AccordionTrigger>Shipping Details</AccordionTrigger>
-          <AccordionContent className="text-muted-foreground">
+          <AccordionContent className="flex flex-col gap-4 text-muted-foreground">
             <p>
               We offer worldwide shipping through trusted courier partners.
-              Standard delivery takes 3-5 business days.
+              Standard delivery takes 3-5 business days, while express shipping
+              ensures delivery within 1-2 business days.
             </p>
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="item-3">
           <AccordionTrigger>Return Policy</AccordionTrigger>
-          <AccordionContent className="text-muted-foreground">
+          <AccordionContent className="flex flex-col gap-4 text-muted-foreground">
             <p>
               We stand behind our products with a comprehensive 30-day return
               policy. If you&apos;re not completely satisfied, simply return the
@@ -46,10 +55,8 @@ const Example = () => {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+    </CardContent>
+  </Card>
+);
 
-      <div className="text-center text-muted-foreground text-sm">{value}</div>
-    </div>
-  );
-};
-
-export default Example;
+export default AccordionCardDemo;

@@ -50,7 +50,7 @@ npm install @ark-ui/react
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 ```
 
-```tsx showLineNumbers
+```tsx
 <AspectRatio>
   <img
     src="/image.jpg"
@@ -80,17 +80,22 @@ Use `[--ratio:*]` with breakpoints to change the ratio at different screen sizes
 
 <ComponentPreview componentName="aspect-ratio" fileName="example-responsive" />
 
+> You can use breakpoint utilities to change the aspect ratio at different screen sizes.
+
+```css
+  md:[--ratio:16/9] lg:[--ratio:16/9]
+```
+
 ## API Reference
 
 ### AspectRatio
 
-Main wrapper that preserves aspect ratio for its children using CSS.
+Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
-
 
 | Attribute | Description |
 | --- | --- |

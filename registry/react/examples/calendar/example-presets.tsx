@@ -18,7 +18,7 @@ import {
 } from "@/registry/react/components/card";
 
 const Example = () => (
-  <Calendar selectionMode="range">
+  <Calendar className="[--cell-size:--spacing(8)]" selectionMode="range">
     <Card className="w-full max-w-xs [--space:--spacing(2)]">
       <CardContent>
         <CalendarViewControl>

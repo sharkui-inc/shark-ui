@@ -85,15 +85,15 @@ import {
 } from "@/components/ui/accordion";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Accordion>
-  <AccordionItem>
-    <AccordionTrigger />
-    <AccordionContent />
-  </AccordionItem>
-  <AccordionItem>
-    <AccordionTrigger />
-    <AccordionContent />
+  <AccordionItem value="item-1">
+    <AccordionTrigger>
+      Is it accessible?
+    </AccordionTrigger>
+    <AccordionContent>
+      Yes. It adheres to the WAI-ARIA design pattern.
+    </AccordionContent>
   </AccordionItem>
 </Accordion>
 ```
@@ -104,12 +104,17 @@ Use the `value` and `onValueChange` props to control the accordion state program
 
 <ComponentPreview componentName="accordion" fileName="example-controlled" />
 
+## States
+
+### Disabled
+
+<ComponentPreview componentName="accordion" fileName="example-disabled" />
 
 ## Examples
 
 ### Non-collapsible
 
-Set the `collapsible` prop to `false` to disable the collapsible behavior and prevent closing the open item.
+Set the `collapsible` prop to `false` to disable the collapsible behavior.
 
 <ComponentPreview componentName="accordion" fileName="example-non-collapsible" />
 
@@ -119,31 +124,31 @@ Use the `multiple` prop to allow multiple items to be open simultaneously.
 
 <ComponentPreview componentName="accordion" fileName="example-multiple" />
 
-### Disabled
+### Card
 
-Use the `disabled` prop on `AccordionItem` to prevent interaction with specific items.
+Wrap the `Accordion` in a `Card` component.
 
-<ComponentPreview componentName="accordion" fileName="example-disabled" />
+<ComponentPreview componentName="accordion" fileName="example-card" />
 
 ## API Reference
 
 ### Accordion
 
-Root component. Manages expand/collapse state for items.
+Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collapsible` | `boolean` | `true` |
-| `multiple` | `boolean` | `false` |
 | `value` | `string[]` | `-` |
 | `defaultValue` | `string[]` | `-` |
+| `collapsible` | `boolean` | `true` |
+| `multiple` | `boolean` | `false` |
 | `onValueChange` | `ValueChangeDetails` | `-` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### AccordionItem
 
-Wraps a single accordion section (trigger + content).
+Single accordion item.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -153,17 +158,16 @@ Wraps a single accordion section (trigger + content).
 
 ### AccordionTrigger
 
-Toggles the section open/closed on click.
+Toggles the item open/closed on click.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `disabled` | `boolean` | `false` |
 | `className` | `string` | `-` |
-| `asChild` | `boolean` | `false` |
 
 ### AccordionContent
 
-Holds the collapsible content for the section.
+Holds the collapsible content for the item.
 
 | Prop | Type | Default |
 | --- | --- | --- |

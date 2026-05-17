@@ -77,7 +77,7 @@ import {
 } from "@/components/ui/carousel"; 
 ```
 
-```tsx showLineNumbers
+```tsx
 <Carousel>
   <CarouselControl>
     <CarouselPrevious>Previous</CarouselPrevious>
@@ -86,14 +86,11 @@ import {
   <CarouselContent>
     <CarouselItem />
     <CarouselItem />
-    <CarouselItem />
   </CarouselContent>
 </Carousel>
 ```
 
 ## Orientation
-
-The `orientation` prop controls the carousel layout direction.
 
 ### Horizontal
 
@@ -105,9 +102,7 @@ The `orientation` prop controls the carousel layout direction.
 
 ## Thumbnail Indicators
 
-Render each thumbnail inside `<CarouselIndicator />` to create a visual preview of each slide.
-
-Use the `orientation` prop to change the orientation of the thumbnail indicators.
+Render each thumbnail inside `CarouselIndicator` to create a visual preview of each slide.
 
 ### Horizontal
 
@@ -121,37 +116,37 @@ Use the `orientation` prop to change the orientation of the thumbnail indicators
 
 ### Autoplay
 
-Use `autoplay` props on `<Carousel />` to make the carousel play automatically.
+Use `autoplay` props on `Carousel` to make the carousel play automatically.
 
 <ComponentPreview componentName="carousel" fileName="example-autoplay" />
 
 ### Loop
 
-Use the `loop` prop to make the carousel loop.
+Use `loop` prop to make the carousel loop.
 
 <ComponentPreview componentName="carousel" fileName="example-loop" />
 
 ### Controlled
 
-Use the `page` and `onPageChange` props to control the carousel state programmatically.
+Use `page` and `onPageChange` props to control the carousel state programmatically.
 
 <ComponentPreview componentName="carousel" fileName="example-controlled" />
 
 ### Slides Per Page
 
-Display multiple slides simultaneously by setting the `slidesPerPage` prop on `<Carousel />`.
+Display multiple slides simultaneously by setting the `slidesPerPage` prop on `Carousel`.
 
 <ComponentPreview componentName="carousel" fileName="example-slides-per-page" />
 
 ### Spacing
 
-Control the gap between slides using the `spacing` prop on `<Carousel />`.
+Control the gap between slides using the `spacing` prop on `Carousel`.
 
 <ComponentPreview componentName="carousel" fileName="example-spacing" />
 
 ### Mouse Drag
 
-To allow mouse drag, set the `allowMouseDrag` prop on `<Carousel />`.
+To allow mouse drag, set the `allowMouseDrag` prop on `Carousel`.
 
 <ComponentPreview componentName="carousel" fileName="example-mouse-drag" />
 

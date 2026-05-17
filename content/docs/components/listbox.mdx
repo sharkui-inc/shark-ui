@@ -76,7 +76,7 @@ import {
 } from "@/components/ui/listbox";
 ```
 
-```tsx showLineNumbers
+```tsx
 const collection = createListCollection({
   items: [
     { label: "Brazil", value: "br" },
@@ -102,7 +102,7 @@ Use `value` and `onValueChange` to control the listbox externally.
 
 <ComponentPreview componentName="listbox" fileName="example-controlled" />
 
-## State
+## States
 
 ### Disabled
 
@@ -142,25 +142,17 @@ Set `selectionMode="none"` to disable selection.
 
 ### With Icon
 
-Add icons to listbox items to provide visual context and improve recognition of different options.
-
 <ComponentPreview componentName="listbox" fileName="example-with-icon" />
 
 ### With Description
-
-Include additional descriptive text for each item to provide more context and help users make informed choices.
 
 <ComponentPreview componentName="listbox" fileName="example-with-description" />
 
 ### Image Explorer
 
-Create an interactive gallery where the listbox acts as navigation for displaying different images or media content.
-
 <ComponentPreview componentName="listbox" fileName="example-image-explorer" />
 
 ### Transfer List
-
-Create a dual-listbox interface for moving items between available and selected states, commonly used for permission management or item selection workflows.
 
 <ComponentPreview componentName="listbox" fileName="example-transfer-list" />
 

@@ -4,8 +4,8 @@ import {
   ActionBarBody,
   ActionBarClose,
   ActionBarContent,
-  ActionBarSelectionTrigger,
   ActionBarTrigger,
+  ActionBarValue,
 } from "@/registry/react/components/action-bar";
 import {
   AlertDialog,
@@ -29,7 +29,7 @@ const Example = () => (
           <XIcon />
         </Button>
       </ActionBarClose>
-      <ActionBarSelectionTrigger count={3} />
+      <ActionBarValue count={3} />
       <ActionBarBody>
         <AlertDialog>
           <AlertDialogTrigger asChild>

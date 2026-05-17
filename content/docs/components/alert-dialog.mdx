@@ -9,7 +9,7 @@ links:
 <Alert>
   <InfoIcon />
   <AlertDescription>
-  Built on top of the [`<Dialog />`](/docs/components/dialog) component. Check it out for more examples.
+  Alert Dialog is built on top of the [`Dialog`](/docs/components/dialog) component. Check it out for more examples.
   </AlertDescription>
 </Alert>
 
@@ -62,10 +62,10 @@ npm install @ark-ui/react lucide-react tailwind-variants
 AlertDialog
 ├── AlertDialogTrigger
 └── AlertDialogContent
-    ├── AlertDialogBody
     ├── AlertDialogHeader
     │   ├── AlertDialogTitle
     │   └── AlertDialogDescription
+    ├── AlertDialogBody
     ├── AlertDialogFooter
     │   ├── AlertDialogCancel
     │   └── AlertDialogAction
@@ -79,33 +79,71 @@ import {
   AlertDialog, 
   AlertDialogTrigger, 
   AlertDialogContent, 
-  AlertDialogBody,
+  AlertDialogHeader,
   AlertDialogTitle, 
   AlertDialogDescription, 
+  AlertDialogBody,
+  AlertDialogFooter,
   AlertDialogAction,
   AlertDialogCancel,
-  AlertDialogHeader,
-  AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
 ```
 
-```tsx showLineNumbers
+```tsx
 <AlertDialog>
-  <AlertDialogTrigger />
+  <AlertDialogTrigger asChild>
+    <Button variant="outline">Open</Button>
   <AlertDialogContent>
     <AlertDialogHeader>
-      <AlertDialogTitle />
-      <AlertDialogDescription />
+      <AlertDialogTitle>Allow accessory to connect?</AlertDialogTitle>
+      <AlertDialogDescription>
+        Do you want to allow the USB accessory to connect to this device?
+      </AlertDialogDescription>
     </AlertDialogHeader>
-    <AlertDialogBody>
-    {/** Your content here */}
-    </AlertDialogBody>
+    <AlertDialogBody />
     <AlertDialogFooter>
-      <AlertDialogCancel />
-      <AlertDialogAction />
+      <AlertDialogCancel>
+        Don't allow
+      </AlertDialogCancel>
+      <AlertDialogClose asChild>
+        <AlertDialogAction>Allow</AlertDialogAction>
+      </AlertDialogClose>
     </AlertDialogFooter>
   </AlertDialogContent>
 </AlertDialog>
+```
+
+## Title & Description
+
+`AlertDialogHeader` supports two usage patterns:
+
+### Using props
+
+Pass `title` and `description` props directly to `AlertDialogHeader`. 
+
+```tsx showLineNumbers
+<AlertDialogHeader 
+  title="Allow accessory to connect?" 
+  description="Do you want to allow the USB accessory to connect to this device?"
+>
+  <AlertDialogAction />
+</AlertDialogHeader>
+```
+
+> This approach does not require `AlertDialogTitle` or `AlertDialogDescription` components.
+
+### Using components
+
+Use `AlertDialogTitle` and `AlertDialogDescription` as children for more control.
+
+```tsx showLineNumbers
+<AlertDialogHeader>
+  <AlertDialogTitle>Allow accessory to connect?</AlertDialogTitle>
+  <AlertDialogDescription>
+    Do you want to allow the USB accessory to connect to this device?
+  </AlertDialogDescription>
+  <AlertDialogAction />
+</AlertDialogHeader>
 ```
 
 ## Examples
@@ -118,7 +156,7 @@ import {
 
 ### AlertDialogAction
 
-Primary action (e.g. confirm, delete). Closes the dialog on click.
+Primary action.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -128,7 +166,7 @@ Primary action (e.g. confirm, delete). Closes the dialog on click.
 
 ### AlertDialogCancel
 
-Cancel action. Closes the dialog without committing.
+Cancel action.
 
 | Prop | Type | Default |
 | --- | --- | --- |

@@ -50,6 +50,7 @@ npm install @ark-ui/react tailwind-variants
 
 ```text
 ButtonGroup
+└── Button or Input
 ├── ButtonGroupText
 └── ButtonGroupSeparator
 ```
@@ -63,11 +64,15 @@ import {
 } from "@/components/ui/button-group";
 ```
 
-```tsx showLineNumbers
+```tsx
 <ButtonGroup> 
-  <Button />
+  <Button>
+    Archive 
+  </Button>
   <ButtonGroupSeparator />
-  <Button />
+  <Button>
+    Report
+  </Button>
 </ButtonGroup>
 ```
 
@@ -77,13 +82,12 @@ import {
 
 ```tsx showLineNumbers
 <ButtonGroup aria-label="Media controls">
-  {/* Your content here */}
+  <Button>Play</Button>
+  <Button>Pause</Button>
 </ButtonGroup>
 ```
 
 ## Orientation
-
-The `orientation` prop controls the layout direction of the button group.
 
 ### Horizontal
 
@@ -97,27 +101,19 @@ The `orientation` prop controls the layout direction of the button group.
 
 ### Nested
 
-Button groups can be nested inside other button groups to add spacing between buttons.
-
 <ComponentPreview componentName="button-group" fileName="example-nested" />
 
 ### Separator
 
-The `<ButtonGroupSeparator />` component adds a separator between buttons.
-
-Buttons with variant `outline` do not need a separator since they have a border. For other variants, a separator is recommended to improve the visual hierarchy.
+Buttons with variant `outline` do not need a separator since they have a border.
 
 <ComponentPreview componentName="button-group" fileName="example-separator" />
 
 ### With Input
 
-Buttons can be combined with input fields in a button group.
-
 <ComponentPreview componentName="button-group" fileName="example-with-input" />
 
 ### With Menu
-
-A menu component can be integrated within a button group for additional options.
 
 <ComponentPreview componentName="button-group" fileName="example-with-menu" />
 
@@ -137,13 +133,15 @@ Groups buttons together. Uses fieldset for accessibility when applicable.
 | --- | --- | --- | 
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `className` | `string` | `-` | 
+| `asChild` | `boolean` | `false` |
 
 ### ButtonGroupSeparator
 
-Visual divider between buttons. Uses [`<Separator />`](/docs/components/separator) internally.
+Visual divider between buttons. Uses [Separator](/docs/components/separator) internally.
 
 | Prop | Type | Default | 
 | --- | --- | --- | 
 | `orientation` | `"horizontal" \| "vertical"` | `"vertical"` |
 | `className` | `string` | `-` | 
+| `asChild` | `boolean` | `false` |
 

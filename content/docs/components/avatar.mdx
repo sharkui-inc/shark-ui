@@ -74,7 +74,7 @@ import {
 } from "@/components/ui/avatar";
 ```
 
-```tsx showLineNumbers
+```tsx
 <Avatar>
   <AvatarImage src="https://github.com/vinihvc.png" />
   <AvatarFallback>VV</AvatarFallback>
@@ -82,8 +82,6 @@ import {
 ```
 
 ## Sizes
-
-Use the `size` prop to change the size of the avatar.
 
 ### Small
 
@@ -101,49 +99,33 @@ Use the `size` prop to change the size of the avatar.
 
 ### Avatar Group
 
-Use the `<AvatarGroup />` to add a group of avatars.
-
 <ComponentPreview componentName="avatar" fileName="example-group" />
 
 ### Badge
-
-Use `<AvatarBadge />` to show status indicators on avatars.
 
 <ComponentPreview componentName="avatar" fileName="example-with-status" />
 
 ### Badge with Icon
 
-Add an icon to `<AvatarBadge />` for actions like adding a user.
-
 <ComponentPreview componentName="avatar" fileName="example-badge-with-icon" />
 
 ### Fallback with Icon
-
-Use an icon inside `<AvatarFallback />` when you have no image or initials.
 
 <ComponentPreview componentName="avatar" fileName="example-fallback-icon" />
 
 ### Avatar Group Count
 
-Use `<AvatarGroupCount />` to add a count to the group.
-
 <ComponentPreview componentName="avatar" fileName="example-group-count" />
 
 ### Avatar Group Count Icon
-
-The `<AvatarGroupCount />` also supports an icon.
 
 <ComponentPreview componentName="avatar" fileName="example-group-count-icon" />
 
 ### Avatar with Popover
 
-Works with the `<Popover>` component to show additional information.
-
 <ComponentPreview componentName="avatar" fileName="example-group-popover" />
 
 ### Avatar with Hover Card
-
-Works with the `<HoverCard>` component to show user information on hover.
 
 <ComponentPreview componentName="avatar" fileName="example-hover-card" />
 
@@ -153,17 +135,23 @@ Use `size-*` to set the size of the avatar.
 
 <ComponentPreview componentName="avatar" fileName="example-size-custom" />
 
+> You can use breakpoint utilities to change the size at different screen sizes.
+
+```css
+  md:size-4 lg:size-8
+```
+
 ### Custom Radius
 
 Use `rounded-*` to set the radius of the avatar.
 
 <ComponentPreview componentName="avatar" fileName="example-custom-radius" />
 
-### Custom Colors
+> You can use breakpoint utilities to change the radius at different screen sizes.
 
-Customize the `<AvatarFallback />` with a custom color.
-
-<ComponentPreview componentName="avatar" fileName="example-custom-colors" />
+```css
+  md:rounded-full lg:rounded-lg
+```
 
 ## API Reference
 

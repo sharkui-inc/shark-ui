@@ -1,5 +1,5 @@
 import { Badge } from "@registry/react/components/badge";
-import { ArrowUpRight, SparklesIcon } from "lucide-react";
+import { SparklesIcon } from "lucide-react";
 import {
   Announcement,
   AnnouncementTitle,
@@ -8,12 +8,11 @@ import {
 const Example = () => (
   <Announcement>
     <Badge variant="info">
-      <SparklesIcon aria-hidden />
+      <SparklesIcon />
       New features
     </Badge>
     <AnnouncementTitle>
       Dark mode and 12 new components available
-      <ArrowUpRight aria-hidden />
     </AnnouncementTitle>
   </Announcement>
 );

@@ -83,7 +83,7 @@ import {
 } from "@/components/ui/command";
 ```
 
-```tsx showLineNumbers
+```tsx
 const { contains } = useFilter({ sensitivity: "base" });
 const { collection, filter } = useListCollection({
   initialItems: [
@@ -120,25 +120,23 @@ const { collection, filter } = useListCollection({
 
 ### With Dialog
 
-Use `<CommandDialog />`, `<CommandDialogTrigger />`, and `<CommandDialogContent />` for the modal pattern.
-
 <ComponentPreview componentName="command" fileName="example-dialog" />
 
 ### Groups
 
-Group related items with `<CommandGroup />` and the `heading` prop. 
+Group related items with `CommandGroup` and the `heading` prop. 
 
 <ComponentPreview componentName="command" fileName="example-groups" />
 
 ### Shortcuts
 
-Display keyboard shortcuts next to items with `<CommandShortcut />`.
+Display keyboard shortcuts next to items with `CommandShortcut`.
 
 <ComponentPreview componentName="command" fileName="example-shortcuts" />
 
 ### With Footer
 
-Add hints or actions in the footer with `<CommandFooter />`.
+Add hints or actions in the footer with `CommandFooter`.
 
 <ComponentPreview componentName="command" fileName="example-with-footer" />
 

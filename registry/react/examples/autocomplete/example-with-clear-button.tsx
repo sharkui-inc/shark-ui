@@ -22,6 +22,7 @@ const Example = () => {
     <Autocomplete
       className="w-64"
       collection={collection}
+      defaultValue={["apple"]}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
       <AutocompleteInput placeholder="Select a fruit..." showClear />
