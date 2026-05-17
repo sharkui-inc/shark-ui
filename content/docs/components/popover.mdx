@@ -100,23 +100,23 @@ import {
 </Popover>
 ```
 
-## Title and Description
+## Title & Description
 
-`<PopoverHeader />` supports two usage patterns:
+`PopoverHeader` supports two usage patterns:
 
 ### Using props
 
-Pass `title` and `description` props directly to `<PopoverHeader />`. 
-
-> This approach does not require `<PopoverTitle />` or `<PopoverDescription />` components.
+Pass `title` and `description` props directly to `PopoverHeader`. 
 
 ```tsx showLineNumbers
 <PopoverHeader title="Popover Title" description="Popover description" />
 ```
 
+> This approach does not require `PopoverTitle` or `PopoverDescription` components.
+
 ### Using components
 
-Alternatively, use `<PopoverTitle />` and `<PopoverDescription />` as children for more control.
+Use `PopoverTitle` and `PopoverDescription` as children for more control.
 
 ```tsx showLineNumbers
 <PopoverHeader>

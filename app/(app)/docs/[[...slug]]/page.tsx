@@ -89,7 +89,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between gap-2">
                       <h1
-                        className="scroll-m-20 font-bold text-3xl"
+                        className="scroll-m-20 font-heading font-semibold text-3xl"
                         id="page-title"
                       >
                         {page.data.title}

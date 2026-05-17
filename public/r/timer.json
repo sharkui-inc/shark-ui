@@ -3,8 +3,7 @@
   "name": "timer",
   "type": "registry:ui",
   "dependencies": [
-    "@ark-ui/react",
-    "lucide-react"
+    "@ark-ui/react"
   ],
   "files": [
     {

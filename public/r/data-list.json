@@ -3,8 +3,7 @@
   "name": "data-list",
   "type": "registry:ui",
   "dependencies": [
-    "@ark-ui/react",
-    "tailwind-variants"
+    "@ark-ui/react"
   ],
   "files": [
     {

@@ -37,6 +37,7 @@ const UPDATED_ITEMS = [
   "/docs/components/card",
   "/docs/components/drawer",
   "/docs/components/table",
+  "/docs/components/dialog",
   "/docs/components/field",
   "/docs/components/action-bar",
   "/docs/components/context-menu",

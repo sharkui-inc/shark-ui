@@ -142,7 +142,7 @@ const treeViewControlVariants = tv({
     "relative my-px",
     "flex items-center gap-(--item-gap)",
     "min-h-8 w-full",
-    "py-(--padding-block) ps-[calc(var(--padding-inline)+var(--indentation)*(var(--depth)-1)+var(--icon-size)*(var(--depth)-1)*.5)] pe-(--padding-inline)",
+    "py-(--padding-block) ps-[calc(var(--padding-inline)+var(--indentation)*(var(--depth)-1)+var(--icon-size)*(var(--depth)-1)*0.5)] pe-(--padding-inline)",
     "bg-transparent",
     "select-none text-start font-inherit text-muted-foreground",
     "rounded-md border-none",
@@ -294,7 +294,7 @@ const TreeViewBranchIndentGuide = (
         "absolute z-1",
         "h-full w-px",
         "bg-border",
-        "start-[calc(var(--padding-inline)+var(--indentation)*(var(--depth)-1)+var(--icon-size)*.5*var(--depth))]",
+        "inset-s-[calc(var(--padding-inline)+var(--indentation)*(var(--depth)-1)+var(--icon-size)*0.5*var(--depth))]",
         "pointer-events-none",
         className
       )}

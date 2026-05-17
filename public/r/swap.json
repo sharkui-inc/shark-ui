@@ -4,8 +4,14 @@
   "type": "registry:ui",
   "dependencies": [
     "@ark-ui/react",
-    "lucide-react"
+    "tailwind-variants"
   ],
+  "cssVars": {
+    "theme": {
+      "--animate-flip-in": "flip-in 0.2s ease-out",
+      "--animate-flip-out": "flip-out 0.2s ease-out"
+    }
+  },
   "css": {
     "@keyframes flip-in": {
       "from": {

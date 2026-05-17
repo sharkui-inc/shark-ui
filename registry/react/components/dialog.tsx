@@ -257,7 +257,9 @@ export const DialogHeader = (props: DialogHeaderProps) => {
   return (
     <ark.div
       className={cn(
-        "flex flex-col gap-2 p-(--space) in-[[data-slot=dialog-content]:has([data-slot=dialog-body])]:pb-3",
+        "p-(--space)",
+        "flex flex-col gap-2",
+        "in-[[data-slot=dialog-content]:has([data-slot=dialog-body])]:pb-3",
         className
       )}
       data-slot="dialog-header"
@@ -283,7 +285,10 @@ export const DialogTitle = (
 
   return (
     <ArkDialog.Title
-      className={cn("font-semibold text-lg leading-none", className)}
+      className={cn(
+        "font-heading font-semibold text-lg leading-none",
+        className
+      )}
       data-slot="dialog-title"
       {...rest}
     />

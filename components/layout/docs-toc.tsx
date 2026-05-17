@@ -42,7 +42,7 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
         On This Page
       </p>
 
-      <div className="relative ms-4.5 flex flex-col gap-0.5 before:absolute before:inset-y-0 before:-start-3.25 before:w-px before:bg-border">
+      <div className="relative ms-4.5 flex flex-col gap-0.5 before:absolute before:-inset-s-3.25 before:inset-y-0 before:w-px before:bg-border">
         {data.map((item) => (
           <TOCItem
             data-active={item.url === `#${activeHeading}`}

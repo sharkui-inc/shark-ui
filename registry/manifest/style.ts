@@ -10,6 +10,8 @@ const registryDependencies = [absoluteUrl("/r/utils.json")];
 const cssVars = {
   theme: {
     "font-sans": "var(--font-sans, ui-sans-serif, system-ui, sans-serif)",
+    "font-heading": "var(--font-heading, ui-sans-serif, system-ui, sans-serif)",
+    "font-mono": "var(--font-mono, ui-monospace, monospace)",
   },
   light: {
     radius: "0.5rem",
@@ -119,10 +121,11 @@ const css = {
       "@apply border-border outline-ring/50 ring-ring": {},
     },
     html: {
-      "@apply antialiased scroll-smooth": {},
+      "@apply antialiased": {},
     },
     body: {
-      "@apply bg-background text-foreground flex min-h-svh flex-col": {},
+      "@apply bg-background text-foreground flex min-h-svh flex-col font-sans":
+        {},
     },
     main: {
       "@apply flex-1 flex flex-col": {},

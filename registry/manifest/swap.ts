@@ -1,6 +1,13 @@
 import type { RegistryItemType } from "@/lib/registry";
 
-const dependencies = ["@ark-ui/react", "lucide-react"];
+const dependencies = ["@ark-ui/react", "tailwind-variants"];
+
+const cssVars = {
+  theme: {
+    "--animate-flip-in": "flip-in 0.2s ease-out",
+    "--animate-flip-out": "flip-out 0.2s ease-out",
+  },
+};
 
 const css = {
   "@keyframes flip-in": {
@@ -25,6 +32,7 @@ const manifest: RegistryItemType = {
   name: "swap",
   type: "registry:ui",
   dependencies,
+  cssVars,
   css,
 };
 

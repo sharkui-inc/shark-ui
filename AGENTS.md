@@ -17,6 +17,7 @@ Use it when adding or editing primitives, registry examples, docs MDX, or when a
 | Per-item build metadata | `registry/manifest/<name>.ts` |
 | LLM-oriented surfaces | `app/(llms)/`, `lib/llms.ts`, `lib/llms-registry-examples.ts` |
 | Deeper agent rules | `skills/shark-ui/SKILL.md` and `skills/shark-ui/references/` |
+| RTL / locale | `content/docs/(root)/rtl.mdx` |
 
 Extended detail for agents: `skills/shark-ui/references/component-registry.md`, `skills/shark-ui/references/rules/composition.md`, `skills/shark-ui/references/rules/forms.md`, `skills/shark-ui/references/rules/styling.md`, `skills/shark-ui/references/rules/migration.md`.
 
@@ -165,14 +166,32 @@ Sidebar (docs previews):
 
 ---
 
-## 11. State and data in examples
+## 11. RTL (right-to-left)
+
+Full setup (`LocaleProvider`, `useLocale`, `dir` on `<html>`): `content/docs/(root)/rtl.mdx`.
+
+**Layout:** Prefer **logical** Tailwind utilities so spacing and alignment follow text direction when `dir` is `rtl`:
+
+- Use `ms-*`, `me-*`, `ps-*`, `pe-*`, and `start-*` / `end-*`
+- Avoid physical `ml-*`, `mr-*`, `pl-*`, `pr-*`, `left-*`, and `right-*` for direction-sensitive layout
+
+Set **`dir={dir}`** on the root (from `useLocale`) so direction propagates. Ark UI overlays, tooltips, and menus respect document direction.
+
+**Animations:** Motion should follow reading direction. Do not use physical slide utilities in registry or examples when a logical alternative exists:
+
+- `slide-in-from-end` / `slide-out-to-end` instead of `slide-in-from-right` / `slide-out-to-right`
+- `slide-in-from-start` / `slide-out-to-start` instead of `slide-in-from-left` / `slide-out-to-left`
+
+---
+
+## 12. State and data in examples
 
 - Define **static** lists and constants **outside** the component when they do not depend on props or hooks.
 - Use **clear handler names** and minimal state for interactive demos.
 
 ---
 
-## 12. Registry manifests (`registry/manifest`)
+## 13. Registry manifests (`registry/manifest`)
 
 Each published item has a **`registry/manifest/<name>.ts`** default export used by `scripts/build-registry.mts` to emit `public/r/<name>.json`.
 
@@ -181,7 +200,7 @@ Each published item has a **`registry/manifest/<name>.ts`** default export used 
 
 ---
 
-## 13. Quality checks
+## 14. Quality checks
 
 From repo root:
 
@@ -193,17 +212,18 @@ pnpm typecheck     # next build (includes types)
 
 ---
 
-## 14. Anti-patterns (summary)
+## 15. Anti-patterns (summary)
 
 - Porting shadcn/Radix snippets by **imports only**.
 - Inventing **Ark or Shark props** not shown in MDX or `registry/react/components/*.tsx`.
 - Using **`render={...}`** on triggers where Shark uses **`asChild`**.
 - **Combobox / select** without the **collection + filter** patterns when the component docs require them.
 - **`Icon size={n}`** or **raw** `gray-500` / `blue-600` classes for theme-driven UI.
+- **Physical** `ml-*` / `mr-*` / `left-*` / `right-*` or **`slide-in-from-left|right`** when logical `ms-*` / `me-*` / `start-*` / `end-*` or **`slide-in-from-start|end`** should be used (RTL).
 
 ---
 
-## 15. Quick checklist (new or updated example)
+## 16. Quick checklist (new or updated example)
 
 - [ ] Default export demo component; `"use client"` only when needed.
 - [ ] Imports from `@/registry/react/components/...` and `lucide-react` as usual in-repo.
@@ -212,6 +232,7 @@ pnpm typecheck     # next build (includes types)
 - [ ] Lists use **collections** when required; **Select** items live under **`SelectGroup`** where applicable.
 - [ ] **a11y:** labels, `aria-label` for icon-only controls, `type` on inputs, decorative **`aria-hidden`** on icons.
 - [ ] **Styling:** semantic tokens, `cn()`, gaps over space utilities for new layout.
+- [ ] **RTL:** logical spacing/position (`ms-*`, `me-*`, `start-*`, `end-*`) and slide utilities (`*-from-start|end`) where direction matters.
 - [ ] **`pnpm registry:build`** if manifest or registry-facing files changed.
 
 For broader discovery and install URLs, see **`skills/shark-ui/SKILL.md`** and **`config/site.ts`**.

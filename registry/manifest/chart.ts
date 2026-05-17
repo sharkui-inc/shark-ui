@@ -1,6 +1,6 @@
 import type { RegistryItemType } from "@/lib/registry";
 
-const dependencies = ["@ark-ui/react", "recharts"];
+const dependencies = ["recharts"];
 
 const manifest: RegistryItemType = {
   name: "chart",

@@ -57,8 +57,9 @@ export const AnnouncementTitle = (
   return (
     <ark.span
       className={cn(
-        "inline-flex min-w-0 flex-1 items-center gap-1 truncate",
-        "select-none font-medium text-sm",
+        "min-w-0",
+        "inline-flex flex-1 items-center gap-1",
+        "select-none truncate font-medium text-sm",
         className
       )}
       data-slot="announcement-title"

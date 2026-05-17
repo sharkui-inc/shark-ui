@@ -97,23 +97,23 @@ import {
 </Dialog>
 ```
 
-## Title and Description
+## Title & Description
 
-`<DialogHeader />` supports two usage patterns:
+`DialogHeader` supports two usage patterns:
 
 ### Using props
 
-Pass `title` and `description` props directly to `<DialogHeader />`. 
-
-> This approach does not require `<DialogTitle />` or `<DialogDescription />` components.
+Pass `title` and `description` props directly to `DialogHeader`. 
 
 ```tsx showLineNumbers
 <DialogHeader title="Dialog Title" description="Dialog description" />
 ```
 
+> This approach does not require `DialogTitle` or `DialogDescription` components.
+
 ### Using components
 
-Alternatively, use `<DialogTitle />` and `<DialogDescription />` as children for more control.
+Use `DialogTitle` and `DialogDescription` as children for more control.
 
 ```tsx showLineNumbers
 <DialogHeader>

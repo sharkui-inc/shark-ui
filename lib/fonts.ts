@@ -5,12 +5,15 @@ import {
 
 export const fontSans = FontSans({
   subsets: ["latin"],
-  display: "swap",
   variable: "--font-sans",
+});
+
+export const fontHeading = FontSans({
+  subsets: ["latin"],
+  variable: "--font-heading",
 });
 
 export const fontMono = FontMono({
   subsets: ["latin"],
-  display: "swap",
   variable: "--font-mono",
 });

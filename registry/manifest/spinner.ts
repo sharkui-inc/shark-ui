@@ -1,6 +1,6 @@
 import type { RegistryItemType } from "@/lib/registry";
 
-const dependencies = ["@ark-ui/react", "lucide-react"];
+const dependencies = ["lucide-react"];
 
 const manifest: RegistryItemType = {
   name: "spinner",

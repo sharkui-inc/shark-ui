@@ -3,7 +3,6 @@
   "name": "chart",
   "type": "registry:ui",
   "dependencies": [
-    "@ark-ui/react",
     "recharts"
   ],
   "files": [

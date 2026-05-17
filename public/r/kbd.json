@@ -3,7 +3,8 @@
   "name": "kbd",
   "type": "registry:ui",
   "dependencies": [
-    "@ark-ui/react"
+    "@ark-ui/react",
+    "tailwind-variants"
   ],
   "files": [
     {

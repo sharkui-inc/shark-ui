@@ -1,6 +1,6 @@
 import type { RegistryItemType } from "@/lib/registry";
 
-const dependencies = ["@ark-ui/react"];
+const dependencies = ["@ark-ui/react", "tailwind-variants"];
 
 const manifest: RegistryItemType = {
   name: "hint",

@@ -4,7 +4,8 @@
   "type": "registry:ui",
   "dependencies": [
     "@ark-ui/react",
-    "lucide-react"
+    "lucide-react",
+    "tailwind-variants"
   ],
   "registryDependencies": [
     "http://localhost:3000/r/combobox.json",

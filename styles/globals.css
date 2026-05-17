@@ -9,6 +9,10 @@
 @theme inline {
   --header-height: calc(var(--spacing) * 14);
 
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
@@ -351,11 +355,11 @@
   }
 
   html {
-    @apply antialiased scroll-smooth;
+    @apply antialiased;
   }
 
   body {
-    @apply bg-background min-h-svh text-foreground flex flex-col overflow-x-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20;
+    @apply bg-background min-h-svh text-foreground flex flex-col overflow-x-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20 font-sans;
   }
 
   main {

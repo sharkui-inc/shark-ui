@@ -3,7 +3,12 @@
   "name": "native-select",
   "type": "registry:ui",
   "dependencies": [
-    "@ark-ui/react"
+    "@ark-ui/react",
+    "lucide-react",
+    "tailwind-variants"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/field.json"
   ],
   "files": [
     {

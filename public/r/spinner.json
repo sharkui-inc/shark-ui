@@ -3,7 +3,6 @@
   "name": "spinner",
   "type": "registry:ui",
   "dependencies": [
-    "@ark-ui/react",
     "lucide-react"
   ],
   "files": [

@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { MediaQuery } from "@/components/debug/media-query";
 import { SITE_CONFIG } from "@/config/site";
-import { fontMono, fontSans } from "@/lib/fonts";
+import { fontHeading, fontMono, fontSans } from "@/lib/fonts";
 import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
 import { SkipNavLink } from "@/registry/react/components/skip-nav";
@@ -69,8 +69,7 @@ const RootLayout = (props: LayoutProps<"/">) => {
 
   return (
     <html
-      className={cn(fontSans.variable, fontMono.variable)}
-      data-scroll-behavior="smooth"
+      className={cn(fontSans.variable, fontMono.variable, fontHeading.variable)}
       lang="en"
       suppressHydrationWarning
     >

@@ -75,7 +75,11 @@ export const AlertTitle = (props: React.ComponentProps<typeof ark.div>) => {
 
   return (
     <ark.div
-      className={cn("font-medium", "[svg~&]:col-start-2", className)}
+      className={cn(
+        "font-heading font-medium",
+        "[svg~&]:col-start-2",
+        className
+      )}
       data-slot="alert-title"
       {...rest}
     />
