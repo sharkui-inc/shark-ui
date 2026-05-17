@@ -359,7 +359,7 @@
   }
 
   body {
-    @apply bg-background min-h-svh text-foreground flex flex-col overflow-x-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20 font-sans;
+    @apply bg-background min-h-svh text-foreground flex flex-col scrollbar-thin overflow-y-scroll scrollbar-track-transparent scrollbar-thumb-foreground/20 font-sans;
   }
 
   main {
