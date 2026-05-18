@@ -60,7 +60,7 @@ const Example = () => (
                 Move to trash
               </span>
             </div>
-            <ListboxShortcut>⌘⇧D</ListboxShortcut>
+            <ListboxShortcut>⌘D</ListboxShortcut>
           </ListboxItem>
         </ListboxItemGroup>
       </ListboxContent>

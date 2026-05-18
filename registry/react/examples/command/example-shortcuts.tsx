@@ -11,15 +11,6 @@ import {
   CommandShortcut,
 } from "@/registry/react/components/command";
 
-const initialItems = [
-  { label: "New File", shortcut: "⌘N", value: "new" },
-  { label: "Save", shortcut: "⌘S", value: "save" },
-  { label: "Copy", shortcut: "⌘C", value: "copy" },
-  { label: "Paste", shortcut: "⌘V", value: "paste" },
-  { label: "Undo", shortcut: "⌘Z", value: "undo" },
-  { label: "Find", shortcut: "⌘F", value: "find" },
-];
-
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
 
@@ -49,5 +40,14 @@ const Example = () => {
     </Command>
   );
 };
+
+const initialItems = [
+  { label: "New File", shortcut: "⌘N", value: "new" },
+  { label: "Save", shortcut: "⌘S", value: "save" },
+  { label: "Copy", shortcut: "⌘C", value: "copy" },
+  { label: "Paste", shortcut: "⌘V", value: "paste" },
+  { label: "Undo", shortcut: "⌘Z", value: "undo" },
+  { label: "Find", shortcut: "⌘F", value: "find" },
+];
 
 export default Example;

@@ -52,6 +52,7 @@ export const NumberInputGroup = (
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "aria-invalid:border-destructive aria-invalid:ring-[3px] aria-invalid:ring-destructive/24",
         "dark:aria-invalid:border-destructive-foreground dark:aria-invalid:text-destructive-foreground dark:aria-invalid:ring-destructive-foreground/20",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="number-field-group"

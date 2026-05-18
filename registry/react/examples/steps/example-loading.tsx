@@ -8,8 +8,6 @@ import {
   StepsTrigger,
 } from "@/registry/react/components/steps";
 
-const items = [true, false, false];
-
 const Example = () => (
   <Steps className="w-full max-w-md" count={items.length}>
     <StepsList>
@@ -27,5 +25,7 @@ const Example = () => (
     </StepsList>
   </Steps>
 );
+
+const items = [true, false, false];
 
 export default Example;

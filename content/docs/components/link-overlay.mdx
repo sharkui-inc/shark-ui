@@ -87,9 +87,9 @@ A blog-style article with metadata, heading, description, and an inner link that
 
 ### Always use Link 
 
-By default the `<LinkOverlay />` component will render an <a /> tag.
+By default the `LinkOverlay` component will render an `a` tag.
 
-To use the Next.js (or any other) `<Link />` component, make the following updates to `link-overlay.tsx`.
+To use the Next.js (or any other) `Link` component, make the following updates to `link-overlay.tsx`.
 
 ```diff tsx title="components/ui/link-overlay.tsx" showLineNumbers
 + import Link from "next/link"

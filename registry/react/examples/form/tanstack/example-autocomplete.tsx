@@ -29,15 +29,6 @@ import {
 } from "@/registry/react/components/field";
 import { toast } from "@/registry/react/components/toast";
 
-const initialItems = [
-  { label: "React", value: "react" },
-  { label: "TypeScript", value: "typescript" },
-  { label: "Node.js", value: "nodejs" },
-  { label: "Go", value: "go" },
-  { label: "Python", value: "python" },
-  { label: "Rust", value: "rust" },
-];
-
 const formSchema = z.object({
   stack: z
     .array(z.string())
@@ -135,5 +126,14 @@ const Example = () => {
     </Card>
   );
 };
+
+const initialItems = [
+  { label: "React", value: "react" },
+  { label: "TypeScript", value: "typescript" },
+  { label: "Node.js", value: "nodejs" },
+  { label: "Go", value: "go" },
+  { label: "Python", value: "python" },
+  { label: "Rust", value: "rust" },
+];
 
 export default Example;

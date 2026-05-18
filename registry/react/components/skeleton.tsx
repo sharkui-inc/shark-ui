@@ -8,7 +8,12 @@ export const Skeleton = (props: React.ComponentProps<typeof ark.div>) => {
 
   return (
     <ark.div
-      className={cn("animate-pulse rounded-md bg-muted", className)}
+      className={cn(
+        "rounded-md bg-muted",
+        "animate-pulse",
+        "motion-reduce:animate-none!",
+        className
+      )}
       data-slot="skeleton"
       {...rest}
     />
@@ -21,7 +26,12 @@ export const SkeletonCircle = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "size-10 shrink-0 animate-pulse rounded-full bg-muted",
+        "size-10",
+        "shrink-0",
+        "bg-muted",
+        "rounded-full",
+        "animate-pulse",
+        "motion-reduce:animate-none!",
         className
       )}
       data-slot="skeleton-circle"
@@ -45,8 +55,11 @@ export const SkeletonText = (props: SkeletonTextProps) => {
   return (
     <ark.div
       className={cn(
-        "flex w-full animate-pulse flex-col gap-2",
+        "w-full",
+        "flex flex-col gap-2",
+        "animate-pulse",
         "**:[div]:h-4",
+        "motion-reduce:animate-none!",
         className
       )}
       data-slot="skeleton-text"

@@ -160,6 +160,7 @@ export const ImageCropperGrid = (
         "data-[axis=vertical]:inset-0_[33.33%] data-[axis=vertical]:border-white/40 data-[axis=vertical]:border-r data-[axis=vertical]:border-l",
         "data-dragging:opacity-100",
         "data-panning:opacity-100",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="image-cropper-grid"

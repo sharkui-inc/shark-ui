@@ -37,15 +37,15 @@ const MenuDemo = () => (
       <MenuGroup>
         <MenuItem value="forward">
           <Send /> Forward
-          <MenuShortcut>⇧⌘F</MenuShortcut>
+          <MenuShortcut>⌘F</MenuShortcut>
         </MenuItem>
         <MenuItem value="reply">
           <Reply /> Reply
-          <MenuShortcut>⇧⌘R</MenuShortcut>
+          <MenuShortcut>⌘R</MenuShortcut>
         </MenuItem>
         <MenuItem value="archive">
           <Archive /> Archive
-          <MenuShortcut>⇧⌘Z</MenuShortcut>
+          <MenuShortcut>⌘Z</MenuShortcut>
         </MenuItem>
         <MenuSub>
           <MenuSubTrigger>
@@ -92,7 +92,7 @@ const MenuDemo = () => (
         <MenuSeparator />
         <MenuItem value="delete" variant="destructive">
           <Trash2 /> Delete
-          <MenuShortcut>⌫</MenuShortcut>
+          <MenuShortcut>⌘ ⌫</MenuShortcut>
         </MenuItem>
       </MenuGroup>
     </MenuContent>

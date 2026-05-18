@@ -155,6 +155,7 @@ const hintContentVariants = tv({
     "rounded-lg shadow-md/5",
     "fade-in-0 zoom-in-[98%] animate-in",
     "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
+    "motion-reduce:animate-none!",
   ],
   variants: {
     placement: {

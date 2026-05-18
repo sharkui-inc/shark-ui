@@ -151,6 +151,7 @@ const actionBarPositionerVariants = tv({
     "data-[state=closed]:animate-out data-[state=open]:animate-in",
     "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
     "data-[state=open]:slide-in-from-bottom-2 data-[state=closed]:slide-out-to-bottom-2",
+    "motion-reduce:animate-none!",
   ],
   variants: {
     placement: {
@@ -237,6 +238,7 @@ export const ActionBarClose = (props: ActionBarCloseProps) => {
       className={cn(
         "opacity-64 transition-opacity",
         "hover:opacity-100",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="action-bar-close"

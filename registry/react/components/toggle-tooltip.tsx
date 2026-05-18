@@ -57,6 +57,7 @@ export const ToggleTooltipContent = (
             "data-[placement=left]:slide-in-from-end-2",
             "data-[placement=right]:slide-in-from-start-2",
             "data-[placement=top]:slide-in-from-bottom-2",
+            "motion-reduce:animate-none!",
             className
           )}
           data-slot="toggle-tooltip-content"

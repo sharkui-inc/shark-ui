@@ -38,6 +38,7 @@ const tabsListVariants = tv({
       "absolute inset-s-0 bottom-0",
       "h-(--height) w-(--width)",
       "transition-[width,translate] duration-200 ease-in-out",
+      "motion-reduce:transition-none!",
     ],
   },
   variants: {
@@ -113,6 +114,7 @@ export const TabsTrigger = (
         "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "[&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:shrink-0",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="tabs-trigger"

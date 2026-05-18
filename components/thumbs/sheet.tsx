@@ -14,7 +14,7 @@ export const SheetThumb = (props: ThumbCardProps) => (
         </div>
         <div className="flex flex-1" />
         <div className="flex justify-end">
-          <div className="h-2 w-2/3 rounded-xs bg-primary" />
+          <div className="h-2.5 w-1/2 rounded-md bg-primary" />
         </div>
       </div>
     </div>

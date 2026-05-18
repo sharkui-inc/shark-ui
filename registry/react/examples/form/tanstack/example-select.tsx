@@ -81,7 +81,7 @@ const Example = () => {
               children={(field) => (
                 <Field
                   invalid={!field.state.meta.isValid}
-                  orientation="horizontal"
+                  orientation="responsive"
                 >
                   <FieldContent>
                     <FieldLabel>Spoken Language</FieldLabel>
@@ -100,7 +100,7 @@ const Example = () => {
                     onValueChange={({ value }) => field.handleChange(value)}
                     value={field.state.value}
                   >
-                    <SelectTrigger className="min-w-32">
+                    <SelectTrigger className="w-full min-w-32">
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>

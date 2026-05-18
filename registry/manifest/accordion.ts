@@ -11,20 +11,12 @@ const cssVars = {
 
 const css = {
   "@keyframes slideUp": {
-    from: {
-      height: "var(--height)",
-    },
-    to: {
-      height: "0",
-    },
+    from: { height: "var(--height)" },
+    to: { height: "0" },
   },
   "@keyframes slideDown": {
-    from: {
-      height: "0",
-    },
-    to: {
-      height: "var(--height)",
-    },
+    from: { height: "0" },
+    to: { height: "var(--height)" },
   },
 };
 

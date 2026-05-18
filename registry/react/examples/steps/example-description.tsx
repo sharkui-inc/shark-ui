@@ -9,12 +9,6 @@ import {
   StepsTrigger,
 } from "@/registry/react/components/steps";
 
-const items = [
-  { title: "Info", description: "Personal" },
-  { title: "Docs", description: "Company" },
-  { title: "Team", description: "Create" },
-];
-
 const Example = () => (
   <Steps className="w-full max-w-md" count={items.length}>
     <StepsList>
@@ -33,5 +27,11 @@ const Example = () => (
     </StepsList>
   </Steps>
 );
+
+const items = [
+  { title: "Info", description: "Personal" },
+  { title: "Docs", description: "Company" },
+  { title: "Team", description: "Create" },
+];
 
 export default Example;

@@ -206,7 +206,7 @@ The toggle listens for **`⌘B`** on macOS and **`Ctrl+B`** elsewhere (`SIDEBAR_
 
 ### SidebarProvider
 
-`<SidebarProvider />` must wrap any tree that calls `useSidebar` or renders `<Sidebar />` / `<SidebarTrigger />`. It forwards standard `div` props (including `className` and `style`).
+`SidebarProvider` must wrap any tree that calls `useSidebar` or renders `Sidebar` / `SidebarTrigger`. It forwards standard `div` props (including `className` and `style`).
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -352,7 +352,7 @@ Wraps scrollable groups. Pass **`scrollFade`** when you want a fade on vertical 
 
 ### SidebarGroup
 
-A titled block with optional **`<SidebarGroupAction />`** and **`<SidebarGroupContent />`**.
+A titled block with optional `SidebarGroupAction` and `SidebarGroupContent`.
 
 ```tsx
 <SidebarGroup>
@@ -364,7 +364,7 @@ A titled block with optional **`<SidebarGroupAction />`** and **`<SidebarGroupCo
 </SidebarGroup>
 ```
 
-Collapsible groups pair with [Collapsible](/docs/components/collapsible). `<SidebarGroupLabel />` is a plain label slot—keep the trigger beside it (or fold the pattern into `<SidebarMenu />` like the preview at the top of this page):
+Collapsible groups pair with [Collapsible](/docs/components/collapsible). `SidebarGroupLabel` is a plain label slot—keep the trigger beside it (or fold the pattern into `SidebarMenu` like the preview at the top of this page):
 
 ```tsx
 <Collapsible className="group/collapsible" defaultOpen>
@@ -387,7 +387,7 @@ Collapsible groups pair with [Collapsible](/docs/components/collapsible). `<Side
 
 ### SidebarMenu
 
-Row list inside a group—map data to `<SidebarMenuItem />` / `<SidebarMenuButton />`.
+Row list inside a group—map data to `SidebarMenuItem` / `SidebarMenuButton`.
 
 ```tsx
 <SidebarMenu>
@@ -416,7 +416,7 @@ Default renders a **Button**; use **`asChild`** for links. **`isActive`** highli
 
 ### SidebarMenuAction
 
-Icon-only or compact action aligned to a row (e.g. “add”, “more”). Use **`showOnHover`** to reveal on row hover.
+Icon-only or compact action aligned to a row. Use **`showOnHover`** to reveal on row hover.
 
 ```tsx
 <SidebarMenuItem>
@@ -485,11 +485,11 @@ export function CustomTrigger() {
 }
 ```
 
-Prefer **`<SidebarTrigger />`** when you want the default styling and accessibility bundle.
+Prefer `SidebarTrigger` when you want the default styling and accessibility bundle.
 
 ### SidebarRail
 
-Draggable edge control that expands or collapses the desktop rail—place after header/content/footer inside `<Sidebar />`.
+Draggable edge control that expands or collapses the desktop rail—place after header/content/footer inside `Sidebar`.
 
 ```tsx
 <Sidebar>

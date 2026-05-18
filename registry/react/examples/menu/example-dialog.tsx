@@ -26,7 +26,7 @@ const Example = () => {
           <Button variant="outline">Open</Button>
         </MenuTrigger>
         <MenuContent className="w-40">
-          <MenuItem onClick={() => setDialogOpen(true)} value="dialog">
+          <MenuItem onSelect={() => setDialogOpen(true)} value="dialog">
             Open dialog
           </MenuItem>
         </MenuContent>

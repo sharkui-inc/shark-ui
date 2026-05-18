@@ -66,7 +66,8 @@ export const CollapsibleContent = (
         "transition-[height] duration-200",
         "overflow-hidden",
         "data-[state=open]:animate-expand",
-        "data-[state=closed]:animate-collapse"
+        "data-[state=closed]:animate-collapse",
+        "motion-reduce:animate-none! motion-reduce:transition-none!"
       )}
       data-slot="collapsible-content"
       {...rest}
@@ -87,10 +88,7 @@ export const CollapsibleIndicator = (
       data-slot="collapsible-indicator"
       {...rest}
     >
-      <ChevronDownIcon
-        aria-hidden
-        className="transition-transform duration-200"
-      />
+      <ChevronDownIcon className="transition-transform duration-200 motion-reduce:transition-none!" />
     </ArkCollapsible.Indicator>
   );
 };

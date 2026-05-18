@@ -37,6 +37,43 @@ npx shadcn@latest add @shark/toast
 npm install @ark-ui/react lucide-react tailwind-variants
 ```
 
+<Step>Import the following variables into your CSS file</Step>
+
+<CodeCollapsibleWrapper>
+```css
+@theme inline {
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+}
+
+:root {
+  --destructive-foreground: var(--color-red-700);
+  --info: var(--color-blue-500);
+  --info-foreground: var(--color-blue-700);
+  --success: var(--color-emerald-500);
+  --success-foreground: var(--color-emerald-700);
+  --warning: var(--color-amber-500);
+  --warning-foreground: var(--color-amber-700);
+}
+
+.dark {
+  --destructive-foreground: var(--color-red-400);
+  --info: var(--color-blue-500);
+  --info-foreground: var(--color-blue-400);
+  --success: var(--color-emerald-500);
+  --success-foreground: var(--color-emerald-400);
+  --warning: var(--color-amber-500);
+  --warning-foreground: var(--color-amber-400);
+}
+```
+</CodeCollapsibleWrapper>
+
+
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource title="components/ui/toast.tsx" src="/toast.tsx" />
@@ -48,13 +85,6 @@ npm install @ark-ui/react lucide-react tailwind-variants
 </TabsContent>
 
 </CodeTabs>
-
-## Anatomy
-
-```text
-Toaster
-└── ToastItem
-```
 
 ## Usage
 
@@ -78,20 +108,9 @@ toaster.create({
 
 ## Deduplication
 
-Toasts with the same `id` are deduplicated: repeated triggers animate the existing toast.
-
-- **Passing `id`** — deduplicate
-- **Not passing `id`** — always create a new toast
+Toasts with the same `id` are deduplicated. If no `id` is passed, a new toast is created.
 
 <ComponentPreview componentName="toast" fileName="example-dedupe" />
-
-```tsx showLineNumbers {2}
-toast.success({ 
-  id: "clipboard", 
-  title: "Success!",
-  description: "User has been created.",
-});
-```
 
 ## Placement
 
@@ -149,9 +168,9 @@ Use `Infinity` to keep the toast visible until the user dismisses it.
 
 <ComponentPreview componentName="toast" fileName="example-duration" />
 
-### Closable
+### Not Closable
 
-Use `closable: true` to show the close button.
+Use `closable` prop to control whether the close button is shown.
 
 <ComponentPreview componentName="toast" fileName="example-closable" />
 
@@ -159,21 +178,24 @@ Use `closable: true` to show the close button.
 
 ### Toaster
 
-Toast container. Place once in your app layout (e.g. root layout).
+Toast container. Place once in your app layout.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `toaster` | `ReturnType<typeof createToaster>` | `-` | 
 | `className` | `string` | `-` | 
 
-### ToastItem
+### toast
 
-Single toast instance. Used internally by `Toaster` for each toast.
+Toast instance. Used to create and manage toasts.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | `-` |
-
+| `title` | `string` | `-` |
+| `description` | `string` | `-` |
+| `type` | `"success" \| "error" \| "warning" \| "info" \| "loading"` | `"info"` |
+| `duration` | `number` | `3000` |
+| `closable` | `boolean` | `true` |
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/toast#api-reference).

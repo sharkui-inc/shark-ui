@@ -35,15 +35,6 @@ import {
   FieldLabel,
 } from "@/registry/react/components/field";
 
-const initialItems = [
-  { label: "React", value: "react" },
-  { label: "TypeScript", value: "typescript" },
-  { label: "Node.js", value: "nodejs" },
-  { label: "Go", value: "go" },
-  { label: "Python", value: "python" },
-  { label: "Rust", value: "rust" },
-];
-
 const formSchema = v.object({
   stack: v.pipe(
     v.array(v.string()),
@@ -134,5 +125,14 @@ const Example = () => {
     </Card>
   );
 };
+
+const initialItems = [
+  { label: "React", value: "react" },
+  { label: "TypeScript", value: "typescript" },
+  { label: "Node.js", value: "nodejs" },
+  { label: "Go", value: "go" },
+  { label: "Python", value: "python" },
+  { label: "Rust", value: "rust" },
+];
 
 export default Example;

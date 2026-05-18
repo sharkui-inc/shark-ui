@@ -39,6 +39,36 @@ npx shadcn@latest add @shark/chart
 npm install recharts
 ```
 
+<Step>Import the following chart color variables into your CSS file (if they are not already in your theme)</Step>
+
+<CodeCollapsibleWrapper>
+```css
+@theme inline {
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+:root {
+  --chart-1: var(--color-orange-600);
+  --chart-2: var(--color-teal-600);
+  --chart-3: var(--color-cyan-900);
+  --chart-4: var(--color-amber-400);
+  --chart-5: var(--color-amber-500);
+}
+
+.dark {
+  --chart-1: var(--color-blue-700);
+  --chart-2: var(--color-emerald-500);
+  --chart-3: var(--color-amber-500);
+  --chart-4: var(--color-purple-500);
+  --chart-5: var(--color-rose-500);
+}
+```
+</CodeCollapsibleWrapper>
+
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource title="components/ui/chart.tsx" src="/chart.tsx" />

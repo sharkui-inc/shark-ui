@@ -40,8 +40,8 @@ export const ColorPicker = (props: ColorPickerProps) => {
     },
     lazyMount = true,
     unmountOnExit = true,
-    className,
     onValueChange,
+    className,
     children,
     ...rest
   } = props;
@@ -135,6 +135,7 @@ export const ColorPickerContent = (
             "origin-(--transform-origin)",
             "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
             "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
+            "motion-reduce:animate-none!",
             className
           )}
           data-slot="color-picker-content"
@@ -256,6 +257,7 @@ export const ColorPickerSwatchTrigger = (
         "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "data-[state=checked]:shadow-sm/5 data-[state=checked]:ring-(--color) data-[state=checked]:ring-2",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="color-picker-swatch-trigger"
@@ -279,6 +281,7 @@ export const ColorPickerSwatch = (
         "transition-transform duration-100 ease-out will-change-transform",
         "not-[data-state=checked]:hover:scale-110",
         "data-[state=checked]:scale-[0.8]",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="color-picker-swatch"
@@ -301,6 +304,7 @@ export const ColorPickerSwatchIndicator = (
         "pointer-events-none",
         "zoom-in-5 animate-in blur-in-md",
         "[&_svg]:size-1/2",
+        "motion-reduce:animate-none!",
         className
       )}
       data-slot="color-picker-swatch-indicator"
@@ -404,7 +408,7 @@ export const ColorPickerAreaThumb = (
 export const ColorPickerInput = (
   props: Partial<React.ComponentProps<typeof ArkColorPicker.ChannelInput>>
 ) => {
-  const { channel = "hex", className, ...rest } = props;
+  const { channel = "hex", ...rest } = props;
 
   return (
     <ArkColorPicker.ChannelInput

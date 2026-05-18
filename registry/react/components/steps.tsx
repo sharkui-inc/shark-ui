@@ -103,6 +103,7 @@ export const StepsIndicator = (
         "data-current:border-primary data-current:bg-primary data-current:text-primary-foreground",
         "data-complete:border-primary data-complete:bg-primary data-complete:text-primary-foreground",
         "[&_svg]:size-(--steps-icon-size) [&_svg]:shrink-0",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="steps-indicator"
@@ -129,6 +130,7 @@ export const StepsSeparator = (
         "data-complete:bg-primary",
         "data-[orientation=horizontal]:mx-(--steps-gutter) data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:w-full",
         "data-[orientation=vertical]:absolute data-[orientation=vertical]:top-[calc(var(--steps-size)+var(--steps-gutter))] data-[orientation=vertical]:left-[calc(var(--steps-size)/2-1px)] data-[orientation=vertical]:h-full data-[orientation=vertical]:max-h-[calc(100%-(var(--steps-size)+var(--steps-gutter)*2))] data-[orientation=vertical]:w-0.5",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="steps-separator"

@@ -37,6 +37,7 @@ export const AlertDialogBody = (
   props: React.ComponentProps<typeof DialogBody>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <DialogBody
       className={cn(

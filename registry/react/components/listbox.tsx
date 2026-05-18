@@ -166,6 +166,7 @@ export const ListboxValueText = (
   props: React.ComponentProps<typeof ArkListbox.ValueText>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <ArkListbox.ValueText
       className={cn("font-normal", className)}
@@ -186,6 +187,7 @@ export const ListboxItemIndicator = (
         "flex shrink-0 items-center justify-center",
         "[&_svg]:text-primary!",
         "zoom-in-95 fade-in-0 animate-in",
+        "motion-reduce:animate-none!",
         className
       )}
       data-slot="listbox-item-indicator"
@@ -200,6 +202,7 @@ export const ListboxEmpty = (
   props: React.ComponentProps<typeof ArkListbox.Empty>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <ArkListbox.Empty
       className={cn(

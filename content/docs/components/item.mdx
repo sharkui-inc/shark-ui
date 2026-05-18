@@ -101,7 +101,7 @@ import {
 
 ## Custom spacing
 
-The `[--space:--spacing("value")]` on `<ItemContent />` controls the internal spacing.
+The `[--space:--spacing("value")]` on `ItemContent` controls the internal spacing.
 
 Default spacing is `--spacing(3)`.
 
@@ -117,31 +117,25 @@ Default spacing is `--spacing(3)`.
 
 ### Icon
 
-Use `<ItemMedia />` with `variant="icon"` to display an icon.
-
 <ComponentPreview componentName="item" fileName="example-icon" />
 
 ### Avatar
-
-`<ItemMedia />` with `variant="default"` displays an avatar.
 
 <ComponentPreview componentName="item" fileName="example-avatar" />
 
 ### Image
 
-Use `<ItemMedia />` with `variant="image"` to display an image.
-
 <ComponentPreview componentName="item" fileName="example-image" />
 
 ### Group
 
-Use `<ItemGroup />` to group related items together.
+Use `ItemGroup` to group related items together.
 
 <ComponentPreview componentName="item" fileName="example-group" />
 
 ### Header
 
-Use `<ItemHeader />` to add a header above the item content.
+Use `ItemHeader` to add a header above the item content.
 
 <ComponentPreview componentName="item" fileName="example-header" />
 
@@ -153,7 +147,7 @@ Use the `asChild` prop to render the item as a link. The hover and focus states 
 
 ### Dropdown
 
-Use `<Item />` inside a menu or dropdown to display rich content in menu items.
+Use `Item` inside a menu or dropdown to display rich content in menu items.
 
 <ComponentPreview componentName="item" fileName="example-dropdown" />
 
@@ -230,7 +224,7 @@ Secondary description or subtitle for the item.
 
 ### ItemActions
 
-Holds action buttons or controls (e.g. menu, buttons).
+Holds action buttons or controls.
 
 | Prop | Type | Default |
 | --- | --- | --- |

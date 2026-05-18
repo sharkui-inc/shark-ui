@@ -2,12 +2,12 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const ToggleGroupThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="flex h-8 w-40 rounded-lg border border-input bg-muted shadow-md/5">
+    <div className="flex h-8 w-32 rounded-lg border border-input bg-muted shadow-md/5">
       <div className="flex size-full items-center justify-center border-input border-e">
         <div className="h-1.5 w-1/2 rounded-full bg-muted-foreground/16" />
       </div>
-      <div className="flex size-full items-center justify-center bg-muted-foreground/16">
-        <div className="h-1.5 w-1/2 rounded-full bg-primary" />
+      <div className="flex size-full items-center justify-center bg-primary">
+        <div className="h-1.5 w-1/2 rounded-full bg-primary-foreground" />
       </div>
       <div className="flex size-full items-center justify-center border-input border-s">
         <div className="h-1.5 w-1/2 rounded-full bg-muted-foreground/16" />

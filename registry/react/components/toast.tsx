@@ -5,7 +5,6 @@ import {
   Toast as ArkToast,
   Toaster as ArkToaster,
   createToaster,
-  type ToastStatusChangeDetails,
   useToastContext,
 } from "@ark-ui/react/toast";
 import {
@@ -16,30 +15,16 @@ import {
   XIcon,
 } from "lucide-react";
 import type { ComponentProps } from "react";
-import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Spinner } from "@/registry/react/components/spinner";
 
 export const useToast = useToastContext;
 
-const toastVariants = tv({
-  base: [
-    "z-(--z-index) translate-x-(--x) translate-y-(--y)",
-    "relative",
-    "h-(--height) w-full min-w-90 max-w-fit max-sm:min-w-72",
-    "px-3.5 py-3",
-    "flex items-start justify-between gap-1.5",
-    "bg-popover",
-    "select-none text-card-foreground text-sm",
-    "rounded-lg border shadow-lg/5",
-    "scale-(--scale) opacity-(--opacity)",
-    "transition-all duration-250 will-change-[translate,opacity,scale]",
-    "ease-[cubic-bezier(0.21,1.02,0.73,1)]",
-    "data-[state=closed]:transition-[translate,scale,opacity]",
-    "data-[state=closed]:duration-[300ms,300ms,150ms]",
-    "data-[state=closed]:ease-[cubic-bezier(0.06,0.71,0.55,1)]",
-  ],
+export const toast = createToaster({
+  placement: "bottom-end",
+  overlap: true,
+  max: 3,
 });
 
 interface ToasterProps
@@ -51,11 +36,21 @@ interface ToasterProps
 }
 
 export const Toaster = (props: ToasterProps) => {
-  const { toaster: toasterInstance = baseToaster, className, ...rest } = props;
+  const { toaster: toasterInstance = toast, className, style, ...rest } = props;
 
   return (
     <Portal>
-      <ArkToaster toaster={toasterInstance} {...rest}>
+      <ArkToaster
+        className={cn(
+          "w-[calc(100%-var(--viewport-offset-left))] sm:w-(--width)",
+          "data-[align=center]:left-[calc(var(--viewport-offset-right)/2)]!",
+          "sm:data-[align=center]:w-full",
+          className
+        )}
+        style={{ "--width": "356px", ...style } as React.CSSProperties}
+        toaster={toasterInstance}
+        {...rest}
+      >
         {(toastItem) => <ToastItem toast={toastItem} />}
       </ArkToaster>
     </Portal>
@@ -84,14 +79,29 @@ export const ToastItem = (props: ToastItemProps) => {
     ? TOAST_ICONS[toastData.type as keyof typeof TOAST_ICONS]
     : null;
 
-  const toastKey = (toastData as { meta?: { toastKey?: string } }).meta
-    ?.toastKey;
+  const isExplicitClosable = toastData.closable === false;
 
   return (
     <ArkToast.Root
-      className={cn(toastVariants(), className)}
+      className={cn(
+        "z-(--z-index) translate-x-(--x) translate-y-(--y)",
+        "relative",
+        "w-[calc(100%-var(--viewport-offset-left))] sm:w-(--width)",
+        "px-3.5 py-3",
+        "flex items-start justify-between gap-1.5",
+        "bg-popover",
+        "select-none text-card-foreground text-sm",
+        "rounded-lg border shadow-lg/5",
+        "scale-(--scale) opacity-(--opacity)",
+        "transition-all duration-250 will-change-[translate,opacity,scale]",
+        "ease-[cubic-bezier(0.21,1.02,0.73,1)]",
+        "data-[state=closed]:transition-[translate,scale,opacity]",
+        "data-[state=closed]:duration-[300ms,300ms,150ms]",
+        "data-[state=closed]:ease-[cubic-bezier(0.06,0.71,0.55,1)]",
+        "motion-reduce:transition-none!",
+        className
+      )}
       data-slot="toast"
-      {...(toastKey && { "data-toast-key": toastKey })}
       {...rest}
     >
       <div className="flex items-start gap-1.5">
@@ -140,7 +150,7 @@ export const ToastItem = (props: ToastItemProps) => {
           </ArkToast.ActionTrigger>
         )}
 
-        {toastData.closable && (
+        {!isExplicitClosable && (
           <ArkToast.CloseTrigger asChild data-slot="toast-close-trigger">
             <Button
               aria-label="Close"
@@ -156,108 +166,3 @@ export const ToastItem = (props: ToastItemProps) => {
     </ArkToast.Root>
   );
 };
-
-const activeToasts = new Map<string, string>();
-
-const getToastKey = (
-  options: Pick<BaseToastOptions, "id" | "title" | "description">
-): string => {
-  const id = options.id ?? "";
-  const title = String(options.title ?? "");
-  const description = String(options.description ?? "");
-  const uniqueKey = `${id}-${title}-${description}`;
-
-  return `toast-${btoa(uniqueKey).slice(0, 16).replace(/\+/g, "-").replace(/\//g, "_")}`;
-};
-
-const animateExistingToast = (toastKey: string, type?: string): void => {
-  const element = document.querySelector(`[data-toast-key="${toastKey}"]`);
-
-  if (!element) {
-    return;
-  }
-
-  if (type === "error") {
-    element.animate(ERROR_ANIMATION_KEYS, {
-      duration: 400,
-      easing: "ease-out",
-    });
-  } else {
-    element.animate(ANIMATION_KEYS, { duration: 300, easing: "ease-in" });
-  }
-};
-
-type BaseToastOptions = Parameters<typeof baseToaster.create>[0];
-
-const createWithDedupe = (options: BaseToastOptions) => {
-  const { id, meta, onStatusChange, ...rest } = options;
-
-  if (id === undefined || id === "") {
-    return baseToaster.create({ ...rest, meta, onStatusChange });
-  }
-
-  const toastKey = getToastKey(options);
-  const existingId = activeToasts.get(toastKey);
-
-  if (existingId) {
-    const element = document.querySelector(`[data-toast-key="${toastKey}"]`);
-    if (element) {
-      animateExistingToast(toastKey, options.type);
-      return existingId;
-    }
-    activeToasts.delete(toastKey);
-  }
-
-  const toastId = baseToaster.create({
-    ...rest,
-    id,
-    meta: { ...(meta && typeof meta === "object" ? meta : {}), toastKey },
-    onStatusChange: (details: ToastStatusChangeDetails) => {
-      if (details.status === "unmounted") {
-        activeToasts.delete(toastKey);
-      }
-      onStatusChange?.(details);
-    },
-  });
-
-  activeToasts.set(toastKey, toastId);
-
-  return toastId;
-};
-
-const baseToaster = createToaster({
-  placement: "bottom-end",
-  overlap: true,
-  pauseOnPageIdle: true,
-});
-
-export const toast = {
-  ...baseToaster,
-  create: (options: BaseToastOptions) => createWithDedupe({ ...options }),
-  success: (options: BaseToastOptions) =>
-    createWithDedupe({ ...options, type: "success" }),
-  error: (options: BaseToastOptions) =>
-    createWithDedupe({ ...options, type: "error" }),
-  warning: (options: BaseToastOptions) =>
-    createWithDedupe({ ...options, type: "warning" }),
-  info: (options: BaseToastOptions) =>
-    createWithDedupe({ ...options, type: "info" }),
-  loading: (options: BaseToastOptions) =>
-    createWithDedupe({ ...options, type: "loading" }),
-};
-
-export const ERROR_ANIMATION_KEYS: Keyframe[] = [
-  { transform: "translateX(0)" },
-  { transform: "translateX(-4px)" },
-  { transform: "translateX(4px)" },
-  { transform: "translateX(-2px)" },
-  { transform: "translateX(2px)" },
-  { transform: "translateX(0)" },
-];
-
-export const ANIMATION_KEYS: Keyframe[] = [
-  { transform: "scale(1)" },
-  { transform: "scale(0.98)" },
-  { transform: "scale(1.02)" },
-  { transform: "scale(1)" },
-];

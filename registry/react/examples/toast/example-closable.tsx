@@ -10,7 +10,7 @@ const Example = () => (
         toast.create({
           title: "Event has been created.",
           description: "Tuesday, February 10, 2026 at 10:00 AM.",
-          closable: true,
+          closable: false,
         })
       }
       variant="outline"

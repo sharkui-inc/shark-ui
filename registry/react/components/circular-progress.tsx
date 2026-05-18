@@ -68,7 +68,7 @@ interface CircularProgressTrackProps
 }
 
 export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
-  const { size = 32, thickness = 4, ...rest } = props;
+  const { size = 32, thickness = 4, className, ...rest } = props;
 
   const { max, min, value } = useCircularProgress();
 
@@ -87,7 +87,9 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
         "block",
         "-rotate-90",
         "pointer-events-none",
-        "group-data-[state=indeterminate]/circular-progress:animate-spin"
+        "motion-reduce:animate-none!",
+        "group-data-[state=indeterminate]/circular-progress:animate-spin!",
+        className
       )}
       data-slot="circular-progress-circle"
       height={size}
@@ -104,7 +106,7 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
         strokeWidth={thickness}
       />
       <circle
-        className="fill-none stroke-primary transition-all duration-300 ease-out"
+        className="fill-none stroke-primary transition-all duration-300 ease-out motion-reduce:transition-none!"
         cx={size / 2}
         cy={size / 2}
         data-slot="circular-progress-range"

@@ -55,6 +55,7 @@ export const dialogOverlayVariants = tv({
     "peer peer-data-[slot=dialog-overlay]:hidden",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
+    "motion-reduce:animate-none!",
   ],
 });
 
@@ -116,6 +117,7 @@ export const dialogContentVariants = tv({
     "scale-[calc(1-0.1*var(--nested-layer-count))] opacity-[calc(1-0.1*var(--nested-layer-count))]",
     "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
     "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
+    "motion-reduce:animate-none! motion-reduce:transition-none!",
   ],
   variants: {
     size: {

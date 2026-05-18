@@ -126,7 +126,7 @@ Use the `accept` prop to restrict file types.
 
 ### With Field
 
-Use `<Field />` to add helper text and error handling.
+Use `Field` to add helper text and error handling.
 
 <ComponentPreview componentName="file-upload" fileName="example-with-field" />
 
@@ -174,13 +174,13 @@ Use the `directory` prop to upload entire folders.
 
 ### Clear Trigger
 
-Use `<FileUploadClearTrigger />` to remove all uploaded files at once.
+Use `FileUploadClearTrigger` to remove all uploaded files at once.
 
 <ComponentPreview componentName="file-upload" fileName="example-clear-trigger" />
 
 ### Custom spacing
 
-Use `[--space:--spacing("value")]` on `<FileUploadDropzone />` to adjust internal spacing.
+Use `[--space:--spacing("value")]` on `FileUploadDropzone` to adjust internal spacing.
 
 Default spacing is `--spacing(6)`.
 
@@ -246,7 +246,7 @@ Drop zone for drag-and-drop. Exposes `data-dragging` when files are dragged over
 
 ### FileUploadDropzoneIcon
 
-Icon shown in the dropzone (e.g. upload icon).
+Icon shown in the dropzone.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -254,7 +254,7 @@ Icon shown in the dropzone (e.g. upload icon).
 
 ### FileUploadTitle
 
-Title text for the dropzone (e.g. "Drag files here").
+Title text for the dropzone.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -270,7 +270,7 @@ Description or hint for the dropzone.
 
 ### FileUploadHelper
 
-Helper text (e.g. file types, size limits).
+Small text that provides additional information about the dropzone.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -278,7 +278,7 @@ Helper text (e.g. file types, size limits).
 
 ### FileUploadList
 
-Pre-built list of uploaded files with previews, names, sizes, and delete buttons. Hidden when empty.
+List of uploaded files. Hidden when empty.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -334,7 +334,7 @@ Shows the file name.
 
 ### FileUploadItemSize
 
-Shows the formatted file size (e.g. "1.2 MB").
+Shows the formatted file size.
 
 | Prop | Type | Default |
 | --- | --- | --- |

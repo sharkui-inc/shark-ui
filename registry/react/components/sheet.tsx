@@ -78,6 +78,7 @@ const sheetContentVariants = tv({
     "transition-[opacity,translate] duration-200 ease-in-out will-change-transform",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
+    "motion-reduce:animate-none! motion-reduce:transition-none!",
   ],
   variants: {
     placement: {

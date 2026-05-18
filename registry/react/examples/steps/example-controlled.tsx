@@ -14,15 +14,6 @@ import {
   StepsTrigger,
 } from "@/registry/react/components/steps";
 
-const items = [
-  {
-    title: "Your details",
-    content: "Please provide your name and email address.",
-  },
-  { title: "Company details", content: "A few details about your company." },
-  { title: "Invite your team", content: "Start collaborating with your team." },
-];
-
 const Example = () => {
   const [step, setStep] = React.useState(0);
 
@@ -79,5 +70,14 @@ const Example = () => {
     </div>
   );
 };
+
+const items = [
+  {
+    title: "Your details",
+    content: "Please provide your name and email address.",
+  },
+  { title: "Company details", content: "A few details about your company." },
+  { title: "Invite your team", content: "Start collaborating with your team." },
+];
 
 export default Example;

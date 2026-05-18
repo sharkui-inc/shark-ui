@@ -24,6 +24,27 @@ npx shadcn@latest add @shark/hitbox
 <TabsContent value="manual">
 
 <Steps>
+<Step>Import the following semantic color variables into your CSS file when using `hitbox-debug`</Step>
+
+<CodeCollapsibleWrapper>
+```css
+@theme inline {
+  --color-info: var(--info);
+  --color-success: var(--success);
+}
+
+:root {
+  --info: var(--color-blue-500);
+  --success: var(--color-emerald-500);
+}
+
+.dark {
+  --info: var(--color-blue-500);
+  --success: var(--color-emerald-500);
+}
+```
+</CodeCollapsibleWrapper>
+
 <Step>Import the following CSS rules into your `globals.css`</Step>
 
 ```css title="globals.css" showLineNumbers
@@ -37,10 +58,10 @@ npx shadcn@latest add @shark/hitbox
     bottom: var(--hitbox-b, 0px);
     left: var(--hitbox-l, 0px);
     pointer-events: inherit;
-    @apply border border-dashed border-blue-500 bg-blue-500/10;
+    @apply border border-dashed border-info bg-info/10;
   }
   &:hover::before {
-    @apply border border-dashed border-green-500 bg-green-500/10;
+    @apply border border-dashed border-success bg-success/10;
   }
 }
 @utility hitbox {

@@ -18,7 +18,9 @@ export const PreviewIframe = (props: PreviewIframeProps) => {
   return (
     <iframe
       className={cn(
-        "min-h-[450px] w-full overflow-hidden rounded-2xl border",
+        "min-h-[450px] w-full",
+        "rounded-2xl border",
+        "overflow-hidden",
         className
       )}
       src={src}

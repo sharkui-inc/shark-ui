@@ -55,7 +55,7 @@ export const CardMedia = (props: CardMediaProps) => {
 
   return (
     <ark.div
-      className={cn(cardMediaVariants({ variant, className }), className)}
+      className={cn(cardMediaVariants({ variant }), className)}
       data-slot="card-media"
       data-variant={variant}
       {...rest}
@@ -75,7 +75,7 @@ interface HeaderProps extends React.ComponentProps<typeof ark.div> {
 }
 
 export const CardHeader = (props: HeaderProps) => {
-  const { className, title, description, children, ...rest } = props;
+  const { title, description, className, children, ...rest } = props;
 
   return (
     <ark.div

@@ -8,12 +8,6 @@ import {
   StepsTrigger,
 } from "@/registry/react/components/steps";
 
-const items = [
-  { icon: UserIcon },
-  { icon: HardDriveIcon },
-  { icon: CreditCardIcon },
-];
-
 const Example = () => (
   <Steps className="w-full max-w-md" count={items.length}>
     <StepsList>
@@ -30,5 +24,11 @@ const Example = () => (
     </StepsList>
   </Steps>
 );
+
+const items = [
+  { icon: UserIcon },
+  { icon: HardDriveIcon },
+  { icon: CreditCardIcon },
+];
 
 export default Example;

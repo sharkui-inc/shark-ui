@@ -11,7 +11,7 @@ import { LinkBox, LinkOverlay } from "@/registry/react/components/link-overlay";
 const LinkOverlayDemo = () => (
   <LinkBox asChild>
     <Card className="w-full max-w-xs">
-      <CardMedia className="aspect-video w-full bg-muted" variant="image" />
+      <CardMedia className="h-32 bg-muted" variant="image" />
       <CardHeader description="This sofa is perfect for modern tropical spaces, baroque inspired spaces.">
         <LinkOverlay asChild>
           <CardTitle asChild>

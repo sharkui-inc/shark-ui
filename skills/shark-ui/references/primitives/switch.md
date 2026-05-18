@@ -26,49 +26,56 @@ npm install @ark-ui/react
 ## Canonical imports
 
 ```tsx
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldLabel,
+} from "@/components/ui/field"
 import { Switch } from "@/components/ui/switch"
 ```
 
 ## Minimal pattern
 
 ```tsx
-<Label>
-  <Switch />
-  Enable notifications
-</Label>
+<Field orientation="horizontal">
+  <Switch defaultChecked />
+  <FieldLabel>Enable notifications</FieldLabel>
+</Field>
 ```
 
 ### Key patterns
 
-Switch with description text (use `id`/`htmlFor` when additional content exists):
+Switch with description (no `id` / `htmlFor` — use `Field` + `FieldContent`):
 
 ```tsx
-const id = useId()
-
-<div className="flex items-center justify-between gap-4">
-  <div className="flex flex-col gap-1">
-    <Label htmlFor={id}>Marketing emails</Label>
-    <p className="text-muted-foreground text-xs">
+<Field orientation="horizontal">
+  <Switch defaultChecked />
+  <FieldContent>
+    <FieldLabel>Marketing emails</FieldLabel>
+    <FieldDescription>
       Receive updates about new products and features.
-    </p>
-  </div>
-  <Switch id={id} />
-</div>
+    </FieldDescription>
+  </FieldContent>
+</Field>
 ```
 
 Disabled switch:
 
 ```tsx
-<Label>
-  <Switch disabled />
-  Marketing emails
-</Label>
+<Field disabled orientation="horizontal">
+  <Switch />
+  <FieldContent>
+    <FieldLabel>Marketing emails</FieldLabel>
+  </FieldContent>
+</Field>
 ```
 
 
 ## Common pitfalls
 
 - Using switch for multi-option selection that should use radio/toggle-group.
+- Adding manual `id` / `htmlFor` when `Field` / `FieldLabel` already associate the control.
 - Omitting visible label or explicit `aria-label` for icon-only switch controls.
 - Treating switch as form value without verifying checked-state wiring.
 

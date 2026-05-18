@@ -29,10 +29,20 @@ const fieldVariants = tv({
         "*:data-[slot=field-label]:flex-auto",
         "has-[>[data-slot=field-content]]:items-start has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
       ],
+      responsive: [
+        "flex-col *:w-full [&>.sr-only]:w-auto",
+        "@md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto",
+        "@md/field-group:*:data-[slot=field-label]:flex-auto",
+        "@md/field-group:has-[>[data-slot=field-content]]:items-start",
+        "@md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+      ],
     },
     reverse: {
       true: [
-        "data-[orientation=horizontal]:flex-row-reverse data-[orientation=vertical]:flex-col-reverse",
+        "data-[orientation=horizontal]:flex-row-reverse",
+        "data-[orientation=vertical]:flex-col-reverse",
+        "data-[orientation=responsive]:flex-col-reverse",
+        "data-[orientation=responsive]:@md/field-group:flex-row-reverse",
       ],
     },
   },
@@ -114,7 +124,7 @@ export const FieldGroup = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "group/field-group",
+        "group/field-group @container/field-group",
         "flex w-full flex-col gap-4",
         "data-[data-slot=checkbox-group]:gap-3",
         "*:data-[slot=field-group]:gap-4",
@@ -213,7 +223,8 @@ export const FieldDescription = (props: React.ComponentProps<typeof ark.p>) => {
       className={cn(
         "pointer-events-none",
         "font-normal text-muted-foreground text-sm leading-normal",
-        "group-has-data-[orientation=horizontal]/field:",
+        "group-has-data-[orientation=horizontal]/field:text-balance",
+        "@md/field-group:group-data-[orientation=responsive]/field:text-balance",
         "nth-last-2:-mt-1 last:mt-0 [[data-variant=legend]+&]:-mt-1.5",
         "in-[[data-slot=field]:has([data-slot=radio-group-item])]:ms-6 in-[[data-slot=field]:has([data-slot=radio-group-item])]:-mt-1.5!",
         "[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4",

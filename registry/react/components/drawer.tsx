@@ -23,9 +23,10 @@ export const DrawerProvider = (
           "fixed inset-0 z-50",
           "bg-background",
           "opacity-0",
+          "pointer-events-none",
           "transition-opacity duration-300 ease-in",
           "data-[state=open]:opacity-(--indent-opacity)",
-          "pointer-events-none"
+          "motion-reduce:transition-none!"
         )}
         data-slot="drawer-indent-background"
       />
@@ -35,6 +36,7 @@ export const DrawerProvider = (
           "data-active:transform-[scale(calc(0.98+(0.02*var(--drawer-swipe-progress))))_translateY(calc(0.5rem*(1-var(--drawer-swipe-progress))))]",
           "transition-[border-radius,transform] duration-300 ease-in-out will-change-transform",
           "data-active:rounded-(--indent-radius)",
+          "motion-reduce:transition-none!",
           className
         )}
         data-slot="drawer-indent"
@@ -76,6 +78,7 @@ const drawerOverlayVariants = tv({
     "bg-(--bg) backdrop-blur-(--blur)",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
+    "motion-reduce:animate-none!",
   ],
 });
 
@@ -144,6 +147,7 @@ const drawerContentVariants = tv({
     "translate-y-[calc(-1.25rem*var(--nested-layer-count))]",
     "scale-[calc(1-0.1*var(--nested-layer-count))] opacity-[calc(1-0.1*var(--nested-layer-count))]",
     "data-[nested=drawer]:data-[state=closed]:slide-in-from-bottom-10 data-[nested=drawer]:data-[state=open]:slide-in-from-bottom-10 data-[has-nested=drawer]:origin-top",
+    "motion-reduce:animate-none!",
   ],
   variants: {
     placement: {
@@ -241,6 +245,7 @@ export const DrawerContentInner = (
         "text-center",
         "transition-opacity duration-300",
         "group-data-[nested=drawer]/drawer:opacity-0 group-data-[nested=drawer]/drawer:data-[state=open]:opacity-100",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="drawer-content-inner"

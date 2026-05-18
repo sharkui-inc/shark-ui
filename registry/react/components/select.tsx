@@ -144,6 +144,7 @@ export const SelectContent = (
             "data-[placement=left]:slide-in-from-end-2",
             "data-[placement=right]:slide-in-from-start-2",
             "data-[placement=top]:slide-in-from-bottom-2",
+            "motion-reduce:animate-none!",
             className
           )}
           data-slot="select-content"
@@ -167,7 +168,7 @@ export const SelectGroup = (props: SelectGroupProps) => {
 
   return (
     <ArkSelect.ItemGroup data-slot="select-group" {...rest}>
-      {!!heading && <SelectGroupLabel>{heading}</SelectGroupLabel>}
+      {!heading && <SelectGroupLabel>{heading}</SelectGroupLabel>}
 
       {children}
     </ArkSelect.ItemGroup>
@@ -248,6 +249,7 @@ export const SelectClearTrigger = (
         "opacity-64",
         "outline-none focus-visible:opacity-100",
         "hover:opacity-100",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="select-clear-trigger"

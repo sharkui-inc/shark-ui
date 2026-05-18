@@ -9,16 +9,8 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
+  CommandSeparator,
 } from "@/registry/react/components/command";
-
-const initialItems = [
-  { label: "Apple", value: "apple", group: "Fruit" },
-  { label: "Banana", value: "banana", group: "Fruit" },
-  { label: "Cherry", value: "cherry", group: "Fruit" },
-  { label: "United States", value: "us", group: "Countries" },
-  { label: "United Kingdom", value: "uk", group: "Countries" },
-  { label: "Germany", value: "de", group: "Countries" },
-];
 
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
@@ -39,19 +31,31 @@ const Example = () => {
       <CommandContent>
         <CommandEmpty />
         <CommandList>
-          {collection.group().map(([group, items]) => (
-            <CommandGroup heading={group} key={group}>
-              {items.map((item) => (
-                <CommandItem item={item} key={item.value}>
-                  {item.label}
-                </CommandItem>
-              ))}
-            </CommandGroup>
+          {collection.group().map(([group, items], index) => (
+            <>
+              {index !== 0 && <CommandSeparator />}
+              <CommandGroup heading={group} key={group}>
+                {items.map((item) => (
+                  <CommandItem item={item} key={item.value}>
+                    {item.label}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </>
           ))}
         </CommandList>
       </CommandContent>
     </Command>
   );
 };
+
+const initialItems = [
+  { label: "Apple", value: "apple", group: "Fruit" },
+  { label: "Banana", value: "banana", group: "Fruit" },
+  { label: "Cherry", value: "cherry", group: "Fruit" },
+  { label: "United States", value: "us", group: "Countries" },
+  { label: "United Kingdom", value: "uk", group: "Countries" },
+  { label: "Germany", value: "de", group: "Countries" },
+];
 
 export default Example;

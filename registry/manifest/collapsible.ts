@@ -11,20 +11,12 @@ const cssVars = {
 
 const css = {
   "@keyframes expand": {
-    from: {
-      height: "var(--collapsed-height, 0)",
-    },
-    to: {
-      height: "var(--height)",
-    },
+    from: { height: "var(--collapsed-height, 0)" },
+    to: { height: "var(--height)" },
   },
   "@keyframes collapse": {
-    from: {
-      height: "var(--height)",
-    },
-    to: {
-      height: "var(--collapsed-height, 0)",
-    },
+    from: { height: "var(--height)" },
+    to: { height: "var(--collapsed-height, 0)" },
   },
 };
 
