@@ -14,11 +14,9 @@ const scrollAreaVariants = tv({
   base: [
     "h-full",
     "rounded-[inherit]",
-    "transition-shadows",
     "outline-none",
     "scrollbar-none",
     "outline-none",
-    "transition-shadow",
   ],
   variants: {
     scrollFade: {
@@ -28,6 +26,7 @@ const scrollAreaVariants = tv({
         "data-at-top:mask-t-from-100%",
         "data-at-bottom:mask-b-from-100%",
         "transition-shadow",
+        "motion-reduce:transition-none!",
       ],
     },
   },
@@ -84,6 +83,7 @@ export const ScrollAreaScrollbar = (
         "data-scrolling:opacity-100 data-scrolling:delay-0 data-scrolling:duration-100",
         "data-[orientation=vertical]:in-[[data-slot=scroll-area]:not([data-overflow-y])]:hidden",
         "data-[orientation=horizontal]:in-[[data-slot=scroll-area]:not([data-overflow-x])]:hidden",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="scroll-area-scrollbar"

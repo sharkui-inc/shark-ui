@@ -102,10 +102,10 @@ export const ClipboardIndicator = (
 
   return (
     <ArkClipboard.Indicator
+      className={cn("pointer-events-none", className)}
+      copied={copied}
       data-slot="clipboard-indicator"
       {...rest}
-      className="pointer-events-none"
-      copied={copied}
     >
       {children || <ClipboardIcon />}
     </ArkClipboard.Indicator>

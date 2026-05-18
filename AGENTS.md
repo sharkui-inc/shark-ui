@@ -129,7 +129,7 @@ Prefer **`aria-label`** on the interactive element over duplicating meaning with
 ### Labels and controls
 
 - Use **`Label`** wrapping control + text, or **`Field` / `FieldLabel`** for form layouts (see `skills/shark-ui/references/rules/forms.md`).
-- For checkbox / radio / switch groups, follow patterns in docs; Ark often wires **`id` / `htmlFor`** when you use the documented Field APIs — do not fight the primitive unless you have extra content outside the label.
+- For checkbox / radio / switch fields, follow patterns in docs and registry examples. **`Field` / `FieldLabel`** associate the label with the control — do not add manual **`id` / `htmlFor`**. Use a bare **`Label`** (or explicit **`id` / `htmlFor`**) only when you are outside the Field pattern.
 
 ### Overlays
 
@@ -154,6 +154,7 @@ Prefer **`aria-label`** on the interactive element over duplicating meaning with
 - Prefer **`data-slot`** and existing **`in-*` / `peer`** patterns already used in components over inventing new `group/` chains when extending registry styles.
 - Merge classes with **`cn()`** from `@/lib/utils`.
 - Follow **Tailwind v4** setup described in installation / styling docs.
+- **Reduced motion:** on registry components, add **`motion-reduce:transition-none!`** and/or **`motion-reduce:animate-none!`** once at the end of each `cn()` / `tv()` class list (Tailwind important `!`). In `cn()`, pass **`className` first**, then built-in strings, then motion overrides last. Use nested overrides only when needed (e.g. `[a]:motion-reduce:transition-none!`, `[&>span]:motion-reduce:animate-none!`). Prefer `cn(className, variants())` when merging variant helpers with a `className` prop.
 
 Charts (docs previews):
 

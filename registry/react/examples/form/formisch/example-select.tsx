@@ -79,7 +79,7 @@ const Example = () => {
               {(field) => (
                 <Field
                   invalid={Boolean(field.errors?.length)}
-                  orientation="horizontal"
+                  orientation="responsive"
                 >
                   <FieldContent>
                     <FieldLabel>Spoken Language</FieldLabel>
@@ -94,7 +94,7 @@ const Example = () => {
                     onValueChange={({ value }) => field.onChange(value)}
                     value={field.input}
                   >
-                    <SelectTrigger className="min-w-32">
+                    <SelectTrigger className="w-full min-w-32">
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>

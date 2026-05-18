@@ -8,8 +8,6 @@ import {
   StepsTrigger,
 } from "@/registry/react/components/steps";
 
-const items = ["Info", "Docs", "Team"];
-
 const Example = () => (
   <Steps className="w-full max-w-md" count={items.length}>
     <StepsList>
@@ -25,5 +23,7 @@ const Example = () => (
     </StepsList>
   </Steps>
 );
+
+const items = ["Info", "Docs", "Team"];
 
 export default Example;

@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 export const useSwap = useSwapContext;
 
 const swapIndicatorVariants = tv({
+  base: ["[&>span]:motion-reduce:animate-none!"],
   variants: {
     variant: {
       fade: [
@@ -47,12 +48,13 @@ export const Swap = (props: SwapProps) => {
     variant = "fade",
     lazyMount = true,
     unmountOnExit = true,
+    className,
     ...rest
   } = props;
 
   return (
     <ArkSwap.Root
-      className={cn(swapIndicatorVariants({ variant }))}
+      className={cn(swapIndicatorVariants({ variant }), className)}
       data-slot="swap"
       lazyMount={lazyMount}
       unmountOnExit={unmountOnExit}

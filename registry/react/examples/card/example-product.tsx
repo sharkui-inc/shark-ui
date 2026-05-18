@@ -9,7 +9,7 @@ import {
 const Example = () => (
   <div className="w-full max-w-xs">
     <Card className="overflow-hidden">
-      <CardMedia className="aspect-video w-full bg-muted" variant="image">
+      <CardMedia className="h-32 bg-muted" variant="image">
         {/* Image hoes here */}
       </CardMedia>
       <CardHeader

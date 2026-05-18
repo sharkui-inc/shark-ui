@@ -149,7 +149,7 @@ const TOCItem = (props: React.ComponentProps<"a">) => {
         "text-muted-foreground leading-4.5",
         "rounded-md border border-transparent no-underline",
         "transition-colors",
-        "before:absolute before:inset-y-px before:-start-3 before:w-px ltr:before:translate-x-0.5 rtl:before:-translate-x-0.5",
+        "before:absolute before:-inset-s-3 before:inset-y-px before:w-px ltr:before:translate-x-0.5 rtl:before:-translate-x-0.5",
         "hover:text-foreground",
         "data-[active=true]:text-foreground",
         "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",

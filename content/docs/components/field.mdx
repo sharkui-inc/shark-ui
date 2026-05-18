@@ -130,7 +130,7 @@ import {
 
 ### Slider
 
-Use `<SliderLabel />` inside the `<Slider />` to label the slider.
+Use `SliderLabel` inside the `Slider` to label the slider.
 
 <ComponentPreview componentName="field" fileName="example-slider-field" /> 
 
@@ -146,11 +146,11 @@ Use `<SliderLabel />` inside the `<Slider />` to label the slider.
 
 ### Field
 
-Root layout for label, control, and helper/error text. Supports vertical and horizontal orientation.
+Root layout for label, control, and helper/error text.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` |
+| `orientation` | `"vertical" \| "horizontal" \| "responsive"` | `"vertical"` |
 | `reverse` | `boolean` | `false` |
 | `invalid` | `boolean` | `-` |
 | `disabled` | `boolean` | `-` |
@@ -194,7 +194,7 @@ Wraps label, description, and error. Use with horizontal orientation.
 
 ### FieldLabel
 
-Label associated with the control via `htmlFor` / `id`. Required for accessibility.
+Label associated with the control.
 
 | Prop | Type | Default |
 | --- | --- | --- |

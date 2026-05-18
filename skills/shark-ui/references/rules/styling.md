@@ -16,6 +16,7 @@ Use when writing or updating Shark components, registry examples, and docs previ
 - **Do not add manual `z-index`** on overlay primitives (`Dialog`, `Sheet`, `Drawer`, `AlertDialog`, `Menu`, `ContextMenu`, `Popover`, `Tooltip`, `HoverCard`, portaled `Select` content, etc.) — stacking is owned by the component.
 - Avoid **redundant classes** that the primitive already applies.
 - Follow **Tailwind CSS v4** conventions used in Shark’s theme (`@import "tailwindcss"`, `@theme inline`, etc. in manual installation docs).
+- **Reduced motion (`prefers-reduced-motion`):** add `motion-reduce:transition-none!` and/or `motion-reduce:animate-none!` **once at the end** of each `cn()` / `tv()` class list (important `!`). Nested selectors when needed (e.g. `[a]:motion-reduce:transition-none!`, `[&>span]:motion-reduce:animate-none!`).
 
 ## Shark-specific expectations
 

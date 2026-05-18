@@ -6,7 +6,7 @@ links:
   ark: https://ark-ui.com/docs/guides/forms#react-hook-form
 ---
 
-This guide will cover building forms using the [`<Field />`](/docs/components/field) component, adding schema validation with [Zod](https://zod.dev), handling errors, ensuring accessibility, and more.
+This guide will cover building forms using the [`Field`](/docs/components/field) component, adding schema validation with [Zod](https://zod.dev), handling errors, ensuring accessibility, and more.
 
 ## Demo
 
@@ -24,16 +24,16 @@ We’ll build a form with a text input and textarea. When you submit, the form d
 
 ## Approach
 
-This form uses React Hook Form for state and Zod for validation. We'll build forms using the `<Field />` component, which gives you complete flexibility over the markup and styling.
+This form uses React Hook Form for state and Zod for validation. We'll build forms using the `Field` component, which gives you complete flexibility over the markup and styling.
 
 - Uses React Hook Form's useForm hook for form state management.
-- Uses the `<Controller />` component for controlled inputs.
-- Uses the `<Field />` components for building accessible forms.
+- Uses the `Controller` component for controlled inputs.
+- Uses the `Field` components for building accessible forms.
 - Uses client-side validation by passing your Zod schema into `resolver`.
 
 ## Anatomy
 
-Typical structure: wrap each field with `Controller`, and the `<Field />` component.
+Typical structure: wrap each field with `Controller`, and the `Field` component.
 
 ```tsx showLineNumbers {7-18}
 <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -125,7 +125,7 @@ export const BugReportForm = () => {
 
 ### Build
 
-Build the form using the `<Controller />` from React Hook Form and the Shark `<Field />`.
+Build the form using the `Controller` from React Hook Form and the Shark `Field`.
 
 <ComponentSource src="../examples/form/rhf/example-demo.tsx"  />
 
@@ -133,7 +133,7 @@ Build the form using the `<Controller />` from React Hook Form and the Shark `<F
 
 That's it. You now have a fully accessible form with client-side validation.
 
-When you submit the form, the `onSubmit` function will be called with the validated form data. If the form is invalid, React Hook Form will display the errors on `field.state.error` for `<FieldError />`.
+When you submit the form, the `onSubmit` function will be called with the validated form data. If the form is invalid, React Hook Form will display the errors on `field.state.error` for `FieldError`.
 
 ## Validation
 
@@ -183,10 +183,10 @@ const form = useForm({
 
 ## Displaying Errors
 
-Display errors next to the field using `<FieldError />`. For styling and accessibility:
+Display errors next to the field using `FieldError`. For styling and accessibility:
 
-- Add the `invalid` prop to the `<Field />` component.
-- Don't need to add the `invalid` prop to the form control such as `<Input />`, `<Checkbox />`, etc.
+- Add the `invalid` prop to the `Field` component.
+- Don't need to add the `invalid` prop to the form control such as `Input`, `Checkbox`, etc.
 
 ```tsx showLineNumbers title="form.tsx" {5,8}
 <Controller
@@ -206,107 +206,107 @@ Display errors next to the field using `<FieldError />`. For styling and accessi
 
 ### Input
 
-- Spread the field object onto the `<Input />` component.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Spread the field object onto the `Input` component.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-input" showBorders={false} hasMaxHeight={false} />
 
 ### Textarea
 
-- Spread the field object onto the `<Textarea />` component.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Spread the field object onto the `Textarea` component.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-textarea" showBorders={false} hasMaxHeight={false} />
 
 ### NativeSelect
 
-- Spread the field object onto the `<NativeSelect />` component.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Spread the field object onto the `NativeSelect` component.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-native-select" showBorders={false} hasMaxHeight={false} />
 
 ### Select
 
-- Wire `field.value` and `field.onChange` to `<Select />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.value` and `field.onChange` to `Select`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-select" showBorders={false} hasMaxHeight={false} />
 
 ### Checkbox
 
-- Wire `field.value` and `field.onChange` to `<Checkbox />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
-- Remember to add `data-slot="checkbox-group"` to the `<FieldGroup />` component for proper styling and spacing.
+- Wire `field.value` and `field.onChange` to `Checkbox`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Remember to add `data-slot="checkbox-group"` to the `FieldGroup` component for proper styling and spacing.
 
 <ComponentPreview componentName="form/rhf" fileName="example-checkbox" showBorders={false} hasMaxHeight={false} />
 
 ### Radio group
 
-- Wire `field.value` and `field.onChange` to `<RadioGroup />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.value` and `field.onChange` to `RadioGroup`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-radio-group" showBorders={false} hasMaxHeight={false} />
 
 ### Switch
 
-- Wire `field.value` and `field.onChange` to `<Switch />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.value` and `field.onChange` to `Switch`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-switch" showBorders={false} hasMaxHeight={false} />
 
 ### NumberInput
 
-- Wire `field.value` and `field.onChange` to `<NumberInput />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.value` and `field.onChange` to `NumberInput`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-number-input" showBorders={false} hasMaxHeight={false} />
 
 ### Slider
 
-- Wire `field.value` and `field.onChange` to `<Slider />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.value` and `field.onChange` to `Slider`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-slider" showBorders={false} hasMaxHeight={false} />
 
 ### Combobox
 
-- Wire `field.value` and `field.onChange` to `<Combobox />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.value` and `field.onChange` to `Combobox`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-combobox" showBorders={false} hasMaxHeight={false} />
 
 ### Autocomplete
 
-- Wire `field.value` and `field.onChange` to `<Autocomplete />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.value` and `field.onChange` to `Autocomplete`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-autocomplete" showBorders={false} hasMaxHeight={false} />
 
 ### Date Picker
 
-- Wire `field.value` and `field.onChange` to `<DatePicker />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.value` and `field.onChange` to `DatePicker`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-date-picker" showBorders={false} hasMaxHeight={false} />
 
 ### Input OTP
 
-- Wire `field.value` and `field.onChange` to `<InputOTP />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.value` and `field.onChange` to `InputOTP`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-input-otp" showBorders={false} hasMaxHeight={false} />
 
 ### Rating
 
-- Wire `field.value` and `field.onChange` to `<Rating />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.value` and `field.onChange` to `Rating`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-rating" showBorders={false} hasMaxHeight={false} />
 
 ### File Upload
 
-- Wire `field.value` and `field.onChange` to `<FileUpload />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.value` and `field.onChange` to `FileUpload`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/rhf" fileName="example-file-upload" showBorders={false} hasMaxHeight={false} />
 
@@ -353,7 +353,7 @@ export const ExampleForm = () => {
 
 ### Array Field Structure
 
-Wrap your array fields in a `<FieldSet />` with a `<FieldLegend />` and `<FieldDescription />`.
+Wrap your array fields in a `FieldSet` with a `FieldLegend` and `FieldDescription`.
 
 ```tsx showLineNumbers title="form.tsx"
 <FieldSet className="gap-4">
@@ -367,7 +367,7 @@ Wrap your array fields in a `<FieldSet />` with a `<FieldLegend />` and `<FieldD
 
 ### Controller Pattern for Array Items
 
-Map over the `fields` array and use `<Controller />` for each item. **Make sure to use `field.id` as the key**.
+Map over the `fields` array and use `Controller` for each item. **Make sure to use `field.id` as the key**.
 
 ```tsx showLineNumbers title="form.tsx"
 {

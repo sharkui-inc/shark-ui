@@ -6,9 +6,9 @@ export const ActionBarThumb = (props: ThumbCardProps) => (
       <div className="flex h-8 items-center gap-2 px-2">
         <div className="h-1.5 w-16 rounded-full bg-muted-foreground/16" />
         <div className="ms-auto flex gap-1.5">
-          <div className="size-5 rounded-md bg-muted-foreground/8" />
-          <div className="size-5 rounded-md bg-muted-foreground/8" />
-          <div className="size-5 rounded-md bg-primary" />
+          <div className="size-5 rounded-lg bg-muted-foreground/8" />
+          <div className="size-5 rounded-lg bg-muted-foreground/8" />
+          <div className="size-5 rounded-lg bg-primary" />
         </div>
       </div>
     </div>

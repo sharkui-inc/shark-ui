@@ -23,6 +23,7 @@ export const inputVariants = tv({
     "dark:aria-invalid:border-destructive-foreground dark:aria-invalid:text-destructive-foreground dark:aria-invalid:ring-destructive-foreground/40",
     "dark:data-invalid:border-destructive-foreground dark:data-invalid:text-destructive-foreground dark:data-invalid:ring-destructive-foreground/40",
     "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-64",
+    "motion-reduce:transition-none!",
   ],
   variants: {
     size: {

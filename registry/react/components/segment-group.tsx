@@ -111,6 +111,7 @@ export const SegmentGroupIndicator = (
         "data-[orientation=vertical]:group-data-[variant=underline]/segment-group:-translate-x-px",
         "data-[orientation=horizontal]:group-data-[variant=underline]/segment-group:h-0.5",
         "data-[orientation=vertical]:group-data-[variant=underline]/segment-group:w-0.5",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="segment-group-indicator"

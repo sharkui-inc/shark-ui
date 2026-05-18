@@ -138,6 +138,7 @@ export const PaginationEllipsis = (
   props: React.ComponentProps<typeof ArkPagination.Ellipsis>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <ArkPagination.Ellipsis
       className={cn(

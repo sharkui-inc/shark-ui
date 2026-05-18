@@ -1,6 +1,8 @@
 "use client";
 
 import { waitForEvent } from "@ark-ui/react/tour";
+import { Checkbox } from "@registry/react/components/checkbox";
+import { Field, FieldLabel } from "@registry/react/components/field";
 import { Button } from "@/registry/react/components/button";
 import { Input } from "@/registry/react/components/input";
 import {
@@ -100,31 +102,20 @@ const Example = () => (
       </TourTrigger>
 
       <div className="flex max-w-xs flex-col gap-4 rounded-lg border border-border bg-muted/50 p-4">
-        <div className="flex flex-col gap-2">
-          <label className="font-medium text-sm" htmlFor="input-name">
-            Name
-          </label>
+        <Field>
+          <FieldLabel htmlFor="input-name">Name</FieldLabel>
           <Input id="input-name" placeholder="Enter your name" type="text" />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label className="font-medium text-sm" htmlFor="input-email">
-            Email
-          </label>
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="input-email">Email</FieldLabel>
           <Input id="input-email" placeholder="Enter your email" type="email" />
-        </div>
-        <div className="flex items-center gap-2">
-          <input
-            className="size-4 rounded border-input accent-primary"
-            id="checkbox-terms"
-            type="checkbox"
-          />
-          <label
-            className="text-muted-foreground text-sm"
-            htmlFor="checkbox-terms"
-          >
+        </Field>
+        <Field orientation="horizontal">
+          <Checkbox id="checkbox-terms" />
+          <FieldLabel htmlFor="checkbox-terms">
             I accept the terms and conditions
-          </label>
-        </div>
+          </FieldLabel>
+        </Field>
       </div>
 
       <TourContent>

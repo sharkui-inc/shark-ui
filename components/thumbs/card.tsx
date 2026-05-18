@@ -12,7 +12,7 @@ export const CardThumb = (props: ThumbCardProps) => (
         <div className="h-2 w-2/3 rounded-lg bg-muted-foreground/8" />
       </div>
       <div className="mt-2 flex justify-end gap-2">
-        <div className="h-4 w-12 rounded-md border border-input bg-primary" />
+        <div className="h-4 w-12 rounded-lg bg-primary" />
       </div>
     </div>
   </ThumbCard>

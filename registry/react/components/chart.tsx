@@ -88,7 +88,17 @@ export const ChartContainer = (props: ChartContainerProps) => {
     <ChartContext.Provider value={{ config }}>
       <div
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-hidden [&_.recharts-surface]:outline-hidden",
+          "flex justify-center",
+          "aspect-video",
+          "text-xs",
+          "[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground",
+          "[&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50",
+          "[&_.recharts-curve.recharts-tooltip-cursor]:stroke-border",
+          "[&_.recharts-dot[stroke='#fff']]:stroke-transparent",
+          "[&_.recharts-layer]:outline-hidden",
+          "[&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border",
+          "[&_.recharts-radial-bar-background-sector]:fill-muted",
+          "[&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted",
           className
         )}
         data-chart={chartId}
@@ -211,7 +221,12 @@ export const ChartTooltipContent = (props: CustomTooltipProps) => {
   return (
     <div
       className={cn(
-        "grid min-w-32 items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
+        "min-w-32",
+        "grid items-start gap-1.5",
+        "px-2.5 py-1.5",
+        "bg-background",
+        "text-xs",
+        "rounded-lg border border-border/50 shadow-xl",
         className
       )}
     >
@@ -225,7 +240,9 @@ export const ChartTooltipContent = (props: CustomTooltipProps) => {
           return (
             <div
               className={cn(
-                "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
+                "w-full",
+                "flex flex-wrap items-stretch gap-2",
+                "[&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
                 indicator === "dot" && "items-center"
               )}
               key={key}
@@ -318,7 +335,8 @@ export const ChartLegendContent = (props: ChartLegendContentProps) => {
         return (
           <div
             className={cn(
-              "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"
+              "flex items-center gap-1.5",
+              "[&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"
             )}
             key={item.value}
           >
@@ -326,7 +344,7 @@ export const ChartLegendContent = (props: ChartLegendContentProps) => {
               <itemConfig.icon />
             ) : (
               <div
-                className="h-2 w-2 shrink-0 rounded-[2px]"
+                className="size-2 shrink-0 rounded-[2px]"
                 style={{
                   backgroundColor: item.color,
                 }}

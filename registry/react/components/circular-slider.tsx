@@ -150,7 +150,9 @@ export const CircularSliderThumb = (
   props: React.ComponentProps<typeof ArkAngleSlider.Thumb>
 ) => {
   const { className, ...rest } = props;
+
   const { thumbSize, ringRadius } = _useCircularSlider();
+
   const halfThumb = thumbSize / 2;
 
   return (
@@ -178,7 +180,8 @@ export const CircularSliderThumb = (
           "size-(--size)",
           "rounded-full shadow-xs/5 ring-2 ring-border",
           "transition-all",
-          "hover:cursor-grab hover:ring-[3px]"
+          "hover:cursor-grab hover:ring-[3px]",
+          "motion-reduce:transition-none!"
         )}
         style={
           {
@@ -202,13 +205,16 @@ interface CircularSliderValueProps
 
 export const CircularSliderValue = (props: CircularSliderValueProps) => {
   const { prefix = "", suffix = "", className, ...rest } = props;
+
   const { value } = useAngleSliderContext();
 
   return (
     <FieldLabel asChild>
       <ArkAngleSlider.ValueText
         className={cn(
-          "gap-1 tabular-nums [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+          "gap-1",
+          "tabular-nums",
+          "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
           className
         )}
         data-slot="circular-slider-value"
@@ -243,6 +249,7 @@ export const CircularSliderMarker = (
   props: React.ComponentProps<typeof ArkAngleSlider.Marker>
 ) => {
   const { className, style, ...rest } = props;
+
   const { size, thickness } = _useCircularSlider();
 
   const ringRadius = size / 2 - thickness / 2;

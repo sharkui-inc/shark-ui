@@ -81,7 +81,7 @@ const Example = () => {
               control={form.control}
               name="language"
               render={({ field, fieldState }) => (
-                <Field invalid={fieldState.invalid} orientation="horizontal">
+                <Field invalid={fieldState.invalid} orientation="responsive">
                   <FieldContent>
                     <FieldLabel>Spoken Language</FieldLabel>
                     <FieldDescription>

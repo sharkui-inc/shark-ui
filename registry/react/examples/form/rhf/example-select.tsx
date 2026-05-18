@@ -76,7 +76,7 @@ const Example = () => {
               control={form.control}
               name="language"
               render={({ field, fieldState }) => (
-                <Field invalid={fieldState.invalid} orientation="horizontal">
+                <Field invalid={fieldState.invalid} orientation="responsive">
                   <FieldContent>
                     <FieldLabel>Spoken Language</FieldLabel>
                     <FieldDescription>
@@ -90,7 +90,7 @@ const Example = () => {
                     onValueChange={({ value }) => field.onChange(value)}
                     value={field.value}
                   >
-                    <SelectTrigger className="min-w-32">
+                    <SelectTrigger className="w-full min-w-32">
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>

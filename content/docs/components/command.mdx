@@ -52,7 +52,7 @@ npm install @ark-ui/react lucide-react
 ## Anatomy
 
 ```text
-Command (inline)
+Command
 ├── CommandInput
 ├── CommandList
 │   ├── CommandEmpty
@@ -62,10 +62,6 @@ Command (inline)
 ├── CommandSeparator
 ├── CommandShortcut
 └── CommandFooter
-
-CommandDialog
-├── CommandDialogTrigger
-└── CommandDialogContent
 ```
 
 ## Usage
@@ -140,6 +136,12 @@ Add hints or actions in the footer with `CommandFooter`.
 
 <ComponentPreview componentName="command" fileName="example-with-footer" />
 
+### Scrollable
+
+Scrollable command menu with multiple items.
+
+<ComponentPreview componentName="command" fileName="example-scrollable" />
+
 ## API Reference
 
 ### Command
@@ -171,7 +173,7 @@ Dialog root for the command palette. Same as `Dialog`.
 
 ### CommandDialogTrigger
 
-Opens the command palette on click. Often uses a search icon.
+Opens the command palette on click. Same as `DialogTrigger`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -257,7 +259,7 @@ A single command or action in the palette.
 
 ### CommandSeparator
 
-Visual divider between groups or items. Uses [`<Separator />`](/components/separator).
+Visual divider between groups or items. Uses `Separator`.
 
 | Prop | Type | Default |
 | --- | --- | --- |

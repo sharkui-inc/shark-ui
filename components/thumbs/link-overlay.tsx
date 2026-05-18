@@ -8,7 +8,7 @@ export const LinkOverlayThumb = (props: ThumbCardProps) => (
         <div className="size-full rounded-md bg-muted-foreground/16" />
         <div
           aria-hidden
-          className="absolute inset-0 flex items-center justify-center rounded-md border border-input border-muted-foreground/32 border-dashed"
+          className="absolute inset-0 flex items-center justify-center rounded-md border border-input border-dashed"
         >
           <ExternalLink className="size-4 text-muted-foreground/64" />
         </div>

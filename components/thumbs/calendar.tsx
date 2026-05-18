@@ -4,13 +4,13 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 export const CalendarThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
     <div className="relative flex w-48 flex-col gap-2 rounded-lg border border-input bg-muted/64 p-3 shadow-md/5">
-      <div className="flex items-center justify-between gap-1">
+      <div className="flex items-center justify-between gap-3">
         <div className="flex size-5 items-center justify-center rounded-lg border border-input bg-muted">
           <span aria-hidden className="text-muted-foreground/64">
             <ChevronLeftIcon className="size-3" />
           </span>
         </div>
-        <div className="flex flex-1 items-center justify-center gap-1">
+        <div className="flex flex-1 items-center justify-center gap-2">
           <div className="h-2 w-full rounded-lg bg-muted-foreground/16" />
           <div className="h-2 w-3/4 rounded-lg bg-muted-foreground/16" />
         </div>

@@ -6,7 +6,7 @@ links:
   ark: https://ark-ui.com/docs/guides/forms#tanstack-form
 ---
 
-This guide will cover building forms using the [`<Field />`](/docs/components/field) component, adding schema validation with [Zod](https://zod.dev), handling errors, ensuring accessibility, and more.
+This guide will cover building forms using the [`Field`](/docs/components/field) component, adding schema validation with [Zod](https://zod.dev), handling errors, ensuring accessibility, and more.
 
 ## Demo
 
@@ -24,16 +24,16 @@ We’ll build a form with a text input and textarea. When you submit, the form d
 
 ## Approach
 
-This form uses TanStack Form for state and Zod for validation. We'll build forms using the `<Field />` component, which gives you complete flexibility over the markup and styling.
+This form uses TanStack Form for state and Zod for validation. We'll build forms using the `Field` component, which gives you complete flexibility over the markup and styling.
 
 - Uses TanStack Form's `useForm` hook for form state management.
 - Uses `form.Field` with a render function for controlled inputs.
-- Uses the `<Field />` components for building accessible forms.
+- Uses the `Field` components for building accessible forms.
 - Uses client-side validation by passing your Zod schema into `validators`.
 
 ## Anatomy
 
-Here's a basic example of a form using TanStack Form with the `<Field />` component.
+Here's a basic example of a form using TanStack Form with the `Field` component.
 
 ```tsx showLineNumbers {11-29}
 <form
@@ -141,7 +141,7 @@ export const ExampleForm = () => {
 
 ### Build
 
-build the form using the `<form.Field />` from TanStack Form and the Shark `<Field />`.
+build the form using the `form.Field` from TanStack Form and the Shark `Field`.
 
 <ComponentSource src="../examples/form/tanstack/example-demo.tsx" />
 
@@ -149,7 +149,7 @@ build the form using the `<form.Field />` from TanStack Form and the Shark `<Fie
 
 That's it. You now have a fully accessible form with client-side validation.
 
-When you submit the form, the `onSubmit` handler receives validated values. If the form is invalid, TanStack Form exposes errors on `field.state.meta.errors` for `<FieldError />`.
+When you submit the form, the `onSubmit` handler receives validated values. If the form is invalid, TanStack Form exposes errors on `field.state.meta.errors` for `FieldError`.
 
 ## Validation
 
@@ -196,10 +196,10 @@ const form = useForm({
 
 ## Displaying Errors
 
-Display errors next to the field using `<FieldError />`. For styling and accessibility:
+Display errors next to the field using `FieldError`. For styling and accessibility:
 
-- Add the `invalid` prop to the `<Field />` component.
-- Don't need to add the `invalid` prop to the form control such as `<Input />`, `<Checkbox />`, etc.
+- Add the `invalid` prop to the `Field` component.
+- Don't need to add the `invalid` prop to the form control such as `Input`, `Checkbox`, etc.
 
 ```tsx showLineNumbers title="form.tsx" {4,13-15}
 <form.Field
@@ -226,108 +226,108 @@ Display errors next to the field using `<FieldError />`. For styling and accessi
 
 ### Input
 
-- Bind `field.state.value` and `field.handleChange` to `<Input />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Bind `field.state.value` and `field.handleChange` to `Input`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-input" showBorders={false} hasMaxHeight={false} />
 
 ### Textarea
 
-- Bind `field.state.value` and `field.handleChange` to `<Textarea />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Bind `field.state.value` and `field.handleChange` to `Textarea`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-textarea" showBorders={false} hasMaxHeight={false} />
 
 ### NativeSelect
 
-- Bind `field.state.value` and `field.handleChange` to `<NativeSelect />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Bind `field.state.value` and `field.handleChange` to `NativeSelect`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-native-select" showBorders={false} hasMaxHeight={false} />
 
 ### Select
 
-- Wire `value` and `onValueChange` on `<Select />`. For overlays, call `field.handleBlur()` from `onInteractOutside` when your example needs blur sync.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `value` and `onValueChange` on `Select`. For overlays, call `field.handleBlur()` from `onInteractOutside` when your example needs blur sync.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-select" showBorders={false} hasMaxHeight={false} />
 
 ### Checkbox
 
-- Wire `field.state.value` and `field.handleChange` to `<Checkbox />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
-- For checkbox arrays, use `mode="array"` on the `<form.Field />` component and TanStack Form's array helpers.
-- Remember to add `data-slot="checkbox-group"` to the `<FieldGroup />` component for proper styling and spacing.
+- Wire `field.state.value` and `field.handleChange` to `Checkbox`.
+- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- For checkbox arrays, use `mode="array"` on the `form.Field` component and TanStack Form's array helpers.
+- Remember to add `data-slot="checkbox-group"` to the `FieldGroup` component for proper styling and spacing.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-checkbox" showBorders={false} hasMaxHeight={false} />
 
 ### Radio group
 
-- Wire `field.state.value` and `field.handleChange` to `<RadioGroup />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.state.value` and `field.handleChange` to `RadioGroup`.
+- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-radio-group" showBorders={false} hasMaxHeight={false} />
 
 ### Switch
 
-- Use `field.state.value` and `field.handleChange` with `<Switch />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Use `field.state.value` and `field.handleChange` with `Switch`.
+- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-switch" showBorders={false} hasMaxHeight={false} />
 
 ### NumberInput
 
-- Wire `field.state.value` and `field.handleChange` to `<NumberInput />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.state.value` and `field.handleChange` to `NumberInput`.
+- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-number-input" showBorders={false} hasMaxHeight={false} />
 
 ### Slider
 
-- Wire `field.state.value` and `field.handleChange` to `<Slider />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.state.value` and `field.handleChange` to `Slider`.
+- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-slider" showBorders={false} hasMaxHeight={false} />
 
 ### Combobox
 
-- Wire `field.state.value` and `field.handleChange` to `<Combobox />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.state.value` and `field.handleChange` to `Combobox`.
+- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-combobox" showBorders={false} hasMaxHeight={false} />
 
 ### Autocomplete
 
-- Wire `field.state.value` and `field.handleChange` to `<Autocomplete />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.state.value` and `field.handleChange` to `Autocomplete`.
+- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-autocomplete" showBorders={false} hasMaxHeight={false} />
 
 ### Date Picker
 
-- Wire `field.state.value` and `field.handleChange` to `<DatePicker />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.state.value` and `field.handleChange` to `DatePicker`.
+- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-date-picker" showBorders={false} hasMaxHeight={false} />
 
 ### Input OTP
 
-- Use `field.state.value` (as `string[]`) and `field.handleChange` with `<InputOTP />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Use `field.state.value` (as `string[]`) and `field.handleChange` with `InputOTP`.
+- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-input-otp" showBorders={false} hasMaxHeight={false} />
 
 ### Rating
 
-- Wire `field.state.value` and `field.handleChange` to `<Rating />`.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Wire `field.state.value` and `field.handleChange` to `Rating`.
+- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-rating" showBorders={false} hasMaxHeight={false} />
 
 ### File Upload
 
 - Wire `onFileAccept` to sync files into form state.
-- Add the `invalid` prop to the `<Field />` component and pass the error message to the `<FieldError />` component.
+- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-file-upload" showBorders={false} hasMaxHeight={false} />
 

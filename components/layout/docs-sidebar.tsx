@@ -40,6 +40,7 @@ const UPDATED_ITEMS = [
   "/docs/components/dialog",
   "/docs/components/field",
   "/docs/components/action-bar",
+  "/docs/components/toast",
   "/docs/components/context-menu",
   "/docs/components/number-input",
   "/docs/components/timer",

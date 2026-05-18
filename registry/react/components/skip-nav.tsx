@@ -16,12 +16,7 @@ export interface SkipNavLinkProps extends React.ComponentProps<typeof ark.a> {
 }
 
 export const SkipNavLink = (props: SkipNavLinkProps) => {
-  const {
-    id = SKIP_NAV_ID,
-    className,
-    children = "Skip to content",
-    ...rest
-  } = props;
+  const { id = SKIP_NAV_ID, className, children, ...rest } = props;
 
   return (
     <ark.a
@@ -39,7 +34,7 @@ export const SkipNavLink = (props: SkipNavLinkProps) => {
       href={`#${id}`}
       {...rest}
     >
-      {children}
+      {children ?? "Skip to content"}
     </ark.a>
   );
 };

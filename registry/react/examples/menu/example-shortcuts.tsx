@@ -34,7 +34,7 @@ const Example = () => (
       <MenuItem value="logout">
         <LogOutIcon />
         Log out
-        <MenuShortcut>⇧⌘Q</MenuShortcut>
+        <MenuShortcut>⌘Q</MenuShortcut>
       </MenuItem>
     </MenuContent>
   </Menu>

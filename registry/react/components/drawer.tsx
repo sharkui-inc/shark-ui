@@ -25,7 +25,8 @@ export const DrawerProvider = (
           "opacity-0",
           "transition-opacity duration-300 ease-in",
           "data-[state=open]:opacity-(--indent-opacity)",
-          "pointer-events-none"
+          "pointer-events-none",
+          "motion-reduce:transition-none!"
         )}
         data-slot="drawer-indent-background"
       />
@@ -35,6 +36,7 @@ export const DrawerProvider = (
           "data-active:transform-[scale(calc(0.98+(0.02*var(--drawer-swipe-progress))))_translateY(calc(0.5rem*(1-var(--drawer-swipe-progress))))]",
           "transition-[border-radius,transform] duration-300 ease-in-out will-change-transform",
           "data-active:rounded-(--indent-radius)",
+          "motion-reduce:transition-none!",
           className
         )}
         data-slot="drawer-indent"
@@ -76,6 +78,7 @@ const drawerOverlayVariants = tv({
     "bg-(--bg) backdrop-blur-(--blur)",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
+    "motion-reduce:animate-none!",
   ],
 });
 
@@ -151,11 +154,13 @@ const drawerContentVariants = tv({
         "data-[state=open]:slide-in-from-top data-[state=open]:animate-in",
         "data-[state=closed]:slide-out-to-top data-[state=closed]:animate-out",
         "rounded-b-2xl",
+        "motion-reduce:animate-none!",
       ],
       down: [
         "data-[state=closed]:slide-out-to-bottom data-[state=closed]:animate-out",
         "data-[state=open]:slide-in-from-bottom data-[state=open]:animate-in",
         "rounded-t-2xl",
+        "motion-reduce:animate-none!",
       ],
       left: [
         "data-[state=open]:slide-in-from-left data-[state=open]:animate-in",
@@ -163,6 +168,7 @@ const drawerContentVariants = tv({
         "max-h-none max-w-md",
         "size-full",
         "rounded-e-2xl",
+        "motion-reduce:animate-none!",
       ],
       right: [
         "data-[state=open]:slide-in-from-right data-[state=open]:animate-in",
@@ -170,6 +176,7 @@ const drawerContentVariants = tv({
         "max-h-none max-w-md",
         "size-full",
         "rounded-s-2xl",
+        "motion-reduce:animate-none!",
       ],
     },
     variant: {
@@ -241,6 +248,7 @@ export const DrawerContentInner = (
         "text-center",
         "transition-opacity duration-300",
         "group-data-[nested=drawer]/drawer:opacity-0 group-data-[nested=drawer]/drawer:data-[state=open]:opacity-100",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="drawer-content-inner"

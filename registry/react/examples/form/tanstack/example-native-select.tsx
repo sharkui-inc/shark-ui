@@ -87,7 +87,7 @@ const Example = () => {
               children={(field) => (
                 <Field
                   invalid={!field.state.meta.isValid}
-                  orientation="horizontal"
+                  orientation="responsive"
                 >
                   <FieldContent>
                     <FieldLabel>Spoken Language</FieldLabel>

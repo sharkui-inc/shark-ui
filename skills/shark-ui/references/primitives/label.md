@@ -3,7 +3,7 @@
 ## When to use
 
 - Visible accessible labels for inputs and controls.
-- Simple `htmlFor`/`id` associations in forms and settings UIs.
+- Form and settings UIs — prefer **`Field` / `FieldLabel`** (association is automatic; no **`id` / `htmlFor`**).
 
 ## Install
 
@@ -20,29 +20,31 @@ npm install @ark-ui/react
 ## Canonical imports
 
 ```tsx
+import { Field, FieldLabel } from "@/components/ui/field"
 import { Label } from "@/components/ui/label"
 ```
 
 ## Minimal pattern
 
 ```tsx
-<Label htmlFor="email">Email</Label>
+<Field>
+  <FieldLabel>Email</FieldLabel>
+  <Input type="email" placeholder="name@example.com" />
+</Field>
 ```
 
 ### Key patterns
 
-Label paired with input:
+Label with input (prefer `Field`):
 
 ```tsx
-const id = useId()
-
-<div className="flex flex-col gap-2">
-  <Label htmlFor={id}>Email</Label>
-  <Input id={id} type="email" placeholder="name@example.com" />
-</div>
+<Field>
+  <FieldLabel>Email</FieldLabel>
+  <Input type="email" placeholder="name@example.com" />
+</Field>
 ```
 
-Label wrapping a checkbox:
+Standalone `Label` wrapping a control (no `id` / `htmlFor`):
 
 ```tsx
 <Label>
@@ -57,7 +59,7 @@ Prefer `FieldLabel` within `Field` for validation-aware forms.
 ## Common pitfalls
 
 - Using `aria-label` when visible `Label` text exists and can be associated.
-- Mismatching `htmlFor`/`id` between label and control.
+- Adding manual `id` / `htmlFor` when `Field` / `FieldLabel` or a wrapping `Label` already associates the control.
 - Using label component as generic typography instead of form labeling.
 
 ## Useful example references

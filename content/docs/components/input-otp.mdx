@@ -103,13 +103,13 @@ Use the `invalid` prop to mark the input as invalid and show error styling.
 
 ### Four Digits
 
-Use four `<InputOTPSlot />` elements for a 4-digit OTP.
+Use four `InputOTPSlot` elements for a 4-digit OTP.
 
 <ComponentPreview componentName="input-otp" fileName="example-four-digits" />
 
 ### Separator
 
-Add `<InputOTPSeparator />` between groups of slots.
+Add `InputOTPSeparator` between groups of slots.
 
 <ComponentPreview componentName="input-otp" fileName="example-separator" />
 
@@ -133,7 +133,7 @@ Use the `mask` prop to mask the input value.
 
 ### Custom Size
 
-Pass `className` to `<InputOTP />` to override slot dimensions and text size.
+Pass `*:data-[slot=input-otp-input]:size-*` and `*:data-[slot=input-otp-input]:text-*` to `InputOTP` to override slot dimensions and text size.
 
 <ComponentPreview componentName="input-otp" fileName="example-custom-size" />
 
@@ -155,7 +155,7 @@ Pass `className` to `<InputOTP />` to override slot dimensions and text size.
 
 ### InputOTPSlot
 
-Single OTP slot. Use `index` to specify position (0-based).
+Single OTP slot. Use `index` to specify position, 0 is the first slot.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -163,7 +163,7 @@ Single OTP slot. Use `index` to specify position (0-based).
 
 ### InputOTPSeparator
 
-Visual separator between slots. Extends native `<hr>` props.
+Visual separator between slots.
 
 ---
 

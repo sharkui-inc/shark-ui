@@ -37,22 +37,22 @@ const ContextMenuDemo = () => (
       <ContextMenuGroup>
         <ContextMenuItem value="forward">
           <Send /> Forward
-          <ContextMenuShortcut>⇧⌘F</ContextMenuShortcut>
+          <ContextMenuShortcut>⌘F</ContextMenuShortcut>
         </ContextMenuItem>
 
         <ContextMenuItem value="reply">
           <Reply /> Reply
-          <ContextMenuShortcut>⇧⌘R</ContextMenuShortcut>
+          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
         </ContextMenuItem>
 
         <ContextMenuItem value="reply-all">
           <ReplyAll /> Reply all
-          <ContextMenuShortcut>⇧⌘A</ContextMenuShortcut>
+          <ContextMenuShortcut>⌘A</ContextMenuShortcut>
         </ContextMenuItem>
 
         <ContextMenuItem value="archive">
           <Archive /> Archive
-          <ContextMenuShortcut>⇧⌘Z</ContextMenuShortcut>
+          <ContextMenuShortcut>⌘Z</ContextMenuShortcut>
         </ContextMenuItem>
 
         <ContextMenuSub>
@@ -96,7 +96,7 @@ const ContextMenuDemo = () => (
         <ContextMenuSeparator />
         <ContextMenuItem value="delete" variant="destructive">
           <Trash2 /> Delete
-          <ContextMenuShortcut>⌫</ContextMenuShortcut>
+          <ContextMenuShortcut>⌘ ⌫</ContextMenuShortcut>
         </ContextMenuItem>
       </ContextMenuGroup>
     </ContextMenuContent>

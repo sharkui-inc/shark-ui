@@ -26,6 +26,7 @@ export const Switch = (props: React.ComponentProps<typeof ArkSwitch.Root>) => {
         "data-[state=checked]:bg-primary",
         "data-[state=unchecked]:bg-input dark:data-[state=unchecked]:bg-input",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="switch"
@@ -46,7 +47,8 @@ export const Switch = (props: React.ComponentProps<typeof ArkSwitch.Root>) => {
             "data-[state=checked]:translate-x-[calc(var(--thumb-size)-4px)]",
             "dark:data-[state=checked]:bg-primary-foreground",
             "data-[state=unchecked]:translate-x-0",
-            "dark:data-[state=unchecked]:bg-foreground"
+            "dark:data-[state=unchecked]:bg-foreground",
+            "motion-reduce:transition-none!"
           )}
           data-slot="switch-thumb"
         />

@@ -15,17 +15,6 @@ import {
 } from "@/registry/react/components/command";
 import { Kbd } from "@/registry/react/components/kbd";
 
-const initialItems = [
-  { label: "Settings", shortcut: "⌘,", value: "settings", group: "App" },
-  {
-    label: "Keyboard Shortcuts",
-    shortcut: "⌘K",
-    value: "shortcuts",
-    group: "App",
-  },
-  { label: "Help", shortcut: "⌘?", value: "help", group: "App" },
-];
-
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
 
@@ -77,5 +66,16 @@ const Example = () => {
     </Command>
   );
 };
+
+const initialItems = [
+  { label: "Settings", shortcut: "⌘,", value: "settings", group: "App" },
+  {
+    label: "Keyboard Shortcuts",
+    shortcut: "⌘K",
+    value: "shortcuts",
+    group: "App",
+  },
+  { label: "Help", shortcut: "⌘?", value: "help", group: "App" },
+];
 
 export default Example;

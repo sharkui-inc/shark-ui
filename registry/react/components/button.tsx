@@ -18,6 +18,7 @@ export const buttonVariants = tv({
     "data-[state=loading]:pointer-events-none",
     "aria-invalid:border-destructive aria-invalid:ring-destructive/24",
     "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    "motion-reduce:transition-none!",
   ],
   variants: {
     variant: {

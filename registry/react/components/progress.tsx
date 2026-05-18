@@ -83,7 +83,9 @@ export const ProgressRange = (
       "transition-all duration-300 ease-out",
       "data-[orientation=horizontal]:h-full",
       "data-[orientation=vertical]:h-full",
-      "data-[state=indeterminate]:w-1/3 data-[state=indeterminate]:animate-indeterminate data-[state=indeterminate]:duration-100"
+      "not-has-[data-state=indeterminate]:motion-reduce:transition-none!",
+      "not-has-[data-state=indeterminate]:motion-reduce:animate-none!",
+      "data-[state=indeterminate]:w-1/3 data-[state=indeterminate]:animate-indeterminate! data-[state=indeterminate]:duration-100"
     )}
     data-slot="progress-range"
     {...props}

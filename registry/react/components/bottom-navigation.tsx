@@ -66,6 +66,7 @@ export const BottomNavigationItem = (
         "[&_svg:not([class*='size-'])]:size-5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         "has-[data-slot=bottom-navigation-item-label]:size-4",
         "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="bottom-navigation-item"

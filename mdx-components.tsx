@@ -1,4 +1,4 @@
-import { ExternalLinkIcon, InfoIcon } from "lucide-react";
+import { ArrowUpRightIcon, InfoIcon } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
 import { CodeBlockCommand } from "@/components/code-block-command";
@@ -168,9 +168,7 @@ export const mdxComponents = {
         {...props}
       >
         {children}
-        {isExternal && (
-          <ExternalLinkIcon className="size-3.5 text-muted-foreground" />
-        )}
+        {isExternal && <ArrowUpRightIcon className="size-3.5 opacity-90" />}
       </Link>
     );
   },

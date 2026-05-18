@@ -85,7 +85,7 @@ const Example = () => {
               {(field) => (
                 <Field
                   invalid={Boolean(field.errors?.length)}
-                  orientation="horizontal"
+                  orientation="responsive"
                 >
                   <FieldContent>
                     <FieldLabel>Spoken Language</FieldLabel>

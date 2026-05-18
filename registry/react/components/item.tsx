@@ -51,6 +51,8 @@ const itemVariants = tv({
     "[a]:transition-colors [a]:hover:bg-muted",
     "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
     "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    "motion-reduce:transition-none!",
+    "[a]:motion-reduce:transition-none!",
   ],
   variants: {
     variant: {
@@ -113,7 +115,7 @@ export const ItemMedia = (props: ItemMediaProps) => {
 
   return (
     <ark.div
-      className={cn(itemMediaVariants({ variant, className }))}
+      className={cn(itemMediaVariants({ variant }), className)}
       data-slot="item-media"
       data-variant={variant}
       {...rest}

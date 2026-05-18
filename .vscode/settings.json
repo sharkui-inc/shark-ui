@@ -29,9 +29,6 @@
   "[graphql]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "[html]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
   "[vue]": {
     "editor.defaultFormatter": "biomejs.biome"
   },

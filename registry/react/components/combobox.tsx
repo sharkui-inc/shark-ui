@@ -182,6 +182,7 @@ export const ComboboxContent = (
             "data-[placement=bottom]:slide-in-from-top-2",
             "data-[placement=right]:slide-in-from-start-2",
             "data-[placement=left]:slide-in-from-end-2",
+            "motion-reduce:animate-none!",
             className
           )}
           data-slot="combobox-content"
@@ -245,7 +246,6 @@ export const comboboxItemVariants = tv({
     "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
     "[&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0",
-    " ",
   ],
   variants: {
     showIndicator: {
