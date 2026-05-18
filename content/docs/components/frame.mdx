@@ -79,6 +79,32 @@ import {
 </Frame>
 ```
 
+
+## Title & Description
+
+`FrameHeader` supports two usage patterns:
+
+### Using props
+
+Pass `title` and `description` props directly to `FrameHeader`. 
+
+```tsx showLineNumbers
+<FrameHeader title="Frame Title" description="Frame description" />
+```
+
+> This approach does not require `FrameTitle` or `FrameDescription` components.
+
+### Using components
+
+Use `FrameTitle` and `FrameDescription` as children for more control.
+
+```tsx showLineNumbers
+<FrameHeader>
+  <FrameTitle>Frame Title</FrameTitle>
+  <FrameDescription>Frame description</FrameDescription>
+</FrameHeader>
+```
+
 ## Examples
 
 ### Separated Panels

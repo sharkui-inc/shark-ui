@@ -42,15 +42,36 @@ export const FramePanel = (props: React.ComponentProps<typeof ark.div>) => {
   );
 };
 
-export const FrameHeader = (props: React.ComponentProps<typeof ark.header>) => {
-  const { className, ...rest } = props;
+interface FrameHeaderProps extends React.ComponentProps<typeof ark.header> {
+  /**
+   * The description of the dialog
+   */
+  description?: string;
+  /**
+   * The title of the dialog
+   */
+  title?: string;
+}
+
+export const FrameHeader = (props: FrameHeaderProps) => {
+  const { title, description, className, children, ...rest } = props;
 
   return (
     <ark.header
       className={cn("flex flex-col", "px-5 py-4", className)}
       data-slot="frame-panel-header"
       {...rest}
-    />
+    >
+      {!!title && <FrameTitle>{title}</FrameTitle>}
+
+      {!!description && <FrameDescription>{description}</FrameDescription>}
+
+      {!title && typeof children === "string" ? (
+        <FrameTitle>{children}</FrameTitle>
+      ) : (
+        children
+      )}
+    </ark.header>
   );
 };
 

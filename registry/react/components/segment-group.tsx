@@ -26,6 +26,7 @@ export const SegmentGroup = (props: SegmentGroupProps) => {
     orientation = "horizontal",
     variant = "default",
     className,
+    children,
     ...rest
   } = props;
 
@@ -46,7 +47,11 @@ export const SegmentGroup = (props: SegmentGroupProps) => {
       data-variant={variant}
       orientation={orientation}
       {...rest}
-    />
+    >
+      <SegmentGroupIndicator />
+
+      {children}
+    </ArkSegmentGroup.Root>
   );
 };
 

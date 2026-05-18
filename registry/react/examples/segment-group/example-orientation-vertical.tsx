@@ -1,6 +1,5 @@
 import {
   SegmentGroup,
-  SegmentGroupIndicator,
   SegmentGroupItem,
   SegmentGroupItemText,
 } from "@/registry/react/components/segment-group";
@@ -11,7 +10,6 @@ const Example = () => (
     defaultValue="Profile"
     orientation="vertical"
   >
-    <SegmentGroupIndicator />
     {items.map((item) => (
       <SegmentGroupItem className="px-2 py-1.5 text-sm" key={item} value={item}>
         <SegmentGroupItemText>{item}</SegmentGroupItemText>

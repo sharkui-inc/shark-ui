@@ -3,7 +3,6 @@
 import React from "react";
 import {
   SegmentGroup,
-  SegmentGroupIndicator,
   SegmentGroupItem,
   SegmentGroupItemText,
 } from "@/registry/react/components/segment-group";
@@ -20,7 +19,6 @@ const Example = () => {
       onValueChange={(e) => setValue(e.value ?? "Profile")}
       value={hoverValue ?? value}
     >
-      <SegmentGroupIndicator />
       {pages.map((page) => (
         <SegmentGroupItem
           className="px-2 py-1.5 text-sm"

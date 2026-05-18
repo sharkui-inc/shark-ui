@@ -2,14 +2,15 @@
 
 import {
   SegmentGroup,
-  SegmentGroupIndicator,
   SegmentGroupItem,
   SegmentGroupItemText,
 } from "@/registry/react/components/segment-group";
 
 const Example = () => (
-  <SegmentGroup className="rounded-lg" defaultValue="Profile">
-    <SegmentGroupIndicator className="bg-primary/20 dark:bg-primary/40" />
+  <SegmentGroup
+    className="rounded-lg *:data-[slot=segment-group-indicator]:bg-primary/40"
+    defaultValue="Profile"
+  >
     {items.map((item) => (
       <SegmentGroupItem
         className="px-2 py-1.5 text-sm"

@@ -16,22 +16,6 @@ import {
   ChartContainer,
 } from "@/registry/react/components/chart";
 
-const data = [
-  { goal: 400 },
-  { goal: 300 },
-  { goal: 200 },
-  { goal: 300 },
-  { goal: 200 },
-  { goal: 278 },
-  { goal: 189 },
-  { goal: 239 },
-  { goal: 300 },
-  { goal: 200 },
-  { goal: 278 },
-  { goal: 189 },
-  { goal: 349 },
-];
-
 const chartConfig = {
   goal: {
     label: "Goal",
@@ -104,3 +88,19 @@ export const ActivityGoalExample = (props: React.ComponentProps<"div">) => {
     </Card>
   );
 };
+
+const data = [
+  { goal: 400 },
+  { goal: 300 },
+  { goal: 200 },
+  { goal: 300 },
+  { goal: 200 },
+  { goal: 278 },
+  { goal: 189 },
+  { goal: 239 },
+  { goal: 300 },
+  { goal: 200 },
+  { goal: 278 },
+  { goal: 189 },
+  { goal: 349 },
+];
