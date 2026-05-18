@@ -87,7 +87,8 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
         "block",
         "-rotate-90",
         "pointer-events-none",
-        "group-data-[state=indeterminate]/circular-progress:animate-spin",
+        "motion-reduce:animate-none!",
+        "group-data-[state=indeterminate]/circular-progress:animate-spin!",
         className
       )}
       data-slot="circular-progress-circle"

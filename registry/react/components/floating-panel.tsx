@@ -64,8 +64,7 @@ export const FloatingPanelContent = (props: FloatingPanelContentProps) => {
             "rounded-2xl border shadow-lg/5",
             "transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform",
             "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
-            "motion-reduce:transition-none!",
-            "motion-reduce:animate-none!",
+            "motion-reduce:animate-none! motion-reduce:transition-none!",
             className
           )}
           data-slot="floating-panel-content"
@@ -141,7 +140,7 @@ export const FloatingPanelControl = (
 interface FloatingPanelStageTriggerProps
   extends Omit<
       React.ComponentProps<typeof ArkFloatingPanel.StageTrigger>,
-      "stage",
+      "stage"
     >,
     ButtonProps {}
 

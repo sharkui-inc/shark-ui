@@ -11,20 +11,12 @@ const cssVars = {
 
 const css = {
   "@keyframes flip-in": {
-    from: {
-      transform: "rotateY(180deg)",
-    },
-    to: {
-      transform: "rotateY(0deg)",
-    },
+    from: { transform: "rotateY(180deg)" },
+    to: { transform: "rotateY(0deg)" },
   },
   "@keyframes flip-out": {
-    from: {
-      transform: "rotateY(0deg)",
-    },
-    to: {
-      transform: "rotateY(180deg)",
-    },
+    from: { transform: "rotateY(0deg)" },
+    to: { transform: "rotateY(180deg)" },
   },
 };
 

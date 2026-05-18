@@ -67,8 +67,7 @@ export const CollapsibleContent = (
         "overflow-hidden",
         "data-[state=open]:animate-expand",
         "data-[state=closed]:animate-collapse",
-        "motion-reduce:transition-none!",
-        "motion-reduce:animate-none!"
+        "motion-reduce:animate-none! motion-reduce:transition-none!"
       )}
       data-slot="collapsible-content"
       {...rest}

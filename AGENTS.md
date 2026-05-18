@@ -154,7 +154,7 @@ Prefer **`aria-label`** on the interactive element over duplicating meaning with
 - Prefer **`data-slot`** and existing **`in-*` / `peer`** patterns already used in components over inventing new `group/` chains when extending registry styles.
 - Merge classes with **`cn()`** from `@/lib/utils`.
 - Follow **Tailwind v4** setup described in installation / styling docs.
-- **Reduced motion:** on registry components, add **`motion-reduce:transition-none!`** and/or **`motion-reduce:animate-none!`** once at the end of each `cn()` / `tv()` class list (Tailwind important `!`). In `cn()`, pass **`className` first**, then built-in strings, then motion overrides last. Use nested overrides only when needed (e.g. `[a]:motion-reduce:transition-none!`, `[&>span]:motion-reduce:animate-none!`). Prefer `cn(className, variants())` when merging variant helpers with a `className` prop.
+- **Reduced motion:** on registry components, add **`motion-reduce:transition-none!`** and/or **`motion-reduce:animate-none!`** once at the end of each built-in class list in `cn()` / `tv()` — **after** component defaults, **before** the `className` argument (keep `className` last; Tailwind important `!`). Example: `cn("…defaults", "motion-reduce:transition-none!", className)`. For `tv()`, put motion at the end of `base` (e.g. `buttonVariants`). When merging variants with `cn()`, use `cn(variants({ ... }), className)` if motion is already in `tv()`, otherwise `cn(variants({ ... }), "motion-reduce:…!", className)`. Use nested overrides only when needed (e.g. `[a]:motion-reduce:transition-none!`, `[&>span]:motion-reduce:animate-none!`).
 
 Charts (docs previews):
 

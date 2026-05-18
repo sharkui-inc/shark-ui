@@ -23,9 +23,9 @@ export const DrawerProvider = (
           "fixed inset-0 z-50",
           "bg-background",
           "opacity-0",
+          "pointer-events-none",
           "transition-opacity duration-300 ease-in",
           "data-[state=open]:opacity-(--indent-opacity)",
-          "pointer-events-none",
           "motion-reduce:transition-none!"
         )}
         data-slot="drawer-indent-background"
@@ -147,6 +147,7 @@ const drawerContentVariants = tv({
     "translate-y-[calc(-1.25rem*var(--nested-layer-count))]",
     "scale-[calc(1-0.1*var(--nested-layer-count))] opacity-[calc(1-0.1*var(--nested-layer-count))]",
     "data-[nested=drawer]:data-[state=closed]:slide-in-from-bottom-10 data-[nested=drawer]:data-[state=open]:slide-in-from-bottom-10 data-[has-nested=drawer]:origin-top",
+    "motion-reduce:animate-none!",
   ],
   variants: {
     placement: {
@@ -154,13 +155,11 @@ const drawerContentVariants = tv({
         "data-[state=open]:slide-in-from-top data-[state=open]:animate-in",
         "data-[state=closed]:slide-out-to-top data-[state=closed]:animate-out",
         "rounded-b-2xl",
-        "motion-reduce:animate-none!",
       ],
       down: [
         "data-[state=closed]:slide-out-to-bottom data-[state=closed]:animate-out",
         "data-[state=open]:slide-in-from-bottom data-[state=open]:animate-in",
         "rounded-t-2xl",
-        "motion-reduce:animate-none!",
       ],
       left: [
         "data-[state=open]:slide-in-from-left data-[state=open]:animate-in",
@@ -168,7 +167,6 @@ const drawerContentVariants = tv({
         "max-h-none max-w-md",
         "size-full",
         "rounded-e-2xl",
-        "motion-reduce:animate-none!",
       ],
       right: [
         "data-[state=open]:slide-in-from-right data-[state=open]:animate-in",
@@ -176,7 +174,6 @@ const drawerContentVariants = tv({
         "max-h-none max-w-md",
         "size-full",
         "rounded-s-2xl",
-        "motion-reduce:animate-none!",
       ],
     },
     variant: {
