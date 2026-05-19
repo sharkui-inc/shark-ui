@@ -1,11 +1,19 @@
 "use client";
 
-import { XIcon } from "lucide-react";
+import {
+  ArchiveIcon,
+  DownloadIcon,
+  PencilIcon,
+  Trash2Icon,
+  XIcon,
+} from "lucide-react";
 import React from "react";
 import {
   ActionBar,
+  ActionBarBody,
   ActionBarClose,
   ActionBarContent,
+  ActionBarSeparator,
   ActionBarValue,
 } from "@/registry/react/components/action-bar";
 import { Button } from "@/registry/react/components/button";
@@ -22,11 +30,7 @@ const Example = () => {
   };
 
   return (
-    <ActionBar
-      onOpenChange={setIsOpen}
-      open={isOpen}
-      positioning={{ placement }}
-    >
+    <>
       <div className="flex flex-wrap gap-4">
         <Button
           onClick={() => handleOpenChange("bottom-start")}
@@ -44,15 +48,43 @@ const Example = () => {
           Bottom End
         </Button>
       </div>
-      <ActionBarContent className="w-full max-w-xs">
-        <ActionBarClose asChild>
-          <Button size="icon-sm" variant="ghost">
-            <XIcon />
-          </Button>
-        </ActionBarClose>
-        <ActionBarValue count={5} />
-      </ActionBarContent>
-    </ActionBar>
+
+      <ActionBar
+        onOpenChange={setIsOpen}
+        open={isOpen}
+        positioning={{ placement }}
+      >
+        <ActionBarContent aria-label="Bulk actions">
+          <ActionBarValue count={5} />
+          <ActionBarSeparator />
+          <ActionBarBody>
+            <Button variant="ghost">
+              <PencilIcon />
+              <span className="max-sm:sr-only">Edit</span>
+            </Button>
+            <Button variant="ghost">
+              <DownloadIcon />
+              <span className="max-sm:sr-only">Export</span>
+            </Button>
+            <Button variant="ghost">
+              <ArchiveIcon />
+              <span className="max-sm:sr-only">Archive</span>
+            </Button>
+            <ActionBarSeparator />
+            <Button variant="destructive">
+              <Trash2Icon />
+              <span className="max-sm:sr-only">Delete</span>
+            </Button>
+          </ActionBarBody>
+          <ActionBarSeparator />
+          <ActionBarClose asChild>
+            <Button size="icon-md" variant="ghost">
+              <XIcon />
+            </Button>
+          </ActionBarClose>
+        </ActionBarContent>
+      </ActionBar>
+    </>
   );
 };
 

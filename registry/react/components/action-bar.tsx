@@ -6,6 +6,23 @@ import { Presence } from "@ark-ui/react/presence";
 import React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/registry/react/components/badge";
+import { Separator } from "@/registry/react/components/separator";
+
+interface ActionBarPositioning {
+  /**
+   * The gutter from the edge in pixels.
+   *
+   * @default '16px'
+   */
+  gutter?: string;
+  /**
+   * The placement of the action bar.
+   *
+   * @default "bottom"
+   */
+  placement?: "bottom" | "bottom-start" | "bottom-end";
+}
 
 interface ActionBarContextValue {
   /**
@@ -27,20 +44,7 @@ interface ActionBarContextValue {
   /**
    * The positioning of the action bar.
    */
-  positioning: {
-    /**
-     * The gutter from the edge in pixels.
-     *
-     * @default '16px'
-     */
-    gutter?: string;
-    /**
-     * The placement of the action bar.
-     *
-     * @default "bottom"
-     */
-    placement?: "bottom" | "bottom-start" | "bottom-end";
-  };
+  positioning: ActionBarPositioning;
   /**
    * The function to call when the action bar is mounted
    */
@@ -51,6 +55,12 @@ const ActionBarContext = React.createContext({} as ActionBarContextValue);
 
 export interface ActionBarProps
   extends Pick<ActionBarContextValue, "lazyMount" | "unmountOnExit"> {
+  /**
+   * Whether to close the action bar when the Escape key is pressed.
+   *
+   * @default true
+   */
+  closeOnEscape?: boolean;
   /**
    * The default open state of the action bar.
    */
@@ -75,6 +85,7 @@ export const ActionBar = (props: React.PropsWithChildren<ActionBarProps>) => {
   const {
     open,
     defaultOpen = false,
+    closeOnEscape = true,
     positioning,
     lazyMount = true,
     unmountOnExit = true,
@@ -102,6 +113,33 @@ export const ActionBar = (props: React.PropsWithChildren<ActionBarProps>) => {
 
     onOpenChange?.(true);
   }, [isControlled, onOpenChange]);
+
+  React.useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    if (!closeOnEscape) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") {
+        return;
+      }
+
+      if (event.defaultPrevented) {
+        return;
+      }
+
+      event.preventDefault();
+      handleClose();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [closeOnEscape, handleClose, isOpen]);
 
   const context = React.useMemo(
     () => ({
@@ -169,12 +207,7 @@ export interface ActionBarContentProps
   extends React.ComponentProps<typeof ark.div> {}
 
 export const ActionBarContent = (props: ActionBarContentProps) => {
-  const {
-    "aria-label": ariaLabel,
-    "aria-labelledby": ariaLabelledby,
-    className,
-    ...rest
-  } = props;
+  const { "aria-labelledby": ariaLabelledby, className, ...rest } = props;
 
   const { isOpen, lazyMount, unmountOnExit, positioning } = _useActionBar();
 
@@ -196,15 +229,12 @@ export const ActionBarContent = (props: ActionBarContentProps) => {
           style={{ "--gutter": gutter } as React.CSSProperties}
         >
           <ark.div
-            aria-label={
-              ariaLabelledby ? undefined : (ariaLabel ?? "Selection actions")
-            }
             aria-labelledby={ariaLabelledby}
             className={cn(
-              "[--space:--spacing(4)]",
-              "flex w-full max-w-full items-center gap-2",
+              "[--space:--spacing(2)]",
+              "flex w-fit items-center gap-1",
               "rounded-xl border shadow-lg/5",
-              "p-(--space)",
+              "px-[calc(var(--space)+2px)] py-(--space)",
               "bg-popover",
               "text-popover-foreground",
               className
@@ -216,6 +246,22 @@ export const ActionBarContent = (props: ActionBarContentProps) => {
         </ark.div>
       </Presence>
     </Portal>
+  );
+};
+
+export interface ActionBarSeparatorProps
+  extends React.ComponentProps<typeof Separator> {}
+
+export const ActionBarSeparator = (props: ActionBarSeparatorProps) => {
+  const { className, ...rest } = props;
+
+  return (
+    <Separator
+      className={cn("mx-1 h-1/2", className)}
+      data-slot="action-bar-separator"
+      orientation="vertical"
+      {...rest}
+    />
   );
 };
 
@@ -251,7 +297,7 @@ export const ActionBarClose = (props: ActionBarCloseProps) => {
 };
 
 export interface ActionBarValueProps
-  extends React.ComponentProps<typeof ark.span> {
+  extends React.ComponentProps<typeof Badge> {
   /**
    * The number of items selected
    */
@@ -266,15 +312,14 @@ export const ActionBarValue = (props: ActionBarValueProps) => {
   const { label, count = 0, className, children, ...rest } = props;
 
   return (
-    <ark.span
-      className={cn("shrink-0 font-medium text-sm", className)}
-      data-slot="action-bar-count"
+    <Badge
+      className={cn("shrink-0 font-medium text-sm tabular-nums", className)}
+      data-slot="action-bar-value"
+      variant="secondary"
       {...rest}
     >
-      {children ??
-        label ??
-        (count === 1 ? "1 item selected" : `${count} items selected`)}
-    </ark.span>
+      {children ?? label ?? count}
+    </Badge>
   );
 };
 
@@ -283,7 +328,11 @@ export const ActionBarBody = (props: React.ComponentProps<typeof ark.div>) => {
 
   return (
     <ark.div
-      className={cn("ml-auto flex items-center gap-2", className)}
+      className={cn(
+        "flex items-center gap-1",
+        "**:data-[slot=action-bar-separator]:h-2",
+        className
+      )}
       {...rest}
     />
   );

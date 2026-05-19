@@ -1,7 +1,7 @@
 import {
-  EllipsisIcon,
+  ArchiveIcon,
+  DownloadIcon,
   PencilIcon,
-  SendIcon,
   Trash2Icon,
   XIcon,
 } from "lucide-react";
@@ -10,6 +10,7 @@ import {
   ActionBarBody,
   ActionBarClose,
   ActionBarContent,
+  ActionBarSeparator,
   ActionBarTrigger,
   ActionBarValue,
 } from "@/registry/react/components/action-bar";
@@ -20,30 +21,34 @@ const ActionBarDemo = () => (
     <ActionBarTrigger asChild>
       <Button variant="outline">Open</Button>
     </ActionBarTrigger>
-    <ActionBarContent className="w-full max-w-xl">
+    <ActionBarContent aria-label="Bulk actions">
+      <ActionBarValue count={3} />
+      <ActionBarSeparator />
+      <ActionBarBody>
+        <Button variant="ghost">
+          <PencilIcon />
+          <span className="max-sm:sr-only">Edit</span>
+        </Button>
+        <Button variant="ghost">
+          <DownloadIcon />
+          <span className="max-sm:sr-only">Export</span>
+        </Button>
+        <Button variant="ghost">
+          <ArchiveIcon />
+          <span className="max-sm:sr-only">Archive</span>
+        </Button>
+        <ActionBarSeparator />
+        <Button variant="destructive">
+          <Trash2Icon />
+          <span className="max-sm:sr-only">Delete</span>
+        </Button>
+      </ActionBarBody>
+      <ActionBarSeparator />
       <ActionBarClose asChild>
-        <Button size="icon-sm" variant="ghost">
+        <Button size="icon-md" variant="ghost">
           <XIcon />
         </Button>
       </ActionBarClose>
-      <ActionBarValue count={3} />
-      <ActionBarBody>
-        <Button asChild size="sm" variant="secondary">
-          <SendIcon />
-          Send
-        </Button>
-        <Button className="max-sm:hidden" size="sm" variant="secondary">
-          <PencilIcon />
-          Edit
-        </Button>
-        <Button size="sm" variant="secondary">
-          <EllipsisIcon />
-        </Button>
-        <Button className="max-sm:hidden" size="sm" variant="destructive">
-          <Trash2Icon />
-          Delete
-        </Button>
-      </ActionBarBody>
     </ActionBarContent>
   </ActionBar>
 );

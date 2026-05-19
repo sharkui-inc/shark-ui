@@ -7,11 +7,15 @@ import {
   PencilIcon,
   SendIcon,
   Trash2Icon,
+  XIcon,
 } from "lucide-react";
 import React from "react";
 import {
   ActionBar,
+  ActionBarBody,
+  ActionBarClose,
   ActionBarContent,
+  ActionBarSeparator,
   ActionBarValue,
 } from "@/registry/react/components/action-bar";
 import {
@@ -19,6 +23,7 @@ import {
   AlertDialogAction,
   AlertDialogBody,
   AlertDialogCancel,
+  AlertDialogClose,
   AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
@@ -127,21 +132,23 @@ const Example = () => {
           </TableBody>
         </Table>
 
-        <ActionBarContent className="w-full max-w-xl">
+        <ActionBarContent aria-label="Actions for selected orders">
           <ActionBarValue count={selectedIds.length} />
-          <div className="ml-auto flex gap-2">
-            <Button className="max-sm:hidden" size="sm" variant="secondary">
+          <ActionBarSeparator />
+          <ActionBarBody>
+            <Button variant="ghost">
               <SendIcon />
-              Send
+              <span className="max-sm:sr-only">Send</span>
             </Button>
-            <Button className="max-sm:hidden" size="sm" variant="secondary">
+            <Button variant="ghost">
               <PencilIcon />
-              Edit
+              <span className="max-sm:sr-only">Edit</span>
             </Button>
             <Menu positioning={{ placement: "top" }}>
               <MenuTrigger asChild>
-                <Button size="sm" variant="secondary">
+                <Button variant="ghost">
                   <EllipsisIcon />
+                  <span className="max-sm:sr-only">More</span>
                 </Button>
               </MenuTrigger>
               <MenuContent>
@@ -155,15 +162,12 @@ const Example = () => {
                 </MenuItem>
               </MenuContent>
             </Menu>
+            <ActionBarSeparator />
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button
-                  className="max-sm:hidden"
-                  size="sm"
-                  variant="destructive"
-                >
+                <Button variant="destructive">
                   <Trash2Icon />
-                  Delete
+                  <span className="max-sm:sr-only">Delete</span>
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
@@ -190,13 +194,21 @@ const Example = () => {
                 </AlertDialogBody>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction variant="destructive">
-                    Delete
-                  </AlertDialogAction>
+                  <AlertDialogClose asChild>
+                    <AlertDialogAction variant="destructive">
+                      Delete
+                    </AlertDialogAction>
+                  </AlertDialogClose>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
-          </div>
+          </ActionBarBody>
+          <ActionBarSeparator />
+          <ActionBarClose asChild onClick={handleClose}>
+            <Button size="icon-md" variant="ghost">
+              <XIcon />
+            </Button>
+          </ActionBarClose>
         </ActionBarContent>
       </ActionBar>
     </div>

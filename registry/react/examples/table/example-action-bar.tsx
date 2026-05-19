@@ -19,6 +19,7 @@ import {
   AlertDialogAction,
   AlertDialogBody,
   AlertDialogCancel,
+  AlertDialogClose,
   AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
@@ -186,9 +187,11 @@ const Example = () => {
                 </AlertDialogBody>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction variant="destructive">
-                    Delete
-                  </AlertDialogAction>
+                  <AlertDialogClose asChild>
+                    <AlertDialogAction variant="destructive">
+                      Delete
+                    </AlertDialogAction>
+                  </AlertDialogClose>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>

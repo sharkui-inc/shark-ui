@@ -4,6 +4,7 @@ import {
   ActionBarBody,
   ActionBarClose,
   ActionBarContent,
+  ActionBarSeparator,
   ActionBarTrigger,
   ActionBarValue,
 } from "@/registry/react/components/action-bar";
@@ -11,6 +12,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
+  AlertDialogClose,
   AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
@@ -23,19 +25,15 @@ const Example = () => (
     <ActionBarTrigger asChild>
       <Button variant="outline">Open</Button>
     </ActionBarTrigger>
-    <ActionBarContent className="w-full max-w-xl">
-      <ActionBarClose asChild>
-        <Button size="icon-sm" variant="ghost">
-          <XIcon />
-        </Button>
-      </ActionBarClose>
+    <ActionBarContent aria-label="Order bulk actions">
       <ActionBarValue count={3} />
+      <ActionBarSeparator />
       <ActionBarBody>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button size="sm" variant="destructive">
+            <Button variant="destructive">
               <Trash2Icon />
-              Delete
+              <span className="max-sm:sr-only">Delete</span>
             </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
@@ -43,16 +41,23 @@ const Example = () => (
               description="This action cannot be undone."
               title="Delete selected orders?"
             />
-
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction variant="destructive">
-                Delete
-              </AlertDialogAction>
+              <AlertDialogClose asChild>
+                <AlertDialogAction variant="destructive">
+                  Delete
+                </AlertDialogAction>
+              </AlertDialogClose>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
       </ActionBarBody>
+      <ActionBarSeparator />
+      <ActionBarClose asChild>
+        <Button size="icon-md" variant="ghost">
+          <XIcon />
+        </Button>
+      </ActionBarClose>
     </ActionBarContent>
   </ActionBar>
 );

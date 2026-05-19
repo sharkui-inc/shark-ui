@@ -10,6 +10,7 @@ import {
   ActionBarBody,
   ActionBarClose,
   ActionBarContent,
+  ActionBarSeparator,
   ActionBarTrigger,
   ActionBarValue,
 } from "@/registry/react/components/action-bar";
@@ -26,18 +27,15 @@ const Example = () => (
     <ActionBarTrigger asChild>
       <Button variant="outline">Open</Button>
     </ActionBarTrigger>
-    <ActionBarContent className="w-full max-w-xl">
-      <ActionBarClose asChild>
-        <Button size="icon-sm" variant="ghost">
-          <XIcon />
-        </Button>
-      </ActionBarClose>
+    <ActionBarContent aria-label="Bulk actions">
       <ActionBarValue count={3} />
+      <ActionBarSeparator />
       <ActionBarBody>
         <Menu positioning={{ placement: "top" }}>
           <MenuTrigger asChild>
-            <Button size="sm" variant="secondary">
+            <Button variant="ghost">
               <EllipsisIcon />
+              <span className="max-sm:sr-only">More</span>
             </Button>
           </MenuTrigger>
           <MenuContent>
@@ -56,6 +54,12 @@ const Example = () => (
           </MenuContent>
         </Menu>
       </ActionBarBody>
+      <ActionBarSeparator />
+      <ActionBarClose asChild>
+        <Button size="icon-md" variant="ghost">
+          <XIcon />
+        </Button>
+      </ActionBarClose>
     </ActionBarContent>
   </ActionBar>
 );

@@ -7,6 +7,7 @@ import {
   ActionBarBody,
   ActionBarClose,
   ActionBarContent,
+  ActionBarSeparator,
   ActionBarTrigger,
   ActionBarValue,
 } from "@/registry/react/components/action-bar";
@@ -20,23 +21,29 @@ const Example = () => {
       <ActionBarTrigger asChild>
         <Button variant="outline">Open</Button>
       </ActionBarTrigger>
-      <ActionBarContent className="w-full max-w-md [--space:--spacing(2)]">
+      <ActionBarContent
+        aria-label="Bulk actions"
+        className="[--space:--spacing(2)]"
+      >
+        <ActionBarValue count={2} />
+        <ActionBarSeparator />
+        <ActionBarBody>
+          <Button variant="ghost">
+            <PencilIcon />
+            <span className="max-sm:sr-only">Edit</span>
+          </Button>
+          <ActionBarSeparator />
+          <Button variant="destructive">
+            <Trash2Icon />
+            <span className="max-sm:sr-only">Delete</span>
+          </Button>
+        </ActionBarBody>
+        <ActionBarSeparator />
         <ActionBarClose asChild>
-          <Button size="icon-sm" variant="ghost">
+          <Button size="icon-md" variant="ghost">
             <XIcon />
           </Button>
         </ActionBarClose>
-        <ActionBarValue count={2} />
-        <ActionBarBody>
-          <Button size="sm" variant="secondary">
-            <PencilIcon />
-            Edit
-          </Button>
-          <Button className="max-sm:hidden" size="sm" variant="destructive">
-            <Trash2Icon />
-            Delete
-          </Button>
-        </ActionBarBody>
       </ActionBarContent>
     </ActionBar>
   );

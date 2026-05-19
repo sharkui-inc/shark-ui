@@ -7,7 +7,10 @@ const manifest: RegistryItemType = {
   name: "action-bar",
   type: "registry:ui",
   dependencies,
-  registryDependencies: [absoluteUrl("/r/button.json")],
+  registryDependencies: [
+    absoluteUrl("/r/badge.json"),
+    absoluteUrl("/r/separator.json"),
+  ],
 };
 
 export default manifest;
