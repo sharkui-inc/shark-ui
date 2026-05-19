@@ -162,7 +162,9 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                   <span className="text-base">{neighbours.previous.name}</span>
                 </div>
               </Link>
-            ) : null}
+            ) : (
+              <div />
+            )}
 
             {neighbours.next ? (
               <Link
