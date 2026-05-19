@@ -17,8 +17,8 @@ export const CopyButton = (props: React.ComponentProps<typeof Clipboard>) => {
   return (
     <Tooltip openDelay={400}>
       <Clipboard rootClassName={cn("z-10", className)} {...rest}>
-        <ClipboardTrigger asChild>
-          <TooltipTrigger asChild>
+        <TooltipTrigger asChild>
+          <ClipboardTrigger asChild>
             <Button
               className="opacity-64 hover:opacity-100 focus-visible:opacity-100"
               size="icon-sm"
@@ -27,8 +27,8 @@ export const CopyButton = (props: React.ComponentProps<typeof Clipboard>) => {
               <ClipboardIndicator />
               {children}
             </Button>
-          </TooltipTrigger>
-        </ClipboardTrigger>
+          </ClipboardTrigger>
+        </TooltipTrigger>
         <TooltipContent>Copy to clipboard</TooltipContent>
       </Clipboard>
     </Tooltip>

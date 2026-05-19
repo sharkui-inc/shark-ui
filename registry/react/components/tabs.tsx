@@ -104,7 +104,7 @@ export const TabsTrigger = (
         "h-9 sm:h-8",
         "flex shrink-0 grow items-center justify-center gap-1.5",
         "px-[calc(--spacing(2.5)-1px)]",
-        "whitespace-nowrap font-medium text-base sm:text-sm",
+        "whitespace-nowrap font-medium text-sm",
         "rounded-lg border border-transparent",
         "cursor-pointer",
         "transition-[color,background-color,box-shadow]",

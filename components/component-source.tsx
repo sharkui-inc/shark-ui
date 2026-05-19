@@ -5,7 +5,6 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import type React from "react";
 import { REGISTRY_PATH } from "@/config/constants";
-import { cn } from "@/lib/utils";
 import { replaceContentForCopy } from "@/utils/formatter";
 import { CodeBlock } from "./code-block";
 import { CodeCollapsibleWrapper } from "./code-collapsible-wrapper";
@@ -39,7 +38,7 @@ export const ComponentSource = (props: ComponentSourceProps) => {
     code,
     title,
     isCollapsible = true,
-    className,
+    ...rest
   } = props;
 
   let codeContent: string | undefined;
@@ -63,18 +62,11 @@ export const ComponentSource = (props: ComponentSourceProps) => {
 
   if (isCollapsible) {
     return (
-      <CodeCollapsibleWrapper className={className}>
-        <CodeBlock code={replacedCode} lang={lang} title={title} />
+      <CodeCollapsibleWrapper>
+        <CodeBlock code={replacedCode} lang={lang} title={title} {...rest} />
       </CodeCollapsibleWrapper>
     );
   }
 
-  return (
-    <CodeBlock
-      className={cn("relative", className)}
-      code={replacedCode}
-      lang={lang}
-      title={title}
-    />
-  );
+  return <CodeBlock code={replacedCode} lang={lang} title={title} {...rest} />;
 };

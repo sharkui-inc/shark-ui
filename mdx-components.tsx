@@ -274,8 +274,7 @@ export const mdxComponents = {
   ),
   pre: ({
     className,
-    children,
-    tabIndex,
+    tabIndex: _tabIndex,
     id: _id,
     ...props
   }: React.ComponentProps<"pre">) => (
@@ -286,9 +285,7 @@ export const mdxComponents = {
           className
         )}
         {...props}
-      >
-        {children}
-      </pre>
+      />
     </ScrollArea>
   ),
   Steps: ({ ...props }) => (
