@@ -1,3 +1,4 @@
+import { buttonVariants } from "@registry/react/components/button";
 import { findNeighbour } from "fumadocs-core/page-tree";
 import {
   ArrowUpRightIcon,
@@ -14,7 +15,6 @@ import { createMetadata, createOgImageUrl } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import { mdxComponents } from "@/mdx-components";
 import { Badge } from "@/registry/react/components/badge";
-import { Button } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { SkipNavContent } from "@/registry/react/components/skip-nav";
 
@@ -77,7 +77,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
   return (
     <div className="size-full">
       <div className="flex items-stretch xl:w-full" data-slot="docs">
-        <div className="relative flex w-full min-w-0 flex-1 flex-col lg:me-4 lg:mt-8 lg:mb-8">
+        <div className="relative flex w-full min-w-0 flex-1 flex-col lg:me-4 lg:mt-8">
           <div className="relative flex w-full flex-col border bg-white text-card-foreground shadow-lg/5 max-lg:border-none lg:rounded-2xl dark:bg-card">
             <div className="flex-1 px-4 py-6 sm:px-6 lg:p-8">
               <div
@@ -95,57 +95,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                         {page.data.title}
                       </h1>
                       {!isIndexPage && (
-                        <div className="flex items-center gap-2">
-                          <DocsCopyPage data={rawContent} url={page.url} />
-
-                          <div className="flex items-center gap-2">
-                            {neighbours.previous ? (
-                              <Button
-                                aria-label="Previous"
-                                asChild
-                                size="icon-sm"
-                                variant="outline"
-                              >
-                                <Link href={neighbours.previous.url}>
-                                  <ChevronLeftIcon
-                                    aria-hidden
-                                    className="rtl:rotate-180"
-                                  />
-                                </Link>
-                              </Button>
-                            ) : (
-                              <Button disabled size="icon-sm" variant="outline">
-                                <ChevronLeftIcon
-                                  aria-hidden
-                                  className="rtl:rotate-180"
-                                />
-                              </Button>
-                            )}
-
-                            {neighbours.next ? (
-                              <Button
-                                aria-label="Next"
-                                asChild
-                                size="icon-sm"
-                                variant="outline"
-                              >
-                                <Link href={neighbours.next.url}>
-                                  <ChevronRightIcon
-                                    aria-hidden
-                                    className="rtl:rotate-180"
-                                  />
-                                </Link>
-                              </Button>
-                            ) : (
-                              <Button disabled size="icon-sm" variant="outline">
-                                <ChevronRightIcon
-                                  aria-hidden
-                                  className="rtl:rotate-180"
-                                />
-                              </Button>
-                            )}
-                          </div>
-                        </div>
+                        <DocsCopyPage data={rawContent} url={page.url} />
                       )}
                     </div>
 
@@ -164,7 +114,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                               rel="noreferrer"
                               target="_blank"
                             >
-                              Docs <ArrowUpRightIcon aria-hidden />
+                              Docs <ArrowUpRightIcon />
                             </a>
                           </Badge>
                         )}
@@ -176,7 +126,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                               rel="noreferrer"
                               target="_blank"
                             >
-                              API <ArrowUpRightIcon aria-hidden />
+                              API <ArrowUpRightIcon />
                             </a>
                           </Badge>
                         )}
@@ -190,6 +140,51 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="grid w-full min-w-0 grid-cols-1 gap-4 pt-4 pb-8 max-lg:container max-lg:bg-white sm:grid-cols-2 max-lg:dark:bg-card">
+            {neighbours.previous ? (
+              <Link
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "h-auto w-full min-w-0",
+                  "p-4",
+                  "flex flex-col items-start",
+                  "bg-white dark:bg-card",
+                  "lg:rounded-2xl"
+                )}
+                href={neighbours.previous.url}
+              >
+                <p className="text-muted-foreground text-xs uppercase tracking-wide">
+                  Previous page
+                </p>
+                <div className="flex items-center gap-2">
+                  <ChevronLeftIcon className="rtl:rotate-180" />
+                  <span className="text-base">{neighbours.previous.name}</span>
+                </div>
+              </Link>
+            ) : null}
+
+            {neighbours.next ? (
+              <Link
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "h-auto w-full min-w-0",
+                  "p-4",
+                  "flex flex-col items-end",
+                  "bg-white dark:bg-card",
+                  "lg:rounded-2xl"
+                )}
+                href={neighbours.next.url}
+              >
+                <p className="text-muted-foreground text-xs uppercase tracking-wide">
+                  Next page
+                </p>
+                <div className="flex items-center gap-2">
+                  <span className="text-base">{neighbours.next.name}</span>
+                  <ChevronRightIcon className="rtl:rotate-180" />
+                </div>
+              </Link>
+            ) : null}
           </div>
         </div>
 

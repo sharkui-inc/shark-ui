@@ -89,7 +89,7 @@ export const buttonVariants = tv({
       "icon-xl": "size-10 [&_svg:not([class*='size-'])]:size-5",
     },
     clickEffect: {
-      true: "active:scale-[0.98]",
+      true: "active:not-aria-[haspopup]:scale-[0.98]",
     },
     pill: {
       true: [
