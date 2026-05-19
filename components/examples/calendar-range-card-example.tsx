@@ -13,7 +13,11 @@ import { Card, CardContent } from "@/registry/react/components/card";
 export const CalendarRangeCardExample = (
   props: React.ComponentProps<"div">
 ) => (
-  <Card {...props}>
+  <Card
+    className="[--space:--spacing(2)]"
+    data-slot="example-calendar-range-card"
+    {...props}
+  >
     <CardContent>
       <Calendar selectionMode="range">
         <CalendarViewControl>

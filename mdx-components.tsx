@@ -158,6 +158,7 @@ export const mdxComponents = {
           "underline underline-offset-4",
           "hover:underline",
           "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          "**:[code]:decoration-primary",
           className
         )}
         href={href ?? "#"}

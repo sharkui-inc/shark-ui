@@ -60,7 +60,7 @@ export const SelectTrigger = (props: SelectTriggerProps) => {
           "flex items-center gap-2",
           "text-sm",
           "data-placeholder-shown:text-muted-foreground/64",
-          "data-[state=open]:border-ring data-[state=open]:ring-[3px] data-[state=open]:ring-ring/32",
+          "data-[state=open]:border-primary data-[state=open]:ring-[3px] data-[state=open]:ring-ring/32",
           "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
           className
         )}
