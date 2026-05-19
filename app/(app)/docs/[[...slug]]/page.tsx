@@ -145,7 +145,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
             {neighbours.previous ? (
               <Link
                 className={cn(
-                  buttonVariants({ variant: "outline" }),
+                  buttonVariants({ variant: "outline", clickEffect: false }),
                   "h-auto w-full min-w-0",
                   "p-4",
                   "flex flex-col items-start",
@@ -169,7 +169,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
             {neighbours.next ? (
               <Link
                 className={cn(
-                  buttonVariants({ variant: "outline" }),
+                  buttonVariants({ variant: "outline", clickEffect: false }),
                   "h-auto w-full min-w-0",
                   "p-4",
                   "flex flex-col items-end",

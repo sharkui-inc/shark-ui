@@ -46,7 +46,7 @@ Use preview mode when the user asks what will change, a component may already ex
 
 | Resource | Path |
 |----------|------|
-| Registry manifest | `registry.json` |
+| Published registry JSON | `public/r/<name>.json` |
 | Component source | `registry/react/components/<name>.tsx` |
 | Docs | `content/docs/components/<name>.mdx` |
 | Examples | `registry/react/examples/<name>/example-*.tsx` |
@@ -70,4 +70,4 @@ When the user wants full manual control:
 
 1. Command uses a documented install target (`@shark/<name>` or published `r/<name>.json` URL).
 2. Flags are real shadcn CLI flags.
-3. Fallback paths point to MDX + `registry.json` when CLI search is unavailable.
+3. Fallback paths point to MDX + `public/r/<name>.json` when CLI search is unavailable.

@@ -3,11 +3,11 @@
   "pages": [
     "index",
     "[Installation](/docs/installation)",
-    "rtl",
-    "skills",
-    "[Forms](/docs/forms)",
-    "colors",
     "styling",
+    "colors",
+    "[Forms](/docs/forms)",
+    "skills",
+    "rtl",
     "llms-txt",
     "[Changelog](/docs/changelog)"
   ]

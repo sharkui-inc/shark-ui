@@ -64,7 +64,6 @@ export const getAllRegistryItems = async (args: GetRegistryItemArgs) => {
   const { framework = "react", folderType } = args;
 
   const registryPath = join(
-    /* turbopackIgnore: true */
     cwd(),
     "registry",
     framework,
@@ -94,7 +93,6 @@ export const getRegistryItem = async (args: GetRegistryItemArgs) => {
   const { framework = "react", folderType } = args;
 
   const registryPath = join(
-    /* turbopackIgnore: true */
     cwd(),
     "registry",
     framework,

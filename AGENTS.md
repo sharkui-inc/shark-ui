@@ -13,7 +13,7 @@ Use it when adding or editing primitives, registry examples, docs MDX, or when a
 | Public API, anatomy, install | `content/docs/components/<name>.mdx`, `content/docs/utilities/<name>.mdx` |
 | Working compositions | `registry/react/examples/<name>/example-*.tsx` |
 | Implementation & Ark wiring | `registry/react/components/<name>.tsx` |
-| Published registry index | `registry.json` |
+| Published registry JSON (CLI) | `public/r/<name>.json` (from `pnpm registry:build`) |
 | Per-item build metadata | `registry/manifest/<name>.ts` |
 | LLM-oriented surfaces | `app/(llms)/`, `lib/llms.ts`, `lib/llms-registry-examples.ts` |
 | Deeper agent rules | `skills/shark-ui/SKILL.md` and `skills/shark-ui/references/` |
