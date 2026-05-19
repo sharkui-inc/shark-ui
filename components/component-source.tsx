@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 import { replaceContentForCopy } from "@/utils/formatter";
 import { CodeBlock } from "./code-block";
 import { CodeCollapsibleWrapper } from "./code-collapsible-wrapper";
-import { CopyButton } from "./copy-button";
 
 export interface ComponentSourceProps
   extends React.ComponentProps<typeof CodeBlock> {
@@ -50,17 +49,8 @@ export const ComponentSource = (props: ComponentSourceProps) => {
   }
 
   if (src) {
-    const sourcePath = join(
-      /* turbopackIgnore: true */
-      process.cwd(),
-      REGISTRY_PATH,
-      src
-    );
-    codeContent = readFileSync(
-      /* turbopackIgnore: true */
-      sourcePath,
-      "utf-8"
-    );
+    const sourcePath = join(process.cwd(), REGISTRY_PATH, src);
+    codeContent = readFileSync(sourcePath, "utf-8");
   }
 
   if (!codeContent) {
@@ -73,32 +63,18 @@ export const ComponentSource = (props: ComponentSourceProps) => {
 
   if (isCollapsible) {
     return (
-      <div className="relative">
-        <CodeCollapsibleWrapper className={className}>
-          <CodeBlock
-            code={replacedCode}
-            // Copy button is not working when the collapsible is closed
-            copyButton={false}
-            lang={lang}
-            title={title}
-          />
-        </CodeCollapsibleWrapper>
-
-        {/* 
-          Copy button here because of inert issue
-          https://ark-ui.com/docs/components/collapsible#partial-collapse
-        */}
-        <CopyButton
-          className="absolute inset-e-1.5 top-2"
-          value={replacedCode}
-        />
-      </div>
+      <CodeCollapsibleWrapper className={className}>
+        <CodeBlock code={replacedCode} lang={lang} title={title} />
+      </CodeCollapsibleWrapper>
     );
   }
 
   return (
-    <div className={cn("relative", className)}>
-      <CodeBlock code={replacedCode} lang={lang} title={title} />
-    </div>
+    <CodeBlock
+      className={cn("relative", className)}
+      code={replacedCode}
+      lang={lang}
+      title={title}
+    />
   );
 };

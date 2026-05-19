@@ -82,8 +82,8 @@ export const HeaderCustomize = () => {
       <Tooltip>
         <TooltipTrigger asChild>
           <SheetTrigger asChild>
-            <Button size="icon-md" variant="ghost">
-              <WandSparklesIcon aria-hidden />
+            <Button aria-label="Customize" size="icon-md" variant="ghost">
+              <WandSparklesIcon />
             </Button>
           </SheetTrigger>
         </TooltipTrigger>

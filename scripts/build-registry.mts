@@ -112,18 +112,6 @@ const writeArtifact = async (metadata: unknown, itemName: string) => {
   console.log(`✅ Generated ${itemName}.json`);
 };
 
-const formatRegistryJson = async () => {
-  const path = join(CWD, "registry.json");
-
-  try {
-    const parsed = JSON.parse(await readFile(path, "utf-8"));
-    await writeFile(path, JSON.stringify(parsed, null, 2));
-    console.log("✅ Updated registry.json");
-  } catch {
-    console.warn("⚠️ registry.json could not be formatted (continuing).");
-  }
-};
-
 /** Pick the best source file per item, honoring SOURCE_EXTS priority. */
 const pickSourceFiles = (files: string[]) => {
   const chosen = new Map<string, SourceExt>();
@@ -199,7 +187,6 @@ const main = async () => {
   }
 
   await processStandaloneManifests(["ui", "style", "hitbox"]);
-  await formatRegistryJson();
 };
 
 main().catch((err) => {

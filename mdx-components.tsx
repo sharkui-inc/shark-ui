@@ -152,7 +152,7 @@ export const mdxComponents = {
     return (
       <Link
         className={cn(
-          "inline-flex items-center gap-1",
+          "inline-flex items-center gap-0.5",
           "font-medium text-foreground",
           "rounded-md border border-transparent",
           "underline underline-offset-4",

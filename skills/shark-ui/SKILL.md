@@ -31,14 +31,14 @@ Use this skill to:
 - Component docs: `content/docs/components/*.mdx`
 - Registry examples: `registry/react/examples/<component>/example-*.tsx`
 - Implementations: `registry/react/components/<component>.tsx`
-- Registry manifest: `registry.json` (authoritative list of published registry items)
+- Published registry items: `public/r/<name>.json` (built from `registry/manifest/<name>.ts`)
 - LLM-oriented routes: `app/(llms)/` and `lib/llms.ts`
 - Repository conventions: `AGENTS.md`
 
 ## Out of scope
 
 - Next.js app routing, marketing pages, and non-registry app code unless the user explicitly asks.
-- Editing `registry.json` generated payloads unless explicitly requested.
+- Hand-editing generated `public/r/*.json` unless explicitly requested.
 
 ## Critical rules
 

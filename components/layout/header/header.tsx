@@ -48,6 +48,8 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
               />
             </div>
 
+            <Separator className="ml-2 h-4" orientation="vertical" />
+
             <Button
               aria-label="Visit GitHub"
               asChild
@@ -63,15 +65,15 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
               </a>
             </Button>
 
-            <Separator orientation="vertical" />
+            <Separator className="h-4" orientation="vertical" />
 
             <HeaderCustomize />
 
-            <Separator orientation="vertical" />
+            <Separator className="h-4" orientation="vertical" />
 
             <ModeSwitcher />
 
-            <Separator className="lg:hidden" orientation="vertical" />
+            <Separator className="h-4 lg:hidden" orientation="vertical" />
 
             <MobileNav
               className="flex lg:hidden"

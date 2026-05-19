@@ -57,17 +57,12 @@ export const ComponentPreview = async (props: ComponentPreviewProps) => {
   }
 
   const examplePath = join(
-    /* turbopackIgnore: true */
     process.cwd(),
     registryPath,
     componentName,
     `${fileName}.tsx`
   );
-  const sourceCode = readFileSync(
-    /* turbopackIgnore: true */
-    examplePath,
-    "utf-8"
-  );
+  const sourceCode = readFileSync(examplePath, "utf-8");
 
   return (
     <ComponentPreviewTabs
