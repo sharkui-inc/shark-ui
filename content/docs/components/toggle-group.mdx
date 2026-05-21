@@ -72,6 +72,26 @@ import {
 </ToggleGroup>
 ```
 
+## Controlled
+
+Use the `value` and `onValueChange` props to control the toggle group state programmatically.
+
+<ComponentPreview componentName="toggle-group" fileName="example-controlled" />
+
+## States
+
+### Disabled
+
+Disable the entire group with the `disabled` prop.
+
+<ComponentPreview componentName="toggle-group" fileName="example-disabled" />
+
+### With disabled toggle
+
+Disable individual toggles by setting `disabled` on a specific item.
+
+<ComponentPreview componentName="toggle-group" fileName="example-disabled-item" />
+
 ## Orientation
 
 Use `orientation` to change the orientation of the toggle group.
@@ -96,20 +116,6 @@ Use `variant` to change the visual style of the toggle buttons.
 
 <ComponentPreview componentName="toggle-group" fileName="example-outline" />
 
-## States
-
-### Disabled
-
-Disable the entire group with the `disabled` prop.
-
-<ComponentPreview componentName="toggle-group" fileName="example-disabled" />
-
-### With disabled toggle
-
-Disable individual toggles by setting `disabled` on a specific item.
-
-<ComponentPreview componentName="toggle-group" fileName="example-disabled-item" />
-
 ## Examples
 
 ### With spacing
@@ -126,7 +132,7 @@ Use `multiple={false}` to allow only one toggle to be selected at a time.
 
 ### Custom toggle group
 
-A custom toggle group example with tooltips and custom styling for font weight selection.
+A custom toggle group example with a custom styling for font weight selection.
 
 <ComponentPreview componentName="toggle-group" fileName="example-custom" />
 

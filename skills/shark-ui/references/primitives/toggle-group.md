@@ -58,7 +58,7 @@ Controlled toggle group:
 ```tsx
 const [value, setValue] = useState(["bold"])
 
-<ToggleGroup value={value} onValueChange={setValue}>
+<ToggleGroup value={value} onValueChange={({ value }) => setValue(value)}>
   <ToggleGroupItem value="bold">Bold</ToggleGroupItem>
   ...
 </ToggleGroup>
@@ -73,6 +73,7 @@ const [value, setValue] = useState(["bold"])
 
 ## Registry example files
 
+- [`example-controlled.tsx`](/registry/react/examples/toggle-group/example-controlled.tsx)
 - [`example-custom.tsx`](/registry/react/examples/toggle-group/example-custom.tsx)
 - [`example-default.tsx`](/registry/react/examples/toggle-group/example-default.tsx)
 - [`example-disabled-item.tsx`](/registry/react/examples/toggle-group/example-disabled-item.tsx)
