@@ -57,6 +57,26 @@ import { Input } from "@/components/ui/input";
 <Input />
 ```
 
+## Controlled
+
+Control the value with `value` and `onChange`.
+
+<ComponentPreview componentName="input" fileName="example-controlled" />
+
+## States
+
+### Disabled
+
+Use the `disabled` prop to disable the input.
+
+<ComponentPreview componentName="input" fileName="example-disabled" />
+
+### Invalid
+
+Use the `invalid` prop to mark the input as invalid.
+
+<ComponentPreview componentName="input" fileName="example-invalid" />
+
 ## Sizes
 
 Use the `size` prop to change the input height.
@@ -73,25 +93,11 @@ Use the `size` prop to change the input height.
 
 <ComponentPreview componentName="input" fileName="example-size-lg" />
 
-## States
-
-### Disabled
-
-Use the `disabled` prop to disable the input.
-
-<ComponentPreview componentName="input" fileName="example-disabled" />
-
-### Invalid
-
-Use the `invalid` prop to mark the input as invalid.
-
-<ComponentPreview componentName="input" fileName="example-invalid" />
-
 ## Examples
 
-### Field
+### With Field
 
-Use `Field`, `FieldLabel` and `FieldDescription` to create an input with a label and a description.
+Use [Field](/docs/components/field) components to create an input with a label and a description.
 
 <ComponentPreview componentName="input" fileName="example-field" />
 
@@ -111,7 +117,7 @@ Use the `type="file"` prop to create a file input.
 <InfoIcon />
 <AlertTitle>Dedicated File Upload component</AlertTitle>
 <AlertDescription>
-  For more advanced file upload functionality, use the `FileUpload` component instead.
+  For more advanced file upload functionality, use the [FileUpload](/docs/components/file-upload) component instead.
 </AlertDescription>
 </Alert>
 
@@ -124,14 +130,6 @@ Use the `orientation="horizontal"` prop to create an inline input.
 ### Grid
 
 <ComponentPreview componentName="input" fileName="example-grid" />
-
-### Required
-
-Use the `required` prop to mark the input as required.
-
-Use `FieldRequiredIndicator` to add a required indicator to the label.
-
-<ComponentPreview componentName="input" fileName="example-required" />
 
 ### Badge
 

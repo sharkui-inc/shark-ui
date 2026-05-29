@@ -1,10 +1,9 @@
-# minimumReleaseAge: 10080
 allowBuilds:
   esbuild: true
   sharp: true
 minimumReleaseAgeExclude:
-  - '@teispace/next-themes@0.5.0'
-  - '@types/node@25.9.0'
-  - date-fns@4.2.1
-  - lru-cache@11.4.0
-  - tsx@4.22.2
+  - '@tanstack/form-core@1.33.0'
+  - '@tanstack/react-form@1.33.0'
+  - fumadocs-core@16.9.2
+  - fumadocs-ui@16.9.2
+  - lucide-react@1.17.0

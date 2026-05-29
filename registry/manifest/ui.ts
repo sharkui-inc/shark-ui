@@ -70,6 +70,7 @@ const SHARK_UI_BUNDLE = [
   "native-select",
   "number-input",
   "pagination",
+  "password-input",
   "popover",
   "presence",
   "progress",

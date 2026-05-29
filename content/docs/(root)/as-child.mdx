@@ -3,11 +3,11 @@ title: The asChild prop
 description: Render a different element as the component while inheriting its styles and behavior.
 ---
 
-The `asChild` prop lets you swap the default element for your own—a link, a custom button, whatever—while keeping the component’s styles, props, and behavior. You get composition without extra wrapper divs or duplicated markup. That’s useful when you need semantic HTML (like an anchor for navigation) but want it to look and act like a Button or Badge.
+The `asChild` prop lets you swap the default element for your own, like a link or a custom button, while keeping the component’s styles, props, and behavior. You get composition without extra wrapper divs or duplicated markup. That’s useful when you need semantic HTML (like an anchor for navigation) but want it to look and act like a Button or Badge.
 
 ## Creating new Components
 
-When you build custom components with the [Ark factory](https://ark-ui.com/docs/guides/composition#the-ark-factory), they automatically support `asChild` because Ark’s factory handles the prop under the hood. You don’t have to do anything special—just pass through props and the child merges in:
+When you build custom components with the [Ark factory](https://ark-ui.com/docs/guides/composition#the-ark-factory), they automatically support `asChild` because Ark’s factory handles the prop under the hood. You don’t have to do anything special. Just pass through props and the child merges in:
 
 ```tsx
 import { ark } from '@ark-ui/react/factory'
@@ -32,7 +32,7 @@ import Link from "next/link";
 
 ### Link
 
-Need a login link that looks like a button? Use `asChild` so the `Link` becomes the rendered element—no extra div, and it keeps proper semantics for SEO and screen readers.
+Need a login link that looks like a button? Use `asChild` so the `Link` becomes the rendered element, with no extra div, and it keeps proper semantics for SEO and screen readers.
 
 ```tsx showLineNumbers
 <Button asChild>
@@ -42,7 +42,7 @@ Need a login link that looks like a button? Use `asChild` so the `Link` becomes 
 
 ### Badge
 
-Sometimes a badge is clickable—a tag that goes somewhere, or a category filter. Wrap a `Link` with `Badge` and `asChild`, and the link gets the badge styling while staying a real anchor.
+Sometimes a badge is clickable, like a tag that goes somewhere or a category filter. Wrap a `Link` with `Badge` and `asChild`, and the link gets the badge styling while staying a real anchor.
 
 ```tsx showLineNumbers
 <Badge asChild>
@@ -78,7 +78,7 @@ Same pattern for menus. The `Button` merges into `MenuTrigger`, so you get a sin
 
 ### Popover
 
-Popovers work the same way. Use `asChild` on `PopoverTrigger` and pass your `Button`—no wrapper needed.
+Popovers work the same way. Use `asChild` on `PopoverTrigger` and pass your `Button`, with no wrapper needed.
 
 ```tsx showLineNumbers
 <Popover>
@@ -88,6 +88,74 @@ Popovers work the same way. Use `asChild` on `PopoverTrigger` and pass your `But
   {/* ... */}
 </Popover>
 ```
+
+### Tooltip
+
+`TooltipTrigger` can render your `Button` directly, so hover and focus behavior stays correct without an extra wrapper.
+
+```tsx showLineNumbers
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="outline">Hover me</Button>
+  </TooltipTrigger>
+  <TooltipContent>More info</TooltipContent>
+</Tooltip>
+```
+
+### Hover Card
+
+Use `HoverCardTrigger asChild` when the trigger should be a link.
+
+```tsx showLineNumbers
+<HoverCard>
+  <HoverCardTrigger asChild>
+    <Link href="/users/vini">@vini</Link>
+  </HoverCardTrigger>
+  <HoverCardContent>Profile preview</HoverCardContent>
+</HoverCard>
+```
+
+### Alert Dialog
+
+`AlertDialogTrigger` and `AlertDialogClose` both support `asChild`, so your buttons remain the real interactive elements.
+
+```tsx showLineNumbers
+<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button variant="destructive">Delete</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    {/* ... */}
+    <AlertDialogClose asChild>
+      <Button variant="outline">Cancel</Button>
+    </AlertDialogClose>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+### Date Picker
+
+`DatePickerTrigger` works well with `Button` via `asChild`, which is useful for calendar popovers.
+
+```tsx showLineNumbers
+<DatePicker>
+  <DatePickerTrigger asChild>
+    <Button variant="outline">Pick a date</Button>
+  </DatePickerTrigger>
+  <DatePickerContent />
+</DatePicker>
+```
+
+## Limitations
+
+`asChild` is powerful, but there are a few constraints to keep in mind:
+
+- It expects a single direct child element. Passing multiple siblings or fragments can break composition.
+- The child must accept forwarded props and refs. If your custom component does not spread props or forward refs, behavior like focus, keyboard handlers, and ARIA attributes may fail.
+- It does not fix invalid semantics. For example, rendering a non-interactive element where a trigger is expected can hurt accessibility.
+- Event handlers and attributes are merged, so conflicting props on the child can override component behavior if used carelessly.
+
+Use `asChild` when semantics and composition need it, but prefer the default element when you do not need to swap the rendered tag.
 
 ## When to use it
 

@@ -12,7 +12,7 @@ const Example = () => (
     <PopoverTrigger asChild>
       <Button variant="outline">Open</Button>
     </PopoverTrigger>
-    <PopoverContent className="w-64">
+    <PopoverContent className="w-full max-w-64">
       <PopoverHeader
         description="Check your notifications."
         title="Notifications"

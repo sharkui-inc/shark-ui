@@ -21,7 +21,7 @@ const Example = () => {
 
   return (
     <Combobox
-      className="w-64"
+      className="w-full max-w-64"
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >

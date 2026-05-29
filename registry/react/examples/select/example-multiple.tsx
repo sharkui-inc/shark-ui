@@ -16,7 +16,7 @@ const Example = () => (
     defaultValue={["javascript", "typescript"]}
     multiple
   >
-    <SelectTrigger className="w-64">
+    <SelectTrigger className="w-full max-w-64">
       <SelectValue className="capitalize">
         <SelectContext>{({ value }) => renderValue(value)}</SelectContext>
       </SelectValue>

@@ -7,7 +7,7 @@ import {
 import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
 
 const Example = () => (
-  <InputGroup className="w-64">
+  <InputGroup className="w-full max-w-64">
     <InputGroupAddon>
       <SearchIcon />
     </InputGroupAddon>

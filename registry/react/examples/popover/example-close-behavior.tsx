@@ -12,7 +12,7 @@ const Example = () => (
       <PopoverTrigger asChild>
         <Button variant="outline">Open outside click</Button>
       </PopoverTrigger>
-      <PopoverContent className="w-64" showCloseButton>
+      <PopoverContent className="w-full max-w-64" showCloseButton>
         <PopoverHeader
           description="Clicking outside does not close this popover. Press ESC to close."
           title="Stays on outside click"
@@ -23,7 +23,7 @@ const Example = () => (
       <PopoverTrigger asChild>
         <Button variant="outline">Open escape</Button>
       </PopoverTrigger>
-      <PopoverContent className="w-64" showCloseButton>
+      <PopoverContent className="w-full max-w-64" showCloseButton>
         <PopoverHeader
           description="Pressing escape does not close this popover. Click outside to close."
           title="Escape disabled"

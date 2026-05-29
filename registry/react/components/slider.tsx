@@ -119,7 +119,7 @@ export const Slider = (props: SliderProps) => {
                 "transition-[color,box-shadow,transform]",
                 "focus-visible:border-primary focus-visible:outline-hidden focus-visible:ring-[3px] focus-visible:ring-ring/32",
                 "origin-left data-dragging:scale-110 data-dragging:cursor-grabbing data-dragging:border-primary data-dragging:ring-[3px] data-dragging:ring-ring/32",
-                "pointer-coarse:after:absolute pointer-coarse:after:h-full pointer-coarse:after:min-h-8",
+                "pointer-coarse:after:absolute pointer-coarse:after:h-full pointer-coarse:after:min-h-11",
                 "motion-reduce:transition-none!"
               )}
               data-slot="slider-thumb"

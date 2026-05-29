@@ -5,7 +5,7 @@ import { Input } from "@/registry/react/components/input";
 
 const Example = () => (
   <ButtonGroup>
-    <Input className="w-64" placeholder="Search..." type="search" />
+    <Input className="w-full max-w-64" placeholder="Search..." type="search" />
     <Button variant="outline">
       <SearchIcon />
     </Button>

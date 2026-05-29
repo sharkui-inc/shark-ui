@@ -39,7 +39,7 @@ const inpuGroupVariants = tv({
   },
 });
 
-interface InputGroupProps
+export interface InputGroupProps
   extends React.ComponentProps<typeof ark.div>,
     VariantProps<typeof inpuGroupVariants> {}
 
@@ -122,7 +122,13 @@ export const InputGroupAddon = (props: InputGroupAddonProps) => {
 };
 
 const inputGroupButtonVariants = tv({
-  base: ["flex items-center gap-2", "text-sm", "shadow-none"],
+  base: [
+    "relative",
+    "flex items-center gap-2",
+    "text-sm",
+    "shadow-none",
+    "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
+  ],
   variants: {
     size: {
       xs: [

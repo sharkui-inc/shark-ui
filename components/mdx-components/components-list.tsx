@@ -51,6 +51,7 @@ import { MenuThumb } from "@/components/thumbs/menu";
 import { NativeSelectThumb } from "@/components/thumbs/native-select";
 import { NumberInputThumb } from "@/components/thumbs/number-input";
 import { PaginationThumb } from "@/components/thumbs/pagination";
+import { PasswordInputThumb } from "@/components/thumbs/password-input";
 import { PopoverThumb } from "@/components/thumbs/popover";
 import { ProgressThumb } from "@/components/thumbs/progress";
 import { ProseThumb } from "@/components/thumbs/prose";
@@ -138,6 +139,7 @@ const THUMB_MAP: Record<string, React.ComponentType<ThumbCardProps>> = {
   menu: MenuThumb,
   "native-select": NativeSelectThumb,
   "number-input": NumberInputThumb,
+  "password-input": PasswordInputThumb,
   pagination: PaginationThumb,
   popover: PopoverThumb,
   progress: ProgressThumb,

@@ -27,6 +27,8 @@ interface DocsSidebarProps extends React.ComponentProps<typeof Sidebar> {
 const NEW_ITEMS = [
   "/docs/skills",
   "/docs/changelog",
+  "/docs/forms/formisch",
+  "/docs/components/password-input",
   "/docs/hooks/use-is-mobile",
 ];
 

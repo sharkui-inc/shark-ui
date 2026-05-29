@@ -74,7 +74,7 @@ export const NumberInputDecrement = (
         "h-8 in-data-[size=lg]:h-9 in-data-[size=sm]:h-7",
         "flex shrink-0",
         "text-foreground",
-        "rounded-none rounded-s-[calc(var(--radius-xl)-1px)]",
+        "rounded-none rounded-s-[calc(var(--radius-lg)+1px)]",
         "cursor-pointer",
         "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
         className
@@ -102,7 +102,7 @@ export const NumberInputIncrement = (
         "h-8 in-data-[size=lg]:h-9 in-data-[size=sm]:h-7",
         "flex shrink-0",
         "text-foreground",
-        "rounded-none rounded-e-[calc(var(--radius-xl)-1px)]",
+        "rounded-none rounded-e-[calc(var(--radius-lg)+1px)]",
         "cursor-pointer",
         "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
         className
@@ -125,13 +125,13 @@ export const NumberInputInput = (props: React.ComponentProps<typeof Input>) => {
       <Input
         className={cn(
           "grow",
-          "dark:bg-transparent",
+          "h-8 in-data-[size=lg]:h-9 in-data-[size=sm]:h-7",
           "tabular-nums",
           "border-0 shadow-none ring-0",
           "focus-visible:ring-0 aria-invalid:ring-0 data-invalid:ring-0",
+          "dark:bg-transparent",
           className
         )}
-        size={size}
       />
     </ArkNumberInput.Input>
   );

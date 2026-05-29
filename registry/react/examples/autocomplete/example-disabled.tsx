@@ -20,7 +20,7 @@ const Example = () => {
 
   return (
     <Autocomplete
-      className="w-64"
+      className="w-full max-w-64"
       collection={collection}
       disabled
       onInputValueChange={({ inputValue }) => filter(inputValue)}

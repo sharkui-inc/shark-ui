@@ -77,4 +77,3 @@ Sizes: `sm`, `default`, `lg`. Always specify `type` explicitly.
 - [`example-inline.tsx`](/registry/react/examples/input/example-inline.tsx)
 - [`example-input-group.tsx`](/registry/react/examples/input/example-input-group.tsx)
 - [`example-invalid.tsx`](/registry/react/examples/input/example-invalid.tsx)
-- [`example-required.tsx`](/registry/react/examples/input/example-required.tsx)

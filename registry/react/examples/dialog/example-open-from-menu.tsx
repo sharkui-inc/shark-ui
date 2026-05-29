@@ -28,7 +28,7 @@ const Example = () => {
           <Button variant="outline">Open</Button>
         </MenuTrigger>
         <MenuContent>
-          <MenuItem onClick={() => setIsOpen(true)} value="settings">
+          <MenuItem onSelect={() => setIsOpen(true)} value="settings">
             <SettingsIcon />
             Open settings
           </MenuItem>
@@ -52,7 +52,7 @@ const Example = () => {
           <DialogBody>
             <p className="text-muted-foreground text-sm">
               You can open dialogs imperatively from menu items using the
-              onClick handler.
+              onSelect handler.
             </p>
           </DialogBody>
           <DialogFooter>

@@ -1,9 +1,8 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { useState } from "react";
+import React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-
 import {
   Card,
   CardContent,
@@ -146,7 +145,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 function ChartAreaInteractive() {
-  const [timeRange, setTimeRange] = useState("90d");
+  const [timeRange, setTimeRange] = React.useState("90d");
 
   const filteredData = chartData.filter((item) => {
     const date = new Date(item.date);

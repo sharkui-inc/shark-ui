@@ -59,7 +59,7 @@ function Example() {
 
   return (
     <Autocomplete
-      className="w-64"
+      className="w-full max-w-64"
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
@@ -87,7 +87,7 @@ Autocomplete with input group:
 
 ```tsx
  <Autocomplete
-      className="w-64"
+      className="w-full max-w-64"
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
   >

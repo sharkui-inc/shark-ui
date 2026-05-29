@@ -20,7 +20,7 @@ const AutocompleteDemo = () => {
   });
 
   return (
-    <Field className="w-64">
+    <Field className="w-full max-w-64">
       <FieldLabel>Search fruits</FieldLabel>
       <Autocomplete
         collection={collection}

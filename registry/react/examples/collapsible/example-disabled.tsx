@@ -7,7 +7,7 @@ import {
 } from "@/registry/react/components/collapsible";
 
 const Example = () => (
-  <div className="w-64">
+  <div className="w-full max-w-64">
     <Collapsible disabled>
       <CollapsibleTrigger asChild>
         <Button className="w-full" variant="outline">

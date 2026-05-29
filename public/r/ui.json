@@ -71,6 +71,7 @@
     "http://localhost:3000/r/native-select.json",
     "http://localhost:3000/r/number-input.json",
     "http://localhost:3000/r/pagination.json",
+    "http://localhost:3000/r/password-input.json",
     "http://localhost:3000/r/popover.json",
     "http://localhost:3000/r/presence.json",
     "http://localhost:3000/r/progress.json",

@@ -25,7 +25,7 @@ const Example = () => {
   });
 
   return (
-    <Field className="w-64">
+    <Field className="w-full max-w-64">
       <FieldLabel>Country</FieldLabel>
       <Autocomplete
         collection={collection}

@@ -95,7 +95,7 @@ With Field:
 ```tsx
 import { Field, FieldLabel, FieldHelper, FieldError } from "@/components/ui/field";
 
-<Field className="w-64">
+<Field className="w-full max-w-64">
   <FieldLabel>Country</FieldLabel>
   <Combobox
     collection={collection}
