@@ -8,7 +8,7 @@ import {
 
 const Example = () => (
   <NumberInput
-    className="w-full max-w-40"
+    className="w-full max-w-48"
     defaultValue="19.00"
     formatOptions={{ currency: "USD", style: "currency" }}
   >

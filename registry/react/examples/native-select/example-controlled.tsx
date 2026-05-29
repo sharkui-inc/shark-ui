@@ -12,7 +12,7 @@ const Example = () => {
   return (
     <div className="flex flex-col gap-2">
       <NativeSelect
-        className="w-full max-w-40"
+        className="w-full max-w-48"
         onChange={(e) => setValue(e.target.value)}
         value={value}
       >

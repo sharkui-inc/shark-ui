@@ -13,7 +13,7 @@ import {
 } from "@/registry/react/components/tree-view";
 
 const TreeViewDemo = () => (
-  <div className="w-full max-w-40">
+  <div className="w-full max-w-48">
     <TreeView collection={collection}>
       <TreeViewTree>
         {collection.rootNode.children?.map((node, index) => (

@@ -5,9 +5,9 @@ import {
 } from "@/registry/react/components/native-select";
 
 const Example = () => (
-  <Field className="w-full max-w-40" invalid>
+  <Field className="w-full max-w-48" invalid>
     <FieldLabel>Select a fruit</FieldLabel>
-    <NativeSelect className="w-full max-w-40">
+    <NativeSelect className="w-full max-w-48">
       <NativeSelectOption value="banana">Banana</NativeSelectOption>
       <NativeSelectOption value="apple">Apple</NativeSelectOption>
       <NativeSelectOption value="orange">Orange</NativeSelectOption>

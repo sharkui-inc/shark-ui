@@ -35,7 +35,7 @@ import {
 ## Minimal pattern
 
 ```tsx
-<NativeSelect className="w-full max-w-40">
+<NativeSelect className="w-full max-w-48">
   <NativeSelectOption value="">Select an option</NativeSelectOption>
   <NativeSelectOption value="a">Option A</NativeSelectOption>
   <NativeSelectOption value="b">Option B</NativeSelectOption>

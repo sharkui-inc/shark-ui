@@ -17,7 +17,7 @@ const Example = () => {
   const [collection, setCollection] = React.useState(initialCollection);
 
   return (
-    <div className="w-full max-w-40">
+    <div className="w-full max-w-48">
       <TreeView
         canRename={() => true}
         collection={collection}

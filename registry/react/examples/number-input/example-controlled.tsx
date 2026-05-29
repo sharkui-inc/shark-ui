@@ -15,7 +15,7 @@ const Example = () => {
   const isNumberFive = value === "3";
 
   return (
-    <div className="flex w-full max-w-40 flex-col gap-4 text-center text-sm">
+    <div className="flex w-full max-w-48 flex-col gap-4 text-center text-sm">
       <p>Select the number 3</p>
       <NumberInput onValueChange={({ value }) => setValue(value)} value={value}>
         <NumberInputGroup>

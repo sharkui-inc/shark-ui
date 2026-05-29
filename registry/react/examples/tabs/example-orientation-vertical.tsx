@@ -6,7 +6,7 @@ import {
 } from "@/registry/react/components/tabs";
 
 const Example = () => (
-  <Tabs className="w-full max-w-40" defaultValue="tab-1" orientation="vertical">
+  <Tabs className="w-full max-w-48" defaultValue="tab-1" orientation="vertical">
     <TabsList variant="default">
       <TabsTrigger value="tab-1">Tab 1</TabsTrigger>
       <TabsTrigger value="tab-2">Tab 2</TabsTrigger>

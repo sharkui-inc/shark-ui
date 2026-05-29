@@ -7,7 +7,7 @@ import {
 } from "@/registry/react/components/number-input";
 
 const Example = () => (
-  <NumberInput allowMouseWheel className="w-full max-w-40" defaultValue="10">
+  <NumberInput allowMouseWheel className="w-full max-w-48" defaultValue="10">
     <NumberInputGroup>
       <NumberInputDecrement />
       <NumberInputInput />

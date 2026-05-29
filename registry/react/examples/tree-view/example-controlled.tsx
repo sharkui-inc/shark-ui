@@ -19,7 +19,7 @@ const Example = () => {
   const isCorrectSelection = selected[0] === "components/input.tsx";
 
   return (
-    <div className="flex w-full max-w-40 flex-col items-center gap-4">
+    <div className="flex w-full max-w-48 flex-col items-center gap-4">
       <p className="text-muted-foreground text-sm">Select input.tsx</p>
 
       <TreeView

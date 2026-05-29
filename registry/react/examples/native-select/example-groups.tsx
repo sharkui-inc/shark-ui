@@ -5,7 +5,7 @@ import {
 } from "@/registry/react/components/native-select";
 
 const Example = () => (
-  <NativeSelect className="w-full max-w-40">
+  <NativeSelect className="w-full max-w-48">
     <NativeSelectOption value="">Select an option</NativeSelectOption>
     <NativeSelectOptGroup label="Tropical">
       <NativeSelectOption value="banana">Banana</NativeSelectOption>

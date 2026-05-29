@@ -7,7 +7,7 @@ import {
 } from "@/registry/react/components/number-input";
 
 const Example = () => (
-  <NumberInput className="w-full max-w-40" defaultValue="1" disabled>
+  <NumberInput className="w-full max-w-48" defaultValue="1" disabled>
     <NumberInputGroup>
       <NumberInputDecrement />
       <NumberInputInput />

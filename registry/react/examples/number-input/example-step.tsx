@@ -9,7 +9,7 @@ import {
 
 const Example = () => (
   <div className="flex flex-col gap-6">
-    <NumberInput className="w-full max-w-40" defaultValue="0" step={5}>
+    <NumberInput className="w-full max-w-48" defaultValue="0" step={5}>
       <FieldLabel>Step 5</FieldLabel>
       <NumberInputGroup>
         <NumberInputDecrement />
@@ -17,7 +17,7 @@ const Example = () => (
         <NumberInputIncrement />
       </NumberInputGroup>
     </NumberInput>
-    <NumberInput className="w-full max-w-40" defaultValue="0.1" step={0.1}>
+    <NumberInput className="w-full max-w-48" defaultValue="0.1" step={0.1}>
       <FieldLabel>Step 0.1</FieldLabel>
       <NumberInputGroup>
         <NumberInputDecrement />

@@ -9,7 +9,7 @@ const Example = () => {
   const isCorrectRating = value === 5;
 
   return (
-    <div className="flex w-full max-w-40 flex-col gap-4 text-center text-sm">
+    <div className="flex w-full max-w-48 flex-col gap-4 text-center text-sm">
       <p>Select the rating 5</p>
       <Rating
         onValueChange={(details) => setValue(details.value ?? 0)}
