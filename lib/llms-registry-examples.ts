@@ -7,6 +7,8 @@ const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   switch: "A control element that allows for a binary selection.",
   "radio-group": "Allows single selection from multiple options.",
   form: "React Hook Form, TanStack Form, and Formisch patterns with Shark UI Field primitives.",
+  "tags-input":
+    "Multi-value tag entry with keyboard navigation and optional combobox autocomplete.",
 };
 
 const EXAMPLE_PREFIX = /^example-/;

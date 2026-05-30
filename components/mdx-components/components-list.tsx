@@ -75,6 +75,7 @@ import { StepsThumb } from "@/components/thumbs/steps";
 import { SwitchThumb } from "@/components/thumbs/switch";
 import { TableThumb } from "@/components/thumbs/table";
 import { TabsThumb } from "@/components/thumbs/tabs";
+import { TagsInputThumb } from "@/components/thumbs/tags-input";
 import { TextareaThumb } from "@/components/thumbs/textarea";
 import type { ThumbCardProps } from "@/components/thumbs/thumb-card";
 import { TimerThumb } from "@/components/thumbs/timer";
@@ -164,6 +165,7 @@ const THUMB_MAP: Record<string, React.ComponentType<ThumbCardProps>> = {
   switch: SwitchThumb,
   table: TableThumb,
   tabs: TabsThumb,
+  "tags-input": TagsInputThumb,
   textarea: TextareaThumb,
   timer: TimerThumb,
   toast: ToastThumb,

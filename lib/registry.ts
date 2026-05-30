@@ -63,12 +63,7 @@ interface RegistryListItemWithPath extends RegistryListItem {
 export const getAllRegistryItems = async (args: GetRegistryItemArgs) => {
   const { framework = "react", folderType } = args;
 
-  const registryPath = join(
-    cwd(),
-    "registry",
-    framework,
-    folderType
-  );
+  const registryPath = join(cwd(), "registry", framework, folderType);
 
   const categories = await readdir(registryPath);
 
@@ -92,12 +87,7 @@ export const getAllRegistryItems = async (args: GetRegistryItemArgs) => {
 export const getRegistryItem = async (args: GetRegistryItemArgs) => {
   const { framework = "react", folderType } = args;
 
-  const registryPath = join(
-    cwd(),
-    "registry",
-    framework,
-    folderType
-  );
+  const registryPath = join(cwd(), "registry", framework, folderType);
 
   const categories = await readdir(registryPath);
 

@@ -1,0 +1,44 @@
+"use client";
+
+import { Field, FieldLabel } from "@/registry/react/components/field";
+import {
+  TagsInput,
+  TagsInputContext,
+  TagsInputInput,
+  TagsInputItem,
+} from "@/registry/react/components/tags-input";
+
+const validTagPattern = /^[a-zA-Z0-9-]+$/;
+
+const Example = () => (
+  <Field className="w-full max-w-sm">
+    <FieldLabel>Min 3 chars, alphanumeric + hyphen</FieldLabel>
+    <TagsInput
+      className="w-full"
+      validate={({ value, inputValue }) => {
+        const next = inputValue.trim();
+        return (
+          Boolean(next) &&
+          !value.includes(next) &&
+          next.length >= 3 &&
+          validTagPattern.test(next)
+        );
+      }}
+    >
+      <TagsInputContext>
+        {(api) => (
+          <>
+            {api.value.map((tag, index) => (
+              <TagsInputItem index={index} key={tag} value={tag}>
+                {tag}
+              </TagsInputItem>
+            ))}
+            <TagsInputInput placeholder="Add tag" />
+          </>
+        )}
+      </TagsInputContext>
+    </TagsInput>
+  </Field>
+);
+
+export default Example;

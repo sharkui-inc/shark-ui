@@ -8,13 +8,14 @@ const TypographyDemo = () => (
         <h1>Taxing Laughter: The Joke Tax Chronicles</h1>
         <p>
           Once upon a time, in a far-off land, there was a very lazy king who
-          spent all day lounging on his throne. One day, his advisors came to him
-          with a problem: the kingdom was running out of money.
+          spent all day lounging on his throne. One day, his advisors came to
+          him with a problem: the kingdom was running out of money.
         </p>
         <h2>The King&apos;s Plan</h2>
         <p>
           The king thought long and hard, and finally came up with{" "}
-          <a href="#">a brilliant plan</a>: he would tax the jokes in the kingdom.
+          <a href="#">a brilliant plan</a>: he would tax the jokes in the
+          kingdom.
         </p>
         <blockquote>
           &quot;After all,&quot; he said, &quot;everyone enjoys a good joke, so
@@ -22,8 +23,8 @@ const TypographyDemo = () => (
         </blockquote>
         <h3>The Joke Tax</h3>
         <p>
-          The king&apos;s subjects were not amused. They grumbled and complained,
-          but the king was firm:
+          The king&apos;s subjects were not amused. They grumbled and
+          complained, but the king was firm:
         </p>
         <ul>
           <li>1st level of puns: 5 gold coins</li>
@@ -49,9 +50,9 @@ const TypographyDemo = () => (
         </p>
         <h3>The People&apos;s Rebellion</h3>
         <p>
-          The people of the kingdom, feeling uplifted by the laughter, started to
-          tell jokes and puns again, and soon the entire kingdom was in on the
-          joke.
+          The people of the kingdom, feeling uplifted by the laughter, started
+          to tell jokes and puns again, and soon the entire kingdom was in on
+          the joke.
         </p>
         <div>
           <table>
@@ -78,13 +79,13 @@ const TypographyDemo = () => (
           </table>
         </div>
         <p>
-          The king, seeing how much happier his subjects were, realized the error
-          of his ways and repealed the joke tax. Jokester was declared a hero, and
-          the kingdom lived happily ever after.
+          The king, seeing how much happier his subjects were, realized the
+          error of his ways and repealed the joke tax. Jokester was declared a
+          hero, and the kingdom lived happily ever after.
         </p>
         <p>
-          The moral of the story is: never underestimate the power of a good laugh
-          and always be careful of bad ideas.
+          The moral of the story is: never underestimate the power of a good
+          laugh and always be careful of bad ideas.
         </p>
       </Prose>
     </ScrollArea>

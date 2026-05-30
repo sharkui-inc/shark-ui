@@ -29,6 +29,7 @@ const NEW_ITEMS = [
   "/docs/changelog",
   "/docs/forms/formisch",
   "/docs/components/password-input",
+  "/docs/components/tags-input",
   "/docs/hooks/use-is-mobile",
 ];
 

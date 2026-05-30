@@ -7,8 +7,8 @@ export const TextareaThumb = (props: ThumbCardProps) => (
         <div className="h-1.5 w-2/3 rounded-full bg-muted-foreground/16" />
       </div>
 
-      <div className="absolute right-1.5 bottom-1 h-2 w-px rotate-45 bg-input" />
-      <div className="absolute right-1 bottom-1 h-1 w-px rotate-45 bg-input" />
+      <div className="absolute right-1.5 bottom-1 h-2 w-px rotate-45 bg-muted-foreground/32" />
+      <div className="absolute right-1 bottom-1 h-1 w-px rotate-45 bg-muted-foreground/32" />
     </div>
   </ThumbCard>
 );
