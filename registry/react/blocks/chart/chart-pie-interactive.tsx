@@ -1,9 +1,8 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { useMemo, useState } from "react";
+import React from "react";
 import { Cell, Label, Pie, PieChart } from "recharts";
-
 import {
   Card,
   CardContent,
@@ -79,9 +78,9 @@ const monthCollection = createListCollection({
 
 function ChartPieInteractive() {
   const id = "pie-interactive";
-  const [activeMonth, setActiveMonth] = useState(desktopData[0].month);
+  const [activeMonth, setActiveMonth] = React.useState(desktopData[0].month);
 
-  const activeIndex = useMemo(
+  const activeIndex = React.useMemo(
     () => desktopData.findIndex((item) => item.month === activeMonth),
     [activeMonth]
   );

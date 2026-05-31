@@ -27,6 +27,7 @@ Use this file to quickly identify the right shark-ui primitive for a UI task. Ea
 - **InputGroup** — Input with addons (icons, buttons, badges). `./references/primitives/input-group.md`
 - **InputOTP** — One-time passcode segmented slots. `./references/primitives/input-otp.md`
 - **NumberInput** — Numeric entry with stepper controls. `./references/primitives/number-input.md`
+- **TagsInput** — Multi-value tags in an input field. `./references/primitives/tags-input.md`
 - **Slider** — Continuous/ranged numeric control. `./references/primitives/slider.md`
 - **Calendar** — Date picker / calendar views. `./references/primitives/calendar.md`
 - **Listbox** — List selection (single/multi) with rich items. `./references/primitives/listbox.md`

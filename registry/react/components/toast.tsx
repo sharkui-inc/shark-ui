@@ -14,7 +14,7 @@ import {
   TriangleAlertIcon,
   XIcon,
 } from "lucide-react";
-import type { ComponentProps } from "react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Spinner } from "@/registry/react/components/spinner";
@@ -28,7 +28,10 @@ export const toast = createToaster({
 });
 
 interface ToasterProps
-  extends Omit<ComponentProps<typeof ArkToaster>, "toaster" | "children"> {
+  extends Omit<
+    React.ComponentProps<typeof ArkToaster>,
+    "toaster" | "children"
+  > {
   /**
    * Toaster instance
    */
@@ -65,7 +68,7 @@ const TOAST_ICONS = {
   warning: <TriangleAlertIcon />,
 } as const;
 
-interface ToastItemProps extends ComponentProps<typeof ArkToast.Root> {
+interface ToastItemProps extends React.ComponentProps<typeof ArkToast.Root> {
   /**
    * The toast item data
    */

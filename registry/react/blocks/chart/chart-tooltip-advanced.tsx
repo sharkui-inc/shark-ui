@@ -1,6 +1,5 @@
 "use client";
 
-import type { CSSProperties } from "react";
 import { Bar, BarChart, XAxis } from "recharts";
 
 import {
@@ -85,7 +84,7 @@ function ChartTooltipAdvanced() {
                         style={
                           {
                             "--color-bg": `var(--color-${name})`,
-                          } as CSSProperties
+                          } as React.CSSProperties
                         }
                       />
                       {chartConfig[name as keyof typeof chartConfig]?.label ||

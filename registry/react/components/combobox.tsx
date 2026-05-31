@@ -152,6 +152,11 @@ export const ComboboxClear = (
   props: React.ComponentProps<typeof ArkCombobox.ClearTrigger>
 ) => <ArkCombobox.ClearTrigger data-slot="combobox-clear" {...props} />;
 
+/** Composable combobox input for custom controls (e.g. Tags Input). */
+export const ComboboxFieldInput = (
+  props: React.ComponentProps<typeof ArkCombobox.Input>
+) => <ArkCombobox.Input data-slot="combobox-field-input" {...props} />;
+
 export const ComboboxPositioner = (
   props: React.ComponentProps<typeof ArkCombobox.Positioner>
 ) => <ArkCombobox.Positioner data-slot="combobox-positioner" {...props} />;

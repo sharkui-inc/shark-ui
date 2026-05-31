@@ -1,8 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import React from "react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
-
 import {
   Card,
   CardContent,
@@ -129,9 +128,9 @@ const chartConfig = {
 
 function ChartBarInteractive() {
   const [activeChart, setActiveChart] =
-    useState<keyof typeof chartConfig>("desktop");
+    React.useState<keyof typeof chartConfig>("desktop");
 
-  const total = useMemo(
+  const total = React.useMemo(
     () => ({
       desktop: chartData.reduce((acc, curr) => acc + curr.desktop, 0),
       mobile: chartData.reduce((acc, curr) => acc + curr.mobile, 0),

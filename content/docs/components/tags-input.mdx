@@ -1,0 +1,252 @@
+---
+title: Tags Input
+description: Allows users to add tags to an input field.
+links:
+  doc: https://ark-ui.com/docs/components/tags-input
+  api: https://ark-ui.com/docs/components/tags-input#api-reference
+---
+
+<ComponentPreview componentName="tags-input" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/tags-input
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>This component depends on [Input Group](/docs/components/input-group). Install it first if you haven't already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ark-ui/react lucide-react
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/tags-input.tsx" src="/tags-input.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+TagsInput
+└── TagsInputContext
+    └── TagsInputItem
+```
+
+## Usage
+
+```tsx
+import { Field, FieldLabel } from "@/components/ui/field";
+import {
+  TagsInput,
+  TagsInputContext,
+  TagsInputItem,
+} from "@/components/ui/tags-input";
+```
+
+```tsx
+<TagsInput defaultValue={["React", "Solid"]}>
+  <TagsInputContext>
+      {({ value }) =>
+        value.map((value, index) => (
+          <TagsInputItem index={index} key={value} value={value}>
+            {value}
+          </TagsInputItem>
+        ))
+      }
+    </TagsInputContext>
+</TagsInput>
+```
+
+## Controlled
+
+Use `value` and `onValueChange` to control the tags array.
+
+<ComponentPreview componentName="tags-input" fileName="example-controlled" />
+
+## States
+
+### Disabled
+
+Use the `disabled` prop to disable the tags input. Users cannot add, remove, or edit tags.
+
+<ComponentPreview componentName="tags-input" fileName="example-disabled" />
+
+### Invalid
+
+Use the `invalid` prop to mark the tags input as invalid for form validation.
+
+<ComponentPreview componentName="tags-input" fileName="example-invalid" />
+
+## Sizes
+
+Use the `size` prop on `TagsInput` to change the control and input height.
+
+### Small
+
+<ComponentPreview componentName="tags-input" fileName="example-size-sm" />
+
+### Medium
+
+<ComponentPreview componentName="tags-input" fileName="example-size-md" />
+
+### Large
+
+<ComponentPreview componentName="tags-input" fileName="example-size-lg" />
+
+## Examples
+
+### Blur Behavior
+
+Use `blurBehavior="add"` to add the current input value as a tag when the field loses focus.
+
+<ComponentPreview componentName="tags-input" fileName="example-blur-behavior" />
+
+### Controlled Input Value
+
+Use `inputValue` and `onInputValueChange` to control the text field independently.
+
+<ComponentPreview componentName="tags-input" fileName="example-controlled-input-value" />
+
+### Delimiter
+
+Use `delimiter` with a regex to split tags when typing or pasting separators.
+
+<ComponentPreview componentName="tags-input" fileName="example-custom-delimiter" />
+
+### Disabled Editing
+
+Pass `editable={false}` to prevent editing existing tags after creation.
+
+<ComponentPreview componentName="tags-input" fileName="example-disable-editing" />
+
+### Max Tag Length
+
+Use `maxLength` to cap characters per tag.
+
+<ComponentPreview componentName="tags-input" fileName="example-max-length" />
+
+### Max With Overflow
+
+Use `max` with `allowOverflow` to allow exceeding the limit while marking the root as invalid.
+
+<ComponentPreview componentName="tags-input" fileName="example-max-with-overflow" />
+
+### Paste Behavior
+
+Use `addOnPaste` with `delimiter` to create multiple tags from pasted text.
+
+<ComponentPreview componentName="tags-input" fileName="example-paste-behavior" />
+
+### Sanitize
+
+Use `sanitizeValue` to normalize tag text before tags are added.
+
+<ComponentPreview componentName="tags-input" fileName="example-sanitize-value" />
+
+### Validation
+
+Use `validate` to accept or reject tags before they are added.
+
+<ComponentPreview componentName="tags-input" fileName="example-validation" />
+
+### With Combobox
+
+<ComponentPreview componentName="tags-input" fileName="example-combobox" />
+
+### With Field
+
+Wrap with [Field](/docs/components/field) for labels, descriptions, and validation messaging.
+
+<ComponentPreview componentName="tags-input" fileName="example-field" />
+
+## API Reference
+
+### TagsInput
+
+Root component. Composes the control, input, and hidden field for form submission.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `showClear` | `boolean` | `true` |
+| `defaultValue` | `string[]` | - |
+| `value` | `string[]` | - |
+| `inputValue` | `string` | - |
+| `defaultInputValue` | `string` | - |
+| `max` | `number` | `Infinity` |
+| `maxLength` | `number` | - |
+| `delimiter` | `string \| RegExp` | `","` |
+| `allowDuplicates` | `boolean` | `false` |
+| `allowOverflow` | `boolean` | - |
+| `disabled` | `boolean` | - |
+| `invalid` | `boolean` | - |
+| `required` | `boolean` | - |
+| `editable` | `boolean` | `false` |
+| `addOnPaste` | `boolean` | `false` |
+| `blurBehavior` | `"add" \| "clear"` | - |
+| `validate` | `(details) => boolean` | - |
+| `sanitizeValue` | `(value: string) => string` | `(value) => value.trim()` |
+| `onValueChange` | `(details) => void` | - |
+| `onInputValueChange` | `(details) => void` | - |
+| `onHighlightChange` | `(details) => void` | - |
+| `onValueInvalid` | `(details) => void` | - |
+| `className` | `string` | - |
+
+### TagsInputInput
+
+Borderless text field for adding new tags. Rendered inside `TagsInput` by default.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `placeholder` | `string` | - |
+| `className` | `string` | - |
+
+### TagsInputItem
+
+Represents a single tag. Requires `index` and `value`. Pass the label as children. Renders the delete trigger and edit input. Chip height follows the root `size` (`sm`, `md`, `lg`). Supports `data-highlighted` when navigated by keyboard.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `index` | `number` | **required** |
+| `value` | `string` | **required** |
+| `showDelete` | `boolean` | `true` |
+| `disabled` | `boolean` | - |
+| `className` | `string` | - |
+
+### TagsInputClearTrigger
+
+Clears all tags.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | - |
+| `asChild` | `boolean` | - |
+
+---
+
+For the full list of props and context methods, see the [Ark UI documentation](https://ark-ui.com/docs/components/tags-input#api-reference).
