@@ -2,10 +2,21 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "input",
   "type": "registry:ui",
-  "dependencies": [
-    "@ark-ui/react",
-    "tailwind-variants"
-  ],
+  "dependencies": ["@ark-ui/react", "tailwind-variants"],
+  "cssVars": {
+    "theme": {
+      "--color-destructive": "var(--destructive)",
+      "--color-destructive-foreground": "var(--destructive-foreground)"
+    },
+    "light": {
+      "destructive": "var(--color-red-500)",
+      "destructive-foreground": "var(--color-red-700)"
+    },
+    "dark": {
+      "destructive": "color-mix(in srgb, var(--color-red-600) 90%, var(--color-neutral-50))",
+      "destructive-foreground": "var(--color-red-400)"
+    }
+  },
   "files": [
     {
       "path": "registry/react/components/input.tsx",

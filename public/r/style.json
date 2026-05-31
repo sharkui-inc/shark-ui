@@ -4,22 +4,72 @@
   "name": "style",
   "type": "registry:style",
   "description": "Complete Shark theme: colors, sidebar, fonts, and base styles. Use with the shadcn CLI after `init` (e.g. `npx shadcn@latest init @shark/style`).",
-  "dependencies": [
-    "@base-ui/react",
-    "tailwind-variants",
-    "lucide-react"
-  ],
-  "devDependencies": [
-    "tw-animate-css"
-  ],
-  "registryDependencies": [
-    "http://localhost:3000/r/utils.json"
-  ],
+  "dependencies": ["@base-ui/react", "tailwind-variants", "lucide-react"],
+  "devDependencies": ["tw-animate-css"],
+  "registryDependencies": ["http://localhost:3000/r/utils.json"],
   "cssVars": {
     "theme": {
       "font-sans": "var(--font-sans, ui-sans-serif, system-ui, sans-serif)",
       "font-heading": "var(--font-heading, ui-sans-serif, system-ui, sans-serif)",
-      "font-mono": "var(--font-mono, ui-monospace, monospace)"
+      "font-mono": "var(--font-mono, ui-monospace, monospace)",
+      "--color-background": "var(--background)",
+      "--color-foreground": "var(--foreground)",
+      "--color-primary": "var(--primary)",
+      "--color-primary-foreground": "var(--primary-foreground)",
+      "--color-secondary": "var(--secondary)",
+      "--color-secondary-foreground": "var(--secondary-foreground)",
+      "--color-card": "var(--card)",
+      "--color-card-foreground": "var(--card-foreground)",
+      "--color-popover": "var(--popover)",
+      "--color-popover-foreground": "var(--popover-foreground)",
+      "--color-muted": "var(--muted)",
+      "--color-muted-foreground": "var(--muted-foreground)",
+      "--color-accent": "var(--accent)",
+      "--color-accent-foreground": "var(--accent-foreground)",
+      "--color-success": "var(--success)",
+      "--color-success-foreground": "var(--success-foreground)",
+      "--color-info": "var(--info)",
+      "--color-info-foreground": "var(--info-foreground)",
+      "--color-warning": "var(--warning)",
+      "--color-warning-foreground": "var(--warning-foreground)",
+      "--color-destructive": "var(--destructive)",
+      "--color-destructive-foreground": "var(--destructive-foreground)",
+      "--color-border": "var(--border)",
+      "--color-input": "var(--input)",
+      "--color-ring": "var(--ring)",
+      "--color-code": "var(--code)",
+      "--color-code-foreground": "var(--code-foreground)",
+      "--color-code-highlight": "var(--code-highlight)",
+      "--color-sidebar": "var(--sidebar)",
+      "--color-sidebar-foreground": "var(--sidebar-foreground)",
+      "--color-sidebar-primary": "var(--sidebar-primary)",
+      "--color-sidebar-primary-foreground": "var(--sidebar-primary-foreground)",
+      "--color-sidebar-accent": "var(--sidebar-accent)",
+      "--color-sidebar-accent-foreground": "var(--sidebar-accent-foreground)",
+      "--color-sidebar-border": "var(--sidebar-border)",
+      "--color-sidebar-ring": "var(--sidebar-ring)",
+      "--color-chart-1": "var(--chart-1)",
+      "--color-chart-2": "var(--chart-2)",
+      "--color-chart-3": "var(--chart-3)",
+      "--color-chart-4": "var(--chart-4)",
+      "--color-chart-5": "var(--chart-5)",
+      "--radius-xs": "calc(var(--radius) * 0.25)",
+      "--radius-sm": "calc(var(--radius) * 0.5)",
+      "--radius-md": "calc(var(--radius) * 0.75)",
+      "--radius-lg": "calc(var(--radius) * 1)",
+      "--radius-xl": "calc(var(--radius) * 1.5)",
+      "--radius-2xl": "calc(var(--radius) * 2)",
+      "--radius-3xl": "calc(var(--radius) * 3)",
+      "--radius-4xl": "calc(var(--radius) * 4)",
+      "--animate-slide-up": "slideUp 0.2s ease-out",
+      "--animate-slide-down": "slideDown 0.2s ease-out",
+      "--animate-marquee-x": "marqueeX var(--marquee-duration) linear infinite var(--marquee-delay)",
+      "--animate-marquee-y": "marqueeY var(--marquee-duration) linear infinite var(--marquee-delay)",
+      "--animate-indeterminate": "indeterminate 1.5s ease-in-out infinite",
+      "--animate-expand": "expand 0.2s ease-out",
+      "--animate-collapse": "collapse 0.2s ease-out",
+      "--animate-flip-in": "flip-in 0.2s ease-out",
+      "--animate-flip-out": "flip-out 0.2s ease-out"
     },
     "light": {
       "radius": "0.5rem",
@@ -48,7 +98,7 @@
       "border": "color-mix(in srgb, var(--color-neutral-950) 12%, var(--background))",
       "input": "color-mix(in srgb, var(--color-neutral-950) 13%, var(--background))",
       "ring": "var(--color-neutral-400)",
-      "sidebar": "var(--color-neutral-50)",
+      "sidebar": "color-mix(in srgb, var(--color-neutral-50) 97%, var(--color-neutral-950))",
       "sidebar-foreground": "color-mix(in srgb, var(--color-neutral-800) 64%, var(--sidebar))",
       "sidebar-primary": "var(--color-neutral-800)",
       "sidebar-primary-foreground": "var(--color-neutral-50)",
@@ -60,7 +110,10 @@
       "chart-2": "var(--color-teal-600)",
       "chart-3": "var(--color-cyan-900)",
       "chart-4": "var(--color-amber-400)",
-      "chart-5": "var(--color-amber-500)"
+      "chart-5": "var(--color-amber-500)",
+      "code": "var(--background)",
+      "code-foreground": "var(--foreground)",
+      "code-highlight": "color-mix(in srgb, var(--color-neutral-950) 4%, var(--code))"
     },
     "dark": {
       "background": "var(--color-neutral-950)",
@@ -71,11 +124,11 @@
       "popover-foreground": "var(--color-neutral-100)",
       "primary": "var(--color-neutral-100)",
       "primary-foreground": "var(--color-neutral-800)",
-      "secondary": "color-mix(in srgb, var(--color-white) 10%, var(--background))",
+      "secondary": "color-mix(in srgb, var(--color-white) 8%, var(--background))",
       "secondary-foreground": "var(--color-neutral-100)",
-      "muted": "color-mix(in srgb, var(--color-neutral-50) 10%, var(--background))",
+      "muted": "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
       "muted-foreground": "color-mix(in srgb, var(--color-neutral-500) 70%, var(--color-neutral-50))",
-      "accent": "color-mix(in srgb, var(--color-neutral-50) 10%, var(--background))",
+      "accent": "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
       "accent-foreground": "var(--color-neutral-100)",
       "destructive": "color-mix(in srgb, var(--color-red-600) 90%, var(--color-neutral-50))",
       "destructive-foreground": "var(--color-red-400)",
@@ -85,14 +138,14 @@
       "success-foreground": "var(--color-emerald-400)",
       "warning": "var(--color-amber-500)",
       "warning-foreground": "var(--color-amber-400)",
-      "border": "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
-      "input": "color-mix(in srgb, var(--color-neutral-50) 10%, var(--background))",
+      "border": "color-mix(in srgb, var(--color-neutral-50) 12%, var(--background))",
+      "input": "color-mix(in srgb, var(--color-neutral-50) 13%, var(--background))",
       "ring": "var(--color-neutral-500)",
       "sidebar": "color-mix(in srgb, var(--color-neutral-950) 97%, var(--color-neutral-50))",
       "sidebar-foreground": "color-mix(in srgb, var(--color-neutral-100) 64%, var(--sidebar))",
       "sidebar-primary": "var(--color-neutral-100)",
       "sidebar-primary-foreground": "var(--color-neutral-800)",
-      "sidebar-accent": "color-mix(in srgb, var(--color-neutral-50) 10%, var(--sidebar))",
+      "sidebar-accent": "color-mix(in srgb, var(--color-neutral-50) 8%, var(--sidebar))",
       "sidebar-accent-foreground": "var(--color-neutral-100)",
       "sidebar-border": "color-mix(in srgb, var(--color-neutral-50) 11%, var(--sidebar))",
       "sidebar-ring": "var(--color-neutral-400)",
@@ -100,10 +153,85 @@
       "chart-2": "var(--color-emerald-500)",
       "chart-3": "var(--color-amber-500)",
       "chart-4": "var(--color-purple-500)",
-      "chart-5": "var(--color-rose-500)"
+      "chart-5": "var(--color-rose-500)",
+      "code": "var(--background)",
+      "code-foreground": "var(--foreground)",
+      "code-highlight": "color-mix(in srgb, var(--color-neutral-50) 4%, var(--code))"
     }
   },
   "css": {
+    "@keyframes slideUp": {
+      "from": {
+        "height": "var(--height)"
+      },
+      "to": {
+        "height": "0"
+      }
+    },
+    "@keyframes slideDown": {
+      "from": {
+        "height": "0"
+      },
+      "to": {
+        "height": "var(--height)"
+      }
+    },
+    "@keyframes marqueeX": {
+      "from": {
+        "transform": "translateX(0)"
+      },
+      "to": {
+        "transform": "translateX(var(--marquee-translate))"
+      }
+    },
+    "@keyframes marqueeY": {
+      "from": {
+        "transform": "translateY(0)"
+      },
+      "to": {
+        "transform": "translateY(var(--marquee-translate))"
+      }
+    },
+    "@keyframes expand": {
+      "from": {
+        "height": "var(--collapsed-height, 0)"
+      },
+      "to": {
+        "height": "var(--height)"
+      }
+    },
+    "@keyframes collapse": {
+      "from": {
+        "height": "var(--height)"
+      },
+      "to": {
+        "height": "var(--collapsed-height, 0)"
+      }
+    },
+    "@keyframes indeterminate": {
+      "0%": {
+        "transform": "translateX(-100%)"
+      },
+      "100%": {
+        "transform": "translateX(400%)"
+      }
+    },
+    "@keyframes flip-in": {
+      "from": {
+        "transform": "rotateY(180deg)"
+      },
+      "to": {
+        "transform": "rotateY(0deg)"
+      }
+    },
+    "@keyframes flip-out": {
+      "from": {
+        "transform": "rotateY(0deg)"
+      },
+      "to": {
+        "transform": "rotateY(180deg)"
+      }
+    },
     "@layer base": {
       "::selection": {
         "@apply bg-primary/80 text-primary-foreground": {}
@@ -115,7 +243,7 @@
         "@apply antialiased": {}
       },
       "body": {
-        "@apply bg-background text-foreground flex min-h-svh flex-col font-sans": {}
+        "@apply bg-background min-h-svh text-foreground flex flex-col scrollbar-thin overflow-y-scroll scrollbar-track-transparent scrollbar-thumb-foreground/20 font-sans": {}
       },
       "main": {
         "@apply flex-1 flex flex-col": {}

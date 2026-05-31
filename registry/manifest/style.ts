@@ -142,8 +142,7 @@ const cssVars = {
     muted: "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
     "muted-foreground":
       "color-mix(in srgb, var(--color-neutral-500) 70%, var(--color-neutral-50))",
-    accent:
-      "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
+    accent: "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
     "accent-foreground": "var(--color-neutral-100)",
     destructive:
       "color-mix(in srgb, var(--color-red-600) 90%, var(--color-neutral-50))",
