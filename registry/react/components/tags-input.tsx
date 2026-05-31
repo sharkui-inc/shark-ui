@@ -174,32 +174,27 @@ export const TagsInputItemDeleteTrigger = (
   const { className, children, ...rest } = props;
 
   return (
-    <TagsInputContext>
-      {({ value }) => (
-        <ArkTagsInput.ItemDeleteTrigger
-          asChild
-          data-slot="tags-input-item-delete-trigger"
-          {...rest}
-        >
-          <InputGroupButton
-            aria-label={`Remove ${value}`}
-            className={cn(
-              "in-data-[size=lg]:size-6 in-data-[size=sm]:size-4 size-5",
-              "shrink-0",
-              "text-muted-foreground",
-              "rounded-[calc(var(--radius)-5px)]",
-              "[&_svg:not([class*='size-'])]:size-3",
-              "hover:text-foreground",
-              className
-            )}
-            size="icon-xs"
-            variant="ghost"
-          >
-            {children ?? <XIcon aria-hidden />}
-          </InputGroupButton>
-        </ArkTagsInput.ItemDeleteTrigger>
-      )}
-    </TagsInputContext>
+    <ArkTagsInput.ItemDeleteTrigger
+      asChild
+      data-slot="tags-input-item-delete-trigger"
+      {...rest}
+    >
+      <InputGroupButton
+        className={cn(
+          "in-data-[size=lg]:size-6 in-data-[size=sm]:size-4 size-5",
+          "shrink-0",
+          "text-muted-foreground",
+          "rounded-[calc(var(--radius)-5px)]",
+          "[&_svg:not([class*='size-'])]:size-3",
+          "hover:text-foreground",
+          className
+        )}
+        size="icon-xs"
+        variant="ghost"
+      >
+        {children ?? <XIcon aria-hidden />}
+      </InputGroupButton>
+    </ArkTagsInput.ItemDeleteTrigger>
   );
 };
 

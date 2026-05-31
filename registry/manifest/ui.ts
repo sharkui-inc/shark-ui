@@ -97,6 +97,7 @@ const SHARK_UI_BUNDLE = [
   "switch",
   "table",
   "tabs",
+  "tags-input",
   "textarea",
   "timer",
   "toast",
