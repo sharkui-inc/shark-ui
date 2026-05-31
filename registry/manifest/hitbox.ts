@@ -1,23 +1,17 @@
 import type { RegistryItemType } from "@/lib/registry";
 
 const cssVars = {
+  theme: {
+    "--color-info": "var(--info)",
+    "--color-success": "var(--success)",
+  },
   light: {
-    "destructive-foreground": "var(--color-red-700)",
     info: "var(--color-blue-500)",
-    "info-foreground": "var(--color-blue-700)",
     success: "var(--color-emerald-500)",
-    "success-foreground": "var(--color-emerald-700)",
-    warning: "var(--color-amber-500)",
-    "warning-foreground": "var(--color-amber-700)",
   },
   dark: {
-    "destructive-foreground": "var(--color-red-400)",
     info: "var(--color-blue-500)",
-    "info-foreground": "var(--color-blue-400)",
     success: "var(--color-emerald-500)",
-    "success-foreground": "var(--color-emerald-400)",
-    warning: "var(--color-amber-500)",
-    "warning-foreground": "var(--color-amber-400)",
   },
 };
 
@@ -51,10 +45,10 @@ const css = {
     },
   },
   "@utility hitbox-*": {
-    "--hitbox-t": "calc(--value([*]) * -1)",
-    "--hitbox-b": "calc(--value([*]) * -1)",
-    "--hitbox-l": "calc(--value([*]) * -1)",
-    "--hitbox-r": "calc(--value([*]) * -1)",
+    "--hitbox-t": "calc(-1 * --spacing(--value(number, [*])))",
+    "--hitbox-b": "calc(-1 * --spacing(--value(number, [*])))",
+    "--hitbox-l": "calc(-1 * --spacing(--value(number, [*])))",
+    "--hitbox-r": "calc(-1 * --spacing(--value(number, [*])))",
     position: "relative",
     "&::before": {
       position: "absolute",
@@ -67,7 +61,7 @@ const css = {
     },
   },
   "@utility hitbox-l-*": {
-    "--hitbox-l": "calc(--value([*]) * -1)",
+    "--hitbox-l": "calc(-1 * --spacing(--value(number, [*])))",
     position: "relative",
     "&::before": {
       position: "absolute",
@@ -80,7 +74,7 @@ const css = {
     },
   },
   "@utility hitbox-r-*": {
-    "--hitbox-r": "calc(--value([*]) * -1)",
+    "--hitbox-r": "calc(-1 * --spacing(--value(number, [*])))",
     position: "relative",
     "&::before": {
       position: "absolute",
@@ -93,7 +87,7 @@ const css = {
     },
   },
   "@utility hitbox-t-*": {
-    "--hitbox-t": "calc(--value([*]) * -1)",
+    "--hitbox-t": "calc(-1 * --spacing(--value(number, [*])))",
     position: "relative",
     "&::before": {
       position: "absolute",
@@ -106,7 +100,7 @@ const css = {
     },
   },
   "@utility hitbox-b-*": {
-    "--hitbox-b": "calc(--value([*]) * -1)",
+    "--hitbox-b": "calc(-1 * --spacing(--value(number, [*])))",
     position: "relative",
     "&::before": {
       position: "absolute",
@@ -119,8 +113,8 @@ const css = {
     },
   },
   "@utility hitbox-x-*": {
-    "--hitbox-l": "calc(--value([*]) * -1)",
-    "--hitbox-r": "calc(--value([*]) * -1)",
+    "--hitbox-l": "calc(-1 * --spacing(--value(number, [*])))",
+    "--hitbox-r": "calc(-1 * --spacing(--value(number, [*])))",
     position: "relative",
     "&::before": {
       position: "absolute",
@@ -133,8 +127,8 @@ const css = {
     },
   },
   "@utility hitbox-y-*": {
-    "--hitbox-t": "calc(--value([*]) * -1)",
-    "--hitbox-b": "calc(--value([*]) * -1)",
+    "--hitbox-t": "calc(-1 * --spacing(--value(number, [*])))",
+    "--hitbox-b": "calc(-1 * --spacing(--value(number, [*])))",
     position: "relative",
     "&::before": {
       position: "absolute",

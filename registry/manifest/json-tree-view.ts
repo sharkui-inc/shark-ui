@@ -3,8 +3,15 @@ import type { RegistryItemType } from "@/lib/registry";
 const dependencies = ["@ark-ui/react", "lucide-react"];
 
 const cssVars = {
+  theme: {
+    "--color-info": "var(--info)",
+    "--color-info-foreground": "var(--info-foreground)",
+    "--color-success": "var(--success)",
+    "--color-success-foreground": "var(--success-foreground)",
+    "--color-warning": "var(--warning)",
+    "--color-warning-foreground": "var(--warning-foreground)",
+  },
   light: {
-    "destructive-foreground": "var(--color-red-700)",
     info: "var(--color-blue-500)",
     "info-foreground": "var(--color-blue-700)",
     success: "var(--color-emerald-500)",
@@ -13,7 +20,6 @@ const cssVars = {
     "warning-foreground": "var(--color-amber-700)",
   },
   dark: {
-    "destructive-foreground": "var(--color-red-400)",
     info: "var(--color-blue-500)",
     "info-foreground": "var(--color-blue-400)",
     success: "var(--color-emerald-500)",

@@ -69,7 +69,7 @@ const CHART_DATA = [
 const chartConfig = {
   value: {
     label: "Sales",
-    color: "hsl(var(--chart-1))",
+    color: "var(--chart-1)",
   },
 } satisfies ChartConfig;
 

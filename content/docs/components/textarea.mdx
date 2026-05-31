@@ -35,6 +35,31 @@ npx shadcn@latest add @shark/textarea
 npm install @ark-ui/react
 ```
 
+<Step>Import the invalid-state color variables into your CSS file.</Step>
+
+<CodeCollapsibleWrapper>
+```css
+@theme inline {
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+}
+
+:root {
+  --destructive: var(--color-red-500);
+  --destructive-foreground: var(--color-red-700);
+}
+
+.dark {
+  --destructive: color-mix(
+    in srgb,
+    var(--color-red-600) 90%,
+    var(--color-neutral-50)
+  );
+  --destructive-foreground: var(--color-red-400);
+}
+```
+</CodeCollapsibleWrapper>
+
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource title="components/ui/textarea.tsx" src="/textarea.tsx" />

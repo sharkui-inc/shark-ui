@@ -41,6 +41,9 @@ npm install @ark-ui/react tailwind-variants lucide-react
 
 ```css title="globals.css"
 @theme inline {
+  --animate-expand: expand 0.2s ease-out;
+  --animate-collapse: collapse 0.2s ease-out;
+
   @keyframes expand {
     from { height: var(--collapsed-height, 0); }
     to { height: var(--height); }

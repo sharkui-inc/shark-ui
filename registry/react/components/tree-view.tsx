@@ -270,8 +270,8 @@ export const TreeViewBranchContent = (
     <ArkTreeView.BranchContent
       className={cn(
         "relative overflow-hidden",
-        "data-[state=open]:animate-[expand_150ms_ease-out]",
-        "data-[state=closed]:animate-[collapse_150ms_ease-out]",
+        "data-[state=open]:animate-expand",
+        "data-[state=closed]:animate-collapse",
         "motion-reduce:animate-none!",
         className
       )}
