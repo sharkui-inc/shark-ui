@@ -7,6 +7,14 @@
     "lucide-react",
     "tailwind-variants"
   ],
+  "cssVars": {
+    "light": {
+      "destructive-foreground": "var(--color-red-700)"
+    },
+    "dark": {
+      "destructive-foreground": "var(--color-red-400)"
+    }
+  },
   "registryDependencies": [
     "http://localhost:3000/r/field.json"
   ],

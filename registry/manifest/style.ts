@@ -45,7 +45,8 @@ const cssVars = {
     input:
       "color-mix(in srgb, var(--color-neutral-950) 13%, var(--background))",
     ring: "var(--color-neutral-400)",
-    sidebar: "var(--color-neutral-50)",
+    sidebar:
+      "color-mix(in srgb, var(--color-neutral-50) 97%, var(--color-neutral-950))",
     "sidebar-foreground":
       "color-mix(in srgb, var(--color-neutral-800) 64%, var(--sidebar))",
     "sidebar-primary": "var(--color-neutral-800)",
@@ -72,13 +73,12 @@ const cssVars = {
     "popover-foreground": "var(--color-neutral-100)",
     primary: "var(--color-neutral-100)",
     "primary-foreground": "var(--color-neutral-800)",
-    secondary: "color-mix(in srgb, var(--color-white) 10%, var(--background))",
+    secondary: "color-mix(in srgb, var(--color-white) 8%, var(--background))",
     "secondary-foreground": "var(--color-neutral-100)",
-    muted: "color-mix(in srgb, var(--color-neutral-50) 10%, var(--background))",
+    muted: "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
     "muted-foreground":
       "color-mix(in srgb, var(--color-neutral-500) 70%, var(--color-neutral-50))",
-    accent:
-      "color-mix(in srgb, var(--color-neutral-50) 10%, var(--background))",
+    accent: "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
     "accent-foreground": "var(--color-neutral-100)",
     destructive:
       "color-mix(in srgb, var(--color-red-600) 90%, var(--color-neutral-50))",
@@ -89,8 +89,9 @@ const cssVars = {
     "success-foreground": "var(--color-emerald-400)",
     warning: "var(--color-amber-500)",
     "warning-foreground": "var(--color-amber-400)",
-    border: "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
-    input: "color-mix(in srgb, var(--color-neutral-50) 10%, var(--background))",
+    border:
+      "color-mix(in srgb, var(--color-neutral-50) 12%, var(--background))",
+    input: "color-mix(in srgb, var(--color-neutral-50) 13%, var(--background))",
     ring: "var(--color-neutral-500)",
     sidebar:
       "color-mix(in srgb, var(--color-neutral-950) 97%, var(--color-neutral-50))",
@@ -99,7 +100,7 @@ const cssVars = {
     "sidebar-primary": "var(--color-neutral-100)",
     "sidebar-primary-foreground": "var(--color-neutral-800)",
     "sidebar-accent":
-      "color-mix(in srgb, var(--color-neutral-50) 10%, var(--sidebar))",
+      "color-mix(in srgb, var(--color-neutral-50) 8%, var(--sidebar))",
     "sidebar-accent-foreground": "var(--color-neutral-100)",
     "sidebar-border":
       "color-mix(in srgb, var(--color-neutral-50) 11%, var(--sidebar))",

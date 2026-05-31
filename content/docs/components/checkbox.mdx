@@ -29,6 +29,24 @@ npx shadcn@latest add @shark/checkbox
 
 <Steps>
 
+<Step>Import the following variable into your CSS file for destructive foreground styles:</Step>
+
+<CodeCollapsibleWrapper>
+```css
+@theme inline {
+  --color-destructive-foreground: var(--destructive-foreground);
+}
+
+:root {
+  --destructive-foreground: var(--color-red-700);
+}
+
+.dark {
+  --destructive-foreground: var(--color-red-400);
+}
+```
+</CodeCollapsibleWrapper>
+
 <Step>Install the following dependencies:</Step>
 
 ```bash

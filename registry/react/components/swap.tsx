@@ -21,8 +21,8 @@ const swapIndicatorVariants = tv({
       ],
       flip: [
         "[&>span]:backface-hidden",
-        "[&>span]:data-[state=open]:animate-[flip-in_400ms_ease]",
-        "[&>span]:data-[state=closed]:animate-[flip-out_200ms_ease]",
+        "[&>span]:data-[state=open]:animate-flip-in",
+        "[&>span]:data-[state=closed]:animate-flip-out",
       ],
       rotate: [
         "[&>span]:data-[state=open]:spin-in-[-90deg] [&>span]:data-[state=open]:fade-in-0 [&>span]:data-[state=open]:animate-in [&>span]:data-[state=open]:duration-250",

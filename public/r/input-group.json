@@ -6,6 +6,14 @@
     "@ark-ui/react",
     "tailwind-variants"
   ],
+  "cssVars": {
+    "light": {
+      "destructive-foreground": "var(--color-red-700)"
+    },
+    "dark": {
+      "destructive-foreground": "var(--color-red-400)"
+    }
+  },
   "registryDependencies": [
     "http://localhost:3000/r/input.json",
     "http://localhost:3000/r/button.json",

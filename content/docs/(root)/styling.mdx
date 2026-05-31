@@ -97,7 +97,11 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
   --border: color-mix(in srgb, var(--color-neutral-950) 12%, var(--background));
   --input: color-mix(in srgb, var(--color-neutral-950) 13%, var(--background));
   --ring: var(--color-neutral-400);
-  --sidebar: var(--color-neutral-50);
+  --sidebar: color-mix(
+    in srgb,
+    var(--color-neutral-50) 97%,
+    var(--color-neutral-950)
+  );
   --sidebar-foreground: color-mix(
     in srgb,
     var(--color-neutral-800) 64%,

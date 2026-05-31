@@ -78,10 +78,10 @@ npx shadcn@latest add @shark/hitbox
 }
 @utility hitbox-* {
   position: relative;
-  --hitbox-t: calc(-1 * --spacing(--value(number, [*])));
-  --hitbox-b: calc(-1 * --spacing(--value(number, [*])));
-  --hitbox-l: calc(-1 * --spacing(--value(number, [*])));
-  --hitbox-r: calc(-1 * --spacing(--value(number, [*])));
+  --hitbox-t: calc(--value([*]) * -1);
+  --hitbox-b: calc(--value([*]) * -1);
+  --hitbox-l: calc(--value([*]) * -1);
+  --hitbox-r: calc(--value([*]) * -1);
   &::before {
     content: "";
     position: absolute;
@@ -94,34 +94,34 @@ npx shadcn@latest add @shark/hitbox
 }
 @utility hitbox-l-* {
   position: relative;
-  --hitbox-l: calc(-1 * --spacing(--value(number, [*])));
+  --hitbox-l: calc(--value([*]) * -1);
   &::before { content: ""; position: absolute; top: var(--hitbox-t, 0px); right: var(--hitbox-r, 0px); bottom: var(--hitbox-b, 0px); left: var(--hitbox-l, 0px); pointer-events: inherit; }
 }
 @utility hitbox-r-* {
   position: relative;
-  --hitbox-r: calc(-1 * --spacing(--value(number, [*])));
+  --hitbox-r: calc(--value([*]) * -1);
   &::before { content: ""; position: absolute; top: var(--hitbox-t, 0px); right: var(--hitbox-r, 0px); bottom: var(--hitbox-b, 0px); left: var(--hitbox-l, 0px); pointer-events: inherit; }
 }
 @utility hitbox-t-* {
   position: relative;
-  --hitbox-t: calc(-1 * --spacing(--value(number, [*])));
+  --hitbox-t: calc(--value([*]) * -1);
   &::before { content: ""; position: absolute; top: var(--hitbox-t, 0px); right: var(--hitbox-r, 0px); bottom: var(--hitbox-b, 0px); left: var(--hitbox-l, 0px); pointer-events: inherit; }
 }
 @utility hitbox-b-* {
   position: relative;
-  --hitbox-b: calc(-1 * --spacing(--value(number, [*])));
+  --hitbox-b: calc(--value([*]) * -1);
   &::before { content: ""; position: absolute; top: var(--hitbox-t, 0px); right: var(--hitbox-r, 0px); bottom: var(--hitbox-b, 0px); left: var(--hitbox-l, 0px); pointer-events: inherit; }
 }
 @utility hitbox-x-* {
   position: relative;
-  --hitbox-l: calc(-1 * --spacing(--value(number, [*])));
-  --hitbox-r: calc(-1 * --spacing(--value(number, [*])));
+  --hitbox-l: calc(--value([*]) * -1);
+  --hitbox-r: calc(--value([*]) * -1);
   &::before { content: ""; position: absolute; top: var(--hitbox-t, 0px); right: var(--hitbox-r, 0px); bottom: var(--hitbox-b, 0px); left: var(--hitbox-l, 0px); pointer-events: inherit; }
 }
 @utility hitbox-y-* {
   position: relative;
-  --hitbox-t: calc(-1 * --spacing(--value(number, [*])));
-  --hitbox-b: calc(-1 * --spacing(--value(number, [*])));
+  --hitbox-t: calc(--value([*]) * -1);
+  --hitbox-b: calc(--value([*]) * -1);
   &::before { content: ""; position: absolute; top: var(--hitbox-t, 0px); right: var(--hitbox-r, 0px); bottom: var(--hitbox-b, 0px); left: var(--hitbox-l, 0px); pointer-events: inherit; }
 }
 ```

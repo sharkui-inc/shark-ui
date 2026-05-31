@@ -7,6 +7,14 @@
     "tailwind-variants",
     "lucide-react"
   ],
+  "cssVars": {
+    "light": {
+      "destructive-foreground": "var(--color-red-700)"
+    },
+    "dark": {
+      "destructive-foreground": "var(--color-red-400)"
+    }
+  },
   "files": [
     {
       "path": "registry/react/components/menu.tsx",
