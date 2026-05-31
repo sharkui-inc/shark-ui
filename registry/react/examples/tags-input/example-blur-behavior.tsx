@@ -4,7 +4,6 @@ import { Field, FieldLabel } from "@/registry/react/components/field";
 import {
   TagsInput,
   TagsInputContext,
-  TagsInputInput,
   TagsInputItem,
 } from "@/registry/react/components/tags-input";
 
@@ -13,16 +12,13 @@ const Example = () => (
     <FieldLabel>Frameworks</FieldLabel>
     <TagsInput blurBehavior="add" className="w-full" defaultValue={["React"]}>
       <TagsInputContext>
-        {(api) => (
-          <>
-            {api.value.map((tag, index) => (
-              <TagsInputItem index={index} key={tag} value={tag}>
-                {tag}
-              </TagsInputItem>
-            ))}
-            <TagsInputInput placeholder="Blur adds the tag" />
-          </>
-        )}
+        {({ value }) =>
+          value.map((tag, index) => (
+            <TagsInputItem index={index} key={tag} value={tag}>
+              {tag}
+            </TagsInputItem>
+          ))
+        }
       </TagsInputContext>
     </TagsInput>
   </Field>

@@ -1,18 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 import {
   TagsInput,
   TagsInputContext,
-  TagsInputInput,
   TagsInputItem,
 } from "@/registry/react/components/tags-input";
 
 const initialValue = ["React", "Solid"];
 
 const Example = () => {
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = React.useState(initialValue);
 
   return (
     <Field className="w-full max-w-sm">
@@ -23,16 +22,13 @@ const Example = () => {
         value={value}
       >
         <TagsInputContext>
-          {(api) => (
-            <>
-              {api.value.map((tag, index) => (
-                <TagsInputItem index={index} key={tag} value={tag}>
-                  {tag}
-                </TagsInputItem>
-              ))}
-              <TagsInputInput placeholder="Add framework" />
-            </>
-          )}
+          {({ value }) =>
+            value.map((tag, index) => (
+              <TagsInputItem index={index} key={tag} value={tag}>
+                {tag}
+              </TagsInputItem>
+            ))
+          }
         </TagsInputContext>
       </TagsInput>
     </Field>

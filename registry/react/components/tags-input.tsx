@@ -17,7 +17,6 @@ import {
 
 export const useTagsInput = useArkTagsInput;
 export const useTagsInputContext = useArkTagsInputContext;
-
 export const TagsInputContext = ArkTagsInput.Context;
 
 interface TagsInputProps
@@ -32,7 +31,15 @@ interface TagsInputProps
 }
 
 export const TagsInput = (props: TagsInputProps) => {
-  const { size = "md", showClear, className, children, ...rest } = props;
+  const {
+    size = "md",
+    showClear,
+    editable = false,
+    tabIndex,
+    className,
+    children,
+    ...rest
+  } = props;
 
   return (
     <ArkTagsInput.Root
@@ -43,42 +50,17 @@ export const TagsInput = (props: TagsInputProps) => {
       )}
       data-size={size}
       data-slot="tags-input"
+      editable={editable}
       {...rest}
     >
-      <TagsInputControl showClear={showClear}>{children}</TagsInputControl>
-      <ArkTagsInput.HiddenInput />
+      <TagsInputControl showClear={showClear}>
+        {children}
+
+        <TagsInputInput placeholder="Add framework" />
+      </TagsInputControl>
+
+      <ArkTagsInput.HiddenInput tabIndex={tabIndex} />
     </ArkTagsInput.Root>
-  );
-};
-
-interface TagsInputRootProviderProps
-  extends React.ComponentProps<typeof ArkTagsInput.RootProvider>,
-    Pick<InputGroupProps, "size"> {
-  /**
-   * Whether to show the clear button.
-   *
-   * @default true
-   */
-  showClear?: boolean;
-}
-
-export const TagsInputRootProvider = (props: TagsInputRootProviderProps) => {
-  const { size = "md", showClear, className, children, ...rest } = props;
-
-  return (
-    <ArkTagsInput.RootProvider
-      className={cn(
-        "group/tags-input",
-        "flex w-full flex-col gap-2",
-        className
-      )}
-      data-size={size}
-      data-slot="tags-input-root-provider"
-      {...rest}
-    >
-      <TagsInputControl showClear={showClear}>{children}</TagsInputControl>
-      <ArkTagsInput.HiddenInput />
-    </ArkTagsInput.RootProvider>
   );
 };
 
@@ -102,10 +84,9 @@ export const TagsInputControl = (props: TagsInputControlProps) => {
     <ArkTagsInput.Control asChild data-slot="tags-input-control">
       <InputGroup
         className={cn(
-          "h-auto min-h-8",
+          "h-auto in-data-[size=lg]:min-h-9 in-data-[size=sm]:min-h-7 min-h-8",
           "p-1",
           "flex-wrap content-start items-center gap-1",
-          "in-data-[size=lg]:min-h-9 in-data-[size=sm]:min-h-7",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
           className
         )}
@@ -129,11 +110,11 @@ interface TagsInputItemProps
    *
    * @default true
    */
-  showClear?: boolean;
+  showDelete?: boolean;
 }
 
 export const TagsInputItem = (props: TagsInputItemProps) => {
-  const { showClear = true, className, children, ...rest } = props;
+  const { showDelete = true, className, children, ...rest } = props;
 
   return (
     <ArkTagsInput.Item
@@ -152,7 +133,7 @@ export const TagsInputItem = (props: TagsInputItemProps) => {
     >
       <TagsInputItemPreview>
         <TagsInputItemText>{children}</TagsInputItemText>
-        {showClear && <TagsInputItemDeleteTrigger />}
+        {showDelete && <TagsInputItemDeleteTrigger />}
       </TagsInputItemPreview>
       <TagsInputItemInput />
     </ArkTagsInput.Item>
@@ -270,5 +251,36 @@ export const TagsInputClearTrigger = (
         {children ?? <XIcon aria-hidden />}
       </InputGroupButton>
     </ArkTagsInput.ClearTrigger>
+  );
+};
+
+interface TagsInputRootProviderProps
+  extends React.ComponentProps<typeof ArkTagsInput.RootProvider>,
+    Pick<InputGroupProps, "size"> {
+  /**
+   * Whether to show the clear button.
+   *
+   * @default true
+   */
+  showClear?: boolean;
+}
+
+export const TagsInputRootProvider = (props: TagsInputRootProviderProps) => {
+  const { size = "md", showClear, className, children, ...rest } = props;
+
+  return (
+    <ArkTagsInput.RootProvider
+      className={cn(
+        "group/tags-input",
+        "flex w-full flex-col gap-2",
+        className
+      )}
+      data-size={size}
+      data-slot="tags-input-root-provider"
+      {...rest}
+    >
+      <TagsInputControl showClear={showClear}>{children}</TagsInputControl>
+      <ArkTagsInput.HiddenInput />
+    </ArkTagsInput.RootProvider>
   );
 };

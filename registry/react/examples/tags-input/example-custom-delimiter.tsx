@@ -4,7 +4,6 @@ import { Field, FieldLabel } from "@/registry/react/components/field";
 import {
   TagsInput,
   TagsInputContext,
-  TagsInputInput,
   TagsInputItem,
 } from "@/registry/react/components/tags-input";
 
@@ -19,16 +18,13 @@ const Example = () => (
       delimiter={tagDelimiter}
     >
       <TagsInputContext>
-        {(api) => (
-          <>
-            {api.value.map((tag, index) => (
-              <TagsInputItem index={index} key={tag} value={tag}>
-                {tag}
-              </TagsInputItem>
-            ))}
-            <TagsInputInput placeholder="Comma, semicolon or space" />
-          </>
-        )}
+        {({ value }) =>
+          value.map((tag, index) => (
+            <TagsInputItem index={index} key={tag} value={tag}>
+              {tag}
+            </TagsInputItem>
+          ))
+        }
       </TagsInputContext>
     </TagsInput>
   </Field>

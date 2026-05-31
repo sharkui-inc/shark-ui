@@ -22,7 +22,7 @@ import {
   SquareTerminal,
   Trash2,
 } from "lucide-react";
-import React, { type ElementType } from "react";
+import React from "react";
 import { SharkIcon } from "@/components/icons/shark";
 import {
   Avatar,
@@ -192,7 +192,7 @@ const data = {
 interface TeamSwitcherProps {
   teams: {
     name: string;
-    logo: ElementType;
+    logo: React.ElementType;
     plan: string;
   }[];
 }
@@ -269,7 +269,7 @@ interface NavMainProps {
   items: {
     title: string;
     url: string;
-    icon?: ElementType;
+    icon?: React.ElementType;
     isActive?: boolean;
     items?: {
       title: string;
@@ -321,7 +321,7 @@ interface NavProjectsProps {
   projects: {
     name: string;
     url: string;
-    icon: ElementType;
+    icon: React.ElementType;
   }[];
 }
 

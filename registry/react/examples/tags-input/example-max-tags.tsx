@@ -4,7 +4,6 @@ import { Field, FieldLabel } from "@/registry/react/components/field";
 import {
   TagsInput,
   TagsInputContext,
-  TagsInputInput,
   TagsInputItem,
 } from "@/registry/react/components/tags-input";
 
@@ -13,16 +12,13 @@ const Example = () => (
     <FieldLabel>Frameworks (max 3)</FieldLabel>
     <TagsInput className="w-full" defaultValue={["React", "Solid"]} max={3}>
       <TagsInputContext>
-        {(api) => (
-          <>
-            {api.value.map((tag, index) => (
-              <TagsInputItem index={index} key={tag} value={tag}>
-                {tag}
-              </TagsInputItem>
-            ))}
-            <TagsInputInput placeholder="Add framework" />
-          </>
-        )}
+        {({ value }) =>
+          value.map((tag, index) => (
+            <TagsInputItem index={index} key={tag} value={tag}>
+              {tag}
+            </TagsInputItem>
+          ))
+        }
       </TagsInputContext>
     </TagsInput>
   </Field>

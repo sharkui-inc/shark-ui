@@ -1,7 +1,7 @@
 "use client";
 
 import { useFilter, useListCollection } from "@ark-ui/react";
-import { useId } from "react";
+import React from "react";
 import {
   Combobox,
   ComboboxContent,
@@ -31,7 +31,8 @@ const frameworkItems = [
 ];
 
 const Example = () => {
-  const uid = useId();
+  const uid = React.useId();
+
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
     initialItems: frameworkItems,
@@ -47,28 +48,27 @@ const Example = () => {
   );
 
   return (
-    <Combobox
-      allowCustomValue
-      className="w-full max-w-sm"
-      collection={collection}
-      ids={{ input: `tags-input-${uid}`, control: `tags-control-${uid}` }}
-      onInputValueChange={({ inputValue }) => filter(inputValue)}
-      onValueChange={({ value }) => {
-        const next = value[0];
-        if (next && !tagsInput.value.includes(next)) {
-          tagsInput.addValue(next);
-        }
-      }}
-      selectionBehavior="clear"
-      value={[]}
-    >
-      <Field className="w-full">
-        <FieldLabel>Frameworks</FieldLabel>
+    <Field className="w-full max-w-sm">
+      <FieldLabel htmlFor={`tags-input-${uid}`}>Frameworks</FieldLabel>
+      <Combobox
+        allowCustomValue
+        collection={collection}
+        ids={{ input: `tags-input-${uid}`, control: `tags-control-${uid}` }}
+        onInputValueChange={({ inputValue }) => filter(inputValue)}
+        onValueChange={({ value }) => {
+          const next = value[0];
+          if (next && !tagsInput.value.includes(next)) {
+            tagsInput.addValue(next);
+          }
+        }}
+        selectionBehavior="clear"
+        value={[]}
+      >
         <TagsInputRootProvider className="w-full" value={tagsInput}>
           <TagsInputContext>
-            {(api) => (
+            {({ value }) => (
               <>
-                {api.value.map((tag, index) => (
+                {value.map((tag, index) => (
                   <TagsInputItem index={index} key={tag} value={tag}>
                     {tag}
                   </TagsInputItem>
@@ -80,18 +80,18 @@ const Example = () => {
             )}
           </TagsInputContext>
         </TagsInputRootProvider>
-      </Field>
-      <ComboboxContent>
-        <ComboboxList>
-          <ComboboxEmpty>No frameworks found</ComboboxEmpty>
-          {availableItems.map((item) => (
-            <ComboboxItem item={item} key={item}>
-              {item}
-            </ComboboxItem>
-          ))}
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox>
+        <ComboboxContent>
+          <ComboboxList>
+            <ComboboxEmpty>No frameworks found</ComboboxEmpty>
+            {availableItems.map((item) => (
+              <ComboboxItem item={item} key={item}>
+                {item}
+              </ComboboxItem>
+            ))}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+    </Field>
   );
 };
 

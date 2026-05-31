@@ -5,7 +5,6 @@ import { Combobox as ArkCombobox } from "@ark-ui/react/combobox";
 import { Dialog as ArkDialog } from "@ark-ui/react/dialog";
 import { SearchIcon } from "lucide-react";
 import type React from "react";
-import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 import {
   Combobox,
@@ -215,7 +214,9 @@ export const CommandGroupLabel = (
   props: React.ComponentProps<typeof ComboboxGroupLabel>
 ) => <ComboboxGroupLabel data-slot="command-group-label" {...props} />;
 
-export const CommandItem = (props: ComponentProps<typeof ComboboxItem>) => {
+export const CommandItem = (
+  props: React.ComponentProps<typeof ComboboxItem>
+) => {
   const { className, ...rest } = props;
 
   return (

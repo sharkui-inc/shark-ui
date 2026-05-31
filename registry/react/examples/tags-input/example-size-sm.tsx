@@ -4,7 +4,6 @@ import { Field, FieldLabel } from "@/registry/react/components/field";
 import {
   TagsInput,
   TagsInputContext,
-  TagsInputInput,
   TagsInputItem,
 } from "@/registry/react/components/tags-input";
 
@@ -15,16 +14,13 @@ const Example = () => (
     <FieldLabel>Frameworks</FieldLabel>
     <TagsInput className="w-full" defaultValue={defaultValue} size="sm">
       <TagsInputContext>
-        {(api) => (
-          <>
-            {api.value.map((value, index) => (
-              <TagsInputItem index={index} key={value} value={value}>
-                {value}
-              </TagsInputItem>
-            ))}
-            <TagsInputInput placeholder="Small" />
-          </>
-        )}
+        {({ value }) =>
+          value.map((value, index) => (
+            <TagsInputItem index={index} key={value} value={value}>
+              {value}
+            </TagsInputItem>
+          ))
+        }
       </TagsInputContext>
     </TagsInput>
   </Field>

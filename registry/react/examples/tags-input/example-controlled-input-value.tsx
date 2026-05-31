@@ -1,17 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 import {
   TagsInput,
   TagsInputContext,
-  TagsInputInput,
   TagsInputItem,
 } from "@/registry/react/components/tags-input";
 
 const Example = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = React.useState("");
 
   return (
     <div className="flex max-w-sm flex-col gap-3">
@@ -36,16 +35,13 @@ const Example = () => {
           onInputValueChange={(details) => setInputValue(details.inputValue)}
         >
           <TagsInputContext>
-            {(api) => (
-              <>
-                {api.value.map((tag, index) => (
-                  <TagsInputItem index={index} key={tag} value={tag}>
-                    {tag}
-                  </TagsInputItem>
-                ))}
-                <TagsInputInput placeholder="Add framework" />
-              </>
-            )}
+            {({ value }) =>
+              value.map((tag, index) => (
+                <TagsInputItem index={index} key={tag} value={tag}>
+                  {tag}
+                </TagsInputItem>
+              ))
+            }
           </TagsInputContext>
         </TagsInput>
       </Field>

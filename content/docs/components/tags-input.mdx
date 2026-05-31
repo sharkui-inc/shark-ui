@@ -52,12 +52,9 @@ npm install @ark-ui/react lucide-react
 ## Anatomy
 
 ```text
-Field
-├── FieldLabel
-└── TagsInput
-    └── TagsInputContext
-        ├── TagsInputItem
-        └── TagsInputInput
+TagsInput
+└── TagsInputContext
+    └── TagsInputItem
 ```
 
 ## Usage
@@ -67,29 +64,22 @@ import { Field, FieldLabel } from "@/components/ui/field";
 import {
   TagsInput,
   TagsInputContext,
-  TagsInputInput,
   TagsInputItem,
 } from "@/components/ui/tags-input";
 ```
 
 ```tsx
-<Field className="max-w-md">
-  <FieldLabel>Frameworks</FieldLabel>
-  <TagsInput defaultValue={["React", "Solid"]}>
-    <TagsInputContext>
-      {(api) => (
-        <>
-          {api.value.map((value, index) => (
-            <TagsInputItem index={index} key={value} value={value}>
-              {value}
-            </TagsInputItem>
-          ))}
-          <TagsInputInput placeholder="Add framework" />
-        </>
-      )}
+<TagsInput defaultValue={["React", "Solid"]}>
+  <TagsInputContext>
+      {({ value }) =>
+        value.map((value, index) => (
+          <TagsInputItem index={index} key={value} value={value}>
+            {value}
+          </TagsInputItem>
+        ))
+      }
     </TagsInputContext>
-  </TagsInput>
-</Field>
+</TagsInput>
 ```
 
 ## Controlled
@@ -172,15 +162,9 @@ Use `addOnPaste` with `delimiter` to create multiple tags from pasted text.
 
 <ComponentPreview componentName="tags-input" fileName="example-paste-behavior" />
 
-### Read-only
-
-Use `readOnly` to show tags without allowing changes.
-
-<ComponentPreview componentName="tags-input" fileName="example-read-only" />
-
 ### Sanitize
 
-Use `sanitizeValue` to normalize tag text (trim, lowercase, and so on) before tags are added.
+Use `sanitizeValue` to normalize tag text before tags are added.
 
 <ComponentPreview componentName="tags-input" fileName="example-sanitize-value" />
 
@@ -191,8 +175,6 @@ Use `validate` to accept or reject tags before they are added.
 <ComponentPreview componentName="tags-input" fileName="example-validation" />
 
 ### With Combobox
-
-Combine with [Combobox](/docs/components/combobox) using shared `ids` and `asChild` on the input. Install Combobox separately if you use this pattern.
 
 <ComponentPreview componentName="tags-input" fileName="example-combobox" />
 
@@ -206,15 +188,16 @@ Wrap with [Field](/docs/components/field) for labels, descriptions, and validati
 
 ### TagsInput
 
-Root component. Renders a hidden input for form submission.
+Root component. Composes the control, input, and hidden field for form submission.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `size` | `"sm" \|| `onInputValueChange` | `(details) => void` | - |
-| `showClear` | `boolean` | `true` || "lg"` | `"md"` |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `showClear` | `boolean` | `true` |
 | `defaultValue` | `string[]` | - |
 | `value` | `string[]` | - |
 | `inputValue` | `string` | - |
+| `defaultInputValue` | `string` | - |
 | `max` | `number` | `Infinity` |
 | `maxLength` | `number` | - |
 | `delimiter` | `string \| RegExp` | `","` |
@@ -222,21 +205,26 @@ Root component. Renders a hidden input for form submission.
 | `allowOverflow` | `boolean` | - |
 | `disabled` | `boolean` | - |
 | `invalid` | `boolean` | - |
-| `readOnly` | `boolean` | - |
-| `editable` | `boolean` | `true` |
+| `required` | `boolean` | - |
+| `editable` | `boolean` | `false` |
 | `addOnPaste` | `boolean` | `false` |
 | `blurBehavior` | `"add" \| "clear"` | - |
 | `validate` | `(details) => boolean` | - |
-| `sanitizeValue` | `(value: string) => string` | - |
+| `sanitizeValue` | `(value: string) => string` | `(value) => value.trim()` |
 | `onValueChange` | `(details) => void` | - |
 | `onInputValueChange` | `(details) => void` | - |
-| `showClear` | `boolean` | `true` ||| `onInputValueChange` | `(details) => void` | - |
-| `showClear` | `boolean` | `true` ||| `onInputValueChange` | `(details) => void` | - |
-| `showClear` | `boolean` | `true` |
+| `onHighlightChange` | `(details) => void` | - |
+| `onValueInvalid` | `(details) => void` | - |
+| `className` | `string` | - |
 
 ### TagsInputInput
 
-Borderless text field for adding new tags.
+Borderless text field for adding new tags. Rendered inside `TagsInput` by default.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `placeholder` | `string` | - |
+| `className` | `string` | - |
 
 ### TagsInputItem
 
@@ -244,12 +232,20 @@ Represents a single tag. Requires `index` and `value`. Pass the label as childre
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `showClear` | `boolean` | `true` |
-
+| `index` | `number` | **required** |
+| `value` | `string` | **required** |
+| `showDelete` | `boolean` | `true` |
+| `disabled` | `boolean` | - |
+| `className` | `string` | - |
 
 ### TagsInputClearTrigger
 
 Clears all tags.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | - |
+| `asChild` | `boolean` | - |
 
 ---
 
