@@ -7,7 +7,7 @@ Thanks for your interest in contributing to shark-ui. This document covers how t
 1. **Clone and install**
 
    ```bash
-   git clone https://github.com/vinihvc/shark-ui.git
+   git clone https://github.com/sharkui-inc/shark-ui.git
    cd shark-ui
    pnpm install
    ```

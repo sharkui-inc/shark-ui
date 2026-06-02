@@ -12,6 +12,7 @@ import { Button } from "@/registry/react/components/button";
 import { Separator } from "@/registry/react/components/separator";
 import { HeaderBrand } from "./header.brand";
 import { HeaderCustomize } from "./header.customize";
+import { SITE_CONFIG } from "@/config/site";
 
 export const SiteHeader = (props: React.ComponentProps<"header">) => {
   const { className, ...rest } = props;
@@ -57,7 +58,7 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
               variant="ghost"
             >
               <a
-                href="https://github.com/vinihvc/shark-ui"
+                href={SITE_CONFIG.repoUrl}
                 rel="noopener noreferrer"
                 target="_blank"
               >

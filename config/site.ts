@@ -3,6 +3,6 @@ export const SITE_CONFIG = {
   description: "shadcn/ui-style components built on Ark UI.",
   url: "https://shark.vini.one",
   creator: "@vinihvc",
-  repoUrl: "https://github.com/vinihvc/shark-ui",
+  repoUrl: "https://github.com/sharkui-inc/shark-ui",
   ogImage: "/og-image.png",
 } as const;

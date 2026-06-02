@@ -61,7 +61,7 @@ const collection = createTreeCollection({
           {
             id: "external/github",
             name: "GitHub Repository",
-            href: "https://github.com/vinihvc/shark-ui",
+            href: "https://github.com/sharkui-inc/shark-ui",
           },
         ],
       },
