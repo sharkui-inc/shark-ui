@@ -31,7 +31,6 @@ export const AnatomyCard = (props: AnatomyCardProps) => {
         "flex items-center justify-center",
         "size-full",
         "rounded-xl",
-        "no-scrollbar",
         "*:[div]:min-h-[350px] *:[div]:max-w-sm",
         className
       )}
