@@ -186,6 +186,7 @@ const actionBarPositionerVariants = tv({
     "fixed inset-x-0 bottom-0 z-50",
     "flex",
     "px-4 pb-[calc(var(--gutter)+env(safe-area-inset-bottom,0))]",
+    "pointer-events-none",
     "data-[state=closed]:animate-out data-[state=open]:animate-in",
     "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
     "data-[state=open]:slide-in-from-bottom-2 data-[state=closed]:slide-out-to-bottom-2",
@@ -237,6 +238,7 @@ export const ActionBarContent = (props: ActionBarContentProps) => {
               "px-[calc(var(--space)+2px)] py-(--space)",
               "bg-popover",
               "text-popover-foreground",
+              "pointer-events-auto",
               className
             )}
             data-slot="action-bar-content"
