@@ -2,10 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "action-bar",
   "type": "registry:ui",
-  "dependencies": [
-    "@ark-ui/react",
-    "tailwind-variants"
-  ],
+  "dependencies": ["@ark-ui/react", "tailwind-variants"],
   "registryDependencies": [
     "http://localhost:3000/r/badge.json",
     "http://localhost:3000/r/separator.json"

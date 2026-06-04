@@ -1,5 +1,5 @@
 <p align="center">
-  <strong>shark-ui</strong>
+  <img src="media/logo.png" alt="Shark UI" width="274" />
 </p>
 <p align="center">
   <em>shadcn-style components built on Ark UI</em>

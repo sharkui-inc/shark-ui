@@ -6,13 +6,13 @@ import { MainNav } from "@/components/layout/header/header.main";
 import { MobileNav } from "@/components/layout/header/header.mobile";
 import { ModeSwitcher } from "@/components/layout/mode-switcher";
 import { NAV_ITEMS } from "@/config/navigation";
+import { SITE_CONFIG } from "@/config/site";
 import { source } from "@/lib/fumadocs";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Separator } from "@/registry/react/components/separator";
 import { HeaderBrand } from "./header.brand";
 import { HeaderCustomize } from "./header.customize";
-import { SITE_CONFIG } from "@/config/site";
 
 export const SiteHeader = (props: React.ComponentProps<"header">) => {
   const { className, ...rest } = props;
