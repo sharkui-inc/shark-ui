@@ -97,6 +97,12 @@ import {
 </Dialog>
 ```
 
+## Controlled
+
+Use `open` and `onOpenChange` on the root to control the dialog state.
+
+<ComponentPreview componentName="dialog" fileName="example-controlled" />
+
 ## Title & Description
 
 `DialogHeader` supports two usage patterns:
@@ -121,6 +127,12 @@ Use `DialogTitle` and `DialogDescription` as children for more control.
   <DialogDescription>Dialog description</DialogDescription>
 </DialogHeader>
 ```
+
+## Size
+
+Use the `size` prop on `DialogContent` to control the maximum width of the panel.
+
+<ComponentPreview componentName="dialog" fileName="example-size" />
 
 ## Examples
 
@@ -215,7 +227,7 @@ Holds the dialog panel. Supports size variants from sm to fullscreen.
 
 | Prop | Type | Default |
 |------|------|---------|
-| `size` | `"sm" \| "md" \| "lg" \| "xl" \| "fullscreen"` | `"md"` |
+| `size` | `"sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "3xl" \| "4xl" \| "5xl" \| "6xl" \| "fullscreen"` | `"md"` |
 | `showCloseButton` | `boolean` | `true` |
 | `className` | `string` | `-` |
 

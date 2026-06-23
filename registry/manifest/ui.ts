@@ -41,6 +41,7 @@ const SHARK_UI_BUNDLE = [
   "context-menu",
   "data-list",
   "date-picker",
+  "date-input",
   "dialog",
   "download-trigger",
   "drawer",

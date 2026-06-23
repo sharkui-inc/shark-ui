@@ -23,7 +23,8 @@ export const NumberInput = (props: NumberInputProps) => {
   return (
     <ArkNumberInput.Root
       className={cn(
-        "group/number-field flex w-full flex-col items-start gap-2",
+        "group/number-field",
+        "flex w-full flex-col items-start gap-2",
         "has-data-[slot=number-field-increment]:has-data-[slot=number-field-decrement]:**:data-[slot=number-field-input]:text-center",
         className
       )}
@@ -43,7 +44,8 @@ export const NumberInputGroup = (
     <ArkNumberInput.Control
       className={cn(
         "relative",
-        "flex w-full justify-between",
+        "w-full",
+        "flex justify-between",
         "bg-transparent dark:bg-input/30",
         "text-base",
         "rounded-lg border border-input shadow-xs/5 ring-ring/32",

@@ -1,5 +1,6 @@
 "use client";
 
+import { parseDate } from "@ark-ui/react";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import React from "react";
@@ -13,7 +14,6 @@ import {
   CalendarViewControl,
   CalendarWeekDays,
   CalendarYearSelect,
-  parseDate,
 } from "@/registry/react/components/calendar";
 import {
   DatePicker,

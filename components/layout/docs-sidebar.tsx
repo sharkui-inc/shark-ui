@@ -25,30 +25,14 @@ interface DocsSidebarProps extends React.ComponentProps<typeof Sidebar> {
 }
 
 const NEW_ITEMS = [
-  "/docs/skills",
-  "/docs/changelog",
-  "/docs/forms/formisch",
-  "/docs/components/password-input",
-  "/docs/components/tags-input",
-  "/docs/hooks/use-is-mobile",
+  "/docs/components/date-input",
+  //
 ];
 
 const UPDATED_ITEMS = [
-  "/docs/forms",
-  "/docs/components/badge",
-  "/docs/components/calendar",
-  "/docs/components/card",
   "/docs/components/drawer",
-  "/docs/components/table",
-  "/docs/components/dialog",
-  "/docs/components/field",
-  "/docs/components/action-bar",
-  "/docs/components/toast",
-  "/docs/components/context-menu",
-  "/docs/components/number-input",
-  "/docs/components/timer",
-  "/docs/components/marquee",
-  "/docs/utilities/json-tree-view",
+  "/docs/components/status",
+  "/docs/components/float",
 ];
 
 export const DocsSidebar = (props: DocsSidebarProps) => {

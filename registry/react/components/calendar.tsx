@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  DatePicker as ArkCalendar,
-  parseDate as arkParseDate,
-} from "@ark-ui/react/date-picker";
+import { DatePicker as ArkCalendar } from "@ark-ui/react/date-picker";
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
@@ -13,8 +10,6 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { nativeSelectVariants } from "@/registry/react/components/native-select";
-
-export const parseDate = arkParseDate;
 
 export const Calendar = (
   props: React.ComponentProps<typeof ArkCalendar.Root>

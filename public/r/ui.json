@@ -9,7 +9,9 @@
     "recharts",
     "tailwind-variants"
   ],
-  "devDependencies": ["tw-animate-css"],
+  "devDependencies": [
+    "tw-animate-css"
+  ],
   "registryDependencies": [
     "http://localhost:3000/r/accordion.json",
     "http://localhost:3000/r/action-bar.json",
@@ -40,6 +42,7 @@
     "http://localhost:3000/r/context-menu.json",
     "http://localhost:3000/r/data-list.json",
     "http://localhost:3000/r/date-picker.json",
+    "http://localhost:3000/r/date-input.json",
     "http://localhost:3000/r/dialog.json",
     "http://localhost:3000/r/download-trigger.json",
     "http://localhost:3000/r/drawer.json",
@@ -96,6 +99,7 @@
     "http://localhost:3000/r/switch.json",
     "http://localhost:3000/r/table.json",
     "http://localhost:3000/r/tabs.json",
+    "http://localhost:3000/r/tags-input.json",
     "http://localhost:3000/r/textarea.json",
     "http://localhost:3000/r/timer.json",
     "http://localhost:3000/r/toast.json",

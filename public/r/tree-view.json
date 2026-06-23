@@ -2,7 +2,11 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "tree-view",
   "type": "registry:ui",
-  "dependencies": ["@ark-ui/react", "lucide-react", "tailwind-variants"],
+  "dependencies": [
+    "@ark-ui/react",
+    "lucide-react",
+    "tailwind-variants"
+  ],
   "css": {
     "@keyframes expand": {
       "from": {
@@ -21,7 +25,9 @@
       }
     }
   },
-  "registryDependencies": ["http://localhost:3000/r/checkbox.json"],
+  "registryDependencies": [
+    "http://localhost:3000/r/checkbox.json"
+  ],
   "files": [
     {
       "path": "registry/react/components/tree-view.tsx",

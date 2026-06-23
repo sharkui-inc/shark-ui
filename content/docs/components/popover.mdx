@@ -97,6 +97,18 @@ import {
 </Popover>
 ```
 
+## Controlled
+
+Use `open` and `onOpenChange` on the root to control the popover state.
+
+<ComponentPreview componentName="popover" fileName="example-controlled" />
+
+## Positioning
+
+Control the position of the popover relative to the trigger using the `positioning` prop.
+
+<ComponentPreview componentName="popover" fileName="example-positioning" />
+
 ## Title & Description
 
 `PopoverHeader` supports two usage patterns:
@@ -121,12 +133,6 @@ Use `PopoverTitle` and `PopoverDescription` as children for more control.
   <PopoverDescription>Popover description</PopoverDescription>
 </PopoverHeader>
 ```
-
-## Positioning
-
-Control the position of the popover relative to the trigger using the `positioning` prop.
-
-<ComponentPreview componentName="popover" fileName="example-positioning" />
 
 ## Examples
 
@@ -165,7 +171,6 @@ Use `closeOnInteractOutside` and `closeOnEscape` props to prevent closing on out
 Use `PopoverBody` to make the content area scrollable while keeping header and footer fixed.
 
 <ComponentPreview componentName="popover" fileName="example-scroll-area" />
-
 ### Inside dialog
 
 Render a popover inside a dialog.

@@ -6,7 +6,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
 const floatVariants = tv({
-  base: ["absolute z-10"],
+  base: ["pointer-events-auto absolute z-10"],
   variants: {
     placement: {
       "top-start": "-translate-1/2 inset-s-0 top-0",

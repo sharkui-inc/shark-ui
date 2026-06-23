@@ -1,0 +1,167 @@
+---
+title: Date Input
+description: Segmented input for dates and times.
+links:
+  doc: https://ark-ui.com/docs/components/date-input
+  api: https://ark-ui.com/docs/components/date-input#api-reference
+---
+
+<ComponentPreview componentName="date-input" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/date-input
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ark-ui/react
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/date-input.tsx" src="/date-input.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { DateInput } from "@/components/ui/date-input";
+```
+
+```tsx
+<DateInput />
+```
+
+## Controlled
+
+Use `value` and `onValueChange` to control the date input programmatically.
+
+<ComponentPreview componentName="date-input" fileName="example-controlled" />
+
+## States
+
+### Disabled
+
+Use the `disabled` prop to prevent user interaction.
+
+<ComponentPreview componentName="date-input" fileName="example-disabled" />
+
+### Invalid
+
+Use the `invalid` prop to indicate an error state.
+
+<ComponentPreview componentName="date-input" fileName="example-invalid" />
+
+## Sizes
+
+Use the `size` prop to change the input height.
+
+### Small
+
+<ComponentPreview componentName="date-input" fileName="example-size-sm" />
+
+### Medium
+
+<ComponentPreview componentName="date-input" fileName="example-size-md" />
+
+### Large
+
+<ComponentPreview componentName="date-input" fileName="example-size-lg" />
+
+## Examples
+
+### With Field
+
+Use [Field](/docs/components/field) components for a labeled date input with helper text.
+
+<ComponentPreview componentName="date-input" fileName="example-with-field" />
+
+### Granularity
+
+Use the `granularity` prop to control which date fields are displayed.
+
+<ComponentPreview componentName="date-input" fileName="example-granularity" />
+
+### Time Only
+
+<ComponentPreview componentName="date-input" fileName="example-time-only" />
+
+### Range
+
+Set `selectionMode="range"`.
+
+<ComponentPreview componentName="date-input" fileName="example-range" />
+
+### Min and Max
+
+Use `min` and `max` to restrict the selectable date range.
+
+<ComponentPreview componentName="date-input" fileName="example-min-max" />
+
+### Leading Zeros
+
+<ComponentPreview componentName="date-input" fileName="example-leading-zeros" />
+
+### With Clear Button
+
+Use the `showClear` prop to display a clear button when the date input has a value.
+
+<ComponentPreview componentName="date-input" fileName="example-with-clear-button" />
+
+### Custom Separator
+
+<ComponentPreview componentName="date-input" fileName="example-custom-separator" />
+
+## API Reference
+
+### DateInput
+
+Root component for the date input.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `showClear` | `boolean` | `false` |
+| `value` | `DateValue[]` | - |
+| `defaultValue` | `DateValue[]` | - |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `selectionMode` | `"single" \| "range"` | `"single"` |
+| `separator` | `string \| React.ReactNode` | `"-"` |
+| `granularity` | `"day" \| "hour" \| "minute" \| "second"` | `"day"` |
+| `hourCycle` | `12 \| 24` | - |
+| `formatter` | `DateFormatter` | - |
+| `min` | `DateValue` | - |
+| `max` | `DateValue` | - |
+| `shouldForceLeadingZeros` | `boolean` | `true` |
+| `disabled` | `boolean` | - |
+| `invalid` | `boolean` | - |
+| `className` | `string` | - |
+
+---
+
+For additional props and behavior, see the [Ark UI documentation](https://ark-ui.com/docs/components/date-input#api-reference).

@@ -20,6 +20,7 @@ npm install @ark-ui/react lucide-react
 ## Canonical imports
 
 ```tsx
+import { parseDate } from "@ark-ui/react";
 import {
   Calendar,
   CalendarViewControl,
@@ -29,7 +30,6 @@ import {
   CalendarTable,
   CalendarWeekDays,
   CalendarTableDays,
-  parseDate
 } from "@/components/ui/calendar"
 ```
 

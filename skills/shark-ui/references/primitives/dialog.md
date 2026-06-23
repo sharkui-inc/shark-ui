@@ -111,6 +111,7 @@ const [open, setOpen] = useState(false)
 ## Registry example files
 
 - [`example-close-behavior.tsx`](/registry/react/examples/dialog/example-close-behavior.tsx)
+- [`example-controlled.tsx`](/registry/react/examples/dialog/example-controlled.tsx)
 - [`example-custom-spacing.tsx`](/registry/react/examples/dialog/example-custom-spacing.tsx)
 - [`example-default.tsx`](/registry/react/examples/dialog/example-default.tsx)
 - [`example-initial-focus.tsx`](/registry/react/examples/dialog/example-initial-focus.tsx)
@@ -119,3 +120,4 @@ const [open, setOpen] = useState(false)
 - [`example-non-modal.tsx`](/registry/react/examples/dialog/example-non-modal.tsx)
 - [`example-open-from-menu.tsx`](/registry/react/examples/dialog/example-open-from-menu.tsx)
 - [`example-scroll-area.tsx`](/registry/react/examples/dialog/example-scroll-area.tsx)
+- [`example-size.tsx`](/registry/react/examples/dialog/example-size.tsx)

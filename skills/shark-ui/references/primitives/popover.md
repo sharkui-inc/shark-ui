@@ -75,6 +75,16 @@ import {
 - **Forms**: `PopoverContent` can wrap short forms using native `<form>` plus `Field` primitives.
 - **Dismiss controls**: use `PopoverClose` with `asChild` + `Button` (set `aria-label` on icon-only closes).
 
+Controlled open state:
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<Popover open={open} onOpenChange={({ open }) => setOpen(open)}>
+  {/* content */}
+</Popover>
+```
+
 ## Common pitfalls
 
 - Using `Popover` as a full modal replacement.
@@ -86,4 +96,5 @@ import {
 - [`example-default.tsx`](/registry/react/examples/popover/example-default.tsx)
 - [`example-anchor.tsx`](/registry/react/examples/popover/example-anchor.tsx)
 - [`example-close-button.tsx`](/registry/react/examples/popover/example-close-button.tsx)
+- [`example-controlled.tsx`](/registry/react/examples/popover/example-controlled.tsx)
 - [`example-positioning.tsx`](/registry/react/examples/popover/example-positioning.tsx)

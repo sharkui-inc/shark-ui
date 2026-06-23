@@ -105,8 +105,8 @@ export const dialogContentVariants = tv({
     "z-[calc(50+var(--layer-index,0))]",
     "relative",
     "row-start-2",
-    "max-h-full min-h-0 w-full min-w-0",
-    "flex flex-col",
+    "max-h-[calc(100svh-2rem)] min-h-0 w-full min-w-0",
+    "flex flex-col overflow-hidden",
     "bg-popover",
     "text-popover-foreground",
     "rounded-2xl border shadow-lg/5",
@@ -134,6 +134,7 @@ export const dialogContentVariants = tv({
     },
     bottomStickOnMobile: {
       true: [
+        "max-sm:max-h-[calc(100svh-3rem)]",
         "max-sm:max-w-none",
         "max-sm:rounded-none max-sm:rounded-t-2xl max-sm:border-x-0 max-sm:border-t max-sm:border-b-0",
         "max-sm:opacity-[calc(1-min(var(--nested-dialogs),1))]",
@@ -225,12 +226,10 @@ export const DialogBody = (props: DialogBodyProps) => {
   const { scrollFade = false, className, ...rest } = props;
 
   return (
-    <ScrollArea scrollFade={scrollFade}>
+    <ScrollArea className="min-h-0 flex-1" scrollFade={scrollFade}>
       <ark.div
         className={cn(
-          "flex-1",
           "p-(--space)",
-          "overflow-auto",
           "in-[[data-slot=dialog-content]:has([data-slot=dialog-header])]:pt-0",
           "in-[[data-slot=dialog-content]:has([data-slot=dialog-footer]:not(.border-t))]:pb-1",
           className
@@ -259,6 +258,7 @@ export const DialogHeader = (props: DialogHeaderProps) => {
   return (
     <ark.div
       className={cn(
+        "shrink-0",
         "p-(--space)",
         "flex flex-col gap-2",
         "in-[[data-slot=dialog-content]:has([data-slot=dialog-body])]:pb-3",
@@ -321,6 +321,7 @@ export const DialogFooter = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
+        "shrink-0",
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
         "sm:rounded-b-[calc(var(--radius-2xl)-1px)]",
         "px-(--space) py-4",

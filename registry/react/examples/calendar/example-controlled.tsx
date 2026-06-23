@@ -1,5 +1,6 @@
 "use client";
 
+import { parseDate } from "@ark-ui/react";
 import React from "react";
 import {
   Calendar,
@@ -11,7 +12,6 @@ import {
   CalendarViewControl,
   CalendarWeekDays,
   CalendarYearSelect,
-  parseDate,
 } from "@/registry/react/components/calendar";
 import { Card, CardContent } from "@/registry/react/components/card";
 

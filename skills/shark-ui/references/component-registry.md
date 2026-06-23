@@ -33,6 +33,7 @@ Use this file to quickly identify the right shark-ui primitive for a UI task. Ea
 - **Listbox** — List selection (single/multi) with rich items. `./references/primitives/listbox.md`
 - **NativeSelect** — Styled native `<select>` control. `./references/primitives/native-select.md`
 - **DatePicker** — Calendar popover + input for dates/ranges/time. `./references/primitives/date-picker.md`
+- **DateInput** — Segment-based typed date/time entry. `./references/primitives/date-input.md`
 - **ColorPicker** — Area, sliders, swatches, and channel inputs. `./references/primitives/color-picker.md`
 
 ## Forms & Validation

@@ -27,6 +27,7 @@ import { ComboboxThumb } from "@/components/thumbs/combobox";
 import { CommandThumb } from "@/components/thumbs/command";
 import { ContextMenuThumb } from "@/components/thumbs/context-menu";
 import { DataListThumb } from "@/components/thumbs/data-list";
+import { DateInputThumb } from "@/components/thumbs/date-input";
 import { DatePickerThumb } from "@/components/thumbs/date-picker";
 import { DialogThumb } from "@/components/thumbs/dialog";
 import { DrawerThumb } from "@/components/thumbs/drawer";
@@ -117,6 +118,7 @@ const THUMB_MAP: Record<string, React.ComponentType<ThumbCardProps>> = {
   "context-menu": ContextMenuThumb,
   "data-list": DataListThumb,
   "date-picker": DatePickerThumb,
+  "date-input": DateInputThumb,
   calendar: CalendarThumb,
   dialog: DialogThumb,
   drawer: DrawerThumb,
