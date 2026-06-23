@@ -49,13 +49,7 @@ export const DrawerProvider = (
 };
 
 export const Drawer = (props: React.ComponentProps<typeof ArkDrawer.Root>) => {
-  const {
-    // when is true, swipe return error, waiting fix
-    lazyMount = false,
-    unmountOnExit = false,
-    //
-    ...rest
-  } = props;
+  const { lazyMount = false, unmountOnExit = false, ...rest } = props;
 
   return (
     <ArkDrawer.Root
