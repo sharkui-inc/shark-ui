@@ -2,9 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "chart",
   "type": "registry:ui",
-  "dependencies": [
-    "recharts"
-  ],
+  "dependencies": ["recharts"],
   "cssVars": {
     "light": {
       "chart-1": "var(--color-orange-600)",

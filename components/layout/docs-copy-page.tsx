@@ -1,7 +1,9 @@
+import { Badge } from "@registry/react/components/badge";
 import { ChevronDownIcon } from "lucide-react";
 import { ChatGptIcon } from "@/components/icons/chat-gpt";
 import { ClaudeIcon } from "@/components/icons/claude";
 import { MarkdownIcon } from "@/components/icons/markdown";
+import { SITE_FEATURES } from "@/config/features";
 import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
@@ -55,7 +57,12 @@ export const DocsCopyPage = (props: DocsCopyPageProps) => {
 
           <MenuContent>
             {Object.entries(menuItems).map(([key, value]) => (
-              <MenuItem asChild key={key} value={key}>
+              <MenuItem
+                asChild
+                className="aria-disabled:opacity-64"
+                key={key}
+                value={key}
+              >
                 {value(pageUrl)}
               </MenuItem>
             ))}
@@ -67,12 +74,19 @@ export const DocsCopyPage = (props: DocsCopyPageProps) => {
 };
 
 const menuItems = {
-  markdown: (url: string) => (
-    <a href={`${url}.md`} rel="noopener noreferrer" target="_blank">
-      <MarkdownIcon />
-      View as Markdown
-    </a>
-  ),
+  markdown: (url: string) =>
+    SITE_FEATURES.rawMarkdownRoutes ? (
+      <a href={`${url}.md`} rel="noopener noreferrer" target="_blank">
+        <MarkdownIcon />
+        View as Markdown
+      </a>
+    ) : (
+      <div aria-disabled>
+        <MarkdownIcon />
+        View as Markdown
+        <Badge variant="outline">Disabled</Badge>
+      </div>
+    ),
   chatgpt: (url: string) => (
     <a
       href={getPromptUrl("https://chatgpt.com", url)}

@@ -1,20 +1,12 @@
 import { Button } from "@/registry/react/components/button";
 import {
   Drawer,
-  DrawerBody,
   DrawerClose,
   DrawerContent,
-  DrawerContentInner,
   DrawerFooter,
   DrawerHeader,
   DrawerTrigger,
 } from "@/registry/react/components/drawer";
-import {
-  Field,
-  FieldGroup,
-  FieldLabel,
-} from "@/registry/react/components/field";
-import { Input } from "@/registry/react/components/input";
 
 const Example = () => (
   <Drawer>
@@ -22,34 +14,19 @@ const Example = () => (
       <Button variant="outline">Open</Button>
     </DrawerTrigger>
     <DrawerContent className="[--bleed:2rem] [--space:--spacing(6)]">
-      <DrawerContentInner>
-        <DrawerHeader
-          description="Tighter bleed and larger internal padding than defaults."
-          title="Custom spacing"
-        />
-        <DrawerBody>
-          <FieldGroup>
-            <Field>
-              <FieldLabel>Name</FieldLabel>
-              <Input defaultValue="Vinicius Vicentini" />
-            </Field>
-            <Field>
-              <FieldLabel>Username</FieldLabel>
-              <Input defaultValue="@vinihvc" />
-            </Field>
-          </FieldGroup>
-        </DrawerBody>
-      </DrawerContentInner>
+      <DrawerHeader
+        description="Tighter bleed and larger internal padding than defaults."
+        title="Custom spacing"
+      />
 
       <DrawerFooter>
-        <DrawerContentInner>
+        <div className="mx-auto w-full max-w-xs">
           <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button className="w-full" variant="outline">
+              Close
+            </Button>
           </DrawerClose>
-          <DrawerClose asChild>
-            <Button>Save changes</Button>
-          </DrawerClose>
-        </DrawerContentInner>
+        </div>
       </DrawerFooter>
     </DrawerContent>
   </Drawer>

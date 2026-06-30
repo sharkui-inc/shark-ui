@@ -4,23 +4,6 @@ import { source } from "@/lib/fumadocs";
 
 export type LLMPage = InferPageType<typeof source>;
 
-export const getLLMFullText = async (page: LLMPage) => {
-  const processed = await page.data.getText("processed");
-
-  return `# ${page.data.title} (${page.url})
-
-${processed}`;
-};
-
-export const getLLMText = (page: LLMPage) =>
-  `- [${page.data.title}](${page.url}): ${page.data.description}`;
-
-export const getComponentPages = () =>
-  source.getPages().filter((p: LLMPage) => p.slugs[0] === "components");
-
-export const getPatternPages = () =>
-  source.getPages().filter((p: LLMPage) => p.slugs[0] !== "components");
-
 const SECTIONS = [
   "components",
   "installation",

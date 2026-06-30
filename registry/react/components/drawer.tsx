@@ -1,14 +1,31 @@
 "use client";
 
-import { Drawer as ArkDrawer, useDrawerContext } from "@ark-ui/react/drawer";
+import {
+  Drawer as ArkDrawer,
+  DrawerContext,
+  useDrawerContext,
+} from "@ark-ui/react/drawer";
 import { ark } from "@ark-ui/react/factory";
 import { Portal } from "@ark-ui/react/portal";
-import type React from "react";
+import { XIcon } from "lucide-react";
+import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+import { Button } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const useDrawer = useDrawerContext;
+
+interface DrawerModalContextProps {
+  /**
+   * Used internally to show or hide overlay
+   *
+   * @default true
+   */
+  modal?: boolean;
+}
+
+const DrawerModalContext = React.createContext({} as DrawerModalContextProps);
 
 export const DrawerProvider = (
   props: React.ComponentProps<typeof ArkDrawer.Indent>
@@ -49,15 +66,23 @@ export const DrawerProvider = (
 };
 
 export const Drawer = (props: React.ComponentProps<typeof ArkDrawer.Root>) => {
-  const { lazyMount = false, unmountOnExit = false, ...rest } = props;
+  const {
+    modal = true,
+    lazyMount = true,
+    unmountOnExit = true,
+    ...rest
+  } = props;
 
   return (
-    <ArkDrawer.Root
-      data-slot="drawer"
-      lazyMount={lazyMount}
-      unmountOnExit={unmountOnExit}
-      {...rest}
-    />
+    <DrawerModalContext.Provider value={{ modal }}>
+      <ArkDrawer.Root
+        data-slot="drawer"
+        lazyMount={lazyMount}
+        modal={modal}
+        unmountOnExit={unmountOnExit}
+        {...rest}
+      />
+    </DrawerModalContext.Provider>
   );
 };
 
@@ -67,9 +92,11 @@ export const DrawerTrigger = (
 
 const drawerOverlayVariants = tv({
   base: [
-    "[--bg:rgb(0_0_0/calc(0.32*(1-var(--drawer-swipe-progress))))] [--blur:calc(4px*(1-var(--drawer-swipe-progress)))]",
+    "[--bg:rgb(0_0_0/calc(0.32*(1-var(--drawer-swipe-progress,0))))] [--blur:calc(4px*(1-var(--drawer-swipe-progress,0)))]",
     "fixed inset-0 z-50",
     "bg-(--bg) backdrop-blur-(--blur)",
+    "data-[has-nested=drawer]:pointer-events-none",
+    "duration-200",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
     "motion-reduce:animate-none!",
@@ -80,6 +107,13 @@ export const DrawerOverlay = (
   props: React.ComponentProps<typeof ArkDrawer.Backdrop>
 ) => {
   const { className, ...rest } = props;
+
+  const { modal } = _useDrawerModal();
+
+  if (!modal) {
+    return null;
+  }
+
   return (
     <ArkDrawer.Backdrop
       className={cn(drawerOverlayVariants(), className)}
@@ -91,17 +125,24 @@ export const DrawerOverlay = (
 
 const drawerPositionerVariants = tv({
   base: [
-    "fixed inset-0 z-50",
-    "flex items-end justify-center",
-    "w-screen",
-    "has-data-[swipe-direction=up]:items-start",
-    "has-data-[swipe-direction=left]:items-stretch has-data-[swipe-direction=left]:justify-start",
-    "has-data-[swipe-direction=right]:items-stretch has-data-[swipe-direction=right]:justify-end",
+    "[--bleed:--spacing(12)] [--inset:--spacing(0)]",
+    "fixed inset-0 z-50 overflow-hidden",
+    "flex w-screen items-end justify-center",
+    "data-[has-nested=drawer]:pointer-events-none",
+    "data-[swipe-direction=up]:items-start",
+    "data-[swipe-direction=left]:items-stretch data-[swipe-direction=left]:justify-start",
+    "data-[swipe-direction=right]:items-stretch data-[swipe-direction=right]:justify-end",
   ],
   variants: {
     variant: {
       default: "",
-      inset: "sm:p-4",
+      inset: [
+        "px-(--inset) sm:[--inset:--spacing(4)]",
+        "data-[swipe-direction=down]:pb-(--inset)",
+        "data-[swipe-direction=up]:pt-(--inset)",
+        "data-[swipe-direction=left]:pt-(--inset) data-[swipe-direction=left]:pb-(--inset)",
+        "data-[swipe-direction=right]:pt-(--inset) data-[swipe-direction=right]:pb-(--inset)",
+      ],
     },
   },
   defaultVariants: {
@@ -125,51 +166,63 @@ export const DrawerPositioner = (props: DrawerPositionerProps) => {
   );
 };
 
+// ::after bleed — https://ark-ui.com/docs/components/drawer#preventing-overdrag-gaps
 const drawerContentVariants = tv({
   base: [
-    "[--bleed:3rem] [--space:--spacing(6)]",
+    "[--space:--spacing(6)]",
+    "[--stack-peek:1.25rem]",
+    "[--stack-scale:calc(1-(var(--nested-drawers,0)*var(--stack-step)))] [--stack-step:0.05]",
+    "[--stack-height:calc(var(--drawer-frontmost-height,var(--drawer-height,0px))+var(--stack-peek))]",
+    "[interpolate-size:allow-keywords]",
     "group/drawer",
     "relative",
+    "touch-none",
     "z-[calc(50+var(--layer-index,0))]",
-    "max-h-[calc(80vh+var(--bleed))] w-full",
-    "-mb-(--bleed) pb-[calc(1.5rem+env(safe-area-inset-bottom,0)+var(--bleed))]",
+    "flex min-h-0 w-full flex-col",
+    "data-[swipe-direction=down]:max-h-[96svh]",
+    "data-[swipe-direction=up]:max-h-[96svh]",
+    "data-nested-drawer-open:h-(--stack-height)",
+    "data-nested-drawer-open:overflow-hidden",
+    "data-nested-drawer-open:pointer-events-none",
     "bg-popover",
     "text-popover-foreground",
-    "flex flex-col",
-    "duration-300 ease-in-out will-change-transform",
-    "data-swiping:select-none",
-    "translate-y-[calc(-1.25rem*var(--nested-layer-count))]",
-    "scale-[calc(1-0.1*var(--nested-layer-count))] opacity-[calc(1-0.1*var(--nested-layer-count))]",
-    "data-[nested=drawer]:data-[state=closed]:slide-in-from-bottom-10 data-[nested=drawer]:data-[state=open]:slide-in-from-bottom-10 data-[has-nested=drawer]:origin-top",
-    "motion-reduce:animate-none!",
+    "shadow-lg/5",
+    "outline-none",
+    "scale-(--stack-scale)",
+    "not-data-nested-drawer-open:transition-[transform,scale,opacity] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
+    "duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] data-nested-drawer-open:transition-[height,scale,translate]",
+    "data-swiping:select-none data-swiping:transition-none data-swiping:duration-0",
+    "data-dragging:transition-none",
+    "data-nested-drawer-swiping:duration-0",
+    "data-[swipe-direction=down]:origin-[center_bottom]",
+    "data-[swipe-direction=up]:origin-[center_top]",
+    "motion-reduce:animate-none! motion-reduce:transition-none!",
+    "after:pointer-events-none after:absolute after:bg-inherit after:content-['']",
+    "data-[swipe-direction=down]:rounded-t-2xl",
+    "data-[swipe-direction=down]:-mb-[max(0,calc(var(--drawer-snap-point-offset-y,0)+clamp(0,1,var(--drawer-snap-point-offset-y,0)/1px)*var(--drawer-swipe-movement-y,0)))]",
+    "data-[swipe-direction=down]:pb-[max(0px,calc(env(safe-area-inset-bottom,0px)+var(--drawer-snap-point-offset-y,0px)+clamp(0,1,var(--drawer-snap-point-offset-y,0px)/1px)*var(--drawer-swipe-movement-y,0px)))]",
+    "data-[swipe-direction=down]:after:inset-inline-0 data-[swipe-direction=down]:after:top-full data-[swipe-direction=down]:after:h-(--bleed)",
+    "data-[swipe-direction=down]:data-[state=open]:animate-drawer-slide-in-bottom",
+    "data-[swipe-direction=down]:data-[state=closed]:animate-drawer-slide-out-bottom",
+    "data-[swipe-direction=up]:rounded-b-2xl",
+    "data-[swipe-direction=up]:pt-[env(safe-area-inset-top,0)]",
+    "data-[swipe-direction=up]:after:inset-inline-0 data-[swipe-direction=up]:after:bottom-full data-[swipe-direction=up]:after:h-(--bleed)",
+    "data-[swipe-direction=up]:data-[state=open]:animate-drawer-slide-in-top",
+    "data-[swipe-direction=up]:data-[state=closed]:animate-drawer-slide-out-top",
+    "data-[swipe-direction=left]:h-full data-[swipe-direction=left]:max-h-none data-[swipe-direction=left]:min-h-0 data-[swipe-direction=left]:w-full data-[swipe-direction=left]:max-w-md",
+    "data-[swipe-direction=left]:rounded-e-2xl",
+    "data-[swipe-direction=left]:ps-[env(safe-area-inset-left,0)]",
+    "data-[swipe-direction=left]:after:inset-block-0 data-[swipe-direction=left]:after:inset-e-full data-[swipe-direction=left]:after:inset-inline-auto data-[swipe-direction=left]:after:h-auto data-[swipe-direction=left]:after:w-(--bleed)",
+    "data-[swipe-direction=left]:data-[state=open]:animate-drawer-slide-in-left",
+    "data-[swipe-direction=left]:data-[state=closed]:animate-drawer-slide-out-left",
+    "data-[swipe-direction=right]:h-full data-[swipe-direction=right]:max-h-none data-[swipe-direction=right]:min-h-0 data-[swipe-direction=right]:w-full data-[swipe-direction=right]:max-w-md",
+    "data-[swipe-direction=right]:rounded-s-2xl",
+    "data-[swipe-direction=right]:pe-[env(safe-area-inset-right,0)]",
+    "data-[swipe-direction=right]:after:inset-block-0 data-[swipe-direction=right]:after:inset-inline-auto data-[swipe-direction=right]:after:inset-s-full data-[swipe-direction=right]:after:h-auto data-[swipe-direction=right]:after:w-(--bleed)",
+    "data-[swipe-direction=right]:data-[state=open]:animate-drawer-slide-in-right",
+    "data-[swipe-direction=right]:data-[state=closed]:animate-drawer-slide-out-right",
   ],
   variants: {
-    placement: {
-      up: [
-        "data-[state=open]:slide-in-from-top data-[state=open]:animate-in",
-        "data-[state=closed]:slide-out-to-top data-[state=closed]:animate-out",
-        "rounded-b-2xl",
-      ],
-      down: [
-        "data-[state=closed]:slide-out-to-bottom data-[state=closed]:animate-out",
-        "data-[state=open]:slide-in-from-bottom data-[state=open]:animate-in",
-        "rounded-t-2xl",
-      ],
-      left: [
-        "data-[state=open]:slide-in-from-left data-[state=open]:animate-in",
-        "data-[state=closed]:slide-out-to-left data-[state=closed]:animate-out",
-        "max-h-none max-w-md",
-        "size-full",
-        "rounded-e-2xl",
-      ],
-      right: [
-        "data-[state=open]:slide-in-from-right data-[state=open]:animate-in",
-        "data-[state=closed]:slide-out-to-right data-[state=closed]:animate-out",
-        "max-h-none max-w-md",
-        "size-full",
-        "rounded-s-2xl",
-      ],
-    },
     variant: {
       default: "",
       inset: [
@@ -179,102 +232,128 @@ const drawerContentVariants = tv({
     },
   },
   defaultVariants: {
-    placement: "down",
     variant: "default",
   },
 });
 
-const SWIPE_DIRECTION_TO_PLACEMENT = {
-  start: "left",
-  end: "right",
-  up: "up",
-  down: "down",
-} as const;
+type SnapPoint = number | string;
+
+function needsFullHeightForSnapPoints(snapPoints: SnapPoint[]): boolean {
+  if (snapPoints.length !== 1) {
+    return true;
+  }
+
+  return snapPoints[0] !== 1;
+}
 
 interface DrawerContentProps
   extends React.ComponentProps<typeof ArkDrawer.Content>,
-    VariantProps<typeof drawerContentVariants> {}
+    VariantProps<typeof drawerContentVariants> {
+  /**
+   * Show the drag bar indicator
+   *
+   * @default true
+   */
+  showBar?: boolean;
+  /**
+   * Show close button at the top right corner
+   *
+   * @default false
+   */
+  showCloseButton?: boolean;
+}
 
 export const DrawerContent = (props: DrawerContentProps) => {
-  const { variant = "default", className, children, ...rest } = props;
+  const {
+    variant = "default",
+    showBar,
+    showCloseButton = false,
+    className,
+    children,
+    ...rest
+  } = props;
 
   return (
     <Portal>
       <DrawerOverlay />
-      <ArkDrawer.Context>
-        {({ swipeDirection }) => (
-          <DrawerPositioner variant={variant}>
-            <ArkDrawer.Content
-              className={cn(
-                drawerContentVariants({
-                  variant,
-                  placement: SWIPE_DIRECTION_TO_PLACEMENT[swipeDirection],
-                }),
-                className
-              )}
-              {...rest}
-              data-slot="drawer-content"
-            >
-              <DrawerGrabber />
 
-              {children}
-            </ArkDrawer.Content>
-          </DrawerPositioner>
-        )}
-      </ArkDrawer.Context>
+      <DrawerContext>
+        {({ snapPoints, swipeDirection }) => {
+          const isVertical =
+            swipeDirection === "down" || swipeDirection === "up";
+          const fullHeight =
+            isVertical && needsFullHeightForSnapPoints(snapPoints);
+
+          return (
+            <DrawerPositioner variant={variant}>
+              <ArkDrawer.Content
+                className={cn(
+                  drawerContentVariants({ variant }),
+                  fullHeight && "h-full",
+                  className
+                )}
+                data-slot="drawer-content"
+                {...rest}
+              >
+                <DrawerGrabber show={showBar} />
+
+                {children}
+
+                {!!showCloseButton && (
+                  <DrawerClose asChild>
+                    <Button
+                      aria-label="Close"
+                      className="absolute inset-e-4 top-4 opacity-64 hover:opacity-100 group-data-[swipe-direction=up]/drawer:top-[calc(1rem+env(safe-area-inset-top,0))]"
+                      size="icon-sm"
+                      variant="ghost"
+                    >
+                      <XIcon aria-hidden />
+                    </Button>
+                  </DrawerClose>
+                )}
+              </ArkDrawer.Content>
+            </DrawerPositioner>
+          );
+        }}
+      </DrawerContext>
     </Portal>
   );
 };
 
-export const DrawerContentInner = (
-  props: React.ComponentProps<typeof ark.div>
-) => {
-  const { className, ...rest } = props;
+interface DrawerGrabberProps
+  extends React.ComponentProps<typeof ArkDrawer.Grabber> {
+  /**
+   * Whether to render the grabber for top and bottom drawers
+   *
+   * @default true
+   */
+  show?: boolean;
+}
+
+export const DrawerGrabber = (props: DrawerGrabberProps) => {
+  const { show = true, className, ...rest } = props;
+
+  if (!show) {
+    return null;
+  }
 
   return (
-    <ark.div
+    <ArkDrawer.Grabber
       className={cn(
-        "flex flex-1 flex-col",
-        "mx-auto w-full max-w-sm",
-        "text-center",
-        "transition-opacity duration-300",
-        "group-data-[nested=drawer]/drawer:opacity-0 group-data-[nested=drawer]/drawer:data-[state=open]:opacity-100",
-        "motion-reduce:transition-none!",
+        "hidden shrink-0 cursor-grab touch-none select-none active:cursor-grabbing",
+        "group-data-[swipe-direction=down]/drawer:flex group-data-[swipe-direction=down]/drawer:w-full group-data-[swipe-direction=down]/drawer:items-center group-data-[swipe-direction=down]/drawer:justify-center group-data-[swipe-direction=down]/drawer:py-5",
+        "group-data-[swipe-direction=up]/drawer:z-10 group-data-[swipe-direction=up]/drawer:order-last group-data-[swipe-direction=up]/drawer:flex group-data-[swipe-direction=up]/drawer:w-full group-data-[swipe-direction=up]/drawer:items-center group-data-[swipe-direction=up]/drawer:justify-center group-data-[swipe-direction=up]/drawer:py-5",
+        "group-data-nested-drawer-open/drawer:hidden",
         className
       )}
-      data-slot="drawer-content-inner"
+      data-slot="drawer-grabber"
       {...rest}
-    />
-  );
-};
-
-export const DrawerGrabber = (
-  props: React.ComponentProps<typeof ArkDrawer.Grabber>
-) => {
-  const { className, ...rest } = props;
-
-  return (
-    <ark.div className="p-(--space)">
-      <ArkDrawer.Grabber
-        className={cn(
-          "h-1 w-12",
-          "mx-auto",
-          "hidden shrink-0",
-          "bg-muted-foreground/32",
-          "rounded-full",
-          "touch-none",
-          "group-data-[swipe-direction=down]/drawer:flex",
-          className
-        )}
-        {...rest}
-        data-slot="drawer-grabber"
-      >
-        <ArkDrawer.GrabberIndicator
-          className="size-full rounded-full"
-          data-slot="drawer-grabber-indicator"
-        />
-      </ArkDrawer.Grabber>
-    </ark.div>
+    >
+      <ArkDrawer.GrabberIndicator
+        className="h-1 w-10 rounded-full bg-muted-foreground/32 group-hover/drawer:bg-muted-foreground/48"
+        data-slot="drawer-grabber-indicator"
+      />
+    </ArkDrawer.Grabber>
   );
 };
 
@@ -289,17 +368,22 @@ interface DrawerHeaderProps extends React.ComponentProps<typeof ark.div> {
   title?: string;
 }
 
+const drawerHeaderVariants = tv({
+  base: [
+    "shrink-0",
+    "flex flex-col gap-2 text-center",
+    "p-(--space)",
+    "in-[[data-slot=drawer-content]:has([data-slot=drawer-body])]:pb-3",
+    "group-data-[swipe-direction=down]/drawer:pt-0",
+  ],
+});
+
 export const DrawerHeader = (props: DrawerHeaderProps) => {
   const { className, title, description, children, ...rest } = props;
 
   return (
     <ark.div
-      className={cn(
-        "flex flex-col gap-2",
-        "p-(--space) pt-0",
-        "in-[[data-slot=drawer-content]:has([data-slot=drawer-body])]:pb-3",
-        className
-      )}
+      className={cn(drawerHeaderVariants(), className)}
       data-slot="drawer-header"
       {...rest}
     >
@@ -322,7 +406,10 @@ export const DrawerTitle = (
   const { className, ...rest } = props;
   return (
     <ArkDrawer.Title
-      className={cn("font-semibold text-lg leading-none", className)}
+      className={cn(
+        "text-center font-semibold text-lg leading-none",
+        className
+      )}
       data-slot="drawer-title"
       {...rest}
     />
@@ -330,12 +417,12 @@ export const DrawerTitle = (
 };
 
 export const DrawerDescription = (
-  props: React.ComponentProps<typeof ark.div>
+  props: React.ComponentProps<typeof ArkDrawer.Description>
 ) => {
   const { className, ...rest } = props;
   return (
-    <ark.div
-      className={cn("text-muted-foreground text-sm", className)}
+    <ArkDrawer.Description
+      className={cn("text-center text-muted-foreground text-sm", className)}
       data-slot="drawer-description"
       {...rest}
     />
@@ -355,13 +442,12 @@ export const DrawerBody = (props: DrawerBodyProps) => {
   const { scrollFade = false, className, ...rest } = props;
 
   return (
-    <ScrollArea scrollFade={scrollFade}>
+    <ScrollArea className="min-h-0 flex-1 touch-pan-y" scrollFade={scrollFade}>
       <ark.div
         className={cn(
-          "flex-1",
-          "p-(--space)",
-          "overflow-auto",
+          "p-(--space) text-center",
           "in-[[data-slot=drawer-content]:has([data-slot=drawer-header])]:pt-0",
+          "group-data-[swipe-direction=down]/drawer:in-[[data-slot=drawer-content]:not(:has([data-slot=drawer-header]))]:pt-0",
           "in-[[data-slot=drawer-content]:has([data-slot=drawer-footer]:not(.border-t))]:pb-1",
           className
         )}
@@ -376,22 +462,46 @@ export const DrawerClose = (
   props: React.ComponentProps<typeof ArkDrawer.CloseTrigger>
 ) => <ArkDrawer.CloseTrigger data-slot="drawer-close" {...props} />;
 
-export const DrawerFooter = (props: React.ComponentProps<typeof ark.div>) => {
-  const { className, ...rest } = props;
+const drawerFooterVariants = tv({
+  base: [
+    "shrink-0",
+    "flex flex-col-reverse gap-2",
+    "sm:rounded-none",
+    "px-(--space) py-4",
+  ],
+  variants: {
+    variant: {
+      default: "border-t bg-muted/48",
+      bare: "",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+interface DrawerFooterProps
+  extends React.ComponentProps<typeof ark.div>,
+    VariantProps<typeof drawerFooterVariants> {}
+
+export const DrawerFooter = (props: DrawerFooterProps) => {
+  const { variant = "default", className, ...rest } = props;
 
   return (
     <ark.div
-      className={cn(
-        "**:data-[slot=drawer-content-inner]:flex-col-reverse **:data-[slot=drawer-content-inner]:gap-2",
-        "flex flex-col-reverse gap-2",
-        "sm:rounded-none",
-        "px-(--space) py-4",
-        "bg-muted/48",
-        "border-t",
-        className
-      )}
+      className={cn(drawerFooterVariants({ variant }), className)}
       data-slot="drawer-footer"
       {...rest}
     />
   );
+};
+
+const _useDrawerModal = () => {
+  const context = React.useContext(DrawerModalContext);
+
+  if (!context) {
+    throw new Error("useDrawerModal must be used within a Drawer");
+  }
+
+  return context;
 };

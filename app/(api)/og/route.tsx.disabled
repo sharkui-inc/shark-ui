@@ -1,3 +1,12 @@
+/**
+ * DISABLED for Vercel Hobby (free) tier — dynamic route consumes serverless invocations.
+ * To re-enable:
+ * 1. Rename this file to route.tsx
+ * 2. Set SITE_FEATURES.dynamicOgImages to true in lib/site-features.ts
+ * 3. Uncomment rewrites in next.config.ts
+ * 4. Remove output: "export" from next.config.ts (required for route handlers)
+ */
+
 import { Buffer } from "node:buffer";
 import type { Font } from "takumi-js";
 import { ImageResponse } from "takumi-js/response";

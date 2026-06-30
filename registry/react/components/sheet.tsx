@@ -32,17 +32,29 @@ export const SheetOverlay = (
 ) => <DialogOverlay data-slot="sheet-overlay" {...props} />;
 
 const sheetPositionerVariants = tv({
-  base: ["fixed inset-0 z-50 grid h-svh w-screen"],
+  base: [
+    "[--inset:--spacing(0)]",
+    "fixed inset-0 z-50",
+    "h-svh w-screen",
+    "grid",
+    "overflow-hidden",
+  ],
   variants: {
     placement: {
-      bottom: "grid grid-rows-[1fr_auto] pt-12",
-      top: "grid grid-rows-[auto_1fr] pb-12",
+      bottom: "grid grid-rows-[1fr_auto] not-data-[variant=inset]:pt-12",
+      top: "grid grid-rows-[auto_1fr] not-data-[variant=inset]:pb-12",
       left: "flex justify-start",
       right: "flex justify-end",
     },
     variant: {
       default: "",
-      inset: "sm:p-4",
+      inset: [
+        "px-(--inset) sm:[--inset:--spacing(4)]",
+        "data-[placement=bottom]:pb-(--inset)",
+        "data-[placement=top]:pt-(--inset)",
+        "data-[placement=left]:pt-(--inset) data-[placement=left]:pb-(--inset)",
+        "data-[placement=right]:pt-(--inset) data-[placement=right]:pb-(--inset)",
+      ],
     },
   },
   defaultVariants: {
@@ -60,7 +72,9 @@ export const SheetPositioner = (props: SheetPositionerProps) => {
   return (
     <ArkDialog.Positioner
       className={cn(sheetPositionerVariants({ placement, variant }), className)}
+      data-placement={placement}
       data-slot="sheet-positioner"
+      data-variant={variant}
       {...rest}
     />
   );
@@ -70,8 +84,8 @@ const sheetContentVariants = tv({
   base: [
     "[--space:--spacing(6)]",
     "relative",
-    "flex flex-col",
     "max-h-full min-h-0 w-full min-w-0",
+    "flex flex-col",
     "bg-popover",
     "text-popover-foreground",
     "shadow-lg/5",

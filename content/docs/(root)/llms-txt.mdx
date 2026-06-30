@@ -1,28 +1,13 @@
 ---
 title: LLMs.txt
-description: Let AI assistants like Claude, Cursor, and Windsurf use Shark UI documentation.
+description: Let AI assistants use the compact Shark UI documentation index.
 ---
 
-Shark UI provides [LLMs.txt](https://llmstxt.org/) endpoints so AI coding assistants can fetch documentation directly by URL.
+Shark UI provides a compact [LLMs.txt](https://llmstxt.org/) index so AI coding assistants can discover the documentation without crawling the full site.
 
 ## Available Files
 
-**Core documentation:**
-
-- [/llms.txt](/llms.txt) — Quick reference index for documentation
-- [/llms-full.txt](/llms-full.txt) — Complete Shark UI documentation
-
-**For limited context windows:**
-
-- [/llms-components.txt](/llms-components.txt) — Component documentation only
-- [/llms-patterns.txt](/llms-patterns.txt) — Common patterns and recipes
-
-**All platforms:**
-
-- [/llms.txt](/llms.txt) — Quick reference index
-- [/llms-full.txt](/llms-full.txt) — Complete documentation
-- [/llms-components.txt](/llms-components.txt) — All component documentation
-- [/llms-patterns.txt](/llms-patterns.txt) — All patterns and recipes
+- [/llms.txt](/llms.txt) — Quick reference index for documentation.
 
 ## Integration
 
@@ -35,7 +20,7 @@ Use Shark UI documentation from https://shark.vini.one/llms.txt
 **Cursor:** Use the `@Docs` feature:
 
 ```bash
-@Docs https://shark.vini.one/llms-full.txt
+@Docs https://shark.vini.one/llms.txt
 ```
 
 [Learn more](https://docs.cursor.com/context/@-symbols/@-docs)
@@ -43,7 +28,7 @@ Use Shark UI documentation from https://shark.vini.one/llms.txt
 **Windsurf:** Add to your `.windsurfrules` file:
 
 ```bash
-#docs https://shark.vini.one/llms-full.txt
+#docs https://shark.vini.one/llms.txt
 ```
 
 [Learn more](https://docs.codeium.com/windsurf/memories#memories-and-rules)
@@ -52,18 +37,6 @@ Use Shark UI documentation from https://shark.vini.one/llms.txt
 
 ```bash
 https://shark.vini.one/llms.txt
-```
-
-For component-specific documentation:
-
-```bash
-https://shark.vini.one/llms-components.txt
-```
-
-For patterns and best practices:
-
-```bash
-https://shark.vini.one/llms-patterns.txt
 ```
 
 ## Contributing

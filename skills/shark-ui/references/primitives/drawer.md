@@ -31,7 +31,6 @@ import {
   DrawerBody,
   DrawerClose,
   DrawerContent,
-  DrawerContentInner,
   DrawerFooter,
   DrawerHeader,
   DrawerTrigger,
@@ -46,19 +45,15 @@ import {
     <Button variant="outline">Open</Button>
   </DrawerTrigger>
   <DrawerContent>
-    <DrawerContentInner>
-      <DrawerHeader
-        description="Supporting description."
-        title="Drawer title"
-      />
-      <DrawerBody>Content</DrawerBody>
-    </DrawerContentInner>
+    <DrawerHeader
+      description="Supporting description."
+      title="Drawer title"
+    />
+    <DrawerBody>Content</DrawerBody>
     <DrawerFooter>
-      <DrawerContentInner>
-        <DrawerClose asChild>
-          <Button variant="outline">Cancel</Button>
-        </DrawerClose>
-      </DrawerContentInner>
+      <DrawerClose asChild>
+        <Button variant="outline">Cancel</Button>
+      </DrawerClose>
     </DrawerFooter>
   </DrawerContent>
 </Drawer>
@@ -66,7 +61,7 @@ import {
 
 ### Key patterns
 
-Positioning via the `swipeDirection` prop (`up` | `down` | `start` | `end`):
+Positioning via the `swipeDirection` prop (`up` | `down` | `start` | `end`). The drag handle is shown only for top and bottom drawers.
 
 ```tsx
 // …
@@ -112,7 +107,6 @@ const [open, setOpen] = useState(false)
 ## Common pitfalls
 
 - Using a drawer for desktop-centered modals → prefer `Dialog` / `Sheet`.
-- Skipping `DrawerContentInner` where the component expects that structure for padding and scroll regions.
 - Missing explicit `type` on buttons inside forms.
 
 ## Registry example files

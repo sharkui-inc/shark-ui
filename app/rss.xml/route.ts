@@ -3,6 +3,7 @@ import { SITE_CONFIG } from "@/config/site";
 import { type ChangelogPageData, getChangelogPages } from "@/lib/changelog";
 import { absoluteUrl } from "@/lib/url";
 
+export const dynamic = "force-static";
 export const revalidate = false;
 
 export const GET = () => {

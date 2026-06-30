@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 interface NavLinkProps extends React.ComponentProps<typeof Link> {}
 
 export const NavLink = (props: NavLinkProps) => {
-  const { href, className, ...rest } = props;
+  const { href, className, prefetch = false, ...rest } = props;
 
   const pathname = usePathname();
 
@@ -18,6 +18,7 @@ export const NavLink = (props: NavLinkProps) => {
       aria-current={isActive ? "page" : undefined}
       className={cn({ active: isActive }, className)}
       href={href}
+      prefetch={prefetch}
       {...rest}
     />
   );

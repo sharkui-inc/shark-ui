@@ -2,6 +2,7 @@ import { RssIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsTableOfContents } from "@/components/layout/docs-toc";
+import { SITE_FEATURES } from "@/config/features";
 import { type ChangelogPageData, getChangelogPages } from "@/lib/changelog";
 import { createMetadata, createOgImageUrl } from "@/lib/metadata";
 import { mdxComponents } from "@/mdx-components";
@@ -20,7 +21,9 @@ export const generateMetadata = (): Metadata => {
     title,
     description,
     url: "/docs/changelog",
-    imageUrl: createOgImageUrl({ title, description }),
+    imageUrl: SITE_FEATURES.dynamicOgImages
+      ? createOgImageUrl({ title, description })
+      : undefined,
   });
 };
 

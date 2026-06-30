@@ -4,6 +4,7 @@ import { source } from "@/lib/fumadocs";
 import { getAllRegistryItems } from "@/lib/registry";
 import { absoluteUrl } from "@/lib/url";
 
+export const dynamic = "force-static";
 export const revalidate = false;
 
 const sitemap = async (): Promise<MetadataRoute.Sitemap> => {

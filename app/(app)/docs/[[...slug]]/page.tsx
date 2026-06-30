@@ -10,6 +10,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DocsCopyPage } from "@/components/layout/docs-copy-page";
 import { DocsTableOfContents } from "@/components/layout/docs-toc";
+import { SITE_FEATURES } from "@/config/features";
 import { source } from "@/lib/fumadocs";
 import { createMetadata, createOgImageUrl } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
@@ -45,10 +46,12 @@ export const generateMetadata = async (
     title: doc.title,
     description: doc.description,
     url: page.url,
-    imageUrl: createOgImageUrl({
-      title: doc.title,
-      description: doc.description,
-    }),
+    imageUrl: SITE_FEATURES.dynamicOgImages
+      ? createOgImageUrl({
+          title: doc.title,
+          description: doc.description,
+        })
+      : undefined,
   });
 };
 

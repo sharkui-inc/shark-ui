@@ -1,3 +1,12 @@
+/**
+ * DISABLED for Vercel Hobby (free) tier — dynamic route consumes serverless invocations.
+ * To re-enable:
+ * 1. Rename this file to route.ts
+ * 2. Set SITE_FEATURES.rawMarkdownRoutes to true in lib/site-features.ts
+ * 3. Uncomment rewrites in next.config.ts
+ * 4. Remove output: "export" from next.config.ts (required for route handlers)
+ */
+
 import fs from "node:fs/promises";
 import path from "node:path";
 import { type NextRequest, NextResponse } from "next/server";

@@ -47,11 +47,11 @@ Drawer
 ├── DrawerTrigger
 └── DrawerContent
     ├── DrawerGrabber
-    ├── DrawerContentInner
+    ├── drawer-main
     │   ├── DrawerHeader
-    │   └── DrawerBody
-    └── DrawerFooter
-        └── DrawerClose
+    │   ├── DrawerBody
+    │   └── DrawerFooter
+    │       └── DrawerClose
 ```
 
 ## Usage
@@ -61,7 +61,6 @@ import {
   Drawer,
   DrawerTrigger,
   DrawerContent,
-  DrawerContentInner,
   DrawerHeader,
   DrawerTitle,
   DrawerDescription,
@@ -75,31 +74,57 @@ import {
 <Drawer>
   <DrawerTrigger />
   <DrawerContent>
-    <DrawerContentInner>
-      <DrawerHeader>
-        <DrawerTitle />
-        <DrawerDescription />
-      </DrawerHeader>
-      <DrawerBody>
-        {/** your content here */}
-      </DrawerBody>
-    </DrawerContentInner>
+    <DrawerHeader>
+      <DrawerTitle />
+      <DrawerDescription />
+    </DrawerHeader>
+    <DrawerBody>
+      {/** your content here */}
+    </DrawerBody>
     <DrawerFooter>
-      <DrawerContentInner>
-        <DrawerClose />
-      </DrawerContentInner>
+      <DrawerClose />
     </DrawerFooter>
   </DrawerContent>
 </Drawer>
 ```
 
+## Controlled
+
+Use `open` and `onOpenChange` on the root to control the drawer state.
+
+<ComponentPreview componentName="drawer" fileName="example-controlled" />
+
+## Title & Description
+
+`DrawerHeader` supports two usage patterns:
+
+### Using props
+
+Pass `title` and `description` props directly to `DrawerHeader`. 
+
+```tsx showLineNumbers
+<DrawerHeader 
+  title="Allow accessory to connect?" 
+  description="Do you want to allow the USB accessory to connect to this device?"
+/>
+```
+
+> This approach does not require `DrawerTitle` or `DrawerDescription` components.
+
+### Using components
+
+Use `DrawerTitle` and `DrawerDescription` as children for more control.
+
+```tsx showLineNumbers
+<DrawerHeader>
+  <DrawerTitle>Allow accessory to connect?</DrawerTitle>
+  <DrawerDescription>
+    Do you want to allow the USB accessory to connect to this device?
+  </DrawerDescription>
+</DrawerHeader>
+```
+
 ## Examples
-
-### Container
-
-Use `DrawerContentInner` to constrain drawer content width to `max-w-sm`.
-
-<ComponentPreview componentName="drawer" fileName="example-drawer-content-inner" />
 
 ### Inset Variant
 
@@ -118,6 +143,26 @@ Control which direction the drawer slides and swipes using `swipeDirection` on t
 Use `snapPoints` to allow the drawer to snap to multiple heights.
 
 <ComponentPreview componentName="drawer" fileName="example-snap-points" />
+
+### Non-Modal
+
+Use `modal={false}` to allow interaction with elements outside the drawer.
+
+<ComponentPreview componentName="drawer" fileName="example-non-modal" />
+
+### No Drag Area
+
+Apply the `data-no-drag` attribute to any element inside the drawer to prevent dragging from starting on it.
+
+<ComponentPreview componentName="drawer" fileName="example-no-drag-area" />
+
+### Non Draggable
+
+Set `draggable={false}` on `DrawerContent` to disable drag-to-dismiss on the panel. 
+
+The drawer can still be dragged by the grabber.
+
+<ComponentPreview componentName="drawer" fileName="example-non-draggable" />
 
 ### Custom spacing
 
@@ -172,20 +217,14 @@ Holds the drawer panel. Supports swipe-to-close; direction inherited from root `
 | Prop | Type | Default |
 | --- | --- | --- |
 | `variant` | `"default" \| "inset"` | `"default"` |
+| `showBar` | `boolean` | `true` |
+| `draggable` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
 | Attribute | Default |
 | --- | --- |
-| `--bleed` | `3rem` |
+| `--bleed` | `--spacing(12)` |
 | `--space` | `--spacing(4)` |
-
-### DrawerContentInner
-
-Wrapper that constrains content to `max-w-sm` and centers it. Use to wrap the main body (header + body) or footer actions. When used inside `DrawerFooter`, inherits `flex-col-reverse` and `gap-2` for button layout.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `className` | `string` | `-` |
 
 ### DrawerHeader
 

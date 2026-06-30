@@ -1,0 +1,31 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "routes": [
+    {
+      "src": "/(docs|view)(/.*)?",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-Web|anthropic-ai|PerplexityBot|Perplexity-User|CCBot|Bytespider|Amazonbot|Applebot-Extended|Meta-ExternalAgent|FacebookBot|Diffbot|ImagesiftBot|YouBot|cohere-ai|Timpibot).*"
+        }
+      ],
+      "mitigate": {
+        "action": "deny"
+      }
+    },
+    {
+      "src": "/(llms-full\\.txt|llms-components\\.txt|llms-patterns\\.txt|og|api/raw/.*)",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-Web|anthropic-ai|PerplexityBot|Perplexity-User|CCBot|Bytespider|Amazonbot|Applebot-Extended|Meta-ExternalAgent|FacebookBot|Diffbot|ImagesiftBot|YouBot|cohere-ai|Timpibot).*"
+        }
+      ],
+      "mitigate": {
+        "action": "deny"
+      }
+    }
+  ]
+}

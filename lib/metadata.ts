@@ -39,6 +39,10 @@ interface CreateOgImageUrlProps {
   title: string;
 }
 
+/**
+ * Builds a dynamic OG image URL for `/og`. Requires `SITE_FEATURES.dynamicOgImages`
+ * and an active `app/(api)/og/route.tsx` (rename from `route.tsx.disabled`).
+ */
 export const createOgImageUrl = ({
   title,
   description,

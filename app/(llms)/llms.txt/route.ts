@@ -1,5 +1,6 @@
 import { buildLLMIndex } from "@/lib/llms";
 
+export const dynamic = "force-static";
 export const revalidate = false;
 
 export const GET = () => {
