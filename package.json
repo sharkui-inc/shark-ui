@@ -54,6 +54,7 @@
     "@tanstack/zod-form-adapter": "^0.42.1",
     "@teispace/next-themes": "^2.0.2",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
     "front-matter": "^4.0.2",

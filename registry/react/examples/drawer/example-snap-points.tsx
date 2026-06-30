@@ -12,7 +12,7 @@ const Example = () => (
     <DrawerTrigger asChild>
       <Button variant="outline">Open</Button>
     </DrawerTrigger>
-    <DrawerContent showCloseButton>
+    <DrawerContent>
       <DrawerHeader
         description="Drag to 25%, 50%, or 100% height. Swipe down to close."
         title="Snap Points"

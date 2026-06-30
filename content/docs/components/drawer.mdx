@@ -22,12 +22,12 @@ npx shadcn@latest add @shark/drawer
 <TabsContent value="manual">
 
 <Steps>
-<Step>This component depends on [Scroll Area](/docs/components/scroll-area). Install them first if you haven't already.</Step>
+<Step>This component depends on [Button](/docs/components/button) and [Scroll Area](/docs/components/scroll-area). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @ark-ui/react tailwind-variants
+npm install @ark-ui/react lucide-react tailwind-variants
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -150,6 +150,12 @@ Use `modal={false}` to allow interaction with elements outside the drawer.
 
 <ComponentPreview componentName="drawer" fileName="example-non-modal" />
 
+### Close button
+
+Use the `showCloseButton` prop to show a close button in the top-right corner.
+
+<ComponentPreview componentName="drawer" fileName="example-close-button" />
+
 ### No Drag Area
 
 Apply the `data-no-drag` attribute to any element inside the drawer to prevent dragging from starting on it.
@@ -218,6 +224,7 @@ Holds the drawer panel. Supports swipe-to-close; direction inherited from root `
 | --- | --- | --- |
 | `variant` | `"default" \| "inset"` | `"default"` |
 | `showBar` | `boolean` | `true` |
+| `showCloseButton` | `boolean` | `false` |
 | `draggable` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
