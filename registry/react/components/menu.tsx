@@ -203,7 +203,14 @@ export const MenuCheckboxItem = (
       )}
       {...rest}
     >
-      <ArkMenu.ItemIndicator className="pointer-events-none absolute inset-s-2 flex size-3.5 items-center justify-center">
+      <ArkMenu.ItemIndicator
+        className={cn(
+          "absolute inset-s-2",
+          "size-3.5",
+          "flex items-center justify-center",
+          "pointer-events-none"
+        )}
+      >
         <CheckIcon />
       </ArkMenu.ItemIndicator>
 
