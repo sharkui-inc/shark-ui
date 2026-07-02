@@ -206,7 +206,7 @@ export const SelectItem = (
         "py-1.5 ps-2 pe-8",
         "flex items-center gap-2",
         "select-none text-base md:text-sm",
-        "rounded-md",
+        "rounded-lg",
         "cursor-default",
         "outline-hidden",
         "in-[[data-slot=select-content]:has([data-slot=select-group-label])]:ps-4",
