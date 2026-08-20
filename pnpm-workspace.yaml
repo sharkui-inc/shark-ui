@@ -7,3 +7,4 @@ minimumReleaseAgeExclude:
   - fumadocs-core@16.9.2
   - fumadocs-ui@16.9.2
   - lucide-react@1.17.0
+  - '@formisch/react@1.0.0'

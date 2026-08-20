@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@ark-ui/react": "^5.37.2",
-    "@formisch/react": "^0.5.0",
+    "@formisch/react": "^1.0.0",
     "@hookform/resolvers": "^5.4.0",
     "@shikijs/langs": "^4.2.0",
     "@shikijs/themes": "^4.2.0",
