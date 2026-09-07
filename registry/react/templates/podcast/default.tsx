@@ -37,41 +37,68 @@ const NAV_ITEMS = [
 
 const FEATURED_CHARTS = [
   {
+    image: "/images/gradients/green-dark.svg",
     subtitle: "Your weekly update of the most played tracks",
     title: "Top 50 Global",
   },
   {
+    image: "/images/gradients/blue.svg",
     subtitle: "Your weekly update of the most played tracks",
     title: "Top 50 India",
   },
   {
+    image: "/images/gradients/purple.svg",
     subtitle: "Your weekly update of the most played tracks",
     title: "Trending India",
   },
   {
+    image: "/images/gradients/orange.svg",
     subtitle: "Your weekly update of the most played tracks",
     title: "Trending Global",
   },
   {
+    image: "/images/gradients/rose.svg",
     subtitle: "Your weekly update of the most played tracks",
     title: "Mega Hits",
   },
   {
+    image: "/images/gradients/amber.svg",
     subtitle: "Your weekly update of the most played tracks",
     title: "Happy Favorites",
   },
 ];
 
 const TRACKS = [
-  { artist: "Aniruth Ravichander, Thalapathy Vijay", title: "Kutti Story" },
-  { artist: "Anirudh Ravichander", title: "VIP Title Song" },
-  { artist: "Anirudh Ravichander", title: "Dharala Prabhu Title Track" },
+  {
+    artist: "Aniruth Ravichander, Thalapathy Vijay",
+    image: "/images/gradients/green-dark.svg",
+    title: "Kutti Story",
+  },
+  {
+    artist: "Anirudh Ravichander",
+    image: "/images/gradients/blue.svg",
+    title: "VIP Title Song",
+  },
+  {
+    artist: "Anirudh Ravichander",
+    image: "/images/gradients/purple.svg",
+    title: "Dharala Prabhu Title Track",
+  },
   {
     artist: "Anirudh Ravichander, Super Subu",
+    image: "/images/gradients/orange.svg",
     title: "Hukum - Thalaivar Alappara",
   },
-  { artist: "Sushin Shyam, Dabzee, Vinayak Sasikumar", title: "Illuminati" },
-  { artist: "Aniruth Ravichander, Thalapathy Vijay", title: "Vaathi Coming" },
+  {
+    artist: "Sushin Shyam, Dabzee, Vinayak Sasikumar",
+    image: "/images/gradients/rose.svg",
+    title: "Illuminati",
+  },
+  {
+    artist: "Aniruth Ravichander, Thalapathy Vijay",
+    image: "/images/gradients/amber.svg",
+    title: "Vaathi Coming",
+  },
 ];
 
 const PodcastTemplate = () => (
@@ -163,7 +190,13 @@ const PodcastTemplate = () => (
                     key={chart.title}
                   >
                     <CardMedia variant="image">
-                      <div className="aspect-square bg-muted-foreground/16" />
+                      <img
+                        alt=""
+                        className="aspect-square object-cover"
+                        height={200}
+                        src={chart.image}
+                        width={200}
+                      />
                     </CardMedia>
                     <CardContent className="p-4">
                       <h3 className="font-semibold">{chart.title}</h3>
@@ -187,7 +220,13 @@ const PodcastTemplate = () => (
                     key={`${track.title}-${track.artist}`}
                   >
                     <CardMedia variant="image">
-                      <div className="aspect-square bg-muted-foreground/16" />
+                      <img
+                        alt=""
+                        className="aspect-square object-cover"
+                        height={160}
+                        src={track.image}
+                        width={160}
+                      />
                     </CardMedia>
                     <CardContent className="p-3">
                       <h3 className="truncate font-medium text-sm">

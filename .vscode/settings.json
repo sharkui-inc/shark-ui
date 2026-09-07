@@ -1,8 +1,9 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
+    "source.organizeImports.biome": "never"
   },
   "tailwindCSS.classFunctions": ["tv", "cn"],
   "[javascript]": {

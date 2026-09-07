@@ -38,7 +38,10 @@ export const RadioGroupItem = (
   return (
     <ArkRadioGroup.Item
       className={cn(
+        "relative",
         "inline-flex items-center gap-2",
+        "touch-manipulation",
+        "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
         "data-disabled:opacity-64",
         className
       )}

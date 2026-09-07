@@ -1,6 +1,6 @@
 ---
 title: Diff
-description: Unified diff hunks with add, delete, and context lines.
+description: Display unified diff hunks.
 ---
 
 <ComponentPreview componentName="diff" />
@@ -79,6 +79,7 @@ npm install @ark-ui/react lucide-react tailwind-variants
 Diff
 ├── DiffHeader
 │   ├── DiffFile
+│   ├── DiffAction
 │   └── DiffStats
 └── DiffContent
     └── DiffLine
@@ -90,7 +91,6 @@ Diff
 import {
   Diff,
   DiffContent,
-  DiffFile,
   DiffHeader,
   DiffLine,
   DiffStats,
@@ -99,8 +99,7 @@ import {
 
 ```tsx
 <Diff>
-  <DiffHeader>
-    <DiffFile>src/auth.ts</DiffFile>
+  <DiffHeader title="src/auth.ts">
     <DiffStats added={4} removed={1} />
   </DiffHeader>
   <DiffContent>
@@ -110,6 +109,37 @@ import {
 </Diff>
 ```
 
+## Visual consistency
+
+`Diff` and [Code Block](/docs/ai-elements/code-block) use the same technical surface: a 36px header, 14px interface text, a scrollable viewport, and 14px / 24px code metrics. They remain separate components: the Diff gutter always shows right-aligned line numbers, while `CodeBlock` prioritizes syntax highlighting and optional line numbers.
+
+## Title
+
+`DiffHeader` supports two title patterns:
+
+### Using props
+
+Pass the `title` prop directly to `DiffHeader`.
+
+```tsx showLineNumbers
+<DiffHeader title="src/auth.ts">
+  <DiffStats added={4} removed={1} />
+</DiffHeader>
+```
+
+> This approach does not require the `DiffFile` component.
+
+### Using components
+
+Use `DiffFile` as a child for more control.
+
+```tsx showLineNumbers
+<DiffHeader>
+  <DiffFile>src/auth.ts</DiffFile>
+  <DiffStats added={4} removed={1} />
+</DiffHeader>
+```
+
 ## Examples
 
 ### Hunk
@@ -117,6 +147,12 @@ import {
 Compose context, delete, and add lines into a unified hunk.
 
 <ComponentPreview componentName="diff" fileName="example-hunk" />
+
+### Long line numbers
+
+The gutter uses the same `w-11` column as [Code Block](/docs/ai-elements/code-block), so line numbers stay aligned with source view.
+
+<ComponentPreview componentName="diff" fileName="example-long-line-numbers" />
 
 ### Without header
 
@@ -132,7 +168,7 @@ Stack one `Diff` per file.
 
 ### With Icon
 
-Place a file-type icon in `DiffHeader` next to `DiffFile`.
+Place a file-type icon in `DiffHeader` next to the file path.
 
 <ComponentPreview componentName="diff" fileName="example-icon" />
 
@@ -159,16 +195,27 @@ Root panel for a unified diff.
 
 ### DiffHeader
 
-Header for the file path and stats.
+Header for the file path and stats. Pass `title` to render `DiffFile`. A string
+child is wrapped the same way.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### DiffFile
+
+File path. Rendered automatically when `title` is set on `DiffHeader`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
-### DiffFile
+### DiffAction
 
-File path. Children are the path text.
+Trailing header actions. Aligns to the end.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -189,7 +236,7 @@ Added and removed counts.
 
 ### DiffContent
 
-Scrollable hunk. Line numbers and `+`/`-` markers sit in a sticky gutter on horizontal overflow.
+Scrollable hunk. Right-aligned line numbers sit in a sticky gutter on horizontal overflow.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -198,7 +245,7 @@ Scrollable hunk. Line numbers and `+`/`-` markers sit in a sticky gutter on hori
 
 ### DiffLine
 
-A source line. Children are the line text. The `+`/`-` marker comes from `type`.
+A source line. Children are the line text. Add and delete states come from `type`.
 
 | Prop | Type | Default |
 | --- | --- | --- |

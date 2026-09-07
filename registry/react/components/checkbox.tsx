@@ -29,6 +29,8 @@ export const checkboxVariants = tv({
   base: [
     "relative",
     "inline-flex shrink-0 items-center justify-center",
+    "touch-manipulation",
+    "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
     "size-4",
     "bg-transparent",
     "rounded-sm border border-input shadow-xs/5",

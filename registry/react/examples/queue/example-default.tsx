@@ -1,45 +1,66 @@
-import { ListTodoIcon } from "lucide-react";
+import {
+  CornerDownLeftIcon,
+  EllipsisIcon,
+  PencilIcon,
+  Trash2Icon,
+} from "lucide-react";
+import { Kbd } from "@/registry/react/components/kbd";
 import {
   Queue,
   QueueItem,
   QueueItemAction,
   QueueItemActions,
   QueueItemContent,
-  QueueItemIndicator,
   QueueList,
   QueueSection,
+  QueueSectionAction,
   QueueSectionContent,
-  QueueSectionLabel,
-  QueueSectionTrigger,
+  QueueSectionHeader,
 } from "@/registry/react/components/queue";
 
-const Example = () => (
+const QueueDemo = () => (
   <Queue className="w-full max-w-md">
-    <QueueSection defaultOpen>
-      <QueueSectionTrigger>
-        <QueueSectionLabel
-          count={2}
-          icon={<ListTodoIcon aria-hidden="true" className="size-4" />}
-          label="Queued"
-        />
-      </QueueSectionTrigger>
+    <QueueSection>
+      <QueueSectionHeader title="4 Queued Messages">
+        <QueueSectionAction>
+          <QueueItemAction size="xs">Start Multitasking</QueueItemAction>
+        </QueueSectionAction>
+      </QueueSectionHeader>
       <QueueSectionContent>
         <QueueList>
-          <QueueItem>
-            <QueueItemIndicator />
-            <QueueItemContent>Summarize the launch brief</QueueItemContent>
-            <QueueItemActions>
-              <QueueItemAction aria-label="Remove">×</QueueItemAction>
-            </QueueItemActions>
-          </QueueItem>
-          <QueueItem>
-            <QueueItemIndicator />
-            <QueueItemContent>Draft release notes</QueueItemContent>
-          </QueueItem>
+          {ITEMS.map((item) => (
+            <QueueItem key={item}>
+              <QueueItemContent>{item}</QueueItemContent>
+              <QueueItemActions>
+                <QueueItemAction size="xs">
+                  Send Now
+                  <Kbd className="border-0 bg-transparent px-0">
+                    <CornerDownLeftIcon aria-hidden="true" />
+                  </Kbd>
+                </QueueItemAction>
+                <QueueItemAction aria-label={`Edit ${item}`}>
+                  <PencilIcon aria-hidden="true" />
+                </QueueItemAction>
+                <QueueItemAction aria-label={`Remove ${item}`}>
+                  <Trash2Icon aria-hidden="true" />
+                </QueueItemAction>
+                <QueueItemAction aria-label={`More actions for ${item}`}>
+                  <EllipsisIcon aria-hidden="true" />
+                </QueueItemAction>
+              </QueueItemActions>
+            </QueueItem>
+          ))}
         </QueueList>
       </QueueSectionContent>
     </QueueSection>
   </Queue>
 );
 
-export default Example;
+const ITEMS = [
+  "Summarize the launch brief",
+  "Draft release notes",
+  "Open a PR for the queue panel",
+  "Ship the docs preview",
+];
+
+export default QueueDemo;

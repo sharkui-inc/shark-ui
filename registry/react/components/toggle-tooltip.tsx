@@ -10,7 +10,7 @@ export const ToggleTooltip = (
   props: React.ComponentProps<typeof ArkPopover.Root>
 ) => {
   const {
-    positioning = { placement: "top" },
+    positioning,
     lazyMount = true,
     unmountOnExit = true,
     modal = false,
@@ -23,7 +23,10 @@ export const ToggleTooltip = (
       data-slot="toggle-tooltip"
       lazyMount={lazyMount}
       modal={modal}
-      positioning={positioning}
+      positioning={{
+        placement: "top",
+        ...positioning,
+      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     />

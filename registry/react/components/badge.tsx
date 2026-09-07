@@ -9,7 +9,7 @@ export const badgeVariants = tv({
     "relative",
     "inline-flex w-fit max-w-full shrink-0 items-center justify-center gap-1",
     "select-none whitespace-nowrap font-medium text-xs",
-    "rounded-md border border-transparent",
+    "border border-transparent",
     "overflow-hidden",
     "transition-colors",
     "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
@@ -24,6 +24,7 @@ export const badgeVariants = tv({
   },
   variants: {
     pill: {
+      false: "rounded-md",
       true: [
         "rounded-full",
         "has-[>svg]:data-[size=sm]:pe-1.5",

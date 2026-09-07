@@ -47,7 +47,7 @@ export const NumberInputGroup = (
         "w-full",
         "flex justify-between",
         "bg-transparent dark:bg-input/30",
-        "text-base",
+        "font-normal text-base md:text-sm",
         "rounded-lg border border-input shadow-xs/5 ring-ring/32",
         "transition-shadow",
         "focus-within:border-primary focus-within:ring-[3px] focus-within:ring-ring/32",
@@ -134,6 +134,7 @@ export const NumberInputInput = (props: React.ComponentProps<typeof Input>) => {
           "dark:bg-transparent",
           className
         )}
+        size={size}
       />
     </ArkNumberInput.Input>
   );

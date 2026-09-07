@@ -8,10 +8,10 @@ import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
 
 const Example = () => (
   <InputGroup className="w-full max-w-64">
+    <InputGroupInput placeholder="Search..." />
     <InputGroupAddon>
       <SearchIcon />
     </InputGroupAddon>
-    <InputGroupInput placeholder="Search..." />
     <InputGroupAddon align="inline-end">
       <KbdGroup>
         <Kbd>⌘</Kbd>

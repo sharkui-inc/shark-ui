@@ -236,13 +236,13 @@ interface FloatingPanelBodyProps
   /**
    * Add a fade effect to the scroll area
    *
-   * @default false
+   * @default true
    */
   scrollFade?: boolean;
 }
 
 export const FloatingPanelBody = (props: FloatingPanelBodyProps) => {
-  const { scrollFade = false, className, children, ...rest } = props;
+  const { scrollFade = true, className, children, ...rest } = props;
 
   return (
     <ScrollArea scrollFade={scrollFade}>

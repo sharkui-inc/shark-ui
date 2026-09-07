@@ -1,6 +1,6 @@
 ---
 title: Tool Result
-description: A collapsible tool result row with title, meta, and status.
+description: Show a tool result with metadata and actions.
 ---
 
 <ComponentPreview componentName="tool-result" />
@@ -78,7 +78,9 @@ ToolResult
 │   ├── ToolResultTitle
 │   ├── ToolResultMeta
 │   ├── ToolResultName
-│   └── ToolResultStatus
+│   └── ToolResultAction
+│       ├── ToolResultStatus (optional)
+│       └── CollapsibleIndicator (optional)
 └── ToolResultContent
 ```
 
@@ -87,9 +89,11 @@ ToolResult
 ```tsx
 import {
   ToolResult,
+  ToolResultAction,
   ToolResultContent,
   ToolResultMeta,
   ToolResultName,
+  ToolResultStatus,
   ToolResultTitle,
   ToolResultTrigger,
 } from "@/components/ui/tool-result";
@@ -101,6 +105,9 @@ import {
     <ToolResultTitle>Tests passed</ToolResultTitle>
     <ToolResultMeta>2.9s</ToolResultMeta>
     <ToolResultName>terminal.run</ToolResultName>
+    <ToolResultAction>
+      <ToolResultStatus />
+    </ToolResultAction>
   </ToolResultTrigger>
   <ToolResultContent />
 </ToolResult>
@@ -130,9 +137,23 @@ Control expand state with `open` and `onOpenChange`.
 
 <ComponentPreview componentName="tool-result" fileName="example-cancelled" />
 
-## With Icon
+## Examples
+
+### With Icon
 
 <ComponentPreview componentName="tool-result" fileName="example-icon" />
+
+### With Diff Stats
+
+Use `ToolResultAction` to align `DiffStats` and the chevron at the end of the trigger.
+
+<ComponentPreview componentName="tool-result" fileName="example-with-diff-stats" />
+
+### Without Trigger
+
+Set `showTrigger={false}` on `ToolResultAction` to hide the chevron while keeping the result header interactive.
+
+<ComponentPreview componentName="tool-result" fileName="example-without-trigger" />
 
 ## API Reference
 
@@ -148,10 +169,20 @@ Root [Collapsible](/docs/components/collapsible). `aria-busy` is set while `stat
 
 ### ToolResultTrigger
 
-Toggles the result. Renders children, then status and the chevron.
+Toggles the result. Place `ToolResultAction` inside to align trailing content and the optional chevron at the logical end.
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### ToolResultAction
+
+Trailing action area. It follows the document direction: aligned at the end in LTR and RTL. Set `showTrigger` to `false` to hide its chevron.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `showTrigger` | `boolean` | `true` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
@@ -184,7 +215,7 @@ Tool name in the trigger.
 
 ### ToolResultStatus
 
-Status icon and label. Children replace the default label.
+Optional status icon and label. Render it inside `ToolResultAction`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -200,7 +231,7 @@ Status icon and label. Children replace the default label.
 
 ### ToolResultContent
 
-Holds [Terminal](/docs/ai-elements/terminal) or [Diff](/docs/ai-elements/diff).
+Content of the tool result.
 
 | Prop | Type | Default |
 | --- | --- | --- |

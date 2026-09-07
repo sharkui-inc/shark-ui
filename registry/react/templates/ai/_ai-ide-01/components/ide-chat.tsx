@@ -31,9 +31,11 @@ import {
   Plan,
   PlanAction,
   PlanContent,
-  PlanDescription,
   PlanHeader,
-  PlanTitle,
+  PlanItem,
+  PlanItemContent,
+  PlanItemDetailFile,
+  PlanItemTrigger,
   PlanTrigger,
 } from "@/registry/react/components/plan";
 import {
@@ -43,15 +45,11 @@ import {
   PromptInputTextarea,
 } from "@/registry/react/components/prompt-input";
 import {
-  TaskItem,
-  TaskItemContent,
-  TaskItemDetailFile,
-  TaskItemTrigger,
-} from "@/registry/react/components/task";
-import {
   ToolResult,
+  ToolResultAction,
   ToolResultContent,
   ToolResultName,
+  ToolResultStatus,
   ToolResultTitle,
   ToolResultTrigger,
 } from "@/registry/react/components/tool-result";
@@ -72,31 +70,27 @@ export const IdeChat = () => {
     <div className="flex h-full min-h-0 flex-col">
       <div className="border-b p-3">
         <Plan>
-          <PlanHeader>
-            <div className="min-w-0">
-              <PlanTitle>Add email validation</PlanTitle>
-              <PlanDescription>Helper, form, then tests.</PlanDescription>
-            </div>
+          <PlanHeader title="Add email validation">
             <PlanAction>
               <PlanTrigger />
             </PlanAction>
           </PlanHeader>
           <PlanContent>
-            <TaskItem status="completed">
-              <TaskItemTrigger status="completed" title="Read helpers.ts" />
-              <TaskItemContent>
-                <TaskItemDetailFile>src/utils/helpers.ts</TaskItemDetailFile>
-              </TaskItemContent>
-            </TaskItem>
-            <TaskItem status="in-progress">
-              <TaskItemTrigger
+            <PlanItem status="completed">
+              <PlanItemTrigger status="completed" title="Read helpers.ts" />
+              <PlanItemContent>
+                <PlanItemDetailFile>src/utils/helpers.ts</PlanItemDetailFile>
+              </PlanItemContent>
+            </PlanItem>
+            <PlanItem status="in-progress">
+              <PlanItemTrigger
                 status="in-progress"
                 title="Patch isValidEmail"
               />
-              <TaskItemContent>
-                <TaskItemDetailFile>src/utils/helpers.ts</TaskItemDetailFile>
-              </TaskItemContent>
-            </TaskItem>
+              <PlanItemContent>
+                <PlanItemDetailFile>src/utils/helpers.ts</PlanItemDetailFile>
+              </PlanItemContent>
+            </PlanItem>
           </PlanContent>
         </Plan>
       </div>
@@ -129,6 +123,9 @@ export const IdeChat = () => {
                     <ToolResultTrigger>
                       <ToolResultTitle>Read helpers.ts</ToolResultTitle>
                       <ToolResultName>Read</ToolResultName>
+                      <ToolResultAction>
+                        <ToolResultStatus />
+                      </ToolResultAction>
                     </ToolResultTrigger>
                   </ToolResult>
                   <Diff>
@@ -148,6 +145,9 @@ export const IdeChat = () => {
                     <ToolResultTrigger>
                       <ToolResultTitle>Tests passed</ToolResultTitle>
                       <ToolResultName>Shell</ToolResultName>
+                      <ToolResultAction>
+                        <ToolResultStatus />
+                      </ToolResultAction>
                     </ToolResultTrigger>
                     <ToolResultContent>
                       <p className="font-mono text-muted-foreground text-xs">

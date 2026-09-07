@@ -2,7 +2,6 @@ import { TypeScriptIcon } from "@/components/icons/typescript";
 import {
   Diff,
   DiffContent,
-  DiffFile,
   DiffHeader,
   DiffLine,
   DiffStats,
@@ -10,9 +9,8 @@ import {
 
 const Example = () => (
   <Diff className="max-w-lg">
-    <DiffHeader>
+    <DiffHeader title="src/utils/helpers.ts">
       <TypeScriptIcon />
-      <DiffFile>src/utils/helpers.ts</DiffFile>
       <DiffStats added={1} removed={1} />
     </DiffHeader>
     <DiffContent>

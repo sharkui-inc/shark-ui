@@ -2,13 +2,9 @@ import type { RegistryItemType } from "@/lib/registry";
 import { absoluteUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
-  dependencies: ["lucide-react"],
-  description: "Collapsible queue of pending prompts and completed items.",
+  description: "Compact queue of pending prompts and completed items.",
   name: "queue",
-  registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/collapsible.json"),
-  ],
+  registryDependencies: [absoluteUrl("/r/button.json")],
   type: "registry:ui",
 };
 

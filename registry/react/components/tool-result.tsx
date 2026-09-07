@@ -103,21 +103,44 @@ export const ToolResultTrigger = (
       className={cn(
         "min-h-9 w-full min-w-0",
         "flex items-center gap-2",
-        "py-1",
+        "px-3 py-1",
         "text-start",
         "rounded-md",
         "outline-none",
         "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "has-data-[slot=collapsible-indicator]:[button]:justify-start!",
         className
       )}
       data-slot="tool-result-trigger"
       {...rest}
     >
-      <span className="flex min-w-0 flex-1 items-center gap-2">{children}</span>
-      <ToolResultStatus />
-      <CollapsibleIndicator className="size-3.5 shrink-0 text-muted-foreground/50" />
+      {children}
     </CollapsibleTrigger>
+  );
+};
+
+interface ToolResultActionProps extends React.ComponentProps<typeof ark.span> {
+  /**
+   * Whether to show the collapsible indicator.
+   */
+  showTrigger?: boolean;
+}
+
+export const ToolResultAction = (props: ToolResultActionProps) => {
+  const { showTrigger = true, className, children, ...rest } = props;
+
+  return (
+    <ark.span
+      className={cn("ms-auto flex shrink-0 items-center gap-2", className)}
+      data-slot="tool-result-action"
+      {...rest}
+    >
+      {children}
+      {showTrigger ? (
+        <CollapsibleIndicator className="size-3.5 shrink-0 text-muted-foreground/50" />
+      ) : null}
+    </ark.span>
   );
 };
 

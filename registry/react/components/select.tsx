@@ -7,6 +7,11 @@ import { CheckIcon, ChevronsUpDownIcon, XIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+import { inputItemVariants } from "@/registry/react/components/input";
+import {
+  menuItemControlVariants,
+  menuListVariants,
+} from "@/registry/react/components/menu";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
 
@@ -38,8 +43,8 @@ export const selectTriggerVariants = tv({
   base: [
     "w-fit min-w-0",
     "flex items-center gap-2",
-    "px-[calc(--spacing(3)-1px)]",
-    "text-sm",
+    "touch-manipulation select-none",
+    "font-normal text-base md:text-sm",
     "outline-none",
     "transition-[color,box-shadow]",
     "data-placeholder-shown:text-muted-foreground/64",
@@ -53,8 +58,8 @@ export const selectTriggerVariants = tv({
   },
   variants: {
     size: {
-      lg: ["h-9"],
-      md: ["h-8"],
+      lg: ["h-9", "px-[calc(--spacing(3.5)-1px)]"],
+      md: ["h-8", "px-[calc(--spacing(3)-1px)]"],
       sm: ["h-7", "px-[calc(--spacing(2.5)-1px)]"],
     },
     variant: {
@@ -203,7 +208,7 @@ export const SelectContent = (
           {...rest}
         >
           <ScrollArea className="min-h-0 flex-1" scrollFade>
-            <div className="p-1" data-slot="select-scroll">
+            <div className={menuListVariants()} data-slot="select-scroll">
               {children}
             </div>
           </ScrollArea>
@@ -241,8 +246,7 @@ export const SelectGroupLabel = (
   return (
     <ArkSelect.ItemGroupLabel
       className={cn(
-        "px-2 py-1.5",
-        "font-semibold text-muted-foreground text-xs",
+        "px-2 py-1.5 font-medium text-muted-foreground text-xs",
         className
       )}
       data-slot="select-group-label"
@@ -259,12 +263,9 @@ export const SelectItem = (
   return (
     <ArkSelect.Item
       className={cn(
-        "relative",
-        "w-full",
-        "py-1.5 ps-2 pe-8",
-        "flex items-center gap-2",
-        "select-none text-base md:text-sm",
-        "rounded-lg",
+        menuItemControlVariants(),
+        inputItemVariants(),
+        "pe-8",
         "cursor-default",
         "outline-hidden",
         "in-[[data-slot=select-content]:has([data-slot=select-group-label])]:ps-4",

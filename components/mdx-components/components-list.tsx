@@ -98,7 +98,6 @@ import { SwitchThumb } from "@/components/thumbs/switch";
 import { TableThumb } from "@/components/thumbs/table";
 import { TabsThumb } from "@/components/thumbs/tabs";
 import { TagsInputThumb } from "@/components/thumbs/tags-input";
-import { TaskThumb } from "@/components/thumbs/task";
 import { TerminalThumb } from "@/components/thumbs/terminal";
 import { TextareaThumb } from "@/components/thumbs/textarea";
 import type { ThumbCardProps } from "@/components/thumbs/thumb-card";
@@ -215,7 +214,6 @@ const THUMB_MAP: Record<string, React.ComponentType<ThumbCardProps>> = {
   table: TableThumb,
   tabs: TabsThumb,
   "tags-input": TagsInputThumb,
-  task: TaskThumb,
   terminal: TerminalThumb,
   textarea: TextareaThumb,
   timer: TimerThumb,

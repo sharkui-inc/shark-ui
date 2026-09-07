@@ -23,6 +23,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/registry/react/components/input-group";
+import { menuListVariants } from "@/registry/react/components/menu";
 
 export const ModelSelector: ArkCombobox.RootComponent = (props) => {
   const { positioning, selectionBehavior = "replace", ...rest } = props;
@@ -30,8 +31,7 @@ export const ModelSelector: ArkCombobox.RootComponent = (props) => {
   return (
     <Combobox
       positioning={{
-        placement: "top-start",
-        sameWidth: false,
+        placement: "top",
         ...positioning,
       }}
       selectionBehavior={selectionBehavior}
@@ -76,7 +76,7 @@ export const ModelSelectorTrigger = (props: ModelSelectorTriggerProps) => {
     <ArkCombobox.Trigger asChild focusable>
       <Button
         className={cn(
-          "min-w-0 max-w-64",
+          "min-w-0 max-w-64 font-normal",
           showTrigger && "justify-between",
           className
         )}
@@ -115,7 +115,12 @@ export const ModelSelectorContent = (
     <Portal>
       <ComboboxPositioner>
         <ArkCombobox.Content
-          className={cn(comboboxContentVariants(), "w-52 p-2", className)}
+          className={cn(
+            comboboxContentVariants(),
+            "w-52",
+            menuListVariants(),
+            className
+          )}
           data-slot="model-selector-content"
           {...rest}
         >
@@ -137,15 +142,15 @@ export const ModelSelectorInput = (
       data-slot="model-selector-input-group"
       size="md"
     >
-      <InputGroupAddon>
-        <SearchIcon aria-hidden="true" className="opacity-64" />
-      </InputGroupAddon>
       <ArkCombobox.Input asChild {...rest}>
         <InputGroupInput
           aria-label="Search models"
           data-slot="model-selector-input"
         />
       </ArkCombobox.Input>
+      <InputGroupAddon>
+        <SearchIcon aria-hidden="true" className="opacity-64" />
+      </InputGroupAddon>
     </InputGroup>
   );
 };

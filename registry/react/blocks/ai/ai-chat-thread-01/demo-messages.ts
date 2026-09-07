@@ -27,7 +27,6 @@ export const LAUNCH_PLAN_MESSAGES: readonly ChatMessage[] = [
       "Start with three decisions: confirm the audience, lock the release boundary, and assign one owner to each launch risk. Then turn the brief into milestones that can be reviewed weekly.",
     id: "launch-assistant",
     plan: {
-      description: "Audience, risks, then weekly milestones.",
       tasks: [
         {
           file: "launch-brief.pdf",

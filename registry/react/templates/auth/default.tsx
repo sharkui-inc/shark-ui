@@ -96,8 +96,10 @@ const AuthTemplate = () => (
     <div className="relative hidden bg-muted lg:block">
       <img
         alt="Acme workspace"
-        className="absolute inset-0 size-full object-cover dark:brightness-[0.2] dark:grayscale"
-        src="/images/placeholder.svg"
+        className="absolute inset-0 size-full object-cover"
+        height={500}
+        src="/images/gradients/green-dark.svg"
+        width={800}
       />
     </div>
   </div>

@@ -6,7 +6,10 @@ const dependencies = ["@ark-ui/react", "lucide-react", "tailwind-variants"];
 const manifest: RegistryItemType = {
   dependencies,
   name: "native-select",
-  registryDependencies: [absoluteUrl("/r/field.json")],
+  registryDependencies: [
+    absoluteUrl("/r/field.json"),
+    absoluteUrl("/r/input.json"),
+  ],
   type: "registry:ui",
 };
 

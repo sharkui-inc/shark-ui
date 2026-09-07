@@ -9,7 +9,14 @@ import { LinkBox, LinkOverlay } from "@/registry/react/components/link-overlay";
 const LinkOverlayDemo = () => (
   <LinkBox asChild>
     <Card className="w-full max-w-xs">
-      <CardMedia className="h-32 bg-muted" variant="image" />
+      <CardMedia className="h-32 bg-muted" variant="image">
+        <img
+          alt="Green mesh gradient"
+          height={128}
+          src="/images/gradients/green-dark.svg"
+          width={500}
+        />
+      </CardMedia>
       <CardHeader description="This sofa is perfect for modern tropical spaces, baroque inspired spaces.">
         <CardTitle asChild>
           <h2>

@@ -11,13 +11,20 @@ import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
-import type { inputVariants } from "@/registry/react/components/input";
+import {
+  inputItemVariants,
+  type inputVariants,
+} from "@/registry/react/components/input";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
 } from "@/registry/react/components/input-group";
+import {
+  menuItemControlVariants,
+  menuListVariants,
+} from "@/registry/react/components/menu";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const useCombobox = useArkComboboxContext;
@@ -203,7 +210,7 @@ export const ComboboxContent = (
           {...rest}
         >
           <ScrollArea className="min-h-0 flex-1" scrollFade>
-            <div className="p-1" data-slot="combobox-scroll">
+            <div className={menuListVariants()} data-slot="combobox-scroll">
               {children}
             </div>
           </ScrollArea>
@@ -241,7 +248,7 @@ export const ComboboxGroupLabel = (
   return (
     <ArkCombobox.ItemGroupLabel
       className={cn(
-        "px-2 py-1.5 font-semibold text-muted-foreground text-xs",
+        "px-2 py-1.5 font-medium text-muted-foreground text-xs",
         className
       )}
       data-slot="combobox-group-label"
@@ -252,11 +259,8 @@ export const ComboboxGroupLabel = (
 
 export const comboboxItemVariants = tv({
   base: [
-    "relative",
-    "py-1.5 ps-2",
-    "text-sm",
-    "flex w-full items-center gap-2",
-    "rounded-xl",
+    menuItemControlVariants(),
+    inputItemVariants(),
     "select-none",
     "cursor-default",
     "outline-hidden",

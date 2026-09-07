@@ -131,7 +131,7 @@ const DateInputControl = (props: DateInputControlProps) => {
           className={cn(
             "min-w-0",
             "flex flex-1 items-center gap-2",
-            "text-base md:text-sm"
+            "font-normal text-base md:text-sm"
           )}
           data-slot="date-input-field"
         >

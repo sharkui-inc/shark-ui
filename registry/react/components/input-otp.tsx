@@ -12,6 +12,7 @@ interface InputOTPProps
 
 export const InputOTP = (props: InputOTPProps) => {
   const {
+    size = "md",
     placeholder,
     otp = true,
     className,
@@ -23,6 +24,7 @@ export const InputOTP = (props: InputOTPProps) => {
   return (
     <ArkPinInput.Root
       className="group/input-otp"
+      data-size={size}
       data-slot="input-otp"
       otp={otp}
       placeholder={placeholder ?? ""}
@@ -31,7 +33,9 @@ export const InputOTP = (props: InputOTPProps) => {
       <ArkPinInput.Control
         className={cn(
           "flex items-center gap-2",
-          "*:data-[slot=input-otp-input]:size-9",
+          "*:data-[slot=input-otp-input]:size-8",
+          "in-data-[size=lg]:*:data-[slot=input-otp-input]:size-9",
+          "in-data-[size=sm]:*:data-[slot=input-otp-input]:size-7",
           className
         )}
         data-slot="input-otp-control"

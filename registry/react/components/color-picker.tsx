@@ -34,9 +34,7 @@ export const ColorPicker = (props: ColorPickerProps) => {
   const {
     value,
     defaultValue,
-    positioning = {
-      placement: "top-start",
-    },
+    positioning,
     lazyMount = true,
     unmountOnExit = true,
     onValueChange,
@@ -62,7 +60,10 @@ export const ColorPicker = (props: ColorPickerProps) => {
           setInternalValue(e.valueAsString);
         }
       }}
-      positioning={positioning}
+      positioning={{
+        placement: "top-start",
+        ...positioning,
+      }}
       unmountOnExit={unmountOnExit}
       value={isControlled ? parseColor(value) : undefined}
       {...rest}

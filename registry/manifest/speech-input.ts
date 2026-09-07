@@ -3,12 +3,12 @@ import { absoluteUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
   dependencies: ["lucide-react"],
-  description: "Microphone button for Web Speech API voice transcription.",
+  description:
+    "Compound microphone recording input with waveform, duration, and browser transcription.",
   name: "speech-input",
   registryDependencies: [
     absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/spinner.json"),
-    absoluteUrl("/r/tooltip.json"),
+    absoluteUrl("/r/native-select.json"),
   ],
   type: "registry:ui",
 };

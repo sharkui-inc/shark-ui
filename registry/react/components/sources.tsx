@@ -39,9 +39,9 @@ export const SourcesTrigger = (props: SourcesTriggerProps) => {
   return (
     <CollapsibleTrigger
       className={cn(
-        "inline-flex items-center gap-1.5",
-        "text-muted-foreground text-xs",
+        "justify-start! flex min-h-9 w-fit max-w-full items-center gap-2 rounded-lg py-1 text-start text-muted-foreground text-sm",
         "hover:text-foreground",
+        "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
         className
       )}
       data-slot="sources-trigger"
@@ -50,7 +50,7 @@ export const SourcesTrigger = (props: SourcesTriggerProps) => {
       {children ?? (
         <>
           <span>Used {count ?? 0} sources</span>
-          <CollapsibleIndicator />
+          <CollapsibleIndicator className="size-3.5" />
         </>
       )}
     </CollapsibleTrigger>
@@ -64,7 +64,7 @@ export const SourcesContent = (
 
   return (
     <CollapsibleContent
-      className={cn("mt-2 flex flex-col gap-1", className)}
+      className={cn("mt-2 flex flex-col items-start gap-1", className)}
       data-slot="sources-content"
       {...rest}
     />
@@ -84,11 +84,15 @@ export const Source = (props: SourceProps) => {
   return (
     <ark.a
       className={cn(
-        "inline-flex min-w-0 items-center gap-2",
-        "px-2 py-1.5",
-        "text-muted-foreground text-xs",
-        "rounded-md",
-        "hover:bg-muted hover:text-foreground",
+        "inline-flex min-h-8 w-fit min-w-0 max-w-full items-center gap-2",
+        "px-2 py-1",
+        "text-foreground text-sm",
+        "rounded-lg",
+        "border border-transparent",
+        "outline-none",
+        "hover:bg-muted",
+        "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+        "focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
         className
       )}
       data-slot="source"
@@ -97,12 +101,9 @@ export const Source = (props: SourceProps) => {
       target="_blank"
       {...rest}
     >
-      <BookIcon aria-hidden="true" className="size-3.5 shrink-0" />
+      <BookIcon aria-hidden="true" />
       <span className="min-w-0 truncate">{children ?? title}</span>
-      <ArrowUpRightIcon
-        aria-hidden="true"
-        className="size-3 shrink-0 opacity-64"
-      />
+      <ArrowUpRightIcon aria-hidden="true" />
     </ark.a>
   );
 };

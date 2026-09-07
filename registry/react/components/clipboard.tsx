@@ -5,6 +5,7 @@ import {
   useClipboardContext,
 } from "@ark-ui/react/clipboard";
 import { CheckIcon, ClipboardIcon } from "lucide-react";
+import { Children } from "react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
@@ -23,15 +24,21 @@ interface ClipboardProps
 
 export const Clipboard = (props: ClipboardProps) => {
   const { rootClassName, className, children, ...rest } = props;
+  const hasMultipleParts = Children.toArray(children).length > 1;
 
   return (
     <ArkClipboard.Root
-      className={cn(rootClassName)}
+      className={cn("contents", rootClassName)}
       data-slot="clipboard"
       {...rest}
     >
       <ArkClipboard.Control
-        className={cn("flex items-center gap-2", className)}
+        asChild={!hasMultipleParts}
+        className={cn(
+          hasMultipleParts && "flex items-center gap-2",
+          rootClassName,
+          className
+        )}
         data-slot="clipboard-control"
       >
         {children}
@@ -61,9 +68,8 @@ export const ClipboardInput = (
 const clipboardValueVariants = tv({
   base: [
     "inline-flex items-center",
-    "px-3",
+    "font-normal text-base md:text-sm",
     "bg-transparent dark:bg-input/30",
-    "text-base md:text-sm",
     "rounded-lg border border-input shadow-sm/5",
   ],
   defaultVariants: {
@@ -71,11 +77,11 @@ const clipboardValueVariants = tv({
   },
   variants: {
     size: {
-      lg: "h-9",
-      md: "h-8",
-      sm: "h-7",
-      xl: "h-10",
-      xs: "h-6",
+      lg: ["h-9", "px-[calc(--spacing(3.5)-1px)]"],
+      md: ["h-8", "px-[calc(--spacing(3)-1px)]"],
+      sm: ["h-7", "px-[calc(--spacing(2.5)-1px)]"],
+      xl: ["h-10", "px-[calc(--spacing(3)-1px)]"],
+      xs: ["h-6", "px-[calc(--spacing(3)-1px)]"],
     },
   },
 });

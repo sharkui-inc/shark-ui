@@ -4,6 +4,7 @@ import { useListCollection } from "@ark-ui/react/collection";
 import { useFilter } from "@ark-ui/react/locale";
 import { ChevronsUpDown } from "lucide-react";
 import React from "react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Input } from "@/registry/react/components/input";
 import {
@@ -15,6 +16,7 @@ import {
   ListboxItemText,
   ListboxValueText,
 } from "@/registry/react/components/listbox";
+import { menuListVariants } from "@/registry/react/components/menu";
 import {
   Popover,
   PopoverContent,
@@ -58,7 +60,7 @@ const Example = () => {
             <ChevronsUpDown className="size-4 opacity-64" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="min-w-64 gap-2 p-1">
+        <PopoverContent className={cn("min-w-64 gap-2", menuListVariants())}>
           <Input
             onChange={(e) => {
               const value = e.target.value;

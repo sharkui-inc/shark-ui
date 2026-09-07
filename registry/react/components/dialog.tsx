@@ -223,13 +223,13 @@ interface DialogBodyProps extends React.ComponentProps<typeof ark.div> {
   /**
    * Add a fade effect to the scroll area
    *
-   * @default false
+   * @default true
    */
   scrollFade?: boolean;
 }
 
 export const DialogBody = (props: DialogBodyProps) => {
-  const { scrollFade = false, className, ...rest } = props;
+  const { scrollFade = true, className, ...rest } = props;
 
   return (
     <ScrollArea className="min-h-0 flex-1" scrollFade={scrollFade}>

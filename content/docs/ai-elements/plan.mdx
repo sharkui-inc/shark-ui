@@ -1,6 +1,6 @@
 ---
 title: Plan
-description: A collapsible agent plan with a title, description, and nested tasks.
+description: Show an agent plan with item status and progress.
 ---
 
 <ComponentPreview componentName="plan" />
@@ -26,7 +26,7 @@ npx shadcn@latest add @shark/plan
 
 <Steps>
 
-<Step>This component depends on [Collapsible](/docs/components/collapsible). Install [Task](/docs/ai-elements/task) to nest steps.</Step>
+<Step>This component depends on [Collapsible](/docs/components/collapsible), [Badge](/docs/components/badge), and [Spinner](/docs/components/spinner). Install them first if you haven't already.</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -46,11 +46,14 @@ npx shadcn@latest add @shark/plan
 Plan
 ├── PlanHeader
 │   ├── PlanTitle
-│   ├── PlanDescription
 │   └── PlanAction
 │       └── PlanTrigger
 └── PlanContent
-    └── Task
+    └── PlanItem
+        ├── PlanItemTrigger
+        └── PlanItemContent
+            └── PlanItemDetail
+                └── PlanItemDetailFile
 ```
 
 ## Usage
@@ -61,63 +64,129 @@ import {
   PlanAction,
   PlanContent,
   PlanHeader,
+  PlanItem,
+  PlanItemContent,
+  PlanItemDetail,
+  PlanItemDetailFile,
+  PlanItemTrigger,
   PlanTitle,
   PlanTrigger,
 } from "@/components/ui/plan";
 ```
 
 ```tsx
-<Plan>
-  <PlanHeader>
-    <PlanTitle>Add email validation</PlanTitle>
+<Plan completed={1} total={3}>
+  <PlanHeader title="Add email validation">
     <PlanAction>
       <PlanTrigger />
     </PlanAction>
   </PlanHeader>
-  <PlanContent />
+  <PlanContent>
+    <PlanItem status="in-progress">
+      <PlanItemTrigger title="Patch isValidEmail" />
+      <PlanItemContent>
+        <PlanItemDetail>
+          Updating <PlanItemDetailFile>src/utils/helpers.ts</PlanItemDetailFile>
+        </PlanItemDetail>
+      </PlanItemContent>
+    </PlanItem>
+  </PlanContent>
 </Plan>
 ```
 
-Compose [Task](/docs/ai-elements/task) inside `PlanContent`.
+## Title
+
+`PlanHeader` supports two title patterns:
+
+### Using props
+
+Pass the `title` prop directly to `PlanHeader`.
+
+```tsx showLineNumbers
+<PlanHeader title="Add email validation">
+  <PlanAction>
+    <PlanTrigger />
+  </PlanAction>
+</PlanHeader>
+```
+
+> This approach does not require the `PlanTitle` component.
+
+### Using components
+
+Use `PlanTitle` as a child for more control.
+
+```tsx showLineNumbers
+<PlanHeader>
+  <PlanTitle>Add email validation</PlanTitle>
+  <PlanAction>
+    <PlanTrigger />
+  </PlanAction>
+</PlanHeader>
+```
 
 ## Controlled
 
-Control expand state with `open` and `onOpenChange`.
+Control the plan expand state with `open` and `onOpenChange`.
 
 <ComponentPreview componentName="plan" fileName="example-controlled" />
+
+Control an individual item with the same props.
+
+<ComponentPreview componentName="plan" fileName="example-item-controlled" />
+
+## States
+
+### Completed
+
+<ComponentPreview componentName="plan" fileName="example-success" />
+
+### Error
+
+<ComponentPreview componentName="plan" fileName="example-error" />
+
+### In progress
+
+<ComponentPreview componentName="plan" fileName="example-in-progress" />
+
+## Examples
+
+### Single item
+
+<ComponentPreview componentName="plan" fileName="example-single-item" />
+
+### Custom item trigger
+
+<ComponentPreview componentName="plan" fileName="example-custom-item-trigger" />
 
 ## API Reference
 
 ### Plan
 
-Root collapsible. Forwards [Collapsible](/docs/components/collapsible) props.
+Root collapsible. Forwards [Collapsible](/docs/components/collapsible) props and can show overall progress.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `defaultOpen` | `boolean` | `true` |
+| `completed` | `number` | `-` |
+| `total` | `number` | `-` |
 | `className` | `string` | `-` |
 
 ### PlanHeader
 
-Header area for title, description, and actions.
+Header area for the title and actions. Pass `title` to render `PlanTitle`. A
+string child is wrapped the same way.
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `title` | `string` | `-` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### PlanTitle
 
-Title text for the plan.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `className` | `string` | `-` |
-| `asChild` | `boolean` | `false` |
-
-### PlanDescription
-
-Supporting description under the title.
+Title text for the plan. Rendered automatically when `title` is set on
+`PlanHeader`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -144,9 +213,57 @@ Toggles the plan. Default children are the collapsible indicator.
 
 ### PlanContent
 
-Holds nested [Task](/docs/ai-elements/task) rows.
+Holds nested plan items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### PlanItem
+
+A collapsible unit of work with a status and optional details.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `status` | `"pending" \| "in-progress" \| "completed" \| "error"` | `"pending"` |
+| `className` | `string` | `-` |
+
+### PlanItemTrigger
+
+Toggles the item and, by default, displays its status, title, and indicator.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` | **required** |
+| `status` | `"pending" \| "in-progress" \| "completed" \| "error"` | inherits `PlanItem` status |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### PlanItemContent
+
+Contains the details revealed when the item is open.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### PlanItemDetail
+
+A supporting line for progress, context, files, or custom content.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### PlanItemDetailFile
+
+A compact file reference for use inside a plan item detail.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "secondary" \| "outline" \| "success" \| "info" \| "warning" \| "destructive"` | `"outline"` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |

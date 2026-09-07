@@ -2,46 +2,38 @@ import {
   Plan,
   PlanAction,
   PlanContent,
-  PlanDescription,
   PlanHeader,
-  PlanTitle,
+  PlanItem,
+  PlanItemContent,
+  PlanItemDetailFile,
+  PlanItemTrigger,
   PlanTrigger,
 } from "@/registry/react/components/plan";
-import {
-  TaskItem,
-  TaskItemContent,
-  TaskItemDetailFile,
-  TaskItemTrigger,
-} from "@/registry/react/components/task";
 
 const Example = () => (
-  <Plan className="max-w-lg">
-    <PlanHeader>
-      <div className="min-w-0">
-        <PlanTitle>Add email validation</PlanTitle>
-        <PlanDescription>Update the helper and the form.</PlanDescription>
-      </div>
+  <Plan className="max-w-lg" completed={1} total={3}>
+    <PlanHeader title="Add email validation">
       <PlanAction>
         <PlanTrigger />
       </PlanAction>
     </PlanHeader>
     <PlanContent>
-      <TaskItem status="completed">
-        <TaskItemTrigger status="completed" title="Read current validator" />
-        <TaskItemContent>
-          <TaskItemDetailFile>src/utils/helpers.ts</TaskItemDetailFile>
-        </TaskItemContent>
-      </TaskItem>
-      <TaskItem status="in-progress">
-        <TaskItemTrigger status="in-progress" title="Patch isValidEmail" />
-        <TaskItemContent>
-          <TaskItemDetailFile>src/utils/helpers.ts</TaskItemDetailFile>
-          <TaskItemDetailFile>src/app.tsx</TaskItemDetailFile>
-        </TaskItemContent>
-      </TaskItem>
-      <TaskItem status="pending">
-        <TaskItemTrigger status="pending" title="Run unit tests" />
-      </TaskItem>
+      <PlanItem status="completed">
+        <PlanItemTrigger status="completed" title="Read current validator" />
+        <PlanItemContent>
+          <PlanItemDetailFile>src/utils/helpers.ts</PlanItemDetailFile>
+        </PlanItemContent>
+      </PlanItem>
+      <PlanItem status="in-progress">
+        <PlanItemTrigger status="in-progress" title="Patch isValidEmail" />
+        <PlanItemContent>
+          <PlanItemDetailFile>src/utils/helpers.ts</PlanItemDetailFile>
+          <PlanItemDetailFile>src/app.tsx</PlanItemDetailFile>
+        </PlanItemContent>
+      </PlanItem>
+      <PlanItem status="pending">
+        <PlanItemTrigger status="pending" title="Run unit tests" />
+      </PlanItem>
     </PlanContent>
   </Plan>
 );

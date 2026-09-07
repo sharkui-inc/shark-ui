@@ -54,8 +54,9 @@ export const ReasoningTrigger = (props: ReasoningTriggerProps) => {
   return (
     <CollapsibleTrigger
       className={cn(
-        "justify-start! flex w-fit max-w-full items-center gap-2 rounded-lg py-1 text-start text-muted-foreground text-sm",
+        "justify-start! flex min-h-9 w-fit max-w-full items-center gap-2 rounded-lg py-1 text-start text-muted-foreground text-sm",
         "hover:text-foreground",
+        "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
         className
       )}
       data-slot="reasoning-trigger"
@@ -63,11 +64,11 @@ export const ReasoningTrigger = (props: ReasoningTriggerProps) => {
     >
       {children ?? (
         <>
-          <BrainIcon aria-hidden="true" className="size-4 shrink-0" />
+          <BrainIcon aria-hidden="true" />
           <span className={cn("inline-block", isStreaming && "shimmer")}>
             {label}
           </span>
-          <CollapsibleIndicator />
+          <CollapsibleIndicator className="size-3.5" />
         </>
       )}
     </CollapsibleTrigger>

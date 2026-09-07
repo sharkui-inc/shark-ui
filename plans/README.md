@@ -86,6 +86,12 @@ This index was reconciled on 2026-08-31. It inventories every plan file; the his
 | 078 | Make the default Link Overlay demo a heading link on a Card | P2 | S | — | DONE |
 | 079 | Link Sidebar docs to the published blocks catalog | P2 | S | — | DONE |
 | 080 | Document Shark theme font variables | P3 | S | — | TODO |
+| 081 | Give CodeBlock one owned scrollport | P1 | M | — | TODO — source is uncommitted in operator worktree |
+| 082 | Make plain text a valid CodeBlock language | P1 | S | 081 | TODO — source is uncommitted in operator worktree |
+| 083 | Render Shiki dual-theme token typography faithfully | P1 | S | 082 | TODO — source is uncommitted in operator worktree |
+| 084 | Defer and share the Shiki highlighter | P1 | M | 082, 083 | TODO — source is uncommitted in operator worktree |
+| 085 | Lock CodeBlock behavior and installation docs | P1 | M | 081, 082, 083, 084 | TODO — source is uncommitted in operator worktree |
+| 086 | Publish the current CodeBlock registry artifact | P1 | S | 081–085 | BLOCKED — requires explicit `pnpm registry:build` authorization |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
@@ -109,6 +115,7 @@ Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJE
 - 072–075 are independent documentation fixes audited on 2026-09-01. Execute 072 first if the File Upload usage snippet will be copied by consumers. Plans 073 and 074 deliberately keep the duplicated anatomy corrections in separate files to avoid conflicts in two actively edited docs. Plan 075 is whitespace-only and can run at any time.
 - 076–078 are the Link Overlay parity batch (2026-09-01). They do not share files and may run in any order. 076 is docs-only (`asChild` vs source fork, plus `href` optional). 077 adds `test/link-overlay.test.tsx` and is authorized to run that focused test file only; execution also assigned JSDOM `document` on `globalThis` in `test/setup-dom.ts` so React DOM loads on Node 26. 078 rewrites `example-default.tsx` (keep Card, drop inert Buttons). Do not raise `button` in `LinkBox` and do not add Chakra’s text-selection caveat in this batch.
 - 079 and 080 are independent MDX plans audited on 2026-09-01. 079 may link only to `/blocks/sidebar`: raw Chart block files are not currently included in the public `BLOCKS` registry. 080 documents the existing `cssVars.theme` font contract and must not change the style manifest.
+- 081–086 are the CodeBlock/Shiki batch audited on 2026-09-07. 081 realizes the operator-approved owned-scrollport API and includes the maximum-height documentation. 082 and 083 establish its plain-text and dual-theme rendering contracts. 084 may proceed only after those contracts are stable. 085 characterizes the completed public behavior. 086 is last and needs the separately named `pnpm registry:build` authorization.
 
 ## Findings considered and rejected
 

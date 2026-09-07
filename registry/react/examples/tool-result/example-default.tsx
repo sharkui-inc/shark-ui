@@ -9,10 +9,12 @@ import {
 } from "@/registry/react/components/terminal";
 import {
   ToolResult,
+  ToolResultAction,
   ToolResultContent,
   ToolResultMeta,
   ToolResultName,
   type ToolResultStatus,
+  ToolResultStatus as ToolResultStatusIndicator,
   ToolResultTitle,
   ToolResultTrigger,
 } from "@/registry/react/components/tool-result";
@@ -74,6 +76,9 @@ const Example = () => {
           </ToolResultTitle>
           {isRunning ? null : <ToolResultMeta>2.9s</ToolResultMeta>}
           <ToolResultName>terminal.run</ToolResultName>
+          <ToolResultAction>
+            <ToolResultStatusIndicator />
+          </ToolResultAction>
         </ToolResultTrigger>
         <ToolResultContent>
           <Terminal output={LINES.slice(0, lineCount).join("\n")}>

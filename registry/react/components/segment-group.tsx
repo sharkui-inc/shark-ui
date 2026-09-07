@@ -7,6 +7,7 @@ import {
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+import { buttonControlVariants } from "@/registry/react/components/button";
 
 export const useSegmentGroup = useSegmentGroupContext;
 
@@ -92,6 +93,8 @@ export const SegmentGroupItem = (
     <ArkSegmentGroup.Item
       className={cn(
         "relative",
+        buttonControlVariants(),
+        "h-8 gap-2 px-[calc(--spacing(3)-1px)]",
         "cursor-pointer",
         "data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
         "rounded-[inherit] border border-transparent",

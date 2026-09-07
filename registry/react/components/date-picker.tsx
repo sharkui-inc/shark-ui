@@ -26,13 +26,16 @@ import {
 export const useDatePicker = useDatePickerContext;
 
 export const DatePicker = (props: React.ComponentProps<typeof Calendar>) => {
-  const { positioning = { placement: "top" }, ...rest } = props;
+  const { positioning, ...rest } = props;
 
   return (
     <Calendar
       data-slot="date-picker"
       inline={false}
-      positioning={positioning}
+      positioning={{
+        placement: "top",
+        ...positioning,
+      }}
       {...rest}
     />
   );
@@ -114,9 +117,6 @@ export const DatePickerTimer = (props: React.ComponentProps<typeof Input>) => {
 
   return (
     <InputGroup {...rest}>
-      <InputGroupAddon>
-        <ClockIcon />
-      </InputGroupAddon>
       <InputGroupInput
         className={cn(
           "[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none",
@@ -128,6 +128,9 @@ export const DatePickerTimer = (props: React.ComponentProps<typeof Input>) => {
         type="time"
         value={value}
       />
+      <InputGroupAddon>
+        <ClockIcon />
+      </InputGroupAddon>
     </InputGroup>
   );
 };

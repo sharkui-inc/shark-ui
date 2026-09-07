@@ -22,6 +22,7 @@ Use when writing or updating Shark components, registry examples, and docs previ
 - Decorative icons: default to `aria-hidden="true"` when the text label already conveys meaning.
 - Prefer `data-slot` selectors and `in-*` / `peer` patterns already used in registry components (e.g. dialog overlay peer pattern) over ad-hoc `group` when the component defines slots.
 - Cancel/dismiss actions in modal footers typically use `Button` `variant="ghost"`; reserve `variant="outline"` for triggers that open overlays, not for primary dismiss actions (see dialog/sheet examples).
+- **Floating list overlays** (Menu, ContextMenu, Select, Combobox, Autocomplete, ModelSelector, NavigationMenu, PromptInputActions, Command) use Menu variants as the contract: `menuListVariants` (`p-1`) for the gutter between the popover border and item highlights, `menuItemControlVariants` (`min-h-8`, `rounded-lg`) for row size and radius. Do not use `rounded-xl` on list rows. Put `p-0` on the shell when a `ScrollArea` wraps the list; do not use `p-1.5` or `p-2` on these contents. Selection rows compose `menuItemControlVariants` with `inputItemVariants` (typography only). Content popovers (HoverCard, DatePicker, ColorPicker, default Popover `--space`) are not list menus and keep their own padding.
 
 ## Global layout (when relevant)
 
@@ -68,6 +69,7 @@ import { cn } from "@/lib/utils"
 8. No redundant `dark:` palette pairs when semantic tokens cover it?
 9. `cn()` for conditional classes?
 10. No extra `z-index` on dialogs, sheets, menus, popovers, tooltips, etc.?
-11. Duplicated layout already provided by the primitive?
-12. Icon semantics and `aria-hidden` correct?
-13. `data-slot` / compound part structure preserved when extending styles?
+11. Floating list menus use Menu `menuListVariants` (`p-1`) and `menuItemControlVariants` (`min-h-8`, `rounded-lg`, not `rounded-xl` on rows)?
+12. Duplicated layout already provided by the primitive?
+13. Icon semantics and `aria-hidden` correct?
+14. `data-slot` / compound part structure preserved when extending styles?

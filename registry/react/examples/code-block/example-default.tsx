@@ -1,18 +1,22 @@
 import {
   CodeBlock,
+  CodeBlockActions,
   CodeBlockContent,
   CodeBlockCopy,
   CodeBlockHeader,
-  CodeBlockTitle,
 } from "@/registry/react/components/code-block";
+import { ScrollArea } from "@/registry/react/components/scroll-area";
 
-const Example = () => (
+const CodeBlockDemo = () => (
   <CodeBlock className="max-w-lg" code={CODE}>
-    <CodeBlockHeader>
-      <CodeBlockTitle>src/utils/helpers.ts</CodeBlockTitle>
-      <CodeBlockCopy />
+    <CodeBlockHeader title="src/utils/helpers.ts">
+      <CodeBlockActions>
+        <CodeBlockCopy />
+      </CodeBlockActions>
     </CodeBlockHeader>
-    <CodeBlockContent showLineNumbers>{CODE}</CodeBlockContent>
+    <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
+      <CodeBlockContent showLineNumbers />
+    </ScrollArea>
   </CodeBlock>
 );
 
@@ -20,4 +24,4 @@ const CODE = `export function isValidEmail(email: string) {
   return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
 }`;
 
-export default Example;
+export default CodeBlockDemo;

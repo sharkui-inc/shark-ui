@@ -4,6 +4,7 @@ import { Tabs as ArkTabs, useTabsContext } from "@ark-ui/react/tabs";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+import { buttonControlVariants } from "@/registry/react/components/button";
 
 export const useTabs = useTabsContext;
 
@@ -131,10 +132,9 @@ export const TabsTrigger = (
     <ArkTabs.Trigger
       className={cn(
         "relative",
-        "h-9 sm:h-8",
-        "flex shrink-0 grow items-center justify-center gap-1.5",
-        "px-[calc(--spacing(2.5)-1px)]",
-        "whitespace-nowrap font-medium text-sm",
+        buttonControlVariants(),
+        "h-8 gap-2 px-[calc(--spacing(3)-1px)]",
+        "flex shrink-0 grow",
         "in-data-[pill=true]/tabs-list:rounded-full rounded-lg border border-transparent",
         "cursor-pointer",
         "transition-[color,background-color,box-shadow]",

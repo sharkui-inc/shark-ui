@@ -33,7 +33,6 @@ export interface DemoMessageExtras {
   code?: DemoCode;
   diff?: { file: string; lines: DemoDiffLine[] };
   plan?: {
-    description: string;
     tasks: DemoPlanTask[];
     title: string;
   };
@@ -114,8 +113,6 @@ export const MESSAGE_EXTRAS: Record<string, DemoMessageExtras> = {
       title: "lib/pin-latest-turn.ts",
     },
     plan: {
-      description:
-        "Pin the viewport, cover the jump with a test, then document the composer.",
       tasks: [
         {
           file: "message-scroller.tsx",

@@ -6,13 +6,12 @@ import {
   BotIcon,
   CopyIcon,
   FileTextIcon,
-  ListTodoIcon,
   PaperclipIcon,
   SearchIcon,
   SquarePenIcon,
   ThumbsDownIcon,
   ThumbsUpIcon,
-  XIcon,
+  Trash2Icon,
 } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -104,9 +103,11 @@ import {
   Plan,
   PlanAction,
   PlanContent,
-  PlanDescription,
   PlanHeader,
-  PlanTitle,
+  PlanItem,
+  PlanItemContent,
+  PlanItemDetailFile,
+  PlanItemTrigger,
   PlanTrigger,
 } from "@/registry/react/components/plan";
 import {
@@ -124,12 +125,10 @@ import {
   QueueItemAction,
   QueueItemActions,
   QueueItemContent,
-  QueueItemIndicator,
   QueueList,
   QueueSection,
   QueueSectionContent,
-  QueueSectionLabel,
-  QueueSectionTrigger,
+  QueueSectionHeader,
 } from "@/registry/react/components/queue";
 import {
   Reasoning,
@@ -143,17 +142,20 @@ import {
   SourcesContent,
   SourcesTrigger,
 } from "@/registry/react/components/sources";
-import { SpeechInput } from "@/registry/react/components/speech-input";
+import {
+  SpeechInput,
+  SpeechInputAccept,
+  SpeechInputClose,
+  SpeechInputContent,
+  SpeechInputStop,
+  SpeechInputTimer,
+  SpeechInputTrigger,
+  SpeechInputWaveform,
+} from "@/registry/react/components/speech-input";
 import {
   Suggestion,
   Suggestions,
 } from "@/registry/react/components/suggestion";
-import {
-  TaskItem,
-  TaskItemContent,
-  TaskItemDetailFile,
-  TaskItemTrigger,
-} from "@/registry/react/components/task";
 import {
   Terminal,
   TerminalContent,
@@ -161,8 +163,10 @@ import {
 } from "@/registry/react/components/terminal";
 import {
   ToolResult,
+  ToolResultAction,
   ToolResultContent,
   ToolResultName,
+  ToolResultStatus,
   ToolResultTitle,
   ToolResultTrigger,
 } from "@/registry/react/components/tool-result";
@@ -278,6 +282,9 @@ const MessageExtras = ({ extras }: { extras: DemoMessageExtras }) => {
           <ToolResultTrigger>
             <ToolResultTitle>{extras.tool.name}</ToolResultTitle>
             <ToolResultName>{extras.tool.file}</ToolResultName>
+            <ToolResultAction>
+              <ToolResultStatus />
+            </ToolResultAction>
           </ToolResultTrigger>
           {extras.terminal ? (
             <ToolResultContent>
@@ -329,25 +336,21 @@ const MessageExtras = ({ extras }: { extras: DemoMessageExtras }) => {
       ) : null}
       {extras.plan ? (
         <Plan defaultOpen>
-          <PlanHeader>
-            <div className="min-w-0">
-              <PlanTitle>{extras.plan.title}</PlanTitle>
-              <PlanDescription>{extras.plan.description}</PlanDescription>
-            </div>
+          <PlanHeader title={extras.plan.title}>
             <PlanAction>
               <PlanTrigger />
             </PlanAction>
           </PlanHeader>
           <PlanContent>
             {extras.plan.tasks.map((task) => (
-              <TaskItem key={task.title} status={task.status}>
-                <TaskItemTrigger status={task.status} title={task.title} />
+              <PlanItem key={task.title} status={task.status}>
+                <PlanItemTrigger status={task.status} title={task.title} />
                 {task.file ? (
-                  <TaskItemContent>
-                    <TaskItemDetailFile>{task.file}</TaskItemDetailFile>
-                  </TaskItemContent>
+                  <PlanItemContent>
+                    <PlanItemDetailFile>{task.file}</PlanItemDetailFile>
+                  </PlanItemContent>
                 ) : null}
-              </TaskItem>
+              </PlanItem>
             ))}
           </PlanContent>
         </Plan>
@@ -584,23 +587,18 @@ const ChatSession = ({
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-3 px-4 pt-2 pb-4 sm:px-6">
         {hasMessages && queuedTurns.length > 0 ? (
           <Queue>
-            <QueueSection defaultOpen>
-              <QueueSectionTrigger>
-                <QueueSectionLabel
-                  count={queuedTurns.length}
-                  icon={<ListTodoIcon aria-hidden="true" className="size-4" />}
-                  label="Queued"
-                />
-              </QueueSectionTrigger>
+            <QueueSection>
+              <QueueSectionHeader
+                title={`${queuedTurns.length} Queued Messages`}
+              />
               <QueueSectionContent>
                 <QueueList>
                   {queuedTurns.map((turn) => (
                     <QueueItem key={turn.id}>
-                      <QueueItemIndicator />
                       <QueueItemContent>{turn.label}</QueueItemContent>
                       <QueueItemActions>
                         <QueueItemAction aria-label={`Remove ${turn.label}`}>
-                          <XIcon aria-hidden="true" />
+                          <Trash2Icon aria-hidden="true" />
                         </QueueItemAction>
                       </QueueItemActions>
                     </QueueItem>
@@ -663,7 +661,16 @@ const ChatSession = ({
                       </ModelSelectorList>
                     </ModelSelectorContent>
                   </ModelSelector>
-                  <SpeechInput />
+                  <SpeechInput>
+                    <SpeechInputTrigger />
+                    <SpeechInputContent>
+                      <SpeechInputWaveform />
+                      <SpeechInputTimer />
+                      <SpeechInputStop />
+                      <SpeechInputClose />
+                      <SpeechInputAccept />
+                    </SpeechInputContent>
+                  </SpeechInput>
                 </PromptInputTools>
                 <PromptInputSubmit disabled={!(canSendNext || isBusy)} />
               </PromptInputFooter>

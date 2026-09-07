@@ -41,10 +41,6 @@ const FocusTrapDemo = () => {
           </Button>
         </FieldGroup>
       </FocusTrap>
-      <p className="text-muted-foreground text-xs">
-        Activate the trap, then use Tab and Shift+Tab to move between its
-        controls.
-      </p>
     </div>
   );
 };

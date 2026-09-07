@@ -34,7 +34,16 @@ import {
   PromptInputTextarea,
   PromptInputTools,
 } from "@/registry/react/components/prompt-input";
-import { SpeechInput } from "@/registry/react/components/speech-input";
+import {
+  SpeechInput,
+  SpeechInputAccept,
+  SpeechInputClose,
+  SpeechInputContent,
+  SpeechInputStop,
+  SpeechInputTimer,
+  SpeechInputTrigger,
+  SpeechInputWaveform,
+} from "@/registry/react/components/speech-input";
 
 interface ModelOption {
   group: string;
@@ -172,7 +181,16 @@ export const ChatComposer = ({
                   <BrainIcon aria-hidden="true" />
                   Think
                 </PromptInputButton>
-                <SpeechInput onTranscriptionChange={handleTranscription} />
+                <SpeechInput onTranscriptionChange={handleTranscription}>
+                  <SpeechInputTrigger />
+                  <SpeechInputContent>
+                    <SpeechInputWaveform />
+                    <SpeechInputTimer />
+                    <SpeechInputStop />
+                    <SpeechInputClose />
+                    <SpeechInputAccept />
+                  </SpeechInputContent>
+                </SpeechInput>
               </PromptInputTools>
               <PromptInputSubmit />
             </PromptInputFooter>

@@ -1,6 +1,6 @@
 ---
 title: Terminal
-description: A shell output panel with basic ANSI color mapping.
+description: Display shell output with ANSI color support.
 ---
 
 <ComponentPreview componentName="terminal" />
@@ -84,6 +84,7 @@ npx shadcn@latest add @shark/terminal
 ```text
 Terminal
 ├── TerminalHeader
+│   ├── TerminalTitle
 │   └── TerminalAction
 └── TerminalContent
 ```
@@ -140,7 +141,18 @@ Root panel.
 
 ### TerminalHeader
 
-Header for the session label and actions.
+Header for the session label and actions. Pass `title` to render
+`TerminalTitle`. A string child is wrapped the same way.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### TerminalTitle
+
+Session label. Rendered automatically when `title` is set on `TerminalHeader`.
 
 | Prop | Type | Default |
 | --- | --- | --- |

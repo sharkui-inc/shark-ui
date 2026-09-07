@@ -1,6 +1,6 @@
 ---
 title: Speech Input
-description: A microphone control that captures voice with the Web Speech API.
+description: Capture speech and return the browser transcription.
 ---
 
 <ComponentPreview componentName="speech-input" />
@@ -44,19 +44,88 @@ npx shadcn@latest add @shark/speech-input
 
 ```text
 SpeechInput
+├── SpeechInputTrigger
+├── SpeechInputDeviceSelect
+└── SpeechInputContent
+    ├── SpeechInputWaveform
+    ├── SpeechInputTimer
+    ├── SpeechInputStop
+    ├── SpeechInputClose
+    └── SpeechInputAccept
 ```
 
 ## Usage
 
 ```tsx
-import { SpeechInput } from "@/components/ui/speech-input";
+import {
+  SpeechInput,
+  SpeechInputAccept,
+  SpeechInputClose,
+  SpeechInputContent,
+  SpeechInputDeviceSelect,
+  SpeechInputStop,
+  SpeechInputTimer,
+  SpeechInputTrigger,
+  SpeechInputWaveform,
+} from "@/components/ui/speech-input";
 ```
 
 ```tsx
-<SpeechInput onTranscriptionChange={(text) => append(text)} />
+<SpeechInput onTranscriptionChange={(text) => append(text)}>
+  <SpeechInputDeviceSelect />
+  <SpeechInputTrigger />
+  <SpeechInputContent>
+    <SpeechInputWaveform />
+    <SpeechInputTimer />
+    <SpeechInputStop />
+    <SpeechInputClose />
+    <SpeechInputAccept />
+  </SpeechInputContent>
+</SpeechInput>
 ```
 
-Uses the browser Web Speech API when available. The control is disabled with a tooltip when speech recognition is unsupported. Requires a secure context (HTTPS or localhost).
+The trigger requests microphone access, creates a local audio recording for the waveform and duration, and starts browser speech recognition when it exists. `SpeechInputStop` ends the capture for review, `SpeechInputAccept` returns the current text, and `SpeechInputClose` discards the recording. Audio stays in the browser unless an `onTranscribe` callback sends it to your application.
+
+`SpeechInputDeviceSelect` lists browser audio inputs. Choose a microphone before recording; device labels become available after the browser has granted microphone permission.
+
+Speech recognition requires HTTPS (or localhost), a microphone, `MediaRecorder`, `AudioContext`, and the browser Web Speech API. If a user starts recording and a required API is unavailable or microphone access is denied, `onError` receives the reason and the component announces it to assistive technologies.
+
+## Browser fallback
+
+Firefox supports microphone capture and `MediaRecorder`, but does not provide browser speech recognition. Keep the component provider-agnostic by passing `onTranscribe`: it receives the locally captured `Blob` only when browser recognition is unavailable and returns the resulting text.
+
+```tsx
+const transcribe = async ({ audio, lang }) => {
+  const formData = new FormData();
+  formData.append("audio", audio, "recording.webm");
+  formData.append("language", lang);
+
+  const response = await fetch("/api/transcribe", {
+    body: formData,
+    method: "POST",
+  });
+
+  if (!response.ok) {
+    throw new Error("Transcription failed.");
+  }
+
+  const { text } = await response.json();
+  return text;
+};
+
+<SpeechInput onTranscribe={transcribe}>
+  <SpeechInputTrigger />
+  <SpeechInputContent>
+    <SpeechInputWaveform />
+    <SpeechInputTimer />
+    <SpeechInputStop />
+    <SpeechInputClose />
+    <SpeechInputAccept />
+  </SpeechInputContent>
+</SpeechInput>;
+```
+
+Implement `/api/transcribe` with the speech-to-text service selected by your app. Keep credentials on the server; the component does not depend on, import, or expose any provider-specific client SDK.
 
 ## States
 
@@ -66,20 +135,76 @@ Use the `disabled` prop to prevent recording.
 
 <ComponentPreview componentName="speech-input" fileName="example-disabled" />
 
+### Recording and review
+
+While recording, the waveform and timer update and `SpeechInputStop` is available. After stopping, the component may briefly show the `"transcribing"` state while `onTranscribe` resolves. The waveform and duration then remain visible with `SpeechInputClose` and `SpeechInputAccept`. Accept is disabled until text is available.
+
+## Examples
+
+### Choose an audio input
+
+Use `SpeechInputDeviceSelect` before the trigger to let the user choose a microphone. The selected device is used when the next recording begins.
+
+<ComponentPreview componentName="speech-input" fileName="example-device-select" />
+
+### Portuguese transcription
+
+Pass a BCP 47 language tag through `lang` to configure browser recognition.
+
+<ComponentPreview componentName="speech-input" fileName="example-portuguese" />
+
+### Listen for recording changes
+
+Use `onListeningChange` to coordinate nearby UI with microphone capture.
+
+<ComponentPreview componentName="speech-input" fileName="example-listening-state" />
+
+### Custom controls
+
+Each action accepts the usual [Button](/docs/components/button) props and custom children.
+
+<ComponentPreview componentName="speech-input" fileName="example-custom-controls" />
+
 ## API Reference
 
 ### SpeechInput
 
-Microphone control built on [Button](/docs/components/button).
+Stateful root for microphone capture, waveform analysis, and browser transcription.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `lang` | `string` | `"en-US"` |
+| `disabled` | `boolean` | `false` |
 | `onTranscriptionChange` | `(text: string) => void` | `-` |
 | `onListeningChange` | `(listening: boolean) => void` | `-` |
-| `variant` | `"default" \| "outline" \| "secondary" \| "ghost" \| "link" \| "destructive"` | `"ghost"` |
-| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon-xs" \| "icon-sm" \| "icon-md" \| "icon-lg" \| "icon-xl"` | `"icon-sm"` |
+| `onError` | `(error: { reason: "unavailable" \| "permission" \| "audio-capture" \| "recognition"; message: string }) => void` | `-` |
+| `onTranscribe` | `(request: { audio: Blob; duration: number; lang: string }) => Promise<string>` | `-` |
 | `className` | `string` | `-` |
-| `asChild` | `boolean` | `false` |
 
+### SpeechInputTrigger
 
+Starts microphone capture. It is only rendered while the root is idle and becomes disabled for unavailable APIs, capture errors, and `disabled` roots.
+
+### SpeechInputContent
+
+Recording bar container. It is rendered while recording and while reviewing a stopped recording.
+
+### SpeechInputDeviceSelect
+
+Native microphone picker. It uses the default microphone until a device is selected, then passes its `deviceId` to `getUserMedia` for the next recording.
+
+### SpeechInputWaveform and SpeechInputTimer
+
+Render the live waveform and elapsed duration from the root capture state.
+
+### SpeechInputStop
+
+Ends capture and enters review mode.
+
+### SpeechInputClose
+
+Discards the active recording and any text without calling `onTranscriptionChange`.
+
+### SpeechInputAccept
+
+Calls `onTranscriptionChange` with the accumulated text and resets the root. It is disabled when no text is available.

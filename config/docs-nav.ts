@@ -16,7 +16,6 @@ export const DOCS_NEW_ITEMS = [
   "/docs/ai-elements/sources",
   "/docs/ai-elements/speech-input",
   "/docs/ai-elements/suggestion",
-  "/docs/ai-elements/task",
   "/docs/ai-elements/terminal",
   "/docs/ai-elements/tool-result",
   "/docs/components/data-table",

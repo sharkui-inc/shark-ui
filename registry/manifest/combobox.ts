@@ -10,6 +10,7 @@ const manifest: RegistryItemType = {
     absoluteUrl("/r/button.json"),
     absoluteUrl("/r/input.json"),
     absoluteUrl("/r/input-group.json"),
+    absoluteUrl("/r/menu.json"),
   ],
   type: "registry:ui",
 };

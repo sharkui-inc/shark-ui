@@ -8,12 +8,6 @@ import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 type DiffLineType = "add" | "context" | "delete";
 
-const DIFF_MARKERS: Record<DiffLineType, string> = {
-  add: "+",
-  context: "",
-  delete: "-",
-};
-
 function getDiffLineAriaLabel(
   lineType: DiffLineType,
   line: number | null | undefined
@@ -40,12 +34,9 @@ export const Diff = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "w-full min-w-0",
+        "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground",
         "flex flex-col",
-        "bg-card",
-        "font-mono text-card-foreground",
-        "rounded-xl border",
-        "overflow-hidden",
+        "[--code-surface-header-height:--spacing(9)] [--code-surface-inline-padding:--spacing(3)]",
         className
       )}
       data-slot="diff"
@@ -54,37 +45,63 @@ export const Diff = (props: React.ComponentProps<typeof ark.div>) => {
   );
 };
 
-export const DiffHeader = (props: React.ComponentProps<typeof ark.div>) => {
+interface DiffHeaderProps extends React.ComponentProps<typeof ark.div> {
+  /**
+   * The file path shown in the header.
+   */
+  title?: string;
+}
+
+export const DiffFile = (props: React.ComponentProps<typeof ark.span>) => {
   const { className, ...rest } = props;
 
   return (
-    <ark.div
+    <ark.span
       className={cn(
-        "w-full min-w-0",
-        "flex items-center gap-2",
-        "px-4 py-2.5",
-        "text-xs",
-        "border-b",
-        "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+        "min-w-0 flex-1 truncate text-muted-foreground text-sm",
         className
       )}
-      data-slot="diff-header"
+      data-slot="diff-file"
       {...rest}
     />
   );
 };
 
-export const DiffFile = (props: React.ComponentProps<typeof ark.span>) => {
-  const { className, children, ...rest } = props;
+export const DiffHeader = (props: DiffHeaderProps) => {
+  const { title, className, children, ...rest } = props;
 
   return (
-    <ark.span
-      className={cn("inline-flex min-w-0 items-center gap-2", className)}
-      data-slot="diff-file"
+    <ark.div
+      className={cn(
+        "flex min-h-(--code-surface-header-height) min-w-0 items-center gap-2 px-(--code-surface-inline-padding) py-1",
+        "border-b",
+        "text-muted-foreground text-sm",
+        "[&>svg]:order-first [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
+        "[&>svg:not([class*='size-'])]:size-3.5",
+        className
+      )}
+      data-slot="diff-header"
       {...rest}
     >
-      <span className="min-w-0 truncate text-foreground">{children}</span>
-    </ark.span>
+      {!!title && <DiffFile>{title}</DiffFile>}
+      {!title && typeof children === "string" ? (
+        <DiffFile>{children}</DiffFile>
+      ) : (
+        children
+      )}
+    </ark.div>
+  );
+};
+
+export const DiffAction = (props: React.ComponentProps<typeof ark.div>) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn("ms-auto flex shrink-0 items-center gap-1", className)}
+      data-slot="diff-action"
+      {...rest}
+    />
   );
 };
 
@@ -108,7 +125,7 @@ export const DiffStats = (props: DiffStatsProps) => {
       className={cn(
         "inline-flex shrink-0 items-center gap-2",
         "ms-auto",
-        "text-xs leading-none",
+        "text-sm tabular-nums",
         className
       )}
       data-slot="diff-stats"
@@ -136,14 +153,16 @@ export const DiffContent = (props: React.ComponentProps<typeof ark.div>) => {
       {...rest}
     >
       <ScrollArea className="min-h-0 w-full flex-1">
-        <div className="w-max min-w-full text-xs leading-5">{children}</div>
+        <div className="w-max min-w-full py-3 font-mono text-sm leading-6">
+          {children}
+        </div>
       </ScrollArea>
     </ark.div>
   );
 };
 
 const diffLineVariants = tv({
-  base: ["min-h-5 w-full min-w-max", "flex items-stretch"],
+  base: ["min-h-6 w-full min-w-max", "flex items-stretch"],
   defaultVariants: {
     type: "context",
   },
@@ -160,10 +179,9 @@ const diffLineVariants = tv({
 const diffGutterVariants = tv({
   base: [
     "sticky left-0 z-1",
-    "flex shrink-0 items-center",
+    "flex w-11 shrink-0 items-center",
     "bg-card",
     "before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:content-['']",
-    "after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:w-px after:bg-border after:content-['']",
   ],
   defaultVariants: {
     type: "context",
@@ -209,9 +227,8 @@ export const DiffLine = (props: DiffLineProps) => {
       <span className={diffGutterVariants({ type: lineType })}>
         <span
           className={cn(
-            "w-8",
-            "shrink-0",
-            "select-none text-center text-muted-foreground text-xs",
+            "w-full pe-3",
+            "select-none text-end text-muted-foreground tabular-nums",
             lineType === "add" && "text-success-foreground",
             lineType === "delete" && "text-destructive-foreground"
           )}
@@ -219,24 +236,11 @@ export const DiffLine = (props: DiffLineProps) => {
         >
           {line ?? ""}
         </span>
-        <span
-          aria-hidden="true"
-          className={cn(
-            "w-4.5",
-            "shrink-0",
-            "select-none text-center text-muted-foreground text-xs",
-            lineType === "add" && "text-success-foreground",
-            lineType === "delete" && "text-destructive-foreground"
-          )}
-          data-slot="diff-line-sign"
-        >
-          {DIFF_MARKERS[lineType]}
-        </span>
       </span>
       <code
         className={cn(
-          "ps-2 pe-3",
-          "whitespace-pre text-muted-foreground",
+          "ps-(--code-surface-inline-padding) pe-(--code-surface-inline-padding)",
+          "whitespace-pre text-muted-foreground leading-6",
           (lineType === "add" || lineType === "delete") && "text-foreground"
         )}
         data-slot="diff-line-code"

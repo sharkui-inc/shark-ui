@@ -8,8 +8,10 @@ import {
 } from "@/registry/react/components/diff";
 import {
   ToolResult,
+  ToolResultAction,
   ToolResultContent,
   ToolResultName,
+  ToolResultStatus,
   ToolResultTitle,
   ToolResultTrigger,
 } from "@/registry/react/components/tool-result";
@@ -19,6 +21,9 @@ const Example = () => (
     <ToolResultTrigger>
       <ToolResultTitle>Apply patch</ToolResultTitle>
       <ToolResultName>Write</ToolResultName>
+      <ToolResultAction>
+        <ToolResultStatus />
+      </ToolResultAction>
     </ToolResultTrigger>
     <ToolResultContent>
       <Diff>

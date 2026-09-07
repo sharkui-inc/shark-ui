@@ -108,7 +108,7 @@ function ChartPieInteractive() {
           <SelectContent className="rounded-xl">
             {monthCollection.items.map((item) => (
               <SelectItem
-                className="rounded-lg [&_span]:flex"
+                className="[&_span]:flex"
                 item={item}
                 key={item.value}
               >

@@ -95,7 +95,7 @@ export const ToastItem = (props: ToastItemProps) => {
         "px-3.5 py-3",
         "flex items-start justify-between gap-1.5",
         "bg-popover",
-        "select-none text-card-foreground text-sm",
+        "text-card-foreground text-sm",
         "rounded-lg border shadow-lg/5",
         "scale-(--scale) opacity-(--opacity)",
         "transition-all duration-250 will-change-[translate,opacity,scale]",

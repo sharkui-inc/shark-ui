@@ -79,24 +79,50 @@ const TerminalFollow = () => {
   return null;
 };
 
-export const TerminalHeader = (props: React.ComponentProps<typeof ark.div>) => {
+interface TerminalHeaderProps extends React.ComponentProps<typeof ark.div> {
+  /**
+   * The title of the terminal session.
+   */
+  title?: string;
+}
+
+export const TerminalTitle = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
 
   return (
     <ark.div
       className={cn(
-        "min-w-0",
-        "flex items-center gap-2",
-        "px-4 py-2.5",
-        "bg-muted/48",
-        "font-mono text-muted-foreground text-xs",
+        "min-w-0 flex-1 truncate text-muted-foreground text-sm",
+        className
+      )}
+      data-slot="terminal-title"
+      {...rest}
+    />
+  );
+};
+
+export const TerminalHeader = (props: TerminalHeaderProps) => {
+  const { title, className, children, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn(
+        "flex min-h-9 min-w-0 items-center gap-2 px-3 py-1",
         "border-b",
+        "text-muted-foreground text-sm",
         "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
         className
       )}
       data-slot="terminal-header"
       {...rest}
-    />
+    >
+      {!!title && <TerminalTitle>{title}</TerminalTitle>}
+      {!title && typeof children === "string" ? (
+        <TerminalTitle>{children}</TerminalTitle>
+      ) : (
+        children
+      )}
+    </ark.div>
   );
 };
 

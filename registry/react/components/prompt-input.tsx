@@ -4,7 +4,7 @@ import { ark } from "@ark-ui/react/factory";
 import { createContext } from "@ark-ui/react/utils";
 import { ArrowUpIcon, SquareIcon } from "lucide-react";
 import type React from "react";
-import { useLayoutEffect, useState } from "react";
+import { Children, isValidElement, useLayoutEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   InputGroup,
@@ -12,6 +12,10 @@ import {
   InputGroupButton,
   InputGroupTextarea,
 } from "@/registry/react/components/input-group";
+import {
+  menuItemControlVariants,
+  menuListVariants,
+} from "@/registry/react/components/menu";
 import {
   Popover,
   PopoverClose,
@@ -47,21 +51,44 @@ interface PromptInputProps
   status?: PromptInputStatus;
 }
 
+export const PromptInputBottom = (
+  props: React.ComponentProps<typeof ark.div>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn("flex w-full items-center gap-2", "px-6 py-2", className)}
+      data-slot="prompt-input-bottom"
+      {...rest}
+    />
+  );
+};
+
 export const PromptInput = (props: PromptInputProps) => {
   const {
-    className,
-    children,
-    onStop,
-    onSubmit,
     status = "ready",
+    onStop,
+    className,
+    onSubmit,
+    children,
     ...rest
   } = props;
+
   const [hasText, setHasText] = useState(false);
+  const promptInputChildren = Children.toArray(children);
+
+  const bottomChildren = promptInputChildren.filter(
+    (child) => isValidElement(child) && child.type === PromptInputBottom
+  );
+  const inputGroupChildren = promptInputChildren.filter(
+    (child) => !(isValidElement(child) && child.type === PromptInputBottom)
+  );
 
   return (
     <PromptInputProvider value={{ hasText, onStop, setHasText, status }}>
       <ark.form
-        className={cn("w-full", className)}
+        className={cn("flex w-full flex-col", className)}
         data-slot="prompt-input"
         data-status={status}
         onSubmit={(event) => {
@@ -80,8 +107,9 @@ export const PromptInput = (props: PromptInputProps) => {
         {...rest}
       >
         <InputGroup className="h-auto flex-col items-stretch rounded-2xl focus-within:border-input focus-within:ring-0">
-          {children}
+          {inputGroupChildren}
         </InputGroup>
+        {bottomChildren}
       </ark.form>
     </PromptInputProvider>
   );
@@ -110,7 +138,7 @@ export const PromptInputFooter = (
   return (
     <InputGroupAddon
       align="block-end"
-      className={cn("min-h-8 justify-between gap-1 px-2 pb-2", className)}
+      className={cn("min-h-8 justify-between gap-0.5 pb-2", className)}
       data-slot="prompt-input-footer"
       {...rest}
     />
@@ -144,7 +172,7 @@ export const PromptInputTextarea = (
 
   return (
     <InputGroupTextarea
-      className={cn("min-h-12 px-3 pt-2 pb-1 leading-6", className)}
+      className={cn("min-h-12 pt-2 pb-1 leading-6", className)}
       data-slot="prompt-input-textarea"
       defaultValue={defaultValue}
       onChange={(event) => {
@@ -220,7 +248,7 @@ export const PromptInputActionsContent = (
 
   return (
     <PopoverContent
-      className={cn("w-56 gap-0 p-1.5", className)}
+      className={cn("w-56 gap-0", menuListVariants(), className)}
       data-slot="prompt-input-actions-content"
       {...rest}
     >
@@ -244,12 +272,15 @@ export const PromptInputAction = (props: PromptInputActionProps) => {
     type = "button",
     ...rest
   } = props;
+  const hasDescription = description !== undefined && description !== null;
 
   return (
     <PopoverClose asChild>
       <ark.button
         className={cn(
-          "flex w-full items-start gap-2.5 rounded-lg px-2.5 py-2 text-left",
+          menuItemControlVariants(),
+          hasDescription ? "items-start" : "items-center",
+          "text-left",
           "outline-none transition-colors",
           "hover:bg-muted focus-visible:bg-muted",
           "disabled:pointer-events-none disabled:opacity-50",
@@ -260,13 +291,18 @@ export const PromptInputAction = (props: PromptInputActionProps) => {
         {...rest}
       >
         {icon ? (
-          <span className="mt-0.5 grid size-5 shrink-0 place-items-center text-muted-foreground [&_svg:not([class*='size-'])]:size-4">
+          <span
+            className={cn(
+              hasDescription && "mt-0.5",
+              "grid size-5 shrink-0 place-items-center text-muted-foreground [&_svg:not([class*='size-'])]:size-4"
+            )}
+          >
             {icon}
           </span>
         ) : null}
         <span className="min-w-0">
           <span className="block text-foreground text-sm">{children}</span>
-          {description ? (
+          {hasDescription ? (
             <span className="mt-0.5 block text-muted-foreground text-xs leading-4">
               {description}
             </span>

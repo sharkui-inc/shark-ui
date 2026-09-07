@@ -4,12 +4,18 @@ import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Spinner } from "@/registry/react/components/spinner";
 
-export const buttonVariants = tv({
+export const buttonControlVariants = tv({
   base: [
     "relative",
     "inline-flex shrink-0 items-center justify-center gap-2",
-    "whitespace-nowrap font-medium text-sm",
-    "rounded-lg bg-clip-padding",
+    "touch-manipulation select-none whitespace-nowrap font-medium text-sm",
+  ],
+});
+
+export const buttonVariants = tv({
+  base: [
+    buttonControlVariants(),
+    "bg-clip-padding",
     "transition-all",
     "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/32",
     "disabled:pointer-events-none disabled:opacity-64",
@@ -31,6 +37,7 @@ export const buttonVariants = tv({
       true: "active:not-aria-[haspopup]:scale-[0.98]",
     },
     pill: {
+      false: "rounded-lg",
       true: ["rounded-full!", "px-[calc(var(--btn-px)+(--spacing(1.5)))]"],
     },
     size: {
@@ -56,7 +63,6 @@ export const buttonVariants = tv({
         "gap-1.5",
         "[--btn-px:calc(--spacing(2.5)-1px)]",
         "px-(--btn-px)",
-        "text-[0.8rem]",
         "rounded-[min(var(--radius-md),12px)]",
         "in-data-[slot=button-group]:rounded-lg",
         "[&_svg:not([class*='size-'])]:size-3.5",

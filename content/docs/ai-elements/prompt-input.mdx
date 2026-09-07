@@ -1,6 +1,6 @@
 ---
 title: Prompt Input
-description: A chat composer with a textarea, tool slots, attachments, and send or stop.
+description: Compose and send chat prompts with attachments and tools.
 ---
 
 <ComponentPreview componentName="prompt-input" />
@@ -46,14 +46,15 @@ npx shadcn@latest add @shark/prompt-input
 PromptInput
 ├── PromptInputHeader
 ├── PromptInputTextarea
-└── PromptInputFooter
-    ├── PromptInputTools
-    │   ├── PromptInputActions
-    │   │   ├── PopoverTrigger
-    │   │   └── PromptInputActionsContent
-    │   │       └── PromptInputAction
-    │   └── PromptInputButton
-    └── PromptInputSubmit
+├── PromptInputFooter
+│   ├── PromptInputTools
+│   │   ├── PromptInputActions
+│   │   │   ├── PopoverTrigger
+│   │   │   └── PromptInputActionsContent
+│   │   │       └── PromptInputAction
+│   │   └── PromptInputButton
+│   └── PromptInputSubmit
+└── PromptInputBottom
 ```
 
 ## Usage
@@ -61,6 +62,7 @@ PromptInput
 ```tsx
 import {
   PromptInput,
+  PromptInputBottom,
   PromptInputFooter,
   PromptInputSubmit,
   PromptInputTextarea,
@@ -75,10 +77,9 @@ import {
     <PromptInputTools />
     <PromptInputSubmit />
   </PromptInputFooter>
+  <PromptInputBottom>Project context</PromptInputBottom>
 </PromptInput>
 ```
-
-`PromptInput` is a form around [Input Group](/docs/components/input-group). Compose actions with `PromptInputActions` and a [Model Selector](/docs/ai-elements/model-selector) in the footer. Enter submits, Shift+Enter inserts a new line.
 
 ## Controlled
 
@@ -144,6 +145,14 @@ Message field. Submits on Enter unless `status` is `"submitted"` or `"streaming"
 ### PromptInputFooter
 
 Addon below the textarea for tools and submit.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### PromptInputBottom
+
+Optional content area below the composer border. Use it for project or environment context.
 
 | Prop | Type | Default |
 | --- | --- | --- |

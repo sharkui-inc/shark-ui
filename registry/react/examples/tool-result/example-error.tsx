@@ -4,8 +4,10 @@ import {
 } from "@/registry/react/components/terminal";
 import {
   ToolResult,
+  ToolResultAction,
   ToolResultContent,
   ToolResultName,
+  ToolResultStatus,
   ToolResultTitle,
   ToolResultTrigger,
 } from "@/registry/react/components/tool-result";
@@ -15,6 +17,9 @@ const Example = () => (
     <ToolResultTrigger>
       <ToolResultTitle>Fetch session</ToolResultTitle>
       <ToolResultName>api.getSession</ToolResultName>
+      <ToolResultAction>
+        <ToolResultStatus />
+      </ToolResultAction>
     </ToolResultTrigger>
     <ToolResultContent>
       <Terminal output={output}>

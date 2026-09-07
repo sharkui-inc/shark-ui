@@ -2,6 +2,7 @@ import { CodeXmlIcon } from "lucide-react";
 import { Badge } from "@/registry/react/components/badge";
 import {
   Diff,
+  DiffAction,
   DiffContent,
   DiffFile,
   DiffHeader,
@@ -13,9 +14,11 @@ const Example = () => (
     <DiffHeader>
       <CodeXmlIcon />
       <DiffFile>src/lib/auth.ts</DiffFile>
-      <Badge className="ms-auto" size="sm" variant="outline">
-        modified
-      </Badge>
+      <DiffAction>
+        <Badge size="sm" variant="outline">
+          modified
+        </Badge>
+      </DiffAction>
     </DiffHeader>
     <DiffContent>
       <DiffLine line={11} type="context">

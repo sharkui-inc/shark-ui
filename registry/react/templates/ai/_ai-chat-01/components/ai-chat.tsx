@@ -1,6 +1,6 @@
 "use client";
 
-import { EllipsisIcon, ListTodoIcon, XIcon } from "lucide-react";
+import { EllipsisIcon, Trash2Icon } from "lucide-react";
 import type React from "react";
 import { useCallback, useRef, useState } from "react";
 import {
@@ -27,12 +27,10 @@ import {
   QueueItemAction,
   QueueItemActions,
   QueueItemContent,
-  QueueItemIndicator,
   QueueList,
   QueueSection,
   QueueSectionContent,
-  QueueSectionLabel,
-  QueueSectionTrigger,
+  QueueSectionHeader,
 } from "@/registry/react/components/queue";
 import {
   SidebarInset,
@@ -100,7 +98,6 @@ const conversations: readonly Conversation[] = [
           "Start with three decisions: confirm the audience, lock the release boundary, and assign one owner to each launch risk. Then turn the brief into milestones that can be reviewed weekly.",
         id: "launch-assistant",
         plan: {
-          description: "Audience, risks, then weekly milestones.",
           tasks: [
             {
               file: "launch-brief.pdf",
@@ -371,21 +368,14 @@ export const AIChat = () => {
             {showQueue ? (
               <div className="shrink-0 px-3 py-2 sm:px-4">
                 <Queue className="mx-auto w-full max-w-3xl">
-                  <QueueSection defaultOpen>
-                    <QueueSectionTrigger>
-                      <QueueSectionLabel
-                        count={queueItems.length}
-                        icon={
-                          <ListTodoIcon aria-hidden="true" className="size-4" />
-                        }
-                        label="Queued"
-                      />
-                    </QueueSectionTrigger>
+                  <QueueSection>
+                    <QueueSectionHeader
+                      title={`${queueItems.length} Queued Messages`}
+                    />
                     <QueueSectionContent>
                       <QueueList>
                         {queueItems.map((item) => (
                           <QueueItem key={item.id}>
-                            <QueueItemIndicator />
                             <QueueItemContent>{item.title}</QueueItemContent>
                             <QueueItemActions>
                               <QueueItemAction
@@ -393,7 +383,7 @@ export const AIChat = () => {
                                 data-queue-item-id={item.id}
                                 onClick={handleRemoveQueueItemClick}
                               >
-                                <XIcon aria-hidden="true" />
+                                <Trash2Icon aria-hidden="true" />
                               </QueueItemAction>
                             </QueueItemActions>
                           </QueueItem>

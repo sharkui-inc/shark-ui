@@ -1,6 +1,6 @@
 ---
 title: Queue
-description: A collapsible list of pending and completed prompts.
+description: Show queued and completed prompts.
 ---
 
 <ComponentPreview componentName="queue" />
@@ -26,7 +26,7 @@ npx shadcn@latest add @shark/queue
 
 <Steps>
 
-<Step>This component depends on [Collapsible](/docs/components/collapsible). Install required dependencies first if you haven&apos;t already.</Step>
+<Step>This component depends on [Button](/docs/components/button). Install required dependencies first if you haven&apos;t already.</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -45,12 +45,12 @@ npx shadcn@latest add @shark/queue
 ```text
 Queue
 └── QueueSection
-    ├── QueueSectionTrigger
-    │   └── QueueSectionLabel
+    ├── QueueSectionHeader
+    │   ├── QueueTitle
+    │   └── QueueSectionAction
     └── QueueSectionContent
         └── QueueList
             └── QueueItem
-                ├── QueueItemIndicator
                 ├── QueueItemContent
                 └── QueueItemActions
                     └── QueueItemAction
@@ -62,35 +62,37 @@ Queue
 import {
   Queue,
   QueueItem,
+  QueueItemAction,
+  QueueItemActions,
   QueueItemContent,
-  QueueItemIndicator,
   QueueList,
   QueueSection,
+  QueueSectionAction,
   QueueSectionContent,
-  QueueSectionLabel,
-  QueueSectionTrigger,
+  QueueSectionHeader,
+  QueueTitle,
 } from "@/components/ui/queue";
 ```
-
-## Controlled
-
-Control section expand state with `open` and `onOpenChange` on `QueueSection`.
-
-<ComponentPreview componentName="queue" fileName="example-controlled" />
 
 ## States
 
 ### Completed
 
-Mark finished prompts with `completed` on `QueueItemIndicator` and `QueueItemContent`.
+Mark finished prompts with `completed` on `QueueItemContent`.
 
 <ComponentPreview componentName="queue" fileName="example-completed" />
+
+### Paused
+
+Use `QueueSectionAction` for a header action such as Resume. Pass an icon as a child of `QueueSectionHeader`.
+
+<ComponentPreview componentName="queue" fileName="example-paused" />
 
 ## API Reference
 
 ### Queue
 
-Root container for collapsible prompt sections.
+Root container for prompt sections.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -98,41 +100,44 @@ Root container for collapsible prompt sections.
 
 ### QueueSection
 
-Collapsible section. Forwards [Collapsible](/docs/components/collapsible) props.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `defaultOpen` | `boolean` | `true` |
-| `className` | `string` | `-` |
-
-### QueueSectionTrigger
-
-Toggles the section. Forwards [CollapsibleTrigger](/docs/components/collapsible) props.
+Bounded panel for one queue group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
-| `asChild` | `boolean` | `false` |
 
-### QueueSectionLabel
+### QueueSectionHeader
 
-Label, optional count, and optional icon for the section trigger.
+Toolbar row for the section title and actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `label` | `string` | **required** |
-| `count` | `number` | `-` |
-| `icon` | `React.ReactNode` | `-` |
+| `title` | `string` | `-` |
+| `className` | `string` | `-` |
+
+### QueueTitle
+
+Section title. Rendered automatically when `title` is set on `QueueSectionHeader`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### QueueSectionAction
+
+Trailing header actions.
+
+| Prop | Type | Default |
+| --- | --- | --- |
 | `className` | `string` | `-` |
 
 ### QueueSectionContent
 
-Holds the list that expands and collapses.
+Holds the list of queued items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
-| `asChild` | `boolean` | `false` |
 
 ### QueueList
 
@@ -148,15 +153,6 @@ A single queued prompt row.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | `-` |
-
-### QueueItemIndicator
-
-Status dot for the row.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `completed` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
 ### QueueItemContent
@@ -178,7 +174,7 @@ Container for row actions.
 
 ### QueueItemAction
 
-Icon button for a row action.
+Ghost button for a row or header action. Row actions fade in on hover.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -186,5 +182,3 @@ Icon button for a row action.
 | `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon-xs" \| "icon-sm" \| "icon-md" \| "icon-lg" \| "icon-xl"` | `"icon-xs"` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
-
-

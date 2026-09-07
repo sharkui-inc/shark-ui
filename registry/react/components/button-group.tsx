@@ -20,15 +20,22 @@ const buttonGroupVariants = tv({
   variants: {
     orientation: {
       horizontal: [
-        "[&>*:not(:first-child)]:rounded-l-none",
+        "[&>*:not(:first-child)]:rounded-s-none",
         "[&>*:not(:first-child)]:border-s-0",
         "[&>*:not(:last-child)]:rounded-e-none",
+        "[&>:not(:first-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:rounded-s-none",
+        "[&>:not(:first-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:border-s-0",
+        "[&>:not(:last-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:rounded-e-none",
       ],
       vertical: [
         "flex-col",
         "[&>*:not(:first-child)]:rounded-t-none",
         "[&>*:not(:first-child)]:border-t-0",
         "[&>*:not(:last-child)]:rounded-b-none [&>*:not(:last-child)]:shadow-none",
+        "[&>:not(:first-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:rounded-t-none",
+        "[&>:not(:first-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:border-t-0",
+        "[&>:not(:last-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:rounded-b-none",
+        "[&>:not(:last-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:shadow-none",
       ],
     },
   },

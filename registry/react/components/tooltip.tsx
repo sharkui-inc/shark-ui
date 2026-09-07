@@ -14,9 +14,7 @@ export const Tooltip = (
   props: React.ComponentProps<typeof ArkTooltip.Root>
 ) => {
   const {
-    positioning = {
-      placement: "top",
-    },
+    positioning,
     lazyMount = true,
     unmountOnExit = true,
     closeDelay = 100,
@@ -30,7 +28,10 @@ export const Tooltip = (
       data-slot="tooltip"
       lazyMount={lazyMount}
       openDelay={openDelay}
-      positioning={positioning}
+      positioning={{
+        placement: "top",
+        ...positioning,
+      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     />

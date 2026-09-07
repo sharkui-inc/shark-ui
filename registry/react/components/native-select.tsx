@@ -12,7 +12,8 @@ export const nativeSelectVariants = tv({
     "appearance-none",
     "w-full min-w-0",
     "ps-2.5 pe-8",
-    "select-none text-sm",
+    "touch-manipulation select-none",
+    "font-normal text-base md:text-sm",
     "bg-transparent dark:bg-input/30",
     "rounded-lg border border-input shadow-xs/5",
     "transition-colors",
@@ -29,9 +30,9 @@ export const nativeSelectVariants = tv({
   },
   variants: {
     size: {
-      lg: ["h-9"],
-      md: ["h-8"],
-      sm: ["h-7"],
+      lg: ["h-9", "px-[calc(--spacing(3.5)-1px)]"],
+      md: ["h-8", "px-[calc(--spacing(3)-1px)]"],
+      sm: ["h-7", "px-[calc(--spacing(2.5)-1px)]"],
     },
   },
 });

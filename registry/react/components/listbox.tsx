@@ -9,7 +9,11 @@ import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { FieldLabel } from "@/registry/react/components/field";
-import { MenuShortcut } from "@/registry/react/components/menu";
+import { inputItemVariants } from "@/registry/react/components/input";
+import {
+  menuItemControlVariants,
+  MenuShortcut,
+} from "@/registry/react/components/menu";
 
 export const useListbox = useListboxContext;
 
@@ -71,11 +75,8 @@ export const ListboxContent = (
 const listboxItemVariants = tv({
   base: [
     "group/listbox-item",
-    "relative",
-    "flex items-center gap-2",
-    "px-2.5 py-2",
-    "rounded-lg",
-    "select-none text-sm",
+    menuItemControlVariants(),
+    inputItemVariants(),
     "cursor-pointer",
     "outline-hidden",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
@@ -170,9 +171,7 @@ export const ListboxItemGroupLabel = (
   return (
     <ArkListbox.ItemGroupLabel
       className={cn(
-        "px-2.5 py-2",
-        "font-medium text-muted-foreground",
-        "pointer-events-none",
+        "pointer-events-none px-[calc(--spacing(3)-1px)] py-1.5 font-medium text-muted-foreground text-xs",
         className
       )}
       data-slot="listbox-item-group-label"

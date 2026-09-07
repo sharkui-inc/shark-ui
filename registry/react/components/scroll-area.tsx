@@ -53,6 +53,7 @@ export const ScrollArea = (props: ScrollAreaProps) => {
     orientation = "both",
     className,
     children,
+    tabIndex,
     ...rest
   } = props;
 
@@ -76,6 +77,7 @@ export const ScrollArea = (props: ScrollAreaProps) => {
           orientation === "vertical" && "overflow-x-hidden!"
         )}
         data-slot="scroll-area-viewport"
+        tabIndex={tabIndex}
       >
         <ArkScrollArea.Content data-slot="scroll-area-content">
           {children}
@@ -111,8 +113,8 @@ export const ScrollAreaScrollbar = (
         "data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:flex-col",
         "data-hover:opacity-100 data-hover:delay-0 data-hover:duration-100",
         "data-scrolling:opacity-100 data-scrolling:delay-0 data-scrolling:duration-100",
-        "data-[orientation=vertical]:in-[[data-slot=scroll-area]:not([data-overflow-y])]:hidden",
-        "data-[orientation=horizontal]:in-[[data-slot=scroll-area]:not([data-overflow-x])]:hidden",
+        "data-[orientation=vertical]:[&:not([data-overflow-y])]:hidden",
+        "data-[orientation=horizontal]:[&:not([data-overflow-x])]:hidden",
         "motion-reduce:transition-none!",
         className
       )}

@@ -183,7 +183,7 @@ function ChartAreaInteractive() {
           </SelectTrigger>
           <SelectContent className="rounded-xl">
             {timeRangeCollection.items.map((item) => (
-              <SelectItem className="rounded-lg" item={item} key={item.value}>
+              <SelectItem item={item} key={item.value}>
                 {item.label}
               </SelectItem>
             ))}

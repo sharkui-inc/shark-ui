@@ -19,7 +19,7 @@ export const Menu = (props: React.ComponentProps<typeof ArkMenu.Root>) => {
   const {
     lazyMount = true,
     onHighlightChange,
-    positioning = { placement: "bottom-end" },
+    positioning,
     unmountOnExit = true,
     ...rest
   } = props;
@@ -38,7 +38,10 @@ export const Menu = (props: React.ComponentProps<typeof ArkMenu.Root>) => {
           }
         });
       }}
-      positioning={positioning}
+      positioning={{
+        placement: "bottom-end",
+        ...positioning,
+      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     />
@@ -62,6 +65,18 @@ export const MenuPositioner = (
     />
   );
 };
+
+export const menuListVariants = tv({
+  base: "p-1",
+});
+
+export const menuItemControlVariants = tv({
+  base: [
+    "relative flex min-h-8 w-full items-center gap-2",
+    "rounded-lg",
+    "px-[calc(--spacing(3)-1px)] py-1.5",
+  ],
+});
 
 export const menuContentVariants = tv({
   base: [
@@ -96,8 +111,8 @@ export const MenuContent = (props: MenuContentProps) => {
           data-slot="menu-content"
           {...rest}
         >
-          <ScrollArea className="min-h-0 flex-1" scrollFade>
-            <div className="p-1" data-slot="menu-scroll">
+          <ScrollArea className="min-h-0 flex-1" scrollFade tabIndex={-1}>
+            <div className={menuListVariants()} data-slot="menu-scroll">
               {children}
             </div>
           </ScrollArea>
@@ -141,15 +156,11 @@ export const MenuSeparator = (
   );
 };
 
-const menuItemVariants = tv({
+export const menuItemVariants = tv({
   base: [
+    menuItemControlVariants(),
     "group/menu-item",
-    "relative",
-    "w-full",
-    "px-2.5 py-1.5",
-    "flex items-center gap-2",
-    "select-none text-sm",
-    "rounded-lg",
+    "touch-manipulation select-none font-medium text-sm",
     "outline-hidden",
     "group-data-[date=open]/trigger-item:bg-accent group-data-[date=open]/trigger-item:text-accent-foreground",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
@@ -177,13 +188,15 @@ interface MenuItemProps
     VariantProps<typeof menuItemVariants> {}
 
 export const MenuItem = (props: MenuItemProps) => {
-  const { variant = "default", className, ...rest } = props;
+  const { variant = "default", className, tabIndex = -1, ...rest } = props;
 
   return (
     <ArkMenu.Item
       className={cn(menuItemVariants({ variant }), className)}
+      data-slot="menu-item"
       data-variant={variant}
       {...rest}
+      tabIndex={tabIndex}
     />
   );
 };
@@ -262,9 +275,7 @@ export const MenuGroupLabel = (
   return (
     <ArkMenu.ItemGroupLabel
       className={cn(
-        "px-2 py-1.5",
-        "font-medium text-muted-foreground text-sm",
-        "pointer-events-none",
+        "pointer-events-none px-2 py-1.5 font-medium text-muted-foreground text-xs",
         className
       )}
       data-slot="menu-group-label"
@@ -316,8 +327,8 @@ export const MenuSubContent = (
           data-slot="menu-sub-content"
           {...rest}
         >
-          <ScrollArea className="min-h-0 flex-1" scrollFade>
-            <div className="p-1" data-slot="menu-sub-scroll">
+          <ScrollArea className="min-h-0 flex-1" scrollFade tabIndex={-1}>
+            <div className={menuListVariants()} data-slot="menu-sub-scroll">
               {children}
             </div>
           </ScrollArea>
@@ -353,8 +364,7 @@ export const MenuShortcut = (props: React.ComponentProps<typeof ark.span>) => {
   return (
     <ark.span
       className={cn(
-        "ms-auto rtl:me-auto",
-        "text-muted-foreground text-xs tracking-widest",
+        "ms-auto font-medium text-muted-foreground text-xs tracking-widest rtl:me-auto",
         "group-data-highlighted/menu-item:group-data-[variant=destructive]/menu-item:text-destructive dark:group-data-highlighted/menu-item:group-data-[variant=destructive]/menu-item:text-destructive-foreground",
         className
       )}

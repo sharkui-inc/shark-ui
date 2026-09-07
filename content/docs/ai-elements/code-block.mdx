@@ -1,6 +1,6 @@
 ---
 title: Code Block
-description: A code panel with a filename, copy control, and optional line numbers.
+description: Display syntax-highlighted code with copy and streaming states.
 ---
 
 <ComponentPreview componentName="code-block" />
@@ -26,7 +26,7 @@ npx shadcn@latest add @shark/code-block
 
 <Steps>
 
-<Step>This component depends on [Clipboard](/docs/components/clipboard) and [Button](/docs/components/button). Install them first if you haven't already.</Step>
+<Step>This component depends on [Clipboard](/docs/components/clipboard), [Button](/docs/components/button), and [Scroll Area](/docs/components/scroll-area). Install them first if you haven't already.</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -44,65 +44,177 @@ npx shadcn@latest add @shark/code-block
 
 ```text
 CodeBlock
-├── CodeBlockHeader
+├── CodeBlockHeader (optional)
 │   ├── CodeBlockTitle
-│   └── CodeBlockCopy
-└── CodeBlockContent
+│   └── CodeBlockActions
+│       ├── CodeBlockLanguageSelector
+│       └── CodeBlockCopy
+└── ScrollArea
+    └── CodeBlockContent
 ```
+
+`CodeBlockContent` renderiza apenas a superfície do código. Envolva-o em `ScrollArea` para que a composição seja dona dos dois eixos de rolagem e para que a numeração sticky se ancore ao viewport correto.
 
 ## Usage
 
 ```tsx
 import {
   CodeBlock,
+  CodeBlockActions,
   CodeBlockContent,
   CodeBlockCopy,
   CodeBlockHeader,
-  CodeBlockTitle,
 } from "@/components/ui/code-block";
+import { ScrollArea } from "@/components/ui/scroll-area";
 ```
 
 ```tsx
 <CodeBlock code={source}>
-  <CodeBlockHeader>
-    <CodeBlockTitle>helpers.ts</CodeBlockTitle>
-    <CodeBlockCopy />
+  <CodeBlockHeader title="helpers.ts">
+    <CodeBlockActions>
+      <CodeBlockCopy />
+    </CodeBlockActions>
   </CodeBlockHeader>
-  <CodeBlockContent showLineNumbers>{source}</CodeBlockContent>
+  <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
+    <CodeBlockContent highlightedLines={[2]} showLineNumbers />
+  </ScrollArea>
 </CodeBlock>
 ```
 
-This is a presentational panel. Pass already-highlighted nodes as children of `CodeBlockContent` if you need syntax colors. For file edits, prefer [Diff](/docs/ai-elements/diff).
+## Title
+
+`CodeBlockHeader` supports two title patterns:
+
+### Using props
+
+Pass the `title` prop directly to `CodeBlockHeader`.
+
+```tsx showLineNumbers
+<CodeBlockHeader title="helpers.ts">
+  <CodeBlockActions>
+    <CodeBlockCopy />
+  </CodeBlockActions>
+</CodeBlockHeader>
+```
+
+> This approach does not require the `CodeBlockTitle` component.
+
+### Using components
+
+Use `CodeBlockTitle` as a child for more control.
+
+```tsx showLineNumbers
+<CodeBlockHeader>
+  <CodeBlockTitle>helpers.ts</CodeBlockTitle>
+  <CodeBlockActions>
+    <CodeBlockCopy />
+  </CodeBlockActions>
+</CodeBlockHeader>
+```
+
+## Streaming
+
+Set `isStreaming` while an AI response is still appending code. The component renders the newest text immediately, defers expensive highlighting while updates are frequent, and highlights the final snippet as soon as streaming completes.
+
+```tsx
+<CodeBlock code={partialCode} isStreaming={status === "streaming"} language="tsx">
+  <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
+    <CodeBlockContent showLineNumbers />
+  </ScrollArea>
+</CodeBlock>
+```
+
+This is a client component. A Server Component can pass its serializable `code`, `language`, and `isStreaming` values to it, but live streamed code is highlighted in the browser. Static server-rendered highlighting is intentionally outside this component's API.
+
+## Visual consistency
+
+`CodeBlock` and [Diff](/docs/ai-elements/diff) share the same technical surface: a 36px header, 14px interface text, a scrollable viewport, and 14px / 24px code metrics. They remain separate components because syntax highlighting, optional line numbers, and copy actions serve a different purpose from add/remove states.
+
+## Examples
+
+### Minimal
+
+<ComponentPreview componentName="code-block" fileName="example-minimal" />
+
+### Highlighted lines
+
+<ComponentPreview componentName="code-block" fileName="example-highlighted-lines" />
+
+### Scrollable
+
+<ComponentPreview componentName="code-block" fileName="example-scrollable" />
+
+### Language selector
+
+<ComponentPreview componentName="code-block" fileName="example-language-selector" />
+
+### Multiple files
+
+<ComponentPreview componentName="code-block" fileName="example-multiple-files" />
+
+### Streaming
+
+<ComponentPreview componentName="code-block" fileName="example-streaming" />
+
+### With Diff
+
+<ComponentPreview componentName="code-block" fileName="example-with-diff" />
+
+### Custom actions
+
+<ComponentPreview componentName="code-block" fileName="example-custom-actions" />
+
+### Content override
+
+<ComponentPreview componentName="code-block" fileName="example-content-override" />
 
 ## API Reference
 
 ### CodeBlock
 
-Root panel. Provides `code` to copy and content parts.
+Root panel. Provides `code`, `language`, and streaming state to its parts.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `code` | `string` | `""` |
+| `language` | `BundledLanguage` | `"tsx"` |
+| `isStreaming` | `boolean` | `false` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CodeBlockHeader
 
-Header for title and copy control.
+Optional header for titles and actions. Pass `title` to render `CodeBlockTitle`.
+A string child is wrapped the same way.
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `title` | `string` | `-` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CodeBlockTitle
 
-Filename or language label.
+Title text for the code block. Rendered automatically when `title` is set on
+`CodeBlockHeader`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
+
+### CodeBlockFilename
+
+Optional truncated filename when composing a custom title.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### CodeBlockActions
+
+Right-aligned optional actions container.
 
 ### CodeBlockCopy
 
@@ -115,9 +227,17 @@ Copies `code` from `CodeBlock`.
 
 ### CodeBlockContent
 
-Renders `code` or string children as lines.
+Renders the root `code` or a string child with Shiki syntax highlighting.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `showLineNumbers` | `boolean` | `false` |
+| `highlightedLines` | `number[]` | `[]` |
+| `code` | `string` | root `code` |
+| `language` | `BundledLanguage` | root `language` |
+| `isStreaming` | `boolean` | root `isStreaming` |
 | `className` | `string` | `-` |
+
+### Language selector parts
+
+`CodeBlockLanguageSelector`, `CodeBlockLanguageSelectorTrigger`, `CodeBlockLanguageSelectorValue`, `CodeBlockLanguageSelectorContent`, and `CodeBlockLanguageSelectorItem` are styled wrappers around [Select](/docs/components/select). Provide the Select collection and control its value from the consuming composition.

@@ -8,6 +8,7 @@ const manifest: RegistryItemType = {
   name: "listbox",
   registryDependencies: [
     absoluteUrl("/r/field.json"),
+    absoluteUrl("/r/input.json"),
     absoluteUrl("/r/menu.json"),
   ],
   type: "registry:ui",

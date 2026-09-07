@@ -1,8 +1,10 @@
 import { GlobeIcon } from "lucide-react";
 import {
   ToolResult,
+  ToolResultAction,
   ToolResultContent,
   ToolResultName,
+  ToolResultStatus,
   ToolResultTitle,
   ToolResultTrigger,
 } from "@/registry/react/components/tool-result";
@@ -13,6 +15,9 @@ const Example = () => (
       <GlobeIcon aria-hidden="true" />
       <ToolResultTitle>Fetched docs</ToolResultTitle>
       <ToolResultName>WebFetch</ToolResultName>
+      <ToolResultAction>
+        <ToolResultStatus />
+      </ToolResultAction>
     </ToolResultTrigger>
     <ToolResultContent>
       <p className="text-muted-foreground text-xs">

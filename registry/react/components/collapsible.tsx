@@ -46,7 +46,7 @@ export const CollapsibleTrigger = (
   return (
     <ArkCollapsible.Trigger
       className={cn(
-        "cursor-pointer",
+        "cursor-pointer touch-manipulation",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "has-data-[slot=collapsible-indicator]:[button]:justify-between",
         className
@@ -96,7 +96,7 @@ export const CollapsibleIndicator = (
       data-slot="collapsible-indicator"
       {...rest}
     >
-      <ChevronDownIcon className="size-4 shrink-0 transition-transform duration-200 motion-reduce:transition-none!" />
+      <ChevronDownIcon className="size-full shrink-0 transition-transform duration-200 motion-reduce:transition-none!" />
     </ArkCollapsible.Indicator>
   );
 };

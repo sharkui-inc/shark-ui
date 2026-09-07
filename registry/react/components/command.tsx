@@ -33,7 +33,10 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/registry/react/components/input-group";
-import { MenuShortcut } from "@/registry/react/components/menu";
+import {
+  menuListVariants,
+  MenuShortcut,
+} from "@/registry/react/components/menu";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
 
@@ -144,7 +147,7 @@ export const Command: ArkCombobox.RootComponent = (props) => {
       className={cn(
         "isolate",
         "flex min-h-0 flex-1 flex-col",
-        "p-2",
+        menuListVariants(),
         "bg-popover",
         "text-popover-foreground",
         "rounded-2xl border",
@@ -304,7 +307,7 @@ export const CommandFooter = (props: React.ComponentProps<typeof ark.div>) => {
       className={cn(
         "z-10",
         "flex items-center justify-between gap-2",
-        "-m-2 mt-2 px-4 py-3",
+        "-m-1 mt-2 px-4 py-3",
         "bg-muted/48",
         "text-muted-foreground text-xs",
         "rounded-b-[calc(var(--radius-2xl,1rem)-1px)] border-t",

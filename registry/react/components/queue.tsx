@@ -1,15 +1,9 @@
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
-import { ChevronDownIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/registry/react/components/collapsible";
 
 export const Queue = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
@@ -23,87 +17,91 @@ export const Queue = (props: React.ComponentProps<typeof ark.div>) => {
   );
 };
 
-export const QueueSection = (
-  props: React.ComponentProps<typeof Collapsible>
-) => {
-  const { className, defaultOpen = true, ...rest } = props;
+export const QueueSection = (props: React.ComponentProps<typeof ark.div>) => {
+  const { className, ...rest } = props;
 
   return (
-    <Collapsible
+    <ark.div
       className={cn(
-        "rounded-xl border bg-card text-card-foreground",
+        "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground",
         className
       )}
       data-slot="queue-section"
-      defaultOpen={defaultOpen}
       {...rest}
     />
   );
 };
 
-export const QueueSectionTrigger = (
-  props: React.ComponentProps<typeof CollapsibleTrigger>
-) => {
-  const { className, children, ...rest } = props;
-
-  return (
-    <CollapsibleTrigger
-      className={cn(
-        "flex w-full items-center justify-between gap-2 px-3 py-2 text-start text-sm",
-        className
-      )}
-      data-slot="queue-section-trigger"
-      {...rest}
-    >
-      {children}
-      <ChevronDownIcon
-        aria-hidden="true"
-        className="size-4 shrink-0 text-muted-foreground transition-transform group-data-[state=open]/collapsible:rotate-180"
-      />
-    </CollapsibleTrigger>
-  );
-};
-
-interface QueueSectionLabelProps extends React.ComponentProps<typeof ark.span> {
+interface QueueSectionHeaderProps extends React.ComponentProps<typeof ark.div> {
   /**
-   * The number of items in the queue section.
+   * The title of the queue section.
    */
-  count?: number;
-  /**
-   * The icon of the queue section.
-   */
-  icon?: React.ReactNode;
-  /**
-   * The label of the queue section.
-   */
-  label: string;
+  title?: string;
 }
 
-export const QueueSectionLabel = (props: QueueSectionLabelProps) => {
-  const { className, count, icon, label, ...rest } = props;
+export const QueueSectionHeader = (props: QueueSectionHeaderProps) => {
+  const { title, className, children, ...rest } = props;
 
   return (
-    <ark.span
-      className={cn("flex min-w-0 items-center gap-2", className)}
-      data-slot="queue-section-label"
+    <ark.div
+      className={cn(
+        "flex min-h-9 min-w-0 items-center gap-2 px-3 py-1",
+        "[&>svg]:order-first [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
+        "[&>svg:not([class*='size-'])]:size-3.5",
+        className
+      )}
+      data-slot="queue-section-header"
       {...rest}
     >
-      {icon}
-      <span className="truncate font-medium">
-        {count === undefined ? label : `${count} ${label}`}
-      </span>
-    </ark.span>
+      {!!title && <QueueTitle>{title}</QueueTitle>}
+      {!title && typeof children === "string" ? (
+        <QueueTitle>{children}</QueueTitle>
+      ) : (
+        children
+      )}
+    </ark.div>
   );
 };
 
-export const QueueSectionContent = (
-  props: React.ComponentProps<typeof CollapsibleContent>
+export const QueueTitle = (props: React.ComponentProps<typeof ark.div>) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn(
+        "min-w-0",
+        "flex-1",
+        "truncate text-muted-foreground text-sm",
+        className
+      )}
+      data-slot="queue-title"
+      {...rest}
+    />
+  );
+};
+
+export const QueueSectionAction = (
+  props: React.ComponentProps<typeof ark.div>
 ) => {
   const { className, ...rest } = props;
 
   return (
-    <CollapsibleContent
-      className={cn("border-t px-3 py-2", className)}
+    <ark.div
+      className={cn("flex shrink-0 items-center gap-1", "ms-auto", className)}
+      data-slot="queue-section-action"
+      {...rest}
+    />
+  );
+};
+
+export const QueueSectionContent = (
+  props: React.ComponentProps<typeof ark.div>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn("border-t p-1", className)}
       data-slot="queue-section-content"
       {...rest}
     />
@@ -115,7 +113,7 @@ export const QueueList = (props: React.ComponentProps<typeof ark.ul>) => {
 
   return (
     <ark.ul
-      className={cn("flex flex-col gap-1", className)}
+      className={cn("flex flex-col gap-0.5", className)}
       data-slot="queue-list"
       {...rest}
     />
@@ -128,36 +126,18 @@ export const QueueItem = (props: React.ComponentProps<typeof ark.li>) => {
   return (
     <ark.li
       className={cn(
-        "flex min-w-0 items-start gap-2 rounded-lg px-2 py-1.5 text-sm hover:bg-muted/60",
+        "group/queue-item",
+        "flex min-h-8 min-w-0 items-center gap-2",
+        "rounded-lg px-2 py-1",
+        "text-sm",
+        "transition-colors duration-150",
+        "hover:bg-muted",
+        "has-focus-visible:bg-muted",
+        "[&>svg:not([class*='size-'])]:size-3.5 [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
+        "motion-reduce:transition-none!",
         className
       )}
       data-slot="queue-item"
-      {...rest}
-    />
-  );
-};
-
-interface QueueItemIndicatorProps
-  extends React.ComponentProps<typeof ark.span> {
-  /**
-   * Whether the item is completed.
-   */
-  completed?: boolean;
-}
-
-export const QueueItemIndicator = (props: QueueItemIndicatorProps) => {
-  const { className, completed = false, ...rest } = props;
-
-  return (
-    <ark.span
-      aria-hidden="true"
-      className={cn(
-        "mt-1.5 size-2 shrink-0 rounded-full",
-        completed ? "bg-muted-foreground/40" : "bg-primary",
-        className
-      )}
-      data-completed={completed ? "" : undefined}
-      data-slot="queue-item-indicator"
       {...rest}
     />
   );
@@ -176,7 +156,7 @@ export const QueueItemContent = (props: QueueItemContentProps) => {
   return (
     <span
       className={cn(
-        "wrap-break-word min-w-0 flex-1",
+        "min-w-0 flex-1 truncate",
         completed && "text-muted-foreground line-through",
         className
       )}
@@ -193,7 +173,15 @@ export const QueueItemActions = (
 
   return (
     <ark.div
-      className={cn("ms-auto flex shrink-0 items-center gap-1", className)}
+      className={cn(
+        "flex shrink-0 items-center gap-0.5",
+        "opacity-0",
+        "group-hover/queue-item:opacity-100",
+        "group-focus-within/queue-item:opacity-100",
+        "transition-opacity duration-150",
+        "motion-reduce:transition-none!",
+        className
+      )}
       data-slot="queue-item-actions"
       {...rest}
     />
@@ -202,6 +190,7 @@ export const QueueItemActions = (
 
 export const QueueItemAction = (props: React.ComponentProps<typeof Button>) => {
   const {
+    className,
     size = "icon-xs",
     type = "button",
     variant = "ghost",
@@ -210,6 +199,11 @@ export const QueueItemAction = (props: React.ComponentProps<typeof Button>) => {
 
   return (
     <Button
+      className={cn(
+        "text-muted-foreground hover:text-foreground",
+        "[&_svg:not([class*='size-'])]:size-3.5",
+        className
+      )}
       data-slot="queue-item-action"
       size={size}
       type={type}

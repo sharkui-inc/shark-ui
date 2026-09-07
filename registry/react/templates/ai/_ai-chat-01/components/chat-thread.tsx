@@ -50,9 +50,11 @@ import {
   Plan,
   PlanAction,
   PlanContent,
-  PlanDescription,
   PlanHeader,
-  PlanTitle,
+  PlanItem,
+  PlanItemContent,
+  PlanItemDetailFile,
+  PlanItemTrigger,
   PlanTrigger,
 } from "@/registry/react/components/plan";
 import {
@@ -72,14 +74,10 @@ import {
   Suggestions,
 } from "@/registry/react/components/suggestion";
 import {
-  TaskItem,
-  TaskItemContent,
-  TaskItemDetailFile,
-  TaskItemTrigger,
-} from "@/registry/react/components/task";
-import {
   ToolResult,
+  ToolResultAction,
   ToolResultName,
+  ToolResultStatus,
   ToolResultTitle,
   ToolResultTrigger,
 } from "@/registry/react/components/tool-result";
@@ -110,7 +108,6 @@ export interface ChatMessage {
   content: string;
   id: string;
   plan?: {
-    description: string;
     tasks: {
       file?: string;
       status: "completed" | "in-progress" | "pending";
@@ -200,6 +197,9 @@ const MessageTool = ({
     <ToolResultTrigger>
       <ToolResultTitle>{name}</ToolResultTitle>
       <ToolResultName>{file}</ToolResultName>
+      <ToolResultAction>
+        <ToolResultStatus />
+      </ToolResultAction>
     </ToolResultTrigger>
   </ToolResult>
 );
@@ -252,31 +252,23 @@ const MessageApprovalPlan = ({
   </ApprovalCard>
 );
 
-const MessagePlan = ({
-  description,
-  tasks,
-  title,
-}: NonNullable<ChatMessage["plan"]>) => (
+const MessagePlan = ({ tasks, title }: NonNullable<ChatMessage["plan"]>) => (
   <Plan defaultOpen>
-    <PlanHeader>
-      <div className="min-w-0">
-        <PlanTitle>{title}</PlanTitle>
-        <PlanDescription>{description}</PlanDescription>
-      </div>
+    <PlanHeader title={title}>
       <PlanAction>
         <PlanTrigger />
       </PlanAction>
     </PlanHeader>
     <PlanContent>
       {tasks.map((task) => (
-        <TaskItem key={task.title} status={task.status}>
-          <TaskItemTrigger status={task.status} title={task.title} />
+        <PlanItem key={task.title} status={task.status}>
+          <PlanItemTrigger status={task.status} title={task.title} />
           {task.file ? (
-            <TaskItemContent>
-              <TaskItemDetailFile>{task.file}</TaskItemDetailFile>
-            </TaskItemContent>
+            <PlanItemContent>
+              <PlanItemDetailFile>{task.file}</PlanItemDetailFile>
+            </PlanItemContent>
           ) : null}
-        </TaskItem>
+        </PlanItem>
       ))}
     </PlanContent>
   </Plan>

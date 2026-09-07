@@ -14,13 +14,12 @@ const inpuGroupVariants = tv({
     "relative",
     "w-full min-w-0",
     "flex items-center",
+    "font-normal text-base md:text-sm",
     "bg-background dark:bg-input/30",
     "[--input-group-inset:calc(var(--spacing)*3-0.45rem)]",
     "border border-input shadow-xs/5",
     "transition-[color,box-shadow]",
     "has-[>textarea]:h-auto",
-    "has-[>[data-align=inline-start]]:[&>input]:ps-2",
-    "has-[>[data-align=inline-end]]:[&>input]:pe-2",
     "has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-start]]:[&>input]:pb-3",
     "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3",
     "outline-none focus-within:border-primary focus-within:ring-[3px] focus-within:ring-ring/32",
@@ -38,9 +37,9 @@ const inpuGroupVariants = tv({
       true: "rounded-full",
     },
     size: {
-      lg: ["h-9"],
-      md: ["h-8"],
-      sm: ["h-7"],
+      lg: ["h-9", "px-[calc(--spacing(3.5)-1px)]"],
+      md: ["h-8", "px-[calc(--spacing(3)-1px)]"],
+      sm: ["h-7", "px-[calc(--spacing(2.5)-1px)]"],
     },
   },
 });
@@ -65,10 +64,9 @@ export const InputGroup = (props: InputGroupProps) => {
 
 const inputGroupAddonVariants = tv({
   base: [
-    "h-auto",
+    "h-full",
     "flex items-center justify-center gap-2",
-    "py-1.5",
-    "select-none font-medium text-muted-foreground text-sm",
+    "select-none font-medium text-muted-foreground text-xs",
     "cursor-text",
     "group-data-[disabled=true]/input-group:opacity-64",
     "[&>kbd]:rounded-[max(0px,calc(var(--radius)-var(--input-group-inset)))]",
@@ -81,30 +79,18 @@ const inputGroupAddonVariants = tv({
     align: {
       "block-end": [
         "[--input-group-inset:--spacing(3)]",
-        "order-last w-full justify-start px-[calc(--spacing(3)-1px)] pb-[calc(--spacing(3)-1px)]",
+        "order-last w-full justify-start px-0 pb-[calc(--spacing(3)-1px)]",
         "group-has-[>input]/input-group:pb-2.5",
         "[.border-t]:pt-[calc(--spacing(3)-1px)]",
-        "in-data-[size=sm]:px-[calc(--spacing(2.5)-1px)]",
       ],
       "block-start": [
         "[--input-group-inset:--spacing(3)]",
-        "order-first w-full justify-start px-[calc(--spacing(3)-1px)] pt-[calc(--spacing(3)-1px)]",
+        "order-first w-full justify-start px-0 pt-[calc(--spacing(3)-1px)]",
         "group-has-[>input]/input-group:pt-2.5",
         "[.border-b]:pb-[calc(--spacing(3)-1px)]",
-        "in-data-[size=sm]:px-[calc(--spacing(2.5)-1px)]",
       ],
-      "inline-end": [
-        "order-last pe-[calc(--spacing(3)-1px)]",
-        "has-[>button]:me-[-0.45rem]",
-        "has-[>kbd]:me-[-0.35rem]",
-        "in-data-[size=sm]:pe-[calc(--spacing(2.5)-1px)]",
-      ],
-      "inline-start": [
-        "order-first ps-[calc(--spacing(3)-1px)]",
-        "has-[>button]:ms-[-0.45rem]",
-        "has-[>kbd]:ms-[-0.35rem]",
-        "in-data-[size=sm]:ps-[calc(--spacing(2.5)-1px)]",
-      ],
+      "inline-end": ["order-last ps-2 pe-0"],
+      "inline-start": ["order-first ps-0 pe-2"],
     },
   },
 });
@@ -121,11 +107,25 @@ export const InputGroupAddon = (props: InputGroupAddonProps) => {
       className={cn(inputGroupAddonVariants({ align }), className)}
       data-align={align}
       data-slot="input-group-addon"
-      onClick={(e) => {
-        if ((e.target as HTMLElement).closest("button")) {
+      onMouseDown={(event) => {
+        if (
+          (event.target as HTMLElement).closest(
+            "button, a, input, select, textarea, [role=button], [role=combobox], [role=listbox], [data-slot=select-trigger]"
+          )
+        ) {
           return;
         }
-        e.currentTarget.parentElement?.querySelector("input")?.focus();
+
+        event.preventDefault();
+
+        const parent = event.currentTarget.parentElement;
+        const control = parent?.querySelector<
+          HTMLInputElement | HTMLTextAreaElement
+        >("input, textarea");
+
+        if (control && !parent?.querySelector("input:focus, textarea:focus")) {
+          control.focus();
+        }
       }}
       role="group"
       {...rest}
@@ -174,7 +174,7 @@ export const InputGroupText = (
     <ark.span
       className={cn(
         "flex items-center gap-2",
-        "text-muted-foreground text-sm",
+        "font-medium text-muted-foreground text-xs",
         "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
         className
       )}
@@ -191,6 +191,8 @@ export const InputGroupInput = (props: React.ComponentProps<typeof Input>) => {
     <Input
       className={cn(
         "flex-1",
+        "h-full",
+        "px-0",
         "bg-transparent",
         "rounded-none border-0 shadow-none",
         "focus-visible:ring-0",
@@ -213,6 +215,7 @@ export const InputGroupTextarea = (
     <Textarea
       className={cn(
         "flex-1",
+        "px-0",
         "py-3",
         "bg-transparent",
         "resize-none rounded-none border-0 shadow-none",

@@ -16,6 +16,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuGroup,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -41,7 +42,7 @@ export const DocsCopyPage = (props: DocsCopyPageProps) => {
       <ButtonGroup>
         <Clipboard value={data}>
           <ClipboardTrigger asChild>
-            <Button className="rounded-e-none" size="sm" variant="outline">
+            <Button size="sm" variant="outline">
               <ClipboardIndicator />
               Copy Markdown
             </Button>
@@ -56,57 +57,53 @@ export const DocsCopyPage = (props: DocsCopyPageProps) => {
           </MenuTrigger>
 
           <MenuContent>
-            {Object.entries(menuItems).map(([key, value]) => (
-              <MenuItem
-                asChild
-                className="aria-disabled:opacity-64"
-                key={key}
-                value={key}
-              >
-                {value(pageUrl)}
+            <MenuGroup>
+              <MenuItem asChild value="chatgpt">
+                <a
+                  href={getPromptUrl("https://chatgpt.com", pageUrl)}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <ChatGptIcon />
+                  Open in ChatGPT
+                </a>
               </MenuItem>
-            ))}
+              <MenuItem asChild value="claude">
+                <a
+                  href={getPromptUrl("https://claude.ai/new", pageUrl)}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <ClaudeIcon />
+                  Open in Claude
+                </a>
+              </MenuItem>
+              {SITE_FEATURES.rawMarkdownRoutes ? (
+                <MenuItem asChild value="markdown">
+                  <a
+                    href={`${pageUrl}.md`}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <MarkdownIcon />
+                    View as Markdown
+                  </a>
+                </MenuItem>
+              ) : (
+                <MenuItem disabled value="markdown">
+                  <MarkdownIcon />
+                  View as Markdown
+                  <Badge className="ms-auto" variant="outline">
+                    Disabled
+                  </Badge>
+                </MenuItem>
+              )}
+            </MenuGroup>
           </MenuContent>
         </Menu>
       </ButtonGroup>
     </ButtonGroup>
   );
-};
-
-const menuItems = {
-  chatgpt: (url: string) => (
-    <a
-      href={getPromptUrl("https://chatgpt.com", url)}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <ChatGptIcon />
-      Open in ChatGPT
-    </a>
-  ),
-  claude: (url: string) => (
-    <a
-      href={getPromptUrl("https://claude.ai/new", url)}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <ClaudeIcon />
-      Open in Claude
-    </a>
-  ),
-  markdown: (url: string) =>
-    SITE_FEATURES.rawMarkdownRoutes ? (
-      <a href={`${url}.md`} rel="noopener noreferrer" target="_blank">
-        <MarkdownIcon />
-        View as Markdown
-      </a>
-    ) : (
-      <div aria-disabled>
-        <MarkdownIcon />
-        View as Markdown
-        <Badge variant="outline">Disabled</Badge>
-      </div>
-    ),
 };
 
 const getPromptUrl = (baseURL: string, url: string) =>

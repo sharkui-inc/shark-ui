@@ -19,7 +19,7 @@ export const HoverCard = (props: HoverCardProps) => {
     unmountOnExit = true,
     closeDelay = 100,
     openDelay = 10,
-    positioning = { placement: "top" },
+    positioning,
     ...rest
   } = props;
 
@@ -29,7 +29,10 @@ export const HoverCard = (props: HoverCardProps) => {
       data-slot="hover-card"
       lazyMount={lazyMount}
       openDelay={openDelay}
-      positioning={positioning}
+      positioning={{
+        placement: "top",
+        ...positioning,
+      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     />

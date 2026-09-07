@@ -7,6 +7,11 @@ import {
 } from "@ark-ui/react/navigation-menu";
 import type React from "react";
 import { cn } from "@/lib/utils";
+import { buttonControlVariants } from "@/registry/react/components/button";
+import {
+  menuItemControlVariants,
+  menuListVariants,
+} from "@/registry/react/components/menu";
 
 export const useNavigationMenu = useArkNavigationMenu;
 export const useNavigationMenuContext = useArkNavigationMenuContext;
@@ -105,7 +110,10 @@ export const NavigationMenuTrigger = (
   return (
     <ArkNavigationMenu.Trigger
       className={cn(
-        "inline-flex h-9 w-full items-center justify-between gap-1.5 rounded-lg px-3 py-2 font-medium text-sm outline-none",
+        buttonControlVariants(),
+        menuItemControlVariants(),
+        "h-8 gap-2 px-[calc(--spacing(3)-1px)]",
+        "w-full justify-between outline-none",
         "hover:bg-accent hover:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
         "focus-visible:ring-[3px] focus-visible:ring-ring/32",
         "disabled:pointer-events-none disabled:opacity-64",
@@ -126,7 +134,10 @@ export const NavigationMenuLink = (
   return (
     <ArkNavigationMenu.Link
       className={cn(
-        "flex items-center gap-2 rounded-lg px-3 py-2 text-sm no-underline outline-none",
+        buttonControlVariants(),
+        menuItemControlVariants(),
+        "h-8 gap-2 px-[calc(--spacing(3)-1px)]",
+        "no-underline outline-none",
         "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
         "data-current:bg-accent data-current:font-medium data-current:text-accent-foreground",
         "focus-visible:ring-[3px] focus-visible:ring-ring/32",
@@ -148,7 +159,8 @@ export const NavigationMenuContent = (
     <ArkNavigationMenu.Content
       className={cn(
         "absolute z-[calc(50+var(--nested-layer-count,0))]",
-        "flex w-max min-w-48 max-w-[min(40rem,calc(100vw-3rem))] flex-col gap-1 p-1",
+        "flex w-max min-w-48 max-w-[min(40rem,calc(100vw-3rem))] flex-col gap-1",
+        menuListVariants(),
         "max-h-[70dvh] overflow-y-auto rounded-xl text-popover-foreground outline-none",
         isViewportRendered
           ? "start-0 top-0"

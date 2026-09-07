@@ -1,7 +1,6 @@
 import {
   Diff,
   DiffContent,
-  DiffFile,
   DiffHeader,
   DiffLine,
   DiffStats,
@@ -10,8 +9,7 @@ import {
 const Example = () => (
   <div className="flex w-full max-w-lg flex-col gap-2">
     <Diff>
-      <DiffHeader>
-        <DiffFile>src/utils/helpers.ts</DiffFile>
+      <DiffHeader title="src/utils/helpers.ts">
         <DiffStats added={1} removed={1} />
       </DiffHeader>
       <DiffContent>
@@ -30,8 +28,7 @@ const Example = () => (
       </DiffContent>
     </Diff>
     <Diff>
-      <DiffHeader>
-        <DiffFile>src/utils/helpers.test.ts</DiffFile>
+      <DiffHeader title="src/utils/helpers.test.ts">
         <DiffStats added={1} removed={0} />
       </DiffHeader>
       <DiffContent>

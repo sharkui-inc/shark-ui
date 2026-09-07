@@ -5,13 +5,18 @@ import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
+export const inputItemVariants = tv({
+  base: [
+    "touch-manipulation select-none font-normal text-base md:text-sm",
+  ],
+});
+
 export const inputVariants = tv({
   base: [
     "peer",
     "w-full min-w-0",
-    "px-[calc(--spacing(3)-1px)]",
     "bg-transparent dark:bg-input/30",
-    "text-base md:text-sm",
+    "font-normal text-base md:text-sm",
     "border border-input shadow-xs/5",
     "placeholder:text-muted-foreground/64",
     "file:inline-flex file:h-7 file:items-center file:border-0",
@@ -35,8 +40,8 @@ export const inputVariants = tv({
       true: "rounded-full",
     },
     size: {
-      lg: ["h-9"],
-      md: ["h-8"],
+      lg: ["h-9", "px-[calc(--spacing(3.5)-1px)]"],
+      md: ["h-8", "px-[calc(--spacing(3)-1px)]"],
       sm: ["h-7", "px-[calc(--spacing(2.5)-1px)]"],
     },
   },

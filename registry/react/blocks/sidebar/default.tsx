@@ -233,14 +233,14 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
               <ChevronsUpDown className="ms-auto size-4" />
             </SidebarMenuButton>
           </MenuTrigger>
-          <MenuContent className="w-(--reference-width) min-w-56 rounded-lg">
+          <MenuContent className="w-(--reference-width) min-w-56">
             <MenuGroup>
               <MenuGroupLabel className="text-muted-foreground text-xs">
                 Teams
               </MenuGroupLabel>
               {teams.map((team, index) => (
                 <MenuItem
-                  className="gap-2 p-2"
+                  className="gap-2"
                   key={team.name}
                   onClick={() => setActiveTeam(team)}
                   value={team.name}
@@ -259,7 +259,7 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
             </MenuGroup>
             <MenuSeparator />
             <MenuGroup>
-              <MenuItem className="gap-2 p-2" value="add-team">
+              <MenuItem className="gap-2" value="add-team">
                 <IconTile
                   aria-hidden="true"
                   className="rounded-md border-input bg-transparent shadow-none"
@@ -362,7 +362,7 @@ const NavProjects = ({ projects }: NavProjectsProps) => (
                 <span className="sr-only">More</span>
               </SidebarMenuAction>
             </MenuTrigger>
-            <MenuContent className="w-48 rounded-lg">
+            <MenuContent className="w-48">
               <MenuGroup>
                 <MenuItem value={`${item.name}-view`}>
                   <Folder />
@@ -429,7 +429,7 @@ const NavUser = ({ user }: NavUserProps) => {
               <ChevronsUpDown className="ms-auto size-4" />
             </SidebarMenuButton>
           </MenuTrigger>
-          <MenuContent className="w-full rounded-lg sm:w-64">
+          <MenuContent className="w-full sm:w-64">
             <MenuGroup>
               <MenuGroupLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">

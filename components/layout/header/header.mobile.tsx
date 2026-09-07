@@ -31,13 +31,7 @@ export const MobileNav = (props: MobileNavProps) => {
       <PopoverTrigger asChild>
         <Button
           aria-label="Toggle Menu"
-          className={cn(
-            "group",
-            "hitbox-2",
-            "pr-0!",
-            "touch-manipulation",
-            className
-          )}
+          className={cn("group", "hitbox-2", "pr-0!", className)}
           size="icon-md"
           variant="ghost"
         >

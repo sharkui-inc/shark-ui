@@ -24,37 +24,37 @@ import { Separator } from "@/registry/react/components/separator";
 const PRODUCTS = [
   {
     id: "1",
-    image: "/images/placeholder.svg",
+    image: "/images/gradients/green-dark.svg",
     name: "Wireless Headphones",
     price: "$99",
   },
   {
     id: "2",
-    image: "/images/placeholder.svg",
+    image: "/images/gradients/blue.svg",
     name: "Smart Watch",
     price: "$249",
   },
   {
     id: "3",
-    image: "/images/placeholder.svg",
+    image: "/images/gradients/purple.svg",
     name: "Portable Speaker",
     price: "$79",
   },
   {
     id: "4",
-    image: "/images/placeholder.svg",
+    image: "/images/gradients/orange.svg",
     name: "USB-C Hub",
     price: "$45",
   },
   {
     id: "5",
-    image: "/images/placeholder.svg",
+    image: "/images/gradients/rose.svg",
     name: "Mechanical Keyboard",
     price: "$149",
   },
   {
     id: "6",
-    image: "/images/placeholder.svg",
+    image: "/images/gradients/amber.svg",
     name: "Ergonomic Mouse",
     price: "$59",
   },

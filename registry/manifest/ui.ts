@@ -117,7 +117,6 @@ const SHARK_UI_BUNDLE = [
   "table",
   "tabs",
   "tags-input",
-  "task",
   "terminal",
   "textarea",
   "timer",

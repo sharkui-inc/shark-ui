@@ -1,7 +1,6 @@
 import {
   Diff,
   DiffContent,
-  DiffFile,
   DiffHeader,
   DiffLine,
   DiffStats,
@@ -9,8 +8,7 @@ import {
 
 const Example = () => (
   <Diff className="max-w-lg">
-    <DiffHeader>
-      <DiffFile>src/auth.ts</DiffFile>
+    <DiffHeader title="src/auth.ts">
       <DiffStats added={4} removed={1} />
     </DiffHeader>
     <DiffContent>
