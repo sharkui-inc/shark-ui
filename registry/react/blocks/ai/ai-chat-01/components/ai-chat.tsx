@@ -489,7 +489,7 @@ const MessageExtras = ({ extras }: { extras: DemoMessageExtras }) => {
         </ApprovalCard>
       ) : null}
       {extras.plan ? (
-        <Plan defaultOpen>
+        <Plan defaultOpen status="in-progress">
           <PlanHeader title={extras.plan.title} />
           <PlanContent>
             {extras.plan.tasks.map((task) => (

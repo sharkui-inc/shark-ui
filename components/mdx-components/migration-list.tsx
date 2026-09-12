@@ -14,7 +14,7 @@ export const MigrationList = () => (
     {DESIGN_SYSTEMS.map((system) => (
       <Item asChild className="[--space:--spacing(4)]" key={system.name}>
         <NavLink
-          className="w-full border-input transition-all"
+          className="w-full border-input transition-[background-color,border-color,box-shadow]"
           href={system.href}
         >
           <ItemMedia>{system.icon}</ItemMedia>

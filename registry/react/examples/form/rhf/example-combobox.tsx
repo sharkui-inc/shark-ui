@@ -72,8 +72,12 @@ const Example = () => {
                   <FieldLabel>Primary department</FieldLabel>
                   <Combobox
                     collection={collection}
-                    onInputValueChange={({ inputValue }) => filter(inputValue)}
-                    onValueChange={(e) => field.onChange(e.value)}
+                    onInputValueChange={({ inputValue, reason }) =>
+                      filter(reason === "item-select" ? "" : inputValue)
+                    }
+                    onValueChange={(e) => {
+                      field.onChange(e.value);
+                    }}
                     value={field.value}
                   >
                     <ComboboxInput

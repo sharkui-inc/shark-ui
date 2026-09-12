@@ -22,7 +22,9 @@ const Example = () => {
       className="w-full max-w-64"
       collection={collection}
       invalid
-      onInputValueChange={({ inputValue }) => filter(inputValue)}
+      onInputValueChange={({ inputValue, reason }) =>
+        filter(reason === "item-select" ? "" : inputValue)
+      }
     >
       <ComboboxInput placeholder="Select a fruit..." />
       <ComboboxContent>

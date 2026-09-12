@@ -23,7 +23,7 @@ export const Switch = (props: React.ComponentProps<typeof ArkSwitch.Root>) => {
         "touch-manipulation",
         "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
         "rounded-full border border-transparent",
-        "transition-all",
+        "transition-[background-color,border-color,box-shadow,opacity]",
         "outline-none [[data-focus-visible],[data-invalid]]:ring-[3px]",
         "data-focus-visible:border-primary data-focus-visible:ring-ring/32",
         "data-invalid:border-destructive data-invalid:ring-destructive/24",

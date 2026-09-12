@@ -23,9 +23,9 @@ export const docsCodeSurfaceClassName = cn(
   "[&_code:not([data-line-numbers]):not([data-language=text]):not([data-language=plaintext])_.line]:px-4",
   "[&_pre[data-language=plaintext]]:px-4! [&_pre[data-language=text]]:px-4!",
   "[&_pre[data-language=plaintext]]:font-[ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation_Mono,Courier_New,monospace]! [&_pre[data-language=text]]:font-[ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation_Mono,Courier_New,monospace]!",
-  "[&_code[data-language=text]]:block! [&_code[data-language=plaintext]]:block! [&_code[data-language=text]]:whitespace-normal! [&_code[data-language=plaintext]]:whitespace-normal!",
+  "[&_code[data-language=text]]:block! [&_code[data-language=plaintext]]:block! [&_code[data-language=text]]:whitespace-pre! [&_code[data-language=plaintext]]:whitespace-pre!",
   "[&_code[data-language=plaintext]]:[font-variant-ligatures:none] [&_code[data-language=text]]:[font-variant-ligatures:none]",
-  "[&_pre[data-language=plaintext]_.line]:min-h-6! [&_pre[data-language=plaintext]_.line]:py-0! [&_pre[data-language=plaintext]_.line]:leading-6! [&_pre[data-language=plaintext]_.line]:whitespace-pre! [&_pre[data-language=text]_.line]:min-h-6! [&_pre[data-language=text]_.line]:py-0! [&_pre[data-language=text]_.line]:leading-6! [&_pre[data-language=text]_.line]:whitespace-pre!"
+  "[&_pre[data-language=plaintext]_.line]:min-h-0! [&_pre[data-language=plaintext]_.line]:py-0! [&_pre[data-language=plaintext]_.line]:leading-[.95]! [&_pre[data-language=plaintext]_.line]:whitespace-pre! [&_pre[data-language=text]_.line]:min-h-0! [&_pre[data-language=text]_.line]:py-0! [&_pre[data-language=text]_.line]:leading-[.95]! [&_pre[data-language=text]_.line]:whitespace-pre!"
 );
 
 export interface DocsCodeFrameProps extends React.ComponentProps<"figure"> {

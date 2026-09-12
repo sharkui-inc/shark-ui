@@ -6,11 +6,10 @@ import {
   PlanItemDetail,
   PlanItemDetailFile,
   PlanItemTrigger,
-  PlanProgress,
 } from "@/registry/react/components/plan";
 
 const Example = () => (
-  <Plan className="max-w-lg">
+  <Plan className="max-w-lg" status="error">
     <PlanContent>
       <PlanItem collapsible defaultOpen status="completed">
         <PlanItemTrigger title="Validate the settlement export" />
@@ -38,7 +37,6 @@ const Example = () => (
         <PlanItemTrigger title="Apply the corrected reconciliation records" />
       </PlanItem>
     </PlanContent>
-    <PlanProgress completed={1} total={3} />
   </Plan>
 );
 

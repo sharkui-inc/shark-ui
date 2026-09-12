@@ -11,7 +11,9 @@ import {
 } from "@/registry/react/components/combobox";
 
 const Example = () => {
-  const [value, setValue] = React.useState<string | undefined>("banana");
+  const [selectedValue, setSelectedValue] = React.useState<string | undefined>(
+    "banana"
+  );
 
   const { contains } = useFilter({ sensitivity: "base" });
 
@@ -25,9 +27,13 @@ const Example = () => {
       <Combobox
         className="w-full"
         collection={collection}
-        inputValue={value}
-        onInputValueChange={({ inputValue }) => filter(inputValue)}
-        onValueChange={({ value }) => setValue(value[0])}
+        onInputValueChange={({ inputValue, reason }) =>
+          filter(reason === "item-select" ? "" : inputValue)
+        }
+        onValueChange={({ value }) => {
+          setSelectedValue(value[0]);
+        }}
+        value={selectedValue ? [selectedValue] : []}
       >
         <ComboboxInput placeholder="Select a fruit..." />
         <ComboboxContent>
@@ -41,7 +47,7 @@ const Example = () => {
         </ComboboxContent>
       </Combobox>
       <p className="text-center text-muted-foreground text-sm">
-        Selected: {value ?? "(none)"}
+        Selected: {selectedValue ?? "(none)"}
       </p>
     </div>
   );

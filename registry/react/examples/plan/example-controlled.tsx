@@ -9,7 +9,6 @@ import {
   PlanItemContent,
   PlanItemDetailFile,
   PlanItemTrigger,
-  PlanProgress,
 } from "@/registry/react/components/plan";
 
 const Example = () => {
@@ -21,7 +20,7 @@ const Example = () => {
 
   return (
     <div className="flex w-full max-w-lg flex-col gap-3">
-      <Plan onOpenChange={handleOpenChange} open={open}>
+      <Plan onOpenChange={handleOpenChange} open={open} status="in-progress">
         <PlanHeader title="Add email validation" />
         <PlanContent>
           <PlanItem collapsible status="completed">
@@ -41,7 +40,6 @@ const Example = () => {
             <PlanItemTrigger title="Run unit tests" />
           </PlanItem>
         </PlanContent>
-        <PlanProgress completed={1} total={3} />
       </Plan>
       <p className="text-muted-foreground text-sm">
         Plan: {open ? "open" : "closed"}

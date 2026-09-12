@@ -28,7 +28,9 @@ const Example = () => {
       <FieldLabel>Country</FieldLabel>
       <Combobox
         collection={collection}
-        onInputValueChange={({ inputValue }) => filter(inputValue)}
+        onInputValueChange={({ inputValue, reason }) =>
+          filter(reason === "item-select" ? "" : inputValue)
+        }
         required
       >
         <ComboboxInput placeholder="Select a country..." />

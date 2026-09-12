@@ -33,9 +33,9 @@
     "lint:check": "ultracite check",
     "lint:fix": "ultracite fix",
     "registry:build": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/build-registry.mts",
-    "theme:build": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/build-themes.mts",
     "start": "next start",
     "test": "tsx --import ./test/setup-dom.ts --test \"test/**/*.test.ts\" \"test/**/*.test.tsx\"",
+    "theme:build": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/build-themes.mts",
     "typecheck": "next build"
   },
   "lint-staged": {

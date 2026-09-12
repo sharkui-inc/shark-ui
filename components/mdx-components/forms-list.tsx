@@ -14,7 +14,7 @@ export const FormsList = () => (
     {FORM_LIBRARIES.map((library) => (
       <Item asChild className="[--space:--spacing(4)]" key={library.name}>
         <NavLink
-          className="w-full border-input transition-all"
+          className="w-full border-input transition-[background-color,border-color,box-shadow]"
           href={library.href}
         >
           <ItemMedia>{library.icon}</ItemMedia>

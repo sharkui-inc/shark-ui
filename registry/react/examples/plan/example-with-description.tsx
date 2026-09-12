@@ -8,9 +8,12 @@ import {
   PlanItemTrigger,
 } from "@/registry/react/components/plan";
 
-const PlanDemo = () => (
+const Example = () => (
   <Plan className="max-w-lg" status="in-progress">
-    <PlanHeader title="Add email validation" />
+    <PlanHeader
+      description="Editing validation utilities"
+      title="Add email validation"
+    />
     <PlanContent>
       <PlanItem collapsible status="completed">
         <PlanItemTrigger title="Read current validator" />
@@ -25,11 +28,8 @@ const PlanDemo = () => (
           <PlanItemDetailFile>src/app.tsx</PlanItemDetailFile>
         </PlanItemContent>
       </PlanItem>
-      <PlanItem status="pending">
-        <PlanItemTrigger title="Run unit tests" />
-      </PlanItem>
     </PlanContent>
   </Plan>
 );
 
-export default PlanDemo;
+export default Example;

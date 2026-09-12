@@ -57,7 +57,7 @@ export const IdeChat = () => {
   return (
     <div className="flex h-full min-h-0 flex-col">
       <div className="border-b p-3">
-        <Plan>
+        <Plan status="in-progress">
           <PlanHeader title="Add email validation" />
           <PlanContent>
             <PlanItem collapsible status="completed">

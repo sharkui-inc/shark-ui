@@ -16,7 +16,7 @@ export const buttonVariants = tv({
   base: [
     buttonControlVariants(),
     "rounded-(--button-radius) [--button-radius:var(--radius-lg)]",
-    "transition-all",
+    "transition-[background-color,border-color,color,box-shadow,opacity,transform]",
     "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/32",
     "disabled:pointer-events-none disabled:opacity-64",
     "data-disabled:pointer-events-none data-disabled:opacity-64",

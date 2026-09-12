@@ -107,7 +107,7 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
         strokeWidth={thickness}
       />
       <circle
-        className="fill-none stroke-primary transition-all duration-300 ease-out motion-reduce:transition-none"
+        className="fill-none stroke-primary transition-[stroke-dashoffset] duration-300 ease-out motion-reduce:transition-none"
         cx={size / 2}
         cy={size / 2}
         data-slot="circular-progress-range"

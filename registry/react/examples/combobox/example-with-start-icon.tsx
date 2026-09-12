@@ -23,7 +23,9 @@ const Example = () => {
     <Combobox
       className="w-full max-w-64"
       collection={collection}
-      onInputValueChange={({ inputValue }) => filter(inputValue)}
+      onInputValueChange={({ inputValue, reason }) =>
+        filter(reason === "item-select" ? "" : inputValue)
+      }
     >
       <ComboboxInput placeholder="Search fruits...">
         <InputGroupAddon align="inline-start">

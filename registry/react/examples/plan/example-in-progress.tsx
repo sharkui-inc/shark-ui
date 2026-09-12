@@ -6,11 +6,10 @@ import {
   PlanItemDetail,
   PlanItemDetailFile,
   PlanItemTrigger,
-  PlanProgress,
 } from "@/registry/react/components/plan";
 
 const Example = () => (
-  <Plan className="max-w-lg">
+  <Plan className="max-w-lg" status="in-progress">
     <PlanContent>
       <PlanItem collapsible defaultOpen status="completed">
         <PlanItemTrigger title="Collect approved tenant documents" />
@@ -39,7 +38,6 @@ const Example = () => (
         <PlanItemTrigger title="Publish the tenant search index" />
       </PlanItem>
     </PlanContent>
-    <PlanProgress completed={1} total={3} />
   </Plan>
 );
 

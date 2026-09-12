@@ -251,7 +251,7 @@ const MessageApprovalPlan = ({
 );
 
 const MessagePlan = ({ tasks, title }: NonNullable<ChatMessage["plan"]>) => (
-  <Plan defaultOpen>
+  <Plan defaultOpen status="in-progress">
     <PlanHeader title={title} />
     <PlanContent>
       {tasks.map((task) => (

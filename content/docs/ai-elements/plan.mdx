@@ -58,7 +58,6 @@ Plan
 │       └── PlanItemContent
 │           └── PlanItemDetail
 │               └── PlanItemDetailFile
-└── PlanProgress
 ```
 
 ## Usage
@@ -73,13 +72,12 @@ import {
   PlanItemDetail,
   PlanItemDetailFile,
   PlanItemTrigger,
-  PlanProgress,
   PlanTitle,
 } from "@/components/ui/plan";
 ```
 
 ```tsx
-<Plan>
+<Plan status="in-progress">
   <PlanHeader title="Add email validation" />
   <PlanContent>
     <PlanItem collapsible status="in-progress">
@@ -91,7 +89,6 @@ import {
       </PlanItemContent>
     </PlanItem>
   </PlanContent>
-  <PlanProgress completed={1} total={3} />
 </Plan>
 ```
 
@@ -145,6 +142,17 @@ Control an individual item with the same props.
 
 ## Examples
 
+### Webhook recovery workflow
+
+Compose a plan with supporting components for an agent task that needs
+diagnosis, an in-flight code change, and a safe rollout.
+
+<ComponentPreview componentName="plan" fileName="example-webhook-recovery" />
+
+### With description
+
+<ComponentPreview componentName="plan" fileName="example-with-description" />
+
 ### Single item
 
 <ComponentPreview componentName="plan" fileName="example-single-item" />
@@ -157,20 +165,25 @@ Control an individual item with the same props.
 
 ### Plan
 
-Root collapsible. Forwards [Collapsible](/docs/components/collapsible) props.
+Root collapsible for an implementation plan. `status` supplies the visual state
+indicator shown in the header, including when the plan is collapsed. Forwards
+[Collapsible](/docs/components/collapsible) props.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `defaultOpen` | `boolean` | `true` |
+| `status` | `"pending" \| "in-progress" \| "completed" \| "error"` | `"pending"` |
 | `className` | `string` | `-` |
 
 ### PlanHeader
 
-Clickable header that toggles the plan. Pass `title` to render `PlanTitle`.
+Clickable header that toggles the implementation plan and passes `title` to
+`PlanTitle`. Add `description` for supporting context.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `title` | `string` | `-` |
+| `description` | `string` | `-` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
@@ -239,17 +252,5 @@ A compact file reference for use inside a plan item detail.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `variant` | `"default" \| "secondary" \| "outline" \| "success" \| "info" \| "warning" \| "destructive"` | `"outline"` |
-| `className` | `string` | `-` |
-| `asChild` | `boolean` | `false` |
-
-### PlanProgress
-
-Full-width footer with completed count and a progress track. Stays visible when
-the plan is collapsed.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `completed` | `number` | **required** |
-| `total` | `number` | **required** |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |

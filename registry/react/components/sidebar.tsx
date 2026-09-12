@@ -314,7 +314,7 @@ export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
         "absolute inset-y-0 z-20 -translate-x-1/2",
         "w-4",
         "hidden sm:flex",
-        "transition-all ease-linear",
+        "transition-[inset-inline-start,inset-inline-end,translate,background-color] ease-linear",
         "after:absolute after:inset-s-1/2 after:inset-y-0 after:w-0.5",
         "hover:after:bg-sidebar-border",
         "group-data-[placement=left]:-inset-e-4 group-data-[placement=right]:inset-s-0",

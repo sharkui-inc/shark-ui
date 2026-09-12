@@ -73,7 +73,7 @@ const Example = () => {
           <ApprovalCardTitle>Ready to implement?</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent>
-          <Plan>
+          <Plan status="pending">
             <PlanHeader>
               <PlanTitle>Add CSV export to orders</PlanTitle>
             </PlanHeader>

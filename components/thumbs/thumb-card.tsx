@@ -47,7 +47,7 @@ export const ThumbCard = (props: ThumbCardProps) => {
       <CardContent
         aria-hidden="true"
         className={cn(
-          "h-40 w-full",
+          "min-h-40 w-full flex-1",
           "flex items-center justify-center",
           "px-10 py-4",
           "bg-card",

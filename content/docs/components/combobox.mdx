@@ -88,7 +88,9 @@ const { collection, filter } = useListCollection({
 
 <Combobox
   collection={collection}
-  onInputValueChange={({ inputValue }) => filter(inputValue)}
+  onInputValueChange={({ inputValue, reason }) =>
+    filter(reason === "item-select" ? "" : inputValue)
+  }
 >
   <ComboboxInput placeholder="Select an option" />
   <ComboboxContent>
@@ -103,9 +105,13 @@ const { collection, filter } = useListCollection({
 </Combobox>
 ```
 
+When an item is selected, Ark UI reports `reason: "item-select"` to
+`onInputValueChange`. Reset the collection filter for that reason so the input
+keeps the selected label while reopening the list shows every item.
+
 ## Controlled
 
-Control the selected value with `inputValue` and `onValueChange` props.
+Control the selected value with `value` and `onValueChange` props.
 
 <ComponentPreview componentName="combobox" fileName="example-controlled" />
 
@@ -185,6 +191,7 @@ Root component.
 | `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
 | `onInputValueChange` | `(details: InputValueChangeDetails) => void` | - |
 | `multiple` | `boolean` | `false` |
+| `selectionBehavior` | `"clear" \| "replace" \| "preserve"` | `"replace"` |
 | `disabled` | `boolean` | - |
 | `openOnClick` | `boolean` | `true` |
 | `alwaysSubmitOnEnter` | `boolean` | - |

@@ -70,19 +70,50 @@ npx shadcn@latest add @shark/swap
 ## Usage
 
 ```tsx
-import { 
-  Swap, 
-  SwapIndicator
-} from "@/registry/react/components/swap";
+import { MoonIcon, SunIcon } from "lucide-react";
+import * as React from "react";
+import { Button } from "@/registry/react/components/button";
+import { Swap } from "@/registry/react/components/swap";
 ```
 
 ```tsx
-<Swap>
+const Example = () => {
+  const [swap, setSwap] = React.useState(false);
+
+  return (
+    <Button
+      aria-label="Toggle dark mode"
+      onClick={() => setSwap((value) => !value)}
+      size="icon-lg"
+      variant="outline"
+    >
+      <Swap
+        off={<SunIcon aria-hidden="true" className="size-4" />}
+        on={<MoonIcon aria-hidden="true" className="size-4" />}
+        swap={swap}
+      />
+    </Button>
+  );
+};
+```
+
+`Swap` is controlled. Keep the state and interaction in the surrounding control,
+such as a `Button`, `Switch`, or `Toggle`.
+
+### Advanced composition
+
+Use `SwapIndicator` when you need to control each indicator directly instead of
+passing `on` and `off`.
+
+```tsx
+import { Swap, SwapIndicator } from "@/registry/react/components/swap";
+
+<Swap swap={swap}>
   <SwapIndicator type="on">
-    <MoonIcon />
+    <MoonIcon aria-hidden="true" className="size-4" />
   </SwapIndicator>
   <SwapIndicator type="off">
-    <SunIcon />
+    <SunIcon aria-hidden="true" className="size-4" />
   </SwapIndicator>
 </Swap>
 ```
@@ -109,6 +140,58 @@ import {
 
 <ComponentPreview componentName="swap" fileName="example-blur" />
 
+### Advanced composition
+
+<ComponentPreview componentName="swap" fileName="example-composition" />
+
+## Custom animations
+
+`variant` covers the built-in transitions. For a one-off animation, define the
+keyframes in your stylesheet and target each indicator through its `data-state`.
+
+```css
+@theme inline {
+  --animate-swap-slide-in: swap-slide-in 180ms ease-out;
+  --animate-swap-slide-out: swap-slide-out 140ms ease-in;
+
+  @keyframes swap-slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.25rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes swap-slide-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-0.25rem);
+    }
+  }
+}
+```
+
+```tsx
+<Swap
+  className="[&>span]:motion-reduce:animate-none [&>span]:data-[state=open]:animate-swap-slide-in [&>span]:data-[state=closed]:animate-swap-slide-out"
+  off={<SunIcon aria-hidden="true" className="size-4" />}
+  on={<MoonIcon aria-hidden="true" className="size-4" />}
+  swap={swap}
+/>
+```
+
+The root receives the classes. Its direct `SwapIndicator` children expose
+`data-state="open"` and `data-state="closed"`; animate both states so the
+outgoing icon has an exit transition. Extract the class string into a local
+wrapper when the animation is reused.
+
 ## API Reference
 
 ### Swap
@@ -116,11 +199,16 @@ import {
 | Prop | Type | Default |
 | --- | --- | --- |
 | `variant` | `"fade" \| "scale" \| "flip" \| "rotate" \| "blur"` | `"fade"` |
-| `swap` | `boolean` | `-` |
+| `swap` | `boolean` | `false` |
+| `on` | `ReactNode` | required with `off` |
+| `off` | `ReactNode` | required with `on` |
+| `children` | `ReactNode` | required when not using `on` and `off` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `-` |
+
+Use either `on` and `off` or `children`; these APIs cannot be combined.
 
 ### SwapIndicator
 

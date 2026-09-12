@@ -98,7 +98,7 @@ export const ToastItem = (props: ToastItemProps) => {
         "text-card-foreground text-sm",
         "rounded-lg border shadow-lg/5",
         "scale-(--scale) opacity-(--opacity)",
-        "transition-all duration-250 will-change-[translate,opacity,scale]",
+        "transition-[translate,scale,opacity] duration-250 will-change-[translate,opacity,scale]",
         "ease-[cubic-bezier(0.21,1.02,0.73,1)]",
         "data-[state=closed]:transition-[translate,scale,opacity]",
         "data-[state=closed]:duration-[300ms,300ms,150ms]",

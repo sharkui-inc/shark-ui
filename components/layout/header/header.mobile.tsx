@@ -38,13 +38,13 @@ export const MobileNav = (props: MobileNavProps) => {
           <div className="relative size-4">
             <span
               className={cn(
-                "absolute inset-s-0 block h-0.5 w-4 bg-foreground transition-all duration-100",
+                "absolute inset-s-0 block h-0.5 w-4 bg-foreground transition-[top,transform] duration-100",
                 "top-1 group-data-[state=open]:top-[0.4rem] group-data-[state=open]:-rotate-45"
               )}
             />
             <span
               className={cn(
-                "absolute inset-s-0 block h-0.5 w-4 bg-foreground transition-all duration-100",
+                "absolute inset-s-0 block h-0.5 w-4 bg-foreground transition-[top,transform] duration-100",
                 "top-2.5 group-data-[state=open]:top-[0.4rem] group-data-[state=open]:rotate-45"
               )}
             />
