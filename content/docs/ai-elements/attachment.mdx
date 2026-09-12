@@ -3,6 +3,8 @@ title: Attachment
 description: Display uploaded files and images with status and actions.
 ---
 
+import manifest from "@/registry/manifest/attachment";
+
 <ComponentPreview componentName="attachment" />
 
 ## Installation
@@ -30,9 +32,7 @@ npx shadcn@latest add @shark/attachment
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

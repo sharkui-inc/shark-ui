@@ -44,7 +44,7 @@ export const ModeSwitcher = () => {
         </Button>
       </TooltipTrigger>
 
-      <TooltipContent className="flex items-center gap-2 pe-2">
+      <TooltipContent>
         Toggle mode <Kbd>D</Kbd>
       </TooltipContent>
     </Tooltip>

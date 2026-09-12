@@ -47,7 +47,7 @@ export const MessageScrollerViewport = (
         "data-overflow-y:not-data-at-bottom:mask-b-from-[calc(100%-var(--fade-size))]",
         "data-overflow-x:not-data-at-left:mask-l-from-[calc(100%-var(--fade-size))]",
         "data-overflow-x:not-data-at-right:mask-r-from-[calc(100%-var(--fade-size))]",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="message-scroller-viewport"
@@ -102,8 +102,9 @@ export const MessageScrollerButton = (props: MessageScrollerButtonProps) => {
     ...rest
   } = props;
   const scrollArea = useScrollArea();
-  const isActive =
-    direction === "end" ? !scrollArea.isAtBottom : !scrollArea.isAtTop;
+  const isAtEdge =
+    direction === "end" ? scrollArea.isAtBottom : scrollArea.isAtTop;
+  const isActive = scrollArea.hasOverflowY && !isAtEdge;
 
   let ariaLabel: string | undefined;
   if (!children) {

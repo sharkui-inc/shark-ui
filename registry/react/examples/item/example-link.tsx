@@ -33,6 +33,16 @@ const Example = () => (
         <ArrowUpRight />
       </a>
     </Item>
+    <Item asChild variant="outline">
+      <button className="w-full text-start" type="button">
+        <ItemContent>
+          <ItemTitle>Start a conversation</ItemTitle>
+          <ItemDescription>
+            Opens the composer without leaving this page.
+          </ItemDescription>
+        </ItemContent>
+      </button>
+    </Item>
   </div>
 );
 

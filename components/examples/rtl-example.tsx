@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { toast } from "@/components/examples/example-toast";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -85,9 +86,9 @@ export const RTLExample = () => {
           }
           value={selectedLocale}
         >
-          {Object.entries(translations).map(([lang, t]) => (
+          {Object.entries(translations).map(([lang, locale]) => (
             <NativeSelectOption key={lang} value={lang}>
-              {t?.label}
+              {locale.label}
             </NativeSelectOption>
           ))}
         </NativeSelect>
@@ -99,11 +100,25 @@ export const RTLExample = () => {
             <CardTitle>{t.values.title}</CardTitle>
             <CardDescription>{t.values.description}</CardDescription>
             <CardAction>
-              <Button variant="link">{t.values.signUp}</Button>
+              <Button
+                onClick={() => toast.info({ title: t.values.signUp })}
+                variant="link"
+              >
+                {t.values.signUp}
+              </Button>
             </CardAction>
           </CardHeader>
           <CardContent>
-            <form>
+            <form
+              id="rtl-login"
+              onSubmit={(event) => {
+                event.preventDefault();
+                toast.success({
+                  description: t.values.title,
+                  title: t.values.login,
+                });
+              }}
+            >
               <FieldGroup>
                 <Field>
                   <FieldLabel>{t.values.email}</FieldLabel>
@@ -129,10 +144,18 @@ export const RTLExample = () => {
             </form>
           </CardContent>
           <CardFooter className="flex-col gap-2">
-            <Button className="w-full" type="submit">
+            <Button className="w-full" form="rtl-login" type="submit">
               {t.values.login}
             </Button>
-            <Button className="w-full" variant="outline">
+            <Button
+              className="w-full"
+              onClick={() =>
+                toast.success({
+                  title: t.values.loginWithGoogle,
+                })
+              }
+              variant="outline"
+            >
               {t.values.loginWithGoogle}
             </Button>
           </CardFooter>

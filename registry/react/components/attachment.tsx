@@ -18,7 +18,7 @@ export const attachmentVariants = tv({
     "flex shrink-0 flex-nowrap",
     "px-2.5 has-[>[data-variant=image]]:px-0",
     "bg-card text-card-foreground",
-    "rounded-xl border border-input",
+    "rounded-xl border border-input shadow-xs/5",
     "transition-colors",
     "has-[>a,>button]:hover:bg-muted/50",
     "data-[state=idle]:border-dashed",
@@ -82,7 +82,7 @@ export const attachmentMediaVariants = tv({
     "overflow-hidden",
     "group-data-[orientation=vertical]/attachment:w-full",
     "group-data-[size=lg]/attachment:w-12 group-data-[size=sm]/attachment:w-8 group-data-[size=xs]/attachment:w-7",
-    "group-data-[orientation=vertical]/attachment:**:data-[slot=spinner]:size-6!",
+    "group-data-[orientation=vertical]/attachment:**:data-[slot=spinner]:size-6",
     "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
     "group-data-[orientation=vertical]/attachment:[&_svg:not([class*='size-'])]:size-6",
     "group-data-[size=lg]/attachment:[&_svg:not([class*='size-'])]:size-5",
@@ -102,6 +102,7 @@ export const attachmentMediaVariants = tv({
       icon: "",
       image: [
         "rounded-[inherit]",
+        "after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten",
         "[&>img]:aspect-square [&>img]:size-full [&>img]:object-cover",
       ],
     },
@@ -269,11 +270,12 @@ export const AttachmentGroup = (
     <ScrollArea
       className={cn("h-auto py-1", className)}
       orientation="horizontal"
+      scrollFade
     >
       <ark.div
         className={cn(
           "flex h-14 w-max min-w-full gap-3",
-          "*:data-[slot=attachment]:h-full! *:data-[slot=attachment]:flex-none",
+          "*:data-[slot=attachment]:h-full *:data-[slot=attachment]:flex-none",
           "[&>[data-slot=attachment]:not(:has([data-slot=attachment-content]))]:w-14"
         )}
         data-slot="attachment-group"

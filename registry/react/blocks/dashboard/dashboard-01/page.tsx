@@ -25,7 +25,7 @@ const DashboardPage = () => (
             Monday, June 24
           </p>
         </div>
-        <Button className="hidden sm:inline-flex" variant="outline">
+        <Button variant="outline">
           <CalendarDaysIcon aria-hidden="true" className="size-4" />
           Last 30 days
         </Button>

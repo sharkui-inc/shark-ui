@@ -46,7 +46,7 @@ import {
 
 Size and framing use CSS variables on the root (for example `[--qr-code-size:…]`); add `QrCodeOverlay` for a centered logo; use `QrCodeDownload` when you need a file download trigger.
 
-Error correction and pixel shape are controlled via Ark `QrCode.Root` props—see component MDX.
+Error correction and pixel shape are controlled via Ark `QrCode.Root` props: see component MDX.
 
 ## Common pitfalls
 

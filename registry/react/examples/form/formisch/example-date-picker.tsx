@@ -118,7 +118,7 @@ const Example = () => {
           </FieldGroup>
         </CardContent>
         <CardFooter>
-          <Button onClick={() => reset(form)} type="button" variant="outline">
+          <Button onClick={() => reset(form)} variant="outline">
             Reset
           </Button>
           <Button type="submit">Save</Button>

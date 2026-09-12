@@ -64,7 +64,7 @@ export const FloatingPanelContent = (props: FloatingPanelContentProps) => {
             "rounded-2xl border shadow-lg/5",
             "transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform",
             "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
-            "motion-reduce:animate-none! motion-reduce:transition-none!",
+            "motion-reduce:animate-none motion-reduce:transition-none",
             className
           )}
           data-slot="floating-panel-content"
@@ -92,12 +92,17 @@ export const FloatingPanelContent = (props: FloatingPanelContentProps) => {
 
 export const FloatingPanelDragTrigger = (
   props: React.ComponentProps<typeof ArkFloatingPanel.DragTrigger>
-) => (
-  <ArkFloatingPanel.DragTrigger
-    data-slot="floating-panel-drag-trigger"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkFloatingPanel.DragTrigger
+      className={cn("cursor-grab has-data-dragging:cursor-grabbing", className)}
+      data-slot="floating-panel-drag-trigger"
+      {...rest}
+    />
+  );
+};
 
 export const FloatingPanelHeader = (
   props: React.ComponentProps<typeof ArkFloatingPanel.Header>
@@ -272,7 +277,7 @@ export const FloatingPanelFooter = (
     <ark.div
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        "rounded-b-[calc(var(--radius-2xl)-1px)]",
+        "rounded-b-2xl",
         "px-(--space) py-4",
         "bg-muted/48",
         "border-t",

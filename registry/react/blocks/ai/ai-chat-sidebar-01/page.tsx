@@ -28,32 +28,16 @@ const SidebarDemo = () => {
     "chat"
   );
 
-  const handleConversationSelect = React.useCallback((id: string) => {
-    setActiveConversationId(id);
-  }, []);
-
-  const handleNewChat = React.useCallback(() => {
-    setActiveConversationId(null);
-  }, []);
-
-  const handleProjectsSelect = React.useCallback(() => {
-    setActiveView("projects");
-  }, []);
-
-  const handleViewChange = React.useCallback((view: "chat" | "projects") => {
-    setActiveView(view);
-  }, []);
-
   return (
     <SidebarProvider className="min-h-svh">
       <ChatSidebar
         activeConversationId={activeConversationId}
         activeView={activeView}
         conversations={DEMO_CONVERSATIONS}
-        onConversationSelect={handleConversationSelect}
-        onNewChat={handleNewChat}
-        onProjectsSelect={handleProjectsSelect}
-        onViewChange={handleViewChange}
+        onConversationSelect={setActiveConversationId}
+        onNewChat={() => setActiveConversationId(null)}
+        onProjectsSelect={() => setActiveView("projects")}
+        onViewChange={setActiveView}
       />
       <SidebarInset className="hidden lg:block" />
     </SidebarProvider>

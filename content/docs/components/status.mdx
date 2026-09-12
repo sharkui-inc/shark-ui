@@ -3,6 +3,8 @@ title: Status
 description: Color-coded status for process or state.
 ---
 
+import manifest from "@/registry/manifest/status";
+
 <ComponentPreview componentName="status" />
 
 ## Installation
@@ -24,12 +26,10 @@ npx shadcn@latest add @shark/status
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css

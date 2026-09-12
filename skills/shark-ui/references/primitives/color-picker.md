@@ -34,7 +34,7 @@ import {
 
 ## Minimal pattern
 
-Follow the **anatomy in component MDX**—Color Picker composes many optional parts (area, sliders, swatch picker, inputs). A typical flow wraps a `ColorPickerTrigger` and portals `ColorPickerContent` with channel controls.
+Follow the **anatomy in component MDX**: Color Picker composes many optional parts (area, sliders, swatch picker, inputs). A typical flow wraps a `ColorPickerTrigger` and portals `ColorPickerContent` with channel controls.
 
 ```tsx
 <ColorPicker>
@@ -47,12 +47,12 @@ Follow the **anatomy in component MDX**—Color Picker composes many optional pa
 
 ### Key patterns
 
-Use **controlled** `value` / `onValueChange` when syncing to forms. Combine with `Field` for validation UX (`example-with-field`). Swatch and slider variants have dedicated examples—copy the closest registry example before inventing markup.
+Use **controlled** `value` / `onValueChange` when syncing to forms. Combine with `Field` for validation UX (`example-with-field`). Swatch and slider variants have dedicated examples: copy the closest registry example before inventing markup.
 
 ## Common pitfalls
 
-- Importing only the root without content parts—popover surface must include real controls.
-- Ignoring color format (hex vs hsla)—align inputs with the format you store in state.
+- Importing only the root without content parts: popover surface must include real controls.
+- Ignoring color format (hex vs hsla): align inputs with the format you store in state.
 - Missing `lucide-react` when examples use icons (manual deps include it).
 
 ## Registry example files

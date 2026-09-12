@@ -13,10 +13,10 @@ Visit http://shark.vini.one/docs to view the documentation.
 
 ## Why shark-ui
 
-- **Familiar** — Same look and DX as shadcn/ui: CLI, registry, copy-paste.
-- **Ark UI** — Accessibility and behavior from Ark UI (WAI-ARIA, keyboard, focus).
-- **Own the code** — Components live in your repo; customize freely.
-- **Tailwind** — Styled with Tailwind CSS and `tailwind-variants`.
+- **Familiar**: Same look and DX as shadcn/ui: CLI, registry, copy-paste.
+- **Ark UI**: Accessibility and behavior from Ark UI (WAI-ARIA, keyboard, focus).
+- **Own the code**: Components live in your repo; customize freely.
+- **Tailwind**: Styled with Tailwind CSS and `tailwind-variants`.
 
 ## Acknowledgments
 

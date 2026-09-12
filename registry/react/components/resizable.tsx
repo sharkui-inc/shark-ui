@@ -47,6 +47,7 @@ export const ResizableResizeTrigger = (props: ResizableResizeTriggerProps) => {
       className={cn(
         "relative bg-border",
         "flex w-px items-center justify-center",
+        "cursor-col-resize data-[orientation=vertical]:cursor-row-resize",
         "after:-translate-x-1/2 data-[orientation=vertical]:after:-translate-y-1/2",
         "after:absolute after:inset-s-1/2 after:inset-y-0 after:w-1",
         "focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1",

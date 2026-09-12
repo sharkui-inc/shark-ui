@@ -24,11 +24,11 @@ npx shadcn@latest add @shark/shimmer
 <TabsContent value="manual">
 
 <Steps>
-<Step>Copy the following into `shimmer.css`</Step>
+<Step>Import the following rules into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 
-```css title="shimmer.css" showLineNumbers
+```css showLineNumbers
 @property --shimmer-angle {
   syntax: "<angle>";
   inherits: true;
@@ -142,12 +142,6 @@ npx shadcn@latest add @shark/shimmer
 ```
 
 </CodeCollapsibleWrapper>
-
-<Step>Import the following CSS rules into your `globals.css`</Step>
-
-```css title="globals.css"
-@import "./shimmer.css";
-```
 
 <Step>Update the import paths to match your project setup.</Step>
 

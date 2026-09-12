@@ -77,8 +77,8 @@ export const MarqueeContent = (
           "delay-(--marquee-delay)",
           "data-[orientation=vertical]:animate-marquee-y data-[orientation=vertical]:flex-col",
           "data-[orientation=horizontal]:animate-marquee-x data-[orientation=horizontal]:flex-row",
-          "data-reverse:direction-[reverse]!",
-          "group-data-paused/marquee:paused!",
+          "data-reverse:direction-[reverse]",
+          "group-data-paused/marquee:paused",
           className
         )}
         data-slot="marquee-content"

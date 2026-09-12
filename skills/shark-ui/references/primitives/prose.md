@@ -17,7 +17,7 @@ Manual deps from docs:
 npm install @ark-ui/react
 ```
 
-Follow the MDX **CSS variables / selectors** section when wiring manual install—`Prose` expects the companion `.prose` rules in your stylesheet.
+Follow the MDX **CSS variables / selectors** section when wiring manual install: `Prose` expects the companion `.prose` rules in your stylesheet.
 
 ## Canonical imports
 
@@ -40,9 +40,9 @@ Use `not-prose` islands (see `example-not-prose`) when embedding cards or compon
 
 ## Common pitfalls
 
-- Installing only the component without copying the **CSS rules** from the manual tab—styles will be incomplete.
+- Installing only the component without copying the **CSS rules** from the manual tab: styles will be incomplete.
 - Nesting interactive widgets without `not-prose` where typography overrides break layout.
-- Expecting automatic sanitization of remote HTML—sanitize upstream if content is untrusted.
+- Expecting automatic sanitization of remote HTML: sanitize upstream if content is untrusted.
 
 ## Registry example files
 

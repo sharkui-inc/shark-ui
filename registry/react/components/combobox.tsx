@@ -22,10 +22,13 @@ import {
   InputGroupInput,
 } from "@/registry/react/components/input-group";
 import {
+  menuEmptyVariants,
+  menuGroupLabelVariants,
   menuItemControlVariants,
+  menuItemIconVariants,
+  menuItemIndicatorVariants,
   menuListVariants,
 } from "@/registry/react/components/menu";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const useCombobox = useArkComboboxContext;
 
@@ -44,9 +47,6 @@ export const Combobox: ArkCombobox.RootComponent = (props) => {
       data-slot="combobox"
       lazyMount={lazyMount}
       openOnClick={openOnClick}
-      scrollToIndexFn={({ getElement }) =>
-        getElement()?.scrollIntoView({ block: "nearest" })
-      }
       unmountOnExit={unmountOnExit}
       {...rest}
     />
@@ -174,9 +174,8 @@ export const ComboboxPositioner = (
 
 export const comboboxContentVariants = tv({
   base: [
-    "relative z-50",
+    "relative z-[calc(50+var(--layer-index,0))]",
     "origin-(--transform-origin)",
-    "flex min-h-0 flex-col overflow-hidden",
     "bg-popover",
     "text-popover-foreground",
     "rounded-xl border shadow-lg/5",
@@ -188,7 +187,14 @@ export const comboboxContentVariants = tv({
     "data-[placement=bottom]:slide-in-from-top-2",
     "data-[placement=right]:slide-in-from-start-2",
     "data-[placement=left]:slide-in-from-end-2",
-    "motion-reduce:animate-none!",
+    "has-data-[state=closed]:animate-out has-data-[state=open]:animate-in",
+    "has-data-[state=closed]:fade-out-0 has-data-[state=open]:fade-in-0",
+    "has-data-[state=open]:zoom-in-[98%] has-data-[state=closed]:zoom-out-[98%]",
+    "has-data-[placement=top]:slide-in-from-bottom-2",
+    "has-data-[placement=bottom]:slide-in-from-top-2",
+    "has-data-[placement=right]:slide-in-from-start-2",
+    "has-data-[placement=left]:slide-in-from-end-2",
+    "motion-reduce:animate-none",
   ],
 });
 
@@ -203,17 +209,15 @@ export const ComboboxContent = (
         <ArkCombobox.Content
           className={cn(
             comboboxContentVariants(),
-            "max-h-96 min-w-48 p-0",
+            "max-h-96 min-w-48",
+            "overflow-y-auto",
+            menuListVariants(),
             className
           )}
           data-slot="combobox-content"
           {...rest}
         >
-          <ScrollArea className="min-h-0 flex-1" scrollFade>
-            <div className={menuListVariants()} data-slot="combobox-scroll">
-              {children}
-            </div>
-          </ScrollArea>
+          {children}
         </ArkCombobox.Content>
       </ComboboxPositioner>
     </Portal>
@@ -247,10 +251,7 @@ export const ComboboxGroupLabel = (
 
   return (
     <ArkCombobox.ItemGroupLabel
-      className={cn(
-        "px-2 py-1.5 font-medium text-muted-foreground text-xs",
-        className
-      )}
+      className={cn(menuGroupLabelVariants(), className)}
       data-slot="combobox-group-label"
       {...rest}
     />
@@ -261,35 +262,33 @@ export const comboboxItemVariants = tv({
   base: [
     menuItemControlVariants(),
     inputItemVariants(),
+    menuItemIconVariants(),
     "select-none",
     "cursor-default",
     "outline-hidden",
     "data-[=checked]:bg-accent data-[state=checked]:text-accent-foreground",
     "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
-    "[&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    "[&_svg:not([class*='text-'])]:text-muted-foreground",
   ],
-  defaultVariants: {
-    showIndicator: true,
-  },
-  variants: {
-    showIndicator: {
-      false: "pe-2",
-      true: "pe-8",
-    },
-  },
 });
 
 interface ComboboxItemProps
-  extends React.ComponentProps<typeof ArkCombobox.Item>,
-    VariantProps<typeof comboboxItemVariants> {}
+  extends React.ComponentProps<typeof ArkCombobox.Item> {
+  /**
+   * Whether to show the selected item check.
+   *
+   * @default true
+   */
+  showIndicator?: boolean;
+}
 
 export const ComboboxItem = (props: ComboboxItemProps) => {
   const { showIndicator = true, className, children, ...rest } = props;
 
   return (
     <ArkCombobox.Item
-      className={cn(comboboxItemVariants({ showIndicator }), className)}
+      className={cn(comboboxItemVariants(), showIndicator && "pe-8", className)}
       data-slot="combobox-item"
       persistFocus
       {...rest}
@@ -297,11 +296,12 @@ export const ComboboxItem = (props: ComboboxItemProps) => {
       {children}
 
       {showIndicator ? (
-        <span className="absolute inset-e-2 flex size-3.5 items-center justify-center">
-          <ArkCombobox.ItemIndicator data-slot="combobox-item-indicator">
-            <CheckIcon />
-          </ArkCombobox.ItemIndicator>
-        </span>
+        <ArkCombobox.ItemIndicator
+          className={menuItemIndicatorVariants()}
+          data-slot="combobox-item-indicator"
+        >
+          <CheckIcon />
+        </ArkCombobox.ItemIndicator>
       ) : null}
     </ArkCombobox.Item>
   );
@@ -314,11 +314,7 @@ export const ComboboxEmpty = (
 
   return (
     <ArkCombobox.Empty
-      className={cn(
-        "px-2 py-1.5",
-        "text-center text-muted-foreground text-sm",
-        className
-      )}
+      className={cn(menuEmptyVariants(), className)}
       data-slot="combobox-empty"
       {...rest}
     >

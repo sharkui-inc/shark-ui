@@ -43,9 +43,9 @@ import {
 
 ## Common pitfalls
 
-- Passing invalid `value` ranges—keep within 0–100 unless docs define another scale.
+- Passing invalid `value` ranges: keep within 0–100 unless docs define another scale.
 - Omitting `CircularProgressTrack` and expecting a ring to render with no children.
-- Treating it like `Progress` (linear); APIs differ—use the circular-specific parts.
+- Treating it like `Progress` (linear); APIs differ: use the circular-specific parts.
 
 ## Registry example files
 

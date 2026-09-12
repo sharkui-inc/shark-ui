@@ -4,6 +4,8 @@ description: A button or an element styled as a button.
 seoDescription: "Accessible React buttons with variants, sizes, loading, and composition."
 ---
 
+import manifest from "@/registry/manifest/button";
+
 <ComponentPreview componentName="button" />
 
 ## Installation
@@ -29,7 +31,7 @@ npx shadcn@latest add @shark/button
 
 <Step>This component depends on [Spinner](/docs/components/spinner). Install it first if you haven't already.</Step>
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
@@ -70,9 +72,7 @@ npx shadcn@latest add @shark/button
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

@@ -4,6 +4,7 @@
     "(root)",
     "components",
     "ai-elements",
+    "helpers",
     "utilities",
     "forms",
     "migration",

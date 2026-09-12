@@ -2,9 +2,7 @@
 
 import { useFilter, useListCollection } from "@ark-ui/react";
 import { BrainIcon, PaperclipIcon, SparklesIcon } from "lucide-react";
-import type React from "react";
-import { useCallback, useState } from "react";
-import { cn } from "@/lib/utils";
+import { useState } from "react";
 import {
   Announcement,
   AnnouncementTitle,
@@ -44,6 +42,7 @@ import {
   SpeechInputTrigger,
   SpeechInputWaveform,
 } from "@/registry/react/components/speech-input";
+import { Toggle } from "@/registry/react/components/toggle";
 
 interface ModelOption {
   group: string;
@@ -82,29 +81,6 @@ export const ChatComposer = ({
     initialItems: [...modelOptions],
   });
 
-  const handleStop = useCallback(() => setStatus("ready"), []);
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLTextAreaElement>) =>
-      setDraft(event.target.value),
-    []
-  );
-  const handleSubmit = useCallback(
-    ({ text }: { text: string }) => {
-      onSend(text);
-      setDraft("");
-      setStatus("streaming");
-      window.setTimeout(() => setStatus("ready"), 900);
-    },
-    [onSend]
-  );
-  const handleTranscription = useCallback((text: string) => {
-    setDraft((current) => (current ? `${current} ${text}` : text));
-  }, []);
-
-  const handleThinkModeClick = useCallback(() => {
-    onThinkModeChange(!thinkMode);
-  }, [onThinkModeChange, thinkMode]);
-
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-3">
       <div className="w-full rounded-2xl bg-muted/50 p-0.5">
@@ -124,14 +100,19 @@ export const ChatComposer = ({
         <FileUpload accept="image/*,.pdf,.txt" className="gap-0" maxFiles={4}>
           <PromptInput
             className="rounded-[15px] border-0 bg-card shadow-xs"
-            onStop={handleStop}
-            onSubmit={handleSubmit}
+            onStop={() => setStatus("ready")}
+            onSubmit={({ text }) => {
+              onSend(text);
+              setDraft("");
+              setStatus("streaming");
+              window.setTimeout(() => setStatus("ready"), 900);
+            }}
             status={status}
           >
             <PromptInputTextarea
               aria-label="Message"
               maxLength={2000}
-              onChange={handleChange}
+              onChange={(event) => setDraft(event.target.value)}
               placeholder="How can I help you today?"
               rows={3}
               value={draft}
@@ -169,19 +150,28 @@ export const ChatComposer = ({
                     </ModelSelectorList>
                   </ModelSelectorContent>
                 </ModelSelector>
-                <PromptInputButton
-                  aria-label="Think mode"
-                  aria-pressed={thinkMode}
-                  className={cn(
-                    thinkMode && "bg-accent text-accent-foreground"
-                  )}
-                  onClick={handleThinkModeClick}
-                  size="xs"
+                <Toggle
+                  asChild
+                  onPressedChange={onThinkModeChange}
+                  pressed={thinkMode}
+                  size="sm"
                 >
-                  <BrainIcon aria-hidden="true" />
-                  Think
-                </PromptInputButton>
-                <SpeechInput onTranscriptionChange={handleTranscription}>
+                  <PromptInputButton
+                    aria-label="Think mode"
+                    className="data-[state=on]:bg-accent data-[state=on]:text-accent-foreground"
+                    size="xs"
+                  >
+                    <BrainIcon aria-hidden="true" />
+                    Think
+                  </PromptInputButton>
+                </Toggle>
+                <SpeechInput
+                  onTranscriptionChange={(text) => {
+                    setDraft((current) =>
+                      current ? `${current} ${text}` : text
+                    );
+                  }}
+                >
                   <SpeechInputTrigger />
                   <SpeechInputContent>
                     <SpeechInputWaveform />

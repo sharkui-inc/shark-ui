@@ -2,7 +2,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const StateThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="flex flex-col items-center gap-2 rounded-lg border border-input border-dashed bg-muted p-3">
+    <div className="flex flex-col items-center gap-2 rounded-lg border border-input border-dashed bg-muted p-3 shadow-md/5">
       <div className="size-6 rounded-md bg-muted-foreground/16" />
       <div className="h-2 w-1/2 rounded-full bg-muted-foreground/16" />
       <div className="h-1.5 w-3/4 rounded-full bg-muted-foreground/16" />

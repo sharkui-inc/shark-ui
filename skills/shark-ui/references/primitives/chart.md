@@ -35,7 +35,7 @@ import { Bar, BarChart } from "recharts"
 <ChartContainer config={chartConfig}>
   <BarChart accessibilityLayer={false} data={data}>
     <Bar dataKey="value" />
-    <ChartTooltip content={(props) => <ChartTooltipContent {...props} />} />
+    <ChartTooltip content={<ChartTooltipContent />} />
   </BarChart>
 </ChartContainer>
 ```
@@ -46,7 +46,7 @@ Define `chartConfig` for labels/colors. Use `ChartLegend` / `ChartLegendContent`
 
 ## Common pitfalls
 
-- Stubbing `active`, `payload`, or coordinates on `ChartTooltipContent`—pass **Recharts’ props through** via `content={(props) => <ChartTooltipContent {...props} />}`.
+- Stubbing `active`, `payload`, or coordinates on `ChartTooltipContent`: pass Recharts props through `content={<ChartTooltipContent />}`.
 - Omitting `ChartTooltip` wrapper entirely and losing shared styling/behavior.
 - For static or non-interactive previews, set `accessibilityLayer={false}` on the chart root when appropriate to avoid stray `tabIndex` from Recharts.
 - Installing only `@ark-ui/react`; charts require **recharts** per manual install.

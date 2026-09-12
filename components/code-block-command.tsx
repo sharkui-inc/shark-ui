@@ -6,6 +6,7 @@ import {
   formatShadcnCommandDisplay,
   packageManagerCommandVariants,
 } from "@/lib/shadcn-command";
+import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import {
   Tabs,
@@ -13,41 +14,50 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/registry/react/components/tabs";
-import { type PackageManager, useConfig } from "@/store/config";
+import {
+  type PackageManager,
+  useConfig,
+  useUpdateConfig,
+} from "@/store/config";
 import { CopyButton } from "./copy-button";
 
-interface CodeBlockCommandProps extends React.ComponentProps<"pre"> {
-  __bun__?: string;
+interface CodeBlockCommandProps extends React.ComponentProps<"figure"> {
   __npm__?: string;
-  __pnpm__?: string;
-  __yarn__?: string;
 }
 
 export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
-  const { __npm__, __yarn__, __pnpm__, __bun__ } = props;
+  const { __npm__, className, ...rest } = props;
 
-  const [config, setConfig] = useConfig();
+  const config = useConfig();
+  const updateConfig = useUpdateConfig();
 
   const packageManager = config.packageManager || "pnpm";
 
-  const tabs = React.useMemo(() => {
-    const variants = packageManagerCommandVariants(__npm__ ?? "");
-
-    return {
-      bun: variants?.bun ?? __bun__,
-      npm: variants?.npm ?? __npm__,
-      pnpm: variants?.pnpm ?? __pnpm__,
-      yarn: variants?.yarn ?? __yarn__,
-    };
-  }, [__npm__, __pnpm__, __yarn__, __bun__]);
+  const tabs = React.useMemo(
+    () =>
+      packageManagerCommandVariants(__npm__ ?? "") ?? {
+        bun: __npm__ ?? "",
+        npm: __npm__ ?? "",
+        pnpm: __npm__ ?? "",
+        yarn: __npm__ ?? "",
+      },
+    [__npm__]
+  );
 
   return (
-    <div>
+    <figure
+      className={cn(
+        "relative mt-6 w-full min-w-0 overflow-hidden rounded-2xl border bg-code text-code-foreground outline-none",
+        "in-data-[tab=code]:border-0",
+        className
+      )}
+      data-slot="docs-mdx-code-block"
+      {...rest}
+    >
       <Tabs
         className="gap-0"
         onValueChange={({ value }) => {
-          setConfig({
-            ...config,
+          updateConfig({
             packageManager: value as PackageManager,
           });
         }}
@@ -77,7 +87,7 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
                   className="relative font-mono text-[.8125rem] leading-none"
                   data-language="bash"
                 >
-                  {formatShadcnCommandDisplay(value ?? "")}
+                  {formatShadcnCommandDisplay(value)}
                 </code>
               </pre>
             </TabsContent>
@@ -89,6 +99,6 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
         className="absolute inset-e-1.5 top-1.5"
         value={tabs[packageManager] ?? ""}
       />
-    </div>
+    </figure>
   );
 };

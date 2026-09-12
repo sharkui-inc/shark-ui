@@ -63,7 +63,7 @@ export const AccordionTrigger = (
         "disabled:pointer-events-none disabled:opacity-64 disabled:grayscale",
         "focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
         "[&_[data-state=open]>svg]:rotate-180",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="accordion-trigger"
@@ -80,7 +80,7 @@ export const AccordionTrigger = (
             "text-muted-foreground",
             "pointer-events-none",
             "transition-transform duration-300",
-            "motion-reduce:transition-none!"
+            "motion-reduce:transition-none"
           )}
         />
       </ArkAccordion.ItemIndicator>
@@ -99,7 +99,7 @@ export const AccordionContent = (
         "overflow-hidden rounded-md text-sm",
         "data-[state=open]:animate-slide-down",
         "data-[state=closed]:animate-slide-up",
-        "motion-reduce:animate-none!",
+        "motion-reduce:animate-none",
         className
       )}
       data-slot="accordion-content"

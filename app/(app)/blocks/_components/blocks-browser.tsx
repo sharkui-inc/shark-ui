@@ -148,25 +148,13 @@ export const BlocksBrowser = ({
     visibleBlocks.find((entry) => entry.block.name === activeBlockName) ??
     visibleBlocks[0];
 
-  const handleNavigationClose = React.useCallback(
-    () => setNavigationOpen(false),
-    []
-  );
-  const handleNavigationOpenChange = React.useCallback(
-    ({ open }: { open: boolean }) => setNavigationOpen(open),
-    []
-  );
-  const getBlockHref = React.useCallback(
-    (entry: BrowserBlock) =>
-      `/blocks/${entry.block.category}/${entry.block.name}`,
-    []
-  );
   const navigationProps: CatalogNavigationProps = {
     activeBlockCategory: activeEntry?.block.category,
     activeBlockName: activeEntry?.block.name,
     blocks,
     categories,
-    getBlockHref,
+    getBlockHref: (entry) =>
+      `/blocks/${entry.block.category}/${entry.block.name}`,
   };
   const heading = activeEntry?.block.title ?? "Blocks";
 
@@ -183,7 +171,7 @@ export const BlocksBrowser = ({
         <div className="min-w-0">
           <div className="sticky top-(--header-height) z-20 flex items-center gap-3 border-b bg-background/95 px-4 py-2 backdrop-blur lg:hidden">
             <Sheet
-              onOpenChange={handleNavigationOpenChange}
+              onOpenChange={({ open }) => setNavigationOpen(open)}
               open={navigationOpen}
             >
               <SheetTrigger asChild>
@@ -198,7 +186,7 @@ export const BlocksBrowser = ({
                   <div className="flex h-full min-h-0 flex-col">
                     <CatalogNavigation
                       {...navigationProps}
-                      onNavigate={handleNavigationClose}
+                      onNavigate={() => setNavigationOpen(false)}
                     />
                   </div>
                 </SheetBody>

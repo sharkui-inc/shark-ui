@@ -14,8 +14,7 @@ import {
   PlusIcon,
   ShieldAlertIcon,
 } from "lucide-react";
-import type React from "react";
-import { useCallback, useState } from "react";
+import { Fragment, useState } from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Context,
@@ -28,6 +27,15 @@ import {
   ContextTrigger,
   ContextUsageRow,
 } from "@/registry/react/components/context";
+import { Input } from "@/registry/react/components/input";
+import {
+  Menu,
+  MenuContent,
+  MenuGroup,
+  MenuItem,
+  MenuSeparator,
+  MenuTrigger,
+} from "@/registry/react/components/menu";
 import {
   ModelSelector,
   ModelSelectorContent,
@@ -35,13 +43,8 @@ import {
   ModelSelectorList,
   ModelSelectorTrigger,
 } from "@/registry/react/components/model-selector";
-import { Input } from "@/registry/react/components/input";
-import { PopoverTrigger } from "@/registry/react/components/popover";
 import {
   PromptInput,
-  PromptInputAction,
-  PromptInputActions,
-  PromptInputActionsContent,
   PromptInputBottom,
   PromptInputButton,
   PromptInputFooter,
@@ -71,34 +74,9 @@ const PromptInputDemo = () => {
   const [actionQuery, setActionQuery] = useState("");
   const { collection } = useListCollection({ initialItems: models });
 
-  const handleStop = useCallback(() => setStatus("ready"), []);
-  const handleSubmit = useCallback(() => {
-    setValue("");
-    setStatus("streaming");
-    window.setTimeout(() => setStatus("ready"), 900);
-  }, []);
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLTextAreaElement>) =>
-      setValue(event.target.value),
-    []
-  );
-  const handleTranscription = useCallback((text: string) => {
-    setValue((current) => (current ? `${current} ${text}` : text));
-  }, []);
-  const handleModelChange = useCallback((details: { value: string[] }) => {
-    setModel(details.value[0] ?? "");
-  }, []);
-  const handleAccessChange = useCallback((details: { value: string[] }) => {
-    setAccess(details.value[0] ?? "");
-  }, []);
-  const handleEffortChange = useCallback((details: { value: string[] }) => {
-    setEffort(details.value[0] ?? "");
-  }, []);
   const normalizedActionQuery = actionQuery.trim().toLowerCase();
   const visibleActions = actionItems.filter((action) =>
-    action.label
-      .toLowerCase()
-      .includes(normalizedActionQuery)
+    action.label.toLowerCase().includes(normalizedActionQuery)
   );
   const contextActions = visibleActions.filter(
     (action) => action.group === "context"
@@ -115,71 +93,62 @@ const PromptInputDemo = () => {
     <div className="flex w-full max-w-lg flex-col gap-3">
       <PromptInput
         className="w-full"
-        onStop={handleStop}
-        onSubmit={handleSubmit}
+        onStop={() => setStatus("ready")}
+        onSubmit={() => {
+          setValue("");
+          setStatus("streaming");
+          window.setTimeout(() => setStatus("ready"), 900);
+        }}
         status={status}
       >
         <PromptInputTextarea
           aria-label="Prompt"
-          onChange={handleChange}
+          onChange={(event) => setValue(event.target.value)}
           placeholder="Do anything"
           value={value}
         />
         <PromptInputFooter>
           <PromptInputTools>
-            <PromptInputActions>
-              <PopoverTrigger asChild>
+            <Menu positioning={{ placement: "top-start" }}>
+              <MenuTrigger asChild>
                 <PromptInputButton aria-label="Add to prompt" size="icon-sm">
                   <PlusIcon aria-hidden="true" />
                 </PromptInputButton>
-              </PopoverTrigger>
-              <PromptInputActionsContent className="w-80 p-1.5">
-                <div className="flex flex-col gap-1">
-                  <Input
-                    aria-label="Search prompt actions"
-                    autoFocus
-                    className="h-8 border-0 px-2 text-sm shadow-none focus-visible:border-transparent focus-visible:ring-0"
-                    onChange={(event) => setActionQuery(event.target.value)}
-                    placeholder="Search actions..."
-                    type="search"
-                    value={actionQuery}
-                  />
-                  {actionSections.map((section, index) => (
-                    <div
-                      className={
-                        index > 0
-                          ? "flex flex-col gap-0.5 border-t pt-1.5"
-                          : "flex flex-col gap-0.5"
-                      }
-                      key={section.id}
-                    >
-                      {section.title ? (
-                        <span className="px-2 py-1 font-medium text-muted-foreground text-xs">
-                          {section.title}
-                        </span>
-                      ) : null}
+              </MenuTrigger>
+              <MenuContent className="w-80">
+                <Input
+                  aria-label="Search prompt actions"
+                  autoFocus
+                  className="h-8 border-0 px-2 text-sm shadow-none focus-visible:border-transparent focus-visible:ring-0"
+                  onChange={(event) => setActionQuery(event.target.value)}
+                  onKeyDown={(event) => event.stopPropagation()}
+                  placeholder="Search actions..."
+                  type="search"
+                  value={actionQuery}
+                />
+                {actionSections.map((section, index) => (
+                  <Fragment key={section.id}>
+                    {index > 0 ? <MenuSeparator /> : null}
+                    <MenuGroup heading={section.title}>
                       {section.actions.map((action) => (
-                        <PromptInputAction
-                          className="min-h-7 px-2 py-1"
-                          icon={action.icon}
-                          key={action.value}
-                        >
+                        <MenuItem key={action.value} value={action.value}>
+                          {action.icon}
                           {action.label}
-                        </PromptInputAction>
+                        </MenuItem>
                       ))}
-                    </div>
-                  ))}
-                  {visibleActions.length === 0 ? (
-                    <p className="px-2 py-1.5 text-muted-foreground text-xs">
-                      No matching actions.
-                    </p>
-                  ) : null}
-                </div>
-              </PromptInputActionsContent>
-            </PromptInputActions>
+                    </MenuGroup>
+                  </Fragment>
+                ))}
+                {visibleActions.length === 0 ? (
+                  <p className="px-2 py-1.5 text-muted-foreground text-xs">
+                    No matching actions.
+                  </p>
+                ) : null}
+              </MenuContent>
+            </Menu>
             <Select
               collection={accessCollection}
-              onValueChange={handleAccessChange}
+              onValueChange={(details) => setAccess(details.value[0] ?? "")}
               positioning={{ placement: "top-start" }}
               value={[access]}
             >
@@ -189,11 +158,7 @@ const PromptInputDemo = () => {
               </SelectTrigger>
               <SelectContent>
                 {accessCollection.items.map((item) => (
-                  <SelectItem
-                    className="items-start py-2"
-                    item={item}
-                    key={item.value}
-                  >
+                  <SelectItem item={item} key={item.value}>
                     <span className="flex min-w-0 flex-col gap-0.5">
                       <span>{item.label}</span>
                       <span className="text-muted-foreground text-xs">
@@ -207,7 +172,7 @@ const PromptInputDemo = () => {
           </PromptInputTools>
           <ModelSelector
             collection={collection}
-            onValueChange={handleModelChange}
+            onValueChange={(details) => setModel(details.value[0] ?? "")}
             value={[model]}
           >
             <ModelSelectorTrigger size="sm" variant="ghost" />
@@ -223,7 +188,7 @@ const PromptInputDemo = () => {
           </ModelSelector>
           <Select
             collection={effortCollection}
-            onValueChange={handleEffortChange}
+            onValueChange={(details) => setEffort(details.value[0] ?? "")}
             positioning={{ placement: "top" }}
             value={[effort]}
           >
@@ -238,7 +203,11 @@ const PromptInputDemo = () => {
               ))}
             </SelectContent>
           </Select>
-          <SpeechInput onTranscriptionChange={handleTranscription}>
+          <SpeechInput
+            onTranscriptionChange={(text) => {
+              setValue((current) => (current ? `${current} ${text}` : text));
+            }}
+          >
             <SpeechInputTrigger />
           </SpeechInput>
           <PromptInputSubmit className="ms-2" size="icon-sm" />
@@ -247,7 +216,6 @@ const PromptInputDemo = () => {
           <Button
             className="text-muted-foreground hover:text-foreground"
             size="sm"
-            type="button"
             variant="ghost"
           >
             <FolderIcon aria-hidden="true" className="size-4" />
@@ -256,7 +224,6 @@ const PromptInputDemo = () => {
           <Button
             className="text-muted-foreground hover:text-foreground"
             size="sm"
-            type="button"
             variant="ghost"
           >
             <MonitorIcon aria-hidden="true" className="size-4" />
@@ -265,7 +232,6 @@ const PromptInputDemo = () => {
           <Button
             className="text-muted-foreground hover:text-foreground"
             size="sm"
-            type="button"
             variant="ghost"
           >
             <GitBranchIcon aria-hidden="true" className="size-4" />

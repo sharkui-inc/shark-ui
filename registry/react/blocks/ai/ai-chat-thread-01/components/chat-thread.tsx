@@ -48,14 +48,12 @@ import {
 } from "@/registry/react/components/message-scroller";
 import {
   Plan,
-  PlanAction,
   PlanContent,
   PlanHeader,
   PlanItem,
   PlanItemContent,
   PlanItemDetailFile,
   PlanItemTrigger,
-  PlanTrigger,
 } from "@/registry/react/components/plan";
 import {
   Reasoning,
@@ -254,15 +252,15 @@ const MessageApprovalPlan = ({
 
 const MessagePlan = ({ tasks, title }: NonNullable<ChatMessage["plan"]>) => (
   <Plan defaultOpen>
-    <PlanHeader title={title}>
-      <PlanAction>
-        <PlanTrigger />
-      </PlanAction>
-    </PlanHeader>
+    <PlanHeader title={title} />
     <PlanContent>
       {tasks.map((task) => (
-        <PlanItem key={task.title} status={task.status}>
-          <PlanItemTrigger status={task.status} title={task.title} />
+        <PlanItem
+          collapsible={Boolean(task.file)}
+          key={task.title}
+          status={task.status}
+        >
+          <PlanItemTrigger title={task.title} />
           {task.file ? (
             <PlanItemContent>
               <PlanItemDetailFile>{task.file}</PlanItemDetailFile>

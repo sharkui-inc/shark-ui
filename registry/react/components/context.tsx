@@ -186,7 +186,6 @@ export const ContextTitle = (props: ContextTitleProps) => {
             className="text-muted-foreground hover:text-foreground"
             pill
             size="icon-xs"
-            type="button"
             variant="ghost"
           >
             <XIcon aria-hidden="true" className="size-3.5" />

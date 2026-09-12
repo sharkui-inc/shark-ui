@@ -1,41 +1,37 @@
 import {
   Plan,
-  PlanAction,
   PlanContent,
   PlanHeader,
   PlanItem,
   PlanItemContent,
   PlanItemDetailFile,
   PlanItemTrigger,
-  PlanTrigger,
+  PlanProgress,
 } from "@/registry/react/components/plan";
 
-const Example = () => (
-  <Plan className="max-w-lg" completed={1} total={3}>
-    <PlanHeader title="Add email validation">
-      <PlanAction>
-        <PlanTrigger />
-      </PlanAction>
-    </PlanHeader>
+const PlanDemo = () => (
+  <Plan className="max-w-lg">
+    <PlanHeader title="Add email validation" />
     <PlanContent>
-      <PlanItem status="completed">
-        <PlanItemTrigger status="completed" title="Read current validator" />
+      <PlanItem collapsible status="completed">
+        <PlanItemTrigger title="Read current validator" />
         <PlanItemContent>
           <PlanItemDetailFile>src/utils/helpers.ts</PlanItemDetailFile>
         </PlanItemContent>
       </PlanItem>
-      <PlanItem status="in-progress">
-        <PlanItemTrigger status="in-progress" title="Patch isValidEmail" />
+      <PlanItem collapsible status="in-progress">
+        <PlanItemTrigger title="Patch isValidEmail" />
         <PlanItemContent>
           <PlanItemDetailFile>src/utils/helpers.ts</PlanItemDetailFile>
           <PlanItemDetailFile>src/app.tsx</PlanItemDetailFile>
         </PlanItemContent>
       </PlanItem>
       <PlanItem status="pending">
-        <PlanItemTrigger status="pending" title="Run unit tests" />
+        <PlanItemTrigger title="Run unit tests" />
       </PlanItem>
     </PlanContent>
+    <PlanProgress completed={1} total={3} />
   </Plan>
 );
 
-export default Example;
+export default PlanDemo;

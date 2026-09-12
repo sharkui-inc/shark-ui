@@ -10,11 +10,9 @@ import {
 import {
   Diff,
   DiffContent,
-  DiffHeader,
   DiffLine,
   DiffStats,
 } from "@/registry/react/components/diff";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 import {
   Tabs,
   TabsContent,
@@ -23,30 +21,30 @@ import {
 } from "@/registry/react/components/tabs";
 
 const Example = () => (
-  <Tabs defaultValue="source">
-    <CodeBlock className="max-w-lg" code={UPDATED_CODE} language="tsx">
-      <CodeBlockHeader className="px-2 py-1">
-        <CodeBlockTitle className="ps-2">
+  <Tabs className="w-full max-w-lg" defaultValue="source">
+    <CodeBlock className="h-72" code={UPDATED_CODE} language="tsx">
+      <CodeBlockHeader>
+        <CodeBlockTitle>
           <CodeBlockFilename>src/profile.ts</CodeBlockFilename>
         </CodeBlockTitle>
-        <TabsList variant="underline">
-          <TabsTrigger value="source">Source</TabsTrigger>
-          <TabsTrigger value="changes">Changes</TabsTrigger>
+        <TabsList className="shrink-0" variant="underline">
+          <TabsTrigger className="grow-0" value="source">
+            Source
+          </TabsTrigger>
+          <TabsTrigger className="grow-0" value="changes">
+            Changes
+          </TabsTrigger>
         </TabsList>
         <CodeBlockActions>
+          <DiffStats added={2} removed={1} />
           <CodeBlockCopy />
         </CodeBlockActions>
       </CodeBlockHeader>
-      <TabsContent value="source">
-        <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
-          <CodeBlockContent showLineNumbers />
-        </ScrollArea>
+      <TabsContent className="flex min-h-0 flex-1 flex-col" value="source">
+        <CodeBlockContent showLineNumbers />
       </TabsContent>
-      <TabsContent value="changes">
-        <Diff className="rounded-none border-0">
-          <DiffHeader title="src/profile.ts">
-            <DiffStats added={2} removed={1} />
-          </DiffHeader>
+      <TabsContent className="flex min-h-0 flex-1 flex-col" value="changes">
+        <Diff className="min-h-0 flex-1 rounded-none border-0 shadow-none">
           <DiffContent>
             <DiffLine line={2} type="context">
               {"  return {"}

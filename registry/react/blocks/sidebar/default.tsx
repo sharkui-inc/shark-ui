@@ -174,7 +174,7 @@ const data = {
   teams: [
     {
       logo: GalleryVerticalEnd,
-      name: "Acme Inc",
+      name: "Onda Inc",
       plan: "Enterprise",
     },
     {
@@ -218,12 +218,7 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               size="lg"
             >
-              <IconTile
-                aria-hidden="true"
-                className="border-transparent bg-sidebar-primary text-sidebar-primary-foreground shadow-none"
-                size="sm"
-                variant="primary"
-              >
+              <IconTile aria-hidden="true" size="lg">
                 <activeTeam.logo className="size-4" />
               </IconTile>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -260,11 +255,7 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
             <MenuSeparator />
             <MenuGroup>
               <MenuItem className="gap-2" value="add-team">
-                <IconTile
-                  aria-hidden="true"
-                  className="rounded-md border-input bg-transparent shadow-none"
-                  size="xs"
-                >
+                <IconTile aria-hidden="true" size="xs">
                   <Plus className="size-4" />
                 </IconTile>
                 <div className="font-medium text-muted-foreground">
@@ -496,10 +487,8 @@ const AppSidebar = () => (
       <SidebarRail />
     </Sidebar>
     <SidebarInset>
-      <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-        <div className="flex items-center gap-2 px-4">
-          <SidebarTrigger className="-ms-1" />
-        </div>
+      <header className="flex h-16 shrink-0 items-center gap-2 px-4 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 motion-reduce:transition-none">
+        <SidebarTrigger className="-ms-1" />
       </header>
     </SidebarInset>
   </SidebarProvider>

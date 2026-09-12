@@ -3,6 +3,8 @@ title: Table
 description: A responsive table component.
 ---
 
+import manifest from "@/registry/manifest/table";
+
 <ComponentPreview componentName="table" />
 
 ## Installation
@@ -28,9 +30,7 @@ npx shadcn@latest add @shark/table
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

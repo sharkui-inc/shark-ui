@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/dialog#api-reference
 ---
 
+import manifest from "@/registry/manifest/dialog";
+
 <ComponentPreview componentName="dialog" />
 
 ## Installation
@@ -33,9 +35,7 @@ npx shadcn@latest add @shark/dialog
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -203,6 +203,12 @@ Default spacing is `--spacing(6)`.
 ```css
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
+
+### Sidebar
+
+Put a `Sidebar` inside `DialogContent` with a fixed height so switching pages does not resize the panel. Do not wrap this layout in `DialogBody` (that part is a single scroll area). Override `SidebarProvider`’s `min-h-svh` with `min-h-0`, and use `collapsible="none"` so the sidebar does not open a nested sheet.
+
+<ComponentPreview componentName="dialog" fileName="example-sidebar" />
 
 ## API Reference
 

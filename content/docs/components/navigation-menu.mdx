@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/navigation-menu#api-reference
 ---
 
+import manifest from "@/registry/manifest/navigation-menu";
+
 <ComponentPreview componentName="navigation-menu" />
 
 ## Installation
@@ -27,9 +29,7 @@ npx shadcn@latest add @shark/navigation-menu
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react@^5.39.1
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -50,12 +50,12 @@ NavigationMenu
 ├── NavigationMenuList
 │   ├── NavigationMenuItem
 │   │   ├── NavigationMenuTrigger
-│   │   ├── NavigationMenuItemIndicator (optional)
+│   │   ├── NavigationMenuItemIndicator
 │   │   └── NavigationMenuContent
 │   │       └── NavigationMenuLink
-│   └── NavigationMenuIndicator (optional)
-│       └── NavigationMenuArrow (optional)
-└── NavigationMenuViewportPositioner (optional)
+│   └── NavigationMenuIndicator
+│       └── NavigationMenuArrow
+└── NavigationMenuViewportPositioner
     └── NavigationMenuViewport
 ```
 
@@ -101,7 +101,7 @@ Pass `value` and handle `onValueChange` to own the active item. An empty string 
 
 ### Disabled
 
-Disable an item with the `disabled` prop on `NavigationMenuItem`.
+Disable an item with the `disabled` prop on `NavigationMenuItem`. `NavigationMenuTrigger` also accepts `disabled`.
 
 <ComponentPreview componentName="navigation-menu" fileName="example-disabled" />
 
@@ -131,9 +131,15 @@ Use `orientation="vertical"` for a column of links with panels opening at the in
 
 ### Indicator
 
-Place `NavigationMenuIndicator` directly inside the list. The list keeps item positioning static so the indicator's coordinates remain relative to the list. `NavigationMenuItemIndicator` is available for a marker attached to an individual item.
+Place `NavigationMenuIndicator` directly inside the list. The list keeps item positioning static so the indicator's coordinates remain relative to the list.
 
 <ComponentPreview componentName="navigation-menu" fileName="example-indicator" />
+
+### Item indicator
+
+Use `NavigationMenuItemIndicator` for a marker attached to an individual item.
+
+<ComponentPreview componentName="navigation-menu" fileName="example-item-indicator" />
 
 ### Root provider
 
@@ -147,72 +153,27 @@ Read the active menu with `NavigationMenuContext` or `useNavigationMenuContext` 
 
 <ComponentPreview componentName="navigation-menu" fileName="example-context" />
 
-## Custom links
+### Custom links
 
-Compose with Next.js links without nesting anchors:
+Use `asChild` on `NavigationMenuLink` with Next.js `Link` or an `<a>` so you do not nest anchors.
 
-```tsx
-import NextLink from "next/link";
-import { NavigationMenuLink } from "@/components/ui/navigation-menu";
+<ComponentPreview componentName="navigation-menu" fileName="example-link" />
 
-<NavigationMenuLink asChild>
-  <NextLink href="/docs/components/button">Button</NextLink>
-</NavigationMenuLink>
-```
+### Large menus
 
-## Sizing and motion
+When the panel is taller than the viewport, constrain height and scroll the content. Content already uses `max-h-[70dvh]`; override with `className` when the preview needs a shorter cap.
 
-Content uses the same surface tokens as Shark Menu. Standalone panels own their border and shadow; inside a shared viewport, the viewport owns that surface instead.
+<ComponentPreview componentName="navigation-menu" fileName="example-large-menus" />
 
-Panels are limited to `70dvh` and scroll when needed. Use `className` to set the content layout and size. Shared viewport dimensions and indicators transition over 200 ms. Reduced motion disables animations and transitions.
+### Click trigger
 
-## Accessibility
+Set `disableHoverTrigger` so panels open on click instead of hover.
 
-Give the navigation an accessible name with `aria-label`. Triggers expose expanded state and links support `aria-current`. Arrow keys move through navigation items, Home/End reach the ends, and Escape dismisses an open panel. Tab follows the focusable content. Vertical navigation and RTL use Ark's direction-aware keyboard behavior.
+<ComponentPreview componentName="navigation-menu" fileName="example-click-trigger" />
 
-## API Reference
+## Viewport size
 
-### NavigationMenu
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value`, `defaultValue` | `string` | — |
-| `onValueChange` | `(details: NavigationMenuValueChangeDetails) => void` | — |
-| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
-| `openDelay` | `number` | `200` |
-| `closeDelay` | `number` | `300` |
-| `disableClickTrigger`, `disableHoverTrigger`, `disablePointerLeaveClose` | `boolean` | `false` |
-| `lazyMount`, `unmountOnExit` | `boolean` | `true` |
-| `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
-| `id`, `ids`, `translations` | Ark root options | — |
-| `asChild` | `boolean` | `false` |
-
-### Parts
-
-All DOM parts accept their Ark props, refs, `className`, and `asChild`. Each has a matching `data-slot="navigation-menu-*"` attribute; both roots use `data-slot="navigation-menu"`.
-
-| Part | Additional props or behavior |
-| --- | --- |
-| `NavigationMenuRootProvider` | Requires `value` from `useNavigationMenu`; shares root styling and mount defaults. |
-| `NavigationMenuList` | Contains items and the optional shared indicator. |
-| `NavigationMenuItem` | Requires a unique `value`; supports `disabled`. |
-| `NavigationMenuTrigger` | Controls its containing item; icons are explicit children. |
-| `NavigationMenuLink` | Supports `href`, `current`, `closeOnClick` (default `true`), `onSelect`, and `value`. |
-| `NavigationMenuContent` | Uses its containing item's value; accepts an explicit `value`. |
-| `NavigationMenuIndicator` | Shared active trigger marker. |
-| `NavigationMenuItemIndicator` | Active marker for one item. |
-| `NavigationMenuArrow` | Decorative arrow inside the shared indicator. |
-| `NavigationMenuViewportPositioner` | `align="start" \| "center" \| "end"`; default `"center"`. |
-| `NavigationMenuViewport` | Shared panel sized by Ark's content measurements. |
-| `NavigationMenuContext` | Render function receiving the menu API; no DOM wrapper. |
-
-### Hooks and types
-
-`useNavigationMenu` creates the state used by `NavigationMenuRootProvider`. `useNavigationMenuContext` reads the surrounding root. The API includes `value`, `open`, `orientation`, `setValue`, `reposition`, `isViewportRendered`, and `getViewportNode`.
-
-The module exports `UseNavigationMenuProps`, `UseNavigationMenuReturn`, `UseNavigationMenuContext`, `NavigationMenuValueChangeDetails`, and props types for the named parts. The root props type is `NavigationMenuProps`.
-
-### CSS variables
+The following CSS variables are exposed on `NavigationMenu` and `NavigationMenuViewport`:
 
 | Variable | Description |
 | --- | --- |
@@ -220,3 +181,192 @@ The module exports `UseNavigationMenuProps`, `UseNavigationMenuReturn`, `UseNavi
 | `--trigger-x`, `--trigger-y` | Active trigger coordinates used by the shared indicator. |
 | `--viewport-width`, `--viewport-height` | Active content dimensions used by the viewport. |
 | `--viewport-x`, `--viewport-y` | Viewport coordinates calculated by Ark. |
+
+Use `--viewport-width` and `--viewport-height` to size the shared panel. Shark already applies those variables and a 200 ms width/height transition on `NavigationMenuViewport`.
+
+Standalone panels own their border and shadow. Inside a shared viewport, the viewport owns that surface instead. Reduced motion disables animations and transitions.
+
+## Accessibility
+
+Give the navigation an accessible name with `aria-label`. Triggers expose expanded state and links support `aria-current`. Tab follows the focusable content. Vertical navigation and RTL use Ark's direction-aware keyboard behavior.
+
+Complies with the [Navigation Menubar WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/).
+
+### Keyboard Support
+
+| Key | Description |
+| --- | --- |
+| `ArrowDown` | Vertical orientation: move to the next trigger. Horizontal: enter the open panel. |
+| `ArrowUp` | Vertical orientation: move to the previous trigger. |
+| `ArrowRight` | Horizontal orientation: move to the next trigger. Inside content: move to the next link. |
+| `ArrowLeft` | Horizontal orientation: move to the previous trigger. Inside content: move to the previous link. |
+| `Home` | Move to the first trigger, or the first link when focus is in content. |
+| `End` | Move to the last trigger, or the last link when focus is in content. |
+| `Escape` | Dismiss the open panel. |
+
+## API Reference
+
+### NavigationMenu
+
+Root element. Manages the active item, orientation, and mount behavior.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | - |
+| `defaultValue` | `string` | - |
+| `onValueChange` | `(details: NavigationMenuValueChangeDetails) => void` | - |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
+| `openDelay` | `number` | `200` |
+| `closeDelay` | `number` | `300` |
+| `disableClickTrigger` | `boolean` | `false` |
+| `disableHoverTrigger` | `boolean` | `false` |
+| `disablePointerLeaveClose` | `boolean` | `false` |
+| `lazyMount` | `boolean` | `true` |
+| `unmountOnExit` | `boolean` | `true` |
+| `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
+| `id` | `string` | - |
+| `ids` | `Partial<{ root, list, item, trigger, content, viewport }>` | - |
+| `translations` | `IntlTranslations` | - |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+Shark defaults `lazyMount` and `unmountOnExit` to `true`. Ark defaults them to `false`. Override both to `false` when using a shared viewport.
+
+### NavigationMenuRootProvider
+
+Use instead of `NavigationMenu` with `value` from `useNavigationMenu`. Shares root styling and mount defaults.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseNavigationMenuReturn` | **required** |
+| `lazyMount` | `boolean` | `true` |
+| `unmountOnExit` | `boolean` | `true` |
+| `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### NavigationMenuList
+
+Contains items and the optional shared indicator.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### NavigationMenuItem
+
+A trigger plus optional content, or a top-level link. Requires a unique `value`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | **required** |
+| `disabled` | `boolean` | `false` |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### NavigationMenuTrigger
+
+Opens the item's panel. Icons are explicit children. Use `asChild` to merge onto a `Button`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `disabled` | `boolean` | `false` |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### NavigationMenuLink
+
+A navigation link in the list or inside content.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `href` | `string` | - |
+| `current` | `boolean` | - |
+| `closeOnClick` | `boolean` | `true` |
+| `onSelect` | `(event: CustomEvent) => void` | - |
+| `value` | `string` | - |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### NavigationMenuContent
+
+Panel for the containing item. Uses that item's `value` unless you pass `value`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | - |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### NavigationMenuIndicator
+
+Shared active trigger marker. Place it inside the list.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### NavigationMenuItemIndicator
+
+Active marker for one item.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### NavigationMenuArrow
+
+Decorative arrow inside the shared indicator.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### NavigationMenuViewportPositioner
+
+Positions the shared viewport. `align` drives `--viewport-x` and `--viewport-y`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `align` | `"start" \| "center" \| "end"` | `"center"` |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### NavigationMenuViewport
+
+Shared panel sized by Ark's content measurements.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### NavigationMenuContext
+
+Render function receiving the menu API. No DOM wrapper.
+
+### Hooks and types
+
+`useNavigationMenu` creates the state used by `NavigationMenuRootProvider`. `useNavigationMenuContext` reads the surrounding root.
+
+| Property | Type |
+| --- | --- |
+| `value` | `string \| null` |
+| `setValue` | `(value: string) => void` |
+| `open` | `boolean` |
+| `orientation` | `"horizontal" \| "vertical"` |
+| `isViewportRendered` | `boolean` |
+| `getViewportNode` | `() => HTMLElement \| null` |
+| `reposition` | `VoidFunction` |
+
+The module exports `UseNavigationMenuProps`, `UseNavigationMenuReturn`, `UseNavigationMenuContext`, `NavigationMenuValueChangeDetails`, and props types for the named parts. The root props type is `NavigationMenuProps`.
+
+All DOM parts accept their Ark props, refs, `className`, and `asChild`. Each has a matching `data-slot="navigation-menu-*"` attribute; both roots use `data-slot="navigation-menu"`.
+
+---
+
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/navigation-menu#api-reference).

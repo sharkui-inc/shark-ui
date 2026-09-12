@@ -5,24 +5,20 @@ import {
   CodeBlockCopy,
   CodeBlockHeader,
 } from "@/registry/react/components/code-block";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 const Example = () => (
-  <CodeBlock className="max-w-lg" code={CODE} language="tsx">
-    <CodeBlockHeader title="auth.ts">
+  <CodeBlock className="w-full max-w-lg" code={CODE} language="tsx">
+    <CodeBlockHeader title="session.ts">
       <CodeBlockActions>
         <CodeBlockCopy />
       </CodeBlockActions>
     </CodeBlockHeader>
-    <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
-      <CodeBlockContent highlightedLines={[3, 4]} showLineNumbers />
-    </ScrollArea>
+    <CodeBlockContent highlightedLines={[2, 3]} showLineNumbers />
   </CodeBlock>
 );
 
 const CODE = `export function isAuthenticated(session: Session | null) {
   if (!session) return false;
-
   return session.expiresAt > new Date();
 }`;
 

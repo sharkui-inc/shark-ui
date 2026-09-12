@@ -1,7 +1,6 @@
 "use client";
 
 import { Separator } from "@registry/react/components/separator";
-import { useTheme } from "@teispace/next-themes";
 import {
   ArrowUpRight,
   MonitorIcon,
@@ -18,16 +17,11 @@ import {
   SnippetCopy,
   SnippetSelect,
 } from "@/components/ui/snippet";
-import {
-  PREVIEW_THEME_MESSAGE_TYPE,
-  type PreviewThemeMessage,
-} from "@/lib/preview-theme";
 import type {
   CompositionFileTreeNode,
   PublishedComposition,
 } from "@/lib/registry";
 import { cn } from "@/lib/utils";
-import { useThemes } from "@/providers/themes";
 import { Button } from "@/registry/react/components/button";
 import { Skeleton } from "@/registry/react/components/skeleton";
 import {
@@ -36,7 +30,15 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/registry/react/components/tabs";
-import { type PackageManager, useConfig } from "@/store/config";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@/registry/react/components/toggle-group";
+import {
+  type PackageManager,
+  useConfig,
+  useUpdateConfig,
+} from "@/store/config";
 
 interface CompositionViewerProps {
   compact?: boolean;
@@ -79,12 +81,10 @@ export const CompositionViewer = ({
   showDescription = false,
   tree,
 }: CompositionViewerProps) => {
-  const [config, setConfig] = useConfig();
-  const { resolvedTheme } = useTheme();
-  const { borderRadius, grayColor, primaryColor } = useThemes();
+  const config = useConfig();
+  const updateConfig = useUpdateConfig();
 
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const iframeRef = React.useRef<HTMLIFrameElement>(null);
 
   const [viewport, setViewport] = React.useState<Viewport>("desktop");
   const [shouldLoad, setShouldLoad] = React.useState(false);
@@ -125,34 +125,6 @@ export const CompositionViewer = ({
   } else if (!compact) {
     description = <p className="sr-only">{item.description}</p>;
   }
-  const handlePackageManagerChange = React.useCallback(
-    (value: string) => {
-      setConfig({
-        ...config,
-        packageManager: value as PackageManager,
-      });
-    },
-    [config, setConfig]
-  );
-
-  const sendTheme = React.useCallback(() => {
-    if (!iframeRef.current?.contentWindow) {
-      return;
-    }
-    const message: PreviewThemeMessage = {
-      payload: {
-        borderRadius,
-        grayColor,
-        mode: resolvedTheme === "dark" ? "dark" : "light",
-        primaryColor,
-      },
-      type: PREVIEW_THEME_MESSAGE_TYPE,
-    };
-    iframeRef.current.contentWindow.postMessage(
-      message,
-      window.location.origin
-    );
-  }, [borderRadius, grayColor, primaryColor, resolvedTheme]);
 
   React.useEffect(() => {
     const container = containerRef.current;
@@ -179,12 +151,6 @@ export const CompositionViewer = ({
   }, []);
 
   React.useEffect(() => {
-    if (loaded) {
-      sendTheme();
-    }
-  }, [loaded, sendTheme]);
-
-  React.useEffect(() => {
     if (!(shouldLoad && !loaded && !failed)) {
       return;
     }
@@ -197,14 +163,6 @@ export const CompositionViewer = ({
     setLoaded(false);
     setFrameKey((key) => key + 1);
   };
-  const showDesktop = React.useCallback(() => setViewport("desktop"), []);
-  const showTablet = React.useCallback(() => setViewport("tablet"), []);
-  const showMobile = React.useCallback(() => setViewport("mobile"), []);
-  const handleFrameLoad = React.useCallback(() => {
-    setFailed(false);
-    setLoaded(true);
-    sendTheme();
-  }, [sendTheme]);
 
   return (
     <article className="scroll-mt-36" id={item.name}>
@@ -229,7 +187,11 @@ export const CompositionViewer = ({
               className="min-w-0 max-w-80 text-xs"
               copyText={installCopyCommand}
               items={installItems}
-              onValueChange={handlePackageManagerChange}
+              onValueChange={(value) => {
+                updateConfig({
+                  packageManager: value as PackageManager,
+                });
+              }}
               value={config.packageManager}
             >
               <SnippetSelect triggerLabel="Choose package manager" />
@@ -238,36 +200,44 @@ export const CompositionViewer = ({
             </Snippet>
             <Separator className="hidden h-4 sm:block" orientation="vertical" />
             <div className="flex items-center gap-1 rounded-lg border p-0.5">
-              <fieldset className="hidden items-center border-0 p-0 md:flex">
-                <legend className="sr-only">Preview width</legend>
-                <Button
+              <ToggleGroup
+                aria-label="Preview width"
+                className="hidden md:flex"
+                deselectable={false}
+                multiple={false}
+                onValueChange={({ value }) => {
+                  const next = value[0] as Viewport | undefined;
+
+                  if (next) {
+                    setViewport(next);
+                  }
+                }}
+                size="sm"
+                value={[viewport]}
+                variant="ghost"
+              >
+                <ToggleGroupItem
                   aria-label="Desktop preview"
-                  aria-pressed={viewport === "desktop"}
-                  onClick={showDesktop}
-                  size="icon-sm"
-                  variant={viewport === "desktop" ? "secondary" : "ghost"}
+                  className="size-7 px-0 data-[state=on]:bg-secondary"
+                  value="desktop"
                 >
                   <MonitorIcon aria-hidden="true" className="size-4" />
-                </Button>
-                <Button
+                </ToggleGroupItem>
+                <ToggleGroupItem
                   aria-label="Tablet preview"
-                  aria-pressed={viewport === "tablet"}
-                  onClick={showTablet}
-                  size="icon-sm"
-                  variant={viewport === "tablet" ? "secondary" : "ghost"}
+                  className="size-7 px-0 data-[state=on]:bg-secondary"
+                  value="tablet"
                 >
                   <TabletIcon aria-hidden="true" className="size-4" />
-                </Button>
-                <Button
+                </ToggleGroupItem>
+                <ToggleGroupItem
                   aria-label="Mobile preview"
-                  aria-pressed={viewport === "mobile"}
-                  onClick={showMobile}
-                  size="icon-sm"
-                  variant={viewport === "mobile" ? "secondary" : "ghost"}
+                  className="size-7 px-0 data-[state=on]:bg-secondary"
+                  value="mobile"
                 >
                   <SmartphoneIcon aria-hidden="true" className="size-4" />
-                </Button>
-              </fieldset>
+                </ToggleGroupItem>
+              </ToggleGroup>
               <Separator
                 className="hidden h-4 md:block"
                 orientation="vertical"
@@ -349,8 +319,10 @@ export const CompositionViewer = ({
                   className="size-full bg-background"
                   key={frameKey}
                   loading="lazy"
-                  onLoad={handleFrameLoad}
-                  ref={iframeRef}
+                  onLoad={() => {
+                    setFailed(false);
+                    setLoaded(true);
+                  }}
                   src={previewUrl}
                   title={`${item.title} ${label.toLowerCase()} preview`}
                 />

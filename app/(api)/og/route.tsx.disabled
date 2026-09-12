@@ -1,5 +1,5 @@
 /**
- * DISABLED for Vercel Hobby (free) tier — dynamic route consumes serverless invocations.
+ * DISABLED for Vercel Hobby (free) tier: dynamic route consumes serverless invocations.
  * To re-enable:
  * 1. Rename this file to route.tsx
  * 2. Set SITE_FEATURES.dynamicOgImages to true in lib/site-features.ts

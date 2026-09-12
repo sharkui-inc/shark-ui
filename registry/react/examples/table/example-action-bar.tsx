@@ -73,7 +73,10 @@ const Example = () => {
 
   return (
     <div className="w-full max-w-2xl rounded-lg border">
-      <ActionBar onOpenChange={(open) => !open && handleClose()} open={isOpen}>
+      <ActionBar
+        onOpenChange={({ open }) => !open && handleClose()}
+        open={isOpen}
+      >
         <Table>
           <TableCaption className="sr-only">
             Orders with checkbox selection and action bar.

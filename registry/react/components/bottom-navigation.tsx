@@ -26,14 +26,19 @@ export const BottomNavigation = (
 export const BottomNavigationList = (
   props: React.ComponentProps<typeof ArkTabs.List>
 ) => {
-  const { "aria-label": ariaLabel, className, ...rest } = props;
+  const {
+    "aria-label": ariaLabel = "Bottom navigation",
+    className,
+    ...rest
+  } = props;
 
   return (
     <ArkTabs.List
+      aria-label={ariaLabel}
       className={cn(
         "fixed inset-x-0 bottom-0 z-10",
         "flex w-full items-center justify-around",
-        "min-h-14 shrink-0",
+        "min-h-[calc(var(--spacing)*14+env(safe-area-inset-bottom,0))] shrink-0",
         "border-t bg-background/60 backdrop-blur-sm",
         "pb-[env(safe-area-inset-bottom,0px)]",
         className
@@ -54,7 +59,7 @@ export const BottomNavigationItem = (
       className={cn(
         "relative",
         "min-w-0",
-        "flex flex-1 flex-col items-center justify-center gap-0.5",
+        "flex min-h-11 flex-1 flex-col items-center justify-center gap-0.5",
         "p-2",
         "text-muted-foreground",
         "cursor-pointer",
@@ -65,8 +70,7 @@ export const BottomNavigationItem = (
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "[&_svg:not([class*='size-'])]:size-5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         "has-[data-slot=bottom-navigation-item-label]:size-4",
-        "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="bottom-navigation-item"

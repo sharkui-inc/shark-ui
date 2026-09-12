@@ -39,11 +39,12 @@ export const SourcesTrigger = (props: SourcesTriggerProps) => {
   return (
     <CollapsibleTrigger
       className={cn(
-        "justify-start! flex min-h-9 w-fit max-w-full items-center gap-2 rounded-lg py-1 text-start text-muted-foreground text-sm",
+        "flex min-h-9 w-fit max-w-full items-center justify-start gap-2 rounded-lg py-1 text-start text-muted-foreground text-sm",
         "hover:text-foreground",
         "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
         className
       )}
+      data-align="start"
       data-slot="sources-trigger"
       {...rest}
     >

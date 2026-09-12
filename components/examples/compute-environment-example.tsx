@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
+import { toast } from "@/components/examples/example-toast";
 import { cn } from "@/lib/utils";
+import { Button } from "@/registry/react/components/button";
 import {
   Field,
   FieldContent,
@@ -26,6 +29,7 @@ export const ComputeEnvironmentExample = (
   props: React.ComponentProps<"div">
 ) => {
   const { className, ...rest } = props;
+  const [isSaving, setIsSaving] = useState(false);
 
   return (
     <div className={cn("flex w-full flex-col gap-6", className)} {...rest}>
@@ -35,9 +39,7 @@ export const ComputeEnvironmentExample = (
           <FieldLabel>
             <Field>
               <FieldContent>
-                <RadioGroupItem tabIndex={-1} value="kubernetes">
-                  Kubernetes
-                </RadioGroupItem>
+                <RadioGroupItem value="kubernetes">Kubernetes</RadioGroupItem>
                 <FieldDescription>
                   Managed containers and orchestration.
                 </FieldDescription>
@@ -47,9 +49,7 @@ export const ComputeEnvironmentExample = (
           <FieldLabel>
             <Field>
               <FieldContent>
-                <RadioGroupItem tabIndex={-1} value="vm">
-                  Virtual Machine
-                </RadioGroupItem>
+                <RadioGroupItem value="vm">Virtual Machine</RadioGroupItem>
                 <FieldDescription>Traditional VM workloads.</FieldDescription>
               </FieldContent>
             </Field>
@@ -57,24 +57,42 @@ export const ComputeEnvironmentExample = (
         </RadioGroup>
       </FieldSet>
 
-      <Field className="w-full" orientation="horizontal">
+      <Field orientation="horizontal">
         <FieldContent>
           <FieldLabel>Number of GPUs</FieldLabel>
           <FieldDescription>You can add more later.</FieldDescription>
         </FieldContent>
         <NumberInput className="max-w-40" defaultValue="4" max={99} min={1}>
           <NumberInputGroup>
-            <NumberInputDecrement tabIndex={-1} />
-            <NumberInputInput tabIndex={-1} />
-            <NumberInputIncrement tabIndex={-1} />
+            <NumberInputDecrement />
+            <NumberInputInput />
+            <NumberInputIncrement />
           </NumberInputGroup>
         </NumberInput>
       </Field>
 
-      <Field className="w-full" orientation="horizontal" reverse>
-        <Switch tabIndex={-1} />
+      <Field orientation="horizontal" reverse>
+        <Switch />
         <FieldLabel>Wallpaper Tinting</FieldLabel>
       </Field>
+
+      <Button
+        className="self-start"
+        isLoading={isSaving}
+        onClick={async () => {
+          setIsSaving(true);
+          await new Promise((resolve) => {
+            window.setTimeout(resolve, 600);
+          });
+          setIsSaving(false);
+          toast.success({
+            description: "Compute settings are saved in this preview.",
+            title: "Config saved",
+          });
+        }}
+      >
+        Save config
+      </Button>
     </div>
   );
 };

@@ -3,6 +3,8 @@ title: Badge
 description: A badge or an element styled as a badge.
 ---
 
+import manifest from "@/registry/manifest/badge";
+
 <ComponentPreview componentName="badge" />
 
 ## Installation
@@ -28,11 +30,9 @@ npx shadcn@latest add @shark/badge
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
@@ -160,6 +160,10 @@ The `asChild` prop renders another element with badge styling.
 ### With spinner
 
 <ComponentPreview componentName="badge" fileName="example-with-spinner" />
+
+### With status
+
+<ComponentPreview componentName="badge" fileName="example-with-status" />
 
 ### Custom color
 

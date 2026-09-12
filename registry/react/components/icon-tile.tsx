@@ -5,20 +5,17 @@ import { cn } from "@/lib/utils";
 
 export const iconTileVariants = tv({
   base: [
-    "size-(--size)",
-    "relative isolate",
     "inline-flex shrink-0 items-center justify-center",
     "font-medium text-muted-foreground",
-    "rounded-lg border",
+    "rounded-md",
     "overflow-hidden",
-    "[&_svg:not([class*='size-'])]:size-(--icon-size)",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0",
     "[a&]:cursor-pointer [button&]:cursor-pointer",
     "[a&]:transition-colors [button&]:transition-colors",
     "disabled:pointer-events-none disabled:opacity-64",
     "aria-disabled:pointer-events-none aria-disabled:opacity-64",
     "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/32",
-    "motion-reduce:transition-none!",
+    "motion-reduce:transition-none",
   ],
   defaultVariants: {
     fill: false,
@@ -28,34 +25,32 @@ export const iconTileVariants = tv({
   variants: {
     fill: {
       false: "",
-      true: "rounded-full before:rounded-full",
+      true: "rounded-full",
     },
     size: {
-      lg: ["[--size:--spacing(12)]", "[--icon-size:--spacing(5.5)]"],
-      md: ["[--size:--spacing(10)]", "[--icon-size:--spacing(4.5)]"],
-      sm: ["[--size:--spacing(8)]", "[--icon-size:--spacing(4)]"],
-      xl: ["[--size:--spacing(14)]", "[--icon-size:--spacing(7)]"],
-      xs: ["[--size:--spacing(6)]", "[--icon-size:--spacing(3.5)]"],
+      lg: "size-9 [&_svg:not([class*='size-'])]:size-4.5",
+      md: "size-8 [&_svg:not([class*='size-'])]:size-4",
+      sm: "size-7 [&_svg:not([class*='size-'])]:size-3.5",
+      xl: "size-10 [&_svg:not([class*='size-'])]:size-5",
+      xs: "size-6 [&_svg:not([class*='size-'])]:size-3",
     },
     variant: {
       default: [
-        "border-border bg-muted shadow-sm/5 ring-2 ring-background",
-        "text-foreground",
-        "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
-        "[button&]:hover:bg-accent [button&]:hover:text-accent-foreground",
-      ],
-      frame: [
-        "border-transparent bg-muted p-1",
-        "before:absolute before:inset-1 before:-z-10 before:rounded-lg before:border before:bg-background before:shadow-xs/5",
+        "bg-primary",
+        "text-primary-foreground",
+        "[a&]:hover:bg-primary/90 [button&]:hover:bg-primary/90",
       ],
       outline: [
-        "border-border bg-background shadow-xs/5",
+        "bg-background",
+        "border border-input",
         "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         "[button&]:hover:bg-accent [button&]:hover:text-accent-foreground",
       ],
-      primary: [
-        "border-primary bg-primary text-primary-foreground shadow-primary/24 shadow-sm",
-        "[a&]:hover:bg-primary/90 [button&]:hover:bg-primary/90",
+      secondary: [
+        "bg-secondary",
+        "text-secondary-foreground",
+        "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+        "[button&]:hover:bg-accent [button&]:hover:text-accent-foreground",
       ],
     },
   },

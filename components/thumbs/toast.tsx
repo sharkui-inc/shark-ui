@@ -9,7 +9,7 @@ export const ToastThumb = (props: ThumbCardProps) => (
 
       <div className="relative z-10 flex h-12 w-full items-center justify-start gap-2 rounded-lg border border-input border-dashed bg-muted px-3 shadow-md/5">
         <div className="mt-4 flex h-full items-start justify-start">
-          <InfoIcon aria-hidden className="size-3 text-muted-foreground/64" />
+          <InfoIcon aria-hidden="true" className="size-3 text-primary" />
         </div>
         <div className="flex w-full flex-1 flex-col gap-1.5">
           <div className="h-1.5 w-1/2 rounded-full bg-muted-foreground/16" />

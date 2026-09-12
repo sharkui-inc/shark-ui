@@ -43,17 +43,25 @@ export const HoverCardTrigger = (
   props: React.ComponentProps<typeof ArkHoverCard.Trigger>
 ) => <ArkHoverCard.Trigger data-slot="hover-card-trigger" {...props} />;
 
-export const HoverCardContent = (
-  props: React.ComponentProps<typeof ArkHoverCard.Content>
-) => {
-  const { className, children, ...rest } = props;
+interface HoverCardContentProps
+  extends React.ComponentProps<typeof ArkHoverCard.Content> {
+  /**
+   * Whether to show the arrow.
+   *
+   * @default true
+   */
+  showArrow?: boolean;
+}
+
+export const HoverCardContent = (props: HoverCardContentProps) => {
+  const { showArrow = true, className, children, ...rest } = props;
 
   return (
     <Portal>
       <ArkHoverCard.Positioner data-slot="hover-card-positioner">
         <ArkHoverCard.Content
           className={cn(
-            "z-50",
+            "z-[calc(50+var(--layer-index,0))]",
             "w-64",
             "p-4",
             "bg-popover",
@@ -68,7 +76,7 @@ export const HoverCardContent = (
             "data-[placement=left]:slide-in-from-end-2",
             "data-[placement=right]:slide-in-from-start-2",
             "data-[placement=top]:slide-in-from-bottom-2",
-            "motion-reduce:animate-none!",
+            "motion-reduce:animate-none",
             className
           )}
           data-slot="hover-card-content"
@@ -76,7 +84,7 @@ export const HoverCardContent = (
         >
           {children}
 
-          <HoverCardArrow />
+          {showArrow && <HoverCardArrow />}
         </ArkHoverCard.Content>
       </ArkHoverCard.Positioner>
     </Portal>

@@ -1,6 +1,6 @@
 import type { RegistryItemType } from "@/lib/registry";
 
-const dependencies = ["tailwind-variants"];
+const dependencies = ["@ark-ui/react", "tailwind-variants"];
 
 const cssVars = {
   dark: {

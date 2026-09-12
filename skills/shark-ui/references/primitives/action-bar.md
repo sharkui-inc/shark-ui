@@ -67,7 +67,7 @@ control. Configure custom action shortcuts in the application.
 ## Common pitfalls
 
 - Missing **Button** dependency or imports when copying examples.
-- Putting `ActionBarClose` / `ActionBarBody` outside `ActionBarContent`—keep the documented hierarchy.
+- Putting `ActionBarClose` / `ActionBarBody` outside `ActionBarContent`: keep the documented hierarchy.
 - Omitting `count` (or wrong type) on `ActionBarValue` when you need selection feedback.
 - Skipping `asChild` and ending up with nested interactive elements or wrong roles.
 

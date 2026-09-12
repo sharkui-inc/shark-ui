@@ -2,6 +2,7 @@ import type { RegistryItemType } from "@/lib/registry";
 import { absoluteUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
+  dependencies: ["@ark-ui/react"],
   description: "A composable card for approval flows.",
   name: "approval-card",
   registryDependencies: [

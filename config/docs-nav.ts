@@ -23,13 +23,14 @@ export const DOCS_NEW_ITEMS = [
   "/docs/components/questionnaire",
   "/docs/components/toc",
   "/docs/hooks/use-async-list",
+  "/docs/hooks/use-copy-to-clipboard",
   "/docs/hooks/use-list-selection",
   "/docs/utilities/focus-trap",
   "/docs/utilities/hotkeys",
   "/docs/utilities/shimmer",
   "/docs/components/icon-tile",
   "/docs/components/state",
-  "/docs/utilities/chat-simulator",
+  "/docs/helpers/create-chat",
 ];
 
 export const DOCS_UPDATED_ITEMS = [

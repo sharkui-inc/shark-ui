@@ -94,36 +94,9 @@ export const ChatSidebar = ({
     }));
   }, [filtered]);
 
-  const handleConversationClick = React.useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
-      const { conversationId } = event.currentTarget.dataset;
-      if (conversationId) {
-        onViewChange("chat");
-        onConversationSelect(conversationId);
-      }
-    },
-    [onConversationSelect, onViewChange]
-  );
-
-  const handleQueryChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setQuery(event.target.value);
-    },
-    []
-  );
-
-  const handleNewChatClick = React.useCallback(() => {
-    onViewChange("chat");
-    onNewChat();
-  }, [onNewChat, onViewChange]);
-
-  const handleProjectsClick = React.useCallback(() => {
+  const handleProjectsClick = () => {
     onProjectsSelect();
-  }, [onProjectsSelect]);
-
-  const handleLibraryClick = React.useCallback(() => {
-    onViewChange("chat");
-  }, [onViewChange]);
+  };
 
   return (
     <Sidebar collapsible="icon">
@@ -135,12 +108,7 @@ export const ChatSidebar = ({
               size="lg"
               tooltip="Shark Assistant"
             >
-              <IconTile
-                aria-hidden="true"
-                className="border-transparent shadow-none"
-                size="sm"
-                variant="primary"
-              >
+              <IconTile aria-hidden="true" size="sm">
                 <BotIcon aria-hidden="true" className="size-4" />
               </IconTile>
               <span>Shark Assistant</span>
@@ -151,7 +119,7 @@ export const ChatSidebar = ({
         <InputGroup className="group-data-[collapsible=icon]:hidden">
           <InputGroupInput
             aria-label="Search conversations"
-            onChange={handleQueryChange}
+            onChange={(event) => setQuery(event.target.value)}
             placeholder="Search..."
             type="search"
             value={query}
@@ -165,7 +133,10 @@ export const ChatSidebar = ({
           <SidebarMenuItem>
             <SidebarMenuButton
               isActive={activeView === "chat" && !activeConversationId}
-              onClick={handleNewChatClick}
+              onClick={() => {
+                onViewChange("chat");
+                onNewChat();
+              }}
             >
               <PlusIcon aria-hidden="true" className="size-4" />
               <span>New chat</span>
@@ -185,7 +156,7 @@ export const ChatSidebar = ({
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton onClick={handleLibraryClick}>
+            <SidebarMenuButton onClick={() => onViewChange("chat")}>
               <BookOpenIcon aria-hidden="true" className="size-4" />
               <span>Library</span>
               <ChevronRightIcon
@@ -220,7 +191,7 @@ export const ChatSidebar = ({
 
         {groups.map(({ group, items }) => (
           <SidebarGroup key={group}>
-            <SidebarGroupLabel className="text-sidebar-foreground!">
+            <SidebarGroupLabel className="text-sidebar-foreground">
               {group}
             </SidebarGroupLabel>
             <SidebarGroupContent>
@@ -228,12 +199,14 @@ export const ChatSidebar = ({
                 {items.map((conversation) => (
                   <SidebarMenuItem key={conversation.id}>
                     <SidebarMenuButton
-                      data-conversation-id={conversation.id}
                       isActive={
                         activeView === "chat" &&
                         activeConversationId === conversation.id
                       }
-                      onClick={handleConversationClick}
+                      onClick={() => {
+                        onViewChange("chat");
+                        onConversationSelect(conversation.id);
+                      }}
                       tooltip={conversation.title}
                     >
                       <span className="truncate">{conversation.title}</span>

@@ -3,6 +3,8 @@ title: Prose
 description: Typography styles for HTML content.
 ---
 
+import manifest from "@/registry/manifest/prose";
+
 <ComponentPreview componentName="prose" />
 
 ## Installation
@@ -28,11 +30,9 @@ npx shadcn@latest add @shark/prose
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following CSS rules into your `globals.css`</Step>
+<Step>Import the following rules into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css

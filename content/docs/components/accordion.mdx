@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/accordion#api-reference
 ---
 
+import manifest from "@/registry/manifest/accordion";
+
 <ComponentPreview componentName="accordion" />
 
 ## Installation
@@ -31,13 +33,11 @@ npx shadcn@latest add @shark/accordion
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Add the following animations to your `globals.css`.</Step>
+<Step>Import the following rules into your CSS file:</Step>
 
-```css title="globals.css" showLineNumbers
+```css showLineNumbers
 @theme inline {
   --animate-slide-up: slideUp 0.2s ease-out;
   --animate-slide-down: slideDown 0.2s ease-out;

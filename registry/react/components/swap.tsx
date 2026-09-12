@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 export const useSwap = useSwapContext;
 
 const swapIndicatorVariants = tv({
-  base: ["[&>span]:motion-reduce:animate-none!"],
+  base: ["[&>span]:motion-reduce:animate-none"],
   defaultVariants: {
     variant: "fade",
   },

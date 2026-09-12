@@ -3,6 +3,8 @@ title: Drawer
 description: A sliding panel with swipe support.
 ---
 
+import manifest from "@/registry/manifest/drawer";
+
 <ComponentPreview componentName="drawer" />
 
 ## Installation
@@ -26,9 +28,7 @@ npx shadcn@latest add @shark/drawer
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

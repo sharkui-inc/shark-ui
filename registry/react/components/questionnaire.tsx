@@ -5,7 +5,7 @@ import { createContext } from "@ark-ui/react/utils";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
-import { Checkbox } from "@/registry/react/components/checkbox";
+import { Checkbox, CheckboxGroup } from "@/registry/react/components/checkbox";
 import {
   Field,
   FieldLabel,
@@ -844,13 +844,26 @@ export const QuestionnaireChoices = (
 
   if (definition.multiple) {
     return (
-      <ark.div
+      <CheckboxGroup
+        aria-describedby={getDescribedBy(
+          hasDescription && descriptionId,
+          rest["aria-describedby"]
+        )}
         className={cn("flex flex-col gap-2", className)}
         data-slot="questionnaire-choices"
+        invalid={invalid}
+        name={definition.name}
+        onValueChange={(values) => {
+          setAnswer(definition.name, {
+            input: answer.input,
+            values,
+          });
+        }}
+        value={answer.values}
         {...rest}
       >
         {content}
-      </ark.div>
+      </CheckboxGroup>
     );
   }
 
@@ -985,18 +998,7 @@ export const QuestionnaireChoice = (props: QuestionnaireChoiceProps) => {
                   invalid && hasError && errorId
                 )}
                 aria-keyshortcuts={shortcut}
-                checked={checked}
                 data-questionnaire-answer="choice"
-                name={definition.name}
-                onCheckedChange={({ checked: nextChecked }) => {
-                  setAnswer(definition.name, {
-                    input: answer.input,
-                    values:
-                      nextChecked === true
-                        ? [...new Set([...answer.values, value])]
-                        : answer.values.filter((entry) => entry !== value),
-                  });
-                }}
                 value={value}
               />
             </span>
@@ -1216,7 +1218,6 @@ export const QuestionnairePrevious = (props: QuestionnaireActionProps) => {
           navigate(index - 1);
         }
       }}
-      type="button"
       variant="outline"
     >
       {children || "Previous"}
@@ -1247,7 +1248,6 @@ export const QuestionnaireNext = (props: QuestionnaireActionProps) => {
           next();
         }
       }}
-      type="button"
     >
       {children || "Next"}
     </Button>
@@ -1275,7 +1275,6 @@ export const QuestionnaireSkip = (props: QuestionnaireActionProps) => {
           skip();
         }
       }}
-      type="button"
       variant="ghost"
     >
       {children || "Skip"}

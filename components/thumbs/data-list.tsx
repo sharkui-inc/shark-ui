@@ -10,7 +10,7 @@ export const DataListThumb = (props: ThumbCardProps) => (
         </div>
         <div className="flex items-center gap-2">
           <div className="h-2 w-20 shrink-0 rounded-full bg-muted-foreground/16" />
-          <div className="h-2 w-2/3 rounded-full bg-muted-foreground/8" />
+          <div className="h-2 w-2/3 rounded-full bg-primary" />
         </div>
         <div className="flex items-center gap-2">
           <div className="h-2 w-14 shrink-0 rounded-full bg-muted-foreground/16" />

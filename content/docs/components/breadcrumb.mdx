@@ -3,6 +3,8 @@ title: Breadcrumb
 description: Shows user location within a hierarchy.
 ---
 
+import manifest from "@/registry/manifest/breadcrumb";
+
 <ComponentPreview componentName="breadcrumb" />
 
 ## Installation
@@ -28,9 +30,7 @@ npx shadcn@latest add @shark/breadcrumb
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

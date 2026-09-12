@@ -13,7 +13,7 @@ import {
   CommandList,
   CommandShortcut,
 } from "@/registry/react/components/command";
-import { Kbd } from "@/registry/react/components/kbd";
+import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
 
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
@@ -47,19 +47,21 @@ const Example = () => {
         </CommandList>
       </CommandContent>
       <CommandFooter>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <Kbd variant="outline">
-            <CornerDownLeftIcon className="size-3" />
+            <CornerDownLeftIcon />
           </Kbd>
           <span>Select</span>
         </div>
-        <div className="flex items-center gap-2">
-          <Kbd variant="outline">
-            <ArrowUpIcon className="size-3" />
-          </Kbd>
-          <Kbd variant="outline">
-            <ArrowDownIcon className="size-3" />
-          </Kbd>
+        <div className="flex items-center gap-1.5">
+          <KbdGroup>
+            <Kbd variant="outline">
+              <ArrowUpIcon />
+            </Kbd>
+            <Kbd variant="outline">
+              <ArrowDownIcon />
+            </Kbd>
+          </KbdGroup>
           <span>Navigate</span>
         </div>
       </CommandFooter>

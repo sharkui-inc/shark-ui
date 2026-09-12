@@ -3,6 +3,8 @@ title: Approval Card
 description: Collect approvals or clarifications in agent workflows.
 ---
 
+import manifest from "@/registry/manifest/approval-card";
+
 <Alert>
   <InfoIcon />
   <AlertDescription>
@@ -38,6 +40,10 @@ npx shadcn@latest add @shark/approval-card
 <Steps>
 
 <Step>Install [Button](/docs/components/button), [Card](/docs/components/card), and [Questionnaire](/docs/components/questionnaire).</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

@@ -50,7 +50,7 @@ Sizes `sm` | `md` | `lg` via `size` on `NativeSelect`; set `invalid` when valida
 
 ## Common pitfalls
 
-- Expecting the same collection-driven API as Shark `Select`—native select uses real `<option>` children.
+- Expecting the same collection-driven API as Shark `Select`: native select uses real `<option>` children.
 - Omitting an empty-value option when you need an explicit “placeholder” row.
 - Skipping `name` / controlled `value` wiring on the underlying select when used inside forms.
 

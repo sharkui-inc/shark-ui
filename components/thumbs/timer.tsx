@@ -13,7 +13,7 @@ export const TimerThumb = (props: ThumbCardProps) => (
         <div className="size-0.5 rotate-90 rounded-full bg-muted-foreground/32" />
         <div className="size-0.5 rotate-90 rounded-full bg-muted-foreground/32" />
       </div>
-      <div className="h-1.5 w-6 rounded-full bg-muted-foreground/16" />
+      <div className="h-1.5 w-6 rounded-full bg-primary" />
       <div className="flex flex-col gap-1">
         <div className="size-0.5 rotate-90 rounded-full bg-muted-foreground/32" />
         <div className="size-0.5 rotate-90 rounded-full bg-muted-foreground/32" />

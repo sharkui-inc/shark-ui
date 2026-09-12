@@ -3,8 +3,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
 import { CompositionViewer } from "@/components/registry-compositions/composition-viewer";
+import {
+  getFileTree,
+  getPublishedCompositions,
+} from "@/lib/composition-catalog";
 import { createMetadata } from "@/lib/metadata";
-import { createTemplateFileTree, getPublishedTemplates } from "@/lib/templates";
 import {
   Announcement,
   AnnouncementTitle,
@@ -18,13 +21,12 @@ export const revalidate = false;
 export const dynamic = "force-static";
 
 export const metadata: Metadata = createMetadata({
-  description: "Shark UI starters you can preview and install.",
   title: "Templates",
   url: "/templates",
 });
 
 const TemplatesPage = async () => {
-  const templates = await getPublishedTemplates();
+  const templates = await getPublishedCompositions("templates");
 
   return (
     <SkipNavContent>
@@ -92,7 +94,7 @@ const TemplatesPage = async () => {
                   <CompositionViewer
                     item={item}
                     kind="templates"
-                    tree={createTemplateFileTree(item.files)}
+                    tree={getFileTree(item.files)}
                   />
                 </React.Suspense>
               ))}

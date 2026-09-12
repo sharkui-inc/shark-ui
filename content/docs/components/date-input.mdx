@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/date-input#api-reference
 ---
 
+import manifest from "@/registry/manifest/date-input";
+
 <ComponentPreview componentName="date-input" />
 
 ## Installation
@@ -33,9 +35,7 @@ npx shadcn@latest add @shark/date-input
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

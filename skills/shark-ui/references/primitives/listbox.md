@@ -61,13 +61,13 @@ const collection = createListCollection({
 
 ### Key patterns
 
-Follow **collection** APIs from docs (`createListCollection`, `useListCollection`, filtering) like combobox—do not assume a bare `items` array when examples use collections. `useListbox` helps with custom triggers/value UI.
+Follow **collection** APIs from docs (`createListCollection`, `useListCollection`, filtering) like combobox: do not assume a bare `items` array when examples use collections. `useListbox` helps with custom triggers/value UI.
 
 ## Common pitfalls
 
 - Rendering items without a `collection` object when the example uses Ark collection patterns.
 - Omitting `ListboxItemIndicator` in multi-select UX where users expect a checkmark.
-- Treating like native `<select>`—listbox is composable; verify focus and typeahead from Ark docs.
+- Treating like native `<select>`: listbox is composable; verify focus and typeahead from Ark docs.
 
 ## Registry example files
 

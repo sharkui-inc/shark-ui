@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 import { SkeletonText } from "@/registry/react/components/skeleton";
 import {
   Toc,
@@ -15,13 +15,11 @@ import {
 
 const Example = () => {
   const contentRef = useRef<HTMLElement>(null);
-  const getScrollEl = useCallback(() => contentRef.current, []);
-
   return (
     <Toc
       className="size-full rounded-lg border p-4"
       items={items}
-      scrollEl={getScrollEl}
+      scrollEl={() => contentRef.current}
     >
       <TocContent className="h-80 overflow-y-auto pe-4" ref={contentRef}>
         <Article />

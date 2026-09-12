@@ -100,10 +100,9 @@ export const RatingItem = (
     <ArkRatingGroup.Item
       className={cn(
         "inline-flex items-center justify-center",
-        "rounded-md",
         "not-[[data-disabled],[data-readonly]]:cursor-pointer",
         "data-disabled:opacity-64 data-disabled:grayscale",
-        "outline-none focus-visible:ring-current not-data-readonly:focus-visible:ring-[3px] focus-visible:ring-offset-1 focus-visible:ring-offset-background",
+        "outline-none",
         className
       )}
       data-slot="rating-item"

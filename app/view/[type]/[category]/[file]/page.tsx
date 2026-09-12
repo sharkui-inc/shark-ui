@@ -2,19 +2,18 @@ import { extname } from "node:path";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type React from "react";
-import { PreviewThemeSync } from "@/components/registry-compositions/preview-theme-sync";
-import { getBlockDefinition } from "@/lib/blocks";
+import {
+  getCompositionDefinition,
+  getDefinitions,
+} from "@/lib/composition-catalog";
 import { getRegistryItem } from "@/lib/registry";
-import { getTemplateDefinition } from "@/lib/templates";
 import { cn } from "@/lib/utils";
-import { BLOCKS } from "@/registry/react/blocks/_registry";
-import { TEMPLATES } from "@/registry/react/templates/_registry";
 
 const VIEW_REGISTRY_FOLDER_TYPES = ["blocks", "templates"] as const;
 const VIEW_REGISTRY_FOLDER_TYPE_SET = new Set(VIEW_REGISTRY_FOLDER_TYPES);
 type ViewRegistryFolderType = (typeof VIEW_REGISTRY_FOLDER_TYPES)[number];
 
-/** Retired preview slugs — still emitted so static export serves app/not-found. */
+/** Retired preview slugs: still emitted so static export serves app/not-found. */
 const RETIRED_VIEW_PARAMS = [
   { category: "ai", file: "ai-chat-01", type: "templates" },
   { category: "ai", file: "ai-ide-01", type: "templates" },
@@ -51,13 +50,13 @@ export const generateStaticParams = async () => {
     })
   );
 
-  const publishedBlocks = BLOCKS.map((block) => ({
+  const publishedBlocks = getDefinitions("blocks").map((block) => ({
     category: block.category,
     file: block.name,
     type: "blocks" as const,
   }));
 
-  const publishedTemplates = TEMPLATES.map((template) => ({
+  const publishedTemplates = getDefinitions("templates").map((template) => ({
     category: template.category,
     file: template.name,
     type: "templates" as const,
@@ -80,10 +79,9 @@ export const generateMetadata = async (
     notFound();
   }
 
-  const block = type === "blocks" ? getBlockDefinition(category, file) : null;
-  const template =
-    type === "templates" ? getTemplateDefinition(category, file) : null;
-  const composition = block ?? template;
+  const composition = isViewRegistryFolderType(type)
+    ? getCompositionDefinition(type, category, file)
+    : null;
 
   return composition
     ? {
@@ -115,10 +113,7 @@ const ViewRegistryPage = async (
   }
 
   let Preview: React.ComponentType;
-  const block = type === "blocks" ? getBlockDefinition(category, file) : null;
-  const template =
-    type === "templates" ? getTemplateDefinition(category, file) : null;
-  const composition = block ?? template;
+  const composition = getCompositionDefinition(type, category, file);
 
   if (composition) {
     const module = await composition.preview();
@@ -154,7 +149,6 @@ const ViewRegistryPage = async (
           "**:data-[slot=card]:rounded-none **:data-[slot=card]:border-0 **:data-[slot=card]:shadow-none"
       )}
     >
-      <PreviewThemeSync />
       <Preview />
     </div>
   );

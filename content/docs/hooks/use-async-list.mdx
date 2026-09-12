@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/collections/async-list#api-reference
 ---
 
+import manifest from "@/registry/manifest/use-async-list";
+
 <ComponentPreview componentName="use-async-list" />
 
 ## Installation
@@ -27,9 +29,7 @@ npx shadcn@latest add @shark/use-async-list
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -104,14 +104,14 @@ A direct export of Ark's `useAsyncList<T, C = string>`. The module also exports 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `load` | Async function returning `{ items: T[], cursor?: C }` | Required |
-| `sort` | Function returning `{ items: T[] }`, synchronously or asynchronously | — |
+| `sort` | Function returning `{ items: T[] }`, synchronously or asynchronously | - |
 | `initialItems` | `T[]` | `[]` |
 | `initialFilterText` | `string` | `""` |
-| `initialSortDescriptor` | `{ column: keyof T; direction: "ascending" \| "descending" }` | — |
-| `dependencies` | Array of strings, numbers, booleans, `null`, or `undefined` | — |
+| `initialSortDescriptor` | `{ column: keyof T; direction: "ascending" \| "descending" }` | - |
+| `dependencies` | Array of strings, numbers, booleans, `null`, or `undefined` | - |
 | `autoReload` | `boolean` | `false` |
-| `onSuccess` | `(details: { items: T[] }) => void` | — |
-| `onError` | `(details: { error: Error }) => void` | — |
+| `onSuccess` | `(details: { items: T[] }) => void` | - |
+| `onError` | `(details: { error: Error }) => void` | - |
 
 `autoReload` enables the initial load. Changes to `dependencies` trigger a reload even when `autoReload` is omitted.
 

@@ -1,8 +1,7 @@
 "use client";
 
 import { GlobeIcon, PaperclipIcon } from "lucide-react";
-import type React from "react";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import {
   PromptInput,
   PromptInputButton,
@@ -17,22 +16,16 @@ const Example = () => {
   const [status, setStatus] = useState<PromptInputStatus>("ready");
   const [value, setValue] = useState("Summarize the latest deploy.");
 
-  const handleStop = useCallback(() => setStatus("ready"), []);
-  const handleSubmit = useCallback(() => {
-    setStatus("streaming");
-  }, []);
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLTextAreaElement>) =>
-      setValue(event.target.value),
-    []
-  );
-
   return (
     <div className="flex w-full max-w-lg flex-col gap-3">
-      <PromptInput onStop={handleStop} onSubmit={handleSubmit} status={status}>
+      <PromptInput
+        onStop={() => setStatus("ready")}
+        onSubmit={() => setStatus("streaming")}
+        status={status}
+      >
         <PromptInputTextarea
           aria-label="Prompt"
-          onChange={handleChange}
+          onChange={(event) => setValue(event.target.value)}
           placeholder="Ask the agent to do something…"
           value={value}
         />

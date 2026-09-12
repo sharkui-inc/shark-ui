@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/pin-input#api-reference
 ---
 
+import manifest from "@/registry/manifest/input-otp";
+
 <ComponentPreview componentName="input-otp" />
 
 ## Installation
@@ -33,9 +35,7 @@ npx shadcn@latest add @shark/input-otp
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -127,7 +127,7 @@ Use the `blurOnComplete` prop to blur the input when all slots are filled.
 
 ### Auto submit
 
-Use `autoSubmit` to submit the owning form when every slot is filled. Backspace compacts values instead of leaving empty gaps.
+Use `autoSubmit` to submit the owning form when every slot is filled. 
 
 <ComponentPreview componentName="input-otp" fileName="example-auto-submit" />
 

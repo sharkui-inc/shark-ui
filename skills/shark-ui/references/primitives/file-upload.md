@@ -73,7 +73,7 @@ Import `Button` from `@/components/ui/button` when using `FileUploadTrigger asCh
 
 - Forgetting `asChild` on `FileUploadTrigger` when composing with `Button`.
 - Missing client boundary (`"use client"`) in consumer files that call upload callbacks.
-- Listing files without rendering `FileUploadList` / item components—root alone does not show picks.
+- Listing files without rendering `FileUploadList` / item components: root alone does not show picks.
 
 ## Registry example files
 

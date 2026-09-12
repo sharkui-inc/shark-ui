@@ -71,7 +71,7 @@ Recursive `TreeViewNode` render prop pattern from examples; `TreeViewCheckbox` f
 
 - Passing a collection whose `id` values are not stable across renders.
 - Forgetting `indexPath` when recursing nodes (expansion/selection breaks).
-- Treating `TreeViewItem` as a branch container—branches must use `TreeViewBranch` + `TreeViewBranchContent`.
+- Treating `TreeViewItem` as a branch container: branches must use `TreeViewBranch` + `TreeViewBranchContent`.
 
 ## Registry example files
 

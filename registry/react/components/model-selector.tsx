@@ -24,6 +24,7 @@ import {
   InputGroupInput,
 } from "@/registry/react/components/input-group";
 import { menuListVariants } from "@/registry/react/components/menu";
+import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const ModelSelector: ArkCombobox.RootComponent = (props) => {
   const { positioning, selectionBehavior = "replace", ...rest } = props;
@@ -161,11 +162,13 @@ export const ModelSelectorList = (
   const { className, ...rest } = props;
 
   return (
-    <ComboboxList
-      className={cn("flex max-h-72 flex-col overflow-y-auto", className)}
-      data-slot="model-selector-list"
-      {...rest}
-    />
+    <ScrollArea className="max-h-72" orientation="vertical" scrollFade>
+      <ComboboxList
+        className={cn("flex flex-col", className)}
+        data-slot="model-selector-list"
+        {...rest}
+      />
+    </ScrollArea>
   );
 };
 

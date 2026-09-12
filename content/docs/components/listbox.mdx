@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/listbox#api-reference
 ---
 
+import manifest from "@/registry/manifest/listbox";
+
 <ComponentPreview componentName="listbox" />
 
 ## Installation
@@ -33,9 +35,7 @@ npx shadcn@latest add @shark/listbox
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -56,13 +56,15 @@ Listbox
 ├── ListboxLabel
 ├── ListboxValueText
 └── ListboxContent
-    ├── ListboxEmpty
-    └── ListboxItemGroup
-        ├── ListboxItemGroupLabel
-        └── ListboxItem
-            ├── ListboxItemText
-            ├── ListboxItemIndicator
-            └── ListboxShortcut
+    └── ListboxBody
+        ├── ListboxEmpty
+        └── ListboxItemGroup
+            ├── ListboxItemGroupLabel
+            └── ListboxItem
+                ├── ListboxItemText
+                ├── ListboxItemDescription
+                ├── ListboxItemIndicator
+                └── ListboxShortcut
 ```
 
 ## Usage
@@ -71,6 +73,7 @@ Listbox
 import { createListCollection } from "@ark-ui/react";
 import {
   Listbox,
+  ListboxBody,
   ListboxContent,
   ListboxItem,
   ListboxLabel,
@@ -89,11 +92,13 @@ const collection = createListCollection({
 <Listbox collection={collection}>
   <ListboxLabel>Country</ListboxLabel>
   <ListboxContent>
-    {collection.items.map((item) => (
-      <ListboxItem item={item} key={item.value}>
-        {item.label}
-      </ListboxItem>
-    ))}
+    <ListboxBody>
+      {collection.items.map((item) => (
+        <ListboxItem item={item} key={item.value}>
+          {item.label}
+        </ListboxItem>
+      ))}
+    </ListboxBody>
   </ListboxContent>
 </Listbox>
 ```
@@ -160,19 +165,19 @@ Set `selectionMode="none"` to disable selection.
 
 ### Grouping
 
-Use `groupBy` in `createListCollection` and `<ListboxItemGroup heading={}>` with `<ListboxItemGroupLabel>` to group items.
+Use `groupBy` in `createListCollection`.
 
 <ComponentPreview componentName="listbox" fileName="example-grouping" />
 
 ### With Filter
 
-Filter items using `useListCollection` with `useFilter` from `@ark-ui/react`. Call `filter` when the search input changes to filter items by label.
+Filter items using `useListCollection` with `useFilter`.
 
 <ComponentPreview componentName="listbox" fileName="example-with-filter" />
 
 ### With Popover
 
-Use the listbox within a popover to create dropdown-like selection menus that overlay other content without taking up permanent screen space.
+Use the listbox within a popover to create menu-like.
 
 <ComponentPreview componentName="listbox" fileName="example-with-popover" />
 
@@ -181,6 +186,12 @@ Use the listbox within a popover to create dropdown-like selection menus that ov
 Use `createGridCollection` with `columnCount` and grid CSS for a grid layout.
 
 <ComponentPreview componentName="listbox" fileName="example-grid" />
+
+### Scrollable
+
+Use `ListboxBody` to make the list scrollable. Set a height on `ListboxContent`.
+
+<ComponentPreview componentName="listbox" fileName="example-scrollable" />
 
 ## API Reference
 
@@ -215,6 +226,14 @@ Holds the list of options.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | - |
+| `className` | `string` | - |
+
+### ListboxBody
+
+Layout wrapper for list items inside `ListboxContent`. Put `h-*` or `max-h-*` on `ListboxContent` when the list should scroll.
+
+| Prop | Type | Default |
+| --- | --- | --- |
 | `className` | `string` | - |
 
 ### ListboxItem

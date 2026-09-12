@@ -1,3 +1,8 @@
+"use client";
+
+import type React from "react";
+import { createPortal } from "react-dom";
+import { useCodeCollapsibleActions } from "@/components/code-collapsible-wrapper";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -13,10 +18,18 @@ import {
 
 export const CopyButton = (props: React.ComponentProps<typeof Clipboard>) => {
   const { className, children, ...rest } = props;
+  const actionsElement = useCodeCollapsibleActions();
 
-  return (
+  const button = (
     <Tooltip openDelay={400}>
-      <Clipboard rootClassName={cn("z-10", className)} {...rest}>
+      <Clipboard
+        rootClassName={cn(
+          "z-10",
+          actionsElement && "pointer-events-auto",
+          className
+        )}
+        {...rest}
+      >
         <TooltipTrigger asChild>
           <ClipboardTrigger asChild>
             <Button
@@ -33,4 +46,6 @@ export const CopyButton = (props: React.ComponentProps<typeof Clipboard>) => {
       </Clipboard>
     </Tooltip>
   );
+
+  return actionsElement ? createPortal(button, actionsElement) : button;
 };

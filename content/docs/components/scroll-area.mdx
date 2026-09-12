@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/scroll-area#api-reference
 ---
 
+import manifest from "@/registry/manifest/scroll-area";
+
 <ComponentPreview componentName="scroll-area" />
 
 ## Installation
@@ -31,9 +33,7 @@ npx shadcn@latest add @shark/scroll-area
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -63,7 +63,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 ### Scroll Fade
 
-Use `scrollFade` to fade the edges of the scroll area. The fade only appears on an axis that overflows, and only on the side you can still scroll toward — it hides at the top when you are already at the top, at the bottom when you cannot scroll further, and the same for left and right on horizontal overflow.
+Use `scrollFade` to fade the edges of the scroll area. The fade only appears on an axis that overflows, and only on the side you can still scroll toward. It hides at the top when you are already at the top, at the bottom when you cannot scroll further, and the same for left and right on horizontal overflow.
 
 <ComponentPreview componentName="scroll-area" fileName="example-scroll-fade" />
 

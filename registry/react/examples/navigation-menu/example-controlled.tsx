@@ -12,7 +12,7 @@ import {
   type NavigationMenuValueChangeDetails,
 } from "@/registry/react/components/navigation-menu";
 
-const NavigationMenuDemo = () => {
+const Example = () => {
   const [value, setValue] = useState<string>("");
 
   const handleValueChange = (details: NavigationMenuValueChangeDetails) =>
@@ -72,4 +72,4 @@ const NavigationMenuDemo = () => {
   );
 };
 
-export default NavigationMenuDemo;
+export default Example;

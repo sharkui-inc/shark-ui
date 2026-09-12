@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/utilities/hotkeys#api-reference
 ---
 
+import manifest from "@/registry/manifest/hotkeys";
+
 <ComponentPreview componentName="hotkeys" />
 
 ## Installation
@@ -27,9 +29,7 @@ npx shadcn@latest add @shark/hotkeys
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

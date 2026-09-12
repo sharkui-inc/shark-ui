@@ -34,10 +34,10 @@ import {
   InputGroupInput,
 } from "@/registry/react/components/input-group";
 import {
-  menuListVariants,
   MenuShortcut,
+  menuListVariants,
+  menuSeparatorVariants,
 } from "@/registry/react/components/menu";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
 
 export const CommandDialog = Dialog;
@@ -73,7 +73,7 @@ const commandDialogContentVariants = tv({
       inset: [
         "p-0 max-sm:border-0",
         "sm:rounded-2xl sm:border",
-        "sm:**:data-[slot=command-footer]:rounded-b-[calc(var(--radius-2xl)-1px)]",
+        "sm:**:data-[slot=command-footer]:rounded-b-2xl",
         "sm:**:data-[slot=command]:rounded-none sm:**:data-[slot=command]:border-0",
       ],
     },
@@ -150,7 +150,7 @@ export const Command: ArkCombobox.RootComponent = (props) => {
         menuListVariants(),
         "bg-popover",
         "text-popover-foreground",
-        "rounded-2xl border",
+        "overflow-hidden rounded-2xl border",
         className
       )}
       closeOnSelect={false}
@@ -180,33 +180,26 @@ interface CommandInputProps
 export const CommandContent = (
   props: React.ComponentProps<typeof ArkCombobox.Content>
 ) => {
-  const { className, children, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
     <ArkCombobox.Content
       className={cn(
         "flex flex-1 flex-col",
         "max-h-(--available-height) min-h-0",
-        "overflow-clip",
+        "overflow-auto overscroll-contain",
         "outline-none",
         "[:not(.has-[+[data-slot=command-footer]])]:rounded-b-2xl [:not(.has-[+[data-slot=command-footer]])]:border-b",
         className
       )}
       data-slot="command-content"
       {...rest}
-    >
-      <ScrollArea
-        className="min-h-0 flex-1 **:data-[slot=scroll-area-scrollbar]:me-0"
-        scrollFade
-      >
-        <div data-slot="command-scroll">{children}</div>
-      </ScrollArea>
-    </ArkCombobox.Content>
+    />
   );
 };
 
 export const CommandInput = (props: CommandInputProps) => {
-  const { size = "lg", className, ...rest } = props;
+  const { size = "lg", className, autoFocus = true, ...rest } = props;
 
   return (
     <ComboboxControl className="mb-2">
@@ -219,7 +212,7 @@ export const CommandInput = (props: CommandInputProps) => {
           <SearchIcon aria-hidden className="opacity-64" />
         </InputGroupAddon>
         <ArkCombobox.Input asChild data-slot="command-input">
-          <InputGroupInput autoFocus />
+          <InputGroupInput autoFocus={autoFocus} />
         </ArkCombobox.Input>
       </InputGroup>
     </ComboboxControl>
@@ -273,7 +266,7 @@ export const CommandItem = (
 
   return (
     <ArkCombobox.Item
-      className={cn(comboboxItemVariants({ showIndicator: false }), className)}
+      className={cn(comboboxItemVariants(), className)}
       data-slot="command-item"
       persistFocus
       {...rest}
@@ -288,7 +281,7 @@ export const CommandSeparator = (
 
   return (
     <Separator
-      className={cn("my-2", className)}
+      className={cn(menuSeparatorVariants(), className)}
       data-slot="command-separator"
       {...rest}
     />
@@ -306,11 +299,11 @@ export const CommandFooter = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn(
         "z-10",
-        "flex items-center justify-between gap-2",
-        "-m-1 mt-2 px-4 py-3",
+        "flex items-center justify-between gap-3",
+        "-mx-1 mt-2 -mb-1 px-3 py-2",
         "bg-muted/48",
-        "text-muted-foreground text-xs",
-        "rounded-b-[calc(var(--radius-2xl,1rem)-1px)] border-t",
+        "text-muted-foreground text-xs leading-none",
+        "rounded-b-2xl border-t",
         className
       )}
       data-slot="command-footer"

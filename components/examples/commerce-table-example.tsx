@@ -1,10 +1,27 @@
 "use client";
 
 import { EllipsisIcon } from "lucide-react";
-import { cn } from "tailwind-variants";
+import { useState } from "react";
+import { toast } from "@/components/examples/example-toast";
+import { cn } from "@/lib/utils";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogClose,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+} from "@/registry/react/components/alert-dialog";
 import { Badge, type BadgeVariant } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
 import { Card, CardContent } from "@/registry/react/components/card";
+import {
+  Menu,
+  MenuContent,
+  MenuItem,
+  MenuTrigger,
+} from "@/registry/react/components/menu";
 import {
   Table,
   TableBody,
@@ -16,6 +33,7 @@ import {
 
 export const CommerceTableExample = (props: React.ComponentProps<"div">) => {
   const { className, ...rest } = props;
+  const [refund, setRefund] = useState<(typeof DATA)[number] | null>(null);
 
   return (
     <Card className={cn("[--space:--spacing(2)]", className)} {...rest}>
@@ -26,6 +44,7 @@ export const CommerceTableExample = (props: React.ComponentProps<"div">) => {
               <TableHead>Name</TableHead>
               <TableHead className="text-center">Amount</TableHead>
               <TableHead className="text-center">Status</TableHead>
+              <TableHead className="w-10" />
             </TableRow>
           </TableHeader>
 
@@ -35,23 +54,81 @@ export const CommerceTableExample = (props: React.ComponentProps<"div">) => {
                 <TableCell>{row.name}</TableCell>
                 <TableCell className="text-center">{row.amount}</TableCell>
                 <TableCell className="text-center">
-                  <Badge
-                    className="capitalize"
-                    variant={BADGE_VARIANTS[row.status]}
-                  >
-                    {row.status}
+                  <Badge variant={BADGE_VARIANTS[row.status]}>
+                    {row.status.charAt(0).toUpperCase() + row.status.slice(1)}
                   </Badge>
                 </TableCell>
                 <TableCell>
-                  <Button size="icon-sm" tabIndex={-1} variant="outline">
-                    <EllipsisIcon />
-                  </Button>
+                  <Menu>
+                    <MenuTrigger asChild>
+                      <Button
+                        aria-label={`Actions for ${row.name}`}
+                        size="icon-sm"
+                        variant="outline"
+                      >
+                        <EllipsisIcon aria-hidden="true" />
+                      </Button>
+                    </MenuTrigger>
+                    <MenuContent>
+                      <MenuItem
+                        onSelect={() =>
+                          toast.info({
+                            description: row.name,
+                            title: "Customer",
+                          })
+                        }
+                        value="view"
+                      >
+                        View
+                      </MenuItem>
+                      <MenuItem onSelect={() => setRefund(row)} value="refund">
+                        Refund
+                      </MenuItem>
+                    </MenuContent>
+                  </Menu>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </CardContent>
+
+      <AlertDialog
+        onOpenChange={({ open }) => {
+          if (!open) {
+            setRefund(null);
+          }
+        }}
+        open={refund !== null}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader
+            description={
+              refund
+                ? `Refund ${refund.amount} to ${refund.name}? This preview does not move money.`
+                : undefined
+            }
+            title="Issue a refund?"
+          />
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogClose asChild>
+              <AlertDialogAction
+                onClick={() => {
+                  toast.success({
+                    description: refund?.name,
+                    title: "Refund issued",
+                  });
+                  setRefund(null);
+                }}
+                variant="destructive"
+              >
+                Refund
+              </AlertDialogAction>
+            </AlertDialogClose>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Card>
   );
 };

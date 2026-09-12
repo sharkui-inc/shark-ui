@@ -111,7 +111,7 @@ function PasswordChecker({ password, onPasswordChange }: PasswordCheckerProps) {
   return (
     <Field className="w-full max-w-sm">
       <FieldLabel>Enter Your Password</FieldLabel>
-      <InputGroup className="w-full">
+      <InputGroup>
         <InputGroupInput
           aria-label="Password"
           autoComplete="current-password"
@@ -125,7 +125,6 @@ function PasswordChecker({ password, onPasswordChange }: PasswordCheckerProps) {
           <InputGroupButton
             aria-label={showPassword ? "Hide password" : "Show password"}
             onClick={handleToggleVisibility}
-            type="button"
           >
             {showPassword ? (
               <EyeOffIcon aria-hidden />
@@ -136,19 +135,13 @@ function PasswordChecker({ password, onPasswordChange }: PasswordCheckerProps) {
         </InputGroupAddon>
       </InputGroup>
       <div className="mt-3 flex gap-2" data-testid="buttonDiv">
-        <Button
-          onClick={handleToggleVisibility}
-          size="sm"
-          type="button"
-          variant="default"
-        >
+        <Button onClick={handleToggleVisibility} size="sm">
           {showPassword ? "Hide Password" : "Show Password"}
         </Button>
         <Button
           disabled={!password}
           onClick={handleClear}
           size="sm"
-          type="button"
           variant="default"
         >
           Clear Password

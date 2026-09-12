@@ -41,9 +41,9 @@ Use `MarqueeEdge` for fade masks; toggle `orientation`, `reverse`, `pauseOnHover
 
 ## Common pitfalls
 
-- Too few children for a wide viewport—content may not fill; use autofill or repeat items.
-- Animating heavy DOM (large images) without sizing constraints—set explicit heights/widths.
-- Ignoring reduced-motion preferences if your product requires them—test accessibility.
+- Too few children for a wide viewport: content may not fill; use autofill or repeat items.
+- Animating heavy DOM (large images) without sizing constraints: set explicit heights/widths.
+- Ignoring reduced-motion preferences if your product requires them: test accessibility.
 
 ## Registry example files
 

@@ -2,7 +2,7 @@
 
 ## When to use
 
-- Minimal contextual help on **hover or focus**—lighter than a full `Tooltip` in some layouts.
+- Minimal contextual help on **hover or focus**: lighter than a full `Tooltip` in some layouts.
 - Icon or text triggers that need a small popper without heavy chrome.
 
 ## Install
@@ -44,7 +44,7 @@ Add `HintArrow` when you want a pointer; tune `positioning` / `gutter` per docs.
 
 ## Common pitfalls
 
-- Using `Hint` for large rich content—keep copy short.
+- Using `Hint` for large rich content: keep copy short.
 - Missing `aria-label` on icon-only `HintTrigger` children.
 - Confusing `Hint` with `ToggleTooltip` (click/toggle popover semantics differ).
 

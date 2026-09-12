@@ -61,9 +61,7 @@ export const IdeWorkspace = ({ path }: IdeWorkspaceProps) => {
             <CodeBlockTitle>{path}</CodeBlockTitle>
             <CodeBlockCopy />
           </CodeBlockHeader>
-          <CodeBlockContent className="max-h-none" showLineNumbers>
-            {code}
-          </CodeBlockContent>
+          <CodeBlockContent showLineNumbers>{code}</CodeBlockContent>
         </CodeBlock>
       </ResizablePanel>
       <ResizableResizeTrigger id="editor:terminal" />

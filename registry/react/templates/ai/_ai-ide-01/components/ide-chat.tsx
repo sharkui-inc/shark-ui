@@ -1,8 +1,7 @@
 "use client";
 
 import { BotIcon } from "lucide-react";
-import type React from "react";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
 import {
   Diff,
@@ -29,14 +28,12 @@ import {
 } from "@/registry/react/components/message-scroller";
 import {
   Plan,
-  PlanAction,
   PlanContent,
   PlanHeader,
   PlanItem,
   PlanItemContent,
   PlanItemDetailFile,
   PlanItemTrigger,
-  PlanTrigger,
 } from "@/registry/react/components/plan";
 import {
   PromptInput,
@@ -57,36 +54,20 @@ import {
 export const IdeChat = () => {
   const [draft, setDraft] = useState("");
 
-  const handleSubmit = useCallback(() => {
-    setDraft("");
-  }, []);
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLTextAreaElement>) =>
-      setDraft(event.target.value),
-    []
-  );
-
   return (
     <div className="flex h-full min-h-0 flex-col">
       <div className="border-b p-3">
         <Plan>
-          <PlanHeader title="Add email validation">
-            <PlanAction>
-              <PlanTrigger />
-            </PlanAction>
-          </PlanHeader>
+          <PlanHeader title="Add email validation" />
           <PlanContent>
-            <PlanItem status="completed">
-              <PlanItemTrigger status="completed" title="Read helpers.ts" />
+            <PlanItem collapsible status="completed">
+              <PlanItemTrigger title="Read helpers.ts" />
               <PlanItemContent>
                 <PlanItemDetailFile>src/utils/helpers.ts</PlanItemDetailFile>
               </PlanItemContent>
             </PlanItem>
-            <PlanItem status="in-progress">
-              <PlanItemTrigger
-                status="in-progress"
-                title="Patch isValidEmail"
-              />
+            <PlanItem collapsible status="in-progress">
+              <PlanItemTrigger title="Patch isValidEmail" />
               <PlanItemContent>
                 <PlanItemDetailFile>src/utils/helpers.ts</PlanItemDetailFile>
               </PlanItemContent>
@@ -163,11 +144,11 @@ export const IdeChat = () => {
         <MessageScrollerButton />
       </MessageScroller>
       <div className="border-t p-3">
-        <PromptInput onSubmit={handleSubmit}>
+        <PromptInput onSubmit={() => setDraft("")}>
           <PromptInputTextarea
             aria-label="Message"
             className="min-h-16"
-            onChange={handleChange}
+            onChange={(event) => setDraft(event.target.value)}
             placeholder="Ask about the code..."
             value={draft}
           />

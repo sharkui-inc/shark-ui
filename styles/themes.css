@@ -1,1282 +1,541 @@
-@import "tailwindcss";
-
-/* Default theme goes here, but it's the default */
+/* Generated from lib/theme/catalog.ts. Do not edit. */
 
 .theme-red {
-  --primary: var(--color-red-600);
-  --primary-foreground: var(--color-red-50);
+  --primary: var(--color-red-400);
+  --primary-foreground: var(--color-red-950);
   --ring: var(--color-red-500);
-  --sidebar-primary: var(--color-red-600);
-  --sidebar-primary-foreground: var(--color-red-50);
+  --sidebar-primary: var(--color-red-400);
+  --sidebar-primary-foreground: var(--color-red-950);
   --sidebar-ring: var(--color-red-500);
-
-  @variant dark {
-    --primary: var(--color-red-700);
-    --primary-foreground: var(--color-red-50);
-    --ring: var(--color-red-900);
-    --sidebar-primary: var(--color-red-700);
-    --sidebar-primary-foreground: var(--color-red-50);
-    --sidebar-ring: var(--color-red-900);
-  }
 }
 
 .theme-orange {
-  --primary: var(--color-orange-700);
-  --primary-foreground: var(--color-orange-50);
-  --ring: var(--color-orange-400);
-  --sidebar-primary: var(--color-orange-700);
-  --sidebar-primary-foreground: var(--color-orange-50);
-  --sidebar-ring: var(--color-orange-400);
-
-  @variant dark {
-    --primary: var(--color-orange-700);
-    --primary-foreground: var(--color-orange-50);
-    --ring: var(--color-orange-900);
-    --sidebar-primary: var(--color-orange-700);
-    --sidebar-primary-foreground: var(--color-orange-50);
-    --sidebar-ring: var(--color-orange-900);
-  }
+  --primary: var(--color-orange-400);
+  --primary-foreground: var(--color-orange-950);
+  --ring: var(--color-orange-500);
+  --sidebar-primary: var(--color-orange-400);
+  --sidebar-primary-foreground: var(--color-orange-950);
+  --sidebar-ring: var(--color-orange-500);
 }
 
 .theme-amber {
-  --primary: var(--color-amber-600);
-  --primary-foreground: var(--color-amber-50);
+  --primary: var(--color-amber-400);
+  --primary-foreground: var(--color-amber-950);
   --ring: var(--color-amber-500);
-  --sidebar-primary: var(--color-amber-600);
-  --sidebar-primary-foreground: var(--color-amber-50);
+  --sidebar-primary: var(--color-amber-400);
+  --sidebar-primary-foreground: var(--color-amber-950);
   --sidebar-ring: var(--color-amber-500);
-
-  @variant dark {
-    --primary: var(--color-amber-700);
-    --primary-foreground: var(--color-amber-50);
-    --ring: var(--color-amber-900);
-    --sidebar-primary: var(--color-amber-700);
-    --sidebar-primary-foreground: var(--color-amber-50);
-    --sidebar-ring: var(--color-amber-900);
-  }
 }
 
 .theme-yellow {
-  --primary: var(--color-yellow-600);
-  --primary-foreground: var(--color-yellow-50);
+  --primary: var(--color-yellow-400);
+  --primary-foreground: var(--color-yellow-950);
   --ring: var(--color-yellow-500);
-  --sidebar-primary: var(--color-yellow-600);
-  --sidebar-primary-foreground: var(--color-yellow-50);
+  --sidebar-primary: var(--color-yellow-400);
+  --sidebar-primary-foreground: var(--color-yellow-950);
   --sidebar-ring: var(--color-yellow-500);
-
-  @variant dark {
-    --primary: var(--color-yellow-700);
-    --primary-foreground: var(--color-yellow-50);
-    --ring: var(--color-yellow-900);
-    --sidebar-primary: var(--color-yellow-700);
-    --sidebar-primary-foreground: var(--color-yellow-50);
-    --sidebar-ring: var(--color-yellow-900);
-  }
 }
 
 .theme-lime {
-  --primary: var(--color-lime-600);
-  --primary-foreground: var(--color-lime-50);
-  --ring: var(--color-lime-600);
-  --sidebar-primary: var(--color-lime-600);
-  --sidebar-primary-foreground: var(--color-lime-50);
-  --sidebar-ring: var(--color-lime-600);
-
-  @variant dark {
-    --primary: var(--color-lime-700);
-    --primary-foreground: var(--color-lime-50);
-    --ring: var(--color-lime-900);
-    --sidebar-primary: var(--color-lime-700);
-    --sidebar-primary-foreground: var(--color-lime-50);
-    --sidebar-ring: var(--color-lime-900);
-  }
+  --primary: var(--color-lime-400);
+  --primary-foreground: var(--color-lime-950);
+  --ring: var(--color-lime-500);
+  --sidebar-primary: var(--color-lime-400);
+  --sidebar-primary-foreground: var(--color-lime-950);
+  --sidebar-ring: var(--color-lime-500);
 }
 
 .theme-green {
-  --primary: var(--color-green-600);
-  --primary-foreground: var(--color-green-50);
-  --ring: var(--color-green-600);
-  --sidebar-primary: var(--color-green-600);
-  --sidebar-primary-foreground: var(--color-green-50);
-  --sidebar-ring: var(--color-green-600);
-
-  @variant dark {
-    --primary: var(--color-green-700);
-    --primary-foreground: var(--color-green-50);
-    --ring: var(--color-green-900);
-    --sidebar-primary: var(--color-green-700);
-    --sidebar-primary-foreground: var(--color-green-50);
-    --sidebar-ring: var(--color-green-900);
-  }
+  --primary: var(--color-green-400);
+  --primary-foreground: var(--color-green-950);
+  --ring: var(--color-green-500);
+  --sidebar-primary: var(--color-green-400);
+  --sidebar-primary-foreground: var(--color-green-950);
+  --sidebar-ring: var(--color-green-500);
 }
 
 .theme-emerald {
-  --primary: var(--color-emerald-600);
-  --primary-foreground: var(--color-emerald-50);
-  --ring: var(--color-emerald-600);
-  --sidebar-primary: var(--color-emerald-600);
-  --sidebar-primary-foreground: var(--color-emerald-50);
-  --sidebar-ring: var(--color-emerald-600);
-
-  @variant dark {
-    --primary: var(--color-emerald-700);
-    --primary-foreground: var(--color-emerald-50);
-    --ring: var(--color-emerald-900);
-    --sidebar-primary: var(--color-emerald-700);
-    --sidebar-primary-foreground: var(--color-emerald-50);
-    --sidebar-ring: var(--color-emerald-900);
-  }
+  --primary: var(--color-emerald-400);
+  --primary-foreground: var(--color-emerald-950);
+  --ring: var(--color-emerald-500);
+  --sidebar-primary: var(--color-emerald-400);
+  --sidebar-primary-foreground: var(--color-emerald-950);
+  --sidebar-ring: var(--color-emerald-500);
 }
 
 .theme-teal {
-  --primary: var(--color-teal-600);
-  --primary-foreground: var(--color-teal-50);
-  --ring: var(--color-teal-600);
-  --sidebar-primary: var(--color-teal-600);
-  --sidebar-primary-foreground: var(--color-teal-50);
-  --sidebar-ring: var(--color-teal-600);
-
-  @variant dark {
-    --primary: var(--color-teal-700);
-    --primary-foreground: var(--color-teal-50);
-    --ring: var(--color-teal-900);
-    --sidebar-primary: var(--color-teal-700);
-    --sidebar-primary-foreground: var(--color-teal-50);
-    --sidebar-ring: var(--color-teal-900);
-  }
+  --primary: var(--color-teal-400);
+  --primary-foreground: var(--color-teal-950);
+  --ring: var(--color-teal-500);
+  --sidebar-primary: var(--color-teal-400);
+  --sidebar-primary-foreground: var(--color-teal-950);
+  --sidebar-ring: var(--color-teal-500);
 }
 
 .theme-cyan {
-  --primary: var(--color-cyan-600);
-  --primary-foreground: var(--color-cyan-50);
-  --ring: var(--color-cyan-600);
-  --sidebar-primary: var(--color-cyan-600);
-  --sidebar-primary-foreground: var(--color-cyan-50);
-  --sidebar-ring: var(--color-cyan-600);
-
-  @variant dark {
-    --primary: var(--color-cyan-700);
-    --primary-foreground: var(--color-cyan-50);
-    --ring: var(--color-cyan-900);
-    --sidebar-primary: var(--color-cyan-700);
-    --sidebar-primary-foreground: var(--color-cyan-50);
-    --sidebar-ring: var(--color-cyan-900);
-  }
+  --primary: var(--color-cyan-400);
+  --primary-foreground: var(--color-cyan-950);
+  --ring: var(--color-cyan-500);
+  --sidebar-primary: var(--color-cyan-400);
+  --sidebar-primary-foreground: var(--color-cyan-950);
+  --sidebar-ring: var(--color-cyan-500);
 }
 
 .theme-sky {
-  --primary: var(--color-sky-600);
-  --primary-foreground: var(--color-sky-50);
-  --ring: var(--color-sky-600);
-  --sidebar-primary: var(--color-sky-600);
-  --sidebar-primary-foreground: var(--color-sky-50);
-  --sidebar-ring: var(--color-sky-600);
-
-  @variant dark {
-    --primary: var(--color-sky-700);
-    --primary-foreground: var(--color-sky-50);
-    --ring: var(--color-sky-900);
-    --sidebar-primary: var(--color-sky-700);
-    --sidebar-primary-foreground: var(--color-sky-50);
-    --sidebar-ring: var(--color-sky-900);
-  }
+  --primary: var(--color-sky-400);
+  --primary-foreground: var(--color-sky-950);
+  --ring: var(--color-sky-500);
+  --sidebar-primary: var(--color-sky-400);
+  --sidebar-primary-foreground: var(--color-sky-950);
+  --sidebar-ring: var(--color-sky-500);
 }
 
 .theme-blue {
-  --primary: var(--color-blue-600);
-  --primary-foreground: var(--color-blue-50);
-  --ring: var(--color-blue-400);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --sidebar-ring: var(--color-blue-400);
-
-  @variant dark {
-    --primary: var(--color-blue-600);
-    --primary-foreground: var(--color-blue-50);
-    --ring: var(--color-blue-900);
-    --sidebar-primary: var(--color-blue-600);
-    --sidebar-primary-foreground: var(--color-blue-50);
-    --sidebar-ring: var(--color-blue-900);
-  }
+  --primary: var(--color-blue-400);
+  --primary-foreground: var(--color-blue-950);
+  --ring: var(--color-blue-500);
+  --sidebar-primary: var(--color-blue-400);
+  --sidebar-primary-foreground: var(--color-blue-950);
+  --sidebar-ring: var(--color-blue-500);
 }
 
 .theme-indigo {
-  --primary: var(--color-indigo-600);
-  --primary-foreground: var(--color-indigo-50);
-  --ring: var(--color-indigo-400);
-  --sidebar-primary: var(--color-indigo-600);
-  --sidebar-primary-foreground: var(--color-indigo-50);
-  --sidebar-ring: var(--color-indigo-400);
-
-  @variant dark {
-    --primary: var(--color-indigo-500);
-    --primary-foreground: var(--color-indigo-50);
-    --ring: var(--color-indigo-900);
-    --sidebar-primary: var(--color-indigo-500);
-    --sidebar-primary-foreground: var(--color-indigo-50);
-    --sidebar-ring: var(--color-indigo-900);
-  }
+  --primary: var(--color-indigo-400);
+  --primary-foreground: var(--color-indigo-950);
+  --ring: var(--color-indigo-500);
+  --sidebar-primary: var(--color-indigo-400);
+  --sidebar-primary-foreground: var(--color-indigo-950);
+  --sidebar-ring: var(--color-indigo-500);
 }
 
 .theme-violet {
-  --primary: var(--color-violet-600);
-  --primary-foreground: var(--color-violet-50);
-  --ring: var(--color-violet-400);
-  --sidebar-primary: var(--color-violet-600);
-  --sidebar-primary-foreground: var(--color-violet-50);
-  --sidebar-ring: var(--color-violet-400);
-
-  @variant dark {
-    --primary: var(--color-violet-500);
-    --primary-foreground: var(--color-violet-50);
-    --ring: var(--color-violet-900);
-    --sidebar-primary: var(--color-violet-500);
-    --sidebar-primary-foreground: var(--color-violet-50);
-    --sidebar-ring: var(--color-violet-900);
-  }
+  --primary: var(--color-violet-400);
+  --primary-foreground: var(--color-violet-950);
+  --ring: var(--color-violet-500);
+  --sidebar-primary: var(--color-violet-400);
+  --sidebar-primary-foreground: var(--color-violet-950);
+  --sidebar-ring: var(--color-violet-500);
 }
 
 .theme-purple {
-  --primary: var(--color-purple-600);
-  --primary-foreground: var(--color-purple-50);
-  --ring: var(--color-purple-400);
-  --sidebar-primary: var(--color-purple-600);
-  --sidebar-primary-foreground: var(--color-purple-50);
-  --sidebar-ring: var(--color-purple-400);
-
-  @variant dark {
-    --primary: var(--color-purple-500);
-    --primary-foreground: var(--color-purple-50);
-    --ring: var(--color-purple-900);
-    --sidebar-primary: var(--color-purple-500);
-    --sidebar-primary-foreground: var(--color-purple-50);
-    --sidebar-ring: var(--color-purple-900);
-  }
+  --primary: var(--color-purple-400);
+  --primary-foreground: var(--color-purple-950);
+  --ring: var(--color-purple-500);
+  --sidebar-primary: var(--color-purple-400);
+  --sidebar-primary-foreground: var(--color-purple-950);
+  --sidebar-ring: var(--color-purple-500);
 }
 
 .theme-fuchsia {
-  --primary: var(--color-fuchsia-600);
-  --primary-foreground: var(--color-fuchsia-50);
-  --ring: var(--color-fuchsia-400);
-  --sidebar-primary: var(--color-fuchsia-600);
-  --sidebar-primary-foreground: var(--color-fuchsia-50);
-  --sidebar-ring: var(--color-fuchsia-400);
-
-  @variant dark {
-    --primary: var(--color-fuchsia-500);
-    --primary-foreground: var(--color-fuchsia-50);
-    --ring: var(--color-fuchsia-900);
-    --sidebar-primary: var(--color-fuchsia-500);
-    --sidebar-primary-foreground: var(--color-fuchsia-50);
-    --sidebar-ring: var(--color-fuchsia-900);
-  }
+  --primary: var(--color-fuchsia-400);
+  --primary-foreground: var(--color-fuchsia-950);
+  --ring: var(--color-fuchsia-500);
+  --sidebar-primary: var(--color-fuchsia-400);
+  --sidebar-primary-foreground: var(--color-fuchsia-950);
+  --sidebar-ring: var(--color-fuchsia-500);
 }
 
 .theme-pink {
-  --primary: var(--color-pink-600);
-  --primary-foreground: var(--color-pink-50);
-  --ring: var(--color-pink-400);
-  --sidebar-primary: var(--color-pink-600);
-  --sidebar-primary-foreground: var(--color-pink-50);
-  --sidebar-ring: var(--color-pink-400);
-
-  @variant dark {
-    --primary: var(--color-pink-500);
-    --primary-foreground: var(--color-pink-50);
-    --ring: var(--color-pink-900);
-    --sidebar-primary: var(--color-pink-500);
-    --sidebar-primary-foreground: var(--color-pink-50);
-    --sidebar-ring: var(--color-pink-900);
-  }
+  --primary: var(--color-pink-400);
+  --primary-foreground: var(--color-pink-950);
+  --ring: var(--color-pink-500);
+  --sidebar-primary: var(--color-pink-400);
+  --sidebar-primary-foreground: var(--color-pink-950);
+  --sidebar-ring: var(--color-pink-500);
 }
 
 .theme-rose {
+  --primary: var(--color-rose-400);
+  --primary-foreground: var(--color-rose-950);
+  --ring: var(--color-rose-500);
+  --sidebar-primary: var(--color-rose-400);
+  --sidebar-primary-foreground: var(--color-rose-950);
+  --sidebar-ring: var(--color-rose-500);
+}
+
+body.primary-tone-dark.theme-red {
+  --primary: var(--color-red-700);
+  --primary-foreground: var(--color-red-50);
+  --ring: var(--color-red-500);
+  --sidebar-primary: var(--color-red-700);
+  --sidebar-primary-foreground: var(--color-red-50);
+  --sidebar-ring: var(--color-red-500);
+}
+
+body.primary-tone-dark.theme-orange {
+  --primary: var(--color-orange-700);
+  --primary-foreground: var(--color-orange-50);
+  --ring: var(--color-orange-500);
+  --sidebar-primary: var(--color-orange-700);
+  --sidebar-primary-foreground: var(--color-orange-50);
+  --sidebar-ring: var(--color-orange-500);
+}
+
+body.primary-tone-dark.theme-amber {
+  --primary: var(--color-amber-700);
+  --primary-foreground: var(--color-amber-50);
+  --ring: var(--color-amber-500);
+  --sidebar-primary: var(--color-amber-700);
+  --sidebar-primary-foreground: var(--color-amber-50);
+  --sidebar-ring: var(--color-amber-500);
+}
+
+body.primary-tone-dark.theme-yellow {
+  --primary: var(--color-yellow-700);
+  --primary-foreground: var(--color-yellow-50);
+  --ring: var(--color-yellow-500);
+  --sidebar-primary: var(--color-yellow-700);
+  --sidebar-primary-foreground: var(--color-yellow-50);
+  --sidebar-ring: var(--color-yellow-500);
+}
+
+body.primary-tone-dark.theme-lime {
+  --primary: var(--color-lime-700);
+  --primary-foreground: var(--color-lime-50);
+  --ring: var(--color-lime-500);
+  --sidebar-primary: var(--color-lime-700);
+  --sidebar-primary-foreground: var(--color-lime-50);
+  --sidebar-ring: var(--color-lime-500);
+}
+
+body.primary-tone-dark.theme-green {
+  --primary: var(--color-green-700);
+  --primary-foreground: var(--color-green-50);
+  --ring: var(--color-green-500);
+  --sidebar-primary: var(--color-green-700);
+  --sidebar-primary-foreground: var(--color-green-50);
+  --sidebar-ring: var(--color-green-500);
+}
+
+body.primary-tone-dark.theme-emerald {
+  --primary: var(--color-emerald-700);
+  --primary-foreground: var(--color-emerald-50);
+  --ring: var(--color-emerald-500);
+  --sidebar-primary: var(--color-emerald-700);
+  --sidebar-primary-foreground: var(--color-emerald-50);
+  --sidebar-ring: var(--color-emerald-500);
+}
+
+body.primary-tone-dark.theme-teal {
+  --primary: var(--color-teal-700);
+  --primary-foreground: var(--color-teal-50);
+  --ring: var(--color-teal-500);
+  --sidebar-primary: var(--color-teal-700);
+  --sidebar-primary-foreground: var(--color-teal-50);
+  --sidebar-ring: var(--color-teal-500);
+}
+
+body.primary-tone-dark.theme-cyan {
+  --primary: var(--color-cyan-700);
+  --primary-foreground: var(--color-cyan-50);
+  --ring: var(--color-cyan-500);
+  --sidebar-primary: var(--color-cyan-700);
+  --sidebar-primary-foreground: var(--color-cyan-50);
+  --sidebar-ring: var(--color-cyan-500);
+}
+
+body.primary-tone-dark.theme-sky {
+  --primary: var(--color-sky-700);
+  --primary-foreground: var(--color-sky-50);
+  --ring: var(--color-sky-500);
+  --sidebar-primary: var(--color-sky-700);
+  --sidebar-primary-foreground: var(--color-sky-50);
+  --sidebar-ring: var(--color-sky-500);
+}
+
+body.primary-tone-dark.theme-blue {
+  --primary: var(--color-blue-600);
+  --primary-foreground: var(--color-blue-50);
+  --ring: var(--color-blue-500);
+  --sidebar-primary: var(--color-blue-600);
+  --sidebar-primary-foreground: var(--color-blue-50);
+  --sidebar-ring: var(--color-blue-500);
+}
+
+body.primary-tone-dark.theme-indigo {
+  --primary: var(--color-indigo-600);
+  --primary-foreground: var(--color-indigo-50);
+  --ring: var(--color-indigo-500);
+  --sidebar-primary: var(--color-indigo-600);
+  --sidebar-primary-foreground: var(--color-indigo-50);
+  --sidebar-ring: var(--color-indigo-500);
+}
+
+body.primary-tone-dark.theme-violet {
+  --primary: var(--color-violet-600);
+  --primary-foreground: var(--color-violet-50);
+  --ring: var(--color-violet-500);
+  --sidebar-primary: var(--color-violet-600);
+  --sidebar-primary-foreground: var(--color-violet-50);
+  --sidebar-ring: var(--color-violet-500);
+}
+
+body.primary-tone-dark.theme-purple {
+  --primary: var(--color-purple-600);
+  --primary-foreground: var(--color-purple-50);
+  --ring: var(--color-purple-500);
+  --sidebar-primary: var(--color-purple-600);
+  --sidebar-primary-foreground: var(--color-purple-50);
+  --sidebar-ring: var(--color-purple-500);
+}
+
+body.primary-tone-dark.theme-fuchsia {
+  --primary: var(--color-fuchsia-700);
+  --primary-foreground: var(--color-fuchsia-50);
+  --ring: var(--color-fuchsia-500);
+  --sidebar-primary: var(--color-fuchsia-700);
+  --sidebar-primary-foreground: var(--color-fuchsia-50);
+  --sidebar-ring: var(--color-fuchsia-500);
+}
+
+body.primary-tone-dark.theme-pink {
+  --primary: var(--color-pink-700);
+  --primary-foreground: var(--color-pink-50);
+  --ring: var(--color-pink-500);
+  --sidebar-primary: var(--color-pink-700);
+  --sidebar-primary-foreground: var(--color-pink-50);
+  --sidebar-ring: var(--color-pink-500);
+}
+
+body.primary-tone-dark.theme-rose {
   --primary: var(--color-rose-700);
   --primary-foreground: var(--color-rose-50);
-  --ring: var(--color-rose-400);
+  --ring: var(--color-rose-500);
   --sidebar-primary: var(--color-rose-700);
   --sidebar-primary-foreground: var(--color-rose-50);
-  --sidebar-ring: var(--color-rose-400);
-
-  @variant dark {
-    --primary: var(--color-rose-500);
-    --primary-foreground: var(--color-rose-50);
-    --ring: var(--color-rose-900);
-    --sidebar-primary: var(--color-rose-500);
-    --sidebar-primary-foreground: var(--color-rose-50);
-    --sidebar-ring: var(--color-rose-900);
-  }
+  --sidebar-ring: var(--color-rose-500);
 }
-
-/* Neutral goes here but it's the same as the default on globals.css */
 
 .bg-slate {
-  --background: var(--color-slate-50);
-  --foreground: var(--color-slate-800);
-
-  --card: color-mix(in srgb, var(--color-slate-950) 2%, var(--background));
-  --card-foreground: var(--color-slate-800);
-
-  --popover: color-mix(in srgb, var(--color-slate-950) 3%, var(--background));
-  --popover-foreground: var(--color-slate-800);
-
-  --secondary: color-mix(in srgb, var(--color-slate-950) 6%, var(--background));
-  --secondary-foreground: var(--color-slate-800);
-
-  --muted: color-mix(in srgb, var(--color-slate-950) 5%, var(--background));
-  --muted-foreground: color-mix(
-    in srgb,
-    var(--color-slate-500) 80%,
-    var(--color-slate-950)
-  );
-
-  --accent: color-mix(in srgb, var(--color-slate-950) 8%, var(--background));
-  --accent-foreground: var(--color-slate-800);
-
-  --border: color-mix(in srgb, var(--color-slate-950) 12%, var(--background));
-  --input: color-mix(in srgb, var(--color-slate-950) 15%, var(--background));
-
-  --sidebar: var(--color-slate-50);
-  --sidebar-foreground: color-mix(
-    in srgb,
-    var(--color-slate-800) 76%,
-    var(--sidebar)
-  );
-  --sidebar-accent: color-mix(
-    in srgb,
-    var(--color-slate-950) 8%,
-    var(--sidebar)
-  );
-  --sidebar-accent-foreground: var(--color-slate-800);
-  --sidebar-border: color-mix(
-    in srgb,
-    var(--color-slate-950) 11%,
-    var(--sidebar)
-  );
-
-  --code: color-mix(in srgb, var(--background) 99%, var(--color-slate-950));
-  --code-highlight: color-mix(in srgb, var(--color-slate-950) 4%, var(--code));
-
-  @variant dark {
-    --background: var(--color-slate-950);
-    --foreground: var(--color-slate-100);
-
-    --card: color-mix(in srgb, var(--background) 98%, var(--color-slate-50));
-    --card-foreground: var(--color-slate-100);
-
-    --popover: color-mix(in srgb, var(--background) 96%, var(--color-slate-50));
-    --popover-foreground: var(--color-slate-100);
-
-    --secondary: color-mix(
-      in srgb,
-      var(--color-slate-50) 8%,
-      var(--background)
-    );
-    --secondary-foreground: var(--color-slate-100);
-
-    --muted: color-mix(in srgb, var(--color-slate-50) 6%, var(--background));
-    --muted-foreground: color-mix(
-      in srgb,
-      var(--color-slate-500) 70%,
-      var(--color-slate-50)
-    );
-
-    --accent: color-mix(in srgb, var(--color-slate-50) 10%, var(--background));
-    --accent-foreground: var(--color-slate-100);
-
-    --border: color-mix(in srgb, var(--color-slate-50) 12%, var(--background));
-    --input: color-mix(in srgb, var(--color-slate-50) 15%, var(--background));
-
-    --sidebar: color-mix(
-      in srgb,
-      var(--color-slate-950) 97%,
-      var(--color-slate-50)
-    );
-    --sidebar-foreground: color-mix(
-      in srgb,
-      var(--color-slate-100) 76%,
-      var(--sidebar)
-    );
-    --sidebar-accent: color-mix(
-      in srgb,
-      var(--color-slate-50) 10%,
-      var(--sidebar)
-    );
-    --sidebar-accent-foreground: var(--color-slate-100);
-    --sidebar-border: color-mix(
-      in srgb,
-      var(--color-slate-50) 11%,
-      var(--sidebar)
-    );
-
-    --code: color-mix(in srgb, var(--background) 99%, var(--color-slate-50));
-    --code-highlight: color-mix(in srgb, var(--color-slate-50) 4%, var(--code));
-  }
-}
-
-.bg-slate:not([class*="theme-"]) {
-  --primary: var(--color-slate-800);
-  --primary-foreground: var(--color-slate-50);
-  --ring: var(--color-slate-400);
-  --sidebar-primary: var(--color-slate-800);
-  --sidebar-primary-foreground: var(--color-slate-50);
-  --sidebar-ring: var(--color-slate-400);
-
-  @variant dark {
-    --primary: var(--color-slate-100);
-    --primary-foreground: var(--color-slate-800);
-    --ring: var(--color-slate-400);
-    --sidebar-primary: var(--color-slate-100);
-    --sidebar-primary-foreground: var(--color-slate-800);
-    --sidebar-ring: var(--color-slate-400);
-  }
+  --theme-color-50: var(--color-slate-50);
+  --theme-color-100: var(--color-slate-100);
+  --theme-color-400: var(--color-slate-400);
+  --theme-color-500: var(--color-slate-500);
+  --theme-color-800: var(--color-slate-800);
+  --theme-color-950: var(--color-slate-950);
 }
 
 .bg-gray {
-  --background: var(--color-gray-50);
-  --foreground: var(--color-gray-800);
-
-  --card: color-mix(in srgb, var(--color-gray-950) 2%, var(--background));
-  --card-foreground: var(--color-gray-800);
-
-  --popover: color-mix(in srgb, var(--color-gray-950) 3%, var(--background));
-  --popover-foreground: var(--color-gray-800);
-
-  --secondary: color-mix(in srgb, var(--color-gray-950) 6%, var(--background));
-  --secondary-foreground: var(--color-gray-800);
-
-  --muted: color-mix(in srgb, var(--color-gray-950) 5%, var(--background));
-  --muted-foreground: color-mix(
-    in srgb,
-    var(--color-gray-500) 80%,
-    var(--color-gray-950)
-  );
-
-  --accent: color-mix(in srgb, var(--color-gray-950) 8%, var(--background));
-  --accent-foreground: var(--color-gray-800);
-
-  --border: color-mix(in srgb, var(--color-gray-950) 12%, var(--background));
-  --input: color-mix(in srgb, var(--color-gray-950) 15%, var(--background));
-
-  --sidebar: var(--color-gray-50);
-  --sidebar-foreground: color-mix(
-    in srgb,
-    var(--color-gray-800) 76%,
-    var(--sidebar)
-  );
-  --sidebar-accent: color-mix(
-    in srgb,
-    var(--color-gray-950) 8%,
-    var(--sidebar)
-  );
-  --sidebar-accent-foreground: var(--color-gray-800);
-  --sidebar-border: color-mix(
-    in srgb,
-    var(--color-gray-950) 11%,
-    var(--sidebar)
-  );
-
-  --code: color-mix(in srgb, var(--background) 99%, var(--color-gray-950));
-  --code-highlight: color-mix(in srgb, var(--color-gray-950) 4%, var(--code));
-
-  @variant dark {
-    --background: var(--color-gray-950);
-    --foreground: var(--color-gray-100);
-
-    --card: color-mix(in srgb, var(--background) 98%, var(--color-gray-50));
-    --card-foreground: var(--color-gray-100);
-
-    --popover: color-mix(in srgb, var(--background) 96%, var(--color-gray-50));
-    --popover-foreground: var(--color-gray-100);
-
-    --secondary: color-mix(in srgb, var(--color-gray-50) 8%, var(--background));
-    --secondary-foreground: var(--color-gray-100);
-
-    --muted: color-mix(in srgb, var(--color-gray-50) 6%, var(--background));
-    --muted-foreground: color-mix(
-      in srgb,
-      var(--color-gray-500) 70%,
-      var(--color-gray-50)
-    );
-
-    --accent: color-mix(in srgb, var(--color-gray-50) 10%, var(--background));
-    --accent-foreground: var(--color-gray-100);
-
-    --border: color-mix(in srgb, var(--color-gray-50) 12%, var(--background));
-    --input: color-mix(in srgb, var(--color-gray-50) 15%, var(--background));
-
-    --sidebar: color-mix(
-      in srgb,
-      var(--color-gray-950) 97%,
-      var(--color-gray-50)
-    );
-    --sidebar-foreground: color-mix(
-      in srgb,
-      var(--color-gray-100) 76%,
-      var(--sidebar)
-    );
-    --sidebar-accent: color-mix(
-      in srgb,
-      var(--color-gray-50) 10%,
-      var(--sidebar)
-    );
-    --sidebar-accent-foreground: var(--color-gray-100);
-    --sidebar-border: color-mix(
-      in srgb,
-      var(--color-gray-50) 11%,
-      var(--sidebar)
-    );
-
-    --code: color-mix(in srgb, var(--background) 99%, var(--color-gray-50));
-    --code-highlight: color-mix(in srgb, var(--color-gray-50) 4%, var(--code));
-  }
-}
-
-.bg-gray:not([class*="theme-"]) {
-  --primary: var(--color-gray-800);
-  --primary-foreground: var(--color-gray-50);
-  --ring: var(--color-gray-400);
-  --sidebar-primary: var(--color-gray-800);
-  --sidebar-primary-foreground: var(--color-gray-50);
-  --sidebar-ring: var(--color-gray-400);
-
-  @variant dark {
-    --primary: var(--color-gray-100);
-    --primary-foreground: var(--color-gray-800);
-    --ring: var(--color-gray-400);
-    --sidebar-primary: var(--color-gray-100);
-    --sidebar-primary-foreground: var(--color-gray-800);
-    --sidebar-ring: var(--color-gray-400);
-  }
+  --theme-color-50: var(--color-gray-50);
+  --theme-color-100: var(--color-gray-100);
+  --theme-color-400: var(--color-gray-400);
+  --theme-color-500: var(--color-gray-500);
+  --theme-color-800: var(--color-gray-800);
+  --theme-color-950: var(--color-gray-950);
 }
 
 .bg-zinc {
-  --background: var(--color-zinc-50);
-  --foreground: var(--color-zinc-800);
-
-  --card: color-mix(in srgb, var(--color-zinc-950) 2%, var(--background));
-  --card-foreground: var(--color-zinc-800);
-
-  --popover: color-mix(in srgb, var(--color-zinc-950) 3%, var(--background));
-  --popover-foreground: var(--color-zinc-800);
-
-  --secondary: color-mix(in srgb, var(--color-zinc-950) 6%, var(--background));
-  --secondary-foreground: var(--color-zinc-800);
-
-  --muted: color-mix(in srgb, var(--color-zinc-950) 5%, var(--background));
-  --muted-foreground: color-mix(
-    in srgb,
-    var(--color-zinc-500) 80%,
-    var(--color-zinc-950)
-  );
-
-  --accent: color-mix(in srgb, var(--color-zinc-950) 8%, var(--background));
-  --accent-foreground: var(--color-zinc-800);
-
-  --border: color-mix(in srgb, var(--color-zinc-950) 12%, var(--background));
-  --input: color-mix(in srgb, var(--color-zinc-950) 15%, var(--background));
-
-  --sidebar: var(--color-zinc-50);
-  --sidebar-foreground: color-mix(
-    in srgb,
-    var(--color-zinc-800) 76%,
-    var(--sidebar)
-  );
-  --sidebar-accent: color-mix(
-    in srgb,
-    var(--color-zinc-950) 8%,
-    var(--sidebar)
-  );
-  --sidebar-accent-foreground: var(--color-zinc-800);
-  --sidebar-border: color-mix(
-    in srgb,
-    var(--color-zinc-950) 11%,
-    var(--sidebar)
-  );
-
-  --code: color-mix(in srgb, var(--background) 99%, var(--color-zinc-950));
-  --code-highlight: color-mix(in srgb, var(--color-zinc-950) 4%, var(--code));
-
-  @variant dark {
-    --background: var(--color-zinc-950);
-    --foreground: var(--color-zinc-100);
-
-    --card: color-mix(in srgb, var(--background) 98%, var(--color-zinc-50));
-    --card-foreground: var(--color-zinc-100);
-
-    --popover: color-mix(in srgb, var(--background) 96%, var(--color-zinc-50));
-    --popover-foreground: var(--color-zinc-100);
-
-    --secondary: color-mix(in srgb, var(--color-zinc-50) 8%, var(--background));
-    --secondary-foreground: var(--color-zinc-100);
-
-    --muted: color-mix(in srgb, var(--color-zinc-50) 6%, var(--background));
-    --muted-foreground: color-mix(
-      in srgb,
-      var(--color-zinc-500) 70%,
-      var(--color-zinc-50)
-    );
-
-    --accent: color-mix(in srgb, var(--color-zinc-50) 10%, var(--background));
-    --accent-foreground: var(--color-zinc-100);
-
-    --border: color-mix(in srgb, var(--color-zinc-50) 12%, var(--background));
-    --input: color-mix(in srgb, var(--color-zinc-50) 15%, var(--background));
-
-    --sidebar: color-mix(
-      in srgb,
-      var(--color-zinc-950) 97%,
-      var(--color-zinc-50)
-    );
-    --sidebar-foreground: color-mix(
-      in srgb,
-      var(--color-zinc-100) 76%,
-      var(--sidebar)
-    );
-    --sidebar-accent: color-mix(
-      in srgb,
-      var(--color-zinc-50) 10%,
-      var(--sidebar)
-    );
-    --sidebar-accent-foreground: var(--color-zinc-100);
-    --sidebar-border: color-mix(
-      in srgb,
-      var(--color-zinc-50) 11%,
-      var(--sidebar)
-    );
-
-    --code: color-mix(in srgb, var(--background) 99%, var(--color-zinc-50));
-    --code-highlight: color-mix(in srgb, var(--color-zinc-50) 4%, var(--code));
-  }
-}
-
-.bg-zinc:not([class*="theme-"]) {
-  --primary: var(--color-zinc-800);
-  --primary-foreground: var(--color-zinc-50);
-  --ring: var(--color-zinc-400);
-  --sidebar-primary: var(--color-zinc-800);
-  --sidebar-primary-foreground: var(--color-zinc-50);
-  --sidebar-ring: var(--color-zinc-400);
-
-  @variant dark {
-    --primary: var(--color-zinc-100);
-    --primary-foreground: var(--color-zinc-800);
-    --ring: var(--color-zinc-400);
-    --sidebar-primary: var(--color-zinc-100);
-    --sidebar-primary-foreground: var(--color-zinc-800);
-    --sidebar-ring: var(--color-zinc-400);
-  }
+  --theme-color-50: var(--color-zinc-50);
+  --theme-color-100: var(--color-zinc-100);
+  --theme-color-400: var(--color-zinc-400);
+  --theme-color-500: var(--color-zinc-500);
+  --theme-color-800: var(--color-zinc-800);
+  --theme-color-950: var(--color-zinc-950);
 }
 
 .bg-stone {
-  --background: var(--color-stone-50);
-  --foreground: var(--color-stone-800);
-
-  --card: color-mix(in srgb, var(--color-stone-950) 2%, var(--background));
-  --card-foreground: var(--color-stone-800);
-
-  --popover: color-mix(in srgb, var(--color-stone-950) 3%, var(--background));
-  --popover-foreground: var(--color-stone-800);
-
-  --secondary: color-mix(in srgb, var(--color-stone-950) 6%, var(--background));
-  --secondary-foreground: var(--color-stone-800);
-
-  --muted: color-mix(in srgb, var(--color-stone-950) 5%, var(--background));
-  --muted-foreground: color-mix(
-    in srgb,
-    var(--color-stone-500) 80%,
-    var(--color-stone-950)
-  );
-
-  --accent: color-mix(in srgb, var(--color-stone-950) 8%, var(--background));
-  --accent-foreground: var(--color-stone-800);
-
-  --border: color-mix(in srgb, var(--color-stone-950) 12%, var(--background));
-  --input: color-mix(in srgb, var(--color-stone-950) 15%, var(--background));
-
-  --sidebar: var(--color-stone-50);
-  --sidebar-foreground: color-mix(
-    in srgb,
-    var(--color-stone-800) 76%,
-    var(--sidebar)
-  );
-  --sidebar-accent: color-mix(
-    in srgb,
-    var(--color-stone-950) 8%,
-    var(--sidebar)
-  );
-  --sidebar-accent-foreground: var(--color-stone-800);
-  --sidebar-border: color-mix(
-    in srgb,
-    var(--color-stone-950) 11%,
-    var(--sidebar)
-  );
-
-  --code: color-mix(in srgb, var(--background) 99%, var(--color-stone-950));
-  --code-highlight: color-mix(in srgb, var(--color-stone-950) 4%, var(--code));
-
-  @variant dark {
-    --background: var(--color-stone-950);
-    --foreground: var(--color-stone-100);
-
-    --card: color-mix(in srgb, var(--background) 98%, var(--color-stone-50));
-    --card-foreground: var(--color-stone-100);
-
-    --popover: color-mix(in srgb, var(--background) 96%, var(--color-stone-50));
-    --popover-foreground: var(--color-stone-100);
-
-    --secondary: color-mix(
-      in srgb,
-      var(--color-stone-50) 8%,
-      var(--background)
-    );
-    --secondary-foreground: var(--color-stone-100);
-
-    --muted: color-mix(in srgb, var(--color-stone-50) 6%, var(--background));
-    --muted-foreground: color-mix(
-      in srgb,
-      var(--color-stone-500) 70%,
-      var(--color-stone-50)
-    );
-
-    --accent: color-mix(in srgb, var(--color-stone-50) 10%, var(--background));
-    --accent-foreground: var(--color-stone-100);
-
-    --border: color-mix(in srgb, var(--color-stone-50) 12%, var(--background));
-    --input: color-mix(in srgb, var(--color-stone-50) 15%, var(--background));
-
-    --sidebar: color-mix(
-      in srgb,
-      var(--color-stone-950) 97%,
-      var(--color-stone-50)
-    );
-    --sidebar-foreground: color-mix(
-      in srgb,
-      var(--color-stone-100) 76%,
-      var(--sidebar)
-    );
-    --sidebar-accent: color-mix(
-      in srgb,
-      var(--color-stone-50) 10%,
-      var(--sidebar)
-    );
-    --sidebar-accent-foreground: var(--color-stone-100);
-    --sidebar-border: color-mix(
-      in srgb,
-      var(--color-stone-50) 11%,
-      var(--sidebar)
-    );
-
-    --code: color-mix(in srgb, var(--background) 99%, var(--color-stone-50));
-    --code-highlight: color-mix(in srgb, var(--color-stone-50) 4%, var(--code));
-  }
-}
-
-.bg-stone:not([class*="theme-"]) {
-  --primary: var(--color-stone-800);
-  --primary-foreground: var(--color-stone-50);
-  --ring: var(--color-stone-400);
-  --sidebar-primary: var(--color-stone-800);
-  --sidebar-primary-foreground: var(--color-stone-50);
-  --sidebar-ring: var(--color-stone-400);
-
-  @variant dark {
-    --primary: var(--color-stone-100);
-    --primary-foreground: var(--color-stone-800);
-    --ring: var(--color-stone-400);
-    --sidebar-primary: var(--color-stone-100);
-    --sidebar-primary-foreground: var(--color-stone-800);
-    --sidebar-ring: var(--color-stone-400);
-  }
+  --theme-color-50: var(--color-stone-50);
+  --theme-color-100: var(--color-stone-100);
+  --theme-color-400: var(--color-stone-400);
+  --theme-color-500: var(--color-stone-500);
+  --theme-color-800: var(--color-stone-800);
+  --theme-color-950: var(--color-stone-950);
 }
 
 .bg-mauve {
-  --background: var(--color-mauve-50);
-  --foreground: var(--color-mauve-800);
-
-  --card: color-mix(in srgb, var(--color-mauve-950) 2%, var(--background));
-  --card-foreground: var(--color-mauve-800);
-
-  --popover: color-mix(in srgb, var(--color-mauve-950) 3%, var(--background));
-  --popover-foreground: var(--color-mauve-800);
-
-  --secondary: color-mix(in srgb, var(--color-mauve-950) 6%, var(--background));
-  --secondary-foreground: var(--color-mauve-800);
-
-  --muted: color-mix(in srgb, var(--color-mauve-950) 5%, var(--background));
-  --muted-foreground: color-mix(
-    in srgb,
-    var(--color-mauve-500) 80%,
-    var(--color-mauve-950)
-  );
-
-  --accent: color-mix(in srgb, var(--color-mauve-950) 8%, var(--background));
-  --accent-foreground: var(--color-mauve-800);
-
-  --border: color-mix(in srgb, var(--color-mauve-950) 12%, var(--background));
-  --input: color-mix(in srgb, var(--color-mauve-950) 15%, var(--background));
-
-  --sidebar: var(--color-mauve-50);
-  --sidebar-foreground: color-mix(
-    in srgb,
-    var(--color-mauve-800) 76%,
-    var(--sidebar)
-  );
-  --sidebar-accent: color-mix(
-    in srgb,
-    var(--color-mauve-950) 8%,
-    var(--sidebar)
-  );
-  --sidebar-accent-foreground: var(--color-mauve-800);
-  --sidebar-border: color-mix(
-    in srgb,
-    var(--color-mauve-950) 11%,
-    var(--sidebar)
-  );
-
-  --code: color-mix(in srgb, var(--background) 99%, var(--color-mauve-950));
-  --code-highlight: color-mix(in srgb, var(--color-mauve-950) 4%, var(--code));
-
-  @variant dark {
-    --background: var(--color-mauve-950);
-    --foreground: var(--color-mauve-100);
-
-    --card: color-mix(in srgb, var(--background) 98%, var(--color-mauve-50));
-    --card-foreground: var(--color-mauve-100);
-
-    --popover: color-mix(in srgb, var(--background) 96%, var(--color-mauve-50));
-    --popover-foreground: var(--color-mauve-100);
-
-    --secondary: color-mix(
-      in srgb,
-      var(--color-mauve-50) 8%,
-      var(--background)
-    );
-    --secondary-foreground: var(--color-mauve-100);
-
-    --muted: color-mix(in srgb, var(--color-mauve-50) 6%, var(--background));
-    --muted-foreground: color-mix(
-      in srgb,
-      var(--color-mauve-500) 70%,
-      var(--color-mauve-50)
-    );
-
-    --accent: color-mix(in srgb, var(--color-mauve-50) 10%, var(--background));
-    --accent-foreground: var(--color-mauve-100);
-
-    --border: color-mix(in srgb, var(--color-mauve-50) 12%, var(--background));
-    --input: color-mix(in srgb, var(--color-mauve-50) 15%, var(--background));
-
-    --sidebar: color-mix(
-      in srgb,
-      var(--color-mauve-950) 97%,
-      var(--color-mauve-50)
-    );
-    --sidebar-foreground: color-mix(
-      in srgb,
-      var(--color-mauve-100) 76%,
-      var(--sidebar)
-    );
-    --sidebar-accent: color-mix(
-      in srgb,
-      var(--color-mauve-50) 10%,
-      var(--sidebar)
-    );
-    --sidebar-accent-foreground: var(--color-mauve-100);
-    --sidebar-border: color-mix(
-      in srgb,
-      var(--color-mauve-50) 11%,
-      var(--sidebar)
-    );
-
-    --code: color-mix(in srgb, var(--background) 99%, var(--color-mauve-50));
-    --code-highlight: color-mix(in srgb, var(--color-mauve-50) 4%, var(--code));
-  }
-}
-
-.bg-mauve:not([class*="theme-"]) {
-  --primary: var(--color-mauve-800);
-  --primary-foreground: var(--color-mauve-50);
-  --ring: var(--color-mauve-400);
-  --sidebar-primary: var(--color-mauve-800);
-  --sidebar-primary-foreground: var(--color-mauve-50);
-  --sidebar-ring: var(--color-mauve-400);
-
-  @variant dark {
-    --primary: var(--color-mauve-100);
-    --primary-foreground: var(--color-mauve-800);
-    --ring: var(--color-mauve-400);
-    --sidebar-primary: var(--color-mauve-100);
-    --sidebar-primary-foreground: var(--color-mauve-800);
-    --sidebar-ring: var(--color-mauve-400);
-  }
+  --theme-color-50: var(--color-mauve-50);
+  --theme-color-100: var(--color-mauve-100);
+  --theme-color-400: var(--color-mauve-400);
+  --theme-color-500: var(--color-mauve-500);
+  --theme-color-800: var(--color-mauve-800);
+  --theme-color-950: var(--color-mauve-950);
 }
 
 .bg-olive {
-  --background: var(--color-olive-50);
-  --foreground: var(--color-olive-800);
-
-  --card: color-mix(in srgb, var(--color-olive-950) 2%, var(--background));
-  --card-foreground: var(--color-olive-800);
-
-  --popover: color-mix(in srgb, var(--color-olive-950) 3%, var(--background));
-  --popover-foreground: var(--color-olive-800);
-
-  --secondary: color-mix(in srgb, var(--color-olive-950) 6%, var(--background));
-  --secondary-foreground: var(--color-olive-800);
-
-  --muted: color-mix(in srgb, var(--color-olive-950) 5%, var(--background));
-  --muted-foreground: color-mix(
-    in srgb,
-    var(--color-olive-500) 80%,
-    var(--color-olive-950)
-  );
-
-  --accent: color-mix(in srgb, var(--color-olive-950) 8%, var(--background));
-  --accent-foreground: var(--color-olive-800);
-
-  --border: color-mix(in srgb, var(--color-olive-950) 12%, var(--background));
-  --input: color-mix(in srgb, var(--color-olive-950) 15%, var(--background));
-
-  --sidebar: var(--color-olive-50);
-  --sidebar-foreground: color-mix(
-    in srgb,
-    var(--color-olive-800) 76%,
-    var(--sidebar)
-  );
-  --sidebar-accent: color-mix(
-    in srgb,
-    var(--color-olive-950) 8%,
-    var(--sidebar)
-  );
-  --sidebar-accent-foreground: var(--color-olive-800);
-  --sidebar-border: color-mix(
-    in srgb,
-    var(--color-olive-950) 11%,
-    var(--sidebar)
-  );
-
-  --code: color-mix(in srgb, var(--background) 99%, var(--color-olive-950));
-  --code-highlight: color-mix(in srgb, var(--color-olive-950) 4%, var(--code));
-
-  @variant dark {
-    --background: var(--color-olive-950);
-    --foreground: var(--color-olive-100);
-
-    --card: color-mix(in srgb, var(--background) 98%, var(--color-olive-50));
-    --card-foreground: var(--color-olive-100);
-
-    --popover: color-mix(in srgb, var(--background) 96%, var(--color-olive-50));
-    --popover-foreground: var(--color-olive-100);
-
-    --secondary: color-mix(
-      in srgb,
-      var(--color-olive-50) 8%,
-      var(--background)
-    );
-    --secondary-foreground: var(--color-olive-100);
-
-    --muted: color-mix(in srgb, var(--color-olive-50) 6%, var(--background));
-    --muted-foreground: color-mix(
-      in srgb,
-      var(--color-olive-500) 70%,
-      var(--color-olive-50)
-    );
-
-    --accent: color-mix(in srgb, var(--color-olive-50) 10%, var(--background));
-    --accent-foreground: var(--color-olive-100);
-
-    --border: color-mix(in srgb, var(--color-olive-50) 12%, var(--background));
-    --input: color-mix(in srgb, var(--color-olive-50) 15%, var(--background));
-
-    --sidebar: color-mix(
-      in srgb,
-      var(--color-olive-950) 97%,
-      var(--color-olive-50)
-    );
-    --sidebar-foreground: color-mix(
-      in srgb,
-      var(--color-olive-100) 76%,
-      var(--sidebar)
-    );
-    --sidebar-accent: color-mix(
-      in srgb,
-      var(--color-olive-50) 10%,
-      var(--sidebar)
-    );
-    --sidebar-accent-foreground: var(--color-olive-100);
-    --sidebar-border: color-mix(
-      in srgb,
-      var(--color-olive-50) 11%,
-      var(--sidebar)
-    );
-
-    --code: color-mix(in srgb, var(--background) 99%, var(--color-olive-50));
-    --code-highlight: color-mix(in srgb, var(--color-olive-50) 4%, var(--code));
-  }
-}
-
-.bg-olive:not([class*="theme-"]) {
-  --primary: var(--color-olive-800);
-  --primary-foreground: var(--color-olive-50);
-  --ring: var(--color-olive-400);
-  --sidebar-primary: var(--color-olive-800);
-  --sidebar-primary-foreground: var(--color-olive-50);
-  --sidebar-ring: var(--color-olive-400);
-
-  @variant dark {
-    --primary: var(--color-olive-100);
-    --primary-foreground: var(--color-olive-800);
-    --ring: var(--color-olive-400);
-    --sidebar-primary: var(--color-olive-100);
-    --sidebar-primary-foreground: var(--color-olive-800);
-    --sidebar-ring: var(--color-olive-400);
-  }
+  --theme-color-50: var(--color-olive-50);
+  --theme-color-100: var(--color-olive-100);
+  --theme-color-400: var(--color-olive-400);
+  --theme-color-500: var(--color-olive-500);
+  --theme-color-800: var(--color-olive-800);
+  --theme-color-950: var(--color-olive-950);
 }
 
 .bg-mist {
-  --background: var(--color-mist-50);
-  --foreground: var(--color-mist-800);
-
-  --card: color-mix(in srgb, var(--color-mist-950) 2%, var(--background));
-  --card-foreground: var(--color-mist-800);
-
-  --popover: color-mix(in srgb, var(--color-mist-950) 3%, var(--background));
-  --popover-foreground: var(--color-mist-800);
-
-  --secondary: color-mix(in srgb, var(--color-mist-950) 6%, var(--background));
-  --secondary-foreground: var(--color-mist-800);
-
-  --muted: color-mix(in srgb, var(--color-mist-950) 5%, var(--background));
-  --muted-foreground: color-mix(
-    in srgb,
-    var(--color-mist-500) 80%,
-    var(--color-mist-950)
-  );
-
-  --accent: color-mix(in srgb, var(--color-mist-950) 8%, var(--background));
-  --accent-foreground: var(--color-mist-800);
-
-  --border: color-mix(in srgb, var(--color-mist-950) 12%, var(--background));
-  --input: color-mix(in srgb, var(--color-mist-950) 15%, var(--background));
-
-  --sidebar: var(--color-mist-50);
-  --sidebar-foreground: color-mix(
-    in srgb,
-    var(--color-mist-800) 76%,
-    var(--sidebar)
-  );
-  --sidebar-accent: color-mix(
-    in srgb,
-    var(--color-mist-950) 8%,
-    var(--sidebar)
-  );
-  --sidebar-accent-foreground: var(--color-mist-800);
-  --sidebar-border: color-mix(
-    in srgb,
-    var(--color-mist-950) 11%,
-    var(--sidebar)
-  );
-
-  --code: color-mix(in srgb, var(--background) 99%, var(--color-mist-950));
-  --code-highlight: color-mix(in srgb, var(--color-mist-950) 4%, var(--code));
-
-  @variant dark {
-    --background: var(--color-mist-950);
-    --foreground: var(--color-mist-100);
-
-    --card: color-mix(in srgb, var(--background) 98%, var(--color-mist-50));
-    --card-foreground: var(--color-mist-100);
-
-    --popover: color-mix(in srgb, var(--background) 96%, var(--color-mist-50));
-    --popover-foreground: var(--color-mist-100);
-
-    --secondary: color-mix(in srgb, var(--color-mist-50) 8%, var(--background));
-    --secondary-foreground: var(--color-mist-100);
-
-    --muted: color-mix(in srgb, var(--color-mist-50) 6%, var(--background));
-    --muted-foreground: color-mix(
-      in srgb,
-      var(--color-mist-500) 70%,
-      var(--color-mist-50)
-    );
-
-    --accent: color-mix(in srgb, var(--color-mist-50) 10%, var(--background));
-    --accent-foreground: var(--color-mist-100);
-
-    --border: color-mix(in srgb, var(--color-mist-50) 12%, var(--background));
-    --input: color-mix(in srgb, var(--color-mist-50) 15%, var(--background));
-
-    --sidebar: color-mix(
-      in srgb,
-      var(--color-mist-950) 97%,
-      var(--color-mist-50)
-    );
-    --sidebar-foreground: color-mix(
-      in srgb,
-      var(--color-mist-100) 76%,
-      var(--sidebar)
-    );
-    --sidebar-primary: var(--color-mist-100);
-    --sidebar-primary-foreground: var(--color-mist-800);
-    --sidebar-accent: color-mix(
-      in srgb,
-      var(--color-mist-50) 10%,
-      var(--sidebar)
-    );
-    --sidebar-accent-foreground: var(--color-mist-100);
-    --sidebar-border: color-mix(
-      in srgb,
-      var(--color-mist-50) 11%,
-      var(--sidebar)
-    );
-
-    --code: color-mix(in srgb, var(--background) 99%, var(--color-mist-50));
-    --code-highlight: color-mix(in srgb, var(--color-mist-50) 4%, var(--code));
-  }
-}
-
-.bg-mist:not([class*="theme-"]) {
-  --primary: var(--color-mist-800);
-  --primary-foreground: var(--color-mist-50);
-  --ring: var(--color-mist-400);
-  --sidebar-primary: var(--color-mist-800);
-  --sidebar-primary-foreground: var(--color-mist-50);
-  --sidebar-ring: var(--color-mist-400);
-
-  @variant dark {
-    --primary: var(--color-mist-100);
-    --primary-foreground: var(--color-mist-800);
-    --ring: var(--color-mist-400);
-    --sidebar-primary: var(--color-mist-100);
-    --sidebar-primary-foreground: var(--color-mist-800);
-    --sidebar-ring: var(--color-mist-400);
-  }
+  --theme-color-50: var(--color-mist-50);
+  --theme-color-100: var(--color-mist-100);
+  --theme-color-400: var(--color-mist-400);
+  --theme-color-500: var(--color-mist-500);
+  --theme-color-800: var(--color-mist-800);
+  --theme-color-950: var(--color-mist-950);
 }
 
 .bg-taupe {
-  --background: var(--color-taupe-50);
-  --foreground: var(--color-taupe-800);
+  --theme-color-50: var(--color-taupe-50);
+  --theme-color-100: var(--color-taupe-100);
+  --theme-color-400: var(--color-taupe-400);
+  --theme-color-500: var(--color-taupe-500);
+  --theme-color-800: var(--color-taupe-800);
+  --theme-color-950: var(--color-taupe-950);
+}
 
-  --card: color-mix(in srgb, var(--color-taupe-950) 2%, var(--background));
-  --card-foreground: var(--color-taupe-800);
-
-  --popover: color-mix(in srgb, var(--color-taupe-950) 3%, var(--background));
-  --popover-foreground: var(--color-taupe-800);
-
-  --secondary: color-mix(in srgb, var(--color-taupe-950) 6%, var(--background));
-  --secondary-foreground: var(--color-taupe-800);
-
-  --muted: color-mix(in srgb, var(--color-taupe-950) 5%, var(--background));
+:is(
+  .bg-slate,
+  .bg-gray,
+  .bg-zinc,
+  .bg-stone,
+  .bg-mauve,
+  .bg-olive,
+  .bg-mist,
+  .bg-taupe
+) {
+  --background: var(--theme-color-50);
+  --foreground: var(--theme-color-800);
+  --card: var(--background);
+  --card-foreground: var(--theme-color-800);
+  --popover: var(--background);
+  --popover-foreground: var(--theme-color-800);
+  --secondary: color-mix(in srgb, var(--theme-color-950) 4%, var(--background));
+  --secondary-foreground: var(--theme-color-800);
+  --muted: color-mix(in srgb, var(--theme-color-950) 4%, var(--background));
   --muted-foreground: color-mix(
     in srgb,
-    var(--color-taupe-500) 80%,
-    var(--color-taupe-950)
+    var(--theme-color-500) 88%,
+    var(--theme-color-950)
   );
-
-  --accent: color-mix(in srgb, var(--color-taupe-950) 8%, var(--background));
-  --accent-foreground: var(--color-taupe-800);
-
-  --border: color-mix(in srgb, var(--color-taupe-950) 12%, var(--background));
-  --input: color-mix(in srgb, var(--color-taupe-950) 15%, var(--background));
-
-  --sidebar: var(--color-taupe-50);
+  --accent: color-mix(in srgb, var(--theme-color-950) 4%, var(--background));
+  --accent-foreground: var(--theme-color-800);
+  --border: color-mix(in srgb, var(--theme-color-950) 8%, var(--background));
+  --input: color-mix(in srgb, var(--theme-color-950) 10%, var(--background));
+  --sidebar: var(--theme-color-50);
   --sidebar-foreground: color-mix(
     in srgb,
-    var(--color-taupe-800) 76%,
+    var(--theme-color-800) 64%,
     var(--sidebar)
   );
   --sidebar-accent: color-mix(
     in srgb,
-    var(--color-taupe-950) 8%,
+    var(--theme-color-950) 4%,
     var(--sidebar)
   );
-  --sidebar-accent-foreground: var(--color-taupe-800);
+  --sidebar-accent-foreground: var(--theme-color-800);
   --sidebar-border: color-mix(
     in srgb,
-    var(--color-taupe-950) 11%,
+    var(--theme-color-950) 6%,
     var(--sidebar)
   );
-
-  --code: color-mix(in srgb, var(--background) 99%, var(--color-taupe-950));
-  --code-highlight: color-mix(in srgb, var(--color-taupe-950) 4%, var(--code));
+  --chart-1: var(--color-blue-600);
+  --chart-2: var(--color-emerald-600);
+  --chart-3: var(--color-amber-600);
+  --chart-4: var(--color-purple-600);
+  --chart-5: var(--color-rose-600);
+  --code: color-mix(in srgb, var(--background) 99%, var(--theme-color-950));
+  --code-highlight: color-mix(in srgb, var(--theme-color-950) 4%, var(--code));
 
   @variant dark {
-    --background: var(--color-taupe-950);
-    --foreground: var(--color-taupe-100);
-
-    --card: color-mix(in srgb, var(--background) 98%, var(--color-taupe-50));
-    --card-foreground: var(--color-taupe-100);
-
-    --popover: color-mix(in srgb, var(--background) 96%, var(--color-taupe-50));
-    --popover-foreground: var(--color-taupe-100);
-
+    --background: color-mix(
+      in srgb,
+      var(--theme-color-950) 95%,
+      var(--theme-color-50)
+    );
+    --foreground: var(--theme-color-100);
+    --card: color-mix(in srgb, var(--background) 98%, var(--theme-color-50));
+    --card-foreground: var(--theme-color-100);
+    --popover: color-mix(in srgb, var(--background) 98%, var(--theme-color-50));
+    --popover-foreground: var(--theme-color-100);
     --secondary: color-mix(
       in srgb,
-      var(--color-taupe-50) 8%,
+      var(--theme-color-50) 4%,
       var(--background)
     );
-    --secondary-foreground: var(--color-taupe-100);
-
-    --muted: color-mix(in srgb, var(--color-taupe-50) 6%, var(--background));
+    --secondary-foreground: var(--theme-color-100);
+    --muted: color-mix(in srgb, var(--theme-color-50) 4%, var(--background));
     --muted-foreground: color-mix(
       in srgb,
-      var(--color-taupe-500) 70%,
-      var(--color-taupe-50)
+      var(--theme-color-500) 88%,
+      var(--theme-color-50)
     );
-
-    --accent: color-mix(in srgb, var(--color-taupe-50) 10%, var(--background));
-    --accent-foreground: var(--color-taupe-100);
-
-    --border: color-mix(in srgb, var(--color-taupe-50) 12%, var(--background));
-    --input: color-mix(in srgb, var(--color-taupe-50) 15%, var(--background));
-
+    --accent: color-mix(in srgb, var(--theme-color-50) 4%, var(--background));
+    --accent-foreground: var(--theme-color-100);
+    --border: color-mix(in srgb, var(--theme-color-50) 6%, var(--background));
+    --input: color-mix(in srgb, var(--theme-color-50) 8%, var(--background));
     --sidebar: color-mix(
       in srgb,
-      var(--color-taupe-950) 97%,
-      var(--color-taupe-50)
+      var(--theme-color-950) 97%,
+      var(--theme-color-50)
     );
     --sidebar-foreground: color-mix(
       in srgb,
-      var(--color-taupe-100) 76%,
+      var(--theme-color-100) 64%,
       var(--sidebar)
     );
     --sidebar-accent: color-mix(
       in srgb,
-      var(--color-taupe-50) 10%,
+      var(--theme-color-50) 4%,
       var(--sidebar)
     );
-    --sidebar-accent-foreground: var(--color-taupe-100);
+    --sidebar-accent-foreground: var(--theme-color-100);
     --sidebar-border: color-mix(
       in srgb,
-      var(--color-taupe-50) 11%,
+      var(--theme-color-50) 5%,
       var(--sidebar)
     );
-
-    --code: color-mix(in srgb, var(--background) 99%, var(--color-taupe-50));
-    --code-highlight: color-mix(in srgb, var(--color-taupe-50) 4%, var(--code));
+    --chart-1: var(--color-blue-700);
+    --chart-2: var(--color-emerald-500);
+    --chart-3: var(--color-amber-500);
+    --chart-4: var(--color-purple-500);
+    --chart-5: var(--color-rose-500);
+    --code: color-mix(in srgb, var(--background) 99%, var(--theme-color-50));
+    --code-highlight: color-mix(in srgb, var(--theme-color-50) 4%, var(--code));
   }
 }
 
-.bg-taupe:not([class*="theme-"]) {
-  --primary: var(--color-taupe-800);
-  --primary-foreground: var(--color-taupe-50);
-  --ring: var(--color-taupe-400);
-  --sidebar-primary: var(--color-taupe-800);
-  --sidebar-primary-foreground: var(--color-taupe-50);
-  --sidebar-ring: var(--color-taupe-400);
+:is(
+  .bg-slate,
+  .bg-gray,
+  .bg-zinc,
+  .bg-stone,
+  .bg-mauve,
+  .bg-olive,
+  .bg-mist,
+  .bg-taupe
+):not(
+  :is(
+    .theme-red,
+    .theme-orange,
+    .theme-amber,
+    .theme-yellow,
+    .theme-lime,
+    .theme-green,
+    .theme-emerald,
+    .theme-teal,
+    .theme-cyan,
+    .theme-sky,
+    .theme-blue,
+    .theme-indigo,
+    .theme-violet,
+    .theme-purple,
+    .theme-fuchsia,
+    .theme-pink,
+    .theme-rose
+  )
+) {
+  --primary: var(--theme-color-800);
+  --primary-foreground: var(--theme-color-50);
+  --ring: var(--theme-color-400);
+  --sidebar-primary: var(--theme-color-800);
+  --sidebar-primary-foreground: var(--theme-color-50);
+  --sidebar-ring: var(--theme-color-400);
 
   @variant dark {
-    --primary: var(--color-taupe-100);
-    --primary-foreground: var(--color-taupe-800);
-    --ring: var(--color-taupe-400);
-    --sidebar-primary: var(--color-taupe-100);
-    --sidebar-primary-foreground: var(--color-taupe-800);
-    --sidebar-ring: var(--color-taupe-400);
+    --primary: var(--theme-color-100);
+    --primary-foreground: var(--theme-color-800);
+    --ring: var(--theme-color-500);
+    --sidebar-primary: var(--theme-color-100);
+    --sidebar-primary-foreground: var(--theme-color-800);
+    --sidebar-ring: var(--theme-color-500);
   }
 }
 
-/* Border Radius */
 .radius-none {
   --radius: 0rem;
 }

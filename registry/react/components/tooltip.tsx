@@ -54,6 +54,9 @@ export const TooltipContent = (
           className={cn(
             "z-50 w-fit",
             "px-3 py-1.5",
+            "has-[[data-slot=kbd],[data-slot=kbd-group]]:flex has-[[data-slot=kbd],[data-slot=kbd-group]]:items-center has-[[data-slot=kbd],[data-slot=kbd-group]]:gap-2",
+            "has-[>[data-slot=kbd-group]:last-child]:pe-2 has-[>[data-slot=kbd]:last-child]:pe-2",
+            "has-[>[data-slot=tooltip-arrow]+[data-slot=kbd-group]:not(:last-child)]:ps-2 has-[>[data-slot=tooltip-arrow]+[data-slot=kbd]:not(:last-child)]:ps-2",
             "bg-foreground",
             "text-background text-xs",
             "rounded-lg shadow-lg/5",
@@ -65,7 +68,7 @@ export const TooltipContent = (
             "data-[placement=left]:slide-in-from-end-2",
             "data-[placement=right]:slide-in-from-start-2",
             "data-[placement=top]:slide-in-from-bottom-2",
-            "motion-reduce:animate-none!",
+            "motion-reduce:animate-none",
             className
           )}
           data-slot="tooltip-content"

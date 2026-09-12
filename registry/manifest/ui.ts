@@ -63,6 +63,7 @@ const SHARK_UI_BUNDLE = [
   "hint",
   "hotkeys",
   "hover-card",
+  "iframe",
   "image-cropper",
   "input",
   "input-group",

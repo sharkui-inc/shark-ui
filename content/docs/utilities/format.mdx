@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/format
 ---
 
+import manifest from "@/registry/manifest/format";
+
 <ComponentPreview componentName="format" />
 
 ## Installation
@@ -27,9 +29,7 @@ npx shadcn@latest add @shark/format
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

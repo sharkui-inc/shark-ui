@@ -35,7 +35,6 @@ const Example = () => {
             id="btn-add-item"
             onClick={addItem}
             size="sm"
-            type="button"
             variant="outline"
           >
             <PlusIcon className="size-4" />

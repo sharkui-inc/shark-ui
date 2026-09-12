@@ -1,14 +1,15 @@
 import {
   CodeBlock,
   CodeBlockContent,
+  CodeBlockCopy,
 } from "@/registry/react/components/code-block";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 const Example = () => (
-  <CodeBlock className="max-w-lg" code={CODE} language="bash">
-    <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
+  <CodeBlock className="w-full max-w-lg" code={CODE} language="bash">
+    <div className="relative min-w-0">
       <CodeBlockContent />
-    </ScrollArea>
+      <CodeBlockCopy className="absolute end-2 top-2 bg-card/80" />
+    </div>
   </CodeBlock>
 );
 

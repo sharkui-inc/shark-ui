@@ -7,7 +7,7 @@ export const BreadcrumbThumb = (props: ThumbCardProps) => (
       <div className="h-0.5 w-3 shrink-0 -rotate-45 rounded-full bg-muted-foreground/16" />
       <div className="h-1.5 w-full rounded-full bg-muted-foreground/16" />
       <div className="h-0.5 w-3 shrink-0 -rotate-45 rounded-full bg-muted-foreground/16" />
-      <div className="h-1.5 w-full rounded-full bg-muted-foreground/16" />
+      <div className="h-1.5 w-full rounded-full bg-primary" />
     </nav>
   </ThumbCard>
 );

@@ -2,6 +2,7 @@
 
 import { ArrowUpRight, PlusIcon, Trash2Icon } from "lucide-react";
 import type React from "react";
+import { toast } from "@/components/examples/example-toast";
 import { Button } from "@/registry/react/components/button";
 import { ButtonGroup } from "@/registry/react/components/button-group";
 import {
@@ -41,7 +42,6 @@ import {
   PopoverHeader,
   PopoverTrigger,
 } from "@/registry/react/components/popover";
-import { toast } from "@/registry/react/components/toast";
 import {
   Tooltip,
   TooltipContent,
@@ -114,7 +114,16 @@ export const ButtonVariantsExample = (props: React.ComponentProps<"div">) => (
               <Button variant="outline">Cancel</Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button>Save changes</Button>
+              <Button
+                onClick={() =>
+                  toast.success({
+                    description: "Username is saved in this preview.",
+                    title: "Changes saved",
+                  })
+                }
+              >
+                Save changes
+              </Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>

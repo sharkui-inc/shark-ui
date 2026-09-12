@@ -41,12 +41,12 @@ import {
 
 ### Key patterns
 
-Use `InputGroupAddon` for non-focusable prefixes/suffixes; `InputGroupButton` for actions; `InputGroupText` for inline readouts. `align` props control block/inline placement—see alignment examples.
+Use `InputGroupAddon` for non-focusable prefixes/suffixes; `InputGroupButton` for actions; `InputGroupText` for inline readouts. `align` props control block/inline placement: see alignment examples.
 
 ## Common pitfalls
 
-- Nesting a raw `<input>` instead of `InputGroupInput` / `InputGroupTextarea`—you lose slot styling and focus ring cohesion.
-- Mixing multiple focusable elements without clear tab order—keep one primary input.
+- Nesting a raw `<input>` instead of `InputGroupInput` / `InputGroupTextarea`: you lose slot styling and focus ring cohesion.
+- Mixing multiple focusable elements without clear tab order: keep one primary input.
 - Forgetting `tailwind-variants` in manual installs.
 
 ## Registry example files

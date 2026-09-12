@@ -14,7 +14,6 @@ import {
   CodeBlockLanguageSelectorTrigger,
   CodeBlockLanguageSelectorValue,
 } from "@/registry/react/components/code-block";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 const Example = () => {
   const [language, setLanguage] = useState("typescript");
@@ -22,7 +21,7 @@ const Example = () => {
 
   return (
     <CodeBlock
-      className="max-w-lg"
+      className="h-48 w-full max-w-lg"
       code={snippet.code}
       language={snippet.language}
     >
@@ -49,9 +48,7 @@ const Example = () => {
           <CodeBlockCopy />
         </CodeBlockActions>
       </CodeBlockHeader>
-      <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
-        <CodeBlockContent showLineNumbers />
-      </ScrollArea>
+      <CodeBlockContent showLineNumbers />
     </CodeBlock>
   );
 };

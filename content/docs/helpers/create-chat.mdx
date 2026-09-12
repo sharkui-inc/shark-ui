@@ -1,0 +1,423 @@
+---
+title: Chat
+description: Create deterministic, local conversations for AI SDK and TanStack AI.
+---
+
+import manifest from "@/registry/manifest/create-chat";
+
+<ComponentPreview componentName="create-chat" autoHeight showBorders={false} />
+
+Browse the [AI Chat](/blocks/ai/ai-chat-01) block.
+
+Write a conversation in code and stream it through AI SDK or TanStack AI `useChat`, with no model, API route, network request, or API key.
+
+`createChat({ adapter })` selects the runtime. Both adapters stream text only. The same fluent API (`user`, `assistant`, `get`, `next`, `transport`) builds native messages and a local transport: an AI SDK `ChatTransport`, or a TanStack `ConnectConnectionAdapter` that replays assistant text as AG-UI events.
+
+In React, prefer `useChatHelper`. It calls the runtime's `useChat`, wires `get` and `transport`, and adds `sendNext`, `nextMessage`, and `canSendNext`. Keep `adapter` constant for the lifetime of the component (Rules of Hooks).
+
+## Installation
+
+<CodeTabs>
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/create-chat
+```
+
+The item copies `lib/create-chat.ts` and `hooks/use-chat-helper.ts`. The hook imports both runtimes, so the CLI also installs `ai`, `@ai-sdk/react`, `@tanstack/ai`, `@tanstack/ai-client`, and `@tanstack/ai-react`. Pass one `adapter` when you create the chat.
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+<Step>Install the packages the files import.</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy the helper into your project.</Step>
+
+<ComponentSource title="lib/create-chat.ts" src="../lib/create-chat.ts" />
+
+<Step>Copy the hook into your project.</Step>
+
+<ComponentSource title="hooks/use-chat-helper.ts" src="../hooks/use-chat-helper.ts" />
+
+<Step>Update the import paths to match your project setup.</Step>
+</Steps>
+
+</TabsContent>
+</CodeTabs>
+
+## Usage
+
+Create the chat once, outside of a component. Pass the same `adapter` to `createChat` and `useChatHelper`.
+
+### AI SDK
+
+```tsx
+import { createChat } from "@/lib/create-chat"
+import { useChatHelper } from "@/hooks/use-chat-helper"
+
+const chat = createChat({ adapter: "ai-sdk" })
+  .user("What changed in this release?")
+  .assistant("Keyboard shortcuts and faster search.")
+  .user("Can you show me the shortcuts?")
+  .assistant("Press ⌘K to search and ⌘Enter to submit.")
+
+export function ReleaseChat() {
+  const { canSendNext, sendNext, status } = useChatHelper({
+    adapter: "ai-sdk",
+    chat,
+  })
+  const isBusy = status === "submitted" || status === "streaming"
+
+  return (
+    <button
+      disabled={!canSendNext || isBusy}
+      onClick={() => void sendNext()}
+      type="button"
+    >
+      Send
+    </button>
+  )
+}
+```
+
+`sendNext()` calls AI SDK `sendMessage` with the next predefined user message. The transport then streams that turn's assistant text.
+
+### TanStack AI
+
+```tsx
+import { createChat } from "@/lib/create-chat"
+import { useChatHelper } from "@/hooks/use-chat-helper"
+
+const chat = createChat({ adapter: "tanstack-ai" })
+  .user("What changed in this release?")
+  .assistant("Keyboard shortcuts and faster search.")
+  .user("Can you show me the shortcuts?")
+  .assistant("Press ⌘K to search and ⌘Enter to submit.")
+
+export function ReleaseChat() {
+  const { canSendNext, sendNext, status } = useChatHelper({
+    adapter: "tanstack-ai",
+    chat,
+  })
+  const isBusy = status === "submitted" || status === "streaming"
+
+  return (
+    <button
+      disabled={!canSendNext || isBusy}
+      onClick={() => void sendNext()}
+      type="button"
+    >
+      Send
+    </button>
+  )
+}
+```
+
+`sendNext()` calls TanStack `append` with the next predefined user message. The connection then streams that turn's assistant text as AG-UI events.
+
+### Transport only
+
+If you already call `useChat`, pass `chat.get(0)` and `chat.transport()`, then send `chat.next(messages)`.
+
+#### AI SDK
+
+```tsx
+import { useChat } from "@ai-sdk/react"
+import { createChat } from "@/lib/create-chat"
+
+const chat = createChat({ adapter: "ai-sdk" })
+  .user("What changed in this release?")
+  .assistant("Keyboard shortcuts and faster search.", { delayMs: 300 })
+
+export function ReleaseChat() {
+  const { messages, sendMessage, status } = useChat({
+    messages: chat.get(0),
+    transport: chat.transport(),
+  })
+  const nextMessage = chat.next(messages)
+  const isBusy = status === "submitted" || status === "streaming"
+
+  return (
+    <button
+      disabled={!nextMessage || isBusy}
+      onClick={() => {
+        if (nextMessage) {
+          void sendMessage(nextMessage)
+        }
+      }}
+      type="button"
+    >
+      Send
+    </button>
+  )
+}
+```
+
+`get(0)` starts with no messages. `sendMessage(nextMessage)` sends the next predefined user message.
+
+#### TanStack AI
+
+```tsx
+import { useChat } from "@tanstack/ai-react"
+import { createChat } from "@/lib/create-chat"
+
+const chat = createChat({ adapter: "tanstack-ai" })
+  .user("What changed in this release?")
+  .assistant("Keyboard shortcuts and faster search.", { delayMs: 300 })
+
+export function ReleaseChat() {
+  const { messages, append, status } = useChat({
+    initialMessages: chat.get(0),
+    connection: chat.transport(),
+  })
+  const nextMessage = chat.next(messages)
+  const isBusy = status === "submitted" || status === "streaming"
+
+  return (
+    <button
+      disabled={!nextMessage || isBusy}
+      onClick={() => {
+        if (nextMessage) {
+          void append(nextMessage)
+        }
+      }}
+      type="button"
+    >
+      Send
+    </button>
+  )
+}
+```
+
+TanStack `useChat` takes `connection` and `initialMessages`. `append(nextMessage)` preserves the scripted user message id so the connection can match the following assistant turn.
+
+## User Messages
+
+`user(text)` adds a user text message. Pass `id` when the message needs a stable identifier. Generated ids look like `create-chat-message-1`.
+
+```tsx
+const chat = createChat({ adapter: "ai-sdk" }).user(
+  "What changed in this release?"
+)
+
+const [message] = chat.get()
+
+message.role // "user"
+message.parts // [{ type: "text", text: "What changed in this release?" }]
+```
+
+TanStack parts use `content` instead of `text`:
+
+```tsx
+const chat = createChat({ adapter: "tanstack-ai" }).user(
+  "What changed in this release?"
+)
+
+const [message] = chat.get()
+
+message.parts // [{ type: "text", content: "What changed in this release?" }]
+```
+
+```tsx
+chat.user("What changed in this release?", {
+  id: "user-release-question",
+})
+```
+
+## Assistant Messages
+
+`assistant(text)` adds the assistant reply that streams after the preceding user message. A string becomes one text part. AI SDK parts from `get()` include `state: "done"`. TanStack parts use `{ type: "text", content }`.
+
+```tsx
+const chat = createChat({ adapter: "ai-sdk" }).assistant(
+  "The release adds keyboard shortcuts and faster search."
+)
+
+const [message] = chat.get()
+
+message.role // "assistant"
+message.parts // [{ type: "text", text: "The release adds...", state: "done" }]
+```
+
+Pass `delayMs` to wait before the response starts streaming, and `id` when the streamed message must keep a stable id.
+
+```tsx
+chat.assistant("Keyboard shortcuts and faster search.", {
+  delayMs: 400,
+  id: "assistant-release-summary",
+})
+```
+
+With `chat.transport()`, the text splits on `/\S+\s*/g` and streams word by word.
+
+## Reading Messages
+
+`get()` returns cloned messages from the start of the conversation. It does not mutate the chat.
+
+```tsx
+chat.get() // Every message.
+chat.get(2) // The first two messages.
+chat.get(0) // An empty initial conversation.
+```
+
+`get(count)` throws `RangeError("count must be a non-negative integer.")` when `count` is negative or not an integer.
+
+`next(messages)` finds the next predefined user message after the messages already shown. Pass a transcript, not an index. It returns that user message or `null` when none remain.
+
+```tsx
+const initialMessages = chat.get(2)
+const nextMessage = chat.next(initialMessages)
+```
+
+## Transport
+
+`transport()` creates the runtime object you pass to `useChat`. When a send runs, it looks up the latest scripted turn whose message id is already in the transcript, then streams the following assistant turn.
+
+If no assistant turn remains, it throws `"No simulated assistant response found."`
+
+### Options
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `delayMs` | `number` | `50` | Delay between text chunks after the first event. Pass `0` to stream immediately. |
+
+The first wait uses the assistant's `delayMs` (default `0`). Later chunks use `transport({ delayMs })`.
+
+```tsx
+const transport = chat.transport({
+  delayMs: 25,
+})
+```
+
+There is no fallback response when the script is exhausted.
+
+### AI SDK
+
+`transport()` returns a `ChatTransport`. Pass it as `transport` to `useChat`, with `messages: chat.get(0)`.
+
+A response emits `start`, `text-start`, `text-delta` chunks, `text-end`, then `finish` with `finishReason: "stop"`. Calling `stop()` from `useChat` aborts the stream and emits an `abort` chunk. `reconnectToStream()` returns `null`.
+
+### TanStack AI
+
+`transport()` returns a `ConnectConnectionAdapter`. Pass it as `connection` to `useChat`, with `initialMessages: chat.get(0)`.
+
+A response emits this sequence:
+
+```
+RUN_STARTED
+TEXT_MESSAGE_START
+TEXT_MESSAGE_CONTENT
+TEXT_MESSAGE_END
+RUN_FINISHED
+```
+
+`runId` and `threadId` come from TanStack's run context, or `run-create-chat` and `thread-create-chat` when the context omits them. Calling `stop()` ends the generator. AG-UI has no separate abort event in this adapter.
+
+Use `append(nextMessage)` for a predefined user message so its id stays in the transcript. `sendMessage()` is for ordinary typed input; that message will not match a scripted user id.
+
+### Runtime differences
+
+| Detail | AI SDK | TanStack AI |
+| --- | --- | --- |
+| `transport()` returns | `ChatTransport` | `ConnectConnectionAdapter` |
+| `useChat` props | `transport`, `messages` | `connection`, `initialMessages` |
+| Send a scripted user message | `sendMessage(nextMessage)` | `append(nextMessage)` |
+| Text part | `{ type: "text", text }` | `{ type: "text", content }` |
+| Stop | `abort` chunk | Generator returns |
+
+## Timing
+
+Two delays control pace:
+
+- `assistant(text, { delayMs })` waits before the assistant response starts. Default `0`.
+- `transport({ delayMs })` waits between text chunks. Default `50`.
+
+```tsx
+const chat = createChat({ adapter: "ai-sdk" })
+  .user("Give me a project update.")
+  .assistant("The first milestone is complete.", { delayMs: 800 })
+
+const transport = chat.transport({ delayMs: 50 })
+```
+
+For tests, pass `chat.transport({ delayMs: 0 })`.
+
+## Scope
+
+Both adapters stream text only. Use them for chat UI previews and for tests that need a stable stream. Pass a production transport when the UI needs tools, files, or model output.
+
+`useChatHelper` selects the runtime `useChat`, seeds `get(initialMessageCount)`, and returns `sendNext`, `nextMessage`, and `canSendNext` on top of that hook. If you already call `useChat`, pass `transport()` yourself.
+
+Pair `adapter: "tanstack-ai"` with a chat from `createChat({ adapter: "tanstack-ai" })`. The same rule applies to `"ai-sdk"`.
+
+## API Reference
+
+### createChat
+
+```tsx
+function createChat(options: { adapter: "ai-sdk" }): AiSdkChat
+function createChat(options: {
+  adapter: "tanstack-ai"
+}): TanStackChat
+```
+
+`adapter: "ai-sdk"` returns an AI SDK chat. `adapter: "tanstack-ai"` returns a TanStack chat. `createAiSdkChat()` and `createTanStackChat()` are the same factories without the union. `createAiSdkChat` is generic over `UIMessage`.
+
+Every method that adds content returns the same chat, so calls can be chained.
+
+| Method | Description |
+| --- | --- |
+| `user(text, { id? })` | Add a predefined user text message. |
+| `assistant(text, { id?, delayMs? })` | Add the assistant text response that streams after the user message. |
+| `get(count?)` | Return cloned scripted messages. `get(0)` starts with an empty transcript. |
+| `next(messages)` | Return the next predefined user message, or `null` when none remain. |
+| `transport({ delayMs? })` | Create the runtime transport or connection. Chunks default to a 50ms delay. |
+
+#### user() options
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `id` | `string` | Use a specific message id. |
+
+#### assistant() options
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | `create-chat-message-1` | Use a specific message id. Matching uses this id. |
+| `delayMs` | `number` | `0` | Wait before the assistant response starts streaming. |
+
+#### transport() options
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `delayMs` | `number` | `50` | Delay between text chunks after the first event. Pass `0` to stream immediately. |
+
+### useChatHelper
+
+```tsx
+function useChatHelper(options: UseChatHelperOptions)
+```
+
+| Option | Type | Default |
+| --- | --- | --- |
+| `adapter` | `"ai-sdk" \| "tanstack-ai"` | required |
+| `chat` | `AiSdkChat \| TanStackChat` | required |
+| `initialMessageCount` | `number` | `0` |
+| `transport.delayMs` | `number` | `50` |
+
+`adapter` and `chat` must use the same runtime. Keep `adapter` constant for the lifetime of the component.
+
+The hook returns everything from the selected runtime's `useChat`, plus:
+
+| Field | Description |
+| --- | --- |
+| `nextMessage` | The next predefined user message, or `null`. |
+| `canSendNext` | `true` when `nextMessage` is set. |
+| `sendNext()` | Sends `nextMessage` via `sendMessage` (AI SDK) or `append` (TanStack). Returns `undefined` when there is no next message. |

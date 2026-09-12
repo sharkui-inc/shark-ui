@@ -45,8 +45,8 @@ Switch `orientation` for horizontal label/value layouts. Use separators or info 
 
 ## Common pitfalls
 
-- Using `DataList` as a generic `<dl>` replacement without `DataListItem` rows—each row should be an item with label + value parts.
-- Misaligned columns across items—prefer shared width utilities from examples.
+- Using `DataList` as a generic `<dl>` replacement without `DataListItem` rows: each row should be an item with label + value parts.
+- Misaligned columns across items: prefer shared width utilities from examples.
 - Skipping `tailwind-variants` install when copying styled variants from source.
 
 ## Registry example files

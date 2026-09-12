@@ -33,13 +33,13 @@ import { Announcement, AnnouncementTitle } from "@/components/ui/announcement"
 
 ### Key patterns
 
-`announcementVariants` (from source) drives `variant` styling—match docs for `default`, `success`, `warning`, `destructive`, `info`. Compose icons and links as children per examples.
+`announcementVariants` (from source) drives `variant` styling: match docs for `default`, `success`, `warning`, `destructive`, `info`. Compose icons and links as children per examples.
 
 ## Common pitfalls
 
 - Using `Announcement` for long-form content; keep copy short and scannable.
-- Assuming Radix `Alert` API; Shark announcement uses `tailwind-variants` and local part names—check MDX tables.
-- Missing semantic structure when you need a heading—use `AnnouncementTitle` when appropriate.
+- Assuming Radix `Alert` API; Shark announcement uses `tailwind-variants` and local part names: check MDX tables.
+- Missing semantic structure when you need a heading: use `AnnouncementTitle` when appropriate.
 
 ## Registry example files
 

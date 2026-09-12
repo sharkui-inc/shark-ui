@@ -68,7 +68,7 @@ export const ButtonGroupText = (
       className={cn(
         "flex items-center gap-2 px-4",
         "font-medium text-sm",
-        "rounded-md border bg-muted shadow-xs",
+        "rounded-md border bg-muted shadow-xs/5",
         "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
         className
       )}
@@ -90,7 +90,7 @@ export const ButtonGroupSeparator = (
         "self-stretch",
         "bg-input",
         "data-[orientation=vertical]:h-auto",
-        "m-0!",
+        "m-0",
         className
       )}
       data-slot="button-group-separator"

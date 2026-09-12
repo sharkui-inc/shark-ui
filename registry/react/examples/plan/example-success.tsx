@@ -6,12 +6,13 @@ import {
   PlanItemDetail,
   PlanItemDetailFile,
   PlanItemTrigger,
+  PlanProgress,
 } from "@/registry/react/components/plan";
 
 const Example = () => (
-  <Plan className="max-w-lg" completed={3} total={3}>
+  <Plan className="max-w-lg">
     <PlanContent>
-      <PlanItem defaultOpen status="completed">
+      <PlanItem collapsible defaultOpen status="completed">
         <PlanItemTrigger title="Export active accounts" />
         <PlanItemContent>
           <PlanItemDetail>
@@ -22,7 +23,7 @@ const Example = () => (
           </PlanItemDetail>
         </PlanItemContent>
       </PlanItem>
-      <PlanItem defaultOpen status="completed">
+      <PlanItem collapsible defaultOpen status="completed">
         <PlanItemTrigger title="Flag inactive privileged accounts" />
         <PlanItemContent>
           <PlanItemDetail>
@@ -33,7 +34,7 @@ const Example = () => (
           </PlanItemDetail>
         </PlanItemContent>
       </PlanItem>
-      <PlanItem defaultOpen status="completed">
+      <PlanItem collapsible defaultOpen status="completed">
         <PlanItemTrigger title="Publish the quarterly access review" />
         <PlanItemContent>
           <PlanItemDetail>
@@ -42,6 +43,7 @@ const Example = () => (
         </PlanItemContent>
       </PlanItem>
     </PlanContent>
+    <PlanProgress completed={3} total={3} />
   </Plan>
 );
 

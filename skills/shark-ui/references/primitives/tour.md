@@ -84,7 +84,7 @@ Steps use `type: "dialog"` for centered cards or `type: "tooltip"` with `target:
 
 - Returning `null` from `target` on tooltip steps (the step will not anchor).
 - Omitting stable `id` values on each step object.
-- Mixing Radix tour examples—Shark follows Ark `Tour` + Shark dialog primitives inside `TourContent`.
+- Mixing Radix tour examples: Shark follows Ark `Tour` + Shark dialog primitives inside `TourContent`.
 
 ## Registry example files
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { RotateCwIcon } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Terminal,
@@ -47,18 +47,16 @@ const Example = () => {
     };
   }, [lineCount, status]);
 
-  const handleReplay = useCallback(() => {
-    setLineCount(1);
-    setStatus("running");
-  }, []);
-
   const isRunning = status === "running";
 
   return (
     <div className="relative flex h-full w-full items-center">
       <Button
         className="absolute end-0 top-0"
-        onClick={handleReplay}
+        onClick={() => {
+          setLineCount(1);
+          setStatus("running");
+        }}
         size="sm"
         variant="ghost"
       >

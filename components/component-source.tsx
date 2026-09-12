@@ -2,14 +2,18 @@
 /** biome-ignore-all lint/style/noParameterAssign: it's ok */
 
 import { readFileSync } from "node:fs";
-import type React from "react";
+import { highlightCode } from "@/lib/highlight-code";
 import { resolveRegistrySourcePath } from "@/lib/registry-source-path";
 import { replaceContentForCopy } from "@/utils/formatter";
-import { CodeBlock } from "./code-block";
 import { CodeCollapsibleWrapper } from "./code-collapsible-wrapper";
+import { DocsCodeFrame, type DocsCodeFrameProps } from "./docs-code-block";
 
-export interface ComponentSourceProps
-  extends React.ComponentProps<typeof CodeBlock> {
+export interface ComponentSourceProps extends DocsCodeFrameProps {
+  /**
+   * The source code to display
+   */
+  code?: string;
+  copyButton?: boolean;
   /**
    * Whether to make the code block collapsible
    *
@@ -20,15 +24,48 @@ export interface ComponentSourceProps
    * The language of the code block
    */
   language?: string;
+  showLineNumbers?: boolean;
   /**
-   * The source code to display
+   * The source file to read
    */
   src?: string;
-  /**
-   * The title of the code block
-   */
-  title?: string;
 }
+
+const DocsCodeBlock = async (
+  props: DocsCodeFrameProps & {
+    code: string;
+    copyButton?: boolean;
+    lang?: string;
+    showLineNumbers?: boolean;
+  }
+) => {
+  const {
+    title,
+    code,
+    copyButton = true,
+    lang = "tsx",
+    showLineNumbers = true,
+    className,
+    ...rest
+  } = props;
+
+  const highlightedCode = await highlightCode(code, lang, { showLineNumbers });
+
+  return (
+    <DocsCodeFrame
+      {...rest}
+      className={className}
+      copyValue={copyButton ? code : undefined}
+      language={lang}
+      title={title}
+    >
+      <div
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki highlights trusted source code.
+        dangerouslySetInnerHTML={{ __html: highlightedCode }}
+      />
+    </DocsCodeFrame>
+  );
+};
 
 export const ComponentSource = (props: ComponentSourceProps) => {
   const {
@@ -61,10 +98,17 @@ export const ComponentSource = (props: ComponentSourceProps) => {
   if (isCollapsible) {
     return (
       <CodeCollapsibleWrapper>
-        <CodeBlock code={replacedCode} lang={lang} title={title} {...rest} />
+        <DocsCodeBlock
+          code={replacedCode}
+          lang={lang}
+          title={title}
+          {...rest}
+        />
       </CodeCollapsibleWrapper>
     );
   }
 
-  return <CodeBlock code={replacedCode} lang={lang} title={title} {...rest} />;
+  return (
+    <DocsCodeBlock code={replacedCode} lang={lang} title={title} {...rest} />
+  );
 };

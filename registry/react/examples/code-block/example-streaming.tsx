@@ -8,10 +8,9 @@ import {
   CodeBlockCopy,
   CodeBlockHeader,
 } from "@/registry/react/components/code-block";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 const Example = () => {
-  const [length, setLength] = useState(0);
+  const [length, setLength] = useState(() => STREAMED_CODE.indexOf("\n") + 1);
   const isStreaming = length < STREAMED_CODE.length;
   const code = STREAMED_CODE.slice(0, length);
 
@@ -25,7 +24,7 @@ const Example = () => {
 
   return (
     <CodeBlock
-      className="max-w-lg"
+      className="h-48 w-full max-w-lg"
       code={code}
       isStreaming={isStreaming}
       language="tsx"
@@ -35,9 +34,7 @@ const Example = () => {
           <CodeBlockCopy />
         </CodeBlockActions>
       </CodeBlockHeader>
-      <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
-        <CodeBlockContent showLineNumbers />
-      </ScrollArea>
+      <CodeBlockContent showLineNumbers />
     </CodeBlock>
   );
 };

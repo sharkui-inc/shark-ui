@@ -5,10 +5,10 @@ export const MessageThumb = (props: ThumbCardProps) => (
     <div className="flex w-full flex-col gap-3">
       <div className="flex items-end gap-2">
         <div className="size-6 shrink-0 rounded-full bg-muted-foreground/16" />
-        <div className="h-8 w-3/5 rounded-xl bg-primary" />
+        <div className="h-8 w-3/5 rounded-xl bg-primary shadow-md/5" />
       </div>
       <div className="flex justify-end">
-        <div className="h-8 w-2/5 rounded-xl bg-secondary" />
+        <div className="h-8 w-2/5 rounded-xl bg-secondary shadow-md/5" />
       </div>
     </div>
   </ThumbCard>

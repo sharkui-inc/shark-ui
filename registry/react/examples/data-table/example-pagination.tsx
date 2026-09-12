@@ -7,7 +7,7 @@ import {
   type Table as TanStackTable,
   useTable,
 } from "@tanstack/react-table";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { Checkbox } from "@/registry/react/components/checkbox";
 import {
   type DataTableFeatures,
@@ -106,46 +106,32 @@ const SelectAllCheckbox = ({
   table,
 }: {
   table: TanStackTable<DataTableFeatures, InventoryItem>;
-}) => {
-  const handleCheckedChange = useCallback(
-    ({ checked }: { checked: boolean | "indeterminate" }) => {
+}) => (
+  <Checkbox
+    aria-label="Select all"
+    checked={
+      table.getIsAllPageRowsSelected() ||
+      (table.getIsSomePageRowsSelected() && "indeterminate")
+    }
+    onCheckedChange={({ checked }) => {
       table.toggleAllPageRowsSelected(!!checked);
-    },
-    [table]
-  );
-
-  return (
-    <Checkbox
-      aria-label="Select all"
-      checked={
-        table.getIsAllPageRowsSelected() ||
-        (table.getIsSomePageRowsSelected() && "indeterminate")
-      }
-      onCheckedChange={handleCheckedChange}
-    />
-  );
-};
+    }}
+  />
+);
 
 const SelectRowCheckbox = ({
   row,
 }: {
   row: Row<DataTableFeatures, InventoryItem>;
-}) => {
-  const handleCheckedChange = useCallback(
-    ({ checked }: { checked: boolean | "indeterminate" }) => {
+}) => (
+  <Checkbox
+    aria-label="Select row"
+    checked={row.getIsSelected()}
+    onCheckedChange={({ checked }) => {
       row.toggleSelected(!!checked);
-    },
-    [row]
-  );
-
-  return (
-    <Checkbox
-      aria-label="Select row"
-      checked={row.getIsSelected()}
-      onCheckedChange={handleCheckedChange}
-    />
-  );
-};
+    }}
+  />
+);
 
 const columns = columnHelper.columns([
   columnHelper.display({

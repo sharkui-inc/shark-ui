@@ -13,8 +13,6 @@ import { IconTile } from "@/registry/react/components/icon-tile";
 import { Input } from "@/registry/react/components/input";
 
 export const metadata: Metadata = createMetadata({
-  description:
-    "Complete login and signup flows with form validation. Includes password reset and OAuth-ready structure.",
   title: "Auth Template",
   url: "/templates/auth",
 });
@@ -24,15 +22,10 @@ const AuthTemplate = () => (
     <div className="flex flex-col gap-4 p-6 md:p-10">
       <div className="flex justify-center gap-2 md:justify-start">
         <a className="flex items-center gap-2 font-medium" href="#">
-          <IconTile
-            aria-hidden="true"
-            className="rounded-md border-transparent shadow-none"
-            size="xs"
-            variant="primary"
-          >
+          <IconTile aria-hidden="true" size="xs">
             <GalleryVerticalEndIcon aria-hidden className="size-4" />
           </IconTile>
-          Acme Inc.
+          Onda Inc.
         </a>
       </div>
       <div className="flex flex-1 items-center justify-center">
@@ -95,7 +88,7 @@ const AuthTemplate = () => (
     </div>
     <div className="relative hidden bg-muted lg:block">
       <img
-        alt="Acme workspace"
+        alt="Onda workspace"
         className="absolute inset-0 size-full object-cover"
         height={500}
         src="/images/gradients/green-dark.svg"

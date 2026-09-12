@@ -4,9 +4,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { MediaQuery } from "@/components/debug/media-query";
 import { JsonLd } from "@/components/seo/json-ld";
-import { UnregisterLegacyServiceWorker } from "@/components/unregister-legacy-service-worker";
 import { SITE_CONFIG } from "@/config/site";
 import { fontHeading, fontMono, fontSans } from "@/lib/fonts";
+import { themeBootstrapScript } from "@/lib/theme/apply";
 import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
 import { SkipNavLink } from "@/registry/react/components/skip-nav";
@@ -35,7 +35,6 @@ export const metadata: Metadata = {
     "react",
     "ui",
   ],
-  manifest: `${SITE_CONFIG.url}/site.webmanifest`,
   metadataBase: new URL(absoluteUrl("/")),
   openGraph: {
     images: [
@@ -51,7 +50,7 @@ export const metadata: Metadata = {
   },
   title: {
     default: SITE_CONFIG.name,
-    template: `%s | ${SITE_CONFIG.name}`,
+    template: `%s - ${SITE_CONFIG.name}`,
   },
   twitter: {
     card: "summary_large_image",
@@ -69,7 +68,11 @@ const RootLayout = (props: LayoutProps<"/">) => {
       lang="en"
       suppressHydrationWarning
     >
-      <body>
+      <body suppressHydrationWarning>
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: The script is generated exclusively from local, allowlisted theme metadata.
+          dangerouslySetInnerHTML={{ __html: themeBootstrapScript }}
+        />
         <JsonLd
           data={{
             "@context": "https://schema.org",
@@ -80,7 +83,6 @@ const RootLayout = (props: LayoutProps<"/">) => {
           }}
         />
         <Providers>
-          <UnregisterLegacyServiceWorker />
           <SkipNavLink />
 
           {children}

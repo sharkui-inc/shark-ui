@@ -89,7 +89,7 @@ const [value, setValue] = useState([parseDate("2024-04-04")]);
 
 Inside an existing `DateInput` tree, use `useDateInputContext()` to read state.
 
-Use [Field](/docs/components/field) for helper and error text. Put `DateInputLabel` **inside** `DateInput` — `FieldLabel` does not associate with the segments.
+Use [Field](/docs/components/field) for helper and error text. Put `DateInputLabel` **inside** `DateInput`: `FieldLabel` does not associate with the segments.
 
 ```tsx
 <Field>
@@ -102,10 +102,10 @@ Use [Field](/docs/components/field) for helper and error text. Put `DateInputLab
 
 ## Common pitfalls
 
-- Forgetting `parseDate` / `DateValue[]` shape — value is always an array.
+- Forgetting `parseDate` / `DateValue[]` shape: value is always an array.
 - Range mode uses `selectionMode="range"`; customize the divider with `separator`.
-- Missing `@ark-ui/react` 5.37.2+ — Date Input is not in earlier releases.
-- Using physical `ml-*` / `mr-*` for RTL layouts — prefer logical spacing (`ms-*`, `me-*`).
+- Missing `@ark-ui/react` 5.37.2+: Date Input is not in earlier releases.
+- Using physical `ml-*` / `mr-*` for RTL layouts: prefer logical spacing (`ms-*`, `me-*`).
 
 ## Registry example files
 

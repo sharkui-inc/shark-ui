@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata({
-  description:
-    "Marketing landing page with hero, features, pricing, and CTA sections. Optimized for conversions.",
   title: "Landing Template",
   url: "/templates/landing",
 });

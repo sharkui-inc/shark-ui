@@ -6,7 +6,7 @@ import {
 import { Spinner } from "@/registry/react/components/spinner";
 
 const Example = () => (
-  <InputGroup className="w-full max-w-xs">
+  <InputGroup className="max-w-xs">
     <InputGroupInput disabled placeholder="Processing…" type="search" />
     <InputGroupAddon align="inline-end">
       <Spinner />

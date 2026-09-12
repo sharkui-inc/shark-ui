@@ -61,8 +61,8 @@ import {
 
 ## Common pitfalls
 
-- Mixing up **countdown** vs **count-up** props—confirm mode in MDX before wiring controls.
-- Omitting `TimerItem` `type` values—each segment must map to the timer machine fields you need.
+- Mixing up **countdown** vs **count-up** props: confirm mode in MDX before wiring controls.
+- Omitting `TimerItem` `type` values: each segment must map to the timer machine fields you need.
 - Missing `lucide-react` for packaged demos that rely on icons.
 
 ## Registry example files

@@ -8,12 +8,6 @@ const registryPath = "registry/react/examples";
 interface ComponentPreviewProps
   extends Omit<React.ComponentProps<"div">, "ref"> {
   /**
-   * The alignment of the component
-   *
-   * @default "center"
-   */
-  align?: "start" | "center" | "end";
-  /**
    * Grow with content instead of locking the preview to 450px.
    *
    * @default false
@@ -41,7 +35,6 @@ export const ComponentPreview = async (props: ComponentPreviewProps) => {
   const {
     componentName,
     fileName = "example-default",
-    align = "center",
     showBorders,
     autoHeight = false,
     ...rest

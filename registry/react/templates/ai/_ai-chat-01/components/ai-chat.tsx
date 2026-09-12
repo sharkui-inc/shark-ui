@@ -1,8 +1,7 @@
 "use client";
 
 import { EllipsisIcon, Trash2Icon } from "lucide-react";
-import type React from "react";
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -215,80 +214,34 @@ export const AIChat = () => {
       ? "All projects"
       : (activeConversation?.title ?? "New chat");
 
-  const handleConversationSelect = useCallback((id: string) => {
-    const conversation = getConversation(id);
-    if (!conversation) {
-      return;
-    }
-    setActiveConversationId(id);
-    setMessages(conversation.messages);
-  }, []);
-
-  const handleNewChat = useCallback(() => {
-    setActiveConversationId(null);
-    setMessages([]);
-  }, []);
-
-  const handleProjectsSelect = useCallback(() => {
-    setActiveView("projects");
-  }, []);
-
-  const handleViewChange = useCallback((view: ChatView) => {
-    setActiveView(view);
-  }, []);
-
-  const handleSend = useCallback(
-    (content: string) => {
-      const sequence = nextMessageId.current;
-      nextMessageId.current += 1;
-      const modelLabel = selectedModel.label;
-      setUsedTokens((current) => Math.min(current + 420, 128_000));
-      setMessages((current) => [
-        ...current,
-        {
-          content,
-          id: `local-user-${sequence}`,
-          role: "user",
-        },
-        {
-          content: thinkMode
-            ? `Using ${modelLabel}, a useful next step is to name the owner, the deadline, and the risk for each item, then share a one-page summary with the team.`
-            : `Using ${modelLabel}: name the owner, deadline, and risk for each item, then share a one-page summary.`,
-          id: `local-assistant-${sequence}`,
-          reasoning: thinkMode
-            ? {
-                content:
-                  "The user wants an actionable reply. Keep the answer short, name owners and risks, and avoid inventing backend work.",
-                duration: 4,
-              }
-            : undefined,
-          role: "assistant",
-        },
-      ]);
-    },
-    [selectedModel.label, thinkMode]
-  );
-
-  const handleSuggestion = useCallback(
-    (text: string) => {
-      handleSend(text);
-    },
-    [handleSend]
-  );
-
-  const handleRemoveQueueItem = useCallback((id: string) => {
-    setQueueItems((current) => current.filter((item) => item.id !== id));
-  }, []);
-
-  const handleRemoveQueueItemClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
-      const { queueItemId } = event.currentTarget.dataset;
-      if (queueItemId) {
-        handleRemoveQueueItem(queueItemId);
-      }
-    },
-    [handleRemoveQueueItem]
-  );
+  const handleSend = (content: string) => {
+    const sequence = nextMessageId.current;
+    nextMessageId.current += 1;
+    const modelLabel = selectedModel.label;
+    setUsedTokens((current) => Math.min(current + 420, 128_000));
+    setMessages((current) => [
+      ...current,
+      {
+        content,
+        id: `local-user-${sequence}`,
+        role: "user",
+      },
+      {
+        content: thinkMode
+          ? `Using ${modelLabel}, a useful next step is to name the owner, the deadline, and the risk for each item, then share a one-page summary with the team.`
+          : `Using ${modelLabel}: name the owner, deadline, and risk for each item, then share a one-page summary.`,
+        id: `local-assistant-${sequence}`,
+        reasoning: thinkMode
+          ? {
+              content:
+                "The user wants an actionable reply. Keep the answer short, name owners and risks, and avoid inventing backend work.",
+              duration: 4,
+            }
+          : undefined,
+        role: "assistant",
+      },
+    ]);
+  };
 
   const showQueue =
     activeView === "chat" && messages.length > 0 && queueItems.length > 0;
@@ -299,10 +252,20 @@ export const AIChat = () => {
         activeConversationId={activeConversationId}
         activeView={activeView}
         conversations={conversations}
-        onConversationSelect={handleConversationSelect}
-        onNewChat={handleNewChat}
-        onProjectsSelect={handleProjectsSelect}
-        onViewChange={handleViewChange}
+        onConversationSelect={(id) => {
+          const conversation = getConversation(id);
+          if (!conversation) {
+            return;
+          }
+          setActiveConversationId(id);
+          setMessages(conversation.messages);
+        }}
+        onNewChat={() => {
+          setActiveConversationId(null);
+          setMessages([]);
+        }}
+        onProjectsSelect={() => setActiveView("projects")}
+        onViewChange={setActiveView}
       />
       <SidebarInset className="min-h-0 overflow-hidden">
         <div className="flex h-svh min-h-0 flex-col lg:p-1.5 lg:ps-0">
@@ -359,7 +322,7 @@ export const AIChat = () => {
               ) : (
                 <ChatThread
                   messages={messages}
-                  onSuggestion={handleSuggestion}
+                  onSuggestion={handleSend}
                   userName="James"
                 />
               )}
@@ -380,8 +343,13 @@ export const AIChat = () => {
                             <QueueItemActions>
                               <QueueItemAction
                                 aria-label={`Remove ${item.title}`}
-                                data-queue-item-id={item.id}
-                                onClick={handleRemoveQueueItemClick}
+                                onClick={() => {
+                                  setQueueItems((current) =>
+                                    current.filter(
+                                      (queueItem) => queueItem.id !== item.id
+                                    )
+                                  );
+                                }}
                               >
                                 <Trash2Icon aria-hidden="true" />
                               </QueueItemAction>

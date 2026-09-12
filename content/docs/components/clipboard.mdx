@@ -5,6 +5,9 @@ links:
   doc: https://ark-ui.com/docs/components/clipboard 
   api: https://ark-ui.com/docs/components/clipboard#api-reference
 ---
+
+import manifest from "@/registry/manifest/clipboard";
+
 <ComponentPreview componentName="clipboard" />
 
 ## Installation
@@ -32,9 +35,7 @@ npx shadcn@latest add @shark/clipboard
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

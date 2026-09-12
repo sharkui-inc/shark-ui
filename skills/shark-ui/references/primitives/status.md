@@ -35,7 +35,7 @@ Combine with `Badge` or icons from examples; use `size` props for density in tab
 
 ## Common pitfalls
 
-- Using `Status` as the only signal—pair with text or icons for color-blind users.
+- Using `Status` as the only signal: pair with text or icons for color-blind users.
 - Skipping `tailwind-variants` in manual installs.
 - Hardcoding colors instead of `variant` tokens defined in source.
 

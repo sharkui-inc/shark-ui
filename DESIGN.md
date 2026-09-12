@@ -130,7 +130,7 @@ components:
 
 Shark UI feels like a well-kept technical workbench: quiet enough for the interface under examination to lead, but precise enough that the surrounding controls always feel intentional. Its identity comes from compact geometry, semantic surface layering, restrained borders, and real product compositions rather than ornamental framing.
 
-The system is designed to survive customization. A user can change the neutral family, primary accent, base radius, and light or dark mode without changing the component grammar. Strong hierarchy comes from weight, scale, spacing, and state—not from accumulating colors or effects.
+The system is designed to survive customization. A user can change the neutral family, primary accent, base radius, and light or dark mode without changing the component grammar. Strong hierarchy comes from weight, scale, spacing, and state rather than accumulating colors or effects.
 
 **Key Characteristics:**
 
@@ -209,6 +209,7 @@ The system is flat by default. Depth comes first from tonal separation and one-p
 
 - **Hairline Ambient** (`0 1px 2px 0 rgb(0 0 0 / 0.05)` geometry): Inputs, cards, and subtle outlined controls where a border alone needs a small amount of separation.
 - **Compact Raised** (`0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)` geometry): Primary actions and contained product surfaces; tint it from the owning semantic role when appropriate.
+- **Overlay** (`shadow-lg/5`): Floating surfaces such as menus, dialogs, sheets, tooltips, and toasts. Larger geometry than hairline because the surface leaves the page flow; the `/5` opacity keeps it as shallow as the rest of the vocabulary.
 
 ### Named Rules
 
@@ -281,6 +282,6 @@ Radius is a user-configurable scale anchored by one base value. Components deriv
 - **Don't** hard-code raw palette colors into reusable components when semantic roles exist.
 - **Don't** introduce a second accent hue to decorate an otherwise neutral surface.
 - **Don't** replace live, functional UI with ornamental imagery when the interface itself can carry the material.
-- **Don't** use large elevation, glow, or decorative shadow as the main hierarchy device.
+- **Don't** use large elevation, glow, or decorative shadow as the main hierarchy device; even overlays stay at `/5` opacity.
 - **Don't** invent isolated radius or spacing values outside the established proportional scales.
 - **Don't** use monospace as a general display treatment or compress mobile content to preserve a desktop layout.

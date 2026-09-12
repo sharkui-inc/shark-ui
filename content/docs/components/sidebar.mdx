@@ -2,13 +2,11 @@
 title: Sidebar
 description: A sidebar for navigation and app structure.
 seoDescription: "Responsive sidebar with groups, a collapsible rail, and a mobile sheet."
-links:
-  doc: https://ui.shadcn.com/docs/components/sidebar
-  api: https://ui.shadcn.com/docs/components/sidebar
 ---
-import { SidebarAnatomy } from "@/components/anatomy/sidebar";
 
-<PreviewIframe src="/view/blocks/sidebar/default" title="Sidebar Default" className="min-h-[550px]" />
+import manifest from "@/registry/manifest/sidebar";
+
+<PreviewIframe wide src="/view/blocks/sidebar/default" title="Sidebar Default" className="min-h-[550px]" />
 
 For full-page examples that wire the sidebar:
 
@@ -39,9 +37,7 @@ npx shadcn@latest add @shark/sidebar
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -96,8 +92,6 @@ Piecing a `Sidebar` together usually means:
 
 Optional helpers: `<SidebarRail>` (edge hit target), the `<SidebarMenu>` building blocks (submenus, badges, skeletons, actions). Same roles as in the upstream doc.
 
-<SidebarAnatomy title="Sidebar Anatomy" />
-
 ## Usage
 
 `app/layout.tsx` keeps the provider at the top level:
@@ -149,8 +143,6 @@ export function AppSidebar() {
 Use the `onOpenChange` prop to control the sidebar open state.
 
 ```tsx
-"use client";
-
 import React from "react";
 import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
 
@@ -158,7 +150,7 @@ export const ControlledLayout = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <SidebarProvider onOpenChange={setOpen} open={open}>
+    <SidebarProvider onOpenChange={({ open }) => setOpen(open)} open={open}>
       <Sidebar />
     </SidebarProvider>
   );
@@ -213,7 +205,7 @@ The toggle listens for **`⌘B`** on macOS and **`Ctrl+B`** elsewhere (`SIDEBAR_
 | --- | --- | --- |
 | `defaultOpen` | `boolean` | Initial open state on desktop (`true` by default). |
 | `open` | `boolean` | Controlled open flag. |
-| `onOpenChange` | `(open: boolean) => void` | Fires when the open flag changes. |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | Fires when the open flag changes. |
 
 #### Width
 

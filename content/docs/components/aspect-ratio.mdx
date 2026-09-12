@@ -3,6 +3,8 @@ title: Aspect Ratio
 description: Wrapper that maintains aspect ratio for content.
 ---
 
+import manifest from "@/registry/manifest/aspect-ratio";
+
 <ComponentPreview componentName="aspect-ratio" />
 
 ## Installation
@@ -28,9 +30,7 @@ npx shadcn@latest add @shark/aspect-ratio
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

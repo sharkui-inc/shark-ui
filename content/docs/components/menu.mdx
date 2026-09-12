@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/menu#api-reference
 ---
 
+import manifest from "@/registry/manifest/menu";
+
 <ComponentPreview componentName="menu" />
 
 ## Installation
@@ -31,9 +33,7 @@ npx shadcn@latest add @shark/menu
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -192,7 +192,7 @@ Use `MenuQuickItem` for actions with icon-above-text layout, ideal for quick act
 
 ### Scrollable
 
-Add `max-h-*` and `overflow-y-auto` to `MenuContent` to constrain height and enable native scrolling when there are many items.
+Add `max-h-*` to `MenuContent` to constrain height and enable native scrolling when there are many items.
 
 <ComponentPreview componentName="menu" fileName="example-with-scroll" />
 

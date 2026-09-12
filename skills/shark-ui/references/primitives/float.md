@@ -2,7 +2,7 @@
 
 ## When to use
 
-- Anchored floating UI that is **not** a full popover/dialog—lightweight positioning helper.
+- Anchored floating UI that is **not** a full popover/dialog: lightweight positioning helper.
 - Custom surfaces that still need collision-aware placement relative to a reference element.
 
 ## Install
@@ -35,8 +35,8 @@ Prefer `positioning` options from Ark floating patterns; combine with your own t
 
 ## Common pitfalls
 
-- Using `Float` when `Popover`, `Menu`, or `Tooltip` already cover the interaction—avoid reinventing focus management.
-- Hard-coding pixel offsets instead of `positioning` options—let the engine flip on overflow.
+- Using `Float` when `Popover`, `Menu`, or `Tooltip` already cover the interaction: avoid reinventing focus management.
+- Hard-coding pixel offsets instead of `positioning` options: let the engine flip on overflow.
 - Omitting `tailwind-variants` from manual install when styles depend on it.
 
 ## Registry example files

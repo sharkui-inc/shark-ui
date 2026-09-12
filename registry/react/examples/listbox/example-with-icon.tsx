@@ -16,7 +16,7 @@ const Example = () => (
       <ListboxContent>
         {collection.items.map((item) => (
           <ListboxItem item={item} key={item.value}>
-            {item.icon}
+            <span>{item.icon}</span>
             <ListboxItemText>{item.label}</ListboxItemText>
             <ListboxItemIndicator />
           </ListboxItem>

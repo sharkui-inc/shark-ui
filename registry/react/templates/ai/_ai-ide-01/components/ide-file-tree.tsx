@@ -1,9 +1,6 @@
 "use client";
 
 import { FileIcon, FolderIcon, FolderOpenIcon } from "lucide-react";
-
-import type React from "react";
-import { useCallback } from "react";
 import {
   createTreeCollection,
   TreeView,
@@ -39,36 +36,29 @@ interface IdeFileTreeProps {
   selectedPath: string;
 }
 
-export const IdeFileTree = ({ onSelect, selectedPath }: IdeFileTreeProps) => {
-  const handleSelectionChange = useCallback(
-    (details: { selectedValue: string[] }) => {
-      const [next] = details.selectedValue;
-      if (next) {
-        onSelect(next);
-      }
-    },
-    [onSelect]
-  );
-
-  return (
-    <div className="flex h-full min-h-0 flex-col gap-2 p-2">
-      <p className="px-2 font-medium text-muted-foreground text-xs uppercase">
-        Files
-      </p>
-      <TreeView
-        collection={collection}
-        onSelectionChange={handleSelectionChange}
-        selectedValue={[selectedPath]}
-      >
-        <TreeViewTree>
-          {collection.rootNode.children?.map((node, index) => (
-            <TreeNode indexPath={[index]} key={node.id} node={node} />
-          ))}
-        </TreeViewTree>
-      </TreeView>
-    </div>
-  );
-};
+export const IdeFileTree = ({ onSelect, selectedPath }: IdeFileTreeProps) => (
+  <div className="flex h-full min-h-0 flex-col gap-2 p-2">
+    <p className="px-2 font-medium text-muted-foreground text-xs uppercase">
+      Files
+    </p>
+    <TreeView
+      collection={collection}
+      onSelectionChange={(details) => {
+        const [next] = details.selectedValue;
+        if (next) {
+          onSelect(next);
+        }
+      }}
+      selectedValue={[selectedPath]}
+    >
+      <TreeViewTree>
+        {collection.rootNode.children?.map((node, index) => (
+          <TreeNode indexPath={[index]} key={node.id} node={node} />
+        ))}
+      </TreeViewTree>
+    </TreeView>
+  </div>
+);
 
 const TreeNode = (props: React.ComponentProps<typeof TreeViewNode>) => {
   const { node, indexPath, ...rest } = props;

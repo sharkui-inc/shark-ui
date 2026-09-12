@@ -4,11 +4,6 @@ import { ark } from "@ark-ui/react/factory";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/registry/react/components/tooltip";
 
 export const MessageGroup = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
@@ -48,7 +43,7 @@ export const MessageAvatar = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex w-fit min-w-8 shrink-0 items-center justify-center self-end overflow-hidden rounded-full bg-muted",
+        "flex w-fit min-w-0 shrink-0 self-end",
         "group-has-data-[slot=message-footer]/message:-translate-y-8",
         "group-has-[[data-slot=message-bubble-reactions][data-side=bottom]]/message:-translate-y-5",
         className
@@ -118,27 +113,21 @@ export const MessageActions = (props: React.ComponentProps<typeof ark.div>) => {
 
 interface MessageActionProps extends React.ComponentProps<typeof Button> {
   label?: string;
-  tooltip?: string;
 }
 
 export const MessageAction = (props: MessageActionProps) => {
   const {
-    children,
-    className,
     label,
     size = "icon-xs",
-    tooltip,
     type = "button",
     variant = "ghost",
+    children,
     ...rest
   } = props;
 
-  const accessibleLabel = label ?? tooltip;
-
-  const button = (
+  return (
     <Button
-      aria-label={accessibleLabel}
-      className={className}
+      aria-label={label}
       data-slot="message-action"
       size={size}
       type={type}
@@ -147,16 +136,5 @@ export const MessageAction = (props: MessageActionProps) => {
     >
       {children}
     </Button>
-  );
-
-  if (!tooltip) {
-    return button;
-  }
-
-  return (
-    <Tooltip positioning={{ placement: "bottom" }}>
-      <TooltipTrigger asChild>{button}</TooltipTrigger>
-      <TooltipContent>{tooltip}</TooltipContent>
-    </Tooltip>
   );
 };

@@ -1,5 +1,7 @@
-import { EllipsisIcon } from "lucide-react";
-import { Button } from "@/registry/react/components/button";
+"use client";
+
+import { ListOrderedIcon } from "lucide-react";
+import { useState } from "react";
 import {
   CodeBlock,
   CodeBlockActions,
@@ -9,31 +11,37 @@ import {
   CodeBlockHeader,
   CodeBlockTitle,
 } from "@/registry/react/components/code-block";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
+import { Toggle } from "@/registry/react/components/toggle";
 
-const Example = () => (
-  <CodeBlock className="max-w-lg" code={CODE} language="json">
-    <CodeBlockHeader>
-      <CodeBlockTitle>
-        <CodeBlockFilename>components.json</CodeBlockFilename>
-      </CodeBlockTitle>
-      <CodeBlockActions>
-        <Button
-          aria-label="More code actions"
-          size="icon-xs"
-          type="button"
-          variant="ghost"
-        >
-          <EllipsisIcon aria-hidden="true" />
-        </Button>
-        <CodeBlockCopy />
-      </CodeBlockActions>
-    </CodeBlockHeader>
-    <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
-      <CodeBlockContent showLineNumbers />
-    </ScrollArea>
-  </CodeBlock>
-);
+const Example = () => {
+  const [showLineNumbers, setShowLineNumbers] = useState(true);
+
+  return (
+    <CodeBlock className="w-full max-w-lg" code={CODE} language="json">
+      <CodeBlockHeader>
+        <CodeBlockTitle>
+          <CodeBlockFilename>components.json</CodeBlockFilename>
+        </CodeBlockTitle>
+        <CodeBlockActions>
+          <Toggle
+            aria-label={
+              showLineNumbers ? "Hide line numbers" : "Show line numbers"
+            }
+            className="size-6 min-w-0 px-0"
+            onPressedChange={setShowLineNumbers}
+            pressed={showLineNumbers}
+            size="sm"
+            variant="ghost"
+          >
+            <ListOrderedIcon aria-hidden="true" />
+          </Toggle>
+          <CodeBlockCopy />
+        </CodeBlockActions>
+      </CodeBlockHeader>
+      <CodeBlockContent showLineNumbers={showLineNumbers} />
+    </CodeBlock>
+  );
+};
 
 const CODE = `{
   "style": "new-york",

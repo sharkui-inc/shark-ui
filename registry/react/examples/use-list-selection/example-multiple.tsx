@@ -27,12 +27,7 @@ const UseListSelectionDemo = () => {
           {selection.selectedValues.length} of {collection.items.length}{" "}
           selected
         </output>
-        <Button
-          onClick={handleSelectAll}
-          size="sm"
-          type="button"
-          variant="outline"
-        >
+        <Button onClick={handleSelectAll} size="sm" variant="outline">
           {selection.isAllSelected() ? "Deselect all" : "Select all"}
         </Button>
       </div>

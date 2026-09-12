@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "dependencies": ["@ark-ui/react"],
+  "name": "use-copy-to-clipboard",
+  "type": "registry:hook",
+  "files": [
+    {
+      "content": "\"use client\";\n\nexport {\n  type UseClipboardProps,\n  type UseClipboardReturn,\n  useClipboard as useCopyToClipboard,\n} from \"@ark-ui/react/clipboard\";\n",
+      "path": "registry/react/hooks/use-copy-to-clipboard.ts",
+      "type": "registry:hook"
+    }
+  ]
+}

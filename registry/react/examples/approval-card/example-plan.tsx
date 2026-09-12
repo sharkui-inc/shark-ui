@@ -22,11 +22,9 @@ import {
 } from "@/registry/react/components/approval-card";
 import {
   Plan,
-  PlanAction,
   PlanContent,
   PlanHeader,
   PlanTitle,
-  PlanTrigger,
 } from "@/registry/react/components/plan";
 import { toast } from "@/registry/react/components/toast";
 
@@ -78,9 +76,6 @@ const Example = () => {
           <Plan>
             <PlanHeader>
               <PlanTitle>Add CSV export to orders</PlanTitle>
-              <PlanAction>
-                <PlanTrigger aria-label="Toggle implementation plan" />
-              </PlanAction>
             </PlanHeader>
             <PlanContent>
               <ol className="flex list-decimal flex-col gap-2 ps-4">

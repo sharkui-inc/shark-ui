@@ -13,7 +13,7 @@ export const TourThumb = (props: ThumbCardProps) => (
           <div className="h-1 w-2/3 rounded-full bg-muted-foreground/8" />
         </div>
         <div className="flex justify-end gap-2 pt-1">
-          <div className="h-4 w-12 rounded-md border border-input bg-muted" />
+          <div className="h-4 w-12 rounded-md border border-input bg-muted shadow-md/5" />
           <div className="h-4 w-12 rounded-md bg-primary" />
         </div>
       </div>

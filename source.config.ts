@@ -1,26 +1,25 @@
+import rehypeShiki from "@shikijs/rehype";
 import {
   defineConfig,
   defineDocs,
   frontmatterSchema,
   metaSchema,
 } from "fumadocs-mdx/config";
-import rehypePrettyCode from "rehype-pretty-code";
 import { z } from "zod";
-import { transformers } from "@/lib/highlight-code";
+import {
+  shikiHighlightOptions,
+  shikiMdxTransformers,
+} from "@/lib/highlight-code";
 
 export default defineConfig({
   mdxOptions: {
     rehypePlugins: (plugins) => {
       plugins.shift();
       plugins.push([
-        // biome-ignore lint/suspicious/noExplicitAny: known
-        rehypePrettyCode as any,
+        rehypeShiki,
         {
-          theme: {
-            dark: "github-dark",
-            light: "github-light-default",
-          },
-          transformers,
+          ...shikiHighlightOptions,
+          transformers: shikiMdxTransformers,
         },
       ]);
 

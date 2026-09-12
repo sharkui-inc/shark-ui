@@ -109,9 +109,9 @@ export const ToolResultTrigger = (
         "outline-none",
         "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        "has-data-[slot=collapsible-indicator]:[button]:justify-start!",
         className
       )}
+      data-align="start"
       data-slot="tool-result-trigger"
       {...rest}
     >

@@ -79,12 +79,12 @@ Variant via the `variant` prop (`default|destructive`):
 
 ## Pitfalls
 
-- Confusing `Menu` (click / explicit trigger) with `ContextMenu` (context/long-press trigger)—they share menu content primitives but different trigger components and semantics.
+- Confusing `Menu` (click / explicit trigger) with `ContextMenu` (context/long-press trigger): they share menu content primitives but different trigger components and semantics.
 - `ContextMenuTrigger` must wrap the surface that should open the menu; putting the trigger around unrelated layout breaks discoverability and hit testing.
 - Stable `value` strings on `ContextMenuItem` (and submenu items) matter for Ark’s collection model; duplicate or missing values break highlighting and typeahead.
 - Submenus: keep `ContextMenuSub` → `ContextMenuSubTrigger` + `ContextMenuSubContent` hierarchy intact; floating `SubContent` without its `Sub` wrapper loses focus management.
 - Mobile and touch: long-press is not obvious; ensure the surface reads as actionable or offer a visible overflow/menu affordance for small viewports.
-- Keyboard-only use: if the trigger surface is not focusable, users cannot reach the menu without a pointing device—ensure a visible, focusable control or an alternate path to the same actions.
+- Keyboard-only use: if the trigger surface is not focusable, users cannot reach the menu without a pointing device: ensure a visible, focusable control or an alternate path to the same actions.
 
 ## Registry examples
 

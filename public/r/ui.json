@@ -7,9 +7,7 @@
     "recharts",
     "tailwind-variants"
   ],
-  "devDependencies": [
-    "tw-animate-css"
-  ],
+  "devDependencies": ["tw-animate-css"],
   "name": "ui",
   "registryDependencies": [
     "https://shark.vini.one/r/accordion.json",
@@ -63,6 +61,7 @@
     "https://shark.vini.one/r/hint.json",
     "https://shark.vini.one/r/hotkeys.json",
     "https://shark.vini.one/r/hover-card.json",
+    "https://shark.vini.one/r/iframe.json",
     "https://shark.vini.one/r/image-cropper.json",
     "https://shark.vini.one/r/input.json",
     "https://shark.vini.one/r/input-group.json",
@@ -117,7 +116,6 @@
     "https://shark.vini.one/r/table.json",
     "https://shark.vini.one/r/tabs.json",
     "https://shark.vini.one/r/tags-input.json",
-    "https://shark.vini.one/r/task.json",
     "https://shark.vini.one/r/terminal.json",
     "https://shark.vini.one/r/textarea.json",
     "https://shark.vini.one/r/timer.json",

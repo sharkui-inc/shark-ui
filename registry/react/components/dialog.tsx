@@ -59,7 +59,7 @@ export const dialogOverlayVariants = tv({
     "peer peer-data-[slot=dialog-overlay]:hidden",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
-    "motion-reduce:animate-none!",
+    "motion-reduce:animate-none",
   ],
 });
 
@@ -121,7 +121,7 @@ export const dialogContentVariants = tv({
     "scale-[calc(1-0.1*var(--nested-layer-count))] opacity-[calc(1-0.1*var(--nested-layer-count))]",
     "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
     "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
-    "motion-reduce:animate-none! motion-reduce:transition-none!",
+    "motion-reduce:animate-none motion-reduce:transition-none",
   ],
   defaultVariants: {
     size: "md",
@@ -232,7 +232,7 @@ export const DialogBody = (props: DialogBodyProps) => {
   const { scrollFade = true, className, ...rest } = props;
 
   return (
-    <ScrollArea className="min-h-0 flex-1" scrollFade={scrollFade}>
+    <ScrollArea className="flex-1" scrollFade={scrollFade}>
       <ark.div
         className={cn(
           "p-(--space)",
@@ -294,7 +294,7 @@ export const DialogTitle = (
   return (
     <ArkDialog.Title
       className={cn(
-        "font-heading font-semibold text-lg leading-none",
+        "font-heading font-semibold text-xl leading-none",
         className
       )}
       data-slot="dialog-title"
@@ -329,7 +329,7 @@ export const DialogFooter = (props: React.ComponentProps<typeof ark.div>) => {
       className={cn(
         "shrink-0",
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        "rounded-b-[calc(var(--radius-2xl)-1px)]",
+        "rounded-b-2xl",
         "px-(--space) py-4",
         "bg-muted/48",
         "border-t",

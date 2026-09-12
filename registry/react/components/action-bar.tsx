@@ -42,13 +42,9 @@ export interface ActionBarProps
 
 export const ActionBar = (props: ActionBarProps) => {
   const {
-    open,
-    defaultOpen = false,
-    closeOnEscape = true,
     positioning,
     lazyMount = true,
     unmountOnExit = true,
-    onOpenChange,
     ...rest
   } = props;
 
@@ -61,12 +57,10 @@ export const ActionBar = (props: ActionBarProps) => {
     <ActionBarProvider value={context}>
       <ArkPopover.Root
         autoFocus={false}
-        closeOnEscape={closeOnEscape}
+        closeOnEscape={false}
         closeOnInteractOutside={false}
-        defaultOpen={open === undefined ? defaultOpen : undefined}
         lazyMount={lazyMount}
         modal={false}
-        open={open}
         unmountOnExit={unmountOnExit}
         {...rest}
       />
@@ -129,7 +123,7 @@ export const ActionBarContent = (props: ActionBarContentProps) => {
             "data-[state=closed]:animate-out data-[state=open]:animate-in",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=open]:slide-in-from-bottom-2 data-[state=closed]:slide-out-to-bottom-2",
-            "motion-reduce:animate-none!",
+            "motion-reduce:animate-none",
             className
           )}
           data-slot="action-bar-content"
@@ -168,7 +162,7 @@ export const ActionBarClose = (props: ActionBarCloseProps) => {
       className={cn(
         "opacity-64 transition-opacity",
         "hover:opacity-100",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="action-bar-close"

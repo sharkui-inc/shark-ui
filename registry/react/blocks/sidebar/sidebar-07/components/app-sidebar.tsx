@@ -41,13 +41,8 @@ export function AppSidebar() {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" tooltip="Acme workspace">
-              <IconTile
-                aria-hidden="true"
-                className="border-transparent bg-sidebar-primary text-sidebar-primary-foreground shadow-none"
-                size="sm"
-                variant="primary"
-              >
+            <SidebarMenuButton size="lg" tooltip="Onda workspace">
+              <IconTile aria-hidden="true" size="sm">
                 <GalleryVerticalEndIcon aria-hidden="true" className="size-4" />
               </IconTile>
               <span className="grid flex-1 text-start text-sm leading-tight">

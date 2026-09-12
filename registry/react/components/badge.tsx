@@ -7,15 +7,15 @@ import { cn } from "@/lib/utils";
 export const badgeVariants = tv({
   base: [
     "relative",
-    "inline-flex w-fit max-w-full shrink-0 items-center justify-center gap-1",
+    "inline-flex w-fit shrink-0 items-center justify-center gap-1",
     "select-none whitespace-nowrap font-medium text-xs",
     "border border-transparent",
     "overflow-hidden",
     "transition-colors",
     "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
     "[&_svg]:pointer-events-none [&_svg]:size-3 [&_svg]:shrink-0",
-    "[button&,a&]:cursor-pointer [button&,a&]:pointer-coarse:after:absolute [button&,a&]:pointer-coarse:after:size-full [button&,a&]:pointer-coarse:after:min-h-11 [button&,a&]:pointer-coarse:after:min-w-11",
-    "motion-reduce:transition-none!",
+    "[button&,a&]:cursor-pointer",
+    "motion-reduce:transition-none",
   ],
   defaultVariants: {
     pill: false,
@@ -39,11 +39,9 @@ export const badgeVariants = tv({
     },
     variant: {
       default: [
-        "bg-foreground",
-        "text-background",
-        "focus-visible:border-foreground focus-visible:ring-foreground/20",
-        "dark:focus-visible:ring-foreground/40",
-        "[a&]:hover:bg-foreground/90",
+        "bg-primary",
+        "text-primary-foreground",
+        "[a&]:hover:bg-primary/90",
       ],
       destructive: [
         "bg-destructive/10 dark:bg-destructive/5",

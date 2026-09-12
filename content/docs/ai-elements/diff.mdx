@@ -3,6 +3,8 @@ title: Diff
 description: Display unified diff hunks.
 ---
 
+import manifest from "@/registry/manifest/diff";
+
 <ComponentPreview componentName="diff" />
 
 ## Installation
@@ -30,11 +32,9 @@ npx shadcn@latest add @shark/diff
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css

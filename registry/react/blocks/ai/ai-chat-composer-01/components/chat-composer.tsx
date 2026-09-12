@@ -3,7 +3,6 @@
 import { useFilter, useListCollection } from "@ark-ui/react";
 import { BrainIcon, PaperclipIcon, SparklesIcon } from "lucide-react";
 import React from "react";
-import { cn } from "@/lib/utils";
 import {
   Announcement,
   AnnouncementTitle,
@@ -43,6 +42,7 @@ import {
   SpeechInputTrigger,
   SpeechInputWaveform,
 } from "@/registry/react/components/speech-input";
+import { Toggle } from "@/registry/react/components/toggle";
 
 interface ModelOption {
   group: string;
@@ -81,29 +81,6 @@ export const ChatComposer = ({
     initialItems: [...modelOptions],
   });
 
-  const handleStop = React.useCallback(() => setStatus("ready"), []);
-  const handleChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLTextAreaElement>) =>
-      setDraft(event.target.value),
-    []
-  );
-  const handleSubmit = React.useCallback(
-    ({ text }: { text: string }) => {
-      onSend(text);
-      setDraft("");
-      setStatus("streaming");
-      window.setTimeout(() => setStatus("ready"), 900);
-    },
-    [onSend]
-  );
-  const handleTranscription = React.useCallback((text: string) => {
-    setDraft((current) => (current ? `${current} ${text}` : text));
-  }, []);
-
-  const handleThinkModeClick = React.useCallback(() => {
-    onThinkModeChange(!thinkMode);
-  }, [onThinkModeChange, thinkMode]);
-
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-3">
       <div className="w-full rounded-2xl bg-muted/50 p-0.5">
@@ -115,7 +92,7 @@ export const ChatComposer = ({
           <span aria-hidden="true" className="text-muted-foreground/60 text-xs">
             ·
           </span>
-          <Button className="h-auto px-0 text-xs" type="button" variant="link">
+          <Button className="h-auto px-0 text-xs" variant="link">
             Upgrade
           </Button>
         </Announcement>
@@ -123,14 +100,19 @@ export const ChatComposer = ({
         <FileUpload accept="image/*,.pdf,.txt" className="gap-0" maxFiles={4}>
           <PromptInput
             className="rounded-[15px] border-0 bg-card shadow-xs"
-            onStop={handleStop}
-            onSubmit={handleSubmit}
+            onStop={() => setStatus("ready")}
+            onSubmit={({ text }) => {
+              onSend(text);
+              setDraft("");
+              setStatus("streaming");
+              window.setTimeout(() => setStatus("ready"), 900);
+            }}
             status={status}
           >
             <PromptInputTextarea
               aria-label="Message"
               maxLength={2000}
-              onChange={handleChange}
+              onChange={(event) => setDraft(event.target.value)}
               placeholder="How can I help you today?"
               rows={3}
               value={draft}
@@ -168,20 +150,28 @@ export const ChatComposer = ({
                     </ModelSelectorList>
                   </ModelSelectorContent>
                 </ModelSelector>
-                <PromptInputButton
-                  aria-label="Think mode"
-                  aria-pressed={thinkMode}
-                  className={cn(
-                    thinkMode && "bg-accent text-accent-foreground"
-                  )}
-                  onClick={handleThinkModeClick}
-                  size="xs"
-                  type="button"
+                <Toggle
+                  asChild
+                  onPressedChange={onThinkModeChange}
+                  pressed={thinkMode}
+                  size="sm"
                 >
-                  <BrainIcon aria-hidden="true" />
-                  Think
-                </PromptInputButton>
-                <SpeechInput onTranscriptionChange={handleTranscription}>
+                  <PromptInputButton
+                    aria-label="Think mode"
+                    className="data-[state=on]:bg-accent data-[state=on]:text-accent-foreground"
+                    size="xs"
+                  >
+                    <BrainIcon aria-hidden="true" />
+                    Think
+                  </PromptInputButton>
+                </Toggle>
+                <SpeechInput
+                  onTranscriptionChange={(text) => {
+                    setDraft((current) =>
+                      current ? `${current} ${text}` : text
+                    );
+                  }}
+                >
                   <SpeechInputTrigger />
                   <SpeechInputContent>
                     <SpeechInputWaveform />

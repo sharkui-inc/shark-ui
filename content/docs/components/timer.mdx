@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/timer#api-reference
 ---
 
+import manifest from "@/registry/manifest/timer";
+
 <ComponentPreview componentName="timer" />
 
 ## Installation
@@ -31,9 +33,7 @@ npx shadcn@latest add @shark/timer
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -226,10 +226,11 @@ Renders one time field from the current timer value.
 
 ### TimerSeparator
 
-Visual delimiter between item groups (defaults to `:` when children are omitted).
+Visual delimiter between item groups.
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `children` | `React.ReactNode` | `":"` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 

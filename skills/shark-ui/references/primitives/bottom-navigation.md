@@ -49,7 +49,7 @@ Built on Ark **Tabs** semantics (`value` / `defaultValue`, `onValueChange`). Eac
 ## Common pitfalls
 
 - Mismatched item `value` strings between controlled state and triggers.
-- Too many tabs for a small viewport—keep counts low or offer a “More” pattern.
+- Too many tabs for a small viewport: keep counts low or offer a “More” pattern.
 - Omitting labels for icon-only items without `aria-label` on the trigger content.
 
 ## Registry example files

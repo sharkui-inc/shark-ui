@@ -9,7 +9,7 @@ import {
   tableFeatures,
   useTable,
 } from "@tanstack/react-table";
-import { type ChangeEvent, useCallback, useState } from "react";
+import { useState } from "react";
 import { Input } from "@/registry/react/components/input";
 import {
   Table,
@@ -34,19 +34,14 @@ const Example = () => {
     },
   });
 
-  const handleSearchChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      table.setGlobalFilter(event.target.value);
-    },
-    [table]
-  );
-
   return (
     <div className="flex w-full max-w-2xl flex-col gap-4">
       <Input
         aria-label="Search contacts"
         className="max-w-xs"
-        onChange={handleSearchChange}
+        onChange={(event) => {
+          table.setGlobalFilter(event.target.value);
+        }}
         placeholder="Search…"
         type="search"
         value={globalFilter}

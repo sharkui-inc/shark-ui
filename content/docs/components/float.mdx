@@ -3,6 +3,8 @@ title: Float
 description: Anchor an element to the edge of a container.
 ---
 
+import manifest from "@/registry/manifest/float";
+
 <ComponentPreview componentName="float" />
 
 ## Installation
@@ -24,9 +26,7 @@ npx shadcn@latest add @shark/float
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

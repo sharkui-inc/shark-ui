@@ -23,7 +23,7 @@ export const QueueSection = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground",
+        "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground shadow-xs/5",
         className
       )}
       data-slot="queue-section"
@@ -134,7 +134,7 @@ export const QueueItem = (props: React.ComponentProps<typeof ark.li>) => {
         "hover:bg-muted",
         "has-focus-visible:bg-muted",
         "[&>svg:not([class*='size-'])]:size-3.5 [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="queue-item"
@@ -179,7 +179,7 @@ export const QueueItemActions = (
         "group-hover/queue-item:opacity-100",
         "group-focus-within/queue-item:opacity-100",
         "transition-opacity duration-150",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="queue-item-actions"

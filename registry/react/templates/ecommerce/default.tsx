@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata({
-  description:
-    "Online store with product grid, cart, checkout, and product detail pages.",
   title: "Ecommerce Template",
   url: "/templates/ecommerce",
 });

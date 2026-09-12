@@ -36,9 +36,9 @@ Place `SkipNavLink` early in the document (before header). Ensure the `href` mat
 
 ## Common pitfalls
 
-- Linking to an `id` that does not exist or is not focusable—verify the target receives focus.
-- Hiding the skip link in a way that removes it from tab order—use visually hidden styles, not `display: none`.
-- Duplicating multiple skip links without clear labels—keep one primary “skip to content”.
+- Linking to an `id` that does not exist or is not focusable: verify the target receives focus.
+- Hiding the skip link in a way that removes it from tab order: use visually hidden styles, not `display: none`.
+- Duplicating multiple skip links without clear labels: keep one primary “skip to content”.
 
 ## Registry example files
 

@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/hover-card#api-reference
 ---
 
+import manifest from "@/registry/manifest/hover-card";
+
 <ComponentPreview componentName="hover-card" />
 
 ## Installation
@@ -31,9 +33,7 @@ npx shadcn@latest add @shark/hover-card
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

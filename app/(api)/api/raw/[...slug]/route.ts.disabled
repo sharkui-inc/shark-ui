@@ -1,5 +1,5 @@
 /**
- * DISABLED for Vercel Hobby (free) tier — dynamic route consumes serverless invocations.
+ * DISABLED for Vercel Hobby (free) tier: dynamic route consumes serverless invocations.
  * To re-enable:
  * 1. Rename this file to route.ts
  * 2. Set SITE_FEATURES.rawMarkdownRoutes to true in lib/site-features.ts

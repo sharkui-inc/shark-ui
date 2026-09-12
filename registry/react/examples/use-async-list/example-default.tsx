@@ -41,7 +41,6 @@ const UseAsyncListDemo = () => {
         className="self-start"
         disabled={list.loading}
         onClick={list.reload}
-        type="button"
         variant="outline"
       >
         {!!list.loading && <Spinner />}
@@ -59,7 +58,7 @@ const UseAsyncListDemo = () => {
               <ItemDescription className="line-clamp-none">
                 “{quote.quote}”
               </ItemDescription>
-              <ItemTitle>— {quote.author}</ItemTitle>
+              <ItemTitle>By {quote.author}</ItemTitle>
             </ItemContent>
           </Item>
         ))}

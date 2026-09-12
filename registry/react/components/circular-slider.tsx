@@ -168,6 +168,7 @@ export const CircularSliderThumb = (
 ) => {
   const { className, ...rest } = props;
 
+  const { dragging } = useCircularSlider();
   const { thumbSize, ringRadius } = _useCircularSlider();
 
   const halfThumb = thumbSize / 2;
@@ -197,8 +198,9 @@ export const CircularSliderThumb = (
           "size-(--size)",
           "rounded-full shadow-xs/5 ring-2 ring-border",
           "transition-all",
-          "hover:cursor-grab hover:ring-[3px]",
-          "motion-reduce:transition-none!"
+          "cursor-grab hover:ring-[3px]",
+          dragging && "cursor-grabbing",
+          "motion-reduce:transition-none"
         )}
         style={
           {

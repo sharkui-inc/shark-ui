@@ -47,7 +47,7 @@ export const Suggestion = (props: SuggestionProps) => {
 
   return (
     <Button
-      className={cn("font-normal", className)}
+      className={cn("font-normal font-sans", className)}
       data-slot="suggestion"
       onClick={() => onClick?.(suggestion)}
       pill={pill}

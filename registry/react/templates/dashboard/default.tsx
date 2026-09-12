@@ -1,9 +1,16 @@
 "use client";
 
+import {
+  BellIcon,
+  LayoutDashboardIcon,
+  SettingsIcon,
+  WavesIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { Bar, BarChart } from "recharts";
 import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
 import { Badge } from "@/registry/react/components/badge";
+import { Button } from "@/registry/react/components/button";
 import {
   Card,
   CardContent,
@@ -15,6 +22,7 @@ import {
   type ChartConfig,
   ChartContainer,
 } from "@/registry/react/components/chart";
+import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   SidebarContent,
   SidebarFooter,
@@ -39,16 +47,11 @@ import {
 } from "@/registry/react/components/table";
 
 const DASHBOARD_NAV = [
-  { href: "#", label: "Overview" },
-  { href: "#", label: "Analytics" },
-  { href: "#", label: "Products" },
-  { href: "#", label: "Orders" },
+  { href: "#", icon: LayoutDashboardIcon, label: "Overview" },
+  { href: "#", icon: BellIcon, label: "Notifications" },
 ];
 
-const DASHBOARD_OTHER = [
-  { href: "#", label: "Settings" },
-  { href: "#", label: "Support" },
-];
+const DASHBOARD_OTHER = [{ href: "#", icon: SettingsIcon, label: "Settings" }];
 
 const CHANNEL_DATA = [
   { channels: "Facebook", percent: "28%", total: "6,958" },
@@ -68,7 +71,7 @@ const CHART_DATA = [
 
 const chartConfig = {
   value: {
-    color: "hsl(var(--chart-1))",
+    color: "var(--chart-1)",
     label: "Sales",
   },
 } satisfies ChartConfig;
@@ -80,19 +83,30 @@ const DashboardTemplate = () => (
       collapsible="none"
     >
       <SidebarHeader className="border-b">
-        <div className="flex items-center gap-2 px-2 py-3">
-          <span className="font-semibold">Catalyst</span>
+        <div className="flex items-center gap-3 px-2 py-3">
+          <IconTile aria-hidden="true" size="sm">
+            <WavesIcon aria-hidden="true" className="size-4" />
+          </IconTile>
+          <div className="grid min-w-0 gap-0.5">
+            <span className="truncate font-semibold text-sm">Catalyst</span>
+            <span className="truncate text-muted-foreground text-xs">
+              Analytics workspace
+            </span>
+          </div>
         </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Main</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
-              {DASHBOARD_NAV.map(({ label, href }) => (
+            <SidebarMenu>
+              {DASHBOARD_NAV.map(({ icon: Icon, label, href }) => (
                 <SidebarMenuItem key={label}>
                   <SidebarMenuButton asChild isActive={label === "Overview"}>
-                    <Link href={href}>{label}</Link>
+                    <Link href={href}>
+                      <Icon aria-hidden="true" className="size-4" />
+                      {label}
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -102,11 +116,14 @@ const DashboardTemplate = () => (
         <SidebarGroup>
           <SidebarGroupLabel>Others</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
-              {DASHBOARD_OTHER.map(({ label, href }) => (
+            <SidebarMenu>
+              {DASHBOARD_OTHER.map(({ icon: Icon, label, href }) => (
                 <SidebarMenuItem key={label}>
                   <SidebarMenuButton asChild>
-                    <Link href={href}>{label}</Link>
+                    <Link href={href}>
+                      <Icon aria-hidden="true" className="size-4" />
+                      {label}
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -129,10 +146,26 @@ const DashboardTemplate = () => (
       </SidebarFooter>
     </SidebarRoot>
     <SidebarInset>
+      <header className="flex h-14 items-center gap-3 border-b px-6">
+        <div className="min-w-0 flex-1">
+          <p className="truncate font-semibold text-sm">Dashboard</p>
+          <p className="text-muted-foreground text-xs">Performance overview</p>
+        </div>
+        <Button size="sm" variant="outline">
+          Last 30 days
+        </Button>
+      </header>
       <div className="flex flex-col gap-6 p-6">
-        <div>
-          <h1 className="font-semibold text-2xl">Welcome back to Catalyst</h1>
-          <p className="text-muted-foreground">Filter by 1D 1W 1M 3M 1Y</p>
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h1 className="font-semibold text-2xl tracking-[-0.03em]">
+              Welcome back to Catalyst
+            </h1>
+            <p className="mt-1 text-muted-foreground text-sm">
+              A concise view of your business performance.
+            </p>
+          </div>
+          <Badge variant="secondary">Updated just now</Badge>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

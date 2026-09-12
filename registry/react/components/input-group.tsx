@@ -16,7 +16,8 @@ const inpuGroupVariants = tv({
     "flex items-center",
     "font-normal text-base md:text-sm",
     "bg-background dark:bg-input/30",
-    "[--input-group-inset:calc(var(--spacing)*3-0.45rem)]",
+    "[--input-group-addon-size:--spacing(6)]",
+    "[--input-group-inset:calc((var(--input-group-height)-2px-var(--input-group-addon-size))/2)]",
     "border border-input shadow-xs/5",
     "transition-[color,box-shadow]",
     "has-[>textarea]:h-auto",
@@ -25,7 +26,7 @@ const inpuGroupVariants = tv({
     "outline-none focus-within:border-primary focus-within:ring-[3px] focus-within:ring-ring/32",
     "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-[3px] has-[[data-slot][aria-invalid=true]]:ring-destructive/24",
     "dark:has-[[data-slot][aria-invalid=true]]:border-destructive-foreground dark:has-[[data-slot][aria-invalid=true]]:ring-destructive-foreground/40",
-    "motion-reduce:transition-none!",
+    "motion-reduce:transition-none",
   ],
   defaultVariants: {
     pill: false,
@@ -37,9 +38,21 @@ const inpuGroupVariants = tv({
       true: "rounded-full",
     },
     size: {
-      lg: ["h-9", "px-[calc(--spacing(3.5)-1px)]"],
-      md: ["h-8", "px-[calc(--spacing(3)-1px)]"],
-      sm: ["h-7", "px-[calc(--spacing(2.5)-1px)]"],
+      lg: [
+        "h-9",
+        "[--input-group-height:--spacing(9)]",
+        "px-[calc(--spacing(3.5)-1px)]",
+      ],
+      md: [
+        "h-8",
+        "[--input-group-height:--spacing(8)]",
+        "px-[calc(--spacing(3)-1px)]",
+      ],
+      sm: [
+        "h-7",
+        "[--input-group-height:--spacing(7)]",
+        "px-[calc(--spacing(2.5)-1px)]",
+      ],
     },
   },
 });
@@ -89,8 +102,8 @@ const inputGroupAddonVariants = tv({
         "group-has-[>input]/input-group:pt-2.5",
         "[.border-b]:pb-[calc(--spacing(3)-1px)]",
       ],
-      "inline-end": ["order-last ps-2 pe-0"],
-      "inline-start": ["order-first ps-0 pe-2"],
+      "inline-end": ["order-last ps-2 pe-0", "has-[button]:-me-2"],
+      "inline-start": ["order-first ps-0 pe-2", "has-[button]:-ms-2"],
     },
   },
 });
@@ -140,25 +153,17 @@ const inputGroupButtonVariants = tv({
     "shadow-none",
     "[--input-group-inner-radius:max(0px,calc(var(--radius)-var(--input-group-inset)))]",
     "rounded-(--input-group-inner-radius)",
-    "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
   ],
 });
 
 export const InputGroupButton = (props: ButtonProps) => {
-  const {
-    className,
-    type = "button",
-    variant = "ghost",
-    size = "xs",
-    ...rest
-  } = props;
+  const { className, variant = "ghost", size = "xs", ...rest } = props;
 
   return (
     <Button
       className={cn(inputGroupButtonVariants(), className)}
       data-slot="input-group-button"
       size={size}
-      type={type}
       variant={variant}
       {...rest}
     />

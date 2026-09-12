@@ -3,6 +3,8 @@ title: Reasoning
 description: Reveal model reasoning with duration and streaming states.
 ---
 
+import manifest from "@/registry/manifest/reasoning";
+
 <ComponentPreview componentName="reasoning" />
 
 ## Installation
@@ -27,6 +29,10 @@ npx shadcn@latest add @shark/reasoning
 <Steps>
 
 <Step>This component depends on [Collapsible](/docs/components/collapsible) and [Shimmer](/docs/utilities/shimmer). Install them first if you haven't already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

@@ -10,11 +10,7 @@ import {
 } from "@/registry/react/components/listbox";
 
 const Example = () => (
-  <Listbox
-    className="w-full max-w-64"
-    collection={collection}
-    defaultValue={["br"]}
-  >
+  <Listbox className="max-w-64" collection={collection} defaultValue={["br"]}>
     <ListboxContent>
       {collection.items.map((item) => (
         <ListboxItem item={item} key={item.value}>

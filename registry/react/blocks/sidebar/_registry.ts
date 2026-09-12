@@ -111,11 +111,43 @@ export const sidebarBlocks = [
     meta: { featured: false, order: 4, previewHeight: 760 },
     name: "sidebar-14",
     preview: () => import("./sidebar-14/page"),
+    registryDependencies: [absoluteUrl("/r/sidebar.json")],
+    title: "Sidebar 14",
+    type: "registry:block",
+  },
+  {
+    category: "sidebar",
+    dependencies: ["lucide-react"],
+    description:
+      "A workspace layout with a collapsible navigation sidebar and persistent details sidebar.",
+    files: [
+      {
+        path: "blocks/sidebar/sidebar-15/page.tsx",
+        source: "page.tsx",
+        target: "app/dashboard/page.tsx",
+        type: "registry:page",
+      },
+      {
+        path: "blocks/sidebar/sidebar-15/components/sidebar-left.tsx",
+        source: "components/sidebar-left.tsx",
+        target: "@components/sidebar-15/sidebar-left.tsx",
+        type: "registry:component",
+      },
+      {
+        path: "blocks/sidebar/sidebar-15/components/sidebar-right.tsx",
+        source: "components/sidebar-right.tsx",
+        target: "@components/sidebar-15/sidebar-right.tsx",
+        type: "registry:component",
+      },
+    ],
+    meta: { featured: false, order: 5, previewHeight: 760 },
+    name: "sidebar-15",
+    preview: () => import("./sidebar-15/page"),
     registryDependencies: [
-      absoluteUrl("/r/icon-tile.json"),
+      absoluteUrl("/r/separator.json"),
       absoluteUrl("/r/sidebar.json"),
     ],
-    title: "Sidebar 14",
+    title: "Sidebar 15",
     type: "registry:block",
   },
 ] as const satisfies readonly BlockDefinition[];

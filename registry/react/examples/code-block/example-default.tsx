@@ -5,18 +5,15 @@ import {
   CodeBlockCopy,
   CodeBlockHeader,
 } from "@/registry/react/components/code-block";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 const CodeBlockDemo = () => (
-  <CodeBlock className="max-w-lg" code={CODE}>
+  <CodeBlock className="w-full max-w-lg" code={CODE} language="tsx">
     <CodeBlockHeader title="src/utils/helpers.ts">
       <CodeBlockActions>
         <CodeBlockCopy />
       </CodeBlockActions>
     </CodeBlockHeader>
-    <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
-      <CodeBlockContent showLineNumbers />
-    </ScrollArea>
+    <CodeBlockContent showLineNumbers />
   </CodeBlock>
 );
 

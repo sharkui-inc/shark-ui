@@ -66,7 +66,7 @@ export function Example() {
                 <Field invalid={fieldState.invalid}>
                   <FieldSet>
                     <FieldLegend>Plan</FieldLegend>
-                    <FieldDescription className="ms-0!">
+                    <FieldDescription>
                       You can upgrade or downgrade your plan at any time.
                     </FieldDescription>
                     <RadioGroup

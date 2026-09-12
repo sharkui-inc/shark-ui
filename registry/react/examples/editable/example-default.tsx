@@ -34,7 +34,7 @@ const EditableDemo = () => (
           <Editable defaultValue="Vinicius Vicentini">
             <EditableArea>
               <EditableInput asChild>
-                <Input className="w-full" />
+                <Input />
               </EditableInput>
               <EditablePreview />
             </EditableArea>

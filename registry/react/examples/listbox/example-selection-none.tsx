@@ -7,6 +7,7 @@ import {
   Listbox,
   ListboxContent,
   ListboxItem,
+  ListboxItemDescription,
   ListboxItemGroup,
   ListboxItemText,
   ListboxShortcut,
@@ -24,42 +25,24 @@ const Example = () => (
       <ListboxContent>
         <ListboxItemGroup heading="Actions">
           <ListboxItem item={collection.items[0]}>
-            <div className="flex h-8 items-start justify-start">
-              <SquarePlusIcon />
-            </div>
-            <div className="flex min-w-0 flex-1 flex-col">
-              <ListboxItemText>New file</ListboxItemText>
-              <span className="text-muted-foreground text-xs">
-                Create a new file
-              </span>
-            </div>
+            <SquarePlusIcon aria-hidden="true" className="h-lh w-3.5" />
+            <ListboxItemText>New file</ListboxItemText>
+            <ListboxItemDescription>Create a new file</ListboxItemDescription>
             <ListboxShortcut>⌘N</ListboxShortcut>
           </ListboxItem>
           <ListboxItem item={collection.items[1]}>
-            <div className="flex h-8 items-start justify-start">
-              <PencilIcon />
-            </div>
-            <div className="flex min-w-0 flex-1 flex-col">
-              <ListboxItemText>Edit file</ListboxItemText>
-              <span className="text-muted-foreground text-xs">
-                Make changes
-              </span>
-            </div>
+            <PencilIcon aria-hidden="true" className="h-lh w-3.5" />
+            <ListboxItemText>Edit file</ListboxItemText>
+            <ListboxItemDescription>Make changes</ListboxItemDescription>
             <ListboxShortcut>⌘E</ListboxShortcut>
           </ListboxItem>
         </ListboxItemGroup>
         <Separator />
         <ListboxItemGroup heading="Danger zone">
           <ListboxItem item={collection.items[2]} variant="destructive">
-            <div className="flex h-8 items-start justify-start">
-              <Trash2Icon />
-            </div>
-            <div className="flex min-w-0 flex-1 flex-col">
-              <ListboxItemText>Delete file</ListboxItemText>
-              <span className="text-muted-foreground text-xs">
-                Move to trash
-              </span>
-            </div>
+            <Trash2Icon aria-hidden="true" className="h-lh w-3.5" />
+            <ListboxItemText>Delete file</ListboxItemText>
+            <ListboxItemDescription>Move to trash</ListboxItemDescription>
             <ListboxShortcut>⌘D</ListboxShortcut>
           </ListboxItem>
         </ListboxItemGroup>

@@ -1,10 +1,9 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { SkeletonText } from "@/registry/react/components/skeleton";
 import {
   Toc,
-  type TocActiveChangeDetails,
   TocContent,
   TocItem,
   type TocItemData,
@@ -27,32 +26,22 @@ import {
 
 const Example = () => {
   const contentRef = useRef<HTMLElement>(null);
-  const getScrollEl = useCallback(() => contentRef.current, []);
   const [expandedValue, setExpandedValue] = useState(["09-guides"]);
   const [selectedValue, setSelectedValue] = useState<string[]>([]);
-
-  const handleActiveChange = useCallback((details: TocActiveChangeDetails) => {
-    const [activeId] = details.activeIds;
-    if (!activeId) {
-      return;
-    }
-    setSelectedValue([activeId]);
-    setExpandedValue(ancestorValues(activeId));
-  }, []);
-
-  const handleExpandedChange = useCallback(
-    (details: { expandedValue: string[] }) => {
-      setExpandedValue(details.expandedValue);
-    },
-    []
-  );
 
   return (
     <Toc
       className="size-full rounded-lg border p-4"
       items={items}
-      onActiveChange={handleActiveChange}
-      scrollEl={getScrollEl}
+      onActiveChange={(details) => {
+        const [activeId] = details.activeIds;
+        if (!activeId) {
+          return;
+        }
+        setSelectedValue([activeId]);
+        setExpandedValue(ancestorValues(activeId));
+      }}
+      scrollEl={() => contentRef.current}
     >
       <TocContent className="h-80 overflow-y-auto pe-4" ref={contentRef}>
         <Article items={items} />
@@ -62,7 +51,9 @@ const Example = () => {
         <TreeView
           collection={collection}
           expandedValue={expandedValue}
-          onExpandedChange={handleExpandedChange}
+          onExpandedChange={(details) => {
+            setExpandedValue(details.expandedValue);
+          }}
           selectedValue={selectedValue}
         >
           <TreeViewTree>

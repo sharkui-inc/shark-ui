@@ -10,7 +10,7 @@ import {
   useTable,
 } from "@tanstack/react-table";
 import { ChevronDownIcon, ChevronRightIcon } from "lucide-react";
-import { Fragment, useCallback, useState } from "react";
+import { Fragment, useState } from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Table,
@@ -120,28 +120,22 @@ const formatCurrency = (amount: number) =>
     style: "currency",
   }).format(amount);
 
-const ExpandToggle = ({ row }: { row: Row<typeof features, Order> }) => {
-  const handleToggle = useCallback(() => {
-    row.toggleExpanded();
-  }, [row]);
-
-  return (
-    <Button
-      aria-expanded={row.getIsExpanded()}
-      aria-label={row.getIsExpanded() ? "Collapse order" : "Expand order"}
-      className="size-8"
-      onClick={handleToggle}
-      size="icon-sm"
-      variant="ghost"
-    >
-      {row.getIsExpanded() ? (
-        <ChevronDownIcon aria-hidden className="size-4" />
-      ) : (
-        <ChevronRightIcon aria-hidden className="size-4" />
-      )}
-    </Button>
-  );
-};
+const ExpandToggle = ({ row }: { row: Row<typeof features, Order> }) => (
+  <Button
+    aria-expanded={row.getIsExpanded()}
+    aria-label={row.getIsExpanded() ? "Collapse order" : "Expand order"}
+    className="size-8"
+    onClick={() => row.toggleExpanded()}
+    size="icon-sm"
+    variant="ghost"
+  >
+    {row.getIsExpanded() ? (
+      <ChevronDownIcon aria-hidden className="size-4" />
+    ) : (
+      <ChevronRightIcon aria-hidden className="size-4" />
+    )}
+  </Button>
+);
 
 const columns = columnHelper.columns([
   columnHelper.display({

@@ -8,14 +8,14 @@ export const buttonControlVariants = tv({
   base: [
     "relative",
     "inline-flex shrink-0 items-center justify-center gap-2",
-    "touch-manipulation select-none whitespace-nowrap font-medium text-sm",
+    "touch-manipulation select-none whitespace-nowrap font-medium font-sans text-sm",
   ],
 });
 
 export const buttonVariants = tv({
   base: [
     buttonControlVariants(),
-    "bg-clip-padding",
+    "rounded-(--button-radius) [--button-radius:var(--radius-lg)]",
     "transition-all",
     "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/32",
     "disabled:pointer-events-none disabled:opacity-64",
@@ -24,7 +24,13 @@ export const buttonVariants = tv({
     "data-[state=loading]:pointer-events-none",
     "aria-invalid:border-destructive aria-invalid:ring-destructive/24",
     "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:shrink-0",
-    "motion-reduce:transition-none!",
+    "motion-reduce:transition-none",
+  ],
+  compoundVariants: [
+    {
+      class: "[--button-radius:9999px]",
+      pill: true,
+    },
   ],
   defaultVariants: {
     clickEffect: true,
@@ -37,22 +43,22 @@ export const buttonVariants = tv({
       true: "active:not-aria-[haspopup]:scale-[0.98]",
     },
     pill: {
-      false: "rounded-lg",
-      true: ["rounded-full!", "px-[calc(var(--btn-px)+(--spacing(1.5)))]"],
+      false: "",
+      true: "px-[calc(var(--btn-px)+(--spacing(1.5)))]",
     },
     size: {
       "icon-lg": "size-9",
       "icon-md": "size-8",
       "icon-sm": [
         "size-7",
-        "rounded-[min(var(--radius-md),12px)]",
-        "in-data-[slot=button-group]:rounded-lg",
+        "[--button-radius:min(var(--radius-md),12px)]",
+        "in-data-[slot=button-group]:[--button-radius:var(--radius-lg)]",
       ],
       "icon-xl": "size-10 [&_svg:not([class*='size-'])]:size-5",
       "icon-xs": [
         "size-6",
-        "rounded-[min(var(--radius-md),10px)]",
-        "in-data-[slot=button-group]:rounded-lg",
+        "[--button-radius:min(var(--radius-md),10px)]",
+        "in-data-[slot=button-group]:[--button-radius:var(--radius-lg)]",
         "[&_svg:not([class*='size-'])]:size-3",
         "in-data-[slot=input-group]:[&_svg:not([class*='size-'])]:size-3.5",
       ],
@@ -63,8 +69,8 @@ export const buttonVariants = tv({
         "gap-1.5",
         "[--btn-px:calc(--spacing(2.5)-1px)]",
         "px-(--btn-px)",
-        "rounded-[min(var(--radius-md),12px)]",
-        "in-data-[slot=button-group]:rounded-lg",
+        "[--button-radius:min(var(--radius-md),12px)]",
+        "in-data-[slot=button-group]:[--button-radius:var(--radius-lg)]",
         "[&_svg:not([class*='size-'])]:size-3.5",
       ],
       xl: [
@@ -79,8 +85,8 @@ export const buttonVariants = tv({
         "[--btn-px:calc(--spacing(2)-1px)]",
         "px-(--btn-px)",
         "text-xs",
-        "rounded-[min(var(--radius-md),10px)]",
-        "in-data-[slot=button-group]:rounded-lg",
+        "[--button-radius:min(var(--radius-md),10px)]",
+        "in-data-[slot=button-group]:[--button-radius:var(--radius-lg)]",
         "[&_svg:not([class*='size-'])]:size-3",
         "in-data-[slot=input-group]:[&_svg:not([class*='size-'])]:size-3.5",
       ],

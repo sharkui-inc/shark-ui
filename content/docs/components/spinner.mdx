@@ -3,6 +3,8 @@ title: Spinner
 description: A spinner for displaying a loading state.
 ---
 
+import manifest from "@/registry/manifest/spinner";
+
 <ComponentPreview componentName="spinner" />
 
 ## Installation
@@ -28,9 +30,7 @@ npx shadcn@latest add @shark/spinner
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

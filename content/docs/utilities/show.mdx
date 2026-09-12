@@ -3,6 +3,8 @@ title: Show
 description: Conditionally render content based on a boolean value.
 ---
 
+import manifest from "@/registry/manifest/show";
+
 <ComponentPreview componentName="show" />
 
 ## Installation
@@ -22,6 +24,10 @@ npx shadcn@latest add @shark/show
 <TabsContent value="manual">
 
 <Steps>
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
 <Step>Copy and paste the following code into your project.</Step>
 
   <ComponentSource title="components/ui/show.tsx" src="/show.tsx" />

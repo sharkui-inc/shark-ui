@@ -52,7 +52,6 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
       )}
       items={items}
       {...rest}
-      autoScroll={false}
     >
       <TocNav className="static w-full">
         <TocTitle className="mb-0 inline-flex h-7 items-center gap-2 text-xs">

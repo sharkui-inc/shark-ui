@@ -16,14 +16,14 @@ export const CalendarRangeExample = () => (
     <CardContent>
       <Calendar className="w-full" fixedWeeks selectionMode="range">
         <CalendarViewControl>
-          <CalendarPrevTrigger tabIndex={-1} />
-          <CalendarMonthSelect tabIndex={-1} />
-          <CalendarYearSelect tabIndex={-1} />
-          <CalendarNextTrigger tabIndex={-1} />
+          <CalendarPrevTrigger />
+          <CalendarMonthSelect />
+          <CalendarYearSelect />
+          <CalendarNextTrigger />
         </CalendarViewControl>
         <CalendarTable>
           <CalendarWeekDays />
-          <CalendarTableDays tabIndex={-1} />
+          <CalendarTableDays />
         </CalendarTable>
       </Calendar>
     </CardContent>

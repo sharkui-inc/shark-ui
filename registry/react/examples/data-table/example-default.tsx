@@ -27,7 +27,7 @@ import {
   ChevronDownIcon,
   MoreHorizontalIcon,
 } from "lucide-react";
-import { type ChangeEvent, useCallback, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/registry/react/components/button";
 import { Checkbox } from "@/registry/react/components/checkbox";
 import { Input } from "@/registry/react/components/input";
@@ -74,29 +74,15 @@ const DataTableDemo = () => {
 
   const emailFilterValue = table.getColumn("email")?.getFilterValue();
 
-  const handleEmailFilterChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      table.getColumn("email")?.setFilterValue(event.target.value);
-    },
-    [table]
-  );
-
-  const handlePreviousPage = useCallback(() => {
-    table.previousPage();
-  }, [table]);
-
-  const handleNextPage = useCallback(() => {
-    table.nextPage();
-  }, [table]);
-
   return (
     <div className="w-full max-w-xl">
       <div className="flex items-center gap-2 py-4">
         <Input
           className="max-w-xs"
-          onChange={handleEmailFilterChange}
+          onChange={(event) => {
+            table.getColumn("email")?.setFilterValue(event.target.value);
+          }}
           placeholder="Filter emails..."
-          type="text"
           value={typeof emailFilterValue === "string" ? emailFilterValue : ""}
         />
         <Menu>
@@ -166,7 +152,7 @@ const DataTableDemo = () => {
         <div className="flex gap-2">
           <Button
             disabled={!table.getCanPreviousPage()}
-            onClick={handlePreviousPage}
+            onClick={() => table.previousPage()}
             size="sm"
             variant="outline"
           >
@@ -174,7 +160,7 @@ const DataTableDemo = () => {
           </Button>
           <Button
             disabled={!table.getCanNextPage()}
-            onClick={handleNextPage}
+            onClick={() => table.nextPage()}
             size="sm"
             variant="outline"
           >
@@ -239,110 +225,83 @@ const SelectAllCheckbox = ({
   table,
 }: {
   table: TanStackTable<typeof features, Payment>;
-}) => {
-  const handleCheckedChange = useCallback(
-    ({ checked }: { checked: boolean | "indeterminate" }) => {
+}) => (
+  <Checkbox
+    aria-label="Select all"
+    checked={
+      table.getIsAllPageRowsSelected() ||
+      (table.getIsSomePageRowsSelected() && "indeterminate")
+    }
+    onCheckedChange={({ checked }) => {
       table.toggleAllPageRowsSelected(!!checked);
-    },
-    [table]
-  );
+    }}
+  />
+);
 
-  return (
-    <Checkbox
-      aria-label="Select all"
-      checked={
-        table.getIsAllPageRowsSelected() ||
-        (table.getIsSomePageRowsSelected() && "indeterminate")
-      }
-      onCheckedChange={handleCheckedChange}
-    />
-  );
-};
-
-const SelectRowCheckbox = ({ row }: { row: Row<typeof features, Payment> }) => {
-  const handleCheckedChange = useCallback(
-    ({ checked }: { checked: boolean | "indeterminate" }) => {
+const SelectRowCheckbox = ({ row }: { row: Row<typeof features, Payment> }) => (
+  <Checkbox
+    aria-label="Select row"
+    checked={row.getIsSelected()}
+    onCheckedChange={({ checked }) => {
       row.toggleSelected(!!checked);
-    },
-    [row]
-  );
-
-  return (
-    <Checkbox
-      aria-label="Select row"
-      checked={row.getIsSelected()}
-      onCheckedChange={handleCheckedChange}
-    />
-  );
-};
+    }}
+  />
+);
 
 const EmailSortHeader = ({
   column,
 }: {
   column: Column<typeof features, Payment, string>;
-}) => {
-  const handleSort = useCallback(() => {
-    column.toggleSorting(column.getIsSorted() === "asc");
-  }, [column]);
+}) => (
+  <Button
+    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+    variant="ghost"
+  >
+    Email
+    <ArrowUpDownIcon aria-hidden className="size-4" />
+  </Button>
+);
 
-  return (
-    <Button onClick={handleSort} variant="ghost">
-      Email
-      <ArrowUpDownIcon aria-hidden className="size-4" />
-    </Button>
-  );
-};
-
-const PaymentActions = ({ payment }: { payment: Payment }) => {
-  const handleCopyId = useCallback(() => {
-    navigator.clipboard.writeText(payment.id);
-  }, [payment.id]);
-
-  return (
-    <Menu>
-      <MenuTrigger asChild>
-        <Button aria-label="Open menu" className="size-8 p-0" variant="ghost">
-          <MoreHorizontalIcon aria-hidden className="size-4" />
-        </Button>
-      </MenuTrigger>
-      <MenuContent>
-        <MenuGroup heading="Actions">
-          <MenuItem onClick={handleCopyId} value="copy-payment-id">
-            Copy payment ID
-          </MenuItem>
-          <MenuSeparator />
-          <MenuItem value="view-customer">View customer</MenuItem>
-          <MenuItem value="view-payment-details">View payment details</MenuItem>
-        </MenuGroup>
-      </MenuContent>
-    </Menu>
-  );
-};
+const PaymentActions = ({ payment }: { payment: Payment }) => (
+  <Menu>
+    <MenuTrigger asChild>
+      <Button aria-label="Open menu" className="size-8 p-0" variant="ghost">
+        <MoreHorizontalIcon aria-hidden className="size-4" />
+      </Button>
+    </MenuTrigger>
+    <MenuContent>
+      <MenuGroup heading="Actions">
+        <MenuItem
+          onClick={() => navigator.clipboard.writeText(payment.id)}
+          value="copy-payment-id"
+        >
+          Copy payment ID
+        </MenuItem>
+        <MenuSeparator />
+        <MenuItem value="view-customer">View customer</MenuItem>
+        <MenuItem value="view-payment-details">View payment details</MenuItem>
+      </MenuGroup>
+    </MenuContent>
+  </Menu>
+);
 
 const ColumnVisibilityItem = ({
   column,
 }: {
   column: Column<typeof features, Payment, unknown>;
-}) => {
-  const handleCheckedChange = useCallback(
-    (value: boolean) => {
+}) => (
+  <MenuCheckboxItem
+    checked={column.getIsVisible()}
+    className="capitalize"
+    closeOnSelect={false}
+    onCheckedChange={(value) => {
       column.toggleVisibility(value);
-    },
-    [column]
-  );
-
-  return (
-    <MenuCheckboxItem
-      checked={column.getIsVisible()}
-      className="capitalize"
-      closeOnSelect={false}
-      onCheckedChange={handleCheckedChange}
-      value={column.id}
-    >
-      {column.id}
-    </MenuCheckboxItem>
-  );
-};
+    }}
+    value={column.id}
+  >
+    {column.id}
+  </MenuCheckboxItem>
+);
 
 export const columns = columnHelper.columns([
   columnHelper.display({

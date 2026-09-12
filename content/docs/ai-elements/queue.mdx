@@ -3,6 +3,8 @@ title: Queue
 description: Show queued and completed prompts.
 ---
 
+import manifest from "@/registry/manifest/queue";
+
 <ComponentPreview componentName="queue" />
 
 ## Installation
@@ -27,6 +29,10 @@ npx shadcn@latest add @shark/queue
 <Steps>
 
 <Step>This component depends on [Button](/docs/components/button). Install required dependencies first if you haven&apos;t already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

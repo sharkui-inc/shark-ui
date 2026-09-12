@@ -3,6 +3,8 @@ title: Prompt Input
 description: Compose and send chat prompts with attachments and tools.
 ---
 
+import manifest from "@/registry/manifest/prompt-input";
+
 <ComponentPreview componentName="prompt-input" />
 
 ## Installation
@@ -28,6 +30,10 @@ npx shadcn@latest add @shark/prompt-input
 
 <Step>This component depends on [Input Group](/docs/components/input-group) and [Popover](/docs/components/popover). Install them first if you haven't already.</Step>
 
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource title="components/ui/prompt-input.tsx" src="/prompt-input.tsx" />
@@ -48,10 +54,12 @@ PromptInput
 ├── PromptInputTextarea
 ├── PromptInputFooter
 │   ├── PromptInputTools
-│   │   ├── PromptInputActions
-│   │   │   ├── PopoverTrigger
-│   │   │   └── PromptInputActionsContent
-│   │   │       └── PromptInputAction
+│   │   ├── Menu
+│   │   │   ├── MenuTrigger asChild → PromptInputButton
+│   │   │   └── MenuContent
+│   │   │       ├── Input
+│   │   │       └── MenuGroup
+│   │   │           └── MenuItem
 │   │   └── PromptInputButton
 │   └── PromptInputSubmit
 └── PromptInputBottom
@@ -109,15 +117,15 @@ Disable the textarea, tools, and submit control together.
 
 ## Attachments
 
-Wrap the composer in [File Upload](/docs/components/file-upload) and place chips in `PromptInputHeader`. Use `FileUploadTrigger` with `asChild` on `PromptInputButton`.
+Wrap the composer in [File Upload](/docs/components/file-upload).
 
-<ComponentPreview componentName="prompt-input" fileName="example-attachments" />
+<ComponentPreview componentName="prompt-input" fileName="example-file-upload" />
 
 ## API Reference
 
 ### PromptInput
 
-Form around [Input Group](/docs/components/input-group). The textarea sits above a footer toolbar inside the same field. Enter submits, Shift+Enter inserts a new line.
+The textarea sits above a footer toolbar inside the same field. Enter submits, Shift+Enter inserts a new line.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -166,18 +174,26 @@ Container for composer actions.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 
-### PromptInputActions
+### PromptInputPopover
 
-Popover for attach and context actions. Built on [Popover](/docs/components/popover). Open it with `PopoverTrigger` and `asChild` on a `PromptInputButton`.
+Popover for attach and context actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `modal` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
-### PromptInputAction
+### PromptInputPopoverTrigger
 
-Action row inside `PromptInputActionsContent`. Closes the popover on select.
+Trigger for the popover.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+
+### PromptInputPopoverAction
+
+Action row inside `PromptInputPopoverContent`. Closes the popover on select.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -187,7 +203,7 @@ Action row inside `PromptInputActionsContent`. Closes the popover on select.
 
 ### PromptInputButton
 
-Tool button. Alias of [InputGroupButton](/docs/components/input-group).
+Tool button.
 
 | Prop | Type | Default |
 | --- | --- | --- |

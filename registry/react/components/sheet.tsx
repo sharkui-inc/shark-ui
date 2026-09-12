@@ -92,7 +92,7 @@ const sheetContentVariants = tv({
     "transition-[opacity,translate] duration-200 ease-in-out will-change-transform",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
-    "motion-reduce:animate-none! motion-reduce:transition-none!",
+    "motion-reduce:animate-none motion-reduce:transition-none",
   ],
   defaultVariants: {
     placement: "right",
@@ -125,7 +125,7 @@ const sheetContentVariants = tv({
       default: "",
       inset: [
         "sm:rounded-2xl sm:border",
-        "sm:**:data-[slot=sheet-footer]:rounded-b-[calc(var(--radius-2xl)-1px)]",
+        "sm:**:data-[slot=sheet-footer]:rounded-b-2xl",
       ],
     },
   },

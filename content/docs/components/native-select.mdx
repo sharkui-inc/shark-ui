@@ -3,6 +3,8 @@ title: Native Select
 description: Styled native HTML select element.
 ---
 
+import manifest from "@/registry/manifest/native-select";
+
 <ComponentPreview componentName="native-select" />
 
 ## Installation
@@ -30,9 +32,7 @@ npx shadcn@latest add @shark/native-select
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

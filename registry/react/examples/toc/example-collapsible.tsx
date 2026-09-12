@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronRightIcon } from "lucide-react";
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 import {
   CircularProgress,
   CircularProgressValue,
@@ -24,13 +24,11 @@ import {
 
 const Example = () => {
   const contentRef = useRef<HTMLElement>(null);
-  const getScrollEl = useCallback(() => contentRef.current, []);
-
   return (
     <Toc
       className="size-full flex-col items-stretch gap-2 rounded-lg border p-4"
       items={items}
-      scrollEl={getScrollEl}
+      scrollEl={() => contentRef.current}
     >
       <Collapsible className="flex w-full flex-col gap-2">
         <TocContext>
@@ -59,7 +57,7 @@ const Example = () => {
                     {activeLabel}
                   </span>
                 </span>
-                <span className="inline-flex size-4 shrink-0 items-center justify-center text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 motion-reduce:transition-none!">
+                <span className="inline-flex size-4 shrink-0 items-center justify-center text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 motion-reduce:transition-none">
                   <ChevronRightIcon aria-hidden="true" className="size-4" />
                 </span>
               </CollapsibleTrigger>

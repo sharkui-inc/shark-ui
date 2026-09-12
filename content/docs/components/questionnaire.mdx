@@ -3,6 +3,8 @@ title: Questionnaire
 description: A composable multi-step form.
 ---
 
+import manifest from "@/registry/manifest/questionnaire";
+
 <ComponentPreview
   className="**:data-[slot=preview]:h-[580px]"
   componentName="questionnaire"
@@ -34,9 +36,7 @@ npx shadcn@latest add @shark/questionnaire
 
 <Step>Install the following dependency if it is not already installed.</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

@@ -22,7 +22,7 @@ const ChartDemo = () => (
         tickLine={false}
         tickMargin={10}
       />
-      <ChartTooltip content={(props) => <ChartTooltipContent {...props} />} />
+      <ChartTooltip content={<ChartTooltipContent />} />
       <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
       <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
     </BarChart>

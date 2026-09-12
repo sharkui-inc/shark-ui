@@ -48,7 +48,7 @@ Built on the same Popover stack as Shark `Popover`: defaults include `lazyMount`
 
 ## Common pitfalls
 
-- Treating it like `Tooltip` (hover-only); this is **toggle / popover** behavior—verify UX on touch.
+- Treating it like `Tooltip` (hover-only); this is **toggle / popover** behavior: verify UX on touch.
 - Forgetting `aria-label` (or visible text) on icon-only triggers.
 - Omitting `ToggleTooltipContent`; the popover root needs both trigger and content descendants.
 - Confusing with Radix `Tooltip`; Shark `Tooltip` vs `ToggleTooltip` serve different interaction models.

@@ -3,6 +3,8 @@ title: Speech Input
 description: Capture speech and return the browser transcription.
 ---
 
+import manifest from "@/registry/manifest/speech-input";
+
 <ComponentPreview componentName="speech-input" />
 
 ## Installation
@@ -27,6 +29,10 @@ npx shadcn@latest add @shark/speech-input
 <Steps>
 
 <Step>This component depends on [Button](/docs/components/button). Install required dependencies first if you haven&apos;t already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

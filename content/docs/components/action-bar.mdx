@@ -3,6 +3,8 @@ title: Action Bar
 description: Display an action bar for selected items.
 ---
 
+import manifest from "@/registry/manifest/action-bar";
+
 <ComponentPreview componentName="action-bar" />
 
 ## Installation
@@ -26,9 +28,7 @@ npx shadcn@latest add @shark/action-bar
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -153,25 +153,6 @@ Default spacing is `--spacing(2)`.
 md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
 
-## Accessibility
-
-The action bar uses Ark UI's non-modal Popover with `role="dialog"`. Opening
-it leaves focus where it is, and the page remains interactive and scrollable.
-Clicking or focusing outside does not close the bar.
-
-Give `ActionBarContent` a descriptive `aria-label` or `aria-labelledby`.
-The fallback label is "Bulk actions". Label icon-only controls and hide
-decorative icons from assistive technology.
-
-With `ActionBarTrigger`, Tab moves into the open bar and Shift+Tab can return
-to the trigger. Tab does not trap focus. Escape closes the topmost overlay
-first; `closeOnEscape={false}` disables Escape dismissal for the bar.
-
-Focus restoration follows Ark UI's Popover behavior and uses `ActionBarTrigger`
-when available. For selection-driven bars without a trigger, the application
-is responsible for placing focus appropriately if it removes a focused control.
-Custom action shortcuts should be configured by the application.
-
 ## API Reference
 
 ### ActionBar
@@ -186,7 +167,7 @@ Root component. Provides open state and positioning to descendants.
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
-| `onOpenChange` | `(open: boolean) => void` | - |
+| `onOpenChange` | `({ open }: OpenChangeDetails) => void` | - |
 
 ### ActionBarContent
 

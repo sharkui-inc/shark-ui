@@ -57,7 +57,7 @@ Tune `openDelay` / `closeDelay`, `positioning`, and `lazyMount` on `HoverCard` r
 
 - Placing critical actions only inside hover content (keyboard/touch users may never open it reliably).
 - Omitting `asChild` on `HoverCardTrigger` when wrapping `Button` or links.
-- Expecting click-to-pin behavior—hover cards dismiss when pointer leaves.
+- Expecting click-to-pin behavior: hover cards dismiss when pointer leaves.
 
 ## Registry example files
 

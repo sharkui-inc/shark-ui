@@ -13,15 +13,13 @@ const ComposerDemo = () => {
   const [model, setModel] = React.useState("gpt-4");
   const [thinkMode, setThinkMode] = React.useState(true);
 
-  const handleSend = React.useCallback(() => undefined, []);
-
   return (
     <main className="grid min-h-svh place-items-center bg-background p-6">
       <ChatComposer
         model={model}
         modelOptions={MODEL_OPTIONS}
         onModelChange={setModel}
-        onSend={handleSend}
+        onSend={() => undefined}
         onThinkModeChange={setThinkMode}
         thinkMode={thinkMode}
       />

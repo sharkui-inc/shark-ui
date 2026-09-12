@@ -1,11 +1,20 @@
 import { createHash } from "node:crypto";
-import { transformerNotationWordHighlight } from "@shikijs/transformers";
+import {
+  transformerMetaHighlight,
+  transformerMetaWordHighlight,
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+} from "@shikijs/transformers";
 import { LRUCache } from "lru-cache";
 import type { ShikiTransformer } from "shiki";
 import { codeToHtml } from "shiki";
 import { packageManagerCommandVariants } from "./shadcn-command";
 
-export { packageManagerCommandVariants };
+export const shikiThemes = {
+  dark: "github-dark",
+  light: "github-light-default",
+} as const;
 
 // LRU cache for cross-request caching of highlighted code.
 // Shiki highlighting is CPU-intensive and deterministic, so caching is safe.
@@ -14,24 +23,77 @@ const highlightCache = new LRUCache<string, string>({
   ttl: 1000 * 60 * 60, // 1 hour.
 });
 
-export const transformers = [
-  {
-    code(node) {
-      if (node.tagName === "code") {
-        const raw = this.source;
-        node.properties.__raw__ = raw;
+const showLineNumbersPattern = /\bshowLineNumbers\b/;
 
-        const variants = packageManagerCommandVariants(raw);
-        if (variants) {
-          node.properties.__bun__ = variants.bun;
-          node.properties.__npm__ = variants.npm;
-          node.properties.__pnpm__ = variants.pnpm;
-          node.properties.__yarn__ = variants.yarn;
-        }
-      }
-    },
+const getMetaValue = (meta: string, name: string) => {
+  const match = meta.match(
+    new RegExp(`(?:^|\\s)${name}=(?:"([^"]*)"|'([^']*)'|([^\\s]+))`)
+  );
+
+  return match?.[1] ?? match?.[2] ?? match?.[3];
+};
+
+const metadataTransformer = {
+  code(node) {
+    if (node.tagName !== "code") {
+      return;
+    }
+
+    const meta = this.options.meta?.__raw ?? "";
+    node.properties["data-language"] = this.options.lang;
+
+    if (showLineNumbersPattern.test(meta)) {
+      node.properties["data-line-numbers"] = "";
+    }
   },
+  pre(node) {
+    const meta = this.options.meta?.__raw ?? "";
+    const title = getMetaValue(meta, "title");
+
+    node.properties["data-language"] = this.options.lang;
+    if (title) {
+      node.properties["data-title"] = title;
+    }
+  },
+} satisfies ShikiTransformer;
+
+const mdxCopyTransformer = {
+  code(node) {
+    if (node.tagName !== "code") {
+      return;
+    }
+
+    node.properties.__raw__ = this.source;
+  },
+  pre(node) {
+    node.properties.__raw__ = this.source;
+
+    const variants = packageManagerCommandVariants(this.source);
+    if (variants) {
+      node.properties.__npm__ = variants.npm;
+    }
+  },
+} satisfies ShikiTransformer;
+
+export const shikiTransformers = [
+  metadataTransformer,
+  transformerMetaHighlight(),
+  transformerMetaWordHighlight(),
+  transformerNotationDiff(),
+  transformerNotationHighlight(),
+  transformerNotationWordHighlight(),
 ] as ShikiTransformer[];
+
+export const shikiMdxTransformers = [
+  ...shikiTransformers,
+  mdxCopyTransformer,
+] as ShikiTransformer[];
+
+export const shikiHighlightOptions = {
+  defaultColor: false as const,
+  themes: shikiThemes,
+  transformers: shikiTransformers,
+};
 
 export const highlightCode = async (
   code: string,
@@ -39,8 +101,9 @@ export const highlightCode = async (
   options?: { showLineNumbers?: boolean }
 ) => {
   const { showLineNumbers = true } = options ?? {};
+  const meta = showLineNumbers ? "showLineNumbers" : "";
   const cacheKey = createHash("sha256")
-    .update(`pre-tab-size-2:${language}:${showLineNumbers}:${code}`)
+    .update(`shiki-v2:${language}:${meta}:${code}`)
     .digest("hex");
 
   const cached = highlightCache.get(cacheKey);
@@ -49,29 +112,9 @@ export const highlightCode = async (
   }
 
   const html = await codeToHtml(code, {
-    defaultColor: false,
+    ...shikiHighlightOptions,
     lang: language,
-    themes: {
-      dark: "github-dark",
-      light: "github-light",
-    },
-    transformers: [
-      {
-        code(node) {
-          if (showLineNumbers) {
-            node.properties["data-line-numbers"] = "";
-          }
-        },
-        line(node) {
-          node.properties["data-line"] = "";
-        },
-        pre(node) {
-          node.properties.class =
-            "text-[.8125rem] min-w-0 w-max px-4 py-3.5 [tab-size:2] outline-none has-data-[highlighted-line]:px-0 has-data-[line-numbers]:ps-0 has-data-[slot=tabs]:p-0 bg-transparent!";
-        },
-      },
-      transformerNotationWordHighlight(),
-    ],
+    meta: { __raw: meta },
   });
 
   highlightCache.set(cacheKey, html);

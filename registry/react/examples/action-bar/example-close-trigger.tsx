@@ -23,7 +23,7 @@ const Example = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <ActionBar onOpenChange={setIsOpen} open={isOpen}>
+    <ActionBar onOpenChange={({ open }) => setIsOpen(open)} open={isOpen}>
       <ActionBarTrigger asChild>
         <Button variant="outline">Open</Button>
       </ActionBarTrigger>

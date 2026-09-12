@@ -3,6 +3,8 @@ title: Separator
 description: Visually separate content with a line.
 ---
 
+import manifest from "@/registry/manifest/separator";
+
 <ComponentPreview componentName="separator" />
 
 ## Installation
@@ -28,9 +30,7 @@ npx shadcn@latest add @shark/separator
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

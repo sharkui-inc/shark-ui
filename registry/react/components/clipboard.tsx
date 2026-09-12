@@ -5,8 +5,8 @@ import {
   useClipboardContext,
 } from "@ark-ui/react/clipboard";
 import { CheckIcon, ClipboardIcon } from "lucide-react";
-import { Children } from "react";
 import type React from "react";
+import { Children } from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { inputVariants } from "@/registry/react/components/input";
@@ -70,7 +70,7 @@ const clipboardValueVariants = tv({
     "inline-flex items-center",
     "font-normal text-base md:text-sm",
     "bg-transparent dark:bg-input/30",
-    "rounded-lg border border-input shadow-sm/5",
+    "rounded-lg border border-input shadow-xs/5",
   ],
   defaultVariants: {
     size: "md",

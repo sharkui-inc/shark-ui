@@ -7,7 +7,7 @@ import {
 } from "@/registry/react/components/plan";
 
 const Example = () => (
-  <PlanItem className="max-w-lg" defaultOpen status="completed">
+  <PlanItem className="max-w-lg" collapsible defaultOpen status="completed">
     <PlanItemTrigger title="Archive resolved support conversations" />
     <PlanItemContent>
       <PlanItemDetail>

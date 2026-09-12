@@ -2,7 +2,7 @@ import type { RegistryItemType } from "@/lib/registry";
 import { absoluteUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
-  dependencies: ["lucide-react"],
+  dependencies: ["@ark-ui/react", "lucide-react"],
   description: "Collapsible citations and inline source footnotes.",
   name: "sources",
   registryDependencies: [

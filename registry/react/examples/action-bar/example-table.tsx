@@ -77,7 +77,10 @@ const Example = () => {
 
   return (
     <div className="w-full max-w-2xl rounded-lg border">
-      <ActionBar onOpenChange={(open) => !open && handleClose()} open={isOpen}>
+      <ActionBar
+        onOpenChange={({ open }) => !open && handleClose()}
+        open={isOpen}
+      >
         <Table>
           <TableCaption className="sr-only">
             Orders with checkbox selection and action bar.
@@ -178,15 +181,15 @@ const Example = () => {
                 <AlertDialogBody>
                   <ul>
                     {selectedIds.map((id) => {
-                      const order = orders.find((order) => order.id === id);
+                      const orderItem = orders.find((order) => order.id === id);
 
-                      if (!order) {
+                      if (!orderItem) {
                         return null;
                       }
 
                       return (
                         <li className="py-1 text-sm" key={id}>
-                          {order.id} - {order.name}
+                          {orderItem.id} - {orderItem.name}
                         </li>
                       );
                     })}

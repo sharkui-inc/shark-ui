@@ -6,16 +6,19 @@ export const ModelSelectorThumb = (props: ThumbCardProps) => (
     <div className="flex w-full flex-col gap-2">
       <div className="flex h-8 items-center rounded-lg border border-input bg-muted px-3 shadow-md/5">
         <div className="flex w-full items-center gap-3">
-          <SearchIcon className="size-3 shrink-0 opacity-48" />
+          <SearchIcon
+            aria-hidden="true"
+            className="size-3 shrink-0 text-muted-foreground/64"
+          />
           <div className="h-2 w-1/3 rounded-full bg-muted-foreground/16" />
         </div>
       </div>
-      <div className="flex flex-col gap-3 rounded-lg border border-input bg-muted p-3 shadow-md/5">
-        <div className="flex items-center gap-2">
-          <div className="h-2 w-1/3 rounded-full bg-muted-foreground/16" />
-          <div className="ms-auto h-2 w-4 rounded-full bg-muted-foreground/16" />
+      <div className="flex flex-col gap-1 rounded-lg border border-input border-dashed bg-muted p-1.5 shadow-md/5">
+        <div className="flex items-center gap-2 rounded-md bg-primary px-2 py-1.5">
+          <div className="h-2 w-1/3 rounded-full bg-primary-foreground" />
+          <div className="ms-auto h-2 w-4 rounded-full bg-primary-foreground/64" />
         </div>
-        <div className="flex w-full items-center gap-2">
+        <div className="flex w-full items-center gap-2 px-2 py-1.5">
           <div className="h-2 w-2/4 rounded-full bg-muted-foreground/16" />
           <div className="ms-auto h-2 w-4 rounded-full bg-muted-foreground/16" />
         </div>

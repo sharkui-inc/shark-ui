@@ -3,6 +3,8 @@ title: Terminal
 description: Display shell output with ANSI color support.
 ---
 
+import manifest from "@/registry/manifest/terminal";
+
 <ComponentPreview componentName="terminal" />
 
 ## Installation
@@ -28,7 +30,7 @@ npx shadcn@latest add @shark/terminal
 
 <Step>This component depends on [ScrollArea](/docs/components/scroll-area), [Clipboard](/docs/components/clipboard), and [Button](/docs/components/button). Install them first if you haven't already.</Step>
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
@@ -66,6 +68,10 @@ npx shadcn@latest add @shark/terminal
 }
 ```
 </CodeCollapsibleWrapper>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/tree-view#api-reference
 ---
 
+import manifest from "@/registry/manifest/tree-view";
+
 <ComponentPreview componentName="tree-view" />
 
 ## Installation
@@ -33,13 +35,11 @@ npx shadcn@latest add @shark/tree-view
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Add the following to your `globals.css` for the tree-view expand/collapse animation:</Step>
+<Step>Import the following rules into your CSS file:</Step>
 
-```css title="globals.css"
+```css showLineNumbers
 @theme inline {
   @keyframes expand {
     from { height: var(--collapsed-height, 0); }

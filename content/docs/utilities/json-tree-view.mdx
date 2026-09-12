@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/utilities/json-tree-view#api-reference
 ---
 
+import manifest from "@/registry/manifest/json-tree-view";
+
 <ComponentPreview componentName="json-tree-view" />
 
 ## Installation
@@ -27,11 +29,9 @@ npx shadcn@latest add @shark/json-tree-view
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css

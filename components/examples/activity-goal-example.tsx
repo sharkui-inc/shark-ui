@@ -1,106 +1,120 @@
 "use client";
 
 import { MinusIcon, PlusIcon } from "lucide-react";
-import React from "react";
-import { Bar, BarChart } from "recharts";
-import { cn } from "@/lib/utils";
+import { useState } from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
   CardContent,
-  CardFooter,
+  CardDescription,
   CardHeader,
+  CardTitle,
 } from "@/registry/react/components/card";
 import {
-  type ChartConfig,
-  ChartContainer,
-} from "@/registry/react/components/chart";
-
-const chartConfig = {
-  goal: {
-    color: "var(--primary)",
-    label: "Goal",
-  },
-} satisfies ChartConfig;
+  CircularProgress,
+  CircularProgressLabel,
+} from "@/registry/react/components/circular-progress";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/registry/react/components/tooltip";
 
 export const ActivityGoalExample = (props: React.ComponentProps<"div">) => {
   const { className, ...rest } = props;
 
-  const [goal, setGoal] = React.useState(350);
+  const [goal, setGoal] = useState(350);
 
   function onClick(adjustment: number) {
-    setGoal(Math.max(200, Math.min(400, goal + adjustment)));
+    setGoal(Math.max(minGoal, Math.min(maxGoal, goal + adjustment)));
   }
 
   return (
-    <Card className={cn("h-full gap-5", className)} {...rest}>
-      <CardHeader
-        description="Set your daily activity goal."
-        title="Move Goal"
-      />
-      <CardContent className="flex flex-1 flex-col">
-        <div className="flex items-center justify-center gap-4">
-          <Button
-            aria-label="Decrease"
-            className="size-7 rounded-full"
-            disabled={goal <= 200}
-            onClick={() => onClick(-10)}
-            size="icon-md"
-            variant="outline"
+    <Card className={className} {...rest}>
+      <CardHeader>
+        <CardTitle className="text-2xl tracking-[-0.02em]">Move goal</CardTitle>
+        <CardDescription>Daily target</CardDescription>
+      </CardHeader>
+      <CardContent className="flex flex-col items-center gap-6">
+        <div className="flex items-center gap-3">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                aria-label="Decrease"
+                disabled={goal <= minGoal}
+                onClick={() => onClick(-10)}
+                pill
+                size="icon-md"
+                variant="outline"
+              >
+                <MinusIcon aria-hidden="true" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Decrease</TooltipContent>
+          </Tooltip>
+          <CircularProgress
+            className="size-[11.5rem]"
+            max={maxGoal}
+            min={minGoal}
+            size={184}
+            thickness={12}
+            value={goal}
           >
-            <MinusIcon aria-hidden />
-          </Button>
-          <div className="text-center">
-            <div className="font-bold text-4xl tabular-nums tracking-tighter">
-              {goal}
+            <CircularProgressLabel className="sr-only">
+              Daily calorie goal
+            </CircularProgressLabel>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <span className="font-heading font-semibold text-4xl tabular-nums tracking-[-0.03em]">
+                {goal}
+              </span>
+              <span className="text-muted-foreground text-xs">
+                Calories/day
+              </span>
             </div>
-            <div className="text-muted-foreground text-xs uppercase">
-              Calories/day
-            </div>
-          </div>
-          <Button
-            aria-label="Increase"
-            className="size-7 rounded-full"
-            disabled={goal >= 400}
-            onClick={() => onClick(10)}
-            size="icon-md"
-            variant="outline"
-          >
-            <PlusIcon aria-hidden />
-          </Button>
+          </CircularProgress>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                aria-label="Increase"
+                disabled={goal >= maxGoal}
+                onClick={() => onClick(10)}
+                pill
+                size="icon-md"
+                variant="outline"
+              >
+                <PlusIcon aria-hidden="true" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Increase</TooltipContent>
+          </Tooltip>
         </div>
-        <div className="flex-1">
-          <ChartContainer
-            className="aspect-auto h-16 w-full"
-            config={chartConfig}
-          >
-            <BarChart data={data}>
-              <Bar dataKey="goal" fill="var(--color-goal)" radius={4} />
-            </BarChart>
-          </ChartContainer>
+        <div className="flex justify-center gap-2.5">
+          {week.map((entry) => (
+            <div className="flex flex-col items-center gap-1" key={entry.day}>
+              <CircularProgress size={22} thickness={3} value={entry.value}>
+                <CircularProgressLabel className="sr-only">
+                  {entry.label}: {entry.value}% of move goal
+                </CircularProgressLabel>
+              </CircularProgress>
+              <span className="text-muted-foreground text-xs">
+                {entry.label}
+              </span>
+            </div>
+          ))}
         </div>
       </CardContent>
-      <CardFooter>
-        <Button className="w-full" variant="outline">
-          Set Goal
-        </Button>
-      </CardFooter>
     </Card>
   );
 };
 
-const data = [
-  { goal: 400 },
-  { goal: 300 },
-  { goal: 200 },
-  { goal: 300 },
-  { goal: 200 },
-  { goal: 278 },
-  { goal: 189 },
-  { goal: 239 },
-  { goal: 300 },
-  { goal: 200 },
-  { goal: 278 },
-  { goal: 189 },
-  { goal: 349 },
+const maxGoal = 400;
+const minGoal = 200;
+const week = [
+  { day: "1", label: "S", value: 100 },
+  { day: "2", label: "M", value: 0 },
+  { day: "3", label: "T", value: 64 },
+  { day: "4", label: "W", value: 100 },
+  { day: "5", label: "T", value: 38 },
+  { day: "6", label: "F", value: 0 },
+  { day: "7", label: "S", value: 81 },
 ];

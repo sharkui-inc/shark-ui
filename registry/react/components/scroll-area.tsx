@@ -11,12 +11,7 @@ import { cn } from "@/lib/utils";
 export const useScrollArea = useScrollAreaContext;
 
 const scrollAreaVariants = tv({
-  base: [
-    "max-h-[inherit] min-h-0 w-full min-w-0 flex-1",
-    "rounded-[inherit]",
-    "outline-none",
-    "scrollbar-none",
-  ],
+  base: ["h-full", "rounded-[inherit]", "outline-none", "scrollbar-none"],
   defaultVariants: {
     scrollbarGutter: false,
     scrollFade: false,
@@ -31,19 +26,47 @@ const scrollAreaVariants = tv({
         "data-overflow-y:not-data-at-bottom:mask-b-from-[calc(100%-var(--fade-size))]",
         "data-overflow-x:not-data-at-left:mask-l-from-[calc(100%-var(--fade-size))]",
         "data-overflow-x:not-data-at-right:mask-r-from-[calc(100%-var(--fade-size))]",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
       ],
     },
   },
 });
+
+type ScrollAreaOrientation = "both" | "horizontal" | "vertical";
+
+const getOrientationStyles = (orientation: ScrollAreaOrientation) => {
+  switch (orientation) {
+    case "vertical":
+      return {
+        content: { minWidth: 0 },
+        viewport: { overflowX: "hidden" as const },
+      };
+    case "horizontal":
+      return {
+        content: { minHeight: 0 },
+        viewport: { overflowY: "hidden" as const },
+      };
+    case "both":
+      return {
+        content: undefined,
+        viewport: undefined,
+      };
+    default: {
+      const _exhaustive: never = orientation;
+      return _exhaustive;
+    }
+  }
+};
 
 interface ScrollAreaProps
   extends React.ComponentProps<typeof ArkScrollArea.Root>,
     VariantProps<typeof scrollAreaVariants> {
   /**
    * Set the orientation of the scroll area
+   *
+   * @default "both"
    */
-  orientation?: "both" | "horizontal" | "vertical";
+  orientation?: ScrollAreaOrientation;
 }
 
 export const ScrollArea = (props: ScrollAreaProps) => {
@@ -53,33 +76,29 @@ export const ScrollArea = (props: ScrollAreaProps) => {
     orientation = "both",
     className,
     children,
-    tabIndex,
     ...rest
   } = props;
+
+  const orientationStyles = getOrientationStyles(orientation);
 
   return (
     <ArkScrollArea.Root
       className={cn(
-        "[--fade-size:1.5rem]",
-        "relative",
-        "size-full min-h-0 min-w-0",
-        "flex w-full flex-col",
-        "overflow-hidden",
+        "relative size-full min-h-0 [--fade-size:1.5rem]",
         className
       )}
       data-slot="scroll-area"
       {...rest}
     >
       <ArkScrollArea.Viewport
-        className={cn(
-          scrollAreaVariants({ scrollbarGutter, scrollFade }),
-          orientation === "horizontal" && "overflow-y-hidden!",
-          orientation === "vertical" && "overflow-x-hidden!"
-        )}
+        className={cn(scrollAreaVariants({ scrollbarGutter, scrollFade }))}
         data-slot="scroll-area-viewport"
-        tabIndex={tabIndex}
+        style={orientationStyles.viewport}
       >
-        <ArkScrollArea.Content data-slot="scroll-area-content">
+        <ArkScrollArea.Content
+          data-slot="scroll-area-content"
+          style={orientationStyles.content}
+        >
           {children}
         </ArkScrollArea.Content>
       </ArkScrollArea.Viewport>
@@ -115,7 +134,7 @@ export const ScrollAreaScrollbar = (
         "data-scrolling:opacity-100 data-scrolling:delay-0 data-scrolling:duration-100",
         "data-[orientation=vertical]:[&:not([data-overflow-y])]:hidden",
         "data-[orientation=horizontal]:[&:not([data-overflow-x])]:hidden",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="scroll-area-scrollbar"
@@ -123,7 +142,7 @@ export const ScrollAreaScrollbar = (
       {...rest}
     >
       <ArkScrollArea.Thumb
-        className="relative flex-1 rounded-full bg-foreground/20"
+        className="relative flex-1 cursor-grab rounded-full bg-foreground/20 data-dragging:cursor-grabbing"
         data-slot="scroll-area-thumb"
       />
     </ArkScrollArea.Scrollbar>

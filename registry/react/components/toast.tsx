@@ -30,7 +30,7 @@ export const toast = createToaster({
 
 type ToasterProps = Omit<
   React.ComponentProps<typeof ArkToaster>,
-  "children"
+  "children" | "toaster"
 > & {
   /**
    * Toaster instance
@@ -46,7 +46,7 @@ export const Toaster = (props: ToasterProps) => {
       <ArkToaster
         className={cn(
           "w-[calc(100%-var(--viewport-offset-left))] sm:w-(--width)",
-          "data-[align=center]:left-[calc(var(--viewport-offset-right)/2)]!",
+          "data-[align=center]:left-[calc(var(--viewport-offset-right)/2)]",
           "sm:data-[align=center]:w-full",
           className
         )}
@@ -103,7 +103,7 @@ export const ToastItem = (props: ToastItemProps) => {
         "data-[state=closed]:transition-[translate,scale,opacity]",
         "data-[state=closed]:duration-[300ms,300ms,150ms]",
         "data-[state=closed]:ease-[cubic-bezier(0.06,0.71,0.55,1)]",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="toast"

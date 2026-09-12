@@ -61,11 +61,7 @@ export const OverviewCards = () => (
               {metric.value}
             </CardTitle>
           </div>
-          <IconTile
-            aria-hidden="true"
-            className="size-9 border-transparent bg-muted shadow-none"
-            size="sm"
-          >
+          <IconTile aria-hidden="true" size="sm">
             <metric.icon aria-hidden="true" className="size-4" />
           </IconTile>
         </CardHeader>

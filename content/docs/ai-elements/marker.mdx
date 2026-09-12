@@ -3,6 +3,8 @@ title: Marker
 description: Separate transcript events with a labeled status line.
 ---
 
+import manifest from "@/registry/manifest/marker";
+
 <ComponentPreview componentName="marker" />
 
 ## Installation
@@ -28,9 +30,7 @@ npx shadcn@latest add @shark/marker
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

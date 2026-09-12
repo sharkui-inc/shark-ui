@@ -42,7 +42,7 @@ Use `ButtonGroupSeparator` between segments and `ButtonGroupText` for non-button
 
 ## Common pitfalls
 
-- Nesting unrelated controls without grouping semantics—keep one logical cluster per `ButtonGroup`.
+- Nesting unrelated controls without grouping semantics: keep one logical cluster per `ButtonGroup`.
 - Mixing standalone `Button` margins that break the connected look; rely on group styles.
 - Forgetting extra packages: manual install includes **tailwind-variants**, not only Ark.
 

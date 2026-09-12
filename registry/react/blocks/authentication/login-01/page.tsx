@@ -35,12 +35,7 @@ const LoginPage = () => (
           className="mb-8 flex items-center gap-2 font-semibold lg:hidden"
           href="#"
         >
-          <IconTile
-            aria-hidden="true"
-            className="border-transparent shadow-none"
-            size="sm"
-            variant="primary"
-          >
+          <IconTile aria-hidden="true" size="sm">
             <WavesIcon aria-hidden="true" className="size-4" />
           </IconTile>
           Northstar

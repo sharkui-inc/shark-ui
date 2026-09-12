@@ -3,6 +3,8 @@ title: Card
 description: Displays content about a single subject.
 ---
 
+import manifest from "@/registry/manifest/card";
+
 <ComponentPreview componentName="card" />
 
 ## Installation
@@ -28,9 +30,7 @@ npx shadcn@latest add @shark/card
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

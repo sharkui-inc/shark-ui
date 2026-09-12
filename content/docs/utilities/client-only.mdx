@@ -5,6 +5,8 @@ links:
   doc: https://ark-ui.com/docs/components/client-only
 ---
 
+import manifest from "@/registry/manifest/client-only";
+
 <ComponentPreview componentName="client-only" />
 
 ## Installation
@@ -26,9 +28,7 @@ npx shadcn@latest add @shark/client-only
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

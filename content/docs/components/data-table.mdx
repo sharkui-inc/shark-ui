@@ -3,6 +3,8 @@ title: Data Table
 description: A composable data table built using TanStack Table.
 ---
 
+import manifest from "@/registry/manifest/data-table";
+
 <ComponentPreview componentName="data-table" />
 
 ## Installation
@@ -30,9 +32,7 @@ npx shadcn@latest add @shark/data-table
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @tanstack/react-table lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -49,8 +49,6 @@ npm install @tanstack/react-table lucide-react
 ## Usage
 
 ```tsx
-"use client";
-
 import { createColumnHelper } from "@tanstack/react-table";
 import {
   DataTable,

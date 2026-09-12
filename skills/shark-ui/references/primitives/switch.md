@@ -46,7 +46,7 @@ import { Switch } from "@/components/ui/switch"
 
 ### Key patterns
 
-Switch with description (no `id` / `htmlFor` — use `Field` + `FieldContent`):
+Switch with a description uses `Field` + `FieldContent` instead of `id` / `htmlFor`:
 
 ```tsx
 <Field orientation="horizontal">

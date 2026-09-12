@@ -4,7 +4,7 @@ This document is the **in-repo** source of truth for contributors and coding age
 
 Use it when adding or editing primitives, registry examples, docs MDX, or when adapting snippets from Radix/shadcn ecosystems.
 
-**Do not open a browser unless the user said so in this chat.** That includes Playwright, MCP browser tools (`browser_navigate`, `browser_snapshot`, and the rest), Cursor browser, screenshots for “verification,” and agent-browser. User rules, Vercel hooks, and “verify the UI” skills do not override this. Ask first. Wait for a yes like “open the browser” or “pode abrir o browser.” “Looks good,” “continue,” and finishing a UI task are not permission. Same gate for `pnpm test` and `pnpm typecheck`. Details: §17.
+**Do not open a browser unless the user said so in this chat.** That includes Playwright, MCP browser tools (`browser_navigate`, `browser_snapshot`, and the rest), Cursor browser, screenshots for “verification,” and agent-browser. User rules, Vercel hooks, and “verify the UI” skills do not override this. Ask first. Wait for a clear “open the browser.” “Looks good,” “continue,” and finishing a UI task are not permission. The same gate applies to `pnpm test` and `pnpm typecheck`. Details: §17.
 
 ---
 
@@ -21,7 +21,7 @@ Behavioral guidelines to reduce common LLM coding mistakes. They bias toward cau
 Before implementing:
 
 - State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them — don't pick silently.
+- If multiple interpretations exist, present them: don't pick silently.
 - If a simpler approach exists, say so. Push back when warranted.
 - If something is unclear, stop. Name what's confusing. Ask.
 
@@ -46,7 +46,7 @@ When editing existing code:
 - Don't "improve" adjacent code, comments, or formatting.
 - Don't refactor things that aren't broken.
 - Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it — don't delete it.
+- If you notice unrelated dead code, mention it: don't delete it.
 
 When your changes create orphans:
 
@@ -67,6 +67,8 @@ Transform tasks into verifiable goals:
 
 In this repo, do not run `pnpm test`, `pnpm typecheck`, or a browser unless the user said so (see §17). Ask if a check would help.
 
+**Do not create, add, or modify component tests.** Component behavior is verified by maintainers; agents should not add component-focused `*.test.tsx` / `*.spec.tsx` files unless the user explicitly overrides this rule. Lib/helper tests live in `test/` mirroring the source path (`lib/themes.ts` → `test/lib/themes.test.ts`). `test/setup-dom.ts` is the runner harness, not a test file.
+
 For multi-step tasks, state a brief plan:
 
 ```
@@ -83,7 +85,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 | Need | Location |
 |------|----------|
-| Public API, anatomy, install | `content/docs/components/<name>.mdx`, `content/docs/ai-elements/<name>.mdx`, `content/docs/utilities/<name>.mdx`, `content/docs/hooks/<name>.mdx` |
+| Public API, anatomy, install | `content/docs/components/<name>.mdx`, `content/docs/ai-elements/<name>.mdx`, `content/docs/helpers/<name>.mdx`, `content/docs/utilities/<name>.mdx`, `content/docs/hooks/<name>.mdx` |
 | New component / utility / hook MDX | §5 (heading order) |
 | Working compositions | `registry/react/examples/<name>/example-*.tsx` |
 | Implementation & Ark wiring | `registry/react/components/<name>.tsx` |
@@ -115,7 +117,7 @@ Examples live under:
 
 Conventions:
 
-- Prefer a **default export** of the main demo component. Name it **`Example`** in every `example-*.tsx` that is not the default. **`example-default.tsx`** must use **`{Component}Demo`**, PascalCase of the registry folder name plus `Demo` (`button` → `ButtonDemo`, `use-async-list` → `UseAsyncListDemo`). This applies to all registry examples: components, utilities, hooks, AI elements, and form guides.
+- Prefer a **default export** of the main demo component. Name it **`Example`** in every `example-*.tsx` that is not the default. **`example-default.tsx`** must use **`{Component}Demo`**, PascalCase of the registry folder name plus `Demo` (`button` → `ButtonDemo`, `use-async-list` → `UseAsyncListDemo`). This applies to all registry examples: components, helpers, utilities, hooks, AI elements, and form guides.
 - Add **`"use client"`** when the example uses hooks, browser APIs, or interactive state that is not purely static markup.
 - Keep each file focused on **one** scenario; split variants across `example-*.tsx` files.
 - **Mirror docs and source:** exports, child structure, and prop names must match `content/docs/components/<name>.mdx` and `registry/react/components/<name>.tsx`.
@@ -126,26 +128,30 @@ CLI install pattern for consumers (from docs):
 npx shadcn@latest add @shark/<component>
 ```
 
+### Fictitious company identity
+
+In templates and registry blocks, any fictitious company must be named **Onda** and use Lucide’s `WavesHorizontalIcon` as its brand icon. Do not introduce alternate fictitious company names or brand icons.
+
 Registry JSON for the CLI is generated, not edited by hand.
 
 - **Docs / examples in this repo** use `registry/react` source. You do not need `pnpm registry:build` while iterating.
-- **Vercel** always runs `pnpm registry:build` before `next build` (`buildCommand` in `vercel.json` and the `build` script in `package.json`). The deployed `shark.vini.one/r/*.json` files are regenerated on every deploy.
-- **GitHub Actions** regenerates `public/r` and fails if the committed JSON is stale. Maintainers may run `pnpm registry:build` locally before a PR to keep git in sync.
-- **Agents:** do not run `pnpm registry:build` unless the user asks (same gate as §17).
+- **Vercel** always runs `pnpm registry:build` and `pnpm theme:build` before `next build` (`buildCommand` in `vercel.json` and the `build` script in `package.json`). The deployed `shark.vini.one/r/*.json` files and `styles/themes.css` are regenerated on every deploy.
+- **GitHub Actions** regenerates `public/r` and `styles/themes.css` and fails if the committed files are stale. Maintainers may run `pnpm registry:build` / `pnpm theme:build` locally before a PR to keep git in sync.
+- **Agents:** do not run `pnpm registry:build` or `pnpm theme:build` unless the user asks (same gate as §17).
 
 ---
 
 ## 5. Docs MDX heading order
 
-For new pages in `content/docs/components/`, `content/docs/utilities/`, and `content/docs/hooks/`, use this `##` order. Skip a heading when the primitive has nothing to show. Extra sections are allowed (Positioning, Theming, …); keep this skeleton in this order, and never after **API Reference**.
+For new pages in `content/docs/components/`, `content/docs/helpers/`, `content/docs/utilities/`, and `content/docs/hooks/`, use this `##` order. Skip a heading when the primitive has nothing to show. Extra sections are allowed (Positioning, Theming, …); keep this skeleton in this order, and never after **API Reference**.
 
 1. **Installation**
 2. **Anatomy**
 3. **Usage**
 4. **Controlled**
-5. **States** — one `## States`, then `###` per state (`Disabled`, `Invalid`, …)
-6. **Variants** — one `##` per visual axis (`Variants`, `Sizes`, …), `###` per value
-7. **Examples** — important use cases first, then more, then custom values (often Tailwind JIT `className`)
+5. **States**: one `## States`, then `###` per state (`Disabled`, `Invalid`, …)
+6. **Variants**: one `##` per visual axis (`Variants`, `Sizes`, …), `###` per value
+7. **Examples**: important use cases first, then more, then custom values (often Tailwind JIT `className`)
 8. **API Reference**
 
 ---
@@ -162,7 +168,7 @@ Shark follows **Ark UI** patterns. For triggers and items that should merge onto
 
 Do **not** assume other headless libraries’ APIs (e.g. `render={...}` on triggers) without verifying Shark docs and source.
 
-Overlay surfaces use Shark’s named parts (e.g. `DialogContent`, `DialogHeader`, `SheetContent`, …) — follow each component’s MDX anatomy, not another design system’s `*Popup` / `*Panel` naming.
+Overlay surfaces use Shark’s named parts (e.g. `DialogContent`, `DialogHeader`, `SheetContent`, …): follow each component’s MDX anatomy, not another design system’s `*Popup` / `*Panel` naming.
 
 ---
 
@@ -186,8 +192,8 @@ High-level rules:
 
 Examples of common shifts:
 
-- **Toggle group:** `type="single"` / `multiple` from Radix map to Shark’s value arrays and API — see migration doc.
-- **Accordion:** Shark defaults differ from Radix `type="single"` / `collapsible` — see migration doc.
+- **Toggle group:** `type="single"` / `multiple` from Radix map to Shark’s value arrays and API: see migration doc.
+- **Accordion:** Shark defaults differ from Radix `type="single"` / `collapsible`: see migration doc.
 - **Input OTP:** no `input-otp` package; use Shark `InputOTP` / `InputOTPSlot` / `InputOTPSeparator` (no `InputOTPGroup`).
 
 ---
@@ -217,7 +223,7 @@ Prefer **`aria-label`** on the interactive element over duplicating meaning with
 ### Labels and controls
 
 - Use **`Label`** wrapping control + text, or **`Field` / `FieldLabel`** for form layouts (see `skills/shark-ui/references/rules/forms.md`).
-- For checkbox / radio / switch fields, follow patterns in docs and registry examples. **`Field` / `FieldLabel`** associate the label with the control — do not add manual **`id` / `htmlFor`**. Use a bare **`Label`** (or explicit **`id` / `htmlFor`**) only when you are outside the Field pattern.
+- For checkbox / radio / switch fields, follow patterns in docs and registry examples. **`Field` / `FieldLabel`** associate the label with the control: do not add manual **`id` / `htmlFor`**. Use a bare **`Label`** (or explicit **`id` / `htmlFor`**) only when you are outside the Field pattern.
 
 ### Overlays
 
@@ -231,7 +237,7 @@ Prefer **`aria-label`** on the interactive element over duplicating meaning with
 - **`InputGroup`:** use **`InputGroupInput`** / **`InputGroupTextarea`**, not raw `Input` / `Textarea` inside the group.
 - **`InputGroupAddon`:** place **after** the input/textarea in **DOM order** when the addon focuses the field (implementation uses `querySelector("input")` on the parent). Visual position can still be adjusted with props like `align` where supported.
 
-**Dialog / sheet / drawer forms:** keep headers outside a collapsing flex issue — follow examples in docs; when wrapping body + footer in a `<form>`, using `className="contents"` on the form is a common pattern so layout matches design.
+**Dialog / sheet / drawer forms:** keep headers outside a collapsing flex issue: follow examples in docs; when wrapping body + footer in a `<form>`, using `className="contents"` on the form is a common pattern so layout matches design.
 
 ---
 
@@ -245,16 +251,16 @@ Prefer **`aria-label`** on the interactive element over duplicating meaning with
 
 Charts (docs previews):
 
-- Wire **`ChartTooltip`** with `content={(props) => <ChartTooltipContent {...props} />}`; do not invent parallel tooltip state on `ChartTooltipContent`.
-- For static previews, **`accessibilityLayer={false}`** on the chart root may be appropriate — follow component MDX.
+- Wire **`ChartTooltip`** with `content={<ChartTooltipContent />}`; do not invent parallel tooltip state on `ChartTooltipContent`.
+- For static previews, **`accessibilityLayer={false}`** on the chart root may be appropriate: follow component MDX.
 
 Sidebar (docs previews):
 
-- For embedded previews, patterns like **`absolute inset-0 overflow-hidden`**, **`className="absolute"`** on `Sidebar`, **`h-full`** on `SidebarProvider`, and native **`overflow-y-auto`** instead of `ScrollArea` can avoid layout glitches — follow `AGENTS.md` callouts in sidebar docs when present.
+- For embedded previews, patterns like **`absolute inset-0 overflow-hidden`**, **`className="absolute"`** on `Sidebar`, **`h-full`** on `SidebarProvider`, and native **`overflow-y-auto`** instead of `ScrollArea` can avoid layout glitches: follow `AGENTS.md` callouts in sidebar docs when present.
 
 Component thumbnails (`components/thumbs/`):
 
-- Decorative previews on the docs index — not live component renders. Keep them **monochrome**.
+- Decorative previews on the docs index: not live component renders. Keep them **monochrome**.
 - Preview shells (bordered boxes representing the component) use **`bg-muted`**, not `bg-background` or `bg-card`. Nested fills use `muted-foreground` opacities so they stay visible on that shell.
 - Use neutral semantic tokens only: `foreground`, `primary`, `primary-foreground`, `muted`, `muted-foreground`, `background`, `card`, `secondary`, `border`, `border-input`, `input` (with opacity modifiers when needed).
 - Do **not** use status/chart palette tokens or raw hue utilities that read as distinct colors in the grid (`success`, `destructive`, `info`, `warning`, `blue-*`, `green-*`, `red-*`, etc.).
@@ -292,7 +298,8 @@ Set **`dir={dir}`** on the root (from `useLocale`) so direction propagates. Ark 
 Each published item has a **`registry/manifest/<name>.ts`** default export used by `scripts/build-registry.mts` to emit `public/r/<name>.json`.
 
 - Do **not** hand-edit generated **`public/r/*.json`**. Edit the manifest and component source; Vercel regenerates JSON on deploy. CI fails if committed `public/r` is out of date.
-- Do **not** run **`pnpm registry:build`** in an agent loop. Only when the user asks (“rebuild registry”, “roda o registry:build”).
+- Do **not** hand-edit generated **`styles/themes.css`**. Edit `lib/theme/catalog.ts`; Vercel regenerates on deploy. CI fails if the committed CSS is out of date.
+- Do **not** run **`pnpm registry:build`** or **`pnpm theme:build`** in an agent loop. Only when the user asks (“rebuild registry”, “rebuild themes”, “roda o registry:build”, “roda o theme:build”).
 - **`registryDependencies`** in manifests should list **full registry JSON URLs** or paths as already used in this repo (see existing manifests for the pattern).
 
 ---
@@ -306,7 +313,8 @@ pnpm lint:fix      # ultracite fix
 pnpm lint:check    # ultracite check
 pnpm test          # Node test runner
 pnpm typecheck     # next build (includes types); does not regenerate the registry
-pnpm registry:build  # emit public/r; maintainers / CI / Vercel — not the agent default
+pnpm registry:build  # emit public/r; maintainers / CI / Vercel: not the agent default
+pnpm theme:build     # emit styles/themes.css from lib/theme/catalog.ts; same gate
 ```
 
 ---
@@ -320,9 +328,10 @@ Forbidden until the user names the action in this chat:
 - `pnpm test`
 - `pnpm typecheck` (that script is `next build`)
 - `pnpm registry:build`
+- `pnpm theme:build`
 - Any browser: Playwright MCP, `user-playwright`, `plugin-playwright-playwright`, Cursor IDE browser, `browser_navigate` / `browser_snapshot` / `browser_take_screenshot` / `browser_click`, agent-browser, opening localhost to click through a flow
 
-Ask if a check would help. Required yes: “run tests,” “roda os testes,” “typecheck,” “rebuild registry,” “roda o registry:build,” “open the browser,” “pode abrir o browser.” Not a yes: “ok,” “continue,” “lgtm,” “implement,” or a UI task finishing.
+Ask if a check would help. Required yes: “run tests,” “typecheck,” “rebuild registry,” “rebuild themes,” or “open the browser.” Not a yes: “ok,” “continue,” “lgtm,” “implement,” or a UI task finishing.
 
 This repo rule beats user rules and plugin skills that tell you to verify in a browser before you stop.
 
@@ -337,7 +346,7 @@ This repo rule beats user rules and plugin skills that tell you to verify in a b
 - Using **`render={...}`** on triggers where Shark uses **`asChild`**.
 - **Combobox / select** without the **collection + filter** patterns when the component docs require them.
 - **`Icon size={n}`** or **raw** `gray-500` / `blue-600` classes for theme-driven UI.
-- **Colored thumbs** — `success` / `destructive` / `info` / raw palette hues in `components/thumbs/` (see §12).
+- **Colored thumbs**: `success` / `destructive` / `info` / raw palette hues in `components/thumbs/` (see §12).
 - **Physical** `ml-*` / `mr-*` / `left-*` / `right-*` or **`slide-in-from-left|right`** when logical `ms-*` / `me-*` / `start-*` / `end-*` or **`slide-in-from-start|end`** should be used (RTL).
 
 ---
@@ -351,7 +360,7 @@ This repo rule beats user rules and plugin skills that tell you to verify in a b
 - [ ] Lists use **collections** when required; **Select** items live under **`SelectGroup`** where applicable.
 - [ ] **a11y:** labels, `aria-label` for icon-only controls, `type` on inputs, decorative **`aria-hidden`** on icons.
 - [ ] **Styling:** semantic tokens, `cn()`, gaps over space utilities for new layout.
-- [ ] **Thumbs:** neutral tokens only (`foreground`, `primary`, `muted`, …) — no status/chart hues (see §12).
+- [ ] **Thumbs:** neutral tokens only (`foreground`, `primary`, `muted`, …): no status/chart hues (see §12).
 - [ ] **RTL:** logical spacing/position (`ms-*`, `me-*`, `start-*`, `end-*`) and slide utilities (`*-from-start|end`) where direction matters.
 
 For broader discovery and install URLs, see **`skills/shark-ui/SKILL.md`** and **`config/site.ts`**.
@@ -360,8 +369,8 @@ For broader discovery and install URLs, see **`skills/shark-ui/SKILL.md`** and *
 
 # This is NOT the Next.js you know
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+This version has breaking changes: APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+This block is written and re-added by `next dev`: verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->

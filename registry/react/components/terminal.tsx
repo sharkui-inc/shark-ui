@@ -49,7 +49,7 @@ export const Terminal = (props: TerminalProps) => {
           "flex flex-col",
           "bg-card",
           "text-card-foreground",
-          "rounded-xl border",
+          "rounded-xl border shadow-xs/5",
           "overflow-hidden",
           className
         )}
@@ -164,7 +164,7 @@ export const TerminalContent = (props: TerminalContentProps) => {
       data-slot="terminal-content"
       {...rest}
     >
-      <ScrollArea className="min-h-0 w-full flex-1">
+      <ScrollArea className="flex-1">
         <TerminalFollow />
         <pre className="w-max min-w-full p-3 font-mono text-[0.8125rem] leading-6">
           {children ??

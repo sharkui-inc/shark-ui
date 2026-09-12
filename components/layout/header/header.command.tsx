@@ -15,8 +15,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { DOCS_NEW_ITEMS, DOCS_UPDATED_ITEMS } from "@/config/docs-nav";
 import type { NavItem } from "@/config/navigation";
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import type { CommandCompositionItem } from "@/lib/command-composition-items";
+import type { CommandCompositionItem } from "@/lib/composition-catalog";
 import type { source } from "@/lib/fumadocs";
 import { formatShadcnCommandDisplay } from "@/lib/shadcn-command";
 import { cn } from "@/lib/utils";
@@ -40,6 +39,7 @@ import {
   useHotkey,
 } from "@/registry/react/components/hotkeys";
 import { Kbd } from "@/registry/react/components/kbd";
+import { useCopyToClipboard } from "@/registry/react/hooks/use-copy-to-clipboard";
 import { useConfig } from "@/store/config";
 
 interface PageItem {
@@ -56,6 +56,7 @@ const GROUP_ICON_MAP: Record<string, LucideIcon> = {
   "ai elements": SparklesIcon,
   blocks: BlocksIcon,
   components: CircleDashed,
+  helpers: CircleDotDashed,
   sections: ArrowRightIcon,
   utilities: CircleDotDashed,
 };
@@ -110,19 +111,18 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
   const router = useRouter();
 
   const formatHotkey = useFormatHotkey();
-  const [{ packageManager }] = useConfig();
-  const { copyToClipboard, isCopied } = useCopyToClipboard({ timeout: 400 });
+  const { packageManager } = useConfig();
+  const clipboard = useCopyToClipboard({ timeout: 400 });
 
   const [isOpen, setIsOpen] = React.useState(false);
-  const [copyPayload, setCopyPayload] = React.useState("");
 
   const { contains } = useFilter({ sensitivity: "base" });
 
   React.useEffect(() => {
     if (!isOpen) {
-      setCopyPayload("");
+      clipboard.setValue("");
     }
-  }, [isOpen]);
+  }, [clipboard.setValue, isOpen]);
 
   // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: it's a simple grouping of items
   const groupedItems = React.useMemo<PageItem[]>(() => {
@@ -143,9 +143,13 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
         for (const item of group.children) {
           if (item.type === "page") {
             const isComponent =
-              ["/components/", "/ai-elements/", "/utilities/", "/hooks/"].some(
-                (path) => item.url.includes(path)
-              ) ?? false;
+              [
+                "/components/",
+                "/ai-elements/",
+                "/helpers/",
+                "/utilities/",
+                "/hooks/",
+              ].some((path) => item.url.includes(path)) ?? false;
             const itemName = item.name?.toString() || "";
 
             allItems.push({
@@ -185,25 +189,6 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
     initialItems: groupedItems,
   });
 
-  const handleHighlightChange = React.useCallback(
-    (details: { highlightedValue: string | null }) => {
-      if (!details.highlightedValue) {
-        setCopyPayload("");
-        return;
-      }
-      const item = groupedItems.find((i) => i.url === details.highlightedValue);
-      if (!item?.isComponent) {
-        setCopyPayload("");
-        return;
-      }
-      const componentName =
-        item.installName ?? item.url.split("/").at(-1)?.split("?")[0] ?? "";
-      const addCmd = getAddCommand(packageManager);
-      setCopyPayload(`${addCmd} @shark/${componentName}`);
-    },
-    [groupedItems, packageManager]
-  );
-
   const toggleOpen = React.useCallback(() => {
     setIsOpen((open) => !open);
   }, []);
@@ -222,8 +207,8 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
   });
 
   useHotkey({
-    action: () => copyToClipboard(copyPayload),
-    enabled: () => isOpen && Boolean(copyPayload),
+    action: () => clipboard.copy(),
+    enabled: () => isOpen && Boolean(clipboard.value),
     hotkey: "mod+C",
     options: { preventDefault: true },
   });
@@ -251,7 +236,25 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
       <CommandDialogContent>
         <Command
           collection={collection}
-          onHighlightChange={handleHighlightChange}
+          onHighlightChange={(details) => {
+            if (!details.highlightedValue) {
+              clipboard.setValue("");
+              return;
+            }
+            const item = groupedItems.find(
+              (i) => i.url === details.highlightedValue
+            );
+            if (!item?.isComponent) {
+              clipboard.setValue("");
+              return;
+            }
+            const componentName =
+              item.installName ??
+              item.url.split("/").at(-1)?.split("?")[0] ??
+              "";
+            const addCmd = getAddCommand(packageManager);
+            clipboard.setValue(`${addCmd} @shark/${componentName}`);
+          }}
           onInputValueChange={({ inputValue }) => filter(inputValue)}
           onValueChange={(e) => {
             router.push(e.items[0].url);
@@ -299,8 +302,8 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
               </Kbd>
               <span className="whitespace-nowrap">Go to Page</span>
             </div>
-            {copyPayload &&
-              (isCopied ? (
+            {Boolean(clipboard.value) &&
+              (clipboard.copied ? (
                 <div className="flex items-center gap-2">
                   <CheckIcon className="size-3" />
                   <span className="whitespace-nowrap">Copied to clipboard</span>
@@ -308,7 +311,7 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
               ) : (
                 <div className="flex min-w-0 items-center gap-2">
                   <span className="truncate font-mono">
-                    {formatShadcnCommandDisplay(copyPayload)}
+                    {formatShadcnCommandDisplay(clipboard.value)}
                   </span>
                   <Kbd variant="outline">{formatHotkey("mod+C")}</Kbd>
                 </div>

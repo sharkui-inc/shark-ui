@@ -3,6 +3,8 @@ title: Skip Nav
 description: Lets keyboard users skip to main content.
 ---
 
+import manifest from "@/registry/manifest/skip-nav";
+
 <ComponentPreview componentName="skip-nav" />
 
 > Click on the "Preview" tab and use the tab key to see the skip to content link.
@@ -26,9 +28,7 @@ npx shadcn@latest add @shark/skip-nav
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

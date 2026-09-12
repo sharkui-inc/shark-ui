@@ -2,7 +2,7 @@ import type { RegistryItemType } from "@/lib/registry";
 import { absoluteUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
-  dependencies: ["lucide-react"],
+  dependencies: ["@ark-ui/react", "lucide-react", "tailwind-variants"],
   description:
     "Context window usage meter with token breakdown and optional cost.",
   name: "context",

@@ -147,7 +147,7 @@ export const MessageBubbleTrigger = (
         "focus-visible:ring-3 focus-visible:ring-ring/50",
         "[&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0",
         "transition-opacity duration-200 ease-out",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       {...rest}
@@ -163,7 +163,7 @@ export const MessageBubbleTrigger = (
           "group-focus-visible/message-bubble-trigger:translate-x-0",
           "group-data-[state=open]/message-bubble-trigger:translate-x-0",
           "transition-transform duration-200 ease-out",
-          "motion-reduce:transition-none!"
+          "motion-reduce:transition-none"
         )}
       >
         {children ?? <ChevronDownIcon aria-hidden="true" className="size-5" />}

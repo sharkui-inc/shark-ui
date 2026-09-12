@@ -1,7 +1,7 @@
 import type { RegistryItemType } from "@/lib/registry";
 import { absoluteUrl } from "@/lib/url";
 
-const dependencies = ["@tanstack/react-table", "lucide-react"];
+const dependencies = ["@ark-ui/react", "@tanstack/react-table", "lucide-react"];
 
 const manifest: RegistryItemType = {
   dependencies,

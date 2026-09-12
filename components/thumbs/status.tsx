@@ -8,7 +8,7 @@ export const StatusThumb = (props: ThumbCardProps) => (
           aria-hidden
           className="size-2.5 shrink-0 rounded-full bg-primary"
         />
-        <div className="flex-1 rounded-md border border-input border-dashed p-1.5">
+        <div className="flex-1 rounded-md border border-input border-dashed bg-muted p-1.5 shadow-md/5">
           <div className="h-2 w-3/4 rounded-full bg-muted-foreground/16" />
         </div>
       </div>
@@ -17,7 +17,7 @@ export const StatusThumb = (props: ThumbCardProps) => (
           aria-hidden
           className="size-2.5 shrink-0 rounded-full bg-muted-foreground/64"
         />
-        <div className="flex-1 rounded-md border border-input border-dashed p-1.5">
+        <div className="flex-1 rounded-md border border-input border-dashed bg-muted p-1.5 shadow-md/5">
           <div className="h-2 w-1/2 rounded-full bg-muted-foreground/16" />
         </div>
       </div>

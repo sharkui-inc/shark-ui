@@ -54,7 +54,6 @@ const UseAsyncListDemo = () => {
         className="self-start"
         disabled={list.loading}
         onClick={handleSort}
-        type="button"
         variant="outline"
       >
         Sort products
@@ -83,7 +82,7 @@ const UseAsyncListDemo = () => {
             <ItemMedia variant="image">
               <img
                 alt={product.title}
-                className="object-contain!"
+                className="object-contain"
                 height={40}
                 loading="lazy"
                 src={product.image}

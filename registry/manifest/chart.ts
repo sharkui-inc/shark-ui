@@ -1,6 +1,6 @@
 import type { RegistryItemType } from "@/lib/registry";
 
-const dependencies = ["recharts"];
+const dependencies = ["@ark-ui/react", "recharts"];
 
 const cssVars = {
   dark: {

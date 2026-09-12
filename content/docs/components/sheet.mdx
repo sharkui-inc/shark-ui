@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/dialog#api-reference
 ---
 
+import manifest from "@/registry/manifest/sheet";
+
 <ComponentPreview componentName="sheet" />
 
 ## Installation
@@ -33,9 +35,7 @@ npx shadcn@latest add @shark/sheet
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

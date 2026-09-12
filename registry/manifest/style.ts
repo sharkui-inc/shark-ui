@@ -9,12 +9,11 @@ const registryDependencies = [absoluteUrl("/r/utils.json")];
 
 const cssVars = {
   dark: {
-    accent:
-      "color-mix(in srgb, var(--color-neutral-50) 10%, var(--background))",
+    accent: "color-mix(in srgb, var(--color-neutral-50) 4%, var(--background))",
     "accent-foreground": "var(--color-neutral-100)",
-    background: "var(--color-neutral-950)",
-    border:
-      "color-mix(in srgb, var(--color-neutral-50) 12%, var(--background))",
+    background:
+      "color-mix(in srgb, var(--color-neutral-950) 95%, var(--color-neutral-50))",
+    border: "color-mix(in srgb, var(--color-neutral-50) 6%, var(--background))",
     card: "color-mix(in srgb, var(--background) 98%, var(--color-neutral-50))",
     "card-foreground": "var(--color-neutral-100)",
     "chart-1": "var(--color-blue-700)",
@@ -27,30 +26,31 @@ const cssVars = {
     foreground: "var(--color-neutral-100)",
     info: "var(--color-blue-600)",
     "info-foreground": "var(--color-blue-300)",
-    input: "color-mix(in srgb, var(--color-neutral-50) 15%, var(--background))",
-    muted: "color-mix(in srgb, var(--color-neutral-50) 6%, var(--background))",
+    input: "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
+    muted: "color-mix(in srgb, var(--color-neutral-50) 4%, var(--background))",
     "muted-foreground":
-      "color-mix(in srgb, var(--color-neutral-500) 70%, var(--color-neutral-50))",
+      "color-mix(in srgb, var(--color-neutral-500) 88%, var(--color-neutral-50))",
     popover:
-      "color-mix(in srgb, var(--background) 96%, var(--color-neutral-50))",
+      "color-mix(in srgb, var(--background) 98%, var(--color-neutral-50))",
     "popover-foreground": "var(--color-neutral-100)",
     primary: "var(--color-neutral-100)",
     "primary-foreground": "var(--color-neutral-800)",
-    ring: "var(--color-neutral-400)",
-    secondary: "color-mix(in srgb, var(--color-white) 8%, var(--background))",
+    ring: "var(--color-neutral-500)",
+    secondary:
+      "color-mix(in srgb, var(--color-neutral-50) 4%, var(--background))",
     "secondary-foreground": "var(--color-neutral-100)",
     sidebar:
       "color-mix(in srgb, var(--color-neutral-950) 97%, var(--color-neutral-50))",
     "sidebar-accent":
-      "color-mix(in srgb, var(--color-neutral-50) 10%, var(--sidebar))",
+      "color-mix(in srgb, var(--color-neutral-50) 4%, var(--sidebar))",
     "sidebar-accent-foreground": "var(--color-neutral-100)",
     "sidebar-border":
-      "color-mix(in srgb, var(--color-neutral-50) 11%, var(--sidebar))",
+      "color-mix(in srgb, var(--color-neutral-50) 5%, var(--sidebar))",
     "sidebar-foreground":
-      "color-mix(in srgb, var(--color-neutral-100) 76%, var(--sidebar))",
+      "color-mix(in srgb, var(--color-neutral-100) 64%, var(--sidebar))",
     "sidebar-primary": "var(--color-neutral-100)",
     "sidebar-primary-foreground": "var(--color-neutral-800)",
-    "sidebar-ring": "var(--color-neutral-400)",
+    "sidebar-ring": "var(--color-neutral-500)",
     success: "var(--color-emerald-600)",
     "success-foreground": "var(--color-emerald-400)",
     warning: "var(--color-amber-600)",
@@ -58,46 +58,45 @@ const cssVars = {
   },
   light: {
     accent:
-      "color-mix(in srgb, var(--color-neutral-950) 8%, var(--background))",
+      "color-mix(in srgb, var(--color-neutral-950) 4%, var(--background))",
     "accent-foreground": "var(--color-neutral-800)",
     background: "var(--color-neutral-50)",
     border:
-      "color-mix(in srgb, var(--color-neutral-950) 12%, var(--background))",
-    card: "color-mix(in srgb, var(--color-neutral-950) 2%, var(--background))",
+      "color-mix(in srgb, var(--color-neutral-950) 8%, var(--background))",
+    card: "var(--background)",
     "card-foreground": "var(--color-neutral-800)",
-    "chart-1": "var(--color-orange-600)",
-    "chart-2": "var(--color-teal-600)",
-    "chart-3": "var(--color-cyan-900)",
-    "chart-4": "var(--color-amber-400)",
-    "chart-5": "var(--color-amber-500)",
+    "chart-1": "var(--color-blue-600)",
+    "chart-2": "var(--color-emerald-600)",
+    "chart-3": "var(--color-amber-600)",
+    "chart-4": "var(--color-purple-600)",
+    "chart-5": "var(--color-rose-600)",
     destructive: "var(--color-red-600)",
     "destructive-foreground": "var(--color-red-700)",
     foreground: "var(--color-neutral-800)",
     info: "var(--color-blue-600)",
     "info-foreground": "var(--color-blue-700)",
     input:
-      "color-mix(in srgb, var(--color-neutral-950) 15%, var(--background))",
-    muted: "color-mix(in srgb, var(--color-neutral-950) 5%, var(--background))",
+      "color-mix(in srgb, var(--color-neutral-950) 10%, var(--background))",
+    muted: "color-mix(in srgb, var(--color-neutral-950) 4%, var(--background))",
     "muted-foreground":
-      "color-mix(in srgb, var(--color-neutral-500) 80%, var(--color-neutral-950))",
-    popover:
-      "color-mix(in srgb, var(--color-neutral-950) 3%, var(--background))",
+      "color-mix(in srgb, var(--color-neutral-500) 88%, var(--color-neutral-950))",
+    popover: "var(--background)",
     "popover-foreground": "var(--color-neutral-800)",
     primary: "var(--color-neutral-800)",
     "primary-foreground": "var(--color-neutral-50)",
     radius: "0.5rem",
     ring: "var(--color-neutral-400)",
     secondary:
-      "color-mix(in srgb, var(--color-neutral-950) 6%, var(--background))",
+      "color-mix(in srgb, var(--color-neutral-950) 4%, var(--background))",
     "secondary-foreground": "var(--color-neutral-800)",
     sidebar: "var(--color-neutral-50)",
     "sidebar-accent":
-      "color-mix(in srgb, var(--color-neutral-950) 8%, var(--sidebar))",
+      "color-mix(in srgb, var(--color-neutral-950) 4%, var(--sidebar))",
     "sidebar-accent-foreground": "var(--color-neutral-800)",
     "sidebar-border":
-      "color-mix(in srgb, var(--color-neutral-950) 11%, var(--sidebar))",
+      "color-mix(in srgb, var(--color-neutral-950) 6%, var(--sidebar))",
     "sidebar-foreground":
-      "color-mix(in srgb, var(--color-neutral-800) 76%, var(--sidebar))",
+      "color-mix(in srgb, var(--color-neutral-800) 64%, var(--sidebar))",
     "sidebar-primary": "var(--color-neutral-800)",
     "sidebar-primary-foreground": "var(--color-neutral-50)",
     "sidebar-ring": "var(--color-neutral-400)",
@@ -107,7 +106,7 @@ const cssVars = {
     "warning-foreground": "var(--color-amber-700)",
   },
   theme: {
-    "font-heading": "var(--font-heading, ui-sans-serif, system-ui, sans-serif)",
+    "font-heading": "var(--font-sans, ui-sans-serif, system-ui, sans-serif)",
     "font-mono": "var(--font-mono, ui-monospace, monospace)",
     "font-sans": "var(--font-sans, ui-sans-serif, system-ui, sans-serif)",
   },

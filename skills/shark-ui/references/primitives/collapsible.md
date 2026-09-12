@@ -45,7 +45,7 @@ Controlled collapsible:
 ```tsx
 const [open, setOpen] = useState(false)
 
-<Collapsible open={open} onOpenChange={setOpen}>
+<Collapsible open={open} onOpenChange={({ open }) => setOpen(open)}>
   <CollapsibleTrigger>
     {open ? "Hide details" : "Show details"}
   </CollapsibleTrigger>

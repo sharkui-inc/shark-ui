@@ -21,12 +21,7 @@ const Example = () => (
       <TerminalAction>
         <Clipboard value={toPlainOutput(output)}>
           <ClipboardTrigger asChild>
-            <Button
-              aria-label="Copy output"
-              size="icon-xs"
-              type="button"
-              variant="ghost"
-            >
+            <Button aria-label="Copy output" size="icon-xs" variant="ghost">
               <ClipboardIndicator />
             </Button>
           </ClipboardTrigger>

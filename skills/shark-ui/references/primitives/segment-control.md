@@ -54,7 +54,7 @@ import {
 
 - Omitting `SegmentGroupIndicator` when the design expects a sliding/underline marker.
 - Mismatched `value` strings between items and controlled state.
-- Searching the registry for “segment-control”—examples and folder are named **`segment-group`**.
+- Searching the registry for “segment-control”: examples and folder are named **`segment-group`**.
 
 ## Registry example files
 

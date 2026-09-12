@@ -198,16 +198,6 @@ export const Snippet = (props: SnippetProps) => {
     copyText ??
     (selectedOption ? toCopyString(selectedOption.code) : toCopyString(text));
 
-  const handleStatusChange = React.useCallback(
-    (details: { copied: boolean }) => {
-      onStatusChange?.(details);
-      if (details.copied) {
-        onCopy?.();
-      }
-    },
-    [onCopy, onStatusChange]
-  );
-
   const contextValue = React.useMemo(
     () => ({
       fallbackLines,
@@ -242,7 +232,12 @@ export const Snippet = (props: SnippetProps) => {
         {...rest}
         className="w-full"
         data-slot="snippet"
-        onStatusChange={handleStatusChange}
+        onStatusChange={(details) => {
+          onStatusChange?.(details);
+          if (details.copied) {
+            onCopy?.();
+          }
+        }}
         rootClassName={cn("w-full", className)}
         value={copyValue}
       >
@@ -267,15 +262,11 @@ const SnippetMenuItem = (props: { item: SnippetOption }) => {
   const { selectedValue, setSelectedValue } = _useSnippet();
   const isSelected = selectedValue === item.value;
 
-  const handleSelect = React.useCallback(() => {
-    setSelectedValue(item.value);
-  }, [item.value, setSelectedValue]);
-
   return (
     <MenuItem
       className="gap-2 pe-2"
       data-slot="snippet-select-item"
-      onSelect={handleSelect}
+      onSelect={() => setSelectedValue(item.value)}
       value={item.value}
     >
       {item.icon}
@@ -325,7 +316,7 @@ export const SnippetSelect = (props: SnippetSelectProps) => {
         <MenuTrigger asChild>
           <InputGroupButton
             aria-label={triggerLabel}
-            className="h-6.5 gap-1 rounded-md ps-1! pe-0.5! text-foreground"
+            className="h-6.5 gap-1 rounded-md ps-1 pe-0.5 text-foreground"
           >
             {triggerOption?.icon}
             <ChevronsUpDownIcon className="size-2.5 shrink-0 text-muted-foreground" />
@@ -425,13 +416,6 @@ export const SnippetCopy = (
 ) => {
   const { className, ...rest } = props;
 
-  const handleCopyMouseDown = React.useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
-    },
-    []
-  );
-
   return (
     <InputGroupAddon
       align="inline-end"
@@ -440,7 +424,12 @@ export const SnippetCopy = (
       {...rest}
     >
       <ClipboardTrigger asChild>
-        <InputGroupButton onMouseDown={handleCopyMouseDown} size="icon-xs">
+        <InputGroupButton
+          onMouseDown={(event) => {
+            event.preventDefault();
+          }}
+          size="icon-xs"
+        >
           <ClipboardIndicator />
         </InputGroupButton>
       </ClipboardTrigger>

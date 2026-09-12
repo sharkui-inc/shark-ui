@@ -45,13 +45,13 @@ import {
 
 ### Key patterns
 
-`useImageCropper` exposes Ark context for custom controls (zoom, reset). Examples show circle crops, min/max sizes, initial crop rectangles, and aspect locks—start from the closest example.
+`useImageCropper` exposes Ark context for custom controls (zoom, reset). Examples show circle crops, min/max sizes, initial crop rectangles, and aspect locks: start from the closest example.
 
 ## Common pitfalls
 
-- Missing `src` or using CORS-blocked images—cropping canvas needs loadable bitmaps.
+- Missing `src` or using CORS-blocked images: cropping canvas needs loadable bitmaps.
 - Omitting required handles/grid parts and expecting a draggable box by default.
-- Ignoring min/max crop constraints—wire `minSize` / `maxSize` per docs when enforcing upload rules.
+- Ignoring min/max crop constraints: wire `minSize` / `maxSize` per docs when enforcing upload rules.
 
 ## Registry example files
 

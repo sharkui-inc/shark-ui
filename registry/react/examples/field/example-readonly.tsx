@@ -8,7 +8,7 @@ import { Input } from "@/registry/react/components/input";
 const Example = () => (
   <Field className="w-full max-w-xs" readOnly>
     <FieldLabel>Workspace ID</FieldLabel>
-    <Input defaultValue="ws_8f2a1c" readOnly type="text" />
+    <Input defaultValue="ws_8f2a1c" readOnly />
     <FieldDescription>This value cannot be edited.</FieldDescription>
   </Field>
 );

@@ -25,7 +25,6 @@ const Example = () => {
       <div className="flex flex-col items-center gap-8 sm:flex-row">
         <Button
           className={cn("hitbox-2", { "hitbox-debug": show })}
-          type="button"
           variant="outline"
         >
           hitbox-6
@@ -34,7 +33,6 @@ const Example = () => {
           aria-label="Menu"
           className={cn("hitbox-2", { "hitbox-debug": show })}
           size="icon-md"
-          type="button"
           variant="ghost"
         >
           <Menu />

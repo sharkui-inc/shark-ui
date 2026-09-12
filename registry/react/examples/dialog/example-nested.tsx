@@ -56,11 +56,11 @@ const Example = () => (
               <FieldGroup>
                 <Field>
                   <FieldLabel>Name</FieldLabel>
-                  <Input defaultValue="Bora Baloglu" type="text" />
+                  <Input defaultValue="Bora Baloglu" />
                 </Field>
                 <Field>
                   <FieldLabel>Email</FieldLabel>
-                  <Input defaultValue="bora@example.com" type="text" />
+                  <Input defaultValue="bora@example.com" />
                 </Field>
               </FieldGroup>
             </DialogBody>

@@ -6,17 +6,17 @@ links:
   ark: https://ark-ui.com/docs/guides/forms#tanstack-form
 ---
 
-This guide will cover building forms using the [Field](/docs/components/field) component, adding schema validation with [Zod](https://zod.dev), handling errors, ensuring accessibility, and more.
+Wire Shark [Field](/docs/components/field) to TanStack Form, validate with [Zod](https://zod.dev), and put errors on `FieldError`.
 
 ## Demo
 
-We’ll build a form with a text input and textarea. When you submit, the form data is validated and any errors will be shown.
+A text input and a textarea. Submit runs the schema and shows errors on the fields.
 
 <Alert>
   <InfoIcon />
   <AlertTitle>Browser validation disabled</AlertTitle>
   <AlertDescription>
-    For the purposes of this demo, browser validation is disabled to illustrate schema validation. In production, keep native validation enabled when appropriate.
+    This demo turns off native browser validation so schema errors are visible. Keep native validation on in production.
   </AlertDescription>
 </Alert>
 
@@ -24,16 +24,16 @@ We’ll build a form with a text input and textarea. When you submit, the form d
 
 ## Approach
 
-This form uses TanStack Form for state and Zod for validation. We'll build forms using the `Field` component, which gives you complete flexibility over the markup and styling.
+TanStack Form holds state. Zod validates. `Field` wraps each control.
 
-- Uses TanStack Form's `useForm` hook for form state management.
-- Uses `form.Field` with a render function for controlled inputs.
-- Uses the `Field` components for building accessible forms.
-- Uses client-side validation by passing your Zod schema into `validators`.
+- `useForm` for state
+- `form.Field` for each control
+- Shark `Field` for label, description, and error
+- `validators` with your Zod schema
 
 ## Anatomy
 
-Here's a basic example of a form using TanStack Form with the `Field` component.
+Each control sits in `form.Field`, then `Field`.
 
 ```tsx showLineNumbers {11-29}
 <form
@@ -81,7 +81,7 @@ Define your form shape with a Zod schema.
 <Alert>
   <InfoIcon />
   <AlertDescription>
-    **Note:** TanStack Form works with Zod and other [Standard Schema](https://tanstack.com/form/latest/docs/framework/react/guides/validation#schema-validation) libraries via its validators API.
+    TanStack Form accepts Zod or other [Standard Schema](https://tanstack.com/form/latest/docs/framework/react/guides/validation#schema-validation) libraries through `validators`.
   </AlertDescription>
 </Alert>
 
@@ -102,8 +102,8 @@ const formSchema = z.object({
 
 ### Setup
 
-- Create the form with `useForm` from TanStack Form and pass your schema to the `onSubmit` option.
-- Use e.preventDefault() and e.stopPropagation() before calling form.handleSubmit()
+- Create the form with `useForm` from TanStack Form and pass your schema to `validators.onSubmit`.
+- Call `e.preventDefault()` and `e.stopPropagation()` before `form.handleSubmit()`.
 
 ```tsx showLineNumbers title="form.tsx" {9-18}
 import { useForm } from "@tanstack/react-form";
@@ -141,21 +141,19 @@ export const ExampleForm = () => {
 
 ### Build
 
-build the form using the `form.Field` from TanStack Form and the Shark `Field`.
+`form.Field` from TanStack Form plus Shark `Field`.
 
 <ComponentSource src="../examples/form/tanstack/example-demo.tsx" />
 
 ### Done
 
-That's it. You now have a fully accessible form with client-side validation.
-
-When you submit the form, the `onSubmit` handler receives validated values. If the form is invalid, TanStack Form exposes errors on `field.state.meta.errors` for `FieldError`.
+Submit calls `onSubmit` with the parsed values. Invalid fields put errors on `field.state.meta.errors` for `FieldError`.
 
 ## Validation
 
 ### Client-side
 
-TanStack Form validates your form data using the Zod schema. Define a schema and pass it to the `validators` option of the `useForm` hook.
+Pass the Zod schema to `validators` on `useForm`.
 
 ```tsx showLineNumbers title="example-form.tsx" {4-7,15}
 import { useForm } from "@tanstack/react-form"
@@ -196,10 +194,7 @@ const form = useForm({
 
 ## Displaying Errors
 
-Display errors next to the field using `FieldError`. For styling and accessibility:
-
-- Add the `invalid` prop to the `Field` component.
-- Don't need to add the `invalid` prop to the form control such as `Input`, `Checkbox`, etc.
+Set `invalid` on `Field`. Skip it on `Input`, `Checkbox`, and the other controls.
 
 ```tsx showLineNumbers title="form.tsx" {4,13-15}
 <form.Field
@@ -227,113 +222,113 @@ Display errors next to the field using `FieldError`. For styling and accessibili
 ### Input
 
 - Bind `field.state.value` and `field.handleChange` to `Input`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-input" showBorders={false} autoHeight />
 
 ### Textarea
 
 - Bind `field.state.value` and `field.handleChange` to `Textarea`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-textarea" showBorders={false} autoHeight />
 
 ### NativeSelect
 
 - Bind `field.state.value` and `field.handleChange` to `NativeSelect`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-native-select" showBorders={false} autoHeight />
 
 ### Select
 
 - Wire `value` and `onValueChange` on `Select`. For overlays, call `field.handleBlur()` from `onInteractOutside` when your example needs blur sync.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-select" showBorders={false} autoHeight />
 
 ### Checkbox
 
 - Wire `field.state.value` and `field.handleChange` to `Checkbox`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
-- For checkbox arrays, use `mode="array"` on the `form.Field` component and TanStack Form's array helpers.
-- Remember to add `data-slot="checkbox-group"` to the `FieldGroup` component for proper styling and spacing.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
+- For checkbox arrays, set `mode="array"` on `form.Field` and use the array helpers.
+- Put `data-slot="checkbox-group"` on `FieldGroup` so spacing matches.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-checkbox" showBorders={false} autoHeight />
 
 ### Radio group
 
 - Wire `field.state.value` and `field.handleChange` to `RadioGroup`.
-- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-radio-group" showBorders={false} autoHeight />
 
 ### Switch
 
 - Use `field.state.value` and `field.handleChange` with `Switch`.
-- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-switch" showBorders={false} autoHeight />
 
 ### NumberInput
 
 - Wire `field.state.value` and `field.handleChange` to `NumberInput`.
-- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-number-input" showBorders={false} autoHeight />
 
 ### Slider
 
 - Wire `field.state.value` and `field.handleChange` to `Slider`.
-- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-slider" showBorders={false} autoHeight />
 
 ### Combobox
 
 - Wire `field.state.value` and `field.handleChange` to `Combobox`.
-- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-combobox" showBorders={false} autoHeight />
 
 ### Autocomplete
 
 - Wire `field.state.value` and `field.handleChange` to `Autocomplete`.
-- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-autocomplete" showBorders={false} autoHeight />
 
 ### Date Picker
 
 - Wire `field.state.value` and `field.handleChange` to `DatePicker`.
-- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-date-picker" showBorders={false} autoHeight />
 
 ### Input OTP
 
 - Use `field.state.value` (as `string[]`) and `field.handleChange` with `InputOTP`.
-- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-input-otp" showBorders={false} autoHeight />
 
 ### Rating
 
 - Wire `field.state.value` and `field.handleChange` to `Rating`.
-- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-rating" showBorders={false} autoHeight />
 
 ### File Upload
 
 - Wire `onFileAccept` to sync files into form state.
-- Add the `invalid` prop to the `Field` component and pass the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-file-upload" showBorders={false} autoHeight />
 
 ### Complex Forms
 
-Here is an example of a more complex form with multiple fields and validation.
+Several fields and one schema.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-complex" showBorders={false} autoHeight />
 
@@ -342,20 +337,20 @@ Here is an example of a more complex form with multiple fields and validation.
 Use `form.reset()` to reset the form to its default values.
 
 ```tsx showLineNumbers
-<Button type="button" variant="outline" onClick={() => form.reset()}>
+<Button variant="outline" onClick={() => form.reset()}>
   Reset
 </Button>
 ```
 
 ## Array Fields
 
-TanStack Form supports array fields with `mode="array"`. You can add, remove, and update items with the same validation as other fields.
+Use `mode="array"` on the parent `form.Field`. `pushValue` and `removeValue` change the list.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-array-emails" showBorders={false} autoHeight />
 
 ### Array Field Structure
 
-Use `mode="array"` on the parent field to enable array field management.
+Put `mode="array"` on the parent `form.Field`.
 
 ```tsx showLineNumbers title="form.tsx" {3,11-13}
 <form.Field
@@ -399,7 +394,6 @@ Access individual array items using bracket notation: `fieldName[index].property
           {field.state.value.length > 1 && (
             <InputGroupAddon align="inline-end">
               <InputGroupButton
-                type="button"
                 variant="ghost"
                 size="icon-xs"
                 onClick={() => field.removeValue(index)}
@@ -421,11 +415,10 @@ Access individual array items using bracket notation: `fieldName[index].property
 
 ### Adding Items
 
-Use `field.pushValue(item)` to add items to an array field. You can disable the button when the array reaches its maximum length.
+Call `field.pushValue(item)`. Disable the button at the max length.
 
 ```tsx showLineNumbers title="form.tsx"
 <Button
-  type="button"
   variant="outline"
   size="sm"
   onClick={() => field.pushValue({ address: "" })}
@@ -437,7 +430,7 @@ Use `field.pushValue(item)` to add items to an array field. You can disable the 
 
 ### Removing Items
 
-Use `field.removeValue(index)` to remove items from an array field. You can conditionally show the remove button only when there's more than one item.
+Call `field.removeValue(index)`. Show the remove button when there is more than one item.
 
 ```tsx showLineNumbers title="form.tsx"
 {
@@ -452,31 +445,9 @@ Use `field.removeValue(index)` to remove items from an array field. You can cond
 }
 ```
 
-### Removing items
-
-Use `removeValue(index)` on the array field.
-
-```tsx showLineNumbers title="form.tsx"
-{
-  emailsField.state.value.length > 1 && (
-    <InputGroupAddon align="inline-end">
-      <InputGroupButton
-        type="button"
-        variant="ghost"
-        size="icon-xs"
-        onClick={() => emailsField.removeValue(index)}
-        aria-label={`Remove email ${index + 1}`}
-      >
-        <XIcon />
-      </InputGroupButton>
-    </InputGroupAddon>
-  );
-}
-```
-
 ### Array validation
 
-Validate arrays with Zod’s `z.array()` and `.min()` / `.max()`.
+Validate the list with `z.array()`, then `.min()` / `.max()`.
 
 ```tsx showLineNumbers title="form.tsx"
 const formSchema = z.object({

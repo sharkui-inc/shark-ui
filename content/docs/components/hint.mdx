@@ -3,6 +3,8 @@ title: Hint
 description: Minimal tooltip for showing information.
 ---
 
+import manifest from "@/registry/manifest/hint";
+
 <Alert>
   <InfoIcon />
   <AlertDescription>
@@ -35,9 +37,7 @@ npx shadcn@latest add @shark/hint
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -100,7 +100,7 @@ Root wrapper. Provides hint context to trigger and content.
 | --- | --- | --- |
 | `open` | `boolean` | - |
 | `defaultOpen` | `boolean` | `false` |
-| `onOpenChange` | `(open: boolean) => void` | - |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
 | `positioning` | `Positioning` | `"{ placement: 'top', gutter: '10px' }"` |
 | `className` | `string` | - |
 

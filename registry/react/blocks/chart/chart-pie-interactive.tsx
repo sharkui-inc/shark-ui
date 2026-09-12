@@ -85,7 +85,7 @@ function ChartPieInteractive() {
     [activeMonth]
   );
   return (
-    <Card className="flex flex-col" data-chart={id}>
+    <Card data-chart={id}>
       <ChartStyle config={chartConfig} id={id} />
       <CardHeader className="flex-row items-start space-y-0 pb-0">
         <div className="grid gap-1">

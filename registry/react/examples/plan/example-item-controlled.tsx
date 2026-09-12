@@ -18,7 +18,12 @@ const Example = () => {
 
   return (
     <div className="flex w-full max-w-lg flex-col gap-3">
-      <PlanItem onOpenChange={handleOpenChange} open={open} status="completed">
+      <PlanItem
+        collapsible
+        onOpenChange={handleOpenChange}
+        open={open}
+        status="completed"
+      >
         <PlanItemTrigger title="Archive resolved support conversations" />
         <PlanItemContent>
           <PlanItemDetail>

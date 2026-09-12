@@ -863,7 +863,7 @@ export const SpeechInputContent = (
   return (
     <ark.div
       className={cn(
-        "flex w-full min-w-0 items-center gap-3 rounded-2xl border bg-card px-3 py-2 text-card-foreground shadow-sm/5",
+        "flex w-full min-w-0 items-center gap-3 rounded-2xl border bg-card px-3 py-2 text-card-foreground shadow-xs/5",
         className
       )}
       data-slot="speech-input-content"
@@ -892,7 +892,7 @@ export const SpeechInputWaveform = (
       {waveformLevels.map(({ id, level }) => (
         <span
           aria-hidden="true"
-          className="min-w-px flex-1 rounded-full bg-muted-foreground/64 transition-[height] motion-reduce:transition-none!"
+          className="min-w-px flex-1 rounded-full bg-muted-foreground/64 transition-[height] motion-reduce:transition-none"
           key={id}
           style={{ height: `${level}%` }}
         />

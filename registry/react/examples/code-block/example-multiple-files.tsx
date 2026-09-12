@@ -8,7 +8,6 @@ import {
   CodeBlockCopy,
   CodeBlockHeader,
 } from "@/registry/react/components/code-block";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 import {
   Tabs,
   TabsContent,
@@ -22,14 +21,22 @@ const Example = () => {
 
   return (
     <Tabs
+      className="w-full max-w-lg"
       onValueChange={(details) => setActiveFile(details.value)}
       value={activeFile}
     >
-      <CodeBlock className="max-w-lg" code={file.code} language={file.language}>
+      <CodeBlock className="h-52" code={file.code} language={file.language}>
         <CodeBlockHeader>
-          <TabsList className="min-w-0 overflow-x-auto" variant="underline">
+          <TabsList
+            className="min-w-0 flex-1 justify-start overflow-x-auto"
+            variant="underline"
+          >
             {FILES.map((item) => (
-              <TabsTrigger key={item.value} value={item.value}>
+              <TabsTrigger
+                className="grow-0"
+                key={item.value}
+                value={item.value}
+              >
                 {item.filename}
               </TabsTrigger>
             ))}
@@ -39,14 +46,16 @@ const Example = () => {
           </CodeBlockActions>
         </CodeBlockHeader>
         {FILES.map((item) => (
-          <TabsContent key={item.value} value={item.value}>
-            <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
-              <CodeBlockContent
-                code={item.code}
-                language={item.language}
-                showLineNumbers
-              />
-            </ScrollArea>
+          <TabsContent
+            className="flex min-h-0 flex-1 flex-col"
+            key={item.value}
+            value={item.value}
+          >
+            <CodeBlockContent
+              code={item.code}
+              language={item.language}
+              showLineNumbers
+            />
           </TabsContent>
         ))}
       </CodeBlock>
@@ -56,7 +65,7 @@ const Example = () => {
 
 const FILES = [
   {
-    code: 'export const siteName = "Shark UI";',
+    code: 'export const siteName = "Shark UI";\nexport const siteUrl = "https://shark.vini.one";',
     filename: "config.ts",
     language: "typescript",
     value: "config",

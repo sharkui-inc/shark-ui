@@ -119,7 +119,7 @@ const Example = () => {
           </FieldGroup>
         </CardContent>
         <CardFooter>
-          <Button onClick={() => form.reset()} type="button" variant="outline">
+          <Button onClick={() => form.reset()} variant="outline">
             Reset
           </Button>
           <Button type="submit">Save</Button>

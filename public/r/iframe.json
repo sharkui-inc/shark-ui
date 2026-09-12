@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "dependencies": ["@ark-ui/react"],
+  "name": "iframe",
+  "type": "registry:ui",
+  "files": [
+    {
+      "content": "\"use client\";\n\nimport { Frame as ArkFrame } from \"@ark-ui/react/frame\";\nimport type React from \"react\";\n\nexport const Iframe = (props: React.ComponentProps<typeof ArkFrame>) => (\n  <ArkFrame data-slot=\"iframe\" {...props} />\n);\n",
+      "path": "registry/react/components/iframe.tsx",
+      "type": "registry:ui"
+    }
+  ]
+}

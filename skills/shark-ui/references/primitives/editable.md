@@ -5,7 +5,7 @@
 - Inline plain-text edits where the value should stay in layout (names, titles, handles, labels, table cells) and flip between a read preview and an input without navigating away.
 - Compact settings or profile rows where commit/discard with submit/cancel triggers (or explicit save flows with `activationMode="none"` + controlled `edit`) fits the UX better than opening a separate dialog per field.
 - Choosing an activation style on purpose: `focus` for keyboard-first forms, `click` / `dblclick` for discoverable pointers, `none` when only a dedicated Edit control should enter edit mode.
-- Single-line or multiline plain text when a native `Input` or `Textarea` (via `EditableInput asChild`) is enough—no formatting toolbar or embedded media.
+- Single-line or multiline plain text when a native `Input` or `Textarea` (via `EditableInput asChild`) is enough: no formatting toolbar or embedded media.
 
 ## When NOT to use
 
@@ -96,7 +96,7 @@ None mode:
 
 - `activationMode="none"` with no `edit` prop and no `EditableEditTrigger` → users never enter edit mode (stuck preview).
 - Controlled vs uncontrolled: mixing `defaultValue` with `value`, or using `value` without `onValueChange`, causes resets or edits that never persist upstream.
-- Anatomy: keep `EditableInput` + `EditablePreview` inside `EditableArea`; wire submit/cancel with `EditableControl` + triggers as in registry examples—wrong nesting breaks Ark behavior.
+- Anatomy: keep `EditableInput` + `EditablePreview` inside `EditableArea`; wire submit/cancel with `EditableControl` + triggers as in registry examples: wrong nesting breaks Ark behavior.
 - `EditableInput asChild`: the slotted `Input` / `Textarea` must be the only focusable control; avoid wrapping an extra native `<input>` inside it.
 
 ## Registry example files

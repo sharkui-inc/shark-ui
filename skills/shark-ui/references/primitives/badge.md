@@ -82,3 +82,4 @@ Badge inside a button (use negative margin for alignment):
 - [`example-variant-outline.tsx`](/registry/react/examples/badge/example-variant-outline.tsx)
 - [`example-variant-secondary.tsx`](/registry/react/examples/badge/example-variant-secondary.tsx)
 - [`example-variant-success.tsx`](/registry/react/examples/badge/example-variant-success.tsx)
+- [`example-with-status.tsx`](/registry/react/examples/badge/example-with-status.tsx)

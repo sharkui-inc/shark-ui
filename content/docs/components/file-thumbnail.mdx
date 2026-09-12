@@ -3,6 +3,8 @@ title: File Thumbnail
 description: A compact visual identifier for a file format.
 ---
 
+import manifest from "@/registry/manifest/file-thumbnail";
+
 <ComponentPreview componentName="file-thumbnail" />
 
 ## Installation
@@ -28,11 +30,9 @@ npx shadcn@latest add @shark/file-thumbnail
 
 <Step>Install the following dependency:</Step>
 
-```bash
-npm install tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file.</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css

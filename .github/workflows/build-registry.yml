@@ -37,5 +37,11 @@ jobs:
           git add public/r
           git diff --cached --exit-code -- public/r
 
+      - name: Theme build
+        run: pnpm run theme:build
+
+      - name: Theme drift
+        run: git diff --exit-code -- styles/themes.css
+
       - name: Typecheck
         run: pnpm run typecheck

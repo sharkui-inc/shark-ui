@@ -3,6 +3,8 @@ title: Code Block
 description: Display syntax-highlighted code with copy and streaming states.
 ---
 
+import manifest from "@/registry/manifest/code-block";
+
 <ComponentPreview componentName="code-block" />
 
 ## Installation
@@ -28,6 +30,10 @@ npx shadcn@latest add @shark/code-block
 
 <Step>This component depends on [Clipboard](/docs/components/clipboard), [Button](/docs/components/button), and [Scroll Area](/docs/components/scroll-area). Install them first if you haven't already.</Step>
 
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource title="components/ui/code-block.tsx" src="/code-block.tsx" />
@@ -44,16 +50,13 @@ npx shadcn@latest add @shark/code-block
 
 ```text
 CodeBlock
-├── CodeBlockHeader (optional)
+├── CodeBlockHeader
 │   ├── CodeBlockTitle
 │   └── CodeBlockActions
 │       ├── CodeBlockLanguageSelector
 │       └── CodeBlockCopy
-└── ScrollArea
-    └── CodeBlockContent
+└── CodeBlockContent
 ```
-
-`CodeBlockContent` renderiza apenas a superfície do código. Envolva-o em `ScrollArea` para que a composição seja dona dos dois eixos de rolagem e para que a numeração sticky se ancore ao viewport correto.
 
 ## Usage
 
@@ -65,19 +68,16 @@ import {
   CodeBlockCopy,
   CodeBlockHeader,
 } from "@/components/ui/code-block";
-import { ScrollArea } from "@/components/ui/scroll-area";
 ```
 
 ```tsx
-<CodeBlock code={source}>
+<CodeBlock className="max-h-80" code={source}>
   <CodeBlockHeader title="helpers.ts">
     <CodeBlockActions>
       <CodeBlockCopy />
     </CodeBlockActions>
   </CodeBlockHeader>
-  <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
-    <CodeBlockContent highlightedLines={[2]} showLineNumbers />
-  </ScrollArea>
+  <CodeBlockContent highlightedLines={[2]} showLineNumbers />
 </CodeBlock>
 ```
 
@@ -114,13 +114,16 @@ Use `CodeBlockTitle` as a child for more control.
 
 ## Streaming
 
-Set `isStreaming` while an AI response is still appending code. The component renders the newest text immediately, defers expensive highlighting while updates are frequent, and highlights the final snippet as soon as streaming completes.
+Set `isStreaming` while an AI response is still appending code. The component renders the newest text immediately, refreshes syntax highlighting at a controlled cadence while the response grows, and highlights the final snippet as soon as streaming completes.
 
 ```tsx
-<CodeBlock code={partialCode} isStreaming={status === "streaming"} language="tsx">
-  <ScrollArea className="flex-none **:data-[slot=scroll-area-viewport]:max-h-80">
-    <CodeBlockContent showLineNumbers />
-  </ScrollArea>
+<CodeBlock
+  className="max-h-80"
+  code={partialCode}
+  isStreaming={status === "streaming"}
+  language="tsx"
+>
+  <CodeBlockContent showLineNumbers />
 </CodeBlock>
 ```
 
@@ -138,33 +141,49 @@ This is a client component. A Server Component can pass its serializable `code`,
 
 ### Highlighted lines
 
+Draw attention to the lines a user should inspect first.
+
 <ComponentPreview componentName="code-block" fileName="example-highlighted-lines" />
 
 ### Scrollable
+
+Constrain the whole panel to keep a long source file readable in place.
 
 <ComponentPreview componentName="code-block" fileName="example-scrollable" />
 
 ### Language selector
 
+Control the language and source together with the Select composition.
+
 <ComponentPreview componentName="code-block" fileName="example-language-selector" />
 
 ### Multiple files
+
+Keep the panel dimensions stable while file tabs switch their source.
 
 <ComponentPreview componentName="code-block" fileName="example-multiple-files" />
 
 ### Streaming
 
+Start with visible code, then append the remaining snippet as an AI response arrives.
+
 <ComponentPreview componentName="code-block" fileName="example-streaming" />
 
 ### With Diff
+
+Use one persistent header for source and review tabs so the panel does not jump between views.
 
 <ComponentPreview componentName="code-block" fileName="example-with-diff" />
 
 ### Custom actions
 
+Compose a working line-number toggle beside the built-in copy action.
+
 <ComponentPreview componentName="code-block" fileName="example-custom-actions" />
 
 ### Content override
+
+Render a content-specific code and language pair without changing the root defaults.
 
 <ComponentPreview componentName="code-block" fileName="example-content-override" />
 
@@ -177,7 +196,7 @@ Root panel. Provides `code`, `language`, and streaming state to its parts.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `code` | `string` | `""` |
-| `language` | `BundledLanguage` | `"tsx"` |
+| `language` | `CodeBlockLanguage` | `"tsx"` |
 | `isStreaming` | `boolean` | `false` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
@@ -234,10 +253,13 @@ Renders the root `code` or a string child with Shiki syntax highlighting.
 | `showLineNumbers` | `boolean` | `false` |
 | `highlightedLines` | `number[]` | `[]` |
 | `code` | `string` | root `code` |
-| `language` | `BundledLanguage` | root `language` |
+| `language` | `CodeBlockLanguage` | root `language` |
 | `isStreaming` | `boolean` | root `isStreaming` |
 | `className` | `string` | `-` |
 
 ### Language selector parts
 
 `CodeBlockLanguageSelector`, `CodeBlockLanguageSelectorTrigger`, `CodeBlockLanguageSelectorValue`, `CodeBlockLanguageSelectorContent`, and `CodeBlockLanguageSelectorItem` are styled wrappers around [Select](/docs/components/select). Provide the Select collection and control its value from the consuming composition.
+
+`CodeBlockLanguage` accepts every bundled Shiki language and `"text"` for
+plain, unhighlighted content.

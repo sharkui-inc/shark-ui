@@ -1,17 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "pnpm registry:build && next build",
-  "headers": [
-    {
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ],
-      "source": "/sw.js"
-    }
-  ],
+  "buildCommand": "pnpm registry:build && pnpm theme:build && next build",
   "routes": [
     {
       "src": "/view(/.*)?",
@@ -27,7 +16,7 @@
       }
     },
     {
-      "src": "/(docs(/.*)?|llms\\.txt|llms-full\\.txt|llms-components\\.txt|llms-patterns\\.txt)",
+      "src": "/(docs(/.*)?|llms\\.txt|llms\\.mdx(/.*)?|llms-full\\.txt|llms-components\\.txt|llms-patterns\\.txt)",
       "has": [
         {
           "type": "header",
@@ -51,6 +40,20 @@
       "mitigate": {
         "action": "deny"
       }
+    },
+    {
+      "src": "/docs\\.md",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8"
+      },
+      "dest": "/llms.mdx/docs"
+    },
+    {
+      "src": "/docs/(.*)\\.md",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8"
+      },
+      "dest": "/llms.mdx/docs/$1"
     }
   ]
 }

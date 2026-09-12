@@ -6,7 +6,7 @@ import {
 } from "@/registry/react/components/input-group";
 
 const Example = () => (
-  <InputGroup className="w-full max-w-64">
+  <InputGroup className="max-w-64">
     <InputGroupInput placeholder="Search..." />
     <InputGroupAddon>
       <SearchIcon />

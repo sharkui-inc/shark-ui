@@ -284,7 +284,7 @@ export const DataTablePagination = <TData extends RowData>(
         row(s) selected.
       </div>
 
-      <div className="flex items-center gap-4 lg:gap-6">
+      <div className="flex flex-wrap items-center gap-4 lg:gap-6">
         <div className="flex items-center gap-2 font-medium text-sm">
           <span className="sr-only sm:not-sr-only">Rows per page</span>
           <NativeSelect

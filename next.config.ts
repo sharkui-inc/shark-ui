@@ -8,9 +8,23 @@ const config: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // Static export — avoids serverless functions on Vercel Hobby (free) tier.
+  // Static export: avoids serverless functions on Vercel Hobby (free) tier.
   output: "export",
   reactStrictMode: true,
+  // Dev-only pretty URLs: /docs/:path.md → static /llms.mdx/docs/:path.
+  // output: "export" does not apply these in production; vercel.json handles that.
+  async rewrites() {
+    return [
+      {
+        destination: "/llms.mdx/docs",
+        source: "/docs.md",
+      },
+      {
+        destination: "/llms.mdx/docs/:path*",
+        source: "/docs/:path*.md",
+      },
+    ];
+  },
   serverExternalPackages: ["@takumi-rs/core"],
   turbopack: {
     rules: codeInspectorPlugin({
@@ -20,15 +34,6 @@ const config: NextConfig = {
       bundler: "turbopack",
     }),
   },
-  // DISABLED for Vercel free tier — rewrites to /api/raw spawn serverless routes.
-  // async rewrites() {
-  //   return [
-  //     {
-  //       destination: "/api/raw/docs/:path*",
-  //       source: "/docs/:path*.md",
-  //     },
-  //   ];
-  // },
 };
 
 export default withMDX(config);

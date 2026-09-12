@@ -45,8 +45,8 @@ Add `CircularSliderMarkerGroup` + `CircularSliderMarker` for tick marks; use `us
 
 ## Common pitfalls
 
-- Missing `CircularSliderThumb`—the dial is not draggable without a thumb part.
-- Confusing degrees vs normalized values—confirm `value` units with Ark `angle-slider` docs.
+- Missing `CircularSliderThumb`: the dial is not draggable without a thumb part.
+- Confusing degrees vs normalized values: confirm `value` units with Ark `angle-slider` docs.
 - Styling the track without using provided parts; prefer composition over ad hoc SVG.
 
 ## Registry example files

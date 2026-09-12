@@ -11,7 +11,7 @@ import {
   NavigationMenuTrigger,
 } from "@/registry/react/components/navigation-menu";
 
-const NavigationMenuDemo = () => (
+const Example = () => (
   <div className="flex min-h-80 w-full justify-center pt-2">
     <NavigationMenu aria-label="Example navigation">
       <NavigationMenuContext>
@@ -64,4 +64,4 @@ const NavigationMenuDemo = () => (
   </div>
 );
 
-export default NavigationMenuDemo;
+export default Example;

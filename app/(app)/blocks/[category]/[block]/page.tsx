@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import React from "react";
 import {
-  createBlockFileTree,
-  getPublishedBlock,
-  getPublishedBlocks,
-} from "@/lib/blocks";
+  getCategories,
+  getFileTree,
+  getPublishedComposition,
+  getPublishedCompositions,
+} from "@/lib/composition-catalog";
 import { createMetadata } from "@/lib/metadata";
-import { BLOCK_CATEGORIES } from "@/registry/react/blocks/_categories";
 import { Skeleton } from "@/registry/react/components/skeleton";
 import { BlocksBrowser } from "../../_components/blocks-browser";
 
@@ -16,7 +16,7 @@ export const dynamicParams = false;
 export const revalidate = false;
 
 export const generateStaticParams = async () => {
-  const blocks = await getPublishedBlocks();
+  const blocks = await getPublishedCompositions("blocks");
   return blocks.map((block) => ({
     block: block.name,
     category: block.category,
@@ -27,7 +27,7 @@ export const generateMetadata = async (
   props: PageProps<"/blocks/[category]/[block]">
 ): Promise<Metadata> => {
   const { block: name, category: slug } = await props.params;
-  const item = await getPublishedBlock(slug, name);
+  const item = await getPublishedComposition("blocks", slug, name);
 
   if (!item) {
     notFound();
@@ -43,18 +43,19 @@ export const generateMetadata = async (
 const BlockPage = async (props: PageProps<"/blocks/[category]/[block]">) => {
   const { block: name, category: slug } = await props.params;
   const [item, blocks] = await Promise.all([
-    getPublishedBlock(slug, name),
-    getPublishedBlocks(),
+    getPublishedComposition("blocks", slug, name),
+    getPublishedCompositions("blocks"),
   ]);
 
-  const category = BLOCK_CATEGORIES.find((entry) => entry.slug === slug);
+  const categories = getCategories("blocks");
+  const category = categories.find((entry) => entry.slug === slug);
   if (!(item && category)) {
     notFound();
   }
 
   const browserBlocks = blocks.map((block) => ({
     block,
-    tree: createBlockFileTree(block.files),
+    tree: getFileTree(block.files),
   }));
 
   return (
@@ -64,7 +65,7 @@ const BlockPage = async (props: PageProps<"/blocks/[category]/[block]">) => {
       <BlocksBrowser
         activeBlockName={item.name}
         blocks={browserBlocks}
-        categories={BLOCK_CATEGORIES}
+        categories={categories}
         categorySlug={category.slug}
         isDetailPage
       />

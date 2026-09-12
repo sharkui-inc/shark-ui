@@ -163,9 +163,9 @@ export const FileUploadList = (props: FileUploadListProps) => {
               "flex-1 items-start justify-start gap-4",
               "bg-card",
               "p-2",
-              "rounded-xl border",
+              "rounded-xl border shadow-xs/5",
               "fade-in-0 slide-in-from-top-5 animate-in",
-              "motion-reduce:animate-none!",
+              "motion-reduce:animate-none",
               className
             )}
             file={file}

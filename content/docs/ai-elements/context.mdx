@@ -3,6 +3,8 @@ title: Context
 description: Show context-window token usage, breakdown, and cost.
 ---
 
+import manifest from "@/registry/manifest/context";
+
 <Alert>
   <InfoIcon />
   <AlertDescription>
@@ -34,6 +36,10 @@ npx shadcn@latest add @shark/context
 <Steps>
 
 <Step>This component depends on [Popover](/docs/components/popover), [Circular Progress](/docs/components/circular-progress), and [Format](/docs/utilities/format). Install required dependencies first if you haven&apos;t already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

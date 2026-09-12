@@ -31,7 +31,6 @@ const UseListSelectionDemo = () => {
             className="justify-start"
             key={item.value}
             onClick={handleItemClick}
-            type="button"
             value={item.value}
             variant={selection.isSelected(item.value) ? "secondary" : "ghost"}
           >

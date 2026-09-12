@@ -226,7 +226,7 @@ export const FieldDescription = (props: React.ComponentProps<typeof ark.p>) => {
         "group-has-data-[orientation=horizontal]/field:text-balance",
         "@md/field-group:group-data-[orientation=responsive]/field:text-balance",
         "nth-last-2:-mt-1 last:mt-0 [[data-variant=legend]+&]:-mt-1.5",
-        "in-[[data-slot=field]:has([data-slot=radio-group-item])]:ms-6 in-[[data-slot=field]:has([data-slot=radio-group-item])]:-mt-1.5!",
+        "[[data-slot=radio-group-item]+&]:ms-6 [[data-slot=radio-group-item]+&]:-mt-1.5",
         "[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4",
         className
       )}

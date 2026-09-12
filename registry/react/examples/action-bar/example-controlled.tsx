@@ -22,7 +22,7 @@ const Example = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <ActionBar onOpenChange={setIsOpen} open={isOpen}>
+    <ActionBar onOpenChange={({ open }) => setIsOpen(open)} open={isOpen}>
       <Button onClick={() => setIsOpen((prev) => !prev)} variant="outline">
         Toggle
       </Button>

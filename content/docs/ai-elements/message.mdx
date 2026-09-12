@@ -4,6 +4,8 @@ description: Structure a chat message with an avatar, header, and footer.
 seoDescription: "Structure a chat message with an avatar, header, and footer."
 ---
 
+import manifest from "@/registry/manifest/message";
+
 <ComponentPreview componentName="message" autoHeight />
 
 ## Installation
@@ -29,9 +31,7 @@ npx shadcn@latest add @shark/message
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

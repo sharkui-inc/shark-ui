@@ -117,7 +117,7 @@ export const TocIndicator = (
         "absolute inset-s-0 w-0.5 rounded-full bg-foreground",
         "h-(--height) -translate-x-1/2 translate-y-(--top) rtl:translate-x-1/2",
         "transition-[height,translate] duration-200",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="toc-indicator"

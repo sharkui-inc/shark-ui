@@ -11,7 +11,7 @@ import {
   useNavigationMenu,
 } from "@/registry/react/components/navigation-menu";
 
-const NavigationMenuDemo = () => {
+const Example = () => {
   const navigationMenu = useNavigationMenu();
 
   return (
@@ -67,4 +67,4 @@ const NavigationMenuDemo = () => {
   );
 };
 
-export default NavigationMenuDemo;
+export default Example;

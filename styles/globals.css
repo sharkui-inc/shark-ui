@@ -316,10 +316,10 @@
   --background: var(--color-neutral-50);
   --foreground: var(--color-neutral-800);
 
-  --card: color-mix(in srgb, var(--color-neutral-950) 2%, var(--background));
+  --card: var(--background);
   --card-foreground: var(--color-neutral-800);
 
-  --popover: color-mix(in srgb, var(--color-neutral-950) 3%, var(--background));
+  --popover: var(--background);
   --popover-foreground: var(--color-neutral-800);
 
   --primary: var(--color-neutral-800);
@@ -327,19 +327,19 @@
 
   --secondary: color-mix(
     in srgb,
-    var(--color-neutral-950) 6%,
+    var(--color-neutral-950) 4%,
     var(--background)
   );
   --secondary-foreground: var(--color-neutral-800);
 
-  --muted: color-mix(in srgb, var(--color-neutral-950) 5%, var(--background));
+  --muted: color-mix(in srgb, var(--color-neutral-950) 4%, var(--background));
   --muted-foreground: color-mix(
     in srgb,
-    var(--color-neutral-500) 80%,
+    var(--color-neutral-500) 88%,
     var(--color-neutral-950)
   );
 
-  --accent: color-mix(in srgb, var(--color-neutral-950) 8%, var(--background));
+  --accent: color-mix(in srgb, var(--color-neutral-950) 4%, var(--background));
   --accent-foreground: var(--color-neutral-800);
 
   --destructive: var(--color-red-600);
@@ -354,40 +354,36 @@
   --warning: var(--color-amber-600);
   --warning-foreground: var(--color-amber-700);
 
-  --border: color-mix(in srgb, var(--color-neutral-950) 12%, var(--background));
-  --input: color-mix(in srgb, var(--color-neutral-950) 15%, var(--background));
+  --border: color-mix(in srgb, var(--color-neutral-950) 8%, var(--background));
+  --input: color-mix(in srgb, var(--color-neutral-950) 10%, var(--background));
   --ring: var(--color-neutral-400);
 
-  --sidebar: color-mix(
-    in srgb,
-    var(--color-neutral-50) 97%,
-    var(--color-neutral-950)
-  );
+  --sidebar: var(--color-neutral-50);
   --sidebar-foreground: color-mix(
     in srgb,
-    var(--color-neutral-800) 76%,
+    var(--color-neutral-800) 64%,
     var(--sidebar)
   );
   --sidebar-primary: var(--color-neutral-800);
   --sidebar-primary-foreground: var(--color-neutral-50);
   --sidebar-accent: color-mix(
     in srgb,
-    var(--color-neutral-950) 8%,
+    var(--color-neutral-950) 4%,
     var(--sidebar)
   );
   --sidebar-accent-foreground: var(--color-neutral-800);
   --sidebar-border: color-mix(
     in srgb,
-    var(--color-neutral-950) 11%,
+    var(--color-neutral-950) 6%,
     var(--sidebar)
   );
   --sidebar-ring: var(--color-neutral-400);
 
-  --chart-1: var(--color-orange-600);
-  --chart-2: var(--color-teal-600);
-  --chart-3: var(--color-cyan-900);
-  --chart-4: var(--color-amber-400);
-  --chart-5: var(--color-amber-500);
+  --chart-1: var(--color-blue-600);
+  --chart-2: var(--color-emerald-600);
+  --chart-3: var(--color-amber-600);
+  --chart-4: var(--color-purple-600);
+  --chart-5: var(--color-rose-600);
 
   --code: var(--background);
   --code-foreground: var(--foreground);
@@ -399,29 +395,37 @@
 }
 
 .dark {
-  --background: var(--color-neutral-950);
+  --background: color-mix(
+    in srgb,
+    var(--color-neutral-950) 95%,
+    var(--color-neutral-50)
+  );
   --foreground: var(--color-neutral-100);
 
   --card: color-mix(in srgb, var(--background) 98%, var(--color-neutral-50));
   --card-foreground: var(--color-neutral-100);
 
-  --popover: color-mix(in srgb, var(--background) 96%, var(--color-neutral-50));
+  --popover: color-mix(in srgb, var(--background) 98%, var(--color-neutral-50));
   --popover-foreground: var(--color-neutral-100);
 
   --primary: var(--color-neutral-100);
   --primary-foreground: var(--color-neutral-800);
 
-  --secondary: color-mix(in srgb, var(--color-white) 8%, var(--background));
+  --secondary: color-mix(
+    in srgb,
+    var(--color-neutral-50) 4%,
+    var(--background)
+  );
   --secondary-foreground: var(--color-neutral-100);
 
-  --muted: color-mix(in srgb, var(--color-neutral-50) 6%, var(--background));
+  --muted: color-mix(in srgb, var(--color-neutral-50) 4%, var(--background));
   --muted-foreground: color-mix(
     in srgb,
-    var(--color-neutral-500) 70%,
+    var(--color-neutral-500) 88%,
     var(--color-neutral-50)
   );
 
-  --accent: color-mix(in srgb, var(--color-neutral-50) 10%, var(--background));
+  --accent: color-mix(in srgb, var(--color-neutral-50) 4%, var(--background));
   --accent-foreground: var(--color-neutral-100);
 
   --destructive: var(--color-red-600);
@@ -436,9 +440,9 @@
   --warning: var(--color-amber-600);
   --warning-foreground: var(--color-amber-400);
 
-  --border: color-mix(in srgb, var(--color-neutral-50) 12%, var(--background));
-  --input: color-mix(in srgb, var(--color-neutral-50) 15%, var(--background));
-  --ring: var(--color-neutral-400);
+  --border: color-mix(in srgb, var(--color-neutral-50) 6%, var(--background));
+  --input: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
+  --ring: var(--color-neutral-500);
 
   --sidebar: color-mix(
     in srgb,
@@ -447,23 +451,23 @@
   );
   --sidebar-foreground: color-mix(
     in srgb,
-    var(--color-neutral-100) 76%,
+    var(--color-neutral-100) 64%,
     var(--sidebar)
   );
   --sidebar-primary: var(--color-neutral-100);
   --sidebar-primary-foreground: var(--color-neutral-800);
   --sidebar-accent: color-mix(
     in srgb,
-    var(--color-neutral-50) 10%,
+    var(--color-neutral-50) 4%,
     var(--sidebar)
   );
   --sidebar-accent-foreground: var(--color-neutral-100);
   --sidebar-border: color-mix(
     in srgb,
-    var(--color-neutral-50) 11%,
+    var(--color-neutral-50) 5%,
     var(--sidebar)
   );
-  --sidebar-ring: var(--color-neutral-400);
+  --sidebar-ring: var(--color-neutral-500);
 
   --chart-1: var(--color-blue-700);
   --chart-2: var(--color-emerald-500);
@@ -486,6 +490,7 @@
   }
 
   html {
+    scrollbar-gutter: stable;
     @apply antialiased;
   }
 
@@ -518,209 +523,4 @@
 
 @utility step-keep {
   counter-increment: step 0;
-}
-
-@layer components {
-  [data-rehype-pretty-code-figure] {
-    position: relative;
-    margin-top: calc(var(--spacing) * 6);
-    overflow: hidden;
-    outline: none;
-    @apply bg-code rounded-2xl text-code-foreground border border-border;
-
-    &:has([data-rehype-pretty-code-title]) [data-slot="copy-button"] {
-      top: calc(var(--spacing) * 1.5);
-    }
-
-    &:has([data-language="text"]) {
-      font-family:
-        ui-monospace,
-        SFMono-Regular,
-        Menlo,
-        Monaco,
-        Consolas,
-        Liberation Mono,
-        Courier New,
-        monospace;
-    }
-
-    :where(*[data-tab="code"]) & {
-      border-width: 0px;
-    }
-  }
-
-  [data-rehype-pretty-code-title] {
-    min-height: calc(var(--spacing) * 11);
-    padding-block: calc(var(--spacing) * 2.5);
-    padding-inline: calc(var(--spacing) * 4);
-    @apply border-border border-b text-muted-foreground font-mono;
-  }
-
-  [data-line-numbers] {
-    display: grid;
-    min-width: 100%;
-    white-space: pre;
-    border: 0;
-    background: transparent;
-    padding: 0;
-    counter-reset: line;
-    box-decoration-break: clone;
-  }
-
-  [data-line-numbers] [data-line]::before {
-    position: sticky;
-    left: 0;
-    display: inline-block;
-    width: calc(var(--spacing) * 16);
-    padding-right: calc(var(--spacing) * 6);
-    text-align: right;
-    content: counter(line);
-    counter-increment: line;
-    @apply bg-code text-muted-foreground;
-  }
-
-  [data-line-numbers] [data-highlighted-line][data-line]::before {
-    @apply bg-code-highlight;
-  }
-
-  [data-line] {
-    display: inline-block;
-    width: 100%;
-    min-height: calc(var(--spacing) * 1);
-    padding-top: calc(var(--spacing) * 0.5);
-    padding-bottom: calc(var(--spacing) * 0.5);
-  }
-
-  /*
-   * ```text composition trees use box-drawing characters; per-line padding makes
-   * vertical connectors look broken. rehype-pretty-code sets `data-language` on
-   * `pre`/`code` (not `language-*` classes). It also sets `code { display: grid }`,
-   * which can add visible row separation — reset to a normal pre stack for text.
-   */
-  [data-rehype-pretty-code-figure] pre[data-language="text"] code,
-  [data-rehype-pretty-code-figure] pre[data-language="plaintext"] code,
-  [data-slot="docs"] pre[data-language="text"] code,
-  [data-slot="docs"] pre[data-language="plaintext"] code {
-    display: block !important;
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-      "Courier New", monospace;
-    font-variant-ligatures: none;
-    line-height: 0.95;
-    white-space: pre;
-  }
-
-  [data-rehype-pretty-code-figure] pre[data-language="text"] [data-line],
-  [data-rehype-pretty-code-figure] pre[data-language="plaintext"] [data-line],
-  [data-rehype-pretty-code-figure] code[data-language="text"] [data-line],
-  [data-rehype-pretty-code-figure] code[data-language="plaintext"] [data-line],
-  [data-slot="docs"] pre[data-language="text"] [data-line],
-  [data-slot="docs"] pre[data-language="plaintext"] [data-line] {
-    display: block;
-    min-height: unset;
-    padding-top: 0;
-    padding-bottom: 0;
-    line-height: 0.95;
-  }
-
-  [data-line] span {
-    @apply text-(--shiki-light);
-
-    @variant dark {
-      @apply text-(--shiki-dark);
-    }
-  }
-
-  [data-highlighted-line],
-  [data-highlighted-chars] {
-    @apply bg-code-highlight relative;
-  }
-
-  [data-highlighted-line] {
-    &:after {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 2px;
-      height: 100%;
-      content: "";
-      background-color: color-mix(
-        in oklab,
-        var(--muted-foreground) 50%,
-        transparent
-      );
-    }
-  }
-
-  [data-highlighted-chars] {
-    padding-block: 0.1rem;
-    padding-inline: 0.3rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-
-    @apply rounded-sm;
-  }
-
-  [data-slot="composition-code-viewer"] [data-rehype-pretty-code-figure] {
-    margin-top: 0;
-    overflow: visible;
-    background: transparent;
-    border: 0;
-    border-radius: 0;
-  }
-
-  [data-slot="composition-code-viewer"] [data-rehype-pretty-code-figure] pre {
-    min-width: 100%;
-    padding-block: calc(var(--spacing) * 4);
-    padding-inline: 0;
-    font-size: 0.8125rem;
-    line-height: 1.6;
-  }
-
-  [data-slot="composition-code-viewer"]
-    [data-line-numbers]
-    [data-line]::before {
-    width: calc(var(--spacing) * 11);
-    padding-right: calc(var(--spacing) * 4);
-    color: color-mix(in oklab, var(--muted-foreground) 72%, transparent);
-    background: transparent;
-  }
-
-  [data-slot="composition-code-viewer"] [data-line] {
-    min-height: calc(var(--spacing) * 5.5);
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  .highlighted-word {
-    position: relative;
-    padding: 0;
-
-    &::before {
-      position: absolute;
-      top: -2px;
-      right: -2px;
-      bottom: -2px;
-      left: -2px;
-      pointer-events: none;
-      content: "";
-
-      @apply rounded-xs;
-    }
-
-    + .highlighted-word {
-      &::before {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-      }
-    }
-
-    &:has(+ .highlighted-word) {
-      &::before {
-        right: 2px;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-    }
-  }
 }

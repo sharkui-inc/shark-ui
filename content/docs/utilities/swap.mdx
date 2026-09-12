@@ -5,6 +5,8 @@ links:
   doc: https://ark-ui.com/docs/utilities/swap
 ---
 
+import manifest from "@/registry/manifest/swap";
+
 <ComponentPreview componentName="swap" />
 
 ## Installation
@@ -26,13 +28,11 @@ npx shadcn@latest add @shark/swap
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Add the following keyframes to your `globals.css` for the flip variant:</Step>
+<Step>Import the following rules into your CSS file:</Step>
 
-```css title="globals.css"
+```css showLineNumbers
 @theme inline {
   --animate-flip-in: flip-in 0.2s ease-out;
   --animate-flip-out: flip-out 0.2s ease-out;

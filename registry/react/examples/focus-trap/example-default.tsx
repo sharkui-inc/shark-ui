@@ -19,7 +19,7 @@ const FocusTrapDemo = () => {
 
   return (
     <div className="flex w-full max-w-sm flex-col items-start gap-4">
-      <Button onClick={startTrap} type="button" variant="outline">
+      <Button onClick={startTrap} variant="outline">
         Start trap
       </Button>
       <FocusTrap
@@ -30,15 +30,13 @@ const FocusTrapDemo = () => {
         <FieldGroup>
           <Field>
             <FieldLabel>First name</FieldLabel>
-            <Input placeholder="Alex" type="text" />
+            <Input placeholder="Alex" />
           </Field>
           <Field>
             <FieldLabel>Notes</FieldLabel>
             <Textarea placeholder="Add a note…" />
           </Field>
-          <Button onClick={endTrap} type="button">
-            End trap
-          </Button>
+          <Button onClick={endTrap}>End trap</Button>
         </FieldGroup>
       </FocusTrap>
     </div>

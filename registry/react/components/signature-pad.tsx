@@ -32,6 +32,8 @@ export const SignaturePad = (
         <SignaturePadClear />
         <SignaturePadGuide />
       </SignaturePadControl>
+
+      <ArkSignaturePad.HiddenInput />
     </ArkSignaturePad.Root>
   );
 };

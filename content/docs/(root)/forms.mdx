@@ -1,6 +1,6 @@
 ---
 title: Forms
-description: A guide to building forms with Shark UI components.
+description: Build forms with Shark Field and a form library.
 links:
   doc: https://ark-ui.com/docs/guides/forms
 ---
@@ -11,13 +11,11 @@ import { FormsList } from "@/components/mdx-components/forms-list";
 
 <FormsList />
 
-For detailed guides with examples, validation, and field-type-specific patterns, see the linked pages above.
-
 ## Field Context
 
-Form components automatically integrate with `Field` through context. When nested inside a `Field`, they inherit `disabled`, `invalid`, `required`, and `readOnly` states automatically.
+Controls nested in `Field` pick up `disabled`, `invalid`, `required`, and `readOnly` from context.
 
-Also `htmlFor` and `id` are automatically handled by the `Field` component. Never use them directly.
+`Field` also owns `htmlFor` and `id`. Do not set them yourself.
 
 ```tsx
 import { Field } from "@/registry/react/components/field"
@@ -40,9 +38,7 @@ const Demo = () => (
 
 ### Invalid
 
-Pass the `invalid` prop to the `Field` component. 
-
-The `FieldError` is only visible when the `invalid` prop is `true`.
+Set `invalid` on `Field`. `FieldError` only renders when `invalid` is `true`.
 
 ```tsx
 import {
@@ -65,9 +61,7 @@ const Demo = () => (
 
 ### Required
 
-Pass the `required` prop to the `Field` component. 
-
-Optionally, you can use the `FieldRequiredIndicator` to indicate that the field is required.
+Set `required` on `Field`. Add `FieldRequiredIndicator` on the label if you want a visual mark.
 
 ```tsx
 import {

@@ -52,12 +52,7 @@ const AITemplatePage = () => (
     >
       <SidebarHeader className="border-b">
         <div className="flex items-center gap-2 px-2 py-2">
-          <IconTile
-            aria-hidden="true"
-            className="rounded-md border-transparent shadow-none"
-            size="xs"
-            variant="primary"
-          >
+          <IconTile aria-hidden="true" size="xs">
             <MessageSquareIcon aria-hidden className="size-4" />
           </IconTile>
           <span className="font-semibold">New chat</span>
@@ -66,7 +61,7 @@ const AITemplatePage = () => (
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
+            <SidebarMenu>
               {AI_TEMPLATE_SIDEBAR.map(({ label, icon: Icon, href }) => (
                 <SidebarMenuItem key={label}>
                   <SidebarMenuButton asChild>
@@ -83,7 +78,7 @@ const AITemplatePage = () => (
         <SidebarGroup>
           <SidebarGroupLabel>Pinned</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
+            <SidebarMenu>
               {PINNED.map((item) => (
                 <SidebarMenuItem key={item}>
                   <SidebarMenuButton asChild>
@@ -97,7 +92,7 @@ const AITemplatePage = () => (
         <SidebarGroup>
           <SidebarGroupLabel>Recents</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
+            <SidebarMenu>
               {RECENTS.slice(0, 3).map((item) => (
                 <SidebarMenuItem key={item}>
                   <SidebarMenuButton asChild>
@@ -111,7 +106,7 @@ const AITemplatePage = () => (
         <SidebarGroup>
           <SidebarGroupLabel>Yesterday</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
+            <SidebarMenu>
               {RECENTS.slice(3, 6).map((item) => (
                 <SidebarMenuItem key={item}>
                   <SidebarMenuButton asChild>

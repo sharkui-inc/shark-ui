@@ -9,7 +9,7 @@ export const SidebarThumb = (props: ThumbCardProps) => (
           <div className="h-1.5 w-2/3 rounded-full bg-muted-foreground/8" />
         </div>
         <div className="flex min-h-0 flex-1 flex-col justify-center gap-1">
-          <div className="h-1.5 w-full rounded-full bg-muted-foreground/16" />
+          <div className="h-1.5 w-full rounded-full bg-primary" />
           <div className="h-1.5 w-5/6 rounded-full bg-muted-foreground/8" />
           <div className="h-1.5 w-full rounded-full bg-muted-foreground/16" />
           <div className="h-1.5 w-4/5 rounded-full bg-muted-foreground/8" />

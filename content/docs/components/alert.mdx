@@ -3,6 +3,8 @@ title: Alert
 description: Displays an alert for user attention.
 ---
 
+import manifest from "@/registry/manifest/alert";
+
 import { Alert, AlertDescription, AlertTitle } from "@/registry/react/components/alert";
 import { TabsContent } from "@/registry/react/components/tabs";
 import { Info, AlertCircle, AlertTriangle, CheckCircle } from "lucide-react";
@@ -32,11 +34,9 @@ npx shadcn@latest add @shark/alert
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css

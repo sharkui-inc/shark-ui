@@ -10,7 +10,6 @@ import type {
   HighlighterGeneric,
   ThemedToken,
 } from "shiki";
-import { createHighlighter } from "shiki";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -18,6 +17,7 @@ import {
   ClipboardIndicator,
   ClipboardTrigger,
 } from "@/registry/react/components/clipboard";
+import { ScrollArea } from "@/registry/react/components/scroll-area";
 import {
   Select,
   SelectContent,
@@ -26,14 +26,15 @@ import {
   SelectValue,
 } from "@/registry/react/components/select";
 
-const STREAM_IDLE_DELAY = 160;
-const STREAM_HIGHLIGHT_INTERVAL = 600;
 const TOKEN_CACHE_LIMIT = 100;
+const STREAM_HIGHLIGHT_INTERVAL = 200;
+
+export type CodeBlockLanguage = BundledLanguage | "text";
 
 interface CodeBlockContextValue {
   code: string;
   isStreaming: boolean;
-  language: BundledLanguage;
+  language: CodeBlockLanguage;
 }
 
 const [CodeBlockProvider, useCodeBlock] = createContext<CodeBlockContextValue>({
@@ -44,7 +45,7 @@ const [CodeBlockProvider, useCodeBlock] = createContext<CodeBlockContextValue>({
 interface CodeBlockProps extends React.ComponentProps<typeof ark.div> {
   code?: string;
   isStreaming?: boolean;
-  language?: BundledLanguage;
+  language?: CodeBlockLanguage;
 }
 
 export const CodeBlock = (props: CodeBlockProps) => {
@@ -68,8 +69,9 @@ export const CodeBlock = (props: CodeBlockProps) => {
           "w-full min-w-0",
           "flex flex-col",
           "bg-card text-card-foreground",
-          "rounded-xl border",
+          "rounded-xl border shadow-xs/5",
           "overflow-hidden",
+          "[--code-surface-line-height:--spacing(6)]",
           className
         )}
         data-slot="code-block"
@@ -110,7 +112,7 @@ export const CodeBlockHeader = (props: CodeBlockHeaderProps) => {
     <ark.div
       className={cn(
         "min-h-9 min-w-0",
-        "flex items-center gap-2",
+        "flex shrink-0 items-center gap-2",
         "px-3 py-1",
         "text-muted-foreground text-sm",
         "border-b",
@@ -174,7 +176,6 @@ export const CodeBlockCopy = (
           aria-label="Copy code"
           className="text-muted-foreground hover:text-foreground"
           size="icon-xs"
-          type="button"
           variant="ghost"
         >
           <ClipboardIndicator />
@@ -188,13 +189,22 @@ interface TokenizedCode {
   tokens: ThemedToken[][];
 }
 
-const highlighterCache = new Map<
-  BundledLanguage,
-  Promise<HighlighterGeneric<BundledLanguage, BundledTheme>>
->();
-const tokenCache = new Map<string, TokenizedCode>();
+interface TokenizedCodeSnapshot extends TokenizedCode {
+  code: string;
+  isHighlighted: boolean;
+  language: CodeBlockLanguage;
+}
 
-const getTokenCacheKey = (code: string, language: BundledLanguage) =>
+let shikiPromise: Promise<typeof import("shiki")> | undefined;
+let highlighterPromise:
+  | Promise<HighlighterGeneric<BundledLanguage, BundledTheme>>
+  | undefined;
+const languageLoadPromises = new Map<BundledLanguage, Promise<void>>();
+let languageLoadQueue = Promise.resolve();
+const tokenCache = new Map<string, TokenizedCode>();
+const tokenPromiseCache = new Map<string, Promise<TokenizedCode>>();
+
+const getTokenCacheKey = (code: string, language: CodeBlockLanguage) =>
   `${language}\u0000${code}`;
 
 const createRawTokens = (code: string): TokenizedCode => ({
@@ -210,18 +220,60 @@ const createRawTokens = (code: string): TokenizedCode => ({
   ),
 });
 
-const getHighlighter = (language: BundledLanguage) => {
-  const cached = highlighterCache.get(language);
+const createRawLineTokens = (line: string) =>
+  line
+    ? [
+        {
+          color: "inherit",
+          content: line,
+        } as ThemedToken,
+      ]
+    : [];
+
+const getShiki = () => {
+  if (!shikiPromise) {
+    shikiPromise = import("shiki").catch((error: unknown) => {
+      shikiPromise = undefined;
+      throw error;
+    });
+  }
+
+  return shikiPromise;
+};
+
+const getHighlighter = () => {
+  if (!highlighterPromise) {
+    highlighterPromise = getShiki()
+      .then(({ createHighlighter }) =>
+        createHighlighter({
+          themes: ["github-light", "github-dark"],
+        })
+      )
+      .catch((error: unknown) => {
+        highlighterPromise = undefined;
+        throw error;
+      });
+  }
+
+  return highlighterPromise;
+};
+
+const loadLanguage = (language: BundledLanguage) => {
+  const cached = languageLoadPromises.get(language);
   if (cached) {
     return cached;
   }
 
-  const highlighter = createHighlighter({
-    langs: [language],
-    themes: ["github-light", "github-dark"],
+  const load = languageLoadQueue.then(async () => {
+    const highlighter = await getHighlighter();
+    await highlighter.loadLanguage(language);
   });
-  highlighterCache.set(language, highlighter);
-  return highlighter;
+  languageLoadQueue = load.catch(() => undefined);
+  languageLoadPromises.set(language, load);
+  load.catch(() => {
+    languageLoadPromises.delete(language);
+  });
+  return load;
 };
 
 const cacheTokens = (key: string, tokenized: TokenizedCode) => {
@@ -229,114 +281,152 @@ const cacheTokens = (key: string, tokenized: TokenizedCode) => {
     const oldestKey = tokenCache.keys().next().value;
     if (oldestKey) {
       tokenCache.delete(oldestKey);
+      tokenPromiseCache.delete(oldestKey);
     }
   }
   tokenCache.set(key, tokenized);
 };
 
-const getTokens = async (code: string, language: BundledLanguage) => {
+const getTokens = (code: string, language: BundledLanguage) => {
   const key = getTokenCacheKey(code, language);
-  const cached = tokenCache.get(key);
-  if (cached) {
+  const cachedPromise = tokenPromiseCache.get(key);
+  if (cachedPromise) {
+    return cachedPromise;
+  }
+
+  const cachedTokens = tokenCache.get(key);
+  if (cachedTokens) {
+    const cached = Promise.resolve(cachedTokens);
+    tokenPromiseCache.set(key, cached);
     return cached;
   }
 
-  const highlighter = await getHighlighter(language);
-  const result = highlighter.codeToTokens(code, {
-    lang: language,
-    themes: { dark: "github-dark", light: "github-light" },
-  });
-  const tokenized = { tokens: result.tokens };
-  cacheTokens(key, tokenized);
-  return tokenized;
+  const tokens = (async () => {
+    try {
+      await loadLanguage(language);
+      const highlighter = await getHighlighter();
+      const result = highlighter.codeToTokens(code, {
+        lang: language,
+        themes: { dark: "github-dark", light: "github-light" },
+      });
+      const tokenized = { tokens: result.tokens };
+      cacheTokens(key, tokenized);
+      return tokenized;
+    } catch {
+      return createRawTokens(code);
+    }
+  })();
+  tokenPromiseCache.set(key, tokens);
+  return tokens;
 };
 
 const useCodeTokens = (
   code: string,
-  language: BundledLanguage,
+  language: CodeBlockLanguage,
   isStreaming: boolean
 ) => {
-  const key = getTokenCacheKey(code, language);
-  const rawTokens = React.useMemo(() => createRawTokens(code), [code]);
-  const [tokens, setTokens] = React.useState<TokenizedCode>(
-    () => tokenCache.get(key) ?? rawTokens
-  );
-  const currentRef = React.useRef({ code, key, language });
-  const idleTimerRef = React.useRef<ReturnType<typeof setTimeout>>();
-  const maxTimerRef = React.useRef<ReturnType<typeof setTimeout>>();
-  const lastHighlightRef = React.useRef(Date.now());
-
-  currentRef.current = { code, key, language };
-
-  const highlightCurrent = React.useCallback(() => {
-    const {
-      code: currentCode,
-      key: currentKey,
-      language: currentLanguage,
-    } = currentRef.current;
-    const cached = tokenCache.get(currentKey);
-    lastHighlightRef.current = Date.now();
-
-    if (maxTimerRef.current) {
-      clearTimeout(maxTimerRef.current);
-      maxTimerRef.current = undefined;
-    }
-
-    if (cached) {
-      setTokens(cached);
-      return;
-    }
-
-    getTokens(currentCode, currentLanguage)
-      .then((nextTokens) => {
-        if (currentRef.current.key === currentKey) {
-          setTokens(nextTokens);
-        }
-      })
-      .catch(() => {
-        // Failed language loading retains the raw fallback.
-      });
-  }, []);
+  const [snapshot, setSnapshot] = React.useState<TokenizedCodeSnapshot>(() => ({
+    code,
+    isHighlighted: false,
+    language,
+    tokens: createRawTokens(code).tokens,
+  }));
+  const codeRef = React.useRef(code);
+  const languageRef = React.useRef(language);
 
   React.useEffect(() => {
-    const cached = tokenCache.get(key);
-    setTokens(cached ?? rawTokens);
+    codeRef.current = code;
+    languageRef.current = language;
+  }, [code, language]);
 
-    if (idleTimerRef.current) {
-      clearTimeout(idleTimerRef.current);
-      idleTimerRef.current = undefined;
-    }
-
-    if (!isStreaming || cached) {
-      highlightCurrent();
-      return;
-    }
-
-    idleTimerRef.current = setTimeout(highlightCurrent, STREAM_IDLE_DELAY);
-
-    if (!maxTimerRef.current) {
-      const elapsed = Date.now() - lastHighlightRef.current;
-      maxTimerRef.current = setTimeout(
-        () => {
-          maxTimerRef.current = undefined;
-          highlightCurrent();
-        },
-        Math.max(0, STREAM_HIGHLIGHT_INTERVAL - elapsed)
-      );
-    }
-  }, [highlightCurrent, isStreaming, key, rawTokens]);
-
-  React.useEffect(
-    () => () => {
-      if (idleTimerRef.current) {
-        clearTimeout(idleTimerRef.current);
+  const highlight = React.useCallback(
+    (codeToHighlight: string, languageToHighlight: CodeBlockLanguage) => {
+      if (languageToHighlight === "text") {
+        setSnapshot({
+          code: codeToHighlight,
+          isHighlighted: true,
+          language: languageToHighlight,
+          tokens: createRawTokens(codeToHighlight).tokens,
+        });
+        return;
       }
-      if (maxTimerRef.current) {
-        clearTimeout(maxTimerRef.current);
-      }
+
+      getTokens(codeToHighlight, languageToHighlight).then(({ tokens }) => {
+        const latestCode = codeRef.current;
+        if (
+          languageRef.current !== languageToHighlight ||
+          (latestCode !== codeToHighlight &&
+            !latestCode.startsWith(codeToHighlight))
+        ) {
+          return;
+        }
+
+        setSnapshot((current) => {
+          if (
+            current.language === languageToHighlight &&
+            ((current.code.length > codeToHighlight.length &&
+              current.code.startsWith(codeToHighlight)) ||
+              (current.code === codeToHighlight && current.isHighlighted))
+          ) {
+            return current;
+          }
+
+          return {
+            code: codeToHighlight,
+            isHighlighted: true,
+            language: languageToHighlight,
+            tokens,
+          };
+        });
+      });
     },
     []
   );
+
+  React.useEffect(() => {
+    if (!isStreaming || language === "text") {
+      highlight(code, language);
+    }
+  }, [code, highlight, isStreaming, language]);
+
+  React.useEffect(() => {
+    if (!isStreaming || language === "text") {
+      return;
+    }
+
+    highlight(codeRef.current, language);
+    const interval = window.setInterval(() => {
+      highlight(codeRef.current, languageRef.current);
+    }, STREAM_HIGHLIGHT_INTERVAL);
+
+    return () => window.clearInterval(interval);
+  }, [highlight, isStreaming, language]);
+
+  return snapshot;
+};
+
+const getDisplayedTokens = (
+  code: string,
+  language: CodeBlockLanguage,
+  snapshot: TokenizedCodeSnapshot
+) => {
+  if (snapshot.language !== language || !code.startsWith(snapshot.code)) {
+    return createRawTokens(code).tokens;
+  }
+
+  if (snapshot.code === code) {
+    return snapshot.tokens;
+  }
+
+  const tokens = snapshot.tokens.map((line) => [...line]);
+  const suffixLines = code.slice(snapshot.code.length).split("\n");
+  const firstSuffixLine = suffixLines.shift() ?? "";
+
+  if (!tokens.length) {
+    tokens.push([]);
+  }
+  tokens.at(-1)?.push(...createRawLineTokens(firstSuffixLine));
+  tokens.push(...suffixLines.map(createRawLineTokens));
 
   return tokens;
 };
@@ -365,7 +455,12 @@ const getTokenKey = (token: ThemedToken) => {
 
 const CodeToken = ({ token }: { token: ThemedToken }) => (
   <span
-    className="dark:!bg-[var(--shiki-dark-bg)] dark:!text-[var(--shiki-dark)]"
+    className={cn(
+      "dark:!bg-[var(--shiki-dark-bg)] dark:!text-[var(--shiki-dark)]",
+      "[font-style:var(--shiki-light-font-style,normal)] dark:[font-style:var(--shiki-dark-font-style,var(--shiki-light-font-style,normal))]",
+      "[font-weight:var(--shiki-light-font-weight,inherit)] dark:[font-weight:var(--shiki-dark-font-weight,var(--shiki-light-font-weight,inherit))]",
+      "[text-decoration:var(--shiki-light-text-decoration,none)] dark:[text-decoration:var(--shiki-dark-text-decoration,var(--shiki-light-text-decoration,none))]"
+    )}
     style={
       {
         backgroundColor: token.bgColor,
@@ -387,38 +482,29 @@ interface CodeBlockContentProps
   code?: string;
   highlightedLines?: number[];
   isStreaming?: boolean;
-  language?: BundledLanguage;
+  language?: CodeBlockLanguage;
   showLineNumbers?: boolean;
 }
 
-export const CodeBlockContent = (props: CodeBlockContentProps) => {
-  const {
-    children,
-    className,
-    code: codeProp,
-    highlightedLines = [],
-    isStreaming: isStreamingProp,
-    language: languageProp,
-    showLineNumbers = false,
-    ...rest
-  } = props;
+interface CodeBlockPreProps
+  extends Omit<React.ComponentProps<typeof ark.pre>, "children"> {
+  highlightedLines: number[];
+  showLineNumbers: boolean;
+  tokens: ThemedToken[][];
+}
 
-  const {
-    code: contextCode,
-    language: contextLanguage,
-    isStreaming: contextIsStreaming,
-  } = useCodeBlock();
-
-  const code =
-    codeProp ?? (typeof children === "string" ? children : contextCode);
-  const language = languageProp ?? contextLanguage;
-  const isStreaming = isStreamingProp ?? contextIsStreaming;
-  const { tokens } = useCodeTokens(code, language, isStreaming);
+const CodeBlockPre = (props: CodeBlockPreProps) => {
+  const { className, highlightedLines, showLineNumbers, tokens, ...rest } =
+    props;
 
   return (
     <ark.pre
-      className={cn("min-w-max py-3 font-mono text-sm leading-6", className)}
+      className={cn(
+        "min-w-max py-3 font-mono text-sm leading-(--code-surface-line-height)",
+        className
+      )}
       data-slot="code-block-content"
+      dir="ltr"
       {...rest}
     >
       <code className="grid min-w-max" data-slot="code-block-code">
@@ -428,7 +514,7 @@ export const CodeBlockContent = (props: CodeBlockContentProps) => {
           return (
             <span
               className={cn(
-                "flex min-h-6",
+                "flex min-h-(--code-surface-line-height) py-0",
                 highlighted && "bg-primary/10",
                 highlighted && !showLineNumbers && "border-primary border-s-2"
               )}
@@ -440,7 +526,8 @@ export const CodeBlockContent = (props: CodeBlockContentProps) => {
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "sticky start-0 z-10 w-11 shrink-0 select-none bg-card pe-3 text-end text-muted-foreground",
+                    "sticky start-0 z-10 w-11 shrink-0 select-none pe-3 text-end text-muted-foreground",
+                    highlighted ? "bg-primary/10" : "bg-card",
                     highlighted && "border-primary border-s-2"
                   )}
                   data-slot="code-block-line-number"
@@ -468,6 +555,39 @@ export const CodeBlockContent = (props: CodeBlockContentProps) => {
         })}
       </code>
     </ark.pre>
+  );
+};
+
+export const CodeBlockContent = (props: CodeBlockContentProps) => {
+  const {
+    children,
+    className,
+    code: codeProp,
+    highlightedLines = [],
+    isStreaming: isStreamingProp,
+    language: languageProp,
+    showLineNumbers = false,
+    ...rest
+  } = props;
+
+  const {
+    code: contextCode,
+    language: contextLanguage,
+    isStreaming: contextIsStreaming,
+  } = useCodeBlock();
+
+  const code =
+    codeProp ?? (typeof children === "string" ? children : contextCode);
+  const language = languageProp ?? contextLanguage;
+  const isStreaming = isStreamingProp ?? contextIsStreaming;
+  const preProps = { className, highlightedLines, showLineNumbers, ...rest };
+  const snapshot = useCodeTokens(code, language, isStreaming);
+  const tokens = getDisplayedTokens(code, language, snapshot);
+
+  return (
+    <ScrollArea className="flex-1">
+      <CodeBlockPre tokens={tokens} {...preProps} />
+    </ScrollArea>
   );
 };
 

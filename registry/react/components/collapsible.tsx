@@ -48,7 +48,7 @@ export const CollapsibleTrigger = (
       className={cn(
         "cursor-pointer touch-manipulation",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
-        "has-data-[slot=collapsible-indicator]:[button]:justify-between",
+        "not-data-[align=start]:has-data-[slot=collapsible-indicator]:[button]:justify-between",
         className
       )}
       data-slot="collapsible-trigger"
@@ -71,7 +71,7 @@ export const CollapsibleContent = (
         "overflow-hidden",
         "data-[state=open]:animate-expand",
         "data-[state=closed]:animate-collapse",
-        "motion-reduce:animate-none! motion-reduce:transition-none!"
+        "motion-reduce:animate-none motion-reduce:transition-none"
       )}
       data-slot="collapsible-content"
       {...rest}
@@ -96,7 +96,7 @@ export const CollapsibleIndicator = (
       data-slot="collapsible-indicator"
       {...rest}
     >
-      <ChevronDownIcon className="size-full shrink-0 transition-transform duration-200 motion-reduce:transition-none!" />
+      <ChevronDownIcon className="size-full shrink-0 transition-transform duration-200 motion-reduce:transition-none" />
     </ArkCollapsible.Indicator>
   );
 };

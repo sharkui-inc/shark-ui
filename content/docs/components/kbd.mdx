@@ -3,6 +3,8 @@ title: Kbd
 description: Styled representation of a single key.
 ---
 
+import manifest from "@/registry/manifest/kbd";
+
 <ComponentPreview componentName="kbd" />
 
 ## Installation
@@ -28,9 +30,7 @@ npx shadcn@latest add @shark/kbd
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

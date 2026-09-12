@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/select#api-reference
 ---
 
+import manifest from "@/registry/manifest/select";
+
 <ComponentPreview componentName="select" />
 
 ## Installation
@@ -33,9 +35,7 @@ npx shadcn@latest add @shark/select
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -141,6 +141,10 @@ Control trigger appearance with the `variant` prop on SelectTrigger.
 <ComponentPreview componentName="select" fileName="example-invalid" />
 
 ## Examples
+
+### With Description
+
+<ComponentPreview componentName="select" fileName="example-with-description" />
 
 ### Multiple
 

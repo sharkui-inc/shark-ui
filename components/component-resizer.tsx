@@ -17,6 +17,10 @@ import {
   ResizablePanel,
   ResizableResizeTrigger,
 } from "@/registry/react/components/resizable";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@/registry/react/components/toggle-group";
 
 interface ComponentResizerProps extends React.ComponentProps<"figure"> {
   /**
@@ -56,34 +60,46 @@ export const ComponentResizer = (props: ComponentResizerProps) => {
         <div className="font-medium text-sm">{title}</div>
 
         <div className="flex items-center gap-2">
-          <ButtonGroup>
-            <Button
+          <ToggleGroup
+            deselectable={false}
+            multiple={false}
+            onValueChange={({ value }) => {
+              const next = value[0] as MediaQuery | undefined;
+
+              if (next) {
+                setMediaQuery(next);
+              }
+            }}
+            size="sm"
+            value={[mediaQuery]}
+            variant="outline"
+          >
+            <ToggleGroupItem
               aria-label="Desktop"
-              onClick={() => setMediaQuery("desktop")}
-              size="icon-sm"
-              variant="outline"
+              className="size-7 px-0"
+              value="desktop"
             >
               <ComputerIcon aria-hidden />
-            </Button>
+            </ToggleGroupItem>
 
-            <Button
+            <ToggleGroupItem
               aria-label="Tablet"
-              onClick={() => setMediaQuery("tablet")}
-              size="icon-sm"
-              variant="outline"
+              className="size-7 px-0"
+              value="tablet"
             >
               <TabletIcon aria-hidden />
-            </Button>
+            </ToggleGroupItem>
 
-            <Button
+            <ToggleGroupItem
               aria-label="Phone"
-              onClick={() => setMediaQuery("mobile")}
-              size="icon-sm"
-              variant="outline"
+              className="size-7 px-0"
+              value="mobile"
             >
               <PhoneIcon aria-hidden />
-            </Button>
+            </ToggleGroupItem>
+          </ToggleGroup>
 
+          <ButtonGroup>
             <Button
               aria-label="Fullscreen"
               asChild

@@ -1,126 +1,21 @@
-import Link from "next/link";
-import type React from "react";
-import { SITE_CONFIG } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { IconTile } from "@/registry/react/components/icon-tile";
-import { SharkIcon } from "../icons/shark";
 
-const DOCS_LINKS = [
-  { href: "/docs/components", label: "Components" },
-  { href: "/themes", label: "Theming" },
-  { href: "/docs/installation", label: "Installation" },
-  { href: "/docs", label: "Get Started" },
-] as const;
-
-const PROJECTS_LINKS = [{ href: "/blocks", label: "Blocks" }] as const;
-
-const COMMUNITY_LINKS = [
-  { href: SITE_CONFIG.repoUrl, label: "GitHub" },
-  {
-    href: `https://x.com/${SITE_CONFIG.creator.replace("@", "")}`,
-    label: "Twitter",
-  },
-] as const;
-
-interface FooterProps extends React.ComponentProps<"footer"> {}
-
-export const Footer = (props: FooterProps) => {
+export const Footer = (props: React.ComponentProps<"footer">) => {
   const { className, ...rest } = props;
 
   return (
-    <footer
-      className={cn(
-        "relative mt-32 border-t bg-linear-to-t from-muted to-muted/10",
-        className
-      )}
-      {...rest}
-    >
-      <div className="absolute inset-s-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
-        <IconTile
-          aria-hidden="true"
-          className="size-12 rounded-xl border-transparent shadow-none"
-          variant="primary"
+    <footer className={cn("container py-8 sm:py-10", className)} {...rest}>
+      <p className="text-center text-muted-foreground text-sm">
+        &copy; {new Date().getFullYear()} Built by{" "}
+        <a
+          className="underline-offset-2 outline-none hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline"
+          href="https://vini.one"
+          rel="noopener noreferrer"
+          target="_blank"
         >
-          <SharkIcon className="size-8 text-primary-foreground" />
-        </IconTile>
-      </div>
-
-      <div className="container pt-24 pb-8">
-        <div className="flex flex-col-reverse items-center gap-8 sm:flex-row sm:items-end sm:justify-between">
-          <div className="flex flex-col gap-2">
-            <p className="text-muted-foreground text-sm">
-              <SharkIcon className="inline-flex h-lh w-4 -translate-y-0.5" />{" "}
-              Created by{" "}
-              <a
-                className="underline-offset-2 outline-none hover:text-primary hover:underline focus-visible:text-primary focus-visible:underline"
-                href="https://vini.one"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Vinicius Vicentini
-              </a>
-            </p>
-          </div>
-          <nav
-            aria-label="Footer navigation"
-            className="flex flex-wrap gap-x-12 gap-y-6 sm:gap-x-16"
-          >
-            <div className="flex flex-col gap-2">
-              <span className="font-medium text-foreground text-sm">
-                Documentation
-              </span>
-              <ul className="flex flex-col gap-1.5">
-                {DOCS_LINKS.map(({ label, href }) => (
-                  <li key={href}>
-                    <Link
-                      className="text-muted-foreground text-sm outline-none hover:text-foreground focus-visible:text-foreground"
-                      href={href}
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex flex-col gap-2">
-              <span className="font-medium text-foreground text-sm">
-                Projects
-              </span>
-              <ul className="flex flex-col gap-1.5">
-                {PROJECTS_LINKS.map(({ label, href }) => (
-                  <li key={href}>
-                    <Link
-                      className="text-muted-foreground text-sm outline-none hover:text-foreground focus-visible:text-foreground"
-                      href={href}
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex flex-col gap-2">
-              <span className="font-medium text-foreground text-sm">
-                Community
-              </span>
-              <ul className="flex flex-col gap-1.5">
-                {COMMUNITY_LINKS.map(({ label, href }) => (
-                  <li key={href}>
-                    <a
-                      className="text-muted-foreground text-sm outline-none hover:text-foreground focus-visible:text-foreground"
-                      href={href}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </div>
+          Vinicius Vicentini
+        </a>
+      </p>
     </footer>
   );
 };

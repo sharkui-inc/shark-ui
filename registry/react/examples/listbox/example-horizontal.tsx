@@ -18,7 +18,7 @@ const Example = () => (
       <ListboxContent className="overflow-x-auto">
         {collection.items.map((item) => (
           <ListboxItem
-            className="w-full flex-col items-start"
+            className="flex w-full flex-col items-start"
             item={item}
             key={item.title}
           >
@@ -27,7 +27,7 @@ const Example = () => (
               <ListboxItemText>{item.title}</ListboxItemText>
               <p className="text-muted-foreground text-xs">{item.artist}</p>
             </div>
-            <ListboxItemIndicator className="absolute top-4 right-4 shrink-0 rounded-sm bg-background [&_svg]:text-foreground!" />
+            <ListboxItemIndicator className="absolute top-4 right-4 shrink-0 rounded-sm bg-background [&_svg]:text-foreground" />
           </ListboxItem>
         ))}
       </ListboxContent>

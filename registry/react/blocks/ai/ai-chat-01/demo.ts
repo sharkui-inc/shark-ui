@@ -1,4 +1,4 @@
-import { createChatSimulator } from "@/registry/react/lib/chat-simulator";
+import { createChat } from "@/registry/react/lib/create-chat";
 
 export interface DemoAttachment {
   description: string;
@@ -179,7 +179,7 @@ export const MESSAGE_EXTRAS: Record<string, DemoMessageExtras> = {
   },
 };
 
-export const chat = createChatSimulator({ adapter: "ai-sdk" })
+export const chat = createChat({ adapter: "ai-sdk" })
   .user(USER_TURNS[0].text, { id: USER_TURNS[0].id })
   .assistant(
     "MessageScroller keeps the viewport pinned to the latest turn while tokens stream, so the thread does not jump. Keep the composer outside the scrollport and show MessageScrollerButton when the user scrolls up.",

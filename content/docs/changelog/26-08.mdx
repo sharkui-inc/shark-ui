@@ -1,0 +1,42 @@
+---
+title: August 2026
+description: AI Elements for chat and coding agents, Hotkeys, Table of Contents, and a Blocks catalog.
+date: 2026-08-24
+---
+
+## New AI Elements
+
+- **[Prompt Input](/docs/ai-elements/prompt-input)**: Chat composer with tool slots, attach, Enter to send, and stop while streaming.
+- **[Tool Result](/docs/ai-elements/tool-result)**: Collapsible tool row with title, meta, and status.
+- **[Reasoning](/docs/ai-elements/reasoning)**: Expandable thinking with duration and shimmer.
+- **[Code Block](/docs/ai-elements/code-block)**: Filename, copy, and line numbers for agent artifacts.
+- **[Diff](/docs/ai-elements/diff)**: Unified add, delete, and context hunks.
+- **[Plan](/docs/ai-elements/plan)**: Collapsible plan with nested, status-aware steps.
+- **[Terminal](/docs/ai-elements/terminal)**: Shell output with basic ANSI colors.
+- **[Approval Card](/docs/ai-elements/approval-card)**: Collect approvals or clarifications in agent workflows.
+- **[Context](/docs/ai-elements/context)**: Show context-window token usage, breakdown, and cost.
+- **[Model Selector](/docs/ai-elements/model-selector)**: Select a model or agent from a searchable list.
+- **[Queue](/docs/ai-elements/queue)**: Show queued and completed prompts.
+- **[Sources](/docs/ai-elements/sources)**: Attach citations and footnotes to assistant responses.
+- **[Suggestion](/docs/ai-elements/suggestion)**: Offer suggested prompts for empty and quick-start states.
+- **[Speech Input](/docs/ai-elements/speech-input)**: Capture speech and return the browser transcription.
+- **[Message Scroller](/docs/ai-elements/message-scroller)**: Ark Scroll Area transcript container with jump-to-start and jump-to-end.
+- **[Message](/docs/ai-elements/message)**: Conversation row with avatar, alignment, header, and footer.
+- **[Message Bubble](/docs/ai-elements/message-bubble)**: Message surface, variants, and reaction cluster.
+- **[Attachment](/docs/ai-elements/attachment)**: File and image cards with upload state and actions.
+- **[Marker](/docs/ai-elements/marker)**: System notes, date breaks, and labeled separators.
+
+Install the chat bundle with `npx shadcn@latest add @shark/chat` for the transcript, composer, tool result, and reasoning.
+
+## New utilities
+
+- **[Shimmer](/docs/utilities/shimmer)**: Text shimmer for live status such as thinking or uploading.
+- **[Hotkeys](/docs/utilities/hotkeys)**: Register shortcuts, sequences, and scopes with `useHotkey` / `useHotkeys`. Format them with `useFormatHotkey`. Read the registry back for a command palette. Ark UI marks this utility as preview.
+
+## New component
+
+- **[Table of Contents](/docs/components/toc)**: Tracks the active heading as the reader scrolls. Nested indent, a sliding indicator, Collapsible composition, and `useToc` / `TocRootProvider` for `activeIds` outside the tree. Ark UI marks this primitive as preview.
+
+## Blocks
+
+The **[Blocks](/blocks)** page has composed interfaces for Authentication, Dashboard, Sidebar, and AI. Copy the source or install a block from the registry.

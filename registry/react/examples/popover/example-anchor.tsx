@@ -16,7 +16,7 @@ const Example = () => (
           <Button variant="outline">Open</Button>
         </PopoverTrigger>
         <PopoverAnchor asChild>
-          <Input className="w-full" placeholder="john@doe.com" />
+          <Input placeholder="john@doe.com" />
         </PopoverAnchor>
         <PopoverContent className="w-56">
           <PopoverHeader

@@ -21,6 +21,7 @@ import {
   PopoverClose,
   PopoverContent,
   PopoverTitle,
+  PopoverTrigger,
 } from "@/registry/react/components/popover";
 import { Spinner } from "@/registry/react/components/spinner";
 
@@ -65,6 +66,21 @@ export const PromptInputBottom = (
   );
 };
 
+const getHasTextFromChildren = (children: React.ReactNode) => {
+  for (const child of Children.toArray(children)) {
+    if (isValidElement(child) && child.type === PromptInputTextarea) {
+      const { defaultValue, value } = child.props as {
+        defaultValue?: unknown;
+        value?: unknown;
+      };
+
+      return Boolean(String(value ?? defaultValue ?? "").trim());
+    }
+  }
+
+  return false;
+};
+
 export const PromptInput = (props: PromptInputProps) => {
   const {
     status = "ready",
@@ -75,7 +91,9 @@ export const PromptInput = (props: PromptInputProps) => {
     ...rest
   } = props;
 
-  const [hasText, setHasText] = useState(false);
+  const [hasText, setHasText] = useState(() =>
+    getHasTextFromChildren(children)
+  );
   const promptInputChildren = Children.toArray(children);
 
   const bottomChildren = promptInputChildren.filter(
@@ -138,7 +156,7 @@ export const PromptInputFooter = (
   return (
     <InputGroupAddon
       align="block-end"
-      className={cn("min-h-8 justify-between gap-0.5 pb-2", className)}
+      className={cn("h-auto min-h-8 justify-between gap-0.5 pb-2", className)}
       data-slot="prompt-input-footer"
       {...rest}
     />
@@ -172,7 +190,10 @@ export const PromptInputTextarea = (
 
   return (
     <InputGroupTextarea
-      className={cn("min-h-12 pt-2 pb-1 leading-6", className)}
+      className={cn(
+        "max-h-52 min-h-12 overflow-y-auto pt-2 pb-1 leading-6",
+        className
+      )}
       data-slot="prompt-input-textarea"
       defaultValue={defaultValue}
       onChange={(event) => {
@@ -226,14 +247,14 @@ export const PromptInputButton = (
   );
 };
 
-export const PromptInputActions = (
+export const PromptInputPopover = (
   props: React.ComponentProps<typeof Popover>
 ) => {
   const { modal = false, positioning, ...rest } = props;
 
   return (
     <Popover
-      data-slot="prompt-input-actions"
+      data-slot="prompt-input-popover"
       modal={modal}
       positioning={{ placement: "top-start", ...positioning }}
       {...rest}
@@ -241,7 +262,11 @@ export const PromptInputActions = (
   );
 };
 
-export const PromptInputActionsContent = (
+export const PromptInputPopoverTrigger = (
+  props: React.ComponentProps<typeof PopoverTrigger>
+) => <PopoverTrigger data-slot="prompt-input-popover-trigger" {...props} />;
+
+export const PromptInputPopoverContent = (
   props: React.ComponentProps<typeof PopoverContent>
 ) => {
   const { className, children, ...rest } = props;
@@ -249,7 +274,7 @@ export const PromptInputActionsContent = (
   return (
     <PopoverContent
       className={cn("w-56 gap-0", menuListVariants(), className)}
-      data-slot="prompt-input-actions-content"
+      data-slot="prompt-input-popover-content"
       {...rest}
     >
       <PopoverTitle className="sr-only">Add to prompt</PopoverTitle>
@@ -258,12 +283,14 @@ export const PromptInputActionsContent = (
   );
 };
 
-interface PromptInputActionProps extends React.ComponentProps<"button"> {
+interface PromptInputPopoverActionProps extends React.ComponentProps<"button"> {
   description?: React.ReactNode;
   icon?: React.ReactNode;
 }
 
-export const PromptInputAction = (props: PromptInputActionProps) => {
+export const PromptInputPopoverAction = (
+  props: PromptInputPopoverActionProps
+) => {
   const {
     className,
     children,
@@ -286,7 +313,7 @@ export const PromptInputAction = (props: PromptInputActionProps) => {
           "disabled:pointer-events-none disabled:opacity-50",
           className
         )}
-        data-slot="prompt-input-action"
+        data-slot="prompt-input-popover-action"
         type={type}
         {...rest}
       >
@@ -345,7 +372,7 @@ export const PromptInputSubmit = (
       aria-label={isStreaming ? "Stop generating" : "Send prompt"}
       className={cn("ms-auto rounded-full", className)}
       data-slot="prompt-input-submit"
-      disabled={isDisabled}
+      disabled={isDisabled ? true : undefined}
       onClick={(event) => {
         if (isStreaming) {
           event.preventDefault();

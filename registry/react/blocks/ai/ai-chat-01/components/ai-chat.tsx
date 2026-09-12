@@ -1,19 +1,36 @@
 "use client";
 
-import { useFilter, useListCollection } from "@ark-ui/react";
+import { createListCollection, useListCollection } from "@ark-ui/react";
 import type { UIMessage } from "ai";
 import {
   BotIcon,
+  BugIcon,
+  CodeXmlIcon,
   CopyIcon,
   FileTextIcon,
+  FolderIcon,
+  GitBranchIcon,
+  GlobeIcon,
+  HammerIcon,
+  ImagePlusIcon,
+  MonitorIcon,
   PaperclipIcon,
-  SearchIcon,
-  SquarePenIcon,
+  PlusIcon,
+  RefreshCwIcon,
+  ShieldAlertIcon,
   ThumbsDownIcon,
   ThumbsUpIcon,
   Trash2Icon,
 } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
+import {
+  type CSSProperties,
+  type ReactNode,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { SharkIcon } from "@/components/icons/shark";
 import { cn } from "@/lib/utils";
 import {
   ApprovalCard,
@@ -43,10 +60,9 @@ import {
   Context,
   ContextBody,
   ContextContent,
-  ContextFooter,
   ContextHeader,
+  ContextIcon,
   ContextMeter,
-  ContextTitle,
   ContextTrigger,
   ContextUsageRow,
 } from "@/registry/react/components/context";
@@ -58,16 +74,19 @@ import {
   DiffLine,
   DiffStats,
 } from "@/registry/react/components/diff";
-import {
-  FileUpload,
-  FileUploadTrigger,
-} from "@/registry/react/components/file-upload";
 import { IconTile } from "@/registry/react/components/icon-tile";
+import { Item, ItemTitle } from "@/registry/react/components/item";
 import {
   Marker,
   MarkerContent,
   MarkerIcon,
 } from "@/registry/react/components/marker";
+import {
+  Menu,
+  MenuContent,
+  MenuItem,
+  MenuTrigger,
+} from "@/registry/react/components/menu";
 import {
   Message,
   MessageAction,
@@ -87,31 +106,27 @@ import {
   MessageScrollerContent,
   MessageScrollerItem,
   MessageScrollerViewport,
+  useMessageScroller,
 } from "@/registry/react/components/message-scroller";
 import {
   ModelSelector,
   ModelSelectorContent,
-  ModelSelectorEmpty,
-  ModelSelectorGroup,
-  ModelSelectorInput,
   ModelSelectorItem,
-  ModelSelectorLabel,
   ModelSelectorList,
   ModelSelectorTrigger,
 } from "@/registry/react/components/model-selector";
 import {
   Plan,
-  PlanAction,
   PlanContent,
   PlanHeader,
   PlanItem,
   PlanItemContent,
   PlanItemDetailFile,
   PlanItemTrigger,
-  PlanTrigger,
 } from "@/registry/react/components/plan";
 import {
   PromptInput,
+  PromptInputBottom,
   PromptInputButton,
   PromptInputFooter,
   type PromptInputStatus,
@@ -136,6 +151,18 @@ import {
   ReasoningTrigger,
 } from "@/registry/react/components/reasoning";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/registry/react/components/select";
+import {
+  Sidebar,
+  SidebarInset,
+  SidebarProvider,
+} from "@/registry/react/components/sidebar";
+import {
   InlineCitation,
   Source,
   Sources,
@@ -144,18 +171,8 @@ import {
 } from "@/registry/react/components/sources";
 import {
   SpeechInput,
-  SpeechInputAccept,
-  SpeechInputClose,
-  SpeechInputContent,
-  SpeechInputStop,
-  SpeechInputTimer,
   SpeechInputTrigger,
-  SpeechInputWaveform,
 } from "@/registry/react/components/speech-input";
-import {
-  Suggestion,
-  Suggestions,
-} from "@/registry/react/components/suggestion";
 import {
   Terminal,
   TerminalContent,
@@ -170,7 +187,7 @@ import {
   ToolResultTitle,
   ToolResultTrigger,
 } from "@/registry/react/components/tool-result";
-import { useChatSimulator } from "@/registry/react/hooks/use-chat-simulator";
+import { useChatHelper } from "@/registry/react/hooks/use-chat-helper";
 import {
   CONTEXT_USAGE,
   chat,
@@ -178,15 +195,143 @@ import {
   getMessageText,
   MESSAGE_EXTRAS,
   MODEL_OPTIONS,
-  SUGGESTIONS,
   USER_TURNS,
 } from "../demo";
 
 interface AiChatProps {
+  assistantName?: string;
   className?: string;
+  headerAction?: ReactNode;
+  rightSidebar?: ReactNode;
+  showDemoArtifacts?: boolean;
+  welcomeTitle?: string;
 }
 
 const noop = () => undefined;
+
+const getCompactThreadTitle = (message: UIMessage) => {
+  const prompt = getMessageText(message).trim().replace(/\s+/g, " ");
+  const matchingTurn = USER_TURNS.find(
+    (turn) => turn.id === message.id || turn.text === prompt
+  );
+
+  if (matchingTurn) {
+    return matchingTurn.label;
+  }
+
+  if (!prompt) {
+    return "New chat";
+  }
+
+  const words = prompt.split(" ");
+  const title = words.slice(0, 6).join(" ");
+
+  return words.length > 6 ? `${title}…` : title;
+};
+
+const effortCollection = createListCollection({
+  items: [
+    { label: "Low", value: "low" },
+    { label: "Medium", value: "medium" },
+    { label: "High", value: "high" },
+    { label: "Extra high", value: "extra-high" },
+  ],
+});
+
+const accessCollection = createListCollection({
+  items: [
+    {
+      description: "Read, write, and run commands.",
+      label: "Full access",
+      value: "full",
+    },
+    {
+      description: "Request approval before taking action.",
+      label: "Ask first",
+      value: "ask",
+    },
+    {
+      description: "View files without making changes.",
+      label: "Read only",
+      value: "read",
+    },
+  ],
+});
+
+const promptActions = [
+  {
+    icon: <PaperclipIcon aria-hidden="true" />,
+    label: "Attach files and folders",
+    value: "files",
+  },
+  {
+    icon: <ImagePlusIcon aria-hidden="true" />,
+    label: "Add image or screenshot",
+    value: "screenshot",
+  },
+  {
+    icon: <GlobeIcon aria-hidden="true" />,
+    label: "Add web page",
+    value: "web-page",
+  },
+  {
+    icon: <FileTextIcon aria-hidden="true" />,
+    label: "Add project instructions",
+    value: "instructions",
+  },
+];
+
+const emptyStateSuggestions = [
+  {
+    icon: <CodeXmlIcon aria-hidden="true" className="size-4" />,
+    label: "Understand",
+    text: "Help me understand the structure of this project.",
+  },
+  {
+    icon: <HammerIcon aria-hidden="true" className="size-4" />,
+    label: "Build",
+    text: "Help me plan a new feature for this project.",
+  },
+  {
+    icon: <RefreshCwIcon aria-hidden="true" className="size-4" />,
+    label: "Review",
+    text: "Review this project and suggest the most valuable improvements.",
+  },
+  {
+    icon: <BugIcon aria-hidden="true" className="size-4" />,
+    label: "Fix",
+    text: "Help me diagnose and fix an issue in this project.",
+  },
+] as const;
+
+const FollowLatestMessage = ({
+  enabled,
+  messageCount,
+  streamedText,
+}: {
+  enabled: boolean;
+  messageCount: number;
+  streamedText: string;
+}) => {
+  const previousMessageCount = useRef(messageCount);
+  const scrollArea = useMessageScroller();
+
+  useLayoutEffect(() => {
+    const startedTurn = messageCount > previousMessageCount.current;
+    const isFirstStreamFrame = streamedText.length === 0;
+
+    if (
+      enabled &&
+      (startedTurn || isFirstStreamFrame || scrollArea.isAtBottom)
+    ) {
+      scrollArea.scrollToEdge({ behavior: "auto", edge: "bottom" });
+    }
+
+    previousMessageCount.current = messageCount;
+  }, [enabled, messageCount, scrollArea, streamedText]);
+
+  return null;
+};
 
 const toPromptStatus = (status: string): PromptInputStatus => {
   switch (status) {
@@ -202,47 +347,58 @@ const toPromptStatus = (status: string): PromptInputStatus => {
 };
 
 const EmptyConversation = ({
-  nextText,
   onSuggestion,
+  welcomeTitle,
 }: {
-  nextText: string;
   onSuggestion: (text: string) => void;
+  welcomeTitle: string;
 }) => (
-  <div className="flex min-h-full flex-col items-center justify-center px-6 py-10 text-center">
+  <div className="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-center px-4 py-10 text-center sm:px-6">
     <IconTile aria-hidden="true" size="lg">
-      <BotIcon aria-hidden="true" />
+      <SharkIcon aria-hidden="true" />
     </IconTile>
-    <h2 className="mt-6 font-semibold text-2xl tracking-tight">
-      Morning, shadcn!
+    <h2 className="mt-7 max-w-3xl text-balance font-medium text-2xl tracking-tight">
+      {welcomeTitle}
     </h2>
-    <p className="mt-2 max-w-sm text-balance text-muted-foreground text-sm">
-      What are we working on today? Press send to start a new conversation.
-    </p>
-    <Suggestions className="mt-8 max-w-lg">
-      {SUGGESTIONS.map((item) => (
-        <Suggestion
-          disabled={item.text !== nextText}
+
+    <div className="mt-8 flex w-full flex-nowrap justify-start gap-3 overflow-x-auto pb-1">
+      {emptyStateSuggestions.map((item) => (
+        <Item
+          asChild
+          className="h-auto min-h-14 min-w-40 flex-1 hover:bg-muted"
           key={item.label}
-          onClick={onSuggestion}
-          suggestion={item.text}
+          variant="outline"
         >
-          {item.label}
-        </Suggestion>
+          <button
+            className="w-full text-start font-sans"
+            onClick={() => onSuggestion(item.text)}
+            type="button"
+          >
+            <span className="flex min-w-0 items-center gap-2">
+              <span className="grid size-7 shrink-0 place-items-center text-primary">
+                {item.icon}
+              </span>
+              <ItemTitle className="line-clamp-2 text-start leading-4">
+                {item.label}
+              </ItemTitle>
+            </span>
+          </button>
+        </Item>
       ))}
-    </Suggestions>
+    </div>
   </div>
 );
 
 const AssistantActions = () => (
   <MessageFooter>
     <MessageActions>
-      <MessageAction tooltip="Copy">
+      <MessageAction>
         <CopyIcon aria-hidden="true" />
       </MessageAction>
-      <MessageAction tooltip="Good response">
+      <MessageAction>
         <ThumbsUpIcon aria-hidden="true" />
       </MessageAction>
-      <MessageAction tooltip="Bad response">
+      <MessageAction>
         <ThumbsDownIcon aria-hidden="true" />
       </MessageAction>
     </MessageActions>
@@ -327,24 +483,22 @@ const MessageExtras = ({ extras }: { extras: DemoMessageExtras }) => {
             <ApprovalCardTitle>{extras.approval}</ApprovalCardTitle>
           </ApprovalCardHeader>
           <ApprovalCardFooter>
-            <ApprovalCardReject type="button" variant="outline">
-              Reject
-            </ApprovalCardReject>
-            <ApprovalCardSubmit type="button">Approve</ApprovalCardSubmit>
+            <ApprovalCardReject variant="outline">Reject</ApprovalCardReject>
+            <ApprovalCardSubmit>Approve</ApprovalCardSubmit>
           </ApprovalCardFooter>
         </ApprovalCard>
       ) : null}
       {extras.plan ? (
         <Plan defaultOpen>
-          <PlanHeader title={extras.plan.title}>
-            <PlanAction>
-              <PlanTrigger />
-            </PlanAction>
-          </PlanHeader>
+          <PlanHeader title={extras.plan.title} />
           <PlanContent>
             {extras.plan.tasks.map((task) => (
-              <PlanItem key={task.title} status={task.status}>
-                <PlanItemTrigger status={task.status} title={task.title} />
+              <PlanItem
+                collapsible={Boolean(task.file)}
+                key={task.title}
+                status={task.status}
+              >
+                <PlanItemTrigger title={task.title} />
                 {task.file ? (
                   <PlanItemContent>
                     <PlanItemDetailFile>{task.file}</PlanItemDetailFile>
@@ -384,10 +538,14 @@ const MessageExtras = ({ extras }: { extras: DemoMessageExtras }) => {
 };
 
 const ChatMessageItem = ({
+  assistantName,
   extras,
+  isStreaming = false,
   message,
 }: {
+  assistantName: string;
   extras?: DemoMessageExtras;
+  isStreaming?: boolean;
   message: UIMessage;
 }) => {
   const isUser = message.role === "user";
@@ -407,12 +565,20 @@ const ChatMessageItem = ({
           </MessageAvatar>
         )}
         <MessageContent>
-          {isUser ? null : <MessageHeader>Shark Assistant</MessageHeader>}
+          {isUser ? null : <MessageHeader>{assistantName}</MessageHeader>}
+          {isUser || !isStreaming ? null : (
+            <Marker className="w-fit rounded-lg bg-muted px-3 py-2">
+              <MarkerIcon>
+                <BotIcon aria-hidden="true" />
+              </MarkerIcon>
+              <MarkerContent className="shimmer">Thinking</MarkerContent>
+            </Marker>
+          )}
           {extras ? <MessageExtras extras={extras} /> : null}
           {text ? (
             <MessageBubble
               align={isUser ? "end" : "start"}
-              variant={isUser ? "secondary" : "ghost"}
+              variant={isUser ? "default" : "outline"}
             >
               <MessageBubbleContent>
                 {text}
@@ -434,28 +600,32 @@ const ChatMessageItem = ({
 };
 
 const ChatSession = ({
+  assistantName,
   className,
-  onReset,
+  headerAction,
+  showDemoArtifacts,
+  welcomeTitle,
 }: {
+  assistantName: string;
   className?: string;
+  headerAction?: ReactNode;
   onReset: () => void;
+  showDemoArtifacts: boolean;
+  welcomeTitle: string;
 }) => {
   const [model, setModel] = useState(MODEL_OPTIONS[0].value);
-  const { contains } = useFilter({ sensitivity: "base" });
-  const { collection, filter } = useListCollection({
-    filter: contains,
-    groupBy: (item) => item.group,
+  const [effort, setEffort] = useState("medium");
+  const [access, setAccess] = useState("full");
+  const [prompt, setPrompt] = useState("");
+  const { collection } = useListCollection({
     initialItems: [...MODEL_OPTIONS],
   });
   const { canSendNext, messages, nextMessage, sendNext, status, stop } =
-    useChatSimulator({
+    useChatHelper({
       adapter: "ai-sdk",
       chat,
     });
-  const nextText = nextMessage ? getMessageText(nextMessage) : "";
   const promptStatus = toPromptStatus(status);
-  const selectedModel =
-    MODEL_OPTIONS.find((option) => option.value === model) ?? MODEL_OPTIONS[0];
   const messageIds = useMemo(
     () => new Set(messages.map((message) => message.id)),
     [messages]
@@ -466,45 +636,22 @@ const ChatSession = ({
   const usedTokens = Math.min(18_420 + messages.length * 640, 128_000);
   const isBusy = status === "submitted" || status === "streaming";
   const hasMessages = messages.length > 0;
+  const latestAssistantMessage = [...messages]
+    .reverse()
+    .find((message) => message.role === "assistant");
   const firstUserMessage = messages.find((message) => message.role === "user");
   const threadTitle = firstUserMessage
-    ? getMessageText(firstUserMessage)
+    ? getCompactThreadTitle(firstUserMessage)
     : "New Chat";
-
-  const handleSendNext = useCallback(() => {
-    sendNext()?.catch(noop);
-  }, [sendNext]);
-  const handleSuggestion = useCallback(
-    (text: string) => {
-      if (text === nextText) {
-        handleSendNext();
-      }
-    },
-    [handleSendNext, nextText]
-  );
-  const handleSubmit = useCallback(() => {
-    if (canSendNext) {
-      handleSendNext();
-    }
-  }, [canSendNext, handleSendNext]);
-  const handleInputValueChange = useCallback(
-    ({ inputValue }: { inputValue: string }) => {
-      filter(inputValue);
-    },
-    [filter]
-  );
-  const handleModelChange = useCallback(({ value }: { value: string[] }) => {
-    setModel(value[0] ?? "");
-  }, []);
+  const latestMessageText = getMessageText(messages.at(-1) ?? { parts: [] });
 
   return (
     <div
       className={cn("flex min-h-0 w-full flex-col bg-background", className)}
     >
       <header
-        aria-label="Chat"
         className={cn(
-          "flex h-12 shrink-0 items-center gap-3 px-4",
+          "flex h-12 shrink-0 items-center gap-3 ps-4",
           hasMessages && "border-b"
         )}
       >
@@ -513,71 +660,43 @@ const ChatSession = ({
             {threadTitle}
           </h2>
         ) : null}
-        <div className="ms-auto flex items-center gap-1">
-          <Context
-            costLabel="$0.042"
-            maxTokens={128_000}
-            usedTokens={usedTokens}
-          >
-            <ContextTrigger />
-            <ContextContent>
-              <ContextHeader>
-                <ContextTitle showCloseButton>Context Usage</ContextTitle>
-                <ContextMeter />
-              </ContextHeader>
-              <ContextBody>
-                {CONTEXT_USAGE.map((usage) => (
-                  <ContextUsageRow key={usage.title} {...usage} />
-                ))}
-              </ContextBody>
-              <ContextFooter />
-            </ContextContent>
-          </Context>
-          <Button
-            aria-label="New chat"
-            onClick={onReset}
-            size="icon-sm"
-            type="button"
-            variant="ghost"
-          >
-            <SquarePenIcon aria-hidden="true" />
-          </Button>
-        </div>
+        <div className="ms-auto">{headerAction}</div>
       </header>
 
       <MessageScroller className="min-h-0 flex-1">
         <MessageScrollerViewport aria-live="polite">
+          <FollowLatestMessage
+            enabled={isBusy}
+            messageCount={messages.length}
+            streamedText={latestMessageText}
+          />
           {messages.length === 0 ? (
             <EmptyConversation
-              nextText={nextText}
-              onSuggestion={handleSuggestion}
+              onSuggestion={setPrompt}
+              welcomeTitle={welcomeTitle}
             />
           ) : (
-            <MessageScrollerContent className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6">
-              <MessageScrollerItem>
-                <Marker variant="separator">
-                  <MarkerContent>Today</MarkerContent>
-                </Marker>
-              </MessageScrollerItem>
-              {isBusy ? (
+            <MessageScrollerContent className="w-full py-8">
+              <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 sm:px-6">
                 <MessageScrollerItem>
-                  <Marker>
-                    <MarkerIcon>
-                      <SearchIcon />
-                    </MarkerIcon>
-                    <MarkerContent className="shimmer">
-                      Reading the thread component
-                    </MarkerContent>
+                  <Marker variant="separator">
+                    <MarkerContent>Today</MarkerContent>
                   </Marker>
                 </MessageScrollerItem>
-              ) : null}
-              {messages.map((message) => (
-                <ChatMessageItem
-                  extras={MESSAGE_EXTRAS[message.id]}
-                  key={message.id}
-                  message={message}
-                />
-              ))}
+                {messages.map((message) => (
+                  <ChatMessageItem
+                    assistantName={assistantName}
+                    extras={
+                      showDemoArtifacts ? MESSAGE_EXTRAS[message.id] : undefined
+                    }
+                    isStreaming={
+                      isBusy && message.id === latestAssistantMessage?.id
+                    }
+                    key={message.id}
+                    message={message}
+                  />
+                ))}
+              </div>
             </MessageScrollerContent>
           )}
         </MessageScrollerViewport>
@@ -585,7 +704,7 @@ const ChatSession = ({
       </MessageScroller>
 
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-3 px-4 pt-2 pb-4 sm:px-6">
-        {hasMessages && queuedTurns.length > 0 ? (
+        {showDemoArtifacts && hasMessages && queuedTurns.length > 0 ? (
           <Queue>
             <QueueSection>
               <QueueSectionHeader
@@ -609,89 +728,190 @@ const ChatSession = ({
           </Queue>
         ) : null}
 
-        <div className="rounded-2xl bg-muted/50 p-0.5">
-          <FileUpload
-            accept="image/*,.pdf,.txt,.md"
-            className="gap-0"
-            maxFiles={4}
-          >
-            <PromptInput
-              className="rounded-xl border-0 bg-card shadow-xs"
-              onStop={stop}
-              onSubmit={handleSubmit}
-              status={promptStatus}
+        <PromptInput
+          className="w-full"
+          onStop={stop}
+          onSubmit={() => {
+            if (canSendNext) {
+              sendNext()?.catch(noop);
+              setPrompt("");
+            }
+          }}
+          status={promptStatus}
+        >
+          <PromptInputTextarea
+            aria-label="Message"
+            onChange={(event) => setPrompt(event.target.value)}
+            value={prompt}
+          />
+          <PromptInputFooter>
+            <PromptInputTools>
+              <Menu positioning={{ placement: "top-start" }}>
+                <MenuTrigger asChild>
+                  <PromptInputButton aria-label="Add to prompt" size="icon-sm">
+                    <PlusIcon aria-hidden="true" />
+                  </PromptInputButton>
+                </MenuTrigger>
+                <MenuContent className="w-52">
+                  {promptActions.map((action) => (
+                    <MenuItem key={action.value} value={action.value}>
+                      {action.icon}
+                      {action.label}
+                    </MenuItem>
+                  ))}
+                </MenuContent>
+              </Menu>
+              <Select
+                collection={accessCollection}
+                onValueChange={({ value }) => setAccess(value[0] ?? "")}
+                positioning={{ placement: "top-start" }}
+                value={[access]}
+              >
+                <SelectTrigger showTrigger={false} size="sm" variant="ghost">
+                  <ShieldAlertIcon aria-hidden="true" />
+                  <SelectValue placeholder="Full access" />
+                </SelectTrigger>
+                <SelectContent>
+                  {accessCollection.items.map((item) => (
+                    <SelectItem item={item} key={item.value}>
+                      <span className="flex min-w-0 flex-col gap-0.5">
+                        <span>{item.label}</span>
+                        <span className="text-muted-foreground text-xs">
+                          {item.description}
+                        </span>
+                      </span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </PromptInputTools>
+            <ModelSelector
+              collection={collection}
+              onValueChange={({ value }) => setModel(value[0] ?? "")}
+              value={[model]}
             >
-              <PromptInputTextarea
-                aria-label="Message"
-                placeholder="Ask the assistant to continue the demo..."
-                readOnly
-                rows={3}
-                value={nextText}
-              />
-              <PromptInputFooter>
-                <PromptInputTools>
-                  <FileUploadTrigger asChild>
-                    <PromptInputButton aria-label="Attach file" size="icon-xs">
-                      <PaperclipIcon aria-hidden="true" />
-                    </PromptInputButton>
-                  </FileUploadTrigger>
-                  <ModelSelector
-                    collection={collection}
-                    onInputValueChange={handleInputValueChange}
-                    onValueChange={handleModelChange}
-                    value={[model]}
-                  >
-                    <ModelSelectorTrigger size="xs" variant="ghost">
-                      {selectedModel.label}
-                    </ModelSelectorTrigger>
-                    <ModelSelectorContent>
-                      <ModelSelectorInput placeholder="Search models" />
-                      <ModelSelectorList>
-                        <ModelSelectorEmpty />
-                        {collection.group().map(([group, items]) => (
-                          <ModelSelectorGroup key={group}>
-                            <ModelSelectorLabel>{group}</ModelSelectorLabel>
-                            {items.map((item) => (
-                              <ModelSelectorItem item={item} key={item.value}>
-                                {item.label}
-                              </ModelSelectorItem>
-                            ))}
-                          </ModelSelectorGroup>
-                        ))}
-                      </ModelSelectorList>
-                    </ModelSelectorContent>
-                  </ModelSelector>
-                  <SpeechInput>
-                    <SpeechInputTrigger />
-                    <SpeechInputContent>
-                      <SpeechInputWaveform />
-                      <SpeechInputTimer />
-                      <SpeechInputStop />
-                      <SpeechInputClose />
-                      <SpeechInputAccept />
-                    </SpeechInputContent>
-                  </SpeechInput>
-                </PromptInputTools>
-                <PromptInputSubmit disabled={!(canSendNext || isBusy)} />
-              </PromptInputFooter>
-            </PromptInput>
-          </FileUpload>
-        </div>
-        <p className="text-center text-muted-foreground text-xs">
-          Demo is read-only. Press send to send messages.
-        </p>
+              <ModelSelectorTrigger size="sm" variant="ghost" />
+              <ModelSelectorContent>
+                <ModelSelectorList>
+                  {collection.items.map((item) => (
+                    <ModelSelectorItem item={item} key={item.value}>
+                      {item.label}
+                    </ModelSelectorItem>
+                  ))}
+                </ModelSelectorList>
+              </ModelSelectorContent>
+            </ModelSelector>
+            <Select
+              collection={effortCollection}
+              onValueChange={({ value }) => setEffort(value[0] ?? "")}
+              positioning={{ placement: "top" }}
+              value={[effort]}
+            >
+              <SelectTrigger showTrigger={false} size="sm" variant="ghost">
+                <SelectValue placeholder="Medium" />
+              </SelectTrigger>
+              <SelectContent>
+                {effortCollection.items.map((item) => (
+                  <SelectItem item={item} key={item.value}>
+                    {item.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <SpeechInput>
+              <SpeechInputTrigger />
+            </SpeechInput>
+            <PromptInputSubmit className="ms-2" size="icon-sm" />
+          </PromptInputFooter>
+          <PromptInputBottom>
+            <Button
+              className="text-muted-foreground hover:text-foreground"
+              size="sm"
+              variant="ghost"
+            >
+              <FolderIcon aria-hidden="true" className="size-4" />
+              shark-ui
+            </Button>
+            <Button
+              className="text-muted-foreground hover:text-foreground"
+              size="sm"
+              variant="ghost"
+            >
+              <MonitorIcon aria-hidden="true" className="size-4" />
+              Local
+            </Button>
+            <Button
+              className="text-muted-foreground hover:text-foreground"
+              size="sm"
+              variant="ghost"
+            >
+              <GitBranchIcon aria-hidden="true" className="size-4" />
+              main
+            </Button>
+            <div className="ms-auto">
+              <Context
+                maxTokens={128_000}
+                positioning={{ placement: "top-end" }}
+                usedTokens={usedTokens}
+              >
+                <ContextTrigger aria-label="Context usage" size="icon-sm">
+                  <ContextIcon />
+                </ContextTrigger>
+                <ContextContent>
+                  <ContextHeader>
+                    <ContextMeter />
+                  </ContextHeader>
+                  <ContextBody>
+                    {CONTEXT_USAGE.map((usage) => (
+                      <ContextUsageRow key={usage.title} {...usage} />
+                    ))}
+                  </ContextBody>
+                </ContextContent>
+              </Context>
+            </div>
+          </PromptInputBottom>
+        </PromptInput>
       </div>
     </div>
   );
 };
 
-export const AiChat = ({ className }: AiChatProps) => {
+export const AiChat = ({
+  assistantName = "Shark Assistant",
+  className,
+  headerAction,
+  rightSidebar,
+  showDemoArtifacts = true,
+  welcomeTitle = "What should we build in shark-ui?",
+}: AiChatProps) => {
   const [session, setSession] = useState(0);
-  const handleReset = useCallback(() => {
-    setSession((current) => current + 1);
-  }, []);
+
+  const sessionContent = (
+    <ChatSession
+      assistantName={assistantName}
+      className={className}
+      headerAction={headerAction}
+      key={session}
+      onReset={() => setSession((current) => current + 1)}
+      showDemoArtifacts={showDemoArtifacts}
+      welcomeTitle={welcomeTitle}
+    />
+  );
+
+  if (!rightSidebar) {
+    return sessionContent;
+  }
 
   return (
-    <ChatSession className={className} key={session} onReset={handleReset} />
+    <SidebarProvider
+      className="h-full min-h-0"
+      defaultOpen={false}
+      style={{ "--sidebar-width": "20rem" } as CSSProperties}
+    >
+      <SidebarInset className="min-w-0">{sessionContent}</SidebarInset>
+      <Sidebar collapsible="offcanvas" placement="right">
+        {rightSidebar}
+      </Sidebar>
+    </SidebarProvider>
   );
 };

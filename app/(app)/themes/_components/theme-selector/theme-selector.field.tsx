@@ -1,10 +1,9 @@
 "use client";
 
-import { Field, FieldLabel } from "@/registry/react/components/field";
-import {
-  NativeSelect,
-  NativeSelectOption,
-} from "@/registry/react/components/native-select";
+import type { Select as ArkSelect } from "@ark-ui/react/select";
+import type React from "react";
+import type { ThemeLockKey } from "@/lib/theme/config";
+import { Field } from "@/registry/react/components/field";
 import {
   Select,
   SelectContent,
@@ -12,80 +11,54 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
-import { useIsMobile } from "@/registry/react/hooks/use-is-mobile";
+import { ThemeSelectorHeading } from "./theme-selector.heading";
 
-interface ThemeSelectorFieldProps<T extends { label: string; value: string }> {
-  collection: { items: T[] };
+interface ThemeSelectorFieldProps {
+  description?: string;
   label: string;
-  onValueChange: (value: string) => void;
+  lockKey?: ThemeLockKey;
   placeholder?: string;
-  renderItem: (item: T) => React.ReactNode;
+  renderItem: (item: ArkSelect.CollectionItem) => React.ReactNode;
   trigger?: React.ReactNode;
-  value: string;
 }
 
-export const ThemeSelectorField = <T extends { label: string; value: string }>(
-  props: ThemeSelectorFieldProps<T>
-) => {
+export const ThemeSelectorField: ArkSelect.RootComponent<
+  ThemeSelectorFieldProps
+> = (props) => {
   const {
     collection,
+    description,
     label,
+    lockKey,
     onValueChange,
     placeholder,
     renderItem,
     trigger,
     value,
   } = props;
-  const isMobile = useIsMobile();
-
-  const handleNativeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    onValueChange(event.target.value);
-  };
-
-  const handleSelectChange = ({ value: next }: { value: string[] }) => {
-    const [selected] = next;
-    if (selected) {
-      onValueChange(selected);
-    }
-  };
-
-  if (isMobile) {
-    return (
-      <Field>
-        <FieldLabel>{label}</FieldLabel>
-        <NativeSelect onChange={handleNativeChange} value={value}>
-          {collection.items.map((item) => (
-            <NativeSelectOption key={item.value} value={item.value}>
-              {item.label}
-            </NativeSelectOption>
-          ))}
-        </NativeSelect>
-      </Field>
-    );
-  }
 
   return (
     <Field>
-      <FieldLabel>{label}</FieldLabel>
+      <ThemeSelectorHeading
+        description={description}
+        lockKey={lockKey}
+        title={label}
+      />
+
       <Select
         collection={collection}
-        onValueChange={handleSelectChange}
-        value={[value]}
+        onValueChange={onValueChange}
+        value={value}
       >
         <SelectTrigger className="w-full">
-          {trigger ? (
-            <div className="flex items-center gap-2">
-              {trigger}
-              <SelectValue placeholder={placeholder} />
-            </div>
-          ) : (
+          <span className="flex min-w-0 flex-1 items-center gap-2">
+            {trigger}
             <SelectValue placeholder={placeholder} />
-          )}
+          </span>
         </SelectTrigger>
-
         <SelectContent>
           {collection.items.map((item) => (
-            <SelectItem item={item.value} key={item.value}>
+            <SelectItem item={item} key={collection.getItemValue(item)}>
               {renderItem(item)}
             </SelectItem>
           ))}

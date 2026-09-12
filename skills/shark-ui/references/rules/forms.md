@@ -18,7 +18,7 @@
 
 ## Forms use FieldGroup + Field
 
-Always use `FieldGroup` + `Field` — never raw `div` with `space-y-*`:
+Always use `FieldGroup` + `Field`: never raw `div` with `space-y-*`:
 
 ```tsx
 <FieldGroup>
@@ -176,7 +176,7 @@ Combine with `Field` for labelled toggle groups:
 
 ## FieldSet + FieldLegend for grouping related fields
 
-Use `FieldSet` + `FieldLegend` for related checkboxes, radios, or switches — not `div` with a heading:
+Use `FieldSet` + `FieldLegend` for related checkboxes, radios, or switches: not `div` with a heading:
 
 ```tsx
 <FieldSet>
@@ -225,4 +225,3 @@ Works for all controls: `Input`, `Textarea`, `Select`, `Checkbox`, `RadioGroupIt
 - [React-Hook-Form](@/content/docs/forms/react-hook-form.mdx)
 - [TanStack Form](@/content/docs/forms/tanstack-form.mdx)
 - [Formisch](@/content/docs/forms/formisch.mdx)
-

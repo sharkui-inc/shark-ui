@@ -49,12 +49,7 @@ export const AppSidebar = () => (
             className="font-semibold text-foreground"
             size="lg"
           >
-            <IconTile
-              aria-hidden="true"
-              className="border-transparent bg-sidebar-primary text-sidebar-primary-foreground shadow-none"
-              size="sm"
-              variant="primary"
-            >
+            <IconTile aria-hidden="true" size="sm">
               <WavesIcon aria-hidden="true" className="size-4" />
             </IconTile>
             <span>Northstar</span>

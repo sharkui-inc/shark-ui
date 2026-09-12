@@ -27,12 +27,13 @@ Requires **Node.js 26+** (`engines` in `package.json`).
 | Command               | Description                                              |
 | --------------------- | -------------------------------------------------------- |
 | `pnpm dev`            | Start docs site (`next dev`)                             |
-| `pnpm build`          | `registry:build` then production Next.js build           |
+| `pnpm build`          | `registry:build` + `theme:build` then production Next.js build |
 | `pnpm typecheck`      | Production Next.js build (includes typecheck). Slow.     |
-| `pnpm test`           | Node test runner (`tsx --test`) for lib helpers          |
+| `pnpm test`           | Node test runner (`tsx --test`) for files in `test/`   |
 | `pnpm lint:check`     | Run lint (Ultracite/Biome)                               |
 | `pnpm lint:fix`       | Auto-fix lint issues                                     |
 | `pnpm registry:build` | Rebuild component registry JSON                          |
+| `pnpm theme:build`    | Generate `styles/themes.css` from `lib/theme/catalog.ts` |
 
 ## Before Submitting
 
@@ -41,14 +42,16 @@ Requires **Node.js 26+** (`engines` in `package.json`).
 - Run `pnpm typecheck` to ensure the project compiles.
 - Run `pnpm build` to verify the production build.
 - If you changed registry source or `registry/manifest`, run `pnpm registry:build` and commit `public/r` so GitHub Actions does not fail the drift check. Vercel regenerates JSON on deploy regardless.
+- If you changed `lib/theme/catalog.ts`, run `pnpm theme:build` and commit `styles/themes.css` so GitHub Actions does not fail the theme drift check. Vercel regenerates the CSS on deploy regardless.
 
 ## Project Structure
 
-- **`registry/react/components/`** — Component implementations
-- **`registry/manifest/`** — Component metadata (dependencies, etc.)
-- **`registry/react/examples/`** — Usage examples shown in docs
-- **`content/docs/`** — MDX documentation
-- **`public/r/`** — Built registry output (generated)
+- **`registry/react/components/`**: Component implementations
+- **`registry/manifest/`**: Component metadata (dependencies, etc.)
+- **`registry/react/examples/`**: Usage examples shown in docs
+- **`content/docs/`**: MDX documentation
+- **`public/r/`**: Built registry output (generated)
+- **`test/`**: Tests mirroring source paths (`lib/foo.ts` → `test/lib/foo.test.ts`)
 
 ## Component Guidelines
 

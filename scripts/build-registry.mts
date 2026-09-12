@@ -2,10 +2,8 @@ import { access, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { SITE_CONFIG } from "../config/site";
-import { getBlockRegistryArtifacts } from "../lib/blocks";
-import { validateUniqueCompositionNames } from "../lib/compositions";
+import { getRegistryArtifacts } from "../lib/composition-catalog";
 import type { RegistryItemType } from "../lib/registry";
-import { getTemplateRegistryArtifacts } from "../lib/templates";
 import { replaceRegistryImportsForCopy } from "../utils/formatter";
 
 type RegistryKind = "component" | "hook" | "lib";
@@ -87,7 +85,7 @@ const buildMetadata = async (
 
   if (!source?.code.trim()) {
     console.warn(
-      `[build-registry] ${itemName}: manifest type is "${manifest.type}" — skipping embedded`
+      `[build-registry] ${itemName}: manifest type is "${manifest.type}"; skipping embedded`
     );
     return base;
   }
@@ -96,7 +94,7 @@ const buildMetadata = async (
 
   if (manifest.type !== manifestType) {
     console.warn(
-      `[build-registry] ${itemName}: kind="${kind}" expects manifest type "${manifestType}" but got "${manifest.type}" — skipping embedded files.`
+      `[build-registry] ${itemName}: kind="${kind}" expects manifest type "${manifestType}" but got "${manifest.type}"; skipping embedded files.`
     );
     return base;
   }
@@ -200,14 +198,13 @@ const processStandaloneManifests = async (itemNames: string[]) => {
 
 const processCompositions = async () => {
   const [blocks, templates] = await Promise.all([
-    getBlockRegistryArtifacts(),
-    getTemplateRegistryArtifacts(),
+    getRegistryArtifacts("blocks"),
+    getRegistryArtifacts("templates"),
   ]);
   const groups = [
     { emoji: "🧱", items: blocks, label: "blocks" },
     { emoji: "🖥️", items: templates, label: "templates" },
   ] as const;
-  validateUniqueCompositionNames(groups.map(({ items }) => items));
 
   await Promise.all(
     groups.map(async ({ emoji, items, label }) => {

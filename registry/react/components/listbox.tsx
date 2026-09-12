@@ -1,5 +1,6 @@
 "use client";
 
+import { ark } from "@ark-ui/react/factory";
 import {
   Listbox as ArkListbox,
   useListboxContext,
@@ -11,8 +12,12 @@ import { cn } from "@/lib/utils";
 import { FieldLabel } from "@/registry/react/components/field";
 import { inputItemVariants } from "@/registry/react/components/input";
 import {
-  menuItemControlVariants,
   MenuShortcut,
+  menuEmptyVariants,
+  menuGroupLabelVariants,
+  menuItemControlVariants,
+  menuItemIconVariants,
+  menuItemIndicatorVariants,
 } from "@/registry/react/components/menu";
 
 export const useListbox = useListboxContext;
@@ -29,9 +34,6 @@ export const Listbox: ArkListbox.RootComponent = (props) => {
         className
       )}
       data-slot="listbox"
-      scrollToIndexFn={({ getElement }) =>
-        getElement()?.scrollIntoView({ block: "nearest" })
-      }
       {...rest}
     />
   );
@@ -59,14 +61,29 @@ export const ListboxContent = (
   return (
     <ArkListbox.Content
       className={cn(
-        "w-full",
-        "flex flex-col gap-1",
+        "flex min-h-0 w-full flex-col",
+        "overflow-y-auto",
         "outline-hidden",
-        "overflow-hidden",
         "data-[orientation=horizontal]:max-h-none data-[orientation=horizontal]:flex-row",
         className
       )}
       data-slot="listbox-content"
+      {...rest}
+    />
+  );
+};
+
+export const ListboxBody = (props: React.ComponentProps<typeof ark.div>) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn(
+        "flex min-w-0 flex-col",
+        "in-[[data-slot=listbox-content][data-orientation=horizontal]]:flex-row",
+        className
+      )}
+      data-slot="listbox-body"
       {...rest}
     />
   );
@@ -77,10 +94,14 @@ const listboxItemVariants = tv({
     "group/listbox-item",
     menuItemControlVariants(),
     inputItemVariants(),
+    "grid grid-cols-[1fr_auto] has-[>:first-child:not([data-slot=listbox-item-text])]:grid-cols-[auto_1fr_auto] has-[>svg]:grid-cols-[--spacing(3.5)_1fr_auto]",
+    "has-data-[slot=listbox-item-indicator]:**:data-[slot=listbox-item-text]:pe-8",
+    "gap-y-0.5",
     "cursor-pointer",
     "outline-hidden",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
-    "[&_svg:not([class*='size-'])]:size-3.5 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    menuItemIconVariants(),
+    "[&_svg:not([class*='text-'])]:text-muted-foreground",
   ],
   defaultVariants: {
     variant: "default",
@@ -97,7 +118,7 @@ const listboxItemVariants = tv({
         "text-destructive dark:text-destructive-foreground",
         "hover:bg-destructive/10 dark:hover:bg-destructive-foreground/10",
         "data-highlighted:bg-destructive/10 dark:data-highlighted:bg-destructive-foreground/10",
-        "**:[svg]:text-destructive! dark:**:[svg]:text-destructive-foreground!",
+        "**:[svg]:text-destructive dark:**:[svg]:text-destructive-foreground",
       ],
     },
   },
@@ -128,10 +149,9 @@ export const ListboxItemText = (
   return (
     <ArkListbox.ItemText
       className={cn(
-        "min-w-0",
-        "flex-1",
-        "text-ellipsis whitespace-nowrap",
-        "overflow-hidden",
+        "min-h-lh min-w-0",
+        "whitespace-nowrap",
+        "[svg~&]:col-start-2",
         className
       )}
       data-slot="listbox-item-text"
@@ -153,7 +173,7 @@ export const ListboxItemGroup = (props: ListboxItemGroupProps) => {
 
   return (
     <ArkListbox.ItemGroup
-      className={cn("flex flex-col gap-1", className)}
+      className={cn("flex flex-col", className)}
       data-slot="listbox-item-group"
       {...rest}
     >
@@ -170,10 +190,7 @@ export const ListboxItemGroupLabel = (
 
   return (
     <ArkListbox.ItemGroupLabel
-      className={cn(
-        "pointer-events-none px-[calc(--spacing(3)-1px)] py-1.5 font-medium text-muted-foreground text-xs",
-        className
-      )}
+      className={cn(menuGroupLabelVariants(), className)}
       data-slot="listbox-item-group-label"
       {...rest}
     />
@@ -194,6 +211,24 @@ export const ListboxValueText = (
   );
 };
 
+export const ListboxItemDescription = (
+  props: React.ComponentProps<typeof ark.span>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.span
+      className={cn(
+        "col-start-1 text-muted-foreground text-xs",
+        "[svg~&]:col-start-2",
+        className
+      )}
+      data-slot="listbox-item-description"
+      {...rest}
+    />
+  );
+};
+
 export const ListboxItemIndicator = (
   props: React.ComponentProps<typeof ArkListbox.ItemIndicator>
 ) => {
@@ -202,10 +237,9 @@ export const ListboxItemIndicator = (
   return (
     <ArkListbox.ItemIndicator
       className={cn(
-        "flex shrink-0 items-center justify-center",
-        "[&_svg]:text-primary!",
+        menuItemIndicatorVariants(),
         "zoom-in-95 fade-in-0 animate-in",
-        "motion-reduce:animate-none!",
+        "motion-reduce:animate-none",
         className
       )}
       data-slot="listbox-item-indicator"
@@ -223,11 +257,7 @@ export const ListboxEmpty = (
 
   return (
     <ArkListbox.Empty
-      className={cn(
-        "px-2 py-1.5",
-        "text-center text-muted-foreground text-sm",
-        className
-      )}
+      className={cn(menuEmptyVariants(), className)}
       data-slot="listbox-empty"
       {...rest}
     />
@@ -236,4 +266,14 @@ export const ListboxEmpty = (
 
 export const ListboxShortcut = (
   props: React.ComponentProps<typeof MenuShortcut>
-) => <MenuShortcut data-slot="listbox-shortcut" {...props} />;
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <MenuShortcut
+      className={cn("col-start-[-1] row-start-1", className)}
+      data-slot="listbox-shortcut"
+      {...rest}
+    />
+  );
+};

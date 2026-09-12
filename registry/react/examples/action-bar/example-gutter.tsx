@@ -40,7 +40,7 @@ const Example = () => {
       </div>
 
       <ActionBar
-        onOpenChange={setIsOpen}
+        onOpenChange={({ open }) => setIsOpen(open)}
         open={isOpen}
         positioning={{ gutter, placement: "bottom" }}
       >

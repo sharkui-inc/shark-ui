@@ -94,7 +94,6 @@ const UseAsyncListDemo = () => {
                     disabled={list.loading || list.sorting}
                     onClick={handleColumnSort}
                     size="sm"
-                    type="button"
                     variant="ghost"
                   >
                     {label}

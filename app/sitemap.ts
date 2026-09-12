@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
-import { getPublishedBlocks } from "@/lib/blocks";
+import {
+  getCategories,
+  getPublishedCompositions,
+} from "@/lib/composition-catalog";
 import { source } from "@/lib/fumadocs";
 import { absoluteUrl } from "@/lib/url";
-import { BLOCK_CATEGORIES } from "@/registry/react/blocks/_categories";
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -14,17 +16,19 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     { changeFrequency: "monthly", priority: 0.6, url: absoluteUrl("/themes") },
   ];
 
-  const blockCategories = BLOCK_CATEGORIES.map((category) => ({
+  const blockCategories = getCategories("blocks").map((category) => ({
     changeFrequency: "monthly" as const,
     priority: 0.6,
     url: absoluteUrl(`/blocks/${category.slug}`),
   }));
 
-  const blockDetails = (await getPublishedBlocks()).map((block) => ({
-    changeFrequency: "monthly" as const,
-    priority: 0.5,
-    url: absoluteUrl(`/blocks/${block.category}/${block.name}`),
-  }));
+  const blockDetails = (await getPublishedCompositions("blocks")).map(
+    (block) => ({
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+      url: absoluteUrl(`/blocks/${block.category}/${block.name}`),
+    })
+  );
 
   const docPages = source.getPages().map((page) => ({
     changeFrequency: "weekly" as const,

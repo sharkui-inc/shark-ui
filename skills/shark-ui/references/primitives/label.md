@@ -3,7 +3,7 @@
 ## When to use
 
 - Visible accessible labels for inputs and controls.
-- Form and settings UIs — prefer **`Field` / `FieldLabel`** (association is automatic; no **`id` / `htmlFor`**).
+- Form and settings UIs: prefer **`Field` / `FieldLabel`** (association is automatic; no **`id` / `htmlFor`**).
 
 ## Install
 

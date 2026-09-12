@@ -9,10 +9,14 @@ import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { inputItemVariants } from "@/registry/react/components/input";
 import {
+  menuEmptyVariants,
+  menuGroupLabelVariants,
   menuItemControlVariants,
+  menuItemIconVariants,
+  menuItemIndicatorVariants,
   menuListVariants,
+  menuSeparatorVariants,
 } from "@/registry/react/components/menu";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
 
 export const useSelect = useSelectContext;
@@ -26,9 +30,6 @@ export const Select: ArkSelect.RootComponent = (props) => {
     <ArkSelect.Root
       data-slot="select"
       lazyMount={lazyMount}
-      scrollToIndexFn={({ getElement }) =>
-        getElement()?.scrollIntoView({ block: "nearest" })
-      }
       unmountOnExit={unmountOnExit}
       {...rest}
     >
@@ -50,7 +51,7 @@ export const selectTriggerVariants = tv({
     "data-placeholder-shown:text-muted-foreground/64",
     "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
     "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-64",
-    "motion-reduce:transition-none!",
+    "motion-reduce:transition-none",
   ],
   defaultVariants: {
     size: "md",
@@ -149,7 +150,11 @@ export const SelectSeparator = (
 
   return (
     <Separator
-      className={cn("pointer-events-none -mx-1 my-1 h-px bg-border", className)}
+      className={cn(
+        "pointer-events-none -mx-1",
+        menuSeparatorVariants(),
+        className
+      )}
       data-slot="select-separator"
       {...rest}
     />
@@ -184,10 +189,10 @@ export const SelectContent = (
       <ArkSelect.Positioner data-slot="select-positioner">
         <ArkSelect.Content
           className={cn(
-            "z-50",
+            "z-[calc(50+var(--layer-index,0))]",
             "relative",
             "max-h-96 min-w-(--reference-width)",
-            "flex min-h-0 flex-col overflow-hidden p-0",
+            "overflow-y-auto",
             "bg-popover",
             "text-popover-foreground",
             "rounded-xl border shadow-lg/5",
@@ -201,17 +206,14 @@ export const SelectContent = (
             "data-[placement=left]:slide-in-from-end-2",
             "data-[placement=right]:slide-in-from-start-2",
             "data-[placement=top]:slide-in-from-bottom-2",
-            "motion-reduce:animate-none!",
+            "motion-reduce:animate-none",
+            menuListVariants(),
             className
           )}
           data-slot="select-content"
           {...rest}
         >
-          <ScrollArea className="min-h-0 flex-1" scrollFade>
-            <div className={menuListVariants()} data-slot="select-scroll">
-              {children}
-            </div>
-          </ScrollArea>
+          {children}
         </ArkSelect.Content>
       </ArkSelect.Positioner>
     </Portal>
@@ -245,10 +247,7 @@ export const SelectGroupLabel = (
 
   return (
     <ArkSelect.ItemGroupLabel
-      className={cn(
-        "px-2 py-1.5 font-medium text-muted-foreground text-xs",
-        className
-      )}
+      className={cn(menuGroupLabelVariants(), className)}
       data-slot="select-group-label"
       {...rest}
     />
@@ -265,31 +264,32 @@ export const SelectItem = (
       className={cn(
         menuItemControlVariants(),
         inputItemVariants(),
-        "pe-8",
+        menuItemIconVariants(),
         "cursor-default",
+        "pe-8",
         "outline-hidden",
         "in-[[data-slot=select-content]:has([data-slot=select-group-label])]:ps-4",
         "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0",
-        "[&_svg:not([class*='size-'])]:size-4 [&_svg]:text-muted-foreground",
+        "[&_svg:not([class*='text-'])]:text-muted-foreground",
         className
       )}
       data-slot="select-item"
       {...rest}
     >
       <ArkSelect.ItemText
-        className="flex w-full flex-1 items-center gap-2"
+        className="flex min-w-0 items-center gap-2"
         data-slot="select-item-text"
       >
         {children}
       </ArkSelect.ItemText>
 
-      <span className="absolute inset-e-2 flex size-4 items-center justify-center">
-        <ArkSelect.ItemIndicator data-slot="select-item-indicator">
-          <CheckIcon />
-        </ArkSelect.ItemIndicator>
-      </span>
+      <ArkSelect.ItemIndicator
+        className={menuItemIndicatorVariants()}
+        data-slot="select-item-indicator"
+      >
+        <CheckIcon />
+      </ArkSelect.ItemIndicator>
     </ArkSelect.Item>
   );
 };
@@ -308,7 +308,7 @@ export const SelectClearTrigger = (
         "opacity-64",
         "outline-none focus-visible:opacity-100",
         "hover:opacity-100",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="select-clear-trigger"
@@ -325,11 +325,7 @@ export const SelectEmpty = (props: React.ComponentProps<typeof ark.div>) => {
   if (empty) {
     return (
       <ark.div
-        className={cn(
-          "px-2 py-1.5",
-          "text-center text-muted-foreground text-sm",
-          className
-        )}
+        className={cn(menuEmptyVariants(), className)}
         role="presentation"
         {...rest}
       />

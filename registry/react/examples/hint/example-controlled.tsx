@@ -13,11 +13,9 @@ const Example = () => {
 
   return (
     <div className="flex w-full max-w-md flex-col items-center gap-6">
-      <Hint onOpenChange={setOpen} open={open}>
+      <Hint onOpenChange={({ open }) => setOpen(open)} open={open}>
         <HintTrigger asChild>
-          <Button type="button" variant="secondary">
-            Hover/Click to show hint
-          </Button>
+          <Button variant="secondary">Hover/Click to show hint</Button>
         </HintTrigger>
         <HintContent>Controlled by React state below.</HintContent>
       </Hint>

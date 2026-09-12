@@ -81,7 +81,7 @@ export const PopoverContent = (props: PopoverContentProps) => {
             "data-[placement=left]:slide-in-from-end-2",
             "data-[placement=right]:slide-in-from-start-2",
             "data-[placement=top]:slide-in-from-bottom-2",
-            "motion-reduce:animate-none!",
+            "motion-reduce:animate-none",
             className
           )}
           data-slot="popover-content"
@@ -200,7 +200,7 @@ export const PopoverFooter = (props: React.ComponentProps<typeof ark.div>) => {
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
         "px-(--space) py-4",
         "bg-muted/64",
-        "rounded-b-[calc(var(--radius-xl)-1px)] border-t",
+        "rounded-b-xl border-t",
         className
       )}
       data-slot="popover-footer"

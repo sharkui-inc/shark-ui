@@ -43,7 +43,7 @@ const Example = () => {
 
   return (
     <Listbox
-      className="w-full max-w-48"
+      className="max-w-48"
       collection={collection}
       onSelect={() => {
         setIsOpen(false);

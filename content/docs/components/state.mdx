@@ -3,6 +3,8 @@ title: State
 description: A composable layout for contextual screen states and next actions.
 ---
 
+import manifest from "@/registry/manifest/state";
+
 <ComponentPreview componentName="state" />
 
 ## Installation
@@ -28,9 +30,7 @@ npx shadcn@latest add @shark/state
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

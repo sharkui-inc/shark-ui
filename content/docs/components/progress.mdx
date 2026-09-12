@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/progress-linear#api-reference
 ---
 
+import manifest from "@/registry/manifest/progress";
+
 <ComponentPreview componentName="progress" />
 
 ## Installation
@@ -33,13 +35,11 @@ npx shadcn@latest add @shark/progress
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Add the following animations to your `globals.css`.</Step>
+<Step>Import the following rules into your CSS file:</Step>
 
-```css title="globals.css" showLineNumbers
+```css showLineNumbers
 @theme inline {
   --animate-indeterminate: indeterminate 1.5s ease-in-out infinite;
 

@@ -266,7 +266,6 @@ export const ComponentsList = (props: ComponentsListProps) => {
                 <Link
                   className={cn(
                     "flex",
-                    "transition-opacity hover:opacity-90",
                     "rounded-lg",
                     "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   )}

@@ -8,6 +8,7 @@ import {
   RocketIcon,
   SparklesIcon,
 } from "lucide-react";
+import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -40,14 +41,14 @@ const NavigationMenuDemo = () => (
                   </span>
                   {section.links.map((item) => (
                     <NavigationMenuLink
-                      className="items-start"
+                      className="h-auto items-start"
                       href={item.href}
                       key={item.href}
                     >
-                      <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground [&_svg]:size-4">
-                        <item.icon aria-hidden="true" className="size-4" />
-                      </span>
-                      <span className="flex flex-col gap-0.5">
+                      <IconTile aria-hidden="true" size="sm">
+                        <item.icon />
+                      </IconTile>
+                      <span className="flex flex-col gap-0.5 text-start">
                         <span className="font-medium">{item.title}</span>
                         <span className="text-muted-foreground text-xs">
                           {item.description}
@@ -69,20 +70,20 @@ const NavigationMenuDemo = () => (
             </span>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="flex min-w-48 flex-col gap-1 p-1" data-single="">
+            <div className="flex min-w-48 flex-col gap-1 p-1">
               <span className="px-3 py-2 font-medium text-muted-foreground text-xs">
                 Guides
               </span>
               {guideLinks.map((item) => (
                 <NavigationMenuLink
-                  className="items-start"
+                  className="h-auto items-start"
                   href={item.href}
                   key={item.href}
                 >
-                  <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground [&_svg]:size-4">
-                    <item.icon aria-hidden="true" className="size-4" />
-                  </span>
-                  <span className="flex flex-col gap-0.5">
+                  <IconTile aria-hidden="true" size="sm">
+                    <item.icon />
+                  </IconTile>
+                  <span className="flex flex-col gap-0.5 text-start">
                     <span className="font-medium">{item.title}</span>
                     <span className="text-muted-foreground text-xs">
                       {item.description}
@@ -95,10 +96,7 @@ const NavigationMenuDemo = () => (
         </NavigationMenuItem>
 
         <NavigationMenuItem value="docs">
-          <NavigationMenuLink
-            className="font-medium"
-            href="https://shark.vini.one/docs"
-          >
+          <NavigationMenuLink className="font-medium" href="/docs">
             Documentation
           </NavigationMenuLink>
         </NavigationMenuItem>

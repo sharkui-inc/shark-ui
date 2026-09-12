@@ -6,10 +6,10 @@ const Example = () => (
     <IconTile aria-hidden="true" fill size="lg">
       <GlobeIcon />
     </IconTile>
-    <IconTile aria-hidden="true" fill size="lg" variant="default">
+    <IconTile aria-hidden="true" fill size="lg" variant="secondary">
       <StarIcon />
     </IconTile>
-    <IconTile aria-hidden="true" fill size="lg" variant="frame">
+    <IconTile aria-hidden="true" fill size="lg" variant="outline">
       <CircleCheckIcon />
     </IconTile>
   </div>

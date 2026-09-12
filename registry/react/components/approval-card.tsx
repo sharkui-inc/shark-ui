@@ -146,7 +146,7 @@ export const ApprovalCardTitle = (
   return (
     <CardTitle
       className={cn(
-        "h-lh min-w-0 font-medium text-muted-foreground text-sm",
+        "h-lh min-w-0 font-medium font-sans text-muted-foreground text-sm",
         className
       )}
       data-slot="approval-card-title"
@@ -324,7 +324,6 @@ export const ApprovalCardReject = (props: ApprovalCardRejectProps) => {
           reject();
         }
       }}
-      type="button"
       variant={variant}
     >
       {children || "Reject"}

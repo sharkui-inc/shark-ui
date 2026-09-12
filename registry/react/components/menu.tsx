@@ -11,14 +11,12 @@ import { CheckIcon, ChevronRight } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const useMenu = useMenuContext;
 
 export const Menu = (props: React.ComponentProps<typeof ArkMenu.Root>) => {
   const {
     lazyMount = true,
-    onHighlightChange,
     positioning,
     unmountOnExit = true,
     ...rest
@@ -28,16 +26,6 @@ export const Menu = (props: React.ComponentProps<typeof ArkMenu.Root>) => {
     <ArkMenu.Root
       data-slot="menu"
       lazyMount={lazyMount}
-      onHighlightChange={(details) => {
-        onHighlightChange?.(details);
-        requestAnimationFrame(() => {
-          for (const item of document.querySelectorAll(
-            "[data-slot=menu-content] [data-highlighted], [data-slot=menu-sub-content] [data-highlighted]"
-          )) {
-            item.scrollIntoView({ block: "nearest" });
-          }
-        });
-      }}
       positioning={{
         placement: "bottom-end",
         ...positioning,
@@ -78,11 +66,40 @@ export const menuItemControlVariants = tv({
   ],
 });
 
+export const menuItemIconVariants = tv({
+  base: [
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0",
+    "[&_svg:not([class*='size-']):not([class*='h-'])]:h-lh",
+    "[&_svg:not([class*='size-']):not([class*='w-'])]:w-3.5",
+  ],
+});
+
+export const menuItemIndicatorVariants = tv({
+  base: [
+    "pointer-events-none",
+    "absolute inset-e-2 top-1.5",
+    "flex h-lh w-3.5 shrink-0 items-center justify-center",
+    "[&_svg]:text-primary",
+  ],
+});
+
+export const menuGroupLabelVariants = tv({
+  base: "pointer-events-none px-2 py-1.5 font-medium text-muted-foreground text-xs",
+});
+
+export const menuEmptyVariants = tv({
+  base: "px-2 py-1.5 text-center text-muted-foreground text-sm",
+});
+
+export const menuSeparatorVariants = tv({
+  base: "my-1 h-px bg-border",
+});
+
 export const menuContentVariants = tv({
   base: [
-    "z-[calc(50+var(--nested-layer-count,0))]",
+    "z-[calc(50+var(--layer-index,0))]",
     "max-h-(--available-height) not-[class*='w-']:min-w-32",
-    "flex min-h-0 flex-col overflow-hidden p-0",
+    "overflow-y-auto",
     "bg-popover",
     "text-popover-foreground",
     "rounded-xl border shadow-lg/5",
@@ -96,7 +113,14 @@ export const menuContentVariants = tv({
     "data-[placement=left]:slide-in-from-end-2",
     "data-[placement=right]:slide-in-from-start-2",
     "data-[placement=top]:slide-in-from-bottom-2",
-    "motion-reduce:animate-none!",
+    "has-data-[state=open]:animate-in",
+    "has-data-[state=open]:fade-in-0",
+    "has-data-[state=open]:zoom-in-[98%]",
+    "has-data-[placement=bottom]:slide-in-from-top-2",
+    "has-data-[placement=left]:slide-in-from-end-2",
+    "has-data-[placement=right]:slide-in-from-start-2",
+    "has-data-[placement=top]:slide-in-from-bottom-2",
+    "motion-reduce:animate-none",
   ],
 });
 
@@ -107,15 +131,11 @@ export const MenuContent = (props: MenuContentProps) => {
     <Portal>
       <MenuPositioner>
         <ArkMenu.Content
-          className={cn(menuContentVariants(), className)}
+          className={cn(menuContentVariants(), menuListVariants(), className)}
           data-slot="menu-content"
           {...rest}
         >
-          <ScrollArea className="min-h-0 flex-1" scrollFade tabIndex={-1}>
-            <div className={menuListVariants()} data-slot="menu-scroll">
-              {children}
-            </div>
-          </ScrollArea>
+          {children}
         </ArkMenu.Content>
       </MenuPositioner>
     </Portal>
@@ -149,7 +169,7 @@ export const MenuSeparator = (
 
   return (
     <ArkMenu.Separator
-      className={cn("my-1 h-px bg-border", className)}
+      className={cn(menuSeparatorVariants(), className)}
       data-slot="menu-separator"
       {...rest}
     />
@@ -164,7 +184,7 @@ export const menuItemVariants = tv({
     "outline-hidden",
     "group-data-[date=open]/trigger-item:bg-accent group-data-[date=open]/trigger-item:text-accent-foreground",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
-    "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    menuItemIconVariants(),
   ],
   defaultVariants: {
     variant: "default",
@@ -177,7 +197,7 @@ export const menuItemVariants = tv({
       destructive: [
         "text-destructive dark:text-destructive-foreground",
         "data-highlighted:bg-destructive/10 dark:data-highlighted:bg-destructive-foreground/10",
-        "**:[svg]:text-destructive! dark:**:[svg]:text-destructive-foreground!",
+        "**:[svg]:text-destructive dark:**:[svg]:text-destructive-foreground",
       ],
     },
   },
@@ -209,7 +229,7 @@ export const MenuQuickItem = (props: MenuItemProps) => {
       className={cn(
         menuItemVariants({ variant }),
         "flex-col gap-1",
-        "[&_svg:not([class*='size-'])]:size-4.5",
+        "[&_svg]:size-4.5",
         className
       )}
       {...rest}
@@ -231,14 +251,7 @@ export const MenuCheckboxItem = (
       )}
       {...rest}
     >
-      <ArkMenu.ItemIndicator
-        className={cn(
-          "absolute inset-e-2",
-          "size-3.5",
-          "flex items-center justify-center",
-          "pointer-events-none"
-        )}
-      >
+      <ArkMenu.ItemIndicator className={menuItemIndicatorVariants()}>
         <CheckIcon />
       </ArkMenu.ItemIndicator>
 
@@ -274,10 +287,7 @@ export const MenuGroupLabel = (
 
   return (
     <ArkMenu.ItemGroupLabel
-      className={cn(
-        "pointer-events-none px-2 py-1.5 font-medium text-muted-foreground text-xs",
-        className
-      )}
+      className={cn(menuGroupLabelVariants(), className)}
       data-slot="menu-group-label"
       {...rest}
     />
@@ -299,7 +309,7 @@ export const MenuRadioItem = (
       data-slot="menu-radio-item"
       {...rest}
     >
-      <ArkMenu.ItemIndicator className="pointer-events-none absolute inset-e-2 flex size-3.5 items-center justify-center">
+      <ArkMenu.ItemIndicator className={menuItemIndicatorVariants()}>
         <CheckIcon />
       </ArkMenu.ItemIndicator>
 
@@ -323,15 +333,11 @@ export const MenuSubContent = (
     <Portal>
       <MenuPositioner data-slot="menu-sub-positioner">
         <ArkMenu.Content
-          className={cn(menuContentVariants(), className)}
+          className={cn(menuContentVariants(), menuListVariants(), className)}
           data-slot="menu-sub-content"
           {...rest}
         >
-          <ScrollArea className="min-h-0 flex-1" scrollFade tabIndex={-1}>
-            <div className={menuListVariants()} data-slot="menu-sub-scroll">
-              {children}
-            </div>
-          </ScrollArea>
+          {children}
         </ArkMenu.Content>
       </MenuPositioner>
     </Portal>

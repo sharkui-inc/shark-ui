@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/rating-group#api-reference
 ---
 
+import manifest from "@/registry/manifest/rating";
+
 <ComponentPreview componentName="rating" />
 
 ## Installation
@@ -31,11 +33,9 @@ npx shadcn@latest add @shark/rating
 
 <Step>Install the dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css

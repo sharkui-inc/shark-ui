@@ -6,17 +6,17 @@ links:
   ark: https://ark-ui.com/docs/guides/forms#react-hook-form
 ---
 
-This guide will cover building forms using the [Field](/docs/components/field) component, adding schema validation with [Zod](https://zod.dev), handling errors, ensuring accessibility, and more.
+Wire Shark [Field](/docs/components/field) to React Hook Form, validate with [Zod](https://zod.dev), and put errors on `FieldError`.
 
 ## Demo
 
-We’ll build a form with a text input and textarea. When you submit, the form data is validated and any errors will be shown.
+A text input and a textarea. Submit runs the schema and shows errors on the fields.
 
 <Alert>
   <InfoIcon />
   <AlertTitle>Browser validation disabled</AlertTitle>
   <AlertDescription>
-    For the purposes of this demo, browser validation is disabled to illustrate schema validation. In production, keep native validation enabled when appropriate.
+    This demo turns off native browser validation so schema errors are visible. Keep native validation on in production.
   </AlertDescription>
 </Alert>
 
@@ -24,16 +24,16 @@ We’ll build a form with a text input and textarea. When you submit, the form d
 
 ## Approach
 
-This form uses React Hook Form for state and Zod for validation. We'll build forms using the `Field` component, which gives you complete flexibility over the markup and styling.
+React Hook Form holds state. Zod validates. `Field` wraps each control.
 
-- Uses React Hook Form's useForm hook for form state management.
-- Uses the `Controller` component for controlled inputs.
-- Uses the `Field` components for building accessible forms.
-- Uses client-side validation by passing your Zod schema into `resolver`.
+- `useForm` for state
+- `Controller` for each control
+- Shark `Field` for label, description, and error
+- `resolver` with your Zod schema
 
 ## Anatomy
 
-Typical structure: wrap each field with `Controller`, and the `Field` component.
+Each control sits in `Controller`, then `Field`.
 
 ```tsx showLineNumbers {7-18}
 <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -70,7 +70,7 @@ Define your form shape with a Zod schema.
 <Alert>
   <InfoIcon />
   <AlertDescription>
-    **Note:** React Hook Form supports other [Standard Schema](https://react-hook-form.com/get-started#SchemaValidation) libraries; Zod is used here for clarity.  
+    React Hook Form also works with other [Standard Schema](https://react-hook-form.com/get-started#SchemaValidation) libraries. These examples use Zod.
   </AlertDescription>
 </Alert>
 
@@ -125,21 +125,19 @@ export const BugReportForm = () => {
 
 ### Build
 
-Build the form using the `Controller` from React Hook Form and the Shark `Field`.
+`Controller` from React Hook Form plus Shark `Field`.
 
 <ComponentSource src="../examples/form/rhf/example-demo.tsx"  />
 
 ### Done
 
-That's it. You now have a fully accessible form with client-side validation.
-
-When you submit the form, the `onSubmit` function will be called with the validated form data. If the form is invalid, React Hook Form will display the errors on `field.state.error` for `FieldError`.
+Submit calls `onSubmit` with the parsed values. Invalid fields put `fieldState.error.message` on `FieldError`.
 
 ## Validation
 
 ### Client-side
 
-React Hook Form validates your form data using the Zod schema. Define a schema and pass it to the `resolver` option of the `useForm` hook.
+Pass the Zod schema to `resolver` on `useForm`.
 
 ```tsx showLineNumbers title="example-form.tsx" {5-8,12}
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -183,10 +181,7 @@ const form = useForm({
 
 ## Displaying Errors
 
-Display errors next to the field using `FieldError`. For styling and accessibility:
-
-- Add the `invalid` prop to the `Field` component.
-- Don't need to add the `invalid` prop to the form control such as `Input`, `Checkbox`, etc.
+Set `invalid` on `Field`. Skip it on `Input`, `Checkbox`, and the other controls.
 
 ```tsx showLineNumbers title="form.tsx" {5,8}
 <Controller
@@ -206,113 +201,113 @@ Display errors next to the field using `FieldError`. For styling and accessibili
 
 ### Input
 
-- Spread the field object onto the `Input` component.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Spread `field` onto `Input`.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-input" showBorders={false} autoHeight />
 
 ### Textarea
 
-- Spread the field object onto the `Textarea` component.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Spread `field` onto `Textarea`.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-textarea" showBorders={false} autoHeight />
 
 ### NativeSelect
 
-- Spread the field object onto the `NativeSelect` component.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Spread `field` onto `NativeSelect`.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-native-select" showBorders={false} autoHeight />
 
 ### Select
 
 - Wire `field.value` and `field.onChange` to `Select`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-select" showBorders={false} autoHeight />
 
 ### Checkbox
 
 - Wire `field.value` and `field.onChange` to `Checkbox`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
-- Remember to add `data-slot="checkbox-group"` to the `FieldGroup` component for proper styling and spacing.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
+- Put `data-slot="checkbox-group"` on `FieldGroup` so spacing matches.
 
 <ComponentPreview componentName="form/rhf" fileName="example-checkbox" showBorders={false} autoHeight />
 
 ### Radio group
 
 - Wire `field.value` and `field.onChange` to `RadioGroup`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-radio-group" showBorders={false} autoHeight />
 
 ### Switch
 
 - Wire `field.value` and `field.onChange` to `Switch`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-switch" showBorders={false} autoHeight />
 
 ### NumberInput
 
 - Wire `field.value` and `field.onChange` to `NumberInput`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-number-input" showBorders={false} autoHeight />
 
 ### Slider
 
 - Wire `field.value` and `field.onChange` to `Slider`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-slider" showBorders={false} autoHeight />
 
 ### Combobox
 
 - Wire `field.value` and `field.onChange` to `Combobox`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-combobox" showBorders={false} autoHeight />
 
 ### Autocomplete
 
 - Wire `field.value` and `field.onChange` to `Autocomplete`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-autocomplete" showBorders={false} autoHeight />
 
 ### Date Picker
 
 - Wire `field.value` and `field.onChange` to `DatePicker`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-date-picker" showBorders={false} autoHeight />
 
 ### Input OTP
 
 - Wire `field.value` and `field.onChange` to `InputOTP`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-input-otp" showBorders={false} autoHeight />
 
 ### Rating
 
 - Wire `field.value` and `field.onChange` to `Rating`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-rating" showBorders={false} autoHeight />
 
 ### File Upload
 
 - Wire `field.value` and `field.onChange` to `FileUpload`.
-- Add the `invalid` prop to the `Field` component and pass the error message to the `FieldError` component.
+- Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/rhf" fileName="example-file-upload" showBorders={false} autoHeight />
 
 ### Complex Forms
 
-Here is an example of a more complex form with multiple fields and validation.
+Several fields and one schema.
 
 <ComponentPreview componentName="form/rhf" fileName="example-complex" showBorders={false} autoHeight />
 
@@ -321,20 +316,20 @@ Here is an example of a more complex form with multiple fields and validation.
 Use `form.reset()` to reset the form to its default values.
 
 ```tsx showLineNumbers
-<Button type="button" variant="outline" onClick={() => form.reset()}>
+<Button variant="outline" onClick={() => form.reset()}>
   Reset
 </Button>
 ```
 
 ## Array Fields
 
-React Hook Form provides a `useFieldArray` hook for managing dynamic array fields. This is useful when you need to add or remove fields dynamically.
+`useFieldArray` adds and removes repeating fields.
 
 <ComponentPreview componentName="form/rhf" fileName="example-array-emails" showBorders={false} autoHeight />
 
 ### Using useFieldArray
 
-Use the `useFieldArray` hook to manage array fields. It provides `fields`, `append`, and `remove` methods.
+`useFieldArray` returns `fields`, `append`, and `remove`.
 
 ```tsx showLineNumbers title="form.tsx" {8-11}
 import { useFieldArray, useForm } from "react-hook-form";
@@ -367,7 +362,7 @@ Wrap your array fields in a `FieldSet` with a `FieldLegend` and `FieldDescriptio
 
 ### Controller Pattern for Array Items
 
-Map over the `fields` array and use `Controller` for each item. **Make sure to use `field.id` as the key**.
+Map `fields` and wrap each item in `Controller`. Use `field.id` as the key.
 
 ```tsx showLineNumbers title="form.tsx"
 {
@@ -400,11 +395,10 @@ Map over the `fields` array and use `Controller` for each item. **Make sure to u
 
 ### Adding Items
 
-Use the `append` method to add new items to the array.
+Call `append` to add an item.
 
 ```tsx showLineNumbers title="form.tsx"
 <Button
-  type="button"
   variant="outline"
   size="sm"
   onClick={() => append({ address: "" })}
@@ -416,14 +410,13 @@ Use the `append` method to add new items to the array.
 
 ### Removing Items
 
-Use the `remove` method to remove items from the array. Add the remove button conditionally.
+Call `remove(index)`. Show the remove button when there is more than one item.
 
 ```tsx showLineNumbers title="form.tsx"
 {
   fields.length > 1 && (
     <InputGroupAddon align="inline-end">
       <InputGroupButton
-        type="button"
         variant="ghost"
         size="icon-xs"
         onClick={() => remove(index)}
@@ -438,7 +431,7 @@ Use the `remove` method to remove items from the array. Add the remove button co
 
 ### Array Validation
 
-Use Zod's `array` method to validate array fields.
+Validate the list with `z.array()`, then `.min()` / `.max()`.
 
 ```tsx showLineNumbers title="form.tsx"
 const formSchema = z.object({

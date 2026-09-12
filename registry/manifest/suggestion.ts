@@ -2,7 +2,7 @@ import type { RegistryItemType } from "@/lib/registry";
 import { absoluteUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
-  dependencies: [],
+  dependencies: ["@ark-ui/react"],
   description: "Starter prompt chips for empty chat states.",
   name: "suggestion",
   registryDependencies: [absoluteUrl("/r/button.json")],

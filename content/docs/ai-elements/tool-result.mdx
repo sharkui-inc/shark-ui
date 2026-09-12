@@ -3,6 +3,8 @@ title: Tool Result
 description: Show a tool result with metadata and actions.
 ---
 
+import manifest from "@/registry/manifest/tool-result";
+
 <ComponentPreview componentName="tool-result" />
 
 ## Installation
@@ -30,11 +32,9 @@ npx shadcn@latest add @shark/tool-result
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
@@ -79,8 +79,8 @@ ToolResult
 │   ├── ToolResultMeta
 │   ├── ToolResultName
 │   └── ToolResultAction
-│       ├── ToolResultStatus (optional)
-│       └── CollapsibleIndicator (optional)
+│       ├── ToolResultStatus
+│       └── CollapsibleIndicator
 └── ToolResultContent
 ```
 

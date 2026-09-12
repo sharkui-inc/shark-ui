@@ -39,7 +39,7 @@ Use the `ratio` prop (width ÷ height). When docs expose CSS variables such as `
 
 - Forgetting `object-cover` (or similar) on media so the ratio box clips predictably.
 - Confusing `ratio` with height-in-pixels; it is a **numeric ratio**, not a length.
-- Nesting interactive controls only inside the ratio slot without reserving space—test overflow.
+- Nesting interactive controls only inside the ratio slot without reserving space: test overflow.
 
 ## Registry example files
 

@@ -48,7 +48,7 @@ export const DrawerProvider = (
           "pointer-events-none",
           "transition-opacity duration-300 ease-in",
           "data-[state=open]:opacity-(--indent-opacity)",
-          "motion-reduce:transition-none!"
+          "motion-reduce:transition-none"
         )}
         data-slot="drawer-indent-background"
       />
@@ -58,7 +58,7 @@ export const DrawerProvider = (
           "data-active:transform-[scale(calc(0.98+(0.02*var(--drawer-swipe-progress))))_translateY(calc(0.5rem*(1-var(--drawer-swipe-progress))))]",
           "transition-[border-radius,transform] duration-300 ease-in-out will-change-transform",
           "data-active:rounded-(--indent-radius)",
-          "motion-reduce:transition-none!",
+          "motion-reduce:transition-none",
           className
         )}
         data-slot="drawer-indent"
@@ -104,7 +104,7 @@ const drawerOverlayVariants = tv({
     "duration-200",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
-    "motion-reduce:animate-none!",
+    "motion-reduce:animate-none",
   ],
 });
 
@@ -171,7 +171,7 @@ export const DrawerPositioner = (props: DrawerPositionerProps) => {
   );
 };
 
-// ::after bleed — https://ark-ui.com/docs/components/drawer#preventing-overdrag-gaps
+// ::after bleed: https://ark-ui.com/docs/components/drawer#preventing-overdrag-gaps
 const drawerContentVariants = tv({
   base: [
     "[--space:--spacing(6)]",
@@ -201,7 +201,7 @@ const drawerContentVariants = tv({
     "data-nested-drawer-swiping:duration-0",
     "data-[swipe-direction=down]:origin-[center_bottom]",
     "data-[swipe-direction=up]:origin-[center_top]",
-    "motion-reduce:animate-none! motion-reduce:transition-none!",
+    "motion-reduce:animate-none motion-reduce:transition-none",
     "after:pointer-events-none after:absolute after:bg-inherit after:content-['']",
     "data-[swipe-direction=down]:rounded-t-2xl",
     "data-[swipe-direction=down]:-mb-[max(0,calc(var(--drawer-snap-point-offset-y,0)+clamp(0,1,var(--drawer-snap-point-offset-y,0)/1px)*var(--drawer-swipe-movement-y,0)))]",
@@ -235,7 +235,7 @@ const drawerContentVariants = tv({
       default: "",
       inset: [
         "sm:rounded-2xl sm:border",
-        "sm:**:data-[slot=drawer-footer]:rounded-b-[calc(var(--radius-2xl)-1px)]",
+        "sm:**:data-[slot=drawer-footer]:rounded-b-2xl",
       ],
     },
   },
@@ -345,7 +345,7 @@ export const DrawerGrabber = (props: DrawerGrabberProps) => {
   return (
     <ArkDrawer.Grabber
       className={cn(
-        "hidden shrink-0 cursor-grab touch-none select-none active:cursor-grabbing",
+        "hidden shrink-0 cursor-grab touch-none select-none group-data-dragging/drawer:cursor-grabbing",
         "group-data-[swipe-direction=down]/drawer:flex group-data-[swipe-direction=down]/drawer:w-full group-data-[swipe-direction=down]/drawer:items-center group-data-[swipe-direction=down]/drawer:justify-center group-data-[swipe-direction=down]/drawer:py-5",
         "group-data-[swipe-direction=up]/drawer:z-10 group-data-[swipe-direction=up]/drawer:order-last group-data-[swipe-direction=up]/drawer:flex group-data-[swipe-direction=up]/drawer:w-full group-data-[swipe-direction=up]/drawer:items-center group-data-[swipe-direction=up]/drawer:justify-center group-data-[swipe-direction=up]/drawer:py-5",
         "group-data-nested-drawer-open/drawer:hidden",
@@ -413,7 +413,7 @@ export const DrawerTitle = (
   return (
     <ArkDrawer.Title
       className={cn(
-        "text-center font-semibold text-lg leading-none",
+        "text-center font-semibold text-xl leading-none",
         className
       )}
       data-slot="drawer-title"
@@ -449,7 +449,7 @@ export const DrawerBody = (props: DrawerBodyProps) => {
   const { scrollFade = true, className, ...rest } = props;
 
   return (
-    <ScrollArea className="min-h-0 flex-1 touch-pan-y" scrollFade={scrollFade}>
+    <ScrollArea className="flex-1 touch-pan-y" scrollFade={scrollFade}>
       <ark.div
         className={cn(
           "p-(--space) text-center",

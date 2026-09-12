@@ -71,7 +71,7 @@ Import `Calendar*` parts from `@/components/ui/calendar` per docs.
 
 ### Key patterns
 
-`DatePicker` composes the Shark `Calendar`—mirror examples for range, time, presets, and custom format. `useDatePicker` exposes context for advanced composition.
+`DatePicker` composes the Shark `Calendar`: mirror examples for range, time, presets, and custom format. `useDatePicker` exposes context for advanced composition.
 
 ## Common pitfalls
 

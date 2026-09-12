@@ -42,7 +42,7 @@ import { Alert, AlertAction, AlertDescription, AlertTitle } from "@/components/u
 
 ### Key patterns
 
-Alert with semantic icon (do NOT use `aria-hidden` — icon conveys status):
+Alert with semantic icon (do NOT use `aria-hidden`: icon conveys status):
 
 ```tsx
 <Alert variant="info">

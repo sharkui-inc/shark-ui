@@ -59,7 +59,6 @@ const UseAsyncListDemo = () => {
             disabled={list.loading}
             onClick={handleLoadMore}
             size="sm"
-            type="button"
             variant="outline"
           >
             {!!list.loading && <Spinner />}

@@ -3,6 +3,8 @@ title: Plan
 description: Show an agent plan with item status and progress.
 ---
 
+import manifest from "@/registry/manifest/plan";
+
 <ComponentPreview componentName="plan" />
 
 ## Installation
@@ -28,6 +30,10 @@ npx shadcn@latest add @shark/plan
 
 <Step>This component depends on [Collapsible](/docs/components/collapsible), [Badge](/docs/components/badge), and [Spinner](/docs/components/spinner). Install them first if you haven't already.</Step>
 
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource title="components/ui/plan.tsx" src="/plan.tsx" />
@@ -45,15 +51,14 @@ npx shadcn@latest add @shark/plan
 ```text
 Plan
 ├── PlanHeader
-│   ├── PlanTitle
-│   └── PlanAction
-│       └── PlanTrigger
-└── PlanContent
-    └── PlanItem
-        ├── PlanItemTrigger
-        └── PlanItemContent
-            └── PlanItemDetail
-                └── PlanItemDetailFile
+│   └── PlanTitle
+├── PlanContent
+│   └── PlanItem
+│       ├── PlanItemTrigger
+│       └── PlanItemContent
+│           └── PlanItemDetail
+│               └── PlanItemDetailFile
+└── PlanProgress
 ```
 
 ## Usage
@@ -61,7 +66,6 @@ Plan
 ```tsx
 import {
   Plan,
-  PlanAction,
   PlanContent,
   PlanHeader,
   PlanItem,
@@ -69,20 +73,16 @@ import {
   PlanItemDetail,
   PlanItemDetailFile,
   PlanItemTrigger,
+  PlanProgress,
   PlanTitle,
-  PlanTrigger,
 } from "@/components/ui/plan";
 ```
 
 ```tsx
-<Plan completed={1} total={3}>
-  <PlanHeader title="Add email validation">
-    <PlanAction>
-      <PlanTrigger />
-    </PlanAction>
-  </PlanHeader>
+<Plan>
+  <PlanHeader title="Add email validation" />
   <PlanContent>
-    <PlanItem status="in-progress">
+    <PlanItem collapsible status="in-progress">
       <PlanItemTrigger title="Patch isValidEmail" />
       <PlanItemContent>
         <PlanItemDetail>
@@ -91,23 +91,20 @@ import {
       </PlanItemContent>
     </PlanItem>
   </PlanContent>
+  <PlanProgress completed={1} total={3} />
 </Plan>
 ```
 
 ## Title
 
-`PlanHeader` supports two title patterns:
+`PlanHeader` is the trigger for the whole plan. It supports two title patterns:
 
 ### Using props
 
 Pass the `title` prop directly to `PlanHeader`.
 
 ```tsx showLineNumbers
-<PlanHeader title="Add email validation">
-  <PlanAction>
-    <PlanTrigger />
-  </PlanAction>
-</PlanHeader>
+<PlanHeader title="Add email validation" />
 ```
 
 > This approach does not require the `PlanTitle` component.
@@ -119,9 +116,6 @@ Use `PlanTitle` as a child for more control.
 ```tsx showLineNumbers
 <PlanHeader>
   <PlanTitle>Add email validation</PlanTitle>
-  <PlanAction>
-    <PlanTrigger />
-  </PlanAction>
 </PlanHeader>
 ```
 
@@ -163,19 +157,16 @@ Control an individual item with the same props.
 
 ### Plan
 
-Root collapsible. Forwards [Collapsible](/docs/components/collapsible) props and can show overall progress.
+Root collapsible. Forwards [Collapsible](/docs/components/collapsible) props.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `defaultOpen` | `boolean` | `true` |
-| `completed` | `number` | `-` |
-| `total` | `number` | `-` |
 | `className` | `string` | `-` |
 
 ### PlanHeader
 
-Header area for the title and actions. Pass `title` to render `PlanTitle`. A
-string child is wrapped the same way.
+Clickable header that toggles the plan. Pass `title` to render `PlanTitle`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -193,24 +184,6 @@ Title text for the plan. Rendered automatically when `title` is set on
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
-### PlanAction
-
-Container for the collapse trigger. Aligns to the end.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `className` | `string` | `-` |
-| `asChild` | `boolean` | `false` |
-
-### PlanTrigger
-
-Toggles the plan. Default children are the collapsible indicator.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `className` | `string` | `-` |
-| `asChild` | `boolean` | `false` |
-
 ### PlanContent
 
 Holds nested plan items.
@@ -222,16 +195,17 @@ Holds nested plan items.
 
 ### PlanItem
 
-A collapsible unit of work with a status and optional details.
+A unit of work with a status. Set `collapsible` to reveal details.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `status` | `"pending" \| "in-progress" \| "completed" \| "error"` | `"pending"` |
+| `collapsible` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
 ### PlanItemTrigger
 
-Toggles the item and, by default, displays its status, title, and indicator.
+Displays status and title. Shows a chevron when the item is `collapsible`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -242,7 +216,7 @@ Toggles the item and, by default, displays its status, title, and indicator.
 
 ### PlanItemContent
 
-Contains the details revealed when the item is open.
+Contains the details revealed when a collapsible item is open.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -265,5 +239,17 @@ A compact file reference for use inside a plan item detail.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `variant` | `"default" \| "secondary" \| "outline" \| "success" \| "info" \| "warning" \| "destructive"` | `"outline"` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### PlanProgress
+
+Full-width footer with completed count and a progress track. Stays visible when
+the plan is collapsed.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `completed` | `number` | **required** |
+| `total` | `number` | **required** |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |

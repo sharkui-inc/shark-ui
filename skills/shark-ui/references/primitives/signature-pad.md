@@ -35,8 +35,8 @@ import { SignaturePad, useSignaturePad } from "@/components/ui/signature-pad"
 
 ## Common pitfalls
 
-- Expecting vector output—component works with raster canvas data; handle encoding yourself.
-- Missing fixed width/height on the canvas container—layout can collapse on flex parents.
+- Expecting vector output: component works with raster canvas data; handle encoding yourself.
+- Missing fixed width/height on the canvas container: layout can collapse on flex parents.
 - Forgetting `lucide-react` when examples import icons for controls.
 
 ## Registry example files

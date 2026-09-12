@@ -34,9 +34,9 @@ export const Diff = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground",
+        "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground shadow-xs/5",
         "flex flex-col",
-        "[--code-surface-header-height:--spacing(9)] [--code-surface-inline-padding:--spacing(3)]",
+        "[--code-surface-header-height:--spacing(9)] [--code-surface-inline-padding:--spacing(3)] [--code-surface-line-height:--spacing(6)]",
         className
       )}
       data-slot="diff"
@@ -152,8 +152,8 @@ export const DiffContent = (props: React.ComponentProps<typeof ark.div>) => {
       dir="ltr"
       {...rest}
     >
-      <ScrollArea className="min-h-0 w-full flex-1">
-        <div className="w-max min-w-full py-3 font-mono text-sm leading-6">
+      <ScrollArea className="flex-1">
+        <div className="w-max min-w-full py-3 font-mono text-sm leading-(--code-surface-line-height)">
           {children}
         </div>
       </ScrollArea>
@@ -162,7 +162,10 @@ export const DiffContent = (props: React.ComponentProps<typeof ark.div>) => {
 };
 
 const diffLineVariants = tv({
-  base: ["min-h-6 w-full min-w-max", "flex items-stretch"],
+  base: [
+    "min-h-(--code-surface-line-height) w-full min-w-max",
+    "flex items-stretch",
+  ],
   defaultVariants: {
     type: "context",
   },
@@ -240,7 +243,7 @@ export const DiffLine = (props: DiffLineProps) => {
       <code
         className={cn(
           "ps-(--code-surface-inline-padding) pe-(--code-surface-inline-padding)",
-          "whitespace-pre text-muted-foreground leading-6",
+          "whitespace-pre text-muted-foreground",
           (lineType === "add" || lineType === "delete") && "text-foreground"
         )}
         data-slot="diff-line-code"

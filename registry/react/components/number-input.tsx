@@ -54,7 +54,7 @@ export const NumberInputGroup = (
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "aria-invalid:border-destructive aria-invalid:ring-[3px] aria-invalid:ring-destructive/24",
         "dark:aria-invalid:border-destructive-foreground dark:aria-invalid:text-destructive-foreground dark:aria-invalid:ring-destructive-foreground/20",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="number-field-group"
@@ -78,7 +78,6 @@ export const NumberInputDecrement = (
         "text-foreground",
         "rounded-none rounded-s-[calc(var(--radius-lg)+1px)]",
         "cursor-pointer",
-        "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
         className
       )}
       data-slot="number-field-decrement"
@@ -106,7 +105,6 @@ export const NumberInputIncrement = (
         "text-foreground",
         "rounded-none rounded-e-[calc(var(--radius-lg)+1px)]",
         "cursor-pointer",
-        "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
         className
       )}
       data-slot="number-field-increment"

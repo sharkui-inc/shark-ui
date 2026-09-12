@@ -447,10 +447,11 @@ export const CalendarTableCell = (
           "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
           "data-unavailable:pointer-events-none data-unavailable:line-through data-unavailable:opacity-64",
-          "data-[view=day]:data-in-range:rounded-none data-[view=day]:data-in-range:not-[data-selected]:bg-primary/10",
-          "data-selected:bg-primary! data-selected:text-primary-foreground!",
-          "data-hover-range-start:rounded-l-lg! data-range-start:rounded-l-lg!",
-          "data-hover-range-end:rounded-r-lg! data-range-end:rounded-r-lg!",
+          "data-[view=day]:data-in-range:not-data-[hover-range-start]:not-data-[range-start]:not-data-[hover-range-end]:not-data-[range-end]:rounded-none",
+          "data-[view=day]:data-in-range:not-data-selected:bg-primary/10",
+          "data-selected:bg-primary data-selected:text-primary-foreground",
+          "data-hover-range-start:rounded-l-lg data-range-start:rounded-l-lg",
+          "data-hover-range-end:rounded-r-lg data-range-end:rounded-r-lg",
           "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
           className
         )}

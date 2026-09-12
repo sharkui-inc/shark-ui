@@ -21,12 +21,7 @@ const FocusTrapDemo = () => {
 
   return (
     <div className="flex w-full max-w-sm flex-col items-start gap-4">
-      <Button
-        onClick={startTrap}
-        ref={buttonRef}
-        type="button"
-        variant="outline"
-      >
+      <Button onClick={startTrap} ref={buttonRef} variant="outline">
         Start trap
       </Button>
       {!!trapped && (
@@ -38,16 +33,14 @@ const FocusTrapDemo = () => {
           <FieldGroup>
             <Field>
               <FieldLabel>First name</FieldLabel>
-              <Input placeholder="Alex" type="text" />
+              <Input placeholder="Alex" />
             </Field>
             <Field>
               <FieldLabel>Last name (autofocused)</FieldLabel>
               {/* Autofocus is intentional and only runs after activating the trap. */}
-              <Input autoFocus placeholder="Morgan" type="text" />
+              <Input autoFocus placeholder="Morgan" />
             </Field>
-            <Button onClick={endTrap} type="button">
-              End trap
-            </Button>
+            <Button onClick={endTrap}>End trap</Button>
           </FieldGroup>
         </FocusTrap>
       )}

@@ -8,7 +8,7 @@ import {
 import { ark } from "@ark-ui/react/factory";
 import { Portal } from "@ark-ui/react/portal";
 import { CheckIcon, Pipette } from "lucide-react";
-import React from "react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
 
@@ -43,29 +43,19 @@ export const ColorPicker = (props: ColorPickerProps) => {
     ...rest
   } = props;
 
-  const [internalValue, setInternalValue] = React.useState(defaultValue);
-
-  const isControlled = value !== undefined;
-
   return (
     <ArkColorPicker.Root
       className={cn("group/color-picker", "w-fit", "flex gap-2", className)}
       data-slot="color-picker"
-      defaultValue={internalValue ? parseColor(internalValue) : undefined}
+      defaultValue={defaultValue ? parseColor(defaultValue) : undefined}
       lazyMount={lazyMount}
-      onValueChange={(e) => {
-        if (isControlled) {
-          onValueChange?.(e);
-        } else {
-          setInternalValue(e.valueAsString);
-        }
-      }}
+      onValueChange={onValueChange}
       positioning={{
         placement: "top-start",
         ...positioning,
       }}
       unmountOnExit={unmountOnExit}
-      value={isControlled ? parseColor(value) : undefined}
+      value={value ? parseColor(value) : undefined}
       {...rest}
     >
       {children}
@@ -122,7 +112,7 @@ export const ColorPickerContent = (
         <ArkColorPicker.Content
           className={cn(
             "[--space:--spacing(3)]",
-            "z-50",
+            "z-[calc(50+var(--layer-index,0))]",
             "relative",
             "w-full min-w-56",
             "flex flex-col gap-4",
@@ -133,7 +123,7 @@ export const ColorPickerContent = (
             "origin-(--transform-origin)",
             "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
             "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
-            "motion-reduce:animate-none!",
+            "motion-reduce:animate-none",
             className
           )}
           data-slot="color-picker-content"
@@ -161,6 +151,7 @@ export const ColorPickerSlider = (
   props: React.ComponentProps<typeof ArkColorPicker.ChannelSlider>
 ) => {
   const { className, children, ...rest } = props;
+  const { dragging } = useColorPicker();
 
   return (
     <ArkColorPicker.ChannelSlider
@@ -196,7 +187,9 @@ export const ColorPickerSlider = (
           "-translate-1/2",
           "rounded-full border-[3px] border-white shadow-[0_0_0_1px_rgba(0,0,0,0.1),inset_0_0_0_1px_rgba(0,0,0,0.1)]",
           "outline-none ring-1 ring-border/64",
-          "origin-left data-[orientation=vertical]:origin-bottom"
+          "origin-left data-[orientation=vertical]:origin-bottom",
+          "cursor-grab",
+          dragging && "cursor-grabbing"
         )}
         data-slot="color-picker-channel-slider-thumb"
       />
@@ -255,7 +248,7 @@ export const ColorPickerSwatchTrigger = (
         "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "data-[state=checked]:shadow-sm/5 data-[state=checked]:ring-(--color) data-[state=checked]:ring-2",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="color-picker-swatch-trigger"
@@ -279,7 +272,7 @@ export const ColorPickerSwatch = (
         "transition-transform duration-100 ease-out will-change-transform",
         "not-[data-state=checked]:hover:scale-110",
         "data-[state=checked]:scale-[0.8]",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="color-picker-swatch"
@@ -302,7 +295,7 @@ export const ColorPickerSwatchIndicator = (
         "pointer-events-none",
         "zoom-in-5 animate-in blur-in-md",
         "[&_svg]:size-1/2",
-        "motion-reduce:animate-none!",
+        "motion-reduce:animate-none",
         className
       )}
       data-slot="color-picker-swatch-indicator"
@@ -387,6 +380,7 @@ export const ColorPickerAreaThumb = (
   props: React.ComponentProps<typeof ArkColorPicker.AreaThumb>
 ) => {
   const { className, ...rest } = props;
+  const { dragging } = useColorPicker();
 
   return (
     <ArkColorPicker.AreaThumb
@@ -394,6 +388,8 @@ export const ColorPickerAreaThumb = (
         "size-4.5",
         "rounded-full border-[3px] border-white shadow-[0_0_0_1px_rgba(0,0,0,0.1),inset_0_0_0_1px_rgba(0,0,0,0.1)]",
         "outline-none ring-border/64",
+        "cursor-grab",
+        dragging && "cursor-grabbing",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         className
       )}

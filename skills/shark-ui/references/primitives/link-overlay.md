@@ -41,9 +41,9 @@ import { LinkBox, LinkOverlay } from "@/components/ui/link-overlay"
 
 ## Common pitfalls
 
-- Using `LinkOverlay` without `LinkBox`—stacking context breaks and nested links misbehave.
+- Using `LinkOverlay` without `LinkBox`: stacking context breaks and nested links misbehave.
 - Putting important actions only under the overlay without their own `<a>` or `button` above the overlay z-index.
-- Duplicating `href` on both overlay and heading text without `asChild` patterns—follow examples to avoid nested interactive elements.
+- Duplicating `href` on both overlay and heading text without `asChild` patterns: follow examples to avoid nested interactive elements.
 
 ## Registry example files
 

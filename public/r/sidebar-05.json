@@ -1,11 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "categories": [
-    "sidebar"
-  ],
-  "dependencies": [
-    "lucide-react"
-  ],
+  "categories": ["sidebar"],
+  "dependencies": ["lucide-react"],
   "description": "A sidebar with collapsible sections and nested navigation.",
   "files": [
     {

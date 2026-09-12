@@ -7,7 +7,7 @@ import { MobileNav } from "@/components/layout/header/header.mobile";
 import { ModeSwitcher } from "@/components/layout/mode-switcher";
 import { NAV_ITEMS } from "@/config/navigation";
 import { SITE_CONFIG } from "@/config/site";
-import { getCommandCompositionItems } from "@/lib/command-composition-items";
+import { getCommandCompositionItems } from "@/lib/composition-catalog";
 import { source } from "@/lib/fumadocs";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
@@ -37,11 +37,10 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
         <HeaderBrand asChild>
           <Link aria-label="Shark UI, back to home" href="/">
             <SharkIcon className="size-5 shrink-0" />
-            Shark
           </Link>
         </HeaderBrand>
 
-        <MainNav className="hidden lg:flex" items={NAV_ITEMS} />
+        <MainNav className="hidden md:flex" items={NAV_ITEMS} />
 
         <div className="ms-auto flex items-center gap-2 md:flex-1 md:justify-end">
           <div className="hidden w-full flex-1 sm:flex md:w-auto md:flex-none">
@@ -52,7 +51,10 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
             />
           </div>
 
-          <Separator className="ml-2 h-4" orientation="vertical" />
+          <Separator
+            className="ml-2 hidden h-4 sm:block"
+            orientation="vertical"
+          />
 
           <Button
             aria-label="Visit GitHub"
@@ -77,10 +79,10 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
 
           <ModeSwitcher />
 
-          <Separator className="h-4 lg:hidden" orientation="vertical" />
+          <Separator className="h-4 md:hidden" orientation="vertical" />
 
           <MobileNav
-            className="flex lg:hidden"
+            className="flex md:hidden"
             items={NAV_ITEMS}
             tree={pageTree}
           />

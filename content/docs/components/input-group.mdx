@@ -3,6 +3,8 @@ title: Input Group
 description: Group input elements together.
 ---
 
+import manifest from "@/registry/manifest/input-group";
+
 <ComponentPreview componentName="input-group" />
 
 ## Installation
@@ -30,9 +32,7 @@ npx shadcn@latest add @shark/input-group
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

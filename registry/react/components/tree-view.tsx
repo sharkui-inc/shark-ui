@@ -262,7 +262,7 @@ export const TreeViewBranchIndicator = (
         "origin-center transition-transform duration-150",
         "data-[state=open]:rotate-90",
         "[&_svg]:size-3.5 [&_svg]:shrink-0",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="tree-view-branch-indicator"
@@ -284,7 +284,7 @@ export const TreeViewBranchContent = (
         "relative overflow-hidden",
         "data-[state=open]:animate-[expand_150ms_ease-out]",
         "data-[state=closed]:animate-[collapse_150ms_ease-out]",
-        "motion-reduce:animate-none!",
+        "motion-reduce:animate-none",
         className
       )}
       data-slot="tree-view-branch-content"
@@ -423,7 +423,7 @@ export const TreeViewCheckbox = (
 
   return (
     <ArkTreeView.NodeCheckbox
-      className={cn(checkboxVariants(), "[&_svg]:size-3!", className)}
+      className={cn(checkboxVariants(), "[&_svg]:size-3", className)}
       data-slot="tree-view-checkbox"
       {...rest}
     >

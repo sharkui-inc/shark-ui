@@ -7,6 +7,7 @@ import { Button } from "@/registry/react/components/button";
 import { Item } from "@/registry/react/components/item";
 import {
   Listbox,
+  ListboxBody,
   ListboxContent,
   ListboxItem,
   ListboxItemGroup,
@@ -28,20 +29,6 @@ const Example = () => {
     items: selected.map((label) => ({ label, value: label })),
   });
 
-  const moveToSelected = React.useCallback(() => {
-    setAvailable((prev) =>
-      prev.filter((item) => !availableValue.includes(item))
-    );
-    setSelected((prev) => [...prev, ...availableValue]);
-    setAvailableValue([]);
-  }, [availableValue]);
-
-  const moveToAvailable = React.useCallback(() => {
-    setSelected((prev) => prev.filter((item) => !selectedValue.includes(item)));
-    setAvailable((prev) => [...prev, ...selectedValue]);
-    setSelectedValue([]);
-  }, [selectedValue]);
-
   return (
     <div className="flex w-full max-w-lg gap-2 max-sm:flex-col sm:gap-4">
       <Item className="w-full p-1" variant="outline">
@@ -53,21 +40,29 @@ const Example = () => {
           value={availableValue}
         >
           <ListboxContent>
-            <ListboxItemGroup heading="Available">
-              {availableCollection.items.map((item) => (
-                <ListboxItem item={item} key={item.value}>
-                  <ListboxItemText>{item.label}</ListboxItemText>
-                  <ListboxItemIndicator />
-                </ListboxItem>
-              ))}
-            </ListboxItemGroup>
+            <ListboxBody>
+              <ListboxItemGroup heading="Available">
+                {availableCollection.items.map((item) => (
+                  <ListboxItem item={item} key={item.value}>
+                    <ListboxItemText>{item.label}</ListboxItemText>
+                    <ListboxItemIndicator />
+                  </ListboxItem>
+                ))}
+              </ListboxItemGroup>
+            </ListboxBody>
           </ListboxContent>
         </Listbox>
       </Item>
       <div className="flex flex-row-reverse justify-center gap-2 sm:flex-col">
         <Button
           disabled={availableValue.length === 0}
-          onClick={moveToSelected}
+          onClick={() => {
+            setAvailable((prev) =>
+              prev.filter((item) => !availableValue.includes(item))
+            );
+            setSelected((prev) => [...prev, ...availableValue]);
+            setAvailableValue([]);
+          }}
           size="icon-md"
           variant="outline"
         >
@@ -75,7 +70,13 @@ const Example = () => {
         </Button>
         <Button
           disabled={selectedValue.length === 0}
-          onClick={moveToAvailable}
+          onClick={() => {
+            setSelected((prev) =>
+              prev.filter((item) => !selectedValue.includes(item))
+            );
+            setAvailable((prev) => [...prev, ...selectedValue]);
+            setSelectedValue([]);
+          }}
           size="icon-md"
           variant="outline"
         >
@@ -91,14 +92,16 @@ const Example = () => {
           value={selectedValue}
         >
           <ListboxContent className="max-h-48 min-h-40">
-            <ListboxItemGroup heading="Selected">
-              {selectedCollection.items.map((item) => (
-                <ListboxItem item={item} key={item.value}>
-                  <ListboxItemText>{item.label}</ListboxItemText>
-                  <ListboxItemIndicator />
-                </ListboxItem>
-              ))}
-            </ListboxItemGroup>
+            <ListboxBody>
+              <ListboxItemGroup heading="Selected">
+                {selectedCollection.items.map((item) => (
+                  <ListboxItem item={item} key={item.value}>
+                    <ListboxItemText>{item.label}</ListboxItemText>
+                    <ListboxItemIndicator />
+                  </ListboxItem>
+                ))}
+              </ListboxItemGroup>
+            </ListboxBody>
           </ListboxContent>
         </Listbox>
       </Item>

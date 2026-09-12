@@ -4,6 +4,7 @@ import Link from "next/link";
 import { DocsTableOfContents } from "@/components/layout/docs-toc";
 import { type ChangelogPageData, getChangelogPages } from "@/lib/changelog";
 import { createMetadata } from "@/lib/metadata";
+import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { SkipNavContent } from "@/registry/react/components/skip-nav";
@@ -33,21 +34,25 @@ const ChangelogPage = () => {
   return (
     <div className="size-full">
       <div className="flex items-stretch xl:w-full" data-slot="docs">
-        <div className="relative flex w-full min-w-0 flex-1 flex-col lg:me-4 lg:mt-8 lg:mb-8">
-          <div className="relative flex w-full flex-col border bg-card text-card-foreground shadow-lg/5 max-lg:border-none lg:rounded-2xl">
+        <div className="relative flex w-full min-w-0 flex-1 flex-col lg:me-4 lg:mt-8">
+          <div className="relative mb-8 flex w-full flex-col border bg-white text-card-foreground shadow-lg/5 max-lg:border-none lg:rounded-2xl dark:bg-card">
             <div className="flex-1 px-4 py-6 sm:px-6 lg:p-8">
-              <div className="mx-auto w-full">
+              <div
+                className={cn("mx-auto w-full", {
+                  "max-w-3xl": pages.length > 0,
+                })}
+              >
                 <div className="flex min-w-0 flex-col gap-8">
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between gap-2">
                       <h1
-                        className="scroll-m-20 font-semibold text-3xl"
+                        className="scroll-m-20 font-heading font-semibold text-3xl"
                         id="page-title"
                       >
                         Changelog
                       </h1>
 
-                      <Button asChild variant="outline">
+                      <Button asChild size="sm" variant="outline">
                         <Link
                           href="/rss.xml"
                           rel="noopener noreferrer"
@@ -59,14 +64,12 @@ const ChangelogPage = () => {
                       </Button>
                     </div>
 
-                    <p className="sm: text-[1.05rem] text-muted-foreground sm:text-base md:max-w-[80%]">
+                    <p className="text-[1.05rem] text-muted-foreground sm:text-base md:max-w-[80%]">
                       Latest updates and announcements.
                     </p>
                   </div>
 
-                  <SkipNavContent />
-
-                  <div className="w-full flex-1 pb-16 sm:pb-0">
+                  <SkipNavContent className="w-full flex-1">
                     {latestPages.map((page) => {
                       const data = page.data as ChangelogPageData;
                       const date =
@@ -80,7 +83,7 @@ const ChangelogPage = () => {
                           key={page.url}
                         >
                           <div className="flex flex-col gap-2">
-                            <h2 className="font-semibold text-xl tracking-tight">
+                            <h2 className="font-heading font-semibold text-xl tracking-tight">
                               <Link className="hover:underline" href={page.url}>
                                 {data.title}
                               </Link>
@@ -103,13 +106,14 @@ const ChangelogPage = () => {
                       );
                     })}
                     {olderPages.length > 0 && (
-                      <div className="mb-24 scroll-mt-24">
-                        <h2 className="mb-6 font-semibold text-xl tracking-tight">
+                      <div className="scroll-mt-24">
+                        <h2 className="mb-6 font-heading font-semibold text-xl tracking-tight">
                           More Updates
                         </h2>
                         <ul className="flex flex-col gap-4">
                           {olderPages.map((page) => {
                             const data = page.data as ChangelogPageData;
+
                             return (
                               <li
                                 className="flex items-center gap-3"
@@ -127,7 +131,7 @@ const ChangelogPage = () => {
                         </ul>
                       </div>
                     )}
-                  </div>
+                  </SkipNavContent>
                 </div>
               </div>
             </div>

@@ -50,7 +50,7 @@ interface HintProps extends React.ComponentProps<typeof ark.div> {
   /**
    * Called when the open state should change (hover/focus or programmatic updates).
    */
-  onOpenChange?: (open: boolean) => void;
+  onOpenChange?: (details: { open: boolean }) => void;
   /**
    * Controlled open state. When set, `defaultOpen` is ignored.
    */
@@ -95,7 +95,7 @@ export const Hint = (props: HintProps) => {
       if (!isControlled) {
         setUncontrolledOpen(next);
       }
-      onOpenChange?.(next);
+      onOpenChange?.({ open: next });
     },
     [isControlled, onOpenChange]
   );
@@ -156,10 +156,10 @@ const hintContentVariants = tv({
     "px-3 py-1.5",
     "bg-foreground",
     "text-background text-xs",
-    "rounded-lg shadow-md/5",
+    "rounded-lg shadow-lg/5",
     "fade-in-0 zoom-in-[98%] animate-in",
     "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
-    "motion-reduce:animate-none!",
+    "motion-reduce:animate-none",
   ],
   defaultVariants: {
     placement: "top",
