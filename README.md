@@ -2,7 +2,7 @@
   <img src="media/logo.png" alt="Shark UI" width="274" />
 </p>
 <p align="center">
-  <em>shadcn-style components built on Ark UI</em>
+  <em>Beautifully designed components built with Ark UI and Tailwind.</em>
 </p>
 
 ---
