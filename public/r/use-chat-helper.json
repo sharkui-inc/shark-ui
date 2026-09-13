@@ -3,6 +3,6 @@
   "dependencies": [],
   "description": "Connect a local chat to AI SDK or TanStack AI useChat.",
   "name": "use-chat-helper",
-  "registryDependencies": ["https://shark.vini.one/r/create-chat.json"],
+  "registryDependencies": ["https://shark-ui.com/r/create-chat.json"],
   "type": "registry:item"
 }

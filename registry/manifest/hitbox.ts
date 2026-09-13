@@ -67,7 +67,7 @@ const css = {
   },
   "@utility hitbox-debug": {
     "&::before": {
-      "@apply border border-dashed border-info bg-info/10": {},
+      "@apply border border-dashed border-info bg-info/8": {},
       bottom: "var(--hitbox-b, 0px)",
       content: '""',
       left: "var(--hitbox-l, 0px)",
@@ -77,7 +77,7 @@ const css = {
       top: "var(--hitbox-t, 0px)",
     },
     "&:hover::before": {
-      "@apply border border-dashed border-success bg-success/10": {},
+      "@apply border border-dashed border-success bg-success/8": {},
     },
     position: "relative",
   },

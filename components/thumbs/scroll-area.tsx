@@ -2,7 +2,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const ScrollAreaThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="flex w-40 gap-2 rounded-lg border border-input bg-muted p-2 pe-1 shadow-md/5">
+    <div className="flex w-40 gap-2 rounded-lg border border-input bg-muted p-2 pe-1 shadow-sm/4">
       <div className="flex flex-1 flex-col gap-2">
         <div className="flex flex-col gap-1">
           <div className="h-2 w-2/3 rounded-full bg-muted-foreground/16" />

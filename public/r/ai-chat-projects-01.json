@@ -24,8 +24,8 @@
   },
   "name": "ai-chat-projects-01",
   "registryDependencies": [
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/card.json"
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/card.json"
   ],
   "title": "AI Chat Projects",
   "type": "registry:block"

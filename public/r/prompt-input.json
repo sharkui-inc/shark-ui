@@ -4,10 +4,10 @@
   "description": "Chat composer with textarea, tool slots, attach, and send or stop.",
   "name": "prompt-input",
   "registryDependencies": [
-    "https://shark.vini.one/r/input-group.json",
-    "https://shark.vini.one/r/menu.json",
-    "https://shark.vini.one/r/popover.json",
-    "https://shark.vini.one/r/spinner.json"
+    "https://shark-ui.com/r/input-group.json",
+    "https://shark-ui.com/r/menu.json",
+    "https://shark-ui.com/r/popover.json",
+    "https://shark-ui.com/r/spinner.json"
   ],
   "type": "registry:ui",
   "files": [

@@ -114,7 +114,7 @@ const { collection, filter } = useListCollection({
 
 ## Controlled
 
-Control the selected command with `value` and `onValueChange`.
+Control the selected command with `value` and `onValueChange`. Ark UI represents selections as a `string[]`, including single selection.
 
 <ComponentPreview componentName="command" fileName="example-controlled" />
 
@@ -161,6 +161,10 @@ Add hints or actions in the footer with `CommandFooter`.
 Scrollable command menu with multiple items.
 
 <ComponentPreview componentName="command" fileName="example-scrollable" />
+
+## RTL
+
+<RTLComponentPreview componentName="command" />
 
 ## API Reference
 
@@ -305,4 +309,3 @@ Footer area for hints, tips, or extra actions.
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/command#api-reference).
-

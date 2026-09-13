@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "dependencies": ["@ark-ui/react", "tailwind-variants"],
   "name": "item",
-  "registryDependencies": ["https://shark.vini.one/r/separator.json"],
+  "registryDependencies": ["https://shark-ui.com/r/separator.json"],
   "type": "registry:ui",
   "files": [
     {

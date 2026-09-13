@@ -7,35 +7,25 @@ import {
   TabsTrigger,
 } from "@/registry/react/components/tabs";
 
-interface ComponentPreviewTabsProps extends React.ComponentProps<"div"> {
+interface ComponentPreviewFrameProps extends React.ComponentProps<"div"> {
   /**
    * Grow with content instead of locking the preview to 450px.
    *
    * @default false
    */
   autoHeight?: boolean;
-  /**
-   * The component to display in the preview
-   *
-   */
-  component: React.ReactNode;
-  /**
-   * Whether to show the dashed padding guide borders around the preview
-   *
-   * @default true
-   */
+  /** The content to display in the preview pane. */
+  preview: React.ReactNode;
+  /** Whether to show the dashed padding guide borders around the preview. */
   showBorders?: boolean;
-  /**
-   * The source code to display in the preview
-   *
-   */
+  /** The source code to display in the code pane. */
   source: React.ReactNode;
 }
 
-export const ComponentPreviewTabs = (props: ComponentPreviewTabsProps) => {
+export const ComponentPreviewFrame = (props: ComponentPreviewFrameProps) => {
   const {
     autoHeight = false,
-    component,
+    preview,
     source,
     showBorders = true,
     className,
@@ -72,7 +62,7 @@ export const ComponentPreviewTabs = (props: ComponentPreviewTabsProps) => {
               <div className="absolute inset-e-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-e-8" />
             </>
           ) : null}
-          {component}
+          {preview}
         </div>
         <TabsContent
           className="absolute inset-0"

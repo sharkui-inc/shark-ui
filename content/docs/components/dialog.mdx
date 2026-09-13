@@ -134,6 +134,12 @@ Use the `size` prop on `DialogContent` to control the maximum width of the panel
 
 <ComponentPreview componentName="dialog" fileName="example-size" />
 
+## Safe Areas
+
+When `bottomStickOnMobile` is enabled, the dialog keeps its content clear of the bottom safe area while its surface remains flush with the viewport edge.
+
+This takes effect when the consuming app enables `viewport-fit=cover`; browsers without a safe area keep the existing layout.
+
 ## Examples
 
 ### Scrollable
@@ -209,6 +215,10 @@ Default spacing is `--spacing(6)`.
 Put a `Sidebar` inside `DialogContent` with a fixed height so switching pages does not resize the panel. Do not wrap this layout in `DialogBody` (that part is a single scroll area). Override `SidebarProvider`’s `min-h-svh` with `min-h-0`, and use `collapsible="none"` so the sidebar does not open a nested sheet.
 
 <ComponentPreview componentName="dialog" fileName="example-sidebar" />
+
+## RTL
+
+<RTLComponentPreview componentName="dialog" />
 
 ## API Reference
 

@@ -181,7 +181,7 @@ const data: Order[] = [
 ];
 
 const OrderDetail = ({ order }: { order: Order }) => (
-  <div className="bg-muted/40 px-4 py-3">
+  <div className="bg-muted/32 px-4 py-3">
     <p className="mb-2 font-medium text-muted-foreground text-xs uppercase tracking-wide">
       Line items
     </p>

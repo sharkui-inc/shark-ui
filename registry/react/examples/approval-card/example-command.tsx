@@ -51,7 +51,7 @@ const Example = () => {
           <ApprovalCardTitle>Apply the staging migration?</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent className="flex flex-col gap-4">
-          <Terminal className="rounded-lg bg-muted/30" output={command}>
+          <Terminal className="rounded-lg bg-muted/32" output={command}>
             <TerminalHeader>storefront · zsh</TerminalHeader>
             <TerminalContent />
           </Terminal>

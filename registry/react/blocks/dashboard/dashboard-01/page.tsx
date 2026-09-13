@@ -16,7 +16,7 @@ const DashboardPage = () => (
   <SidebarProvider>
     <AppSidebar />
     <SidebarInset>
-      <header className="sticky top-0 z-10 flex h-16 items-center gap-3 border-b bg-background/95 px-4 backdrop-blur sm:px-6">
+      <header className="sticky top-0 z-10 flex h-16 items-center gap-3 border-b bg-background/96 px-4 backdrop-blur sm:px-6">
         <SidebarTrigger />
         <Separator className="h-5" orientation="vertical" />
         <div className="min-w-0 flex-1">

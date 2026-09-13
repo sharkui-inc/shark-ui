@@ -138,7 +138,7 @@ export const ToolResultAction = (props: ToolResultActionProps) => {
     >
       {children}
       {showTrigger ? (
-        <CollapsibleIndicator className="size-3.5 shrink-0 text-muted-foreground/50" />
+        <CollapsibleIndicator className="size-3.5 shrink-0 text-muted-foreground" />
       ) : null}
     </ark.span>
   );

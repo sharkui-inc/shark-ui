@@ -68,9 +68,9 @@ import {
 const PromptInputDemo = () => {
   const [status, setStatus] = useState<PromptInputStatus>("ready");
   const [value, setValue] = useState("");
-  const [model, setModel] = useState("terra-5.6");
-  const [effort, setEffort] = useState("medium");
-  const [access, setAccess] = useState("full");
+  const [model, setModel] = useState(["terra-5.6"]);
+  const [effort, setEffort] = useState(["medium"]);
+  const [access, setAccess] = useState(["full"]);
   const [actionQuery, setActionQuery] = useState("");
   const { collection } = useListCollection({ initialItems: models });
 
@@ -148,9 +148,9 @@ const PromptInputDemo = () => {
             </Menu>
             <Select
               collection={accessCollection}
-              onValueChange={(details) => setAccess(details.value[0] ?? "")}
+              onValueChange={(details) => setAccess(details.value)}
               positioning={{ placement: "top-start" }}
-              value={[access]}
+              value={access}
             >
               <SelectTrigger showTrigger={false} size="sm" variant="ghost">
                 <ShieldAlertIcon aria-hidden="true" />
@@ -172,8 +172,8 @@ const PromptInputDemo = () => {
           </PromptInputTools>
           <ModelSelector
             collection={collection}
-            onValueChange={(details) => setModel(details.value[0] ?? "")}
-            value={[model]}
+            onValueChange={(details) => setModel(details.value)}
+            value={model}
           >
             <ModelSelectorTrigger size="sm" variant="ghost" />
             <ModelSelectorContent>
@@ -188,9 +188,9 @@ const PromptInputDemo = () => {
           </ModelSelector>
           <Select
             collection={effortCollection}
-            onValueChange={(details) => setEffort(details.value[0] ?? "")}
+            onValueChange={(details) => setEffort(details.value)}
             positioning={{ placement: "top" }}
-            value={[effort]}
+            value={effort}
           >
             <SelectTrigger showTrigger={false} size="sm" variant="ghost">
               <SelectValue placeholder="Medium" />

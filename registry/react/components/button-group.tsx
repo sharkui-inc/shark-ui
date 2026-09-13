@@ -68,7 +68,7 @@ export const ButtonGroupText = (
       className={cn(
         "flex items-center gap-2 px-4",
         "font-medium text-sm",
-        "rounded-md border bg-muted shadow-xs/5",
+        "rounded-md border bg-muted shadow-xs/4",
         "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
         className
       )}

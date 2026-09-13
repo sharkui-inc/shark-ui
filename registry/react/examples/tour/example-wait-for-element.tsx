@@ -44,7 +44,7 @@ const Example = () => {
           <div className="flex flex-col gap-2">
             {items.map((item, index) => (
               <div
-                className="rounded-lg border border-border bg-muted/50 px-4 py-3 text-sm"
+                className="rounded-lg border border-border bg-muted/48 px-4 py-3 text-sm"
                 data-item={
                   index === items.length - 1 && items.length > 2
                     ? "new"

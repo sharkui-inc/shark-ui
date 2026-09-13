@@ -43,7 +43,7 @@ const Example = () => {
             <span className="text-muted-foreground">Server: github</span>
             <code>create_issue</code>
           </div>
-          <pre className="overflow-x-auto rounded-lg border bg-muted/40 px-3 py-2 font-mono text-xs">
+          <pre className="overflow-x-auto rounded-lg border bg-muted/32 px-3 py-2 font-mono text-xs">
             <code>{JSON.stringify(toolArguments, null, 2)}</code>
           </pre>
           <p className="text-muted-foreground text-xs">

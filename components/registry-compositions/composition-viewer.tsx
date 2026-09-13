@@ -271,7 +271,7 @@ export const CompositionViewer = ({
           >
             <div
               className={cn(
-                "relative max-w-full overflow-hidden rounded-lg border bg-background shadow-sm",
+                "relative max-w-full overflow-hidden rounded-lg border bg-background shadow-sm/4",
                 "lg:resize-x"
               )}
               style={{

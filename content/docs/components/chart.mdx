@@ -314,7 +314,7 @@ const chartConfig = {
 
 ### Applying colors in markup and data
 
-`ChartContainer` sets `var(--color-<key>)` for each config key. Use it on fills, in the data, or in Tailwind:
+`ChartContainer` sets `var(--color-*)` for each config key. Use it on fills, in the data, or in Tailwind:
 
 ```tsx
 <Bar dataKey="desktop" fill="var(--color-desktop)" />
@@ -417,7 +417,7 @@ Pass `accessibilityLayer` for keyboard and screen reader support. Skip it on dec
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `config` | `ChartConfig` | — |
+| `config` | `ChartConfig` | - |
 | `initialDimension` | `{ width: number; height: number }` | `{ width: 320, height: 200 }` |
 
 ### ChartTooltipContent

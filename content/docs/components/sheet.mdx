@@ -94,6 +94,12 @@ Use `open` and `onOpenChange` on the root to control the sheet state.
 
 <ComponentPreview componentName="sheet" fileName="example-controlled" />
 
+## Safe Areas
+
+Sheets automatically keep their content clear of the safe area on their anchored edge. The panel background still reaches the viewport edge.
+
+This takes effect when the consuming app enables `viewport-fit=cover`; browsers without a safe area keep the existing layout.
+
 ## Sides
 
 Control which side the sheet slides in from using the `side` prop.
@@ -145,6 +151,10 @@ Default spacing is `--spacing(6)`.
 ```css
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
+
+## RTL
+
+<RTLComponentPreview componentName="sheet" />
 
 ## API Reference
 

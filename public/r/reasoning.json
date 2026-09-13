@@ -4,8 +4,8 @@
   "description": "Expandable model thinking with duration and streaming label.",
   "name": "reasoning",
   "registryDependencies": [
-    "https://shark.vini.one/r/collapsible.json",
-    "https://shark.vini.one/r/shimmer.json"
+    "https://shark-ui.com/r/collapsible.json",
+    "https://shark-ui.com/r/shimmer.json"
   ],
   "type": "registry:ui",
   "files": [

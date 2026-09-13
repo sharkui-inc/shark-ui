@@ -24,13 +24,13 @@
   },
   "name": "ai-chat-sidebar-01",
   "registryDependencies": [
-    "https://shark.vini.one/r/avatar.json",
-    "https://shark.vini.one/r/badge.json",
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/icon-tile.json",
-    "https://shark.vini.one/r/input-group.json",
-    "https://shark.vini.one/r/separator.json",
-    "https://shark.vini.one/r/sidebar.json"
+    "https://shark-ui.com/r/avatar.json",
+    "https://shark-ui.com/r/badge.json",
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/icon-tile.json",
+    "https://shark-ui.com/r/input-group.json",
+    "https://shark-ui.com/r/separator.json",
+    "https://shark-ui.com/r/sidebar.json"
   ],
   "title": "AI Chat Sidebar",
   "type": "registry:block"

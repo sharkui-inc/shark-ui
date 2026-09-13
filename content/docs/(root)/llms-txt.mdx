@@ -1,44 +1,26 @@
 ---
 title: LLMs.txt
-description: Compact documentation index for AI coding assistants.
+description: Focused documentation and design context for AI-assisted Shark UI work.
 ---
 
-Shark UI ships a compact [LLMs.txt](https://llmstxt.org/) index so coding assistants can find docs without crawling the full site. Public documentation is available to search and user-requested fetchers; model-training crawlers remain restricted.
+Shark UI gives agents three layers of context: compact indexes for discovery, Markdown pages for implementation, and a design contract for visual fidelity.
 
-## Available Files
+## Choose the task
 
-- [/llms.txt](/llms.txt): quick reference index for documentation.
+- **Install Shark UI**: read [Foundations](/llms/foundations.txt), then [Installation](/llms/installation.txt).
+- **Add a component**: read [Foundations](/llms/foundations.txt), then [Components](/llms/components.txt) and that component's Markdown page.
+- **Build a form, collection, or overlay**: read [Patterns](/llms/patterns.txt) and its linked Markdown pages.
+- **Migrate from another library**: use the migration section in [Patterns](/llms/patterns.txt).
+- **Generate or refine UI**: read the [design contract](/design.md) before writing styles.
 
-## Integration
+Every documentation page has a Markdown version: append `.md` to its URL. The indexes already use those URLs, so an agent can load only the context needed for the task.
 
-**Claude Code:** Reference the docs in your prompt or add to your project’s `.claude` file:
+## Prompt
 
-```bash
-Use Shark UI documentation from https://shark.vini.one/llms.txt
+```text
+Read https://shark-ui.com/llms.txt and start with Foundations. Load only the matching task index and Markdown pages before writing code. Read https://shark-ui.com/design.md before changing UI. Shark UI is a copy-and-own React registry built with Ark UI and Tailwind CSS v4; use its registry or CLI and do not use Radix UI or Base UI APIs.
 ```
 
-**Cursor:** Use the `@Docs` feature:
+## Skills
 
-```bash
-@Docs https://shark.vini.one/llms.txt
-```
-
-[Learn more](https://docs.cursor.com/context/@-symbols/@-docs)
-
-**Windsurf:** Add to your `.windsurfrules` file:
-
-```bash
-#docs https://shark.vini.one/llms.txt
-```
-
-[Learn more](https://docs.codeium.com/windsurf/memories#memories-and-rules)
-
-**Other AI tools:** Most assistants accept documentation URLs:
-
-```bash
-https://shark.vini.one/llms.txt
-```
-
-## Contributing
-
-Spotted an issue with AI-generated code? Contributions to improve the LLMs.txt output are welcome on [GitHub](https://github.com/sharkui-inc/shark-ui).
+Use the [Shark UI Skill](/docs/skills) for durable project-level guidance. It complements current Markdown documentation with component patterns, registry workflow, and Ark UI rules; it does not replace the linked docs.

@@ -191,6 +191,12 @@ React to collapse mode and peer state with utilities.
 </SidebarMenuItem>
 ```
 
+## Safe Areas
+
+Fixed sidebars keep their content clear of the anchored side safe area. The mobile sidebar inherits the same behavior from [Sheet](/docs/components/sheet).
+
+This takes effect when the consuming app enables `viewport-fit=cover`; browsers without a safe area keep the existing layout.
+
 ## Keyboard shortcut
 
 The toggle listens for **`⌘B`** on macOS and **`Ctrl+B`** elsewhere (`SIDEBAR_KEYBOARD_SHORTCUT` in source). Match that expectation in shortcuts or help copy.

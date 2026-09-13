@@ -116,8 +116,8 @@ const listboxItemVariants = tv({
       ],
       destructive: [
         "text-destructive dark:text-destructive-foreground",
-        "hover:bg-destructive/10 dark:hover:bg-destructive-foreground/10",
-        "data-highlighted:bg-destructive/10 dark:data-highlighted:bg-destructive-foreground/10",
+        "hover:bg-destructive/8 dark:hover:bg-destructive-foreground/8",
+        "data-highlighted:bg-destructive/8 dark:data-highlighted:bg-destructive-foreground/8",
         "**:[svg]:text-destructive dark:**:[svg]:text-destructive-foreground",
       ],
     },

@@ -118,7 +118,7 @@ export const ColorPickerContent = (
             "flex flex-col gap-4",
             "p-(--space)",
             "bg-popover",
-            "rounded-xl border shadow-lg/5",
+            "rounded-xl border shadow-lg/4",
             "outline-none",
             "origin-(--transform-origin)",
             "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
@@ -185,9 +185,9 @@ export const ColorPickerSlider = (
           "relative shrink-0",
           "size-4.5",
           "-translate-1/2",
-          "rounded-full border-[3px] border-white shadow-[0_0_0_1px_rgba(0,0,0,0.1),inset_0_0_0_1px_rgba(0,0,0,0.1)]",
+          "rounded-full border-[3px] border-white shadow-[0_0_0_1px_rgb(0_0_0/0.08),inset_0_0_0_1px_rgb(0_0_0/0.08)]",
           "outline-none ring-1 ring-border/64",
-          "origin-left data-[orientation=vertical]:origin-bottom",
+          "origin-left data-[orientation=vertical]:origin-bottom rtl:origin-right",
           "cursor-grab",
           dragging && "cursor-grabbing"
         )}
@@ -247,7 +247,7 @@ export const ColorPickerSwatchTrigger = (
         "transition-[border-color,box-shadow] duration-100 ease-out will-change-transform",
         "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
-        "data-[state=checked]:shadow-sm/5 data-[state=checked]:ring-(--color) data-[state=checked]:ring-2",
+        "data-[state=checked]:shadow-sm/4 data-[state=checked]:ring-(--color) data-[state=checked]:ring-2",
         "motion-reduce:transition-none",
         className
       )}
@@ -386,7 +386,7 @@ export const ColorPickerAreaThumb = (
     <ArkColorPicker.AreaThumb
       className={cn(
         "size-4.5",
-        "rounded-full border-[3px] border-white shadow-[0_0_0_1px_rgba(0,0,0,0.1),inset_0_0_0_1px_rgba(0,0,0,0.1)]",
+        "rounded-full border-[3px] border-white shadow-[0_0_0_1px_rgb(0_0_0/0.08),inset_0_0_0_1px_rgb(0_0_0/0.08)]",
         "outline-none ring-border/64",
         "cursor-grab",
         dragging && "cursor-grabbing",

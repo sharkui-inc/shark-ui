@@ -58,8 +58,8 @@ const itemVariants = tv({
   variants: {
     variant: {
       default: "border-transparent",
-      muted: "border-transparent bg-muted/48 shadow-muted/5 shadow-xs",
-      outline: "border-border shadow-xs/5",
+      muted: "border-transparent bg-muted/48 shadow-xs/4",
+      outline: "border-border shadow-xs/4",
     },
   },
 });
@@ -163,7 +163,7 @@ export const ItemDescription = (props: React.ComponentProps<typeof ark.p>) => {
   return (
     <ark.p
       className={cn(
-        "line-clamp-2 text-left font-normal text-muted-foreground text-sm leading-normal",
+        "line-clamp-2 text-start font-normal text-muted-foreground text-sm leading-normal",
         "[&>a:hover]:text-primary",
         "[&>a]:underline [&>a]:underline-offset-4",
         className

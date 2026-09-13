@@ -156,7 +156,7 @@ const hintContentVariants = tv({
     "px-3 py-1.5",
     "bg-foreground",
     "text-background text-xs",
-    "rounded-lg shadow-lg/5",
+    "rounded-lg shadow-lg/4",
     "fade-in-0 zoom-in-[98%] animate-in",
     "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
     "motion-reduce:animate-none",

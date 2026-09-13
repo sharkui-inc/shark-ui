@@ -38,6 +38,7 @@ import {
   menuListVariants,
   menuSeparatorVariants,
 } from "@/registry/react/components/menu";
+import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
 
 export const CommandDialog = Dialog;
@@ -180,21 +181,29 @@ interface CommandInputProps
 export const CommandContent = (
   props: React.ComponentProps<typeof ArkCombobox.Content>
 ) => {
-  const { className, ...rest } = props;
+  const { children, className, ...rest } = props;
 
   return (
     <ArkCombobox.Content
       className={cn(
         "flex flex-1 flex-col",
         "max-h-(--available-height) min-h-0",
-        "overflow-auto overscroll-contain",
+        "overflow-hidden",
         "outline-none",
         "[:not(.has-[+[data-slot=command-footer]])]:rounded-b-2xl [:not(.has-[+[data-slot=command-footer]])]:border-b",
         className
       )}
       data-slot="command-content"
       {...rest}
-    />
+    >
+      <ScrollArea
+        className="max-h-[inherit] min-h-0 flex-1"
+        orientation="vertical"
+        scrollFade
+      >
+        {children}
+      </ScrollArea>
+    </ArkCombobox.Content>
   );
 };
 

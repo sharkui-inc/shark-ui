@@ -3,10 +3,10 @@
   "dependencies": ["@ark-ui/react", "tailwind-variants", "lucide-react"],
   "name": "select",
   "registryDependencies": [
-    "https://shark.vini.one/r/input.json",
-    "https://shark.vini.one/r/menu.json",
-    "https://shark.vini.one/r/scroll-area.json",
-    "https://shark.vini.one/r/separator.json"
+    "https://shark-ui.com/r/input.json",
+    "https://shark-ui.com/r/menu.json",
+    "https://shark-ui.com/r/scroll-area.json",
+    "https://shark-ui.com/r/separator.json"
   ],
   "type": "registry:ui",
   "files": [

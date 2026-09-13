@@ -4,9 +4,9 @@
   "description": "Shell output panel with basic ANSI color mapping.",
   "name": "terminal",
   "registryDependencies": [
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/clipboard.json",
-    "https://shark.vini.one/r/scroll-area.json"
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/clipboard.json",
+    "https://shark-ui.com/r/scroll-area.json"
   ],
   "type": "registry:ui",
   "files": [

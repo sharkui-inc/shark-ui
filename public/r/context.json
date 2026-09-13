@@ -4,11 +4,11 @@
   "description": "Context window usage meter with token breakdown and optional cost.",
   "name": "context",
   "registryDependencies": [
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/circular-progress.json",
-    "https://shark.vini.one/r/format.json",
-    "https://shark.vini.one/r/popover.json",
-    "https://shark.vini.one/r/progress.json"
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/circular-progress.json",
+    "https://shark-ui.com/r/format.json",
+    "https://shark-ui.com/r/popover.json",
+    "https://shark-ui.com/r/progress.json"
   ],
   "type": "registry:ui",
   "files": [

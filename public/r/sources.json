@@ -4,8 +4,8 @@
   "description": "Collapsible citations and inline source footnotes.",
   "name": "sources",
   "registryDependencies": [
-    "https://shark.vini.one/r/collapsible.json",
-    "https://shark.vini.one/r/hover-card.json"
+    "https://shark-ui.com/r/collapsible.json",
+    "https://shark-ui.com/r/hover-card.json"
   ],
   "type": "registry:ui",
   "files": [

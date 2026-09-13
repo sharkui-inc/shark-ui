@@ -5,7 +5,7 @@ import { ClientOnly } from "@/registry/react/components/client-only";
 const Example = () => (
   <ClientOnly
     fallback={
-      <div className="rounded-xl border border-dashed bg-muted/50 px-4 py-3 text-muted-foreground text-sm">
+      <div className="rounded-xl border border-dashed bg-muted/48 px-4 py-3 text-muted-foreground text-sm">
         Loading…
       </div>
     }

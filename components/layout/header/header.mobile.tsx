@@ -52,7 +52,7 @@ export const MobileNav = (props: MobileNavProps) => {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="h-(--available-height) w-(--available-width) overflow-y-auto rounded-none border-none bg-background/90 p-0 shadow-none backdrop-blur duration-100">
+      <PopoverContent className="h-(--available-height) w-(--available-width) overflow-y-auto rounded-none border-none bg-background/80 p-0 shadow-none backdrop-blur duration-100">
         <div className="flex flex-col gap-8 px-4 py-6">
           <div className="flex flex-col gap-4">
             <div className="font-medium text-muted-foreground text-sm">

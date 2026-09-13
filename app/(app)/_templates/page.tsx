@@ -64,9 +64,9 @@ const TemplatesPage = async () => {
                 </Button>
               </div>
 
-              <Announcement className="mt-6 bg-background p-0 shadow-sm/5">
+              <Announcement className="mt-6 bg-background p-0 shadow-sm/4">
                 <Link
-                  className="inline-flex min-w-0 max-w-full items-center gap-2 rounded-2xl py-0.5 ps-0.5 pe-3 outline-none transition-colors hover:bg-input/12 focus-visible:ring-[3px] focus-visible:ring-ring/32 motion-reduce:transition-none"
+                  className="inline-flex min-w-0 max-w-full items-center gap-2 rounded-2xl py-0.5 ps-0.5 pe-3 outline-none transition-colors hover:bg-input/8 focus-visible:ring-[3px] focus-visible:ring-ring/32 motion-reduce:transition-none"
                   href="#ai-chat-01"
                 >
                   <Badge pill size="sm" variant="secondary">
@@ -83,7 +83,7 @@ const TemplatesPage = async () => {
           </div>
         </section>
 
-        <section className="bg-muted/20" id="templates-catalog">
+        <section className="bg-muted/24" id="templates-catalog">
           <div className="container border-x px-4 py-14 motion-safe:animate-[templates-workbench-in_1s_cubic-bezier(0.16,1,0.3,1)_both] sm:px-6 sm:py-16 lg:px-8 lg:py-20 motion-safe:[animation-range:entry_0%_entry_30%] motion-safe:[animation-timeline:view()]">
             <div className="flex flex-col gap-16">
               {templates.map((item) => (

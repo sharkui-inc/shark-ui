@@ -66,7 +66,7 @@ export const ReasoningCardExample = (props: React.ComponentProps<"div">) => {
           <SourcesTrigger count={2} />
           <SourcesContent>
             <Source href="https://ark-ui.com" title="Ark UI" />
-            <Source href="https://shark.vini.one" title="Shark UI" />
+            <Source href="https://shark-ui.com" title="Shark UI" />
           </SourcesContent>
         </Sources>
       </CardContent>

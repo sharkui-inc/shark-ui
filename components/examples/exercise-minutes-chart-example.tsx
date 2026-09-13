@@ -118,10 +118,10 @@ export const ExerciseMinutesChartExample = (
               dataKey="average"
               dot={{
                 fill: "var(--color-average)",
-                opacity: 0.5,
+                opacity: 0.48,
               }}
               stroke="var(--color-average)"
-              strokeOpacity={0.5}
+              strokeOpacity={0.48}
               strokeWidth={2}
               type="monotone"
             />

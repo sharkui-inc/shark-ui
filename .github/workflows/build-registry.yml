@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      NEXT_PUBLIC_SITE_URL: https://shark.vini.one
+      NEXT_PUBLIC_SITE_URL: https://shark-ui.com
     steps:
       - uses: actions/checkout@v4
 

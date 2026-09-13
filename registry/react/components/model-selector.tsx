@@ -2,20 +2,18 @@
 
 import { Combobox as ArkCombobox } from "@ark-ui/react/combobox";
 import { ark } from "@ark-ui/react/factory";
-import { Portal } from "@ark-ui/react/portal";
 import { ChevronsUpDownIcon, SearchIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
   Combobox,
+  ComboboxContent,
   ComboboxEmpty,
   ComboboxGroup,
   ComboboxGroupLabel,
   ComboboxItem,
   ComboboxList,
-  ComboboxPositioner,
-  comboboxContentVariants,
   useCombobox,
 } from "@/registry/react/components/combobox";
 import {
@@ -23,8 +21,6 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/registry/react/components/input-group";
-import { menuListVariants } from "@/registry/react/components/menu";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const ModelSelector: ArkCombobox.RootComponent = (props) => {
   const { positioning, selectionBehavior = "replace", ...rest } = props;
@@ -113,22 +109,13 @@ export const ModelSelectorContent = (
   const { className, children, ...rest } = props;
 
   return (
-    <Portal>
-      <ComboboxPositioner>
-        <ArkCombobox.Content
-          className={cn(
-            comboboxContentVariants(),
-            "w-52",
-            menuListVariants(),
-            className
-          )}
-          data-slot="model-selector-content"
-          {...rest}
-        >
-          {children}
-        </ArkCombobox.Content>
-      </ComboboxPositioner>
-    </Portal>
+    <ComboboxContent
+      className={cn("max-h-72 w-52", className)}
+      data-slot="model-selector-content"
+      {...rest}
+    >
+      {children}
+    </ComboboxContent>
   );
 };
 
@@ -162,13 +149,11 @@ export const ModelSelectorList = (
   const { className, ...rest } = props;
 
   return (
-    <ScrollArea className="max-h-72" orientation="vertical" scrollFade>
-      <ComboboxList
-        className={cn("flex flex-col", className)}
-        data-slot="model-selector-list"
-        {...rest}
-      />
-    </ScrollArea>
+    <ComboboxList
+      className={cn("flex flex-col", className)}
+      data-slot="model-selector-list"
+      {...rest}
+    />
   );
 };
 

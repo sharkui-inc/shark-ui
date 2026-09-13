@@ -35,7 +35,9 @@ export const packageManagerCommandVariants = (raw: string) => {
       pnpm: raw
         .replaceAll("npx", "pnpm dlx")
         .replaceAll("npm install", "pnpm add"),
-      yarn: raw.replaceAll("npx", "yarn").replaceAll("npm install", "yarn add"),
+      yarn: raw
+        .replaceAll("npx", "yarn dlx")
+        .replaceAll("npm install", "yarn add"),
     };
   }
   if (raw.startsWith("npm run")) {

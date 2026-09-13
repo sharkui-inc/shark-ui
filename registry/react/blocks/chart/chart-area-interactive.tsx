@@ -145,15 +145,15 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 function ChartAreaInteractive() {
-  const [timeRange, setTimeRange] = React.useState("90d");
+  const [timeRange, setTimeRange] = React.useState(["90d"]);
 
   const filteredData = chartData.filter((item) => {
     const date = new Date(item.date);
     const referenceDate = new Date("2024-06-30");
     let daysToSubtract = 90;
-    if (timeRange === "30d") {
+    if (timeRange.includes("30d")) {
       daysToSubtract = 30;
-    } else if (timeRange === "7d") {
+    } else if (timeRange.includes("7d")) {
       daysToSubtract = 7;
     }
     const startDate = new Date(referenceDate);
@@ -172,8 +172,8 @@ function ChartAreaInteractive() {
         </div>
         <Select
           collection={timeRangeCollection}
-          onValueChange={(e) => setTimeRange(e.value[0] ?? "90d")}
-          value={[timeRange]}
+          onValueChange={({ value }) => setTimeRange(value)}
+          value={timeRange}
         >
           <SelectTrigger
             aria-label="Select a value"

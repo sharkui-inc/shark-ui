@@ -126,7 +126,7 @@ export const FieldGroup = (props: React.ComponentProps<typeof ark.div>) => {
       className={cn(
         "group/field-group @container/field-group",
         "flex w-full flex-col gap-4",
-        "data-[data-slot=checkbox-group]:gap-3",
+        "data-[slot=checkbox-group]:gap-3",
         "*:data-[slot=field-group]:gap-4",
         className
       )}
@@ -165,9 +165,8 @@ export const FieldLabel = (
         "select-none font-medium text-sm leading-snug",
         "flex w-fit gap-1",
         "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-2.5",
-        "has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/5",
+        "has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/8",
         "group-data-disabled/field:opacity-64",
-        "dark:has-data-[state=checked]:bg-primary/10",
         className
       )}
       data-slot="field-label"

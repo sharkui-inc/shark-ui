@@ -165,8 +165,8 @@ export const QrConnectExample = (props: React.ComponentProps<"div">) => {
 };
 
 const SESSIONS = [
-  { code: "7K4M-2Q8P", url: "https://shark.vini.one/connect?s=1" },
-  { code: "N4XP-8W3C", url: "https://shark.vini.one/connect?s=2" },
-  { code: "Q2H9-L6DT", url: "https://shark.vini.one/connect?s=3" },
-  { code: "B8RM-5Y1K", url: "https://shark.vini.one/connect?s=4" },
+  { code: "7K4M-2Q8P", url: "https://shark-ui.com/connect?s=1" },
+  { code: "N4XP-8W3C", url: "https://shark-ui.com/connect?s=2" },
+  { code: "Q2H9-L6DT", url: "https://shark-ui.com/connect?s=3" },
+  { code: "B8RM-5Y1K", url: "https://shark-ui.com/connect?s=4" },
 ] as const;

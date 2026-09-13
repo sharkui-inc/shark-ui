@@ -143,7 +143,7 @@ export const PaginationItem = (
       <Button
         className={cn(
           "tabular-nums",
-          "data-selected:not-[hover]:bg-transparent dark:data-selected:not-[hover]:bg-input/30",
+          "data-selected:not-[hover]:bg-transparent dark:data-selected:not-[hover]:bg-input/32",
           "data-selected:not-[hover]:text-foreground",
           "data-selected:not-[hover]:border-input",
           className

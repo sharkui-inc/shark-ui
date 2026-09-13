@@ -24,14 +24,14 @@
   },
   "name": "ai-chat-composer-01",
   "registryDependencies": [
-    "https://shark.vini.one/r/announcement.json",
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/file-upload.json",
-    "https://shark.vini.one/r/input-group.json",
-    "https://shark.vini.one/r/model-selector.json",
-    "https://shark.vini.one/r/popover.json",
-    "https://shark.vini.one/r/prompt-input.json",
-    "https://shark.vini.one/r/speech-input.json"
+    "https://shark-ui.com/r/announcement.json",
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/file-upload.json",
+    "https://shark-ui.com/r/input-group.json",
+    "https://shark-ui.com/r/model-selector.json",
+    "https://shark-ui.com/r/popover.json",
+    "https://shark-ui.com/r/prompt-input.json",
+    "https://shark-ui.com/r/speech-input.json"
   ],
   "title": "AI Chat Composer",
   "type": "registry:block"

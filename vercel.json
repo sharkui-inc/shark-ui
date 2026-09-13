@@ -1,6 +1,26 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "pnpm registry:build && pnpm theme:build && next build",
+  "headers": [
+    {
+      "source": "/docs/:path*",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</llms.txt>; rel=\"describedby\""
+        }
+      ]
+    },
+    {
+      "source": "/design.md",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        }
+      ]
+    }
+  ],
   "routes": [
     {
       "src": "/view(/.*)?",
@@ -16,7 +36,7 @@
       }
     },
     {
-      "src": "/(docs(/.*)?|llms\\.txt|llms\\.mdx(/.*)?|llms-full\\.txt|llms-components\\.txt|llms-patterns\\.txt)",
+      "src": "/(docs(/.*)?|llms(?:\\.txt|/.*\\.txt)|llms\\.mdx(/.*)?|design\\.md)",
       "has": [
         {
           "type": "header",
@@ -29,7 +49,7 @@
       }
     },
     {
-      "src": "/(og|api/raw/.*)",
+      "src": "/og",
       "has": [
         {
           "type": "header",

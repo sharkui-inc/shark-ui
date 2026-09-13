@@ -4,8 +4,8 @@
   "description": "Conversation scroll container with jump-to-start and jump-to-end controls.",
   "name": "message-scroller",
   "registryDependencies": [
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/scroll-area.json"
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/scroll-area.json"
   ],
   "type": "registry:ui",
   "files": [

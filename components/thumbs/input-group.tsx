@@ -3,7 +3,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const InputGroupThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="flex overflow-hidden rounded-lg border border-input bg-muted shadow-md/5">
+    <div className="flex overflow-hidden rounded-lg border border-input bg-muted shadow-sm/4">
       <div className="flex size-8 shrink-0 items-center justify-center border-input border-e">
         <SearchIcon
           aria-hidden="true"

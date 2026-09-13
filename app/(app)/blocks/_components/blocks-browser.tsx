@@ -169,7 +169,7 @@ export const BlocksBrowser = ({
         </Sidebar>
 
         <div className="min-w-0">
-          <div className="sticky top-(--header-height) z-20 flex items-center gap-3 border-b bg-background/95 px-4 py-2 backdrop-blur lg:hidden">
+          <div className="sticky top-(--header-height) z-20 flex items-center gap-3 border-b bg-background/96 px-4 py-2 backdrop-blur lg:hidden">
             <Sheet
               onOpenChange={({ open }) => setNavigationOpen(open)}
               open={navigationOpen}

@@ -57,14 +57,14 @@ export const ColorsConcept = (props: React.ComponentProps<"div">) => {
               <div
                 className={cn(
                   "min-h-24",
-                  "shadow-xs/5",
+                  "shadow-xs/4",
                   "flex items-end justify-center",
                   "pb-2",
                   "rounded-lg",
                   color.hex
                 )}
               >
-                <span className="font-medium font-mono text-white text-xs drop-shadow-xs">
+                <span className="font-medium font-mono text-white text-xs drop-shadow-xs/4">
                   500
                 </span>
               </div>

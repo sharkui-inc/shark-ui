@@ -120,9 +120,7 @@ const DateInputControl = (props: DateInputControlProps) => {
     <ArkDateInput.Control asChild data-slot="date-input-control">
       <InputGroup
         className={cn(
-          "px-3",
-          "data-disabled:pointer-events-none data-disabled:opacity-64",
-          "has-data-[slot=date-input-clear]:pr-0"
+          "data-disabled:pointer-events-none data-disabled:opacity-64"
         )}
         size={size}
       >
@@ -186,8 +184,8 @@ const DateInputSegment = (
         "rounded-sm border-0 shadow-none ring-0",
         "not-data-[type=literal]:px-0.5",
         "not-data-[type=literal]:focus:bg-primary not-data-[type=literal]:focus:text-primary-foreground",
-        "data-[type=literal]:select-none data-[type=literal]:px-px data-[type=literal]:text-muted-foreground/64",
-        "data-placeholder-shown:text-muted-foreground/64",
+        "data-[type=literal]:select-none data-[type=literal]:px-px data-[type=literal]:text-muted-foreground",
+        "data-placeholder-shown:text-muted-foreground",
         "outline-none",
         "data-readonly:cursor-default",
         "group-aria-invalid/date-input:text-destructive group-data-invalid/date-input:text-destructive",

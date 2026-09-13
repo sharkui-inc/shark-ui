@@ -69,8 +69,8 @@ const clipboardValueVariants = tv({
   base: [
     "inline-flex items-center",
     "font-normal text-base md:text-sm",
-    "bg-transparent dark:bg-input/30",
-    "rounded-lg border border-input shadow-xs/5",
+    "bg-transparent dark:bg-input/32",
+    "rounded-lg border border-input shadow-xs/4",
   ],
   defaultVariants: {
     size: "md",

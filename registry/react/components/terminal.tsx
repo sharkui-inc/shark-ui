@@ -49,7 +49,7 @@ export const Terminal = (props: TerminalProps) => {
           "flex flex-col",
           "bg-card",
           "text-card-foreground",
-          "rounded-xl border shadow-xs/5",
+          "rounded-xl border shadow-xs/4",
           "overflow-hidden",
           className
         )}

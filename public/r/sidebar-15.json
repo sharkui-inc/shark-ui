@@ -30,8 +30,8 @@
   },
   "name": "sidebar-15",
   "registryDependencies": [
-    "https://shark.vini.one/r/separator.json",
-    "https://shark.vini.one/r/sidebar.json"
+    "https://shark-ui.com/r/separator.json",
+    "https://shark-ui.com/r/sidebar.json"
   ],
   "title": "Sidebar 15",
   "type": "registry:block"

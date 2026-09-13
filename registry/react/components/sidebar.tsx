@@ -266,7 +266,9 @@ export const Sidebar = (props: SidebarProps) => {
             "size-full",
             "flex flex-col",
             "bg-sidebar",
-            "group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow-sm/5"
+            "group-data-[placement=left]:ps-[env(safe-area-inset-left,0px)]",
+            "group-data-[placement=right]:pe-[env(safe-area-inset-right,0px)]",
+            "group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow-sm/4"
           )}
           data-sidebar="sidebar"
           data-slot="sidebar-inner"
@@ -346,7 +348,7 @@ export const SidebarInset = (props: React.ComponentProps<typeof ark.main>) => {
         "relative flex w-full flex-1 flex-col bg-background",
         "md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ms-2",
         "md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ms-0",
-        "md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm/5",
+        "md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm/4",
         className
       )}
       data-slot="sidebar-inset"
@@ -473,7 +475,7 @@ export const SidebarGroupLabel = (
         "h-8",
         "px-2",
         "flex shrink-0 items-center",
-        "font-medium text-sidebar-foreground/70 text-xs",
+        "font-medium text-sidebar-foreground text-xs",
         "rounded-md",
         "transition-[margin,opacity] duration-200 ease-linear",
         "outline-hidden ring-sidebar-ring focus-visible:ring-2",
@@ -608,7 +610,7 @@ export const SidebarMenuButton = ({
         "[&_svg]:mx-0",
         "[&>span]:truncate",
         "[&>svg:last-child]:ms-auto",
-        "group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-0! group-data-[collapsible=icon]:justify-center",
+        "group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0!",
         "group-data-[collapsible=icon]:[&>:not(:first-child)]:hidden",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         "focus-visible:sidebar-ring-[3px] outline-none focus-visible:ring-sidebar-ring/32",
@@ -646,8 +648,7 @@ export const SidebarMenuButton = ({
   );
 };
 
-interface SidebarMenuActionProps
-  extends React.ComponentProps<typeof Button> {
+interface SidebarMenuActionProps extends React.ComponentProps<typeof Button> {
   showOnHover?: boolean;
 }
 

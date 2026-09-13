@@ -23,7 +23,7 @@
     "previewHeight": 480
   },
   "name": "ai-chat-empty-01",
-  "registryDependencies": ["https://shark.vini.one/r/suggestion.json"],
+  "registryDependencies": ["https://shark-ui.com/r/suggestion.json"],
   "title": "AI Chat Empty State",
   "type": "registry:block"
 }

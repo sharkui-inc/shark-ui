@@ -93,7 +93,7 @@ export const ScrollArea = (props: ScrollAreaProps) => {
       <ArkScrollArea.Viewport
         className={cn(scrollAreaVariants({ scrollbarGutter, scrollFade }))}
         data-slot="scroll-area-viewport"
-        style={orientationStyles.viewport}
+        style={{ maxHeight: "inherit", ...orientationStyles.viewport }}
       >
         <ArkScrollArea.Content
           data-slot="scroll-area-content"
@@ -142,7 +142,7 @@ export const ScrollAreaScrollbar = (
       {...rest}
     >
       <ArkScrollArea.Thumb
-        className="relative flex-1 cursor-grab rounded-full bg-foreground/20 data-dragging:cursor-grabbing"
+        className="relative flex-1 cursor-grab rounded-full bg-foreground/24 data-dragging:cursor-grabbing"
         data-slot="scroll-area-thumb"
       />
     </ArkScrollArea.Scrollbar>

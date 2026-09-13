@@ -4,13 +4,13 @@
   "description": "A composable questionnaire with single, multiple, freeform, and optional answers.",
   "name": "questionnaire",
   "registryDependencies": [
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/checkbox.json",
-    "https://shark.vini.one/r/field.json",
-    "https://shark.vini.one/r/hotkeys.json",
-    "https://shark.vini.one/r/input.json",
-    "https://shark.vini.one/r/kbd.json",
-    "https://shark.vini.one/r/radio-group.json"
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/checkbox.json",
+    "https://shark-ui.com/r/field.json",
+    "https://shark-ui.com/r/hotkeys.json",
+    "https://shark-ui.com/r/input.json",
+    "https://shark-ui.com/r/kbd.json",
+    "https://shark-ui.com/r/radio-group.json"
   ],
   "type": "registry:ui",
   "files": [

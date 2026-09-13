@@ -16,7 +16,7 @@ import {
 } from "@/registry/react/components/model-selector";
 
 const Example = () => {
-  const [selected, setSelected] = React.useState("");
+  const [selected, setSelected] = React.useState<string[]>([]);
 
   const { contains } = useFilter({ sensitivity: "base" });
 
@@ -31,7 +31,8 @@ const Example = () => {
       <ModelSelector
         collection={collection}
         onInputValueChange={({ inputValue }) => filter(inputValue)}
-        onValueChange={({ value }) => setSelected(value[0] ?? "")}
+        onValueChange={({ value }) => setSelected(value)}
+        value={selected}
       >
         <ModelSelectorTrigger />
         <ModelSelectorContent>
@@ -51,7 +52,7 @@ const Example = () => {
           </ModelSelectorList>
         </ModelSelectorContent>
       </ModelSelector>
-      <p className="text-muted-foreground text-sm">{selected}</p>
+      <p className="text-muted-foreground text-sm">{selected.join(", ")}</p>
     </div>
   );
 };

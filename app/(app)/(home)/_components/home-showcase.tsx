@@ -8,7 +8,7 @@ import {
   COMPONENTS_SLUG,
   THEME_TEMPLATES,
 } from "@/app/(app)/themes/_lib/theme-templates";
-import { useOptimisticTab } from "@/app/(app)/themes/_lib/use-optimistic-tab";
+import { useResponsiveTab } from "@/app/(app)/themes/_lib/use-optimistic-tab";
 import { getActiveThemePreset, THEME_PRESETS } from "@/lib/theme/config";
 import { useThemeCustomization } from "@/lib/theme/provider";
 import { cn } from "@/lib/utils";
@@ -22,17 +22,17 @@ import {
 export const HomeShowcase = (props: React.PropsWithChildren) => {
   const { children } = props;
 
-  const { onValueChange, optimisticTab } = useOptimisticTab(COMPONENTS_SLUG);
-  const template = THEME_TEMPLATES.find((item) => item.slug === optimisticTab);
+  const { onValueChange, visibleTab } = useResponsiveTab(COMPONENTS_SLUG);
+  const template = THEME_TEMPLATES.find((item) => item.slug === visibleTab);
   const gallery = template ? null : children;
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <Tabs
-          className="min-w-0"
+          className="min-w-0 max-lg:hidden"
           onValueChange={onValueChange}
-          value={optimisticTab}
+          value={visibleTab}
         >
           <div className="max-w-full overflow-x-auto">
             <TabsList>
@@ -103,7 +103,7 @@ const HomeThemePicker = () => {
                     "focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                     preset.swatchClass,
                     selected &&
-                      "ring-2 ring-foreground/25 ring-offset-2 ring-offset-background"
+                      "ring-2 ring-foreground/24 ring-offset-2 ring-offset-background"
                   )}
                   onClick={() => {
                     applyPreset(preset);

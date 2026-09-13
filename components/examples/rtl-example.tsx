@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { RTLPreview } from "@/components/docs/component-preview/rtl-preview";
 import { toast } from "@/components/examples/example-toast";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -18,93 +18,59 @@ import {
   FieldLabel,
 } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
-import {
-  NativeSelect,
-  NativeSelectOption,
-} from "@/registry/react/components/native-select";
 
 const translations = {
-  ar: {
-    dir: "rtl",
-    label: "Arabic (عربي)",
-    values: {
-      description: "أدخل بريدك الإلكتروني أدناه لتسجيل الدخول إلى حسابك",
-      email: "البريد الإلكتروني",
-      emailPlaceholder: "m@example.com",
-      forgotPassword: "نسيت كلمة المرور؟",
-      login: "تسجيل الدخول",
-      loginWithGoogle: "تسجيل الدخول باستخدام Google",
-      password: "كلمة المرور",
-      signUp: "إنشاء حساب",
-      title: "تسجيل الدخول إلى حسابك",
-    },
+  "ar-SA": {
+    description: "أدخل بريدك الإلكتروني أدناه لتسجيل الدخول إلى حسابك",
+    email: "البريد الإلكتروني",
+    emailPlaceholder: "m@example.com",
+    forgotPassword: "نسيت كلمة المرور؟",
+    login: "تسجيل الدخول",
+    loginWithGoogle: "تسجيل الدخول باستخدام Google",
+    password: "كلمة المرور",
+    signUp: "إنشاء حساب",
+    title: "تسجيل الدخول إلى حسابك",
   },
-  en: {
-    dir: "ltr",
-    label: "English",
-    values: {
-      description: "Enter your email below to login to your account",
-      email: "Email",
-      emailPlaceholder: "m@example.com",
-      forgotPassword: "Forgot your password?",
-      login: "Login",
-      loginWithGoogle: "Login with Google",
-      password: "Password",
-      signUp: "Sign Up",
-      title: "Login to your account",
-    },
+  "en-US": {
+    description: "Enter your email below to login to your account",
+    email: "Email",
+    emailPlaceholder: "m@example.com",
+    forgotPassword: "Forgot your password?",
+    login: "Login",
+    loginWithGoogle: "Login with Google",
+    password: "Password",
+    signUp: "Sign Up",
+    title: "Login to your account",
   },
-  he: {
-    dir: "rtl",
-    label: "Hebrew (עברית)",
-    values: {
-      description: "הזן את האימייל שלך למטה כדי להתחבר לחשבון שלך",
-      email: "אימייל",
-      emailPlaceholder: "m@example.com",
-      forgotPassword: "שכחת את הסיסמה?",
-      login: "התחבר",
-      loginWithGoogle: "התחבר עם Google",
-      password: "סיסמה",
-      signUp: "הירשם",
-      title: "התחבר לחשבון שלך",
-    },
+  "he-IL": {
+    description: "הזן את האימייל שלך למטה כדי להתחבר לחשבון שלך",
+    email: "אימייל",
+    emailPlaceholder: "m@example.com",
+    forgotPassword: "שכחת את הסיסמה?",
+    login: "התחבר",
+    loginWithGoogle: "התחבר עם Google",
+    password: "סיסמה",
+    signUp: "הירשם",
+    title: "התחבר לחשבון שלך",
   },
-};
+} as const;
 
-export const RTLExample = () => {
-  const [selectedLocale, setSelectedLocale] =
-    React.useState<keyof typeof translations>("ar");
+export const RTLExample = () => (
+  <RTLPreview className="h-[500px]" contentClassName="rounded-xl border">
+    {(locale) => {
+      const t = translations[locale];
 
-  const t = translations[selectedLocale ?? "en"];
-
-  return (
-    <div className="h-[500px] rounded-xl border">
-      <div className="flex justify-between border-b p-4">
-        <NativeSelect
-          onChange={(e) =>
-            setSelectedLocale(e.target.value as keyof typeof translations)
-          }
-          value={selectedLocale}
-        >
-          {Object.entries(translations).map(([lang, locale]) => (
-            <NativeSelectOption key={lang} value={lang}>
-              {locale.label}
-            </NativeSelectOption>
-          ))}
-        </NativeSelect>
-      </div>
-
-      <div className="flex w-full justify-center p-4">
-        <Card className="mx-auto w-full max-w-sm" dir={t.dir}>
+      return (
+        <Card className="w-full max-w-sm">
           <CardHeader>
-            <CardTitle>{t.values.title}</CardTitle>
-            <CardDescription>{t.values.description}</CardDescription>
+            <CardTitle>{t.title}</CardTitle>
+            <CardDescription>{t.description}</CardDescription>
             <CardAction>
               <Button
-                onClick={() => toast.info({ title: t.values.signUp })}
+                onClick={() => toast.info({ title: t.signUp })}
                 variant="link"
               >
-                {t.values.signUp}
+                {t.signUp}
               </Button>
             </CardAction>
           </CardHeader>
@@ -114,28 +80,28 @@ export const RTLExample = () => {
               onSubmit={(event) => {
                 event.preventDefault();
                 toast.success({
-                  description: t.values.title,
-                  title: t.values.login,
+                  description: t.title,
+                  title: t.login,
                 });
               }}
             >
               <FieldGroup>
                 <Field>
-                  <FieldLabel>{t.values.email}</FieldLabel>
+                  <FieldLabel>{t.email}</FieldLabel>
                   <Input
-                    placeholder={t.values.emailPlaceholder}
+                    placeholder={t.emailPlaceholder}
                     required
                     type="email"
                   />
                 </Field>
                 <Field className="grid gap-2">
                   <div className="flex items-center">
-                    <FieldLabel>{t.values.password}</FieldLabel>
+                    <FieldLabel>{t.password}</FieldLabel>
                     <a
                       className="ms-auto inline-block text-sm underline-offset-4 hover:underline"
                       href="#"
                     >
-                      {t.values.forgotPassword}
+                      {t.forgotPassword}
                     </a>
                   </div>
                   <Input required type="password" />
@@ -145,22 +111,22 @@ export const RTLExample = () => {
           </CardContent>
           <CardFooter className="flex-col gap-2">
             <Button className="w-full" form="rtl-login" type="submit">
-              {t.values.login}
+              {t.login}
             </Button>
             <Button
               className="w-full"
               onClick={() =>
                 toast.success({
-                  title: t.values.loginWithGoogle,
+                  title: t.loginWithGoogle,
                 })
               }
               variant="outline"
             >
-              {t.values.loginWithGoogle}
+              {t.loginWithGoogle}
             </Button>
           </CardFooter>
         </Card>
-      </div>
-    </div>
-  );
-};
+      );
+    }}
+  </RTLPreview>
+);

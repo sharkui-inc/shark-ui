@@ -863,7 +863,7 @@ export const SpeechInputContent = (
   return (
     <ark.div
       className={cn(
-        "flex w-full min-w-0 items-center gap-3 rounded-2xl border bg-card px-3 py-2 text-card-foreground shadow-xs/5",
+        "flex w-full min-w-0 items-center gap-3 rounded-2xl border bg-card px-3 py-2 text-card-foreground shadow-xs/4",
         className
       )}
       data-slot="speech-input-content"

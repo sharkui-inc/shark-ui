@@ -34,7 +34,7 @@ export const Diff = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground shadow-xs/5",
+        "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground shadow-xs/4",
         "flex flex-col",
         "[--code-surface-header-height:--spacing(9)] [--code-surface-inline-padding:--spacing(3)] [--code-surface-line-height:--spacing(6)]",
         className

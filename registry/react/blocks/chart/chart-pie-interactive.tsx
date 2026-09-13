@@ -78,10 +78,10 @@ const monthCollection = createListCollection({
 
 function ChartPieInteractive() {
   const id = "pie-interactive";
-  const [activeMonth, setActiveMonth] = React.useState(desktopData[0].month);
+  const [activeMonth, setActiveMonth] = React.useState([desktopData[0].month]);
 
   const activeIndex = React.useMemo(
-    () => desktopData.findIndex((item) => item.month === activeMonth),
+    () => desktopData.findIndex((item) => activeMonth.includes(item.month)),
     [activeMonth]
   );
   return (
@@ -94,10 +94,8 @@ function ChartPieInteractive() {
         </div>
         <Select
           collection={monthCollection}
-          onValueChange={(e) =>
-            setActiveMonth(e.value[0] ?? desktopData[0].month)
-          }
-          value={[activeMonth]}
+          onValueChange={({ value }) => setActiveMonth(value)}
+          value={activeMonth}
         >
           <SelectTrigger
             aria-label="Select a value"

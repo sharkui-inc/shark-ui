@@ -3,9 +3,9 @@
   "description": "A composable card for approval flows.",
   "name": "approval-card",
   "registryDependencies": [
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/card.json",
-    "https://shark.vini.one/r/questionnaire.json"
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/card.json",
+    "https://shark-ui.com/r/questionnaire.json"
   ],
   "type": "registry:ui",
   "files": [

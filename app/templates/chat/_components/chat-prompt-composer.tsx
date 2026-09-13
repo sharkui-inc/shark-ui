@@ -75,9 +75,9 @@ export const ChatPromptComposer = ({
   usedTokens: number;
   value: string;
 }) => {
-  const [model, setModel] = useState(MODEL_OPTIONS[0].value);
-  const [effort, setEffort] = useState("medium");
-  const [access, setAccess] = useState("full");
+  const [model, setModel] = useState([MODEL_OPTIONS[0].value]);
+  const [effort, setEffort] = useState(["medium"]);
+  const [access, setAccess] = useState(["full"]);
   const { collection } = useListCollection({
     initialItems: [...MODEL_OPTIONS],
   });
@@ -114,9 +114,9 @@ export const ChatPromptComposer = ({
             </Menu>
             <Select
               collection={accessCollection}
-              onValueChange={({ value: next }) => setAccess(next[0] ?? "")}
+              onValueChange={(details) => setAccess(details.value)}
               positioning={{ placement: "top-start" }}
-              value={[access]}
+              value={access}
             >
               <SelectTrigger showTrigger={false} size="sm" variant="ghost">
                 <ShieldAlertIcon aria-hidden="true" />
@@ -138,8 +138,8 @@ export const ChatPromptComposer = ({
           </PromptInputTools>
           <ModelSelector
             collection={collection}
-            onValueChange={({ value: next }) => setModel(next[0] ?? "")}
-            value={[model]}
+            onValueChange={(details) => setModel(details.value)}
+            value={model}
           >
             <ModelSelectorTrigger size="sm" variant="ghost" />
             <ModelSelectorContent>
@@ -154,9 +154,9 @@ export const ChatPromptComposer = ({
           </ModelSelector>
           <Select
             collection={effortCollection}
-            onValueChange={({ value: next }) => setEffort(next[0] ?? "")}
+            onValueChange={(details) => setEffort(details.value)}
             positioning={{ placement: "top" }}
-            value={[effort]}
+            value={effort}
           >
             <SelectTrigger showTrigger={false} size="sm" variant="ghost">
               <SelectValue placeholder="Medium" />

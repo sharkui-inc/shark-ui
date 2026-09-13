@@ -19,7 +19,7 @@ import {
 import { Input } from "@/registry/react/components/input";
 
 export const LoginForm = () => (
-  <Card className="shadow-sm">
+  <Card className="shadow-sm/4">
     <CardHeader>
       <CardTitle className="text-2xl tracking-[-0.02em]">
         Welcome back

@@ -3,15 +3,15 @@
   "dependencies": ["@ark-ui/react", "tailwind-variants", "lucide-react"],
   "name": "sidebar",
   "registryDependencies": [
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/hotkeys.json",
-    "https://shark.vini.one/r/input.json",
-    "https://shark.vini.one/r/scroll-area.json",
-    "https://shark.vini.one/r/separator.json",
-    "https://shark.vini.one/r/sheet.json",
-    "https://shark.vini.one/r/skeleton.json",
-    "https://shark.vini.one/r/tooltip.json",
-    "https://shark.vini.one/r/use-is-mobile.json"
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/hotkeys.json",
+    "https://shark-ui.com/r/input.json",
+    "https://shark-ui.com/r/scroll-area.json",
+    "https://shark-ui.com/r/separator.json",
+    "https://shark-ui.com/r/sheet.json",
+    "https://shark-ui.com/r/skeleton.json",
+    "https://shark-ui.com/r/tooltip.json",
+    "https://shark-ui.com/r/use-is-mobile.json"
   ],
   "type": "registry:ui",
   "files": [

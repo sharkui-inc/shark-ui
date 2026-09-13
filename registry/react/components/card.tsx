@@ -15,7 +15,7 @@ export const Card = (props: React.ComponentProps<typeof ark.div>) => {
         "bg-card",
         "text-card-foreground",
         "has-[>_[data-variant=image]]:pt-0 has-[>_[data-slot=card-footer]]:pb-0",
-        "overflow-hidden rounded-xl border shadow-xs/5",
+        "overflow-hidden rounded-xl border shadow-xs/4",
         className
       )}
       data-slot="card"

@@ -4,7 +4,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 export const DatePickerThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
     <div className="flex w-full max-w-48 flex-col gap-2">
-      <div className="flex h-8 items-center rounded-lg border border-input bg-muted px-3 shadow-md/5">
+      <div className="flex h-8 items-center rounded-lg border border-input bg-muted px-3 shadow-sm/4">
         <div className="flex w-full items-center gap-3">
           <CalendarIcon
             aria-hidden="true"
@@ -13,7 +13,7 @@ export const DatePickerThumb = (props: ThumbCardProps) => (
           <div className="h-2 w-1/3 rounded-full bg-muted-foreground/16" />
         </div>
       </div>
-      <div className="relative flex flex-col gap-2 rounded-lg border border-input border-dashed bg-muted/64 p-3 shadow-md/5">
+      <div className="relative flex flex-col gap-2 rounded-lg border border-input border-dashed bg-muted/64 p-3 shadow-sm/4">
         <div className="grid grid-cols-5 place-content-center gap-1.5">
           {Array.from({ length: 5 }, (_, i) => `day-${i}`).map((key) => (
             <div

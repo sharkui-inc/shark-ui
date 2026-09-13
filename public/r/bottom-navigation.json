@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "dependencies": ["@ark-ui/react"],
   "name": "bottom-navigation",
-  "registryDependencies": ["https://shark.vini.one/r/tabs.json"],
+  "registryDependencies": ["https://shark-ui.com/r/tabs.json"],
   "type": "registry:ui",
   "files": [
     {

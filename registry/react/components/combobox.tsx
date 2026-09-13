@@ -10,7 +10,6 @@ import { CheckIcon, ChevronsUpDownIcon, XIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/react/components/button";
 import {
   inputItemVariants,
   type inputVariants,
@@ -29,6 +28,7 @@ import {
   menuItemIndicatorVariants,
   menuListVariants,
 } from "@/registry/react/components/menu";
+import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const useCombobox = useArkComboboxContext;
 
@@ -36,7 +36,10 @@ export const ComboboxContext = ArkCombobox.Context;
 
 export const Combobox: ArkCombobox.RootComponent = (props) => {
   const {
+    allowCustomValue = false,
     openOnClick = true,
+    onInputValueChange,
+    scrollToIndexFn,
     lazyMount = true,
     unmountOnExit = true,
     ...rest
@@ -44,9 +47,27 @@ export const Combobox: ArkCombobox.RootComponent = (props) => {
 
   return (
     <ArkCombobox.Root
+      allowCustomValue={allowCustomValue}
       data-slot="combobox"
       lazyMount={lazyMount}
+      onInputValueChange={(details) => {
+        onInputValueChange?.({
+          ...details,
+          inputValue:
+            details.reason === "item-select" && !allowCustomValue
+              ? ""
+              : details.inputValue,
+        });
+      }}
       openOnClick={openOnClick}
+      scrollToIndexFn={(details) => {
+        if (scrollToIndexFn) {
+          scrollToIndexFn(details);
+          return;
+        }
+
+        details.getElement()?.scrollIntoView({ block: "nearest" });
+      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     />
@@ -115,23 +136,16 @@ export const ComboboxInput = (props: ComboboxInputProps) => {
           <InputGroupInput {...rest} />
         </ArkCombobox.Input>
         <InputGroupAddon align="inline-end">
-          {showTrigger && (
-            <InputGroupButton
-              asChild
-              className="group-has-data-[slot=combobox-clear]/input-group:hidden"
-              size="icon-xs"
-              variant="ghost"
-            >
-              <ComboboxTrigger />
-            </InputGroupButton>
-          )}
-          {showClear && inputValue && (
+          {showTrigger ? (
+            <ComboboxTrigger className="group-has-data-[slot=combobox-clear]/input-group:hidden" />
+          ) : null}
+          {showClear && inputValue ? (
             <ComboboxClear asChild>
               <InputGroupButton size="icon-xs" variant="ghost">
                 <XIcon />
               </InputGroupButton>
             </ComboboxClear>
-          )}
+          ) : null}
         </InputGroupAddon>
       </InputGroup>
     </ComboboxControl>
@@ -145,15 +159,15 @@ export const ComboboxTrigger = (
 
   return (
     <ArkCombobox.Trigger
-      className={cn("absolute inset-e-1 inset-y-0", className)}
+      className={children ? className : undefined}
       data-slot="combobox-trigger"
       {...rest}
       asChild
     >
       {children ?? (
-        <Button className="size-4" variant="ghost">
-          <ChevronsUpDownIcon className="size-4" />
-        </Button>
+        <InputGroupButton className={className} size="icon-xs" variant="ghost">
+          <ChevronsUpDownIcon />
+        </InputGroupButton>
       )}
     </ArkCombobox.Trigger>
   );
@@ -168,6 +182,109 @@ export const ComboboxFieldInput = (
   props: React.ComponentProps<typeof ArkCombobox.Input>
 ) => <ArkCombobox.Input data-slot="combobox-field-input" {...props} />;
 
+interface ComboboxChipsProps
+  extends React.ComponentProps<typeof ArkCombobox.Control>,
+    Pick<React.ComponentProps<typeof InputGroup>, "size"> {}
+
+export const ComboboxChips = (props: ComboboxChipsProps) => {
+  const { size = "md", className, children, ...rest } = props;
+
+  return (
+    <ArkCombobox.Control asChild data-slot="combobox-chips-control" {...rest}>
+      <InputGroup
+        className={cn(
+          "h-auto min-h-8 data-[size=lg]:min-h-9 data-[size=sm]:min-h-7",
+          "flex-wrap content-start items-center gap-1 py-1",
+          "[--input-group-inset:--spacing(1)]",
+          "data-disabled:pointer-events-none data-disabled:opacity-64",
+          "has-data-[slot=combobox-chip]:px-1",
+          className
+        )}
+        size={size}
+      >
+        {children}
+      </InputGroup>
+    </ArkCombobox.Control>
+  );
+};
+
+export const ComboboxChipsInput = (
+  props: Omit<React.ComponentProps<typeof ArkCombobox.Input>, "size">
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkCombobox.Input asChild data-slot="combobox-chips-input">
+      <InputGroupInput
+        className={cn(
+          "h-5.5 in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5 min-w-18 flex-auto basis-auto",
+          "px-1",
+          className
+        )}
+        {...rest}
+      />
+    </ArkCombobox.Input>
+  );
+};
+
+interface ComboboxChipProps {
+  children: React.ReactNode;
+  className?: string;
+  removeProps?: React.ComponentProps<"button">;
+  value: string;
+}
+
+export const ComboboxChip = (props: ComboboxChipProps) => {
+  const { children, className, removeProps, value } = props;
+  const { clearValue, disabled } = useCombobox();
+  const {
+    className: removeClassName,
+    onClick,
+    ...removeRest
+  } = removeProps ?? {};
+
+  return (
+    <span
+      className={cn(
+        "h-6 in-data-[size=lg]:h-7 in-data-[size=sm]:h-5 max-w-full",
+        "inline-flex shrink-0 items-center gap-1",
+        "in-data-[size=lg]:ps-2 in-data-[size=sm]:ps-1 ps-1.5 pe-0.5",
+        "bg-secondary",
+        "rounded-md border",
+        "text-secondary-foreground text-xs",
+        className
+      )}
+      data-slot="combobox-chip"
+    >
+      <span className="truncate">{children}</span>
+      {disabled ? null : (
+        <InputGroupButton
+          aria-label={`Remove ${value}`}
+          className={cn(
+            "in-data-[size=lg]:size-6 in-data-[size=sm]:size-4 size-5",
+            "shrink-0",
+            "text-muted-foreground",
+            "hover:text-foreground",
+            removeClassName
+          )}
+          onClick={(event) => {
+            onClick?.(event);
+
+            if (!event.defaultPrevented) {
+              clearValue(value);
+            }
+          }}
+          size="icon-xs"
+          type="button"
+          {...removeRest}
+        >
+          <XIcon aria-hidden />
+        </InputGroupButton>
+      )}
+    </span>
+  );
+};
+
 export const ComboboxPositioner = (
   props: React.ComponentProps<typeof ArkCombobox.Positioner>
 ) => <ArkCombobox.Positioner data-slot="combobox-positioner" {...props} />;
@@ -178,7 +295,7 @@ export const comboboxContentVariants = tv({
     "origin-(--transform-origin)",
     "bg-popover",
     "text-popover-foreground",
-    "rounded-xl border shadow-lg/5",
+    "rounded-xl border shadow-lg/4",
     "outline-none",
     "data-[state=closed]:animate-out data-[state=open]:animate-in",
     "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
@@ -210,14 +327,20 @@ export const ComboboxContent = (
           className={cn(
             comboboxContentVariants(),
             "max-h-96 min-w-48",
-            "overflow-y-auto",
+            "overflow-hidden",
             menuListVariants(),
             className
           )}
           data-slot="combobox-content"
           {...rest}
         >
-          {children}
+          <ScrollArea
+            className="max-h-[inherit]"
+            orientation="vertical"
+            scrollFade
+          >
+            {children}
+          </ScrollArea>
         </ArkCombobox.Content>
       </ComboboxPositioner>
     </Portal>
@@ -266,7 +389,7 @@ export const comboboxItemVariants = tv({
     "select-none",
     "cursor-default",
     "outline-hidden",
-    "data-[=checked]:bg-accent data-[state=checked]:text-accent-foreground",
+    "data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground",
     "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
     "[&_svg:not([class*='text-'])]:text-muted-foreground",

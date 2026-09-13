@@ -12,11 +12,11 @@ const Example = () => (
       {"Production: "}
       <a
         className="text-info-foreground underline underline-offset-2"
-        href="https://shark.vini.one"
+        href="https://shark-ui.com"
         rel="noreferrer"
         target="_blank"
       >
-        https://shark.vini.one
+        https://shark-ui.com
       </a>
       {"\n\n"}
       <span className="text-success">✓</span>

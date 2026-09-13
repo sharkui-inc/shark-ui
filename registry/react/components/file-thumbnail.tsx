@@ -16,7 +16,7 @@ export const fileThumbnailVariants = tv({
     badge: [
       "absolute",
       "select-none whitespace-nowrap font-medium uppercase leading-none",
-      "rounded-[0.35em] border-t shadow-xs/5",
+      "rounded-[0.35em] border-t shadow-xs/4",
     ],
     sheet: "rounded-md border border-border bg-white",
   },
@@ -39,37 +39,37 @@ export const fileThumbnailVariants = tv({
       default: {
         badge: [
           "bg-secondary text-secondary-foreground",
-          "border-t-secondary-foreground/35 shadow-secondary-foreground/25",
+          "border-t-secondary-foreground/32 shadow-secondary-foreground/24",
         ],
       },
       destructive: {
         badge: [
           "bg-destructive text-white",
-          "border-t-destructive-foreground shadow-destructive/35",
+          "border-t-destructive-foreground shadow-destructive/32",
         ],
       },
       info: {
         badge: [
           "bg-info text-white",
-          "border-t-info-foreground shadow-info/35",
+          "border-t-info-foreground shadow-info/32",
         ],
       },
       primary: {
         badge: [
           "bg-primary text-white",
-          "border-t-primary-foreground/30 shadow-primary/35",
+          "border-t-primary-foreground/32 shadow-primary/32",
         ],
       },
       success: {
         badge: [
           "bg-success text-white",
-          "border-t-success-foreground shadow-success/35",
+          "border-t-success-foreground shadow-success/32",
         ],
       },
       warning: {
         badge: [
           "bg-warning text-white",
-          "border-t-warning-foreground shadow-warning/35",
+          "border-t-warning-foreground shadow-warning/32",
         ],
       },
     },

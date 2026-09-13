@@ -6,6 +6,7 @@ interface CreateMetadataProps {
   description?: string;
   imageAlt?: string;
   imageUrl?: string;
+  markdownUrl?: string;
   title?: string;
   url?: string;
 }
@@ -19,10 +20,13 @@ export const createMetadata = ({
   description,
   imageAlt,
   imageUrl,
+  markdownUrl,
   title,
   url,
 }: CreateMetadataProps): Metadata => {
   const canonical = url === undefined ? undefined : absoluteUrl(url);
+  const markdown =
+    markdownUrl === undefined ? undefined : absoluteUrl(markdownUrl);
   const image =
     imageUrl === undefined
       ? undefined
@@ -34,7 +38,16 @@ export const createMetadata = ({
         });
 
   return omitUndefined<Metadata>({
-    alternates: canonical === undefined ? undefined : { canonical },
+    alternates:
+      canonical === undefined
+        ? undefined
+        : {
+            canonical,
+            types:
+              markdown === undefined
+                ? undefined
+                : { "text/markdown": markdown },
+          },
     description,
     openGraph: omitUndefined({
       description,

@@ -11,7 +11,7 @@ import {
 const Example = () => (
   <Plan className="max-w-lg" status="completed">
     <PlanContent>
-      <PlanItem collapsible defaultOpen status="completed">
+      <PlanItem collapsible status="completed">
         <PlanItemTrigger title="Export active accounts" />
         <PlanItemContent>
           <PlanItemDetail>
@@ -22,7 +22,7 @@ const Example = () => (
           </PlanItemDetail>
         </PlanItemContent>
       </PlanItem>
-      <PlanItem collapsible defaultOpen status="completed">
+      <PlanItem collapsible status="completed">
         <PlanItemTrigger title="Flag inactive privileged accounts" />
         <PlanItemContent>
           <PlanItemDetail>
@@ -33,7 +33,7 @@ const Example = () => (
           </PlanItemDetail>
         </PlanItemContent>
       </PlanItem>
-      <PlanItem collapsible defaultOpen status="completed">
+      <PlanItem collapsible status="completed">
         <PlanItemTrigger title="Publish the quarterly access review" />
         <PlanItemContent>
           <PlanItemDetail>

@@ -613,9 +613,9 @@ const ChatSession = ({
   showDemoArtifacts: boolean;
   welcomeTitle: string;
 }) => {
-  const [model, setModel] = useState(MODEL_OPTIONS[0].value);
-  const [effort, setEffort] = useState("medium");
-  const [access, setAccess] = useState("full");
+  const [model, setModel] = useState([MODEL_OPTIONS[0].value]);
+  const [effort, setEffort] = useState(["medium"]);
+  const [access, setAccess] = useState(["full"]);
   const [prompt, setPrompt] = useState("");
   const { collection } = useListCollection({
     initialItems: [...MODEL_OPTIONS],
@@ -763,9 +763,9 @@ const ChatSession = ({
               </Menu>
               <Select
                 collection={accessCollection}
-                onValueChange={({ value }) => setAccess(value[0] ?? "")}
+                onValueChange={({ value }) => setAccess(value)}
                 positioning={{ placement: "top-start" }}
-                value={[access]}
+                value={access}
               >
                 <SelectTrigger showTrigger={false} size="sm" variant="ghost">
                   <ShieldAlertIcon aria-hidden="true" />
@@ -787,8 +787,8 @@ const ChatSession = ({
             </PromptInputTools>
             <ModelSelector
               collection={collection}
-              onValueChange={({ value }) => setModel(value[0] ?? "")}
-              value={[model]}
+              onValueChange={({ value }) => setModel(value)}
+              value={model}
             >
               <ModelSelectorTrigger size="sm" variant="ghost" />
               <ModelSelectorContent>
@@ -803,9 +803,9 @@ const ChatSession = ({
             </ModelSelector>
             <Select
               collection={effortCollection}
-              onValueChange={({ value }) => setEffort(value[0] ?? "")}
+              onValueChange={({ value }) => setEffort(value)}
               positioning={{ placement: "top" }}
-              value={[effort]}
+              value={effort}
             >
               <SelectTrigger showTrigger={false} size="sm" variant="ghost">
                 <SelectValue placeholder="Medium" />

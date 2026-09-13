@@ -2,7 +2,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const QueueThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="flex w-full flex-col overflow-hidden rounded-xl border border-input bg-muted shadow-md/5">
+    <div className="flex w-full flex-col overflow-hidden rounded-xl border border-input bg-muted shadow-sm/4">
       <div className="flex items-center justify-between border-b px-2 py-1.5">
         <div className="h-2.5 w-24 rounded bg-muted-foreground/24" />
         <div className="h-2.5 w-10 rounded bg-muted-foreground/16" />

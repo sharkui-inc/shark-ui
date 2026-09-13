@@ -11,7 +11,7 @@ import manifest from "@/registry/manifest/toggle-tooltip";
 <Alert>
   <InfoIcon />
   <AlertDescription>
-  Toggle Tooltip is built on top of the [Popover](/docs/components/popover) component. Check it out for more examples.
+  Toggle Tooltip is built on top of the [Popover](/docs/components/popover) component. Visual styles come from [Tooltip](/docs/components/tooltip).
   </AlertDescription>
 </Alert>
 
@@ -38,7 +38,7 @@ npx shadcn@latest add @shark/toggle-tooltip
 
 <Steps>
 
-<Step>This component depends on [Popover](/docs/components/popover). Install it first if you haven't already.</Step>
+<Step>This component depends on [Popover](/docs/components/popover) and [Tooltip](/docs/components/tooltip). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
@@ -120,7 +120,19 @@ Use the `positioning` prop to change the position.
 
 <ComponentPreview componentName="toggle-tooltip" fileName="example-side" />
 
-## API Reference 
+## Examples
+
+### Without Arrow
+
+Hide the arrow with `showArrow={false}` on `ToggleTooltipContent`.
+
+<ComponentPreview componentName="toggle-tooltip" fileName="example-without-arrow" />
+
+## RTL
+
+<RTLComponentPreview componentName="toggle-tooltip" />
+
+## API Reference
 
 ### ToggleTooltip
 
@@ -152,6 +164,7 @@ Tooltip content shown in a popover on click.
 | --- | --- | --- |
 | `className` | `string` | - |
 | `asChild` | `boolean` | - |
+| `showArrow` | `boolean` | `true` |
 
 ### ToggleTooltipArrow
 

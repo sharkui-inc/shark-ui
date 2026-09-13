@@ -3,8 +3,11 @@
 import { useFilter, useListCollection } from "@ark-ui/react";
 import {
   Combobox,
+  ComboboxChip,
+  ComboboxChips,
+  ComboboxChipsInput,
   ComboboxContent,
-  ComboboxInput,
+  ComboboxContext,
   ComboboxItem,
   ComboboxList,
 } from "@/registry/react/components/combobox";
@@ -22,18 +25,36 @@ const Example = () => {
       className="w-full max-w-64"
       collection={collection}
       multiple
-      onInputValueChange={({ inputValue }) => filter(inputValue)}
+      onInputValueChange={({ inputValue, reason }) =>
+        filter(reason === "item-select" ? "" : inputValue)
+      }
     >
-      <ComboboxInput placeholder="Select frameworks..." />
-      <ComboboxContent>
-        <ComboboxList>
-          {collection.items.map((item) => (
-            <ComboboxItem item={item} key={item.value}>
-              {item.label}
-            </ComboboxItem>
-          ))}
-        </ComboboxList>
-      </ComboboxContent>
+      <ComboboxContext>
+        {({ selectedItems }) => (
+          <>
+            <ComboboxChips>
+              {selectedItems.map((item) => (
+                <ComboboxChip key={item.value} value={item.value}>
+                  {item.label}
+                </ComboboxChip>
+              ))}
+              <ComboboxChipsInput
+                aria-label="Add framework"
+                placeholder="Select frameworks..."
+              />
+            </ComboboxChips>
+            <ComboboxContent>
+              <ComboboxList>
+                {collection.items.map((item) => (
+                  <ComboboxItem item={item} key={item.value}>
+                    {item.label}
+                  </ComboboxItem>
+                ))}
+              </ComboboxList>
+            </ComboboxContent>
+          </>
+        )}
+      </ComboboxContext>
     </Combobox>
   );
 };

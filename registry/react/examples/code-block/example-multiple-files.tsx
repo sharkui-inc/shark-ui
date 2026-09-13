@@ -65,7 +65,7 @@ const Example = () => {
 
 const FILES = [
   {
-    code: 'export const siteName = "Shark UI";\nexport const siteUrl = "https://shark.vini.one";',
+    code: 'export const siteName = "Shark UI";\nexport const siteUrl = "https://shark-ui.com";',
     filename: "config.ts",
     language: "typescript",
     value: "config",

@@ -3,7 +3,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const ReasoningThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="flex w-full flex-col gap-2 rounded-lg border border-input bg-muted p-2 shadow-md/5">
+    <div className="flex w-full flex-col gap-2 rounded-lg border border-input bg-muted p-2 shadow-sm/4">
       <div className="flex items-center justify-between gap-2">
         <div className="h-2 w-28 rounded-full bg-primary" />
         <ChevronDownIcon

@@ -92,7 +92,7 @@ export const ChartContainer = (props: ChartContainerProps) => {
           "aspect-video",
           "text-xs",
           "[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground",
-          "[&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50",
+          "[&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/48",
           "[&_.recharts-curve.recharts-tooltip-cursor]:stroke-border",
           "[&_.recharts-dot[stroke='#fff']]:stroke-transparent",
           "[&_.recharts-layer]:outline-hidden",
@@ -366,7 +366,7 @@ export const ChartTooltipContent = (props: ChartTooltipContentProps) => {
         "px-2.5 py-1.5",
         "bg-background",
         "text-xs",
-        "rounded-lg border border-border/50 shadow-lg/5",
+        "rounded-lg border border-border/48 shadow-lg/4",
         className
       )}
     >

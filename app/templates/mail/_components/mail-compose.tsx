@@ -48,7 +48,7 @@ export const MailCompose = ({
       id="mail-compose-form"
       onSubmit={onSend}
     >
-      <div className="border-b bg-muted/18 px-4 py-3 sm:px-5">
+      <div className="border-b bg-muted/16 px-4 py-3 sm:px-5">
         <h2 className="font-semibold text-sm tracking-[-0.02em]">
           {composeHeading(composeMode)}
         </h2>

@@ -3,7 +3,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const CalendarThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="relative flex w-48 flex-col gap-2 rounded-lg border border-input bg-muted/64 p-3 shadow-md/5">
+    <div className="relative flex w-48 flex-col gap-2 rounded-lg border border-input bg-muted/64 p-3 shadow-sm/4">
       <div className="flex items-center justify-between gap-3">
         <div className="flex size-5 items-center justify-center rounded-lg border border-input bg-muted">
           <ChevronLeftIcon

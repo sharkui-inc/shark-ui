@@ -98,7 +98,7 @@ const collection = createListCollection({
 
 ## Controlled
 
-Use `value` and `onValueChange` to control the selected items.
+Use `value` and `onValueChange` to control the selected items. Ark UI represents selections as a `string[]`, including single selection.
 
 <ComponentPreview componentName="select" fileName="example-controlled" />
 
@@ -183,6 +183,10 @@ Use `SelectEmpty` to display a message when the collection has no items.
 Hide the chevron with `showTrigger={false}`.
 
 <ComponentPreview componentName="select" fileName="example-without-trigger" />
+
+## RTL
+
+<RTLComponentPreview componentName="select" />
 
 ## API Reference
 

@@ -18,9 +18,9 @@
   },
   "name": "chart-area-interactive",
   "registryDependencies": [
-    "https://shark.vini.one/r/card.json",
-    "https://shark.vini.one/r/chart.json",
-    "https://shark.vini.one/r/select.json"
+    "https://shark-ui.com/r/card.json",
+    "https://shark-ui.com/r/chart.json",
+    "https://shark-ui.com/r/select.json"
   ],
   "title": "Area Chart: Interactive",
   "type": "registry:block"

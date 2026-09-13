@@ -38,7 +38,7 @@ import {
   useFormatHotkey,
   useHotkey,
 } from "@/registry/react/components/hotkeys";
-import { Kbd } from "@/registry/react/components/kbd";
+import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
 import { useCopyToClipboard } from "@/registry/react/hooks/use-copy-to-clipboard";
 import { useConfig } from "@/store/config";
 
@@ -223,14 +223,17 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
         <Button
           className={cn(
             "justify-between",
-            "bg-white dark:bg-input/48",
-            "h-8 w-full md:w-48 lg:w-40"
+            "bg-white dark:bg-input/32",
+            "w-full md:w-48 lg:w-40"
           )}
           clickEffect={false}
           variant="outline"
         >
           <span className="inline-flex">Search...</span>
-          <Kbd variant="outline">{formatHotkey("mod+K")}</Kbd>
+          <KbdGroup>
+            <Kbd variant="outline">{formatHotkey("mod")}</Kbd>
+            <Kbd variant="outline">{formatHotkey("K")}</Kbd>
+          </KbdGroup>
         </Button>
       </CommandDialogTrigger>
       <CommandDialogContent>

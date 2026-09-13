@@ -12,7 +12,7 @@ import {
 } from "@/registry/react/components/state";
 
 export const MailEmpty = ({ onCompose }: { onCompose: () => void }) => (
-  <State className="border-0 bg-muted/12">
+  <State className="border-0 bg-muted/16">
     <StateHeader>
       <StateMedia variant="icon">
         <InboxIcon aria-hidden="true" />

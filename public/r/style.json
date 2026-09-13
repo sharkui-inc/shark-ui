@@ -115,6 +115,6 @@
   "devDependencies": ["tw-animate-css"],
   "extends": "none",
   "name": "style",
-  "registryDependencies": ["https://shark.vini.one/r/utils.json"],
+  "registryDependencies": ["https://shark-ui.com/r/utils.json"],
   "type": "registry:style"
 }

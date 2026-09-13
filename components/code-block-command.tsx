@@ -47,7 +47,14 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
   return (
     <figure
       className={cn(
-        "relative mt-6 w-full min-w-0 overflow-hidden rounded-2xl border bg-code text-code-foreground outline-none",
+        "relative",
+        "w-full min-w-0",
+        "mt-6",
+        "bg-code",
+        "text-code-foreground",
+        "overflow-hidden",
+        "outline-none",
+        "rounded-2xl border",
         "in-data-[tab=code]:border-0",
         className
       )}

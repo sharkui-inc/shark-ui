@@ -40,6 +40,7 @@ const DARK_PRIMARY_TONE_SHADES = {
 } as const;
 
 type Oklch = readonly [number, number, number];
+type LinearRgb = readonly [number, number, number];
 
 const tailwindTheme = readFileSync(
   "node_modules/tailwindcss/theme.css",
@@ -49,39 +50,73 @@ const tailwindTheme = readFileSync(
 const tailwindColor = (palette: string, shade: string): Oklch => {
   const match = tailwindTheme.match(
     new RegExp(
-      `--color-${palette}-${shade}: oklch\\(([\\d.]+)% ([\\d.]+) ([\\d.]+)\\)`
+      `--color-${palette}-${shade}: oklch\\(([\\d.]+)% ([\\d.]+) ([\\d.]+|none)\\)`
     )
   );
 
   assert.ok(match, `missing Tailwind color ${palette}-${shade}`);
 
-  return [Number(match[1]) / 100, Number(match[2]), Number(match[3])];
+  return [
+    Number(match[1]) / 100,
+    Number(match[2]),
+    match[3] === "none" ? 0 : Number(match[3]),
+  ];
 };
 
-const oklchLuminance = ([lightness, chroma, hue]: Oklch) => {
+const oklchToLinearRgb = ([lightness, chroma, hue]: Oklch): LinearRgb => {
   const radians = (hue * Math.PI) / 180;
   const a = chroma * Math.cos(radians);
   const b = chroma * Math.sin(radians);
   const l = (lightness + 0.396_337_777_4 * a + 0.215_803_757_3 * b) ** 3;
   const m = (lightness - 0.105_561_345_8 * a - 0.063_854_172_8 * b) ** 3;
   const s = (lightness - 0.089_484_177_5 * a - 1.291_485_548 * b) ** 3;
-  const [red, green, blue] = [
+  return [
     4.076_741_662_1 * l - 3.307_711_591_3 * m + 0.230_969_929_2 * s,
     -1.268_438_004_6 * l + 2.609_757_401_1 * m - 0.341_319_396_5 * s,
     -0.004_196_086_3 * l - 0.703_418_614_7 * m + 1.707_614_701 * s,
-  ].map((channel) => Math.min(1, Math.max(0, channel)));
-
-  return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+  ].map((channel) => Math.min(1, Math.max(0, channel))) as LinearRgb;
 };
+
+const linearLuminance = ([red, green, blue]: LinearRgb) =>
+  0.2126 * red + 0.7152 * green + 0.0722 * blue;
 
 const contrastRatio = (first: Oklch, second: Oklch) => {
   const [lighter, darker] = [
-    oklchLuminance(first),
-    oklchLuminance(second),
+    linearLuminance(oklchToLinearRgb(first)),
+    linearLuminance(oklchToLinearRgb(second)),
   ].sort((a, b) => b - a);
 
   return (lighter + 0.05) / (darker + 0.05);
 };
+
+const contrastRatioForRgb = (first: LinearRgb, second: LinearRgb) => {
+  const [lighter, darker] = [
+    linearLuminance(first),
+    linearLuminance(second),
+  ].sort((a, b) => b - a);
+
+  return (lighter + 0.05) / (darker + 0.05);
+};
+
+const toSrgb = (channel: number) =>
+  channel <= 0.003_130_8
+    ? channel * 12.92
+    : 1.055 * channel ** (1 / 2.4) - 0.055;
+
+const toLinearRgb = (channel: number) =>
+  channel <= 0.040_45 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+
+const mixInSrgb = (
+  foreground: LinearRgb,
+  background: LinearRgb,
+  foregroundPercent: number
+): LinearRgb =>
+  foreground.map((channel, index) =>
+    toLinearRgb(
+      toSrgb(channel) * foregroundPercent +
+        toSrgb(background[index]) * (1 - foregroundPercent)
+    )
+  ) as LinearRgb;
 
 const byValue = <T extends { value: string }>(
   items: readonly T[],
@@ -209,17 +244,79 @@ describe("createCssVars", () => {
     }
   });
 
-  it("keeps dark primary tones at WCAG AA contrast", () => {
-    for (const [palette, shade] of Object.entries(DARK_PRIMARY_TONE_SHADES)) {
-      const contrast = contrastRatio(
-        tailwindColor(palette, shade),
-        tailwindColor(palette, "50")
+  it("keeps primary tones at WCAG AA contrast", () => {
+    for (const primary of PRIMARY_COLORS.filter(
+      (color) => color.value !== "neutral"
+    )) {
+      for (const tone of PRIMARY_TONES) {
+        const shade = getPrimaryToneShade(primary.value, tone.value);
+        const foreground = tone.value === "light" ? "950" : "50";
+        const contrast = contrastRatio(
+          tailwindColor(primary.value, shade),
+          tailwindColor(primary.value, foreground)
+        );
+
+        assert.ok(
+          contrast >= 4.5,
+          `${primary.value}-${shade} with ${primary.value}-${foreground} is ${contrast.toFixed(2)}:1`
+        );
+      }
+    }
+  });
+
+  it("keeps semantic text pairs at WCAG AA contrast across base themes", () => {
+    for (const base of BASE_COLORS) {
+      const palette = BASE_PALETTE_RE.exec(base.cssVars.light.background)?.[1];
+
+      assert.ok(palette, `missing palette for ${base.value}`);
+
+      const lightBackground = oklchToLinearRgb(tailwindColor(palette, "50"));
+      const lightForeground = oklchToLinearRgb(tailwindColor(palette, "800"));
+      const lightSurface = mixInSrgb(
+        oklchToLinearRgb(tailwindColor(palette, "950")),
+        lightBackground,
+        0.04
+      );
+      const lightMutedForeground = mixInSrgb(
+        oklchToLinearRgb(tailwindColor(palette, "500")),
+        oklchToLinearRgb(tailwindColor(palette, "950")),
+        0.88
+      );
+      const darkBackground = mixInSrgb(
+        oklchToLinearRgb(tailwindColor(palette, "950")),
+        lightBackground,
+        0.95
+      );
+      const darkForeground = oklchToLinearRgb(tailwindColor(palette, "100"));
+      const darkCard = mixInSrgb(darkBackground, lightBackground, 0.98);
+      const darkSidebar = mixInSrgb(
+        oklchToLinearRgb(tailwindColor(palette, "950")),
+        lightBackground,
+        0.97
+      );
+      const darkSidebarForeground = mixInSrgb(
+        darkForeground,
+        darkSidebar,
+        0.64
       );
 
-      assert.ok(
-        contrast >= 4.5,
-        `${palette}-${shade} with ${palette}-50 is ${contrast.toFixed(2)}:1`
-      );
+      for (const [name, foreground, background] of [
+        ["light foreground", lightForeground, lightBackground],
+        ["light card", lightForeground, lightBackground],
+        ["light secondary", lightForeground, lightSurface],
+        ["light muted", lightMutedForeground, lightBackground],
+        ["dark foreground", darkForeground, darkBackground],
+        ["dark card", darkForeground, darkCard],
+        ["dark secondary", darkForeground, darkCard],
+        ["dark sidebar", darkSidebarForeground, darkSidebar],
+      ] as const) {
+        const contrast = contrastRatioForRgb(foreground, background);
+
+        assert.ok(
+          contrast >= 4.5,
+          `${base.value} ${name} is ${contrast.toFixed(2)}:1`
+        );
+      }
     }
   });
 
@@ -295,11 +392,14 @@ describe("createCssVars", () => {
       "styles/globals.css",
       "registry/manifest/style.ts",
       "content/docs/(root)/styling.mdx",
-    ].map((path) => readFileSync(path, "utf8"));
+    ].map((path) => readFileSync(path, "utf8").replace(/\s+/g, ""));
 
     for (const source of sources) {
       for (const token of expectedTokens) {
-        assert.ok(source.includes(token), `${token} missing from theme source`);
+        assert.ok(
+          source.includes(token.replace(/\s+/g, "")),
+          `${token} missing from theme source`
+        );
       }
       assert.ok(!source.includes("--alpha("));
     }

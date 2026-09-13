@@ -21,10 +21,10 @@ export default function Sidebar14Page() {
         <main className="flex flex-1 flex-col gap-4 p-4">
           <div className="grid gap-4 md:grid-cols-3">
             {["routing", "caching", "rendering"].map((card) => (
-              <div className="aspect-video rounded-xl bg-muted/45" key={card} />
+              <div className="aspect-video rounded-xl bg-muted/48" key={card} />
             ))}
           </div>
-          <div className="min-h-96 flex-1 rounded-xl bg-muted/45" />
+          <div className="min-h-96 flex-1 rounded-xl bg-muted/48" />
         </main>
       </SidebarInset>
       <AppSidebar />

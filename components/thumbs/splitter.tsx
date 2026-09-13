@@ -2,7 +2,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const SplitterThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="flex h-24 w-full overflow-hidden rounded-lg border border-input bg-muted shadow-md/5">
+    <div className="flex h-24 w-full overflow-hidden rounded-lg border border-input bg-muted shadow-sm/4">
       <div className="flex w-2/5 items-center justify-center">
         <div className="h-2 w-8 rounded-full bg-muted-foreground/16" />
       </div>

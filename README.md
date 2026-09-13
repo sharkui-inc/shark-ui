@@ -9,7 +9,7 @@
 
 ## Documentation
 
-Visit http://shark.vini.one/docs to view the documentation.
+Visit http://shark-ui.com/docs to view the documentation.
 
 ## Why shark-ui
 

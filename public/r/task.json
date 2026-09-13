@@ -4,9 +4,9 @@
   "description": "Collapsible agent workflow tasks with progress states and details.",
   "name": "task",
   "registryDependencies": [
-    "https://shark.vini.one/r/badge.json",
-    "https://shark.vini.one/r/collapsible.json",
-    "https://shark.vini.one/r/spinner.json"
+    "https://shark-ui.com/r/badge.json",
+    "https://shark-ui.com/r/collapsible.json",
+    "https://shark-ui.com/r/spinner.json"
   ],
   "type": "registry:ui",
   "files": [

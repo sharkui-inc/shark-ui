@@ -3,6 +3,7 @@
 import { ark } from "@ark-ui/react/factory";
 import { Tabs as ArkTabs } from "@ark-ui/react/tabs";
 import type React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
 export const BottomNavigation = (
@@ -15,6 +16,7 @@ export const BottomNavigation = (
       className={cn(
         "w-full",
         "min-h-[calc(var(--spacing)*14+env(safe-area-inset-bottom,0))]",
+        "has-[data-variant=inset]:min-h-[calc(var(--spacing)*18+env(safe-area-inset-bottom,0))]",
         className
       )}
       data-slot="bottom-navigation"
@@ -23,11 +25,39 @@ export const BottomNavigation = (
   );
 };
 
-export const BottomNavigationList = (
-  props: React.ComponentProps<typeof ArkTabs.List>
-) => {
+const bottomNavigationListVariants = tv({
+  base: [
+    "fixed z-10",
+    "flex items-center justify-around",
+    "shrink-0 border-t bg-background/64 backdrop-blur-sm",
+  ],
+  defaultVariants: {
+    variant: "default",
+  },
+  variants: {
+    variant: {
+      default: [
+        "inset-x-0 bottom-0",
+        "min-h-[calc(var(--spacing)*14+env(safe-area-inset-bottom,0))] w-full",
+        "pb-[env(safe-area-inset-bottom,0px)]",
+      ],
+      inset: [
+        "inset-x-4",
+        "bottom-[calc(var(--spacing)*4+env(safe-area-inset-bottom,0px))]",
+        "min-h-14 rounded-full shadow-lg/4",
+      ],
+    },
+  },
+});
+
+interface BottomNavigationListProps
+  extends React.ComponentProps<typeof ArkTabs.List>,
+    VariantProps<typeof bottomNavigationListVariants> {}
+
+export const BottomNavigationList = (props: BottomNavigationListProps) => {
   const {
     "aria-label": ariaLabel = "Bottom navigation",
+    variant = "default",
     className,
     ...rest
   } = props;
@@ -35,15 +65,9 @@ export const BottomNavigationList = (
   return (
     <ArkTabs.List
       aria-label={ariaLabel}
-      className={cn(
-        "fixed inset-x-0 bottom-0 z-10",
-        "flex w-full items-center justify-around",
-        "min-h-[calc(var(--spacing)*14+env(safe-area-inset-bottom,0))] shrink-0",
-        "border-t bg-background/60 backdrop-blur-sm",
-        "pb-[env(safe-area-inset-bottom,0px)]",
-        className
-      )}
+      className={cn(bottomNavigationListVariants({ variant }), className)}
       data-slot="bottom-navigation-list"
+      data-variant={variant}
       {...rest}
     />
   );

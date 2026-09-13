@@ -140,8 +140,8 @@ npx shadcn@latest add @shark/prose
 
 .prose blockquote:not(.not-prose blockquote) {
   margin-top: calc(var(--spacing) * 6);
-  border-left: 2px solid var(--color-border);
-  padding-left: calc(var(--spacing) * 6);
+  border-inline-start: 2px solid var(--color-border);
+  padding-inline-start: calc(var(--spacing) * 6);
   font-style: italic;
 }
 
@@ -165,7 +165,7 @@ npx shadcn@latest add @shark/prose
 .prose table:not(.not-prose table) th {
   border: 1px solid var(--color-border);
   padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
-  text-align: left;
+  text-align: start;
   font-weight: 700;
 }
 
@@ -189,7 +189,7 @@ npx shadcn@latest add @shark/prose
 .prose table:not(.not-prose table) td {
   border: 1px solid var(--color-border);
   padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
-  text-align: left;
+  text-align: start;
 }
 
 .prose table:not(.not-prose table) td[align="center"] {
@@ -202,7 +202,7 @@ npx shadcn@latest add @shark/prose
 
 .prose ul:not(.not-prose ul) {
   margin-top: calc(var(--spacing) * 6);
-  margin-left: calc(var(--spacing) * 6);
+  margin-inline-start: calc(var(--spacing) * 6);
   list-style: disc;
 }
 
@@ -218,7 +218,7 @@ npx shadcn@latest add @shark/prose
 
 .prose ol:not(.not-prose ol) {
   margin-top: calc(var(--spacing) * 6);
-  margin-left: calc(var(--spacing) * 6);
+  margin-inline-start: calc(var(--spacing) * 6);
   list-style: decimal;
 }
 
@@ -442,6 +442,10 @@ Use the `not-prose` class in a child to exclude it from prose styles. Useful whe
 ### Small
 
 <ComponentPreview componentName="prose" fileName="example-small" />
+
+## RTL
+
+<RTLComponentPreview componentName="prose" />
 
 ## API Reference
 

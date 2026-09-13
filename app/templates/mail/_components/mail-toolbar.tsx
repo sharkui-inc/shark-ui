@@ -19,7 +19,7 @@ export const MailToolbar = ({
   onToggleFavorite: () => void;
   onToggleUnread: () => void;
 }) => (
-  <div className="flex h-14 min-h-14 shrink-0 items-center gap-2 overflow-x-auto border-b bg-muted/18 px-3 py-0 sm:px-4">
+  <div className="flex h-14 min-h-14 shrink-0 items-center gap-2 overflow-x-auto border-b bg-muted/16 px-3 py-0 sm:px-4">
     {composeMode ? (
       <MailComposeToolbar onComposeChange={onComposeChange} />
     ) : (

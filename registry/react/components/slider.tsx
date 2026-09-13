@@ -115,11 +115,11 @@ export const Slider = (props: SliderProps) => {
                 "h-4.5 w-[calc(--spacing(4.5)*1.375)]",
                 "data-[orientation=vertical]:h-[calc(--spacing(4.5)*1.375)] data-[orientation=vertical]:w-4.5",
                 "bg-white",
-                "rounded-full border border-input shadow-xs/5",
+                "rounded-full border border-input shadow-xs/4",
                 "cursor-grab select-none",
                 "transition-[color,box-shadow,transform]",
                 "focus-visible:border-primary focus-visible:outline-hidden focus-visible:ring-[3px] focus-visible:ring-ring/32",
-                "origin-left data-[orientation=vertical]:origin-bottom data-dragging:scale-110 data-dragging:cursor-grabbing data-dragging:border-primary data-dragging:ring-[3px] data-dragging:ring-ring/32",
+                "origin-left data-[orientation=vertical]:origin-bottom data-dragging:scale-110 data-dragging:cursor-grabbing data-dragging:border-primary data-dragging:ring-[3px] data-dragging:ring-ring/32 rtl:origin-right",
                 "pointer-coarse:after:absolute pointer-coarse:after:h-full pointer-coarse:after:min-h-11",
                 "motion-reduce:transition-none"
               )}
@@ -160,7 +160,7 @@ export const Slider = (props: SliderProps) => {
               <span
                 className={cn(
                   "h-1 w-px",
-                  "bg-muted-foreground/70 group-data-[state=at-value]/marker:bg-foreground group-data-[state=under-value]/marker:bg-foreground",
+                  "bg-muted-foreground/64 group-data-[state=at-value]/marker:bg-foreground group-data-[state=under-value]/marker:bg-foreground",
                   "group-data-interval/marker:h-0.5"
                 )}
               />

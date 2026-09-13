@@ -22,7 +22,7 @@ const segmentGroupVariants = tv({
     "data-disabled:opacity-64",
     "data-[variant=underline]:gap-1 data-[variant=underline]:border-input",
     "data-[orientation=horizontal]:data-[variant=underline]:border-b",
-    "data-[orientation=vertical]:data-[variant=underline]:border-l",
+    "data-[orientation=vertical]:data-[variant=underline]:border-s",
   ],
   compoundVariants: [
     {

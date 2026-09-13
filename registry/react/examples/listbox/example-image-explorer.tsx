@@ -12,8 +12,8 @@ import {
 const Example = () => {
   const [value, setValue] = React.useState(["mountain"]);
 
-  const selectedImage = collection.items.find(
-    (item) => item.value === value.at(0)
+  const selectedImage = collection.items.find((item) =>
+    value.includes(item.value)
   );
 
   return (

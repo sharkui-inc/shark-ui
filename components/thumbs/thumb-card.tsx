@@ -25,9 +25,9 @@ export const ThumbCard = (props: ThumbCardProps) => {
       aria-label={title}
       className={cn(
         "size-full gap-0 overflow-hidden bg-muted/48 pb-0 [--space:--spacing(4)]",
-        "shadow-xs/5",
+        "shadow-xs/4",
         "transition-[border-color,box-shadow] duration-200 ease-in-out",
-        "hover:border-foreground/12 hover:shadow-xs/10",
+        "hover:border-foreground/8 hover:shadow-xs/8",
         "motion-reduce:transition-none",
         className
       )}

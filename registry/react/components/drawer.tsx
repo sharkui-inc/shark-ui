@@ -191,7 +191,7 @@ const drawerContentVariants = tv({
     "data-nested-drawer-open:pointer-events-none",
     "bg-popover",
     "text-popover-foreground",
-    "shadow-lg/5",
+    "shadow-lg/4",
     "outline-none",
     "scale-(--stack-scale)",
     "not-data-nested-drawer-open:transition-[transform,scale,opacity] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",

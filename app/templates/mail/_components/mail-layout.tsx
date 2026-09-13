@@ -16,7 +16,7 @@ export const MailLayout = ({
   list: ReactNode;
   sidebar: ReactNode;
 }) => (
-  <div className="flex h-full min-h-0 flex-col overflow-hidden bg-muted/12">
+  <div className="flex h-full min-h-0 flex-col overflow-hidden bg-background">
     <Resizable
       className="min-h-0 flex-1"
       defaultSize={[16, 84]}

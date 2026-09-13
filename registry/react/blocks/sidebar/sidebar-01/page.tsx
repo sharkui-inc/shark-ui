@@ -33,12 +33,12 @@ export default function Sidebar01Page() {
           <div className="grid gap-4 md:grid-cols-3">
             {summaryCards.map((card) => (
               <div
-                className="aspect-video rounded-xl border bg-muted/35"
+                className="aspect-video rounded-xl border bg-muted/48"
                 key={card}
               />
             ))}
           </div>
-          <div className="min-h-96 flex-1 rounded-xl border bg-muted/35" />
+          <div className="min-h-96 flex-1 rounded-xl border bg-muted/48" />
         </main>
       </SidebarInset>
     </SidebarProvider>

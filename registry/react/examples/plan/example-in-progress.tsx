@@ -11,7 +11,7 @@ import {
 const Example = () => (
   <Plan className="max-w-lg" status="in-progress">
     <PlanContent>
-      <PlanItem collapsible defaultOpen status="completed">
+      <PlanItem collapsible status="completed">
         <PlanItemTrigger title="Collect approved tenant documents" />
         <PlanItemContent>
           <PlanItemDetail>

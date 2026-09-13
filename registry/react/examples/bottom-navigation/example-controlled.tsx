@@ -20,7 +20,7 @@ const Example = () => {
 
   return (
     <div className="flex w-full max-w-xs flex-col gap-3">
-      <div className="flex h-72 flex-col overflow-y-auto rounded-lg border bg-muted shadow-lg/5">
+      <div className="flex h-72 flex-col overflow-y-auto rounded-lg border bg-muted shadow-lg/4">
         <ScrollArea>
           <div className="h-96" />
           <BottomNavigation onValueChange={handleValueChange} value={value}>

@@ -118,7 +118,7 @@ const conversations: readonly Conversation[] = [
         role: "assistant",
         sources: [
           {
-            href: "https://shark.vini.one/docs",
+            href: "https://shark-ui.com/docs",
             title: "Shark UI Docs",
           },
           {
@@ -195,7 +195,7 @@ export const AIChat = () => {
     conversations[0]?.messages ?? []
   );
   const [thinkMode, setThinkMode] = useState(true);
-  const [model, setModel] = useState("gpt-4");
+  const [model, setModel] = useState(["gpt-4"]);
   const [usedTokens, setUsedTokens] = useState(18_420);
   const [queueItems, setQueueItems] = useState(() => [...INITIAL_QUEUE]);
 
@@ -203,7 +203,8 @@ export const AIChat = () => {
     ? getConversation(activeConversationId)
     : null;
   const selectedModel =
-    MODEL_OPTIONS.find((option) => option.value === model) ?? MODEL_OPTIONS[0];
+    MODEL_OPTIONS.find((option) => model.includes(option.value)) ??
+    MODEL_OPTIONS[0];
 
   const breadcrumbProject =
     activeView === "projects"

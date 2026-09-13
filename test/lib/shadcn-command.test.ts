@@ -36,7 +36,7 @@ describe("packageManagerCommandVariants", () => {
     assert.equal(variants.bun.includes("bunx --bun"), true);
   });
 
-  it("maps generic npx to yarn / pnpm dlx", () => {
+  it("maps generic npx to package-manager executors", () => {
     const variants = packageManagerCommandVariants(
       "npx shadcn@latest add @shark/button"
     );
@@ -44,7 +44,7 @@ describe("packageManagerCommandVariants", () => {
       bun: "bunx --bun shadcn@latest add @shark/button",
       npm: "npx shadcn@latest add @shark/button",
       pnpm: "pnpm dlx shadcn@latest add @shark/button",
-      yarn: "yarn shadcn@latest add @shark/button",
+      yarn: "yarn dlx shadcn@latest add @shark/button",
     });
   });
 
@@ -56,7 +56,7 @@ describe("packageManagerCommandVariants", () => {
       bun: "bunx --bun shadcn@latest add @shark/create-chat\nbunx --bun shadcn@latest add @shark/use-chat-helper",
       npm: "npx shadcn@latest add @shark/create-chat\nnpx shadcn@latest add @shark/use-chat-helper",
       pnpm: "pnpm dlx shadcn@latest add @shark/create-chat\npnpm dlx shadcn@latest add @shark/use-chat-helper",
-      yarn: "yarn shadcn@latest add @shark/create-chat\nyarn shadcn@latest add @shark/use-chat-helper",
+      yarn: "yarn dlx shadcn@latest add @shark/create-chat\nyarn dlx shadcn@latest add @shark/use-chat-helper",
     });
   });
 
@@ -68,7 +68,7 @@ describe("packageManagerCommandVariants", () => {
       bun: "bunx --bun shadcn@latest add @shark/create-chat && bun add ai @ai-sdk/react",
       npm: "npx shadcn@latest add @shark/create-chat && npm install ai @ai-sdk/react",
       pnpm: "pnpm dlx shadcn@latest add @shark/create-chat && pnpm add ai @ai-sdk/react",
-      yarn: "yarn shadcn@latest add @shark/create-chat && yarn add ai @ai-sdk/react",
+      yarn: "yarn dlx shadcn@latest add @shark/create-chat && yarn add ai @ai-sdk/react",
     });
   });
 

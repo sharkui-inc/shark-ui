@@ -42,7 +42,7 @@ const Example = () => {
           <SpeechInputAccept />
         </SpeechInputContent>
       </SpeechInput>
-      <p className="min-h-10 rounded-lg border bg-muted/40 px-3 py-2 text-muted-foreground text-sm">
+      <p className="min-h-10 rounded-lg border bg-muted/32 px-3 py-2 text-muted-foreground text-sm">
         {transcript || "Choose a microphone, then record your message."}
       </p>
     </div>

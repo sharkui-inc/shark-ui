@@ -448,7 +448,7 @@ const TreeViewNodeInput = (
         "text-sm",
         "border-primary bg-popover text-foreground",
         "rounded-md border",
-        "selection:bg-primary/20 selection:text-foreground",
+        "selection:bg-primary/24 selection:text-foreground",
         "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
         className
       )}

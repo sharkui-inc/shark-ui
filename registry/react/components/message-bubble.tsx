@@ -41,24 +41,24 @@ export const messageBubbleVariants = tv({
       destructive: [
         "[--message-bubble-surface:color-mix(in_oklab,var(--destructive)_10%,var(--background))]",
         "dark:[--message-bubble-surface:color-mix(in_oklab,var(--destructive)_5%,var(--background))]",
-        "*:data-[slot=message-bubble-content]:bg-destructive/10 *:data-[slot=message-bubble-content]:text-destructive-foreground",
-        "dark:*:data-[slot=message-bubble-content]:bg-destructive/5",
-        "*:data-[slot=message-bubble-content]:border-destructive-foreground/20",
-        "[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-destructive/20",
+        "*:data-[slot=message-bubble-content]:bg-destructive/8 *:data-[slot=message-bubble-content]:text-destructive-foreground",
+        "dark:*:data-[slot=message-bubble-content]:bg-destructive/8",
+        "*:data-[slot=message-bubble-content]:border-destructive-foreground/24",
+        "[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-destructive/24",
       ],
       ghost: [
         "[--message-bubble-surface:var(--background)]",
         "border-none *:data-[slot=message-bubble-content]:rounded-none *:data-[slot=message-bubble-content]:bg-transparent *:data-[slot=message-bubble-content]:p-0",
         "[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-muted",
         "[&>[data-slot=message-bubble-content]:is(button,a):hover]:text-foreground",
-        "dark:[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-muted/50",
+        "dark:[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-muted/48",
       ],
       outline: [
         "[--message-bubble-surface:var(--background)]",
         "*:data-[slot=message-bubble-content]:border-border *:data-[slot=message-bubble-content]:bg-background",
         "[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-muted",
         "[&>[data-slot=message-bubble-content]:is(button,a):hover]:text-foreground",
-        "dark:[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-input/30",
+        "dark:[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-input/32",
       ],
       secondary: [
         "[--message-bubble-surface:var(--secondary)]",
@@ -107,8 +107,8 @@ export const MessageBubbleContent = (
       className={cn(
         "wrap-break-word w-fit min-w-0 max-w-full overflow-hidden rounded-xl border border-transparent px-3 py-2 text-sm leading-relaxed",
         "group-data-[align=end]/message-bubble:self-end",
-        "[button,a]:outline-none [button,a]:transition-colors [button]:text-left",
-        "[button,a]:focus-visible:border-ring [button,a]:focus-visible:ring-3 [button,a]:focus-visible:ring-ring/50",
+        "[button,a]:outline-none [button,a]:transition-colors [button]:text-start",
+        "[button,a]:focus-visible:border-ring [button,a]:focus-visible:ring-3 [button,a]:focus-visible:ring-ring/48",
         className
       )}
       {...rest}
@@ -144,7 +144,7 @@ export const MessageBubbleTrigger = (
         "group-data-[variant=secondary]/message-bubble:text-secondary-foreground",
         "group-data-[variant=tinted]/message-bubble:text-foreground",
         "outline-none",
-        "focus-visible:ring-3 focus-visible:ring-ring/50",
+        "focus-visible:ring-3 focus-visible:ring-ring/48",
         "[&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0",
         "transition-opacity duration-200 ease-out",
         "motion-reduce:transition-none",

@@ -3,8 +3,8 @@
   "dependencies": ["@ark-ui/react", "lucide-react", "tailwind-variants"],
   "name": "autocomplete",
   "registryDependencies": [
-    "https://shark.vini.one/r/combobox.json",
-    "https://shark.vini.one/r/separator.json"
+    "https://shark-ui.com/r/combobox.json",
+    "https://shark-ui.com/r/separator.json"
   ],
   "type": "registry:ui",
   "files": [

@@ -31,7 +31,7 @@ export function SidebarRight() {
           <CalendarPlusIcon aria-hidden="true" className="size-4" />
           <div className="min-w-0">
             <p className="truncate font-medium text-sm">September 2026</p>
-            <p className="truncate text-sidebar-foreground/65 text-xs">
+            <p className="truncate text-sidebar-foreground text-xs">
               3 events today
             </p>
           </div>
@@ -47,7 +47,7 @@ export function SidebarRight() {
                   <SidebarMenuButton asChild>
                     <a href="#">
                       <span className="flex-1">{calendar.name}</span>
-                      <span className="text-sidebar-foreground/65 text-xs">
+                      <span className="text-sidebar-foreground text-xs">
                         {calendar.events}
                       </span>
                       <ChevronRightIcon aria-hidden="true" className="size-4" />
@@ -62,7 +62,7 @@ export function SidebarRight() {
         <SidebarGroup>
           <SidebarGroupLabel>Upcoming</SidebarGroupLabel>
           <SidebarGroupContent>
-            <p className="px-2 text-sidebar-foreground/65 text-sm">
+            <p className="px-2 text-sidebar-foreground text-sm">
               Design review at 10:30 AM
             </p>
           </SidebarGroupContent>

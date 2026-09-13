@@ -11,15 +11,15 @@ import {
 } from "@/registry/react/components/model-selector";
 
 const Example = () => {
-  const [value, setValue] = useState(models[0].value);
+  const [value, setValue] = useState([models[0].value]);
   const { collection } = useListCollection({ initialItems: models });
 
   return (
     <div className="flex justify-center">
       <ModelSelector
         collection={collection}
-        onValueChange={({ value }) => setValue(value[0] ?? "")}
-        value={[value]}
+        onValueChange={(details) => setValue(details.value)}
+        value={value}
       >
         <ModelSelectorTrigger variant="ghost" />
         <ModelSelectorContent>

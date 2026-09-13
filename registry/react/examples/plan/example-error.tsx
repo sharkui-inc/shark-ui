@@ -11,7 +11,7 @@ import {
 const Example = () => (
   <Plan className="max-w-lg" status="error">
     <PlanContent>
-      <PlanItem collapsible defaultOpen status="completed">
+      <PlanItem collapsible status="completed">
         <PlanItemTrigger title="Validate the settlement export" />
         <PlanItemContent>
           <PlanItemDetail>
@@ -19,7 +19,7 @@ const Example = () => (
           </PlanItemDetail>
         </PlanItemContent>
       </PlanItem>
-      <PlanItem collapsible defaultOpen status="error">
+      <PlanItem collapsible status="error">
         <PlanItemTrigger title="Backfill payment reconciliation records" />
         <PlanItemContent>
           <PlanItemDetail>

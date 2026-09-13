@@ -22,7 +22,7 @@ import { SettingsSwitchField } from "./settings-fields";
 export const SettingsAppearancePage = ({ onSave }: { onSave: () => void }) => {
   const [systemPreference, setSystemPreference] = useState(true);
   const [compactNavigation, setCompactNavigation] = useState(true);
-  const [appearance, setAppearance] = useState<AppearanceOption>("System");
+  const [appearance, setAppearance] = useState<AppearanceOption[]>(["System"]);
 
   return (
     <FieldGroup className="max-w-xl">
@@ -36,16 +36,10 @@ export const SettingsAppearancePage = ({ onSave }: { onSave: () => void }) => {
           <ToggleGroup
             multiple={false}
             onValueChange={({ value }) => {
-              const next = value[0] as AppearanceOption | undefined;
-
-              if (!next) {
-                return;
-              }
-
-              setAppearance(next);
+              setAppearance(value as AppearanceOption[]);
               onSave();
             }}
-            value={[appearance]}
+            value={appearance}
             variant="outline"
           >
             {appearanceOptions.map((option) => (

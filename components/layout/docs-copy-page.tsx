@@ -1,9 +1,7 @@
-import { Badge } from "@registry/react/components/badge";
 import { ChevronDownIcon } from "lucide-react";
 import { ChatGptIcon } from "@/components/icons/chat-gpt";
 import { ClaudeIcon } from "@/components/icons/claude";
 import { MarkdownIcon } from "@/components/icons/markdown";
-import { SITE_FEATURES } from "@/config/features";
 import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
@@ -78,26 +76,16 @@ export const DocsCopyPage = (props: DocsCopyPageProps) => {
                   Open in Claude
                 </a>
               </MenuItem>
-              {SITE_FEATURES.rawMarkdownRoutes ? (
-                <MenuItem asChild value="markdown">
-                  <a
-                    href={`${pageUrl}.md`}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <MarkdownIcon />
-                    View as Markdown
-                  </a>
-                </MenuItem>
-              ) : (
-                <MenuItem disabled value="markdown">
+              <MenuItem asChild value="markdown">
+                <a
+                  href={`${pageUrl}.md`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
                   <MarkdownIcon />
                   View as Markdown
-                  <Badge className="ms-auto" variant="outline">
-                    Disabled
-                  </Badge>
-                </MenuItem>
-              )}
+                </a>
+              </MenuItem>
             </MenuGroup>
           </MenuContent>
         </Menu>

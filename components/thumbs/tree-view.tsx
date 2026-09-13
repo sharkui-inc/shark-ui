@@ -3,7 +3,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const TreeViewThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="flex flex-col gap-1.5 rounded-lg border border-input bg-muted p-3 shadow-md/5">
+    <div className="flex flex-col gap-1.5 rounded-lg border border-input bg-muted p-3 shadow-sm/4">
       <div className="flex items-center gap-2">
         <ChevronDownIcon
           aria-hidden="true"

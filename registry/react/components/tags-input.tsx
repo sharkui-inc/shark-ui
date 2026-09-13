@@ -93,9 +93,10 @@ export const TagsInputControl = (props: TagsInputControlProps) => {
       <InputGroup
         className={cn(
           "h-auto in-data-[size=lg]:min-h-9 in-data-[size=sm]:min-h-7 min-h-8",
-          "p-1 [--input-group-inset:--spacing(1)]",
+          "py-1 [--input-group-inset:--spacing(1)]",
           "flex-wrap content-start items-center gap-1",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
+          "has-data-[slot=tags-input-item]:px-1",
           className
         )}
         size={size}
@@ -128,13 +129,13 @@ export const TagsInputItem = (props: TagsInputItemProps) => {
     <ArkTagsInput.Item
       className={cn(
         "h-6 in-data-[size=lg]:h-7 in-data-[size=sm]:h-5 max-w-full",
-        "pr-0.5 in-data-[size=lg]:pl-2 in-data-[size=sm]:pl-1 pl-1.5",
+        "in-data-[size=lg]:ps-2 in-data-[size=sm]:ps-1 ps-1.5 pe-0.5",
         "inline-flex shrink-0 items-center gap-1",
         "bg-secondary",
         "in-data-[size=lg]:text-sm text-secondary-foreground text-xs",
         "[--input-group-inset:--spacing(0.5)]",
         "in-data-[pill=true]/tags-input:rounded-full rounded-md border outline-none",
-        "data-highlighted:border-primary/30 data-highlighted:bg-primary/10",
+        "data-highlighted:border-primary/32 data-highlighted:bg-primary/8",
         className
       )}
       data-slot="tags-input-item"
@@ -226,7 +227,7 @@ export const TagsInputInput = (
     <InputGroupInput
       className={cn(
         "w-auto min-w-18 max-w-full flex-auto shrink basis-auto",
-        "h-7 in-data-[size=lg]:h-8 in-data-[size=sm]:h-6"
+        "h-5.5 in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5"
       )}
     />
   </ArkTagsInput.Input>

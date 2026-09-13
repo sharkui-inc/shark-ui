@@ -176,7 +176,7 @@ export const TourContent = (props: TourContentProps) => {
             "w-full max-w-md",
             "flex flex-col gap-4",
             "bg-background",
-            "rounded-lg border shadow-lg/5",
+            "rounded-lg border shadow-lg/4",
             "focus:outline-none focus:ring-0",
             "data-[state=closed]:animate-out data-[state=open]:animate-in",
             "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
@@ -190,9 +190,9 @@ export const TourContent = (props: TourContentProps) => {
           {children}
 
           {!!showCloseButton && (
-            <TourClose asChild className="absolute top-4 right-4">
+            <TourClose asChild className="absolute inset-e-4 top-4">
               <Button
-                className="size-8 border-none opacity-70 hover:opacity-100"
+                className="size-8 border-none text-muted-foreground hover:text-foreground"
                 size="icon-md"
                 variant="ghost"
               >

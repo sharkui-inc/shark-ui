@@ -22,33 +22,33 @@ export const alertVariants = tv({
   variants: {
     variant: {
       default: [
-        "bg-input/4",
+        "bg-input/8",
         "[&_svg]:text-muted-foreground",
         "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-muted",
       ],
       destructive: [
-        "bg-destructive/4",
+        "bg-destructive/8",
         "border-destructive/32",
         "[&_svg]:text-destructive-foreground",
-        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-destructive/10",
+        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-destructive/8",
       ],
       info: [
-        "bg-info/4",
+        "bg-info/8",
         "border-info/32",
         "[&_svg]:text-info-foreground",
-        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-info/10",
+        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-info/8",
       ],
       success: [
-        "bg-success/4",
+        "bg-success/8",
         "border-success/32",
         "[&_svg]:text-success-foreground",
-        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-success/10",
+        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-success/8",
       ],
       warning: [
-        "bg-warning/4",
+        "bg-warning/8",
         "border-warning/32",
         "[&_svg]:text-warning-foreground",
-        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-warning/10",
+        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-warning/8",
       ],
     },
   },

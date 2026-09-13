@@ -3,11 +3,11 @@
   "dependencies": ["@tanstack/react-table", "lucide-react"],
   "name": "data-table",
   "registryDependencies": [
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/menu.json",
-    "https://shark.vini.one/r/native-select.json",
-    "https://shark.vini.one/r/pagination.json",
-    "https://shark.vini.one/r/table.json"
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/menu.json",
+    "https://shark-ui.com/r/native-select.json",
+    "https://shark-ui.com/r/pagination.json",
+    "https://shark-ui.com/r/table.json"
   ],
   "type": "registry:ui",
   "files": [

@@ -10,7 +10,7 @@ const MODEL_OPTIONS = [
 ] as const;
 
 const ComposerDemo = () => {
-  const [model, setModel] = React.useState("gpt-4");
+  const [model, setModel] = React.useState(["gpt-4"]);
   const [thinkMode, setThinkMode] = React.useState(true);
 
   return (

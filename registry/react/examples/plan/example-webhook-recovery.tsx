@@ -24,7 +24,7 @@ const Example = () => (
       title="Recover failed invoice webhooks"
     />
     <PlanContent>
-      <PlanItem collapsible defaultOpen status="completed">
+      <PlanItem collapsible status="completed">
         <PlanItemTrigger title="Inspect the failed delivery batch" />
         <PlanItemContent>
           <PlanItemDetail>
@@ -38,7 +38,7 @@ const Example = () => (
           </PlanItemDetail>
         </PlanItemContent>
       </PlanItem>
-      <PlanItem collapsible defaultOpen status="in-progress">
+      <PlanItem collapsible status="in-progress">
         <PlanItemTrigger title="Patch the retry worker" />
         <PlanItemContent>
           <PlanItemDetail>

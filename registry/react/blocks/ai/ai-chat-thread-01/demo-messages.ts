@@ -48,7 +48,7 @@ export const LAUNCH_PLAN_MESSAGES: readonly ChatMessage[] = [
     role: "assistant",
     sources: [
       {
-        href: "https://shark.vini.one/docs",
+        href: "https://shark-ui.com/docs",
         title: "Shark UI Docs",
       },
       {

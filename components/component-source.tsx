@@ -6,13 +6,22 @@ import { highlightCode } from "@/lib/highlight-code";
 import { resolveRegistrySourcePath } from "@/lib/registry-source-path";
 import { replaceContentForCopy } from "@/utils/formatter";
 import { CodeCollapsibleWrapper } from "./code-collapsible-wrapper";
-import { DocsCodeFrame, type DocsCodeFrameProps } from "./docs-code-block";
+import {
+  DocsCodeFrame,
+  type DocsCodeFrameProps,
+  isDocsTextLanguage,
+} from "./docs-code-block";
 
 export interface ComponentSourceProps extends DocsCodeFrameProps {
   /**
    * The source code to display
    */
-  code?: string;
+  code: string;
+  /**
+   * Whether to show the copy button
+   *
+   * @default true
+   */
   copyButton?: boolean;
   /**
    * Whether to make the code block collapsible
@@ -24,6 +33,11 @@ export interface ComponentSourceProps extends DocsCodeFrameProps {
    * The language of the code block
    */
   language?: string;
+  /**
+   * Whether to show the line numbers
+   *
+   * @default true
+   */
   showLineNumbers?: boolean;
   /**
    * The source file to read
@@ -31,14 +45,7 @@ export interface ComponentSourceProps extends DocsCodeFrameProps {
   src?: string;
 }
 
-const DocsCodeBlock = async (
-  props: DocsCodeFrameProps & {
-    code: string;
-    copyButton?: boolean;
-    lang?: string;
-    showLineNumbers?: boolean;
-  }
-) => {
+const DocsCodeBlock = async (props: ComponentSourceProps) => {
   const {
     title,
     code,
@@ -49,7 +56,9 @@ const DocsCodeBlock = async (
     ...rest
   } = props;
 
-  const highlightedCode = await highlightCode(code, lang, { showLineNumbers });
+  const highlightedCode = isDocsTextLanguage(lang)
+    ? undefined
+    : await highlightCode(code, lang, { showLineNumbers });
 
   return (
     <DocsCodeFrame
@@ -57,12 +66,15 @@ const DocsCodeBlock = async (
       className={className}
       copyValue={copyButton ? code : undefined}
       language={lang}
+      rawCode={code}
       title={title}
     >
-      <div
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki highlights trusted source code.
-        dangerouslySetInnerHTML={{ __html: highlightedCode }}
-      />
+      {highlightedCode ? (
+        <div
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki highlights trusted source code.
+          dangerouslySetInnerHTML={{ __html: highlightedCode }}
+        />
+      ) : null}
     </DocsCodeFrame>
   );
 };

@@ -4,8 +4,8 @@
   "description": "Compound microphone recording input with waveform, duration, and browser transcription.",
   "name": "speech-input",
   "registryDependencies": [
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/native-select.json"
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/native-select.json"
   ],
   "type": "registry:ui",
   "files": [

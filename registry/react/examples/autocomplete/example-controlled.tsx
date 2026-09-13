@@ -12,7 +12,7 @@ import {
 } from "@/registry/react/components/autocomplete";
 
 const Example = () => {
-  const [value, setValue] = React.useState<string | undefined>("banana");
+  const [value, setValue] = React.useState(["banana"]);
 
   const { contains } = useFilter({ sensitivity: "base" });
 
@@ -27,8 +27,8 @@ const Example = () => {
         className="w-full"
         collection={collection}
         onInputValueChange={({ inputValue }) => filter(inputValue)}
-        onValueChange={(e) => setValue(e.value?.at(0))}
-        value={value ? [value] : []}
+        onValueChange={(details) => setValue(details.value)}
+        value={value}
       >
         <AutocompleteInput placeholder="Select a fruit..." />
         <AutocompleteContent>
@@ -43,7 +43,7 @@ const Example = () => {
         </AutocompleteContent>
       </Autocomplete>
       <p className="text-center text-muted-foreground text-sm">
-        Selected: {value ?? "(none)"}
+        Selected: {value.join(", ") || "(none)"}
       </p>
     </div>
   );

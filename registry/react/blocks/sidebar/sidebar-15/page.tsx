@@ -26,7 +26,7 @@ export default function Sidebar15Page() {
               Review the navigation and scheduling details before publishing.
             </p>
           </section>
-          <div className="mx-auto min-h-96 w-full max-w-3xl rounded-xl bg-muted/45" />
+          <div className="mx-auto min-h-96 w-full max-w-3xl rounded-xl bg-muted/48" />
         </main>
       </SidebarInset>
       <SidebarRight />

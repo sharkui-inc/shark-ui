@@ -307,10 +307,10 @@ export const PromptInputPopoverAction = (
         className={cn(
           menuItemControlVariants(),
           hasDescription ? "items-start" : "items-center",
-          "text-left",
+          "text-start",
           "outline-none transition-colors",
           "hover:bg-muted focus-visible:bg-muted",
-          "disabled:pointer-events-none disabled:opacity-50",
+          "disabled:pointer-events-none disabled:opacity-64",
           className
         )}
         data-slot="prompt-input-popover-action"

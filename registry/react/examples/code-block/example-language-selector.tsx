@@ -16,8 +16,11 @@ import {
 } from "@/registry/react/components/code-block";
 
 const Example = () => {
-  const [language, setLanguage] = useState("typescript");
-  const snippet = SNIPPETS[language as keyof typeof SNIPPETS];
+  const [language, setLanguage] = useState(["typescript"]);
+  const snippet =
+    SNIPPETS[
+      language.find((value) => value in SNIPPETS) as keyof typeof SNIPPETS
+    ] ?? SNIPPETS.typescript;
 
   return (
     <CodeBlock
@@ -29,10 +32,8 @@ const Example = () => {
         <CodeBlockActions>
           <CodeBlockLanguageSelector
             collection={LANGUAGES}
-            onValueChange={(details) =>
-              setLanguage(details.value[0] ?? "typescript")
-            }
-            value={[language]}
+            onValueChange={({ value }) => setLanguage(value)}
+            value={language}
           >
             <CodeBlockLanguageSelectorTrigger>
               <CodeBlockLanguageSelectorValue />

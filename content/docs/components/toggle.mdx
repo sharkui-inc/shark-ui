@@ -52,16 +52,11 @@ npx shadcn@latest add @shark/toggle
 ## Usage
 
 ```tsx
-import { 
-  Toggle,   
-  ToggleIndicator 
-} from "@/components/ui/toggle"; 
+import { Toggle } from "@/components/ui/toggle";
 ```
 
 ```tsx
-<Toggle>
-  <ToggleIndicator />
-</Toggle>
+<Toggle>Toggle</Toggle>
 ```
 
 ## Controlled
@@ -117,6 +112,16 @@ Use multiple toggles with icons for toolbar-style controls.
 
 <ComponentPreview componentName="toggle" fileName="example-icon-group" />
 
+### Stateful label
+
+`ToggleIndicator` renders its children when pressed and `fallback` when not.
+
+<ComponentPreview componentName="toggle" fileName="example-indicator" />
+
+## RTL
+
+<RTLComponentPreview componentName="toggle" />
+
 ## API Reference
 
 ### Toggle
@@ -137,10 +142,11 @@ Toggle button for on/off or selected state. Use `asChild` for custom elements.
 
 ### ToggleIndicator
 
-Icon or indicator shown when toggle is active. Omitted when used as child.
+Renders its children when the toggle is pressed and `fallback` when it is not.
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `fallback` | `ReactNode` | `-` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 

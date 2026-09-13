@@ -11,7 +11,7 @@
       "type": "registry:page"
     },
     {
-      "content": "import type { ChatMessage } from \"@/components/ai-chat-thread/chat-thread\";\n\nexport const LAUNCH_PLAN_MESSAGES: readonly ChatMessage[] = [\n  {\n    attachment: {\n      description: \"PDF · 1.2 MB\",\n      name: \"launch-brief.pdf\",\n    },\n    content: \"Turn this launch brief into a concise plan for the product team.\",\n    id: \"launch-user\",\n    role: \"user\",\n  },\n  {\n    approvalPlan: {\n      steps: [\n        { id: \"1\", title: \"Confirm audience and release boundary\" },\n        { id: \"2\", title: \"Assign owners to launch risks\" },\n        { id: \"3\", title: \"Draft weekly milestone reviews\" },\n        { id: \"4\", title: \"Publish one-page summary\" },\n      ],\n      summary:\n        \"Lock scope, assign risk owners, and turn the brief into weekly milestones.\",\n      title: \"Launch plan\",\n    },\n    confirmation: \"Allow reading launch-brief.pdf for planning context?\",\n    content:\n      \"Start with three decisions: confirm the audience, lock the release boundary, and assign one owner to each launch risk. Then turn the brief into milestones that can be reviewed weekly.\",\n    id: \"launch-assistant\",\n    plan: {\n      tasks: [\n        {\n          file: \"launch-brief.pdf\",\n          status: \"completed\",\n          title: \"Extract decisions from the brief\",\n        },\n        {\n          status: \"in-progress\",\n          title: \"Draft milestone checklist\",\n        },\n      ],\n      title: \"Launch readiness\",\n    },\n    reasoning: {\n      content:\n        \"The brief already names the audience and three launch risks. I should convert those into owned decisions and a weekly review cadence instead of inventing new workstreams.\",\n      duration: 6,\n    },\n    role: \"assistant\",\n    sources: [\n      {\n        href: \"https://shark.vini.one/docs\",\n        title: \"Shark UI Docs\",\n      },\n      {\n        href: \"https://ark-ui.com\",\n        title: \"Ark UI\",\n      },\n    ],\n    tool: {\n      file: \"launch-brief.pdf\",\n      name: \"Read\",\n      pathLabel: \"File\",\n    },\n  },\n];\n",
+      "content": "import type { ChatMessage } from \"@/components/ai-chat-thread/chat-thread\";\n\nexport const LAUNCH_PLAN_MESSAGES: readonly ChatMessage[] = [\n  {\n    attachment: {\n      description: \"PDF · 1.2 MB\",\n      name: \"launch-brief.pdf\",\n    },\n    content: \"Turn this launch brief into a concise plan for the product team.\",\n    id: \"launch-user\",\n    role: \"user\",\n  },\n  {\n    approvalPlan: {\n      steps: [\n        { id: \"1\", title: \"Confirm audience and release boundary\" },\n        { id: \"2\", title: \"Assign owners to launch risks\" },\n        { id: \"3\", title: \"Draft weekly milestone reviews\" },\n        { id: \"4\", title: \"Publish one-page summary\" },\n      ],\n      summary:\n        \"Lock scope, assign risk owners, and turn the brief into weekly milestones.\",\n      title: \"Launch plan\",\n    },\n    confirmation: \"Allow reading launch-brief.pdf for planning context?\",\n    content:\n      \"Start with three decisions: confirm the audience, lock the release boundary, and assign one owner to each launch risk. Then turn the brief into milestones that can be reviewed weekly.\",\n    id: \"launch-assistant\",\n    plan: {\n      tasks: [\n        {\n          file: \"launch-brief.pdf\",\n          status: \"completed\",\n          title: \"Extract decisions from the brief\",\n        },\n        {\n          status: \"in-progress\",\n          title: \"Draft milestone checklist\",\n        },\n      ],\n      title: \"Launch readiness\",\n    },\n    reasoning: {\n      content:\n        \"The brief already names the audience and three launch risks. I should convert those into owned decisions and a weekly review cadence instead of inventing new workstreams.\",\n      duration: 6,\n    },\n    role: \"assistant\",\n    sources: [\n      {\n        href: \"https://shark-ui.com/docs\",\n        title: \"Shark UI Docs\",\n      },\n      {\n        href: \"https://ark-ui.com\",\n        title: \"Ark UI\",\n      },\n    ],\n    tool: {\n      file: \"launch-brief.pdf\",\n      name: \"Read\",\n      pathLabel: \"File\",\n    },\n  },\n];\n",
       "path": "blocks/ai/ai-chat-thread-01/demo-messages.ts",
       "target": "@components/ai-chat-thread/demo-messages.ts",
       "type": "registry:file"
@@ -30,19 +30,19 @@
   },
   "name": "ai-chat-thread-01",
   "registryDependencies": [
-    "https://shark.vini.one/r/approval-card.json",
-    "https://shark.vini.one/r/attachment.json",
-    "https://shark.vini.one/r/avatar.json",
-    "https://shark.vini.one/r/message-bubble.json",
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/message.json",
-    "https://shark.vini.one/r/message-scroller.json",
-    "https://shark.vini.one/r/plan.json",
-    "https://shark.vini.one/r/reasoning.json",
-    "https://shark.vini.one/r/sources.json",
-    "https://shark.vini.one/r/suggestion.json",
-    "https://shark.vini.one/r/tool-result.json",
-    "https://shark.vini.one/r/tooltip.json"
+    "https://shark-ui.com/r/approval-card.json",
+    "https://shark-ui.com/r/attachment.json",
+    "https://shark-ui.com/r/avatar.json",
+    "https://shark-ui.com/r/message-bubble.json",
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/message.json",
+    "https://shark-ui.com/r/message-scroller.json",
+    "https://shark-ui.com/r/plan.json",
+    "https://shark-ui.com/r/reasoning.json",
+    "https://shark-ui.com/r/sources.json",
+    "https://shark-ui.com/r/suggestion.json",
+    "https://shark-ui.com/r/tool-result.json",
+    "https://shark-ui.com/r/tooltip.json"
   ],
   "title": "AI Chat Thread",
   "type": "registry:block"

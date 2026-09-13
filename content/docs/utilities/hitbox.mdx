@@ -58,10 +58,10 @@ npx shadcn@latest add @shark/hitbox
     bottom: var(--hitbox-b, 0px);
     left: var(--hitbox-l, 0px);
     pointer-events: inherit;
-    @apply border border-dashed border-info bg-info/10;
+    @apply border border-dashed border-info bg-info/8;
   }
   &:hover::before {
-    @apply border border-dashed border-success bg-success/10;
+    @apply border border-dashed border-success bg-success/8;
   }
 }
 @utility hitbox {
@@ -178,6 +178,10 @@ Add `hitbox-debug` to visualize the expanded hit area.
 Use `hitbox-y-*` so adjacent items feel continuous.
 
 <ComponentPreview componentName="hitbox" fileName="example-sidebar" />
+
+## RTL
+
+<RTLComponentPreview componentName="hitbox" />
 
 ## API Reference
 

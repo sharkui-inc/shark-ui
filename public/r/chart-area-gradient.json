@@ -18,8 +18,8 @@
   },
   "name": "chart-area-gradient",
   "registryDependencies": [
-    "https://shark.vini.one/r/card.json",
-    "https://shark.vini.one/r/chart.json"
+    "https://shark-ui.com/r/card.json",
+    "https://shark-ui.com/r/chart.json"
   ],
   "title": "Area Chart: Gradient",
   "type": "registry:block"

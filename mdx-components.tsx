@@ -4,8 +4,9 @@ import type React from "react";
 import { CodeBlockCommand } from "@/components/code-block-command";
 import { CodeCollapsibleWrapper } from "@/components/code-collapsible-wrapper";
 import { CodeTabs } from "@/components/code-tabs";
-import { ComponentPreview } from "@/components/component-preview";
 import { ComponentSource } from "@/components/component-source";
+import { ComponentPreview } from "@/components/docs/component-preview/component-preview";
+import { RTLComponentPreview } from "@/components/docs/component-preview/rtl-component-preview";
 import { DocsCodeFrame } from "@/components/docs-code-block";
 import { PreviewIframe } from "@/components/preview-iframe";
 import { RegistryDependencies } from "@/components/registry-dependencies";
@@ -298,6 +299,7 @@ export const mdxComponents = {
         copyValue={__raw__}
         data-slot="docs-mdx-code-block"
         language={language}
+        rawCode={__raw__}
         title={title}
       >
         <pre className={className} data-language={language} {...props} />
@@ -305,6 +307,7 @@ export const mdxComponents = {
     );
   },
   RegistryDependencies,
+  RTLComponentPreview,
   Step: ({ className, ...props }: React.ComponentProps<"h3">) => (
     <h3
       className={cn("mt-8 scroll-m-32 tracking-tight first:mt-2", className)}

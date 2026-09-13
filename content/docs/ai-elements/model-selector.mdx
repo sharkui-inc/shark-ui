@@ -127,7 +127,7 @@ const { collection, filter } = useListCollection({
 
 ## Controlled
 
-Control the selected model with `value` and `onValueChange`.
+Control the selected model with `value` and `onValueChange`. Ark UI represents selections as a `string[]`, including single selection.
 
 <ComponentPreview componentName="model-selector" fileName="example-controlled" />
 
@@ -170,6 +170,10 @@ Group models with `groupBy` on the collection and `ModelSelectorGroup`.
 Pass `showTrigger` to display a chevron in the trigger.
 
 <ComponentPreview componentName="model-selector" fileName="example-with-trigger" />
+
+## RTL
+
+<RTLComponentPreview componentName="model-selector" />
 
 ## API Reference
 

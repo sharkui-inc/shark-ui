@@ -24,7 +24,7 @@ const Example = () => (
         <Button variant="outline">Start Form Tutorial</Button>
       </TourTrigger>
 
-      <div className="flex max-w-xs flex-col gap-4 rounded-lg border border-border bg-muted/50 p-4">
+      <div className="flex max-w-xs flex-col gap-4 rounded-lg border border-border bg-muted/48 p-4">
         <Field>
           <FieldLabel htmlFor="input-name">Name</FieldLabel>
           <Input id="input-name" placeholder="Enter your name" />

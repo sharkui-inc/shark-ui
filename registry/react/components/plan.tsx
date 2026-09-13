@@ -8,7 +8,7 @@ import {
   CircleXIcon,
   ListChecksIcon,
 } from "lucide-react";
-import type React from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/registry/react/components/badge";
 import {
@@ -96,7 +96,7 @@ export const PlanHeader = (props: PlanHeaderProps) => {
       className={cn(
         "flex w-full min-w-0 items-center gap-3 px-3 py-2 text-start",
         description ? "min-h-14" : "min-h-10",
-        "hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "hover:bg-muted/48 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         "transition-colors duration-150 motion-reduce:transition-none",
         className
       )}
@@ -164,9 +164,36 @@ export const PlanItem = (props: PlanItemProps) => {
     className,
     collapsible = false,
     defaultOpen,
+    onOpenChange,
+    open,
     status = "pending",
     ...rest
   } = props;
+  const isOpenControlled = open !== undefined;
+  const [uncontrolledOpen, setUncontrolledOpen] = React.useState(
+    () => defaultOpen ?? status === "in-progress"
+  );
+  const previousStatus = React.useRef(status);
+
+  React.useEffect(() => {
+    if (previousStatus.current === status) {
+      return;
+    }
+
+    previousStatus.current = status;
+
+    if (!isOpenControlled) {
+      setUncontrolledOpen(status === "in-progress");
+    }
+  }, [isOpenControlled, status]);
+
+  const handleOpenChange = (details: { open: boolean }) => {
+    if (!isOpenControlled) {
+      setUncontrolledOpen(details.open);
+    }
+
+    onOpenChange?.(details);
+  };
 
   return (
     <PlanItemProvider value={{ collapsible, status }}>
@@ -179,7 +206,8 @@ export const PlanItem = (props: PlanItemProps) => {
         )}
         data-slot="plan-item"
         data-status={status}
-        defaultOpen={defaultOpen ?? status === "in-progress"}
+        onOpenChange={handleOpenChange}
+        open={isOpenControlled ? open : uncontrolledOpen}
         {...rest}
       />
     </PlanItemProvider>
@@ -227,7 +255,7 @@ export const PlanItemTrigger = (props: PlanItemTriggerProps) => {
     "grid min-h-9 w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-lg px-2 py-1.5 text-start",
     collapsible &&
       "cursor-pointer hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-    status === "in-progress" && "bg-muted/70",
+    status === "in-progress" && "bg-muted/64",
     "transition-colors duration-150 motion-reduce:transition-none",
     "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
     className

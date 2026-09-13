@@ -1,6 +1,9 @@
 import { CodeBlockCommand } from "./code-block-command";
 
 interface RegistryDependenciesProps {
+  /**
+   * The dependencies to display
+   */
   dependencies?: string[];
 }
 

@@ -27,6 +27,85 @@ Conflict order: explicit user or system instructions, then `biome.json`, then th
 - Overlay primitives own stacking. Do not add `z-index` to dialogs, menus, popovers, tooltips, or similar surfaces.
 - Import named Lucide icons. Size them with Tailwind classes, never the numeric `size` prop. Mark decorative icons `aria-hidden="true"`; leave semantic icons exposed unless equivalent text is present.
 - Use logical utilities (`ms-*`, `me-*`, `ps-*`, `pe-*`, `start-*`, `end-*`) instead of physical direction. Use `slide-*-from-start|end` animations and propagate `dir` from `useLocale` when applicable.
+- Use physical direction only for an explicitly LTR surface, visual coordinates, or geometry unrelated to reading order. Keep the exception explicit and document why it cannot follow `dir`.
+
+### Class lists
+
+Short, single-group lists stay one string: `"flex items-center gap-2"`.
+
+When a `className` covers more than one group below, split into multiple strings via `cn()` (JSX) or a `tv()` `base` / `variants` array. Same grouping either way. Related utilities stay on the same line. Different groups get different lines. Skip unused groups. In `cn()`, `className` is last.
+
+Line order:
+
+1. CSS variables (`[--space:--spacing(6)]`)
+2. Group / peer / slot (`group/item`, `peer`)
+3. Position and stacking (`relative`, `fixed`, `inset-0`, `z-*`, `row-start-*`)
+4. Size (`w-*`, `h-*`, `min-*`, `max-*`, `size-*`, `flex-1`, `shrink-*`)
+5. Display and alignment (`flex`, `grid`, `items-*`, `justify-*`, `gap-*`)
+6. Spacing (`p-*`, `m-*`, `px-*`)
+7. Background (`bg-*`, `backdrop-*`)
+8. Typography (`text-*`, `font-*`, `leading-*`, `truncate`)
+9. Shape and chrome (`rounded-*`, `border`, `shadow-*`, `ring-*`)
+10. Overflow (`overflow-*`)
+11. Interaction (`cursor-*`, `select-*`, `pointer-events-*`, `outline-*`, `touch-*`)
+12. Transform (`translate-*`, `scale-*`, `origin-*`)
+13. Transition (`transition-*`, `duration-*`, `ease-*`, `will-change-*`)
+14. States: one line per family (`hover:`, `focus-visible:`, `disabled:`, `aria-invalid:`, `data-[state=open]:`, `data-[state=closed]:`)
+15. Descendants / slots (`[&_svg]:`, `in-data-[slot=...]`)
+16. Reduced motion last (`motion-reduce:*`)
+
+State modifiers in the same family stay on one line:
+
+```tsx
+"data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
+"data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
+```
+
+```tsx
+className={cn(
+  "[--space:--spacing(4)] [--offset:--spacing(2)]",
+  "group/panel",
+  "relative z-50",
+  "max-h-[calc(100svh-2rem)] w-full min-w-0 max-w-lg",
+  "flex flex-col items-stretch",
+  "gap-(--space) p-(--space)",
+  "bg-popover backdrop-blur-xs",
+  "font-sans text-sm text-popover-foreground",
+  "rounded-2xl border shadow-lg/4",
+  "overflow-hidden",
+  "outline-none",
+  "origin-top translate-y-(--offset)",
+  "transition-[opacity,translate] duration-200 ease-in-out will-change-transform",
+  "hover:bg-muted/48",
+  "focus-visible:ring-[3px] focus-visible:ring-ring/32",
+  "disabled:pointer-events-none disabled:opacity-64",
+  "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
+  "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
+  "[&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "motion-reduce:animate-none motion-reduce:transition-none",
+  className
+)}
+```
+
+### Opacity
+
+Use only these visual alpha values: `0`, `4`, `8`, `16`, `24`, `32`, `48`, `64`, `80`, `96`, and `100`. This applies to Tailwind alpha modifiers, `opacity-*`, shadows, and CSS alpha channels.
+
+- Choose alpha by semantic role, not by visual nudging. Text and informative icons use opaque semantic tokens by default; placeholders must meet WCAG AA on their effective background.
+- Disabled controls use `opacity-64` together with their semantic disabled state and blocked interaction. Do not dim a still-interactive control with element opacity.
+- Use `opacity-0` and `opacity-100` for visibility transitions. Gesture- or animation-derived values may use a CSS variable or `calc()` when documented locally.
+- Reserve `/4` for neutral elevation; `/8` and `/16` for subtle feedback or selection; `/24` for subtle validation and decoration; `/32` for standard focus and scrims; `/48` for reinforced focus and present muted surfaces; `/64` for validated supporting content; `/80` for strong translucent layers; and `/96` for fixed blurred surfaces.
+- Do not add opacity for consistency alone. It is appropriate only for disabled state, interaction reveal, elevation, media, charts, and decorative content.
+- Exclude `color-mix()` token recipes, user-entered color values, and calculated gesture opacity from this scale.
+
+### Shadows
+
+Use the smallest elevation that communicates containment or separation. Neutral shadows always declare both geometry and alpha: `shadow-xs/4` for structural separation, `shadow-xs/8` for hover reinforcement, `shadow-sm/4` for raised controls and preview surfaces, and `shadow-lg/4` for overlays outside page flow.
+
+- Do not use bare neutral `shadow-*` or `drop-shadow-*` utilities, or geometry outside `xs`, `sm`, and `lg`.
+- A semantic raised action may pair its color token with bare `shadow-sm` (`shadow-primary/24 shadow-sm`); the semantic token owns the approved alpha in that recipe.
+- Use arbitrary shadows only where utilities cannot express an inset technical boundary, an image-cropper mask, or required geometry. Their alpha channels still follow the approved scale.
+- Borders and tonal separation establish structure before elevation. Shadows do not replace focus rings or contrast-bearing borders.
 
 ## Files, examples, and docs
 

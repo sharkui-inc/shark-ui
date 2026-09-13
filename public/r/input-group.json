@@ -3,9 +3,9 @@
   "dependencies": ["@ark-ui/react", "tailwind-variants"],
   "name": "input-group",
   "registryDependencies": [
-    "https://shark.vini.one/r/input.json",
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/textarea.json"
+    "https://shark-ui.com/r/input.json",
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/textarea.json"
   ],
   "type": "registry:ui",
   "files": [

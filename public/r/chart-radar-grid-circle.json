@@ -18,8 +18,8 @@
   },
   "name": "chart-radar-grid-circle",
   "registryDependencies": [
-    "https://shark.vini.one/r/card.json",
-    "https://shark.vini.one/r/chart.json"
+    "https://shark-ui.com/r/card.json",
+    "https://shark-ui.com/r/chart.json"
   ],
   "title": "Radar Chart: Grid Circle",
   "type": "registry:block"

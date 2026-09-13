@@ -131,8 +131,11 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 function ChartBarInteractive() {
-  const [activeChart, setActiveChart] =
-    React.useState<keyof typeof chartConfig>("desktop");
+  const [activeChart, setActiveChart] = React.useState(["desktop"]);
+  const selectedChart =
+    activeChart.find(
+      (value): value is keyof typeof chartConfig => value in chartConfig
+    ) ?? "desktop";
 
   const total = React.useMemo(
     () => ({
@@ -155,20 +158,14 @@ function ChartBarInteractive() {
           className="flex flex-1"
           deselectable={false}
           multiple={false}
-          onValueChange={({ value }) => {
-            const chart = value[0] as keyof typeof chartConfig | undefined;
-
-            if (chart) {
-              setActiveChart(chart);
-            }
-          }}
-          value={[activeChart]}
+          onValueChange={({ value }) => setActiveChart(value)}
+          value={activeChart}
         >
           {["desktop", "mobile"].map((key) => {
             const chart = key as keyof typeof chartConfig;
             return (
               <ToggleGroupItem
-                className="relative z-30 h-auto flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-start data-[state=on]:bg-muted/50 sm:border-t-0 sm:border-l sm:px-8 sm:py-6"
+                className="relative z-30 h-auto flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-start data-[state=on]:bg-muted/48 sm:border-t-0 sm:border-l sm:px-8 sm:py-6"
                 key={chart}
                 value={chart}
               >
@@ -226,7 +223,10 @@ function ChartBarInteractive() {
                 />
               }
             />
-            <Bar dataKey={activeChart} fill={`var(--color-${activeChart})`} />
+            <Bar
+              dataKey={selectedChart}
+              fill={`var(--color-${selectedChart})`}
+            />
           </BarChart>
         </ChartContainer>
       </CardContent>

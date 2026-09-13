@@ -24,7 +24,7 @@
   },
   "dependencies": ["@ark-ui/react", "tailwind-variants"],
   "name": "announcement",
-  "registryDependencies": ["https://shark.vini.one/r/badge.json"],
+  "registryDependencies": ["https://shark-ui.com/r/badge.json"],
   "type": "registry:ui",
   "files": [
     {

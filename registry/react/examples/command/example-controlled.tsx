@@ -24,7 +24,7 @@ const Example = () => {
     initialItems,
   });
 
-  const selected = initialItems.find((item) => item.value === value[0]);
+  const selected = initialItems.find((item) => value.includes(item.value));
 
   const handleInputValueChange = (details: { inputValue: string }) => {
     filter(details.inputValue);

@@ -51,9 +51,9 @@ interface ModelOption {
 }
 
 interface ChatComposerProps {
-  model: string;
+  model: string[];
   modelOptions: readonly ModelOption[];
-  onModelChange: (value: string) => void;
+  onModelChange: (value: string[]) => void;
   onSend: (content: string) => void;
   onThinkModeChange: (enabled: boolean) => void;
   thinkMode: boolean;
@@ -71,7 +71,8 @@ export const ChatComposer = ({
   const [status, setStatus] = React.useState<PromptInputStatus>("ready");
 
   const selectedModel =
-    modelOptions.find((option) => option.value === model) ?? modelOptions[0];
+    modelOptions.find((option) => model.includes(option.value)) ??
+    modelOptions[0];
 
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
@@ -83,13 +84,13 @@ export const ChatComposer = ({
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-3">
-      <div className="w-full rounded-2xl bg-muted/50 p-0.5">
+      <div className="w-full rounded-2xl bg-muted/48 p-0.5">
         <Announcement className="w-full rounded-t-[15px] border-0 bg-transparent px-3 py-2 shadow-none">
           <SparklesIcon aria-hidden="true" className="text-muted-foreground" />
           <AnnouncementTitle className="text-muted-foreground text-xs">
             Access premium models & features
           </AnnouncementTitle>
-          <span aria-hidden="true" className="text-muted-foreground/60 text-xs">
+          <span aria-hidden="true" className="text-muted-foreground/64 text-xs">
             ·
           </span>
           <Button className="h-auto px-0 text-xs" variant="link">
@@ -99,7 +100,7 @@ export const ChatComposer = ({
 
         <FileUpload accept="image/*,.pdf,.txt" className="gap-0" maxFiles={4}>
           <PromptInput
-            className="rounded-[15px] border-0 bg-card shadow-xs"
+            className="rounded-[15px] border-0 bg-card shadow-xs/4"
             onStop={() => setStatus("ready")}
             onSubmit={({ text }) => {
               onSend(text);
@@ -127,8 +128,8 @@ export const ChatComposer = ({
                 <ModelSelector
                   collection={collection}
                   onInputValueChange={({ inputValue }) => filter(inputValue)}
-                  onValueChange={({ value }) => onModelChange(value[0] ?? "")}
-                  value={[model]}
+                  onValueChange={({ value }) => onModelChange(value)}
+                  value={model}
                 >
                   <ModelSelectorTrigger size="xs" variant="ghost">
                     {selectedModel?.label ?? "Model"}

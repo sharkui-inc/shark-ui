@@ -96,7 +96,7 @@ export const ToastItem = (props: ToastItemProps) => {
         "flex items-start justify-between gap-1.5",
         "bg-popover",
         "text-card-foreground text-sm",
-        "rounded-lg border shadow-lg/5",
+        "rounded-lg border shadow-lg/4",
         "scale-(--scale) opacity-(--opacity)",
         "transition-[translate,scale,opacity] duration-250 will-change-[translate,opacity,scale]",
         "ease-[cubic-bezier(0.21,1.02,0.73,1)]",

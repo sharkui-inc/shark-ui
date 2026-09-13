@@ -139,11 +139,11 @@ export const MESSAGE_EXTRAS: Record<string, DemoMessageExtras> = {
     },
     sources: [
       {
-        href: "https://shark.vini.one/docs/ai-elements/message-scroller",
+        href: "https://shark-ui.com/docs/ai-elements/message-scroller",
         title: "Message Scroller",
       },
       {
-        href: "https://shark.vini.one/docs/ai-elements/prompt-input",
+        href: "https://shark-ui.com/docs/ai-elements/prompt-input",
         title: "Prompt Input",
       },
     ],

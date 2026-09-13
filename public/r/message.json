@@ -4,8 +4,8 @@
   "description": "Conversation row with avatar, alignment, header, content, footer, and actions.",
   "name": "message",
   "registryDependencies": [
-    "https://shark.vini.one/r/button.json",
-    "https://shark.vini.one/r/tooltip.json"
+    "https://shark-ui.com/r/button.json",
+    "https://shark-ui.com/r/tooltip.json"
   ],
   "type": "registry:ui",
   "files": [

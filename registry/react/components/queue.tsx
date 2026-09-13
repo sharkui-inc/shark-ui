@@ -23,7 +23,7 @@ export const QueueSection = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground shadow-xs/5",
+        "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground shadow-xs/4",
         className
       )}
       data-slot="queue-section"

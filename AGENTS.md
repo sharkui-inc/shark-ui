@@ -1,6 +1,6 @@
 # Shark UI
 
-Component registry: Ark UI, Tailwind CSS v4, Next.js. https://shark.vini.one
+Component registry: Ark UI, Tailwind CSS v4, Next.js. https://shark-ui.com
 
 Read [`CODE_STYLE.md`](CODE_STYLE.md) before editing source, examples, docs, or manifests. Shark composition: [`skills/shark-ui/SKILL.md`](skills/shark-ui/SKILL.md). Format/lint: `biome.json`.
 

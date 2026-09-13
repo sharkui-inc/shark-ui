@@ -55,7 +55,7 @@ function ChartRadarGridFill() {
               content={<ChartTooltipContent hideLabel />}
               cursor={false}
             />
-            <PolarGrid className="fill-(--color-desktop) opacity-20" />
+            <PolarGrid className="fill-(--color-desktop) opacity-24" />
             <PolarAngleAxis dataKey="month" />
             <Radar
               dataKey="desktop"

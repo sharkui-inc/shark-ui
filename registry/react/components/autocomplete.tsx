@@ -17,14 +17,19 @@ import {
 } from "@/registry/react/components/combobox";
 import { Separator } from "@/registry/react/components/separator";
 
-export const Autocomplete: ArkCombobox.RootComponent = (props) => (
-  <Combobox
-    allowCustomValue
-    data-slot="autocomplete"
-    inputBehavior="autocomplete"
-    {...props}
-  />
-);
+export const Autocomplete: ArkCombobox.RootComponent = (props) => {
+  const { openOnClick = false, ...rest } = props;
+
+  return (
+    <Combobox
+      allowCustomValue
+      data-slot="autocomplete"
+      inputBehavior="autocomplete"
+      openOnClick={openOnClick}
+      {...rest}
+    />
+  );
+};
 
 export const AutocompleteControl = (
   props: React.ComponentProps<typeof ComboboxControl>

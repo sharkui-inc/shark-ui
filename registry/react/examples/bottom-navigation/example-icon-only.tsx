@@ -8,7 +8,7 @@ import {
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 const Example = () => (
-  <div className="flex h-72 w-full max-w-xs flex-col overflow-y-auto rounded-lg border bg-muted shadow-lg/5">
+  <div className="flex h-72 w-full max-w-xs flex-col overflow-y-auto rounded-lg border bg-muted shadow-lg/4">
     <ScrollArea>
       <div className="h-96" />
       <BottomNavigation defaultValue="home">

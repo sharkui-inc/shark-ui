@@ -161,6 +161,10 @@ diagnosis, an in-flight code change, and a safe rollout.
 
 <ComponentPreview componentName="plan" fileName="example-custom-item-trigger" />
 
+## RTL
+
+<RTLComponentPreview componentName="plan" />
+
 ## API Reference
 
 ### Plan
@@ -208,7 +212,9 @@ Holds nested plan items.
 
 ### PlanItem
 
-A unit of work with a status. Set `collapsible` to reveal details.
+A unit of work with a status. Set `collapsible` to reveal details. In
+uncontrolled mode, an in-progress item opens automatically and closes when its
+status changes. Use `open` to control disclosure yourself.
 
 | Prop | Type | Default |
 | --- | --- | --- |

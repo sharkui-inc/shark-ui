@@ -107,7 +107,7 @@ export const AppSidebar = () => (
             </Avatar>
             <span className="grid min-w-0 flex-1 text-start text-sm leading-tight">
               <span className="truncate font-medium">Maya Chen</span>
-              <span className="truncate text-foreground/70 text-xs">
+              <span className="truncate text-foreground/64 text-xs">
                 maya@northstar.dev
               </span>
             </span>

@@ -103,7 +103,7 @@ export const TrafficDonutExample = (props: React.ComponentProps<"div">) => {
 
             return (
               <ToggleGroupItem
-                className="h-auto gap-1.5 rounded-md px-1.5 py-0.5 text-muted-foreground text-xs hover:bg-muted data-[state=off]:opacity-40"
+                className="h-auto gap-1.5 rounded-md px-1.5 py-0.5 text-muted-foreground text-xs hover:bg-muted data-[state=off]:[&_span]:opacity-48"
                 key={item.browser}
                 value={item.browser}
               >

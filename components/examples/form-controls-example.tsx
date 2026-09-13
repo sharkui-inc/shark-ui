@@ -215,7 +215,7 @@ export const FormControlsExample = (props: React.ComponentProps<"div">) => {
   );
 };
 
-const SHARE_URL = "https://shark.vini.one/share/q3-launch";
+const SHARE_URL = "https://shark-ui.com/share/q3-launch";
 
 const INITIAL = {
   access: "invite" as const,

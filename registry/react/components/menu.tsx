@@ -102,7 +102,7 @@ export const menuContentVariants = tv({
     "overflow-y-auto",
     "bg-popover",
     "text-popover-foreground",
-    "rounded-xl border shadow-lg/5",
+    "rounded-xl border shadow-lg/4",
     "origin-(--transform-origin)",
     "outline-none",
     "duration-100",
@@ -196,7 +196,7 @@ export const menuItemVariants = tv({
       ],
       destructive: [
         "text-destructive dark:text-destructive-foreground",
-        "data-highlighted:bg-destructive/10 dark:data-highlighted:bg-destructive-foreground/10",
+        "data-highlighted:bg-destructive/8 dark:data-highlighted:bg-destructive-foreground/8",
         "**:[svg]:text-destructive dark:**:[svg]:text-destructive-foreground",
       ],
     },

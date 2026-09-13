@@ -3,7 +3,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const CollapsibleThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="overflow-hidden rounded-lg border border-input bg-muted shadow-md/5">
+    <div className="overflow-hidden rounded-lg border border-input bg-muted shadow-sm/4">
       <div className="flex items-center justify-between gap-3 border-input border-b px-3 py-2.5">
         <div className="h-2 w-1/2 rounded-full bg-primary" />
         <ChevronDownIcon

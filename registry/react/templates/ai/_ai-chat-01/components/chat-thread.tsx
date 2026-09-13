@@ -224,13 +224,13 @@ const MessageApprovalPlan = ({
       <ApprovalCardTitle>{title}</ApprovalCardTitle>
     </ApprovalCardHeader>
     <ApprovalCardContent>
-      <ol className="flex flex-col gap-1 rounded-lg border bg-muted/30 p-2">
+      <ol className="flex flex-col gap-1 rounded-lg border bg-muted/32 p-2">
         {steps.map((step) => (
           <li
             className="flex items-start gap-2 px-2 py-1.5 text-xs"
             key={step.id}
           >
-            <span className="mt-1 size-2 shrink-0 rounded-full border border-muted-foreground/50" />
+            <span className="mt-1 size-2 shrink-0 rounded-full border border-muted-foreground/48" />
             <span className="min-w-0">
               <span className="font-medium">{step.title}</span>
               {step.detail ? (

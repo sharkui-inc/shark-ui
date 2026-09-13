@@ -2,7 +2,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const TocThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="flex w-48 gap-3 rounded-lg border border-input bg-muted p-3 shadow-md/5">
+    <div className="flex w-48 gap-3 rounded-lg border border-input bg-muted p-3 shadow-sm/4">
       <div className="flex flex-1 flex-col gap-2 py-1">
         <div className="h-2 w-full rounded-full bg-muted-foreground/16" />
         <div className="h-2 w-4/5 rounded-full bg-muted-foreground/8" />

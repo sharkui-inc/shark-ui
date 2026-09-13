@@ -13,7 +13,7 @@ export const Frame = (props: React.ComponentProps<typeof ark.div>) => {
         "relative",
         "p-1",
         "flex flex-col",
-        "bg-muted/72",
+        "bg-muted/64",
         "rounded-2xl",
         "*:[[data-slot=frame-panel]+[data-slot=frame-panel]]:mt-1",
         className
@@ -33,7 +33,7 @@ export const FramePanel = (props: React.ComponentProps<typeof ark.div>) => {
         "relative",
         "p-5",
         "bg-background",
-        "rounded-xl border shadow-xs/5",
+        "rounded-xl border shadow-xs/4",
         className
       )}
       data-slot="frame-panel"

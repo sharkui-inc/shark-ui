@@ -37,7 +37,7 @@ const Example = () => (
           </div>
           <CollapsibleTrigger asChild>
             <Button
-              className="ms-auto mt-1 block h-auto w-fit p-0 text-primary-foreground/90 hover:text-primary-foreground hover:no-underline"
+              className="ms-auto mt-1 block h-auto w-fit p-0 text-primary-foreground/80 hover:text-primary-foreground hover:no-underline"
               clickEffect={false}
               size="sm"
               variant="link"

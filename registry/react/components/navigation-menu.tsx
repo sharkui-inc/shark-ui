@@ -174,7 +174,7 @@ export const NavigationMenuContent = (
         "rounded-xl text-popover-foreground outline-none",
         isViewportRendered
           ? "start-0 top-0"
-          : "start-0 top-full mt-2 max-h-[70dvh] overflow-y-auto border bg-popover shadow-lg/5 data-[orientation=vertical]:start-full data-[orientation=vertical]:top-0 data-[orientation=vertical]:ms-2 data-[orientation=vertical]:mt-0",
+          : "start-0 top-full mt-2 max-h-[70dvh] overflow-y-auto border bg-popover shadow-lg/4 data-[orientation=vertical]:start-full data-[orientation=vertical]:top-0 data-[orientation=vertical]:ms-2 data-[orientation=vertical]:mt-0",
         "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
         "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
         "data-[motion=from-start]:slide-in-from-start-2 data-[motion=from-end]:slide-in-from-end-2",
@@ -271,7 +271,7 @@ export const NavigationMenuViewport = (
     <ArkNavigationMenu.Viewport
       className={cn(
         "pointer-events-auto relative mt-2 box-content h-(--viewport-height) w-(--viewport-width) flex-none overflow-hidden",
-        "max-h-[70dvh] max-w-[calc(100vw-3rem)] rounded-xl border bg-popover text-popover-foreground shadow-lg/5",
+        "max-h-[70dvh] max-w-[calc(100vw-3rem)] rounded-xl border bg-popover text-popover-foreground shadow-lg/4",
         "data-[orientation=vertical]:ms-2 data-[orientation=vertical]:mt-0",
         "transition-[width,height] duration-200 ease-out",
         "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",

@@ -118,7 +118,7 @@ const css = {
       "@apply bg-primary/80 text-primary-foreground": {},
     },
     "*": {
-      "@apply border-border outline-ring/50 ring-ring": {},
+      "@apply border-border outline-ring/48 ring-ring": {},
     },
     body: {
       "@apply bg-background text-foreground flex min-h-svh flex-col font-sans":

@@ -20,7 +20,7 @@ export const TaskEmptyState = ({
   onClearFilters: () => void;
   onCreate: () => void;
 }) => (
-  <State className="min-h-88 border bg-muted/12 px-6 py-12 shadow-xs/5">
+  <State className="min-h-88 border bg-muted/8 px-6 py-12 shadow-xs/4">
     <StateHeader>
       <StateMedia variant="icon">
         <ClipboardListIcon aria-hidden="true" />

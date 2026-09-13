@@ -73,7 +73,7 @@ const Example = () => {
           </ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent className="flex flex-col gap-4">
-          <CodeBlock className="rounded-lg bg-muted/30" code={request}>
+          <CodeBlock className="rounded-lg bg-muted/32" code={request}>
             <CodeBlockHeader>
               <CodeBlockTitle>GET · registry.npmjs.org</CodeBlockTitle>
             </CodeBlockHeader>

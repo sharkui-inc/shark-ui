@@ -18,8 +18,8 @@
   },
   "name": "chart-line-dots-colors",
   "registryDependencies": [
-    "https://shark.vini.one/r/card.json",
-    "https://shark.vini.one/r/chart.json"
+    "https://shark-ui.com/r/card.json",
+    "https://shark-ui.com/r/chart.json"
   ],
   "title": "Line Chart: Dots Colors",
   "type": "registry:block"

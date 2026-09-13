@@ -54,7 +54,7 @@ export const FileUploadDropzone = (
         "rounded-2xl border-2 border-input border-dashed",
         "cursor-pointer",
         "data-cover:absolute data-cover:inset-0 data-cover:flex data-cover:items-center data-cover:justify-center",
-        "data-dragging:border-primary data-dragging:bg-primary/10",
+        "data-dragging:border-primary data-dragging:bg-primary/8",
         "data-invalid:border-destructive dark:data-invalid:border-destructive-foreground",
         className
       )}
@@ -76,7 +76,7 @@ export const FileUploadDropzoneIcon = (
         "bg-muted/48",
         "text-muted-foreground",
         "rounded-full border",
-        "group-data-dragging/file-upload:border-primary/24 group-data-dragging/file-upload:bg-primary/5 group-data-dragging/file-upload:text-primary",
+        "group-data-dragging/file-upload:border-primary/24 group-data-dragging/file-upload:bg-primary/8 group-data-dragging/file-upload:text-primary",
         "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className
       )}
@@ -163,7 +163,7 @@ export const FileUploadList = (props: FileUploadListProps) => {
               "flex-1 items-start justify-start gap-4",
               "bg-card",
               "p-2",
-              "rounded-xl border shadow-xs/5",
+              "rounded-xl border shadow-xs/4",
               "fade-in-0 slide-in-from-top-5 animate-in",
               "motion-reduce:animate-none",
               className
@@ -195,8 +195,8 @@ export const FileUploadList = (props: FileUploadListProps) => {
               <Button
                 className={cn(
                   "rounded-lg",
-                  "hover:bg-destructive/10 hover:text-destructive",
-                  "dark:hover:bg-destructive-foreground/10 dark:hover:text-destructive-foreground"
+                  "hover:bg-destructive/8 hover:text-destructive",
+                  "dark:hover:bg-destructive-foreground/8 dark:hover:text-destructive-foreground"
                 )}
                 size="icon-xs"
                 variant="ghost"
@@ -235,7 +235,7 @@ export const FileUploadItemPreview = (
       className={cn(
         "flex shrink-0 items-center justify-center",
         "font-semibold text-[0.5rem] text-primary",
-        "bg-primary/10",
+        "bg-primary/8",
         "select-none",
         "rounded-full",
         className

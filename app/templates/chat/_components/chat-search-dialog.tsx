@@ -52,8 +52,8 @@ export const ChatSearchDialog = ({
           collection={collection}
           onInputValueChange={({ inputValue }) => filter(inputValue)}
           onValueChange={({ value }) => {
-            const command = commandItems.find(
-              (item) => item.value === value[0]
+            const command = commandItems.find((item) =>
+              value.includes(item.value)
             );
 
             if (command?.value === "new-chat") {

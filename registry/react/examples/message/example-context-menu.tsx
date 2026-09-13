@@ -42,14 +42,16 @@ const ChatRow = (props: {
 }) => {
   const { align = "start", text, variant = "default" } = props;
   const [open, setOpen] = React.useState(false);
-  const [reaction, setReaction] = React.useState<string | null>(null);
-  const emoji = collection.items.find((item) => item.value === reaction)?.label;
+  const [reaction, setReaction] = React.useState<string[]>([]);
+  const emoji = collection.items.find((item) =>
+    reaction.includes(item.value)
+  )?.label;
 
   const handleOpenChange = (details: { open: boolean }) => {
     setOpen(details.open);
   };
 
-  const handleReactionChange = (value: string | null) => {
+  const handleReactionChange = (value: string[]) => {
     setReaction(value);
     setOpen(false);
   };
@@ -97,22 +99,18 @@ const ChatRow = (props: {
 };
 
 const EmojiPicker = (props: {
-  onValueChange: (value: string | null) => void;
-  value: string | null;
+  onValueChange: (value: string[]) => void;
+  value: string[];
 }) => {
   const { onValueChange, value } = props;
-
-  const handleValueChange = (details: { value: string[] }) => {
-    onValueChange(details.value[0] ?? null);
-  };
 
   return (
     <Listbox
       aria-label="Add reaction"
       collection={collection}
       deselectable
-      onValueChange={handleValueChange}
-      value={value ? [value] : []}
+      onValueChange={(details) => onValueChange(details.value)}
+      value={value}
     >
       <ListboxContent
         className="grid grid-cols-[repeat(var(--column-count),1fr)] gap-1"

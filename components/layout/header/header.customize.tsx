@@ -238,7 +238,7 @@ export const HeaderCustomize = () => {
                           <span
                             className={cn(
                               "relative flex size-full items-center justify-center",
-                              "before:absolute before:inset-0 before:bg-black/0 group-data-[state=checked]:before:bg-black/12",
+                              "before:absolute before:inset-0 before:bg-black/0 group-data-[state=checked]:before:bg-black/8",
                               color.hex
                             )}
                           >
@@ -284,7 +284,7 @@ export const HeaderCustomize = () => {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <span
-                            className="relative flex size-full items-center justify-center before:absolute before:inset-0 before:bg-black/0 group-data-[state=checked]:before:bg-black/12"
+                            className="relative flex size-full items-center justify-center before:absolute before:inset-0 before:bg-black/0 group-data-[state=checked]:before:bg-black/8"
                             style={{
                               backgroundColor: getPrimaryFillCss(
                                 color.value,
@@ -308,11 +308,11 @@ export const HeaderCustomize = () => {
                 <span className="font-medium text-muted-foreground text-xs">
                   {THEME_FIELDS.primaryTone.label}
                 </span>
-                <div className="h-8 w-40 rounded-lg border border-input shadow-xs/5 transition-[color,box-shadow] has-[:focus-visible]:border-primary has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/32">
+                <div className="h-8 w-40 rounded-lg border border-input shadow-xs/4 transition-[color,box-shadow] has-[:focus-visible]:border-primary has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/32">
                   <SegmentGroup
                     aria-label="Primary tone"
                     className={cn(
-                      "size-full gap-0 overflow-hidden rounded-[inherit] bg-transparent dark:bg-input/30",
+                      "size-full gap-0 overflow-hidden rounded-[inherit] bg-transparent dark:bg-input/32",
                       "*:data-[slot=segment-group-indicator]:rounded-none",
                       "*:data-[slot=segment-group-indicator]:bg-primary"
                     )}
@@ -376,9 +376,9 @@ export const HeaderCustomize = () => {
                   <RadioGroupItem
                     className={cn(
                       "flex flex-col items-center gap-2",
-                      "rounded-xl border border-input bg-muted/40 p-2.5",
+                      "rounded-xl border border-input bg-muted/32 p-2.5",
                       "pointer-coarse:after:hidden",
-                      "data-[state=checked]:border-primary data-[state=checked]:bg-primary/10 data-[state=checked]:ring-1 data-[state=checked]:ring-primary/48 data-[state=checked]:ring-inset",
+                      "data-[state=checked]:border-primary data-[state=checked]:bg-primary/8 data-[state=checked]:ring-1 data-[state=checked]:ring-primary/48 data-[state=checked]:ring-inset",
                       "data-focus-visible:ring-[3px] data-focus-visible:ring-ring/32 data-focus-visible:ring-inset"
                     )}
                     key={radius.value}

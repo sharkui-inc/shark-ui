@@ -8,7 +8,6 @@ import { Portal } from "@ark-ui/react/portal";
 import { CalendarIcon, ClockIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/react/components/button";
 import {
   Calendar,
   CalendarLabel,
@@ -65,7 +64,7 @@ export const DatePickerTrigger = (
       <ArkDatePicker.Trigger
         className={cn(
           "justify-start",
-          "text-left data-placeholder-shown:[&>span]:text-muted-foreground",
+          "text-start data-placeholder-shown:[&>span]:text-muted-foreground",
           "active:scale-100",
           "[&_svg:not([class*='text-'])]:opacity-64",
           className
@@ -94,18 +93,11 @@ export const DatePickerInput = (props: DatePickerInputProps) => {
         </ArkDatePicker.Input>
 
         <InputGroupAddon align="inline-end">
-          <InputGroupButton
-            asChild
-            data-slot="input-group-button"
-            size="icon-xs"
-            variant="ghost"
-          >
-            <ArkDatePicker.Trigger asChild data-slot="date-picker-trigger">
-              <Button size="icon-md" variant="ghost">
-                <CalendarIcon aria-hidden className="text-muted-foreground" />
-              </Button>
-            </ArkDatePicker.Trigger>
-          </InputGroupButton>
+          <ArkDatePicker.Trigger asChild data-slot="date-picker-trigger">
+            <InputGroupButton size="icon-xs" variant="ghost">
+              <CalendarIcon aria-hidden className="text-muted-foreground" />
+            </InputGroupButton>
+          </ArkDatePicker.Trigger>
         </InputGroupAddon>
       </InputGroup>
     </ArkDatePicker.Control>
@@ -151,7 +143,7 @@ export const DatePickerContent = (
             "p-3",
             "bg-popover",
             "text-popover-foreground",
-            "rounded-xl border shadow-lg/5",
+            "rounded-xl border shadow-lg/4",
             "outline-none",
             "origin-(--transform-origin)",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",

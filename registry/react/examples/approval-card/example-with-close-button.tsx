@@ -65,7 +65,7 @@ const Example = () => {
             </ApprovalCardAction>
           </ApprovalCardHeader>
           <ApprovalCardContent className="flex flex-col gap-4">
-            <pre className="overflow-x-auto rounded-lg border bg-muted/40 px-3 py-2 font-mono text-xs">
+            <pre className="overflow-x-auto rounded-lg border bg-muted/32 px-3 py-2 font-mono text-xs">
               <code>pnpm db:migrate --env staging</code>
             </pre>
             <p className="text-muted-foreground text-xs">

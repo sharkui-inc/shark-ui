@@ -345,7 +345,7 @@ export const CalendarWeekNumberHeaderCell = (
       className={cn(
         "h-(--cell-size) w-full min-w-(--cell-size)",
         "flex items-center justify-center",
-        "select-none font-medium text-muted-foreground/64 text-xs",
+        "select-none font-medium text-muted-foreground text-xs",
         className
       )}
       data-slot="calendar-week-number-header"
@@ -366,7 +366,7 @@ export const CalendarWeekNumberCell = (
       className={cn(
         "h-(--cell-size) w-full min-w-(--cell-size)",
         "flex items-center justify-center",
-        "select-none font-medium text-muted-foreground/64 text-xs tabular-nums",
+        "select-none font-medium text-muted-foreground text-xs tabular-nums",
         className
       )}
       data-slot="calendar-week-number-cell"
@@ -403,7 +403,7 @@ export const CalendarTableHeader = (
       className={cn(
         "h-(--cell-size) w-full",
         "flex items-center justify-center",
-        "select-none font-medium text-muted-foreground/64 text-xs",
+        "select-none font-medium text-muted-foreground text-xs",
         "rounded-lg",
         className
       )}
@@ -428,8 +428,8 @@ export const CalendarTableCell = (
         "relative",
         "h-(--cell-size) w-full",
         "select-none text-center",
-        "[&:first-child[aria-selected=true]_div]:rounded-l-lg",
-        "[&:last-child[aria-selected=true]_div]:rounded-r-lg"
+        "[&:first-child[aria-selected=true]_div]:rounded-s-lg",
+        "[&:last-child[aria-selected=true]_div]:rounded-e-lg"
       )}
       data-slot="calendar-table-cell"
       value={value}
@@ -443,15 +443,15 @@ export const CalendarTableCell = (
           "rounded-lg border border-transparent",
           "hover:bg-accent hover:text-accent-foreground",
           "data-today:data-selected:after:bg-background data-today:after:absolute data-today:after:bottom-1 data-today:after:left-1/2 data-today:after:size-1 data-today:after:-translate-x-1/2 data-today:after:rounded-full data-today:after:bg-primary",
-          "data-focus:border-primary data-focus:bg-accent/30 data-focus:text-primary data-focus:ring-[3px] data-focus:ring-ring/32",
+          "data-focus:border-primary data-focus:bg-accent/32 data-focus:text-primary data-focus:ring-[3px] data-focus:ring-ring/32",
           "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
           "data-unavailable:pointer-events-none data-unavailable:line-through data-unavailable:opacity-64",
           "data-[view=day]:data-in-range:not-data-[hover-range-start]:not-data-[range-start]:not-data-[hover-range-end]:not-data-[range-end]:rounded-none",
-          "data-[view=day]:data-in-range:not-data-selected:bg-primary/10",
+          "data-[view=day]:data-in-range:not-data-selected:bg-primary/8",
           "data-selected:bg-primary data-selected:text-primary-foreground",
-          "data-hover-range-start:rounded-l-lg data-range-start:rounded-l-lg",
-          "data-hover-range-end:rounded-r-lg data-range-end:rounded-r-lg",
+          "data-hover-range-start:rounded-s-lg data-range-start:rounded-s-lg",
+          "data-hover-range-end:rounded-e-lg data-range-end:rounded-e-lg",
           "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
           className
         )}

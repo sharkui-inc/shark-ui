@@ -3,7 +3,7 @@
   "dependencies": ["@ark-ui/react", "lucide-react"],
   "description": "Collapsible tool result row with title, meta, and trailing actions.",
   "name": "tool-result",
-  "registryDependencies": ["https://shark.vini.one/r/collapsible.json"],
+  "registryDependencies": ["https://shark-ui.com/r/collapsible.json"],
   "type": "registry:ui",
   "files": [
     {

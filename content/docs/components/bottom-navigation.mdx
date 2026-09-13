@@ -1,6 +1,6 @@
 ---
 title: Bottom Navigation
-description: Fixed bottom nav for mobile-first apps.
+description: Fixed and floating bottom nav for mobile-first apps.
 links:
   doc: https://ark-ui.com/docs/components/tabs
   api: https://ark-ui.com/docs/components/tabs#api-reference
@@ -104,9 +104,17 @@ Disable an item with the `disabled` prop.
 
 <ComponentPreview componentName="bottom-navigation" fileName="example-disabled" />
 
-## Disclaimer
+## Variants
 
-> Don't include `position: absolute` on the `BottomNavigationList`. It's just for the examples.
+Use the prop `variant` to change the appearance.
+
+### Default
+
+<ComponentPreview componentName="bottom-navigation" fileName="example-default" />
+
+### Inset
+
+<ComponentPreview componentName="bottom-navigation" fileName="example-variant-inset" />
 
 ## Examples
 
@@ -145,6 +153,10 @@ Use this component for three to five mutually exclusive top-level sections. Use 
 
 <ComponentPreview componentName="bottom-navigation" fileName="example-with-links" />
 
+## RTL
+
+<RTLComponentPreview componentName="bottom-navigation" />
+
 ## API Reference
 
 ### BottomNavigation
@@ -166,6 +178,7 @@ Fixed bar at the bottom. Typically holds nav items.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `aria-label` | `string` | `"Bottom navigation"` |
+| `variant` | `"default" \| "inset"` | `"default"` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 

@@ -11,11 +11,11 @@ import {
 } from "@/registry/react/components/model-selector";
 
 const Example = () => {
-  const [value, setValue] = useState(models[0].value);
+  const [value, setValue] = useState([models[0].value]);
   const { collection } = useListCollection({ initialItems: models });
 
   const onValueChange = (details: { value: string[] }) => {
-    setValue(details.value[0] ?? "");
+    setValue(details.value);
   };
 
   return (
@@ -23,7 +23,7 @@ const Example = () => {
       <ModelSelector
         collection={collection}
         onValueChange={onValueChange}
-        value={[value]}
+        value={value}
       >
         <ModelSelectorTrigger variant="outline" />
         <ModelSelectorContent>

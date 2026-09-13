@@ -50,7 +50,7 @@ export const MusicAlbums = () => (
                 <img alt="" height={320} src={album.image} width={320} />
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-200 group-focus-within:opacity-100 group-hover/card:opacity-100 motion-reduce:transition-none"
+                  className="pointer-events-none absolute inset-0 bg-black/32 opacity-0 transition-opacity duration-200 group-focus-within:opacity-100 group-hover/card:opacity-100 motion-reduce:transition-none"
                 />
                 <div className="pointer-events-none absolute inset-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center opacity-0 transition-opacity group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-hover/card:pointer-events-auto group-hover/card:opacity-100 motion-reduce:transition-none">
                   <Button

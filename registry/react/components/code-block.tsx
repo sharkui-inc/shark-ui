@@ -69,7 +69,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
           "w-full min-w-0",
           "flex flex-col",
           "bg-card text-card-foreground",
-          "rounded-xl border shadow-xs/5",
+          "rounded-xl border shadow-xs/4",
           "overflow-hidden",
           "[--code-surface-line-height:--spacing(6)]",
           className
@@ -514,8 +514,8 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
           return (
             <span
               className={cn(
-                "flex min-h-(--code-surface-line-height) py-0",
-                highlighted && "bg-primary/10",
+                "block min-h-(--code-surface-line-height) py-0",
+                highlighted && "bg-primary/8",
                 highlighted && !showLineNumbers && "border-primary border-s-2"
               )}
               data-highlighted={highlighted ? "" : undefined}
@@ -526,8 +526,8 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "sticky start-0 z-10 w-11 shrink-0 select-none pe-3 text-end text-muted-foreground",
-                    highlighted ? "bg-primary/10" : "bg-card",
+                    "sticky start-0 z-10 inline-block w-11 select-none pe-3 text-end text-muted-foreground",
+                    highlighted ? "bg-primary/8" : "bg-card",
                     highlighted && "border-primary border-s-2"
                   )}
                   data-slot="code-block-line-number"

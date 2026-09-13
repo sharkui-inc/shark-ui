@@ -13,10 +13,10 @@ const css = {
       "text-underline-offset": "var(--spacing)",
     },
     ".prose blockquote:not(.not-prose blockquote)": {
-      "border-left": "2px solid var(--color-border)",
+      "border-inline-start": "2px solid var(--color-border)",
       "font-style": "italic",
       "margin-top": "calc(var(--spacing) * 6)",
-      "padding-left": "calc(var(--spacing) * 6)",
+      "padding-inline-start": "calc(var(--spacing) * 6)",
     },
     ".prose code:not(.not-prose code)": {
       "background-color": "var(--color-muted)",
@@ -159,7 +159,7 @@ const css = {
     },
     ".prose ol:not(.not-prose ol)": {
       "list-style": "decimal",
-      "margin-left": "calc(var(--spacing) * 6)",
+      "margin-inline-start": "calc(var(--spacing) * 6)",
       "margin-top": "calc(var(--spacing) * 6)",
     },
     ".prose ol:not(.not-prose ol) > li": {
@@ -201,7 +201,7 @@ const css = {
     ".prose table:not(.not-prose table) td": {
       border: "1px solid var(--color-border)",
       padding: "calc(var(--spacing) * 2) calc(var(--spacing) * 4)",
-      "text-align": "left",
+      "text-align": "start",
     },
     '.prose table:not(.not-prose table) td[align="center"]': {
       "text-align": "center",
@@ -213,7 +213,7 @@ const css = {
       border: "1px solid var(--color-border)",
       "font-weight": "700",
       padding: "calc(var(--spacing) * 2) calc(var(--spacing) * 4)",
-      "text-align": "left",
+      "text-align": "start",
     },
     '.prose table:not(.not-prose table) th[align="center"]': {
       "text-align": "center",
@@ -231,7 +231,7 @@ const css = {
     },
     ".prose ul:not(.not-prose ul)": {
       "list-style": "disc",
-      "margin-left": "calc(var(--spacing) * 6)",
+      "margin-inline-start": "calc(var(--spacing) * 6)",
       "margin-top": "calc(var(--spacing) * 6)",
     },
     ".prose ul:not(.not-prose ul) > li": {

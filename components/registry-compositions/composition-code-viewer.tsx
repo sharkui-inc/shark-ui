@@ -3,7 +3,7 @@
 import { FilesIcon } from "lucide-react";
 import React from "react";
 import { CopyButton } from "@/components/copy-button";
-import { docsCodeSurfaceClassName } from "@/components/docs-code-block";
+import { docsShikiContentClassName } from "@/components/docs-code-block";
 import type {
   CompositionFileTreeNode,
   PublishedCompositionFile,
@@ -115,7 +115,7 @@ export const CompositionCodeViewer = ({
 
         <ScrollArea className="flex-1">
           <figure
-            className={docsCodeSurfaceClassName}
+            className={docsShikiContentClassName}
             data-slot="composition-code"
           >
             <div

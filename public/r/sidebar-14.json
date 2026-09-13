@@ -23,7 +23,7 @@
     "previewHeight": 760
   },
   "name": "sidebar-14",
-  "registryDependencies": ["https://shark.vini.one/r/sidebar.json"],
+  "registryDependencies": ["https://shark-ui.com/r/sidebar.json"],
   "title": "Sidebar 14",
   "type": "registry:block"
 }

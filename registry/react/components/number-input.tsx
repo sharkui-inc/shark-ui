@@ -46,14 +46,14 @@ export const NumberInputGroup = (
         "relative",
         "w-full",
         "flex justify-between",
-        "bg-transparent dark:bg-input/30",
+        "bg-transparent dark:bg-input/32",
         "font-normal text-base md:text-sm",
-        "rounded-lg border border-input shadow-xs/5 ring-ring/32",
+        "rounded-lg border border-input shadow-xs/4 ring-ring/32",
         "transition-shadow",
         "focus-within:border-primary focus-within:ring-[3px] focus-within:ring-ring/32",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "aria-invalid:border-destructive aria-invalid:ring-[3px] aria-invalid:ring-destructive/24",
-        "dark:aria-invalid:border-destructive-foreground dark:aria-invalid:text-destructive-foreground dark:aria-invalid:ring-destructive-foreground/20",
+        "dark:aria-invalid:border-destructive-foreground dark:aria-invalid:text-destructive-foreground dark:aria-invalid:ring-destructive-foreground/24",
         "motion-reduce:transition-none",
         className
       )}

@@ -2,7 +2,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const DrawerThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="flex h-full w-full max-w-32 flex-col overflow-hidden rounded-xl border border-input border-dashed bg-muted shadow-md/5">
+    <div className="flex h-full w-full max-w-32 flex-col overflow-hidden rounded-xl border border-input border-dashed bg-muted shadow-sm/4">
       <div className="flex justify-center pt-1.5 pb-0.5">
         <div className="h-0.5 w-8 rounded-full bg-muted-foreground/24" />
       </div>
@@ -19,7 +19,7 @@ export const DrawerThumb = (props: ThumbCardProps) => (
         </div>
       </div>
       <div className="flex justify-center py-1">
-        <div className="h-0.5 w-8 rounded-full bg-muted-foreground/20" />
+        <div className="h-0.5 w-8 rounded-full bg-muted-foreground/24" />
       </div>
     </div>
   </ThumbCard>

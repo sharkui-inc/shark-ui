@@ -88,7 +88,7 @@ const sheetContentVariants = tv({
     "flex flex-col",
     "bg-popover",
     "text-popover-foreground",
-    "shadow-lg/5",
+    "shadow-lg/4",
     "transition-[opacity,translate] duration-200 ease-in-out will-change-transform",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
@@ -101,23 +101,23 @@ const sheetContentVariants = tv({
   variants: {
     placement: {
       bottom: [
-        "row-start-2 border-t",
+        "row-start-2 border-t pb-[env(safe-area-inset-bottom,0px)]",
         "data-[state=closed]:slide-in-from-bottom-10 data-[state=open]:slide-in-from-bottom-10",
       ],
       left: [
-        "w-[calc(100%-(--spacing(12)))] max-w-md",
+        "w-[calc(100%-(--spacing(12)))] max-w-md ps-[env(safe-area-inset-left,0px)]",
         "col-start-2",
         "border-e",
         "data-[state=closed]:slide-out-to-start-10 data-[state=open]:slide-in-from-start-10",
       ],
       right: [
-        "w-[calc(100%-(--spacing(12)))] max-w-md",
+        "w-[calc(100%-(--spacing(12)))] max-w-md pe-[env(safe-area-inset-right,0px)]",
         "col-start-2",
         "border-s",
         "data-[state=closed]:slide-out-to-end-10 data-[state=open]:slide-in-from-end-10",
       ],
       top: [
-        "border-b",
+        "border-b pt-[env(safe-area-inset-top,0px)]",
         "data-[state=closed]:slide-out-to-top-10 data-[state=open]:slide-in-from-top-10",
       ],
     },

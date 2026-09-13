@@ -1,106 +1,19 @@
-import type { InferPageType } from "fumadocs-core/source";
-import { SITE_CONFIG } from "@/config/site";
 import { source } from "@/lib/fumadocs";
+import {
+  buildLLMIndex as buildIndex,
+  buildLLMIndexSection as buildIndexSection,
+  type LLMIndexName,
+} from "@/lib/llms-index";
 
-export type LLMPage = InferPageType<typeof source>;
+export {
+  createLLMIndexResponse,
+  isLLMIndexName,
+  LLM_INDEX_CONTENT_TYPE,
+  LLM_INDEXES,
+  type LLMIndexName,
+} from "@/lib/llms-index";
 
-const SECTIONS = [
-  "components",
-  "ai-elements",
-  "installation",
-  "helpers",
-  "utilities",
-  "hooks",
-  "forms",
-  "changelog",
-] as const;
+export const buildLLMIndex = buildIndex;
 
-const SECTION_LABELS: Record<(typeof SECTIONS)[number], string> = {
-  "ai-elements": "AI Elements",
-  changelog: "Changelog",
-  components: "Components",
-  forms: "Forms",
-  helpers: "Helpers",
-  hooks: "Hooks",
-  installation: "Installation",
-  utilities: "Utilities",
-};
-
-function groupPagesBySection(pages: LLMPage[]) {
-  const bySection = new Map<string, LLMPage[]>();
-  for (const page of pages) {
-    const first = page.slugs[0];
-    const section =
-      first && SECTIONS.includes(first as (typeof SECTIONS)[number])
-        ? first
-        : "handbook";
-    const list = bySection.get(section) ?? [];
-    list.push(page);
-    bySection.set(section, list);
-  }
-  return bySection;
-}
-
-function appendComponentsSection(
-  lines: string[],
-  bySection: Map<string, LLMPage[]>,
-  baseUrl: string
-) {
-  const componentPages = bySection.get("components") ?? [];
-  const components = componentPages.filter((p) => p.slugs.length > 1);
-  const hasIndex = componentPages.some((p) => p.slugs.length === 1);
-  if (!hasIndex && components.length === 0) {
-    return;
-  }
-
-  lines.push("### Components", "");
-  if (hasIndex) {
-    lines.push(
-      `- [All Components](${baseUrl}/docs/components): Explore the full list of components available in the library.`,
-      ""
-    );
-  }
-  for (const p of components) {
-    lines.push(
-      `- [${p.data.title}](${baseUrl}${p.url}): ${p.data.description}`
-    );
-  }
-  lines.push("");
-}
-
-export const buildLLMIndex = (baseUrl = SITE_CONFIG.url) => {
-  const pages = source.getPages();
-  const bySection = groupPagesBySection(pages);
-  const lines: string[] = [];
-
-  appendComponentsSection(lines, bySection, baseUrl);
-
-  const handbook = bySection.get("handbook") ?? [];
-  if (handbook.length > 0) {
-    lines.push("### Handbook", "");
-    for (const p of handbook) {
-      lines.push(
-        `- [${p.data.title}](${baseUrl}${p.url}): ${p.data.description}`
-      );
-    }
-    lines.push("");
-  }
-
-  for (const key of SECTIONS) {
-    if (key === "components") {
-      continue;
-    }
-    const list = bySection.get(key) ?? [];
-    if (list.length > 0) {
-      lines.push(`### ${SECTION_LABELS[key]}`, "");
-      for (const p of list) {
-        lines.push(
-          `- [${p.data.title}](${baseUrl}${p.url}): ${p.data.description}`
-        );
-      }
-      lines.push("");
-    }
-  }
-
-  return lines.join("\n").trimEnd();
-};
+export const buildLLMIndexSection = (index: LLMIndexName) =>
+  buildIndexSection(index, source.getPages());

@@ -56,7 +56,7 @@ export const AccordionTrigger = (
         "flex flex-1 items-center justify-between gap-3",
         "touch-manipulation",
         "py-4",
-        "text-left font-medium text-sm",
+        "text-start font-medium text-sm",
         "rounded-md border border-transparent",
         "outline-none",
         "transition-[border-color,box-shadow,opacity]",

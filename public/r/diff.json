@@ -17,7 +17,7 @@
   "dependencies": ["@ark-ui/react", "lucide-react", "tailwind-variants"],
   "description": "Unified diff hunks with add, delete, and context lines.",
   "name": "diff",
-  "registryDependencies": ["https://shark.vini.one/r/scroll-area.json"],
+  "registryDependencies": ["https://shark-ui.com/r/scroll-area.json"],
   "type": "registry:ui",
   "files": [
     {

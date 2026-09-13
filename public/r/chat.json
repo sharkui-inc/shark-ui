@@ -4,15 +4,15 @@
   "description": "Conversation primitives for chat: transcript, composer, tool calls, and reasoning.",
   "name": "chat",
   "registryDependencies": [
-    "https://shark.vini.one/r/attachment.json",
-    "https://shark.vini.one/r/marker.json",
-    "https://shark.vini.one/r/message.json",
-    "https://shark.vini.one/r/message-bubble.json",
-    "https://shark.vini.one/r/message-scroller.json",
-    "https://shark.vini.one/r/prompt-input.json",
-    "https://shark.vini.one/r/reasoning.json",
-    "https://shark.vini.one/r/shimmer.json",
-    "https://shark.vini.one/r/tool-result.json"
+    "https://shark-ui.com/r/attachment.json",
+    "https://shark-ui.com/r/marker.json",
+    "https://shark-ui.com/r/message.json",
+    "https://shark-ui.com/r/message-bubble.json",
+    "https://shark-ui.com/r/message-scroller.json",
+    "https://shark-ui.com/r/prompt-input.json",
+    "https://shark-ui.com/r/reasoning.json",
+    "https://shark-ui.com/r/shimmer.json",
+    "https://shark-ui.com/r/tool-result.json"
   ],
   "type": "registry:ui"
 }

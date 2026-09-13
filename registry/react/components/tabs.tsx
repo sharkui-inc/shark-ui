@@ -139,7 +139,7 @@ export const TabsTrigger = (
         "cursor-pointer",
         "transition-[color,background-color,box-shadow]",
         "data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
-        "hover:text-foreground/72",
+        "hover:text-foreground",
         "aria-selected:text-foreground",
         "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
         "data-disabled:pointer-events-none data-disabled:opacity-64",

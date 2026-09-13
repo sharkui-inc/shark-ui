@@ -45,10 +45,10 @@ export const ThemeSelectorPrimaryTone = () => {
         lockKey="primaryTone"
         title={THEME_FIELDS.primaryTone.label}
       />
-      <div className="h-8 rounded-lg border border-input shadow-xs/5 transition-[color,box-shadow] has-focus-visible:border-primary has-focus-visible:ring-[3px] has-focus-visible:ring-ring/32">
+      <div className="h-8 rounded-lg border border-input shadow-xs/4 transition-[color,box-shadow] has-focus-visible:border-primary has-focus-visible:ring-[3px] has-focus-visible:ring-ring/32">
         <SegmentGroup
           className={cn(
-            "size-full gap-0 overflow-hidden rounded-[inherit] bg-transparent dark:bg-input/30",
+            "size-full gap-0 overflow-hidden rounded-[inherit] bg-transparent dark:bg-input/32",
             "*:data-[slot=segment-group-indicator]:rounded-none",
             "*:data-[slot=segment-group-indicator]:bg-primary"
           )}

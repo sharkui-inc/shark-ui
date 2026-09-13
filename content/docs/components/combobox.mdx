@@ -53,7 +53,9 @@ npx shadcn@latest add @shark/combobox
 
 ```text
 Combobox
-  ├── ComboboxInput
+  ├── ComboboxInput | ComboboxChips
+  │   ├── ComboboxChip
+  │   └── ComboboxChipsInput
   └── ComboboxContent
       ├── ComboboxEmpty
       └── ComboboxList
@@ -111,7 +113,7 @@ keeps the selected label while reopening the list shows every item.
 
 ## Controlled
 
-Control the selected value with `value` and `onValueChange` props.
+Control the selected value with `value` and `onValueChange` props. Ark UI represents selections as a `string[]`, including single selection.
 
 <ComponentPreview componentName="combobox" fileName="example-controlled" />
 
@@ -159,11 +161,13 @@ Use Combobox with `Field` components to style the combobox with the field compon
 
 ### Scrollable
 
+Long lists scroll, and the selected option is shown when reopened.
+
 <ComponentPreview componentName="combobox" fileName="example-with-scroll" />
 
 ### Multiple
 
-Enable multiple selection by setting the `multiple` prop to `Combobox`.
+Use `multiple` to select more than one option.
 
 <ComponentPreview componentName="combobox" fileName="example-multiple" />
 
@@ -173,9 +177,19 @@ Pass `showClear` to `ComboboxInput` to show a clear button.
 
 <ComponentPreview componentName="combobox" fileName="example-with-clear-button" />
 
+### Open on typing
+
+Set `openOnClick={false}` to open the list only when typing or using the trigger.
+
+<ComponentPreview componentName="combobox" fileName="example-without-open-on-click" />
+
 ### With start icon
 
 <ComponentPreview componentName="combobox" fileName="example-with-start-icon" />
+
+## RTL
+
+<RTLComponentPreview componentName="combobox" />
 
 ## API Reference
 
@@ -218,6 +232,36 @@ Input with dropdown trigger and optional clear button. Combines search and selec
 | `showTrigger` | `boolean` | `true` |
 | `showClear` | `boolean` | `false` |
 | `disabled` | `boolean` | - |
+| `className` | `string` | - |
+
+### ComboboxChips
+
+Control for multiple selections. Wrap `ComboboxChip` values and a
+`ComboboxChipsInput` inside it.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `className` | `string` | - |
+
+### ComboboxChipsInput
+
+Search input for use inside `ComboboxChips`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `placeholder` | `string` | - |
+| `className` | `string` | - |
+
+### ComboboxChip
+
+Displays one selected value and removes it from the combobox when its button is pressed.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | **required** |
+| `children` | `ReactNode` | **required** |
+| `removeProps` | `ComponentProps<"button">` | - |
 | `className` | `string` | - |
 
 ### ComboboxTrigger

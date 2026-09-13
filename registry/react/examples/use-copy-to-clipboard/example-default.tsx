@@ -6,7 +6,7 @@ import { useCopyToClipboard } from "@/registry/react/hooks/use-copy-to-clipboard
 
 const UseCopyToClipboardDemo = () => {
   const clipboard = useCopyToClipboard({
-    defaultValue: "https://shark.vini.one",
+    defaultValue: "https://shark-ui.com",
   });
 
   return (
