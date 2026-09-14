@@ -1,9 +1,15 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import {
   type ComponentPreviewExampleProps,
   getComponentPreviewExample,
 } from "./component-preview-example";
 import { ComponentPreviewFrame } from "./component-preview-frame";
-import { RTLPreview } from "./rtl-preview";
+import {
+  RTLPreviewContent,
+  RTLPreviewHeader,
+  RTLPreviewProvider,
+} from "./rtl-preview";
 
 type RTLComponentPreviewProps = ComponentPreviewExampleProps;
 
@@ -14,20 +20,30 @@ export const RTLComponentPreview = async (props: RTLComponentPreviewProps) => {
     autoHeight = false,
     ...rest
   } = props;
+  const rtlExamplePath = join(
+    process.cwd(),
+    "registry/react/examples",
+    componentName,
+    "example-rtl.tsx"
+  );
   const { preview, source } = await getComponentPreviewExample(
     componentName,
+    existsSync(rtlExamplePath) ? "example-rtl" : fileName,
     fileName
   );
 
   return (
-    <RTLPreview contentClassName="block w-full p-0">
+    <RTLPreviewProvider>
       <ComponentPreviewFrame
         {...rest}
         autoHeight={autoHeight}
-        preview={preview}
+        preview={
+          <RTLPreviewContent className="contents">{preview}</RTLPreviewContent>
+        }
+        previewHeader={<RTLPreviewHeader />}
         showBorders={false}
         source={source}
       />
-    </RTLPreview>
+    </RTLPreviewProvider>
   );
 };

@@ -109,6 +109,7 @@ type BaseColorName = (typeof BASE_COLOR_OPTIONS)[number]["value"];
 interface PrimaryTokenMap {
   primary: string;
   "primary-foreground": string;
+  "primary-hover": string;
   ring: string;
   "sidebar-primary": string;
   "sidebar-primary-foreground": string;
@@ -123,27 +124,34 @@ interface PrimaryCssVars {
 const primaryTokens = (
   palette: string,
   shade: string,
-  foreground: string
+  foreground: string,
+  ringShade: string
 ): PrimaryTokenMap => ({
   primary: `var(--color-${palette}-${shade})`,
   "primary-foreground": `var(--color-${palette}-${foreground})`,
-  ring: `var(--color-${palette}-500)`,
+  "primary-hover": `color-mix(in srgb, var(--color-${palette}-${shade}) 92%, var(--color-${palette}-950))`,
+  ring: `var(--color-${palette}-${ringShade})`,
   "sidebar-primary": `var(--color-${palette}-${shade})`,
   "sidebar-primary-foreground": `var(--color-${palette}-${foreground})`,
-  "sidebar-ring": `var(--color-${palette}-500)`,
+  "sidebar-ring": `var(--color-${palette}-${ringShade})`,
 });
 
 const primaryCssVars = (value: PrimaryColorName): PrimaryCssVars => {
   if (value === "neutral") {
     return {
-      dark: primaryTokens("neutral", "100", "800"),
-      light: primaryTokens("neutral", "800", "50"),
+      dark: primaryTokens("neutral", "100", "800", "400"),
+      light: primaryTokens("neutral", "800", "50", "600"),
     };
   }
 
-  const tokens = primaryTokens(value, "400", "950");
+  const lightRingShade = ["blue", "indigo", "violet", "purple"].includes(value)
+    ? "600"
+    : "700";
 
-  return { dark: tokens, light: tokens };
+  return {
+    dark: primaryTokens(value, "400", "950", "500"),
+    light: primaryTokens(value, "400", "950", lightRingShade),
+  };
 };
 
 export const PRIMARY_COLORS = PRIMARY_COLOR_OPTIONS.map((item) => ({
@@ -226,17 +234,19 @@ const baseThemeTokens = (palette: string, mode: "light" | "dark") => {
     "popover-foreground": foreground,
     primary: foreground,
     "primary-foreground": foregroundSurface,
-    ring: `var(--color-${palette}-${light ? "400" : "500"})`,
-    secondary: `color-mix(in srgb, ${surface} 4%, var(--background))`,
+    "primary-hover": `color-mix(in srgb, ${foreground} 92%, var(--color-${palette}-950))`,
+    ring: `var(--color-${palette}-${light ? "600" : "400"})`,
+    secondary: `color-mix(in srgb, ${surface} 8%, var(--background))`,
     "secondary-foreground": foreground,
+    "secondary-hover": `color-mix(in srgb, ${surface} 16%, var(--background))`,
     sidebar,
     "sidebar-accent": `color-mix(in srgb, ${surface} 4%, var(--sidebar))`,
     "sidebar-accent-foreground": foreground,
     "sidebar-border": `color-mix(in srgb, ${surface} ${light ? 6 : 5}%, var(--sidebar))`,
-    "sidebar-foreground": `color-mix(in srgb, ${foreground} 64%, var(--sidebar))`,
+    "sidebar-foreground": `color-mix(in srgb, ${foreground} 80%, var(--sidebar))`,
     "sidebar-primary": foreground,
     "sidebar-primary-foreground": foregroundSurface,
-    "sidebar-ring": `var(--color-${palette}-${light ? "400" : "500"})`,
+    "sidebar-ring": `var(--color-${palette}-${light ? "600" : "400"})`,
   };
 };
 
@@ -351,13 +361,14 @@ const STATUS_LIGHT = {
   "chart-4": "var(--color-purple-600)",
   "chart-5": "var(--color-rose-600)",
   destructive: "var(--color-red-600)",
-  "destructive-foreground": "var(--color-red-700)",
+  "destructive-foreground": "var(--color-red-800)",
+  "destructive-hover": "var(--color-red-700)",
   info: "var(--color-blue-600)",
-  "info-foreground": "var(--color-blue-700)",
-  success: "var(--color-emerald-600)",
-  "success-foreground": "var(--color-emerald-700)",
-  warning: "var(--color-amber-600)",
-  "warning-foreground": "var(--color-amber-700)",
+  "info-foreground": "var(--color-blue-800)",
+  success: "var(--color-emerald-700)",
+  "success-foreground": "var(--color-emerald-800)",
+  warning: "var(--color-amber-700)",
+  "warning-foreground": "var(--color-amber-800)",
 } as const;
 
 const STATUS_DARK = {
@@ -368,11 +379,12 @@ const STATUS_DARK = {
   "chart-5": "var(--color-rose-500)",
   destructive: "var(--color-red-600)",
   "destructive-foreground": "var(--color-red-400)",
+  "destructive-hover": "var(--color-red-700)",
   info: "var(--color-blue-600)",
   "info-foreground": "var(--color-blue-300)",
-  success: "var(--color-emerald-600)",
+  success: "var(--color-emerald-700)",
   "success-foreground": "var(--color-emerald-400)",
-  warning: "var(--color-amber-600)",
+  warning: "var(--color-amber-700)",
   "warning-foreground": "var(--color-amber-400)",
 } as const;
 
@@ -393,18 +405,27 @@ const primaryToneTokens = (
 
   const step = getPrimaryToneShade(palette, primaryTone);
   const foreground = primaryTone === "light" ? "950" : "50";
-  const tokens = {
+  const sharedTokens = {
     primary: `var(--color-${palette}-${step})`,
     "primary-foreground": `var(--color-${palette}-${foreground})`,
-    ring: `var(--color-${palette}-500)`,
+    "primary-hover": `color-mix(in srgb, var(--color-${palette}-${step}) 92%, var(--color-${palette}-950))`,
     "sidebar-primary": `var(--color-${palette}-${step})`,
     "sidebar-primary-foreground": `var(--color-${palette}-${foreground})`,
-    "sidebar-ring": `var(--color-${palette}-500)`,
   };
 
   return {
-    dark: { ...primaryCss.dark, ...tokens },
-    light: { ...primaryCss.light, ...tokens },
+    dark: {
+      ...primaryCss.dark,
+      ...sharedTokens,
+      ring: `var(--color-${palette}-500)`,
+      "sidebar-ring": `var(--color-${palette}-500)`,
+    },
+    light: {
+      ...primaryCss.light,
+      ...sharedTokens,
+      ring: `var(--color-${palette}-${getPrimaryToneShade(palette, "dark")})`,
+      "sidebar-ring": `var(--color-${palette}-${getPrimaryToneShade(palette, "dark")})`,
+    },
   };
 };
 
@@ -461,6 +482,7 @@ const THEME_COLOR_SHADES = ["50", "100", "400", "500", "800", "950"] as const;
 const PRIMARY_VAR_KEYS = [
   "primary",
   "primary-foreground",
+  "primary-hover",
   "ring",
   "sidebar-primary",
   "sidebar-primary-foreground",
@@ -476,6 +498,7 @@ const SURFACE_VAR_KEYS = [
   "popover-foreground",
   "secondary",
   "secondary-foreground",
+  "secondary-hover",
   "muted",
   "muted-foreground",
   "accent",
@@ -602,6 +625,13 @@ export const createRuntimeThemeCss = () => {
     )
   );
 
+  const darkThemeRules = chromatic.map((color) =>
+    formatRuntimeRule(
+      `.dark body.theme-${color.value}`,
+      formatRuntimeDeclarations(color.cssVars.dark, PRIMARY_VAR_KEYS)
+    )
+  );
+
   const darkToneRules = chromatic.map((color) =>
     formatRuntimeRule(
       `body.primary-tone-dark.theme-${color.value}`,
@@ -609,7 +639,23 @@ export const createRuntimeThemeCss = () => {
         primaryTokens(
           color.value,
           getPrimaryToneShade(color.value, "dark"),
-          "50"
+          "50",
+          getPrimaryToneShade(color.value, "dark")
+        ),
+        PRIMARY_VAR_KEYS
+      )
+    )
+  );
+
+  const darkToneDarkRules = chromatic.map((color) =>
+    formatRuntimeRule(
+      `.dark body.primary-tone-dark.theme-${color.value}`,
+      formatRuntimeDeclarations(
+        primaryTokens(
+          color.value,
+          getPrimaryToneShade(color.value, "dark"),
+          "50",
+          "500"
         ),
         PRIMARY_VAR_KEYS
       )
@@ -641,6 +687,8 @@ export const createRuntimeThemeCss = () => {
     "/* Generated from lib/theme/catalog.ts. Do not edit. */",
     ...themeRules,
     ...darkToneRules,
+    ...darkThemeRules,
+    ...darkToneDarkRules,
     ...aliasRules,
     surfaceRule,
     fallbackRule,

@@ -971,7 +971,7 @@ export const QuestionnaireChoice = (props: QuestionnaireChoiceProps) => {
           "text-start",
           "rounded-xl border border-input",
           "data-[state=checked]:border-primary data-[state=checked]:bg-primary/8",
-          "has-focus-visible:border-primary has-focus-visible:ring-[3px] has-focus-visible:ring-ring/32",
+          "has-focus-visible:border-ring has-focus-visible:ring-[3px] has-focus-visible:ring-ring/32",
           "data-disabled:opacity-64",
           className
         )}

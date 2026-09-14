@@ -8,8 +8,10 @@ colors:
   card-foreground: "var(--card-foreground)"
   primary: "var(--primary)"
   primary-foreground: "var(--primary-foreground)"
+  primary-hover: "var(--primary-hover)"
   secondary: "var(--secondary)"
   secondary-foreground: "var(--secondary-foreground)"
+  secondary-hover: "var(--secondary-hover)"
   muted: "var(--muted)"
   muted-foreground: "var(--muted-foreground)"
   accent: "var(--accent)"
@@ -21,6 +23,7 @@ colors:
   code-foreground: "var(--code-foreground)"
   destructive: "var(--destructive)"
   destructive-foreground: "var(--destructive-foreground)"
+  destructive-hover: "var(--destructive-hover)"
 typography:
   display:
     fontFamily: "Hanken Grotesk, sans-serif"
@@ -146,15 +149,20 @@ The palette is role-driven and themeable: background, foreground, surface, state
 
 ### Primary
 
-- **Theme Accent:** Reserved for primary actions, selected emphasis, focus borders, and the focus ring. The default theme keeps this role neutral; configured themes may supply one chromatic hue.
+- **Theme Accent:** A neutral contextual surface for hover, menus, and quiet selected regions. It never derives from the configured primary.
 - **Accent Foreground:** Maintains readable contrast on the current primary surface in both color modes.
+- **Primary Hover:** An opaque, palette-preserving darker mix. Solid controls use it instead of compositing primary alpha over an unknown parent surface.
+- **Focus Ring:** A separate, accessible dark palette shade used for keyboard focus borders and rings; it is intentionally not the primary fill.
 
 ### Neutral
 
 - **Canvas:** The page foundation; it remains visually quiet so examples and content carry the hierarchy.
 - **Foreground:** The highest-emphasis text and icon role.
 - **Card and Popover Surfaces:** Near-canvas layers used for bounded content, overlays, and composed product regions.
-- **Muted and Secondary Surfaces:** Low-contrast fills for selected navigation, supporting controls, skeletons, and low-emphasis regions.
+- **Muted Surface:** Neutral `/4`, reserved for skeletons and recessive content.
+- **Secondary Surface:** Neutral `/8`, with a neutral `/12` hover, for supporting filled controls.
+- **Accent Surface:** Neutral `/4`, reserved for hover and interactive contextual feedback; sidebar selection follows the same rule.
+- **Secondary Hover:** Neutral `/16`, providing a visible hover step above the secondary `/8` surface.
 - **Muted Foreground:** Supporting copy, metadata, placeholders, and inactive navigation.
 - **Border and Input Strokes:** Subtle structural separators derived from the active neutral family rather than a fixed gray.
 - **Code Surface:** A dedicated semantic surface that follows the selected neutral family and color mode.
@@ -165,7 +173,7 @@ The palette is role-driven and themeable: background, foreground, surface, state
 
 **The One Accent Rule.** A screen may use one configured primary hue. Keep surrounding surfaces neutral so the accent communicates state and action rather than decoration.
 
-**The Contrast Pair Rule.** Primary, card, popover, sidebar, code, and feedback surfaces travel with their matching foreground roles; do not mix foreground tokens across surface families.
+**The Contrast Pair Rule.** Primary, card, popover, sidebar, code, and feedback surfaces travel with their matching foreground roles; do not mix foreground tokens across surface families. Validate the final composited color, not a token in isolation.
 
 ## Typography
 
@@ -209,7 +217,7 @@ The system is flat by default. Depth comes first from tonal separation and one-p
 
 - **Hairline Ambient** (`shadow-xs/4`): Inputs, cards, and subtle outlined controls where a border alone needs a small amount of separation.
 - **Hover Reinforcement** (`shadow-xs/8`): Temporary feedback that makes an existing bounded surface more tangible without changing its elevation role.
-- **Compact Raised** (`shadow-sm/4`): Primary actions, contained product surfaces, and decorative previews. Tint primary and destructive actions from their owning semantic role when appropriate.
+- **Compact Raised** (`shadow-sm/4`): Primary actions, contained product surfaces, and decorative previews. Color, border, ring, and background express semantic state; elevation stays neutral.
 - **Overlay** (`shadow-lg/4`): Floating surfaces such as menus, dialogs, sheets, tooltips, and toasts. Larger geometry than compact raised because the surface leaves the page flow; the `/4` opacity keeps it as shallow as the rest of the vocabulary.
 
 ### Named Rules
@@ -230,9 +238,9 @@ Radius is a user-configurable scale anchored by one base value. Components deriv
 
 - **Character:** Compact, quiet, and stateful; labels and icons remain visually centered with a consistent gap.
 - **Shape:** Gently rounded by default, with an explicit pill option and smaller corners only at the extra-small size.
-- **Primary:** Uses the semantic primary pair, a transparent border for stable geometry, and a shallow role-tinted shadow.
+- **Primary:** Uses the semantic primary pair, an opaque primary-hover state, a transparent border for stable geometry, and a shallow neutral shadow.
 - **Secondary / Outline / Ghost:** Secondary uses a quiet filled surface; outline uses the input stroke over a transparent surface; ghost is transparent until hover.
-- **Hover / Focus / Active:** Hover shifts the owning semantic surface slightly. Keyboard focus uses a three-pixel translucent ring plus a semantic border. Pressing scales ordinary buttons to 98%; reduced-motion mode removes transitions.
+- **Hover / Focus / Active:** Solid hover uses its opaque semantic hover token. Accent remains neutral; selection that needs persistent emphasis uses primary indicators, weight, or border. Keyboard focus uses a three-pixel translucent ring plus the separate semantic ring border. Pressing scales ordinary buttons to 98%; reduced-motion mode removes transitions.
 - **Disabled / Loading:** Preserve the control footprint, reduce opacity, block pointer actions, and expose busy/disabled state semantically.
 
 ### Badges
@@ -252,7 +260,7 @@ Radius is a user-configurable scale anchored by one base value. Components deriv
 ### Inputs / Fields
 
 - **Style:** Compact height, transparent light-mode fill, subtle dark-mode fill, semantic input stroke, and control-radius corners.
-- **Focus:** The border moves to primary and a three-pixel translucent ring appears without changing layout.
+- **Focus:** The border moves to ring and a three-pixel translucent ring appears without changing layout.
 - **Error / Disabled:** Invalid state switches border, text, and ring to destructive roles. Disabled state keeps content legible at reduced opacity and communicates the unavailable cursor state.
 - **Composition:** Labels use medium interface type; descriptions use muted supporting text. Stacked form groups use explicit gaps rather than ad hoc margins.
 

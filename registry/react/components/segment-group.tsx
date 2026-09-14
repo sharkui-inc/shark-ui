@@ -98,7 +98,7 @@ export const SegmentGroupItem = (
         "cursor-pointer",
         "data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
         "rounded-[inherit] border border-transparent",
-        "outline-none data-focus-visible:border-primary data-focus-visible:ring-[3px] data-focus-visible:ring-ring/32",
+        "outline-none data-focus-visible:border-ring data-focus-visible:ring-[3px] data-focus-visible:ring-ring/32",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         className
       )}

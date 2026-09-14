@@ -5,6 +5,11 @@ import { describe, it } from "node:test";
 
 const ALLOWED_ALPHA = new Set([0, 4, 8, 16, 24, 32, 48, 64, 80, 96, 100]);
 const ALLOWED_SHADOW_GEOMETRIES = new Set(["xs", "sm", "lg"]);
+const TECHNICAL_SHADOWS = new Set([
+  "shadow-[0_0_0_1px_rgb(0_0_0/0.08),inset_0_0_0_1px_rgb(0_0_0/0.08)]",
+  "shadow-[0_0_0_9999px_rgb(0_0_0/0.48)]",
+  "shadow-[0_1px_3px_rgb(0_0_0/0.32)]",
+]);
 const SOURCE_ROOTS = [
   "app",
   "components",
@@ -59,15 +64,6 @@ const reportUnexpectedAlpha = (
 
 const reportUnexpectedShadows = (source: string, path: string) => {
   const findings: string[] = [];
-  const semanticRaisedShadowIndexes = new Set<number>();
-
-  for (const match of source.matchAll(
-    /\bshadow-[a-z-]+\/\d+\s+(shadow-sm)\b/g
-  )) {
-    semanticRaisedShadowIndexes.add(
-      (match.index ?? 0) + match[0].lastIndexOf(match[1])
-    );
-  }
 
   for (const match of source.matchAll(
     /\b(?:shadow|drop-shadow)-(2xs|xs|sm|md|lg|xl|2xl)(?:\/(\d+))?(?=$|["'\s])/g
@@ -89,16 +85,44 @@ const reportUnexpectedShadows = (source: string, path: string) => {
       continue;
     }
 
-    if (
-      match[0] !== "shadow-sm" ||
-      !semanticRaisedShadowIndexes.has(match.index ?? 0)
-    ) {
-      findings.push(`${path}:${line} uses bare shadow ${match[0]}`);
+    findings.push(`${path}:${line} uses bare shadow ${match[0]}`);
+  }
+
+  for (const match of source.matchAll(
+    /\b(?:shadow|drop-shadow)-(?:2xs|xs|sm|md|lg|xl|2xl)\/\d+\//g
+  )) {
+    const line = source.slice(0, match.index).split("\n").length;
+    findings.push(`${path}:${line} uses malformed shadow ${match[0]}`);
+  }
+
+  for (const match of source.matchAll(/\bshadow-([a-z-]+)\/(\d+)\b/g)) {
+    if (!ALLOWED_SHADOW_GEOMETRIES.has(match[1])) {
+      const line = source.slice(0, match.index).split("\n").length;
+      findings.push(`${path}:${line} uses color-tinted shadow ${match[0]}`);
+    }
+  }
+
+  for (const match of source.matchAll(/\bshadow-\[[^\]]+\]/g)) {
+    if (!TECHNICAL_SHADOWS.has(match[0])) {
+      const line = source.slice(0, match.index).split("\n").length;
+      findings.push(
+        `${path}:${line} uses undocumented technical shadow ${match[0]}`
+      );
     }
   }
 
   return findings;
 };
+
+const reportTranslucentSolidHovers = (source: string, path: string) =>
+  [
+    ...source.matchAll(
+      /\b(?:[A-Za-z0-9_[\]:&=-]+:)*hover:bg-(?:primary|secondary)\/\d+|\b(?:[A-Za-z0-9_[\]:&=-]+:)*hover:bg-destructive\/80|\b[^"'\s]*hover\]:bg-(?:primary|secondary)\/\d+|\b[^"'\s]*hover\]:bg-destructive\/80/g
+    ),
+  ].map((match) => {
+    const line = source.slice(0, match.index).split("\n").length;
+    return `${path}:${line} uses translucent solid hover ${match[0]}`;
+  });
 
 describe("opacity policy", () => {
   it("uses only the approved alpha scale in authored source", () => {
@@ -139,6 +163,7 @@ describe("opacity policy", () => {
             true
           ),
           ...reportUnexpectedShadows(source, path),
+          ...reportTranslucentSolidHovers(source, path),
         ];
       })
     );

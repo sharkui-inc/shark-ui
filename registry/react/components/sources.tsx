@@ -93,7 +93,7 @@ export const Source = (props: SourceProps) => {
         "outline-none",
         "hover:bg-muted",
         "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
-        "focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+        "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
         className
       )}
       data-slot="source"

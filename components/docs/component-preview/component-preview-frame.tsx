@@ -16,6 +16,8 @@ interface ComponentPreviewFrameProps extends React.ComponentProps<"div"> {
   autoHeight?: boolean;
   /** The content to display in the preview pane. */
   preview: React.ReactNode;
+  /** Optional controls displayed above the preview content. */
+  previewHeader?: React.ReactNode;
   /** Whether to show the dashed padding guide borders around the preview. */
   showBorders?: boolean;
   /** The source code to display in the code pane. */
@@ -26,6 +28,7 @@ export const ComponentPreviewFrame = (props: ComponentPreviewFrameProps) => {
   const {
     autoHeight = false,
     preview,
+    previewHeader,
     source,
     showBorders = true,
     className,
@@ -46,23 +49,29 @@ export const ComponentPreviewFrame = (props: ComponentPreviewFrameProps) => {
       <div className="group/stage relative overflow-hidden rounded-2xl border">
         <div
           className={cn(
-            "relative min-h-[450px] w-full p-4 sm:p-10",
-            "flex items-center justify-center overflow-y-auto bg-code",
+            "relative min-h-[450px] w-full",
+            "flex flex-col bg-code",
             "group-has-[[data-slot=tab-code]:not([hidden])]/stage:pointer-events-none",
             "group-has-[[data-slot=tab-code]:not([hidden])]/stage:invisible",
             !autoHeight && "h-[450px]"
           )}
           data-slot="preview"
         >
-          {showBorders ? (
-            <>
-              <div className="absolute inset-x-0 top-4 border border-border/64 border-dashed max-sm:hidden sm:top-8" />
-              <div className="absolute inset-x-0 bottom-4 border border-border/64 border-dashed max-sm:hidden sm:bottom-8" />
-              <div className="absolute inset-s-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-s-8" />
-              <div className="absolute inset-e-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-e-8" />
-            </>
-          ) : null}
-          {preview}
+          {previewHeader}
+          <div
+            className="relative flex min-h-0 flex-1 items-center justify-center overflow-y-auto p-4 sm:p-10"
+            data-slot="preview-content"
+          >
+            {showBorders ? (
+              <>
+                <div className="absolute inset-x-0 top-4 border border-border/64 border-dashed max-sm:hidden sm:top-8" />
+                <div className="absolute inset-x-0 bottom-4 border border-border/64 border-dashed max-sm:hidden sm:bottom-8" />
+                <div className="absolute inset-s-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-s-8" />
+                <div className="absolute inset-e-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-e-8" />
+              </>
+            ) : null}
+            {preview}
+          </div>
         </div>
         <TabsContent
           className="absolute inset-0"

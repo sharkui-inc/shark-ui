@@ -39,38 +39,23 @@ export const fileThumbnailVariants = tv({
       default: {
         badge: [
           "bg-secondary text-secondary-foreground",
-          "border-t-secondary-foreground/32 shadow-secondary-foreground/24",
+          "border-t-secondary-foreground/32",
         ],
       },
       destructive: {
-        badge: [
-          "bg-destructive text-white",
-          "border-t-destructive-foreground shadow-destructive/32",
-        ],
+        badge: ["bg-destructive text-white", "border-t-destructive-foreground"],
       },
       info: {
-        badge: [
-          "bg-info text-white",
-          "border-t-info-foreground shadow-info/32",
-        ],
+        badge: ["bg-info text-white", "border-t-info-foreground"],
       },
       primary: {
-        badge: [
-          "bg-primary text-white",
-          "border-t-primary-foreground/32 shadow-primary/32",
-        ],
+        badge: ["bg-primary text-white", "border-t-primary-foreground/32"],
       },
       success: {
-        badge: [
-          "bg-success text-white",
-          "border-t-success-foreground shadow-success/32",
-        ],
+        badge: ["bg-success text-white", "border-t-success-foreground"],
       },
       warning: {
-        badge: [
-          "bg-warning text-white",
-          "border-t-warning-foreground shadow-warning/32",
-        ],
+        badge: ["bg-warning text-white", "border-t-warning-foreground"],
       },
     },
   },

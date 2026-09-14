@@ -201,7 +201,10 @@ describe("createCssVars", () => {
 
         const runtimeBlock = runtimeThemes.slice(runtimeStart, runtimeEnd + 1);
 
-        for (const block of [rootBlock, darkBlock]) {
+        for (const [block, ringShade] of [
+          [rootBlock, darkShade],
+          [darkBlock, "500"],
+        ] as const) {
           assert.ok(
             block.includes(`--primary: var(--color-${palette}-${shade});`)
           );
@@ -220,22 +223,33 @@ describe("createCssVars", () => {
               `--sidebar-primary-foreground: var(--color-${palette}-${foreground});`
             )
           );
-          assert.ok(block.includes(`--ring: var(--color-${palette}-500);`));
           assert.ok(
-            block.includes(`--sidebar-ring: var(--color-${palette}-500);`)
+            block.includes(
+              `--primary-hover: color-mix(in srgb, var(--color-${palette}-${shade}) 92%, var(--color-${palette}-950));`
+            )
+          );
+          assert.ok(
+            block.includes(`--ring: var(--color-${palette}-${ringShade});`)
+          );
+          assert.ok(
+            block.includes(
+              `--sidebar-ring: var(--color-${palette}-${ringShade});`
+            )
           );
         }
 
         for (const token of [
           `--primary: var(--color-${palette}-${shade});`,
           `--primary-foreground: var(--color-${palette}-${foreground});`,
+          `--primary-hover: color-mix(in srgb, var(--color-${palette}-${shade}) 92%, var(--color-${palette}-950));`,
           `--sidebar-primary: var(--color-${palette}-${shade});`,
           `--sidebar-primary-foreground: var(--color-${palette}-${foreground});`,
-          `--ring: var(--color-${palette}-500);`,
-          `--sidebar-ring: var(--color-${palette}-500);`,
+          `--ring: var(--color-${palette}-${darkShade});`,
+          `--sidebar-ring: var(--color-${palette}-${darkShade});`,
         ]) {
+          const normalizedToken = token.replace(/\s+/g, "");
           assert.equal(
-            runtimeBlock.split(token).length - 1,
+            runtimeBlock.replace(/\s+/g, "").split(normalizedToken).length - 1,
             1,
             `${token} should be emitted by the ${tone} runtime base`
           );
@@ -264,57 +278,156 @@ describe("createCssVars", () => {
     }
   });
 
-  it("keeps semantic text pairs at WCAG AA contrast across base themes", () => {
+  it("keeps composed surface, status, primary, and focus pairs accessible", () => {
+    const white: LinearRgb = [1, 1, 1];
+
     for (const base of BASE_COLORS) {
       const palette = BASE_PALETTE_RE.exec(base.cssVars.light.background)?.[1];
 
       assert.ok(palette, `missing palette for ${base.value}`);
 
-      const lightBackground = oklchToLinearRgb(tailwindColor(palette, "50"));
-      const lightForeground = oklchToLinearRgb(tailwindColor(palette, "800"));
-      const lightSurface = mixInSrgb(
-        oklchToLinearRgb(tailwindColor(palette, "950")),
-        lightBackground,
-        0.04
-      );
-      const lightMutedForeground = mixInSrgb(
-        oklchToLinearRgb(tailwindColor(palette, "500")),
-        oklchToLinearRgb(tailwindColor(palette, "950")),
-        0.88
-      );
-      const darkBackground = mixInSrgb(
-        oklchToLinearRgb(tailwindColor(palette, "950")),
-        lightBackground,
-        0.95
-      );
-      const darkForeground = oklchToLinearRgb(tailwindColor(palette, "100"));
-      const darkCard = mixInSrgb(darkBackground, lightBackground, 0.98);
-      const darkSidebar = mixInSrgb(
-        oklchToLinearRgb(tailwindColor(palette, "950")),
-        lightBackground,
-        0.97
-      );
-      const darkSidebarForeground = mixInSrgb(
-        darkForeground,
-        darkSidebar,
-        0.64
-      );
+      for (const mode of ["light", "dark"] as const) {
+        const light = mode === "light";
+        const base50 = oklchToLinearRgb(tailwindColor(palette, "50"));
+        const base950 = oklchToLinearRgb(tailwindColor(palette, "950"));
+        const surface = oklchToLinearRgb(
+          tailwindColor(palette, light ? "950" : "50")
+        );
+        const background = light ? base50 : mixInSrgb(base950, base50, 0.95);
+        const foreground = oklchToLinearRgb(
+          tailwindColor(palette, light ? "800" : "100")
+        );
+        const card = light ? background : mixInSrgb(background, base50, 0.98);
+        const sidebar = light ? base50 : mixInSrgb(base950, base50, 0.97);
+        const muted = mixInSrgb(surface, background, 0.04);
+        const secondary = mixInSrgb(surface, background, 0.08);
+        const secondaryHover = mixInSrgb(surface, background, 0.16);
+        const mutedForeground = mixInSrgb(
+          oklchToLinearRgb(tailwindColor(palette, "500")),
+          surface,
+          0.88
+        );
+        const sidebarForeground = mixInSrgb(foreground, sidebar, 0.8);
 
-      for (const [name, foreground, background] of [
-        ["light foreground", lightForeground, lightBackground],
-        ["light card", lightForeground, lightBackground],
-        ["light secondary", lightForeground, lightSurface],
-        ["light muted", lightMutedForeground, lightBackground],
-        ["dark foreground", darkForeground, darkBackground],
-        ["dark card", darkForeground, darkCard],
-        ["dark secondary", darkForeground, darkCard],
-        ["dark sidebar", darkSidebarForeground, darkSidebar],
-      ] as const) {
-        const contrast = contrastRatioForRgb(foreground, background);
+        for (const primary of PRIMARY_COLORS) {
+          for (const tone of PRIMARY_TONES) {
+            const neutral = primary.value === "neutral";
+            const primaryPalette = neutral ? palette : primary.value;
+            let primaryShade: string;
+            let primaryForegroundShade: string;
+            let ringShade: string;
+
+            if (neutral) {
+              primaryShade = light ? "800" : "100";
+              primaryForegroundShade = light ? "50" : "800";
+              ringShade = light ? "600" : "400";
+            } else {
+              primaryShade = getPrimaryToneShade(primary.value, tone.value);
+              primaryForegroundShade = tone.value === "light" ? "950" : "50";
+              ringShade = light
+                ? getPrimaryToneShade(primary.value, "dark")
+                : "500";
+            }
+            const primaryFill = oklchToLinearRgb(
+              tailwindColor(primaryPalette, primaryShade)
+            );
+            const primaryForeground = oklchToLinearRgb(
+              tailwindColor(primaryPalette, primaryForegroundShade)
+            );
+            const primaryHover = mixInSrgb(
+              primaryFill,
+              oklchToLinearRgb(tailwindColor(primaryPalette, "950")),
+              0.92
+            );
+            const accent = mixInSrgb(surface, background, 0.04);
+            const sidebarAccent = mixInSrgb(surface, sidebar, 0.04);
+            const ring = oklchToLinearRgb(
+              tailwindColor(primaryPalette, ringShade)
+            );
+            const surfaces = [
+              ["background", background],
+              ["card", card],
+              ["popover", card],
+              ["muted", muted],
+              ["secondary", secondary],
+              ["accent", accent],
+              ["sidebar", sidebar],
+              ["sidebar accent", sidebarAccent],
+            ] as const;
+
+            for (const [name, value] of surfaces) {
+              const contrast = contrastRatioForRgb(foreground, value);
+              assert.ok(
+                contrast >= 4.5,
+                `${base.value} ${mode} ${primary.value} ${tone.value} foreground on ${name} is ${contrast.toFixed(2)}:1`
+              );
+              const ringContrast = contrastRatioForRgb(ring, value);
+              assert.ok(
+                ringContrast >= 3,
+                `${base.value} ${mode} ${primary.value} ${tone.value} ring on ${name} is ${ringContrast.toFixed(2)}:1`
+              );
+            }
+
+            for (const [name, value] of [
+              ["primary", primaryFill],
+              ["primary hover", primaryHover],
+            ] as const) {
+              const contrast = contrastRatioForRgb(primaryForeground, value);
+              assert.ok(
+                contrast >= 4.5,
+                `${primary.value} ${tone.value} ${name} is ${contrast.toFixed(2)}:1`
+              );
+            }
+          }
+        }
+
+        for (const [name, value] of [
+          ["background", background],
+          ["card", card],
+          ["popover", card],
+          ["muted", muted],
+          ["secondary", secondary],
+          ["secondary hover", secondaryHover],
+          ["sidebar", sidebar],
+        ] as const) {
+          const contrast = contrastRatioForRgb(foreground, value);
+          assert.ok(
+            contrast >= 4.5,
+            `${base.value} ${mode} foreground on ${name} is ${contrast.toFixed(2)}:1`
+          );
+        }
+
+        for (const [name, paletteName, ink, fill] of [
+          ["destructive", "red", light ? "800" : "400", "600"],
+          ["info", "blue", light ? "800" : "300", "600"],
+          ["success", "emerald", light ? "800" : "400", "700"],
+          ["warning", "amber", light ? "800" : "400", "700"],
+        ] as const) {
+          const inkColor = oklchToLinearRgb(tailwindColor(paletteName, ink));
+          const fillColor = oklchToLinearRgb(tailwindColor(paletteName, fill));
+
+          assert.ok(
+            contrastRatioForRgb(white, fillColor) >= 4.5,
+            `${mode} ${name} solid fill must support white text`
+          );
+
+          for (const percent of [0.08, 0.24]) {
+            const composed = mixInSrgb(fillColor, background, percent);
+            const contrast = contrastRatioForRgb(inkColor, composed);
+            assert.ok(
+              contrast >= 4.5,
+              `${base.value} ${mode} ${name} ink on ${percent * 100}% layer is ${contrast.toFixed(2)}:1`
+            );
+          }
+        }
 
         assert.ok(
-          contrast >= 4.5,
-          `${base.value} ${name} is ${contrast.toFixed(2)}:1`
+          contrastRatioForRgb(mutedForeground, background) >= 4.5,
+          `${base.value} ${mode} muted foreground must meet AA`
+        );
+        assert.ok(
+          contrastRatioForRgb(sidebarForeground, sidebar) >= 4.5,
+          `${base.value} ${mode} sidebar foreground must meet AA`
         );
       }
     }
@@ -344,7 +457,22 @@ describe("createCssVars", () => {
       assert.ok(palette, `missing palette for ${base.value}`);
       assert.ok(
         rootBlock.includes(
-          `--secondary: color-mix(in srgb, var(--color-${palette}-950) 4%, var(--background));`
+          `--secondary: color-mix(in srgb, var(--color-${palette}-950) 8%, var(--background));`
+        )
+      );
+      assert.ok(
+        rootBlock.includes(
+          `--secondary-hover: color-mix(in srgb, var(--color-${palette}-950) 16%, var(--background));`
+        )
+      );
+      assert.ok(
+        rootBlock.includes(
+          `--accent: color-mix(in srgb, var(--color-${palette}-950) 4%, var(--background));`
+        )
+      );
+      assert.ok(
+        rootBlock.includes(
+          `--sidebar-accent: color-mix(in srgb, var(--color-${palette}-950) 4%, var(--sidebar));`
         )
       );
       assert.ok(
@@ -382,6 +510,8 @@ describe("createCssVars", () => {
     const expectedTokens = [
       "color-mix(in srgb, var(--color-neutral-950) 4%, var(--background))",
       "color-mix(in srgb, var(--color-neutral-950) 8%, var(--background))",
+      "color-mix(in srgb, var(--color-neutral-950) 16%, var(--background))",
+      "color-mix(in srgb, var(--color-neutral-950) 4%, var(--sidebar))",
       "color-mix(in srgb, var(--color-neutral-50) 4%, var(--background))",
       "color-mix(in srgb, var(--color-neutral-50) 6%, var(--background))",
       "color-mix(in srgb, var(--color-neutral-950) 95%, var(--color-neutral-50))",

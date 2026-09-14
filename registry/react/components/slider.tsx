@@ -118,7 +118,7 @@ export const Slider = (props: SliderProps) => {
                 "rounded-full border border-input shadow-xs/4",
                 "cursor-grab select-none",
                 "transition-[color,box-shadow,transform]",
-                "focus-visible:border-primary focus-visible:outline-hidden focus-visible:ring-[3px] focus-visible:ring-ring/32",
+                "focus-visible:border-ring focus-visible:outline-hidden focus-visible:ring-[3px] focus-visible:ring-ring/32",
                 "origin-left data-[orientation=vertical]:origin-bottom data-dragging:scale-110 data-dragging:cursor-grabbing data-dragging:border-primary data-dragging:ring-[3px] data-dragging:ring-ring/32 rtl:origin-right",
                 "pointer-coarse:after:absolute pointer-coarse:after:h-full pointer-coarse:after:min-h-11",
                 "motion-reduce:transition-none"

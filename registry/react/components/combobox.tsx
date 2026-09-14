@@ -24,6 +24,7 @@ import {
   menuEmptyVariants,
   menuGroupLabelVariants,
   menuItemControlVariants,
+  menuItemHighlightVariants,
   menuItemIconVariants,
   menuItemIndicatorVariants,
   menuListVariants,
@@ -217,8 +218,7 @@ export const ComboboxChipsInput = (
     <ArkCombobox.Input asChild data-slot="combobox-chips-input">
       <InputGroupInput
         className={cn(
-          "h-5.5 in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5 min-w-18 flex-auto basis-auto",
-          "px-1",
+          "h-5.5 in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5 w-auto min-w-18 max-w-full flex-auto basis-auto",
           className
         )}
         {...rest}
@@ -246,7 +246,7 @@ export const ComboboxChip = (props: ComboboxChipProps) => {
   return (
     <span
       className={cn(
-        "h-6 in-data-[size=lg]:h-7 in-data-[size=sm]:h-5 max-w-full",
+        "h-5.5 in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5 max-w-full",
         "inline-flex shrink-0 items-center gap-1",
         "in-data-[size=lg]:ps-2 in-data-[size=sm]:ps-1 ps-1.5 pe-0.5",
         "bg-secondary",
@@ -389,8 +389,7 @@ export const comboboxItemVariants = tv({
     "select-none",
     "cursor-default",
     "outline-hidden",
-    "data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground",
-    "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
+    menuItemHighlightVariants(),
     "data-disabled:pointer-events-none data-disabled:opacity-64",
     "[&_svg:not([class*='text-'])]:text-muted-foreground",
   ],

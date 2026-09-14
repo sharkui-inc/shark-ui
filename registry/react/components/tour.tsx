@@ -330,10 +330,12 @@ export const TourActions = (
                   : "default"
               }
             >
-              {action.action === "prev" && <ChevronLeft className="size-3.5" />}
+              {action.action === "prev" && (
+                <ChevronLeft className="size-3.5 rtl:rotate-180" />
+              )}
               {action.label}
               {action.action === "next" && (
-                <ChevronRight className="size-3.5" />
+                <ChevronRight className="size-3.5 rtl:rotate-180" />
               )}
             </Button>
           </TourActionTrigger>
@@ -366,7 +368,7 @@ export const TourPreviousStep = (
       asChild
     >
       <Button size="sm" variant="outline">
-        <ChevronLeft className="size-3.5" />
+        <ChevronLeft className="size-3.5 rtl:rotate-180" />
         {prevAction.label}
       </Button>
     </TourActionTrigger>
@@ -404,7 +406,9 @@ export const TourNextStep = (
       <Button size="sm">
         {action.label}
 
-        {actionType === "next" && <ChevronRight className="size-3.5" />}
+        {actionType === "next" && (
+          <ChevronRight className="size-3.5 rtl:rotate-180" />
+        )}
       </Button>
     </TourActionTrigger>
   );

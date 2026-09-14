@@ -38,7 +38,7 @@ export const iconTileVariants = tv({
       default: [
         "bg-primary",
         "text-primary-foreground",
-        "[a&]:hover:bg-primary/80 [button&]:hover:bg-primary/80",
+        "[a&]:hover:bg-primary-hover [button&]:hover:bg-primary-hover",
       ],
       outline: [
         "bg-background",

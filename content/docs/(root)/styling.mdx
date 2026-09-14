@@ -22,14 +22,17 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-hover: var(--destructive-hover);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
   --color-success: var(--success);
@@ -72,12 +75,14 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
   --popover-foreground: var(--color-neutral-800);
   --primary: var(--color-neutral-800);
   --primary-foreground: var(--color-neutral-50);
+  --primary-hover: color-mix(in srgb, var(--color-neutral-800) 92%, var(--color-neutral-950));
   --secondary: color-mix(
     in srgb,
-    var(--color-neutral-950) 4%,
+    var(--color-neutral-950) 8%,
     var(--background)
   );
   --secondary-foreground: var(--color-neutral-800);
+  --secondary-hover: color-mix(in srgb, var(--color-neutral-950) 16%, var(--background));
   --muted: color-mix(in srgb, var(--color-neutral-950) 4%, var(--background));
   --muted-foreground: color-mix(
     in srgb,
@@ -87,20 +92,21 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
   --accent: color-mix(in srgb, var(--color-neutral-950) 4%, var(--background));
   --accent-foreground: var(--color-neutral-800);
   --destructive: var(--color-red-600);
-  --destructive-foreground: var(--color-red-700);
+  --destructive-foreground: var(--color-red-800);
+  --destructive-hover: var(--color-red-700);
   --info: var(--color-blue-600);
-  --info-foreground: var(--color-blue-700);
-  --success: var(--color-emerald-600);
-  --success-foreground: var(--color-emerald-700);
-  --warning: var(--color-amber-600);
-  --warning-foreground: var(--color-amber-700);
+  --info-foreground: var(--color-blue-800);
+  --success: var(--color-emerald-700);
+  --success-foreground: var(--color-emerald-800);
+  --warning: var(--color-amber-700);
+  --warning-foreground: var(--color-amber-800);
   --border: color-mix(in srgb, var(--color-neutral-950) 8%, var(--background));
   --input: color-mix(in srgb, var(--color-neutral-950) 10%, var(--background));
-  --ring: var(--color-neutral-400);
+  --ring: var(--color-neutral-600);
   --sidebar: var(--color-neutral-50);
   --sidebar-foreground: color-mix(
     in srgb,
-    var(--color-neutral-800) 64%,
+    var(--color-neutral-800) 80%,
     var(--sidebar)
   );
   --sidebar-primary: var(--color-neutral-800);
@@ -116,7 +122,7 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
     var(--color-neutral-950) 6%,
     var(--sidebar)
   );
-  --sidebar-ring: var(--color-neutral-400);
+  --sidebar-ring: var(--color-neutral-600);
   --chart-1: var(--color-blue-600);
   --chart-2: var(--color-emerald-600);
   --chart-3: var(--color-amber-600);
@@ -141,8 +147,10 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
   --popover-foreground: var(--color-neutral-100);
   --primary: var(--color-neutral-100);
   --primary-foreground: var(--color-neutral-800);
-  --secondary: color-mix(in srgb, var(--color-neutral-50) 4%, var(--background));
+  --primary-hover: color-mix(in srgb, var(--color-neutral-100) 92%, var(--color-neutral-950));
+  --secondary: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
   --secondary-foreground: var(--color-neutral-100);
+  --secondary-hover: color-mix(in srgb, var(--color-neutral-50) 16%, var(--background));
   --muted: color-mix(in srgb, var(--color-neutral-50) 4%, var(--background));
   --muted-foreground: color-mix(
     in srgb,
@@ -153,15 +161,16 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
   --accent-foreground: var(--color-neutral-100);
   --destructive: var(--color-red-600);
   --destructive-foreground: var(--color-red-400);
+  --destructive-hover: var(--color-red-700);
   --info: var(--color-blue-600);
   --info-foreground: var(--color-blue-300);
-  --success: var(--color-emerald-600);
+  --success: var(--color-emerald-700);
   --success-foreground: var(--color-emerald-400);
-  --warning: var(--color-amber-600);
+  --warning: var(--color-amber-700);
   --warning-foreground: var(--color-amber-400);
   --border: color-mix(in srgb, var(--color-neutral-50) 6%, var(--background));
   --input: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
-  --ring: var(--color-neutral-500);
+  --ring: var(--color-neutral-400);
   --sidebar: color-mix(
     in srgb,
     var(--color-neutral-950) 97%,
@@ -169,7 +178,7 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
   );
   --sidebar-foreground: color-mix(
     in srgb,
-    var(--color-neutral-100) 64%,
+    var(--color-neutral-100) 80%,
     var(--sidebar)
   );
   --sidebar-primary: var(--color-neutral-100);
@@ -185,7 +194,7 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
     var(--color-neutral-50) 5%,
     var(--sidebar)
   );
-  --sidebar-ring: var(--color-neutral-500);
+  --sidebar-ring: var(--color-neutral-400);
   --chart-1: var(--color-blue-700);
   --chart-2: var(--color-emerald-500);
   --chart-3: var(--color-amber-500);

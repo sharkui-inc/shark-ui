@@ -21,6 +21,9 @@ Conflict order: explicit user or system instructions, then `biome.json`, then th
 ## Tailwind, Icons, and RTL
 
 - Use semantic tokens (`text-muted-foreground`, `bg-destructive`, `border-input`), not raw palette classes. Skip manual `dark:` palette pairs when tokens cover the case.
+- Surface hierarchy is intentional: `muted` and `accent` are neutral `/4`; `secondary` is neutral `/8`; `secondary-hover` is neutral `/16`; `sidebar-accent` is neutral `/4` over the sidebar. Accent communicates interactive context without becoming a second primary surface.
+- Solid semantic controls use opaque `primary-hover`, `secondary-hover`, or `destructive-hover` tokens. Do not use translucent `primary`, `secondary`, or destructive `/80` hover fills for solid controls: their final color depends on the parent surface. Contextual status feedback may use its documented `/8` to `/24` layers.
+- Focus uses `border-ring` and `ring-ring`; primary fill communicates actions and explicit selected indicators, while the ring token communicates keyboard focus with verified contrast.
 - Prefer built-in variants and semantic tokens before restyling with `className`. Use `className` for layout.
 - Prefer `flex` or `grid` with `gap-*` over `space-x-*` / `space-y-*`. Use `size-*` for squares and icons. Use `truncate`, not the expanded utility sequence.
 - Prefer `data-slot` and existing `in-*` / `peer` patterns when extending registry styles.
@@ -97,14 +100,14 @@ Use only these visual alpha values: `0`, `4`, `8`, `16`, `24`, `32`, `48`, `64`,
 - Reserve `/4` for neutral elevation; `/8` and `/16` for subtle feedback or selection; `/24` for subtle validation and decoration; `/32` for standard focus and scrims; `/48` for reinforced focus and present muted surfaces; `/64` for validated supporting content; `/80` for strong translucent layers; and `/96` for fixed blurred surfaces.
 - Do not add opacity for consistency alone. It is appropriate only for disabled state, interaction reveal, elevation, media, charts, and decorative content.
 - Exclude `color-mix()` token recipes, user-entered color values, and calculated gesture opacity from this scale.
+- A translucent state is allowed only when it is intentionally a contextual layer and its text, icon, border, and focus contrast have been validated on the effective composited background.
 
 ### Shadows
 
-Use the smallest elevation that communicates containment or separation. Neutral shadows always declare both geometry and alpha: `shadow-xs/4` for structural separation, `shadow-xs/8` for hover reinforcement, `shadow-sm/4` for raised controls and preview surfaces, and `shadow-lg/4` for overlays outside page flow.
+Use the smallest elevation that communicates containment or separation. The system is tactile and contained: `shadow-xs/4` is structural separation, `shadow-xs/8` is hover reinforcement, `shadow-sm/4` is for raised controls and preview surfaces, and `shadow-lg/4` is for overlays outside page flow.
 
-- Do not use bare neutral `shadow-*` or `drop-shadow-*` utilities, or geometry outside `xs`, `sm`, and `lg`.
-- A semantic raised action may pair its color token with bare `shadow-sm` (`shadow-primary/24 shadow-sm`); the semantic token owns the approved alpha in that recipe.
-- Use arbitrary shadows only where utilities cannot express an inset technical boundary, an image-cropper mask, or required geometry. Their alpha channels still follow the approved scale.
+- Every elevation shadow declares geometry and alpha. Do not use bare, color-tinted, status-tinted, or geometry outside `xs`, `sm`, and `lg`.
+- Use arbitrary shadows only for the documented ColorPicker inset keyline and ImageCropper mask/handle geometry. They are technical effects, not elevation; their alpha channels still follow the approved scale.
 - Borders and tonal separation establish structure before elevation. Shadows do not replace focus rings or contrast-bearing borders.
 
 ## Files, examples, and docs

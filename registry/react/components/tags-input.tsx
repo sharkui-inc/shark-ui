@@ -128,7 +128,7 @@ export const TagsInputItem = (props: TagsInputItemProps) => {
   return (
     <ArkTagsInput.Item
       className={cn(
-        "h-6 in-data-[size=lg]:h-7 in-data-[size=sm]:h-5 max-w-full",
+        "h-5.5 in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5 max-w-full",
         "in-data-[size=lg]:ps-2 in-data-[size=sm]:ps-1 ps-1.5 pe-0.5",
         "inline-flex shrink-0 items-center gap-1",
         "bg-secondary",
@@ -214,7 +214,7 @@ export const TagsInputItemInput = (
     <InputGroupInput
       className={cn(
         "px-1 text-xs",
-        "h-6 in-data-[size=lg]:h-7 in-data-[size=sm]:h-5"
+        "h-5.5 in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5"
       )}
     />
   </ArkTagsInput.ItemInput>
@@ -246,6 +246,7 @@ export const TagsInputClearTrigger = (
     >
       <InputGroupButton
         className={cn(
+          "size-5.5 in-data-[size=lg]:size-6.5 in-data-[size=sm]:size-4.5",
           "ms-auto shrink-0 self-center text-muted-foreground hover:text-foreground",
           className
         )}

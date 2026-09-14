@@ -11,7 +11,7 @@ export const nativeSelectVariants = tv({
   base: [
     "appearance-none",
     "w-full min-w-0",
-    "ps-2.5 pe-8",
+    "ps-2.5 pe-8 text-start",
     "touch-manipulation select-none",
     "font-normal text-base md:text-sm",
     "bg-transparent dark:bg-input/32",
@@ -20,7 +20,7 @@ export const nativeSelectVariants = tv({
     "outline-none",
     "[&:has(option[value='']:checked)]:text-muted-foreground",
     "disabled:pointer-events-none disabled:cursor-not-allowed",
-    "focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+    "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
     "aria-invalid:border-destructive aria-invalid:ring-[3px] aria-invalid:ring-destructive/24",
     "dark:aria-invalid:border-destructive-foreground dark:aria-invalid:text-destructive-foreground dark:aria-invalid:ring-destructive-foreground/24",
     "motion-reduce:transition-none",
@@ -30,9 +30,9 @@ export const nativeSelectVariants = tv({
   },
   variants: {
     size: {
-      lg: ["h-9", "px-[calc(--spacing(3.5)-1px)]"],
-      md: ["h-8", "px-[calc(--spacing(3)-1px)]"],
-      sm: ["h-7", "px-[calc(--spacing(2.5)-1px)]"],
+      lg: ["h-9", "ps-[calc(--spacing(3.5)-1px)]"],
+      md: ["h-8", "ps-[calc(--spacing(3)-1px)]"],
+      sm: ["h-7", "ps-[calc(--spacing(2.5)-1px)]"],
     },
   },
 });

@@ -260,7 +260,7 @@ export const TreeViewBranchIndicator = (
         "inline-flex shrink-0 items-center justify-center",
         "text-muted-foreground",
         "origin-center transition-transform duration-150",
-        "data-[state=open]:rotate-90",
+        "data-[state=open]:rotate-90 rtl:data-[state=closed]:-rotate-180",
         "[&_svg]:size-3.5 [&_svg]:shrink-0",
         "motion-reduce:transition-none",
         className
@@ -449,7 +449,7 @@ const TreeViewNodeInput = (
         "border-primary bg-popover text-foreground",
         "rounded-md border",
         "selection:bg-primary/24 selection:text-foreground",
-        "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+        "outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
         className
       )}
       data-slot="tree-view-node-rename-input"

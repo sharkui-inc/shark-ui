@@ -20,7 +20,11 @@ const Example = () => (
         }
       >
         {collection.items.map((item) => (
-          <ListboxItem item={item} key={item.value}>
+          <ListboxItem
+            className="data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
+            item={item}
+            key={item.value}
+          >
             <ListboxItemText className="text-center text-xl">
               {item.label}
             </ListboxItemText>

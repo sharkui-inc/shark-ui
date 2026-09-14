@@ -3,303 +3,949 @@
 .theme-red {
   --primary: var(--color-red-400);
   --primary-foreground: var(--color-red-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-red-400) 92%,
+    var(--color-red-950)
+  );
+  --ring: var(--color-red-700);
+  --sidebar-primary: var(--color-red-400);
+  --sidebar-primary-foreground: var(--color-red-950);
+  --sidebar-ring: var(--color-red-700);
+}
+
+.theme-orange {
+  --primary: var(--color-orange-400);
+  --primary-foreground: var(--color-orange-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-orange-400) 92%,
+    var(--color-orange-950)
+  );
+  --ring: var(--color-orange-700);
+  --sidebar-primary: var(--color-orange-400);
+  --sidebar-primary-foreground: var(--color-orange-950);
+  --sidebar-ring: var(--color-orange-700);
+}
+
+.theme-amber {
+  --primary: var(--color-amber-400);
+  --primary-foreground: var(--color-amber-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-amber-400) 92%,
+    var(--color-amber-950)
+  );
+  --ring: var(--color-amber-700);
+  --sidebar-primary: var(--color-amber-400);
+  --sidebar-primary-foreground: var(--color-amber-950);
+  --sidebar-ring: var(--color-amber-700);
+}
+
+.theme-yellow {
+  --primary: var(--color-yellow-400);
+  --primary-foreground: var(--color-yellow-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-yellow-400) 92%,
+    var(--color-yellow-950)
+  );
+  --ring: var(--color-yellow-700);
+  --sidebar-primary: var(--color-yellow-400);
+  --sidebar-primary-foreground: var(--color-yellow-950);
+  --sidebar-ring: var(--color-yellow-700);
+}
+
+.theme-lime {
+  --primary: var(--color-lime-400);
+  --primary-foreground: var(--color-lime-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-lime-400) 92%,
+    var(--color-lime-950)
+  );
+  --ring: var(--color-lime-700);
+  --sidebar-primary: var(--color-lime-400);
+  --sidebar-primary-foreground: var(--color-lime-950);
+  --sidebar-ring: var(--color-lime-700);
+}
+
+.theme-green {
+  --primary: var(--color-green-400);
+  --primary-foreground: var(--color-green-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-green-400) 92%,
+    var(--color-green-950)
+  );
+  --ring: var(--color-green-700);
+  --sidebar-primary: var(--color-green-400);
+  --sidebar-primary-foreground: var(--color-green-950);
+  --sidebar-ring: var(--color-green-700);
+}
+
+.theme-emerald {
+  --primary: var(--color-emerald-400);
+  --primary-foreground: var(--color-emerald-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-emerald-400) 92%,
+    var(--color-emerald-950)
+  );
+  --ring: var(--color-emerald-700);
+  --sidebar-primary: var(--color-emerald-400);
+  --sidebar-primary-foreground: var(--color-emerald-950);
+  --sidebar-ring: var(--color-emerald-700);
+}
+
+.theme-teal {
+  --primary: var(--color-teal-400);
+  --primary-foreground: var(--color-teal-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-teal-400) 92%,
+    var(--color-teal-950)
+  );
+  --ring: var(--color-teal-700);
+  --sidebar-primary: var(--color-teal-400);
+  --sidebar-primary-foreground: var(--color-teal-950);
+  --sidebar-ring: var(--color-teal-700);
+}
+
+.theme-cyan {
+  --primary: var(--color-cyan-400);
+  --primary-foreground: var(--color-cyan-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-cyan-400) 92%,
+    var(--color-cyan-950)
+  );
+  --ring: var(--color-cyan-700);
+  --sidebar-primary: var(--color-cyan-400);
+  --sidebar-primary-foreground: var(--color-cyan-950);
+  --sidebar-ring: var(--color-cyan-700);
+}
+
+.theme-sky {
+  --primary: var(--color-sky-400);
+  --primary-foreground: var(--color-sky-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-sky-400) 92%,
+    var(--color-sky-950)
+  );
+  --ring: var(--color-sky-700);
+  --sidebar-primary: var(--color-sky-400);
+  --sidebar-primary-foreground: var(--color-sky-950);
+  --sidebar-ring: var(--color-sky-700);
+}
+
+.theme-blue {
+  --primary: var(--color-blue-400);
+  --primary-foreground: var(--color-blue-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-blue-400) 92%,
+    var(--color-blue-950)
+  );
+  --ring: var(--color-blue-600);
+  --sidebar-primary: var(--color-blue-400);
+  --sidebar-primary-foreground: var(--color-blue-950);
+  --sidebar-ring: var(--color-blue-600);
+}
+
+.theme-indigo {
+  --primary: var(--color-indigo-400);
+  --primary-foreground: var(--color-indigo-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-indigo-400) 92%,
+    var(--color-indigo-950)
+  );
+  --ring: var(--color-indigo-600);
+  --sidebar-primary: var(--color-indigo-400);
+  --sidebar-primary-foreground: var(--color-indigo-950);
+  --sidebar-ring: var(--color-indigo-600);
+}
+
+.theme-violet {
+  --primary: var(--color-violet-400);
+  --primary-foreground: var(--color-violet-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-violet-400) 92%,
+    var(--color-violet-950)
+  );
+  --ring: var(--color-violet-600);
+  --sidebar-primary: var(--color-violet-400);
+  --sidebar-primary-foreground: var(--color-violet-950);
+  --sidebar-ring: var(--color-violet-600);
+}
+
+.theme-purple {
+  --primary: var(--color-purple-400);
+  --primary-foreground: var(--color-purple-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-purple-400) 92%,
+    var(--color-purple-950)
+  );
+  --ring: var(--color-purple-600);
+  --sidebar-primary: var(--color-purple-400);
+  --sidebar-primary-foreground: var(--color-purple-950);
+  --sidebar-ring: var(--color-purple-600);
+}
+
+.theme-fuchsia {
+  --primary: var(--color-fuchsia-400);
+  --primary-foreground: var(--color-fuchsia-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-fuchsia-400) 92%,
+    var(--color-fuchsia-950)
+  );
+  --ring: var(--color-fuchsia-700);
+  --sidebar-primary: var(--color-fuchsia-400);
+  --sidebar-primary-foreground: var(--color-fuchsia-950);
+  --sidebar-ring: var(--color-fuchsia-700);
+}
+
+.theme-pink {
+  --primary: var(--color-pink-400);
+  --primary-foreground: var(--color-pink-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-pink-400) 92%,
+    var(--color-pink-950)
+  );
+  --ring: var(--color-pink-700);
+  --sidebar-primary: var(--color-pink-400);
+  --sidebar-primary-foreground: var(--color-pink-950);
+  --sidebar-ring: var(--color-pink-700);
+}
+
+.theme-rose {
+  --primary: var(--color-rose-400);
+  --primary-foreground: var(--color-rose-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-rose-400) 92%,
+    var(--color-rose-950)
+  );
+  --ring: var(--color-rose-700);
+  --sidebar-primary: var(--color-rose-400);
+  --sidebar-primary-foreground: var(--color-rose-950);
+  --sidebar-ring: var(--color-rose-700);
+}
+
+body.primary-tone-dark.theme-red {
+  --primary: var(--color-red-700);
+  --primary-foreground: var(--color-red-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-red-700) 92%,
+    var(--color-red-950)
+  );
+  --ring: var(--color-red-700);
+  --sidebar-primary: var(--color-red-700);
+  --sidebar-primary-foreground: var(--color-red-50);
+  --sidebar-ring: var(--color-red-700);
+}
+
+body.primary-tone-dark.theme-orange {
+  --primary: var(--color-orange-700);
+  --primary-foreground: var(--color-orange-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-orange-700) 92%,
+    var(--color-orange-950)
+  );
+  --ring: var(--color-orange-700);
+  --sidebar-primary: var(--color-orange-700);
+  --sidebar-primary-foreground: var(--color-orange-50);
+  --sidebar-ring: var(--color-orange-700);
+}
+
+body.primary-tone-dark.theme-amber {
+  --primary: var(--color-amber-700);
+  --primary-foreground: var(--color-amber-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-amber-700) 92%,
+    var(--color-amber-950)
+  );
+  --ring: var(--color-amber-700);
+  --sidebar-primary: var(--color-amber-700);
+  --sidebar-primary-foreground: var(--color-amber-50);
+  --sidebar-ring: var(--color-amber-700);
+}
+
+body.primary-tone-dark.theme-yellow {
+  --primary: var(--color-yellow-700);
+  --primary-foreground: var(--color-yellow-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-yellow-700) 92%,
+    var(--color-yellow-950)
+  );
+  --ring: var(--color-yellow-700);
+  --sidebar-primary: var(--color-yellow-700);
+  --sidebar-primary-foreground: var(--color-yellow-50);
+  --sidebar-ring: var(--color-yellow-700);
+}
+
+body.primary-tone-dark.theme-lime {
+  --primary: var(--color-lime-700);
+  --primary-foreground: var(--color-lime-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-lime-700) 92%,
+    var(--color-lime-950)
+  );
+  --ring: var(--color-lime-700);
+  --sidebar-primary: var(--color-lime-700);
+  --sidebar-primary-foreground: var(--color-lime-50);
+  --sidebar-ring: var(--color-lime-700);
+}
+
+body.primary-tone-dark.theme-green {
+  --primary: var(--color-green-700);
+  --primary-foreground: var(--color-green-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-green-700) 92%,
+    var(--color-green-950)
+  );
+  --ring: var(--color-green-700);
+  --sidebar-primary: var(--color-green-700);
+  --sidebar-primary-foreground: var(--color-green-50);
+  --sidebar-ring: var(--color-green-700);
+}
+
+body.primary-tone-dark.theme-emerald {
+  --primary: var(--color-emerald-700);
+  --primary-foreground: var(--color-emerald-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-emerald-700) 92%,
+    var(--color-emerald-950)
+  );
+  --ring: var(--color-emerald-700);
+  --sidebar-primary: var(--color-emerald-700);
+  --sidebar-primary-foreground: var(--color-emerald-50);
+  --sidebar-ring: var(--color-emerald-700);
+}
+
+body.primary-tone-dark.theme-teal {
+  --primary: var(--color-teal-700);
+  --primary-foreground: var(--color-teal-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-teal-700) 92%,
+    var(--color-teal-950)
+  );
+  --ring: var(--color-teal-700);
+  --sidebar-primary: var(--color-teal-700);
+  --sidebar-primary-foreground: var(--color-teal-50);
+  --sidebar-ring: var(--color-teal-700);
+}
+
+body.primary-tone-dark.theme-cyan {
+  --primary: var(--color-cyan-700);
+  --primary-foreground: var(--color-cyan-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-cyan-700) 92%,
+    var(--color-cyan-950)
+  );
+  --ring: var(--color-cyan-700);
+  --sidebar-primary: var(--color-cyan-700);
+  --sidebar-primary-foreground: var(--color-cyan-50);
+  --sidebar-ring: var(--color-cyan-700);
+}
+
+body.primary-tone-dark.theme-sky {
+  --primary: var(--color-sky-700);
+  --primary-foreground: var(--color-sky-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-sky-700) 92%,
+    var(--color-sky-950)
+  );
+  --ring: var(--color-sky-700);
+  --sidebar-primary: var(--color-sky-700);
+  --sidebar-primary-foreground: var(--color-sky-50);
+  --sidebar-ring: var(--color-sky-700);
+}
+
+body.primary-tone-dark.theme-blue {
+  --primary: var(--color-blue-600);
+  --primary-foreground: var(--color-blue-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-blue-600) 92%,
+    var(--color-blue-950)
+  );
+  --ring: var(--color-blue-600);
+  --sidebar-primary: var(--color-blue-600);
+  --sidebar-primary-foreground: var(--color-blue-50);
+  --sidebar-ring: var(--color-blue-600);
+}
+
+body.primary-tone-dark.theme-indigo {
+  --primary: var(--color-indigo-600);
+  --primary-foreground: var(--color-indigo-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-indigo-600) 92%,
+    var(--color-indigo-950)
+  );
+  --ring: var(--color-indigo-600);
+  --sidebar-primary: var(--color-indigo-600);
+  --sidebar-primary-foreground: var(--color-indigo-50);
+  --sidebar-ring: var(--color-indigo-600);
+}
+
+body.primary-tone-dark.theme-violet {
+  --primary: var(--color-violet-600);
+  --primary-foreground: var(--color-violet-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-violet-600) 92%,
+    var(--color-violet-950)
+  );
+  --ring: var(--color-violet-600);
+  --sidebar-primary: var(--color-violet-600);
+  --sidebar-primary-foreground: var(--color-violet-50);
+  --sidebar-ring: var(--color-violet-600);
+}
+
+body.primary-tone-dark.theme-purple {
+  --primary: var(--color-purple-600);
+  --primary-foreground: var(--color-purple-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-purple-600) 92%,
+    var(--color-purple-950)
+  );
+  --ring: var(--color-purple-600);
+  --sidebar-primary: var(--color-purple-600);
+  --sidebar-primary-foreground: var(--color-purple-50);
+  --sidebar-ring: var(--color-purple-600);
+}
+
+body.primary-tone-dark.theme-fuchsia {
+  --primary: var(--color-fuchsia-700);
+  --primary-foreground: var(--color-fuchsia-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-fuchsia-700) 92%,
+    var(--color-fuchsia-950)
+  );
+  --ring: var(--color-fuchsia-700);
+  --sidebar-primary: var(--color-fuchsia-700);
+  --sidebar-primary-foreground: var(--color-fuchsia-50);
+  --sidebar-ring: var(--color-fuchsia-700);
+}
+
+body.primary-tone-dark.theme-pink {
+  --primary: var(--color-pink-700);
+  --primary-foreground: var(--color-pink-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-pink-700) 92%,
+    var(--color-pink-950)
+  );
+  --ring: var(--color-pink-700);
+  --sidebar-primary: var(--color-pink-700);
+  --sidebar-primary-foreground: var(--color-pink-50);
+  --sidebar-ring: var(--color-pink-700);
+}
+
+body.primary-tone-dark.theme-rose {
+  --primary: var(--color-rose-700);
+  --primary-foreground: var(--color-rose-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-rose-700) 92%,
+    var(--color-rose-950)
+  );
+  --ring: var(--color-rose-700);
+  --sidebar-primary: var(--color-rose-700);
+  --sidebar-primary-foreground: var(--color-rose-50);
+  --sidebar-ring: var(--color-rose-700);
+}
+
+.dark body.theme-red {
+  --primary: var(--color-red-400);
+  --primary-foreground: var(--color-red-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-red-400) 92%,
+    var(--color-red-950)
+  );
   --ring: var(--color-red-500);
   --sidebar-primary: var(--color-red-400);
   --sidebar-primary-foreground: var(--color-red-950);
   --sidebar-ring: var(--color-red-500);
 }
 
-.theme-orange {
+.dark body.theme-orange {
   --primary: var(--color-orange-400);
   --primary-foreground: var(--color-orange-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-orange-400) 92%,
+    var(--color-orange-950)
+  );
   --ring: var(--color-orange-500);
   --sidebar-primary: var(--color-orange-400);
   --sidebar-primary-foreground: var(--color-orange-950);
   --sidebar-ring: var(--color-orange-500);
 }
 
-.theme-amber {
+.dark body.theme-amber {
   --primary: var(--color-amber-400);
   --primary-foreground: var(--color-amber-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-amber-400) 92%,
+    var(--color-amber-950)
+  );
   --ring: var(--color-amber-500);
   --sidebar-primary: var(--color-amber-400);
   --sidebar-primary-foreground: var(--color-amber-950);
   --sidebar-ring: var(--color-amber-500);
 }
 
-.theme-yellow {
+.dark body.theme-yellow {
   --primary: var(--color-yellow-400);
   --primary-foreground: var(--color-yellow-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-yellow-400) 92%,
+    var(--color-yellow-950)
+  );
   --ring: var(--color-yellow-500);
   --sidebar-primary: var(--color-yellow-400);
   --sidebar-primary-foreground: var(--color-yellow-950);
   --sidebar-ring: var(--color-yellow-500);
 }
 
-.theme-lime {
+.dark body.theme-lime {
   --primary: var(--color-lime-400);
   --primary-foreground: var(--color-lime-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-lime-400) 92%,
+    var(--color-lime-950)
+  );
   --ring: var(--color-lime-500);
   --sidebar-primary: var(--color-lime-400);
   --sidebar-primary-foreground: var(--color-lime-950);
   --sidebar-ring: var(--color-lime-500);
 }
 
-.theme-green {
+.dark body.theme-green {
   --primary: var(--color-green-400);
   --primary-foreground: var(--color-green-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-green-400) 92%,
+    var(--color-green-950)
+  );
   --ring: var(--color-green-500);
   --sidebar-primary: var(--color-green-400);
   --sidebar-primary-foreground: var(--color-green-950);
   --sidebar-ring: var(--color-green-500);
 }
 
-.theme-emerald {
+.dark body.theme-emerald {
   --primary: var(--color-emerald-400);
   --primary-foreground: var(--color-emerald-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-emerald-400) 92%,
+    var(--color-emerald-950)
+  );
   --ring: var(--color-emerald-500);
   --sidebar-primary: var(--color-emerald-400);
   --sidebar-primary-foreground: var(--color-emerald-950);
   --sidebar-ring: var(--color-emerald-500);
 }
 
-.theme-teal {
+.dark body.theme-teal {
   --primary: var(--color-teal-400);
   --primary-foreground: var(--color-teal-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-teal-400) 92%,
+    var(--color-teal-950)
+  );
   --ring: var(--color-teal-500);
   --sidebar-primary: var(--color-teal-400);
   --sidebar-primary-foreground: var(--color-teal-950);
   --sidebar-ring: var(--color-teal-500);
 }
 
-.theme-cyan {
+.dark body.theme-cyan {
   --primary: var(--color-cyan-400);
   --primary-foreground: var(--color-cyan-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-cyan-400) 92%,
+    var(--color-cyan-950)
+  );
   --ring: var(--color-cyan-500);
   --sidebar-primary: var(--color-cyan-400);
   --sidebar-primary-foreground: var(--color-cyan-950);
   --sidebar-ring: var(--color-cyan-500);
 }
 
-.theme-sky {
+.dark body.theme-sky {
   --primary: var(--color-sky-400);
   --primary-foreground: var(--color-sky-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-sky-400) 92%,
+    var(--color-sky-950)
+  );
   --ring: var(--color-sky-500);
   --sidebar-primary: var(--color-sky-400);
   --sidebar-primary-foreground: var(--color-sky-950);
   --sidebar-ring: var(--color-sky-500);
 }
 
-.theme-blue {
+.dark body.theme-blue {
   --primary: var(--color-blue-400);
   --primary-foreground: var(--color-blue-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-blue-400) 92%,
+    var(--color-blue-950)
+  );
   --ring: var(--color-blue-500);
   --sidebar-primary: var(--color-blue-400);
   --sidebar-primary-foreground: var(--color-blue-950);
   --sidebar-ring: var(--color-blue-500);
 }
 
-.theme-indigo {
+.dark body.theme-indigo {
   --primary: var(--color-indigo-400);
   --primary-foreground: var(--color-indigo-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-indigo-400) 92%,
+    var(--color-indigo-950)
+  );
   --ring: var(--color-indigo-500);
   --sidebar-primary: var(--color-indigo-400);
   --sidebar-primary-foreground: var(--color-indigo-950);
   --sidebar-ring: var(--color-indigo-500);
 }
 
-.theme-violet {
+.dark body.theme-violet {
   --primary: var(--color-violet-400);
   --primary-foreground: var(--color-violet-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-violet-400) 92%,
+    var(--color-violet-950)
+  );
   --ring: var(--color-violet-500);
   --sidebar-primary: var(--color-violet-400);
   --sidebar-primary-foreground: var(--color-violet-950);
   --sidebar-ring: var(--color-violet-500);
 }
 
-.theme-purple {
+.dark body.theme-purple {
   --primary: var(--color-purple-400);
   --primary-foreground: var(--color-purple-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-purple-400) 92%,
+    var(--color-purple-950)
+  );
   --ring: var(--color-purple-500);
   --sidebar-primary: var(--color-purple-400);
   --sidebar-primary-foreground: var(--color-purple-950);
   --sidebar-ring: var(--color-purple-500);
 }
 
-.theme-fuchsia {
+.dark body.theme-fuchsia {
   --primary: var(--color-fuchsia-400);
   --primary-foreground: var(--color-fuchsia-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-fuchsia-400) 92%,
+    var(--color-fuchsia-950)
+  );
   --ring: var(--color-fuchsia-500);
   --sidebar-primary: var(--color-fuchsia-400);
   --sidebar-primary-foreground: var(--color-fuchsia-950);
   --sidebar-ring: var(--color-fuchsia-500);
 }
 
-.theme-pink {
+.dark body.theme-pink {
   --primary: var(--color-pink-400);
   --primary-foreground: var(--color-pink-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-pink-400) 92%,
+    var(--color-pink-950)
+  );
   --ring: var(--color-pink-500);
   --sidebar-primary: var(--color-pink-400);
   --sidebar-primary-foreground: var(--color-pink-950);
   --sidebar-ring: var(--color-pink-500);
 }
 
-.theme-rose {
+.dark body.theme-rose {
   --primary: var(--color-rose-400);
   --primary-foreground: var(--color-rose-950);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-rose-400) 92%,
+    var(--color-rose-950)
+  );
   --ring: var(--color-rose-500);
   --sidebar-primary: var(--color-rose-400);
   --sidebar-primary-foreground: var(--color-rose-950);
   --sidebar-ring: var(--color-rose-500);
 }
 
-body.primary-tone-dark.theme-red {
+.dark body.primary-tone-dark.theme-red {
   --primary: var(--color-red-700);
   --primary-foreground: var(--color-red-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-red-700) 92%,
+    var(--color-red-950)
+  );
   --ring: var(--color-red-500);
   --sidebar-primary: var(--color-red-700);
   --sidebar-primary-foreground: var(--color-red-50);
   --sidebar-ring: var(--color-red-500);
 }
 
-body.primary-tone-dark.theme-orange {
+.dark body.primary-tone-dark.theme-orange {
   --primary: var(--color-orange-700);
   --primary-foreground: var(--color-orange-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-orange-700) 92%,
+    var(--color-orange-950)
+  );
   --ring: var(--color-orange-500);
   --sidebar-primary: var(--color-orange-700);
   --sidebar-primary-foreground: var(--color-orange-50);
   --sidebar-ring: var(--color-orange-500);
 }
 
-body.primary-tone-dark.theme-amber {
+.dark body.primary-tone-dark.theme-amber {
   --primary: var(--color-amber-700);
   --primary-foreground: var(--color-amber-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-amber-700) 92%,
+    var(--color-amber-950)
+  );
   --ring: var(--color-amber-500);
   --sidebar-primary: var(--color-amber-700);
   --sidebar-primary-foreground: var(--color-amber-50);
   --sidebar-ring: var(--color-amber-500);
 }
 
-body.primary-tone-dark.theme-yellow {
+.dark body.primary-tone-dark.theme-yellow {
   --primary: var(--color-yellow-700);
   --primary-foreground: var(--color-yellow-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-yellow-700) 92%,
+    var(--color-yellow-950)
+  );
   --ring: var(--color-yellow-500);
   --sidebar-primary: var(--color-yellow-700);
   --sidebar-primary-foreground: var(--color-yellow-50);
   --sidebar-ring: var(--color-yellow-500);
 }
 
-body.primary-tone-dark.theme-lime {
+.dark body.primary-tone-dark.theme-lime {
   --primary: var(--color-lime-700);
   --primary-foreground: var(--color-lime-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-lime-700) 92%,
+    var(--color-lime-950)
+  );
   --ring: var(--color-lime-500);
   --sidebar-primary: var(--color-lime-700);
   --sidebar-primary-foreground: var(--color-lime-50);
   --sidebar-ring: var(--color-lime-500);
 }
 
-body.primary-tone-dark.theme-green {
+.dark body.primary-tone-dark.theme-green {
   --primary: var(--color-green-700);
   --primary-foreground: var(--color-green-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-green-700) 92%,
+    var(--color-green-950)
+  );
   --ring: var(--color-green-500);
   --sidebar-primary: var(--color-green-700);
   --sidebar-primary-foreground: var(--color-green-50);
   --sidebar-ring: var(--color-green-500);
 }
 
-body.primary-tone-dark.theme-emerald {
+.dark body.primary-tone-dark.theme-emerald {
   --primary: var(--color-emerald-700);
   --primary-foreground: var(--color-emerald-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-emerald-700) 92%,
+    var(--color-emerald-950)
+  );
   --ring: var(--color-emerald-500);
   --sidebar-primary: var(--color-emerald-700);
   --sidebar-primary-foreground: var(--color-emerald-50);
   --sidebar-ring: var(--color-emerald-500);
 }
 
-body.primary-tone-dark.theme-teal {
+.dark body.primary-tone-dark.theme-teal {
   --primary: var(--color-teal-700);
   --primary-foreground: var(--color-teal-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-teal-700) 92%,
+    var(--color-teal-950)
+  );
   --ring: var(--color-teal-500);
   --sidebar-primary: var(--color-teal-700);
   --sidebar-primary-foreground: var(--color-teal-50);
   --sidebar-ring: var(--color-teal-500);
 }
 
-body.primary-tone-dark.theme-cyan {
+.dark body.primary-tone-dark.theme-cyan {
   --primary: var(--color-cyan-700);
   --primary-foreground: var(--color-cyan-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-cyan-700) 92%,
+    var(--color-cyan-950)
+  );
   --ring: var(--color-cyan-500);
   --sidebar-primary: var(--color-cyan-700);
   --sidebar-primary-foreground: var(--color-cyan-50);
   --sidebar-ring: var(--color-cyan-500);
 }
 
-body.primary-tone-dark.theme-sky {
+.dark body.primary-tone-dark.theme-sky {
   --primary: var(--color-sky-700);
   --primary-foreground: var(--color-sky-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-sky-700) 92%,
+    var(--color-sky-950)
+  );
   --ring: var(--color-sky-500);
   --sidebar-primary: var(--color-sky-700);
   --sidebar-primary-foreground: var(--color-sky-50);
   --sidebar-ring: var(--color-sky-500);
 }
 
-body.primary-tone-dark.theme-blue {
+.dark body.primary-tone-dark.theme-blue {
   --primary: var(--color-blue-600);
   --primary-foreground: var(--color-blue-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-blue-600) 92%,
+    var(--color-blue-950)
+  );
   --ring: var(--color-blue-500);
   --sidebar-primary: var(--color-blue-600);
   --sidebar-primary-foreground: var(--color-blue-50);
   --sidebar-ring: var(--color-blue-500);
 }
 
-body.primary-tone-dark.theme-indigo {
+.dark body.primary-tone-dark.theme-indigo {
   --primary: var(--color-indigo-600);
   --primary-foreground: var(--color-indigo-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-indigo-600) 92%,
+    var(--color-indigo-950)
+  );
   --ring: var(--color-indigo-500);
   --sidebar-primary: var(--color-indigo-600);
   --sidebar-primary-foreground: var(--color-indigo-50);
   --sidebar-ring: var(--color-indigo-500);
 }
 
-body.primary-tone-dark.theme-violet {
+.dark body.primary-tone-dark.theme-violet {
   --primary: var(--color-violet-600);
   --primary-foreground: var(--color-violet-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-violet-600) 92%,
+    var(--color-violet-950)
+  );
   --ring: var(--color-violet-500);
   --sidebar-primary: var(--color-violet-600);
   --sidebar-primary-foreground: var(--color-violet-50);
   --sidebar-ring: var(--color-violet-500);
 }
 
-body.primary-tone-dark.theme-purple {
+.dark body.primary-tone-dark.theme-purple {
   --primary: var(--color-purple-600);
   --primary-foreground: var(--color-purple-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-purple-600) 92%,
+    var(--color-purple-950)
+  );
   --ring: var(--color-purple-500);
   --sidebar-primary: var(--color-purple-600);
   --sidebar-primary-foreground: var(--color-purple-50);
   --sidebar-ring: var(--color-purple-500);
 }
 
-body.primary-tone-dark.theme-fuchsia {
+.dark body.primary-tone-dark.theme-fuchsia {
   --primary: var(--color-fuchsia-700);
   --primary-foreground: var(--color-fuchsia-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-fuchsia-700) 92%,
+    var(--color-fuchsia-950)
+  );
   --ring: var(--color-fuchsia-500);
   --sidebar-primary: var(--color-fuchsia-700);
   --sidebar-primary-foreground: var(--color-fuchsia-50);
   --sidebar-ring: var(--color-fuchsia-500);
 }
 
-body.primary-tone-dark.theme-pink {
+.dark body.primary-tone-dark.theme-pink {
   --primary: var(--color-pink-700);
   --primary-foreground: var(--color-pink-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-pink-700) 92%,
+    var(--color-pink-950)
+  );
   --ring: var(--color-pink-500);
   --sidebar-primary: var(--color-pink-700);
   --sidebar-primary-foreground: var(--color-pink-50);
   --sidebar-ring: var(--color-pink-500);
 }
 
-body.primary-tone-dark.theme-rose {
+.dark body.primary-tone-dark.theme-rose {
   --primary: var(--color-rose-700);
   --primary-foreground: var(--color-rose-50);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--color-rose-700) 92%,
+    var(--color-rose-950)
+  );
   --ring: var(--color-rose-500);
   --sidebar-primary: var(--color-rose-700);
   --sidebar-primary-foreground: var(--color-rose-50);
@@ -394,8 +1040,13 @@ body.primary-tone-dark.theme-rose {
   --card-foreground: var(--theme-color-800);
   --popover: var(--background);
   --popover-foreground: var(--theme-color-800);
-  --secondary: color-mix(in srgb, var(--theme-color-950) 4%, var(--background));
+  --secondary: color-mix(in srgb, var(--theme-color-950) 8%, var(--background));
   --secondary-foreground: var(--theme-color-800);
+  --secondary-hover: color-mix(
+    in srgb,
+    var(--theme-color-950) 16%,
+    var(--background)
+  );
   --muted: color-mix(in srgb, var(--theme-color-950) 4%, var(--background));
   --muted-foreground: color-mix(
     in srgb,
@@ -409,7 +1060,7 @@ body.primary-tone-dark.theme-rose {
   --sidebar: var(--theme-color-50);
   --sidebar-foreground: color-mix(
     in srgb,
-    var(--theme-color-800) 64%,
+    var(--theme-color-800) 80%,
     var(--sidebar)
   );
   --sidebar-accent: color-mix(
@@ -444,10 +1095,15 @@ body.primary-tone-dark.theme-rose {
     --popover-foreground: var(--theme-color-100);
     --secondary: color-mix(
       in srgb,
-      var(--theme-color-50) 4%,
+      var(--theme-color-50) 8%,
       var(--background)
     );
     --secondary-foreground: var(--theme-color-100);
+    --secondary-hover: color-mix(
+      in srgb,
+      var(--theme-color-50) 16%,
+      var(--background)
+    );
     --muted: color-mix(in srgb, var(--theme-color-50) 4%, var(--background));
     --muted-foreground: color-mix(
       in srgb,
@@ -465,7 +1121,7 @@ body.primary-tone-dark.theme-rose {
     );
     --sidebar-foreground: color-mix(
       in srgb,
-      var(--theme-color-100) 64%,
+      var(--theme-color-100) 80%,
       var(--sidebar)
     );
     --sidebar-accent: color-mix(
@@ -521,18 +1177,28 @@ body.primary-tone-dark.theme-rose {
 ) {
   --primary: var(--theme-color-800);
   --primary-foreground: var(--theme-color-50);
-  --ring: var(--theme-color-400);
+  --primary-hover: color-mix(
+    in srgb,
+    var(--theme-color-800) 92%,
+    var(--theme-color-950)
+  );
+  --ring: var(--theme-color-600);
   --sidebar-primary: var(--theme-color-800);
   --sidebar-primary-foreground: var(--theme-color-50);
-  --sidebar-ring: var(--theme-color-400);
+  --sidebar-ring: var(--theme-color-600);
 
   @variant dark {
     --primary: var(--theme-color-100);
     --primary-foreground: var(--theme-color-800);
-    --ring: var(--theme-color-500);
+    --primary-hover: color-mix(
+      in srgb,
+      var(--theme-color-100) 92%,
+      var(--theme-color-950)
+    );
+    --ring: var(--theme-color-400);
     --sidebar-primary: var(--theme-color-100);
     --sidebar-primary-foreground: var(--theme-color-800);
-    --sidebar-ring: var(--theme-color-500);
+    --sidebar-ring: var(--theme-color-400);
   }
 }
 

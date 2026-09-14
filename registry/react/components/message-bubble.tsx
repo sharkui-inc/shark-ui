@@ -36,7 +36,7 @@ export const messageBubbleVariants = tv({
       default: [
         "[--message-bubble-surface:var(--primary)]",
         "*:data-[slot=message-bubble-content]:bg-primary *:data-[slot=message-bubble-content]:text-primary-foreground",
-        "[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-primary/80",
+        "[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-primary-hover",
       ],
       destructive: [
         "[--message-bubble-surface:color-mix(in_oklab,var(--destructive)_10%,var(--background))]",

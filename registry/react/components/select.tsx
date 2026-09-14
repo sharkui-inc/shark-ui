@@ -12,6 +12,7 @@ import {
   menuEmptyVariants,
   menuGroupLabelVariants,
   menuItemControlVariants,
+  menuItemHighlightVariants,
   menuItemIconVariants,
   menuItemIndicatorVariants,
   menuListVariants,
@@ -59,16 +60,22 @@ export const selectTriggerVariants = tv({
   },
   variants: {
     size: {
-      lg: ["h-9", "px-[calc(--spacing(3.5)-1px)]"],
-      md: ["h-8", "px-[calc(--spacing(3)-1px)]"],
-      sm: ["h-7", "px-[calc(--spacing(2.5)-1px)]"],
+      lg: [
+        "h-9",
+        "ps-[calc(--spacing(3.5)-1px)] pe-[calc(--spacing(3.5)-1px)]",
+      ],
+      md: ["h-8", "ps-[calc(--spacing(3)-1px)] pe-[calc(--spacing(3)-1px)]"],
+      sm: [
+        "h-7",
+        "ps-[calc(--spacing(2.5)-1px)] pe-[calc(--spacing(2.5)-1px)]",
+      ],
     },
     variant: {
       default: [
         "rounded-lg",
         "bg-transparent dark:bg-input/32",
         "border border-input shadow-xs/4",
-        "focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+        "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
         "data-[state=open]:border-primary data-[state=open]:ring-[3px] data-[state=open]:ring-ring/32",
         "aria-invalid:border-destructive aria-invalid:text-destructive aria-invalid:ring-[3px] aria-invalid:ring-destructive/24",
         "data-invalid:border-destructive data-invalid:text-destructive data-invalid:ring-[3px] data-invalid:ring-destructive/24",
@@ -79,7 +86,7 @@ export const selectTriggerVariants = tv({
         "rounded-lg",
         "border border-transparent",
         "hover:bg-accent hover:text-accent-foreground",
-        "focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+        "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
       ],
     },
   },
@@ -125,7 +132,7 @@ export const SelectTrigger = (props: SelectTriggerProps) => {
         {children}
 
         {showTrailing ? (
-          <div className="ms-auto flex items-center gap-1 rtl:me-auto">
+          <div className="ms-auto flex items-center gap-1">
             {showClear ? (
               <SelectClearTrigger>
                 <XIcon />
@@ -269,7 +276,7 @@ export const SelectItem = (
         "pe-8",
         "outline-hidden",
         "in-[[data-slot=select-content]:has([data-slot=select-group-label])]:ps-4",
-        "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
+        menuItemHighlightVariants(),
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "[&_svg:not([class*='text-'])]:text-muted-foreground",
         className

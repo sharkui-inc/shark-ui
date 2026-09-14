@@ -52,7 +52,7 @@ export const PaginationFirst = (props: PaginationFirstProps) => {
   return (
     <ArkPagination.FirstTrigger asChild data-slot="pagination-first">
       <Button variant={variant} {...rest}>
-        <ChevronFirstIcon />
+        <ChevronFirstIcon className="rtl:rotate-180" />
         <span className={cn({ "sr-only": !withLabel })}>
           {children || "First"}
         </span>
@@ -76,7 +76,7 @@ export const PaginationPrevious = (props: PaginationPreviousProps) => {
   return (
     <ArkPagination.PrevTrigger asChild data-slot="pagination-previous">
       <Button variant={variant} {...rest}>
-        <ChevronLeftIcon />
+        <ChevronLeftIcon className="rtl:rotate-180" />
         <span className={cn({ "sr-only": !withLabel })}>
           {children || "Previous"}
         </span>
@@ -103,7 +103,7 @@ export const PaginationNext = (props: PaginationNextProps) => {
         <span className={cn({ "sr-only": !withLabel })}>
           {children || "Next"}
         </span>
-        <ChevronRightIcon />
+        <ChevronRightIcon className="rtl:rotate-180" />
       </Button>
     </ArkPagination.NextTrigger>
   );
@@ -127,7 +127,7 @@ export const PaginationLast = (props: PaginationLastProps) => {
         <span className={cn({ "sr-only": !withLabel })}>
           {children || "Last"}
         </span>
-        <ChevronLastIcon />
+        <ChevronLastIcon className="rtl:rotate-180" />
       </Button>
     </ArkPagination.LastTrigger>
   );
@@ -157,23 +157,31 @@ export const PaginationItem = (
   );
 };
 
-export const PaginationItems = (
-  props: Omit<React.ComponentProps<typeof ArkPagination.Context>, "children">
-) => (
-  <ArkPagination.Context data-slot="pagination-item s" {...props}>
-    {({ pages }) =>
-      pages.map((page, index) =>
-        page.type === "page" ? (
-          <PaginationItem key={page.value} type="page" value={page.value}>
-            {page.value}
-          </PaginationItem>
-        ) : (
-          <PaginationEllipsis index={index} key={`ellipsis-${index}`} />
+interface PaginationItemsProps
+  extends Omit<React.ComponentProps<typeof ArkPagination.Context>, "children"> {
+  /** Formats the visible page number. */
+  formatPage?: (page: number) => React.ReactNode;
+}
+
+export const PaginationItems = (props: PaginationItemsProps) => {
+  const { formatPage = String, ...rest } = props;
+
+  return (
+    <ArkPagination.Context data-slot="pagination-item s" {...rest}>
+      {({ pages }) =>
+        pages.map((page, index) =>
+          page.type === "page" ? (
+            <PaginationItem key={page.value} type="page" value={page.value}>
+              {formatPage(page.value)}
+            </PaginationItem>
+          ) : (
+            <PaginationEllipsis index={index} key={`ellipsis-${index}`} />
+          )
         )
-      )
-    }
-  </ArkPagination.Context>
-);
+      }
+    </ArkPagination.Context>
+  );
+};
 
 interface PaginationItemLinkProps extends React.ComponentProps<typeof Button> {
   /**

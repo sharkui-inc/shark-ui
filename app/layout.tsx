@@ -6,6 +6,11 @@ import { MediaQuery } from "@/components/debug/media-query";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE_CONFIG } from "@/config/site";
 import { fontHeading, fontMono, fontSans } from "@/lib/fonts";
+import {
+  getOrganizationJsonLd,
+  getSoftwareApplicationJsonLd,
+  getWebSiteJsonLd,
+} from "@/lib/json-ld";
 import { themeBootstrapScript } from "@/lib/theme/apply";
 import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
@@ -73,15 +78,9 @@ const RootLayout = (props: LayoutProps<"/">) => {
           // biome-ignore lint/security/noDangerouslySetInnerHtml: The script is generated exclusively from local, allowlisted theme metadata.
           dangerouslySetInnerHTML={{ __html: themeBootstrapScript }}
         />
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            description: SITE_CONFIG.description,
-            name: SITE_CONFIG.name,
-            url: SITE_CONFIG.url,
-          }}
-        />
+        <JsonLd data={getOrganizationJsonLd()} />
+        <JsonLd data={getWebSiteJsonLd()} />
+        <JsonLd data={getSoftwareApplicationJsonLd()} />
         <Providers>
           <SkipNavLink />
 

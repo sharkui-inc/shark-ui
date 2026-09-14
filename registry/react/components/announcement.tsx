@@ -14,7 +14,7 @@ export const announcementVariants = tv({
     "bg-input/8",
     "rounded-2xl border border-input",
     "transition-colors",
-    "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+    "outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
     "[&_svg]:size-3.5 [&_svg]:shrink-0",
     "has-data-[slot=badge]:ps-0.5",
     "[button&,a&]:cursor-pointer",

@@ -444,7 +444,7 @@ export const CalendarTableCell = (
           "hover:bg-accent hover:text-accent-foreground",
           "data-today:data-selected:after:bg-background data-today:after:absolute data-today:after:bottom-1 data-today:after:left-1/2 data-today:after:size-1 data-today:after:-translate-x-1/2 data-today:after:rounded-full data-today:after:bg-primary",
           "data-focus:border-primary data-focus:bg-accent/32 data-focus:text-primary data-focus:ring-[3px] data-focus:ring-ring/32",
-          "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+          "outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
           "data-unavailable:pointer-events-none data-unavailable:line-through data-unavailable:opacity-64",
           "data-[view=day]:data-in-range:not-data-[hover-range-start]:not-data-[range-start]:not-data-[hover-range-end]:not-data-[range-end]:rounded-none",

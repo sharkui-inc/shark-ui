@@ -20,7 +20,7 @@ import {
 import { Input } from "@/registry/react/components/input";
 
 const translations = {
-  "ar-SA": {
+  ar: {
     description: "أدخل بريدك الإلكتروني أدناه لتسجيل الدخول إلى حسابك",
     email: "البريد الإلكتروني",
     emailPlaceholder: "m@example.com",
@@ -31,7 +31,7 @@ const translations = {
     signUp: "إنشاء حساب",
     title: "تسجيل الدخول إلى حسابك",
   },
-  "en-US": {
+  en: {
     description: "Enter your email below to login to your account",
     email: "Email",
     emailPlaceholder: "m@example.com",
@@ -42,7 +42,7 @@ const translations = {
     signUp: "Sign Up",
     title: "Login to your account",
   },
-  "he-IL": {
+  he: {
     description: "הזן את האימייל שלך למטה כדי להתחבר לחשבון שלך",
     email: "אימייל",
     emailPlaceholder: "m@example.com",

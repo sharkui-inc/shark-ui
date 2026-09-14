@@ -13,6 +13,10 @@ import { DocsTableOfContents } from "@/components/layout/docs-toc";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getDateFromFile } from "@/lib/changelog";
 import { source } from "@/lib/fumadocs";
+import {
+  getBreadcrumbJsonLd,
+  getChangelogTechArticleJsonLd,
+} from "@/lib/json-ld";
 import { createMetadata } from "@/lib/metadata";
 import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
@@ -97,28 +101,15 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
 
   return (
     <div className="size-full">
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: breadcrumbItems.map((item, index) => ({
-            "@type": "ListItem",
-            item: item.url,
-            name: item.name,
-            position: index + 1,
-          })),
-        }}
-      />
+      <JsonLd data={getBreadcrumbJsonLd(breadcrumbItems)} />
       {isChangelog && page.slugs.length > 1 && changelogDate ? (
         <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "TechArticle",
-            datePublished: changelogDate.toISOString(),
-            description,
-            headline: page.data.title,
-            mainEntityOfPage: absoluteUrl(page.url),
-          }}
+          data={getChangelogTechArticleJsonLd({
+            datePublished: changelogDate,
+            description: description ?? page.data.title,
+            title: page.data.title,
+            url: absoluteUrl(page.url),
+          })}
         />
       ) : null}
       <div className="flex items-stretch xl:w-full" data-slot="docs">

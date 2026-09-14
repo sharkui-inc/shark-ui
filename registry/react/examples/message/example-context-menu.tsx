@@ -120,7 +120,7 @@ const EmojiPicker = (props: {
       >
         {collection.items.map((item) => (
           <ListboxItem
-            className="size-8 justify-center p-0"
+            className="size-8 justify-center p-0 data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
             item={item}
             key={item.value}
           >

@@ -16,6 +16,7 @@ import {
   menuEmptyVariants,
   menuGroupLabelVariants,
   menuItemControlVariants,
+  menuItemHighlightVariants,
   menuItemIconVariants,
   menuItemIndicatorVariants,
 } from "@/registry/react/components/menu";
@@ -108,12 +109,7 @@ const listboxItemVariants = tv({
   },
   variants: {
     variant: {
-      default: [
-        "text-popover-foreground",
-        "data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground",
-        "hover:bg-accent hover:text-accent-foreground",
-        "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
-      ],
+      default: ["text-popover-foreground", menuItemHighlightVariants()],
       destructive: [
         "text-destructive dark:text-destructive-foreground",
         "hover:bg-destructive/8 dark:hover:bg-destructive-foreground/8",

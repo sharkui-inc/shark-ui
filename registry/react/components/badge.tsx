@@ -12,7 +12,7 @@ export const badgeVariants = tv({
     "border border-transparent",
     "overflow-hidden",
     "transition-colors",
-    "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+    "outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
     "[&_svg]:pointer-events-none [&_svg]:size-3 [&_svg]:shrink-0",
     "[button&,a&]:cursor-pointer",
     "motion-reduce:transition-none",
@@ -41,7 +41,7 @@ export const badgeVariants = tv({
       default: [
         "bg-primary",
         "text-primary-foreground",
-        "[a&]:hover:bg-primary/80",
+        "[a&]:hover:bg-primary-hover",
       ],
       destructive: [
         "bg-destructive/8 dark:bg-destructive/8",
@@ -69,7 +69,7 @@ export const badgeVariants = tv({
         "text-secondary-foreground",
         "border-secondary/24",
         "focus-visible:border-foreground focus-visible:ring-foreground/48",
-        "[a&]:hover:bg-secondary/80",
+        "[a&]:hover:bg-secondary-hover",
       ],
       success: [
         "bg-success/8",

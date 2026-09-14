@@ -19,6 +19,7 @@ export const Carousel = (
   return (
     <ArkCarousel.Root
       className={cn(
+        "group/carousel",
         "relative",
         "flex flex-col",
         "data-[orientation=vertical]:w-max data-[orientation=vertical]:flex-row",
@@ -73,7 +74,10 @@ export const CarouselPrevious = (
         size="icon-md"
         variant="outline"
       >
-        <ChevronLeftIcon aria-hidden className="size-4" />
+        <ChevronLeftIcon
+          aria-hidden
+          className="size-4 group-data-[orientation=horizontal]/carousel:rtl:rotate-180"
+        />
       </Button>
     </ArkCarousel.PrevTrigger>
   );
@@ -103,7 +107,10 @@ export const CarouselNext = (
         size="icon-md"
         variant="outline"
       >
-        <ChevronRightIcon aria-hidden className="size-4" />
+        <ChevronRightIcon
+          aria-hidden
+          className="size-4 group-data-[orientation=horizontal]/carousel:rtl:rotate-180"
+        />
       </Button>
     </ArkCarousel.NextTrigger>
   );

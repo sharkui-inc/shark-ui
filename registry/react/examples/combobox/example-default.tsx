@@ -9,12 +9,18 @@ import {
   ComboboxList,
 } from "@/registry/react/components/combobox";
 
-const ComboboxDemo = () => {
+interface ComboboxDemoProps {
+  items?: typeof initialItems;
+  placeholder?: string;
+}
+
+export const ComboboxDemo = (props: ComboboxDemoProps) => {
+  const { items = initialItems, placeholder = "Select an option" } = props;
   const { contains } = useFilter({ sensitivity: "base" });
 
   const { collection, filter } = useListCollection({
     filter: contains,
-    initialItems,
+    initialItems: items,
   });
 
   return (
@@ -25,7 +31,7 @@ const ComboboxDemo = () => {
         filter(reason === "item-select" ? "" : inputValue)
       }
     >
-      <ComboboxInput placeholder="Select an option" />
+      <ComboboxInput placeholder={placeholder} />
       <ComboboxContent>
         <ComboboxList>
           {collection.items.map((item) => (
@@ -46,4 +52,6 @@ const initialItems = [
   { label: "Date", value: "date" },
 ];
 
-export default ComboboxDemo;
+const ComboboxDefaultExample = () => <ComboboxDemo />;
+
+export default ComboboxDefaultExample;

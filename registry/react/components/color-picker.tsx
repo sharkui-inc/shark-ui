@@ -245,7 +245,7 @@ export const ColorPickerSwatchTrigger = (
         "flex items-center justify-center",
         "rounded-full",
         "transition-[border-color,box-shadow] duration-100 ease-out will-change-transform",
-        "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "data-[state=checked]:shadow-sm/4 data-[state=checked]:ring-(--color) data-[state=checked]:ring-2",
         "motion-reduce:transition-none",

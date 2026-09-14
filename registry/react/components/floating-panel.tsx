@@ -136,7 +136,7 @@ export const FloatingPanelControl = (
 
   return (
     <ArkFloatingPanel.Control
-      className={cn("ms-auto flex items-center gap-2 rtl:me-auto", className)}
+      className={cn("ms-auto flex items-center gap-2", className)}
       {...rest}
     />
   );

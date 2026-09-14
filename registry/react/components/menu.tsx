@@ -74,6 +74,10 @@ export const menuItemIconVariants = tv({
   ],
 });
 
+export const menuItemHighlightVariants = tv({
+  base: "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
+});
+
 export const menuItemIndicatorVariants = tv({
   base: [
     "pointer-events-none",
@@ -191,9 +195,7 @@ export const menuItemVariants = tv({
   },
   variants: {
     variant: {
-      default: [
-        "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
-      ],
+      default: [menuItemHighlightVariants()],
       destructive: [
         "text-destructive dark:text-destructive-foreground",
         "data-highlighted:bg-destructive/8 dark:data-highlighted:bg-destructive-foreground/8",
@@ -358,25 +360,29 @@ export const MenuSubTrigger = (
       {children}
 
       <MenuShortcut>
-        <ChevronRight className="size-3.5" />
+        <ChevronRight className="size-3.5 rtl:rotate-180" />
       </MenuShortcut>
     </ArkMenu.TriggerItem>
   );
 };
 
 export const MenuShortcut = (props: React.ComponentProps<typeof ark.span>) => {
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ark.span
       className={cn(
-        "ms-auto font-medium text-muted-foreground text-xs tracking-widest rtl:me-auto",
+        "ms-auto font-medium text-muted-foreground text-xs tracking-widest",
         "group-data-highlighted/menu-item:group-data-[variant=destructive]/menu-item:text-destructive dark:group-data-highlighted/menu-item:group-data-[variant=destructive]/menu-item:text-destructive-foreground",
         className
       )}
       data-slot="menu-shortcut"
       {...rest}
-    />
+    >
+      <span dir="ltr" style={{ unicodeBidi: "isolate" }}>
+        {children}
+      </span>
+    </ark.span>
   );
 };
 
