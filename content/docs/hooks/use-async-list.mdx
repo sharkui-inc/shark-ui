@@ -8,7 +8,7 @@ links:
 
 import manifest from "@/registry/manifest/use-async-list";
 
-<ComponentPreview componentName="use-async-list" />
+<ComponentPreview componentName="use-async-list" autoHeight />
 
 ## Installation
 
@@ -50,88 +50,116 @@ import { useAsyncList } from "@/hooks/use-async-list";
 ```tsx
 const list = useAsyncList<User>({
   autoReload: true,
+
   async load({ signal }) {
     const response = await fetch("/api/users", { signal });
+
     if (!response.ok) throw new Error("Failed to load users");
+
     const items: User[] = await response.json();
-    return { items };
+
+    return { 
+      items 
+    };
   },
 });
 ```
-
-Use `list.items`, `list.loading`, and `list.error` to render the result. Pass the supplied `signal` to `fetch` so requests can be canceled. `setFilterText` starts a new load immediately; the hook does not add a debounce.
-
-The examples retain Ark's data sources: DummyJSON, JSONPlaceholder, Fake Store API, and local user fixtures. Network examples require those services to be available and show an error when a request fails.
 
 ## Examples
 
 ### Infinite loading
 
-Return the next cursor from `load` and call `loadMore` to append another page. Omit the cursor when no pages remain.
+Implement pagination by returning a cursor that indicates more data is available.
 
-<ComponentPreview componentName="use-async-list" fileName="example-infinite-loading" />
+<ComponentPreview componentName="use-async-list" fileName="example-infinite-loading" autoHeight />
 
 ### Filtering
 
-Filter local users by name or email. The simulated delay makes the loading state visible; the input remains usable while results load.
+Filter data based on user input with automatic debouncing and loading states.
 
-<ComponentPreview componentName="use-async-list" fileName="example-filter" />
+<ComponentPreview componentName="use-async-list" fileName="example-filter" autoHeight />
 
 ### Client-side sorting
 
-Provide a `sort` callback to reorder loaded items locally. This example uses locale-aware comparison and leaves the original array unchanged.
+Sort data on the client side after loading it from the server.
 
-<ComponentPreview componentName="use-async-list" fileName="example-sort-client-side" />
+<ComponentPreview componentName="use-async-list" fileName="example-sort-client-side" autoHeight />
 
 ### Server-side sorting
 
-Without a `sort` callback, `list.sort` invokes `load` with the new descriptor. This example sends the direction to Fake Store API; it does not request sorting by product title.
+Send sort parameters to the server and reload data when sorting changes.
 
-<ComponentPreview componentName="use-async-list" fileName="example-sort-server-side" />
+<ComponentPreview componentName="use-async-list" fileName="example-sort-server-side" autoHeight />
 
 ### Dependencies
 
-Changes to the department or role reload the list automatically. Keep dependency values primitive; they identify the external values used by `load`.
+Automatically reload data when dependencies change, such as filter selections or external state.
 
-<ComponentPreview componentName="use-async-list" fileName="example-dependencies" />
+<ComponentPreview componentName="use-async-list" fileName="example-dependencies" autoHeight />
 
 ## API Reference
 
 ### useAsyncList
 
-A direct export of Ark's `useAsyncList<T, C = string>`. The module also exports `UseAsyncListProps<T, C>` and `UseAsyncListReturn<T, C>`.
+Direct export of Ark's `useAsyncList<T, C = string>`. Also exports the `UseAsyncListProps<T, C>` and `UseAsyncListReturn<T, C>` types.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `load` | Async function returning `{ items: T[], cursor?: C }` | Required |
-| `sort` | Function returning `{ items: T[] }`, synchronously or asynchronously | - |
+| `load` | `(details) => Promise<{ items: T[]; cursor?: C }>` | Required |
+| `sort` | `(details) => { items: T[] } \| Promise<{ items: T[] }>` | `-` |
 | `initialItems` | `T[]` | `[]` |
 | `initialFilterText` | `string` | `""` |
-| `initialSortDescriptor` | `{ column: keyof T; direction: "ascending" \| "descending" }` | - |
-| `dependencies` | Array of strings, numbers, booleans, `null`, or `undefined` | - |
+| `initialSortDescriptor` | `{ column: keyof T; direction: "ascending" \| "descending" }` | `-` |
+| `dependencies` | `(string \| number \| boolean \| null \| undefined)[]` | `[]` |
 | `autoReload` | `boolean` | `false` |
-| `onSuccess` | `(details: { items: T[] }) => void` | - |
-| `onError` | `(details: { error: Error }) => void` | - |
+| `onSuccess` | `(details: { items: T[] }) => void` | `-` |
+| `onError` | `(details: { error: Error }) => void` | `-` |
 
-`autoReload` enables the initial load. Changes to `dependencies` trigger a reload even when `autoReload` is omitted.
+`autoReload` runs the initial load; changing `dependencies` reloads the list. The cursor type is the second generic parameter, e.g. `useAsyncList<Post, number>`.
 
 ### Callback details
 
-`load` receives `signal`, `filterText`, `cursor`, and `sortDescriptor`. The signal and cursor may be absent. The cursor type is the second generic parameter, for example `useAsyncList<Post, number>`.
+#### load
 
-`sort` receives `items`, `descriptor`, and `filterText`. The descriptor's `column` is a key of `T`.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `signal` | `AbortSignal \| undefined` | `-` |
+| `filterText` | `string` | `-` |
+| `cursor` | `C \| undefined` | `-` |
+| `sortDescriptor` | `{ column: keyof T; direction: "ascending" \| "descending" } \| undefined` | `-` |
+
+Returns `{ items: T[]; cursor?: C }`.
+
+#### sort
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `items` | `T[]` | `-` |
+| `descriptor` | `{ column: keyof T; direction: "ascending" \| "descending" }` | `-` |
+| `filterText` | `string` | `-` |
+
+Returns `{ items: T[] }`.
 
 ### Return value
 
-| Member | Description |
-| --- | --- |
-| `items` | Current items. |
-| `loading`, `sorting` | Loading and local sorting states. |
-| `empty`, `hasMore` | Whether the list is empty or has another cursor. |
-| `error` | Error from the latest failed operation, if any. |
-| `filterText`, `sortDescriptor`, `cursor` | Current filter, sorting, and pagination state. |
-| `reload()` | Reload the list. |
-| `loadMore()` | Append the next page when a cursor exists. |
-| `sort(descriptor)` | Sort locally when a callback exists, otherwise load with the descriptor. |
-| `setFilterText(text)`, `clearFilter()` | Update the filter and load matching items. |
-| `abort()` | Cancel the current request. |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `items` | `T[]` | `-` |
+| `loading` | `boolean` | `-` |
+| `sorting` | `boolean` | `-` |
+| `empty` | `boolean` | `-` |
+| `hasMore` | `boolean` | `-` |
+| `error` | `any` | `-` |
+| `filterText` | `string` | `-` |
+| `sortDescriptor` | `{ column: keyof T; direction: "ascending" \| "descending" } \| undefined` | `-` |
+| `cursor` | `C \| undefined` | `-` |
+| `abort()` | `() => void` | `-` |
+| `reload()` | `() => void` | `-` |
+| `loadMore()` | `() => void` | `-` |
+| `sort(descriptor)` | `(descriptor: { column: keyof T; direction: "ascending" \| "descending" }) => void` | `-` |
+| `setFilterText(text)` | `(text: string) => void` | `-` |
+| `clearFilter()` | `() => void` | `-` |
+
+---
+
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/collections/async-list#api-reference).

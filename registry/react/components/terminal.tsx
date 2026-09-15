@@ -164,9 +164,12 @@ export const TerminalContent = (props: TerminalContentProps) => {
       data-slot="terminal-content"
       {...rest}
     >
-      <ScrollArea className="flex-1">
+      <ScrollArea className="flex-1" dir="ltr">
         <TerminalFollow />
-        <pre className="w-max min-w-full p-3 font-mono text-[0.8125rem] leading-6">
+        <pre
+          className="w-max min-w-full p-3 font-mono text-[0.8125rem] leading-6"
+          dir="ltr"
+        >
           {children ??
             tokens.map((token) => (
               <span className={token.className} key={token.start}>

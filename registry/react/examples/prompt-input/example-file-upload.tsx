@@ -44,7 +44,7 @@ const Example = () => {
     >
       <FileUploadDropzone
         asChild
-        className="cursor-default justify-start rounded-none border-0 p-0 text-start data-dragging:bg-transparent [&[data-dragging]_[data-slot=input-group]]:border-primary [&[data-dragging]_[data-slot=input-group]]:bg-primary/8"
+        className="cursor-default justify-start rounded-none border-0 p-0 text-start data-dragging:bg-transparent [&[data-dragging]_[data-slot=input-group]]:border-primary/64 [&[data-dragging]_[data-slot=input-group]]:bg-primary/8"
         disableClick
       >
         <PromptInput onSubmit={() => setValue("")}>

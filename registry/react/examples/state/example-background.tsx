@@ -24,7 +24,7 @@ const Example = () => (
     </StateHeader>
     <StateContent>
       <Button size="sm" variant="outline">
-        <RefreshCcwIcon aria-hidden="true" />
+        <RefreshCcwIcon aria-hidden="true" data-icon="inline-start" />
         Refresh
       </Button>
     </StateContent>

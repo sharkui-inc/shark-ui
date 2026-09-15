@@ -6,6 +6,13 @@ const withMDX = createMDX();
 
 const config: NextConfig = {
   images: {
+    remotePatterns: [
+      {
+        hostname: "api.dicebear.com",
+        pathname: "/10.x/waves/svg",
+        protocol: "https",
+      },
+    ],
     unoptimized: true,
   },
   // Static export: avoids serverless functions on Vercel Hobby (free) tier.

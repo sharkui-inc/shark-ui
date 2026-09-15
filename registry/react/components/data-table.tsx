@@ -31,6 +31,7 @@ import {
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
+import { FormatNumber } from "@/registry/react/components/format";
 import {
   Menu,
   MenuCheckboxItem,
@@ -280,8 +281,9 @@ export const DataTablePagination = <TData extends RowData>(
       {...rest}
     >
       <div className="flex-1 text-muted-foreground text-sm">
-        {table.getFilteredSelectedRowModel().rows.length} of {filteredRowCount}{" "}
-        row(s) selected.
+        <FormatNumber value={table.getFilteredSelectedRowModel().rows.length} />
+        {" of "}
+        <FormatNumber value={filteredRowCount} /> row(s) selected.
       </div>
 
       <div className="flex flex-wrap items-center gap-4 lg:gap-6">
@@ -297,14 +299,15 @@ export const DataTablePagination = <TData extends RowData>(
           >
             {[10, 20, 30, 40, 50].map((size) => (
               <NativeSelectOption key={size} value={size}>
-                {size}
+                <FormatNumber useGrouping={false} value={size} />
               </NativeSelectOption>
             ))}
           </NativeSelect>
         </div>
 
         <div className="w-28 text-center font-medium text-sm">
-          Page {pageIndex + 1} of {pageCount}
+          Page <FormatNumber useGrouping={false} value={pageIndex + 1} /> of{" "}
+          <FormatNumber useGrouping={false} value={pageCount} />
         </div>
 
         <Pagination

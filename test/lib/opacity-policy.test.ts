@@ -5,6 +5,18 @@ import { describe, it } from "node:test";
 
 const ALLOWED_ALPHA = new Set([0, 4, 8, 16, 24, 32, 48, 64, 80, 96, 100]);
 const ALLOWED_SHADOW_GEOMETRIES = new Set(["xs", "sm", "lg"]);
+const SOLID_PRIMARY_FOCUS_COMPONENTS = new Set([
+  "registry/react/components/badge.tsx",
+  "registry/react/components/button.tsx",
+  "registry/react/components/calendar.tsx",
+  "registry/react/components/checkbox.tsx",
+  "registry/react/components/icon-tile.tsx",
+  "registry/react/components/message-bubble.tsx",
+  "registry/react/components/radio-group.tsx",
+  "registry/react/components/skip-nav.tsx",
+  "registry/react/components/steps.tsx",
+  "registry/react/components/switch.tsx",
+]);
 const TECHNICAL_SHADOWS = new Set([
   "shadow-[0_0_0_1px_rgb(0_0_0/0.08),inset_0_0_0_1px_rgb(0_0_0/0.08)]",
   "shadow-[0_0_0_9999px_rgb(0_0_0/0.48)]",
@@ -124,6 +136,60 @@ const reportTranslucentSolidHovers = (source: string, path: string) =>
     return `${path}:${line} uses translucent solid hover ${match[0]}`;
   });
 
+const reportInvalidFocusTreatments = (source: string, path: string) => {
+  const findings: string[] = [];
+  const state =
+    "(?:focus|focus-visible|data-focus-visible|has-focus-visible|in-focus-visible)";
+
+  for (const match of source.matchAll(
+    new RegExp(
+      `${state}:(?:border-(?:sidebar-)?ring|ring-(?:sidebar-)?ring)/(?!64|24)(\\d+)`,
+      "g"
+    )
+  )) {
+    const line = source.slice(0, match.index).split("\n").length;
+    findings.push(`${path}:${line} uses unsupported focus opacity ${match[0]}`);
+  }
+
+  for (const match of source.matchAll(
+    new RegExp(
+      `${state}:(?:ring|outline)-(?!offset-)(?:primary|destructive|success|warning|info|foreground|[a-z]+-\\d+)(?=$|["'\\s])`,
+      "g"
+    )
+  )) {
+    const line = source.slice(0, match.index).split("\n").length;
+    findings.push(
+      `${path}:${line} uses non-semantic focus indicator ${match[0]}`
+    );
+  }
+
+  for (const match of source.matchAll(
+    new RegExp(`${state}:ring-(?:sidebar-)?ring(?!/24\\b)`, "g")
+  )) {
+    const line = source.slice(0, match.index).split("\n").length;
+    findings.push(`${path}:${line} uses a focus ring without /24`);
+  }
+
+  for (const match of source.matchAll(
+    new RegExp(`${state}:border-background(?=$|["'\\s])`, "g")
+  )) {
+    const line = source.slice(0, match.index).split("\n").length;
+
+    if (
+      !(
+        SOLID_PRIMARY_FOCUS_COMPONENTS.has(path) &&
+        source.includes("bg-primary")
+      )
+    ) {
+      findings.push(
+        `${path}:${line} uses border-background outside a solid primary focus recipe`
+      );
+    }
+  }
+
+  return findings;
+};
+
 describe("opacity policy", () => {
   it("uses only the approved alpha scale in authored source", () => {
     const findings = SOURCE_ROOTS.flatMap((root) =>
@@ -164,6 +230,7 @@ describe("opacity policy", () => {
           ),
           ...reportUnexpectedShadows(source, path),
           ...reportTranslucentSolidHovers(source, path),
+          ...reportInvalidFocusTreatments(source, path),
         ];
       })
     );

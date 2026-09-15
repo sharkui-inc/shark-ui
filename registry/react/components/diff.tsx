@@ -53,7 +53,7 @@ interface DiffHeaderProps extends React.ComponentProps<typeof ark.div> {
 }
 
 export const DiffFile = (props: React.ComponentProps<typeof ark.span>) => {
-  const { className, ...rest } = props;
+  const { className, style, ...rest } = props;
 
   return (
     <ark.span
@@ -62,6 +62,8 @@ export const DiffFile = (props: React.ComponentProps<typeof ark.span>) => {
         className
       )}
       data-slot="diff-file"
+      dir="ltr"
+      style={{ unicodeBidi: "isolate", ...style }}
       {...rest}
     />
   );
@@ -152,7 +154,7 @@ export const DiffContent = (props: React.ComponentProps<typeof ark.div>) => {
       dir="ltr"
       {...rest}
     >
-      <ScrollArea className="flex-1">
+      <ScrollArea className="flex-1" dir="ltr">
         <div className="w-max min-w-full py-3 font-mono text-sm leading-(--code-surface-line-height)">
           {children}
         </div>
@@ -181,6 +183,7 @@ const diffLineVariants = tv({
 
 const diffGutterVariants = tv({
   base: [
+    // A diff is an explicitly LTR code surface, including its line-number gutter.
     "sticky left-0 z-1",
     "flex w-11 shrink-0 items-center",
     "bg-card",

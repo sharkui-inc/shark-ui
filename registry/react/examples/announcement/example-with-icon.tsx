@@ -8,7 +8,7 @@ import {
 const Example = () => (
   <Announcement>
     <Badge variant="info">
-      <SparklesIcon />
+      <SparklesIcon data-icon="inline-start" />
       New features
     </Badge>
     <AnnouncementTitle>

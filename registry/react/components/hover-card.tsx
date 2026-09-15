@@ -67,6 +67,7 @@ export const HoverCardContent = (props: HoverCardContentProps) => {
             "bg-popover",
             "text-popover-foreground",
             "origin-(--transform-origin)",
+            "duration-150 ease-out",
             "rounded-xl border shadow-lg/4",
             "outline-hidden",
             "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
@@ -76,7 +77,7 @@ export const HoverCardContent = (props: HoverCardContentProps) => {
             "data-[placement=left]:slide-in-from-end-2",
             "data-[placement=right]:slide-in-from-start-2",
             "data-[placement=top]:slide-in-from-bottom-2",
-            "motion-reduce:animate-none",
+            "motion-reduce:data-[state=closed]:zoom-out-100 motion-reduce:data-[state=open]:zoom-in-100",
             className
           )}
           data-slot="hover-card-content"

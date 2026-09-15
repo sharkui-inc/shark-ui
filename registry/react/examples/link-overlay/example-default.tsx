@@ -1,3 +1,4 @@
+import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Card,
   CardHeader,
@@ -13,7 +14,7 @@ const LinkOverlayDemo = () => (
         <img
           alt="Green mesh gradient"
           height={128}
-          src="/images/gradients/green-dark.svg"
+          src={createWavesAvatar("Living room Sofa", "green-dark")}
           width={500}
         />
       </CardMedia>

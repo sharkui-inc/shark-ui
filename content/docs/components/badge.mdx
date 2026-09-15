@@ -93,6 +93,25 @@ import { Badge } from "@/components/ui/badge";
 <Badge>Favorite</Badge>
 ```
 
+## Icons
+
+Mark inline icons with `data-icon` so they follow the reading direction.
+
+```tsx
+import { CheckIcon, StarIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+
+<Badge>
+  <StarIcon data-icon="inline-start" />
+  Favorite
+</Badge>
+
+<Badge>
+  Verified
+  <CheckIcon data-icon="inline-end" />
+</Badge>
+```
+
 ## Variants
 
 ### Default
@@ -170,6 +189,8 @@ The `asChild` prop renders another element with badge styling.
 <ComponentPreview componentName="badge" fileName="example-custom-color" />
 
 ## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 <RTLComponentPreview componentName="badge" />
 

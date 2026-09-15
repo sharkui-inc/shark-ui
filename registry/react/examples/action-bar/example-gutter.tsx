@@ -49,20 +49,20 @@ const Example = () => {
           <ActionBarSeparator />
           <ActionBarBody>
             <Button variant="ghost">
-              <PencilIcon />
+              <PencilIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Edit</span>
             </Button>
             <Button variant="ghost">
-              <DownloadIcon />
+              <DownloadIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Export</span>
             </Button>
             <Button variant="ghost">
-              <ArchiveIcon />
+              <ArchiveIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Archive</span>
             </Button>
             <ActionBarSeparator />
             <Button variant="destructive">
-              <Trash2Icon />
+              <Trash2Icon data-icon="inline-start" />
               <span className="max-sm:sr-only">Delete</span>
             </Button>
           </ActionBarBody>

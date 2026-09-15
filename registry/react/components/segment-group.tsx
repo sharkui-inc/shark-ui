@@ -98,7 +98,7 @@ export const SegmentGroupItem = (
         "cursor-pointer",
         "data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
         "rounded-[inherit] border border-transparent",
-        "outline-none data-focus-visible:border-ring data-focus-visible:ring-[3px] data-focus-visible:ring-ring/32",
+        "outline-hidden data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         className
       )}
@@ -139,7 +139,7 @@ export const SegmentGroupIndicator = (
         "h-(--height) w-(--width)",
         "rounded-[inherit]",
         "bg-input",
-        "transition-[width,height,left,top] duration-150 ease-out",
+        "transition-[width,height,left,top] duration-150 ease-in-out",
         "[transition-property:var(--transition-property,width,height,left,top)]",
         "group-data-[variant=underline]/segment-group:bg-primary",
         "data-[orientation=horizontal]:group-data-[variant=underline]/segment-group:top-[calc(var(--top)+var(--height)-1px)]",

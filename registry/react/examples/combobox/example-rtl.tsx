@@ -1,11 +1,51 @@
 "use client";
 
-import { useRTLPreviewLanguage } from "@/components/docs/component-preview/rtl-preview";
-import { ComboboxDemo } from "./example-default";
+import { useFilter, useListCollection } from "@ark-ui/react";
+import { usePreviewLocale } from "@/hooks/use-preview-locale";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/registry/react/components/combobox";
+
+const Example = () => {
+  const { contains } = useFilter({ sensitivity: "base" });
+  const { locale } = usePreviewLocale();
+  const { values } = translations[locale];
+
+  const { collection, filter } = useListCollection({
+    filter: contains,
+    initialItems: values.items,
+  });
+
+  return (
+    <Combobox
+      className="max-w-xs"
+      collection={collection}
+      onInputValueChange={({ inputValue, reason }) =>
+        filter(reason === "item-select" ? "" : inputValue)
+      }
+    >
+      <ComboboxInput placeholder={values.placeholder} />
+      <ComboboxContent>
+        <ComboboxEmpty />
+        <ComboboxList>
+          {collection.items.map((item) => (
+            <ComboboxItem item={item} key={item.value}>
+              {item.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+};
 
 const translations = {
   ar: {
-    dir: "rtl",
     values: {
       items: [
         { label: "تفاح", value: "apple" },
@@ -17,7 +57,6 @@ const translations = {
     },
   },
   en: {
-    dir: "ltr",
     values: {
       items: [
         { label: "Apple", value: "apple" },
@@ -29,7 +68,6 @@ const translations = {
     },
   },
   he: {
-    dir: "rtl",
     values: {
       items: [
         { label: "תפוח", value: "apple" },
@@ -40,13 +78,6 @@ const translations = {
       placeholder: "בחר אפשרות",
     },
   },
-} as const;
-
-const ComboboxRTLExample = () => {
-  const { language } = useRTLPreviewLanguage();
-  const { values } = translations[language];
-
-  return <ComboboxDemo items={values.items} placeholder={values.placeholder} />;
 };
 
-export default ComboboxRTLExample;
+export default Example;

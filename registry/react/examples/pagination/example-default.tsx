@@ -1,6 +1,5 @@
 "use client";
 
-import type React from "react";
 import {
   Pagination,
   PaginationItems,
@@ -8,24 +7,12 @@ import {
   PaginationPrevious,
 } from "@/registry/react/components/pagination";
 
-interface PaginationDemoProps {
-  formatPage?: (page: number) => React.ReactNode;
-  nextLabel?: string;
-  previousLabel?: string;
-}
+const PaginationDemo = () => (
+  <Pagination count={50} pageSize={10}>
+    <PaginationPrevious />
+    <PaginationItems />
+    <PaginationNext />
+  </Pagination>
+);
 
-export const PaginationDemo = (props: PaginationDemoProps) => {
-  const { formatPage, nextLabel = "Next", previousLabel = "Previous" } = props;
-
-  return (
-    <Pagination count={50} pageSize={10}>
-      <PaginationPrevious>{previousLabel}</PaginationPrevious>
-      <PaginationItems formatPage={formatPage} />
-      <PaginationNext>{nextLabel}</PaginationNext>
-    </Pagination>
-  );
-};
-
-const PaginationDefaultExample = () => <PaginationDemo />;
-
-export default PaginationDefaultExample;
+export default PaginationDemo;

@@ -89,7 +89,11 @@ const DataTableDemo = () => {
           <MenuTrigger asChild>
             <Button className="ms-auto" variant="outline">
               Columns
-              <ChevronDownIcon aria-hidden className="size-4" />
+              <ChevronDownIcon
+                aria-hidden
+                className="size-4"
+                data-icon="inline-end"
+              />
             </Button>
           </MenuTrigger>
           <MenuContent>
@@ -258,7 +262,7 @@ const EmailSortHeader = ({
     variant="ghost"
   >
     Email
-    <ArrowUpDownIcon aria-hidden className="size-4" />
+    <ArrowUpDownIcon aria-hidden className="size-4" data-icon="inline-end" />
   </Button>
 );
 

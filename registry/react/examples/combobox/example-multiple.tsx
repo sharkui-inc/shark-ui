@@ -8,6 +8,7 @@ import {
   ComboboxChipsInput,
   ComboboxContent,
   ComboboxContext,
+  ComboboxEmpty,
   ComboboxItem,
   ComboboxList,
 } from "@/registry/react/components/combobox";
@@ -44,6 +45,7 @@ const Example = () => {
               />
             </ComboboxChips>
             <ComboboxContent>
+              <ComboboxEmpty />
               <ComboboxList>
                 {collection.items.map((item) => (
                   <ComboboxItem item={item} key={item.value}>

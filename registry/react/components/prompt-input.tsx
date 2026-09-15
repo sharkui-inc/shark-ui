@@ -124,7 +124,7 @@ export const PromptInput = (props: PromptInputProps) => {
         }}
         {...rest}
       >
-        <InputGroup className="h-auto flex-col items-stretch rounded-2xl focus-within:border-input focus-within:ring-0">
+        <InputGroup className="h-auto flex-col items-stretch rounded-2xl">
           {inputGroupChildren}
         </InputGroup>
         {bottomChildren}
@@ -308,8 +308,8 @@ export const PromptInputPopoverAction = (
           menuItemControlVariants(),
           hasDescription ? "items-start" : "items-center",
           "text-start",
-          "outline-none transition-colors",
-          "hover:bg-muted focus-visible:bg-muted",
+          "outline-hidden transition-colors",
+          "hover:bg-muted focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
           "disabled:pointer-events-none disabled:opacity-64",
           className
         )}

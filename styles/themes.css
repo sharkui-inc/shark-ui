@@ -1182,10 +1182,10 @@ body.primary-tone-dark.theme-rose {
     var(--theme-color-800) 92%,
     var(--theme-color-950)
   );
-  --ring: var(--theme-color-600);
+  --ring: var(--theme-color-950);
   --sidebar-primary: var(--theme-color-800);
   --sidebar-primary-foreground: var(--theme-color-50);
-  --sidebar-ring: var(--theme-color-600);
+  --sidebar-ring: var(--theme-color-950);
 
   @variant dark {
     --primary: var(--theme-color-100);
@@ -1195,10 +1195,10 @@ body.primary-tone-dark.theme-rose {
       var(--theme-color-100) 92%,
       var(--theme-color-950)
     );
-    --ring: var(--theme-color-400);
+    --ring: var(--theme-color-50);
     --sidebar-primary: var(--theme-color-100);
     --sidebar-primary-foreground: var(--theme-color-800);
-    --sidebar-ring: var(--theme-color-400);
+    --sidebar-ring: var(--theme-color-50);
   }
 }
 

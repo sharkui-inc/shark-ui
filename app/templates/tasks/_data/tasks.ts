@@ -1,5 +1,6 @@
 import { createListCollection } from "@ark-ui/react";
 import { ArrowDownIcon, ArrowUpIcon, MinusIcon } from "lucide-react";
+import { createWavesAvatar } from "@/lib/dicebear";
 
 export const STATUS_OPTIONS = [
   "Todo",
@@ -48,22 +49,22 @@ export const ASSIGNEES: Record<
   { avatar: string; initials: string; name: string }
 > = {
   arjun: {
-    avatar: "/images/gradients/blue.svg",
+    avatar: createWavesAvatar("Arjun Patel", "blue"),
     initials: "AP",
     name: "Arjun Patel",
   },
   elena: {
-    avatar: "/images/gradients/rose.svg",
+    avatar: createWavesAvatar("Elena Rossi", "rose"),
     initials: "ER",
     name: "Elena Rossi",
   },
   jules: {
-    avatar: "/images/gradients/green-dark.svg",
+    avatar: createWavesAvatar("Jules Martin", "green-dark"),
     initials: "JM",
     name: "Jules Martin",
   },
   maya: {
-    avatar: "/images/gradients/purple.svg",
+    avatar: createWavesAvatar("Maya Chen", "purple"),
     initials: "MC",
     name: "Maya Chen",
   },

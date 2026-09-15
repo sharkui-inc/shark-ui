@@ -152,7 +152,7 @@ The palette is role-driven and themeable: background, foreground, surface, state
 - **Theme Accent:** A neutral contextual surface for hover, menus, and quiet selected regions. It never derives from the configured primary.
 - **Accent Foreground:** Maintains readable contrast on the current primary surface in both color modes.
 - **Primary Hover:** An opaque, palette-preserving darker mix. Solid controls use it instead of compositing primary alpha over an unknown parent surface.
-- **Focus Ring:** A separate, accessible dark palette shade used for keyboard focus borders and rings; it is intentionally not the primary fill.
+- **Focus Ring:** An extreme shade of the configured primary palette (`950` light, `50` dark). Focus combines a `/64` border and quieter `/24` external ring; the border carries the accessible contrast without becoming fully opaque. The sole exception is a solid primary control: it uses an opaque `background` border so focus remains legible inside the fill, while retaining the `/24` external ring.
 
 ### Neutral
 
@@ -240,7 +240,7 @@ Radius is a user-configurable scale anchored by one base value. Components deriv
 - **Shape:** Gently rounded by default, with an explicit pill option and smaller corners only at the extra-small size.
 - **Primary:** Uses the semantic primary pair, an opaque primary-hover state, a transparent border for stable geometry, and a shallow neutral shadow.
 - **Secondary / Outline / Ghost:** Secondary uses a quiet filled surface; outline uses the input stroke over a transparent surface; ghost is transparent until hover.
-- **Hover / Focus / Active:** Solid hover uses its opaque semantic hover token. Accent remains neutral; selection that needs persistent emphasis uses primary indicators, weight, or border. Keyboard focus uses a three-pixel translucent ring plus the separate semantic ring border. Pressing scales ordinary buttons to 98%; reduced-motion mode removes transitions.
+- **Hover / Focus / Active:** Solid hover uses its opaque semantic hover token. Accent remains neutral; selection that needs persistent emphasis uses primary indicators, weight, or border. Keyboard focus uses a primary `/64` border plus a quieter two-pixel `/24` ring, except inside a solid primary control where the border is opaque `background`. Pressing scales ordinary buttons to 98% over 120ms; reduced motion preserves an opacity response while removing spatial movement.
 - **Disabled / Loading:** Preserve the control footprint, reduce opacity, block pointer actions, and expose busy/disabled state semantically.
 
 ### Badges
@@ -260,7 +260,7 @@ Radius is a user-configurable scale anchored by one base value. Components deriv
 ### Inputs / Fields
 
 - **Style:** Compact height, transparent light-mode fill, subtle dark-mode fill, semantic input stroke, and control-radius corners.
-- **Focus:** The border moves to ring and a three-pixel translucent ring appears without changing layout.
+- **Focus:** The existing border becomes primary `ring/64` and a two-pixel primary `ring/24` appears without changing layout.
 - **Error / Disabled:** Invalid state switches border, text, and ring to destructive roles. Disabled state keeps content legible at reduced opacity and communicates the unavailable cursor state.
 - **Composition:** Labels use medium interface type; descriptions use muted supporting text. Stacked form groups use explicit gaps rather than ad hoc margins.
 
@@ -273,7 +273,15 @@ Radius is a user-configurable scale anchored by one base value. Components deriv
 ### Tabs
 
 - **Style:** Tabs behave like a compact segmented control. The active indicator uses the accent surface beneath the selected trigger; inactive labels remain muted.
-- **Motion:** Indicator width and position transition over 200ms with standard ease-in-out, and the transition is removed under reduced motion.
+- **Motion:** Indicator geometry transitions with `duration-150 ease-in-out`. This is a documented Ark geometry exception: its primitive supplies live width and position, so transform alone cannot represent every size change. Reduced motion updates it immediately.
+
+## Motion
+
+Shark UI motion is tactile and contained, declared locally with Tailwind and `tw-animate-css`: press feedback uses `duration-[120ms] ease-out`; controls and anchored overlays use `duration-150 ease-out`; dialogs and sheets use `duration-200 ease-out`; Ark geometry exceptions use `duration-150 ease-in-out`. Drawer is the sole exception: its panel slides at local `duration-300 ease-out` using Ark's swipe displacement and strength variables, while its backdrop independently fades at `duration-[450ms] ease-out`; the panel never fades and swipe closing stays velocity-derived. There are no shared motion tokens, keyframes, or easing curves in `globals.css`. Existing marquee and indeterminate-progress keyframes are isolated technical effects, never interface recipes.
+
+Anchored overlays scale from `origin-(--transform-origin)`, fade from 98%, and travel two spacing units according to placement. Centered dialogs and free-floating coordinate panels use `origin-center`. This follows the origin contracts exposed by [Ark UI](https://ark-ui.com/docs/components/popover), [Radix](https://www.radix-ui.com/primitives/docs/components/popover), and [Base UI](https://base-ui.com/react/handbook/animation).
+
+Only Ark primitives that expose live geometry may transition width, height, or position: SegmentGroup and Navigation Menu indicators/viewports. All other interactive motion uses transform and opacity. Reduced-motion mode keeps a brief fade and removes travel, scale, rotation, and blur.
 
 ## Do's and Don'ts
 
@@ -281,7 +289,7 @@ Radius is a user-configurable scale anchored by one base value. Components deriv
 
 - **Do** compose new interfaces from semantic surfaces, matched foreground roles, and existing component variants.
 - **Do** keep one configured primary accent surrounded by neutral structure.
-- **Do** use compact controls, visible three-pixel focus rings, and stable transparent borders so state changes do not shift layout.
+- **Do** use compact controls, visible opaque two-pixel focus rings, and stable transparent borders so state changes do not shift layout.
 - **Do** use one-pixel borders and shallow shadows to clarify containment.
 - **Do** use Hanken Grotesk for product hierarchy and JetBrains Mono only for technical strings.
 - **Do** preserve responsive stacking, horizontal overflow where appropriate, reduced-motion behavior, and logical start/end layout.

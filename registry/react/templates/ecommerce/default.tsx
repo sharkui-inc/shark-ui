@@ -9,6 +9,7 @@ export const metadata: Metadata = createMetadata({
 
 import Image from "next/image";
 import Link from "next/link";
+import { createWavesAvatar } from "@/lib/dicebear";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -22,37 +23,37 @@ import { Separator } from "@/registry/react/components/separator";
 const PRODUCTS = [
   {
     id: "1",
-    image: "/images/gradients/green-dark.svg",
+    image: createWavesAvatar("Wireless Headphones", "green-dark"),
     name: "Wireless Headphones",
     price: "$99",
   },
   {
     id: "2",
-    image: "/images/gradients/blue.svg",
+    image: createWavesAvatar("Smart Watch", "blue"),
     name: "Smart Watch",
     price: "$249",
   },
   {
     id: "3",
-    image: "/images/gradients/purple.svg",
+    image: createWavesAvatar("Portable Speaker", "purple"),
     name: "Portable Speaker",
     price: "$79",
   },
   {
     id: "4",
-    image: "/images/gradients/orange.svg",
+    image: createWavesAvatar("USB-C Hub", "orange"),
     name: "USB-C Hub",
     price: "$45",
   },
   {
     id: "5",
-    image: "/images/gradients/rose.svg",
+    image: createWavesAvatar("Mechanical Keyboard", "rose"),
     name: "Mechanical Keyboard",
     price: "$149",
   },
   {
     id: "6",
-    image: "/images/gradients/amber.svg",
+    image: createWavesAvatar("Ergonomic Mouse", "amber"),
     name: "Ergonomic Mouse",
     price: "$59",
   },

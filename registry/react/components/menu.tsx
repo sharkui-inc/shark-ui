@@ -47,7 +47,7 @@ export const MenuPositioner = (
 
   return (
     <ArkMenu.Positioner
-      className={cn("outline-none", className)}
+      className={cn("outline-hidden", className)}
       data-slot="menu-positioner"
       {...rest}
     />
@@ -108,8 +108,8 @@ export const menuContentVariants = tv({
     "text-popover-foreground",
     "rounded-xl border shadow-lg/4",
     "origin-(--transform-origin)",
-    "outline-none",
-    "duration-100",
+    "outline-hidden",
+    "duration-150 ease-out",
     "data-[state=open]:animate-in",
     "data-[state=open]:fade-in-0",
     "data-[state=open]:zoom-in-[98%]",
@@ -124,7 +124,8 @@ export const menuContentVariants = tv({
     "has-data-[placement=left]:slide-in-from-end-2",
     "has-data-[placement=right]:slide-in-from-start-2",
     "has-data-[placement=top]:slide-in-from-bottom-2",
-    "motion-reduce:animate-none",
+    "motion-reduce:data-[state=open]:zoom-in-100",
+    "motion-reduce:data-[placement=bottom]:slide-in-from-top-0 motion-reduce:data-[placement=left]:slide-in-from-end-0 motion-reduce:data-[placement=right]:slide-in-from-start-0 motion-reduce:data-[placement=top]:slide-in-from-bottom-0",
   ],
 });
 

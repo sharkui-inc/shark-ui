@@ -189,7 +189,7 @@ export const CommandContent = (
         "flex flex-1 flex-col",
         "max-h-(--available-height) min-h-0",
         "overflow-hidden",
-        "outline-none",
+        "outline-hidden",
         "[:not(.has-[+[data-slot=command-footer]])]:rounded-b-2xl [:not(.has-[+[data-slot=command-footer]])]:border-b",
         className
       )}

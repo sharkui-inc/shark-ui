@@ -8,11 +8,12 @@ import { createContext } from "@ark-ui/react/utils";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { FieldLabel } from "@/registry/react/components/field";
+import { FormatNumber } from "@/registry/react/components/format";
+import { useLocale } from "@/registry/react/components/locale";
 
 export const useCircularSlider = useAngleSliderContext;
 
 interface CircularSliderContextValue {
-  ringCircumference: number;
   ringRadius: number;
   size: number;
   thickness: number;
@@ -58,7 +59,6 @@ export const CircularSlider = (props: CircularSliderProps) => {
 
   const values = React.useMemo(
     () => ({
-      ringCircumference: 2 * Math.PI * (size / 2 - thickness / 2),
       ringRadius: size / 2 - thickness / 2,
       size,
       thickness,
@@ -88,7 +88,7 @@ export const CircularSlider = (props: CircularSliderProps) => {
         {...rest}
       >
         <ArkAngleSlider.Control
-          className="group/circular-slider-control absolute inset-0"
+          className="group/circular-slider-control absolute inset-0 cursor-grab active:cursor-grabbing"
           data-slot="circular-slider-control"
         >
           <CircularSliderProgressRing />
@@ -112,18 +112,25 @@ export const CircularSlider = (props: CircularSliderProps) => {
 
 const CircularSliderProgressRing = () => {
   const api = useAngleSliderContext();
-  const { size, thickness, ringRadius, ringCircumference } =
-    _useCircularSlider();
+  const { dir } = useLocale();
+  const { size, thickness, ringRadius } = _useCircularSlider();
 
-  const percent = api.value / 360;
-  const dashLength = percent * ringCircumference;
-  const gapLength = ringCircumference - dashLength;
   const center = size / 2;
+  const displayAngle = dir === "rtl" ? (360 - api.value) % 360 : api.value;
+  const radians = (displayAngle * Math.PI) / 180;
+  const endX = center + ringRadius * Math.sin(radians);
+  const endY = center - ringRadius * Math.cos(radians);
+  const largeArcFlag = api.value > 180 ? 1 : 0;
+  const sweepFlag = dir === "rtl" ? 0 : 1;
+  const progressPath =
+    api.value === 0
+      ? null
+      : `M ${center} ${center - ringRadius} A ${ringRadius} ${ringRadius} 0 ${largeArcFlag} ${sweepFlag} ${endX} ${endY}`;
 
   return (
     <svg
       aria-hidden="true"
-      className="pointer-events-none -rotate-90"
+      className="pointer-events-none"
       height={size}
       viewBox={`0 0 ${size} ${size}`}
       width={size}
@@ -136,15 +143,14 @@ const CircularSliderProgressRing = () => {
         r={ringRadius}
         strokeWidth={thickness}
       />
-      <circle
-        className="stroke-primary [stroke-linecap:round]"
-        cx={center}
-        cy={center}
-        fill="transparent"
-        r={ringRadius}
-        strokeDasharray={`${dashLength} ${gapLength}`}
-        strokeWidth={thickness}
-      />
+      {progressPath ? (
+        <path
+          className="stroke-primary [stroke-linecap:round]"
+          d={progressPath}
+          fill="transparent"
+          strokeWidth={thickness}
+        />
+      ) : null}
     </svg>
   );
 };
@@ -168,6 +174,7 @@ export const CircularSliderThumb = (
 ) => {
   const { className, ...rest } = props;
 
+  const { dir } = useLocale();
   const { dragging } = useCircularSlider();
   const { thumbSize, ringRadius } = _useCircularSlider();
 
@@ -177,9 +184,12 @@ export const CircularSliderThumb = (
     <ArkAngleSlider.Thumb
       className={cn(
         "absolute inset-0 z-10 flex items-center justify-center",
-        "outline-none",
-        "focus-visible:[&_span]:outline-hidden focus-visible:[&_span]:ring-2 focus-visible:[&_span]:ring-ring/32",
+        "outline-hidden",
+        "focus-visible:[&_span]:border-ring/64 focus-visible:[&_span]:outline-hidden focus-visible:[&_span]:ring-2 focus-visible:[&_span]:ring-ring/24",
         "active:[&_span]:scale-110 active:[&_span]:ring-[3px] active:[&_span]:ring-ring/32",
+        // Ark's RTL drag offset depends on the pointer target. Let Control
+        // receive pointer events so it calculates the mirrored angle directly.
+        dir === "rtl" && "pointer-events-none",
         className
       )}
       data-slot="circular-slider-thumb"
@@ -239,7 +249,7 @@ export const CircularSliderValue = (props: CircularSliderValueProps) => {
         data-slot="circular-slider-value"
         {...rest}
       >
-        {prefix} {value} {suffix}
+        {prefix} <FormatNumber useGrouping={false} value={value} /> {suffix}
       </ArkAngleSlider.ValueText>
     </FieldLabel>
   );

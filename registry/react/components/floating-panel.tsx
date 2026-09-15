@@ -62,9 +62,11 @@ export const FloatingPanelContent = (props: FloatingPanelContentProps) => {
             "bg-popover",
             "text-popover-foreground",
             "rounded-2xl border shadow-lg/4",
-            "transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform",
+            "outline-hidden",
+            "origin-center transition-[scale,opacity,translate] duration-200 ease-out will-change-transform",
             "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
-            "motion-reduce:animate-none motion-reduce:transition-none",
+            "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
+            "motion-reduce:data-[state=closed]:zoom-out-100 motion-reduce:data-[state=open]:zoom-in-100 motion-reduce:transition-none",
             className
           )}
           data-slot="floating-panel-content"

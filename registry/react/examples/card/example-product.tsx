@@ -1,3 +1,4 @@
+import { createWavesAvatar } from "@/lib/dicebear";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -13,7 +14,7 @@ const Example = () => (
         <img
           alt="Green mesh gradient"
           height={128}
-          src="/images/gradients/green-dark.svg"
+          src={createWavesAvatar("studio print", "green-dark")}
           width={500}
         />
       </CardMedia>

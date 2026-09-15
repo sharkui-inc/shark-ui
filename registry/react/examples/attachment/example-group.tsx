@@ -1,3 +1,4 @@
+import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Attachment,
   AttachmentActions,
@@ -38,7 +39,7 @@ const attachments = [
   {
     name: "brand-mark.png",
     orientation: "vertical",
-    src: "/images/gradients/green-dark.svg",
+    src: createWavesAvatar("brand mark", "green-dark"),
     variant: "image",
   },
   {

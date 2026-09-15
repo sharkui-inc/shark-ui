@@ -51,13 +51,13 @@ export const ColorPickerExample = (props: React.ComponentProps<"div">) => {
           onValueChange={({ value }) => setHex(value.toString("hex"))}
         >
           <ColorPickerArea
-            className="aspect-[5/3] h-auto w-full"
+            className="aspect-5/3 h-auto w-full"
             xChannel="hue"
             yChannel="lightness"
           >
             <ColorPickerAreaThumb />
           </ColorPickerArea>
-          <ColorPickerSwatchGroup className="w-full">
+          <ColorPickerSwatchGroup className="w-full justify-center">
             {swatches.map((color) => (
               <ColorPickerSwatchTrigger
                 aria-label={color}

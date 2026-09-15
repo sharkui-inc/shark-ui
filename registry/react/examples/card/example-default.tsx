@@ -32,7 +32,7 @@ const CardDemo = () => (
       <CardFooter className="flex-col">
         <Button className="w-full">Send one-time code</Button>
         <Button className="w-full" variant="outline">
-          <GoogleIcon />
+          <GoogleIcon data-icon="inline-start" />
           Login with Google
         </Button>
       </CardFooter>

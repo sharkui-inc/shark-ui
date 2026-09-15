@@ -43,7 +43,6 @@ import { FileUploadThumb } from "@/components/thumbs/file-upload";
 import { FloatThumb } from "@/components/thumbs/float";
 import { FloatingPanelThumb } from "@/components/thumbs/floating-panel";
 import { FrameThumb } from "@/components/thumbs/frame";
-import { HintThumb } from "@/components/thumbs/hint";
 import { HoverCardThumb } from "@/components/thumbs/hover-card";
 import { ImageCropperThumb } from "@/components/thumbs/image-cropper";
 import { InputThumb } from "@/components/thumbs/input";
@@ -159,7 +158,6 @@ const THUMB_MAP: Record<string, React.ComponentType<ThumbCardProps>> = {
   float: FloatThumb,
   "floating-panel": FloatingPanelThumb,
   frame: FrameThumb,
-  hint: HintThumb,
   "hover-card": HoverCardThumb,
   "image-cropper": ImageCropperThumb,
   input: InputThumb,
@@ -267,7 +265,7 @@ export const ComponentsList = (props: ComponentsListProps) => {
                   className={cn(
                     "flex",
                     "rounded-lg",
-                    "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    "border border-transparent outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
                   )}
                   href={item.url}
                   key={item.url}

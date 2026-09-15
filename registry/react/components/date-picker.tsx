@@ -144,12 +144,13 @@ export const DatePickerContent = (
             "bg-popover",
             "text-popover-foreground",
             "rounded-xl border shadow-lg/4",
-            "outline-none",
+            "outline-hidden",
             "origin-(--transform-origin)",
+            "duration-150 ease-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=closed]:animate-out data-[state=open]:animate-in",
             "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
-            "motion-reduce:animate-none",
+            "motion-reduce:data-[state=closed]:zoom-out-100 motion-reduce:data-[state=open]:zoom-in-100",
             className
           )}
           data-slot="date-picker-content"

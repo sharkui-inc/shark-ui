@@ -76,6 +76,7 @@ export const ComponentPreviewFrame = (props: ComponentPreviewFrameProps) => {
         <TabsContent
           className="absolute inset-0"
           data-slot="tab-code"
+          dir="ltr"
           value="code"
         >
           <div

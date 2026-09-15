@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 export const useHighlight = useArkHighlight;
 
 export const highlightVariants = tv({
-  base: ["box-decoration-clone"],
+  base: ["box-decoration-clone", "bg-transparent"],
   defaultVariants: {
     variant: "default",
   },

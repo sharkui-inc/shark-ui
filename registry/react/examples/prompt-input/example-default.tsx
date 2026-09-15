@@ -218,7 +218,11 @@ const PromptInputDemo = () => {
             size="sm"
             variant="ghost"
           >
-            <FolderIcon aria-hidden="true" className="size-4" />
+            <FolderIcon
+              aria-hidden="true"
+              className="size-4"
+              data-icon="inline-start"
+            />
             viajuntos
           </Button>
           <Button
@@ -226,7 +230,11 @@ const PromptInputDemo = () => {
             size="sm"
             variant="ghost"
           >
-            <MonitorIcon aria-hidden="true" className="size-4" />
+            <MonitorIcon
+              aria-hidden="true"
+              className="size-4"
+              data-icon="inline-start"
+            />
             Local
           </Button>
           <Button
@@ -234,7 +242,11 @@ const PromptInputDemo = () => {
             size="sm"
             variant="ghost"
           >
-            <GitBranchIcon aria-hidden="true" className="size-4" />
+            <GitBranchIcon
+              aria-hidden="true"
+              className="size-4"
+              data-icon="inline-start"
+            />
             main
           </Button>
           <div className="ms-auto">

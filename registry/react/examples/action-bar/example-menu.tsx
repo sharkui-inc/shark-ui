@@ -34,7 +34,7 @@ const Example = () => (
         <Menu positioning={{ placement: "top" }}>
           <MenuTrigger asChild>
             <Button variant="ghost">
-              <EllipsisIcon />
+              <EllipsisIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">More</span>
             </Button>
           </MenuTrigger>

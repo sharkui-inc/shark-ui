@@ -119,11 +119,12 @@ export const ColorPickerContent = (
             "p-(--space)",
             "bg-popover",
             "rounded-xl border shadow-lg/4",
-            "outline-none",
+            "outline-hidden",
             "origin-(--transform-origin)",
+            "duration-150 ease-out",
             "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
             "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
-            "motion-reduce:animate-none",
+            "motion-reduce:data-[state=closed]:zoom-out-100 motion-reduce:data-[state=open]:zoom-in-100",
             className
           )}
           data-slot="color-picker-content"
@@ -186,7 +187,7 @@ export const ColorPickerSlider = (
           "size-4.5",
           "-translate-1/2",
           "rounded-full border-[3px] border-white shadow-[0_0_0_1px_rgb(0_0_0/0.08),inset_0_0_0_1px_rgb(0_0_0/0.08)]",
-          "outline-none ring-1 ring-border/64",
+          "outline-hidden ring-1 ring-border/64",
           "origin-left data-[orientation=vertical]:origin-bottom rtl:origin-right",
           "cursor-grab",
           dragging && "cursor-grabbing"
@@ -223,6 +224,7 @@ export const ColorPickerSwatchGroup = (
   props: React.ComponentProps<typeof ArkColorPicker.SwatchGroup>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <ArkColorPicker.SwatchGroup
       className={cn("flex flex-wrap items-center gap-2", className)}
@@ -243,11 +245,11 @@ export const ColorPickerSwatchTrigger = (
         "relative",
         "size-8",
         "flex items-center justify-center",
-        "rounded-full",
-        "transition-[border-color,box-shadow] duration-100 ease-out will-change-transform",
-        "outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "rounded-full border border-transparent",
+        "transition-[border-color,box-shadow] duration-[120ms] ease-out will-change-transform",
+        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
-        "data-[state=checked]:shadow-sm/4 data-[state=checked]:ring-(--color) data-[state=checked]:ring-2",
+        "data-[state=checked]:shadow-sm/4 data-[state=checked]:ring-2 data-[state=checked]:ring-foreground/24",
         "motion-reduce:transition-none",
         className
       )}
@@ -269,8 +271,8 @@ export const ColorPickerSwatch = (
         "shrink-0",
         "overflow-hidden",
         "rounded-[inherit]",
-        "transition-transform duration-100 ease-out will-change-transform",
-        "not-[data-state=checked]:hover:scale-110",
+        "transition-transform duration-[120ms] ease-out will-change-transform",
+        "[@media(hover:hover)_and_(pointer:fine)]:not-[data-state=checked]:hover:scale-110",
         "data-[state=checked]:scale-[0.8]",
         "motion-reduce:transition-none",
         className
@@ -387,7 +389,7 @@ export const ColorPickerAreaThumb = (
       className={cn(
         "size-4.5",
         "rounded-full border-[3px] border-white shadow-[0_0_0_1px_rgb(0_0_0/0.08),inset_0_0_0_1px_rgb(0_0_0/0.08)]",
-        "outline-none ring-border/64",
+        "outline-hidden ring-border/64",
         "cursor-grab",
         dragging && "cursor-grabbing",
         "data-disabled:pointer-events-none data-disabled:opacity-64",

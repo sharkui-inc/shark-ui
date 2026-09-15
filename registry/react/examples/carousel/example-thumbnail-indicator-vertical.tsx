@@ -1,3 +1,4 @@
+import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Carousel,
   CarouselContent,
@@ -11,7 +12,7 @@ import {
 
 const Example = () => (
   <Carousel
-    className="h-40 w-full max-w-48 sm:max-w-64"
+    className="h-40 w-full max-w-48"
     loop
     orientation="vertical"
     slideCount={slides.length}
@@ -46,23 +47,23 @@ const Example = () => (
 const slides = [
   {
     alt: "Green mesh gradient",
-    src: "/images/gradients/green-dark.svg",
+    src: createWavesAvatar("green carousel slide", "green-dark"),
   },
   {
     alt: "Blue mesh gradient",
-    src: "/images/gradients/blue.svg",
+    src: createWavesAvatar("blue carousel slide", "blue"),
   },
   {
     alt: "Purple mesh gradient",
-    src: "/images/gradients/purple.svg",
+    src: createWavesAvatar("purple carousel slide", "purple"),
   },
   {
     alt: "Orange mesh gradient",
-    src: "/images/gradients/orange.svg",
+    src: createWavesAvatar("orange carousel slide", "orange"),
   },
   {
     alt: "Rose mesh gradient",
-    src: "/images/gradients/rose.svg",
+    src: createWavesAvatar("rose carousel slide", "rose"),
   },
 ];
 

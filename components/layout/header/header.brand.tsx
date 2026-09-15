@@ -41,7 +41,7 @@ export const HeaderBrand = (
           "font-bold text-base",
           "rounded-md border border-transparent",
           "cursor-pointer",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          "focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
           className
         )}
         {...rest}

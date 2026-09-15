@@ -1,3 +1,4 @@
+import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Item,
   ItemContent,
@@ -32,17 +33,17 @@ const images = [
   {
     alt: "Midnight City Lights",
     description: "Electric Nights · Neon Dreams · 3:45",
-    src: "/images/gradients/blue.svg",
+    src: createWavesAvatar("Midnight City Lights", "blue"),
   },
   {
     alt: "Coffee Shop Conversations",
     description: "Urban Stories · The Morning Brew · 4:05",
-    src: "/images/gradients/orange.svg",
+    src: createWavesAvatar("Coffee Shop Conversations", "orange"),
   },
   {
     alt: "Digital Rain",
     description: "Binary Beats · Cyber Symphony · 3:30",
-    src: "/images/gradients/purple.svg",
+    src: createWavesAvatar("Digital Rain", "purple"),
   },
 ];
 

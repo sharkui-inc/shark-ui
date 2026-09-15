@@ -1,4 +1,5 @@
 import { CompassIcon, HomeIcon, LibraryIcon, SearchIcon } from "lucide-react";
+import { createWavesAvatar } from "@/lib/dicebear";
 
 export const NAV_ITEMS = [
   { group: "Browse", icon: HomeIcon, label: "Home" },
@@ -8,12 +9,12 @@ export const NAV_ITEMS = [
 ] as const;
 
 const ART = [
-  "/images/gradients/green-dark.svg",
-  "/images/gradients/blue.svg",
-  "/images/gradients/purple.svg",
-  "/images/gradients/orange.svg",
-  "/images/gradients/rose.svg",
-  "/images/gradients/amber.svg",
+  createWavesAvatar("Mira Vale", "green-dark"),
+  createWavesAvatar("Northbound", "blue"),
+  createWavesAvatar("Juniper Club", "purple"),
+  createWavesAvatar("Morrow", "orange"),
+  createWavesAvatar("Kite Theory", "rose"),
+  createWavesAvatar("Lumen", "amber"),
 ] as const;
 
 export const TRACKS = [

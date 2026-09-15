@@ -1,10 +1,15 @@
 "use client";
 
 import { InfoIcon } from "lucide-react";
-import React from "react";
+import type React from "react";
+import {
+  type PreviewLanguage,
+  PreviewLocaleProvider,
+  usePreviewLocale,
+} from "@/hooks/use-preview-locale";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
-import { LocaleProvider } from "@/registry/react/components/locale";
+import { LocaleProvider, useLocale } from "@/registry/react/components/locale";
 import {
   NativeSelect,
   NativeSelectOption,
@@ -43,67 +48,40 @@ const previewLocales = [
   },
 ] as const;
 
-export type RTLPreviewLocale = (typeof previewLocales)[number]["locale"];
-export type RTLPreviewLanguage = (typeof previewLocales)[number]["language"];
-
-const RTLPreviewContext = React.createContext<
-  (typeof previewLocales)[number] | null
->(null);
-const RTLPreviewLanguageSetterContext = React.createContext<
-  ((language: RTLPreviewLanguage) => void) | null
->(null);
+const getPreviewLocale = (language: PreviewLanguage) =>
+  previewLocales.find((item) => item.language === language) ??
+  previewLocales[0];
 
 interface RTLPreviewProps
   extends Omit<React.ComponentProps<"div">, "children"> {
-  children?:
-    | React.ReactNode
-    | ((language: RTLPreviewLanguage) => React.ReactNode);
-  contentClassName?: string;
+  children?: React.ReactNode | ((language: PreviewLanguage) => React.ReactNode);
 }
 
 type RTLPreviewProviderProps = React.ComponentProps<"div">;
 
 type RTLPreviewContentProps = React.ComponentProps<"div">;
 
-export const useRTLPreviewLanguage = () => {
-  const current = React.useContext(RTLPreviewContext);
-
-  if (!current) {
-    throw new Error("RTL preview parts must be used within RTLPreviewProvider");
-  }
-
-  return current;
-};
-
 export const RTLPreviewProvider = (props: RTLPreviewProviderProps) => {
   const { children, className, ...rest } = props;
-  const [language, setLanguage] = React.useState<RTLPreviewLanguage>("ar");
-  const current =
-    previewLocales.find((item) => item.language === language) ??
-    previewLocales[0];
 
   return (
-    <RTLPreviewLanguageSetterContext.Provider value={setLanguage}>
-      <RTLPreviewContext.Provider value={current}>
-        <div
-          className={cn("w-full", "flex flex-col", className)}
-          data-slot="rtl-preview"
-          {...rest}
-        >
-          {children}
-        </div>
-      </RTLPreviewContext.Provider>
-    </RTLPreviewLanguageSetterContext.Provider>
+    <PreviewLocaleProvider>
+      <div
+        className={cn("w-full", "flex flex-col", className)}
+        data-slot="rtl-preview"
+        dir="ltr"
+        {...rest}
+      >
+        {children}
+      </div>
+    </PreviewLocaleProvider>
   );
 };
 
 export const RTLPreviewHeader = () => {
-  const current = useRTLPreviewLanguage();
-  const setLanguage = React.useContext(RTLPreviewLanguageSetterContext);
+  const { locale, setLocale } = usePreviewLocale();
 
-  if (!setLanguage) {
-    throw new Error("RTLPreviewHeader must be used within RTLPreviewProvider");
-  }
+  const current = getPreviewLocale(locale);
 
   return (
     <div
@@ -112,19 +90,17 @@ export const RTLPreviewHeader = () => {
     >
       <NativeSelect
         aria-label="Preview language"
-        onChange={(event) =>
-          setLanguage(event.target.value as RTLPreviewLanguage)
-        }
-        value={current.language}
+        onChange={(event) => setLocale(event.target.value as PreviewLanguage)}
+        value={locale}
       >
         {previewLocales.map((item) => (
-          <NativeSelectOption key={item.locale} value={item.language}>
+          <NativeSelectOption key={item.language} value={item.language}>
             {item.label}
           </NativeSelectOption>
         ))}
       </NativeSelect>
 
-      <ToggleTooltip positioning={{ placement: "bottom-start" }}>
+      <ToggleTooltip positioning={{ placement: "bottom-end" }}>
         <ToggleTooltipTrigger asChild>
           <Button aria-label={current.a11yLabel} size="icon-sm" variant="ghost">
             <InfoIcon aria-hidden="true" />
@@ -144,7 +120,7 @@ export const RTLPreviewHeader = () => {
             <p
               className="px-2 py-1.5 text-start"
               dir={item.dir}
-              key={item.locale}
+              key={item.language}
               lang={item.locale}
             >
               {item.content}
@@ -158,40 +134,62 @@ export const RTLPreviewHeader = () => {
 
 export const RTLPreviewContent = (props: RTLPreviewContentProps) => {
   const { children, ...rest } = props;
-  const { dir, locale } = useRTLPreviewLanguage();
+
+  const { locale: language } = usePreviewLocale();
+  const { locale } = getPreviewLocale(language);
 
   return (
     <LocaleProvider locale={locale}>
-      <div data-slot="rtl-preview-content" dir={dir} lang={locale} {...rest}>
+      <RTLPreviewLocalizedContent {...rest}>
         {children}
-      </div>
+      </RTLPreviewLocalizedContent>
     </LocaleProvider>
   );
 };
 
+const RTLPreviewLocalizedContent = (props: RTLPreviewContentProps) => {
+  const { children, className, ...rest } = props;
+
+  const { dir, locale } = useLocale();
+
+  return (
+    <div
+      className={cn(
+        "w-full min-w-0",
+        "flex items-center justify-center",
+        className
+      )}
+      data-slot="rtl-preview-content"
+      dir={dir}
+      lang={locale}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
+};
+
 export const RTLPreview = (props: RTLPreviewProps) => {
-  const { children, className, contentClassName, ...rest } = props;
+  const { children, className, ...rest } = props;
 
   return (
     <RTLPreviewProvider className={className} {...rest}>
       <RTLPreviewHeader />
-      <RTLPreviewLayout contentClassName={contentClassName}>
-        {children}
-      </RTLPreviewLayout>
+      <RTLPreviewLayout>{children}</RTLPreviewLayout>
     </RTLPreviewProvider>
   );
 };
 
-interface RTLPreviewLayoutProps {
+interface RTLPreviewLayoutProps
+  extends Omit<React.ComponentProps<typeof RTLPreviewContent>, "children"> {
   children: RTLPreviewProps["children"];
-  contentClassName?: string;
 }
 
 const RTLPreviewLayout = (props: RTLPreviewLayoutProps) => {
-  const { children, contentClassName } = props;
-  const { language } = useRTLPreviewLanguage();
-  const content =
-    typeof children === "function" ? children(language) : children;
+  const { children, ...rest } = props;
+
+  const { locale } = usePreviewLocale();
+  const content = typeof children === "function" ? children(locale) : children;
 
   return (
     <RTLPreviewContent
@@ -199,8 +197,9 @@ const RTLPreviewLayout = (props: RTLPreviewLayoutProps) => {
         "min-w-0 flex-1",
         "flex items-center justify-center",
         "p-4",
-        contentClassName
+        "rounded-xl border"
       )}
+      {...rest}
     >
       {content}
     </RTLPreviewContent>

@@ -136,7 +136,7 @@ export const CodeBlockHeader = (props: CodeBlockHeaderProps) => {
 export const CodeBlockFilename = (
   props: React.ComponentProps<typeof ark.span>
 ) => {
-  const { className, ...rest } = props;
+  const { className, style, ...rest } = props;
   return (
     <ark.span
       className={cn(
@@ -145,6 +145,8 @@ export const CodeBlockFilename = (
         className
       )}
       data-slot="code-block-filename"
+      dir="ltr"
+      style={{ unicodeBidi: "isolate", ...style }}
       {...rest}
     />
   );
@@ -456,9 +458,9 @@ const getTokenKey = (token: ThemedToken) => {
 const CodeToken = ({ token }: { token: ThemedToken }) => (
   <span
     className={cn(
-      "dark:!bg-[var(--shiki-dark-bg)] dark:!text-[var(--shiki-dark)]",
+      "dark:bg-(--shiki-dark-bg)! dark:text-(--shiki-dark)!",
       "[font-style:var(--shiki-light-font-style,normal)] dark:[font-style:var(--shiki-dark-font-style,var(--shiki-light-font-style,normal))]",
-      "[font-weight:var(--shiki-light-font-weight,inherit)] dark:[font-weight:var(--shiki-dark-font-weight,var(--shiki-light-font-weight,inherit))]",
+      "font-(--shiki-light-font-weight,inherit) dark:font-(--shiki-dark-font-weight,var(--shiki-light-font-weight,inherit))",
       "[text-decoration:var(--shiki-light-text-decoration,none)] dark:[text-decoration:var(--shiki-dark-text-decoration,var(--shiki-light-text-decoration,none))]"
     )}
     style={
@@ -526,7 +528,7 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "sticky start-0 z-10 inline-block w-11 select-none pe-3 text-end text-muted-foreground",
+                    "sticky inset-s-0 z-10 inline-block w-11 select-none pe-3 text-end text-muted-foreground",
                     highlighted ? "bg-primary/8" : "bg-card",
                     highlighted && "border-primary border-s-2"
                   )}
@@ -585,7 +587,7 @@ export const CodeBlockContent = (props: CodeBlockContentProps) => {
   const tokens = getDisplayedTokens(code, language, snapshot);
 
   return (
-    <ScrollArea className="flex-1">
+    <ScrollArea className="flex-1" dir="ltr">
       <CodeBlockPre tokens={tokens} {...preProps} />
     </ScrollArea>
   );

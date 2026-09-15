@@ -90,7 +90,7 @@ export const BottomNavigationItem = (
         "transition-colors",
         "hover:text-foreground",
         "aria-selected:text-primary",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "border border-transparent focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "[&_svg:not([class*='size-'])]:size-5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         "has-[data-slot=bottom-navigation-item-label]:size-4",

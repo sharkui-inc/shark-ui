@@ -3,6 +3,7 @@
 import { RefreshCwIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "@/components/examples/example-toast";
+import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Avatar,
   AvatarFallback,
@@ -71,7 +72,7 @@ export const InputOTPExample = (props: React.ComponentProps<"div">) => {
         <Avatar size="lg">
           <AvatarImage
             alt="Green mesh gradient"
-            src="/images/gradients/green-dark.svg"
+            src={createWavesAvatar("input otp", "green-dark")}
           />
           <AvatarFallback>YO</AvatarFallback>
         </Avatar>

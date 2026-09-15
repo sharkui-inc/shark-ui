@@ -58,10 +58,10 @@ export const AccordionTrigger = (
         "py-4",
         "text-start font-medium text-sm",
         "rounded-md border border-transparent",
-        "outline-none",
+        "outline-hidden",
         "transition-[border-color,box-shadow,opacity]",
         "disabled:pointer-events-none disabled:opacity-64 disabled:grayscale",
-        "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
+        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "[&_[data-state=open]>svg]:rotate-180",
         "motion-reduce:transition-none",
         className
@@ -79,7 +79,7 @@ export const AccordionTrigger = (
             "shrink-0",
             "text-muted-foreground",
             "pointer-events-none",
-            "transition-transform duration-300",
+            "transition-transform duration-150 ease-out",
             "motion-reduce:transition-none"
           )}
         />
@@ -96,9 +96,10 @@ export const AccordionContent = (
   return (
     <ArkAccordion.ItemContent
       className={cn(
+        "[--radix-accordion-content-height:var(--height)]",
         "overflow-hidden rounded-md text-sm",
-        "data-[state=open]:animate-slide-down",
-        "data-[state=closed]:animate-slide-up",
+        "data-[state=open]:animate-accordion-down data-[state=open]:duration-200 data-[state=open]:ease-out",
+        "data-[state=closed]:animate-accordion-up data-[state=closed]:duration-200 data-[state=closed]:ease-out",
         "motion-reduce:animate-none",
         className
       )}

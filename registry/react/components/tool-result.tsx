@@ -106,9 +106,9 @@ export const ToolResultTrigger = (
         "px-3 py-1",
         "text-start",
         "rounded-md",
-        "outline-none",
+        "outline-hidden",
         "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
-        "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         className
       )}
       data-align="start"
@@ -179,7 +179,7 @@ export const ToolResultMeta = (
 export const ToolResultName = (
   props: React.ComponentProps<typeof ark.span>
 ) => {
-  const { className, ...rest } = props;
+  const { className, style, ...rest } = props;
 
   return (
     <ark.span
@@ -189,6 +189,8 @@ export const ToolResultName = (
         className
       )}
       data-slot="tool-result-name"
+      dir="ltr"
+      style={{ unicodeBidi: "isolate", ...style }}
       {...rest}
     />
   );

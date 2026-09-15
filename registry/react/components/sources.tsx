@@ -30,11 +30,20 @@ export const Sources = (props: React.ComponentProps<typeof Collapsible>) => {
 
 interface SourcesTriggerProps
   extends React.ComponentProps<typeof CollapsibleTrigger> {
+  /**
+   * The number of sources used.
+   */
   count?: number;
+  /**
+   * Whether to show the trigger indicator.
+   *
+   * Defaults to `true`.
+   */
+  showTrigger?: boolean;
 }
 
 export const SourcesTrigger = (props: SourcesTriggerProps) => {
-  const { children, className, count, ...rest } = props;
+  const { count, showTrigger = true, className, children, ...rest } = props;
 
   return (
     <CollapsibleTrigger
@@ -48,12 +57,10 @@ export const SourcesTrigger = (props: SourcesTriggerProps) => {
       data-slot="sources-trigger"
       {...rest}
     >
-      {children ?? (
-        <>
-          <span>Used {count ?? 0} sources</span>
-          <CollapsibleIndicator className="size-3.5" />
-        </>
-      )}
+      {children ?? <span>Used {count ?? 0} sources</span>}
+      {showTrigger ? (
+        <CollapsibleIndicator className="size-3.5 rtl:rotate-180" />
+      ) : null}
     </CollapsibleTrigger>
   );
 };
@@ -90,10 +97,10 @@ export const Source = (props: SourceProps) => {
         "text-foreground text-sm",
         "rounded-lg",
         "border border-transparent",
-        "outline-none",
+        "outline-hidden",
         "hover:bg-muted",
         "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
-        "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
+        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         className
       )}
       data-slot="source"
@@ -104,7 +111,7 @@ export const Source = (props: SourceProps) => {
     >
       <BookIcon aria-hidden="true" />
       <span className="min-w-0 truncate">{children ?? title}</span>
-      <ArrowUpRightIcon aria-hidden="true" />
+      <ArrowUpRightIcon aria-hidden="true" className="rtl:-scale-x-100" />
     </ark.a>
   );
 };

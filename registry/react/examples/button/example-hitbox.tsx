@@ -18,7 +18,7 @@ const Example = () => {
             checked={show}
             onCheckedChange={({ checked }) => setShow(checked)}
           />
-          <FieldLabel>Show hitbox</FieldLabel>
+          <FieldLabel>Hitbox</FieldLabel>
         </Field>
       </div>
 

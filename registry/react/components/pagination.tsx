@@ -14,6 +14,7 @@ import {
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
+import { FormatNumber } from "@/registry/react/components/format";
 
 export const usePagination = usePaginationContext;
 
@@ -157,31 +158,26 @@ export const PaginationItem = (
   );
 };
 
-interface PaginationItemsProps
-  extends Omit<React.ComponentProps<typeof ArkPagination.Context>, "children"> {
-  /** Formats the visible page number. */
-  formatPage?: (page: number) => React.ReactNode;
-}
+type PaginationItemsProps = Omit<
+  React.ComponentProps<typeof ArkPagination.Context>,
+  "children"
+>;
 
-export const PaginationItems = (props: PaginationItemsProps) => {
-  const { formatPage = String, ...rest } = props;
-
-  return (
-    <ArkPagination.Context data-slot="pagination-item s" {...rest}>
-      {({ pages }) =>
-        pages.map((page, index) =>
-          page.type === "page" ? (
-            <PaginationItem key={page.value} type="page" value={page.value}>
-              {formatPage(page.value)}
-            </PaginationItem>
-          ) : (
-            <PaginationEllipsis index={index} key={`ellipsis-${index}`} />
-          )
+export const PaginationItems = (props: PaginationItemsProps) => (
+  <ArkPagination.Context data-slot="pagination-item s" {...props}>
+    {({ pages }) =>
+      pages.map((page, index) =>
+        page.type === "page" ? (
+          <PaginationItem key={page.value} type="page" value={page.value}>
+            <FormatNumber useGrouping={false} value={page.value} />
+          </PaginationItem>
+        ) : (
+          <PaginationEllipsis index={index} key={`ellipsis-${index}`} />
         )
-      }
-    </ArkPagination.Context>
-  );
-};
+      )
+    }
+  </ArkPagination.Context>
+);
 
 interface PaginationItemLinkProps extends React.ComponentProps<typeof Button> {
   /**

@@ -17,15 +17,14 @@ export interface ComponentPreviewExampleProps
 
 export const getComponentPreviewExample = async (
   componentName: string,
-  previewFileName = "example-default",
-  sourceFileName = previewFileName
+  fileName = "example-default"
 ) => {
   const example = await import(
-    `@/${registryPath}/${componentName}/${previewFileName}.tsx`
+    `@/${registryPath}/${componentName}/${fileName}.tsx`
   );
 
   if (!example.default) {
-    throw new Error(`File ${previewFileName} not found`);
+    throw new Error(`File ${fileName} not found`);
   }
 
   const Example = example.default;
@@ -34,7 +33,7 @@ export const getComponentPreviewExample = async (
     process.cwd(),
     registryPath,
     componentName,
-    `${sourceFileName}.tsx`
+    `${fileName}.tsx`
   );
 
   return {

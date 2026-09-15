@@ -2,6 +2,7 @@
 
 import { ArrowUpRightIcon, AudioWaveformIcon } from "lucide-react";
 import { useState } from "react";
+import { createWavesAvatar } from "@/lib/dicebear";
 import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Item,
@@ -90,7 +91,7 @@ export const MusicSidebar = () => {
               <img
                 alt=""
                 height={44}
-                src="/images/gradients/amber.svg"
+                src={createWavesAvatar("Fresh this week", "amber")}
                 width={44}
               />
             </ItemMedia>

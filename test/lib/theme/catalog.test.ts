@@ -202,8 +202,8 @@ describe("createCssVars", () => {
         const runtimeBlock = runtimeThemes.slice(runtimeStart, runtimeEnd + 1);
 
         for (const [block, ringShade] of [
-          [rootBlock, darkShade],
-          [darkBlock, "500"],
+          [rootBlock, "950"],
+          [darkBlock, "50"],
         ] as const) {
           assert.ok(
             block.includes(`--primary: var(--color-${palette}-${shade});`)
@@ -302,6 +302,7 @@ describe("createCssVars", () => {
         const muted = mixInSrgb(surface, background, 0.04);
         const secondary = mixInSrgb(surface, background, 0.08);
         const secondaryHover = mixInSrgb(surface, background, 0.16);
+        const input = mixInSrgb(surface, background, light ? 0.1 : 0.08);
         const mutedForeground = mixInSrgb(
           oklchToLinearRgb(tailwindColor(palette, "500")),
           surface,
@@ -320,13 +321,11 @@ describe("createCssVars", () => {
             if (neutral) {
               primaryShade = light ? "800" : "100";
               primaryForegroundShade = light ? "50" : "800";
-              ringShade = light ? "600" : "400";
+              ringShade = light ? "950" : "50";
             } else {
               primaryShade = getPrimaryToneShade(primary.value, tone.value);
               primaryForegroundShade = tone.value === "light" ? "950" : "50";
-              ringShade = light
-                ? getPrimaryToneShade(primary.value, "dark")
-                : "500";
+              ringShade = light ? "950" : "50";
             }
             const primaryFill = oklchToLinearRgb(
               tailwindColor(primaryPalette, primaryShade)
@@ -361,12 +360,27 @@ describe("createCssVars", () => {
                 contrast >= 4.5,
                 `${base.value} ${mode} ${primary.value} ${tone.value} foreground on ${name} is ${contrast.toFixed(2)}:1`
               );
-              const ringContrast = contrastRatioForRgb(ring, value);
+              const focusBorder = mixInSrgb(ring, value, 0.64);
+              const focusHalo = mixInSrgb(ring, value, 0.24);
+              const ringContrast = contrastRatioForRgb(focusBorder, value);
               assert.ok(
                 ringContrast >= 3,
-                `${base.value} ${mode} ${primary.value} ${tone.value} ring on ${name} is ${ringContrast.toFixed(2)}:1`
+                `${base.value} ${mode} ${primary.value} ${tone.value} focus border on ${name} is ${ringContrast.toFixed(2)}:1`
+              );
+              assert.ok(
+                ringContrast > contrastRatioForRgb(focusHalo, value),
+                `${base.value} ${mode} ${primary.value} ${tone.value} focus border must be stronger than its halo on ${name}`
               );
             }
+
+            const inputFocusContrast = contrastRatioForRgb(
+              mixInSrgb(ring, input, 0.64),
+              input
+            );
+            assert.ok(
+              inputFocusContrast >= 3,
+              `${base.value} ${mode} ${primary.value} ${tone.value} ring on input is ${inputFocusContrast.toFixed(2)}:1`
+            );
 
             for (const [name, value] of [
               ["primary", primaryFill],
@@ -376,6 +390,15 @@ describe("createCssVars", () => {
               assert.ok(
                 contrast >= 4.5,
                 `${primary.value} ${tone.value} ${name} is ${contrast.toFixed(2)}:1`
+              );
+
+              const primaryFocusBorderContrast = contrastRatioForRgb(
+                background,
+                value
+              );
+              assert.ok(
+                primaryFocusBorderContrast >= 3,
+                `${base.value} ${mode} ${primary.value} ${tone.value} background focus border on ${name} is ${primaryFocusBorderContrast.toFixed(2)}:1`
               );
             }
           }

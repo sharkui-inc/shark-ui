@@ -37,20 +37,7 @@ npx shadcn@latest add @shark/tree-view
 
 <RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following rules into your CSS file:</Step>
-
-```css showLineNumbers
-@theme inline {
-  @keyframes expand {
-    from { height: var(--collapsed-height, 0); }
-    to { height: var(--height); }
-  }
-  @keyframes collapse {
-    from { height: var(--height); }
-    to { height: var(--collapsed-height, 0); }
-  }
-}
-```
+<Step>Ensure your CSS entry imports `tw-animate-css`.</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -211,6 +198,8 @@ Use the `fileIcons` prop on `TreeView` with `createFileIcons` to map file extens
 
 
 ## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 <RTLComponentPreview componentName="tree-view" />
 

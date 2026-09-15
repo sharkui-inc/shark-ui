@@ -42,7 +42,7 @@ export const MessageScrollerViewport = (
   return (
     <ArkScrollArea.Viewport
       className={cn(
-        "scrollbar-none size-full min-h-0 min-w-0 overflow-y-auto overscroll-contain outline-none contain-content",
+        "scrollbar-none size-full min-h-0 min-w-0 overflow-y-auto overscroll-contain outline-hidden contain-content",
         "data-overflow-y:not-data-at-top:mask-t-from-[calc(100%-var(--fade-size))]",
         "data-overflow-y:not-data-at-bottom:mask-b-from-[calc(100%-var(--fade-size))]",
         "data-overflow-x:not-data-at-left:mask-l-from-[calc(100%-var(--fade-size))]",
@@ -116,9 +116,9 @@ export const MessageScrollerButton = (props: MessageScrollerButtonProps) => {
       aria-label={ariaLabel}
       className={cn(
         "absolute start-1/2 -translate-x-1/2 border-border bg-background text-foreground rtl:translate-x-1/2",
-        "transition-[translate,scale,opacity] duration-200",
+        "transition-[translate,scale,opacity] duration-150 ease-out",
         "hover:bg-muted hover:text-foreground",
-        "data-[active=false]:pointer-events-none data-[active=false]:scale-95 data-[active=false]:opacity-0 data-[active=false]:duration-400",
+        "data-[active=false]:pointer-events-none data-[active=false]:scale-95 data-[active=false]:opacity-0",
         "data-[active=true]:translate-y-0 data-[active=true]:scale-100 data-[active=true]:opacity-100",
         "data-[direction=end]:data-[active=false]:translate-y-full data-[direction=end]:bottom-4",
         "data-[direction=start]:data-[active=false]:-translate-y-full data-[direction=start]:top-4",

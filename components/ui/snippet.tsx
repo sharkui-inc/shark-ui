@@ -242,11 +242,7 @@ export const Snippet = (props: SnippetProps) => {
         value={copyValue}
       >
         <InputGroup
-          className={cn(
-            "w-full",
-            "focus-within:border-input focus-within:ring-0",
-            isMultiline && "h-auto"
-          )}
+          className={cn("w-full", isMultiline && "h-auto")}
           size={size}
         >
           {content}

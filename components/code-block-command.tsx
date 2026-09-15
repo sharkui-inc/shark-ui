@@ -53,7 +53,6 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
         "bg-code",
         "text-code-foreground",
         "overflow-hidden",
-        "outline-none",
         "rounded-2xl border",
         "in-data-[tab=code]:border-0",
         className

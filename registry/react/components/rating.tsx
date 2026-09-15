@@ -102,7 +102,7 @@ export const RatingItem = (
         "inline-flex items-center justify-center",
         "not-[[data-disabled],[data-readonly]]:cursor-pointer",
         "data-disabled:opacity-64 data-disabled:grayscale",
-        "outline-none",
+        "outline-hidden",
         className
       )}
       data-slot="rating-item"

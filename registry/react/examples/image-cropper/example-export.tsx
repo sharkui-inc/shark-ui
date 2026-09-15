@@ -1,5 +1,6 @@
 "use client";
 
+import { createWavesAvatar } from "@/lib/dicebear";
 import { Button } from "@/registry/react/components/button";
 import {
   ImageCropper,
@@ -10,7 +11,10 @@ import {
 
 const Example = () => (
   <ImageCropper className="aspect-video w-full max-w-lg">
-    <ImageCropperImage alt="Crop me" src="/images/gradients/green-dark.svg" />
+    <ImageCropperImage
+      alt="Crop me"
+      src={createWavesAvatar("image cropper", "green-dark")}
+    />
     <ImageCropperSelection />
     <ImageCropperContext>
       {(cropper) => (

@@ -1,5 +1,6 @@
 import { GalleryVerticalEndIcon } from "lucide-react";
 import type { Metadata } from "next";
+import { createWavesAvatar } from "@/lib/dicebear";
 import { createMetadata } from "@/lib/metadata";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -91,7 +92,7 @@ const AuthTemplate = () => (
         alt="Onda workspace"
         className="absolute inset-0 size-full object-cover"
         height={500}
-        src="/images/gradients/green-dark.svg"
+        src={createWavesAvatar("Onda workspace", "green-dark")}
         width={800}
       />
     </div>

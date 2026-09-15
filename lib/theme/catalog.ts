@@ -139,8 +139,8 @@ const primaryTokens = (
 const primaryCssVars = (value: PrimaryColorName): PrimaryCssVars => {
   if (value === "neutral") {
     return {
-      dark: primaryTokens("neutral", "100", "800", "400"),
-      light: primaryTokens("neutral", "800", "50", "600"),
+      dark: primaryTokens("neutral", "100", "800", "50"),
+      light: primaryTokens("neutral", "800", "50", "950"),
     };
   }
 
@@ -235,7 +235,7 @@ const baseThemeTokens = (palette: string, mode: "light" | "dark") => {
     primary: foreground,
     "primary-foreground": foregroundSurface,
     "primary-hover": `color-mix(in srgb, ${foreground} 92%, var(--color-${palette}-950))`,
-    ring: `var(--color-${palette}-${light ? "600" : "400"})`,
+    ring: `var(--color-${palette}-${light ? "950" : "50"})`,
     secondary: `color-mix(in srgb, ${surface} 8%, var(--background))`,
     "secondary-foreground": foreground,
     "secondary-hover": `color-mix(in srgb, ${surface} 16%, var(--background))`,
@@ -246,7 +246,7 @@ const baseThemeTokens = (palette: string, mode: "light" | "dark") => {
     "sidebar-foreground": `color-mix(in srgb, ${foreground} 80%, var(--sidebar))`,
     "sidebar-primary": foreground,
     "sidebar-primary-foreground": foregroundSurface,
-    "sidebar-ring": `var(--color-${palette}-${light ? "600" : "400"})`,
+    "sidebar-ring": `var(--color-${palette}-${light ? "950" : "50"})`,
   };
 };
 
@@ -417,14 +417,14 @@ const primaryToneTokens = (
     dark: {
       ...primaryCss.dark,
       ...sharedTokens,
-      ring: `var(--color-${palette}-500)`,
-      "sidebar-ring": `var(--color-${palette}-500)`,
+      ring: `var(--color-${palette}-50)`,
+      "sidebar-ring": `var(--color-${palette}-50)`,
     },
     light: {
       ...primaryCss.light,
       ...sharedTokens,
-      ring: `var(--color-${palette}-${getPrimaryToneShade(palette, "dark")})`,
-      "sidebar-ring": `var(--color-${palette}-${getPrimaryToneShade(palette, "dark")})`,
+      ring: `var(--color-${palette}-950)`,
+      "sidebar-ring": `var(--color-${palette}-950)`,
     },
   };
 };

@@ -146,7 +146,7 @@ const treeViewControlVariants = tv({
     "rounded-md border-none",
     "cursor-pointer",
     "hover:bg-muted hover:text-foreground",
-    "outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:-outline-offset-2",
+    "border border-transparent outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
     "data-selected:bg-accent data-selected:text-accent-foreground",
     "data-focus:bg-muted data-focus:text-foreground",
     "data-disabled:opacity-64 data-disabled:grayscale",
@@ -259,7 +259,7 @@ export const TreeViewBranchIndicator = (
       className={cn(
         "inline-flex shrink-0 items-center justify-center",
         "text-muted-foreground",
-        "origin-center transition-transform duration-150",
+        "origin-center transition-transform duration-150 ease-out",
         "data-[state=open]:rotate-90 rtl:data-[state=closed]:-rotate-180",
         "[&_svg]:size-3.5 [&_svg]:shrink-0",
         "motion-reduce:transition-none",
@@ -281,9 +281,10 @@ export const TreeViewBranchContent = (
   return (
     <ArkTreeView.BranchContent
       className={cn(
+        "[--radix-collapsible-content-height:var(--height)]",
         "relative overflow-hidden",
-        "data-[state=open]:animate-[expand_150ms_ease-out]",
-        "data-[state=closed]:animate-[collapse_150ms_ease-out]",
+        "data-[state=open]:animate-collapsible-down data-[state=open]:duration-150 data-[state=open]:ease-out",
+        "data-[state=closed]:animate-collapsible-up data-[state=closed]:duration-150 data-[state=closed]:ease-out",
         "motion-reduce:animate-none",
         className
       )}
@@ -449,7 +450,7 @@ const TreeViewNodeInput = (
         "border-primary bg-popover text-foreground",
         "rounded-md border",
         "selection:bg-primary/24 selection:text-foreground",
-        "outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
+        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         className
       )}
       data-slot="tree-view-node-rename-input"

@@ -20,7 +20,7 @@ export const Textarea = (
         "rounded-lg border border-input shadow-xs/4",
         "placeholder:text-muted-foreground",
         "transition-[color,box-shadow]",
-        "outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
+        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "aria-invalid:border-destructive aria-invalid:text-destructive aria-invalid:ring-[3px] aria-invalid:ring-destructive/24",
         "data-invalid:border-destructive data-invalid:text-destructive data-invalid:ring-[3px] data-invalid:ring-destructive/24",
         "dark:aria-invalid:border-destructive-foreground dark:aria-invalid:text-destructive-foreground dark:aria-invalid:ring-destructive-foreground/32",

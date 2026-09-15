@@ -50,12 +50,15 @@ export const mdxComponents = {
     return (
       <Link
         className={cn(
+          "relative",
+          "max-w-full",
           "inline-flex items-center gap-0.5",
+          "-mx-1 px-1",
           "font-medium text-foreground",
           "rounded-md border border-transparent",
-          "underline underline-offset-4",
-          "hover:underline",
-          "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          "no-underline",
+          "outline-hidden",
+          "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
           "**:[code]:decoration-primary",
           className
         )}
@@ -66,8 +69,10 @@ export const mdxComponents = {
         })}
         {...props}
       >
-        {children}
-        {isExternal && <ArrowUpRightIcon className="size-3.5 opacity-90" />}
+        <span className="underline underline-offset-4">{children}</span>
+        {isExternal ? (
+          <ArrowUpRightIcon className="size-3.5 opacity-90" />
+        ) : null}
       </Link>
     );
   },
@@ -101,7 +106,6 @@ export const mdxComponents = {
             "bg-primary/5",
             "font-mono text-primary text-sm",
             "rounded-md",
-            "outline-none",
             className
           )}
           {...props}
@@ -397,11 +401,14 @@ const HeadingAnchor = ({ id, children }: React.ComponentProps<"a">) => {
     <a
       className={cn(
         "group",
-        "-mx-2 px-2",
-        "rounded-md",
+        "relative",
+        "max-w-full",
+        "inline-block",
+        "-mx-1 px-1",
+        "rounded-md border border-transparent",
         "no-underline underline-offset-4",
-        "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        "border border-transparent"
+        "outline-hidden",
+        "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
       )}
       href={`#${id}`}
     >
@@ -410,7 +417,7 @@ const HeadingAnchor = ({ id, children }: React.ComponentProps<"a">) => {
       </span>
       <span
         aria-hidden="true"
-        className="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100"
+        className="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
       >
         #
       </span>

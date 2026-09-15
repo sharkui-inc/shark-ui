@@ -40,7 +40,7 @@ export const MailListItem = ({
     )}
   >
     <button
-      className="flex min-w-0 flex-1 items-start gap-3 text-start outline-none"
+      className="flex min-w-0 flex-1 items-start gap-3 text-start outline-hidden"
       onClick={() => onSelect(email.id)}
       type="button"
     >

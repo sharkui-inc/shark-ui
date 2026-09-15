@@ -186,7 +186,7 @@ const DateInputSegment = (
         "not-data-[type=literal]:focus:bg-primary not-data-[type=literal]:focus:text-primary-foreground",
         "data-[type=literal]:select-none data-[type=literal]:px-px data-[type=literal]:text-muted-foreground",
         "data-placeholder-shown:text-muted-foreground",
-        "outline-none",
+        "outline-hidden",
         "data-readonly:cursor-default",
         "group-aria-invalid/date-input:text-destructive group-data-invalid/date-input:text-destructive",
         "not-data-[type=literal]:focus:group-data-invalid/date-input:bg-destructive not-data-[type=literal]:focus:group-data-invalid/date-input:text-white",

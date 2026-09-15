@@ -44,6 +44,7 @@ export const JsonTreeView = (props: JsonTreeViewProps) => {
         className
       )}
       data-slot="json-tree-view"
+      dir="ltr"
       lazyMount={lazyMount}
       unmountOnExit={unmountOnExit}
       {...rest}

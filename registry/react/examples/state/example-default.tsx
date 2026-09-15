@@ -31,7 +31,8 @@ const StateDemo = () => (
     </StateContent>
     <Button asChild className="text-muted-foreground" size="sm" variant="link">
       <a aria-label="Learn more about creating projects" href="#">
-        Learn More <ArrowUpRightIcon aria-hidden="true" />
+        Learn More{" "}
+        <ArrowUpRightIcon aria-hidden="true" data-icon="inline-end" />
       </a>
     </Button>
   </State>

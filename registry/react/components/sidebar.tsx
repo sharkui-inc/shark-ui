@@ -232,13 +232,11 @@ export const Sidebar = (props: SidebarProps) => {
           "relative",
           "w-(--sidebar-width)",
           "bg-transparent",
-          "transition-[width] duration-200 ease-linear",
           "group-data-[collapsible=offcanvas]:w-0",
           "group-data-[placement=right]:rotate-180",
           variant === "floating" || variant === "inset"
             ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]"
-            : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)",
-          "motion-reduce:transition-none"
+            : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)"
         )}
         data-slot="sidebar-gap"
       />
@@ -248,14 +246,12 @@ export const Sidebar = (props: SidebarProps) => {
           "w-(--sidebar-width)",
           "hidden md:flex",
           "h-svh",
-          "transition-[inset-inline-start,inset-inline-end,width] duration-200 ease-linear",
           placement === "left"
             ? "inset-s-0 group-data-[collapsible=offcanvas]:-inset-s-(--sidebar-width)"
             : "inset-e-0 group-data-[collapsible=offcanvas]:-inset-e-(--sidebar-width)",
           variant === "floating" || variant === "inset"
             ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
             : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[placement=right]:border-s group-data-[placement=left]:border-e",
-          "motion-reduce:transition-none",
           className
         )}
         data-slot="sidebar-container"
@@ -316,7 +312,6 @@ export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
         "absolute inset-y-0 z-20 -translate-x-1/2",
         "w-4",
         "hidden sm:flex",
-        "transition-[inset-inline-start,inset-inline-end,translate,background-color] ease-linear",
         "after:absolute after:inset-s-1/2 after:inset-y-0 after:w-0.5",
         "hover:after:bg-sidebar-border",
         "group-data-[placement=left]:-inset-e-4 group-data-[placement=right]:inset-s-0",
@@ -325,7 +320,6 @@ export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
         "group-data-[collapsible=offcanvas]:translate-x-0 hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:after:inset-s-full",
         "[[data-placement=left][data-collapsible=offcanvas]_&]:-inset-e-2",
         "[[data-placement=right][data-collapsible=offcanvas]_&]:-inset-s-2",
-        "motion-reduce:transition-none",
         className
       )}
       data-sidebar="rail"
@@ -450,11 +444,9 @@ export const SidebarGroup = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn(
         "relative flex w-full min-w-0 flex-col p-2",
-        "transition-[padding] duration-200 ease-linear",
         "group-data-[collapsible=icon]:py-0",
         "first:group-data-[collapsible=icon]:pt-2",
         "last:group-data-[collapsible=icon]:pb-2",
-        "motion-reduce:transition-none",
         className
       )}
       data-sidebar="group"
@@ -477,11 +469,8 @@ export const SidebarGroupLabel = (
         "flex shrink-0 items-center",
         "font-medium text-sidebar-foreground text-xs",
         "rounded-md",
-        "transition-[margin,opacity] duration-200 ease-linear",
-        "outline-hidden ring-sidebar-ring focus-visible:ring-2",
         "[&_svg]:size-4 [&_svg]:shrink-0",
         "group-data-[collapsible=icon]:pointer-events-none group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
-        "motion-reduce:transition-none",
         className
       )}
       data-sidebar="group-label"
@@ -601,7 +590,6 @@ export const SidebarMenuButton = ({
         "peer/menu-button group/menu-button",
         "flex w-full min-w-0",
         "justify-start",
-        "border-0",
         "h-8 p-2",
         "overflow-hidden",
         "transition-[width,height,padding]",
@@ -613,7 +601,7 @@ export const SidebarMenuButton = ({
         "group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0!",
         "group-data-[collapsible=icon]:[&>:not(:first-child)]:hidden",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-        "focus-visible:sidebar-ring-[3px] outline-none focus-visible:ring-sidebar-ring/32",
+        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "active:bg-sidebar-accent active:text-sidebar-accent-foreground",
         "data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground",
         "group-has-data-[sidebar=menu-action]/menu-item:pe-8",
@@ -802,7 +790,7 @@ export const SidebarMenuSubButton = (props: SidebarMenuSubButtonProps) => {
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         "active:bg-sidebar-accent active:text-sidebar-accent-foreground",
         "data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground",
-        "focus-visible:sidebar-ring-[3px] focus-visible:ring-sidebar-ring/32",
+        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "[&>span:last-child]:truncate",
         "[&_svg]:text-sidebar-accent-foreground",
         className

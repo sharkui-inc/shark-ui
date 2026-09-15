@@ -4,6 +4,7 @@ import { useFilter, useListCollection } from "@ark-ui/react";
 import {
   Combobox,
   ComboboxContent,
+  ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
@@ -36,6 +37,7 @@ const Example = () => {
           placeholder="Select an item..."
         />
         <ComboboxContent>
+          <ComboboxEmpty />
           <ComboboxList>
             {collection.items.map((item) => (
               <ComboboxItem item={item} key={item.value}>

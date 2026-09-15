@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "@/components/examples/example-toast";
 import { AppleIcon } from "@/components/icons/apple";
 import { GoogleIcon } from "@/components/icons/google";
+import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Avatar,
   AvatarFallback,
@@ -57,7 +58,7 @@ export const LoginFormExample = (props: React.ComponentProps<"div">) => {
         <Avatar size="lg">
           <AvatarImage
             alt="Green mesh gradient"
-            src="/images/gradients/purple.svg"
+            src={createWavesAvatar("create account", "purple")}
           />
           <AvatarFallback>AC</AvatarFallback>
         </Avatar>

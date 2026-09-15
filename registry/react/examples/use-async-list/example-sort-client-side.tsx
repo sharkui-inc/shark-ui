@@ -97,7 +97,11 @@ const UseAsyncListDemo = () => {
                     variant="ghost"
                   >
                     {label}
-                    <Icon aria-hidden="true" className="size-3.5" />
+                    <Icon
+                      aria-hidden="true"
+                      className="size-3.5"
+                      data-icon="inline-end"
+                    />
                   </Button>
                 </TableHead>
               );

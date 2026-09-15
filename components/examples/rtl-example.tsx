@@ -56,7 +56,7 @@ const translations = {
 } as const;
 
 export const RTLExample = () => (
-  <RTLPreview className="h-[500px]" contentClassName="rounded-xl border">
+  <RTLPreview className="h-[500px]">
     {(locale) => {
       const t = translations[locale];
 

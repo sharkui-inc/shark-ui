@@ -107,8 +107,9 @@ export const MessageBubbleContent = (
       className={cn(
         "wrap-break-word w-fit min-w-0 max-w-full overflow-hidden rounded-xl border border-transparent px-3 py-2 text-sm leading-relaxed",
         "group-data-[align=end]/message-bubble:self-end",
-        "[button,a]:outline-none [button,a]:transition-colors [button]:text-start",
-        "[button,a]:focus-visible:border-ring [button,a]:focus-visible:ring-3 [button,a]:focus-visible:ring-ring/48",
+        "[button,a]:outline-hidden [button,a]:transition-colors [button]:text-start",
+        "[button,a]:focus-visible:border-ring/64 [button,a]:focus-visible:ring-2 [button,a]:focus-visible:ring-ring/24",
+        "group-data-[variant=default]/message-bubble:[button,a]:focus-visible:border-background",
         className
       )}
       {...rest}
@@ -143,10 +144,11 @@ export const MessageBubbleTrigger = (
         "group-data-[variant=outline]/message-bubble:text-foreground",
         "group-data-[variant=secondary]/message-bubble:text-secondary-foreground",
         "group-data-[variant=tinted]/message-bubble:text-foreground",
-        "outline-none",
-        "focus-visible:ring-3 focus-visible:ring-ring/48",
+        "outline-hidden",
+        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "group-data-[variant=default]/message-bubble:focus-visible:border-background",
         "[&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0",
-        "transition-opacity duration-200 ease-out",
+        "transition-opacity duration-150 ease-out",
         "motion-reduce:transition-none",
         className
       )}
@@ -162,7 +164,7 @@ export const MessageBubbleTrigger = (
           "pointer-fine:group-hover/message-bubble:translate-x-0",
           "group-focus-visible/message-bubble-trigger:translate-x-0",
           "group-data-[state=open]/message-bubble-trigger:translate-x-0",
-          "transition-transform duration-200 ease-out",
+          "transition-transform duration-150 ease-out",
           "motion-reduce:transition-none"
         )}
       >

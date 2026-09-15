@@ -1,3 +1,4 @@
+import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Card,
   CardContent,
@@ -47,7 +48,7 @@ const preview = {
   description:
     "An advanced online playground for Tailwind CSS that lets you use all of your custom config.",
   hostname: "play.tailwindcss.com",
-  image: "/images/gradients/green-dark.svg",
+  image: createWavesAvatar("Tailwind Play", "green-dark"),
   title: "Tailwind Play",
   url: "https://play.tailwindcss.com",
 };

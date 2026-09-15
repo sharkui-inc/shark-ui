@@ -116,7 +116,7 @@ export const TocIndicator = (
       className={cn(
         "absolute inset-s-0 w-0.5 rounded-full bg-foreground",
         "h-(--height) -translate-x-1/2 translate-y-(--top) rtl:translate-x-1/2",
-        "transition-[height,translate] duration-200",
+        "transition-[height,translate] duration-150 ease-in-out",
         "motion-reduce:transition-none",
         className
       )}
@@ -144,11 +144,16 @@ export const TocLink = (props: React.ComponentProps<typeof ArkToc.Link>) => {
   return (
     <ArkToc.Link
       className={cn(
-        "block py-1",
+        "relative",
+        "w-fit max-w-full",
+        "inline-block",
+        "-mx-1 px-1 py-1",
         "text-muted-foreground",
+        "rounded-md border border-transparent",
+        "outline-hidden",
         "hover:text-foreground",
+        "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "data-active:font-medium data-active:text-foreground",
-        "outline-none focus-visible:text-foreground",
         className
       )}
       data-slot="toc-link"

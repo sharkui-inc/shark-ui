@@ -74,6 +74,7 @@ export const PopoverContent = (props: PopoverContentProps) => {
             "rounded-xl border shadow-lg/4",
             "outline-hidden",
             "origin-(--transform-origin)",
+            "duration-150 ease-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
             "data-[state=closed]:animate-out data-[state=open]:animate-in",
@@ -81,7 +82,8 @@ export const PopoverContent = (props: PopoverContentProps) => {
             "data-[placement=left]:slide-in-from-end-2",
             "data-[placement=right]:slide-in-from-start-2",
             "data-[placement=top]:slide-in-from-bottom-2",
-            "motion-reduce:animate-none",
+            "motion-reduce:data-[state=closed]:zoom-out-100 motion-reduce:data-[state=open]:zoom-in-100",
+            "motion-reduce:data-[placement=bottom]:slide-in-from-top-0 motion-reduce:data-[placement=left]:slide-in-from-end-0 motion-reduce:data-[placement=right]:slide-in-from-start-0 motion-reduce:data-[placement=top]:slide-in-from-bottom-0",
             className
           )}
           data-slot="popover-content"

@@ -114,6 +114,7 @@ export const MarqueeEdge = (
         "group-data-[orientation=horizontal]/marquee:h-full group-data-[orientation=horizontal]/marquee:w-1/4",
         "group-data-[orientation=vertical]/marquee:h-1/4 group-data-[orientation=vertical]/marquee:w-full",
         "pointer-events-none",
+        "rtl:rotate-180",
         "from-background to-transparent",
         "data-[side=start]:bg-linear-to-r",
         "data-[side=end]:bg-linear-to-l",

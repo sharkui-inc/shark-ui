@@ -96,7 +96,7 @@ const CatalogNavigation = ({
                   key={category.slug}
                   value={category.slug}
                 >
-                  <AccordionTrigger className="w-full justify-start gap-2 rounded-lg px-3 py-2 font-medium text-muted-foreground text-xs hover:bg-muted hover:text-foreground focus-visible:border-transparent [&_[data-slot=accordion-indicator]_svg]:size-3.5 [&_[data-slot=accordion-indicator]_svg]:translate-y-0 [&_[data-slot=accordion-indicator]_svg]:text-muted-foreground">
+                  <AccordionTrigger className="w-full justify-start gap-2 rounded-lg px-3 py-2 font-medium text-muted-foreground text-xs hover:bg-muted hover:text-foreground [&_[data-slot=accordion-indicator]_svg]:size-3.5 [&_[data-slot=accordion-indicator]_svg]:translate-y-0 [&_[data-slot=accordion-indicator]_svg]:text-muted-foreground">
                     <span className="min-w-0 truncate">{category.label}</span>
                     <span className="ms-auto font-normal text-xs tabular-nums">
                       {categoryCount}

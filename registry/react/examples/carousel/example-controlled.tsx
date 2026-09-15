@@ -14,12 +14,10 @@ import {
 const Example = () => {
   const [page, setPage] = React.useState(0);
 
-  const slides = Array.from({ length: 8 });
-
   return (
     <div className="flex flex-col gap-4">
       <Carousel
-        className="w-full max-w-48 sm:max-w-64"
+        className="w-full max-w-48"
         onPageChange={({ page }) => setPage(page)}
         page={page}
         slideCount={slides.length}
@@ -47,5 +45,7 @@ const Example = () => {
     </div>
   );
 };
+
+const slides = Array.from({ length: 8 });
 
 export default Example;

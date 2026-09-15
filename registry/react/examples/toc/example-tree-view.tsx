@@ -211,7 +211,7 @@ const TreeNode = (props: NodeProviderProps<TocNode>) => {
     <TreeViewNode indexPath={indexPath} node={node}>
       <TocItem className="contents" item={item}>
         <TreeViewContent asChild>
-          <TocLink href={`#${item.value}`}>
+          <TocLink className="mx-0 w-full px-0" href={`#${item.value}`}>
             <TreeViewItem>{node.name}</TreeViewItem>
           </TocLink>
         </TreeViewContent>

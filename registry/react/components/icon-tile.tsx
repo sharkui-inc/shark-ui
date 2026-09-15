@@ -14,7 +14,7 @@ export const iconTileVariants = tv({
     "[a&]:transition-colors [button&]:transition-colors",
     "disabled:pointer-events-none disabled:opacity-64",
     "aria-disabled:pointer-events-none aria-disabled:opacity-64",
-    "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/32",
+    "border border-transparent outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
     "motion-reduce:transition-none",
   ],
   defaultVariants: {
@@ -39,6 +39,7 @@ export const iconTileVariants = tv({
         "bg-primary",
         "text-primary-foreground",
         "[a&]:hover:bg-primary-hover [button&]:hover:bg-primary-hover",
+        "focus-visible:border-background",
       ],
       outline: [
         "bg-background",

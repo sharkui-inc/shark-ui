@@ -23,7 +23,7 @@ Conflict order: explicit user or system instructions, then `biome.json`, then th
 - Use semantic tokens (`text-muted-foreground`, `bg-destructive`, `border-input`), not raw palette classes. Skip manual `dark:` palette pairs when tokens cover the case.
 - Surface hierarchy is intentional: `muted` and `accent` are neutral `/4`; `secondary` is neutral `/8`; `secondary-hover` is neutral `/16`; `sidebar-accent` is neutral `/4` over the sidebar. Accent communicates interactive context without becoming a second primary surface.
 - Solid semantic controls use opaque `primary-hover`, `secondary-hover`, or `destructive-hover` tokens. Do not use translucent `primary`, `secondary`, or destructive `/80` hover fills for solid controls: their final color depends on the parent surface. Contextual status feedback may use its documented `/8` to `/24` layers.
-- Focus uses `border-ring` and `ring-ring`; primary fill communicates actions and explicit selected indicators, while the ring token communicates keyboard focus with verified contrast.
+- Every focus-owning control uses `outline-hidden` plus `border-ring/64 ring-2 ring-ring/24`. Keep a base `border border-transparent` when the control has no structural border, so focus does not shift layout; fields keep `border-input` until focused. Both layers derive from the configured primary: the stronger `/64` border carries contrast and the `/24` ring is a quieter outer reinforcement. The only exception is a control whose own interactive surface is solid `bg-primary`: it uses an opaque `border-background` with the same `ring-2 ring-ring/24`, so the border remains visible inside the fill. `outline-hidden` suppresses the browser outline while preserving it in forced-colors mode. Do not use `outline-none` unless a documented accessibility exception requires suppressing focus in forced-colors mode. Static and decorative elements do not receive outline utilities.
 - Prefer built-in variants and semantic tokens before restyling with `className`. Use `className` for layout.
 - Prefer `flex` or `grid` with `gap-*` over `space-x-*` / `space-y-*`. Use `size-*` for squares and icons. Use `truncate`, not the expanded utility sequence.
 - Prefer `data-slot` and existing `in-*` / `peer` patterns when extending registry styles.
@@ -31,6 +31,10 @@ Conflict order: explicit user or system instructions, then `biome.json`, then th
 - Import named Lucide icons. Size them with Tailwind classes, never the numeric `size` prop. Mark decorative icons `aria-hidden="true"`; leave semantic icons exposed unless equivalent text is present.
 - Use logical utilities (`ms-*`, `me-*`, `ps-*`, `pe-*`, `start-*`, `end-*`) instead of physical direction. Use `slide-*-from-start|end` animations and propagate `dir` from `useLocale` when applicable.
 - Use physical direction only for an explicitly LTR surface, visual coordinates, or geometry unrelated to reading order. Keep the exception explicit and document why it cannot follow `dir`.
+- Motion is tactile and contained, and declared locally in each component with Tailwind and `tw-animate-css`: press uses `duration-[120ms] ease-out`; controls and anchored overlays use `duration-150 ease-out`; dialogs and sheets use `duration-200 ease-out`; the documented Ark geometry exception uses `duration-150 ease-in-out`. Do not add shared duration, easing, animation, or keyframe tokens to `styles/globals.css`.
+- Drawer is the sole motion exception: it may use local Tailwind transitions over the Ark swipe variables (`--drawer-translate-x/y`, `--drawer-swipe-progress`, and `--drawer-swipe-strength`) so the panel follows a gesture without lag and settles from its current position. The panel slides at `duration-300 ease-out` without a fade; the backdrop keeps its independent `duration-[450ms] ease-out` fade. Disable transitions while swiping; use the local, strength-derived close duration only on both surfaces. Do not add Drawer keyframes, tokens, or CSS outside `drawer.tsx`.
+- Do not add interface keyframes, animation tokens, or easing curves to `styles/globals.css`; compose all other interface motion from `tw-animate-css` utilities in the owning component. Existing marquee and indeterminate-progress keyframes are technical implementations, never reusable interface recipes. An overlay anchored by Ark positioning must use `origin-(--transform-origin)`, 98% scale, fade, placement-aware travel, and the local overlay classes. Centered dialogs and coordinate-positioned floating panels deliberately use `origin-center`. Do not use `scale(0)`, `ease-in`, `ease-linear`, `transition-all`, or arbitrary easing functions.
+- Reduced motion retains a short fade but removes travel, scale, rotation, and blur. Gate hover transforms behind `(hover: hover)` and `(pointer: fine)`.
 
 ### Class lists
 
@@ -76,16 +80,16 @@ className={cn(
   "font-sans text-sm text-popover-foreground",
   "rounded-2xl border shadow-lg/4",
   "overflow-hidden",
-  "outline-none",
-  "origin-top translate-y-(--offset)",
-  "transition-[opacity,translate] duration-200 ease-in-out will-change-transform",
+  "outline-hidden",
+  "origin-(--transform-origin) translate-y-(--offset)",
+  "transition-[opacity,translate] duration-150 ease-out will-change-transform",
   "hover:bg-muted/48",
-  "focus-visible:ring-[3px] focus-visible:ring-ring/32",
+  "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
   "disabled:pointer-events-none disabled:opacity-64",
   "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
   "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
   "[&_svg]:pointer-events-none [&_svg]:shrink-0",
-  "motion-reduce:animate-none motion-reduce:transition-none",
+  "motion-reduce:data-[state=closed]:zoom-out-100 motion-reduce:data-[state=open]:zoom-in-100 motion-reduce:transition-none",
   className
 )}
 ```
@@ -97,7 +101,7 @@ Use only these visual alpha values: `0`, `4`, `8`, `16`, `24`, `32`, `48`, `64`,
 - Choose alpha by semantic role, not by visual nudging. Text and informative icons use opaque semantic tokens by default; placeholders must meet WCAG AA on their effective background.
 - Disabled controls use `opacity-64` together with their semantic disabled state and blocked interaction. Do not dim a still-interactive control with element opacity.
 - Use `opacity-0` and `opacity-100` for visibility transitions. Gesture- or animation-derived values may use a CSS variable or `calc()` when documented locally.
-- Reserve `/4` for neutral elevation; `/8` and `/16` for subtle feedback or selection; `/24` for subtle validation and decoration; `/32` for standard focus and scrims; `/48` for reinforced focus and present muted surfaces; `/64` for validated supporting content; `/80` for strong translucent layers; and `/96` for fixed blurred surfaces.
+- Reserve `/4` for neutral elevation; `/8` and `/16` for subtle feedback or selection; `/24` for subtle validation, decoration, and the outer keyboard-focus ring; `/32` for scrims; `/48` for present muted surfaces; `/64` for validated supporting content and the contrast-bearing keyboard-focus border; `/80` for strong translucent layers; and `/96` for fixed blurred surfaces.
 - Do not add opacity for consistency alone. It is appropriate only for disabled state, interaction reveal, elevation, media, charts, and decorative content.
 - Exclude `color-mix()` token recipes, user-entered color values, and calculated gesture opacity from this scale.
 - A translucent state is allowed only when it is intentionally a contextual layer and its text, icon, border, and focus contrast have been validated on the effective composited background.

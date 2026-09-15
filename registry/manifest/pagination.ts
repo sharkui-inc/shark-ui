@@ -6,7 +6,10 @@ const dependencies = ["@ark-ui/react", "lucide-react"];
 const manifest: RegistryItemType = {
   dependencies,
   name: "pagination",
-  registryDependencies: [absoluteUrl("/r/button.json")],
+  registryDependencies: [
+    absoluteUrl("/r/button.json"),
+    absoluteUrl("/r/format.json"),
+  ],
   type: "registry:ui",
 };
 

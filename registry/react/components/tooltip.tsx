@@ -21,7 +21,8 @@ export const tooltipContentVariants = tv({
     "bg-foreground",
     "text-background text-xs",
     "rounded-lg shadow-lg/4",
-    "origin-(--transform-origin) animate-in",
+    "outline-hidden",
+    "origin-(--transform-origin) animate-in duration-150 ease-out",
     "fade-in-0 zoom-in-[98%]",
     "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%]",
     "data-[state=closed]:animate-out",
@@ -29,7 +30,8 @@ export const tooltipContentVariants = tv({
     "data-[placement=left]:slide-in-from-end-2",
     "data-[placement=right]:slide-in-from-start-2",
     "data-[placement=top]:slide-in-from-bottom-2",
-    "motion-reduce:animate-none",
+    "motion-reduce:zoom-in-100 motion-reduce:data-[state=closed]:zoom-out-100",
+    "motion-reduce:data-[placement=bottom]:slide-in-from-top-0 motion-reduce:data-[placement=left]:slide-in-from-end-0 motion-reduce:data-[placement=right]:slide-in-from-start-0 motion-reduce:data-[placement=top]:slide-in-from-bottom-0",
   ],
 });
 

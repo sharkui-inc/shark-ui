@@ -96,7 +96,7 @@ export const PlanHeader = (props: PlanHeaderProps) => {
       className={cn(
         "flex w-full min-w-0 items-center gap-3 px-3 py-2 text-start",
         description ? "min-h-14" : "min-h-10",
-        "hover:bg-muted/48 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "border border-transparent hover:bg-muted/48 focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
         "transition-colors duration-150 motion-reduce:transition-none",
         className
       )}
@@ -254,7 +254,7 @@ export const PlanItemTrigger = (props: PlanItemTriggerProps) => {
   const sharedClassName = cn(
     "grid min-h-9 w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-lg px-2 py-1.5 text-start",
     collapsible &&
-      "cursor-pointer hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+      "cursor-pointer border border-transparent hover:bg-muted focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
     status === "in-progress" && "bg-muted/64",
     "transition-colors duration-150 motion-reduce:transition-none",
     "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
@@ -319,7 +319,7 @@ export const PlanItemDetail = (props: React.ComponentProps<typeof ark.div>) => {
 export const PlanItemDetailFile = (
   props: React.ComponentProps<typeof Badge>
 ) => {
-  const { variant = "outline", className, ...rest } = props;
+  const { variant = "outline", className, style, ...rest } = props;
 
   return (
     <Badge
@@ -328,7 +328,9 @@ export const PlanItemDetailFile = (
         className
       )}
       data-slot="plan-item-detail-file"
+      dir="ltr"
       size="sm"
+      style={{ unicodeBidi: "isolate", ...style }}
       variant={variant}
       {...rest}
     />

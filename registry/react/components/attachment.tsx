@@ -253,7 +253,7 @@ export const AttachmentTrigger = (
 
   return (
     <ark.button
-      className={cn("absolute inset-0 z-10 outline-none", className)}
+      className={cn("absolute inset-0 z-10 outline-hidden", className)}
       data-slot="attachment-trigger"
       type={type ?? "button"}
       {...rest}

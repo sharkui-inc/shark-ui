@@ -1,3 +1,4 @@
+import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Attachment,
   AttachmentActions,
@@ -11,7 +12,7 @@ const Example = () => (
       <img
         alt=""
         height={104}
-        src="/images/gradients/green-dark.svg"
+        src={createWavesAvatar("brand mark", "green-dark")}
         width={104}
       />
     </AttachmentMedia>

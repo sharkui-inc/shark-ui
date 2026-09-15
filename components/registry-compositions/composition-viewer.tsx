@@ -175,7 +175,16 @@ export const CompositionViewer = ({
           <Separator className="hidden h-4 sm:block" orientation="vertical" />
           <Heading className="min-w-0 flex-1 basis-32 truncate font-medium text-sm">
             <a
-              className="outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/32"
+              className={cn(
+                "relative",
+                "max-w-full",
+                "inline-block",
+                "-mx-1 px-1",
+                "rounded-md border border-transparent",
+                "outline-hidden",
+                "hover:text-foreground",
+                "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+              )}
               href={`#${item.name}`}
             >
               {item.title}

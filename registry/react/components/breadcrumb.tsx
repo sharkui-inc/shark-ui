@@ -55,11 +55,14 @@ export const BreadcrumbLink = (props: React.ComponentProps<typeof ark.a>) => {
   return (
     <ark.a
       className={cn(
+        "relative",
+        "-mx-1 px-1",
         "text-nowrap",
         "rounded-md border border-transparent",
+        "outline-hidden",
         "transition-colors",
         "hover:text-foreground",
-        "outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "motion-reduce:transition-none",
         className
       )}

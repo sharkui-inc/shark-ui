@@ -1,6 +1,5 @@
 "use client";
 
-import { BrainIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -65,7 +64,6 @@ export const ReasoningTrigger = (props: ReasoningTriggerProps) => {
     >
       {children ?? (
         <>
-          <BrainIcon aria-hidden="true" />
           <span className={cn("inline-block", isStreaming && "shimmer")}>
             {label}
           </span>
@@ -83,10 +81,7 @@ export const ReasoningContent = (
 
   return (
     <CollapsibleContent
-      className={cn(
-        "ps-6 text-muted-foreground text-sm leading-relaxed",
-        className
-      )}
+      className={cn("text-muted-foreground text-sm leading-relaxed", className)}
       data-slot="reasoning-content"
       {...rest}
     />

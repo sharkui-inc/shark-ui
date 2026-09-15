@@ -43,7 +43,7 @@ const UseAsyncListDemo = () => {
         onClick={list.reload}
         variant="outline"
       >
-        {!!list.loading && <Spinner />}
+        {!!list.loading && <Spinner data-icon="inline-start" />}
         {list.loading ? "Loading" : "Reload quotes"}
       </Button>
       {!!list.error && (

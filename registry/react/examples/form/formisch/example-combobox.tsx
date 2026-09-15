@@ -22,6 +22,7 @@ import {
 import {
   Combobox,
   ComboboxContent,
+  ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
@@ -88,6 +89,7 @@ const Example = () => {
                       showClear
                     />
                     <ComboboxContent>
+                      <ComboboxEmpty />
                       <ComboboxList>
                         {collection.items.map((item) => (
                           <ComboboxItem item={item} key={item.value}>

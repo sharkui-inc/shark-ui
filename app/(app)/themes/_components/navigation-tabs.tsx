@@ -23,15 +23,13 @@ export const NavigationTabs = () => {
         onValueChange={onValueChange}
         value={visibleTab}
       >
-        <div className="max-w-full overflow-x-auto">
-          <TabsList>
-            {TABS.map((item) => (
-              <TabsTrigger key={item.slug} value={item.slug}>
-                {item.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </div>
+        <TabsList>
+          {TABS.map((item) => (
+            <TabsTrigger key={item.slug} value={item.slug}>
+              {item.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
       </Tabs>
       <div className="relative min-h-0 flex-1">
         <TemplatePreviewHost

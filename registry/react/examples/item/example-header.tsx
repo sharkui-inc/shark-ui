@@ -1,3 +1,4 @@
+import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Item,
   ItemContent,
@@ -34,17 +35,17 @@ const Example = () => (
 const models = [
   {
     description: "Everyday tasks and UI generation.",
-    image: "/images/gradients/green-dark.svg",
+    image: createWavesAvatar("v0-1.5-sm", "green-dark"),
     name: "v0-1.5-sm",
   },
   {
     description: "Advanced thinking or reasoning.",
-    image: "/images/gradients/rose.svg",
+    image: createWavesAvatar("v0-1.5-lg", "rose"),
     name: "v0-1.5-lg",
   },
   {
     description: "Open Source model for everyone.",
-    image: "/images/gradients/amber.svg",
+    image: createWavesAvatar("v0-2.0-mini", "amber"),
     name: "v0-2.0-mini",
   },
 ];

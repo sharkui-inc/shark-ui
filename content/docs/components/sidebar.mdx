@@ -191,11 +191,11 @@ React to collapse mode and peer state with utilities.
 </SidebarMenuItem>
 ```
 
-## Safe Areas
+## RTL
 
-Fixed sidebars keep their content clear of the anchored side safe area. The mobile sidebar inherits the same behavior from [Sheet](/docs/components/sheet).
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
-This takes effect when the consuming app enables `viewport-fit=cover`; browsers without a safe area keep the existing layout.
+<PreviewIframe wide src="/view/blocks/sidebar/rtl" title="Sidebar RTL" className="min-h-[550px]" />
 
 ## Keyboard shortcut
 
@@ -371,7 +371,7 @@ Collapsible groups pair with [Collapsible](/docs/components/collapsible). `Sideb
     <div className="flex items-center gap-2 px-2">
       <SidebarGroupLabel className="flex-1 px-0">Help</SidebarGroupLabel>
       <CollapsibleTrigger
-        className="rounded-md p-1.5 outline-none ring-sidebar-ring focus-visible:ring-2"
+        className="rounded-md border border-transparent p-1.5 outline-hidden focus-visible:border-sidebar-ring/64 focus-visible:ring-2 focus-visible:ring-sidebar-ring/24"
         type="button"
       >
         <ChevronDown className="size-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
@@ -480,6 +480,7 @@ import { useSidebar } from "@/components/ui/sidebar";
 
 export function CustomTrigger() {
   const { toggleSidebar } = useSidebar();
+
   return <button type="button" onClick={toggleSidebar}>Toggle</button>;
 }
 ```

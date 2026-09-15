@@ -134,7 +134,7 @@ export const TagsInputItem = (props: TagsInputItemProps) => {
         "bg-secondary",
         "in-data-[size=lg]:text-sm text-secondary-foreground text-xs",
         "[--input-group-inset:--spacing(0.5)]",
-        "in-data-[pill=true]/tags-input:rounded-full rounded-md border outline-none",
+        "in-data-[pill=true]/tags-input:rounded-full rounded-md border outline-hidden",
         "data-highlighted:border-primary/32 data-highlighted:bg-primary/8",
         className
       )}
@@ -246,7 +246,7 @@ export const TagsInputClearTrigger = (
     >
       <InputGroupButton
         className={cn(
-          "size-5.5 in-data-[size=lg]:size-6.5 in-data-[size=sm]:size-4.5",
+          "in-data-[size=lg]:size-6.5 in-data-[size=sm]:size-4.5 size-5.5",
           "ms-auto shrink-0 self-center text-muted-foreground hover:text-foreground",
           className
         )}

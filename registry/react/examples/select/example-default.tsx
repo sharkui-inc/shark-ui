@@ -10,41 +10,26 @@ import {
   SelectValue,
 } from "@/registry/react/components/select";
 
-interface SelectDemoProps {
-  heading?: string;
-  items?: string[];
-  placeholder?: string;
-}
+const SelectDemo = () => (
+  <Select collection={collection}>
+    <SelectTrigger className="w-48">
+      <SelectValue placeholder="Select a fruit" />
+    </SelectTrigger>
 
-export const SelectDemo = (props: SelectDemoProps) => {
-  const {
-    heading = "Fruits",
-    items = initialItems,
-    placeholder = "Select a fruit",
-  } = props;
-  const collection = createListCollection({ items });
+    <SelectContent>
+      <SelectGroup heading="Fruits">
+        {collection.items.map((item) => (
+          <SelectItem item={item} key={item}>
+            {item}
+          </SelectItem>
+        ))}
+      </SelectGroup>
+    </SelectContent>
+  </Select>
+);
 
-  return (
-    <Select collection={collection}>
-      <SelectTrigger className="w-48">
-        <SelectValue placeholder={placeholder} />
-      </SelectTrigger>
+const collection = createListCollection({
+  items: ["Banana", "Apple", "Orange", "Pineapple"],
+});
 
-      <SelectContent>
-        <SelectGroup heading={heading}>
-          {collection.items.map((item) => (
-            <SelectItem item={item} key={item}>
-              {item}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-  );
-};
-
-const initialItems = ["Banana", "Apple", "Orange", "Pineapple"];
-
-const SelectDefaultExample = () => <SelectDemo />;
-
-export default SelectDefaultExample;
+export default SelectDemo;

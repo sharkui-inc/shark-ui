@@ -30,7 +30,7 @@ const Example = () => {
     <DatePicker onValueChange={({ value }) => setValue(value)} value={value}>
       <DatePickerTrigger asChild>
         <Button className="min-w-48" variant="outline">
-          <CalendarIcon />
+          <CalendarIcon data-icon="inline-start" />
           {formattedDate}
         </Button>
       </DatePickerTrigger>

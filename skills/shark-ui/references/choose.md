@@ -14,7 +14,6 @@ Docs: `content/docs/`. Examples: `registry/react/examples/<name>/example-*.tsx`.
 | Hover or focus hint, text only | Tooltip |
 | Hover preview with structured content | HoverCard |
 | Click to show info | ToggleTooltip |
-| Minimal hint | Hint |
 | Button actions | Menu |
 | Right-click actions | ContextMenu |
 | Searchable palette | Command |
@@ -137,7 +136,6 @@ Use `Separator` instead of `<hr>` or a `border-t` divider. Use `Badge` for a sta
 - Float: anchor to a container edge.
 - FloatingPanel: draggable window.
 - Frame: bordered grouping box.
-- Hint: minimal hint.
 - HoverCard: rich hover preview.
 - IconTile: icon, initials, or short text surface.
 - ImageCropper: crop and transform an image.
@@ -231,7 +229,6 @@ Use `Separator` instead of `<hr>` or a `border-t` divider. Use `Badge` for a sta
 - JsonTreeView: expandable JSON tree.
 - Presence: mount and unmount animation.
 - Shimmer: live-status text shimmer.
-- Show: boolean conditional render.
 - Swap: animate between two states.
 
 ### Hooks

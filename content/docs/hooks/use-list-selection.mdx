@@ -62,13 +62,13 @@ Create the collection outside your component when its items are static. The hook
 
 ### Multiple selection
 
-Select several items, then select or clear the entire collection.
+Set `selectionMode` to `multiple` to allow multiple items to be selected.
 
 <ComponentPreview componentName="use-list-selection" fileName="example-multiple" />
 
 ### Range selection
 
-Click to replace the selection, Shift+click to extend from the first selected item in collection order, or Cmd/Ctrl+click to toggle one item. Each row is a keyboard-accessible button with `aria-pressed`.
+Extend the selection from the first selected item to the clicked item.
 
 <ComponentPreview componentName="use-list-selection" fileName="example-range" />
 
@@ -76,7 +76,7 @@ Click to replace the selection, Shift+click to extend from the first selected it
 
 ### useListSelection
 
-A direct export of the Ark hook. `UseListSelectionProps<T>` and `UseListSelectionReturn` are also exported.
+Direct export of the Ark hook. Also exports the `UseListSelectionProps<T>` and `UseListSelectionReturn` types.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -86,21 +86,37 @@ A direct export of the Ark hook. `UseListSelectionProps<T>` and `UseListSelectio
 | `initialSelectedValues` | `string[]` | `[]` |
 | `resetOnCollectionChange` | `boolean` | `false` |
 
-`initialSelectedValues` initializes the selection; it is not a controlled value prop. Use `setSelectedValues` for subsequent updates. Setting `resetOnCollectionChange` clears selection when the collection changes.
+`initialSelectedValues` defines the initial selection; it is not a controlled value. Use `setSelectedValues` to update it later. With `resetOnCollectionChange`, changing the collection clears the selection.
 
 ### Return value
 
-| Member | Description |
-| --- | --- |
-| `selectedValues` | Selected values as a string array. |
-| `isEmpty` | Whether no values are selected. |
-| `firstSelectedValue`, `lastSelectedValue` | First and last selected values in collection order, or `null`. |
-| `isSelected(value)` | Whether a value is selected. |
-| `canSelect(value)` | Whether the collection allows selecting a value. |
-| `isAllSelected()`, `isSomeSelected()` | Query selection across the collection. |
-| `select(value, forceToggle?)` | Select using the current selection mode. |
-| `deselect(value)`, `toggle(value)` | Remove or toggle a value. |
-| `replace(value)` | Replace selection with one value; accepts `null`. |
-| `extend(anchorValue, targetValue)` | Extend selection across a range. |
-| `setSelectedValues(values)` | Set the selected values. |
-| `clear()`, `resetSelection()` | Clear selection. `resetSelection()` creates a new empty selection; it does not restore `initialSelectedValues`. |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `selectedValues` | `string[]` | `-` |
+| `isEmpty` | `boolean` | `-` |
+| `firstSelectedValue` | `string \| null` | `-` |
+| `lastSelectedValue` | `string \| null` | `-` |
+
+### Query methods
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `isSelected(value)` | `(value: string \| null) => boolean` | `-` |
+| `canSelect(value)` | `(value: string) => boolean` | `-` |
+| `isAllSelected()` | `() => boolean` | `-` |
+| `isSomeSelected()` | `() => boolean` | `-` |
+
+### Selection methods
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `select(value, forceToggle?)` | `(value: string, forceToggle?: boolean) => void` | `-` |
+| `deselect(value)` | `(value: string) => void` | `-` |
+| `toggle(value)` | `(value: string) => void` | `-` |
+| `replace(value)` | `(value: string \| null) => void` | `-` |
+| `extend(anchorValue, targetValue)` | `(anchorValue: string, targetValue: string) => void` | `-` |
+| `setSelectedValues(values)` | `(values: string[]) => void` | `-` |
+| `clear()` | `() => void` | `-` |
+| `resetSelection()` | `() => void` | `-` |
+
+`resetSelection()` creates a new empty selection; it does not restore `initialSelectedValues`.

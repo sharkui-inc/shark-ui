@@ -201,7 +201,7 @@ const ThemeCodeFigure = ({
       </figcaption>
       <CopyButton className="absolute inset-e-1.5 top-1.5" value={code} />
       <div className="max-h-72 w-full min-w-0 overflow-auto">
-        <pre className="m-0 w-max min-w-full bg-code px-4 py-3.5 font-mono text-sm leading-6 outline-none">
+        <pre className="m-0 w-max min-w-full bg-code px-4 py-3.5 font-mono text-sm leading-6">
           <code
             className="flex w-max min-w-full flex-col"
             data-language={language}

@@ -17,7 +17,7 @@ const Example = () => {
             checked={show}
             onCheckedChange={({ checked }) => setShow(checked)}
           />
-          <FieldLabel>Show hitbox</FieldLabel>
+          <FieldLabel>Hitbox</FieldLabel>
         </Field>
       </div>
 
@@ -25,14 +25,14 @@ const Example = () => {
         <Button
           className={cn("hitbox-x-4", { "hitbox-debug": show })}
           clickEffect={false}
-          size="sm"
+          variant="secondary"
         >
           Left and right
         </Button>
         <Button
           className={cn("hitbox-y-4", { "hitbox-debug": show })}
           clickEffect={false}
-          size="sm"
+          variant="secondary"
         >
           Top and bottom
         </Button>

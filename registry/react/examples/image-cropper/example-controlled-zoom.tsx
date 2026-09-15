@@ -2,6 +2,7 @@
 
 import { ZoomInIcon, ZoomOutIcon } from "lucide-react";
 import React from "react";
+import { createWavesAvatar } from "@/lib/dicebear";
 import { Button } from "@/registry/react/components/button";
 import {
   ImageCropper,
@@ -17,7 +18,7 @@ const Example = () => {
       <ImageCropper onZoomChange={(e) => setZoom(e.zoom)} zoom={zoom}>
         <ImageCropperImage
           alt="Crop me"
-          src="/images/gradients/green-dark.svg"
+          src={createWavesAvatar("image cropper", "green-dark")}
         />
         <ImageCropperSelection />
       </ImageCropper>

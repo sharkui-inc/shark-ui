@@ -9,22 +9,35 @@ import {
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
+import { FormatNumber } from "@/registry/react/components/format";
+import { LocaleProvider, useLocale } from "@/registry/react/components/locale";
 import { nativeSelectVariants } from "@/registry/react/components/native-select";
 
 export const Calendar = (
   props: React.ComponentProps<typeof ArkCalendar.Root>
 ) => {
-  const { lazyMount = true, unmountOnExit = true, className, ...rest } = props;
+  const {
+    lazyMount = true,
+    unmountOnExit = true,
+    className,
+    locale: localeProp,
+    ...rest
+  } = props;
+  const { locale: providerLocale } = useLocale();
+  const locale = localeProp ?? providerLocale;
 
   return (
-    <ArkCalendar.Root
-      className={cn("[--cell-size:--spacing(9)]", "w-fit", className)}
-      data-slot="calendar"
-      inline
-      lazyMount={lazyMount}
-      unmountOnExit={unmountOnExit}
-      {...rest}
-    />
+    <LocaleProvider locale={locale}>
+      <ArkCalendar.Root
+        className={cn("[--cell-size:--spacing(9)]", "w-fit", className)}
+        data-slot="calendar"
+        inline
+        lazyMount={lazyMount}
+        locale={locale}
+        unmountOnExit={unmountOnExit}
+        {...rest}
+      />
+    </LocaleProvider>
   );
 };
 
@@ -269,7 +282,10 @@ export const CalendarTableDays = (
             <CalendarTableRow key={index}>
               {calendar.showWeekNumbers ? (
                 <CalendarWeekNumberCell week={week} weekIndex={index}>
-                  {calendar.getWeekNumber(week)}
+                  <FormatNumber
+                    useGrouping={false}
+                    value={calendar.getWeekNumber(week)}
+                  />
                 </CalendarWeekNumberCell>
               ) : null}
               {week.map((day) => (
@@ -278,7 +294,7 @@ export const CalendarTableDays = (
                   tabIndex={tabIndex ?? undefined}
                   value={day}
                 >
-                  {day.day}
+                  <FormatNumber useGrouping={false} value={day.day} />
                 </CalendarTableCell>
               ))}
             </CalendarTableRow>
@@ -313,7 +329,10 @@ export const CalendarTableNextMonth = (props: CalendarTableNextMonthProps) => {
               <CalendarTableRow key={index}>
                 {calendar.showWeekNumbers ? (
                   <CalendarWeekNumberCell week={week} weekIndex={index}>
-                    {calendar.getWeekNumber(week)}
+                    <FormatNumber
+                      useGrouping={false}
+                      value={calendar.getWeekNumber(week)}
+                    />
                   </CalendarWeekNumberCell>
                 ) : null}
                 {week.map((day) => (
@@ -323,7 +342,7 @@ export const CalendarTableNextMonth = (props: CalendarTableNextMonthProps) => {
                     value={day}
                     visibleRange={offset.visibleRange}
                   >
-                    {day.day}
+                    <FormatNumber useGrouping={false} value={day.day} />
                   </CalendarTableCell>
                 ))}
               </CalendarTableRow>
@@ -443,8 +462,9 @@ export const CalendarTableCell = (
           "rounded-lg border border-transparent",
           "hover:bg-accent hover:text-accent-foreground",
           "data-today:data-selected:after:bg-background data-today:after:absolute data-today:after:bottom-1 data-today:after:left-1/2 data-today:after:size-1 data-today:after:-translate-x-1/2 data-today:after:rounded-full data-today:after:bg-primary",
-          "data-focus:border-primary data-focus:bg-accent/32 data-focus:text-primary data-focus:ring-[3px] data-focus:ring-ring/32",
-          "outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
+          "data-focus:border-ring/64 data-focus:bg-accent data-focus:text-foreground data-focus:ring-2 data-focus:ring-ring/24",
+          "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+          "data-selected:data-focus:border-background data-selected:focus-visible:border-background",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
           "data-unavailable:pointer-events-none data-unavailable:line-through data-unavailable:opacity-64",
           "data-[view=day]:data-in-range:not-data-[hover-range-start]:not-data-[range-start]:not-data-[hover-range-end]:not-data-[range-end]:rounded-none",

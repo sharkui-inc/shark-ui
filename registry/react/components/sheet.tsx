@@ -89,10 +89,11 @@ const sheetContentVariants = tv({
     "bg-popover",
     "text-popover-foreground",
     "shadow-lg/4",
-    "transition-[opacity,translate] duration-200 ease-in-out will-change-transform",
+    "outline-hidden",
+    "origin-center transition-[opacity,translate] duration-200 ease-out will-change-transform",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
-    "motion-reduce:animate-none motion-reduce:transition-none",
+    "motion-reduce:data-[state=closed]:zoom-out-100 motion-reduce:data-[state=open]:zoom-in-100 motion-reduce:transition-none",
   ],
   defaultVariants: {
     placement: "right",
@@ -102,7 +103,7 @@ const sheetContentVariants = tv({
     placement: {
       bottom: [
         "row-start-2 border-t pb-[env(safe-area-inset-bottom,0px)]",
-        "data-[state=closed]:slide-in-from-bottom-10 data-[state=open]:slide-in-from-bottom-10",
+        "data-[state=closed]:slide-out-to-bottom-10 data-[state=open]:slide-in-from-bottom-10",
       ],
       left: [
         "w-[calc(100%-(--spacing(12)))] max-w-md ps-[env(safe-area-inset-left,0px)]",

@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 export const useScrollArea = useScrollAreaContext;
 
 const scrollAreaVariants = tv({
-  base: ["h-full", "rounded-[inherit]", "outline-none", "scrollbar-none"],
+  base: ["h-full", "rounded-[inherit]", "scrollbar-none"],
   defaultVariants: {
     scrollbarGutter: false,
     scrollFade: false,
@@ -130,8 +130,8 @@ export const ScrollAreaScrollbar = (
         "transition-opacity delay-300",
         "data-[orientation=vertical]:w-1.5",
         "data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:flex-col",
-        "data-hover:opacity-100 data-hover:delay-0 data-hover:duration-100",
-        "data-scrolling:opacity-100 data-scrolling:delay-0 data-scrolling:duration-100",
+        "data-hover:opacity-100 data-hover:delay-0 data-hover:duration-[120ms]",
+        "data-scrolling:opacity-100 data-scrolling:delay-0 data-scrolling:duration-[120ms]",
         "data-[orientation=vertical]:[&:not([data-overflow-y])]:hidden",
         "data-[orientation=horizontal]:[&:not([data-overflow-x])]:hidden",
         "motion-reduce:transition-none",

@@ -1,20 +1,49 @@
 "use client";
 
-import { useRTLPreviewLanguage } from "@/components/docs/component-preview/rtl-preview";
-import { PaginationDemo } from "./example-default";
+import { usePreviewLocale } from "@/hooks/use-preview-locale";
+import { FormatNumber } from "@/registry/react/components/format";
+import {
+  Pagination,
+  PaginationItems,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/registry/react/components/pagination";
+
+const Example = () => {
+  const { locale } = usePreviewLocale();
+
+  const { values } = translations[locale];
+
+  return (
+    <Pagination count={50} pageSize={10}>
+      <PaginationPrevious>{values.previous}</PaginationPrevious>
+      <PaginationItems
+        formatPage={(page) => <FormatNumber useGrouping={false} value={page} />}
+      />
+      <PaginationNext>{values.next}</PaginationNext>
+    </Pagination>
+  );
+};
 
 const translations = {
-  ar: { nextLabel: "التالي", previousLabel: "السابق" },
-  en: { nextLabel: "Next", previousLabel: "Previous" },
-  he: { nextLabel: "הבא", previousLabel: "הקודם" },
+  ar: {
+    values: {
+      next: "التالي",
+      previous: "السابق",
+    },
+  },
+  en: {
+    values: {
+      next: "Next",
+      previous: "Previous",
+    },
+  },
+  he: {
+    values: {
+      next: "הבא",
+      previous: "הקודם",
+    },
+  },
 };
 
-const PaginationRTLExample = () => {
-  const { language, locale } = useRTLPreviewLanguage();
-  const formatPage = new Intl.NumberFormat(locale, { useGrouping: false })
-    .format;
-
-  return <PaginationDemo {...translations[language]} formatPage={formatPage} />;
-};
-
-export default PaginationRTLExample;
+export default Example;

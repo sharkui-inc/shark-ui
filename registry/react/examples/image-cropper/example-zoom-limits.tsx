@@ -1,3 +1,4 @@
+import { createWavesAvatar } from "@/lib/dicebear";
 import {
   ImageCropper,
   ImageCropperImage,
@@ -6,7 +7,10 @@ import {
 
 const Example = () => (
   <ImageCropper className="max-w-lg" maxZoom={2} minZoom={0.5}>
-    <ImageCropperImage alt="Crop me" src="/images/gradients/green-dark.svg" />
+    <ImageCropperImage
+      alt="Crop me"
+      src={createWavesAvatar("image cropper", "green-dark")}
+    />
     <ImageCropperSelection />
   </ImageCropper>
 );

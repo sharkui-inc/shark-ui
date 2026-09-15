@@ -14,10 +14,10 @@ import {
 } from "@/registry/react/components/collapsible";
 
 const CollapsibleDemo = () => (
-  <Card className="w-96">
+  <Card className="w-96 [--space:--spacing(4)]">
     <Collapsible>
       <CardHeader title="Total visits">
-        <CardDescription>
+        <CardDescription className="pt-2">
           <div className="flex items-center gap-1">
             <Badge variant="success">22.3%</Badge>
             <Badge variant="info">10.1%</Badge>
@@ -37,7 +37,7 @@ const CollapsibleDemo = () => (
       </CardHeader>
 
       <CollapsibleContent className="text-sm">
-        <div className="mt-(--space) grid gap-3 px-(--space)">
+        <div className="grid gap-3 px-(--space) pt-(--space)">
           <div className="grid grid-cols-3 items-center gap-4">
             <div className="col-span-2 text-muted-foreground">Google</div>
             <div className="place-self-end">

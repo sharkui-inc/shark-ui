@@ -75,7 +75,7 @@ export const StepsTrigger = (props: StepsTriggerProps) => {
     <ArkSteps.Trigger
       className={cn(
         "inline-flex items-center gap-3",
-        "cursor-pointer rounded-full outline-none",
+        "cursor-pointer rounded-full outline-hidden",
         "disabled:pointer-events-none disabled:opacity-64",
         className
       )}
@@ -99,7 +99,8 @@ export const StepsIndicator = (
         "font-medium text-sm",
         "rounded-full border",
         "transition-colors",
-        "in-focus-visible:ring-[3px] in-focus-visible:ring-ring/32",
+        "in-focus-visible:border-ring/64 in-focus-visible:ring-2 in-focus-visible:ring-ring/24",
+        "data-complete:in-focus-visible:border-background data-current:in-focus-visible:border-background",
         "data-current:border-primary data-current:bg-primary data-current:text-primary-foreground",
         "data-complete:border-primary data-complete:bg-primary data-complete:text-primary-foreground",
         "[&_svg]:size-(--steps-icon-size) [&_svg]:shrink-0",

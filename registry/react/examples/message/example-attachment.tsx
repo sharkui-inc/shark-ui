@@ -1,4 +1,5 @@
 import { DownloadIcon } from "lucide-react";
+import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Attachment,
   AttachmentAction,
@@ -23,7 +24,7 @@ const Example = () => (
             <img
               alt="Workspace"
               height={104}
-              src="/images/gradients/green-dark.svg"
+              src={createWavesAvatar("Workspace", "green-dark")}
               width={104}
             />
           </AttachmentMedia>

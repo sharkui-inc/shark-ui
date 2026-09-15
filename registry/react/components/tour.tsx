@@ -177,11 +177,13 @@ export const TourContent = (props: TourContentProps) => {
             "flex flex-col gap-4",
             "bg-background",
             "rounded-lg border shadow-lg/4",
-            "focus:outline-none focus:ring-0",
+            "outline-hidden",
+            "origin-center data-[type=tooltip]:origin-(--transform-origin)",
+            "duration-200 ease-out",
             "data-[state=closed]:animate-out data-[state=open]:animate-in",
             "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
             "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
-            "motion-reduce:animate-none",
+            "motion-reduce:data-[state=closed]:zoom-out-100 motion-reduce:data-[state=open]:zoom-in-100",
             className
           )}
           data-slot="tour-content"
@@ -216,13 +218,20 @@ export const TourBody = (props: React.ComponentProps<typeof DialogBody>) => (
 
 export const TourSpotlight = (
   props: React.ComponentProps<typeof ArkTour.Spotlight>
-) => (
-  <ArkTour.Spotlight
-    className="z-50 border-2 border-primary"
-    data-slot="tour-spotlight"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkTour.Spotlight
+      className={cn(
+        "z-50 border-2 border-ring/64 ring-2 ring-ring/24",
+        className
+      )}
+      data-slot="tour-spotlight"
+      {...rest}
+    />
+  );
+};
 
 export const TourHeader = (
   props: React.ComponentProps<typeof DialogHeader>

@@ -52,7 +52,7 @@ const Example = () => {
   return (
     <div className="relative flex h-full w-full items-center">
       <Button
-        className="absolute end-0 top-0"
+        className="absolute inset-e-0 top-0"
         onClick={() => {
           setLineCount(1);
           setStatus("running");
@@ -60,7 +60,7 @@ const Example = () => {
         size="sm"
         variant="ghost"
       >
-        <RotateCwIcon aria-hidden="true" />
+        <RotateCwIcon aria-hidden="true" data-icon="inline-start" />
         Replay
       </Button>
       <ToolResult

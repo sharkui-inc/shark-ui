@@ -86,12 +86,12 @@ import { Button } from "@/components/ui/button";
     <ActionBarSeparator />
     <ActionBarBody>
       <Button variant="ghost">
-        <PencilIcon aria-hidden="true" />
+        <PencilIcon aria-hidden="true" data-icon="inline-start" />
         <span className="max-sm:sr-only">Edit</span>
       </Button>
       <ActionBarSeparator />
       <Button variant="destructive">
-        <Trash2Icon aria-hidden="true" />
+        <Trash2Icon aria-hidden="true" data-icon="inline-start" />
         <span className="max-sm:sr-only">Delete</span>
       </Button>
     </ActionBarBody>
@@ -154,6 +154,8 @@ md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
 
 ## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 <RTLComponentPreview componentName="action-bar" />
 

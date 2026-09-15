@@ -41,7 +41,7 @@ const Example = () => {
               activeIndex === -1 ? 0 : ((activeIndex + 1) / items.length) * 100;
 
             return (
-              <CollapsibleTrigger className="flex w-full items-center justify-between gap-3 rounded-lg border border-border bg-transparent px-3 py-2.5 text-start font-medium text-sm outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring">
+              <CollapsibleTrigger className="flex w-full items-center justify-between gap-3 rounded-lg border border-border bg-transparent px-3 py-2.5 text-start font-medium text-sm outline-hidden hover:bg-muted focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24">
                 <span className="flex min-w-0 flex-1 items-center gap-2">
                   <CircularProgress
                     className="shrink-0"
@@ -70,7 +70,7 @@ const Example = () => {
             {items.map((item, index) => (
               <TocItem className="ps-0" item={item} key={item.value}>
                 <TocLink
-                  className="flex items-center gap-2 rounded-md px-2 py-1.5 data-active:text-primary"
+                  className="mx-0 flex items-center gap-2 rounded-md px-2 py-1.5 data-active:text-primary"
                   href={`#${item.value}`}
                 >
                   <span className="min-w-6 font-semibold text-[0.6875rem] text-muted-foreground tabular-nums">

@@ -39,6 +39,7 @@ const UseListSelectionDemo = () => {
               className={
                 selection.isSelected(item.value) ? "size-4" : "size-4 opacity-0"
               }
+              data-icon="inline-start"
             />
             {item.label}
           </Button>

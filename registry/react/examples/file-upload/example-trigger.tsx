@@ -11,7 +11,7 @@ const Example = () => (
     <div className="flex justify-center">
       <FileUploadTrigger asChild>
         <Button variant="outline">
-          <PaperclipIcon />
+          <PaperclipIcon data-icon="inline-start" />
           Browse files
         </Button>
       </FileUploadTrigger>

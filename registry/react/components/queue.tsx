@@ -132,7 +132,7 @@ export const QueueItem = (props: React.ComponentProps<typeof ark.li>) => {
         "text-sm",
         "transition-colors duration-150",
         "hover:bg-muted",
-        "has-focus-visible:bg-muted",
+        "has-focus-visible:border-ring/64 has-focus-visible:bg-muted has-focus-visible:ring-2 has-focus-visible:ring-ring/24",
         "[&>svg:not([class*='size-'])]:size-3.5 [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
         "motion-reduce:transition-none",
         className
@@ -201,7 +201,7 @@ export const QueueItemAction = (props: React.ComponentProps<typeof Button>) => {
     <Button
       className={cn(
         "text-muted-foreground hover:text-foreground",
-        "[&_svg:not([class*='size-'])]:size-3.5",
+        "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:text-muted-foreground",
         className
       )}
       data-slot="queue-item-action"

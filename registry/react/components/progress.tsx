@@ -80,11 +80,11 @@ export const ProgressRange = (
   <ArkProgress.Range
     className={cn(
       "bg-primary",
-      "transition-[width,height] duration-300 ease-out",
+      "transition-none",
       "data-[orientation=horizontal]:h-full",
       "data-[orientation=vertical]:h-full",
-      "motion-reduce:animate-none motion-reduce:transition-none",
-      "data-[state=indeterminate]:w-1/3 data-[state=indeterminate]:animate-indeterminate data-[state=indeterminate]:duration-100"
+      "motion-reduce:data-[state=indeterminate]:animate-none",
+      "data-[state=indeterminate]:w-1/3 data-[state=indeterminate]:animate-indeterminate"
     )}
     data-slot="progress-range"
     {...props}

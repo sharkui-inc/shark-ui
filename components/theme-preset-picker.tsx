@@ -65,15 +65,15 @@ const ThemePresetBar = (props: { onSelect?: () => void }) => {
       value={activePreset?.label ?? ""}
     >
       <RadioGroupLabel>{THEME_PRESET_FIELD.label}</RadioGroupLabel>
-      <div className="flex h-11 gap-px overflow-hidden rounded-xl border border-input bg-border">
+      <div className="flex h-11 gap-0.5 overflow-hidden rounded-xl border border-input bg-border">
         {THEME_PRESETS.map((preset) => (
           <RadioGroupItem
             aria-label={preset.label}
             className={cn(
-              "group h-full min-w-0 flex-1 justify-center p-0",
-              "rounded-none border-0",
+              "group relative h-full min-w-0 flex-1 justify-center p-0",
+              "rounded-none border border-transparent",
               "data-[state=checked]:z-10 data-[state=checked]:outline-2 data-[state=checked]:outline-foreground data-[state=checked]:-outline-offset-2",
-              "data-focus-visible:z-20 data-focus-visible:outline-2 data-focus-visible:outline-ring data-focus-visible:-outline-offset-2",
+              "data-focus-visible:z-20 data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24",
               "pointer-coarse:after:hidden"
             )}
             key={preset.label}
@@ -83,7 +83,8 @@ const ThemePresetBar = (props: { onSelect?: () => void }) => {
               <TooltipTrigger asChild>
                 <span
                   className={cn(
-                    "relative flex size-full items-center justify-center before:absolute before:inset-0 before:bg-black/0 group-data-[state=checked]:before:bg-black/8",
+                    "absolute -inset-px",
+                    "flex items-center justify-center before:absolute before:inset-0 before:bg-black/0 group-data-[state=checked]:before:bg-black/8",
                     preset.swatchClass
                   )}
                 >
@@ -133,8 +134,8 @@ const ThemePresetGrid = (props: { onSelect?: () => void }) => {
           aria-label={`Apply ${preset.label} theme`}
           className={cn(
             "group flex flex-col items-center gap-1.5 rounded-lg p-1",
-            "cursor-pointer outline-none",
-            "focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            "cursor-pointer outline-hidden",
+            "border border-transparent focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
           )}
           key={preset.label}
           value={preset.label}

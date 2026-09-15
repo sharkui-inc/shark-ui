@@ -52,9 +52,10 @@ export const FileUploadDropzone = (
         "flex flex-col items-center justify-center gap-2",
         "text-center",
         "rounded-2xl border-2 border-input border-dashed",
-        "cursor-pointer",
+        "cursor-pointer outline-hidden",
         "data-cover:absolute data-cover:inset-0 data-cover:flex data-cover:items-center data-cover:justify-center",
-        "data-dragging:border-primary data-dragging:bg-primary/8",
+        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "data-dragging:border-primary/64 data-dragging:bg-primary/8",
         "data-invalid:border-destructive dark:data-invalid:border-destructive-foreground",
         className
       )}

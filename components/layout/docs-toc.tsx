@@ -76,7 +76,16 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
           present={showScrollToTop}
         >
           <a
-            className="inline-flex items-center gap-2 py-1 text-muted-foreground outline-none hover:text-foreground focus-visible:text-foreground"
+            className={cn(
+              "relative",
+              "inline-flex items-center gap-2",
+              "-mx-1 px-1 py-1",
+              "text-muted-foreground",
+              "rounded-md border border-transparent",
+              "outline-hidden",
+              "hover:text-foreground",
+              "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+            )}
             href="#page-title"
           >
             <CircleArrowUpIcon aria-hidden className="size-4" /> Scroll to top

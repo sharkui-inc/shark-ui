@@ -14,6 +14,7 @@ import {
 
 const TocDemo = () => {
   const contentRef = useRef<HTMLElement>(null);
+
   return (
     <Toc
       className="size-full rounded-lg border p-4"

@@ -65,12 +65,12 @@ export const CollapsibleContent = (
   return (
     <ArkCollapsible.Content
       className={cn(
+        "[--radix-collapsible-content-height:var(--height)]",
         "h-(--collapsed-height)",
         "group-data-partial-collapse/collapsible:h-full",
-        "transition-[height] duration-200",
         "overflow-hidden",
-        "data-[state=open]:animate-expand",
-        "data-[state=closed]:animate-collapse",
+        "data-[state=open]:animate-collapsible-down data-[state=open]:duration-200 data-[state=open]:ease-out",
+        "data-[state=closed]:animate-collapsible-up data-[state=closed]:duration-200 data-[state=closed]:ease-out",
         "motion-reduce:animate-none motion-reduce:transition-none"
       )}
       data-slot="collapsible-content"
@@ -96,7 +96,7 @@ export const CollapsibleIndicator = (
       data-slot="collapsible-indicator"
       {...rest}
     >
-      <ChevronDownIcon className="size-full shrink-0 transition-transform duration-200 motion-reduce:transition-none" />
+      <ChevronDownIcon className="size-full shrink-0 transition-transform duration-150 ease-out motion-reduce:transition-none" />
     </ArkCollapsible.Indicator>
   );
 };

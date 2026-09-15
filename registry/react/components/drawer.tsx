@@ -46,7 +46,7 @@ export const DrawerProvider = (
           "bg-background",
           "opacity-0",
           "pointer-events-none",
-          "transition-opacity duration-300 ease-in",
+          "transition-opacity duration-200 ease-out",
           "data-[state=open]:opacity-(--indent-opacity)",
           "motion-reduce:transition-none"
         )}
@@ -56,7 +56,7 @@ export const DrawerProvider = (
         className={cn(
           "[--indent-radius:calc(1rem*(1-var(--drawer-swipe-progress,0)))]",
           "data-active:transform-[scale(calc(0.98+(0.02*var(--drawer-swipe-progress))))_translateY(calc(0.5rem*(1-var(--drawer-swipe-progress))))]",
-          "transition-[border-radius,transform] duration-300 ease-in-out will-change-transform",
+          "transition-[border-radius,transform] duration-150 ease-in-out will-change-transform",
           "data-active:rounded-(--indent-radius)",
           "motion-reduce:transition-none",
           className
@@ -101,9 +101,9 @@ const drawerOverlayVariants = tv({
     "fixed inset-0 z-50",
     "bg-(--bg) backdrop-blur-(--blur)",
     "data-[has-nested=drawer]:pointer-events-none",
-    "duration-200",
+    "transition-opacity duration-300 ease-out",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
-    "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
+    "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out data-[state=closed]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
     "motion-reduce:animate-none",
   ],
 });
@@ -171,7 +171,6 @@ export const DrawerPositioner = (props: DrawerPositionerProps) => {
   );
 };
 
-// ::after bleed: https://ark-ui.com/docs/components/drawer#preventing-overdrag-gaps
 const drawerContentVariants = tv({
   base: [
     "[--space:--spacing(6)]",
@@ -192,11 +191,14 @@ const drawerContentVariants = tv({
     "bg-popover",
     "text-popover-foreground",
     "shadow-lg/4",
-    "outline-none",
+    "outline-hidden",
     "scale-(--stack-scale)",
-    "not-data-nested-drawer-open:transition-[transform,scale,opacity] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
-    "duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] data-nested-drawer-open:transition-[height,scale,translate]",
-    "data-swiping:select-none data-swiping:transition-none data-swiping:duration-0",
+    "duration-300 ease-out",
+    "not-data-nested-drawer-open:transition-[transform,scale]",
+    "data-nested-drawer-open:transition-[height,scale,translate]",
+    "data-[state=closed]:duration-[calc(var(--drawer-swipe-strength)*300ms)]",
+    "data-[state=closed]:animate-out data-[state=open]:animate-in",
+    "data-swiping:select-none data-swiping:transition-none",
     "data-dragging:transition-none",
     "data-nested-drawer-swiping:duration-0",
     "data-[swipe-direction=down]:origin-[center_bottom]",
@@ -207,25 +209,21 @@ const drawerContentVariants = tv({
     "data-[swipe-direction=down]:-mb-[max(0,calc(var(--drawer-snap-point-offset-y,0)+clamp(0,1,var(--drawer-snap-point-offset-y,0)/1px)*var(--drawer-swipe-movement-y,0)))]",
     "data-[swipe-direction=down]:pb-[max(0px,calc(env(safe-area-inset-bottom,0px)+var(--drawer-snap-point-offset-y,0px)+clamp(0,1,var(--drawer-snap-point-offset-y,0px)/1px)*var(--drawer-swipe-movement-y,0px)))]",
     "data-[swipe-direction=down]:after:inset-inline-0 data-[swipe-direction=down]:after:top-full data-[swipe-direction=down]:after:h-(--bleed)",
-    "data-[swipe-direction=down]:data-[state=open]:animate-drawer-slide-in-bottom",
-    "data-[swipe-direction=down]:data-[state=closed]:animate-drawer-slide-out-bottom",
+    "data-[swipe-direction=down]:slide-in-from-bottom data-[swipe-direction=down]:slide-out-to-bottom",
     "data-[swipe-direction=up]:rounded-b-2xl",
     "data-[swipe-direction=up]:pt-[env(safe-area-inset-top,0)]",
     "data-[swipe-direction=up]:after:inset-inline-0 data-[swipe-direction=up]:after:bottom-full data-[swipe-direction=up]:after:h-(--bleed)",
-    "data-[swipe-direction=up]:data-[state=open]:animate-drawer-slide-in-top",
-    "data-[swipe-direction=up]:data-[state=closed]:animate-drawer-slide-out-top",
+    "data-[swipe-direction=up]:slide-in-from-top data-[swipe-direction=up]:slide-out-to-top",
     "data-[swipe-direction=left]:h-full data-[swipe-direction=left]:max-h-none data-[swipe-direction=left]:min-h-0 data-[swipe-direction=left]:w-full data-[swipe-direction=left]:max-w-md",
     "data-[swipe-direction=left]:rounded-e-2xl",
     "data-[swipe-direction=left]:ps-[env(safe-area-inset-left,0)]",
     "data-[swipe-direction=left]:after:inset-block-0 data-[swipe-direction=left]:after:inset-e-full data-[swipe-direction=left]:after:inset-inline-auto data-[swipe-direction=left]:after:h-auto data-[swipe-direction=left]:after:w-(--bleed)",
-    "data-[swipe-direction=left]:data-[state=open]:animate-drawer-slide-in-left",
-    "data-[swipe-direction=left]:data-[state=closed]:animate-drawer-slide-out-left",
+    "data-[swipe-direction=left]:slide-in-from-left data-[swipe-direction=left]:slide-out-to-left",
     "data-[swipe-direction=right]:h-full data-[swipe-direction=right]:max-h-none data-[swipe-direction=right]:min-h-0 data-[swipe-direction=right]:w-full data-[swipe-direction=right]:max-w-md",
     "data-[swipe-direction=right]:rounded-s-2xl",
     "data-[swipe-direction=right]:pe-[env(safe-area-inset-right,0)]",
     "data-[swipe-direction=right]:after:inset-block-0 data-[swipe-direction=right]:after:inset-inline-auto data-[swipe-direction=right]:after:inset-s-full data-[swipe-direction=right]:after:h-auto data-[swipe-direction=right]:after:w-(--bleed)",
-    "data-[swipe-direction=right]:data-[state=open]:animate-drawer-slide-in-right",
-    "data-[swipe-direction=right]:data-[state=closed]:animate-drawer-slide-out-right",
+    "data-[swipe-direction=right]:slide-in-from-right data-[swipe-direction=right]:slide-out-to-right",
   ],
   defaultVariants: {
     variant: "default",

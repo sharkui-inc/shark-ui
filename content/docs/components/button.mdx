@@ -96,6 +96,25 @@ import { Button } from "@/components/ui/button";
 <Button>Button</Button>
 ```
 
+## Icons
+
+Mark inline icons with `data-icon` so they follow the reading direction.
+
+```tsx
+import { ArrowRightIcon, PlusIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+<Button>
+  <PlusIcon data-icon="inline-start" />
+  Add
+</Button>
+
+<Button variant="outline">
+  Continue
+  <ArrowRightIcon data-icon="inline-end" className="rtl:rotate-180" />
+</Button>
+```
+
 ## Link
 
 There are two ways to render another element with button styling: 
@@ -161,6 +180,8 @@ There are two ways to render another element with button styling:
 
 ## Pill
 
+The `pill` prop creates fully rounded buttons.
+
 <ComponentPreview componentName="button" fileName="example-pill" />
 
 ## Disabling click effect
@@ -190,6 +211,8 @@ For increasing the tap target area, use [Hitbox](/docs/utilities/hitbox).
 <ComponentPreview componentName="button" fileName="example-custom-color" />
 
 ## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 <RTLComponentPreview componentName="button" />
 

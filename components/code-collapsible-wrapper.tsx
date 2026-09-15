@@ -1,28 +1,29 @@
 "use client";
 
 import { Collapsible as ArkCollapsible } from "@ark-ui/react/collapsible";
-import {
-  type ComponentProps,
-  createContext,
-  useContext,
-  useState,
-} from "react";
+import { createContext } from "@ark-ui/react/utils";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 
 interface CodeCollapsibleWrapperProps
-  extends ComponentProps<typeof ArkCollapsible.Root> {}
+  extends React.ComponentProps<typeof ArkCollapsible.Root> {}
 
-const CodeCollapsibleActionsContext = createContext<HTMLElement | null>(null);
+const [CodeCollapsibleActionsProvider, useCodeCollapsibleActions] =
+  createContext<HTMLElement | null>({
+    defaultValue: null,
+    hookName: "useCodeCollapsibleActions",
+    name: "CodeCollapsibleActionsContext",
+    providerName: "CodeCollapsibleWrapper",
+    strict: false,
+  });
 
-export const useCodeCollapsibleActions = () =>
-  useContext(CodeCollapsibleActionsContext);
+export { useCodeCollapsibleActions };
 
 export const CodeCollapsibleWrapper = (props: CodeCollapsibleWrapperProps) => {
   const { className, children, collapsedHeight = "256px", ...rest } = props;
-  const [actionsElement, setActionsElement] = useState<HTMLElement | null>(
-    null
-  );
+  const [actionsElement, setActionsElement] =
+    React.useState<HTMLElement | null>(null);
 
   return (
     <ArkCollapsible.Root
@@ -32,7 +33,7 @@ export const CodeCollapsibleWrapper = (props: CodeCollapsibleWrapperProps) => {
       unmountOnExit={false}
       {...rest}
     >
-      <CodeCollapsibleActionsContext.Provider value={actionsElement}>
+      <CodeCollapsibleActionsProvider value={actionsElement}>
         {/*
           Ark marks tabbable elements inside partial collapses as inert while
           closed. Keep visible actions outside Content so they remain usable.
@@ -57,9 +58,10 @@ export const CodeCollapsibleWrapper = (props: CodeCollapsibleWrapperProps) => {
 
         <ArkCollapsible.Content
           className={cn(
+            "[--radix-collapsible-content-height:var(--height)]",
             "relative mt-6 overflow-hidden [&>figure]:mt-0 [&>figure]:md:mx-0!",
             "transition-[height] duration-200",
-            "data-[state=closed]:animate-collapse data-[state=open]:animate-expand",
+            "data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down data-[state=closed]:duration-200 data-[state=open]:duration-200 data-[state=closed]:ease-out data-[state=open]:ease-out",
             "motion-reduce:animate-none motion-reduce:transition-none"
           )}
         >
@@ -69,14 +71,14 @@ export const CodeCollapsibleWrapper = (props: CodeCollapsibleWrapperProps) => {
         <ArkCollapsible.Trigger asChild>
           <button
             className={cn(
-              "absolute inset-x-0 -bottom-4",
+              "absolute inset-x-px -bottom-4 -mx-px",
               "h-20",
               "flex items-center justify-center",
               "bg-linear-to-b from-transparent via-background/64 to-background",
               "font-medium text-muted-foreground text-sm",
-              "rounded-b-lg border border-t-0",
+              "rounded-b-lg",
               "transition-colors",
-              "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/32",
+              "border border-t-0 outline-hidden focus-visible:border-ring/64 focus-visible:border-t focus-visible:ring-2 focus-visible:ring-ring/24",
               "hover:text-foreground",
               "group-data-[state=open]/code-collapsible:hidden"
             )}
@@ -85,7 +87,7 @@ export const CodeCollapsibleWrapper = (props: CodeCollapsibleWrapperProps) => {
             Expand
           </button>
         </ArkCollapsible.Trigger>
-      </CodeCollapsibleActionsContext.Provider>
+      </CodeCollapsibleActionsProvider>
     </ArkCollapsible.Root>
   );
 };

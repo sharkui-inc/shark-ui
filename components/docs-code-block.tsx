@@ -11,7 +11,7 @@ export const isDocsTextLanguage = (language?: string) =>
 
 export const docsShikiContentClassName = cn(
   "font-mono",
-  "[&_pre]:tab-2 [&_pre]:w-max [&_pre]:min-w-full [&_pre]:bg-transparent [&_pre]:px-0 [&_pre]:py-3.5 [&_pre]:text-[.8125rem] [&_pre]:leading-6 [&_pre]:outline-none",
+  "[&_pre]:tab-2 [&_pre]:w-max [&_pre]:min-w-full [&_pre]:bg-transparent [&_pre]:px-0 [&_pre]:py-3.5 [&_pre]:text-[.8125rem] [&_pre]:leading-6",
   "[&_code]:grid [&_code]:min-w-full",
   "[&_.line]:relative [&_.line]:block [&_.line]:min-h-6",
   "[&_.line_span]:text-(--shiki-light) dark:[&_.line_span]:text-(--shiki-dark)",
@@ -42,7 +42,7 @@ export const DocsCodeFrame = (props: DocsCodeFrameProps) => {
   return (
     <figure
       className={cn(
-        "relative mt-6 overflow-hidden rounded-2xl border in-data-[tab=code]:border-0 bg-code text-code-foreground outline-none",
+        "relative mt-6 overflow-hidden rounded-2xl border in-data-[tab=code]:border-0 bg-code text-code-foreground",
         className
       )}
       data-slot="docs-code-block"
@@ -67,7 +67,7 @@ export const DocsCodeFrame = (props: DocsCodeFrameProps) => {
       <ScrollArea className="**:data-[slot=scroll-area-scrollbar]:data-[orientation=horizontal]:mx-2 **:data-[slot=scroll-area-scrollbar]:data-[orientation=vertical]:my-2">
         {isPlainText ? (
           <pre
-            className="m-0 w-max min-w-full bg-transparent px-4 py-3.5 text-[.8125rem] leading-6 outline-none"
+            className="m-0 w-max min-w-full bg-transparent px-4 py-3.5 text-[.8125rem] leading-6 outline-hidden"
             data-language={language}
             tabIndex={0}
           >

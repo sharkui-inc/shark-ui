@@ -47,9 +47,9 @@ const itemVariants = tv({
     "in-data-[slot=menu-content]:p-0",
     "font-sans text-sm",
     "rounded-xl border",
-    "transition-colors duration-100",
+    "transition-colors duration-[120ms]",
     "[&:is(a,button)]:hover:bg-muted",
-    "outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
+    "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
     "[&_svg:not([class*='size-']):not([class*='h-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   ],
   defaultVariants: {

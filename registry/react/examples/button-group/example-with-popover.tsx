@@ -12,7 +12,7 @@ import { Separator } from "@/registry/react/components/separator";
 const Example = () => (
   <ButtonGroup>
     <Button variant="outline">
-      <GitForkIcon /> Fork
+      <GitForkIcon data-icon="inline-start" /> Fork
       <Badge size="sm" variant="secondary">
         42
       </Badge>
@@ -35,7 +35,7 @@ const Example = () => (
           clickEffect={false}
           variant="ghost"
         >
-          <PlusIcon />
+          <PlusIcon data-icon="inline-start" />
           Create a new fork
         </Button>
       </PopoverContent>

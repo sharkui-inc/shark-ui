@@ -11,24 +11,37 @@ import {
   AutocompleteList,
 } from "@/registry/react/components/autocomplete";
 
-const AutocompleteDemo = () => {
+interface AutocompleteDemoProps {
+  emptyLabel?: string;
+  items?: typeof initialItems;
+  label?: string;
+  placeholder?: string;
+}
+
+export const AutocompleteDemo = (props: AutocompleteDemoProps) => {
+  const {
+    emptyLabel = "No results found.",
+    items = initialItems,
+    label = "Search fruits",
+    placeholder = "e.g. Apple",
+  } = props;
   const { contains } = useFilter({ sensitivity: "base" });
 
   const { collection, filter } = useListCollection({
     filter: contains,
-    initialItems,
+    initialItems: items,
   });
 
   return (
     <Field className="w-full max-w-64">
-      <FieldLabel>Search fruits</FieldLabel>
+      <FieldLabel>{label}</FieldLabel>
       <Autocomplete
         collection={collection}
         onInputValueChange={({ inputValue }) => filter(inputValue)}
       >
-        <AutocompleteInput placeholder="e.g. Apple" showClear />
+        <AutocompleteInput placeholder={placeholder} showClear />
         <AutocompleteContent>
-          <AutocompleteEmpty />
+          <AutocompleteEmpty>{emptyLabel}</AutocompleteEmpty>
           <AutocompleteList>
             {collection.items.map((item) => (
               <AutocompleteItem item={item} key={item.value}>
@@ -49,4 +62,6 @@ const initialItems = [
   { label: "Date", value: "date" },
 ];
 
-export default AutocompleteDemo;
+const AutocompleteDefaultExample = () => <AutocompleteDemo />;
+
+export default AutocompleteDefaultExample;

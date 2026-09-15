@@ -8,6 +8,7 @@ const manifest: RegistryItemType = {
   name: "data-table",
   registryDependencies: [
     absoluteUrl("/r/button.json"),
+    absoluteUrl("/r/format.json"),
     absoluteUrl("/r/menu.json"),
     absoluteUrl("/r/native-select.json"),
     absoluteUrl("/r/pagination.json"),

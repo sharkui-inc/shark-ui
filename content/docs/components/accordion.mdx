@@ -35,23 +35,7 @@ npx shadcn@latest add @shark/accordion
 
 <RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following rules into your CSS file:</Step>
-
-```css showLineNumbers
-@theme inline {
-  --animate-slide-up: slideUp 0.2s ease-out;
-  --animate-slide-down: slideDown 0.2s ease-out;
-
-  @keyframes slideUp {
-    from { height: var(--height); }
-    to { height: 0; }
-  }
-  @keyframes slideDown {
-    from { height: 0; }
-    to { height: var(--height); }
-  }
-}
-```
+<Step>Ensure your CSS entry imports `tw-animate-css`.</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -131,6 +115,8 @@ Wrap the `Accordion` in a `Card` component.
 <ComponentPreview componentName="accordion" fileName="example-card" />
 
 ## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 <RTLComponentPreview componentName="accordion" />
 

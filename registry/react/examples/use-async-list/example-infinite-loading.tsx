@@ -61,7 +61,7 @@ const UseAsyncListDemo = () => {
             size="sm"
             variant="outline"
           >
-            {!!list.loading && <Spinner />}
+            {!!list.loading && <Spinner data-icon="inline-start" />}
             {list.error ? "Retry" : "Load more"}
           </Button>
         )}

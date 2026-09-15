@@ -12,6 +12,7 @@ import {
   type TooltipValueType,
 } from "recharts";
 import { cn } from "@/lib/utils";
+import { FormatNumber } from "@/registry/react/components/format";
 
 const THEMES = { dark: ".dark", light: "" } as const;
 
@@ -159,7 +160,7 @@ export const ChartStyle = ({
 
 const formatTooltipValue = (value: unknown) => {
   if (typeof value === "number") {
-    return value.toLocaleString();
+    return <FormatNumber value={value} />;
   }
 
   if (value === undefined || value === null) {
@@ -283,7 +284,11 @@ const ChartTooltipItem = ({
               </span>
             </div>
             {formattedValue === null ? null : (
-              <span className="font-medium font-mono text-foreground tabular-nums">
+              <span
+                className="font-medium font-mono text-foreground tabular-nums"
+                dir="ltr"
+                style={{ unicodeBidi: "isolate" }}
+              >
                 {formattedValue}
               </span>
             )}

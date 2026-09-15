@@ -140,17 +140,17 @@ const Example = () => {
           <ActionBarSeparator />
           <ActionBarBody>
             <Button variant="ghost">
-              <SendIcon />
+              <SendIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Send</span>
             </Button>
             <Button variant="ghost">
-              <PencilIcon />
+              <PencilIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Edit</span>
             </Button>
             <Menu positioning={{ placement: "top" }}>
               <MenuTrigger asChild>
                 <Button variant="ghost">
-                  <EllipsisIcon />
+                  <EllipsisIcon data-icon="inline-start" />
                   <span className="max-sm:sr-only">More</span>
                 </Button>
               </MenuTrigger>
@@ -169,7 +169,7 @@ const Example = () => {
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button variant="destructive">
-                  <Trash2Icon />
+                  <Trash2Icon data-icon="inline-start" />
                   <span className="max-sm:sr-only">Delete</span>
                 </Button>
               </AlertDialogTrigger>

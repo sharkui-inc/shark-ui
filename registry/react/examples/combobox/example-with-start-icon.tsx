@@ -5,6 +5,7 @@ import { AppleIcon } from "lucide-react";
 import {
   Combobox,
   ComboboxContent,
+  ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
@@ -33,6 +34,7 @@ const Example = () => {
         </InputGroupAddon>
       </ComboboxInput>
       <ComboboxContent>
+        <ComboboxEmpty />
         <ComboboxList>
           {collection.items.map((item) => (
             <ComboboxItem item={item} key={item.value}>

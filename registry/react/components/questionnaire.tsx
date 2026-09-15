@@ -581,7 +581,7 @@ export const Questionnaire = (props: QuestionnaireProps) => {
       <ark.form
         {...rest}
         className={cn(
-          "flex w-full min-w-0 flex-col gap-4 text-sm outline-none",
+          "flex w-full min-w-0 flex-col gap-4 text-sm",
           className
         )}
         data-slot="questionnaire"
@@ -746,7 +746,7 @@ export const QuestionnaireItem = (props: QuestionnaireItemProps) => {
         aria-invalid={invalid || undefined}
         aria-labelledby={titleId}
         className={cn(
-          "min-w-0 gap-4 outline-none",
+          "min-w-0 gap-4 outline-hidden",
           className,
           !active && "hidden"
         )}
@@ -971,7 +971,7 @@ export const QuestionnaireChoice = (props: QuestionnaireChoiceProps) => {
           "text-start",
           "rounded-xl border border-input",
           "data-[state=checked]:border-primary data-[state=checked]:bg-primary/8",
-          "has-focus-visible:border-ring has-focus-visible:ring-[3px] has-focus-visible:ring-ring/32",
+          "has-focus-visible:border-ring/64 has-focus-visible:ring-2 has-focus-visible:ring-ring/24",
           "data-disabled:opacity-64",
           className
         )}

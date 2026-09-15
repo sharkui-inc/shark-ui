@@ -37,7 +37,7 @@ const Example = () => {
             size="sm"
             variant="outline"
           >
-            <PlusIcon className="size-4" />
+            <PlusIcon className="size-4" data-icon="inline-start" />
             Add Item
           </Button>
 

@@ -10,7 +10,7 @@ const Example = () => {
   });
 
   return (
-    <p className="font-medium text-foreground text-lg leading-relaxed">
+    <p className="text-foreground text-lg leading-relaxed">
       {chunks.map((chunk, index) =>
         chunk.match ? (
           <mark

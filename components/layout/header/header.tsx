@@ -33,10 +33,10 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
       )}
       {...rest}
     >
-      <div className="container flex h-full items-center gap-4">
+      <div className="container flex h-full items-center gap-2">
         <HeaderBrand asChild>
           <Link aria-label="Shark UI, back to home" href="/">
-            <SharkIcon className="size-5 shrink-0" />
+            <SharkIcon className="size-6 shrink-0" />
           </Link>
         </HeaderBrand>
 

@@ -12,9 +12,9 @@ const UseCopyToClipboardDemo = () => {
   return (
     <Button onClick={() => clipboard.copy()}>
       {clipboard.copied ? (
-        <CheckIcon aria-hidden="true" />
+        <CheckIcon aria-hidden="true" data-icon="inline-start" />
       ) : (
-        <ClipboardIcon aria-hidden="true" />
+        <ClipboardIcon aria-hidden="true" data-icon="inline-start" />
       )}
       {clipboard.copied ? "Copied" : "Copy"}
     </Button>

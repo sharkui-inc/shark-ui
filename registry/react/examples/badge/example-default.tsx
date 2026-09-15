@@ -3,7 +3,7 @@ import { Badge } from "@/registry/react/components/badge";
 
 const Example = () => (
   <Badge>
-    <Star />
+    <Star data-icon="inline-start" />
     Favorite
   </Badge>
 );

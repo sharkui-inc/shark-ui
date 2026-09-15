@@ -135,11 +135,11 @@ const Example = () => {
           <ActionBarValue count={selectedIds.length} />
           <div className="ml-auto flex gap-2">
             <Button size="sm" variant="secondary">
-              <SendIcon />
+              <SendIcon data-icon="inline-start" />
               Send
             </Button>
             <Button size="sm" variant="secondary">
-              <PencilIcon />
+              <PencilIcon data-icon="inline-start" />
               Edit
             </Button>
             <Menu positioning={{ placement: "top" }}>
@@ -162,7 +162,7 @@ const Example = () => {
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button size="sm" variant="destructive">
-                  <Trash2Icon />
+                  <Trash2Icon data-icon="inline-start" />
                   Delete
                 </Button>
               </AlertDialogTrigger>

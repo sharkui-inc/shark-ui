@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronLeftIcon, ChevronRightIcon, SearchIcon } from "lucide-react";
+import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Avatar,
   AvatarFallback,
@@ -55,7 +56,10 @@ export const MusicHeader = () => (
             variant="ghost"
           >
             <Avatar size="sm">
-              <AvatarImage alt="" src="/images/gradients/rose.svg" />
+              <AvatarImage
+                alt=""
+                src={createWavesAvatar("Mira Vale", "rose")}
+              />
               <AvatarFallback>MV</AvatarFallback>
             </Avatar>
           </Button>

@@ -11,12 +11,16 @@ import {
   RTLPreviewProvider,
 } from "./rtl-preview";
 
-type RTLComponentPreviewProps = ComponentPreviewExampleProps;
+type RTLComponentPreviewProps = ComponentPreviewExampleProps & {
+  /** The RTL example file name. Defaults to `example-rtl`. */
+  rtlFileName?: string;
+};
 
 export const RTLComponentPreview = async (props: RTLComponentPreviewProps) => {
   const {
     componentName,
     fileName = "example-default",
+    rtlFileName = "example-rtl",
     autoHeight = false,
     ...rest
   } = props;
@@ -24,12 +28,12 @@ export const RTLComponentPreview = async (props: RTLComponentPreviewProps) => {
     process.cwd(),
     "registry/react/examples",
     componentName,
-    "example-rtl.tsx"
+    `${rtlFileName}.tsx`
   );
+  const previewFileName = existsSync(rtlExamplePath) ? rtlFileName : fileName;
   const { preview, source } = await getComponentPreviewExample(
     componentName,
-    existsSync(rtlExamplePath) ? "example-rtl" : fileName,
-    fileName
+    previewFileName
   );
 
   return (
@@ -37,11 +41,8 @@ export const RTLComponentPreview = async (props: RTLComponentPreviewProps) => {
       <ComponentPreviewFrame
         {...rest}
         autoHeight={autoHeight}
-        preview={
-          <RTLPreviewContent className="contents">{preview}</RTLPreviewContent>
-        }
+        preview={<RTLPreviewContent>{preview}</RTLPreviewContent>}
         previewHeader={<RTLPreviewHeader />}
-        showBorders={false}
         source={source}
       />
     </RTLPreviewProvider>

@@ -30,7 +30,7 @@ export const LinkOverlay = (props: React.ComponentProps<typeof ark.a>) => {
         "-mx-1 -my-0.5 px-1 py-0.5",
         "rounded-md border border-transparent",
         "before:absolute before:inset-0 before:z-0 before:block before:h-full before:w-full before:cursor-inherit before:content-['']",
-        "outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/32",
+        "border border-transparent outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         className
       )}
       data-slot="link-overlay"

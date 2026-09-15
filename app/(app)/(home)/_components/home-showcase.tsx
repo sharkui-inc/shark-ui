@@ -34,16 +34,14 @@ export const HomeShowcase = (props: React.PropsWithChildren) => {
           onValueChange={onValueChange}
           value={visibleTab}
         >
-          <div className="max-w-full overflow-x-auto">
-            <TabsList>
-              <TabsTrigger value={COMPONENTS_SLUG}>Components</TabsTrigger>
-              {THEME_TEMPLATES.map((item) => (
-                <TabsTrigger key={item.slug} value={item.slug}>
-                  {item.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </div>
+          <TabsList>
+            <TabsTrigger value={COMPONENTS_SLUG}>Components</TabsTrigger>
+            {THEME_TEMPLATES.map((item) => (
+              <TabsTrigger key={item.slug} value={item.slug}>
+                {item.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
         </Tabs>
 
         <div className="flex shrink-0 items-center gap-2 self-end sm:self-auto">
@@ -96,20 +94,25 @@ const HomeThemePicker = () => {
                   aria-label={`Apply ${preset.label} theme`}
                   aria-pressed={selected}
                   className={cn(
-                    "relative size-6 shrink-0 rounded-full",
-                    "cursor-pointer outline-none",
+                    "relative size-6 shrink-0 rounded-full border border-transparent",
+                    "cursor-pointer outline-hidden",
                     "transition-shadow duration-100 ease-out",
                     "motion-reduce:transition-none!",
-                    "focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                    preset.swatchClass,
-                    selected &&
-                      "ring-2 ring-foreground/24 ring-offset-2 ring-offset-background"
+                    "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+                    selected && "ring-2 ring-primary"
                   )}
                   onClick={() => {
                     applyPreset(preset);
                   }}
                   type="button"
                 >
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "absolute inset-0 rounded-full",
+                      preset.swatchClass
+                    )}
+                  />
                   {selected ? (
                     <CheckIcon
                       aria-hidden="true"

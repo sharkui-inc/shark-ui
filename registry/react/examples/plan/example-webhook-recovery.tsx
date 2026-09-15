@@ -64,7 +64,7 @@ const Example = () => (
             <AlertAction>
               <Button size="sm" variant="outline">
                 View run
-                <ExternalLinkIcon aria-hidden="true" />
+                <ExternalLinkIcon aria-hidden="true" data-icon="inline-end" />
               </Button>
             </AlertAction>
           </Alert>

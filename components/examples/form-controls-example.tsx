@@ -153,7 +153,7 @@ export const FormControlsExample = (props: React.ComponentProps<"div">) => {
                 <InputGroup>
                   <ClipboardInput
                     asChild
-                    className="h-full flex-1 rounded-none border-0 bg-transparent px-0 shadow-none focus-visible:ring-0 dark:bg-transparent"
+                    className="h-full flex-1 rounded-none border-0 bg-transparent px-0 shadow-none focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent"
                   >
                     <InputGroupInput
                       aria-label="Share link"

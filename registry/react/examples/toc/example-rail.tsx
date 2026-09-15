@@ -33,7 +33,7 @@ const Example = () => {
               key={item.value}
             >
               <TocLink
-                className="relative overflow-visible py-[0.35rem] text-[0.8125rem] leading-[1.4]"
+                className="relative mx-0 overflow-visible px-0 py-[0.35rem] text-[0.8125rem] leading-[1.4]"
                 href={`#${item.value}`}
                 style={{ paddingInlineStart: textOffset(item.depth) }}
               >

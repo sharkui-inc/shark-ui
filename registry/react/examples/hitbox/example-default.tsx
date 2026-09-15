@@ -17,14 +17,14 @@ const Example = () => {
             checked={show}
             onCheckedChange={({ checked }) => setShow(checked)}
           />
-          <FieldLabel>Show hitbox</FieldLabel>
+          <FieldLabel>Hitbox</FieldLabel>
         </Field>
       </div>
 
       <Button
         className={cn("group/hitbox hitbox-6 w-28", { "hitbox-debug": show })}
         clickEffect={false}
-        size="lg"
+        variant="secondary"
       >
         <span className="font-mono group-hover/hitbox:hidden">hitbox-6</span>
         <span className="not-group-hover/hitbox:hidden group-active:hidden">

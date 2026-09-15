@@ -14,7 +14,6 @@ import {
 import { themeBootstrapScript } from "@/lib/theme/apply";
 import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
-import { SkipNavLink } from "@/registry/react/components/skip-nav";
 import { Toaster } from "@/registry/react/components/toast";
 import { Providers } from "./providers";
 
@@ -82,8 +81,6 @@ const RootLayout = (props: LayoutProps<"/">) => {
         <JsonLd data={getWebSiteJsonLd()} />
         <JsonLd data={getSoftwareApplicationJsonLd()} />
         <Providers>
-          <SkipNavLink />
-
           {children}
 
           <Toaster />

@@ -219,15 +219,15 @@ export const HeaderCustomize = () => {
                 <RadioGroupLabel>
                   {THEME_FIELDS.baseColor.label}
                 </RadioGroupLabel>
-                <div className="flex h-11 gap-px overflow-hidden rounded-xl border border-input bg-border">
+                <div className="flex h-11 gap-0.5 overflow-hidden rounded-xl border bg-border">
                   {BASE_COLORS.map((color) => (
                     <RadioGroupItem
                       aria-label={color.label}
                       className={cn(
-                        "group h-full min-w-0 flex-1 justify-center p-0",
-                        "rounded-none border-0",
+                        "group relative h-full min-w-0 flex-1 justify-center p-0",
+                        "rounded-none border border-transparent",
                         "data-[state=checked]:z-10 data-[state=checked]:outline-2 data-[state=checked]:outline-foreground data-[state=checked]:-outline-offset-2",
-                        "data-focus-visible:z-20 data-focus-visible:outline-2 data-focus-visible:outline-ring data-focus-visible:-outline-offset-2",
+                        "data-focus-visible:z-20 data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24",
                         "pointer-coarse:after:hidden"
                       )}
                       key={color.value}
@@ -237,7 +237,8 @@ export const HeaderCustomize = () => {
                         <TooltipTrigger asChild>
                           <span
                             className={cn(
-                              "relative flex size-full items-center justify-center",
+                              "absolute -inset-px",
+                              "flex items-center justify-center",
                               "before:absolute before:inset-0 before:bg-black/0 group-data-[state=checked]:before:bg-black/8",
                               color.hex
                             )}
@@ -267,15 +268,15 @@ export const HeaderCustomize = () => {
                 <RadioGroupLabel>
                   {THEME_FIELDS.primaryColor.label}
                 </RadioGroupLabel>
-                <div className="grid grid-cols-9 gap-px overflow-hidden rounded-xl border border-input">
+                <div className="grid grid-cols-9 gap-0.5 overflow-hidden rounded-xl border">
                   {PRIMARY_COLORS.map((color) => (
                     <RadioGroupItem
                       aria-label={color.label}
                       className={cn(
                         "group relative aspect-square justify-center p-0",
-                        "rounded-none border-0",
+                        "rounded-none border border-transparent",
                         "data-[state=checked]:z-10 data-[state=checked]:outline-2 data-[state=checked]:outline-foreground data-[state=checked]:-outline-offset-2",
-                        "data-focus-visible:z-20 data-focus-visible:outline-2 data-focus-visible:outline-ring data-focus-visible:-outline-offset-2",
+                        "data-focus-visible:z-20 data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24",
                         "pointer-coarse:after:hidden"
                       )}
                       key={color.value}
@@ -284,7 +285,7 @@ export const HeaderCustomize = () => {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <span
-                            className="relative flex size-full items-center justify-center before:absolute before:inset-0 before:bg-black/0 group-data-[state=checked]:before:bg-black/8"
+                            className="absolute -inset-px flex items-center justify-center before:absolute before:inset-0 before:bg-black/0 group-data-[state=checked]:before:bg-black/8"
                             style={{
                               backgroundColor: getPrimaryFillCss(
                                 color.value,
@@ -308,7 +309,7 @@ export const HeaderCustomize = () => {
                 <span className="font-medium text-muted-foreground text-xs">
                   {THEME_FIELDS.primaryTone.label}
                 </span>
-                <div className="h-8 w-40 rounded-lg border border-input shadow-xs/4 transition-[color,box-shadow] has-[:focus-visible]:border-primary has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/32">
+                <div className="h-8 w-40 rounded-lg border border-input shadow-xs/4 transition-[color,box-shadow] has-[:focus-visible]:border-ring/64 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring/24">
                   <SegmentGroup
                     aria-label="Primary tone"
                     className={cn(
@@ -376,10 +377,10 @@ export const HeaderCustomize = () => {
                   <RadioGroupItem
                     className={cn(
                       "flex flex-col items-center gap-2",
-                      "rounded-xl border border-input bg-muted/32 p-2.5",
+                      "rounded-xl border bg-muted/32 p-2.5",
                       "pointer-coarse:after:hidden",
                       "data-[state=checked]:border-primary data-[state=checked]:bg-primary/8 data-[state=checked]:ring-1 data-[state=checked]:ring-primary/48 data-[state=checked]:ring-inset",
-                      "data-focus-visible:ring-[3px] data-focus-visible:ring-ring/32 data-focus-visible:ring-inset"
+                      "data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24"
                     )}
                     key={radius.value}
                     value={radius.value}

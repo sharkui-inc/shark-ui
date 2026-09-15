@@ -8,6 +8,7 @@ import {
   StarIcon,
   Trash2Icon,
 } from "lucide-react";
+import { createWavesAvatar } from "@/lib/dicebear";
 
 export const FOLDERS = [
   { icon: InboxIcon, label: "Inbox" },
@@ -179,21 +180,21 @@ export const EMAILS: Email[] = [
 ] satisfies Email[];
 
 const SENDER_AVATARS: Record<string, string> = {
-  Airbnb: "/images/gradients/rose.svg",
-  AWS: "/images/gradients/orange.svg",
-  DocuSign: "/images/gradients/blue.svg",
-  Figma: "/images/gradients/purple.svg",
-  Mercury: "/images/gradients/green-dark.svg",
-  Notion: "/images/gradients/amber.svg",
-  PagerDuty: "/images/gradients/orange.svg",
-  Spotify: "/images/gradients/green-dark.svg",
-  "United Airlines": "/images/gradients/blue.svg",
-  Vercel: "/images/gradients/amber.svg",
-  You: "/images/gradients/green-dark.svg",
+  Airbnb: createWavesAvatar("Airbnb", "rose"),
+  AWS: createWavesAvatar("AWS", "orange"),
+  DocuSign: createWavesAvatar("DocuSign", "blue"),
+  Figma: createWavesAvatar("Figma", "purple"),
+  Mercury: createWavesAvatar("Mercury", "green-dark"),
+  Notion: createWavesAvatar("Notion", "amber"),
+  PagerDuty: createWavesAvatar("PagerDuty", "orange"),
+  Spotify: createWavesAvatar("Spotify", "green-dark"),
+  "United Airlines": createWavesAvatar("United Airlines", "blue"),
+  Vercel: createWavesAvatar("Vercel", "amber"),
+  You: createWavesAvatar("You", "green-dark"),
 };
 
 export const getSenderAvatar = (sender: string) =>
-  SENDER_AVATARS[sender] ?? "/images/gradients/green-dark.svg";
+  SENDER_AVATARS[sender] ?? createWavesAvatar(sender, "green-dark");
 
 export const getFolderCount = (folder: Mailbox) => {
   switch (folder) {

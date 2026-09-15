@@ -23,7 +23,7 @@ const inpuGroupVariants = tv({
     "has-[>textarea]:h-auto",
     "has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-start]]:[&>input]:pb-3",
     "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3",
-    "outline-none focus-within:border-primary focus-within:ring-[3px] focus-within:ring-ring/32",
+    "focus-within:border-ring/64 focus-within:ring-2 focus-within:ring-ring/24",
     "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-[3px] has-[[data-slot][aria-invalid=true]]:ring-destructive/24",
     "dark:has-[[data-slot][aria-invalid=true]]:border-destructive-foreground dark:has-[[data-slot][aria-invalid=true]]:ring-destructive-foreground/32",
     "motion-reduce:transition-none",
@@ -153,6 +153,7 @@ const inputGroupButtonVariants = tv({
     "shadow-none",
     "[--input-group-inner-radius:max(0px,calc(var(--radius)-var(--input-group-inset)))]",
     "rounded-(--input-group-inner-radius)",
+    "focus-visible:border-transparent focus-visible:ring-0",
   ],
 });
 
@@ -200,7 +201,7 @@ export const InputGroupInput = (props: React.ComponentProps<typeof Input>) => {
         "px-0",
         "bg-transparent",
         "rounded-none border-0 shadow-none",
-        "focus-visible:ring-0",
+        "focus-visible:border-0 focus-visible:ring-0",
         "disabled:bg-transparent aria-invalid:ring-0 data-invalid:ring-0",
         "dark:bg-transparent dark:disabled:bg-transparent",
         className
@@ -224,7 +225,7 @@ export const InputGroupTextarea = (
         "py-3",
         "bg-transparent",
         "resize-none rounded-none border-0 shadow-none",
-        "focus-visible:ring-0",
+        "focus-visible:border-0 focus-visible:ring-0",
         "disabled:bg-transparent aria-invalid:ring-0 data-invalid:ring-0",
         "dark:bg-transparent dark:disabled:bg-transparent",
         className

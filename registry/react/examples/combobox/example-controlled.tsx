@@ -5,6 +5,7 @@ import React from "react";
 import {
   Combobox,
   ComboboxContent,
+  ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
@@ -33,6 +34,7 @@ const Example = () => {
       >
         <ComboboxInput placeholder="Select a fruit..." />
         <ComboboxContent>
+          <ComboboxEmpty />
           <ComboboxList>
             {collection.items.map((item) => (
               <ComboboxItem item={item} key={item.value}>

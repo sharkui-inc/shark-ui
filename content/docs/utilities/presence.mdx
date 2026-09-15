@@ -55,9 +55,7 @@ const [visible, setVisible] = React.useState(false);
 
 ## Lazy
 
-Setting `lazyMount` and `unmountOnExit` to `true` lazy mounts and unmounts the content.
-
-It will remove the element from the DOM when it is not present. Shark defaults both to `true`.
+It will remove the element from the DOM when it is not present. The default is `true`.
 
 ```tsx showLineNumbers
 <Presence lazyMount unmountOnExit {...}>
@@ -80,23 +78,14 @@ When content stays mounted after close, `hideMode` chooses how it is hidden:
 </Presence>
 ```
 
-The same prop is available on overlays that keep content mounted (Dialog, Drawer, Sheet, Accordion, Collapsible, Tree View). Shark overlays default `unmountOnExit`, so set `unmountOnExit={false}` if you want `hideMode` to apply.
-
-`onEnterComplete` fires once the enter animation finishes, matching `onExitComplete`.
-
 ## States
 
-Presence automatically manages the attribute `data-state` to `open` and `closed`. This enables styling and animations based on visibility state.
-
+Presence automatically manages the attribute `data-state` to `open` and `closed`.
 
 ```tsx showLineNumbers
 <Presence present={true} /> // <div data-state="open" />
 <Presence present={false} /> // <div data-state="closed" />
 ```
-
-## RTL
-
-<RTLComponentPreview componentName="presence" />
 
 ## API Reference
 

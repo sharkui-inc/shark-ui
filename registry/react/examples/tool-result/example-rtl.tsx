@@ -1,0 +1,129 @@
+"use client";
+
+import { RotateCwIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import { usePreviewLocale } from "@/hooks/use-preview-locale";
+import { Button } from "@/registry/react/components/button";
+import {
+  Terminal,
+  TerminalContent,
+} from "@/registry/react/components/terminal";
+import {
+  ToolResult,
+  ToolResultAction,
+  ToolResultContent,
+  ToolResultMeta,
+  ToolResultName,
+  type ToolResultStatus,
+  ToolResultStatus as ToolResultStatusIndicator,
+  ToolResultTitle,
+  ToolResultTrigger,
+} from "@/registry/react/components/tool-result";
+
+const Example = () => {
+  const { locale } = usePreviewLocale();
+
+  const { values } = translations[locale];
+
+  const [lineCount, setLineCount] = useState(1);
+  const [status, setStatus] = useState<ToolResultStatus>("running");
+
+  useEffect(() => {
+    if (status !== "running") {
+      return;
+    }
+
+    if (lineCount >= LINES.length) {
+      const doneId = window.setTimeout(() => {
+        setStatus("success");
+      }, 400);
+
+      return () => {
+        window.clearTimeout(doneId);
+      };
+    }
+
+    const lineId = window.setTimeout(() => {
+      setLineCount((count) => count + 1);
+    }, 420);
+
+    return () => {
+      window.clearTimeout(lineId);
+    };
+  }, [lineCount, status]);
+
+  const isRunning = status === "running";
+
+  return (
+    <div className="relative flex h-full w-full items-center">
+      <Button
+        className="absolute inset-e-0 top-0"
+        onClick={() => {
+          setLineCount(1);
+          setStatus("running");
+        }}
+        size="sm"
+        variant="ghost"
+      >
+        <RotateCwIcon aria-hidden="true" data-icon="inline-start" />
+        {values.replay}
+      </Button>
+      <ToolResult
+        className="mx-auto w-full max-w-md"
+        defaultOpen={false}
+        status={status}
+      >
+        <ToolResultTrigger>
+          <ToolResultTitle>
+            {isRunning ? values.running : values.passed}
+          </ToolResultTitle>
+          {isRunning ? null : <ToolResultMeta>2.9s</ToolResultMeta>}
+          <ToolResultName>terminal.run</ToolResultName>
+          <ToolResultAction>
+            <ToolResultStatusIndicator />
+          </ToolResultAction>
+        </ToolResultTrigger>
+        <ToolResultContent>
+          <Terminal output={LINES.slice(0, lineCount).join("\n")}>
+            <TerminalContent />
+          </Terminal>
+        </ToolResultContent>
+      </ToolResult>
+    </div>
+  );
+};
+
+const LINES = [
+  "\u001B[34mRunning tests...\u001B[0m",
+  "",
+  " \u001B[32m✓\u001B[0m validateForm › returns error for invalid email",
+  " \u001B[32m✓\u001B[0m validateForm › passes for valid input",
+  "",
+  "\u001B[90m2 passed (2.9s)\u001B[0m",
+];
+
+const translations = {
+  ar: {
+    values: {
+      passed: "نجحت الاختبارات",
+      replay: "إعادة التشغيل",
+      running: "جارٍ تشغيل الاختبارات",
+    },
+  },
+  en: {
+    values: {
+      passed: "Tests passed",
+      replay: "Replay",
+      running: "Running tests",
+    },
+  },
+  he: {
+    values: {
+      passed: "הבדיקות עברו",
+      replay: "הפעל שוב",
+      running: "מריץ בדיקות",
+    },
+  },
+};
+
+export default Example;

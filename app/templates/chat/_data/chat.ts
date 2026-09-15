@@ -9,6 +9,7 @@ import {
   SquarePenIcon,
   TerminalIcon,
 } from "lucide-react";
+import { createWavesAvatar } from "@/lib/dicebear";
 
 export const NEW_CHAT = "New chat";
 
@@ -89,7 +90,7 @@ export const environmentSources = [
 ] as const;
 
 export const account = {
-  avatar: "/images/gradients/rose.svg",
+  avatar: createWavesAvatar("Vinicius Vicentini", "rose"),
   initials: "VV",
   name: "Vinicius Vicentini",
 };

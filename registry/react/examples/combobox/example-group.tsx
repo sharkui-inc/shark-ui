@@ -4,6 +4,7 @@ import { useFilter, useListCollection } from "@ark-ui/react";
 import {
   Combobox,
   ComboboxContent,
+  ComboboxEmpty,
   ComboboxGroup,
   ComboboxInput,
   ComboboxItem,
@@ -29,6 +30,7 @@ const Example = () => {
     >
       <ComboboxInput placeholder="Select a timezone" />
       <ComboboxContent className="w-60">
+        <ComboboxEmpty />
         <ComboboxList>
           {collection.group().map(([continent, group]) => (
             <ComboboxGroup heading={continent} key={continent}>

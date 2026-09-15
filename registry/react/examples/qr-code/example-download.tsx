@@ -36,14 +36,14 @@ const Example = () => {
           <div className="flex items-center gap-2">
             <QrCodeDownload asChild fileName="qr-code" mimeType="image/png">
               <Button className="w-1/2" size="icon-md" variant="outline">
-                <DownloadIcon />
+                <DownloadIcon data-icon="inline-start" />
                 PNG
               </Button>
             </QrCodeDownload>
 
             <QrCodeDownload asChild fileName="qr-code" mimeType="image/svg+xml">
               <Button className="w-1/2" size="icon-md">
-                <DownloadIcon />
+                <DownloadIcon data-icon="inline-start" />
                 SVG
               </Button>
             </QrCodeDownload>
