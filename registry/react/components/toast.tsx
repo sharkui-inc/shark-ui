@@ -129,7 +129,7 @@ export const ToastItem = (props: ToastItemProps) => {
             {toastData.title}
           </ArkToast.Title>
 
-          {toastData.description && (
+          {!!toastData.description && (
             <ArkToast.Description
               className="text-muted-foreground text-sm"
               data-slot="toast-description"
@@ -141,7 +141,7 @@ export const ToastItem = (props: ToastItemProps) => {
       </div>
 
       <div className="flex items-center gap-2">
-        {toastData.action && (
+        {!!toastData.action && (
           <ArkToast.ActionTrigger
             asChild
             data-slot="toast-action-trigger"

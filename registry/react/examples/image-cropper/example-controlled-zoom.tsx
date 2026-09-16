@@ -4,6 +4,7 @@ import { ZoomInIcon, ZoomOutIcon } from "lucide-react";
 import React from "react";
 import { createWavesAvatar } from "@/lib/dicebear";
 import { Button } from "@/registry/react/components/button";
+import { Card, CardContent } from "@/registry/react/components/card";
 import {
   ImageCropper,
   ImageCropperImage,
@@ -14,7 +15,7 @@ const Example = () => {
   const [zoom, setZoom] = React.useState(1);
 
   return (
-    <div className="flex w-full max-w-lg flex-col items-end gap-2">
+    <Card className="w-full max-w-sm pt-0 [--space:--spacing(4)]">
       <ImageCropper onZoomChange={(e) => setZoom(e.zoom)} zoom={zoom}>
         <ImageCropperImage
           alt="Crop me"
@@ -22,7 +23,7 @@ const Example = () => {
         />
         <ImageCropperSelection />
       </ImageCropper>
-      <div className="flex gap-1">
+      <CardContent className="flex justify-end gap-2">
         <Button
           aria-label="Zoom out"
           onClick={() => setZoom(Math.max(0, zoom - 0.25))}
@@ -39,8 +40,8 @@ const Example = () => {
         >
           <ZoomInIcon aria-hidden />
         </Button>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

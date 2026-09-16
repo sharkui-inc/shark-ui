@@ -17,7 +17,7 @@ const Example = () => {
   return (
     <div className="flex w-full max-w-lg flex-col gap-3">
       <Reasoning duration={8} onOpenChange={handleOpenChange} open={open}>
-        <ReasoningTrigger duration={8} />
+        <ReasoningTrigger />
         <ReasoningContent>
           The form already validates empty fields. I should add a format check
           next to `validateForm` and keep the regex in a helper so the UI can

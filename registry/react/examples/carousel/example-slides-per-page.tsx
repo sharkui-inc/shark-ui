@@ -10,9 +10,10 @@ import {
 
 const Example = () => (
   <Carousel
-    className="w-full max-w-48 sm:max-w-80"
+    className="w-full max-w-lg"
     slideCount={slides.length}
     slidesPerPage={3}
+    spacing="16px"
   >
     <CarouselControl>
       <CarouselPrevious>Previous</CarouselPrevious>
@@ -23,7 +24,7 @@ const Example = () => (
       {slides.map((_, index) => (
         <CarouselItem index={index} key={index}>
           <Card>
-            <CardContent className="flex h-40 items-center justify-center">
+            <CardContent className="flex aspect-square items-center justify-center">
               <span className="font-semibold text-2xl">{index + 1}</span>
             </CardContent>
           </Card>

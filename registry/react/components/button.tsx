@@ -8,14 +8,15 @@ export const buttonControlVariants = tv({
   base: [
     "relative",
     "inline-flex shrink-0 items-center justify-center gap-2",
-    "touch-manipulation select-none whitespace-nowrap font-medium font-sans text-sm",
+    "touch-manipulation",
+    "select-none whitespace-nowrap font-medium font-sans text-sm",
   ],
 });
 
 export const buttonVariants = tv({
   base: [
     buttonControlVariants(),
-    "rounded-(--button-radius) [--button-radius:var(--radius-lg)]",
+    "rounded-lg",
     "transition-[background-color,border-color,color,box-shadow,opacity,transform]",
     "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
     "disabled:pointer-events-none disabled:opacity-64",
@@ -25,12 +26,12 @@ export const buttonVariants = tv({
     "aria-invalid:border-destructive aria-invalid:ring-destructive/24",
     "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:shrink-0",
     "has-[>[data-icon=inline-start]]:ps-[calc(var(--btn-px)-(--spacing(0.5)))] has-[>[data-icon=inline-end]]:pe-[calc(var(--btn-px)-(--spacing(0.5)))]",
-    "[&_[data-icon=inline-end]]:order-last [&_[data-icon=inline-start]]:order-first [&_[data-icon]]:mx-0",
+    "**:data-[icon=inline-end]:order-last **:data-[icon=inline-start]:order-first **:data-icon:mx-0",
     "motion-reduce:transition-none",
   ],
   compoundVariants: [
     {
-      class: "[--button-radius:9999px]",
+      class: "rounded-full",
       pill: true,
     },
   ],
@@ -51,16 +52,11 @@ export const buttonVariants = tv({
     size: {
       "icon-lg": "size-9",
       "icon-md": "size-8",
-      "icon-sm": [
-        "size-7",
-        "[--button-radius:min(var(--radius-md),12px)]",
-        "in-data-[slot=button-group]:[--button-radius:var(--radius-lg)]",
-      ],
+      "icon-sm": ["size-7", "rounded-md"],
       "icon-xl": "size-10 [&_svg:not([class*='size-'])]:size-5",
       "icon-xs": [
         "size-6",
-        "[--button-radius:min(var(--radius-md),10px)]",
-        "in-data-[slot=button-group]:[--button-radius:var(--radius-lg)]",
+        "rounded-md",
         "[&_svg:not([class*='size-'])]:size-3",
         "in-data-[slot=input-group]:[&_svg:not([class*='size-'])]:size-3.5",
       ],
@@ -71,8 +67,7 @@ export const buttonVariants = tv({
         "gap-1.5",
         "[--btn-px:calc(--spacing(2.5)-1px)]",
         "px-(--btn-px)",
-        "[--button-radius:min(var(--radius-md),12px)]",
-        "in-data-[slot=button-group]:[--button-radius:var(--radius-lg)]",
+        "rounded-md",
         "[&_svg:not([class*='size-'])]:size-3.5",
       ],
       xl: [
@@ -87,8 +82,7 @@ export const buttonVariants = tv({
         "[--btn-px:calc(--spacing(2)-1px)]",
         "px-(--btn-px)",
         "text-xs",
-        "[--button-radius:min(var(--radius-md),10px)]",
-        "in-data-[slot=button-group]:[--button-radius:var(--radius-lg)]",
+        "rounded-md",
         "[&_svg:not([class*='size-'])]:size-3",
         "in-data-[slot=input-group]:[&_svg:not([class*='size-'])]:size-3.5",
       ],
@@ -120,14 +114,14 @@ export const buttonVariants = tv({
       outline: [
         "bg-transparent",
         "text-foreground",
-        "border border-input shadow-sm/4",
+        "border border-input shadow-xs/4",
         "hover:bg-accent hover:text-accent-foreground",
         "dark:bg-input/32 dark:hover:bg-input/64",
       ],
       secondary: [
         "bg-secondary",
         "text-secondary-foreground",
-        "border border-transparent",
+        "border border-transparent shadow-sm/4",
         "hover:bg-secondary-hover",
       ],
     },

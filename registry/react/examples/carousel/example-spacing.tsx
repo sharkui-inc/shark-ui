@@ -10,7 +10,7 @@ import {
 
 const Example = () => (
   <Carousel
-    className="w-full max-w-48"
+    className="w-full max-w-lg"
     slideCount={slides.length}
     slidesPerPage={2}
     spacing="64px"

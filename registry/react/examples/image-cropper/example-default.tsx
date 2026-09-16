@@ -1,4 +1,5 @@
 import { createWavesAvatar } from "@/lib/dicebear";
+import { Card, CardContent } from "@/registry/react/components/card";
 import {
   ImageCropper,
   ImageCropperImage,
@@ -6,13 +7,17 @@ import {
 } from "@/registry/react/components/image-cropper";
 
 const ImageCropperDemo = () => (
-  <ImageCropper className="aspect-video w-full max-w-lg">
-    <ImageCropperImage
-      alt="Crop me"
-      src={createWavesAvatar("image cropper", "green-dark")}
-    />
-    <ImageCropperSelection />
-  </ImageCropper>
+  <Card className="w-full max-w-sm pt-0 [--space:--spacing(4)]">
+    <CardContent>
+      <ImageCropper>
+        <ImageCropperImage
+          alt="Crop me"
+          src={createWavesAvatar("image cropper", "green-dark")}
+        />
+        <ImageCropperSelection />
+      </ImageCropper>
+    </CardContent>
+  </Card>
 );
 
 export default ImageCropperDemo;

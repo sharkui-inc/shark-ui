@@ -15,6 +15,7 @@ export const inputVariants = tv({
     "w-full min-w-0",
     "bg-transparent dark:bg-input/32",
     "font-normal text-base md:text-sm",
+    "rounded-lg",
     "border border-input shadow-xs/4",
     "placeholder:text-muted-foreground",
     "file:inline-flex file:h-7 file:items-center file:border-0",
@@ -28,19 +29,25 @@ export const inputVariants = tv({
     "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-64",
     "motion-reduce:transition-none",
   ],
+  compoundVariants: [
+    {
+      class: "rounded-full",
+      pill: true,
+    },
+  ],
   defaultVariants: {
     pill: false,
     size: "md",
   },
   variants: {
     pill: {
-      false: "rounded-lg",
-      true: "rounded-full",
+      false: "",
+      true: "",
     },
     size: {
       lg: ["h-9", "px-[calc(--spacing(3.5)-1px)]"],
       md: ["h-8", "px-[calc(--spacing(3)-1px)]"],
-      sm: ["h-7", "px-[calc(--spacing(2.5)-1px)]"],
+      sm: ["h-7", "px-[calc(--spacing(2.5)-1px)]", "rounded-md"],
     },
   },
 });

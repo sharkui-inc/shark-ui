@@ -58,7 +58,11 @@ export const CodeBlock = (props: CodeBlockProps) => {
     ...rest
   } = props;
   const value = React.useMemo(
-    () => ({ code, isStreaming, language }),
+    () => ({
+      code,
+      isStreaming,
+      language,
+    }),
     [code, isStreaming, language]
   );
 

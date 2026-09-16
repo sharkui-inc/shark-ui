@@ -49,17 +49,19 @@ export const ComponentPreviewFrame = (props: ComponentPreviewFrameProps) => {
       <div className="group/stage relative overflow-hidden rounded-2xl border">
         <div
           className={cn(
-            "relative min-h-[450px] w-full",
+            "relative w-full",
             "flex flex-col bg-code",
             "group-has-[[data-slot=tab-code]:not([hidden])]/stage:pointer-events-none",
-            "group-has-[[data-slot=tab-code]:not([hidden])]/stage:invisible",
-            !autoHeight && "h-[450px]"
+            "group-has-[[data-slot=tab-code]:not([hidden])]/stage:invisible"
           )}
           data-slot="preview"
         >
           {previewHeader}
           <div
-            className="relative flex min-h-0 flex-1 items-center justify-center overflow-y-auto p-4 sm:p-10"
+            className={cn(
+              "relative flex min-h-0 items-center justify-center overflow-y-auto p-4 sm:p-10",
+              autoHeight ? "min-h-[450px]" : "h-[450px]"
+            )}
             data-slot="preview-content"
           >
             {showBorders ? (

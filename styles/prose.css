@@ -287,5 +287,5 @@
   line-height: var(--text-xs--line-height);
   color: var(--color-muted-foreground);
   background-color: var(--color-muted);
-  border-radius: var(--radius-sm);
+  border-radius: calc(var(--radius) * 0.5);
 }

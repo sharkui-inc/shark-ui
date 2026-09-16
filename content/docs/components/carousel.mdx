@@ -90,6 +90,12 @@ import {
 </Carousel>
 ```
 
+### Controlled
+
+Use `page` and `onPageChange` props to control the carousel state programmatically.
+
+<ComponentPreview componentName="carousel" fileName="example-controlled" />
+
 ## Orientation
 
 ### Horizontal
@@ -126,23 +132,17 @@ Use `loop` prop to make the carousel loop.
 
 <ComponentPreview componentName="carousel" fileName="example-loop" />
 
-### Controlled
+### Spacing
 
-Use `page` and `onPageChange` props to control the carousel state programmatically.
+Control the gap between slides using the `spacing` prop on `Carousel`.
 
-<ComponentPreview componentName="carousel" fileName="example-controlled" />
+<ComponentPreview componentName="carousel" fileName="example-spacing" />
 
 ### Slides Per Page
 
 Display multiple slides simultaneously by setting the `slidesPerPage` prop on `Carousel`.
 
 <ComponentPreview componentName="carousel" fileName="example-slides-per-page" />
-
-### Spacing
-
-Control the gap between slides using the `spacing` prop on `Carousel`.
-
-<ComponentPreview componentName="carousel" fileName="example-spacing" />
 
 ### Mouse Drag
 
@@ -173,7 +173,7 @@ Root component. Manages slide state and navigation.
 | `page` | `number` | `-` |
 | `slidesPerPage` | `number` | `1` |
 | `slidesPerMove` | `number \| 'auto'` | `'auto'` |
-| `spacing` | `string` | `"16px"` |
+| `spacing` | `string` | `"0px"` |
 | `padding` | `number` | `0` |
 | `className` | `string` | `-` |
 
@@ -213,6 +213,7 @@ Goes to the previous slide.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
+| `label` | `string` | `"Previous"` |
 
 ### CarouselNext
 
@@ -221,6 +222,7 @@ Goes to the next slide.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
+| `label` | `string` | `"Next"` |
 
 ### CarouselIndicatorGroup
 

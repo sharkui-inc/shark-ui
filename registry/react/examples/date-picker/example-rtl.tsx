@@ -19,11 +19,13 @@ import {
   DatePickerTrigger,
   DatePickerValue,
 } from "@/registry/react/components/date-picker";
+import { useLocale } from "@/registry/react/components/locale";
 
 const Example = () => {
-  const { locale } = usePreviewLocale();
+  const { locale: language } = usePreviewLocale();
+  const { locale } = useLocale();
 
-  const { values } = translations[locale];
+  const { values } = translations[language];
 
   return (
     <DatePicker locale={locale}>

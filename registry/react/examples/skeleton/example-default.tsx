@@ -6,7 +6,7 @@ import {
 const SkeletonDemo = () => (
   <div className="flex w-full max-w-xs items-center gap-4">
     <SkeletonCircle className="size-16" />
-    <SkeletonText lines={3} />
+    <SkeletonText lines={2} />
   </div>
 );
 

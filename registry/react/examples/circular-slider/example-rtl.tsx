@@ -3,9 +3,8 @@
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import {
   CircularSlider,
-  useCircularSlider,
+  CircularSliderValue,
 } from "@/registry/react/components/circular-slider";
-import { useLocale } from "@/registry/react/components/locale";
 
 const Example = () => {
   const { locale } = usePreviewLocale();
@@ -14,24 +13,8 @@ const Example = () => {
 
   return (
     <CircularSlider aria-label={values.angle} defaultValue={45}>
-      <RtlValue suffix="°" />
+      <CircularSliderValue suffix="°" />
     </CircularSlider>
-  );
-};
-
-const RtlValue = (props: { suffix?: string }) => {
-  const { suffix = "" } = props;
-  const { locale } = useLocale();
-  const { value } = useCircularSlider();
-
-  const formatValue = new Intl.NumberFormat(locale, { useGrouping: false })
-    .format;
-
-  return (
-    <span className="relative z-1 tabular-nums">
-      {formatValue(value)}
-      {suffix}
-    </span>
   );
 };
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
-import { FormatNumber } from "@/registry/react/components/format";
 import {
   Pagination,
   PaginationItems,
@@ -17,9 +16,7 @@ const Example = () => {
   return (
     <Pagination count={50} pageSize={10}>
       <PaginationPrevious>{values.previous}</PaginationPrevious>
-      <PaginationItems
-        formatPage={(page) => <FormatNumber useGrouping={false} value={page} />}
-      />
+      <PaginationItems />
       <PaginationNext>{values.next}</PaginationNext>
     </Pagination>
   );

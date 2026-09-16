@@ -118,7 +118,7 @@ export const CalendarYearSelect = (
 
   return (
     <div
-      className={cn("relative w-fit has-[select:disabled]:opacity-64")}
+      className="relative w-fit has-[select:disabled]:opacity-64"
       data-slot="calendar-year-select-wrapper"
     >
       <ArkCalendar.YearSelect
@@ -127,12 +127,7 @@ export const CalendarYearSelect = (
         {...rest}
       />
       <ChevronDownIcon
-        className={cn(
-          "absolute inset-e-2.5 top-1/2 -translate-y-1/2",
-          "size-4",
-          "select-none text-muted-foreground",
-          "pointer-events-none"
-        )}
+        className="pointer-events-none absolute inset-e-2.5 top-1/2 size-4 -translate-y-1/2 select-none text-muted-foreground"
         data-slot="calendar-year-select-icon"
       />
     </div>
@@ -146,7 +141,7 @@ export const CalendarMonthSelect = (
 
   return (
     <div
-      className={cn("relative w-fit has-[select:disabled]:opacity-64")}
+      className="relative w-fit has-[select:disabled]:opacity-64"
       data-slot="calendar-month-select-wrapper"
     >
       <ArkCalendar.MonthSelect
@@ -155,12 +150,7 @@ export const CalendarMonthSelect = (
         {...rest}
       />
       <ChevronDownIcon
-        className={cn(
-          "absolute inset-e-2.5 top-1/2 -translate-y-1/2",
-          "size-4",
-          "select-none text-muted-foreground",
-          "pointer-events-none"
-        )}
+        className="pointer-events-none absolute inset-e-2.5 top-1/2 size-4 -translate-y-1/2 select-none text-muted-foreground"
         data-slot="calendar-month-select-icon"
       />
     </div>

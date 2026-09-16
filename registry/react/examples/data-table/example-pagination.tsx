@@ -51,7 +51,11 @@ const Example = () => {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead
+                    colSpan={header.colSpan}
+                    key={header.id}
+                    rowSpan={header.rowSpan}
+                  >
                     {header.isPlaceholder ? null : (
                       <table.FlexRender header={header} />
                     )}
@@ -78,7 +82,7 @@ const Example = () => {
               <TableRow>
                 <TableCell
                   className="h-24 text-center"
-                  colSpan={columns.length}
+                  colSpan={Math.max(table.getVisibleLeafColumns().length, 1)}
                 >
                   No results.
                 </TableCell>

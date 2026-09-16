@@ -1,32 +1,26 @@
 import { JsonTreeView } from "@/registry/react/components/json-tree-view";
 
 const Example = () => (
-  <div className="flex flex-col gap-6">
-    <div>
-      <p className="mb-2 font-medium text-foreground text-sm">
-        defaultExpandedDepth={0} (all collapsed)
-      </p>
-      <JsonTreeView data={data} defaultExpandedDepth={0} />
-    </div>
-    <div>
-      <p className="mb-2 font-medium text-foreground text-sm">
-        defaultExpandedDepth={2}
-      </p>
-      <JsonTreeView data={data} defaultExpandedDepth={2} />
-    </div>
-  </div>
+  <JsonTreeView
+    className="w-full max-w-xl"
+    data={data}
+    defaultExpandedDepth={2}
+  />
 );
 
 const data = {
-  user: {
-    profile: {
-      name: "Jane",
-      settings: {
-        notifications: true,
-        theme: "dark",
-      },
+  deployment: {
+    environment: "production",
+    release: {
+      commit: "a1b2c3d",
+      service: "onda-api",
+    },
+    runtime: {
+      region: "us-east-1",
+      replicas: 3,
     },
   },
+  status: "healthy",
 };
 
 export default Example;

@@ -10,6 +10,7 @@ const manifest: RegistryItemType = {
     absoluteUrl("/r/button.json"),
     absoluteUrl("/r/checkbox.json"),
     absoluteUrl("/r/field.json"),
+    absoluteUrl("/r/format.json"),
     absoluteUrl("/r/hotkeys.json"),
     absoluteUrl("/r/input.json"),
     absoluteUrl("/r/kbd.json"),

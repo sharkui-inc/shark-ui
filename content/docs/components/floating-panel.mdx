@@ -146,6 +146,7 @@ Root component. Manages panel position and drag state.
 | `defaultSize` | `Size` | `-` |
 | `onSizeChange` | `(details: SizeChangeDetails) => void` | `-` |
 | `lazyMount` | `boolean` | `true` |
+| `persistRect` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
 | `initialFocusEl` | `() => MaybeElement` | `-` |
@@ -196,7 +197,7 @@ Title for the panel.
 
 ### FloatingPanelBody
 
-Scrollable body content. Uses [ScrollArea](/docs/components/scroll-area) for overflow.
+Scrollable body content. 
 
 | Prop | Type | Default |
 | --- | --- | --- |

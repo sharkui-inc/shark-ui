@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext } from "@ark-ui/react/utils";
-import type React from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -210,7 +210,28 @@ export const ApprovalCardItemDescription = (
 
 export const ApprovalCardChoices = (
   props: React.ComponentProps<typeof QuestionnaireChoices>
-) => <QuestionnaireChoices {...props} data-slot="approval-card-choices" />;
+) => {
+  const { children, ...rest } = props;
+
+  const content = React.Children.map(children, (child) => {
+    if (
+      !React.isValidElement<ApprovalCardChoiceProps>(child) ||
+      child.type !== ApprovalCardChoice
+    ) {
+      return child;
+    }
+
+    return (
+      <QuestionnaireChoice {...child.props} data-slot="approval-card-choice" />
+    );
+  });
+
+  return (
+    <QuestionnaireChoices {...rest} data-slot="approval-card-choices">
+      {content}
+    </QuestionnaireChoices>
+  );
+};
 
 export const ApprovalCardChoice = (
   props: React.ComponentProps<typeof QuestionnaireChoice>

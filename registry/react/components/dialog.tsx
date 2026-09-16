@@ -27,7 +27,10 @@ const [DialogModalProvider, _useDialog] = createContext<DialogContextProps>({
   providerName: "Dialog",
 });
 
-export const Dialog = (props: React.ComponentProps<typeof ArkDialog.Root>) => {
+export interface DialogProps
+  extends React.ComponentProps<typeof ArkDialog.Root> {}
+
+export const Dialog = (props: DialogProps) => {
   const {
     modal = true,
     lazyMount = true,
@@ -36,7 +39,11 @@ export const Dialog = (props: React.ComponentProps<typeof ArkDialog.Root>) => {
   } = props;
 
   return (
-    <DialogModalProvider value={{ modal }}>
+    <DialogModalProvider
+      value={{
+        modal,
+      }}
+    >
       <ArkDialog.Root
         lazyMount={lazyMount}
         modal={modal}

@@ -105,7 +105,7 @@ export const AvatarBadge = (props: AvatarBadgeProps) => {
         "absolute inset-e-0 bottom-0 z-10",
         "flex items-center justify-center",
         "group-data-[size=sm]/avatar:size-2 group-data-[size=sm]/avatar:[&_svg]:hidden",
-        "group-data-[size=default]/avatar:size-2.5 group-data-[size=default]/avatar:[&_svg]:size-2",
+        "group-data-[size=md]/avatar:size-2.5 group-data-[size=md]/avatar:[&_svg]:size-2",
         "group-data-[size=lg]/avatar:size-3 group-data-[size=lg]/avatar:[&_svg]:size-2",
         className
       )}

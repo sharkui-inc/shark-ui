@@ -8,7 +8,7 @@ links:
 
 import manifest from "@/registry/manifest/json-tree-view";
 
-<ComponentPreview componentName="json-tree-view" />
+<ComponentPreview componentName="json-tree-view" autoHeight />
 
 ## Installation
 
@@ -85,24 +85,30 @@ npx shadcn@latest add @shark/json-tree-view
 ```tsx
 import { JsonTreeView } from "@/registry/react/components/json-tree-view";
 
-const data = { name: "John", age: 30, address: { city: "NYC" } };
+const orderFulfilledEvent = {
+  event: "order.fulfilled",
+  order: {
+    id: "ord_01K5H2Q4J6FM3A",
+    total: 12900,
+  },
+};
 
-<JsonTreeView data={data} defaultExpandedDepth={1} />
+<JsonTreeView data={orderFulfilledEvent} defaultExpandedDepth={1} />
 ```
 
 ## Examples
 
-### Controlling expand level
+### Expand depth
 
 Use the `defaultExpandedDepth` prop to control how many levels are expanded by default.
 
-<ComponentPreview componentName="json-tree-view" fileName="example-expand-depth" />
+<ComponentPreview componentName="json-tree-view" fileName="example-expand-depth" autoHeight />
 
 ### Map and Set
 
 Native JavaScript Map and Set objects are supported.
 
-<ComponentPreview componentName="json-tree-view" fileName="example-map-set" />
+<ComponentPreview componentName="json-tree-view" fileName="example-map-set" autoHeight />
 
 ## RTL
 

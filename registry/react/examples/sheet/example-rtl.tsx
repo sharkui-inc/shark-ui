@@ -28,7 +28,7 @@ const Example = () => {
       <SheetTrigger asChild>
         <Button variant="outline">{values.open}</Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent placement="right">
         <SheetHeader description={values.description} title={values.title} />
         <SheetBody>
           <FieldGroup>

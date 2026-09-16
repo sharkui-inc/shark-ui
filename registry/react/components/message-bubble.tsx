@@ -27,6 +27,8 @@ export const messageBubbleVariants = tv({
     "data-[variant=ghost]:max-w-full",
     "has-[[data-slot=message-bubble-reactions][data-side=bottom]]:mb-5",
     "has-[[data-slot=message-bubble-reactions][data-side=top]]:mt-5",
+    "[&:where([data-variant=ghost],[data-variant=outline])>[data-slot=message-bubble-content]:is(button,a):hover]:bg-muted",
+    "[&:where([data-variant=ghost],[data-variant=outline])>[data-slot=message-bubble-content]:is(button,a):hover]:text-foreground",
   ],
   defaultVariants: {
     variant: "default",
@@ -49,15 +51,11 @@ export const messageBubbleVariants = tv({
       ghost: [
         "[--message-bubble-surface:var(--background)]",
         "border-none *:data-[slot=message-bubble-content]:rounded-none *:data-[slot=message-bubble-content]:bg-transparent *:data-[slot=message-bubble-content]:p-0",
-        "[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-muted",
-        "[&>[data-slot=message-bubble-content]:is(button,a):hover]:text-foreground",
         "dark:[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-muted/48",
       ],
       outline: [
         "[--message-bubble-surface:var(--background)]",
         "*:data-[slot=message-bubble-content]:border-border *:data-[slot=message-bubble-content]:bg-background",
-        "[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-muted",
-        "[&>[data-slot=message-bubble-content]:is(button,a):hover]:text-foreground",
         "dark:[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-input/32",
       ],
       secondary: [

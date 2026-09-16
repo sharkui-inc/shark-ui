@@ -6,7 +6,6 @@ description: A composable multi-step form.
 import manifest from "@/registry/manifest/questionnaire";
 
 <ComponentPreview
-  className="**:data-[slot=preview]:h-[580px]"
   componentName="questionnaire"
   autoHeight
 />
@@ -288,6 +287,8 @@ Current question progress.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `aria-label` | `string` | `"Question progress"` |
+| `aria-valuetext` | `string` | Localized progress text |
+| `formatProgress` | `(details) => string` | Localized `"current of total"` text |
 | `className` | `string` | - |
 
 ### QuestionnaireActions

@@ -33,7 +33,7 @@ interface DocsCopyPageProps extends React.ComponentProps<typeof ButtonGroup> {
 export const DocsCopyPage = (props: DocsCopyPageProps) => {
   const { data, url, className, ...rest } = props;
 
-  const pageUrl = absoluteUrl(`${url}`);
+  const pageUrl = absoluteUrl(url);
 
   return (
     <ButtonGroup className={cn("hidden sm:flex", className)} {...rest}>
@@ -77,11 +77,7 @@ export const DocsCopyPage = (props: DocsCopyPageProps) => {
                 </a>
               </MenuItem>
               <MenuItem asChild value="markdown">
-                <a
-                  href={`${pageUrl}.md`}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
+                <a href={`${url}.md`} rel="noopener noreferrer" target="_blank">
                   <MarkdownIcon />
                   View as Markdown
                 </a>

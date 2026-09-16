@@ -1,0 +1,155 @@
+---
+title: Masonry
+description: Arranges a collection of items in responsive columns with varied heights.
+---
+
+import manifest from "@/registry/manifest/masonry";
+
+<ComponentPreview componentName="masonry" autoHeight />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/masonry
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/masonry.tsx" src="/masonry.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+Masonry
+└── MasonryItem
+```
+
+## Usage
+
+```tsx
+import { Masonry, MasonryItem } from "@/components/ui/masonry";
+```
+
+```tsx
+<Masonry className="columns-1 sm:columns-2 lg:columns-3">
+  <MasonryItem>{/* Content */}</MasonryItem>
+  <MasonryItem>{/* Content */}</MasonryItem>
+  <MasonryItem>{/* Content */}</MasonryItem>
+</Masonry>
+```
+
+`Masonry` renders a semantic `ul` and `MasonryItem` renders an `li`. Keep items in their logical reading order. Controls inside each item retain their native keyboard behavior.
+
+## Responsive columns
+
+Set the column count with Tailwind utilities on `Masonry`.
+
+```tsx
+<Masonry className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4">
+  {/* Items */}
+</Masonry>
+```
+
+After hydration, Masonry places each item in the currently shortest column. Items keep that column when their height changes, so expanding content only moves items below it in the same column.
+
+## Spacing
+
+Use `--gap` to control the horizontal and vertical space between items. Its default is `--spacing(4)`.
+
+```tsx
+<Masonry
+  className="[--gap:--spacing(6)] columns-1 sm:columns-2 lg:columns-3"
+>
+  {/* Items */}
+</Masonry>
+```
+
+## Constrained height
+
+Wrap the collection in [Scroll Area](/docs/components/scroll-area) when it needs a bounded height. This keeps the list semantics intact while allowing vertical scrolling.
+
+```tsx
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+<ScrollArea
+  className="h-[min(32rem,70vh)] rounded-xl border"
+  orientation="vertical"
+  scrollFade
+>
+  <Masonry className="columns-1 p-4 sm:columns-2 lg:columns-3">
+    {/* Items */}
+  </Masonry>
+</ScrollArea>
+```
+
+## Dynamic content
+
+Masonry supports Accordion, Collapsible, and other content whose height changes. It renders CSS Multi-column on the server, then measures the list in the browser and keeps each item in its assigned column. The output remains a semantic `ul` with direct `li` children, so reading and keyboard order remain the source order.
+
+```tsx
+<Masonry className="columns-1 p-4 md:columns-2">
+  <MasonryItem>{/* Expandable content */}</MasonryItem>
+  <MasonryItem>{/* Expandable content */}</MasonryItem>
+</Masonry>
+```
+
+## Examples
+
+### Editorial collection
+
+Use varied media, metadata, and contributors to create a reading collection that still preserves a logical source order.
+
+<ComponentPreview componentName="masonry" fileName="example-default" autoHeight />
+
+### Accordion sessions
+
+Accordion details expand within their assigned column, keeping the surrounding cards compact and stable.
+
+<ComponentPreview componentName="masonry" fileName="example-accordion" autoHeight />
+
+### Collapsible projects
+
+Several Collapsible cards can stay open at once; each only moves the cards below it in the same column.
+
+<ComponentPreview componentName="masonry" fileName="example-collapsible" autoHeight />
+
+## API Reference
+
+### Masonry
+
+Semantic list container for masonry items. Supports all `ul` props, including `className` and `asChild`.
+
+| CSS Variable | Default |
+| --- | --- |
+| `--gap` | `--spacing(4)` |
+
+### MasonryItem
+
+Semantic list item that keeps its content together inside a masonry column. Supports all `li` props, including `className` and `asChild`.

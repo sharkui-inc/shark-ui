@@ -108,11 +108,15 @@ Use only these visual alpha values: `0`, `4`, `8`, `16`, `24`, `32`, `48`, `64`,
 
 ### Shadows
 
-Use the smallest elevation that communicates containment or separation. The system is tactile and contained: `shadow-xs/4` is structural separation, `shadow-xs/8` is hover reinforcement, `shadow-sm/4` is for raised controls and preview surfaces, and `shadow-lg/4` is for overlays outside page flow.
+Use the smallest elevation that communicates containment or separation. The system is tactile and contained: `shadow-xs/4` is structural separation, `shadow-xs/8` is hover reinforcement, `shadow-sm/4` is for raised controls and preview surfaces, and `shadow-lg/4` is for overlays outside page flow. Fields and outlined controls use `shadow-xs/4`; filled action buttons (`default`, `destructive`, and `secondary`) use `shadow-sm/4`; ghost and link buttons have no elevation. Do not add hover shadows unless the interaction specifically needs `shadow-xs/8` as temporary tactile reinforcement.
 
 - Every elevation shadow declares geometry and alpha. Do not use bare, color-tinted, status-tinted, or geometry outside `xs`, `sm`, and `lg`.
 - Use arbitrary shadows only for the documented ColorPicker inset keyline and ImageCropper mask/handle geometry. They are technical effects, not elevation; their alpha channels still follow the approved scale.
 - Borders and tonal separation establish structure before elevation. Shadows do not replace focus rings or contrast-bearing borders.
+
+### Control shape
+
+Rectangular Button, Input, InputGroup, Select, NativeSelect, and NumberInput controls use `rounded-lg` at medium and large sizes and `rounded-md` at small and extra-small sizes where available. ButtonGroup alone owns joined contours: it removes only internal corners and duplicate borders. Use direct Tailwind radius utilities; technical inner geometry may calculate directly from `--radius`, but never declares or consumes a component-local `--*-radius` property. Only the explicit `pill` variant uses a full radius.
 
 ## Files, examples, and docs
 

@@ -1,21 +1,21 @@
 import { JsonTreeView } from "@/registry/react/components/json-tree-view";
 
 const Example = () => (
-  <div className="w-full max-w-md">
-    <JsonTreeView data={data} defaultExpandedDepth={1} />
-  </div>
+  <JsonTreeView
+    className="w-full max-w-xl"
+    data={data}
+    defaultExpandedDepth={1}
+  />
 );
 
 const data = {
-  address: {
-    city: "Anytown",
-    state: "CA",
-    street: "123 Main St",
-    zip: "12345",
+  event: "order.fulfilled",
+  order: {
+    id: "ord_01K5H2Q4J6FM3A",
+    status: "fulfilled",
+    total: 12_900,
   },
-  age: 30,
-  email: "john.doe@example.com",
-  name: "John Doe",
+  source: "onda-commerce",
 };
 
 export default Example;

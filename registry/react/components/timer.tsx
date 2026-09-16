@@ -16,7 +16,10 @@ export const remainingMsUntilDate = (date: Date): number => {
   return Math.max(0, end - Date.now());
 };
 
-export const Timer = (props: React.ComponentProps<typeof ArkTimer.Root>) => {
+export interface TimerProps
+  extends React.ComponentProps<typeof ArkTimer.Root> {}
+
+export const Timer = (props: TimerProps) => {
   const { className, ...rest } = props;
 
   return (

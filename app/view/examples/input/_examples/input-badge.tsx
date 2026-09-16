@@ -1,0 +1,21 @@
+import { Badge } from "@/registry/react/components/badge";
+import { Field, FieldLabel } from "@/registry/react/components/field";
+import { Input } from "@/registry/react/components/input";
+
+const InputBadge = () => (
+  <Field className="w-full max-w-64">
+    <FieldLabel htmlFor="input-badge">
+      Webhook URL{" "}
+      <Badge className="ml-auto" variant="secondary">
+        Beta
+      </Badge>
+    </FieldLabel>
+    <Input
+      id="input-badge"
+      placeholder="https://api.example.com/webhook"
+      type="url"
+    />
+  </Field>
+);
+
+export default InputBadge;

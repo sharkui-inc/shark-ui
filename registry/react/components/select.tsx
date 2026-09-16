@@ -47,6 +47,7 @@ export const selectTriggerVariants = tv({
     "flex items-center gap-2",
     "touch-manipulation select-none",
     "font-normal text-base md:text-sm",
+    "rounded-lg",
     "outline-hidden",
     "transition-[color,box-shadow]",
     "data-placeholder-shown:text-muted-foreground",
@@ -68,11 +69,11 @@ export const selectTriggerVariants = tv({
       sm: [
         "h-7",
         "ps-[calc(--spacing(2.5)-1px)] pe-[calc(--spacing(2.5)-1px)]",
+        "rounded-md",
       ],
     },
     variant: {
       default: [
-        "rounded-lg",
         "bg-transparent dark:bg-input/32",
         "border border-input shadow-xs/4",
         "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
@@ -83,7 +84,6 @@ export const selectTriggerVariants = tv({
         "dark:data-invalid:border-destructive-foreground dark:data-invalid:text-destructive-foreground dark:data-invalid:ring-destructive-foreground/32",
       ],
       ghost: [
-        "rounded-lg",
         "border border-transparent",
         "hover:bg-accent hover:text-accent-foreground",
         "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
@@ -309,7 +309,7 @@ export const SelectClearTrigger = (
 
   return (
     <ArkSelect.ClearTrigger
-      aria-label="Clear selected value(s)"
+      aria-label="Clear selection"
       className={cn(
         "[&_svg]:pointer-events-none [&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
         "transition-opacity",

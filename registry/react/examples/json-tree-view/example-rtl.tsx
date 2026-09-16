@@ -9,9 +9,11 @@ const Example = () => {
   const { values } = translations[locale];
 
   return (
-    <div className="w-full max-w-md">
-      <JsonTreeView data={values.data} defaultExpandedDepth={1} />
-    </div>
+    <JsonTreeView
+      className="w-full max-w-xl"
+      data={values.data}
+      defaultExpandedDepth={1}
+    />
   );
 };
 
@@ -19,45 +21,45 @@ const translations = {
   ar: {
     values: {
       data: {
-        address: {
-          city: "Anytown",
-          state: "CA",
-          street: "123 Main St",
-          zip: "12345",
+        ticket: {
+          id: "SUP-1048",
+          requester: {
+            email: "layla.hassan@example.com",
+            name: "ليلى حسن",
+          },
+          status: "open",
         },
-        age: 30,
-        email: "john.doe@example.com",
-        name: "John Doe",
+        workspace: "Onda Commerce",
       },
     },
   },
   en: {
     values: {
       data: {
-        address: {
-          city: "Anytown",
-          state: "CA",
-          street: "123 Main St",
-          zip: "12345",
+        ticket: {
+          id: "SUP-1048",
+          requester: {
+            email: "jordan.lee@example.com",
+            name: "Jordan Lee",
+          },
+          status: "open",
         },
-        age: 30,
-        email: "john.doe@example.com",
-        name: "John Doe",
+        workspace: "Onda Commerce",
       },
     },
   },
   he: {
     values: {
       data: {
-        address: {
-          city: "Anytown",
-          state: "CA",
-          street: "123 Main St",
-          zip: "12345",
+        ticket: {
+          id: "SUP-1048",
+          requester: {
+            email: "maya.levi@example.com",
+            name: "מאיה לוי",
+          },
+          status: "open",
         },
-        age: 30,
-        email: "john.doe@example.com",
-        name: "John Doe",
+        workspace: "Onda Commerce",
       },
     },
   },

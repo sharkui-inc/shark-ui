@@ -13,10 +13,8 @@ const Example = () => {
   const { values } = translations[locale];
 
   return (
-    <Reasoning className="max-w-lg" duration={8}>
-      <ReasoningTrigger duration={8} isStreaming>
-        {values.trigger}
-      </ReasoningTrigger>
+    <Reasoning className="max-w-lg" duration={8} isStreaming>
+      <ReasoningTrigger>{values.trigger}</ReasoningTrigger>
       <ReasoningContent>{values.content}</ReasoningContent>
     </Reasoning>
   );

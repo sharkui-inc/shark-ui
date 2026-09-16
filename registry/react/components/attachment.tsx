@@ -12,11 +12,11 @@ import { ScrollArea } from "./scroll-area";
 
 export const attachmentVariants = tv({
   base: [
-    "group/attachment",
+    "group",
     "relative",
     "w-fit min-w-0 max-w-full",
     "flex shrink-0 flex-nowrap",
-    "px-2.5 has-[>[data-variant=image]]:px-0",
+    "not-has-[>[data-variant=image]]:px-2.5",
     "bg-card text-card-foreground",
     "rounded-xl border border-input shadow-xs/4",
     "transition-colors",
@@ -34,10 +34,10 @@ export const attachmentVariants = tv({
       vertical: "w-24 flex-col has-data-[slot=attachment-content]:w-30",
     },
     size: {
-      lg: "gap-3 text-base has-data-[slot=attachment-content]:py-2.5",
-      md: "gap-2 text-sm has-data-[slot=attachment-content]:py-2",
-      sm: "gap-2.5 text-xs has-data-[slot=attachment-content]:py-1.5",
-      xs: "gap-1.5 rounded-lg text-xs has-data-[slot=attachment-content]:py-1",
+      lg: "gap-3 text-base not-has-[>[data-variant=image]]:has-data-[slot=attachment-content]:py-2.5",
+      md: "gap-2 text-sm not-has-[>[data-variant=image]]:has-data-[slot=attachment-content]:py-2",
+      sm: "gap-2.5 text-xs not-has-[>[data-variant=image]]:has-data-[slot=attachment-content]:py-1.5",
+      xs: "gap-1.5 rounded-lg text-xs not-has-[>[data-variant=image]]:has-data-[slot=attachment-content]:py-1",
     },
   },
 });
@@ -80,13 +80,13 @@ export const attachmentMediaVariants = tv({
     "bg-muted",
     "text-foreground",
     "overflow-hidden",
-    "group-data-[orientation=vertical]/attachment:w-full",
-    "group-data-[size=lg]/attachment:w-12 group-data-[size=sm]/attachment:w-8 group-data-[size=xs]/attachment:w-7",
-    "group-data-[orientation=vertical]/attachment:**:data-[slot=spinner]:size-6",
+    "group-data-[orientation=vertical]:w-full",
+    "group-data-[size=lg]:w-12 group-data-[size=sm]:w-8 group-data-[size=xs]:w-7",
+    "group-data-[orientation=vertical]:**:data-[slot=spinner]:size-6",
     "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
-    "group-data-[orientation=vertical]/attachment:[&_svg:not([class*='size-'])]:size-6",
-    "group-data-[size=lg]/attachment:[&_svg:not([class*='size-'])]:size-5",
-    "group-data-[size=xs]/attachment:[&_svg:not([class*='size-'])]:size-3.5",
+    "group-data-[orientation=vertical]:[&_svg:not([class*='size-'])]:size-6",
+    "group-data-[size=lg]:[&_svg:not([class*='size-'])]:size-5",
+    "group-data-[size=xs]:[&_svg:not([class*='size-'])]:size-3.5",
   ],
   defaultVariants: {
     variant: "icon",
@@ -95,9 +95,9 @@ export const attachmentMediaVariants = tv({
     variant: {
       file: [
         "w-8 overflow-visible bg-transparent",
-        "group-data-[size=lg]/attachment:w-10",
-        "group-data-[size=sm]/attachment:w-6.5",
-        "group-data-[size=xs]/attachment:w-6",
+        "group-data-[size=lg]:w-10",
+        "group-data-[size=sm]:w-6.5",
+        "group-data-[size=xs]:w-6",
       ],
       icon: "",
       image: [
@@ -130,7 +130,7 @@ export const AttachmentMedia = (props: AttachmentMediaProps) => {
     >
       {variant === "file" ? (
         <FileThumbnail
-          className="group-data-[size=lg]/attachment:scale-[1.2] group-data-[size=sm]/attachment:scale-[.8] group-data-[size=xs]/attachment:scale-[.7]"
+          className="group-data-[size=lg]:scale-[1.2] group-data-[size=sm]:scale-[.8] group-data-[size=xs]:scale-[.7]"
           format={format}
           size="sm"
         />
@@ -156,7 +156,7 @@ export const AttachmentContent = (
         "min-w-0 max-w-full",
         "flex-1",
         "leading-tight",
-        "group-data-[orientation=vertical]/attachment:px-1",
+        "group-data-[orientation=vertical]:px-1",
         className
       )}
       data-slot="attachment-content"
@@ -174,7 +174,7 @@ export const AttachmentTitle = (
     <ark.span
       className={cn(
         "block min-w-0 max-w-full truncate font-medium",
-        "group-data-[state=processing]/attachment:shimmer group-data-[state=uploading]/attachment:shimmer",
+        "group-data-[state=processing]:shimmer group-data-[state=uploading]:shimmer",
         className
       )}
       data-slot="attachment-title"
@@ -195,8 +195,8 @@ export const AttachmentDescription = (
         "min-w-0 max-w-full",
         "mt-0.5",
         "truncate text-muted-foreground text-xs",
-        "group-data-[state=error]/attachment:text-destructive",
-        "dark:group-data-[state=error]/attachment:text-destructive-foreground",
+        "group-data-[state=error]:text-destructive",
+        "dark:group-data-[state=error]:text-destructive-foreground",
         className
       )}
       data-slot="attachment-description"
@@ -216,8 +216,8 @@ export const AttachmentActions = (
         "relative z-20",
         "flex shrink-0 items-center self-start",
         "gap-1",
-        "group-data-[orientation=vertical]/attachment:absolute group-data-[orientation=vertical]/attachment:inset-e-1.5 group-data-[orientation=vertical]/attachment:top-1.5",
-        "group-data-[orientation=vertical]/attachment:*:data-[slot=attachment-action]:size-5",
+        "group-data-[orientation=vertical]:absolute group-data-[orientation=vertical]:inset-e-1.5 group-data-[orientation=vertical]:top-1.5",
+        "group-data-[orientation=vertical]:*:data-[slot=attachment-action]:size-5",
         className
       )}
       data-slot="attachment-actions"
@@ -240,11 +240,25 @@ export const AttachmentAction = (props: ButtonProps) => {
   );
 };
 
-export const AttachmentRemove = (props: ButtonProps) => (
-  <AttachmentAction data-slot="attachment-remove" {...props}>
-    <XIcon aria-hidden="true" />
-  </AttachmentAction>
-);
+export const AttachmentRemove = (props: ButtonProps) => {
+  const { className, ...rest } = props;
+
+  return (
+    <AttachmentAction
+      className={cn(
+        "transition-opacity duration-150 ease-out",
+        "[@media(hover:hover)_and_(pointer:fine)]:opacity-0",
+        "group-focus-within:opacity-100 group-hover:opacity-100",
+        "motion-reduce:transition-none",
+        className
+      )}
+      data-slot="attachment-remove"
+      {...rest}
+    >
+      <XIcon aria-hidden="true" />
+    </AttachmentAction>
+  );
+};
 
 export const AttachmentTrigger = (
   props: React.ComponentProps<typeof ark.button>

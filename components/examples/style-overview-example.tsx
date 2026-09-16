@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  getBaseColor,
-  getBorderRadius,
-  getPrimaryColor,
-} from "@/lib/theme/catalog";
+import { getBaseColor, getPrimaryColor } from "@/lib/theme/catalog";
 import { getThemeFont } from "@/lib/theme/fonts";
 import { cn } from "@/lib/utils";
 import {
@@ -18,7 +14,6 @@ export const StyleOverviewExample = (props: React.ComponentProps<"div">) => {
   const config = useConfig();
   const primary = getPrimaryColor(config.primaryColor);
   const base = getBaseColor(config.baseColor);
-  const radius = getBorderRadius(config.borderRadius);
   const heading = getThemeFont(config.fontHeading);
   const sans = getThemeFont(config.fontSans);
 
@@ -69,7 +64,7 @@ export const StyleOverviewExample = (props: React.ComponentProps<"div">) => {
           <span
             aria-hidden="true"
             className="size-10 shrink-0 bg-primary"
-            style={{ borderRadius: "var(--radius-lg)" }}
+            style={{ borderRadius: "var(--radius)" }}
           />
         </div>
       </CardContent>

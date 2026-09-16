@@ -66,7 +66,7 @@ import {
 
 ```tsx
 <Reasoning duration={8}>
-  <ReasoningTrigger duration={8} />
+  <ReasoningTrigger />
   <ReasoningContent>The helper already checks empty fields...</ReasoningContent>
 </Reasoning>
 ```
@@ -81,9 +81,15 @@ Control expand state with `open` and `onOpenChange`.
 
 ## Streaming
 
-Set `isStreaming` so the trigger uses the [shimmer](/docs/utilities/shimmer) class.
+Set `isStreaming` on `Reasoning` so its trigger uses the [shimmer](/docs/utilities/shimmer) class.
 
 <ComponentPreview componentName="reasoning" fileName="example-streaming" />
+
+## Translations
+
+Use `translations` to customize the default trigger label. Use `thoughtForDuration` to delegate pluralization and grammar to your application's i18n library.
+
+<ComponentPreview componentName="reasoning" fileName="example-translations" />
 
 ## RTL
 
@@ -95,22 +101,21 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 ### Reasoning
 
-Root collapsible. `defaultOpen` follows `isStreaming` when unset.
+Root collapsible. `defaultOpen` follows `isStreaming` when unset. `duration` and `isStreaming` are available to `ReasoningTrigger`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `duration` | `number` | `-` |
 | `isStreaming` | `boolean` | `false` |
+| `translations` | `Partial<ReasoningTranslations>` | - |
 | `className` | `string` | `-` |
 
 ### ReasoningTrigger
 
-Toggles the reasoning. Default label is `Thought`, `Thinking` while streaming, or `Thought for {duration}s`.
+Toggles the reasoning. Its default label comes from the root `translations`: `thought`, `thinking`, or `thoughtForDuration`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `duration` | `number` | `-` |
-| `isStreaming` | `boolean` | `false` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 

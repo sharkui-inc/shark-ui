@@ -118,6 +118,16 @@ export function PaymentsTable({ data }: { data: Payment[] }) {
   autoHeight
 />
 
+### Manual pagination
+
+Use `manualPagination` when the server returns only the current page. Provide `rowCount` when it is known so the table can calculate the total page count. Use a stable `getRowId` whenever selection must persist between server responses.
+
+<ComponentPreview
+  componentName="data-table"
+  fileName="example-manual-pagination"
+  autoHeight
+/>
+
 ### Global filter
 
 `globalFilteringFeature` across all columns.
@@ -128,7 +138,7 @@ export function PaymentsTable({ data }: { data: Payment[] }) {
 
 `rowExpandingFeature` with a detail panel per row.
 
-<ComponentPreview componentName="data-table" fileName="example-expandable" />
+<ComponentPreview componentName="data-table" fileName="example-expandable" autoHeight />
 
 ## Features
 
@@ -147,6 +157,8 @@ const table = useTable({
 
 Use `DataTableColumnHeader` in a column header for an Ark UI menu with ascending, descending, and hide actions.
 
+Keep `data` and `columns` stable with `React.useMemo`, state, or values defined outside the component. Recreating either array on every render makes TanStack recompute row models and can reset pagination.
+
 ## Pagination and view options
 
 For a custom table composition created with `useTable`, pass its instance to `DataTablePagination` and `DataTableViewOptions`.
@@ -163,6 +175,8 @@ import {
 
 <DataTablePagination table={table} />
 ```
+
+For server-side filtering and sorting, pass `manualFiltering` and `manualSorting`, then reset or validate the current page when those remote values change. Set `pageCount: -1` when the server does not know the total: `DataTablePagination` will show only previous and next controls.
 
 ## RTL
 

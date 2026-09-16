@@ -48,7 +48,9 @@ export const NumberInputGroup = (
         "flex justify-between",
         "bg-transparent dark:bg-input/32",
         "font-normal text-base md:text-sm",
-        "rounded-lg border border-input shadow-xs/4",
+        "rounded-lg",
+        "in-data-[size=sm]:rounded-md",
+        "border border-input shadow-xs/4",
         "transition-[border-color,box-shadow]",
         "focus-within:border-ring/64 focus-within:ring-2 focus-within:ring-ring/24",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
@@ -76,7 +78,8 @@ export const NumberInputDecrement = (
         "h-8 in-data-[size=lg]:h-9 in-data-[size=sm]:h-7",
         "flex shrink-0",
         "text-foreground",
-        "rounded-none rounded-s-[calc(var(--radius-lg)+1px)]",
+        "rounded-none rounded-s-[calc(var(--radius)+1px)]",
+        "in-data-[size=sm]:rounded-s-[calc(var(--radius)*0.75+1px)]",
         "cursor-pointer",
         className
       )}
@@ -107,7 +110,8 @@ export const NumberInputIncrement = (
         "h-8 in-data-[size=lg]:h-9 in-data-[size=sm]:h-7",
         "flex shrink-0",
         "text-foreground",
-        "rounded-none rounded-e-[calc(var(--radius-lg)+1px)]",
+        "rounded-none rounded-e-[calc(var(--radius)+1px)]",
+        "in-data-[size=sm]:rounded-e-[calc(var(--radius)*0.75+1px)]",
         "cursor-pointer",
         className
       )}

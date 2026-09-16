@@ -30,7 +30,8 @@ export const RTLComponentPreview = async (props: RTLComponentPreviewProps) => {
     componentName,
     `${rtlFileName}.tsx`
   );
-  const previewFileName = existsSync(rtlExamplePath) ? rtlFileName : fileName;
+  const hasRtlExample = existsSync(rtlExamplePath);
+  const previewFileName = hasRtlExample ? rtlFileName : fileName;
   const { preview, source } = await getComponentPreviewExample(
     componentName,
     previewFileName
@@ -42,7 +43,16 @@ export const RTLComponentPreview = async (props: RTLComponentPreviewProps) => {
         {...rest}
         autoHeight={autoHeight}
         preview={<RTLPreviewContent>{preview}</RTLPreviewContent>}
-        previewHeader={<RTLPreviewHeader />}
+        previewHeader={
+          <>
+            <RTLPreviewHeader />
+            {!hasRtlExample && process.env.NODE_ENV !== "production" ? (
+              <p className="border-warning/64 border-b bg-warning/8 px-4 py-3 text-sm text-warning-foreground">
+                This component does not have an RTL-specific example yet.
+              </p>
+            ) : null}
+          </>
+        }
         source={source}
       />
     </RTLPreviewProvider>

@@ -8,7 +8,7 @@ export const MediaQuery = () => {
       style={{
         alignItems: "center",
         backgroundColor: "var(--foreground)",
-        borderRadius: "var(--radius-md)",
+        borderRadius: "calc(var(--radius) * 0.75)",
         bottom: "calc(var(--spacing) * 1.5)",
         color: "var(--background)",
         display: "flex",

@@ -54,10 +54,9 @@ export const DrawerProvider = (
       />
       <ArkDrawer.Indent
         className={cn(
-          "[--indent-radius:calc(1rem*(1-var(--drawer-swipe-progress,0)))]",
           "data-active:transform-[scale(calc(0.98+(0.02*var(--drawer-swipe-progress))))_translateY(calc(0.5rem*(1-var(--drawer-swipe-progress))))]",
           "transition-[border-radius,transform] duration-150 ease-in-out will-change-transform",
-          "data-active:rounded-(--indent-radius)",
+          "data-active:rounded-[calc(1rem*(1-var(--drawer-swipe-progress,0)))]",
           "motion-reduce:transition-none",
           className
         )}
@@ -70,7 +69,10 @@ export const DrawerProvider = (
   );
 };
 
-export const Drawer = (props: React.ComponentProps<typeof ArkDrawer.Root>) => {
+export interface DrawerProps
+  extends React.ComponentProps<typeof ArkDrawer.Root> {}
+
+export const Drawer = (props: DrawerProps) => {
   const {
     modal = true,
     lazyMount = true,
@@ -79,7 +81,11 @@ export const Drawer = (props: React.ComponentProps<typeof ArkDrawer.Root>) => {
   } = props;
 
   return (
-    <DrawerModalProvider value={{ modal }}>
+    <DrawerModalProvider
+      value={{
+        modal,
+      }}
+    >
       <ArkDrawer.Root
         data-slot="drawer"
         lazyMount={lazyMount}

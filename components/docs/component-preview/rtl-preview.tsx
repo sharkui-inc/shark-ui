@@ -52,11 +52,6 @@ const getPreviewLocale = (language: PreviewLanguage) =>
   previewLocales.find((item) => item.language === language) ??
   previewLocales[0];
 
-interface RTLPreviewProps
-  extends Omit<React.ComponentProps<"div">, "children"> {
-  children?: React.ReactNode | ((language: PreviewLanguage) => React.ReactNode);
-}
-
 type RTLPreviewProviderProps = React.ComponentProps<"div">;
 
 type RTLPreviewContentProps = React.ComponentProps<"div">;
@@ -155,7 +150,7 @@ const RTLPreviewLocalizedContent = (props: RTLPreviewContentProps) => {
   return (
     <div
       className={cn(
-        "w-full min-w-0",
+        "size-full min-h-0",
         "flex items-center justify-center",
         className
       )}
@@ -166,42 +161,5 @@ const RTLPreviewLocalizedContent = (props: RTLPreviewContentProps) => {
     >
       {children}
     </div>
-  );
-};
-
-export const RTLPreview = (props: RTLPreviewProps) => {
-  const { children, className, ...rest } = props;
-
-  return (
-    <RTLPreviewProvider className={className} {...rest}>
-      <RTLPreviewHeader />
-      <RTLPreviewLayout>{children}</RTLPreviewLayout>
-    </RTLPreviewProvider>
-  );
-};
-
-interface RTLPreviewLayoutProps
-  extends Omit<React.ComponentProps<typeof RTLPreviewContent>, "children"> {
-  children: RTLPreviewProps["children"];
-}
-
-const RTLPreviewLayout = (props: RTLPreviewLayoutProps) => {
-  const { children, ...rest } = props;
-
-  const { locale } = usePreviewLocale();
-  const content = typeof children === "function" ? children(locale) : children;
-
-  return (
-    <RTLPreviewContent
-      className={cn(
-        "min-w-0 flex-1",
-        "flex items-center justify-center",
-        "p-4",
-        "rounded-xl border"
-      )}
-      {...rest}
-    >
-      {content}
-    </RTLPreviewContent>
   );
 };

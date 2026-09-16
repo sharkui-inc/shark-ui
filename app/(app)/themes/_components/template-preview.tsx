@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
+import type { ComponentPreviewItem } from "@/lib/component-previews";
 import { cn } from "@/lib/utils";
 import { Spinner } from "@/registry/react/components/spinner";
 import { COMPONENTS_SLUG, getThemeTemplate } from "../_lib/theme-templates";
@@ -9,11 +10,32 @@ import { ExamplePreview } from "./example-preview";
 interface TemplatePreviewHostProps {
   activeSlug: string | null;
   className?: string;
+  selectedComponent: ComponentPreviewItem | null;
 }
 
-const getPreviewFrame = (slug: string) => {
+interface PreviewFrame {
+  id: string;
+  label: string;
+  src: string;
+}
+
+const getPreviewFrame = (
+  slug: string,
+  selectedComponent: ComponentPreviewItem | null
+): PreviewFrame | null => {
+  if (slug === "preview") {
+    return selectedComponent
+      ? {
+          id: `preview:${selectedComponent.slug}`,
+          label: selectedComponent.title,
+          src: `/view/examples/${selectedComponent.slug}`,
+        }
+      : null;
+  }
+
   if (slug === COMPONENTS_SLUG) {
     return {
+      id: slug,
       label: "Components",
       src: "/templates/components",
     };
@@ -26,27 +48,39 @@ const getPreviewFrame = (slug: string) => {
   }
 
   return {
+    id: slug,
     label: template.label,
     src: `/templates/${slug}`,
   };
 };
 
 export const TemplatePreviewHost = (props: TemplatePreviewHostProps) => {
-  const { activeSlug, className } = props;
-  const [visitedSlugs, setVisitedSlugs] = useState<string[]>([]);
-  const [loadedSlugs, setLoadedSlugs] = useState(() => new Set<string>());
+  const { activeSlug, className, selectedComponent } = props;
+  const [visitedFrames, setVisitedFrames] = React.useState<PreviewFrame[]>([]);
+  const [loadedFrameIds, setLoadedFrameIds] = React.useState(
+    () => new Set<string>()
+  );
+  const activeFrame = React.useMemo(
+    () => (activeSlug ? getPreviewFrame(activeSlug, selectedComponent) : null),
+    [activeSlug, selectedComponent]
+  );
 
-  let slugs = visitedSlugs;
+  React.useEffect(() => {
+    if (!activeFrame) {
+      return;
+    }
 
-  if (activeSlug && !visitedSlugs.includes(activeSlug)) {
-    slugs = [...visitedSlugs, activeSlug];
-    setVisitedSlugs(slugs);
-  }
+    setVisitedFrames((current) =>
+      current.some((frame) => frame.id === activeFrame.id)
+        ? current
+        : [...current, activeFrame]
+    );
+  }, [activeFrame]);
 
-  const isHostActive = activeSlug !== null;
-  const isLoading = activeSlug !== null && !loadedSlugs.has(activeSlug);
+  const isHostActive = activeFrame !== null;
+  const isLoading = activeFrame !== null && !loadedFrameIds.has(activeFrame.id);
 
-  if (slugs.length === 0) {
+  if (visitedFrames.length === 0) {
     return null;
   }
 
@@ -60,16 +94,10 @@ export const TemplatePreviewHost = (props: TemplatePreviewHostProps) => {
       inert={!isHostActive}
     >
       {isLoading ? <PreviewLoading /> : null}
-      {slugs.map((slug) => {
-        const frame = getPreviewFrame(slug);
-
-        if (!frame) {
-          return null;
-        }
-
-        const isSlugActive = slug === activeSlug;
-        const loaded = loadedSlugs.has(slug);
-        const canInteract = isSlugActive && loaded;
+      {visitedFrames.map((frame) => {
+        const isFrameActive = frame.id === activeFrame?.id;
+        const loaded = loadedFrameIds.has(frame.id);
+        const canInteract = isFrameActive && loaded;
 
         return (
           // biome-ignore lint/a11y/noNoninteractiveElementInteractions: load reports the iframe resource state
@@ -77,18 +105,18 @@ export const TemplatePreviewHost = (props: TemplatePreviewHostProps) => {
             className={cn(
               "absolute inset-0 size-full bg-background",
               canInteract ? null : "pointer-events-none",
-              isSlugActive && loaded ? null : "invisible"
+              isFrameActive && loaded ? null : "invisible"
             )}
             inert={!canInteract}
-            key={slug}
+            key={frame.id}
             onLoad={() => {
-              setLoadedSlugs((current) => {
-                if (current.has(slug)) {
+              setLoadedFrameIds((current) => {
+                if (current.has(frame.id)) {
                   return current;
                 }
 
                 const next = new Set(current);
-                next.add(slug);
+                next.add(frame.id);
                 return next;
               });
             }}

@@ -14,7 +14,7 @@ export const useCarousel = useCarouselContext;
 export const Carousel = (
   props: React.ComponentProps<typeof ArkCarousel.Root>
 ) => {
-  const { spacing = "16px", className, ...rest } = props;
+  const { spacing, className, ...rest } = props;
 
   return (
     <ArkCarousel.Root
@@ -22,7 +22,7 @@ export const Carousel = (
         "group/carousel",
         "relative",
         "flex flex-col",
-        "data-[orientation=vertical]:w-max data-[orientation=vertical]:flex-row",
+        "data-[orientation=vertical]:flex-row",
         className
       )}
       data-slot="carousel"
@@ -68,7 +68,7 @@ export const CarouselPrevious = (
       asChild
     >
       <Button
-        aria-label="Previous"
+        aria-label="Previous slide"
         clickEffect={false}
         pill
         size="icon-md"
@@ -76,7 +76,7 @@ export const CarouselPrevious = (
       >
         <ChevronLeftIcon
           aria-hidden
-          className="size-4 group-data-[orientation=horizontal]/carousel:rtl:rotate-180"
+          className="group-data-[orientation=horizontal]/carousel:rtl:rotate-180"
         />
       </Button>
     </ArkCarousel.PrevTrigger>
@@ -101,7 +101,7 @@ export const CarouselNext = (
       data-slot="carousel-next"
     >
       <Button
-        aria-label="Next"
+        aria-label="Next slide"
         clickEffect={false}
         pill
         size="icon-md"
@@ -109,7 +109,7 @@ export const CarouselNext = (
       >
         <ChevronRightIcon
           aria-hidden
-          className="size-4 group-data-[orientation=horizontal]/carousel:rtl:rotate-180"
+          className="group-data-[orientation=horizontal]/carousel:rtl:rotate-180"
         />
       </Button>
     </ArkCarousel.NextTrigger>
@@ -146,9 +146,9 @@ export const CarouselIndicator = (
         "shrink-0",
         "bg-foreground",
         "opacity-64 data-current:opacity-100",
-        "overflow-hidden",
-        "[&_img]:size-full [&_img]:rounded-lg [&_img]:object-cover",
         "rounded-full",
+        "overflow-hidden",
+        "[&_img]:size-full [&_img]:rounded-[inherit] [&_img]:object-cover",
         className
       )}
       data-slot="carousel-indicator"
@@ -166,9 +166,10 @@ export const CarouselContent = (
     <ArkCarousel.ItemGroup
       className={cn(
         "min-w-0",
-        "-my-4 py-4",
+        "data-[orientation=horizontal]:-my-4 data-[orientation=horizontal]:py-4",
         "flex flex-1 gap-4",
-        "overflow-hidden rounded-lg",
+        "rounded-lg",
+        "overflow-hidden",
         className
       )}
       data-slot="carousel-group"

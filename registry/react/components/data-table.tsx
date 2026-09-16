@@ -24,6 +24,8 @@ import {
 import {
   ArrowDownIcon,
   ArrowUpIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   ChevronsUpDownIcon,
   EyeOffIcon,
   Settings2Icon,
@@ -138,7 +140,11 @@ export const DataTable = <TData extends RowData>(
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <TableHead key={header.id}>
+                <TableHead
+                  colSpan={header.colSpan}
+                  key={header.id}
+                  rowSpan={header.rowSpan}
+                >
                   {header.isPlaceholder ? null : (
                     <table.FlexRender header={header} />
                   )}
@@ -164,7 +170,10 @@ export const DataTable = <TData extends RowData>(
             ))
           ) : (
             <TableRow>
-              <TableCell className="h-24 text-center" colSpan={columns.length}>
+              <TableCell
+                className="h-24 text-center"
+                colSpan={Math.max(table.getVisibleLeafColumns().length, 1)}
+              >
                 {emptyMessage}
               </TableCell>
             </TableRow>
@@ -191,6 +200,7 @@ export const DataTableColumnHeader = <TData extends RowData, TValue>(
   props: DataTableColumnHeaderProps<TData, TValue>
 ) => {
   const { className, column, title, ...rest } = props;
+
   const canSort = column.getCanSort();
 
   if (!canSort) {
@@ -269,21 +279,23 @@ export const DataTablePagination = <TData extends RowData>(
 
   const pageCount = table.getPageCount();
   const { pageIndex, pageSize } = table.state.pagination;
-  const filteredRowCount = table.getFilteredRowModel().rows.length;
+  const rowCount = table.getRowCount();
+  const selectedRowCount = table.getFilteredSelectedRowModel().rows.length;
+  const page = pageIndex + 1;
+  const hasKnownPageCount = Number.isFinite(pageCount) && pageCount >= 0;
 
   return (
     <ark.div
       className={cn(
-        "flex flex-wrap items-center justify-between gap-4 px-2",
+        "flex w-full flex-wrap items-center justify-between gap-4 px-2",
         className
       )}
       data-slot="data-table-pagination"
       {...rest}
     >
       <div className="flex-1 text-muted-foreground text-sm">
-        <FormatNumber value={table.getFilteredSelectedRowModel().rows.length} />
-        {" of "}
-        <FormatNumber value={filteredRowCount} /> row(s) selected.
+        <FormatNumber value={selectedRowCount} /> of{" "}
+        <FormatNumber value={rowCount} /> row(s) selected.
       </div>
 
       <div className="flex flex-wrap items-center gap-4 lg:gap-6">
@@ -306,26 +318,61 @@ export const DataTablePagination = <TData extends RowData>(
         </div>
 
         <div className="w-28 text-center font-medium text-sm">
-          Page <FormatNumber useGrouping={false} value={pageIndex + 1} /> of{" "}
-          <FormatNumber useGrouping={false} value={pageCount} />
+          {hasKnownPageCount ? (
+            <>
+              Page <FormatNumber useGrouping={false} value={page} /> of{" "}
+              <FormatNumber useGrouping={false} value={pageCount} />
+            </>
+          ) : (
+            <>
+              Page <FormatNumber useGrouping={false} value={page} />
+            </>
+          )}
         </div>
 
-        <Pagination
-          className="mx-0 w-auto justify-start gap-1"
-          count={filteredRowCount}
-          onPageChange={(details) => {
-            table.setPageIndex(details.page - 1);
-          }}
-          page={pageIndex + 1}
-          pageSize={pageSize}
-        >
-          <PaginationPrevious
-            size="icon-sm"
-            variant="outline"
-            withLabel={false}
-          />
-          <PaginationNext size="icon-sm" variant="outline" withLabel={false} />
-        </Pagination>
+        {hasKnownPageCount ? (
+          <Pagination
+            className="mx-0 w-auto justify-start gap-1"
+            count={rowCount}
+            onPageChange={(details) => {
+              table.setPageIndex(details.page - 1);
+            }}
+            page={page}
+            pageSize={pageSize}
+          >
+            <PaginationPrevious
+              size="icon-sm"
+              variant="outline"
+              withLabel={false}
+            />
+            <PaginationNext
+              size="icon-sm"
+              variant="outline"
+              withLabel={false}
+            />
+          </Pagination>
+        ) : (
+          <div className="flex items-center gap-1">
+            <Button
+              aria-label="Previous page"
+              disabled={!table.getCanPreviousPage()}
+              onClick={() => table.previousPage()}
+              size="icon-sm"
+              variant="outline"
+            >
+              <ChevronLeftIcon aria-hidden className="rtl:rotate-180" />
+            </Button>
+            <Button
+              aria-label="Next page"
+              disabled={!table.getCanNextPage()}
+              onClick={() => table.nextPage()}
+              size="icon-sm"
+              variant="outline"
+            >
+              <ChevronRightIcon aria-hidden className="rtl:rotate-180" />
+            </Button>
+          </div>
+        )}
       </div>
     </ark.div>
   );

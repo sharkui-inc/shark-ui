@@ -118,11 +118,23 @@ Set `fixedCropArea` to `true` when the crop area should stay fixed while the ima
 
 <ComponentPreview componentName="image-cropper" fileName="example-fixed-crop-area" />
 
-### Export crop
+### Crop preview
 
-`useImageCropper` and `ImageCropperContext` expose `getCropData()` (natural-image `corners` and `outputSize`) and `getCroppedImage({ maxSize })` to cap the output while keeping aspect ratio.
+Generate and inspect the current crop.
 
-<ComponentPreview componentName="image-cropper" fileName="example-export" />
+<ComponentPreview componentName="image-cropper" fileName="example-crop-preview" />
+
+### Controls
+
+Control zoom, rotation, flip, and reset from the cropper context.
+
+<ComponentPreview componentName="image-cropper" fileName="example-controls" />
+
+### Events
+
+Track crop position and zoom changes.
+
+<ComponentPreview componentName="image-cropper" fileName="example-events" />
 
 ## RTL
 

@@ -20,7 +20,7 @@ const css = {
     },
     ".prose code:not(.not-prose code)": {
       "background-color": "var(--color-muted)",
-      "border-radius": "var(--radius-sm)",
+      "border-radius": "calc(var(--radius) * 0.5)",
       color: "var(--color-muted-foreground)",
       "font-size": "var(--text-xs)",
       "font-weight": "500",

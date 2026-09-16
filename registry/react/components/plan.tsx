@@ -251,20 +251,16 @@ export const PlanItemTrigger = (props: PlanItemTriggerProps) => {
     </>
   );
 
-  const sharedClassName = cn(
-    "grid min-h-9 w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-lg px-2 py-1.5 text-start",
-    collapsible &&
-      "cursor-pointer border border-transparent hover:bg-muted focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
-    status === "in-progress" && "bg-muted/64",
-    "transition-colors duration-150 motion-reduce:transition-none",
-    "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
-    className
-  );
-
   if (!collapsible) {
     return (
       <ark.div
-        className={sharedClassName}
+        className={cn(
+          "grid min-h-9 w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-lg px-2 py-1.5 text-start",
+          status === "in-progress" && "bg-muted/64",
+          "transition-colors duration-150 motion-reduce:transition-none",
+          "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
+          className
+        )}
         data-slot="plan-item-trigger"
         {...rest}
       >
@@ -275,7 +271,14 @@ export const PlanItemTrigger = (props: PlanItemTriggerProps) => {
 
   return (
     <CollapsibleTrigger
-      className={sharedClassName}
+      className={cn(
+        "grid min-h-9 w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-lg px-2 py-1.5 text-start",
+        "cursor-pointer border border-transparent hover:bg-muted focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
+        status === "in-progress" && "bg-muted/64",
+        "transition-colors duration-150 motion-reduce:transition-none",
+        "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
+        className
+      )}
       data-align="start"
       data-slot="plan-item-trigger"
       {...rest}

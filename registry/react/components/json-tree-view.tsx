@@ -23,24 +23,33 @@ export const JsonTreeView = (props: JsonTreeViewProps) => {
   return (
     <ArkJsonTreeView.Root
       className={cn(
-        "w-full min-w-0",
-        "font-mono text-foreground",
+        "[--json-tree-indent:--spacing(5)] [--json-tree-row-padding:--spacing(1.5)]",
+        "w-full min-w-0 max-w-full shrink-0",
+        "bg-card font-mono text-foreground text-xs leading-6",
+        "rounded-xl border shadow-xs/4",
+        "overflow-x-auto",
         "**:data-[part=branch-content]:relative",
-        "**:data-[part=branch-indent-guide]:absolute **:data-[part=branch-indent-guide]:inset-s-[calc((var(--depth)-1)*1rem)] **:data-[part=branch-indent-guide]:h-full **:data-[part=branch-indent-guide]:w-px **:data-[part=branch-indent-guide]:bg-border",
-        "**:data-[part=branch-control]:flex **:data-[part=branch-control]:min-w-0 **:data-[part=branch-control]:max-w-full **:data-[part=branch-control]:select-none **:data-[part=branch-control]:overflow-hidden **:data-[part=branch-control]:ps-[calc((var(--depth)-1)*0.75rem)]",
-        "**:data-[part=branch-control]:rounded-md **:data-[part=branch-control]:px-2",
-        "**:data-[part=branch-control]:hover:bg-muted",
-        "**:data-[part=branch-indicator]:me-1 **:data-[part=branch-indicator]:inline-flex **:data-[part=branch-indicator]:shrink-0 **:data-[part=branch-indicator]:origin-center **:data-[part=branch-indicator]:items-center **:data-[part=branch-indicator]:justify-center [&_[data-part=branch-indicator][data-state=open]]:rotate-90",
-        "**:data-[part=item]:relative **:data-[part=item]:flex **:data-[part=item]:min-w-0 **:data-[part=item]:max-w-full **:data-[part=item]:overflow-hidden **:data-[part=item]:rounded-md **:data-[part=item]:ps-[calc(((var(--depth)-1)*0.75rem)+0.75rem)]",
-        "**:data-[part=item]:hover:bg-muted",
-        "**:data-[part=item-text]:flex **:data-[part=item-text]:min-w-0 **:data-[part=item-text]:max-w-full **:data-[part=item-text]:flex-1 **:data-[part=item-text]:items-baseline **:data-[part=item-text]:overflow-hidden",
-        "**:data-[part=branch-text]:flex **:data-[part=branch-text]:min-w-0 **:data-[part=branch-text]:max-w-full **:data-[part=branch-text]:flex-1 **:data-[part=branch-text]:items-baseline **:data-[part=branch-text]:overflow-hidden",
-        "[&_[data-part=item-text]>[data-kind=key]]:min-w-0 [&_[data-part=item-text]>[data-kind=key]]:max-w-[40%] [&_[data-part=item-text]>[data-kind=key]]:shrink [&_[data-part=item-text]>[data-kind=key]]:truncate",
-        "[&_[data-part=item-text]>[data-kind=colon]]:shrink-0",
-        "[&_[data-part=item-text]>[data-kind=preview]]:min-w-0 [&_[data-part=item-text]>[data-kind=preview]]:flex-1 [&_[data-part=item-text]>[data-kind=preview]]:truncate",
-        "[&_[data-part=branch-text]>[data-kind=key]]:min-w-0 [&_[data-part=branch-text]>[data-kind=key]]:max-w-[40%] [&_[data-part=branch-text]>[data-kind=key]]:shrink [&_[data-part=branch-text]>[data-kind=key]]:truncate",
-        "[&_[data-part=branch-text]>[data-kind=colon]]:shrink-0",
-        "[&_[data-part=branch-text]>[data-kind=preview]]:min-w-0 [&_[data-part=branch-text]>[data-kind=preview]]:flex-1 [&_[data-part=branch-text]>[data-kind=preview]]:truncate",
+        "**:data-[part=branch-indent-guide]:absolute **:data-[part=branch-indent-guide]:inset-s-[calc((var(--depth)-1)*var(--json-tree-indent)+1.125rem)] **:data-[part=branch-indent-guide]:h-full **:data-[part=branch-indent-guide]:w-px **:data-[part=branch-indent-guide]:bg-border/64",
+        "[&_:is([data-part=branch],[data-part=item]):not(:last-child)]:mb-0.5",
+        "[&_[data-part=branch-control][data-state=open]]:mb-0.5",
+        "[&_:is([data-part=branch-control],[data-part=item])]:relative [&_:is([data-part=branch-control],[data-part=item])]:flex [&_:is([data-part=branch-control],[data-part=item])]:min-h-7.5 [&_:is([data-part=branch-control],[data-part=item])]:w-full [&_:is([data-part=branch-control],[data-part=item])]:min-w-0 [&_:is([data-part=branch-control],[data-part=item])]:max-w-full [&_:is([data-part=branch-control],[data-part=item])]:items-center",
+        "[&_:is([data-part=branch-control],[data-part=item])]:px-(--json-tree-row-padding) [&_:is([data-part=branch-control],[data-part=item])]:ps-[calc((var(--depth)-1)*var(--json-tree-indent)+1.75rem)]",
+        "[&_:is([data-part=branch-control],[data-part=item])]:select-none [&_:is([data-part=branch-control],[data-part=item])]:text-start",
+        "[&_:is([data-part=branch-control],[data-part=item])]:rounded-md [&_:is([data-part=branch-control],[data-part=item])]:border [&_:is([data-part=branch-control],[data-part=item])]:border-transparent",
+        "[&_:is([data-part=branch-control],[data-part=item])]:outline-hidden",
+        "[&_:is([data-part=branch-control],[data-part=item])]:transition-colors [&_:is([data-part=branch-control],[data-part=item])]:duration-150 [&_:is([data-part=branch-control],[data-part=item])]:ease-out",
+        "[&_:is([data-part=branch-control],[data-part=item])]:hover:bg-accent [&_:is([data-part=branch-control],[data-part=item])]:hover:text-foreground",
+        "[&_:is([data-part=branch-control],[data-part=item])]:focus-visible:border-ring/64 [&_:is([data-part=branch-control],[data-part=item])]:focus-visible:ring-2 [&_:is([data-part=branch-control],[data-part=item])]:focus-visible:ring-ring/24",
+        "[&_:is([data-part=branch-control],[data-part=item])]:data-focus:bg-accent [&_:is([data-part=branch-control],[data-part=item])]:data-focus:text-foreground",
+        "**:data-[part=branch-control]:cursor-pointer",
+        "**:data-[part=branch-indicator]:absolute **:data-[part=branch-indicator]:inset-s-[calc((var(--depth)-1)*var(--json-tree-indent)+0.25rem)] **:data-[part=branch-indicator]:flex **:data-[part=branch-indicator]:size-5 **:data-[part=branch-indicator]:items-center **:data-[part=branch-indicator]:justify-center",
+        "**:data-[part=branch-indicator]:rounded-sm **:data-[part=branch-indicator]:text-muted-foreground",
+        "**:data-[part=branch-indicator]:origin-center **:data-[part=branch-indicator]:transition-transform **:data-[part=branch-indicator]:duration-150 **:data-[part=branch-indicator]:ease-out",
+        "**:data-[part=branch-indicator]:motion-reduce:transition-none [&_[data-part=branch-indicator][data-state=open]]:rotate-90",
+        "[&_:is([data-part=branch-text],[data-part=item-text])]:flex [&_:is([data-part=branch-text],[data-part=item-text])]:min-w-0 [&_:is([data-part=branch-text],[data-part=item-text])]:max-w-full [&_:is([data-part=branch-text],[data-part=item-text])]:flex-1 [&_:is([data-part=branch-text],[data-part=item-text])]:items-baseline [&_:is([data-part=branch-text],[data-part=item-text])]:overflow-hidden",
+        "**:data-[kind=key]:min-w-0 **:data-[kind=key]:max-w-[40%] **:data-[kind=key]:shrink **:data-[kind=key]:truncate",
+        "**:data-[kind=colon]:shrink-0",
+        "**:data-[kind=preview]:min-w-0 **:data-[kind=preview]:flex-1 **:data-[kind=preview]:truncate",
         className
       )}
       data-slot="json-tree-view"
@@ -63,15 +72,16 @@ const JsonTreeViewTree = (
     <ArkJsonTreeView.Tree
       arrow={<ChevronRightIcon className="size-3.5" />}
       className={cn(
-        "flex w-full min-w-0 flex-col **:gap-1",
-        "text-muted-foreground text-xs leading-7",
+        "flex w-full min-w-0 flex-col p-2",
+        "text-muted-foreground text-xs leading-6",
         "[&_svg]:size-3.5",
-        "**:data-[type=string]:text-success",
-        "**:data-[type=number]:text-info",
-        "**:data-[type=boolean]:font-semibold **:data-[type=boolean]:text-warning",
+        "**:data-[type=string]:text-success-foreground",
+        "**:data-[type=number]:text-info-foreground",
+        "**:data-[type=boolean]:font-semibold **:data-[type=boolean]:text-warning-foreground",
         "**:data-[type=null]:font-semibold **:data-[type=null]:text-muted-foreground **:data-[type=null]:italic",
         "**:data-[kind=key]:font-medium **:data-[kind=key]:text-foreground",
         "**:data-[kind=colon]:mx-1 **:data-[kind=colon]:text-muted-foreground",
+        "**:data-[kind=preview-text]:text-muted-foreground **:data-[kind=preview]:text-muted-foreground",
         className
       )}
       data-slot="json-tree-view-tree"

@@ -6,26 +6,42 @@ import {
   useFloatingPanelContext,
 } from "@ark-ui/react/floating-panel";
 import { Portal } from "@ark-ui/react/portal";
+import { createContext } from "@ark-ui/react/utils";
 import { Maximize, MaximizeIcon, MinimizeIcon, MinusIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
+import { tv, VariantProps } from "tailwind-variants";
 
 export const useFloatingPanel = useFloatingPanelContext;
+
+const [FloatingPanelProvider, _useFloatingPanelConfig] =
+  createContext<Pick<React.ComponentProps<typeof ArkFloatingPanel.Root>, "persistRect">>({
+    name: "FloatingPanelContext",
+    providerName: "FloatingPanel",
+  });
 
 export const FloatingPanel = (
   props: React.ComponentProps<typeof ArkFloatingPanel.Root>
 ) => {
-  const { lazyMount = true, unmountOnExit = true, ...rest } = props;
+  const {
+    lazyMount = true,
+    persistRect = true,
+    unmountOnExit = true,
+    ...rest
+  } = props;
 
   return (
-    <ArkFloatingPanel.Root
-      data-slot="floating-panel"
-      lazyMount={lazyMount}
-      unmountOnExit={unmountOnExit}
-      {...rest}
-    />
+    <FloatingPanelProvider value={{ persistRect }}>
+      <ArkFloatingPanel.Root
+        data-slot="floating-panel"
+        lazyMount={lazyMount}
+        persistRect={persistRect}
+        unmountOnExit={unmountOnExit}
+        {...rest}
+      />
+    </FloatingPanelProvider>
   );
 };
 
@@ -43,38 +59,57 @@ interface FloatingPanelContentProps
   resizable?: boolean;
 }
 
+const floatingPanelContentVariants =tv({
+  base:[
+    "[--space:--spacing(4)]",
+    'z-[calc(50+var(--z-index))]',
+    "group/floating-panel",
+    "relative",
+    "flex flex-col",
+    "h-(--height) min-h-0 w-(--width)",
+    "bg-popover",
+    "text-popover-foreground",
+    "rounded-2xl border shadow-lg/4",
+    "outline-hidden",
+    "origin-center transition-[scale,opacity,translate] duration-200 ease-out will-change-transform",
+    "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
+    "motion-reduce:data-[state=open]:zoom-in-100 motion-reduce:transition-none",
+  ],
+  variants:{
+    persistRect:{
+      true: [
+       [
+        "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out motion-reduce:data-[state=closed]:zoom-out-100",
+       ]
+      ],
+    },
+  },
+})
+
+interface FloatingPanelContentProps extends React.ComponentProps<typeof ArkFloatingPanel.Content>, VariantProps<typeof floatingPanelContentVariants> {}
+
 export const FloatingPanelContent = (props: FloatingPanelContentProps) => {
   const { resizable = true, className, children, ...rest } = props;
+
+  const { persistRect } = _useFloatingPanelConfig();
 
   return (
     <Portal>
       <ArkFloatingPanel.Positioner
-        className="inset-s-(--x) top-(--y) z-50"
+        className="inset-s-(--x) top-(--y)"
         data-slot="floating-panel-positioner"
+        // Position coordinates are physical, so the portal geometry stays LTR.
+        dir="ltr"
+        style={{ zIndex: "calc(50 + var(--z-index))" }}
       >
         <ArkFloatingPanel.Content
-          className={cn(
-            "[--space:--spacing(4)]",
-            "group/floating-panel",
-            "relative",
-            "flex flex-col",
-            "h-(--height) min-h-0 w-(--width)",
-            "bg-popover",
-            "text-popover-foreground",
-            "rounded-2xl border shadow-lg/4",
-            "outline-hidden",
-            "origin-center transition-[scale,opacity,translate] duration-200 ease-out will-change-transform",
-            "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
-            "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
-            "motion-reduce:data-[state=closed]:zoom-out-100 motion-reduce:data-[state=open]:zoom-in-100 motion-reduce:transition-none",
-            className
-          )}
+          className={cn(floatingPanelContentVariants({persistRect, }), className)}
           data-slot="floating-panel-content"
           {...rest}
         >
           {children}
 
-          {resizable && (
+          {!!resizable && (
             <>
               <FloatingPanelResizeTrigger axis="n" />
               <FloatingPanelResizeTrigger axis="e" />
@@ -213,12 +248,22 @@ export const FloatingPanelTitle = (
 
 export const FloatingPanelResizeTrigger = (
   props: React.ComponentProps<typeof ArkFloatingPanel.ResizeTrigger>
-) => (
-  <ArkFloatingPanel.ResizeTrigger
-    data-slot="floating-panel-resize-trigger"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkFloatingPanel.ResizeTrigger
+      className={cn(
+        "data-[axis=n]:h-[6px] data-[axis=s]:h-[6px] data-[axis=n]:max-w-[90%] data-[axis=s]:max-w-[90%]",
+        "data-[axis=e]:max-h-[90%] data-[axis=w]:max-h-[90%] data-[axis=e]:w-[6px] data-[axis=w]:w-[6px]",
+        "data-[axis=ne]:size-2.5 data-[axis=nw]:size-2.5 data-[axis=se]:size-2.5 data-[axis=sw]:size-2.5",
+        className
+      )}
+      data-slot="floating-panel-resize-trigger"
+      {...rest}
+    />
+  );
+};
 
 export const FloatingPanelStageTrigger = (
   props: React.ComponentProps<typeof ArkFloatingPanel.StageTrigger>

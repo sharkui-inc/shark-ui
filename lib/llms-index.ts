@@ -146,7 +146,7 @@ export const buildLLMIndex = (baseUrl = SITE_CONFIG.url) => {
     "How agents should use Shark UI:",
     "1. Read Foundations first.",
     "2. Load the smallest index for the task, then only the linked Markdown pages needed to implement it.",
-    "3. Read the design contract before changing UI.",
+    "3. Read the design contract before changing UI; use the handbook only when rationale or an extension decision is needed.",
     "",
     "## Core workflow",
     "",
@@ -161,7 +161,7 @@ export const buildLLMIndex = (baseUrl = SITE_CONFIG.url) => {
     );
   }
   lines.push(
-    `- [Design contract](${baseUrl}/design.md): Visual rules for generated Shark UI interfaces.`,
+    `- [Design contract](${baseUrl}/design.md): Prescriptive visual rules and composition recipes for generated Shark UI interfaces.`,
     ""
   );
   const { changelog } = INDEX_DETAILS;

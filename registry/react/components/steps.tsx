@@ -101,8 +101,7 @@ export const StepsIndicator = (
         "transition-colors",
         "in-focus-visible:border-ring/64 in-focus-visible:ring-2 in-focus-visible:ring-ring/24",
         "data-complete:in-focus-visible:border-background data-current:in-focus-visible:border-background",
-        "data-current:border-primary data-current:bg-primary data-current:text-primary-foreground",
-        "data-complete:border-primary data-complete:bg-primary data-complete:text-primary-foreground",
+        "[&:is([data-current],[data-complete])]:border-primary [&:is([data-current],[data-complete])]:bg-primary [&:is([data-current],[data-complete])]:text-primary-foreground",
         "[&_svg]:size-(--steps-icon-size) [&_svg]:shrink-0",
         "motion-reduce:transition-none",
         className

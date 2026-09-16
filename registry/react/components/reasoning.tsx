@@ -1,5 +1,6 @@
 "use client";
 
+import { createContext } from "@ark-ui/react/utils";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -9,46 +10,101 @@ import {
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
 
-interface ReasoningProps extends React.ComponentProps<typeof Collapsible> {
-  duration?: number;
-  isStreaming?: boolean;
+export interface ReasoningTranslations {
+  /**
+   * The thinking label
+   *
+   * @default "Thinking"
+   */
+  thinking: React.ReactNode;
+  /**
+   * The thought label
+   *
+   * @default "Thought"
+   */
+  thought: React.ReactNode;
+  /**
+   * The thought for duration label
+   *
+   * @default (duration) => `Thought for ${duration}s`
+   */
+  thoughtForDuration: (duration: number) => React.ReactNode;
 }
+
+interface ReasoningProps extends React.ComponentProps<typeof Collapsible> {
+  /**
+   * The duration of the reasoning
+   */
+  duration?: number;
+  /**
+   * Whether the reasoning is streaming
+   */
+  isStreaming?: boolean;
+  /**
+   * The translations for the reasoning
+   */
+  translations?: Partial<ReasoningTranslations>;
+}
+
+type ReasoningContextValue = Pick<
+  ReasoningProps,
+  "duration" | "isStreaming" | "translations"
+>;
 
 export const Reasoning = (props: ReasoningProps) => {
   const {
-    className,
     defaultOpen,
     duration,
     isStreaming = false,
+    translations,
+    className,
     ...rest
   } = props;
 
   return (
-    <Collapsible
-      className={cn("w-full min-w-0 text-sm", className)}
-      data-duration={duration}
-      data-slot="reasoning"
-      data-streaming={isStreaming ? "" : undefined}
-      defaultOpen={defaultOpen ?? isStreaming}
-      {...rest}
-    />
+    <ReasoningProvider
+      value={{
+        duration,
+        isStreaming,
+        translations,
+      }}
+    >
+      <Collapsible
+        className={cn("w-full min-w-0 text-sm", className)}
+        data-duration={duration}
+        data-slot="reasoning"
+        data-streaming={isStreaming ? "" : undefined}
+        defaultOpen={defaultOpen ?? isStreaming}
+        {...rest}
+      />
+    </ReasoningProvider>
   );
 };
 
-interface ReasoningTriggerProps
-  extends React.ComponentProps<typeof CollapsibleTrigger> {
-  duration?: number;
-  isStreaming?: boolean;
-}
+const getReasoningLabel = (context: ReasoningContextValue) => {
+  const { duration, isStreaming, translations } = context;
 
-export const ReasoningTrigger = (props: ReasoningTriggerProps) => {
-  const { className, children, duration, isStreaming = false, ...rest } = props;
-  let label = "Thought";
   if (isStreaming) {
-    label = "Thinking";
-  } else if (duration !== undefined) {
-    label = `Thought for ${duration}s`;
+    return translations?.thinking ?? DEFAULT_TRANSLATIONS.thinking;
   }
+
+  if (duration !== undefined) {
+    return (
+      translations?.thoughtForDuration?.(duration) ??
+      DEFAULT_TRANSLATIONS.thoughtForDuration(duration)
+    );
+  }
+
+  return translations?.thought ?? DEFAULT_TRANSLATIONS.thought;
+};
+
+export const ReasoningTrigger = (
+  props: React.ComponentProps<typeof CollapsibleTrigger>
+) => {
+  const { className, children, ...rest } = props;
+
+  const reasoning = _useReasoning();
+  const label = getReasoningLabel(reasoning);
 
   return (
     <CollapsibleTrigger
@@ -63,13 +119,14 @@ export const ReasoningTrigger = (props: ReasoningTriggerProps) => {
       {...rest}
     >
       {children ?? (
-        <>
-          <span className={cn("inline-block", isStreaming && "shimmer")}>
-            {label}
-          </span>
-          <CollapsibleIndicator className="size-3.5" />
-        </>
+        <span
+          className={cn("inline-block", reasoning.isStreaming && "shimmer")}
+        >
+          {label}
+        </span>
       )}
+
+      <CollapsibleIndicator className="size-3.5" />
     </CollapsibleTrigger>
   );
 };
@@ -87,3 +144,16 @@ export const ReasoningContent = (
     />
   );
 };
+
+const DEFAULT_TRANSLATIONS: ReasoningTranslations = {
+  thinking: "Thinking",
+  thought: "Thought",
+  thoughtForDuration: (duration) => `Thought for ${duration}s`,
+};
+
+const [ReasoningProvider, _useReasoning] = createContext<ReasoningContextValue>(
+  {
+    name: "ReasoningContext",
+    providerName: "Reasoning",
+  }
+);

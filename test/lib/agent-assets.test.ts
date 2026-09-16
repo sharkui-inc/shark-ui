@@ -22,18 +22,30 @@ const concreteTokens =
 const logicalDirections = /logical direction utilities/;
 const consistencyRule =
   /arbitrary colors, corner radii, font families, overlay z-index values/;
+const decisionOrder = /^## Decision order$/m;
+const compositionRecipes = /^## Composition recipes$/m;
+const formRecipe = /^### Form with validation and actions$/m;
+const collectionRecipe = /^### Collection with filters and navigation$/m;
+const stateRecipes = /^## State recipes$/m;
+const reviewChecklist = /^## Review checklist$/m;
 const vercelConfig = JSON.parse(
   readFileSync(join(root, "vercel.json"), "utf8")
 ) as VercelConfig;
 
 describe("agent-facing assets", () => {
-  it("publishes a concise design contract", () => {
+  it("publishes a structured design contract", () => {
     assert.match(designContract, designHeading);
     assert.match(designContract, arkAndTailwind);
     assert.match(designContract, semanticTokens);
     assert.match(designContract, concreteTokens);
     assert.match(designContract, logicalDirections);
     assert.match(designContract, consistencyRule);
+    assert.match(designContract, decisionOrder);
+    assert.match(designContract, compositionRecipes);
+    assert.match(designContract, formRecipe);
+    assert.match(designContract, collectionRecipe);
+    assert.match(designContract, stateRecipes);
+    assert.match(designContract, reviewChecklist);
   });
 
   it("serves design.md as Markdown and protects it from training crawlers", () => {

@@ -178,7 +178,7 @@ const MessageReasoning = ({
   duration: number;
 }) => (
   <Reasoning duration={duration}>
-    <ReasoningTrigger duration={duration} />
+    <ReasoningTrigger />
     <ReasoningContent>{content}</ReasoningContent>
   </Reasoning>
 );

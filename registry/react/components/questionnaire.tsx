@@ -12,6 +12,7 @@ import {
   FieldLegend,
   FieldSet,
 } from "@/registry/react/components/field";
+import { FormatNumber } from "@/registry/react/components/format";
 import { useHotkeys } from "@/registry/react/components/hotkeys";
 import { Input } from "@/registry/react/components/input";
 import { Kbd } from "@/registry/react/components/kbd";
@@ -349,7 +350,7 @@ export const Questionnaire = (props: QuestionnaireProps) => {
 
   const getActiveAnswerControls = () => {
     const item = formRef.current?.querySelector<HTMLElement>(
-      '[data-slot="questionnaire-item"][data-active]'
+      "[data-questionnaire-item][data-active]"
     );
 
     if (!item) {
@@ -580,10 +581,7 @@ export const Questionnaire = (props: QuestionnaireProps) => {
     >
       <ark.form
         {...rest}
-        className={cn(
-          "flex w-full min-w-0 flex-col gap-4 text-sm",
-          className
-        )}
+        className={cn("flex w-full min-w-0 flex-col gap-4 text-sm", className)}
         data-slot="questionnaire"
         noValidate
         onPointerDown={(event) => {
@@ -753,6 +751,7 @@ export const QuestionnaireItem = (props: QuestionnaireItemProps) => {
         data-active={active ? "" : undefined}
         data-multiple={definition.multiple ? "" : undefined}
         data-name={name}
+        data-questionnaire-item=""
         data-required={definition.required ? "" : undefined}
         data-slot="questionnaire-item"
         hidden={!active}
@@ -934,8 +933,6 @@ export const QuestionnaireChoice = (props: QuestionnaireChoiceProps) => {
     invalid,
   } = _useQuestionnaireItem();
 
-  const { setAnswer } = _useQuestionnaire();
-
   const checked =
     (definition.multiple || !answer.input.trim()) &&
     answer.values.includes(value);
@@ -1104,7 +1101,6 @@ export const QuestionnaireInput = (props: QuestionnaireInputProps) => {
           });
         }
       }}
-      type="text"
       value={answer.input}
     />
   );
@@ -1134,14 +1130,19 @@ export const QuestionnaireError = (
   );
 };
 
-export const QuestionnaireProgress = (
-  props: React.ComponentProps<typeof ark.div>
-) => {
-  const { "aria-label": ariaLabel, children, className, ...rest } = props;
+export interface QuestionnaireProgressProps
+  extends React.ComponentProps<typeof ark.div> {}
+
+export const QuestionnaireProgress = (props: QuestionnaireProgressProps) => {
+  const {
+    "aria-label": ariaLabel,
+    "aria-valuetext": ariaValueText,
+    children,
+    className,
+    ...rest
+  } = props;
 
   const { index, items } = _useQuestionnaire();
-
-  const text = items.length ? `${index + 1} of ${items.length}` : "0 / 0";
 
   if (!items.length) {
     return (
@@ -1151,10 +1152,24 @@ export const QuestionnaireProgress = (
         data-slot="questionnaire-progress"
         role="status"
       >
-        {children ?? text}
+        {children ?? (
+          <>
+            <FormatNumber useGrouping={false} value={0} /> /{" "}
+            <FormatNumber useGrouping={false} value={0} />
+          </>
+        )}
       </ark.div>
     );
   }
+
+  const page = index + 1;
+  const text = `${page} of ${items.length}`;
+  const content = (
+    <>
+      <FormatNumber useGrouping={false} value={page} /> of{" "}
+      <FormatNumber useGrouping={false} value={items.length} />
+    </>
+  );
 
   return (
     <ark.div
@@ -1163,12 +1178,12 @@ export const QuestionnaireProgress = (
       aria-valuemax={items.length}
       aria-valuemin={1}
       aria-valuenow={index + 1}
-      aria-valuetext={text}
+      aria-valuetext={ariaValueText ?? text}
       className={cn("text-muted-foreground tabular-nums", className)}
       data-slot="questionnaire-progress"
       role="progressbar"
     >
-      {children ?? text}
+      {children ?? content}
     </ark.div>
   );
 };

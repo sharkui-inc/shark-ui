@@ -429,7 +429,7 @@ const MessageExtras = ({ extras }: { extras: DemoMessageExtras }) => {
       ) : null}
       {extras.reasoning ? (
         <Reasoning duration={extras.reasoning.duration}>
-          <ReasoningTrigger duration={extras.reasoning.duration} />
+          <ReasoningTrigger />
           <ReasoningContent>{extras.reasoning.content}</ReasoningContent>
         </Reasoning>
       ) : null}

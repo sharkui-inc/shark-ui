@@ -18,6 +18,7 @@ const inpuGroupVariants = tv({
     "bg-background dark:bg-input/32",
     "[--input-group-addon-size:--spacing(6)]",
     "[--input-group-inset:calc((var(--input-group-height)-2px-var(--input-group-addon-size))/2)]",
+    "rounded-lg",
     "border border-input shadow-xs/4",
     "transition-[color,box-shadow]",
     "has-[>textarea]:h-auto",
@@ -28,14 +29,20 @@ const inpuGroupVariants = tv({
     "dark:has-[[data-slot][aria-invalid=true]]:border-destructive-foreground dark:has-[[data-slot][aria-invalid=true]]:ring-destructive-foreground/32",
     "motion-reduce:transition-none",
   ],
+  compoundVariants: [
+    {
+      class: "rounded-full",
+      pill: true,
+    },
+  ],
   defaultVariants: {
     pill: false,
     size: "md",
   },
   variants: {
     pill: {
-      false: "rounded-lg",
-      true: "rounded-full",
+      false: "",
+      true: "",
     },
     size: {
       lg: [
@@ -52,6 +59,7 @@ const inpuGroupVariants = tv({
         "h-7",
         "[--input-group-height:--spacing(7)]",
         "px-[calc(--spacing(2.5)-1px)]",
+        "rounded-md",
       ],
     },
   },
@@ -67,6 +75,7 @@ export const InputGroup = (props: InputGroupProps) => {
   return (
     <ark.div
       className={cn(inpuGroupVariants({ pill, size }), className)}
+      data-pill={pill || undefined}
       data-size={size}
       data-slot="input-group"
       role="group"
@@ -83,6 +92,8 @@ const inputGroupAddonVariants = tv({
     "cursor-text",
     "group-data-[disabled=true]/input-group:opacity-64",
     "[&>kbd]:rounded-[max(0px,calc(var(--radius)-var(--input-group-inset)))]",
+    "group-data-[size=sm]/input-group:[&>kbd]:rounded-[max(0px,calc(var(--radius)*0.75-var(--input-group-inset)))]",
+    "group-data-[pill=true]/input-group:[&>kbd]:rounded-full",
     "[&_svg:not([class*='size-'])]:size-4",
   ],
   defaultVariants: {
@@ -151,8 +162,9 @@ const inputGroupButtonVariants = tv({
     "relative",
     "text-sm",
     "shadow-none",
-    "[--input-group-inner-radius:max(0px,calc(var(--radius)-var(--input-group-inset)))]",
-    "rounded-(--input-group-inner-radius)",
+    "rounded-[max(0px,calc(var(--radius)-var(--input-group-inset)))]",
+    "group-data-[size=sm]/input-group:rounded-[max(0px,calc(var(--radius)*0.75-var(--input-group-inset)))]",
+    "group-data-[pill=true]/input-group:rounded-full",
     "focus-visible:border-transparent focus-visible:ring-0",
   ],
 });
@@ -196,9 +208,7 @@ export const InputGroupInput = (props: React.ComponentProps<typeof Input>) => {
   return (
     <Input
       className={cn(
-        "flex-1",
-        "h-full",
-        "px-0",
+        "h-full flex-1 px-0",
         "bg-transparent",
         "rounded-none border-0 shadow-none",
         "focus-visible:border-0 focus-visible:ring-0",
@@ -220,11 +230,9 @@ export const InputGroupTextarea = (
   return (
     <Textarea
       className={cn(
-        "flex-1",
-        "px-0",
-        "py-3",
+        "flex-1 px-0",
         "bg-transparent",
-        "resize-none rounded-none border-0 shadow-none",
+        "resize-none rounded-none border-0 py-3 shadow-none",
         "focus-visible:border-0 focus-visible:ring-0",
         "disabled:bg-transparent aria-invalid:ring-0 data-invalid:ring-0",
         "dark:bg-transparent dark:disabled:bg-transparent",

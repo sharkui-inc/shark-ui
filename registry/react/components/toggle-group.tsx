@@ -99,17 +99,17 @@ export const ToggleGroupItem = (props: ToggleGroupItemProps) => {
           "shrink-0 focus:z-10 focus-visible:z-10",
           "data-[spacing=0]:rounded-none",
           "data-[spacing=0]:px-2",
-          "data-[orientation=horizontal]:data-[spacing=0]:data-[pill=false]:first:rounded-l-lg",
+          "data-[orientation=horizontal]:data-[spacing=0]:data-[pill=false]:first:rounded-s-lg",
           "data-[orientation=vertical]:data-[spacing=0]:data-[pill=false]:first:rounded-t-lg",
-          "data-[orientation=horizontal]:data-[spacing=0]:data-[pill=false]:last:rounded-r-lg",
+          "data-[orientation=horizontal]:data-[spacing=0]:data-[pill=false]:last:rounded-e-lg",
           "data-[orientation=vertical]:data-[spacing=0]:data-[pill=false]:last:rounded-b-lg",
-          "data-[orientation=horizontal]:data-[spacing=0]:data-[pill=true]:first:rounded-l-full",
+          "data-[orientation=horizontal]:data-[spacing=0]:data-[pill=true]:first:rounded-s-full",
           "data-[orientation=vertical]:data-[spacing=0]:data-[pill=true]:first:rounded-t-full",
-          "data-[orientation=horizontal]:data-[spacing=0]:data-[pill=true]:last:rounded-r-full",
+          "data-[orientation=horizontal]:data-[spacing=0]:data-[pill=true]:last:rounded-e-full",
           "data-[orientation=vertical]:data-[spacing=0]:data-[pill=true]:last:rounded-b-full",
-          "data-[orientation=horizontal]:data-[spacing=0]:data-[variant=outline]:border-l-0",
+          "data-[orientation=horizontal]:data-[spacing=0]:data-[variant=outline]:border-s-0",
           "data-[orientation=vertical]:data-[spacing=0]:data-[variant=outline]:border-t-0",
-          "data-[orientation=horizontal]:data-[spacing=0]:data-[variant=outline]:first:border-l",
+          "data-[orientation=horizontal]:data-[spacing=0]:data-[variant=outline]:first:border-s",
           className
         )}
         data-pill={pill}

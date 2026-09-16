@@ -236,11 +236,7 @@ export const PromptInputButton = (
 
   return (
     <InputGroupButton
-      className={cn(
-        "[--input-group-inner-radius:var(--radius-md)]",
-        "rounded-md",
-        className
-      )}
+      className={cn("rounded-md", className)}
       data-slot="prompt-input-button"
       {...rest}
     />

@@ -12,25 +12,27 @@ import {
 
 const Example = () => (
   <Carousel
-    className="h-40 w-full max-w-48"
+    className="h-40 w-full max-w-48 gap-4"
     loop
     orientation="vertical"
     slideCount={slides.length}
   >
-    <CarouselControl className="relative">
-      <CarouselPrevious>Previous</CarouselPrevious>
-      <CarouselNext>Next</CarouselNext>
-
-      <CarouselContent>
+    <div className="relative min-w-0 flex-1">
+      <CarouselContent className="h-full">
         {slides.map((slide, index) => (
           <CarouselItem index={index} key={slide.src}>
             <img alt={slide.alt} height={300} src={slide.src} width={500} />
           </CarouselItem>
         ))}
       </CarouselContent>
-    </CarouselControl>
 
-    <CarouselIndicatorGroup className="ml-4">
+      <CarouselControl className="absolute inset-0">
+        <CarouselPrevious>Previous</CarouselPrevious>
+        <CarouselNext>Next</CarouselNext>
+      </CarouselControl>
+    </div>
+
+    <CarouselIndicatorGroup className="shrink-0">
       {slides.map((slide) => (
         <CarouselIndicator
           className="size-10 rounded-md"

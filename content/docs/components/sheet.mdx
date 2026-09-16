@@ -187,11 +187,11 @@ Opens the sheet on click. Use `asChild` for custom triggers.
 
 ### SheetContent
 
-Holds the sheet panel. Slides in from the configured edge.
+Holds the sheet panel. Slides in from the configured physical edge; `left` and `right` do not change with document direction.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `side` | `"right" \| "left" \| "top" \| "bottom"` | `"right"` |
+| `placement` | `"right" \| "left" \| "top" \| "bottom"` | `"right"` |
 | `variant` | `"default" \| "inset"` | `"default"` |
 | `showCloseButton` | `boolean` | `true` |
 | `className` | `string` | `-` |
@@ -212,7 +212,7 @@ Header area for title and description.
 
 ### SheetBody
 
-Scrollable body content. Uses [ScrollArea](/docs/components/scroll-area) for overflow.
+Scrollable body content.
 
 | Prop | Type | Default |
 | --- | --- | --- |

@@ -2,6 +2,7 @@
 
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { createWavesAvatar } from "@/lib/dicebear";
+import { Card, CardContent } from "@/registry/react/components/card";
 import {
   ImageCropper,
   ImageCropperImage,
@@ -14,13 +15,17 @@ const Example = () => {
   const { values } = translations[locale];
 
   return (
-    <ImageCropper className="aspect-video w-full max-w-lg">
-      <ImageCropperImage
-        alt={values.alt}
-        src={createWavesAvatar("image cropper", "green-dark")}
-      />
-      <ImageCropperSelection />
-    </ImageCropper>
+    <Card className="w-full max-w-sm pt-0 [--space:--spacing(4)]">
+      <CardContent>
+        <ImageCropper>
+          <ImageCropperImage
+            alt={values.alt}
+            src={createWavesAvatar("image cropper", "green-dark")}
+          />
+          <ImageCropperSelection />
+        </ImageCropper>
+      </CardContent>
+    </Card>
   );
 };
 

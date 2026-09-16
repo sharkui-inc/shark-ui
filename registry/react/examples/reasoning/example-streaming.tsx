@@ -6,7 +6,7 @@ import {
 
 const Example = () => (
   <Reasoning className="max-w-lg" defaultOpen isStreaming>
-    <ReasoningTrigger isStreaming />
+    <ReasoningTrigger />
     <ReasoningContent>
       Scanning helpers.ts for the current validation path...
     </ReasoningContent>
