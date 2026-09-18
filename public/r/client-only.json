@@ -7,7 +7,7 @@
   "type": "registry:ui",
   "files": [
     {
-      "content": "\"use client\";\n\nimport { ClientOnly as ArkClientOnly } from \"@ark-ui/react/client-only\";\n\nexport const ClientOnly = (\n  props: React.ComponentProps<typeof ArkClientOnly>\n) => <ArkClientOnly data-slot=\"client-only\" {...props} />;\n",
+      "content": "\"use client\";\n\nimport { ClientOnly as ArkClientOnly } from \"@ark-ui/react/client-only\";\nimport type React from \"react\";\n\nexport const ClientOnly = (\n  props: React.ComponentProps<typeof ArkClientOnly>\n) => <ArkClientOnly data-slot=\"client-only\" {...props} />;\n",
       "path": "registry/react/components/client-only.tsx",
       "type": "registry:ui"
     }
