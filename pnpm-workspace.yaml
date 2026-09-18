@@ -11,6 +11,9 @@ minimumReleaseAgeExclude:
   - ai@7.0.95
   - ultracite@7.11.1
   - valibot@1.5.0
-  - '@ark-ui/react@5.39.1'
-patchedDependencies:
-  '@ark-ui/react@5.39.1': patches/@ark-ui__react@5.39.1.patch
+  - '@ark-ui/react@5.39.2'
+  - '@tanstack/ai-client@0.32.1'
+  - '@tanstack/ai-react@0.27.0'
+  - '@tanstack/ai@0.55.0'
+  - jsdom@30.1.0
+  - lucide-react@1.47.0

@@ -1,3 +1,4 @@
+import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
 import ExampleAreaChannels from "@/registry/react/examples/color-picker/example-area-channels";
 import ExampleAreaDots from "@/registry/react/examples/color-picker/example-area-dots";
 import ExampleAreaRtl from "@/registry/react/examples/color-picker/example-area-rtl";
@@ -34,7 +35,8 @@ import ExampleSwatchPickerRtl from "@/registry/react/examples/color-picker/examp
 import ExampleWithField from "@/registry/react/examples/color-picker/example-with-field";
 
 const ColorPickerExamplePage = () => (
-  <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
+  <PreviewLocaleProvider>
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
     <div className="grid gap-16 sm:grid-cols-2">
       <section
         aria-labelledby="default-heading"
@@ -507,7 +509,8 @@ const ColorPickerExamplePage = () => (
         </div>
       </section>
     </div>
-  </div>
+    </div>
+  </PreviewLocaleProvider>
 );
 
 export default ColorPickerExamplePage;

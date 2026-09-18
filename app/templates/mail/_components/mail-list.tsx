@@ -17,7 +17,7 @@ import { MailToolbarButton } from "./mail-toolbar-button";
 const INBOX = EMAILS.filter((email) => email.folder === "Inbox");
 
 export const MailList = () => {
-  const [query, setQuery] = useState("");
+  const [query] = useState("");
   const [selectedId, setSelectedId] = useState(INBOX[0]?.id ?? null);
   const [favoriteIds, setFavoriteIds] = useState<string[]>([...STARRED_IDS]);
 

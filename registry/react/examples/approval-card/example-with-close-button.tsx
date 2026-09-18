@@ -1,7 +1,7 @@
 "use client";
 
 import { TerminalIcon, XIcon } from "lucide-react";
-import { type React, useState } from "react";
+import { type SubmitEvent, useState } from "react";
 import {
   ApprovalCard,
   ApprovalCardAction,
@@ -18,7 +18,7 @@ import { toast } from "@/registry/react/components/toast";
 const Example = () => {
   const [isOpen, setIsOpen] = useState(true);
 
-  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     toast.create({

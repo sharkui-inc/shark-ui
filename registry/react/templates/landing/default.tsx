@@ -54,7 +54,7 @@ const PRICING = [
 const LandingTemplate = () => (
   <div className="flex min-h-svh flex-col">
     <header className="container flex h-16 items-center justify-between">
-      <span className="font-semibold">Acme</span>
+      <span className="font-semibold">Onda</span>
       <nav className="flex gap-4">
         <Link
           className="text-muted-foreground text-sm hover:text-foreground"
@@ -170,7 +170,7 @@ const LandingTemplate = () => (
     <footer className="border-t">
       <div className="container flex h-16 items-center justify-between">
         <span className="text-muted-foreground text-sm">
-          © {new Date().getFullYear()} Acme. All rights reserved.
+          © {new Date().getFullYear()} Onda. All rights reserved.
         </span>
       </div>
     </footer>

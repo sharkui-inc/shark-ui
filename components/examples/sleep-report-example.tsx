@@ -125,7 +125,6 @@ const SleepStackedBar = ({
     <Rectangle
       {...rest}
       height={height}
-      payload={payload}
       radius={[
         isTop ? sleepBarRadius : 0,
         isTop ? sleepBarRadius : 0,

@@ -1,6 +1,10 @@
 "use client";
 
-import { Dialog as ArkDialog, useDialogContext } from "@ark-ui/react/dialog";
+import {
+  Dialog as ArkDialog,
+  useDialog as useArkDialog,
+  useDialogContext as useArkDialogContext,
+} from "@ark-ui/react/dialog";
 import { ark } from "@ark-ui/react/factory";
 import { Portal } from "@ark-ui/react/portal";
 import { createContext } from "@ark-ui/react/utils";
@@ -11,7 +15,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
-export const useDialog = useDialogContext;
+export const useDialog = useArkDialog;
+export const useDialogContext = useArkDialogContext;
+export const DialogRootProvider = ArkDialog.RootProvider;
 
 interface DialogContextProps {
   /**
@@ -241,11 +247,15 @@ export const DialogBody = (props: DialogBodyProps) => {
   const { scrollFade = true, className, ...rest } = props;
 
   return (
-    <ScrollArea className="flex-1" scrollFade={scrollFade}>
+    <ScrollArea
+      className="min-w-0 flex-1"
+      orientation="vertical"
+      scrollFade={scrollFade}
+    >
       <ark.div
         className={cn(
           "p-(--space)",
-          "in-[[data-slot=dialog-content]:has([data-slot=dialog-header])]:pt-0",
+          "in-[[data-slot=dialog-content]:has([data-slot=dialog-header]:not(.sr-only))]:pt-0",
           "in-[[data-slot=dialog-content]:has([data-slot=dialog-footer]:not(.border-t))]:pb-1",
           className
         )}

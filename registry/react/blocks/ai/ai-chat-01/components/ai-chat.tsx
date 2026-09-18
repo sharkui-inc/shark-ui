@@ -1,7 +1,6 @@
 "use client";
 
 import { createListCollection, useListCollection } from "@ark-ui/react";
-import type { UIMessage } from "ai";
 import {
   BotIcon,
   BugIcon,
@@ -57,6 +56,13 @@ import {
   CodeBlockTitle,
 } from "@/registry/react/components/code-block";
 import {
+  Combobox,
+  ComboboxButtonTrigger,
+  ComboboxContent,
+  ComboboxItem,
+  ComboboxList,
+} from "@/registry/react/components/combobox";
+import {
   Context,
   ContextBody,
   ContextContent,
@@ -108,13 +114,6 @@ import {
   MessageScrollerViewport,
   useMessageScroller,
 } from "@/registry/react/components/message-scroller";
-import {
-  ModelSelector,
-  ModelSelectorContent,
-  ModelSelectorItem,
-  ModelSelectorList,
-  ModelSelectorTrigger,
-} from "@/registry/react/components/model-selector";
 import {
   Plan,
   PlanContent,
@@ -188,11 +187,11 @@ import {
   ToolResultTrigger,
 } from "@/registry/react/components/tool-result";
 import { useChatHelper } from "@/registry/react/hooks/use-chat-helper";
+import type { ChatMessage } from "@/registry/react/lib/create-chat";
 import {
   CONTEXT_USAGE,
   chat,
   type DemoMessageExtras,
-  getMessageText,
   MESSAGE_EXTRAS,
   MODEL_OPTIONS,
   USER_TURNS,
@@ -209,8 +208,8 @@ interface AiChatProps {
 
 const noop = () => undefined;
 
-const getCompactThreadTitle = (message: UIMessage) => {
-  const prompt = getMessageText(message).trim().replace(/\s+/g, " ");
+const getCompactThreadTitle = (message: ChatMessage) => {
+  const prompt = message.content.trim().replace(/\s+/g, " ");
   const matchingTurn = USER_TURNS.find(
     (turn) => turn.id === message.id || turn.text === prompt
   );
@@ -546,10 +545,10 @@ const ChatMessageItem = ({
   assistantName: string;
   extras?: DemoMessageExtras;
   isStreaming?: boolean;
-  message: UIMessage;
+  message: ChatMessage;
 }) => {
   const isUser = message.role === "user";
-  const text = getMessageText(message);
+  const text = message.content;
   const firstSource = extras?.sources?.[0];
 
   return (
@@ -613,7 +612,7 @@ const ChatSession = ({
   showDemoArtifacts: boolean;
   welcomeTitle: string;
 }) => {
-  const [model, setModel] = useState([MODEL_OPTIONS[0].value]);
+  const [model, setModel] = useState<string[]>([MODEL_OPTIONS[0].value]);
   const [effort, setEffort] = useState(["medium"]);
   const [access, setAccess] = useState(["full"]);
   const [prompt, setPrompt] = useState("");
@@ -622,7 +621,6 @@ const ChatSession = ({
   });
   const { canSendNext, messages, nextMessage, sendNext, status, stop } =
     useChatHelper({
-      adapter: "ai-sdk",
       chat,
     });
   const promptStatus = toPromptStatus(status);
@@ -643,7 +641,7 @@ const ChatSession = ({
   const threadTitle = firstUserMessage
     ? getCompactThreadTitle(firstUserMessage)
     : "New Chat";
-  const latestMessageText = getMessageText(messages.at(-1) ?? { parts: [] });
+  const latestMessageText = messages.at(-1)?.content ?? "";
 
   return (
     <div
@@ -785,22 +783,28 @@ const ChatSession = ({
                 </SelectContent>
               </Select>
             </PromptInputTools>
-            <ModelSelector
+            <Combobox
               collection={collection}
               onValueChange={({ value }) => setModel(value)}
+              positioning={{ placement: "top" }}
               value={model}
             >
-              <ModelSelectorTrigger size="sm" variant="ghost" />
-              <ModelSelectorContent>
-                <ModelSelectorList>
+              <ComboboxButtonTrigger
+                placeholder="Model"
+                showTrigger={false}
+                size="sm"
+                variant="ghost"
+              />
+              <ComboboxContent className="max-h-72 w-52">
+                <ComboboxList>
                   {collection.items.map((item) => (
-                    <ModelSelectorItem item={item} key={item.value}>
+                    <ComboboxItem item={item} key={item.value}>
                       {item.label}
-                    </ModelSelectorItem>
+                    </ComboboxItem>
                   ))}
-                </ModelSelectorList>
-              </ModelSelectorContent>
-            </ModelSelector>
+                </ComboboxList>
+              </ComboboxContent>
+            </Combobox>
             <Select
               collection={effortCollection}
               onValueChange={({ value }) => setEffort(value)}

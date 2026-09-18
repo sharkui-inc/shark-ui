@@ -2,7 +2,8 @@
 
 import {
   AngleSlider as ArkAngleSlider,
-  useAngleSliderContext,
+  useAngleSlider as useArkAngleSlider,
+  useAngleSliderContext as useArkAngleSliderContext,
 } from "@ark-ui/react/angle-slider";
 import { createContext } from "@ark-ui/react/utils";
 import React from "react";
@@ -11,7 +12,9 @@ import { FieldLabel } from "@/registry/react/components/field";
 import { FormatNumber } from "@/registry/react/components/format";
 import { useLocale } from "@/registry/react/components/locale";
 
-export const useCircularSlider = useAngleSliderContext;
+export const useCircularSlider = useArkAngleSlider;
+export const useCircularSliderContext = useArkAngleSliderContext;
+export const CircularSliderRootProvider = ArkAngleSlider.RootProvider;
 
 interface CircularSliderContextValue {
   ringRadius: number;
@@ -111,7 +114,8 @@ export const CircularSlider = (props: CircularSliderProps) => {
 };
 
 const CircularSliderProgressRing = () => {
-  const api = useAngleSliderContext();
+  const api = useCircularSliderContext();
+
   const { dir } = useLocale();
   const { size, thickness, ringRadius } = _useCircularSlider();
 
@@ -175,7 +179,7 @@ export const CircularSliderThumb = (
   const { className, ...rest } = props;
 
   const { dir } = useLocale();
-  const { dragging } = useCircularSlider();
+  const { dragging } = useCircularSliderContext();
   const { thumbSize, ringRadius } = _useCircularSlider();
 
   const halfThumb = thumbSize / 2;
@@ -235,7 +239,7 @@ interface CircularSliderValueProps
 export const CircularSliderValue = (props: CircularSliderValueProps) => {
   const { prefix = "", suffix = "", className, ...rest } = props;
 
-  const { value } = useAngleSliderContext();
+  const { value } = useCircularSliderContext();
 
   return (
     <FieldLabel asChild>

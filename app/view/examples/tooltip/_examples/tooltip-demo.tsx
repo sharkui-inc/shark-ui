@@ -7,7 +7,9 @@ import {
 
 const TooltipDemo = () => (
   <Tooltip>
-    <TooltipTrigger render={<Button variant="outline" />}>Hover</TooltipTrigger>
+    <TooltipTrigger asChild>
+      <Button variant="outline">Hover</Button>
+    </TooltipTrigger>
     <TooltipContent>
       <p>Add to library</p>
     </TooltipContent>

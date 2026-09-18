@@ -1,3 +1,5 @@
+"use client";
+
 import { createListCollection } from "@ark-ui/react";
 import {
   Select,

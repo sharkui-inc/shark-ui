@@ -16,7 +16,7 @@ const Example = () => (
         <PlanItemContent>
           <PlanItemDetail>
             Collected 428 documents from
-            <PlanItemDetailFile>content/customers/acme</PlanItemDetailFile>
+            <PlanItemDetailFile>content/customers/onda</PlanItemDetailFile>
           </PlanItemDetail>
         </PlanItemContent>
       </PlanItem>

@@ -5,14 +5,17 @@ import { ark } from "@ark-ui/react/factory";
 import {
   Menu as ArkMenu,
   type MenuContentProps,
-  useMenuContext,
+  useMenu as useArkMenu,
+  useMenuContext as useArkMenuContext,
 } from "@ark-ui/react/menu";
 import { CheckIcon, ChevronRight } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
-export const useMenu = useMenuContext;
+export const useMenu = useArkMenu;
+export const useMenuContext = useArkMenuContext;
+export const MenuRootProvider = ArkMenu.RootProvider;
 
 export const Menu = (props: React.ComponentProps<typeof ArkMenu.Root>) => {
   const {
@@ -83,7 +86,7 @@ export const menuItemIndicatorVariants = tv({
     "pointer-events-none",
     "absolute inset-e-2 top-1.5",
     "flex h-lh w-3.5 shrink-0 items-center justify-center",
-    "[&_svg]:text-primary",
+    "[&_svg]:text-muted-foreground",
   ],
 });
 

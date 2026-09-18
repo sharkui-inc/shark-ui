@@ -9,7 +9,8 @@ import {
 
 interface ComponentPreviewFrameProps extends React.ComponentProps<"div"> {
   /**
-   * Grow with content instead of locking the preview to 450px.
+   * Size the preview to its content with equal padding on all sides,
+   * instead of locking to a 450px frame that vertically centers short examples.
    *
    * @default false
    */
@@ -66,10 +67,10 @@ export const ComponentPreviewFrame = (props: ComponentPreviewFrameProps) => {
           >
             {showBorders ? (
               <>
-                <div className="absolute inset-x-0 top-4 border border-border/64 border-dashed max-sm:hidden sm:top-8" />
-                <div className="absolute inset-x-0 bottom-4 border border-border/64 border-dashed max-sm:hidden sm:bottom-8" />
-                <div className="absolute inset-s-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-s-8" />
-                <div className="absolute inset-e-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-e-8" />
+                <div className="absolute inset-x-0 top-4 border border-border/64 border-dashed max-sm:hidden sm:top-10" />
+                <div className="absolute inset-x-0 bottom-4 border border-border/64 border-dashed max-sm:hidden sm:bottom-10" />
+                <div className="absolute inset-s-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-s-10" />
+                <div className="absolute inset-e-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-e-10" />
               </>
             ) : null}
             {preview}

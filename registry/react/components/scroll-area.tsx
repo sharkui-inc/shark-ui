@@ -2,13 +2,16 @@
 
 import {
   ScrollArea as ArkScrollArea,
-  useScrollAreaContext,
+  useScrollArea as useArkScrollArea,
+  useScrollAreaContext as useArkScrollAreaContext,
 } from "@ark-ui/react/scroll-area";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
-export const useScrollArea = useScrollAreaContext;
+export const useScrollArea = useArkScrollArea;
+export const useScrollAreaContext = useArkScrollAreaContext;
+export const ScrollAreaRootProvider = ArkScrollArea.RootProvider;
 
 const scrollAreaVariants = tv({
   base: ["h-full", "rounded-[inherit]", "scrollbar-none"],
@@ -22,10 +25,10 @@ const scrollAreaVariants = tv({
     },
     scrollFade: {
       true: [
-        "data-overflow-y:not-data-at-top:mask-t-from-[calc(100%-var(--fade-size))]",
-        "data-overflow-y:not-data-at-bottom:mask-b-from-[calc(100%-var(--fade-size))]",
-        "data-overflow-x:not-data-at-left:mask-l-from-[calc(100%-var(--fade-size))]",
-        "data-overflow-x:not-data-at-right:mask-r-from-[calc(100%-var(--fade-size))]",
+        "mask-t-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-y-start)))]",
+        "mask-b-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-y-end)))]",
+        "mask-l-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-x-start)))]",
+        "mask-r-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-x-end)))]",
         "motion-reduce:transition-none",
       ],
     },

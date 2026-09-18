@@ -31,10 +31,10 @@ const ButtonGroupSelectExample = () => {
         <Select
           collection={currencies}
           onValueChange={({ value }) => setCurrency(value[0])}
-          value={currency}
+          value={[currency]}
         >
           <SelectTrigger className="font-mono">{currency}</SelectTrigger>
-          <SelectContent positioning={{ placement: "bottom-start" }}>
+          <SelectContent>
             <SelectGroup>
               {currencies.items.map((item) => (
                 <SelectItem item={item} key={item.value}>

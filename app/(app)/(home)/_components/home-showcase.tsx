@@ -35,7 +35,7 @@ export const HomeShowcase = (props: React.PropsWithChildren) => {
           value={visibleTab}
         >
           <TabsList>
-            <TabsTrigger value={COMPONENTS_SLUG}>Components</TabsTrigger>
+            <TabsTrigger value={COMPONENTS_SLUG}>Preview</TabsTrigger>
             {THEME_TEMPLATES.map((item) => (
               <TabsTrigger key={item.slug} value={item.slug}>
                 {item.label}

@@ -13,7 +13,10 @@ const ResizableDemo = () => (
       { id: "2", minSize: 10 },
     ]}
   >
-    <ResizablePanel className="flex h-[200px] items-center justify-center p-6" id="1">
+    <ResizablePanel
+      className="flex h-[200px] items-center justify-center p-6"
+      id="1"
+    >
       <span className="font-semibold">One</span>
     </ResizablePanel>
 

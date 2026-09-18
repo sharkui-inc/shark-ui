@@ -28,7 +28,9 @@ const Example = () => {
     >
       <SelectTrigger className="w-56">
         <SelectValue className="capitalize">
-          <SelectContext>{({ value }) => renderValue(value)}</SelectContext>
+          <SelectContext>
+            {({ value: selectedValue }) => renderValue(selectedValue)}
+          </SelectContext>
         </SelectValue>
       </SelectTrigger>
       <SelectContent>
@@ -49,7 +51,7 @@ const renderValue = (value: string[]) => {
     return "Select 3 frameworks";
   }
 
-  const firstValue = value?.at(0) ?? "";
+  const firstValue = value.at(0) ?? "";
   const additionalValues =
     value.length > 1 ? ` (+${value.length - 1} more)` : "";
 

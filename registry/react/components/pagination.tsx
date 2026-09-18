@@ -2,7 +2,8 @@
 
 import {
   Pagination as ArkPagination,
-  usePaginationContext,
+  usePagination as useArkPagination,
+  usePaginationContext as useArkPaginationContext,
 } from "@ark-ui/react/pagination";
 import {
   ChevronFirstIcon,
@@ -11,31 +12,53 @@ import {
   ChevronRightIcon,
   EllipsisIcon,
 } from "lucide-react";
-import type React from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
 import { FormatNumber } from "@/registry/react/components/format";
 
-export const usePagination = usePaginationContext;
+export const usePagination = useArkPagination;
+export const usePaginationContext = useArkPaginationContext;
+export const PaginationRootProvider = ArkPagination.RootProvider;
+
+const PaginationTypeContext = React.createContext<"button" | "link">("button");
 
 interface PaginationProps
   extends React.ComponentProps<typeof ArkPagination.Root> {}
 
 export const Pagination = (props: PaginationProps) => {
-  const { className, ...rest } = props;
+  const { type = "button", className, ...rest } = props;
 
   return (
-    <ArkPagination.Root
-      className={cn(
-        "mx-auto",
-        "w-full",
-        "flex justify-center gap-1",
-        className
-      )}
-      data-slot="pagination"
-      {...rest}
-    />
+    <PaginationTypeContext.Provider value={type}>
+      <ArkPagination.Root
+        className={cn(
+          "mx-auto",
+          "w-full",
+          "flex justify-center gap-1",
+          className
+        )}
+        data-slot="pagination"
+        type={type}
+        {...rest}
+      />
+    </PaginationTypeContext.Provider>
   );
+};
+
+const PaginationButton = (props: ButtonProps) => {
+  const { children, ...rest } = props;
+  const type = React.useContext(PaginationTypeContext);
+
+  if (type === "link") {
+    return (
+      <Button asChild {...rest}>
+        <a>{children}</a>
+      </Button>
+    );
+  }
+
+  return <Button {...rest}>{children}</Button>;
 };
 
 interface PaginationFirstProps
@@ -52,12 +75,12 @@ export const PaginationFirst = (props: PaginationFirstProps) => {
 
   return (
     <ArkPagination.FirstTrigger asChild data-slot="pagination-first">
-      <Button variant={variant} {...rest}>
+      <PaginationButton variant={variant} {...rest}>
         <ChevronFirstIcon className="rtl:rotate-180" />
         <span className={cn({ "sr-only": !withLabel })}>
           {children || "First"}
         </span>
-      </Button>
+      </PaginationButton>
     </ArkPagination.FirstTrigger>
   );
 };
@@ -76,12 +99,12 @@ export const PaginationPrevious = (props: PaginationPreviousProps) => {
 
   return (
     <ArkPagination.PrevTrigger asChild data-slot="pagination-previous">
-      <Button variant={variant} {...rest}>
+      <PaginationButton variant={variant} {...rest}>
         <ChevronLeftIcon className="rtl:rotate-180" />
         <span className={cn({ "sr-only": !withLabel })}>
           {children || "Previous"}
         </span>
-      </Button>
+      </PaginationButton>
     </ArkPagination.PrevTrigger>
   );
 };
@@ -100,12 +123,12 @@ export const PaginationNext = (props: PaginationNextProps) => {
 
   return (
     <ArkPagination.NextTrigger asChild data-slot="pagination-next">
-      <Button variant={variant} {...rest}>
+      <PaginationButton variant={variant} {...rest}>
         <span className={cn({ "sr-only": !withLabel })}>
           {children || "Next"}
         </span>
         <ChevronRightIcon className="rtl:rotate-180" />
-      </Button>
+      </PaginationButton>
     </ArkPagination.NextTrigger>
   );
 };
@@ -124,12 +147,12 @@ export const PaginationLast = (props: PaginationLastProps) => {
 
   return (
     <ArkPagination.LastTrigger asChild data-slot="pagination-last">
-      <Button variant={variant} {...rest}>
+      <PaginationButton variant={variant} {...rest}>
         <span className={cn({ "sr-only": !withLabel })}>
           {children || "Last"}
         </span>
         <ChevronLastIcon className="rtl:rotate-180" />
-      </Button>
+      </PaginationButton>
     </ArkPagination.LastTrigger>
   );
 };
@@ -141,7 +164,7 @@ export const PaginationItem = (
 
   return (
     <ArkPagination.Item asChild data-slot="pagination-item" {...rest}>
-      <Button
+      <PaginationButton
         className={cn(
           "tabular-nums",
           "data-selected:not-[hover]:bg-transparent dark:data-selected:not-[hover]:bg-input/32",
@@ -153,7 +176,7 @@ export const PaginationItem = (
         variant="ghost"
       >
         {children}
-      </Button>
+      </PaginationButton>
     </ArkPagination.Item>
   );
 };
@@ -172,51 +195,17 @@ export const PaginationItems = (props: PaginationItemsProps) => (
             <FormatNumber useGrouping={false} value={page.value} />
           </PaginationItem>
         ) : (
-          <PaginationEllipsis index={index} key={`ellipsis-${index}`} />
+          <PaginationEllipsis
+            index={index}
+            key={`ellipsis-${pages
+              .filter((candidate) => candidate.type === "ellipsis")
+              .indexOf(page)}`}
+          />
         )
       )
     }
   </ArkPagination.Context>
 );
-
-interface PaginationItemLinkProps extends React.ComponentProps<typeof Button> {
-  /**
-   * The page number to link to.
-   */
-  page?: "previous" | "next" | number;
-}
-
-export const PaginationItemLink = (props: PaginationItemLinkProps) => {
-  const { page, children, ...rest } = props;
-
-  const pagination = usePaginationContext();
-
-  const pageValue = () => {
-    if (page === "previous") {
-      return pagination.previousPage;
-    }
-
-    if (page === "next") {
-      return pagination.nextPage;
-    }
-
-    return page;
-  };
-
-  if (typeof page === "number") {
-    return (
-      <Button asChild variant="outline" {...rest}>
-        <a href={`?page=${pageValue()}`}>{children}</a>
-      </Button>
-    );
-  }
-
-  return (
-    <Button asChild variant="ghost" {...rest}>
-      <a href={`?page=${pageValue()}`}>{children}</a>
-    </Button>
-  );
-};
 
 export const PaginationEllipsis = (
   props: React.ComponentProps<typeof ArkPagination.Ellipsis>

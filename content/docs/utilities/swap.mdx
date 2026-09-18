@@ -30,7 +30,32 @@ npx shadcn@latest add @shark/swap
 
 <RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Ensure your CSS entry imports `tw-animate-css`.</Step>
+<Step>Add the flip animation tokens and keyframes to your CSS entry:</Step>
+
+```css
+@theme inline {
+  --animate-flip-in: flip-in 400ms ease;
+  --animate-flip-out: flip-out 200ms ease;
+
+  @keyframes flip-in {
+    from {
+      transform: rotateY(180deg);
+    }
+    to {
+      transform: rotateY(0deg);
+    }
+  }
+
+  @keyframes flip-out {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(180deg);
+    }
+  }
+}
+```
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -76,9 +101,9 @@ const Example = () => {
 
 ```tsx
 <Swap
-  className={cn(
-    "[&>span]:data-[state=open]:fade-in-0 [&>span]:data-[state=open]:slide-in-from-bottom-1 [&>span]:data-[state=open]:duration-150 [&>span]:data-[state=open]:ease-out",
-    "[&>span]:data-[state=closed]:fade-out-0 [&>span]:data-[state=closed]:slide-out-to-top-1 [&>span]:data-[state=closed]:duration-150 [&>span]:data-[state=closed]:ease-out",
+  indicatorClassName={cn(
+    "data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom-1 data-[state=open]:duration-150 data-[state=open]:ease-out",
+    "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-1 data-[state=closed]:duration-150 data-[state=closed]:ease-out",
   )}
   off={<SunIcon aria-hidden="true" className="size-4" />}
   on={<MoonIcon aria-hidden="true" className="size-4" />}
@@ -116,11 +141,12 @@ const Example = () => {
 | --- | --- | --- |
 | `variant` | `"fade" \| "scale" \| "flip" \| "rotate" \| "blur"` | `"fade"` |
 | `swap` | `boolean` | `false` |
-| `on` | `ReactNode` | required with `off` |
-| `off` | `ReactNode` | required with `on` |
+| `on` | `ReactNode` | - |
+| `off` | `ReactNode` | - |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
 | `className` | `string` | `-` |
+| `indicatorClassName` | `string` | `-` |
 
 ---
 

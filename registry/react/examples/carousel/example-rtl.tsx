@@ -16,7 +16,7 @@ const Example = () => {
 
   const { values } = translations[locale];
 
-  const slides = Array.from({ length: values.numbers.length });
+  const slides = Array.from({ length: values.numbers.length }, (_, id) => ({ id }));
 
   return (
     <Carousel className="w-full max-w-48" slideCount={slides.length}>
@@ -26,8 +26,8 @@ const Example = () => {
       </CarouselControl>
 
       <CarouselContent>
-        {slides.map((_, index) => (
-          <CarouselItem index={index} key={index}>
+        {slides.map((slide, index) => (
+          <CarouselItem index={index} key={slide.id}>
             <Card>
               <CardContent className="flex aspect-square items-center justify-center">
                 <span className="font-semibold text-4xl">

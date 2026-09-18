@@ -17,7 +17,9 @@ const Example = () => {
       <Field className="w-48" orientation="horizontal">
         <Switch
           checked={checked}
-          onCheckedChange={({ checked }) => setChecked(checked ?? false)}
+          onCheckedChange={({ checked: nextChecked }) =>
+            setChecked(nextChecked ?? false)
+          }
         />
         <FieldContent>
           <FieldLabel>Enable notifications</FieldLabel>

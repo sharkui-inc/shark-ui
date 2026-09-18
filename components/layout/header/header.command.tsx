@@ -3,13 +3,14 @@
 import { useFilter, useListCollection } from "@ark-ui/react";
 import type { LucideIcon } from "lucide-react";
 import {
-  ArrowRightIcon,
+  ArrowLeftRightIcon,
   BlocksIcon,
   CheckIcon,
   CircleDashed,
   CircleDotDashed,
   CornerDownLeftIcon,
-  SparklesIcon,
+  FileTextIcon,
+  SquarePenIcon,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -17,9 +18,11 @@ import { DOCS_NEW_ITEMS, DOCS_UPDATED_ITEMS } from "@/config/docs-nav";
 import type { NavItem } from "@/config/navigation";
 import type { CommandCompositionItem } from "@/lib/composition-catalog";
 import type { source } from "@/lib/fumadocs";
-import { formatShadcnCommandDisplay } from "@/lib/shadcn-command";
+import {
+  createShadcnAddCommand,
+  formatShadcnCommandDisplay,
+} from "@/lib/installation-command";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
 import {
   Command,
@@ -39,6 +42,7 @@ import {
   useHotkey,
 } from "@/registry/react/components/hotkeys";
 import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
+import { Status } from "@/registry/react/components/status";
 import { useCopyToClipboard } from "@/registry/react/hooks/use-copy-to-clipboard";
 import { useConfig } from "@/store/config";
 
@@ -53,15 +57,29 @@ interface PageItem {
 }
 
 const GROUP_ICON_MAP: Record<string, LucideIcon> = {
-  "ai elements": SparklesIcon,
+  "ai components": CircleDashed,
   blocks: BlocksIcon,
   components: CircleDashed,
+  forms: SquarePenIcon,
   helpers: CircleDotDashed,
-  sections: ArrowRightIcon,
+  hooks: CircleDotDashed,
+  migration: ArrowLeftRightIcon,
+  sections: FileTextIcon,
   utilities: CircleDotDashed,
 };
 
-const DEFAULT_GROUP_ICON = ArrowRightIcon;
+const DEFAULT_GROUP_ICON = FileTextIcon;
+
+const COMPONENT_PAGE_PATHS = [
+  "/components/",
+  "/ai-components/",
+  "/helpers/",
+  "/utilities/",
+  "/hooks/",
+];
+
+const isComponentPage = (url: string) =>
+  COMPONENT_PAGE_PATHS.some((path) => url.includes(path));
 
 const isFormFieldFocused = () => {
   const target = document.activeElement;
@@ -92,18 +110,42 @@ interface HeaderCommandProps
   tree: typeof source.pageTree;
 }
 
-const getAddCommand = (packageManager: string) => {
-  switch (packageManager) {
-    case "pnpm":
-      return "pnpm dlx shadcn@latest add";
-    case "bun":
-      return "bunx --bun shadcn@latest add";
-    case "yarn":
-      return "yarn dlx shadcn@latest add";
-    default:
-      return "npx shadcn@latest add";
-  }
-};
+const getCommandItems = ({
+  compositionItems,
+  navItems,
+  tree,
+}: Pick<
+  HeaderCommandProps,
+  "compositionItems" | "navItems" | "tree"
+>): PageItem[] => [
+  ...navItems.map((item) => ({
+    group: "Sections",
+    isComponent: false,
+    label: item.label,
+    url: item.href,
+    value: item.href,
+  })),
+  ...tree.children.flatMap((group) => {
+    if (group.type !== "folder") {
+      return [];
+    }
+
+    return group.children.flatMap((item) => {
+      if (item.type !== "page") {
+        return [];
+      }
+
+      return {
+        group: String(group.name),
+        isComponent: isComponentPage(item.url),
+        label: item.name?.toString() || "",
+        url: item.url,
+        value: item.url,
+      };
+    });
+  }),
+  ...compositionItems,
+];
 
 export const HeaderCommand = (props: HeaderCommandProps) => {
   const { compositionItems, navItems, tree, ...rest } = props;
@@ -124,55 +166,10 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
     }
   }, [clipboard.setValue, isOpen]);
 
-  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: it's a simple grouping of items
-  const groupedItems = React.useMemo<PageItem[]>(() => {
-    const allItems: PageItem[] = [];
-
-    for (const navItem of navItems) {
-      allItems.push({
-        group: "Sections",
-        isComponent: false,
-        label: navItem.label,
-        url: navItem.href,
-        value: navItem.href,
-      });
-    }
-
-    for (const group of tree.children) {
-      if (group.type === "folder") {
-        for (const item of group.children) {
-          if (item.type === "page") {
-            const isComponent =
-              [
-                "/components/",
-                "/ai-elements/",
-                "/helpers/",
-                "/utilities/",
-                "/hooks/",
-              ].some((path) => item.url.includes(path)) ?? false;
-            const itemName = item.name?.toString() || "";
-
-            allItems.push({
-              group:
-                typeof group.name === "string"
-                  ? group.name
-                  : String(group.name),
-              isComponent,
-              label: itemName,
-              url: item.url,
-              value: item.url,
-            });
-          }
-        }
-      }
-    }
-
-    for (const item of compositionItems) {
-      allItems.push(item);
-    }
-
-    return allItems;
-  }, [compositionItems, navItems, tree]);
+  const groupedItems = React.useMemo(
+    () => getCommandItems({ compositionItems, navItems, tree }),
+    [compositionItems, navItems, tree]
+  );
 
   const filterItems = React.useCallback(
     (_itemText: string, inputValue: string, item: PageItem) =>
@@ -255,7 +252,7 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
               item.installName ??
               item.url.split("/").at(-1)?.split("?")[0] ??
               "";
-            const addCmd = getAddCommand(packageManager);
+            const addCmd = createShadcnAddCommand(packageManager);
             clipboard.setValue(`${addCmd} @shark/${componentName}`);
           }}
           onInputValueChange={({ inputValue }) => filter(inputValue)}
@@ -265,7 +262,7 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
               setIsOpen(false);
             });
           }}
-          placeholder="Search docs, blocks…"
+          placeholder="Search docs…"
         >
           <CommandInput />
           <CommandContent>
@@ -279,17 +276,23 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
                       DEFAULT_GROUP_ICON;
                     return (
                       <CommandItem item={item} key={item.value}>
-                        <ItemIcon />
+                        <ItemIcon aria-hidden className="size-3.5" />
                         {item.label}
                         {DOCS_UPDATED_ITEMS.includes(item.url) && (
-                          <Badge className="ms-auto" variant="outline">
-                            Updated
-                          </Badge>
+                          <>
+                            <Status className="ms-auto" size="sm" />
+                            <span className="sr-only">Updated</span>
+                          </>
                         )}
                         {DOCS_NEW_ITEMS.includes(item.url) && (
-                          <Badge className="ms-auto" variant="info">
-                            New
-                          </Badge>
+                          <>
+                            <Status
+                              className="ms-auto"
+                              size="sm"
+                              variant="info"
+                            />
+                            <span className="sr-only">New</span>
+                          </>
                         )}
                       </CommandItem>
                     );

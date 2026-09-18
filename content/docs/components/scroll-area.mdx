@@ -59,31 +59,49 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 </ScrollArea>
 ```
 
-## Examples
+## Orientation
 
-### Scroll Fade
+### Vertical Scroll
 
-Use `scrollFade` to fade the edges of the scroll area. The fade only appears on an axis that overflows, and only on the side you can still scroll toward. It hides at the top when you are already at the top, at the bottom when you cannot scroll further, and the same for left and right on horizontal overflow.
+Set `orientation="vertical"` to allow vertical scrolling only.
 
-<ComponentPreview componentName="scroll-area" fileName="example-scroll-fade" />
-
-### Scrollbar Gutter
-
-Use `scrollbarGutter` to reserve padding when content overflows, so the overlay scrollbar does not cover trailing content.
-
-<ComponentPreview componentName="scroll-area" fileName="example-scrollbar-gutter" />
+<ComponentPreview componentName="scroll-area" fileName="example-vertical" />
 
 ### Horizontal Scroll
+
+Set `orientation="horizontal"` for horizontal scrolling.
 
 <ComponentPreview componentName="scroll-area" fileName="example-horizontal" />
 
 ### Both Scrollbars
 
+Set `orientation="both"` to allow scrolling on both axes.
+
 <ComponentPreview componentName="scroll-area" fileName="example-both-directions" />
+
+## Examples
+
+### Scroll Fade
+
+Use `scrollFade` to fade edges on overflowing axes, only toward the scrollable side.
+
+<ComponentPreview componentName="scroll-area" fileName="example-scroll-fade" />
+
+### Scrollbar Gutter
+
+Use `scrollbarGutter` to reserve padding so the overlay scrollbar does not cover content.
+
+<ComponentPreview componentName="scroll-area" fileName="example-scrollbar-gutter" />
+
+### Hide Thumb
+
+Target the `scroll-area-thumb` slot to hide the visual indicator while preserving scroll behavior.
+
+<ComponentPreview componentName="scroll-area" fileName="example-hide-thumb" />
 
 ### Nested
 
-Scroll areas can be nested within each other for complex layouts.
+Nest scroll areas inside each other.
 
 <ComponentPreview componentName="scroll-area" fileName="example-nested" />
 
@@ -99,15 +117,32 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 Custom-styled scrollable region. Hides native scrollbars; preserves scroll behavior.
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
 | scrollFade | `boolean` | `false` | 
 | scrollbarGutter | `boolean` | `false` | 
 | orientation | `"both" \| "horizontal" \| "vertical"` | `"both"` |
 
-| Attribute | Default |
-| --- | --- |
-| `--fade-size` | `1.5rem` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--fade-size` | CSS custom property | `1.5rem` |
+
+### ScrollAreaRootProvider
+
+Provides a ScrollArea API created with `useScrollArea` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseScrollAreaReturn` | **required** |
+
+### ScrollAreaScrollbar
+
+Public ScrollAreaScrollbar component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 ---
 

@@ -1,3 +1,4 @@
+import { StarIcon } from "lucide-react";
 import {
   Avatar,
   AvatarFallback,
@@ -15,8 +16,8 @@ const Example = () => (
   <Card className="w-full max-w-xs">
     <CardContent className="space-y-2">
       <Rating
-        className="**:data-[slot=rating-item-indicator]:size-4"
         defaultValue={5}
+        icon={<StarIcon className="size-4" />}
         readOnly
       />
       <blockquote className="text-muted-foreground">

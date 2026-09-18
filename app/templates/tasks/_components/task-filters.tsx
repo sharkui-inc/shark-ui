@@ -87,7 +87,7 @@ export const TaskFilters = ({
               {item === FILTER_ALL ? (
                 <TaskAllOption />
               ) : (
-                <TaskStatusOption status={item} />
+                <TaskStatusOption status={item as TaskStatus} />
               )}
             </SelectItem>
           ))}
@@ -111,7 +111,7 @@ export const TaskFilters = ({
               {item === FILTER_ALL ? (
                 <TaskAllOption />
               ) : (
-                <TaskPriorityOption priority={item} />
+                <TaskPriorityOption priority={item as TaskPriority} />
               )}
             </SelectItem>
           ))}

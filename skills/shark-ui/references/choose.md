@@ -68,7 +68,6 @@ SegmentGroup switches modes. Tabs switch peer content panels.
 | Wizard progress | Steps |
 | App chrome | Sidebar |
 | Mobile tab bar | BottomNavigation |
-| Site nav with menus | NavigationMenu |
 | Hierarchy trail | Breadcrumb |
 | Paged lists | Pagination |
 
@@ -149,7 +148,6 @@ Use `Separator` instead of `<hr>` or a `border-t` divider. Use `Badge` for a sta
 - Marquee: horizontal scrolling items.
 - Menu: dropdown actions.
 - NativeSelect: native `<select>`.
-- NavigationMenu: site links and menus.
 - NumberInput: numeric entry.
 - Pagination: page through a list.
 - PasswordInput: masked text field.
@@ -190,9 +188,9 @@ Use `Separator` instead of `<hr>` or a `border-t` divider. Use `Badge` for a sta
 - Tour: guided walkthrough.
 - TreeView: expandable hierarchy.
 
-### AI elements
+### AI Components
 
-`content/docs/ai-elements/<name>.mdx`. Composition: [`ai-elements.md`](ai-elements.md).
+`content/docs/ai-components/<name>.mdx`. Composition: [`ai-components.md`](ai-components.md).
 
 - ApprovalCard: collect an approval or clarification.
 - Attachment: uploaded file or image with status.

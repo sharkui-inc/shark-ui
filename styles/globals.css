@@ -88,6 +88,8 @@
   --animate-marquee-y: marqueeY var(--marquee-duration) linear infinite
     var(--marquee-delay);
   --animate-indeterminate: indeterminate 1.5s ease-in-out infinite;
+  --animate-flip-in: flip-in 400ms ease;
+  --animate-flip-out: flip-out 200ms ease;
 
   @keyframes marqueeX {
     from {
@@ -113,6 +115,24 @@
     }
     100% {
       transform: translateX(400%);
+    }
+  }
+
+  @keyframes flip-in {
+    from {
+      transform: rotateY(180deg);
+    }
+    to {
+      transform: rotateY(0deg);
+    }
+  }
+
+  @keyframes flip-out {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(180deg);
     }
   }
 }
@@ -156,21 +176,21 @@
     var(--color-neutral-950)
   );
 
-  --accent: color-mix(in srgb, var(--color-neutral-950) 4%, var(--background));
+  --accent: color-mix(in srgb, var(--color-neutral-950) 8%, var(--background));
   --accent-foreground: var(--color-neutral-800);
 
   --destructive: var(--color-red-600);
   --destructive-foreground: var(--color-red-800);
   --destructive-hover: var(--color-red-700);
 
-  --info: var(--color-blue-600);
-  --info-foreground: var(--color-blue-800);
+  --info: var(--color-blue-500);
+  --info-foreground: var(--color-blue-700);
 
-  --success: var(--color-emerald-700);
-  --success-foreground: var(--color-emerald-800);
+  --success: var(--color-emerald-600);
+  --success-foreground: var(--color-emerald-700);
 
-  --warning: var(--color-amber-700);
-  --warning-foreground: var(--color-amber-800);
+  --warning: var(--color-amber-500);
+  --warning-foreground: var(--color-amber-700);
 
   --border: color-mix(in srgb, var(--color-neutral-950) 8%, var(--background));
   --input: color-mix(in srgb, var(--color-neutral-950) 10%, var(--background));
@@ -186,7 +206,7 @@
   --sidebar-primary-foreground: var(--color-neutral-50);
   --sidebar-accent: color-mix(
     in srgb,
-    var(--color-neutral-950) 4%,
+    var(--color-neutral-950) 8%,
     var(--sidebar)
   );
   --sidebar-accent-foreground: var(--color-neutral-800);
@@ -253,20 +273,20 @@
     var(--color-neutral-50)
   );
 
-  --accent: color-mix(in srgb, var(--color-neutral-50) 4%, var(--background));
+  --accent: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
   --accent-foreground: var(--color-neutral-100);
 
   --destructive: var(--color-red-600);
   --destructive-foreground: var(--color-red-400);
   --destructive-hover: var(--color-red-700);
 
-  --info: var(--color-blue-600);
-  --info-foreground: var(--color-blue-300);
+  --info: var(--color-blue-500);
+  --info-foreground: var(--color-blue-400);
 
-  --success: var(--color-emerald-700);
+  --success: var(--color-emerald-600);
   --success-foreground: var(--color-emerald-400);
 
-  --warning: var(--color-amber-700);
+  --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-400);
 
   --border: color-mix(in srgb, var(--color-neutral-50) 6%, var(--background));
@@ -287,7 +307,7 @@
   --sidebar-primary-foreground: var(--color-neutral-800);
   --sidebar-accent: color-mix(
     in srgb,
-    var(--color-neutral-50) 4%,
+    var(--color-neutral-50) 8%,
     var(--sidebar)
   );
   --sidebar-accent-foreground: var(--color-neutral-100);
@@ -338,17 +358,4 @@
 
 @utility container {
   @apply mx-auto max-w-[1400px] px-4;
-}
-
-@utility step {
-  counter-increment: step;
-
-  &:before {
-    content: counter(step);
-    @apply border border-border bg-code mr-2 inline-flex size-6 tabular-nums items-center justify-center rounded-full text-center -indent-px font-mono text-xs font-medium md:absolute md:mt-[-4px] md:ml-[-50px] md:size-8;
-  }
-}
-
-@utility step-keep {
-  counter-increment: step 0;
 }

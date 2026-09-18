@@ -1,6 +1,10 @@
 "use client";
 
-import { Combobox as ArkCombobox } from "@ark-ui/react/combobox";
+import {
+  Combobox as ArkCombobox,
+  useCombobox as useArkCombobox,
+  useComboboxContext as useArkComboboxContext,
+} from "@ark-ui/react/combobox";
 import { Dialog as ArkDialog } from "@ark-ui/react/dialog";
 import { ark } from "@ark-ui/react/factory";
 import { Portal } from "@ark-ui/react/portal";
@@ -40,6 +44,10 @@ import {
 } from "@/registry/react/components/menu";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
+
+export const useCommand = useArkCombobox;
+export const useCommandContext = useArkComboboxContext;
+export const CommandRootProvider = ArkCombobox.RootProvider;
 
 export const CommandDialog = Dialog;
 
@@ -211,7 +219,7 @@ export const CommandInput = (props: CommandInputProps) => {
   const { size = "lg", className, autoFocus = true, ...rest } = props;
 
   return (
-    <ComboboxControl className="mb-2">
+    <ComboboxControl className="mb-1">
       <InputGroup
         className={cn("rounded-xl bg-input/32", className)}
         size={size}

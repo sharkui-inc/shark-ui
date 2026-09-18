@@ -3,7 +3,8 @@
 import {
   ColorPicker as ArkColorPicker,
   parseColor as parseColorArk,
-  useColorPickerContext,
+  useColorPicker as useArkColorPicker,
+  useColorPickerContext as useArkColorPickerContext,
 } from "@ark-ui/react/color-picker";
 import { ark } from "@ark-ui/react/factory";
 import { Portal } from "@ark-ui/react/portal";
@@ -13,7 +14,9 @@ import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
 
 export const parseColor = parseColorArk;
-export const useColorPicker = useColorPickerContext;
+export const useColorPicker = useArkColorPicker;
+export const useColorPickerContext = useArkColorPickerContext;
+export const ColorPickerRootProvider = ArkColorPicker.RootProvider;
 
 export interface ColorPickerProps
   extends Omit<
@@ -139,6 +142,7 @@ export const ColorPickerView = (
   props: React.ComponentProps<typeof ArkColorPicker.View>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <ArkColorPicker.View
       className={cn("relative flex size-full flex-1 flex-col gap-4", className)}
@@ -152,7 +156,7 @@ export const ColorPickerSlider = (
   props: React.ComponentProps<typeof ArkColorPicker.ChannelSlider>
 ) => {
   const { className, children, ...rest } = props;
-  const { dragging } = useColorPicker();
+  const { dragging } = useColorPickerContext();
 
   return (
     <ArkColorPicker.ChannelSlider
@@ -246,7 +250,7 @@ export const ColorPickerSwatchTrigger = (
         "size-8",
         "flex items-center justify-center",
         "rounded-full border border-transparent",
-        "transition-[border-color,box-shadow] duration-[120ms] ease-out will-change-transform",
+        "transition-[border-color,box-shadow] duration-150 ease-out will-change-transform",
         "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "data-[state=checked]:shadow-sm/4 data-[state=checked]:ring-2 data-[state=checked]:ring-foreground/24",
@@ -271,8 +275,7 @@ export const ColorPickerSwatch = (
         "shrink-0",
         "overflow-hidden",
         "rounded-[inherit]",
-        "transition-transform duration-[120ms] ease-out will-change-transform",
-        "[@media(hover:hover)_and_(pointer:fine)]:not-[data-state=checked]:hover:scale-110",
+        "transition-transform duration-150 ease-out will-change-transform",
         "data-[state=checked]:scale-[0.8]",
         "motion-reduce:transition-none",
         className
@@ -382,7 +385,7 @@ export const ColorPickerAreaThumb = (
   props: React.ComponentProps<typeof ArkColorPicker.AreaThumb>
 ) => {
   const { className, ...rest } = props;
-  const { dragging } = useColorPicker();
+  const { dragging } = useColorPickerContext();
 
   return (
     <ArkColorPicker.AreaThumb

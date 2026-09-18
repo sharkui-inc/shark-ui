@@ -11,6 +11,13 @@ import {
 import { useState } from "react";
 import { Button } from "@/registry/react/components/button";
 import {
+  Combobox,
+  ComboboxButtonTrigger,
+  ComboboxContent,
+  ComboboxItem,
+  ComboboxList,
+} from "@/registry/react/components/combobox";
+import {
   Context,
   ContextBody,
   ContextContent,
@@ -26,13 +33,6 @@ import {
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
-import {
-  ModelSelector,
-  ModelSelectorContent,
-  ModelSelectorItem,
-  ModelSelectorList,
-  ModelSelectorTrigger,
-} from "@/registry/react/components/model-selector";
 import {
   PromptInput,
   PromptInputBottom,
@@ -75,7 +75,7 @@ export const ChatPromptComposer = ({
   usedTokens: number;
   value: string;
 }) => {
-  const [model, setModel] = useState([MODEL_OPTIONS[0].value]);
+  const [model, setModel] = useState<string[]>([MODEL_OPTIONS[0].value]);
   const [effort, setEffort] = useState(["medium"]);
   const [access, setAccess] = useState(["full"]);
   const { collection } = useListCollection({
@@ -136,22 +136,28 @@ export const ChatPromptComposer = ({
               </SelectContent>
             </Select>
           </PromptInputTools>
-          <ModelSelector
+          <Combobox
             collection={collection}
             onValueChange={(details) => setModel(details.value)}
+            positioning={{ placement: "top" }}
             value={model}
           >
-            <ModelSelectorTrigger size="sm" variant="ghost" />
-            <ModelSelectorContent>
-              <ModelSelectorList>
+            <ComboboxButtonTrigger
+              placeholder="Model"
+              showTrigger={false}
+              size="sm"
+              variant="ghost"
+            />
+            <ComboboxContent className="max-h-72 w-52">
+              <ComboboxList>
                 {collection.items.map((item) => (
-                  <ModelSelectorItem item={item} key={item.value}>
+                  <ComboboxItem item={item} key={item.value}>
                     {item.label}
-                  </ModelSelectorItem>
+                  </ComboboxItem>
                 ))}
-              </ModelSelectorList>
-            </ModelSelectorContent>
-          </ModelSelector>
+              </ComboboxList>
+            </ComboboxContent>
+          </Combobox>
           <Select
             collection={effortCollection}
             onValueChange={(details) => setEffort(details.value)}

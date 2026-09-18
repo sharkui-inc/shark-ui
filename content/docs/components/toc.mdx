@@ -133,7 +133,7 @@ Root. Tracks visible headings and owns scroll behavior.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `items` | `TocItemData[]` | `[]` |
-| `scrollEl` | `() => HTMLElement \| null` | document / viewport |
+| `scrollEl` | `() => HTMLElement \| null` | - |
 | `activeIds` | `string[]` | `-` |
 | `defaultActiveIds` | `string[]` | `-` |
 | `autoScroll` | `boolean` | `true` |
@@ -146,12 +146,12 @@ Root. Tracks visible headings and owns scroll behavior.
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
-| CSS Variable | Description |
-| --- | --- |
-| `--top` | Indicator offset from the top of the list |
-| `--height` | Indicator height for the active range |
-| `--left` | Indicator horizontal offset |
-| `--width` | Indicator width |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--top` | CSS custom property | - |
+| `--height` | CSS custom property | - |
+| `--left` | CSS custom property | - |
+| `--width` | CSS custom property | - |
 
 ### TocContent
 
@@ -209,17 +209,17 @@ One TOC entry. Indent follows `--depth` from the item's heading level.
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
-| Attribute | Description |
-| --- | --- |
-| `data-value` | Item `value` (heading id) |
-| `data-active` | Present when the heading is active |
-| `data-first` | First item in the active range |
-| `data-last` | Last item in the active range |
-| `data-depth` | Heading depth |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `data-value` | CSS custom property | - |
+| `data-active` | CSS custom property | - |
+| `data-first` | CSS custom property | - |
+| `data-last` | CSS custom property | - |
+| `data-depth` | CSS custom property | - |
 
-| CSS Variable | Description |
-| --- | --- |
-| `--depth` | Heading depth for indentation |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--depth` | CSS custom property | - |
 
 ### TocLink
 
@@ -230,10 +230,26 @@ Anchor to a heading. Sets `aria-current="location"` when active. With `scrollEl`
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
-| Attribute | Description |
-| --- | --- |
-| `data-value` | Linked heading id |
-| `data-active` | Present when the linked heading is active |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `data-value` | CSS custom property | - |
+| `data-active` | CSS custom property | - |
+
+### TocRootProvider
+
+Provides a Toc API created with `useToc` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseTocReturn` | **required** |
+
+### TocContext
+
+Render-prop access to the surrounding component API.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: unknown) => React.ReactNode` | **required** |
 
 ---
 

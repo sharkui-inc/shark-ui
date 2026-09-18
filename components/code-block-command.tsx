@@ -4,8 +4,11 @@ import { TerminalIcon } from "lucide-react";
 import React from "react";
 import {
   formatShadcnCommandDisplay,
+  isPackageManager,
+  type PackageManagerCommands,
   packageManagerCommandVariants,
-} from "@/lib/shadcn-command";
+  packageManagers,
+} from "@/lib/installation-command";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import {
@@ -14,11 +17,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/registry/react/components/tabs";
-import {
-  type PackageManager,
-  useConfig,
-  useUpdateConfig,
-} from "@/store/config";
+import { useConfig, useUpdateConfig } from "@/store/config";
 import { CopyButton } from "./copy-button";
 
 interface CodeBlockCommandProps extends React.ComponentProps<"figure"> {
@@ -29,20 +28,22 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
   const { __npm__, className, ...rest } = props;
 
   const config = useConfig();
+  const { packageManager } = config;
   const updateConfig = useUpdateConfig();
 
-  const packageManager = config.packageManager || "pnpm";
+  const tabs = React.useMemo(() => {
+    const rawCommand = __npm__ ?? "";
 
-  const tabs = React.useMemo(
-    () =>
-      packageManagerCommandVariants(__npm__ ?? "") ?? {
-        bun: __npm__ ?? "",
-        npm: __npm__ ?? "",
-        pnpm: __npm__ ?? "",
-        yarn: __npm__ ?? "",
-      },
-    [__npm__]
-  );
+    return (
+      packageManagerCommandVariants(rawCommand) ??
+      ({
+        bun: rawCommand,
+        npm: rawCommand,
+        pnpm: rawCommand,
+        yarn: rawCommand,
+      } satisfies PackageManagerCommands)
+    );
+  }, [__npm__]);
 
   return (
     <figure
@@ -64,7 +65,7 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
         className="gap-0"
         onValueChange={({ value }) => {
           updateConfig({
-            packageManager: value as PackageManager,
+            ...(isPackageManager(value) ? { packageManager: value } : {}),
           });
         }}
         value={packageManager}
@@ -73,27 +74,27 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
           <TerminalIcon aria-hidden className="size-4" />
 
           <TabsList className="bg-transparent">
-            {Object.entries(tabs).map(([key]) => (
-              <TabsTrigger className="rounded-lg" key={key} value={key}>
-                {key}
+            {packageManagers.map((manager) => (
+              <TabsTrigger className="rounded-lg" key={manager} value={manager}>
+                {manager}
               </TabsTrigger>
             ))}
           </TabsList>
         </div>
 
         <ScrollArea className="**:data-[slot=scroll-area-scrollbar]:data-[orientation=horizontal]:mx-2 **:data-[slot=scroll-area-scrollbar]:data-[orientation=vertical]:my-2">
-          {Object.entries(tabs).map(([key, value]) => (
+          {packageManagers.map((manager) => (
             <TabsContent
               className="mt-0 w-max px-4 py-3.5"
-              key={key}
-              value={key}
+              key={manager}
+              value={manager}
             >
               <pre>
                 <code
                   className="relative font-mono text-[.8125rem] leading-none"
                   data-language="bash"
                 >
-                  {formatShadcnCommandDisplay(value)}
+                  {formatShadcnCommandDisplay(tabs[manager])}
                 </code>
               </pre>
             </TabsContent>

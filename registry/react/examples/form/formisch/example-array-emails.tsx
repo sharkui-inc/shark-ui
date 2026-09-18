@@ -133,11 +133,11 @@ const Example = () => {
                     Add email address
                   </Button>
                 </FieldGroup>
-                {arrayField.errors?.[0] && (
+                {arrayField.errors?.[0] ? (
                   <Field invalid>
                     <FieldError>{arrayField.errors[0]}</FieldError>
                   </Field>
-                )}
+                ) : null}
               </FieldSet>
             )}
           </FieldArray>

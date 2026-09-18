@@ -163,9 +163,19 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 ### Avatar
 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+
 Container for user or entity profile image. Supports sizes and fallback.
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `className` | `string` | `-` | 
@@ -175,7 +185,7 @@ Container for user or entity profile image. Supports sizes and fallback.
 
 Profile image. Shown when URL loads; fallback used on error.
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
 | `className` | `string` | `-` | 
 | `asChild` | `boolean` | `false` | 
@@ -184,7 +194,7 @@ Profile image. Shown when URL loads; fallback used on error.
 
 Shown when the image fails to load or is loading. Often initials or icon.
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
 | `className` | `string` | `-` | 
 | `asChild` | `boolean` | `false` | 
@@ -193,7 +203,7 @@ Shown when the image fails to load or is loading. Often initials or icon.
 
 Groups avatars with overlap and optional count badge.
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
 | `className` | `string` | `-` | 
 | `asChild` | `boolean` | `false` | 
@@ -202,7 +212,7 @@ Groups avatars with overlap and optional count badge.
 
 Shows "+N" when more avatars exist than displayed.
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
 | `className` | `string` | `-` | 
 | `asChild` | `boolean` | `false` | 
@@ -211,11 +221,19 @@ Shows "+N" when more avatars exist than displayed.
 
 Status or indicator badge overlaid on the avatar corner.
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
 | `variant` | `"default" \| "success" \| "info" \| "warning" \| "destructive"` | `"default"` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` | 
+
+### AvatarRootProvider
+
+Provides a Avatar API created with `useAvatar` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseAvatarReturn` | **required** |
 
 ---
 

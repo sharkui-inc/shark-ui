@@ -1,11 +1,15 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "categories": ["sidebar"],
-  "dependencies": ["lucide-react"],
+  "categories": [
+    "sidebar"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
   "description": "A sidebar with collapsible sections and nested navigation.",
   "files": [
     {
-      "content": "import { Separator } from \"@/components/ui/separator\";\nimport {\n  SidebarInset,\n  SidebarProvider,\n  SidebarTrigger,\n} from \"@/components/ui/sidebar\";\nimport { AppSidebar } from \"@/components/sidebar-05/app-sidebar\";\n\nexport default function Sidebar05Page() {\n  return (\n    <SidebarProvider>\n      <AppSidebar />\n      <SidebarInset>\n        <header className=\"flex h-14 shrink-0 items-center gap-2 border-b px-4\">\n          <SidebarTrigger className=\"-ms-1\" />\n          <Separator className=\"h-4\" orientation=\"vertical\" />\n          <p className=\"font-medium text-sm\">Workspace overview</p>\n        </header>\n        <main className=\"grid flex-1 gap-4 p-4 md:grid-cols-2\">\n          <section className=\"min-h-64 rounded-xl border bg-muted/35\" />\n          <section className=\"min-h-64 rounded-xl border bg-muted/35\" />\n          <section className=\"min-h-80 rounded-xl border bg-muted/35 md:col-span-2\" />\n        </main>\n      </SidebarInset>\n    </SidebarProvider>\n  );\n}\n",
+      "content": "import { Separator } from \"@/components/ui/separator\";\nimport {\n  SidebarInset,\n  SidebarProvider,\n  SidebarTrigger,\n} from \"@/components/ui/sidebar\";\nimport { AppSidebar } from \"@/components/sidebar-05/app-sidebar\";\n\nexport default function Sidebar05Page() {\n  return (\n    <SidebarProvider>\n      <AppSidebar />\n      <SidebarInset>\n        <header className=\"flex h-14 shrink-0 items-center gap-2 border-b px-4\">\n          <SidebarTrigger className=\"-ms-1\" />\n          <Separator className=\"h-4\" orientation=\"vertical\" />\n          <p className=\"font-medium text-sm\">Workspace overview</p>\n        </header>\n        <main className=\"grid flex-1 gap-4 p-4 md:grid-cols-2\">\n          <section className=\"min-h-64 rounded-xl border bg-muted/48\" />\n          <section className=\"min-h-64 rounded-xl border bg-muted/48\" />\n          <section className=\"min-h-80 rounded-xl border bg-muted/48 md:col-span-2\" />\n        </main>\n      </SidebarInset>\n    </SidebarProvider>\n  );\n}\n",
       "path": "blocks/sidebar/sidebar-05/page.tsx",
       "target": "app/dashboard/page.tsx",
       "type": "registry:page"

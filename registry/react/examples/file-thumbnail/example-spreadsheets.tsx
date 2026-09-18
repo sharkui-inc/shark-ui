@@ -8,6 +8,6 @@ const Example = () => (
   </div>
 );
 
-const formats = ["csv", "ods", "tsv", "xls", "xlsb", "xlsm", "xlsx"] as const;
+const formats = ["csv", "xls", "xlsx"] as const;
 
 export default Example;

@@ -17,7 +17,7 @@ export default function Sidebar07Page() {
           <SidebarTrigger className="-ms-1" />
           <Separator className="h-4" orientation="vertical" />
           <div className="flex min-w-0 items-center gap-2 text-sm">
-            <span className="hidden text-muted-foreground sm:inline">Acme</span>
+            <span className="hidden text-muted-foreground sm:inline">Onda</span>
             <span
               aria-hidden="true"
               className="hidden text-muted-foreground sm:inline"

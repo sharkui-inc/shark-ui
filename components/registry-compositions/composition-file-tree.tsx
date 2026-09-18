@@ -101,6 +101,7 @@ export const CompositionFileTree = ({
     const treeNode = toTreeNode(node, [index]);
     return treeNode ? [treeNode] : [];
   });
+
   const collection = createTreeCollection({
     rootNode: { children: nodes, id: "root", name: "" },
   });
@@ -111,7 +112,7 @@ export const CompositionFileTree = ({
       collection={collection}
       defaultExpandedValue={getExpandedValues(nodes)}
       onSelectionChange={({ selectedValue }) => {
-        const path = selectedValue[0];
+        const [path] = selectedValue;
 
         if (path) {
           onSelect(path);

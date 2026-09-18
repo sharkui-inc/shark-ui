@@ -20,8 +20,8 @@ const Example = () => {
         value={value}
       >
         <TagsInputContext>
-          {({ value }) =>
-            value.map((tag, index) => (
+          {({ value: tags }) =>
+            tags.map((tag, index) => (
               <TagsInputItem index={index} key={tag} value={tag}>
                 {tag}
               </TagsInputItem>

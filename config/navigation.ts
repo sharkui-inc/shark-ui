@@ -14,11 +14,6 @@ export const NAV_ITEMS = [
     label: "Themes",
     showOnHeader: true,
   },
-  {
-    href: "/blocks",
-    label: "Blocks",
-    showOnHeader: true,
-  },
 ];
 
 export type NavItem = (typeof NAV_ITEMS)[number];

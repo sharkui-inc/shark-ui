@@ -97,14 +97,6 @@ import {
 
 <ComponentPreview componentName="calendar" fileName="example-controlled" />
 
-## States
-
-### Invalid
-
-Use the `invalid` prop to mark the calendar as invalid.
-
-<ComponentPreview componentName="calendar" fileName="example-invalid" />
-
 ## Examples
 
 ### Date Range
@@ -150,12 +142,6 @@ Set `showWeekNumbers` to render a week-number column. `CalendarWeekDays` and `Ca
 In `selectionMode="multiple"`, `maxSelectedDates` caps how many days can be selected.
 
 <ComponentPreview componentName="calendar" fileName="example-max-selected" />
-
-### Custom calendar
-
-Pass `createCalendar` to use a non-Gregorian calendar from `@internationalized/date`. Pair it with a matching `locale`.
-
-<ComponentPreview componentName="calendar" fileName="example-create-calendar" />
 
 ### Custom Cell Size
 
@@ -204,9 +190,9 @@ Root component. Manages date view, selection, and navigation.
 | `className` | `string` | - |
 | `asChild` | `boolean` | `false` |
 
-| CSS Variable | Default |
-| --- | --- |
-| `--cell-size` | `--spacing(9)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--cell-size` | CSS custom property | `--spacing(9)` |
 
 ### CalendarViewControl
 
@@ -276,6 +262,166 @@ Single day cell. Clickable for selection. Shows disabled/outside styling.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `value` | `DateValue` | - |
+| `className` | `string` | - |
+
+### CalendarRootProvider
+
+Provides a Calendar API created with `useCalendar` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseCalendarReturn` | **required** |
+
+### CalendarControl
+
+Public CalendarControl component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarLabel
+
+Public CalendarLabel component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarTrigger
+
+Public CalendarTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarPresetTrigger
+
+Public CalendarPresetTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarViewDate
+
+Public CalendarViewDate component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarTodayTrigger
+
+Public CalendarTodayTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarClearTrigger
+
+Public CalendarClearTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarView
+
+Public CalendarView component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarContext
+
+Render-prop access to the surrounding component API.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: unknown) => React.ReactNode` | **required** |
+
+### CalendarPrevTrigger
+
+Public CalendarPrevTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarNextTrigger
+
+Public CalendarNextTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarWeekNumberHeaderCell
+
+Public CalendarWeekNumberHeaderCell component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarWeekNumberCell
+
+Public CalendarWeekNumberCell component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarTableHead
+
+Public CalendarTableHead component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarTableRow
+
+Public CalendarTableRow component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarTableHeader
+
+Public CalendarTableHeader component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### CalendarTableBody
+
+Public CalendarTableBody component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
 | `className` | `string` | - |
 
 ---

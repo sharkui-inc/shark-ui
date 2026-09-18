@@ -31,7 +31,7 @@ npx shadcn@latest add @shark/select
 
 <Steps>
 
-<Step>This component depends on [Separator](/docs/components/separator) and [Input](/docs/components/input). Install them first if you haven't already.</Step>
+<Step>This component depends on [Input](/docs/components/input), [Scroll Area](/docs/components/scroll-area), and [Separator](/docs/components/separator). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
@@ -112,6 +112,18 @@ Use `value` and `onValueChange` to control the selected items. Ark UI represents
 
 <ComponentPreview componentName="select" fileName="example-invalid" />
 
+## Variants
+
+Control trigger appearance with the `variant` prop on SelectTrigger.
+
+### Default
+
+<ComponentPreview componentName="select" fileName="example-variant-default" />
+
+### Ghost
+
+<ComponentPreview componentName="select" fileName="example-variant-ghost" />
+
 ## Size
 
 Control trigger size with the `size` prop on SelectTrigger.
@@ -128,19 +140,11 @@ Control trigger size with the `size` prop on SelectTrigger.
 
 <ComponentPreview componentName="select" fileName="example-size-lg" />
 
-## Variants
-
-Control trigger appearance with the `variant` prop on SelectTrigger.
-
-### Default
-
-<ComponentPreview componentName="select" fileName="example-variant-default" />
-
-### Ghost
-
-<ComponentPreview componentName="select" fileName="example-variant-ghost" />
-
 ## Examples
+
+### With Icon
+
+<ComponentPreview componentName="select" fileName="example-with-icon" />
 
 ### With Description
 
@@ -290,6 +294,31 @@ Shown when the collection has no items (`collection.size === 0`). Place inside `
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `className` | `string` | - |
+
+### SelectRootProvider
+
+Provides a Select API created with `useSelect` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseSelectReturn` | **required** |
+
+### SelectContext
+
+Render-prop access to the surrounding component API.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: unknown) => React.ReactNode` | **required** |
+
+### SelectSeparator
+
+Public SelectSeparator component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
 | `className` | `string` | - |
 
 ---

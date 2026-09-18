@@ -2,7 +2,6 @@ import { PreviewGallery } from "@/components/examples/preview-tiles";
 import { Footer } from "@/components/layout/footer";
 import { SITE_CONFIG } from "@/config/site";
 import { source } from "@/lib/fumadocs";
-import type { LLMPage } from "@/lib/llms";
 import { createMetadata } from "@/lib/metadata";
 import { HeroSection } from "./_components/hero";
 import { HeroAtmosphere } from "./_components/hero-atmosphere";
@@ -19,7 +18,7 @@ export const metadata = createMetadata({
 const rawCount = source
   .getPages()
   .filter(
-    (p: LLMPage) =>
+    (p) =>
       p.slugs[0] === "components" ||
       p.slugs[0] === "helpers" ||
       p.slugs[0] === "utilities"

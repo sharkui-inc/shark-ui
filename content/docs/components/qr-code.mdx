@@ -138,10 +138,10 @@ Root wrapper for the QR code and optional overlay/actions.
 | `className` | `string` | - |
 | `asChild` | `boolean` | - |
 
-| Attribute | Default |
-| --- | --- |
-| `--qr-code-size` | `--spacing(32)` |
-| `--qr-code-overlay-size` | `calc(var(--qr-code-size)/4)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--qr-code-size` | CSS custom property | `--spacing(32)` |
+| `--qr-code-overlay-size` | CSS custom property | `calc(var(--qr-code-size)/4)` |
 
 ### QrCodeFrame
 
@@ -172,6 +172,14 @@ Downloads the QR code as an image file.
 | `quality` | `number` | - |
 | `className` | `string` | - |
 | `asChild` | `boolean` | - |
+
+### QrCodeRootProvider
+
+Provides a QrCode API created with `useQrCode` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseQrCodeReturn` | **required** |
 
 ---
 

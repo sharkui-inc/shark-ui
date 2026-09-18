@@ -11,9 +11,6 @@ Confirm anatomy and props in the component MDX + `registry/react/examples/<name>
 Radix uses `asChild`. Base UI uses `render`. Shark uses `asChild` with one child.
 
 ```tsx
-// Base UI. Do not copy.
-<Menu.Trigger render={<button type="button">Open</button>} />
-
 // Shark / Ark
 <MenuTrigger asChild>
   <Button variant="outline">Open</Button>

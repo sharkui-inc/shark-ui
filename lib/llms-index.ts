@@ -44,13 +44,13 @@ const INDEX_DETAILS: Record<
   },
   patterns: {
     description:
-      "Forms, collections, overlays, AI elements, helpers, hooks, utilities, and migrations.",
+      "Forms, collections, overlays, AI Components, helpers, hooks, utilities, and migrations.",
     title: "Patterns",
   },
 };
 
 const PATTERN_SECTIONS = new Set([
-  "ai-elements",
+  "ai-components",
   "forms",
   "helpers",
   "hooks",
@@ -135,7 +135,7 @@ const getMarkdownUrl = (page: LLMDocPage, baseUrl: string) =>
 const getPageDescription = (page: LLMDocPage) =>
   page.data.description ?? "Documentation for Shark UI.";
 
-export const buildLLMIndex = (baseUrl = SITE_CONFIG.url) => {
+export const buildLLMIndex = (baseUrl: string = SITE_CONFIG.url) => {
   const lines = [
     "# Shark UI",
     "",
@@ -187,7 +187,7 @@ const getPagesForPatternComponentGroup = (
   );
 
 const PATTERN_CONTENT_GROUPS = [
-  { section: "ai-elements", title: "AI elements" },
+  { section: "ai-components", title: "AI Components" },
   { section: "forms", title: "Form integrations" },
   { section: "helpers", title: "Helpers" },
   { section: "hooks", title: "Hooks" },
@@ -226,7 +226,7 @@ const appendPatternGroups = (
 export const buildLLMIndexSection = (
   index: LLMIndexName,
   pages: LLMDocPage[],
-  baseUrl = SITE_CONFIG.url
+  baseUrl: string = SITE_CONFIG.url
 ) => {
   const details = INDEX_DETAILS[index];
   const lines = [

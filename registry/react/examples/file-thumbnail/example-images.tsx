@@ -8,20 +8,6 @@ const Example = () => (
   </div>
 );
 
-const formats = [
-  "apng",
-  "avif",
-  "bmp",
-  "gif",
-  "heic",
-  "ico",
-  "jpeg",
-  "jpg",
-  "png",
-  "svg",
-  "tif",
-  "tiff",
-  "webp",
-] as const;
+const formats = ["ico", "jpeg", "jpg", "png", "svg", "webp"] as const;
 
 export default Example;

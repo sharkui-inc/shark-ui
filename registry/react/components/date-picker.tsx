@@ -2,7 +2,8 @@
 
 import {
   DatePicker as ArkDatePicker,
-  useDatePickerContext,
+  useDatePicker as useArkDatePicker,
+  useDatePickerContext as useArkDatePickerContext,
 } from "@ark-ui/react/date-picker";
 import { Portal } from "@ark-ui/react/portal";
 import { CalendarIcon, ClockIcon } from "lucide-react";
@@ -22,7 +23,9 @@ import {
   InputGroupInput,
 } from "@/registry/react/components/input-group";
 
-export const useDatePicker = useDatePickerContext;
+export const useDatePicker = useArkDatePicker;
+export const useDatePickerContext = useArkDatePickerContext;
+export const DatePickerRootProvider = ArkDatePicker.RootProvider;
 
 export const DatePicker = (props: React.ComponentProps<typeof Calendar>) => {
   const { positioning, ...rest } = props;

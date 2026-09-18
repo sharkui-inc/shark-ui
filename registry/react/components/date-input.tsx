@@ -19,6 +19,7 @@ import {
 
 export const useDateInput = useArkDateInput;
 export const useDateInputContext = useArkDateInputContext;
+export const DateInputRootProvider = ArkDateInput.RootProvider;
 
 interface DateInputProps
   extends React.ComponentProps<typeof ArkDateInput.Root>,

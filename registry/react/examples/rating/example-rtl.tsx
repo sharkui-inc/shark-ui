@@ -33,7 +33,7 @@ const Example = () => {
           <AvatarFallback>VV</AvatarFallback>
         </Avatar>
         <div>
-          <CardTitle className="text-base">Vinicius Vicentini</CardTitle>
+          <CardTitle>Vinicius Vicentini</CardTitle>
           <CardDescription>{values.morning}</CardDescription>
         </div>
       </CardHeader>

@@ -1,3 +1,5 @@
+"use client";
+
 import { IslamicUmalquraCalendar } from "@internationalized/date";
 import {
   Calendar,

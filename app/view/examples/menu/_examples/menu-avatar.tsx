@@ -22,7 +22,7 @@ import {
 const MenuAvatar = () => (
   <Menu>
     <MenuTrigger asChild>
-      <Button className="rounded-full" size="icon" variant="ghost">
+      <Button className="rounded-full" size="icon-md" variant="ghost">
         <Avatar>
           <AvatarImage alt="shadcn" src="https://github.com/shadcn.png" />
           <AvatarFallback>LR</AvatarFallback>

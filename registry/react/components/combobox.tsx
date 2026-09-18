@@ -3,6 +3,7 @@
 import {
   Combobox as ArkCombobox,
   type ComboboxList as ArkComboboxList,
+  useCombobox as useArkCombobox,
   useComboboxContext as useArkComboboxContext,
 } from "@ark-ui/react/combobox";
 import { Portal } from "@ark-ui/react/portal";
@@ -10,6 +11,7 @@ import { CheckIcon, ChevronsUpDownIcon, XIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+import { Button, type ButtonProps } from "@/registry/react/components/button";
 import {
   inputItemVariants,
   type inputVariants,
@@ -31,7 +33,9 @@ import {
 } from "@/registry/react/components/menu";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
-export const useCombobox = useArkComboboxContext;
+export const useCombobox = useArkCombobox;
+export const useComboboxContext = useArkComboboxContext;
+export const ComboboxRootProvider = ArkCombobox.RootProvider;
 
 export const ComboboxContext = ArkCombobox.Context;
 
@@ -95,7 +99,8 @@ export const ComboboxControl = (
 
 interface ComboboxInputProps
   extends Omit<React.ComponentProps<typeof ArkCombobox.Input>, "size">,
-    VariantProps<typeof inputVariants> {
+    VariantProps<typeof inputVariants>,
+    VariantProps<typeof comboboxInputVariants> {
   /**
    * Whether the control is disabled.
    *
@@ -117,9 +122,22 @@ interface ComboboxInputProps
   showTrigger?: boolean;
 }
 
+export const comboboxInputVariants = tv({
+  variants: {
+    variant: {
+      ghost: [
+        "bg-transparent dark:bg-transparent",
+        "border-transparent shadow-none",
+        "hover:bg-accent hover:text-accent-foreground",
+      ],
+    },
+  },
+});
+
 export const ComboboxInput = (props: ComboboxInputProps) => {
   const {
     size = "md",
+    variant,
     showTrigger = true,
     showClear = false,
     className,
@@ -127,11 +145,14 @@ export const ComboboxInput = (props: ComboboxInputProps) => {
     ...rest
   } = props;
 
-  const { inputValue } = useCombobox();
+  const { inputValue } = useComboboxContext();
 
   return (
     <ComboboxControl data-size={size}>
-      <InputGroup className={cn(className)} size={size}>
+      <InputGroup
+        className={cn(comboboxInputVariants({ variant }), className)}
+        size={size}
+      >
         {children}
         <ArkCombobox.Input asChild>
           <InputGroupInput {...rest} />
@@ -170,6 +191,64 @@ export const ComboboxTrigger = (
           <ChevronsUpDownIcon />
         </InputGroupButton>
       )}
+    </ArkCombobox.Trigger>
+  );
+};
+
+interface ComboboxButtonTriggerProps extends Omit<ButtonProps, "children"> {
+  children?: React.ReactNode;
+  /**
+   * Text shown when no item is selected.
+   *
+   * @default "Select an option"
+   */
+  placeholder?: React.ReactNode;
+  /**
+   * Whether to show the chevron icon.
+   *
+   * @default true
+   */
+  showTrigger?: boolean;
+}
+
+export const ComboboxButtonTrigger = (props: ComboboxButtonTriggerProps) => {
+  const {
+    placeholder = "Select an option",
+    showTrigger = true,
+    size = "md",
+    variant = "outline",
+    className,
+    children,
+    ...rest
+  } = props;
+  const { hasSelectedItems, valueAsString } = useComboboxContext();
+  const label = children ?? (hasSelectedItems ? valueAsString : placeholder);
+  const ariaLabel =
+    rest["aria-label"] ??
+    (typeof label === "string" ? label : "Select an option");
+
+  return (
+    <ArkCombobox.Trigger asChild focusable>
+      <Button
+        className={cn(
+          "min-w-0 max-w-64 font-normal",
+          showTrigger && "justify-between",
+          className
+        )}
+        data-slot="combobox-button-trigger"
+        size={size}
+        variant={variant}
+        {...rest}
+        aria-label={ariaLabel}
+      >
+        <span className="min-w-0 flex-1 truncate">{label}</span>
+        {showTrigger ? (
+          <ChevronsUpDownIcon
+            aria-hidden="true"
+            className="size-3.5 shrink-0 opacity-64"
+          />
+        ) : null}
+      </Button>
     </ArkCombobox.Trigger>
   );
 };
@@ -236,7 +315,7 @@ interface ComboboxChipProps {
 
 export const ComboboxChip = (props: ComboboxChipProps) => {
   const { children, className, removeProps, value } = props;
-  const { clearValue, disabled } = useCombobox();
+  const { clearValue, disabled } = useComboboxContext();
   const {
     className: removeClassName,
     onClick,
@@ -261,9 +340,10 @@ export const ComboboxChip = (props: ComboboxChipProps) => {
         <InputGroupButton
           aria-label={`Remove ${value}`}
           className={cn(
-            "in-data-[size=lg]:size-6 in-data-[size=sm]:size-4 size-5",
+            "in-data-[size=lg]:size-4.5 in-data-[size=sm]:size-2.5 size-3.5",
             "shrink-0",
             "text-muted-foreground",
+            "[&_svg:not([class*='size-'])]:size-2 in-data-[size=lg]:[&_svg:not([class*='size-'])]:size-2.5 in-data-[size=sm]:[&_svg:not([class*='size-'])]:size-1.5",
             "hover:text-foreground",
             removeClassName
           )}

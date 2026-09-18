@@ -3,13 +3,16 @@
 import { ark } from "@ark-ui/react/";
 import {
   Progress as ArkProgress,
-  useProgressContext,
+  useProgress as useArkProgress,
+  useProgressContext as useArkProgressContext,
 } from "@ark-ui/react/progress";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { FieldLabel } from "@/registry/react/components/field";
 
-export const useCircularProgress = useProgressContext;
+export const useCircularProgress = useArkProgress;
+export const useCircularProgressContext = useArkProgressContext;
+export const CircularProgressRootProvider = ArkProgress.RootProvider;
 
 interface CircularProgressProps
   extends React.ComponentProps<typeof ArkProgress.Root>,
@@ -77,7 +80,7 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
   const circumference = 2 * Math.PI * radius;
   const range = Math.max(max - min, 1);
   const normalizedValue =
-    value == null ? min : Math.min(Math.max(value, min), max);
+    value === null ? min : Math.min(Math.max(value, min), max);
   const percent = (normalizedValue - min) / range;
   const dashOffset = circumference * (1 - percent);
 
@@ -113,7 +116,7 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
         data-slot="circular-progress-range"
         r={radius}
         strokeDasharray={circumference}
-        strokeDashoffset={value == null ? circumference * 0.7 : dashOffset}
+        strokeDashoffset={value === null ? circumference * 0.7 : dashOffset}
         strokeLinecap="round"
         strokeWidth={thickness}
       />

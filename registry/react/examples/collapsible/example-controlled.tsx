@@ -14,7 +14,10 @@ const Example = () => {
 
   return (
     <div className="w-64 space-y-2">
-      <Collapsible onOpenChange={({ open }) => setOpen(open)} open={open}>
+      <Collapsible
+        onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)}
+        open={open}
+      >
         <CollapsibleTrigger asChild>
           <Button className="w-full" clickEffect={false} variant="outline">
             {open ? "Collapse" : "Expand"}

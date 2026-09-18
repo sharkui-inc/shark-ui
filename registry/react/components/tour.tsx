@@ -4,9 +4,10 @@ import { Portal } from "@ark-ui/react";
 import { ark } from "@ark-ui/react/factory";
 import {
   Tour as ArkTour,
+  type StatusChangeDetails,
   type TourStepDetails,
   type UseTourReturn,
-  useTour,
+  useTour as useArkTour,
 } from "@ark-ui/react/tour";
 import { createContext } from "@ark-ui/react/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -22,6 +23,34 @@ import {
 } from "@/registry/react/components/dialog";
 
 export type TourStepType = TourStepDetails;
+export const useTour = useArkTour;
+
+let activeTourCount = 0;
+let bodyHadRelativeClass = false;
+
+const addBodyRelativeClass = () => {
+  if (activeTourCount === 0) {
+    bodyHadRelativeClass = document.body.classList.contains("relative");
+
+    if (!bodyHadRelativeClass) {
+      document.body.classList.add("relative");
+    }
+  }
+
+  activeTourCount += 1;
+};
+
+const removeBodyRelativeClass = () => {
+  if (activeTourCount === 0) {
+    return;
+  }
+
+  activeTourCount -= 1;
+
+  if (activeTourCount === 0 && !bodyHadRelativeClass) {
+    document.body.classList.remove("relative");
+  }
+};
 
 interface TourProviderProps {
   /**
@@ -49,7 +78,7 @@ interface TourProps
   /**
    * Called when the tour status changes
    */
-  onStatusChange?: (details: { status: string }) => void;
+  onStatusChange?: (details: StatusChangeDetails) => void;
   /**
    * Called when the current step changes
    */
@@ -63,22 +92,26 @@ interface TourProps
 }
 
 export const Tour = (props: TourProps) => {
-  const { steps = [], lazyMount = true, unmountOnExit = true, ...rest } = props;
+  const {
+    steps = [],
+    lazyMount = true,
+    onStatusChange,
+    unmountOnExit = true,
+    ...rest
+  } = props;
 
   const [isStarted, setIsStarted] = React.useState(false);
 
-  const tour = useTour({ steps });
+  const tour = useArkTour({ steps });
 
   React.useEffect(() => {
-    if (isStarted) {
-      document.body.classList.add("relative");
-    } else {
-      document.body.classList.remove("relative");
+    if (!isStarted) {
+      return;
     }
 
-    return () => {
-      document.body.classList.remove("relative");
-    };
+    addBodyRelativeClass();
+
+    return removeBodyRelativeClass;
   }, [isStarted]);
 
   const handleStart = React.useCallback(() => {
@@ -86,11 +119,33 @@ export const Tour = (props: TourProps) => {
     tour.start();
   }, [tour]);
 
+  const handleStatusChange = React.useCallback(
+    (details: StatusChangeDetails) => {
+      switch (details.status) {
+        case "started":
+          setIsStarted(true);
+          break;
+        case "skipped":
+        case "completed":
+        case "dismissed":
+        case "not-found":
+          setIsStarted(false);
+          break;
+        default:
+          break;
+      }
+
+      onStatusChange?.(details);
+    },
+    [onStatusChange]
+  );
+
   return (
     <TourContextProvider value={{ handleStart, tour }}>
       <ArkTour.Root
         data-slot="tour"
         lazyMount={lazyMount}
+        onStatusChange={handleStatusChange}
         tour={tour}
         unmountOnExit={unmountOnExit}
         {...rest}

@@ -27,7 +27,10 @@ const Example = () => {
   const formattedDate = format(value[0].toString(), "PPP");
 
   return (
-    <DatePicker onValueChange={({ value }) => setValue(value)} value={value}>
+    <DatePicker
+      onValueChange={({ value: nextValue }) => setValue(nextValue)}
+      value={value}
+    >
       <DatePickerTrigger asChild>
         <Button className="min-w-48" variant="outline">
           <CalendarIcon data-icon="inline-start" />

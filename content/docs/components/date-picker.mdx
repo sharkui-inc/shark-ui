@@ -203,9 +203,9 @@ Wraps the calendar. Inherits `--cell-size` from calendar for date cell sizing.
 | --- | --- | --- |
 | `className` | `string` | - |
 
-| Attribute | Default |
-| --- | --- |
-| `--cell-size` | `--spacing(8)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--cell-size` | CSS custom property | `--spacing(8)` |
 
 ### DatePickerValue
 
@@ -237,6 +237,14 @@ Quick preset button for dates. `button`
 | `className` | `string` | - |
 | `value` | `DateValue[]` | - |
 | `asChild` | `boolean` | - |
+
+### DatePickerRootProvider
+
+Provides a DatePicker API created with `useDatePicker` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseDatePickerReturn` | **required** |
 
 ---
 

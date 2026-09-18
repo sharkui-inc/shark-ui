@@ -2,6 +2,7 @@
 
 import {
   ToggleGroup as ArkToggleGroup,
+  useToggleGroup as useArkToggleGroup,
   useToggleGroupContext as useArkToggleGroupContext,
 } from "@ark-ui/react/toggle-group";
 import { createContext } from "@ark-ui/react/utils";
@@ -10,7 +11,9 @@ import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Toggle, type ToggleProps } from "@/registry/react/components/toggle";
 
-export const useToggleGroup = useArkToggleGroupContext;
+export const useToggleGroup = useArkToggleGroup;
+export const useToggleGroupContext = useArkToggleGroupContext;
+export const ToggleGroupRootProvider = ArkToggleGroup.RootProvider;
 
 type ToggleGroupContextProps = Pick<
   ToggleProps,
@@ -115,7 +118,7 @@ export const ToggleGroupItem = (props: ToggleGroupItemProps) => {
         data-pill={pill}
         data-spacing={spacing}
         data-variant={variant}
-        pill={spacing > 0 ? pill : false}
+        pill={false}
         size={size}
         variant={variant}
         {...rest}

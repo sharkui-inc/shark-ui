@@ -230,13 +230,13 @@ Root component. Provides tree context and manages expand/selection state.
 | `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
 | `className` | `string` | - |
 
-| Attribute | Default |
-| --- | --- |
-| `--indentation` | `--spacing(4)` |
-| `--item-gap` | `--spacing(2)` |
-| `--padding-block` | `--spacing(1.5)` |
-| `--padding-inline` | `--spacing(3)` |
-| `--icon-size` | `--spacing(4)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--indentation` | CSS custom property | `--spacing(4)` |
+| `--item-gap` | CSS custom property | `--spacing(2)` |
+| `--padding-block` | CSS custom property | `--spacing(1.5)` |
+| `--padding-inline` | CSS custom property | `--spacing(3)` |
+| `--icon-size` | CSS custom property | `--spacing(4)` |
 
 ### TreeViewLabel
 
@@ -335,7 +335,7 @@ Creates a tree collection from node data. Use with `collection` prop on `TreeVie
 
 **TreeNodeType**: shape of each node (extend with generic `T` for custom props):
 
-| Property | Type | Default |
+| Prop | Type | Default |
 | --- | --- | --- |
 | `id` | `string` | - |
 | `name` | `string` | - |
@@ -372,6 +372,23 @@ const fileIcons = createFileIcons({
   ".md": FileText,
 });
 ```
+
+### TreeViewRootProvider
+
+Provides a TreeView API created with `useTreeView` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseTreeViewReturn` | **required** |
+
+### TreeViewBranchIndicator
+
+Public TreeViewBranchIndicator component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 ---
 

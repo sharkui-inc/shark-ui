@@ -139,59 +139,64 @@ const MinuteTicks = () => {
   const timer = useTimer();
   const { days, hours, minutes, seconds } = timer.time;
   const finished = days + hours + minutes + seconds === 0;
-  const remaining = finished ? 0 : seconds === 0 ? 60 : seconds;
+  const remaining = finished ? 0 : seconds || 60;
   const exact = (remaining / 60) * tickHeights.length;
-  const previousExact = useRef(tickHeights.length);
+  const previousExact = useRef<number>(tickHeights.length);
   const draining = exact <= previousExact.current;
   previousExact.current = exact;
 
   return (
-    <div
-      aria-label={`Seconds remaining this minute: ${remaining}`}
-      aria-valuemax={60}
-      aria-valuemin={0}
-      aria-valuenow={remaining}
-      className="flex h-8 items-end justify-center gap-1"
-      role="meter"
-    >
-      {tickHeights.map((height, index) => {
-        const fill = Math.min(1, Math.max(0, exact - index));
+    <>
+      <meter
+        aria-label={`Seconds remaining this minute: ${remaining}`}
+        className="sr-only"
+        max={60}
+        min={0}
+        value={remaining}
+      />
+      <div
+        aria-hidden="true"
+        className="flex h-8 items-end justify-center gap-1"
+      >
+        {tickHeights.map(({ height, id }, index) => {
+          const fill = Math.min(1, Math.max(0, exact - index));
 
-        return (
-          <span
-            className={cn(
-              "relative w-1.5 overflow-hidden rounded-full bg-muted",
-              height
-            )}
-            key={index}
-          >
+          return (
             <span
               className={cn(
-                "absolute inset-x-0 bottom-0 rounded-full bg-primary motion-reduce:transition-none",
-                draining && "transition-[height] duration-1000 ease-linear"
+                "relative w-1.5 overflow-hidden rounded-full bg-muted",
+                height
               )}
-              style={{ height: `${fill * 100}%` }}
-            />
-          </span>
-        );
-      })}
-    </div>
+              key={id}
+            >
+              <span
+                className={cn(
+                  "absolute inset-x-0 bottom-0 rounded-full bg-primary motion-reduce:transition-none",
+                  draining && "transition-[height] duration-1000 ease-linear"
+                )}
+                style={{ height: `${fill * 100}%` }}
+              />
+            </span>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
 const breakMs = 5 * 60 * 1000;
 const focusMs = 25 * 60 * 1000;
 const tickHeights = [
-  "h-3",
-  "h-4",
-  "h-5",
-  "h-6",
-  "h-7",
-  "h-8",
-  "h-8",
-  "h-7",
-  "h-6",
-  "h-5",
-  "h-4",
-  "h-3",
+  { height: "h-3", id: "start" },
+  { height: "h-4", id: "low" },
+  { height: "h-5", id: "medium-low" },
+  { height: "h-6", id: "medium" },
+  { height: "h-7", id: "medium-high" },
+  { height: "h-8", id: "peak" },
+  { height: "h-8", id: "peak-return" },
+  { height: "h-7", id: "medium-high-return" },
+  { height: "h-6", id: "medium-return" },
+  { height: "h-5", id: "medium-low-return" },
+  { height: "h-4", id: "low-return" },
+  { height: "h-3", id: "end" },
 ] as const;

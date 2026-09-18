@@ -48,16 +48,14 @@ const ButtonGroupRtl = () => {
           <ButtonGroup>
             <Button variant="outline">تأجيل</Button>
             <Menu positioning={{ placement: "bottom-start" }}>
-              <MenuTrigger
-                render={
-                  <Button
-                    aria-label="More Options"
-                    size="icon-md"
-                    variant="outline"
-                  />
-                }
-              >
-                <MoreHorizontalIcon />
+              <MenuTrigger asChild>
+                <Button
+                  aria-label="More Options"
+                  size="icon-md"
+                  variant="outline"
+                >
+                  <MoreHorizontalIcon />
+                </Button>
               </MenuTrigger>
               <MenuContent className="w-40" dir="rtl">
                 <MenuGroup>
@@ -90,7 +88,10 @@ const ButtonGroupRtl = () => {
                       تصنيف كـ...
                     </MenuSubTrigger>
                     <MenuSubContent dir="rtl">
-                      <MenuRadioGroup onValueChange={setLabel} value={label}>
+                      <MenuRadioGroup
+                        onValueChange={({ value }) => setLabel(value)}
+                        value={label}
+                      >
                         <MenuRadioItem value="personal">شخصي</MenuRadioItem>
                         <MenuRadioItem value="work">عمل</MenuRadioItem>
                         <MenuRadioItem value="other">آخر</MenuRadioItem>

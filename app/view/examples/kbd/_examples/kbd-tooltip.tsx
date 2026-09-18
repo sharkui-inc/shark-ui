@@ -24,7 +24,7 @@ const KbdTooltip = () => (
         </TooltipTrigger>
         <TooltipContent>
           Print Document
-          <KbdGroup className="ml-1.5 inline">
+          <KbdGroup>
             <Kbd>Ctrl</Kbd>
             <Kbd>P</Kbd>
           </KbdGroup>

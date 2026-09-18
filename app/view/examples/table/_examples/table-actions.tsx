@@ -33,11 +33,7 @@ const TableActions = () => (
           <TableCell className="text-right">
             <Menu>
               <MenuTrigger asChild>
-                <Button
-                  aria-label="Open menu"
-                  size="icon-md"
-                  variant="ghost"
-                >
+                <Button aria-label="Open menu" size="icon-md" variant="ghost">
                   <MoreHorizontalIcon aria-hidden="true" />
                 </Button>
               </MenuTrigger>

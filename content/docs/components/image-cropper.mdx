@@ -166,11 +166,11 @@ Root wrapper. Manages crop state and handles.
 | `zoom` | `number` | - |
 | `className` | `string` | - |
 
-| Attribute | Default |
-| --- | --- |
-| `--cropper-accent` | `var(--color-white)` |
-| `--cropper-handler-size` | `--spacing(2)` |
-| `--cropper-handler-width` | `--spacing(1)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--cropper-accent` | CSS custom property | `var(--color-white)` |
+| `--cropper-handler-size` | CSS custom property | `--spacing(2)` |
+| `--cropper-handler-width` | CSS custom property | `--spacing(1)` |
 
 ### ImageCropperImage
 
@@ -189,6 +189,40 @@ Crop selection overlay with resize handles and optional grid.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `axis` | `"horizontal" \| "vertical" \| "both"` | `"both"` |
+| `className` | `string` | - |
+
+### ImageCropperRootProvider
+
+Provides a ImageCropper API created with `useImageCropper` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseImageCropperReturn` | **required** |
+
+### ImageCropperContext
+
+Render-prop access to the surrounding component API.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: unknown) => React.ReactNode` | **required** |
+
+### ImageCropperHandle
+
+Public ImageCropperHandle component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### ImageCropperGrid
+
+Public ImageCropperGrid component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
 | `className` | `string` | - |
 
 ---

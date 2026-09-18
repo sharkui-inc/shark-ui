@@ -8,16 +8,6 @@ const Example = () => (
   </div>
 );
 
-const formats = [
-  "key",
-  "odp",
-  "pot",
-  "potx",
-  "pps",
-  "ppsx",
-  "ppt",
-  "pptm",
-  "pptx",
-] as const;
+const formats = ["pps", "ppsx", "ppt", "pptx"] as const;
 
 export default Example;

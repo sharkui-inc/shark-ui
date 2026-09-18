@@ -34,7 +34,7 @@ const Example = () => {
     <Item className="flex w-full max-w-64 flex-col gap-2 p-1" variant="outline">
       <Input
         onChange={(e) => {
-          const value = e.target.value;
+          const { value } = e.target;
           setSearch(value);
           filter(value);
         }}
@@ -50,7 +50,7 @@ const Example = () => {
             </ListboxItem>
           ))}
 
-          {isEmpty && <ListboxEmpty>No results found.</ListboxEmpty>}
+          {isEmpty ? <ListboxEmpty>No results found.</ListboxEmpty> : null}
         </ListboxContent>
       </Listbox>
     </Item>

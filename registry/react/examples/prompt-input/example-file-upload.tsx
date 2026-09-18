@@ -1,7 +1,7 @@
 "use client";
 
 import { PaperclipIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import {
   Attachment,
   AttachmentActions,
@@ -15,14 +15,8 @@ import {
   FileUpload,
   FileUploadDropzone,
   FileUploadTrigger,
-  useFileUpload,
+  useFileUploadContext,
 } from "@/registry/react/components/file-upload";
-import {
-  Menu,
-  MenuContent,
-  MenuItem,
-  MenuTrigger,
-} from "@/registry/react/components/menu";
 import {
   PromptInput,
   PromptInputButton,
@@ -30,15 +24,14 @@ import {
   PromptInputHeader,
   PromptInputSubmit,
   PromptInputTextarea,
-  PromptInputTools,
 } from "@/registry/react/components/prompt-input";
 
 const Example = () => {
-  const [value, setValue] = useState("Fix the email validator in helpers.ts");
+  const [value, setValue] = React.useState("");
 
   return (
     <FileUpload
-      accept="image/*,.pdf,.txt"
+      accept="image/*,.md,.pdf,.txt"
       className="w-full max-w-lg"
       maxFiles={4}
     >
@@ -50,32 +43,18 @@ const Example = () => {
         <PromptInput onSubmit={() => setValue("")}>
           <FileUploadAttachments />
           <PromptInputTextarea
-            aria-label="Prompt"
+            aria-label="Prompt with attachments"
             onChange={(event) => setValue(event.target.value)}
-            placeholder="Ask about a file..."
+            placeholder="Ask about your files…"
             value={value}
           />
           <PromptInputFooter>
-            <PromptInputTools>
-              <Menu positioning={{ placement: "top-start" }}>
-                <MenuTrigger asChild>
-                  <PromptInputButton aria-label="Add attachment" size="icon-xs">
-                    <PaperclipIcon aria-hidden="true" />
-                  </PromptInputButton>
-                </MenuTrigger>
-                <MenuContent>
-                  <MenuItem asChild value="upload-file">
-                    <FileUploadTrigger asChild>
-                      <button type="button">
-                        <PaperclipIcon aria-hidden="true" />
-                        Upload file
-                      </button>
-                    </FileUploadTrigger>
-                  </MenuItem>
-                </MenuContent>
-              </Menu>
-            </PromptInputTools>
-            <PromptInputSubmit />
+            <FileUploadTrigger asChild>
+              <PromptInputButton aria-label="Attach files" size="icon-sm">
+                <PaperclipIcon aria-hidden="true" />
+              </PromptInputButton>
+            </FileUploadTrigger>
+            <PromptInputSubmit size="icon-sm" />
           </PromptInputFooter>
         </PromptInput>
       </FileUploadDropzone>
@@ -84,7 +63,7 @@ const Example = () => {
 };
 
 const FileUploadAttachments = () => {
-  const { acceptedFiles, deleteFile } = useFileUpload();
+  const { acceptedFiles, deleteFile } = useFileUploadContext();
 
   if (acceptedFiles.length === 0) {
     return null;
@@ -95,9 +74,9 @@ const FileUploadAttachments = () => {
       <AttachmentGroup className="w-full">
         {acceptedFiles.map((file) => (
           <Attachment
-            className="max-w-44"
+            className="max-w-52"
             key={`${file.name}-${file.lastModified}`}
-            size="xs"
+            size="sm"
           >
             <AttachmentMedia
               format={file.name.split(".").pop()}

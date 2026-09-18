@@ -59,12 +59,14 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["backupCode"]}>
               {(field) => {
-                const value = (field.input as string[]) ?? [...emptyCode];
+                const value = field.input as string[];
                 return (
                   <Field invalid={Boolean(field.errors?.length)}>
                     <FieldLabel>Backup code</FieldLabel>
                     <InputOTP
-                      onValueChange={({ value }) => field.onChange(value)}
+                      onValueChange={({ value: nextValue }) =>
+                        field.onChange(nextValue)
+                      }
                       value={value}
                     >
                       <InputOTPSlot index={0} />

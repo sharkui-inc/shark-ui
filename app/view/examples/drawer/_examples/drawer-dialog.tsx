@@ -43,7 +43,7 @@ const DrawerDialog = () => {
 
   if (isDesktop) {
     return (
-      <Dialog onOpenChange={setOpen} open={open}>
+      <Dialog onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)} open={open}>
         <DialogTrigger asChild>
           <Button variant="outline">Edit Profile</Button>
         </DialogTrigger>
@@ -62,7 +62,7 @@ const DrawerDialog = () => {
   }
 
   return (
-    <Drawer onOpenChange={setOpen} open={open}>
+    <Drawer onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)} open={open}>
       <DrawerTrigger asChild>
         <Button variant="outline">Edit Profile</Button>
       </DrawerTrigger>

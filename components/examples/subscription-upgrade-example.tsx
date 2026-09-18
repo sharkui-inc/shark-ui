@@ -59,7 +59,7 @@ export const SubscriptionUpgradeExample = (
 
             <Field>
               <FieldLabel>Email</FieldLabel>
-              <Input placeholder="mail@acme.com" />
+              <Input placeholder="mail@onda.com" />
             </Field>
           </FieldGroup>
 

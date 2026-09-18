@@ -43,7 +43,7 @@ const CalendarCustomDays = () => (
                       >
                         <ArkCalendar.TableCellTrigger className="inline-flex size-full select-none flex-col items-center justify-center gap-0.5 rounded-lg border border-transparent font-normal text-sm leading-none outline-hidden hover:bg-accent hover:text-accent-foreground data-selected:bg-primary data-selected:text-primary-foreground">
                           {day.day}
-                          <span className="text-xs opacity-70">
+                          <span className="text-xs opacity-64">
                             {isWeekend(day) ? "$120" : "$100"}
                           </span>
                         </ArkCalendar.TableCellTrigger>

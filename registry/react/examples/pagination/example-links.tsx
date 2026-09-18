@@ -1,14 +1,23 @@
+"use client";
+
 import {
   Pagination,
-  PaginationItemLink,
   PaginationItems,
+  PaginationNext,
+  PaginationPrevious,
 } from "@/registry/react/components/pagination";
 
 const Example = () => (
-  <Pagination count={50} pageSize={10}>
-    <PaginationItemLink page="previous">Previous</PaginationItemLink>
+  <Pagination
+    count={50}
+    getPageUrl={({ page }) => `/products?page=${page}`}
+    onClick={(event) => event.preventDefault()} // just to don't navigate to the page
+    pageSize={10}
+    type="link"
+  >
+    <PaginationPrevious />
     <PaginationItems />
-    <PaginationItemLink page="next">Next</PaginationItemLink>
+    <PaginationNext />
   </Pagination>
 );
 

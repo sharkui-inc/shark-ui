@@ -214,7 +214,7 @@ const baseThemeTokens = (palette: string, mode: "light" | "dark") => {
     : `color-mix(in srgb, var(--color-${palette}-950) 97%, var(--color-${palette}-50))`;
 
   return {
-    accent: `color-mix(in srgb, ${surface} 4%, var(--background))`,
+    accent: `color-mix(in srgb, ${surface} 8%, var(--background))`,
     "accent-foreground": foreground,
     background: light
       ? `var(--color-${palette}-50)`
@@ -240,7 +240,7 @@ const baseThemeTokens = (palette: string, mode: "light" | "dark") => {
     "secondary-foreground": foreground,
     "secondary-hover": `color-mix(in srgb, ${surface} 16%, var(--background))`,
     sidebar,
-    "sidebar-accent": `color-mix(in srgb, ${surface} 4%, var(--sidebar))`,
+    "sidebar-accent": `color-mix(in srgb, ${surface} 8%, var(--sidebar))`,
     "sidebar-accent-foreground": foreground,
     "sidebar-border": `color-mix(in srgb, ${surface} ${light ? 6 : 5}%, var(--sidebar))`,
     "sidebar-foreground": `color-mix(in srgb, ${foreground} 80%, var(--sidebar))`,
@@ -363,12 +363,12 @@ const STATUS_LIGHT = {
   destructive: "var(--color-red-600)",
   "destructive-foreground": "var(--color-red-800)",
   "destructive-hover": "var(--color-red-700)",
-  info: "var(--color-blue-600)",
-  "info-foreground": "var(--color-blue-800)",
-  success: "var(--color-emerald-700)",
-  "success-foreground": "var(--color-emerald-800)",
-  warning: "var(--color-amber-700)",
-  "warning-foreground": "var(--color-amber-800)",
+  info: "var(--color-blue-500)",
+  "info-foreground": "var(--color-blue-700)",
+  success: "var(--color-emerald-600)",
+  "success-foreground": "var(--color-emerald-700)",
+  warning: "var(--color-amber-500)",
+  "warning-foreground": "var(--color-amber-700)",
 } as const;
 
 const STATUS_DARK = {
@@ -380,11 +380,11 @@ const STATUS_DARK = {
   destructive: "var(--color-red-600)",
   "destructive-foreground": "var(--color-red-400)",
   "destructive-hover": "var(--color-red-700)",
-  info: "var(--color-blue-600)",
-  "info-foreground": "var(--color-blue-300)",
-  success: "var(--color-emerald-700)",
+  info: "var(--color-blue-500)",
+  "info-foreground": "var(--color-blue-400)",
+  success: "var(--color-emerald-600)",
   "success-foreground": "var(--color-emerald-400)",
-  warning: "var(--color-amber-700)",
+  warning: "var(--color-amber-500)",
   "warning-foreground": "var(--color-amber-400)",
 } as const;
 

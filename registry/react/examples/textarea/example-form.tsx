@@ -43,7 +43,7 @@ const Example = () => {
               placeholder="Type your message here"
               value={message}
             />
-            {error && <FieldError>{error}</FieldError>}
+            {error ? <FieldError>{error}</FieldError> : null}
           </Field>
         </CardContent>
         <CardFooter>

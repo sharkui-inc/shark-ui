@@ -8,6 +8,7 @@ import {
   SearchIcon,
   Settings2Icon,
   SparklesIcon,
+  WavesHorizontalIcon,
 } from "lucide-react";
 import {
   Sidebar,
@@ -40,10 +41,10 @@ export function SidebarLeft() {
             <SidebarMenuButton
               className="font-semibold"
               size="lg"
-              tooltip="Acme"
+              tooltip="Onda"
             >
-              <FolderKanbanIcon aria-hidden="true" />
-              <span>Acme</span>
+              <WavesHorizontalIcon aria-hidden="true" />
+              <span>Onda</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

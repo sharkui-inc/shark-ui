@@ -64,7 +64,7 @@ const Example = () => {
                   <Rating
                     count={5}
                     onValueChange={(e) => field.onChange(e.value ?? 0)}
-                    value={(field.input as number) ?? 0}
+                    value={field.input as number}
                   />
                   <FieldDescription>
                     1 = not likely, 5 = very likely.

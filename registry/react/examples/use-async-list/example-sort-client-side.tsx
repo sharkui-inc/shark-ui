@@ -2,7 +2,13 @@
 
 import { useCollator } from "@ark-ui/react/locale";
 import { ArrowDownIcon, ArrowUpDownIcon, ArrowUpIcon } from "lucide-react";
+import { createWavesAvatar } from "@/lib/dicebear";
 import { Alert, AlertDescription } from "@/registry/react/components/alert";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/react/components/avatar";
 import { Button } from "@/registry/react/components/button";
 import { Spinner } from "@/registry/react/components/spinner";
 import {
@@ -28,7 +34,7 @@ const UseAsyncListDemo = () => {
     autoReload: true,
     async load({ signal }) {
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users?_limit=5",
+        "https://jsonplaceholder.typicode.com/users?_limit=4",
         { signal }
       );
       if (!response.ok) {
@@ -61,7 +67,7 @@ const UseAsyncListDemo = () => {
   };
 
   return (
-    <div className="flex w-full max-w-xl flex-col gap-4">
+    <div className="flex w-full max-w-xl flex-col gap-3">
       {!!list.loading && (
         <div className="flex items-center gap-2 text-muted-foreground text-sm">
           <Spinner /> Loading
@@ -111,7 +117,18 @@ const UseAsyncListDemo = () => {
         <TableBody>
           {list.items.map((user) => (
             <TableRow key={user.id}>
-              <TableCell>{user.name}</TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <Avatar size="sm">
+                    <AvatarImage
+                      alt={user.name}
+                      src={createWavesAvatar(user.username, "amber")}
+                    />
+                    <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                  {user.name}
+                </div>
+              </TableCell>
               <TableCell>{user.username}</TableCell>
               <TableCell>{user.email}</TableCell>
             </TableRow>

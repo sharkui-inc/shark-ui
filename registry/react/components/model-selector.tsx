@@ -1,6 +1,10 @@
 "use client";
 
-import { Combobox as ArkCombobox } from "@ark-ui/react/combobox";
+import {
+  Combobox as ArkCombobox,
+  useCombobox as useArkCombobox,
+  useComboboxContext as useArkComboboxContext,
+} from "@ark-ui/react/combobox";
 import { ark } from "@ark-ui/react/factory";
 import { ChevronsUpDownIcon, SearchIcon } from "lucide-react";
 import type React from "react";
@@ -14,8 +18,13 @@ import {
   ComboboxGroupLabel,
   ComboboxItem,
   ComboboxList,
-  useCombobox,
+  useComboboxContext,
 } from "@/registry/react/components/combobox";
+
+export const useModelSelector = useArkCombobox;
+export const useModelSelectorContext = useArkComboboxContext;
+export const ModelSelectorRootProvider = ArkCombobox.RootProvider;
+
 import {
   InputGroup,
   InputGroupAddon,
@@ -62,7 +71,7 @@ export const ModelSelectorTrigger = (props: ModelSelectorTriggerProps) => {
     ...rest
   } = props;
 
-  const { hasSelectedItems, valueAsString } = useCombobox();
+  const { hasSelectedItems, valueAsString } = useComboboxContext();
 
   const label = children ?? (hasSelectedItems ? valueAsString : "Select model");
 

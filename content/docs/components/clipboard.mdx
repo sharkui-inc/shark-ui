@@ -160,6 +160,22 @@ Text display of the value. Use when input is not needed.
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
+### ClipboardRootProvider
+
+Provides a Clipboard API created with `useClipboard` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseClipboardReturn` | **required** |
+
+### ClipboardContext
+
+Render-prop access to the surrounding component API.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: unknown) => React.ReactNode` | **required** |
+
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/clipboard#api-reference).

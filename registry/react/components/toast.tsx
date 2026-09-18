@@ -6,7 +6,7 @@ import {
   Toaster as ArkToaster,
   type CreateToasterReturn,
   createToaster,
-  useToastContext,
+  useToastContext as useArkToastContext,
 } from "@ark-ui/react/toast";
 import {
   CircleAlertIcon,
@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Spinner } from "@/registry/react/components/spinner";
 
-export const useToast = useToastContext;
+export const useToastContext = useArkToastContext;
 
 export const toast = createToaster({
   max: 3,

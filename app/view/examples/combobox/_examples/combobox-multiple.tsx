@@ -31,7 +31,7 @@ const ComboboxMultiple = () => {
         filter(reason === "item-select" ? "" : inputValue)
       }
     >
-      <ComboboxContext>
+      <ComboboxContext<Framework>>
         {({ selectedItems }) => (
           <>
             <ComboboxChips>
@@ -69,5 +69,7 @@ const initialItems = [
   { label: "Remix", value: "remix" },
   { label: "Astro", value: "astro" },
 ];
+
+type Framework = (typeof initialItems)[number];
 
 export default ComboboxMultiple;

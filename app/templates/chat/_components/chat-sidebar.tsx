@@ -166,7 +166,9 @@ export const ChatSidebar = () => {
 };
 
 const WorkspaceSwitcher = () => {
-  const [workspaceValue, setWorkspaceValue] = useState(workspaces[0].value);
+  const [workspaceValue, setWorkspaceValue] = useState<string>(
+    workspaces[0].value
+  );
   const workspace =
     workspaces.find((item) => item.value === workspaceValue) ?? workspaces[0];
 

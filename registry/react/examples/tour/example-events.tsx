@@ -16,10 +16,10 @@ import {
 } from "@/registry/react/components/tour";
 
 const Example = () => {
-  const [logs, setLogs] = React.useState<string[]>([]);
+  const [logs, setLogs] = React.useState<{ id: string; message: string }[]>([]);
 
   const addLog = (message: string) => {
-    setLogs((prev) => [...prev, message]);
+    setLogs((prev) => [...prev, { id: crypto.randomUUID(), message }]);
   };
 
   return (
@@ -61,7 +61,7 @@ const Example = () => {
           {logs.length === 0 ? (
             <span>Start the tour to see events</span>
           ) : (
-            logs.map((log, i) => <span key={i}>{log}</span>)
+            logs.map((log) => <span key={log.id}>{log.message}</span>)
           )}
         </div>
 

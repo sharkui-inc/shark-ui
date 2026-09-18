@@ -1,10 +1,16 @@
 "use client";
 
-import { Switch as ArkSwitch, useSwitchContext } from "@ark-ui/react/switch";
+import {
+  Switch as ArkSwitch,
+  useSwitch as useArkSwitch,
+  useSwitchContext as useArkSwitchContext,
+} from "@ark-ui/react/switch";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useSwitch = useSwitchContext;
+export const useSwitch = useArkSwitch;
+export const useSwitchContext = useArkSwitchContext;
+export const SwitchRootProvider = ArkSwitch.RootProvider;
 
 export const Switch = (props: React.ComponentProps<typeof ArkSwitch.Root>) => {
   const { className, tabIndex, ...rest } = props;

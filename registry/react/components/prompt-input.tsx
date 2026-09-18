@@ -12,17 +12,6 @@ import {
   InputGroupButton,
   InputGroupTextarea,
 } from "@/registry/react/components/input-group";
-import {
-  menuItemControlVariants,
-  menuListVariants,
-} from "@/registry/react/components/menu";
-import {
-  Popover,
-  PopoverClose,
-  PopoverContent,
-  PopoverTitle,
-  PopoverTrigger,
-} from "@/registry/react/components/popover";
 import { Spinner } from "@/registry/react/components/spinner";
 
 export type PromptInputStatus = "error" | "ready" | "streaming" | "submitted";
@@ -141,7 +130,7 @@ export const PromptInputHeader = (
   return (
     <InputGroupAddon
       align="block-start"
-      className={cn("flex-wrap gap-2", className)}
+      className={cn("h-auto flex-wrap items-start gap-2", className)}
       data-slot="prompt-input-header"
       {...rest}
     />
@@ -240,99 +229,6 @@ export const PromptInputButton = (
       data-slot="prompt-input-button"
       {...rest}
     />
-  );
-};
-
-export const PromptInputPopover = (
-  props: React.ComponentProps<typeof Popover>
-) => {
-  const { modal = false, positioning, ...rest } = props;
-
-  return (
-    <Popover
-      data-slot="prompt-input-popover"
-      modal={modal}
-      positioning={{ placement: "top-start", ...positioning }}
-      {...rest}
-    />
-  );
-};
-
-export const PromptInputPopoverTrigger = (
-  props: React.ComponentProps<typeof PopoverTrigger>
-) => <PopoverTrigger data-slot="prompt-input-popover-trigger" {...props} />;
-
-export const PromptInputPopoverContent = (
-  props: React.ComponentProps<typeof PopoverContent>
-) => {
-  const { className, children, ...rest } = props;
-
-  return (
-    <PopoverContent
-      className={cn("w-56 gap-0", menuListVariants(), className)}
-      data-slot="prompt-input-popover-content"
-      {...rest}
-    >
-      <PopoverTitle className="sr-only">Add to prompt</PopoverTitle>
-      {children}
-    </PopoverContent>
-  );
-};
-
-interface PromptInputPopoverActionProps extends React.ComponentProps<"button"> {
-  description?: React.ReactNode;
-  icon?: React.ReactNode;
-}
-
-export const PromptInputPopoverAction = (
-  props: PromptInputPopoverActionProps
-) => {
-  const {
-    className,
-    children,
-    description,
-    icon,
-    type = "button",
-    ...rest
-  } = props;
-  const hasDescription = description !== undefined && description !== null;
-
-  return (
-    <PopoverClose asChild>
-      <ark.button
-        className={cn(
-          menuItemControlVariants(),
-          hasDescription ? "items-start" : "items-center",
-          "text-start",
-          "outline-hidden transition-colors",
-          "hover:bg-muted focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
-          "disabled:pointer-events-none disabled:opacity-64",
-          className
-        )}
-        data-slot="prompt-input-popover-action"
-        type={type}
-        {...rest}
-      >
-        {icon ? (
-          <span
-            className={cn(
-              hasDescription && "mt-0.5",
-              "grid size-5 shrink-0 place-items-center text-muted-foreground [&_svg:not([class*='size-'])]:size-4"
-            )}
-          >
-            {icon}
-          </span>
-        ) : null}
-        <span className="min-w-0">
-          <span className="block text-foreground text-sm">{children}</span>
-          {hasDescription ? (
-            <span className="mt-0.5 block text-muted-foreground text-xs leading-4">
-              {description}
-            </span>
-          ) : null}
-        </span>
-      </ark.button>
-    </PopoverClose>
   );
 };
 

@@ -1,19 +1,16 @@
 "use client";
 
 import {
-  AudioWaveform,
   BadgeCheck,
   Bell,
   BookOpen,
   Bot,
   ChevronRight,
   ChevronsUpDown,
-  Command,
   CreditCard,
   Folder,
   Forward,
   Frame,
-  GalleryVerticalEnd,
   LogOut,
   Map as MapIcon,
   MoreHorizontal,
@@ -23,8 +20,10 @@ import {
   Sparkles,
   SquareTerminal,
   Trash2,
+  WavesHorizontalIcon,
 } from "lucide-react";
 import { type ElementType, useState } from "react";
+import { SharkIcon } from "@/components/icons/shark";
 import {
   Avatar,
   AvatarFallback,
@@ -119,9 +118,8 @@ const data = {
     { icon: MapIcon, name: "Travel", url: "#" },
   ],
   teams: [
-    { logo: GalleryVerticalEnd, name: "Acme Inc", plan: "Enterprise" },
-    { logo: AudioWaveform, name: "Acme Corp.", plan: "Startup" },
-    { logo: Command, name: "Evil Corp.", plan: "Free" },
+    { logo: WavesHorizontalIcon, name: "Onda Inc.", plan: "Enterprise" },
+    { logo: SharkIcon, name: "Shark Corp.", plan: "Free" },
   ],
   user: {
     avatar: "https://github.com/shadcn.png",

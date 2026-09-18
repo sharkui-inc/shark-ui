@@ -22,7 +22,7 @@ const RatingDemo = () => (
         <AvatarFallback>VV</AvatarFallback>
       </Avatar>
       <div>
-        <CardTitle className="text-base">Vinicius Vicentini</CardTitle>
+        <CardTitle>Vinicius Vicentini</CardTitle>
         <CardDescription> Tuestday morning at Mercado N.89</CardDescription>
       </div>
     </CardHeader>

@@ -250,10 +250,10 @@ Holds the drawer panel. Supports swipe-to-close; direction inherited from root `
 | `draggable` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--bleed` | `--spacing(12)` |
-| `--space` | `--spacing(4)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--bleed` | CSS custom property | `--spacing(12)` |
+| `--space` | CSS custom property | `--spacing(4)` |
 
 ### DrawerHeader
 
@@ -309,6 +309,50 @@ Closes the drawer on click. Use `asChild` for custom close elements.
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
+
+### DrawerRootProvider
+
+Provides a Drawer API created with `useDrawer` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseDrawerReturn` | **required** |
+
+### DrawerProvider
+
+Public DrawerProvider component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### DrawerOverlay
+
+Public DrawerOverlay component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### DrawerPositioner
+
+Public DrawerPositioner component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### DrawerGrabber
+
+Public DrawerGrabber component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 ---
 

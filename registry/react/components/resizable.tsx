@@ -2,13 +2,16 @@
 
 import {
   Splitter as ArkSplitter,
-  useSplitterContext,
+  useSplitter as useArkSplitter,
+  useSplitterContext as useArkSplitterContext,
 } from "@ark-ui/react/splitter";
 import { GripVertical } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useResizable = useSplitterContext;
+export const useResizable = useArkSplitter;
+export const useResizableContext = useArkSplitterContext;
+export const ResizableRootProvider = ArkSplitter.RootProvider;
 
 export const Resizable = (
   props: React.ComponentProps<typeof ArkSplitter.Root>
@@ -61,7 +64,7 @@ export const ResizableResizeTrigger = (props: ResizableResizeTriggerProps) => {
       data-slot="resizable-resize-trigger"
       {...rest}
     >
-      {withHandle && (
+      {withHandle ? (
         <div
           className={cn(
             "z-10",
@@ -73,7 +76,7 @@ export const ResizableResizeTrigger = (props: ResizableResizeTriggerProps) => {
         >
           <GripVertical className="size-2.5" />
         </div>
-      )}
+      ) : null}
     </ArkSplitter.ResizeTrigger>
   );
 };

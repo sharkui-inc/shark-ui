@@ -12,7 +12,10 @@ const Example = () => {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <ToggleGroup onValueChange={({ value }) => setValue(value)} value={value}>
+      <ToggleGroup
+        onValueChange={({ value: nextValue }) => setValue(nextValue)}
+        value={value}
+      >
         <ToggleGroupItem aria-label="Toggle bold" value="bold">
           <BoldIcon />
         </ToggleGroupItem>

@@ -6,7 +6,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import {
   ScrollArea,
-  useScrollArea,
+  useScrollAreaContext,
 } from "@/registry/react/components/scroll-area";
 
 interface TerminalContextValue {
@@ -62,7 +62,7 @@ export const Terminal = (props: TerminalProps) => {
 
 const TerminalFollow = () => {
   const { autoScroll, output } = _useTerminal();
-  const { scrollToEdge } = useScrollArea();
+  const { scrollToEdge } = useScrollAreaContext();
 
   const followOutput = React.useEffectEvent((_nextOutput: string) => {
     if (!autoScroll) {

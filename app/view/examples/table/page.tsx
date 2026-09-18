@@ -15,7 +15,10 @@ const TableExamplePage = () => (
         </div>
       </section>
 
-      <section aria-labelledby="actions-heading" className="flex flex-col gap-5">
+      <section
+        aria-labelledby="actions-heading"
+        className="flex flex-col gap-5"
+      >
         <h2 className="font-medium text-muted-foreground" id="actions-heading">
           Actions
         </h2>

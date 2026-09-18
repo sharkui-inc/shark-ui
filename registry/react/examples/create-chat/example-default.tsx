@@ -69,13 +69,12 @@ const CreateChatDemo = () => {
 const ChatThread = ({ onReset }: { onReset: () => void }) => {
   const { canSendNext, messages, nextMessage, sendNext, status, stop } =
     useChatHelper({
-      adapter: "ai-sdk",
       chat,
       initialMessageCount: 0,
     });
   const isBusy = status === "submitted" || status === "streaming";
-  const nextText = nextMessage ? getMessageText(nextMessage) : "";
-  const latestText = getMessageText(messages.at(-1) ?? { parts: [] });
+  const nextText = nextMessage?.content ?? "";
+  const latestText = messages.at(-1)?.content ?? "";
 
   return (
     <Card className="h-[32rem] w-full gap-0 overflow-hidden rounded-3xl py-0">
@@ -118,9 +117,9 @@ const ChatThread = ({ onReset }: { onReset: () => void }) => {
                         >
                           <MessageBubbleContent>
                             {isUser ? (
-                              getMessageText(message)
+                              message.content
                             ) : (
-                              <MessageText text={getMessageText(message)} />
+                              <MessageText text={message.content} />
                             )}
                           </MessageBubbleContent>
                         </MessageBubble>
@@ -280,14 +279,6 @@ const renderInline = (text: string) => {
     return <span key={part}>{part}</span>;
   });
 };
-
-const getMessageText = (message: {
-  parts: readonly { text?: string; type: string }[];
-}) =>
-  message.parts
-    .filter((part) => part.type === "text")
-    .map((part) => part.text ?? "")
-    .join("");
 
 const toPromptStatus = (status: string): PromptInputStatus => {
   switch (status) {

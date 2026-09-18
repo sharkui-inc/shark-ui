@@ -6,7 +6,7 @@ Read [`CODE_STYLE.md`](CODE_STYLE.md) before editing source, examples, docs, or 
 
 ## Layout
 
-- Docs: `content/docs/{components,ai-elements,helpers,utilities,hooks}/<name>.mdx`
+- Docs: `content/docs/{components,ai-components,helpers,utilities,hooks}/<name>.mdx`
 - Examples: `registry/react/examples/<name>/example-*.tsx`
 - Components: `registry/react/components/<name>.tsx`
 - Manifests: `registry/manifest/<name>.ts` (`registryDependencies`: full registry JSON URLs)

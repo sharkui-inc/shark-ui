@@ -31,7 +31,7 @@ import {
   InputGroupTextarea,
 } from "@/registry/react/components/input-group";
 
-export const BugReportForm = () => {
+const BugReportForm = () => {
   const form = useForm({
     initialInput: {
       description: "",

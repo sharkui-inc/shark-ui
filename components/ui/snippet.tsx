@@ -3,7 +3,7 @@
 import { createContext } from "@ark-ui/react/utils";
 import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
 import React from "react";
-import { formatShadcnCommandDisplay } from "@/lib/shadcn-command";
+import { formatShadcnCommandDisplay } from "@/lib/installation-command";
 import { cn } from "@/lib/utils";
 import {
   Clipboard,

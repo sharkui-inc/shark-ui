@@ -1,7 +1,13 @@
 "use client";
 
 import { useFilter, useListCollection } from "@ark-ui/react";
-import { BrainIcon, PaperclipIcon, SparklesIcon } from "lucide-react";
+import { Combobox as ArkCombobox } from "@ark-ui/react/combobox";
+import {
+  BrainIcon,
+  PaperclipIcon,
+  SearchIcon,
+  SparklesIcon,
+} from "lucide-react";
 import { useState } from "react";
 import {
   Announcement,
@@ -9,20 +15,25 @@ import {
 } from "@/registry/react/components/announcement";
 import { Button } from "@/registry/react/components/button";
 import {
+  Combobox,
+  ComboboxButtonTrigger,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxGroup,
+  ComboboxGroupLabel,
+  ComboboxItem,
+  ComboboxList,
+  useComboboxContext,
+} from "@/registry/react/components/combobox";
+import {
   FileUpload,
   FileUploadTrigger,
 } from "@/registry/react/components/file-upload";
 import {
-  ModelSelector,
-  ModelSelectorContent,
-  ModelSelectorEmpty,
-  ModelSelectorGroup,
-  ModelSelectorInput,
-  ModelSelectorItem,
-  ModelSelectorLabel,
-  ModelSelectorList,
-  ModelSelectorTrigger,
-} from "@/registry/react/components/model-selector";
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/registry/react/components/input-group";
 import {
   PromptInput,
   PromptInputButton,
@@ -69,10 +80,6 @@ export const ChatComposer = ({
 }: ChatComposerProps) => {
   const [draft, setDraft] = useState("");
   const [status, setStatus] = useState<PromptInputStatus>("ready");
-
-  const selectedModel =
-    modelOptions.find((option) => model.includes(option.value)) ??
-    modelOptions[0];
 
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
@@ -125,32 +132,38 @@ export const ChatComposer = ({
                     <PaperclipIcon aria-hidden="true" />
                   </PromptInputButton>
                 </FileUploadTrigger>
-                <ModelSelector
+                <Combobox
                   collection={collection}
+                  inputBehavior="autohighlight"
                   onInputValueChange={({ inputValue }) => filter(inputValue)}
                   onValueChange={({ value }) => onModelChange(value)}
+                  positioning={{ placement: "top" }}
+                  selectionBehavior="clear"
                   value={model}
                 >
-                  <ModelSelectorTrigger size="xs" variant="ghost">
-                    {selectedModel?.label ?? "Model"}
-                  </ModelSelectorTrigger>
-                  <ModelSelectorContent>
-                    <ModelSelectorInput placeholder="Search models" />
-                    <ModelSelectorList>
-                      <ModelSelectorEmpty />
+                  <ComboboxButtonTrigger
+                    placeholder="Model"
+                    showTrigger={false}
+                    size="xs"
+                    variant="ghost"
+                  />
+                  <ComboboxContent className="max-h-72 w-52">
+                    <ComboboxSearch />
+                    <ComboboxList>
+                      <ComboboxEmpty>No models found.</ComboboxEmpty>
                       {collection.group().map(([group, items]) => (
-                        <ModelSelectorGroup key={group}>
-                          <ModelSelectorLabel>{group}</ModelSelectorLabel>
+                        <ComboboxGroup key={group}>
+                          <ComboboxGroupLabel>{group}</ComboboxGroupLabel>
                           {items.map((item) => (
-                            <ModelSelectorItem item={item} key={item.value}>
+                            <ComboboxItem item={item} key={item.value}>
                               {item.label}
-                            </ModelSelectorItem>
+                            </ComboboxItem>
                           ))}
-                        </ModelSelectorGroup>
+                        </ComboboxGroup>
                       ))}
-                    </ModelSelectorList>
-                  </ModelSelectorContent>
-                </ModelSelector>
+                    </ComboboxList>
+                  </ComboboxContent>
+                </Combobox>
                 <Toggle
                   asChild
                   onPressedChange={onThinkModeChange}
@@ -195,5 +208,36 @@ export const ChatComposer = ({
         double-check.
       </p>
     </div>
+  );
+};
+
+const ComboboxSearch = () => {
+  const { setInputValue } = useComboboxContext();
+
+  return (
+    <InputGroup className="mb-2 rounded-xl bg-input/32" size="md">
+      <ArkCombobox.Input asChild>
+        <InputGroupInput
+          aria-label="Search models"
+          onBlur={(event) => {
+            const { currentTarget, relatedTarget } = event;
+            const contentId = currentTarget.getAttribute("aria-controls");
+            const content = contentId
+              ? currentTarget.ownerDocument.getElementById(contentId)
+              : null;
+            const isInsideContent =
+              relatedTarget instanceof Node && content?.contains(relatedTarget);
+
+            if (!isInsideContent) {
+              setInputValue("");
+            }
+          }}
+          placeholder="Search models"
+        />
+      </ArkCombobox.Input>
+      <InputGroupAddon>
+        <SearchIcon aria-hidden="true" className="opacity-64" />
+      </InputGroupAddon>
+    </InputGroup>
   );
 };

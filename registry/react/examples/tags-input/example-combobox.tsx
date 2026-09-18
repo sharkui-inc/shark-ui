@@ -45,7 +45,7 @@ const Example = () => {
         ids={{ control: `tags-control-${uid}`, input: `tags-input-${uid}` }}
         onInputValueChange={({ inputValue }) => filter(inputValue)}
         onValueChange={({ value }) => {
-          const next = value[0];
+          const [next] = value;
           if (next && !tagsInput.value.includes(next)) {
             tagsInput.addValue(next);
           }

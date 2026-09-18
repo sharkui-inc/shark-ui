@@ -8,10 +8,10 @@ import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
 import {
   ScrollAreaScrollbar,
-  useScrollArea,
+  useScrollAreaContext,
 } from "@/registry/react/components/scroll-area";
 
-export const useMessageScroller = useScrollArea;
+export const useMessageScroller = useScrollAreaContext;
 
 export const MessageScroller = (
   props: React.ComponentProps<typeof ArkScrollArea.Root>
@@ -42,7 +42,7 @@ export const MessageScrollerViewport = (
   return (
     <ArkScrollArea.Viewport
       className={cn(
-        "scrollbar-none size-full min-h-0 min-w-0 overflow-y-auto overscroll-contain outline-hidden contain-content",
+        "scrollbar-none size-full min-h-0 min-w-0 overflow-y-auto outline-hidden contain-content",
         "data-overflow-y:not-data-at-top:mask-t-from-[calc(100%-var(--fade-size))]",
         "data-overflow-y:not-data-at-bottom:mask-b-from-[calc(100%-var(--fade-size))]",
         "data-overflow-x:not-data-at-left:mask-l-from-[calc(100%-var(--fade-size))]",
@@ -101,7 +101,7 @@ export const MessageScrollerButton = (props: MessageScrollerButtonProps) => {
     size = "icon-sm",
     ...rest
   } = props;
-  const scrollArea = useScrollArea();
+  const scrollArea = useScrollAreaContext();
   const isAtEdge =
     direction === "end" ? scrollArea.isAtBottom : scrollArea.isAtTop;
   const isActive = scrollArea.hasOverflowY && !isAtEdge;

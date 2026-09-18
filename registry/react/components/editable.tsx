@@ -2,7 +2,8 @@
 
 import {
   Editable as ArkEditable,
-  useEditableContext,
+  useEditable as useArkEditable,
+  useEditableContext as useArkEditableContext,
 } from "@ark-ui/react/editable";
 import type React from "react";
 import { cn } from "@/lib/utils";
@@ -11,7 +12,9 @@ import {
   buttonVariants,
 } from "@/registry/react/components/button";
 
-export const useEditable = useEditableContext;
+export const useEditable = useArkEditable;
+export const useEditableContext = useArkEditableContext;
+export const EditableRootProvider = ArkEditable.RootProvider;
 
 export interface EditableProps
   extends React.ComponentProps<typeof ArkEditable.Root> {

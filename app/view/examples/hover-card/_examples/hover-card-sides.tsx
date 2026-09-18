@@ -16,10 +16,10 @@ const HoverCardSides = () => (
         openDelay={100}
         positioning={{ placement: side }}
       >
-        <HoverCardTrigger
-          render={<Button className="capitalize" variant="outline" />}
-        >
-          {side}
+        <HoverCardTrigger asChild>
+          <Button className="capitalize" variant="outline">
+            {side}
+          </Button>
         </HoverCardTrigger>
         <HoverCardContent>
           <div className="flex flex-col gap-1">

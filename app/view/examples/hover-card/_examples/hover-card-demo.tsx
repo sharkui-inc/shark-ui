@@ -7,8 +7,8 @@ import {
 
 const HoverCardDemo = () => (
   <HoverCard>
-    <HoverCardTrigger render={<Button variant="link" />}>
-      Hover Here
+    <HoverCardTrigger asChild>
+      <Button variant="link">Hover Here</Button>
     </HoverCardTrigger>
     <HoverCardContent className="flex w-64 flex-col gap-0.5">
       <div className="font-semibold">@nextjs</div>

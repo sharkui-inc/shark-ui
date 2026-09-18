@@ -321,11 +321,19 @@ Shorthand for a single "go" control: renders `TimerResume` when the timer is `pa
 
 ### `remainingMsUntilDate`
 
-| Parameter | Type |
-| --- | --- |
-| `date` | `Date` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `date` | `Date` | - |
 
 Returns a `number` of milliseconds until `date`, or `0` if `date` is in the past.
+
+### TimerRootProvider
+
+Provides a Timer API created with `useTimer` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseTimerReturn` | **required** |
 
 ---
 

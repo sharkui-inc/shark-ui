@@ -11,7 +11,6 @@ import {
   Folder,
   Forward,
   Frame,
-  GalleryVerticalEnd,
   LogOut,
   Map as MapIcon,
   MoreHorizontal,
@@ -21,6 +20,7 @@ import {
   Sparkles,
   SquareTerminal,
   Trash2,
+  WavesHorizontalIcon,
 } from "lucide-react";
 import React from "react";
 import { SharkIcon } from "@/components/icons/shark";
@@ -173,8 +173,8 @@ const data = {
   ],
   teams: [
     {
-      logo: GalleryVerticalEnd,
-      name: "Onda Inc",
+      logo: WavesHorizontalIcon,
+      name: "Onda Inc.",
       plan: "Enterprise",
     },
     {
@@ -228,7 +228,7 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
               <ChevronsUpDown className="ms-auto size-4" />
             </SidebarMenuButton>
           </MenuTrigger>
-          <MenuContent className="w-(--reference-width) min-w-56">
+          <MenuContent className="min-w-56">
             <MenuGroup>
               <MenuGroupLabel className="text-muted-foreground text-xs">
                 Teams
@@ -240,11 +240,7 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
                   onClick={() => setActiveTeam(team)}
                   value={team.name}
                 >
-                  <IconTile
-                    aria-hidden="true"
-                    className="rounded-md border-input bg-transparent shadow-none"
-                    size="xs"
-                  >
+                  <IconTile aria-hidden="true" size="xs" variant="secondary">
                     <team.logo className="size-3.5 shrink-0" />
                   </IconTile>
                   {team.name}
@@ -297,7 +293,7 @@ const NavMain = ({ items }: NavMainProps) => (
           <SidebarMenuItem>
             <CollapsibleTrigger asChild>
               <SidebarMenuButton tooltip={item.title}>
-                {item.icon && <item.icon />}
+                {item.icon ? <item.icon /> : null}
                 <span>{item.title}</span>
                 <ChevronRight className="ms-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
               </SidebarMenuButton>

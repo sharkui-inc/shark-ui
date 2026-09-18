@@ -3,6 +3,8 @@ import { resolve } from "node:path";
 import { describe, it } from "node:test";
 import { resolveRegistrySourcePath } from "@/lib/registry-source-path";
 
+const OUTSIDE_REGISTRY_ERROR = /outside the registry/;
+
 describe("resolveRegistrySourcePath", () => {
   it("allows a component file under REGISTRY_PATH", () => {
     const resolved = resolveRegistrySourcePath("/hotkeys.tsx");
@@ -36,7 +38,7 @@ describe("resolveRegistrySourcePath", () => {
   it("rejects paths that leave registry/react", () => {
     assert.throws(
       () => resolveRegistrySourcePath("../../../package.json"),
-      /outside the registry/
+      OUTSIDE_REGISTRY_ERROR
     );
   });
 });

@@ -81,11 +81,13 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["interviewDate"]}>
               {(field) => {
-                const value = (field.input as DateValue[]) ?? [];
+                const value = field.input as DateValue[];
                 return (
                   <Field invalid={Boolean(field.errors?.length)}>
                     <DatePicker
-                      onValueChange={({ value }) => field.onChange(value)}
+                      onValueChange={({ value: nextValue }) =>
+                        field.onChange(nextValue)
+                      }
                       value={value}
                     >
                       <DatePickerLabel>

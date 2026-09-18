@@ -3,12 +3,15 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   Timer as ArkTimer,
-  useTimerContext as useArkTimer,
+  useTimer as useArkTimer,
+  useTimerContext as useArkTimerContext,
 } from "@ark-ui/react/timer";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
 export const useTimer = useArkTimer;
+export const useTimerContext = useArkTimerContext;
+export const TimerRootProvider = ArkTimer.RootProvider;
 
 export const remainingMsUntilDate = (date: Date): number => {
   const end = new Date(date).getTime();

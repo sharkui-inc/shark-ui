@@ -2,7 +2,11 @@
 
 import { Portal } from "@ark-ui/react";
 import { ark } from "@ark-ui/react/factory";
-import { Select as ArkSelect, useSelectContext } from "@ark-ui/react/select";
+import {
+  Select as ArkSelect,
+  useSelect as useArkSelect,
+  useSelectContext as useArkSelectContext,
+} from "@ark-ui/react/select";
 import { CheckIcon, ChevronsUpDownIcon, XIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
@@ -18,19 +22,36 @@ import {
   menuListVariants,
   menuSeparatorVariants,
 } from "@/registry/react/components/menu";
+import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
 
-export const useSelect = useSelectContext;
+export const useSelect = useArkSelect;
+export const useSelectContext = useArkSelectContext;
+export const SelectRootProvider = ArkSelect.RootProvider;
 
 export const SelectContext = ArkSelect.Context;
 
 export const Select: ArkSelect.RootComponent = (props) => {
-  const { lazyMount = true, unmountOnExit = true, children, ...rest } = props;
+  const {
+    lazyMount = true,
+    unmountOnExit = true,
+    children,
+    scrollToIndexFn,
+    ...rest
+  } = props;
 
   return (
     <ArkSelect.Root
       data-slot="select"
       lazyMount={lazyMount}
+      scrollToIndexFn={(details) => {
+        if (scrollToIndexFn) {
+          scrollToIndexFn(details);
+          return;
+        }
+
+        details.getElement()?.scrollIntoView({ block: "nearest" });
+      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     >
@@ -199,7 +220,7 @@ export const SelectContent = (
             "z-[calc(50+var(--layer-index,0))]",
             "relative",
             "max-h-96 min-w-(--reference-width)",
-            "overflow-y-auto",
+            "overflow-hidden",
             "bg-popover",
             "text-popover-foreground",
             "rounded-xl border shadow-lg/4",
@@ -221,7 +242,13 @@ export const SelectContent = (
           data-slot="select-content"
           {...rest}
         >
-          {children}
+          <ScrollArea
+            className="max-h-[inherit]"
+            orientation="vertical"
+            scrollFade
+          >
+            {children}
+          </ScrollArea>
         </ArkSelect.Content>
       </ArkSelect.Positioner>
     </Portal>

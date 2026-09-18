@@ -24,7 +24,7 @@ import {
   FieldSet,
 } from "@/registry/react/components/field";
 
-export const Example = () => {
+const Example = () => {
   const form = useForm({
     defaultValues: {
       responses: true,

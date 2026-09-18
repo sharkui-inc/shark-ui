@@ -8,8 +8,6 @@ const manifest: RegistryItemType = {
   name: "prompt-input",
   registryDependencies: [
     absoluteUrl("/r/input-group.json"),
-    absoluteUrl("/r/menu.json"),
-    absoluteUrl("/r/popover.json"),
     absoluteUrl("/r/spinner.json"),
   ],
   type: "registry:ui",

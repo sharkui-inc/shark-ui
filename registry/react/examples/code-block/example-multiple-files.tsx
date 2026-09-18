@@ -16,7 +16,7 @@ import {
 } from "@/registry/react/components/tabs";
 
 const Example = () => {
-  const [activeFile, setActiveFile] = useState(FILES[0].value);
+  const [activeFile, setActiveFile] = useState<string>(FILES[0].value);
   const file = FILES.find((item) => item.value === activeFile) ?? FILES[0];
 
   return (

@@ -23,12 +23,10 @@ const ButtonGroupPopoverExample = () => (
       Copilot
     </Button>
     <Popover positioning={{ placement: "bottom-end" }}>
-      <PopoverTrigger
-        render={
-          <Button aria-label="Open Popover" size="icon-md" variant="outline" />
-        }
-      >
-        <ChevronDownIcon />
+      <PopoverTrigger asChild>
+        <Button aria-label="Open Popover" size="icon-md" variant="outline">
+          <ChevronDownIcon />
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="rounded-xl text-sm">
         <PopoverHeader>

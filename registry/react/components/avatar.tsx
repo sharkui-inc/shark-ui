@@ -1,6 +1,10 @@
 "use client";
 
-import { Avatar as ArkAvatar, useAvatarContext } from "@ark-ui/react/avatar";
+import {
+  Avatar as ArkAvatar,
+  useAvatar as useArkAvatar,
+  useAvatarContext as useArkAvatarContext,
+} from "@ark-ui/react/avatar";
 import { ark } from "@ark-ui/react/factory";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
@@ -10,8 +14,9 @@ import {
   type statusVariants,
 } from "@/registry/react/components/status";
 
-export const useAvatar = useAvatarContext;
-
+export const useAvatar = useArkAvatar;
+export const useAvatarContext = useArkAvatarContext;
+export const AvatarRootProvider = ArkAvatar.RootProvider;
 const avatarVariants = tv({
   base: [
     "group/avatar",

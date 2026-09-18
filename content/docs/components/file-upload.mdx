@@ -265,9 +265,9 @@ Drop zone for drag-and-drop. Exposes `data-dragging` when files are dragged over
 | `disableClick` | `boolean` | `-` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(8)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | CSS custom property | `--spacing(8)` |
 
 ### FileUploadDropzoneIcon
 
@@ -388,17 +388,25 @@ Removes all files from the list.
 
 Hook to access file upload state and methods. Use inside `FileUpload` or `FileUploadRootProvider`.
 
-| Property | Type |
-| --- | --- |
-| `acceptedFiles` | `File[]` |
-| `rejectedFiles` | `FileRejection[]` |
-| `openFilePicker` | `() => void` |
-| `deleteFile` | `(file: File, type?: ItemType) => void` |
-| `clearFiles` | `() => void` |
-| `clearRejectedFiles` | `() => void` |
-| `getFileSize` | `(file: File) => string` |
-| `createFileUrl` | `(file: File, cb: (url: string) => void) => () => void` |
-| `setClipboardFiles` | `(dt: DataTransfer) => boolean` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `acceptedFiles` | `File[]` | - |
+| `rejectedFiles` | `FileRejection[]` | - |
+| `openFilePicker` | `() => void` | - |
+| `deleteFile` | `(file: File, type?: ItemType) => void` | - |
+| `clearFiles` | `() => void` | - |
+| `clearRejectedFiles` | `() => void` | - |
+| `getFileSize` | `(file: File) => string` | - |
+| `createFileUrl` | `(file: File, cb: (url: string) => void) => () => void` | - |
+| `setClipboardFiles` | `(dt: DataTransfer) => boolean` | - |
+
+### FileUploadRootProvider
+
+Provides a FileUpload API created with `useFileUpload` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseFileUploadReturn` | **required** |
 
 ---
 

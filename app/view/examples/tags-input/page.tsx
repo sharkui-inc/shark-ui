@@ -1,3 +1,4 @@
+import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
 import ExampleBlurBehavior from "@/registry/react/examples/tags-input/example-blur-behavior";
 import ExampleCombobox from "@/registry/react/examples/tags-input/example-combobox";
 import ExampleControlled from "@/registry/react/examples/tags-input/example-controlled";
@@ -21,7 +22,8 @@ import ExampleSizeSm from "@/registry/react/examples/tags-input/example-size-sm"
 import ExampleValidation from "@/registry/react/examples/tags-input/example-validation";
 
 const TagsInputExamplePage = () => (
-  <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
+  <PreviewLocaleProvider>
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
     <div className="grid gap-16 sm:grid-cols-2">
       <section
         aria-labelledby="default-heading"
@@ -276,7 +278,8 @@ const TagsInputExamplePage = () => (
         </div>
       </section>
     </div>
-  </div>
+    </div>
+  </PreviewLocaleProvider>
 );
 
 export default TagsInputExamplePage;

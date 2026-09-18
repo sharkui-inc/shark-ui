@@ -96,6 +96,7 @@ interface CodeBlockHeaderProps extends React.ComponentProps<typeof ark.div> {
 
 export const CodeBlockTitle = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
+
   return (
     <ark.div
       className={cn(
@@ -112,6 +113,7 @@ export const CodeBlockTitle = (props: React.ComponentProps<typeof ark.div>) => {
 
 export const CodeBlockHeader = (props: CodeBlockHeaderProps) => {
   const { title, className, children, ...rest } = props;
+
   return (
     <ark.div
       className={cn(
@@ -141,6 +143,7 @@ export const CodeBlockFilename = (
   props: React.ComponentProps<typeof ark.span>
 ) => {
   const { className, style, ...rest } = props;
+
   return (
     <ark.span
       className={cn(
@@ -160,6 +163,7 @@ export const CodeBlockActions = (
   props: React.ComponentProps<typeof ark.div>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <ark.div
       className={cn("ms-auto flex shrink-0 items-center gap-1", className)}
@@ -252,6 +256,7 @@ const getHighlighter = () => {
     highlighterPromise = getShiki()
       .then(({ createHighlighter }) =>
         createHighlighter({
+          langs: [],
           themes: ["github-light", "github-dark"],
         })
       )
@@ -597,14 +602,15 @@ export const CodeBlockContent = (props: CodeBlockContentProps) => {
   );
 };
 
-export const CodeBlockLanguageSelector = (
-  props: React.ComponentProps<typeof Select>
-) => <Select data-slot="code-block-language-selector" {...props} />;
+export const CodeBlockLanguageSelector: typeof Select = (props) => (
+  <Select data-slot="code-block-language-selector" {...props} />
+);
 
 export const CodeBlockLanguageSelectorTrigger = (
   props: React.ComponentProps<typeof SelectTrigger>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <SelectTrigger
       className={cn(
@@ -624,10 +630,7 @@ export const CodeBlockLanguageSelectorValue = (
 
 export const CodeBlockLanguageSelectorContent = (
   props: React.ComponentProps<typeof SelectContent>
-) => {
-  const { align = "end", ...rest } = props;
-  return <SelectContent align={align} {...rest} />;
-};
+) => <SelectContent {...props} />;
 
 export const CodeBlockLanguageSelectorItem = (
   props: React.ComponentProps<typeof SelectItem>

@@ -7,7 +7,9 @@
     "recharts",
     "tailwind-variants"
   ],
-  "devDependencies": ["tw-animate-css"],
+  "devDependencies": [
+    "tw-animate-css"
+  ],
   "name": "ui",
   "registryDependencies": [
     "https://shark-ui.com/r/accordion.json",
@@ -78,7 +80,6 @@
     "https://shark-ui.com/r/message-bubble.json",
     "https://shark-ui.com/r/message-scroller.json",
     "https://shark-ui.com/r/native-select.json",
-    "https://shark-ui.com/r/navigation-menu.json",
     "https://shark-ui.com/r/number-input.json",
     "https://shark-ui.com/r/pagination.json",
     "https://shark-ui.com/r/password-input.json",

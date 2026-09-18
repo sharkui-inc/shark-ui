@@ -1,4 +1,12 @@
-<svg fill="none" height="1200" width="1200" xmlns="http://www.w3.org/2000/svg">
+<svg
+  aria-labelledby="placeholder-title"
+  fill="none"
+  height="1200"
+  role="img"
+  width="1200"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title id="placeholder-title">Image placeholder</title>
   <style>
   :root {
     --placeholder-bg: #eaeaea;

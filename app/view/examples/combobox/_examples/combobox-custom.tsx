@@ -22,14 +22,14 @@ const ComboboxCustom = () => {
   const { collection, filter } = useListCollection({
     filter: contains,
     initialItems: countries.filter((country) => country.code !== ""),
+    itemToString: (country) => country.label,
+    itemToValue: (country) => country.value,
   });
 
   return (
     <Combobox
       className="w-full max-w-64"
       collection={collection}
-      itemToStringValue={(country) => country.label}
-      itemToValue={(country) => country.value}
       onInputValueChange={({ inputValue, reason }) =>
         filter(reason === "item-select" ? "" : inputValue)
       }

@@ -248,9 +248,9 @@ Holds the popover panel content. Displayed in a portal.
 | `showCloseButton` | `boolean` | `false` |
 | `className` | `string` | - |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(4)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | CSS custom property | `--spacing(4)` |
 
 ### PopoverHeader
 
@@ -312,10 +312,27 @@ Optional arrow pointing toward the trigger element.
 | --- | --- | --- |
 | `className` | `string` | - |
 
-| Attribute | Default |
-| --- | --- |
-| `--arrow-background` | `var(--popover)` |
-| `--arrow-size` | `calc(1.5 * var(--spacing))` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--arrow-background` | CSS custom property | `var(--popover)` |
+| `--arrow-size` | CSS custom property | `calc(1.5 * var(--spacing))` |
+
+### PopoverRootProvider
+
+Provides a Popover API created with `usePopover` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UsePopoverReturn` | **required** |
+
+### PopoverPositioner
+
+Public PopoverPositioner component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 ---
 

@@ -35,7 +35,7 @@ const navigation = [
   },
   {
     items: [
-      { icon: BotIcon, label: "AI elements" },
+      { icon: BotIcon, label: "AI Components" },
       { icon: Settings2Icon, label: "Configuration" },
     ],
     label: "Build",

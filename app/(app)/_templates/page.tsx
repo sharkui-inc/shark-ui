@@ -56,12 +56,6 @@ const TemplatesPage = async () => {
                     <ArrowDownIcon aria-hidden="true" />
                   </Link>
                 </Button>
-                <Button asChild size="xl" variant="outline">
-                  <Link href="/blocks">
-                    View blocks
-                    <ArrowRightIcon aria-hidden="true" />
-                  </Link>
-                </Button>
               </div>
 
               <Announcement className="mt-6 bg-background p-0 shadow-sm/4">
@@ -98,28 +92,6 @@ const TemplatesPage = async () => {
                   />
                 </React.Suspense>
               ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="border-y">
-          <div className="container border-x px-4 py-14 sm:px-8 sm:py-16">
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <h2 className="text-balance font-heading font-semibold text-3xl tracking-[-0.03em] sm:text-4xl">
-                  Need a smaller starting point?
-                </h2>
-                <p className="mt-2 max-w-xl text-muted-foreground">
-                  Browse composed sections you can add without adopting a full
-                  product shell.
-                </p>
-              </div>
-              <Button asChild className="w-full sm:w-auto" size="xl">
-                <Link href="/blocks">
-                  Browse blocks
-                  <ArrowRightIcon aria-hidden="true" />
-                </Link>
-              </Button>
             </div>
           </div>
         </section>

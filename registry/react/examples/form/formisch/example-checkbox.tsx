@@ -30,7 +30,7 @@ import {
 } from "@/registry/react/components/field";
 import { toast } from "@/registry/react/components/toast";
 
-export const Example = () => {
+const Example = () => {
   const form = useForm({
     initialInput: {
       responses: true,

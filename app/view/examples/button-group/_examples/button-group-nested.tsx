@@ -23,8 +23,10 @@ const ButtonGroupNestedExample = () => (
       <InputGroup>
         <InputGroupInput placeholder="Send a message..." />
         <Tooltip>
-          <TooltipTrigger render={<InputGroupAddon align="inline-end" />}>
-            <AudioLinesIcon />
+          <TooltipTrigger asChild>
+            <InputGroupAddon align="inline-end">
+              <AudioLinesIcon />
+            </InputGroupAddon>
           </TooltipTrigger>
           <TooltipContent>Voice Mode</TooltipContent>
         </Tooltip>

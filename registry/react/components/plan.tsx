@@ -215,7 +215,7 @@ export const PlanItem = (props: PlanItemProps) => {
 };
 
 interface PlanItemTriggerProps
-  extends Omit<React.ComponentProps<typeof CollapsibleTrigger>, "title"> {
+  extends Omit<React.ComponentProps<typeof CollapsibleTrigger>, "ref" | "title"> {
   /**
    * The status of the plan item.
    */
@@ -253,7 +253,7 @@ export const PlanItemTrigger = (props: PlanItemTriggerProps) => {
 
   if (!collapsible) {
     return (
-      <ark.div
+      <ark.button
         className={cn(
           "grid min-h-9 w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-lg px-2 py-1.5 text-start",
           status === "in-progress" && "bg-muted/64",
@@ -262,10 +262,12 @@ export const PlanItemTrigger = (props: PlanItemTriggerProps) => {
           className
         )}
         data-slot="plan-item-trigger"
+        disabled
+        type="button"
         {...rest}
       >
         {content}
-      </ark.div>
+      </ark.button>
     );
   }
 

@@ -96,14 +96,16 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
 
     const content = input.trim();
 
-    setMessages((current) => [...current, { content, role: "user" }].slice(-8));
+    setMessages((current) =>
+      [...current, { content, role: "user" as const }].slice(-8)
+    );
     setInput("");
     setIsTyping(true);
 
     window.clearTimeout(replyTimeoutRef.current);
     replyTimeoutRef.current = window.setTimeout(() => {
       setMessages((current) =>
-        [...current, { content: replyFor(content), role: "agent" }].slice(-8)
+        [...current, { content: replyFor(content), role: "agent" as const }].slice(-8)
       );
       setIsTyping(false);
     }, 700);

@@ -1,3 +1,5 @@
+"use client";
+
 import CalendarBasic from "./_examples/calendar-basic";
 import CalendarBookedDates from "./_examples/calendar-booked-dates";
 import CalendarCaption from "./_examples/calendar-caption";

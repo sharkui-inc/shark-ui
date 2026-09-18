@@ -211,24 +211,9 @@ export const ApprovalCardItemDescription = (
 export const ApprovalCardChoices = (
   props: React.ComponentProps<typeof QuestionnaireChoices>
 ) => {
-  const { children, ...rest } = props;
-
-  const content = React.Children.map(children, (child) => {
-    if (
-      !React.isValidElement<ApprovalCardChoiceProps>(child) ||
-      child.type !== ApprovalCardChoice
-    ) {
-      return child;
-    }
-
-    return (
-      <QuestionnaireChoice {...child.props} data-slot="approval-card-choice" />
-    );
-  });
-
   return (
-    <QuestionnaireChoices {...rest} data-slot="approval-card-choices">
-      {content}
+    <QuestionnaireChoices {...props} data-slot="approval-card-choices">
+      {props.children}
     </QuestionnaireChoices>
   );
 };

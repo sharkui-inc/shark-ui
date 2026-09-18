@@ -8,10 +8,12 @@ import {
 const TooltipDisabled = () => (
   <>
     <Tooltip>
-      <TooltipTrigger render={<span className="inline-block w-fit" />}>
-        <Button disabled variant="outline">
-          Disabled
-        </Button>
+      <TooltipTrigger asChild>
+        <span className="inline-block w-fit">
+          <Button disabled variant="outline">
+            Disabled
+          </Button>
+        </span>
       </TooltipTrigger>
       <TooltipContent>
         <p>This feature is currently unavailable</p>

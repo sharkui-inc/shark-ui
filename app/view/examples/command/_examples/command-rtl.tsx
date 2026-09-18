@@ -47,11 +47,7 @@ const CommandRtl = () => {
                 <Fragment key={group}>
                   <CommandGroup heading={group}>
                     {items.map((item) => (
-                      <CommandItem
-                        disabled={item.disabled}
-                        item={item}
-                        key={item.value}
-                      >
+                      <CommandItem item={item} key={item.value}>
                         {item.icon}
                         <span>{item.label}</span>
                         {item.shortcut ? (

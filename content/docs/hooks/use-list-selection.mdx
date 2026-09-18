@@ -49,34 +49,33 @@ import { useListSelection } from "@/hooks/use-list-selection";
 ```
 
 ```tsx
-const selection = useListSelection({ collection, selectionMode: "multiple" });
+const collection = createListCollection({
+  items: [
+    { label: "React", value: "react" },
+    { label: "Vue", value: "vue" },
+  ],
+});
 
-selection.isSelected("react");
-selection.toggle("react");
-selection.clear();
+const selection = useListSelection({ collection });
 ```
-
-Create the collection outside your component when its items are static. The hook manages selection state; your controls still provide their own labels and keyboard interactions.
 
 ## Examples
 
 ### Multiple selection
 
-Set `selectionMode` to `multiple` to allow multiple items to be selected.
+Set `selectionMode` to `multiple`.
 
 <ComponentPreview componentName="use-list-selection" fileName="example-multiple" />
 
 ### Range selection
 
-Extend the selection from the first selected item to the clicked item.
+Use `extend` to select a range.
 
 <ComponentPreview componentName="use-list-selection" fileName="example-range" />
 
 ## API Reference
 
 ### useListSelection
-
-Direct export of the Ark hook. Also exports the `UseListSelectionProps<T>` and `UseListSelectionReturn` types.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -86,8 +85,6 @@ Direct export of the Ark hook. Also exports the `UseListSelectionProps<T>` and `
 | `initialSelectedValues` | `string[]` | `[]` |
 | `resetOnCollectionChange` | `boolean` | `false` |
 
-`initialSelectedValues` defines the initial selection; it is not a controlled value. Use `setSelectedValues` to update it later. With `resetOnCollectionChange`, changing the collection clears the selection.
-
 ### Return value
 
 | Prop | Type | Default |
@@ -96,27 +93,19 @@ Direct export of the Ark hook. Also exports the `UseListSelectionProps<T>` and `
 | `isEmpty` | `boolean` | `-` |
 | `firstSelectedValue` | `string \| null` | `-` |
 | `lastSelectedValue` | `string \| null` | `-` |
+| `isSelected` | `(value: string \| null) => boolean` | `-` |
+| `canSelect` | `(value: string) => boolean` | `-` |
+| `isAllSelected` | `() => boolean` | `-` |
+| `isSomeSelected` | `() => boolean` | `-` |
+| `select` | `(value: string, forceToggle?: boolean) => void` | `-` |
+| `deselect` | `(value: string) => void` | `-` |
+| `toggle` | `(value: string) => void` | `-` |
+| `replace` | `(value: string \| null) => void` | `-` |
+| `extend` | `(anchorValue: string, targetValue: string) => void` | `-` |
+| `setSelectedValues` | `(values: string[]) => void` | `-` |
+| `clear` | `() => void` | `-` |
+| `resetSelection` | `() => void` | `-` |
 
-### Query methods
+---
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| `isSelected(value)` | `(value: string \| null) => boolean` | `-` |
-| `canSelect(value)` | `(value: string) => boolean` | `-` |
-| `isAllSelected()` | `() => boolean` | `-` |
-| `isSomeSelected()` | `() => boolean` | `-` |
-
-### Selection methods
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `select(value, forceToggle?)` | `(value: string, forceToggle?: boolean) => void` | `-` |
-| `deselect(value)` | `(value: string) => void` | `-` |
-| `toggle(value)` | `(value: string) => void` | `-` |
-| `replace(value)` | `(value: string \| null) => void` | `-` |
-| `extend(anchorValue, targetValue)` | `(anchorValue: string, targetValue: string) => void` | `-` |
-| `setSelectedValues(values)` | `(values: string[]) => void` | `-` |
-| `clear()` | `() => void` | `-` |
-| `resetSelection()` | `() => void` | `-` |
-
-`resetSelection()` creates a new empty selection; it does not restore `initialSelectedValues`.
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/collections/list-selection#api-reference).

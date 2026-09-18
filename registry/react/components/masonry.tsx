@@ -6,12 +6,17 @@ import { cn } from "@/lib/utils";
 
 interface MasonryMetrics {
   columnCount: number;
-  gap: number;
+  columnGap: number;
   itemWidth: number;
   paddingBottom: number;
-  paddingLeft: number;
+  paddingInlineStart: number;
   paddingTop: number;
   rightToLeft: boolean;
+  rowGap: number;
+}
+
+export interface MasonryProps extends React.ComponentProps<typeof ark.ul> {
+  reflow?: "balanced" | "stable";
 }
 
 const getItems = (masonry: HTMLElement) =>
@@ -26,9 +31,11 @@ const getMetrics = (masonry: HTMLElement): MasonryMetrics | null => {
   const paddingLeft = getPixelValue(styles.paddingLeft);
   const paddingRight = getPixelValue(styles.paddingRight);
   const columnCount = Math.max(1, Number.parseInt(styles.columnCount, 10) || 1);
-  const gap = getPixelValue(styles.columnGap);
+  const columnGap = getPixelValue(styles.columnGap);
+  const rightToLeft = styles.direction === "rtl";
   const contentWidth = masonry.clientWidth - paddingLeft - paddingRight;
-  const itemWidth = (contentWidth - gap * (columnCount - 1)) / columnCount;
+  const itemWidth =
+    (contentWidth - columnGap * (columnCount - 1)) / columnCount;
 
   if (itemWidth <= 0) {
     return null;
@@ -36,23 +43,22 @@ const getMetrics = (masonry: HTMLElement): MasonryMetrics | null => {
 
   return {
     columnCount,
-    gap,
+    columnGap,
     itemWidth,
     paddingBottom: getPixelValue(styles.paddingBottom),
-    paddingLeft,
+    paddingInlineStart: rightToLeft ? paddingRight : paddingLeft,
     paddingTop: getPixelValue(styles.paddingTop),
-    rightToLeft: styles.direction === "rtl",
+    rightToLeft,
+    rowGap: getPixelValue(styles.rowGap),
   };
 };
 
 const getHorizontalOffset = (column: number, metrics: MasonryMetrics) => {
-  const offset = column * (metrics.itemWidth + metrics.gap);
+  const offset =
+    metrics.paddingInlineStart +
+    column * (metrics.itemWidth + metrics.columnGap);
 
-  return metrics.rightToLeft
-    ? metrics.paddingLeft +
-        (metrics.columnCount - 1) * (metrics.itemWidth + metrics.gap) -
-        offset
-    : metrics.paddingLeft + offset;
+  return metrics.rightToLeft ? -offset : offset;
 };
 
 const removeStaleColumns = (
@@ -97,23 +103,33 @@ const positionItems = (
       item.dataset.masonryAnimate = "true";
     }
 
-    columnHeights[column] += item.getBoundingClientRect().height + metrics.gap;
+    columnHeights[column] +=
+      item.getBoundingClientRect().height + metrics.rowGap;
+  }
+
+  if (items.length === 0) {
+    return metrics.paddingTop + metrics.paddingBottom;
   }
 
   return (
     Math.max(metrics.paddingTop, ...columnHeights) -
-    metrics.gap +
+    metrics.rowGap +
     metrics.paddingBottom
   );
 };
 
-export const Masonry = (props: React.ComponentProps<typeof ark.ul>) => {
-  const { className, ...rest } = props;
+export const Masonry = (props: MasonryProps) => {
+  const { className, reflow = "stable", ...rest } = props;
   const masonryRef = React.useRef<HTMLUListElement>(null);
 
   React.useLayoutEffect(() => {
     const masonry = masonryRef.current;
+    if (!masonry) {
+      return;
+    }
+
     const columns = new Map<HTMLElement, number>();
+    const observedItems = new Set<HTMLElement>();
     const previousHeight = masonry.style.height;
     let animationFrame: number | undefined;
     let columnCount = 0;
@@ -128,7 +144,7 @@ export const Masonry = (props: React.ComponentProps<typeof ark.ul>) => {
 
       const { columnCount: nextColumnCount } = metrics;
 
-      if (columnCount !== nextColumnCount) {
+      if (reflow === "balanced" || columnCount !== nextColumnCount) {
         columns.clear();
         columnCount = nextColumnCount;
       }
@@ -158,8 +174,23 @@ export const Masonry = (props: React.ComponentProps<typeof ark.ul>) => {
 
     const resizeObserver = new ResizeObserver(scheduleLayout);
     const observeItems = () => {
-      for (const item of getItems(masonry)) {
+      const items = getItems(masonry);
+      const itemSet = new Set(items);
+
+      for (const item of observedItems) {
+        if (!itemSet.has(item)) {
+          resizeObserver.unobserve(item);
+          observedItems.delete(item);
+        }
+      }
+
+      for (const item of items) {
+        if (observedItems.has(item)) {
+          continue;
+        }
+
         resizeObserver.observe(item);
+        observedItems.add(item);
       }
     };
     const mutationObserver = new MutationObserver(() => {
@@ -169,7 +200,7 @@ export const Masonry = (props: React.ComponentProps<typeof ark.ul>) => {
 
     resizeObserver.observe(masonry);
     observeItems();
-    mutationObserver.observe(masonry, { childList: true, subtree: true });
+    mutationObserver.observe(masonry, { childList: true });
     scheduleLayout();
 
     return () => {
@@ -189,13 +220,14 @@ export const Masonry = (props: React.ComponentProps<typeof ark.ul>) => {
         item.style.removeProperty("--masonry-item-y");
       }
     };
-  }, []);
+  }, [reflow]);
 
   return (
     <ark.ul
       className={cn(
         "[--gap:--spacing(4)]",
-        "relative columns-1 gap-(--gap)",
+        "relative columns-1 gap-x-(--gap) gap-y-(--gap)",
+        "w-full min-w-0",
         "m-0 list-none p-0",
         className
       )}
@@ -212,8 +244,10 @@ export const MasonryItem = (props: React.ComponentProps<typeof ark.li>) => {
   return (
     <ark.li
       className={cn(
+        "min-w-0",
         "mb-(--gap) break-inside-avoid",
-        "data-[masonry-layout=ready]:absolute data-[masonry-layout=ready]:mb-0 data-[masonry-layout=ready]:w-(--masonry-item-width)",
+        "data-[masonry-layout=ready]:absolute data-[masonry-layout=ready]:start-0 data-[masonry-layout=ready]:top-0",
+        "data-[masonry-layout=ready]:mb-0 data-[masonry-layout=ready]:w-(--masonry-item-width)",
         "data-[masonry-layout=ready]:translate-x-(--masonry-item-x) data-[masonry-layout=ready]:translate-y-(--masonry-item-y)",
         "data-[masonry-layout=ready]:will-change-transform",
         "data-[masonry-animate]:transition-transform data-[masonry-animate]:duration-150 data-[masonry-animate]:ease-out",

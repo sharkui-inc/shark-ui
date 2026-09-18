@@ -239,9 +239,10 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
           <div className="sticky top-(--header-height) z-30 ms-auto hidden h-[calc(100svh-var(--header-height))] w-64 flex-col overflow-hidden xl:flex">
             <ScrollArea
               className="[--fade-size:3rem] **:data-[slot=scroll-area-scrollbar]:hidden"
+              orientation="vertical"
               scrollFade
             >
-              <div className="flex min-h-0 flex-col gap-2 overflow-auto py-2">
+              <div className="flex min-h-0 min-w-0 flex-col gap-2 py-2">
                 <div className="h-(--top-spacing) shrink-0" />
                 <DocsTableOfContents data={page.data.toc} />
               </div>

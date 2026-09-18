@@ -33,7 +33,7 @@ const PaginationIconsOnly = () => (
         <SelectTrigger className="w-20" id="select-rows-per-page">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent positioning={{ placement: "bottom-start" }}>
+        <SelectContent>
           <SelectGroup>
             {rowsPerPage.items.map((item) => (
               <SelectItem item={item} key={item.value}>

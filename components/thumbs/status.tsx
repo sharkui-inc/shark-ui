@@ -15,7 +15,7 @@ export const StatusThumb = (props: ThumbCardProps) => (
       <div className="flex items-center gap-2">
         <span
           aria-hidden
-          className="size-2.5 shrink-0 rounded-full bg-muted-foreground/64"
+          className="size-2.5 shrink-0 rounded-full bg-muted-foreground/16"
         />
         <div className="flex-1 rounded-md border border-input border-dashed bg-muted p-1.5 shadow-sm/4">
           <div className="h-2 w-1/2 rounded-full bg-muted-foreground/16" />

@@ -31,8 +31,8 @@ const TooltipRtl = () => (
         <div className="flex flex-wrap justify-center gap-2">
           {physicalSides.map((side) => (
             <Tooltip key={side} positioning={{ placement: side }}>
-              <TooltipTrigger render={<Button variant="outline" />}>
-                {translations[side]}
+              <TooltipTrigger asChild>
+                <Button variant="outline">{translations[side]}</Button>
               </TooltipTrigger>
               <TooltipContent>{translations.content}</TooltipContent>
             </Tooltip>
@@ -45,8 +45,8 @@ const TooltipRtl = () => (
               key={side}
               positioning={{ placement: logicalPlacement[side] }}
             >
-              <TooltipTrigger render={<Button variant="outline" />}>
-                {translations[side]}
+              <TooltipTrigger asChild>
+                <Button variant="outline">{translations[side]}</Button>
               </TooltipTrigger>
               <TooltipContent>{translations.content}</TooltipContent>
             </Tooltip>

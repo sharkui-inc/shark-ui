@@ -23,7 +23,7 @@ import { toast } from "@registry/react/components/toast";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 
-export const Example = () => {
+const Example = () => {
   const form = useForm({
     defaultValues: {
       twoFactor: false,

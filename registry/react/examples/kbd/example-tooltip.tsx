@@ -15,7 +15,7 @@ const Example = () => (
     </TooltipTrigger>
     <TooltipContent>
       Toggle mode
-      <KbdGroup className="ml-1.5 inline">
+      <KbdGroup>
         <Kbd>D</Kbd>
       </KbdGroup>
     </TooltipContent>

@@ -24,9 +24,7 @@ export const HeroSection = (props: HeroSectionProps) => {
             <Badge>
               <BotIcon aria-hidden="true" />
             </Badge>
-            <AnnouncementTitle>
-              New AI components and a blocks catalog
-            </AnnouncementTitle>
+            <AnnouncementTitle>New AI components</AnnouncementTitle>
             <ArrowRightIcon aria-hidden="true" />
           </Link>
         </Announcement>

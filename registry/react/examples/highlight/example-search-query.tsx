@@ -18,7 +18,11 @@ const Example = () => {
       <ul className="space-y-2">
         {searchResults.map((item) => (
           <li className="text-base text-foreground" key={item}>
-            {query ? <Highlight ignoreCase query={query} text={item} /> : item}
+            {query ? (
+              <Highlight ignoreCase query={query} text={item} />
+            ) : (
+              String(item)
+            )}
           </li>
         ))}
       </ul>

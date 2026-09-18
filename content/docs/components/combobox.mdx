@@ -53,7 +53,7 @@ npx shadcn@latest add @shark/combobox
 
 ```text
 Combobox
-  ├── ComboboxInput | ComboboxChips
+  ├── ComboboxInput | ComboboxChips | ComboboxButtonTrigger
   │   ├── ComboboxChip
   │   └── ComboboxChipsInput
   └── ComboboxContent
@@ -71,6 +71,7 @@ import { useFilter, useListCollection } from "@ark-ui/react";
 import {
   Combobox,
   ComboboxContent,
+  ComboboxEmpty,
   ComboboxGroup,
   ComboboxInput,
   ComboboxItem,
@@ -96,6 +97,7 @@ const { collection, filter } = useListCollection({
 >
   <ComboboxInput placeholder="Select an option" />
   <ComboboxContent>
+    <ComboboxEmpty />
     <ComboboxList>
       {items.map((item) => (
         <ComboboxItem item={item} key={item.value}>
@@ -116,6 +118,18 @@ keeps the selected label while reopening the list shows every item.
 Control the selected value with `value` and `onValueChange` props. Ark UI represents selections as a `string[]`, including single selection.
 
 <ComponentPreview componentName="combobox" fileName="example-controlled" />
+
+## Variants
+
+Control input appearance with the `variant` prop on `ComboboxInput`.
+
+### Default
+
+<ComponentPreview componentName="combobox" fileName="example-variant-default" />
+
+### Ghost
+
+<ComponentPreview componentName="combobox" fileName="example-variant-ghost" />
 
 ## Size
 
@@ -142,6 +156,12 @@ Control the selected value with `value` and `onValueChange` props. Ark UI repres
 <ComponentPreview componentName="combobox" fileName="example-disabled" />
 
 ## Examples
+
+### Trigger with search
+
+Use a button trigger to open a searchable list without a chevron indicator.
+
+<ComponentPreview componentName="combobox" fileName="example-button-trigger" />
 
 ### Auto highlight
 
@@ -176,6 +196,12 @@ Use `multiple` to select more than one option.
 Pass `showClear` to `ComboboxInput` to show a clear button.
 
 <ComponentPreview componentName="combobox" fileName="example-with-clear-button" />
+
+### Without trigger
+
+Hide the chevron with `showTrigger={false}`.
+
+<ComponentPreview componentName="combobox" fileName="example-without-trigger" />
 
 ### Open on typing
 
@@ -231,6 +257,7 @@ Input with menu trigger and optional clear button. Combines search and selection
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `variant` | `"ghost"` | - |
 | `showTrigger` | `boolean` | `true` |
 | `showClear` | `boolean` | `false` |
 | `disabled` | `boolean` | - |
@@ -274,6 +301,19 @@ Opens the menu on click.
 | --- | --- | --- |
 | `className` | `string` | - |
 | `asChild` | `boolean` | - |
+
+### ComboboxButtonTrigger
+
+Button trigger that displays the selected value or a placeholder.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `placeholder` | `ReactNode` | `"Select an option"` |
+| `showTrigger` | `boolean` | `true` |
+| `size` | [ButtonSize](/docs/components/button#size) | `"md"` |
+| `variant` | [ButtonVariant](/docs/components/button#variants) | `"outline"` |
+| `children` | `ReactNode` | - |
+| `className` | `string` | - |
 
 ### ComboboxClear
 
@@ -338,6 +378,40 @@ Shown when no options match the current filter. Use for empty state.
 | --- | --- | --- |
 | `className` | `string` | - |
 | `children` | `ReactNode` | `No results found.` |
+
+### ComboboxRootProvider
+
+Provides a Combobox API created with `useCombobox` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseComboboxReturn` | **required** |
+
+### ComboboxContext
+
+Render-prop access to the surrounding component API.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: unknown) => React.ReactNode` | **required** |
+
+### ComboboxFieldInput
+
+Public ComboboxFieldInput component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### ComboboxPositioner
+
+Public ComboboxPositioner component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 ---
 

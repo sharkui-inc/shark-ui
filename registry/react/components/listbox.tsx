@@ -3,7 +3,8 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   Listbox as ArkListbox,
-  useListboxContext,
+  useListbox as useArkListbox,
+  useListboxContext as useArkListboxContext,
 } from "@ark-ui/react/listbox";
 import { CheckIcon } from "lucide-react";
 import type React from "react";
@@ -21,7 +22,9 @@ import {
   menuItemIndicatorVariants,
 } from "@/registry/react/components/menu";
 
-export const useListbox = useListboxContext;
+export const useListbox = useArkListbox;
+export const useListboxContext = useArkListboxContext;
+export const ListboxRootProvider = ArkListbox.RootProvider;
 
 export const Listbox: ArkListbox.RootComponent = (props) => {
   const { className, ...rest } = props;

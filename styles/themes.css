@@ -1053,7 +1053,7 @@ body.primary-tone-dark.theme-rose {
     var(--theme-color-500) 88%,
     var(--theme-color-950)
   );
-  --accent: color-mix(in srgb, var(--theme-color-950) 4%, var(--background));
+  --accent: color-mix(in srgb, var(--theme-color-950) 8%, var(--background));
   --accent-foreground: var(--theme-color-800);
   --border: color-mix(in srgb, var(--theme-color-950) 8%, var(--background));
   --input: color-mix(in srgb, var(--theme-color-950) 10%, var(--background));
@@ -1065,7 +1065,7 @@ body.primary-tone-dark.theme-rose {
   );
   --sidebar-accent: color-mix(
     in srgb,
-    var(--theme-color-950) 4%,
+    var(--theme-color-950) 8%,
     var(--sidebar)
   );
   --sidebar-accent-foreground: var(--theme-color-800);
@@ -1110,7 +1110,7 @@ body.primary-tone-dark.theme-rose {
       var(--theme-color-500) 88%,
       var(--theme-color-50)
     );
-    --accent: color-mix(in srgb, var(--theme-color-50) 4%, var(--background));
+    --accent: color-mix(in srgb, var(--theme-color-50) 8%, var(--background));
     --accent-foreground: var(--theme-color-100);
     --border: color-mix(in srgb, var(--theme-color-50) 6%, var(--background));
     --input: color-mix(in srgb, var(--theme-color-50) 8%, var(--background));
@@ -1126,7 +1126,7 @@ body.primary-tone-dark.theme-rose {
     );
     --sidebar-accent: color-mix(
       in srgb,
-      var(--theme-color-50) 4%,
+      var(--theme-color-50) 8%,
       var(--sidebar)
     );
     --sidebar-accent-foreground: var(--theme-color-100);

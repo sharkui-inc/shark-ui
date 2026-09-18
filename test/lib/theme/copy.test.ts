@@ -10,7 +10,6 @@ import {
   createThemeExportCss,
   createThemeFontInstallCommand,
   getThemeFontInstall,
-  uniqueThemeFonts,
 } from "@/lib/theme/copy";
 import { getThemeFont } from "@/lib/theme/fonts";
 
@@ -30,52 +29,30 @@ const base = byValue(BASE_COLORS, "neutral");
 const radius = byValue(BORDER_RADIUS, "md");
 
 describe("theme copy helpers", () => {
-  it("imports each selected font once and writes font variables", () => {
+  it("exports only the selected theme tokens", () => {
     const css = createThemeExportCss(
       primary.cssVars,
       base.cssVars,
-      radius.cssVars,
-      {
-        fontHeading: "figtree",
-        fontSans: "hanken-grotesk",
-      }
+      radius.cssVars
     );
-    const sans = getThemeFont("hanken-grotesk");
-    const heading = getThemeFont("figtree");
 
-    assert.equal(
-      css.startsWith(
-        `@import url("${sans.cssUrl}");\n@import url("${heading.cssUrl}");`
-      ),
-      true
-    );
-    assert.ok(css.includes("--font-sans: 'Hanken Grotesk', sans-serif;"));
-    assert.ok(css.includes("--font-heading: 'Figtree', sans-serif;"));
+    assert.equal(css.includes("@import"), false);
+    assert.equal(css.includes("--font-sans"), false);
+    assert.equal(css.includes("--font-heading"), false);
     assert.ok(css.includes(":root {"));
     assert.ok(css.includes("--background:"));
     assert.ok(css.includes(".dark {"));
   });
 
-  it("dedupes font imports when heading and sans share a face", () => {
+  it("includes the selected primary tone", () => {
     const css = createThemeExportCss(
       primary.cssVars,
       base.cssVars,
       radius.cssVars,
-      {
-        fontHeading: "inter",
-        fontSans: "inter",
-      }
+      "dark"
     );
-    const inter = getThemeFont("inter");
-    const importCount = css.split(`@import url("${inter.cssUrl}");`).length - 1;
 
-    assert.equal(importCount, 1);
-    assert.deepEqual(
-      uniqueThemeFonts({ fontHeading: "inter", fontSans: "inter" }).map(
-        (font) => font.value
-      ),
-      ["inter"]
-    );
+    assert.ok(css.includes("--background:"));
   });
 
   it("maps variable Google fonts to fontsource-variable packages", () => {

@@ -19,7 +19,7 @@ const CollapsibleRtl = () => {
         <Collapsible
           className="flex w-[350px] flex-col gap-2"
           dir="rtl"
-          onOpenChange={setIsOpen}
+          onOpenChange={({ open }) => setIsOpen(open)}
           open={isOpen}
         >
           <div className="flex items-center justify-between gap-4 px-4">

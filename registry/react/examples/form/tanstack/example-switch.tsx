@@ -22,7 +22,7 @@ import {
 } from "@/registry/react/components/field";
 import { Switch } from "@/registry/react/components/switch";
 
-export const Example = () => {
+const Example = () => {
   const form = useForm({
     defaultValues: {
       twoFactor: false,

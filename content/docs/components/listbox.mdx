@@ -310,9 +310,30 @@ Shown when the list has no items. Use for empty states.
 | `asChild` | `boolean` | - |
 | `className` | `string` | - |
 
+
 ### ListboxShortcut
 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | - |
 Optional keyboard shortcut hint shown next to an item.
+
+### ListboxRootProvider
+
+Provides a Listbox API created with `useListbox` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseListboxReturn` | **required** |
+
+### ListboxItemDescription
+
+Public ListboxItemDescription component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 ---
 

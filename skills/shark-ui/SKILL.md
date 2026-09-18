@@ -29,7 +29,7 @@ Do not invent Shark or Ark props.
 4. Select / Combobox / Listbox / Autocomplete: [`references/collections.md`](references/collections.md)
 5. Forms: [`references/forms.md`](references/forms.md)
 6. Overlay, menu, card parts: [`references/composition.md`](references/composition.md)
-7. Chat UI: [`references/ai-elements.md`](references/ai-elements.md)
+7. Chat UI: [`references/ai-components.md`](references/ai-components.md)
 8. Editing registry `tv()`: [`references/styling.md`](references/styling.md)
 
 Consumer apps import from `@/components/ui/<name>`. In-repo examples import from `@/registry/react/components/<name>`.

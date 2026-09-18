@@ -1,4 +1,4 @@
-import { GalleryVerticalEndIcon } from "lucide-react";
+import { WavesHorizontalIcon } from "lucide-react";
 import type { Metadata } from "next";
 import { createWavesAvatar } from "@/lib/dicebear";
 import { createMetadata } from "@/lib/metadata";
@@ -24,7 +24,7 @@ const AuthTemplate = () => (
       <div className="flex justify-center gap-2 md:justify-start">
         <a className="flex items-center gap-2 font-medium" href="#">
           <IconTile aria-hidden="true" size="xs">
-            <GalleryVerticalEndIcon aria-hidden className="size-4" />
+            <WavesHorizontalIcon aria-hidden className="size-4" />
           </IconTile>
           Onda Inc.
         </a>

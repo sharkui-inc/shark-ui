@@ -4,6 +4,11 @@ import { ark } from "@ark-ui/react/factory";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/registry/react/components/tooltip";
 
 export const MessageGroup = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
@@ -113,11 +118,14 @@ export const MessageActions = (props: React.ComponentProps<typeof ark.div>) => {
 
 interface MessageActionProps extends React.ComponentProps<typeof Button> {
   label?: string;
+  /** The tooltip to display for icon-only actions. */
+  tooltip?: string;
 }
 
 export const MessageAction = (props: MessageActionProps) => {
   const {
     label,
+    tooltip,
     size = "icon-xs",
     type = "button",
     variant = "ghost",
@@ -125,9 +133,9 @@ export const MessageAction = (props: MessageActionProps) => {
     ...rest
   } = props;
 
-  return (
+  const button = (
     <Button
-      aria-label={label}
+      aria-label={label ?? tooltip}
       data-slot="message-action"
       size={size}
       type={type}
@@ -136,5 +144,14 @@ export const MessageAction = (props: MessageActionProps) => {
     >
       {children}
     </Button>
+  );
+
+  return tooltip ? (
+    <Tooltip>
+      <TooltipTrigger asChild>{button}</TooltipTrigger>
+      <TooltipContent>{tooltip}</TooltipContent>
+    </Tooltip>
+  ) : (
+    button
   );
 };

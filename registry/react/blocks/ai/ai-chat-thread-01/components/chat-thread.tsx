@@ -99,6 +99,7 @@ interface ApprovalPlanStep {
 export interface ChatMessage {
   approvalPlan?: {
     steps: ApprovalPlanStep[];
+    summary?: string;
     title: string;
   };
   attachment?: ChatMessageAttachment;

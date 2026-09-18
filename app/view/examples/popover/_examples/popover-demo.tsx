@@ -15,8 +15,8 @@ import {
 
 const PopoverDemo = () => (
   <Popover>
-    <PopoverTrigger render={<Button variant="outline" />}>
-      Open popover
+    <PopoverTrigger asChild>
+      <Button variant="outline">Open popover</Button>
     </PopoverTrigger>
 
     <PopoverContent className="w-80">

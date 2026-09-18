@@ -3,11 +3,14 @@
 import {
   ImageCropper as ArkImageCropper,
   useImageCropper as useArkImageCropper,
+  useImageCropperContext as useArkImageCropperContext,
 } from "@ark-ui/react/image-cropper";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
 export const useImageCropper = useArkImageCropper;
+export const useImageCropperContext = useArkImageCropperContext;
+export const ImageCropperRootProvider = ArkImageCropper.RootProvider;
 
 export const ImageCropperContext = (
   props: React.ComponentProps<typeof ArkImageCropper.Context>

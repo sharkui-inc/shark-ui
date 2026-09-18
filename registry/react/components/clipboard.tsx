@@ -2,7 +2,8 @@
 
 import {
   Clipboard as ArkClipboard,
-  useClipboardContext,
+  useClipboard as useArkClipboard,
+  useClipboardContext as useArkClipboardContext,
 } from "@ark-ui/react/clipboard";
 import { CheckIcon, ClipboardIcon } from "lucide-react";
 import type React from "react";
@@ -11,7 +12,9 @@ import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { inputVariants } from "@/registry/react/components/input";
 
-export const useClipboard = useClipboardContext;
+export const useClipboard = useArkClipboard;
+export const useClipboardContext = useArkClipboardContext;
+export const ClipboardRootProvider = ArkClipboard.RootProvider;
 export const ClipboardContext = ArkClipboard.Context;
 
 interface ClipboardProps

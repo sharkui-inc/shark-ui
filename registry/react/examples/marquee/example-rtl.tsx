@@ -16,8 +16,8 @@ import {
 const Example = () => (
   <Marquee>
     <MarqueeContent>
-      {items.map((Icon, index) => (
-        <MarqueeItem key={index}>
+      {items.map((Icon) => (
+        <MarqueeItem key={Icon.name}>
           <Card className="[--space:--spacing(8)]">
             <CardContent>
               <Icon className="size-10" />

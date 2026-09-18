@@ -92,7 +92,7 @@ const ChartDemo = () => {
 
               return (
                 <button
-                  className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-l px-6 py-4 text-left data-[active=true]:bg-muted/50 sm:px-8 sm:py-6"
+                  className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-l px-6 py-4 text-left data-[active=true]:bg-muted/48 sm:px-8 sm:py-6"
                   data-active={activeChart === chart}
                   key={chart}
                   onClick={() => setActiveChart(chart)}
@@ -144,7 +144,7 @@ const ChartDemo = () => {
                 <ChartTooltipContent
                   className="w-[150px]"
                   labelFormatter={(value) =>
-                    new Date(value).toLocaleDateString("en-US", {
+                    new Date(String(value)).toLocaleDateString("en-US", {
                       day: "numeric",
                       month: "short",
                       year: "numeric",

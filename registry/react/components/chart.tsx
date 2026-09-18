@@ -31,8 +31,11 @@ export type ChartConfig = Record<
   }
 >;
 
-type ChartTooltipContentProps = React.ComponentProps<typeof Tooltip> &
-  React.ComponentProps<"div"> & {
+type ChartTooltipContentProps = Omit<
+  React.ComponentProps<typeof Tooltip>,
+  "content"
+> &
+  Omit<React.ComponentProps<"div">, "content"> & {
     hideIndicator?: boolean;
     hideLabel?: boolean;
     indicator?: "dashed" | "dot" | "line";
@@ -40,7 +43,7 @@ type ChartTooltipContentProps = React.ComponentProps<typeof Tooltip> &
     nameKey?: string;
   } & Omit<
     DefaultTooltipContentProps<TooltipValueType, TooltipNameType>,
-    "accessibilityLayer"
+    "accessibilityLayer" | "content"
   >;
 
 type ChartLegendContentProps = React.ComponentProps<"div"> &
@@ -134,12 +137,9 @@ export const ChartStyle = ({
     return null;
   }
 
-  return (
-    <style
-      dangerouslySetInnerHTML={{
-        __html: Object.entries(THEMES)
-          .map(
-            ([theme, prefix]) => `
+  const styles = Object.entries(THEMES)
+    .map(
+      ([theme, prefix]) => `
             ${prefix} [data-chart=${id}] {
             ${colorConfig
               .map(([key, itemConfig]) => {
@@ -151,11 +151,10 @@ export const ChartStyle = ({
               .join("\n")}
             }
             `
-          )
-          .join("\n"),
-      }}
-    />
-  );
+    )
+    .join("\n");
+
+  return <style>{styles}</style>;
 };
 
 const formatTooltipValue = (value: unknown) => {

@@ -11,7 +11,6 @@ import {
   Folder,
   Forward,
   Frame,
-  GalleryVerticalEnd,
   LogOut,
   Map as MapIcon,
   MoreHorizontal,
@@ -21,6 +20,7 @@ import {
   Sparkles,
   SquareTerminal,
   Trash2,
+  WavesHorizontalIcon,
 } from "lucide-react";
 import React from "react";
 import { SharkIcon } from "@/components/icons/shark";
@@ -174,8 +174,8 @@ const data = {
   ],
   teams: [
     {
-      logo: GalleryVerticalEnd,
-      name: "Onda Inc",
+      logo: WavesHorizontalIcon,
+      name: "Onda Inc.",
       plan: "مؤسسية",
     },
     {
@@ -229,7 +229,7 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
               <ChevronsUpDown className="ms-auto size-4" />
             </SidebarMenuButton>
           </MenuTrigger>
-          <MenuContent className="w-(--reference-width) min-w-56">
+          <MenuContent className="min-w-56">
             <MenuGroup>
               <MenuGroupLabel className="text-muted-foreground text-xs">
                 الفرق
@@ -241,11 +241,7 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
                   onClick={() => setActiveTeam(team)}
                   value={team.name}
                 >
-                  <IconTile
-                    aria-hidden="true"
-                    className="rounded-md border-input bg-transparent shadow-none"
-                    size="xs"
-                  >
+                  <IconTile aria-hidden="true" size="xs" variant="secondary">
                     <team.logo className="size-3.5 shrink-0" />
                   </IconTile>
                   {team.name}
@@ -474,28 +470,26 @@ const NavUser = ({ user }: NavUserProps) => {
 
 const AppSidebar = () => (
   <LocaleProvider locale="ar-SA">
-    <div dir="rtl" lang="ar">
-      <SidebarProvider>
-        <Sidebar collapsible="icon" placement="right">
-          <SidebarHeader>
-            <TeamSwitcher teams={data.teams} />
-          </SidebarHeader>
-          <SidebarContent>
-            <NavMain items={data.navMain} />
-            <NavProjects projects={data.projects} />
-          </SidebarContent>
-          <SidebarFooter>
-            <NavUser user={data.user} />
-          </SidebarFooter>
-          <SidebarRail />
-        </Sidebar>
-        <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2 px-4 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 motion-reduce:transition-none">
-            <SidebarTrigger className="-ms-1" />
-          </header>
-        </SidebarInset>
-      </SidebarProvider>
-    </div>
+    <SidebarProvider dir="rtl" lang="ar">
+      <Sidebar collapsible="icon" placement="right">
+        <SidebarHeader>
+          <TeamSwitcher teams={data.teams} />
+        </SidebarHeader>
+        <SidebarContent>
+          <NavMain items={data.navMain} />
+          <NavProjects projects={data.projects} />
+        </SidebarContent>
+        <SidebarFooter>
+          <NavUser user={data.user} />
+        </SidebarFooter>
+        <SidebarRail />
+      </Sidebar>
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 px-4 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 motion-reduce:transition-none">
+          <SidebarTrigger className="-ms-1" />
+        </header>
+      </SidebarInset>
+    </SidebarProvider>
   </LocaleProvider>
 );
 

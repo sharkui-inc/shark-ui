@@ -48,7 +48,7 @@ const ItemDropdown = () => (
         <ChevronDownIcon data-icon="inline-end" />
       </Button>
     </MenuTrigger>
-    <MenuContent align="end" className="w-72">
+    <MenuContent className="w-72">
       <MenuGroup>
         {people.map((person) => (
           <MenuItem key={person.username} value={person.username}>

@@ -118,9 +118,7 @@ Use `variant` to change the visual style of the toggle buttons.
 
 ## Pill
 
-The `pill` prop creates fully rounded toggle groups. 
-
-With `spacing={0}`, the group becomes a segmented pill control. With spacing, each item is individually pill-shaped.
+The `pill` prop creates a fully rounded segmented toggle group.
 
 <ComponentPreview componentName="toggle-group" fileName="example-pill" />
 
@@ -170,9 +168,9 @@ Root component. Provides shared variant and size to child toggles via context.
 | `disabled` | `boolean` | `false` |
 | `className` | `string` | - |
 
-| Attribute | Default |
-| --- | --- |
-| `--gap` | Set from the `spacing` prop (default `0`) |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--gap` | CSS custom property | `0` |
 
 ### ToggleGroupItem
 
@@ -184,6 +182,14 @@ Single toggle in the group. Uses [Toggle](/docs/components/toggle) internally.
 | `disabled` | `boolean` | `false` |
 | `className` | `string` | - |
 | `aria-label` | `string` | - |
+
+### ToggleGroupRootProvider
+
+Provides a ToggleGroup API created with `useToggleGroup` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseToggleGroupReturn` | **required** |
 
 ---
 

@@ -12,10 +12,14 @@ const Example = () => (
   <Steps className="w-full max-w-md" count={items.length}>
     <StepsList>
       {items.map((item, index) => (
-        <StepsItem index={index} key={index}>
+        <StepsItem index={index} key={item.id}>
           <StepsTrigger disabled>
             <StepsIndicator>
-              {item ? <Loader2Icon className="animate-spin" /> : index + 1}
+              {item.loading ? (
+                <Loader2Icon className="animate-spin" />
+              ) : (
+                index + 1
+              )}
             </StepsIndicator>
           </StepsTrigger>
 
@@ -26,6 +30,10 @@ const Example = () => (
   </Steps>
 );
 
-const items = [true, false, false];
+const items = [
+  { id: "loading", loading: true },
+  { id: "review", loading: false },
+  { id: "complete", loading: false },
+];
 
 export default Example;

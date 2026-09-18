@@ -29,7 +29,7 @@ import {
 } from "@/registry/react/components/number-input";
 import { toast } from "@/registry/react/components/toast";
 
-export const Example = () => {
+const Example = () => {
   const form = useForm({
     defaultValues: {
       expectedSalary: undefined,

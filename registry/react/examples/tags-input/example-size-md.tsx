@@ -12,10 +12,10 @@ const Example = () => (
     <FieldLabel>Frameworks</FieldLabel>
     <TagsInput className="w-full" defaultValue={defaultValue} size="md">
       <TagsInputContext>
-        {({ value }) =>
-          value.map((value, index) => (
-            <TagsInputItem index={index} key={value} value={value}>
-              {value}
+        {({ value: tags }) =>
+          tags.map((tag, index) => (
+            <TagsInputItem index={index} key={tag} value={tag}>
+              {tag}
             </TagsInputItem>
           ))
         }

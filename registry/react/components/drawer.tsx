@@ -3,7 +3,8 @@
 import {
   Drawer as ArkDrawer,
   DrawerContext,
-  useDrawerContext,
+  useDrawer as useArkDrawer,
+  useDrawerContext as useArkDrawerContext,
 } from "@ark-ui/react/drawer";
 import { ark } from "@ark-ui/react/factory";
 import { Portal } from "@ark-ui/react/portal";
@@ -15,7 +16,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
-export const useDrawer = useDrawerContext;
+export const useDrawer = useArkDrawer;
+export const useDrawerContext = useArkDrawerContext;
+export const DrawerRootProvider = ArkDrawer.RootProvider;
 
 interface DrawerModalContextProps {
   /**
@@ -457,8 +460,8 @@ export const DrawerBody = (props: DrawerBodyProps) => {
       <ark.div
         className={cn(
           "p-(--space) text-center",
-          "in-[[data-slot=drawer-content]:has([data-slot=drawer-header])]:pt-0",
-          "group-data-[swipe-direction=down]/drawer:in-[[data-slot=drawer-content]:not(:has([data-slot=drawer-header]))]:pt-0",
+          "in-[[data-slot=drawer-content]:has([data-slot=drawer-header]:not(.sr-only))]:pt-0",
+          "group-data-[swipe-direction=down]/drawer:in-[[data-slot=drawer-content]:not(:has([data-slot=drawer-header]:not(.sr-only)))]:pt-0",
           "in-[[data-slot=drawer-content]:has([data-slot=drawer-footer]:not(.border-t))]:pb-1",
           className
         )}

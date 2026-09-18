@@ -125,7 +125,7 @@ const command = [
 ].join("\n");
 
 const facts = [
-  { label: "Repository", value: "acme/storefront" },
+  { label: "Repository", value: "onda/storefront" },
   { label: "Command", value: "pnpm test" },
 ] as const;
 

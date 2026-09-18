@@ -1,12 +1,19 @@
 "use client";
 
+import { createWavesAvatar } from "@/lib/dicebear";
 import { Alert, AlertDescription } from "@/registry/react/components/alert";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/react/components/avatar";
 import { Button } from "@/registry/react/components/button";
 import {
   Item,
   ItemContent,
   ItemDescription,
   ItemGroup,
+  ItemMedia,
   ItemTitle,
 } from "@/registry/react/components/item";
 import { Spinner } from "@/registry/react/components/spinner";
@@ -49,7 +56,7 @@ const UseAsyncListDemo = () => {
   };
 
   return (
-    <div className="flex w-full max-w-md flex-col gap-4">
+    <div className="flex w-full max-w-md flex-col gap-3">
       <div className="flex items-center justify-between gap-2">
         <output className="text-muted-foreground text-sm">
           Loaded {list.items.length} posts
@@ -76,14 +83,26 @@ const UseAsyncListDemo = () => {
           <Spinner /> Loading
         </div>
       )}
-      <ItemGroup className="max-h-80 gap-2 overflow-y-auto">
+      <ItemGroup className="max-h-64 gap-2 overflow-y-auto">
         {list.items.map((post) => (
-          <Item key={post.id} role="listitem" variant="outline">
+          <Item
+            className="[--space:--spacing(2)]"
+            key={post.id}
+            role="listitem"
+            variant="outline"
+          >
+            <ItemMedia>
+              <Avatar>
+                <AvatarImage
+                  alt={`Author ${post.userId}`}
+                  src={createWavesAvatar(`author-${post.userId}`, "orange")}
+                />
+                <AvatarFallback>{post.userId}</AvatarFallback>
+              </Avatar>
+            </ItemMedia>
             <ItemContent>
-              <ItemTitle className="line-clamp-none">{post.title}</ItemTitle>
-              <ItemDescription className="line-clamp-none">
-                {post.body}
-              </ItemDescription>
+              <ItemTitle>{post.title}</ItemTitle>
+              <ItemDescription>{post.body}</ItemDescription>
             </ItemContent>
           </Item>
         ))}

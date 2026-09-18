@@ -89,7 +89,7 @@ const ComposeMenu = ({
   items: readonly ComposeMenuItem[];
   label: string;
 }) => (
-  <Menu className="contents" positioning={{ placement: "bottom-start" }}>
+  <Menu positioning={{ placement: "bottom-start" }}>
     <MenuTrigger asChild>
       <Button
         aria-label={label}

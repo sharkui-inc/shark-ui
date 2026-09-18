@@ -9,10 +9,10 @@ const TooltipSides = () => (
   <div className="flex flex-wrap gap-2">
     {(["left", "top", "bottom", "right"] as const).map((side) => (
       <Tooltip key={side} positioning={{ placement: side }}>
-        <TooltipTrigger
-          render={<Button className="w-fit capitalize" variant="outline" />}
-        >
-          {side}
+        <TooltipTrigger asChild>
+          <Button className="w-fit capitalize" variant="outline">
+            {side}
+          </Button>
         </TooltipTrigger>
         <TooltipContent>
           <p>Add to library</p>

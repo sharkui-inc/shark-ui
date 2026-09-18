@@ -4,7 +4,7 @@ import { Separator } from "@/registry/react/components/separator";
 
 const tags = Array.from(
   { length: 50 },
-  (_, i, a) => `v1.2.0-beta.${a.length - i}`
+  (_, i) => `v1.2.0-beta.${50 - i}`
 );
 
 const ScrollAreaDemo = () => (

@@ -13,7 +13,7 @@ const CardEdgeToEdge = () => (
       title="Terms of Service"
     />
     <CardContent className="-mb-(--space)">
-      <div className="-mx-(--space) max-h-48 space-y-4 overflow-y-scroll border-t bg-muted/50 px-(--space) py-4 text-sm leading-relaxed">
+      <div className="-mx-(--space) max-h-48 space-y-4 overflow-y-scroll border-t bg-muted/48 px-(--space) py-4 text-sm leading-relaxed">
         <p>
           These terms govern your use of the workspace, including access to
           shared documents, project files, and collaboration tools.

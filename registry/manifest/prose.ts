@@ -64,9 +64,12 @@ const css = {
     },
     ".prose figure:not(.not-prose figure) img": {
       "border-radius": "var(--radius)",
-      "margin-bottom": "0",
-      "margin-top": "0",
     },
+    ".prose figure:not(.not-prose figure) img, .prose figure:not(.not-prose figure) iframe":
+      {
+        "margin-bottom": "0",
+        "margin-top": "0",
+      },
     ".prose h1:not(.not-prose h1)": {
       "font-size": "var(--text-2xl)",
       "font-weight": "800",
@@ -138,7 +141,7 @@ const css = {
       "margin-bottom": "calc(var(--spacing) * 10)",
       "margin-top": "calc(var(--spacing) * 10)",
     },
-    ".prose img:not(.not-prose img), .prose picture:not(.not-prose picture), .prose video:not(.not-prose video)":
+    ".prose img:not(.not-prose img), .prose picture:not(.not-prose picture), .prose video:not(.not-prose video), .prose iframe:not(.not-prose iframe)":
       {
         "margin-bottom": "calc(var(--spacing) * 6)",
         "margin-top": "calc(var(--spacing) * 6)",

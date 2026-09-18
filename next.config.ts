@@ -23,7 +23,7 @@ const config: NextConfig = {
   async rewrites() {
     return [
       {
-        destination: "/llms.mdx/docs",
+        destination: "/llms.mdx/docs/index",
         source: "/docs.md",
       },
       {

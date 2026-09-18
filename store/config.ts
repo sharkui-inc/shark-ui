@@ -2,11 +2,16 @@ import { atom, useSetAtom } from "jotai";
 import { useAtomValueRawSync } from "jotai/react";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
 import {
+  type PackageManager,
+  packageManagers,
+} from "@/lib/installation-command";
+import {
   DEFAULT_THEME_CONFIG,
   normalizeThemeConfig,
   type ThemeConfig,
 } from "@/lib/theme/config";
 
+export type { PackageManager } from "@/lib/installation-command";
 export type {
   BaseColor,
   BorderRadius,
@@ -26,8 +31,6 @@ export {
   DEFAULT_THEME_LOCKS,
 } from "@/lib/theme/config";
 
-export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
-
 export type InstallationMethod = "cli" | "manual";
 
 export type Config = ThemeConfig & {
@@ -35,7 +38,7 @@ export type Config = ThemeConfig & {
   packageManager: PackageManager;
 };
 
-export const DEFAULT_PACKAGE_MANAGER: PackageManager = "pnpm";
+export const DEFAULT_PACKAGE_MANAGER: PackageManager = packageManagers[0];
 export const DEFAULT_INSTALLATION_METHOD: InstallationMethod = "cli";
 
 const defaultConfig: Config = {
@@ -76,9 +79,7 @@ export const normalizeConfig = (
   };
 };
 
-const configStorage = createJSONStorage<Config>(() =>
-  typeof window === "undefined" ? undefined : localStorage
-);
+const configStorage = createJSONStorage<Config>(() => localStorage);
 
 const storage = {
   ...configStorage,

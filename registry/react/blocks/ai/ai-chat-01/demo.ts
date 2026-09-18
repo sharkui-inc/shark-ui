@@ -139,11 +139,11 @@ export const MESSAGE_EXTRAS: Record<string, DemoMessageExtras> = {
     },
     sources: [
       {
-        href: "https://shark-ui.com/docs/ai-elements/message-scroller",
+        href: "https://shark-ui.com/docs/ai-components/message-scroller",
         title: "Message Scroller",
       },
       {
-        href: "https://shark-ui.com/docs/ai-elements/prompt-input",
+        href: "https://shark-ui.com/docs/ai-components/prompt-input",
         title: "Prompt Input",
       },
     ],
@@ -195,11 +195,3 @@ export const chat = createChat({ adapter: "ai-sdk" })
     "Approve this rollout and I will apply the viewport pin, add the regression test, and document the composer layout.",
     { delayMs: 280, id: "assistant-plan" }
   );
-
-export const getMessageText = (message: {
-  parts: readonly { text?: string; type: string }[];
-}) =>
-  message.parts
-    .filter((part) => part.type === "text")
-    .map((part) => part.text ?? "")
-    .join("");

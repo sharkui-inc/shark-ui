@@ -14,8 +14,15 @@ import {
   PlusIcon,
   ShieldAlertIcon,
 } from "lucide-react";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/registry/react/components/button";
+import {
+  Combobox,
+  ComboboxButtonTrigger,
+  ComboboxContent,
+  ComboboxItem,
+  ComboboxList,
+} from "@/registry/react/components/combobox";
 import {
   Context,
   ContextBody,
@@ -27,7 +34,6 @@ import {
   ContextTrigger,
   ContextUsageRow,
 } from "@/registry/react/components/context";
-import { Input } from "@/registry/react/components/input";
 import {
   Menu,
   MenuContent,
@@ -36,13 +42,6 @@ import {
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
-import {
-  ModelSelector,
-  ModelSelectorContent,
-  ModelSelectorItem,
-  ModelSelectorList,
-  ModelSelectorTrigger,
-} from "@/registry/react/components/model-selector";
 import {
   PromptInput,
   PromptInputBottom,
@@ -71,23 +70,7 @@ const PromptInputDemo = () => {
   const [model, setModel] = useState(["terra-5.6"]);
   const [effort, setEffort] = useState(["medium"]);
   const [access, setAccess] = useState(["full"]);
-  const [actionQuery, setActionQuery] = useState("");
   const { collection } = useListCollection({ initialItems: models });
-
-  const normalizedActionQuery = actionQuery.trim().toLowerCase();
-  const visibleActions = actionItems.filter((action) =>
-    action.label.toLowerCase().includes(normalizedActionQuery)
-  );
-  const contextActions = visibleActions.filter(
-    (action) => action.group === "context"
-  );
-  const agentActions = visibleActions.filter(
-    (action) => action.group === "agent"
-  );
-  const actionSections = [
-    { actions: contextActions, id: "context", title: "Add context" },
-    { actions: agentActions, id: "agent", title: "Agent actions" },
-  ].filter((section) => section.actions.length > 0);
 
   return (
     <div className="flex w-full max-w-lg flex-col gap-3">
@@ -115,35 +98,24 @@ const PromptInputDemo = () => {
                   <PlusIcon aria-hidden="true" />
                 </PromptInputButton>
               </MenuTrigger>
-              <MenuContent className="w-80">
-                <Input
-                  aria-label="Search prompt actions"
-                  autoFocus
-                  className="h-8 border-0 px-2 text-sm shadow-none focus-visible:border-transparent focus-visible:ring-0"
-                  onChange={(event) => setActionQuery(event.target.value)}
-                  onKeyDown={(event) => event.stopPropagation()}
-                  placeholder="Search actions..."
-                  type="search"
-                  value={actionQuery}
-                />
-                {actionSections.map((section, index) => (
-                  <Fragment key={section.id}>
-                    {index > 0 ? <MenuSeparator /> : null}
-                    <MenuGroup heading={section.title}>
-                      {section.actions.map((action) => (
-                        <MenuItem key={action.value} value={action.value}>
-                          {action.icon}
-                          {action.label}
-                        </MenuItem>
-                      ))}
-                    </MenuGroup>
-                  </Fragment>
-                ))}
-                {visibleActions.length === 0 ? (
-                  <p className="px-2 py-1.5 text-muted-foreground text-xs">
-                    No matching actions.
-                  </p>
-                ) : null}
+              <MenuContent>
+                <MenuGroup heading="Add context">
+                  {contextActions.map((action) => (
+                    <MenuItem key={action.value} value={action.value}>
+                      {action.icon}
+                      {action.label}
+                    </MenuItem>
+                  ))}
+                </MenuGroup>
+                <MenuSeparator />
+                <MenuGroup heading="Agent actions">
+                  {agentActions.map((action) => (
+                    <MenuItem key={action.value} value={action.value}>
+                      {action.icon}
+                      {action.label}
+                    </MenuItem>
+                  ))}
+                </MenuGroup>
               </MenuContent>
             </Menu>
             <Select
@@ -170,22 +142,28 @@ const PromptInputDemo = () => {
               </SelectContent>
             </Select>
           </PromptInputTools>
-          <ModelSelector
+          <Combobox
             collection={collection}
             onValueChange={(details) => setModel(details.value)}
+            positioning={{ placement: "top" }}
             value={model}
           >
-            <ModelSelectorTrigger size="sm" variant="ghost" />
-            <ModelSelectorContent>
-              <ModelSelectorList>
+            <ComboboxButtonTrigger
+              placeholder="Model"
+              showTrigger={false}
+              size="sm"
+              variant="ghost"
+            />
+            <ComboboxContent className="max-h-72 w-52">
+              <ComboboxList>
                 {collection.items.map((item) => (
-                  <ModelSelectorItem item={item} key={item.value}>
+                  <ComboboxItem item={item} key={item.value}>
                     {item.label}
-                  </ModelSelectorItem>
+                  </ComboboxItem>
                 ))}
-              </ModelSelectorList>
-            </ModelSelectorContent>
-          </ModelSelector>
+              </ComboboxList>
+            </ComboboxContent>
+          </Combobox>
           <Select
             collection={effortCollection}
             onValueChange={(details) => setEffort(details.value)}
@@ -349,6 +327,11 @@ const actionItems = [
     value: "ask",
   },
 ];
+
+const contextActions = actionItems.filter(
+  (action) => action.group === "context"
+);
+const agentActions = actionItems.filter((action) => action.group === "agent");
 
 const contextUsage = [
   { title: "Input", value: 4200 },

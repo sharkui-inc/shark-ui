@@ -1,6 +1,10 @@
 "use client";
 
-import { Dialog as ArkDialog, useDialogContext } from "@ark-ui/react/dialog";
+import {
+  Dialog as ArkDialog,
+  useDialog as useArkDialog,
+  useDialogContext as useArkDialogContext,
+} from "@ark-ui/react/dialog";
 import { Portal } from "@ark-ui/react/portal";
 import { XIcon } from "lucide-react";
 import type React from "react";
@@ -17,7 +21,9 @@ import {
   DialogTitle,
 } from "@/registry/react/components/dialog";
 
-export const useSheet = useDialogContext;
+export const useSheet = useArkDialog;
+export const useSheetContext = useArkDialogContext;
+export const SheetRootProvider = ArkDialog.RootProvider;
 
 export const Sheet = (props: React.ComponentProps<typeof Dialog>) => (
   <Dialog data-slot="sheet" {...props} />
@@ -204,7 +210,7 @@ export const SheetBody = (props: React.ComponentProps<typeof DialogBody>) => {
   return (
     <DialogBody
       className={cn(
-        "in-[[data-slot=sheet-content]:has([data-slot=sheet-header])]:pt-0",
+        "in-[[data-slot=sheet-content]:has([data-slot=sheet-header]:not(.sr-only))]:pt-0",
         className
       )}
       data-slot="sheet-body"

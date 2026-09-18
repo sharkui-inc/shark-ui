@@ -6,7 +6,8 @@ import { ComponentPreviewFrame } from "./component-preview-frame";
 
 interface ComponentPreviewProps extends ComponentPreviewExampleProps {
   /**
-   * Grow with content instead of locking the preview to 450px.
+   * Size the preview to its content with equal padding on all sides,
+   * instead of locking to a 450px frame that vertically centers short examples.
    *
    * @default false
    */

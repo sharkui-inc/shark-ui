@@ -53,14 +53,9 @@ const list = useAsyncList<User>({
 
   async load({ signal }) {
     const response = await fetch("/api/users", { signal });
-
-    if (!response.ok) throw new Error("Failed to load users");
-
     const items: User[] = await response.json();
 
-    return { 
-      items 
-    };
+    return { items };
   },
 });
 ```
@@ -69,39 +64,37 @@ const list = useAsyncList<User>({
 
 ### Infinite loading
 
-Implement pagination by returning a cursor that indicates more data is available.
+Return a `cursor` from `load`, then call `loadMore()`.
 
 <ComponentPreview componentName="use-async-list" fileName="example-infinite-loading" autoHeight />
 
 ### Filtering
 
-Filter data based on user input with automatic debouncing and loading states.
+Use `setFilterText` to filter the list.
 
 <ComponentPreview componentName="use-async-list" fileName="example-filter" autoHeight />
 
 ### Client-side sorting
 
-Sort data on the client side after loading it from the server.
+Pass `sort` to sort items after they load.
 
 <ComponentPreview componentName="use-async-list" fileName="example-sort-client-side" autoHeight />
 
 ### Server-side sorting
 
-Send sort parameters to the server and reload data when sorting changes.
+Read `sortDescriptor` in `load` to sort on the server.
 
 <ComponentPreview componentName="use-async-list" fileName="example-sort-server-side" autoHeight />
 
 ### Dependencies
 
-Automatically reload data when dependencies change, such as filter selections or external state.
+Pass `dependencies` to reload when those values change.
 
 <ComponentPreview componentName="use-async-list" fileName="example-dependencies" autoHeight />
 
 ## API Reference
 
 ### useAsyncList
-
-Direct export of Ark's `useAsyncList<T, C = string>`. Also exports the `UseAsyncListProps<T, C>` and `UseAsyncListReturn<T, C>` types.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -115,31 +108,6 @@ Direct export of Ark's `useAsyncList<T, C = string>`. Also exports the `UseAsync
 | `onSuccess` | `(details: { items: T[] }) => void` | `-` |
 | `onError` | `(details: { error: Error }) => void` | `-` |
 
-`autoReload` runs the initial load; changing `dependencies` reloads the list. The cursor type is the second generic parameter, e.g. `useAsyncList<Post, number>`.
-
-### Callback details
-
-#### load
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `signal` | `AbortSignal \| undefined` | `-` |
-| `filterText` | `string` | `-` |
-| `cursor` | `C \| undefined` | `-` |
-| `sortDescriptor` | `{ column: keyof T; direction: "ascending" \| "descending" } \| undefined` | `-` |
-
-Returns `{ items: T[]; cursor?: C }`.
-
-#### sort
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `items` | `T[]` | `-` |
-| `descriptor` | `{ column: keyof T; direction: "ascending" \| "descending" }` | `-` |
-| `filterText` | `string` | `-` |
-
-Returns `{ items: T[] }`.
-
 ### Return value
 
 | Prop | Type | Default |
@@ -149,16 +117,16 @@ Returns `{ items: T[] }`.
 | `sorting` | `boolean` | `-` |
 | `empty` | `boolean` | `-` |
 | `hasMore` | `boolean` | `-` |
-| `error` | `any` | `-` |
+| `error` | `Error \| undefined` | `-` |
 | `filterText` | `string` | `-` |
 | `sortDescriptor` | `{ column: keyof T; direction: "ascending" \| "descending" } \| undefined` | `-` |
 | `cursor` | `C \| undefined` | `-` |
-| `abort()` | `() => void` | `-` |
-| `reload()` | `() => void` | `-` |
-| `loadMore()` | `() => void` | `-` |
-| `sort(descriptor)` | `(descriptor: { column: keyof T; direction: "ascending" \| "descending" }) => void` | `-` |
-| `setFilterText(text)` | `(text: string) => void` | `-` |
-| `clearFilter()` | `() => void` | `-` |
+| `abort` | `() => void` | `-` |
+| `reload` | `() => void` | `-` |
+| `loadMore` | `() => void` | `-` |
+| `sort` | `(descriptor) => void` | `-` |
+| `setFilterText` | `(text: string) => void` | `-` |
+| `clearFilter` | `() => void` | `-` |
 
 ---
 

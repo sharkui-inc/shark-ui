@@ -8,22 +8,28 @@ import {
 const PopoverAlignments = () => (
   <div className="flex gap-6">
     <Popover positioning={{ placement: "bottom-start" }}>
-      <PopoverTrigger render={<Button size="sm" variant="outline" />}>
-        Start
+      <PopoverTrigger asChild>
+        <Button size="sm" variant="outline">
+          Start
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="w-40">Aligned to start</PopoverContent>
     </Popover>
 
     <Popover>
-      <PopoverTrigger render={<Button size="sm" variant="outline" />}>
-        Center
+      <PopoverTrigger asChild>
+        <Button size="sm" variant="outline">
+          Center
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="w-40">Aligned to center</PopoverContent>
     </Popover>
 
     <Popover positioning={{ placement: "bottom-end" }}>
-      <PopoverTrigger render={<Button size="sm" variant="outline" />}>
-        End
+      <PopoverTrigger asChild>
+        <Button size="sm" variant="outline">
+          End
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="w-40">Aligned to end</PopoverContent>
     </Popover>

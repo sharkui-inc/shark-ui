@@ -8,16 +8,6 @@ const Example = () => (
   </div>
 );
 
-const formats = [
-  "doc",
-  "docm",
-  "docx",
-  "epub",
-  "md",
-  "odt",
-  "rtf",
-  "tex",
-  "txt",
-] as const;
+const formats = ["doc", "docx", "epub", "md", "txt"] as const;
 
 export default Example;

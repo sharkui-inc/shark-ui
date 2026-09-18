@@ -127,14 +127,6 @@ export const chat = createChat({ adapter: "ai-sdk" })
     { delayMs: 280 }
   );
 
-export const getMessageText = (message: {
-  parts: readonly { text?: string; type: string }[];
-}) =>
-  message.parts
-    .filter((part) => part.type === "text")
-    .map((part) => part.text ?? "")
-    .join("");
-
 export const toPromptStatus = (status: string): PromptInputStatus => {
   switch (status) {
     case "error":

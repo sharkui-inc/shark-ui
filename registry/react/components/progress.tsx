@@ -2,13 +2,16 @@
 
 import {
   Progress as ArkProgress,
-  useProgressContext,
+  useProgress as useArkProgress,
+  useProgressContext as useArkProgressContext,
 } from "@ark-ui/react/progress";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { FieldLabel } from "@/registry/react/components/field";
 
-export const useProgress = useProgressContext;
+export const useProgress = useArkProgress;
+export const useProgressContext = useArkProgressContext;
+export const ProgressRootProvider = ArkProgress.RootProvider;
 
 interface ProgressProps
   extends Omit<React.ComponentProps<typeof ArkProgress.Root>, "value"> {

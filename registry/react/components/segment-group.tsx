@@ -2,14 +2,17 @@
 
 import {
   SegmentGroup as ArkSegmentGroup,
-  useSegmentGroupContext,
+  useSegmentGroup as useArkSegmentGroup,
+  useSegmentGroupContext as useArkSegmentGroupContext,
 } from "@ark-ui/react/segment-group";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { buttonControlVariants } from "@/registry/react/components/button";
 
-export const useSegmentGroup = useSegmentGroupContext;
+export const useSegmentGroup = useArkSegmentGroup;
+export const useSegmentGroupContext = useArkSegmentGroupContext;
+export const SegmentGroupRootProvider = ArkSegmentGroup.RootProvider;
 
 type SegmentGroupVariant = "default" | "underline";
 

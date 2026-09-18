@@ -58,98 +58,72 @@ import { Masonry, MasonryItem } from "@/components/ui/masonry";
 ```
 
 ```tsx
-<Masonry className="columns-1 sm:columns-2 lg:columns-3">
+<Masonry className="columns-1 gap-x-4 gap-y-6 sm:columns-2">
   <MasonryItem>{/* Content */}</MasonryItem>
   <MasonryItem>{/* Content */}</MasonryItem>
   <MasonryItem>{/* Content */}</MasonryItem>
 </Masonry>
 ```
 
-`Masonry` renders a semantic `ul` and `MasonryItem` renders an `li`. Keep items in their logical reading order. Controls inside each item retain their native keyboard behavior.
+## Reflow
 
-## Responsive columns
+Reflow is the process of recalculating the layout of the items in the masonry.
 
-Set the column count with Tailwind utilities on `Masonry`.
+### Stable
 
-```tsx
-<Masonry className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4">
-  {/* Items */}
-</Masonry>
-```
+Keeps items in their column when height changes.
 
-After hydration, Masonry places each item in the currently shortest column. Items keep that column when their height changes, so expanding content only moves items below it in the same column.
+<ComponentPreview componentName="masonry" fileName="example-reflow-stable" autoHeight />
 
-## Spacing
+### Balanced
 
-Use `--gap` to control the horizontal and vertical space between items. Its default is `--spacing(4)`.
+Rebalances columns on each layout pass.
 
-```tsx
-<Masonry
-  className="[--gap:--spacing(6)] columns-1 sm:columns-2 lg:columns-3"
->
-  {/* Items */}
-</Masonry>
-```
-
-## Constrained height
-
-Wrap the collection in [Scroll Area](/docs/components/scroll-area) when it needs a bounded height. This keeps the list semantics intact while allowing vertical scrolling.
-
-```tsx
-import { ScrollArea } from "@/components/ui/scroll-area";
-
-<ScrollArea
-  className="h-[min(32rem,70vh)] rounded-xl border"
-  orientation="vertical"
-  scrollFade
->
-  <Masonry className="columns-1 p-4 sm:columns-2 lg:columns-3">
-    {/* Items */}
-  </Masonry>
-</ScrollArea>
-```
-
-## Dynamic content
-
-Masonry supports Accordion, Collapsible, and other content whose height changes. It renders CSS Multi-column on the server, then measures the list in the browser and keeps each item in its assigned column. The output remains a semantic `ul` with direct `li` children, so reading and keyboard order remain the source order.
-
-```tsx
-<Masonry className="columns-1 p-4 md:columns-2">
-  <MasonryItem>{/* Expandable content */}</MasonryItem>
-  <MasonryItem>{/* Expandable content */}</MasonryItem>
-</Masonry>
-```
+<ComponentPreview componentName="masonry" fileName="example-reflow-balanced" autoHeight />
 
 ## Examples
 
-### Editorial collection
+### Responsive columns
 
-Use varied media, metadata, and contributors to create a reading collection that still preserves a logical source order.
+<ComponentPreview componentName="masonry" fileName="example-columns" autoHeight />
 
-<ComponentPreview componentName="masonry" fileName="example-default" autoHeight />
+### Custom spacing
 
-### Accordion sessions
+<ComponentPreview componentName="masonry" fileName="example-spacing" autoHeight />
 
-Accordion details expand within their assigned column, keeping the surrounding cards compact and stable.
+### Expandable items
 
-<ComponentPreview componentName="masonry" fileName="example-accordion" autoHeight />
-
-### Collapsible projects
-
-Several Collapsible cards can stay open at once; each only moves the cards below it in the same column.
+Use [Collapsible](/docs/components/collapsible) inside `MasonryItem`.
 
 <ComponentPreview componentName="masonry" fileName="example-collapsible" autoHeight />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="masonry" autoHeight />
 
 ## API Reference
 
 ### Masonry
 
-Semantic list container for masonry items. Supports all `ul` props, including `className` and `asChild`.
+Root container.
 
-| CSS Variable | Default |
-| --- | --- |
-| `--gap` | `--spacing(4)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+| `reflow` | `"stable" \| "balanced"` | `"stable"` |
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--gap` | CSS custom property | `--spacing(4)` |
 
 ### MasonryItem
 
-Semantic list item that keeps its content together inside a masonry column. Supports all `li` props, including `className` and `asChild`.
+Item wrapper.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |

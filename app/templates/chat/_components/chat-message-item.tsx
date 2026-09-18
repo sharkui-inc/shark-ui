@@ -1,6 +1,5 @@
 "use client";
 
-import type { UIMessage } from "ai";
 import { BotIcon, CopyIcon, ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
 import {
   Marker,
@@ -19,7 +18,7 @@ import {
   MessageBubbleContent,
 } from "@/registry/react/components/message-bubble";
 import { MessageScrollerItem } from "@/registry/react/components/message-scroller";
-import { getMessageText } from "../_data/chat-demo";
+import type { ChatMessage } from "@/registry/react/lib/create-chat";
 
 const AssistantActions = () => (
   <MessageFooter>
@@ -42,10 +41,10 @@ export const ChatMessageItem = ({
   message,
 }: {
   isStreaming?: boolean;
-  message: UIMessage;
+  message: ChatMessage;
 }) => {
   const isUser = message.role === "user";
-  const text = getMessageText(message);
+  const text = message.content;
 
   return (
     <MessageScrollerItem>

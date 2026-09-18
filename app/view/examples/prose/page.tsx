@@ -21,6 +21,7 @@ import ExampleRtl from "@/registry/react/examples/prose/example-rtl";
 import ExampleSeparator from "@/registry/react/examples/prose/example-separator";
 import ExampleSmall from "@/registry/react/examples/prose/example-small";
 import ExampleTable from "@/registry/react/examples/prose/example-table";
+import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
 
 const ProseExamplePage = () => (
   <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
@@ -236,7 +237,9 @@ const ProseExamplePage = () => (
           RTL
         </h2>
         <div className="rounded-3xl bg-muted p-6 sm:p-10">
-          <ExampleRtl />
+          <PreviewLocaleProvider>
+            <ExampleRtl />
+          </PreviewLocaleProvider>
         </div>
       </section>
     </div>

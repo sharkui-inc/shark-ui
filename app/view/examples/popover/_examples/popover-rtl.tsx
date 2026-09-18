@@ -33,8 +33,8 @@ const PopoverRtl = () => (
         <div className="flex flex-wrap justify-center gap-2">
           {physicalSides.map((side) => (
             <Popover key={side} positioning={{ placement: side }}>
-              <PopoverTrigger render={<Button variant="outline" />}>
-                {translations[side]}
+              <PopoverTrigger asChild>
+                <Button variant="outline">{translations[side]}</Button>
               </PopoverTrigger>
               <PopoverContent>
                 <PopoverHeader
@@ -52,8 +52,8 @@ const PopoverRtl = () => (
               key={side}
               positioning={{ placement: logicalPlacement[side] }}
             >
-              <PopoverTrigger render={<Button variant="outline" />}>
-                {translations[side]}
+              <PopoverTrigger asChild>
+                <Button variant="outline">{translations[side]}</Button>
               </PopoverTrigger>
               <PopoverContent>
                 <PopoverHeader

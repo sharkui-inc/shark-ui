@@ -11,8 +11,8 @@ import {
 const Example = () => {
   const [visible, setVisible] = React.useState(false);
 
-  const handleVisibilityChange = (visible: boolean) => {
-    setVisible(visible);
+  const handleVisibilityChange = (nextVisible: boolean) => {
+    setVisible(nextVisible);
 
     if (visible) {
       setTimeout(() => {
@@ -24,7 +24,9 @@ const Example = () => {
   return (
     <PasswordInput
       className="w-full max-w-64"
-      onVisibilityChange={({ visible }) => handleVisibilityChange(visible)}
+      onVisibilityChange={({ visible: nextVisible }) =>
+        handleVisibilityChange(nextVisible)
+      }
       visible={visible}
     >
       <PasswordInputGroup>

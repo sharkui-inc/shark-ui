@@ -470,9 +470,9 @@ Holds the color picker popover. Displayed in a portal.
 | --- | --- | --- |
 | `className` | `string` | - |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(3)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | CSS custom property | `--spacing(3)` |
 
 ### ColorPickerControl
 
@@ -611,6 +611,14 @@ Displays the current color as a swatch. Use for standalone value preview.
 ### parseColor
 
 Exported utility to parse color strings. Use for programmatic color handling.
+
+### ColorPickerRootProvider
+
+Provides a ColorPicker API created with `useColorPicker` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseColorPickerReturn` | **required** |
 
 ---
 

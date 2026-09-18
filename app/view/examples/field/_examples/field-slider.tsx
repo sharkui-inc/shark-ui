@@ -20,7 +20,7 @@ const FieldSlider = () => {
         <span className="font-medium tabular-nums">{value[1]}</span>).
       </FieldDescription>
       <Slider
-        aria-label="Price Range"
+        aria-label={["Price Range"]}
         className="mt-2 w-full"
         max={1000}
         min={0}

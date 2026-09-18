@@ -18,11 +18,11 @@ import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 const Example = () => (
   <ScrollArea
-    className="h-[min(32rem,70vh)] rounded-xl border"
+    className="h-[min(32rem,70vh)] w-full min-w-0 rounded-xl border"
     orientation="vertical"
     scrollFade
   >
-    <Masonry className="columns-1 p-4 [--gap:--spacing(5)] sm:columns-2 lg:columns-3">
+    <Masonry className="columns-1 gap-x-4 gap-y-6 p-4 sm:columns-2">
       {projects.map((project) => (
         <MasonryItem key={project.title}>
           <Collapsible defaultOpen={project.defaultOpen}>
@@ -84,8 +84,8 @@ const projects = [
     owner: "Mara Kim",
     status: "In review",
     statusVariant: "secondary" as const,
-    summary: "A calmer way for new teams to find their first useful ritual.",
-    title: "Welcome ritual",
+    summary: "A first ritual for new teams.",
+    title: "Welcome",
   },
   {
     avatar: createWavesAvatar("Ravi Singh", "blue"),
@@ -97,8 +97,8 @@ const projects = [
     status: "Exploring",
     statusVariant: "info" as const,
     summary:
-      "A compact pattern library for decisions that need a shared language.",
-    title: "Pattern library",
+      "A compact pattern library for the decisions that need a shared language, clearer ownership, and a record that helps the next team begin without starting from scratch.",
+    title: "Pattern library for shared decisions",
   },
   {
     avatar: createWavesAvatar("Amina Cole", "rose"),
@@ -109,8 +109,7 @@ const projects = [
     owner: "Amina Cole",
     status: "Planning",
     statusVariant: "outline" as const,
-    summary:
-      "A monthly evening for people building thoughtful digital products.",
+    summary: "A monthly evening for people building thoughtful products.",
     title: "Onda sessions",
   },
   {
@@ -123,8 +122,8 @@ const projects = [
     status: "Shipping",
     statusVariant: "success" as const,
     summary:
-      "A collection of tools for making a busy week feel more intentional.",
-    title: "Focus kit",
+      "A collection of small tools, prompts, and shared routines for making a busy week feel more intentional without making collaboration harder.",
+    title: "Focus kit for a busy week",
   },
 ];
 

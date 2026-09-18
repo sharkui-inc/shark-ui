@@ -21,8 +21,8 @@ const Example = () => (
     </CarouselControl>
 
     <CarouselContent>
-      {slides.map((_, index) => (
-        <CarouselItem index={index} key={index}>
+      {slides.map((slide, index) => (
+        <CarouselItem index={index} key={slide.id}>
           <Card>
             <CardContent className="flex aspect-square items-center justify-center">
               <span className="font-semibold text-2xl">{index + 1}</span>
@@ -34,6 +34,6 @@ const Example = () => (
   </Carousel>
 );
 
-const slides = Array.from({ length: 16 });
+const slides = Array.from({ length: 16 }, (_, id) => ({ id }));
 
 export default Example;

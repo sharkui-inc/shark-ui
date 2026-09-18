@@ -258,7 +258,8 @@ npx shadcn@latest add @shark/prose
 
 .prose img:not(.not-prose img),
 .prose picture:not(.not-prose picture),
-.prose video:not(.not-prose video) {
+.prose video:not(.not-prose video),
+.prose iframe:not(.not-prose iframe) {
   margin-top: calc(var(--spacing) * 6);
   margin-bottom: calc(var(--spacing) * 6);
 }
@@ -459,3 +460,11 @@ Root wrapper for typography-styled content.
   | --- | --- | --- |
   | `className` | `string` | - |
   | `asChild` | `boolean` | `false` |
+### Prose
+
+Public Prose component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |

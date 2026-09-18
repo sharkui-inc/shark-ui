@@ -5,7 +5,7 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 
 const tableCheckboxSpacing =
-  "has-[[role=checkbox]]:ps-2 has-[[role=checkbox]]:pe-0";
+  "has-[[role=checkbox]]:leading-none has-[[role=checkbox]]:ps-2 has-[[role=checkbox]]:pe-0 [&>[role=checkbox]]:align-middle";
 
 interface TableProps extends React.ComponentProps<typeof ark.table> {
   /**

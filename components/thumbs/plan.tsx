@@ -6,7 +6,7 @@ export const PlanThumb = (props: ThumbCardProps) => (
       <div className="flex h-5 items-center gap-1.5 px-1.5">
         <div className="size-2 rounded-sm border border-muted-foreground/32" />
         <div className="flex flex-1 flex-col gap-1">
-          <div className="h-1.5 w-2/3 rounded bg-foreground" />
+          <div className="h-1.5 w-2/3 rounded bg-muted-foreground/24" />
           <div className="h-1 w-1/3 rounded bg-muted-foreground/24" />
         </div>
         <div className="size-1.5 rounded-full bg-primary" />

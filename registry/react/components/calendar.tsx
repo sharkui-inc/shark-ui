@@ -1,6 +1,10 @@
 "use client";
 
-import { DatePicker as ArkCalendar } from "@ark-ui/react/date-picker";
+import {
+  DatePicker as ArkCalendar,
+  useDatePicker as useArkDatePicker,
+  useDatePickerContext as useArkDatePickerContext,
+} from "@ark-ui/react/date-picker";
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
@@ -12,6 +16,10 @@ import { Button } from "@/registry/react/components/button";
 import { FormatNumber } from "@/registry/react/components/format";
 import { LocaleProvider, useLocale } from "@/registry/react/components/locale";
 import { nativeSelectVariants } from "@/registry/react/components/native-select";
+
+export const useCalendar = useArkDatePicker;
+export const useCalendarContext = useArkDatePickerContext;
+export const CalendarRootProvider = ArkCalendar.RootProvider;
 
 export const Calendar = (
   props: React.ComponentProps<typeof ArkCalendar.Root>
@@ -269,7 +277,7 @@ export const CalendarTableDays = (
       {(calendar) => (
         <CalendarTableBody {...rest}>
           {calendar.weeks.map((week, index) => (
-            <CalendarTableRow key={index}>
+            <CalendarTableRow key={week[0].toString()}>
               {calendar.showWeekNumbers ? (
                 <CalendarWeekNumberCell week={week} weekIndex={index}>
                   <FormatNumber
@@ -316,7 +324,7 @@ export const CalendarTableNextMonth = (props: CalendarTableNextMonthProps) => {
         return (
           <CalendarTableBody {...rest}>
             {offset.weeks.map((week, index) => (
-              <CalendarTableRow key={index}>
+              <CalendarTableRow key={week[0].toString()}>
                 {calendar.showWeekNumbers ? (
                   <CalendarWeekNumberCell week={week} weekIndex={index}>
                     <FormatNumber

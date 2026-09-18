@@ -61,7 +61,7 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["priceRange"]}>
               {(field) => {
-                const value = (field.input as number[]) ?? defaultRange;
+                const value = field.input as number[];
 
                 return (
                   <Field invalid={Boolean(field.errors?.length)}>

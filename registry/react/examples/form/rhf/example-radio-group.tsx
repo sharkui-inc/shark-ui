@@ -28,7 +28,7 @@ import {
 } from "@/registry/react/components/radio-group";
 import { toast } from "@/registry/react/components/toast";
 
-export function Example() {
+function Example() {
   const form = useForm({
     defaultValues: {
       plan: "",

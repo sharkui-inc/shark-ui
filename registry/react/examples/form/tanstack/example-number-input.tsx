@@ -28,7 +28,7 @@ import {
   NumberInputInput,
 } from "@/registry/react/components/number-input";
 
-export const Example = () => {
+const Example = () => {
   const form = useForm({
     defaultValues: {
       expectedSalary: undefined as number | undefined,

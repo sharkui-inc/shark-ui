@@ -160,15 +160,118 @@ Root component. Manages step state and connectors.
 | `isStepSkippable` | `(details: StepValidityDetails) => boolean` | `-` |
 | `onStepInvalid` | `(details: StepInvalidDetails) => void` | `-` |
 
+
 ### StepsList
 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 Wraps the list of steps. Handles connector layout.
 
-| Attribute | Default |
-| --- | --- |
-| `--steps-gutter` | `--spacing(2)` |
-| `--steps-icon-size` | `--spacing(4)` |
-| `--steps-size` | `--spacing(8)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--steps-gutter` | CSS custom property | `--spacing(2)` |
+| `--steps-icon-size` | CSS custom property | `--spacing(4)` |
+| `--steps-size` | CSS custom property | `--spacing(8)` |
+
+### StepsRootProvider
+
+Provides a Steps API created with `useSteps` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseStepsReturn` | **required** |
+
+### StepsItem
+
+Public StepsItem component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### StepsTrigger
+
+Public StepsTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### StepsIndicator
+
+Public StepsIndicator component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### StepsSeparator
+
+Public StepsSeparator component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### StepsTitle
+
+Public StepsTitle component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### StepsDescription
+
+Public StepsDescription component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### StepsContent
+
+Public StepsContent component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### StepsCompletedContent
+
+Public StepsCompletedContent component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### StepsPrevious
+
+Public StepsPrevious component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### StepsNext
+
+Public StepsNext component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 ---
 

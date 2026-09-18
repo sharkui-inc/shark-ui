@@ -237,6 +237,15 @@ Opens the menu on click. Use `asChild` to delegate to a child element.
 | --- | --- | --- |
 | `asChild` | `boolean` | - |
 
+### MenuPositioner
+
+Positions the menu content relative to its trigger.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | - |
+| `className` | `string` | - |
+
 ### MenuContent
 
 Holds menu options. Displayed in a portal, positioned relative to the trigger.
@@ -301,9 +310,19 @@ Groups related items. Use `heading` or `MenuGroupLabel` for a label.
 
 Label for a group. Must be used inside `MenuGroup`.
 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | - |
+| `className` | `string` | - |
+
 ### MenuSeparator
 
 Visual divider between groups of menu items.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | - |
+| `className` | `string` | - |
 
 ### MenuQuickItem
 
@@ -317,13 +336,45 @@ A menu option with icon-above-text layout for quick actions. Use with `flex` to 
 | `closeOnSelect` | `boolean` | - |
 | `onSelect` | `VoidFunction` | - |
 
-### MenuSub / MenuSubTrigger / MenuSubContent
+### MenuSub
 
-Submenu: wrap a nested `Menu`-like structure. `MenuSubTrigger` opens the submenu; `MenuSubContent` holds the nested items.
+Root element for a nested submenu. It accepts the same state and positioning props as `Menu`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `positioning` | `PositioningOptions` | - |
+| `open` | `boolean` | - |
+| `defaultOpen` | `boolean` | - |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
+| `closeOnSelect` | `boolean` | `true` |
+
+### MenuSubTrigger
+
+Menu item that opens its nested submenu.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | **required** |
+| `disabled` | `boolean` | - |
+| `asChild` | `boolean` | - |
+| `className` | `string` | - |
+
+### MenuSubContent
+
+Holds the items rendered by a nested submenu.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | - |
+| `className` | `string` | - |
 
 ### MenuShortcut
 
 Optional keyboard shortcut hint displayed next to a menu item.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | - |
 
 ### MenuArrow
 
@@ -333,10 +384,18 @@ Optional arrow pointing toward the trigger.
 | --- | --- | --- |
 | `className` | `string` | - |
 
-| Attribute | Default |
-| --- | --- |
-| `--arrow-background` | `var(--popover)` |
-| `--arrow-size` | `calc(1.5 * var(--spacing))` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--arrow-background` | CSS custom property | `var(--popover)` |
+| `--arrow-size` | CSS custom property | `calc(1.5 * var(--spacing))` |
+
+### MenuRootProvider
+
+Provides a Menu API created with `useMenu` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseMenuReturn` | **required** |
 
 ---
 

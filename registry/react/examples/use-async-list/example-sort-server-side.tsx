@@ -28,7 +28,7 @@ const UseAsyncListDemo = () => {
     initialSortDescriptor: { column: "id", direction: "ascending" },
     async load({ sortDescriptor, signal }) {
       const url = new URL("https://fakestoreapi.com/products");
-      url.searchParams.set("limit", "5");
+      url.searchParams.set("limit", "4");
       url.searchParams.set(
         "sort",
         sortDescriptor?.direction === "descending" ? "desc" : "asc"
@@ -49,31 +49,28 @@ const UseAsyncListDemo = () => {
     });
 
   return (
-    <div className="flex w-full max-w-md flex-col gap-4">
-      <Button
-        className="self-start"
-        disabled={list.loading}
-        onClick={handleSort}
-        variant="outline"
-      >
-        Sort products
-        {descending ? (
-          <ArrowDownIcon
-            aria-hidden="true"
-            className="size-4"
-            data-icon="inline-end"
-          />
-        ) : (
-          <ArrowUpIcon
-            aria-hidden="true"
-            className="size-4"
-            data-icon="inline-end"
-          />
-        )}
-      </Button>
-      <output className="text-muted-foreground text-sm">
-        Order: {descending ? "Descending" : "Ascending"}
-      </output>
+    <div className="flex w-full max-w-md flex-col gap-3">
+      <div className="flex w-full items-center justify-between gap-3">
+        <output className="text-muted-foreground text-sm">
+          Order: {descending ? "Descending" : "Ascending"}
+        </output>
+        <Button disabled={list.loading} onClick={handleSort} variant="outline">
+          Sort products
+          {descending ? (
+            <ArrowDownIcon
+              aria-hidden="true"
+              className="size-4"
+              data-icon="inline-end"
+            />
+          ) : (
+            <ArrowUpIcon
+              aria-hidden="true"
+              className="size-4"
+              data-icon="inline-end"
+            />
+          )}
+        </Button>
+      </div>
       {!!list.loading && (
         <div className="flex items-center gap-2 text-muted-foreground text-sm">
           <Spinner /> Loading
@@ -86,7 +83,12 @@ const UseAsyncListDemo = () => {
       )}
       <ItemGroup className="gap-2">
         {list.items.map((product) => (
-          <Item key={product.id} role="listitem" variant="outline">
+          <Item
+            className="[--space:--spacing(2)]"
+            key={product.id}
+            role="listitem"
+            variant="outline"
+          >
             <ItemMedia variant="image">
               <img
                 alt={product.title}

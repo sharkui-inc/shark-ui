@@ -34,10 +34,7 @@ const BreadcrumbDropdown = () => (
               <ChevronDownIcon className="size-3.5" data-icon="inline-end" />
             </Button>
           </MenuTrigger>
-          <MenuContent
-            className="w-44"
-            positioning={{ placement: "bottom-start" }}
-          >
+          <MenuContent className="w-44">
             <MenuItem asChild value="documentation">
               <a href="#">Documentation</a>
             </MenuItem>

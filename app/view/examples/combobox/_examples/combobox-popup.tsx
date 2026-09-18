@@ -19,33 +19,28 @@ const ComboboxPopup = () => {
   const { collection, filter } = useListCollection({
     filter: contains,
     initialItems: countries,
+    itemToString: (country) => country.label,
   });
 
   return (
     <Combobox
       className="max-w-xs"
       collection={collection}
-      defaultValue={countries[0]}
-      itemToStringValue={(country) => country.label}
+      defaultValue={[countries[0].value]}
       onInputValueChange={({ inputValue, reason }) =>
         filter(reason === "item-select" ? "" : inputValue)
       }
     >
-      <ComboboxTrigger
-        render={
-          <Button
-            className="w-64 justify-between font-normal"
-            variant="outline"
-          />
-        }
-      >
-        <ComboboxContext>
-          {({ selectedItems }) => (
-            <span className="truncate">
-              {selectedItems[0]?.label ?? "Select country"}
-            </span>
-          )}
-        </ComboboxContext>
+      <ComboboxTrigger asChild>
+        <Button className="w-64 justify-between font-normal" variant="outline">
+          <ComboboxContext<Country>>
+            {({ selectedItems }) => (
+              <span className="truncate">
+                {selectedItems[0]?.label ?? "Select country"}
+              </span>
+            )}
+          </ComboboxContext>
+        </Button>
       </ComboboxTrigger>
       <ComboboxContent>
         <ComboboxInput placeholder="Search" showTrigger={false} />
@@ -134,5 +129,7 @@ const countries = [
     value: "united-states",
   },
 ];
+
+type Country = (typeof countries)[number];
 
 export default ComboboxPopup;

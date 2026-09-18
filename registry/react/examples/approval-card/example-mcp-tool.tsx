@@ -62,7 +62,7 @@ const Example = () => {
 
 const toolArguments = {
   body: "Page 1 starts at offset 20. Expected offset: 0.",
-  owner: "acme",
+  owner: "onda",
   repo: "storefront",
   title: "First page skips 20 orders",
 };

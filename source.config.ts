@@ -1,10 +1,6 @@
 import rehypeShiki from "@shikijs/rehype";
-import {
-  defineConfig,
-  defineDocs,
-  frontmatterSchema,
-  metaSchema,
-} from "fumadocs-mdx/config";
+import { metaSchema, pageSchema } from "fumadocs-core/source/schema";
+import { defineConfig, defineDocs } from "fumadocs-mdx/config";
 import { z } from "zod";
 import {
   shikiHighlightOptions,
@@ -35,7 +31,8 @@ export const docs = defineDocs({
     postprocess: {
       includeProcessedMarkdown: true,
     },
-    schema: frontmatterSchema.extend({
+    schema: z.object({
+      ...pageSchema.shape,
       links: z
         .object({
           api: z.url().optional(),

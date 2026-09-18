@@ -32,8 +32,8 @@ const HoverCardRtl = () => (
         <div className="flex flex-wrap justify-center gap-2">
           {physicalSides.map((side) => (
             <HoverCard key={side} positioning={{ placement: side }}>
-              <HoverCardTrigger render={<Button variant="outline" />}>
-                {translations[side]}
+              <HoverCardTrigger asChild>
+                <Button variant="outline">{translations[side]}</Button>
               </HoverCardTrigger>
               <HoverCardContent className="flex w-64 flex-col gap-1">
                 <div className="font-semibold">{translations.name}</div>
@@ -51,8 +51,8 @@ const HoverCardRtl = () => (
               key={side}
               positioning={{ placement: logicalPlacement[side] }}
             >
-              <HoverCardTrigger render={<Button variant="outline" />}>
-                {translations[side]}
+              <HoverCardTrigger asChild>
+                <Button variant="outline">{translations[side]}</Button>
               </HoverCardTrigger>
               <HoverCardContent className="flex w-64 flex-col gap-1">
                 <div className="font-semibold">{translations.name}</div>

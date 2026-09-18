@@ -22,15 +22,7 @@ Install the Shark component, read its anatomy, then adapt markup and state. The 
 
 ## Triggers
 
-Base UI uses a `render` prop. Shark uses `asChild`:
-
-```tsx
-import { Menu } from "@base-ui/react/menu";
-
-<Menu.Root>
-  <Menu.Trigger render={<button type="button">Open</button>} />
-</Menu.Root>
-```
+Base UI composes triggers with `render`; replace that composition with `asChild` in Shark:
 
 ```tsx
 import { Menu, MenuTrigger } from "@/components/ui/menu";
@@ -43,7 +35,7 @@ import { Button } from "@/components/ui/button";
 </Menu>;
 ```
 
-Pass exactly one child. Do not port `render` callbacks unchanged.
+Pass exactly one child. Do not port Base UI composition callbacks unchanged.
 
 ## Component equivalents
 
@@ -54,18 +46,6 @@ Pass exactly one child. Do not port `render` callbacks unchanged.
 Browse [Components](/docs/components) for same-name primitives (Menu, Dialog, Select, and others).
 
 ## Select
-
-```tsx
-import { Select } from "@base-ui/react/select";
-
-<Select.Root defaultValue="next">
-  <Select.Trigger render={<button type="button" />} />
-  <Select.Popup>
-    <Select.Item value="next">Next.js</Select.Item>
-    <Select.Item value="vite">Vite</Select.Item>
-  </Select.Popup>
-</Select.Root>
-```
 
 ```tsx
 import { createListCollection } from "@ark-ui/react";

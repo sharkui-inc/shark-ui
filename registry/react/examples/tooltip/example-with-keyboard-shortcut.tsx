@@ -13,7 +13,7 @@ const Example = () => (
     </TooltipTrigger>
     <TooltipContent>
       <p>Add to library</p>
-      <KbdGroup className="ml-1.5 inline">
+      <KbdGroup>
         <Kbd>⌘</Kbd>
         <Kbd>K</Kbd>
       </KbdGroup>

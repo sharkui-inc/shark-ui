@@ -2,13 +2,16 @@
 
 import {
   RatingGroup as ArkRatingGroup,
-  useRatingGroupContext,
+  useRatingGroup as useArkRatingGroup,
+  useRatingGroupContext as useArkRatingGroupContext,
 } from "@ark-ui/react/rating-group";
 import { StarIcon } from "lucide-react";
 import React from "react";
 import { cn } from "@/lib/utils";
 
-export const useRating = useRatingGroupContext;
+export const useRating = useArkRatingGroup;
+export const useRatingContext = useArkRatingGroupContext;
+export const RatingRootProvider = ArkRatingGroup.RootProvider;
 
 interface RatingProps extends React.ComponentProps<typeof ArkRatingGroup.Root> {
   /**

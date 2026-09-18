@@ -24,6 +24,9 @@ const inpuGroupVariants = tv({
     "has-[>textarea]:h-auto",
     "has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-start]]:[&>input]:pb-3",
     "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3",
+    "[&_[data-inline=true]_:is([data-slot=input-group-button],[data-slot=kbd])]:rounded-[max(0px,calc(var(--radius)-var(--input-group-inset)))]",
+    "data-[size=sm]:not-data-[pill=true]:[&_[data-inline=true]_:is([data-slot=input-group-button],[data-slot=kbd])]:rounded-[max(0px,calc(var(--radius)*0.75-var(--input-group-inset)))]",
+    "data-[pill=true]:[&_[data-inline=true]_:is([data-slot=input-group-button],[data-slot=kbd])]:rounded-full",
     "focus-within:border-ring/64 focus-within:ring-2 focus-within:ring-ring/24",
     "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-[3px] has-[[data-slot][aria-invalid=true]]:ring-destructive/24",
     "dark:has-[[data-slot][aria-invalid=true]]:border-destructive-foreground dark:has-[[data-slot][aria-invalid=true]]:ring-destructive-foreground/32",
@@ -91,9 +94,6 @@ const inputGroupAddonVariants = tv({
     "select-none font-medium text-muted-foreground text-xs",
     "cursor-text",
     "group-data-[disabled=true]/input-group:opacity-64",
-    "[&>kbd]:rounded-[max(0px,calc(var(--radius)-var(--input-group-inset)))]",
-    "group-data-[size=sm]/input-group:[&>kbd]:rounded-[max(0px,calc(var(--radius)*0.75-var(--input-group-inset)))]",
-    "group-data-[pill=true]/input-group:[&>kbd]:rounded-full",
     "[&_svg:not([class*='size-'])]:size-4",
   ],
   defaultVariants: {
@@ -130,6 +130,7 @@ export const InputGroupAddon = (props: InputGroupAddonProps) => {
     <ark.div
       className={cn(inputGroupAddonVariants({ align }), className)}
       data-align={align}
+      data-inline={align.startsWith("inline") || undefined}
       data-slot="input-group-addon"
       onMouseDown={(event) => {
         if (
@@ -162,9 +163,6 @@ const inputGroupButtonVariants = tv({
     "relative",
     "text-sm",
     "shadow-none",
-    "rounded-[max(0px,calc(var(--radius)-var(--input-group-inset)))]",
-    "group-data-[size=sm]/input-group:rounded-[max(0px,calc(var(--radius)*0.75-var(--input-group-inset)))]",
-    "group-data-[pill=true]/input-group:rounded-full",
     "focus-visible:border-transparent focus-visible:ring-0",
   ],
 });

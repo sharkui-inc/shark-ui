@@ -2,13 +2,16 @@
 
 import {
   Collapsible as ArkCollapsible,
-  useCollapsibleContext,
+  useCollapsible as useArkCollapsible,
+  useCollapsibleContext as useArkCollapsibleContext,
 } from "@ark-ui/react/collapsible";
 import { ChevronDownIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useCollapsible = useCollapsibleContext;
+export const useCollapsible = useArkCollapsible;
+export const useCollapsibleContext = useArkCollapsibleContext;
+export const CollapsibleRootProvider = ArkCollapsible.RootProvider;
 
 export const Collapsible = (
   props: React.ComponentProps<typeof ArkCollapsible.Root>
@@ -66,8 +69,7 @@ export const CollapsibleContent = (
     <ArkCollapsible.Content
       className={cn(
         "[--radix-collapsible-content-height:var(--height)]",
-        "h-(--collapsed-height)",
-        "group-data-partial-collapse/collapsible:h-full",
+        "data-has-collapsed-size:h-full data-has-collapsed-size:min-h-(--collapsed-height)",
         "overflow-hidden",
         "data-[state=open]:animate-collapsible-down data-[state=open]:duration-200 data-[state=open]:ease-out",
         "data-[state=closed]:animate-collapsible-up data-[state=closed]:duration-200 data-[state=closed]:ease-out",

@@ -807,7 +807,7 @@ export const QuestionnaireDescription = (
 export const QuestionnaireChoices = (
   props: React.ComponentProps<typeof ark.div>
 ) => {
-  const { children, className, ...rest } = props;
+  const { children, className, defaultValue: _defaultValue, ...rest } = props;
 
   const {
     answer,

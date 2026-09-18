@@ -110,7 +110,7 @@ const supportsAudioCapture = () => {
   }
 
   return Boolean(
-    navigator.mediaDevices?.getUserMedia &&
+    typeof navigator.mediaDevices?.getUserMedia === "function" &&
       typeof MediaRecorder !== "undefined" &&
       getAudioContext()
   );
@@ -159,7 +159,7 @@ const stopMediaRecorderAndCollect = async (
 
   mediaRecorder.onerror = null;
   await new Promise<void>((resolve) => {
-    mediaRecorder.addEventListener("stop", resolve, { once: true });
+    mediaRecorder.addEventListener("stop", () => resolve(), { once: true });
     try {
       mediaRecorder.stop();
     } catch {
@@ -229,7 +229,7 @@ interface SpeechInputContextValue {
   isStarting: boolean;
   message: string | undefined;
   setDeviceId: (deviceId: string) => void;
-  start: () => void;
+  start: () => Promise<void>;
   state: SpeechInputState;
   stop: () => Promise<void>;
   waveformLevels: WaveformLevel[];
@@ -241,7 +241,8 @@ const [SpeechInputProvider, useSpeechInput] =
     providerName: "SpeechInput",
   });
 
-export interface SpeechInputProps extends React.ComponentProps<typeof ark.div> {
+export interface SpeechInputProps
+  extends Omit<React.ComponentProps<typeof ark.div>, "onError"> {
   /** Prevent starting a recording. */
   disabled?: boolean;
   /** Language tag sent to the browser speech recognizer. */

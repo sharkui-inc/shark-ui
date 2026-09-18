@@ -64,7 +64,7 @@ const DrawerDemo = () => {
   const [deliveryTime, setDeliveryTime] = useState("asap");
 
   return (
-    <Drawer onOpenChange={setOpen} open={open}>
+    <Drawer onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)} open={open}>
       <DrawerTrigger asChild>
         <Button variant="secondary">Open Drawer</Button>
       </DrawerTrigger>
@@ -78,7 +78,7 @@ const DrawerDemo = () => {
         <div className="flex-1 overflow-y-auto p-4">
           <RadioGroup
             className="gap-2"
-            onValueChange={setDeliveryTime}
+            onValueChange={({ value }) => setDeliveryTime(value ?? "")}
             value={deliveryTime}
           >
             {deliveryTimes.map((time) => (

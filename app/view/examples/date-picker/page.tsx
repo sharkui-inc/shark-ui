@@ -1,3 +1,5 @@
+"use client";
+
 import DatePickerBasic from "./_examples/date-picker-basic";
 import DatePickerDob from "./_examples/date-picker-dob";
 import DatePickerInput from "./_examples/date-picker-input";

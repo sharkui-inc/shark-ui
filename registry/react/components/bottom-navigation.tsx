@@ -1,10 +1,18 @@
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
-import { Tabs as ArkTabs } from "@ark-ui/react/tabs";
+import {
+  Tabs as ArkTabs,
+  useTabs as useArkTabs,
+  useTabsContext as useArkTabsContext,
+} from "@ark-ui/react/tabs";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+
+export const useBottomNavigation = useArkTabs;
+export const useBottomNavigationContext = useArkTabsContext;
+export const BottomNavigationRootProvider = ArkTabs.RootProvider;
 
 export const BottomNavigation = (
   props: React.ComponentProps<typeof ArkTabs.Root>

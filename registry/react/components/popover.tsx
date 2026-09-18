@@ -3,7 +3,8 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   Popover as ArkPopover,
-  usePopoverContext,
+  usePopover as useArkPopover,
+  usePopoverContext as useArkPopoverContext,
 } from "@ark-ui/react/popover";
 import { Portal } from "@ark-ui/react/portal";
 import { XIcon } from "lucide-react";
@@ -11,7 +12,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
-export const usePopover = usePopoverContext;
+export const usePopover = useArkPopover;
+export const usePopoverContext = useArkPopoverContext;
+export const PopoverRootProvider = ArkPopover.RootProvider;
 
 export const Popover = (
   props: React.ComponentProps<typeof ArkPopover.Root>
@@ -182,7 +185,7 @@ export const PopoverBody = (props: React.ComponentProps<typeof ark.div>) => {
           "flex-1",
           "p-(--space)",
           "overflow-auto",
-          "in-[[data-slot=popover-content]:has([data-slot=popover-header])]:pt-1",
+          "in-[[data-slot=popover-content]:has([data-slot=popover-header]:not(.sr-only))]:pt-1",
           "in-[[data-slot=popover-content]:has([data-slot=popover-footer]:not(.border-t))]:pb-1",
           className
         )}

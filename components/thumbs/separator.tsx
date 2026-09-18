@@ -8,11 +8,11 @@ export const SeparatorThumb = (props: ThumbCardProps) => (
         <div className="h-1.5 w-full shrink-0 rounded-full bg-muted-foreground/8" />
       </div>
 
-      <div className="h-0.5 w-full shrink-0 rounded-full bg-muted-foreground/64" />
+      <div className="h-0.5 w-full shrink-0 rounded-full bg-muted-foreground/16" />
 
       <div className="flex h-6 items-center gap-2">
         <div className="h-1.5 w-1/3 rounded-full bg-muted-foreground/8" />
-        <div className="h-full w-0.5 shrink-0 rounded-full bg-muted-foreground/64" />
+        <div className="h-full w-0.5 shrink-0 rounded-full bg-muted-foreground/16" />
         <div className="h-1.5 w-1/3 rounded-full bg-muted-foreground/8" />
       </div>
     </div>

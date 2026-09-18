@@ -1,8 +1,13 @@
 "use client";
 
 import type React from "react";
-
+import { createWavesAvatar } from "@/lib/dicebear";
 import { Alert, AlertDescription } from "@/registry/react/components/alert";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/react/components/avatar";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
 import {
@@ -10,6 +15,7 @@ import {
   ItemContent,
   ItemDescription,
   ItemGroup,
+  ItemMedia,
   ItemTitle,
 } from "@/registry/react/components/item";
 import { Spinner } from "@/registry/react/components/spinner";
@@ -43,9 +49,9 @@ const UseAsyncListDemo = () => {
     list.setFilterText(event.target.value);
 
   return (
-    <div className="flex w-full max-w-md flex-col gap-4">
+    <div className="flex w-full max-w-md flex-col gap-3">
       <Field>
-        <FieldLabel>Search users</FieldLabel>
+        <FieldLabel className="sr-only">Search users</FieldLabel>
         <Input
           onChange={handleFilterChange}
           placeholder="Search by name or email…"
@@ -65,13 +71,24 @@ const UseAsyncListDemo = () => {
       )}
       <ItemGroup className="gap-2">
         {list.items.map((user) => (
-          <Item key={user.id} role="listitem" variant="outline">
+          <Item
+            className="[--space:--spacing(2)]"
+            key={user.id}
+            role="listitem"
+            variant="outline"
+          >
+            <ItemMedia>
+              <Avatar>
+                <AvatarImage
+                  alt={user.name}
+                  src={createWavesAvatar(user.email, "purple")}
+                />
+                <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+              </Avatar>
+            </ItemMedia>
             <ItemContent>
               <ItemTitle>{user.name}</ItemTitle>
               <ItemDescription>{user.email}</ItemDescription>
-              <p className="text-muted-foreground text-xs">
-                {user.department} · {user.role}
-              </p>
             </ItemContent>
           </Item>
         ))}
@@ -83,7 +100,7 @@ const UseAsyncListDemo = () => {
   );
 };
 
-const LIMIT = 4;
+const LIMIT = 3;
 
 const mockUsers: User[] = [
   {

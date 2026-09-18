@@ -1,0 +1,245 @@
+---
+title: Tool Result
+description: Show a tool result with metadata and actions.
+---
+
+import manifest from "@/registry/manifest/tool-result";
+
+<ComponentPreview componentName="tool-result" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/tool-result
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>This component depends on [Collapsible](/docs/components/collapsible). Install it first if you haven't already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Import the following variables into your CSS file:</Step>
+
+<CodeCollapsibleWrapper>
+```css
+@theme inline {
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-info-foreground: var(--info-foreground);
+  --color-success-foreground: var(--success-foreground);
+}
+
+:root {
+  --destructive-foreground: var(--color-red-700);
+  --info-foreground: var(--color-blue-700);
+  --success-foreground: var(--color-emerald-700);
+}
+
+.dark {
+  --destructive-foreground: var(--color-red-400);
+  --info-foreground: var(--color-blue-400);
+  --success-foreground: var(--color-emerald-400);
+}
+```
+</CodeCollapsibleWrapper>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/tool-result.tsx" src="/tool-result.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+ToolResult
+├── ToolResultTrigger
+│   ├── ToolResultTitle
+│   ├── ToolResultMeta
+│   ├── ToolResultName
+│   └── ToolResultAction
+│       ├── ToolResultStatus
+│       └── CollapsibleIndicator
+└── ToolResultContent
+```
+
+## Usage
+
+```tsx
+import {
+  ToolResult,
+  ToolResultAction,
+  ToolResultContent,
+  ToolResultMeta,
+  ToolResultName,
+  ToolResultStatus,
+  ToolResultTitle,
+  ToolResultTrigger,
+} from "@/components/ui/tool-result";
+```
+
+```tsx
+<ToolResult status="success">
+  <ToolResultTrigger>
+    <ToolResultTitle>Tests passed</ToolResultTitle>
+    <ToolResultMeta>2.9s</ToolResultMeta>
+    <ToolResultName>terminal.run</ToolResultName>
+    <ToolResultAction>
+      <ToolResultStatus />
+    </ToolResultAction>
+  </ToolResultTrigger>
+  <ToolResultContent />
+</ToolResult>
+```
+
+## Controlled
+
+Control expand state with `open` and `onOpenChange`.
+
+<ComponentPreview componentName="tool-result" fileName="example-controlled" />
+
+## Status
+
+### Running
+
+<ComponentPreview componentName="tool-result" fileName="example-running" />
+
+### Success
+
+<ComponentPreview componentName="tool-result" fileName="example-success" />
+
+### Error
+
+<ComponentPreview componentName="tool-result" fileName="example-error" />
+
+### Cancelled
+
+<ComponentPreview componentName="tool-result" fileName="example-cancelled" />
+
+## Examples
+
+### With Icon
+
+<ComponentPreview componentName="tool-result" fileName="example-icon" />
+
+### With Diff Stats
+
+Use `ToolResultAction` to align `DiffStats` and the chevron at the end of the trigger.
+
+<ComponentPreview componentName="tool-result" fileName="example-with-diff-stats" />
+
+### Without Trigger
+
+Set `showTrigger={false}` on `ToolResultAction` to hide the chevron while keeping the result header interactive.
+
+<ComponentPreview componentName="tool-result" fileName="example-without-trigger" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="tool-result" />
+
+## API Reference
+
+### ToolResult
+
+Root [Collapsible](/docs/components/collapsible). `aria-busy` is set while `status` is `"running"`. `defaultOpen` is `true` when `status` is `"running"`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `status` | `"running" \| "success" \| "error" \| "cancelled"` | `"success"` |
+| `defaultOpen` | `boolean` | `true` when `status` is `"running"` |
+| `className` | `string` | `-` |
+
+### ToolResultTrigger
+
+Toggles the result. Place `ToolResultAction` inside to align trailing content and the optional chevron at the logical end.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### ToolResultAction
+
+Trailing action area. It follows the document direction: aligned at the end in LTR and RTL. Set `showTrigger` to `false` to hide its chevron.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `showTrigger` | `boolean` | `true` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### ToolResultTitle
+
+Primary label in the trigger.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### ToolResultMeta
+
+Secondary text such as duration.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### ToolResultName
+
+Tool name in the trigger.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### ToolResultStatus
+
+Optional status icon and label. Render it inside `ToolResultAction`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `running` | string | Running |
+| `success` | string | Completed |
+| `error` | string | Failed |
+| `cancelled` | string | Cancelled |
+
+### ToolResultContent
+
+Content of the tool result.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |

@@ -29,7 +29,7 @@ export const MusicAlbums = () => (
       slideCount={FEATURED_CHARTS.length}
       spacing="16px"
     >
-      <div className="flex items-center justify-between gap-4">
+      <div className="mb-4 flex items-center justify-between gap-4">
         <h2 className="font-heading font-semibold text-xl tracking-[-0.02em]">
           Albums for your next listen
         </h2>
@@ -38,7 +38,8 @@ export const MusicAlbums = () => (
           <CarouselNext className="static! translate-x-0! translate-y-0!" />
         </CarouselControl>
       </div>
-      <CarouselContent className="mt-4 mb-0 py-0">
+
+      <CarouselContent>
         {FEATURED_CHARTS.map((album, index) => (
           <CarouselItem
             className="basis-[82%]! sm:basis-[calc(50%-0.5rem)]! lg:basis-[calc(33.333%-0.667rem)]! xl:basis-[calc(20%-0.8rem)]!"

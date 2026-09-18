@@ -2,14 +2,17 @@
 
 import {
   SignaturePad as ArkSignaturePad,
-  useSignaturePadContext,
+  useSignaturePad as useArkSignaturePad,
+  useSignaturePadContext as useArkSignaturePadContext,
 } from "@ark-ui/react/signature-pad";
 import { RotateCcw } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 
-export const useSignaturePad = useSignaturePadContext;
+export const useSignaturePad = useArkSignaturePad;
+export const useSignaturePadContext = useArkSignaturePadContext;
+export const SignaturePadRootProvider = ArkSignaturePad.RootProvider;
 
 export const SignaturePad = (
   props: React.ComponentProps<typeof ArkSignaturePad.Root>
@@ -33,7 +36,7 @@ export const SignaturePad = (
         <SignaturePadGuide />
       </SignaturePadControl>
 
-      <ArkSignaturePad.HiddenInput />
+      <ArkSignaturePad.HiddenInput value="" />
     </ArkSignaturePad.Root>
   );
 };

@@ -28,7 +28,7 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const [item, setItem] = useState(items[0].name);
+  const [item, setItem] = useState<string>(items[0].name);
   const [value, setValue] = useState<ApprovalCardValue>({});
 
   const handleItemChange = (details: ApprovalCardItemChangeDetails) => {

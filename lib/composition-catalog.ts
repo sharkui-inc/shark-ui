@@ -463,4 +463,5 @@ const toCommandItem = (
 };
 
 export const getCommandCompositionItems = (): CommandCompositionItem[] =>
-  getDefinitions("blocks").map(toCommandItem);
+  // Blocks catalog route is temporarily disabled (`app/(app)/_blocks`).
+  getDefinitions("blocks").map(toCommandItem).slice(0, 0);

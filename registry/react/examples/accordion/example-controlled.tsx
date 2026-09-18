@@ -13,7 +13,10 @@ const Example = () => {
 
   return (
     <div className="w-full max-w-lg">
-      <Accordion onValueChange={({ value }) => setValue(value)} value={value}>
+      <Accordion
+        onValueChange={({ value: nextValue }) => setValue(nextValue)}
+        value={value}
+      >
         <AccordionItem value="item-1">
           <AccordionTrigger>Product Information</AccordionTrigger>
           <AccordionContent className="text-muted-foreground">

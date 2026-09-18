@@ -34,17 +34,16 @@ import { createChat } from "@/registry/react/lib/create-chat";
 export const ReasoningCardExample = (props: React.ComponentProps<"div">) => {
   const { canSendNext, messages, nextMessage, sendNext, status, stop } =
     useChatHelper({
-      adapter: "ai-sdk",
       chat,
       initialMessageCount: 2,
     });
   const promptStatus = toPromptStatus(status);
   const isStreaming = status === "submitted" || status === "streaming";
-  const nextText = nextMessage ? getMessageText(nextMessage) : "";
+  const nextText = nextMessage?.content ?? "";
   const assistantMessage = messages.findLast(
     (message) => message.role === "assistant"
   );
-  const answer = assistantMessage ? getMessageText(assistantMessage) : "";
+  const answer = assistantMessage?.content ?? "";
   const assistantExtras = assistantMessage
     ? extras[assistantMessage.id]
     : undefined;
@@ -58,7 +57,7 @@ export const ReasoningCardExample = (props: React.ComponentProps<"div">) => {
       />
       <CardContent className="flex flex-col gap-4">
         <Reasoning duration={duration} isStreaming={isStreaming}>
-          <ReasoningTrigger duration={duration} isStreaming={isStreaming} />
+          <ReasoningTrigger />
           <ReasoningContent>{assistantExtras?.reasoning}</ReasoningContent>
         </Reasoning>
         <p className="text-sm">{answer}</p>
@@ -135,14 +134,6 @@ const extras: Record<string, { duration: number; reasoning: string }> = {
       "Perceived slowness sits between the click and the first paint: input delay, skeleton size, and layout shift when data arrives.",
   },
 };
-
-const getMessageText = (message: {
-  parts: readonly { text?: string; type: string }[];
-}) =>
-  message.parts
-    .filter((part) => part.type === "text")
-    .map((part) => part.text ?? "")
-    .join("");
 
 const toPromptStatus = (status: string): PromptInputStatus => {
   switch (status) {

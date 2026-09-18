@@ -1,8 +1,4 @@
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-} from "@/registry/react/components/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/registry/react/components/tabs";
 
 const TabsDisabled = () => (
   <Tabs defaultValue="home">

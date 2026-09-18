@@ -102,6 +102,12 @@ Control the panel size programmatically using the `size` and `onSizeChange` prop
 
 <ComponentPreview componentName="floating-panel" fileName="example-controlled-size" />
 
+### Size Limits
+
+Use `minSize` and `maxSize` to limit the width and height of a resizable panel.
+
+<ComponentPreview componentName="floating-panel" fileName="example-size-limits" />
+
 ### Controlled Position
 
 Control the panel position programmatically using the `position` and `onPositionChange` props.
@@ -144,6 +150,8 @@ Root component. Manages panel position and drag state.
 | `onPositionChange` | `(details: PositionChangeDetails) => void` | `-` |
 | `size` | `Size` | `-` |
 | `defaultSize` | `Size` | `-` |
+| `minSize` | `Size` | `-` |
+| `maxSize` | `Size` | `-` |
 | `onSizeChange` | `(details: SizeChangeDetails) => void` | `-` |
 | `lazyMount` | `boolean` | `true` |
 | `persistRect` | `boolean` | `true` |
@@ -174,9 +182,9 @@ Holds the panel content.
 | `resizable` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(4)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | CSS custom property | `--spacing(4)` |
 
 ### FloatingPanelHeader
 
@@ -212,6 +220,86 @@ Closes the panel on click.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
+
+### FloatingPanelRootProvider
+
+Provides a FloatingPanel API created with `useFloatingPanel` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseFloatingPanelReturn` | **required** |
+
+### FloatingPanelDragTrigger
+
+Public FloatingPanelDragTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### FloatingPanelControl
+
+Public FloatingPanelControl component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### FloatingPanelMinimize
+
+Public FloatingPanelMinimize component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### FloatingPanelMaximize
+
+Public FloatingPanelMaximize component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### FloatingPanelRestore
+
+Public FloatingPanelRestore component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### FloatingPanelResizeTrigger
+
+Public FloatingPanelResizeTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### FloatingPanelStageTrigger
+
+Public FloatingPanelStageTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### FloatingPanelFooter
+
+Public FloatingPanelFooter component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 ---
 

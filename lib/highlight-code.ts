@@ -9,7 +9,7 @@ import {
 import { LRUCache } from "lru-cache";
 import type { ShikiTransformer } from "shiki";
 import { codeToHtml } from "shiki";
-import { packageManagerCommandVariants } from "./shadcn-command";
+import { packageManagerCommandVariants } from "./installation-command";
 
 export const shikiThemes = {
   dark: "github-dark",

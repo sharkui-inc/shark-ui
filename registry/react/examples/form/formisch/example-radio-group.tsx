@@ -33,7 +33,7 @@ import {
   RadioGroupItem,
 } from "@/registry/react/components/radio-group";
 
-export function Example() {
+function Example() {
   const form = useForm({
     initialInput: { plan: "" },
     schema: formSchema,

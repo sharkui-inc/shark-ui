@@ -1,9 +1,13 @@
 "use client";
 
-import type React from "react";
-
-import { useState } from "react";
+import React from "react";
+import { createWavesAvatar } from "@/lib/dicebear";
 import { Alert, AlertDescription } from "@/registry/react/components/alert";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/react/components/avatar";
 import {
   Field,
   FieldGroup,
@@ -15,6 +19,7 @@ import {
   ItemContent,
   ItemDescription,
   ItemGroup,
+  ItemMedia,
   ItemTitle,
 } from "@/registry/react/components/item";
 import {
@@ -33,8 +38,8 @@ interface User {
 }
 
 const UseAsyncListDemo = () => {
-  const [department, setDepartment] = useState("");
-  const [role, setRole] = useState("");
+  const [department, setDepartment] = React.useState("");
+  const [role, setRole] = React.useState("");
   const list = useAsyncList<User>({
     dependencies: [department, role],
     initialItems: mockUsers.slice(0, LIMIT),
@@ -62,11 +67,11 @@ const UseAsyncListDemo = () => {
     setRole(event.target.value);
 
   return (
-    <div className="flex w-full max-w-md flex-col gap-4">
+    <div className="flex w-full max-w-md flex-col gap-3">
       <FieldGroup className="gap-3">
         <div className="grid grid-cols-2 gap-3">
           <Field>
-            <FieldLabel>Department</FieldLabel>
+            <FieldLabel className="sr-only">Department</FieldLabel>
             <NativeSelect
               className="w-full"
               onChange={handleDepartmentChange}
@@ -81,7 +86,7 @@ const UseAsyncListDemo = () => {
             </NativeSelect>
           </Field>
           <Field>
-            <FieldLabel>Role</FieldLabel>
+            <FieldLabel className="sr-only">Role</FieldLabel>
             <NativeSelect
               className="w-full"
               onChange={handleRoleChange}
@@ -97,7 +102,7 @@ const UseAsyncListDemo = () => {
           </Field>
         </div>
         <Field>
-          <FieldLabel>Search users</FieldLabel>
+          <FieldLabel className="sr-only">Search users</FieldLabel>
           <Input
             onChange={handleFilterChange}
             placeholder="Search by name or email…"
@@ -116,18 +121,26 @@ const UseAsyncListDemo = () => {
           <AlertDescription>{list.error.message}</AlertDescription>
         </Alert>
       )}
-      <output className="text-muted-foreground text-sm">
-        Found {list.items.length} users
-      </output>
       <ItemGroup className="gap-2">
         {list.items.map((user) => (
-          <Item key={user.id} role="listitem" variant="outline">
+          <Item
+            className="[--space:--spacing(2)]"
+            key={user.id}
+            role="listitem"
+            variant="outline"
+          >
+            <ItemMedia>
+              <Avatar>
+                <AvatarImage
+                  alt={user.name}
+                  src={createWavesAvatar(user.email, "green-dark")}
+                />
+                <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+              </Avatar>
+            </ItemMedia>
             <ItemContent>
               <ItemTitle>{user.name}</ItemTitle>
               <ItemDescription>{user.email}</ItemDescription>
-              <p className="text-muted-foreground text-xs">
-                {user.department} · {user.role}
-              </p>
             </ItemContent>
           </Item>
         ))}
@@ -135,11 +148,14 @@ const UseAsyncListDemo = () => {
       {!(list.loading || list.error) && !!list.empty && (
         <p className="text-muted-foreground text-sm">No results found.</p>
       )}
+      <output className="self-end text-muted-foreground text-sm">
+        Found {list.items.length} users
+      </output>
     </div>
   );
 };
 
-const LIMIT = 5;
+const LIMIT = 3;
 
 const mockUsers: User[] = [
   {

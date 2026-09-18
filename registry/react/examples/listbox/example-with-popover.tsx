@@ -63,7 +63,7 @@ const Example = () => {
         <PopoverContent className={cn("min-w-64 gap-2", menuListVariants())}>
           <Input
             onChange={(e) => {
-              const value = e.target.value;
+              const { value } = e.target;
               setSearch(value);
               filter(value);
             }}
@@ -78,7 +78,7 @@ const Example = () => {
               </ListboxItem>
             ))}
 
-            {isEmpty && <ListboxEmpty>No results found.</ListboxEmpty>}
+            {isEmpty ? <ListboxEmpty>No results found.</ListboxEmpty> : null}
           </ListboxContent>
         </PopoverContent>
       </Popover>

@@ -259,6 +259,67 @@ Clears all tags.
 | `className` | `string` | - |
 | `asChild` | `boolean` | - |
 
+### TagsInputRootProvider
+
+Provides a TagsInput API created with `useTagsInput` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseTagsInputReturn` | **required** |
+
+### TagsInputContext
+
+Render-prop access to the surrounding component API.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: unknown) => React.ReactNode` | **required** |
+
+### TagsInputControl
+
+Public TagsInputControl component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### TagsInputItemPreview
+
+Public TagsInputItemPreview component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### TagsInputItemText
+
+Public TagsInputItemText component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### TagsInputItemDeleteTrigger
+
+Public TagsInputItemDeleteTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### TagsInputItemInput
+
+Public TagsInputItemInput component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
 ---
 
 For the full list of props and context methods, see the [Ark UI documentation](https://ark-ui.com/docs/components/tags-input#api-reference).

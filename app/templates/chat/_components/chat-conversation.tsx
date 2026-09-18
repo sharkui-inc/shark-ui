@@ -9,7 +9,7 @@ import {
   MessageScrollerViewport,
 } from "@/registry/react/components/message-scroller";
 import { useChatHelper } from "@/registry/react/hooks/use-chat-helper";
-import { chat, getMessageText, toPromptStatus } from "../_data/chat-demo";
+import { chat, toPromptStatus } from "../_data/chat-demo";
 import { EmptyConversation } from "./chat-empty-state";
 import { FollowLatestMessage } from "./chat-follow-latest";
 import { ChatHeader } from "./chat-header";
@@ -21,17 +21,16 @@ const noop = () => undefined;
 export const ChatConversation = () => {
   const { canSendNext, messages, nextMessage, sendNext, status, stop } =
     useChatHelper({
-      adapter: "ai-sdk",
       chat,
     });
   const promptStatus = toPromptStatus(status);
-  const nextText = nextMessage ? getMessageText(nextMessage) : "";
+  const nextText = nextMessage?.content ?? "";
   const usedTokens = Math.min(18_420 + messages.length * 640, 128_000);
   const isBusy = status === "submitted" || status === "streaming";
   const latestAssistantMessage = [...messages]
     .reverse()
     .find((message) => message.role === "assistant");
-  const latestMessageText = getMessageText(messages.at(-1) ?? { parts: [] });
+  const latestMessageText = messages.at(-1)?.content ?? "";
 
   const handleSubmit = () => {
     if (canSendNext) {

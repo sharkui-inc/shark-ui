@@ -8,10 +8,6 @@ import manifest from "@/registry/manifest/sidebar";
 
 <PreviewIframe wide src="/view/blocks/sidebar/default" title="Sidebar Default" className="min-h-[550px]" />
 
-For full-page examples that wire the sidebar:
-
-Browse the [Sidebar Blocks](/blocks/sidebar).
-
 ## Installation
 
 <CodeTabs>
@@ -38,6 +34,43 @@ npx shadcn@latest add @shark/sidebar
 <Step>Install the following dependencies:</Step>
 
 <RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Import the following variables into your CSS file:</Step>
+
+```css showLineNumbers
+@theme inline {
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --sidebar: var(--color-neutral-50);
+  --sidebar-foreground: color-mix(in srgb, var(--color-neutral-800) 80%, var(--sidebar));
+  --sidebar-primary: var(--color-neutral-800);
+  --sidebar-primary-foreground: var(--color-neutral-50);
+  --sidebar-accent: color-mix(in srgb, var(--color-neutral-950) 4%, var(--sidebar));
+  --sidebar-accent-foreground: var(--color-neutral-800);
+  --sidebar-border: color-mix(in srgb, var(--color-neutral-950) 6%, var(--sidebar));
+  --sidebar-ring: var(--color-neutral-600);
+}
+
+.dark {
+  --sidebar: color-mix(in srgb, var(--color-neutral-950) 97%, var(--color-neutral-50));
+  --sidebar-foreground: color-mix(in srgb, var(--color-neutral-100) 80%, var(--sidebar));
+  --sidebar-primary: var(--color-neutral-100);
+  --sidebar-primary-foreground: var(--color-neutral-800);
+  --sidebar-accent: color-mix(in srgb, var(--color-neutral-50) 4%, var(--sidebar));
+  --sidebar-accent-foreground: var(--color-neutral-100);
+  --sidebar-border: color-mix(in srgb, var(--color-neutral-50) 5%, var(--sidebar));
+  --sidebar-ring: var(--color-neutral-400);
+}
+```
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -191,15 +224,15 @@ React to collapse mode and peer state with utilities.
 </SidebarMenuItem>
 ```
 
+## Keyboard shortcut
+
+The toggle listens for **`⌘B`** on macOS and **`Ctrl+B`** elsewhere (`SIDEBAR_KEYBOARD_SHORTCUT` in source). Match that expectation in shortcuts or help copy.
+
 ## RTL
 
 To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
-<PreviewIframe wide src="/view/blocks/sidebar/rtl" title="Sidebar RTL" className="min-h-[550px]" />
-
-## Keyboard shortcut
-
-The toggle listens for **`⌘B`** on macOS and **`Ctrl+B`** elsewhere (`SIDEBAR_KEYBOARD_SHORTCUT` in source). Match that expectation in shortcuts or help copy.
+<PreviewIframe wide side="right" src="/view/blocks/sidebar/rtl" title="Sidebar RTL" className="min-h-[550px]" />
 
 ## API Reference
 
@@ -207,11 +240,11 @@ The toggle listens for **`⌘B`** on macOS and **`Ctrl+B`** elsewhere (`SIDEBAR_
 
 `SidebarProvider` must wrap any tree that calls `useSidebar` or renders `Sidebar` / `SidebarTrigger`. It forwards standard `div` props (including `className` and `style`).
 
-| Name | Type | Description |
+| Prop | Type | Default |
 | --- | --- | --- |
-| `defaultOpen` | `boolean` | Initial open state on desktop (`true` by default). |
-| `open` | `boolean` | Controlled open flag. |
-| `onOpenChange` | `(details: OpenChangeDetails) => void` | Fires when the open flag changes. |
+| `defaultOpen` | `boolean` | `true` |
+| `open` | `boolean` | - |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
 
 #### Width
 
@@ -230,29 +263,29 @@ Defaults live beside `SIDEBAR_WIDTH` and `SIDEBAR_WIDTH_MOBILE` inside the regis
 </SidebarProvider>
 ```
 
-| Attribute | Default |
-| --- | --- |
-| `--sidebar-width` | `16rem` |
-| `--sidebar-width-mobile` | `18rem` |
-| `--sidebar-width-icon` | `3rem` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--sidebar-width` | CSS custom property | `16rem` |
+| `--sidebar-width-mobile` | CSS custom property | `18rem` |
+| `--sidebar-width-icon` | CSS custom property | `3rem` |
 
 ### Sidebar
 
-Primary column component: desktop fixed strip + mobile sheet (via [Sheet](/docs/components/sheet)).
+Primary column component: desktop fixed strip + mobile sheet
 
-| Property | Type | Description |
+| Prop | Type | Default |
 | --- | --- | --- |
-| `placement` | `"left" \| "right"` | Physical horizontal edge the column hugs; it does not change with document direction. |
-| `variant` | `"sidebar" \| "floating" \| "inset"` | Visual treatment: flush rail, floating panel, or inset shell. |
-| `collapsible` | `"offcanvas" \| "icon" \| "none"` | How width collapses. |
+| `placement` | `"left" \| "right"` | `"left"` |
+| `variant` | `"sidebar" \| "floating" \| "inset"` | `"sidebar"` |
+| `collapsible` | `"offcanvas" \| "icon" \| "none"` | `"offcanvas"` |
 
 ### Collapsible modes
 
-| Mode | Behavior |
-| --- | --- |
-| `offcanvas` | Collapses off-screen; rail can recall it. |
-| `icon` | Shrinks to an icon rail. |
-| `none` | Fixed width; no collapse animation. |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `offcanvas` | `string` | - |
+| `icon` | `string` | - |
+| `none` | `string` | - |
 
 With **`variant="inset"`**, park page content in **`SidebarInset`** so padding, radius, and background line up with the inset shell:
 
@@ -264,6 +297,15 @@ With **`variant="inset"`**, park page content in **`SidebarInset`** so padding, 
   </SidebarInset>
 </SidebarProvider>
 ```
+
+### SidebarInset
+
+Public SidebarInset component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 ### useSidebar
 
@@ -283,17 +325,21 @@ export function Example() {
 }
 ```
 
-| Property | Type | Description |
+| Prop | Type | Default |
 | --- | --- | --- |
-| `state` | `"expanded" \| "collapsed"` | Desktop collapse mode. |
-| `open` | `boolean` | Desktop drawer expanded. |
-| `setOpen` | `(open: boolean) => void` | Set desktop open. |
-| `openMobile` | `boolean` | Mobile sheet visibility. |
-| `setOpenMobile` | `(open: boolean) => void` | Control the sheet. |
-| `isMobile` | `boolean` | Breakpoint-derived mobile flag. |
-| `toggleSidebar` | `() => void` | Toggles desktop or mobile as appropriate. |
+| `state` | `"expanded" \| "collapsed"` | - |
+| `open` | `boolean` | - |
+| `setOpen` | `(open: boolean) => void` | - |
+| `openMobile` | `boolean` | - |
+| `setOpenMobile` | `(open: boolean) => void` | - |
+| `isMobile` | `boolean` | - |
+| `toggleSidebar` | `() => void` | - |
 
 ### SidebarHeader
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 Sticky top region. Common pattern: workspace switcher or brand row inside a `SidebarMenu`.
 
@@ -315,6 +361,10 @@ Sticky top region. Common pattern: workspace switcher or brand row inside a `Sid
 Wire menus or [Menu](/docs/components/menu) triggers to `SidebarMenuButton` as needed.
 
 ### SidebarFooter
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 Sticky bottom slot: profile, settings entry, sign-out, etc.
 
@@ -332,7 +382,29 @@ Sticky bottom slot: profile, settings entry, sign-out, etc.
 </Sidebar>
 ```
 
+### SidebarInput
+
+Public SidebarInput component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### SidebarSeparator
+
+Public SidebarSeparator component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
 ### SidebarContent
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 Wraps scrollable groups. Fades the edges when the content overflows. Pass **`scrollFade={false}`** to disable.
 
@@ -345,11 +417,15 @@ Wraps scrollable groups. Fades the edges when the content overflows. Pass **`scr
 </Sidebar>
 ```
 
-| Attribute | Default |
-| --- | --- |
-| `--fade-size` | `3rem` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--fade-size` | CSS custom property | `3rem` |
 
 ### SidebarGroup
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 A titled block with optional `SidebarGroupAction` and `SidebarGroupContent`.
 
@@ -384,7 +460,38 @@ Collapsible groups pair with [Collapsible](/docs/components/collapsible). `Sideb
 </Collapsible>
 ```
 
+### SidebarGroupLabel
+
+Public SidebarGroupLabel component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### SidebarGroupAction
+
+Public SidebarGroupAction component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### SidebarGroupContent
+
+Public SidebarGroupContent component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
 ### SidebarMenu
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 Row list inside a group. Map data to `SidebarMenuItem` / `SidebarMenuButton`.
 
@@ -403,7 +510,20 @@ Row list inside a group. Map data to `SidebarMenuItem` / `SidebarMenuButton`.
 </SidebarMenu>
 ```
 
+### SidebarMenuItem
+
+Public SidebarMenuItem component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
 ### SidebarMenuButton
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 Default renders a **Button**; use **`asChild`** for links. **`isActive`** highlights the active route; **`tooltip`** surfaces collapsed labels.
 
@@ -414,6 +534,10 @@ Default renders a **Button**; use **`asChild`** for links. **`isActive`** highli
 ```
 
 ### SidebarMenuAction
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 Icon-only or compact action aligned to a row. Use **`showOnHover`** to reveal on row hover.
 
@@ -432,6 +556,10 @@ Icon-only or compact action aligned to a row. Use **`showOnHover`** to reveal on
 ```
 
 ### SidebarMenuSub
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 Nested list hanging off a parent item.
 
@@ -446,7 +574,29 @@ Nested list hanging off a parent item.
 </SidebarMenuItem>
 ```
 
+### SidebarMenuSubItem
+
+Public SidebarMenuSubItem component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### SidebarMenuSubButton
+
+Public SidebarMenuSubButton component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
 ### SidebarMenuBadge
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 Small count or pill beside a row.
 
@@ -458,6 +608,10 @@ Small count or pill beside a row.
 ```
 
 ### SidebarMenuSkeleton
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 Placeholder rows while async routes or prefs load.
 
@@ -471,8 +625,13 @@ Placeholder rows while async routes or prefs load.
 </SidebarMenu>
 ```
 
+
 ### SidebarTrigger
 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 Prebuilt toggle wired to context. Drop it next to your page title or in a toolbar.
 
 ```tsx
@@ -488,6 +647,10 @@ export function CustomTrigger() {
 Prefer `SidebarTrigger` when you want the default styling and accessibility bundle.
 
 ### SidebarRail
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 Draggable edge control that expands or collapses the desktop rail. Place it after header/content/footer inside `Sidebar`.
 

@@ -36,7 +36,7 @@ const ComboboxRtl = () => {
               filter(reason === "item-select" ? "" : inputValue)
             }
           >
-            <ComboboxContext>
+            <ComboboxContext<Framework>>
               {({ selectedItems }) => (
                 <>
                   <ComboboxChips>
@@ -75,5 +75,7 @@ const initialItems = [
   { label: "التعليم", value: "education" },
   { label: "الصحة", value: "health" },
 ];
+
+type Framework = (typeof initialItems)[number];
 
 export default ComboboxRtl;

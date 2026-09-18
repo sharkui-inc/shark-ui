@@ -1,11 +1,15 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "categories": ["sidebar"],
-  "dependencies": ["lucide-react"],
+  "categories": [
+    "sidebar"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
   "description": "A right-side messaging sidebar with labels and unread counts.",
   "files": [
     {
-      "content": "import {\n  SidebarInset,\n  SidebarProvider,\n  SidebarTrigger,\n} from \"@/components/ui/sidebar\";\nimport { AppSidebar } from \"@/components/sidebar-14/app-sidebar\";\n\nexport default function Sidebar14Page() {\n  return (\n    <SidebarProvider>\n      <SidebarInset>\n        <header className=\"flex h-14 shrink-0 items-center gap-2 border-b px-4\">\n          <div className=\"min-w-0\">\n            <p className=\"truncate font-medium text-sm\">Data fetching</p>\n            <p className=\"truncate text-muted-foreground text-xs\">\n              Build your application\n            </p>\n          </div>\n          <SidebarTrigger className=\"ms-auto rotate-180 rtl:rotate-0\" />\n        </header>\n        <main className=\"flex flex-1 flex-col gap-4 p-4\">\n          <div className=\"grid gap-4 md:grid-cols-3\">\n            {[\"routing\", \"caching\", \"rendering\"].map((card) => (\n              <div className=\"aspect-video rounded-xl bg-muted/45\" key={card} />\n            ))}\n          </div>\n          <div className=\"min-h-96 flex-1 rounded-xl bg-muted/45\" />\n        </main>\n      </SidebarInset>\n      <AppSidebar />\n    </SidebarProvider>\n  );\n}\n",
+      "content": "import {\n  SidebarInset,\n  SidebarProvider,\n  SidebarTrigger,\n} from \"@/components/ui/sidebar\";\nimport { AppSidebar } from \"@/components/sidebar-14/app-sidebar\";\n\nexport default function Sidebar14Page() {\n  return (\n    <SidebarProvider>\n      <SidebarInset>\n        <header className=\"flex h-14 shrink-0 items-center gap-2 border-b px-4\">\n          <div className=\"min-w-0\">\n            <p className=\"truncate font-medium text-sm\">Data fetching</p>\n            <p className=\"truncate text-muted-foreground text-xs\">\n              Build your application\n            </p>\n          </div>\n          <SidebarTrigger className=\"ms-auto rotate-180 rtl:rotate-0\" />\n        </header>\n        <main className=\"flex flex-1 flex-col gap-4 p-4\">\n          <div className=\"grid gap-4 md:grid-cols-3\">\n            {[\"routing\", \"caching\", \"rendering\"].map((card) => (\n              <div className=\"aspect-video rounded-xl bg-muted/48\" key={card} />\n            ))}\n          </div>\n          <div className=\"min-h-96 flex-1 rounded-xl bg-muted/48\" />\n        </main>\n      </SidebarInset>\n      <AppSidebar />\n    </SidebarProvider>\n  );\n}\n",
       "path": "blocks/sidebar/sidebar-14/page.tsx",
       "target": "app/dashboard/page.tsx",
       "type": "registry:page"
@@ -23,7 +27,9 @@
     "previewHeight": 760
   },
   "name": "sidebar-14",
-  "registryDependencies": ["https://shark-ui.com/r/sidebar.json"],
+  "registryDependencies": [
+    "https://shark-ui.com/r/sidebar.json"
+  ],
   "title": "Sidebar 14",
   "type": "registry:block"
 }

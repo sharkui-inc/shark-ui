@@ -41,7 +41,7 @@ export const AlertDialogBody = (
   return (
     <DialogBody
       className={cn(
-        "in-[[data-slot=alert-dialog-content]:has([data-slot=alert-dialog-header])]:pt-0",
+        "in-[[data-slot=alert-dialog-content]:has([data-slot=alert-dialog-header]:not(.sr-only))]:pt-0",
         className
       )}
       data-slot="alert-dialog-body"

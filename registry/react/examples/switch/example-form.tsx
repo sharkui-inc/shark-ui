@@ -48,7 +48,7 @@ const Example = () => {
               />
               <FieldContent>
                 <FieldLabel>I agree to the terms</FieldLabel>
-                {errors.terms && <FieldError>{errors.terms}</FieldError>}
+                {errors.terms ? <FieldError>{errors.terms}</FieldError> : null}
               </FieldContent>
             </Field>
           </FieldGroup>

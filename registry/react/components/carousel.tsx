@@ -2,14 +2,17 @@
 
 import {
   Carousel as ArkCarousel,
-  useCarouselContext,
+  useCarousel as useArkCarousel,
+  useCarouselContext as useArkCarouselContext,
 } from "@ark-ui/react/carousel";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 
-export const useCarousel = useCarouselContext;
+export const useCarousel = useArkCarousel;
+export const useCarouselContext = useArkCarouselContext;
+export const CarouselRootProvider = ArkCarousel.RootProvider;
 
 export const Carousel = (
   props: React.ComponentProps<typeof ArkCarousel.Root>

@@ -41,13 +41,6 @@ npx shadcn@latest add @shark/focus-trap
 </TabsContent>
 </CodeTabs>
 
-## Anatomy
-
-```text
-FocusTrap
-└── Focusable controls
-```
-
 ## Usage
 
 ```tsx
@@ -61,19 +54,17 @@ import { FocusTrap } from "@/components/ui/focus-trap";
 </FocusTrap>
 ```
 
-The wrapper has no visual styles. Use `className` to lay out the container, or `asChild` with a single element. Always provide a way to end the trap from inside it. Existing Shark dialogs and drawers already manage focus; they do not need an additional trap.
-
 ## Examples
 
 ### Autofocus
 
-Mount the contents after the user activates the trap. The second input uses `autoFocus`, and focus returns to the start button when the trap is removed.
+Mount the trap after activation and put `autoFocus` on a child. Use `setReturnFocus` to restore focus when it unmounts.
 
 <ComponentPreview componentName="focus-trap" fileName="example-autofocus" />
 
 ### Initial focus
 
-Use a ref and `initialFocus` to choose which control receives focus on activation.
+Pass `initialFocus` to set which control receives focus when the trap activates.
 
 <ComponentPreview componentName="focus-trap" fileName="example-initial-focus" />
 
@@ -81,15 +72,18 @@ Use a ref and `initialFocus` to choose which control receives focus on activatio
 
 ### FocusTrap
 
-Accepts Ark's `FocusTrap` props, native div attributes, and a ref.
-
-| Prop | Type | Description |
+| Prop | Type | Default |
 | --- | --- | --- |
-| `disabled` | `boolean` | Disable the trap. The examples start disabled. |
-| `asChild` | `boolean` | Merge onto a single child element. |
-| `initialFocus` | Focus target or function; also accepts `false` | Choose initial focus, or skip it. |
-| `fallbackFocus` | Focus target or function | Target to focus if no tabbable controls exist. Give a fallback container `tabIndex={-1}`. |
-| `returnFocusOnDeactivate` | `boolean` | Return focus after deactivation; defaults to `true`. The basic example explicitly sets it to `false`. |
-| `setReturnFocus` | Focus target or function | Choose the target for restored focus. |
-| `persistentElements` | `(() => Element \| null)[]` | Additional elements, such as portalled content, treated as inside the trap. |
-| `onActivate`, `onDeactivate` | `() => void` | Callbacks when the trap activates or deactivates. |
+| `disabled` | `boolean` | `-` |
+| `asChild` | `boolean` | `-` |
+| `initialFocus` | `FocusTargetOrFalse` | `-` |
+| `fallbackFocus` | `FocusTarget` | `-` |
+| `returnFocusOnDeactivate` | `boolean` | `true` |
+| `setReturnFocus` | `FocusTargetValueOrFalse \| ((node: HTMLElement \| SVGElement) => FocusTargetValueOrFalse)` | `-` |
+| `persistentElements` | `(() => Element \| null)[]` | `-` |
+| `onActivate` | `() => void` | `-` |
+| `onDeactivate` | `() => void` | `-` |
+
+---
+
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/utilities/focus-trap#api-reference).

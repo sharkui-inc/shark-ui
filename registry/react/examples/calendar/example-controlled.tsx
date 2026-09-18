@@ -23,7 +23,7 @@ const Example = () => {
       <Card className="[--space:--spacing(2)]">
         <CardContent>
           <Calendar
-            onValueChange={({ value }) => setValue(value)}
+            onValueChange={({ value: nextValue }) => setValue(nextValue)}
             value={value}
           >
             <CalendarViewControl>

@@ -198,7 +198,8 @@
 
 .prose img:not(.not-prose img),
 .prose picture:not(.not-prose picture),
-.prose video:not(.not-prose video) {
+.prose video:not(.not-prose video),
+.prose iframe:not(.not-prose iframe) {
   margin-top: calc(var(--spacing) * 6);
   margin-bottom: calc(var(--spacing) * 6);
 }
@@ -266,9 +267,13 @@
   margin-bottom: calc(var(--spacing) * 6);
 }
 
-.prose figure:not(.not-prose figure) img {
+.prose figure:not(.not-prose figure) img,
+.prose figure:not(.not-prose figure) iframe {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.prose figure:not(.not-prose figure) img {
   border-radius: var(--radius);
 }
 

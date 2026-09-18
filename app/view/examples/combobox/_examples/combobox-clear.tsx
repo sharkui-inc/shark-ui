@@ -22,7 +22,7 @@ const ComboboxClear = () => {
     <Combobox
       className="w-full max-w-64"
       collection={collection}
-      defaultValue={initialItems[0].value}
+      defaultValue={[initialItems[0].value]}
       onInputValueChange={({ inputValue, reason }) =>
         filter(reason === "item-select" ? "" : inputValue)
       }

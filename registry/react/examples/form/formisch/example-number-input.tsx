@@ -34,7 +34,7 @@ import {
   NumberInputInput,
 } from "@/registry/react/components/number-input";
 
-export const Example = () => {
+const Example = () => {
   const form = useForm({
     initialInput: { expectedSalary: "" },
     schema: formSchema,

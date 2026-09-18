@@ -1,6 +1,10 @@
 "use client";
 
-import { Menu as ArkMenu, useMenuContext } from "@ark-ui/react/menu";
+import {
+  Menu as ArkMenu,
+  useMenu as useArkMenu,
+  useMenuContext as useArkMenuContext,
+} from "@ark-ui/react/menu";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -15,7 +19,9 @@ import {
   MenuSubTrigger,
 } from "@/registry/react/components/menu";
 
-export const useContextMenu = useMenuContext;
+export const useContextMenu = useArkMenu;
+export const useContextMenuContext = useArkMenuContext;
+export const ContextMenuRootProvider = ArkMenu.RootProvider;
 
 export const ContextMenu = (props: React.ComponentProps<typeof Menu>) => (
   <Menu data-slot="context-menu" {...props} />

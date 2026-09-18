@@ -120,6 +120,23 @@ interface AttachmentMediaProps
 
 export const AttachmentMedia = (props: AttachmentMediaProps) => {
   const { children, className, format, variant = "icon", ...rest } = props;
+  let content = children;
+
+  if (variant === "file") {
+    content = (
+      <FileThumbnail
+        className="group-data-[size=lg]:scale-[1.2] group-data-[size=sm]:scale-[.8] group-data-[size=xs]:scale-[.7]"
+        format={format}
+        size="sm"
+      />
+    );
+  } else if (variant === "icon") {
+    content = (
+      <IconTile aria-hidden="true" className="size-full">
+        {children}
+      </IconTile>
+    );
+  }
 
   return (
     <ark.div
@@ -128,19 +145,7 @@ export const AttachmentMedia = (props: AttachmentMediaProps) => {
       data-variant={variant}
       {...rest}
     >
-      {variant === "file" ? (
-        <FileThumbnail
-          className="group-data-[size=lg]:scale-[1.2] group-data-[size=sm]:scale-[.8] group-data-[size=xs]:scale-[.7]"
-          format={format}
-          size="sm"
-        />
-      ) : variant === "icon" ? (
-        <IconTile aria-hidden="true" className="size-full">
-          {children}
-        </IconTile>
-      ) : (
-        children
-      )}
+      {content}
     </ark.div>
   );
 };
@@ -282,8 +287,9 @@ export const AttachmentGroup = (
 
   return (
     <ScrollArea
-      className={cn("h-auto py-1", className)}
+      className={cn("h-auto", className)}
       orientation="horizontal"
+      scrollbarGutter
       scrollFade
     >
       <ark.div

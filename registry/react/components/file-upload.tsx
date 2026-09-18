@@ -3,6 +3,7 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   FileUpload as ArkFileUpload,
+  useFileUpload as useArkFileUpload,
   useFileUploadContext as useArkFileUploadContext,
 } from "@ark-ui/react/file-upload";
 import { UploadIcon, XIcon } from "lucide-react";
@@ -10,7 +11,9 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 
-export const useFileUpload = useArkFileUploadContext;
+export const useFileUpload = useArkFileUpload;
+export const useFileUploadContext = useArkFileUploadContext;
+export const FileUploadRootProvider = ArkFileUpload.RootProvider;
 
 export const FileUpload = (
   props: React.ComponentProps<typeof ArkFileUpload.Root>
@@ -141,7 +144,7 @@ interface FileUploadListProps
 export const FileUploadList = (props: FileUploadListProps) => {
   const { className, ...rest } = props;
 
-  const fileUpload = useFileUpload();
+  const fileUpload = useFileUploadContext();
 
   const files = fileUpload.acceptedFiles;
 
@@ -313,15 +316,6 @@ export const FileUploadClearTrigger = (
 ) => (
   <ArkFileUpload.ClearTrigger
     data-slot="file-upload-clear-trigger"
-    {...props}
-  />
-);
-
-export const FileUploadRootProvider = (
-  props: React.ComponentProps<typeof ArkFileUpload.RootProvider>
-) => (
-  <ArkFileUpload.RootProvider
-    data-slot="file-upload-root-provider"
     {...props}
   />
 );

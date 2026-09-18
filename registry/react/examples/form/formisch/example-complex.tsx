@@ -169,7 +169,7 @@ const Example = () => {
                               onCheckedChange={({ checked }) => {
                                 const next = checked
                                   ? [...list, addon.id]
-                                  : list.filter((v) => v !== addon.id);
+                                  : list.filter((id) => id !== addon.id);
                                 field.onChange(next);
                               }}
                             />

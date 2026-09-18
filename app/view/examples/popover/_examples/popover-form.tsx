@@ -17,8 +17,8 @@ import {
 
 const PopoverForm = () => (
   <Popover positioning={{ placement: "bottom-start" }}>
-    <PopoverTrigger render={<Button variant="outline" />}>
-      Open Popover
+    <PopoverTrigger asChild>
+      <Button variant="outline">Open Popover</Button>
     </PopoverTrigger>
     <PopoverContent className="w-64">
       <PopoverHeader>

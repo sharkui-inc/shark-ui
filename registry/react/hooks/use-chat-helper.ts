@@ -2,98 +2,123 @@
 
 import { useChat } from "@ai-sdk/react";
 import { useChat as useTanStackChat } from "@tanstack/ai-react";
-import type { UIMessage } from "ai";
 import { useCallback, useMemo } from "react";
-import type {
-  AiSdkChat,
-  CreateChatTransportOptions,
-  TanStackChat,
+import {
+  type Chat,
+  type ChatMessage,
+  type CreateChatTransportOptions,
+  getChatRuntime,
 } from "@/registry/react/lib/create-chat";
 
-interface BaseUseChatHelperOptions {
+export interface UseChatHelperOptions {
+  chat: Chat;
   initialMessageCount?: number;
   transport?: CreateChatTransportOptions;
 }
 
-export type UseChatHelperOptions =
-  | (BaseUseChatHelperOptions & {
-      adapter: "ai-sdk";
-      chat: AiSdkChat;
-    })
-  | (BaseUseChatHelperOptions & {
-      adapter: "tanstack-ai";
-      chat: TanStackChat;
-    });
+export interface ChatHelperState {
+  canSendNext: boolean;
+  error: Error | undefined;
+  messages: ChatMessage[];
+  nextMessage: ChatMessage | null;
+  sendNext: () => Promise<void> | undefined;
+  status: "ready" | "submitted" | "streaming" | "error";
+  stop: () => void;
+}
 
-const useAiSdkChatHelper = <UI_MESSAGE extends UIMessage = UIMessage>(
-  chat: AiSdkChat<UI_MESSAGE>,
-  options: BaseUseChatHelperOptions = {}
-) => {
+const useAiSdkChatHelper = (
+  chat: Chat,
+  options: UseChatHelperOptions
+): ChatHelperState => {
+  const runtime = getChatRuntime(chat);
+  if (runtime.adapter !== "ai-sdk") {
+    throw new Error("Expected an AI SDK chat runtime.");
+  }
+
   const initialMessages = useMemo(
-    () => chat.get(options.initialMessageCount ?? 0),
-    [chat, options.initialMessageCount]
+    () =>
+      chat
+        .get(options.initialMessageCount ?? 0)
+        .map((message) => runtime.toMessage(message)),
+    [chat, options.initialMessageCount, runtime]
   );
   const transport = useMemo(
-    () => chat.transport(options.transport),
-    [chat, options.transport]
+    () => runtime.createTransport(options.transport),
+    [options.transport, runtime]
   );
-  const chatState = useChat<UI_MESSAGE>({
+  const chatState = useChat({
     messages: initialMessages,
     transport,
   });
-  const nextMessage = chat.next(chatState.messages);
+  const messages = chatState.messages.map(runtime.fromMessage);
+  const nextMessage = chat.next(messages);
   const sendNext = useCallback(() => {
     if (nextMessage) {
-      return chatState.sendMessage(nextMessage);
+      return chatState.sendMessage(runtime.toMessage(nextMessage));
     }
-  }, [chatState.sendMessage, nextMessage]);
+  }, [chatState.sendMessage, nextMessage, runtime]);
 
   return {
-    ...chatState,
     canSendNext: nextMessage !== null,
+    error: chatState.error,
+    messages,
     nextMessage,
     sendNext,
+    status: chatState.status,
+    stop: chatState.stop,
   };
 };
 
 const useTanStackChatHelper = (
-  chat: TanStackChat,
-  options: BaseUseChatHelperOptions = {}
-) => {
+  chat: Chat,
+  options: UseChatHelperOptions
+): ChatHelperState => {
+  const runtime = getChatRuntime(chat);
+  if (runtime.adapter !== "tanstack-ai") {
+    throw new Error("Expected a TanStack AI chat runtime.");
+  }
+
   const initialMessages = useMemo(
-    () => chat.get(options.initialMessageCount ?? 0),
-    [chat, options.initialMessageCount]
+    () =>
+      chat
+        .get(options.initialMessageCount ?? 0)
+        .map((message) => runtime.toMessage(message)),
+    [chat, options.initialMessageCount, runtime]
   );
   const connection = useMemo(
-    () => chat.transport(options.transport),
-    [chat, options.transport]
+    () => runtime.createTransport(options.transport),
+    [options.transport, runtime]
   );
   const chatState = useTanStackChat({
     connection,
     initialMessages,
   });
-  const nextMessage = chat.next(chatState.messages);
+  const messages = chatState.messages.map(runtime.fromMessage);
+  const nextMessage = chat.next(messages);
   const sendNext = useCallback(() => {
     if (nextMessage) {
-      return chatState.append(nextMessage);
+      return chatState.append(runtime.toMessage(nextMessage));
     }
-  }, [chatState.append, nextMessage]);
+  }, [chatState.append, nextMessage, runtime]);
 
   return {
-    ...chatState,
     canSendNext: nextMessage !== null,
+    error: chatState.error,
+    messages,
     nextMessage,
     sendNext,
+    status: chatState.status,
+    stop: chatState.stop,
   };
 };
 
-/**
- * Connects a local chat to the selected runtime. Keep `adapter` constant for
- * the lifetime of the component, as required by React's Rules of Hooks.
- */
-export const useChatHelper = (options: UseChatHelperOptions) => {
+/** Connects a local chat to the runtime selected by `createChat`. */
+export const useChatHelper = (
+  options: UseChatHelperOptions
+): ChatHelperState => {
+  const runtime = getChatRuntime(options.chat);
   const useAdapter =
-    options.adapter === "ai-sdk" ? useAiSdkChatHelper : useTanStackChatHelper;
+    runtime.adapter === "ai-sdk" ? useAiSdkChatHelper : useTanStackChatHelper;
 
-  return useAdapter(options.chat as never, options);
+  return useAdapter(options.chat, options);
 };

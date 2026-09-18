@@ -1,0 +1,219 @@
+---
+title: Prompt Input
+description: Compose and send chat prompts with attachments and tools.
+---
+
+import manifest from "@/registry/manifest/prompt-input";
+
+<ComponentPreview autoHeight componentName="prompt-input" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/prompt-input
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>This component depends on [Input Group](/docs/components/input-group). Install it first if you haven't already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/prompt-input.tsx" src="/prompt-input.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+PromptInput
+├── PromptInputHeader
+├── PromptInputTextarea
+├── PromptInputFooter
+│   ├── PromptInputTools
+│   │   └── PromptInputButton
+│   └── PromptInputSubmit
+└── PromptInputBottom
+```
+
+## Usage
+
+```tsx
+import {
+  PromptInput,
+  PromptInputBottom,
+  PromptInputFooter,
+  PromptInputSubmit,
+  PromptInputTextarea,
+  PromptInputTools,
+} from "@/components/ui/prompt-input";
+```
+
+```tsx
+<PromptInput onSubmit={({ text }) => send(text)} onStop={stop}>
+  <PromptInputTextarea aria-label="Prompt" />
+  <PromptInputFooter>
+    <PromptInputTools />
+    <PromptInputSubmit />
+  </PromptInputFooter>
+  <PromptInputBottom>Project context</PromptInputBottom>
+</PromptInput>
+```
+
+## Controlled
+
+Control the textarea value and composer `status` from the parent.
+
+<ComponentPreview
+  autoHeight
+  componentName="prompt-input"
+  fileName="example-controlled"
+/>
+
+## States
+
+### Streaming
+
+Use `status="streaming"` to show the stop control while a response is generating.
+
+<ComponentPreview
+  autoHeight
+  componentName="prompt-input"
+  fileName="example-status-streaming"
+/>
+
+### Error
+
+Use `status="error"` after a failed generation.
+
+<ComponentPreview
+  autoHeight
+  componentName="prompt-input"
+  fileName="example-status-error"
+/>
+
+### Disabled
+
+Disable the textarea, tools, and submit control together.
+
+<ComponentPreview
+  autoHeight
+  componentName="prompt-input"
+  fileName="example-disabled"
+/>
+
+## Examples
+
+### Attachments
+
+Wrap the composer in [File Upload](/docs/components/file-upload).
+
+<ComponentPreview
+  autoHeight
+  componentName="prompt-input"
+  fileName="example-file-upload"
+/>
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview autoHeight componentName="prompt-input" />
+
+## API Reference
+
+### PromptInput
+
+The textarea sits above a footer toolbar inside the same field. Enter submits, Shift+Enter inserts a new line.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `status` | `"ready" \| "submitted" \| "streaming" \| "error"` | `"ready"` |
+| `onSubmit` | `(detail: { text: string; event: FormEvent }) => void` | `-` |
+| `onStop` | `() => void` | `-` |
+| `className` | `string` | `-` |
+
+### PromptInputHeader
+
+Addon above the textarea. Place attachment chips here.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### PromptInputTextarea
+
+Message field. Submits on Enter unless `status` is `"submitted"` or `"streaming"`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### PromptInputFooter
+
+Addon below the textarea for tools and submit.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### PromptInputBottom
+
+Optional content area below the composer border. Use it for project or environment context.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### PromptInputTools
+
+Container for composer actions.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### PromptInputButton
+
+Tool button.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "outline" \| "secondary" \| "ghost" \| "link" \| "destructive"` | `"ghost"` |
+| `size` | `"xs" \| "sm" \| "icon-xs" \| "icon-sm"` | `"xs"` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### PromptInputSubmit
+
+Send control. Uses an up arrow when ready, a spinner for `"submitted"`, and a stop control for `"streaming"`. Disabled while the textarea is empty unless streaming.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "outline" \| "secondary" \| "ghost" \| "link" \| "destructive"` | `"default"` |
+| `size` | `"xs" \| "sm" \| "icon-xs" \| "icon-sm"` | `"icon-sm"` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |

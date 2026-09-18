@@ -17,6 +17,7 @@ import {
 
 export const useTagsInput = useArkTagsInput;
 export const useTagsInputContext = useArkTagsInputContext;
+export const TagsInputRootProvider = ArkTagsInput.RootProvider;
 export const TagsInputContext = ArkTagsInput.Context;
 
 interface TagsInputProps
@@ -190,10 +191,10 @@ export const TagsInputItemDeleteTrigger = (
       <InputGroupButton
         aria-label="Clear tags"
         className={cn(
-          "in-data-[size=lg]:size-6 in-data-[size=sm]:size-4 size-5",
+          "in-data-[size=lg]:size-4.5 in-data-[size=sm]:size-2.5 size-3.5",
           "shrink-0",
           "text-muted-foreground",
-          "[&_svg:not([class*='size-'])]:size-3",
+          "[&_svg:not([class*='size-'])]:size-2 in-data-[size=lg]:[&_svg:not([class*='size-'])]:size-2.5 in-data-[size=sm]:[&_svg:not([class*='size-'])]:size-1.5",
           "hover:text-foreground",
           className
         )}
@@ -255,50 +256,5 @@ export const TagsInputClearTrigger = (
         {children ?? <XIcon aria-hidden />}
       </InputGroupButton>
     </ArkTagsInput.ClearTrigger>
-  );
-};
-
-interface TagsInputRootProviderProps
-  extends React.ComponentProps<typeof ArkTagsInput.RootProvider>,
-    Pick<InputGroupProps, "size"> {
-  /**
-   * Whether tag chips use fully rounded corners.
-   *
-   * @default false
-   */
-  pill?: boolean;
-  /**
-   * Whether to show the clear button.
-   *
-   * @default true
-   */
-  showClear?: boolean;
-}
-
-export const TagsInputRootProvider = (props: TagsInputRootProviderProps) => {
-  const {
-    size = "md",
-    showClear,
-    pill = false,
-    className,
-    children,
-    ...rest
-  } = props;
-
-  return (
-    <ArkTagsInput.RootProvider
-      className={cn(
-        "group/tags-input",
-        "flex w-full flex-col gap-2",
-        className
-      )}
-      data-pill={pill}
-      data-size={size}
-      data-slot="tags-input-root-provider"
-      {...rest}
-    >
-      <TagsInputControl showClear={showClear}>{children}</TagsInputControl>
-      <ArkTagsInput.HiddenInput />
-    </ArkTagsInput.RootProvider>
   );
 };

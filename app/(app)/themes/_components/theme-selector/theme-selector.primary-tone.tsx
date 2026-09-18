@@ -1,7 +1,7 @@
 "use client";
 
 import { CircleIcon } from "lucide-react";
-import { useCallback } from "react";
+import React from "react";
 import { PRIMARY_TONES } from "@/lib/theme/catalog";
 import {
   DEFAULT_PRIMARY_TONE,
@@ -23,7 +23,7 @@ export const ThemeSelectorPrimaryTone = () => {
   const { config, locks, setPrimaryTone } = useThemeCustomization();
   const primaryTone = config.primaryTone ?? DEFAULT_PRIMARY_TONE;
 
-  const handleToggleTone = useCallback(() => {
+  const handleToggleTone = React.useCallback(() => {
     if (locks.primaryTone) {
       return;
     }

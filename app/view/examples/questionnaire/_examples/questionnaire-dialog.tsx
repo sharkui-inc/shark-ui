@@ -51,7 +51,7 @@ const QuestionnaireDialog = () => {
   };
 
   return (
-    <Dialog onOpenChange={setOpen} open={open}>
+    <Dialog onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)} open={open}>
       <DialogTrigger asChild>
         <Button variant="outline">Open clarification</Button>
       </DialogTrigger>

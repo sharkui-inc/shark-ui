@@ -44,7 +44,7 @@ export const CommandExample = (props: React.ComponentProps<"div">) => {
           "[data-slot=command-input]"
         );
 
-        if (document.activeElement === input) {
+        if (input && document.activeElement === input) {
           input.blur();
         }
       });

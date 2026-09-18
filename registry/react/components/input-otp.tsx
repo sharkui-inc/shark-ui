@@ -1,10 +1,18 @@
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
-import { PinInput as ArkPinInput } from "@ark-ui/react/pin-input";
+import {
+  PinInput as ArkPinInput,
+  usePinInput as useArkPinInput,
+  usePinInputContext as useArkPinInputContext,
+} from "@ark-ui/react/pin-input";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Input, type InputProps } from "@/registry/react/components/input";
+
+export const useInputOTP = useArkPinInput;
+export const useInputOTPContext = useArkPinInputContext;
+export const InputOTPRootProvider = ArkPinInput.RootProvider;
 
 interface InputOTPProps
   extends React.ComponentProps<typeof ArkPinInput.Root>,

@@ -1,15 +1,21 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react/collection";
-import { CheckIcon } from "lucide-react";
 import type React from "react";
-import { Button } from "@/registry/react/components/button";
+import { Checkbox } from "@/registry/react/components/checkbox";
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldTitle,
+} from "@/registry/react/components/field";
 import { useListSelection } from "@/registry/react/hooks/use-list-selection";
 
 const UseListSelectionDemo = () => {
   const selection = useListSelection({ collection, selectionMode: "multiple" });
-  const handleItemClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const { value } = event.currentTarget;
+  const handleItemClick = (value: string, event: React.MouseEvent) => {
     if (event.shiftKey && selection.firstSelectedValue) {
       selection.extend(selection.firstSelectedValue, value);
     } else if (event.ctrlKey || event.metaKey) {
@@ -20,31 +26,29 @@ const UseListSelectionDemo = () => {
   };
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
+    <div className="flex w-full max-w-sm flex-col gap-3">
       <output className="text-muted-foreground text-sm">
         Selected: {selection.selectedValues.join(", ") || "None"}
       </output>
-      <div className="flex flex-col gap-1">
-        {collection.items.map((item) => (
-          <Button
-            aria-pressed={selection.isSelected(item.value)}
-            className="justify-start"
-            key={item.value}
-            onClick={handleItemClick}
-            value={item.value}
-            variant={selection.isSelected(item.value) ? "secondary" : "ghost"}
-          >
-            <CheckIcon
-              aria-hidden="true"
-              className={
-                selection.isSelected(item.value) ? "size-4" : "size-4 opacity-0"
-              }
-              data-icon="inline-start"
-            />
-            {item.label}
-          </Button>
-        ))}
-      </div>
+      <FieldGroup className="gap-2" role="list">
+        {collection.items.map((item) => {
+          const selected = selection.isSelected(item.value);
+          return (
+            <FieldLabel className="w-full" key={item.value} role="listitem">
+              <Field orientation="horizontal">
+                <FieldContent>
+                  <FieldTitle>{item.label}</FieldTitle>
+                  <FieldDescription>{item.description}</FieldDescription>
+                </FieldContent>
+                <Checkbox
+                  checked={selected}
+                  onClick={(event) => handleItemClick(item.value, event)}
+                />
+              </Field>
+            </FieldLabel>
+          );
+        })}
+      </FieldGroup>
       <p className="text-muted-foreground text-xs">
         Click to select · Shift+click for a range · Cmd/Ctrl+click to toggle
       </p>
@@ -54,11 +58,21 @@ const UseListSelectionDemo = () => {
 
 const collection = createListCollection({
   items: [
-    { label: "React", value: "react" },
-    { label: "Vue", value: "vue" },
-    { label: "Angular", value: "angular" },
-    { label: "Svelte", value: "svelte" },
-    { label: "Solid", value: "solid" },
+    {
+      description: "Component-driven interfaces",
+      label: "React",
+      value: "react",
+    },
+    {
+      description: "Progressive web interfaces",
+      label: "Vue",
+      value: "vue",
+    },
+    {
+      description: "Lean compiled components",
+      label: "Svelte",
+      value: "svelte",
+    },
   ],
 });
 

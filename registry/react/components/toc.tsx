@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 
 export const useToc = useArkToc;
 export const useTocContext = useArkTocContext;
+export const TocRootProvider = ArkToc.RootProvider;
 export const TocContext = ArkToc.Context;
 
 export type { TocActiveChangeDetails, TocItemData } from "@ark-ui/react/toc";
@@ -21,23 +22,6 @@ export const Toc = (props: React.ComponentProps<typeof ArkToc.Root>) => {
     <ArkToc.Root
       className={cn("flex items-start gap-8", className)}
       data-slot="toc"
-      {...rest}
-    />
-  );
-};
-
-export const TocRootProvider = (
-  props: React.ComponentProps<typeof ArkToc.RootProvider>
-) => {
-  const { className, style, value, ...rest } = props;
-  const rootProps = value.getRootProps();
-
-  return (
-    <ArkToc.RootProvider
-      className={cn("flex items-start gap-8", className)}
-      data-slot="toc"
-      style={{ ...rootProps.style, ...style }}
-      value={value}
       {...rest}
     />
   );

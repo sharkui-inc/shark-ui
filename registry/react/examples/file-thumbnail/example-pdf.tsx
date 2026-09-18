@@ -8,6 +8,6 @@ const Example = () => (
   </div>
 );
 
-const formats = ["pdf", "djv", "djvu", "oxps", "xps"] as const;
+const formats = ["pdf", "xps"] as const;
 
 export default Example;

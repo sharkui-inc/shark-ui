@@ -43,19 +43,8 @@ export const createThemeExportCss = (
   primaryCss: PrimaryColor["cssVars"],
   baseCss: BaseColor["cssVars"],
   radiusCss: BorderRadius["cssVars"],
-  fonts: ThemeCopyFonts,
   primaryTone: PrimaryTone = "light"
-) => {
-  const sans = getThemeFont(fonts.fontSans);
-  const heading = getThemeFont(fonts.fontHeading);
-  const imports = uniqueThemeFonts(fonts)
-    .map((font) => `@import url("${font.cssUrl}");`)
-    .join("\n");
-  const fontVars = `:root {\n  --font-sans: ${sans.family};\n  --font-heading: ${heading.family};\n}`;
-  const tokens = createCssVars(primaryCss, baseCss, radiusCss, primaryTone);
-
-  return `${imports}\n\n${fontVars}\n\n${tokens}`;
-};
+) => createCssVars(primaryCss, baseCss, radiusCss, primaryTone);
 
 export const createThemeFontInstallCommand = (fonts: ThemeCopyFonts) => {
   const packages = uniqueThemeFonts(fonts)

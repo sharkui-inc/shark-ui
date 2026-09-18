@@ -1,42 +1,66 @@
 ---
-title: August 2026
-description: AI Elements for chat and coding agents, Hotkeys, Table of Contents, and a Blocks catalog.
+title: AI Components is here
+description: AI Components for chat and coding agents, createChat helper, new primitives, Hotkeys, migration guides, and theme updates.
 date: 2026-08-24
 ---
 
-## New AI Elements
+## AI Components
 
-- **[Prompt Input](/docs/ai-elements/prompt-input)**: Chat composer with tool slots, attach, Enter to send, and stop while streaming.
-- **[Tool Result](/docs/ai-elements/tool-result)**: Collapsible tool row with title, meta, and status.
-- **[Reasoning](/docs/ai-elements/reasoning)**: Expandable thinking with duration and shimmer.
-- **[Code Block](/docs/ai-elements/code-block)**: Filename, copy, and line numbers for agent artifacts.
-- **[Diff](/docs/ai-elements/diff)**: Unified add, delete, and context hunks.
-- **[Plan](/docs/ai-elements/plan)**: Collapsible plan with nested, status-aware steps.
-- **[Terminal](/docs/ai-elements/terminal)**: Shell output with basic ANSI colors.
-- **[Approval Card](/docs/ai-elements/approval-card)**: Collect approvals or clarifications in agent workflows.
-- **[Context](/docs/ai-elements/context)**: Show context-window token usage, breakdown, and cost.
-- **[Model Selector](/docs/ai-elements/model-selector)**: Select a model or agent from a searchable list.
-- **[Queue](/docs/ai-elements/queue)**: Show queued and completed prompts.
-- **[Sources](/docs/ai-elements/sources)**: Attach citations and footnotes to assistant responses.
-- **[Suggestion](/docs/ai-elements/suggestion)**: Offer suggested prompts for empty and quick-start states.
-- **[Speech Input](/docs/ai-elements/speech-input)**: Capture speech and return the browser transcription.
-- **[Message Scroller](/docs/ai-elements/message-scroller)**: Ark Scroll Area transcript container with jump-to-start and jump-to-end.
-- **[Message](/docs/ai-elements/message)**: Conversation row with avatar, alignment, header, and footer.
-- **[Message Bubble](/docs/ai-elements/message-bubble)**: Message surface, variants, and reaction cluster.
-- **[Attachment](/docs/ai-elements/attachment)**: File and image cards with upload state and actions.
-- **[Marker](/docs/ai-elements/marker)**: System notes, date breaks, and labeled separators.
+Building blocks for agent and chat surfaces:
 
-Install the chat bundle with `npx shadcn@latest add @shark/chat` for the transcript, composer, tool result, and reasoning.
+- **[Prompt Input](/docs/ai-components/prompt-input)**: Composer with tool slots, attach, Enter to send, and stop while streaming.
+- **[Message](/docs/ai-components/message)** / **[Message Bubble](/docs/ai-components/message-bubble)** / **[Message Scroller](/docs/ai-components/message-scroller)**: Conversation row, surface variants, and transcript scrolling with jump controls.
+- **[Attachment](/docs/ai-components/attachment)**: File and image cards with upload state and actions.
+- **[Marker](/docs/ai-components/marker)**: System notes, date breaks, and labeled separators.
+- **[Reasoning](/docs/ai-components/reasoning)**: Expandable thinking with duration and shimmer.
+- **[Tool Result](/docs/ai-components/tool-result)**: Collapsible tool row with title, meta, and status.
+- **[Code Block](/docs/ai-components/code-block)**: Filename, copy, and line numbers for agent artifacts.
+- **[Diff](/docs/ai-components/diff)**: Unified add, delete, and context hunks.
+- **[Plan](/docs/ai-components/plan)**: Collapsible plan with nested, status-aware steps.
+- **[Terminal](/docs/ai-components/terminal)**: Shell output with basic ANSI colors.
+- **[Approval Card](/docs/ai-components/approval-card)**: Approvals and clarifications in agent workflows.
+- **[Context](/docs/ai-components/context)**: Context-window token usage, breakdown, and cost.
+- **[Model Selector](/docs/ai-components/model-selector)**: Searchable model or agent picker.
+- **[Queue](/docs/ai-components/queue)**: Queued and completed prompts.
+- **[Sources](/docs/ai-components/sources)**: Citations and footnotes on assistant responses.
+- **[Suggestion](/docs/ai-components/suggestion)**: Suggested prompts for empty and quick-start states.
+- **[Speech Input](/docs/ai-components/speech-input)**: Browser speech capture and transcription.
+
+## Helper
+
+- **[Chat (`createChat`)](/docs/helpers/create-chat)**: Deterministic local conversations for AI SDK and TanStack AI, with a matching chat helper hook.
+
+## New components
+
+- **[Table of Contents](/docs/components/toc)**: Active heading tracking, nested indent, sliding indicator, and `useToc` / `TocRootProvider`. Ark UI marks this primitive as preview.
+- **[Questionnaire](/docs/components/questionnaire)**: Composable multi-step form.
+- **[Data Table](/docs/components/data-table)**: Composable table built on TanStack Table.
+- **[Masonry](/docs/components/masonry)**: Responsive columns with varied item heights.
+- **[State](/docs/components/state)**: Layout for empty, error, and other contextual screen states.
+- **[File Thumbnail](/docs/components/file-thumbnail)**: Compact file-format identifier.
+- **[Icon Tile](/docs/components/icon-tile)**: Consistent surface for icons, initials, and short text.
 
 ## New utilities
 
 - **[Shimmer](/docs/utilities/shimmer)**: Text shimmer for live status such as thinking or uploading.
-- **[Hotkeys](/docs/utilities/hotkeys)**: Register shortcuts, sequences, and scopes with `useHotkey` / `useHotkeys`. Format them with `useFormatHotkey`. Read the registry back for a command palette. Ark UI marks this utility as preview.
+- **[Hotkeys](/docs/utilities/hotkeys)**: Shortcuts, sequences, and scopes via `useHotkey` / `useHotkeys`, plus `useFormatHotkey` and a readable registry for command palettes. Ark UI marks this utility as preview.
+- **[Focus Trap](/docs/utilities/focus-trap)**: Keep keyboard focus inside a region.
+- **[Iframe](/docs/utilities/iframe)**: Controlled iframe embedding for previews and embeds.
 
-## New component
+## New hooks
 
-- **[Table of Contents](/docs/components/toc)**: Tracks the active heading as the reader scrolls. Nested indent, a sliding indicator, Collapsible composition, and `useToc` / `TocRootProvider` for `activeIds` outside the tree. Ark UI marks this primitive as preview.
+- **[useAsyncList](/docs/hooks/use-async-list)**: Load, filter, sort, and paginate asynchronous lists.
+- **[useListSelection](/docs/hooks/use-list-selection)**: Single, multiple, and range selection for collections.
 
-## Blocks
+## Migration
 
-The **[Blocks](/blocks)** page has composed interfaces for Authentication, Dashboard, Sidebar, and AI. Copy the source or install a block from the registry.
+Guides for moving into Shark UI from [shadcn](/docs/migration/shadcn), [Radix](/docs/migration/radix), and [Base UI](/docs/migration/base-ui).
+
+## Theme & site
+
+- Theme editor: font selection, heading controls, primary tone, radius, and the existing color system.
+- Home and docs polish around AI Components and the expanded registry surface.
+
+## Removals
+
+- **Hint**: Removed in favor of [Tooltip](/docs/components/tooltip).

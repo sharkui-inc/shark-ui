@@ -59,8 +59,10 @@ const Example = () => {
         <Pagination
           className="flex-1 justify-end"
           count={users.length}
-          onPageChange={({ page }) => setPage(page)}
-          onPageSizeChange={({ pageSize }) => setPageSize(pageSize)}
+          onPageChange={({ page: nextPage }) => setPage(nextPage)}
+          onPageSizeChange={({ pageSize: nextPageSize }) =>
+            setPageSize(nextPageSize)
+          }
           page={page}
           pageSize={pageSize}
         >

@@ -3,12 +3,15 @@
 import { Portal } from "@ark-ui/react";
 import {
   HoverCard as ArkHoverCard,
-  useHoverCardContext,
+  useHoverCard as useArkHoverCard,
+  useHoverCardContext as useArkHoverCardContext,
 } from "@ark-ui/react/hover-card";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useHoverCard = useHoverCardContext;
+export const useHoverCard = useArkHoverCard;
+export const useHoverCardContext = useArkHoverCardContext;
+export const HoverCardRootProvider = ArkHoverCard.RootProvider;
 
 interface HoverCardProps
   extends React.ComponentProps<typeof ArkHoverCard.Root> {}
@@ -17,8 +20,8 @@ export const HoverCard = (props: HoverCardProps) => {
   const {
     lazyMount = true,
     unmountOnExit = true,
-    closeDelay = 100,
-    openDelay = 10,
+    closeDelay = 300,
+    openDelay = 600,
     positioning,
     ...rest
   } = props;
@@ -85,7 +88,7 @@ export const HoverCardContent = (props: HoverCardContentProps) => {
         >
           {children}
 
-          {showArrow && <HoverCardArrow />}
+          {showArrow ? <HoverCardArrow /> : null}
         </ArkHoverCard.Content>
       </ArkHoverCard.Positioner>
     </Portal>

@@ -36,8 +36,8 @@ Use semantic Tailwind utilities such as `bg-background`, `text-foreground`, `bg-
 | --- | --- | --- |
 | `background` / `foreground` | Canvas and highest-emphasis content. | A component-specific decorative fill. |
 | `card`, `popover`, `sidebar`, `code` | Bounded surface with its matching foreground token. | A substitute for a primary action. |
-| `muted` and `accent` | Neutral `/4` recessive content, hover, and contextual selection. | A second primary color. |
-| `secondary` | Neutral `/8` supporting filled controls; `/16` on hover. | A semantic success, warning, or destructive state. |
+| `muted` | Neutral `/4` recessive content. | A second primary color. |
+| `accent`, `secondary`, and `sidebar-accent` | Neutral `/8` interactive or supporting fill; `secondary` uses `/16` on hover. | A semantic success, warning, or destructive state. |
 | `primary` | Primary actions and persistent emphasis. | General decoration. |
 | Feedback roles | Meaningful success, warning, info, or destructive feedback. | Decorative variation. |
 

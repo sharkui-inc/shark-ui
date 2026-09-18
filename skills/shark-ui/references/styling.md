@@ -6,7 +6,7 @@ Other primitives import these `tv()` bases onto their Ark parts. Do not redeclar
 
 | Base | Exports | Used by |
 | --- | --- | --- |
-| Button | `buttonControlVariants`, `buttonVariants` | Toggle, Tabs, Segment Group, Navigation Menu, Sidebar, Editable, Pagination |
+| Button | `buttonControlVariants`, `buttonVariants` | Toggle, Tabs, Segment Group, Sidebar, Editable, Pagination |
 | Input | `inputVariants`, `inputItemVariants` | Clipboard, Combobox, Select/Listbox rows (`inputItemVariants`) |
 | Menu | `menuItemControlVariants`, `menuListVariants`, plus group/empty/separator variants | list-row density |
 | Dialog | `dialogOverlayVariants`, `dialogContentVariants` | Command (content); Tour (overlay); Sheet and Alert Dialog re-export Dialog parts |
@@ -14,7 +14,7 @@ Other primitives import these `tv()` bases onto their Ark parts. Do not redeclar
 
 ## List rows
 
-Menu, ContextMenu, Select, Combobox, Autocomplete, ModelSelector, NavigationMenu, PromptInputPopover, Command, and Listbox use Menu density:
+Menu, ContextMenu, Select, Combobox, Autocomplete, ModelSelector, Command, and Listbox use Menu density:
 
 - Rows: `menuItemControlVariants` (`min-h-8`, `rounded-lg`, `gap-2`). Not `rounded-xl`.
 - Floating list overlays: `menuListVariants` (`p-1`).

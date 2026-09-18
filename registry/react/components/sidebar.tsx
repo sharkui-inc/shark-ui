@@ -166,6 +166,7 @@ export const Sidebar = (props: SidebarProps) => {
     ...rest
   } = props;
 
+  // Placement selects a physical viewport edge, independent of document direction.
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
 
   if (collapsible === "none") {
@@ -232,6 +233,7 @@ export const Sidebar = (props: SidebarProps) => {
           "relative",
           "w-(--sidebar-width)",
           "bg-transparent",
+          "transition-[width] duration-200 ease-linear",
           "group-data-[collapsible=offcanvas]:w-0",
           "group-data-[placement=right]:rotate-180",
           variant === "floating" || variant === "inset"
@@ -246,12 +248,13 @@ export const Sidebar = (props: SidebarProps) => {
           "w-(--sidebar-width)",
           "hidden md:flex",
           "h-svh",
+          "transition-[left,right,width] duration-200 ease-linear",
           placement === "left"
-            ? "inset-s-0 group-data-[collapsible=offcanvas]:-inset-s-(--sidebar-width)"
-            : "inset-e-0 group-data-[collapsible=offcanvas]:-inset-e-(--sidebar-width)",
+            ? "left-0 group-data-[collapsible=offcanvas]:-left-(--sidebar-width)"
+            : "right-0 group-data-[collapsible=offcanvas]:-right-(--sidebar-width)",
           variant === "floating" || variant === "inset"
             ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
-            : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[placement=right]:border-s group-data-[placement=left]:border-e",
+            : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[placement=left]:border-r group-data-[placement=right]:border-l",
           className
         )}
         data-slot="sidebar-container"
@@ -262,8 +265,8 @@ export const Sidebar = (props: SidebarProps) => {
             "size-full",
             "flex flex-col",
             "bg-sidebar",
-            "group-data-[placement=left]:ps-[env(safe-area-inset-left,0px)]",
-            "group-data-[placement=right]:pe-[env(safe-area-inset-right,0px)]",
+            "group-data-[placement=left]:pl-[env(safe-area-inset-left,0px)]",
+            "group-data-[placement=right]:pr-[env(safe-area-inset-right,0px)]",
             "group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow-sm/4"
           )}
           data-sidebar="sidebar"
@@ -314,12 +317,13 @@ export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
         "hidden sm:flex",
         "after:absolute after:inset-s-1/2 after:inset-y-0 after:w-0.5",
         "hover:after:bg-sidebar-border",
-        "group-data-[placement=left]:-inset-e-4 group-data-[placement=right]:inset-s-0",
+        "group-data-[placement=left]:-right-4 group-data-[placement=right]:left-0",
         "in-data-[placement=left]:cursor-w-resize in-data-[placement=right]:cursor-e-resize",
         "[[data-placement=left][data-state=collapsed]_&]:cursor-e-resize [[data-placement=right][data-state=collapsed]_&]:cursor-w-resize",
+        "transition-[left,right,transform,background-color] duration-200 ease-linear",
         "group-data-[collapsible=offcanvas]:translate-x-0 hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:after:inset-s-full",
-        "[[data-placement=left][data-collapsible=offcanvas]_&]:-inset-e-2",
-        "[[data-placement=right][data-collapsible=offcanvas]_&]:-inset-s-2",
+        "[[data-placement=left][data-collapsible=offcanvas]_&]:-right-2",
+        "[[data-placement=right][data-collapsible=offcanvas]_&]:-left-2",
         className
       )}
       data-sidebar="rail"
@@ -469,6 +473,7 @@ export const SidebarGroupLabel = (
         "flex shrink-0 items-center",
         "font-medium text-sidebar-foreground text-xs",
         "rounded-md",
+        "transition-[margin,opacity] duration-200 ease-linear",
         "[&_svg]:size-4 [&_svg]:shrink-0",
         "group-data-[collapsible=icon]:pointer-events-none group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
         className
@@ -490,7 +495,7 @@ export const SidebarGroupAction = (
       className={cn(
         "absolute inset-e-3 top-3.5",
         "text-sidebar-foreground",
-        "transition-transform",
+        "transition-transform duration-200 ease-linear",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         "[&_svg]:size-4",
         "after:absolute after:-inset-2 md:after:hidden",
@@ -592,7 +597,7 @@ export const SidebarMenuButton = ({
         "justify-start",
         "h-8 p-2",
         "overflow-hidden",
-        "transition-[width,height,padding]",
+        "transition-[width,height,padding] duration-200 ease-linear",
         "data-[size=sm]:h-7 data-[size=sm]:text-xs",
         "data-[size=lg]:h-12",
         "[&_svg]:mx-0",
@@ -648,7 +653,7 @@ export const SidebarMenuAction = (props: SidebarMenuActionProps) => {
       className={cn(
         "absolute inset-e-1 top-1.5",
         "text-sidebar-foreground",
-        "transition-transform",
+        "transition-transform duration-200 ease-linear",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         "peer-hover/menu-button:text-sidebar-accent-foreground",
         "after:absolute after:-inset-2 md:after:hidden",

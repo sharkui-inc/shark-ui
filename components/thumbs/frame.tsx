@@ -7,8 +7,8 @@ export const FrameThumb = (props: ThumbCardProps) => (
         <div className="h-1.5 w-1/2 rounded-full bg-muted-foreground/16" />
         <div className="h-1.5 w-3/4 rounded-full bg-muted-foreground/8" />
       </div>
-      <div className="flex flex-col gap-1 rounded-md bg-primary/8 p-2">
-        <div className="h-1.5 w-full rounded-full bg-primary" />
+      <div className="flex flex-col gap-1 rounded-md bg-primary p-2">
+        <div className="h-1.5 w-full rounded-full bg-primary-foreground" />
         <div className="h-1.5 w-2/3 rounded-full bg-muted-foreground/16" />
       </div>
     </div>

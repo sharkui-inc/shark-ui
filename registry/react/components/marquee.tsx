@@ -1,8 +1,16 @@
 "use client";
 
-import { Marquee as ArkMarquee } from "@ark-ui/react/marquee";
+import {
+  Marquee as ArkMarquee,
+  useMarquee as useArkMarquee,
+  useMarqueeContext as useArkMarqueeContext,
+} from "@ark-ui/react/marquee";
 import type React from "react";
 import { cn } from "@/lib/utils";
+
+export const useMarquee = useArkMarquee;
+export const useMarqueeContext = useArkMarqueeContext;
+export const MarqueeRootProvider = ArkMarquee.RootProvider;
 
 interface MarqueeProps
   extends Omit<React.ComponentProps<typeof ArkMarquee.Root>, "side"> {
@@ -50,12 +58,12 @@ export const Marquee = (props: MarqueeProps) => {
     >
       {children}
 
-      {showEdges && (
+      {showEdges ? (
         <>
           <MarqueeEdge side={orientation === "horizontal" ? "start" : "top"} />
           <MarqueeEdge side={orientation === "horizontal" ? "end" : "bottom"} />
         </>
-      )}
+      ) : null}
     </ArkMarquee.Root>
   );
 };

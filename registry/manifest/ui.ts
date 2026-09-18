@@ -80,7 +80,6 @@ const SHARK_UI_BUNDLE = [
   "message-bubble",
   "message-scroller",
   "native-select",
-  "navigation-menu",
   "number-input",
   "pagination",
   "password-input",

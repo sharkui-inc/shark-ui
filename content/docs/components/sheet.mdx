@@ -196,9 +196,9 @@ Holds the sheet panel. Slides in from the configured physical edge; `left` and `
 | `showCloseButton` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(6)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | CSS custom property | `--spacing(6)` |
 
 ### SheetHeader
 
@@ -271,6 +271,14 @@ Positioning wrapper for sheet content. Used internally; expose for custom layout
 | `side` | `"right" \| "left" \| "top" \| "bottom"` | `-` |
 | `variant` | `"default" \| "inset"` | `"default"` |
 | `className` | `string` | `-` |
+
+### SheetRootProvider
+
+Provides a Sheet API created with `useSheet` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseSheetReturn` | **required** |
 
 ---
 

@@ -67,7 +67,7 @@ const DrawerRtl = () => {
   return (
     <div className="flex w-full justify-center" dir="rtl">
       <LocaleProvider locale="ar-SA">
-        <Drawer onOpenChange={setOpen} open={open}>
+        <Drawer onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)} open={open}>
           <DrawerTrigger asChild>
             <Button variant="secondary">فتح الدرج</Button>
           </DrawerTrigger>
@@ -82,7 +82,7 @@ const DrawerRtl = () => {
               <RadioGroup
                 className="gap-2"
                 dir="rtl"
-                onValueChange={setDeliveryTime}
+                onValueChange={({ value }) => setDeliveryTime(value ?? "")}
                 value={deliveryTime}
               >
                 {deliveryTimes.map((time) => (

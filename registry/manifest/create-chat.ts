@@ -12,8 +12,8 @@ const manifest: RegistryItemType = {
     "Create deterministic local conversations for AI SDK and TanStack AI.",
   files: [
     {
-      path: "registry/react/hooks/use-chat-helper.ts",
-      type: "registry:hook",
+      path: "registry/react/lib/create-chat.ts",
+      type: "registry:lib",
     },
   ],
   name: "create-chat",

@@ -26,7 +26,7 @@ const Example = () => {
   const [activeItem, setActiveItem] = React.useState("");
 
   const handleSelectNode = (selectedNodes: TreeNodeType[]) => {
-    const selectedItem = selectedNodes.map((node) => node.name)[0];
+    const [selectedItem] = selectedNodes.map((node) => node.name);
 
     const isFolder = selectedNodes.every((node) => node.children?.length ?? 0);
 
@@ -57,24 +57,21 @@ const Example = () => {
       </div>
 
       <div className="flex flex-1 flex-col rounded-lg border p-0.5">
-        {activeItem && (
+        {activeItem ? (
           <Tabs className="flex-1" value={activeItem}>
             <TabsList variant="underline">
-              <TabsTrigger value={activeItem}>
-                {activeItem}
-
-                <div
-                  className={buttonVariants({
-                    size: "icon-xs",
-                    variant: "ghost",
-                  })}
-                  onClick={() => setActiveItem("")}
-                  role="button"
-                  tabIndex={0}
-                >
-                  <XIcon />
-                </div>
-              </TabsTrigger>
+              <TabsTrigger value={activeItem}>{activeItem}</TabsTrigger>
+              <button
+                aria-label="Close tab"
+                className={buttonVariants({
+                  size: "icon-xs",
+                  variant: "ghost",
+                })}
+                onClick={() => setActiveItem("")}
+                type="button"
+              >
+                <XIcon aria-hidden="true" />
+              </button>
             </TabsList>
             <TabsContent
               className="p-2 text-muted-foreground text-sm"
@@ -83,7 +80,7 @@ const Example = () => {
               {"// File content"}
             </TabsContent>
           </Tabs>
-        )}
+        ) : null}
       </div>
     </div>
   );

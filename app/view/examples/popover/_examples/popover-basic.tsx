@@ -10,8 +10,10 @@ import {
 
 const PopoverBasic = () => (
   <Popover positioning={{ placement: "bottom-start" }}>
-    <PopoverTrigger render={<Button className="w-fit" variant="outline" />}>
-      Open Popover
+    <PopoverTrigger asChild>
+      <Button className="w-fit" variant="outline">
+        Open Popover
+      </Button>
     </PopoverTrigger>
     <PopoverContent>
       <PopoverHeader>

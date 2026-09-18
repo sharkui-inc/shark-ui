@@ -59,8 +59,8 @@ The palette is role-driven and themeable. Background, foreground, surface, inter
 | --- | --- |
 | Canvas and foreground | Page foundation and highest-emphasis content. |
 | Card, popover, sidebar, and code | Bounded surfaces paired with their matching foreground token. |
-| Muted and accent | Neutral `/4` contextual layers for recessive content, hover, and quiet selection. |
-| Secondary and secondary hover | Neutral `/8` supporting fill and `/16` hover step. |
+| Muted | Neutral `/4` recessive content layer. |
+| Accent, secondary, and sidebar accent | Neutral `/8` interactive or supporting fill; `secondary-hover` uses `/16`. |
 | Primary and destructive | Semantic action or feedback, never decoration. |
 | Border and input | Structural strokes derived from the active neutral family. |
 
@@ -153,7 +153,7 @@ Anchored overlays use `origin-(--transform-origin)`, a 98% scale, fade, and plac
 
 **Do:** compose motion from local `tw-animate-css` utilities and keep a brief fade under reduced motion while removing travel, scale, rotation, and blur.
 
-**Avoid:** shared interface keyframes or easing tokens in `styles/globals.css`, `transition-all`, `ease-in`, `ease-linear`, or ungated hover transforms.
+**Avoid:** shared interface keyframes or easing tokens in `styles/globals.css`, `transition-all`, `ease-in`, `ease-linear`, or ungated hover transforms. The Sidebar is the documented shadcn-derived exception: its coordinated width, inset, margin, and opacity changes use local `duration-200 ease-linear` so its shell and compact menu move together.
 
 **Review:** the interaction remains understandable with `prefers-reduced-motion`, and an overlay's origin matches its placement.
 

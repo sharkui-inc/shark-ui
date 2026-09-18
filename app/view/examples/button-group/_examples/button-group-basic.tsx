@@ -45,16 +45,10 @@ const ButtonGroupBasic = () => {
       <ButtonGroup>
         <Button variant="outline">Snooze</Button>
         <Menu positioning={{ placement: "bottom-end" }}>
-          <MenuTrigger
-            render={
-              <Button
-                aria-label="More Options"
-                size="icon-md"
-                variant="outline"
-              />
-            }
-          >
-            <MoreHorizontalIcon />
+          <MenuTrigger asChild>
+            <Button aria-label="More Options" size="icon-md" variant="outline">
+              <MoreHorizontalIcon />
+            </Button>
           </MenuTrigger>
           <MenuContent className="w-40">
             <MenuGroup>
@@ -87,7 +81,10 @@ const ButtonGroupBasic = () => {
                   Label As...
                 </MenuSubTrigger>
                 <MenuSubContent>
-                  <MenuRadioGroup onValueChange={setLabel} value={label}>
+                  <MenuRadioGroup
+                    onValueChange={({ value }) => setLabel(value)}
+                    value={label}
+                  >
                     <MenuRadioItem value="personal">Personal</MenuRadioItem>
                     <MenuRadioItem value="work">Work</MenuRadioItem>
                     <MenuRadioItem value="other">Other</MenuRadioItem>

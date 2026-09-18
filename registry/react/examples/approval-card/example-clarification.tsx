@@ -110,7 +110,9 @@ const Example = () => {
         </ApprovalCardContent>
         <ApprovalCardFooter>
           <ApprovalCardPrevious />
-          <ApprovalCardReject>Cancel</ApprovalCardReject>
+          <ApprovalCardReject className="col-start-2">
+            Cancel
+          </ApprovalCardReject>
           <ApprovalCardNext />
           <ApprovalCardSubmit>Confirm requirements</ApprovalCardSubmit>
         </ApprovalCardFooter>

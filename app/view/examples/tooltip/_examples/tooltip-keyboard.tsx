@@ -9,8 +9,10 @@ import {
 
 const TooltipKeyboard = () => (
   <Tooltip>
-    <TooltipTrigger render={<Button size="icon-sm" variant="outline" />}>
-      <SaveIcon aria-hidden="true" />
+    <TooltipTrigger asChild>
+      <Button size="icon-sm" variant="outline">
+        <SaveIcon aria-hidden="true" />
+      </Button>
     </TooltipTrigger>
     <TooltipContent>
       Save Changes <Kbd>S</Kbd>

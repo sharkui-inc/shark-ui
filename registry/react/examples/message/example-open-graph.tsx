@@ -21,36 +21,37 @@ const Example = () => (
         <LinkBox asChild>
           <Card className="w-full max-w-64 [--space:--spacing(3)]">
             <CardMedia className="h-32 bg-muted" variant="image">
-              <img alt="" height={144} src={preview.image} width={256} />
+              <img
+                alt=""
+                height={144}
+                src={createWavesAvatar("Tailwind Play", "green-dark")}
+                width={256}
+              />
             </CardMedia>
             <CardHeader>
               <LinkOverlay asChild>
                 <CardTitle asChild>
-                  <a href={preview.url}>{preview.title}</a>
+                  <a href="https://play.tailwindcss.com">Tailwind Play</a>
                 </CardTitle>
               </LinkOverlay>
-              <CardDescription>{preview.description}</CardDescription>
+              <CardDescription>
+                An advanced online playground for Tailwind CSS that lets you use
+                all of your custom config.
+              </CardDescription>
             </CardHeader>
-            <CardContent>{preview.hostname}</CardContent>
+            <CardContent>play.tailwindcss.com</CardContent>
           </Card>
         </LinkBox>
         <MessageBubble align="end">
           <MessageBubbleContent asChild>
-            <a href={preview.url}>{preview.url}</a>
+            <a href="https://play.tailwindcss.com">
+              https://play.tailwindcss.com
+            </a>
           </MessageBubbleContent>
         </MessageBubble>
       </MessageContent>
     </Message>
   </div>
 );
-
-const preview = {
-  description:
-    "An advanced online playground for Tailwind CSS that lets you use all of your custom config.",
-  hostname: "play.tailwindcss.com",
-  image: createWavesAvatar("Tailwind Play", "green-dark"),
-  title: "Tailwind Play",
-  url: "https://play.tailwindcss.com",
-};
 
 export default Example;

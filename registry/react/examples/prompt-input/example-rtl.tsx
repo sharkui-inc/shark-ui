@@ -14,9 +14,16 @@ import {
   PlusIcon,
   ShieldAlertIcon,
 } from "lucide-react";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { Button } from "@/registry/react/components/button";
+import {
+  Combobox,
+  ComboboxButtonTrigger,
+  ComboboxContent,
+  ComboboxItem,
+  ComboboxList,
+} from "@/registry/react/components/combobox";
 import {
   Context,
   ContextBody,
@@ -28,7 +35,6 @@ import {
   ContextTrigger,
   ContextUsageRow,
 } from "@/registry/react/components/context";
-import { Input } from "@/registry/react/components/input";
 import {
   Menu,
   MenuContent,
@@ -37,13 +43,6 @@ import {
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
-import {
-  ModelSelector,
-  ModelSelectorContent,
-  ModelSelectorItem,
-  ModelSelectorList,
-  ModelSelectorTrigger,
-} from "@/registry/react/components/model-selector";
 import {
   PromptInput,
   PromptInputBottom,
@@ -76,35 +75,7 @@ const Example = () => {
   const [model, setModel] = useState(["terra-5.6"]);
   const [effort, setEffort] = useState(["medium"]);
   const [access, setAccess] = useState(["full"]);
-  const [actionQuery, setActionQuery] = useState("");
   const { collection } = useListCollection({ initialItems: models });
-
-  const actionItems = actionItemsByValue;
-
-  const normalizedActionQuery = actionQuery.trim().toLowerCase();
-  const visibleActions = actionItems.filter((action) =>
-    values.actionLabels[action.value]
-      .toLowerCase()
-      .includes(normalizedActionQuery)
-  );
-  const contextActions = visibleActions.filter(
-    (action) => action.group === "context"
-  );
-  const agentActions = visibleActions.filter(
-    (action) => action.group === "agent"
-  );
-  const actionSections = [
-    {
-      actions: contextActions,
-      id: "context",
-      title: values.actionSections.context,
-    },
-    {
-      actions: agentActions,
-      id: "agent",
-      title: values.actionSections.agent,
-    },
-  ].filter((section) => section.actions.length > 0);
 
   const effortCollection = createListCollection({ items: values.efforts });
   const accessCollection = createListCollection({ items: values.accessLevels });
@@ -139,34 +110,23 @@ const Example = () => {
                 </PromptInputButton>
               </MenuTrigger>
               <MenuContent className="w-80">
-                <Input
-                  aria-label={values.searchAriaLabel}
-                  autoFocus
-                  className="h-8 border-0 px-2 text-sm shadow-none focus-visible:border-transparent focus-visible:ring-0"
-                  onChange={(event) => setActionQuery(event.target.value)}
-                  onKeyDown={(event) => event.stopPropagation()}
-                  placeholder={values.searchPlaceholder}
-                  type="search"
-                  value={actionQuery}
-                />
-                {actionSections.map((section, index) => (
-                  <Fragment key={section.id}>
-                    {index > 0 ? <MenuSeparator /> : null}
-                    <MenuGroup heading={section.title}>
-                      {section.actions.map((action) => (
-                        <MenuItem key={action.value} value={action.value}>
-                          {action.icon}
-                          {values.actionLabels[action.value]}
-                        </MenuItem>
-                      ))}
-                    </MenuGroup>
-                  </Fragment>
-                ))}
-                {visibleActions.length === 0 ? (
-                  <p className="px-2 py-1.5 text-muted-foreground text-xs">
-                    {values.noMatchingActions}
-                  </p>
-                ) : null}
+                <MenuGroup heading={values.actionSections.context}>
+                  {contextActions.map((action) => (
+                    <MenuItem key={action.value} value={action.value}>
+                      {action.icon}
+                      {values.actionLabels[action.value]}
+                    </MenuItem>
+                  ))}
+                </MenuGroup>
+                <MenuSeparator />
+                <MenuGroup heading={values.actionSections.agent}>
+                  {agentActions.map((action) => (
+                    <MenuItem key={action.value} value={action.value}>
+                      {action.icon}
+                      {values.actionLabels[action.value]}
+                    </MenuItem>
+                  ))}
+                </MenuGroup>
               </MenuContent>
             </Menu>
             <Select
@@ -193,22 +153,28 @@ const Example = () => {
               </SelectContent>
             </Select>
           </PromptInputTools>
-          <ModelSelector
+          <Combobox
             collection={collection}
             onValueChange={(details) => setModel(details.value)}
+            positioning={{ placement: "top" }}
             value={model}
           >
-            <ModelSelectorTrigger size="sm" variant="ghost" />
-            <ModelSelectorContent>
-              <ModelSelectorList>
+            <ComboboxButtonTrigger
+              placeholder="Model"
+              showTrigger={false}
+              size="sm"
+              variant="ghost"
+            />
+            <ComboboxContent className="max-h-72 w-52">
+              <ComboboxList>
                 {collection.items.map((item) => (
-                  <ModelSelectorItem item={item} key={item.value}>
+                  <ComboboxItem item={item} key={item.value}>
                     {item.label}
-                  </ModelSelectorItem>
+                  </ComboboxItem>
                 ))}
-              </ModelSelectorList>
-            </ModelSelectorContent>
-          </ModelSelector>
+              </ComboboxList>
+            </ComboboxContent>
+          </Combobox>
           <Select
             collection={effortCollection}
             onValueChange={(details) => setEffort(details.value)}
@@ -348,6 +314,13 @@ const actionItemsByValue = [
   },
 ] as const;
 
+const contextActions = actionItemsByValue.filter(
+  (action) => action.group === "context"
+);
+const agentActions = actionItemsByValue.filter(
+  (action) => action.group === "agent"
+);
+
 const contextUsage = [
   { key: "input", value: 4200 },
   { key: "output", value: 860 },
@@ -403,11 +376,8 @@ const translations = {
         { label: "عالي جدًا", value: "extra-high" },
       ],
       local: "محلي",
-      noMatchingActions: "لا توجد إجراءات مطابقة.",
       promptAriaLabel: "موجه",
       promptPlaceholder: "افعل أي شيء",
-      searchAriaLabel: "ابحث عن إجراءات الموجه",
-      searchPlaceholder: "ابحث عن إجراءات...",
     },
   },
   en: {
@@ -457,11 +427,8 @@ const translations = {
         { label: "Extra high", value: "extra-high" },
       ],
       local: "Local",
-      noMatchingActions: "No matching actions.",
       promptAriaLabel: "Prompt",
       promptPlaceholder: "Do anything",
-      searchAriaLabel: "Search prompt actions",
-      searchPlaceholder: "Search actions...",
     },
   },
   he: {
@@ -511,11 +478,8 @@ const translations = {
         { label: "גבוה במיוחד", value: "extra-high" },
       ],
       local: "מקומי",
-      noMatchingActions: "אין פעולות תואמות.",
       promptAriaLabel: "פרומפט",
       promptPlaceholder: "תעשה הכל",
-      searchAriaLabel: "חיפוש פעולות פרומפט",
-      searchPlaceholder: "חפש פעולות...",
     },
   },
 };

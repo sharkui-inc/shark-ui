@@ -260,9 +260,9 @@ Holds the dialog panel. Supports size variants from sm to fullscreen.
 | `showCloseButton` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(6)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | CSS custom property | `--spacing(6)` |
 
 ### DialogHeader
 
@@ -324,6 +324,23 @@ Dimmed overlay behind the dialog panel.
 | Prop | Type | Default |
 |------|------|---------|
 | `className` | `string` | `-` |
+
+### DialogRootProvider
+
+Provides a Dialog API created with `useDialog` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseDialogReturn` | **required** |
+
+### DialogPositioner
+
+Public DialogPositioner component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 ---
 

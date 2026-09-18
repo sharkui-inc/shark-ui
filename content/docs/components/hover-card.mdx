@@ -73,11 +73,11 @@ import {
   </HoverCardContent>
 </HoverCard>
 ```
-## Triggers Delays
+## Trigger Delays
 
 The `openDelay` and `closeDelay` props control the delay before the hover card opens and closes respectively.
 
-Default values are `100ms` for `closeDelay` and `10ms` for `openDelay`.
+Default values are `600ms` for `openDelay` and `300ms` for `closeDelay`.
 
 <ComponentPreview componentName="hover-card" fileName="example-triggers-delays" />
 
@@ -113,13 +113,13 @@ Root component. Manages hover state and content visibility.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `closeDelay` | `number` | `100` |
+| `closeDelay` | `number` | `300` |
 | `defaultOpen` | `boolean` | - |
 | `disabled` | `boolean` | - |
 | `immediate` | `boolean` | - |
 | `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
 | `open` | `boolean` | - |
-| `openDelay` | `number` | `10` |
+| `openDelay` | `number` | `600` |
 | `positioning` | `PositioningOptions` | `{ placement: "top" }` |
 | `className` | `string` | `-` |
 
@@ -150,10 +150,18 @@ Optional arrow pointing toward the trigger.
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | - |
 
-| Attribute | Default |
-| --- | --- |
-| `--arrow-background` | `var(--popover)` |
-| `--arrow-size` | `calc(1.5 * var(--spacing))` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--arrow-background` | CSS custom property | `var(--popover)` |
+| `--arrow-size` | CSS custom property | `calc(1.5 * var(--spacing))` |
+
+### HoverCardRootProvider
+
+Provides a HoverCard API created with `useHoverCard` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseHoverCardReturn` | **required** |
 
 ---
 

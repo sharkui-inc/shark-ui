@@ -1,11 +1,17 @@
 "use client";
 
-import { Slider as ArkSlider, useSliderContext } from "@ark-ui/react/slider";
+import {
+  Slider as ArkSlider,
+  useSlider as useArkSlider,
+  useSliderContext as useArkSliderContext,
+} from "@ark-ui/react/slider";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { FieldLabel } from "@/registry/react/components/field";
 
-export const useSlider = useSliderContext;
+export const useSlider = useArkSlider;
+export const useSliderContext = useArkSliderContext;
+export const SliderRootProvider = ArkSlider.RootProvider;
 
 interface SliderProps extends React.ComponentProps<typeof ArkSlider.Root> {
   /**
@@ -134,7 +140,7 @@ export const Slider = (props: SliderProps) => {
         })}
       </ArkSlider.Control>
 
-      {showMarkers && (
+      {showMarkers ? (
         <ArkSlider.MarkerGroup
           className={cn(
             "w-full",
@@ -171,7 +177,7 @@ export const Slider = (props: SliderProps) => {
             </ArkSlider.Marker>
           ))}
         </ArkSlider.MarkerGroup>
-      )}
+      ) : null}
     </ArkSlider.Root>
   );
 };

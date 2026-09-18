@@ -5,6 +5,7 @@ import {
   TreeView as ArkTreeView,
   createTreeCollection as arkCreateTreeCollection,
   type TreeCollection as arkTreeCollection,
+  useTreeView as useArkTreeView,
   useTreeViewContext as useArkTreeViewContext,
 } from "@ark-ui/react/tree-view";
 import { createContext } from "@ark-ui/react/utils";
@@ -14,7 +15,9 @@ import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { checkboxVariants } from "@/registry/react/components/checkbox";
 
-export const useTreeView = useArkTreeViewContext;
+export const useTreeView = useArkTreeView;
+export const useTreeViewContext = useArkTreeViewContext;
+export const TreeViewRootProvider = ArkTreeView.RootProvider;
 
 export interface TreeNodeType<T = unknown> {
   children?: TreeNodeType<T>[] | undefined;

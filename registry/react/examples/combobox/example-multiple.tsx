@@ -30,7 +30,7 @@ const Example = () => {
         filter(reason === "item-select" ? "" : inputValue)
       }
     >
-      <ComboboxContext>
+      <ComboboxContext<Framework>>
         {({ selectedItems }) => (
           <>
             <ComboboxChips>
@@ -67,5 +67,7 @@ const initialItems = [
   { label: "Svelte", value: "svelte" },
   { label: "Solid", value: "solid" },
 ];
+
+type Framework = (typeof initialItems)[number];
 
 export default Example;

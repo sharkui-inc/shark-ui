@@ -17,6 +17,11 @@ import {
   SnippetCopy,
   SnippetSelect,
 } from "@/components/ui/snippet";
+import {
+  createShadcnAddCommand,
+  packageManagers,
+} from "@/lib/installation-command";
+import type { PackageManager } from "@/lib/installation-command";
 import type {
   CompositionFileTreeNode,
   PublishedComposition,
@@ -34,11 +39,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/registry/react/components/toggle-group";
-import {
-  type PackageManager,
-  useConfig,
-  useUpdateConfig,
-} from "@/store/config";
+import { useConfig, useUpdateConfig } from "@/store/config";
 
 interface CompositionViewerProps {
   compact?: boolean;
@@ -56,22 +57,6 @@ const viewportWidths: Record<Viewport, number | "100%"> = {
   mobile: 390,
   tablet: 768,
 };
-
-const installCommandBody = (name: string) => `shadcn@latest add @shark/${name}`;
-
-const installCopyCommands = {
-  bun: (name: string) => `bunx --bun ${installCommandBody(name)}`,
-  npm: (name: string) => `npx ${installCommandBody(name)}`,
-  pnpm: (name: string) => `pnpm dlx ${installCommandBody(name)}`,
-  yarn: (name: string) => `yarn dlx ${installCommandBody(name)}`,
-} as const;
-
-const packageManagers = [
-  "pnpm",
-  "npm",
-  "yarn",
-  "bun",
-] as const satisfies readonly PackageManager[];
 
 export const CompositionViewer = ({
   compact = false,
@@ -94,10 +79,10 @@ export const CompositionViewer = ({
 
   const previewUrl = `/view/${kind}/${item.category}/${item.name}`;
 
-  const installDisplayCommand = installCommandBody(item.name);
+  const installDisplayCommand = `shadcn@latest add @shark/${item.name}`;
 
   const installCopyCommand = React.useMemo(
-    () => installCopyCommands[config.packageManager](item.name),
+    () => createShadcnAddCommand(config.packageManager, `@shark/${item.name}`),
     [config.packageManager, item.name]
   );
 

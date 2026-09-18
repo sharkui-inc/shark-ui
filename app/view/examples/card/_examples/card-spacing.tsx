@@ -50,7 +50,7 @@ const CardSpacing = () => {
       <ToggleGroup
         className="justify-center"
         multiple={false}
-        onValueChange={(value) => {
+        onValueChange={({ value }) => {
           if (value[0]) {
             setSpacing(value[0]);
           }

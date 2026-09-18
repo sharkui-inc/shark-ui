@@ -1,16 +1,14 @@
 "use client";
 
 import React from "react";
-import type { ComponentPreviewItem } from "@/lib/component-previews";
 import { cn } from "@/lib/utils";
 import { Spinner } from "@/registry/react/components/spinner";
 import { COMPONENTS_SLUG, getThemeTemplate } from "../_lib/theme-templates";
 import { ExamplePreview } from "./example-preview";
 
-interface TemplatePreviewHostProps {
+interface TemplatePreviewHostProps
+  extends React.ComponentProps<typeof ExamplePreview> {
   activeSlug: string | null;
-  className?: string;
-  selectedComponent: ComponentPreviewItem | null;
 }
 
 interface PreviewFrame {
@@ -19,24 +17,11 @@ interface PreviewFrame {
   src: string;
 }
 
-const getPreviewFrame = (
-  slug: string,
-  selectedComponent: ComponentPreviewItem | null
-): PreviewFrame | null => {
-  if (slug === "preview") {
-    return selectedComponent
-      ? {
-          id: `preview:${selectedComponent.slug}`,
-          label: selectedComponent.title,
-          src: `/view/examples/${selectedComponent.slug}`,
-        }
-      : null;
-  }
-
+const getPreviewFrame = (slug: string): PreviewFrame | null => {
   if (slug === COMPONENTS_SLUG) {
     return {
       id: slug,
-      label: "Components",
+      label: "Preview",
       src: "/templates/components",
     };
   }
@@ -55,14 +40,15 @@ const getPreviewFrame = (
 };
 
 export const TemplatePreviewHost = (props: TemplatePreviewHostProps) => {
-  const { activeSlug, className, selectedComponent } = props;
+  const { activeSlug, className } = props;
+
   const [visitedFrames, setVisitedFrames] = React.useState<PreviewFrame[]>([]);
   const [loadedFrameIds, setLoadedFrameIds] = React.useState(
     () => new Set<string>()
   );
   const activeFrame = React.useMemo(
-    () => (activeSlug ? getPreviewFrame(activeSlug, selectedComponent) : null),
-    [activeSlug, selectedComponent]
+    () => (activeSlug ? getPreviewFrame(activeSlug) : null),
+    [activeSlug]
   );
 
   React.useEffect(() => {

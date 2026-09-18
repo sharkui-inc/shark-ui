@@ -1,12 +1,18 @@
 "use client";
 
-import { Alert, AlertDescription } from "@/registry/react/components/alert";
+import { createWavesAvatar } from "@/lib/dicebear";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/react/components/avatar";
 import { Button } from "@/registry/react/components/button";
 import {
   Item,
   ItemContent,
   ItemDescription,
   ItemGroup,
+  ItemMedia,
   ItemTitle,
 } from "@/registry/react/components/item";
 import { Spinner } from "@/registry/react/components/spinner";
@@ -24,7 +30,7 @@ const UseAsyncListDemo = () => {
     async load({ signal }) {
       const skip = Math.floor(Math.random() * 50);
       const response = await fetch(
-        `https://dummyjson.com/quotes?limit=4&skip=${skip}`,
+        `https://dummyjson.com/quotes?limit=3&skip=${skip}`,
         { signal }
       );
       if (!response.ok) {
@@ -36,9 +42,9 @@ const UseAsyncListDemo = () => {
   });
 
   return (
-    <div className="flex w-full max-w-md flex-col gap-4">
+    <div className="flex w-full max-w-md flex-col gap-3">
       <Button
-        className="self-start"
+        className="self-end"
         disabled={list.loading}
         onClick={list.reload}
         variant="outline"
@@ -46,18 +52,25 @@ const UseAsyncListDemo = () => {
         {!!list.loading && <Spinner data-icon="inline-start" />}
         {list.loading ? "Loading" : "Reload quotes"}
       </Button>
-      {!!list.error && (
-        <Alert role="alert" variant="destructive">
-          <AlertDescription>{list.error.message}</AlertDescription>
-        </Alert>
-      )}
       <ItemGroup className="gap-2">
         {list.items.map((quote) => (
-          <Item key={quote.id} role="listitem" variant="outline">
+          <Item
+            className="[--space:--spacing(2)]"
+            key={quote.id}
+            role="listitem"
+            variant="outline"
+          >
+            <ItemMedia>
+              <Avatar>
+                <AvatarImage
+                  alt={quote.author}
+                  src={createWavesAvatar(quote.author, "blue")}
+                />
+                <AvatarFallback>{quote.author.charAt(0)}</AvatarFallback>
+              </Avatar>
+            </ItemMedia>
             <ItemContent>
-              <ItemDescription className="line-clamp-none">
-                “{quote.quote}”
-              </ItemDescription>
+              <ItemDescription>“{quote.quote}”</ItemDescription>
               <ItemTitle>By {quote.author}</ItemTitle>
             </ItemContent>
           </Item>

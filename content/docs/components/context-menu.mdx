@@ -108,7 +108,26 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 ## API Reference
 
-### ContextTrigger
+### ContextMenu
+
+Root element for a context menu. It accepts the same state and positioning props as `Menu`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `positioning` | `PositioningOptions` | - |
+| `open` | `boolean` | - |
+| `defaultOpen` | `boolean` | - |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
+
+### ContextMenuRootProvider
+
+Provides a context-menu API created with `useContextMenu`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseMenuReturn` | **required** |
+
+### ContextMenuTrigger
 
 Trigger component for the context menu.
 
@@ -116,6 +135,79 @@ Trigger component for the context menu.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
+
+### ContextMenuContent
+
+Holds context-menu items in a portal.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | - |
+| `className` | `string` | - |
+
+### ContextMenuGroup
+
+Groups related context-menu items.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `heading` | `string` | - |
+
+### ContextMenuSeparator
+
+Visual divider between groups of context-menu items.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | - |
+| `className` | `string` | - |
+
+### ContextMenuItem
+
+A selectable context-menu option.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | **required** |
+| `variant` | `"default" \| "destructive"` | `"default"` |
+| `disabled` | `boolean` | - |
+
+### ContextMenuSub
+
+Root element for a nested context menu.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `open` | `boolean` | - |
+| `defaultOpen` | `boolean` | - |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
+
+### ContextMenuSubTrigger
+
+Menu item that opens the nested context menu.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | **required** |
+| `disabled` | `boolean` | - |
+| `asChild` | `boolean` | - |
+
+### ContextMenuSubContent
+
+Holds the nested context-menu items.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | - |
+| `className` | `string` | - |
+
+### ContextMenuShortcut
+
+Optional keyboard shortcut hint displayed next to an item.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | - |
 
 ---
 

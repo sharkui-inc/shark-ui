@@ -154,6 +154,7 @@ export const mdxComponents = {
       className={cn(
         "mt-2 scroll-m-28",
         "font-heading font-semibold text-3xl tracking-tight",
+        iframeAfterTextClassName,
         className
       )}
       {...props}
@@ -175,6 +176,7 @@ export const mdxComponents = {
           "[&+h3]:mt-6!",
           "[&+p]:mt-4!",
           "[&+]*:[code]:text-xl",
+          iframeAfterTextClassName,
           className
         )}
         id={headingId}
@@ -194,6 +196,7 @@ export const mdxComponents = {
           "font-medium tracking-tight",
           "[&+p]:mt-4!",
           "*:[code]:text-xl",
+          iframeAfterTextClassName,
           className
         )}
         id={headingId}
@@ -211,6 +214,7 @@ export const mdxComponents = {
         className={cn(
           "mt-8 scroll-m-28",
           "font-heading font-medium text-base tracking-tight",
+          iframeAfterTextClassName,
           className
         )}
         id={headingId}
@@ -228,6 +232,7 @@ export const mdxComponents = {
         className={cn(
           "mt-8 scroll-m-28",
           "font-heading font-medium text-base tracking-tight",
+          iframeAfterTextClassName,
           className
         )}
         {...props}
@@ -244,6 +249,7 @@ export const mdxComponents = {
         className={cn(
           "mt-8 scroll-m-28",
           "font-medium text-base tracking-tight",
+          iframeAfterTextClassName,
           className
         )}
         id={headingId}
@@ -257,8 +263,20 @@ export const mdxComponents = {
     <hr className="my-4 md:my-8" {...props} />
   ),
   InfoIcon,
-  img: ({ className, ...props }: React.ComponentProps<"img">) => (
-    <img className={cn("rounded-lg", className)} {...props} />
+  img: ({
+    alt = "",
+    className,
+    height,
+    width,
+    ...props
+  }: React.ComponentProps<"img">) => (
+    <img
+      alt={alt}
+      className={cn("rounded-lg", className)}
+      height={height}
+      width={width}
+      {...props}
+    />
   ),
   li: ({ className, ...props }: React.ComponentProps<"li">) => (
     <li className={cn("mt-2", className)} {...props} />
@@ -274,6 +292,7 @@ export const mdxComponents = {
     <p
       className={cn(
         "not-first:mt-6 text-muted-foreground leading-relaxed",
+        iframeAfterTextClassName,
         className
       )}
       {...props}
@@ -314,13 +333,24 @@ export const mdxComponents = {
   RTLComponentPreview,
   Step: ({ className, ...props }: React.ComponentProps<"h3">) => (
     <h3
-      className={cn("mt-8 scroll-m-32 tracking-tight first:mt-2", className)}
+      className={cn(
+        "mt-8 scroll-m-32 tracking-tight first:mt-2",
+        "before:me-2 before:inline-flex before:size-6 before:items-center before:justify-center before:bg-code",
+        "before:text-center before:-indent-px before:font-mono before:text-xs before:tabular-nums",
+        "before:rounded-full before:border before:border-border before:font-medium before:content-[counter(step)]",
+        "md:before:absolute md:before:-ms-12.5 md:before:-mt-1 md:before:size-8",
+        className
+      )}
+      data-slot="step"
       {...props}
     />
   ),
   Steps: ({ ...props }) => (
     <div
-      className="[&>h3]:step steps mb-12 [counter-reset:step] md:ms-4 md:border-s md:ps-8"
+      className={cn(
+        "steps mb-12 [counter-reset:step] md:ms-4 md:border-s md:ps-8",
+        "*:data-[slot=step]:[counter-increment:step]"
+      )}
       {...props}
     />
   ),
@@ -383,6 +413,9 @@ export const mdxComponents = {
     />
   ),
 };
+
+const iframeAfterTextClassName =
+  "[&+iframe]:my-6 [&+[data-slot=preview-iframe]]:my-6";
 
 const getHeadingId = (children: React.ReactNode) =>
   children

@@ -3,24 +3,28 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   FloatingPanel as ArkFloatingPanel,
-  useFloatingPanelContext,
+  useFloatingPanel as useArkFloatingPanel,
+  useFloatingPanelContext as useArkFloatingPanelContext,
 } from "@ark-ui/react/floating-panel";
 import { Portal } from "@ark-ui/react/portal";
 import { createContext } from "@ark-ui/react/utils";
 import { Maximize, MaximizeIcon, MinimizeIcon, MinusIcon } from "lucide-react";
 import type React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
-import { tv, VariantProps } from "tailwind-variants";
 
-export const useFloatingPanel = useFloatingPanelContext;
+export const useFloatingPanel = useArkFloatingPanel;
+export const useFloatingPanelContext = useArkFloatingPanelContext;
+export const FloatingPanelRootProvider = ArkFloatingPanel.RootProvider;
 
-const [FloatingPanelProvider, _useFloatingPanelConfig] =
-  createContext<Pick<React.ComponentProps<typeof ArkFloatingPanel.Root>, "persistRect">>({
-    name: "FloatingPanelContext",
-    providerName: "FloatingPanel",
-  });
+const [FloatingPanelProvider, _useFloatingPanelConfig] = createContext<
+  Pick<React.ComponentProps<typeof ArkFloatingPanel.Root>, "persistRect">
+>({
+  name: "FloatingPanelContext",
+  providerName: "FloatingPanel",
+});
 
 export const FloatingPanel = (
   props: React.ComponentProps<typeof ArkFloatingPanel.Root>
@@ -59,10 +63,10 @@ interface FloatingPanelContentProps
   resizable?: boolean;
 }
 
-const floatingPanelContentVariants =tv({
-  base:[
+const floatingPanelContentVariants = tv({
+  base: [
     "[--space:--spacing(4)]",
-    'z-[calc(50+var(--z-index))]',
+    "z-[calc(50+var(--z-index))]",
     "group/floating-panel",
     "relative",
     "flex flex-col",
@@ -75,18 +79,20 @@ const floatingPanelContentVariants =tv({
     "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
     "motion-reduce:data-[state=open]:zoom-in-100 motion-reduce:transition-none",
   ],
-  variants:{
-    persistRect:{
+  variants: {
+    persistRect: {
       true: [
-       [
-        "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out motion-reduce:data-[state=closed]:zoom-out-100",
-       ]
+        [
+          "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] motion-reduce:data-[state=closed]:zoom-out-100 data-[state=closed]:animate-out",
+        ],
       ],
     },
   },
-})
+});
 
-interface FloatingPanelContentProps extends React.ComponentProps<typeof ArkFloatingPanel.Content>, VariantProps<typeof floatingPanelContentVariants> {}
+interface FloatingPanelContentProps
+  extends React.ComponentProps<typeof ArkFloatingPanel.Content>,
+    VariantProps<typeof floatingPanelContentVariants> {}
 
 export const FloatingPanelContent = (props: FloatingPanelContentProps) => {
   const { resizable = true, className, children, ...rest } = props;
@@ -103,7 +109,10 @@ export const FloatingPanelContent = (props: FloatingPanelContentProps) => {
         style={{ zIndex: "calc(50 + var(--z-index))" }}
       >
         <ArkFloatingPanel.Content
-          className={cn(floatingPanelContentVariants({persistRect, }), className)}
+          className={cn(
+            floatingPanelContentVariants({ persistRect }),
+            className
+          )}
           data-slot="floating-panel-content"
           {...rest}
         >

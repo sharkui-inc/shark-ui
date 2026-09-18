@@ -6,14 +6,17 @@ export const revalidate = false;
 export const dynamicParams = false;
 
 export const generateStaticParams = () =>
-  source.generateParams().filter(({ slug }) => slug.length > 0);
+  source
+    .generateParams()
+    .filter(({ slug }) => slug.length > 0)
+    .map(({ slug }) => ({ slug: [...slug, "index"] }));
 
 export const GET = async (
   _request: Request,
   props: { params: Promise<{ slug: string[] }> }
 ) => {
   const { slug } = await props.params;
-  const page = source.getPage(slug);
+  const page = source.getPage(slug.slice(0, -1));
 
   if (!page) {
     notFound();

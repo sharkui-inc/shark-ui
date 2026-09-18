@@ -131,7 +131,9 @@ const Example = () => {
 
 const formSchema = z.object({
   interviewDate: z
-    .array(z.custom<DateValue>((val) => val != null && typeof val === "object"))
+    .array(
+      z.custom<DateValue>((val) => val !== null && typeof val === "object")
+    )
     .min(1, {
       message: "Please choose your preferred interview date.",
     }),

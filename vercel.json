@@ -23,6 +23,20 @@
   ],
   "routes": [
     {
+      "src": "/docs/ai-elements",
+      "status": 308,
+      "headers": {
+        "Location": "/docs/ai-components"
+      }
+    },
+    {
+      "src": "/docs/ai-elements/(.*)",
+      "status": 308,
+      "headers": {
+        "Location": "/docs/ai-components/$1"
+      }
+    },
+    {
       "src": "/view(/.*)?",
       "has": [
         {
@@ -66,7 +80,7 @@
       "headers": {
         "Content-Type": "text/markdown; charset=utf-8"
       },
-      "dest": "/llms.mdx/docs"
+      "dest": "/llms.mdx/docs/index"
     },
     {
       "src": "/docs/(.*)\\.md",

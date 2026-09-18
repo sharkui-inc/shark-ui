@@ -105,7 +105,7 @@ Use `PaginationFirst` and `PaginationLast` to jump to the first or last page.
 
 ### With Links
 
-`PaginationItemLink` renders an `<a>` whose `href` is `?page=`. Ark’s `type="link"` and `getPageUrl` set `href` on native First / Previous / Item / Next / Last parts. Shark wraps those parts in `Button`, so use `PaginationItemLink` for query-string links.
+Set `type="link"` and provide `getPageUrl`.
 
 <ComponentPreview componentName="pagination" fileName="example-links" />
 
@@ -138,6 +138,77 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 | `getPageUrl` | `(details: PageUrlDetails) => string` | - |
 | `onPageChange` | `(details: PageChangeDetails) => void` | - |
 | `onPageSizeChange` | `(details: PageSizeChangeDetails) => void` | - |
+
+### PaginationRootProvider
+
+Provides a Pagination API created with `usePagination` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UsePaginationReturn` | **required** |
+
+### PaginationFirst
+
+Public PaginationFirst component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### PaginationPrevious
+
+Public PaginationPrevious component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### PaginationNext
+
+Public PaginationNext component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### PaginationLast
+
+Public PaginationLast component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### PaginationItem
+
+Public PaginationItem component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### PaginationItems
+
+Public PaginationItems component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
+
+### PaginationEllipsis
+
+Public PaginationEllipsis component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | - |
 
 ---
 

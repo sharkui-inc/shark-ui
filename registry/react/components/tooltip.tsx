@@ -3,13 +3,16 @@
 import { Portal } from "@ark-ui/react/portal";
 import {
   Tooltip as ArkTooltip,
-  useTooltipContext,
+  useTooltip as useArkTooltip,
+  useTooltipContext as useArkTooltipContext,
 } from "@ark-ui/react/tooltip";
 import type React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
-export const useTooltip = useTooltipContext;
+export const useTooltip = useArkTooltip;
+export const useTooltipContext = useArkTooltipContext;
+export const TooltipRootProvider = ArkTooltip.RootProvider;
 
 export const tooltipContentVariants = tv({
   base: [
@@ -48,7 +51,7 @@ export const Tooltip = (
     lazyMount = true,
     unmountOnExit = true,
     closeDelay = 100,
-    openDelay = 0,
+    openDelay = 600,
     ...rest
   } = props;
 

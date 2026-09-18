@@ -7,10 +7,10 @@ import {
   CircleUserRoundIcon,
   CommandIcon,
   FolderIcon,
-  GalleryVerticalEndIcon,
   LifeBuoyIcon,
   Settings2Icon,
   SquareTerminalIcon,
+  WavesHorizontalIcon,
 } from "lucide-react";
 import { IconTile } from "@/registry/react/components/icon-tile";
 import {
@@ -43,10 +43,10 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" tooltip="Onda workspace">
               <IconTile aria-hidden="true" size="sm">
-                <GalleryVerticalEndIcon aria-hidden="true" className="size-4" />
+                <WavesHorizontalIcon aria-hidden="true" className="size-4" />
               </IconTile>
               <span className="grid flex-1 text-start text-sm leading-tight">
-                <span className="truncate font-semibold">Acme Inc.</span>
+                <span className="truncate font-semibold">Onda Inc.</span>
                 <span className="truncate text-xs">Enterprise</span>
               </span>
               <ChevronsUpDownIcon aria-hidden="true" className="ms-auto" />

@@ -126,9 +126,17 @@ Toggle switch for on/off state. Use with a form control.
 | `onCheckedChange` | `(details: CheckedChangeDetails) => void` | `-` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--size` | `--spacing(5)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--size` | CSS custom property | `--spacing(5)` |
+
+### SwitchRootProvider
+
+Provides a Switch API created with `useSwitch` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseSwitchReturn` | **required** |
 
 ---
 

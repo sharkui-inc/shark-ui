@@ -45,6 +45,7 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
     <Toc
       className={cn(
         "z-10",
+        "w-full min-w-0",
         "flex-col gap-1",
         "py-2 ps-6 pe-4",
         "text-sm",
@@ -62,13 +63,7 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
           <TocIndicator className="bg-primary" />
           {items.map((item) => (
             <TocItem item={item} key={item.value}>
-              <TocLink
-                className="w-full min-w-0 truncate"
-                href={item.href}
-                title={item.title}
-              >
-                {item.title}
-              </TocLink>
+              <TocLink href={item.href}>{item.title}</TocLink>
             </TocItem>
           ))}
         </TocList>
