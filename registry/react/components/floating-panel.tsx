@@ -263,8 +263,8 @@ export const FloatingPanelResizeTrigger = (
   return (
     <ArkFloatingPanel.ResizeTrigger
       className={cn(
-        "data-[axis=n]:h-[6px] data-[axis=s]:h-[6px] data-[axis=n]:max-w-[90%] data-[axis=s]:max-w-[90%]",
-        "data-[axis=e]:max-h-[90%] data-[axis=w]:max-h-[90%] data-[axis=e]:w-[6px] data-[axis=w]:w-[6px]",
+        "data-[axis=n]:h-1.5 data-[axis=s]:h-1.5 data-[axis=n]:max-w-[90%] data-[axis=s]:max-w-[90%]",
+        "data-[axis=e]:max-h-[90%] data-[axis=w]:max-h-[90%] data-[axis=e]:w-1.5 data-[axis=w]:w-1.5",
         "data-[axis=ne]:size-2.5 data-[axis=nw]:size-2.5 data-[axis=se]:size-2.5 data-[axis=sw]:size-2.5",
         className
       )}

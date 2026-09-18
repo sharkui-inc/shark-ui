@@ -24,6 +24,7 @@ const Example = () => (
             className="data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
             item={item}
             key={item.value}
+            showIndicator={false}
           >
             <ListboxItemText className="text-center text-xl">
               {item.label}

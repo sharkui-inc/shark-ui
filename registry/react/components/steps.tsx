@@ -107,7 +107,7 @@ export const StepsIndicator = (
         "transition-colors",
         "in-focus-visible:border-ring/64 in-focus-visible:ring-2 in-focus-visible:ring-ring/24",
         "data-complete:in-focus-visible:border-background data-current:in-focus-visible:border-background",
-        "[&:is([data-current],[data-complete])]:border-primary [&:is([data-current],[data-complete])]:bg-primary [&:is([data-current],[data-complete])]:text-primary-foreground",
+        "[[data-current],[data-complete]]:border-primary [[data-current],[data-complete]]:bg-primary [[data-current],[data-complete]]:text-primary-foreground",
         "[&_svg]:size-(--steps-icon-size) [&_svg]:shrink-0",
         "motion-reduce:transition-none",
         className
@@ -135,7 +135,7 @@ export const StepsSeparator = (
         "transition-colors",
         "data-complete:bg-primary",
         "data-[orientation=horizontal]:mx-(--steps-gutter) data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:w-full",
-        "data-[orientation=vertical]:absolute data-[orientation=vertical]:start-[calc(var(--steps-size)/2-1px)] data-[orientation=vertical]:top-[calc(var(--steps-size)+var(--steps-gutter))] data-[orientation=vertical]:h-full data-[orientation=vertical]:max-h-[calc(100%-(var(--steps-size)+var(--steps-gutter)*2))] data-[orientation=vertical]:w-0.5",
+        "data-[orientation=vertical]:absolute data-[orientation=vertical]:inset-s-[calc(var(--steps-size)/2-1px)] data-[orientation=vertical]:top-[calc(var(--steps-size)+var(--steps-gutter))] data-[orientation=vertical]:h-full data-[orientation=vertical]:max-h-[calc(100%-(var(--steps-size)+var(--steps-gutter)*2))] data-[orientation=vertical]:w-0.5",
         "motion-reduce:transition-none",
         className
       )}

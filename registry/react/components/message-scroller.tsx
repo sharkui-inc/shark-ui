@@ -115,7 +115,7 @@ export const MessageScrollerButton = (props: MessageScrollerButtonProps) => {
     <Button
       aria-label={ariaLabel}
       className={cn(
-        "absolute start-1/2 -translate-x-1/2 border-border bg-background text-foreground rtl:translate-x-1/2",
+        "absolute inset-s-1/2 -translate-x-1/2 border-border bg-background text-foreground rtl:translate-x-1/2",
         "transition-[translate,scale,opacity] duration-150 ease-out",
         "hover:bg-muted hover:text-foreground",
         "data-[active=false]:pointer-events-none data-[active=false]:scale-95 data-[active=false]:opacity-0",

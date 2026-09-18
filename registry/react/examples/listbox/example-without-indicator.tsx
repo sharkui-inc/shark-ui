@@ -12,7 +12,7 @@ const Example = () => (
   <Listbox className="max-w-64" collection={collection} defaultValue={["br"]}>
     <ListboxContent>
       {collection.items.map((item) => (
-        <ListboxItem item={item} key={item.value}>
+        <ListboxItem item={item} key={item.value} showIndicator={false}>
           <ListboxItemText>{item.label}</ListboxItemText>
         </ListboxItem>
       ))}

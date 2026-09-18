@@ -17,11 +17,11 @@ import {
   SnippetCopy,
   SnippetSelect,
 } from "@/components/ui/snippet";
+import type { PackageManager } from "@/lib/installation-command";
 import {
   createShadcnAddCommand,
   packageManagers,
 } from "@/lib/installation-command";
-import type { PackageManager } from "@/lib/installation-command";
 import type {
   CompositionFileTreeNode,
   PublishedComposition,
@@ -113,7 +113,6 @@ export const CompositionViewer = ({
 
   React.useEffect(() => {
     const container = containerRef.current;
-    // biome-ignore lint/suspicious/noUnnecessaryConditions: React refs remain nullable at runtime before the element mounts.
     if (!container) {
       return;
     }

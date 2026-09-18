@@ -104,6 +104,27 @@ export const DrawerTrigger = (
   props: React.ComponentProps<typeof ArkDrawer.Trigger>
 ) => <ArkDrawer.Trigger data-slot="drawer-trigger" {...props} />;
 
+export const DrawerSwipeArea = (
+  props: React.ComponentProps<typeof ArkDrawer.SwipeArea>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkDrawer.SwipeArea
+      className={cn(
+        "fixed z-[calc(50+var(--layer-index,0))] touch-none",
+        "data-[swipe-direction=up]:inset-x-0 data-[swipe-direction=up]:bottom-0 data-[swipe-direction=up]:h-8",
+        "data-[swipe-direction=down]:inset-x-0 data-[swipe-direction=down]:top-0 data-[swipe-direction=down]:h-8",
+        "data-[swipe-direction=left]:inset-y-0 data-[swipe-direction=left]:right-0 data-[swipe-direction=left]:w-8",
+        "data-[swipe-direction=right]:inset-y-0 data-[swipe-direction=right]:left-0 data-[swipe-direction=right]:w-8",
+        className
+      )}
+      data-slot="drawer-swipe-area"
+      {...rest}
+    />
+  );
+};
+
 const drawerOverlayVariants = tv({
   base: [
     "[--bg:rgb(0_0_0/calc(0.32*(1-var(--drawer-swipe-progress,0))))] [--blur:calc(4px*(1-var(--drawer-swipe-progress,0)))]",
@@ -184,8 +205,11 @@ const drawerContentVariants = tv({
   base: [
     "[--space:--spacing(6)]",
     "[--stack-peek:1.25rem]",
-    "[--stack-scale:calc(1-(var(--nested-drawers,0)*var(--stack-step)))] [--stack-step:0.05]",
-    "[--stack-height:calc(var(--drawer-frontmost-height,var(--drawer-height,0px))+var(--stack-peek))]",
+    "[--stack-progress:clamp(0,var(--drawer-swipe-progress,0),1)] [--stack-step:0.05]",
+    "[--stack-depth:calc(var(--nested-drawers,0)-var(--stack-progress))] [--stack-scale:calc(1-(var(--stack-depth)*var(--stack-step)))]",
+    "[--stack-peek-offset:calc(var(--stack-depth)*var(--stack-peek))]",
+    "[--stack-base-height:var(--drawer-height,0px)] [--stack-frontmost-height:var(--drawer-frontmost-height,var(--stack-base-height))]",
+    "[--stack-height:calc(var(--stack-base-height)+(var(--stack-frontmost-height)-var(--stack-base-height)+var(--stack-peek))*(1-var(--stack-progress)))]",
     "[interpolate-size:allow-keywords]",
     "group/drawer",
     "relative",
@@ -197,42 +221,41 @@ const drawerContentVariants = tv({
     "data-nested-drawer-open:h-(--stack-height)",
     "data-nested-drawer-open:overflow-hidden",
     "data-nested-drawer-open:pointer-events-none",
-    "bg-popover",
+    "bg-popover data-nested-drawer-open:bg-[color-mix(in_srgb,var(--popover),var(--foreground)_calc(4%*var(--stack-depth)))]",
     "text-popover-foreground",
     "shadow-lg/4",
     "outline-hidden",
     "scale-(--stack-scale)",
-    "duration-300 ease-out",
-    "not-data-nested-drawer-open:transition-[transform,scale]",
-    "data-nested-drawer-open:transition-[height,scale,translate]",
+    "transition-[background-color,box-shadow,height,scale,transform,translate] duration-300 ease-out",
     "data-[state=closed]:duration-[calc(var(--drawer-swipe-strength)*300ms)]",
     "data-[state=closed]:animate-out data-[state=open]:animate-in",
     "data-swiping:select-none data-swiping:transition-none",
     "data-dragging:transition-none",
-    "data-nested-drawer-swiping:duration-0",
+    "data-nested-drawer-open:shadow-sm/4",
+    "data-nested-drawer-swiping:transition-none",
     "data-[swipe-direction=down]:origin-[center_bottom]",
+    "data-nested-drawer-open:data-[swipe-direction=down]:translate-y-[calc(-1*var(--stack-peek-offset))]",
     "data-[swipe-direction=up]:origin-[center_top]",
+    "data-nested-drawer-open:data-[swipe-direction=up]:translate-y-(--stack-peek-offset)",
     "motion-reduce:animate-none motion-reduce:transition-none",
     "after:pointer-events-none after:absolute after:bg-inherit after:content-['']",
     "data-[swipe-direction=down]:rounded-t-2xl",
     "data-[swipe-direction=down]:-mb-[max(0,calc(var(--drawer-snap-point-offset-y,0)+clamp(0,1,var(--drawer-snap-point-offset-y,0)/1px)*var(--drawer-swipe-movement-y,0)))]",
     "data-[swipe-direction=down]:pb-[max(0px,calc(env(safe-area-inset-bottom,0px)+var(--drawer-snap-point-offset-y,0px)+clamp(0,1,var(--drawer-snap-point-offset-y,0px)/1px)*var(--drawer-swipe-movement-y,0px)))]",
     "data-[swipe-direction=down]:after:inset-inline-0 data-[swipe-direction=down]:after:top-full data-[swipe-direction=down]:after:h-(--bleed)",
-    "data-[swipe-direction=down]:slide-in-from-bottom data-[swipe-direction=down]:slide-out-to-bottom",
     "data-[swipe-direction=up]:rounded-b-2xl",
     "data-[swipe-direction=up]:pt-[env(safe-area-inset-top,0)]",
     "data-[swipe-direction=up]:after:inset-inline-0 data-[swipe-direction=up]:after:bottom-full data-[swipe-direction=up]:after:h-(--bleed)",
-    "data-[swipe-direction=up]:slide-in-from-top data-[swipe-direction=up]:slide-out-to-top",
     "data-[swipe-direction=left]:h-full data-[swipe-direction=left]:max-h-none data-[swipe-direction=left]:min-h-0 data-[swipe-direction=left]:w-full data-[swipe-direction=left]:max-w-md",
     "data-[swipe-direction=left]:rounded-e-2xl",
     "data-[swipe-direction=left]:ps-[env(safe-area-inset-left,0)]",
+    "data-nested-drawer-open:data-[swipe-direction=left]:translate-x-(--stack-peek-offset)",
     "data-[swipe-direction=left]:after:inset-block-0 data-[swipe-direction=left]:after:inset-e-full data-[swipe-direction=left]:after:inset-inline-auto data-[swipe-direction=left]:after:h-auto data-[swipe-direction=left]:after:w-(--bleed)",
-    "data-[swipe-direction=left]:slide-in-from-left data-[swipe-direction=left]:slide-out-to-left",
     "data-[swipe-direction=right]:h-full data-[swipe-direction=right]:max-h-none data-[swipe-direction=right]:min-h-0 data-[swipe-direction=right]:w-full data-[swipe-direction=right]:max-w-md",
     "data-[swipe-direction=right]:rounded-s-2xl",
     "data-[swipe-direction=right]:pe-[env(safe-area-inset-right,0)]",
+    "data-nested-drawer-open:data-[swipe-direction=right]:translate-x-[calc(-1*var(--stack-peek-offset))]",
     "data-[swipe-direction=right]:after:inset-block-0 data-[swipe-direction=right]:after:inset-inline-auto data-[swipe-direction=right]:after:inset-s-full data-[swipe-direction=right]:after:h-auto data-[swipe-direction=right]:after:w-(--bleed)",
-    "data-[swipe-direction=right]:slide-in-from-right data-[swipe-direction=right]:slide-out-to-right",
   ],
   defaultVariants: {
     variant: "default",
@@ -247,6 +270,13 @@ const drawerContentVariants = tv({
     },
   },
 });
+
+const drawerAnimationDirection = {
+  down: "slide-in-from-bottom slide-out-to-bottom",
+  end: "slide-in-from-end slide-out-to-end",
+  start: "slide-in-from-start slide-out-to-start",
+  up: "slide-in-from-top slide-out-to-top",
+} as const;
 
 type SnapPoint = number | string;
 
@@ -301,6 +331,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
               <ArkDrawer.Content
                 className={cn(
                   drawerContentVariants({ variant }),
+                  drawerAnimationDirection[swipeDirection ?? "down"],
                   fullHeight && "h-full",
                   className
                 )}

@@ -21,6 +21,7 @@ const Example = () => (
             className="flex w-full flex-col items-start"
             item={item}
             key={item.title}
+            showIndicator={false}
           >
             <div className="aspect-square size-20 w-full rounded-lg bg-foreground" />
             <div>

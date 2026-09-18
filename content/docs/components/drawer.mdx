@@ -44,6 +44,7 @@ npx shadcn@latest add @shark/drawer
 
 ```text
 Drawer
+├── DrawerSwipeArea
 ├── DrawerTrigger
 └── DrawerContent
     ├── DrawerGrabber
@@ -59,6 +60,7 @@ Drawer
 ```tsx
 import {
   Drawer,
+  DrawerSwipeArea,
   DrawerTrigger,
   DrawerContent,
   DrawerHeader,
@@ -72,6 +74,7 @@ import {
 
 ```tsx
 <Drawer>
+  <DrawerSwipeArea />
   <DrawerTrigger />
   <DrawerContent>
     <DrawerHeader>
@@ -138,6 +141,18 @@ Control which direction the drawer slides and swipes using `swipeDirection` on t
 
 <ComponentPreview componentName="drawer" fileName="example-swipe-directions" />
 
+### Edge Swipe
+
+Render `DrawerSwipeArea` to open the drawer by swiping from its edge. The hit area follows the drawer direction and is inactive while the drawer is open.
+
+<ComponentPreview componentName="drawer" fileName="example-swipe-area" />
+
+### Scrollable
+
+`DrawerBody` fills the remaining panel height and scrolls independently, keeping the header and footer visible.
+
+<ComponentPreview componentName="drawer" fileName="example-scrollable" />
+
 ### Snap Points
 
 Use `snapPoints` to allow the drawer to snap to multiple heights.
@@ -155,6 +170,12 @@ Use `modal={false}` to allow interaction with elements outside the drawer.
 Give each `DrawerTrigger` a `value` to reuse one drawer across several buttons.
 
 <ComponentPreview componentName="drawer" fileName="example-multiple-triggers" />
+
+### Nested Drawers
+
+Nested drawers scale, shift, and smoothly resize the previous drawer to the frontmost panel height. Swipe the top drawer slowly to see the previous layer restore as the gesture progresses.
+
+<ComponentPreview componentName="drawer" fileName="example-nested" />
 
 ### Autofocus
 
@@ -238,6 +259,17 @@ Opens the drawer on click. Use `asChild` for custom trigger elements.
 | `value` | `string` | `-` |
 | `className` | `string` | `-` |
 
+### DrawerSwipeArea
+
+An invisible edge hit area that opens the drawer by swipe. Its position follows the resolved physical swipe direction.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `disabled` | `boolean` | `false` |
+| `swipeDirection` | `"up" \| "down" \| "start" \| "end"` | opposite of the drawer direction |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
 ### DrawerContent
 
 Holds the drawer panel. Supports swipe-to-close; direction inherited from root `swipeDirection`.
@@ -253,7 +285,7 @@ Holds the drawer panel. Supports swipe-to-close; direction inherited from root `
 | Prop | Type | Default |
 | --- | --- | --- |
 | `--bleed` | CSS custom property | `--spacing(12)` |
-| `--space` | CSS custom property | `--spacing(4)` |
+| `--space` | CSS custom property | `--spacing(6)` |
 
 ### DrawerHeader
 
@@ -290,7 +322,7 @@ Scrollable body content.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `scrollFade` | `boolean` | `false` |
+| `scrollFade` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
 ### DrawerFooter

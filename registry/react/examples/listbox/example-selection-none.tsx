@@ -26,14 +26,18 @@ const Example = () => (
         <ListboxItemGroup heading="Actions">
           <ListboxItem item={collection.items[0]}>
             <SquarePlusIcon aria-hidden="true" />
-            <ListboxItemText>New file</ListboxItemText>
-            <ListboxItemDescription>Create a new file</ListboxItemDescription>
+            <div className="flex min-w-0 flex-1 flex-col">
+              <ListboxItemText>New file</ListboxItemText>
+              <ListboxItemDescription>Create a new file</ListboxItemDescription>
+            </div>
             <ListboxShortcut>⌘N</ListboxShortcut>
           </ListboxItem>
           <ListboxItem item={collection.items[1]}>
             <PencilIcon aria-hidden="true" />
-            <ListboxItemText>Edit file</ListboxItemText>
-            <ListboxItemDescription>Make changes</ListboxItemDescription>
+            <div className="flex min-w-0 flex-1 flex-col">
+              <ListboxItemText>Edit file</ListboxItemText>
+              <ListboxItemDescription>Make changes</ListboxItemDescription>
+            </div>
             <ListboxShortcut>⌘E</ListboxShortcut>
           </ListboxItem>
         </ListboxItemGroup>
@@ -41,8 +45,10 @@ const Example = () => (
         <ListboxItemGroup heading="Danger zone">
           <ListboxItem item={collection.items[2]} variant="destructive">
             <Trash2Icon aria-hidden="true" />
-            <ListboxItemText>Delete file</ListboxItemText>
-            <ListboxItemDescription>Move to trash</ListboxItemDescription>
+            <div className="flex min-w-0 flex-1 flex-col">
+              <ListboxItemText>Delete file</ListboxItemText>
+              <ListboxItemDescription>Move to trash</ListboxItemDescription>
+            </div>
             <ListboxShortcut>⌘D</ListboxShortcut>
           </ListboxItem>
         </ListboxItemGroup>

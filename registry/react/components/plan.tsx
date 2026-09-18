@@ -200,8 +200,8 @@ export const PlanItem = (props: PlanItemProps) => {
       <Collapsible
         className={cn(
           "w-full min-w-0 text-sm",
-          "[&>[data-slot=collapsible-content]]:w-full",
-          "[&>[data-slot=collapsible-content]]:min-w-0",
+          "*:data-[slot=collapsible-content]:w-full",
+          "*:data-[slot=collapsible-content]:min-w-0",
           className
         )}
         data-slot="plan-item"
@@ -215,7 +215,10 @@ export const PlanItem = (props: PlanItemProps) => {
 };
 
 interface PlanItemTriggerProps
-  extends Omit<React.ComponentProps<typeof CollapsibleTrigger>, "ref" | "title"> {
+  extends Omit<
+    React.ComponentProps<typeof CollapsibleTrigger>,
+    "ref" | "title"
+  > {
   /**
    * The status of the plan item.
    */

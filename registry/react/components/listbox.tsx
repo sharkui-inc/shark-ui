@@ -98,9 +98,7 @@ const listboxItemVariants = tv({
     "group/listbox-item",
     menuItemControlVariants(),
     inputItemVariants(),
-    "grid grid-cols-[1fr_auto] has-[>:first-child:not([data-slot=listbox-item-text])]:grid-cols-[auto_1fr_auto] has-[>svg]:grid-cols-[--spacing(3.5)_1fr_auto]",
-    "has-data-[slot=listbox-item-indicator]:**:data-[slot=listbox-item-text]:pe-8",
-    "gap-y-0.5",
+    "items-start",
     "cursor-pointer",
     "outline-hidden",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
@@ -112,7 +110,11 @@ const listboxItemVariants = tv({
   },
   variants: {
     variant: {
-      default: ["text-popover-foreground", menuItemHighlightVariants()],
+      default: [
+        "text-popover-foreground",
+        menuItemHighlightVariants(),
+        "hover:bg-accent hover:text-accent-foreground",
+      ],
       destructive: [
         "text-destructive dark:text-destructive-foreground",
         "hover:bg-destructive/8 dark:hover:bg-destructive-foreground/8",
@@ -125,24 +127,39 @@ const listboxItemVariants = tv({
 
 interface ListboxItemProps
   extends React.ComponentProps<typeof ArkListbox.Item>,
-    VariantProps<typeof listboxItemVariants> {}
+    VariantProps<typeof listboxItemVariants> {
+  /**
+   * Whether to show the selected item check.
+   *
+   * @default true
+   */
+  showIndicator?: boolean;
+}
 
 export const ListboxItem = (props: ListboxItemProps) => {
   const {
-    highlightOnHover = true,
+    showIndicator = true,
     variant = "default",
     className,
+    children,
     ...rest
   } = props;
 
   return (
     <ArkListbox.Item
-      className={cn(listboxItemVariants({ variant }), className)}
+      className={cn(
+        listboxItemVariants({ variant }),
+        showIndicator && "pe-8",
+        className
+      )}
       data-slot="listbox-item"
       data-variant={variant}
-      highlightOnHover={highlightOnHover}
       {...rest}
-    />
+    >
+      {children}
+
+      {showIndicator ? <ListboxItemIndicator /> : null}
+    </ArkListbox.Item>
   );
 };
 
@@ -153,12 +170,7 @@ export const ListboxItemText = (
 
   return (
     <ArkListbox.ItemText
-      className={cn(
-        "min-h-lh min-w-0",
-        "whitespace-nowrap",
-        "[svg~&]:col-start-2",
-        className
-      )}
+      className={cn("min-h-lh min-w-0 flex-1", "whitespace-nowrap", className)}
       data-slot="listbox-item-text"
       {...rest}
     />
@@ -223,11 +235,7 @@ export const ListboxItemDescription = (
 
   return (
     <ark.span
-      className={cn(
-        "col-start-1 text-muted-foreground text-xs",
-        "[svg~&]:col-start-2",
-        className
-      )}
+      className={cn("text-muted-foreground text-xs", className)}
       data-slot="listbox-item-description"
       {...rest}
     />
@@ -271,14 +279,4 @@ export const ListboxEmpty = (
 
 export const ListboxShortcut = (
   props: React.ComponentProps<typeof MenuShortcut>
-) => {
-  const { className, ...rest } = props;
-
-  return (
-    <MenuShortcut
-      className={cn("col-start-[-1] row-start-1", className)}
-      data-slot="listbox-shortcut"
-      {...rest}
-    />
-  );
-};
+) => <MenuShortcut data-slot="listbox-shortcut" {...props} />;

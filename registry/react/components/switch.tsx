@@ -23,7 +23,7 @@ export const Switch = (props: React.ComponentProps<typeof ArkSwitch.Root>) => {
         "[--switch-thumb-height:calc(var(--switch-size)-4px)]",
         "[--switch-thumb-width:calc(var(--switch-thumb-height)*1.375)]",
         "[--switch-thumb-translate:calc((var(--switch-size)*2)-var(--switch-thumb-width)-4px)]",
-        "h-[var(--switch-size)] w-[calc(var(--switch-size)*2)]",
+        "h-(--switch-size) w-[calc(var(--switch-size)*2)]",
         "relative",
         "p-0.5",
         "inline-flex shrink-0 items-center",

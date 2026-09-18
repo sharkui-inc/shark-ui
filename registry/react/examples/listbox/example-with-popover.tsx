@@ -12,7 +12,6 @@ import {
   ListboxContent,
   ListboxEmpty,
   ListboxItem,
-  ListboxItemIndicator,
   ListboxItemText,
   ListboxValueText,
 } from "@/registry/react/components/listbox";
@@ -74,7 +73,6 @@ const Example = () => {
             {collection.items.map((item) => (
               <ListboxItem item={item} key={item.value}>
                 <ListboxItemText>{item.label}</ListboxItemText>
-                <ListboxItemIndicator />
               </ListboxItem>
             ))}
 

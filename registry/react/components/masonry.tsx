@@ -246,12 +246,12 @@ export const MasonryItem = (props: React.ComponentProps<typeof ark.li>) => {
       className={cn(
         "min-w-0",
         "mb-(--gap) break-inside-avoid",
-        "data-[masonry-layout=ready]:absolute data-[masonry-layout=ready]:start-0 data-[masonry-layout=ready]:top-0",
+        "data-[masonry-layout=ready]:absolute data-[masonry-layout=ready]:inset-s-0 data-[masonry-layout=ready]:top-0",
         "data-[masonry-layout=ready]:mb-0 data-[masonry-layout=ready]:w-(--masonry-item-width)",
         "data-[masonry-layout=ready]:translate-x-(--masonry-item-x) data-[masonry-layout=ready]:translate-y-(--masonry-item-y)",
         "data-[masonry-layout=ready]:will-change-transform",
-        "data-[masonry-animate]:transition-transform data-[masonry-animate]:duration-150 data-[masonry-animate]:ease-out",
-        "motion-reduce:data-[masonry-animate]:transition-none",
+        "data-masonry-animate:transition-transform data-masonry-animate:duration-150 data-masonry-animate:ease-out",
+        "motion-reduce:data-masonry-animate:transition-none",
         className
       )}
       data-slot="masonry-item"

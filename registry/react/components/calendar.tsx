@@ -465,7 +465,7 @@ export const CalendarTableCell = (
           "data-selected:data-focus:border-background data-selected:focus-visible:border-background",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
           "data-unavailable:pointer-events-none data-unavailable:line-through data-unavailable:opacity-64",
-          "data-[view=day]:data-in-range:not-data-[hover-range-start]:not-data-[range-start]:not-data-[hover-range-end]:not-data-[range-end]:rounded-none",
+          "data-[view=day]:data-in-range:not-data-hover-range-start:not-data-range-start:not-data-hover-range-end:not-data-range-end:rounded-none",
           "data-[view=day]:data-in-range:not-data-selected:bg-primary/8",
           "data-selected:bg-primary data-selected:text-primary-foreground",
           "data-hover-range-start:rounded-s-lg data-range-start:rounded-s-lg",
