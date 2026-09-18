@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "tailwind-variants", "lucide-react"];
 
@@ -7,10 +7,10 @@ const manifest: RegistryItemType = {
   dependencies,
   name: "select",
   registryDependencies: [
-    absoluteUrl("/r/input.json"),
-    absoluteUrl("/r/menu.json"),
-    absoluteUrl("/r/scroll-area.json"),
-    absoluteUrl("/r/separator.json"),
+    registryUrl("/r/input.json"),
+    registryUrl("/r/menu.json"),
+    registryUrl("/r/scroll-area.json"),
+    registryUrl("/r/separator.json"),
   ],
   type: "registry:ui",
 };

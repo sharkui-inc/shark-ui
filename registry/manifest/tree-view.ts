@@ -1,12 +1,12 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "lucide-react", "tailwind-variants"];
 
 const manifest: RegistryItemType = {
   dependencies,
   name: "tree-view",
-  registryDependencies: [absoluteUrl("/r/checkbox.json")],
+  registryDependencies: [registryUrl("/r/checkbox.json")],
   type: "registry:ui",
 };
 

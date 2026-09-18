@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
   dependencies: ["@ark-ui/react", "lucide-react"],
@@ -7,9 +7,9 @@ const manifest: RegistryItemType = {
     "Collapsible agent plan with status-aware items, progress, and details.",
   name: "plan",
   registryDependencies: [
-    absoluteUrl("/r/badge.json"),
-    absoluteUrl("/r/collapsible.json"),
-    absoluteUrl("/r/spinner.json"),
+    registryUrl("/r/badge.json"),
+    registryUrl("/r/collapsible.json"),
+    registryUrl("/r/spinner.json"),
   ],
   type: "registry:ui",
 };

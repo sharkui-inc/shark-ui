@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
   dependencies: ["@ark-ui/react"],
@@ -7,14 +7,14 @@ const manifest: RegistryItemType = {
     "A composable questionnaire with single, multiple, freeform, and optional answers.",
   name: "questionnaire",
   registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/checkbox.json"),
-    absoluteUrl("/r/field.json"),
-    absoluteUrl("/r/format.json"),
-    absoluteUrl("/r/hotkeys.json"),
-    absoluteUrl("/r/input.json"),
-    absoluteUrl("/r/kbd.json"),
-    absoluteUrl("/r/radio-group.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/checkbox.json"),
+    registryUrl("/r/field.json"),
+    registryUrl("/r/format.json"),
+    registryUrl("/r/hotkeys.json"),
+    registryUrl("/r/input.json"),
+    registryUrl("/r/kbd.json"),
+    registryUrl("/r/radio-group.json"),
   ],
   type: "registry:ui",
 };

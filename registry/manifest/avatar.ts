@@ -1,12 +1,12 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "tailwind-variants"];
 
 const manifest: RegistryItemType = {
   dependencies,
   name: "avatar",
-  registryDependencies: [absoluteUrl("/r/status.json")],
+  registryDependencies: [registryUrl("/r/status.json")],
   type: "registry:ui",
 };
 

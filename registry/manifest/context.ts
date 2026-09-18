@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
   dependencies: ["@ark-ui/react", "lucide-react", "tailwind-variants"],
@@ -7,11 +7,11 @@ const manifest: RegistryItemType = {
     "Context window usage meter with token breakdown and optional cost.",
   name: "context",
   registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/circular-progress.json"),
-    absoluteUrl("/r/format.json"),
-    absoluteUrl("/r/popover.json"),
-    absoluteUrl("/r/progress.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/circular-progress.json"),
+    registryUrl("/r/format.json"),
+    registryUrl("/r/popover.json"),
+    registryUrl("/r/progress.json"),
   ],
   type: "registry:ui",
 };

@@ -1,11 +1,11 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@base-ui/react", "tailwind-variants", "lucide-react"];
 
 const devDependencies = ["tw-animate-css"];
 
-const registryDependencies = [absoluteUrl("/r/utils.json")];
+const registryDependencies = [registryUrl("/r/utils.json")];
 
 const cssVars = {
   dark: {

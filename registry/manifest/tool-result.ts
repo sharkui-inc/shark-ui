@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const cssVars = {
   dark: {
@@ -20,7 +20,7 @@ const manifest: RegistryItemType = {
   description:
     "Collapsible tool result row with title, meta, and trailing actions.",
   name: "tool-result",
-  registryDependencies: [absoluteUrl("/r/collapsible.json")],
+  registryDependencies: [registryUrl("/r/collapsible.json")],
   type: "registry:ui",
 };
 

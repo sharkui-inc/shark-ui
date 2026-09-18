@@ -1,12 +1,12 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react"];
 
 const manifest: RegistryItemType = {
   dependencies,
   name: "editable",
-  registryDependencies: [absoluteUrl("/r/button.json")],
+  registryDependencies: [registryUrl("/r/button.json")],
   type: "registry:ui",
 };
 

@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react"];
 
@@ -7,8 +7,8 @@ const manifest: RegistryItemType = {
   dependencies,
   name: "toggle-tooltip",
   registryDependencies: [
-    absoluteUrl("/r/popover.json"),
-    absoluteUrl("/r/tooltip.json"),
+    registryUrl("/r/popover.json"),
+    registryUrl("/r/tooltip.json"),
   ],
   type: "registry:ui",
 };

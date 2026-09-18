@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { after, describe, it } from "node:test";
 import { SITE_CONFIG } from "@/config/site";
-import { absoluteUrl } from "@/lib/url";
+import { absoluteUrl, registryUrl } from "@/lib/url";
 
 describe("absoluteUrl", () => {
   const previousSiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -51,5 +51,15 @@ describe("absoluteUrl", () => {
     delete process.env.NEXT_PUBLIC_SITE_URL;
     delete process.env.VERCEL_URL;
     assert.equal(absoluteUrl("/docs"), `${SITE_CONFIG.url}/docs`);
+  });
+
+  it("uses the canonical site URL for registry artifacts", () => {
+    process.env.NEXT_PUBLIC_SITE_URL = "https://example.test";
+    process.env.VERCEL_URL = "preview-shark-ui.vercel.app/";
+
+    assert.equal(
+      registryUrl("/r/button.json"),
+      `${SITE_CONFIG.url}/r/button.json`
+    );
   });
 });

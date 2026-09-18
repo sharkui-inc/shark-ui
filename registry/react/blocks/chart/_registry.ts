@@ -1,5 +1,5 @@
 import type { BlockDefinition } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const chartPreviews = {
   "chart-area-axes": () => import("./chart-area-axes"),
@@ -115,12 +115,12 @@ export const chartBlocks = Object.entries(chartPreviews).map(
   ([name, preview], index): BlockDefinition => {
     const copy = getChartCopy(name);
     const registryDependencies = [
-      absoluteUrl("/r/card.json"),
-      absoluteUrl("/r/chart.json"),
+      registryUrl("/r/card.json"),
+      registryUrl("/r/chart.json"),
     ];
 
     if (interactiveCharts.has(name)) {
-      registryDependencies.push(absoluteUrl("/r/select.json"));
+      registryDependencies.push(registryUrl("/r/select.json"));
     }
 
     return {

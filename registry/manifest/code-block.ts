@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
   dependencies: ["@ark-ui/react", "shiki"],
@@ -7,10 +7,10 @@ const manifest: RegistryItemType = {
     "Composable code panel with Shiki highlighting, streaming support, copy, and line numbers.",
   name: "code-block",
   registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/clipboard.json"),
-    absoluteUrl("/r/select.json"),
-    absoluteUrl("/r/scroll-area.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/clipboard.json"),
+    registryUrl("/r/select.json"),
+    registryUrl("/r/scroll-area.json"),
   ],
   type: "registry:ui",
 };

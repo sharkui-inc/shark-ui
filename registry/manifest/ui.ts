@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = [
   "@ark-ui/react",
@@ -134,7 +134,7 @@ const manifest: RegistryItemType = {
   devDependencies,
   name: "ui",
   registryDependencies: SHARK_UI_BUNDLE.map((name) =>
-    absoluteUrl(`/r/${name}.json`)
+    registryUrl(`/r/${name}.json`)
   ),
   type: "registry:ui",
 };

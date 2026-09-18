@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "tailwind-variants"];
 
@@ -16,7 +16,7 @@ const manifest: RegistryItemType = {
   cssVars,
   dependencies,
   name: "button",
-  registryDependencies: [absoluteUrl("/r/spinner.json")],
+  registryDependencies: [registryUrl("/r/spinner.json")],
   type: "registry:ui",
 };
 

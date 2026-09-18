@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "lucide-react", "tailwind-variants"];
 
@@ -7,9 +7,9 @@ const manifest: RegistryItemType = {
   dependencies,
   name: "listbox",
   registryDependencies: [
-    absoluteUrl("/r/field.json"),
-    absoluteUrl("/r/input.json"),
-    absoluteUrl("/r/menu.json"),
+    registryUrl("/r/field.json"),
+    registryUrl("/r/input.json"),
+    registryUrl("/r/menu.json"),
   ],
   type: "registry:ui",
 };

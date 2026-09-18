@@ -1,5 +1,5 @@
 import type { BlockDefinition } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 export const dashboardBlocks = [
   {
@@ -53,15 +53,15 @@ export const dashboardBlocks = [
     name: "dashboard-01",
     preview: () => import("./dashboard-01/page"),
     registryDependencies: [
-      absoluteUrl("/r/avatar.json"),
-      absoluteUrl("/r/badge.json"),
-      absoluteUrl("/r/button.json"),
-      absoluteUrl("/r/card.json"),
-      absoluteUrl("/r/chart.json"),
-      absoluteUrl("/r/icon-tile.json"),
-      absoluteUrl("/r/separator.json"),
-      absoluteUrl("/r/sidebar.json"),
-      absoluteUrl("/r/table.json"),
+      registryUrl("/r/avatar.json"),
+      registryUrl("/r/badge.json"),
+      registryUrl("/r/button.json"),
+      registryUrl("/r/card.json"),
+      registryUrl("/r/chart.json"),
+      registryUrl("/r/icon-tile.json"),
+      registryUrl("/r/separator.json"),
+      registryUrl("/r/sidebar.json"),
+      registryUrl("/r/table.json"),
     ],
     title: "Analytics Dashboard",
     type: "registry:block",

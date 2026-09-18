@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
   dependencies: ["@ark-ui/react", "lucide-react"],
@@ -7,8 +7,8 @@ const manifest: RegistryItemType = {
     "Compound microphone recording input with waveform, duration, and browser transcription.",
   name: "speech-input",
   registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/native-select.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/native-select.json"),
   ],
   type: "registry:ui",
 };

@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "recharts"];
 
@@ -24,7 +24,7 @@ const manifest: RegistryItemType = {
   cssVars,
   dependencies,
   name: "chart",
-  registryDependencies: [absoluteUrl("/r/format.json")],
+  registryDependencies: [registryUrl("/r/format.json")],
   type: "registry:ui",
 };
 

@@ -1,12 +1,12 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react"];
 
 const manifest: RegistryItemType = {
   dependencies,
   name: "slider",
-  registryDependencies: [absoluteUrl("/r/field.json")],
+  registryDependencies: [registryUrl("/r/field.json")],
   type: "registry:ui",
 };
 

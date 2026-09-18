@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
   dependencies: ["@ark-ui/react", "lucide-react"],
@@ -7,8 +7,8 @@ const manifest: RegistryItemType = {
     "Chat composer with textarea, tool slots, attach, and send or stop.",
   name: "prompt-input",
   registryDependencies: [
-    absoluteUrl("/r/input-group.json"),
-    absoluteUrl("/r/spinner.json"),
+    registryUrl("/r/input-group.json"),
+    registryUrl("/r/spinner.json"),
   ],
   type: "registry:ui",
 };

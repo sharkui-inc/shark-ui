@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const cssVars = {
   dark: {
@@ -21,7 +21,7 @@ const manifest: RegistryItemType = {
   dependencies: ["@ark-ui/react", "lucide-react", "tailwind-variants"],
   description: "Unified diff hunks with add, delete, and context lines.",
   name: "diff",
-  registryDependencies: [absoluteUrl("/r/scroll-area.json")],
+  registryDependencies: [registryUrl("/r/scroll-area.json")],
   type: "registry:ui",
 };
 

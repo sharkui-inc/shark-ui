@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "lucide-react", "tailwind-variants"];
 
@@ -9,11 +9,11 @@ const manifest: RegistryItemType = {
     "File and image attachment card with upload state, actions, and a full-card trigger.",
   name: "attachment",
   registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/file-thumbnail.json"),
-    absoluteUrl("/r/icon-tile.json"),
-    absoluteUrl("/r/scroll-area.json"),
-    absoluteUrl("/r/shimmer.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/file-thumbnail.json"),
+    registryUrl("/r/icon-tile.json"),
+    registryUrl("/r/scroll-area.json"),
+    registryUrl("/r/shimmer.json"),
   ],
   type: "registry:ui",
 };

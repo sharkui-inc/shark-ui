@@ -1,5 +1,5 @@
 import type { BlockDefinition } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 export const sidebarBlocks = [
   {
@@ -24,9 +24,9 @@ export const sidebarBlocks = [
     name: "sidebar-01",
     preview: () => import("./sidebar-01/page"),
     registryDependencies: [
-      absoluteUrl("/r/icon-tile.json"),
-      absoluteUrl("/r/separator.json"),
-      absoluteUrl("/r/sidebar.json"),
+      registryUrl("/r/icon-tile.json"),
+      registryUrl("/r/separator.json"),
+      registryUrl("/r/sidebar.json"),
     ],
     title: "Sidebar 01",
     type: "registry:block",
@@ -53,9 +53,9 @@ export const sidebarBlocks = [
     name: "sidebar-05",
     preview: () => import("./sidebar-05/page"),
     registryDependencies: [
-      absoluteUrl("/r/collapsible.json"),
-      absoluteUrl("/r/separator.json"),
-      absoluteUrl("/r/sidebar.json"),
+      registryUrl("/r/collapsible.json"),
+      registryUrl("/r/separator.json"),
+      registryUrl("/r/sidebar.json"),
     ],
     title: "Sidebar 05",
     type: "registry:block",
@@ -82,9 +82,9 @@ export const sidebarBlocks = [
     name: "sidebar-07",
     preview: () => import("./sidebar-07/page"),
     registryDependencies: [
-      absoluteUrl("/r/icon-tile.json"),
-      absoluteUrl("/r/separator.json"),
-      absoluteUrl("/r/sidebar.json"),
+      registryUrl("/r/icon-tile.json"),
+      registryUrl("/r/separator.json"),
+      registryUrl("/r/sidebar.json"),
     ],
     title: "Sidebar 07",
     type: "registry:block",
@@ -111,7 +111,7 @@ export const sidebarBlocks = [
     meta: { featured: false, order: 4, previewHeight: 760 },
     name: "sidebar-14",
     preview: () => import("./sidebar-14/page"),
-    registryDependencies: [absoluteUrl("/r/sidebar.json")],
+    registryDependencies: [registryUrl("/r/sidebar.json")],
     title: "Sidebar 14",
     type: "registry:block",
   },
@@ -144,8 +144,8 @@ export const sidebarBlocks = [
     name: "sidebar-15",
     preview: () => import("./sidebar-15/page"),
     registryDependencies: [
-      absoluteUrl("/r/separator.json"),
-      absoluteUrl("/r/sidebar.json"),
+      registryUrl("/r/separator.json"),
+      registryUrl("/r/sidebar.json"),
     ],
     title: "Sidebar 15",
     type: "registry:block",

@@ -1,5 +1,5 @@
 import type { BlockDefinition } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 export const authenticationBlocks = [
   {
@@ -29,12 +29,12 @@ export const authenticationBlocks = [
     name: "login-01",
     preview: () => import("./login-01/page"),
     registryDependencies: [
-      absoluteUrl("/r/button.json"),
-      absoluteUrl("/r/card.json"),
-      absoluteUrl("/r/field.json"),
-      absoluteUrl("/r/icon-tile.json"),
-      absoluteUrl("/r/input.json"),
-      absoluteUrl("/r/separator.json"),
+      registryUrl("/r/button.json"),
+      registryUrl("/r/card.json"),
+      registryUrl("/r/field.json"),
+      registryUrl("/r/icon-tile.json"),
+      registryUrl("/r/input.json"),
+      registryUrl("/r/separator.json"),
     ],
     title: "Login",
     type: "registry:block",

@@ -1,14 +1,14 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
   dependencies: ["@ark-ui/react"],
   description: "A composable card for approval flows.",
   name: "approval-card",
   registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/card.json"),
-    absoluteUrl("/r/questionnaire.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/card.json"),
+    registryUrl("/r/questionnaire.json"),
   ],
   type: "registry:ui",
 };

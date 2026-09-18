@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const CHAT_BUNDLE = [
   "attachment",
@@ -19,7 +19,7 @@ const manifest: RegistryItemType = {
     "Conversation primitives for chat: transcript, composer, tool calls, and reasoning.",
   name: "chat",
   registryDependencies: CHAT_BUNDLE.map((name) =>
-    absoluteUrl(`/r/${name}.json`)
+    registryUrl(`/r/${name}.json`)
   ),
   type: "registry:ui",
 };

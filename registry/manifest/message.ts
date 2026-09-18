@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react"];
 
@@ -9,8 +9,8 @@ const manifest: RegistryItemType = {
     "Conversation row with avatar, alignment, header, content, footer, and actions.",
   name: "message",
   registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/tooltip.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/tooltip.json"),
   ],
   type: "registry:ui",
 };

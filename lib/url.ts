@@ -3,6 +3,14 @@ import { SITE_CONFIG } from "@/config/site";
 const TRAILING_SLASH = /\/$/;
 const HTTP_PROTOCOL = /^https?:\/\//;
 
+const joinUrl = (base: string, path: string) => {
+  const normalizedBase = base.replace(TRAILING_SLASH, "");
+
+  return path.startsWith("/")
+    ? `${normalizedBase}${path}`
+    : `${normalizedBase}/${path}`;
+};
+
 const getBaseUrl = (): string => {
   const vercelUrl = process.env.VERCEL_URL;
 
@@ -23,8 +31,6 @@ const getBaseUrl = (): string => {
   return SITE_CONFIG.url.replace(TRAILING_SLASH, "");
 };
 
-export const absoluteUrl = (path: string) => {
-  const base = getBaseUrl();
+export const absoluteUrl = (path: string) => joinUrl(getBaseUrl(), path);
 
-  return path.startsWith("/") ? `${base}${path}` : `${base}/${path}`;
-};
+export const registryUrl = (path: string) => joinUrl(SITE_CONFIG.url, path);

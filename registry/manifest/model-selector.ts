@@ -1,15 +1,15 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
   dependencies: ["@ark-ui/react", "lucide-react"],
   description: "Combobox picker for models and agents with optional search.",
   name: "model-selector",
   registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/combobox.json"),
-    absoluteUrl("/r/input-group.json"),
-    absoluteUrl("/r/menu.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/combobox.json"),
+    registryUrl("/r/input-group.json"),
+    registryUrl("/r/menu.json"),
   ],
   type: "registry:ui",
 };

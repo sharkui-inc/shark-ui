@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
   dependencies: ["@ai-sdk/react", "@tanstack/ai-react", "ai"],
@@ -11,7 +11,7 @@ const manifest: RegistryItemType = {
     },
   ],
   name: "use-chat-helper",
-  registryDependencies: [absoluteUrl("/r/create-chat.json")],
+  registryDependencies: [registryUrl("/r/create-chat.json")],
   type: "registry:hook",
 };
 
