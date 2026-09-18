@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { Bar, BarChart, XAxis } from "recharts";
 
 import {

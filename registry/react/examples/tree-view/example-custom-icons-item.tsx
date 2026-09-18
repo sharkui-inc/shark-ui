@@ -1,6 +1,7 @@
 "use client";
 
 import { FolderIcon, FolderOpenIcon, StarIcon } from "lucide-react";
+import type React from "react";
 import {
   createTreeCollection,
   TreeView,

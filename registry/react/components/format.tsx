@@ -1,6 +1,7 @@
 "use client";
 
 import { Format as ArkFormat } from "@ark-ui/react/format";
+import type React from "react";
 
 export const FormatByte = (
   props: React.ComponentProps<typeof ArkFormat.Byte>

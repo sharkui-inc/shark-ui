@@ -1,3 +1,4 @@
+import type React from "react";
 export const SharkIcon = (props: React.ComponentProps<"svg">) => (
   <svg
     fill="currentColor"

@@ -1,6 +1,7 @@
 "use client";
 
 import { FileIcon, PackageIcon, PackageOpenIcon } from "lucide-react";
+import type React from "react";
 import {
   createTreeCollection,
   TreeView,

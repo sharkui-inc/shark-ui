@@ -1,6 +1,7 @@
 "use client";
 
 import { PaperclipIcon } from "lucide-react";
+import type React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   Card,

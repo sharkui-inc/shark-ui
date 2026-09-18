@@ -1,3 +1,4 @@
+import type React from "react";
 export const GoogleIcon = (props: React.ComponentProps<"svg">) => (
   <svg viewBox="0 0 488 512" {...props} aria-hidden="true">
     <path

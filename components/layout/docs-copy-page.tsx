@@ -1,4 +1,5 @@
 import { ChevronDownIcon } from "lucide-react";
+import type React from "react";
 import { ChatGptIcon } from "@/components/icons/chat-gpt";
 import { ClaudeIcon } from "@/components/icons/claude";
 import { MarkdownIcon } from "@/components/icons/markdown";

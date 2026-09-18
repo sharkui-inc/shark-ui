@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { NavLink } from "@/components/nav-link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";

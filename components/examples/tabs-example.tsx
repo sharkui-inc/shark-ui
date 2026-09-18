@@ -1,3 +1,4 @@
+import type React from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/registry/react/components/tabs";
 
 export const TabsExample = (

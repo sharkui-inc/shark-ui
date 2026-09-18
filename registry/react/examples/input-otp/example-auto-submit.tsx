@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { InputOTP, InputOTPSlot } from "@/registry/react/components/input-otp";
 import { toast } from "@/registry/react/components/toast";
 

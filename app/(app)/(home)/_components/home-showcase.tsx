@@ -3,6 +3,7 @@
 import { Tabs, TabsList, TabsTrigger } from "@registry/react/components/tabs";
 import { CheckIcon, PaletteIcon } from "lucide-react";
 import Link from "next/link";
+import type React from "react";
 import { TemplatePreviewHost } from "@/app/(app)/themes/_components/template-preview";
 import {
   COMPONENTS_SLUG,

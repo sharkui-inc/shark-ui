@@ -13,6 +13,7 @@ import {
 } from "@registry/react/components/context-menu";
 import { DownloadTrigger } from "@registry/react/components/download-trigger";
 import { DownloadIcon } from "lucide-react";
+import type React from "react";
 import { SharkIcon } from "@/components/icons/shark";
 import { cn } from "@/lib/utils";
 

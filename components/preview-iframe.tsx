@@ -1,4 +1,5 @@
 import type { Frame } from "@ark-ui/react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 
 interface PreviewIframeProps extends React.ComponentProps<typeof Frame> {

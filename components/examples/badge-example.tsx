@@ -1,3 +1,4 @@
+import type React from "react";
 import { Badge } from "@/registry/react/components/badge";
 import {
   Card,

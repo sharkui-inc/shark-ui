@@ -1,6 +1,7 @@
 import { Badge } from "@registry/react/components/badge";
 import { ArrowRightIcon, BotIcon } from "lucide-react";
 import Link from "next/link";
+import type React from "react";
 import { cn } from "@/lib/utils";
 import {
   Announcement,

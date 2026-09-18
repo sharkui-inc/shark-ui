@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type React from "react";
 import { GithubIcon } from "@/components/icons/github";
 import { SharkIcon } from "@/components/icons/shark";
 import { HeaderCommand } from "@/components/layout/header/header.command";

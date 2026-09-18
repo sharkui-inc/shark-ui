@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { getBaseColor, getPrimaryColor } from "@/lib/theme/catalog";
 import { getThemeFont } from "@/lib/theme/fonts";
 import { cn } from "@/lib/utils";

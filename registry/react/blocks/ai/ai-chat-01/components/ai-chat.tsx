@@ -21,14 +21,7 @@ import {
   ThumbsUpIcon,
   Trash2Icon,
 } from "lucide-react";
-import {
-  type CSSProperties,
-  type ReactNode,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React from "react";
 import { SharkIcon } from "@/components/icons/shark";
 import { cn } from "@/lib/utils";
 import {
@@ -200,8 +193,8 @@ import {
 interface AiChatProps {
   assistantName?: string;
   className?: string;
-  headerAction?: ReactNode;
-  rightSidebar?: ReactNode;
+  headerAction?: React.ReactNode;
+  rightSidebar?: React.ReactNode;
   showDemoArtifacts?: boolean;
   welcomeTitle?: string;
 }
@@ -312,10 +305,10 @@ const FollowLatestMessage = ({
   messageCount: number;
   streamedText: string;
 }) => {
-  const previousMessageCount = useRef(messageCount);
+  const previousMessageCount = React.useRef(messageCount);
   const scrollArea = useMessageScroller();
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     const startedTurn = messageCount > previousMessageCount.current;
     const isFirstStreamFrame = streamedText.length === 0;
 
@@ -607,15 +600,15 @@ const ChatSession = ({
 }: {
   assistantName: string;
   className?: string;
-  headerAction?: ReactNode;
+  headerAction?: React.ReactNode;
   onReset: () => void;
   showDemoArtifacts: boolean;
   welcomeTitle: string;
 }) => {
-  const [model, setModel] = useState<string[]>([MODEL_OPTIONS[0].value]);
-  const [effort, setEffort] = useState(["medium"]);
-  const [access, setAccess] = useState(["full"]);
-  const [prompt, setPrompt] = useState("");
+  const [model, setModel] = React.useState<string[]>([MODEL_OPTIONS[0].value]);
+  const [effort, setEffort] = React.useState(["medium"]);
+  const [access, setAccess] = React.useState(["full"]);
+  const [prompt, setPrompt] = React.useState("");
   const { collection } = useListCollection({
     initialItems: [...MODEL_OPTIONS],
   });
@@ -624,7 +617,7 @@ const ChatSession = ({
       chat,
     });
   const promptStatus = toPromptStatus(status);
-  const messageIds = useMemo(
+  const messageIds = React.useMemo(
     () => new Set(messages.map((message) => message.id)),
     [messages]
   );
@@ -888,7 +881,7 @@ export const AiChat = ({
   showDemoArtifacts = true,
   welcomeTitle = "What should we build in shark-ui?",
 }: AiChatProps) => {
-  const [session, setSession] = useState(0);
+  const [session, setSession] = React.useState(0);
 
   const sessionContent = (
     <ChatSession
@@ -910,7 +903,7 @@ export const AiChat = ({
     <SidebarProvider
       className="h-full min-h-0"
       defaultOpen={false}
-      style={{ "--sidebar-width": "20rem" } as CSSProperties}
+      style={{ "--sidebar-width": "20rem" } as React.CSSProperties}
     >
       <SidebarInset className="min-w-0">{sessionContent}</SidebarInset>
       <Sidebar collapsible="offcanvas" placement="right">

@@ -4,8 +4,8 @@ import { Portal } from "@ark-ui/react";
 import { ark } from "@ark-ui/react/factory";
 import {
   Tour as ArkTour,
-  type StatusChangeDetails,
   type TourStepDetails,
+  type UseTourProps,
   type UseTourReturn,
   useTour as useArkTour,
 } from "@ark-ui/react/tour";
@@ -23,6 +23,12 @@ import {
 } from "@/registry/react/components/dialog";
 
 export type TourStepType = TourStepDetails;
+export type TourStatusChangeDetails = Parameters<
+  NonNullable<UseTourProps["onStatusChange"]>
+>[0];
+export type TourStepChangeDetails = Parameters<
+  NonNullable<UseTourProps["onStepChange"]>
+>[0];
 export const useTour = useArkTour;
 
 let activeTourCount = 0;
@@ -69,40 +75,32 @@ const [TourContextProvider, useTourContext] = createContext<TourProviderProps>({
   providerName: "Tour",
 });
 
-interface TourProps
-  extends Omit<React.ComponentProps<typeof ArkTour.Root>, "tour"> {
-  /**
-   * Enable arrow key navigation between steps
-   */
-  keyboardNavigation?: boolean;
-  /**
-   * Called when the tour status changes
-   */
-  onStatusChange?: (details: StatusChangeDetails) => void;
-  /**
-   * Called when the current step changes
-   */
-  onStepChange?: (details: { stepId: string | null }) => void;
+type TourProps = React.PropsWithChildren<
+  Omit<UseTourProps, "steps"> &
+    Omit<React.ComponentProps<typeof ArkTour.Root>, "children" | "tour">
+> & {
   /**
    * The steps to display in the tour
    *
    * @default []
    */
-  steps: TourStepDetails[];
-}
+  steps?: TourStepDetails[];
+};
 
 export const Tour = (props: TourProps) => {
   const {
-    steps = [],
+    children,
+    immediate,
     lazyMount = true,
+    onExitComplete,
     onStatusChange,
+    present,
+    steps = [],
     unmountOnExit = true,
-    ...rest
+    ...tourProps
   } = props;
 
   const [isStarted, setIsStarted] = React.useState(false);
-
-  const tour = useArkTour({ steps });
 
   React.useEffect(() => {
     if (!isStarted) {
@@ -114,13 +112,8 @@ export const Tour = (props: TourProps) => {
     return removeBodyRelativeClass;
   }, [isStarted]);
 
-  const handleStart = React.useCallback(() => {
-    setIsStarted(true);
-    tour.start();
-  }, [tour]);
-
   const handleStatusChange = React.useCallback(
-    (details: StatusChangeDetails) => {
+    (details: TourStatusChangeDetails) => {
       switch (details.status) {
         case "started":
           setIsStarted(true);
@@ -140,16 +133,29 @@ export const Tour = (props: TourProps) => {
     [onStatusChange]
   );
 
+  const tour = useArkTour({
+    ...tourProps,
+    onStatusChange: handleStatusChange,
+    steps,
+  });
+
+  const handleStart = React.useCallback(() => {
+    setIsStarted(true);
+    tour.start();
+  }, [tour]);
+
   return (
     <TourContextProvider value={{ handleStart, tour }}>
       <ArkTour.Root
-        data-slot="tour"
+        immediate={immediate}
         lazyMount={lazyMount}
-        onStatusChange={handleStatusChange}
+        onExitComplete={onExitComplete}
+        present={present}
         tour={tour}
         unmountOnExit={unmountOnExit}
-        {...rest}
-      />
+      >
+        {children}
+      </ArkTour.Root>
     </TourContextProvider>
   );
 };

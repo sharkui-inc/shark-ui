@@ -1,3 +1,4 @@
+import type React from "react";
 export const ShadcnIcon = (props: React.ComponentProps<"svg">) => (
   <svg
     fill="none"

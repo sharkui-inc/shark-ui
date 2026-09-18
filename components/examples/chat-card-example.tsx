@@ -1,13 +1,7 @@
 "use client";
 
 import { ArrowUpIcon, InfoIcon } from "lucide-react";
-import {
-  useEffect,
-  useEffectEvent,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import {
   Avatar,
@@ -72,15 +66,15 @@ const initialMessages: ChatMessage[] = [
 ];
 
 export const ChatCardExample = (props: React.ComponentProps<"div">) => {
-  const [messages, setMessages] = useState(initialMessages);
-  const [input, setInput] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-  const replyTimeoutRef = useRef<number>(0);
+  const [messages, setMessages] = React.useState(initialMessages);
+  const [input, setInput] = React.useState("");
+  const [isTyping, setIsTyping] = React.useState(false);
+  const replyTimeoutRef = React.useRef<number>(0);
   const inputLength = input.trim().length;
 
   const threadSize = messages.length + Number(isTyping);
 
-  useEffect(
+  React.useEffect(
     () => () => {
       window.clearTimeout(replyTimeoutRef.current);
     },
@@ -105,7 +99,10 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
     window.clearTimeout(replyTimeoutRef.current);
     replyTimeoutRef.current = window.setTimeout(() => {
       setMessages((current) =>
-        [...current, { content: replyFor(content), role: "agent" as const }].slice(-8)
+        [
+          ...current,
+          { content: replyFor(content), role: "agent" as const },
+        ].slice(-8)
       );
       setIsTyping(false);
     }, 700);
@@ -232,7 +229,7 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
 const FollowThread = ({ threadSize }: { threadSize: number }) => {
   const { scrollToEdge } = useScrollArea();
 
-  const followThread = useEffectEvent((size: number) => {
+  const followThread = React.useEffectEvent((size: number) => {
     if (size < 1) {
       return;
     }
@@ -240,7 +237,7 @@ const FollowThread = ({ threadSize }: { threadSize: number }) => {
     scrollToEdge({ edge: "bottom" });
   });
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     followThread(threadSize);
   }, [threadSize]);
 

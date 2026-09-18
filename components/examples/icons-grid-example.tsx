@@ -14,6 +14,7 @@ import {
   Trash2Icon,
   UploadIcon,
 } from "lucide-react";
+import type React from "react";
 import { toast } from "@/components/examples/example-toast";
 import { Button } from "@/registry/react/components/button";
 import { Card, CardContent } from "@/registry/react/components/card";

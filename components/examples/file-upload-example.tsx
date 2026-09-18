@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   FileUpload,

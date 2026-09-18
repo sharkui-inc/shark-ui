@@ -7,6 +7,7 @@ import {
   FolderIcon,
   FolderOpenIcon,
 } from "lucide-react";
+import type React from "react";
 import {
   createFileIcons,
   createTreeCollection,

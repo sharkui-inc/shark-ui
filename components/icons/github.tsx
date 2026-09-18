@@ -1,3 +1,4 @@
+import type React from "react";
 export const GithubIcon = (props: React.ComponentProps<"svg">) => (
   <svg
     fill="currentColor"
