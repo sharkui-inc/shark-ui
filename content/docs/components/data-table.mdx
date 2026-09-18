@@ -98,8 +98,6 @@ export function PaymentsTable({ data }: { data: Payment[] }) {
 
 ### Basic
 
-`DataTable` with static columns.
-
 <ComponentPreview componentName="data-table" fileName="example-basic" />
 
 ### Sortable columns
@@ -120,8 +118,6 @@ export function PaymentsTable({ data }: { data: Payment[] }) {
 
 ### Manual pagination
 
-Use `manualPagination` when the server returns only the current page. Provide `rowCount` when it is known so the table can calculate the total page count. Use a stable `getRowId` whenever selection must persist between server responses.
-
 <ComponentPreview
   componentName="data-table"
   fileName="example-manual-pagination"
@@ -139,44 +135,6 @@ Use `manualPagination` when the server returns only the current page. Provide `r
 `rowExpandingFeature` with a detail panel per row.
 
 <ComponentPreview componentName="data-table" fileName="example-expandable" autoHeight />
-
-## Features
-
-`dataTableFeatures` is exported so custom compositions can use exactly the same v9 feature set with `useTable`. TanStack Table includes the core row model by default; the optional row models are registered by this component with `createFilteredRowModel`, `createSortedRowModel`, and `createPaginatedRowModel`.
-
-```tsx
-import { useTable } from "@tanstack/react-table";
-import { dataTableFeatures } from "@/components/ui/data-table";
-
-const table = useTable({
-  columns,
-  data,
-  features: dataTableFeatures,
-});
-```
-
-Use `DataTableColumnHeader` in a column header for an Ark UI menu with ascending, descending, and hide actions.
-
-Keep `data` and `columns` stable with `React.useMemo`, state, or values defined outside the component. Recreating either array on every render makes TanStack recompute row models and can reset pagination.
-
-## Pagination and view options
-
-For a custom table composition created with `useTable`, pass its instance to `DataTablePagination` and `DataTableViewOptions`.
-
-```tsx
-import {
-  DataTablePagination,
-  DataTableViewOptions,
-} from "@/components/ui/data-table";
-
-<div className="flex items-center gap-2">
-  <DataTableViewOptions table={table} />
-</div>
-
-<DataTablePagination table={table} />
-```
-
-For server-side filtering and sorting, pass `manualFiltering` and `manualSorting`, then reset or validate the current page when those remote values change. Set `pageCount: -1` when the server does not know the total: `DataTablePagination` will show only previous and next controls.
 
 ## RTL
 

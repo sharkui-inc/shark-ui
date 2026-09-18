@@ -197,7 +197,7 @@ export const TimerRestart = (props: TimerActionProps) => (
 );
 
 export const TimerPlay = (props: TimerActionProps) => {
-  const { paused } = useArkTimer();
+  const { paused } = useArkTimerContext();
 
   if (paused) {
     return <TimerResume {...props} />;

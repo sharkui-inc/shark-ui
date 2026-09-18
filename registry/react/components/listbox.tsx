@@ -128,13 +128,19 @@ interface ListboxItemProps
     VariantProps<typeof listboxItemVariants> {}
 
 export const ListboxItem = (props: ListboxItemProps) => {
-  const { variant = "default", className, ...rest } = props;
+  const {
+    highlightOnHover = true,
+    variant = "default",
+    className,
+    ...rest
+  } = props;
 
   return (
     <ArkListbox.Item
       className={cn(listboxItemVariants({ variant }), className)}
       data-slot="listbox-item"
       data-variant={variant}
+      highlightOnHover={highlightOnHover}
       {...rest}
     />
   );

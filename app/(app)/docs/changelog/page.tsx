@@ -150,7 +150,7 @@ const ChangelogPage = () => {
                 {latestPages.length > 0 && (
                   <DocsTableOfContents
                     data={latestPages.map((page) => ({
-                      depth: 1,
+                      depth: 2,
                       title: page.data.title,
                       url: page.url,
                     }))}
@@ -159,7 +159,7 @@ const ChangelogPage = () => {
                 {olderPages.length > 0 && (
                   <DocsTableOfContents
                     data={olderPages.map((page) => ({
-                      depth: 1,
+                      depth: 2,
                       title: page.data.title,
                       url: page.url,
                     }))}

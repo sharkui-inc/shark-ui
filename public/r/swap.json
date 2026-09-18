@@ -1,5 +1,29 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "css": {
+    "@keyframes flip-in": {
+      "from": {
+        "transform": "rotateY(180deg)"
+      },
+      "to": {
+        "transform": "rotateY(0deg)"
+      }
+    },
+    "@keyframes flip-out": {
+      "from": {
+        "transform": "rotateY(0deg)"
+      },
+      "to": {
+        "transform": "rotateY(180deg)"
+      }
+    }
+  },
+  "cssVars": {
+    "theme": {
+      "--animate-flip-in": "flip-in 400ms ease",
+      "--animate-flip-out": "flip-out 200ms ease"
+    }
+  },
   "dependencies": [
     "@ark-ui/react",
     "tailwind-variants"

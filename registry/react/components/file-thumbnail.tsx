@@ -49,13 +49,16 @@ export const fileThumbnailVariants = tv({
         badge: ["bg-info text-white", "border-t-info-foreground"],
       },
       primary: {
-        badge: ["bg-primary text-white", "border-t-primary-foreground/32"],
+        badge: [
+          "bg-primary text-primary-foreground",
+          "border-t-primary-foreground/32",
+        ],
       },
       success: {
-        badge: ["bg-success text-white", "border-t-success-foreground"],
+        badge: ["white bg-success", "border-t-success-foreground"],
       },
       warning: {
-        badge: ["bg-warning text-white", "border-t-warning-foreground"],
+        badge: ["white bg-warning", "border-t-warning-foreground"],
       },
     },
   },

@@ -26,7 +26,9 @@ export const ActivityGoalExample = (props: React.ComponentProps<"div">) => {
   const [goal, setGoal] = React.useState(350);
 
   function onClick(adjustment: number) {
-    setGoal(Math.max(minGoal, Math.min(maxGoal, goal + adjustment)));
+    setGoal((currentGoal) =>
+      Math.max(minGoal, Math.min(maxGoal, currentGoal + adjustment))
+    );
   }
 
   return (

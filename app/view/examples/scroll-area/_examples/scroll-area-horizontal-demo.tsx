@@ -26,7 +26,7 @@ const ScrollAreaHorizontalDemo = () => (
     className="w-96 whitespace-nowrap rounded-md border"
     orientation="horizontal"
   >
-    <div className="flex w-max space-x-4 p-4">
+    <div className="flex w-max gap-4 p-4">
       {works.map((artwork) => (
         <figure className="shrink-0" key={artwork.artist}>
           <div className="overflow-hidden rounded-md">

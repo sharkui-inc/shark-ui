@@ -8,7 +8,6 @@ export const DOCS_NEW_ITEMS = [
   "/docs/ai-components/marker",
   "/docs/ai-components/message",
   "/docs/ai-components/message-scroller",
-  "/docs/ai-components/model-selector",
   "/docs/ai-components/plan",
   "/docs/ai-components/prompt-input",
   "/docs/ai-components/queue",

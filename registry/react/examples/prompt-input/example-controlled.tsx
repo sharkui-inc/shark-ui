@@ -1,15 +1,8 @@
 "use client";
 
-import { createListCollection, useListCollection } from "@ark-ui/react";
+import { createListCollection } from "@ark-ui/react";
 import { ShieldCheckIcon } from "lucide-react";
 import React from "react";
-import {
-  ModelSelector,
-  ModelSelectorContent,
-  ModelSelectorItem,
-  ModelSelectorList,
-  ModelSelectorTrigger,
-} from "@/registry/react/components/model-selector";
 import {
   PromptInput,
   PromptInputFooter,
@@ -29,7 +22,6 @@ const Example = () => {
   const [status, setStatus] = React.useState<PromptInputStatus>("ready");
   const [value, setValue] = React.useState("Summarize the latest deploy.");
   const [access, setAccess] = React.useState(["ask-first"]);
-  const { collection } = useListCollection({ initialItems: models });
 
   return (
     <PromptInput
@@ -63,28 +55,11 @@ const Example = () => {
             ))}
           </SelectContent>
         </Select>
-        <ModelSelector collection={collection}>
-          <ModelSelectorTrigger size="sm" variant="ghost" />
-          <ModelSelectorContent>
-            <ModelSelectorList>
-              {collection.items.map((item) => (
-                <ModelSelectorItem item={item} key={item.value}>
-                  {item.label}
-                </ModelSelectorItem>
-              ))}
-            </ModelSelectorList>
-          </ModelSelectorContent>
-        </ModelSelector>
         <PromptInputSubmit className="ms-1" size="icon-sm" />
       </PromptInputFooter>
     </PromptInput>
   );
 };
-
-const models = [
-  { label: "GPT-5.6 Terra", value: "gpt-5.6-terra" },
-  { label: "Claude Sonnet 4", value: "claude-sonnet-4" },
-];
 
 const accessCollection = createListCollection({
   items: [

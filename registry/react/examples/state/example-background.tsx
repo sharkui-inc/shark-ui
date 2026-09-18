@@ -10,7 +10,7 @@ import {
 } from "@/registry/react/components/state";
 
 const Example = () => (
-  <State className="h-full bg-gradient-to-b from-30% from-muted/50 to-background">
+  <State className="h-full bg-gradient-to-b from-30% from-muted/48 to-background">
     <StateHeader>
       <StateMedia variant="icon">
         <BellIcon aria-hidden="true" />

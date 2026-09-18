@@ -71,7 +71,7 @@ export const mdxComponents = {
       >
         <span className="underline underline-offset-4">{children}</span>
         {isExternal ? (
-          <ArrowUpRightIcon className="size-3.5 opacity-90" />
+          <ArrowUpRightIcon className="size-3.5 opacity-80" />
         ) : null}
       </Link>
     );
@@ -103,7 +103,7 @@ export const mdxComponents = {
           className={cn(
             "relative",
             "px-1",
-            "bg-primary/5",
+            "bg-primary/8",
             "font-mono text-primary text-sm",
             "rounded-md",
             className

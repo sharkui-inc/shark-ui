@@ -109,13 +109,9 @@ const { collection, filter } = useListCollection({
 </Combobox>
 ```
 
-When an item is selected, Ark UI reports `reason: "item-select"` to
-`onInputValueChange`. Reset the collection filter for that reason so the input
-keeps the selected label while reopening the list shows every item.
-
 ## Controlled
 
-Control the selected value with `value` and `onValueChange` props. Ark UI represents selections as a `string[]`, including single selection.
+Control the selected value with `value` and `onValueChange` props.
 
 <ComponentPreview componentName="combobox" fileName="example-controlled" />
 

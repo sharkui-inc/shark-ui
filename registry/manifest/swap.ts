@@ -2,7 +2,27 @@ import type { RegistryItemType } from "@/lib/registry";
 
 const dependencies = ["@ark-ui/react", "tailwind-variants"];
 
+const cssVars = {
+  theme: {
+    "--animate-flip-in": "flip-in 400ms ease",
+    "--animate-flip-out": "flip-out 200ms ease",
+  },
+};
+
+const css = {
+  "@keyframes flip-in": {
+    from: { transform: "rotateY(180deg)" },
+    to: { transform: "rotateY(0deg)" },
+  },
+  "@keyframes flip-out": {
+    from: { transform: "rotateY(0deg)" },
+    to: { transform: "rotateY(180deg)" },
+  },
+};
+
 const manifest: RegistryItemType = {
+  css,
+  cssVars,
   dependencies,
   name: "swap",
   type: "registry:ui",

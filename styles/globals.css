@@ -4,6 +4,7 @@
 @import "./prose.css";
 @import "./hitbox.css";
 @import "./shimmer.css";
+@import "./swap.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -88,8 +89,6 @@
   --animate-marquee-y: marqueeY var(--marquee-duration) linear infinite
     var(--marquee-delay);
   --animate-indeterminate: indeterminate 1.5s ease-in-out infinite;
-  --animate-flip-in: flip-in 400ms ease;
-  --animate-flip-out: flip-out 200ms ease;
 
   @keyframes marqueeX {
     from {
@@ -115,24 +114,6 @@
     }
     100% {
       transform: translateX(400%);
-    }
-  }
-
-  @keyframes flip-in {
-    from {
-      transform: rotateY(180deg);
-    }
-    to {
-      transform: rotateY(0deg);
-    }
-  }
-
-  @keyframes flip-out {
-    from {
-      transform: rotateY(0deg);
-    }
-    to {
-      transform: rotateY(180deg);
     }
   }
 }

@@ -107,7 +107,7 @@ export const DrawerTrigger = (
 const drawerOverlayVariants = tv({
   base: [
     "[--bg:rgb(0_0_0/calc(0.32*(1-var(--drawer-swipe-progress,0))))] [--blur:calc(4px*(1-var(--drawer-swipe-progress,0)))]",
-    "fixed inset-0 z-50",
+    "fixed inset-0 z-[calc(50+var(--layer-index,0))]",
     "bg-(--bg) backdrop-blur-(--blur)",
     "data-[has-nested=drawer]:pointer-events-none",
     "transition-opacity duration-300 ease-out",
@@ -140,7 +140,7 @@ export const DrawerOverlay = (
 const drawerPositionerVariants = tv({
   base: [
     "[--bleed:--spacing(12)] [--inset:--spacing(0)]",
-    "fixed inset-0 z-50 overflow-hidden",
+    "fixed inset-0 z-[calc(50+var(--layer-index,0))] overflow-hidden",
     "flex w-screen items-end justify-center",
     "data-[has-nested=drawer]:pointer-events-none",
     "data-[swipe-direction=up]:items-start",

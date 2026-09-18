@@ -59,7 +59,6 @@ import { MenuThumb } from "@/components/thumbs/menu";
 import { MessageThumb } from "@/components/thumbs/message";
 import { MessageBubbleThumb } from "@/components/thumbs/message-bubble";
 import { MessageScrollerThumb } from "@/components/thumbs/message-scroller";
-import { ModelSelectorThumb } from "@/components/thumbs/model-selector";
 import { NativeSelectThumb } from "@/components/thumbs/native-select";
 import { NumberInputThumb } from "@/components/thumbs/number-input";
 import { PaginationThumb } from "@/components/thumbs/pagination";
@@ -174,7 +173,6 @@ const THUMB_MAP: Record<string, React.ComponentType<ThumbCardProps>> = {
   message: MessageThumb,
   "message-bubble": MessageBubbleThumb,
   "message-scroller": MessageScrollerThumb,
-  "model-selector": ModelSelectorThumb,
   "native-select": NativeSelectThumb,
   "number-input": NumberInputThumb,
   pagination: PaginationThumb,

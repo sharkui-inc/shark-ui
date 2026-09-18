@@ -191,7 +191,11 @@ export const TourOverlay = (
 
   return (
     <ArkTour.Backdrop
-      className={cn(dialogOverlayVariants(), "duration-initial", className)}
+      className={cn(
+        dialogOverlayVariants(),
+        "z-[calc(50+var(--layer-index,0))] duration-initial",
+        className
+      )}
       data-slot="tour-overlay"
       {...rest}
     />

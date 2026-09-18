@@ -1,6 +1,6 @@
 "use client";
 
-import { ark } from "@ark-ui/react/";
+import { ark } from "@ark-ui/react/factory";
 import {
   Progress as ArkProgress,
   useProgress as useArkProgress,
@@ -74,7 +74,7 @@ interface CircularProgressTrackProps
 export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
   const { size = 32, thickness = 4, className, ...rest } = props;
 
-  const { max, min, value } = useCircularProgress();
+  const { max, min, value } = useCircularProgressContext();
 
   const radius = size / 2 - thickness / 2;
   const circumference = 2 * Math.PI * radius;
@@ -90,6 +90,7 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
       className={cn(
         "block",
         "-rotate-90",
+        "rtl:rotate-90",
         "pointer-events-none",
         "motion-reduce:animate-none",
         "group-data-[state=indeterminate]/circular-progress:animate-spin",

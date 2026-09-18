@@ -201,7 +201,6 @@ Use `Separator` instead of `<hr>` or a `border-t` divider. Use `Badge` for a sta
 - Message: avatar, header, footer around a turn.
 - MessageBubble: aligned bubble with reactions.
 - MessageScroller: conversation scroll and jump.
-- ModelSelector: pick a model or agent.
 - Plan: agent plan items and progress.
 - PromptInput: compose a prompt with tools and attachments.
 - Queue: queued and completed prompts.

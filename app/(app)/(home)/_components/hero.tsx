@@ -21,7 +21,7 @@ export const HeroSection = (props: HeroSectionProps) => {
     <section className={cn("relative", className)} {...rest}>
       <div className="flex w-full max-w-5xl flex-col items-start gap-6">
         <Announcement asChild className="bg-background">
-          <Link href="/docs/changelog">
+          <Link href="/docs/changelog/26-08">
             <Badge>
               <BotIcon aria-hidden="true" />
             </Badge>

@@ -14,7 +14,7 @@ Other primitives import these `tv()` bases onto their Ark parts. Do not redeclar
 
 ## List rows
 
-Menu, ContextMenu, Select, Combobox, Autocomplete, ModelSelector, Command, and Listbox use Menu density:
+Menu, ContextMenu, Select, Combobox, Autocomplete, Command, and Listbox use Menu density:
 
 - Rows: `menuItemControlVariants` (`min-h-8`, `rounded-lg`, `gap-2`). Not `rounded-xl`.
 - Floating list overlays: `menuListVariants` (`p-1`).

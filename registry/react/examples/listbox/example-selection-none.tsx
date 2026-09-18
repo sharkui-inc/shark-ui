@@ -25,13 +25,13 @@ const Example = () => (
       <ListboxContent>
         <ListboxItemGroup heading="Actions">
           <ListboxItem item={collection.items[0]}>
-            <SquarePlusIcon aria-hidden="true" className="h-lh w-3.5" />
+            <SquarePlusIcon aria-hidden="true" />
             <ListboxItemText>New file</ListboxItemText>
             <ListboxItemDescription>Create a new file</ListboxItemDescription>
             <ListboxShortcut>⌘N</ListboxShortcut>
           </ListboxItem>
           <ListboxItem item={collection.items[1]}>
-            <PencilIcon aria-hidden="true" className="h-lh w-3.5" />
+            <PencilIcon aria-hidden="true" />
             <ListboxItemText>Edit file</ListboxItemText>
             <ListboxItemDescription>Make changes</ListboxItemDescription>
             <ListboxShortcut>⌘E</ListboxShortcut>
@@ -40,7 +40,7 @@ const Example = () => (
         <Separator />
         <ListboxItemGroup heading="Danger zone">
           <ListboxItem item={collection.items[2]} variant="destructive">
-            <Trash2Icon aria-hidden="true" className="h-lh w-3.5" />
+            <Trash2Icon aria-hidden="true" />
             <ListboxItemText>Delete file</ListboxItemText>
             <ListboxItemDescription>Move to trash</ListboxItemDescription>
             <ListboxShortcut>⌘D</ListboxShortcut>

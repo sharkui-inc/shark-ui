@@ -51,13 +51,10 @@ export const generateMetadata = async (
     notFound();
   }
 
-  const title = doc.seoTitle ?? doc.title;
-  const description = doc.seoDescription ?? doc.description;
-
   return createMetadata({
-    description,
+    description: doc.description,
     markdownUrl: `${page.url}.md`,
-    title,
+    title: doc.title,
     url: page.url,
   });
 };
@@ -77,7 +74,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
 
   const isChangelog = params.slug?.[0] === "changelog";
   const changelogDate = isChangelog ? getDateFromFile(page.slugs) : null;
-  const description = page.data.seoDescription ?? page.data.description;
+  const { description } = page.data;
   const breadcrumbItems = [
     { name: "Home", url: absoluteUrl("/") },
     { name: "Documentation", url: absoluteUrl("/docs") },
