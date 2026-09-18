@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowLeftIcon, ArrowRightIcon, RotateCwIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import {
   ContextMenu,
   ContextMenuContent,
@@ -22,7 +22,7 @@ import {
 } from "@/registry/react/components/menu";
 
 const ContextMenuRtl = () => {
-  const [people, setPeople] = useState("pedro");
+  const [people, setPeople] = React.useState("pedro");
 
   return (
     <div dir="rtl">

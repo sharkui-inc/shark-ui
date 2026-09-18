@@ -1,7 +1,7 @@
 "use client";
 
 import { CrownIcon, FileTextIcon, PencilIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   Avatar,
@@ -60,9 +60,11 @@ import {
 } from "@/registry/react/components/tooltip";
 
 export const FormControlsExample = (props: React.ComponentProps<"div">) => {
-  const [access, setAccess] = useState<"anyone" | "invite">(INITIAL.access);
-  const [comments, setComments] = useState(INITIAL.comments);
-  const [isSaving, setIsSaving] = useState(false);
+  const [access, setAccess] = React.useState<"anyone" | "invite">(
+    INITIAL.access
+  );
+  const [comments, setComments] = React.useState(INITIAL.comments);
+  const [isSaving, setIsSaving] = React.useState(false);
 
   const isInvite = access === "invite";
 

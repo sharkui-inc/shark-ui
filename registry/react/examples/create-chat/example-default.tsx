@@ -9,7 +9,7 @@ import {
   PlusIcon,
   RefreshCwIcon,
 } from "lucide-react";
-import { useLayoutEffect, useRef, useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -51,7 +51,7 @@ import { useChatHelper } from "@/registry/react/hooks/use-chat-helper";
 import { createChat } from "@/registry/react/lib/create-chat";
 
 const CreateChatDemo = () => {
-  const [session, setSession] = useState(0);
+  const [session, setSession] = React.useState(0);
 
   return (
     <div className="flex w-full max-w-md flex-col gap-3">
@@ -185,10 +185,10 @@ const FollowLatestMessage = ({
   messageCount: number;
   streamedText: string;
 }) => {
-  const previousMessageCount = useRef(messageCount);
+  const previousMessageCount = React.useRef(messageCount);
   const scrollArea = useMessageScroller();
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     const startedTurn = messageCount > previousMessageCount.current;
     const isFirstStreamFrame = streamedText.length === 0;
 

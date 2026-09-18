@@ -1,7 +1,7 @@
 "use client";
 
 import { MailIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Sidebar,
@@ -17,7 +17,7 @@ import { MailFolderNav } from "./mail-folder-nav";
 import { MailLabelNav } from "./mail-label-nav";
 
 export const MailSidebar = () => {
-  const [activeFolder, setActiveFolder] = useState<Mailbox>("Inbox");
+  const [activeFolder, setActiveFolder] = React.useState<Mailbox>("Inbox");
 
   return (
     <SidebarProvider className="h-full min-h-0 w-full">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
@@ -29,7 +29,7 @@ export const ComputeEnvironmentExample = (
   props: React.ComponentProps<"div">
 ) => {
   const { className, ...rest } = props;
-  const [isSaving, setIsSaving] = useState(false);
+  const [isSaving, setIsSaving] = React.useState(false);
 
   return (
     <div className={cn("flex w-full flex-col gap-6", className)} {...rest}>

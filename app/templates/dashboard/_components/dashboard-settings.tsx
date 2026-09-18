@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckIcon } from "lucide-react";
-import { type CSSProperties, useState } from "react";
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -36,8 +36,8 @@ export const DashboardSettings = ({
   onOpenChange: (open: boolean) => void;
   open: boolean;
 }) => {
-  const [page, setPage] = useState<SettingsPage>("general");
-  const [lastSaved, setLastSaved] = useState("All changes saved");
+  const [page, setPage] = React.useState<SettingsPage>("general");
+  const [lastSaved, setLastSaved] = React.useState("All changes saved");
   const saveSettings = () => setLastSaved("Saved just now");
 
   const renderPage = () => {
@@ -75,7 +75,7 @@ export const DashboardSettings = ({
         />
         <SidebarProvider
           className="min-h-0 min-w-0 flex-1"
-          style={{ "--sidebar-width": "13rem" } as CSSProperties}
+          style={{ "--sidebar-width": "13rem" } as React.CSSProperties}
         >
           <Sidebar className="border-e bg-transparent" collapsible="none">
             <SidebarContent>

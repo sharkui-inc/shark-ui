@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 
 const ChartTooltipDemo = () => (
@@ -180,7 +180,7 @@ const TooltipDemo = ({
                     {
                       "--color-bg": indicatorColor,
                       "--color-border": indicatorColor,
-                    } as CSSProperties
+                    } as React.CSSProperties
                   }
                 />
               )}

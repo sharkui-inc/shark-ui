@@ -9,7 +9,7 @@ import {
   UserRoundIcon,
   WavesHorizontalIcon,
 } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import {
   Avatar,
   AvatarFallback,
@@ -43,7 +43,7 @@ import { getInitials } from "../_utils/get-initials";
 import { DashboardSettings } from "./dashboard-settings";
 
 export const DashboardSidebar = () => {
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = React.useState(false);
 
   return (
     <>

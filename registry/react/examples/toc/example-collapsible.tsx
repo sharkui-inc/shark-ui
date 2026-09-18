@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronRightIcon } from "lucide-react";
-import { useRef } from "react";
+import React from "react";
 import {
   CircularProgress,
   CircularProgressValue,
@@ -23,7 +23,7 @@ import {
 } from "@/registry/react/components/toc";
 
 const Example = () => {
-  const contentRef = useRef<HTMLElement>(null);
+  const contentRef = React.useRef<HTMLElement>(null);
   return (
     <Toc
       className="size-full flex-col items-stretch gap-2 rounded-lg border p-4"

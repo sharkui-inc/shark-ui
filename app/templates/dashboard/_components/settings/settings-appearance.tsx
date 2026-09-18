@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import {
   Field,
   FieldDescription,
@@ -20,9 +20,11 @@ import {
 import { SettingsSwitchField } from "./settings-fields";
 
 export const SettingsAppearancePage = ({ onSave }: { onSave: () => void }) => {
-  const [systemPreference, setSystemPreference] = useState(true);
-  const [compactNavigation, setCompactNavigation] = useState(true);
-  const [appearance, setAppearance] = useState<AppearanceOption[]>(["System"]);
+  const [systemPreference, setSystemPreference] = React.useState(true);
+  const [compactNavigation, setCompactNavigation] = React.useState(true);
+  const [appearance, setAppearance] = React.useState<AppearanceOption[]>([
+    "System",
+  ]);
 
   return (
     <FieldGroup className="max-w-xl">

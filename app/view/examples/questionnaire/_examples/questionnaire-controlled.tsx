@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import React from "react";
 import {
   Questionnaire,
   QuestionnaireActions,
@@ -32,7 +31,7 @@ const itemLabels: Record<string, string> = {
 };
 
 const QuestionnaireControlled = () => {
-  const [item, setItem] = useState("scope");
+  const [item, setItem] = React.useState("scope");
 
   const handleItemChange = (details: QuestionnaireItemChangeDetails) =>
     setItem(details.item);

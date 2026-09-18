@@ -1,7 +1,7 @@
 "use client";
 
 import { CopyIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -34,7 +34,7 @@ import {
 } from "@/registry/react/components/tooltip";
 
 export const ColorPickerExample = (props: React.ComponentProps<"div">) => {
-  const [hex, setHex] = useState("#eb5e41");
+  const [hex, setHex] = React.useState("#eb5e41");
 
   return (
     <Card {...props}>

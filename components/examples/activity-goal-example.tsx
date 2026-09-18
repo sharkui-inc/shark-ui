@@ -1,7 +1,7 @@
 "use client";
 
 import { MinusIcon, PlusIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -23,7 +23,7 @@ import {
 export const ActivityGoalExample = (props: React.ComponentProps<"div">) => {
   const { className, ...rest } = props;
 
-  const [goal, setGoal] = useState(350);
+  const [goal, setGoal] = React.useState(350);
 
   function onClick(adjustment: number) {
     setGoal(Math.max(minGoal, Math.min(maxGoal, goal + adjustment)));

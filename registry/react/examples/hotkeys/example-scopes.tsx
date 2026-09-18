@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { Badge } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -12,8 +12,8 @@ import { Kbd } from "@/registry/react/components/kbd";
 
 const Example = () => {
   const formatHotkey = useFormatHotkey();
-  const [scope, setScope] = useState("editor");
-  const [fired, setFired] = useState<string | null>(null);
+  const [scope, setScope] = React.useState("editor");
+  const [fired, setFired] = React.useState<string | null>(null);
 
   useHotkeys({
     commands: commands.map((command) => ({

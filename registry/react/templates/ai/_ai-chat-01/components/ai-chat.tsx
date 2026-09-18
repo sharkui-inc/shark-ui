@@ -1,7 +1,7 @@
 "use client";
 
 import { EllipsisIcon, Trash2Icon } from "lucide-react";
-import { useRef, useState } from "react";
+import React from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -186,18 +186,18 @@ const getConversation = (id: string) =>
   conversations.find((conversation) => conversation.id === id) ?? null;
 
 export const AIChat = () => {
-  const nextMessageId = useRef(0);
-  const [activeView, setActiveView] = useState<ChatView>("chat");
-  const [activeConversationId, setActiveConversationId] = useState<
+  const nextMessageId = React.useRef(0);
+  const [activeView, setActiveView] = React.useState<ChatView>("chat");
+  const [activeConversationId, setActiveConversationId] = React.useState<
     string | null
   >(conversations[0]?.id ?? null);
-  const [messages, setMessages] = useState<readonly ChatMessage[]>(
+  const [messages, setMessages] = React.useState<readonly ChatMessage[]>(
     conversations[0]?.messages ?? []
   );
-  const [thinkMode, setThinkMode] = useState(true);
-  const [model, setModel] = useState(["gpt-4"]);
-  const [usedTokens, setUsedTokens] = useState(18_420);
-  const [queueItems, setQueueItems] = useState(() => [...INITIAL_QUEUE]);
+  const [thinkMode, setThinkMode] = React.useState(true);
+  const [model, setModel] = React.useState(["gpt-4"]);
+  const [usedTokens, setUsedTokens] = React.useState(18_420);
+  const [queueItems, setQueueItems] = React.useState(() => [...INITIAL_QUEUE]);
 
   const activeConversation = activeConversationId
     ? getConversation(activeConversationId)

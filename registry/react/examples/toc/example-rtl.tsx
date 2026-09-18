@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import React from "react";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { SkeletonText } from "@/registry/react/components/skeleton";
 import {
@@ -14,7 +14,7 @@ import {
 } from "@/registry/react/components/toc";
 
 const Example = () => {
-  const contentRef = useRef<HTMLElement>(null);
+  const contentRef = React.useRef<HTMLElement>(null);
 
   const { locale } = usePreviewLocale();
 

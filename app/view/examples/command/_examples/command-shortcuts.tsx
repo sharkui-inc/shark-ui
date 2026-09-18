@@ -2,7 +2,7 @@
 
 import { useFilter, useListCollection } from "@ark-ui/react";
 import { CreditCardIcon, SettingsIcon, UserIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Command,
@@ -19,7 +19,7 @@ import {
 } from "@/registry/react/components/command";
 
 const CommandShortcuts = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
     filter: contains,

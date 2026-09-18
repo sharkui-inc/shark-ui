@@ -9,7 +9,7 @@ import {
   SmileIcon,
   UserIcon,
 } from "lucide-react";
-import { Fragment, useEffect, useState } from "react";
+import React from "react";
 import {
   Command,
   CommandContent,
@@ -26,7 +26,7 @@ import {
 import { Kbd } from "@/registry/react/components/kbd";
 
 const CommandDialogExample = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
     filter: contains,
@@ -34,7 +34,7 @@ const CommandDialogExample = () => {
     initialItems,
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     const down = (event: KeyboardEvent) => {
       if (event.key === "j" && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
@@ -63,7 +63,7 @@ const CommandDialogExample = () => {
               <CommandEmpty>No results found.</CommandEmpty>
               <CommandList>
                 {collection.group().map(([group, items], index) => (
-                  <Fragment key={group}>
+                  <React.Fragment key={group}>
                     {index !== 0 && <CommandSeparator />}
                     <CommandGroup heading={group}>
                       {items.map((item) => (
@@ -76,7 +76,7 @@ const CommandDialogExample = () => {
                         </CommandItem>
                       ))}
                     </CommandGroup>
-                  </Fragment>
+                  </React.Fragment>
                 ))}
               </CommandList>
             </CommandContent>

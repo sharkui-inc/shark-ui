@@ -1,7 +1,7 @@
 "use client";
 
 import type { Select as ArkSelect } from "@ark-ui/react/select";
-import type { Dispatch, ReactNode, SetStateAction } from "react";
+import type React from "react";
 import {
   Field,
   FieldGroup,
@@ -39,8 +39,8 @@ import {
 interface TaskEditorSelectProps {
   itemKey: (item: ArkSelect.CollectionItem) => string;
   label: string;
-  renderItem: (item: ArkSelect.CollectionItem) => ReactNode;
-  selectValue: ReactNode;
+  renderItem: (item: ArkSelect.CollectionItem) => React.ReactNode;
+  selectValue: React.ReactNode;
 }
 
 const TaskEditorSelect: ArkSelect.RootComponent<TaskEditorSelectProps> = (
@@ -82,7 +82,7 @@ export const TaskEditorFields = ({
   onDraftChange,
 }: {
   draft: TaskDraft;
-  onDraftChange: Dispatch<SetStateAction<TaskDraft>>;
+  onDraftChange: React.Dispatch<React.SetStateAction<TaskDraft>>;
 }) => {
   const patchDraft = <K extends keyof TaskDraft>(
     key: K,

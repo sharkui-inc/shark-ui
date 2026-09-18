@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import {
   FieldDescription,
   FieldGroup,
@@ -14,9 +14,9 @@ export const SettingsNotificationsPage = ({
 }: {
   onSave: () => void;
 }) => {
-  const [weeklySummary, setWeeklySummary] = useState(true);
-  const [customerAlerts, setCustomerAlerts] = useState(true);
-  const [securityAlerts, setSecurityAlerts] = useState(true);
+  const [weeklySummary, setWeeklySummary] = React.useState(true);
+  const [customerAlerts, setCustomerAlerts] = React.useState(true);
+  const [securityAlerts, setSecurityAlerts] = React.useState(true);
 
   return (
     <FieldGroup className="max-w-xl">

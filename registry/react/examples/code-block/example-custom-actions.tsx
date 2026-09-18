@@ -1,7 +1,7 @@
 "use client";
 
 import { ListOrderedIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import {
   CodeBlock,
   CodeBlockActions,
@@ -14,7 +14,7 @@ import {
 import { Toggle } from "@/registry/react/components/toggle";
 
 const Example = () => {
-  const [showLineNumbers, setShowLineNumbers] = useState(true);
+  const [showLineNumbers, setShowLineNumbers] = React.useState(true);
 
   return (
     <CodeBlock className="w-full max-w-lg" code={CODE} language="json">

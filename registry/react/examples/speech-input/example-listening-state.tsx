@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import {
   SpeechInput,
   SpeechInputAccept,
@@ -14,7 +14,7 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const [isListening, setIsListening] = useState(false);
+  const [isListening, setIsListening] = React.useState(false);
 
   return (
     <div className="flex w-full max-w-md flex-col items-center gap-3">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useListCollection } from "@ark-ui/react";
-import { useState } from "react";
+import React from "react";
 import {
   ModelSelector,
   ModelSelectorContent,
@@ -11,7 +11,7 @@ import {
 } from "@/registry/react/components/model-selector";
 
 const Example = () => {
-  const [value, setValue] = useState([models[0].value]);
+  const [value, setValue] = React.useState([models[0].value]);
   const { collection } = useListCollection({ initialItems: models });
 
   const onValueChange = (details: { value: string[] }) => {

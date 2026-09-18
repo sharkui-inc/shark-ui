@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import React from "react";
 import { Label, Pie, PieChart } from "recharts";
 import {
   Card,
@@ -19,10 +19,10 @@ import {
 } from "@/registry/react/components/toggle-group";
 
 export const TrafficDonutExample = (props: React.ComponentProps<"div">) => {
-  const [visible, setVisible] = useState(() =>
+  const [visible, setVisible] = React.useState(() =>
     chartData.map((item) => item.browser)
   );
-  const visibleData = useMemo(
+  const visibleData = React.useMemo(
     () => chartData.filter((item) => visible.includes(item.browser)),
     [visible]
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { RotateCwIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Terminal,
@@ -20,10 +20,10 @@ import {
 } from "@/registry/react/components/tool-result";
 
 const Example = () => {
-  const [lineCount, setLineCount] = useState(1);
-  const [status, setStatus] = useState<ToolResultStatus>("running");
+  const [lineCount, setLineCount] = React.useState(1);
+  const [status, setStatus] = React.useState<ToolResultStatus>("running");
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (status !== "running") {
       return;
     }

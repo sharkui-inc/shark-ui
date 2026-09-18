@@ -2,7 +2,7 @@
 
 import { useChat } from "@ai-sdk/react";
 import { useChat as useTanStackChat } from "@tanstack/ai-react";
-import { useCallback, useMemo } from "react";
+import React from "react";
 import {
   type Chat,
   type ChatMessage,
@@ -35,14 +35,14 @@ const useAiSdkChatHelper = (
     throw new Error("Expected an AI SDK chat runtime.");
   }
 
-  const initialMessages = useMemo(
+  const initialMessages = React.useMemo(
     () =>
       chat
         .get(options.initialMessageCount ?? 0)
         .map((message) => runtime.toMessage(message)),
     [chat, options.initialMessageCount, runtime]
   );
-  const transport = useMemo(
+  const transport = React.useMemo(
     () => runtime.createTransport(options.transport),
     [options.transport, runtime]
   );
@@ -52,7 +52,7 @@ const useAiSdkChatHelper = (
   });
   const messages = chatState.messages.map(runtime.fromMessage);
   const nextMessage = chat.next(messages);
-  const sendNext = useCallback(() => {
+  const sendNext = React.useCallback(() => {
     if (nextMessage) {
       return chatState.sendMessage(runtime.toMessage(nextMessage));
     }
@@ -78,14 +78,14 @@ const useTanStackChatHelper = (
     throw new Error("Expected a TanStack AI chat runtime.");
   }
 
-  const initialMessages = useMemo(
+  const initialMessages = React.useMemo(
     () =>
       chat
         .get(options.initialMessageCount ?? 0)
         .map((message) => runtime.toMessage(message)),
     [chat, options.initialMessageCount, runtime]
   );
-  const connection = useMemo(
+  const connection = React.useMemo(
     () => runtime.createTransport(options.transport),
     [options.transport, runtime]
   );
@@ -95,7 +95,7 @@ const useTanStackChatHelper = (
   });
   const messages = chatState.messages.map(runtime.fromMessage);
   const nextMessage = chat.next(messages);
-  const sendNext = useCallback(() => {
+  const sendNext = React.useCallback(() => {
     if (nextMessage) {
       return chatState.append(runtime.toMessage(nextMessage));
     }

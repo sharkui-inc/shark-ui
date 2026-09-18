@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRightIcon, AudioWaveformIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { createWavesAvatar } from "@/lib/dicebear";
 import { IconTile } from "@/registry/react/components/icon-tile";
 import {
@@ -29,7 +29,7 @@ import { NAV_ITEMS, type NavigationItem, TRACKS } from "../_data/music";
 
 export const MusicSidebar = () => {
   const [activeNavigation, setActiveNavigation] =
-    useState<NavigationItem>("Home");
+    React.useState<NavigationItem>("Home");
 
   return (
     <Sidebar className="absolute h-full" collapsible="icon">

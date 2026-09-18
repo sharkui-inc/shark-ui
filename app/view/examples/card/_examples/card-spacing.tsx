@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -40,7 +40,7 @@ const spacingOptions = [
 ];
 
 const CardSpacing = () => {
-  const [spacing, setSpacing] = useState("4");
+  const [spacing, setSpacing] = React.useState("4");
   const selectedSpacing = spacingOptions.find(
     (option) => option.value === spacing
   );

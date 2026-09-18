@@ -3,8 +3,7 @@
 import { ark } from "@ark-ui/react/factory";
 import { createContext } from "@ark-ui/react/utils";
 import { ArrowUpIcon, SquareIcon } from "lucide-react";
-import type React from "react";
-import { Children, isValidElement, useLayoutEffect, useState } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import {
   InputGroup,
@@ -56,8 +55,8 @@ export const PromptInputBottom = (
 };
 
 const getHasTextFromChildren = (children: React.ReactNode) => {
-  for (const child of Children.toArray(children)) {
-    if (isValidElement(child) && child.type === PromptInputTextarea) {
+  for (const child of React.Children.toArray(children)) {
+    if (React.isValidElement(child) && child.type === PromptInputTextarea) {
       const { defaultValue, value } = child.props as {
         defaultValue?: unknown;
         value?: unknown;
@@ -80,16 +79,17 @@ export const PromptInput = (props: PromptInputProps) => {
     ...rest
   } = props;
 
-  const [hasText, setHasText] = useState(() =>
+  const [hasText, setHasText] = React.useState(() =>
     getHasTextFromChildren(children)
   );
-  const promptInputChildren = Children.toArray(children);
+  const promptInputChildren = React.Children.toArray(children);
 
   const bottomChildren = promptInputChildren.filter(
-    (child) => isValidElement(child) && child.type === PromptInputBottom
+    (child) => React.isValidElement(child) && child.type === PromptInputBottom
   );
   const inputGroupChildren = promptInputChildren.filter(
-    (child) => !(isValidElement(child) && child.type === PromptInputBottom)
+    (child) =>
+      !(React.isValidElement(child) && child.type === PromptInputBottom)
   );
 
   return (
@@ -173,7 +173,7 @@ export const PromptInputTextarea = (
     props;
   const { setHasText, status } = usePromptInput();
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     setHasText(Boolean(String(value ?? defaultValue ?? "").trim()));
   }, [defaultValue, setHasText, value]);
 

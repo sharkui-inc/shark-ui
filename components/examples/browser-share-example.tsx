@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import React from "react";
 import { Cell, Label, Pie, PieChart } from "recharts";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/registry/react/components/badge";
@@ -55,9 +55,9 @@ const chartConfig = {
 const total = data.reduce((acc, item) => acc + item.value, 0);
 
 export const BrowserShareExample = (props: React.ComponentProps<"div">) => {
-  const [selected, setSelected] = useState("firefox");
+  const [selected, setSelected] = React.useState("firefox");
   const active = data.find((item) => item.name === selected) ?? data[2];
-  const percent = useMemo(
+  const percent = React.useMemo(
     () => Math.round((active.value / total) * 100),
     [active]
   );

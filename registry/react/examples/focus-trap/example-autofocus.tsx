@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Field,
@@ -11,8 +11,8 @@ import { FocusTrap } from "@/registry/react/components/focus-trap";
 import { Input } from "@/registry/react/components/input";
 
 const FocusTrapDemo = () => {
-  const [trapped, setTrapped] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [trapped, setTrapped] = React.useState(false);
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
 
   const getReturnFocus = (): HTMLButtonElement | false =>
     buttonRef.current ?? false;

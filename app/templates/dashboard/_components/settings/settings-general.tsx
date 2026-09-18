@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import {
   FieldDescription,
   FieldGroup,
@@ -10,8 +10,8 @@ import {
 import { SettingsTextField } from "./settings-fields";
 
 export const SettingsGeneralPage = ({ onSave }: { onSave: () => void }) => {
-  const [workspaceName, setWorkspaceName] = useState("Onda");
-  const [workspaceUrl, setWorkspaceUrl] = useState("onda");
+  const [workspaceName, setWorkspaceName] = React.useState("Onda");
+  const [workspaceUrl, setWorkspaceUrl] = React.useState("onda");
 
   return (
     <FieldGroup className="max-w-xl">

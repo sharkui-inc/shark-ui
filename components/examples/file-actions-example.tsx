@@ -2,7 +2,7 @@
 
 import { createListCollection } from "@ark-ui/react";
 import { PencilIcon, SquarePlusIcon, Trash2Icon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   AlertDialog,
@@ -41,8 +41,10 @@ import {
 import { Separator } from "@/registry/react/components/separator";
 
 export const FileActionsExample = (props: React.ComponentProps<"div">) => {
-  const [dialog, setDialog] = useState<"delete" | "edit" | "new" | null>(null);
-  const [isSaving, setIsSaving] = useState(false);
+  const [dialog, setDialog] = React.useState<"delete" | "edit" | "new" | null>(
+    null
+  );
+  const [isSaving, setIsSaving] = React.useState(false);
 
   return (
     <>

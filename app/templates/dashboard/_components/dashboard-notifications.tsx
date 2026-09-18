@@ -1,7 +1,7 @@
 "use client";
 
 import { BellIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -23,7 +23,7 @@ import {
 import { initialUnreadIds, notifications } from "../_data/dashboard";
 
 export const DashboardNotifications = () => {
-  const [unreadIds, setUnreadIds] = useState(initialUnreadIds);
+  const [unreadIds, setUnreadIds] = React.useState(initialUnreadIds);
   const unreadCount = unreadIds.length;
 
   const markRead = (id: string) => {

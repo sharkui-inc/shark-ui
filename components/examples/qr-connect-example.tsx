@@ -1,7 +1,7 @@
 "use client";
 
 import { CopyIcon, LaptopIcon, RefreshCwIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import { Badge } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
@@ -35,9 +35,9 @@ import {
 } from "@/registry/react/components/tooltip";
 
 export const QrConnectExample = (props: React.ComponentProps<"div">) => {
-  const [isLinked, setIsLinked] = useState(false);
-  const [isVerifying, setIsVerifying] = useState(false);
-  const [session, setSession] = useState(0);
+  const [isLinked, setIsLinked] = React.useState(false);
+  const [isVerifying, setIsVerifying] = React.useState(false);
+  const [session, setSession] = React.useState(0);
 
   const pairing = SESSIONS[session % SESSIONS.length];
 

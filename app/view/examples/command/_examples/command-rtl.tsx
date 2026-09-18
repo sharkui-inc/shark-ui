@@ -9,7 +9,7 @@ import {
   SmileIcon,
   UserIcon,
 } from "lucide-react";
-import { Fragment } from "react";
+import React from "react";
 import {
   Command,
   CommandContent,
@@ -44,7 +44,7 @@ const CommandRtl = () => {
             <CommandEmpty>لم يتم العثور على نتائج.</CommandEmpty>
             <CommandList>
               {collection.group().map(([group, items]) => (
-                <Fragment key={group}>
+                <React.Fragment key={group}>
                   <CommandGroup heading={group}>
                     {items.map((item) => (
                       <CommandItem item={item} key={item.value}>
@@ -57,7 +57,7 @@ const CommandRtl = () => {
                     ))}
                   </CommandGroup>
                   {group === "اقتراحات" && <CommandSeparator />}
-                </Fragment>
+                </React.Fragment>
               ))}
             </CommandList>
           </CommandContent>

@@ -1,7 +1,7 @@
 "use client";
 
 import { BellIcon, MailIcon, MessageSquareIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Menu,
@@ -12,7 +12,7 @@ import {
 } from "@/registry/react/components/menu";
 
 const MenuCheckboxesIcons = () => {
-  const [notifications, setNotifications] = useState({
+  const [notifications, setNotifications] = React.useState({
     email: true,
     push: true,
     sms: false,

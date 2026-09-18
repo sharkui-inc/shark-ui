@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import React from "react";
 import {
   Questionnaire,
   QuestionnaireActions,
@@ -32,8 +31,8 @@ const hasAnswer = (answer: QuestionnaireValue[keyof QuestionnaireValue]) =>
   Boolean(answer?.input.trim() || answer?.values.some((value) => value.trim()));
 
 const QuestionnaireNavigationState = () => {
-  const [item, setItem] = useState<ItemName>("permission");
-  const [value, setValue] = useState<QuestionnaireValue>({});
+  const [item, setItem] = React.useState<ItemName>("permission");
+  const [value, setValue] = React.useState<QuestionnaireValue>({});
   const unanswered = !hasAnswer(value[item]);
 
   const handleItemChange = (details: QuestionnaireItemChangeDetails) =>

@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import React from "react";
 import {
   NativeSelect,
   NativeSelectOption,
@@ -31,7 +30,7 @@ const items = [
 type ShortcutMode = "letters" | "numbers" | undefined;
 
 const QuestionnaireShortcuts = () => {
-  const [shortcuts, setShortcuts] = useState<ShortcutMode>("letters");
+  const [shortcuts, setShortcuts] = React.useState<ShortcutMode>("letters");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

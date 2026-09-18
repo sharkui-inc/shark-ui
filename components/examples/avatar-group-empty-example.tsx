@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   Avatar,
@@ -28,8 +28,8 @@ import {
 import { Input } from "@/registry/react/components/input";
 
 export const AvatarGroupEmptyExample = (props: React.ComponentProps<"div">) => {
-  const [open, setOpen] = useState(false);
-  const [isSending, setIsSending] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [isSending, setIsSending] = React.useState(false);
 
   return (
     <Card {...props}>

@@ -8,7 +8,7 @@ import {
   PlusIcon,
   ShieldAlertIcon,
 } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Combobox,
@@ -75,9 +75,9 @@ export const ChatPromptComposer = ({
   usedTokens: number;
   value: string;
 }) => {
-  const [model, setModel] = useState<string[]>([MODEL_OPTIONS[0].value]);
-  const [effort, setEffort] = useState(["medium"]);
-  const [access, setAccess] = useState(["full"]);
+  const [model, setModel] = React.useState<string[]>([MODEL_OPTIONS[0].value]);
+  const [effort, setEffort] = React.useState(["medium"]);
+  const [access, setAccess] = React.useState(["full"]);
   const { collection } = useListCollection({
     initialItems: [...MODEL_OPTIONS],
   });

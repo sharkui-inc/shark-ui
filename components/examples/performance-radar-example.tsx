@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 import {
   Card,
@@ -20,7 +20,7 @@ import {
 } from "@/registry/react/components/toggle-group";
 
 export const PerformanceRadarExample = (props: React.ComponentProps<"div">) => {
-  const [series, setSeries] = useState(["desktop", "mobile"]);
+  const [series, setSeries] = React.useState(["desktop", "mobile"]);
   const showMobile = series.includes("mobile");
   const showDesktop = series.includes("desktop");
 

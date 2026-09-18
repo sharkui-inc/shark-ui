@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Menu,
@@ -11,9 +11,9 @@ import {
 } from "@/registry/react/components/menu";
 
 const MenuCheckboxes = () => {
-  const [showStatusBar, setShowStatusBar] = useState(true);
-  const [showActivityBar, setShowActivityBar] = useState(false);
-  const [showPanel, setShowPanel] = useState(false);
+  const [showStatusBar, setShowStatusBar] = React.useState(true);
+  const [showActivityBar, setShowActivityBar] = React.useState(false);
+  const [showPanel, setShowPanel] = React.useState(false);
 
   return (
     <Menu>

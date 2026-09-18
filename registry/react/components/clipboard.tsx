@@ -6,8 +6,7 @@ import {
   useClipboardContext as useArkClipboardContext,
 } from "@ark-ui/react/clipboard";
 import { CheckIcon, ClipboardIcon } from "lucide-react";
-import type React from "react";
-import { Children } from "react";
+import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { inputVariants } from "@/registry/react/components/input";
@@ -27,7 +26,7 @@ interface ClipboardProps
 
 export const Clipboard = (props: ClipboardProps) => {
   const { rootClassName, className, children, ...rest } = props;
-  const hasMultipleParts = Children.toArray(children).length > 1;
+  const hasMultipleParts = React.Children.toArray(children).length > 1;
 
   return (
     <ArkClipboard.Root

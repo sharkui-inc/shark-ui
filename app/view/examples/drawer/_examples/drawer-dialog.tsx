@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Dialog,
@@ -22,9 +22,9 @@ import { FieldLabel } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
 
 const useIsDesktop = () => {
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isDesktop, setIsDesktop] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const matchMedia = window.matchMedia("(min-width: 768px)");
     const handleChange = () => setIsDesktop(matchMedia.matches);
 
@@ -38,12 +38,15 @@ const useIsDesktop = () => {
 };
 
 const DrawerDialog = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const isDesktop = useIsDesktop();
 
   if (isDesktop) {
     return (
-      <Dialog onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)} open={open}>
+      <Dialog
+        onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)}
+        open={open}
+      >
         <DialogTrigger asChild>
           <Button variant="outline">Edit Profile</Button>
         </DialogTrigger>
@@ -62,7 +65,10 @@ const DrawerDialog = () => {
   }
 
   return (
-    <Drawer onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)} open={open}>
+    <Drawer
+      onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)}
+      open={open}
+    >
       <DrawerTrigger asChild>
         <Button variant="outline">Edit Profile</Button>
       </DrawerTrigger>

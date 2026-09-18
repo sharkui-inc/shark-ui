@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React from "react";
 import {
   Item,
   ItemActions,
@@ -12,7 +12,7 @@ import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
 export const ShortcutsExample = (props: React.ComponentProps<"div">) => (
   <ItemGroup className="gap-2" {...props}>
     {shortcuts.map(({ keys, label }, index) => (
-      <Fragment key={label}>
+      <React.Fragment key={label}>
         {index > 0 && <ItemSeparator className="my-0" />}
         <Item className="px-0 py-0">
           <ItemHeader>
@@ -26,7 +26,7 @@ export const ShortcutsExample = (props: React.ComponentProps<"div">) => (
             </ItemActions>
           </ItemHeader>
         </Item>
-      </Fragment>
+      </React.Fragment>
     ))}
   </ItemGroup>
 );

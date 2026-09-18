@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import React from "react";
 import {
   Questionnaire,
   QuestionnaireActions,
@@ -27,7 +26,7 @@ const items = [
 const pageNames = ["scope", "strategy", "tests", "delivery"] as const;
 
 const QuestionnaireProgressExample = () => {
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = React.useState(1);
 
   const handleItemChange = (details: QuestionnaireItemChangeDetails) =>
     setCurrent(

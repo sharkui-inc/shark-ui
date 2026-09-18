@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Menu,
@@ -12,7 +12,7 @@ import {
 } from "@/registry/react/components/menu";
 
 const MenuRadioGroupDemo = () => {
-  const [position, setPosition] = useState("bottom");
+  const [position, setPosition] = React.useState("bottom");
 
   return (
     <Menu>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import { AppleIcon } from "@/components/icons/apple";
 import { GoogleIcon } from "@/components/icons/google";
@@ -36,9 +36,9 @@ import {
 import { Input } from "@/registry/react/components/input";
 
 export const LoginFormExample = (props: React.ComponentProps<"div">) => {
-  const [open, setOpen] = useState(false);
-  const [isCreating, setIsCreating] = useState(false);
-  const [oauth, setOauth] = useState<"apple" | "google" | null>(null);
+  const [open, setOpen] = React.useState(false);
+  const [isCreating, setIsCreating] = React.useState(false);
+  const [oauth, setOauth] = React.useState<"apple" | "google" | null>(null);
 
   const signInWith = async (provider: "apple" | "google") => {
     setOauth(provider);

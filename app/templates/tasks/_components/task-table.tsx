@@ -7,7 +7,7 @@ import {
   type SortingState,
   useTable,
 } from "@tanstack/react-table";
-import { type FormEvent, useState } from "react";
+import React from "react";
 import { dataTableFeatures } from "@/registry/react/components/data-table";
 import {
   EMPTY_DRAFT,
@@ -30,17 +30,19 @@ const INITIAL_ROW_SELECTION: RowSelectionState = {
 };
 
 export const TaskTable = () => {
-  const [tasks, setTasks] = useState(INITIAL_TASKS);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [tasks, setTasks] = React.useState(INITIAL_TASKS);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
   const [columnVisibility, setColumnVisibility] =
-    useState<ColumnVisibilityState>({});
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>(
+    React.useState<ColumnVisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>(
     INITIAL_ROW_SELECTION
   );
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [nextTaskNumber, setNextTaskNumber] = useState(1110);
-  const [editor, setEditor] = useState<TaskEditorState | null>(null);
-  const [draft, setDraft] = useState<TaskDraft>(EMPTY_DRAFT);
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [nextTaskNumber, setNextTaskNumber] = React.useState(1110);
+  const [editor, setEditor] = React.useState<TaskEditorState | null>(null);
+  const [draft, setDraft] = React.useState<TaskDraft>(EMPTY_DRAFT);
 
   const closeEditor = () => {
     setDraft(EMPTY_DRAFT);
@@ -69,7 +71,7 @@ export const TaskTable = () => {
     return id;
   };
 
-  const saveTask = (event: FormEvent<HTMLFormElement>) => {
+  const saveTask = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const title = draft.title.trim();
     if (!(title && editor)) {

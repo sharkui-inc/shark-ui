@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from "react";
+import type React from "react";
 import { ActivityGoalExample } from "@/components/examples/activity-goal-example";
 import { AlertExample } from "@/components/examples/alert-example";
 import { AnalyticsCardExample } from "@/components/examples/analytics-card-example";
@@ -32,7 +32,7 @@ import { cn } from "@/lib/utils";
 export const PREVIEW_TILES: {
   column: "end" | "middle" | "start";
   key: string;
-  node: ReactNode;
+  node: React.ReactNode;
 }[] = [
   { column: "start", key: "avatar", node: <AvatarGroupEmptyExample /> },
   { column: "middle", key: "style", node: <StyleOverviewExample /> },
@@ -62,7 +62,7 @@ export const PREVIEW_TILES: {
   { column: "middle", key: "communities", node: <CommunitiesExample /> },
 ];
 
-export const PreviewGallery = (props: ComponentProps<"div">) => {
+export const PreviewGallery = (props: React.ComponentProps<"div">) => {
   const { className, ...rest } = props;
 
   return (

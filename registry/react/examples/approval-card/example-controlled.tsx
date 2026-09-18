@@ -1,7 +1,7 @@
 "use client";
 
 import { SlidersHorizontalIcon } from "lucide-react";
-import { type SubmitEvent, useState } from "react";
+import React from "react";
 import {
   ApprovalCard,
   ApprovalCardAction,
@@ -28,8 +28,8 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const [item, setItem] = useState<string>(items[0].name);
-  const [value, setValue] = useState<ApprovalCardValue>({});
+  const [item, setItem] = React.useState<string>(items[0].name);
+  const [value, setValue] = React.useState<ApprovalCardValue>({});
 
   const handleItemChange = (details: ApprovalCardItemChangeDetails) => {
     setItem(details.item);
@@ -39,7 +39,7 @@ const Example = () => {
     setValue(details.value);
   };
 
-  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);

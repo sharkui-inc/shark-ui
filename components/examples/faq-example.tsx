@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   Accordion,
@@ -33,8 +33,8 @@ import { Input } from "@/registry/react/components/input";
 import { Textarea } from "@/registry/react/components/textarea";
 
 export const FaqExample = (props: React.ComponentProps<"div">) => {
-  const [open, setOpen] = useState(false);
-  const [isSending, setIsSending] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [isSending, setIsSending] = React.useState(false);
 
   return (
     <Card {...props}>

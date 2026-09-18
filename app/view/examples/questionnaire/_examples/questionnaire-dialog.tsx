@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Dialog,
@@ -35,7 +34,7 @@ const items = [
 ] as const;
 
 const QuestionnaireDialog = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -51,7 +50,10 @@ const QuestionnaireDialog = () => {
   };
 
   return (
-    <Dialog onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)} open={open}>
+    <Dialog
+      onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)}
+      open={open}
+    >
       <DialogTrigger asChild>
         <Button variant="outline">Open clarification</Button>
       </DialogTrigger>

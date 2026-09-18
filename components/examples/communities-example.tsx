@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   AlertDialog,
@@ -27,8 +27,8 @@ import {
 } from "@/registry/react/components/item";
 
 export const CommunitiesExample = (props: React.ComponentProps<"div">) => {
-  const [joined, setJoined] = useState<string[]>([]);
-  const [leaving, setLeaving] = useState<string | null>(null);
+  const [joined, setJoined] = React.useState<string[]>([]);
+  const [leaving, setLeaving] = React.useState<string | null>(null);
 
   return (
     <div className="flex flex-col gap-1" {...props}>

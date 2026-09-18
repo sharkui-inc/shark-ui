@@ -1,7 +1,7 @@
 "use client";
 
 import { useFilter, useListCollection } from "@ark-ui/react";
-import { useState } from "react";
+import React from "react";
 import {
   Command,
   CommandContent,
@@ -15,7 +15,7 @@ import {
 } from "@/registry/react/components/command";
 
 const Example = () => {
-  const [value, setValue] = useState(["linear"]);
+  const [value, setValue] = React.useState(["linear"]);
   const { contains } = useFilter({ sensitivity: "base" });
 
   const { collection, filter } = useListCollection({

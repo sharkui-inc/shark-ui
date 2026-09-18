@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import {
   ContextMenu,
   ContextMenuContent,
@@ -10,9 +10,9 @@ import {
 import { MenuCheckboxItem } from "@/registry/react/components/menu";
 
 const ContextMenuCheckboxes = () => {
-  const [showBookmarks, setShowBookmarks] = useState(true);
-  const [showFullUrls, setShowFullUrls] = useState(false);
-  const [showDeveloperTools, setShowDeveloperTools] = useState(true);
+  const [showBookmarks, setShowBookmarks] = React.useState(true);
+  const [showFullUrls, setShowFullUrls] = React.useState(false);
+  const [showDeveloperTools, setShowDeveloperTools] = React.useState(true);
 
   return (
     <ContextMenu>

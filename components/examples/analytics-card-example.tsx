@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { Area, AreaChart } from "recharts";
 import { Badge } from "@/registry/react/components/badge";
 import {
@@ -21,7 +21,7 @@ import {
 } from "@/registry/react/components/toggle-group";
 
 export const AnalyticsCardExample = (props: React.ComponentProps<"div">) => {
-  const [range, setRange] = useState(["7d"]);
+  const [range, setRange] = React.useState(["7d"]);
   const isMonth = range[0] === "30d";
   const data = isMonth ? chartData30d : chartData7d;
   const visitors = isMonth ? "1.2M visitors" : "418.2K visitors";

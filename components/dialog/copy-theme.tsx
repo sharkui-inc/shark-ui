@@ -1,6 +1,6 @@
 "use client";
 
-import type { ComponentProps } from "react";
+import type React from "react";
 import { CopyButton } from "@/components/copy-button";
 import {
   getBaseColor,
@@ -19,7 +19,9 @@ import {
 } from "@/registry/react/components/dialog";
 import { useConfig } from "@/store/config";
 
-export const CopyThemeCodeDialog = (props: ComponentProps<typeof Dialog>) => {
+export const CopyThemeCodeDialog = (
+  props: React.ComponentProps<typeof Dialog>
+) => {
   const { children, ...rest } = props;
   const cfg = useConfig();
 

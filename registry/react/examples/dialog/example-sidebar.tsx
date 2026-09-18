@@ -6,7 +6,7 @@ import {
   UsersIcon,
   WavesHorizontalIcon,
 } from "lucide-react";
-import { type CSSProperties, useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Dialog,
@@ -40,7 +40,7 @@ import {
 } from "@/registry/react/components/sidebar";
 
 const Example = () => {
-  const [page, setPage] = useState<SettingsPage>("account");
+  const [page, setPage] = React.useState<SettingsPage>("account");
 
   const renderPage = () => {
     switch (page) {
@@ -118,7 +118,7 @@ const Example = () => {
         />
         <SidebarProvider
           className="min-h-0 min-w-0 flex-1"
-          style={{ "--sidebar-width": "13rem" } as CSSProperties}
+          style={{ "--sidebar-width": "13rem" } as React.CSSProperties}
         >
           <Sidebar className="border-e bg-transparent" collapsible="none">
             <SidebarHeader className="flex-row items-center gap-2">

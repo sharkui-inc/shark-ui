@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -19,8 +19,8 @@ import { Input } from "@/registry/react/components/input";
 export const CreateAccountFormExample = (
   props: React.ComponentProps<"div">
 ) => {
-  const [isCreating, setIsCreating] = useState(false);
-  const [oauth, setOauth] = useState<"github" | "google" | null>(null);
+  const [isCreating, setIsCreating] = React.useState(false);
+  const [oauth, setOauth] = React.useState<"github" | "google" | null>(null);
 
   const signInWith = async (provider: "github" | "google") => {
     setOauth(provider);

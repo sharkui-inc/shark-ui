@@ -1,7 +1,7 @@
 "use client";
 
 import { GlobeIcon } from "lucide-react";
-import type { SubmitEvent } from "react";
+import type React from "react";
 import {
   ApprovalCard,
   ApprovalCardChoice,
@@ -32,7 +32,7 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const answers = new FormData(event.currentTarget);
     const scope = answers.get("network-scope");

@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useEffect, useRef } from "react";
+import React from "react";
 import {
   Questionnaire,
   QuestionnaireActions,
@@ -19,9 +18,9 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const QuestionnaireInvalidDemo = () => {
-  const formRef = useRef<HTMLFormElement>(null);
+  const formRef = React.useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     formRef.current?.requestSubmit();
   }, []);
 

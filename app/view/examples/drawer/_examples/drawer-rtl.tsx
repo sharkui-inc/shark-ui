@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { Badge } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -61,13 +61,16 @@ const deliveryTimes = [
 ];
 
 const DrawerRtl = () => {
-  const [open, setOpen] = useState(false);
-  const [deliveryTime, setDeliveryTime] = useState("asap");
+  const [open, setOpen] = React.useState(false);
+  const [deliveryTime, setDeliveryTime] = React.useState("asap");
 
   return (
     <div className="flex w-full justify-center" dir="rtl">
       <LocaleProvider locale="ar-SA">
-        <Drawer onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)} open={open}>
+        <Drawer
+          onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)}
+          open={open}
+        >
           <DrawerTrigger asChild>
             <Button variant="secondary">فتح الدرج</Button>
           </DrawerTrigger>

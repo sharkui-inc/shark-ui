@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { Badge } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -19,7 +19,7 @@ import { Progress } from "@/registry/react/components/progress";
 import { SettingsTextField } from "./settings-fields";
 
 export const SettingsBillingPage = ({ onSave }: { onSave: () => void }) => {
-  const [billingEmail, setBillingEmail] = useState("billing@onda.io");
+  const [billingEmail, setBillingEmail] = React.useState("billing@onda.io");
 
   return (
     <FieldGroup className="max-w-xl">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React from "react";
 import {
   CodeBlock,
   CodeBlockActions,
@@ -10,11 +10,13 @@ import {
 } from "@/registry/react/components/code-block";
 
 const Example = () => {
-  const [length, setLength] = useState(() => STREAMED_CODE.indexOf("\n") + 1);
+  const [length, setLength] = React.useState(
+    () => STREAMED_CODE.indexOf("\n") + 1
+  );
   const isStreaming = length < STREAMED_CODE.length;
   const code = STREAMED_CODE.slice(0, length);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const timer = window.setInterval(() => {
       setLength((current) => Math.min(current + 5, STREAMED_CODE.length));
     }, 90);

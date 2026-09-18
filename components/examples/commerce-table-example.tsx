@@ -1,7 +1,7 @@
 "use client";
 
 import { EllipsisIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import { cn } from "@/lib/utils";
 import {
@@ -33,7 +33,9 @@ import {
 
 export const CommerceTableExample = (props: React.ComponentProps<"div">) => {
   const { className, ...rest } = props;
-  const [refund, setRefund] = useState<(typeof DATA)[number] | null>(null);
+  const [refund, setRefund] = React.useState<(typeof DATA)[number] | null>(
+    null
+  );
 
   return (
     <Card className={cn("[--space:--spacing(2)]", className)} {...rest}>

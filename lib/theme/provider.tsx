@@ -1,6 +1,6 @@
 "use client";
 
-import { type PropsWithChildren, useCallback, useEffect } from "react";
+import React from "react";
 import { useConfig, useUpdateConfig } from "@/store/config";
 import { applyBodyThemeClasses, applyThemeFonts } from "./apply";
 import {
@@ -18,7 +18,9 @@ import {
 } from "./config";
 import type { ThemeFontName } from "./fonts";
 
-export const ThemeConfigurationProvider = ({ children }: PropsWithChildren) => {
+export const ThemeConfigurationProvider = ({
+  children,
+}: React.PropsWithChildren) => {
   const config = useConfig();
   const {
     primaryColor,
@@ -29,7 +31,7 @@ export const ThemeConfigurationProvider = ({ children }: PropsWithChildren) => {
     primaryTone,
   } = config;
 
-  useEffect(() => {
+  React.useEffect(() => {
     applyBodyThemeClasses({
       baseColor,
       borderRadius,
@@ -55,64 +57,64 @@ export const useThemeCustomization = () => {
   const isDefault = isDefaultThemeConfig(config);
   const locks = getThemeLocks(config);
 
-  const setBaseColor = useCallback(
+  const setBaseColor = React.useCallback(
     (baseColor: BaseColor) => {
       updateConfig({ baseColor });
     },
     [updateConfig]
   );
 
-  const setPrimaryColor = useCallback(
+  const setPrimaryColor = React.useCallback(
     (primaryColor: PrimaryColor) => {
       updateConfig({ primaryColor });
     },
     [updateConfig]
   );
 
-  const setPrimaryTone = useCallback(
+  const setPrimaryTone = React.useCallback(
     (primaryTone: PrimaryTone) => {
       updateConfig({ primaryTone });
     },
     [updateConfig]
   );
 
-  const setFontSans = useCallback(
+  const setFontSans = React.useCallback(
     (fontSans: ThemeFontName) => {
       updateConfig({ fontSans });
     },
     [updateConfig]
   );
 
-  const setFontHeading = useCallback(
+  const setFontHeading = React.useCallback(
     (fontHeading: ThemeFontName) => {
       updateConfig({ fontHeading });
     },
     [updateConfig]
   );
 
-  const setBorderRadius = useCallback(
+  const setBorderRadius = React.useCallback(
     (borderRadius: BorderRadius) => {
       updateConfig({ borderRadius });
     },
     [updateConfig]
   );
 
-  const applyPreset = useCallback(
+  const applyPreset = React.useCallback(
     (preset: ThemePreset) => {
       updateConfig(applyThemePreset(preset));
     },
     [updateConfig]
   );
 
-  const randomize = useCallback(() => {
+  const randomize = React.useCallback(() => {
     updateConfig(randomizeThemeConfig);
   }, [updateConfig]);
 
-  const reset = useCallback(() => {
+  const reset = React.useCallback(() => {
     updateConfig(resetThemeConfig);
   }, [updateConfig]);
 
-  const toggleLock = useCallback(
+  const toggleLock = React.useCallback(
     (lockKey: ThemeLockKey) => {
       updateConfig((currentConfig) => {
         const themeLocks = getThemeLocks(currentConfig);

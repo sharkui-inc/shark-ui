@@ -1,4 +1,4 @@
-import { useId } from "react";
+import React from "react";
 import {
   Context,
   ContextBody,
@@ -16,7 +16,7 @@ import {
 } from "@/registry/react/components/tooltip";
 
 const Example = () => {
-  const triggerId = useId();
+  const triggerId = React.useId();
 
   return (
     <div className="flex justify-center">

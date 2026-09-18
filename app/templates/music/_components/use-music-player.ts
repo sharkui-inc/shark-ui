@@ -1,19 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React from "react";
 import { TRACKS, type Track } from "../_data/music";
 
 export const useMusicPlayer = () => {
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(true);
-  const [progress, setProgress] = useState(28);
-  const [volume, setVolumeState] = useState(72);
-  const [previousVolume, setPreviousVolume] = useState(72);
+  const [currentTrackIndex, setCurrentTrackIndex] = React.useState(0);
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isFavorite, setIsFavorite] = React.useState(true);
+  const [progress, setProgress] = React.useState(28);
+  const [volume, setVolumeState] = React.useState(72);
+  const [previousVolume, setPreviousVolume] = React.useState(72);
   const currentTrack = TRACKS[currentTrackIndex];
   const isMuted = volume === 0;
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!isPlaying) {
       return;
     }

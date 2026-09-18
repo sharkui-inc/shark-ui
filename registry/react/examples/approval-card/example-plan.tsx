@@ -1,7 +1,7 @@
 "use client";
 
 import { ListChecksIcon } from "lucide-react";
-import { type SubmitEvent, useState } from "react";
+import React from "react";
 import {
   ApprovalCard,
   ApprovalCardChoice,
@@ -29,10 +29,10 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const [value, setValue] = useState<ApprovalCardValue>({});
+  const [value, setValue] = React.useState<ApprovalCardValue>({});
   const handleValueChange = (details: ApprovalCardValueChangeDetails) =>
     setValue(details.value);
-  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const answers = new FormData(event.currentTarget);
     const decision = answers.get("decision");

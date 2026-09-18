@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import { useHotkeyRecorder } from "@/registry/react/components/hotkeys";
 import { Kbd } from "@/registry/react/components/kbd";
 
 const Example = () => {
-  const [binding, setBinding] = useState<string | null>(null);
-  const [lastEvent, setLastEvent] = useState<string | null>(null);
+  const [binding, setBinding] = React.useState<string | null>(null);
+  const [lastEvent, setLastEvent] = React.useState<string | null>(null);
 
   const recorder = useHotkeyRecorder({
     onCancel: () => setLastEvent("cancelled"),

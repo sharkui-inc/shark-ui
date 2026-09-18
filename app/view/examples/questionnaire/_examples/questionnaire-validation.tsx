@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import React from "react";
 import { z } from "zod";
 import {
   Card,
@@ -62,8 +61,8 @@ const ValidationProgress = ({
 );
 
 const QuestionnaireValidation = () => {
-  const [item, setItem] = useState<QuestionnaireItemName>("detail");
-  const [errors, setErrors] = useState<QuestionnaireErrors>({});
+  const [item, setItem] = React.useState<QuestionnaireItemName>("detail");
+  const [errors, setErrors] = React.useState<QuestionnaireErrors>({});
 
   const index = items.findIndex((definition) => definition.name === item) + 1;
 

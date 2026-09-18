@@ -11,7 +11,7 @@ import {
   TagIcon,
   Trash2Icon,
 } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import { ButtonGroup } from "@/registry/react/components/button-group";
 import { LocaleProvider } from "@/registry/react/components/locale";
@@ -30,7 +30,7 @@ import {
 } from "@/registry/react/components/menu";
 
 const ButtonGroupRtl = () => {
-  const [label, setLabel] = useState("personal");
+  const [label, setLabel] = React.useState("personal");
 
   return (
     <div dir="rtl">

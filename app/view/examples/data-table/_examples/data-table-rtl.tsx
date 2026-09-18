@@ -27,7 +27,7 @@ import {
   ChevronDownIcon,
   MoreHorizontalIcon,
 } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import { Checkbox } from "@/registry/react/components/checkbox";
 import { Input } from "@/registry/react/components/input";
@@ -77,11 +77,13 @@ const t = {
 };
 
 const DataTableRtl = () => {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
   const [columnVisibility, setColumnVisibility] =
-    useState<ColumnVisibilityState>({});
-  const [rowSelection, setRowSelection] = useState({});
+    React.useState<ColumnVisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useTable({
     columns,

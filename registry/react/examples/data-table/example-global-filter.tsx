@@ -9,7 +9,7 @@ import {
   tableFeatures,
   useTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import React from "react";
 import { Input } from "@/registry/react/components/input";
 import {
   Table,
@@ -21,7 +21,7 @@ import {
 } from "@/registry/react/components/table";
 
 const Example = () => {
-  const [globalFilter, setGlobalFilter] = useState("");
+  const [globalFilter, setGlobalFilter] = React.useState("");
 
   const table = useTable({
     columns,

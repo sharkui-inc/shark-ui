@@ -1,7 +1,7 @@
 "use client";
 
 import { useFilter, useListCollection } from "@ark-ui/react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Command,
@@ -17,7 +17,7 @@ import {
 } from "@/registry/react/components/command";
 
 const CommandBasic = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
     filter: contains,

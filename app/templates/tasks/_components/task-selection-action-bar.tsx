@@ -9,7 +9,7 @@ import {
   Trash2Icon,
   XIcon,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import type React from "react";
 import {
   ActionBar,
   ActionBarBody,
@@ -28,7 +28,7 @@ import {
 import type { TaskStatus } from "../_data/tasks";
 
 interface TaskSelectionActionBarProps {
-  children: ReactNode;
+  children: React.ReactNode;
   onClearSelection: () => void;
   onDelete: () => void;
   onDuplicate: () => void;

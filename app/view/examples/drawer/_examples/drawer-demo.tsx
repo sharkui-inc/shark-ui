@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { Badge } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -60,11 +60,14 @@ const deliveryTimes = [
 ];
 
 const DrawerDemo = () => {
-  const [open, setOpen] = useState(false);
-  const [deliveryTime, setDeliveryTime] = useState("asap");
+  const [open, setOpen] = React.useState(false);
+  const [deliveryTime, setDeliveryTime] = React.useState("asap");
 
   return (
-    <Drawer onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)} open={open}>
+    <Drawer
+      onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)}
+      open={open}
+    >
       <DrawerTrigger asChild>
         <Button variant="secondary">Open Drawer</Button>
       </DrawerTrigger>

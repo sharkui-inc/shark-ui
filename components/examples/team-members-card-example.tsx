@@ -1,7 +1,7 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   Avatar,
@@ -89,8 +89,8 @@ const collection = createListCollection({
 });
 
 export const TeamMembersCardExample = (props: React.ComponentProps<"div">) => {
-  const [open, setOpen] = useState(false);
-  const [isInviting, setIsInviting] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [isInviting, setIsInviting] = React.useState(false);
 
   return (
     <Card {...props}>

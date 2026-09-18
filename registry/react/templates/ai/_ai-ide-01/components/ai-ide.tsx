@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import {
   Resizable,
   ResizablePanel,
@@ -11,7 +11,7 @@ import { IdeFileTree } from "./ide-file-tree";
 import { IdeWorkspace } from "./ide-workspace";
 
 export const AIIde = () => {
-  const [path, setPath] = useState("src/utils/helpers.ts");
+  const [path, setPath] = React.useState("src/utils/helpers.ts");
 
   return (
     <div className="h-svh min-h-0 bg-background">

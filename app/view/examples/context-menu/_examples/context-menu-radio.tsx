@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import {
   ContextMenu,
   ContextMenuContent,
@@ -14,8 +14,8 @@ import {
 } from "@/registry/react/components/menu";
 
 const ContextMenuRadio = () => {
-  const [user, setUser] = useState("pedro");
-  const [theme, setTheme] = useState("light");
+  const [user, setUser] = React.useState("pedro");
+  const [theme, setTheme] = React.useState("light");
 
   return (
     <ContextMenu>

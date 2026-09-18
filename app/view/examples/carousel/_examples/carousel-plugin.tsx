@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React from "react";
 import { Card, CardContent } from "@/registry/react/components/card";
 import {
   Carousel,
@@ -15,7 +15,7 @@ import {
 const AutoplayControl = ({ isPlaying }: { isPlaying: boolean }) => {
   const { scrollNext } = useCarouselContext();
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!isPlaying) {
       return;
     }
@@ -29,7 +29,7 @@ const AutoplayControl = ({ isPlaying }: { isPlaying: boolean }) => {
 };
 
 const CarouselPlugin = () => {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = React.useState(true);
 
   return (
     <Carousel

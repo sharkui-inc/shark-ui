@@ -2,7 +2,7 @@
 
 import { createColumnHelper } from "@tanstack/react-table";
 import { MoreHorizontalIcon, SearchIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import {
   Avatar,
   AvatarFallback,
@@ -78,7 +78,7 @@ const employeeColumns = employeeColumnHelper.columns([
 ]);
 
 export const DashboardEmployees = () => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = React.useState("");
   const visibleEmployees = employees.filter((employee) =>
     `${employee.name} ${employee.role}`
       .toLowerCase()

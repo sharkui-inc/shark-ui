@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import {
   Terminal,
   TerminalContent,
@@ -17,7 +17,7 @@ import {
 } from "@/registry/react/components/tool-result";
 
 const Example = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = React.useState(true);
 
   const handleOpenChange = (details: { open: boolean }) => {
     setOpen(details.open);

@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
 } from "@registry/react/components/tooltip";
 import { CodeIcon, RotateCcwIcon, ShuffleIcon } from "lucide-react";
-import { useId } from "react";
+import React from "react";
 import { CopyThemeCodeDialog } from "@/components/dialog/copy-theme";
 import { useThemeCustomization } from "@/lib/theme/provider";
 import { cn } from "@/lib/utils";
@@ -35,8 +35,9 @@ import { ThemeSelectorRadius } from "./theme-selector.radius";
 
 export const ThemeSelector = (props: React.ComponentProps<"fieldset">) => {
   const { className, ...rest } = props;
+
   const { isDefault, randomize, reset } = useThemeCustomization();
-  const viewCodeTriggerId = useId();
+  const viewCodeTriggerId = React.useId();
 
   useHotkey({
     action: randomize,

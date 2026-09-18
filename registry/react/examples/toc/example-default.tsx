@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import React from "react";
 import { SkeletonText } from "@/registry/react/components/skeleton";
 import {
   Toc,
@@ -13,7 +13,7 @@ import {
 } from "@/registry/react/components/toc";
 
 const TocDemo = () => {
-  const contentRef = useRef<HTMLElement>(null);
+  const contentRef = React.useRef<HTMLElement>(null);
 
   return (
     <Toc

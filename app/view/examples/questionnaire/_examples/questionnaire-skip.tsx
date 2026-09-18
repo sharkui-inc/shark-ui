@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import React from "react";
 import {
   Questionnaire,
   QuestionnaireActions,
@@ -32,7 +31,7 @@ const hasAnswer = (answer: QuestionnaireValue[keyof QuestionnaireValue]) =>
   Boolean(answer?.input.trim() || answer?.values.some((value) => value.trim()));
 
 const QuestionnaireSkipExample = () => {
-  const [value, setValue] = useState<QuestionnaireValue>({});
+  const [value, setValue] = React.useState<QuestionnaireValue>({});
 
   const { constraints } = value;
   let constraintStatus: "unanswered" | "answered" | "skipped";

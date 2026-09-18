@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import React from "react";
 import {
   Questionnaire,
   QuestionnaireActions,
@@ -22,8 +21,8 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const QuestionnaireDemo = () => {
-  const [item, setItem] = useState("workspace");
-  const [value, setValue] = useState<QuestionnaireValue>({});
+  const [item, setItem] = React.useState("workspace");
+  const [value, setValue] = React.useState<QuestionnaireValue>({});
   const handleItemChange = (details: QuestionnaireItemChangeDetails) =>
     setItem(details.item);
   const handleValueChange = (details: QuestionnaireValueChangeDetails) =>

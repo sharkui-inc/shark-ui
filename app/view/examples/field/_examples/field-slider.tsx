@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import {
   Field,
   FieldDescription,
@@ -9,7 +9,7 @@ import {
 import { Slider } from "@/registry/react/components/slider";
 
 const FieldSlider = () => {
-  const [value, setValue] = useState<number[]>([200, 800]);
+  const [value, setValue] = React.useState<number[]>([200, 800]);
 
   return (
     <Field className="w-full max-w-xs">

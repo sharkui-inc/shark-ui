@@ -1,7 +1,7 @@
 "use client";
 
 import { MaximizeIcon, MinimizeIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -23,7 +23,7 @@ import {
 import { Input } from "@/registry/react/components/input";
 
 const CollapsibleSettings = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <Card className="mx-auto w-full max-w-xs">

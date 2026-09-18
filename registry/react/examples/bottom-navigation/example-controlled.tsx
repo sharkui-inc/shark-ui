@@ -1,7 +1,7 @@
 "use client";
 
 import { BellIcon, HomeIcon, SearchIcon, UserIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import {
   BottomNavigation,
   BottomNavigationItem,
@@ -12,7 +12,7 @@ import {
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 const Example = () => {
-  const [value, setValue] = useState("home");
+  const [value, setValue] = React.useState("home");
 
   const handleValueChange = (details: { value: string }) => {
     setValue(details.value);

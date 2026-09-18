@@ -7,7 +7,7 @@ import {
   type Table as TanStackTable,
   useTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import React from "react";
 import { Checkbox } from "@/registry/react/components/checkbox";
 import {
   type DataTableFeatures,
@@ -24,7 +24,7 @@ import {
 } from "@/registry/react/components/table";
 
 const Example = () => {
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
 
   const table = useTable({
     columns,

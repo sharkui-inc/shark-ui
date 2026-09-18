@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import React from "react";
 import { SkeletonText } from "@/registry/react/components/skeleton";
 import {
   Toc,
@@ -25,9 +25,9 @@ import {
 } from "@/registry/react/components/tree-view";
 
 const Example = () => {
-  const contentRef = useRef<HTMLElement>(null);
-  const [expandedValue, setExpandedValue] = useState(["09-guides"]);
-  const [selectedValue, setSelectedValue] = useState<string[]>([]);
+  const contentRef = React.useRef<HTMLElement>(null);
+  const [expandedValue, setExpandedValue] = React.useState(["09-guides"]);
+  const [selectedValue, setSelectedValue] = React.useState<string[]>([]);
 
   return (
     <Toc

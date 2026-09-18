@@ -1,7 +1,7 @@
 "use client";
 
 import { BotIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
 import {
   Diff,
@@ -52,7 +52,7 @@ import {
 } from "@/registry/react/components/tool-result";
 
 export const IdeChat = () => {
-  const [draft, setDraft] = useState("");
+  const [draft, setDraft] = React.useState("");
 
   return (
     <div className="flex h-full min-h-0 flex-col">

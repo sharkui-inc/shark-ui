@@ -8,7 +8,7 @@ import {
   SearchIcon,
   SparklesIcon,
 } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import {
   Announcement,
   AnnouncementTitle,
@@ -78,8 +78,8 @@ export const ChatComposer = ({
   onThinkModeChange,
   thinkMode,
 }: ChatComposerProps) => {
-  const [draft, setDraft] = useState("");
-  const [status, setStatus] = useState<PromptInputStatus>("ready");
+  const [draft, setDraft] = React.useState("");
+  const [status, setStatus] = React.useState<PromptInputStatus>("ready");
 
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({

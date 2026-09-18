@@ -1,7 +1,7 @@
 "use client";
 
 import { MoreHorizontalIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Item,
@@ -20,7 +20,7 @@ import {
 import { TRACKS } from "../_data/music";
 
 export const MusicRecommended = () => {
-  const [favoriteTitles, setFavoriteTitles] = useState<string[]>([
+  const [favoriteTitles, setFavoriteTitles] = React.useState<string[]>([
     TRACKS[0].title,
   ]);
 

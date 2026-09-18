@@ -9,7 +9,7 @@ import {
   SearchIcon,
   Settings2Icon,
 } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { SharkIcon } from "@/components/icons/shark";
 import {
   Avatar,
@@ -47,10 +47,10 @@ import { account, conversations, NEW_CHAT, workspaces } from "../_data/chat";
 import { ChatSearchDialog } from "./chat-search-dialog";
 
 export const ChatSidebar = () => {
-  const [activeConversation, setActiveConversation] = useState(
+  const [activeConversation, setActiveConversation] = React.useState(
     conversations[0]
   );
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = React.useState(false);
   const isNewChat = activeConversation === NEW_CHAT;
 
   const handleNewChat = () => {
@@ -166,7 +166,7 @@ export const ChatSidebar = () => {
 };
 
 const WorkspaceSwitcher = () => {
-  const [workspaceValue, setWorkspaceValue] = useState<string>(
+  const [workspaceValue, setWorkspaceValue] = React.useState<string>(
     workspaces[0].value
   );
   const workspace =

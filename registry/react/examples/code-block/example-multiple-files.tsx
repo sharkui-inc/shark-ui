@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import {
   CodeBlock,
   CodeBlockActions,
@@ -16,7 +16,7 @@ import {
 } from "@/registry/react/components/tabs";
 
 const Example = () => {
-  const [activeFile, setActiveFile] = useState<string>(FILES[0].value);
+  const [activeFile, setActiveFile] = React.useState<string>(FILES[0].value);
   const file = FILES.find((item) => item.value === activeFile) ?? FILES[0];
 
   return (

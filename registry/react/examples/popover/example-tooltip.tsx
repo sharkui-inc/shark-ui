@@ -1,4 +1,4 @@
-import { useId } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Popover,
@@ -13,7 +13,7 @@ import {
 } from "@/registry/react/components/tooltip";
 
 const Example = () => {
-  const triggerId = useId();
+  const triggerId = React.useId();
 
   return (
     <Popover ids={{ trigger: triggerId }}>

@@ -1,7 +1,7 @@
 "use client";
 
 import { PlugIcon } from "lucide-react";
-import type { SubmitEvent } from "react";
+import type React from "react";
 import {
   ApprovalCard,
   ApprovalCardContent,
@@ -14,7 +14,7 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     toast.create({
       description: "Approved this create_issue call only.",

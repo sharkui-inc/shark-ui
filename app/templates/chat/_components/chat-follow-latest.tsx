@@ -1,21 +1,20 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import React from "react";
 import { useMessageScroller } from "@/registry/react/components/message-scroller";
 
-export const FollowLatestMessage = ({
-  enabled,
-  messageCount,
-  streamedText,
-}: {
+interface FollowLatestMessageProps {
   enabled: boolean;
   messageCount: number;
   streamedText: string;
-}) => {
-  const previousMessageCount = useRef(messageCount);
+}
+export const FollowLatestMessage = (props: FollowLatestMessageProps) => {
+  const { enabled, messageCount, streamedText } = props;
+
+  const previousMessageCount = React.useRef(messageCount);
   const scrollArea = useMessageScroller();
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     const startedTurn = messageCount > previousMessageCount.current;
     const isFirstStreamFrame = streamedText.length === 0;
 

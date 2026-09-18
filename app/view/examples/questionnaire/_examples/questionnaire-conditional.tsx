@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useMemo, useState } from "react";
+import React from "react";
 import {
   Questionnaire,
   QuestionnaireActions,
@@ -20,8 +19,8 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const QuestionnaireConditional = () => {
-  const [runtime, setRuntime] = useState("local");
-  const items = useMemo(
+  const [runtime, setRuntime] = React.useState("local");
+  const items = React.useMemo(
     () => [
       { name: "runtime", required: true },
       { name: "environment", required: runtime === "cloud" },

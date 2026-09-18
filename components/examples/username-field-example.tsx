@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React from "react";
 import {
   Field,
   FieldDescription,
@@ -15,12 +15,12 @@ const AVAILABILITY_DESCRIPTION = {
 } as const;
 
 export const UsernameFieldExample = (props: React.ComponentProps<"div">) => {
-  const [name, setName] = useState("");
-  const [availability, setAvailability] = useState<
+  const [name, setName] = React.useState("");
+  const [availability, setAvailability] = React.useState<
     "available" | "idle" | "taken"
   >("idle");
 
-  useEffect(() => {
+  React.useEffect(() => {
     const trimmed = name.trim();
 
     if (trimmed.length === 0) {

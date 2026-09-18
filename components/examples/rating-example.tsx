@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   Avatar,
@@ -24,9 +24,9 @@ import {
 } from "@/registry/react/components/toggle-group";
 
 export const RatingExample = (props: React.ComponentProps<"div">) => {
-  const [rating, setRating] = useState(5);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [rating, setRating] = React.useState(5);
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   return (
     <Card {...props}>

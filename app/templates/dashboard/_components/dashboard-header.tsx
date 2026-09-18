@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronDownIcon, DownloadIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Menu,
@@ -14,7 +14,7 @@ import { type DateRange, dateRanges } from "../_data/dashboard";
 import { DashboardNotifications } from "./dashboard-notifications";
 
 export const DashboardHeader = () => {
-  const [dateRange, setDateRange] = useState<DateRange>("Last 30 days");
+  const [dateRange, setDateRange] = React.useState<DateRange>("Last 30 days");
 
   return (
     <header className="flex h-14 shrink-0 items-center gap-3 border-b px-4">

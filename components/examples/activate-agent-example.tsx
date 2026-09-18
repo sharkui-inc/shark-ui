@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   AlertDialog,
@@ -30,10 +30,10 @@ import {
 } from "@/registry/react/components/item";
 
 export const ActivateAgentExample = (props: React.ComponentProps<"div">) => {
-  const [status, setStatus] = useState<"dismissed" | "enabled" | "idle">(
+  const [status, setStatus] = React.useState<"dismissed" | "enabled" | "idle">(
     "idle"
   );
-  const [isEnabling, setIsEnabling] = useState(false);
+  const [isEnabling, setIsEnabling] = React.useState(false);
 
   if (status === "dismissed") {
     return (

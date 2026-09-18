@@ -12,7 +12,7 @@ import {
   SmileIcon,
   UserIcon,
 } from "lucide-react";
-import { useEffect, useRef } from "react";
+import React from "react";
 import {
   Command,
   CommandContent,
@@ -28,7 +28,7 @@ import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
 
 export const CommandExample = (props: React.ComponentProps<"div">) => {
   const { className, ...rest } = props;
-  const rootRef = useRef<HTMLDivElement>(null);
+  const rootRef = React.useRef<HTMLDivElement>(null);
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
     filter: contains,
@@ -36,7 +36,7 @@ export const CommandExample = (props: React.ComponentProps<"div">) => {
     initialItems,
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     let innerId = 0;
     const outerId = requestAnimationFrame(() => {
       innerId = requestAnimationFrame(() => {

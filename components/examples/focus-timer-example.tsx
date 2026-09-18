@@ -8,7 +8,7 @@ import {
   SkipForwardIcon,
   TimerIcon,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
@@ -33,7 +33,7 @@ import {
 export const FocusTimerExample = (props: React.ComponentProps<"div">) => {
   const { className, ...rest } = props;
 
-  const [session, setSession] = useState<"break" | "focus">("focus");
+  const [session, setSession] = React.useState<"break" | "focus">("focus");
   const isFocus = session === "focus";
 
   const skipSession = () => {
@@ -141,7 +141,7 @@ const MinuteTicks = () => {
   const finished = days + hours + minutes + seconds === 0;
   const remaining = finished ? 0 : seconds || 60;
   const exact = (remaining / 60) * tickHeights.length;
-  const previousExact = useRef<number>(tickHeights.length);
+  const previousExact = React.useRef<number>(tickHeights.length);
   const draining = exact <= previousExact.current;
   previousExact.current = exact;
 

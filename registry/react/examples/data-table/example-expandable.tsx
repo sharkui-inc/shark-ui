@@ -10,7 +10,7 @@ import {
   useTable,
 } from "@tanstack/react-table";
 import { ChevronDownIcon, ChevronRightIcon } from "lucide-react";
-import { Fragment, useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Table,
@@ -22,7 +22,7 @@ import {
 } from "@/registry/react/components/table";
 
 const Example = () => {
-  const [expanded, setExpanded] = useState<ExpandedState>({});
+  const [expanded, setExpanded] = React.useState<ExpandedState>({});
 
   const table = useTable({
     columns,
@@ -59,7 +59,7 @@ const Example = () => {
         <TableBody>
           {table.getRowModel().rows.length ? (
             table.getRowModel().rows.map((row) => (
-              <Fragment key={row.id}>
+              <React.Fragment key={row.id}>
                 <TableRow>
                   {row.getAllCells().map((cell) => (
                     <TableCell
@@ -79,7 +79,7 @@ const Example = () => {
                     </TableCell>
                   </TableRow>
                 ) : null}
-              </Fragment>
+              </React.Fragment>
             ))
           ) : (
             <TableRow>

@@ -1,7 +1,7 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react/collection";
-import { useState } from "react";
+import React from "react";
 import {
   CodeBlock,
   CodeBlockActions,
@@ -16,7 +16,7 @@ import {
 } from "@/registry/react/components/code-block";
 
 const Example = () => {
-  const [language, setLanguage] = useState(["typescript"]);
+  const [language, setLanguage] = React.useState(["typescript"]);
   const snippet =
     SNIPPETS[
       language.find((value) => value in SNIPPETS) as keyof typeof SNIPPETS

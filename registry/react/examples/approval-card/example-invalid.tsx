@@ -1,7 +1,7 @@
 "use client";
 
 import { CircleAlertIcon } from "lucide-react";
-import { type SubmitEvent, useEffect, useRef } from "react";
+import React from "react";
 import {
   ApprovalCard,
   ApprovalCardChoice,
@@ -20,13 +20,13 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const formRef = useRef<HTMLFormElement>(null);
+  const formRef = React.useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     formRef.current?.requestSubmit();
   }, []);
 
-  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     toast.create({

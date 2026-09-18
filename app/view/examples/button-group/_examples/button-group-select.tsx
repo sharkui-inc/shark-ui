@@ -2,7 +2,7 @@
 
 import { createListCollection } from "@ark-ui/react";
 import { ArrowRightIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import { ButtonGroup } from "@/registry/react/components/button-group";
 import { Input } from "@/registry/react/components/input";
@@ -23,7 +23,7 @@ const currencies = createListCollection({
 });
 
 const ButtonGroupSelectExample = () => {
-  const [currency, setCurrency] = useState("$");
+  const [currency, setCurrency] = React.useState("$");
 
   return (
     <ButtonGroup>

@@ -27,7 +27,7 @@ import {
   SunIcon,
   UserIcon,
 } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Menu,
@@ -46,12 +46,12 @@ import {
 } from "@/registry/react/components/menu";
 
 const MenuComplex = () => {
-  const [notifications, setNotifications] = useState({
+  const [notifications, setNotifications] = React.useState({
     email: true,
     push: true,
     sms: false,
   });
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = React.useState("light");
 
   return (
     <Menu>

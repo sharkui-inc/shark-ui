@@ -2,7 +2,6 @@
 
 import { ark } from "@ark-ui/react/factory";
 import { createContext } from "@ark-ui/react/utils";
-import type { CSSProperties } from "react";
 import React from "react";
 import type {
   BundledLanguage,
@@ -480,7 +479,7 @@ const CodeToken = ({ token }: { token: ThemedToken }) => (
         fontWeight: isBold(token.fontStyle) ? "bold" : undefined,
         textDecoration: isUnderline(token.fontStyle) ? "underline" : undefined,
         ...token.htmlStyle,
-      } as CSSProperties
+      } as React.CSSProperties
     }
   >
     {token.content}

@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import React from "react";
 import { Iframe } from "@/registry/react/components/iframe";
 
 const Example = () => {
-  const ref = useRef<HTMLIFrameElement>(null);
+  const ref = React.useRef<HTMLIFrameElement>(null);
 
   return (
     <Iframe

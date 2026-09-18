@@ -2,7 +2,7 @@
 
 import { type DateValue, parseDate } from "@ark-ui/react";
 import { CalendarCheckIcon, CalendarDaysIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -36,10 +36,10 @@ import {
 } from "@/registry/react/components/toggle-group";
 
 export const BookAppointmentExample = (props: React.ComponentProps<"div">) => {
-  const [value, setValue] = useState<DateValue[]>([today]);
-  const [slot, setSlot] = useState(["slot-0"]);
-  const [isBooked, setIsBooked] = useState(false);
-  const [isConfirming, setIsConfirming] = useState(false);
+  const [value, setValue] = React.useState<DateValue[]>([today]);
+  const [slot, setSlot] = React.useState(["slot-0"]);
+  const [isBooked, setIsBooked] = React.useState(false);
+  const [isConfirming, setIsConfirming] = React.useState(false);
   const selectedDay = value[0] ?? today;
   const selectedSlot =
     slots.find((item) => item.value === slot[0])?.label ?? slots[0].label;

@@ -1,7 +1,7 @@
 "use client";
 
 import { FileTextIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   AlertDialog,
@@ -31,8 +31,10 @@ import {
 } from "@/registry/react/components/item";
 
 export const UnsavedChangesExample = (props: React.ComponentProps<"div">) => {
-  const [status, setStatus] = useState<"discarded" | "idle" | "saved">("idle");
-  const [isSaving, setIsSaving] = useState(false);
+  const [status, setStatus] = React.useState<"discarded" | "idle" | "saved">(
+    "idle"
+  );
+  const [isSaving, setIsSaving] = React.useState(false);
   const badge = STATUS_BADGE[status];
 
   return (

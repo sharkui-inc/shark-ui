@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Field,
@@ -12,8 +12,8 @@ import { Input } from "@/registry/react/components/input";
 import { Textarea } from "@/registry/react/components/textarea";
 
 const FocusTrapDemo = () => {
-  const [trapped, setTrapped] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [trapped, setTrapped] = React.useState(false);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   const getInitialFocus = () => inputRef.current;
   const startTrap = () => setTrapped(true);

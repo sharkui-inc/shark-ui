@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import {
   PlanItem,
   PlanItemContent,
@@ -10,7 +10,7 @@ import {
 } from "@/registry/react/components/plan";
 
 const Example = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = React.useState(true);
 
   const handleOpenChange = (details: { open: boolean }) => {
     setOpen(details.open);

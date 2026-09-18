@@ -1,7 +1,7 @@
 "use client";
 
 import { InboxIcon, PlusIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import {
   State,
@@ -17,9 +17,11 @@ import { MailToolbarButton } from "./mail-toolbar-button";
 const INBOX = EMAILS.filter((email) => email.folder === "Inbox");
 
 export const MailList = () => {
-  const [query] = useState("");
-  const [selectedId, setSelectedId] = useState(INBOX[0]?.id ?? null);
-  const [favoriteIds, setFavoriteIds] = useState<string[]>([...STARRED_IDS]);
+  const [query] = React.useState("");
+  const [selectedId, setSelectedId] = React.useState(INBOX[0]?.id ?? null);
+  const [favoriteIds, setFavoriteIds] = React.useState<string[]>([
+    ...STARRED_IDS,
+  ]);
 
   const emails = INBOX.filter((email) =>
     `${email.sender} ${email.subject} ${email.preview}`

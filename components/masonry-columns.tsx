@@ -1,4 +1,4 @@
-import { Children, isValidElement } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 
 const COLUMN_IDS = ["start", "middle", "end"] as const;
@@ -12,7 +12,7 @@ const columnForChild = (
   child: React.ReactNode,
   index: number
 ): MasonryColumnId => {
-  if (isValidElement<{ "data-column"?: string }>(child)) {
+  if (React.isValidElement<{ "data-column"?: string }>(child)) {
     const column = child.props["data-column"];
 
     if (isMasonryColumnId(column)) {
@@ -30,7 +30,7 @@ interface MasonryColumnsProps extends React.ComponentProps<"div"> {
 export const MasonryColumns = (props: MasonryColumnsProps) => {
   const { children, className, columnClassName, ...rest } = props;
 
-  const items = Children.toArray(children);
+  const items = React.Children.toArray(children);
   const columns = COLUMN_IDS.map((columnId) => ({
     columnId,
     items: items

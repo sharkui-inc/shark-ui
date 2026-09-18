@@ -1,7 +1,7 @@
 "use client";
 
 import { RefreshCwIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import { createWavesAvatar } from "@/lib/dicebear";
 import {
@@ -32,13 +32,13 @@ import {
 import { Status } from "@/registry/react/components/status";
 
 export const InputOTPExample = (props: React.ComponentProps<"div">) => {
-  const [value, setValue] = useState<string[]>([...PREVIEW_VALUE]);
-  const [cooldown, setCooldown] = useState(0);
-  const [isVerified, setIsVerified] = useState(false);
-  const [isContinuing, setIsContinuing] = useState(false);
-  const cooldownIntervalRef = useRef(0);
+  const [value, setValue] = React.useState<string[]>([...PREVIEW_VALUE]);
+  const [cooldown, setCooldown] = React.useState(0);
+  const [isVerified, setIsVerified] = React.useState(false);
+  const [isContinuing, setIsContinuing] = React.useState(false);
+  const cooldownIntervalRef = React.useRef(0);
 
-  useEffect(
+  React.useEffect(
     () => () => {
       window.clearInterval(cooldownIntervalRef.current);
     },

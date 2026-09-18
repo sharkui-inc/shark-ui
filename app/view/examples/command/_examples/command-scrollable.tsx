@@ -26,7 +26,7 @@ import {
   ZoomInIcon,
   ZoomOutIcon,
 } from "lucide-react";
-import { Fragment, useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Command,
@@ -44,7 +44,7 @@ import {
 } from "@/registry/react/components/command";
 
 const CommandScrollable = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
     filter: contains,
@@ -71,7 +71,7 @@ const CommandScrollable = () => {
               <CommandEmpty>No results found.</CommandEmpty>
               <CommandList>
                 {collection.group().map(([group, items], index) => (
-                  <Fragment key={group}>
+                  <React.Fragment key={group}>
                     {index !== 0 && <CommandSeparator />}
                     <CommandGroup heading={group}>
                       {items.map((item) => (
@@ -84,7 +84,7 @@ const CommandScrollable = () => {
                         </CommandItem>
                       ))}
                     </CommandGroup>
-                  </Fragment>
+                  </React.Fragment>
                 ))}
               </CommandList>
             </CommandContent>

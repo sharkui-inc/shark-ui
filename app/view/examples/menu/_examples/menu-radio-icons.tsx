@@ -1,7 +1,7 @@
 "use client";
 
 import { Building2Icon, CreditCardIcon, WalletIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Menu,
@@ -13,7 +13,7 @@ import {
 } from "@/registry/react/components/menu";
 
 const MenuRadioIcons = () => {
-  const [paymentMethod, setPaymentMethod] = useState("card");
+  const [paymentMethod, setPaymentMethod] = React.useState("card");
 
   return (
     <Menu>

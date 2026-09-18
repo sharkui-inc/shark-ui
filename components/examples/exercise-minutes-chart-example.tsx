@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import {
   Card,
@@ -53,7 +53,7 @@ const chartConfig = {
 export const ExerciseMinutesChartExample = (
   props: React.ComponentProps<"div">
 ) => {
-  const [range, setRange] = useState(["this"]);
+  const [range, setRange] = React.useState(["this"]);
   const data = range[0] === "last" ? lastWeek : thisWeek;
 
   return (

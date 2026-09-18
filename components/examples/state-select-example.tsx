@@ -1,7 +1,7 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { useState } from "react";
+import React from "react";
 import {
   Field,
   FieldDescription,
@@ -17,7 +17,7 @@ import {
 } from "@/registry/react/components/select";
 
 export const StateSelectExample = (props: React.ComponentProps<"div">) => {
-  const [value, setValue] = useState<string[]>([]);
+  const [value, setValue] = React.useState<string[]>([]);
   const state = value.at(0);
 
   return (

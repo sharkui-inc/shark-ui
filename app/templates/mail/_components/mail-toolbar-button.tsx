@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Tooltip,
@@ -9,7 +9,7 @@ import {
 } from "@/registry/react/components/tooltip";
 
 interface MailToolbarButtonProps {
-  children: ReactNode;
+  children: React.ReactNode;
   form?: string;
   label: string;
   onClick?: () => void;

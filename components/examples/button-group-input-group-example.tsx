@@ -1,7 +1,7 @@
 "use client";
 
 import { AudioLinesIcon, ImageIcon, PlusIcon, VideoIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   InputGroup,
@@ -23,7 +23,7 @@ import {
 } from "@/registry/react/components/tooltip";
 
 export const ButtonGroupInputGroupExample = () => {
-  const [voice, setVoice] = useState(false);
+  const [voice, setVoice] = React.useState(false);
 
   return (
     <InputGroup className="max-w-64">

@@ -27,7 +27,7 @@ import {
   ChevronDownIcon,
   MoreHorizontalIcon,
 } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { Button } from "@/registry/react/components/button";
 import { Checkbox } from "@/registry/react/components/checkbox";
@@ -51,11 +51,13 @@ import {
 } from "@/registry/react/components/table";
 
 const Example = () => {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
   const [columnVisibility, setColumnVisibility] =
-    useState<ColumnVisibilityState>({});
-  const [rowSelection, setRowSelection] = useState({});
+    React.useState<ColumnVisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
   const { locale } = usePreviewLocale();
 

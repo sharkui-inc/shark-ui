@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronsUpDownIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Collapsible,
@@ -11,7 +11,7 @@ import {
 import { LocaleProvider } from "@/registry/react/components/locale";
 
 const CollapsibleRtl = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <div className="flex w-full justify-center" dir="rtl">

@@ -1,7 +1,7 @@
 "use client";
 
 import { BadgeCheckIcon, MailIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
 import { Button } from "@/registry/react/components/button";
@@ -36,9 +36,9 @@ import {
 import { SharkIcon } from "../icons/shark";
 
 export const SocialProfileExample = (props: React.ComponentProps<"div">) => {
-  const [isFollowing, setIsFollowing] = useState(false);
-  const [isSending, setIsSending] = useState(false);
-  const [messageOpen, setMessageOpen] = useState(false);
+  const [isFollowing, setIsFollowing] = React.useState(false);
+  const [isSending, setIsSending] = React.useState(false);
+  const [messageOpen, setMessageOpen] = React.useState(false);
   const followers = isFollowing ? "12.5K" : "12.4K";
 
   return (

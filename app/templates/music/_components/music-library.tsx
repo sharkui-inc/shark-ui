@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import {
   Tabs,
   TabsContent,
@@ -13,7 +13,7 @@ import { MusicLibraryPodcasts } from "./music-library-podcasts";
 import { MusicLibrarySongs } from "./music-library-songs";
 
 export const MusicLibrary = () => {
-  const [favoriteTitles, setFavoriteTitles] = useState<string[]>([
+  const [favoriteTitles, setFavoriteTitles] = React.useState<string[]>([
     TRACKS[0].title,
   ]);
 

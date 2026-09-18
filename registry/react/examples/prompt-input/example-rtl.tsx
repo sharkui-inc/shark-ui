@@ -14,7 +14,7 @@ import {
   PlusIcon,
   ShieldAlertIcon,
 } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -70,11 +70,11 @@ const Example = () => {
 
   const { values } = translations[locale];
 
-  const [status, setStatus] = useState<PromptInputStatus>("ready");
-  const [value, setValue] = useState("");
-  const [model, setModel] = useState(["terra-5.6"]);
-  const [effort, setEffort] = useState(["medium"]);
-  const [access, setAccess] = useState(["full"]);
+  const [status, setStatus] = React.useState<PromptInputStatus>("ready");
+  const [value, setValue] = React.useState("");
+  const [model, setModel] = React.useState(["terra-5.6"]);
+  const [effort, setEffort] = React.useState(["medium"]);
+  const [access, setAccess] = React.useState(["full"]);
   const { collection } = useListCollection({ initialItems: models });
 
   const effortCollection = createListCollection({ items: values.efforts });

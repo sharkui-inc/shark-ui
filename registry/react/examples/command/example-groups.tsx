@@ -1,7 +1,7 @@
 "use client";
 
 import { useFilter, useListCollection } from "@ark-ui/react";
-import { Fragment } from "react";
+import React from "react";
 import {
   Command,
   CommandContent,
@@ -33,7 +33,7 @@ const Example = () => {
         <CommandEmpty />
         <CommandList>
           {collection.group().map(([group, items], index) => (
-            <Fragment key={group}>
+            <React.Fragment key={group}>
               {index !== 0 && <CommandSeparator />}
               <CommandGroup heading={group}>
                 {items.map((item) => (
@@ -42,7 +42,7 @@ const Example = () => {
                   </CommandItem>
                 ))}
               </CommandGroup>
-            </Fragment>
+            </React.Fragment>
           ))}
         </CommandList>
       </CommandContent>

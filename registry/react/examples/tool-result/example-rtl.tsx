@@ -1,7 +1,7 @@
 "use client";
 
 import { RotateCwIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import React from "react";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -25,10 +25,10 @@ const Example = () => {
 
   const { values } = translations[locale];
 
-  const [lineCount, setLineCount] = useState(1);
-  const [status, setStatus] = useState<ToolResultStatus>("running");
+  const [lineCount, setLineCount] = React.useState(1);
+  const [status, setStatus] = React.useState<ToolResultStatus>("running");
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (status !== "running") {
       return;
     }

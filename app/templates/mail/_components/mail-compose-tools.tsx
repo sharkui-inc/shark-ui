@@ -13,7 +13,7 @@ import {
   Undo2Icon,
   WandSparklesIcon,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import type React from "react";
 import { Button } from "@/registry/react/components/button";
 import { ButtonGroup } from "@/registry/react/components/button-group";
 import {
@@ -26,7 +26,7 @@ import {
 import { MailToolbarButton } from "./mail-toolbar-button";
 
 interface ComposeMenuItem {
-  icon: ReactNode;
+  icon: React.ReactNode;
   label: string;
   value: string;
 }
@@ -85,7 +85,7 @@ const ComposeMenu = ({
   items,
   label,
 }: {
-  icon: ReactNode;
+  icon: React.ReactNode;
   items: readonly ComposeMenuItem[];
   label: string;
 }) => (

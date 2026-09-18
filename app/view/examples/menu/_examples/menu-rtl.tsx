@@ -1,7 +1,7 @@
 "use client";
 
 import { CreditCardIcon, SettingsIcon, UserIcon } from "lucide-react";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import { LocaleProvider } from "@/registry/react/components/locale";
 import {
@@ -21,10 +21,10 @@ import {
 } from "@/registry/react/components/menu";
 
 const MenuRtl = () => {
-  const [showStatusBar, setShowStatusBar] = useState(true);
-  const [showActivityBar, setShowActivityBar] = useState(false);
-  const [showPanel, setShowPanel] = useState(false);
-  const [position, setPosition] = useState("bottom");
+  const [showStatusBar, setShowStatusBar] = React.useState(true);
+  const [showActivityBar, setShowActivityBar] = React.useState(false);
+  const [showPanel, setShowPanel] = React.useState(false);
+  const [position, setPosition] = React.useState("bottom");
 
   return (
     <div dir="rtl">

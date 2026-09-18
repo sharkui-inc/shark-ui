@@ -1,6 +1,6 @@
 "use client";
 
-import { type FormEvent, useState } from "react";
+import React from "react";
 import { EMAILS, type MailComposeMode, STARRED_IDS } from "../_data/mail";
 import { MailCompose } from "./mail-compose";
 import { MailEmpty } from "./mail-empty";
@@ -10,13 +10,15 @@ import { MailToolbar } from "./mail-toolbar";
 const [selectedEmail] = EMAILS;
 
 export const MailPane = () => {
-  const [composeMode, setComposeMode] = useState<MailComposeMode>(null);
-  const [isStarred, setIsStarred] = useState(
+  const [composeMode, setComposeMode] = React.useState<MailComposeMode>(null);
+  const [isStarred, setIsStarred] = React.useState(
     selectedEmail ? STARRED_IDS.includes(selectedEmail.id) : false
   );
-  const [isUnread, setIsUnread] = useState(selectedEmail?.unread ?? false);
+  const [isUnread, setIsUnread] = React.useState(
+    selectedEmail?.unread ?? false
+  );
 
-  const closeCompose = (event?: FormEvent<HTMLFormElement>) => {
+  const closeCompose = (event?: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
     setComposeMode(null);
   };
@@ -47,7 +49,7 @@ const MailPaneBody = ({
 }: {
   composeMode: MailComposeMode;
   onCompose: () => void;
-  onSend: (event: FormEvent<HTMLFormElement>) => void;
+  onSend: (event: React.FormEvent<HTMLFormElement>) => void;
 }) => {
   if (composeMode) {
     return (

@@ -1,6 +1,6 @@
 "use client";
 
-import type { Dispatch, FormEvent, SetStateAction } from "react";
+import type React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Dialog,
@@ -16,9 +16,9 @@ import { TaskEditorFields } from "./task-editor-fields";
 interface TaskEditorDialogProps {
   draft: TaskDraft;
   editor: TaskEditorState | null;
-  onDraftChange: Dispatch<SetStateAction<TaskDraft>>;
+  onDraftChange: React.Dispatch<React.SetStateAction<TaskDraft>>;
   onOpenChange: (open: boolean) => void;
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export const TaskEditorDialog = (props: TaskEditorDialogProps) => {

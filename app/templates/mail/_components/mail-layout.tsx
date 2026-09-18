@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type React from "react";
 import {
   Resizable,
   ResizablePanel,
@@ -12,9 +12,9 @@ export const MailLayout = ({
   list,
   sidebar,
 }: {
-  content: ReactNode;
-  list: ReactNode;
-  sidebar: ReactNode;
+  content: React.ReactNode;
+  list: React.ReactNode;
+  sidebar: React.ReactNode;
 }) => (
   <div className="flex h-full min-h-0 flex-col overflow-hidden bg-background">
     <Resizable

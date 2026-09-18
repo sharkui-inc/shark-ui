@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import {
   PromptInput,
@@ -22,11 +22,11 @@ import {
 } from "@/registry/react/components/speech-input";
 
 export const SpeechInputExample = () => {
-  const [value, setValue] = useState("");
-  const [status, setStatus] = useState<PromptInputStatus>("ready");
-  const timeoutRef = useRef(0);
+  const [value, setValue] = React.useState("");
+  const [status, setStatus] = React.useState<PromptInputStatus>("ready");
+  const timeoutRef = React.useRef(0);
 
-  useEffect(
+  React.useEffect(
     () => () => {
       window.clearTimeout(timeoutRef.current);
     },

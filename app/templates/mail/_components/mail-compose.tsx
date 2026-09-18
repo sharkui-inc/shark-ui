@@ -1,6 +1,6 @@
 "use client";
 
-import type { FormEvent } from "react";
+import type React from "react";
 import {
   InputGroup,
   InputGroupAddon,
@@ -13,7 +13,7 @@ const REPLY_PREFIX = /^(re|fw|fwd):/i;
 
 interface MailComposeProps {
   composeMode: Exclude<MailComposeMode, null>;
-  onSend: (event: FormEvent<HTMLFormElement>) => void;
+  onSend: (event: React.FormEvent<HTMLFormElement>) => void;
   selectedEmail?: Email;
 }
 
