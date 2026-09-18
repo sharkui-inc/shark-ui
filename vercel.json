@@ -87,7 +87,7 @@
       "headers": {
         "Content-Type": "text/markdown; charset=utf-8"
       },
-      "dest": "/llms.mdx/docs/$1"
+      "dest": "/llms.mdx/docs/$1/index"
     }
   ]
 }

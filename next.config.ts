@@ -18,20 +18,20 @@ const config: NextConfig = {
   // Static export: avoids serverless functions on Vercel Hobby (free) tier.
   output: "export",
   reactStrictMode: true,
-  // Dev-only pretty URLs: /docs/:path.md → static /llms.mdx/docs/:path.
-  // output: "export" does not apply these in production; vercel.json handles that.
-  async rewrites() {
-    return [
-      {
-        destination: "/llms.mdx/docs/index",
-        source: "/docs.md",
-      },
-      {
-        destination: "/llms.mdx/docs/:path*",
-        source: "/docs/:path*.md",
-      },
-    ];
-  },
+  // Keep these dev-only aliases for a future runtime deployment. Static exports
+  // do not apply Next rewrites, so Vercel serves the equivalents in vercel.json.
+  // async rewrites() {
+  //   return [
+  //     {
+  //       destination: "/llms.mdx/docs/index",
+  //       source: "/docs.md",
+  //     },
+  //     {
+  //       destination: "/llms.mdx/docs/:path*/index",
+  //       source: "/docs/:path*.md",
+  //     },
+  //   ];
+  // },
   serverExternalPackages: ["@takumi-rs/core"],
   turbopack: {
     rules: codeInspectorPlugin({
