@@ -10,7 +10,6 @@ import { Button } from "@/registry/react/components/button";
 import { Field } from "@/registry/react/components/field";
 import {
   Listbox,
-  ListboxBody,
   ListboxContent,
   ListboxItem,
   ListboxItemText,
@@ -106,16 +105,14 @@ export const ThemeSelectorRadius = () => {
             selectOnHighlight
             value={[config.borderRadius]}
           >
-            <ListboxContent
-              className="p-(--space) pt-1"
-              data-theme-radius-listbox
-            >
-              <ListboxBody className="grid grid-cols-[repeat(var(--column-count),1fr)] gap-2">
+            <ListboxContent data-theme-radius-listbox>
+              <div className="grid grid-cols-[repeat(var(--column-count),1fr)] gap-2 p-(--space) pt-1">
                 {collection.items.map((item) => (
                   <ListboxItem
                     className="relative flex flex-col items-center justify-center gap-2 rounded-xl border border-input bg-muted/32 p-2.5 text-center hover:bg-muted/32 hover:text-foreground data-[state=checked]:border-primary data-highlighted:border-primary/64 data-[state=checked]:bg-primary/8 data-highlighted:bg-primary/8 data-[state=checked]:text-foreground data-highlighted:text-foreground data-[state=checked]:ring-1 data-[state=checked]:ring-primary/48 data-[state=checked]:ring-inset"
                     item={item}
                     key={item.value}
+                    showIndicator={false}
                   >
                     <span
                       aria-hidden="true"
@@ -127,7 +124,7 @@ export const ThemeSelectorRadius = () => {
                     </ListboxItemText>
                   </ListboxItem>
                 ))}
-              </ListboxBody>
+              </div>
             </ListboxContent>
           </Listbox>
         </PopoverContent>

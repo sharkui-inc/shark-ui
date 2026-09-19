@@ -134,7 +134,6 @@ Use `Separator` instead of `<hr>` or a `border-t` divider. Use `Badge` for a sta
 - FileUpload: pick and drop files.
 - Float: anchor to a container edge.
 - FloatingPanel: draggable window.
-- Frame: bordered grouping box.
 - HoverCard: rich hover preview.
 - IconTile: icon, initials, or short text surface.
 - ImageCropper: crop and transform an image.

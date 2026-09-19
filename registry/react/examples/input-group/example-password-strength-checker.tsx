@@ -24,8 +24,11 @@ const Example = () => {
 };
 
 const UPPERCASE_REGEX = /[A-Z]/;
+
 const LOWERCASE_REGEX = /[a-z]/;
+
 const NUMBER_REGEX = /\d/;
+
 const NON_ALPHANUMERIC_REGEX = /[^a-zA-Z0-9]/;
 
 type PasswordStrengthLevel = "weak" | "moderate" | "strong";

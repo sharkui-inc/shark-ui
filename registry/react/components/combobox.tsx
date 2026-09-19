@@ -29,7 +29,6 @@ import {
   menuItemHighlightVariants,
   menuItemIconVariants,
   menuItemIndicatorVariants,
-  menuListVariants,
 } from "@/registry/react/components/menu";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
@@ -372,24 +371,21 @@ export const ComboboxPositioner = (
 export const comboboxContentVariants = tv({
   base: [
     "relative z-[calc(50+var(--layer-index,0))]",
+    "p-1.5",
     "origin-(--transform-origin)",
     "bg-popover",
     "text-popover-foreground",
     "rounded-xl border shadow-lg/4",
     "outline-hidden",
     "duration-150 ease-out",
-    "[&:is([data-state=closed],:has([data-state=closed]))]:animate-out",
-    "[&:is([data-state=open],:has([data-state=open]))]:animate-in",
-    "[&:is([data-state=closed],:has([data-state=closed]))]:fade-out-0",
-    "[&:is([data-state=open],:has([data-state=open]))]:fade-in-0",
-    "[&:is([data-state=open],:has([data-state=open]))]:zoom-in-[98%]",
-    "[&:is([data-state=closed],:has([data-state=closed]))]:zoom-out-[98%]",
-    "[&:is([data-placement=top],:has([data-placement=top]))]:slide-in-from-bottom-2",
-    "[&:is([data-placement=bottom],:has([data-placement=bottom]))]:slide-in-from-top-2",
-    "[&:is([data-placement=right],:has([data-placement=right]))]:slide-in-from-start-2",
-    "[&:is([data-placement=left],:has([data-placement=left]))]:slide-in-from-end-2",
-    "motion-reduce:data-[state=closed]:zoom-out-100 motion-reduce:data-[state=open]:zoom-in-100",
-    "motion-reduce:data-[placement=top]:slide-in-from-bottom-0 motion-reduce:data-[placement=bottom]:slide-in-from-top-0 motion-reduce:data-[placement=right]:slide-in-from-start-0 motion-reduce:data-[placement=left]:slide-in-from-end-0",
+    "data-[state=closed]:animate-out data-[state=open]:animate-in",
+    "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+    "data-[state=open]:zoom-in-[98%] data-[state=closed]:zoom-out-[98%]",
+    "data-[placement=top]:slide-in-from-bottom-2",
+    "data-[placement=bottom]:slide-in-from-top-2",
+    "data-[placement=right]:slide-in-from-start-2",
+    "data-[placement=left]:slide-in-from-end-2",
+    "motion-reduce:animate-none",
   ],
 });
 
@@ -406,15 +402,15 @@ export const ComboboxContent = (
             comboboxContentVariants(),
             "max-h-96 min-w-48",
             "overflow-hidden",
-            menuListVariants(),
             className
           )}
           data-slot="combobox-content"
           {...rest}
         >
           <ScrollArea
-            className="max-h-[inherit]"
+            className="h-auto max-h-[inherit] **:data-[slot=scroll-area-viewport]:h-auto"
             orientation="vertical"
+            overscrollContain
             scrollFade
           >
             {children}
@@ -470,6 +466,7 @@ export const comboboxItemVariants = tv({
     menuItemHighlightVariants(),
     "data-disabled:pointer-events-none data-disabled:opacity-64",
     "[&_svg:not([class*='text-'])]:text-muted-foreground",
+    "[&>svg]:self-start",
   ],
 });
 
@@ -488,7 +485,7 @@ export const ComboboxItem = (props: ComboboxItemProps) => {
 
   return (
     <ArkCombobox.Item
-      className={cn(comboboxItemVariants(), showIndicator && "pe-8", className)}
+      className={cn(comboboxItemVariants(), className, showIndicator && "pe-8")}
       data-slot="combobox-item"
       persistFocus
       {...rest}
@@ -518,7 +515,7 @@ export const ComboboxEmpty = (
       data-slot="combobox-empty"
       {...rest}
     >
-      {children || "No results found."}
+      {children ?? "No results found."}
     </ArkCombobox.Empty>
   );
 };

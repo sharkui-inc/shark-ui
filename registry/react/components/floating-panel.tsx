@@ -77,13 +77,13 @@ const floatingPanelContentVariants = tv({
     "outline-hidden",
     "origin-center transition-[scale,opacity,translate] duration-200 ease-out will-change-transform",
     "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
-    "motion-reduce:data-[state=open]:zoom-in-100 motion-reduce:transition-none",
+    "motion-reduce:animate-none motion-reduce:transition-none",
   ],
   variants: {
     persistRect: {
       true: [
         [
-          "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] motion-reduce:data-[state=closed]:zoom-out-100 data-[state=closed]:animate-out",
+          "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
         ],
       ],
     },
@@ -306,12 +306,11 @@ export const FloatingPanelBody = (props: FloatingPanelBodyProps) => {
   const { scrollFade = true, className, children, ...rest } = props;
 
   return (
-    <ScrollArea scrollFade={scrollFade}>
+    <ScrollArea overscrollContain scrollFade={scrollFade}>
       <ArkFloatingPanel.Body
         className={cn(
           "flex flex-col gap-4",
           "p-(--space)",
-          "overflow-auto",
           "in-[[data-slot=floating-panel-content]:has([data-slot=floating-panel-footer]:not(.border-t))]:pb-1",
           className
         )}

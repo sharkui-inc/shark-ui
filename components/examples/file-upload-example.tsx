@@ -35,4 +35,5 @@ export const FileUploadExample = (props: React.ComponentProps<"div">) => (
 );
 
 const acceptedTypes = "image/png,image/jpeg,application/pdf";
+
 const maxFileSize = 10 * 1024 * 1024;

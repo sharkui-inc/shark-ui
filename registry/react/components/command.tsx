@@ -39,7 +39,6 @@ import {
 } from "@/registry/react/components/input-group";
 import {
   MenuShortcut,
-  menuListVariants,
   menuSeparatorVariants,
 } from "@/registry/react/components/menu";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
@@ -156,7 +155,6 @@ export const Command: ArkCombobox.RootComponent = (props) => {
       className={cn(
         "isolate",
         "flex min-h-0 flex-1 flex-col",
-        menuListVariants(),
         "bg-popover",
         "text-popover-foreground",
         "overflow-hidden rounded-2xl border",
@@ -194,8 +192,9 @@ export const CommandContent = (
   return (
     <ArkCombobox.Content
       className={cn(
-        "flex flex-1 flex-col",
         "max-h-(--available-height) min-h-0",
+        "flex flex-1 flex-col",
+        "p-1.5",
         "overflow-hidden",
         "outline-hidden",
         "[:not(.has-[+[data-slot=command-footer]])]:rounded-b-2xl [:not(.has-[+[data-slot=command-footer]])]:border-b",
@@ -207,6 +206,7 @@ export const CommandContent = (
       <ScrollArea
         className="max-h-[inherit] min-h-0 flex-1"
         orientation="vertical"
+        overscrollContain
         scrollFade
       >
         {children}
@@ -219,7 +219,7 @@ export const CommandInput = (props: CommandInputProps) => {
   const { size = "lg", className, autoFocus = true, ...rest } = props;
 
   return (
-    <ComboboxControl className="mb-1">
+    <ComboboxControl className="m-1.5">
       <InputGroup
         className={cn("rounded-xl bg-input/32", className)}
         size={size}
@@ -263,7 +263,7 @@ export const CommandEmpty = (
       data-slot="command-empty"
       {...rest}
     >
-      {children || "No results found."}
+      {children ?? "No results found."}
     </ComboboxEmpty>
   );
 };
@@ -317,7 +317,7 @@ export const CommandFooter = (props: React.ComponentProps<typeof ark.div>) => {
       className={cn(
         "z-10",
         "flex items-center justify-between gap-3",
-        "-mx-1 mt-2 -mb-1 px-3 py-2",
+        "mt-2 px-3 py-2",
         "bg-muted/48",
         "text-muted-foreground text-xs leading-none",
         "rounded-b-2xl border-t",

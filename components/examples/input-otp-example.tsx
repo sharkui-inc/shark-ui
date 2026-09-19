@@ -188,5 +188,7 @@ export const InputOTPExample = (props: React.ComponentProps<"div">) => {
 };
 
 const EMPTY_VALUE = ["", "", "", "", "", ""];
+
 const PREVIEW_VALUE = ["5", "5", "1", "6", "", ""];
+
 const EMAIL = "you@example.com";

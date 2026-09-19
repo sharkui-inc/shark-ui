@@ -78,7 +78,7 @@ export const PaginationFirst = (props: PaginationFirstProps) => {
       <PaginationButton variant={variant} {...rest}>
         <ChevronFirstIcon className="rtl:rotate-180" />
         <span className={cn({ "sr-only": !withLabel })}>
-          {children || "First"}
+          {children ?? "First"}
         </span>
       </PaginationButton>
     </ArkPagination.FirstTrigger>
@@ -102,7 +102,7 @@ export const PaginationPrevious = (props: PaginationPreviousProps) => {
       <PaginationButton variant={variant} {...rest}>
         <ChevronLeftIcon className="rtl:rotate-180" />
         <span className={cn({ "sr-only": !withLabel })}>
-          {children || "Previous"}
+          {children ?? "Previous"}
         </span>
       </PaginationButton>
     </ArkPagination.PrevTrigger>
@@ -125,7 +125,7 @@ export const PaginationNext = (props: PaginationNextProps) => {
     <ArkPagination.NextTrigger asChild data-slot="pagination-next">
       <PaginationButton variant={variant} {...rest}>
         <span className={cn({ "sr-only": !withLabel })}>
-          {children || "Next"}
+          {children ?? "Next"}
         </span>
         <ChevronRightIcon className="rtl:rotate-180" />
       </PaginationButton>
@@ -149,7 +149,7 @@ export const PaginationLast = (props: PaginationLastProps) => {
     <ArkPagination.LastTrigger asChild data-slot="pagination-last">
       <PaginationButton variant={variant} {...rest}>
         <span className={cn({ "sr-only": !withLabel })}>
-          {children || "Last"}
+          {children ?? "Last"}
         </span>
         <ChevronLastIcon className="rtl:rotate-180" />
       </PaginationButton>

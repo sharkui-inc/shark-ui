@@ -26,6 +26,7 @@ import {
 } from "@/registry/react/components/select";
 
 const TOKEN_CACHE_LIMIT = 100;
+
 const STREAM_HIGHLIGHT_INTERVAL = 200;
 
 export type CodeBlockLanguage = BundledLanguage | "text";
@@ -208,9 +209,13 @@ let shikiPromise: Promise<typeof import("shiki")> | undefined;
 let highlighterPromise:
   | Promise<HighlighterGeneric<BundledLanguage, BundledTheme>>
   | undefined;
+
 const languageLoadPromises = new Map<BundledLanguage, Promise<void>>();
+
 let languageLoadQueue = Promise.resolve();
+
 const tokenCache = new Map<string, TokenizedCode>();
+
 const tokenPromiseCache = new Map<string, Promise<TokenizedCode>>();
 
 const getTokenCacheKey = (code: string, language: CodeBlockLanguage) =>
@@ -443,8 +448,10 @@ const getDisplayedTokens = (
 
 const isItalic = (fontStyle: number | undefined) =>
   [1, 3, 5, 7].includes(fontStyle ?? 0);
+
 const isBold = (fontStyle: number | undefined) =>
   [2, 3, 6, 7].includes(fontStyle ?? 0);
+
 const isUnderline = (fontStyle: number | undefined) =>
   [4, 5, 6, 7].includes(fontStyle ?? 0);
 
@@ -595,7 +602,7 @@ export const CodeBlockContent = (props: CodeBlockContentProps) => {
   const tokens = getDisplayedTokens(code, language, snapshot);
 
   return (
-    <ScrollArea className="flex-1" dir="ltr">
+    <ScrollArea className="flex-1" dir="ltr" overscrollContain>
       <CodeBlockPre tokens={tokens} {...preProps} />
     </ScrollArea>
   );

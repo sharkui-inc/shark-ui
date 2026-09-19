@@ -16,8 +16,11 @@ interface ChangelogTechArticleJsonLd {
 }
 
 const ORGANIZATION_ID = "#organization";
+
 const SOFTWARE_ID = "#software";
+
 const TWITTER_HANDLE = /^@/;
+
 const WEBSITE_ID = "#website";
 
 const getSiteUrl = () => new URL(absoluteUrl("/")).origin;

@@ -1,6 +1,5 @@
 "use client";
 
-import { LocaleProvider } from "@/registry/react/components/locale";
 import {
   Table,
   TableBody,
@@ -28,39 +27,33 @@ const t = {
 };
 
 const TableRtl = () => (
-  <div dir="rtl">
-    <LocaleProvider locale="ar-SA">
-      <Table className="mx-auto w-full max-w-xl">
-        <TableCaption>{t.caption}</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">{t.invoice}</TableHead>
-            <TableHead>{t.status}</TableHead>
-            <TableHead>{t.method}</TableHead>
-            <TableHead className="text-right">{t.amount}</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{t[invoice.paymentStatus]}</TableCell>
-              <TableCell>{t[invoice.paymentMethod]}</TableCell>
-              <TableCell className="text-right">
-                {invoice.totalAmount}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>{t.total}</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </LocaleProvider>
-  </div>
+  <Table className="mx-auto w-full max-w-xl">
+    <TableCaption>{t.caption}</TableCaption>
+    <TableHeader>
+      <TableRow>
+        <TableHead className="w-[100px]">{t.invoice}</TableHead>
+        <TableHead>{t.status}</TableHead>
+        <TableHead>{t.method}</TableHead>
+        <TableHead className="text-right">{t.amount}</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {invoices.map((invoice) => (
+        <TableRow key={invoice.invoice}>
+          <TableCell className="font-medium">{invoice.invoice}</TableCell>
+          <TableCell>{t[invoice.paymentStatus]}</TableCell>
+          <TableCell>{t[invoice.paymentMethod]}</TableCell>
+          <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+    <TableFooter>
+      <TableRow>
+        <TableCell colSpan={3}>{t.total}</TableCell>
+        <TableCell className="text-right">$2,500.00</TableCell>
+      </TableRow>
+    </TableFooter>
+  </Table>
 );
 
 const invoices = [

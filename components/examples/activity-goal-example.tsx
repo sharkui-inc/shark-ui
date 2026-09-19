@@ -54,6 +54,7 @@ export const ActivityGoalExample = (props: React.ComponentProps<"div">) => {
             </TooltipTrigger>
             <TooltipContent>Decrease</TooltipContent>
           </Tooltip>
+
           <CircularProgress
             className="size-[11.5rem]"
             max={maxGoal}
@@ -110,7 +111,9 @@ export const ActivityGoalExample = (props: React.ComponentProps<"div">) => {
 };
 
 const maxGoal = 400;
+
 const minGoal = 200;
+
 const week = [
   { day: "1", label: "S", value: 100 },
   { day: "2", label: "M", value: 0 },

@@ -25,10 +25,15 @@ import {
 import { useIsMobile } from "@/registry/react/hooks/use-is-mobile";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
+
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+
 const SIDEBAR_WIDTH = "16rem";
+
 const SIDEBAR_WIDTH_MOBILE = "18rem";
+
 const SIDEBAR_WIDTH_ICON = "3rem";
+
 const SIDEBAR_KEYBOARD_SHORTCUT = "b";
 
 interface SidebarContextProps {
@@ -423,13 +428,14 @@ export const SidebarContent = (props: SidebarContentProps) => {
   return (
     <ScrollArea
       className="flex-1 [--fade-size:3rem] **:data-[slot=scroll-area-scrollbar]:hidden"
+      fill
       orientation="vertical"
+      overscrollContain
       scrollFade={scrollFade}
     >
       <ark.div
         className={cn(
-          "min-h-0",
-          "flex flex-1 flex-col gap-0",
+          "flex min-h-full flex-col gap-0",
           "group-data-[collapsible=icon]:overflow-hidden",
           className
         )}

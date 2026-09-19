@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext } from "@ark-ui/react/utils";
-import React from "react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -210,13 +210,11 @@ export const ApprovalCardItemDescription = (
 
 export const ApprovalCardChoices = (
   props: React.ComponentProps<typeof QuestionnaireChoices>
-) => {
-  return (
-    <QuestionnaireChoices {...props} data-slot="approval-card-choices">
-      {props.children}
-    </QuestionnaireChoices>
-  );
-};
+) => (
+  <QuestionnaireChoices {...props} data-slot="approval-card-choices">
+    {props.children}
+  </QuestionnaireChoices>
+);
 
 export const ApprovalCardChoice = (
   props: React.ComponentProps<typeof QuestionnaireChoice>
@@ -267,7 +265,7 @@ export const ApprovalCardPrevious = (
 
   return (
     <QuestionnairePrevious {...rest} data-slot="approval-card-previous">
-      {children || "Previous"}
+      {children ?? "Previous"}
     </QuestionnairePrevious>
   );
 };
@@ -279,7 +277,7 @@ export const ApprovalCardNext = (
 
   return (
     <QuestionnaireNext {...rest} data-slot="approval-card-next">
-      {children || "Next"}
+      {children ?? "Next"}
     </QuestionnaireNext>
   );
 };
@@ -291,7 +289,7 @@ export const ApprovalCardSkip = (
 
   return (
     <QuestionnaireSkip {...rest} data-slot="approval-card-skip">
-      {children || "Skip"}
+      {children ?? "Skip"}
     </QuestionnaireSkip>
   );
 };
@@ -303,7 +301,7 @@ export const ApprovalCardSubmit = (
 
   return (
     <QuestionnaireSubmit {...rest} data-slot="approval-card-submit">
-      {children || "Approve"}
+      {children ?? "Approve"}
     </QuestionnaireSubmit>
   );
 };
@@ -332,7 +330,7 @@ export const ApprovalCardReject = (props: ApprovalCardRejectProps) => {
       }}
       variant={variant}
     >
-      {children || "Reject"}
+      {children ?? "Reject"}
     </Button>
   );
 };

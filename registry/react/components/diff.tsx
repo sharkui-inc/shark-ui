@@ -154,7 +154,7 @@ export const DiffContent = (props: React.ComponentProps<typeof ark.div>) => {
       dir="ltr"
       {...rest}
     >
-      <ScrollArea className="flex-1" dir="ltr">
+      <ScrollArea className="flex-1" dir="ltr" overscrollContain>
         <div className="w-max min-w-full py-3 font-mono text-sm leading-(--code-surface-line-height)">
           {children}
         </div>

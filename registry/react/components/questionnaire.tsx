@@ -1235,7 +1235,7 @@ export const QuestionnairePrevious = (props: QuestionnaireActionProps) => {
       }}
       variant="outline"
     >
-      {children || "Previous"}
+      {children ?? "Previous"}
     </Button>
   );
 };
@@ -1264,7 +1264,7 @@ export const QuestionnaireNext = (props: QuestionnaireActionProps) => {
         }
       }}
     >
-      {children || "Next"}
+      {children ?? "Next"}
     </Button>
   );
 };
@@ -1292,7 +1292,7 @@ export const QuestionnaireSkip = (props: QuestionnaireActionProps) => {
       }}
       variant="ghost"
     >
-      {children || "Skip"}
+      {children ?? "Skip"}
     </Button>
   );
 };
@@ -1317,7 +1317,7 @@ export const QuestionnaireSubmit = (props: QuestionnaireActionProps) => {
       disabled={disabled}
       type="submit"
     >
-      {children || "Submit"}
+      {children ?? "Submit"}
     </Button>
   );
 };

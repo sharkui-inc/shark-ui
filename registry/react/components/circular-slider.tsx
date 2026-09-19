@@ -190,7 +190,7 @@ export const CircularSliderThumb = (
         "absolute inset-0 z-10 flex items-center justify-center",
         "outline-hidden",
         "focus-visible:[&_span]:border-ring/64 focus-visible:[&_span]:outline-hidden focus-visible:[&_span]:ring-2 focus-visible:[&_span]:ring-ring/24",
-        "active:[&_span]:scale-110 active:[&_span]:ring-[3px] active:[&_span]:ring-ring/32",
+        "active:[&_span]:scale-110",
         // Ark's RTL drag offset depends on the pointer target. Let Control
         // receive pointer events so it calculates the mirrored angle directly.
         dir === "rtl" && "pointer-events-none",

@@ -65,11 +65,17 @@ Control the value with `value` and `onValueChange` for a controlled slider.
 
 <ComponentPreview componentName="slider" fileName="example-controlled" />
 
+## States
+
+### Disabled
+
+Use the `disabled` prop to disable the slider.
+
+<ComponentPreview componentName="slider" fileName="example-disabled" />
+
 ## Examples
 
 ### With label and value
-
-Use `<Field>`, `<SliderLabel>`, and `<SliderValue>` for accessible labelling and to show the current value.
 
 <ComponentPreview componentName="slider" fileName="example-with-label" />
 
@@ -84,12 +90,6 @@ Use an array with two values for a range slider.
 Use `orientation="vertical"` for a vertical slider.
 
 <ComponentPreview componentName="slider" fileName="example-vertical" />
-
-### Disabled
-
-Use the `disabled` prop to disable the slider.
-
-<ComponentPreview componentName="slider" fileName="example-disabled" />
 
 ### Min and max
 
@@ -113,22 +113,15 @@ Use with `showMarkers` and `markerLabels` to show custom labels on the markers.
 
 ### Large step
 
-Hold `Shift` or press `PageUp` / `PageDown` to move by `largeStep` (defaults to `10 * step`).
+Focus the thumb, then hold `Shift` + Arrow keys.
 
 <ComponentPreview componentName="slider" fileName="example-large-step" />
 
 ### Thumb collision
 
-On a range slider, `thumbCollisionBehavior` controls what happens when thumbs meet: `none`, `push`, or `swap`.
+Use `thumbCollisionBehavior` to control what happens when thumbs meet: `none`, `push`, or `swap`.
 
 <ComponentPreview componentName="slider" fileName="example-thumb-collision" />
-
-<Alert>
-  <InfoIcon />
-  <AlertDescription>
-    Marks are only supported for `horizontal` sliders.
-  </AlertDescription>
-</Alert>
 
 ## RTL
 

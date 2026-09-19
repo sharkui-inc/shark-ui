@@ -11,7 +11,7 @@ import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { FieldLabel } from "@/registry/react/components/field";
-import { inputItemVariants } from "@/registry/react/components/input";
+import { Input, inputItemVariants } from "@/registry/react/components/input";
 import {
   MenuShortcut,
   menuEmptyVariants,
@@ -21,6 +21,7 @@ import {
   menuItemIconVariants,
   menuItemIndicatorVariants,
 } from "@/registry/react/components/menu";
+import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const useListbox = useArkListbox;
 export const useListboxContext = useArkListboxContext;
@@ -57,39 +58,42 @@ export const ListboxLabel = (
   );
 };
 
+export const ListboxInput = (props: React.ComponentProps<typeof Input>) => (
+  <ArkListbox.Input asChild data-slot="listbox-input">
+    <Input {...props} />
+  </ArkListbox.Input>
+);
+
 export const ListboxContent = (
   props: React.ComponentProps<typeof ArkListbox.Content>
 ) => {
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ArkListbox.Content
       className={cn(
-        "flex min-h-0 w-full flex-col",
-        "overflow-y-auto",
+        "flex min-h-0 w-full min-w-0 flex-col",
+        "p-1.5",
+        "overflow-hidden",
         "outline-hidden",
         "data-[orientation=horizontal]:max-h-none data-[orientation=horizontal]:flex-row",
         className
       )}
       data-slot="listbox-content"
       {...rest}
-    />
-  );
-};
-
-export const ListboxBody = (props: React.ComponentProps<typeof ark.div>) => {
-  const { className, ...rest } = props;
-
-  return (
-    <ark.div
-      className={cn(
-        "flex min-w-0 flex-col",
-        "in-[[data-slot=listbox-content][data-orientation=horizontal]]:flex-row",
-        className
-      )}
-      data-slot="listbox-body"
-      {...rest}
-    />
+    >
+      <ScrollArea
+        className={cn(
+          "max-h-[inherit]",
+          "**:data-[slot=scroll-area-content]:flex **:data-[slot=scroll-area-content]:flex-col **:data-[slot=scroll-area-content]:gap-1",
+          "in-[[data-slot=listbox-content][data-orientation=horizontal]]:**:data-[slot=scroll-area-content]:flex-row"
+        )}
+        overscrollContain
+        scrollFade
+      >
+        {children}
+      </ScrollArea>
+    </ArkListbox.Content>
   );
 };
 
@@ -149,8 +153,8 @@ export const ListboxItem = (props: ListboxItemProps) => {
     <ArkListbox.Item
       className={cn(
         listboxItemVariants({ variant }),
-        showIndicator && "pe-8",
-        className
+        className,
+        showIndicator && "pe-8"
       )}
       data-slot="listbox-item"
       data-variant={variant}
@@ -266,14 +270,16 @@ export const ListboxItemIndicator = (
 export const ListboxEmpty = (
   props: React.ComponentProps<typeof ArkListbox.Empty>
 ) => {
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ArkListbox.Empty
       className={cn(menuEmptyVariants(), className)}
       data-slot="listbox-empty"
       {...rest}
-    />
+    >
+      {children ?? "No results found."}
+    </ArkListbox.Empty>
   );
 };
 

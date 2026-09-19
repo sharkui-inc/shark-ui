@@ -317,6 +317,7 @@ const actionItemsByValue = [
 const contextActions = actionItemsByValue.filter(
   (action) => action.group === "context"
 );
+
 const agentActions = actionItemsByValue.filter(
   (action) => action.group === "agent"
 );

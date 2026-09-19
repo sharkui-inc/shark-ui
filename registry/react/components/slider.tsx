@@ -5,7 +5,7 @@ import {
   useSlider as useArkSlider,
   useSliderContext as useArkSliderContext,
 } from "@ark-ui/react/slider";
-import React from "react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 import { FieldLabel } from "@/registry/react/components/field";
 
@@ -49,15 +49,12 @@ export const Slider = (props: SliderProps) => {
     ...rest
   } = props;
 
-  const _values = React.useMemo(() => {
-    if (Array.isArray(value)) {
-      return value;
-    }
-    if (Array.isArray(defaultValue)) {
-      return defaultValue;
-    }
-    return [min, max];
-  }, [value, defaultValue, min, max]);
+  let thumbCount = 1;
+  if (Array.isArray(value)) {
+    thumbCount = value.length;
+  } else if (Array.isArray(defaultValue)) {
+    thumbCount = defaultValue.length;
+  }
 
   return (
     <ArkSlider.Root
@@ -83,6 +80,8 @@ export const Slider = (props: SliderProps) => {
           "flex items-center",
           "touch-none select-none",
           "data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-40 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col",
+          "has-data-[slot=slider-marker]:data-[orientation=horizontal]:mb-5",
+          "has-data-[slot=slider-marker]:data-[orientation=vertical]:me-5",
           "data-disabled:pointer-events-none data-disabled:opacity-64"
         )}
         data-slot="slider-control"
@@ -110,7 +109,7 @@ export const Slider = (props: SliderProps) => {
           />
         </ArkSlider.Track>
 
-        {Array.from({ length: _values.length }, (_, index) => {
+        {Array.from({ length: thumbCount }, (_, index) => {
           const key = `slider-thumb-${index}`;
 
           return (
@@ -123,9 +122,10 @@ export const Slider = (props: SliderProps) => {
                 "bg-white",
                 "rounded-full border border-input shadow-xs/4",
                 "cursor-grab select-none",
-                "transition-[color,box-shadow,transform] duration-150 ease-out",
+                "origin-left data-[orientation=vertical]:origin-bottom rtl:origin-right",
+                "transition-[box-shadow,scale] duration-150 ease-out",
                 "focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
-                "origin-left data-[orientation=vertical]:origin-bottom data-dragging:scale-110 data-dragging:cursor-grabbing data-dragging:border-primary data-dragging:ring-[3px] data-dragging:ring-ring/32 rtl:origin-right",
+                "data-dragging:scale-105 data-dragging:cursor-grabbing",
                 "pointer-coarse:after:absolute pointer-coarse:after:h-full pointer-coarse:after:min-h-11",
                 "motion-reduce:transition-none"
               )}
@@ -138,46 +138,57 @@ export const Slider = (props: SliderProps) => {
             </ArkSlider.Thumb>
           );
         })}
+
+        {showMarkers ? (
+          <ArkSlider.MarkerGroup
+            className={cn(
+              "absolute!",
+              "font-medium text-muted-foreground text-xs",
+              "pointer-events-none",
+              "data-[orientation=horizontal]:inset-x-[calc(var(--slider-thumb-width)/-4)] data-[orientation=horizontal]:top-full data-[orientation=horizontal]:mt-2",
+              "data-[orientation=vertical]:inset-s-full data-[orientation=vertical]:inset-y-[calc(var(--slider-thumb-height)/-4)] data-[orientation=vertical]:ms-2"
+            )}
+            data-slot="slider-marker-group"
+          >
+            {Array.from({ length: max - min + 1 }, (_, index) => {
+              const markerValue = min + index;
+
+              return (
+                <ArkSlider.Marker
+                  className={cn(
+                    "group/marker",
+                    "flex items-center justify-center gap-2",
+                    "data-[orientation=horizontal]:w-0 data-[orientation=horizontal]:flex-col",
+                    "data-[orientation=vertical]:h-0 data-[orientation=vertical]:flex-row",
+                    "data-[state=at-value]:text-foreground data-[state=under-value]:text-foreground"
+                  )}
+                  data-interval={
+                    markerValue % markerInterval === 0 ? undefined : ""
+                  }
+                  data-slot="slider-marker"
+                  key={String(markerValue)}
+                  value={markerValue}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "bg-muted-foreground/64 group-data-[state=at-value]/marker:bg-foreground group-data-[state=under-value]/marker:bg-foreground",
+                      "group-data-[orientation=horizontal]/marker:h-1 group-data-[orientation=horizontal]/marker:w-px",
+                      "group-data-[orientation=vertical]/marker:h-px group-data-[orientation=vertical]/marker:w-1",
+                      "group-data-interval/marker:group-data-[orientation=horizontal]/marker:h-0.5",
+                      "group-data-interval/marker:group-data-[orientation=vertical]/marker:w-0.5"
+                    )}
+                  />
+
+                  <span className="group-data-interval/marker:opacity-0">
+                    {markerLabels?.[index] ?? markerValue}
+                  </span>
+                </ArkSlider.Marker>
+              );
+            })}
+          </ArkSlider.MarkerGroup>
+        ) : null}
       </ArkSlider.Control>
-
-      {showMarkers ? (
-        <ArkSlider.MarkerGroup
-          className={cn(
-            "w-full",
-            "flex items-center justify-between gap-1",
-            "mt-3 px-2.5",
-            "font-medium text-muted-foreground text-xs",
-            "data-[orientation=vertical]:hidden",
-            "pointer-events-none"
-          )}
-        >
-          {Array.from({ length: max + 1 }, (_, index) => (
-            <ArkSlider.Marker
-              className={cn(
-                "group/marker",
-                "flex w-0 flex-col items-center justify-center gap-2",
-                "data-[state=at-value]:text-foreground data-[state=under-value]:text-foreground"
-              )}
-              data-interval={index % markerInterval === 0 ? undefined : ""}
-              data-slot="slider-marker"
-              key={String(index)}
-              value={index}
-            >
-              <span
-                className={cn(
-                  "h-1 w-px",
-                  "bg-muted-foreground/64 group-data-[state=at-value]/marker:bg-foreground group-data-[state=under-value]/marker:bg-foreground",
-                  "group-data-interval/marker:h-0.5"
-                )}
-              />
-
-              <span className={cn("group-data-interval/marker:opacity-0")}>
-                {markerLabels?.[index] ?? index}
-              </span>
-            </ArkSlider.Marker>
-          ))}
-        </ArkSlider.MarkerGroup>
-      ) : null}
     </ArkSlider.Root>
   );
 };
@@ -201,7 +212,7 @@ export const SliderValue = (
     <FieldLabel asChild>
       <ArkSlider.ValueText
         className={cn("ms-auto tabular-nums", className)}
-        data-slot="progress-value"
+        data-slot="slider-value"
         {...rest}
       />
     </FieldLabel>

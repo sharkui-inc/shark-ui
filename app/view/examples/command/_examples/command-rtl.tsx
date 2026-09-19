@@ -21,7 +21,6 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/registry/react/components/command";
-import { LocaleProvider } from "@/registry/react/components/locale";
 
 const CommandRtl = () => {
   const { contains } = useFilter({ sensitivity: "base" });
@@ -32,38 +31,34 @@ const CommandRtl = () => {
   });
 
   return (
-    <div dir="rtl">
-      <LocaleProvider locale="ar-SA">
-        <Command
-          className="w-full max-w-md"
-          collection={collection}
-          onInputValueChange={({ inputValue }) => filter(inputValue)}
-        >
-          <CommandInput placeholder="اكتب أمرًا أو ابحث..." />
-          <CommandContent>
-            <CommandEmpty>لم يتم العثور على نتائج.</CommandEmpty>
-            <CommandList>
-              {collection.group().map(([group, items]) => (
-                <React.Fragment key={group}>
-                  <CommandGroup heading={group}>
-                    {items.map((item) => (
-                      <CommandItem item={item} key={item.value}>
-                        {item.icon}
-                        <span>{item.label}</span>
-                        {item.shortcut ? (
-                          <CommandShortcut>{item.shortcut}</CommandShortcut>
-                        ) : null}
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                  {group === "اقتراحات" && <CommandSeparator />}
-                </React.Fragment>
-              ))}
-            </CommandList>
-          </CommandContent>
-        </Command>
-      </LocaleProvider>
-    </div>
+    <Command
+      className="w-full max-w-md"
+      collection={collection}
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
+    >
+      <CommandInput placeholder="اكتب أمرًا أو ابحث..." />
+      <CommandContent>
+        <CommandEmpty>لم يتم العثور على نتائج.</CommandEmpty>
+        <CommandList>
+          {collection.group().map(([group, items]) => (
+            <React.Fragment key={group}>
+              <CommandGroup heading={group}>
+                {items.map((item) => (
+                  <CommandItem item={item} key={item.value}>
+                    {item.icon}
+                    <span>{item.label}</span>
+                    {item.shortcut ? (
+                      <CommandShortcut>{item.shortcut}</CommandShortcut>
+                    ) : null}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+              {group === "اقتراحات" && <CommandSeparator />}
+            </React.Fragment>
+          ))}
+        </CommandList>
+      </CommandContent>
+    </Command>
   );
 };
 

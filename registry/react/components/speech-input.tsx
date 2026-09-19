@@ -11,9 +11,10 @@ import {
   NativeSelectOption,
 } from "@/registry/react/components/native-select";
 
-const waveformBarCount = 48;
+const WAVE_FORMBAR_COUNT = 48;
+
 const waveformBarIds = Array.from(
-  { length: waveformBarCount },
+  { length: WAVE_FORMBAR_COUNT },
   (_, index) => `waveform-${index}`
 );
 
@@ -200,10 +201,10 @@ const getWaveformLevels = (analyser: AnalyserNode | null) => {
   analyser.getByteFrequencyData(samples);
 
   return waveformBarIds.map((id, index) => {
-    const start = Math.floor((index * samples.length) / waveformBarCount);
+    const start = Math.floor((index * samples.length) / WAVE_FORMBAR_COUNT);
     const end = Math.max(
       start + 1,
-      Math.floor(((index + 1) * samples.length) / waveformBarCount)
+      Math.floor(((index + 1) * samples.length) / WAVE_FORMBAR_COUNT)
     );
     let total = 0;
     for (let sampleIndex = start; sampleIndex < end; sampleIndex += 1) {

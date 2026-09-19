@@ -102,6 +102,7 @@ const Example = () => {
 };
 
 const PRICE_MIN = 200;
+
 const PRICE_MAX = 10_000;
 
 const formSchema = z.object({

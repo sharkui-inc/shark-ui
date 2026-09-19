@@ -14,16 +14,16 @@ import {
 const Example = () => (
   <Field className="w-full">
     <Listbox
-      className="mx-auto w-full max-w-5xl gap-5 px-4 sm:px-6 lg:px-8"
+      className="mx-auto w-full max-w-xs gap-5 px-4 sm:px-6"
       collection={collection}
       defaultValue={[collection.items[0].title]}
-      orientation="horizontal"
+      orientation="vertical"
     >
       <ListboxContent>
-        <div className="flex min-w-max gap-3 pb-2 sm:gap-4">
+        <div className="flex flex-col gap-3 sm:gap-4">
           {collection.items.map((item) => (
             <ListboxItem
-              className="group/album relative w-40 shrink-0 flex-col gap-3 rounded-2xl border border-transparent bg-transparent p-0 text-start transition-[border-color,box-shadow,transform] duration-150 ease-out sm:w-48"
+              className="group/album relative w-full flex-col gap-3 rounded-2xl border border-transparent bg-transparent p-0 text-start transition-[border-color,box-shadow,transform] duration-150 ease-out"
               item={item}
               key={item.title}
               showIndicator={false}

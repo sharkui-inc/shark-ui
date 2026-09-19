@@ -1,4 +1,8 @@
-import { Slider, SliderLabel } from "@/registry/react/components/slider";
+import {
+  Slider,
+  SliderLabel,
+  SliderValue,
+} from "@/registry/react/components/slider";
 
 const Example = () => (
   <Slider
@@ -7,7 +11,10 @@ const Example = () => (
     largeStep={20}
     step={1}
   >
-    <SliderLabel>Volume</SliderLabel>
+    <div className="flex items-center justify-between">
+      <SliderLabel>Volume</SliderLabel>
+      <SliderValue />
+    </div>
   </Slider>
 );
 

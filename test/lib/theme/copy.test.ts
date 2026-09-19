@@ -25,7 +25,9 @@ const byValue = <T extends { value: string }>(
 };
 
 const primary = byValue(PRIMARY_COLORS, "neutral");
+
 const base = byValue(BASE_COLORS, "neutral");
+
 const radius = byValue(BORDER_RADIUS, "md");
 
 describe("theme copy helpers", () => {

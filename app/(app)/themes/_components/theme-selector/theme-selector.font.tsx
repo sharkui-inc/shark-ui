@@ -16,7 +16,6 @@ import { Button } from "@/registry/react/components/button";
 import { Field } from "@/registry/react/components/field";
 import {
   Listbox,
-  ListboxBody,
   ListboxContent,
   ListboxItem,
   ListboxItemText,
@@ -156,16 +155,14 @@ export const ThemeSelectorFont = ({ slot }: { slot: ThemeFontSlot }) => {
             selectOnHighlight
             value={[value]}
           >
-            <ListboxContent
-              className="max-h-80 p-(--space) pt-1"
-              data-theme-font-listbox={slot}
-            >
-              <ListboxBody className="grid grid-cols-[repeat(var(--column-count),1fr)] gap-3">
+            <ListboxContent className="max-h-80" data-theme-font-listbox={slot}>
+              <div className="grid grid-cols-[repeat(var(--column-count),1fr)] gap-3 p-(--space) pt-1">
                 {collection.items.map((item) => (
                   <ListboxItem
                     className="relative flex flex-col items-center justify-center gap-2 rounded-2xl border px-2 py-3 text-center hover:border-primary/64 hover:bg-transparent data-[state=checked]:border-primary data-highlighted:border-primary/64 data-[state=checked]:bg-transparent data-highlighted:bg-transparent data-[state=checked]:text-foreground"
                     item={item}
                     key={item.value}
+                    showIndicator={false}
                     style={{ fontFamily: item.family }}
                   >
                     <ListboxItemText className="flex-none font-medium text-xl">
@@ -176,7 +173,7 @@ export const ThemeSelectorFont = ({ slot }: { slot: ThemeFontSlot }) => {
                     </span>
                   </ListboxItem>
                 ))}
-              </ListboxBody>
+              </div>
             </ListboxContent>
           </Listbox>
         </PopoverContent>

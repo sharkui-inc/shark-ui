@@ -31,7 +31,6 @@ import React from "react";
 import { Button } from "@/registry/react/components/button";
 import { Checkbox } from "@/registry/react/components/checkbox";
 import { Input } from "@/registry/react/components/input";
-import { LocaleProvider } from "@/registry/react/components/locale";
 import {
   Menu,
   MenuCheckboxItem,
@@ -104,111 +103,105 @@ const DataTableRtl = () => {
   const emailFilterValue = table.getColumn("email")?.getFilterValue();
 
   return (
-    <div dir="rtl">
-      <LocaleProvider locale="ar-SA">
-        <div className="w-full">
-          <div className="flex items-center gap-2 py-4">
-            <Input
-              className="max-w-sm"
-              onChange={(event) => {
-                table.getColumn("email")?.setFilterValue(event.target.value);
-              }}
-              placeholder={t.filterEmails}
-              value={
-                typeof emailFilterValue === "string" ? emailFilterValue : ""
-              }
-            />
-            <Menu>
-              <MenuTrigger asChild>
-                <Button className="ms-auto" variant="outline">
-                  {t.columns}
-                  <ChevronDownIcon
-                    aria-hidden="true"
-                    className="size-4"
-                    data-icon="inline-end"
-                  />
-                </Button>
-              </MenuTrigger>
-              <MenuContent>
-                <MenuGroup>
-                  {table
-                    .getAllColumns()
-                    .filter((column) => column.getCanHide())
-                    .map((column) => (
-                      <ColumnVisibilityItem column={column} key={column.id} />
-                    ))}
-                </MenuGroup>
-              </MenuContent>
-            </Menu>
-          </div>
-          <div className="overflow-hidden rounded-md border">
-            <Table>
-              <TableHeader>
-                {table.getHeaderGroups().map((headerGroup) => (
-                  <TableRow key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => (
-                      <TableHead key={header.id}>
-                        {header.isPlaceholder ? null : (
-                          <table.FlexRender header={header} />
-                        )}
-                      </TableHead>
-                    ))}
-                  </TableRow>
+    <div className="w-full">
+      <div className="flex items-center gap-2 py-4">
+        <Input
+          className="max-w-sm"
+          onChange={(event) => {
+            table.getColumn("email")?.setFilterValue(event.target.value);
+          }}
+          placeholder={t.filterEmails}
+          value={typeof emailFilterValue === "string" ? emailFilterValue : ""}
+        />
+        <Menu>
+          <MenuTrigger asChild>
+            <Button className="ms-auto" variant="outline">
+              {t.columns}
+              <ChevronDownIcon
+                aria-hidden="true"
+                className="size-4"
+                data-icon="inline-end"
+              />
+            </Button>
+          </MenuTrigger>
+          <MenuContent>
+            <MenuGroup>
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => (
+                  <ColumnVisibilityItem column={column} key={column.id} />
                 ))}
-              </TableHeader>
-              <TableBody>
-                {table.getRowModel().rows?.length ? (
-                  table.getRowModel().rows.map((row) => (
-                    <TableRow
-                      data-state={row.getIsSelected() ? "selected" : undefined}
-                      key={row.id}
-                    >
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id}>
-                          <table.FlexRender cell={cell} />
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell
-                      className="h-24 text-center"
-                      colSpan={columns.length}
-                    >
-                      {t.noResults}
+            </MenuGroup>
+          </MenuContent>
+        </Menu>
+      </div>
+      <div className="overflow-hidden rounded-md border">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder ? null : (
+                      <table.FlexRender header={header} />
+                    )}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  data-state={row.getIsSelected() ? "selected" : undefined}
+                  key={row.id}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      <table.FlexRender cell={cell} />
                     </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </div>
-          <div className="flex items-center justify-end gap-2 py-4">
-            <div className="flex-1 text-muted-foreground text-sm">
-              {table.getFilteredSelectedRowModel().rows.length} {t.of}{" "}
-              {table.getFilteredRowModel().rows.length} {t.rowsSelected}
-            </div>
-            <div className="flex gap-2">
-              <Button
-                disabled={!table.getCanPreviousPage()}
-                onClick={() => table.previousPage()}
-                size="sm"
-                variant="outline"
-              >
-                {t.previous}
-              </Button>
-              <Button
-                disabled={!table.getCanNextPage()}
-                onClick={() => table.nextPage()}
-                size="sm"
-                variant="outline"
-              >
-                {t.next}
-              </Button>
-            </div>
-          </div>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  className="h-24 text-center"
+                  colSpan={columns.length}
+                >
+                  {t.noResults}
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <div className="flex items-center justify-end gap-2 py-4">
+        <div className="flex-1 text-muted-foreground text-sm">
+          {table.getFilteredSelectedRowModel().rows.length} {t.of}{" "}
+          {table.getFilteredRowModel().rows.length} {t.rowsSelected}
         </div>
-      </LocaleProvider>
+        <div className="flex gap-2">
+          <Button
+            disabled={!table.getCanPreviousPage()}
+            onClick={() => table.previousPage()}
+            size="sm"
+            variant="outline"
+          >
+            {t.previous}
+          </Button>
+          <Button
+            disabled={!table.getCanNextPage()}
+            onClick={() => table.nextPage()}
+            size="sm"
+            variant="outline"
+          >
+            {t.next}
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

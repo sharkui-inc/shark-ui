@@ -135,7 +135,7 @@ export const dialogContentVariants = tv({
     "scale-[calc(1-0.1*var(--nested-layer-count))] opacity-[calc(1-0.1*var(--nested-layer-count))]",
     "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
     "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
-    "motion-reduce:data-[state=closed]:zoom-out-100 motion-reduce:data-[state=open]:zoom-in-100 motion-reduce:transition-none",
+    "motion-reduce:animate-none motion-reduce:transition-none",
   ],
   defaultVariants: {
     size: "md",
@@ -250,6 +250,7 @@ export const DialogBody = (props: DialogBodyProps) => {
     <ScrollArea
       className="min-w-0 flex-1"
       orientation="vertical"
+      overscrollContain
       scrollFade={scrollFade}
     >
       <ark.div

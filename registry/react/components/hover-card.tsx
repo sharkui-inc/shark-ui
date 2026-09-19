@@ -80,7 +80,7 @@ export const HoverCardContent = (props: HoverCardContentProps) => {
             "data-[placement=left]:slide-in-from-end-2",
             "data-[placement=right]:slide-in-from-start-2",
             "data-[placement=top]:slide-in-from-bottom-2",
-            "motion-reduce:data-[state=closed]:zoom-out-100 motion-reduce:data-[state=open]:zoom-in-100",
+            "motion-reduce:animate-none",
             className
           )}
           data-slot="hover-card-content"

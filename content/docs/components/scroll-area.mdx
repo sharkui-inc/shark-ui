@@ -89,9 +89,7 @@ Use `scrollFade` to fade edges on overflowing axes, only toward the scrollable s
 
 ### Scrollbar Gutter
 
-Use `scrollbarGutter` to reserve padding so the overlay scrollbar does not cover content.
-
-<ComponentPreview componentName="scroll-area" fileName="example-scrollbar-gutter" />
+Use `scrollbarGutter` to always reserve the scrollbar track space and prevent layout shifts when content starts to overflow.
 
 ### Hide Thumb
 
@@ -119,9 +117,12 @@ Custom-styled scrollable region. Hides native scrollbars; preserves scroll behav
 
 | Prop | Type | Default |
 | --- | --- | --- | 
-| scrollFade | `boolean` | `false` | 
-| scrollbarGutter | `boolean` | `false` | 
-| orientation | `"both" \| "horizontal" \| "vertical"` | `"both"` |
+| `scrollFade` | `boolean` | `false` |
+| `scrollbarGutter` | `boolean` | `false` |
+| `fill` | `boolean` | `false` |
+| `clampContentMinWidth` | `boolean` | `true` |
+| `overscrollContain` | `boolean` | `false` |
+| `orientation` | `"both" \| "horizontal" \| "vertical"` | `"both"` |
 
 | Prop | Type | Default |
 | --- | --- | --- |

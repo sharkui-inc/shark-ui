@@ -72,6 +72,7 @@ const ChatThread = ({ onReset }: { onReset: () => void }) => {
       chat,
       initialMessageCount: 0,
     });
+
   const isBusy = status === "submitted" || status === "streaming";
   const nextText = nextMessage?.content ?? "";
   const latestText = messages.at(-1)?.content ?? "";
@@ -250,6 +251,7 @@ const promptActions = [
 ];
 
 const PARAGRAPH_BREAK = /\n\n+/;
+
 const INLINE_CODE = /(`[^`]+`)/g;
 
 const MessageText = ({ text }: { text: string }) => {

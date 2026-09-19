@@ -20,11 +20,60 @@ import {
   FieldLabel,
   FieldTitle,
 } from "@/registry/react/components/field";
-import { LocaleProvider } from "@/registry/react/components/locale";
 import {
   RadioGroup,
   RadioGroupItem,
 } from "@/registry/react/components/radio-group";
+
+const DrawerRtl = () => {
+  const [deliveryTime, setDeliveryTime] = React.useState("asap");
+
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="secondary">فتح الدرج</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>اختر وقت التوصيل</DrawerTitle>
+          <DrawerDescription>سنجهز طلبك في أقرب وقت ممكن.</DrawerDescription>
+        </DrawerHeader>
+        <div className="flex-1 overflow-y-auto p-4">
+          <RadioGroup
+            className="gap-2"
+            onValueChange={({ value }) => setDeliveryTime(value ?? "")}
+            value={deliveryTime}
+          >
+            {deliveryTimes.map((time) => (
+              <FieldLabel htmlFor={time.id} key={time.value}>
+                <Field orientation="horizontal">
+                  <FieldContent>
+                    <FieldTitle className="flex items-center gap-2">
+                      {time.label}
+                      {time.badge ? (
+                        <Badge variant="secondary">{time.badge}</Badge>
+                      ) : null}
+                    </FieldTitle>
+                    <FieldDescription>{time.description}</FieldDescription>
+                  </FieldContent>
+                  <RadioGroupItem id={time.id} value={time.value} />
+                </Field>
+              </FieldLabel>
+            ))}
+          </RadioGroup>
+        </div>
+        <DrawerFooter>
+          <DrawerClose asChild>
+            <Button>تأكيد وقت التوصيل</Button>
+          </DrawerClose>
+          <DrawerClose asChild>
+            <Button variant="outline">إلغاء</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+};
 
 const deliveryTimes = [
   {
@@ -59,70 +108,5 @@ const deliveryTimes = [
     value: "6-30",
   },
 ];
-
-const DrawerRtl = () => {
-  const [open, setOpen] = React.useState(false);
-  const [deliveryTime, setDeliveryTime] = React.useState("asap");
-
-  return (
-    <div className="flex w-full justify-center" dir="rtl">
-      <LocaleProvider locale="ar-SA">
-        <Drawer
-          onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)}
-          open={open}
-        >
-          <DrawerTrigger asChild>
-            <Button variant="secondary">فتح الدرج</Button>
-          </DrawerTrigger>
-          <DrawerContent dir="rtl">
-            <DrawerHeader>
-              <DrawerTitle>اختر وقت التوصيل</DrawerTitle>
-              <DrawerDescription>
-                سنجهز طلبك في أقرب وقت ممكن.
-              </DrawerDescription>
-            </DrawerHeader>
-            <div className="flex-1 overflow-y-auto p-4">
-              <RadioGroup
-                className="gap-2"
-                dir="rtl"
-                onValueChange={({ value }) => setDeliveryTime(value ?? "")}
-                value={deliveryTime}
-              >
-                {deliveryTimes.map((time) => (
-                  <FieldLabel htmlFor={time.id} key={time.value}>
-                    <Field orientation="horizontal">
-                      <FieldContent>
-                        <FieldTitle className="flex items-center gap-2">
-                          {time.label}
-                          {time.badge ? (
-                            <Badge variant="secondary">{time.badge}</Badge>
-                          ) : null}
-                        </FieldTitle>
-                        <FieldDescription dir="rtl">
-                          {time.description}
-                        </FieldDescription>
-                      </FieldContent>
-                      <RadioGroupItem
-                        dir="rtl"
-                        id={time.id}
-                        value={time.value}
-                      />
-                    </Field>
-                  </FieldLabel>
-                ))}
-              </RadioGroup>
-            </div>
-            <DrawerFooter>
-              <Button onClick={() => setOpen(false)}>تأكيد وقت التوصيل</Button>
-              <DrawerClose asChild>
-                <Button variant="outline">إلغاء</Button>
-              </DrawerClose>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
-      </LocaleProvider>
-    </div>
-  );
-};
 
 export default DrawerRtl;

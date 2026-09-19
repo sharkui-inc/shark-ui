@@ -13,7 +13,6 @@ import {
   FieldSet,
 } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
-import { LocaleProvider } from "@/registry/react/components/locale";
 import {
   Select,
   SelectContent,
@@ -23,6 +22,129 @@ import {
   SelectValue,
 } from "@/registry/react/components/select";
 import { Textarea } from "@/registry/react/components/textarea";
+
+const FieldRtl = () => (
+  <div className="w-full max-w-md py-6">
+    <form>
+      <FieldGroup>
+        <FieldSet>
+          <FieldLegend>طريقة الدفع</FieldLegend>
+          <FieldDescription>جميع المعاملات آمنة ومشفرة</FieldDescription>
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="checkout-7j9-card-name-43j-rtl">
+                الاسم على البطاقة
+              </FieldLabel>
+              <Input
+                id="checkout-7j9-card-name-43j-rtl"
+                placeholder="Evil Rabbit"
+                required
+              />
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="checkout-7j9-card-number-uw1-rtl">
+                رقم البطاقة
+              </FieldLabel>
+              <Input
+                id="checkout-7j9-card-number-uw1-rtl"
+                placeholder="1234 5678 9012 3456"
+                required
+              />
+              <FieldDescription>
+                أدخل رقم البطاقة المكون من 16 رقمًا
+              </FieldDescription>
+            </Field>
+            <div className="grid grid-cols-3 gap-4">
+              <Field>
+                <FieldLabel htmlFor="checkout-exp-month-ts6-rtl">
+                  الشهر
+                </FieldLabel>
+                <Select collection={monthCollection}>
+                  <SelectTrigger id="checkout-exp-month-ts6-rtl">
+                    <SelectValue placeholder="ش.ش" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {monthCollection.items.map((item) => (
+                        <SelectItem item={item} key={item.value}>
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="checkout-7j9-exp-year-f59-rtl">
+                  السنة
+                </FieldLabel>
+                <Select collection={yearCollection}>
+                  <SelectTrigger id="checkout-7j9-exp-year-f59-rtl">
+                    <SelectValue placeholder="YYYY" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {yearCollection.items.map((item) => (
+                        <SelectItem item={item} key={item.value}>
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="checkout-7j9-cvv-rtl">CVV</FieldLabel>
+                <Input id="checkout-7j9-cvv-rtl" placeholder="123" required />
+              </Field>
+            </div>
+          </FieldGroup>
+        </FieldSet>
+        <FieldSeparator />
+        <FieldSet>
+          <FieldLegend>عنوان الفوترة</FieldLegend>
+          <FieldDescription>
+            عنوان الفوترة المرتبط بطريقة الدفع الخاصة بك
+          </FieldDescription>
+          <FieldGroup>
+            <Field orientation="horizontal">
+              <Checkbox
+                defaultChecked
+                id="checkout-7j9-same-as-shipping-wgm-rtl"
+              />
+              <FieldLabel
+                className="font-normal"
+                htmlFor="checkout-7j9-same-as-shipping-wgm-rtl"
+              >
+                نفس عنوان الشحن
+              </FieldLabel>
+            </Field>
+          </FieldGroup>
+        </FieldSet>
+        <FieldSet>
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="checkout-7j9-optional-comments-rtl">
+                تعليقات
+              </FieldLabel>
+              <Textarea
+                className="resize-none"
+                id="checkout-7j9-optional-comments-rtl"
+                placeholder="أضف أي تعليقات إضافية"
+              />
+            </Field>
+          </FieldGroup>
+        </FieldSet>
+        <Field orientation="horizontal">
+          <Button type="submit">إرسال</Button>
+          <Button type="button" variant="outline">
+            إلغاء
+          </Button>
+        </Field>
+      </FieldGroup>
+    </form>
+  </div>
+);
 
 const monthCollection = createListCollection({
   items: [
@@ -51,130 +173,5 @@ const yearCollection = createListCollection({
     { label: "2029", value: "2029" },
   ],
 });
-
-const FieldRtl = () => (
-  <div className="w-full max-w-md py-6" dir="rtl">
-    <LocaleProvider locale="ar-SA">
-      <form>
-        <FieldGroup>
-          <FieldSet>
-            <FieldLegend>طريقة الدفع</FieldLegend>
-            <FieldDescription>جميع المعاملات آمنة ومشفرة</FieldDescription>
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="checkout-7j9-card-name-43j-rtl">
-                  الاسم على البطاقة
-                </FieldLabel>
-                <Input
-                  id="checkout-7j9-card-name-43j-rtl"
-                  placeholder="Evil Rabbit"
-                  required
-                />
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="checkout-7j9-card-number-uw1-rtl">
-                  رقم البطاقة
-                </FieldLabel>
-                <Input
-                  id="checkout-7j9-card-number-uw1-rtl"
-                  placeholder="1234 5678 9012 3456"
-                  required
-                />
-                <FieldDescription>
-                  أدخل رقم البطاقة المكون من 16 رقمًا
-                </FieldDescription>
-              </Field>
-              <div className="grid grid-cols-3 gap-4">
-                <Field>
-                  <FieldLabel htmlFor="checkout-exp-month-ts6-rtl">
-                    الشهر
-                  </FieldLabel>
-                  <Select collection={monthCollection}>
-                    <SelectTrigger id="checkout-exp-month-ts6-rtl">
-                      <SelectValue placeholder="ش.ش" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        {monthCollection.items.map((item) => (
-                          <SelectItem item={item} key={item.value}>
-                            {item.label}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="checkout-7j9-exp-year-f59-rtl">
-                    السنة
-                  </FieldLabel>
-                  <Select collection={yearCollection}>
-                    <SelectTrigger id="checkout-7j9-exp-year-f59-rtl">
-                      <SelectValue placeholder="YYYY" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        {yearCollection.items.map((item) => (
-                          <SelectItem item={item} key={item.value}>
-                            {item.label}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="checkout-7j9-cvv-rtl">CVV</FieldLabel>
-                  <Input id="checkout-7j9-cvv-rtl" placeholder="123" required />
-                </Field>
-              </div>
-            </FieldGroup>
-          </FieldSet>
-          <FieldSeparator />
-          <FieldSet>
-            <FieldLegend>عنوان الفوترة</FieldLegend>
-            <FieldDescription>
-              عنوان الفوترة المرتبط بطريقة الدفع الخاصة بك
-            </FieldDescription>
-            <FieldGroup>
-              <Field orientation="horizontal">
-                <Checkbox
-                  defaultChecked
-                  id="checkout-7j9-same-as-shipping-wgm-rtl"
-                />
-                <FieldLabel
-                  className="font-normal"
-                  htmlFor="checkout-7j9-same-as-shipping-wgm-rtl"
-                >
-                  نفس عنوان الشحن
-                </FieldLabel>
-              </Field>
-            </FieldGroup>
-          </FieldSet>
-          <FieldSet>
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="checkout-7j9-optional-comments-rtl">
-                  تعليقات
-                </FieldLabel>
-                <Textarea
-                  className="resize-none"
-                  id="checkout-7j9-optional-comments-rtl"
-                  placeholder="أضف أي تعليقات إضافية"
-                />
-              </Field>
-            </FieldGroup>
-          </FieldSet>
-          <Field orientation="horizontal">
-            <Button type="submit">إرسال</Button>
-            <Button type="button" variant="outline">
-              إلغاء
-            </Button>
-          </Field>
-        </FieldGroup>
-      </form>
-    </LocaleProvider>
-  </div>
-);
 
 export default FieldRtl;

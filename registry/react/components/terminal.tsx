@@ -164,7 +164,7 @@ export const TerminalContent = (props: TerminalContentProps) => {
       data-slot="terminal-content"
       {...rest}
     >
-      <ScrollArea className="flex-1" dir="ltr">
+      <ScrollArea className="flex-1" dir="ltr" overscrollContain>
         <TerminalFollow />
         <pre
           className="w-max min-w-full p-3 font-mono text-[0.8125rem] leading-6"
@@ -183,6 +183,7 @@ export const TerminalContent = (props: TerminalContentProps) => {
 };
 
 const ESC = String.fromCharCode(27);
+
 const ANSI_RE = new RegExp(`${ESC}\\[([0-9;]*)m`, "g");
 
 const ANSI_CLASS: Record<string, string> = {

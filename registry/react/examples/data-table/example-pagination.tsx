@@ -170,6 +170,7 @@ const locations = [
   "Dock",
   "Overflow",
 ] as const;
+
 const statuses: InventoryItem["status"][] = ["in-stock", "low", "backorder"];
 
 const data: InventoryItem[] = Array.from({ length: 24 }, (_, index) => {

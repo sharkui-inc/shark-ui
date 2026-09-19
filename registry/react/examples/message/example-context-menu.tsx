@@ -112,23 +112,26 @@ const EmojiPicker = (props: {
       onValueChange={(details) => onValueChange(details.value)}
       value={value}
     >
-      <ListboxContent
-        className="grid grid-cols-[repeat(var(--column-count),1fr)] gap-1"
-        style={
-          { "--column-count": collection.columnCount } as React.CSSProperties
-        }
-      >
-        {collection.items.map((item) => (
-          <ListboxItem
-            className="size-8 justify-center p-0 data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
-            item={item}
-            key={item.value}
-          >
-            <ListboxItemText className="flex-none text-center text-lg">
-              {item.label}
-            </ListboxItemText>
-          </ListboxItem>
-        ))}
+      <ListboxContent>
+        <div
+          className="grid grid-cols-[repeat(var(--column-count),1fr)] gap-1"
+          style={
+            { "--column-count": collection.columnCount } as React.CSSProperties
+          }
+        >
+          {collection.items.map((item) => (
+            <ListboxItem
+              className="size-8 justify-center p-0 data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
+              item={item}
+              key={item.value}
+              showIndicator={false}
+            >
+              <ListboxItemText className="flex-none text-center text-lg">
+                {item.label}
+              </ListboxItemText>
+            </ListboxItem>
+          ))}
+        </div>
       </ListboxContent>
     </Listbox>
   );

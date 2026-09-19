@@ -42,7 +42,6 @@ import { FileThumbnailThumb } from "@/components/thumbs/file-thumbnail";
 import { FileUploadThumb } from "@/components/thumbs/file-upload";
 import { FloatThumb } from "@/components/thumbs/float";
 import { FloatingPanelThumb } from "@/components/thumbs/floating-panel";
-import { FrameThumb } from "@/components/thumbs/frame";
 import { HoverCardThumb } from "@/components/thumbs/hover-card";
 import { ImageCropperThumb } from "@/components/thumbs/image-cropper";
 import { InputThumb } from "@/components/thumbs/input";
@@ -156,7 +155,6 @@ const THUMB_MAP: Record<string, React.ComponentType<ThumbCardProps>> = {
   "file-upload": FileUploadThumb,
   float: FloatThumb,
   "floating-panel": FloatingPanelThumb,
-  frame: FrameThumb,
   "hover-card": HoverCardThumb,
   "image-cropper": ImageCropperThumb,
   input: InputThumb,

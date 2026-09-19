@@ -9,7 +9,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/registry/react/components/chart";
-import { LocaleProvider } from "@/registry/react/components/locale";
 
 const chartData = [
   { desktop: 186, mobile: 80, month: "january" },
@@ -44,43 +43,37 @@ const ChartRtl = () => {
   } satisfies ChartConfig;
 
   return (
-    <div dir="rtl">
-      <LocaleProvider locale="ar-SA">
-        <ChartContainer
-          className="min-h-[200px] w-full max-w-sm"
-          config={chartConfig}
-        >
-          <BarChart accessibilityLayer data={chartData}>
-            <CartesianGrid orientation="right" vertical={false} />
-            <XAxis
-              axisLine={false}
-              dataKey="month"
-              reversed
-              tickFormatter={(value) =>
-                (
-                  translations[value as keyof typeof translations] as string
-                ).slice(0, 3)
-              }
-              tickLine={false}
-              tickMargin={10}
-            />
-            <ChartTooltip
-              content={
-                <ChartTooltipContent
-                  labelClassName="w-32"
-                  labelFormatter={(value) =>
-                    translations[value as keyof typeof translations] as string
-                  }
-                />
+    <ChartContainer className="min-h-48 w-full max-w-sm" config={chartConfig}>
+      <BarChart accessibilityLayer data={chartData}>
+        <CartesianGrid orientation="right" vertical={false} />
+        <XAxis
+          axisLine={false}
+          dataKey="month"
+          reversed
+          tickFormatter={(value) =>
+            (translations[value as keyof typeof translations] as string).slice(
+              0,
+              3
+            )
+          }
+          tickLine={false}
+          tickMargin={10}
+        />
+        <ChartTooltip
+          content={
+            <ChartTooltipContent
+              labelClassName="w-32"
+              labelFormatter={(value) =>
+                translations[value as keyof typeof translations] as string
               }
             />
-            <ChartLegend content={<ChartLegendContent />} />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-            <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
-          </BarChart>
-        </ChartContainer>
-      </LocaleProvider>
-    </div>
+          }
+        />
+        <ChartLegend content={<ChartLegendContent />} />
+        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
+        <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+      </BarChart>
+    </ChartContainer>
   );
 };
 

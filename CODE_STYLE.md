@@ -30,7 +30,7 @@ Conflict order: explicit user or system instructions → `biome.json` → this f
 - Motion local via Tailwind + `tw-animate-css`. Press `duration-[120ms] ease-out`; controls/anchored overlays `duration-150 ease-out`; dialogs/sheets `duration-200 ease-out`; Ark geometry exception `duration-150 ease-in-out`. No duration/easing/animation/keyframe tokens in `styles/globals.css` (compose in the owning component). Marquee / indeterminate-progress keyframes are technical only.
 - Drawer exception: local transitions over `--drawer-translate-x/y`, `--drawer-swipe-progress`, `--drawer-swipe-strength`. Panel `duration-300 ease-out` (no fade); backdrop `duration-[450ms] ease-out` fade. Disable transitions while swiping; strength-derived close duration on both. No Drawer CSS outside `drawer.tsx`.
 - Ark-positioned overlays: `origin-(--transform-origin)`, 98% scale, fade, placement-aware travel, local overlay classes. Centered dialogs / coordinate-positioned panels: `origin-center`. Ban `scale(0)`, `ease-in`, `ease-linear`, `transition-all`, arbitrary easing — except Sidebar shadcn geometry (`duration-200 ease-linear` for width/inset/margin/opacity).
-- Reduced motion: short fade only (no travel/scale/rotation/blur). Gate hover transforms with `(hover: hover)` and `(pointer: fine)`.
+- Reduced motion on overlays: disable all enter/exit animation and motion transitions (`motion-reduce:animate-none`; add `motion-reduce:transition-none` when the overlay also uses CSS `transition-*`). Non-overlay continuous motion (spinners, skeleton, indeterminate progress) keeps `motion-reduce:animate-none` as today. Gate hover transforms with `(hover: hover)` and `(pointer: fine)`.
 
 ### Class lists
 
@@ -70,7 +70,7 @@ className={cn(
   "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
   "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
   "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
-  "motion-reduce:transition-none",
+  "motion-reduce:animate-none motion-reduce:transition-none",
   className
 )}
 ```

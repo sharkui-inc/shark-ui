@@ -4,9 +4,48 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/registry/react/components/hover-card";
-import { LocaleProvider } from "@/registry/react/components/locale";
+
+const HoverCardRtl = () => (
+  <div className="grid gap-4">
+    <div className="flex flex-wrap justify-center gap-2">
+      {physicalSides.map((side) => (
+        <HoverCard key={side} positioning={{ placement: side }}>
+          <HoverCardTrigger asChild>
+            <Button variant="outline">{translations[side]}</Button>
+          </HoverCardTrigger>
+          <HoverCardContent className="flex w-64 flex-col gap-1">
+            <div className="font-semibold">{translations.name}</div>
+            <div className="text-muted-foreground text-sm">
+              {translations.price}
+            </div>
+          </HoverCardContent>
+        </HoverCard>
+      ))}
+    </div>
+
+    <div className="flex flex-wrap justify-center gap-2">
+      {logicalSides.map((side) => (
+        <HoverCard
+          key={side}
+          positioning={{ placement: logicalPlacement[side] }}
+        >
+          <HoverCardTrigger asChild>
+            <Button variant="outline">{translations[side]}</Button>
+          </HoverCardTrigger>
+          <HoverCardContent className="flex w-64 flex-col gap-1">
+            <div className="font-semibold">{translations.name}</div>
+            <div className="text-muted-foreground text-sm">
+              {translations.price}
+            </div>
+          </HoverCardContent>
+        </HoverCard>
+      ))}
+    </div>
+  </div>
+);
 
 const physicalSides = ["left", "top", "bottom", "right"] as const;
+
 const logicalSides = ["inline-start", "inline-end"] as const;
 
 const translations = {
@@ -24,48 +63,5 @@ const logicalPlacement: Record<string, "left" | "right"> = {
   "inline-end": "left",
   "inline-start": "right",
 };
-
-const HoverCardRtl = () => (
-  <div dir="rtl">
-    <LocaleProvider locale="ar-SA">
-      <div className="grid gap-4">
-        <div className="flex flex-wrap justify-center gap-2">
-          {physicalSides.map((side) => (
-            <HoverCard key={side} positioning={{ placement: side }}>
-              <HoverCardTrigger asChild>
-                <Button variant="outline">{translations[side]}</Button>
-              </HoverCardTrigger>
-              <HoverCardContent className="flex w-64 flex-col gap-1">
-                <div className="font-semibold">{translations.name}</div>
-                <div className="text-muted-foreground text-sm">
-                  {translations.price}
-                </div>
-              </HoverCardContent>
-            </HoverCard>
-          ))}
-        </div>
-
-        <div className="flex flex-wrap justify-center gap-2">
-          {logicalSides.map((side) => (
-            <HoverCard
-              key={side}
-              positioning={{ placement: logicalPlacement[side] }}
-            >
-              <HoverCardTrigger asChild>
-                <Button variant="outline">{translations[side]}</Button>
-              </HoverCardTrigger>
-              <HoverCardContent className="flex w-64 flex-col gap-1">
-                <div className="font-semibold">{translations.name}</div>
-                <div className="text-muted-foreground text-sm">
-                  {translations.price}
-                </div>
-              </HoverCardContent>
-            </HoverCard>
-          ))}
-        </div>
-      </div>
-    </LocaleProvider>
-  </div>
-);
 
 export default HoverCardRtl;

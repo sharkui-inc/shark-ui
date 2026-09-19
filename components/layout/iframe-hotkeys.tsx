@@ -1,9 +1,12 @@
 "use client";
 
 import React from "react";
+import {
+  type Platform,
+  usePlatform,
+} from "@/registry/react/components/hotkeys";
 
 const MESSAGE_TYPE = "shark-ui:hotkey";
-const MAC_PLATFORM_REGEX = /Mac|iPhone|iPad|iPod/;
 
 interface ForwardedHotkey {
   altKey: boolean;
@@ -39,7 +42,7 @@ const isForwardedHotkey = (value: unknown): value is ForwardedHotkey => {
   );
 };
 
-const isForwardedShortcut = (event: KeyboardEvent) => {
+const isForwardedShortcut = (event: KeyboardEvent, platform: Platform) => {
   const key = event.key.toLowerCase();
   const hasNoModifiers = !(
     event.altKey ||
@@ -52,10 +55,10 @@ const isForwardedShortcut = (event: KeyboardEvent) => {
     return ["c", "d", "r", "t", "/"].includes(key);
   }
 
-  const isMac = MAC_PLATFORM_REGEX.test(navigator.userAgent);
-  const hasPlatformModifier = isMac
-    ? event.metaKey && !event.ctrlKey
-    : event.ctrlKey && !event.metaKey;
+  const hasPlatformModifier =
+    platform === "mac"
+      ? event.metaKey && !event.ctrlKey
+      : event.ctrlKey && !event.metaKey;
 
   return (
     hasPlatformModifier &&
@@ -71,6 +74,8 @@ const isCurrentIframe = (source: MessageEventSource | null) =>
   );
 
 export const IframeHotkeys = () => {
+  const platform = usePlatform();
+
   React.useEffect(() => {
     if (window.parent === window) {
       const handleMessage = (event: MessageEvent) => {
@@ -108,7 +113,7 @@ export const IframeHotkeys = () => {
         event.key === "Dead" ||
         event.keyCode === 229 ||
         isEditableTarget(event.target) ||
-        !isForwardedShortcut(event)
+        !isForwardedShortcut(event, platform)
       ) {
         return;
       }
@@ -131,7 +136,7 @@ export const IframeHotkeys = () => {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [platform]);
 
   return null;
 };

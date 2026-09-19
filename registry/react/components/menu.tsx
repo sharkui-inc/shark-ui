@@ -12,6 +12,7 @@ import { CheckIcon, ChevronRight } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const useMenu = useArkMenu;
 export const useMenuContext = useArkMenuContext;
@@ -57,10 +58,6 @@ export const MenuPositioner = (
   );
 };
 
-export const menuListVariants = tv({
-  base: "p-1",
-});
-
 export const menuItemControlVariants = tv({
   base: [
     "relative flex min-h-8 w-full items-center gap-2",
@@ -105,23 +102,21 @@ export const menuSeparatorVariants = tv({
 export const menuContentVariants = tv({
   base: [
     "z-[calc(50+var(--layer-index,0))]",
-    "max-h-(--available-height) not-[class*='w-']:min-w-32",
-    "overflow-y-auto",
+    "relative max-h-(--available-height) not-[class*='w-']:min-w-32",
+    "p-1.5",
+    "overflow-hidden",
     "bg-popover",
     "text-popover-foreground",
     "rounded-xl border shadow-lg/4",
     "origin-(--transform-origin)",
     "outline-hidden",
     "duration-150 ease-out",
-    "[[data-state=open],:has([data-state=open])]:animate-in",
-    "[[data-state=open],:has([data-state=open])]:fade-in-0",
-    "[[data-state=open],:has([data-state=open])]:zoom-in-[98%]",
-    "[[data-placement=bottom],:has([data-placement=bottom])]:slide-in-from-top-2",
-    "[[data-placement=left],:has([data-placement=left])]:slide-in-from-end-2",
-    "[[data-placement=right],:has([data-placement=right])]:slide-in-from-start-2",
-    "[[data-placement=top],:has([data-placement=top])]:slide-in-from-bottom-2",
-    "motion-reduce:data-[state=open]:zoom-in-100",
-    "motion-reduce:data-[placement=bottom]:slide-in-from-top-0 motion-reduce:data-[placement=left]:slide-in-from-end-0 motion-reduce:data-[placement=right]:slide-in-from-start-0 motion-reduce:data-[placement=top]:slide-in-from-bottom-0",
+    "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
+    "data-[side=bottom]:slide-in-from-top-2",
+    "data-[side=left]:slide-in-from-end-2",
+    "data-[side=right]:slide-in-from-start-2",
+    "data-[side=top]:slide-in-from-bottom-2",
+    "motion-reduce:animate-none",
   ],
 });
 
@@ -132,11 +127,18 @@ export const MenuContent = (props: MenuContentProps) => {
     <Portal>
       <MenuPositioner>
         <ArkMenu.Content
-          className={cn(menuContentVariants(), menuListVariants(), className)}
+          className={cn(menuContentVariants(), className)}
           data-slot="menu-content"
           {...rest}
         >
-          {children}
+          <ScrollArea
+            className="h-auto max-h-[inherit] **:data-[slot=scroll-area-viewport]:h-auto"
+            orientation="vertical"
+            overscrollContain
+            scrollFade
+          >
+            {children}
+          </ScrollArea>
         </ArkMenu.Content>
       </MenuPositioner>
     </Portal>
@@ -211,7 +213,11 @@ export const MenuItem = (props: MenuItemProps) => {
 
   return (
     <ArkMenu.Item
-      className={cn(menuItemVariants({ variant }), className)}
+      className={cn(
+        menuItemVariants({ variant }),
+        "[&>svg]:self-start",
+        className
+      )}
       data-slot="menu-item"
       data-variant={variant}
       {...rest}
@@ -245,8 +251,8 @@ export const MenuCheckboxItem = (
     <ArkMenu.CheckboxItem
       className={cn(
         menuItemVariants({ variant: "default" }),
-        "pe-8",
-        className
+        className,
+        "pe-8"
       )}
       {...rest}
     >
@@ -254,7 +260,15 @@ export const MenuCheckboxItem = (
         <CheckIcon />
       </ArkMenu.ItemIndicator>
 
-      <ArkMenu.ItemText>{children}</ArkMenu.ItemText>
+      <ArkMenu.ItemText
+        className={cn(
+          "flex min-w-0 flex-1 items-center gap-2",
+          "[&>svg]:self-start"
+        )}
+        data-slot="menu-checkbox-item-text"
+      >
+        {children}
+      </ArkMenu.ItemText>
     </ArkMenu.CheckboxItem>
   );
 };
@@ -302,8 +316,8 @@ export const MenuRadioItem = (
     <ArkMenu.RadioItem
       className={cn(
         menuItemVariants({ variant: "default" }),
-        "pe-8",
-        className
+        className,
+        "pe-8"
       )}
       data-slot="menu-radio-item"
       {...rest}
@@ -312,7 +326,13 @@ export const MenuRadioItem = (
         <CheckIcon />
       </ArkMenu.ItemIndicator>
 
-      <ArkMenu.ItemText data-slot="menu-radio-item-text">
+      <ArkMenu.ItemText
+        className={cn(
+          "flex min-w-0 flex-1 items-center gap-2",
+          "[&>svg]:self-start"
+        )}
+        data-slot="menu-radio-item-text"
+      >
         {children}
       </ArkMenu.ItemText>
     </ArkMenu.RadioItem>
@@ -323,25 +343,9 @@ export const MenuSub = (props: React.ComponentProps<typeof Menu>) => (
   <Menu data-slot="menu-sub" {...props} />
 );
 
-export const MenuSubContent = (
-  props: React.ComponentProps<typeof ArkMenu.Content>
-) => {
-  const { className, children, ...rest } = props;
-
-  return (
-    <Portal>
-      <MenuPositioner data-slot="menu-sub-positioner">
-        <ArkMenu.Content
-          className={cn(menuContentVariants(), menuListVariants(), className)}
-          data-slot="menu-sub-content"
-          {...rest}
-        >
-          {children}
-        </ArkMenu.Content>
-      </MenuPositioner>
-    </Portal>
-  );
-};
+export const MenuSubContent = (props: MenuContentProps) => (
+  <MenuContent data-slot="menu-sub-content" {...props} />
+);
 
 export const MenuSubTrigger = (
   props: React.ComponentProps<typeof ArkMenu.TriggerItem>
@@ -350,7 +354,11 @@ export const MenuSubTrigger = (
 
   return (
     <ArkMenu.TriggerItem
-      className={cn(menuItemVariants({ variant: "default" }), className)}
+      className={cn(
+        menuItemVariants({ variant: "default" }),
+        "[&>svg]:self-start",
+        className
+      )}
       data-slot="menu-sub-trigger"
       {...rest}
     >

@@ -287,6 +287,7 @@ const accessLevels = [
 ];
 
 const effortCollection = createListCollection({ items: efforts });
+
 const accessCollection = createListCollection({ items: accessLevels });
 
 const actionItems = [
@@ -331,6 +332,7 @@ const actionItems = [
 const contextActions = actionItems.filter(
   (action) => action.group === "context"
 );
+
 const agentActions = actionItems.filter((action) => action.group === "agent");
 
 const contextUsage = [

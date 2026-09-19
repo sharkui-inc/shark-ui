@@ -19,7 +19,6 @@ import {
   menuItemHighlightVariants,
   menuItemIconVariants,
   menuItemIndicatorVariants,
-  menuListVariants,
   menuSeparatorVariants,
 } from "@/registry/react/components/menu";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
@@ -220,6 +219,7 @@ export const SelectContent = (
             "z-[calc(50+var(--layer-index,0))]",
             "relative",
             "max-h-96 min-w-(--reference-width)",
+            "p-1",
             "overflow-hidden",
             "bg-popover",
             "text-popover-foreground",
@@ -234,17 +234,16 @@ export const SelectContent = (
             "data-[placement=left]:slide-in-from-end-2",
             "data-[placement=right]:slide-in-from-start-2",
             "data-[placement=top]:slide-in-from-bottom-2",
-            "motion-reduce:data-[state=open]:zoom-in-100",
-            "motion-reduce:data-[placement=bottom]:slide-in-from-top-0 motion-reduce:data-[placement=left]:slide-in-from-end-0 motion-reduce:data-[placement=right]:slide-in-from-start-0 motion-reduce:data-[placement=top]:slide-in-from-bottom-0",
-            menuListVariants(),
+            "motion-reduce:animate-none",
             className
           )}
           data-slot="select-content"
           {...rest}
         >
           <ScrollArea
-            className="max-h-[inherit]"
+            className="h-auto max-h-[inherit] **:data-[slot=scroll-area-viewport]:h-auto"
             orientation="vertical"
+            overscrollContain
             scrollFade
           >
             {children}
@@ -301,19 +300,19 @@ export const SelectItem = (
         inputItemVariants(),
         menuItemIconVariants(),
         "cursor-default",
-        "pe-8",
         "outline-hidden",
         "in-[[data-slot=select-content]:has([data-slot=select-group-label])]:ps-4",
         menuItemHighlightVariants(),
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "[&_svg:not([class*='text-'])]:text-muted-foreground",
-        className
+        className,
+        "pe-8"
       )}
       data-slot="select-item"
       {...rest}
     >
       <ArkSelect.ItemText
-        className="flex min-w-0 items-center gap-2"
+        className="flex min-w-0 items-start gap-2"
         data-slot="select-item-text"
       >
         {children}

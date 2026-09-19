@@ -42,7 +42,7 @@ export const MessageScrollerViewport = (
   return (
     <ArkScrollArea.Viewport
       className={cn(
-        "scrollbar-none size-full min-h-0 min-w-0 overflow-y-auto outline-hidden contain-content",
+        "scrollbar-none size-full min-h-0 min-w-0 overflow-y-auto overscroll-y-contain outline-hidden contain-content",
         "data-overflow-y:not-data-at-top:mask-t-from-[calc(100%-var(--fade-size))]",
         "data-overflow-y:not-data-at-bottom:mask-b-from-[calc(100%-var(--fade-size))]",
         "data-overflow-x:not-data-at-left:mask-l-from-[calc(100%-var(--fade-size))]",

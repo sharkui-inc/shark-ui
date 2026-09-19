@@ -117,7 +117,7 @@ export const ClipboardIndicator = (
       data-slot="clipboard-indicator"
       {...rest}
     >
-      {children || <ClipboardIcon />}
+      {children ?? <ClipboardIcon />}
     </ArkClipboard.Indicator>
   );
 };

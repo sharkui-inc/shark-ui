@@ -6,7 +6,10 @@ const dependencies = ["@ark-ui/react", "tailwind-variants", "lucide-react"];
 const manifest: RegistryItemType = {
   dependencies,
   name: "menu",
-  registryDependencies: [registryUrl("/r/button.json")],
+  registryDependencies: [
+    registryUrl("/r/button.json"),
+    registryUrl("/r/scroll-area.json"),
+  ],
   type: "registry:ui",
 };
 

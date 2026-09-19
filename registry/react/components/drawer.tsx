@@ -487,7 +487,11 @@ export const DrawerBody = (props: DrawerBodyProps) => {
   const { scrollFade = true, className, ...rest } = props;
 
   return (
-    <ScrollArea className="flex-1 touch-pan-y" scrollFade={scrollFade}>
+    <ScrollArea
+      className="flex-1 touch-pan-y"
+      overscrollContain
+      scrollFade={scrollFade}
+    >
       <ark.div
         className={cn(
           "p-(--space) text-center",

@@ -115,6 +115,7 @@ const PATTERN_COMPONENT_GROUPS = [
 
 const getIndexName = (page: LLMDocPage): LLMIndexName => {
   const [section] = page.slugs;
+
   if (section === "components") {
     return "components";
   }
@@ -132,6 +133,7 @@ const getIndexName = (page: LLMDocPage): LLMIndexName => {
 
 const getMarkdownUrl = (page: LLMDocPage, baseUrl: string) =>
   `${baseUrl}${page.url}.md`;
+
 const getPageDescription = (page: LLMDocPage) =>
   page.data.description ?? "Documentation for Shark UI.";
 

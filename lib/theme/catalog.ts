@@ -530,6 +530,7 @@ const STATUS_CHART_KEYS = [
 const RUNTIME_THEME_PALETTE = "slate";
 
 const CSS_PRINT_WIDTH = 80;
+
 const COLOR_MIX_ARGS_RE = /,\s*/;
 
 const aliasThemeColorVars = (value: string, palette: string) =>

@@ -301,6 +301,7 @@ const mockUsers: User[] = [
 ];
 
 const departments = [...new Set(mockUsers.map((user) => user.department))];
+
 const roles = [...new Set(mockUsers.map((user) => user.role))];
 
 export default UseAsyncListDemo;

@@ -81,15 +81,20 @@ const items = [
 
 // h2 sits at level 0; deeper headings step in, clamped so h5+ share h4's indent
 const BASE = 8;
+
 const RAIL_STEP = 8;
+
 const TEXT_STEP = 12;
+
 const MAX_LEVEL = 2;
 
 // the rail overlaps the row above by BRIDGE px so the turn can straddle the boundary
 const BRIDGE = 6;
 
 const levelOf = (depth: number) => Math.min(Math.max(depth - 2, 0), MAX_LEVEL);
+
 const lineOffset = (depth: number) => BASE + levelOf(depth) * RAIL_STEP;
+
 const textOffset = (depth: number) => BASE + (levelOf(depth) + 1) * TEXT_STEP;
 
 const Rail = (props: {

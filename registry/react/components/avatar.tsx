@@ -17,6 +17,7 @@ import {
 export const useAvatar = useArkAvatar;
 export const useAvatarContext = useArkAvatarContext;
 export const AvatarRootProvider = ArkAvatar.RootProvider;
+
 const avatarVariants = tv({
   base: [
     "group/avatar",

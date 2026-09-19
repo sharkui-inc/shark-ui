@@ -54,17 +54,17 @@ npx shadcn@latest add @shark/listbox
 ```text
 Listbox
 ├── ListboxLabel
+├── ListboxInput
 ├── ListboxValueText
 └── ListboxContent
-    └── ListboxBody
-        ├── ListboxEmpty
-        └── ListboxItemGroup
-            ├── ListboxItemGroupLabel
-            └── ListboxItem
-                ├── ListboxItemText
-                ├── ListboxItemDescription
-                ├── ListboxItemIndicator
-                └── ListboxShortcut
+    ├── ListboxEmpty
+    └── ListboxItemGroup
+        ├── ListboxItemGroupLabel
+        └── ListboxItem
+            ├── ListboxItemText
+            ├── ListboxItemDescription
+            ├── ListboxItemIndicator
+            └── ListboxShortcut
 ```
 
 ## Usage
@@ -73,7 +73,6 @@ Listbox
 import { createListCollection } from "@ark-ui/react";
 import {
   Listbox,
-  ListboxBody,
   ListboxContent,
   ListboxItem,
   ListboxLabel,
@@ -92,13 +91,11 @@ const collection = createListCollection({
 <Listbox collection={collection}>
   <ListboxLabel>Country</ListboxLabel>
   <ListboxContent>
-    <ListboxBody>
-      {collection.items.map((item) => (
-        <ListboxItem item={item} key={item.value}>
-          {item.label}
-        </ListboxItem>
-      ))}
-    </ListboxBody>
+    {collection.items.map((item) => (
+      <ListboxItem item={item} key={item.value}>
+        {item.label}
+      </ListboxItem>
+    ))}
   </ListboxContent>
 </Listbox>
 ```
@@ -120,6 +117,10 @@ Disable the entire listbox with the `disabled` prop.
 ## Orientation
 
 Use `orientation` prop to change the orientation of the listbox.
+
+### Vertical
+
+<ComponentPreview componentName="listbox" fileName="example-vertical" />
 
 ### Horizontal
 
@@ -161,10 +162,6 @@ Set `showIndicator={false}` on `ListboxItem` to hide the selected item checkmark
 
 <ComponentPreview componentName="listbox" fileName="example-without-indicator" />
 
-### Image Explorer
-
-<ComponentPreview componentName="listbox" fileName="example-image-explorer" />
-
 ### Transfer List
 
 <ComponentPreview componentName="listbox" fileName="example-transfer-list" />
@@ -177,7 +174,7 @@ Use `groupBy` in `createListCollection`.
 
 ### With Filter
 
-Filter items using `useListCollection` with `useFilter`.
+Filter items with `ListboxInput`, `useListCollection`, and `useFilter`.
 
 <ComponentPreview componentName="listbox" fileName="example-with-filter" />
 
@@ -189,13 +186,12 @@ Use the listbox within a popover to create menu-like.
 
 ### Grid Layout
 
-Use `createGridCollection` with `columnCount` and grid CSS for a grid layout.
+Use `createGridCollection` with `columnCount` and wrap the items in a `div` with grid CSS.
+`ListboxContent` owns the scrollable surface; use the wrapper for collection layout such as grid columns and gaps.
 
 <ComponentPreview componentName="listbox" fileName="example-grid" />
 
 ### Scrollable
-
-Use `ListboxBody` to make the list scrollable. Set a height on `ListboxContent`.
 
 <ComponentPreview componentName="listbox" fileName="example-scrollable" />
 
@@ -231,6 +227,19 @@ Accessible label. Render as a child of `Listbox`.
 | --- | --- | --- |
 | `className` | `string` | - |
 
+### ListboxInput
+
+Filter input for the listbox. Use with `useListCollection` and `onChange` to filter items.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `autoHighlight` | `boolean` | `false` |
+| `keyboardPriority` | `"caret" \| "navigate"` | `"caret"` |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `pill` | `boolean` | `false` |
+| `asChild` | `boolean` | - |
+| `className` | `string` | - |
+
 ### ListboxContent
 
 Holds the list of options.
@@ -238,14 +247,6 @@ Holds the list of options.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | - |
-| `className` | `string` | - |
-
-### ListboxBody
-
-Layout wrapper for list items inside `ListboxContent`. Put `h-*` or `max-h-*` on `ListboxContent` when the list should scroll.
-
-| Prop | Type | Default |
-| --- | --- | --- |
 | `className` | `string` | - |
 
 ### ListboxItem

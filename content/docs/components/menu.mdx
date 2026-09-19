@@ -148,6 +148,12 @@ Combine icons with labels for quick scanning.
 
 <ComponentPreview componentName="menu" fileName="example-icons" />
 
+### With Description
+
+Add supporting text to clarify the outcome of each menu action.
+
+<ComponentPreview componentName="menu" fileName="example-with-description" />
+
 ### Shortcuts
 
 Use `MenuShortcut` to show keyboard hints next to menu items.
@@ -168,15 +174,9 @@ Use `MenuRadioGroup` and `MenuRadioItem` for a single selection from a set of op
 
 ### With Link
 
-Use the `asChild` prop on `MenuItem` with a `anchor` element to render a link.
+Use the `asChild` prop on `MenuItem`.
 
 <ComponentPreview componentName="menu" fileName="example-link" />
-
-### With Group Label
-
-Use `MenuGroup` with  `MenuGroupLabel` or the `heading` prop to group related items under a label.
-
-<ComponentPreview componentName="menu" fileName="example-group-label" />
 
 ### With Separator
 
@@ -184,15 +184,20 @@ Use `MenuSeparator` to add visual dividers between related groups of menu items.
 
 <ComponentPreview componentName="menu" fileName="example-with-separator" />
 
+### With Group Label
+
+Use `MenuGroup` with  `MenuGroupLabel` or the `heading` prop to group related items under a label.
+
+<ComponentPreview componentName="menu" fileName="example-group-label" />
+
 ### Quick Items
 
-Use `MenuQuickItem` for actions with icon-above-text layout, ideal for quick actions like Copy and Share displayed horizontally.
+Use `MenuQuickItem` for actions with icon-above-text layout, ideal for quick actions.
 
 <ComponentPreview componentName="menu" fileName="example-quick-item" />
 
 ### Scrollable
 
-Add `max-h-*` to `MenuContent` to constrain height and enable native scrolling when there are many items.
 
 <ComponentPreview componentName="menu" fileName="example-with-scroll" />
 
@@ -231,7 +236,7 @@ Root element of the menu component.
 
 ### MenuTrigger
 
-Opens the menu on click. Use `asChild` to delegate to a child element.
+Opens the menu on click.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -257,7 +262,7 @@ Holds menu options. Displayed in a portal, positioned relative to the trigger.
 
 ### MenuItem
 
-A single selectable menu option. Supports `asChild` for custom elements.
+A single selectable menu option.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -270,7 +275,7 @@ A single selectable menu option. Supports `asChild` for custom elements.
 
 ### MenuCheckboxItem
 
-A menu option with a checkbox. Use `checked` and `onCheckedChange` for controlled state.
+A menu option with a checkbox.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -281,7 +286,7 @@ A menu option with a checkbox. Use `checked` and `onCheckedChange` for controlle
 
 ### MenuRadioGroup
 
-Group of mutually exclusive options. Use `value` and `onValueChange` for controlled state.
+Group of mutually exclusive options.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -300,7 +305,7 @@ A single option in a radio group.
 
 ### MenuGroup
 
-Groups related items. Use `heading` or `MenuGroupLabel` for a label.
+Groups related items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -308,7 +313,7 @@ Groups related items. Use `heading` or `MenuGroupLabel` for a label.
 
 ### MenuGroupLabel
 
-Label for a group. Must be used inside `MenuGroup`.
+Label for a group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -326,7 +331,7 @@ Visual divider between groups of menu items.
 
 ### MenuQuickItem
 
-A menu option with icon-above-text layout for quick actions. Use with `flex` to display multiple items horizontally.
+A menu option with icon-above-text layout for quick actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |

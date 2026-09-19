@@ -57,7 +57,6 @@ const SHARK_UI_BUNDLE = [
   "floating-panel",
   "focus-trap",
   "format",
-  "frame",
   "highlight",
   "hitbox",
   "hotkeys",

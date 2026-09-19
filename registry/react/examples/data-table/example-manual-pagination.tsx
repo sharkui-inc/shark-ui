@@ -97,6 +97,7 @@ const columns = columnHelper.columns([
 ]);
 
 const customers = ["Ava", "Emma", "Liam", "Noah", "Olivia"] as const;
+
 const statuses: Order["status"][] = ["Paid", "Pending", "Refunded"];
 
 const orders: Order[] = Array.from({ length: 23 }, (_, index) => ({

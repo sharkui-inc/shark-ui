@@ -33,8 +33,7 @@ export const tooltipContentVariants = tv({
     "data-[placement=left]:slide-in-from-end-2",
     "data-[placement=right]:slide-in-from-start-2",
     "data-[placement=top]:slide-in-from-bottom-2",
-    "motion-reduce:zoom-in-100 motion-reduce:data-[state=closed]:zoom-out-100",
-    "motion-reduce:data-[placement=bottom]:slide-in-from-top-0 motion-reduce:data-[placement=left]:slide-in-from-end-0 motion-reduce:data-[placement=right]:slide-in-from-start-0 motion-reduce:data-[placement=top]:slide-in-from-bottom-0",
+    "motion-reduce:animate-none",
   ],
 });
 

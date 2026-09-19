@@ -83,6 +83,7 @@ const interactiveCharts = new Set([
   "chart-area-interactive",
   "chart-pie-interactive",
 ]);
+
 const CHART_PREFIX_PATTERN = /^chart-/;
 
 const titleCase = (value: string) =>

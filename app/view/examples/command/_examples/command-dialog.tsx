@@ -23,10 +23,17 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/registry/react/components/command";
+import {
+  useFormatHotkey,
+  useHotkey,
+} from "@/registry/react/components/hotkeys";
 import { Kbd } from "@/registry/react/components/kbd";
+
+const HOTKEY = "mod+j";
 
 const CommandDialogExample = () => {
   const [open, setOpen] = React.useState(false);
+  const formatHotkey = useFormatHotkey();
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
     filter: contains,
@@ -34,22 +41,16 @@ const CommandDialogExample = () => {
     initialItems,
   });
 
-  React.useEffect(() => {
-    const down = (event: KeyboardEvent) => {
-      if (event.key === "j" && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault();
-        setOpen((isOpen) => !isOpen);
-      }
-    };
-
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
-  }, []);
+  useHotkey({
+    action: () => setOpen((isOpen) => !isOpen),
+    hotkey: HOTKEY,
+    options: { preventDefault: true },
+  });
 
   return (
     <>
       <p className="text-muted-foreground text-sm">
-        Press <Kbd>⌘J</Kbd> to open the command palette
+        Press <Kbd>{formatHotkey(HOTKEY)}</Kbd> to open the command palette
       </p>
       <CommandDialog onOpenChange={({ open: o }) => setOpen(o)} open={open}>
         <CommandDialogContent>

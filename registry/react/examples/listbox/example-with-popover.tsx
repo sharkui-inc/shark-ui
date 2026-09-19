@@ -15,7 +15,6 @@ import {
   ListboxItemText,
   ListboxValueText,
 } from "@/registry/react/components/listbox";
-import { menuListVariants } from "@/registry/react/components/menu";
 import {
   Popover,
   PopoverContent,
@@ -59,7 +58,7 @@ const Example = () => {
             <ChevronsUpDown className="size-4 opacity-64" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className={cn("min-w-64 gap-2", menuListVariants())}>
+        <PopoverContent className={cn("min-w-64 gap-2")}>
           <Input
             onChange={(e) => {
               const { value } = e.target;

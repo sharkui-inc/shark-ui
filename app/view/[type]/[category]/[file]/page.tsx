@@ -10,7 +10,9 @@ import { getRegistryItem } from "@/lib/registry";
 import { cn } from "@/lib/utils";
 
 const VIEW_REGISTRY_FOLDER_TYPES = ["blocks", "templates"] as const;
+
 const VIEW_REGISTRY_FOLDER_TYPE_SET = new Set(VIEW_REGISTRY_FOLDER_TYPES);
+
 type ViewRegistryFolderType = (typeof VIEW_REGISTRY_FOLDER_TYPES)[number];
 
 /** Retired preview slugs: still emitted so static export serves app/not-found. */

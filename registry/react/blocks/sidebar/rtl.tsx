@@ -35,7 +35,6 @@ import {
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
 import { IconTile } from "@/registry/react/components/icon-tile";
-import { LocaleProvider } from "@/registry/react/components/locale";
 import {
   Menu,
   MenuContent,
@@ -469,28 +468,26 @@ const NavUser = ({ user }: NavUserProps) => {
 };
 
 const AppSidebar = () => (
-  <LocaleProvider locale="ar-SA">
-    <SidebarProvider dir="rtl" lang="ar">
-      <Sidebar collapsible="icon" placement="right">
-        <SidebarHeader>
-          <TeamSwitcher teams={data.teams} />
-        </SidebarHeader>
-        <SidebarContent>
-          <NavMain items={data.navMain} />
-          <NavProjects projects={data.projects} />
-        </SidebarContent>
-        <SidebarFooter>
-          <NavUser user={data.user} />
-        </SidebarFooter>
-        <SidebarRail />
-      </Sidebar>
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 px-4 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 motion-reduce:transition-none">
-          <SidebarTrigger className="-ms-1" />
-        </header>
-      </SidebarInset>
-    </SidebarProvider>
-  </LocaleProvider>
+  <SidebarProvider dir="rtl" lang="ar">
+    <Sidebar collapsible="icon" placement="right">
+      <SidebarHeader>
+        <TeamSwitcher teams={data.teams} />
+      </SidebarHeader>
+      <SidebarContent>
+        <NavMain items={data.navMain} />
+        <NavProjects projects={data.projects} />
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={data.user} />
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
+    <SidebarInset>
+      <header className="flex h-16 shrink-0 items-center gap-2 px-4 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 motion-reduce:transition-none">
+        <SidebarTrigger className="-ms-1" />
+      </header>
+    </SidebarInset>
+  </SidebarProvider>
 );
 
 export default AppSidebar;

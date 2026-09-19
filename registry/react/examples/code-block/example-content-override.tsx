@@ -18,6 +18,7 @@ const Example = () => (
 );
 
 const INSTALL_COMMAND = "pnpm add @shark/code-block";
+
 const OUTPUT = "Installed @shark/code-block\nDone in 1.4s";
 
 export default Example;

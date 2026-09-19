@@ -5,7 +5,6 @@ import {
   CardContent,
   CardHeader,
 } from "@/registry/react/components/card";
-import { LocaleProvider } from "@/registry/react/components/locale";
 import {
   Tabs,
   TabsContent,
@@ -14,30 +13,26 @@ import {
 } from "@/registry/react/components/tabs";
 
 const TabsRtl = () => (
-  <div dir="rtl">
-    <LocaleProvider locale="ar-SA">
-      <Tabs className="w-full max-w-sm" defaultValue="overview">
-        <TabsList>
-          {tabs.map((tab) => (
-            <TabsTrigger key={tab.value} value={tab.value}>
-              {tab.title}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+  <Tabs className="w-full max-w-sm" defaultValue="overview">
+    <TabsList>
+      {tabs.map((tab) => (
+        <TabsTrigger key={tab.value} value={tab.value}>
+          {tab.title}
+        </TabsTrigger>
+      ))}
+    </TabsList>
 
-        {tabs.map((tab) => (
-          <TabsContent key={tab.value} value={tab.value}>
-            <Card>
-              <CardHeader description={tab.description} title={tab.title} />
-              <CardContent className="text-muted-foreground text-sm">
-                {tab.content}
-              </CardContent>
-            </Card>
-          </TabsContent>
-        ))}
-      </Tabs>
-    </LocaleProvider>
-  </div>
+    {tabs.map((tab) => (
+      <TabsContent key={tab.value} value={tab.value}>
+        <Card>
+          <CardHeader description={tab.description} title={tab.title} />
+          <CardContent className="text-muted-foreground text-sm">
+            {tab.content}
+          </CardContent>
+        </Card>
+      </TabsContent>
+    ))}
+  </Tabs>
 );
 
 const tabs = [

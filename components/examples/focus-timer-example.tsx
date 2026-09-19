@@ -185,7 +185,9 @@ const MinuteTicks = () => {
 };
 
 const breakMs = 5 * 60 * 1000;
+
 const focusMs = 25 * 60 * 1000;
+
 const tickHeights = [
   { height: "h-3", id: "start" },
   { height: "h-4", id: "low" },

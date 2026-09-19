@@ -87,7 +87,7 @@ export const FileUploadDropzoneIcon = (
       data-slot="file-upload-dropzone-icon"
       {...rest}
     >
-      {children || <UploadIcon />}
+      {children ?? <UploadIcon />}
     </ark.div>
   );
 };

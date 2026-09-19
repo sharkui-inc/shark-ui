@@ -19,9 +19,12 @@ import { TEMPLATES } from "@/registry/react/templates/_registry";
 import { replaceRegistryImportsForCopy } from "@/utils/formatter";
 
 const SOURCE_EXTENSIONS = [".tsx", ".ts", ".jsx", ".js", ".json"] as const;
+
 const RELATIVE_IMPORT_PATTERN = /(from\s+["']|import\s+["'])(\.[^"']+)(["'])/g;
+
 const REGISTRY_COMPONENT_IMPORT_PATTERN =
   /@\/registry\/react\/components\/([a-z0-9-]+)/g;
+
 const CODE_EXTENSION_PATTERN = /\.(?:tsx?|jsx?)$/;
 
 export const COMPOSITION_KINDS = ["blocks", "templates"] as const;

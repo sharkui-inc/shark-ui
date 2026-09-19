@@ -1,6 +1,7 @@
 import { SITE_CONFIG } from "@/config/site";
 
 const TRAILING_SLASH = /\/$/;
+
 const HTTP_PROTOCOL = /^https?:\/\//;
 
 const joinUrl = (base: string, path: string) => {

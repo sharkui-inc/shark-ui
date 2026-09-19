@@ -289,7 +289,7 @@ export const AttachmentGroup = (
     <ScrollArea
       className={cn("h-auto", className)}
       orientation="horizontal"
-      scrollbarGutter
+      overscrollContain
       scrollFade
     >
       <ark.div
