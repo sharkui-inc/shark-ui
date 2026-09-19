@@ -227,13 +227,7 @@ export const SelectContent = (
             "origin-(--transform-origin)",
             "outline-hidden",
             "duration-150 ease-out",
-            "data-[state=open]:animate-in",
-            "data-[state=open]:fade-in-0",
-            "data-[state=open]:zoom-in-[98%]",
-            "data-[placement=bottom]:slide-in-from-top-2",
-            "data-[placement=left]:slide-in-from-end-2",
-            "data-[placement=right]:slide-in-from-start-2",
-            "data-[placement=top]:slide-in-from-bottom-2",
+            "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
             "motion-reduce:animate-none",
             className
           )}

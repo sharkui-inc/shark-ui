@@ -42,7 +42,9 @@ const Example = () => {
         <Rating />
       </CardContent>
       <CardFooter>
-        <Button className="w-full">{values.submit}</Button>
+        <Button className="w-full" variant="outline">
+          {values.submit}
+        </Button>
       </CardFooter>
     </Card>
   );

@@ -71,7 +71,10 @@ const commandDialogPositionerVariants = tv({
 });
 
 const commandDialogContentVariants = tv({
-  base: ["max-sm:row-start-1"],
+  base: [
+    "max-sm:row-start-1",
+    "data-[state=closed]:animate-none data-[state=open]:animate-none",
+  ],
   defaultVariants: {
     variant: "default",
   },
@@ -118,7 +121,7 @@ export const CommandDialogContent = (props: CommandDialogContentProps) => {
 
   return (
     <Portal>
-      <DialogOverlay />
+      <DialogOverlay className="data-[state=closed]:animate-none data-[state=open]:animate-none" />
 
       <DialogPositioner
         className={commandDialogPositionerVariants({ variant })}

@@ -253,12 +253,7 @@ export const ListboxItemIndicator = (
 
   return (
     <ArkListbox.ItemIndicator
-      className={cn(
-        menuItemIndicatorVariants(),
-        "zoom-in-95 fade-in-0 animate-in",
-        "motion-reduce:animate-none",
-        className
-      )}
+      className={cn(menuItemIndicatorVariants(), className)}
       data-slot="listbox-item-indicator"
       {...rest}
     >

@@ -31,7 +31,9 @@ const RatingDemo = () => (
       <Rating />
     </CardContent>
     <CardFooter>
-      <Button className="w-full">Submit</Button>
+      <Button className="w-full" variant="outline">
+        Submit
+      </Button>
     </CardFooter>
   </Card>
 );

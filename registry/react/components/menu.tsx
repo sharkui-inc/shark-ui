@@ -12,7 +12,6 @@ import { CheckIcon, ChevronRight } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const useMenu = useArkMenu;
 export const useMenuContext = useArkMenuContext;
@@ -112,10 +111,6 @@ export const menuContentVariants = tv({
     "outline-hidden",
     "duration-150 ease-out",
     "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
-    "data-[side=bottom]:slide-in-from-top-2",
-    "data-[side=left]:slide-in-from-end-2",
-    "data-[side=right]:slide-in-from-start-2",
-    "data-[side=top]:slide-in-from-bottom-2",
     "motion-reduce:animate-none",
   ],
 });
@@ -131,14 +126,7 @@ export const MenuContent = (props: MenuContentProps) => {
           data-slot="menu-content"
           {...rest}
         >
-          <ScrollArea
-            className="h-auto max-h-[inherit] **:data-[slot=scroll-area-viewport]:h-auto"
-            orientation="vertical"
-            overscrollContain
-            scrollFade
-          >
-            {children}
-          </ScrollArea>
+          {children}
         </ArkMenu.Content>
       </MenuPositioner>
     </Portal>
@@ -343,9 +331,23 @@ export const MenuSub = (props: React.ComponentProps<typeof Menu>) => (
   <Menu data-slot="menu-sub" {...props} />
 );
 
-export const MenuSubContent = (props: MenuContentProps) => (
-  <MenuContent data-slot="menu-sub-content" {...props} />
-);
+export const MenuSubContent = (
+  props: React.ComponentProps<typeof ArkMenu.Content>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <Portal>
+      <MenuPositioner data-slot="menu-sub-positioner">
+        <ArkMenu.Content
+          className={cn(menuContentVariants(), "overflow-y-auto", className)}
+          data-slot="menu-sub-content"
+          {...rest}
+        />
+      </MenuPositioner>
+    </Portal>
+  );
+};
 
 export const MenuSubTrigger = (
   props: React.ComponentProps<typeof ArkMenu.TriggerItem>

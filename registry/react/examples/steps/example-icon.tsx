@@ -12,7 +12,7 @@ const Example = () => (
   <Steps className="w-full max-w-md" count={items.length}>
     <StepsList>
       {items.map((item, index) => (
-        <StepsItem index={index} key={item.icon.name}>
+        <StepsItem index={index} key={index}>
           <StepsTrigger>
             <StepsIndicator>
               <item.icon />
