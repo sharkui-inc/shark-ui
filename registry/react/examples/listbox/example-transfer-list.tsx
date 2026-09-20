@@ -3,7 +3,6 @@
 import { createListCollection } from "@ark-ui/react";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import React from "react";
-import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Avatar,
   AvatarFallback,
@@ -139,35 +138,40 @@ const MemberList = ({
 
 const people = [
   {
-    avatar: createWavesAvatar("camille-dubois", "purple"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=camille-dubois&waveColor=7c3aed",
     initials: "CD",
     label: "Camille Dubois",
     role: "Product designer",
     value: "camille",
   },
   {
-    avatar: createWavesAvatar("edward-lee", "blue"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=edward-lee&waveColor=2b6cb0",
     initials: "EL",
     label: "Edward Lee",
     role: "Frontend engineer",
     value: "edward",
   },
   {
-    avatar: createWavesAvatar("mila-jensen", "orange"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=mila-jensen&waveColor=ea580c",
     initials: "MJ",
     label: "Mila Jensen",
     role: "Marketing lead",
     value: "mila",
   },
   {
-    avatar: createWavesAvatar("dario-rossi", "green-dark"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=dario-rossi&waveColor=1a6b5c",
     initials: "DR",
     label: "Dario Rossi",
     role: "Product manager",
     value: "dario",
   },
   {
-    avatar: createWavesAvatar("aya-tanaka", "amber"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=aya-tanaka&waveColor=ca8a04",
     initials: "AT",
     label: "Aya Tanaka",
     role: "Research lead",

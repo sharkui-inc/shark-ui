@@ -2,6 +2,7 @@
 
 import { createListCollection } from "@ark-ui/react";
 import {
+  applyThemePreset,
   getActiveThemePreset,
   getCustomThemeSwatchCss,
   THEME_PRESET_FIELD,
@@ -19,7 +20,8 @@ const collection = createListCollection({
 });
 
 export const ThemeSelectorPreset = () => {
-  const { applyPreset, config } = useThemeCustomization();
+  const { applyPreset, clearThemePreview, config, previewTheme } =
+    useThemeCustomization();
   const activePreset = getActiveThemePreset(config);
 
   return (
@@ -27,6 +29,17 @@ export const ThemeSelectorPreset = () => {
       collection={collection}
       description={THEME_PRESET_FIELD.description}
       label={THEME_PRESET_FIELD.label}
+      onPreview={(next) => {
+        if (!next) {
+          clearThemePreview();
+          return;
+        }
+
+        const preset = collection.items.find((item) => item.value === next);
+        if (preset) {
+          previewTheme(applyThemePreset(preset));
+        }
+      }}
       onValueChange={({ value }) => {
         const [next] = value;
         const preset = collection.items.find((item) => item.value === next);

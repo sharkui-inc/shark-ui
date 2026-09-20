@@ -1,4 +1,3 @@
-import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Carousel,
   CarouselContent,
@@ -28,23 +27,23 @@ const Example = () => (
 const slides = [
   {
     alt: "Green mesh gradient",
-    src: createWavesAvatar("green carousel slide", "green-dark"),
+    src: "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=green+carousel+slide&waveColor=1a6b5c",
   },
   {
     alt: "Blue mesh gradient",
-    src: createWavesAvatar("blue carousel slide", "blue"),
+    src: "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=blue+carousel+slide&waveColor=2b6cb0",
   },
   {
     alt: "Purple mesh gradient",
-    src: createWavesAvatar("purple carousel slide", "purple"),
+    src: "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=purple+carousel+slide&waveColor=7c3aed",
   },
   {
     alt: "Orange mesh gradient",
-    src: createWavesAvatar("orange carousel slide", "orange"),
+    src: "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=orange+carousel+slide&waveColor=ea580c",
   },
   {
     alt: "Rose mesh gradient",
-    src: createWavesAvatar("rose carousel slide", "rose"),
+    src: "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=rose+carousel+slide&waveColor=e11d48",
   },
 ];
 

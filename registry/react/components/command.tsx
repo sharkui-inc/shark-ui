@@ -19,7 +19,6 @@ import {
   ComboboxGroup,
   ComboboxGroupLabel,
   type ComboboxItem,
-  ComboboxList,
   comboboxItemVariants,
 } from "@/registry/react/components/combobox";
 import {
@@ -197,7 +196,7 @@ export const CommandContent = (
       className={cn(
         "max-h-(--available-height) min-h-0",
         "flex flex-1 flex-col",
-        "p-1.5",
+        "px-1.5",
         "overflow-hidden",
         "outline-hidden",
         "[:not(.has-[+[data-slot=command-footer]])]:rounded-b-2xl [:not(.has-[+[data-slot=command-footer]])]:border-b",
@@ -206,14 +205,7 @@ export const CommandContent = (
       data-slot="command-content"
       {...rest}
     >
-      <ScrollArea
-        className="max-h-[inherit] min-h-0 flex-1"
-        orientation="vertical"
-        overscrollContain
-        scrollFade
-      >
-        {children}
-      </ScrollArea>
+      {children}
     </ArkCombobox.Content>
   );
 };
@@ -245,13 +237,18 @@ export const CommandList = (props: CommandListProps) => {
   const { className, ...rest } = props;
 
   return (
-    <div className="max-h-72 min-h-0 flex-1">
-      <ComboboxList
-        className={cn("flex-1", className)}
+    <ScrollArea
+      className="max-h-72 min-h-0 flex-1"
+      orientation="vertical"
+      overscrollContain
+      scrollFade
+    >
+      <ArkCombobox.List
+        className={cn("flex flex-col", className)}
         data-slot="command-list"
         {...rest}
       />
-    </div>
+    </ScrollArea>
   );
 };
 
@@ -320,7 +317,7 @@ export const CommandFooter = (props: React.ComponentProps<typeof ark.div>) => {
       className={cn(
         "z-10",
         "flex items-center justify-between gap-3",
-        "mt-2 px-3 py-2",
+        "px-3 py-2",
         "bg-muted/48",
         "text-muted-foreground text-xs leading-none",
         "rounded-b-2xl border-t",

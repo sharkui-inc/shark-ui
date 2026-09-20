@@ -16,7 +16,9 @@ const Example = () => {
 
   const { values } = translations[locale];
 
-  const slides = Array.from({ length: values.numbers.length }, (_, id) => ({ id }));
+  const slides = Array.from({ length: values.numbers.length }, (_, id) => ({
+    id,
+  }));
 
   return (
     <Carousel className="w-full max-w-48" slideCount={slides.length}>

@@ -16,8 +16,8 @@ export const ContextMenuThumb = (props: ThumbCardProps) => (
           <div className="h-2 w-full rounded-full bg-primary-foreground" />
         </div>
         <div className="flex items-center gap-2 p-2">
-          <div className="size-4 shrink-0 rounded-md bg-muted-foreground/16" />
-          <div className="h-2 w-full rounded-full bg-muted-foreground/16" />
+          <div className="size-4 shrink-0 rounded-md bg-muted-foreground/24" />
+          <div className="h-2 w-full rounded-full bg-muted-foreground/24" />
         </div>
       </div>
     </div>

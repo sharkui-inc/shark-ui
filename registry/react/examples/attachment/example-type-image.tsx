@@ -1,4 +1,3 @@
-import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Attachment,
   AttachmentActions,
@@ -15,7 +14,7 @@ const Example = () => (
       <img
         alt=""
         height={104}
-        src={createWavesAvatar("campaign cover", "green-dark")}
+        src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=campaign+cover&waveColor=1a6b5c"
         width={104}
       />
     </AttachmentMedia>

@@ -17,9 +17,9 @@ export const revalidate = false;
 export const generateStaticParams = () =>
   getCategories("blocks").map((category) => ({ category: category.slug }));
 
-export const generateMetadata = async (
-  props: { params: Promise<{ category: string }> }
-): Promise<Metadata> => {
+export const generateMetadata = async (props: {
+  params: Promise<{ category: string }>;
+}): Promise<Metadata> => {
   const { category: slug } = await props.params;
 
   const category = getCategories("blocks").find((item) => item.slug === slug);

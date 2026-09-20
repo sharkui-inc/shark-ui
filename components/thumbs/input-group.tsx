@@ -11,7 +11,7 @@ export const InputGroupThumb = (props: ThumbCardProps) => (
         />
       </div>
       <div className="flex h-8 flex-1 items-center px-3">
-        <div className="h-2 w-1/2 rounded-full bg-muted-foreground/16" />
+        <div className="h-2 w-1/2 rounded-full bg-muted-foreground/24" />
       </div>
       <div className="flex size-8 shrink-0 items-center justify-center border-input border-s">
         <div className="size-2.5 rounded-lg bg-primary" />

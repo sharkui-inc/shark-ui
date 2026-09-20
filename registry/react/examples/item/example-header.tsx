@@ -1,4 +1,3 @@
-import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Item,
   ItemContent,
@@ -35,17 +34,20 @@ const Example = () => (
 const models = [
   {
     description: "Everyday tasks and UI generation.",
-    image: createWavesAvatar("v0-1.5-sm", "green-dark"),
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=v0-1.5-sm&waveColor=1a6b5c",
     name: "v0-1.5-sm",
   },
   {
     description: "Advanced thinking or reasoning.",
-    image: createWavesAvatar("v0-1.5-lg", "rose"),
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=v0-1.5-lg&waveColor=e11d48",
     name: "v0-1.5-lg",
   },
   {
     description: "Open Source model for everyone.",
-    image: createWavesAvatar("v0-2.0-mini", "amber"),
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=v0-2.0-mini&waveColor=ca8a04",
     name: "v0-2.0-mini",
   },
 ];

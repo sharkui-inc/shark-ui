@@ -12,6 +12,7 @@ export const revalidate = false;
 
 export const metadata = createMetadata({
   description: SITE_CONFIG.description,
+  title: "Build your own component library",
   url: "/",
 });
 

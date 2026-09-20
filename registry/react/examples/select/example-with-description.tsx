@@ -11,7 +11,7 @@ import {
 
 const Example = () => (
   <Select collection={collection} defaultValue={["mx"]}>
-    <SelectTrigger className="w-full max-w-xs">
+    <SelectTrigger className="w-48">
       <SelectValue placeholder="Select a country" />
     </SelectTrigger>
     <SelectContent>

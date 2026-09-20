@@ -2,7 +2,6 @@
 
 import { createListCollection } from "@ark-ui/react";
 import React from "react";
-import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Listbox,
   ListboxContent,
@@ -65,31 +64,36 @@ const collection = createListCollection({
   items: [
     {
       alt: "Scenic mountain view",
-      artwork: createWavesAvatar("mountain-landscape", "blue"),
+      artwork:
+        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=mountain-landscape&waveColor=2b6cb0",
       label: "Mountain Landscape",
       value: "mountain",
     },
     {
       alt: "Ocean waves",
-      artwork: createWavesAvatar("ocean-waves", "purple"),
+      artwork:
+        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=ocean-waves&waveColor=7c3aed",
       label: "Ocean Waves",
       value: "ocean",
     },
     {
       alt: "Forest path",
-      artwork: createWavesAvatar("forest-path", "green-dark"),
+      artwork:
+        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=forest-path&waveColor=1a6b5c",
       label: "Forest Path",
       value: "forest",
     },
     {
       alt: "City skyline",
-      artwork: createWavesAvatar("city-skyline", "orange"),
+      artwork:
+        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=city-skyline&waveColor=ea580c",
       label: "City Skyline",
       value: "city",
     },
     {
       alt: "Desert dunes",
-      artwork: createWavesAvatar("desert-dunes", "amber"),
+      artwork:
+        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=desert-dunes&waveColor=ca8a04",
       label: "Desert Dunes",
       value: "desert",
     },

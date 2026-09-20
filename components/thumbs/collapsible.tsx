@@ -12,8 +12,8 @@ export const CollapsibleThumb = (props: ThumbCardProps) => (
         />
       </div>
       <div className="flex flex-col gap-1 px-3 py-3">
-        <div className="h-1.5 w-full rounded-full bg-muted-foreground/16" />
-        <div className="h-1.5 w-2/3 rounded-full bg-muted-foreground/16" />
+        <div className="h-1.5 w-full rounded-full bg-muted-foreground/24" />
+        <div className="h-1.5 w-2/3 rounded-full bg-muted-foreground/24" />
       </div>
     </div>
   </ThumbCard>

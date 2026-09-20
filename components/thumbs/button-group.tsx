@@ -7,10 +7,10 @@ export const ButtonGroupThumb = (props: ThumbCardProps) => (
         <div className="h-2 w-4 rounded-full bg-primary-foreground" />
       </div>
       <div className="flex flex-1 items-center justify-center border-input border-e p-3">
-        <div className="h-2 w-4 rounded-full bg-muted-foreground/16" />
+        <div className="h-2 w-4 rounded-full bg-muted-foreground/24" />
       </div>
       <div className="flex flex-1 items-center justify-center p-3">
-        <div className="h-2 w-4 rounded-full bg-muted-foreground/16" />
+        <div className="h-2 w-4 rounded-full bg-muted-foreground/24" />
       </div>
     </div>
   </ThumbCard>

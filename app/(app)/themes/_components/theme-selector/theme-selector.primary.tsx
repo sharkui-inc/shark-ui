@@ -35,7 +35,8 @@ const renderPrimaryItem = (
 );
 
 export const ThemeSelectorPrimary = () => {
-  const { config, setPrimaryColor } = useThemeCustomization();
+  const { clearThemePreview, config, previewTheme, setPrimaryColor } =
+    useThemeCustomization();
   const primaryTone = config.primaryTone ?? DEFAULT_PRIMARY_TONE;
 
   return (
@@ -44,6 +45,14 @@ export const ThemeSelectorPrimary = () => {
       description={THEME_FIELDS.primaryColor.description}
       label={THEME_FIELDS.primaryColor.label}
       lockKey="primaryColor"
+      onPreview={(next) => {
+        if (!next) {
+          clearThemePreview();
+          return;
+        }
+
+        previewTheme({ primaryColor: next as PrimaryColor });
+      }}
       onValueChange={({ value }) => {
         const [next] = value;
         if (next) {

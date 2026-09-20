@@ -2,7 +2,6 @@
 
 import { ArrowUpRightIcon, AudioWaveformIcon } from "lucide-react";
 import React from "react";
-import { createWavesAvatar } from "@/lib/dicebear";
 import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Item,
@@ -91,7 +90,7 @@ export const MusicSidebar = () => {
               <img
                 alt=""
                 height={44}
-                src={createWavesAvatar("Fresh this week", "amber")}
+                src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=Fresh+this+week&waveColor=ca8a04"
                 width={44}
               />
             </ItemMedia>

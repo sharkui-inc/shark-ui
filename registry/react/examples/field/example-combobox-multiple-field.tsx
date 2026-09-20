@@ -36,7 +36,7 @@ const Example = () => {
           filter(reason === "item-select" ? "" : inputValue)
         }
       >
-      <ComboboxContext<Framework>>
+        <ComboboxContext<Framework>>
           {({ selectedItems }) => (
             <>
               <ComboboxChips>
@@ -62,7 +62,7 @@ const Example = () => {
               </ComboboxContent>
             </>
           )}
-      </ComboboxContext>
+        </ComboboxContext>
       </Combobox>
       <FieldDescription>Select multiple items.</FieldDescription>
     </Field>

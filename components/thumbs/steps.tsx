@@ -6,8 +6,8 @@ export const StepsThumb = (props: ThumbCardProps) => (
       <div className="size-5 rounded-full border-2 border-input border-primary bg-primary" />
       <div className="h-0.5 flex-1 rounded-full bg-primary" />
       <div className="size-5 rounded-full bg-primary" />
-      <div className="h-0.5 flex-1 rounded-full bg-muted-foreground/16" />
-      <div className="size-5 rounded-full border-2 border-input border-muted-foreground/16" />
+      <div className="h-0.5 flex-1 rounded-full bg-muted-foreground/24" />
+      <div className="size-5 rounded-full border-2 border-input border-muted-foreground/24" />
     </div>
   </ThumbCard>
 );

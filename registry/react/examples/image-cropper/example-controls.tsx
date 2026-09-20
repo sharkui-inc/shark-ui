@@ -9,7 +9,6 @@ import {
   ZoomInIcon,
   ZoomOutIcon,
 } from "lucide-react";
-import { createWavesAvatar } from "@/lib/dicebear";
 import { Button } from "@/registry/react/components/button";
 import { ButtonGroup } from "@/registry/react/components/button-group";
 import { Card } from "@/registry/react/components/card";
@@ -25,7 +24,7 @@ const Example = () => (
     <ImageCropper>
       <ImageCropperImage
         alt="Crop me"
-        src={createWavesAvatar("image cropper", "green-dark")}
+        src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=image+cropper&waveColor=1a6b5c"
       />
       <ImageCropperSelection />
       <ImageCropperContext>

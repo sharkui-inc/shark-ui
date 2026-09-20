@@ -1,7 +1,7 @@
 "use client";
 
-import type { Select as ArkSelect } from "@ark-ui/react/select";
-import React from "react";
+import type { CollectionItem, ListCollection } from "@ark-ui/react/collection";
+import type React from "react";
 import type { ThemeLockKey } from "@/lib/theme/config";
 import { Field } from "@/registry/react/components/field";
 import {
@@ -12,57 +12,37 @@ import {
   SelectValue,
 } from "@/registry/react/components/select";
 import { ThemeSelectorHeading } from "./theme-selector.heading";
+import { useThemeHighlightPreview } from "./theme-selector.preview";
 
-const keyboardNavigationKeys = new Set(["ArrowDown", "ArrowUp", "End", "Home"]);
-
-interface ThemeSelectorFieldProps {
+interface ThemeSelectorFieldProps<T extends CollectionItem = CollectionItem> {
+  collection: ListCollection<T>;
   description?: string;
   label: string;
   lockKey?: ThemeLockKey;
+  onPreview?: (value: string | null) => void;
+  onValueChange?: (details: { value: string[] }) => void;
   placeholder?: string;
-  renderItem: (item: ArkSelect.CollectionItem) => React.ReactNode;
+  renderItem: (item: T) => React.ReactNode;
   trigger?: React.ReactNode;
+  value?: string[];
 }
 
-export const ThemeSelectorField: ArkSelect.RootComponent<
-  ThemeSelectorFieldProps
-> = (props) => {
+export const ThemeSelectorField = <T extends CollectionItem>(
+  props: ThemeSelectorFieldProps<T>
+) => {
   const {
     collection,
     description,
     label,
     lockKey,
+    onPreview,
     onValueChange,
     placeholder,
     renderItem,
     trigger,
     value,
   } = props;
-  const isKeyboardNavigation = React.useRef<boolean>(false);
-  const keyboardNavigationTimeout = React.useRef<number | undefined>(undefined);
-
-  React.useEffect(
-    () => () => {
-      if (keyboardNavigationTimeout.current !== undefined) {
-        window.clearTimeout(keyboardNavigationTimeout.current);
-      }
-    },
-    []
-  );
-
-  const handleKeyDownCapture = (event: React.KeyboardEvent<HTMLElement>) => {
-    if (!keyboardNavigationKeys.has(event.key)) {
-      return;
-    }
-
-    isKeyboardNavigation.current = true;
-    if (keyboardNavigationTimeout.current !== undefined) {
-      window.clearTimeout(keyboardNavigationTimeout.current);
-    }
-    keyboardNavigationTimeout.current = window.setTimeout(() => {
-      isKeyboardNavigation.current = false;
-    }, 0);
-  };
+  const preview = useThemeHighlightPreview(onPreview);
 
   return (
     <Field>
@@ -74,21 +54,12 @@ export const ThemeSelectorField: ArkSelect.RootComponent<
 
       <Select
         collection={collection}
-        onHighlightChange={({ highlightedItem, highlightedValue }) => {
-          if (isKeyboardNavigation.current === false) {
-            return;
+        onHighlightChange={preview.onHighlightChange}
+        onOpenChange={({ open }) => {
+          if (!open) {
+            preview.clearPreview();
           }
-
-          if (!(highlightedItem && highlightedValue)) {
-            return;
-          }
-
-          onValueChange?.({
-            items: [highlightedItem],
-            value: [highlightedValue],
-          });
         }}
-        onKeyDownCapture={handleKeyDownCapture}
         onValueChange={onValueChange}
         value={value}
       >
@@ -98,7 +69,10 @@ export const ThemeSelectorField: ArkSelect.RootComponent<
             <SelectValue placeholder={placeholder} />
           </span>
         </SelectTrigger>
-        <SelectContent onKeyDownCapture={handleKeyDownCapture}>
+        <SelectContent
+          onKeyDownCapture={preview.onKeyDownCapture}
+          onPointerLeave={preview.onPointerLeaveContent}
+        >
           {collection.items.map((item) => (
             <SelectItem item={item} key={collection.getItemValue(item)}>
               {renderItem(item)}

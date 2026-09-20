@@ -4,7 +4,6 @@ import React from "react";
 import { toast } from "@/components/examples/example-toast";
 import { AppleIcon } from "@/components/icons/apple";
 import { GoogleIcon } from "@/components/icons/google";
-import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Avatar,
   AvatarFallback,
@@ -58,7 +57,7 @@ export const LoginFormExample = (props: React.ComponentProps<"div">) => {
         <Avatar size="lg">
           <AvatarImage
             alt="Green mesh gradient"
-            src={createWavesAvatar("create account", "purple")}
+            src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=create+account&waveColor=7c3aed"
           />
           <AvatarFallback>AC</AvatarFallback>
         </Avatar>

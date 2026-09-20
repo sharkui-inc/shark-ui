@@ -7,8 +7,8 @@ export const SegmentGroupThumb = (props: ThumbCardProps) => (
         <div className="flex items-center justify-center rounded-lg bg-primary p-2">
           <div className="h-1.5 w-8 rounded-full bg-primary-foreground" />
         </div>
-        <div className="h-1.5 w-8 rounded-full bg-muted-foreground/16" />
-        <div className="h-1.5 w-8 rounded-full bg-muted-foreground/16" />
+        <div className="h-1.5 w-8 rounded-full bg-muted-foreground/24" />
+        <div className="h-1.5 w-8 rounded-full bg-muted-foreground/24" />
       </div>
     </div>
   </ThumbCard>

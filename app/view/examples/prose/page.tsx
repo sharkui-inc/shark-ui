@@ -1,3 +1,4 @@
+import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
 import ExampleA from "@/registry/react/examples/prose/example-a";
 import ExampleBlockquote from "@/registry/react/examples/prose/example-blockquote";
 import ExampleDefault from "@/registry/react/examples/prose/example-default";
@@ -21,7 +22,6 @@ import ExampleRtl from "@/registry/react/examples/prose/example-rtl";
 import ExampleSeparator from "@/registry/react/examples/prose/example-separator";
 import ExampleSmall from "@/registry/react/examples/prose/example-small";
 import ExampleTable from "@/registry/react/examples/prose/example-table";
-import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
 
 const ProseExamplePage = () => (
   <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">

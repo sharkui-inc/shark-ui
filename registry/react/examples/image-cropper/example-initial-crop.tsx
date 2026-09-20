@@ -1,4 +1,3 @@
-import { createWavesAvatar } from "@/lib/dicebear";
 import { Card } from "@/registry/react/components/card";
 import {
   ImageCropper,
@@ -18,7 +17,7 @@ const Example = () => (
     >
       <ImageCropperImage
         alt="Crop me"
-        src={createWavesAvatar("image cropper", "green-dark")}
+        src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=image+cropper&waveColor=1a6b5c"
       />
       <ImageCropperSelection />
     </ImageCropper>

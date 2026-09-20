@@ -21,7 +21,6 @@ import {
   menuItemIconVariants,
   menuItemIndicatorVariants,
 } from "@/registry/react/components/menu";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const useListbox = useArkListbox;
 export const useListboxContext = useArkListboxContext;
@@ -72,27 +71,18 @@ export const ListboxContent = (
   return (
     <ArkListbox.Content
       className={cn(
-        "flex min-h-0 w-full min-w-0 flex-col",
+        "flex min-h-0 w-full min-w-0 flex-col gap-1 *:shrink-0",
         "p-1.5",
-        "overflow-hidden",
+        "overflow-y-auto overflow-x-hidden overscroll-y-contain",
+        "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20",
         "outline-hidden",
-        "data-[orientation=horizontal]:max-h-none data-[orientation=horizontal]:flex-row",
+        "data-[orientation=horizontal]:max-h-none data-[orientation=horizontal]:flex-row data-[orientation=horizontal]:overflow-x-auto data-[orientation=horizontal]:overflow-y-hidden data-[orientation=horizontal]:overscroll-x-contain",
         className
       )}
       data-slot="listbox-content"
       {...rest}
     >
-      <ScrollArea
-        className={cn(
-          "max-h-[inherit]",
-          "**:data-[slot=scroll-area-content]:flex **:data-[slot=scroll-area-content]:flex-col **:data-[slot=scroll-area-content]:gap-1",
-          "in-[[data-slot=listbox-content][data-orientation=horizontal]]:**:data-[slot=scroll-area-content]:flex-row"
-        )}
-        overscrollContain
-        scrollFade
-      >
-        {children}
-      </ScrollArea>
+      {children}
     </ArkListbox.Content>
   );
 };
@@ -102,7 +92,6 @@ const listboxItemVariants = tv({
     "group/listbox-item",
     menuItemControlVariants(),
     inputItemVariants(),
-    "items-start",
     "cursor-pointer",
     "outline-hidden",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
@@ -142,6 +131,7 @@ interface ListboxItemProps
 
 export const ListboxItem = (props: ListboxItemProps) => {
   const {
+    highlightOnHover = true,
     showIndicator = true,
     variant = "default",
     className,
@@ -158,6 +148,7 @@ export const ListboxItem = (props: ListboxItemProps) => {
       )}
       data-slot="listbox-item"
       data-variant={variant}
+      highlightOnHover={highlightOnHover}
       {...rest}
     >
       {children}

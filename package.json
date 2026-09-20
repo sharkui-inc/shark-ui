@@ -2,7 +2,7 @@
   "name": "shark-ui",
   "version": "1.0.0",
   "private": true,
-  "description": "shadcn/ui-style components built on Ark UI.",
+  "description": "Beautifully designed components built with Ark UI",
   "keywords": [
     "headless",
     "a11y",

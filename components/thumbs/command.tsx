@@ -10,7 +10,7 @@ export const CommandThumb = (props: ThumbCardProps) => (
             aria-hidden="true"
             className="size-3 shrink-0 text-muted-foreground/64"
           />
-          <div className="h-2 w-1/3 rounded-full bg-muted-foreground/16" />
+          <div className="h-2 w-1/3 rounded-full bg-muted-foreground/24" />
         </div>
       </div>
       <div className="flex flex-col gap-1 rounded-lg border border-input border-dashed bg-muted p-1.5 shadow-sm/4">
@@ -20,9 +20,9 @@ export const CommandThumb = (props: ThumbCardProps) => (
           <div className="ms-auto h-2 w-4 rounded-full bg-primary-foreground/64" />
         </div>
         <div className="flex w-full items-center gap-2 px-2 py-1.5">
-          <div className="size-2 rounded-full bg-muted-foreground/16" />
-          <div className="h-2 w-2/4 rounded-full bg-muted-foreground/16" />
-          <div className="ms-auto h-2 w-4 rounded-full bg-muted-foreground/16" />
+          <div className="size-2 rounded-full bg-muted-foreground/24" />
+          <div className="h-2 w-2/4 rounded-full bg-muted-foreground/24" />
+          <div className="ms-auto h-2 w-4 rounded-full bg-muted-foreground/24" />
         </div>
       </div>
     </div>

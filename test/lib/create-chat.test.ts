@@ -144,15 +144,13 @@ describe("createChat", () => {
     if (runtime.adapter === "ai-sdk") {
       assert.throws(
         () =>
-          runtime
-            .createTransport()
-            .sendMessages({
-              abortSignal: undefined,
-              chatId: "test-chat",
-              messageId: undefined,
-              messages: [runtime.toMessage(chat.get(1)[0])],
-              trigger: "submit-message",
-            }),
+          runtime.createTransport().sendMessages({
+            abortSignal: undefined,
+            chatId: "test-chat",
+            messageId: undefined,
+            messages: [runtime.toMessage(chat.get(1)[0])],
+            trigger: "submit-message",
+          }),
         { message: "No simulated assistant response found." }
       );
     }

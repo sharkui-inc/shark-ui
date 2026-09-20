@@ -365,7 +365,7 @@ const PlanHeaderStatus = ({ status }: { status: PlanStatus }) => (
     className={cn(
       "flex shrink-0 items-center text-muted-foreground",
       status === "in-progress" &&
-        "text-foreground transition-[opacity,transform] duration-150 ease-out group-data-[state=open]/collapsible:pointer-events-none group-data-[state=open]/collapsible:scale-75 group-data-[state=open]/collapsible:opacity-0 motion-reduce:transition-none",
+        "text-foreground transition-[opacity,scale] duration-150 ease-out group-data-[state=open]/collapsible:pointer-events-none group-data-[state=open]/collapsible:scale-75 group-data-[state=open]/collapsible:opacity-0 motion-reduce:transition-none",
       status === "completed" && "text-success-foreground",
       status === "error" && "text-destructive-foreground"
     )}

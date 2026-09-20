@@ -1,5 +1,4 @@
 import { CompassIcon, HomeIcon, LibraryIcon, SearchIcon } from "lucide-react";
-import { createWavesAvatar } from "@/lib/dicebear";
 
 export const NAV_ITEMS = [
   { group: "Browse", icon: HomeIcon, label: "Home" },
@@ -9,12 +8,12 @@ export const NAV_ITEMS = [
 ] as const;
 
 const ART = [
-  createWavesAvatar("Mira Vale", "green-dark"),
-  createWavesAvatar("Northbound", "blue"),
-  createWavesAvatar("Juniper Club", "purple"),
-  createWavesAvatar("Morrow", "orange"),
-  createWavesAvatar("Kite Theory", "rose"),
-  createWavesAvatar("Lumen", "amber"),
+  "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Mira+Vale&waveColor=1a6b5c",
+  "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Northbound&waveColor=2b6cb0",
+  "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=Juniper+Club&waveColor=7c3aed",
+  "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=Morrow&waveColor=ea580c",
+  "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=Kite+Theory&waveColor=e11d48",
+  "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=Lumen&waveColor=ca8a04",
 ] as const;
 
 export const TRACKS = [

@@ -12,9 +12,9 @@ export const ReasoningThumb = (props: ThumbCardProps) => (
         />
       </div>
       <div className="flex flex-col gap-1">
-        <div className="h-1.5 w-full rounded-full bg-muted-foreground/16" />
-        <div className="h-1.5 w-4/5 rounded-full bg-muted-foreground/16" />
-        <div className="h-1.5 w-2/3 rounded-full bg-muted-foreground/8" />
+        <div className="h-1.5 w-full rounded-full bg-muted-foreground/24" />
+        <div className="h-1.5 w-4/5 rounded-full bg-muted-foreground/24" />
+        <div className="h-1.5 w-2/3 rounded-full bg-muted-foreground/16" />
       </div>
     </div>
   </ThumbCard>

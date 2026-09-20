@@ -103,7 +103,8 @@ export const menuContentVariants = tv({
     "z-[calc(50+var(--layer-index,0))]",
     "relative max-h-(--available-height) not-[class*='w-']:min-w-32",
     "p-1.5",
-    "overflow-hidden",
+    "overflow-y-auto overflow-x-hidden overscroll-y-contain",
+    "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20",
     "bg-popover",
     "text-popover-foreground",
     "rounded-xl border shadow-lg/4",
@@ -201,11 +202,7 @@ export const MenuItem = (props: MenuItemProps) => {
 
   return (
     <ArkMenu.Item
-      className={cn(
-        menuItemVariants({ variant }),
-        "[&>svg]:self-start",
-        className
-      )}
+      className={cn(menuItemVariants({ variant }), className)}
       data-slot="menu-item"
       data-variant={variant}
       {...rest}
@@ -249,10 +246,7 @@ export const MenuCheckboxItem = (
       </ArkMenu.ItemIndicator>
 
       <ArkMenu.ItemText
-        className={cn(
-          "flex min-w-0 flex-1 items-center gap-2",
-          "[&>svg]:self-start"
-        )}
+        className="flex min-w-0 flex-1 items-center gap-2"
         data-slot="menu-checkbox-item-text"
       >
         {children}
@@ -315,10 +309,7 @@ export const MenuRadioItem = (
       </ArkMenu.ItemIndicator>
 
       <ArkMenu.ItemText
-        className={cn(
-          "flex min-w-0 flex-1 items-center gap-2",
-          "[&>svg]:self-start"
-        )}
+        className="flex min-w-0 flex-1 items-center gap-2"
         data-slot="menu-radio-item-text"
       >
         {children}
@@ -340,7 +331,7 @@ export const MenuSubContent = (
     <Portal>
       <MenuPositioner data-slot="menu-sub-positioner">
         <ArkMenu.Content
-          className={cn(menuContentVariants(), "overflow-y-auto", className)}
+          className={cn(menuContentVariants(), className)}
           data-slot="menu-sub-content"
           {...rest}
         />
@@ -356,11 +347,7 @@ export const MenuSubTrigger = (
 
   return (
     <ArkMenu.TriggerItem
-      className={cn(
-        menuItemVariants({ variant: "default" }),
-        "[&>svg]:self-start",
-        className
-      )}
+      className={cn(menuItemVariants({ variant: "default" }), className)}
       data-slot="menu-sub-trigger"
       {...rest}
     >

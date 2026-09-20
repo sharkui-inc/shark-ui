@@ -2,7 +2,6 @@
 
 import { useCollator } from "@ark-ui/react/locale";
 import { ArrowDownIcon, ArrowUpDownIcon, ArrowUpIcon } from "lucide-react";
-import { createWavesAvatar } from "@/lib/dicebear";
 import { Alert, AlertDescription } from "@/registry/react/components/alert";
 import {
   Avatar,
@@ -122,7 +121,7 @@ const UseAsyncListDemo = () => {
                   <Avatar size="sm">
                     <AvatarImage
                       alt={user.name}
-                      src={createWavesAvatar(user.username, "amber")}
+                      src={`https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=${encodeURIComponent(user.username)}&waveColor=ca8a04`}
                     />
                     <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
                   </Avatar>

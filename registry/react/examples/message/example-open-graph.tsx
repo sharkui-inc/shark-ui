@@ -1,4 +1,3 @@
-import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Card,
   CardContent,
@@ -24,7 +23,7 @@ const Example = () => (
               <img
                 alt=""
                 height={144}
-                src={createWavesAvatar("Tailwind Play", "green-dark")}
+                src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Tailwind+Play&waveColor=1a6b5c"
                 width={256}
               />
             </CardMedia>

@@ -8,7 +8,6 @@ import {
   StarIcon,
   Trash2Icon,
 } from "lucide-react";
-import { createWavesAvatar } from "@/lib/dicebear";
 
 export const FOLDERS = [
   { icon: InboxIcon, label: "Inbox" },
@@ -180,21 +179,31 @@ export const EMAILS: Email[] = [
 ] satisfies Email[];
 
 const SENDER_AVATARS: Record<string, string> = {
-  Airbnb: createWavesAvatar("Airbnb", "rose"),
-  AWS: createWavesAvatar("AWS", "orange"),
-  DocuSign: createWavesAvatar("DocuSign", "blue"),
-  Figma: createWavesAvatar("Figma", "purple"),
-  Mercury: createWavesAvatar("Mercury", "green-dark"),
-  Notion: createWavesAvatar("Notion", "amber"),
-  PagerDuty: createWavesAvatar("PagerDuty", "orange"),
-  Spotify: createWavesAvatar("Spotify", "green-dark"),
-  "United Airlines": createWavesAvatar("United Airlines", "blue"),
-  Vercel: createWavesAvatar("Vercel", "amber"),
-  You: createWavesAvatar("You", "green-dark"),
+  Airbnb:
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=Airbnb&waveColor=e11d48",
+  AWS: "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=AWS&waveColor=ea580c",
+  DocuSign:
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=DocuSign&waveColor=2b6cb0",
+  Figma:
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=Figma&waveColor=7c3aed",
+  Mercury:
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Mercury&waveColor=1a6b5c",
+  Notion:
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=Notion&waveColor=ca8a04",
+  PagerDuty:
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=PagerDuty&waveColor=ea580c",
+  Spotify:
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Spotify&waveColor=1a6b5c",
+  "United Airlines":
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=United+Airlines&waveColor=2b6cb0",
+  Vercel:
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=Vercel&waveColor=ca8a04",
+  You: "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=You&waveColor=1a6b5c",
 };
 
 export const getSenderAvatar = (sender: string) =>
-  SENDER_AVATARS[sender] ?? createWavesAvatar(sender, "green-dark");
+  SENDER_AVATARS[sender] ??
+  `https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=${encodeURIComponent(sender)}&waveColor=1a6b5c`;
 
 export const getFolderCount = (folder: Mailbox) => {
   switch (folder) {

@@ -64,11 +64,9 @@ const GROUP_ICON_MAP: Record<string, LucideIcon> = {
   helpers: CircleDotDashed,
   hooks: CircleDotDashed,
   migration: ArrowLeftRightIcon,
-  sections: FileTextIcon,
+  pages: FileTextIcon,
   utilities: CircleDotDashed,
 };
-
-const DEFAULT_GROUP_ICON = FileTextIcon;
 
 const COMPONENT_PAGE_PATHS = [
   "/components/",
@@ -119,7 +117,7 @@ const getCommandItems = ({
   "compositionItems" | "navItems" | "tree"
 >): PageItem[] => [
   ...navItems.map((item) => ({
-    group: "Sections",
+    group: "Pages",
     isComponent: false,
     label: item.label,
     url: item.href,
@@ -272,8 +270,7 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
                 <CommandGroup heading={group} key={group}>
                   {items.map((item) => {
                     const ItemIcon =
-                      GROUP_ICON_MAP[item.group.toLowerCase()] ??
-                      DEFAULT_GROUP_ICON;
+                      GROUP_ICON_MAP[item.group.toLowerCase()] ?? FileTextIcon;
                     return (
                       <CommandItem item={item} key={item.value}>
                         <ItemIcon aria-hidden className="size-3.5" />

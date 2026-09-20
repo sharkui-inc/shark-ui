@@ -1,11 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "categories": [
-    "ai"
-  ],
-  "dependencies": [
-    "lucide-react"
-  ],
+  "categories": ["ai"],
+  "dependencies": ["lucide-react"],
   "description": "Rich assistant thread with reasoning, tools, approval, plan, sources, and message actions.",
   "files": [
     {

@@ -2,10 +2,7 @@ import React from "react";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
 
-const tags = Array.from(
-  { length: 50 },
-  (_, i) => `v1.2.0-beta.${50 - i}`
-);
+const tags = Array.from({ length: 50 }, (_, i) => `v1.2.0-beta.${50 - i}`);
 
 const ScrollAreaDemo = () => (
   <ScrollArea className="h-72 w-48 rounded-md border">

@@ -17,8 +17,8 @@ export const FloatingPanelThumb = (props: ThumbCardProps) => (
         </div>
       </div>
       <div className="flex flex-1 flex-col gap-1.5 p-3">
-        <div className="h-2 w-2/3 rounded-full bg-muted-foreground/16" />
-        <div className="h-2 w-full rounded-full bg-muted-foreground/8" />
+        <div className="h-2 w-2/3 rounded-full bg-muted-foreground/24" />
+        <div className="h-2 w-full rounded-full bg-muted-foreground/16" />
       </div>
     </div>
   </ThumbCard>

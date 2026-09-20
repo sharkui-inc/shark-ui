@@ -10,7 +10,7 @@ export const QrCodeThumb = (props: ThumbCardProps) => (
           className="size-16 stroke-[1.5] text-muted-foreground/64"
         />
       </div>
-      <div className="h-1.5 w-1/4 rounded-lg bg-muted-foreground/16" />
+      <div className="h-1.5 w-1/4 rounded-lg bg-muted-foreground/24" />
     </div>
   </ThumbCard>
 );

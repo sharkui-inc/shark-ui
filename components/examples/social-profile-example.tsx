@@ -66,7 +66,7 @@ export const SocialProfileExample = (props: React.ComponentProps<"div">) => {
         </div>
       </CardHeader>
       <CardContent>
-        <p className="text-sm">Accessible primitives on Ark UI and Tailwind.</p>
+        <p className="text-sm">Accessible primitives on Ark UI</p>
       </CardContent>
       <CardFooter className="flex-wrap justify-between gap-3">
         <div className="flex gap-4">

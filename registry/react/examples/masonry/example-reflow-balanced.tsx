@@ -1,4 +1,3 @@
-import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Avatar,
   AvatarFallback,
@@ -48,35 +47,40 @@ const Example = () => (
 const tiles = [
   {
     author: "Maya Chen",
-    avatar: createWavesAvatar("Maya Chen", "purple"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=Maya+Chen&waveColor=7c3aed",
     body: "A brief signal from the field.",
     initials: "MC",
     title: "Morning note",
   },
   {
     author: "Noah Williams",
-    avatar: createWavesAvatar("Noah Williams", "orange"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=Noah+Williams&waveColor=ea580c",
     body: "Balanced reflow clears column assignments on every layout pass, so uneven static cards settle into more even columns when heights differ a lot.",
     initials: "NW",
     title: "Even columns matter",
   },
   {
     author: "Iris Okafor",
-    avatar: createWavesAvatar("Iris Okafor", "blue"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Iris+Okafor&waveColor=2b6cb0",
     body: "A short practice line.",
     initials: "IO",
     title: "Shared language",
   },
   {
     author: "Sofia Alvarez",
-    avatar: createWavesAvatar("Sofia Alvarez", "rose"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=Sofia+Alvarez&waveColor=e11d48",
     body: "Use this mode for mostly static collections where packing density is more important than retaining each item's previous column after a resize or content update.",
     initials: "SA",
     title: "Static collections",
   },
   {
     author: "Jon Bell",
-    avatar: createWavesAvatar("Jon Bell", "green-dark"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Jon+Bell&waveColor=1a6b5c",
     body: "Existing items may move when the layout recalculates.",
     initials: "JB",
     title: "Expect movement",

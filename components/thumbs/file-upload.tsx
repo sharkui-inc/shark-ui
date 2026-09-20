@@ -10,7 +10,7 @@ export const FileUploadThumb = (props: ThumbCardProps) => (
           className="size-3 text-primary-foreground"
         />
       </div>
-      <div className="h-1.5 w-1/2 rounded-full bg-muted-foreground/16" />
+      <div className="h-1.5 w-1/2 rounded-full bg-muted-foreground/24" />
     </div>
   </ThumbCard>
 );

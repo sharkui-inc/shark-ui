@@ -1,6 +1,5 @@
 import { createListCollection } from "@ark-ui/react";
 import { ArrowDownIcon, ArrowUpIcon, MinusIcon } from "lucide-react";
-import { createWavesAvatar } from "@/lib/dicebear";
 
 export const STATUS_OPTIONS = [
   "Todo",
@@ -49,22 +48,26 @@ export const ASSIGNEES: Record<
   { avatar: string; initials: string; name: string }
 > = {
   arjun: {
-    avatar: createWavesAvatar("Arjun Patel", "blue"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Arjun+Patel&waveColor=2b6cb0",
     initials: "AP",
     name: "Arjun Patel",
   },
   elena: {
-    avatar: createWavesAvatar("Elena Rossi", "rose"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=Elena+Rossi&waveColor=e11d48",
     initials: "ER",
     name: "Elena Rossi",
   },
   jules: {
-    avatar: createWavesAvatar("Jules Martin", "green-dark"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Jules+Martin&waveColor=1a6b5c",
     initials: "JM",
     name: "Jules Martin",
   },
   maya: {
-    avatar: createWavesAvatar("Maya Chen", "purple"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=Maya+Chen&waveColor=7c3aed",
     initials: "MC",
     name: "Maya Chen",
   },

@@ -12,8 +12,8 @@ export const ToastThumb = (props: ThumbCardProps) => (
           <InfoIcon aria-hidden="true" className="size-3 text-primary" />
         </div>
         <div className="flex w-full flex-1 flex-col gap-1.5">
-          <div className="h-1.5 w-1/2 rounded-full bg-muted-foreground/16" />
-          <div className="h-1.5 w-4/5 rounded-full bg-muted-foreground/16" />
+          <div className="h-1.5 w-1/2 rounded-full bg-muted-foreground/24" />
+          <div className="h-1.5 w-4/5 rounded-full bg-muted-foreground/24" />
         </div>
       </div>
     </div>

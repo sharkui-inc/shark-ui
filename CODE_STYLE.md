@@ -141,4 +141,9 @@ API tables: `| Prop | Type | Default |`. `-` when no default; no alt headers or 
 
 ## Thumbnails
 
-Decorative monochrome. Tokens only: `foreground`, `primary`, `primary-foreground`, `muted`, `muted-foreground`, `background`, `card`, `secondary`, `border`, `border-input`, `input` (+ opacity). Shells `bg-muted`; nested fills `muted-foreground` opacity. No status/chart/raw hue.
+Decorative monochrome. Tokens only: `foreground`, `primary`, `primary-foreground`, `muted`, `muted-foreground`, `background`, `card`, `secondary`, `border`, `border-input`, `input` (+ opacity). No status/chart/raw hue.
+
+- Shell: opaque `bg-muted` (never translucent `bg-muted/*` on the illustration container).
+- Nested fills: `muted-foreground` opacity ladder — `/16` faint · `/24` default · `/32` strong. Keep at least two steps inside a thumb when hierarchy matters.
+- Icons / supporting chrome: `text-muted-foreground/64`.
+- Accent: solid `primary` / `primary-foreground`. Nested chips on a muted shell use `bg-background` (or `bg-card`), not another `bg-muted`.

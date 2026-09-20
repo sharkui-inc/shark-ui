@@ -1,13 +1,8 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "dependencies": [
-    "@ark-ui/react",
-    "tailwind-variants"
-  ],
+  "dependencies": ["@ark-ui/react", "tailwind-variants"],
   "name": "segment-group",
-  "registryDependencies": [
-    "https://shark-ui.com/r/button.json"
-  ],
+  "registryDependencies": ["https://shark-ui.com/r/button.json"],
   "type": "registry:ui",
   "files": [
     {

@@ -325,7 +325,7 @@ export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
         "group-data-[placement=left]:-right-4 group-data-[placement=right]:left-0",
         "in-data-[placement=left]:cursor-w-resize in-data-[placement=right]:cursor-e-resize",
         "[[data-placement=left][data-state=collapsed]_&]:cursor-e-resize [[data-placement=right][data-state=collapsed]_&]:cursor-w-resize",
-        "transition-[left,right,transform,background-color] duration-200 ease-linear",
+        "transition-[left,right,translate,background-color] duration-200 ease-linear",
         "group-data-[collapsible=offcanvas]:translate-x-0 hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:after:inset-s-full",
         "[[data-placement=left][data-collapsible=offcanvas]_&]:-right-2",
         "[[data-placement=right][data-collapsible=offcanvas]_&]:-left-2",

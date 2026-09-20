@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { FieldLabel } from "@/registry/react/components/field";
 import { Kbd } from "@/registry/react/components/kbd";
-import { ListboxLabel } from "@/registry/react/components/listbox";
 import {
   Tooltip,
   TooltipContent,
@@ -15,7 +14,6 @@ import {
 } from "@/registry/react/components/tooltip";
 
 interface ThemeSelectorHeadingProps {
-  asListboxLabel?: boolean;
   description?: string;
   hotkey?: string;
   lockKey?: ThemeLockKey;
@@ -23,7 +21,7 @@ interface ThemeSelectorHeadingProps {
 }
 
 export const ThemeSelectorHeading = (props: ThemeSelectorHeadingProps) => {
-  const { asListboxLabel = false, description, hotkey, lockKey, title } = props;
+  const { description, hotkey, lockKey, title } = props;
 
   const { locks, toggleLock } = useThemeCustomization();
   const locked = lockKey ? locks[lockKey] : false;
@@ -31,11 +29,7 @@ export const ThemeSelectorHeading = (props: ThemeSelectorHeadingProps) => {
 
   return (
     <div className="flex items-center gap-0.5">
-      {asListboxLabel ? (
-        <ListboxLabel>{title}</ListboxLabel>
-      ) : (
-        <FieldLabel>{title}</FieldLabel>
-      )}
+      <FieldLabel>{title}</FieldLabel>
 
       {description ? (
         <Tooltip>

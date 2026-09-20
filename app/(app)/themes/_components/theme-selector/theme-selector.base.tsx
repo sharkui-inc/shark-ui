@@ -23,7 +23,8 @@ const renderBaseItem = (item: (typeof BASE_COLORS)[number]) => (
 );
 
 export const ThemeSelectorBase = () => {
-  const { config, setBaseColor } = useThemeCustomization();
+  const { clearThemePreview, config, previewTheme, setBaseColor } =
+    useThemeCustomization();
   const current = collection.items.find(
     (item) => item.value === config.baseColor
   );
@@ -34,6 +35,14 @@ export const ThemeSelectorBase = () => {
       description={THEME_FIELDS.baseColor.description}
       label={THEME_FIELDS.baseColor.label}
       lockKey="baseColor"
+      onPreview={(next) => {
+        if (!next) {
+          clearThemePreview();
+          return;
+        }
+
+        previewTheme({ baseColor: next as BaseColor });
+      }}
       onValueChange={({ value }) => {
         const [next] = value;
         if (next) {

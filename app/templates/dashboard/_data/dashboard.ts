@@ -8,7 +8,6 @@ import {
   ShoppingBagIcon,
   UsersIcon,
 } from "lucide-react";
-import { createWavesAvatar } from "@/lib/dicebear";
 
 export const metrics = [
   {
@@ -76,10 +75,14 @@ export type Employee = (typeof employees)[number];
 export const ownerEmployeeId = "#4586932" satisfies Employee["id"];
 
 export const employeeAvatars: Record<Employee["id"], string> = {
-  "#4586932": createWavesAvatar("Kate Moore", "rose"),
-  "#4586933": createWavesAvatar("John Smith", "green-dark"),
-  "#4586936": createWavesAvatar("Alex Turner", "blue"),
-  "#4586937": createWavesAvatar("Emma Davis", "purple"),
+  "#4586932":
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=Kate+Moore&waveColor=e11d48",
+  "#4586933":
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=John+Smith&waveColor=1a6b5c",
+  "#4586936":
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Alex+Turner&waveColor=2b6cb0",
+  "#4586937":
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=Emma+Davis&waveColor=7c3aed",
 };
 
 export const owner = {

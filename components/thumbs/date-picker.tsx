@@ -10,14 +10,14 @@ export const DatePickerThumb = (props: ThumbCardProps) => (
             aria-hidden="true"
             className="size-3 shrink-0 text-muted-foreground/64"
           />
-          <div className="h-2 w-1/3 rounded-full bg-muted-foreground/16" />
+          <div className="h-2 w-1/3 rounded-full bg-muted-foreground/24" />
         </div>
       </div>
-      <div className="relative flex flex-col gap-2 rounded-lg border border-input border-dashed bg-muted/64 p-3 shadow-sm/4">
+      <div className="relative flex flex-col gap-2 rounded-lg border border-input border-dashed bg-muted p-3 shadow-sm/4">
         <div className="grid grid-cols-5 place-content-center gap-1.5">
           {Array.from({ length: 5 }, (_, i) => `day-${i}`).map((key) => (
             <div
-              className="h-1.5 rounded-lg bg-muted-foreground/16"
+              className="h-1.5 rounded-lg bg-muted-foreground/24"
               key={key}
             />
           ))}
@@ -28,7 +28,7 @@ export const DatePickerThumb = (props: ThumbCardProps) => (
               className={
                 i === 2
                   ? "size-6 rounded-lg bg-primary"
-                  : "size-6 rounded-lg bg-muted-foreground/8"
+                  : "size-6 rounded-lg bg-muted-foreground/16"
               }
               key={key}
             />

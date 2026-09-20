@@ -1,6 +1,5 @@
 import { WavesHorizontalIcon } from "lucide-react";
 import type { Metadata } from "next";
-import { createWavesAvatar } from "@/lib/dicebear";
 import { createMetadata } from "@/lib/metadata";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -92,7 +91,7 @@ const AuthTemplate = () => (
         alt="Onda workspace"
         className="absolute inset-0 size-full object-cover"
         height={500}
-        src={createWavesAvatar("Onda workspace", "green-dark")}
+        src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Onda+workspace&waveColor=1a6b5c"
         width={800}
       />
     </div>

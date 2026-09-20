@@ -401,14 +401,7 @@ export const ComboboxContent = (
           data-slot="combobox-content"
           {...rest}
         >
-          <ScrollArea
-            className="h-auto max-h-[inherit] **:data-[slot=scroll-area-viewport]:h-auto"
-            orientation="vertical"
-            overscrollContain
-            scrollFade
-          >
-            {children}
-          </ScrollArea>
+          {children}
         </ArkCombobox.Content>
       </ComboboxPositioner>
     </Portal>
@@ -460,7 +453,6 @@ export const comboboxItemVariants = tv({
     menuItemHighlightVariants(),
     "data-disabled:pointer-events-none data-disabled:opacity-64",
     "[&_svg:not([class*='text-'])]:text-muted-foreground",
-    "[&>svg]:self-start",
   ],
 });
 
@@ -520,10 +512,17 @@ export const ComboboxList = (
   const { className, ...rest } = props;
 
   return (
-    <ArkCombobox.List
-      className={cn("flex flex-col", className)}
-      data-slot="combobox-list"
-      {...rest}
-    />
+    <ScrollArea
+      className="h-auto max-h-[inherit] **:data-[slot=scroll-area-viewport]:h-auto"
+      orientation="vertical"
+      overscrollContain
+      scrollFade
+    >
+      <ArkCombobox.List
+        className={cn("flex flex-col", className)}
+        data-slot="combobox-list"
+        {...rest}
+      />
+    </ScrollArea>
   );
 };

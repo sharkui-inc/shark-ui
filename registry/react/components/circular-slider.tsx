@@ -211,7 +211,7 @@ export const CircularSliderThumb = (
           "bg-white",
           "size-(--size)",
           "rounded-full shadow-xs/4 ring-2 ring-border",
-          "transition-[box-shadow,transform]",
+          "transition-[box-shadow,scale]",
           "cursor-grab hover:ring-[3px]",
           dragging && "cursor-grabbing",
           "motion-reduce:transition-none"

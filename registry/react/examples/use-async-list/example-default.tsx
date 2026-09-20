@@ -1,6 +1,5 @@
 "use client";
 
-import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Avatar,
   AvatarFallback,
@@ -64,7 +63,7 @@ const UseAsyncListDemo = () => {
               <Avatar>
                 <AvatarImage
                   alt={quote.author}
-                  src={createWavesAvatar(quote.author, "blue")}
+                  src={`https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=${encodeURIComponent(quote.author)}&waveColor=2b6cb0`}
                 />
                 <AvatarFallback>{quote.author.charAt(0)}</AvatarFallback>
               </Avatar>

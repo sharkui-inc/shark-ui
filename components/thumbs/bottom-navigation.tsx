@@ -9,12 +9,12 @@ export const BottomNavigationThumb = (props: ThumbCardProps) => (
           <div className="h-1 w-6 rounded-full bg-primary" />
         </div>
         <div className="flex flex-col items-center gap-1">
-          <div className="size-4 rounded-full bg-muted-foreground/16" />
-          <div className="h-1 w-6 rounded-full bg-muted-foreground/16" />
+          <div className="size-4 rounded-full bg-muted-foreground/24" />
+          <div className="h-1 w-6 rounded-full bg-muted-foreground/24" />
         </div>
         <div className="flex flex-col items-center gap-1">
-          <div className="size-4 rounded-full bg-muted-foreground/16" />
-          <div className="h-1 w-6 rounded-full bg-muted-foreground/16" />
+          <div className="size-4 rounded-full bg-muted-foreground/24" />
+          <div className="h-1 w-6 rounded-full bg-muted-foreground/24" />
         </div>
       </div>
     </div>

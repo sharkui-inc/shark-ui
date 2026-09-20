@@ -9,7 +9,7 @@ export const TreeViewThumb = (props: ThumbCardProps) => (
           aria-hidden="true"
           className="size-3 shrink-0 text-muted-foreground/64"
         />
-        <div className="h-2 w-1/2 rounded-full bg-muted-foreground/16" />
+        <div className="h-2 w-1/2 rounded-full bg-muted-foreground/24" />
       </div>
       <div className="flex items-center gap-2 ps-4">
         <ChevronDownIcon
@@ -23,7 +23,7 @@ export const TreeViewThumb = (props: ThumbCardProps) => (
           aria-hidden="true"
           className="size-3 shrink-0 text-muted-foreground/64"
         />
-        <div className="h-2 w-2/5 rounded-full bg-muted-foreground/16" />
+        <div className="h-2 w-2/5 rounded-full bg-muted-foreground/24" />
       </div>
     </div>
   </ThumbCard>

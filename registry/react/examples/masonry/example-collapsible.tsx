@@ -1,5 +1,4 @@
 import { ArrowUpRightIcon } from "lucide-react";
-import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Avatar,
   AvatarFallback,
@@ -76,7 +75,8 @@ const Example = () => (
 
 const projects = [
   {
-    avatar: createWavesAvatar("Mara Kim", "amber"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=Mara+Kim&waveColor=ca8a04",
     defaultOpen: true,
     details:
       "The team is refining the first-run flow after five customer calls. The next review focuses on the invitation step and empty state.",
@@ -88,7 +88,8 @@ const projects = [
     title: "Welcome",
   },
   {
-    avatar: createWavesAvatar("Ravi Singh", "blue"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Ravi+Singh&waveColor=2b6cb0",
     defaultOpen: false,
     details:
       "We are testing the library with two product teams and documenting the smallest set of patterns they reach for repeatedly.",
@@ -101,7 +102,8 @@ const projects = [
     title: "Pattern library for shared decisions",
   },
   {
-    avatar: createWavesAvatar("Amina Cole", "rose"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=Amina+Cole&waveColor=e11d48",
     defaultOpen: false,
     details:
       "The next session pairs community questions with working prototypes, so each conversation ends with something tangible to test.",
@@ -113,7 +115,8 @@ const projects = [
     title: "Onda sessions",
   },
   {
-    avatar: createWavesAvatar("Leo Martin", "green-dark"),
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Leo+Martin&waveColor=1a6b5c",
     defaultOpen: false,
     details:
       "We are gathering the small operational practices that help makers protect deep work without disappearing from their collaborators.",

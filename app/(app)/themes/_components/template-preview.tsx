@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { republishThemeVisualToIframe } from "@/lib/theme/preview";
 import { cn } from "@/lib/utils";
 import { Spinner } from "@/registry/react/components/spinner";
 import { COMPONENTS_SLUG, getThemeTemplate } from "../_lib/theme-templates";
@@ -95,7 +96,8 @@ export const TemplatePreviewHost = (props: TemplatePreviewHostProps) => {
             )}
             inert={!canInteract}
             key={frame.id}
-            onLoad={() => {
+            onLoad={(event) => {
+              republishThemeVisualToIframe(event.currentTarget);
               setLoadedFrameIds((current) => {
                 if (current.has(frame.id)) {
                   return current;

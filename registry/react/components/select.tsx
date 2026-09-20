@@ -21,7 +21,6 @@ import {
   menuItemIndicatorVariants,
   menuSeparatorVariants,
 } from "@/registry/react/components/menu";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
 
 export const useSelect = useArkSelect;
@@ -219,8 +218,9 @@ export const SelectContent = (
             "z-[calc(50+var(--layer-index,0))]",
             "relative",
             "max-h-96 min-w-(--reference-width)",
-            "p-1",
-            "overflow-hidden",
+            "p-1.5",
+            "overflow-y-auto overflow-x-hidden overscroll-y-contain",
+            "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20",
             "bg-popover",
             "text-popover-foreground",
             "rounded-xl border shadow-lg/4",
@@ -234,14 +234,7 @@ export const SelectContent = (
           data-slot="select-content"
           {...rest}
         >
-          <ScrollArea
-            className="h-auto max-h-[inherit] **:data-[slot=scroll-area-viewport]:h-auto"
-            orientation="vertical"
-            overscrollContain
-            scrollFade
-          >
-            {children}
-          </ScrollArea>
+          {children}
         </ArkSelect.Content>
       </ArkSelect.Positioner>
     </Portal>
@@ -306,7 +299,7 @@ export const SelectItem = (
       {...rest}
     >
       <ArkSelect.ItemText
-        className="flex min-w-0 items-start gap-2"
+        className="flex min-w-0 items-center gap-2"
         data-slot="select-item-text"
       >
         {children}

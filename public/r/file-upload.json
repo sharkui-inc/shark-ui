@@ -1,13 +1,8 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "dependencies": [
-    "@ark-ui/react",
-    "lucide-react"
-  ],
+  "dependencies": ["@ark-ui/react", "lucide-react"],
   "name": "file-upload",
-  "registryDependencies": [
-    "https://shark-ui.com/r/button.json"
-  ],
+  "registryDependencies": ["https://shark-ui.com/r/button.json"],
   "type": "registry:ui",
   "files": [
     {

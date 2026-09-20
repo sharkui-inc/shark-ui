@@ -1,7 +1,6 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { createWavesAvatar } from "@/lib/dicebear";
 import { Field } from "@/registry/react/components/field";
 import {
   Listbox,
@@ -62,19 +61,22 @@ const collection = createListCollection({
   items: [
     {
       artist: "O Rappa",
-      artwork: createWavesAvatar("rappa-mundi", "orange"),
+      artwork:
+        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=rappa-mundi&waveColor=ea580c",
       title: "Rappa Mundi",
       year: "1996",
     },
     {
       artist: "Charlie Brown Jr.",
-      artwork: createWavesAvatar("acustico-mtv", "green-dark"),
+      artwork:
+        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=acustico-mtv&waveColor=1a6b5c",
       title: "Acústico MTV",
       year: "2003",
     },
     {
       artist: "Michael Jackson",
-      artwork: createWavesAvatar("thriller", "purple"),
+      artwork:
+        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=thriller&waveColor=7c3aed",
       title: "Thriller",
       year: "1982",
     },

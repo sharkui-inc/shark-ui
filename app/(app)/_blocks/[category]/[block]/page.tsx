@@ -23,9 +23,9 @@ export const generateStaticParams = async () => {
   }));
 };
 
-export const generateMetadata = async (
-  props: { params: Promise<{ block: string; category: string }> }
-): Promise<Metadata> => {
+export const generateMetadata = async (props: {
+  params: Promise<{ block: string; category: string }>;
+}): Promise<Metadata> => {
   const { block: name, category: slug } = await props.params;
   const item = await getPublishedComposition("blocks", slug, name);
 

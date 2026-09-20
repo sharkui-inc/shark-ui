@@ -1,12 +1,8 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "dependencies": [
-    "@ark-ui/react"
-  ],
+  "dependencies": ["@ark-ui/react"],
   "name": "input-otp",
-  "registryDependencies": [
-    "https://shark-ui.com/r/input.json"
-  ],
+  "registryDependencies": ["https://shark-ui.com/r/input.json"],
   "type": "registry:ui",
   "files": [
     {

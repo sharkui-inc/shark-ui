@@ -8,6 +8,7 @@ import {
   type PrimaryTone,
   THEME_FIELDS,
 } from "@/lib/theme/config";
+import { canPointerPreview } from "@/lib/theme/preview";
 import { useThemeCustomization } from "@/lib/theme/provider";
 import { cn } from "@/lib/utils";
 import { Field } from "@/registry/react/components/field";
@@ -20,7 +21,8 @@ import {
 import { ThemeSelectorHeading } from "./theme-selector.heading";
 
 export const ThemeSelectorPrimaryTone = () => {
-  const { config, locks, setPrimaryTone } = useThemeCustomization();
+  const { clearThemePreview, config, locks, previewTheme, setPrimaryTone } =
+    useThemeCustomization();
   const primaryTone = config.primaryTone ?? DEFAULT_PRIMARY_TONE;
 
   const handleToggleTone = React.useCallback(() => {
@@ -45,7 +47,14 @@ export const ThemeSelectorPrimaryTone = () => {
         lockKey="primaryTone"
         title={THEME_FIELDS.primaryTone.label}
       />
-      <div className="h-8 overflow-hidden rounded-lg border border-input shadow-xs/4 transition-[color,box-shadow] has-focus-visible:border-ring/64 has-focus-visible:ring-2 has-focus-visible:ring-ring/24">
+      <div
+        className="h-8 overflow-hidden rounded-lg border border-input shadow-xs/4 transition-[color,box-shadow] has-focus-visible:border-ring/64 has-focus-visible:ring-2 has-focus-visible:ring-ring/24"
+        onPointerLeave={() => {
+          if (canPointerPreview()) {
+            clearThemePreview();
+          }
+        }}
+      >
         <SegmentGroup
           className={cn(
             "size-full gap-0 bg-transparent dark:bg-input/32",
@@ -64,6 +73,11 @@ export const ThemeSelectorPrimaryTone = () => {
               aria-label={tone.label}
               className="relative h-auto min-w-0 flex-1 gap-0 rounded-none p-0 text-muted-foreground data-focus-visible:border-transparent data-[state=checked]:text-primary-foreground data-focus-visible:ring-0"
               key={tone.value}
+              onPointerEnter={() => {
+                if (canPointerPreview()) {
+                  previewTheme({ primaryTone: tone.value });
+                }
+              }}
               value={tone.value}
             >
               <SegmentGroupItemText className="absolute inset-0 z-1 flex items-center justify-center">

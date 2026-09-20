@@ -9,7 +9,6 @@ import {
   SquarePenIcon,
   TerminalIcon,
 } from "lucide-react";
-import { createWavesAvatar } from "@/lib/dicebear";
 
 export const NEW_CHAT = "New chat";
 
@@ -90,7 +89,8 @@ export const environmentSources = [
 ] as const;
 
 export const account = {
-  avatar: createWavesAvatar("Vinicius Vicentini", "rose"),
+  avatar:
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=Vinicius+Vicentini&waveColor=e11d48",
   initials: "VV",
   name: "Vinicius Vicentini",
 };

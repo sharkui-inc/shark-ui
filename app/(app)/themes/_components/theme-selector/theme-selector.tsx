@@ -1,11 +1,5 @@
 "use client";
 
-import { Kbd } from "@registry/react/components/kbd";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@registry/react/components/tooltip";
 import { CodeIcon, RotateCcwIcon, ShuffleIcon } from "lucide-react";
 import React from "react";
 import { CopyThemeCodeDialog } from "@/components/dialog/copy-theme";
@@ -25,7 +19,13 @@ import { Button } from "@/registry/react/components/button";
 import { DialogTrigger } from "@/registry/react/components/dialog";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 import { useHotkey } from "@/registry/react/components/hotkeys";
+import { Kbd } from "@/registry/react/components/kbd";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/registry/react/components/tooltip";
 import { ThemeSelectorBase } from "./theme-selector.base";
 import { ThemeSelectorFont } from "./theme-selector.font";
 import { ThemeSelectorPreset } from "./theme-selector.preset";

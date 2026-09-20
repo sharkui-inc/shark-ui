@@ -1,5 +1,4 @@
 import { XIcon } from "lucide-react";
-import { createWavesAvatar } from "@/lib/dicebear";
 import {
   Attachment,
   AttachmentAction,
@@ -35,17 +34,17 @@ const files = [
   {
     meta: "PNG · 820 KB",
     name: "workspace.png",
-    src: createWavesAvatar("workspace", "green-dark"),
+    src: "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=workspace&waveColor=1a6b5c",
   },
   {
     meta: "JPG · 1.1 MB",
     name: "desk-reference.jpg",
-    src: createWavesAvatar("desk reference", "blue"),
+    src: "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=desk+reference&waveColor=2b6cb0",
   },
   {
     meta: "JPG · 940 KB",
     name: "office-reference.jpg",
-    src: createWavesAvatar("office reference", "purple"),
+    src: "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=office+reference&waveColor=7c3aed",
   },
 ] as const;
 

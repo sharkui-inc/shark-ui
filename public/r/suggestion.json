@@ -1,13 +1,9 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "dependencies": [
-    "@ark-ui/react"
-  ],
+  "dependencies": ["@ark-ui/react"],
   "description": "Starter prompt chips for empty chat states.",
   "name": "suggestion",
-  "registryDependencies": [
-    "https://shark-ui.com/r/button.json"
-  ],
+  "registryDependencies": ["https://shark-ui.com/r/button.json"],
   "type": "registry:ui",
   "files": [
     {
