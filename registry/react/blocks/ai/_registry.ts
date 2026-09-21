@@ -59,7 +59,6 @@ export const aiBlocks = [
       registryUrl("/r/select.json"),
       registryUrl("/r/sidebar.json"),
       registryUrl("/r/sources.json"),
-      registryUrl("/r/speech-input.json"),
       registryUrl("/r/toggle.json"),
       registryUrl("/r/suggestion.json"),
       registryUrl("/r/terminal.json"),
@@ -111,7 +110,7 @@ export const aiBlocks = [
     category: "ai",
     dependencies: ["lucide-react"],
     description:
-      "Premium upgrade banner, prompt composer, model picker, think mode, and voice input.",
+      "Premium upgrade banner, prompt composer, model picker, and think mode.",
     files: [
       {
         path: "blocks/ai/ai-chat-composer-01/page.tsx",
@@ -141,7 +140,6 @@ export const aiBlocks = [
       registryUrl("/r/input-group.json"),
       registryUrl("/r/popover.json"),
       registryUrl("/r/prompt-input.json"),
-      registryUrl("/r/speech-input.json"),
       registryUrl("/r/toggle.json"),
     ],
     title: "AI Chat Composer",

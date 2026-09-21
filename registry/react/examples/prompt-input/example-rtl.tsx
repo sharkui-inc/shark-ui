@@ -9,6 +9,7 @@ import {
   GlobeIcon,
   ImagePlusIcon,
   ListTodoIcon,
+  MicIcon,
   MonitorIcon,
   PaperclipIcon,
   PlusIcon,
@@ -60,10 +61,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
-import {
-  SpeechInput,
-  SpeechInputTrigger,
-} from "@/registry/react/components/speech-input";
 
 const Example = () => {
   const { locale } = usePreviewLocale();
@@ -192,13 +189,12 @@ const Example = () => {
               ))}
             </SelectContent>
           </Select>
-          <SpeechInput
-            onTranscriptionChange={(text) => {
-              setValue((current) => (current ? `${current} ${text}` : text));
-            }}
+          <PromptInputButton
+            aria-label={values.voiceInputAriaLabel}
+            size="icon-sm"
           >
-            <SpeechInputTrigger />
-          </SpeechInput>
+            <MicIcon aria-hidden="true" />
+          </PromptInputButton>
           <PromptInputSubmit className="ms-2" size="icon-sm" />
         </PromptInputFooter>
         <PromptInputBottom>
@@ -379,6 +375,7 @@ const translations = {
       local: "محلي",
       promptAriaLabel: "موجه",
       promptPlaceholder: "افعل أي شيء",
+      voiceInputAriaLabel: "إدخال صوتي",
     },
   },
   en: {
@@ -430,6 +427,7 @@ const translations = {
       local: "Local",
       promptAriaLabel: "Prompt",
       promptPlaceholder: "Do anything",
+      voiceInputAriaLabel: "Voice input",
     },
   },
   he: {
@@ -481,6 +479,7 @@ const translations = {
       local: "מקומי",
       promptAriaLabel: "פרומפט",
       promptPlaceholder: "תעשה הכל",
+      voiceInputAriaLabel: "קלט קולי",
     },
   },
 };

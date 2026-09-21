@@ -13,7 +13,6 @@ export const DOCS_NEW_ITEMS = [
   "/docs/ai-components/queue",
   "/docs/ai-components/reasoning",
   "/docs/ai-components/sources",
-  "/docs/ai-components/speech-input",
   "/docs/ai-components/suggestion",
   "/docs/ai-components/terminal",
   "/docs/ai-components/tool-result",

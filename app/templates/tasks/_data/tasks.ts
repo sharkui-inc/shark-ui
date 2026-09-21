@@ -206,12 +206,6 @@ export const priorityIconMap = {
   Medium: MinusIcon,
 };
 
-export const priorityIconClassMap: Record<TaskPriority, string> = {
-  High: "text-warning-foreground",
-  Low: "text-muted-foreground",
-  Medium: "text-foreground",
-};
-
 export const statusIndicatorVariantMap: Record<
   TaskStatus,
   StatusIndicatorVariant

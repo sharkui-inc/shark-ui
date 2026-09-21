@@ -1,4 +1,8 @@
-import { BookOpenCheckIcon, GitBranchIcon, SearchIcon } from "lucide-react";
+import {
+  BookOpenCheckIcon,
+  CircleCheckIcon,
+  GitBranchIcon,
+} from "lucide-react";
 import {
   Marker,
   MarkerContent,
@@ -15,9 +19,9 @@ const MarkerIconExample = () => (
     </Marker>
     <Marker variant="separator">
       <MarkerIcon>
-        <SearchIcon />
+        <CircleCheckIcon />
       </MarkerIcon>
-      <MarkerContent>Explored 4 files</MarkerContent>
+      <MarkerContent>Conversation compacted</MarkerContent>
     </Marker>
     <Marker className="flex-col">
       <MarkerIcon>

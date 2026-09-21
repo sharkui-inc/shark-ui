@@ -164,7 +164,7 @@ export const FloatingPanelHeader = (
           "px-(--space) py-[calc(var(--space)*0.5)]",
           "flex flex-1 shrink-0 items-center gap-2",
           "bg-muted/48",
-          "rounded-t-2xl border-b",
+          "rounded-t-[max(0px,calc(var(--radius-2xl)-1px))] border-b",
           "overflow-hidden",
           "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
           className
@@ -332,7 +332,7 @@ export const FloatingPanelFooter = (
     <ark.div
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        "rounded-b-2xl",
+        "rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
         "px-(--space) py-4",
         "bg-muted/48",
         "border-t",

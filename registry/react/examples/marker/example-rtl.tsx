@@ -1,12 +1,12 @@
 "use client";
 
-import { SearchIcon } from "lucide-react";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
+import { Marker, MarkerContent } from "@/registry/react/components/marker";
+import { Message, MessageContent } from "@/registry/react/components/message";
 import {
-  Marker,
-  MarkerContent,
-  MarkerIcon,
-} from "@/registry/react/components/marker";
+  MessageBubble,
+  MessageBubbleContent,
+} from "@/registry/react/components/message-bubble";
 
 const Example = () => {
   const { locale } = usePreviewLocale();
@@ -14,29 +14,48 @@ const Example = () => {
   const { values } = translations[locale];
 
   return (
-    <Marker className="w-full max-w-sm">
-      <MarkerIcon>
-        <SearchIcon />
-      </MarkerIcon>
-      <MarkerContent className="shimmer">{values.text}</MarkerContent>
-    </Marker>
+    <div className="flex w-full max-w-sm flex-col gap-6">
+      <Message>
+        <MessageContent>
+          <MessageBubble variant="secondary">
+            <MessageBubbleContent>{values.earlier}</MessageBubbleContent>
+          </MessageBubble>
+        </MessageContent>
+      </Message>
+      <Marker variant="separator">
+        <MarkerContent>{values.today}</MarkerContent>
+      </Marker>
+      <Message align="end">
+        <MessageContent>
+          <MessageBubble align="end">
+            <MessageBubbleContent>{values.later}</MessageBubbleContent>
+          </MessageBubble>
+        </MessageContent>
+      </Message>
+    </div>
   );
 };
 
 const translations = {
   ar: {
     values: {
-      text: "جاري البحث في ١٢ ملفًا عن منطق المصادقة",
+      earlier: "هل نكمل هذا غدًا؟",
+      later: "نعم. سأبدأ بالملخص.",
+      today: "اليوم",
     },
   },
   en: {
     values: {
-      text: "Searching 12 files for authentication logic",
+      earlier: "Can we pick this up tomorrow?",
+      later: "Yes. Starting with the summary.",
+      today: "Today",
     },
   },
   he: {
     values: {
-      text: "מחפש ב-12 קבצים אחר היגיון אימות",
+      earlier: "נמשיך עם זה מחר?",
+      later: "כן. מתחיל מהסיכום.",
+      today: "היום",
     },
   },
 };

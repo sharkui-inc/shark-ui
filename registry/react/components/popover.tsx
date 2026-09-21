@@ -53,6 +53,12 @@ export const PopoverPositioner = (
 interface PopoverContentProps
   extends React.ComponentProps<typeof ArkPopover.Content> {
   /**
+   * Whether to show the arrow
+   *
+   * @default false
+   */
+  showArrow?: boolean;
+  /**
    * Show close button at the top right corner
    *
    * @default true
@@ -61,7 +67,13 @@ interface PopoverContentProps
 }
 
 export const PopoverContent = (props: PopoverContentProps) => {
-  const { showCloseButton = false, className, children, ...rest } = props;
+  const {
+    showArrow = false,
+    showCloseButton = false,
+    className,
+    children,
+    ...rest
+  } = props;
 
   return (
     <Portal>
@@ -102,6 +114,8 @@ export const PopoverContent = (props: PopoverContentProps) => {
               </Button>
             </PopoverClose>
           )}
+
+          {showArrow ? <PopoverArrow /> : null}
         </ArkPopover.Content>
       </PopoverPositioner>
     </Portal>
@@ -200,7 +214,7 @@ export const PopoverFooter = (props: React.ComponentProps<typeof ark.div>) => {
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
         "px-(--space) py-4",
         "bg-muted/64",
-        "rounded-b-xl border-t",
+        "rounded-b-[max(0px,calc(var(--radius-xl)-1px))] border-t",
         className
       )}
       data-slot="popover-footer"
@@ -230,7 +244,7 @@ export const PopoverArrow = (
       }
       {...rest}
     >
-      <ArkPopover.ArrowTip className="border-s border-t" />
+      <ArkPopover.ArrowTip />
     </ArkPopover.Arrow>
   );
 };

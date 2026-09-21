@@ -60,7 +60,8 @@ Popover
     │   └── PopoverDescription
     ├── PopoverBody
     ├── PopoverFooter
-    └── PopoverClose
+    ├── PopoverClose
+    └── PopoverArrow
 ```
 
 ## Usage
@@ -135,6 +136,12 @@ Use `PopoverTitle` and `PopoverDescription` as children for more control.
 ```
 
 ## Examples
+
+### With Arrow
+
+Show an arrow with `showArrow` on `PopoverContent`.
+
+<ComponentPreview componentName="popover" fileName="example-with-arrow" />
 
 ### Non-modal
 
@@ -246,11 +253,12 @@ Holds the popover panel content. Displayed in a portal.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `showCloseButton` | `boolean` | `false` |
+| `showArrow` | `boolean` | `false` |
 | `className` | `string` | - |
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `--space` | CSS custom property | `--spacing(4)` |
+| `--space` | `string` | `--spacing(4)` |
 
 ### PopoverHeader
 
@@ -314,8 +322,8 @@ Optional arrow pointing toward the trigger element.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `--arrow-background` | CSS custom property | `var(--popover)` |
-| `--arrow-size` | CSS custom property | `calc(1.5 * var(--spacing))` |
+| `--arrow-background` | `string` | `var(--popover)` |
+| `--arrow-size` | `string` | `calc(1.5 * var(--spacing))` |
 
 ### PopoverRootProvider
 

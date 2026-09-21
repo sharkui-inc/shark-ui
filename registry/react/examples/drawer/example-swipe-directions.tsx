@@ -14,11 +14,13 @@ const Example = () => (
         <Button variant="outline">Bottom</Button>
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader title="Bottom Drawer" />
+        <DrawerHeader title="Bottom" />
         <DrawerBody>
-          <p className="text-muted-foreground text-sm">
-            Swipe down to close this drawer.
-          </p>
+          <div className="mx-auto w-full max-w-xs">
+            <p className="text-muted-foreground text-sm">
+              This sheet enters from the bottom. Swipe down to close it.
+            </p>
+          </div>
         </DrawerBody>
       </DrawerContent>
     </Drawer>
@@ -28,11 +30,13 @@ const Example = () => (
         <Button variant="outline">Top</Button>
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader title="Top Drawer" />
+        <DrawerHeader title="Top" />
         <DrawerBody>
-          <p className="text-muted-foreground text-sm">
-            Swipe up to close this drawer.
-          </p>
+          <div className="mx-auto w-full max-w-xs">
+            <p className="text-muted-foreground text-sm">
+              This sheet enters from the top. Swipe up to close it.
+            </p>
+          </div>
         </DrawerBody>
       </DrawerContent>
     </Drawer>
@@ -42,10 +46,11 @@ const Example = () => (
         <Button variant="outline">Left</Button>
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader title="Start Drawer" />
+        <DrawerHeader title="Left" />
         <DrawerBody>
           <p className="text-muted-foreground text-sm">
-            Swipe left to close this drawer.
+            This panel enters from the start edge. Swipe toward that edge to
+            close it.
           </p>
         </DrawerBody>
       </DrawerContent>
@@ -56,10 +61,11 @@ const Example = () => (
         <Button variant="outline">Right</Button>
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader title="End Drawer" />
+        <DrawerHeader title="Right" />
         <DrawerBody>
           <p className="text-muted-foreground text-sm">
-            Swipe right to close this drawer.
+            This panel enters from the end edge. Swipe toward that edge to close
+            it.
           </p>
         </DrawerBody>
       </DrawerContent>

@@ -1,6 +1,7 @@
 import { Button } from "@/registry/react/components/button";
 import {
   Drawer,
+  DrawerBody,
   DrawerClose,
   DrawerContent,
   DrawerFooter,
@@ -13,12 +14,16 @@ const Example = () => (
     <DrawerTrigger asChild>
       <Button variant="outline">Open</Button>
     </DrawerTrigger>
-    <DrawerContent className="[--bleed:2rem] [--space:--spacing(6)]">
+    <DrawerContent className="[--space:--spacing(10)]">
       <DrawerHeader
-        description="Tighter bleed and larger internal padding than defaults."
+        description="Tighter edge bleed and roomier padding than the defaults."
         title="Custom spacing"
       />
-
+      <DrawerBody>
+        <div className="mx-auto w-full max-w-xs rounded-lg border bg-muted px-3 py-3 text-sm">
+          The gap around this block comes from the spacing variable.
+        </div>
+      </DrawerBody>
       <DrawerFooter>
         <div className="mx-auto w-full max-w-xs">
           <DrawerClose asChild>

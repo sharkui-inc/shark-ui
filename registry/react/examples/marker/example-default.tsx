@@ -1,19 +1,34 @@
-import { SearchIcon } from "lucide-react";
+import { Marker, MarkerContent } from "@/registry/react/components/marker";
+import { Message, MessageContent } from "@/registry/react/components/message";
 import {
-  Marker,
-  MarkerContent,
-  MarkerIcon,
-} from "@/registry/react/components/marker";
+  MessageBubble,
+  MessageBubbleContent,
+} from "@/registry/react/components/message-bubble";
 
-const Example = () => (
-  <Marker className="w-full max-w-sm">
-    <MarkerIcon>
-      <SearchIcon />
-    </MarkerIcon>
-    <MarkerContent className="shimmer">
-      Searching 12 files for authentication logic
-    </MarkerContent>
-  </Marker>
+const MarkerDemo = () => (
+  <div className="flex w-full max-w-sm flex-col gap-6">
+    <Message>
+      <MessageContent>
+        <MessageBubble variant="secondary">
+          <MessageBubbleContent>
+            Can we pick this up tomorrow?
+          </MessageBubbleContent>
+        </MessageBubble>
+      </MessageContent>
+    </Message>
+    <Marker variant="separator">
+      <MarkerContent>Today</MarkerContent>
+    </Marker>
+    <Message align="end">
+      <MessageContent>
+        <MessageBubble align="end">
+          <MessageBubbleContent>
+            Yes. Starting with the summary.
+          </MessageBubbleContent>
+        </MessageBubble>
+      </MessageContent>
+    </Message>
+  </div>
 );
 
-export default Example;
+export default MarkerDemo;

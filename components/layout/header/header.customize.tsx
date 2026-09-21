@@ -10,6 +10,7 @@ import {
   WandSparklesIcon,
 } from "lucide-react";
 import React from "react";
+import { tv } from "tailwind-variants";
 import { CopyThemeCodeDialog } from "@/components/dialog/copy-theme";
 import { ThemePresetPicker } from "@/components/theme-preset-picker";
 import { loadThemeFontPreviews } from "@/lib/theme/apply";
@@ -82,10 +83,12 @@ import {
   TooltipTrigger,
 } from "@/registry/react/components/tooltip";
 
-const hideRadioChrome = cn(
-  "**:data-[slot=radio-group-item-control]:hidden",
-  "**:data-[slot=radio-group-item-text]:contents"
-);
+const hideRadioChrome = tv({
+  base: [
+    "**:data-[slot=radio-group-item-control]:hidden",
+    "**:data-[slot=radio-group-item-text]:contents",
+  ],
+});
 
 interface FontPickerProps {
   fonts: readonly ThemeFont[];
@@ -212,7 +215,7 @@ export const HeaderCustomize = () => {
 
             <Field>
               <RadioGroup
-                className={cn(hideRadioChrome, "flex flex-col gap-2")}
+                className={cn(hideRadioChrome(), "flex flex-col gap-2")}
                 onValueChange={({ value }) => setBaseColor(value as BaseColor)}
                 value={config.baseColor}
               >
@@ -259,7 +262,7 @@ export const HeaderCustomize = () => {
 
             <Field>
               <RadioGroup
-                className={cn(hideRadioChrome, "flex flex-col gap-2")}
+                className={cn(hideRadioChrome(), "flex flex-col gap-2")}
                 onValueChange={({ value }) =>
                   setPrimaryColor(value as PrimaryColor)
                 }
@@ -364,7 +367,7 @@ export const HeaderCustomize = () => {
 
             <Field>
               <RadioGroup
-                className={cn(hideRadioChrome, "grid grid-cols-5 gap-2")}
+                className={cn(hideRadioChrome(), "grid grid-cols-5 gap-2")}
                 onValueChange={({ value }) =>
                   setBorderRadius(value as BorderRadius)
                 }

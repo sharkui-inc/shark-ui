@@ -2,6 +2,7 @@
 
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import React from "react";
+import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Field, FieldLabel } from "@/registry/react/components/field";
@@ -65,11 +66,15 @@ interface PasswordStrengthProps {
   password: string;
 }
 
-const STRENGTH_STYLES = {
-  moderate: "bg-orange-500 text-white dark:bg-orange-600 dark:text-white",
-  strong: "bg-green-500 text-white dark:bg-green-600 dark:text-white",
-  weak: "bg-red-500 text-white dark:bg-red-600 dark:text-white",
-} as const;
+const passwordStrengthVariants = tv({
+  variants: {
+    strength: {
+      moderate: "bg-orange-500 text-white dark:bg-orange-600 dark:text-white",
+      strong: "bg-green-500 text-white dark:bg-green-600 dark:text-white",
+      weak: "bg-red-500 text-white dark:bg-red-600 dark:text-white",
+    },
+  },
+});
 
 const STRENGTH_LABELS = {
   moderate: "Moderate Password",
@@ -85,7 +90,7 @@ function PasswordStrength({ password }: PasswordStrengthProps) {
       aria-live="polite"
       className={cn(
         "flex h-12 w-full items-center justify-center rounded-lg font-medium text-sm transition-colors",
-        STRENGTH_STYLES[strength]
+        passwordStrengthVariants({ strength })
       )}
       data-testid="passwordStrengthDiv"
       role="status"

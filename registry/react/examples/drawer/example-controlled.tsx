@@ -15,19 +15,21 @@ const Example = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex flex-wrap items-center justify-center gap-3">
+      <p className="text-muted-foreground text-sm">
+        {open ? "Open" : "Closed"}
+      </p>
       <Button onClick={() => setOpen(true)} variant="outline">
-        Open Controlled
+        Open from state
       </Button>
-
       <Drawer onOpenChange={({ open: isOpen }) => setOpen(isOpen)} open={open}>
         <DrawerTrigger asChild>
-          <Button variant="outline">Open Uncontrolled</Button>
+          <Button variant="outline">Open from trigger</Button>
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader
-            description="The open state is managed with open and onOpenChange."
-            title="Controlled drawer"
+            description="Both buttons write the same open state."
+            title="Controlled"
           />
           <DrawerFooter>
             <div className="mx-auto w-full max-w-xs">

@@ -26,6 +26,7 @@ const Example = () => {
   const contentRef = React.useRef<HTMLElement>(null);
   return (
     <Toc
+      autoScroll={false}
       className="size-full flex-col items-stretch gap-2 rounded-lg border p-4"
       items={items}
       scrollEl={() => contentRef.current}

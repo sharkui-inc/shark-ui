@@ -140,7 +140,7 @@ export const DatePickerContent = (
       <ArkDatePicker.Positioner data-slot="date-picker-positioner">
         <ArkDatePicker.Content
           className={cn(
-            "[--cell-size:--spacing(8)]",
+            "[--cell-size:--spacing(9)]",
             "z-[calc(50+var(--layer-index,0))]",
             "w-fit min-w-72",
             "p-3",

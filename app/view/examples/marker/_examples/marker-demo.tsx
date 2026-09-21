@@ -1,4 +1,4 @@
-import { GitBranchIcon, SearchIcon } from "lucide-react";
+import { CircleCheckIcon, GitBranchIcon } from "lucide-react";
 import {
   Marker,
   MarkerContent,
@@ -18,16 +18,18 @@ const MarkerDemo = () => (
       <MarkerIcon>
         <Spinner />
       </MarkerIcon>
-      <MarkerContent className="shimmer">Thinking...</MarkerContent>
+      <MarkerContent className="shimmer">
+        Loading earlier messages
+      </MarkerContent>
     </Marker>
     <Marker variant="separator">
       <MarkerContent>Conversation compacted</MarkerContent>
     </Marker>
     <Marker>
       <MarkerIcon>
-        <SearchIcon />
+        <CircleCheckIcon />
       </MarkerIcon>
-      <MarkerContent>Explored 4 files</MarkerContent>
+      <MarkerContent>New messages</MarkerContent>
     </Marker>
   </div>
 );

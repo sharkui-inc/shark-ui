@@ -1,8 +1,5 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/registry/react/components/avatar";
+import { SharkIcon } from "@/components/icons/shark";
+import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
 import { Marker, MarkerContent } from "@/registry/react/components/marker";
 import {
   Message,
@@ -40,19 +37,17 @@ const MessageScrollerDemo = () => (
                 {isYou ? null : (
                   <MessageAvatar>
                     <Avatar size="sm">
-                      <AvatarImage
-                        alt="Ada"
-                        src="https://github.com/shadcn.png"
-                      />
-                      <AvatarFallback>A</AvatarFallback>
+                      <AvatarFallback>
+                        <SharkIcon />
+                      </AvatarFallback>
                     </Avatar>
                   </MessageAvatar>
                 )}
                 <MessageContent>
-                  {isYou ? null : <MessageHeader>Ada</MessageHeader>}
+                  {isYou ? null : <MessageHeader>Shark AI</MessageHeader>}
                   <MessageBubble
                     align={isYou ? "end" : "start"}
-                    variant={isYou ? "secondary" : "default"}
+                    variant={isYou ? "default" : "secondary"}
                   >
                     <MessageBubbleContent>{turn.text}</MessageBubbleContent>
                   </MessageBubble>
@@ -68,15 +63,15 @@ const MessageScrollerDemo = () => (
 );
 
 const turns = [
-  { from: "ada", text: "Morning. Did the preview deploy?" },
+  { from: "ai", text: "Morning. Did the preview deploy?" },
   { from: "you", text: "Yes. Checking the chat primitives next." },
-  { from: "ada", text: "Scroller first. Jump buttons if I scroll away." },
+  { from: "ai", text: "Scroller first. Jump buttons if I scroll away." },
   { from: "you", text: "Ark ScrollArea, no extra headless package." },
-  { from: "ada", text: "Nice. Marker for the date break?" },
+  { from: "ai", text: "Nice. Marker for the date break?" },
   { from: "you", text: "Separator variant. Coming up." },
-  { from: "ada", text: "Attachments too, if you still have time." },
+  { from: "ai", text: "Attachments too, if you still have time." },
   { from: "you", text: "File card is in. Image cards after lunch." },
-  { from: "ada", text: "Ship a draft when the docs page renders." },
+  { from: "ai", text: "Ship a draft when the docs page renders." },
   { from: "you", text: "On it." },
 ] as const;
 

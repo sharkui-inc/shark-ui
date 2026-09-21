@@ -93,7 +93,7 @@ import {
 
 ## Controlled
 
-Use `open` and `onOpenChange` on the root to control the drawer state.
+`open` and `onOpenChange` on `Drawer`.
 
 <ComponentPreview componentName="drawer" fileName="example-controlled" />
 
@@ -131,81 +131,85 @@ Use `DrawerTitle` and `DrawerDescription` as children for more control.
 
 ### Inset Variant
 
-Use `variant="inset"` on `DrawerContent` so the drawer appears as a floating card rather than edge-to-edge.
+`variant="inset"` on `DrawerContent`. The panel floats with padding.
 
 <ComponentPreview componentName="drawer" fileName="example-inset" />
 
 ### Swipe Directions
 
-Control which direction the drawer slides and swipes using `swipeDirection` on the root.
+`swipeDirection` on `Drawer`: `down`, `up`, `start`, or `end`.
 
 <ComponentPreview componentName="drawer" fileName="example-swipe-directions" />
 
-### Edge Swipe
-
-Render `DrawerSwipeArea` to open the drawer by swiping from its edge. The hit area follows the drawer direction and is inactive while the drawer is open.
-
-<ComponentPreview componentName="drawer" fileName="example-swipe-area" />
-
 ### Scrollable
 
-`DrawerBody` fills the remaining panel height and scrolls independently, keeping the header and footer visible.
+`DrawerBody` scrolls. Header and footer stay fixed.
 
 <ComponentPreview componentName="drawer" fileName="example-scrollable" />
 
 ### Snap Points
 
-Use `snapPoints` to allow the drawer to snap to multiple heights.
+`snapPoints` on `Drawer`. This example uses `0.25`, `0.5`, and `1`.
 
 <ComponentPreview componentName="drawer" fileName="example-snap-points" />
 
 ### Non-Modal
 
-Use `modal={false}` to allow interaction with elements outside the drawer.
+`modal={false}` leaves the page interactive.
 
 <ComponentPreview componentName="drawer" fileName="example-non-modal" />
 
+### Indent background
+
+`DrawerProvider` wraps the page. An open drawer scales that page and reveals the background behind it. Pass `container` to keep the drawer inside a frame.
+
+<ComponentPreview componentName="drawer" fileName="example-indent-background" />
+
 ### Multiple triggers
 
-Give each `DrawerTrigger` a `value` to reuse one drawer across several buttons.
+`value` on each `DrawerTrigger`. One drawer for several buttons.
 
 <ComponentPreview componentName="drawer" fileName="example-multiple-triggers" />
 
 ### Nested Drawers
 
-Nested drawers scale, shift, and smoothly resize the previous drawer to the frontmost panel height. Swipe the top drawer slowly to see the previous layer restore as the gesture progresses.
+Nest a `Drawer` inside another. The back panel follows the front panel height.
 
 <ComponentPreview componentName="drawer" fileName="example-nested" />
 
-### Autofocus
-
-Focus order is `initialFocusEl`, then `[data-autofocus]`, then the first tabbable element without `[data-no-autofocus]`.
-
 ### Close button
 
-Use the `showCloseButton` prop to show a close button in the top-right corner.
+`showCloseButton` on `DrawerContent`.
 
 <ComponentPreview componentName="drawer" fileName="example-close-button" />
 
 ### No Drag Area
 
-Apply the `data-no-drag` attribute to any element inside the drawer to prevent dragging from starting on it.
+`data-no-drag` stops a drag from starting on that element.
 
 <ComponentPreview componentName="drawer" fileName="example-no-drag-area" />
 
 ### Non Draggable
 
-Set `draggable={false}` on `DrawerContent` to disable drag-to-dismiss on the panel. 
-
-The drawer can still be dragged by the grabber.
+`draggable={false}` on `DrawerContent`. The grabber still drags.
 
 <ComponentPreview componentName="drawer" fileName="example-non-draggable" />
 
+### Responsive Dialog
+
+`Drawer` below the mobile breakpoint. [Dialog](/docs/components/dialog#responsive) on larger screens.
+
+<ComponentPreview componentName="drawer" fileName="example-responsive-dialog" />
+
+### Responsive Menu
+
+`Drawer` below the mobile breakpoint. [Menu](/docs/components/menu#responsive) on larger screens. `DrawerMenuTrigger` opens the next drawer.
+
+<ComponentPreview componentName="drawer" fileName="example-responsive-menu" />
+
 ### Custom spacing
 
-Use `[--space:--spacing("value")]` on `DrawerContent` to adjust internal spacing.
-
-Default spacing is `--spacing(6)`.
+`[--space]` on `DrawerContent`. Default is `--spacing(6)`.
 
 <ComponentPreview componentName="drawer" fileName="example-custom-spacing" />
 
@@ -280,12 +284,13 @@ Holds the drawer panel. Supports swipe-to-close; direction inherited from root `
 | `showBar` | `boolean` | `true` |
 | `showCloseButton` | `boolean` | `false` |
 | `draggable` | `boolean` | `true` |
+| `container` | `RefObject<HTMLElement \| null>` | `-` |
 | `className` | `string` | `-` |
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `--bleed` | CSS custom property | `--spacing(12)` |
-| `--space` | CSS custom property | `--spacing(6)` |
+| `--bleed` | `string` | `--spacing(12)` |
+| `--space` | `string` | `--spacing(6)` |
 
 ### DrawerHeader
 
@@ -352,12 +357,12 @@ Provides a Drawer API created with `useDrawer` to descendant components.
 
 ### DrawerProvider
 
-Public DrawerProvider component. It forwards the underlying primitive props.
+Wraps the page. Open drawers scale this surface and reveal the background behind it.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### DrawerOverlay
 
@@ -385,6 +390,82 @@ Public DrawerGrabber component. It forwards the underlying primitive props.
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | - |
+
+### DrawerMenu
+
+Menu list rendered inside a drawer. Uses the same row metrics as `Menu`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DrawerMenuItem
+
+Action row. Closes the drawer when wrapped in `DrawerClose`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "destructive"` | `"default"` |
+| `className` | `string` | `-` |
+
+### DrawerMenuSeparator
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DrawerMenuGroup
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DrawerMenuGroupLabel
+
+Section label. In a nested drawer, use it as the title and swipe down to go back.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DrawerMenuTrigger
+
+Opens a nested drawer. Renders the row and a trailing chevron.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DrawerMenuCheckboxItem
+
+Checkbox row with the menu check indicator.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `checked` | `boolean` | `-` |
+| `defaultChecked` | `boolean` | `-` |
+| `disabled` | `boolean` | `false` |
+| `onCheckedChange` | `(details: { checked: boolean }) => void` | `-` |
+| `className` | `string` | `-` |
+
+### DrawerMenuRadioGroup
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `-` |
+| `defaultValue` | `string` | `-` |
+| `onValueChange` | `(details: { value: string }) => void` | `-` |
+| `className` | `string` | `-` |
+
+### DrawerMenuRadioItem
+
+Radio row with the same check indicator as `MenuRadioItem`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | **required** |
+| `disabled` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

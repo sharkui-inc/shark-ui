@@ -17,6 +17,7 @@ const TocDemo = () => {
 
   return (
     <Toc
+      autoScroll={false}
       className="size-full rounded-lg border p-4"
       items={items}
       scrollEl={() => contentRef.current}

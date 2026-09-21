@@ -115,7 +115,7 @@ export const CompositionCodeViewer = ({
 
         <ScrollArea className="flex-1">
           <figure
-            className={docsShikiContentClassName}
+            className={docsShikiContentClassName()}
             data-slot="composition-code"
           >
             <div

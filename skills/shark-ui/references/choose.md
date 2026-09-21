@@ -205,7 +205,6 @@ Use `Separator` instead of `<hr>` or a `border-t` divider. Use `Badge` for a sta
 - Queue: queued and completed prompts.
 - Reasoning: model reasoning with duration.
 - Sources: citations and footnotes.
-- SpeechInput: browser speech-to-text.
 - Suggestion: suggested prompts.
 - Terminal: shell output with ANSI colors.
 - ToolResult: tool output with metadata and actions.

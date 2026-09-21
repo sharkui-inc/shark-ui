@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  CalendarCheckIcon,
   CalendarClockIcon,
   ChevronDownIcon,
   ClockArrowUpIcon,
@@ -9,7 +10,6 @@ import {
   ListIcon,
   PaperclipIcon,
   SmileIcon,
-  SparklesIcon,
   Undo2Icon,
   WandSparklesIcon,
 } from "lucide-react";
@@ -74,7 +74,7 @@ const SEND_ITEMS: ComposeMenuItem[] = [
     value: "schedule",
   },
   {
-    icon: <SparklesIcon aria-hidden="true" />,
+    icon: <CalendarCheckIcon aria-hidden="true" />,
     label: "Send when I'm next free",
     value: "later",
   },

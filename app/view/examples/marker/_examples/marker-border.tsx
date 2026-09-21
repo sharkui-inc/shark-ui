@@ -1,4 +1,4 @@
-import { FileTextIcon, GitBranchIcon, SearchIcon } from "lucide-react";
+import { CircleCheckIcon, GitBranchIcon, ShieldCheckIcon } from "lucide-react";
 import {
   Marker,
   MarkerContent,
@@ -15,15 +15,15 @@ const MarkerBorder = () => (
     </Marker>
     <Marker variant="border">
       <MarkerIcon>
-        <SearchIcon />
+        <ShieldCheckIcon />
       </MarkerIcon>
-      <MarkerContent>Reviewed 8 related files</MarkerContent>
+      <MarkerContent>Checks passed</MarkerContent>
     </Marker>
     <Marker variant="border">
       <MarkerIcon>
-        <FileTextIcon />
+        <CircleCheckIcon />
       </MarkerIcon>
-      <MarkerContent>Opened implementation notes</MarkerContent>
+      <MarkerContent>Conversation compacted</MarkerContent>
     </Marker>
   </div>
 );

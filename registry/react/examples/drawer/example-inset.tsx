@@ -1,6 +1,7 @@
 import { Button } from "@/registry/react/components/button";
 import {
   Drawer,
+  DrawerBody,
   DrawerClose,
   DrawerContent,
   DrawerFooter,
@@ -18,7 +19,13 @@ const Example = () => (
         description="On larger screens, the drawer appears with rounded corners and padding."
         title="Inset drawer"
       />
-
+      <DrawerBody>
+        <div className="mx-auto w-full max-w-xs">
+          <p className="text-muted-foreground text-sm">
+            The sheet floats inside the screen instead of meeting the edges.
+          </p>
+        </div>
+      </DrawerBody>
       <DrawerFooter>
         <div className="mx-auto w-full max-w-xs">
           <DrawerClose asChild>

@@ -1,4 +1,4 @@
-import { ArrowDownIcon, ArrowRightIcon, SparklesIcon } from "lucide-react";
+import { ArrowDownIcon, ArrowRightIcon, RocketIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
@@ -64,7 +64,7 @@ const TemplatesPage = async () => {
                   href="#ai-chat-01"
                 >
                   <Badge pill size="sm" variant="secondary">
-                    <SparklesIcon aria-hidden="true" />
+                    <RocketIcon aria-hidden="true" />
                     New
                   </Badge>
                   <AnnouncementTitle>

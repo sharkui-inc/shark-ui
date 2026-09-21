@@ -18,7 +18,6 @@ Put `Attachment` inside `MessageContent`.
 
 - Attachments: wrap the composer in FileUpload; chips in `PromptInputHeader`.
 - Tools and submit: `PromptInputFooter` / `PromptInputTools`.
-- Voice: `SpeechInput`.
 - Empty-state prompts: `Suggestion`.
 
 ## Agent chrome

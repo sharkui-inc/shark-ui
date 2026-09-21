@@ -8,6 +8,7 @@ import {
   ChevronRight,
   ChevronsUpDown,
   CreditCard,
+  Crown,
   Folder,
   Forward,
   Frame,
@@ -17,7 +18,6 @@ import {
   PieChart,
   Plus,
   Settings2,
-  Sparkles,
   SquareTerminal,
   Trash2,
   WavesHorizontalIcon,
@@ -374,7 +374,7 @@ const NavUser = ({ user }: NavUserProps) => {
             <MenuSeparator />
             <MenuGroup>
               <MenuItem value="upgrade">
-                <Sparkles aria-hidden="true" />
+                <Crown aria-hidden="true" />
                 Upgrade to Pro
               </MenuItem>
             </MenuGroup>

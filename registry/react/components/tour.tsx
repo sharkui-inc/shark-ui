@@ -1,25 +1,26 @@
 "use client";
 
-import { Portal } from "@ark-ui/react";
 import { ark } from "@ark-ui/react/factory";
+import { Portal } from "@ark-ui/react/portal";
 import {
   Tour as ArkTour,
   type TourStepDetails,
   type UseTourProps,
-  type UseTourReturn,
   useTour as useArkTour,
+  useTourContext as useArkTourContext,
 } from "@ark-ui/react/tour";
-import { createContext } from "@ark-ui/react/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import React from "react";
+import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
   DialogBody,
   DialogFooter,
-  DialogHeader,
-  type DialogOverlay,
+  dialogDescriptionVariants,
+  dialogHeaderVariants,
   dialogOverlayVariants,
+  dialogTitleVariants,
 } from "@/registry/react/components/dialog";
 
 export type TourStepType = TourStepDetails;
@@ -29,152 +30,97 @@ export type TourStatusChangeDetails = Parameters<
 export type TourStepChangeDetails = Parameters<
   NonNullable<UseTourProps["onStepChange"]>
 >[0];
+
 export const useTour = useArkTour;
+export const useTourContext = useArkTourContext;
 
 let activeTourCount = 0;
 let bodyHadRelativeClass = false;
+let bodyHadOverflowXClipClass = false;
 
-const addBodyRelativeClass = () => {
+const addBodyTourClasses = () => {
   if (activeTourCount === 0) {
     bodyHadRelativeClass = document.body.classList.contains("relative");
+    bodyHadOverflowXClipClass =
+      document.body.classList.contains("overflow-x-clip");
 
     if (!bodyHadRelativeClass) {
       document.body.classList.add("relative");
+    }
+
+    if (!bodyHadOverflowXClipClass) {
+      document.body.classList.add("overflow-x-clip");
     }
   }
 
   activeTourCount += 1;
 };
 
-const removeBodyRelativeClass = () => {
+const removeBodyTourClasses = () => {
   if (activeTourCount === 0) {
     return;
   }
 
   activeTourCount -= 1;
 
-  if (activeTourCount === 0 && !bodyHadRelativeClass) {
+  if (activeTourCount !== 0) {
+    return;
+  }
+
+  if (!bodyHadRelativeClass) {
     document.body.classList.remove("relative");
+  }
+
+  if (!bodyHadOverflowXClipClass) {
+    document.body.classList.remove("overflow-x-clip");
   }
 };
 
-interface TourProviderProps {
-  /**
-   * The function to start the tour
-   */
-  handleStart: () => void;
-  /**
-   * The tour instance
-   */
-  tour: UseTourReturn;
-}
-
-const [TourContextProvider, useTourContext] = createContext<TourProviderProps>({
-  hookName: "useTourContext",
-  name: "TourContext",
-  providerName: "Tour",
-});
-
-type TourProps = React.PropsWithChildren<
-  Omit<UseTourProps, "steps"> &
-    Omit<React.ComponentProps<typeof ArkTour.Root>, "children" | "tour">
-> & {
-  /**
-   * The steps to display in the tour
-   *
-   * @default []
-   */
-  steps?: TourStepDetails[];
-};
-
-export const Tour = (props: TourProps) => {
-  const {
-    children,
-    immediate,
-    lazyMount = true,
-    onExitComplete,
-    onStatusChange,
-    present,
-    steps = [],
-    unmountOnExit = true,
-    ...tourProps
-  } = props;
-
-  const [isStarted, setIsStarted] = React.useState(false);
+const TourBodyRelative = () => {
+  const tour = useArkTourContext();
 
   React.useEffect(() => {
-    if (!isStarted) {
+    if (!tour.open) {
       return;
     }
 
-    addBodyRelativeClass();
+    addBodyTourClasses();
 
-    return removeBodyRelativeClass;
-  }, [isStarted]);
+    return removeBodyTourClasses;
+  }, [tour.open]);
 
-  const handleStatusChange = React.useCallback(
-    (details: TourStatusChangeDetails) => {
-      switch (details.status) {
-        case "started":
-          setIsStarted(true);
-          break;
-        case "skipped":
-        case "completed":
-        case "dismissed":
-        case "not-found":
-          setIsStarted(false);
-          break;
-        default:
-          break;
-      }
+  return null;
+};
 
-      onStatusChange?.(details);
-    },
-    [onStatusChange]
-  );
-
-  const tour = useArkTour({
-    ...tourProps,
-    onStatusChange: handleStatusChange,
-    steps,
-  });
-
-  const handleStart = React.useCallback(() => {
-    setIsStarted(true);
-    tour.start();
-  }, [tour]);
+export const Tour = (props: React.ComponentProps<typeof ArkTour.Root>) => {
+  const { children, lazyMount = true, unmountOnExit = true, ...rest } = props;
 
   return (
-    <TourContextProvider value={{ handleStart, tour }}>
-      <ArkTour.Root
-        immediate={immediate}
-        lazyMount={lazyMount}
-        onExitComplete={onExitComplete}
-        present={present}
-        tour={tour}
-        unmountOnExit={unmountOnExit}
-      >
-        {children}
-      </ArkTour.Root>
-    </TourContextProvider>
+    <ArkTour.Root
+      data-slot="tour"
+      lazyMount={lazyMount}
+      unmountOnExit={unmountOnExit}
+      {...rest}
+    >
+      <TourBodyRelative />
+      {children}
+    </ArkTour.Root>
   );
 };
 
-interface TourTriggerProps extends React.ComponentProps<typeof ark.button> {}
-
-export const TourTrigger = (props: TourTriggerProps) => {
+export const TourTrigger = (props: React.ComponentProps<typeof ark.button>) => {
   const { onClick, ...rest } = props;
 
-  const { handleStart } = useTourContext();
+  const tour = useArkTourContext();
 
   return (
     <ark.button
       data-slot="tour-trigger"
       type="button"
       {...rest}
-      onClick={(e) => {
-        onClick?.(e);
-        handleStart();
+      onClick={(event) => {
+        onClick?.(event);
+        tour.start();
       }}
     />
   );
@@ -185,7 +131,7 @@ export const TourActionTrigger = (
 ) => <ArkTour.ActionTrigger data-slot="tour-action-trigger" {...props} />;
 
 export const TourOverlay = (
-  props: React.ComponentProps<typeof DialogOverlay>
+  props: React.ComponentProps<typeof ArkTour.Backdrop>
 ) => {
   const { className, ...rest } = props;
 
@@ -193,7 +139,9 @@ export const TourOverlay = (
     <ArkTour.Backdrop
       className={cn(
         dialogOverlayVariants(),
-        "z-[calc(50+var(--layer-index,0))] duration-initial",
+        "[--tour-z-index:calc(50+var(--layer-index,0))]",
+        "z-[calc(var(--tour-layer)+var(--tour-z-index))]",
+        "duration-initial",
         className
       )}
       data-slot="tour-overlay"
@@ -201,23 +149,65 @@ export const TourOverlay = (
     />
   );
 };
-export const TourPositioner = (
-  props: React.ComponentProps<typeof ArkTour.Positioner>
-) => (
-  <ArkTour.Positioner
-    className={cn(
-      "z-50",
-      "flex items-center justify-center",
-      "data-[type=dialog]:fixed data-[type=dialog]:inset-0",
-      "data-[type=tooltip]:absolute"
-    )}
-    data-slot="tour-positioner"
-    {...props}
-  />
-);
+
+interface TourPositionerProps
+  extends React.ComponentProps<typeof ArkTour.Positioner> {
+  /**
+   * Stick dialog steps to the bottom of the screen on mobile
+   *
+   * @default true
+   */
+  bottomStickOnMobile?: boolean;
+}
+
+export const TourPositioner = (props: TourPositionerProps) => {
+  const { bottomStickOnMobile = true, className, ...rest } = props;
+
+  return (
+    <ArkTour.Positioner
+      className={cn(
+        "[--tour-z-index:calc(50+var(--layer-index,0))]",
+        "z-[calc(var(--tour-layer)+var(--tour-z-index))]",
+        "data-[type=dialog]:fixed data-[type=dialog]:inset-0",
+        "data-[type=tooltip]:absolute",
+        "data-[type=tooltip]:max-w-[calc(100dvw-1rem)] data-[type=tooltip]:max-sm:min-w-0!",
+        "data-[type=floating]:fixed",
+        "data-[type=floating]:data-[placement*=top]:top-6",
+        "data-[type=floating]:data-[placement*=bottom]:bottom-6",
+        "data-[type=floating]:data-[placement*=start]:inset-s-6",
+        "data-[type=floating]:data-[placement*=end]:inset-e-6",
+        "data-[type=floating]:w-[min(28rem,calc(100vw-3rem))]",
+        bottomStickOnMobile &&
+          "data-[type=dialog]:max-sm:h-svh data-[type=dialog]:max-sm:w-screen",
+        bottomStickOnMobile
+          ? "data-[type=dialog]:max-sm:grid data-[type=dialog]:max-sm:grid-rows-[1fr_auto] data-[type=dialog]:max-sm:justify-items-center"
+          : "data-[type=dialog]:flex data-[type=dialog]:items-center data-[type=dialog]:justify-center",
+        bottomStickOnMobile &&
+          "data-[type=dialog]:max-sm:p-0 data-[type=dialog]:max-sm:pt-12",
+        bottomStickOnMobile &&
+          "data-[type=dialog]:sm:flex data-[type=dialog]:sm:items-center data-[type=dialog]:sm:justify-center",
+        className
+      )}
+      data-slot="tour-positioner"
+      {...rest}
+    />
+  );
+};
 
 interface TourContentProps
   extends React.ComponentProps<typeof ArkTour.Content> {
+  /**
+   * Stick dialog steps to the bottom of the screen on mobile
+   *
+   * @default true
+   */
+  bottomStickOnMobile?: boolean;
+  /**
+   * Whether to show the arrow
+   *
+   * @default true
+   */
+  showArrow?: boolean;
   /**
    * Show close button at the top right corner
    *
@@ -227,53 +217,107 @@ interface TourContentProps
 }
 
 export const TourContent = (props: TourContentProps) => {
-  const { showCloseButton = true, className, children, ...rest } = props;
+  const {
+    bottomStickOnMobile = true,
+    showArrow = true,
+    showCloseButton = true,
+    className,
+    children,
+    ...rest
+  } = props;
 
   return (
     <Portal>
       <TourOverlay />
-      <TourPositioner>
+      <TourPositioner bottomStickOnMobile={bottomStickOnMobile}>
         <ArkTour.Content
           className={cn(
             "[--space:--spacing(4)]",
-            "z-[calc(50+var(--layer-index,0))]",
-            "relative",
+            "[--tour-z-index:calc(50+var(--layer-index,0))]",
+            "relative z-[calc(var(--tour-layer,2)+var(--tour-z-index))]",
             "w-full max-w-md",
-            "flex flex-col gap-4",
-            "bg-background",
-            "rounded-lg border shadow-lg/4",
+            "data-[type=tooltip]:w-fit data-[type=tooltip]:max-w-[min(28rem,calc(100dvw-2rem))] data-[type=tooltip]:max-sm:min-w-0 data-[type=tooltip]:sm:min-w-xs",
+            bottomStickOnMobile &&
+              "data-[type=dialog]:max-sm:row-start-2 data-[type=dialog]:max-sm:min-w-0 data-[type=dialog]:max-sm:max-w-none",
             "outline-hidden",
             "origin-center data-[type=tooltip]:origin-(--transform-origin)",
             "duration-200 ease-out",
             "data-[state=closed]:animate-out data-[state=open]:animate-in",
             "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
             "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
+            bottomStickOnMobile &&
+              "data-[type=dialog]:max-sm:data-[state=closed]:slide-out-to-bottom-5 data-[type=dialog]:max-sm:data-[state=closed]:zoom-out-100",
+            bottomStickOnMobile &&
+              "data-[type=dialog]:max-sm:data-[state=open]:slide-in-from-bottom-5 data-[type=dialog]:max-sm:data-[state=open]:zoom-in-100",
             "motion-reduce:animate-none",
             className
           )}
           data-slot="tour-content"
           {...rest}
         >
-          {children}
+          <div
+            className={cn(
+              "relative",
+              bottomStickOnMobile &&
+                "in-data-[type=dialog]:max-sm:max-h-[calc(100svh-3rem)] in-data-[type=dialog]:max-sm:min-h-0",
+              "flex flex-col",
+              bottomStickOnMobile &&
+                "in-data-[type=dialog]:max-sm:pb-[env(safe-area-inset-bottom,0px)]",
+              "bg-popover",
+              "text-popover-foreground",
+              "rounded-2xl border shadow-lg/4",
+              bottomStickOnMobile &&
+                "in-data-[type=dialog]:max-sm:rounded-none in-data-[type=dialog]:max-sm:rounded-t-2xl in-data-[type=dialog]:max-sm:border-x-0 in-data-[type=dialog]:max-sm:border-t in-data-[type=dialog]:max-sm:border-b-0",
+              "overflow-hidden",
+              bottomStickOnMobile &&
+                "in-data-[type=dialog]:max-sm:**:data-[slot=dialog-footer]:rounded-none in-data-[type=dialog]:max-sm:**:data-[slot=tour-actions]:rounded-none in-data-[type=dialog]:max-sm:**:data-[slot=tour-control]:rounded-none"
+            )}
+          >
+            {children}
 
-          {!!showCloseButton && (
-            <TourClose asChild className="absolute inset-e-4 top-4">
-              <Button
-                className="size-8 border-none text-muted-foreground hover:text-foreground"
-                size="icon-md"
-                variant="ghost"
-              >
-                <X />
+            {!!showCloseButton && (
+              <TourClose asChild className="absolute inset-e-4 top-4">
+                <Button
+                  className="size-8 border-none text-muted-foreground hover:text-foreground"
+                  size="icon-md"
+                  variant="ghost"
+                >
+                  <X aria-hidden="true" />
 
-                <span className="sr-only">Close</span>
-              </Button>
-            </TourClose>
-          )}
+                  <span className="sr-only">Close</span>
+                </Button>
+              </TourClose>
+            )}
+          </div>
+
+          {showArrow ? <TourArrow /> : null}
         </ArkTour.Content>
       </TourPositioner>
 
       <TourSpotlight />
     </Portal>
+  );
+};
+
+export const TourArrow = (
+  props: React.ComponentProps<typeof ArkTour.Arrow>
+) => {
+  const { style, children, ...rest } = props;
+
+  return (
+    <ArkTour.Arrow
+      data-slot="tour-arrow"
+      style={
+        {
+          "--arrow-background": "var(--popover)",
+          "--arrow-size": "calc(1.5 * var(--spacing))",
+          ...style,
+        } as React.CSSProperties
+      }
+      {...rest}
+    >
+      <ArkTour.ArrowTip />
+    </ArkTour.Arrow>
   );
 };
 
@@ -289,7 +333,9 @@ export const TourSpotlight = (
   return (
     <ArkTour.Spotlight
       className={cn(
-        "z-50 border-2 border-ring/64 ring-2 ring-ring/24",
+        "[--tour-z-index:calc(50+var(--layer-index,0))]",
+        "z-[calc(var(--tour-layer)+var(--tour-z-index))]",
+        "border-2 border-ring/64 ring-2 ring-ring/24",
         className
       )}
       data-slot="tour-spotlight"
@@ -298,28 +344,48 @@ export const TourSpotlight = (
   );
 };
 
-export const TourHeader = (
-  props: React.ComponentProps<typeof DialogHeader>
-) => <DialogHeader data-slot="tour-header" {...props} />;
+interface TourHeaderProps extends React.ComponentProps<typeof ark.div> {
+  /**
+   * The description of the tour
+   */
+  description?: string;
+  /**
+   * The title of the tour
+   */
+  title?: string;
+}
+
+export const TourHeader = (props: TourHeaderProps) => {
+  const { title, description, className, children, ...rest } = props;
+
+  return (
+    <ark.div
+      data-slot="tour-header"
+      {...rest}
+      className={cn(dialogHeaderVariants(), className)}
+    >
+      {!!title && <TourTitle>{title}</TourTitle>}
+      {!!description && <TourDescription>{description}</TourDescription>}
+      {!title && typeof children === "string" ? (
+        <TourTitle>{children}</TourTitle>
+      ) : (
+        children
+      )}
+    </ark.div>
+  );
+};
 
 export const TourTitle = (
   props: React.ComponentProps<typeof ArkTour.Title>
 ) => {
   const { className, ...rest } = props;
 
-  const { tour } = useTourContext();
-
   return (
     <ArkTour.Title
-      className={cn(
-        "font-semibold text-base leading-none tracking-tight",
-        className
-      )}
+      className={cn(dialogTitleVariants(), className)}
       data-slot="tour-title"
       {...rest}
-    >
-      {tour.step?.title}
-    </ArkTour.Title>
+    />
   );
 };
 
@@ -328,16 +394,12 @@ export const TourDescription = (
 ) => {
   const { className, ...rest } = props;
 
-  const { tour } = useTourContext();
-
   return (
     <ArkTour.Description
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn(dialogDescriptionVariants(), className)}
       data-slot="tour-description"
       {...rest}
-    >
-      {tour.step?.description}
-    </ArkTour.Description>
+    />
   );
 };
 
@@ -346,16 +408,12 @@ export const TourProgressText = (
 ) => {
   const { className, ...rest } = props;
 
-  const { tour } = useTourContext();
-
   return (
     <ArkTour.ProgressText
       className={cn("text-muted-foreground text-sm", className)}
       data-slot="tour-progress-text"
       {...rest}
-    >
-      {tour.getProgressText()}
-    </ArkTour.ProgressText>
+    />
   );
 };
 
@@ -363,71 +421,143 @@ export const TourClose = (
   props: React.ComponentProps<typeof ArkTour.CloseTrigger>
 ) => <ArkTour.CloseTrigger data-slot="tour-close-trigger" {...props} />;
 
+const tourActionPlacementVariants = tv({
+  defaultVariants: {
+    placement: "middle",
+  },
+  variants: {
+    placement: {
+      end: "col-start-3 row-start-1 justify-self-end",
+      middle: "col-start-2 row-start-1 justify-self-end",
+      start: "col-start-1 row-start-1 justify-self-start",
+    },
+  },
+});
+
+type TourStepAction = NonNullable<TourStepType["actions"]>[number];
+type TourActionPlacement = "end" | "middle" | "start";
+
+const getTourActionPlacement = (
+  action: TourStepAction,
+  hasNext: boolean
+): TourActionPlacement => {
+  const kind = action.action;
+
+  if (typeof kind === "function" || kind === undefined) {
+    return "middle";
+  }
+
+  switch (kind) {
+    case "prev":
+      return "start";
+    case "next":
+      return "end";
+    case "skip":
+      return "middle";
+    case "dismiss":
+      return hasNext ? "middle" : "end";
+    default: {
+      const _exhaustive: never = kind;
+      return _exhaustive;
+    }
+  }
+};
+
 export const TourFooter = (
   props: React.ComponentProps<typeof DialogFooter>
 ) => {
-  const { children, ...rest } = props;
+  const { children, className, ...rest } = props;
 
   return (
     <ArkTour.Control {...rest} asChild>
-      <DialogFooter data-slot="tour-control">{children}</DialogFooter>
+      <DialogFooter
+        className={cn(
+          "w-full",
+          "grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2",
+          className
+        )}
+        data-slot="tour-control"
+      >
+        {children}
+      </DialogFooter>
     </ArkTour.Control>
   );
 };
 
 export const TourActions = (
-  props: React.ComponentProps<typeof DialogFooter>
+  props: Omit<React.ComponentProps<typeof DialogFooter>, "children">
 ) => {
   const { className, ...rest } = props;
 
-  const { tour } = useTourContext();
-
-  const actions = tour.step?.actions ?? [];
-
-  if (actions.length === 0) {
-    return null;
-  }
-
   return (
-    <ArkTour.Control {...rest} asChild>
-      <DialogFooter
-        className={cn("flex flex-wrap gap-2", className)}
-        data-slot="tour-actions"
-      >
-        {actions.map((action) => (
-          <TourActionTrigger action={action} asChild key={action.label}>
-            <Button
-              size="sm"
-              variant={
-                action.action === "dismiss" || action.action === "prev"
-                  ? "outline"
-                  : "default"
-              }
+    <ArkTour.Actions>
+      {(actions) => {
+        if (actions.length === 0) {
+          return null;
+        }
+
+        const hasNext = actions.some((action) => action.action === "next");
+
+        return (
+          <ArkTour.Control {...rest} asChild>
+            <DialogFooter
+              className={cn(
+                "w-full",
+                "grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2",
+                className
+              )}
+              data-slot="tour-actions"
             >
-              {action.action === "prev" && (
-                <ChevronLeft className="size-3.5 rtl:rotate-180" />
-              )}
-              {action.label}
-              {action.action === "next" && (
-                <ChevronRight className="size-3.5 rtl:rotate-180" />
-              )}
-            </Button>
-          </TourActionTrigger>
-        ))}
-      </DialogFooter>
-    </ArkTour.Control>
+              {actions.map((action) => {
+                const isOutline =
+                  action.action === "prev" ||
+                  action.action === "skip" ||
+                  (action.action === "dismiss" && hasNext);
+
+                return (
+                  <TourActionTrigger action={action} asChild key={action.label}>
+                    <Button
+                      className={tourActionPlacementVariants({
+                        placement: getTourActionPlacement(action, hasNext),
+                      })}
+                      disabled={action.attrs?.disabled ? true : undefined}
+                      size="sm"
+                      {...(isOutline ? { variant: "outline" as const } : {})}
+                    >
+                      {action.action === "prev" && (
+                        <ChevronLeft
+                          aria-hidden="true"
+                          className="size-3.5 rtl:rotate-180"
+                        />
+                      )}
+                      {action.label}
+                      {action.action === "next" && (
+                        <ChevronRight
+                          aria-hidden="true"
+                          className="size-3.5 rtl:rotate-180"
+                        />
+                      )}
+                    </Button>
+                  </TourActionTrigger>
+                );
+              })}
+            </DialogFooter>
+          </ArkTour.Control>
+        );
+      }}
+    </ArkTour.Actions>
   );
 };
+
 export const TourPreviousStep = (
   props: Omit<React.ComponentProps<typeof TourActionTrigger>, "action">
 ) => {
-  const { ...rest } = props;
+  const { className, ...rest } = props;
 
-  const { tour } = useTourContext();
+  const tour = useArkTourContext();
 
-  const prevAction = React.useMemo(
-    () => tour.step?.actions?.find((action) => action.action === "prev"),
-    [tour]
+  const prevAction = tour.step?.actions?.find(
+    (action) => action.action === "prev"
   );
 
   if (!prevAction) {
@@ -441,8 +571,15 @@ export const TourPreviousStep = (
       action={prevAction}
       asChild
     >
-      <Button size="sm" variant="outline">
-        <ChevronLeft className="size-3.5 rtl:rotate-180" />
+      <Button
+        className={cn(
+          tourActionPlacementVariants({ placement: "start" }),
+          className
+        )}
+        size="sm"
+        variant="outline"
+      >
+        <ChevronLeft aria-hidden="true" className="size-3.5 rtl:rotate-180" />
         {prevAction.label}
       </Button>
     </TourActionTrigger>
@@ -452,19 +589,14 @@ export const TourPreviousStep = (
 export const TourNextStep = (
   props: Omit<React.ComponentProps<typeof TourActionTrigger>, "action">
 ) => {
-  const { ...rest } = props;
+  const { className, ...rest } = props;
 
-  const { tour } = useTourContext();
+  const tour = useArkTourContext();
 
-  const action = React.useMemo(
-    () =>
-      tour.step?.actions?.find(
-        (a) => a.action === "next" || a.action === "dismiss"
-      ),
-    [tour]
+  const action = tour.step?.actions?.find(
+    (stepAction) =>
+      stepAction.action === "next" || stepAction.action === "dismiss"
   );
-
-  const actionType = React.useMemo(() => action?.action, [action]);
 
   if (!action) {
     return null;
@@ -477,15 +609,23 @@ export const TourNextStep = (
       action={action}
       asChild
     >
-      <Button size="sm">
+      <Button
+        className={cn(
+          tourActionPlacementVariants({ placement: "end" }),
+          className
+        )}
+        disabled={action.attrs?.disabled ? true : undefined}
+        size="sm"
+      >
         {action.label}
 
-        {actionType === "next" && (
-          <ChevronRight className="size-3.5 rtl:rotate-180" />
+        {action.action === "next" && (
+          <ChevronRight
+            aria-hidden="true"
+            className="size-3.5 rtl:rotate-180"
+          />
         )}
       </Button>
     </TourActionTrigger>
   );
 };
-
-export { useTourContext };

@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/registry/react/components/button";
 import {
   Drawer,
@@ -16,15 +18,15 @@ const Example = () => (
     </DrawerTrigger>
     <DrawerContent>
       <DrawerHeader
-        description="This drawer allows interaction with elements outside. Focus trapping and scroll prevention are disabled."
-        title="Non-Modal Drawer"
+        description="The page behind this sheet stays interactive."
+        title="Non-modal"
       />
       <DrawerBody>
-        <p className="text-muted-foreground text-sm">
-          Set <code className="text-foreground">modal</code> to{" "}
-          <code className="text-foreground">false</code> on the drawer root to
-          interact with the page behind it while the drawer is open.
-        </p>
+        <div className="mx-auto w-full max-w-xs">
+          <p className="text-muted-foreground text-sm">
+            Leave this open and use Page action. The count keeps updating.
+          </p>
+        </div>
       </DrawerBody>
       <DrawerFooter>
         <div className="mx-auto w-full max-w-xs">

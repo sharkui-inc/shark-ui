@@ -1,10 +1,10 @@
 "use client";
 
 import {
+  ArrowUpIcon,
   BookIcon,
   LayoutGridIcon,
   MessageSquareIcon,
-  SparklesIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
@@ -162,7 +162,7 @@ const AITemplatePage = () => (
                 type="submit"
                 variant="ghost"
               >
-                <SparklesIcon aria-hidden className="size-4" />
+                <ArrowUpIcon aria-hidden className="size-4" />
               </Button>
             </div>
             <p className="mt-2 text-center text-muted-foreground text-xs">

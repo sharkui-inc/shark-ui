@@ -4,6 +4,7 @@ import { useListCollection } from "@ark-ui/react";
 import {
   FolderIcon,
   GitBranchIcon,
+  MicIcon,
   MonitorIcon,
   PlusIcon,
   ShieldAlertIcon,
@@ -50,10 +51,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
-import {
-  SpeechInput,
-  SpeechInputTrigger,
-} from "@/registry/react/components/speech-input";
 import {
   accessCollection,
   CONTEXT_USAGE,
@@ -175,9 +172,9 @@ export const ChatPromptComposer = ({
               ))}
             </SelectContent>
           </Select>
-          <SpeechInput>
-            <SpeechInputTrigger />
-          </SpeechInput>
+          <PromptInputButton aria-label="Voice input" size="icon-sm">
+            <MicIcon aria-hidden="true" />
+          </PromptInputButton>
           <PromptInputSubmit className="ms-2" size="icon-sm" />
         </PromptInputFooter>
         <PromptInputBottom>

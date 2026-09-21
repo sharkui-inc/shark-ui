@@ -1,6 +1,8 @@
 "use client";
 
 import { waitForEvent } from "@ark-ui/react/tour";
+import { Music2Icon, PencilIcon, PlusIcon, Trash2Icon } from "lucide-react";
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Tour,
@@ -12,51 +14,132 @@ import {
   type TourStepType,
   TourTitle,
   TourTrigger,
+  useTour,
 } from "@/registry/react/components/tour";
 
-const Example = () => (
-  <div className="flex flex-col gap-4">
-    <Tour steps={steps}>
-      <TourTrigger asChild>
-        <Button variant="outline">Start Interactive Tour</Button>
-      </TourTrigger>
+const Example = () => {
+  const [track, setTrack] = React.useState<string | null>(null);
 
-      <div className="flex flex-wrap gap-2">
-        <Button id="btn-add" size="sm" variant="outline">
-          Add Item
-        </Button>
-        <Button id="btn-edit" size="sm" variant="outline">
-          Edit
-        </Button>
-        <Button id="btn-delete" size="sm" variant="outline">
-          Delete
-        </Button>
-      </div>
+  const addTrack = () => {
+    setTrack("Harbor notes");
+  };
 
-      <TourContent>
-        <TourHeader>
-          <TourProgressText />
-          <TourTitle />
-          <TourDescription />
-        </TourHeader>
+  const editTrack = () => {
+    setTrack((current) => (current ? "Harbor notes, evening mix" : current));
+  };
 
-        <TourActions />
-      </TourContent>
-    </Tour>
-  </div>
-);
+  const deleteTrack = () => {
+    setTrack(null);
+  };
+
+  const tour = useTour({
+    closeOnInteractOutside: false,
+    keyboardNavigation: false,
+    steps,
+  });
+
+  return (
+    <div className="flex w-full max-w-sm flex-col gap-4">
+      <Tour tour={tour}>
+        <TourTrigger asChild>
+          <Button variant="outline">Start tour</Button>
+        </TourTrigger>
+
+        <div className="flex flex-col gap-3 rounded-lg border bg-card p-3 shadow-xs/4">
+          <div className="flex min-h-16 items-center gap-3 rounded-md border bg-background p-2">
+            {track ? (
+              <>
+                <img
+                  alt=""
+                  className="size-12 rounded-md"
+                  height={48}
+                  src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=studio-print&waveColor=ea580c"
+                  width={48}
+                />
+                <span className="min-w-0 truncate font-medium text-sm">
+                  {track}
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
+                  <Music2Icon aria-hidden="true" className="size-4" />
+                </span>
+                <span className="text-muted-foreground text-sm">
+                  Queue is empty
+                </span>
+              </>
+            )}
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            <Button
+              id="tour-click-add"
+              onClick={addTrack}
+              size="sm"
+              variant="outline"
+            >
+              <PlusIcon
+                aria-hidden="true"
+                className="size-4"
+                data-icon="inline-start"
+              />
+              Add
+            </Button>
+            <Button
+              id="tour-click-edit"
+              onClick={editTrack}
+              size="sm"
+              variant="outline"
+            >
+              <PencilIcon
+                aria-hidden="true"
+                className="size-4"
+                data-icon="inline-start"
+              />
+              Edit
+            </Button>
+            <Button
+              id="tour-click-delete"
+              onClick={deleteTrack}
+              size="sm"
+              variant="outline"
+            >
+              <Trash2Icon
+                aria-hidden="true"
+                className="size-4"
+                data-icon="inline-start"
+              />
+              Delete
+            </Button>
+          </div>
+        </div>
+
+        <TourContent>
+          <TourHeader>
+            <TourProgressText />
+            <TourTitle />
+            <TourDescription />
+          </TourHeader>
+          <TourActions />
+        </TourContent>
+      </Tour>
+    </div>
+  );
+};
 
 const steps: TourStepType[] = [
   {
     actions: [{ action: "next", label: "Begin" }],
-    description:
-      "This tour will guide you through actions. You must complete each step to proceed.",
+    description: "Each step advances on the matching click.",
     id: "intro",
-    title: "Interactive Tutorial",
+    title: "Queue the track",
     type: "dialog",
   },
   {
-    description: 'Click the "Add Item" button to continue.',
+    backdrop: false,
+    description:
+      "Add Harbor notes to the queue. The tour advances when you click Add, not Next.",
     effect({ next, target, show }) {
       show();
       const [promise, cancel] = waitForEvent(target, "click");
@@ -64,12 +147,14 @@ const steps: TourStepType[] = [
       return cancel;
     },
     id: "click-add",
-    target: () => document.querySelector<HTMLElement>("#btn-add"),
-    title: "Click the Add Button",
+    target: () => document.querySelector<HTMLElement>("#tour-click-add"),
+    title: "Add the track",
     type: "tooltip",
   },
   {
-    description: 'Now click the "Edit" button.',
+    backdrop: false,
+    description:
+      "Rename the track. The tour advances when you click Edit, not Next.",
     effect({ next, target, show }) {
       show();
       const [promise, cancel] = waitForEvent(target, "click");
@@ -77,12 +162,14 @@ const steps: TourStepType[] = [
       return cancel;
     },
     id: "click-edit",
-    target: () => document.querySelector<HTMLElement>("#btn-edit"),
-    title: "Click the Edit Button",
+    target: () => document.querySelector<HTMLElement>("#tour-click-edit"),
+    title: "Edit the title",
     type: "tooltip",
   },
   {
-    description: 'Finally, click the "Delete" button.',
+    backdrop: false,
+    description:
+      "Remove the track from the queue. The tour advances when you click Delete, not Next.",
     effect({ next, target, show }) {
       show();
       const [promise, cancel] = waitForEvent(target, "click");
@@ -90,15 +177,15 @@ const steps: TourStepType[] = [
       return cancel;
     },
     id: "click-delete",
-    target: () => document.querySelector<HTMLElement>("#btn-delete"),
-    title: "Click the Delete Button",
+    target: () => document.querySelector<HTMLElement>("#tour-click-delete"),
+    title: "Delete the track",
     type: "tooltip",
   },
   {
     actions: [{ action: "dismiss", label: "Finish" }],
-    description: "You completed all the interactive steps.",
+    description: "The queue is empty.",
     id: "complete",
-    title: "Well Done!",
+    title: "Queue cleared",
     type: "dialog",
   },
 ];

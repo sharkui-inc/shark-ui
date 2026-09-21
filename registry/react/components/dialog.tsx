@@ -267,6 +267,10 @@ export const DialogBody = (props: DialogBodyProps) => {
   );
 };
 
+export const dialogHeaderVariants = tv({
+  base: ["shrink-0", "p-(--space)", "flex flex-col gap-2"],
+});
+
 interface DialogHeaderProps extends React.ComponentProps<typeof ark.div> {
   /**
    * The description of the dialog
@@ -284,9 +288,7 @@ export const DialogHeader = (props: DialogHeaderProps) => {
   return (
     <ark.div
       className={cn(
-        "shrink-0",
-        "p-(--space)",
-        "flex flex-col gap-2",
+        dialogHeaderVariants(),
         "in-[[data-slot=dialog-content]:has([data-slot=dialog-body])]:pb-3",
         className
       )}
@@ -306,6 +308,10 @@ export const DialogHeader = (props: DialogHeaderProps) => {
   );
 };
 
+export const dialogTitleVariants = tv({
+  base: ["font-heading font-semibold text-xl leading-none"],
+});
+
 export const DialogTitle = (
   props: React.ComponentProps<typeof ArkDialog.Title>
 ) => {
@@ -313,15 +319,16 @@ export const DialogTitle = (
 
   return (
     <ArkDialog.Title
-      className={cn(
-        "font-heading font-semibold text-xl leading-none",
-        className
-      )}
+      className={cn(dialogTitleVariants(), className)}
       data-slot="dialog-title"
       {...rest}
     />
   );
 };
+
+export const dialogDescriptionVariants = tv({
+  base: ["text-muted-foreground text-sm"],
+});
 
 export const DialogDescription = (
   props: React.ComponentProps<typeof ArkDialog.Description>
@@ -330,7 +337,7 @@ export const DialogDescription = (
 
   return (
     <ArkDialog.Description
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn(dialogDescriptionVariants(), className)}
       data-slot="dialog-description"
       {...rest}
     />
@@ -349,7 +356,7 @@ export const DialogFooter = (props: React.ComponentProps<typeof ark.div>) => {
       className={cn(
         "shrink-0",
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        "rounded-b-2xl",
+        "rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
         "px-(--space) py-4",
         "bg-muted/48",
         "border-t",

@@ -1,4 +1,4 @@
-import { CheckIcon, InfoIcon, SearchIcon, SparklesIcon } from "lucide-react";
+import { CheckIcon, InfoIcon, SearchIcon } from "lucide-react";
 import {
   Field,
   FieldDescription,
@@ -45,7 +45,7 @@ const InputGroupWithKbd = () => (
           placeholder="Type to search..."
         />
         <InputGroupAddon align="inline-start">
-          <SparklesIcon aria-hidden="true" />
+          <SearchIcon aria-hidden="true" />
         </InputGroupAddon>
         <InputGroupAddon align="inline-end">
           <KbdGroup>

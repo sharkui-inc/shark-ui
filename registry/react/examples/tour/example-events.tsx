@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowRightIcon, CircleCheckIcon, PlayIcon } from "lucide-react";
 import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -7,59 +8,74 @@ import {
   TourActions,
   TourContent,
   TourDescription,
-  TourFooter,
   TourHeader,
   TourProgressText,
   type TourStepType,
   TourTitle,
   TourTrigger,
+  useTour,
 } from "@/registry/react/components/tour";
 
 const Example = () => {
   const [logs, setLogs] = React.useState<{ id: string; message: string }[]>([]);
 
   const addLog = (message: string) => {
-    setLogs((prev) => [...prev, { id: crypto.randomUUID(), message }]);
+    setLogs((current) => [...current, { id: crypto.randomUUID(), message }]);
   };
+
+  const tour = useTour({
+    onStatusChange: (details) => addLog(`Status: ${details.status}`),
+    onStepChange: (details) =>
+      addLog(`Step changed: ${details.stepId ?? "unknown"}`),
+    steps,
+  });
 
   return (
     <div className="flex w-full max-w-sm flex-col gap-4">
-      <Tour
-        onStatusChange={(details) => addLog(`Status: ${details.status}`)}
-        onStepChange={(details) =>
-          addLog(`Step changed: ${details.stepId ?? "unknown"}`)
-        }
-        steps={steps}
-      >
+      <Tour tour={tour}>
         <TourTrigger asChild>
-          <Button variant="outline">Start Tour</Button>
+          <Button variant="outline">Start tour</Button>
         </TourTrigger>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-col gap-2">
           <div
-            className="flex items-center justify-center rounded-md border bg-popover px-6 py-4 font-medium"
-            id="event-1"
+            className="flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm shadow-xs/4"
+            id="tour-events-started"
           >
-            Step 1
+            <PlayIcon
+              aria-hidden="true"
+              className="size-4 shrink-0 text-muted-foreground"
+            />
+            Started
           </div>
           <div
-            className="flex items-center justify-center rounded-md border bg-popover px-6 py-4 font-medium"
-            id="event-2"
+            className="flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm shadow-xs/4"
+            id="tour-events-advanced"
           >
-            Step 2
+            <ArrowRightIcon
+              aria-hidden="true"
+              className="size-4 shrink-0 text-muted-foreground rtl:rotate-180"
+            />
+            Advanced
           </div>
           <div
-            className="flex items-center justify-center rounded-md border bg-popover px-6 py-4 font-medium"
-            id="event-3"
+            className="flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm shadow-xs/4"
+            id="tour-events-finished"
           >
-            Step 3
+            <CircleCheckIcon
+              aria-hidden="true"
+              className="size-4 shrink-0 text-muted-foreground"
+            />
+            Finished
           </div>
         </div>
 
-        <div className="flex h-32 flex-col gap-1 overflow-y-auto rounded-md border bg-muted p-3 font-mono text-muted-foreground text-xs">
-          <strong>Event Log:</strong>
+        <div className="flex h-28 flex-col gap-1 overflow-y-auto rounded-lg border bg-muted p-3 font-mono text-muted-foreground text-xs">
+          <span className="font-medium font-sans text-foreground text-sm">
+            Event log
+          </span>
           {logs.length === 0 ? (
-            <span>Start the tour to see events</span>
+            <span>Start the tour to record step and status changes.</span>
           ) : (
             logs.map((log) => <span key={log.id}>{log.message}</span>)
           )}
@@ -71,10 +87,7 @@ const Example = () => {
             <TourTitle />
             <TourDescription />
           </TourHeader>
-
-          <TourFooter>
-            <TourActions />
-          </TourFooter>
+          <TourActions />
         </TourContent>
       </Tour>
     </div>
@@ -84,10 +97,10 @@ const Example = () => {
 const steps: TourStepType[] = [
   {
     actions: [{ action: "next", label: "Next" }],
-    description: "Watch the event log below as you navigate.",
-    id: "step-1",
-    target: () => document.querySelector<HTMLElement>("#event-1"),
-    title: "First Step",
+    description: "Opening the tour logs the first events.",
+    id: "started",
+    target: () => document.querySelector<HTMLElement>("#tour-events-started"),
+    title: "Started",
     type: "tooltip",
   },
   {
@@ -95,10 +108,10 @@ const steps: TourStepType[] = [
       { action: "prev", label: "Back" },
       { action: "next", label: "Next" },
     ],
-    description: "Each step change triggers an event.",
-    id: "step-2",
-    target: () => document.querySelector<HTMLElement>("#event-2"),
-    title: "Second Step",
+    description: "This step logs another step change.",
+    id: "advanced",
+    target: () => document.querySelector<HTMLElement>("#tour-events-advanced"),
+    title: "Advanced",
     type: "tooltip",
   },
   {
@@ -106,10 +119,10 @@ const steps: TourStepType[] = [
       { action: "prev", label: "Back" },
       { action: "dismiss", label: "Finish" },
     ],
-    description: "Complete the tour to see the status change.",
-    id: "step-3",
-    target: () => document.querySelector<HTMLElement>("#event-3"),
-    title: "Final Step",
+    description: "Finishing logs the status change.",
+    id: "finished",
+    target: () => document.querySelector<HTMLElement>("#tour-events-finished"),
+    title: "Finished",
     type: "tooltip",
   },
 ];

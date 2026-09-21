@@ -1,13 +1,17 @@
-import {
-  type ComponentPreviewExampleProps,
-  getComponentPreviewExample,
-} from "./component-preview-example";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import type React from "react";
+import { ComponentSource } from "../../component-source";
 import { ComponentPreviewFrame } from "./component-preview-frame";
 
-interface ComponentPreviewProps extends ComponentPreviewExampleProps {
+const registryPath = "registry/react/examples";
+
+export interface ComponentPreviewExampleProps
+  extends Omit<React.ComponentProps<"div">, "ref"> {
   /**
-   * Size the preview to its content with equal padding on all sides,
-   * instead of locking to a 450px frame that vertically centers short examples.
+   * Size the preview to its content, with extra vertical padding so examples
+   * sit inside the dashed guides, instead of locking to a 450px frame that
+   * vertically centers short examples.
    *
    * @default false
    */
@@ -22,6 +26,9 @@ interface ComponentPreviewProps extends ComponentPreviewExampleProps {
    * The file name of the component
    */
   fileName?: string;
+}
+
+interface ComponentPreviewProps extends ComponentPreviewExampleProps {
   /**
    * Whether to show the dashed padding guide borders around the preview
    *
@@ -29,6 +36,38 @@ interface ComponentPreviewProps extends ComponentPreviewExampleProps {
    */
   showBorders?: boolean;
 }
+
+export const getComponentPreviewExample = async (
+  componentName: string,
+  fileName = "example-default"
+) => {
+  const example = await import(
+    `@/${registryPath}/${componentName}/${fileName}.tsx`
+  );
+
+  if (!example.default) {
+    throw new Error(`File ${fileName} not found`);
+  }
+
+  const Example = example.default;
+
+  const examplePath = join(
+    process.cwd(),
+    registryPath,
+    componentName,
+    `${fileName}.tsx`
+  );
+
+  return {
+    preview: <Example />,
+    source: (
+      <ComponentSource
+        code={readFileSync(examplePath, "utf-8")}
+        isCollapsible={false}
+      />
+    ),
+  };
+};
 
 export const ComponentPreview = async (props: ComponentPreviewProps) => {
   const {

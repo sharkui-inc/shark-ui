@@ -4,7 +4,6 @@ import { Portal } from "@ark-ui/react";
 import { ark } from "@ark-ui/react/factory";
 import {
   Menu as ArkMenu,
-  type MenuContentProps,
   useMenu as useArkMenu,
   useMenuContext as useArkMenuContext,
 } from "@ark-ui/react/menu";
@@ -116,8 +115,18 @@ export const menuContentVariants = tv({
   ],
 });
 
+interface MenuContentProps
+  extends React.ComponentProps<typeof ArkMenu.Content> {
+  /**
+   * Whether to show the arrow
+   *
+   * @default false
+   */
+  showArrow?: boolean;
+}
+
 export const MenuContent = (props: MenuContentProps) => {
-  const { className, children, ...rest } = props;
+  const { showArrow = false, className, children, ...rest } = props;
 
   return (
     <Portal>
@@ -128,6 +137,8 @@ export const MenuContent = (props: MenuContentProps) => {
           {...rest}
         >
           {children}
+
+          {showArrow ? <MenuArrow /> : null}
         </ArkMenu.Content>
       </MenuPositioner>
     </Portal>
@@ -322,10 +333,18 @@ export const MenuSub = (props: React.ComponentProps<typeof Menu>) => (
   <Menu data-slot="menu-sub" {...props} />
 );
 
-export const MenuSubContent = (
-  props: React.ComponentProps<typeof ArkMenu.Content>
-) => {
-  const { className, ...rest } = props;
+interface MenuSubContentProps
+  extends React.ComponentProps<typeof ArkMenu.Content> {
+  /**
+   * Whether to show the arrow
+   *
+   * @default false
+   */
+  showArrow?: boolean;
+}
+
+export const MenuSubContent = (props: MenuSubContentProps) => {
+  const { showArrow = false, className, children, ...rest } = props;
 
   return (
     <Portal>
@@ -334,7 +353,11 @@ export const MenuSubContent = (
           className={cn(menuContentVariants(), className)}
           data-slot="menu-sub-content"
           {...rest}
-        />
+        >
+          {children}
+
+          {showArrow ? <MenuArrow /> : null}
+        </ArkMenu.Content>
       </MenuPositioner>
     </Portal>
   );
@@ -392,12 +415,11 @@ export const MenuArrow = (
           "--arrow-background": "var(--popover)",
           "--arrow-size": "calc(1.5 * var(--spacing))",
           ...style,
-          left: "20px",
         } as React.CSSProperties
       }
       {...rest}
     >
-      <ArkMenu.ArrowTip className="border-s border-t" />
+      <ArkMenu.ArrowTip />
     </ArkMenu.Arrow>
   );
 };

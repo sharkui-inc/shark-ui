@@ -1,6 +1,7 @@
 import { ArrowUpRightIcon, InfoIcon } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
+import { tv } from "tailwind-variants";
 import { CodeBlockCommand } from "@/components/code-block-command";
 import { CodeCollapsibleWrapper } from "@/components/code-collapsible-wrapper";
 import { CodeTabs } from "@/components/code-tabs";
@@ -154,7 +155,7 @@ export const mdxComponents = {
       className={cn(
         "mt-2 scroll-m-28",
         "font-heading font-semibold text-3xl tracking-tight",
-        iframeAfterTextClassName,
+        iframeAfterTextClassName(),
         className
       )}
       {...props}
@@ -171,12 +172,12 @@ export const mdxComponents = {
           "font-heading font-medium text-xl tracking-tight",
           "first:mt-0",
           "lg:mt-12",
-          "[&+.steps>h3]:mt-4!",
-          "[&+.steps]:mt-0!",
-          "[&+h3]:mt-6!",
+          "[&+.steps>h3]:mt-4",
+          "[&+.steps]:mt-0",
+          "[&+h3]:mt-6",
           "[&+p]:mt-4!",
           "[&+]*:[code]:text-xl",
-          iframeAfterTextClassName,
+          iframeAfterTextClassName(),
           className
         )}
         id={headingId}
@@ -196,7 +197,7 @@ export const mdxComponents = {
           "font-medium tracking-tight",
           "[&+p]:mt-4!",
           "*:[code]:text-xl",
-          iframeAfterTextClassName,
+          iframeAfterTextClassName(),
           className
         )}
         id={headingId}
@@ -214,7 +215,7 @@ export const mdxComponents = {
         className={cn(
           "mt-8 scroll-m-28",
           "font-heading font-medium text-base tracking-tight",
-          iframeAfterTextClassName,
+          iframeAfterTextClassName(),
           className
         )}
         id={headingId}
@@ -232,7 +233,7 @@ export const mdxComponents = {
         className={cn(
           "mt-8 scroll-m-28",
           "font-heading font-medium text-base tracking-tight",
-          iframeAfterTextClassName,
+          iframeAfterTextClassName(),
           className
         )}
         {...props}
@@ -249,7 +250,7 @@ export const mdxComponents = {
         className={cn(
           "mt-8 scroll-m-28",
           "font-medium text-base tracking-tight",
-          iframeAfterTextClassName,
+          iframeAfterTextClassName(),
           className
         )}
         id={headingId}
@@ -292,7 +293,7 @@ export const mdxComponents = {
     <p
       className={cn(
         "not-first:mt-6 text-muted-foreground leading-relaxed",
-        iframeAfterTextClassName,
+        iframeAfterTextClassName(),
         className
       )}
       {...props}
@@ -414,8 +415,9 @@ export const mdxComponents = {
   ),
 };
 
-const iframeAfterTextClassName =
-  "[&+iframe]:my-6 [&+[data-slot=preview-iframe]]:my-6";
+const iframeAfterTextClassName = tv({
+  base: "[&+[data-slot=preview-iframe]]:my-6 [&+iframe]:my-6",
+});
 
 const getHeadingId = (children: React.ReactNode) =>
   children

@@ -14,21 +14,36 @@ const Example = () => (
     </DrawerTrigger>
     <DrawerContent>
       <DrawerHeader
-        description="Drag to 25%, 50%, or 100% height. Swipe down to close."
-        title="Snap Points"
+        description="Opens at 50%. Drag the grabber to 25%, 50%, or full height."
+        title="Snap points"
       />
-      <DrawerBody className="flex flex-col gap-2 text-muted-foreground text-sm">
-        <p>
-          This drawer has multiple snap points at 25%, 50%, and 100% of the
-          viewport height.
-        </p>
-        <p>
-          Drag the grabber to snap between different heights, or swipe to
-          dismiss.
-        </p>
+      <DrawerBody>
+        <div className="mx-auto flex w-full max-w-xs flex-col gap-2">
+          {steps.map((step) => (
+            <div
+              className="rounded-lg border bg-muted px-3 py-2 text-start text-sm"
+              key={step}
+            >
+              {step}
+            </div>
+          ))}
+        </div>
       </DrawerBody>
     </DrawerContent>
   </Drawer>
 );
+
+const steps = [
+  "Inbox",
+  "Today",
+  "Upcoming",
+  "Anytime",
+  "Someday",
+  "Logbook",
+  "Projects",
+  "Areas",
+  "Archive",
+  "Trash",
+];
 
 export default Example;

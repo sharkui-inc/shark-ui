@@ -9,6 +9,7 @@ import {
   LoaderCircleIcon,
 } from "lucide-react";
 import React from "react";
+import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import {
   Collapsible,
@@ -39,12 +40,16 @@ const STATUS_LABEL: Record<ToolResultStatus, string> = {
   success: "Completed",
 };
 
-const STATUS_CLASS: Record<ToolResultStatus, string> = {
-  cancelled: "text-muted-foreground",
-  error: "text-destructive-foreground",
-  running: "text-info-foreground",
-  success: "text-success-foreground",
-};
+const toolResultStatusVariants = tv({
+  variants: {
+    status: {
+      cancelled: "text-muted-foreground",
+      error: "text-destructive-foreground",
+      running: "text-info-foreground",
+      success: "text-success-foreground",
+    },
+  },
+});
 
 const ToolResultStatusIcon = (props: { status: ToolResultStatus }) => {
   const { status } = props;
@@ -208,7 +213,7 @@ export const ToolResultStatus = (
       className={cn(
         "inline-flex shrink-0 items-center gap-1",
         "font-medium text-xs",
-        STATUS_CLASS[status],
+        toolResultStatusVariants({ status }),
         className
       )}
       data-slot="tool-result-status"

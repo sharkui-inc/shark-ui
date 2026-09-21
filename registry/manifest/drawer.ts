@@ -8,6 +8,7 @@ const manifest: RegistryItemType = {
   name: "drawer",
   registryDependencies: [
     registryUrl("/r/button.json"),
+    registryUrl("/r/menu.json"),
     registryUrl("/r/scroll-area.json"),
   ],
   type: "registry:ui",

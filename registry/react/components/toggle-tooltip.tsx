@@ -8,11 +8,12 @@ import {
 import { Portal } from "@ark-ui/react/portal";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { Popover, PopoverTrigger } from "@/registry/react/components/popover";
 import {
-  tooltipArrowStyle,
-  tooltipContentVariants,
-} from "@/registry/react/components/tooltip";
+  Popover,
+  PopoverArrow,
+  PopoverTrigger,
+} from "@/registry/react/components/popover";
+import { tooltipContentVariants } from "@/registry/react/components/tooltip";
 
 export const useToggleTooltip = useArkPopover;
 export const useToggleTooltipContext = useArkPopoverContext;
@@ -84,12 +85,16 @@ export const ToggleTooltipArrow = (
   const { style, ...rest } = props;
 
   return (
-    <ArkPopover.Arrow
+    <PopoverArrow
       data-slot="toggle-tooltip-arrow"
-      style={{ ...tooltipArrowStyle, ...style }}
+      style={{
+        ...({
+          "--arrow-background": "var(--foreground)",
+          "--arrow-size": "calc(1.5 * var(--spacing))",
+        } as React.CSSProperties),
+        ...style,
+      }}
       {...rest}
-    >
-      <ArkPopover.ArrowTip />
-    </ArkPopover.Arrow>
+    />
   );
 };

@@ -133,7 +133,7 @@ const sheetContentVariants = tv({
       default: "",
       inset: [
         "sm:rounded-2xl sm:border",
-        "sm:**:data-[slot=sheet-footer]:rounded-b-2xl",
+        "sm:**:data-[slot=sheet-footer]:rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
       ],
     },
   },

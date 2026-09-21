@@ -53,6 +53,7 @@ npx shadcn@latest add @shark/hover-card
 HoverCard
 ├── HoverCardTrigger
 └── HoverCardContent
+    └── HoverCardArrow
 ```
 
 ## Usage
@@ -99,6 +100,14 @@ Use the `disabled` prop to prevent the hover card from opening on hover.
 
 <ComponentPreview componentName="hover-card" fileName="example-disabled" />
 
+## Examples
+
+### Hide Arrow
+
+Hide the arrow with `showArrow={false}` on `HoverCardContent`.
+
+<ComponentPreview componentName="hover-card" fileName="example-without-arrow" />
+
 ## RTL
 
 To enable RTL support, see the [RTL configuration guide](/docs/rtl).
@@ -140,6 +149,7 @@ Content shown in a popover when hover card is open.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | - |
+| `showArrow` | `boolean` | `true` |
 
 ### HoverCardArrow
 
@@ -152,8 +162,8 @@ Optional arrow pointing toward the trigger.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `--arrow-background` | CSS custom property | `var(--popover)` |
-| `--arrow-size` | CSS custom property | `calc(1.5 * var(--spacing))` |
+| `--arrow-background` | `string` | `var(--popover)` |
+| `--arrow-size` | `string` | `calc(1.5 * var(--spacing))` |
 
 ### HoverCardRootProvider
 

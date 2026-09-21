@@ -12,6 +12,7 @@ import {
   GlobeIcon,
   HammerIcon,
   ImagePlusIcon,
+  MicIcon,
   MonitorIcon,
   PaperclipIcon,
   PlusIcon,
@@ -161,10 +162,6 @@ import {
   SourcesContent,
   SourcesTrigger,
 } from "@/registry/react/components/sources";
-import {
-  SpeechInput,
-  SpeechInputTrigger,
-} from "@/registry/react/components/speech-input";
 import {
   Terminal,
   TerminalContent,
@@ -815,9 +812,9 @@ const ChatSession = ({
                 ))}
               </SelectContent>
             </Select>
-            <SpeechInput>
-              <SpeechInputTrigger />
-            </SpeechInput>
+            <PromptInputButton aria-label="Voice input" size="icon-sm">
+              <MicIcon aria-hidden="true" />
+            </PromptInputButton>
             <PromptInputSubmit className="ms-2" size="icon-sm" />
           </PromptInputFooter>
           <PromptInputBottom>

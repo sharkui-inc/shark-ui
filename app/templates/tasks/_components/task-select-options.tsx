@@ -1,8 +1,8 @@
 import {
   BugIcon,
   FileTextIcon,
+  LightbulbIcon,
   ListFilterIcon,
-  SparklesIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -15,7 +15,6 @@ import { Status } from "@/registry/react/components/status";
 import {
   ASSIGNEES,
   FILTER_ALL,
-  priorityIconClassMap,
   priorityIconMap,
   statusIndicatorVariantMap,
   type TaskAssigneeId,
@@ -23,11 +22,12 @@ import {
   type TaskStatus,
   type TaskType,
 } from "../_data/tasks";
+import { priorityIconVariants } from "./task-priority";
 
 const typeIconMap = {
   Bug: BugIcon,
   Documentation: FileTextIcon,
-  Feature: SparklesIcon,
+  Feature: LightbulbIcon,
 };
 
 export const TaskAllOption = () => (
@@ -62,7 +62,7 @@ export const TaskPriorityOption = ({
     <>
       <PriorityIcon
         aria-hidden="true"
-        className={cn("size-4", priorityIconClassMap[priority])}
+        className={cn("size-4", priorityIconVariants({ priority }))}
       />
       {priority}
     </>

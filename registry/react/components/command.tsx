@@ -83,7 +83,7 @@ const commandDialogContentVariants = tv({
       inset: [
         "p-0 max-sm:border-0",
         "sm:rounded-2xl sm:border",
-        "sm:**:data-[slot=command-footer]:rounded-b-2xl",
+        "sm:**:data-[slot=command-footer]:rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
         "sm:**:data-[slot=command]:rounded-none sm:**:data-[slot=command]:border-0",
       ],
     },
@@ -216,7 +216,11 @@ export const CommandInput = (props: CommandInputProps) => {
   return (
     <ComboboxControl className="m-1.5">
       <InputGroup
-        className={cn("rounded-xl bg-input/32", className)}
+        className={cn(
+          "rounded-xl bg-input/32",
+          "focus-within:border-input focus-within:ring-0",
+          className
+        )}
         size={size}
         {...rest}
       >
@@ -231,9 +235,9 @@ export const CommandInput = (props: CommandInputProps) => {
   );
 };
 
-interface CommandListProps extends React.ComponentProps<typeof ComboboxList> {}
-
-export const CommandList = (props: CommandListProps) => {
+export const CommandList = (
+  props: React.ComponentProps<typeof ArkCombobox.List>
+) => {
   const { className, ...rest } = props;
 
   return (
@@ -244,7 +248,7 @@ export const CommandList = (props: CommandListProps) => {
       scrollFade
     >
       <ArkCombobox.List
-        className={cn("flex flex-col", className)}
+        className={cn("flex flex-col not-empty:pb-2", className)}
         data-slot="command-list"
         {...rest}
       />
@@ -320,7 +324,7 @@ export const CommandFooter = (props: React.ComponentProps<typeof ark.div>) => {
         "px-3 py-2",
         "bg-muted/48",
         "text-muted-foreground text-xs leading-none",
-        "rounded-b-2xl border-t",
+        "rounded-b-[max(0px,calc(var(--radius-2xl)-1px))] border-t",
         className
       )}
       data-slot="command-footer"

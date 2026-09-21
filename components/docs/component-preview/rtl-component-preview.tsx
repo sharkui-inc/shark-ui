@@ -3,13 +3,13 @@ import { join } from "node:path";
 import {
   type ComponentPreviewExampleProps,
   getComponentPreviewExample,
-} from "./component-preview-example";
-import { ComponentPreviewFrame } from "./component-preview-frame";
+} from "./component-preview";
 import {
+  ComponentPreviewFrame,
   RTLPreviewContent,
   RTLPreviewHeader,
   RTLPreviewProvider,
-} from "./rtl-preview";
+} from "./component-preview-frame";
 
 type RTLComponentPreviewProps = ComponentPreviewExampleProps & {
   /** The RTL example file name. Defaults to `example-rtl`. */
@@ -42,7 +42,11 @@ export const RTLComponentPreview = async (props: RTLComponentPreviewProps) => {
       <ComponentPreviewFrame
         {...rest}
         autoHeight={autoHeight}
-        preview={<RTLPreviewContent>{preview}</RTLPreviewContent>}
+        preview={
+          <RTLPreviewContent autoHeight={autoHeight}>
+            {preview}
+          </RTLPreviewContent>
+        }
         previewHeader={
           <>
             <RTLPreviewHeader />

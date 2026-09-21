@@ -85,7 +85,11 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
         <ScrollArea className="**:data-[slot=scroll-area-scrollbar]:data-[orientation=horizontal]:mx-2 **:data-[slot=scroll-area-scrollbar]:data-[orientation=vertical]:my-2">
           {packageManagers.map((manager) => (
             <TabsContent
-              className="mt-0 w-max px-4 py-3.5"
+              className={cn(
+                "mt-0 w-max px-4 py-3.5",
+                "border border-transparent outline-hidden",
+                "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24 focus-visible:ring-inset"
+              )}
               key={manager}
               value={manager}
             >

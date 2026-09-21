@@ -24,13 +24,13 @@ import {
 import { Status } from "@/registry/react/components/status";
 import {
   ASSIGNEES,
-  priorityIconClassMap,
   priorityIconMap,
   statusIndicatorVariantMap,
   type Task,
   type TaskPriority,
   type TaskStatus,
 } from "../_data/tasks";
+import { priorityIconVariants } from "./task-priority";
 
 const columnHelper = createColumnHelper<DataTableFeatures, Task>();
 
@@ -63,7 +63,7 @@ export const TaskPriorityLabel = ({ priority }: { priority: TaskPriority }) => {
     <span className="inline-flex items-center gap-1.5 font-medium text-sm">
       <PriorityIcon
         aria-hidden="true"
-        className={cn("size-3.5", priorityIconClassMap[priority])}
+        className={cn("size-3.5", priorityIconVariants({ priority }))}
       />
       {priority}
     </span>

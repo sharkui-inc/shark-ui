@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
 import { FileThumbnail } from "@/registry/react/components/file-thumbnail";
 import { IconTile } from "@/registry/react/components/icon-tile";
-import { ScrollArea } from "./scroll-area";
+import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const attachmentVariants = tv({
   base: [

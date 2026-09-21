@@ -1,13 +1,13 @@
 "use client";
 
 import {
+  BotIcon,
   CalendarDaysIcon,
   FolderKanbanIcon,
   HouseIcon,
   InboxIcon,
   SearchIcon,
   Settings2Icon,
-  SparklesIcon,
   WavesHorizontalIcon,
 } from "lucide-react";
 import {
@@ -25,7 +25,7 @@ import {
 
 const primaryNavigation = [
   { icon: SearchIcon, label: "Search" },
-  { icon: SparklesIcon, label: "Ask AI" },
+  { icon: BotIcon, label: "Ask AI" },
   { icon: HouseIcon, label: "Home" },
   { icon: InboxIcon, label: "Inbox" },
 ];

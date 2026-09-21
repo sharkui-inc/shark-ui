@@ -4,9 +4,10 @@ import { useFilter, useListCollection } from "@ark-ui/react";
 import { Combobox as ArkCombobox } from "@ark-ui/react/combobox";
 import {
   BrainIcon,
+  CrownIcon,
+  MicIcon,
   PaperclipIcon,
   SearchIcon,
-  SparklesIcon,
 } from "lucide-react";
 import React from "react";
 import {
@@ -43,16 +44,6 @@ import {
   PromptInputTextarea,
   PromptInputTools,
 } from "@/registry/react/components/prompt-input";
-import {
-  SpeechInput,
-  SpeechInputAccept,
-  SpeechInputClose,
-  SpeechInputContent,
-  SpeechInputStop,
-  SpeechInputTimer,
-  SpeechInputTrigger,
-  SpeechInputWaveform,
-} from "@/registry/react/components/speech-input";
 import { Toggle } from "@/registry/react/components/toggle";
 
 interface ModelOption {
@@ -93,7 +84,7 @@ export const ChatComposer = ({
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-3">
       <div className="w-full rounded-2xl bg-muted/48 p-0.5">
         <Announcement className="w-full rounded-t-[15px] border-0 bg-transparent px-3 py-2 shadow-none">
-          <SparklesIcon aria-hidden="true" className="text-muted-foreground" />
+          <CrownIcon aria-hidden="true" className="text-muted-foreground" />
           <AnnouncementTitle className="text-muted-foreground text-xs">
             Access premium models & features
           </AnnouncementTitle>
@@ -179,22 +170,9 @@ export const ChatComposer = ({
                     Think
                   </PromptInputButton>
                 </Toggle>
-                <SpeechInput
-                  onTranscriptionChange={(text) => {
-                    setDraft((current) =>
-                      current ? `${current} ${text}` : text
-                    );
-                  }}
-                >
-                  <SpeechInputTrigger />
-                  <SpeechInputContent>
-                    <SpeechInputWaveform />
-                    <SpeechInputTimer />
-                    <SpeechInputStop />
-                    <SpeechInputClose />
-                    <SpeechInputAccept />
-                  </SpeechInputContent>
-                </SpeechInput>
+                <PromptInputButton aria-label="Voice input" size="icon-xs">
+                  <MicIcon aria-hidden="true" />
+                </PromptInputButton>
               </PromptInputTools>
               <PromptInputSubmit />
             </PromptInputFooter>

@@ -85,7 +85,6 @@ import { SkeletonThumb } from "@/components/thumbs/skeleton";
 import { SkipNavThumb } from "@/components/thumbs/skip-nav";
 import { SliderThumb } from "@/components/thumbs/slider";
 import { SourcesThumb } from "@/components/thumbs/sources";
-import { SpeechInputThumb } from "@/components/thumbs/speech-input";
 import { SpinnerThumb } from "@/components/thumbs/spinner";
 import { StateThumb } from "@/components/thumbs/state";
 import { StatusThumb } from "@/components/thumbs/status";
@@ -198,7 +197,6 @@ const THUMB_MAP: Record<string, React.ComponentType<ThumbCardProps>> = {
   "skip-nav": SkipNavThumb,
   slider: SliderThumb,
   sources: SourcesThumb,
-  "speech-input": SpeechInputThumb,
   spinner: SpinnerThumb,
   state: StateThumb,
   status: StatusThumb,

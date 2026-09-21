@@ -27,7 +27,13 @@ const Example = () => {
           <DrawerContent>
             <DrawerHeader title={drawer.title} />
             <DrawerBody>
-              <p className="text-muted-foreground text-sm">{drawer.body}</p>
+              {index < 2 ? (
+                <div className="mx-auto w-full max-w-xs">
+                  <p className="text-muted-foreground text-sm">{drawer.body}</p>
+                </div>
+              ) : (
+                <p className="text-muted-foreground text-sm">{drawer.body}</p>
+              )}
             </DrawerBody>
           </DrawerContent>
         </Drawer>

@@ -33,11 +33,6 @@ export const tooltipContentVariants = tv({
   ],
 });
 
-export const tooltipArrowStyle = {
-  "--arrow-background": "var(--foreground)",
-  "--arrow-size": "calc(1.5 * var(--spacing))",
-} as React.CSSProperties;
-
 export const Tooltip = (
   props: React.ComponentProps<typeof ArkTooltip.Root>
 ) => {
@@ -108,7 +103,13 @@ export const TooltipArrow = (
   return (
     <ArkTooltip.Arrow
       data-slot="tooltip-arrow"
-      style={{ ...tooltipArrowStyle, ...style }}
+      style={{
+        ...({
+          "--arrow-background": "var(--foreground)",
+          "--arrow-size": "calc(1.5 * var(--spacing))",
+        } as React.CSSProperties),
+        ...style,
+      }}
       {...rest}
     >
       <ArkTooltip.ArrowTip />

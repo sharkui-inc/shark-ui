@@ -6,10 +6,10 @@ const MarkerSeparator = () => (
       <MarkerContent>Today</MarkerContent>
     </Marker>
     <Marker variant="separator">
-      <MarkerContent>Worked for 42s</MarkerContent>
+      <MarkerContent>Conversation compacted</MarkerContent>
     </Marker>
     <Marker variant="separator">
-      <MarkerContent>Conversation compacted</MarkerContent>
+      <MarkerContent>New messages</MarkerContent>
     </Marker>
   </div>
 );

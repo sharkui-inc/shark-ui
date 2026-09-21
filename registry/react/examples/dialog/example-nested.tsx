@@ -32,11 +32,11 @@ const Example = () => (
       <DialogBody className="grid gap-4">
         <div className="grid gap-1">
           <p className="text-muted-foreground text-sm">Name</p>
-          <p className="font-medium text-sm">Bora Baloglu</p>
+          <p className="font-medium text-sm">Vinicius Vicentini</p>
         </div>
         <div className="grid gap-1">
           <p className="text-muted-foreground text-sm">Email</p>
-          <p className="font-medium text-sm">bora@example.com</p>
+          <p className="font-medium text-sm">vinihvc@example.com</p>
         </div>
       </DialogBody>
 
@@ -56,11 +56,11 @@ const Example = () => (
               <FieldGroup>
                 <Field>
                   <FieldLabel>Name</FieldLabel>
-                  <Input defaultValue="Bora Baloglu" />
+                  <Input defaultValue="Vinicius Vicentini" />
                 </Field>
                 <Field>
                   <FieldLabel>Email</FieldLabel>
-                  <Input defaultValue="bora@example.com" />
+                  <Input defaultValue="vinihvc@example.com" />
                 </Field>
               </FieldGroup>
             </DialogBody>

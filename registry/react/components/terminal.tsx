@@ -3,6 +3,7 @@
 import { ark } from "@ark-ui/react/factory";
 import { createContext } from "@ark-ui/react/utils";
 import React from "react";
+import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import {
   ScrollArea,
@@ -186,15 +187,26 @@ const ESC = String.fromCharCode(27);
 
 const ANSI_RE = new RegExp(`${ESC}\\[([0-9;]*)m`, "g");
 
-const ANSI_CLASS: Record<string, string> = {
-  "0": "",
-  "31": "text-destructive-foreground",
-  "32": "text-success-foreground",
-  "33": "text-warning-foreground",
-  "34": "text-info-foreground",
-  "36": "text-info-foreground ",
-  "90": "text-muted-foreground",
-};
+const ANSI_CODES = ["0", "31", "32", "33", "34", "36", "90"] as const;
+
+type AnsiCode = (typeof ANSI_CODES)[number];
+
+const ansiVariants = tv({
+  variants: {
+    code: {
+      "0": "",
+      "31": "text-destructive-foreground",
+      "32": "text-success-foreground",
+      "33": "text-warning-foreground",
+      "34": "text-info-foreground",
+      "36": "text-info-foreground",
+      "90": "text-muted-foreground",
+    },
+  },
+});
+
+const isAnsiCode = (code: string): code is AnsiCode =>
+  ANSI_CODES.includes(code as AnsiCode);
 
 interface AnsiToken {
   className: string;
@@ -218,9 +230,8 @@ export const parseAnsi = (value: string): AnsiToken[] => {
     }
     const codes = (match[1] ?? "0").split(";");
     for (const code of codes) {
-      currentClass = ANSI_CLASS[code] ?? currentClass;
-      if (code === "0") {
-        currentClass = "";
+      if (isAnsiCode(code)) {
+        currentClass = ansiVariants({ code });
       }
     }
     lastIndex = index + match[0].length;

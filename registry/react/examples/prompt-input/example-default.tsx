@@ -9,6 +9,7 @@ import {
   GlobeIcon,
   ImagePlusIcon,
   ListTodoIcon,
+  MicIcon,
   MonitorIcon,
   PaperclipIcon,
   PlusIcon,
@@ -59,10 +60,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
-import {
-  SpeechInput,
-  SpeechInputTrigger,
-} from "@/registry/react/components/speech-input";
 
 const PromptInputDemo = () => {
   const [status, setStatus] = React.useState<PromptInputStatus>("ready");
@@ -181,13 +178,9 @@ const PromptInputDemo = () => {
               ))}
             </SelectContent>
           </Select>
-          <SpeechInput
-            onTranscriptionChange={(text) => {
-              setValue((current) => (current ? `${current} ${text}` : text));
-            }}
-          >
-            <SpeechInputTrigger />
-          </SpeechInput>
+          <PromptInputButton aria-label="Voice input" size="icon-sm">
+            <MicIcon aria-hidden="true" />
+          </PromptInputButton>
           <PromptInputSubmit className="ms-2" size="icon-sm" />
         </PromptInputFooter>
         <PromptInputBottom>
