@@ -1,7 +1,11 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "categories": ["sidebar"],
-  "dependencies": ["lucide-react"],
+  "categories": [
+    "sidebar"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
   "description": "A workspace layout with a collapsible navigation sidebar and persistent details sidebar.",
   "files": [
     {

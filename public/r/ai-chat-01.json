@@ -1,7 +1,13 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "categories": ["ai"],
-  "dependencies": ["@ai-sdk/react", "ai", "lucide-react"],
+  "categories": [
+    "ai"
+  ],
+  "dependencies": [
+    "@ai-sdk/react",
+    "ai",
+    "lucide-react"
+  ],
   "description": "Functional chat panel with a local createChat helper, empty state, thread, and composer.",
   "files": [
     {

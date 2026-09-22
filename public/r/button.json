@@ -8,9 +8,14 @@
       "destructive": "var(--color-red-600)"
     }
   },
-  "dependencies": ["@ark-ui/react", "tailwind-variants"],
+  "dependencies": [
+    "@ark-ui/react",
+    "tailwind-variants"
+  ],
   "name": "button",
-  "registryDependencies": ["https://shark-ui.com/r/spinner.json"],
+  "registryDependencies": [
+    "https://shark-ui.com/r/spinner.json"
+  ],
   "type": "registry:ui",
   "files": [
     {

@@ -22,7 +22,11 @@
       "sidebar-ring": "var(--color-neutral-600)"
     }
   },
-  "dependencies": ["@ark-ui/react", "tailwind-variants", "lucide-react"],
+  "dependencies": [
+    "@ark-ui/react",
+    "tailwind-variants",
+    "lucide-react"
+  ],
   "name": "sidebar",
   "registryDependencies": [
     "https://shark-ui.com/r/button.json",

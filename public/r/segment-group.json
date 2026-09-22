@@ -1,8 +1,12 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "dependencies": ["@ark-ui/react"],
+  "dependencies": [
+    "@ark-ui/react"
+  ],
   "name": "segment-group",
-  "registryDependencies": ["https://shark-ui.com/r/button.json"],
+  "registryDependencies": [
+    "https://shark-ui.com/r/button.json"
+  ],
   "type": "registry:ui",
   "files": [
     {

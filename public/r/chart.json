@@ -16,9 +16,14 @@
       "chart-5": "var(--color-amber-500)"
     }
   },
-  "dependencies": ["@ark-ui/react", "recharts"],
+  "dependencies": [
+    "@ark-ui/react",
+    "recharts"
+  ],
   "name": "chart",
-  "registryDependencies": ["https://shark-ui.com/r/format.json"],
+  "registryDependencies": [
+    "https://shark-ui.com/r/format.json"
+  ],
   "type": "registry:ui",
   "files": [
     {

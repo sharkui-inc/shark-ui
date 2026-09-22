@@ -1,6 +1,10 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "dependencies": ["@ai-sdk/react", "@tanstack/ai-react", "ai"],
+  "dependencies": [
+    "@ai-sdk/react",
+    "@tanstack/ai-react",
+    "ai"
+  ],
   "description": "Connect a local chat to AI SDK or TanStack AI useChat.",
   "files": [
     {
@@ -10,6 +14,8 @@
     }
   ],
   "name": "use-chat-helper",
-  "registryDependencies": ["https://shark-ui.com/r/create-chat.json"],
+  "registryDependencies": [
+    "https://shark-ui.com/r/create-chat.json"
+  ],
   "type": "registry:hook"
 }

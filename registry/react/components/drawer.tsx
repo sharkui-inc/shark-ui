@@ -267,7 +267,7 @@ const drawerContentVariants = tv({
     "text-popover-foreground",
     "shadow-lg/4",
     "outline-hidden",
-    "transition-[background-color,box-shadow,height,transform] duration-450 ease-[cubic-bezier(0.32,0.72,0,1)]",
+    "transition-[background-color,box-shadow,height,transform] duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)]",
     "data-[state=closed]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
     "data-[state=closed]:animate-out data-[state=open]:animate-in",
     "data-swiping:select-none data-swiping:transition-none",
@@ -823,7 +823,10 @@ export const DrawerBody = (props: DrawerBodyProps) => {
     <ScrollArea
       className={cn(
         "flex min-h-0 min-w-0 flex-1 touch-pan-y flex-col overflow-hidden",
-        "*:data-[slot=scroll-area-viewport]:h-auto! *:data-[slot=scroll-area-viewport]:min-h-0 *:data-[slot=scroll-area-viewport]:flex-auto *:data-[slot=scroll-area-viewport]:touch-pan-y"
+        "[&>[data-slot=scroll-area-viewport]]:h-auto!",
+        "[&>[data-slot=scroll-area-viewport]]:min-h-0",
+        "[&>[data-slot=scroll-area-viewport]]:flex-auto",
+        "[&>[data-slot=scroll-area-viewport]]:touch-pan-y"
       )}
       orientation="vertical"
       overscrollContain

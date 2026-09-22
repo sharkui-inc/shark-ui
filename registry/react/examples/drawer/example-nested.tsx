@@ -182,7 +182,7 @@ const DeliveryOptions = () => (
           <FieldContent>
             <FieldTitle>
               {option.title}
-              {option.badge ? (
+              {"badge" in option ? (
                 <Badge pill size="sm" variant="secondary">
                   {option.badge}
                 </Badge>

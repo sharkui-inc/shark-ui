@@ -1,6 +1,8 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "dependencies": ["@ark-ui/react"],
+  "dependencies": [
+    "@ark-ui/react"
+  ],
   "description": "A composable questionnaire with single, multiple, freeform, and optional answers.",
   "name": "questionnaire",
   "registryDependencies": [
