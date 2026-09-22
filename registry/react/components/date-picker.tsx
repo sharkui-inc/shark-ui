@@ -10,7 +10,6 @@ import { CalendarIcon, ClockIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import {
-  Calendar,
   CalendarLabel,
   CalendarPresetTrigger,
 } from "@/registry/react/components/calendar";
@@ -28,17 +27,26 @@ export const useDatePickerContext = useArkDatePickerContext;
 export const DatePickerRootProvider = ArkDatePicker.RootProvider;
 
 export const DatePicker = (
-  props: Omit<React.ComponentProps<typeof Calendar>, "inline">
+  props: Omit<React.ComponentProps<typeof ArkDatePicker.Root>, "inline">
 ) => {
-  const { positioning, ...rest } = props;
+  const {
+    lazyMount = true,
+    unmountOnExit = true,
+    positioning,
+    className,
+    ...rest
+  } = props;
 
   return (
-    <Calendar
+    <ArkDatePicker.Root
+      className={cn("[--cell-size:--spacing(9)]", "w-fit", className)}
       data-slot="date-picker"
+      lazyMount={lazyMount}
       positioning={{
         placement: "top",
         ...positioning,
       }}
+      unmountOnExit={unmountOnExit}
       {...rest}
       inline={false}
     />

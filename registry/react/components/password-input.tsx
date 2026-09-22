@@ -37,7 +37,10 @@ type PasswordInputControlProps = Pick<
 >;
 
 interface PasswordInputProps
-  extends Omit<React.ComponentProps<typeof ArkPasswordInput.Root>, "children">,
+  extends Omit<
+      React.ComponentProps<typeof ArkPasswordInput.Root>,
+      "children" | keyof PasswordInputControlProps
+    >,
     Pick<InputGroupProps, "size">,
     PasswordInputControlProps {
   /**
