@@ -27,7 +27,7 @@ import {
 
 const TOKEN_CACHE_LIMIT = 100;
 
-const STREAM_HIGHLIGHT_INTERVAL = 200;
+const STREAM_HIGHLIGHT_INTERVAL = 300;
 
 export type CodeBlockLanguage = BundledLanguage | "text";
 
@@ -348,6 +348,7 @@ const useCodeTokens = (
   }));
   const codeRef = React.useRef(code);
   const languageRef = React.useRef(language);
+  const lastHighlightedCodeRef = React.useRef<string | null>(null);
 
   React.useEffect(() => {
     codeRef.current = code;
@@ -356,6 +357,8 @@ const useCodeTokens = (
 
   const highlight = React.useCallback(
     (codeToHighlight: string, languageToHighlight: CodeBlockLanguage) => {
+      lastHighlightedCodeRef.current = codeToHighlight;
+
       if (languageToHighlight === "text") {
         setSnapshot({
           code: codeToHighlight,
@@ -411,7 +414,11 @@ const useCodeTokens = (
 
     highlight(codeRef.current, language);
     const interval = window.setInterval(() => {
-      highlight(codeRef.current, languageRef.current);
+      const currentCode = codeRef.current;
+      if (currentCode === lastHighlightedCodeRef.current) {
+        return;
+      }
+      highlight(currentCode, languageRef.current);
     }, STREAM_HIGHLIGHT_INTERVAL);
 
     return () => window.clearInterval(interval);
@@ -513,6 +520,10 @@ interface CodeBlockPreProps
 const CodeBlockPre = (props: CodeBlockPreProps) => {
   const { className, highlightedLines, showLineNumbers, tokens, ...rest } =
     props;
+  const highlightedLineSet = React.useMemo(
+    () => new Set(highlightedLines),
+    [highlightedLines]
+  );
 
   return (
     <ark.pre
@@ -527,7 +538,7 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
       <code className="grid min-w-max" data-slot="code-block-code">
         {tokens.map((line, index) => {
           const lineNumber = index + 1;
-          const highlighted = highlightedLines.includes(lineNumber);
+          const highlighted = highlightedLineSet.has(lineNumber);
           return (
             <span
               className={cn(
@@ -537,7 +548,7 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
               )}
               data-highlighted={highlighted ? "" : undefined}
               data-line={lineNumber}
-              key={`${lineNumber}:${line.map((token) => token.content).join("")}`}
+              key={lineNumber}
             >
               {showLineNumbers ? (
                 <span

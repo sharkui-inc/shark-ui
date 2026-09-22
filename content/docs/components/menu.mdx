@@ -213,6 +213,12 @@ Open a dialog from a `MenuItem` with the `onSelect` prop and controlled state.
 
 <ComponentPreview componentName="menu" fileName="example-dialog" />
 
+### Multiple triggers
+
+`value` on each `MenuTrigger`. `onTriggerValueChange` tracks which row opened the menu.
+
+<ComponentPreview componentName="menu" fileName="example-multiple-triggers" />
+
 ### Destructive
 
 Use `variant="destructive"` on `MenuItem` for irreversible actions like delete.
@@ -244,6 +250,7 @@ Root element of the menu component.
 | `defaultOpen` | `boolean` | - |
 | `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
 | `onSelect` | `(details: SelectionDetails) => void` | - |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | - |
 | `closeOnSelect` | `boolean` | `true` |
 
 ### MenuTrigger
@@ -253,6 +260,7 @@ Opens the menu on click.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | - |
+| `value` | `string` | - |
 
 ### MenuPositioner
 

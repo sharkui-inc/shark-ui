@@ -10,7 +10,11 @@ import {
 const TagsInputDemo = () => (
   <Field className="w-full max-w-sm">
     <FieldLabel>Frameworks</FieldLabel>
-    <TagsInput className="w-full" defaultValue={defaultValue}>
+    <TagsInput
+      className="w-full"
+      defaultValue={defaultValue}
+      placeholder="Add framework"
+    >
       <TagsInputContext>
         {({ value: tags }) =>
           tags.map((tag, index) => (

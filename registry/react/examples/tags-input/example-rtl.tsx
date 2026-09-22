@@ -16,7 +16,11 @@ const Example = () => {
   return (
     <Field className="w-full max-w-sm">
       <FieldLabel>{values.label}</FieldLabel>
-      <TagsInput className="w-full" defaultValue={values.items}>
+      <TagsInput
+        className="w-full"
+        defaultValue={values.items}
+        placeholder="Add framework"
+      >
         <TagsInputContext>
           {({ value }) =>
             value.map((item, index) => (

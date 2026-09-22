@@ -3,43 +3,43 @@
 import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
-  Dialog,
-  DialogBody,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTrigger,
-} from "@/registry/react/components/dialog";
-import {
   Field,
   FieldGroup,
   FieldLabel,
 } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
+import {
+  Sheet,
+  SheetBody,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTrigger,
+} from "@/registry/react/components/sheet";
 
 const Example = () => {
   const [activeUser, setActiveUser] = React.useState<User | null>(null);
 
   return (
-    <Dialog
+    <Sheet
       onTriggerValueChange={({ value }) => {
         setActiveUser(users.find((user) => user.value === value) ?? null);
       }}
     >
       <div className="flex flex-wrap justify-center gap-2">
         {users.map((user) => (
-          <DialogTrigger asChild key={user.value} value={user.value}>
+          <SheetTrigger asChild key={user.value} value={user.value}>
             <Button variant="outline">Edit {user.name}</Button>
-          </DialogTrigger>
+          </SheetTrigger>
         ))}
       </div>
-      <DialogContent>
-        <DialogHeader
-          description="One dialog, shared across every trigger."
+      <SheetContent>
+        <SheetHeader
+          description="One sheet, shared across every trigger."
           title={activeUser ? `Edit ${activeUser.name}` : "Edit teammate"}
         />
-        <DialogBody>
+        <SheetBody>
           {activeUser ? (
             <FieldGroup key={activeUser.value}>
               <Field>
@@ -52,17 +52,17 @@ const Example = () => {
               </Field>
             </FieldGroup>
           ) : null}
-        </DialogBody>
-        <DialogFooter>
-          <DialogClose asChild>
+        </SheetBody>
+        <SheetFooter>
+          <SheetClose asChild>
             <Button variant="outline">Cancel</Button>
-          </DialogClose>
-          <DialogClose asChild>
+          </SheetClose>
+          <SheetClose asChild>
             <Button>Save</Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   );
 };
 

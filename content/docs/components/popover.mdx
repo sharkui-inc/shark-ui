@@ -182,6 +182,13 @@ Use `closeOnInteractOutside` and `closeOnEscape` props to prevent closing on out
 Use `PopoverBody` to make the content area scrollable while keeping header and footer fixed.
 
 <ComponentPreview componentName="popover" fileName="example-scroll-area" />
+
+### Multiple triggers
+
+`value` on each `PopoverTrigger`. `onTriggerValueChange` tracks which button opened the popover.
+
+<ComponentPreview componentName="popover" fileName="example-multiple-triggers" />
+
 ### Inside dialog
 
 Render a popover inside a dialog.
@@ -219,6 +226,7 @@ Root element of the popover.
 | `open` | `boolean` | - |
 | `defaultOpen` | `boolean` | - |
 | `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | - |
 | `positioning` | `PositioningOptions` | - |
 | `modal` | `boolean` | `true` |
 | `closeOnInteractOutside` | `boolean` | `true` |

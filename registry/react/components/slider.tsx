@@ -193,12 +193,16 @@ export const Slider = (props: SliderProps) => {
   );
 };
 
-export const SliderLabel = (props: React.ComponentProps<typeof FieldLabel>) => {
+export const SliderLabel = (
+  props: React.ComponentProps<typeof ArkSlider.Label>
+) => {
   const { children, ...rest } = props;
 
   return (
-    <FieldLabel {...rest}>
-      <ArkSlider.Label data-slot="slider-label">{children}</ArkSlider.Label>
+    <FieldLabel asChild>
+      <ArkSlider.Label data-slot="slider-label" {...rest}>
+        {children}
+      </ArkSlider.Label>
     </FieldLabel>
   );
 };

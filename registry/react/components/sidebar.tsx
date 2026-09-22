@@ -718,10 +718,7 @@ interface SidebarMenuSkeletonProps
 export const SidebarMenuSkeleton = (props: SidebarMenuSkeletonProps) => {
   const { className, showIcon = false, ...rest } = props;
 
-  const width = React.useMemo(
-    () => `${Math.floor(Math.random() * 40) + 50}%`,
-    []
-  );
+  const width = "70%";
 
   return (
     <ark.div

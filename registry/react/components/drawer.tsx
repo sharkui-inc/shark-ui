@@ -31,7 +31,6 @@ import {
 
 export const useDrawer = useArkDrawer;
 export const useDrawerContext = useArkDrawerContext;
-export const DrawerRootProvider = ArkDrawer.RootProvider;
 
 interface DrawerModalContextProps {
   /**
@@ -47,6 +46,27 @@ const [DrawerModalProvider, _useDrawerModal] =
     name: "DrawerModalContext",
     providerName: "Drawer",
   });
+
+export interface DrawerRootProviderProps
+  extends React.ComponentProps<typeof ArkDrawer.RootProvider> {
+  /**
+   * Used internally to show or hide overlay. Match the `modal` option
+   * passed to `useDrawer` when non-default.
+   *
+   * @default true
+   */
+  modal?: boolean;
+}
+
+export const DrawerRootProvider = (props: DrawerRootProviderProps) => {
+  const { modal = true, children, ...rest } = props;
+
+  return (
+    <DrawerModalProvider value={{ modal }}>
+      <ArkDrawer.RootProvider {...rest}>{children}</ArkDrawer.RootProvider>
+    </DrawerModalProvider>
+  );
+};
 
 export const DrawerProvider = (
   props: React.ComponentProps<typeof ArkDrawer.Indent>
@@ -135,7 +155,8 @@ export const DrawerSwipeArea = (
 const drawerOverlayVariants = tv({
   base: [
     "[--bg:rgb(0_0_0/calc(0.32*(1-max(0,var(--drawer-swipe-progress,0)))))] [--blur:calc(4px*(1-max(0,var(--drawer-swipe-progress,0))))]",
-    "fixed inset-0 z-[calc(50+var(--layer-index,0))]",
+    "fixed inset-0 z-50",
+    "peer peer-data-[slot=drawer-backdrop]:hidden",
     "bg-(--bg) backdrop-blur-(--blur)",
     "data-[has-nested=drawer]:pointer-events-none",
     "transition-opacity duration-300 ease-out",
@@ -243,6 +264,7 @@ const drawerContentVariants = tv({
     "relative",
     "flex min-h-0 w-full flex-col",
     "[&[data-swipe-direction=up],&[data-swipe-direction=down]]:max-h-[96svh]",
+    "[&[data-swipe-direction=up],&[data-swipe-direction=down]]:h-(--drawer-rest-height,auto)",
     "data-nested-drawer-open:[&[data-swipe-direction=up],&[data-swipe-direction=down]]:h-(--stack-height)!",
     "[&[data-swipe-direction=left],&[data-swipe-direction=right]]:h-full [&[data-swipe-direction=left],&[data-swipe-direction=right]]:max-h-none [&[data-swipe-direction=left],&[data-swipe-direction=right]]:min-h-0 [&[data-swipe-direction=left],&[data-swipe-direction=right]]:w-full [&[data-swipe-direction=left],&[data-swipe-direction=right]]:max-w-md",
     "data-nested-drawer-open:overflow-hidden",
@@ -290,7 +312,7 @@ const drawerContentVariants = tv({
   variants: {
     variant: {
       default: "",
-      inset: ["sm:rounded-2xl sm:border"],
+      inset: ["sm:rounded-2xl sm:border sm:[--bleed:0px]"],
     },
   },
 });
@@ -369,31 +391,27 @@ function measureRestHeight(
   resizeObserver.observe(content);
 }
 
-// Zag publishes the drag on the active drawer. Ancestors copy that distance so
-// the stack follows the finger, and keep a transform-free rest height so scale
-// cannot feed the next measurement.
+// Zag puts drag distance on the active drawer only. Copy it to ancestors for
+// finger-follow, and freeze rest height so scale cannot feed the next measure.
 function bindNestedDrawerStack(content: HTMLElement) {
   let frame = 0;
   let tracking = false;
-  let freezeRestHeight = false;
+  let freeze = false;
   let wasNested = false;
   let unfreezeTimer = 0;
-  let holding = false;
   let front: HTMLElement | null = null;
 
   const clearProgress = () => {
-    holding = false;
     front = null;
     content.style.removeProperty(NESTED_SWIPE_PROGRESS);
   };
 
-  const holdProgress = () => {
-    holding = true;
-    content.style.setProperty(NESTED_SWIPE_PROGRESS, "1");
+  const setProgress = (value: number) => {
+    content.style.setProperty(NESTED_SWIPE_PROGRESS, value.toFixed(4));
   };
 
   const resizeObserver = new ResizeObserver(() => {
-    if (freezeRestHeight || content.hasAttribute("data-nested-drawer-open")) {
+    if (freeze || content.hasAttribute("data-nested-drawer-open")) {
       return;
     }
 
@@ -408,7 +426,7 @@ function bindNestedDrawerStack(content: HTMLElement) {
       return;
     }
 
-    freezeRestHeight = false;
+    freeze = false;
     measureRestHeight(content, resizeObserver);
   };
 
@@ -438,7 +456,7 @@ function bindNestedDrawerStack(content: HTMLElement) {
     return swiping.item(swiping.length - 1);
   };
 
-  const holdOrClearProgress = () => {
+  const endTracking = () => {
     stopTracking();
 
     const closing =
@@ -446,7 +464,7 @@ function bindNestedDrawerStack(content: HTMLElement) {
       content.hasAttribute("data-nested-drawer-open");
 
     if (closing) {
-      holdProgress();
+      setProgress(1);
       return;
     }
 
@@ -457,7 +475,7 @@ function bindNestedDrawerStack(content: HTMLElement) {
     frame = 0;
 
     if (!content.hasAttribute("data-nested-drawer-swiping")) {
-      holdOrClearProgress();
+      endTracking();
       return;
     }
 
@@ -467,19 +485,19 @@ function bindNestedDrawerStack(content: HTMLElement) {
       front = swiping;
     }
 
-    if (front?.getAttribute("data-state") === "closed") {
-      holdProgress();
+    if (!front?.isConnected) {
+      clearProgress();
       tracking = false;
       return;
     }
 
-    if (front) {
-      content.style.setProperty(
-        NESTED_SWIPE_PROGRESS,
-        readSwipeProgress(front).toFixed(4)
-      );
+    if (front.getAttribute("data-state") === "closed") {
+      setProgress(1);
+      tracking = false;
+      return;
     }
 
+    setProgress(readSwipeProgress(front));
     frame = requestAnimationFrame(tick);
   };
 
@@ -497,7 +515,7 @@ function bindNestedDrawerStack(content: HTMLElement) {
     const swiping = content.hasAttribute("data-nested-drawer-swiping");
 
     if (nested) {
-      freezeRestHeight = true;
+      freeze = true;
     } else if (wasNested) {
       clearProgress();
       scheduleUnfreeze();
@@ -511,13 +529,10 @@ function bindNestedDrawerStack(content: HTMLElement) {
     }
 
     if (tracking) {
-      holdOrClearProgress();
+      endTracking();
     }
 
-    if (
-      !(freezeRestHeight || nested) &&
-      content.getAttribute("data-state") === "open"
-    ) {
+    if (!(freeze || nested) && content.getAttribute("data-state") === "open") {
       measureRestHeight(content, resizeObserver);
     }
   };
@@ -530,30 +545,9 @@ function bindNestedDrawerStack(content: HTMLElement) {
     unfreeze();
   };
 
-  const styleObserver = new MutationObserver(() => {
-    if (!holding || front?.isConnected) {
-      return;
-    }
-
-    clearProgress();
-  });
-
-  const contentObserver = new MutationObserver(() => {
-    if (freezeRestHeight || content.hasAttribute("data-nested-drawer-open")) {
-      return;
-    }
-
-    measureRestHeight(content, resizeObserver);
-  });
-
   const attributeObserver = new MutationObserver(sync);
 
   resizeObserver.observe(content);
-  styleObserver.observe(content, {
-    attributeFilter: ["style"],
-    attributes: true,
-  });
-  contentObserver.observe(content, { childList: true, subtree: true });
   attributeObserver.observe(content, {
     attributeFilter: [
       "data-nested-drawer-open",
@@ -569,8 +563,6 @@ function bindNestedDrawerStack(content: HTMLElement) {
     stopTracking();
     window.clearTimeout(unfreezeTimer);
     resizeObserver.disconnect();
-    styleObserver.disconnect();
-    contentObserver.disconnect();
     attributeObserver.disconnect();
     content.removeEventListener("transitionend", onTransitionEnd);
     content.style.removeProperty(DRAWER_REST_HEIGHT);
@@ -770,7 +762,7 @@ export const DrawerHeader = (props: DrawerHeaderProps) => {
       className={cn(
         dialogHeaderVariants(),
         "in-[[data-slot=drawer-content]:has([data-slot=drawer-body])]:pb-3",
-        "group-data-[swipe-direction=down]/drawer:pt-0",
+        "group-data-[swipe-direction=down]/drawer:pt-4",
         className
       )}
       data-slot="drawer-header"
@@ -796,7 +788,11 @@ export const DrawerTitle = (
 
   return (
     <ArkDrawer.Title
-      className={cn(dialogTitleVariants(), "text-center", className)}
+      className={cn(
+        dialogTitleVariants(),
+        "group-[&[data-swipe-direction=up],&[data-swipe-direction=down]]/drawer:text-center",
+        className
+      )}
       data-slot="drawer-title"
       {...rest}
     />
@@ -810,7 +806,11 @@ export const DrawerDescription = (
 
   return (
     <ArkDrawer.Description
-      className={cn(dialogDescriptionVariants(), "text-center", className)}
+      className={cn(
+        dialogDescriptionVariants(),
+        "group-[&[data-swipe-direction=up],&[data-swipe-direction=down]]/drawer:text-center",
+        className
+      )}
       data-slot="drawer-description"
       {...rest}
     />
@@ -844,7 +844,8 @@ export const DrawerBody = (props: DrawerBodyProps) => {
     >
       <ark.div
         className={cn(
-          "p-(--space) text-center",
+          "p-(--space)",
+          "group-[&[data-swipe-direction=up],&[data-swipe-direction=down]]/drawer:text-center",
           "in-[[data-slot=drawer-content]:has([data-slot=drawer-header]:not(.sr-only))]:pt-0",
           "group-data-[swipe-direction=down]/drawer:in-[[data-slot=drawer-content]:not(:has([data-slot=drawer-header]:not(.sr-only)))]:pt-0",
           className
@@ -866,7 +867,7 @@ export const DrawerFooter = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex shrink-0 flex-col-reverse gap-2",
+        "flex shrink-0 flex-col-reverse gap-2 sm:flex-row sm:justify-end",
         "px-(--space) py-4",
         "sm:rounded-none",
         className

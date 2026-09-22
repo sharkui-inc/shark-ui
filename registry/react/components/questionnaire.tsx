@@ -259,18 +259,44 @@ export const Questionnaire = (props: QuestionnaireProps) => {
 
     return { itemDefinitions: definitions, itemIndexes: indexes };
   }, [items]);
-  const index = items.length ? (itemIndexes.get(requestedItem ?? "") ?? 0) : -1;
+  let index = -1;
+  if (items.length) {
+    if (requestedItem && itemIndexes.has(requestedItem)) {
+      index = itemIndexes.get(requestedItem) ?? 0;
+    } else {
+      index = 0;
+    }
+  }
 
   const activeItem = items[index];
 
-  const changeItem = (name: string) => {
-    if (controlledItem === undefined) {
-      setInternalItem(name);
+  const changeItem = React.useCallback(
+    (name: string) => {
+      if (controlledItem === undefined) {
+        setInternalItem(name);
+      }
+      if (name !== requestedItem) {
+        onItemChange?.({ item: name });
+      }
+    },
+    [controlledItem, requestedItem, onItemChange]
+  );
+
+  React.useEffect(() => {
+    if (!items.length) {
+      return;
     }
-    if (name !== activeItem?.name) {
-      onItemChange?.({ item: name });
+    if (requestedItem && itemIndexes.has(requestedItem)) {
+      return;
     }
-  };
+
+    const fallback = items[0]?.name;
+    if (!fallback) {
+      return;
+    }
+
+    changeItem(fallback);
+  }, [items, requestedItem, itemIndexes, changeItem]);
 
   const changeValue = (nextValue: QuestionnaireValue) => {
     if (controlledValue === undefined) {

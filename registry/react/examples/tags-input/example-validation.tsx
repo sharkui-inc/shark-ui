@@ -12,6 +12,7 @@ const Example = () => (
     <FieldLabel>Min 3 chars, alphanumeric + hyphen</FieldLabel>
     <TagsInput
       className="w-full"
+      placeholder="Add framework"
       validate={({ value, inputValue }) => {
         const next = inputValue.trim();
         return (

@@ -6,7 +6,7 @@ import {
   useSignaturePadContext as useArkSignaturePadContext,
 } from "@ark-ui/react/signature-pad";
 import { RotateCcw } from "lucide-react";
-import type React from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 
@@ -17,7 +17,9 @@ export const SignaturePadRootProvider = ArkSignaturePad.RootProvider;
 export const SignaturePad = (
   props: React.ComponentProps<typeof ArkSignaturePad.Root>
 ) => {
-  const { className, ...rest } = props;
+  const { className, onDrawEnd, ...rest } = props;
+  const [value, setValue] = React.useState("");
+  const emptyRef = React.useRef<boolean>(true);
 
   return (
     <ArkSignaturePad.Root
@@ -28,6 +30,16 @@ export const SignaturePad = (
         className
       )}
       data-slot="signature-pad"
+      onDrawEnd={(details) => {
+        emptyRef.current = false;
+        details.getDataUrl("image/png").then((url) => {
+          if (emptyRef.current) {
+            return;
+          }
+          setValue(url);
+        });
+        onDrawEnd?.(details);
+      }}
       {...rest}
     >
       <SignaturePadControl>
@@ -36,9 +48,30 @@ export const SignaturePad = (
         <SignaturePadGuide />
       </SignaturePadControl>
 
-      <ArkSignaturePad.HiddenInput value="" />
+      <SignaturePadEmptyReset
+        onEmpty={() => {
+          emptyRef.current = true;
+          setValue("");
+        }}
+      />
+      <ArkSignaturePad.HiddenInput value={value} />
     </ArkSignaturePad.Root>
   );
+};
+
+const SignaturePadEmptyReset = (props: { onEmpty: () => void }) => {
+  const { onEmpty } = props;
+  const { empty } = useArkSignaturePadContext();
+  const onEmptyRef = React.useRef(onEmpty);
+  onEmptyRef.current = onEmpty;
+
+  React.useEffect(() => {
+    if (empty) {
+      onEmptyRef.current();
+    }
+  }, [empty]);
+
+  return null;
 };
 
 const SignaturePadControl = (

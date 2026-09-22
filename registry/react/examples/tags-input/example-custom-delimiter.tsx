@@ -14,6 +14,7 @@ const Example = () => (
       className="w-full"
       defaultValue={["React"]}
       delimiter={tagDelimiter}
+      placeholder="Add framework"
     >
       <TagsInputContext>
         {({ value }) =>

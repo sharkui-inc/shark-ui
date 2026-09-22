@@ -17,6 +17,7 @@ const Example = () => {
       <TagsInput
         className="w-full"
         onValueChange={(details) => setValue(details.value)}
+        placeholder="Add framework"
         value={value}
       >
         <TagsInputContext>

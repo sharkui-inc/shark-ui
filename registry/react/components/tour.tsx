@@ -34,46 +34,58 @@ export type TourStepChangeDetails = Parameters<
 export const useTour = useArkTour;
 export const useTourContext = useArkTourContext;
 
-let activeTourCount = 0;
-let bodyHadRelativeClass = false;
-let bodyHadOverflowXClipClass = false;
-
-const addBodyTourClasses = () => {
-  if (activeTourCount === 0) {
-    bodyHadRelativeClass = document.body.classList.contains("relative");
-    bodyHadOverflowXClipClass =
-      document.body.classList.contains("overflow-x-clip");
-
-    if (!bodyHadRelativeClass) {
-      document.body.classList.add("relative");
-    }
-
-    if (!bodyHadOverflowXClipClass) {
-      document.body.classList.add("overflow-x-clip");
-    }
-  }
-
-  activeTourCount += 1;
+// Classes are removed only when the last tour closes and only if this layer added them.
+const tourBodyLock: {
+  addedOverflowXClip: boolean;
+  addedRelative: boolean;
+  count: number;
+} = {
+  addedOverflowXClip: false,
+  addedRelative: false,
+  count: 0,
 };
 
-const removeBodyTourClasses = () => {
-  if (activeTourCount === 0) {
+const acquireTourBodyLock = () => {
+  if (tourBodyLock.count === 0) {
+    if (!document.body.classList.contains("relative")) {
+      document.body.classList.add("relative");
+      tourBodyLock.addedRelative = true;
+    }
+
+    if (!document.body.classList.contains("overflow-x-clip")) {
+      document.body.classList.add("overflow-x-clip");
+      tourBodyLock.addedOverflowXClip = true;
+    }
+  }
+
+  tourBodyLock.count += 1;
+};
+
+const releaseTourBodyLock = () => {
+  if (tourBodyLock.count === 0) {
     return;
   }
 
-  activeTourCount -= 1;
+  tourBodyLock.count -= 1;
 
-  if (activeTourCount !== 0) {
+  if (tourBodyLock.count < 0) {
+    tourBodyLock.count = 0;
+  }
+
+  if (tourBodyLock.count !== 0) {
     return;
   }
 
-  if (!bodyHadRelativeClass) {
+  if (tourBodyLock.addedRelative) {
     document.body.classList.remove("relative");
   }
 
-  if (!bodyHadOverflowXClipClass) {
+  if (tourBodyLock.addedOverflowXClip) {
     document.body.classList.remove("overflow-x-clip");
   }
+
+  tourBodyLock.addedRelative = false;
+  tourBodyLock.addedOverflowXClip = false;
 };
 
 const TourBodyRelative = () => {
@@ -84,9 +96,9 @@ const TourBodyRelative = () => {
       return;
     }
 
-    addBodyTourClasses();
+    acquireTourBodyLock();
 
-    return removeBodyTourClasses;
+    return releaseTourBodyLock;
   }, [tour.open]);
 
   return null;

@@ -180,7 +180,7 @@ Focus order is `initialFocusEl`, then `[data-autofocus]`, then the first tabbabl
 
 ### Multiple triggers
 
-Give each `DialogTrigger` a `value` to reuse one dialog across several buttons. The panel repositions to the trigger that opened it.
+`value` on each `DialogTrigger`. `onTriggerValueChange` tracks which button opened the dialog.
 
 <ComponentPreview componentName="dialog" fileName="example-multiple-triggers" />
 
@@ -233,6 +233,7 @@ Root context provider. Controls open state and modal behavior.
 | `open` | `boolean` | `-` |
 | `defaultOpen` | `boolean` | `false` |
 | `onOpenChange` | `({ open }: OpenChangeDetails) => void` | `-` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
 | `modal` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
 | `closeOnInteractOutside` | `boolean` | `true` |

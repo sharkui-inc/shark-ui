@@ -114,7 +114,7 @@ export const FileUploadDescription = (
   return (
     <ark.div
       className={cn("font-medium text-muted-foreground text-sm", className)}
-      data-slot="file-upload-title"
+      data-slot="file-upload-description"
       {...rest}
     />
   );
@@ -152,12 +152,20 @@ export const FileUploadList = (props: FileUploadListProps) => {
     return null;
   }
 
+  const keyCounts = new Map<string, number>();
+  for (const file of files) {
+    const baseKey = `${file.name}-${file.size}-${file.lastModified}`;
+    keyCounts.set(baseKey, (keyCounts.get(baseKey) ?? 0) + 1);
+  }
+
   return (
     <FileUploadItemGroup className="flex flex-col gap-2">
       {files.map((file, index) => {
         const isImage = file.type.startsWith("image/");
 
-        const key = `${file.name}-${index}`;
+        const baseKey = `${file.name}-${file.size}-${file.lastModified}`;
+        const key =
+          (keyCounts.get(baseKey) ?? 0) > 1 ? `${baseKey}-${index}` : baseKey;
 
         const extension = file.name.split(".").pop();
 

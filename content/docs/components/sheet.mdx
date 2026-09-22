@@ -132,6 +132,12 @@ Use `modal={false}` to allow interaction with elements outside the sheet.
 
 <ComponentPreview componentName="sheet" fileName="example-non-modal" />
 
+### Multiple triggers
+
+`value` on each `SheetTrigger`. `onTriggerValueChange` tracks which button opened the sheet.
+
+<ComponentPreview componentName="sheet" fileName="example-multiple-triggers" />
+
 ### Custom spacing
 
 Use `[--space:--spacing("value")]` on `SheetContent` to adjust internal padding.
@@ -163,6 +169,7 @@ Root component.
 | `open` | `boolean` | `-` |
 | `defaultOpen` | `boolean` | `false` |
 | `onOpenChange` | `({ open }: OpenChangeDetails) => void` | `-` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
 | `modal` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
 | `closeOnInteractOutside` | `boolean` | `true` |

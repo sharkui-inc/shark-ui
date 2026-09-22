@@ -102,6 +102,12 @@ Use the `positioning` prop to change the position of the tooltip.
 
 <ComponentPreview componentName="tooltip" fileName="example-with-keyboard-shortcut" />
 
+### Multiple triggers
+
+`value` on each `TooltipTrigger`. `onTriggerValueChange` updates shared tooltip content.
+
+<ComponentPreview componentName="tooltip" fileName="example-multiple-triggers" />
+
 ### Disabled Button
 
 Show a tooltip on a disabled button by wrapping it with a span.
@@ -136,6 +142,7 @@ Root component that wraps the tooltip. Manages open state and positioning.
 | `open` | `boolean` | - |
 | `defaultOpen` | `boolean` | - |
 | `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | - |
 | `disabled` | `boolean` | - |
 | `interactive` | `boolean` | `false` |
 | `closeOnClick` | `boolean` | `true` |
@@ -150,6 +157,7 @@ Element that shows the tooltip on hover or focus. Button by default; use `asChil
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | - |
+| `value` | `string` | - |
 
 ### TooltipContent
 

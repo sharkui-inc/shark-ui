@@ -161,19 +161,19 @@ Use `DrawerTitle` and `DrawerDescription` as children for more control.
 
 ### Indent background
 
-`DrawerProvider` wraps the page. An open drawer scales that page and reveals the background behind it. Pass `container` to keep the drawer inside a frame.
+`DrawerProvider` wraps the page. An open drawer scales that page and reveals the background behind it.
 
 <ComponentPreview componentName="drawer" fileName="example-indent-background" />
 
 ### Multiple triggers
 
-`value` on each `DrawerTrigger`. One drawer for several buttons.
+`value` on each `DrawerTrigger`. `onTriggerValueChange` tracks which button opened the drawer.
 
 <ComponentPreview componentName="drawer" fileName="example-multiple-triggers" />
 
 ### Nested Drawers
 
-Nest a `Drawer` inside another. The back panel follows the front panel height.
+Nest a `Drawer` inside another.
 
 <ComponentPreview componentName="drawer" fileName="example-nested" />
 
@@ -209,7 +209,9 @@ Nest a `Drawer` inside another. The back panel follows the front panel height.
 
 ### Custom spacing
 
-`[--space]` on `DrawerContent`. Default is `--spacing(6)`.
+`[--space]` on `DrawerContent`. 
+
+Default is `--spacing(6)`.
 
 <ComponentPreview componentName="drawer" fileName="example-custom-spacing" />
 
@@ -236,6 +238,7 @@ Root element of the drawer.
 | `open` | `boolean` | `-` |
 | `defaultOpen` | `boolean` | `false` |
 | `onOpenChange` | `({ open }: OpenChangeDetails) => void` | `-` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
 | `swipeDirection` | `"up" \| "down" \| "start" \| "end"` | `"down"` |
 | `snapPoints` | `(number \| string)[]` | `[1]` |
 | `defaultSnapPoint` | `number \| string \| null` | `1` |
@@ -284,7 +287,6 @@ Holds the drawer panel. Supports swipe-to-close; direction inherited from root `
 | `showBar` | `boolean` | `true` |
 | `showCloseButton` | `boolean` | `false` |
 | `draggable` | `boolean` | `true` |
-| `container` | `RefObject<HTMLElement \| null>` | `-` |
 | `className` | `string` | `-` |
 
 | Prop | Type | Default |
@@ -354,6 +356,9 @@ Provides a Drawer API created with `useDrawer` to descendant components.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `value` | `UseDrawerReturn` | **required** |
+| `modal` | `boolean` | `true` |
+
+`modal` gates `DrawerOverlay` the same way as on `Drawer`. Pass the same value you used in `useDrawer` when it is not the default.
 
 ### DrawerProvider
 

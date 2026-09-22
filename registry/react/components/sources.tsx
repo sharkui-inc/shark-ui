@@ -79,6 +79,28 @@ export const SourcesContent = (
   );
 };
 
+const ALLOWED_HREF_PROTOCOLS = new Set(["http:", "https:", "mailto:"]);
+
+const toSafeHref = (href: string | undefined): string | undefined => {
+  if (!href) {
+    return undefined;
+  }
+  try {
+    const url = new URL(
+      href,
+      typeof window === "undefined"
+        ? "https://example.com"
+        : window.location.href
+    );
+    if (!ALLOWED_HREF_PROTOCOLS.has(url.protocol)) {
+      return undefined;
+    }
+    return url.href;
+  } catch {
+    return undefined;
+  }
+};
+
 interface SourceProps extends React.ComponentProps<typeof ark.a> {
   /**
    * The title of the source.
@@ -88,9 +110,11 @@ interface SourceProps extends React.ComponentProps<typeof ark.a> {
 
 export const Source = (props: SourceProps) => {
   const { href, title, className, children, ...rest } = props;
+  const safeHref = toSafeHref(href);
 
   return (
     <ark.a
+      {...rest}
       className={cn(
         "inline-flex min-h-8 w-fit min-w-0 max-w-full items-center gap-2",
         "px-2 py-1",
@@ -104,10 +128,9 @@ export const Source = (props: SourceProps) => {
         className
       )}
       data-slot="source"
-      href={href}
+      href={safeHref}
       rel="noreferrer"
-      target="_blank"
-      {...rest}
+      target={safeHref ? "_blank" : undefined}
     >
       <BookIcon aria-hidden="true" />
       <span className="min-w-0 truncate">{children ?? title}</span>
@@ -133,6 +156,7 @@ interface InlineCitationProps extends React.ComponentProps<typeof ark.button> {
 
 export const InlineCitation = (props: InlineCitationProps) => {
   const { href, index, title, className, children, ...rest } = props;
+  const safeHref = toSafeHref(href);
 
   const label = index === undefined ? "Source" : String(index);
 
@@ -166,14 +190,14 @@ export const InlineCitation = (props: InlineCitationProps) => {
       <HoverCardTrigger asChild>{trigger}</HoverCardTrigger>
       <HoverCardContent className="w-64 gap-1 p-3 text-xs">
         {title ? <p className="font-medium text-foreground">{title}</p> : null}
-        {href ? (
+        {safeHref ? (
           <a
             className="break-all text-muted-foreground underline-offset-2 hover:underline"
-            href={href}
+            href={safeHref}
             rel="noreferrer"
             target="_blank"
           >
-            {href}
+            {safeHref}
           </a>
         ) : null}
       </HoverCardContent>

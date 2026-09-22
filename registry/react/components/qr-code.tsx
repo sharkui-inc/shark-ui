@@ -62,7 +62,6 @@ export const QrCodeOverlay = (
     <ArkQrCode.Overlay
       className={cn(
         "size-(--qr-code-overlay-size)",
-        "absolute inset-0",
         "p-2",
         "flex items-center justify-center",
         "bg-black",

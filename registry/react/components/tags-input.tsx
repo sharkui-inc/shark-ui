@@ -30,6 +30,12 @@ interface TagsInputProps
    */
   pill?: boolean;
   /**
+   * Placeholder text for the root input.
+   *
+   * @default ""
+   */
+  placeholder?: string;
+  /**
    * Whether to show the clear button.
    *
    * @default true
@@ -42,6 +48,7 @@ export const TagsInput = (props: TagsInputProps) => {
     size = "md",
     showClear,
     pill = false,
+    placeholder = "",
     editable = false,
     tabIndex,
     className,
@@ -65,7 +72,7 @@ export const TagsInput = (props: TagsInputProps) => {
       <TagsInputControl showClear={showClear}>
         {children}
 
-        <TagsInputInput placeholder="Add framework" />
+        <TagsInputInput placeholder={placeholder} />
       </TagsInputControl>
 
       <ArkTagsInput.HiddenInput tabIndex={tabIndex} />
@@ -189,7 +196,6 @@ export const TagsInputItemDeleteTrigger = (
       {...rest}
     >
       <InputGroupButton
-        aria-label="Clear tags"
         className={cn(
           "in-data-[size=lg]:size-4.5 in-data-[size=sm]:size-2.5 size-3.5",
           "shrink-0",

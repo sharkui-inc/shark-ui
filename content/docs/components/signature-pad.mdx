@@ -113,6 +113,8 @@ Root component. Canvas for drawing signatures. Manages strokes and export.
 | `onDrawEnd` | `(details: DrawEndDetails) => void` | - |
 | `className` | `string` | - |
 
+When `name` is set, the composed control submits a PNG data URL after draw-end (empty string when cleared).
+
 ### SignaturePadRootProvider
 
 Provides a SignaturePad API created with `useSignaturePad` to descendant components.

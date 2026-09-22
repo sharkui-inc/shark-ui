@@ -111,8 +111,9 @@ export const DatePickerTimer = (props: React.ComponentProps<typeof Input>) => {
   const { id, value, defaultValue, className, ...rest } = props;
 
   return (
-    <InputGroup {...rest}>
+    <InputGroup>
       <InputGroupInput
+        {...rest}
         className={cn(
           "[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none",
           className

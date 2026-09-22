@@ -61,7 +61,7 @@ interface PopoverContentProps
   /**
    * Show close button at the top right corner
    *
-   * @default true
+   * @default false
    */
   showCloseButton?: boolean;
 }

@@ -10,7 +10,12 @@ import {
 const Example = () => (
   <Field className="w-full max-w-sm">
     <FieldLabel>Teams</FieldLabel>
-    <TagsInput className="w-full" defaultValue={defaultValue} pill>
+    <TagsInput
+      className="w-full"
+      defaultValue={defaultValue}
+      pill
+      placeholder="Add framework"
+    >
       <TagsInputContext>
         {({ value }) =>
           value.map((tag, index) => (

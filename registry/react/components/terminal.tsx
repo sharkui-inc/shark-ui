@@ -61,11 +61,12 @@ export const Terminal = (props: TerminalProps) => {
   );
 };
 
-const TerminalFollow = () => {
-  const { autoScroll, output } = _useTerminal();
+const TerminalFollow = (props: { followKey: string }) => {
+  const { followKey } = props;
+  const { autoScroll } = _useTerminal();
   const { scrollToEdge } = useScrollAreaContext();
 
-  const followOutput = React.useEffectEvent((_nextOutput: string) => {
+  const follow = React.useEffectEvent((_key: string) => {
     if (!autoScroll) {
       return;
     }
@@ -74,8 +75,8 @@ const TerminalFollow = () => {
   });
 
   React.useLayoutEffect(() => {
-    followOutput(output);
-  }, [output]);
+    follow(followKey);
+  }, [followKey]);
 
   return null;
 };
@@ -151,8 +152,15 @@ export const TerminalContent = (props: TerminalContentProps) => {
 
   const { output: outputFromContext } = _useTerminal();
   const output = outputProp ?? outputFromContext;
+  // Non-string children should prefer the `output` prop for autoScroll.
+  const followKey = typeof children === "string" ? children : output;
 
-  const tokens = parseAnsi(output);
+  const tokens = React.useMemo(() => {
+    if (children === undefined || children === null) {
+      return parseAnsi(output);
+    }
+    return null;
+  }, [children, output]);
 
   return (
     <ark.div
@@ -166,13 +174,13 @@ export const TerminalContent = (props: TerminalContentProps) => {
       {...rest}
     >
       <ScrollArea className="flex-1" dir="ltr" overscrollContain>
-        <TerminalFollow />
+        <TerminalFollow followKey={followKey} />
         <pre
           className="w-max min-w-full p-3 font-mono text-[0.8125rem] leading-6"
           dir="ltr"
         >
           {children ??
-            tokens.map((token) => (
+            tokens?.map((token) => (
               <span className={token.className} key={token.start}>
                 {token.text}
               </span>

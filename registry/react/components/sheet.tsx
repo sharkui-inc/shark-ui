@@ -195,7 +195,20 @@ export const SheetContent = (props: SheetContentProps) => {
 
 export const SheetHeader = (
   props: React.ComponentProps<typeof DialogHeader>
-) => <DialogHeader data-slot="sheet-header" {...props} />;
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <DialogHeader
+      className={cn(
+        "in-[[data-slot=sheet-content]:has([data-slot=sheet-body])]:pb-3",
+        className
+      )}
+      data-slot="sheet-header"
+      {...rest}
+    />
+  );
+};
 
 export const SheetTitle = (props: React.ComponentProps<typeof DialogTitle>) => (
   <DialogTitle data-slot="sheet-title" {...props} />
@@ -212,6 +225,7 @@ export const SheetBody = (props: React.ComponentProps<typeof DialogBody>) => {
     <DialogBody
       className={cn(
         "in-[[data-slot=sheet-content]:has([data-slot=sheet-header]:not(.sr-only))]:pt-0",
+        "in-[[data-slot=sheet-content]:has([data-slot=sheet-footer]:not(.border-t))]:pb-1",
         className
       )}
       data-slot="sheet-body"

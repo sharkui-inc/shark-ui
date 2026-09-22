@@ -185,7 +185,6 @@ export const menuItemVariants = tv({
     "group/menu-item",
     "touch-manipulation select-none font-medium text-sm",
     "outline-hidden",
-    "group-data-[date=open]/trigger-item:bg-accent group-data-[date=open]/trigger-item:text-accent-foreground",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
     menuItemIconVariants(),
   ],
@@ -370,7 +369,11 @@ export const MenuSubTrigger = (
 
   return (
     <ArkMenu.TriggerItem
-      className={cn(menuItemVariants({ variant: "default" }), className)}
+      className={cn(
+        menuItemVariants({ variant: "default" }),
+        "data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
+        className
+      )}
       data-slot="menu-sub-trigger"
       {...rest}
     >

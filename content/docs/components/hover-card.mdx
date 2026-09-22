@@ -102,6 +102,12 @@ Use the `disabled` prop to prevent the hover card from opening on hover.
 
 ## Examples
 
+### Multiple triggers
+
+`value` on each `HoverCardTrigger`. `onTriggerValueChange` tracks which trigger is hovered.
+
+<ComponentPreview componentName="hover-card" fileName="example-multiple-triggers" />
+
 ### Hide Arrow
 
 Hide the arrow with `showArrow={false}` on `HoverCardContent`.
@@ -127,6 +133,7 @@ Root component. Manages hover state and content visibility.
 | `disabled` | `boolean` | - |
 | `immediate` | `boolean` | - |
 | `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | - |
 | `open` | `boolean` | - |
 | `openDelay` | `number` | `600` |
 | `positioning` | `PositioningOptions` | `{ placement: "top" }` |
@@ -140,6 +147,7 @@ Shows the hover card on hover or focus.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | - |
+| `value` | `string` | - |
 
 ### HoverCardContent
 

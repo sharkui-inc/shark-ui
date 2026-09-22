@@ -11,39 +11,59 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from "@/registry/react/components/drawer";
+import {
+  Field,
+  FieldGroup,
+  FieldLabel,
+} from "@/registry/react/components/field";
+import { Input } from "@/registry/react/components/input";
 
 const Example = () => {
-  const [teammate, setTeammate] = React.useState(users[0].name);
+  const [activeUser, setActiveUser] = React.useState<User | null>(null);
 
   return (
-    <Drawer>
+    <Drawer
+      onTriggerValueChange={({ value }) => {
+        setActiveUser(users.find((user) => user.value === value) ?? null);
+      }}
+    >
       <div className="flex flex-wrap justify-center gap-2">
         {users.map((user) => (
           <DrawerTrigger asChild key={user.value} value={user.value}>
-            <Button onClick={() => setTeammate(user.name)} variant="outline">
-              Edit {user.name}
-            </Button>
+            <Button variant="outline">Edit {user.name}</Button>
           </DrawerTrigger>
         ))}
       </div>
       <DrawerContent>
         <DrawerHeader
-          description="One drawer, opened by either button."
-          title={`Edit ${teammate}`}
+          description="One drawer, shared across every trigger."
+          title={activeUser ? `Edit ${activeUser.name}` : "Edit teammate"}
         />
-        <DrawerBody>
-          <div className="mx-auto w-full max-w-xs">
-            <p className="text-muted-foreground text-sm">
-              The title follows the trigger you pressed.
-            </p>
-          </div>
+        <DrawerBody className="text-start">
+          {activeUser ? (
+            <div className="mx-auto w-full max-w-xs">
+              <FieldGroup key={activeUser.value}>
+                <Field>
+                  <FieldLabel>Name</FieldLabel>
+                  <Input defaultValue={activeUser.name} />
+                </Field>
+                <Field>
+                  <FieldLabel>Email</FieldLabel>
+                  <Input defaultValue={activeUser.email} />
+                </Field>
+              </FieldGroup>
+            </div>
+          ) : null}
         </DrawerBody>
         <DrawerFooter>
-          <div className="mx-auto w-full max-w-xs">
+          <div className="mx-auto flex w-full max-w-xs gap-2">
             <DrawerClose asChild>
-              <Button className="w-full" variant="outline">
-                Close
+              <Button className="flex-1" variant="outline">
+                Cancel
               </Button>
+            </DrawerClose>
+            <DrawerClose asChild>
+              <Button className="flex-1">Save</Button>
             </DrawerClose>
           </div>
         </DrawerFooter>
@@ -52,9 +72,11 @@ const Example = () => {
   );
 };
 
+type User = (typeof users)[number];
+
 const users = [
-  { name: "Alice", value: "alice" },
-  { name: "Bob", value: "bob" },
+  { email: "alice@onda.dev", name: "Alice", value: "alice" },
+  { email: "bob@onda.dev", name: "Bob", value: "bob" },
 ];
 
 export default Example;

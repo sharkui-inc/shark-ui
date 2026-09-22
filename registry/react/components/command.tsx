@@ -222,13 +222,12 @@ export const CommandInput = (props: CommandInputProps) => {
           className
         )}
         size={size}
-        {...rest}
       >
         <InputGroupAddon>
           <SearchIcon aria-hidden className="opacity-64" />
         </InputGroupAddon>
         <ArkCombobox.Input asChild data-slot="command-input">
-          <InputGroupInput autoFocus={autoFocus} />
+          <InputGroupInput autoFocus={autoFocus} {...rest} />
         </ArkCombobox.Input>
       </InputGroup>
     </ComboboxControl>
