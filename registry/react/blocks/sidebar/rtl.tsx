@@ -218,7 +218,7 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               size="lg"
             >
-              <IconTile aria-hidden="true" size="lg">
+              <IconTile aria-hidden size="lg">
                 <activeTeam.logo className="size-4" />
               </IconTile>
               <div className="grid flex-1 text-start text-sm leading-tight">
@@ -240,7 +240,7 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
                   onClick={() => setActiveTeam(team)}
                   value={team.name}
                 >
-                  <IconTile aria-hidden="true" size="xs" variant="secondary">
+                  <IconTile aria-hidden size="xs" variant="secondary">
                     <team.logo className="size-3.5 shrink-0" />
                   </IconTile>
                   {team.name}
@@ -251,7 +251,7 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
             <MenuSeparator />
             <MenuGroup>
               <MenuItem className="gap-2" value="add-team">
-                <IconTile aria-hidden="true" size="xs">
+                <IconTile aria-hidden size="xs">
                   <Plus className="size-4" />
                 </IconTile>
                 <div className="font-medium text-muted-foreground">

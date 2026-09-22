@@ -47,7 +47,7 @@ const Example = () => {
     <div className="w-full max-w-lg">
       <ApprovalCard onReject={handleReject} onSubmit={handleSubmit}>
         <ApprovalCardHeader>
-          <TerminalIcon aria-hidden="true" />
+          <TerminalIcon aria-hidden />
           <ApprovalCardTitle>Apply the staging migration?</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent className="flex flex-col gap-4">

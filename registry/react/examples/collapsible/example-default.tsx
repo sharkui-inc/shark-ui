@@ -14,7 +14,7 @@ import {
 } from "@/registry/react/components/collapsible";
 
 const CollapsibleDemo = () => (
-  <Card className="w-96 [--space:--spacing(4)]">
+  <Card className="w-full max-w-96 [--space:--spacing(4)]">
     <Collapsible>
       <CardHeader title="Total visits">
         <CardDescription className="pt-2">

@@ -50,7 +50,7 @@ export const UnsavedChangesExample = (props: React.ComponentProps<"div">) => {
       <CardContent>
         <Item variant="outline">
           <ItemMedia variant="icon">
-            <FileTextIcon aria-hidden="true" />
+            <FileTextIcon aria-hidden />
           </ItemMedia>
           <ItemContent>
             <ItemTitle>Q3 launch notes</ItemTitle>
@@ -61,51 +61,49 @@ export const UnsavedChangesExample = (props: React.ComponentProps<"div">) => {
           </ItemActions>
         </Item>
       </CardContent>
-      <CardFooter>
-        <div className="grid w-full grid-cols-2 gap-2">
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button className="w-full" variant="outline">
-                Discard
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader
-                description="This preview will reset. You cannot undo this in the demo."
-                title="Discard unsaved changes?"
-              />
-              <AlertDialogFooter>
-                <AlertDialogCancel>Keep editing</AlertDialogCancel>
-                <AlertDialogClose asChild>
-                  <AlertDialogAction
-                    onClick={() => {
-                      setStatus("discarded");
-                      toast.info({ title: "Changes discarded" });
-                    }}
-                    variant="destructive"
-                  >
-                    Discard
-                  </AlertDialogAction>
-                </AlertDialogClose>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-          <Button
-            className="w-full"
-            isLoading={isSaving}
-            onClick={async () => {
-              setIsSaving(true);
-              await new Promise((resolve) => {
-                window.setTimeout(resolve, 600);
-              });
-              setIsSaving(false);
-              setStatus("saved");
-              toast.success({ title: "Changes saved" });
-            }}
-          >
-            Save
-          </Button>
-        </div>
+      <CardFooter className="grid w-full grid-cols-2">
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button className="w-full" variant="outline">
+              Discard
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader
+              description="This preview will reset. You cannot undo this in the demo."
+              title="Discard unsaved changes?"
+            />
+            <AlertDialogFooter>
+              <AlertDialogCancel>Keep editing</AlertDialogCancel>
+              <AlertDialogClose asChild>
+                <AlertDialogAction
+                  onClick={() => {
+                    setStatus("discarded");
+                    toast.info({ title: "Changes discarded" });
+                  }}
+                  variant="destructive"
+                >
+                  Discard
+                </AlertDialogAction>
+              </AlertDialogClose>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+        <Button
+          className="w-full"
+          isLoading={isSaving}
+          onClick={async () => {
+            setIsSaving(true);
+            await new Promise((resolve) => {
+              window.setTimeout(resolve, 600);
+            });
+            setIsSaving(false);
+            setStatus("saved");
+            toast.success({ title: "Changes saved" });
+          }}
+        >
+          Save
+        </Button>
       </CardFooter>
     </Card>
   );

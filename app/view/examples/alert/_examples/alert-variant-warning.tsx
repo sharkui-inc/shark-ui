@@ -7,7 +7,7 @@ import {
 
 const AlertVariantWarning = () => (
   <Alert className="max-w-md" variant="warning">
-    <AlertTriangleIcon aria-hidden="true" />
+    <AlertTriangleIcon aria-hidden />
     <AlertTitle>Storage almost full</AlertTitle>
     <AlertDescription>
       Your storage is almost full. Consider upgrading your plan to avoid losing

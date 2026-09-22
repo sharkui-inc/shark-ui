@@ -2,7 +2,6 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
-  AlertDialogClose,
   AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
@@ -22,11 +21,9 @@ const Example = () => (
       />
       <AlertDialogFooter>
         <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogClose asChild>
-          <AlertDialogAction variant="destructive">
-            Delete project
-          </AlertDialogAction>
-        </AlertDialogClose>
+        <AlertDialogAction variant="destructive">
+          Delete project
+        </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

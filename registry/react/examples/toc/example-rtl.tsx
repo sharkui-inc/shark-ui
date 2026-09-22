@@ -59,7 +59,7 @@ const Article = ({ items }: { items: TocItemProps[] }) => (
           {item.label}
         </h2>
         <SkeletonText
-          aria-hidden="true"
+          aria-hidden
           className="animate-none **:[div]:h-2"
           lines={item.lines}
         />

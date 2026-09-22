@@ -7,7 +7,7 @@ import {
 
 const AlertVariantDefault = () => (
   <Alert className="max-w-md">
-    <CheckCheckIcon aria-hidden="true" />
+    <CheckCheckIcon aria-hidden />
     <AlertTitle>Deployment successful</AlertTitle>
     <AlertDescription>
       You can now start building your next great project.

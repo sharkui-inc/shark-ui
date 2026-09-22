@@ -22,7 +22,7 @@ const InputGroupRtl = () => (
     <InputGroup className="max-w-xs">
       <InputGroupInput placeholder="بحث..." />
       <InputGroupAddon>
-        <SearchIcon aria-hidden="true" />
+        <SearchIcon aria-hidden />
       </InputGroupAddon>
       <InputGroupAddon align="inline-end">١٢ نتيجة</InputGroupAddon>
     </InputGroup>

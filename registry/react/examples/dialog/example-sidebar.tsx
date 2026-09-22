@@ -122,7 +122,7 @@ const Example = () => {
         >
           <Sidebar className="border-e bg-transparent" collapsible="none">
             <SidebarHeader className="flex-row items-center gap-2">
-              <WavesHorizontalIcon aria-hidden="true" />
+              <WavesHorizontalIcon aria-hidden />
               <span className="font-medium">Onda</span>
             </SidebarHeader>
             <SidebarContent>
@@ -135,7 +135,7 @@ const Example = () => {
                           isActive={page === value}
                           onClick={() => setPage(value)}
                         >
-                          <Icon aria-hidden="true" />
+                          <Icon aria-hidden />
                           <span>{label}</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>

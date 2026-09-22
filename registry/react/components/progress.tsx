@@ -63,36 +63,46 @@ export const Progress = (props: ProgressProps) => {
 
 export const ProgressTrack = (
   props: React.ComponentProps<typeof ArkProgress.Track>
-) => (
-  <ArkProgress.Track
-    className={cn(
-      "bg-input",
-      "rounded-full",
-      "overflow-x-hidden",
-      "data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full",
-      "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2"
-    )}
-    data-slot="progress-track"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkProgress.Track
+      className={cn(
+        "bg-input",
+        "rounded-full",
+        "overflow-x-hidden",
+        "data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full",
+        "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2",
+        className
+      )}
+      data-slot="progress-track"
+      {...rest}
+    />
+  );
+};
 
 export const ProgressRange = (
   props: React.ComponentProps<typeof ArkProgress.Range>
-) => (
-  <ArkProgress.Range
-    className={cn(
-      "bg-primary",
-      "transition-none",
-      "data-[orientation=horizontal]:h-full",
-      "data-[orientation=vertical]:h-full",
-      "motion-reduce:data-[state=indeterminate]:animate-none",
-      "data-[state=indeterminate]:w-1/3 data-[state=indeterminate]:animate-indeterminate"
-    )}
-    data-slot="progress-range"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkProgress.Range
+      className={cn(
+        "bg-primary",
+        "transition-none",
+        "data-[orientation=horizontal]:h-full",
+        "data-[orientation=vertical]:h-full",
+        "motion-reduce:data-[state=indeterminate]:animate-none",
+        "data-[state=indeterminate]:w-1/3 data-[state=indeterminate]:animate-indeterminate",
+        className
+      )}
+      data-slot="progress-range"
+      {...rest}
+    />
+  );
+};
 
 export const ProgressLabel = (
   props: React.ComponentProps<typeof ArkProgress.Label>

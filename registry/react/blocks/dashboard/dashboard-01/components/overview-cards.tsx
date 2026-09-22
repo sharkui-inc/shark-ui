@@ -61,16 +61,16 @@ export const OverviewCards = () => (
               {metric.value}
             </CardTitle>
           </div>
-          <IconTile aria-hidden="true" size="sm">
-            <metric.icon aria-hidden="true" className="size-4" />
+          <IconTile aria-hidden size="sm">
+            <metric.icon aria-hidden className="size-4" />
           </IconTile>
         </CardHeader>
         <CardContent>
           <Badge variant={metric.positive ? "secondary" : "outline"}>
             {metric.positive ? (
-              <ArrowUpRightIcon aria-hidden="true" className="size-3" />
+              <ArrowUpRightIcon aria-hidden className="size-3" />
             ) : (
-              <ArrowDownRightIcon aria-hidden="true" className="size-3" />
+              <ArrowDownRightIcon aria-hidden className="size-3" />
             )}
             {metric.change}
           </Badge>

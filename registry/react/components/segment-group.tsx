@@ -6,7 +6,6 @@ import {
   useSegmentGroupContext as useArkSegmentGroupContext,
 } from "@ark-ui/react/segment-group";
 import type React from "react";
-import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { buttonControlVariants } from "@/registry/react/components/button";
 
@@ -16,43 +15,8 @@ export const SegmentGroupRootProvider = ArkSegmentGroup.RootProvider;
 
 type SegmentGroupVariant = "default" | "underline";
 
-const segmentGroupVariants = tv({
-  base: [
-    "group/segment-group relative",
-    "flex gap-2",
-    "isolate",
-    "data-[orientation=vertical]:flex-col",
-    "data-disabled:opacity-64",
-    "data-[variant=underline]:gap-1 data-[variant=underline]:border-input",
-    "data-[orientation=horizontal]:data-[variant=underline]:border-b",
-    "data-[orientation=vertical]:data-[variant=underline]:border-s",
-  ],
-  compoundVariants: [
-    {
-      class: "rounded-full",
-      pill: true,
-      variant: "default",
-    },
-  ],
-  defaultVariants: {
-    pill: false,
-    variant: "default",
-  },
-  variants: {
-    pill: {
-      false: "",
-      true: "",
-    },
-    variant: {
-      default: "",
-      underline: "",
-    },
-  },
-});
-
 interface SegmentGroupProps
-  extends React.ComponentProps<typeof ArkSegmentGroup.Root>,
-    VariantProps<typeof segmentGroupVariants> {
+  extends React.ComponentProps<typeof ArkSegmentGroup.Root> {
   /**
    * The visual variant of the segment group.
    *
@@ -65,7 +29,6 @@ export const SegmentGroup = (props: SegmentGroupProps) => {
   const {
     orientation = "horizontal",
     variant = "default",
-    pill = false,
     className,
     children,
     ...rest
@@ -73,8 +36,17 @@ export const SegmentGroup = (props: SegmentGroupProps) => {
 
   return (
     <ArkSegmentGroup.Root
-      className={cn(segmentGroupVariants({ pill, variant }), className)}
-      data-pill={pill}
+      className={cn(
+        "group/segment-group relative",
+        "flex gap-2",
+        "isolate",
+        "data-[orientation=vertical]:flex-col",
+        "data-disabled:opacity-64",
+        "data-[variant=underline]:gap-1 data-[variant=underline]:border-input",
+        "data-[orientation=horizontal]:data-[variant=underline]:border-b",
+        "data-[orientation=vertical]:data-[variant=underline]:border-s",
+        className
+      )}
       data-slot="segment-group"
       data-variant={variant}
       orientation={orientation}

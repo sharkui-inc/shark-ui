@@ -5,10 +5,7 @@ export const MenuThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
     <div className="flex w-48 flex-col items-end gap-1.5">
       <div className="flex size-8 items-center justify-center rounded-lg border border-input bg-muted shadow-sm/4">
-        <EllipsisIcon
-          aria-hidden="true"
-          className="size-4 text-muted-foreground/64"
-        />
+        <EllipsisIcon aria-hidden className="size-4 text-muted-foreground/64" />
       </div>
       <div className="flex w-full flex-col overflow-hidden rounded-lg border border-input border-dashed bg-muted shadow-sm/4">
         <div className="flex items-center gap-2 bg-primary p-2">

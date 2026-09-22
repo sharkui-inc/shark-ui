@@ -4,7 +4,7 @@ const RIPPLE_RINGS = [36, 52, 68, 84, 100] as const;
 
 export const HeroAtmosphere = () => (
   <div
-    aria-hidden="true"
+    aria-hidden
     className="pointer-events-none absolute end-[-6%] top-[16rem] size-0 sm:top-[18rem] lg:top-[20rem]"
   >
     {RIPPLE_RINGS.map((size, index) => (

@@ -109,10 +109,6 @@ import {
 </Diff>
 ```
 
-## Visual consistency
-
-`Diff` and [Code Block](/docs/ai-components/code-block) use the same technical surface: a 36px header, 14px interface text, a scrollable viewport, and 14px / 24px code metrics. They remain separate components: the Diff gutter always shows right-aligned line numbers, while `CodeBlock` prioritizes syntax highlighting and optional line numbers.
-
 ## Title
 
 `DiffHeader` supports two title patterns:
@@ -150,21 +146,27 @@ Compose context, delete, and add lines into a unified hunk.
 
 ### Long line numbers
 
-The gutter uses the same `w-11` column as [Code Block](/docs/ai-components/code-block), so line numbers stay aligned with source view.
+The gutter shares a minimum width with [Code Block](/docs/ai-components/code-block) and grows with the widest line number, so source and diff views stay aligned.
 
 <ComponentPreview componentName="diff" fileName="example-long-line-numbers" />
+
+### Scrollable (vertical)
+
+Constrain height so the hunk scrolls vertically inside the panel.
+
+<ComponentPreview componentName="diff" fileName="example-scrollable" />
+
+### Scrollable (horizontal)
+
+Long lines overflow and scroll horizontally; the line-number gutter stays sticky.
+
+<ComponentPreview componentName="diff" fileName="example-scrollable-horizontal" />
 
 ### Without header
 
 Omit `DiffHeader` when the filename is already shown nearby.
 
 <ComponentPreview componentName="diff" fileName="example-no-header" />
-
-### Multiple files
-
-Stack one `Diff` per file.
-
-<ComponentPreview componentName="diff" fileName="example-multiple" />
 
 ### With Icon
 
@@ -175,12 +177,6 @@ Place a file-type icon in `DiffHeader` next to the file path.
 ### Custom header
 
 <ComponentPreview componentName="diff" fileName="example-custom-header" />
-
-### With Tool Result
-
-Place a `Diff` in `ToolResultContent` when a write or edit tool returns a patch.
-
-<ComponentPreview componentName="diff" fileName="example-with-tool" />
 
 ## RTL
 

@@ -49,7 +49,7 @@ export const ActivityGoalExample = (props: React.ComponentProps<"div">) => {
                 size="icon-md"
                 variant="outline"
               >
-                <MinusIcon aria-hidden="true" />
+                <MinusIcon aria-hidden />
               </Button>
             </TooltipTrigger>
             <TooltipContent>Decrease</TooltipContent>
@@ -85,7 +85,7 @@ export const ActivityGoalExample = (props: React.ComponentProps<"div">) => {
                 size="icon-md"
                 variant="outline"
               >
-                <PlusIcon aria-hidden="true" />
+                <PlusIcon aria-hidden />
               </Button>
             </TooltipTrigger>
             <TooltipContent>Increase</TooltipContent>

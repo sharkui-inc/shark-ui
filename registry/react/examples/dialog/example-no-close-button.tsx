@@ -21,10 +21,10 @@ const Example = () => (
       />
       <DialogFooter>
         <DialogClose asChild>
-          <Button variant="outline">Cancel</Button>
+          <Button>Confirm</Button>
         </DialogClose>
         <DialogClose asChild>
-          <Button>Confirm</Button>
+          <Button variant="outline">Cancel</Button>
         </DialogClose>
       </DialogFooter>
     </DialogContent>

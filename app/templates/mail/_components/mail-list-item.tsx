@@ -80,7 +80,7 @@ export const MailListItem = ({
         variant="ghost"
       >
         <StarIcon
-          aria-hidden="true"
+          aria-hidden
           className={
             isStarred ? "fill-current text-primary" : "text-muted-foreground"
           }

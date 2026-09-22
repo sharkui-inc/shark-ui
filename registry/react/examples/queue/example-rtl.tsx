@@ -45,17 +45,17 @@ const Example = () => {
                   <QueueItemAction size="xs">
                     {values.sendNow}
                     <Kbd className="border-0 bg-transparent px-0">
-                      <CornerDownLeftIcon aria-hidden="true" />
+                      <CornerDownLeftIcon aria-hidden />
                     </Kbd>
                   </QueueItemAction>
                   <QueueItemAction aria-label={`${values.edit} ${item}`}>
-                    <PencilIcon aria-hidden="true" />
+                    <PencilIcon aria-hidden />
                   </QueueItemAction>
                   <QueueItemAction aria-label={`${values.remove} ${item}`}>
-                    <Trash2Icon aria-hidden="true" />
+                    <Trash2Icon aria-hidden />
                   </QueueItemAction>
                   <QueueItemAction aria-label={`${values.more} ${item}`}>
-                    <EllipsisIcon aria-hidden="true" />
+                    <EllipsisIcon aria-hidden />
                   </QueueItemAction>
                 </QueueItemActions>
               </QueueItem>

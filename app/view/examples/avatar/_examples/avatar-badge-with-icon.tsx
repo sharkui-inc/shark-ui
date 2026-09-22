@@ -11,7 +11,7 @@ const AvatarBadgeWithIcon = () => (
     <AvatarImage alt="@vinihvc" src="https://github.com/vinihvc.png" />
     <AvatarFallback>VV</AvatarFallback>
     <AvatarBadge>
-      <PlusIcon aria-hidden="true" />
+      <PlusIcon aria-hidden />
     </AvatarBadge>
   </Avatar>
 );

@@ -4,12 +4,12 @@ import { Button } from "@/registry/react/components/button";
 const ButtonWithIconExample = () => (
   <div className="flex flex-wrap gap-2">
     <Button variant="outline">
-      <GitBranchIcon aria-hidden="true" data-icon="inline-start" />
+      <GitBranchIcon aria-hidden data-icon="inline-start" />
       New Branch
     </Button>
     <Button variant="outline">
       Fork
-      <GitForkIcon aria-hidden="true" data-icon="inline-end" />
+      <GitForkIcon aria-hidden data-icon="inline-end" />
     </Button>
   </div>
 );

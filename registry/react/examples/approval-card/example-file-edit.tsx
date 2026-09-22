@@ -42,7 +42,7 @@ const Example = () => {
     <div className="w-full max-w-lg">
       <ApprovalCard onReject={handleReject} onSubmit={handleSubmit}>
         <ApprovalCardHeader>
-          <FilePenLineIcon aria-hidden="true" />
+          <FilePenLineIcon aria-hidden />
           <ApprovalCardTitle>Apply this file change?</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent>

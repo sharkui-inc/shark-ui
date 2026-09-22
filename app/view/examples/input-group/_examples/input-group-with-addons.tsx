@@ -31,7 +31,7 @@ const InputGroupWithAddons = () => (
       <InputGroup>
         <InputGroupInput id="input-icon-left-05" />
         <InputGroupAddon>
-          <SearchIcon aria-hidden="true" />
+          <SearchIcon aria-hidden />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -40,7 +40,7 @@ const InputGroupWithAddons = () => (
       <InputGroup>
         <InputGroupInput id="input-icon-right-07" />
         <InputGroupAddon align="inline-end">
-          <EyeOffIcon aria-hidden="true" />
+          <EyeOffIcon aria-hidden />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -51,13 +51,10 @@ const InputGroupWithAddons = () => (
       <InputGroup>
         <InputGroupInput id="input-icon-both-09" />
         <InputGroupAddon>
-          <MicIcon aria-hidden="true" />
+          <MicIcon aria-hidden />
         </InputGroupAddon>
         <InputGroupAddon align="inline-end">
-          <RadioIcon
-            aria-hidden="true"
-            className="animate-pulse text-red-500"
-          />
+          <RadioIcon aria-hidden className="animate-pulse text-red-500" />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -86,7 +83,7 @@ const InputGroupWithAddons = () => (
       <InputGroup>
         <InputGroupInput id="input-icon-both-10" />
         <InputGroupAddon align="inline-end">
-          <StarIcon aria-hidden="true" />
+          <StarIcon aria-hidden />
           <InputGroupButton
             aria-label="Copy to clipboard"
             onClick={() => toast.create({ title: "Copied to clipboard" })}
@@ -96,10 +93,7 @@ const InputGroupWithAddons = () => (
           </InputGroupButton>
         </InputGroupAddon>
         <InputGroupAddon>
-          <RadioIcon
-            aria-hidden="true"
-            className="animate-pulse text-red-500"
-          />
+          <RadioIcon aria-hidden className="animate-pulse text-red-500" />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -108,7 +102,7 @@ const InputGroupWithAddons = () => (
       <InputGroup>
         <InputGroupInput id="input-description-10" />
         <InputGroupAddon align="inline-end">
-          <InfoIcon aria-hidden="true" />
+          <InfoIcon aria-hidden />
         </InputGroupAddon>
       </InputGroup>
       <FieldDescription>

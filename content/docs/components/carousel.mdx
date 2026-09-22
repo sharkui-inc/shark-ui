@@ -90,9 +90,9 @@ import {
 </Carousel>
 ```
 
-### Controlled
+## Controlled
 
-Use `page` and `onPageChange` props to control the carousel state programmatically.
+Use `page` and `onPageChange` to control the carousel.
 
 <ComponentPreview componentName="carousel" fileName="example-controlled" />
 
@@ -108,7 +108,7 @@ Use `page` and `onPageChange` props to control the carousel state programmatical
 
 ## Thumbnail Indicators
 
-Render each thumbnail inside `CarouselIndicator` to create a visual preview of each slide.
+Render each thumbnail inside `CarouselIndicator`.
 
 ### Horizontal
 
@@ -122,7 +122,7 @@ Render each thumbnail inside `CarouselIndicator` to create a visual preview of e
 
 ### Autoplay
 
-Use `autoplay` props on `Carousel` to make the carousel play automatically.
+Use the `autoplay` prop to play automatically.
 
 <ComponentPreview componentName="carousel" fileName="example-autoplay" />
 
@@ -134,19 +134,19 @@ Use `loop` prop to make the carousel loop.
 
 ### Spacing
 
-Control the gap between slides using the `spacing` prop on `Carousel`.
+Use the `spacing` prop to control the gap between slides.
 
 <ComponentPreview componentName="carousel" fileName="example-spacing" />
 
 ### Slides Per Page
 
-Display multiple slides simultaneously by setting the `slidesPerPage` prop on `Carousel`.
+Use the `slidesPerPage` prop to show multiple slides at once.
 
 <ComponentPreview componentName="carousel" fileName="example-slides-per-page" />
 
 ### Mouse Drag
 
-To allow mouse drag, set the `allowMouseDrag` prop on `Carousel`.
+Use the `allowMouseDrag` prop to enable mouse drag.
 
 <ComponentPreview componentName="carousel" fileName="example-mouse-drag" />
 
@@ -173,8 +173,8 @@ Root component. Manages slide state and navigation.
 | `page` | `number` | `-` |
 | `slidesPerPage` | `number` | `1` |
 | `slidesPerMove` | `number \| 'auto'` | `'auto'` |
-| `spacing` | `string` | `"0px"` |
-| `padding` | `number` | `0` |
+| `spacing` | `string` | `"16px"` |
+| `padding` | `string` | `-` |
 | `className` | `string` | `-` |
 
 ### CarouselContent

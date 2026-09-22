@@ -93,7 +93,9 @@ export const EditablePreview = (props: EditablePreviewProps) => {
         "whitespace-pre-wrap font-normal text-base sm:text-sm",
         "dark:hover:bg-input/32",
         "data-placeholder-shown:text-muted-foreground",
+        "in-[[data-slot=editable-area]:has(textarea)]:h-auto",
         "in-[[data-slot=editable-area]:has(textarea)]:items-start",
+        "in-[[data-slot=editable-area]:has(textarea)]:py-2",
         className
       )}
       data-slot="editable-preview"

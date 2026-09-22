@@ -14,7 +14,7 @@ const Example = () => (
   <div className="flex w-full max-w-sm flex-col gap-3">
     <Attachment state="idle">
       <AttachmentMedia>
-        <ClockIcon aria-hidden="true" />
+        <ClockIcon aria-hidden />
       </AttachmentMedia>
       <AttachmentContent>
         <AttachmentTitle>selected-file.pdf</AttachmentTitle>
@@ -41,7 +41,7 @@ const Example = () => (
     </Attachment>
     <Attachment state="error">
       <AttachmentMedia>
-        <FileTextIcon aria-hidden="true" />
+        <FileTextIcon aria-hidden />
       </AttachmentMedia>
       <AttachmentContent>
         <AttachmentTitle>financial-model.xlsx</AttachmentTitle>
@@ -49,13 +49,13 @@ const Example = () => (
       </AttachmentContent>
       <AttachmentActions>
         <AttachmentAction aria-label="Remove financial-model.xlsx">
-          <XIcon aria-hidden="true" />
+          <XIcon aria-hidden />
         </AttachmentAction>
       </AttachmentActions>
     </Attachment>
     <Attachment state="done">
       <AttachmentMedia>
-        <CheckIcon aria-hidden="true" />
+        <CheckIcon aria-hidden />
       </AttachmentMedia>
       <AttachmentContent>
         <AttachmentTitle>uploaded-report.pdf</AttachmentTitle>

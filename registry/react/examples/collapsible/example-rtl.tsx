@@ -22,7 +22,7 @@ const Example = () => {
   const { values } = translations[locale];
 
   return (
-    <Card className="w-96">
+    <Card className="w-full max-w-96">
       <Collapsible>
         <CardHeader title={values.totalVisits}>
           <CardDescription className="pt-2">

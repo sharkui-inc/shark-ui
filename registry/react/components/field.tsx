@@ -182,7 +182,6 @@ export const FieldRequiredIndicator = (
 
   return (
     <ArkField.RequiredIndicator
-      aria-hidden
       className={cn(
         "select-none text-destructive text-sm",
         "dark:text-destructive-foreground",
@@ -190,6 +189,7 @@ export const FieldRequiredIndicator = (
       )}
       data-slot="field-required-indicator"
       {...rest}
+      aria-hidden
     >
       {children ?? "*"}
     </ArkField.RequiredIndicator>

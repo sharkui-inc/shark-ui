@@ -98,7 +98,7 @@ export const DashboardEmployees = () => {
               value={query}
             />
             <InputGroupAddon>
-              <SearchIcon aria-hidden="true" />
+              <SearchIcon aria-hidden />
             </InputGroupAddon>
           </InputGroup>
         </CardAction>
@@ -125,7 +125,7 @@ const EmployeeActions = ({ employee }: { employee: Employee }) => (
         size="icon-xs"
         variant="ghost"
       >
-        <MoreHorizontalIcon aria-hidden="true" />
+        <MoreHorizontalIcon aria-hidden />
       </Button>
     </MenuTrigger>
     <MenuContent>

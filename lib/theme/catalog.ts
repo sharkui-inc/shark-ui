@@ -390,8 +390,11 @@ const STATUS_DARK = {
 
 const BASE_PALETTE_FROM_BACKGROUND_RE = /--color-([a-z]+)-/;
 
-const basePaletteFromBackground = (background: string) =>
-  BASE_PALETTE_FROM_BACKGROUND_RE.exec(background)?.[1];
+const basePaletteFromBackground = (background: string) => {
+  const match: RegExpExecArray | null =
+    BASE_PALETTE_FROM_BACKGROUND_RE.exec(background);
+  return match?.[1];
+};
 
 const primaryToneTokens = (
   primaryCss: PrimaryColor["cssVars"],

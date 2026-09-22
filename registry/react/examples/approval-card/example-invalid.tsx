@@ -53,7 +53,7 @@ const Example = () => {
         ref={formRef}
       >
         <ApprovalCardHeader>
-          <CircleAlertIcon aria-hidden="true" />
+          <CircleAlertIcon aria-hidden />
           <ApprovalCardTitle>Schedule the deployment</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent>

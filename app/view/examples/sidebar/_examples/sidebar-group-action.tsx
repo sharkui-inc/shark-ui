@@ -34,7 +34,7 @@ const SidebarGroupActionDemo = () => (
             }}
             title="Add Project"
           >
-            <PlusIcon aria-hidden="true" />
+            <PlusIcon aria-hidden />
             <span className="sr-only">Add Project</span>
           </SidebarGroupAction>
           <SidebarGroupContent>
@@ -43,7 +43,7 @@ const SidebarGroupActionDemo = () => (
                 <SidebarMenuItem key={project.name}>
                   <SidebarMenuButton asChild>
                     <a href={project.url}>
-                      <project.icon aria-hidden="true" />
+                      <project.icon aria-hidden />
                       <span>{project.name}</span>
                     </a>
                   </SidebarMenuButton>

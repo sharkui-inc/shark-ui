@@ -50,14 +50,14 @@ export const DashboardSidebar = () => {
       <Sidebar className="absolute h-full" collapsible="offcanvas">
         <SidebarHeader className="h-14 min-h-14 shrink-0 flex-row items-center justify-between border-b py-0">
           <div className="flex h-full items-center gap-2">
-            <IconTile aria-hidden="true" size="xs">
-              <WavesHorizontalIcon aria-hidden="true" />
+            <IconTile aria-hidden size="xs">
+              <WavesHorizontalIcon aria-hidden />
             </IconTile>
             <p className="truncate font-semibold text-sm">Onda</p>
           </div>
 
           <Button size="icon-xs" variant="ghost">
-            <SearchIcon aria-hidden="true" />
+            <SearchIcon aria-hidden />
           </Button>
         </SidebarHeader>
 
@@ -69,7 +69,7 @@ export const DashboardSidebar = () => {
                 {dashboardNavigation.map(({ icon: Icon, label }) => (
                   <SidebarMenuItem key={label}>
                     <SidebarMenuButton isActive={label === "Dashboard"}>
-                      <Icon aria-hidden="true" />
+                      <Icon aria-hidden />
                       <span>{label}</span>
                       {label === "Customers" ? (
                         <Badge
@@ -103,28 +103,28 @@ export const DashboardSidebar = () => {
                 </MenuTrigger>
                 <MenuContent className="w-(--reference-width)">
                   <MenuItem value="profile">
-                    <UserRoundIcon aria-hidden="true" />
+                    <UserRoundIcon aria-hidden />
                     Profile
                   </MenuItem>
                   <MenuItem
                     onClick={() => setSettingsOpen(true)}
                     value="settings"
                   >
-                    <SettingsIcon aria-hidden="true" />
+                    <SettingsIcon aria-hidden />
                     Settings
                   </MenuItem>
                   <MenuItem value="keyboard-shortcuts">
-                    <KeyboardIcon aria-hidden="true" />
+                    <KeyboardIcon aria-hidden />
                     Keyboard shortcuts
                     <MenuShortcut>⌘/</MenuShortcut>
                   </MenuItem>
                   <MenuItem value="help-center">
-                    <CircleHelpIcon aria-hidden="true" />
+                    <CircleHelpIcon aria-hidden />
                     Help center
                   </MenuItem>
                   <MenuSeparator />
                   <MenuItem value="sign-out" variant="destructive">
-                    <LogOutIcon aria-hidden="true" />
+                    <LogOutIcon aria-hidden />
                     Sign out
                   </MenuItem>
                 </MenuContent>

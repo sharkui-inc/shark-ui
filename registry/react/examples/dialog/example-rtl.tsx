@@ -64,11 +64,11 @@ const Example = () => {
         </DialogBody>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">{values.cancel}</Button>
+            <Button>{values.save}</Button>
           </DialogClose>
 
           <DialogClose asChild>
-            <Button>{values.save}</Button>
+            <Button variant="outline">{values.cancel}</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

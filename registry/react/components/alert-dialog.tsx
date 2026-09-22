@@ -1,5 +1,6 @@
 "use client";
 
+import { ark } from "@ark-ui/react/factory";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
@@ -9,14 +10,14 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  dialogFooterVariants,
 } from "@/registry/react/components/dialog";
 
 export const AlertDialog = (props: React.ComponentProps<typeof Dialog>) => (
-  <Dialog data-slot="alert-dialog-root" role="alertdialog" {...props} />
+  <Dialog data-slot="alert-dialog-root" {...props} role="alertdialog" />
 );
 
 export const AlertDialogTrigger = (
@@ -28,8 +29,8 @@ export const AlertDialogContent = (
 ) => (
   <DialogContent
     data-slot="alert-dialog-content"
-    showCloseButton={false}
     {...props}
+    showCloseButton={false}
   />
 );
 
@@ -41,7 +42,7 @@ export const AlertDialogBody = (
   return (
     <DialogBody
       className={cn(
-        "in-[[data-slot=alert-dialog-content]:has([data-slot=alert-dialog-header]:not(.sr-only))]:pt-0",
+        "in-[[data-slot=alert-dialog-content]:has([data-slot=alert-dialog-header]:not(.sr-only))]:pt-1",
         className
       )}
       data-slot="alert-dialog-body"
@@ -52,7 +53,20 @@ export const AlertDialogBody = (
 
 export const AlertDialogHeader = (
   props: React.ComponentProps<typeof DialogHeader>
-) => <DialogHeader data-slot="alert-dialog-header" {...props} />;
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <DialogHeader
+      className={cn(
+        "in-[[data-slot=alert-dialog-content]:has([data-slot=alert-dialog-body])]:pb-3",
+        className
+      )}
+      data-slot="alert-dialog-header"
+      {...rest}
+    />
+  );
+};
 
 export const AlertDialogTitle = (
   props: React.ComponentProps<typeof DialogTitle>
@@ -67,8 +81,22 @@ export const AlertDialogClose = (
 ) => <DialogClose data-slot="alert-dialog-close" {...props} />;
 
 export const AlertDialogFooter = (
-  props: React.ComponentProps<typeof DialogFooter>
-) => <DialogFooter data-slot="alert-dialog-footer" {...props} />;
+  props: React.ComponentProps<typeof ark.div>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn(
+        dialogFooterVariants(),
+        "flex-col-reverse sm:flex-row sm:justify-end",
+        className
+      )}
+      data-slot="alert-dialog-footer"
+      {...rest}
+    />
+  );
+};
 
 interface AlertDialogActionProps
   extends React.ComponentProps<typeof DialogClose>,
@@ -84,7 +112,11 @@ interface AlertDialogActionProps
 export const AlertDialogAction = (props: AlertDialogActionProps) => {
   const { variant = "default", ...rest } = props;
 
-  return <Button variant={variant} {...rest} />;
+  return (
+    <AlertDialogClose asChild data-slot="alert-dialog-action">
+      <Button variant={variant} {...rest} />
+    </AlertDialogClose>
+  );
 };
 
 interface AlertDialogCancelProps

@@ -9,7 +9,7 @@ import {
 } from "@/registry/react/components/image-cropper";
 
 const Example = () => {
-  const [crop, setCrop] = React.useState<Crop>();
+  const [crop, setCrop] = React.useState<Crop | undefined>();
   const [zoom, setZoom] = React.useState(1);
 
   return (

@@ -42,7 +42,7 @@ const Example = () => {
               </span>
             </div>
             <span className="flex size-8 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground">
-              <Share2Icon aria-hidden="true" className="size-4" />
+              <Share2Icon aria-hidden className="size-4" />
             </span>
           </div>
         </div>

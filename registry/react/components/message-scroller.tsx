@@ -133,13 +133,18 @@ export const MessageScrollerButton = (props: MessageScrollerButtonProps) => {
       {...rest}
       onClick={(event) => {
         onClick?.(event);
+
+        if (event.defaultPrevented) {
+          return;
+        }
+
         scrollArea.scrollToEdge({
           behavior: "smooth",
           edge: direction === "end" ? "bottom" : "top",
         });
       }}
     >
-      {children ?? <ArrowDownIcon aria-hidden="true" />}
+      {children ?? <ArrowDownIcon aria-hidden />}
     </Button>
   );
 };

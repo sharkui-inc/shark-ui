@@ -5,6 +5,7 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
+  MenuItemDescription,
   MenuSeparator,
   MenuShortcut,
   MenuTrigger,
@@ -18,20 +19,18 @@ const Example = () => (
     <MenuContent className="w-72">
       <MenuGroup heading="Actions">
         <MenuItem value="new-file">
-          <SquarePlusIcon aria-hidden="true" />
+          <SquarePlusIcon aria-hidden />
           <span className="flex min-w-0 flex-1 flex-col gap-0.5">
             <span>New file</span>
-            <span className="text-muted-foreground text-xs">
-              Create a new file
-            </span>
+            <MenuItemDescription>Create a new file</MenuItemDescription>
           </span>
           <MenuShortcut>⌘N</MenuShortcut>
         </MenuItem>
         <MenuItem value="edit-file">
-          <PencilIcon aria-hidden="true" />
+          <PencilIcon aria-hidden />
           <span className="flex min-w-0 flex-1 flex-col gap-0.5">
             <span>Edit file</span>
-            <span className="text-muted-foreground text-xs">Make changes</span>
+            <MenuItemDescription>Make changes</MenuItemDescription>
           </span>
           <MenuShortcut>⌘E</MenuShortcut>
         </MenuItem>
@@ -39,10 +38,10 @@ const Example = () => (
       <MenuSeparator />
       <MenuGroup heading="Danger zone">
         <MenuItem value="delete-file" variant="destructive">
-          <Trash2Icon aria-hidden="true" />
+          <Trash2Icon aria-hidden />
           <span className="flex min-w-0 flex-1 flex-col gap-0.5">
             <span>Delete file</span>
-            <span className="text-muted-foreground text-xs">Move to trash</span>
+            <MenuItemDescription>Move to trash</MenuItemDescription>
           </span>
           <MenuShortcut>⌘D</MenuShortcut>
         </MenuItem>

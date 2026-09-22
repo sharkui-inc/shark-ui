@@ -15,8 +15,8 @@ export const ChatAppsPanel = () => (
         <Item asChild key={label} variant="outline">
           <button className="w-full text-start" type="button">
             <ItemHeader>
-              <IconTile aria-hidden="true" size="sm" variant="outline">
-                <Icon aria-hidden="true" />
+              <IconTile aria-hidden size="sm" variant="outline">
+                <Icon aria-hidden />
               </IconTile>
             </ItemHeader>
             <ItemContent>

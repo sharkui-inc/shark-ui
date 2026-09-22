@@ -87,7 +87,7 @@ const LandingTemplate = () => (
           <Button asChild size="lg">
             <Link href="#">
               Get Started
-              <ArrowRightIcon aria-hidden className="size-4" />
+              <ArrowRightIcon aria-hidden />
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline">

@@ -5,7 +5,6 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
-  AlertDialogClose,
   AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
@@ -30,9 +29,7 @@ const Example = () => {
         />
         <AlertDialogFooter>
           <AlertDialogCancel>{values.cancel}</AlertDialogCancel>
-          <AlertDialogClose asChild>
-            <AlertDialogAction>{values.confirm}</AlertDialogAction>
-          </AlertDialogClose>
+          <AlertDialogAction>{values.confirm}</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

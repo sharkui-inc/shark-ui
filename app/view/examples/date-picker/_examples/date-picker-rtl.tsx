@@ -22,7 +22,7 @@ const DatePickerRtl = () => (
     <DatePickerTrigger asChild>
       <Button className="w-56" variant="outline">
         <DatePickerValue placeholder="اختر تاريخًا" />
-        <ChevronDownIcon aria-hidden="true" data-icon="inline-end" />
+        <ChevronDownIcon aria-hidden data-icon="inline-end" />
       </Button>
     </DatePickerTrigger>
     <DatePickerContent>

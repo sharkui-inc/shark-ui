@@ -91,11 +91,7 @@ const DataTableDemo = () => {
           <MenuTrigger asChild>
             <Button className="ms-auto" variant="outline">
               Columns
-              <ChevronDownIcon
-                aria-hidden="true"
-                className="size-4"
-                data-icon="inline-end"
-              />
+              <ChevronDownIcon aria-hidden data-icon="inline-end" />
             </Button>
           </MenuTrigger>
           <MenuContent>
@@ -272,11 +268,7 @@ const EmailSortHeader = ({
     variant="ghost"
   >
     Email
-    <ArrowUpDownIcon
-      aria-hidden="true"
-      className="size-4"
-      data-icon="inline-end"
-    />
+    <ArrowUpDownIcon aria-hidden data-icon="inline-end" />
   </Button>
 );
 
@@ -284,7 +276,7 @@ const PaymentActions = ({ payment }: { payment: Payment }) => (
   <Menu>
     <MenuTrigger asChild>
       <Button aria-label="Open menu" size="icon-md" variant="ghost">
-        <MoreHorizontalIcon aria-hidden="true" className="size-4" />
+        <MoreHorizontalIcon aria-hidden />
       </Button>
     </MenuTrigger>
     <MenuContent className="w-44">

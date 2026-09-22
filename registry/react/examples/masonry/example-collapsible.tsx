@@ -61,7 +61,7 @@ const Example = () => (
                     href="#"
                   >
                     Open project
-                    <ArrowUpRightIcon aria-hidden="true" className="size-3.5" />
+                    <ArrowUpRightIcon aria-hidden className="size-3.5" />
                   </a>
                 </div>
               </CollapsibleContent>

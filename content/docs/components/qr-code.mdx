@@ -93,26 +93,24 @@ For example, `--qr-code-size:6rem` for small, `--qr-code-size:10rem` for large
 
 ### With an overlay
 
-Use `QrCodeOverlay` to add an overlay in the center. Downloads and `getDataUrl()` include the overlay in the exported image.
+Use `QrCodeOverlay` to place an image in the center.
 
 <ComponentPreview componentName="qr-code" fileName="example-overlay" />
 
 ### Error correction
 
-In cases where the link is too long or the logo overlay covers a significant area, the error correction level can be increased.
+Set `encoding.ecc`:
 
-Use the `encoding.ecc` property to set the error correction level:
-
-- **L:** Allows recovery of up to 7% data loss (default)
-- **M:** Allows recovery of up to 15% data loss
-- **Q:** Allows recovery of up to 25% data loss
-- **H:** Allows recovery of up to 30% data loss
+- **L:** up to 7% recovery
+- **M:** up to 15%
+- **Q:** up to 25%
+- **H:** up to 30%
 
 <ComponentPreview componentName="qr-code" fileName="example-error-correction" />
 
 ### Download
 
-Use `QrCodeDownload` with `fileName` and `mimeType` to let users download the QR code as an image. The file includes any overlay placed on the code.
+Use `QrCodeDownload` with `fileName` and `mimeType`.
 
 <ComponentPreview componentName="qr-code" fileName="example-download" />
 
@@ -133,7 +131,7 @@ Root wrapper for the QR code and optional overlay/actions.
 | `value` | `string` | - |
 | `defaultValue` | `string` | - |
 | `onValueChange` | `(details: ValueChangeDetails) => void` | - |
-| `encoding` | `QrCodeGenerateOptions` | - |
+| `encoding` | `QrCodeGenerateOptions` | `{ ecc: "L" }` |
 | `pixelSize` | `number` | - |
 | `className` | `string` | - |
 | `asChild` | `boolean` | - |

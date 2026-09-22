@@ -111,11 +111,11 @@ export const ClipboardIndicator = (
 
   return (
     <ArkClipboard.Indicator
-      aria-hidden="true"
       className={cn("pointer-events-none", className)}
       copied={copied}
       data-slot="clipboard-indicator"
       {...rest}
+      aria-hidden
     >
       {children ?? <ClipboardIcon />}
     </ArkClipboard.Indicator>

@@ -128,7 +128,7 @@ export const CommandDialogContent = (props: CommandDialogContentProps) => {
       >
         <ArkDialog.Content
           className={cn(
-            dialogContentVariants({ size }),
+            dialogContentVariants({ size }).content(),
             commandDialogContentVariants({ variant }),
             className
           )}
@@ -162,16 +162,16 @@ export const Command: ArkCombobox.RootComponent = (props) => {
         "overflow-hidden rounded-2xl border",
         className
       )}
-      closeOnSelect={false}
       data-slot="command"
+      lazyMount={lazyMount}
+      unmountOnExit={unmountOnExit}
+      {...rest}
+      closeOnSelect={false}
       disableLayer
       inputBehavior="autohighlight"
-      lazyMount={lazyMount}
       loopFocus={false}
       open
       selectionBehavior="clear"
-      unmountOnExit={unmountOnExit}
-      {...rest}
     />
   );
 };
@@ -241,7 +241,7 @@ export const CommandList = (
 
   return (
     <ScrollArea
-      className="max-h-72 min-h-0 flex-1"
+      className="max-h-72 flex-1"
       orientation="vertical"
       overscrollContain
       scrollFade
@@ -288,8 +288,8 @@ export const CommandItem = (
     <ArkCombobox.Item
       className={cn(comboboxItemVariants(), className)}
       data-slot="command-item"
-      persistFocus
       {...rest}
+      persistFocus
     />
   );
 };

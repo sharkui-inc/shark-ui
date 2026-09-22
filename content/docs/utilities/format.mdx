@@ -63,61 +63,61 @@ import {
 
 ### Format Byte
 
-Format byte values as file sizes.
+Byte count as a file size.
 
 <ComponentPreview componentName="format" fileName="example-byte" />
 
 #### Unit display
 
-Use the `unitDisplay` prop to control how the unit is displayed.
+`unitDisplay`: `"long"`, `"short"`, or `"narrow"`.
 
 <ComponentPreview componentName="format" fileName="example-byte-unit-display" />
 
 #### Unit system
 
-Use `unitSystem` to choose between decimal (1000 bytes) or binary (1024 bytes).
+`unitSystem`: `"decimal"` (1000) or `"binary"` (1024).
 
 <ComponentPreview componentName="format" fileName="example-byte-unit-system" />
 
 ### Format Relative Time
 
-Format dates as relative time.
+Date as relative time.
 
 <ComponentPreview componentName="format" fileName="example-relative-time" />
 
 #### Style
 
-Use the `style` prop for long, short, or narrow format.
+`style`: `"long"`, `"short"`, or `"narrow"`.
 
 <ComponentPreview componentName="format" fileName="example-relative-time-short" />
 
 ### Format Time
 
-Format a `Date` or ISO time string. Use `format="12h"` with `amLabel` / `pmLabel` for meridiem text.
+`Date` or ISO string. With `format="12h"`, set `amLabel` / `pmLabel`.
 
 <ComponentPreview componentName="format" fileName="example-time" />
 
 ### Format Number
 
-Format numbers with locale-aware options.
+Locale-aware number via `Intl.NumberFormat` options.
 
 <ComponentPreview componentName="format" fileName="example-number" />
 
 #### Currency
 
-Use `style="currency"` with the `currency` prop for currency formatting.
+`style="currency"` and `currency`.
 
 <ComponentPreview componentName="format" fileName="example-number-currency" />
 
 #### Percentage
 
-Use `style="percent"` to format numbers as percentages.
+`style="percent"`.
 
 <ComponentPreview componentName="format" fileName="example-number-percent" />
 
 #### Compact notation
 
-Use `notation="compact"` for compact display.
+`notation="compact"`.
 
 <ComponentPreview componentName="format" fileName="example-number-compact" />
 

@@ -123,7 +123,7 @@ const FontPicker = (props: FontPickerProps) => {
         <SelectTrigger className="w-full">
           <span className="flex min-w-0 items-center gap-2">
             <span
-              aria-hidden="true"
+              aria-hidden
               className="w-4 text-center font-medium text-sm"
               style={{ fontFamily: selectedFont?.family }}
             >
@@ -136,7 +136,7 @@ const FontPicker = (props: FontPickerProps) => {
           {collection.items.map((item) => (
             <SelectItem item={item} key={item.value}>
               <span
-                aria-hidden="true"
+                aria-hidden
                 className="w-4 text-center font-medium text-sm"
                 style={{ fontFamily: item.family }}
               >
@@ -247,7 +247,7 @@ export const HeaderCustomize = () => {
                             )}
                           >
                             <CheckIcon
-                              aria-hidden="true"
+                              aria-hidden
                               className="relative z-10 size-4 text-white opacity-0 transition-opacity group-data-[state=checked]:opacity-100"
                             />
                           </span>
@@ -297,7 +297,7 @@ export const HeaderCustomize = () => {
                             }}
                           >
                             <CheckIcon
-                              aria-hidden="true"
+                              aria-hidden
                               className="relative z-10 size-4 text-white opacity-0 transition-opacity group-data-[state=checked]:opacity-100"
                             />
                           </span>
@@ -389,7 +389,7 @@ export const HeaderCustomize = () => {
                     value={radius.value}
                   >
                     <span
-                      aria-hidden="true"
+                      aria-hidden
                       className="size-9 bg-primary"
                       style={{ borderRadius: radius.cssVars.radius }}
                     />

@@ -10,7 +10,7 @@ import {
 const Example = () => (
   <Attachment className="max-w-sm">
     <AttachmentMedia>
-      <BracesIcon aria-hidden="true" />
+      <BracesIcon aria-hidden />
     </AttachmentMedia>
     <AttachmentContent>
       <AttachmentTitle>tokens.ts</AttachmentTitle>

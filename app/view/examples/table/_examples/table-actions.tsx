@@ -34,7 +34,7 @@ const TableActions = () => (
             <Menu>
               <MenuTrigger asChild>
                 <Button aria-label="Open menu" size="icon-md" variant="ghost">
-                  <MoreHorizontalIcon aria-hidden="true" />
+                  <MoreHorizontalIcon aria-hidden />
                 </Button>
               </MenuTrigger>
               <MenuContent>

@@ -36,7 +36,7 @@ const Example = () => {
     event.preventDefault();
     const answers = new FormData(event.currentTarget);
     const decision = answers.get("decision");
-    if (value.decision?.values.includes("build")) {
+    if (value.decision.values.includes("build")) {
       toast.create({
         description: "Individual tool permissions still apply.",
         title: "Plan approved",
@@ -69,7 +69,7 @@ const Example = () => {
         value={value}
       >
         <ApprovalCardHeader>
-          <ListChecksIcon aria-hidden="true" />
+          <ListChecksIcon aria-hidden />
           <ApprovalCardTitle>Ready to implement?</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent>

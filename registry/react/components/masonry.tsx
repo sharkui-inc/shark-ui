@@ -119,11 +119,29 @@ const positionItems = (
 };
 
 export const Masonry = (props: MasonryProps) => {
-  const { className, reflow = "stable", ...rest } = props;
-  const masonryRef = React.useRef<HTMLUListElement>(null);
+  const { className, reflow = "stable", ref, ...rest } = props;
+
+  const masonryRef = React.useRef<HTMLUListElement | null>(null);
+
+  const setMasonryRef = React.useCallback(
+    (node: HTMLUListElement | null) => {
+      masonryRef.current = node;
+
+      if (typeof ref === "function") {
+        ref(node);
+        return;
+      }
+
+      if (ref) {
+        ref.current = node;
+      }
+    },
+    [ref]
+  );
 
   React.useLayoutEffect(() => {
     const masonry = masonryRef.current;
+
     if (!masonry) {
       return;
     }
@@ -232,8 +250,8 @@ export const Masonry = (props: MasonryProps) => {
         className
       )}
       data-slot="masonry"
-      ref={masonryRef}
       {...rest}
+      ref={setMasonryRef}
     />
   );
 };

@@ -137,7 +137,7 @@ Use `ApprovalCardTitle` as a child for more control.
 
 ## Controlled
 
-Control the active item and selected values when the surrounding application owns the flow state.
+Use `value` and `onValueChange` to control the active item and selection.
 
 <ComponentPreview componentName="approval-card" fileName="example-controlled" autoHeight />
 
@@ -145,13 +145,13 @@ Control the active item and selected values when the surrounding application own
 
 ### Invalid
 
-Render validation feedback after a required approval choice has not been made.
+Show validation after a required choice is missing.
 
 <ComponentPreview componentName="approval-card" fileName="example-invalid" autoHeight />
 
 ### Disabled
 
-Disable unavailable choices and freeform input while preserving available paths.
+Disable unavailable choices and freeform input.
 
 <ComponentPreview componentName="approval-card" fileName="example-disabled" autoHeight />
 
@@ -159,8 +159,7 @@ Disable unavailable choices and freeform input while preserving available paths.
 
 ### With close button
 
-Place a dismiss action beside the title with `ApprovalCardAction`. The
-surrounding application owns the card's open state.
+Place a dismiss action beside the title with `ApprovalCardAction`.
 
 <ComponentPreview componentName="approval-card" fileName="example-with-close-button" autoHeight />
 

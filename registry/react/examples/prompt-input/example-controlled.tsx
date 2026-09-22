@@ -44,7 +44,7 @@ const Example = () => {
           value={access}
         >
           <SelectTrigger showTrigger={false} size="sm" variant="ghost">
-            <ShieldCheckIcon aria-hidden="true" />
+            <ShieldCheckIcon aria-hidden />
             <SelectValue placeholder="Ask first" />
           </SelectTrigger>
           <SelectContent>

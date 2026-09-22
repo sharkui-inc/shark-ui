@@ -5,11 +5,11 @@ const TabsIcons = () => (
   <Tabs defaultValue="preview">
     <TabsList>
       <TabsTrigger value="preview">
-        <AppWindowIcon aria-hidden="true" />
+        <AppWindowIcon aria-hidden />
         Preview
       </TabsTrigger>
       <TabsTrigger value="code">
-        <CodeIcon aria-hidden="true" />
+        <CodeIcon aria-hidden />
         Code
       </TabsTrigger>
     </TabsList>

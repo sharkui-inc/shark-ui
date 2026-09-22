@@ -26,7 +26,7 @@ const renderPrimaryItem = (
 ) => (
   <div className="flex items-center gap-2">
     <div
-      aria-hidden="true"
+      aria-hidden
       className="size-4 rounded-full"
       style={{ backgroundColor: getPrimaryFillCss(item.value, primaryTone) }}
     />
@@ -63,7 +63,7 @@ export const ThemeSelectorPrimary = () => {
       renderItem={(item) => renderPrimaryItem(item, primaryTone)}
       trigger={
         <div
-          aria-hidden="true"
+          aria-hidden
           className="size-4 rounded-full"
           style={{
             backgroundColor: getPrimaryFillCss(

@@ -176,7 +176,7 @@ export const BlocksBrowser = ({
             >
               <SheetTrigger asChild>
                 <Button variant="outline">
-                  <PanelLeftIcon aria-hidden="true" className="size-4" />
+                  <PanelLeftIcon aria-hidden />
                   Browse
                 </Button>
               </SheetTrigger>
@@ -210,7 +210,7 @@ export const BlocksBrowser = ({
               <div className="grid min-h-80 place-items-center rounded-xl border border-dashed px-6 text-center">
                 <div className="max-w-sm">
                   <SearchXIcon
-                    aria-hidden="true"
+                    aria-hidden
                     className="mx-auto size-8 text-muted-foreground"
                   />
                   <h2 className="mt-4 font-semibold text-lg">

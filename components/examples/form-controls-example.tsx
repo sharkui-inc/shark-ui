@@ -78,7 +78,7 @@ export const FormControlsExample = (props: React.ComponentProps<"div">) => {
         <FieldGroup>
           <Item variant="outline">
             <ItemMedia variant="icon">
-              <FileTextIcon aria-hidden="true" />
+              <FileTextIcon aria-hidden />
             </ItemMedia>
             <ItemContent>
               <ItemTitle>Q3 launch notes</ItemTitle>

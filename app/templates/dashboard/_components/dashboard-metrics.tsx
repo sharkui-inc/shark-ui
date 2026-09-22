@@ -27,7 +27,7 @@ export const DashboardMetrics = () => (
         <CardHeader description={metric.label} title={metric.value}>
           <CardAction>
             <Badge className="gap-1" size="sm" variant="success">
-              <TrendingUpIcon aria-hidden="true" />
+              <TrendingUpIcon aria-hidden />
               {metric.change}
             </Badge>
           </CardAction>
@@ -57,7 +57,7 @@ const MetricSparkline = ({
   label: string;
 }) => (
   <ChartContainer
-    aria-hidden="true"
+    aria-hidden
     className="aspect-auto! h-12 w-full"
     config={metricChartConfig}
   >

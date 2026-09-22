@@ -33,7 +33,7 @@ const ErrorPage = (props: ErrorPageProps) => {
             aria-label="Error"
             className="font-bold text-6xl text-muted-foreground sm:text-8xl"
           >
-            <span aria-hidden="true">500</span>
+            <span aria-hidden>500</span>
           </h1>
 
           <p className="max-w-xs text-lg text-muted-foreground">

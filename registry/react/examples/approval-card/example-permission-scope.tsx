@@ -69,7 +69,7 @@ const Example = () => {
         shortcuts="numbers"
       >
         <ApprovalCardHeader>
-          <ShieldCheckIcon aria-hidden="true" />
+          <ShieldCheckIcon aria-hidden />
           <ApprovalCardTitle>Allow the agent to run tests?</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent className="flex flex-col gap-4">

@@ -84,7 +84,11 @@ export const RadioGroupText = (
 
   return (
     <FieldLabel asChild>
-      <ArkRadioGroup.ItemText data-slot="radio-group-item-text" {...rest}>
+      <ArkRadioGroup.ItemText
+        className={className}
+        data-slot="radio-group-item-text"
+        {...rest}
+      >
         {children}
       </ArkRadioGroup.ItemText>
     </FieldLabel>

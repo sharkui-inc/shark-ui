@@ -27,6 +27,7 @@ import { Progress } from "@/registry/react/components/progress";
 interface ContextValue {
   costLabel?: string;
   maxTokens: number;
+  usedPercent: number;
   usedTokens: number;
 }
 
@@ -42,14 +43,28 @@ interface ContextProps extends React.ComponentProps<typeof Popover> {
 }
 
 export const Context = (props: ContextProps) => {
-  const { costLabel, maxTokens, usedTokens, modal = false, ...rest } = props;
+  const {
+    costLabel,
+    maxTokens,
+    usedTokens,
+    modal = false,
+    positioning,
+    ...rest
+  } = props;
+
+  const usedPercent = maxTokens > 0 ? Math.min(1, usedTokens / maxTokens) : 0;
 
   return (
-    <ContextValueProvider value={{ costLabel, maxTokens, usedTokens }}>
+    <ContextValueProvider
+      value={{ costLabel, maxTokens, usedPercent, usedTokens }}
+    >
       <Popover
         data-slot="context"
         modal={modal}
-        positioning={{ placement: "top" }}
+        positioning={{
+          placement: "top",
+          ...positioning,
+        }}
         {...rest}
       />
     </ContextValueProvider>
@@ -57,13 +72,11 @@ export const Context = (props: ContextProps) => {
 };
 
 export const ContextIcon = ({ className }: { className?: string }) => {
-  const { maxTokens, usedTokens } = _useContextValue();
-
-  const usedPercent = maxTokens > 0 ? usedTokens / maxTokens : 0;
+  const { usedPercent } = _useContextValue();
 
   return (
     <CircularProgress
-      aria-hidden="true"
+      aria-hidden
       className={cn("size-4 shrink-0", className)}
       size={16}
       thickness={2}
@@ -80,14 +93,12 @@ export const ContextTrigger = (props: ContextButtonProps) => {
   const {
     size = "sm",
     variant = "ghost",
-    asChild: _,
+    asChild = false,
     children,
     ...rest
   } = props;
 
-  const { maxTokens, usedTokens } = _useContextValue();
-
-  const usedPercent = maxTokens > 0 ? usedTokens / maxTokens : 0;
+  const { usedPercent } = _useContextValue();
 
   const content = (
     <>
@@ -102,6 +113,14 @@ export const ContextTrigger = (props: ContextButtonProps) => {
       <ContextIcon />
     </>
   );
+
+  if (asChild) {
+    return (
+      <PopoverTrigger asChild data-slot="context-trigger" {...rest}>
+        {children}
+      </PopoverTrigger>
+    );
+  }
 
   return (
     <PopoverTrigger asChild data-slot="context-trigger" {...rest}>
@@ -188,7 +207,7 @@ export const ContextTitle = (props: ContextTitleProps) => {
             size="icon-xs"
             variant="ghost"
           >
-            <XIcon aria-hidden="true" className="size-3.5" />
+            <XIcon aria-hidden />
           </Button>
         </PopoverClose>
       )}
@@ -199,9 +218,7 @@ export const ContextTitle = (props: ContextTitleProps) => {
 export const ContextMeter = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
 
-  const { maxTokens, usedTokens } = _useContextValue();
-
-  const usedPercent = maxTokens > 0 ? usedTokens / maxTokens : 0;
+  const { maxTokens, usedPercent, usedTokens } = _useContextValue();
 
   return (
     <ark.div

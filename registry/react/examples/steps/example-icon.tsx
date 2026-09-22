@@ -12,7 +12,7 @@ const Example = () => (
   <Steps className="w-full max-w-md" count={items.length}>
     <StepsList>
       {items.map((item, index) => (
-        <StepsItem index={index} key={index}>
+        <StepsItem index={index} key={item.name}>
           <StepsTrigger>
             <StepsIndicator>
               <item.icon />
@@ -26,9 +26,9 @@ const Example = () => (
 );
 
 const items = [
-  { icon: UserIcon },
-  { icon: HardDriveIcon },
-  { icon: CreditCardIcon },
+  { icon: UserIcon, name: "account" },
+  { icon: HardDriveIcon, name: "files" },
+  { icon: CreditCardIcon, name: "billing" },
 ];
 
 export default Example;

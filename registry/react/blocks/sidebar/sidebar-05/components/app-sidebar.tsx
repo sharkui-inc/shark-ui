@@ -55,7 +55,7 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton className="font-semibold" size="lg">
-              <ChartNoAxesCombinedIcon aria-hidden="true" />
+              <ChartNoAxesCombinedIcon aria-hidden />
               <span>Northstar</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -75,10 +75,10 @@ export function AppSidebar() {
                 <SidebarMenuItem>
                   <CollapsibleTrigger asChild>
                     <SidebarMenuButton tooltip={item.label}>
-                      <item.icon aria-hidden="true" />
+                      <item.icon aria-hidden />
                       <span>{item.label}</span>
                       <ChevronRightIcon
-                        aria-hidden="true"
+                        aria-hidden
                         className="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-90 motion-reduce:transition-none"
                       />
                     </SidebarMenuButton>
@@ -109,7 +109,7 @@ export function AppSidebar() {
             <SidebarMenuItem key={item.label}>
               <SidebarMenuButton asChild>
                 <a href="#">
-                  <item.icon aria-hidden="true" />
+                  <item.icon aria-hidden />
                   <span>{item.label}</span>
                 </a>
               </SidebarMenuButton>

@@ -18,12 +18,13 @@ import {
   DialogFooter,
   DialogHeader,
   DialogOverlay,
+  DialogRootProvider,
   DialogTitle,
 } from "@/registry/react/components/dialog";
 
 export const useSheet = useArkDialog;
 export const useSheetContext = useArkDialogContext;
-export const SheetRootProvider = ArkDialog.RootProvider;
+export const SheetRootProvider = DialogRootProvider;
 
 export const Sheet = (props: React.ComponentProps<typeof Dialog>) => (
   <Dialog data-slot="sheet" {...props} />
@@ -35,7 +36,21 @@ export const SheetTrigger = (
 
 export const SheetOverlay = (
   props: React.ComponentProps<typeof DialogOverlay>
-) => <DialogOverlay data-slot="sheet-overlay" {...props} />;
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <DialogOverlay
+      className={cn(
+        "peer-data-[slot=dialog-overlay]:block!",
+        "peer-data-[slot=sheet-overlay]:hidden",
+        className
+      )}
+      data-slot="sheet-overlay"
+      {...rest}
+    />
+  );
+};
 
 const sheetPositionerVariants = tv({
   base: [
@@ -106,7 +121,6 @@ const sheetContentVariants = tv({
     variant: "default",
   },
   variants: {
-    // Sheet placement refers to a visual viewport edge, not reading order.
     placement: {
       bottom: [
         "row-start-2 border-t pb-[env(safe-area-inset-bottom,0px)]",
@@ -202,6 +216,7 @@ export const SheetHeader = (
     <DialogHeader
       className={cn(
         "in-[[data-slot=sheet-content]:has([data-slot=sheet-body])]:pb-3",
+        "max-sm:pb-4",
         className
       )}
       data-slot="sheet-header"
@@ -224,8 +239,7 @@ export const SheetBody = (props: React.ComponentProps<typeof DialogBody>) => {
   return (
     <DialogBody
       className={cn(
-        "in-[[data-slot=sheet-content]:has([data-slot=sheet-header]:not(.sr-only))]:pt-0",
-        "in-[[data-slot=sheet-content]:has([data-slot=sheet-footer]:not(.border-t))]:pb-1",
+        "in-[[data-slot=sheet-content]:has([data-slot=sheet-header]:not(.sr-only))]:pt-1",
         className
       )}
       data-slot="sheet-body"

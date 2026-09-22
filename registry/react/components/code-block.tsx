@@ -17,13 +17,6 @@ import {
   ClipboardTrigger,
 } from "@/registry/react/components/clipboard";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/registry/react/components/select";
 
 const TOKEN_CACHE_LIMIT = 100;
 
@@ -75,7 +68,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
           "bg-card text-card-foreground",
           "rounded-xl border shadow-xs/4",
           "overflow-hidden",
-          "[--code-surface-line-height:--spacing(6)]",
+          "[--code-surface-gutter-min:--spacing(11)] [--code-surface-header-height:--spacing(9)] [--code-surface-inline-padding:--spacing(3)] [--code-surface-line-height:--spacing(6)]",
           className
         )}
         data-slot="code-block"
@@ -117,11 +110,9 @@ export const CodeBlockHeader = (props: CodeBlockHeaderProps) => {
   return (
     <ark.div
       className={cn(
-        "min-h-9 min-w-0",
-        "flex shrink-0 items-center gap-2",
-        "px-3 py-1",
-        "text-muted-foreground text-sm",
+        "flex min-h-(--code-surface-header-height) min-w-0 shrink-0 items-center gap-2 px-(--code-surface-inline-padding) py-1",
         "border-b",
+        "text-muted-foreground text-sm",
         "[&>svg]:order-first [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
         "[&>svg:not([class*='size-'])]:size-3.5",
         className
@@ -152,9 +143,9 @@ export const CodeBlockFilename = (
         className
       )}
       data-slot="code-block-filename"
+      {...rest}
       dir="ltr"
       style={{ unicodeBidi: "isolate", ...style }}
-      {...rest}
     />
   );
 };
@@ -500,21 +491,24 @@ const CodeToken = ({ token }: { token: ThemedToken }) => (
   </span>
 );
 
-interface CodeBlockContentProps
+interface CodeBlockPreProps
   extends Omit<React.ComponentProps<typeof ark.pre>, "children"> {
+  highlightedLines: number[];
+  showLineNumbers: boolean;
+  tokens: ThemedToken[][];
+}
+
+interface CodeBlockContentProps
+  extends Omit<
+    CodeBlockPreProps,
+    "tokens" | "highlightedLines" | "showLineNumbers"
+  > {
   children?: string;
   code?: string;
   highlightedLines?: number[];
   isStreaming?: boolean;
   language?: CodeBlockLanguage;
   showLineNumbers?: boolean;
-}
-
-interface CodeBlockPreProps
-  extends Omit<React.ComponentProps<typeof ark.pre>, "children"> {
-  highlightedLines: number[];
-  showLineNumbers: boolean;
-  tokens: ThemedToken[][];
 }
 
 const CodeBlockPre = (props: CodeBlockPreProps) => {
@@ -532,19 +526,31 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
         className
       )}
       data-slot="code-block-content"
-      dir="ltr"
       {...rest}
+      dir="ltr"
     >
-      <code className="grid min-w-max" data-slot="code-block-code">
+      <code
+        className={cn(
+          "grid min-w-max",
+          showLineNumbers &&
+            "grid-cols-[minmax(var(--code-surface-gutter-min),max-content)_minmax(max-content,1fr)]"
+        )}
+        data-slot="code-block-code"
+      >
         {tokens.map((line, index) => {
           const lineNumber = index + 1;
           const highlighted = highlightedLineSet.has(lineNumber);
           return (
             <span
               className={cn(
-                "block min-h-(--code-surface-line-height) py-0",
-                highlighted && "bg-primary/8",
-                highlighted && !showLineNumbers && "border-primary border-s-2"
+                "min-h-(--code-surface-line-height) w-full min-w-max py-0",
+                showLineNumbers
+                  ? "col-span-2 grid grid-cols-subgrid items-stretch"
+                  : "flex items-stretch",
+                highlighted && "bg-code-highlight",
+                highlighted &&
+                  !showLineNumbers &&
+                  "border-muted-foreground/48 border-s-2"
               )}
               data-highlighted={highlighted ? "" : undefined}
               data-line={lineNumber}
@@ -552,20 +558,24 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
             >
               {showLineNumbers ? (
                 <span
-                  aria-hidden="true"
+                  aria-hidden
                   className={cn(
-                    "sticky inset-s-0 z-10 inline-block w-11 select-none pe-3 text-end text-muted-foreground",
-                    highlighted ? "bg-primary/8" : "bg-card",
-                    highlighted && "border-primary border-s-2"
+                    "sticky inset-s-0 z-10 flex w-full min-w-0 items-center bg-card",
+                    highlighted &&
+                      "border-muted-foreground/48 border-s-2 bg-code-highlight"
                   )}
                   data-slot="code-block-line-number"
                 >
-                  {lineNumber}
+                  <span className="w-full select-none px-(--code-surface-inline-padding) text-end text-muted-foreground tabular-nums">
+                    {lineNumber}
+                  </span>
                 </span>
               ) : null}
               <span
                 className={cn(
-                  showLineNumbers ? "pe-3" : "px-3",
+                  showLineNumbers
+                    ? "ps-(--code-surface-inline-padding) pe-(--code-surface-inline-padding)"
+                    : "px-(--code-surface-inline-padding)",
                   highlighted && !showLineNumbers && "ps-2.5"
                 )}
               >
@@ -589,7 +599,6 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
 export const CodeBlockContent = (props: CodeBlockContentProps) => {
   const {
     children,
-    className,
     code: codeProp,
     highlightedLines = [],
     isStreaming: isStreamingProp,
@@ -608,47 +617,17 @@ export const CodeBlockContent = (props: CodeBlockContentProps) => {
     codeProp ?? (typeof children === "string" ? children : contextCode);
   const language = languageProp ?? contextLanguage;
   const isStreaming = isStreamingProp ?? contextIsStreaming;
-  const preProps = { className, highlightedLines, showLineNumbers, ...rest };
   const snapshot = useCodeTokens(code, language, isStreaming);
   const tokens = getDisplayedTokens(code, language, snapshot);
 
   return (
     <ScrollArea className="flex-1" dir="ltr" overscrollContain>
-      <CodeBlockPre tokens={tokens} {...preProps} />
+      <CodeBlockPre
+        highlightedLines={highlightedLines}
+        showLineNumbers={showLineNumbers}
+        tokens={tokens}
+        {...rest}
+      />
     </ScrollArea>
   );
 };
-
-export const CodeBlockLanguageSelector: typeof Select = (props) => (
-  <Select data-slot="code-block-language-selector" {...props} />
-);
-
-export const CodeBlockLanguageSelectorTrigger = (
-  props: React.ComponentProps<typeof SelectTrigger>
-) => {
-  const { className, ...rest } = props;
-
-  return (
-    <SelectTrigger
-      className={cn(
-        "h-6 border-transparent bg-transparent px-2 text-sm shadow-none",
-        className
-      )}
-      size="sm"
-      variant="ghost"
-      {...rest}
-    />
-  );
-};
-
-export const CodeBlockLanguageSelectorValue = (
-  props: React.ComponentProps<typeof SelectValue>
-) => <SelectValue {...props} />;
-
-export const CodeBlockLanguageSelectorContent = (
-  props: React.ComponentProps<typeof SelectContent>
-) => <SelectContent {...props} />;
-
-export const CodeBlockLanguageSelectorItem = (
-  props: React.ComponentProps<typeof SelectItem>
-) => <SelectItem {...props} />;

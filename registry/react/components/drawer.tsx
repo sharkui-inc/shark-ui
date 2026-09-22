@@ -81,11 +81,10 @@ export const DrawerProvider = (
       />
       <ArkDrawer.Indent
         className={cn(
-          "[--indent-motion:calc(1-clamp(0,var(--drawer-swipe-progress,0)*100000,1))]",
           "relative z-10",
           "bg-background",
           "origin-top will-change-transform",
-          "transition-[border-radius,transform] duration-[calc(450ms*var(--indent-motion))] ease-[cubic-bezier(0.32,0.72,0,1)]",
+          "transition-[border-radius,transform] duration-[calc(450ms*(1-clamp(0,var(--drawer-swipe-progress,0)*100000,1)))] ease-[cubic-bezier(0.32,0.72,0,1)]",
           "data-active:transform-[scale(calc(0.97+(0.03*var(--drawer-swipe-progress,0))))_translateY(calc(0.5rem*(1-var(--drawer-swipe-progress,0))))] data-active:overflow-hidden data-active:rounded-[calc(1rem*(1-var(--drawer-swipe-progress,0)))]",
           "motion-reduce:transition-none",
           className
@@ -154,10 +153,9 @@ export const DrawerSwipeArea = (
 
 const drawerOverlayVariants = tv({
   base: [
-    "[--bg:rgb(0_0_0/calc(0.32*(1-max(0,var(--drawer-swipe-progress,0)))))] [--blur:calc(4px*(1-max(0,var(--drawer-swipe-progress,0))))]",
     "fixed inset-0 z-50",
     "peer peer-data-[slot=drawer-backdrop]:hidden",
-    "bg-(--bg) backdrop-blur-(--blur)",
+    "bg-[rgb(0_0_0/calc(0.32*(1-max(0,var(--drawer-swipe-progress,0)))))] backdrop-blur-[calc(4px*(1-max(0,var(--drawer-swipe-progress,0))))]",
     "data-[has-nested=drawer]:pointer-events-none",
     "transition-opacity duration-300 ease-out",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
@@ -179,8 +177,6 @@ export const DrawerOverlay = (
     restingOpen.current = openAmount;
   }
 
-  // Zag publishes absolute drag distance, so the rubber-band past the open
-  // snap changes the scrim. Hold the resting scrim until the drawer is dismissed.
   const overdrag =
     drawer.open && drawer.dragging && openAmount >= restingOpen.current;
 
@@ -207,7 +203,7 @@ export const DrawerOverlay = (
 
 const drawerPositionerVariants = tv({
   base: [
-    "[--bleed:--spacing(12)] [--inset:--spacing(0)]",
+    "[--bleed:--spacing(12)]",
     "fixed inset-0 z-[calc(50+var(--layer-index,0))] overflow-hidden",
     "flex w-screen items-end justify-center",
     "data-[has-nested=drawer]:pointer-events-none",
@@ -223,6 +219,7 @@ const drawerPositionerVariants = tv({
     variant: {
       default: "",
       inset: [
+        "[--inset:--spacing(0)]",
         "px-(--inset) sm:[--inset:--spacing(4)]",
         "data-[swipe-direction=down]:pb-(--inset)",
         "data-[swipe-direction=up]:pt-(--inset)",
@@ -251,12 +248,9 @@ export const DrawerPositioner = (props: DrawerPositionerProps) => {
 const drawerContentVariants = tv({
   base: [
     "[--space:--spacing(6)]",
-    "[--peek:calc(--spacing(6)-1px)] [--stack-step:0.05]",
-    "[--stack-progress:clamp(0,var(--nested-swipe-progress,0),1)]",
-    "[--stack-depth:max(0,calc(var(--nested-drawers,0)-var(--stack-progress)))]",
-    "[--stack-scale:clamp(0,calc(1-(var(--stack-depth)*var(--stack-step))),1)]",
-    "[--shrink:calc(1-var(--stack-scale))]",
-    "[--stack-peek-offset:calc(var(--stack-depth)*var(--peek))]",
+    "[--stack-depth:max(0,calc(var(--nested-drawers,0)-clamp(0,var(--nested-swipe-progress,0),1)))]",
+    "[--stack-scale:clamp(0,calc(1-(var(--stack-depth)*0.05)),1)]",
+    "[--stack-peek-offset:calc(var(--stack-depth)*calc(--spacing(6)-1px))]",
     "[--stack-height:var(--drawer-frontmost-height,var(--drawer-rest-height,0px))]",
     "[--stack-x:0px] [--stack-y:0px]",
     "[--snap-gap:calc(var(--drawer-snap-point-offset-y,0px)+clamp(0,1,var(--drawer-snap-point-offset-y,0px)/1px)*var(--drawer-swipe-movement-y,0px))]",
@@ -273,16 +267,16 @@ const drawerContentVariants = tv({
     "text-popover-foreground",
     "shadow-lg/4",
     "outline-hidden",
-    "transition-[background-color,box-shadow,height,transform] duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)]",
+    "transition-[background-color,box-shadow,height,transform] duration-450 ease-[cubic-bezier(0.32,0.72,0,1)]",
     "data-[state=closed]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
     "data-[state=closed]:animate-out data-[state=open]:animate-in",
     "data-swiping:select-none data-swiping:transition-none",
     "data-nested-drawer-open:shadow-sm/4",
     "data-nested-drawer-swiping:transition-none",
     "data-[swipe-direction=down]:origin-[center_bottom]",
-    "data-[swipe-direction=down]:[--stack-y:calc(0px-var(--stack-peek-offset)-(var(--shrink)*var(--stack-height)))]",
+    "data-[swipe-direction=down]:[--stack-y:calc(0px-var(--stack-peek-offset)-((1-var(--stack-scale))*var(--stack-height)))]",
     "data-[swipe-direction=up]:origin-[center_top]",
-    "data-[swipe-direction=up]:[--stack-y:calc(0px+var(--stack-peek-offset)+(var(--shrink)*var(--stack-height)))]",
+    "data-[swipe-direction=up]:[--stack-y:calc(0px+var(--stack-peek-offset)+((1-var(--stack-scale))*var(--stack-height)))]",
     "data-[swipe-direction=left]:origin-right",
     "data-[swipe-direction=left]:[--stack-x:calc(0px+var(--stack-peek-offset))]",
     "data-[swipe-direction=right]:origin-left",
@@ -391,8 +385,6 @@ function measureRestHeight(
   resizeObserver.observe(content);
 }
 
-// Zag puts drag distance on the active drawer only. Copy it to ancestors for
-// finger-follow, and freeze rest height so scale cannot feed the next measure.
 function bindNestedDrawerStack(content: HTMLElement) {
   let frame = 0;
   let tracking = false;
@@ -652,6 +644,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
         {({ snapPoints, swipeDirection }) => {
           const isVertical =
             swipeDirection === "down" || swipeDirection === "up";
+
           const fullHeight =
             isVertical && needsFullHeightForSnapPoints(snapPoints);
 
@@ -666,16 +659,20 @@ export const DrawerContent = (props: DrawerContentProps) => {
                   drawerAnimationVariants({
                     direction: swipeDirection ?? "down",
                   }),
+                  isVertical && "text-center",
                   fullHeight && "h-full",
                   className
                 )}
                 data-slot="drawer-content"
+                {...rest}
                 onPointerDown={(event) => {
                   onPointerDown?.(event);
+                  if (event.defaultPrevented) {
+                    return;
+                  }
                   event.stopPropagation();
                 }}
                 ref={setContentRef}
-                {...rest}
               >
                 <DrawerGrabber show={showBar} />
 
@@ -762,6 +759,7 @@ export const DrawerHeader = (props: DrawerHeaderProps) => {
       className={cn(
         dialogHeaderVariants(),
         "in-[[data-slot=drawer-content]:has([data-slot=drawer-body])]:pb-3",
+        "max-sm:pb-4",
         "group-data-[swipe-direction=down]/drawer:pt-4",
         className
       )}
@@ -788,11 +786,7 @@ export const DrawerTitle = (
 
   return (
     <ArkDrawer.Title
-      className={cn(
-        dialogTitleVariants(),
-        "group-[&[data-swipe-direction=up],&[data-swipe-direction=down]]/drawer:text-center",
-        className
-      )}
+      className={cn(dialogTitleVariants(), className)}
       data-slot="drawer-title"
       {...rest}
     />
@@ -806,11 +800,7 @@ export const DrawerDescription = (
 
   return (
     <ArkDrawer.Description
-      className={cn(
-        dialogDescriptionVariants(),
-        "group-[&[data-swipe-direction=up],&[data-swipe-direction=down]]/drawer:text-center",
-        className
-      )}
+      className={cn(dialogDescriptionVariants(), className)}
       data-slot="drawer-description"
       {...rest}
     />
@@ -833,10 +823,7 @@ export const DrawerBody = (props: DrawerBodyProps) => {
     <ScrollArea
       className={cn(
         "flex min-h-0 min-w-0 flex-1 touch-pan-y flex-col overflow-hidden",
-        "[&>[data-slot=scroll-area-viewport]]:h-auto!",
-        "[&>[data-slot=scroll-area-viewport]]:min-h-0",
-        "[&>[data-slot=scroll-area-viewport]]:flex-auto",
-        "[&>[data-slot=scroll-area-viewport]]:touch-pan-y"
+        "*:data-[slot=scroll-area-viewport]:h-auto! *:data-[slot=scroll-area-viewport]:min-h-0 *:data-[slot=scroll-area-viewport]:flex-auto *:data-[slot=scroll-area-viewport]:touch-pan-y"
       )}
       orientation="vertical"
       overscrollContain
@@ -845,9 +832,9 @@ export const DrawerBody = (props: DrawerBodyProps) => {
       <ark.div
         className={cn(
           "p-(--space)",
-          "group-[&[data-swipe-direction=up],&[data-swipe-direction=down]]/drawer:text-center",
-          "in-[[data-slot=drawer-content]:has([data-slot=drawer-header]:not(.sr-only))]:pt-0",
-          "group-data-[swipe-direction=down]/drawer:in-[[data-slot=drawer-content]:not(:has([data-slot=drawer-header]:not(.sr-only)))]:pt-0",
+          "group-data-[swipe-direction=down]/drawer:pt-0",
+          "in-[[data-slot=drawer-content]:has([data-slot=drawer-header]:not(.sr-only))]:pt-1",
+          "in-[[data-slot=drawer-content]:has([data-slot=drawer-footer])]:pb-1",
           className
         )}
         data-slot="drawer-body"
@@ -867,7 +854,7 @@ export const DrawerFooter = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex shrink-0 flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        "flex shrink-0 flex-col gap-2 sm:flex-row-reverse sm:justify-start",
         "px-(--space) py-4",
         "sm:rounded-none",
         className
@@ -966,7 +953,7 @@ export const DrawerMenuTrigger = (
       {...rest}
     >
       {children}
-      <ChevronRightIcon className="ms-auto size-3.5" />
+      <ChevronRightIcon className="ms-auto size-3.5 rtl:rotate-180" />
     </DrawerTrigger>
   );
 };
@@ -975,19 +962,20 @@ export const DrawerMenuCheckboxItem = (
   props: React.ComponentProps<typeof ArkCheckbox.Root>
 ) => {
   const { children, className, ...rest } = props;
+  const { item, indicator } = menuItemIndicatorVariants();
 
   return (
     <ArkCheckbox.Root
       className={cn(
         menuItemVariants(),
-        "pe-8",
+        item(),
         "hover:bg-accent hover:text-accent-foreground",
         className
       )}
       data-slot="drawer-menu-checkbox-item"
       {...rest}
     >
-      <ArkCheckbox.Indicator className={menuItemIndicatorVariants()}>
+      <ArkCheckbox.Indicator className={indicator()}>
         <CheckIcon />
       </ArkCheckbox.Indicator>
       <span className="flex min-w-0 flex-1 items-center gap-2">{children}</span>
@@ -1014,12 +1002,13 @@ export const DrawerMenuRadioItem = (
   props: React.ComponentProps<typeof ArkRadioGroup.Item>
 ) => {
   const { children, className, ...rest } = props;
+  const { item, indicator } = menuItemIndicatorVariants();
 
   return (
     <ArkRadioGroup.Item
       className={cn(
         menuItemVariants(),
-        "pe-8",
+        item(),
         "hover:bg-accent hover:text-accent-foreground",
         className
       )}
@@ -1028,7 +1017,7 @@ export const DrawerMenuRadioItem = (
     >
       <span
         className={cn(
-          menuItemIndicatorVariants(),
+          indicator(),
           "hidden group-data-[state=checked]/menu-item:flex"
         )}
       >

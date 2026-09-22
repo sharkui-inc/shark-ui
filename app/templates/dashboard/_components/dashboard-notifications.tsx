@@ -42,7 +42,7 @@ export const DashboardNotifications = () => {
           size="icon-sm"
           variant="ghost"
         >
-          <BellIcon aria-hidden="true" />
+          <BellIcon aria-hidden />
           {unreadCount > 0 ? (
             <span className="absolute end-1 top-1 size-1.5 rounded-full bg-primary" />
           ) : null}
@@ -72,7 +72,7 @@ export const DashboardNotifications = () => {
                   >
                     <ItemMedia>
                       <span
-                        aria-hidden="true"
+                        aria-hidden
                         className={cn(
                           "size-1.5 rounded-full",
                           unread ? "bg-primary" : "bg-transparent"

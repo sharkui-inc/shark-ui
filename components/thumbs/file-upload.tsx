@@ -6,7 +6,7 @@ export const FileUploadThumb = (props: ThumbCardProps) => (
     <div className="flex w-40 flex-col items-center justify-center gap-2 rounded-lg border border-input border-dashed bg-muted p-6 shadow-sm/4">
       <div className="flex size-8 items-center justify-center rounded-full bg-primary">
         <CloudUploadIcon
-          aria-hidden="true"
+          aria-hidden
           className="size-3 text-primary-foreground"
         />
       </div>

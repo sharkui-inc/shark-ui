@@ -68,7 +68,7 @@ export const CommerceTableExample = (props: React.ComponentProps<"div">) => {
                         size="icon-sm"
                         variant="outline"
                       >
-                        <EllipsisIcon aria-hidden="true" />
+                        <EllipsisIcon aria-hidden />
                       </Button>
                     </MenuTrigger>
                     <MenuContent>

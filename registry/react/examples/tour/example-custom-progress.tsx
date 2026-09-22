@@ -70,7 +70,7 @@ const ReleaseGates = () => {
             key={gate.id}
           >
             <Icon
-              aria-hidden="true"
+              aria-hidden
               className={cn(
                 "size-4 shrink-0",
                 isComplete ? "text-primary" : "text-muted-foreground"

@@ -42,14 +42,14 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" tooltip="Onda workspace">
-              <IconTile aria-hidden="true" size="sm">
-                <WavesHorizontalIcon aria-hidden="true" className="size-4" />
+              <IconTile aria-hidden size="sm">
+                <WavesHorizontalIcon aria-hidden className="size-4" />
               </IconTile>
               <span className="grid flex-1 text-start text-sm leading-tight">
                 <span className="truncate font-semibold">Onda Inc.</span>
                 <span className="truncate text-xs">Enterprise</span>
               </span>
-              <ChevronsUpDownIcon aria-hidden="true" className="ms-auto" />
+              <ChevronsUpDownIcon aria-hidden className="ms-auto" />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -66,7 +66,7 @@ export function AppSidebar() {
                   tooltip={item.label}
                 >
                   <a href="#">
-                    <item.icon aria-hidden="true" />
+                    <item.icon aria-hidden />
                     <span>{item.label}</span>
                   </a>
                 </SidebarMenuButton>
@@ -81,7 +81,7 @@ export function AppSidebar() {
               <SidebarMenuItem key={project}>
                 <SidebarMenuButton asChild>
                   <a href="#">
-                    <FolderIcon aria-hidden="true" />
+                    <FolderIcon aria-hidden />
                     <span>{project}</span>
                   </a>
                 </SidebarMenuButton>
@@ -95,7 +95,7 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Support">
               <a href="#">
-                <LifeBuoyIcon aria-hidden="true" />
+                <LifeBuoyIcon aria-hidden />
                 <span>Support</span>
               </a>
             </SidebarMenuButton>
@@ -103,17 +103,17 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" tooltip="vini@example.com">
               <IconTile
-                aria-hidden="true"
+                aria-hidden
                 className="border-transparent bg-sidebar-accent text-sidebar-foreground shadow-none"
                 size="sm"
               >
-                <CircleUserRoundIcon aria-hidden="true" className="size-4" />
+                <CircleUserRoundIcon aria-hidden className="size-4" />
               </IconTile>
               <span className="grid flex-1 text-start text-sm leading-tight">
                 <span className="truncate font-medium">Vini</span>
                 <span className="truncate text-xs">vini@example.com</span>
               </span>
-              <CommandIcon aria-hidden="true" className="ms-auto" />
+              <CommandIcon aria-hidden className="ms-auto" />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

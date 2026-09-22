@@ -67,7 +67,7 @@ const Example = () => {
                   size="icon-md"
                   variant="outline"
                 >
-                  <ChevronUpIcon aria-hidden className="size-4" />
+                  <ChevronUpIcon aria-hidden />
                 </Button>
               </div>
 
@@ -80,7 +80,7 @@ const Example = () => {
                   size="icon-md"
                   variant="outline"
                 >
-                  <ChevronLeftIcon aria-hidden className="size-4" />
+                  <ChevronLeftIcon aria-hidden />
                 </Button>
                 <Button
                   aria-label="Move down"
@@ -90,7 +90,7 @@ const Example = () => {
                   size="icon-md"
                   variant="outline"
                 >
-                  <ChevronDownIcon aria-hidden className="size-4" />
+                  <ChevronDownIcon aria-hidden />
                 </Button>
                 <Button
                   aria-label="Move right"
@@ -100,7 +100,7 @@ const Example = () => {
                   size="icon-md"
                   variant="outline"
                 >
-                  <ChevronRightIcon aria-hidden className="size-4" />
+                  <ChevronRightIcon aria-hidden />
                 </Button>
               </div>
             </div>

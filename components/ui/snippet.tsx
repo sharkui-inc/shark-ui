@@ -324,14 +324,14 @@ export const SnippetSelect = (props: SnippetSelectProps) => {
           ))}
         </MenuContent>
       </Menu>
-      <span aria-hidden="true" className="h-4 w-px shrink-0 bg-border" />
+      <span aria-hidden className="h-4 w-px shrink-0 bg-border" />
     </InputGroupAddon>
   );
 };
 
 export const SnippetPrompt = () => (
   <span
-    aria-hidden="true"
+    aria-hidden
     className="text-muted-foreground"
     data-slot="snippet-prompt"
   >

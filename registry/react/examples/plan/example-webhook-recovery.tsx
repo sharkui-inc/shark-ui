@@ -55,7 +55,7 @@ const Example = () => (
             </PlanItemDetailFile>
           </PlanItemDetail>
           <Alert variant="info">
-            <InfoIcon aria-hidden="true" />
+            <InfoIcon aria-hidden />
             <AlertTitle>Staging validation is running</AlertTitle>
             <AlertDescription>
               The agent is replaying a copy of the failed batch before it
@@ -64,7 +64,7 @@ const Example = () => (
             <AlertAction>
               <Button size="sm" variant="outline">
                 View run
-                <ExternalLinkIcon aria-hidden="true" data-icon="inline-end" />
+                <ExternalLinkIcon aria-hidden data-icon="inline-end" />
               </Button>
             </AlertAction>
           </Alert>

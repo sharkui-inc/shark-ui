@@ -56,10 +56,10 @@ const DialogRtl = () => (
             </FieldGroup>
           </DialogBody>
           <DialogFooter>
+            <Button type="submit">حفظ التغييرات</Button>
             <DialogClose asChild>
               <Button variant="outline">إلغاء</Button>
             </DialogClose>
-            <Button type="submit">حفظ التغييرات</Button>
           </DialogFooter>
         </DialogContent>
       </form>

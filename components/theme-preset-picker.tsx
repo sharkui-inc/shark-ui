@@ -89,7 +89,7 @@ const ThemePresetBar = (props: { onSelect?: () => void }) => {
                   )}
                 >
                   <CheckIcon
-                    aria-hidden="true"
+                    aria-hidden
                     className="relative z-10 size-4 text-white opacity-0 transition-opacity group-data-[state=checked]:opacity-100"
                   />
                 </span>

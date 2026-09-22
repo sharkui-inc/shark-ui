@@ -221,7 +221,6 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
             "bg-white dark:bg-input/32",
             "w-full md:w-48 lg:w-40"
           )}
-          clickEffect={false}
           variant="outline"
         >
           <span className="inline-flex">Search...</span>

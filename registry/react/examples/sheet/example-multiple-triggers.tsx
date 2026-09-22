@@ -55,10 +55,10 @@ const Example = () => {
         </SheetBody>
         <SheetFooter>
           <SheetClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button>Save</Button>
           </SheetClose>
           <SheetClose asChild>
-            <Button>Save</Button>
+            <Button variant="outline">Cancel</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

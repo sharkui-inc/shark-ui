@@ -124,7 +124,7 @@ interface InputGroupAddonProps
     VariantProps<typeof inputGroupAddonVariants> {}
 
 export const InputGroupAddon = (props: InputGroupAddonProps) => {
-  const { className, align = "inline-start", ...rest } = props;
+  const { className, align = "inline-start", onMouseDown, ...rest } = props;
 
   return (
     <ark.div
@@ -132,7 +132,14 @@ export const InputGroupAddon = (props: InputGroupAddonProps) => {
       data-align={align}
       data-inline={align.startsWith("inline") || undefined}
       data-slot="input-group-addon"
+      role="group"
+      {...rest}
       onMouseDown={(event) => {
+        onMouseDown?.(event);
+        if (event.defaultPrevented) {
+          return;
+        }
+
         if (
           (event.target as HTMLElement).closest(
             "button, a, input, select, textarea, [role=button], [role=combobox], [role=listbox], [data-slot=select-trigger]"
@@ -152,8 +159,6 @@ export const InputGroupAddon = (props: InputGroupAddonProps) => {
           control.focus();
         }
       }}
-      role="group"
-      {...rest}
     />
   );
 };

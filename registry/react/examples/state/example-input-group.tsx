@@ -32,7 +32,7 @@ const Example = () => (
           type="search"
         />
         <InputGroupAddon>
-          <SearchIcon aria-hidden="true" />
+          <SearchIcon aria-hidden />
         </InputGroupAddon>
         <InputGroupAddon align="inline-end">
           <Kbd>/</Kbd>

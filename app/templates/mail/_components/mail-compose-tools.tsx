@@ -33,17 +33,17 @@ interface ComposeMenuItem {
 
 const TEMPLATE_ITEMS: ComposeMenuItem[] = [
   {
-    icon: <ListIcon aria-hidden="true" />,
+    icon: <ListIcon aria-hidden />,
     label: "Follow-up",
     value: "follow-up",
   },
   {
-    icon: <ListIcon aria-hidden="true" />,
+    icon: <ListIcon aria-hidden />,
     label: "Introduction",
     value: "intro",
   },
   {
-    icon: <ListIcon aria-hidden="true" />,
+    icon: <ListIcon aria-hidden />,
     label: "Meeting notes",
     value: "notes",
   },
@@ -51,12 +51,12 @@ const TEMPLATE_ITEMS: ComposeMenuItem[] = [
 
 const ATTACHMENT_ITEMS: ComposeMenuItem[] = [
   {
-    icon: <FileIcon aria-hidden="true" />,
+    icon: <FileIcon aria-hidden />,
     label: "Attach file",
     value: "file",
   },
   {
-    icon: <ImageIcon aria-hidden="true" />,
+    icon: <ImageIcon aria-hidden />,
     label: "Insert image",
     value: "image",
   },
@@ -64,17 +64,17 @@ const ATTACHMENT_ITEMS: ComposeMenuItem[] = [
 
 const SEND_ITEMS: ComposeMenuItem[] = [
   {
-    icon: <ClockArrowUpIcon aria-hidden="true" />,
+    icon: <ClockArrowUpIcon aria-hidden />,
     label: "Send now",
     value: "now",
   },
   {
-    icon: <CalendarClockIcon aria-hidden="true" />,
+    icon: <CalendarClockIcon aria-hidden />,
     label: "Schedule send",
     value: "schedule",
   },
   {
-    icon: <CalendarCheckIcon aria-hidden="true" />,
+    icon: <CalendarCheckIcon aria-hidden />,
     label: "Send when I'm next free",
     value: "later",
   },
@@ -91,14 +91,9 @@ const ComposeMenu = ({
 }) => (
   <Menu positioning={{ placement: "bottom-start" }}>
     <MenuTrigger asChild>
-      <Button
-        aria-label={label}
-        clickEffect={false}
-        size="sm"
-        variant="outline"
-      >
+      <Button aria-label={label} size="sm" variant="outline">
         {icon}
-        <ChevronDownIcon aria-hidden="true" />
+        <ChevronDownIcon aria-hidden />
       </Button>
     </MenuTrigger>
     <MenuContent className="min-w-44">
@@ -118,36 +113,33 @@ export const MailComposeTools = () => (
   <ButtonGroup aria-label="Compose tools" className="min-w-0 shrink-0">
     <ButtonGroup aria-label="Writing tools">
       <MailToolbarButton label="Undo">
-        <Undo2Icon aria-hidden="true" />
+        <Undo2Icon aria-hidden />
       </MailToolbarButton>
       <MailToolbarButton label="Formatting">
-        <span
-          aria-hidden="true"
-          className="font-medium text-[11px] leading-none"
-        >
+        <span aria-hidden className="font-medium text-[11px] leading-none">
           Aa
         </span>
       </MailToolbarButton>
       <MailToolbarButton label="Emoji">
-        <SmileIcon aria-hidden="true" />
+        <SmileIcon aria-hidden />
       </MailToolbarButton>
       <MailToolbarButton label="Write with AI">
-        <WandSparklesIcon aria-hidden="true" />
+        <WandSparklesIcon aria-hidden />
       </MailToolbarButton>
     </ButtonGroup>
     <ButtonGroup aria-label="Insert">
       <ComposeMenu
-        icon={<ListIcon aria-hidden="true" />}
+        icon={<ListIcon aria-hidden />}
         items={TEMPLATE_ITEMS}
         label="Templates"
       />
       <ComposeMenu
-        icon={<PaperclipIcon aria-hidden="true" />}
+        icon={<PaperclipIcon aria-hidden />}
         items={ATTACHMENT_ITEMS}
         label="Attach"
       />
       <ComposeMenu
-        icon={<ClockArrowUpIcon aria-hidden="true" />}
+        icon={<ClockArrowUpIcon aria-hidden />}
         items={SEND_ITEMS}
         label="Send options"
       />

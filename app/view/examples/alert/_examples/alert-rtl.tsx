@@ -8,7 +8,7 @@ import {
 const AlertRtl = () => (
   <div className="flex max-w-md flex-col gap-4">
     <Alert>
-      <CheckCircle2Icon aria-hidden="true" />
+      <CheckCircle2Icon aria-hidden />
       <AlertTitle>تم الدفع بنجاح</AlertTitle>
       <AlertDescription>
         تمت معالجة دفعتك البالغة 29.99 دولارًا. تم إرسال إيصال إلى عنوان بريدك
@@ -17,7 +17,7 @@ const AlertRtl = () => (
     </Alert>
 
     <Alert variant="info">
-      <InfoIcon aria-hidden="true" />
+      <InfoIcon aria-hidden />
       <AlertTitle>ميزة جديدة متاحة</AlertTitle>
       <AlertDescription>
         لقد أضفنا دعم الوضع الداكن. يمكنك تفعيله في إعدادات حسابك.

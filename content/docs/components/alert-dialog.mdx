@@ -105,9 +105,7 @@ import {
       <AlertDialogCancel>
         Don't allow
       </AlertDialogCancel>
-      <AlertDialogClose asChild>
-        <AlertDialogAction>Allow</AlertDialogAction>
-      </AlertDialogClose>
+      <AlertDialogAction>Allow</AlertDialogAction>
     </AlertDialogFooter>
   </AlertDialogContent>
 </AlertDialog>
@@ -253,7 +251,7 @@ Public AlertDialogClose component. It forwards the underlying primitive props.
 
 ### AlertDialogFooter
 
-Public AlertDialogFooter component. It forwards the underlying primitive props.
+Footer for action buttons. Put **Cancel first in the DOM** (safe default focus), then Confirm. Uses `flex-col-reverse` / `sm:flex-row sm:justify-end` so Confirm stays on the right (and on top on mobile) — opposite DOM order from `DialogFooter`, which puts primary first for Tab focus.
 
 | Prop | Type | Default |
 | --- | --- | --- |

@@ -69,10 +69,7 @@ const Example = () => {
                 size="sm"
               >
                 Next
-                <ChevronRightIcon
-                  aria-hidden="true"
-                  className="size-3.5 rtl:rotate-180"
-                />
+                <ChevronRightIcon aria-hidden className="rtl:rotate-180" />
               </Button>
             </TourFooter>
           ) : (
@@ -143,7 +140,7 @@ const ProfileCard = (props: {
       return (
         <>
           <span className="flex size-12 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
-            <CircleAlertIcon aria-hidden="true" className="size-4" />
+            <CircleAlertIcon aria-hidden className="size-4" />
           </span>
           <div className="flex min-w-0 flex-col">
             <span className="truncate font-medium text-sm">
@@ -167,7 +164,7 @@ const ProfileCard = (props: {
 const ProfilePlaceholder = () => (
   <>
     <span className="flex size-12 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
-      <WavesHorizontalIcon aria-hidden="true" className="size-4" />
+      <WavesHorizontalIcon aria-hidden className="size-4" />
     </span>
     <div className="flex min-w-0 flex-col">
       <span className="truncate font-medium text-sm">Waiting for GitHub</span>

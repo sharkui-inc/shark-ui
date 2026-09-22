@@ -17,7 +17,6 @@ import { checkboxVariants } from "@/registry/react/components/checkbox";
 
 export const useTreeView = useArkTreeView;
 export const useTreeViewContext = useArkTreeViewContext;
-export const TreeViewRootProvider = ArkTreeView.RootProvider;
 
 export interface TreeNodeType<T = unknown> {
   children?: TreeNodeType<T>[] | undefined;
@@ -50,6 +49,20 @@ const [TreeViewContextProvider, _useTreeView] =
     name: "TreeViewContext",
     providerName: "TreeView",
   });
+
+export interface TreeViewRootProviderProps
+  extends React.ComponentProps<typeof ArkTreeView.RootProvider>,
+    TreeViewContextProps {}
+
+export const TreeViewRootProvider = (props: TreeViewRootProviderProps) => {
+  const { fileIcons, children, ...rest } = props;
+
+  return (
+    <TreeViewContextProvider value={{ fileIcons }}>
+      <ArkTreeView.RootProvider {...rest}>{children}</ArkTreeView.RootProvider>
+    </TreeViewContextProvider>
+  );
+};
 
 interface TreeViewProps
   extends ArkTreeView.RootComponentProps,
@@ -129,13 +142,17 @@ export const TreeViewNode = <T extends TreeNodeType>(
 
 export const TreeViewBranch = (
   props: React.ComponentProps<typeof ArkTreeView.Branch>
-) => (
-  <ArkTreeView.Branch
-    className={cn("relative")}
-    data-slot="tree-view-branch"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkTreeView.Branch
+      className={cn("relative", className)}
+      data-slot="tree-view-branch"
+      {...rest}
+    />
+  );
+};
 
 const treeViewControlVariants = tv({
   base: [
@@ -377,7 +394,9 @@ export const TreeViewItem = (props: TreeViewItemProps) => {
             {nodeState.renaming ? (
               <TreeViewNodeInput />
             ) : (
-              <TreeViewItemTitle {...rest}>{children}</TreeViewItemTitle>
+              <TreeViewItemTitle className={className} {...rest}>
+                {children}
+              </TreeViewItemTitle>
             )}
           </>
         );

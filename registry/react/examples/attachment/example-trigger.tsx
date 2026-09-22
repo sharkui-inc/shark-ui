@@ -24,7 +24,7 @@ const Example = () => (
   <Dialog>
     <Attachment>
       <AttachmentMedia>
-        <FileSearchIcon aria-hidden="true" />
+        <FileSearchIcon aria-hidden />
       </AttachmentMedia>
       <AttachmentContent>
         <AttachmentTitle>research-summary.pdf</AttachmentTitle>
@@ -32,7 +32,7 @@ const Example = () => (
       </AttachmentContent>
       <AttachmentActions>
         <AttachmentAction aria-label="Remove research-summary.pdf">
-          <XIcon aria-hidden="true" />
+          <XIcon aria-hidden />
         </AttachmentAction>
       </AttachmentActions>
       <DialogTrigger asChild>

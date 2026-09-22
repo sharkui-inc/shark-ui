@@ -32,7 +32,7 @@ const AvatarGroupCountIcon = () => (
       <AvatarFallback>IA</AvatarFallback>
     </Avatar>
     <AvatarGroupCount>
-      <PlusIcon aria-hidden="true" />
+      <PlusIcon aria-hidden />
     </AvatarGroupCount>
   </AvatarGroup>
 );

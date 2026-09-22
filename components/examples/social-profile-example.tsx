@@ -88,7 +88,7 @@ export const SocialProfileExample = (props: React.ComponentProps<"div">) => {
               <TooltipTrigger asChild>
                 <DialogTrigger asChild>
                   <Button aria-label="Message" size="icon-sm" variant="outline">
-                    <MailIcon aria-hidden="true" />
+                    <MailIcon aria-hidden />
                   </Button>
                 </DialogTrigger>
               </TooltipTrigger>

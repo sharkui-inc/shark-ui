@@ -16,8 +16,6 @@ import {
   menuEmptyVariants,
   menuGroupLabelVariants,
   menuItemControlVariants,
-  menuItemHighlightVariants,
-  menuItemIconVariants,
   menuItemIndicatorVariants,
   menuSeparatorVariants,
 } from "@/registry/react/components/menu";
@@ -279,34 +277,38 @@ export const SelectItem = (
   props: React.ComponentProps<typeof ArkSelect.Item>
 ) => {
   const { className, children, ...rest } = props;
+  const { item, indicator } = menuItemIndicatorVariants();
 
   return (
     <ArkSelect.Item
       className={cn(
         menuItemControlVariants(),
         inputItemVariants(),
-        menuItemIconVariants(),
         "cursor-default",
         "outline-hidden",
         "in-[[data-slot=select-content]:has([data-slot=select-group-label])]:ps-4",
-        menuItemHighlightVariants(),
+        "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "[&_svg:not([class*='text-'])]:text-muted-foreground",
         className,
-        "pe-8"
+        item()
       )}
       data-slot="select-item"
       {...rest}
     >
       <ArkSelect.ItemText
-        className="flex min-w-0 items-center gap-2"
+        className={cn(
+          "flex min-w-0 items-center gap-2",
+          "has-data-[slot$=-item-description]:items-start",
+          "has-data-[slot$=-item-description]:[&>svg]:translate-y-0.5"
+        )}
         data-slot="select-item-text"
       >
         {children}
       </ArkSelect.ItemText>
 
       <ArkSelect.ItemIndicator
-        className={menuItemIndicatorVariants()}
+        className={indicator()}
         data-slot="select-item-indicator"
       >
         <CheckIcon />

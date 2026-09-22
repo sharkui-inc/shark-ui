@@ -100,7 +100,7 @@ export const ReasoningCardExample = (props: React.ComponentProps<"div">) => {
                 }
                 size="icon-xs"
               >
-                <PaperclipIcon aria-hidden="true" />
+                <PaperclipIcon aria-hidden />
               </PromptInputButton>
             </PromptInputTools>
             <PromptInputSubmit />

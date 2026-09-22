@@ -18,12 +18,12 @@ export const MusicLibraryPlaylists = () => (
         <CardMedia className="relative aspect-[4/3]" variant="image">
           <img alt="" height={240} src={playlist.image} width={320} />
           <div
-            aria-hidden="true"
+            aria-hidden
             className="pointer-events-none absolute inset-0 bg-black/32 opacity-0 transition-opacity group-hover/card:opacity-100 motion-reduce:transition-none"
           />
           <div className="absolute start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity group-hover/card:opacity-100 motion-reduce:transition-none">
             <Button aria-label={`Play ${playlist.title}`} pill>
-              <PlayIcon aria-hidden="true" /> Play mix
+              <PlayIcon aria-hidden /> Play mix
             </Button>
           </div>
         </CardMedia>

@@ -137,7 +137,7 @@ const EmptyConversation = ({
 }) => (
   <div className="flex min-h-full flex-col items-center justify-center px-6 py-16 text-center">
     <span className="mb-5 grid size-8 place-items-center text-muted-foreground">
-      <BotIcon aria-hidden="true" className="size-8" />
+      <BotIcon aria-hidden className="size-8" />
     </span>
     <h2 className="font-medium text-lg">Hello {userName}</h2>
     <p className="mt-1 text-muted-foreground text-sm">
@@ -221,7 +221,7 @@ const MessageApprovalPlan = ({
 }: NonNullable<ChatMessage["approvalPlan"]>) => (
   <ApprovalCard onApprove={noop} onReject={noop}>
     <ApprovalCardHeader>
-      <ListTodoIcon aria-hidden="true" />
+      <ListTodoIcon aria-hidden />
       <ApprovalCardTitle>{title}</ApprovalCardTitle>
     </ApprovalCardHeader>
     <ApprovalCardContent>
@@ -279,7 +279,7 @@ const MessageAttachmentBlock = ({
 }: ChatMessageAttachment) => (
   <Attachment size="sm">
     <AttachmentMedia>
-      <FileTextIcon aria-hidden="true" />
+      <FileTextIcon aria-hidden />
     </AttachmentMedia>
     <AttachmentContent>
       <AttachmentTitle>{name}</AttachmentTitle>
@@ -292,16 +292,16 @@ const AssistantActions = () => (
   <MessageFooter>
     <MessageActions>
       <MessageAction tooltip="Copy">
-        <CopyIcon aria-hidden="true" />
+        <CopyIcon aria-hidden />
       </MessageAction>
       <MessageAction tooltip="Regenerate">
-        <RefreshCcwIcon aria-hidden="true" />
+        <RefreshCcwIcon aria-hidden />
       </MessageAction>
       <MessageAction tooltip="Good response">
-        <ThumbsUpIcon aria-hidden="true" />
+        <ThumbsUpIcon aria-hidden />
       </MessageAction>
       <MessageAction tooltip="Bad response">
-        <ThumbsDownIcon aria-hidden="true" />
+        <ThumbsDownIcon aria-hidden />
       </MessageAction>
     </MessageActions>
   </MessageFooter>
@@ -318,7 +318,7 @@ const ChatMessageItem = ({ message }: { message: ChatMessage }) => {
           <MessageAvatar>
             <Avatar size="sm">
               <AvatarFallback>
-                <BotIcon aria-hidden="true" className="size-4" />
+                <BotIcon aria-hidden className="size-4" />
               </AvatarFallback>
             </Avatar>
           </MessageAvatar>

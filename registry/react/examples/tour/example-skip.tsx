@@ -31,7 +31,7 @@ const Example = () => {
             id="tour-skip-notifications"
           >
             <BellIcon
-              aria-hidden="true"
+              aria-hidden
               className="size-4 shrink-0 text-muted-foreground"
             />
             <div className="flex min-w-0 flex-col">
@@ -46,7 +46,7 @@ const Example = () => {
             id="tour-skip-digest"
           >
             <MailIcon
-              aria-hidden="true"
+              aria-hidden
               className="size-4 shrink-0 text-muted-foreground"
             />
             <div className="flex min-w-0 flex-col">
@@ -61,7 +61,7 @@ const Example = () => {
             id="tour-skip-quiet"
           >
             <MoonIcon
-              aria-hidden="true"
+              aria-hidden
               className="size-4 shrink-0 text-muted-foreground"
             />
             <div className="flex min-w-0 flex-col">

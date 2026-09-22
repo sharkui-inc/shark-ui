@@ -30,11 +30,11 @@ export const Autocomplete: ArkCombobox.RootComponent = (props) => {
 
   return (
     <Combobox
-      allowCustomValue
       data-slot="autocomplete"
-      inputBehavior="autocomplete"
       openOnClick={openOnClick}
       {...rest}
+      allowCustomValue
+      inputBehavior="autocomplete"
     />
   );
 };

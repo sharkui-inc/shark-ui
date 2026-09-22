@@ -130,9 +130,9 @@ const ExpandToggle = ({ row }: { row: Row<typeof features, Order> }) => (
     variant="ghost"
   >
     {row.getIsExpanded() ? (
-      <ChevronDownIcon aria-hidden className="size-4" />
+      <ChevronDownIcon aria-hidden />
     ) : (
-      <ChevronRightIcon aria-hidden className="size-4" />
+      <ChevronRightIcon aria-hidden />
     )}
   </Button>
 );

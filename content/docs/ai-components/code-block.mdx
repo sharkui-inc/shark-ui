@@ -53,7 +53,6 @@ CodeBlock
 ├── CodeBlockHeader
 │   ├── CodeBlockTitle
 │   └── CodeBlockActions
-│       ├── CodeBlockLanguageSelector
 │       └── CodeBlockCopy
 └── CodeBlockContent
 ```
@@ -87,8 +86,6 @@ import {
 
 ### Using props
 
-Pass the `title` prop directly to `CodeBlockHeader`.
-
 ```tsx showLineNumbers
 <CodeBlockHeader title="helpers.ts">
   <CodeBlockActions>
@@ -97,11 +94,7 @@ Pass the `title` prop directly to `CodeBlockHeader`.
 </CodeBlockHeader>
 ```
 
-> This approach does not require the `CodeBlockTitle` component.
-
 ### Using components
-
-Use `CodeBlockTitle` as a child for more control.
 
 ```tsx showLineNumbers
 <CodeBlockHeader>
@@ -114,24 +107,9 @@ Use `CodeBlockTitle` as a child for more control.
 
 ## Streaming
 
-Set `isStreaming` while an AI response is still appending code. The component renders the newest text immediately, refreshes syntax highlighting at a controlled cadence while the response grows, and highlights the final snippet as soon as streaming completes.
+Set `isStreaming` while code is still arriving. Highlighting runs in the browser.
 
-```tsx
-<CodeBlock
-  className="max-h-80"
-  code={partialCode}
-  isStreaming={status === "streaming"}
-  language="tsx"
->
-  <CodeBlockContent showLineNumbers />
-</CodeBlock>
-```
-
-This is a client component. A Server Component can pass its serializable `code`, `language`, and `isStreaming` values to it, but live streamed code is highlighted in the browser. Static server-rendered highlighting is intentionally outside this component's API.
-
-## Visual consistency
-
-`CodeBlock` and [Diff](/docs/ai-components/diff) share the same technical surface: a 36px header, 14px interface text, a scrollable viewport, and 14px / 24px code metrics. They remain separate components because syntax highlighting, optional line numbers, and copy actions serve a different purpose from add/remove states.
+<ComponentPreview componentName="code-block" fileName="example-streaming" />
 
 ## Examples
 
@@ -141,51 +119,35 @@ This is a client component. A Server Component can pass its serializable `code`,
 
 ### Highlighted lines
 
-Draw attention to the lines a user should inspect first.
-
 <ComponentPreview componentName="code-block" fileName="example-highlighted-lines" />
 
-### Scrollable
+### Scrollable (vertical)
 
-Constrain the whole panel to keep a long source file readable in place.
+Constrain height so the content scrolls vertically inside the panel.
 
 <ComponentPreview componentName="code-block" fileName="example-scrollable" />
 
-### Language selector
+### Scrollable (horizontal)
 
-Control the language and source together with the Select composition.
+Long lines overflow and scroll horizontally; the line-number gutter stays sticky.
+
+<ComponentPreview componentName="code-block" fileName="example-scrollable-horizontal" />
+
+### Language selector
 
 <ComponentPreview componentName="code-block" fileName="example-language-selector" />
 
 ### Multiple files
 
-Keep the panel dimensions stable while file tabs switch their source.
-
 <ComponentPreview componentName="code-block" fileName="example-multiple-files" />
 
-### Streaming
-
-Start with visible code, then append the remaining snippet as an AI response arrives.
-
-<ComponentPreview componentName="code-block" fileName="example-streaming" />
-
 ### With Diff
-
-Use one persistent header for source and review tabs so the panel does not jump between views.
 
 <ComponentPreview componentName="code-block" fileName="example-with-diff" />
 
 ### Custom actions
 
-Compose a working line-number toggle beside the built-in copy action.
-
 <ComponentPreview componentName="code-block" fileName="example-custom-actions" />
-
-### Content override
-
-Render a content-specific code and language pair without changing the root defaults.
-
-<ComponentPreview componentName="code-block" fileName="example-content-override" />
 
 ## RTL
 
@@ -197,8 +159,6 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 ### CodeBlock
 
-Root panel. Provides `code`, `language`, and streaming state to its parts.
-
 | Prop | Type | Default |
 | --- | --- | --- |
 | `code` | `string` | `""` |
@@ -209,8 +169,7 @@ Root panel. Provides `code`, `language`, and streaming state to its parts.
 
 ### CodeBlockHeader
 
-Optional header for titles and actions. Pass `title` to render `CodeBlockTitle`.
-A string child is wrapped the same way.
+Header for the title and actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -220,17 +179,12 @@ A string child is wrapped the same way.
 
 ### CodeBlockTitle
 
-Title text for the code block. Rendered automatically when `title` is set on
-`CodeBlockHeader`.
-
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CodeBlockFilename
-
-Optional truncated filename when composing a custom title.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -239,7 +193,7 @@ Optional truncated filename when composing a custom title.
 
 ### CodeBlockActions
 
-Right-aligned optional actions container.
+Right-aligned actions container.
 
 ### CodeBlockCopy
 
@@ -252,8 +206,6 @@ Copies `code` from `CodeBlock`.
 
 ### CodeBlockContent
 
-Renders the root `code` or a string child with Shiki syntax highlighting.
-
 | Prop | Type | Default |
 | --- | --- | --- |
 | `showLineNumbers` | `boolean` | `false` |
@@ -263,9 +215,4 @@ Renders the root `code` or a string child with Shiki syntax highlighting.
 | `isStreaming` | `boolean` | - |
 | `className` | `string` | `-` |
 
-### Language selector parts
-
-`CodeBlockLanguageSelector`, `CodeBlockLanguageSelectorTrigger`, `CodeBlockLanguageSelectorValue`, `CodeBlockLanguageSelectorContent`, and `CodeBlockLanguageSelectorItem` are styled wrappers around [Select](/docs/components/select). Provide the Select collection and control its value from the consuming composition.
-
-`CodeBlockLanguage` accepts every bundled Shiki language and `"text"` for
-plain, unhighlighted content.
+`CodeBlockLanguage` accepts every bundled Shiki language and `"text"`.

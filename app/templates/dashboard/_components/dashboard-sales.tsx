@@ -30,7 +30,7 @@ export const DashboardSales = () => (
     >
       <CardAction>
         <Badge className="gap-1" size="sm" variant="success">
-          <TrendingUpIcon aria-hidden="true" />
+          <TrendingUpIcon aria-hidden />
           {salesSummary.change}
         </Badge>
       </CardAction>

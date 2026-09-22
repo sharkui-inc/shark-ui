@@ -132,7 +132,7 @@ export const AttachmentMedia = (props: AttachmentMediaProps) => {
     );
   } else if (variant === "icon") {
     content = (
-      <IconTile aria-hidden="true" className="size-full">
+      <IconTile aria-hidden className="size-full">
         {children}
       </IconTile>
     );
@@ -246,10 +246,11 @@ export const AttachmentAction = (props: ButtonProps) => {
 };
 
 export const AttachmentRemove = (props: ButtonProps) => {
-  const { className, ...rest } = props;
+  const { className, "aria-label": ariaLabel = "Remove", ...rest } = props;
 
   return (
     <AttachmentAction
+      aria-label={ariaLabel}
       className={cn(
         "transition-opacity duration-150 ease-out",
         "[@media(hover:hover)_and_(pointer:fine)]:opacity-0",
@@ -260,7 +261,7 @@ export const AttachmentRemove = (props: ButtonProps) => {
       data-slot="attachment-remove"
       {...rest}
     >
-      <XIcon aria-hidden="true" />
+      <XIcon aria-hidden />
     </AttachmentAction>
   );
 };

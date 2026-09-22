@@ -33,7 +33,7 @@ const Example = () => {
             size="sm"
             variant="ghost"
           >
-            <ListOrderedIcon aria-hidden="true" />
+            <ListOrderedIcon aria-hidden />
           </Toggle>
           <CodeBlockCopy />
         </CodeBlockActions>

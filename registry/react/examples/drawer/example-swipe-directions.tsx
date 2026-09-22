@@ -39,13 +39,13 @@ const DeliveryDrawer = (props: {
   const footerActions = (
     <>
       <DrawerClose asChild>
-        <Button className="w-full" pill variant="outline">
-          Cancel
+        <Button className="w-full" pill>
+          Confirm Delivery Time
         </Button>
       </DrawerClose>
       <DrawerClose asChild>
-        <Button className="w-full" pill>
-          Confirm Delivery Time
+        <Button className="w-full" pill variant="outline">
+          Cancel
         </Button>
       </DrawerClose>
     </>
@@ -92,7 +92,7 @@ const DeliveryOptions = () => (
           <FieldContent>
             <FieldTitle>
               {option.title}
-              {option.badge ? (
+              {"badge" in option ? (
                 <Badge pill size="sm" variant="secondary">
                   {option.badge}
                 </Badge>

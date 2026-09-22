@@ -31,7 +31,7 @@ export const MusicPlayerExtras = ({
     <Sheet closeOnInteractOutside modal={false}>
       <SheetTrigger asChild>
         <Button aria-label="Open play queue" size="icon-md" variant="ghost">
-          <ListMusicIcon aria-hidden="true" />
+          <ListMusicIcon aria-hidden />
         </Button>
       </SheetTrigger>
       <MusicQueue currentTrack={track} onTrackSelect={onTrackSelect} />
@@ -44,11 +44,7 @@ export const MusicPlayerExtras = ({
           size="icon-md"
           variant="ghost"
         >
-          {isMuted ? (
-            <VolumeXIcon aria-hidden="true" />
-          ) : (
-            <Volume2Icon aria-hidden="true" />
-          )}
+          {isMuted ? <VolumeXIcon aria-hidden /> : <Volume2Icon aria-hidden />}
         </Button>
       </HoverCardTrigger>
       <HoverCardContent className="w-auto p-2" showArrow={false}>

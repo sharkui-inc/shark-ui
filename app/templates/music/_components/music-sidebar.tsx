@@ -34,8 +34,8 @@ export const MusicSidebar = () => {
     <Sidebar className="absolute h-full" collapsible="icon">
       <SidebarHeader className="h-12 min-h-12 shrink-0 flex-row items-center justify-between border-b py-0 group-data-[collapsible=icon]:justify-center">
         <div className="flex h-full items-center gap-2 group-data-[collapsible=icon]:hidden">
-          <IconTile aria-hidden="true" size="xs">
-            <AudioWaveformIcon aria-hidden="true" />
+          <IconTile aria-hidden size="xs">
+            <AudioWaveformIcon aria-hidden />
           </IconTile>
           <p className="truncate font-semibold text-sm">Ondafy</p>
         </div>
@@ -45,11 +45,11 @@ export const MusicSidebar = () => {
         />
         <div className="group/brand-toggle hidden size-6 group-data-[collapsible=icon]:grid">
           <IconTile
-            aria-hidden="true"
+            aria-hidden
             className="col-start-1 row-start-1 transition-opacity group-focus-within/brand-toggle:opacity-0 group-hover/brand-toggle:opacity-0"
             size="xs"
           >
-            <AudioWaveformIcon aria-hidden="true" />
+            <AudioWaveformIcon aria-hidden />
           </IconTile>
           <SidebarTrigger
             aria-label="Expand sidebar"
@@ -72,7 +72,7 @@ export const MusicSidebar = () => {
                         onClick={() => setActiveNavigation(label)}
                         tooltip={label}
                       >
-                        <Icon aria-hidden="true" />
+                        <Icon aria-hidden />
                         <span>{label}</span>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -99,7 +99,7 @@ export const MusicSidebar = () => {
               <ItemTitle>{TRACKS.length} new tracks for you</ItemTitle>
             </ItemContent>
             <ItemActions className="text-primary">
-              <ArrowUpRightIcon aria-hidden="true" />
+              <ArrowUpRightIcon aria-hidden />
             </ItemActions>
           </button>
         </Item>

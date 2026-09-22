@@ -95,19 +95,27 @@ export const SidebarProvider = (props: SidebarProviderProps) => {
         _setOpen(openState);
       }
 
-      // biome-ignore lint/suspicious/noDocumentCookie: Persist the sidebar state across reloads.
       document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
     },
     [setOpenProp, open]
   );
 
+  React.useEffect(() => {
+    if (openProp === undefined || !isMobile) {
+      return;
+    }
+    setOpenMobile(openProp);
+  }, [openProp, isMobile]);
+
   const toggleSidebar = React.useCallback(() => {
     if (isMobile) {
-      setOpenMobile((prev) => !prev);
-    } else {
-      setOpen((prev) => !prev);
+      const next = !openMobile;
+      setOpenMobile(next);
+      setOpen(next);
+      return;
     }
-  }, [isMobile, setOpen]);
+    setOpen((prev) => !prev);
+  }, [isMobile, openMobile, setOpen]);
 
   useHotkey({
     action: toggleSidebar,
@@ -171,8 +179,7 @@ export const Sidebar = (props: SidebarProps) => {
     ...rest
   } = props;
 
-  // Placement selects a physical viewport edge, independent of document direction.
-  const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
+  const { isMobile, state, openMobile, setOpenMobile, setOpen } = useSidebar();
 
   if (collapsible === "none") {
     return (
@@ -194,7 +201,13 @@ export const Sidebar = (props: SidebarProps) => {
 
   if (isMobile) {
     return (
-      <Sheet onOpenChange={({ open }) => setOpenMobile(open)} open={openMobile}>
+      <Sheet
+        onOpenChange={({ open: nextOpen }) => {
+          setOpenMobile(nextOpen);
+          setOpen(nextOpen);
+        }}
+        open={openMobile}
+      >
         <SheetContent
           className={cn(
             "w-(--sidebar-width)",
@@ -218,7 +231,12 @@ export const Sidebar = (props: SidebarProps) => {
             description="Displays the mobile sidebar."
             title="Sidebar"
           />
-          <ark.div className="flex size-full flex-col">{children}</ark.div>
+          <ark.div
+            className={cn("flex size-full flex-col", className)}
+            {...rest}
+          >
+            {children}
+          </ark.div>
         </SheetContent>
       </Sheet>
     );
@@ -294,13 +312,16 @@ export const SidebarTrigger = (props: React.ComponentProps<typeof Button>) => {
       className={cn("size-7", className)}
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
-      onClick={(event) => {
-        onClick?.(event);
-        toggleSidebar();
-      }}
       size="icon-md"
       variant="ghost"
       {...rest}
+      onClick={(event) => {
+        onClick?.(event);
+        if (event.defaultPrevented) {
+          return;
+        }
+        toggleSidebar();
+      }}
     >
       <PanelLeftIcon className="rtl:rotate-180" />
       <ark.span className="sr-only">Toggle Sidebar</ark.span>
@@ -309,7 +330,7 @@ export const SidebarTrigger = (props: React.ComponentProps<typeof Button>) => {
 };
 
 export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
-  const { className, ...rest } = props;
+  const { className, onClick, ...rest } = props;
 
   const { toggleSidebar } = useSidebar();
 
@@ -333,11 +354,17 @@ export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
       )}
       data-sidebar="rail"
       data-slot="sidebar-rail"
-      onClick={toggleSidebar}
-      tabIndex={-1}
       title="Toggle Sidebar"
       type="button"
       {...rest}
+      onClick={(event) => {
+        onClick?.(event);
+        if (event.defaultPrevented) {
+          return;
+        }
+        toggleSidebar();
+      }}
+      tabIndex={-1}
     />
   );
 };
@@ -508,12 +535,12 @@ export const SidebarGroupAction = (
         "group-data-[collapsible=icon]:hidden",
         className
       )}
-      clickEffect={false}
       data-sidebar="group-action"
       data-slot="sidebar-group-action"
       size="icon-xs"
       variant="ghost"
       {...rest}
+      clickEffect={false}
     />
   );
 };
@@ -618,7 +645,6 @@ export const SidebarMenuButton = ({
         "group-has-data-[sidebar=menu-action]/menu-item:pe-8",
         className
       )}
-      clickEffect={false}
       data-active={isActive}
       data-sidebar="menu-button"
       data-size={size}
@@ -626,6 +652,7 @@ export const SidebarMenuButton = ({
       variant={variant}
       {...rest}
       {...(tooltip ? { id: triggerId } : {})}
+      clickEffect={false}
     />
   );
 
@@ -670,12 +697,12 @@ export const SidebarMenuAction = (props: SidebarMenuActionProps) => {
           "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 peer-data-[active=true]/menu-button:text-sidebar-accent-foreground md:opacity-0",
         className
       )}
-      clickEffect={false}
       data-sidebar="menu-action"
       data-slot="sidebar-menu-action"
       size="icon-xs"
       variant="ghost"
       {...rest}
+      clickEffect={false}
     />
   );
 };

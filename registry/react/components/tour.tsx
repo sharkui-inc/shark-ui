@@ -10,8 +10,8 @@ import {
   useTourContext as useArkTourContext,
 } from "@ark-ui/react/tour";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import React from "react";
-import { tv } from "tailwind-variants";
+import type React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -34,76 +34,6 @@ export type TourStepChangeDetails = Parameters<
 export const useTour = useArkTour;
 export const useTourContext = useArkTourContext;
 
-// Classes are removed only when the last tour closes and only if this layer added them.
-const tourBodyLock: {
-  addedOverflowXClip: boolean;
-  addedRelative: boolean;
-  count: number;
-} = {
-  addedOverflowXClip: false,
-  addedRelative: false,
-  count: 0,
-};
-
-const acquireTourBodyLock = () => {
-  if (tourBodyLock.count === 0) {
-    if (!document.body.classList.contains("relative")) {
-      document.body.classList.add("relative");
-      tourBodyLock.addedRelative = true;
-    }
-
-    if (!document.body.classList.contains("overflow-x-clip")) {
-      document.body.classList.add("overflow-x-clip");
-      tourBodyLock.addedOverflowXClip = true;
-    }
-  }
-
-  tourBodyLock.count += 1;
-};
-
-const releaseTourBodyLock = () => {
-  if (tourBodyLock.count === 0) {
-    return;
-  }
-
-  tourBodyLock.count -= 1;
-
-  if (tourBodyLock.count < 0) {
-    tourBodyLock.count = 0;
-  }
-
-  if (tourBodyLock.count !== 0) {
-    return;
-  }
-
-  if (tourBodyLock.addedRelative) {
-    document.body.classList.remove("relative");
-  }
-
-  if (tourBodyLock.addedOverflowXClip) {
-    document.body.classList.remove("overflow-x-clip");
-  }
-
-  tourBodyLock.addedRelative = false;
-  tourBodyLock.addedOverflowXClip = false;
-};
-
-const TourBodyRelative = () => {
-  const tour = useArkTourContext();
-
-  React.useEffect(() => {
-    if (!tour.open) {
-      return;
-    }
-
-    acquireTourBodyLock();
-
-    return releaseTourBodyLock;
-  }, [tour.open]);
-
-  return null;
-};
-
 export const Tour = (props: React.ComponentProps<typeof ArkTour.Root>) => {
   const { children, lazyMount = true, unmountOnExit = true, ...rest } = props;
 
@@ -114,7 +44,6 @@ export const Tour = (props: React.ComponentProps<typeof ArkTour.Root>) => {
       unmountOnExit={unmountOnExit}
       {...rest}
     >
-      <TourBodyRelative />
       {children}
     </ArkTour.Root>
   );
@@ -132,6 +61,9 @@ export const TourTrigger = (props: React.ComponentProps<typeof ark.button>) => {
       {...rest}
       onClick={(event) => {
         onClick?.(event);
+        if (event.defaultPrevented) {
+          return;
+        }
         tour.start();
       }}
     />
@@ -151,8 +83,7 @@ export const TourOverlay = (
     <ArkTour.Backdrop
       className={cn(
         dialogOverlayVariants(),
-        "[--tour-z-index:calc(50+var(--layer-index,0))]",
-        "z-[calc(var(--tour-layer)+var(--tour-z-index))]",
+        "z-[calc(var(--tour-layer)+50+var(--layer-index,0))]",
         "duration-initial",
         className
       )}
@@ -162,8 +93,40 @@ export const TourOverlay = (
   );
 };
 
+export const tourPositionerVariants = tv({
+  base: [
+    "z-[calc(var(--tour-layer)+50+var(--layer-index,0))]",
+    "data-[type=dialog]:fixed data-[type=dialog]:inset-0",
+    "data-[type=tooltip]:absolute",
+    "data-[type=tooltip]:max-w-[calc(100dvw-1rem)] data-[type=tooltip]:max-sm:min-w-0!",
+    "data-[type=floating]:fixed",
+    "data-[type=floating]:data-[placement*=top]:top-6",
+    "data-[type=floating]:data-[placement*=bottom]:bottom-6",
+    "data-[type=floating]:data-[placement*=start]:inset-s-6",
+    "data-[type=floating]:data-[placement*=end]:inset-e-6",
+    "data-[type=floating]:w-[min(28rem,calc(100vw-3rem))]",
+  ],
+  defaultVariants: {
+    bottomStickOnMobile: true,
+  },
+  variants: {
+    bottomStickOnMobile: {
+      false: [
+        "data-[type=dialog]:flex data-[type=dialog]:items-center data-[type=dialog]:justify-center",
+      ],
+      true: [
+        "data-[type=dialog]:max-sm:h-svh data-[type=dialog]:max-sm:w-screen",
+        "data-[type=dialog]:max-sm:grid data-[type=dialog]:max-sm:grid-rows-[1fr_auto] data-[type=dialog]:max-sm:justify-items-center",
+        "data-[type=dialog]:max-sm:p-0 data-[type=dialog]:max-sm:pt-12",
+        "data-[type=dialog]:sm:flex data-[type=dialog]:sm:items-center data-[type=dialog]:sm:justify-center",
+      ],
+    },
+  },
+});
+
 interface TourPositionerProps
-  extends React.ComponentProps<typeof ArkTour.Positioner> {
+  extends React.ComponentProps<typeof ArkTour.Positioner>,
+    VariantProps<typeof tourPositionerVariants> {
   /**
    * Stick dialog steps to the bottom of the screen on mobile
    *
@@ -177,37 +140,62 @@ export const TourPositioner = (props: TourPositionerProps) => {
 
   return (
     <ArkTour.Positioner
-      className={cn(
-        "[--tour-z-index:calc(50+var(--layer-index,0))]",
-        "z-[calc(var(--tour-layer)+var(--tour-z-index))]",
-        "data-[type=dialog]:fixed data-[type=dialog]:inset-0",
-        "data-[type=tooltip]:absolute",
-        "data-[type=tooltip]:max-w-[calc(100dvw-1rem)] data-[type=tooltip]:max-sm:min-w-0!",
-        "data-[type=floating]:fixed",
-        "data-[type=floating]:data-[placement*=top]:top-6",
-        "data-[type=floating]:data-[placement*=bottom]:bottom-6",
-        "data-[type=floating]:data-[placement*=start]:inset-s-6",
-        "data-[type=floating]:data-[placement*=end]:inset-e-6",
-        "data-[type=floating]:w-[min(28rem,calc(100vw-3rem))]",
-        bottomStickOnMobile &&
-          "data-[type=dialog]:max-sm:h-svh data-[type=dialog]:max-sm:w-screen",
-        bottomStickOnMobile
-          ? "data-[type=dialog]:max-sm:grid data-[type=dialog]:max-sm:grid-rows-[1fr_auto] data-[type=dialog]:max-sm:justify-items-center"
-          : "data-[type=dialog]:flex data-[type=dialog]:items-center data-[type=dialog]:justify-center",
-        bottomStickOnMobile &&
-          "data-[type=dialog]:max-sm:p-0 data-[type=dialog]:max-sm:pt-12",
-        bottomStickOnMobile &&
-          "data-[type=dialog]:sm:flex data-[type=dialog]:sm:items-center data-[type=dialog]:sm:justify-center",
-        className
-      )}
+      className={cn(tourPositionerVariants({ bottomStickOnMobile }), className)}
       data-slot="tour-positioner"
       {...rest}
     />
   );
 };
 
+export const tourContentVariants = tv({
+  defaultVariants: {
+    bottomStickOnMobile: true,
+  },
+  slots: {
+    content: [
+      "[--space:--spacing(4)]",
+      "relative z-[calc(var(--tour-layer,2)+50+var(--layer-index,0))]",
+      "w-full max-w-md",
+      "data-[type=tooltip]:w-fit data-[type=tooltip]:max-w-[min(28rem,calc(100dvw-2rem))] data-[type=tooltip]:max-sm:min-w-0 data-[type=tooltip]:sm:min-w-xs",
+      "outline-hidden",
+      "origin-center data-[type=tooltip]:origin-(--transform-origin)",
+      "duration-200 ease-out",
+      "data-[state=closed]:animate-out data-[state=open]:animate-in",
+      "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
+      "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
+      "motion-reduce:animate-none",
+    ],
+    panel: [
+      "relative",
+      "flex flex-col",
+      "bg-popover",
+      "text-popover-foreground",
+      "rounded-2xl border shadow-lg/4",
+      "overflow-hidden",
+    ],
+  },
+  variants: {
+    bottomStickOnMobile: {
+      true: {
+        content: [
+          "data-[type=dialog]:max-sm:row-start-2 data-[type=dialog]:max-sm:min-w-0 data-[type=dialog]:max-sm:max-w-none",
+          "data-[type=dialog]:max-sm:data-[state=closed]:slide-out-to-bottom-5 data-[type=dialog]:max-sm:data-[state=closed]:zoom-out-100",
+          "data-[type=dialog]:max-sm:data-[state=open]:slide-in-from-bottom-5 data-[type=dialog]:max-sm:data-[state=open]:zoom-in-100",
+        ],
+        panel: [
+          "in-data-[type=dialog]:max-sm:max-h-[calc(100svh-3rem)] in-data-[type=dialog]:max-sm:min-h-0",
+          "in-data-[type=dialog]:max-sm:pb-[env(safe-area-inset-bottom,0px)]",
+          "in-data-[type=dialog]:max-sm:rounded-none in-data-[type=dialog]:max-sm:rounded-t-2xl in-data-[type=dialog]:max-sm:border-x-0 in-data-[type=dialog]:max-sm:border-t in-data-[type=dialog]:max-sm:border-b-0",
+          "in-data-[type=dialog]:max-sm:**:data-[slot=dialog-footer]:rounded-none in-data-[type=dialog]:max-sm:**:data-[slot=tour-actions]:rounded-none in-data-[type=dialog]:max-sm:**:data-[slot=tour-control]:rounded-none",
+        ],
+      },
+    },
+  },
+});
+
 interface TourContentProps
-  extends React.ComponentProps<typeof ArkTour.Content> {
+  extends React.ComponentProps<typeof ArkTour.Content>,
+    VariantProps<typeof tourContentVariants> {
   /**
    * Stick dialog steps to the bottom of the screen on mobile
    *
@@ -238,53 +226,18 @@ export const TourContent = (props: TourContentProps) => {
     ...rest
   } = props;
 
+  const { content, panel } = tourContentVariants({ bottomStickOnMobile });
+
   return (
     <Portal>
       <TourOverlay />
       <TourPositioner bottomStickOnMobile={bottomStickOnMobile}>
         <ArkTour.Content
-          className={cn(
-            "[--space:--spacing(4)]",
-            "[--tour-z-index:calc(50+var(--layer-index,0))]",
-            "relative z-[calc(var(--tour-layer,2)+var(--tour-z-index))]",
-            "w-full max-w-md",
-            "data-[type=tooltip]:w-fit data-[type=tooltip]:max-w-[min(28rem,calc(100dvw-2rem))] data-[type=tooltip]:max-sm:min-w-0 data-[type=tooltip]:sm:min-w-xs",
-            bottomStickOnMobile &&
-              "data-[type=dialog]:max-sm:row-start-2 data-[type=dialog]:max-sm:min-w-0 data-[type=dialog]:max-sm:max-w-none",
-            "outline-hidden",
-            "origin-center data-[type=tooltip]:origin-(--transform-origin)",
-            "duration-200 ease-out",
-            "data-[state=closed]:animate-out data-[state=open]:animate-in",
-            "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-            "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
-            bottomStickOnMobile &&
-              "data-[type=dialog]:max-sm:data-[state=closed]:slide-out-to-bottom-5 data-[type=dialog]:max-sm:data-[state=closed]:zoom-out-100",
-            bottomStickOnMobile &&
-              "data-[type=dialog]:max-sm:data-[state=open]:slide-in-from-bottom-5 data-[type=dialog]:max-sm:data-[state=open]:zoom-in-100",
-            "motion-reduce:animate-none",
-            className
-          )}
+          className={cn(content(), className)}
           data-slot="tour-content"
           {...rest}
         >
-          <div
-            className={cn(
-              "relative",
-              bottomStickOnMobile &&
-                "in-data-[type=dialog]:max-sm:max-h-[calc(100svh-3rem)] in-data-[type=dialog]:max-sm:min-h-0",
-              "flex flex-col",
-              bottomStickOnMobile &&
-                "in-data-[type=dialog]:max-sm:pb-[env(safe-area-inset-bottom,0px)]",
-              "bg-popover",
-              "text-popover-foreground",
-              "rounded-2xl border shadow-lg/4",
-              bottomStickOnMobile &&
-                "in-data-[type=dialog]:max-sm:rounded-none in-data-[type=dialog]:max-sm:rounded-t-2xl in-data-[type=dialog]:max-sm:border-x-0 in-data-[type=dialog]:max-sm:border-t in-data-[type=dialog]:max-sm:border-b-0",
-              "overflow-hidden",
-              bottomStickOnMobile &&
-                "in-data-[type=dialog]:max-sm:**:data-[slot=dialog-footer]:rounded-none in-data-[type=dialog]:max-sm:**:data-[slot=tour-actions]:rounded-none in-data-[type=dialog]:max-sm:**:data-[slot=tour-control]:rounded-none"
-            )}
-          >
+          <div className={panel()}>
             {children}
 
             {!!showCloseButton && (
@@ -294,7 +247,7 @@ export const TourContent = (props: TourContentProps) => {
                   size="icon-md"
                   variant="ghost"
                 >
-                  <X aria-hidden="true" />
+                  <X aria-hidden />
 
                   <span className="sr-only">Close</span>
                 </Button>
@@ -333,9 +286,20 @@ export const TourArrow = (
   );
 };
 
-export const TourBody = (props: React.ComponentProps<typeof DialogBody>) => (
-  <DialogBody data-slot="tour-body" {...props} />
-);
+export const TourBody = (props: React.ComponentProps<typeof DialogBody>) => {
+  const { className, ...rest } = props;
+
+  return (
+    <DialogBody
+      className={cn(
+        "in-[[data-slot=tour-content]:has([data-slot=tour-header]:not(.sr-only))]:pt-1",
+        className
+      )}
+      data-slot="tour-body"
+      {...rest}
+    />
+  );
+};
 
 export const TourSpotlight = (
   props: React.ComponentProps<typeof ArkTour.Spotlight>
@@ -345,8 +309,7 @@ export const TourSpotlight = (
   return (
     <ArkTour.Spotlight
       className={cn(
-        "[--tour-z-index:calc(50+var(--layer-index,0))]",
-        "z-[calc(var(--tour-layer)+var(--tour-z-index))]",
+        "z-[calc(var(--tour-layer)+50+var(--layer-index,0))]",
         "border-2 border-ring/64 ring-2 ring-ring/24",
         className
       )}
@@ -374,7 +337,12 @@ export const TourHeader = (props: TourHeaderProps) => {
     <ark.div
       data-slot="tour-header"
       {...rest}
-      className={cn(dialogHeaderVariants(), className)}
+      className={cn(
+        dialogHeaderVariants(),
+        "in-[[data-slot=tour-content]:has([data-slot=tour-body])]:pb-3",
+        "max-sm:pb-4",
+        className
+      )}
     >
       {!!title && <TourTitle>{title}</TourTitle>}
       {!!description && <TourDescription>{description}</TourDescription>}
@@ -538,14 +506,14 @@ export const TourActions = (
                     >
                       {action.action === "prev" && (
                         <ChevronLeft
-                          aria-hidden="true"
+                          aria-hidden
                           className="size-3.5 rtl:rotate-180"
                         />
                       )}
                       {action.label}
                       {action.action === "next" && (
                         <ChevronRight
-                          aria-hidden="true"
+                          aria-hidden
                           className="size-3.5 rtl:rotate-180"
                         />
                       )}
@@ -591,7 +559,7 @@ export const TourPreviousStep = (
         size="sm"
         variant="outline"
       >
-        <ChevronLeft aria-hidden="true" className="size-3.5 rtl:rotate-180" />
+        <ChevronLeft aria-hidden className="size-3.5 rtl:rotate-180" />
         {prevAction.label}
       </Button>
     </TourActionTrigger>
@@ -632,10 +600,7 @@ export const TourNextStep = (
         {action.label}
 
         {action.action === "next" && (
-          <ChevronRight
-            aria-hidden="true"
-            className="size-3.5 rtl:rotate-180"
-          />
+          <ChevronRight aria-hidden className="size-3.5 rtl:rotate-180" />
         )}
       </Button>
     </TourActionTrigger>

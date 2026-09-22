@@ -20,7 +20,7 @@ const AlertDialogSmallWithMedia = () => (
     </AlertDialogTrigger>
     <AlertDialogContent size="sm">
       <AlertDialogHeader>
-        <BluetoothIcon aria-hidden="true" />
+        <BluetoothIcon aria-hidden />
         <AlertDialogTitle>Enable Bluetooth?</AlertDialogTitle>
         <AlertDialogDescription>
           Allow this device to connect to nearby Bluetooth accessories.

@@ -21,7 +21,7 @@ const Example = () => {
     <State>
       <StateHeader>
         <StateMedia variant="icon">
-          <FolderCodeIcon aria-hidden="true" />
+          <FolderCodeIcon aria-hidden />
         </StateMedia>
         <StateTitle asChild>
           <h2>{values.title}</h2>
@@ -41,8 +41,7 @@ const Example = () => {
         variant="link"
       >
         <a aria-label={values.learnLabel} href="#">
-          {values.learn}{" "}
-          <ArrowUpRightIcon aria-hidden="true" data-icon="inline-end" />
+          {values.learn} <ArrowUpRightIcon aria-hidden data-icon="inline-end" />
         </a>
       </Button>
     </State>

@@ -143,11 +143,7 @@ export const ToastItem = (props: ToastItemProps) => {
 
       <div className="flex items-center gap-2">
         {!!toastData.action && (
-          <ArkToast.ActionTrigger
-            asChild
-            data-slot="toast-action-trigger"
-            onClick={toastData.action.onClick}
-          >
+          <ArkToast.ActionTrigger asChild data-slot="toast-action-trigger">
             <Button size="sm" variant="secondary">
               {toastData.action.label}
             </Button>

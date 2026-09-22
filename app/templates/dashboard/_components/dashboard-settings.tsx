@@ -88,7 +88,7 @@ export const DashboardSettings = ({
                           isActive={page === value}
                           onClick={() => setPage(value)}
                         >
-                          <Icon aria-hidden="true" />
+                          <Icon aria-hidden />
                           <span>{label}</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
@@ -105,7 +105,7 @@ export const DashboardSettings = ({
           </SidebarInset>
         </SidebarProvider>
         <DialogFooter className="sm:justify-start">
-          <CheckIcon aria-hidden="true" className="h-lh w-3.5 text-primary" />
+          <CheckIcon aria-hidden className="h-lh w-3.5 text-primary" />
           <span className="text-muted-foreground text-sm">{lastSaved}</span>
         </DialogFooter>
       </DialogContent>

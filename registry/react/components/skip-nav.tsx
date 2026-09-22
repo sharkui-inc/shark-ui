@@ -31,8 +31,8 @@ export const SkipNavLink = (props: SkipNavLinkProps) => {
         className
       )}
       data-slot="skip-nav-link"
-      href={`#${id}`}
       {...rest}
+      href={`#${id}`}
     >
       {children ?? "Skip to content"}
     </ark.a>
@@ -57,8 +57,8 @@ export const SkipNavContent = (props: SkipNavContentProps) => {
       className={cn("outline-hidden", className)}
       data-slot="skip-nav-content"
       id={id}
-      tabIndex={-1}
       {...rest}
+      tabIndex={-1}
     />
   );
 };

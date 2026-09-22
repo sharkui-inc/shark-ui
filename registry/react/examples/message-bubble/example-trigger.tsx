@@ -38,13 +38,13 @@ const Example = () => (
         <MenuGroup>
           {actions.map((action) => (
             <MenuItem key={action.value} value={action.value}>
-              <action.icon aria-hidden="true" />
+              <action.icon aria-hidden />
               {action.label}
             </MenuItem>
           ))}
           <MenuSeparator />
           <MenuItem value="delete" variant="destructive">
-            <Trash2Icon aria-hidden="true" />
+            <Trash2Icon aria-hidden />
             Delete
           </MenuItem>
         </MenuGroup>

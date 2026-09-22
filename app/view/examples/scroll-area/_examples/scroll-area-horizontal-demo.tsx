@@ -23,7 +23,7 @@ const works: Artwork[] = [
 
 const ScrollAreaHorizontalDemo = () => (
   <ScrollArea
-    className="w-96 whitespace-nowrap rounded-md border"
+    className="w-full max-w-96 whitespace-nowrap rounded-md border"
     orientation="horizontal"
   >
     <div className="flex w-max gap-4 p-4">

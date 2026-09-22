@@ -49,7 +49,7 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton className="font-semibold" size="lg">
-              <IconTile aria-hidden="true" size="sm">
+              <IconTile aria-hidden size="sm">
                 S
               </IconTile>
               <span>Shark UI</span>
@@ -75,7 +75,7 @@ export function AppSidebar() {
                       isActive={item.label === "Introduction"}
                     >
                       <a href="#">
-                        <item.icon aria-hidden="true" />
+                        <item.icon aria-hidden />
                         <span>{item.label}</span>
                       </a>
                     </SidebarMenuButton>
@@ -91,7 +91,7 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <a href="#">
-                <LifeBuoyIcon aria-hidden="true" />
+                <LifeBuoyIcon aria-hidden />
                 <span>Support</span>
               </a>
             </SidebarMenuButton>

@@ -16,7 +16,7 @@ export const TooltipRootProvider = ArkTooltip.RootProvider;
 
 export const tooltipContentVariants = tv({
   base: [
-    "z-50 w-fit",
+    "z-[calc(50+var(--layer-index,0))] w-fit",
     "px-3 py-1.5",
     "has-[[data-slot=kbd],[data-slot=kbd-group]]:flex has-[[data-slot=kbd],[data-slot=kbd-group]]:items-center has-[[data-slot=kbd],[data-slot=kbd-group]]:gap-2",
     "has-[>:is([data-slot=kbd],[data-slot=kbd-group]):last-child]:pe-2",

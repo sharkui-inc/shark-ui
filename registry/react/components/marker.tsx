@@ -49,13 +49,13 @@ export const MarkerIcon = (props: React.ComponentProps<typeof ark.span>) => {
 
   return (
     <ark.span
-      aria-hidden="true"
       className={cn(
         "size-4 shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       data-slot="marker-icon"
       {...rest}
+      aria-hidden
     />
   );
 };

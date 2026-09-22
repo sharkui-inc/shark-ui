@@ -10,7 +10,7 @@ const Example = () => (
   <PlanItem className="max-w-md" collapsible defaultOpen status="error">
     <PlanItemTrigger title="Refresh the warehouse inventory cache">
       <CircleAlertIcon
-        aria-hidden="true"
+        aria-hidden
         className="size-3.5 shrink-0 text-destructive-foreground"
       />
       <span className="min-w-0 truncate font-medium">

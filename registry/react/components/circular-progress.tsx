@@ -86,7 +86,6 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
 
   return (
     <ark.svg
-      aria-hidden="true"
       className={cn(
         "block",
         "-rotate-90",
@@ -101,6 +100,7 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
       viewBox={`0 0 ${size} ${size}`}
       width={size}
       {...rest}
+      aria-hidden
     >
       <circle
         className="fill-none stroke-input"

@@ -20,7 +20,7 @@ const InputGroupInlineEnd = () => (
         type="password"
       />
       <InputGroupAddon align="inline-end">
-        <EyeOffIcon aria-hidden="true" />
+        <EyeOffIcon aria-hidden />
       </InputGroupAddon>
     </InputGroup>
     <FieldDescription>Icon positioned at the end.</FieldDescription>

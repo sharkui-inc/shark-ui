@@ -52,7 +52,7 @@ const AITemplatePage = () => (
     >
       <SidebarHeader className="border-b">
         <div className="flex items-center gap-2 px-2 py-2">
-          <IconTile aria-hidden="true" size="xs">
+          <IconTile aria-hidden size="xs">
             <MessageSquareIcon aria-hidden className="size-4" />
           </IconTile>
           <span className="font-semibold">New chat</span>
@@ -162,7 +162,7 @@ const AITemplatePage = () => (
                 type="submit"
                 variant="ghost"
               >
-                <ArrowUpIcon aria-hidden className="size-4" />
+                <ArrowUpIcon aria-hidden />
               </Button>
             </div>
             <p className="mt-2 text-center text-muted-foreground text-xs">

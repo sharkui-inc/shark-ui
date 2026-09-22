@@ -10,13 +10,13 @@ const ButtonRtlExample = () => (
     <Button variant="destructive">حذف</Button>
     <Button variant="outline">
       إرسال
-      <ArrowRightIcon aria-hidden="true" data-icon="inline-end" />
+      <ArrowRightIcon aria-hidden data-icon="inline-end" />
     </Button>
     <Button aria-label="إضافة" size="icon-md" variant="outline">
-      <PlusIcon aria-hidden="true" />
+      <PlusIcon aria-hidden />
     </Button>
     <Button variant="secondary">
-      <Spinner aria-hidden="true" data-icon="inline-start" />
+      <Spinner aria-hidden data-icon="inline-start" />
       جاري التحميل
     </Button>
   </div>

@@ -51,7 +51,7 @@ const Example = () => {
       {isOpen ? (
         <ApprovalCard onReject={handleReject} onSubmit={handleSubmit}>
           <ApprovalCardHeader>
-            <TerminalIcon aria-hidden="true" />
+            <TerminalIcon aria-hidden />
             <ApprovalCardTitle>Apply the staging migration?</ApprovalCardTitle>
             <ApprovalCardAction>
               <Button
@@ -60,7 +60,7 @@ const Example = () => {
                 size="icon-sm"
                 variant="ghost"
               >
-                <XIcon aria-hidden="true" />
+                <XIcon aria-hidden />
               </Button>
             </ApprovalCardAction>
           </ApprovalCardHeader>

@@ -44,10 +44,10 @@ const Example = () => {
         </SheetBody>
         <SheetFooter>
           <SheetClose asChild>
-            <Button variant="outline">{values.cancel}</Button>
+            <Button>{values.save}</Button>
           </SheetClose>
           <SheetClose asChild>
-            <Button>{values.save}</Button>
+            <Button variant="outline">{values.cancel}</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

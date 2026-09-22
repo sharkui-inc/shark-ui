@@ -65,10 +65,10 @@ const Example = () => (
               </FieldGroup>
             </DialogBody>
             <DialogFooter>
+              <Button type="submit">Save changes</Button>
               <DialogClose asChild>
                 <Button variant="ghost">Cancel</Button>
               </DialogClose>
-              <Button type="submit">Save changes</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

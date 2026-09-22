@@ -24,13 +24,13 @@ const AssistantActions = () => (
   <MessageFooter>
     <MessageActions>
       <MessageAction>
-        <CopyIcon aria-hidden="true" />
+        <CopyIcon aria-hidden />
       </MessageAction>
       <MessageAction>
-        <ThumbsUpIcon aria-hidden="true" />
+        <ThumbsUpIcon aria-hidden />
       </MessageAction>
       <MessageAction>
-        <ThumbsDownIcon aria-hidden="true" />
+        <ThumbsDownIcon aria-hidden />
       </MessageAction>
     </MessageActions>
   </MessageFooter>
@@ -53,7 +53,7 @@ export const ChatMessageItem = ({
           {!isUser && isStreaming && !text ? (
             <Marker role="status">
               <MarkerIcon>
-                <BotIcon aria-hidden="true" />
+                <BotIcon aria-hidden />
               </MarkerIcon>
               <MarkerContent className="shimmer">Thinking</MarkerContent>
             </Marker>

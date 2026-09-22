@@ -26,8 +26,6 @@ import {
   menuEmptyVariants,
   menuGroupLabelVariants,
   menuItemControlVariants,
-  menuItemHighlightVariants,
-  menuItemIconVariants,
   menuItemIndicatorVariants,
 } from "@/registry/react/components/menu";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
@@ -242,10 +240,7 @@ export const ComboboxButtonTrigger = (props: ComboboxButtonTriggerProps) => {
       >
         <span className="min-w-0 flex-1 truncate">{label}</span>
         {showTrigger ? (
-          <ChevronsUpDownIcon
-            aria-hidden="true"
-            className="size-3.5 shrink-0 opacity-64"
-          />
+          <ChevronsUpDownIcon aria-hidden className="shrink-0 opacity-64" />
         ) : null}
       </Button>
     </ArkCombobox.Trigger>
@@ -318,6 +313,7 @@ export const ComboboxChip = (props: ComboboxChipProps) => {
   const {
     className: removeClassName,
     onClick,
+    type = "button",
     ...removeRest
   } = removeProps ?? {};
 
@@ -339,13 +335,15 @@ export const ComboboxChip = (props: ComboboxChipProps) => {
         <InputGroupButton
           aria-label={`Remove ${value}`}
           className={cn(
-            "in-data-[size=lg]:size-4.5 in-data-[size=sm]:size-2.5 size-3.5",
+            "in-data-[size=lg]:size-5.5 in-data-[size=sm]:size-3.5 size-4.5",
             "shrink-0",
             "text-muted-foreground",
             "[&_svg:not([class*='size-'])]:size-2 in-data-[size=lg]:[&_svg:not([class*='size-'])]:size-2.5 in-data-[size=sm]:[&_svg:not([class*='size-'])]:size-1.5",
             "hover:text-foreground",
             removeClassName
           )}
+          size="icon-xs"
+          {...removeRest}
           onClick={(event) => {
             onClick?.(event);
 
@@ -353,9 +351,7 @@ export const ComboboxChip = (props: ComboboxChipProps) => {
               clearValue(value);
             }
           }}
-          size="icon-xs"
-          type="button"
-          {...removeRest}
+          type={type}
         >
           <XIcon aria-hidden />
         </InputGroupButton>
@@ -446,11 +442,10 @@ export const comboboxItemVariants = tv({
   base: [
     menuItemControlVariants(),
     inputItemVariants(),
-    menuItemIconVariants(),
     "select-none",
     "cursor-default",
     "outline-hidden",
-    menuItemHighlightVariants(),
+    "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
     "[&_svg:not([class*='text-'])]:text-muted-foreground",
   ],
@@ -468,19 +463,20 @@ interface ComboboxItemProps
 
 export const ComboboxItem = (props: ComboboxItemProps) => {
   const { showIndicator = true, className, children, ...rest } = props;
+  const { item, indicator } = menuItemIndicatorVariants();
 
   return (
     <ArkCombobox.Item
-      className={cn(comboboxItemVariants(), className, showIndicator && "pe-8")}
+      className={cn(comboboxItemVariants(), className, showIndicator && item())}
       data-slot="combobox-item"
-      persistFocus
       {...rest}
+      persistFocus
     >
       {children}
 
       {showIndicator ? (
         <ArkCombobox.ItemIndicator
-          className={menuItemIndicatorVariants()}
+          className={indicator()}
           data-slot="combobox-item-indicator"
         >
           <CheckIcon />

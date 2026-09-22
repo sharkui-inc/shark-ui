@@ -51,7 +51,7 @@ const Example = () => {
           size="icon-md"
           title="Add to project"
         >
-          <PlusIcon aria-hidden="true" />
+          <PlusIcon aria-hidden />
         </Button>
         <Button
           aria-label="Remove selected people from the project"
@@ -66,7 +66,7 @@ const Example = () => {
           title="Remove from project"
           variant="outline"
         >
-          <MinusIcon aria-hidden="true" />
+          <MinusIcon aria-hidden />
         </Button>
       </div>
       <MemberList

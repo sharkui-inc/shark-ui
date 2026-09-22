@@ -88,8 +88,9 @@ interface PlanHeaderProps
 }
 
 export const PlanHeader = (props: PlanHeaderProps) => {
-  const { status } = usePlan();
   const { title, className, children, description, ...rest } = props;
+
+  const { status } = usePlan();
 
   return (
     <CollapsibleTrigger
@@ -105,7 +106,7 @@ export const PlanHeader = (props: PlanHeaderProps) => {
       {...rest}
     >
       <ListChecksIcon
-        aria-hidden="true"
+        aria-hidden
         className="h-lh w-4 shrink-0 self-start text-muted-foreground"
       />
       <span
@@ -180,10 +181,15 @@ export const PlanItem = (props: PlanItemProps) => {
       return;
     }
 
+    const was = previousStatus.current;
     previousStatus.current = status;
 
-    if (!isOpenControlled) {
-      setUncontrolledOpen(status === "in-progress");
+    if (
+      !isOpenControlled &&
+      status === "in-progress" &&
+      was !== "in-progress"
+    ) {
+      setUncontrolledOpen(true);
     }
   }, [isOpenControlled, status]);
 
@@ -265,9 +271,9 @@ export const PlanItemTrigger = (props: PlanItemTriggerProps) => {
           className
         )}
         data-slot="plan-item-trigger"
-        disabled
         type="button"
         {...rest}
+        disabled
       >
         {content}
       </ark.button>
@@ -336,11 +342,11 @@ export const PlanItemDetailFile = (
         className
       )}
       data-slot="plan-item-detail-file"
+      {...rest}
       dir="ltr"
       size="sm"
       style={{ unicodeBidi: "isolate", ...style }}
       variant={variant}
-      {...rest}
     />
   );
 };
@@ -386,10 +392,7 @@ const PlanStatusIcon = ({
 }) => {
   if (status === "in-progress") {
     return (
-      <Spinner
-        aria-hidden="true"
-        className={cn("size-3.5 shrink-0", className)}
-      />
+      <Spinner aria-hidden className={cn("size-3.5 shrink-0", className)} />
     );
   }
 
@@ -403,7 +406,7 @@ const PlanStatusIcon = ({
 
   return (
     <Icon
-      aria-hidden="true"
+      aria-hidden
       className={cn(
         "size-3.5 shrink-0",
         status === "completed" && "text-success-foreground",

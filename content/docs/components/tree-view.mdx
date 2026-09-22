@@ -126,7 +126,7 @@ const TreeNode = (props: React.ComponentProps<typeof TreeViewNode>) => {
 
 ## Controlled
 
-Use `selectedValue` and `onSelectionChange` to control the selected node and react to selection changes.
+Use `selectedValue` and `onSelectionChange` to control selection.
 
 <ComponentPreview componentName="tree-view" fileName="example-controlled" />
 
@@ -134,9 +134,7 @@ Use `selectedValue` and `onSelectionChange` to control the selected node and rea
 
 ### Multiple selection
 
-Use `selectionMode="multiple"` to allow selecting multiple nodes. 
-
-Hold `Shift` and `click` to select a range, or use `Ctrl`/`Cmd`+`click` to toggle individual nodes.
+Use `selectionMode="multiple"`.
 
 <ComponentPreview componentName="tree-view" fileName="example-multiple-selection" />
 
@@ -148,7 +146,7 @@ Right-click on tree items to show a context menu.
 
 ### Renaming nodes
 
-Use the `canRename` prop and `onRenameComplete` callback to enable inline renaming of nodes. Press F2 to activate rename mode on the focused node.
+Use `canRename` and `onRenameComplete` for inline rename.
 
 <ComponentPreview componentName="tree-view" fileName="example-rename" />
 
@@ -160,7 +158,7 @@ Use the `checkedValue` and `onCheckedChange` props to control the checked nodes.
 
 ### Links
 
-Tree items can be rendered as links. Use `asChild` on `TreeViewContent` and wrap an `<a>` element with `TreeViewItem` inside.
+Use `asChild` on `TreeViewContent` with an `<a>` inside `TreeViewItem`.
 
 <ComponentPreview componentName="tree-view" fileName="example-links" />
 
@@ -180,7 +178,7 @@ There are three ways to customize icons:
 
 ### Folder icons
 
-Use the `icon` and `expandedIcon` props on `TreeViewBranchItem` to customize folder icons. Pass `null` to hide the icon.
+Use `icon` and `expandedIcon` on `TreeViewBranchItem`. Pass `null` to hide.
 
 <ComponentPreview componentName="tree-view" fileName="example-custom-icons-folder" />
 
@@ -192,7 +190,7 @@ Pass the `icon` prop to `TreeViewItem` to override the icon for a specific leaf 
 
 ### With file extensions
 
-Use the `fileIcons` prop on `TreeView` with `createFileIcons` to map file extensions to icon components. Icons are resolved from each node's id; unmatched extensions fall back to `FileIcon`.
+Use `fileIcons` with `createFileIcons` to map extensions to icons.
 
 <ComponentPreview componentName="tree-view" fileName="example-custom-icons" />
 
@@ -380,6 +378,9 @@ Provides a TreeView API created with `useTreeView` to descendant components.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `value` | `UseTreeViewReturn` | **required** |
+| `fileIcons` | `Record<string, React.JSX.ElementType \| null>` | `-` |
+
+Pass the same `fileIcons` you would use on `TreeView` so leaf items resolve extension icons under the headless path.
 
 ### TreeViewBranchIndicator
 

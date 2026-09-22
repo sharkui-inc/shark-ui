@@ -35,7 +35,7 @@ const Example = () => {
     <div className="w-full max-w-lg">
       <ApprovalCard onReject={handleReject} onSubmit={handleSubmit}>
         <ApprovalCardHeader>
-          <PlugIcon aria-hidden="true" />
+          <PlugIcon aria-hidden />
           <ApprovalCardTitle>Create an issue on GitHub?</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent>

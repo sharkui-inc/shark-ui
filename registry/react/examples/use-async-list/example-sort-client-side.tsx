@@ -103,7 +103,7 @@ const UseAsyncListDemo = () => {
                   >
                     {label}
                     <Icon
-                      aria-hidden="true"
+                      aria-hidden
                       className="size-3.5"
                       data-icon="inline-end"
                     />

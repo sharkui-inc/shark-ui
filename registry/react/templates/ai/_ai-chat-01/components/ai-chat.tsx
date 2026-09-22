@@ -312,7 +312,7 @@ export const AIChat = () => {
                   size="icon-xs"
                   variant="ghost"
                 >
-                  <EllipsisIcon aria-hidden="true" />
+                  <EllipsisIcon aria-hidden />
                 </Button>
               </div>
             </header>
@@ -352,7 +352,7 @@ export const AIChat = () => {
                                   );
                                 }}
                               >
-                                <Trash2Icon aria-hidden="true" />
+                                <Trash2Icon aria-hidden />
                               </QueueItemAction>
                             </QueueItemActions>
                           </QueueItem>

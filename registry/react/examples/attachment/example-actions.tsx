@@ -20,7 +20,7 @@ const Example = () => (
       </AttachmentContent>
       <AttachmentActions>
         <AttachmentAction aria-label="Download research-summary.pdf">
-          <DownloadIcon aria-hidden="true" />
+          <DownloadIcon aria-hidden />
         </AttachmentAction>
         <AttachmentRemove aria-label="Remove research-summary.pdf" />
       </AttachmentActions>

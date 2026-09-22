@@ -11,7 +11,7 @@ import {
 } from "@/registry/react/components/tabs";
 
 const TabsDemo = () => (
-  <Tabs className="w-[400px]" defaultValue="overview">
+  <Tabs className="w-full max-w-96" defaultValue="overview">
     <TabsList>
       {tabs.map((tab) => (
         <TabsTrigger key={tab.value} value={tab.value}>

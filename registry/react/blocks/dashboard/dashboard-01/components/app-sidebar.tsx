@@ -49,8 +49,8 @@ export const AppSidebar = () => (
             className="font-semibold text-foreground"
             size="lg"
           >
-            <IconTile aria-hidden="true" size="sm">
-              <WavesIcon aria-hidden="true" className="size-4" />
+            <IconTile aria-hidden size="sm">
+              <WavesIcon aria-hidden className="size-4" />
             </IconTile>
             <span>Northstar</span>
           </SidebarMenuButton>
@@ -70,7 +70,7 @@ export const AppSidebar = () => (
                   className="text-foreground"
                   isActive={index === 0}
                 >
-                  <item.icon aria-hidden="true" className="size-4" />
+                  <item.icon aria-hidden className="size-4" />
                   <span>{item.label}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -87,7 +87,7 @@ export const AppSidebar = () => (
             {manageItems.map((item) => (
               <SidebarMenuItem key={item.label}>
                 <SidebarMenuButton className="text-foreground">
-                  <item.icon aria-hidden="true" className="size-4" />
+                  <item.icon aria-hidden className="size-4" />
                   <span>{item.label}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -115,7 +115,7 @@ export const AppSidebar = () => (
         </SidebarMenuItem>
         <SidebarMenuItem>
           <SidebarMenuButton className="text-foreground">
-            <LifeBuoyIcon aria-hidden="true" className="size-4" />
+            <LifeBuoyIcon aria-hidden className="size-4" />
             <span>Help and support</span>
           </SidebarMenuButton>
         </SidebarMenuItem>

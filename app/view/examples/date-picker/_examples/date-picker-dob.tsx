@@ -34,7 +34,7 @@ const DatePickerDob = () => {
       >
         <DatePickerTrigger asChild>
           <Button variant="outline">
-            <CalendarIcon aria-hidden="true" data-icon="inline-start" />
+            <CalendarIcon aria-hidden data-icon="inline-start" />
             <DatePickerValue placeholder="Select date" />
           </Button>
         </DatePickerTrigger>

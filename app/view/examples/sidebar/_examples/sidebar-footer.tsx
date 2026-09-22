@@ -32,7 +32,7 @@ const SidebarFooterDemo = () => (
               <MenuTrigger asChild>
                 <SidebarMenuButton className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
                   Username
-                  <ChevronUpIcon aria-hidden="true" className="ms-auto" />
+                  <ChevronUpIcon aria-hidden className="ms-auto" />
                 </SidebarMenuButton>
               </MenuTrigger>
               <MenuContent className="w-(--reference-width)">

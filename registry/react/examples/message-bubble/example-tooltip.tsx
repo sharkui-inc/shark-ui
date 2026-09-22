@@ -32,7 +32,7 @@ const Example = () => (
               size="icon-xs"
               variant="ghost"
             >
-              <CheckCheckIcon aria-hidden="true" />
+              <CheckCheckIcon aria-hidden />
             </Button>
           </TooltipTrigger>
           <TooltipContent>Read 10:05 AM</TooltipContent>

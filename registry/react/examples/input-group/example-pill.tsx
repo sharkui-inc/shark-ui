@@ -12,7 +12,7 @@ const Example = () => (
   <InputGroup className="max-w-xs" pill>
     <InputGroupInput aria-label="Search" placeholder="Search…" type="search" />
     <InputGroupAddon align="inline-start">
-      <SearchIcon aria-hidden="true" />
+      <SearchIcon aria-hidden />
     </InputGroupAddon>
     <InputGroupAddon align="inline-end">
       <InputGroupButton>Go</InputGroupButton>

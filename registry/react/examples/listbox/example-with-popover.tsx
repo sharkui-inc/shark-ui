@@ -49,11 +49,7 @@ const Example = () => {
     >
       <Popover onOpenChange={({ open }) => setIsOpen(open)} open={isOpen}>
         <PopoverTrigger asChild>
-          <Button
-            className="justify-between"
-            clickEffect={false}
-            variant="outline"
-          >
+          <Button className="justify-between" variant="outline">
             <ListboxValueText placeholder="Select framework" />
             <ChevronsUpDown className="size-4 opacity-64" />
           </Button>

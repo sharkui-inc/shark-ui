@@ -15,7 +15,7 @@ export const MailEmpty = ({ onCompose }: { onCompose: () => void }) => (
   <State className="border-0 bg-muted/16">
     <StateHeader>
       <StateMedia variant="icon">
-        <InboxIcon aria-hidden="true" />
+        <InboxIcon aria-hidden />
       </StateMedia>
       <StateTitle asChild>
         <h2>No email selected</h2>
@@ -26,7 +26,7 @@ export const MailEmpty = ({ onCompose }: { onCompose: () => void }) => (
     </StateHeader>
     <StateContent>
       <Button onClick={onCompose} size="sm" variant="outline">
-        <PenLineIcon aria-hidden="true" />
+        <PenLineIcon aria-hidden />
         New message
       </Button>
     </StateContent>

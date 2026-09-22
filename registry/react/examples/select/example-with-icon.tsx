@@ -13,7 +13,7 @@ import {
 const Example = () => (
   <Select collection={collection} defaultValue={["next"]}>
     <SelectTrigger className="w-48">
-      <CableIcon aria-hidden="true" />
+      <CableIcon aria-hidden />
       <SelectValue placeholder="Select framework" />
     </SelectTrigger>
     <SelectContent>

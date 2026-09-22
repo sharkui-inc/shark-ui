@@ -84,7 +84,7 @@ const EcommerceTemplate = () => (
         </div>
         <Button asChild size="icon-md" variant="ghost">
           <Link aria-label="Shopping cart" href="#">
-            <ShoppingCartIcon aria-hidden className="size-5" />
+            <ShoppingCartIcon aria-hidden />
           </Link>
         </Button>
       </div>

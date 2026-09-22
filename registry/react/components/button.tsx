@@ -152,8 +152,10 @@ export const Button = (props: ButtonProps) => {
     clickEffect = true,
     pill = false,
     isLoading = false,
+    disabled,
     className,
     children,
+    "aria-disabled": ariaDisabled,
     ...rest
   } = props;
 
@@ -167,10 +169,11 @@ export const Button = (props: ButtonProps) => {
       data-slot="button"
       data-state={isLoading ? "loading" : "idle"}
       data-variant={variant}
+      disabled={disabled || isLoading}
       type="button"
       {...rest}
-      aria-busy={isLoading}
-      aria-disabled={isLoading}
+      aria-busy={isLoading || undefined}
+      aria-disabled={isLoading || ariaDisabled}
     >
       {isLoading ? (
         <>

@@ -50,11 +50,7 @@ export const FocusTimerExample = (props: React.ComponentProps<"div">) => {
           startMs={isFocus ? focusMs : breakMs}
         >
           <Badge variant={isFocus ? "default" : "secondary"}>
-            {isFocus ? (
-              <TimerIcon aria-hidden="true" />
-            ) : (
-              <CoffeeIcon aria-hidden="true" />
-            )}
+            {isFocus ? <TimerIcon aria-hidden /> : <CoffeeIcon aria-hidden />}
             {isFocus ? "Focus" : "Break"}
           </Badge>
           <TimerArea>
@@ -75,7 +71,7 @@ export const FocusTimerExample = (props: React.ComponentProps<"div">) => {
                 <span className="inline-flex">
                   <TimerReset asChild hidden={false}>
                     <Button aria-label="Reset" size="icon-md" variant="ghost">
-                      <RotateCcwIcon aria-hidden="true" />
+                      <RotateCcwIcon aria-hidden />
                     </Button>
                   </TimerReset>
                 </span>
@@ -88,7 +84,7 @@ export const FocusTimerExample = (props: React.ComponentProps<"div">) => {
                   <span className="inline-flex">
                     <TimerPause asChild>
                       <Button aria-label="Pause" pill size="icon-lg">
-                        <PauseIcon aria-hidden="true" />
+                        <PauseIcon aria-hidden />
                       </Button>
                     </TimerPause>
                   </span>
@@ -100,10 +96,7 @@ export const FocusTimerExample = (props: React.ComponentProps<"div">) => {
                   <span className="inline-flex">
                     <TimerPlay asChild>
                       <Button aria-label="Play" pill size="icon-lg">
-                        <PlayIcon
-                          aria-hidden="true"
-                          className="translate-x-px"
-                        />
+                        <PlayIcon aria-hidden className="translate-x-px" />
                       </Button>
                     </TimerPlay>
                   </span>
@@ -119,7 +112,7 @@ export const FocusTimerExample = (props: React.ComponentProps<"div">) => {
                   size="icon-md"
                   variant="ghost"
                 >
-                  <SkipForwardIcon aria-hidden="true" />
+                  <SkipForwardIcon aria-hidden />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>

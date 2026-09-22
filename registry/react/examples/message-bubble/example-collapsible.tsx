@@ -31,7 +31,7 @@ const Example = () => (
               </p>
             </CollapsibleContent>
             <div
-              aria-hidden="true"
+              aria-hidden
               className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-(--message-bubble-surface) to-transparent group-data-[state=open]/collapsible:hidden"
             />
           </div>

@@ -34,7 +34,7 @@ export const ThumbCard = (props: ThumbCardProps) => {
       {...rest}
     >
       <CardHeader
-        aria-hidden="true"
+        aria-hidden
         className={cn(
           "flex h-auto min-h-18 flex-col pb-4",
           "**:data-[slot=card-title]:tracking-tight",
@@ -45,7 +45,7 @@ export const ThumbCard = (props: ThumbCardProps) => {
       />
 
       <CardContent
-        aria-hidden="true"
+        aria-hidden
         className={cn(
           "min-h-40 w-full flex-1",
           "flex items-center justify-center",

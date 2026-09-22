@@ -22,10 +22,10 @@ const Example = () => (
   <Queue className="w-full max-w-md">
     <QueueSection>
       <QueueSectionHeader title="Queue paused because you interrupted">
-        <PauseIcon aria-hidden="true" />
+        <PauseIcon aria-hidden />
         <QueueSectionAction>
           <QueueItemAction size="xs">
-            <PlayIcon aria-hidden="true" />
+            <PlayIcon aria-hidden />
             Resume
           </QueueItemAction>
         </QueueSectionAction>
@@ -33,15 +33,15 @@ const Example = () => (
       <QueueSectionContent>
         <QueueList>
           <QueueItem>
-            <ListPlusIcon aria-hidden="true" />
+            <ListPlusIcon aria-hidden />
             <QueueItemContent>Draft the queue panel update</QueueItemContent>
             <QueueItemActions>
               <QueueItemAction size="xs">Steer</QueueItemAction>
               <QueueItemAction aria-label="Remove Draft the queue panel update">
-                <Trash2Icon aria-hidden="true" />
+                <Trash2Icon aria-hidden />
               </QueueItemAction>
               <QueueItemAction aria-label="More actions for Draft the queue panel update">
-                <EllipsisIcon aria-hidden="true" />
+                <EllipsisIcon aria-hidden />
               </QueueItemAction>
             </QueueItemActions>
           </QueueItem>

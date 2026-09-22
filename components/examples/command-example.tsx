@@ -75,7 +75,7 @@ export const CommandExample = (props: React.ComponentProps<"div">) => {
 
                   return (
                     <CommandItem item={item} key={item.value}>
-                      <Icon aria-hidden="true" />
+                      <Icon aria-hidden />
                       {item.label}
                       <CommandShortcut>{item.shortcut}</CommandShortcut>
                     </CommandItem>

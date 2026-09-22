@@ -43,7 +43,7 @@ export function SidebarLeft() {
               size="lg"
               tooltip="Onda"
             >
-              <WavesHorizontalIcon aria-hidden="true" />
+              <WavesHorizontalIcon aria-hidden />
               <span>Onda</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -61,7 +61,7 @@ export function SidebarLeft() {
                   tooltip={item.label}
                 >
                   <a href="#">
-                    <item.icon aria-hidden="true" />
+                    <item.icon aria-hidden />
                     <span>{item.label}</span>
                   </a>
                 </SidebarMenuButton>
@@ -76,7 +76,7 @@ export function SidebarLeft() {
               <SidebarMenuItem key={workspace}>
                 <SidebarMenuButton asChild>
                   <a href="#">
-                    <FolderKanbanIcon aria-hidden="true" />
+                    <FolderKanbanIcon aria-hidden />
                     <span>{workspace}</span>
                   </a>
                 </SidebarMenuButton>
@@ -90,7 +90,7 @@ export function SidebarLeft() {
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Calendar">
               <a href="#">
-                <CalendarDaysIcon aria-hidden="true" />
+                <CalendarDaysIcon aria-hidden />
                 <span>Calendar</span>
               </a>
             </SidebarMenuButton>
@@ -98,7 +98,7 @@ export function SidebarLeft() {
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Settings">
               <a href="#">
-                <Settings2Icon aria-hidden="true" />
+                <Settings2Icon aria-hidden />
                 <span>Settings</span>
               </a>
             </SidebarMenuButton>

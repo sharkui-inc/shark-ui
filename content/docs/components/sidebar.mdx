@@ -172,7 +172,7 @@ export function AppSidebar() {
 
 ## Controlled
 
-Use the `onOpenChange` prop to control the sidebar open state.
+Use `open` / `onOpenChange` to control the sidebar. On mobile, the sheet follows the same `open` state — set `open={false}` to close it, and mobile toggles fire `onOpenChange`.
 
 ```tsx
 import React from "react";

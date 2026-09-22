@@ -63,7 +63,7 @@ const Example = () => {
             ) : (
               <>
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
-                  <Music2Icon aria-hidden="true" className="size-4" />
+                  <Music2Icon aria-hidden />
                 </span>
                 <span className="text-muted-foreground text-sm">
                   Queue is empty
@@ -79,11 +79,7 @@ const Example = () => {
               size="sm"
               variant="outline"
             >
-              <PlusIcon
-                aria-hidden="true"
-                className="size-4"
-                data-icon="inline-start"
-              />
+              <PlusIcon aria-hidden data-icon="inline-start" />
               Add
             </Button>
             <Button
@@ -92,11 +88,7 @@ const Example = () => {
               size="sm"
               variant="outline"
             >
-              <PencilIcon
-                aria-hidden="true"
-                className="size-4"
-                data-icon="inline-start"
-              />
+              <PencilIcon aria-hidden data-icon="inline-start" />
               Edit
             </Button>
             <Button
@@ -105,11 +97,7 @@ const Example = () => {
               size="sm"
               variant="outline"
             >
-              <Trash2Icon
-                aria-hidden="true"
-                className="size-4"
-                data-icon="inline-start"
-              />
+              <Trash2Icon aria-hidden data-icon="inline-start" />
               Delete
             </Button>
           </div>

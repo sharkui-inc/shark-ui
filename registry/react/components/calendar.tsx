@@ -14,7 +14,6 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { FormatNumber } from "@/registry/react/components/format";
-import { LocaleProvider, useLocale } from "@/registry/react/components/locale";
 import { nativeSelectVariants } from "@/registry/react/components/native-select";
 
 export const useCalendar = useArkDatePicker;
@@ -22,52 +21,49 @@ export const useCalendarContext = useArkDatePickerContext;
 export const CalendarRootProvider = ArkCalendar.RootProvider;
 
 export const Calendar = (
-  props: React.ComponentProps<typeof ArkCalendar.Root>
+  props: Omit<React.ComponentProps<typeof ArkCalendar.Root>, "inline">
 ) => {
-  const {
-    lazyMount = true,
-    unmountOnExit = true,
-    className,
-    locale: localeProp,
-    ...rest
-  } = props;
-  const { locale: providerLocale } = useLocale();
-  const locale = localeProp ?? providerLocale;
+  const { lazyMount = true, unmountOnExit = true, className, ...rest } = props;
 
   return (
-    <LocaleProvider locale={locale}>
-      <ArkCalendar.Root
-        className={cn("[--cell-size:--spacing(9)]", "w-fit", className)}
-        data-slot="calendar"
-        inline
-        lazyMount={lazyMount}
-        locale={locale}
-        unmountOnExit={unmountOnExit}
-        {...rest}
-      />
-    </LocaleProvider>
+    <ArkCalendar.Root
+      className={cn("[--cell-size:--spacing(9)]", "w-fit", className)}
+      data-slot="calendar"
+      lazyMount={lazyMount}
+      unmountOnExit={unmountOnExit}
+      {...rest}
+      inline
+    />
   );
 };
 
 export const CalendarControl = (
   props: React.ComponentProps<typeof ArkCalendar.Control>
-) => (
-  <ArkCalendar.Control
-    className="inline-flex items-center gap-2"
-    data-slot="calendar-control"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkCalendar.Control
+      className={cn("inline-flex items-center gap-2", className)}
+      data-slot="calendar-control"
+      {...rest}
+    />
+  );
+};
 
 export const CalendarLabel = (
   props: React.ComponentProps<typeof ArkCalendar.Label>
-) => (
-  <ArkCalendar.Label
-    className="font-medium text-sm"
-    data-slot="calendar-label"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkCalendar.Label
+      className={cn("font-medium text-sm", className)}
+      data-slot="calendar-label"
+      {...rest}
+    />
+  );
+};
 
 export const CalendarTrigger = (
   props: React.ComponentProps<typeof ArkCalendar.Trigger>
@@ -96,22 +92,25 @@ export const CalendarViewDate = (
 export const CalendarTodayTrigger = (
   props: React.ComponentProps<typeof Button>
 ) => {
-  const { variant = "outline", size = "lg", ...rest } = props;
+  const { variant = "outline", size = "lg", onClick, ...rest } = props;
+  const calendar = useCalendarContext();
 
   return (
-    <CalendarContext>
-      {(calendar) => (
-        <Button
-          data-slot="calendar-today-trigger"
-          onClick={() => calendar.selectToday()}
-          size={size}
-          variant={variant}
-          {...rest}
-        >
-          Today
-        </Button>
-      )}
-    </CalendarContext>
+    <Button
+      data-slot="calendar-today-trigger"
+      size={size}
+      variant={variant}
+      {...rest}
+      onClick={(event) => {
+        onClick?.(event);
+        if (event.defaultPrevented) {
+          return;
+        }
+        calendar.selectToday();
+      }}
+    >
+      Today
+    </Button>
   );
 };
 
@@ -130,7 +129,7 @@ export const CalendarYearSelect = (
       data-slot="calendar-year-select-wrapper"
     >
       <ArkCalendar.YearSelect
-        className={cn(nativeSelectVariants())}
+        className={cn(nativeSelectVariants(), className)}
         data-slot="calendar-year-select"
         {...rest}
       />
@@ -179,9 +178,7 @@ export const CalendarView = (
   );
 };
 
-export const CalendarContext = (
-  props: React.ComponentProps<typeof ArkCalendar.Context>
-) => <ArkCalendar.Context data-slot="calendar-context" {...props} />;
+export const CalendarContext = ArkCalendar.Context;
 
 export const CalendarViewControl = (
   props: React.ComponentProps<typeof ArkCalendar.ViewControl>
@@ -207,7 +204,7 @@ export const CalendarPrevTrigger = (
 ) => (
   <ArkCalendar.PrevTrigger asChild data-slot="calendar-prev-trigger" {...props}>
     <Button className="me-auto" size="icon-md" variant="ghost">
-      <ChevronLeftIcon aria-hidden className="size-4 rtl:rotate-180" />
+      <ChevronLeftIcon aria-hidden className="rtl:rotate-180" />
     </Button>
   </ArkCalendar.PrevTrigger>
 );
@@ -217,7 +214,7 @@ export const CalendarNextTrigger = (
 ) => (
   <ArkCalendar.NextTrigger asChild data-slot="calendar-next-trigger" {...props}>
     <Button className="ms-auto" size="icon-md" variant="ghost">
-      <ChevronRightIcon aria-hidden className="size-4 rtl:rotate-180" />
+      <ChevronRightIcon aria-hidden className="rtl:rotate-180" />
     </Button>
   </ArkCalendar.NextTrigger>
 );

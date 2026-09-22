@@ -88,7 +88,7 @@ export const ThemeSelectorFont = ({ slot }: { slot: ThemeFontSlot }) => {
       trigger={
         <>
           <span
-            aria-hidden="true"
+            aria-hidden
             className="w-4 shrink-0 text-center text-sm"
             style={{ fontFamily: selectedFont.family }}
           >

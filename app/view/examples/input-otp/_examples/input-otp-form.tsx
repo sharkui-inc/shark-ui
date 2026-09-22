@@ -33,7 +33,7 @@ const InputOTPForm = () => (
         <div className="flex items-center justify-between">
           <FieldLabel htmlFor="otp-verification">Verification code</FieldLabel>
           <Button size="xs" variant="outline">
-            <RefreshCwIcon aria-hidden="true" data-icon="inline-start" />
+            <RefreshCwIcon aria-hidden data-icon="inline-start" />
             Resend Code
           </Button>
         </div>

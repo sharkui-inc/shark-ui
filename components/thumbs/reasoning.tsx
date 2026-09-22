@@ -7,7 +7,7 @@ export const ReasoningThumb = (props: ThumbCardProps) => (
       <div className="flex items-center justify-between gap-2">
         <div className="h-2 w-28 rounded-full bg-primary" />
         <ChevronDownIcon
-          aria-hidden="true"
+          aria-hidden
           className="size-3 shrink-0 rotate-180 text-primary"
         />
       </div>

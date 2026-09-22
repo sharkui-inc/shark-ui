@@ -16,6 +16,7 @@
         "noJsxPropsBind": "off"
       },
       "suspicious": {
+        "noDocumentCookie": "off",
         "noDuplicateCustomProperties": "off"
       }
     }

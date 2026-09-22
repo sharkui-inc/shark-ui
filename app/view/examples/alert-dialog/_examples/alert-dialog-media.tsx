@@ -20,7 +20,7 @@ const AlertDialogMedia = () => (
     </AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>
-        <CircleFadingPlusIcon aria-hidden="true" />
+        <CircleFadingPlusIcon aria-hidden />
         <AlertDialogTitle>Share Project</AlertDialogTitle>
         <AlertDialogDescription>
           Share your project with your team to start collaborating.

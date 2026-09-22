@@ -15,7 +15,7 @@ export const TaskHeader = () => (
       </Badge>
     </div>
     <Button className="ms-auto">
-      <PlusIcon aria-hidden="true" />
+      <PlusIcon aria-hidden />
       New task
     </Button>
   </header>

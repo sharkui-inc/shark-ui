@@ -77,15 +77,13 @@ Use the `readOnly` prop to show a signature without allowing changes.
 
 ### Image preview
 
-Use the `onDrawEnd` callback to capture the signature as an image. 
+Use `onDrawEnd` to capture the signature as an image.
 
-The callback receives the `getDataUrl(type)` method that returns a promise that resolves to a data URL.
-
-<ComponentPreview componentName="signature-pad" fileName="example-image-preview" />
+<ComponentPreview componentName="signature-pad" fileName="example-image-preview" autoHeight />
 
 ### With field
 
-Wrap the signature pad in a `Field` with `FieldLabel` and `FieldHelper` for accessible form integration.
+Use [Field](/docs/components/field) with `FieldLabel` and `FieldHelper`.
 
 <ComponentPreview componentName="signature-pad" fileName="example-field" />
 
@@ -112,8 +110,6 @@ Root component. Canvas for drawing signatures. Manages strokes and export.
 | `onDraw` | `(details: DrawDetails) => void` | - |
 | `onDrawEnd` | `(details: DrawEndDetails) => void` | - |
 | `className` | `string` | - |
-
-When `name` is set, the composed control submits a PNG data URL after draw-end (empty string when cleared).
 
 ### SignaturePadRootProvider
 

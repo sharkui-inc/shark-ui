@@ -51,7 +51,7 @@ export const ThemeSelectorPreset = () => {
       renderItem={(item) => (
         <div className="flex items-center gap-2">
           <span
-            aria-hidden="true"
+            aria-hidden
             className={cn("size-4 rounded-full", item.swatchClass)}
           />
           {item.label}
@@ -59,7 +59,7 @@ export const ThemeSelectorPreset = () => {
       )}
       trigger={
         <span
-          aria-hidden="true"
+          aria-hidden
           className={cn(
             "size-4 shrink-0 rounded-full",
             activePreset?.swatchClass,

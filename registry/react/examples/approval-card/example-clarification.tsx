@@ -72,7 +72,7 @@ const Example = () => {
         shortcuts="letters"
       >
         <ApprovalCardHeader>
-          <MessageCircleQuestionIcon aria-hidden="true" />
+          <MessageCircleQuestionIcon aria-hidden />
           <ApprovalCardTitle>
             A couple of details before I plan
           </ApprovalCardTitle>

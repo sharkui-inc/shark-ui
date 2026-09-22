@@ -35,17 +35,17 @@ const QueueDemo = () => (
                 <QueueItemAction size="xs">
                   Send Now
                   <Kbd className="border-0 bg-transparent px-0">
-                    <CornerDownLeftIcon aria-hidden="true" />
+                    <CornerDownLeftIcon aria-hidden />
                   </Kbd>
                 </QueueItemAction>
                 <QueueItemAction aria-label={`Edit ${item}`}>
-                  <PencilIcon aria-hidden="true" />
+                  <PencilIcon aria-hidden />
                 </QueueItemAction>
                 <QueueItemAction aria-label={`Remove ${item}`}>
-                  <Trash2Icon aria-hidden="true" />
+                  <Trash2Icon aria-hidden />
                 </QueueItemAction>
                 <QueueItemAction aria-label={`More actions for ${item}`}>
-                  <EllipsisIcon aria-hidden="true" />
+                  <EllipsisIcon aria-hidden />
                 </QueueItemAction>
               </QueueItemActions>
             </QueueItem>

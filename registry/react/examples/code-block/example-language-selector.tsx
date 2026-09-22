@@ -8,12 +8,14 @@ import {
   CodeBlockContent,
   CodeBlockCopy,
   CodeBlockHeader,
-  CodeBlockLanguageSelector,
-  CodeBlockLanguageSelectorContent,
-  CodeBlockLanguageSelectorItem,
-  CodeBlockLanguageSelectorTrigger,
-  CodeBlockLanguageSelectorValue,
 } from "@/registry/react/components/code-block";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/registry/react/components/select";
 
 const Example = () => {
   const [language, setLanguage] = React.useState(["typescript"]);
@@ -24,28 +26,32 @@ const Example = () => {
 
   return (
     <CodeBlock
-      className="h-48 w-full max-w-lg"
+      className="w-full max-w-lg"
       code={snippet.code}
       language={snippet.language}
     >
       <CodeBlockHeader title={snippet.filename}>
         <CodeBlockActions>
-          <CodeBlockLanguageSelector
+          <Select
             collection={LANGUAGES}
             onValueChange={({ value }) => setLanguage(value)}
             value={language}
           >
-            <CodeBlockLanguageSelectorTrigger>
-              <CodeBlockLanguageSelectorValue />
-            </CodeBlockLanguageSelectorTrigger>
-            <CodeBlockLanguageSelectorContent>
+            <SelectTrigger
+              className="h-6 border-transparent bg-transparent px-2 text-sm shadow-none"
+              size="sm"
+              variant="ghost"
+            >
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
               {LANGUAGES.items.map((item) => (
-                <CodeBlockLanguageSelectorItem item={item} key={item.value}>
+                <SelectItem item={item} key={item.value}>
                   {item.label}
-                </CodeBlockLanguageSelectorItem>
+                </SelectItem>
               ))}
-            </CodeBlockLanguageSelectorContent>
-          </CodeBlockLanguageSelector>
+            </SelectContent>
+          </Select>
           <CodeBlockCopy />
         </CodeBlockActions>
       </CodeBlockHeader>

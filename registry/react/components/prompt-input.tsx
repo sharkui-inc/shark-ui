@@ -250,13 +250,11 @@ export const PromptInputSubmit = (
   const isSubmitted = status === "submitted";
   const isDisabled = disabled ?? (isSubmitted || !(isStreaming || hasText));
 
-  let submitIcon = <ArrowUpIcon aria-hidden="true" className="size-4" />;
+  let submitIcon = <ArrowUpIcon aria-hidden className="size-4" />;
   if (isSubmitted) {
     submitIcon = <Spinner />;
   } else if (isStreaming) {
-    submitIcon = (
-      <SquareIcon aria-hidden="true" className="size-3 fill-current" />
-    );
+    submitIcon = <SquareIcon aria-hidden className="size-3 fill-current" />;
   }
 
   return (
@@ -266,11 +264,14 @@ export const PromptInputSubmit = (
       data-slot="prompt-input-submit"
       disabled={isDisabled ? true : undefined}
       onClick={(event) => {
-        if (isStreaming) {
-          event.preventDefault();
-          onStop?.();
-        }
         onClick?.(event);
+
+        if (!isStreaming || event.defaultPrevented) {
+          return;
+        }
+
+        event.preventDefault();
+        onStop?.();
       }}
       size={size}
       type={isStreaming ? "button" : (type ?? "submit")}

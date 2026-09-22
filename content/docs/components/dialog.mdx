@@ -174,7 +174,7 @@ Use `initialFocusEl` to control which element receives focus when the dialog ope
 
 ### Autofocus
 
-Focus order is `initialFocusEl`, then `[data-autofocus]`, then the first tabbable element without `[data-no-autofocus]`. Mark chrome like the close button with `data-no-autofocus` so the real field receives focus.
+Order: `initialFocusEl`, then `[data-autofocus]`, then the first tabbable. Prefer DOM order for footer actions — see `DialogFooter`.
 
 <ComponentPreview componentName="dialog" fileName="example-autofocus" />
 
@@ -206,7 +206,7 @@ Default spacing is `--spacing(6)`.
 
 ### Sidebar
 
-Put a `Sidebar` inside `DialogContent` with a fixed height so switching pages does not resize the panel. Do not wrap this layout in `DialogBody` (that part is a single scroll area). Override `SidebarProvider`’s `min-h-svh` with `min-h-0`, and use `collapsible="none"` so the sidebar does not open a nested sheet.
+Put `Sidebar` in `DialogContent` with a fixed height. Skip `DialogBody`. Use `min-h-0` on `SidebarProvider` and `collapsible="none"`.
 
 <ComponentPreview componentName="dialog" fileName="example-sidebar" />
 
@@ -293,6 +293,8 @@ Scrollable body content.
 
 Footer area for action buttons.
 
+Put the primary action **first in the DOM**, then Cancel. The footer uses `flex-col` / `sm:flex-row-reverse` so the visual order stays Cancel on the left and Confirm on the right (Confirm on top on mobile). That way Tab and initial focus hit Confirm when there is no earlier field.
+
 | Prop | Type | Default |
 |------|------|---------|
 | `className` | `string` | `-` |
@@ -339,6 +341,9 @@ Provides a Dialog API created with `useDialog` to descendant components.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `value` | `UseDialogReturn` | **required** |
+| `modal` | `boolean` | `true` |
+
+`modal` gates `DialogOverlay` the same way as on `Dialog`. Pass the same value you used in `useDialog` when it is not the default.
 
 ### DialogPositioner
 

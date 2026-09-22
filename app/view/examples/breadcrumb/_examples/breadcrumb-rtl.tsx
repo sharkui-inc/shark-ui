@@ -24,14 +24,14 @@ const BreadcrumbRtl = () => (
         <BreadcrumbLink href="/">الرئيسية</BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator>
-        <DotIcon aria-hidden="true" />
+        <DotIcon aria-hidden />
       </BreadcrumbSeparator>
       <BreadcrumbItem>
         <Menu positioning={{ placement: "bottom-start" }}>
           <MenuTrigger asChild>
             <Button size="sm" variant="ghost">
               المكونات
-              <ChevronDownIcon className="size-3.5" data-icon="inline-end" />
+              <ChevronDownIcon data-icon="inline-end" />
             </Button>
           </MenuTrigger>
           <MenuContent className="w-44">
@@ -48,7 +48,7 @@ const BreadcrumbRtl = () => (
         </Menu>
       </BreadcrumbItem>
       <BreadcrumbSeparator>
-        <DotIcon aria-hidden="true" />
+        <DotIcon aria-hidden />
       </BreadcrumbSeparator>
       <BreadcrumbItem>
         <BreadcrumbPage>مسار التنقل</BreadcrumbPage>

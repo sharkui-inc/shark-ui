@@ -68,9 +68,9 @@ const CollapsibleSettings = () => {
           <CollapsibleTrigger asChild>
             <Button size="icon-md" variant="outline">
               {isOpen ? (
-                <MinimizeIcon aria-hidden="true" />
+                <MinimizeIcon aria-hidden />
               ) : (
-                <MaximizeIcon aria-hidden="true" />
+                <MaximizeIcon aria-hidden />
               )}
             </Button>
           </CollapsibleTrigger>

@@ -58,7 +58,7 @@ export const TaskFilters = ({
   <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
     <InputGroup className="lg:max-w-48">
       <InputGroupAddon>
-        <SearchIcon aria-hidden="true" />
+        <SearchIcon aria-hidden />
       </InputGroupAddon>
       <InputGroupInput
         aria-label="Search tasks"
@@ -124,7 +124,7 @@ export const TaskFilters = ({
           size="sm"
           variant="ghost"
         >
-          <XIcon aria-hidden="true" />
+          <XIcon aria-hidden />
           Clear
         </Button>
       ) : null}

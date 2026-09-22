@@ -47,7 +47,7 @@ export const ThemeSelectorRadius = () => {
       trigger={
         <>
           <span
-            aria-hidden="true"
+            aria-hidden
             className="size-4 shrink-0 bg-primary"
             style={{ borderRadius: selectedRadius?.cssVars.radius }}
           />
@@ -64,7 +64,7 @@ export const ThemeSelectorRadius = () => {
           showIndicator={false}
         >
           <span
-            aria-hidden="true"
+            aria-hidden
             className="size-9 bg-primary"
             style={{ borderRadius: item.cssVars.radius }}
           />

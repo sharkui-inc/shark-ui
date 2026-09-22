@@ -52,14 +52,14 @@ const Example = () => {
             </div>
           </DrawerBody>
           <DrawerFooter>
-            <div className="mx-auto flex w-full max-w-xs flex-col-reverse gap-2">
+            <div className="mx-auto flex w-full max-w-xs flex-col gap-2">
+              <DrawerClose asChild>
+                <Button className="w-full">Save</Button>
+              </DrawerClose>
               <DrawerClose asChild>
                 <Button className="w-full" variant="outline">
                   Cancel
                 </Button>
-              </DrawerClose>
-              <DrawerClose asChild>
-                <Button className="w-full">Save</Button>
               </DrawerClose>
             </div>
           </DrawerFooter>
@@ -83,10 +83,10 @@ const Example = () => {
         </DialogBody>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button>Save</Button>
           </DialogClose>
           <DialogClose asChild>
-            <Button>Save</Button>
+            <Button variant="outline">Cancel</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

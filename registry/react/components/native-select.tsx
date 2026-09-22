@@ -63,13 +63,13 @@ export const NativeSelect = (props: NativeSelectProps) => {
       data-slot="native-select-wrapper"
     >
       <ArkField.Select
-        aria-invalid={invalid}
         className={cn(nativeSelectVariants({ size }))}
         data-slot="native-select"
         {...rest}
+        aria-invalid={invalid || undefined}
       />
       <ChevronsUpDownIcon
-        aria-hidden="true"
+        aria-hidden
         className={cn(
           "absolute inset-e-2.5 top-1/2 -translate-y-1/2",
           "size-4"

@@ -23,13 +23,13 @@ const SidebarGroupDemo = () => (
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton>
-                  <LifeBuoyIcon aria-hidden="true" />
+                  <LifeBuoyIcon aria-hidden />
                   Support
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton>
-                  <SendIcon aria-hidden="true" />
+                  <SendIcon aria-hidden />
                   Feedback
                 </SidebarMenuButton>
               </SidebarMenuItem>

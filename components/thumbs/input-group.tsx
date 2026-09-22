@@ -5,10 +5,7 @@ export const InputGroupThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
     <div className="flex overflow-hidden rounded-lg border border-input bg-muted shadow-sm/4">
       <div className="flex size-8 shrink-0 items-center justify-center border-input border-e">
-        <SearchIcon
-          aria-hidden="true"
-          className="size-3 text-muted-foreground/64"
-        />
+        <SearchIcon aria-hidden className="size-3 text-muted-foreground/64" />
       </div>
       <div className="flex h-8 flex-1 items-center px-3">
         <div className="h-2 w-1/2 rounded-full bg-muted-foreground/24" />

@@ -103,13 +103,13 @@ const SideDeliveryDrawer = (props: {
         </DrawerBody>
         <DrawerFooter className="sm:flex-col">
           <DrawerClose asChild>
-            <Button className="w-full" pill variant="outline">
-              {copy.cancel}
+            <Button className="w-full" pill>
+              {copy.confirm}
             </Button>
           </DrawerClose>
           <DrawerClose asChild>
-            <Button className="w-full" pill>
-              {copy.confirm}
+            <Button className="w-full" pill variant="outline">
+              {copy.cancel}
             </Button>
           </DrawerClose>
         </DrawerFooter>

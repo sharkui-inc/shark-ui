@@ -155,7 +155,7 @@ const InputGroupWithTooltip = () => {
           <InputGroup>
             <InputGroupInput id="input-url-group" />
             <InputGroupAddon align="inline-end">
-              <InfoIcon aria-hidden="true" />
+              <InfoIcon aria-hidden />
             </InputGroupAddon>
           </InputGroup>
           <ButtonGroupText>.com</ButtonGroupText>

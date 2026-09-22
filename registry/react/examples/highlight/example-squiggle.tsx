@@ -19,7 +19,7 @@ const Example = () => {
           >
             {chunk.text}
             <svg
-              aria-hidden="true"
+              aria-hidden
               className="pointer-events-none absolute -bottom-1 left-0 select-none"
               viewBox="0 0 580 23"
               xmlns="http://www.w3.org/2000/svg"

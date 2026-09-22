@@ -93,7 +93,7 @@ export const ChatPromptComposer = ({
             <Menu positioning={{ placement: "top-start" }}>
               <MenuTrigger asChild>
                 <PromptInputButton aria-label="Add to prompt" size="icon-sm">
-                  <PlusIcon aria-hidden="true" />
+                  <PlusIcon aria-hidden />
                 </PromptInputButton>
               </MenuTrigger>
               <MenuContent className="w-52">
@@ -102,7 +102,7 @@ export const ChatPromptComposer = ({
 
                   return (
                     <MenuItem key={action.value} value={action.value}>
-                      <Icon aria-hidden="true" />
+                      <Icon aria-hidden />
                       {action.label}
                     </MenuItem>
                   );
@@ -116,7 +116,7 @@ export const ChatPromptComposer = ({
               value={access}
             >
               <SelectTrigger showTrigger={false} size="sm" variant="ghost">
-                <ShieldAlertIcon aria-hidden="true" />
+                <ShieldAlertIcon aria-hidden />
                 <SelectValue placeholder="Full access" />
               </SelectTrigger>
               <SelectContent>
@@ -173,21 +173,21 @@ export const ChatPromptComposer = ({
             </SelectContent>
           </Select>
           <PromptInputButton aria-label="Voice input" size="icon-sm">
-            <MicIcon aria-hidden="true" />
+            <MicIcon aria-hidden />
           </PromptInputButton>
           <PromptInputSubmit className="ms-2" size="icon-sm" />
         </PromptInputFooter>
         <PromptInputBottom>
           <Button className="text-muted-foreground" size="sm" variant="ghost">
-            <FolderIcon aria-hidden="true" />
+            <FolderIcon aria-hidden />
             shark-ui
           </Button>
           <Button className="text-muted-foreground" size="sm" variant="ghost">
-            <MonitorIcon aria-hidden="true" />
+            <MonitorIcon aria-hidden />
             Local
           </Button>
           <Button className="text-muted-foreground" size="sm" variant="ghost">
-            <GitBranchIcon aria-hidden="true" />
+            <GitBranchIcon aria-hidden />
             main
           </Button>
           <div className="ms-auto">

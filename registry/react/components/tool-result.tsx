@@ -56,18 +56,18 @@ const ToolResultStatusIcon = (props: { status: ToolResultStatus }) => {
 
   switch (status) {
     case "cancelled":
-      return <BanIcon aria-hidden="true" className="size-3" />;
+      return <BanIcon aria-hidden className="size-3" />;
     case "error":
-      return <CircleXIcon aria-hidden="true" className="size-3" />;
+      return <CircleXIcon aria-hidden className="size-3" />;
     case "running":
       return (
         <LoaderCircleIcon
-          aria-hidden="true"
+          aria-hidden
           className="size-3 animate-spin motion-reduce:animate-none"
         />
       );
     case "success":
-      return <CircleCheckIcon aria-hidden="true" className="size-3" />;
+      return <CircleCheckIcon aria-hidden className="size-3" />;
     default: {
       const _exhaustive: never = status;
       return _exhaustive;
@@ -87,12 +87,12 @@ export const ToolResult = (props: ToolResultProps) => {
   return (
     <ToolResultProvider value={value}>
       <Collapsible
-        aria-busy={status === "running"}
         className={cn("w-full min-w-0 text-sm", className)}
         data-slot="tool-result"
         data-status={status}
         defaultOpen={defaultOpen ?? status === "running"}
         {...rest}
+        aria-busy={status === "running"}
       />
     </ToolResultProvider>
   );
@@ -194,9 +194,9 @@ export const ToolResultName = (
         className
       )}
       data-slot="tool-result-name"
+      {...rest}
       dir="ltr"
       style={{ unicodeBidi: "isolate", ...style }}
-      {...rest}
     />
   );
 };

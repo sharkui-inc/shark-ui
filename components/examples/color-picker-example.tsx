@@ -73,7 +73,7 @@ export const ColorPickerExample = (props: React.ComponentProps<"div">) => {
           <ColorPickerControl className="w-full">
             <InputGroup>
               <InputGroupAddon align="inline-start">
-                <ColorPickerSwatchPreview aria-hidden="true" />
+                <ColorPickerSwatchPreview aria-hidden />
               </InputGroupAddon>
               <ColorPickerInput asChild channel="hex">
                 <InputGroupInput aria-label="Brand color" />
@@ -93,7 +93,7 @@ export const ColorPickerExample = (props: React.ComponentProps<"div">) => {
                       size="icon-xs"
                       variant="ghost"
                     >
-                      <CopyIcon aria-hidden="true" />
+                      <CopyIcon aria-hidden />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>Copy hex</TooltipContent>

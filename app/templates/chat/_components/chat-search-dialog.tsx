@@ -77,7 +77,7 @@ export const ChatSearchDialog = ({
 
                     return (
                       <CommandItem item={item} key={item.value}>
-                        <Icon aria-hidden="true" />
+                        <Icon aria-hidden />
                         <span className="truncate">{item.label}</span>
                         {item.shortcut ? (
                           <CommandShortcut>{item.shortcut}</CommandShortcut>

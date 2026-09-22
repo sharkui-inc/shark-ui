@@ -79,10 +79,10 @@ export const BreadcrumbPage = (
 
   return (
     <ark.span
-      aria-current="page"
       className={cn("font-normal text-foreground", className)}
       data-slot="breadcrumb-page"
       {...rest}
+      aria-current="page"
     />
   );
 };
@@ -94,11 +94,11 @@ export const BreadcrumbSeparator = (
 
   return (
     <ark.li
-      aria-hidden="true"
       className={cn("opacity-64 [&_svg]:size-4", className)}
       data-slot="breadcrumb-separator"
-      role="presentation"
       {...rest}
+      aria-hidden
+      role="presentation"
     >
       {children ?? <ChevronRightIcon className="size-4 rtl:rotate-180" />}
     </ark.li>
@@ -109,10 +109,10 @@ export const BreadcrumbEllipsis = (
   props: React.ComponentProps<typeof ark.span>
 ) => (
   <ark.span
-    aria-hidden="true"
     data-slot="breadcrumb-ellipsis"
-    role="presentation"
     {...props}
+    aria-hidden
+    role="presentation"
   >
     <MoreHorizontalIcon className="size-4" />
   </ark.span>

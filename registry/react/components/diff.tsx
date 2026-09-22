@@ -36,7 +36,7 @@ export const Diff = (props: React.ComponentProps<typeof ark.div>) => {
       className={cn(
         "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground shadow-xs/4",
         "flex flex-col",
-        "[--code-surface-header-height:--spacing(9)] [--code-surface-inline-padding:--spacing(3)] [--code-surface-line-height:--spacing(6)]",
+        "[--code-surface-gutter-min:--spacing(11)] [--code-surface-header-height:--spacing(9)] [--code-surface-inline-padding:--spacing(3)] [--code-surface-line-height:--spacing(6)]",
         className
       )}
       data-slot="diff"
@@ -58,13 +58,13 @@ export const DiffFile = (props: React.ComponentProps<typeof ark.span>) => {
   return (
     <ark.span
       className={cn(
-        "min-w-0 flex-1 truncate text-muted-foreground text-sm",
+        "min-w-0 flex-1 truncate text-muted-foreground text-sm [text-align:match-parent]",
         className
       )}
       data-slot="diff-file"
+      {...rest}
       dir="ltr"
       style={{ unicodeBidi: "isolate", ...style }}
-      {...rest}
     />
   );
 };
@@ -132,6 +132,7 @@ export const DiffStats = (props: DiffStatsProps) => {
       )}
       data-slot="diff-stats"
       {...rest}
+      dir="ltr"
     >
       <span className="text-success-foreground">+{added}</span>
       <span className="text-destructive-foreground">-{removed}</span>
@@ -151,11 +152,11 @@ export const DiffContent = (props: React.ComponentProps<typeof ark.div>) => {
         className
       )}
       data-slot="diff-content"
-      dir="ltr"
       {...rest}
+      dir="ltr"
     >
       <ScrollArea className="flex-1" dir="ltr" overscrollContain>
-        <div className="w-max min-w-full py-3 font-mono text-sm leading-(--code-surface-line-height)">
+        <div className="grid w-max min-w-full grid-cols-[minmax(var(--code-surface-gutter-min),max-content)_minmax(max-content,1fr)] py-3 font-mono text-sm leading-(--code-surface-line-height)">
           {children}
         </div>
       </ScrollArea>
@@ -165,8 +166,7 @@ export const DiffContent = (props: React.ComponentProps<typeof ark.div>) => {
 
 const diffLineVariants = tv({
   base: [
-    "min-h-(--code-surface-line-height) w-full min-w-max",
-    "flex items-stretch",
+    "col-span-2 grid min-h-(--code-surface-line-height) w-full min-w-max grid-cols-subgrid items-stretch",
   ],
   defaultVariants: {
     type: "context",
@@ -183,9 +183,8 @@ const diffLineVariants = tv({
 
 const diffGutterVariants = tv({
   base: [
-    // A diff is an explicitly LTR code surface, including its line-number gutter.
     "sticky left-0 z-1",
-    "flex w-11 shrink-0 items-center",
+    "flex w-full min-w-0 items-center",
     "bg-card",
     "before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:content-['']",
   ],
@@ -233,7 +232,7 @@ export const DiffLine = (props: DiffLineProps) => {
       <span className={diffGutterVariants({ type: lineType })}>
         <span
           className={cn(
-            "w-full pe-3",
+            "w-full px-(--code-surface-inline-padding)",
             "select-none text-end text-muted-foreground tabular-nums",
             lineType === "add" && "text-success-foreground",
             lineType === "delete" && "text-destructive-foreground"

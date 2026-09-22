@@ -13,7 +13,6 @@ import { Toggle, type ToggleProps } from "@/registry/react/components/toggle";
 
 export const useToggleGroup = useArkToggleGroup;
 export const useToggleGroupContext = useArkToggleGroupContext;
-export const ToggleGroupRootProvider = ArkToggleGroup.RootProvider;
 
 type ToggleGroupContextProps = Pick<
   ToggleProps,
@@ -32,6 +31,31 @@ const [ToggleGroupProvider, _useToggleGroup] =
     name: "ToggleGroupContext",
     providerName: "ToggleGroup",
   });
+
+export interface ToggleGroupRootProviderProps
+  extends React.ComponentProps<typeof ArkToggleGroup.RootProvider>,
+    ToggleGroupContextProps {}
+
+export const ToggleGroupRootProvider = (
+  props: ToggleGroupRootProviderProps
+) => {
+  const {
+    pill = false,
+    size = "md",
+    spacing = 0,
+    variant = "ghost",
+    children,
+    ...rest
+  } = props;
+
+  return (
+    <ToggleGroupProvider value={{ pill, size, spacing, variant }}>
+      <ArkToggleGroup.RootProvider {...rest}>
+        {children}
+      </ArkToggleGroup.RootProvider>
+    </ToggleGroupProvider>
+  );
+};
 
 interface ToggleGroupProps
   extends React.ComponentProps<typeof ArkToggleGroup.Root>,

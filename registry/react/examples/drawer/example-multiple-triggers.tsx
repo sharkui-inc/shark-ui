@@ -56,14 +56,14 @@ const Example = () => {
           ) : null}
         </DrawerBody>
         <DrawerFooter>
-          <div className="mx-auto flex w-full max-w-xs gap-2">
+          <div className="mx-auto flex w-full max-w-xs flex-col gap-2 sm:flex-row-reverse">
+            <DrawerClose asChild>
+              <Button className="flex-1">Save</Button>
+            </DrawerClose>
             <DrawerClose asChild>
               <Button className="flex-1" variant="outline">
                 Cancel
               </Button>
-            </DrawerClose>
-            <DrawerClose asChild>
-              <Button className="flex-1">Save</Button>
             </DrawerClose>
           </div>
         </DrawerFooter>

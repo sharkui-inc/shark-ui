@@ -47,7 +47,7 @@ export const MusicQueue = ({
               </ItemMedia>
               <ItemContent>
                 <ItemTitle className="text-primary">
-                  <AudioWaveformIcon aria-hidden="true" />
+                  <AudioWaveformIcon aria-hidden />
                   {currentTrack.title}
                 </ItemTitle>
                 <ItemDescription>{currentTrack.artist}</ItemDescription>

@@ -92,7 +92,7 @@ const PromptInputDemo = () => {
             <Menu positioning={{ placement: "top-start" }}>
               <MenuTrigger asChild>
                 <PromptInputButton aria-label="Add to prompt" size="icon-sm">
-                  <PlusIcon aria-hidden="true" />
+                  <PlusIcon aria-hidden />
                 </PromptInputButton>
               </MenuTrigger>
               <MenuContent>
@@ -122,7 +122,7 @@ const PromptInputDemo = () => {
               value={access}
             >
               <SelectTrigger showTrigger={false} size="sm" variant="ghost">
-                <ShieldAlertIcon aria-hidden="true" />
+                <ShieldAlertIcon aria-hidden />
                 <SelectValue placeholder="Full access" />
               </SelectTrigger>
               <SelectContent>
@@ -179,7 +179,7 @@ const PromptInputDemo = () => {
             </SelectContent>
           </Select>
           <PromptInputButton aria-label="Voice input" size="icon-sm">
-            <MicIcon aria-hidden="true" />
+            <MicIcon aria-hidden />
           </PromptInputButton>
           <PromptInputSubmit className="ms-2" size="icon-sm" />
         </PromptInputFooter>
@@ -189,11 +189,7 @@ const PromptInputDemo = () => {
             size="sm"
             variant="ghost"
           >
-            <FolderIcon
-              aria-hidden="true"
-              className="size-4"
-              data-icon="inline-start"
-            />
+            <FolderIcon aria-hidden data-icon="inline-start" />
             viajuntos
           </Button>
           <Button
@@ -201,11 +197,7 @@ const PromptInputDemo = () => {
             size="sm"
             variant="ghost"
           >
-            <MonitorIcon
-              aria-hidden="true"
-              className="size-4"
-              data-icon="inline-start"
-            />
+            <MonitorIcon aria-hidden data-icon="inline-start" />
             Local
           </Button>
           <Button
@@ -213,11 +205,7 @@ const PromptInputDemo = () => {
             size="sm"
             variant="ghost"
           >
-            <GitBranchIcon
-              aria-hidden="true"
-              className="size-4"
-              data-icon="inline-start"
-            />
+            <GitBranchIcon aria-hidden data-icon="inline-start" />
             main
           </Button>
           <div className="ms-auto">
@@ -286,37 +274,37 @@ const accessCollection = createListCollection({ items: accessLevels });
 const actionItems = [
   {
     group: "context",
-    icon: <PaperclipIcon aria-hidden="true" />,
+    icon: <PaperclipIcon aria-hidden />,
     label: "Attach files and folders",
     value: "files",
   },
   {
     group: "context",
-    icon: <ImagePlusIcon aria-hidden="true" />,
+    icon: <ImagePlusIcon aria-hidden />,
     label: "Add image or screenshot",
     value: "image",
   },
   {
     group: "context",
-    icon: <GlobeIcon aria-hidden="true" />,
+    icon: <GlobeIcon aria-hidden />,
     label: "Add web page",
     value: "web-page",
   },
   {
     group: "context",
-    icon: <FileTextIcon aria-hidden="true" />,
+    icon: <FileTextIcon aria-hidden />,
     label: "Add project instructions",
     value: "instructions",
   },
   {
     group: "agent",
-    icon: <ListTodoIcon aria-hidden="true" />,
+    icon: <ListTodoIcon aria-hidden />,
     label: "Plan implementation",
     value: "plan",
   },
   {
     group: "agent",
-    icon: <CircleHelpIcon aria-hidden="true" />,
+    icon: <CircleHelpIcon aria-hidden />,
     label: "Ask a question",
     value: "ask",
   },

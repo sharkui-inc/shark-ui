@@ -1,6 +1,7 @@
 {
   // "js/ts.tsdk.path": "node_modules/typescript/lib",
   "typescript.tsdk": "node_modules/typescript/lib",
+  "attribution": { "commit": "", "pr": "" },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "explicit",

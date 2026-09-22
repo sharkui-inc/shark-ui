@@ -74,10 +74,10 @@ const CollapsibleFileTree = () => {
               variant="ghost"
             >
               <ChevronRightIcon
-                aria-hidden="true"
+                aria-hidden
                 className="transition-transform group-data-[state=open]/collapsible:rotate-90"
               />
-              <FolderIcon aria-hidden="true" data-icon="inline-start" />
+              <FolderIcon aria-hidden data-icon="inline-start" />
               {fileItem.name}
             </Button>
           </CollapsibleTrigger>
@@ -97,7 +97,7 @@ const CollapsibleFileTree = () => {
         size="sm"
         variant="link"
       >
-        <FileIcon aria-hidden="true" data-icon="inline-start" />
+        <FileIcon aria-hidden data-icon="inline-start" />
         <span>{fileItem.name}</span>
       </Button>
     );

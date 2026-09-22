@@ -65,9 +65,9 @@ const tabsListVariants = tv({
       "data-[orientation=vertical]:flex-col",
     ],
     indicator: [
-      "absolute inset-s-0 bottom-0",
+      "absolute top-(--top) left-(--left)",
       "h-(--height) w-(--width)",
-      "transition-[width,translate] duration-150 ease-in-out",
+      "transition-[width,height,left,top] duration-150 ease-in-out",
       "motion-reduce:transition-none",
     ],
   },
@@ -84,13 +84,14 @@ const tabsListVariants = tv({
         base: [
           "data-[orientation=vertical]:px-1",
           "data-[orientation=horizontal]:py-1",
-          "*:data-[slot=tabs-tab]:hover:bg-accent",
+          "*:data-[slot=tabs-trigger]:hover:bg-accent",
         ],
         indicator: [
           "z-10",
-          "absolute bottom-0",
           "bg-primary",
+          "data-[orientation=horizontal]:top-[calc(var(--top)+var(--height)-1px)]",
           "data-[orientation=horizontal]:h-0.5",
+          "data-[orientation=vertical]:left-[calc(var(--left)+var(--width)-1px)]",
           "data-[orientation=vertical]:w-0.5",
         ],
       },

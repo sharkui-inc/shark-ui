@@ -51,7 +51,7 @@ export const HomeShowcase = (props: React.PropsWithChildren) => {
             <TooltipTrigger asChild>
               <Button asChild pill size="icon-sm" variant="outline">
                 <Link aria-label="Open theme builder" href="/themes">
-                  <PaletteIcon aria-hidden="true" />
+                  <PaletteIcon aria-hidden />
                 </Link>
               </Button>
             </TooltipTrigger>
@@ -68,7 +68,7 @@ export const HomeShowcase = (props: React.PropsWithChildren) => {
         {gallery}
         {gallery ? (
           <div
-            aria-hidden="true"
+            aria-hidden
             className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-48 bg-linear-to-t from-background via-background/80 to-transparent lg:h-64"
           />
         ) : null}
@@ -108,7 +108,7 @@ const HomeThemePicker = () => {
                   type="button"
                 >
                   <span
-                    aria-hidden="true"
+                    aria-hidden
                     className={cn(
                       "absolute inset-0 rounded-full",
                       preset.swatchClass
@@ -116,7 +116,7 @@ const HomeThemePicker = () => {
                   />
                   {selected ? (
                     <CheckIcon
-                      aria-hidden="true"
+                      aria-hidden
                       className="absolute inset-0 m-auto size-3 text-primary-foreground"
                     />
                   ) : null}

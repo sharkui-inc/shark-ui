@@ -22,7 +22,7 @@ const AuthTemplate = () => (
     <div className="flex flex-col gap-4 p-6 md:p-10">
       <div className="flex justify-center gap-2 md:justify-start">
         <a className="flex items-center gap-2 font-medium" href="#">
-          <IconTile aria-hidden="true" size="xs">
+          <IconTile aria-hidden size="xs">
             <WavesHorizontalIcon aria-hidden className="size-4" />
           </IconTile>
           Onda Inc.

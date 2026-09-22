@@ -32,7 +32,7 @@ const Example = () => {
           >
             <span className="flex items-center gap-2 font-medium text-sm">
               <ArrowRightIcon
-                aria-hidden="true"
+                aria-hidden
                 className="size-4 text-muted-foreground rtl:rotate-180"
               />
               Next step
@@ -44,7 +44,7 @@ const Example = () => {
           >
             <span className="flex items-center gap-2 font-medium text-sm">
               <ArrowLeftIcon
-                aria-hidden="true"
+                aria-hidden
                 className="size-4 text-muted-foreground rtl:rotate-180"
               />
               Previous step
@@ -55,10 +55,7 @@ const Example = () => {
             id="tour-keyboard-close"
           >
             <span className="flex items-center gap-2 font-medium text-sm">
-              <XIcon
-                aria-hidden="true"
-                className="size-4 text-muted-foreground"
-              />
+              <XIcon aria-hidden className="size-4 text-muted-foreground" />
               Close tour
             </span>
           </div>

@@ -17,7 +17,7 @@ export const ChatEmpty = ({
 }: ChatEmptyProps) => (
   <div className="flex min-h-svh flex-col items-center justify-center px-6 py-16 text-center">
     <span className="mb-5 grid size-8 place-items-center text-muted-foreground">
-      <BotIcon aria-hidden="true" className="size-8" />
+      <BotIcon aria-hidden className="size-8" />
     </span>
     <h2 className="font-medium text-lg">Hello {userName}</h2>
     <p className="mt-1 text-muted-foreground text-sm">

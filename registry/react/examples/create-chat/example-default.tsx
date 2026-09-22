@@ -92,7 +92,7 @@ const ChatThread = ({ onReset }: { onReset: () => void }) => {
             size="icon-sm"
             variant="outline"
           >
-            <RefreshCwIcon aria-hidden="true" />
+            <RefreshCwIcon aria-hidden />
           </Button>
         </CardAction>
       </CardHeader>
@@ -156,7 +156,7 @@ const ChatThread = ({ onReset }: { onReset: () => void }) => {
               <Menu positioning={{ placement: "top-start" }}>
                 <MenuTrigger asChild>
                   <PromptInputButton aria-label="Add to prompt" size="icon-xs">
-                    <PlusIcon aria-hidden="true" />
+                    <PlusIcon aria-hidden />
                   </PromptInputButton>
                 </MenuTrigger>
                 <MenuContent className="w-52">
@@ -224,27 +224,27 @@ const chat = createChat({ adapter: "ai-sdk" })
 
 const promptActions = [
   {
-    icon: <PaperclipIcon aria-hidden="true" />,
+    icon: <PaperclipIcon aria-hidden />,
     label: "Attach files",
     value: "files",
   },
   {
-    icon: <ImagePlusIcon aria-hidden="true" />,
+    icon: <ImagePlusIcon aria-hidden />,
     label: "Add screenshot",
     value: "screenshot",
   },
   {
-    icon: <GlobeIcon aria-hidden="true" />,
+    icon: <GlobeIcon aria-hidden />,
     label: "Add web page",
     value: "web-page",
   },
   {
-    icon: <FileTextIcon aria-hidden="true" />,
+    icon: <FileTextIcon aria-hidden />,
     label: "Add project instructions",
     value: "instructions",
   },
   {
-    icon: <ListTodoIcon aria-hidden="true" />,
+    icon: <ListTodoIcon aria-hidden />,
     label: "Plan implementation",
     value: "plan",
   },

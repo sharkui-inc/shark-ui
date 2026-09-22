@@ -96,9 +96,7 @@ import {
 
 ## Accessibility
 
-Always use a `TableCaption` to help assistive technologies announce what the table represents. 
-
-Use with the `sr-only` class to make the caption screen-reader only if you don't want to show it.
+Use `TableCaption`. Add `sr-only` to hide it visually.
 
 ```tsx showLineNumbers
 <Table>
@@ -131,13 +129,13 @@ Add an actions column with buttons per row.
 
 ### With action bar
 
-Use checkboxes for row selection and an action bar that appears when one or more rows are selected. See the [action bar](/docs/components/action-bar) component.
+Row selection with [action bar](/docs/components/action-bar).
 
 <ComponentPreview componentName="table" fileName="example-action-bar" />
 
 ### With context menu
 
-Wrap each row with `ContextMenuTrigger` so right-clicking shows a context menu with row actions.
+Wrap each row with `ContextMenuTrigger`.
 
 <ComponentPreview componentName="table" fileName="example-context-menu" />
 
@@ -222,7 +220,7 @@ Data cell for body or footer rows.
 
 ### TableCaption
 
-Accessible caption describing the table. Use `sr-only` for screen-reader only.
+Accessible caption describing the table.
 
 | Prop | Type | Default |
 | --- | --- | --- |

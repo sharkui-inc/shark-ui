@@ -7,11 +7,11 @@ const LoginPage = () => (
     <section className="relative hidden overflow-hidden border-e bg-foreground text-background lg:flex lg:flex-col lg:justify-between lg:p-12">
       <div className="flex items-center gap-2 font-semibold">
         <IconTile
-          aria-hidden="true"
+          aria-hidden
           className="size-9 border-transparent bg-background text-foreground shadow-none"
           size="sm"
         >
-          <WavesIcon aria-hidden="true" className="size-5" />
+          <WavesIcon aria-hidden className="size-5" />
         </IconTile>
         Northstar
       </div>
@@ -35,8 +35,8 @@ const LoginPage = () => (
           className="mb-8 flex items-center gap-2 font-semibold lg:hidden"
           href="#"
         >
-          <IconTile aria-hidden="true" size="sm">
-            <WavesIcon aria-hidden="true" className="size-4" />
+          <IconTile aria-hidden size="sm">
+            <WavesIcon aria-hidden className="size-4" />
           </IconTile>
           Northstar
         </a>

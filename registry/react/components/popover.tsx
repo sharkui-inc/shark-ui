@@ -189,13 +189,11 @@ export const PopoverBody = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
 
   return (
-    <ScrollArea overscrollContain scrollFade>
+    <ScrollArea className="min-h-0 min-w-0 flex-1" overscrollContain scrollFade>
       <ark.div
         className={cn(
-          "flex-1",
           "p-(--space)",
           "in-[[data-slot=popover-content]:has([data-slot=popover-header]:not(.sr-only))]:pt-1",
-          "in-[[data-slot=popover-content]:has([data-slot=popover-footer]:not(.border-t))]:pb-1",
           className
         )}
         data-slot="popover-body"

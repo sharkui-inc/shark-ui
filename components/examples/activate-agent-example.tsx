@@ -62,7 +62,7 @@ export const ActivateAgentExample = (props: React.ComponentProps<"div">) => {
           {agentFeatures.map((feature) => (
             <Item className="px-0" key={feature}>
               <ItemMedia variant="icon">
-                <CheckIcon aria-hidden="true" className="size-4" />
+                <CheckIcon aria-hidden className="size-4" />
               </ItemMedia>
               <ItemContent>
                 <ItemTitle>{feature}</ItemTitle>

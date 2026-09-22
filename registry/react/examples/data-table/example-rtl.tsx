@@ -96,11 +96,7 @@ const Example = () => {
           <MenuTrigger asChild>
             <Button className="ms-auto" variant="outline">
               {values.columns}
-              <ChevronDownIcon
-                aria-hidden
-                className="size-4"
-                data-icon="inline-end"
-              />
+              <ChevronDownIcon aria-hidden data-icon="inline-end" />
             </Button>
           </MenuTrigger>
           <MenuContent>
@@ -299,7 +295,7 @@ const EmailSortHeader = ({
       variant="ghost"
     >
       {values.email}
-      <ArrowUpDownIcon aria-hidden className="size-4" data-icon="inline-end" />
+      <ArrowUpDownIcon aria-hidden data-icon="inline-end" />
     </Button>
   );
 };
@@ -329,7 +325,7 @@ const PaymentActions = ({ payment }: { payment: Payment }) => {
           className="size-8 p-0"
           variant="ghost"
         >
-          <MoreHorizontalIcon aria-hidden className="size-4" />
+          <MoreHorizontalIcon aria-hidden />
         </Button>
       </MenuTrigger>
       <MenuContent>

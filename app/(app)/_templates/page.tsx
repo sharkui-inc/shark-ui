@@ -53,7 +53,7 @@ const TemplatesPage = async () => {
                 <Button asChild size="xl">
                   <Link href="#ai-chat-01">
                     Explore AI Chat
-                    <ArrowDownIcon aria-hidden="true" />
+                    <ArrowDownIcon aria-hidden />
                   </Link>
                 </Button>
               </div>
@@ -64,13 +64,13 @@ const TemplatesPage = async () => {
                   href="#ai-chat-01"
                 >
                   <Badge pill size="sm" variant="secondary">
-                    <RocketIcon aria-hidden="true" />
+                    <RocketIcon aria-hidden />
                     New
                   </Badge>
                   <AnnouncementTitle>
                     AI Chat template is now available
                   </AnnouncementTitle>
-                  <ArrowRightIcon aria-hidden="true" />
+                  <ArrowRightIcon aria-hidden />
                 </Link>
               </Announcement>
             </div>

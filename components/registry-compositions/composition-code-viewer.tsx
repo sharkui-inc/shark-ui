@@ -83,7 +83,7 @@ export const CompositionCodeViewer = ({
           >
             <SheetTrigger asChild>
               <Button className="lg:hidden" size="icon-sm" variant="ghost">
-                <FilesIcon aria-hidden="true" className="size-4" />
+                <FilesIcon aria-hidden />
                 <span className="sr-only">Browse files</span>
               </Button>
             </SheetTrigger>

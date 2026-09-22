@@ -198,7 +198,7 @@ export const RTLPreviewHeader = () => {
       <ToggleTooltip positioning={{ placement: "bottom-end" }}>
         <ToggleTooltipTrigger asChild>
           <Button aria-label={current.a11yLabel} size="icon-sm" variant="ghost">
-            <InfoIcon aria-hidden="true" />
+            <InfoIcon aria-hidden />
           </Button>
         </ToggleTooltipTrigger>
         <ToggleTooltipContent

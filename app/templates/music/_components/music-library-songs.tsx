@@ -26,7 +26,7 @@ export const MusicLibrarySongs = ({
         <TableHead>Title</TableHead>
         <TableHead className="hidden sm:table-cell">Album</TableHead>
         <TableHead className="w-24 text-end">
-          <Clock3Icon aria-hidden="true" className="ms-auto size-3.5" />
+          <Clock3Icon aria-hidden className="ms-auto size-3.5" />
           <span className="sr-only">Duration</span>
         </TableHead>
       </TableRow>
@@ -48,7 +48,7 @@ export const MusicLibrarySongs = ({
                 variant={isCurrent ? "default" : "ghost"}
               >
                 {isCurrent ? (
-                  <AudioWaveformIcon aria-hidden="true" />
+                  <AudioWaveformIcon aria-hidden />
                 ) : (
                   <span>{index + 1}</span>
                 )}
@@ -85,7 +85,7 @@ export const MusicLibrarySongs = ({
                   variant="ghost"
                 >
                   <HeartIcon
-                    aria-hidden="true"
+                    aria-hidden
                     fill={isFavorite ? "currentColor" : "none"}
                   />
                 </Button>

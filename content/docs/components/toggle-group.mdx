@@ -74,7 +74,7 @@ import {
 
 ## Controlled
 
-Use the `value` and `onValueChange` props to control the toggle group state programmatically.
+Use the `value` and `onValueChange` props to control the toggle group.
 
 <ComponentPreview componentName="toggle-group" fileName="example-controlled" />
 
@@ -190,6 +190,12 @@ Provides a ToggleGroup API created with `useToggleGroup` to descendant component
 | Prop | Type | Default |
 | --- | --- | --- |
 | `value` | `UseToggleGroupReturn` | **required** |
+| `pill` | `boolean` | `false` |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `spacing` | `number` | `0` |
+| `variant` | `"ghost" \| "outline"` | `"ghost"` |
+
+Pass the same styling props you would use on `ToggleGroup` so `ToggleGroupItem` receives them under the headless path.
 
 ---
 

@@ -65,7 +65,7 @@ export const TaskSelectionActionBar = ({
           size="icon-sm"
           variant="ghost"
         >
-          <CopyIcon aria-hidden="true" />
+          <CopyIcon aria-hidden />
         </Button>
         <Button
           aria-label="Mark selected tasks as done"
@@ -73,7 +73,7 @@ export const TaskSelectionActionBar = ({
           size="icon-sm"
           variant="ghost"
         >
-          <CheckIcon aria-hidden="true" />
+          <CheckIcon aria-hidden />
         </Button>
         <Menu positioning={{ placement: "top" }}>
           <MenuTrigger asChild>
@@ -82,7 +82,7 @@ export const TaskSelectionActionBar = ({
               size="icon-sm"
               variant="ghost"
             >
-              <EllipsisIcon aria-hidden="true" />
+              <EllipsisIcon aria-hidden />
             </Button>
           </MenuTrigger>
           <MenuContent>
@@ -90,11 +90,11 @@ export const TaskSelectionActionBar = ({
               onClick={() => onMove("In Progress")}
               value="move-to-active"
             >
-              <ArrowRightIcon aria-hidden="true" />
+              <ArrowRightIcon aria-hidden />
               Move to active
             </MenuItem>
             <MenuItem onClick={() => onMove("Backlog")} value="move-to-backlog">
-              <ListRestartIcon aria-hidden="true" />
+              <ListRestartIcon aria-hidden />
               Move to backlog
             </MenuItem>
             <MenuItem
@@ -102,7 +102,7 @@ export const TaskSelectionActionBar = ({
               value="cancel-tasks"
               variant="destructive"
             >
-              <XIcon aria-hidden="true" />
+              <XIcon aria-hidden />
               Cancel tasks
             </MenuItem>
           </MenuContent>
@@ -114,13 +114,13 @@ export const TaskSelectionActionBar = ({
           size="icon-sm"
           variant="destructive"
         >
-          <Trash2Icon aria-hidden="true" />
+          <Trash2Icon aria-hidden />
         </Button>
       </ActionBarBody>
       <ActionBarSeparator />
       <ActionBarClose asChild onClick={onClearSelection}>
         <Button aria-label="Clear selection" size="icon-sm" variant="ghost">
-          <XIcon aria-hidden="true" />
+          <XIcon aria-hidden />
         </Button>
       </ActionBarClose>
     </ActionBarContent>

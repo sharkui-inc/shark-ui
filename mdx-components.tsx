@@ -451,7 +451,7 @@ const HeadingAnchor = ({ id, children }: React.ComponentProps<"a">) => {
         {children}
       </span>
       <span
-        aria-hidden="true"
+        aria-hidden
         className="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
       >
         #

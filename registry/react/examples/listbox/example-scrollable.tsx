@@ -44,137 +44,80 @@ const Example = () => (
   </Listbox>
 );
 
+const backgrounds = [
+  "f3e8fb",
+  "e8f1fb",
+  "faf0e4",
+  "eef4e6",
+  "faf6e0",
+  "f8e8ee",
+] as const;
+
+const waveColors = [
+  "7c3aed",
+  "2b6cb0",
+  "ea580c",
+  "1a6b5c",
+  "ca8a04",
+  "e11d48",
+] as const;
+
+const people = [
+  { label: "Camille Dubois", value: "camille" },
+  { label: "Edward Lee", value: "edward" },
+  { label: "Mila Jensen", value: "mila" },
+  { label: "Dario Rossi", value: "dario" },
+  { label: "Aya Tanaka", value: "aya" },
+  { label: "Noah Berg", value: "noah" },
+  { label: "Sofia Alvarez", value: "sofia" },
+  { label: "Liam Okafor", value: "liam" },
+  { label: "Elena Petrov", value: "elena" },
+  { label: "Kai Nakamura", value: "kai" },
+  { label: "Isla Moreau", value: "isla" },
+  { label: "Omar Hassan", value: "omar" },
+  { label: "Nina Volkov", value: "nina" },
+  { label: "Felix Brandt", value: "felix" },
+  { label: "Priya Sharma", value: "priya" },
+  { label: "Jonas Eriksson", value: "jonas" },
+  { label: "Amara Okonkwo", value: "amara" },
+  { label: "Theo Martins", value: "theo" },
+  { label: "Yuki Sato", value: "yuki" },
+  { label: "Nora Lindqvist", value: "nora" },
+  { label: "Mateo Vargas", value: "mateo" },
+  { label: "Leila Haddad", value: "leila" },
+  { label: "Hugo Lefevre", value: "hugo" },
+  { label: "Zara Ahmed", value: "zara" },
+  { label: "Diego Silva", value: "diego" },
+  { label: "Ingrid Olsen", value: "ingrid" },
+  { label: "Ravi Patel", value: "ravi" },
+  { label: "Chloe Nguyen", value: "chloe" },
+  { label: "Andre Costa", value: "andre" },
+  { label: "Mei Chen", value: "mei" },
+  { label: "Soren Bakker", value: "soren" },
+  { label: "Fatima Zahra", value: "fatima" },
+  { label: "Luca Bianchi", value: "luca" },
+  { label: "Hannah Kim", value: "hannah" },
+  { label: "Pavel Novak", value: "pavel" },
+  { label: "Aisha Rahman", value: "aisha" },
+  { label: "Owen Murphy", value: "owen" },
+  { label: "Vera Kowalski", value: "vera" },
+  { label: "Kenji Watanabe", value: "kenji" },
+  { label: "Iris Fontaine", value: "iris" },
+];
+
 const collection = createListCollection({
-  items: [
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=camille-dubois&waveColor=7c3aed",
-      email: "camille@onda.co",
-      initials: "CD",
-      label: "Camille Dubois",
-      value: "camille",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=edward-lee&waveColor=2b6cb0",
-      email: "edward@onda.co",
-      initials: "EL",
-      label: "Edward Lee",
-      value: "edward",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=mila-jensen&waveColor=ea580c",
-      email: "mila@onda.co",
-      initials: "MJ",
-      label: "Mila Jensen",
-      value: "mila",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=dario-rossi&waveColor=1a6b5c",
-      email: "dario@onda.co",
-      initials: "DR",
-      label: "Dario Rossi",
-      value: "dario",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=aya-tanaka&waveColor=ca8a04",
-      email: "aya@onda.co",
-      initials: "AT",
-      label: "Aya Tanaka",
-      value: "aya",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=noah-berg&waveColor=e11d48",
-      email: "noah@onda.co",
-      initials: "NB",
-      label: "Noah Berg",
-      value: "noah",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=sofia-alvarez&waveColor=7c3aed",
-      email: "sofia@onda.co",
-      initials: "SA",
-      label: "Sofia Alvarez",
-      value: "sofia",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=liam-okafor&waveColor=2b6cb0",
-      email: "liam@onda.co",
-      initials: "LO",
-      label: "Liam Okafor",
-      value: "liam",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=elena-petrov&waveColor=ea580c",
-      email: "elena@onda.co",
-      initials: "EP",
-      label: "Elena Petrov",
-      value: "elena",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=kai-nakamura&waveColor=1a6b5c",
-      email: "kai@onda.co",
-      initials: "KN",
-      label: "Kai Nakamura",
-      value: "kai",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=isla-moreau&waveColor=ca8a04",
-      email: "isla@onda.co",
-      initials: "IM",
-      label: "Isla Moreau",
-      value: "isla",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=omar-hassan&waveColor=e11d48",
-      email: "omar@onda.co",
-      initials: "OH",
-      label: "Omar Hassan",
-      value: "omar",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=nina-volkov&waveColor=7c3aed",
-      email: "nina@onda.co",
-      initials: "NV",
-      label: "Nina Volkov",
-      value: "nina",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=felix-brandt&waveColor=2b6cb0",
-      email: "felix@onda.co",
-      initials: "FB",
-      label: "Felix Brandt",
-      value: "felix",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=priya-sharma&waveColor=ea580c",
-      email: "priya@onda.co",
-      initials: "PS",
-      label: "Priya Sharma",
-      value: "priya",
-    },
-    {
-      avatar:
-        "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=jonas-eriksson&waveColor=1a6b5c",
-      email: "jonas@onda.co",
-      initials: "JE",
-      label: "Jonas Eriksson",
-      value: "jonas",
-    },
-  ],
+  items: people.map((person, index) => {
+    const [first = "", last = ""] = person.label.split(" ");
+    const palette = index % backgrounds.length;
+
+    return {
+      avatar: `https://api.dicebear.com/10.x/waves/svg?backgroundColor=${backgrounds[palette]}&scale=1.2&seed=${person.value}&waveColor=${waveColors[palette]}`,
+      email: `${person.value}@onda.co`,
+      initials: `${first.charAt(0)}${last.charAt(0)}`,
+      label: person.label,
+      value: person.value,
+    };
+  }),
 });
 
 export default Example;

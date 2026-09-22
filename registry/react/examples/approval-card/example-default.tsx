@@ -46,7 +46,7 @@ const ApprovalCardDemo = () => {
     <div className="w-full max-w-lg">
       <ApprovalCard items={items} onSubmit={handleSubmit} shortcuts="letters">
         <ApprovalCardHeader>
-          <MessageCircleQuestionIcon aria-hidden="true" />
+          <MessageCircleQuestionIcon aria-hidden />
           <ApprovalCardTitle>Prepare the handoff</ApprovalCardTitle>
           <ApprovalCardAction>
             <ApprovalCardProgress />

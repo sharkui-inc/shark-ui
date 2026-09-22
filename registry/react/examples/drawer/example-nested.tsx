@@ -86,15 +86,15 @@ const NestedDrawer = (props: {
                   </div>
                 </DrawerBody>
                 <DrawerFooter>
-                  <div className="mx-auto flex w-full max-w-xs flex-col-reverse gap-2">
+                  <div className="mx-auto flex w-full max-w-xs flex-col gap-2">
+                    <Button className="w-full" type="submit">
+                      Save changes
+                    </Button>
                     <DrawerClose asChild>
                       <Button className="w-full" variant="outline">
                         Cancel
                       </Button>
                     </DrawerClose>
-                    <Button className="w-full" type="submit">
-                      Save changes
-                    </Button>
                   </div>
                 </DrawerFooter>
               </DrawerContent>
@@ -150,15 +150,15 @@ const SideNestedDrawer = (props: {
                 </FieldGroup>
               </DrawerBody>
               <DrawerFooter className="sm:flex-col">
-                <div className="flex flex-col-reverse gap-2">
+                <div className="flex flex-col gap-2">
+                  <Button className="w-full" pill type="submit">
+                    Save address
+                  </Button>
                   <DrawerClose asChild>
                     <Button className="w-full" pill variant="outline">
                       Cancel
                     </Button>
                   </DrawerClose>
-                  <Button className="w-full" pill type="submit">
-                    Save address
-                  </Button>
                 </div>
               </DrawerFooter>
             </DrawerContent>

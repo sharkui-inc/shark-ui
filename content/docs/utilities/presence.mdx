@@ -55,39 +55,38 @@ const [visible, setVisible] = React.useState(false);
 
 ## Lazy
 
-It will remove the element from the DOM when it is not present.
+`lazyMount` and `unmountOnExit`: mount on first open, unmount on close.
 
-The default is `true`.
-
-```tsx showLineNumbers
-<Presence lazyMount unmountOnExit {...}>
-  {/** content */}
-</Presence>
-```
+<ComponentPreview
+  autoHeight
+  componentName="presence"
+  fileName="example-lazy"
+/>
 
 ## Hide mode
 
-When content stays mounted after close, `hideMode` chooses how it is hidden:
+When `unmountOnExit` is `false`, `hideMode` chooses how closed content is hidden:
 
-- `'display-none'` (default): HTML `hidden`. Effects stay alive.
-- `'activity'`: React 19 Activity. Effects pause.
+- `"display-none"`: HTML `hidden`. Effects stay alive.
+- `"activity"`: React 19 Activity. Effects pause.
 
-`hideMode` does nothing when `unmountOnExit` is `true`, because the tree is removed on close.
+Ignored when `unmountOnExit` is `true`.
 
-```tsx
-<Presence present={visible} unmountOnExit={false} hideMode="activity">
-  {/** content */}
-</Presence>
-```
+<ComponentPreview
+  autoHeight
+  componentName="presence"
+  fileName="example-hide-mode"
+/>
 
 ## States
 
-Presence automatically manages the attribute `data-state` to `open` and `closed`.
+Sets `data-state` to `open` or `closed` for enter and exit styles.
 
-```tsx showLineNumbers
-<Presence present={true} /> // <div data-state="open" />
-<Presence present={false} /> // <div data-state="closed" />
-```
+<ComponentPreview
+  autoHeight
+  componentName="presence"
+  fileName="example-state"
+/>
 
 ## API Reference
 

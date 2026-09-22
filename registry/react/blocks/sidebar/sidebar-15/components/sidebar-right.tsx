@@ -28,7 +28,7 @@ export function SidebarRight() {
     >
       <SidebarHeader className="border-sidebar-border border-b">
         <div className="flex items-center gap-2 px-2 py-1.5">
-          <CalendarPlusIcon aria-hidden="true" className="size-4" />
+          <CalendarPlusIcon aria-hidden className="size-4" />
           <div className="min-w-0">
             <p className="truncate font-medium text-sm">September 2026</p>
             <p className="truncate text-sidebar-foreground text-xs">
@@ -50,7 +50,7 @@ export function SidebarRight() {
                       <span className="text-sidebar-foreground text-xs">
                         {calendar.events}
                       </span>
-                      <ChevronRightIcon aria-hidden="true" className="size-4" />
+                      <ChevronRightIcon aria-hidden className="size-4" />
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -72,7 +72,7 @@ export function SidebarRight() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <PlusIcon aria-hidden="true" />
+              <PlusIcon aria-hidden />
               <span>New calendar</span>
             </SidebarMenuButton>
           </SidebarMenuItem>

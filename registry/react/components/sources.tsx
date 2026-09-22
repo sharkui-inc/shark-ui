@@ -58,9 +58,7 @@ export const SourcesTrigger = (props: SourcesTriggerProps) => {
       {...rest}
     >
       {children ?? <span>Used {count ?? 0} sources</span>}
-      {showTrigger ? (
-        <CollapsibleIndicator className="size-3.5 rtl:rotate-180" />
-      ) : null}
+      {showTrigger ? <CollapsibleIndicator className="size-3.5" /> : null}
     </CollapsibleTrigger>
   );
 };
@@ -85,13 +83,24 @@ const toSafeHref = (href: string | undefined): string | undefined => {
   if (!href) {
     return undefined;
   }
+
+  const trimmed = href.trim();
+  if (!trimmed || trimmed.startsWith("//")) {
+    return undefined;
+  }
+
+  if (
+    trimmed.startsWith("/") ||
+    trimmed.startsWith("./") ||
+    trimmed.startsWith("../") ||
+    trimmed.startsWith("?") ||
+    trimmed.startsWith("#")
+  ) {
+    return trimmed;
+  }
+
   try {
-    const url = new URL(
-      href,
-      typeof window === "undefined"
-        ? "https://example.com"
-        : window.location.href
-    );
+    const url = new URL(trimmed);
     if (!ALLOWED_HREF_PROTOCOLS.has(url.protocol)) {
       return undefined;
     }
@@ -132,9 +141,9 @@ export const Source = (props: SourceProps) => {
       rel="noreferrer"
       target={safeHref ? "_blank" : undefined}
     >
-      <BookIcon aria-hidden="true" />
+      <BookIcon aria-hidden />
       <span className="min-w-0 truncate">{children ?? title}</span>
-      <ArrowUpRightIcon aria-hidden="true" className="rtl:-scale-x-100" />
+      <ArrowUpRightIcon aria-hidden className="rtl:-scale-x-100" />
     </ark.a>
   );
 };

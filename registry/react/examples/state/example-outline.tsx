@@ -13,7 +13,7 @@ const Example = () => (
   <State className="border border-dashed">
     <StateHeader>
       <StateMedia variant="icon">
-        <CloudIcon aria-hidden="true" />
+        <CloudIcon aria-hidden />
       </StateMedia>
       <StateTitle asChild>
         <h2>Cloud Storage Empty</h2>

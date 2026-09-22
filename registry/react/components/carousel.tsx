@@ -29,7 +29,7 @@ export const Carousel = (
         className
       )}
       data-slot="carousel"
-      spacing={spacing}
+      spacing={spacing ?? "16px"}
       {...rest}
     />
   );
@@ -168,9 +168,8 @@ export const CarouselContent = (
   return (
     <ArkCarousel.ItemGroup
       className={cn(
-        "min-w-0",
+        "min-w-0 flex-1",
         "data-[orientation=horizontal]:-my-4 data-[orientation=horizontal]:py-4",
-        "flex flex-1 gap-4",
         "rounded-lg",
         "overflow-hidden",
         className
@@ -190,7 +189,6 @@ export const CarouselItem = (
     <ArkCarousel.Item
       className={cn(
         "min-w-0",
-        "shrink-0 grow-0 basis-full",
         "[&_img]:size-full [&_img]:rounded-lg [&_img]:object-cover",
         className
       )}

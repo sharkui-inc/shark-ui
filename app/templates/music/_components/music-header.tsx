@@ -27,17 +27,17 @@ export const MusicHeader = () => (
     <div className="flex items-center gap-2">
       <ButtonGroup>
         <Button aria-label="Go back" size="icon-sm" variant="ghost">
-          <ChevronLeftIcon aria-hidden="true" />
+          <ChevronLeftIcon aria-hidden />
         </Button>
         <Button aria-label="Go forward" size="icon-sm" variant="ghost">
-          <ChevronRightIcon aria-hidden="true" />
+          <ChevronRightIcon aria-hidden />
         </Button>
       </ButtonGroup>
     </div>
     <div className="flex items-center gap-2">
       <InputGroup className="w-48" size="sm">
         <InputGroupAddon>
-          <SearchIcon aria-hidden="true" />
+          <SearchIcon aria-hidden />
         </InputGroupAddon>
         <InputGroupInput
           aria-label="Search music"

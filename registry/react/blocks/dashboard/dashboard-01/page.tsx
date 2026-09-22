@@ -26,11 +26,11 @@ const DashboardPage = () => (
           </p>
         </div>
         <Button variant="outline">
-          <CalendarDaysIcon aria-hidden="true" className="size-4" />
+          <CalendarDaysIcon aria-hidden />
           Last 30 days
         </Button>
         <Button aria-label="Export dashboard" size="icon-md" variant="outline">
-          <DownloadIcon aria-hidden="true" className="size-4" />
+          <DownloadIcon aria-hidden />
         </Button>
       </header>
 

@@ -1,7 +1,7 @@
 import type { RegistryItemType } from "@/lib/registry";
 import { registryUrl } from "@/lib/url";
 
-const dependencies = ["@ark-ui/react", "tailwind-variants"];
+const dependencies = ["@ark-ui/react"];
 
 const manifest: RegistryItemType = {
   dependencies,

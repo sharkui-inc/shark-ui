@@ -249,22 +249,22 @@ const accessCollection = createListCollection({
 
 const promptActions = [
   {
-    icon: <PaperclipIcon aria-hidden="true" />,
+    icon: <PaperclipIcon aria-hidden />,
     label: "Attach files and folders",
     value: "files",
   },
   {
-    icon: <ImagePlusIcon aria-hidden="true" />,
+    icon: <ImagePlusIcon aria-hidden />,
     label: "Add image or screenshot",
     value: "screenshot",
   },
   {
-    icon: <GlobeIcon aria-hidden="true" />,
+    icon: <GlobeIcon aria-hidden />,
     label: "Add web page",
     value: "web-page",
   },
   {
-    icon: <FileTextIcon aria-hidden="true" />,
+    icon: <FileTextIcon aria-hidden />,
     label: "Add project instructions",
     value: "instructions",
   },
@@ -272,22 +272,22 @@ const promptActions = [
 
 const emptyStateSuggestions = [
   {
-    icon: <CodeXmlIcon aria-hidden="true" className="size-4" />,
+    icon: <CodeXmlIcon aria-hidden className="size-4" />,
     label: "Understand",
     text: "Help me understand the structure of this project.",
   },
   {
-    icon: <HammerIcon aria-hidden="true" className="size-4" />,
+    icon: <HammerIcon aria-hidden className="size-4" />,
     label: "Build",
     text: "Help me plan a new feature for this project.",
   },
   {
-    icon: <RefreshCwIcon aria-hidden="true" className="size-4" />,
+    icon: <RefreshCwIcon aria-hidden className="size-4" />,
     label: "Review",
     text: "Review this project and suggest the most valuable improvements.",
   },
   {
-    icon: <BugIcon aria-hidden="true" className="size-4" />,
+    icon: <BugIcon aria-hidden className="size-4" />,
     label: "Fix",
     text: "Help me diagnose and fix an issue in this project.",
   },
@@ -343,8 +343,8 @@ const EmptyConversation = ({
   welcomeTitle: string;
 }) => (
   <div className="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-center px-4 py-10 text-center sm:px-6">
-    <IconTile aria-hidden="true" size="lg">
-      <SharkIcon aria-hidden="true" />
+    <IconTile aria-hidden size="lg">
+      <SharkIcon aria-hidden />
     </IconTile>
     <h2 className="mt-7 max-w-3xl text-balance font-medium text-2xl tracking-tight">
       {welcomeTitle}
@@ -382,13 +382,13 @@ const AssistantActions = () => (
   <MessageFooter>
     <MessageActions>
       <MessageAction>
-        <CopyIcon aria-hidden="true" />
+        <CopyIcon aria-hidden />
       </MessageAction>
       <MessageAction>
-        <ThumbsUpIcon aria-hidden="true" />
+        <ThumbsUpIcon aria-hidden />
       </MessageAction>
       <MessageAction>
-        <ThumbsDownIcon aria-hidden="true" />
+        <ThumbsDownIcon aria-hidden />
       </MessageAction>
     </MessageActions>
   </MessageFooter>
@@ -512,7 +512,7 @@ const MessageExtras = ({ extras }: { extras: DemoMessageExtras }) => {
       {extras.attachment ? (
         <Attachment size="sm">
           <AttachmentMedia>
-            <FileTextIcon aria-hidden="true" />
+            <FileTextIcon aria-hidden />
           </AttachmentMedia>
           <AttachmentContent>
             <AttachmentTitle>{extras.attachment.name}</AttachmentTitle>
@@ -548,7 +548,7 @@ const ChatMessageItem = ({
           <MessageAvatar>
             <Avatar size="sm">
               <AvatarFallback>
-                <BotIcon aria-hidden="true" className="size-4" />
+                <BotIcon aria-hidden className="size-4" />
               </AvatarFallback>
             </Avatar>
           </MessageAvatar>
@@ -558,7 +558,7 @@ const ChatMessageItem = ({
           {isUser || !isStreaming ? null : (
             <Marker className="w-fit rounded-lg bg-muted px-3 py-2">
               <MarkerIcon>
-                <BotIcon aria-hidden="true" />
+                <BotIcon aria-hidden />
               </MarkerIcon>
               <MarkerContent className="shimmer">Thinking</MarkerContent>
             </Marker>
@@ -705,7 +705,7 @@ const ChatSession = ({
                       <QueueItemContent>{turn.label}</QueueItemContent>
                       <QueueItemActions>
                         <QueueItemAction aria-label={`Remove ${turn.label}`}>
-                          <Trash2Icon aria-hidden="true" />
+                          <Trash2Icon aria-hidden />
                         </QueueItemAction>
                       </QueueItemActions>
                     </QueueItem>
@@ -737,7 +737,7 @@ const ChatSession = ({
               <Menu positioning={{ placement: "top-start" }}>
                 <MenuTrigger asChild>
                   <PromptInputButton aria-label="Add to prompt" size="icon-sm">
-                    <PlusIcon aria-hidden="true" />
+                    <PlusIcon aria-hidden />
                   </PromptInputButton>
                 </MenuTrigger>
                 <MenuContent className="w-52">
@@ -756,7 +756,7 @@ const ChatSession = ({
                 value={access}
               >
                 <SelectTrigger showTrigger={false} size="sm" variant="ghost">
-                  <ShieldAlertIcon aria-hidden="true" />
+                  <ShieldAlertIcon aria-hidden />
                   <SelectValue placeholder="Full access" />
                 </SelectTrigger>
                 <SelectContent>
@@ -813,7 +813,7 @@ const ChatSession = ({
               </SelectContent>
             </Select>
             <PromptInputButton aria-label="Voice input" size="icon-sm">
-              <MicIcon aria-hidden="true" />
+              <MicIcon aria-hidden />
             </PromptInputButton>
             <PromptInputSubmit className="ms-2" size="icon-sm" />
           </PromptInputFooter>
@@ -823,7 +823,7 @@ const ChatSession = ({
               size="sm"
               variant="ghost"
             >
-              <FolderIcon aria-hidden="true" className="size-4" />
+              <FolderIcon aria-hidden />
               shark-ui
             </Button>
             <Button
@@ -831,7 +831,7 @@ const ChatSession = ({
               size="sm"
               variant="ghost"
             >
-              <MonitorIcon aria-hidden="true" className="size-4" />
+              <MonitorIcon aria-hidden />
               Local
             </Button>
             <Button
@@ -839,7 +839,7 @@ const ChatSession = ({
               size="sm"
               variant="ghost"
             >
-              <GitBranchIcon aria-hidden="true" className="size-4" />
+              <GitBranchIcon aria-hidden />
               main
             </Button>
             <div className="ms-auto">

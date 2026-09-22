@@ -25,7 +25,7 @@ const Example = () => {
       onValueChange={(details) => setActiveFile(details.value)}
       value={activeFile}
     >
-      <CodeBlock className="h-52" code={file.code} language={file.language}>
+      <CodeBlock className="min-h-40" code={file.code} language={file.language}>
         <CodeBlockHeader>
           <TabsList
             className="min-w-0 flex-1 justify-start overflow-x-auto"

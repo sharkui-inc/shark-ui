@@ -23,12 +23,11 @@ const Example = () => (
           <ToggleTooltipTrigger asChild>
             <Button
               aria-label="Show error details"
-              clickEffect={false}
               pill
               size="icon-xs"
               variant="ghost"
             >
-              <InfoIcon aria-hidden="true" />
+              <InfoIcon aria-hidden />
             </Button>
           </ToggleTooltipTrigger>
           <ToggleTooltipContent className="max-w-64">

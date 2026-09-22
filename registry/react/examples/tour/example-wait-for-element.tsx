@@ -60,7 +60,7 @@ const Example = () => {
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2 font-medium text-sm">
               <WavesHorizontalIcon
-                aria-hidden="true"
+                aria-hidden
                 className="size-4 text-primary"
               />
               Notes
@@ -71,11 +71,7 @@ const Example = () => {
               size="sm"
               variant="outline"
             >
-              <PlusIcon
-                aria-hidden="true"
-                className="size-4"
-                data-icon="inline-start"
-              />
+              <PlusIcon aria-hidden data-icon="inline-start" />
               Add note
             </Button>
           </div>
@@ -103,7 +99,7 @@ const Example = () => {
                   size="icon-sm"
                   variant="ghost"
                 >
-                  <Trash2Icon aria-hidden="true" />
+                  <Trash2Icon aria-hidden />
                 </Button>
               </div>
             ))}

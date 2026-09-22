@@ -17,29 +17,29 @@ const InputGroupIcon = () => (
     <InputGroup>
       <InputGroupInput placeholder="Search..." />
       <InputGroupAddon>
-        <SearchIcon aria-hidden="true" />
+        <SearchIcon aria-hidden />
       </InputGroupAddon>
     </InputGroup>
     <InputGroup>
       <InputGroupInput placeholder="Enter your email" type="email" />
       <InputGroupAddon>
-        <MailIcon aria-hidden="true" />
+        <MailIcon aria-hidden />
       </InputGroupAddon>
     </InputGroup>
     <InputGroup>
       <InputGroupInput placeholder="Card number" />
       <InputGroupAddon>
-        <CreditCardIcon aria-hidden="true" />
+        <CreditCardIcon aria-hidden />
       </InputGroupAddon>
       <InputGroupAddon align="inline-end">
-        <CheckIcon aria-hidden="true" />
+        <CheckIcon aria-hidden />
       </InputGroupAddon>
     </InputGroup>
     <InputGroup>
       <InputGroupInput placeholder="Card number" />
       <InputGroupAddon align="inline-end">
-        <StarIcon aria-hidden="true" />
-        <InfoIcon aria-hidden="true" />
+        <StarIcon aria-hidden />
+        <InfoIcon aria-hidden />
       </InputGroupAddon>
     </InputGroup>
   </div>

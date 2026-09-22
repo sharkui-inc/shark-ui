@@ -38,7 +38,7 @@ const InputGroupInCard = () => (
               type="email"
             />
             <InputGroupAddon align="inline-end">
-              <MailIcon aria-hidden="true" />
+              <MailIcon aria-hidden />
             </InputGroupAddon>
           </InputGroup>
         </Field>
@@ -50,7 +50,7 @@ const InputGroupInCard = () => (
             </InputGroupAddon>
             <InputGroupInput id="website-input" placeholder="example.com" />
             <InputGroupAddon align="inline-end">
-              <ExternalLinkIcon aria-hidden="true" />
+              <ExternalLinkIcon aria-hidden />
             </InputGroupAddon>
           </InputGroup>
         </Field>

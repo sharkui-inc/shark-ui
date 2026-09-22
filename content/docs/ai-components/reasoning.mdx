@@ -99,7 +99,7 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 ### Reasoning
 
-Root collapsible. `defaultOpen` follows `isStreaming` when unset. `duration` and `isStreaming` are available to `ReasoningTrigger`.
+Root collapsible. When uncontrolled, opens when `isStreaming` becomes true (including after mount) and stays open when streaming ends. Controlled `open` is respected. `duration` and `isStreaming` are available to `ReasoningTrigger`.
 
 | Prop | Type | Default |
 | --- | --- | --- |

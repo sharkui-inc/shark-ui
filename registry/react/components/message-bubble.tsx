@@ -166,7 +166,7 @@ export const MessageBubbleTrigger = (
           "motion-reduce:transition-none"
         )}
       >
-        {children ?? <ChevronDownIcon aria-hidden="true" className="size-5" />}
+        {children ?? <ChevronDownIcon aria-hidden className="size-5" />}
       </span>
     </ark.button>
   );

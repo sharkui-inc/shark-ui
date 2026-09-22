@@ -21,7 +21,7 @@ const DatePickerBasic = () => (
   <DatePicker>
     <DatePickerTrigger asChild>
       <Button className="min-w-56" variant="outline">
-        <CalendarIcon aria-hidden="true" data-icon="inline-start" />
+        <CalendarIcon aria-hidden data-icon="inline-start" />
         <DatePickerValue placeholder="Pick a date" />
       </Button>
     </DatePickerTrigger>

@@ -137,7 +137,7 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
                       size="icon-sm"
                       variant="ghost"
                     >
-                      <InfoIcon aria-hidden="true" />
+                      <InfoIcon aria-hidden />
                     </Button>
                   </DialogTrigger>
                 </span>

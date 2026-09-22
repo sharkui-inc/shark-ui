@@ -55,10 +55,10 @@ const Example = () => {
         </DialogBody>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button>Save</Button>
           </DialogClose>
           <DialogClose asChild>
-            <Button>Save</Button>
+            <Button variant="outline">Cancel</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

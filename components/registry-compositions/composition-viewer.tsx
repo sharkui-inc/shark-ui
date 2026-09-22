@@ -214,21 +214,21 @@ export const CompositionViewer = ({
                   className="size-7 px-0 data-[state=on]:bg-secondary"
                   value="desktop"
                 >
-                  <MonitorIcon aria-hidden="true" className="size-4" />
+                  <MonitorIcon aria-hidden className="size-4" />
                 </ToggleGroupItem>
                 <ToggleGroupItem
                   aria-label="Tablet preview"
                   className="size-7 px-0 data-[state=on]:bg-secondary"
                   value="tablet"
                 >
-                  <TabletIcon aria-hidden="true" className="size-4" />
+                  <TabletIcon aria-hidden className="size-4" />
                 </ToggleGroupItem>
                 <ToggleGroupItem
                   aria-label="Mobile preview"
                   className="size-7 px-0 data-[state=on]:bg-secondary"
                   value="mobile"
                 >
-                  <SmartphoneIcon aria-hidden="true" className="size-4" />
+                  <SmartphoneIcon aria-hidden className="size-4" />
                 </ToggleGroupItem>
               </ToggleGroup>
               <Separator
@@ -241,7 +241,7 @@ export const CompositionViewer = ({
                 size="icon-sm"
                 variant="ghost"
               >
-                <RefreshCwIcon aria-hidden="true" className="size-4" />
+                <RefreshCwIcon aria-hidden />
               </Button>
               <Button asChild size="icon-sm" variant="ghost">
                 <a
@@ -250,7 +250,7 @@ export const CompositionViewer = ({
                   rel="noreferrer"
                   target="_blank"
                 >
-                  <ArrowUpRight aria-hidden="true" className="size-4" />
+                  <ArrowUpRight aria-hidden className="size-4" />
                 </a>
               </Button>
             </div>
@@ -285,7 +285,7 @@ export const CompositionViewer = ({
                         onClick={reload}
                         variant="outline"
                       >
-                        <RefreshCwIcon aria-hidden="true" className="size-4" />
+                        <RefreshCwIcon aria-hidden />
                         Retry preview
                       </Button>
                     </div>

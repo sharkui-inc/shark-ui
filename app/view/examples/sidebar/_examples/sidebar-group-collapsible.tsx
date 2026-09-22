@@ -31,7 +31,7 @@ const SidebarGroupCollapsible = () => (
               <CollapsibleTrigger>
                 Help
                 <ChevronDownIcon
-                  aria-hidden="true"
+                  aria-hidden
                   className="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
                 />
               </CollapsibleTrigger>
@@ -41,13 +41,13 @@ const SidebarGroupCollapsible = () => (
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton>
-                      <LifeBuoyIcon aria-hidden="true" />
+                      <LifeBuoyIcon aria-hidden />
                       Support
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton>
-                      <SendIcon aria-hidden="true" />
+                      <SendIcon aria-hidden />
                       Feedback
                     </SidebarMenuButton>
                   </SidebarMenuItem>

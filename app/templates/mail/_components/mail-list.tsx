@@ -43,7 +43,7 @@ export const MailList = () => {
         <h2 className="min-w-0 flex-1 truncate font-semibold text-sm">Inbox</h2>
 
         <MailToolbarButton label="New message" variant="default">
-          <PlusIcon aria-hidden="true" />
+          <PlusIcon aria-hidden />
         </MailToolbarButton>
       </header>
       <ScrollArea className="min-w-0 flex-1" orientation="vertical" scrollFade>
@@ -62,7 +62,7 @@ export const MailList = () => {
           <State className="min-h-52 border-0">
             <StateHeader>
               <StateMedia variant="icon">
-                <InboxIcon aria-hidden="true" />
+                <InboxIcon aria-hidden />
               </StateMedia>
               <StateTitle>Nothing to review here.</StateTitle>
               <StateDescription>

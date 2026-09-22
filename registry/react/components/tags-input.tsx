@@ -69,7 +69,7 @@ export const TagsInput = (props: TagsInputProps) => {
       editable={editable}
       {...rest}
     >
-      <TagsInputControl showClear={showClear}>
+      <TagsInputControl showClear={showClear} size={size}>
         {children}
 
         <TagsInputInput placeholder={placeholder} />
@@ -197,7 +197,7 @@ export const TagsInputItemDeleteTrigger = (
     >
       <InputGroupButton
         className={cn(
-          "in-data-[size=lg]:size-4.5 in-data-[size=sm]:size-2.5 size-3.5",
+          "in-data-[size=lg]:size-5.5 in-data-[size=sm]:size-3.5 size-4.5",
           "shrink-0",
           "text-muted-foreground",
           "[&_svg:not([class*='size-'])]:size-2 in-data-[size=lg]:[&_svg:not([class*='size-'])]:size-2.5 in-data-[size=sm]:[&_svg:not([class*='size-'])]:size-1.5",

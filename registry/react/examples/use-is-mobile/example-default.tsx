@@ -10,9 +10,9 @@ const UseIsMobileDemo = () => {
     <div className="flex items-center gap-3">
       <div className="flex size-10 items-center justify-center rounded-xl border bg-muted/48 [&_svg]:size-4 [&_svg]:text-muted-foreground">
         {isMobile ? (
-          <SmartphoneIcon aria-hidden="true" />
+          <SmartphoneIcon aria-hidden />
         ) : (
-          <MonitorIcon aria-hidden="true" />
+          <MonitorIcon aria-hidden />
         )}
       </div>
       <div className="flex flex-col gap-1">

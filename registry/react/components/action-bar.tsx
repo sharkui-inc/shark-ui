@@ -56,13 +56,13 @@ export const ActionBar = (props: ActionBarProps) => {
   return (
     <ActionBarProvider value={context}>
       <ArkPopover.Root
+        lazyMount={lazyMount}
+        unmountOnExit={unmountOnExit}
+        {...rest}
         autoFocus={false}
         closeOnEscape={false}
         closeOnInteractOutside={false}
-        lazyMount={lazyMount}
         modal={false}
-        unmountOnExit={unmountOnExit}
-        {...rest}
       />
     </ActionBarProvider>
   );
@@ -141,14 +141,14 @@ export interface ActionBarSeparatorProps
   extends React.ComponentProps<typeof Separator> {}
 
 export const ActionBarSeparator = (props: ActionBarSeparatorProps) => {
-  const { className, ...rest } = props;
+  const { className, orientation = "vertical", ...rest } = props;
 
   return (
     <Separator
       className={cn("mx-1 h-1/2", className)}
       data-slot="action-bar-separator"
-      orientation="vertical"
       {...rest}
+      orientation={orientation}
     />
   );
 };
@@ -187,14 +187,21 @@ export interface ActionBarValueProps
 }
 
 export const ActionBarValue = (props: ActionBarValueProps) => {
-  const { label, count = 0, className, children, ...rest } = props;
+  const {
+    label,
+    count = 0,
+    className,
+    children,
+    variant = "secondary",
+    ...rest
+  } = props;
 
   return (
     <Badge
       className={cn("shrink-0 font-medium text-sm tabular-nums", className)}
       data-slot="action-bar-value"
-      variant="secondary"
       {...rest}
+      variant={variant}
     >
       {children ?? label ?? count}
     </Badge>

@@ -8,7 +8,7 @@ const ChartTooltipDemo = () => (
         Label
       </div>
       <svg
-        aria-hidden="true"
+        aria-hidden
         className="absolute top-[50px] left-[5px] z-10"
         fill="none"
         height="12"
@@ -42,7 +42,7 @@ const ChartTooltipDemo = () => (
         Name
       </div>
       <svg
-        aria-hidden="true"
+        aria-hidden
         className="absolute top-[10px] left-[85px] z-10 -scale-x-100"
         fill="none"
         height="42"
@@ -93,7 +93,7 @@ const ChartTooltipDemo = () => (
         payload={[{ fill: "var(--chart-1)", name: "Chrome", value: 1286 }]}
       />
       <svg
-        aria-hidden="true"
+        aria-hidden
         className="absolute top-[38px] left-[30px] z-10 rotate-[-40deg]"
         fill="none"
         height="34"

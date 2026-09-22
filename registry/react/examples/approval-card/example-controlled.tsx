@@ -77,7 +77,7 @@ const Example = () => {
         value={value}
       >
         <ApprovalCardHeader>
-          <SlidersHorizontalIcon aria-hidden="true" />
+          <SlidersHorizontalIcon aria-hidden />
           <ApprovalCardTitle>Configure review preferences</ApprovalCardTitle>
           <ApprovalCardAction>
             <ApprovalCardProgress />

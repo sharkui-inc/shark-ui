@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext } from "@ark-ui/react/utils";
-import type React from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import {
   Collapsible,
@@ -54,12 +54,41 @@ type ReasoningContextValue = Pick<
 export const Reasoning = (props: ReasoningProps) => {
   const {
     defaultOpen,
+    open,
+    onOpenChange,
     duration,
     isStreaming = false,
     translations,
     className,
     ...rest
   } = props;
+
+  const isOpenControlled = open !== undefined;
+  const [uncontrolledOpen, setUncontrolledOpen] = React.useState(
+    () => defaultOpen ?? isStreaming
+  );
+  const wasStreaming = React.useRef(isStreaming);
+
+  React.useEffect(() => {
+    const startedStreaming = isStreaming && !wasStreaming.current;
+    wasStreaming.current = isStreaming;
+
+    if (!isOpenControlled && startedStreaming) {
+      setUncontrolledOpen(true);
+    }
+  }, [isOpenControlled, isStreaming]);
+
+  const handleOpenChange = (
+    details: Parameters<
+      NonNullable<React.ComponentProps<typeof Collapsible>["onOpenChange"]>
+    >[0]
+  ) => {
+    if (!isOpenControlled) {
+      setUncontrolledOpen(details.open);
+    }
+
+    onOpenChange?.(details);
+  };
 
   return (
     <ReasoningProvider
@@ -74,7 +103,8 @@ export const Reasoning = (props: ReasoningProps) => {
         data-duration={duration}
         data-slot="reasoning"
         data-streaming={isStreaming ? "" : undefined}
-        defaultOpen={defaultOpen ?? isStreaming}
+        onOpenChange={handleOpenChange}
+        open={isOpenControlled ? open : uncontrolledOpen}
         {...rest}
       />
     </ReasoningProvider>

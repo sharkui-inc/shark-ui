@@ -84,11 +84,11 @@ export const ChatComposer = ({
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-3">
       <div className="w-full rounded-2xl bg-muted/48 p-0.5">
         <Announcement className="w-full rounded-t-[15px] border-0 bg-transparent px-3 py-2 shadow-none">
-          <CrownIcon aria-hidden="true" className="text-muted-foreground" />
+          <CrownIcon aria-hidden className="text-muted-foreground" />
           <AnnouncementTitle className="text-muted-foreground text-xs">
             Access premium models & features
           </AnnouncementTitle>
-          <span aria-hidden="true" className="text-muted-foreground/64 text-xs">
+          <span aria-hidden className="text-muted-foreground/64 text-xs">
             ·
           </span>
           <Button className="h-auto px-0 text-xs" variant="link">
@@ -120,7 +120,7 @@ export const ChatComposer = ({
               <PromptInputTools>
                 <FileUploadTrigger asChild>
                   <PromptInputButton aria-label="Attach file" size="icon-xs">
-                    <PaperclipIcon aria-hidden="true" />
+                    <PaperclipIcon aria-hidden />
                   </PromptInputButton>
                 </FileUploadTrigger>
                 <Combobox
@@ -166,12 +166,12 @@ export const ChatComposer = ({
                     className="data-[state=on]:bg-accent data-[state=on]:text-accent-foreground"
                     size="xs"
                   >
-                    <BrainIcon aria-hidden="true" />
+                    <BrainIcon aria-hidden />
                     Think
                   </PromptInputButton>
                 </Toggle>
                 <PromptInputButton aria-label="Voice input" size="icon-xs">
-                  <MicIcon aria-hidden="true" />
+                  <MicIcon aria-hidden />
                 </PromptInputButton>
               </PromptInputTools>
               <PromptInputSubmit />
@@ -214,7 +214,7 @@ const ComboboxSearch = () => {
         />
       </ArkCombobox.Input>
       <InputGroupAddon>
-        <SearchIcon aria-hidden="true" className="opacity-64" />
+        <SearchIcon aria-hidden className="opacity-64" />
       </InputGroupAddon>
     </InputGroup>
   );

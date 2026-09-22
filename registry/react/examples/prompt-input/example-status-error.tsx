@@ -22,11 +22,11 @@ const Example = () => {
       {status === "error" ? (
         <div className="flex items-center justify-between gap-2 px-1">
           <span className="flex items-center gap-2 text-destructive text-xs">
-            <TriangleAlertIcon aria-hidden="true" className="size-3.5" />
+            <TriangleAlertIcon aria-hidden className="size-3.5" />
             Couldn’t finish the review.
           </span>
           <Button onClick={() => setStatus("ready")} size="xs" variant="ghost">
-            <RefreshCwIcon aria-hidden="true" data-icon="inline-start" />
+            <RefreshCwIcon aria-hidden data-icon="inline-start" />
             Retry
           </Button>
         </div>

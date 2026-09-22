@@ -80,7 +80,7 @@ import {
 
 ## Controlled
 
-Control the selected value programmatically with `value` and `onValueChange` props.
+Use `value` and `onValueChange` to control the selected value.
 
 <ComponentPreview componentName="segment-group" fileName="example-controlled" />
 
@@ -107,12 +107,6 @@ Use the `disabled` prop on individual items to disable specific options.
 ### Underline
 
 <ComponentPreview componentName="segment-group" fileName="example-variant-underline" />
-
-## Pill
-
-The `pill` prop creates fully rounded segment groups. Only applies when `variant` is `"default"`.
-
-<ComponentPreview componentName="segment-group" fileName="example-pill" />
 
 ## Orientation
 
@@ -163,7 +157,6 @@ Root component. Manages segmented control state (single or multi-select).
 | `onValueChange` | `(details: ValueChangeDetails) => void` | - |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `variant` | `"default" \| "underline"` | `"default"` |
-| `pill` | `boolean` | `false` |
 | `disabled` | `boolean` | - |
 | `className` | `string` | - |
 | `asChild` | `boolean` | - |

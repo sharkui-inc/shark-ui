@@ -9,7 +9,6 @@ const manifest: RegistryItemType = {
   registryDependencies: [
     registryUrl("/r/button.json"),
     registryUrl("/r/clipboard.json"),
-    registryUrl("/r/select.json"),
     registryUrl("/r/scroll-area.json"),
   ],
   type: "registry:ui",

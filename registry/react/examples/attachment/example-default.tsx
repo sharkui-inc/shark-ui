@@ -10,7 +10,7 @@ import {
 const Example = () => (
   <Attachment state="done">
     <AttachmentMedia>
-      <FileTextIcon aria-hidden="true" />
+      <FileTextIcon aria-hidden />
     </AttachmentMedia>
     <AttachmentContent>
       <AttachmentTitle>brief.pdf</AttachmentTitle>

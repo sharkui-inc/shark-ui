@@ -27,18 +27,20 @@ export const useDatePicker = useArkDatePicker;
 export const useDatePickerContext = useArkDatePickerContext;
 export const DatePickerRootProvider = ArkDatePicker.RootProvider;
 
-export const DatePicker = (props: React.ComponentProps<typeof Calendar>) => {
+export const DatePicker = (
+  props: Omit<React.ComponentProps<typeof Calendar>, "inline">
+) => {
   const { positioning, ...rest } = props;
 
   return (
     <Calendar
       data-slot="date-picker"
-      inline={false}
       positioning={{
         placement: "top",
         ...positioning,
       }}
       {...rest}
+      inline={false}
     />
   );
 };
@@ -92,7 +94,7 @@ export const DatePickerInput = (props: DatePickerInputProps) => {
     <ArkDatePicker.Control data-slot="date-picker-control">
       <InputGroup size={size}>
         <ArkDatePicker.Input asChild data-slot="date-picker-input" {...rest}>
-          <InputGroupInput />
+          <InputGroupInput className={className} />
         </ArkDatePicker.Input>
 
         <InputGroupAddon align="inline-end">

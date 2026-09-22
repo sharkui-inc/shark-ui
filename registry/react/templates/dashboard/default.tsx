@@ -84,8 +84,8 @@ const DashboardTemplate = () => (
     >
       <SidebarHeader className="border-b">
         <div className="flex items-center gap-3 px-2 py-3">
-          <IconTile aria-hidden="true" size="sm">
-            <WavesIcon aria-hidden="true" className="size-4" />
+          <IconTile aria-hidden size="sm">
+            <WavesIcon aria-hidden className="size-4" />
           </IconTile>
           <div className="grid min-w-0 gap-0.5">
             <span className="truncate font-semibold text-sm">Catalyst</span>
@@ -104,7 +104,7 @@ const DashboardTemplate = () => (
                 <SidebarMenuItem key={label}>
                   <SidebarMenuButton asChild isActive={label === "Overview"}>
                     <Link href={href}>
-                      <Icon aria-hidden="true" className="size-4" />
+                      <Icon aria-hidden className="size-4" />
                       {label}
                     </Link>
                   </SidebarMenuButton>
@@ -121,7 +121,7 @@ const DashboardTemplate = () => (
                 <SidebarMenuItem key={label}>
                   <SidebarMenuButton asChild>
                     <Link href={href}>
-                      <Icon aria-hidden="true" className="size-4" />
+                      <Icon aria-hidden className="size-4" />
                       {label}
                     </Link>
                   </SidebarMenuButton>

@@ -139,7 +139,7 @@ export const ScrollAreaScrollbar = (
     <ArkScrollArea.Scrollbar
       className={cn(
         "flex",
-        "data-[orientation=vertical]:ms-1 data-[orientation=horizontal]:mt-1",
+        "m-1",
         "bg-transparent",
         "pointer-events-none opacity-0",
         "transition-opacity delay-300",

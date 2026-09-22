@@ -9,7 +9,7 @@ import { Button } from "@/registry/react/components/button";
 
 const AlertWithAction = () => (
   <Alert className="max-w-md">
-    <InfoIcon aria-hidden="true" />
+    <InfoIcon aria-hidden />
     <AlertTitle>Dark mode is now available</AlertTitle>
     <AlertDescription>
       Enable it under your profile settings to get started.

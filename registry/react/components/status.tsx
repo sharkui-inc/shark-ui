@@ -41,11 +41,11 @@ export const Status = (props: StatusProps) => {
 
   return (
     <ark.span
-      aria-hidden="true"
       className={cn(statusVariants({ size, variant }), className)}
       data-size={size}
       data-slot="status-indicator"
       {...rest}
+      aria-hidden
     />
   );
 };

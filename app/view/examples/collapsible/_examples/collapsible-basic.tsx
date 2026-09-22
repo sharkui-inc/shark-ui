@@ -15,7 +15,7 @@ const CollapsibleBasic = () => (
           <Button className="w-full" variant="ghost">
             Product details
             <ChevronDownIcon
-              aria-hidden="true"
+              aria-hidden
               className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
               data-icon="inline-end"
             />

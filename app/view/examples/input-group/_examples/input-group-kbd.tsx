@@ -10,7 +10,7 @@ const InputGroupKbd = () => (
   <InputGroup className="max-w-sm">
     <InputGroupInput placeholder="Search..." />
     <InputGroupAddon>
-      <SearchIcon aria-hidden="true" />
+      <SearchIcon aria-hidden />
     </InputGroupAddon>
     <InputGroupAddon align="inline-end">
       <Kbd>⌘K</Kbd>

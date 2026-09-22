@@ -17,8 +17,7 @@ import {
   menuEmptyVariants,
   menuGroupLabelVariants,
   menuItemControlVariants,
-  menuItemHighlightVariants,
-  menuItemIconVariants,
+  menuItemDescriptionVariants,
   menuItemIndicatorVariants,
 } from "@/registry/react/components/menu";
 
@@ -95,7 +94,6 @@ const listboxItemVariants = tv({
     "cursor-pointer",
     "outline-hidden",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
-    menuItemIconVariants(),
     "[&_svg:not([class*='text-'])]:text-muted-foreground",
   ],
   defaultVariants: {
@@ -105,7 +103,7 @@ const listboxItemVariants = tv({
     variant: {
       default: [
         "text-popover-foreground",
-        menuItemHighlightVariants(),
+        "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
         "hover:bg-accent hover:text-accent-foreground",
       ],
       destructive: [
@@ -138,13 +136,14 @@ export const ListboxItem = (props: ListboxItemProps) => {
     children,
     ...rest
   } = props;
+  const { item } = menuItemIndicatorVariants();
 
   return (
     <ArkListbox.Item
       className={cn(
         listboxItemVariants({ variant }),
         className,
-        showIndicator && "pe-8"
+        showIndicator && item()
       )}
       data-slot="listbox-item"
       data-variant={variant}
@@ -230,7 +229,7 @@ export const ListboxItemDescription = (
 
   return (
     <ark.span
-      className={cn("text-muted-foreground text-xs", className)}
+      className={cn(menuItemDescriptionVariants(), className)}
       data-slot="listbox-item-description"
       {...rest}
     />
@@ -241,10 +240,11 @@ export const ListboxItemIndicator = (
   props: React.ComponentProps<typeof ArkListbox.ItemIndicator>
 ) => {
   const { className, children, ...rest } = props;
+  const { indicator } = menuItemIndicatorVariants();
 
   return (
     <ArkListbox.ItemIndicator
-      className={cn(menuItemIndicatorVariants(), className)}
+      className={cn(indicator(), className)}
       data-slot="listbox-item-indicator"
       {...rest}
     >

@@ -6,7 +6,7 @@ export const QrCodeThumb = (props: ThumbCardProps) => (
     <div className="flex flex-col items-center justify-center gap-3">
       <div className="flex size-20 justify-center rounded-lg border border-input bg-muted p-2 shadow-sm/4">
         <QrCodeIcon
-          aria-hidden="true"
+          aria-hidden
           className="size-16 stroke-[1.5] text-muted-foreground/64"
         />
       </div>

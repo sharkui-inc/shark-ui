@@ -31,10 +31,7 @@ export const MusicNowPlaying = ({
       size="icon-sm"
       variant="ghost"
     >
-      <HeartIcon
-        aria-hidden="true"
-        fill={isFavorite ? "currentColor" : "none"}
-      />
+      <HeartIcon aria-hidden fill={isFavorite ? "currentColor" : "none"} />
     </Button>
   </div>
 );

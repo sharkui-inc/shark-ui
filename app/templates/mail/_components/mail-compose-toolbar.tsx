@@ -13,12 +13,12 @@ export const MailComposeToolbar = ({
 }) => (
   <>
     <MailToolbarButton label="Back" onClick={() => onComposeChange(null)}>
-      <ArrowLeftIcon aria-hidden="true" />
+      <ArrowLeftIcon aria-hidden />
     </MailToolbarButton>
     <MailComposeTools />
     <ButtonGroup aria-label="Compose" className="ms-auto shrink-0">
       <MailToolbarButton label="Discard" onClick={() => onComposeChange(null)}>
-        <XIcon aria-hidden="true" />
+        <XIcon aria-hidden />
       </MailToolbarButton>
       <MailToolbarButton
         form="mail-compose-form"
@@ -26,7 +26,7 @@ export const MailComposeToolbar = ({
         type="submit"
         variant="default"
       >
-        <SendIcon aria-hidden="true" />
+        <SendIcon aria-hidden />
       </MailToolbarButton>
     </ButtonGroup>
   </>

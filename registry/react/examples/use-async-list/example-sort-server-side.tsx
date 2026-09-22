@@ -57,17 +57,9 @@ const UseAsyncListDemo = () => {
         <Button disabled={list.loading} onClick={handleSort} variant="outline">
           Sort products
           {descending ? (
-            <ArrowDownIcon
-              aria-hidden="true"
-              className="size-4"
-              data-icon="inline-end"
-            />
+            <ArrowDownIcon aria-hidden data-icon="inline-end" />
           ) : (
-            <ArrowUpIcon
-              aria-hidden="true"
-              className="size-4"
-              data-icon="inline-end"
-            />
+            <ArrowUpIcon aria-hidden data-icon="inline-end" />
           )}
         </Button>
       </div>

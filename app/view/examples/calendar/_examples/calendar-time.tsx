@@ -52,7 +52,7 @@ const CalendarTime = () => (
               type="time"
             />
             <InputGroupAddon>
-              <ClockIcon aria-hidden="true" className="text-muted-foreground" />
+              <ClockIcon aria-hidden className="text-muted-foreground" />
             </InputGroupAddon>
           </InputGroup>
         </Field>
@@ -66,7 +66,7 @@ const CalendarTime = () => (
               type="time"
             />
             <InputGroupAddon>
-              <ClockIcon aria-hidden="true" className="text-muted-foreground" />
+              <ClockIcon aria-hidden className="text-muted-foreground" />
             </InputGroupAddon>
           </InputGroup>
         </Field>

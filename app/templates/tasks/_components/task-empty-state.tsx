@@ -23,7 +23,7 @@ export const TaskEmptyState = ({
   <State className="min-h-88 border bg-muted/8 px-6 py-12 shadow-xs/4">
     <StateHeader>
       <StateMedia variant="icon">
-        <ClipboardListIcon aria-hidden="true" />
+        <ClipboardListIcon aria-hidden />
       </StateMedia>
       <StateTitle asChild>
         <h2>

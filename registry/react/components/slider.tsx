@@ -170,7 +170,7 @@ export const Slider = (props: SliderProps) => {
                   value={markerValue}
                 >
                   <span
-                    aria-hidden="true"
+                    aria-hidden
                     className={cn(
                       "bg-muted-foreground/64 group-data-[state=at-value]/marker:bg-foreground group-data-[state=under-value]/marker:bg-foreground",
                       "group-data-[orientation=horizontal]/marker:h-1 group-data-[orientation=horizontal]/marker:w-px",

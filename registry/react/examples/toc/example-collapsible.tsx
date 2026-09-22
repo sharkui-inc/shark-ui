@@ -59,7 +59,7 @@ const Example = () => {
                   </span>
                 </span>
                 <span className="inline-flex size-4 shrink-0 items-center justify-center text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 motion-reduce:transition-none">
-                  <ChevronRightIcon aria-hidden="true" className="size-4" />
+                  <ChevronRightIcon aria-hidden className="size-4" />
                 </span>
               </CollapsibleTrigger>
             );
@@ -112,7 +112,7 @@ const Article = () => (
           {item.label}
         </h2>
         <SkeletonText
-          aria-hidden="true"
+          aria-hidden
           className="animate-none **:[div]:h-2"
           lines={item.lines}
         />

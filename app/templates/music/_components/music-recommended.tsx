@@ -61,7 +61,7 @@ export const MusicRecommended = () => {
                       size="icon-sm"
                       variant="ghost"
                     >
-                      <MoreHorizontalIcon aria-hidden="true" />
+                      <MoreHorizontalIcon aria-hidden />
                     </Button>
                   </MenuTrigger>
                   <MenuContent>

@@ -152,7 +152,7 @@ export const TerminalContent = (props: TerminalContentProps) => {
 
   const { output: outputFromContext } = _useTerminal();
   const output = outputProp ?? outputFromContext;
-  // Non-string children should prefer the `output` prop for autoScroll.
+
   const followKey = typeof children === "string" ? children : output;
 
   const tokens = React.useMemo(() => {

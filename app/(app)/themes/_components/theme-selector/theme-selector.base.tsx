@@ -17,7 +17,7 @@ const collection = createListCollection({
 
 const renderBaseItem = (item: (typeof BASE_COLORS)[number]) => (
   <div className="flex items-center gap-2">
-    <div aria-hidden="true" className={cn("size-4 rounded-full", item.hex)} />
+    <div aria-hidden className={cn("size-4 rounded-full", item.hex)} />
     {item.label}
   </div>
 );
@@ -53,7 +53,7 @@ export const ThemeSelectorBase = () => {
       renderItem={renderBaseItem}
       trigger={
         <div
-          aria-hidden="true"
+          aria-hidden
           className={cn(
             "size-4 rounded-full",
             current?.hex ?? "bg-neutral-500"

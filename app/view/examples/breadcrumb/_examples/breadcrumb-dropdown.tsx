@@ -24,14 +24,14 @@ const BreadcrumbDropdown = () => (
         <BreadcrumbLink href="/">Home</BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator>
-        <DotIcon aria-hidden="true" />
+        <DotIcon aria-hidden />
       </BreadcrumbSeparator>
       <BreadcrumbItem>
         <Menu positioning={{ placement: "bottom-start" }}>
           <MenuTrigger asChild>
             <Button size="sm" variant="ghost">
               Components
-              <ChevronDownIcon className="size-3.5" data-icon="inline-end" />
+              <ChevronDownIcon data-icon="inline-end" />
             </Button>
           </MenuTrigger>
           <MenuContent className="w-44">
@@ -48,7 +48,7 @@ const BreadcrumbDropdown = () => (
         </Menu>
       </BreadcrumbItem>
       <BreadcrumbSeparator>
-        <DotIcon aria-hidden="true" />
+        <DotIcon aria-hidden />
       </BreadcrumbSeparator>
       <BreadcrumbItem>
         <BreadcrumbPage>Breadcrumb</BreadcrumbPage>

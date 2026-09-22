@@ -42,7 +42,7 @@ const Example = () => {
   );
 };
 
-const initialItems = Array.from({ length: 30 }, (_, i) => ({
+const initialItems = Array.from({ length: 60 }, (_, i) => ({
   label: `Option ${i + 1}`,
   value: `option-${i + 1}`,
 }));

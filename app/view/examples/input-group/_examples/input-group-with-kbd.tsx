@@ -45,7 +45,7 @@ const InputGroupWithKbd = () => (
           placeholder="Type to search..."
         />
         <InputGroupAddon align="inline-start">
-          <SearchIcon aria-hidden="true" />
+          <SearchIcon aria-hidden />
         </InputGroupAddon>
         <InputGroupAddon align="inline-end">
           <KbdGroup>
@@ -75,7 +75,7 @@ const InputGroupWithKbd = () => (
         placeholder="Search documentation..."
       />
       <InputGroupAddon>
-        <SearchIcon aria-hidden="true" />
+        <SearchIcon aria-hidden />
       </InputGroupAddon>
       <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
     </InputGroup>
@@ -86,7 +86,7 @@ const InputGroupWithKbd = () => (
         placeholder="Search documentation..."
       />
       <InputGroupAddon>
-        <SearchIcon aria-hidden="true" />
+        <SearchIcon aria-hidden />
       </InputGroupAddon>
       <InputGroupAddon align="inline-end">Disabled</InputGroupAddon>
     </InputGroup>
@@ -96,7 +96,7 @@ const InputGroupWithKbd = () => (
         <InputGroup>
           <InputGroupInput id="input-group-11" placeholder="First Name" />
           <InputGroupAddon align="inline-end">
-            <InfoIcon aria-hidden="true" />
+            <InfoIcon aria-hidden />
           </InputGroupAddon>
         </InputGroup>
       </Field>
@@ -105,7 +105,7 @@ const InputGroupWithKbd = () => (
         <InputGroup>
           <InputGroupInput id="input-group-12" placeholder="Last Name" />
           <InputGroupAddon align="inline-end">
-            <InfoIcon aria-hidden="true" />
+            <InfoIcon aria-hidden />
           </InputGroupAddon>
         </InputGroup>
       </Field>

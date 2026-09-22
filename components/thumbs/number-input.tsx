@@ -5,19 +5,13 @@ export const NumberInputThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
     <div className="flex w-40 overflow-hidden rounded-lg border border-input bg-muted shadow-sm/4">
       <div className="flex size-8 shrink-0 items-center justify-center border-border border-input border-e">
-        <MinusIcon
-          aria-hidden="true"
-          className="size-3 text-muted-foreground/64"
-        />
+        <MinusIcon aria-hidden className="size-3 text-muted-foreground/64" />
       </div>
       <div className="flex h-8 flex-1 items-center justify-center px-2">
         <div className="h-2 w-8 rounded-full bg-muted-foreground/24" />
       </div>
       <div className="flex size-8 shrink-0 items-center justify-center border-border border-input border-s">
-        <PlusIcon
-          aria-hidden="true"
-          className="size-3 text-muted-foreground/64"
-        />
+        <PlusIcon aria-hidden className="size-3 text-muted-foreground/64" />
       </div>
     </div>
   </ThumbCard>

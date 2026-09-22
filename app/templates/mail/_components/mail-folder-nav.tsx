@@ -25,7 +25,7 @@ export const MailFolderNav = ({
             isActive={activeFolder === label}
             onClick={() => onFolderChange(label)}
           >
-            <Icon aria-hidden="true" />
+            <Icon aria-hidden />
             <span>{label}</span>
           </SidebarMenuButton>
           {count > 0 ? <SidebarMenuBadge>{count}</SidebarMenuBadge> : null}

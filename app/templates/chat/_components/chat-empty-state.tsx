@@ -19,8 +19,8 @@ import { emptyStateSuggestions } from "../_data/chat-demo";
 export const EmptyConversation = ({ onSelect }: { onSelect: () => void }) => (
   <State className="min-h-full">
     <StateHeader>
-      <IconTile aria-hidden="true" size="sm">
-        <SharkIcon aria-hidden="true" />
+      <IconTile aria-hidden size="sm">
+        <SharkIcon aria-hidden />
       </IconTile>
       <StateTitle asChild>
         <h2>What are we building?</h2>
@@ -34,7 +34,7 @@ export const EmptyConversation = ({ onSelect }: { onSelect: () => void }) => (
           <Item asChild className="flex-1" key={item.label} variant="outline">
             <button onClick={onSelect} type="button">
               <ItemMedia className="text-primary" variant="icon">
-                <Icon aria-hidden="true" />
+                <Icon aria-hidden />
               </ItemMedia>
               <ItemContent>
                 <ItemTitle>{item.label}</ItemTitle>

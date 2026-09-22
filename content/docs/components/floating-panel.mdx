@@ -98,7 +98,7 @@ import {
 
 ### Controlled Size
 
-Control the panel size programmatically using the `size` and `onSizeChange` props.
+Use `size` and `onSizeChange` to control the panel size.
 
 <ComponentPreview componentName="floating-panel" fileName="example-controlled-size" />
 
@@ -110,7 +110,7 @@ Use `minSize` and `maxSize` to limit the width and height of a resizable panel.
 
 ### Controlled Position
 
-Control the panel position programmatically using the `position` and `onPositionChange` props.
+Use `position` and `onPositionChange` to control the panel position.
 
 <ComponentPreview componentName="floating-panel" fileName="example-controlled-position" />
 
@@ -154,7 +154,7 @@ Root component. Manages panel position and drag state.
 | `maxSize` | `Size` | `-` |
 | `onSizeChange` | `(details: SizeChangeDetails) => void` | `-` |
 | `lazyMount` | `boolean` | `true` |
-| `persistRect` | `boolean` | `true` |
+| `persistRect` | `boolean` | `-` |
 | `unmountOnExit` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
 | `initialFocusEl` | `() => MaybeElement` | `-` |
@@ -294,7 +294,7 @@ Public FloatingPanelStageTrigger component. It forwards the underlying primitive
 
 ### FloatingPanelFooter
 
-Public FloatingPanelFooter component. It forwards the underlying primitive props.
+Footer area for actions. Put **Cancel first in the DOM**, then the primary action. Uses `flex-col-reverse` / `sm:flex-row sm:justify-end` so Confirm sits on the right (and on top on mobile).
 
 | Prop | Type | Default |
 | --- | --- | --- |

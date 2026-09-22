@@ -32,10 +32,7 @@ const typeIconMap = {
 
 export const TaskAllOption = () => (
   <>
-    <ListFilterIcon
-      aria-hidden="true"
-      className="size-4 text-muted-foreground"
-    />
+    <ListFilterIcon aria-hidden className="size-4 text-muted-foreground" />
     All
   </>
 );
@@ -45,7 +42,7 @@ export const TaskTypeOption = ({ type }: { type: TaskType }) => {
 
   return (
     <>
-      <TypeIcon aria-hidden="true" className="size-4 text-muted-foreground" />
+      <TypeIcon aria-hidden className="size-4 text-muted-foreground" />
       {type}
     </>
   );
@@ -61,7 +58,7 @@ export const TaskPriorityOption = ({
   return (
     <>
       <PriorityIcon
-        aria-hidden="true"
+        aria-hidden
         className={cn("size-4", priorityIconVariants({ priority }))}
       />
       {priority}

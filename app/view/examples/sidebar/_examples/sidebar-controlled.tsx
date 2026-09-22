@@ -50,7 +50,7 @@ const SidebarControlled = () => {
                   <SidebarMenuItem key={project.name}>
                     <SidebarMenuButton asChild>
                       <a href={project.url}>
-                        <project.icon aria-hidden="true" />
+                        <project.icon aria-hidden />
                         <span>{project.name}</span>
                       </a>
                     </SidebarMenuButton>

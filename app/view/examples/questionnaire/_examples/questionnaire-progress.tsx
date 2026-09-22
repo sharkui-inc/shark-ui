@@ -54,7 +54,7 @@ const QuestionnaireProgressExample = () => {
       onSubmit={handleSubmit}
     >
       <div className="w-full">
-        <div aria-hidden="true" className="mb-2 flex gap-1.5">
+        <div aria-hidden className="mb-2 flex gap-1.5">
           {items.map((definition, index) => (
             <span
               className={

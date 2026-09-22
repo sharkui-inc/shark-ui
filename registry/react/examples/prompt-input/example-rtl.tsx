@@ -103,7 +103,7 @@ const Example = () => {
                   aria-label={values.addToPromptAriaLabel}
                   size="icon-sm"
                 >
-                  <PlusIcon aria-hidden="true" />
+                  <PlusIcon aria-hidden />
                 </PromptInputButton>
               </MenuTrigger>
               <MenuContent className="w-80">
@@ -133,7 +133,7 @@ const Example = () => {
               value={access}
             >
               <SelectTrigger showTrigger={false} size="sm" variant="ghost">
-                <ShieldAlertIcon aria-hidden="true" />
+                <ShieldAlertIcon aria-hidden />
                 <SelectValue placeholder={values.accessLevels[0].label} />
               </SelectTrigger>
               <SelectContent>
@@ -193,7 +193,7 @@ const Example = () => {
             aria-label={values.voiceInputAriaLabel}
             size="icon-sm"
           >
-            <MicIcon aria-hidden="true" />
+            <MicIcon aria-hidden />
           </PromptInputButton>
           <PromptInputSubmit className="ms-2" size="icon-sm" />
         </PromptInputFooter>
@@ -203,11 +203,7 @@ const Example = () => {
             size="sm"
             variant="ghost"
           >
-            <FolderIcon
-              aria-hidden="true"
-              className="size-4"
-              data-icon="inline-start"
-            />
+            <FolderIcon aria-hidden data-icon="inline-start" />
             viajuntos
           </Button>
           <Button
@@ -215,11 +211,7 @@ const Example = () => {
             size="sm"
             variant="ghost"
           >
-            <MonitorIcon
-              aria-hidden="true"
-              className="size-4"
-              data-icon="inline-start"
-            />
+            <MonitorIcon aria-hidden data-icon="inline-start" />
             {values.local}
           </Button>
           <Button
@@ -227,11 +219,7 @@ const Example = () => {
             size="sm"
             variant="ghost"
           >
-            <GitBranchIcon
-              aria-hidden="true"
-              className="size-4"
-              data-icon="inline-start"
-            />
+            <GitBranchIcon aria-hidden data-icon="inline-start" />
             main
           </Button>
           <div className="ms-auto">
@@ -280,32 +268,32 @@ const models = [
 const actionItemsByValue = [
   {
     group: "context",
-    icon: <PaperclipIcon aria-hidden="true" />,
+    icon: <PaperclipIcon aria-hidden />,
     value: "files",
   },
   {
     group: "context",
-    icon: <ImagePlusIcon aria-hidden="true" />,
+    icon: <ImagePlusIcon aria-hidden />,
     value: "image",
   },
   {
     group: "context",
-    icon: <GlobeIcon aria-hidden="true" />,
+    icon: <GlobeIcon aria-hidden />,
     value: "web-page",
   },
   {
     group: "context",
-    icon: <FileTextIcon aria-hidden="true" />,
+    icon: <FileTextIcon aria-hidden />,
     value: "instructions",
   },
   {
     group: "agent",
-    icon: <ListTodoIcon aria-hidden="true" />,
+    icon: <ListTodoIcon aria-hidden />,
     value: "plan",
   },
   {
     group: "agent",
-    icon: <CircleHelpIcon aria-hidden="true" />,
+    icon: <CircleHelpIcon aria-hidden />,
     value: "ask",
   },
 ] as const;

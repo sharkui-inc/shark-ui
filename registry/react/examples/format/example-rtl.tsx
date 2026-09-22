@@ -1,37 +1,46 @@
 "use client";
 
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
+import {
+  Attachment,
+  AttachmentContent,
+  AttachmentDescription,
+  AttachmentMedia,
+  AttachmentTitle,
+} from "@/registry/react/components/attachment";
 import { FormatByte } from "@/registry/react/components/format";
 
 const Example = () => {
   const { locale } = usePreviewLocale();
-
   const { values } = translations[locale];
 
   return (
-    <div className="flex flex-col gap-1">
-      <span className="text-muted-foreground text-sm">{values.label}</span>
-      <span className="font-semibold text-2xl text-foreground tabular-nums tracking-tight">
-        <FormatByte value={120_000} />
-      </span>
-    </div>
+    <Attachment state="done">
+      <AttachmentMedia format="pdf" variant="file" />
+      <AttachmentContent>
+        <AttachmentTitle>{values.title}</AttachmentTitle>
+        <AttachmentDescription>
+          PDF · <FormatByte value={120_000} />
+        </AttachmentDescription>
+      </AttachmentContent>
+    </Attachment>
   );
 };
 
 const translations = {
   ar: {
     values: {
-      label: "حجم الملف",
+      title: "إرشادات-العلامة.pdf",
     },
   },
   en: {
     values: {
-      label: "File size",
+      title: "brand-guidelines.pdf",
     },
   },
   he: {
     values: {
-      label: "גודל קובץ",
+      title: "הנחיות-מותג.pdf",
     },
   },
 };

@@ -228,7 +228,7 @@ Scrollable body content.
 
 ### SheetFooter
 
-Footer area for action buttons.
+Footer area for action buttons. Same pattern as `DialogFooter`: primary action first in the DOM; layout classes reverse the visual order (Cancel left / Confirm right).
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -286,6 +286,9 @@ Provides a Sheet API created with `useSheet` to descendant components.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `value` | `UseSheetReturn` | **required** |
+| `modal` | `boolean` | `true` |
+
+`modal` gates the overlay the same way as on `Sheet` / `Dialog`. Pass the same value you used in `useSheet` when it is not the default.
 
 ---
 

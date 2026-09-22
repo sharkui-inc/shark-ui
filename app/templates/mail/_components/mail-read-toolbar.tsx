@@ -37,13 +37,13 @@ export const MailReadToolbar = ({
     <ButtonGroup aria-label="Message actions" className="min-w-0">
       <ButtonGroup aria-label="Mailbox">
         <MailToolbarButton label="Archive message">
-          <ArchiveIcon aria-hidden="true" />
+          <ArchiveIcon aria-hidden />
         </MailToolbarButton>
         <MailToolbarButton label="Delete message">
-          <Trash2Icon aria-hidden="true" />
+          <Trash2Icon aria-hidden />
         </MailToolbarButton>
         <MailToolbarButton label="Mark as junk">
-          <CircleAlertIcon aria-hidden="true" />
+          <CircleAlertIcon aria-hidden />
         </MailToolbarButton>
       </ButtonGroup>
       <ButtonGroup aria-label="Flags">
@@ -52,11 +52,7 @@ export const MailReadToolbar = ({
           onClick={onToggleUnread}
           pressed={isUnread}
         >
-          {isUnread ? (
-            <EyeIcon aria-hidden="true" />
-          ) : (
-            <EyeOffIcon aria-hidden="true" />
-          )}
+          {isUnread ? <EyeIcon aria-hidden /> : <EyeOffIcon aria-hidden />}
         </MailToolbarButton>
         <MailToolbarButton
           label={`${isStarred ? "Remove" : "Add"} message ${isStarred ? "from" : "to"} favorites`}
@@ -64,7 +60,7 @@ export const MailReadToolbar = ({
           pressed={isStarred}
         >
           <StarIcon
-            aria-hidden="true"
+            aria-hidden
             className={isStarred ? "fill-current text-primary" : undefined}
           />
         </MailToolbarButton>
@@ -74,13 +70,13 @@ export const MailReadToolbar = ({
           label="Reply"
           onClick={() => onComposeChange("reply")}
         >
-          <ReplyIcon aria-hidden="true" />
+          <ReplyIcon aria-hidden />
         </MailToolbarButton>
         <MailToolbarButton
           label="Reply all"
           onClick={() => onComposeChange("reply-all")}
         >
-          <ReplyAllIcon aria-hidden="true" />
+          <ReplyAllIcon aria-hidden />
         </MailToolbarButton>
       </ButtonGroup>
     </ButtonGroup>
@@ -92,7 +88,7 @@ export const MailReadToolbar = ({
         type="search"
       />
       <InputGroupAddon>
-        <SearchIcon aria-hidden="true" />
+        <SearchIcon aria-hidden />
       </InputGroupAddon>
     </InputGroup>
   </>

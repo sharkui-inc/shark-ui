@@ -62,7 +62,7 @@ export const TaskPriorityLabel = ({ priority }: { priority: TaskPriority }) => {
   return (
     <span className="inline-flex items-center gap-1.5 font-medium text-sm">
       <PriorityIcon
-        aria-hidden="true"
+        aria-hidden
         className={cn("size-3.5", priorityIconVariants({ priority }))}
       />
       {priority}
@@ -83,19 +83,19 @@ export const TaskRowMenu = ({
         size="icon-sm"
         variant="ghost"
       >
-        <EllipsisIcon aria-hidden="true" />
+        <EllipsisIcon aria-hidden />
       </Button>
     </MenuTrigger>
     <MenuContent>
       <MenuItem onClick={() => onEdit(task)} value={`edit-${task.id}`}>
-        <PencilIcon aria-hidden="true" />
+        <PencilIcon aria-hidden />
         Edit task
       </MenuItem>
       <MenuItem
         onClick={() => onDuplicate(task)}
         value={`duplicate-${task.id}`}
       >
-        <CopyIcon aria-hidden="true" />
+        <CopyIcon aria-hidden />
         Duplicate task
       </MenuItem>
       <MenuItem
@@ -103,7 +103,7 @@ export const TaskRowMenu = ({
         value={`delete-${task.id}`}
         variant="destructive"
       >
-        <Trash2Icon aria-hidden="true" />
+        <Trash2Icon aria-hidden />
         Delete task
       </MenuItem>
     </MenuContent>

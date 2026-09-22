@@ -59,7 +59,7 @@ export const ChatProjects = () => (
         </p>
       </div>
       <Button>
-        <PlusIcon aria-hidden="true" className="size-4" />
+        <PlusIcon aria-hidden />
         Create project
       </Button>
     </div>
@@ -70,7 +70,7 @@ export const ChatProjects = () => (
         return (
           <Card key={project.id}>
             <CardMedia variant="icon">
-              <Icon aria-hidden="true" />
+              <Icon aria-hidden />
             </CardMedia>
             <CardHeader
               description={project.description}

@@ -16,7 +16,7 @@ const InputInputGroup = () => (
         <InputGroupText>https://</InputGroupText>
       </InputGroupAddon>
       <InputGroupAddon align="inline-end">
-        <InfoIcon aria-hidden="true" />
+        <InfoIcon aria-hidden />
       </InputGroupAddon>
     </InputGroup>
   </Field>

@@ -10,7 +10,7 @@ import {
 const Example = () => (
   <div className="flex w-full max-w-lg flex-col gap-2">
     <span className="flex items-center gap-2 px-1 text-muted-foreground text-xs">
-      <LockKeyholeIcon aria-hidden="true" className="size-3.5" />
+      <LockKeyholeIcon aria-hidden className="size-3.5" />
       Workspace access required.
     </span>
     <PromptInput>
@@ -21,7 +21,7 @@ const Example = () => (
       />
       <PromptInputFooter>
         <PromptInputButton aria-label="Attach file" disabled size="icon-sm">
-          <PaperclipIcon aria-hidden="true" />
+          <PaperclipIcon aria-hidden />
         </PromptInputButton>
         <PromptInputSubmit disabled size="icon-sm" />
       </PromptInputFooter>

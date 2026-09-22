@@ -35,7 +35,7 @@ export const MusicTransport = ({
         size="icon-sm"
         variant="ghost"
       >
-        <ShuffleIcon aria-hidden="true" />
+        <ShuffleIcon aria-hidden />
       </Button>
       <Button
         aria-label="Previous track"
@@ -43,7 +43,7 @@ export const MusicTransport = ({
         size="icon-sm"
         variant="ghost"
       >
-        <SkipBackIcon aria-hidden="true" />
+        <SkipBackIcon aria-hidden />
       </Button>
       <Button
         aria-label={isPlaying ? "Pause" : "Play"}
@@ -51,11 +51,7 @@ export const MusicTransport = ({
         size="icon-sm"
         variant="ghost"
       >
-        {isPlaying ? (
-          <PauseIcon aria-hidden="true" />
-        ) : (
-          <PlayIcon aria-hidden="true" />
-        )}
+        {isPlaying ? <PauseIcon aria-hidden /> : <PlayIcon aria-hidden />}
       </Button>
       <Button
         aria-label="Next track"
@@ -63,7 +59,7 @@ export const MusicTransport = ({
         size="icon-sm"
         variant="ghost"
       >
-        <SkipForwardIcon aria-hidden="true" />
+        <SkipForwardIcon aria-hidden />
       </Button>
       <Button
         aria-label="Repeat queue"
@@ -71,7 +67,7 @@ export const MusicTransport = ({
         size="icon-sm"
         variant="ghost"
       >
-        <Repeat2Icon aria-hidden="true" />
+        <Repeat2Icon aria-hidden />
       </Button>
     </div>
     <div className="flex items-center gap-2">

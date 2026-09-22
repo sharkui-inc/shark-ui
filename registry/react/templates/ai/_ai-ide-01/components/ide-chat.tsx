@@ -94,7 +94,7 @@ export const IdeChat = () => {
                 <MessageAvatar>
                   <Avatar size="sm">
                     <AvatarFallback>
-                      <BotIcon aria-hidden="true" className="size-4" />
+                      <BotIcon aria-hidden className="size-4" />
                     </AvatarFallback>
                   </Avatar>
                 </MessageAvatar>

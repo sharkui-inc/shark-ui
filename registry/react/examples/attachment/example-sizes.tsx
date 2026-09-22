@@ -11,7 +11,7 @@ const Example = () => (
   <div className="flex w-full max-w-sm flex-col gap-3">
     <Attachment size="lg">
       <AttachmentMedia>
-        <FileTextIcon aria-hidden="true" />
+        <FileTextIcon aria-hidden />
       </AttachmentMedia>
       <AttachmentContent>
         <AttachmentTitle>Large attachment</AttachmentTitle>
@@ -20,7 +20,7 @@ const Example = () => (
     </Attachment>
     <Attachment>
       <AttachmentMedia>
-        <FileTextIcon aria-hidden="true" />
+        <FileTextIcon aria-hidden />
       </AttachmentMedia>
       <AttachmentContent>
         <AttachmentTitle>Default attachment</AttachmentTitle>
@@ -29,7 +29,7 @@ const Example = () => (
     </Attachment>
     <Attachment size="sm">
       <AttachmentMedia>
-        <FileTextIcon aria-hidden="true" />
+        <FileTextIcon aria-hidden />
       </AttachmentMedia>
       <AttachmentContent>
         <AttachmentTitle>Small attachment</AttachmentTitle>
@@ -38,7 +38,7 @@ const Example = () => (
     </Attachment>
     <Attachment size="xs">
       <AttachmentMedia>
-        <FileTextIcon aria-hidden="true" />
+        <FileTextIcon aria-hidden />
       </AttachmentMedia>
       <AttachmentContent>
         <AttachmentTitle>Extra small attachment</AttachmentTitle>

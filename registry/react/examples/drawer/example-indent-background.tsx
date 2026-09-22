@@ -18,7 +18,6 @@ const Example = () => {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   return (
-    // translateZ keeps the portaled drawer inside this frame
     <div
       className={cn(
         "relative h-80 w-full max-w-lg",

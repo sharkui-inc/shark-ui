@@ -7,7 +7,7 @@ import {
 
 const AlertCustomColor = () => (
   <Alert className="max-w-md border-amber-500/32 bg-amber-500/8 [&_svg]:text-amber-500">
-    <AlertTriangleIcon aria-hidden="true" />
+    <AlertTriangleIcon aria-hidden />
     <AlertTitle>Your subscription will expire in 3 days</AlertTitle>
     <AlertDescription>
       Renew now to avoid service interruption or upgrade to a paid plan to

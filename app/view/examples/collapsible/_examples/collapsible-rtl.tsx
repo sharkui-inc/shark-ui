@@ -15,7 +15,7 @@ const CollapsibleRtl = () => {
   return (
     <div className="flex w-full justify-center">
       <Collapsible
-        className="flex w-[350px] flex-col gap-2"
+        className="flex w-full max-w-80 flex-col gap-2"
         onOpenChange={({ open }) => setIsOpen(open)}
         open={isOpen}
       >
@@ -23,7 +23,7 @@ const CollapsibleRtl = () => {
           <h4 className="font-semibold text-sm">الطلب #4189</h4>
           <CollapsibleTrigger asChild>
             <Button size="icon-md" variant="ghost">
-              <ChevronsUpDownIcon aria-hidden="true" />
+              <ChevronsUpDownIcon aria-hidden />
               <span className="sr-only">Toggle details</span>
             </Button>
           </CollapsibleTrigger>

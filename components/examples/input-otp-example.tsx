@@ -162,7 +162,7 @@ export const InputOTPExample = (props: React.ComponentProps<"div">) => {
                 size="sm"
                 variant="ghost"
               >
-                <RefreshCwIcon aria-hidden="true" />
+                <RefreshCwIcon aria-hidden />
                 {cooldown > 0 ? `Resend in ${cooldown}s` : "Resend code"}
               </Button>
               <Button

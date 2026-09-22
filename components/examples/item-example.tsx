@@ -25,13 +25,13 @@ export const ItemExample = () => (
       <Item asChild variant="outline">
         <button className="w-full text-start" type="button">
           <ItemMedia>
-            <BadgeCheck aria-hidden="true" className="size-5" />
+            <BadgeCheck aria-hidden className="size-5" />
           </ItemMedia>
           <ItemContent>
             <ItemTitle>Your profile has been verified.</ItemTitle>
           </ItemContent>
           <ItemActions>
-            <ChevronRight aria-hidden="true" className="size-4" />
+            <ChevronRight aria-hidden className="size-4" />
           </ItemActions>
         </button>
       </Item>

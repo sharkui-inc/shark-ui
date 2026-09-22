@@ -22,7 +22,7 @@ const Example = () => (
         </AttachmentContent>
         <AttachmentActions>
           <AttachmentAction aria-label={`Remove ${file.name}`}>
-            <XIcon aria-hidden="true" />
+            <XIcon aria-hidden />
           </AttachmentAction>
         </AttachmentActions>
       </Attachment>

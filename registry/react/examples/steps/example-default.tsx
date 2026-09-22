@@ -45,16 +45,13 @@ const StepsDemo = () => (
       <StepsNext asChild>
         <Button>
           Next
-          <ChevronRight
-            className="size-4 rtl:rotate-180"
-            data-icon="inline-end"
-          />
+          <ChevronRight className="rtl:rotate-180" data-icon="inline-end" />
         </Button>
       </StepsNext>
       <StepsPrevious asChild>
         <Button variant="outline">
           <ChevronLeftIcon
-            className="size-4 rtl:rotate-180"
+            className="rtl:rotate-180"
             data-icon="inline-start"
           />
           Back

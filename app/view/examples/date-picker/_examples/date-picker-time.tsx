@@ -31,7 +31,7 @@ const DatePickerTime = () => (
         <DatePickerTrigger asChild>
           <Button className="w-full justify-between" variant="outline">
             <DatePickerValue placeholder="Select date" />
-            <ChevronDownIcon aria-hidden="true" data-icon="inline-end" />
+            <ChevronDownIcon aria-hidden data-icon="inline-end" />
           </Button>
         </DatePickerTrigger>
         <DatePickerContent>

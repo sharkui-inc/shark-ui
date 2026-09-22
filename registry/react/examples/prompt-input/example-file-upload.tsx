@@ -51,7 +51,7 @@ const Example = () => {
           <PromptInputFooter>
             <FileUploadTrigger asChild>
               <PromptInputButton aria-label="Attach files" size="icon-sm">
-                <PaperclipIcon aria-hidden="true" />
+                <PaperclipIcon aria-hidden />
               </PromptInputButton>
             </FileUploadTrigger>
             <PromptInputSubmit size="icon-sm" />

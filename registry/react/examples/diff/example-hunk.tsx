@@ -13,7 +13,7 @@ const Example = () => (
     </DiffHeader>
     <DiffContent>
       <DiffLine line={10} type="context">
-        {"export async function requireUser(request: Request) {"}
+        {"export async function reqUser(request: Request) {"}
       </DiffLine>
       <DiffLine line={11} type="context">
         {"  const session = await getSession(request);"}

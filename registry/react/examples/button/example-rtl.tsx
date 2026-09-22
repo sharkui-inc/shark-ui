@@ -16,13 +16,13 @@ const Example = () => {
       <Button variant="outline">
         {values.submit}
         <ArrowRightIcon
-          aria-hidden="true"
+          aria-hidden
           className="rtl:rotate-180"
           data-icon="inline-end"
         />
       </Button>
       <Button aria-label={values.add} size="icon-md" variant="outline">
-        <PlusIcon aria-hidden="true" />
+        <PlusIcon aria-hidden />
       </Button>
       <Button disabled isLoading variant="secondary">
         {values.loading}

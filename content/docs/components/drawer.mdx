@@ -211,8 +211,6 @@ Nest a `Drawer` inside another.
 
 `[--space]` on `DrawerContent`. 
 
-Default is `--spacing(6)`.
-
 <ComponentPreview componentName="drawer" fileName="example-custom-spacing" />
 
 > You can use breakpoint utilities to change the internal spacing at different screen sizes.
@@ -334,7 +332,7 @@ Scrollable body content.
 
 ### DrawerFooter
 
-Footer area for action buttons.
+Footer area for action buttons. Same pattern as `DialogFooter`: primary action first in the DOM; layout classes reverse the visual order (Cancel left / Confirm right).
 
 | Prop | Type | Default |
 | --- | --- | --- |

@@ -53,7 +53,7 @@ const Example = () => (
           <Button variant="outline">
             Next
             <ChevronRightIcon
-              className="size-4 rtl:rotate-180"
+              className="rtl:rotate-180"
               data-icon="inline-end"
             />
           </Button>
@@ -62,7 +62,7 @@ const Example = () => (
         <StepsPrevious asChild>
           <Button variant="outline">
             <ChevronLeftIcon
-              className="size-4 rtl:rotate-180"
+              className="rtl:rotate-180"
               data-icon="inline-start"
             />
             Back
