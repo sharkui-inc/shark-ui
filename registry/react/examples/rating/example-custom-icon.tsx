@@ -1,3 +1,5 @@
+"use client";
+
 import { HeartIcon } from "lucide-react";
 import { Rating } from "@/registry/react/components/rating";
 
