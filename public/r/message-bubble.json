@@ -1,10 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "dependencies": [
-    "@ark-ui/react",
-    "lucide-react",
-    "tailwind-variants"
-  ],
+  "dependencies": ["@ark-ui/react", "lucide-react", "tailwind-variants"],
   "description": "Message surface with variants, alignment, and reaction clusters.",
   "name": "message-bubble",
   "type": "registry:ui",

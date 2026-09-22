@@ -1,13 +1,8 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "dependencies": [
-    "@ark-ui/react",
-    "tailwind-variants"
-  ],
+  "dependencies": ["@ark-ui/react", "tailwind-variants"],
   "name": "announcement",
-  "registryDependencies": [
-    "https://shark-ui.com/r/badge.json"
-  ],
+  "registryDependencies": ["https://shark-ui.com/r/badge.json"],
   "type": "registry:ui",
   "files": [
     {

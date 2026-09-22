@@ -14,16 +14,10 @@
       "success-foreground": "var(--color-emerald-700)"
     }
   },
-  "dependencies": [
-    "@ark-ui/react",
-    "lucide-react",
-    "tailwind-variants"
-  ],
+  "dependencies": ["@ark-ui/react", "lucide-react", "tailwind-variants"],
   "description": "Unified diff hunks with add, delete, and context lines.",
   "name": "diff",
-  "registryDependencies": [
-    "https://shark-ui.com/r/scroll-area.json"
-  ],
+  "registryDependencies": ["https://shark-ui.com/r/scroll-area.json"],
   "type": "registry:ui",
   "files": [
     {
