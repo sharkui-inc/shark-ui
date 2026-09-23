@@ -122,15 +122,52 @@ export const toCompositionRegistryItem = (
   type: composition.type,
 });
 
+const collectUrlCandidates = (value: unknown, out: string[]) => {
+  if (typeof value === "string") {
+    out.push(value);
+    return;
+  }
+
+  if (!Array.isArray(value)) {
+    return;
+  }
+
+  for (const entry of value) {
+    if (typeof entry === "string") {
+      out.push(entry);
+    }
+  }
+};
+
 export const assertNoLocalhost = (
   fileName: string,
   raw: string,
   siteOrigin: string
 ) => {
-  if (LOCALHOST_RE.test(raw)) {
-    throw new Error(
-      `localhost URL found in public/r/${fileName}. Registry artifacts must use ${siteOrigin}.`
-    );
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    return;
+  }
+
+  if (typeof parsed !== "object" || parsed === null) {
+    return;
+  }
+
+  const record = parsed as Record<string, unknown>;
+  const candidates: string[] = [];
+
+  collectUrlCandidates(record.registryDependencies, candidates);
+  collectUrlCandidates(record.url, candidates);
+  collectUrlCandidates(record.homepage, candidates);
+
+  for (const candidate of candidates) {
+    if (LOCALHOST_RE.test(candidate)) {
+      throw new Error(
+        `localhost URL found in public/r/${fileName}. Registry artifacts must use ${siteOrigin}.`
+      );
+    }
   }
 };
 
