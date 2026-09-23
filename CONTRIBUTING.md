@@ -30,7 +30,7 @@ Docs run at http://localhost:3000.
 
 ## Before a PR
 
-- Run `pnpm lint:fix`. CI does not gate on `pnpm lint:check` yet.
+- Run `pnpm lint:fix`. CI runs `pnpm lint:check`.
 - Run `pnpm test`.
 - Run `pnpm build` (covers registry, theme, and typecheck). If you did not touch registry or theme sources, `pnpm typecheck` is enough.
 - If you changed registry source or `registry/manifest`, run `pnpm registry:build` and commit `public/r` so the drift check passes. Vercel regenerates JSON on deploy regardless.

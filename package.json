@@ -38,11 +38,6 @@
     "theme:build": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/build-themes.mts",
     "typecheck": "next build"
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,jsonc,mts,css,md,mdx}": [
-      "pnpm lint:fix"
-    ]
-  },
   "dependencies": {
     "@ai-sdk/react": "^4.0.114",
     "@ark-ui/react": "^5.39.2",
@@ -97,7 +92,6 @@
     "@types/react-dom": "19.3.0",
     "esbuild": "^0.28.2",
     "jsdom": "^30.1.1",
-    "lint-staged": "^17.5.1",
     "postcss": "^8.5.28",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",
