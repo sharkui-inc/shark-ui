@@ -1,11 +1,14 @@
 import {
   BASE_COLORS,
+  type BaseColorName,
   BORDER_RADIUS,
+  type BorderRadiusName,
   type PrimaryTone as CatalogPrimaryTone,
   getBaseFillCss,
   getPrimaryFillCss,
   PRIMARY_COLORS,
   PRIMARY_TONES,
+  type PrimaryColorName,
 } from "./catalog";
 import {
   DEFAULT_FONT_HEADING as DEFAULT_THEME_FONT_HEADING,
@@ -17,9 +20,9 @@ import {
   type ThemeFontSlot,
 } from "./fonts";
 
-export type PrimaryColor = (typeof PRIMARY_COLORS)[number]["value"];
-export type BaseColor = (typeof BASE_COLORS)[number]["value"];
-export type BorderRadius = (typeof BORDER_RADIUS)[number]["value"];
+export type PrimaryColor = PrimaryColorName;
+export type BaseColor = BaseColorName;
+export type BorderRadius = BorderRadiusName;
 export type PrimaryTone = CatalogPrimaryTone;
 
 export type ThemeLockKey =
@@ -317,15 +320,7 @@ export interface ThemePreset {
   swatchClass: string;
 }
 
-export type ThemePresetPatch = Pick<
-  ThemeConfig,
-  | "baseColor"
-  | "borderRadius"
-  | "fontHeading"
-  | "fontSans"
-  | "primaryColor"
-  | "primaryTone"
->;
+export type ThemePresetPatch = VisualThemePick;
 
 // Accent follows the base 500 undertone: analogous chroma-up when that hue is
 // unique in the set, square (±90°) when analogous collides with another preset.

@@ -21,36 +21,35 @@ describe("absoluteUrl", () => {
     }
   });
 
-  it("joins NEXT_PUBLIC_SITE_URL without a double slash", () => {
-    delete process.env.VERCEL_URL;
-    process.env.NEXT_PUBLIC_SITE_URL = "https://example.test/";
-    assert.equal(
-      absoluteUrl("/r/button.json"),
-      "https://example.test/r/button.json"
-    );
-  });
-
-  it("uses VERCEL_URL before NEXT_PUBLIC_SITE_URL", () => {
-    process.env.NEXT_PUBLIC_SITE_URL = "https://example.test";
+  it("uses SITE_CONFIG.url even when NEXT_PUBLIC_SITE_URL is set", () => {
+    process.env.NEXT_PUBLIC_SITE_URL = "https://shark.vini.one/";
     process.env.VERCEL_URL = "preview-shark-ui.vercel.app/";
 
     assert.equal(
-      absoluteUrl("docs/components/button.md"),
-      "https://preview-shark-ui.vercel.app/docs/components/button.md"
+      absoluteUrl("/docs/components/button"),
+      `${SITE_CONFIG.url}/docs/components/button`
     );
   });
 
-  it("preserves the protocol when VERCEL_URL includes one", () => {
+  it("ignores VERCEL_URL", () => {
     delete process.env.NEXT_PUBLIC_SITE_URL;
-    process.env.VERCEL_URL = "http://localhost:3000/";
+    process.env.VERCEL_URL = "preview-shark-ui.vercel.app/";
 
-    assert.equal(absoluteUrl("/docs"), "http://localhost:3000/docs");
+    assert.equal(absoluteUrl("/docs"), `${SITE_CONFIG.url}/docs`);
   });
 
-  it("falls back to SITE_CONFIG.url when env is unset", () => {
-    delete process.env.NEXT_PUBLIC_SITE_URL;
-    delete process.env.VERCEL_URL;
-    assert.equal(absoluteUrl("/docs"), `${SITE_CONFIG.url}/docs`);
+  it("joins paths without a double slash", () => {
+    assert.equal(
+      absoluteUrl("/r/button.json"),
+      `${SITE_CONFIG.url}/r/button.json`
+    );
+  });
+
+  it("joins paths that omit a leading slash", () => {
+    assert.equal(
+      absoluteUrl("docs/components/button.md"),
+      `${SITE_CONFIG.url}/docs/components/button.md`
+    );
   });
 
   it("uses the canonical site URL for registry artifacts", () => {

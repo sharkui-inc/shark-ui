@@ -1,13 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "categories": [
-    "chart"
-  ],
-  "dependencies": [
-    "@ark-ui/react",
-    "lucide-react",
-    "recharts"
-  ],
+  "categories": ["chart"],
+  "dependencies": ["@ark-ui/react", "lucide-react", "recharts"],
   "description": "A line chart example with label.",
   "files": [
     {

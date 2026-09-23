@@ -1,196 +1,182 @@
 ---
 name: Shark UI
-description: A compact, themeable registry interface built from quiet semantic surfaces and inspectable product UI.
+description: Themeable copy-and-own registry UI with semantic surfaces, one primary accent, flat elevation, and inspectable product compositions.
+typography:
+  sans:
+    fontFamily: Hanken Grotesk
+    fontSize: 1rem
+    fontWeight: 400
+    lineHeight: 1.5
+  heading:
+    fontFamily: Figtree
+    fontSize: 1.25rem
+    fontWeight: 600
+    lineHeight: 1.25
+  mono:
+    fontFamily: JetBrains Mono
+    fontSize: 0.875rem
+    fontWeight: 400
+    lineHeight: 1.5
+rounded:
+  sm: 0.375rem
+  md: 0.5rem
+  lg: 0.625rem
+  xl: 0.75rem
+spacing:
+  control: 0.5rem
+  related: 1rem
+  region: 2.5rem
+components:
+  button-primary:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.on-primary}"
+    rounded: "{rounded.lg}"
+  button-outline:
+    rounded: "{rounded.lg}"
+  card:
+    backgroundColor: "{colors.card}"
+    textColor: "{colors.on-card}"
+    rounded: "{rounded.xl}"
+  input:
+    rounded: "{rounded.lg}"
+    padding: 0.5rem
+colors:
+  primary: "var(--primary)"
+  on-primary: "var(--primary-foreground)"
+  background: "var(--background)"
+  on-background: "var(--foreground)"
+  card: "var(--card)"
+  on-card: "var(--card-foreground)"
+  muted: "var(--muted)"
+  on-muted: "var(--muted-foreground)"
+  border: "var(--border)"
+  ring: "var(--ring)"
 ---
 
-# Shark UI design handbook
+# Shark UI
 
-Shark UI is a copy-and-own React registry built with Ark UI and Tailwind CSS v4. This handbook explains the intent behind its visual and interaction system. It is the canonical human reference; [the public design contract](public/design.md) is the shorter, prescriptive version for AI-assisted UI work.
+Canonical design rationale for Shark UI. For day-to-day UI generation, prefer the shorter [public design contract](public/design.md). This file explains *why* the system looks and behaves the way it does, and when to extend it.
 
-## Purpose and principles
+**Visual character:** Compact, high-signal product UI on neutral semantic surfaces; one configurable primary for action; structure from layout, surface steps, and 1px borders, not glow or heavy shadow.
 
-### The living workbench
+**Fits:** Developer docs, registry previews, forms, collections, settings, and dense tool-like product surfaces.
 
-Shark UI should feel like a well-kept technical workbench: quiet enough for the interface under examination to lead, precise enough that controls feel intentional. It uses compact geometry, semantic surface layers, restrained borders, and real product compositions instead of ornamental framing.
+**Does not fit:** Marketing landing pages that need ornamental imagery, multi-accent brand systems, or glassmorphism / neon hierarchy.
 
-### Design for customization
+## Overview
 
-Consumers can change the neutral family, primary accent, base radius, and color mode without changing component grammar. Hierarchy comes from typography, spacing, surface roles, and state—not from accumulating colors or effects.
-
-### Rules at a glance
-
-| Principle | Do | Avoid | Review criterion |
-| --- | --- | --- | --- |
-| Semantic roles | Use semantic surface, foreground, border, and feedback tokens. | Bind reusable UI to raw palette classes. | Every reusable color expresses a semantic role. |
-| One accent | Reserve configured `primary` for action and durable emphasis. | Add a second decorative accent hue. | Surrounding product surfaces remain neutral. |
-| Quiet structure | Establish hierarchy with layout, a surface step, and a border. | Use glow or large shadows as the primary hierarchy device. | Elevation is no stronger than the documented role requires. |
-| Stable interaction | Preserve footprint and visible focus across states. | Let focus, loading, or selection shift nearby layout. | Keyboard focus is visible and geometry stays stable. |
-| Adaptable composition | Let content earn columns and use logical direction. | Compress labels to preserve a desktop arrangement. | The narrow layout remains readable, operable, and RTL-safe. |
-
-## Source of truth and decision order
-
-### What owns each decision
+Shark UI is a copy-and-own React registry (Ark UI + Tailwind CSS v4). Consumers change neutral family, primary hue, base radius, and color mode without changing component grammar.
 
 | Need | Source of truth |
 | --- | --- |
-| Theme values, semantic colors, radius, and mode | `lib/theme/catalog.ts` and generated theme output |
-| Component API, anatomy, and behavior | Component Markdown page and `registry/react/components/` |
-| Shipped composition examples | `registry/react/examples/` |
-| Styling and implementation conventions | `CODE_STYLE.md` and [Styling](https://shark-ui.com/docs/styling.md) |
-| Intent, cross-component rules, and exception threshold | This handbook |
+| Theme values and semantic colors | `lib/theme/catalog.ts` → generated theme CSS |
+| Component API and anatomy | Component docs + `registry/react/components/` |
+| Shipped compositions | `registry/react/examples/` |
+| Implementation conventions | `CODE_STYLE.md`, [Styling](https://shark-ui.com/docs/styling.md) |
+| Operational UI rules for agents | [public/design.md](public/design.md) |
+| Intent and extension threshold | This file |
 
-Do not hand-edit generated theme output or registry JSON. This handbook names roles and relationships; it does not replace their generated values or component documentation.
+**Decision order**
 
-### Choose before creating
+1. Reuse a documented component and variant.
+2. Compose documented primitives.
+3. Propose an extension only when primitives cannot express the task without a misleading API, duplicated a11y work, or repeated local styling.
 
-1. Reuse the documented component and its existing variants when it fits the user task.
-2. Compose documented Shark primitives when no single component represents the composition.
-3. Propose an extension only when the behavior or repeated composition cannot be expressed by those primitives without a misleading API, duplicated accessibility work, or repeated local styling.
+An extension names the user task, primitives considered, a11y + responsive behavior, and one representative composition. No parallel token scale, z-index layer, or interaction grammar.
 
-An extension proposal must name the user task it serves, the primitives considered, the accessibility behavior it owns, responsive behavior, and at least one representative composition. It must not introduce a parallel token scale, arbitrary z-index layer, or alternate interaction grammar.
+## Colors
 
-## Foundations
-
-### Color and surfaces
-
-The palette is role-driven and themeable. Background, foreground, surface, interaction, and feedback roles remain stable while the neutral family and primary hue change.
+Colors are **role-driven and themeable**. Never bind reusable UI to raw palette classes (`bg-blue-500`). Use semantic utilities: `bg-background`, `text-foreground`, `bg-card`, `text-muted-foreground`, `border-input`, `ring-ring`.
 
 | Role | Use |
 | --- | --- |
-| Canvas and foreground | Page foundation and highest-emphasis content. |
-| Card, popover, sidebar, and code | Bounded surfaces paired with their matching foreground token. |
-| Muted | Neutral `/4` recessive content layer. |
-| Accent, secondary, and sidebar accent | Neutral `/8` interactive or supporting fill; `secondary-hover` uses `/16`. |
-| Primary and destructive | Semantic action or feedback, never decoration. |
-| Border and input | Structural strokes derived from the active neutral family. |
+| `background` / `foreground` | Page canvas and highest-emphasis content |
+| `card`, `popover`, `sidebar`, `code` | Bounded surface + matching `*-foreground` |
+| `muted` | Neutral `/4` recessive layer |
+| `accent`, `secondary`, `sidebar-accent` | Neutral `/8` interactive or supporting fill (`secondary-hover` = `/16`) |
+| `primary` | Sole chromatic action / durable emphasis |
+| Feedback (`destructive`, success, warning, info) | Real outcomes, not decoration |
+| `border` / `input` / `ring` | Structure and focus |
 
-**Do:** use `bg-background`, `text-foreground`, `bg-card`, `text-muted-foreground`, `border-input`, and equivalent semantic roles. Pair every bounded surface with its matching foreground role.
+Rules:
 
-**Avoid:** raw palette classes in reusable components, a translucent solid hover fill, or a foreground token from a different surface family.
+- One configured `primary`. Surrounding product chrome stays neutral.
+- Pair every bounded surface with its matching foreground token.
+- Solid controls use opaque `*-hover` tokens, not translucent fills over an unknown parent.
+- Validate contrast on the composited surface in light and dark mode.
 
-**Review:** validate contrast after compositing on the actual surface in light and dark mode. A configured primary remains the only chromatic action accent.
+## Typography
 
-### Typography
+| Role | Token / family | Use |
+| --- | --- | --- |
+| Body / UI | `font-sans` → Hanken Grotesk (default) | Controls, body, labels, nav |
+| Heading | `font-heading` → Figtree (default) | Page and region titles |
+| Mono | JetBrains Mono | Code, commands, paths, keyboard strings |
 
-Hanken Grotesk is the display and interface family. JetBrains Mono is reserved for code, commands, paths, and technical metadata. Hierarchy comes from the configured scale, weight, leading, and restrained tracking.
+Hierarchy comes from the configured scale, weight, and leading, not one-off font sizes or decorative mono. Do not add an isolated display family for product UI.
 
-| Role | Intended use |
+## Layout
+
+- Page container: centered, max `1400px`, `1rem` inline padding. Major bands: `2.5-4rem` vertical padding.
+- Density: tightest gaps inside controls → moderate gaps for related content → decisive gaps between regions.
+- Layout primitives: `flex` / `grid` + `gap-*`. Do not use `space-x-*` / `space-y-*`.
+- Start one fluid column; add columns only when content benefits; stack when a column stops being readable or operable.
+- Direction: logical utilities (`ms-*`, `me-*`, `ps-*`, `pe-*`, `start-*`, `end-*`). Physical left/right only for explicitly LTR content, visual coordinates, or non-reading-order geometry (document locally).
+- Narrow: scroll filters/code before compressing labels; primary actions may go full width.
+
+## Elevation & Depth
+
+Flat by default. Tone + 1px border before shadow. Shadows are neutral and shallow.
+
+| Token | Use |
 | --- | --- |
-| Display | Page-level statements. |
-| Editorial display | Persuasive catalog hero only. |
-| Headline and title | Major content units, cards, dialogs, and bounded regions. |
-| Body and label | Explanation, controls, field labels, navigation, and metadata. |
-| Mono | Executable, file-oriented, or keyboard-oriented strings. |
+| `shadow-xs/4` | Fields, cards, outlined controls |
+| `shadow-xs/8` | Temporary hover reinforcement |
+| `shadow-sm/4` | Filled actions, contained previews |
+| `shadow-lg/4` | Overlays (menus, dialogs, sheets, tooltips) |
 
-**Do:** use the configured `font-sans` and `font-heading` roles; keep mono semantic.
+Approved alphas only (see `CODE_STYLE.md`): `/4` elevation, `/8`-`/16` feedback, `/24` outer focus ring, `/64` focus border / supporting content. No bare, tinted, status-tinted, or large diffuse shadows. Removing a shadow must not erase structure or focus.
 
-**Avoid:** an isolated display family, monospace as decoration, or arbitrary type sizes to repair hierarchy.
+## Shapes
 
-**Review:** each text style communicates its information role before visual emphasis; supporting text remains readable at browser zoom.
+`--radius` is the source of truth (default `0.5rem` / `md`).
 
-### Spacing, layout, and shape
+- Controls: `rounded-lg` at medium/large, `rounded-md` at small.
+- Cards and major surfaces: one step rounder than the control they contain.
+- Pills are explicit variants only.
+- `ButtonGroup` owns joined contours and duplicate-border removal.
+- No unrelated corner values in reusable components.
 
-The default page container is centered, capped at 1400px, and uses 1rem inline padding. Major bands use 2.5–4rem vertical padding. Controls and metadata use the tightest rhythm; related content has a moderate gap; independent regions separate decisively.
+## Components
 
-Rectangular controls use `rounded-lg` at medium and large sizes and `rounded-md` at small sizes. Cards and major bounded surfaces are one radius step rounder. A pill is always an explicit variant. ButtonGroup owns joined contours and duplicate-border removal.
+Components own anatomy, variants, state, and focus. Layouts own placement and spacing between components. Use existing variants before restyling with `className`. `className` is for layout and task-specific composition, not a second design system.
 
-**Do:** use `flex` or `grid` with `gap-*`, `--radius` and its derived scale, and logical start/end utilities.
+**Buttons:** `primary` for the leading action; outline/ghost stay neutral. Focus: `outline-hidden` + `border-ring/64` + `ring-2 ring-ring/24`. Solid `bg-primary` uses `border-background` with the same ring. Preserve footprint across hover, focus, press, loading, invalid, and disabled (`opacity-64` only with blocked interaction).
 
-**Avoid:** unrelated corner values, `space-x-*`/`space-y-*`, or physical direction for reading-order layout.
+**Cards / surfaces:** `bg-card` + matching foreground; border before elevation.
 
-**Review:** spacing follows the density ladder, and changing the configured base radius preserves proportional relationships.
+**Inputs / fields:** `Field` owns label ↔ control ↔ description ↔ error. Invalid state is semantic and not color-only.
 
-### Border, elevation, and opacity
+**Overlays:** Own stacking and positioning; no local `z-index`. Require a title part. Anchored: `origin-(--transform-origin)`, 98% scale, fade, placement-aware travel. Centered: `origin-center`. Motion timings and reduced-motion rules live in the [design contract](public/design.md).
 
-The system is flat by default. Tone and a one-pixel border establish containment before shadow. Elevation remains neutral and shallow.
+**Selection vs action:** `accent` for contextual hover/selection; `primary` for durable emphasis. Status colors encode real outcomes and include a non-color cue.
 
-| Role | Use |
-| --- | --- |
-| `shadow-xs/4` | Structural separation for fields, cards, and outlined controls. |
-| `shadow-xs/8` | Temporary hover reinforcement only. |
-| `shadow-sm/4` | Filled actions and contained preview surfaces. |
-| `shadow-lg/4` | Menus, dialogs, sheets, tooltips, and other overlays. |
+**Composition recipes** (docs preview, forms, collections, loading/empty/error): follow [public/design.md](public/design.md). Do not invent parallel APIs.
 
-Use only the approved alpha scale in `CODE_STYLE.md`. `/4` is neutral elevation; `/8` and `/16` are contextual feedback; `/24` supports decoration and outer focus reinforcement; `/64` carries supporting content or the contrast-bearing focus border.
+## Do's and Don'ts
 
-**Do:** pair a shallow shadow with its structural border when containment needs reinforcement.
+**Do**
 
-**Avoid:** bare, tinted, status-tinted, or large diffuse shadows.
+- Use semantic tokens and documented variants first.
+- Keep one primary accent; build hierarchy with type, spacing, and surface roles.
+- Preserve visible keyboard focus and stable geometry across states.
+- Prefer native semantics and documented Ark parts; respect reduced motion and RTL.
+- Update code + component docs + this file + the public contract when a shared rule changes (in that order).
 
-**Review:** removing the shadow should not erase a component's structural boundary or keyboard focus.
+**Don't**
 
-## Interaction, responsiveness, and motion
-
-### States and focus
-
-Interactive controls preserve their footprint in hover, focus, pressed, loading, invalid, and disabled states. Solid primary controls use opaque `primary-hover`; secondary and destructive controls use their semantic opaque hover tokens. Disabled controls expose their unavailable state, block interaction, and use `opacity-64` only with the corresponding semantic state.
-
-Every focus-owning control uses `outline-hidden`, a contrast-bearing `border-ring/64`, and `ring-2 ring-ring/24`. Keep a transparent base border on borderless controls so focus does not shift layout. A solid `bg-primary` control instead uses `border-background` with the same outer ring.
-
-**Do:** use semantic elements, visible keyboard focus, documented parts, and accessible names.
-
-**Avoid:** `outline-none`, focus styles on decorative elements, or an opacity-only disabled treatment on something still interactive.
-
-**Review:** a keyboard-only user can locate and operate every interactive control without layout movement.
-
-### Responsive and bidirectional layout
-
-Start with one fluid column. Add columns only when content benefits from them; stack when a column no longer remains readable or operable. Horizontal category and filter controls may scroll before labels are compressed. Narrow primary actions may become full width.
-
-Use `ms-*`, `me-*`, `ps-*`, `pe-*`, `start-*`, `end-*`, directional slide utilities, and propagated `dir`. Physical direction is allowed only for explicitly LTR content, visual coordinates, or geometry unrelated to reading order, with the exception documented locally.
-
-**Do:** preserve touch targets, reading order, and reachability at narrow widths.
-
-**Avoid:** shrinking labels, preserving desktop grids by force, or left/right positional utilities for text direction.
-
-**Review:** the composition works in narrow layouts and RTL without local overrides or hidden essential actions.
-
-### Motion
-
-Motion is tactile, contained, and local to the owning component. Press uses `duration-[120ms] ease-out`; controls and anchored overlays use `duration-150 ease-out`; dialogs and sheets use `duration-200 ease-out`. Ark geometry exceptions use `duration-150 ease-in-out` only when the primitive supplies live geometry.
-
-Anchored overlays use `origin-(--transform-origin)`, a 98% scale, fade, and placement-aware travel. Centered dialogs and coordinate-positioned panels use `origin-center`. Drawer is the sole gesture exception: its panel follows Ark swipe variables, settles at `duration-300 ease-out`, and its backdrop fades independently at `duration-[450ms] ease-out`.
-
-**Do:** compose motion from local `tw-animate-css` utilities and keep a brief fade under reduced motion while removing travel, scale, rotation, and blur.
-
-**Avoid:** shared interface keyframes or easing tokens in `styles/globals.css`, `transition-all`, `ease-in`, `ease-linear`, or ungated hover transforms. The Sidebar is the documented shadcn-derived exception: its coordinated width, inset, margin, and opacity changes use local `duration-200 ease-linear` so its shell and compact menu move together.
-
-**Review:** the interaction remains understandable with `prefers-reduced-motion`, and an overlay's origin matches its placement.
-
-## Composition patterns
-
-Patterns solve recurring user tasks; components supply the primitives. Start from the relevant component documentation and shipped example before composing.
-
-### Documentation and preview surfaces
-
-Use a readable content column with a compact heading, supporting copy, and a bounded preview or code region. Preview shells use `bg-muted`; thumbnails remain decorative, monochrome, and limited to the approved surface tokens. The live interface—not ornamental imagery—carries the visual material.
-
-On narrow screens, stack heading, controls, preview, and code. Preserve overflow for code and horizontal controls rather than compressing labels. Loading reserves the preview footprint; an empty preview explains the missing prerequisite; a failed preview gives a direct recovery action.
-
-### Forms
-
-Compose fields in their documented hierarchy: label, control, description, and error feedback. Let `Field` own its relationship to the control; invalid state is semantic and visible. Group related fields with explicit gaps; place primary and secondary actions in a stable, reachable action region.
-
-On narrow screens, stack field groups and make primary actions full width when needed. Loading retains labels and control footprints, invalid state supplies usable recovery guidance, and errors never rely on color alone.
-
-### Collections and navigation
-
-Place collection context, filters, and actions before the result region. Reuse documented collection primitives; selection is contextual through neutral accent surfaces while durable action emphasis uses primary. Filters or categories can scroll horizontally on narrow widths.
-
-Represent loading with a stable skeleton or reserved collection region. Empty states explain the current filter or absence and offer the next useful action. Error states preserve context, state what failed, and offer retry or recovery without discarding user input.
-
-## Accessibility as a foundation
-
-Accessibility is evaluated in each rule and pattern rather than appended at the end of delivery.
-
-- Use native semantic elements first; use the documented Ark parts and collection APIs when a composite widget is required.
-- Preserve keyboard access, visible focus, meaningful labels, overlay titles, and logical reading order.
-- Validate color contrast on composited backgrounds and do not encode status in color alone.
-- Keep content functional at text zoom and narrow widths; use concise, direct copy with enough context to recover from an error.
-- Respect reduced motion and gate hover transforms behind fine-pointer and hover capability.
-
-## Maintaining the system
-
-When a rule changes, update the implementation source of truth first, then its component documentation or example, this handbook, and finally the public contract if the rule affects UI generation. Prefer a focused rule and an example over a broad aesthetic statement.
-
-Questions or proposals should identify the user task, existing primitive or pattern, evidence for the exception, and the accessibility and responsive behavior being preserved.
+- Hardcode palette classes, arbitrary radii, fonts, or overlay z-index in reusable UI.
+- Add a second decorative accent hue or use glow/large shadows for hierarchy.
+- Dim still-interactive controls; use `outline-none` on focus-owning controls; encode status in color alone.
+- Compress labels to save a desktop layout; force physical direction for reading order.
+- Dump brand-book prose or parallel token systems into components; keep this file a working spec.

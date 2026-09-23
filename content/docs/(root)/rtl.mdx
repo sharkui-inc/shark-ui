@@ -5,11 +5,11 @@ description: Set direction, use logical properties, and test directional control
 
 <RTLComponentPreview componentName="rtl" rtlFileName="example-default" autoHeight />
 
-RTL changes reading order, alignment, and directional controls. It does not flip every element.
+RTL flips reading order, alignment, and some controls. It does not mirror every icon or layout.
 
 ## Set the document direction
 
-When the locale is known while rendering the document, set `lang` and `dir` on `<html>`. `lang` describes the language; it does not infer a text direction.
+If you know the locale when the document renders, set `lang` and `dir` on `<html>`. `lang` names the language; it does not choose text direction for you.
 
 ```tsx title="app/layout.tsx" showLineNumbers {8-9,12}
 import type React from "react";
@@ -32,7 +32,7 @@ Common RTL locales include `ar-SA`, `ar-BH`, `he-IL`, and `fa-IR`. Without `Loca
 
 ## Change direction in a client subtree
 
-For a client-side locale switcher, apply `dir` and `lang` to the localized subtree. Do not render `<html>` inside an application component.
+For a client-side locale switcher, put `dir` and `lang` on the localized subtree. Do not render `<html>` from an application component.
 
 ```tsx title="settings-panel.tsx"
 "use client";
@@ -66,11 +66,11 @@ export const SettingsPanel = (props: { children: React.ReactNode }) => {
 };
 ```
 
-`LocaleProvider` stores the active locale. `useLocale` returns its `locale` and `dir`.
+`LocaleProvider` holds the active locale. `useLocale` returns `locale` and `dir`.
 
 ## Use logical properties
 
-Use utilities that describe reading order.
+Prefer utilities that follow reading order instead of physical left and right.
 
 | Avoid | Use instead |
 | --- | --- |
@@ -82,24 +82,24 @@ Use utilities that describe reading order.
 | `rounded-l-*`, `rounded-r-*` | `rounded-s-*`, `rounded-e-*` |
 | `slide-in-from-left/right` | `slide-in-from-start/end` |
 
-For centered elements, pair logical placement with an `rtl:` translation variant when the horizontal transform depends on the inline axis.
+If a centered element still needs a horizontal transform that depends on the inline axis, add an `rtl:` translation variant beside the logical placement.
 
 ## What to mirror
 
-Mirror controls that follow reading order or horizontal movement:
+Mirror controls that track reading order or horizontal movement:
 
-- Back and forward navigation.
-- Steppers and directional arrows.
-- Reading-progress fills and illustrated sequences.
+- Back and forward navigation
+- Steppers and directional arrows
+- Reading-progress fills and illustrated sequences
 
 Keep these physical:
 
-- Media playback controls, clocks, and circular progress.
-- Checkmarks, numbers, URLs, code, charts, and graphs.
-- Image cropper handles and other visual coordinates.
-- Images whose directional story requires a dedicated RTL asset.
+- Media playback controls, clocks, and circular progress
+- Checkmarks, numbers, URLs, code, charts, and graphs
+- Image cropper handles and other visual coordinates
+- Images that need a separate RTL asset when direction matters
 
-## Format dates; translate copy separately
+## Format dates, translate copy separately
 
 `useDateFormatter` localizes dates and numbers. It does not translate labels or messages.
 
@@ -111,7 +111,7 @@ const LaunchDate = () => {
     dateStyle: "long",
     timeZone: "UTC",
   });
-  
+
   const date = new Date("2026-03-15T00:00:00Z");
 
   return <time dateTime="2026-03-15">{formatter.format(date)}</time>;
@@ -120,15 +120,15 @@ const LaunchDate = () => {
 
 ## Test overlays and inputs
 
-Test components while they are open:
+Check components in the open state:
 
-- Open `Dialog`, `Menu`, `Popover`, and `Select`; check placement, focus order, and Escape.
-- Check `Date Input`, `Date Picker`, ranges, and clear controls in both directions.
-- Check directional icons, keyboard navigation, and horizontal control order.
+- Open `Dialog`, `Menu`, `Popover`, and `Select`. Verify placement, focus order, and Escape.
+- Exercise `Date Input`, `Date Picker`, ranges, and clear controls in both directions.
+- Confirm directional icons, keyboard navigation, and horizontal control order.
 
 ## RTL review checklist
 
 - Switch between an LTR and RTL locale at desktop and narrow widths.
-- Check alignment, padding, borders, and transforms for physical `left`/`right` assumptions.
-- Open overlays and use Tab, arrow keys, and Escape.
+- Scan alignment, padding, borders, and transforms for leftover physical `left`/`right` values.
+- Open overlays and walk Tab, arrow keys, and Escape.
 - Check dates, ranges, emails, URLs, IDs, and mixed RTL and Latin text.

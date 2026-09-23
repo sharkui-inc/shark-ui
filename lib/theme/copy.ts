@@ -1,10 +1,3 @@
-import {
-  type BaseColor,
-  type BorderRadius,
-  createCssVars,
-  type PrimaryColor,
-  type PrimaryTone,
-} from "./catalog";
 import { getThemeFont, type ThemeFont, type ThemeFontName } from "./fonts";
 
 export interface ThemeCopyFonts {
@@ -38,13 +31,6 @@ export const uniqueThemeFonts = (fonts: ThemeCopyFonts) => {
 
   return [sans, getThemeFont(fonts.fontHeading)];
 };
-
-export const createThemeExportCss = (
-  primaryCss: PrimaryColor["cssVars"],
-  baseCss: BaseColor["cssVars"],
-  radiusCss: BorderRadius["cssVars"],
-  primaryTone: PrimaryTone = "light"
-) => createCssVars(primaryCss, baseCss, radiusCss, primaryTone);
 
 export const createThemeFontInstallCommand = (fonts: ThemeCopyFonts) => {
   const packages = uniqueThemeFonts(fonts)

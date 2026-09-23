@@ -8,6 +8,8 @@ export const JsonLd = ({ data }: JsonLdProps) => (
     dangerouslySetInnerHTML={{
       __html: JSON.stringify(data).replaceAll("<", "\\u003c"),
     }}
+    // Keep JSON-LD in the initial HTML for crawlers (static export).
+    suppressHydrationWarning
     type="application/ld+json"
   />
 );

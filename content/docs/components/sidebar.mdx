@@ -1,6 +1,8 @@
 ---
 title: Sidebar
-description: Responsive sidebar with groups, a collapsible rail, and a mobile sheet.
+description: A sidebar for navigation and app structure.
+seo:
+  description: Collapsible app sidebar with groups and a mobile sheet.
 ---
 
 import manifest from "@/registry/manifest/sidebar";
@@ -172,7 +174,7 @@ export function AppSidebar() {
 
 ## Controlled
 
-Use `open` / `onOpenChange` to control the sidebar. On mobile, the sheet follows the same `open` state — set `open={false}` to close it, and mobile toggles fire `onOpenChange`.
+Use `open` / `onOpenChange` to control the sidebar. On mobile, the sheet follows the same `open` state - set `open={false}` to close it, and mobile toggles fire `onOpenChange`.
 
 ```tsx
 import React from "react";
@@ -663,3 +665,9 @@ Draggable edge control that expands or collapses the desktop rail. Place it afte
   <SidebarRail />
 </Sidebar>
 ```
+
+## Related
+
+- [Sheet](/docs/components/sheet) - edge-sliding panel for mobile-friendly layouts
+- [Bottom Navigation](/docs/components/bottom-navigation) - mobile bottom destinations
+- [Breadcrumb](/docs/components/breadcrumb) - hierarchy location trail

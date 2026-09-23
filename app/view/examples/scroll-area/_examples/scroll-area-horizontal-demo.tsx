@@ -32,7 +32,7 @@ const ScrollAreaHorizontalDemo = () => (
           <div className="overflow-hidden rounded-md">
             <Image
               alt={`Photo by ${artwork.artist}`}
-              className="aspect-[3/4] h-fit w-fit object-cover"
+              className="aspect-3/4 h-fit w-fit object-cover"
               height={400}
               src={artwork.art}
               width={300}

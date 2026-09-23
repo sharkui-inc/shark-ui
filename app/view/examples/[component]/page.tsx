@@ -1,21 +1,37 @@
 import { notFound } from "next/navigation";
-import { getComponentPreviews } from "@/lib/component-previews";
+import { source } from "@/lib/fumadocs";
 
 export const dynamicParams = false;
 export const revalidate = false;
 
+const COMPONENT_SLUGS = (() => {
+  const components = source.pageTree.children.find(
+    (item) => item.type === "folder" && item.name === "Components"
+  );
+
+  if (components?.type !== "folder") {
+    return [];
+  }
+
+  return components.children.flatMap((item) => {
+    if (item.type !== "page") {
+      return [];
+    }
+
+    const slug = item.url.split("/").filter(Boolean).at(-1);
+    return slug ? [slug] : [];
+  });
+})();
+
 export const generateStaticParams = () =>
-  getComponentPreviews().map(({ slug: component }) => ({ component }));
+  COMPONENT_SLUGS.map((component) => ({ component }));
 
 const ComponentExamplePage = async (
   props: PageProps<"/view/examples/[component]">
 ) => {
   const { component } = await props.params;
-  const hasPreview = getComponentPreviews().some(
-    (preview) => preview.slug === component
-  );
 
-  if (!hasPreview) {
+  if (!COMPONENT_SLUGS.includes(component)) {
     notFound();
   }
 

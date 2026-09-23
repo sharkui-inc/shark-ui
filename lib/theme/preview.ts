@@ -1,8 +1,8 @@
 import { atom } from "jotai";
-import type { ThemePresetPatch } from "./config";
+import type { VisualThemePick } from "./config";
 
-export type ThemePreviewPatch = Partial<ThemePresetPatch>;
-export type ThemeVisual = ThemePresetPatch;
+export type ThemeVisual = VisualThemePick;
+export type ThemePreviewPatch = Partial<ThemeVisual>;
 
 export const THEME_VISUAL_MESSAGE_TYPE = "shark-ui:theme-visual" as const;
 
@@ -24,9 +24,7 @@ export const canPointerPreview = () =>
 export const isEmbeddedThemeFrame = () =>
   typeof window !== "undefined" && window.parent !== window;
 
-export const toThemeVisual = (
-  source: ThemePresetPatch | (ThemePresetPatch & Record<string, unknown>)
-): ThemeVisual => ({
+export const toThemeVisual = (source: ThemeVisual): ThemeVisual => ({
   baseColor: source.baseColor,
   borderRadius: source.borderRadius,
   fontHeading: source.fontHeading,
@@ -36,7 +34,7 @@ export const toThemeVisual = (
 });
 
 export const mergeThemeVisual = (
-  committed: ThemePresetPatch,
+  committed: ThemeVisual,
   preview: ThemePreviewPatch | null
 ): ThemeVisual =>
   preview

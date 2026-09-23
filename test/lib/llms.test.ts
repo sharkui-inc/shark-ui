@@ -1,37 +1,21 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
-  buildLLMIndex,
   buildLLMIndexSection,
   createLLMIndexResponse,
   isLLMIndexName,
   LLM_INDEXES,
   type LLMDocPage,
-} from "@/lib/llms-index";
+} from "@/lib/llms";
 
 const baseUrl = "https://example.test";
-const heading = /^# Shark UI\n/m;
-const summary = /^> .+/m;
-const indexesHeading = /## Core workflow/;
-const optionalHeading = /## Optional/;
-const changelogLink =
-  /\[Changelog\]\(https:\/\/example\.test\/llms\/changelog\.txt\)/;
-const foundationsLink =
-  /\[Foundations\]\(https:\/\/example\.test\/llms\/foundations\.txt\)/;
-const designLink = /\[Design contract\]\(https:\/\/example\.test\/design\.md\)/;
-const docsLink = /\/docs\//;
-const operationalFlow = /How agents should use Shark UI:/;
-const formsHeading = /## Forms/;
-const collectionsHeading = /## Collections/;
-const overlaysHeading = /## Overlays/;
-const fieldPatternLink =
-  /Field\]\(https:\/\/example\.test\/docs\/components\/field\.md\)/;
-const selectPatternLink =
-  /Select\]\(https:\/\/example\.test\/docs\/components\/select\.md\)/;
-const dialogPatternLink =
-  /Dialog\]\(https:\/\/example\.test\/docs\/components\/dialog\.md\)/;
+const formsDocsLink = /Forms\]\(https:\/\/example\.test\/docs\/forms\.md\)/;
+const migrationLink =
+  /From Radix\]\(https:\/\/example\.test\/docs\/migration\/radix\.md\)/;
 const buttonComponentLink =
   /Button\]\(https:\/\/example\.test\/docs\/components\/button\.md\)/;
+const fieldComponentLink =
+  /Field\]\(https:\/\/example\.test\/docs\/components\/field\.md\)/;
 const markdownLink = /\]\((https:\/\/[^)]+)\)/g;
 
 const getMarkdownLinks = (content: string) =>
@@ -96,24 +80,13 @@ const pages: LLMDocPage[] = [
 ];
 
 describe("LLM indexes", () => {
-  it("builds a concise root directory with an optional changelog", () => {
-    const index = buildLLMIndex(baseUrl);
-
-    assert.match(index, heading);
-    assert.match(index, summary);
-    assert.match(index, indexesHeading);
-    assert.match(index, optionalHeading);
-    assert.match(index, operationalFlow);
-    assert.match(index, changelogLink);
-    assert.match(index, foundationsLink);
-    assert.match(index, designLink);
-    assert.doesNotMatch(index, docsLink);
+  it("rejects unknown index names", () => {
     assert.equal(isLLMIndexName("handbook"), false);
     assert.equal(isLLMIndexName("guides"), false);
   });
 
   it("serves indexes as plain text", () => {
-    const response = createLLMIndexResponse(buildLLMIndex(baseUrl));
+    const response = createLLMIndexResponse("ok");
 
     assert.equal(
       response.headers.get("Content-Type"),
@@ -133,13 +106,11 @@ describe("LLM indexes", () => {
     assert.deepEqual([...new Set(links)].sort(), [...expectedLinks].sort());
     assert.ok(links.every((link) => link.startsWith(`${baseUrl}/docs`)));
     assert.ok(links.every((link) => link.endsWith(".md")));
-    assert.match(patterns, formsHeading);
-    assert.match(patterns, collectionsHeading);
-    assert.match(patterns, overlaysHeading);
-    assert.match(patterns, fieldPatternLink);
-    assert.match(patterns, selectPatternLink);
-    assert.match(patterns, dialogPatternLink);
     assert.match(components, buttonComponentLink);
+    assert.match(components, fieldComponentLink);
+    assert.doesNotMatch(patterns, fieldComponentLink);
+    assert.match(patterns, formsDocsLink);
+    assert.match(patterns, migrationLink);
     assert.equal(buildLLMIndexSection("patterns", pages, baseUrl), patterns);
     assert.ok(
       foundations.length > 0 && installation.length > 0 && changelog.length > 0

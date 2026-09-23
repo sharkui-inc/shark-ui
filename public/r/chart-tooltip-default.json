@@ -1,13 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "categories": [
-    "chart"
-  ],
-  "dependencies": [
-    "@ark-ui/react",
-    "lucide-react",
-    "recharts"
-  ],
+  "categories": ["chart"],
+  "dependencies": ["@ark-ui/react", "lucide-react", "recharts"],
   "description": "A ready-to-use tooltip chart built with Shark UI and Recharts.",
   "files": [
     {

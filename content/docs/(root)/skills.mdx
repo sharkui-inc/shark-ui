@@ -1,15 +1,15 @@
 ---
 title: Skills
-description: Component guidance for AI agents.
+description: Install the Shark UI skill so agents follow registry patterns, Ark composition, and migrations.
 ---
 
-Use this [Agent Skills](https://agentskills.io/specification) package to build and maintain Ark UI components with an agent.
+This [Agent Skills](https://agentskills.io/specification) package teaches an agent how to add, compose, style, and migrate Shark UI components in your project.
 
-Ask your agent to:
+Examples of what to ask:
 
-- _“Add a settings dialog with a validated form and save/cancel actions.”_
-- _“Replace this Radix dropdown with Shark Menu, preserving keyboard behavior.”_
-- _“Build a responsive dashboard filter using Shark tokens and an RTL-safe layout.”_
+- _“Add a settings dialog with a form and save/cancel buttons.”_
+- _“Replace this Radix dropdown with Shark Menu.”_
+- _“Build a filter bar with Shark tokens that works in RTL.”_
 
 ## Install
 
@@ -17,37 +17,35 @@ Ask your agent to:
 npx skills add sharkui-inc/shark-ui
 ```
 
-Start a new agent session from the repository, then ask for a component task to verify discovery. If your client does not discover the skill automatically, follow its setup instructions on [skills.sh](https://www.skills.sh/).
+Open a new agent session in the repo and try a component task to confirm it loaded. If the client does not pick it up, follow the setup steps on [skills.sh](https://www.skills.sh/).
 
 ## What it helps with
 
 ### Build and compose
 
-Choose the appropriate component, add it with the [registry and CLI](/docs/installation), and follow its Ark UI composition. The skill helps with component parts, `asChild` triggers, collections, form fields, and accessible overlays.
+Pick the right component, add it with the [registry and CLI](/docs/installation), and follow its Ark UI parts. The skill covers nesting, `asChild` triggers, collections, form fields, and accessible overlays.
 
 ### Migrate and refactor
 
-Replace Radix UI, Base UI, or shadcn-shaped patterns while preserving semantics and keyboard behavior. Use the [migration guides](/docs/migration) for API-specific differences instead of treating a migration as an import rename.
+Rewrite Radix UI, Base UI, or shadcn-style code into Shark while keeping semantics and keyboard behavior. Use the [migration guides](/docs/migration) for API differences; do not treat a migration as an import rename.
 
 ### Style consistently
 
-Prefer semantic tokens, existing variants, logical RTL-safe utilities, and documented component patterns before adding custom CSS. Use [Styling](/docs/styling) and the [design contract](/design.md) for current visual rules; use the [design handbook](https://github.com/sharkui-inc/shark-ui/blob/main/DESIGN.md) when evaluating an extension or its rationale.
+Reach for semantic tokens, existing variants, logical RTL-safe utilities, and documented patterns before custom CSS. For visual rules, use [Styling](/docs/styling) and the [design contract](/design.md). Use the [design handbook](https://github.com/sharkui-inc/shark-ui/blob/main/DESIGN.md) when you need rationale or want to propose an extension.
 
 ## Use it with the docs
 
-Use the skill for project guidance. Published documentation remains the source of truth for current APIs, installation, and visual rules.
+The skill is project guidance. Published docs stay the source of truth for APIs, installation, and visual rules.
 
-- Start at [/llms.txt](/llms.txt), then load the smallest relevant index and Markdown pages.
-- Before changing an existing component, read its Markdown page and matching shipped example.
-- Use [/design.md](/design.md) before generating or refining UI; use the handbook for rationale or extension decisions.
-- Components use React, Ark UI, and Tailwind CSS v4. Do not substitute Radix UI or Base UI APIs.
-
-The skill does not replace human review, product requirements, or the conventions already established in your project.
+- Start at [/llms.txt](/llms.txt), then load the smallest matching index and Markdown pages.
+- Before changing a component, read its Markdown page and a shipped example.
+- Read [/design.md](/design.md) before generating or refining UI. Use the handbook for rationale or extension decisions.
+- Shark UI is React, Ark UI, and Tailwind CSS v4. Do not swap in Radix UI or Base UI APIs.
 
 ## Keeping it current
 
-Reinstall the skill with your chosen CLI when you update the library or find a mismatch. When it disagrees with the docs, follow the docs and report the difference in the [repository](https://github.com/sharkui-inc/shark-ui).
+Reinstall the skill when you update the library or spot a mismatch. If the skill and docs disagree, follow the docs and report it in the [repository](https://github.com/sharkui-inc/shark-ui).
 
 ## Compatibility
 
-Use the skill with an agent that supports the Agent Skills format. Client support and setup vary; find the current compatibility list and client guidance on [skills.sh](https://www.skills.sh/).
+Works with agents that support the Agent Skills format. Client support differs; see the list and setup notes on [skills.sh](https://www.skills.sh/).

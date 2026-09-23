@@ -1,13 +1,14 @@
+import { realpathSync } from "node:fs";
 import { access, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { SITE_CONFIG } from "../config/site";
 import { getRegistryArtifacts } from "../lib/composition-catalog";
-import type { RegistryItemType } from "../lib/registry";
+import type { CompositionArtifact, RegistryItemType } from "../lib/registry";
 import { replaceRegistryImportsForCopy } from "../utils/formatter";
 
-type RegistryKind = "component" | "hook" | "lib";
-type SourceExt = "ts" | "tsx";
+export type RegistryKind = "component" | "hook" | "lib";
+export type SourceExt = "ts" | "tsx";
 
 interface KindConfig {
   emoji: string;
@@ -16,16 +17,24 @@ interface KindConfig {
   subdir: string;
 }
 
-const SCHEMA = "https://ui.shadcn.com/schema/registry-item.json";
-const CWD = process.cwd();
-const PUBLIC_DIR = join(CWD, "public", "r");
-const TRAILING_SLASH = /\/$/;
-const LOCALHOST_RE = /localhost|127\.0\.0\.1/i;
+export const SCHEMA = "https://ui.shadcn.com/schema/registry-item.json";
 
 /** Source extensions in priority order (first wins on ambiguity). */
-const SOURCE_EXTS: readonly SourceExt[] = ["tsx", "ts"];
+export const SOURCE_EXTS: readonly SourceExt[] = ["tsx", "ts"];
 
-const KINDS = {
+const SOURCE_EXT_PRIORITY = new Map(
+  SOURCE_EXTS.map((ext, index) => [ext, index])
+);
+
+export const STANDALONE_MANIFESTS = [
+  "ui",
+  "style",
+  "hitbox",
+  "shimmer",
+  "chat",
+] as const;
+
+export const KINDS = {
   component: {
     emoji: "📦",
     label: "components",
@@ -46,8 +55,135 @@ const KINDS = {
   },
 } as const satisfies Record<RegistryKind, KindConfig>;
 
-// Cache the in-flight promise so concurrent callers dedupe automatically.
+export const REGISTRY_KINDS = Object.keys(KINDS) as RegistryKind[];
+
+const LOCALHOST_RE = /localhost|127\.0\.0\.1/i;
+const CWD = process.cwd();
+const PUBLIC_DIR = join(CWD, "public", "r");
+const TRAILING_SLASH = /\/$/;
+
+const COMPOSITION_GROUPS = [
+  { emoji: "🧱", kind: "blocks", label: "blocks" },
+  { emoji: "🖥️", kind: "templates", label: "templates" },
+] as const;
+
+/** Pick the best source file per item, honoring SOURCE_EXTS priority. */
+export const pickSourceFiles = (files: string[]) => {
+  const chosen = new Map<string, SourceExt>();
+
+  for (const file of files) {
+    const ext = SOURCE_EXTS.find((candidate) => file.endsWith(`.${candidate}`));
+    if (!ext) {
+      continue;
+    }
+
+    const name = file.slice(0, -(ext.length + 1));
+    const current = chosen.get(name);
+    const nextPriority =
+      SOURCE_EXT_PRIORITY.get(ext) ?? Number.POSITIVE_INFINITY;
+    const currentPriority =
+      current === undefined
+        ? Number.POSITIVE_INFINITY
+        : (SOURCE_EXT_PRIORITY.get(current) ?? Number.POSITIVE_INFINITY);
+
+    if (current === undefined || nextPriority < currentPriority) {
+      chosen.set(name, ext);
+    }
+  }
+
+  return chosen;
+};
+
+export const primaryRegistryPath = (
+  kind: RegistryKind,
+  itemName: string,
+  ext: SourceExt,
+  framework = "react"
+) => `registry/${framework}/${KINDS[kind].subdir}/${itemName}.${ext}`;
+
+export const toCompositionRegistryItem = (
+  composition: CompositionArtifact
+) => ({
+  $schema: SCHEMA,
+  categories: [composition.category],
+  dependencies: composition.dependencies ?? [],
+  description: composition.description,
+  files: composition.files.map(({ content, path, target, type }) => ({
+    content,
+    path,
+    target,
+    type,
+  })),
+  meta: composition.meta,
+  name: composition.name,
+  registryDependencies: composition.registryDependencies,
+  title: composition.title,
+  type: composition.type,
+});
+
+export const assertNoLocalhost = (
+  fileName: string,
+  raw: string,
+  siteOrigin: string
+) => {
+  if (LOCALHOST_RE.test(raw)) {
+    throw new Error(
+      `localhost URL found in public/r/${fileName}. Registry artifacts must use ${siteOrigin}.`
+    );
+  }
+};
+
+export const assertRegistryDepsOrigin = (
+  fileName: string,
+  deps: unknown,
+  siteOrigin: string
+) => {
+  if (!Array.isArray(deps)) {
+    return;
+  }
+
+  const originPrefix = `${siteOrigin}/`;
+
+  for (const dep of deps) {
+    if (typeof dep !== "string" || !dep.startsWith("http")) {
+      continue;
+    }
+    if (!dep.startsWith(originPrefix)) {
+      throw new Error(
+        `public/r/${fileName}: registryDependency is not under ${originPrefix}`
+      );
+    }
+  }
+};
+
+export const validatePublishedArtifact = (
+  fileName: string,
+  raw: string,
+  siteOrigin: string
+) => {
+  assertNoLocalhost(fileName, raw, siteOrigin);
+
+  const parsed: unknown = JSON.parse(raw);
+  if (
+    typeof parsed !== "object" ||
+    parsed === null ||
+    !("registryDependencies" in parsed)
+  ) {
+    return;
+  }
+
+  assertRegistryDepsOrigin(fileName, parsed.registryDependencies, siteOrigin);
+};
+
 const manifestCache = new Map<string, Promise<RegistryItemType>>();
+
+const manifestPath = (itemName: string) =>
+  join(CWD, "registry", "manifest", `${itemName}.ts`);
+
+const kindDir = (kind: RegistryKind, framework: string) =>
+  join(CWD, "registry", framework, KINDS[kind].subdir);
+
+const artifactPath = (itemName: string) => join(PUBLIC_DIR, `${itemName}.json`);
 
 const loadManifest = (itemName: string): Promise<RegistryItemType> => {
   const cached = manifestCache.get(itemName);
@@ -56,9 +192,8 @@ const loadManifest = (itemName: string): Promise<RegistryItemType> => {
   }
 
   const pending = (async () => {
-    const path = join(CWD, "registry", "manifest", `${itemName}.ts`);
     try {
-      const mod = await import(pathToFileURL(path).href);
+      const mod = await import(pathToFileURL(manifestPath(itemName)).href);
       return mod.default as RegistryItemType;
     } catch (error) {
       throw new Error(`Manifest not found for ${itemName}`, { cause: error });
@@ -69,29 +204,49 @@ const loadManifest = (itemName: string): Promise<RegistryItemType> => {
   return pending;
 };
 
+const readTransformed = async (filePath: string) =>
+  replaceRegistryImportsForCopy(await readFile(filePath, "utf-8"));
+
+const writeArtifact = async (itemName: string, metadata: unknown) => {
+  await writeFile(artifactPath(itemName), JSON.stringify(metadata, null, 2));
+  console.log(`✅ Generated ${itemName}.json`);
+};
+
+const loadExtraFiles = async (
+  files: RegistryItemType["files"],
+  primaryPath: string
+) => {
+  const extras = await Promise.all(
+    (files ?? []).map(async (file) => ({
+      ...file,
+      content: await readTransformed(join(CWD, file.path)),
+    }))
+  );
+  return extras.filter((file) => file.path !== primaryPath);
+};
+
 interface SourceInput {
   code: string;
   ext: SourceExt;
 }
 
-const buildMetadata = async (
+const buildKindMetadata = async (
   itemName: string,
   kind: RegistryKind,
-  source?: SourceInput,
+  source: SourceInput,
   framework = "react"
 ) => {
   const manifest = await loadManifest(itemName);
   const base = { $schema: SCHEMA, ...manifest };
 
-  if (!source?.code.trim()) {
+  if (!source.code.trim()) {
     console.warn(
       `[build-registry] ${itemName}: manifest type is "${manifest.type}"; skipping embedded`
     );
     return base;
   }
 
-  const { manifestType, subdir } = KINDS[kind];
-
+  const { manifestType } = KINDS[kind];
   if (manifest.type !== manifestType) {
     console.warn(
       `[build-registry] ${itemName}: kind="${kind}" expects manifest type "${manifestType}" but got "${manifest.type}"; skipping embedded files.`
@@ -99,15 +254,12 @@ const buildMetadata = async (
     return base;
   }
 
-  const extraFiles = await Promise.all(
-    (manifest.files ?? []).map(async (file) => ({
-      ...file,
-      content: replaceRegistryImportsForCopy(
-        await readFile(join(CWD, file.path), "utf-8")
-      ),
-    }))
+  const primaryPath = primaryRegistryPath(
+    kind,
+    itemName,
+    source.ext,
+    framework
   );
-  const primaryPath = `registry/${framework}/${subdir}/${itemName}.${source.ext}`;
 
   return {
     ...base,
@@ -117,45 +269,14 @@ const buildMetadata = async (
         path: primaryPath,
         type: manifest.type,
       },
-      ...extraFiles.filter((file) => file.path !== primaryPath),
+      ...(await loadExtraFiles(manifest.files, primaryPath)),
     ],
   };
 };
 
-const writeArtifact = async (metadata: unknown, itemName: string) => {
-  const filePath = join(PUBLIC_DIR, `${itemName}.json`);
-  await writeFile(filePath, JSON.stringify(metadata, null, 2));
-  console.log(`✅ Generated ${itemName}.json`);
-};
-
-/** Pick the best source file per item, honoring SOURCE_EXTS priority. */
-const pickSourceFiles = (files: string[]) => {
-  const chosen = new Map<string, SourceExt>();
-
-  for (const file of files) {
-    for (let i = 0; i < SOURCE_EXTS.length; i += 1) {
-      const ext = SOURCE_EXTS[i];
-      const suffix = `.${ext}`;
-      if (!file.endsWith(suffix)) {
-        continue;
-      }
-
-      const name = file.slice(0, -suffix.length);
-      const existing = chosen.get(name);
-      if (existing === undefined || i < SOURCE_EXTS.indexOf(existing)) {
-        chosen.set(name, ext);
-      }
-      break;
-    }
-  }
-
-  return chosen;
-};
-
 const processKind = async (kind: RegistryKind, framework = "react") => {
   const { subdir, label, emoji } = KINDS[kind];
-
-  const dirPath = join(CWD, "registry", framework, subdir);
+  const dirPath = kindDir(kind, framework);
 
   try {
     await access(dirPath);
@@ -170,93 +291,49 @@ const processKind = async (kind: RegistryKind, framework = "react") => {
   await Promise.all(
     Array.from(chosen, async ([itemName, ext]) => {
       console.log(`${emoji} Processing ${itemName}...`);
-      const code = replaceRegistryImportsForCopy(
-        await readFile(join(dirPath, `${itemName}.${ext}`), "utf-8")
-      );
-      const metadata = await buildMetadata(
+      const code = await readTransformed(join(dirPath, `${itemName}.${ext}`));
+      const metadata = await buildKindMetadata(
         itemName,
         kind,
         { code, ext },
         framework
       );
-      await writeArtifact(metadata, itemName);
+      await writeArtifact(itemName, metadata);
     })
   );
 
   console.log(`🎉 Successfully processed all ${chosen.size} ${label}!\n`);
 };
 
-const processStandaloneManifests = async (itemNames: string[]) => {
-  await Promise.all(
-    itemNames.map(async (itemName) => {
-      console.log(`📦 Processing standalone manifest ${itemName}...`);
-      const manifest = await loadManifest(itemName);
-      await writeArtifact({ $schema: SCHEMA, ...manifest }, itemName);
-    })
-  );
-};
-
 const processCompositions = async () => {
-  const [blocks, templates] = await Promise.all([
-    getRegistryArtifacts("blocks"),
-    getRegistryArtifacts("templates"),
-  ]);
-  const groups = [
-    { emoji: "🧱", items: blocks, label: "blocks" },
-    { emoji: "🖥️", items: templates, label: "templates" },
-  ] as const;
-
   await Promise.all(
-    groups.map(async ({ emoji, items, label }) => {
+    COMPOSITION_GROUPS.map(async ({ emoji, kind, label }) => {
+      const items = (await getRegistryArtifacts(kind)) as CompositionArtifact[];
       console.log(`Found ${items.length} ${label} to process:`);
+
       await Promise.all(
         items.map(async (composition) => {
           console.log(`${emoji} Processing ${composition.name}...`);
-          const metadata = {
-            $schema: SCHEMA,
-            categories: [composition.category],
-            dependencies: composition.dependencies ?? [],
-            description: composition.description,
-            files: composition.files.map(({ content, path, target, type }) => ({
-              content,
-              path,
-              target,
-              type,
-            })),
-            meta: composition.meta,
-            name: composition.name,
-            registryDependencies: composition.registryDependencies,
-            title: composition.title,
-            type: composition.type,
-          };
-
-          await writeArtifact(metadata, composition.name);
+          await writeArtifact(
+            composition.name,
+            toCompositionRegistryItem(composition)
+          );
         })
       );
+
       console.log(`🎉 Successfully processed all ${items.length} ${label}!\n`);
     })
   );
 };
 
-const main = async () => {
-  await mkdir(PUBLIC_DIR, { recursive: true });
-
-  // generate registry for all kinds
+const processStandaloneManifests = async () => {
   await Promise.all(
-    (["component", "hook", "lib"] as const).map((kind) => processKind(kind))
+    STANDALONE_MANIFESTS.map(async (itemName) => {
+      console.log(`📦 Processing standalone manifest ${itemName}...`);
+      const manifest = await loadManifest(itemName);
+      await writeArtifact(itemName, { $schema: SCHEMA, ...manifest });
+    })
   );
-
-  await processCompositions();
-
-  await processStandaloneManifests([
-    "ui",
-    "style",
-    "hitbox",
-    "shimmer",
-    "chat",
-  ]);
-
-  await assertPublishedRegistryUrls();
 };
 
 const assertPublishedRegistryUrls = async () => {
@@ -273,40 +350,35 @@ const assertPublishedRegistryUrls = async () => {
   );
 
   for (const { name, raw } of files) {
-    if (LOCALHOST_RE.test(raw)) {
-      throw new Error(
-        `localhost URL found in public/r/${name}. Registry artifacts must use ${siteOrigin}.`
-      );
-    }
-
-    const parsed: unknown = JSON.parse(raw);
-    if (
-      typeof parsed !== "object" ||
-      parsed === null ||
-      !("registryDependencies" in parsed)
-    ) {
-      continue;
-    }
-
-    const { registryDependencies } = parsed;
-    if (!Array.isArray(registryDependencies)) {
-      continue;
-    }
-
-    for (const dep of registryDependencies) {
-      if (typeof dep !== "string" || !dep.startsWith("http")) {
-        continue;
-      }
-      if (!dep.startsWith(`${siteOrigin}/`)) {
-        throw new Error(
-          `public/r/${name}: registryDependency is not under ${siteOrigin}/`
-        );
-      }
-    }
+    validatePublishedArtifact(name, raw, siteOrigin);
   }
 };
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+const main = async () => {
+  await mkdir(PUBLIC_DIR, { recursive: true });
+  await Promise.all(REGISTRY_KINDS.map((kind) => processKind(kind)));
+  await processCompositions();
+  await processStandaloneManifests();
+  await assertPublishedRegistryUrls();
+};
+
+const isDirectRun = () => {
+  if (process.argv[1] === undefined) {
+    return false;
+  }
+  try {
+    return (
+      realpathSync(fileURLToPath(import.meta.url)) ===
+      realpathSync(process.argv[1])
+    );
+  } catch {
+    return false;
+  }
+};
+
+if (isDirectRun()) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

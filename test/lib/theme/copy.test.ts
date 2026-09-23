@@ -1,42 +1,20 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import {
-  BASE_COLORS,
-  BORDER_RADIUS,
-  PRIMARY_COLORS,
-} from "@/lib/theme/catalog";
+import { createCssVars } from "@/lib/theme/catalog";
 import {
   createNextFontSnippet,
-  createThemeExportCss,
   createThemeFontInstallCommand,
   getThemeFontInstall,
 } from "@/lib/theme/copy";
 import { getThemeFont } from "@/lib/theme/fonts";
 
-const byValue = <T extends { value: string }>(
-  items: readonly T[],
-  value: string
-) => {
-  const item = items.find((entry) => entry.value === value);
-
-  assert.ok(item, `missing catalog item ${value}`);
-
-  return item;
-};
-
-const primary = byValue(PRIMARY_COLORS, "neutral");
-
-const base = byValue(BASE_COLORS, "neutral");
-
-const radius = byValue(BORDER_RADIUS, "md");
-
 describe("theme copy helpers", () => {
   it("exports only the selected theme tokens", () => {
-    const css = createThemeExportCss(
-      primary.cssVars,
-      base.cssVars,
-      radius.cssVars
-    );
+    const css = createCssVars({
+      baseColor: "neutral",
+      borderRadius: "md",
+      primaryColor: "neutral",
+    });
 
     assert.equal(css.includes("@import"), false);
     assert.equal(css.includes("--font-sans"), false);
@@ -47,14 +25,15 @@ describe("theme copy helpers", () => {
   });
 
   it("includes the selected primary tone", () => {
-    const css = createThemeExportCss(
-      primary.cssVars,
-      base.cssVars,
-      radius.cssVars,
-      "dark"
-    );
+    const css = createCssVars({
+      baseColor: "neutral",
+      borderRadius: "md",
+      primaryColor: "blue",
+      primaryTone: "dark",
+    });
 
     assert.ok(css.includes("--background:"));
+    assert.ok(css.includes("--primary: var(--color-blue-600)"));
   });
 
   it("maps variable Google fonts to fontsource-variable packages", () => {

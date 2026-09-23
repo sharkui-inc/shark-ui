@@ -2,13 +2,8 @@
 
 import type React from "react";
 import { CopyButton } from "@/components/copy-button";
-import {
-  getBaseColor,
-  getBorderRadius,
-  getPrimaryColor,
-} from "@/lib/theme/catalog";
+import { createCssVars } from "@/lib/theme/catalog";
 import { DEFAULT_PRIMARY_TONE } from "@/lib/theme/config";
-import { createThemeExportCss } from "@/lib/theme/copy";
 import {
   Dialog,
   DialogBody,
@@ -25,16 +20,12 @@ export const CopyThemeCodeDialog = (
   const { children, ...rest } = props;
   const cfg = useConfig();
 
-  const primary = getPrimaryColor(cfg.primaryColor);
-  const base = getBaseColor(cfg.baseColor);
-  const radius = getBorderRadius(cfg.borderRadius);
-  const primaryTone = cfg.primaryTone ?? DEFAULT_PRIMARY_TONE;
-  const cssCode = createThemeExportCss(
-    primary.cssVars,
-    base.cssVars,
-    radius.cssVars,
-    primaryTone
-  );
+  const cssCode = createCssVars({
+    baseColor: cfg.baseColor,
+    borderRadius: cfg.borderRadius,
+    primaryColor: cfg.primaryColor,
+    primaryTone: cfg.primaryTone ?? DEFAULT_PRIMARY_TONE,
+  });
 
   return (
     <Dialog {...rest}>

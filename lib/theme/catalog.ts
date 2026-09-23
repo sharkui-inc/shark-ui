@@ -103,8 +103,8 @@ const BASE_COLOR_OPTIONS = [
   { hex: "bg-taupe-500", label: "Taupe", value: "taupe" },
 ] as const;
 
-type PrimaryColorName = (typeof PRIMARY_COLOR_OPTIONS)[number]["value"];
-type BaseColorName = (typeof BASE_COLOR_OPTIONS)[number]["value"];
+export type PrimaryColorName = (typeof PRIMARY_COLOR_OPTIONS)[number]["value"];
+export type BaseColorName = (typeof BASE_COLOR_OPTIONS)[number]["value"];
 
 interface PrimaryTokenMap {
   primary: string;
@@ -121,7 +121,7 @@ interface PrimaryCssVars {
   light: PrimaryTokenMap;
 }
 
-const primaryTokens = (
+export const primaryTokens = (
   palette: string,
   shade: string,
   foreground: string,
@@ -135,34 +135,6 @@ const primaryTokens = (
   "sidebar-primary-foreground": `var(--color-${palette}-${foreground})`,
   "sidebar-ring": `var(--color-${palette}-${ringShade})`,
 });
-
-const primaryCssVars = (value: PrimaryColorName): PrimaryCssVars => {
-  if (value === "neutral") {
-    return {
-      dark: primaryTokens("neutral", "100", "800", "50"),
-      light: primaryTokens("neutral", "800", "50", "950"),
-    };
-  }
-
-  const lightRingShade = ["blue", "indigo", "violet", "purple"].includes(value)
-    ? "600"
-    : "700";
-
-  return {
-    dark: primaryTokens(value, "400", "950", "500"),
-    light: primaryTokens(value, "400", "950", lightRingShade),
-  };
-};
-
-export const PRIMARY_COLORS = PRIMARY_COLOR_OPTIONS.map((item) => ({
-  ...item,
-  cssVars: primaryCssVars(item.value),
-})) as readonly {
-  cssVars: PrimaryCssVars;
-  hex: { dark: string; light: string };
-  label: string;
-  value: PrimaryColorName;
-}[];
 
 export const PRIMARY_TONES = [
   { label: "Light", value: "light" },
@@ -193,6 +165,35 @@ export const getPrimaryToneShade = (
     : "700";
 };
 
+const primaryCssVars = (value: PrimaryColorName): PrimaryCssVars => {
+  if (value === "neutral") {
+    return {
+      dark: primaryTokens("neutral", "100", "800", "50"),
+      light: primaryTokens("neutral", "800", "50", "950"),
+    };
+  }
+
+  return {
+    dark: primaryTokens(value, "400", "950", "500"),
+    light: primaryTokens(
+      value,
+      "400",
+      "950",
+      getPrimaryToneShade(value, "dark")
+    ),
+  };
+};
+
+export const PRIMARY_COLORS = PRIMARY_COLOR_OPTIONS.map((item) => ({
+  ...item,
+  cssVars: primaryCssVars(item.value),
+})) as readonly {
+  cssVars: PrimaryCssVars;
+  hex: { dark: string; light: string };
+  label: string;
+  value: PrimaryColorName;
+}[];
+
 export const getPrimaryFillCss = (
   color: PrimaryColorName,
   primaryTone: PrimaryTone
@@ -204,7 +205,7 @@ export const getPrimaryFillCss = (
   return `var(--color-${color}-${getPrimaryToneShade(color, primaryTone)})`;
 };
 
-const baseThemeTokens = (palette: string, mode: "light" | "dark") => {
+export const baseThemeTokens = (palette: string, mode: "light" | "dark") => {
   const light = mode === "light";
   const surface = `var(--color-${palette}-${light ? "950" : "50"})`;
   const foreground = `var(--color-${palette}-${light ? "800" : "100"})`;
@@ -316,9 +317,10 @@ export const BORDER_RADIUS = [
   },
 ] as const;
 
-export type PrimaryColor = (typeof PRIMARY_COLORS)[number];
-export type BaseColor = (typeof BASE_COLORS)[number];
-export type BorderRadius = (typeof BORDER_RADIUS)[number];
+export type PrimaryColorOption = (typeof PRIMARY_COLORS)[number];
+export type BaseColorOption = (typeof BASE_COLORS)[number];
+export type BorderRadiusOption = (typeof BORDER_RADIUS)[number];
+export type BorderRadiusName = BorderRadiusOption["value"];
 
 const findCatalogItem = <T extends { value: string }>(
   items: readonly T[],
@@ -334,16 +336,16 @@ const findCatalogItem = <T extends { value: string }>(
   return item;
 };
 
-export const getBaseColor = (value: BaseColor["value"]) =>
+export const getBaseColor = (value: BaseColorName) =>
   findCatalogItem(BASE_COLORS, value, "base color");
 
-export const getBaseFillCss = (color: BaseColor["value"]) =>
+export const getBaseFillCss = (color: BaseColorName) =>
   `var(--color-${color}-500)`;
 
-export const getPrimaryColor = (value: PrimaryColor["value"]) =>
+export const getPrimaryColor = (value: PrimaryColorName) =>
   findCatalogItem(PRIMARY_COLORS, value, "primary color");
 
-export const getBorderRadius = (value: BorderRadius["value"]) =>
+export const getBorderRadius = (value: BorderRadiusName) =>
   findCatalogItem(BORDER_RADIUS, value, "border radius");
 
 export const withDefaultFirst = <T extends { value: string }>(
@@ -354,7 +356,7 @@ export const withDefaultFirst = <T extends { value: string }>(
   ...items.filter(({ value }) => value !== defaultValue),
 ];
 
-const STATUS_LIGHT = {
+export const STATUS_LIGHT = {
   "chart-1": "var(--color-blue-600)",
   "chart-2": "var(--color-emerald-600)",
   "chart-3": "var(--color-amber-600)",
@@ -371,7 +373,7 @@ const STATUS_LIGHT = {
   "warning-foreground": "var(--color-amber-700)",
 } as const;
 
-const STATUS_DARK = {
+export const STATUS_DARK = {
   "chart-1": "var(--color-blue-700)",
   "chart-2": "var(--color-emerald-500)",
   "chart-3": "var(--color-amber-500)",
@@ -388,51 +390,24 @@ const STATUS_DARK = {
   "warning-foreground": "var(--color-amber-400)",
 } as const;
 
-const BASE_PALETTE_FROM_BACKGROUND_RE = /--color-([a-z]+)-/;
-
-const basePaletteFromBackground = (background: string) => {
-  const match: RegExpExecArray | null =
-    BASE_PALETTE_FROM_BACKGROUND_RE.exec(background);
-  return match?.[1];
-};
-
 const primaryToneTokens = (
-  primaryCss: PrimaryColor["cssVars"],
+  palette: PrimaryColorName,
   primaryTone: PrimaryTone
-) => {
-  const palette = basePaletteFromBackground(primaryCss.light.primary);
-
-  if (!palette || palette === "neutral") {
-    return primaryCss;
+): PrimaryCssVars => {
+  if (palette === "neutral") {
+    return primaryCssVars(palette);
   }
 
   const step = getPrimaryToneShade(palette, primaryTone);
   const foreground = primaryTone === "light" ? "950" : "50";
-  const sharedTokens = {
-    primary: `var(--color-${palette}-${step})`,
-    "primary-foreground": `var(--color-${palette}-${foreground})`,
-    "primary-hover": `color-mix(in srgb, var(--color-${palette}-${step}) 92%, var(--color-${palette}-950))`,
-    "sidebar-primary": `var(--color-${palette}-${step})`,
-    "sidebar-primary-foreground": `var(--color-${palette}-${foreground})`,
-  };
 
   return {
-    dark: {
-      ...primaryCss.dark,
-      ...sharedTokens,
-      ring: `var(--color-${palette}-50)`,
-      "sidebar-ring": `var(--color-${palette}-50)`,
-    },
-    light: {
-      ...primaryCss.light,
-      ...sharedTokens,
-      ring: `var(--color-${palette}-950)`,
-      "sidebar-ring": `var(--color-${palette}-950)`,
-    },
+    dark: primaryTokens(palette, step, foreground, "50"),
+    light: primaryTokens(palette, step, foreground, "950"),
   };
 };
 
-const baseCodeTokens = (palette: string, mode: "light" | "dark") => {
+export const baseCodeTokens = (palette: string, mode: "light" | "dark") => {
   const mix = mode === "light" ? `${palette}-950` : `${palette}-50`;
 
   return {
@@ -452,250 +427,29 @@ const formatCssVarsBlock = (
   return `${selector} {\n${lines.join("\n")}\n}`;
 };
 
-export const createCssVars = (
-  primaryCss: PrimaryColor["cssVars"],
-  baseCss: BaseColor["cssVars"],
-  radiusCss: BorderRadius["cssVars"],
-  primaryTone: PrimaryTone = "light"
-) => {
-  const primary = primaryToneTokens(primaryCss, primaryTone);
-  const palette = basePaletteFromBackground(baseCss.light.background);
-  const lightCode = palette ? baseCodeTokens(palette, "light") : {};
-  const darkCode = palette ? baseCodeTokens(palette, "dark") : {};
+export interface CreateCssVarsInput {
+  baseColor: BaseColorName;
+  borderRadius: BorderRadiusName;
+  primaryColor: PrimaryColorName;
+  primaryTone?: PrimaryTone;
+}
+
+export const createCssVars = (input: CreateCssVarsInput) => {
+  const primaryTone = input.primaryTone ?? "light";
+  const primary = primaryToneTokens(input.primaryColor, primaryTone);
+  const radiusCss = getBorderRadius(input.borderRadius).cssVars;
 
   return `${formatCssVarsBlock(":root", {
-    ...baseCss.light,
-    ...(palette ? baseThemeTokens(palette, "light") : {}),
-    ...lightCode,
+    ...baseThemeTokens(input.baseColor, "light"),
+    ...baseCodeTokens(input.baseColor, "light"),
     ...STATUS_LIGHT,
     ...primary.light,
     ...radiusCss,
   })}\n\n${formatCssVarsBlock(".dark", {
-    ...baseCss.dark,
-    ...(palette ? baseThemeTokens(palette, "dark") : {}),
-    ...darkCode,
+    ...baseThemeTokens(input.baseColor, "dark"),
+    ...baseCodeTokens(input.baseColor, "dark"),
     ...STATUS_DARK,
     ...primary.dark,
     ...radiusCss,
   })}`;
-};
-
-const THEME_COLOR_SHADES = ["50", "100", "400", "500", "800", "950"] as const;
-
-const PRIMARY_VAR_KEYS = [
-  "primary",
-  "primary-foreground",
-  "primary-hover",
-  "ring",
-  "sidebar-primary",
-  "sidebar-primary-foreground",
-  "sidebar-ring",
-] as const;
-
-const SURFACE_VAR_KEYS = [
-  "background",
-  "foreground",
-  "card",
-  "card-foreground",
-  "popover",
-  "popover-foreground",
-  "secondary",
-  "secondary-foreground",
-  "secondary-hover",
-  "muted",
-  "muted-foreground",
-  "accent",
-  "accent-foreground",
-  "border",
-  "input",
-  "sidebar",
-  "sidebar-foreground",
-  "sidebar-accent",
-  "sidebar-accent-foreground",
-  "sidebar-border",
-  "chart-1",
-  "chart-2",
-  "chart-3",
-  "chart-4",
-  "chart-5",
-  "code",
-  "code-highlight",
-] as const;
-
-const STATUS_CHART_KEYS = [
-  "chart-1",
-  "chart-2",
-  "chart-3",
-  "chart-4",
-  "chart-5",
-] as const;
-
-const RUNTIME_THEME_PALETTE = "slate";
-
-const CSS_PRINT_WIDTH = 80;
-
-const COLOR_MIX_ARGS_RE = /,\s*/;
-
-const aliasThemeColorVars = (value: string, palette: string) =>
-  value.replaceAll(`var(--color-${palette}-`, "var(--theme-color-");
-
-const formatColorMixValue = (value: string, indent: string) => {
-  const args = value.slice("color-mix(".length, -1).split(COLOR_MIX_ARGS_RE);
-
-  return `color-mix(\n${args.map((arg) => `${indent}  ${arg}`).join(",\n")}\n${indent})`;
-};
-
-const formatRuntimeDeclaration = (
-  key: string,
-  value: string,
-  indent: string
-) => {
-  const line = `${indent}--${key}: ${value};`;
-
-  if (line.length <= CSS_PRINT_WIDTH || !value.startsWith("color-mix(")) {
-    return line;
-  }
-
-  return `${indent}--${key}: ${formatColorMixValue(value, indent)};`;
-};
-
-const formatRuntimeDeclarations = (
-  vars: object,
-  keys: readonly string[],
-  indent = "  "
-) =>
-  keys
-    .map((key) => {
-      const value = (vars as Record<string, string | undefined>)[key];
-
-      return value === undefined
-        ? undefined
-        : formatRuntimeDeclaration(key, value, indent);
-    })
-    .filter((line): line is string => line !== undefined)
-    .join("\n");
-
-const formatRuntimeRule = (selector: string, declarations: string) =>
-  `${selector} {\n${declarations}\n}`;
-
-const formatIsSelector = (selectors: readonly string[]) =>
-  `:is(\n  ${selectors.join(",\n  ")}\n)`;
-
-const runtimeSurfaceVars = (mode: "light" | "dark") => {
-  const palette = RUNTIME_THEME_PALETTE;
-  const status = mode === "light" ? STATUS_LIGHT : STATUS_DARK;
-  const tokens: Record<string, string> = {
-    ...baseThemeTokens(palette, mode),
-    ...baseCodeTokens(palette, mode),
-  };
-
-  for (const key of STATUS_CHART_KEYS) {
-    tokens[key] = status[key];
-  }
-
-  return Object.fromEntries(
-    Object.entries(tokens).map(([key, value]) => [
-      key,
-      aliasThemeColorVars(value, palette),
-    ])
-  );
-};
-
-const runtimePrimaryVars = (mode: "light" | "dark") => {
-  const tokens = baseThemeTokens(RUNTIME_THEME_PALETTE, mode);
-
-  return Object.fromEntries(
-    PRIMARY_VAR_KEYS.map((key) => [
-      key,
-      aliasThemeColorVars(tokens[key], RUNTIME_THEME_PALETTE),
-    ])
-  );
-};
-
-export const createRuntimeThemeCss = () => {
-  const chromatic = PRIMARY_COLORS.filter((color) => color.value !== "neutral");
-  const bases = BASE_COLORS.filter((color) => color.value !== "neutral");
-  const themeSelectors = chromatic.map((color) => `.theme-${color.value}`);
-  const baseSelectors = bases.map((color) => `.bg-${color.value}`);
-  const lightSurface = runtimeSurfaceVars("light");
-  const darkSurface = runtimeSurfaceVars("dark");
-  const lightPrimary = runtimePrimaryVars("light");
-  const darkPrimary = runtimePrimaryVars("dark");
-
-  const themeRules = chromatic.map((color) =>
-    formatRuntimeRule(
-      `.theme-${color.value}`,
-      formatRuntimeDeclarations(color.cssVars.light, PRIMARY_VAR_KEYS)
-    )
-  );
-
-  const darkThemeRules = chromatic.map((color) =>
-    formatRuntimeRule(
-      `.dark body.theme-${color.value}`,
-      formatRuntimeDeclarations(color.cssVars.dark, PRIMARY_VAR_KEYS)
-    )
-  );
-
-  const darkToneRules = chromatic.map((color) =>
-    formatRuntimeRule(
-      `body.primary-tone-dark.theme-${color.value}`,
-      formatRuntimeDeclarations(
-        primaryTokens(
-          color.value,
-          getPrimaryToneShade(color.value, "dark"),
-          "50",
-          getPrimaryToneShade(color.value, "dark")
-        ),
-        PRIMARY_VAR_KEYS
-      )
-    )
-  );
-
-  const darkToneDarkRules = chromatic.map((color) =>
-    formatRuntimeRule(
-      `.dark body.primary-tone-dark.theme-${color.value}`,
-      formatRuntimeDeclarations(
-        primaryTokens(
-          color.value,
-          getPrimaryToneShade(color.value, "dark"),
-          "50",
-          "500"
-        ),
-        PRIMARY_VAR_KEYS
-      )
-    )
-  );
-
-  const aliasRules = bases.map((color) =>
-    formatRuntimeRule(
-      `.bg-${color.value}`,
-      THEME_COLOR_SHADES.map(
-        (shade) =>
-          `  --theme-color-${shade}: var(--color-${color.value}-${shade});`
-      ).join("\n")
-    )
-  );
-
-  const surfaceRule = `${formatIsSelector(baseSelectors)} {\n${formatRuntimeDeclarations(lightSurface, SURFACE_VAR_KEYS)}\n\n  @variant dark {\n${formatRuntimeDeclarations(darkSurface, SURFACE_VAR_KEYS, "    ")}\n  }\n}`;
-
-  const fallbackRule = `${formatIsSelector(baseSelectors)}:not(\n  ${formatIsSelector(themeSelectors).replaceAll("\n", "\n  ")}\n) {\n${formatRuntimeDeclarations(lightPrimary, PRIMARY_VAR_KEYS)}\n\n  @variant dark {\n${formatRuntimeDeclarations(darkPrimary, PRIMARY_VAR_KEYS, "    ")}\n  }\n}`;
-
-  const radiusRules = BORDER_RADIUS.map((radius) =>
-    formatRuntimeRule(
-      `.radius-${radius.value}`,
-      `  --radius: ${radius.cssVars.radius};`
-    )
-  );
-
-  return `${[
-    "/* Generated from lib/theme/catalog.ts. Do not edit. */",
-    ...themeRules,
-    ...darkToneRules,
-    ...darkThemeRules,
-    ...darkToneDarkRules,
-    ...aliasRules,
-    surfaceRule,
-    fallbackRule,
-    ...radiusRules,
-  ].join("\n\n")}\n`;
 };

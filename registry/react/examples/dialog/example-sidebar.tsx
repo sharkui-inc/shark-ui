@@ -1,18 +1,12 @@
 "use client";
 
-import {
-  CreditCardIcon,
-  UserRoundIcon,
-  UsersIcon,
-  WavesHorizontalIcon,
-} from "lucide-react";
+import { CreditCardIcon, UserRoundIcon, UsersIcon } from "lucide-react";
 import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Dialog,
-  DialogClose,
+  DialogBody,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTrigger,
 } from "@/registry/react/components/dialog";
@@ -25,13 +19,11 @@ import {
   FieldSet,
 } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarHeader,
   SidebarInset,
   SidebarMenu,
   SidebarMenuButton,
@@ -49,10 +41,7 @@ const Example = () => {
           <FieldGroup>
             <FieldSet>
               <FieldLegend>Account</FieldLegend>
-              <FieldDescription>
-                Short page. Switching away and back should not resize the
-                dialog.
-              </FieldDescription>
+              <FieldDescription>Your workspace profile.</FieldDescription>
               <Field>
                 <FieldLabel>Workspace name</FieldLabel>
                 <Input defaultValue="Onda" />
@@ -65,9 +54,7 @@ const Example = () => {
           <FieldGroup>
             <FieldSet>
               <FieldLegend>Team</FieldLegend>
-              <FieldDescription>
-                Medium page with a few members of the Onda workspace.
-              </FieldDescription>
+              <FieldDescription>Members of this workspace.</FieldDescription>
               {TEAM.map((member) => (
                 <Field key={member.email}>
                   <FieldLabel>{member.name}</FieldLabel>
@@ -82,9 +69,7 @@ const Example = () => {
           <FieldGroup>
             <FieldSet>
               <FieldLegend>Billing</FieldLegend>
-              <FieldDescription>
-                Long page. Only this inset scrolls; the dialog height stays put.
-              </FieldDescription>
+              <FieldDescription>Invoice history.</FieldDescription>
               {INVOICES.map((invoice) => (
                 <Field key={invoice.id}>
                   <FieldLabel>{invoice.label}</FieldLabel>
@@ -113,7 +98,7 @@ const Example = () => {
       >
         <DialogHeader
           className="sr-only"
-          description="Workspace preferences for Onda."
+          description="Settings with an embedded sidebar."
           title="Settings"
         />
         <SidebarProvider
@@ -121,10 +106,6 @@ const Example = () => {
           style={{ "--sidebar-width": "13rem" } as React.CSSProperties}
         >
           <Sidebar className="border-e bg-transparent" collapsible="none">
-            <SidebarHeader className="flex-row items-center gap-2">
-              <WavesHorizontalIcon aria-hidden />
-              <span className="font-medium">Onda</span>
-            </SidebarHeader>
             <SidebarContent>
               <SidebarGroup>
                 <SidebarGroupContent>
@@ -146,16 +127,9 @@ const Example = () => {
             </SidebarContent>
           </Sidebar>
           <SidebarInset className="min-h-0 overflow-hidden bg-transparent">
-            <ScrollArea>
-              <div className="p-(--space)">{renderPage()}</div>
-            </ScrollArea>
+            <DialogBody>{renderPage()}</DialogBody>
           </SidebarInset>
         </SidebarProvider>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Close</Button>
-          </DialogClose>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

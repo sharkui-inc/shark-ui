@@ -1,6 +1,8 @@
 ---
 title: Tour
-description: Displays a guided tour of the application.
+description: Guided tour of the application.
+seo:
+  description: Guided tour that points at UI and steps the user through it.
 links:
   doc: https://ark-ui.com/docs/components/tour
   api: https://ark-ui.com/docs/components/tour#api-reference
@@ -20,10 +22,24 @@ import manifest from "@/registry/manifest/tour";
 </TabsList>
 
 <TabsContent value="cli">
-  
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
 ```bash
 npx shadcn@latest add @shark/tour
 ```
+
+<Step>Add the following to your CSS file. The spotlight and tooltip backdrop are positioned against the `body`.</Step>
+
+```css title="globals.css"
+body {
+  position: relative;
+}
+```
+
+</Steps>
 
 </TabsContent>
 
@@ -43,19 +59,19 @@ npx shadcn@latest add @shark/tour
 
 <Step>Update the import paths to match your project setup.</Step>
 
+<Step>Add the following to your CSS file. The spotlight and tooltip backdrop are positioned against the `body`.</Step>
+
+```css title="globals.css"
+body {
+  position: relative;
+}
+```
+
 </Steps>
 
 </TabsContent>
 
 </CodeTabs>
-
-<Alert>
-<InfoIcon />
-<AlertTitle>Position the body</AlertTitle>
-<AlertDescription>
-  Set `position: relative` on the `body`. The spotlight and tooltip backdrop are positioned against it.
-</AlertDescription>
-</Alert>
 
 ## Anatomy
 

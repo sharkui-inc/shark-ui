@@ -1,11 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "categories": [
-    "sidebar"
-  ],
-  "dependencies": [
-    "lucide-react"
-  ],
+  "categories": ["sidebar"],
+  "dependencies": ["lucide-react"],
   "description": "A right-side messaging sidebar with labels and unread counts.",
   "files": [
     {
@@ -27,9 +23,7 @@
     "previewHeight": 760
   },
   "name": "sidebar-14",
-  "registryDependencies": [
-    "https://shark-ui.com/r/sidebar.json"
-  ],
+  "registryDependencies": ["https://shark-ui.com/r/sidebar.json"],
   "title": "Sidebar 14",
   "type": "registry:block"
 }

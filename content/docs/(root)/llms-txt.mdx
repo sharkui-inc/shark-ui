@@ -1,27 +1,27 @@
 ---
 title: LLMs.txt
-description: Focused documentation and design context for AI-assisted Shark UI work.
+description: Indexes and Markdown pages agents use to load Shark UI docs.
 ---
 
-Shark UI gives agents four layers of context: compact indexes for discovery, Markdown pages for implementation, a public design contract for visual fidelity, and a design handbook for rationale and extension decisions.
+Shark UI publishes [llms.txt](https://llmstxt.org/) indexes so agents can find docs without crawling the site. Start at [/llms.txt](/llms.txt), then open only the index and Markdown pages that match the task.
 
 ## Choose the task
 
-- **Install Shark UI**: read [Foundations](/llms/foundations.txt), then [Installation](/llms/installation.txt).
-- **Add a component**: read [Foundations](/llms/foundations.txt), then [Components](/llms/components.txt) and that component's Markdown page.
-- **Build a form, collection, or overlay**: read [Patterns](/llms/patterns.txt) and its linked Markdown pages.
-- **Migrate from another library**: use the migration section in [Patterns](/llms/patterns.txt).
-- **Generate or refine UI**: read the [design contract](/design.md) before writing styles. It contains prescriptive visual rules and composition recipes.
-- **Understand rationale or propose an extension**: read the [design handbook](https://github.com/sharkui-inc/shark-ui/blob/main/DESIGN.md) after the contract.
+- **Install Shark UI**: [Foundations](/llms/foundations.txt), then [Installation](/llms/installation.txt).
+- **Add a component**: [Foundations](/llms/foundations.txt), then [Components](/llms/components.txt) and that component's Markdown page.
+- **Build a form, collection, or overlay**: [Components](/llms/components.txt) plus the relevant component Markdown pages. For form integrations, helpers, hooks, utilities, or AI Components, use [Patterns](/llms/patterns.txt).
+- **Migrate from another library**: migration section in [Patterns](/llms/patterns.txt).
+- **Generate or refine UI**: read the [design contract](/design.md) before writing styles.
+- **Need rationale or an extension**: read the [design handbook](https://github.com/sharkui-inc/shark-ui/blob/main/DESIGN.md) after the contract.
 
-Every documentation page has a Markdown version: append `.md` to its URL. The indexes already use those URLs, so an agent can load only the context needed for the task.
+Every docs page has a Markdown version at the same URL with `.md` appended. The indexes already link those URLs.
 
 ## Prompt
 
 ```text
-Read https://shark-ui.com/llms.txt and start with Foundations. Load only the matching task index and Markdown pages before writing code. Read https://shark-ui.com/design.md before changing UI; use the handbook when you need rationale or must propose an extension. Shark UI is a copy-and-own React registry built with Ark UI and Tailwind CSS v4; use its registry or CLI and do not use Radix UI or Base UI APIs.
+Read https://shark-ui.com/llms.txt and start with Foundations. Load only the matching task index and Markdown pages before writing code. Read https://shark-ui.com/design.md before changing UI. Use the handbook when you need rationale or must propose an extension. Shark UI is a copy-and-own React registry built with Ark UI and Tailwind CSS v4. Use its registry or CLI. Do not use Radix UI or Base UI APIs.
 ```
 
 ## Skills
 
-Use the [Shark UI Skill](/docs/skills) for durable project-level guidance. It complements current Markdown documentation with component patterns, registry workflow, and Ark UI rules; it does not replace the linked docs.
+For guidance that stays with the project across sessions, install the [Shark UI Skill](/docs/skills). Docs remain the source of truth for APIs and visual rules; the skill does not replace them.

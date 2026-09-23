@@ -30,7 +30,7 @@ const Example = () => (
         <MenuItem key={person.username} value={person.username}>
           <Item className="[--space:--spacing(2)]">
             <ItemMedia>
-              <Avatar className="grayscale" size="sm">
+              <Avatar size="sm">
                 <AvatarImage alt="" src={person.avatar} />
                 <AvatarFallback>{person.username.charAt(0)}</AvatarFallback>
               </Avatar>

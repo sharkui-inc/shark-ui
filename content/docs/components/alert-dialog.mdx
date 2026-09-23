@@ -1,6 +1,8 @@
 ---
 title: Alert Dialog
-description: Dialog for displaying important content.
+description: Confirmation dialog for important actions.
+seo:
+  description: Confirmation dialog that blocks until the user accepts or cancels.
 links:
   doc: https://ark-ui.com/docs/components/dialog
   api: https://ark-ui.com/docs/components/dialog#api-reference
@@ -251,7 +253,7 @@ Public AlertDialogClose component. It forwards the underlying primitive props.
 
 ### AlertDialogFooter
 
-Footer for action buttons. Put **Cancel first in the DOM** (safe default focus), then Confirm. Uses `flex-col-reverse` / `sm:flex-row sm:justify-end` so Confirm stays on the right (and on top on mobile) — opposite DOM order from `DialogFooter`, which puts primary first for Tab focus.
+Footer for action buttons. Put **Cancel first in the DOM** (safe default focus), then Confirm. Uses `flex-col-reverse` / `sm:flex-row sm:justify-end` so Confirm stays on the right (and on top on mobile) - opposite DOM order from `DialogFooter`, which puts primary first for Tab focus.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -261,3 +263,9 @@ Footer for action buttons. Put **Cancel first in the DOM** (safe default focus),
 ---
 
 For a complete list of props, see the [Dialog API Reference](/docs/components/dialog#api-reference).
+
+## Related
+
+- [Dialog](/docs/components/dialog) - modal dialog for focused tasks
+- [Drawer](/docs/components/drawer) - swipeable sliding panel
+- [Toast](/docs/components/toast) - transient action feedback

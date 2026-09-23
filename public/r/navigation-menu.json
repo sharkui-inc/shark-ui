@@ -1,8 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "dependencies": [
-    "@ark-ui/react@^5.39.1"
-  ],
+  "dependencies": ["@ark-ui/react@^5.39.1"],
   "name": "navigation-menu",
   "registryDependencies": [
     "https://shark-ui.com/r/button.json",

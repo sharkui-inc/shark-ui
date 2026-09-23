@@ -1,6 +1,8 @@
 ---
 title: Dialog
-description: A dialog for displaying content.
+description: Modal dialog for focused content.
+seo:
+  description: Modal for confirmations and focused tasks.
 links:
   doc: https://ark-ui.com/docs/components/dialog
   api: https://ark-ui.com/docs/components/dialog#api-reference
@@ -174,7 +176,7 @@ Use `initialFocusEl` to control which element receives focus when the dialog ope
 
 ### Autofocus
 
-Order: `initialFocusEl`, then `[data-autofocus]`, then the first tabbable. Prefer DOM order for footer actions — see `DialogFooter`.
+Order: `initialFocusEl`, then `[data-autofocus]`, then the first tabbable. Prefer DOM order for footer actions - see `DialogFooter`.
 
 <ComponentPreview componentName="dialog" fileName="example-autofocus" />
 
@@ -206,7 +208,7 @@ Default spacing is `--spacing(6)`.
 
 ### Sidebar
 
-Put `Sidebar` in `DialogContent` with a fixed height. Skip `DialogBody`. Use `min-h-0` on `SidebarProvider` and `collapsible="none"`.
+Put `Sidebar` in `DialogContent` with a fixed height. Use `DialogBody` inside `SidebarInset` for the scrollable panel. Use `min-h-0` on `SidebarProvider` and `collapsible="none"`.
 
 <ComponentPreview componentName="dialog" fileName="example-sidebar" />
 
@@ -357,3 +359,10 @@ Public DialogPositioner component. It forwards the underlying primitive props.
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/dialog#api-reference).
+
+## Related
+
+- [Alert Dialog](/docs/components/alert-dialog) - interruptive confirmation dialog
+- [Sheet](/docs/components/sheet) - edge-sliding panel for mobile-friendly layouts
+- [Drawer](/docs/components/drawer) - swipeable sliding panel
+- [Popover](/docs/components/popover) - non-modal anchored overlay

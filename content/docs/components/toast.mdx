@@ -1,6 +1,8 @@
 ---
 title: Toast
-description: Provides feedback on an action.
+description: Short-lived feedback on an action.
+seo:
+  description: Short-lived notifications for success, errors, and undo.
 links:
   doc: https://ark-ui.com/docs/components/toast
   api: https://ark-ui.com/docs/components/toast#api-reference
@@ -20,10 +22,33 @@ import manifest from "@/registry/manifest/toast";
 </TabsList>
 
 <TabsContent value="cli">
-  
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
 ```bash
 npx shadcn@latest add @shark/toast
 ```
+
+<Step>Add the Toaster component.</Step>
+
+```tsx title="app/layout.tsx"
+import { Toaster } from "@/components/ui/toast"
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <main>{children}</main>
+        <Toaster />
+      </body>
+    </html>
+  )
+}
+```
+
+</Steps>
 
 </TabsContent>
 
@@ -64,12 +89,28 @@ npx shadcn@latest add @shark/toast
 ```
 </CodeCollapsibleWrapper>
 
-
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource title="components/ui/toast.tsx" src="/toast.tsx" />
 
 <Step>Update the import paths to match your project setup.</Step>
+
+<Step>Add the Toaster component.</Step>
+
+```tsx title="app/layout.tsx"
+import { Toaster } from "@/components/ui/toast"
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <main>{children}</main>
+        <Toaster />
+      </body>
+    </html>
+  )
+}
+```
 
 </Steps>
 
@@ -80,21 +121,14 @@ npx shadcn@latest add @shark/toast
 ## Usage
 
 ```tsx
-import { Toaster } from "@/components/ui/toast";
+import { toast } from "@/components/ui/toast"
 ```
 
 ```tsx
-const toaster = useToast();
-
-// add the toaster to the layout
-<Toaster toaster={toaster} />
-
-// show a toast
-toaster.create({
-  title: "Show Info Toast",
-  description: "This is an info toast",
-  type: "info",
-});
+toast.create({
+  title: "Event created",
+  description: "Sunday, December 3 at 9:00 AM",
+})
 ```
 
 ## Deduplication
@@ -205,3 +239,9 @@ Public ToastItem component. It forwards the underlying primitive props.
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/toast#api-reference).
+
+## Related
+
+- [Alert](/docs/components/alert) - inline status banner
+- [Alert Dialog](/docs/components/alert-dialog) - interruptive confirmation dialog
+- [Announcement](/docs/components/announcement) - inline product notice

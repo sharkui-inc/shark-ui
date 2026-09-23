@@ -39,6 +39,11 @@ export const docs = defineDocs({
           doc: z.url().optional(),
         })
         .optional(),
+      seo: z
+        .object({
+          description: z.string(),
+        })
+        .optional(),
     }),
   },
   meta: {

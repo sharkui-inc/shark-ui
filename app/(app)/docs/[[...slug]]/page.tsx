@@ -52,7 +52,7 @@ export const generateMetadata = async (
   }
 
   return createMetadata({
-    description: doc.description,
+    description: doc.seo?.description ?? doc.description,
     markdownUrl: `${page.url}.md`,
     title: doc.title,
     url: page.url,

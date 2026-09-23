@@ -186,7 +186,7 @@ const diffGutterVariants = tv({
     "sticky left-0 z-1",
     "flex w-full min-w-0 items-center",
     "bg-card",
-    "before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:content-['']",
+    "before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:w-0.75 before:content-['']",
   ],
   defaultVariants: {
     type: "context",
