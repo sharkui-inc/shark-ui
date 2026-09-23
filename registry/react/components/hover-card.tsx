@@ -73,8 +73,8 @@ export const HoverCardContent = (props: HoverCardContentProps) => {
             "duration-150 ease-out",
             "rounded-xl border shadow-lg/4",
             "outline-hidden",
+            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
-            "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
             "data-[state=closed]:animate-out data-[state=open]:animate-in",
             "motion-reduce:animate-none",
             className
