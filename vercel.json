@@ -23,6 +23,20 @@
   ],
   "routes": [
     {
+      "src": "/blocks(/.*)?",
+      "status": 308,
+      "headers": {
+        "Location": "/docs/components"
+      }
+    },
+    {
+      "src": "/templates",
+      "status": 308,
+      "headers": {
+        "Location": "/docs"
+      }
+    },
+    {
       "src": "/docs/ai-elements",
       "status": 308,
       "headers": {

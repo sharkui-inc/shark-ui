@@ -12,7 +12,6 @@ import type {
   PublishedComposition,
   PublishedCompositionFile,
 } from "@/lib/registry";
-import { assertPathInsideRoot } from "@/lib/registry-path";
 import { BLOCK_CATEGORIES } from "@/registry/react/blocks/_categories";
 import { BLOCKS } from "@/registry/react/blocks/_registry";
 import { TEMPLATE_CATEGORIES } from "@/registry/react/templates/_categories";
@@ -168,21 +167,16 @@ const createCatalog = ({
   const toSourcePath = (
     composition: CompositionDefinition,
     file: CompositionFileDefinition
-  ) => {
-    const compositionRoot = join(
+  ) =>
+    join(
       process.cwd(),
       "registry",
       "react",
       kind,
       composition.category,
-      composition.name
+      composition.name,
+      file.source
     );
-    return assertPathInsideRoot(
-      resolve(compositionRoot, file.source),
-      compositionRoot,
-      `[${kind}] ${composition.name} source ${file.source}`
-    );
-  };
 
   const resolveRelativeFile = (
     composition: CompositionDefinition,
@@ -472,4 +466,5 @@ const toCommandItem = (
 };
 
 export const getCommandCompositionItems = (): CommandCompositionItem[] =>
-  getDefinitions("blocks").map(toCommandItem);
+  // Blocks catalog route is temporarily disabled (`app/(app)/_blocks`).
+  getDefinitions("blocks").map(toCommandItem).slice(0, 0);

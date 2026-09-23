@@ -8,12 +8,6 @@ export const revalidate = false;
 const sitemap = (): MetadataRoute.Sitemap => {
   const staticRoutes = [
     { changeFrequency: "weekly", priority: 1, url: absoluteUrl("/") },
-    { changeFrequency: "weekly", priority: 0.8, url: absoluteUrl("/blocks") },
-    {
-      changeFrequency: "weekly",
-      priority: 0.8,
-      url: absoluteUrl("/templates"),
-    },
     { changeFrequency: "monthly", priority: 0.6, url: absoluteUrl("/themes") },
   ];
 

@@ -1,11 +1,10 @@
 import { realpathSync } from "node:fs";
 import { access, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
-import { join, resolve } from "node:path";
+import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { SITE_CONFIG } from "../config/site";
 import { getRegistryArtifacts } from "../lib/composition-catalog";
 import type { CompositionArtifact, RegistryItemType } from "../lib/registry";
-import { assertPathInsideRoot } from "../lib/registry-path";
 import { replaceRegistryImportsForCopy } from "../utils/formatter";
 
 export type RegistryKind = "component" | "hook" | "lib";
@@ -122,52 +121,15 @@ export const toCompositionRegistryItem = (
   type: composition.type,
 });
 
-const collectUrlCandidates = (value: unknown, out: string[]) => {
-  if (typeof value === "string") {
-    out.push(value);
-    return;
-  }
-
-  if (!Array.isArray(value)) {
-    return;
-  }
-
-  for (const entry of value) {
-    if (typeof entry === "string") {
-      out.push(entry);
-    }
-  }
-};
-
 export const assertNoLocalhost = (
   fileName: string,
   raw: string,
   siteOrigin: string
 ) => {
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(raw);
-  } catch {
-    return;
-  }
-
-  if (typeof parsed !== "object" || parsed === null) {
-    return;
-  }
-
-  const record = parsed as Record<string, unknown>;
-  const candidates: string[] = [];
-
-  collectUrlCandidates(record.registryDependencies, candidates);
-  collectUrlCandidates(record.url, candidates);
-  collectUrlCandidates(record.homepage, candidates);
-
-  for (const candidate of candidates) {
-    if (LOCALHOST_RE.test(candidate)) {
-      throw new Error(
-        `localhost URL found in public/r/${fileName}. Registry artifacts must use ${siteOrigin}.`
-      );
-    }
+  if (LOCALHOST_RE.test(raw)) {
+    throw new Error(
+      `localhost URL found in public/r/${fileName}. Registry artifacts must use ${siteOrigin}.`
+    );
   }
 };
 
@@ -250,24 +212,15 @@ const writeArtifact = async (itemName: string, metadata: unknown) => {
   console.log(`✅ Generated ${itemName}.json`);
 };
 
-const REGISTRY_ROOT = resolve(CWD, "registry");
-
 const loadExtraFiles = async (
   files: RegistryItemType["files"],
   primaryPath: string
 ) => {
   const extras = await Promise.all(
-    (files ?? []).map(async (file) => {
-      const filePath = assertPathInsideRoot(
-        resolve(CWD, file.path),
-        REGISTRY_ROOT,
-        `registry file ${file.path}`
-      );
-      return {
-        ...file,
-        content: await readTransformed(filePath),
-      };
-    })
+    (files ?? []).map(async (file) => ({
+      ...file,
+      content: await readTransformed(join(CWD, file.path)),
+    }))
   );
   return extras.filter((file) => file.path !== primaryPath);
 };

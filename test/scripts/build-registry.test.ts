@@ -142,21 +142,19 @@ describe("toCompositionRegistryItem", () => {
 });
 
 describe("assertNoLocalhost", () => {
-  it("throws when registryDependencies contain localhost", () => {
+  it("throws when raw contains localhost", () => {
     assert.throws(
       () =>
         assertNoLocalhost(
           "button.json",
-          JSON.stringify({
-            registryDependencies: ["http://localhost:3000/r/button.json"],
-          }),
+          JSON.stringify({ url: "http://localhost:3000/r/button.json" }),
           SITE_ORIGIN
         ),
       LOCALHOST_IN_BUTTON
     );
   });
 
-  it("throws when url contains 127.0.0.1", () => {
+  it("throws when raw contains 127.0.0.1", () => {
     assert.throws(
       () =>
         assertNoLocalhost(
@@ -172,27 +170,7 @@ describe("assertNoLocalhost", () => {
     assert.doesNotThrow(() =>
       assertNoLocalhost(
         "button.json",
-        JSON.stringify({
-          registryDependencies: [`${SITE_ORIGIN}/r/button.json`],
-        }),
-        SITE_ORIGIN
-      )
-    );
-  });
-
-  it("ignores localhost inside files[].content", () => {
-    assert.doesNotThrow(() =>
-      assertNoLocalhost(
-        "button.json",
-        JSON.stringify({
-          files: [
-            {
-              content: "fetch('http://localhost:3000')",
-              path: "registry/react/components/button.tsx",
-            },
-          ],
-          registryDependencies: [`${SITE_ORIGIN}/r/utils.json`],
-        }),
+        JSON.stringify({ url: `${SITE_ORIGIN}/r/button.json` }),
         SITE_ORIGIN
       )
     );
