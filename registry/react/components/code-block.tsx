@@ -339,12 +339,17 @@ const useCodeTokens = (
   }));
   const codeRef = React.useRef(code);
   const languageRef = React.useRef(language);
+  const isStreamingRef = React.useRef(isStreaming);
   const lastHighlightedCodeRef = React.useRef<string | null>(null);
 
   React.useEffect(() => {
     codeRef.current = code;
     languageRef.current = language;
   }, [code, language]);
+
+  React.useEffect(() => {
+    isStreamingRef.current = isStreaming;
+  }, [isStreaming]);
 
   const highlight = React.useCallback(
     (codeToHighlight: string, languageToHighlight: CodeBlockLanguage) => {
@@ -362,20 +367,30 @@ const useCodeTokens = (
 
       getTokens(codeToHighlight, languageToHighlight).then(({ tokens }) => {
         const latestCode = codeRef.current;
-        if (
-          languageRef.current !== languageToHighlight ||
-          (latestCode !== codeToHighlight &&
-            !latestCode.startsWith(codeToHighlight))
-        ) {
+        const streaming = isStreamingRef.current;
+        const codeMatches = streaming
+          ? latestCode === codeToHighlight ||
+            latestCode.startsWith(codeToHighlight)
+          : latestCode === codeToHighlight;
+
+        if (languageRef.current !== languageToHighlight || !codeMatches) {
           return;
         }
 
         setSnapshot((current) => {
-          if (
+          if (streaming) {
+            if (
+              current.language === languageToHighlight &&
+              ((current.code.length > codeToHighlight.length &&
+                current.code.startsWith(codeToHighlight)) ||
+                (current.code === codeToHighlight && current.isHighlighted))
+            ) {
+              return current;
+            }
+          } else if (
             current.language === languageToHighlight &&
-            ((current.code.length > codeToHighlight.length &&
-              current.code.startsWith(codeToHighlight)) ||
-              (current.code === codeToHighlight && current.isHighlighted))
+            current.code === codeToHighlight &&
+            current.isHighlighted
           ) {
             return current;
           }
