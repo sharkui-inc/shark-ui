@@ -656,6 +656,36 @@ export const Questionnaire = (props: QuestionnaireProps) => {
         ref={setFormRef}
         tabIndex={-1}
       >
+        {items.map((definition) => {
+          if (definition.name === activeItem?.name) {
+            return null;
+          }
+
+          const answer = value[definition.name] ?? EMPTY_ANSWER;
+          const freeform = answer.input.trim();
+
+          if (freeform) {
+            return (
+              <input
+                key={definition.name}
+                name={definition.name}
+                type="hidden"
+                value={freeform}
+              />
+            );
+          }
+
+          return answer.values
+            .filter((entry) => entry.trim())
+            .map((entry) => (
+              <input
+                key={`${definition.name}:${entry}`}
+                name={definition.name}
+                type="hidden"
+                value={entry}
+              />
+            ));
+        })}
         {children}
       </ark.form>
     </QuestionnaireProvider>
@@ -689,7 +719,8 @@ export const QuestionnaireItem = (props: QuestionnaireItemProps) => {
   const invalid = context.invalidItems.includes(name) && !hasAnswer(answer);
 
   const itemRef = React.useRef<HTMLFieldSetElement>(null);
-  const wasActive = React.useRef(active);
+  // Start false so remounting an active item (after unmount while inactive) still focuses.
+  const wasActive = React.useRef<boolean>(false);
   const lastRequest = React.useRef(context.focusRequest);
 
   const setRef = React.useCallback(
@@ -732,6 +763,10 @@ export const QuestionnaireItem = (props: QuestionnaireItemProps) => {
     );
   }
 
+  if (!active) {
+    return null;
+  }
+
   const titleId = `${id}-title`;
   const descriptionId = `${id}-description`;
   const errorId = `${id}-error`;
@@ -754,20 +789,14 @@ export const QuestionnaireItem = (props: QuestionnaireItemProps) => {
         aria-describedby={getDescribedBy(describedBy, rest["aria-describedby"])}
         aria-invalid={invalid || undefined}
         aria-labelledby={titleId}
-        className={cn(
-          "min-w-0 gap-4 outline-hidden",
-          className,
-          !active && "hidden"
-        )}
-        data-active={active ? "" : undefined}
+        className={cn("min-w-0 gap-4 outline-hidden", className)}
+        data-active=""
         data-multiple={definition.multiple ? "" : undefined}
         data-name={name}
         data-questionnaire-item=""
         data-required={definition.required ? "" : undefined}
         data-slot="questionnaire-item"
-        hidden={!active}
         id={id}
-        inert={!active}
         invalid={invalid}
         ref={setRef}
         tabIndex={-1}
