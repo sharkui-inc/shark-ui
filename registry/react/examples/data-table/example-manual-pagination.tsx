@@ -9,6 +9,10 @@ import React from "react";
 import {
   type DataTableFeatures,
   DataTablePagination,
+  DataTablePaginationControls,
+  DataTablePaginationNavigation,
+  DataTablePaginationPageInfo,
+  DataTablePaginationRowsPerPage,
   dataTableFeatures,
 } from "@/registry/react/components/data-table";
 import {
@@ -77,7 +81,13 @@ const Example = () => {
         </Table>
       </div>
 
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table}>
+        <DataTablePaginationRowsPerPage className="flex-1" />
+        <DataTablePaginationControls>
+          <DataTablePaginationPageInfo />
+          <DataTablePaginationNavigation />
+        </DataTablePaginationControls>
+      </DataTablePagination>
     </div>
   );
 };

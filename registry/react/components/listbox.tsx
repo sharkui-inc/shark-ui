@@ -70,7 +70,7 @@ export const ListboxContent = (
   return (
     <ArkListbox.Content
       className={cn(
-        "flex min-h-0 w-full min-w-0 flex-col gap-1 *:shrink-0",
+        "flex min-h-0 w-full min-w-0 flex-col *:shrink-0",
         "p-1.5",
         "overflow-y-auto overflow-x-hidden overscroll-y-contain",
         "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20",
@@ -150,7 +150,9 @@ export const ListboxItem = (props: ListboxItemProps) => {
       highlightOnHover={highlightOnHover}
       {...rest}
     >
-      {children}
+      <span className="flex min-w-0 flex-1 items-start gap-2">
+        {children}
+      </span>
 
       {showIndicator ? <ListboxItemIndicator /> : null}
     </ArkListbox.Item>

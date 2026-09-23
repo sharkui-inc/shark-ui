@@ -469,7 +469,7 @@ const NavUser = ({ user }: NavUserProps) => {
 
 const AppSidebar = () => (
   <SidebarProvider dir="rtl" lang="ar">
-    <Sidebar collapsible="icon" placement="right">
+    <Sidebar collapsible="icon">
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>

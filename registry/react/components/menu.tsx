@@ -59,10 +59,8 @@ export const MenuPositioner = (
 export const menuContentVariants = tv({
   base: [
     "z-[calc(50+var(--layer-index,0))]",
-    "relative max-h-(--available-height) not-[class*='w-']:min-w-32",
+    "max-h-(--available-height) min-w-32",
     "p-1.5",
-    "overflow-y-auto overflow-x-hidden overscroll-y-contain",
-    "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20",
     "bg-popover",
     "text-popover-foreground",
     "rounded-xl border shadow-lg/4",
@@ -73,6 +71,14 @@ export const menuContentVariants = tv({
     "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
     "data-[state=closed]:animate-out data-[state=open]:animate-in",
     "motion-reduce:animate-none",
+  ],
+});
+
+export const menuContentScrollVariants = tv({
+  base: [
+    "max-h-[inherit]",
+    "overflow-y-auto overflow-x-hidden overscroll-y-contain",
+    "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20",
   ],
 });
 
@@ -97,7 +103,7 @@ export const MenuContent = (props: MenuContentProps) => {
           data-slot="menu-content"
           {...rest}
         >
-          {children}
+          <div className={menuContentScrollVariants()}>{children}</div>
 
           {showArrow ? <MenuArrow /> : null}
         </ArkMenu.Content>
@@ -146,14 +152,10 @@ export const MenuSeparator = (
 
 export const menuItemControlVariants = tv({
   base: [
-    "relative flex min-h-8 w-full items-center gap-2",
+    "relative flex min-h-8 w-full items-start gap-2",
     "rounded-lg",
     "px-[calc(--spacing(3)-1px)] py-1.5",
-    "has-data-[slot$=-item-description]:items-start",
-    "has-data-[slot$=-item-description]:[&>svg]:translate-y-0.5",
-    "[&_svg]:pointer-events-none [&_svg]:shrink-0",
-    "[&_svg:not([class*='size-']):not([class*='h-'])]:h-lh",
-    "[&_svg:not([class*='size-']):not([class*='w-'])]:w-3.5",
+    "[&_svg]:pointer-events-none [&_svg]:h-lh [&_svg]:w-3.5 [&_svg]:shrink-0",
   ],
 });
 
@@ -266,7 +268,7 @@ export const MenuCheckboxItem = (
       </ArkMenu.ItemIndicator>
 
       <ArkMenu.ItemText
-        className="flex min-w-0 flex-1 items-center gap-2"
+        className="flex min-w-0 flex-1 items-start gap-2"
         data-slot="menu-checkbox-item-text"
       >
         {children}
@@ -297,7 +299,7 @@ export const MenuRadioItem = (
       </ArkMenu.ItemIndicator>
 
       <ArkMenu.ItemText
-        className="flex min-w-0 flex-1 items-center gap-2"
+        className="flex min-w-0 flex-1 items-start gap-2"
         data-slot="menu-radio-item-text"
       >
         {children}
@@ -369,7 +371,7 @@ export const MenuSubContent = (props: MenuSubContentProps) => {
           data-slot="menu-sub-content"
           {...rest}
         >
-          {children}
+          <div className={menuContentScrollVariants()}>{children}</div>
 
           {showArrow ? <MenuArrow /> : null}
         </ArkMenu.Content>
@@ -429,6 +431,7 @@ export const MenuArrow = (
 
   return (
     <ArkMenu.Arrow
+      data-slot="menu-arrow"
       style={
         {
           "--arrow-background": "var(--popover)",
@@ -438,7 +441,7 @@ export const MenuArrow = (
       }
       {...rest}
     >
-      <ArkMenu.ArrowTip />
+      <ArkMenu.ArrowTip className="border-t border-l" />
     </ArkMenu.Arrow>
   );
 };

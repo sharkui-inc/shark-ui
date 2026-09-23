@@ -1,6 +1,7 @@
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
+import { createContext } from "@ark-ui/react/utils";
 import {
   type Column,
   type ColumnDef,
@@ -205,7 +206,11 @@ export const DataTableColumnHeader = <TData extends RowData, TValue>(
 
   if (!canSort) {
     return (
-      <ark.div className={className} {...rest}>
+      <ark.div
+        className={className}
+        data-slot="data-table-column-header"
+        {...rest}
+      >
         {title}
       </ark.div>
     );
@@ -222,10 +227,18 @@ export const DataTableColumnHeader = <TData extends RowData, TValue>(
   }
 
   return (
-    <ark.div className={cn("flex items-center gap-2", className)} {...rest}>
+    <ark.div
+      className={cn("flex items-center gap-2", className)}
+      data-slot="data-table-column-header"
+      {...rest}
+    >
       <Menu positioning={{ placement: "bottom-start" }}>
         <MenuTrigger asChild>
-          <Button className="-ms-2" size="sm" variant="ghost">
+          <Button
+            className="in-[[data-slot=data-table-column-header]:first-child]:-ms-2"
+            size="sm"
+            variant="ghost"
+          >
             <span>{title}</span>
             {sortIcon}
           </Button>
@@ -264,6 +277,16 @@ export const DataTableColumnHeader = <TData extends RowData, TValue>(
   );
 };
 
+interface DataTablePaginationContextValue {
+  table: ReactTable<DataTableFeatures, RowData>;
+}
+
+const [DataTablePaginationProvider, useDataTablePagination] =
+  createContext<DataTablePaginationContextValue>({
+    name: "DataTablePaginationContext",
+    providerName: "DataTablePagination",
+  });
+
 export interface DataTablePaginationProps<TData extends RowData>
   extends React.ComponentProps<typeof ark.div> {
   /**
@@ -275,105 +298,201 @@ export interface DataTablePaginationProps<TData extends RowData>
 export const DataTablePagination = <TData extends RowData>(
   props: DataTablePaginationProps<TData>
 ) => {
-  const { className, table, ...rest } = props;
+  const { children, className, table, ...rest } = props;
 
-  const pageCount = table.getPageCount();
-  const { pageIndex, pageSize } = table.state.pagination;
+  return (
+    <DataTablePaginationProvider
+      value={{ table: table as ReactTable<DataTableFeatures, RowData> }}
+    >
+      <ark.div
+        className={cn(
+          "flex w-full flex-wrap items-center justify-between gap-4 px-2",
+          className
+        )}
+        data-slot="data-table-pagination"
+        {...rest}
+      >
+        {children}
+      </ark.div>
+    </DataTablePaginationProvider>
+  );
+};
+
+export interface DataTablePaginationSelectedCountProps
+  extends React.ComponentProps<typeof ark.div> {}
+
+export const DataTablePaginationSelectedCount = (
+  props: DataTablePaginationSelectedCountProps
+) => {
+  const { className, ...rest } = props;
+  const { table } = useDataTablePagination();
+
   const rowCount = table.getRowCount();
   const selectedRowCount = table.getFilteredSelectedRowModel().rows.length;
-  const page = pageIndex + 1;
+
+  return (
+    <ark.div
+      className={cn("flex-1 text-muted-foreground text-sm", className)}
+      data-slot="data-table-pagination-selected-count"
+      {...rest}
+    >
+      <FormatNumber value={selectedRowCount} /> of{" "}
+      <FormatNumber value={rowCount} /> row(s) selected.
+    </ark.div>
+  );
+};
+
+export interface DataTablePaginationControlsProps
+  extends React.ComponentProps<typeof ark.div> {}
+
+export const DataTablePaginationControls = (
+  props: DataTablePaginationControlsProps
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn("flex flex-wrap items-center gap-4 lg:gap-6", className)}
+      data-slot="data-table-pagination-controls"
+      {...rest}
+    />
+  );
+};
+
+export interface DataTablePaginationRowsPerPageProps
+  extends React.ComponentProps<typeof ark.div> {}
+
+export const DataTablePaginationRowsPerPage = (
+  props: DataTablePaginationRowsPerPageProps
+) => {
+  const { className, ...rest } = props;
+  const { table } = useDataTablePagination();
+  const { pageSize } = table.state.pagination;
+
+  return (
+    <ark.div
+      className={cn("flex items-center gap-2 font-medium text-sm", className)}
+      data-slot="data-table-pagination-rows-per-page"
+      {...rest}
+    >
+      <span className="sr-only sm:not-sr-only">Rows per page</span>
+      <NativeSelect
+        aria-label="Rows per page"
+        onChange={(event) => {
+          table.setPageSize(Number(event.target.value));
+        }}
+        size="sm"
+        value={pageSize}
+      >
+        {[10, 20, 30, 40, 50].map((size) => (
+          <NativeSelectOption key={size} value={size}>
+            <FormatNumber useGrouping={false} value={size} />
+          </NativeSelectOption>
+        ))}
+      </NativeSelect>
+    </ark.div>
+  );
+};
+
+export interface DataTablePaginationPageInfoProps
+  extends React.ComponentProps<typeof ark.div> {}
+
+export const DataTablePaginationPageInfo = (
+  props: DataTablePaginationPageInfoProps
+) => {
+  const { className, ...rest } = props;
+  const { table } = useDataTablePagination();
+
+  const pageCount = table.getPageCount();
+  const page = table.state.pagination.pageIndex + 1;
   const hasKnownPageCount = Number.isFinite(pageCount) && pageCount >= 0;
 
   return (
     <ark.div
-      className={cn(
-        "flex w-full flex-wrap items-center justify-between gap-4 px-2",
-        className
-      )}
-      data-slot="data-table-pagination"
+      className={cn("w-28 text-center font-medium text-sm", className)}
+      data-slot="data-table-pagination-page-info"
       {...rest}
     >
-      <div className="flex-1 text-muted-foreground text-sm">
-        <FormatNumber value={selectedRowCount} /> of{" "}
-        <FormatNumber value={rowCount} /> row(s) selected.
-      </div>
+      {hasKnownPageCount ? (
+        <>
+          Page <FormatNumber useGrouping={false} value={page} /> of{" "}
+          <FormatNumber useGrouping={false} value={pageCount} />
+        </>
+      ) : (
+        <>
+          Page <FormatNumber useGrouping={false} value={page} />
+        </>
+      )}
+    </ark.div>
+  );
+};
 
-      <div className="flex flex-wrap items-center gap-4 lg:gap-6">
-        <div className="flex items-center gap-2 font-medium text-sm">
-          <span className="sr-only sm:not-sr-only">Rows per page</span>
-          <NativeSelect
-            aria-label="Rows per page"
-            onChange={(event) => {
-              table.setPageSize(Number(event.target.value));
-            }}
-            size="sm"
-            value={pageSize}
-          >
-            {[10, 20, 30, 40, 50].map((size) => (
-              <NativeSelectOption key={size} value={size}>
-                <FormatNumber useGrouping={false} value={size} />
-              </NativeSelectOption>
-            ))}
-          </NativeSelect>
-        </div>
+export interface DataTablePaginationNavigationProps
+  extends React.ComponentProps<typeof ark.div> {}
 
-        <div className="w-28 text-center font-medium text-sm">
-          {hasKnownPageCount ? (
-            <>
-              Page <FormatNumber useGrouping={false} value={page} /> of{" "}
-              <FormatNumber useGrouping={false} value={pageCount} />
-            </>
-          ) : (
-            <>
-              Page <FormatNumber useGrouping={false} value={page} />
-            </>
-          )}
-        </div>
+export const DataTablePaginationNavigation = (
+  props: DataTablePaginationNavigationProps
+) => {
+  const { className, ...rest } = props;
+  const { table } = useDataTablePagination();
 
-        {hasKnownPageCount ? (
-          <Pagination
-            className="mx-0 w-auto justify-start gap-1"
-            count={rowCount}
-            onPageChange={(details) => {
-              table.setPageIndex(details.page - 1);
-            }}
-            page={page}
-            pageSize={pageSize}
-          >
-            <PaginationPrevious
-              size="icon-sm"
-              variant="outline"
-              withLabel={false}
-            />
-            <PaginationNext
-              size="icon-sm"
-              variant="outline"
-              withLabel={false}
-            />
-          </Pagination>
-        ) : (
-          <div className="flex items-center gap-1">
-            <Button
-              aria-label="Previous page"
-              disabled={!table.getCanPreviousPage()}
-              onClick={() => table.previousPage()}
-              size="icon-sm"
-              variant="outline"
-            >
-              <ChevronLeftIcon aria-hidden className="rtl:rotate-180" />
-            </Button>
-            <Button
-              aria-label="Next page"
-              disabled={!table.getCanNextPage()}
-              onClick={() => table.nextPage()}
-              size="icon-sm"
-              variant="outline"
-            >
-              <ChevronRightIcon aria-hidden className="rtl:rotate-180" />
-            </Button>
-          </div>
-        )}
-      </div>
+  const pageCount = table.getPageCount();
+  const { pageIndex, pageSize } = table.state.pagination;
+  const rowCount = table.getRowCount();
+  const page = pageIndex + 1;
+  const hasKnownPageCount = Number.isFinite(pageCount) && pageCount >= 0;
+
+  if (hasKnownPageCount) {
+    return (
+      <ark.div
+        className={className}
+        data-slot="data-table-pagination-navigation"
+        {...rest}
+      >
+        <Pagination
+          className="mx-0 w-auto justify-start gap-1"
+          count={rowCount}
+          onPageChange={(details) => {
+            table.setPageIndex(details.page - 1);
+          }}
+          page={page}
+          pageSize={pageSize}
+        >
+          <PaginationPrevious
+            size="icon-sm"
+            variant="outline"
+            withLabel={false}
+          />
+          <PaginationNext size="icon-sm" variant="outline" withLabel={false} />
+        </Pagination>
+      </ark.div>
+    );
+  }
+
+  return (
+    <ark.div
+      className={cn("flex items-center gap-1", className)}
+      data-slot="data-table-pagination-navigation"
+      {...rest}
+    >
+      <Button
+        aria-label="Previous page"
+        disabled={!table.getCanPreviousPage()}
+        onClick={() => table.previousPage()}
+        size="icon-sm"
+        variant="outline"
+      >
+        <ChevronLeftIcon aria-hidden className="rtl:rotate-180" />
+      </Button>
+      <Button
+        aria-label="Next page"
+        disabled={!table.getCanNextPage()}
+        onClick={() => table.nextPage()}
+        size="icon-sm"
+        variant="outline"
+      >
+        <ChevronRightIcon aria-hidden className="rtl:rotate-180" />
+      </Button>
     </ark.div>
   );
 };

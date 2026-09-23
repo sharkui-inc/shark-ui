@@ -68,7 +68,7 @@ export const FileActionsExample = (props: React.ComponentProps<"div">) => {
             <ListboxItemGroup heading="Actions">
               <ListboxItem item={collection.items[0]}>
                 <SquarePlusIcon aria-hidden />
-                <div className="flex min-w-0 flex-1 flex-col">
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                   <ListboxItemText>New file</ListboxItemText>
                   <ListboxItemDescription>
                     Create a new file
@@ -78,7 +78,7 @@ export const FileActionsExample = (props: React.ComponentProps<"div">) => {
               </ListboxItem>
               <ListboxItem item={collection.items[1]}>
                 <PencilIcon aria-hidden />
-                <div className="flex min-w-0 flex-1 flex-col">
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                   <ListboxItemText>Edit file</ListboxItemText>
                   <ListboxItemDescription>Make changes</ListboxItemDescription>
                 </div>
@@ -89,7 +89,7 @@ export const FileActionsExample = (props: React.ComponentProps<"div">) => {
             <ListboxItemGroup heading="Danger zone">
               <ListboxItem item={collection.items[2]} variant="destructive">
                 <Trash2Icon aria-hidden />
-                <div className="flex min-w-0 flex-1 flex-col">
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                   <ListboxItemText>Delete file</ListboxItemText>
                   <ListboxItemDescription>Move to trash</ListboxItemDescription>
                 </div>

@@ -10,8 +10,8 @@ const Example = () => (
     <Sources defaultOpen>
       <SourcesTrigger count={2} />
       <SourcesContent>
-        <Source href="https://react.dev" title="React Documentation" />
-        <Source href="https://ark-ui.com" title="Ark UI" />
+        <Source href="#" title="React Documentation" />
+        <Source href="#" title="Ark UI" />
       </SourcesContent>
     </Sources>
   </div>

@@ -10,12 +10,7 @@ const Example = () => (
     <TerminalContent>
       <span className="text-muted-foreground">{"$ vercel --prod\n\n"}</span>
       {"Production: "}
-      <a
-        className="text-info-foreground underline underline-offset-2"
-        href="https://shark-ui.com"
-        rel="noreferrer"
-        target="_blank"
-      >
+      <a className="text-info-foreground underline underline-offset-2" href="#">
         https://shark-ui.com
       </a>
       {"\n\n"}

@@ -312,7 +312,7 @@ export const HeaderCustomize = () => {
                 <span className="font-medium text-muted-foreground text-xs">
                   {THEME_FIELDS.primaryTone.label}
                 </span>
-                <div className="h-8 w-40 overflow-hidden rounded-lg border border-input shadow-xs/4 transition-[color,box-shadow] has-[:focus-visible]:border-ring/64 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring/24">
+                <div className="h-8 w-40 overflow-hidden rounded-lg border border-input shadow-xs/4 transition-[color,box-shadow] has-focus-visible:border-ring/64 has-focus-visible:ring-2 has-focus-visible:ring-ring/24">
                   <SegmentGroup
                     aria-label="Primary tone"
                     className={cn(
@@ -404,6 +404,18 @@ export const HeaderCustomize = () => {
         </SheetBody>
 
         <SheetFooter>
+          <CopyThemeCodeDialog>
+            <DialogTrigger asChild>
+              <Button>
+                <ClipboardIcon />
+                Copy theme
+              </Button>
+            </DialogTrigger>
+          </CopyThemeCodeDialog>
+          <Button onClick={randomize} variant="outline">
+            <Shuffle aria-hidden />
+            Shuffle
+          </Button>
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button disabled={isDefault ? true : undefined} variant="outline">
@@ -426,19 +438,6 @@ export const HeaderCustomize = () => {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-          <Button onClick={randomize} variant="outline">
-            <Shuffle aria-hidden />
-            Shuffle
-          </Button>
-
-          <CopyThemeCodeDialog>
-            <DialogTrigger asChild>
-              <Button className="sm:ms-auto">
-                <ClipboardIcon />
-                Copy theme
-              </Button>
-            </DialogTrigger>
-          </CopyThemeCodeDialog>
         </SheetFooter>
       </SheetContent>
     </Sheet>

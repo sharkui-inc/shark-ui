@@ -80,7 +80,6 @@ export const PopoverContent = (props: PopoverContentProps) => {
       <PopoverPositioner>
         <ArkPopover.Content
           className={cn(
-            "relative",
             "z-[calc(50+var(--layer-index,0))]",
             "[--space:--spacing(4)]",
             "w-auto min-w-32",
@@ -228,7 +227,7 @@ export const PopoverClose = (
 export const PopoverArrow = (
   props: React.ComponentProps<typeof ArkPopover.Arrow>
 ) => {
-  const { style, ...rest } = props;
+  const { style, children, ...rest } = props;
 
   return (
     <ArkPopover.Arrow
@@ -242,7 +241,7 @@ export const PopoverArrow = (
       }
       {...rest}
     >
-      <ArkPopover.ArrowTip />
+      {children ?? <ArkPopover.ArrowTip className="border-t border-l" />}
     </ArkPopover.Arrow>
   );
 };

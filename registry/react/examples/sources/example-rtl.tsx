@@ -18,8 +18,8 @@ const Example = () => {
       <Sources defaultOpen>
         <SourcesTrigger count={2}>{values.trigger}</SourcesTrigger>
         <SourcesContent>
-          <Source href="https://react.dev" title={values.reactTitle} />
-          <Source href="https://ark-ui.com" title={values.arkTitle} />
+          <Source href="#" title={values.reactTitle} />
+          <Source href="#" title={values.arkTitle} />
         </SourcesContent>
       </Sources>
     </div>

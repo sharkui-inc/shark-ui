@@ -258,7 +258,6 @@ export const Sidebar = (props: SidebarProps) => {
           "bg-transparent",
           "transition-[width] duration-200 ease-linear",
           "group-data-[collapsible=offcanvas]:w-0",
-          "group-data-[placement=right]:rotate-180",
           variant === "floating" || variant === "inset"
             ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]"
             : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)"
@@ -271,13 +270,13 @@ export const Sidebar = (props: SidebarProps) => {
           "w-(--sidebar-width)",
           "hidden md:flex",
           "h-svh",
-          "transition-[left,right,width] duration-200 ease-linear",
+          "transition-[inset-inline,width] duration-200 ease-linear",
           placement === "left"
-            ? "left-0 group-data-[collapsible=offcanvas]:-left-(--sidebar-width)"
-            : "right-0 group-data-[collapsible=offcanvas]:-right-(--sidebar-width)",
+            ? "inset-s-0 group-data-[collapsible=offcanvas]:-inset-s-(--sidebar-width)"
+            : "inset-e-0 group-data-[collapsible=offcanvas]:-inset-e-(--sidebar-width)",
           variant === "floating" || variant === "inset"
             ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
-            : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[placement=left]:border-r group-data-[placement=right]:border-l",
+            : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[placement=right]:border-s group-data-[placement=left]:border-e",
           className
         )}
         data-slot="sidebar-container"
@@ -288,8 +287,8 @@ export const Sidebar = (props: SidebarProps) => {
             "size-full",
             "flex flex-col",
             "bg-sidebar",
-            "group-data-[placement=left]:pl-[env(safe-area-inset-left,0px)]",
-            "group-data-[placement=right]:pr-[env(safe-area-inset-right,0px)]",
+            "group-data-[placement=left]:ps-[env(safe-area-inset-left,0px)] group-data-[placement=left]:rtl:ps-[env(safe-area-inset-right,0px)]",
+            "group-data-[placement=right]:pe-[env(safe-area-inset-right,0px)] group-data-[placement=right]:rtl:pe-[env(safe-area-inset-left,0px)]",
             "group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow-sm/4"
           )}
           data-sidebar="sidebar"
@@ -338,18 +337,20 @@ export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
     <ark.button
       aria-label="Toggle Sidebar"
       className={cn(
-        "absolute inset-y-0 z-20 -translate-x-1/2",
+        "absolute inset-y-0 z-20 -translate-x-1/2 rtl:translate-x-1/2",
         "w-4",
         "hidden sm:flex",
         "after:absolute after:inset-s-1/2 after:inset-y-0 after:w-0.5",
         "hover:after:bg-sidebar-border",
-        "group-data-[placement=left]:-right-4 group-data-[placement=right]:left-0",
+        "group-data-[placement=left]:-inset-e-4 group-data-[placement=right]:inset-s-0",
         "in-data-[placement=left]:cursor-w-resize in-data-[placement=right]:cursor-e-resize",
+        "rtl:in-data-[placement=left]:cursor-e-resize rtl:in-data-[placement=right]:cursor-w-resize",
         "[[data-placement=left][data-state=collapsed]_&]:cursor-e-resize [[data-placement=right][data-state=collapsed]_&]:cursor-w-resize",
-        "transition-[left,right,translate,background-color] duration-200 ease-linear",
+        "rtl:[[data-placement=left][data-state=collapsed]_&]:cursor-w-resize rtl:[[data-placement=right][data-state=collapsed]_&]:cursor-e-resize",
+        "transition-[inset-inline,translate,background-color] duration-200 ease-linear",
         "group-data-[collapsible=offcanvas]:translate-x-0 hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:after:inset-s-full",
-        "[[data-placement=left][data-collapsible=offcanvas]_&]:-right-2",
-        "[[data-placement=right][data-collapsible=offcanvas]_&]:-left-2",
+        "[[data-placement=left][data-collapsible=offcanvas]_&]:-inset-e-2",
+        "[[data-placement=right][data-collapsible=offcanvas]_&]:-inset-s-2",
         className
       )}
       data-sidebar="rail"

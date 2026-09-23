@@ -113,10 +113,11 @@ export const CompositionCodeViewer = ({
           <CopyButton className="size-7" value={activeFile.content} />
         </header>
 
-        <ScrollArea className="flex-1">
+        <ScrollArea className="flex-1" dir="ltr">
           <figure
             className={docsShikiContentClassName()}
             data-slot="composition-code"
+            dir="ltr"
           >
             <div
               // biome-ignore lint/security/noDangerouslySetInnerHtml: content is highlighted from repository source at build time

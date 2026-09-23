@@ -1,6 +1,6 @@
 "use client";
 
-import type React from "react";
+import React from "react";
 import { getBaseColor, getPrimaryColor } from "@/lib/theme/catalog";
 import { getThemeFont } from "@/lib/theme/fonts";
 import { cn } from "@/lib/utils";
@@ -13,15 +13,20 @@ import { useConfig } from "@/store/config";
 
 export const StyleOverviewExample = (props: React.ComponentProps<"div">) => {
   const config = useConfig();
+  const [ready, setReady] = React.useState(false);
   const primary = getPrimaryColor(config.primaryColor);
   const base = getBaseColor(config.baseColor);
   const heading = getThemeFont(config.fontHeading);
   const sans = getThemeFont(config.fontSans);
 
+  React.useEffect(() => {
+    setReady(true);
+  }, []);
+
   return (
     <Card {...props}>
       <CardHeader
-        description={`${primary.label} · ${base.label}`}
+        description={ready ? `${primary.label} · ${base.label}` : "\u00A0"}
         title="Style overview"
       />
       <CardContent className="flex flex-col gap-5">
@@ -56,10 +61,10 @@ export const StyleOverviewExample = (props: React.ComponentProps<"div">) => {
         <div className="flex items-end justify-between gap-3 border-t pt-4">
           <div className="min-w-0">
             <p className="truncate font-heading font-semibold text-xl tracking-[-0.02em]">
-              {heading.label}
+              {ready ? heading.label : "\u00A0"}
             </p>
             <p className="truncate text-muted-foreground text-sm">
-              {sans.label}
+              {ready ? sans.label : "\u00A0"}
             </p>
           </div>
           <span

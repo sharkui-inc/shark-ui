@@ -43,7 +43,20 @@ export const ContextMenuTrigger = (
 
 export const ContextMenuContent = (
   props: React.ComponentProps<typeof MenuContent>
-) => <MenuContent data-slot="context-menu-content" {...props} />;
+) => {
+  const { onContextMenu, ...rest } = props;
+
+  return (
+    <MenuContent
+      data-slot="context-menu-content"
+      onContextMenu={(event) => {
+        onContextMenu?.(event);
+        event.preventDefault();
+      }}
+      {...rest}
+    />
+  );
+};
 
 export const ContextMenuGroup = (
   props: React.ComponentProps<typeof MenuGroup>
@@ -62,8 +75,21 @@ export const ContextMenuSub = (props: React.ComponentProps<typeof MenuSub>) => (
 );
 
 export const ContextMenuSubContent = (
-  props: React.ComponentProps<typeof MenuContent>
-) => <MenuSubContent data-slot="context-menu-sub-content" {...props} />;
+  props: React.ComponentProps<typeof MenuSubContent>
+) => {
+  const { onContextMenu, ...rest } = props;
+
+  return (
+    <MenuSubContent
+      data-slot="context-menu-sub-content"
+      onContextMenu={(event) => {
+        onContextMenu?.(event);
+        event.preventDefault();
+      }}
+      {...rest}
+    />
+  );
+};
 
 export const ContextMenuSubTrigger = (
   props: React.ComponentProps<typeof MenuSubTrigger>

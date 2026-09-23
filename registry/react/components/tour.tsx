@@ -281,7 +281,7 @@ export const TourArrow = (
       }
       {...rest}
     >
-      <ArkTour.ArrowTip />
+      {children ?? <ArkTour.ArrowTip className="border-t border-l" />}
     </ArkTour.Arrow>
   );
 };

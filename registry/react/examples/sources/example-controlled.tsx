@@ -20,8 +20,8 @@ const Example = () => {
       <Sources onOpenChange={handleOpenChange} open={open}>
         <SourcesTrigger count={2} />
         <SourcesContent>
-          <Source href="https://react.dev" title="React Documentation" />
-          <Source href="https://ark-ui.com" title="Ark UI" />
+          <Source href="#" title="React Documentation" />
+          <Source href="#" title="Ark UI" />
         </SourcesContent>
       </Sources>
       <p className="text-muted-foreground text-sm">

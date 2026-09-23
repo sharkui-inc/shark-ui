@@ -95,6 +95,8 @@ export const ToggleTooltipArrow = (
         ...style,
       }}
       {...rest}
-    />
+    >
+      <ArkPopover.ArrowTip />
+    </PopoverArrow>
   );
 };

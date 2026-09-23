@@ -5,6 +5,10 @@ import { Card, CardFooter } from "@/registry/react/components/card";
 import {
   type DataTableFeatures,
   DataTablePagination,
+  DataTablePaginationControls,
+  DataTablePaginationNavigation,
+  DataTablePaginationPageInfo,
+  DataTablePaginationRowsPerPage,
 } from "@/registry/react/components/data-table";
 import {
   Table,
@@ -80,7 +84,13 @@ export const TaskGrid = ({
         </Table>
       </div>
       <CardFooter className="px-3 py-3 sm:px-4">
-        <DataTablePagination table={table} />
+        <DataTablePagination table={table}>
+          <DataTablePaginationRowsPerPage className="flex-1" />
+          <DataTablePaginationControls>
+            <DataTablePaginationPageInfo />
+            <DataTablePaginationNavigation />
+          </DataTablePaginationControls>
+        </DataTablePagination>
       </CardFooter>
     </Card>
   );

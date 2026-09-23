@@ -28,17 +28,17 @@ const Example = () => {
           <ContextMenuItem value="forward">
             <Send />
             {values.forward}
-            <ContextMenuShortcut>⌘F</ContextMenuShortcut>
+            <ContextMenuShortcut>{values.shortcutForward}</ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuItem value="reply">
             <Reply />
             {values.reply}
-            <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+            <ContextMenuShortcut>{values.shortcutReply}</ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuItem value="archive">
             <Archive />
             {values.archive}
-            <ContextMenuShortcut>⌘Z</ContextMenuShortcut>
+            <ContextMenuShortcut>{values.shortcutArchive}</ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuSub>
             <ContextMenuSubTrigger>
@@ -54,7 +54,7 @@ const Example = () => {
           <ContextMenuItem value="delete" variant="destructive">
             <Trash2 />
             {values.delete}
-            <ContextMenuShortcut>⌘ ⌫</ContextMenuShortcut>
+            <ContextMenuShortcut>{values.shortcutDelete}</ContextMenuShortcut>
           </ContextMenuItem>
         </ContextMenuGroup>
       </ContextMenuContent>
@@ -72,6 +72,10 @@ const translations = {
       junk: "غير هام",
       moveTo: "نقل إلى",
       reply: "رد",
+      shortcutArchive: "⌘ز",
+      shortcutDelete: "⌘ ⌫",
+      shortcutForward: "⌘ف",
+      shortcutReply: "⌘ر",
       trash: "سلة المهملات",
     },
   },
@@ -84,6 +88,10 @@ const translations = {
       junk: "Junk",
       moveTo: "Move to",
       reply: "Reply",
+      shortcutArchive: "⌘Z",
+      shortcutDelete: "⌘ ⌫",
+      shortcutForward: "⌘F",
+      shortcutReply: "⌘R",
       trash: "Trash",
     },
   },
@@ -96,6 +104,10 @@ const translations = {
       junk: "דואר זבל",
       moveTo: "העבר אל",
       reply: "השב",
+      shortcutArchive: "⌘ז",
+      shortcutDelete: "⌘ ⌫",
+      shortcutForward: "⌘פ",
+      shortcutReply: "⌘ר",
       trash: "אשפה",
     },
   },

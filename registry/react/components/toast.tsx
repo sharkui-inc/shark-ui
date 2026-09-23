@@ -46,7 +46,7 @@ export const Toaster = (props: ToasterProps) => {
       <ArkToaster
         className={cn(
           "w-[calc(100%-var(--viewport-offset-left))] sm:w-(--width)",
-          "data-[align=center]:left-[calc(var(--viewport-offset-right)/2)]",
+          "data-[align=center]:inset-s-[calc(var(--viewport-offset-right)/2)]",
           "sm:data-[align=center]:w-full",
           className
         )}

@@ -30,6 +30,7 @@ const Example = () => (
 );
 
 interface TreeNodeWithLinks extends TreeNodeType<unknown> {
+  external?: boolean;
   href?: string;
 }
 
@@ -39,12 +40,12 @@ const collection = createTreeCollection({
       {
         children: [
           {
-            href: "/docs",
+            href: "#",
             id: "docs/introduction",
             name: "Introduction",
           },
           {
-            href: "/docs/components",
+            href: "#",
             id: "docs/components",
             name: "Components",
           },
@@ -55,7 +56,8 @@ const collection = createTreeCollection({
       {
         children: [
           {
-            href: "https://github.com/sharkui-inc/shark-ui",
+            external: true,
+            href: "#",
             id: "external/github",
             name: "GitHub Repository",
           },
@@ -63,7 +65,7 @@ const collection = createTreeCollection({
         id: "external",
         name: "External Links",
       },
-      { href: "/llms.txt", id: "llms.txt", name: "llms.txt" },
+      { href: "#", id: "llms.txt", name: "llms.txt" },
     ],
     id: "ROOT",
     name: "",
@@ -90,16 +92,10 @@ const TreeNode = (props: NodeProviderProps<TreeNodeWithLinks>) => {
         </TreeViewBranch>
       ) : (
         <TreeViewContent asChild>
-          <a
-            href={node.href ?? "#"}
-            rel={
-              node.href?.startsWith("http") ? "noopener noreferrer" : undefined
-            }
-            target={node.href?.startsWith("http") ? "_blank" : undefined}
-          >
+          <a href={node.href ?? "#"}>
             <TreeViewItem icon={Link}>
               {node.name}
-              {node.href?.startsWith("http") && <ArrowUpRight />}
+              {node.external ? <ArrowUpRight /> : null}
             </TreeViewItem>
           </a>
         </TreeViewContent>

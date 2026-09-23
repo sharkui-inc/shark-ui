@@ -47,7 +47,10 @@ export const ChatConversation = () => {
       </header>
 
       <MessageScroller className="min-h-0 flex-1">
-        <MessageScrollerViewport aria-live="polite">
+        <MessageScrollerViewport
+          aria-live="polite"
+          className="overscroll-y-auto"
+        >
           <FollowLatestMessage
             enabled={isBusy}
             messageCount={messages.length}

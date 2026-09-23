@@ -56,8 +56,8 @@ const translations = {
     values: {
       empty: "لم يتم العثور على أوامر.",
       items: [
-        { group: "اقتراحات", label: "لينير", shortcut: "⌘L", value: "linear" },
-        { group: "اقتراحات", label: "فيغما", shortcut: "⌘F", value: "figma" },
+        { group: "اقتراحات", label: "لينير", shortcut: "⌘ل", value: "linear" },
+        { group: "اقتراحات", label: "فيغما", shortcut: "⌘ف", value: "figma" },
         {
           group: "الإعدادات",
           label: "الإعدادات",
@@ -105,8 +105,8 @@ const translations = {
     values: {
       empty: "לא נמצאו פקודות.",
       items: [
-        { group: "הצעות", label: "ליניאר", shortcut: "⌘L", value: "linear" },
-        { group: "הצעות", label: "פיגמה", shortcut: "⌘F", value: "figma" },
+        { group: "הצעות", label: "ליניאר", shortcut: "⌘ל", value: "linear" },
+        { group: "הצעות", label: "פיגמה", shortcut: "⌘פ", value: "figma" },
         { group: "הגדרות", label: "הגדרות", shortcut: "⌘,", value: "settings" },
         { group: "הגדרות", label: "עזרה", shortcut: "⌘?", value: "help" },
       ],

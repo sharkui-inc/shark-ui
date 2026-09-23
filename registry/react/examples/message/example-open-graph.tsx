@@ -30,7 +30,7 @@ const Example = () => (
             <CardHeader>
               <LinkOverlay asChild>
                 <CardTitle asChild>
-                  <a href="https://play.tailwindcss.com">Tailwind Play</a>
+                  <a href="#">Tailwind Play</a>
                 </CardTitle>
               </LinkOverlay>
               <CardDescription>
@@ -43,9 +43,7 @@ const Example = () => (
         </LinkBox>
         <MessageBubble align="end">
           <MessageBubbleContent asChild>
-            <a href="https://play.tailwindcss.com">
-              https://play.tailwindcss.com
-            </a>
+            <a href="#">https://play.tailwindcss.com</a>
           </MessageBubbleContent>
         </MessageBubble>
       </MessageContent>

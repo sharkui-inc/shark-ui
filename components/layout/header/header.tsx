@@ -53,7 +53,7 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
           </div>
 
           <Separator
-            className="ml-2 hidden h-4 sm:block"
+            className="ms-2 hidden h-4 sm:block"
             orientation="vertical"
           />
 

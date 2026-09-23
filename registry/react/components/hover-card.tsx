@@ -108,7 +108,7 @@ export const HoverCardArrow = (
       }
       {...rest}
     >
-      <ArkHoverCard.ArrowTip />
+      <ArkHoverCard.ArrowTip className="border-t border-l" />
     </ArkHoverCard.Arrow>
   );
 };

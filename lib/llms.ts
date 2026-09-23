@@ -1,5 +1,4 @@
 import { SITE_CONFIG } from "@/config/site";
-import { source } from "@/lib/fumadocs";
 
 export const LLM_INDEXES = [
   "foundations",
@@ -85,7 +84,7 @@ const pageLink = (page: LLMDocPage, baseUrl: string) => {
 
 export const buildLLMIndexSection = (
   index: LLMIndexName,
-  pages: LLMDocPage[] = source.getPages(),
+  pages: LLMDocPage[],
   baseUrl: string = SITE_CONFIG.url
 ) => {
   const { description, intro, title } = INDEXES[index];

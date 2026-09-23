@@ -48,6 +48,17 @@ npx shadcn@latest add @shark/data-table
 
 </CodeTabs>
 
+## Anatomy
+
+```text
+DataTablePagination
+├── DataTablePaginationSelectedCount
+└── DataTablePaginationControls
+    ├── DataTablePaginationRowsPerPage
+    ├── DataTablePaginationPageInfo
+    └── DataTablePaginationNavigation
+```
+
 ## Usage
 
 ```tsx
@@ -96,6 +107,30 @@ export function PaymentsTable({ data }: { data: Payment[] }) {
 }
 ```
 
+Compose pagination parts and omit what you do not need:
+
+```tsx
+import {
+  DataTablePagination,
+  DataTablePaginationControls,
+  DataTablePaginationNavigation,
+  DataTablePaginationPageInfo,
+  DataTablePaginationRowsPerPage,
+  DataTablePaginationSelectedCount,
+} from "@/components/ui/data-table";
+```
+
+```tsx
+<DataTablePagination table={table}>
+  <DataTablePaginationSelectedCount />
+  <DataTablePaginationControls>
+    <DataTablePaginationRowsPerPage />
+    <DataTablePaginationPageInfo />
+    <DataTablePaginationNavigation />
+  </DataTablePaginationControls>
+</DataTablePagination>
+```
+
 ## Examples
 
 ### Basic
@@ -110,7 +145,7 @@ export function PaymentsTable({ data }: { data: Payment[] }) {
 
 ### Pagination
 
-`useTable` plus `DataTablePagination`.
+`useTable` with composed `DataTablePagination` parts.
 
 <ComponentPreview
   componentName="data-table"
@@ -119,6 +154,8 @@ export function PaymentsTable({ data }: { data: Payment[] }) {
 />
 
 ### Manual pagination
+
+Omit `DataTablePaginationSelectedCount` when the table has no row selection.
 
 <ComponentPreview
   componentName="data-table"
@@ -170,6 +207,36 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 | Prop | Type | Default |
 | --- | --- | --- |
 | `table` | `ReactTable<DataTableFeatures, TData>` | - |
+| `className` | `string` | - |
+
+### DataTablePaginationSelectedCount
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | - |
+
+### DataTablePaginationControls
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | - |
+
+### DataTablePaginationRowsPerPage
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | - |
+
+### DataTablePaginationPageInfo
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | - |
+
+### DataTablePaginationNavigation
+
+| Prop | Type | Default |
+| --- | --- | --- |
 | `className` | `string` | - |
 
 ### DataTableViewOptions

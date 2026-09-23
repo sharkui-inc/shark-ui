@@ -12,6 +12,11 @@ import { Checkbox } from "@/registry/react/components/checkbox";
 import {
   type DataTableFeatures,
   DataTablePagination,
+  DataTablePaginationControls,
+  DataTablePaginationNavigation,
+  DataTablePaginationPageInfo,
+  DataTablePaginationRowsPerPage,
+  DataTablePaginationSelectedCount,
   dataTableFeatures,
 } from "@/registry/react/components/data-table";
 import {
@@ -52,6 +57,9 @@ const Example = () => {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <TableHead
+                    className={
+                      header.column.id === "select" ? "w-[1%]" : undefined
+                    }
                     colSpan={header.colSpan}
                     key={header.id}
                     rowSpan={header.rowSpan}
@@ -72,7 +80,12 @@ const Example = () => {
                   key={row.id}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      className={
+                        cell.column.id === "select" ? "w-[1%]" : undefined
+                      }
+                      key={cell.id}
+                    >
                       <table.FlexRender cell={cell} />
                     </TableCell>
                   ))}
@@ -91,7 +104,14 @@ const Example = () => {
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table}>
+        <DataTablePaginationSelectedCount />
+        <DataTablePaginationControls>
+          <DataTablePaginationRowsPerPage />
+          <DataTablePaginationPageInfo />
+          <DataTablePaginationNavigation />
+        </DataTablePaginationControls>
+      </DataTablePagination>
     </div>
   );
 };

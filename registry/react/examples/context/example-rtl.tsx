@@ -40,7 +40,7 @@ const Example = () => {
               />
             ))}
           </ContextBody>
-          <ContextFooter />
+          <ContextFooter title={values.footerTitle} />
         </ContextContent>
       </Context>
     </div>
@@ -58,6 +58,7 @@ const translations = {
   ar: {
     values: {
       costLabel: "$٠٫٠٤٢",
+      footerTitle: "التكلفة الإجمالية",
       rows: {
         cache: "الذاكرة المؤقتة",
         input: "المدخلات",
@@ -70,6 +71,7 @@ const translations = {
   en: {
     values: {
       costLabel: "$0.042",
+      footerTitle: "Total cost",
       rows: {
         cache: "Cache",
         input: "Input",
@@ -82,6 +84,7 @@ const translations = {
   he: {
     values: {
       costLabel: "$0.042",
+      footerTitle: "עלות כוללת",
       rows: {
         cache: "מטמון",
         input: "קלט",

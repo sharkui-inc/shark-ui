@@ -13,13 +13,13 @@ const Example = () => (
     <BreadcrumbList>
       <BreadcrumbItem>
         <BreadcrumbLink asChild>
-          <Link href="/docs">Docs</Link>
+          <Link href="#">Docs</Link>
         </BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator />
       <BreadcrumbItem>
         <BreadcrumbLink asChild>
-          <Link href="/docs/components">Components</Link>
+          <Link href="#">Components</Link>
         </BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator />

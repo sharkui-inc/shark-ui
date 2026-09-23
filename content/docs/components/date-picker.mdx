@@ -166,8 +166,8 @@ Root element. Extends [Calendar](/docs/components/calendar#api-reference).
 | `required` | `boolean` | - |
 | `invalid` | `boolean` | - |
 | `positioning` | `PositioningOptions` | `{ placement: "top" }` |
-| `lazyMount` | `boolean` | - |
-| `unmountOnExit` | `boolean` | - |
+| `lazyMount` | `boolean` | `true` |
+| `unmountOnExit` | `boolean` | `true` |
 
 ### DatePickerLabel
 
@@ -199,7 +199,7 @@ Input with calendar icon that opens the date picker on click. `input`
 
 ### DatePickerContent
 
-Wraps the calendar. Inherits `--cell-size` from calendar for date cell sizing.
+Wraps the calendar. Sets `--cell-size` for date cell sizing (same default as Calendar).
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -207,7 +207,7 @@ Wraps the calendar. Inherits `--cell-size` from calendar for date cell sizing.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `--cell-size` | `string` | `--spacing(8)` |
+| `--cell-size` | `string` | `--spacing(9)` |
 
 ### DatePickerValue
 

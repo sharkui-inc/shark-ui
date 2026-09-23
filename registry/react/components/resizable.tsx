@@ -23,7 +23,6 @@ export const Resizable = (
       className={cn("flex size-full", className)}
       data-slot="resizable"
       {...rest}
-      dir="ltr"
     />
   );
 };

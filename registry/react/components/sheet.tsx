@@ -64,7 +64,7 @@ const sheetPositionerVariants = tv({
     variant: "default",
   },
   variants: {
-    // placement left/right map to inline-start/end for RTL-safe motion.
+    // placement left/right map to inline-start/end.
     placement: {
       bottom: "grid grid-rows-[1fr_auto] not-data-[variant=inset]:pt-12",
       left: "flex justify-start",
@@ -128,16 +128,18 @@ const sheetContentVariants = tv({
         "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
       ],
       left: [
-        "w-[calc(100%-(--spacing(12)))] max-w-md ps-[env(safe-area-inset-left,0px)]",
+        "w-[calc(100%-(--spacing(12)))] max-w-md ps-[env(safe-area-inset-left,0px)] rtl:ps-[env(safe-area-inset-right,0px)]",
         "col-start-2",
         "border-e",
-        "data-[state=closed]:slide-out-to-start data-[state=open]:slide-in-from-start",
+        "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left",
+        "rtl:data-[state=closed]:slide-out-to-right rtl:data-[state=open]:slide-in-from-right",
       ],
       right: [
-        "w-[calc(100%-(--spacing(12)))] max-w-md pe-[env(safe-area-inset-right,0px)]",
+        "w-[calc(100%-(--spacing(12)))] max-w-md pe-[env(safe-area-inset-right,0px)] rtl:pe-[env(safe-area-inset-left,0px)]",
         "col-start-2",
         "border-s",
-        "data-[state=closed]:slide-out-to-end data-[state=open]:slide-in-from-end",
+        "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
+        "rtl:data-[state=closed]:slide-out-to-left rtl:data-[state=open]:slide-in-from-left",
       ],
       top: [
         "border-b pt-[env(safe-area-inset-top,0px)]",

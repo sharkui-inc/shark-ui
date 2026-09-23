@@ -4,7 +4,7 @@ import { Badge } from "@/registry/react/components/badge";
 
 const Example = () => (
   <Badge asChild variant="info">
-    <Link href="/">
+    <Link href="#">
       <CirclePlusIcon data-icon="inline-start" />
       New components <ArrowUpRightIcon data-icon="inline-end" />
     </Link>

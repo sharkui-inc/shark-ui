@@ -474,7 +474,12 @@ export const ComboboxItem = (props: ComboboxItemProps) => {
       {...rest}
       persistFocus
     >
-      {children}
+      <ArkCombobox.ItemText
+        className="flex min-w-0 flex-1 items-start gap-2"
+        data-slot="combobox-item-text"
+      >
+        {children}
+      </ArkCombobox.ItemText>
 
       {showIndicator ? (
         <ArkCombobox.ItemIndicator

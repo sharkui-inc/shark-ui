@@ -258,10 +258,18 @@ export const ContextBody = (
   );
 };
 
-export const ContextFooter = (
-  props: React.ComponentProps<typeof PopoverFooter>
-) => {
-  const { children, className, ...rest } = props;
+interface ContextFooterProps
+  extends Omit<React.ComponentProps<typeof PopoverFooter>, "title"> {
+  /**
+   * The label for the total cost row.
+   *
+   * @default "Total cost"
+   */
+  title?: string;
+}
+
+export const ContextFooter = (props: ContextFooterProps) => {
+  const { children, className, title = "Total cost", ...rest } = props;
 
   const { costLabel } = _useContextValue();
 
@@ -278,7 +286,7 @@ export const ContextFooter = (
     >
       {children ?? (
         <>
-          <span className="text-foreground">Total cost</span>
+          <span className="text-foreground">{title}</span>
           <span className="font-medium text-muted-foreground tabular-nums">
             {costLabel ?? "-"}
           </span>

@@ -56,7 +56,7 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
     >
       <TocNav className="static w-full">
         <TocTitle className="mb-0 inline-flex h-7 items-center gap-2 text-xs">
-          <AlignLeftIcon aria-hidden className="size-3" />
+          <AlignLeftIcon aria-hidden className="size-3 rtl:scale-x-[-1]" />
           On This Page
         </TocTitle>
         <TocList>

@@ -258,6 +258,8 @@ The toggle listens for **`⌘B`** on macOS and **`Ctrl+B`** elsewhere (`SIDEBAR_
 
 To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
+`placement` on `Sidebar` maps to **inline edges** like [Sheet](/docs/components/sheet): `"left"` is inline-start, `"right"` is inline-end. Under `dir="rtl"`, the default `placement="left"` sits on the right. Desktop and mobile (Sheet) share that mapping.
+
 <PreviewIframe wide side="right" src="/view/blocks/sidebar/rtl" title="Sidebar RTL" className="min-h-[550px]" />
 
 ## API Reference
@@ -304,6 +306,8 @@ Primary column component: desktop fixed strip + mobile sheet
 | `placement` | `"left" \| "right"` | `"left"` |
 | `variant` | `"sidebar" \| "floating" \| "inset"` | `"sidebar"` |
 | `collapsible` | `"offcanvas" \| "icon" \| "none"` | `"offcanvas"` |
+
+`placement` is reading-order: `"left"` = inline-start, `"right"` = inline-end. See [RTL](#rtl).
 
 ### Collapsible modes
 
@@ -690,9 +694,3 @@ Draggable edge control that expands or collapses the desktop rail. Place it afte
   <SidebarRail />
 </Sidebar>
 ```
-
-## Related
-
-- [Sheet](/docs/components/sheet) - edge-sliding panel for mobile-friendly layouts
-- [Bottom Navigation](/docs/components/bottom-navigation) - mobile bottom destinations
-- [Breadcrumb](/docs/components/breadcrumb) - hierarchy location trail

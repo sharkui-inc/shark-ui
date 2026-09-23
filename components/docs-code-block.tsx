@@ -51,6 +51,7 @@ export const DocsCodeFrame = (props: DocsCodeFrameProps) => {
       )}
       data-slot="docs-code-block"
       {...rest}
+      dir="ltr"
     >
       {title ? (
         <figcaption className="flex min-h-11 items-center gap-2 border-b px-4 py-2.5 font-mono text-[.8125rem] text-muted-foreground [&_svg]:size-4">
@@ -68,7 +69,10 @@ export const DocsCodeFrame = (props: DocsCodeFrameProps) => {
         />
       ) : null}
 
-      <ScrollArea className="**:data-[slot=scroll-area-scrollbar]:data-[orientation=horizontal]:mx-2 **:data-[slot=scroll-area-scrollbar]:data-[orientation=vertical]:my-2">
+      <ScrollArea
+        className="**:data-[slot=scroll-area-scrollbar]:data-[orientation=horizontal]:mx-2 **:data-[slot=scroll-area-scrollbar]:data-[orientation=vertical]:my-2"
+        dir="ltr"
+      >
         {isPlainText ? (
           <pre
             className="m-0 w-max min-w-full bg-transparent px-4 py-3.5 text-[.8125rem] leading-6 outline-hidden"

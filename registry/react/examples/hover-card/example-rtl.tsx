@@ -33,9 +33,7 @@ const Example = () => {
           <div className="flex flex-col gap-2">
             <a
               className="font-medium text-sm underline underline-offset-4"
-              href="https://github.com/vinihvc"
-              rel="noopener"
-              target="_blank"
+              href="#"
             >
               @vinihvc
             </a>

@@ -153,6 +153,7 @@ export const FileUploadList = (props: FileUploadListProps) => {
   }
 
   const keyCounts = new Map<string, number>();
+
   for (const file of files) {
     const baseKey = `${file.name}-${file.size}-${file.lastModified}`;
     keyCounts.set(baseKey, (keyCounts.get(baseKey) ?? 0) + 1);
@@ -172,7 +173,7 @@ export const FileUploadList = (props: FileUploadListProps) => {
         return (
           <FileUploadItem
             className={cn(
-              "flex-1 items-start justify-start gap-4",
+              "flex-1 items-center justify-start gap-2",
               "bg-card",
               "p-2",
               "rounded-xl border shadow-xs/4",
@@ -195,7 +196,7 @@ export const FileUploadList = (props: FileUploadListProps) => {
               )}
             </FileUploadItemPreview>
 
-            <div className="min-w-0 flex-1 overflow-hidden">
+            <div className="flex min-w-0 flex-1 flex-col gap-0.5 overflow-hidden">
               <FileUploadItemName />
               <FileUploadItemSize />
             </div>
@@ -230,7 +231,7 @@ export const FileUploadItem = (
 
   return (
     <ArkFileUpload.Item
-      className={cn("relative inline-flex", className)}
+      className={cn("relative inline-flex items-center", className)}
       data-slot="file-upload-item"
       {...rest}
     />

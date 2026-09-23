@@ -299,11 +299,7 @@ export const SelectItem = (
       {...rest}
     >
       <ArkSelect.ItemText
-        className={cn(
-          "flex min-w-0 items-center gap-2",
-          "has-data-[slot$=-item-description]:items-start",
-          "has-data-[slot$=-item-description]:[&>svg]:translate-y-0.5"
-        )}
+        className="flex min-w-0 items-start gap-2"
         data-slot="select-item-text"
       >
         {children}

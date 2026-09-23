@@ -32,17 +32,17 @@ const Example = () => {
           <MenuItem value="forward">
             <Send />
             {values.forward}
-            <MenuShortcut>⌘F</MenuShortcut>
+            <MenuShortcut>{values.shortcutForward}</MenuShortcut>
           </MenuItem>
           <MenuItem value="reply">
             <Reply />
             {values.reply}
-            <MenuShortcut>⌘R</MenuShortcut>
+            <MenuShortcut>{values.shortcutReply}</MenuShortcut>
           </MenuItem>
           <MenuItem value="archive">
             <Archive />
             {values.archive}
-            <MenuShortcut>⌘Z</MenuShortcut>
+            <MenuShortcut>{values.shortcutArchive}</MenuShortcut>
           </MenuItem>
           <MenuSub>
             <MenuSubTrigger>
@@ -68,7 +68,7 @@ const Example = () => {
           <MenuItem value="delete" variant="destructive">
             <Trash2 />
             {values.delete}
-            <MenuShortcut>⌘ ⌫</MenuShortcut>
+            <MenuShortcut>{values.shortcutDelete}</MenuShortcut>
           </MenuItem>
         </MenuGroup>
       </MenuContent>
@@ -91,6 +91,10 @@ const translations = {
       open: "فتح",
       priority: "الأولوية",
       reply: "رد",
+      shortcutArchive: "⌘ز",
+      shortcutDelete: "⌘ ⌫",
+      shortcutForward: "⌘ف",
+      shortcutReply: "⌘ر",
       trash: "سلة المهملات",
     },
   },
@@ -108,6 +112,10 @@ const translations = {
       open: "Open",
       priority: "Priority",
       reply: "Reply",
+      shortcutArchive: "⌘Z",
+      shortcutDelete: "⌘ ⌫",
+      shortcutForward: "⌘F",
+      shortcutReply: "⌘R",
       trash: "Trash",
     },
   },
@@ -125,6 +133,10 @@ const translations = {
       open: "פתיחה",
       priority: "עדיפות",
       reply: "השב",
+      shortcutArchive: "⌘ז",
+      shortcutDelete: "⌘ ⌫",
+      shortcutForward: "⌘פ",
+      shortcutReply: "⌘ר",
       trash: "אשפה",
     },
   },

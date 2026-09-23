@@ -9,7 +9,7 @@ import {
 const Example = () => (
   <div className="flex w-full max-w-md flex-col gap-4">
     <Item asChild variant="muted">
-      <a href="/docs">
+      <a href="#">
         <ItemContent>
           <ItemTitle>Visit our documentation</ItemTitle>
           <ItemDescription>
@@ -19,11 +19,7 @@ const Example = () => (
       </a>
     </Item>
     <Item asChild variant="outline">
-      <a
-        href="https://vini.one/twitter"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
+      <a href="#">
         <ItemContent>
           <ItemTitle>External resource</ItemTitle>
           <ItemDescription>

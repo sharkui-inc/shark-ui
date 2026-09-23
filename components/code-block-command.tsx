@@ -60,6 +60,7 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
       )}
       data-slot="docs-mdx-code-block"
       {...rest}
+      dir="ltr"
     >
       <Tabs
         className="gap-0"
@@ -82,7 +83,10 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
           </TabsList>
         </div>
 
-        <ScrollArea className="**:data-[slot=scroll-area-scrollbar]:data-[orientation=horizontal]:mx-2 **:data-[slot=scroll-area-scrollbar]:data-[orientation=vertical]:my-2">
+        <ScrollArea
+          className="**:data-[slot=scroll-area-scrollbar]:data-[orientation=horizontal]:mx-2 **:data-[slot=scroll-area-scrollbar]:data-[orientation=vertical]:my-2"
+          dir="ltr"
+        >
           {packageManagers.map((manager) => (
             <TabsContent
               className={cn(

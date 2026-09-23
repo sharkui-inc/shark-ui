@@ -1,3 +1,4 @@
+import { source } from "@/lib/fumadocs";
 import {
   buildLLMIndexSection,
   createLLMIndexResponse,
@@ -25,5 +26,7 @@ export const GET = async (
     return new Response(null, { status: 404 });
   }
 
-  return createLLMIndexResponse(buildLLMIndexSection(indexName));
+  return createLLMIndexResponse(
+    buildLLMIndexSection(indexName, source.getPages())
+  );
 };

@@ -50,7 +50,7 @@ const itemVariants = tv({
     "transition-colors duration-[120ms]",
     "[&:is(a,button)]:hover:bg-muted",
     "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
-    "[&_svg:not([class*='size-']):not([class*='h-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    "[&>svg:not([class*='size-']):not([class*='h-'])]:size-4 [&>svg]:pointer-events-none [&>svg]:shrink-0",
   ],
   defaultVariants: {
     variant: "default",
@@ -84,7 +84,6 @@ export const Item = (props: ItemProps) => {
 const itemMediaVariants = tv({
   base: [
     "flex shrink-0 items-center justify-center gap-2",
-    "group-has-data-[slot=item-description]/item:translate-y-0.5 group-has-data-[slot=item-description]/item:self-start",
     "[&_svg]:pointer-events-none",
   ],
   defaultVariants: {
@@ -93,7 +92,11 @@ const itemMediaVariants = tv({
   variants: {
     variant: {
       default: "bg-transparent",
-      icon: ["[&_svg:not([class*='size-'])]:size-4"],
+      icon: [
+        "group-has-data-[slot=item-description]/item:self-start",
+        "[&_svg:not([class*='size-']):not([class*='h-'])]:h-lh",
+        "[&_svg:not([class*='size-']):not([class*='w-'])]:w-4",
+      ],
       image: [
         "relative",
         "size-10",
