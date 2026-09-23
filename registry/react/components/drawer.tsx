@@ -444,8 +444,36 @@ function bindNestedDrawerStack(content: HTMLElement) {
   };
 
   const activeSwipe = () => {
-    const swiping = document.querySelectorAll<HTMLElement>(SWIPING_DRAWER);
-    return swiping.item(swiping.length - 1);
+    // Prefer the portal host (custom container or body) so independent drawer
+    // trees in separate frames do not cross-wire nested swipe progress.
+    const positioner = content.closest("[data-slot=drawer-positioner]");
+    const scope: ParentNode =
+      positioner?.parentElement ?? content.ownerDocument ?? document;
+    const swiping = scope.querySelectorAll<HTMLElement>(SWIPING_DRAWER);
+
+    if (swiping.length <= 1) {
+      return swiping.item(0);
+    }
+
+    let frontNode: HTMLElement | null = null;
+    let frontLayer = Number.NEGATIVE_INFINITY;
+
+    for (const node of swiping) {
+      if (node === content) {
+        continue;
+      }
+
+      const layer = Number.parseFloat(
+        getComputedStyle(node).getPropertyValue("--layer-index") || "0"
+      );
+
+      if (layer >= frontLayer) {
+        frontNode = node;
+        frontLayer = layer;
+      }
+    }
+
+    return frontNode ?? swiping.item(swiping.length - 1);
   };
 
   const endTracking = () => {
