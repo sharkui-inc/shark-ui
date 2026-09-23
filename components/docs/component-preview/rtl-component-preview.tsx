@@ -1,5 +1,6 @@
 import { existsSync } from "node:fs";
-import { join } from "node:path";
+import { resolve } from "node:path";
+import { assertPathInsideRoot } from "@/lib/registry-path";
 import {
   type ComponentPreviewExampleProps,
   getComponentPreviewExample,
@@ -10,6 +11,8 @@ import {
   RTLPreviewHeader,
   RTLPreviewProvider,
 } from "./component-preview-frame";
+
+const EXAMPLE_NAME_PATTERN = /^[a-z0-9-]+$/;
 
 type RTLComponentPreviewProps = ComponentPreviewExampleProps & {
   /** The RTL example file name. Defaults to `example-rtl`. */
@@ -24,11 +27,21 @@ export const RTLComponentPreview = async (props: RTLComponentPreviewProps) => {
     autoHeight = false,
     ...rest
   } = props;
-  const rtlExamplePath = join(
-    process.cwd(),
-    "registry/react/examples",
-    componentName,
-    `${rtlFileName}.tsx`
+
+  if (
+    !(
+      EXAMPLE_NAME_PATTERN.test(componentName) &&
+      EXAMPLE_NAME_PATTERN.test(rtlFileName)
+    )
+  ) {
+    throw new Error("Invalid component or RTL example file name");
+  }
+
+  const examplesRoot = resolve(process.cwd(), "registry/react/examples");
+  const rtlExamplePath = assertPathInsideRoot(
+    resolve(examplesRoot, componentName, `${rtlFileName}.tsx`),
+    examplesRoot,
+    "RTL example path"
   );
   const hasRtlExample = existsSync(rtlExamplePath);
   const previewFileName = hasRtlExample ? rtlFileName : fileName;

@@ -1,10 +1,11 @@
 import { realpathSync } from "node:fs";
 import { access, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { SITE_CONFIG } from "../config/site";
 import { getRegistryArtifacts } from "../lib/composition-catalog";
 import type { CompositionArtifact, RegistryItemType } from "../lib/registry";
+import { assertPathInsideRoot } from "../lib/registry-path";
 import { replaceRegistryImportsForCopy } from "../utils/formatter";
 
 export type RegistryKind = "component" | "hook" | "lib";
@@ -212,15 +213,24 @@ const writeArtifact = async (itemName: string, metadata: unknown) => {
   console.log(`✅ Generated ${itemName}.json`);
 };
 
+const REGISTRY_ROOT = resolve(CWD, "registry");
+
 const loadExtraFiles = async (
   files: RegistryItemType["files"],
   primaryPath: string
 ) => {
   const extras = await Promise.all(
-    (files ?? []).map(async (file) => ({
-      ...file,
-      content: await readTransformed(join(CWD, file.path)),
-    }))
+    (files ?? []).map(async (file) => {
+      const filePath = assertPathInsideRoot(
+        resolve(CWD, file.path),
+        REGISTRY_ROOT,
+        `registry file ${file.path}`
+      );
+      return {
+        ...file,
+        content: await readTransformed(filePath),
+      };
+    })
   );
   return extras.filter((file) => file.path !== primaryPath);
 };

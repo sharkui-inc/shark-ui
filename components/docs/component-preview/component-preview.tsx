@@ -1,10 +1,12 @@
 import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { resolve } from "node:path";
 import type React from "react";
+import { assertPathInsideRoot } from "@/lib/registry-path";
 import { ComponentSource } from "../../component-source";
 import { ComponentPreviewFrame } from "./component-preview-frame";
 
 const registryPath = "registry/react/examples";
+const EXAMPLE_NAME_PATTERN = /^[a-z0-9-]+$/;
 
 export interface ComponentPreviewExampleProps
   extends Omit<React.ComponentProps<"div">, "ref"> {
@@ -51,11 +53,20 @@ export const getComponentPreviewExample = async (
 
   const Example = example.default;
 
-  const examplePath = join(
-    process.cwd(),
-    registryPath,
-    componentName,
-    `${fileName}.tsx`
+  if (
+    !(
+      EXAMPLE_NAME_PATTERN.test(componentName) &&
+      EXAMPLE_NAME_PATTERN.test(fileName)
+    )
+  ) {
+    throw new Error("Invalid component or example file name");
+  }
+
+  const examplesRoot = resolve(process.cwd(), registryPath);
+  const examplePath = assertPathInsideRoot(
+    resolve(examplesRoot, componentName, `${fileName}.tsx`),
+    examplesRoot,
+    "ComponentPreview example path"
   );
 
   return {

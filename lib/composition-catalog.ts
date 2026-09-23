@@ -12,6 +12,7 @@ import type {
   PublishedComposition,
   PublishedCompositionFile,
 } from "@/lib/registry";
+import { assertPathInsideRoot } from "@/lib/registry-path";
 import { BLOCK_CATEGORIES } from "@/registry/react/blocks/_categories";
 import { BLOCKS } from "@/registry/react/blocks/_registry";
 import { TEMPLATE_CATEGORIES } from "@/registry/react/templates/_categories";
@@ -167,16 +168,21 @@ const createCatalog = ({
   const toSourcePath = (
     composition: CompositionDefinition,
     file: CompositionFileDefinition
-  ) =>
-    join(
+  ) => {
+    const compositionRoot = join(
       process.cwd(),
       "registry",
       "react",
       kind,
       composition.category,
-      composition.name,
-      file.source
+      composition.name
     );
+    return assertPathInsideRoot(
+      resolve(compositionRoot, file.source),
+      compositionRoot,
+      `[${kind}] ${composition.name} source ${file.source}`
+    );
+  };
 
   const resolveRelativeFile = (
     composition: CompositionDefinition,
