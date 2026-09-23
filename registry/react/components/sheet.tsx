@@ -64,6 +64,7 @@ const sheetPositionerVariants = tv({
     variant: "default",
   },
   variants: {
+    // placement left/right map to inline-start/end for RTL-safe motion.
     placement: {
       bottom: "grid grid-rows-[1fr_auto] not-data-[variant=inset]:pt-12",
       left: "flex justify-start",
@@ -130,13 +131,13 @@ const sheetContentVariants = tv({
         "w-[calc(100%-(--spacing(12)))] max-w-md ps-[env(safe-area-inset-left,0px)]",
         "col-start-2",
         "border-e",
-        "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left",
+        "data-[state=closed]:slide-out-to-start data-[state=open]:slide-in-from-start",
       ],
       right: [
         "w-[calc(100%-(--spacing(12)))] max-w-md pe-[env(safe-area-inset-right,0px)]",
         "col-start-2",
         "border-s",
-        "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
+        "data-[state=closed]:slide-out-to-end data-[state=open]:slide-in-from-end",
       ],
       top: [
         "border-b pt-[env(safe-area-inset-top,0px)]",
