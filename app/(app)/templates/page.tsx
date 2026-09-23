@@ -51,7 +51,7 @@ const TemplatesPage = async () => {
 
               <div className="mt-8 flex w-full max-w-sm flex-col justify-center gap-2 sm:w-auto sm:max-w-none sm:flex-row">
                 <Button asChild size="xl">
-                  <Link href="#ai-chat-01">
+                  <Link href="#ai-chat-workspace-01">
                     Explore AI Chat
                     <ArrowDownIcon aria-hidden />
                   </Link>
@@ -61,7 +61,7 @@ const TemplatesPage = async () => {
               <Announcement className="mt-6 bg-background p-0 shadow-sm/4">
                 <Link
                   className="inline-flex min-w-0 max-w-full items-center gap-2 rounded-2xl border border-transparent py-0.5 ps-0.5 pe-3 outline-hidden transition-colors hover:bg-input/8 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24 motion-reduce:transition-none"
-                  href="#ai-chat-01"
+                  href="#ai-chat-workspace-01"
                 >
                   <Badge pill size="sm" variant="secondary">
                     <RocketIcon aria-hidden />

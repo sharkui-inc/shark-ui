@@ -17,7 +17,6 @@ type ViewRegistryFolderType = (typeof VIEW_REGISTRY_FOLDER_TYPES)[number];
 
 /** Retired preview slugs: still emitted so static export serves app/not-found. */
 const RETIRED_VIEW_PARAMS = [
-  { category: "ai", file: "ai-chat-01", type: "templates" },
   { category: "ai", file: "ai-ide-01", type: "templates" },
 ] as const;
 
