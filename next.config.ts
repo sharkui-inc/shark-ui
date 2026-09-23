@@ -32,7 +32,6 @@ const config: NextConfig = {
   //     },
   //   ];
   // },
-  serverExternalPackages: ["@takumi-rs/core"],
   turbopack: {
     rules: codeInspectorPlugin({
       behavior: {

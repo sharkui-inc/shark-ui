@@ -193,9 +193,6 @@ importers:
       '@shikijs/transformers':
         specifier: ^4.4.3
         version: 4.4.3
-      '@takumi-rs/core':
-        specifier: ^2.14.0
-        version: 2.14.0(csstype@3.2.3)(react@19.3.0)
       '@tanstack/ai':
         specifier: ^0.58.0
         version: 0.58.0(zod@4.6.5)
@@ -277,9 +274,6 @@ importers:
       tailwind-variants:
         specifier: ^3.3.1
         version: 3.3.1(tailwind-merge@3.7.0)(tailwindcss@4.3.3)
-      takumi-js:
-        specifier: ^2.14.0
-        version: 2.14.0(csstype@3.2.3)(react@19.3.0)
       valibot:
         specifier: ^1.5.0
         version: 1.5.0(typescript@7.0.2)
@@ -5249,10 +5243,12 @@ snapshots:
     transitivePeerDependencies:
       - preact
       - react
+    optional: true
 
   '@takumi-rs/helpers@2.14.0(react@19.3.0)':
     optionalDependencies:
       react: 19.3.0
+    optional: true
 
   '@takumi-rs/wasm@2.14.0(csstype@3.2.3)(react@19.3.0)':
     dependencies:
@@ -5262,6 +5258,7 @@ snapshots:
     transitivePeerDependencies:
       - preact
       - react
+    optional: true
 
   '@tanstack/ai-client@0.33.2(zod@4.6.5)':
     dependencies:
@@ -7925,6 +7922,7 @@ snapshots:
       - csstype
       - preact
       - react
+    optional: true
 
   tapable@2.3.3: {}
 
