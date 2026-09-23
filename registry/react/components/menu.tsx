@@ -61,6 +61,8 @@ export const menuContentVariants = tv({
     "z-[calc(50+var(--layer-index,0))]",
     "max-h-(--available-height) min-w-32",
     "p-1.5",
+    "overflow-y-auto overflow-x-hidden overscroll-y-contain",
+    "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20",
     "bg-popover",
     "text-popover-foreground",
     "rounded-xl border shadow-lg/4",
@@ -74,26 +76,10 @@ export const menuContentVariants = tv({
   ],
 });
 
-export const menuContentScrollVariants = tv({
-  base: [
-    "max-h-[inherit]",
-    "overflow-y-auto overflow-x-hidden overscroll-y-contain",
-    "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20",
-  ],
-});
-
-interface MenuContentProps
-  extends React.ComponentProps<typeof ArkMenu.Content> {
-  /**
-   * Whether to show the arrow
-   *
-   * @default false
-   */
-  showArrow?: boolean;
-}
-
-export const MenuContent = (props: MenuContentProps) => {
-  const { showArrow = false, className, children, ...rest } = props;
+export const MenuContent = (
+  props: React.ComponentProps<typeof ArkMenu.Content>
+) => {
+  const { className, children, ...rest } = props;
 
   return (
     <Portal>
@@ -103,9 +89,7 @@ export const MenuContent = (props: MenuContentProps) => {
           data-slot="menu-content"
           {...rest}
         >
-          <div className={menuContentScrollVariants()}>{children}</div>
-
-          {showArrow ? <MenuArrow /> : null}
+          {children}
         </ArkMenu.Content>
       </MenuPositioner>
     </Portal>
@@ -350,18 +334,10 @@ export const MenuSub = (props: React.ComponentProps<typeof Menu>) => (
   <Menu data-slot="menu-sub" {...props} />
 );
 
-interface MenuSubContentProps
-  extends React.ComponentProps<typeof ArkMenu.Content> {
-  /**
-   * Whether to show the arrow
-   *
-   * @default false
-   */
-  showArrow?: boolean;
-}
-
-export const MenuSubContent = (props: MenuSubContentProps) => {
-  const { showArrow = false, className, children, ...rest } = props;
+export const MenuSubContent = (
+  props: React.ComponentProps<typeof ArkMenu.Content>
+) => {
+  const { className, children, ...rest } = props;
 
   return (
     <Portal>
@@ -371,9 +347,7 @@ export const MenuSubContent = (props: MenuSubContentProps) => {
           data-slot="menu-sub-content"
           {...rest}
         >
-          <div className={menuContentScrollVariants()}>{children}</div>
-
-          {showArrow ? <MenuArrow /> : null}
+          {children}
         </ArkMenu.Content>
       </MenuPositioner>
     </Portal>
@@ -421,28 +395,6 @@ export const MenuShortcut = (props: React.ComponentProps<typeof ark.span>) => {
         {children}
       </span>
     </ark.span>
-  );
-};
-
-export const MenuArrow = (
-  props: React.ComponentProps<typeof ArkMenu.Arrow>
-) => {
-  const { style, ...rest } = props;
-
-  return (
-    <ArkMenu.Arrow
-      data-slot="menu-arrow"
-      style={
-        {
-          "--arrow-background": "var(--popover)",
-          "--arrow-size": "calc(1.5 * var(--spacing))",
-          ...style,
-        } as React.CSSProperties
-      }
-      {...rest}
-    >
-      <ArkMenu.ArrowTip className="border-t border-l" />
-    </ArkMenu.Arrow>
   );
 };
 

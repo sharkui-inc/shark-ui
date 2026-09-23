@@ -69,7 +69,6 @@ Menu
         │   └── MenuSubContent
         ├── MenuSeparator
         ├── MenuShortcut
-        └── MenuArrow
 ```
 
 ## Usage
@@ -221,12 +220,6 @@ Use `variant="destructive"` on `MenuItem` for irreversible actions like delete.
 
 <ComponentPreview componentName="menu" fileName="example-destructive" />
 
-### With Arrow
-
-Show an arrow with `showArrow` on `MenuContent`.
-
-<ComponentPreview componentName="menu" fileName="example-with-arrow" />
-
 ### Responsive
 
 Use [Drawer](/docs/components/drawer#responsive-menu) below the mobile breakpoint and `Menu` on larger screens. `DrawerMenuTrigger` opens the next drawer.
@@ -281,7 +274,6 @@ Holds menu options. Displayed in a portal, positioned relative to the trigger.
 | --- | --- | --- |
 | `asChild` | `boolean` | - |
 | `className` | `string` | - |
-| `showArrow` | `boolean` | `false` |
 
 ### MenuItem
 
@@ -403,7 +395,6 @@ Holds the items rendered by a nested submenu.
 | --- | --- | --- |
 | `asChild` | `boolean` | - |
 | `className` | `string` | - |
-| `showArrow` | `boolean` | `false` |
 
 ### MenuShortcut
 
@@ -412,19 +403,6 @@ Optional keyboard shortcut hint displayed next to a menu item.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | - |
-
-### MenuArrow
-
-Optional arrow pointing toward the trigger.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `className` | `string` | - |
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `--arrow-background` | `string` | `var(--popover)` |
-| `--arrow-size` | `string` | `calc(1.5 * var(--spacing))` |
 
 ### MenuRootProvider
 
