@@ -24,13 +24,18 @@ Shark UI builds on [Ark UI](https://ark-ui.com), [shadcn CLI](https://ui.shadcn.
 
 ## Development
 
-| Command        | Description        |
-|----------------|--------------------|
-| `pnpm dev`     | Start docs site    |
-| `pnpm build`   | Build docs         |
-| `pnpm run typecheck`  | Type-check and build |
-| `pnpm run lint:check` | Lint (Ultracite)     |
-| `pnpm run lint:fix`   | Lint and fix         |
+| Command               | Description                                                         |
+| --------------------- | ------------------------------------------------------------------- |
+| `pnpm dev`            | Docs site (`next dev`)                                              |
+| `pnpm build`          | `registry:build` + `theme:build` + production Next.js build         |
+| `pnpm typecheck`      | Production Next.js build (typecheck). Slow.                         |
+| `pnpm test`           | Node test runner for files under `test/`                            |
+| `pnpm lint:check`     | Lint (Ultracite/Biome)                                              |
+| `pnpm lint:fix`       | Auto-fix lint issues                                                |
+| `pnpm registry:build` | Rebuild `public/r/*.json` from manifests                            |
+| `pnpm theme:build`    | Generate `styles/themes.css` from `scripts/build-themes.mts`        |
+
+Do not hand-edit generated `public/r/*.json` or `styles/themes.css`. Full contributor workflow: see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
