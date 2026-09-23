@@ -7,4 +7,10 @@ export const TEMPLATE_CATEGORIES = [
     order: 1,
     slug: "ai",
   },
+  {
+    description: "Dense product apps promoted from the Themes gallery.",
+    label: "Apps",
+    order: 2,
+    slug: "apps",
+  },
 ] as const satisfies readonly TemplateCategory[];
