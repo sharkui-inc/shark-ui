@@ -15,13 +15,9 @@
       "--animate-indeterminate": "indeterminate 1.5s ease-in-out infinite"
     }
   },
-  "dependencies": [
-    "@ark-ui/react"
-  ],
+  "dependencies": ["@ark-ui/react"],
   "name": "progress",
-  "registryDependencies": [
-    "https://shark-ui.com/r/field.json"
-  ],
+  "registryDependencies": ["https://shark-ui.com/r/field.json"],
   "type": "registry:ui",
   "files": [
     {

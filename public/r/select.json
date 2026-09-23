@@ -1,10 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "dependencies": [
-    "@ark-ui/react",
-    "tailwind-variants",
-    "lucide-react"
-  ],
+  "dependencies": ["@ark-ui/react", "tailwind-variants", "lucide-react"],
   "name": "select",
   "registryDependencies": [
     "https://shark-ui.com/r/input.json",

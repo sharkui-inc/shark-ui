@@ -1,8 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "categories": [
-    "apps"
-  ],
+  "categories": ["apps"],
   "dependencies": [
     "@ark-ui/react",
     "@tanstack/react-table",

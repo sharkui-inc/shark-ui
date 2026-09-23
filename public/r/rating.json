@@ -8,10 +8,7 @@
       "warning": "var(--color-amber-500)"
     }
   },
-  "dependencies": [
-    "@ark-ui/react",
-    "lucide-react"
-  ],
+  "dependencies": ["@ark-ui/react", "lucide-react"],
   "name": "rating",
   "type": "registry:ui",
   "files": [

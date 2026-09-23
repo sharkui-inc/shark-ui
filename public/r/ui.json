@@ -7,9 +7,7 @@
     "recharts",
     "tailwind-variants"
   ],
-  "devDependencies": [
-    "tw-animate-css"
-  ],
+  "devDependencies": ["tw-animate-css"],
   "name": "ui",
   "registryDependencies": [
     "https://shark-ui.com/r/accordion.json",
