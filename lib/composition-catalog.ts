@@ -472,5 +472,4 @@ const toCommandItem = (
 };
 
 export const getCommandCompositionItems = (): CommandCompositionItem[] =>
-  // Blocks catalog route is temporarily disabled (`app/(app)/_blocks`).
-  getDefinitions("blocks").map(toCommandItem).slice(0, 0);
+  getDefinitions("blocks").map(toCommandItem);
