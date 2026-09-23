@@ -1,6 +1,10 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "dependencies": ["@ark-ui/react", "@tanstack/react-table", "lucide-react"],
+  "dependencies": [
+    "@ark-ui/react",
+    "@tanstack/react-table",
+    "lucide-react"
+  ],
   "name": "data-table",
   "registryDependencies": [
     "https://shark-ui.com/r/button.json",

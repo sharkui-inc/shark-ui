@@ -1,7 +1,12 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "categories": ["ai"],
-  "dependencies": ["@ark-ui/react", "lucide-react"],
+  "categories": [
+    "ai"
+  ],
+  "dependencies": [
+    "@ark-ui/react",
+    "lucide-react"
+  ],
   "description": "Full AI chat workspace with sidebar history, projects, thread, and composer.",
   "files": [
     {

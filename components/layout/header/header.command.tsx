@@ -128,13 +128,16 @@ const getCommandItems = ({
       return [];
     }
 
+    const groupName =
+      String(group.name) === "Sections" ? "Pages" : String(group.name);
+
     return group.children.flatMap((item) => {
       if (item.type !== "page") {
         return [];
       }
 
       return {
-        group: String(group.name),
+        group: groupName,
         isComponent: isComponentPage(item.url),
         label: item.name?.toString() || "",
         url: item.url,

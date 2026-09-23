@@ -28,20 +28,28 @@ import {
 
 interface ComponentPreviewFrameProps extends React.ComponentProps<"div"> {
   /**
-   * Size the preview to its content, with extra vertical padding so examples
-   * sit inside the dashed guides, instead of locking to a 450px frame that
-   * vertically centers short examples.
+   * Size the preview to its content.
    *
    * @default false
    */
   autoHeight?: boolean;
-  /** The content to display in the preview pane. */
+  /**
+   * The content to display in the preview pane.
+   */
   preview: React.ReactNode;
-  /** Optional controls displayed above the preview content. */
+  /**
+   * Optional controls displayed above the preview content.
+   */
   previewHeader?: React.ReactNode;
-  /** Whether to show the dashed padding guide borders around the preview. */
+  /**
+   * Whether to show the dashed padding guide borders around the preview.
+   *
+   * @default true
+   */
   showBorders?: boolean;
-  /** The source code to display in the code pane. */
+  /**
+   * The source code to display in the code pane.
+   */
   source: React.ReactNode;
 }
 

@@ -50,11 +50,12 @@ Drawer
 ├── DrawerTrigger
 └── DrawerContent
     ├── DrawerGrabber
-    ├── drawer-main
-    │   ├── DrawerHeader
-    │   ├── DrawerBody
-    │   └── DrawerFooter
-    │       └── DrawerClose
+    ├── DrawerHeader
+    │   ├── DrawerTitle
+    │   └── DrawerDescription
+    ├── DrawerBody
+    └── DrawerFooter
+        └── DrawerClose
 ```
 
 ## Usage
@@ -173,7 +174,7 @@ Use `DrawerTitle` and `DrawerDescription` as children for more control.
 
 <ComponentPreview componentName="drawer" fileName="example-multiple-triggers" />
 
-### Nested Drawers
+### Nested ex
 
 Nest a `Drawer` inside another.
 
@@ -211,7 +212,7 @@ Nest a `Drawer` inside another.
 
 ### Custom spacing
 
-`[--space]` on `DrawerContent`. 
+The `[--space:--spacing("value")]` controls the internal spacing. 
 
 <ComponentPreview componentName="drawer" fileName="example-custom-spacing" />
 

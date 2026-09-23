@@ -237,7 +237,28 @@ export const createRuntimeThemeCss = () => {
 };
 
 const main = async () => {
-  await writeFile(THEMES_CSS, createRuntimeThemeCss());
+  const chromatic = PRIMARY_COLORS.filter((color) => color.value !== "neutral");
+  const bases = BASE_COLORS.filter((color) => color.value !== "neutral");
+
+  console.log(
+    `Found ${chromatic.length} theme colors, ${bases.length} base colors, and ${BORDER_RADIUS.length} radii to process:`
+  );
+
+  for (const color of chromatic) {
+    console.log(`🎨 Processing theme-${color.value}...`);
+  }
+  for (const color of bases) {
+    console.log(`🧱 Processing bg-${color.value}...`);
+  }
+  for (const radius of BORDER_RADIUS) {
+    console.log(`⬜ Processing radius-${radius.value}...`);
+  }
+
+  const css = createRuntimeThemeCss();
+  await writeFile(THEMES_CSS, css);
+
+  console.log(`✅ Generated styles/themes.css (${css.length} bytes)`);
+  console.log("🎉 Successfully built runtime themes!\n");
 };
 
 const isDirectRun = () => {
@@ -256,6 +277,7 @@ const isDirectRun = () => {
 
 if (isDirectRun()) {
   main().catch((err) => {
+    console.error("❌ Failed to build themes:");
     console.error(err);
     process.exit(1);
   });

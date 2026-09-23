@@ -9,21 +9,19 @@ const registryPath = "registry/react/examples";
 export interface ComponentPreviewExampleProps
   extends Omit<React.ComponentProps<"div">, "ref"> {
   /**
-   * Size the preview to its content, with extra vertical padding so examples
-   * sit inside the dashed guides, instead of locking to a 450px frame that
-   * vertically centers short examples.
+   * Size the preview to its content.
    *
    * @default false
    */
   autoHeight?: boolean;
   /**
    * The name of the component to display in the preview
-   *
-   * @default ""
    */
   componentName: string;
   /**
    * The file name of the component
+   *
+   * @default "example-default"
    */
   fileName?: string;
 }

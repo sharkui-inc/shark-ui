@@ -167,9 +167,7 @@ Place a dismiss action beside the title with `ApprovalCardAction`.
 
 ### Custom spacing
 
-The `[--space:--spacing("value")]` custom property from `Card` controls the Approval Card's internal spacing.
-
-Default spacing is `--spacing(6)`.
+The `[--space:--spacing("value")]` controls the internal spacing.
 
 <ComponentPreview componentName="approval-card" fileName="example-custom-spacing" autoHeight />
 
@@ -241,6 +239,10 @@ Form root.
 | `onApprove` | `(details?: ApprovalCardSubmitDetails) => void` | `-` |
 | `onReject` | `() => void` | `-` |
 | `className` | `string` | `-` |
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(6)` |
 
 ### ApprovalCardHeader
 

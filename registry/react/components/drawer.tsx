@@ -263,11 +263,11 @@ const drawerContentVariants = tv({
     "[&[data-swipe-direction=left],&[data-swipe-direction=right]]:h-full [&[data-swipe-direction=left],&[data-swipe-direction=right]]:max-h-none [&[data-swipe-direction=left],&[data-swipe-direction=right]]:min-h-0 [&[data-swipe-direction=left],&[data-swipe-direction=right]]:w-full [&[data-swipe-direction=left],&[data-swipe-direction=right]]:max-w-md",
     "data-nested-drawer-open:overflow-hidden",
     "data-nested-drawer-open:pointer-events-none",
-    "bg-popover data-nested-drawer-open:bg-[color-mix(in_srgb,var(--popover),var(--foreground)_calc(4%*var(--stack-depth)))]",
+    "bg-popover",
     "text-popover-foreground",
     "shadow-lg/4",
     "outline-hidden",
-    "transition-[background-color,box-shadow,height,transform] duration-450 ease-[cubic-bezier(0.32,0.72,0,1)]",
+    "transition-[box-shadow,height,transform] duration-450 ease-[cubic-bezier(0.32,0.72,0,1)]",
     "data-[state=closed]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
     "data-[state=closed]:animate-out data-[state=open]:animate-in",
     "data-swiping:select-none data-swiping:transition-none",
@@ -688,7 +688,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
                     direction: swipeDirection ?? "down",
                   }),
                   isVertical && "text-center",
-                  fullHeight && "h-full",
+                  fullHeight && "h-full!",
                   className
                 )}
                 data-slot="drawer-content"

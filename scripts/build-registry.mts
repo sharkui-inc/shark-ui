@@ -215,15 +215,15 @@ const writeArtifact = async (itemName: string, metadata: unknown) => {
 const loadExtraFiles = async (
   files: RegistryItemType["files"],
   primaryPath: string
-) => {
-  const extras = await Promise.all(
-    (files ?? []).map(async (file) => ({
-      ...file,
-      content: await readTransformed(join(CWD, file.path)),
-    }))
+) =>
+  Promise.all(
+    (files ?? [])
+      .filter((file) => file.path !== primaryPath)
+      .map(async (file) => {
+        const content = await readTransformed(join(CWD, file.path));
+        return { ...file, content };
+      })
   );
-  return extras.filter((file) => file.path !== primaryPath);
-};
 
 interface SourceInput {
   code: string;

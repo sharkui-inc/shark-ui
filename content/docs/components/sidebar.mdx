@@ -20,9 +20,34 @@ import manifest from "@/registry/manifest/sidebar";
 
 <TabsContent value="cli">
 
+<Steps>
+
+<Step>Run the following command:</Step>
+
 ```bash
 npx shadcn@latest add @shark/sidebar
 ```
+
+<Step>Add the SidebarProvider component.</Step>
+
+```tsx title="app/layout.tsx"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
+
+export default function Layout({ children }) {
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <main>
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
+  )
+}
+```
+
+</Steps>
 
 </TabsContent>
 
@@ -79,6 +104,25 @@ npx shadcn@latest add @shark/sidebar
 
 <Step>Update the import paths to match your project setup.</Step>
 
+<Step>Add the SidebarProvider component.</Step>
+
+```tsx title="app/layout.tsx"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
+
+export default function Layout({ children }) {
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <main>
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
+  )
+}
+```
+
 </Steps>
 
 </TabsContent>
@@ -128,25 +172,6 @@ Optional helpers: `<SidebarRail>` (edge hit target), the `<SidebarMenu>` buildin
 
 ## Usage
 
-`app/layout.tsx` keeps the provider at the top level:
-
-```tsx title="app/layout.tsx"
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
-
-export default function Layout({ children }: React.PropsWithChildren) {
-  return (
-    <SidebarProvider>
-      <AppSidebar />
-      <main>
-        <SidebarTrigger />
-        {children}
-      </main>
-    </SidebarProvider>
-  );
-}
-```
-
 The sidebar column itself is usually a dedicated module:
 
 ```tsx title="components/app-sidebar.tsx"
@@ -156,7 +181,7 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarHeader,
-} from "@/components/ui/sidebar";
+} from "@/components/ui/sidebar"
 
 export function AppSidebar() {
   return (
@@ -168,7 +193,7 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter />
     </Sidebar>
-  );
+  )
 }
 ```
 
