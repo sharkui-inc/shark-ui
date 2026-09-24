@@ -50,10 +50,10 @@ const Example = () => {
 const steps: TourStepType[] = [
   {
     actions: [{ action: "next", label: "Next" }],
-    backdrop: false,
-    description: "The page stays visible.",
+    description:
+      "This step has backdrop. the next step will not have backdrop.",
     id: "step-1",
-    title: "No backdrop",
+    title: "With backdrop",
     type: "dialog",
   },
   {
@@ -67,7 +67,7 @@ const steps: TourStepType[] = [
     id: "note",
     target: () =>
       document.querySelector<HTMLElement>("#tour-hide-backdrop-note"),
-    title: "Still no backdrop",
+    title: "Without backdrop",
     type: "tooltip",
   },
 ];

@@ -63,7 +63,7 @@ const ToolResultStatusIcon = (props: { status: ToolResultStatus }) => {
       return (
         <LoaderCircleIcon
           aria-hidden
-          className="size-3 animate-spin motion-reduce:animate-none"
+          className="size-3 animate-spin"
         />
       );
     case "success":

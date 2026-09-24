@@ -124,12 +124,12 @@ export const SocialProfileExample = (props: React.ComponentProps<"div">) => {
                   </FieldGroup>
                 </DialogBody>
                 <DialogFooter>
-                  <DialogClose asChild>
-                    <Button variant="outline">Cancel</Button>
-                  </DialogClose>
                   <Button isLoading={isSending} type="submit">
                     Send
                   </Button>
+                  <DialogClose asChild>
+                    <Button variant="outline">Cancel</Button>
+                  </DialogClose>
                 </DialogFooter>
               </form>
             </DialogContent>

@@ -40,7 +40,7 @@ const MenuSubmenu = () => (
         </MenuSub>
         <MenuItem value="new-team">
           New Team
-          <MenuShortcut>⌘+T</MenuShortcut>
+          <MenuShortcut>⌘T</MenuShortcut>
         </MenuItem>
       </MenuGroup>
     </MenuContent>

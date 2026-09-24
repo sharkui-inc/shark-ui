@@ -483,28 +483,32 @@ const getTokenKey = (token: ThemedToken) => {
   return nextTokenKey;
 };
 
-const CodeToken = ({ token }: { token: ThemedToken }) => (
-  <span
-    className={cn(
-      "dark:bg-(--shiki-dark-bg)! dark:text-(--shiki-dark)!",
-      "[font-style:var(--shiki-light-font-style,normal)] dark:[font-style:var(--shiki-dark-font-style,var(--shiki-light-font-style,normal))]",
-      "font-(--shiki-light-font-weight,inherit) dark:font-(--shiki-dark-font-weight,var(--shiki-light-font-weight,inherit))",
-      "[text-decoration:var(--shiki-light-text-decoration,none)] dark:[text-decoration:var(--shiki-dark-text-decoration,var(--shiki-light-text-decoration,none))]"
-    )}
-    style={
-      {
-        backgroundColor: token.bgColor,
-        color: token.color === "inherit" ? undefined : token.color,
-        fontStyle: isItalic(token.fontStyle) ? "italic" : undefined,
-        fontWeight: isBold(token.fontStyle) ? "bold" : undefined,
-        textDecoration: isUnderline(token.fontStyle) ? "underline" : undefined,
-        ...token.htmlStyle,
-      } as React.CSSProperties
-    }
-  >
-    {token.content}
-  </span>
-);
+const CodeToken = (props: { token: ThemedToken }) => {
+  const { token } = props;
+
+  return (
+    <span
+      className={cn(
+        "dark:bg-(--shiki-dark-bg)! dark:text-(--shiki-dark)!",
+        "[font-style:var(--shiki-light-font-style,normal)] dark:[font-style:var(--shiki-dark-font-style,var(--shiki-light-font-style,normal))]",
+        "font-(--shiki-light-font-weight,inherit) dark:font-(--shiki-dark-font-weight,var(--shiki-light-font-weight,inherit))",
+        "[text-decoration:var(--shiki-light-text-decoration,none)] dark:[text-decoration:var(--shiki-dark-text-decoration,var(--shiki-light-text-decoration,none))]"
+      )}
+      style={
+        {
+          backgroundColor: token.bgColor,
+          color: token.color === "inherit" ? undefined : token.color,
+          fontStyle: isItalic(token.fontStyle) ? "italic" : undefined,
+          fontWeight: isBold(token.fontStyle) ? "bold" : undefined,
+          textDecoration: isUnderline(token.fontStyle) ? "underline" : undefined,
+          ...token.htmlStyle,
+        } as React.CSSProperties
+      }
+    >
+      {token.content}
+    </span>
+  );
+};
 
 interface CodeBlockPreProps
   extends Omit<React.ComponentProps<typeof ark.pre>, "children"> {

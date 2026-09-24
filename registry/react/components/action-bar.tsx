@@ -127,6 +127,7 @@ export const ActionBarContent = (props: ActionBarContentProps) => {
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=open]:slide-in-from-bottom-2 data-[state=closed]:slide-out-to-bottom-2",
             "motion-reduce:animate-none",
+            "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
           )}
           data-slot="action-bar-content"

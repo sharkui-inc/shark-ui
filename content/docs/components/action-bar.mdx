@@ -163,7 +163,9 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 ### ActionBar
 
-Root component. Provides open state and positioning to descendants.
+Root component. Provides open state and positioning to descendants. Escape and
+outside interaction do not close the ActionBar, and it does not move focus
+automatically.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -172,7 +174,6 @@ Root component. Provides open state and positioning to descendants.
 | `positioning` | `ActionBarPositioning` | `{ placement: "bottom", gutter: "16px" }` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `closeOnEscape` | `boolean` | `true` |
 | `onOpenChange` | `({ open }: OpenChangeDetails) => void` | - |
 
 ### ActionBarContent

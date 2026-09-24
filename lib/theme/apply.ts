@@ -5,20 +5,20 @@ import {
   PRIMARY_TONES,
 } from "./catalog";
 import {
-  type BaseColor,
-  type BorderRadius,
   createVisualThemeLists,
-  DEFAULT_BASE_COLOR,
-  DEFAULT_BORDER_RADIUS,
   DEFAULT_FONT_HEADING,
   DEFAULT_FONT_SANS,
   DEFAULT_PRIMARY_COLOR,
-  DEFAULT_PRIMARY_TONE,
-  type PrimaryColor,
-  type PrimaryTone,
+  DEFAULT_THEME_CONFIG,
   pickVisualThemeSource,
+  type VisualThemePick,
 } from "./config";
-import { getThemeFont, THEME_FONTS, type ThemeFontName } from "./fonts";
+import {
+  getThemeFont,
+  THEME_FONTS,
+  THEME_FONTS_PREVIEW_CSS_URL,
+  type ThemeFontName,
+} from "./fonts";
 
 const managedThemeClasses = new Set([
   ...BASE_COLORS.map(({ value }) => `bg-${value}`),
@@ -34,12 +34,12 @@ export const hasManagedBodyThemeClass = () =>
   typeof document !== "undefined" &&
   Array.from(document.body.classList).some(isManagedThemeClass);
 
-export const applyBodyThemeClasses = (input: {
-  borderRadius: BorderRadius;
-  baseColor: BaseColor;
-  primaryColor: PrimaryColor;
-  primaryTone: PrimaryTone;
-}) => {
+export const applyBodyThemeClasses = (
+  input: Pick<
+    VisualThemePick,
+    "baseColor" | "borderRadius" | "primaryColor" | "primaryTone"
+  >
+) => {
   if (typeof document === "undefined") {
     return;
   }
@@ -64,26 +64,37 @@ export const applyBodyThemeClasses = (input: {
   body.classList.add(...classes);
 };
 
-const dynamicFontName = (font: ThemeFontName, defaultFont: ThemeFontName) =>
-  font === defaultFont ? null : font;
+export const getDynamicThemeFonts = (
+  input: Pick<VisualThemePick, "fontHeading" | "fontSans">
+) => {
+  const fonts = new Set<ThemeFontName>();
 
-export const getDynamicThemeFonts = (input: {
-  fontHeading: ThemeFontName;
-  fontSans: ThemeFontName;
-}) =>
-  Array.from(
-    new Set(
-      [
-        dynamicFontName(input.fontSans, DEFAULT_FONT_SANS),
-        dynamicFontName(input.fontHeading, DEFAULT_FONT_HEADING),
-      ].filter((font): font is ThemeFontName => font !== null)
-    )
-  );
+  if (input.fontSans !== DEFAULT_FONT_SANS) {
+    fonts.add(input.fontSans);
+  }
 
-export const applyThemeFonts = (input: {
-  fontHeading: ThemeFontName;
-  fontSans: ThemeFontName;
-}) => {
+  if (input.fontHeading !== DEFAULT_FONT_HEADING) {
+    fonts.add(input.fontHeading);
+  }
+
+  return [...fonts];
+};
+
+const ensureActiveFontLink = (name: ThemeFontName, href: string) => {
+  if (document.querySelector(`link[data-shark-theme-font="${name}"]`)) {
+    return;
+  }
+
+  const link = document.createElement("link");
+  link.dataset.sharkThemeFont = name;
+  link.href = href;
+  link.rel = "stylesheet";
+  document.head.appendChild(link);
+};
+
+export const applyThemeFonts = (
+  input: Pick<VisualThemePick, "fontHeading" | "fontSans">
+) => {
   if (typeof document === "undefined") {
     return;
   }
@@ -100,16 +111,7 @@ export const applyThemeFonts = (input: {
   }
 
   for (const name of dynamicFonts) {
-    if (document.querySelector(`link[data-shark-theme-font="${name}"]`)) {
-      continue;
-    }
-
-    const font = getThemeFont(name);
-    const link = document.createElement("link");
-    link.dataset.sharkThemeFont = name;
-    link.href = font.cssUrl;
-    link.rel = "stylesheet";
-    document.head.appendChild(link);
+    ensureActiveFontLink(name, getThemeFont(name).cssUrl);
   }
 
   const html = document.documentElement;
@@ -130,36 +132,28 @@ export const applyThemeFonts = (input: {
   applyVariable("--font-heading", input.fontHeading, DEFAULT_FONT_HEADING);
 };
 
+export const applyThemeVisual = (visual: VisualThemePick) => {
+  applyBodyThemeClasses(visual);
+  applyThemeFonts(visual);
+};
+
 export const loadThemeFontPreviews = () => {
   if (typeof document === "undefined") {
     return;
   }
 
-  for (const font of THEME_FONTS) {
-    if (
-      document.querySelector(
-        `link[data-shark-theme-font-preview="${font.value}"]`
-      )
-    ) {
-      continue;
-    }
-
-    const link = document.createElement("link");
-    link.dataset.sharkThemeFontPreview = font.value;
-    link.href = font.cssUrl;
-    link.rel = "stylesheet";
-    document.head.appendChild(link);
+  if (document.querySelector("link[data-shark-theme-font-preview]")) {
+    return;
   }
+
+  const link = document.createElement("link");
+  link.dataset.sharkThemeFontPreview = "";
+  link.href = THEME_FONTS_PREVIEW_CSS_URL;
+  link.rel = "stylesheet";
+  document.head.appendChild(link);
 };
 
-const visualThemeLists = createVisualThemeLists({
-  baseColor: DEFAULT_BASE_COLOR,
-  borderRadius: DEFAULT_BORDER_RADIUS,
-  fontHeading: DEFAULT_FONT_HEADING,
-  fontSans: DEFAULT_FONT_SANS,
-  primaryColor: DEFAULT_PRIMARY_COLOR,
-  primaryTone: DEFAULT_PRIMARY_TONE,
-});
+const visualThemeLists = createVisualThemeLists(DEFAULT_THEME_CONFIG);
 
 const themeBootstrapFonts = Object.fromEntries(
   THEME_FONTS.map(({ cssUrl, family, value }) => [value, { cssUrl, family }])
@@ -176,10 +170,10 @@ export const themeBootstrapScript = `
     if (!stored) return;
 
     const value = JSON.parse(stored);
-    const pick = pickVisualTheme(value, lists);
 
     if (!value || typeof value !== "object" || Array.isArray(value)) return;
 
+    const pick = pickVisualTheme(value, lists);
     const body = document.body;
 
     body.classList.add(

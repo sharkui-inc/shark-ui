@@ -48,6 +48,7 @@ const itemVariants = tv({
     "font-sans text-sm",
     "rounded-xl border",
     "transition-colors duration-[120ms]",
+    "motion-reduce:transition-none",
     "[&:is(a,button)]:hover:bg-muted",
     "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
     "[&>svg:not([class*='size-']):not([class*='h-'])]:size-4 [&>svg]:pointer-events-none [&>svg]:shrink-0",

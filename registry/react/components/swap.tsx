@@ -18,7 +18,10 @@ const swapIndicatorVariants = tv({
     variant: "fade",
   },
   slots: {
-    indicator: "motion-reduce:animate-none",
+    indicator: [
+      "motion-reduce:animate-none",
+      "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+    ],
     root: "",
   },
   variants: {

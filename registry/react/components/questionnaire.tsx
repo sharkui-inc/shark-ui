@@ -126,6 +126,15 @@ const EMPTY_ANSWER: QuestionnaireAnswer = { input: "", values: [] };
 const hasAnswer = (answer: QuestionnaireAnswer | undefined) =>
   Boolean(answer?.input.trim() || answer?.values.some((value) => value.trim()));
 
+const getAnswerFormValues = (answer: QuestionnaireAnswer) => {
+  const input = answer.input.trim();
+
+  return [
+    ...(input ? [input] : []),
+    ...answer.values.filter((value) => value.trim()),
+  ];
+};
+
 const getDescribedBy = (...ids: (false | string | undefined)[]) => {
   const value = ids.filter(Boolean).join(" ");
   return value || undefined;
@@ -656,35 +665,20 @@ export const Questionnaire = (props: QuestionnaireProps) => {
         ref={setFormRef}
         tabIndex={-1}
       >
-        {items.map((definition) => {
+        {items.flatMap((definition) => {
           if (definition.name === activeItem?.name) {
-            return null;
+            return [];
           }
 
           const answer = value[definition.name] ?? EMPTY_ANSWER;
-          const freeform = answer.input.trim();
-
-          if (freeform) {
-            return (
-              <input
-                key={definition.name}
-                name={definition.name}
-                type="hidden"
-                value={freeform}
-              />
-            );
-          }
-
-          return answer.values
-            .filter((entry) => entry.trim())
-            .map((entry) => (
-              <input
-                key={`${definition.name}:${entry}`}
-                name={definition.name}
-                type="hidden"
-                value={entry}
-              />
-            ));
+          return getAnswerFormValues(answer).map((formValue, index) => (
+            <input
+              key={`${definition.name}:${index}`}
+              name={definition.name}
+              type="hidden"
+              value={formValue}
+            />
+          ));
         })}
         {children}
       </ark.form>

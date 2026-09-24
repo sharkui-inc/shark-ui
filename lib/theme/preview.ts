@@ -1,5 +1,9 @@
 import { atom } from "jotai";
-import type { VisualThemePick } from "./config";
+import {
+  pickVisualThemeFields,
+  VISUAL_THEME_KEYS,
+  type VisualThemePick,
+} from "./config";
 
 export type ThemeVisual = VisualThemePick;
 export type ThemePreviewPatch = Partial<ThemeVisual>;
@@ -24,14 +28,7 @@ export const canPointerPreview = () =>
 export const isEmbeddedThemeFrame = () =>
   typeof window !== "undefined" && window.parent !== window;
 
-export const toThemeVisual = (source: ThemeVisual): ThemeVisual => ({
-  baseColor: source.baseColor,
-  borderRadius: source.borderRadius,
-  fontHeading: source.fontHeading,
-  fontSans: source.fontSans,
-  primaryColor: source.primaryColor,
-  primaryTone: source.primaryTone,
-});
+export const toThemeVisual = pickVisualThemeFields;
 
 export const mergeThemeVisual = (
   committed: ThemeVisual,
@@ -48,14 +45,7 @@ const isThemeVisual = (value: unknown): value is ThemeVisual => {
 
   const record = value as Record<string, unknown>;
 
-  return (
-    typeof record.baseColor === "string" &&
-    typeof record.borderRadius === "string" &&
-    typeof record.fontHeading === "string" &&
-    typeof record.fontSans === "string" &&
-    typeof record.primaryColor === "string" &&
-    typeof record.primaryTone === "string"
-  );
+  return VISUAL_THEME_KEYS.every((key) => typeof record[key] === "string");
 };
 
 export const isThemeVisualMessage = (

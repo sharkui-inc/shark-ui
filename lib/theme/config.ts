@@ -13,8 +13,7 @@ import {
 import {
   DEFAULT_FONT_HEADING as DEFAULT_THEME_FONT_HEADING,
   DEFAULT_FONT_SANS as DEFAULT_THEME_FONT_SANS,
-  THEME_FONTS_HEADING,
-  THEME_FONTS_SANS,
+  THEME_FONTS,
   type ThemeFont,
   type ThemeFontName,
   type ThemeFontSlot,
@@ -70,14 +69,32 @@ export const DEFAULT_THEME_CONFIG: ThemeConfig = {
   themeLocks: DEFAULT_THEME_LOCKS,
 };
 
-export interface VisualThemePick {
-  baseColor: BaseColor;
-  borderRadius: BorderRadius;
-  fontHeading: ThemeFontName;
-  fontSans: ThemeFontName;
-  primaryColor: PrimaryColor;
-  primaryTone: PrimaryTone;
-}
+export type VisualThemePick = Omit<ThemeConfig, "themeLocks">;
+
+export const VISUAL_THEME_KEYS = [
+  "baseColor",
+  "borderRadius",
+  "fontHeading",
+  "fontSans",
+  "primaryColor",
+  "primaryTone",
+] as const satisfies readonly (keyof VisualThemePick)[];
+
+export const pickVisualThemeFields = (
+  source: VisualThemePick
+): VisualThemePick => ({
+  baseColor: source.baseColor,
+  borderRadius: source.borderRadius,
+  fontHeading: source.fontHeading,
+  fontSans: source.fontSans,
+  primaryColor: source.primaryColor,
+  primaryTone: source.primaryTone,
+});
+
+export const visualThemeEquals = (
+  left: VisualThemePick,
+  right: VisualThemePick
+) => VISUAL_THEME_KEYS.every((key) => left[key] === right[key]);
 
 export interface VisualThemeLists {
   baseColors: readonly string[];
@@ -93,17 +110,21 @@ export interface VisualThemeLists {
 
 export const createVisualThemeLists = (
   defaultConfig: VisualThemePick
-): VisualThemeLists => ({
-  baseColors: BASE_COLORS.map(({ value }) => value),
-  borderRadii: BORDER_RADIUS.map(({ value }) => value),
-  defaultConfig,
-  fontSlots: {
-    heading: THEME_FONTS_HEADING.map(({ value }) => value),
-    sans: THEME_FONTS_SANS.map(({ value }) => value),
-  },
-  primaryColors: PRIMARY_COLORS.map(({ value }) => value),
-  primaryTones: PRIMARY_TONES.map(({ value }) => value),
-});
+): VisualThemeLists => {
+  const fontValues = THEME_FONTS.map(({ value }) => value);
+
+  return {
+    baseColors: BASE_COLORS.map(({ value }) => value),
+    borderRadii: BORDER_RADIUS.map(({ value }) => value),
+    defaultConfig,
+    fontSlots: {
+      heading: fontValues,
+      sans: fontValues,
+    },
+    primaryColors: PRIMARY_COLORS.map(({ value }) => value),
+    primaryTones: PRIMARY_TONES.map(({ value }) => value),
+  };
+};
 
 export const pickVisualThemeSource = `function pickVisualTheme(value, lists) {
   const defaults = lists.defaultConfig;
@@ -184,14 +205,7 @@ export const normalizeThemeConfig = (
 
   const pick = pickVisualTheme(
     value,
-    createVisualThemeLists({
-      baseColor: fallback.baseColor,
-      borderRadius: fallback.borderRadius,
-      fontHeading: fallback.fontHeading,
-      fontSans: fallback.fontSans,
-      primaryColor: fallback.primaryColor,
-      primaryTone: fallback.primaryTone,
-    })
+    createVisualThemeLists(pickVisualThemeFields(fallback))
   );
 
   return {
@@ -239,13 +253,13 @@ export const THEME_FONT_SLOTS = {
   heading: {
     ...THEME_FIELDS.fontHeading,
     defaultValue: DEFAULT_FONT_HEADING,
-    fonts: THEME_FONTS_HEADING,
+    fonts: THEME_FONTS,
     lockKey: "fontHeading",
   },
   sans: {
     ...THEME_FIELDS.fontSans,
     defaultValue: DEFAULT_FONT_SANS,
-    fonts: THEME_FONTS_SANS,
+    fonts: THEME_FONTS,
     lockKey: "fontSans",
   },
 } as const satisfies Record<
@@ -267,58 +281,67 @@ export const getThemeLocks = (config: ThemeConfig): ThemeLocks => ({
   ...config.themeLocks,
 });
 
-export const isDefaultThemeConfig = (config: ThemeConfig) =>
-  config.baseColor === DEFAULT_BASE_COLOR &&
-  config.borderRadius === DEFAULT_BORDER_RADIUS &&
-  config.fontHeading === DEFAULT_FONT_HEADING &&
-  config.fontSans === DEFAULT_FONT_SANS &&
-  config.primaryColor === DEFAULT_PRIMARY_COLOR &&
-  config.primaryTone === DEFAULT_PRIMARY_TONE &&
-  Object.entries(DEFAULT_THEME_LOCKS).every(
-    ([key, value]) => getThemeLocks(config)[key as keyof ThemeLocks] === value
+export const isDefaultThemeConfig = (config: ThemeConfig) => {
+  const locks = getThemeLocks(config);
+
+  return (
+    visualThemeEquals(config, DEFAULT_THEME_CONFIG) &&
+    (Object.keys(DEFAULT_THEME_LOCKS) as ThemeLockKey[]).every(
+      (key) => locks[key] === DEFAULT_THEME_LOCKS[key]
+    )
   );
+};
 
 export const resetThemeConfig = (): ThemeConfig => ({
   ...DEFAULT_THEME_CONFIG,
 });
+
+const unlocked = <T>(locked: boolean, current: T, next: T) =>
+  locked ? current : next;
 
 export const randomizeThemeConfig = (config: ThemeConfig): ThemeConfig => {
   const locks = getThemeLocks(config);
 
   return {
     ...config,
-    baseColor: locks.baseColor
-      ? config.baseColor
-      : pickRandom(BASE_COLORS).value,
-    borderRadius: locks.borderRadius
-      ? config.borderRadius
-      : pickRandom(BORDER_RADIUS).value,
-    fontHeading: locks.fontHeading
-      ? config.fontHeading
-      : pickRandom(THEME_FONTS_HEADING).value,
-    fontSans: locks.fontSans
-      ? config.fontSans
-      : pickRandom(THEME_FONTS_SANS).value,
-    primaryColor: locks.primaryColor
-      ? config.primaryColor
-      : pickRandom(PRIMARY_COLORS).value,
-    primaryTone: locks.primaryTone
-      ? config.primaryTone
-      : pickRandom(["dark", "light"] as const),
+    baseColor: unlocked(
+      locks.baseColor,
+      config.baseColor,
+      pickRandom(BASE_COLORS).value
+    ),
+    borderRadius: unlocked(
+      locks.borderRadius,
+      config.borderRadius,
+      pickRandom(BORDER_RADIUS).value
+    ),
+    fontHeading: unlocked(
+      locks.fontHeading,
+      config.fontHeading,
+      pickRandom(THEME_FONTS).value
+    ),
+    fontSans: unlocked(
+      locks.fontSans,
+      config.fontSans,
+      pickRandom(THEME_FONTS).value
+    ),
+    primaryColor: unlocked(
+      locks.primaryColor,
+      config.primaryColor,
+      pickRandom(PRIMARY_COLORS).value
+    ),
+    primaryTone: unlocked(
+      locks.primaryTone,
+      config.primaryTone,
+      pickRandom(PRIMARY_TONES).value
+    ),
     themeLocks: locks,
   };
 };
 
-export interface ThemePreset {
-  baseColor: BaseColor;
-  borderRadius: BorderRadius;
-  fontHeading: ThemeFontName;
-  fontSans: ThemeFontName;
+export type ThemePreset = VisualThemePick & {
   label: string;
-  primaryColor: PrimaryColor;
-  primaryTone: PrimaryTone;
   swatchClass: string;
-}
+};
 
 export type ThemePresetPatch = VisualThemePick;
 
@@ -418,25 +441,13 @@ export const THEME_PRESETS = [
   },
 ] as const satisfies readonly ThemePreset[];
 
-export const applyThemePreset = (preset: ThemePreset): ThemePresetPatch => ({
-  baseColor: preset.baseColor,
-  borderRadius: preset.borderRadius,
-  fontHeading: preset.fontHeading,
-  fontSans: preset.fontSans,
-  primaryColor: preset.primaryColor,
-  primaryTone: preset.primaryTone,
-});
+export const applyThemePreset = (preset: ThemePreset): ThemePresetPatch =>
+  pickVisualThemeFields(preset);
 
 export const isThemePresetActive = (
   config: ThemePresetPatch,
   preset: ThemePreset
-) =>
-  config.baseColor === preset.baseColor &&
-  config.borderRadius === preset.borderRadius &&
-  config.fontHeading === preset.fontHeading &&
-  config.fontSans === preset.fontSans &&
-  config.primaryColor === preset.primaryColor &&
-  config.primaryTone === preset.primaryTone;
+) => visualThemeEquals(config, preset);
 
 export const getActiveThemePreset = (config: ThemePresetPatch) =>
   THEME_PRESETS.find((preset) => isThemePresetActive(config, preset));

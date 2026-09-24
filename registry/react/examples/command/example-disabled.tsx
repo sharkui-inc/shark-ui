@@ -59,7 +59,7 @@ const initialItems = [
   { group: "Suggestions", label: "Figma", shortcut: "⌘F", value: "figma" },
   { group: "Suggestions", label: "Slack", shortcut: "⌘S", value: "slack" },
   { group: "Settings", label: "Settings", shortcut: "⌘,", value: "settings" },
-  { group: "Settings", label: "Help", shortcut: "⌘?", value: "help" },
+  { group: "Settings", label: "Help", shortcut: "⌘⇧/", value: "help" },
 ];
 
 export default Example;

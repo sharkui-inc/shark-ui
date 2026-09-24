@@ -56,7 +56,7 @@ const initialItems = [
   { group: "Suggestions", label: "YouTube", shortcut: "⌘Y", value: "youtube" },
   { group: "Suggestions", label: "Raycast", shortcut: "⌘R", value: "raycast" },
   { group: "Settings", label: "Settings", shortcut: "⌘,", value: "settings" },
-  { group: "Settings", label: "Help", shortcut: "⌘?", value: "help" },
+  { group: "Settings", label: "Help", shortcut: "⌘⇧/", value: "help" },
   { group: "Settings", label: "About", shortcut: "⌘I", value: "about" },
   { group: "Settings", label: "Feedback", shortcut: "⌘F", value: "feedback" },
   { group: "Settings", label: "Support", shortcut: "⌘S", value: "support" },

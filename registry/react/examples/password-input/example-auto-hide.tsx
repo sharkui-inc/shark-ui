@@ -6,22 +6,24 @@ import { PasswordInput } from "@/registry/react/components/password-input";
 const Example = () => {
   const [visible, setVisible] = React.useState(false);
 
-  const handleVisibilityChange = (nextVisible: boolean) => {
-    setVisible(nextVisible);
-
-    if (visible) {
-      setTimeout(() => {
-        setVisible(false);
-      }, HIDE_DELAY_MS);
+  React.useEffect(() => {
+    if (!visible) {
+      return;
     }
-  };
+
+    const hideTimeoutId = window.setTimeout(() => {
+      setVisible(false);
+    }, HIDE_DELAY_MS);
+
+    return () => {
+      window.clearTimeout(hideTimeoutId);
+    };
+  }, [visible]);
 
   return (
     <PasswordInput
       className="w-full max-w-64"
-      onVisibilityChange={({ visible: nextVisible }) =>
-        handleVisibilityChange(nextVisible)
-      }
+      onVisibilityChange={({ visible: nextVisible }) => setVisible(nextVisible)}
       placeholder="Enter password"
       visible={visible}
     />

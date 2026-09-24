@@ -5,6 +5,7 @@ import type { NextConfig } from "next";
 const withMDX = createMDX();
 
 const config: NextConfig = {
+  allowedDevOrigins: ["192.168.*.*"],
   images: {
     remotePatterns: [
       {

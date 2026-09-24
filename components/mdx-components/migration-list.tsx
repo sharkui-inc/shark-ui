@@ -1,6 +1,6 @@
-import { AccessibilityIcon } from "lucide-react";
 import { BaseUIIcon } from "@/components/icons/base-ui";
 import { RadixIcon } from "@/components/icons/radix";
+import { ReactAriaIcon } from "@/components/icons/react-aria";
 import { ShadcnIcon } from "@/components/icons/shadcn";
 import { NavLink } from "@/components/nav-link";
 import {
@@ -46,7 +46,7 @@ const DESIGN_SYSTEMS = [
   },
   {
     href: "/docs/migration/react-aria",
-    icon: <AccessibilityIcon className="size-8" />,
+    icon: <ReactAriaIcon className="size-8" />,
     name: "React Aria",
   },
 ];

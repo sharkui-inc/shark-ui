@@ -111,9 +111,6 @@ export const ButtonVariantsExample = (props: React.ComponentProps<"div">) => (
           </DialogBody>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DialogClose>
-            <DialogClose asChild>
               <Button
                 onClick={() =>
                   toast.success({
@@ -124,6 +121,9 @@ export const ButtonVariantsExample = (props: React.ComponentProps<"div">) => (
               >
                 Save changes
               </Button>
+            </DialogClose>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>

@@ -3,7 +3,6 @@
 import { TerminalIcon } from "lucide-react";
 import React from "react";
 import {
-  formatShadcnCommandDisplay,
   isPackageManager,
   type PackageManagerCommands,
   packageManagerCommandVariants,
@@ -19,6 +18,26 @@ import {
 } from "@/registry/react/components/tabs";
 import { useConfig, useUpdateConfig } from "@/store/config";
 import { CopyButton } from "./copy-button";
+
+const renderCommand = (command: string) => {
+  const parts: React.ReactNode[] = [];
+  const pattern = /shadcn@latest/g;
+  let cursor = 0;
+
+  for (const match of command.matchAll(pattern)) {
+    const start = match.index ?? cursor;
+    parts.push(command.slice(cursor, start), "shadcn");
+    parts.push(
+      <span className="text-[0px]" key={start}>
+        @latest
+      </span>
+    );
+    cursor = start + match[0].length;
+  }
+
+  parts.push(command.slice(cursor));
+  return parts;
+};
 
 interface CodeBlockCommandProps extends React.ComponentProps<"figure"> {
   __npm__?: string;
@@ -102,7 +121,7 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
                   className="relative font-mono text-[.8125rem] leading-none"
                   data-language="bash"
                 >
-                  {formatShadcnCommandDisplay(tabs[manager])}
+                  {renderCommand(tabs[manager])}
                 </code>
               </pre>
             </TabsContent>

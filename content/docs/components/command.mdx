@@ -124,9 +124,29 @@ Control the selected command with `value` and `onValueChange`.
 
 ### Disabled
 
-Use the `disabled` prop to disable the command palette.
+Use the `disabled` prop to disable the entire command palette.
 
 <ComponentPreview componentName="command" fileName="example-disabled" />
+
+### Disabled Item
+
+Set `disabled: true` on an item in the collection to disable a specific command.
+
+<ComponentPreview componentName="command" fileName="example-disabled-item" />
+
+## Variants
+
+### Default
+
+On mobile, the default variant is flush with the screen edge.
+
+<ComponentPreview componentName="command" fileName="example-variant-default" />
+
+### Inset
+
+Use `variant="inset"` to give the command palette an inset from the screen edge.
+
+<ComponentPreview componentName="command" fileName="example-inset" />
 
 ## Examples
 
@@ -134,11 +154,11 @@ Use the `disabled` prop to disable the command palette.
 
 <ComponentPreview componentName="command" fileName="example-dialog" />
 
-### Inset Variant
+### Fill
 
-Use the `variant="inset"` prop to add padding. The command palette appears as a floating card.
+Set `fill` to use the full available mobile viewport for the command dialog.
 
-<ComponentPreview componentName="command" fileName="example-inset" />
+<ComponentPreview componentName="command" fileName="example-fill" />
 
 ### Groups
 
@@ -216,6 +236,7 @@ Container for the command palette inside the dialog.
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg" \| "xl" \| "fullscreen"` | `"lg"` |
 | `variant` | `"default" \| "inset"` | `"default"` |
+| `fill` | `boolean` | `false` |
 | `title` | `string` | `"Command Palette"` |
 | `description` | `string` | `"Search for a command to run..."` |
 | `className` | `string` | - |

@@ -138,6 +138,20 @@ Use `DiffFile` as a child for more control.
 </DiffHeader>
 ```
 
+## Scrollable
+
+### Vertical
+
+Constrain height so the hunk scrolls vertically inside the panel.
+
+<ComponentPreview componentName="diff" fileName="example-scrollable" />
+
+### Horizontal
+
+Long lines overflow and scroll horizontally; the line-number gutter stays sticky.
+
+<ComponentPreview componentName="diff" fileName="example-scrollable-horizontal" />
+
 ## Examples
 
 ### Hunk
@@ -151,18 +165,6 @@ Compose context, delete, and add lines into a unified hunk.
 The gutter shares a minimum width with [Code Block](/docs/ai-components/code-block) and grows with the widest line number, so source and diff views stay aligned.
 
 <ComponentPreview componentName="diff" fileName="example-long-line-numbers" />
-
-### Scrollable (vertical)
-
-Constrain height so the hunk scrolls vertically inside the panel.
-
-<ComponentPreview componentName="diff" fileName="example-scrollable" />
-
-### Scrollable (horizontal)
-
-Long lines overflow and scroll horizontally; the line-number gutter stays sticky.
-
-<ComponentPreview componentName="diff" fileName="example-scrollable-horizontal" />
 
 ### Without header
 

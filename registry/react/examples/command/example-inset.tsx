@@ -45,7 +45,7 @@ const Example = () => {
   return (
     <CommandDialog onOpenChange={onOpenChange} open={open}>
       <CommandDialogTrigger asChild>
-        <Button variant="outline">Open Command Palette</Button>
+        <Button variant="outline">Open Command</Button>
       </CommandDialogTrigger>
       <CommandDialogContent variant="inset">
         <Command

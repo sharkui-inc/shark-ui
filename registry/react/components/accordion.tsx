@@ -104,6 +104,7 @@ export const AccordionContent = (
         "data-[state=open]:animate-accordion-down data-[state=open]:duration-200 data-[state=open]:ease-out",
         "data-[state=closed]:animate-accordion-up data-[state=closed]:duration-200 data-[state=closed]:ease-out",
         "motion-reduce:animate-none",
+        "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
         className
       )}
       data-slot="accordion-content"

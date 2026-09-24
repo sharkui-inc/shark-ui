@@ -6,7 +6,7 @@ import {
   useScrollAreaContext as useArkScrollAreaContext,
 } from "@ark-ui/react/scroll-area";
 import type React from "react";
-import { tv, type VariantProps } from "tailwind-variants";
+import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
 export const useScrollArea = useArkScrollArea;
@@ -15,33 +15,12 @@ export const ScrollAreaRootProvider = ArkScrollArea.RootProvider;
 
 const scrollAreaVariants = tv({
   base: ["h-full", "rounded-[inherit]", "outline-hidden", "scrollbar-none"],
-  defaultVariants: {
-    scrollFade: false,
-  },
-  variants: {
-    overscrollContain: {
-      true: [
-        "has-[>[data-slot=scroll-area-content][data-overflow-y]]:overscroll-y-contain",
-        "has-[>[data-slot=scroll-area-content][data-overflow-x]]:overscroll-x-contain",
-      ],
-    },
-    scrollFade: {
-      true: [
-        "mask-t-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-y-start)))]",
-        "mask-b-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-y-end)))]",
-        "mask-l-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-x-start)))]",
-        "mask-r-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-x-end)))]",
-        "motion-reduce:transition-none",
-      ],
-    },
-  },
 });
 
 type ScrollAreaOrientation = "both" | "horizontal" | "vertical";
 
 interface ScrollAreaProps
-  extends React.ComponentProps<typeof ArkScrollArea.Root>,
-    VariantProps<typeof scrollAreaVariants> {
+  extends React.ComponentProps<typeof ArkScrollArea.Root> {
   /**
    * Whether to prevent the content from expanding the scroll area horizontally.
    *
@@ -72,6 +51,12 @@ interface ScrollAreaProps
    * @default false
    */
   scrollbarGutter?: boolean;
+  /**
+   * Fade the edges where the content can scroll.
+   *
+   * @default false
+   */
+  scrollFade?: boolean;
 }
 
 export const ScrollArea = (props: ScrollAreaProps) => {
@@ -99,15 +84,28 @@ export const ScrollArea = (props: ScrollAreaProps) => {
     >
       <ArkScrollArea.Viewport
         className={cn(
-          scrollAreaVariants({
-            overscrollContain,
-            scrollFade,
-          }),
+          scrollAreaVariants(),
+          overscrollContain &&
+            orientation !== "horizontal" &&
+            "has-[>[data-slot=scroll-area-content][data-overflow-y]]:overscroll-y-contain",
+          overscrollContain &&
+            orientation !== "vertical" &&
+            "has-[>[data-slot=scroll-area-content][data-overflow-x]]:overscroll-x-contain",
+          scrollFade &&
+            orientation !== "horizontal" &&
+            "mask-t-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-y-start)))] mask-b-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-y-end)))]",
+          scrollFade &&
+            orientation !== "vertical" &&
+            "mask-l-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-x-start)))] mask-r-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-x-end)))]",
           scrollbarGutter && orientation !== "horizontal" && "pe-2.5",
           scrollbarGutter && orientation !== "vertical" && "pb-2.5"
         )}
         data-slot="scroll-area-viewport"
-        style={{ maxHeight: "inherit" }}
+        style={{
+          maxHeight: "inherit",
+          overflowX: orientation === "vertical" ? "hidden" : "auto",
+          overflowY: orientation === "horizontal" ? "hidden" : "auto",
+        }}
       >
         <ArkScrollArea.Content
           className={cn(fill && "size-full")}

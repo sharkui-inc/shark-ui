@@ -103,6 +103,7 @@ export const ToastItem = (props: ToastItemProps) => {
         "data-[state=closed]:transition-[translate,scale,opacity]",
         "data-[state=closed]:duration-150 data-[state=closed]:ease-out",
         "motion-reduce:transition-none",
+        "motion-reduce:data-[state=closed]:transition-none",
         className
       )}
       data-slot="toast"

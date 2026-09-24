@@ -257,6 +257,7 @@ export const Sidebar = (props: SidebarProps) => {
           "w-(--sidebar-width)",
           "bg-transparent",
           "transition-[width] duration-200 ease-linear",
+          "motion-reduce:transition-none",
           "group-data-[collapsible=offcanvas]:w-0",
           variant === "floating" || variant === "inset"
             ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]"
@@ -271,6 +272,7 @@ export const Sidebar = (props: SidebarProps) => {
           "hidden md:flex",
           "h-svh",
           "transition-[inset-inline,width] duration-200 ease-linear",
+          "motion-reduce:transition-none",
           placement === "left"
             ? "inset-s-0 group-data-[collapsible=offcanvas]:-inset-s-(--sidebar-width)"
             : "inset-e-0 group-data-[collapsible=offcanvas]:-inset-e-(--sidebar-width)",
@@ -348,6 +350,7 @@ export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
         "[[data-placement=left][data-state=collapsed]_&]:cursor-e-resize [[data-placement=right][data-state=collapsed]_&]:cursor-w-resize",
         "rtl:[[data-placement=left][data-state=collapsed]_&]:cursor-w-resize rtl:[[data-placement=right][data-state=collapsed]_&]:cursor-e-resize",
         "transition-[inset-inline,translate,background-color] duration-200 ease-linear",
+        "motion-reduce:transition-none",
         "group-data-[collapsible=offcanvas]:translate-x-0 hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:after:inset-s-full",
         "[[data-placement=left][data-collapsible=offcanvas]_&]:-inset-e-2",
         "[[data-placement=right][data-collapsible=offcanvas]_&]:-inset-s-2",
@@ -508,6 +511,7 @@ export const SidebarGroupLabel = (
         "font-medium text-sidebar-foreground text-xs",
         "rounded-md",
         "transition-[margin,opacity] duration-200 ease-linear",
+        "motion-reduce:transition-none",
         "[&_svg]:size-4 [&_svg]:shrink-0",
         "group-data-[collapsible=icon]:pointer-events-none group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
         className
@@ -530,6 +534,7 @@ export const SidebarGroupAction = (
         "absolute inset-e-3 top-3.5",
         "text-sidebar-foreground",
         "transition-transform duration-200 ease-linear",
+        "motion-reduce:transition-none",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         "[&_svg]:size-4",
         "after:absolute after:-inset-2 md:after:hidden",
@@ -632,6 +637,7 @@ export const SidebarMenuButton = ({
         "h-8 p-2",
         "overflow-hidden",
         "transition-[width,height,padding] duration-200 ease-linear",
+        "motion-reduce:transition-none",
         "data-[size=sm]:h-7 data-[size=sm]:text-xs",
         "data-[size=lg]:h-12",
         "[&_svg]:mx-0",
@@ -688,6 +694,7 @@ export const SidebarMenuAction = (props: SidebarMenuActionProps) => {
         "absolute inset-e-1 top-1.5",
         "text-sidebar-foreground",
         "transition-transform duration-200 ease-linear",
+        "motion-reduce:transition-none",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         "peer-hover/menu-button:text-sidebar-accent-foreground",
         "after:absolute after:-inset-2 md:after:hidden",

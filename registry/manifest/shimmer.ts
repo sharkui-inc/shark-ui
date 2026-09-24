@@ -53,7 +53,10 @@ const css = {
     "--shimmer-angle": "calc(--value(integer) * 1deg)",
   },
   "@utility shimmer-color-*": {
-    "--shimmer-color": "--value(--color, [color])",
+    "--shimmer-color": [
+      "--value(--color, [color])",
+      "color-mix(in oklch, --value(--color, [color]) calc(--modifier(integer) * 1%), transparent)",
+    ],
   },
   "@utility shimmer-duration-*": {
     "--shimmer-duration": "calc(--value(integer) * 1ms)",

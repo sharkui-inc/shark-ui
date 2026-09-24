@@ -105,9 +105,10 @@ export const MessageBubbleContent = (
       className={cn(
         "wrap-break-word w-fit min-w-0 max-w-full overflow-hidden rounded-xl border border-transparent px-3 py-2 text-sm leading-relaxed",
         "group-data-[align=end]/message-bubble:self-end",
-        "[button,a]:outline-hidden [button,a]:transition-colors [button]:text-start",
-        "[button,a]:focus-visible:border-ring/64 [button,a]:focus-visible:ring-2 [button,a]:focus-visible:ring-ring/24",
-        "group-data-[variant=default]/message-bubble:[button,a]:focus-visible:border-background",
+        "[&_button,&_a]:outline-hidden [&_button,&_a]:transition-colors [&_button]:text-start",
+        "[&_button,&_a]:motion-reduce:transition-none",
+        "[&_button,&_a]:focus-visible:border-ring/64 [&_button,&_a]:focus-visible:ring-2 [&_button,&_a]:focus-visible:ring-ring/24",
+        "group-data-[variant=default]/message-bubble:[&_button,&_a]:focus-visible:border-background",
         className
       )}
       {...rest}

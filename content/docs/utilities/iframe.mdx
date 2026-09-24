@@ -53,15 +53,6 @@ import { Iframe } from "@/components/ui/iframe";
 </Iframe>
 ```
 
-## What goes into the `<Iframe>`
-
-- `children`: rendered into `.frame-root`, or `<body>` if `.frame-root` is missing.
-- `head`: rendered into the iframe `<head>`.
-- `srcDoc`: the iframe's initial HTML. Changing it rewrites the document and remounts `children`.
-- `onMount`: after `children` mount. Inject scripts through `contentDocument`.
-- `onUnmount`: as `children` unmount. Undo `onMount`.
-- Native iframe attributes (`title`, `sandbox`, `allow`, `loading`, `className`, `style`): on the outer `<iframe>`.
-
 ## Examples
 
 ### Injecting script

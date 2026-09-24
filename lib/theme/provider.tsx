@@ -4,7 +4,7 @@ import { useSetAtom } from "jotai";
 import { useAtomValueRawSync } from "jotai/react";
 import React from "react";
 import { useConfig, useUpdateConfig } from "@/store/config";
-import { applyBodyThemeClasses, applyThemeFonts } from "./apply";
+import { applyThemeVisual } from "./apply";
 import {
   applyThemePreset,
   type BaseColor,
@@ -32,18 +32,14 @@ import {
 
 export type { ThemePreviewPatch } from "./preview";
 
-const applyThemeVisual = (visual: ThemeVisual) => {
-  applyBodyThemeClasses({
-    baseColor: visual.baseColor,
-    borderRadius: visual.borderRadius,
-    primaryColor: visual.primaryColor,
-    primaryTone: visual.primaryTone,
-  });
-  applyThemeFonts({
-    fontHeading: visual.fontHeading,
-    fontSans: visual.fontSans,
-  });
-};
+const subscribeNoop = () => () => undefined;
+
+const useHasHydrated = () =>
+  React.useSyncExternalStore<boolean>(
+    subscribeNoop,
+    () => true,
+    () => false
+  );
 
 export const ThemeConfigurationProvider = ({
   children,
@@ -88,11 +84,10 @@ export const ThemeConfigurationProvider = ({
 
     applyThemeVisual(nextVisual);
 
-    if (!embedded) {
+    if (!isEmbeddedThemeFrame()) {
       publishThemeVisual(nextVisual);
     }
   }, [
-    embedded,
     baseColor,
     borderRadius,
     fontHeading,
@@ -109,126 +104,75 @@ export const useThemeCustomization = () => {
   const updateConfig = useUpdateConfig();
   const setPreview = useSetAtom(themePreviewAtom);
   const previewTimeoutRef = React.useRef<number | undefined>(undefined);
-  const [hasHydrated, setHasHydrated] = React.useState(false);
+  const hasHydrated = useHasHydrated();
   const isDefault = hasHydrated && isDefaultThemeConfig(config);
   const locks = getThemeLocks(config);
 
-  React.useEffect(() => {
-    setHasHydrated(true);
-  }, []);
+  const clearPreviewTimeout = () => {
+    window.clearTimeout(previewTimeoutRef.current);
+    previewTimeoutRef.current = undefined;
+  };
 
   React.useEffect(
     () => () => {
-      if (previewTimeoutRef.current !== undefined) {
-        window.clearTimeout(previewTimeoutRef.current);
-      }
+      window.clearTimeout(previewTimeoutRef.current);
     },
     []
   );
 
-  const clearThemePreview = React.useCallback(() => {
-    if (previewTimeoutRef.current !== undefined) {
-      window.clearTimeout(previewTimeoutRef.current);
-      previewTimeoutRef.current = undefined;
-    }
-
+  const clearThemePreview = () => {
+    clearPreviewTimeout();
     setPreview(null);
-  }, [setPreview]);
+  };
 
-  const previewTheme = React.useCallback(
-    (patch: ThemePreviewPatch) => {
-      if (previewTimeoutRef.current !== undefined) {
-        window.clearTimeout(previewTimeoutRef.current);
-      }
+  const previewTheme = (patch: ThemePreviewPatch) => {
+    clearPreviewTimeout();
+    previewTimeoutRef.current = window.setTimeout(() => {
+      previewTimeoutRef.current = undefined;
+      setPreview(patch);
+    }, PREVIEW_OVERRIDE_DEBOUNCE_MS);
+  };
 
-      previewTimeoutRef.current = window.setTimeout(() => {
-        previewTimeoutRef.current = undefined;
-        setPreview(patch);
-      }, PREVIEW_OVERRIDE_DEBOUNCE_MS);
-    },
-    [setPreview]
-  );
+  const commitConfig = (update: Parameters<typeof updateConfig>[0]) => {
+    clearThemePreview();
+    updateConfig(update);
+  };
 
-  const commitConfig = React.useCallback(
-    (update: Parameters<typeof updateConfig>[0]) => {
-      clearThemePreview();
-      updateConfig(update);
-    },
-    [clearThemePreview, updateConfig]
-  );
+  const setBaseColor = (baseColor: BaseColor) => commitConfig({ baseColor });
 
-  const setBaseColor = React.useCallback(
-    (baseColor: BaseColor) => {
-      commitConfig({ baseColor });
-    },
-    [commitConfig]
-  );
+  const setPrimaryColor = (primaryColor: PrimaryColor) =>
+    commitConfig({ primaryColor });
 
-  const setPrimaryColor = React.useCallback(
-    (primaryColor: PrimaryColor) => {
-      commitConfig({ primaryColor });
-    },
-    [commitConfig]
-  );
+  const setPrimaryTone = (primaryTone: PrimaryTone) =>
+    commitConfig({ primaryTone });
 
-  const setPrimaryTone = React.useCallback(
-    (primaryTone: PrimaryTone) => {
-      commitConfig({ primaryTone });
-    },
-    [commitConfig]
-  );
+  const setFontSans = (fontSans: ThemeFontName) => commitConfig({ fontSans });
 
-  const setFontSans = React.useCallback(
-    (fontSans: ThemeFontName) => {
-      commitConfig({ fontSans });
-    },
-    [commitConfig]
-  );
+  const setFontHeading = (fontHeading: ThemeFontName) =>
+    commitConfig({ fontHeading });
 
-  const setFontHeading = React.useCallback(
-    (fontHeading: ThemeFontName) => {
-      commitConfig({ fontHeading });
-    },
-    [commitConfig]
-  );
+  const setBorderRadius = (borderRadius: BorderRadius) =>
+    commitConfig({ borderRadius });
 
-  const setBorderRadius = React.useCallback(
-    (borderRadius: BorderRadius) => {
-      commitConfig({ borderRadius });
-    },
-    [commitConfig]
-  );
+  const applyPreset = (preset: ThemePreset) =>
+    commitConfig(applyThemePreset(preset));
 
-  const applyPreset = React.useCallback(
-    (preset: ThemePreset) => {
-      commitConfig(applyThemePreset(preset));
-    },
-    [commitConfig]
-  );
+  const randomize = () => commitConfig(randomizeThemeConfig);
 
-  const randomize = React.useCallback(() => {
-    commitConfig(randomizeThemeConfig);
-  }, [commitConfig]);
+  const reset = () => commitConfig(resetThemeConfig);
 
-  const reset = React.useCallback(() => {
-    commitConfig(resetThemeConfig);
-  }, [commitConfig]);
+  const toggleLock = (lockKey: ThemeLockKey) => {
+    updateConfig((currentConfig) => {
+      const themeLocks = getThemeLocks(currentConfig);
 
-  const toggleLock = React.useCallback(
-    (lockKey: ThemeLockKey) => {
-      updateConfig((currentConfig) => {
-        const themeLocks = getThemeLocks(currentConfig);
-
-        return {
-          themeLocks: {
-            ...themeLocks,
-            [lockKey]: !themeLocks[lockKey],
-          },
-        };
-      });
-    },
-    [updateConfig]
-  );
+      return {
+        themeLocks: {
+          ...themeLocks,
+          [lockKey]: !themeLocks[lockKey],
+        },
+      };
+    });
+  };
 
   return {
     applyPreset,

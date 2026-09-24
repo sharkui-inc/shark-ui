@@ -10,11 +10,7 @@ import {
   DEFAULT_FONT_SANS,
   getThemeFont,
   isThemeFontName,
-  isThemeHeadingFontName,
-  isThemeSansFontName,
   THEME_FONTS,
-  THEME_FONTS_HEADING,
-  THEME_FONTS_SANS,
 } from "@/lib/theme/fonts";
 
 describe("theme fonts", () => {
@@ -23,22 +19,38 @@ describe("theme fonts", () => {
     assert.equal(DEFAULT_FONT_HEADING, "figtree");
   });
 
-  it("assigns fonts to role-specific slots", () => {
-    assert.equal(THEME_FONTS_SANS.length, 18);
-    assert.equal(THEME_FONTS_HEADING.length, 21);
+  it("exposes one catalog for heading and sans", () => {
+    assert.equal(THEME_FONTS.length, 23);
     assert.ok(isThemeFontName("inter"));
-    assert.ok(isThemeSansFontName("inter"));
-    assert.ok(isThemeHeadingFontName("newsreader"));
-    assert.ok(isThemeSansFontName("ibm-plex-mono"));
-    assert.ok(isThemeHeadingFontName("ibm-plex-mono"));
-    assert.ok(isThemeSansFontName("jetbrains-mono"));
-    assert.ok(isThemeHeadingFontName("geist-mono"));
-    assert.equal(isThemeSansFontName("fraunces"), false);
-    assert.equal(isThemeHeadingFontName("public-sans"), false);
+    assert.ok(isThemeFontName("newsreader"));
+    assert.ok(isThemeFontName("ibm-plex-mono"));
+    assert.ok(isThemeFontName("public-sans"));
+    assert.ok(isThemeFontName("fraunces"));
     assert.equal(isThemeFontName("fredoka"), false);
     assert.equal(isThemeFontName("instrument-serif"), false);
     assert.equal(isThemeFontName("playfair-display"), false);
     assert.equal(isThemeFontName("not-a-font"), false);
+    assert.equal(getThemeFont("inter").label, "Inter");
+    assert.equal(getThemeFont("inter").family, "'Inter', sans-serif");
+  });
+
+  it("builds bare Google CSS URLs unless axes are set", () => {
+    assert.equal(
+      getThemeFont("ibm-plex-sans").cssUrl,
+      "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap"
+    );
+    assert.equal(
+      getThemeFont("source-sans-3").cssUrl,
+      "https://fonts.googleapis.com/css2?family=Source+Sans+3&display=swap"
+    );
+    assert.equal(
+      getThemeFont("lora").cssUrl,
+      "https://fonts.googleapis.com/css2?family=Lora&display=swap"
+    );
+    assert.match(
+      getThemeFont("newsreader").cssUrl,
+      /family=Newsreader:ital,opsz,wght@/
+    );
   });
 
   it("only requests selected non-default fonts once", () => {
@@ -56,7 +68,6 @@ describe("theme fonts", () => {
       }),
       []
     );
-    assert.equal(getThemeFont("inter").label, "Inter");
   });
 
   it("adds only active font stylesheets and removes stale ones", () => {
@@ -93,12 +104,13 @@ describe("theme fonts", () => {
     );
   });
 
-  it("loads preview stylesheets that survive active font cleanup", () => {
+  it("loads a single preview stylesheet that survives active font cleanup", () => {
+    loadThemeFontPreviews();
     loadThemeFontPreviews();
 
     assert.equal(
       document.querySelectorAll("link[data-shark-theme-font-preview]").length,
-      THEME_FONTS.length
+      1
     );
 
     applyThemeFonts({
@@ -112,7 +124,7 @@ describe("theme fonts", () => {
 
     assert.equal(
       document.querySelectorAll("link[data-shark-theme-font-preview]").length,
-      THEME_FONTS.length
+      1
     );
     assert.equal(
       document.querySelectorAll("link[data-shark-theme-font]").length,

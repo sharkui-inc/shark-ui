@@ -124,12 +124,12 @@ export const LoginFormExample = (props: React.ComponentProps<"div">) => {
                 </FieldGroup>
               </DialogBody>
               <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant="outline">Cancel</Button>
-                </DialogClose>
                 <Button isLoading={isCreating} type="submit">
                   Create account
                 </Button>
+                <DialogClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DialogClose>
               </DialogFooter>
             </form>
           </DialogContent>

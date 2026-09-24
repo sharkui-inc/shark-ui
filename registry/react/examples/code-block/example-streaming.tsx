@@ -1,6 +1,8 @@
 "use client";
 
+import { RefreshCwIcon } from "lucide-react";
 import React from "react";
+import { Button } from "@/registry/react/components/button";
 import {
   CodeBlock,
   CodeBlockActions,
@@ -9,10 +11,10 @@ import {
   CodeBlockHeader,
 } from "@/registry/react/components/code-block";
 
+const initialLength = () => STREAMED_CODE.indexOf("\n") + 1;
+
 const Example = () => {
-  const [length, setLength] = React.useState(
-    () => STREAMED_CODE.indexOf("\n") + 1
-  );
+  const [length, setLength] = React.useState(initialLength);
   const isStreaming = length < STREAMED_CODE.length;
   const code = STREAMED_CODE.slice(0, length);
 
@@ -25,24 +27,44 @@ const Example = () => {
   }, []);
 
   return (
-    <CodeBlock
-      className="h-48 w-full max-w-lg"
-      code={code}
-      isStreaming={isStreaming}
-      language="tsx"
-    >
-      <CodeBlockHeader title="generated.tsx">
-        <CodeBlockActions>
-          <CodeBlockCopy />
-        </CodeBlockActions>
-      </CodeBlockHeader>
-      <CodeBlockContent showLineNumbers />
-    </CodeBlock>
+    <div className="relative flex size-full items-center justify-center">
+      <div className="absolute inset-e-4 top-4">
+        <Button
+          aria-label="Reload"
+          size="icon-md"
+          variant="ghost"
+          onClick={() => setLength(initialLength())}
+        >
+          <RefreshCwIcon aria-hidden />
+        </Button>
+      </div>
+
+      <CodeBlock
+        className="w-full max-w-lg"
+        code={code}
+        isStreaming={isStreaming}
+        language="tsx"
+      >
+        <CodeBlockHeader title="generated.tsx">
+          <CodeBlockActions>
+            <CodeBlockCopy />
+          </CodeBlockActions>
+        </CodeBlockHeader>
+        <CodeBlockContent showLineNumbers />
+      </CodeBlock>
+    </div>
   );
 };
 
-const STREAMED_CODE = `export function Greeting({ name }: { name: string }) {
-  return <p>Hello, {name}!</p>;
+const STREAMED_CODE = `export function Greeting({ name }) {
+  return (
+    <section>
+      <h1>Welcome back</h1>
+      <p>
+        Hello, <strong>{name}</strong>! Your workspace is ready.
+      </p>
+    </section>
+  );
 }`;
 
 export default Example;

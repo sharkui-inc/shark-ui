@@ -20,6 +20,7 @@ export const attachmentVariants = tv({
     "bg-card text-card-foreground",
     "rounded-xl border border-input shadow-xs/4",
     "transition-colors",
+    "motion-reduce:transition-none",
     "has-[>a,>button]:hover:bg-muted/48",
     "data-[state=idle]:border-dashed",
     "data-[state=error]:border-destructive/64 dark:data-[state=error]:border-destructive-foreground/64",

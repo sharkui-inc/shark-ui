@@ -150,12 +150,12 @@ export const FileActionsExample = (props: React.ComponentProps<"div">) => {
               </FieldGroup>
             </DialogBody>
             <DialogFooter>
-              <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DialogClose>
               <Button isLoading={isSaving} type="submit">
                 {dialog === "new" ? "Create" : "Save"}
               </Button>
+              <DialogClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DialogClose>
             </DialogFooter>
           </form>
         </DialogContent>

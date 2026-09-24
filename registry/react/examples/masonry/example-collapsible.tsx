@@ -17,7 +17,7 @@ import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 const Example = () => (
   <ScrollArea
-    className="h-[min(32rem,70vh)] w-full min-w-0 rounded-xl border"
+    className="h-[min(32rem,70vh)] min-w-0 rounded-xl border"
     orientation="vertical"
     scrollFade
   >

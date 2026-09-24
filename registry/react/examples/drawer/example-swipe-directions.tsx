@@ -35,7 +35,9 @@ const DeliveryDrawer = (props: {
   trigger: string;
 }) => {
   const { swipeDirection, trigger } = props;
+
   const isSide = swipeDirection === "start" || swipeDirection === "end";
+
   const footerActions = (
     <>
       <DrawerClose asChild>

@@ -52,7 +52,8 @@ export const ThemeSelectorPopoverGrid = (
   const contentRef = React.useRef<HTMLDivElement | null>(null);
   const preview = useThemeHighlightPreview(onPreview);
 
-  const handleOpenChange = ({ open }: { open: boolean }) => {
+  const handleOpenChange = (details: { open: boolean }) => {
+    const { open } = details;
     if (open) {
       setHighlightedValue(value);
     } else {

@@ -71,7 +71,8 @@ export const Context = (props: ContextProps) => {
   );
 };
 
-export const ContextIcon = ({ className }: { className?: string }) => {
+export const ContextIcon = (props: { className?: string }) => {
+  const { className } = props;
   const { usedPercent } = _useContextValue();
 
   return (

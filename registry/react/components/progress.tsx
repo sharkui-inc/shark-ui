@@ -94,7 +94,6 @@ export const ProgressRange = (
         "transition-none",
         "data-[orientation=horizontal]:h-full",
         "data-[orientation=vertical]:h-full",
-        "motion-reduce:data-[state=indeterminate]:animate-none",
         "data-[state=indeterminate]:w-1/3 data-[state=indeterminate]:animate-indeterminate",
         className
       )}

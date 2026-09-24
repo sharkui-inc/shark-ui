@@ -65,13 +65,13 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 ### Vertical Scroll
 
-Set `orientation="vertical"` to allow vertical scrolling only.
+Set `orientation="vertical"` to limit scrolling to the vertical axis.
 
 <ComponentPreview componentName="scroll-area" fileName="example-vertical" />
 
 ### Horizontal Scroll
 
-Set `orientation="horizontal"` for horizontal scrolling.
+Set `orientation="horizontal"` to limit scrolling to the horizontal axis.
 
 <ComponentPreview componentName="scroll-area" fileName="example-horizontal" />
 
@@ -92,6 +92,26 @@ Use `scrollFade` to fade edges on overflowing axes, only toward the scrollable s
 ### Scrollbar Gutter
 
 Use `scrollbarGutter` to reserve scrollbar track space.
+
+<ComponentPreview componentName="scroll-area" fileName="example-scrollbar-gutter" />
+
+### Wide Content
+
+Use `clampContentMinWidth` to keep wide content from expanding its scroll area.
+
+<ComponentPreview componentName="scroll-area" fileName="example-clamp-content-min-width" />
+
+### Fill Area
+
+Use `fill` to make the content fill the available scroll area.
+
+<ComponentPreview componentName="scroll-area" fileName="example-fill" />
+
+### Nested Scrolling
+
+Use `overscrollContain` to keep scrolling inside a nested scroll area at its edges.
+
+<ComponentPreview componentName="scroll-area" fileName="example-overscroll-contain" />
 
 ### Hide Thumb
 

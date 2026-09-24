@@ -38,6 +38,7 @@ export const JsonTreeView = (props: JsonTreeViewProps) => {
         "[&_:is([data-part=branch-control],[data-part=item])]:rounded-md [&_:is([data-part=branch-control],[data-part=item])]:border [&_:is([data-part=branch-control],[data-part=item])]:border-transparent",
         "[&_:is([data-part=branch-control],[data-part=item])]:outline-hidden",
         "[&_:is([data-part=branch-control],[data-part=item])]:transition-colors [&_:is([data-part=branch-control],[data-part=item])]:duration-150 [&_:is([data-part=branch-control],[data-part=item])]:ease-out",
+        "[&_:is([data-part=branch-control],[data-part=item])]:motion-reduce:transition-none",
         "[&_:is([data-part=branch-control],[data-part=item])]:hover:bg-accent [&_:is([data-part=branch-control],[data-part=item])]:hover:text-foreground",
         "[&_:is([data-part=branch-control],[data-part=item])]:focus-visible:border-ring/64 [&_:is([data-part=branch-control],[data-part=item])]:focus-visible:ring-2 [&_:is([data-part=branch-control],[data-part=item])]:focus-visible:ring-ring/24",
         "[&_:is([data-part=branch-control],[data-part=item])]:data-focus:bg-accent [&_:is([data-part=branch-control],[data-part=item])]:data-focus:text-foreground",

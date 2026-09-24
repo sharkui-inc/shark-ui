@@ -94,6 +94,7 @@ export const PopoverContent = (props: PopoverContentProps) => {
             "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
             "data-[state=closed]:animate-out data-[state=open]:animate-in",
             "motion-reduce:animate-none",
+            "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
           )}
           data-slot="popover-content"
@@ -188,7 +189,7 @@ export const PopoverBody = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
 
   return (
-    <ScrollArea className="min-h-0 min-w-0 flex-1" overscrollContain scrollFade>
+    <ScrollArea className="min-w-0 flex-1" overscrollContain scrollFade>
       <ark.div
         className={cn(
           "p-(--space)",

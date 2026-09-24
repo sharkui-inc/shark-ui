@@ -28,7 +28,7 @@ Conflict order: explicit user or system instructions → `biome.json` → this f
 - Local via Tailwind + `tw-animate-css`. Press `duration-[120ms] ease-out`; controls/anchored overlays `duration-150 ease-out`; dialogs/sheets `duration-200 ease-out`; Ark geometry `duration-150 ease-in-out`.
 - No duration/easing/animation/keyframe tokens in `styles/globals.css` — compose in the owning component.
 - Ark-positioned overlays: `origin-(--transform-origin)`, 98% scale, fade, placement-aware travel, local overlay classes. Centered dialogs / coordinate-positioned panels: `origin-center`. Ban `scale(0)`, `ease-in`, `ease-linear`, `transition-all`, arbitrary easing — except Drawer (`drawer.tsx`) and Sidebar geometry (`sidebar.tsx`).
-- Overlays: `motion-reduce:animate-none`; add `motion-reduce:transition-none` when using CSS `transition-*`. Continuous non-overlay motion (spinners, skeleton, indeterminate progress): `motion-reduce:animate-none`. Gate hover transforms with `(hover: hover)` and `(pointer: fine)`.
+- Overlays: disable animations with `motion-reduce:animate-none` and CSS transitions with `motion-reduce:transition-none`. When an animation or transition is qualified by a state selector such as `data-[state=open]:`, repeat that state selector under `motion-reduce:` (for example, `motion-reduce:data-[state=open]:animate-none`) so the reduced-motion rule has enough specificity; class-string order alone does not guarantee it wins. Drawer (`drawer.tsx`) disables open/close animations and transitions under reduced motion while keeping direct swipe tracking responsive. Continuous non-overlay motion (spinners, marquees, and progress indicators) remains animated when reduced motion is enabled. Gate hover transforms with `(hover: hover)` and `(pointer: fine)`.
 
 ## Class lists
 
@@ -62,6 +62,7 @@ className={cn(
   "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
   "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
   "motion-reduce:animate-none motion-reduce:transition-none",
+  "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
   className
 )}
 ```

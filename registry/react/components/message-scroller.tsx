@@ -47,7 +47,7 @@ export const MessageScrollerViewport = (
         "data-overflow-y:not-data-at-bottom:mask-b-from-[calc(100%-var(--fade-size))]",
         "data-overflow-x:not-data-at-left:mask-l-from-[calc(100%-var(--fade-size))]",
         "data-overflow-x:not-data-at-right:mask-r-from-[calc(100%-var(--fade-size))]",
-        "motion-reduce:transition-none",
+        "motion-reduce:scroll-auto",
         className
       )}
       data-slot="message-scroller-viewport"
@@ -117,6 +117,7 @@ export const MessageScrollerButton = (props: MessageScrollerButtonProps) => {
       className={cn(
         "absolute inset-s-1/2 -translate-x-1/2 border-border bg-background text-foreground rtl:translate-x-1/2",
         "transition-[translate,scale,opacity] duration-150 ease-out",
+        "motion-reduce:transition-none",
         "hover:bg-muted hover:text-foreground",
         "data-[active=false]:pointer-events-none data-[active=false]:scale-95 data-[active=false]:opacity-0",
         "data-[active=true]:translate-y-0 data-[active=true]:scale-100 data-[active=true]:opacity-100",
@@ -139,7 +140,9 @@ export const MessageScrollerButton = (props: MessageScrollerButtonProps) => {
         }
 
         scrollArea.scrollToEdge({
-          behavior: "smooth",
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
           edge: direction === "end" ? "bottom" : "top",
         });
       }}

@@ -34,7 +34,8 @@ const collections = {
   }),
 };
 
-export const ThemeSelectorFont = ({ slot }: { slot: ThemeFontSlot }) => {
+export const ThemeSelectorFont = (props: { slot: ThemeFontSlot }) => {
+  const { slot } = props;
   const {
     clearThemePreview,
     config,

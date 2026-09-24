@@ -75,7 +75,7 @@ const MenuRtl = () => {
           </MenuSub>
           <MenuItem value="new-team">
             فريق جديد
-            <MenuShortcut>⌘+T</MenuShortcut>
+            <MenuShortcut>⌘T</MenuShortcut>
           </MenuItem>
         </MenuGroup>
         <MenuSeparator />

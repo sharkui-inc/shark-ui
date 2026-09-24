@@ -182,7 +182,7 @@ const initialItems = [
     group: "View",
     icon: <ZoomInIcon aria-hidden />,
     label: "Zoom In",
-    shortcut: "⌘+",
+    shortcut: "⌘=",
     value: "zoom-in",
   },
   {

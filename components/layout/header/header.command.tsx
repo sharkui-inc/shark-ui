@@ -233,7 +233,7 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
           </KbdGroup>
         </Button>
       </CommandDialogTrigger>
-      <CommandDialogContent>
+      <CommandDialogContent variant="inset">
         <Command
           collection={collection}
           onHighlightChange={(details) => {

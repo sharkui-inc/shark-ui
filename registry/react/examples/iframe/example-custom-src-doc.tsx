@@ -6,22 +6,30 @@ const srcDoc = `<html><head>
 </head><body style='overflow: hidden'><div></div></body></html>`;
 
 const Example = () => (
-  <Iframe
-    srcDoc={srcDoc}
-    style={{ border: "1px solid #ccc", maxWidth: "800px", width: "100%" }}
-    title="Custom iframe"
-  >
-    <h1 style={{ fontFamily: "'Hanken Grotesk', sans-serif" }}>
-      Hello from inside the iframe!
-    </h1>
-    <p>
-      This content is rendered within our custom iframe component using a
-      Portal.
-    </p>
-    <p>
-      The iframe has custom initial content, including the Hanken Grotesk font.
-    </p>
-  </Iframe>
+  <div className="mx-auto max-w-4xl">
+    <Iframe
+      className="rounded-lg"
+      srcDoc={srcDoc}
+      style={{
+        border: "1px solid #ccc",
+        height: "var(--height)",
+        width: "100%",
+      }}
+      title="Custom iframe"
+    >
+      <h1 style={{ fontFamily: "'Hanken Grotesk', sans-serif" }}>
+        Hello from inside the iframe!
+      </h1>
+      <p>
+        This content is rendered within our custom iframe component using a
+        Portal.
+      </p>
+      <p>
+        The iframe has custom initial content, including the Hanken Grotesk
+        font.
+      </p>
+    </Iframe>
+  </div>
 );
 
 export default Example;

@@ -96,7 +96,7 @@ export const TourOverlay = (
 export const tourPositionerVariants = tv({
   base: [
     "z-[calc(var(--tour-layer)+50+var(--layer-index,0))]",
-    "data-[type=dialog]:fixed data-[type=dialog]:inset-0",
+    "data-[type=dialog]:fixed data-[type=dialog]:inset-0 data-[type=dialog]:p-4",
     "data-[type=tooltip]:absolute",
     "data-[type=tooltip]:max-w-[calc(100dvw-1rem)] data-[type=tooltip]:max-sm:min-w-0!",
     "data-[type=floating]:fixed",
@@ -107,7 +107,7 @@ export const tourPositionerVariants = tv({
     "data-[type=floating]:w-[min(28rem,calc(100vw-3rem))]",
   ],
   defaultVariants: {
-    bottomStickOnMobile: true,
+    bottomStickOnMobile: false,
   },
   variants: {
     bottomStickOnMobile: {
@@ -117,7 +117,7 @@ export const tourPositionerVariants = tv({
       true: [
         "data-[type=dialog]:max-sm:h-svh data-[type=dialog]:max-sm:w-screen",
         "data-[type=dialog]:max-sm:grid data-[type=dialog]:max-sm:grid-rows-[1fr_auto] data-[type=dialog]:max-sm:justify-items-center",
-        "data-[type=dialog]:max-sm:p-0 data-[type=dialog]:max-sm:pt-12",
+        "data-[type=dialog]:max-sm:pt-12",
         "data-[type=dialog]:sm:flex data-[type=dialog]:sm:items-center data-[type=dialog]:sm:justify-center",
       ],
     },
@@ -130,13 +130,13 @@ interface TourPositionerProps
   /**
    * Stick dialog steps to the bottom of the screen on mobile
    *
-   * @default true
+   * @default false
    */
   bottomStickOnMobile?: boolean;
 }
 
 export const TourPositioner = (props: TourPositionerProps) => {
-  const { bottomStickOnMobile = true, className, ...rest } = props;
+  const { bottomStickOnMobile = false, className, ...rest } = props;
 
   return (
     <ArkTour.Positioner
@@ -149,7 +149,7 @@ export const TourPositioner = (props: TourPositionerProps) => {
 
 export const tourContentVariants = tv({
   defaultVariants: {
-    bottomStickOnMobile: true,
+    bottomStickOnMobile: false,
   },
   slots: {
     content: [
@@ -164,6 +164,7 @@ export const tourContentVariants = tv({
       "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
       "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
       "motion-reduce:animate-none",
+      "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
     ],
     panel: [
       "relative",
@@ -179,14 +180,13 @@ export const tourContentVariants = tv({
       true: {
         content: [
           "data-[type=dialog]:max-sm:row-start-2 data-[type=dialog]:max-sm:min-w-0 data-[type=dialog]:max-sm:max-w-none",
-          "data-[type=dialog]:max-sm:data-[state=closed]:slide-out-to-bottom-5 data-[type=dialog]:max-sm:data-[state=closed]:zoom-out-100",
-          "data-[type=dialog]:max-sm:data-[state=open]:slide-in-from-bottom-5 data-[type=dialog]:max-sm:data-[state=open]:zoom-in-100",
+          "data-[type=dialog]:max-sm:origin-bottom",
+          "data-[type=dialog]:max-sm:data-[state=closed]:slide-out-to-bottom-1/2 data-[type=dialog]:max-sm:data-[state=closed]:zoom-out-100",
+          "data-[type=dialog]:max-sm:data-[state=open]:slide-in-from-bottom-1/2 data-[type=dialog]:max-sm:data-[state=open]:zoom-in-100",
         ],
         panel: [
           "in-data-[type=dialog]:max-sm:max-h-[calc(100svh-3rem)] in-data-[type=dialog]:max-sm:min-h-0",
           "in-data-[type=dialog]:max-sm:pb-[env(safe-area-inset-bottom,0px)]",
-          "in-data-[type=dialog]:max-sm:rounded-none in-data-[type=dialog]:max-sm:rounded-t-2xl in-data-[type=dialog]:max-sm:border-x-0 in-data-[type=dialog]:max-sm:border-t in-data-[type=dialog]:max-sm:border-b-0",
-          "in-data-[type=dialog]:max-sm:**:data-[slot=dialog-footer]:rounded-none in-data-[type=dialog]:max-sm:**:data-[slot=tour-actions]:rounded-none in-data-[type=dialog]:max-sm:**:data-[slot=tour-control]:rounded-none",
         ],
       },
     },
@@ -199,7 +199,7 @@ interface TourContentProps
   /**
    * Stick dialog steps to the bottom of the screen on mobile
    *
-   * @default true
+   * @default false
    */
   bottomStickOnMobile?: boolean;
   /**
@@ -218,7 +218,7 @@ interface TourContentProps
 
 export const TourContent = (props: TourContentProps) => {
   const {
-    bottomStickOnMobile = true,
+    bottomStickOnMobile = false,
     showArrow = true,
     showCloseButton = true,
     className,
@@ -501,7 +501,6 @@ export const TourActions = (
                         placement: getTourActionPlacement(action, hasNext),
                       })}
                       disabled={action.attrs?.disabled ? true : undefined}
-                      size="sm"
                       {...(isOutline ? { variant: "outline" as const } : {})}
                     >
                       {action.action === "prev" && (
@@ -556,7 +555,6 @@ export const TourPreviousStep = (
           tourActionPlacementVariants({ placement: "start" }),
           className
         )}
-        size="sm"
         variant="outline"
       >
         <ChevronLeft aria-hidden className="size-3.5 rtl:rotate-180" />
@@ -595,7 +593,6 @@ export const TourNextStep = (
           className
         )}
         disabled={action.attrs?.disabled ? true : undefined}
-        size="sm"
       >
         {action.label}
 

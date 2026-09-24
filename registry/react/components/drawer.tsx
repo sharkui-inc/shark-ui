@@ -155,12 +155,12 @@ const drawerOverlayVariants = tv({
   base: [
     "fixed inset-0 z-50",
     "peer peer-data-[slot=drawer-backdrop]:hidden",
-    "bg-[rgb(0_0_0/calc(0.32*(1-max(0,var(--drawer-swipe-progress,0)))))] backdrop-blur-[calc(4px*(1-max(0,var(--drawer-swipe-progress,0))))]",
+    "motion-safe:bg-[rgb(0_0_0/calc(0.32*(1-max(0,var(--drawer-swipe-progress,0)))))] motion-safe:backdrop-blur-[calc(4px*(1-max(0,var(--drawer-swipe-progress,0))))]",
+    "motion-reduce:bg-[rgb(0_0_0/0.32)] motion-reduce:backdrop-blur-[4px]",
     "data-[has-nested=drawer]:pointer-events-none",
-    "transition-opacity duration-300 ease-out",
-    "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
-    "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out data-[state=closed]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
-    "motion-reduce:animate-none",
+    "motion-safe:transition-opacity motion-safe:duration-300 motion-safe:ease-out",
+    "motion-safe:data-[state=open]:fade-in-0 motion-safe:data-[state=open]:animate-in",
+    "motion-safe:data-[state=closed]:fade-out-0 motion-safe:data-[state=closed]:animate-out motion-safe:data-[state=closed]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
   ],
 });
 
@@ -204,6 +204,7 @@ export const DrawerOverlay = (
 const drawerPositionerVariants = tv({
   base: [
     "[--bleed:--spacing(12)]",
+    "[--inset:--spacing(3)] sm:[--inset:--spacing(4)]",
     "fixed inset-0 z-[calc(50+var(--layer-index,0))] overflow-hidden",
     "flex w-screen items-end justify-center",
     "data-[has-nested=drawer]:pointer-events-none",
@@ -219,8 +220,7 @@ const drawerPositionerVariants = tv({
     variant: {
       default: "",
       inset: [
-        "[--inset:--spacing(0)]",
-        "px-(--inset) sm:[--inset:--spacing(4)]",
+        "px-(--inset)",
         "data-[swipe-direction=down]:pb-(--inset)",
         "data-[swipe-direction=up]:pt-(--inset)",
         "[&[data-swipe-direction=left],&[data-swipe-direction=right]]:py-(--inset)",
@@ -299,6 +299,8 @@ const drawerContentVariants = tv({
     "data-[swipe-direction=right]:after:inset-s-full",
     "[&[data-swipe-direction=left],&[data-swipe-direction=right]]:after:inset-y-0 [&[data-swipe-direction=left],&[data-swipe-direction=right]]:after:h-auto [&[data-swipe-direction=left],&[data-swipe-direction=right]]:after:w-(--bleed)",
     "motion-reduce:animate-none motion-reduce:transition-none",
+    "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+    "motion-reduce:data-[state=closed]:transition-none motion-reduce:data-[state=open]:transition-none",
   ],
   defaultVariants: {
     variant: "default",
@@ -306,7 +308,10 @@ const drawerContentVariants = tv({
   variants: {
     variant: {
       default: "",
-      inset: ["sm:rounded-2xl sm:border sm:[--bleed:0px]"],
+      inset: [
+        "rounded-2xl border [--bleed:0px]",
+        "[&[data-swipe-direction=down],&[data-swipe-direction=up],&[data-swipe-direction=left],&[data-swipe-direction=right]]:rounded-2xl",
+      ],
     },
   },
 });
@@ -850,7 +855,7 @@ export const DrawerBody = (props: DrawerBodyProps) => {
   return (
     <ScrollArea
       className={cn(
-        "flex min-h-0 min-w-0 flex-1 touch-pan-y flex-col overflow-hidden",
+        "flex min-w-0 flex-1 touch-pan-y flex-col overflow-hidden",
         "*:data-[slot=scroll-area-viewport]:h-auto!",
         "*:data-[slot=scroll-area-viewport]:min-h-0",
         "*:data-[slot=scroll-area-viewport]:flex-auto",

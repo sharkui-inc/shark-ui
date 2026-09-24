@@ -77,7 +77,7 @@ const initialItems = [
     shortcut: "⌘K",
     value: "shortcuts",
   },
-  { group: "App", label: "Help", shortcut: "⌘?", value: "help" },
+  { group: "App", label: "Help", shortcut: "⌘⇧/", value: "help" },
 ];
 
 export default Example;

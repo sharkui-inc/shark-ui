@@ -94,6 +94,7 @@ export const dialogOverlayVariants = tv({
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
     "motion-reduce:animate-none",
+    "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
   ],
 });
 
@@ -161,6 +162,7 @@ export const dialogContentVariants = tv({
       "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
       "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
       "motion-reduce:animate-none motion-reduce:transition-none",
+      "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
     ],
     positioner: [],
   },
@@ -175,7 +177,8 @@ export const dialogContentVariants = tv({
           "max-sm:**:data-[slot=dialog-footer]:rounded-none",
           "max-sm:**:data-[slot=alert-dialog-footer]:rounded-none",
           "max-sm:opacity-[calc(1-min(var(--nested-dialogs),1))]",
-          "max-sm:data-[state=closed]:slide-out-to-bottom-5 max-sm:data-[state=open]:slide-in-from-bottom-5",
+          "max-sm:origin-bottom",
+          "max-sm:data-[state=closed]:slide-out-to-bottom-1/2 max-sm:data-[state=open]:slide-in-from-bottom-1/2",
           "max-sm:data-[state=closed]:zoom-out-100 max-sm:data-[state=open]:zoom-in-100",
         ],
         positioner: ["max-sm:grid-rows-[1fr_auto] max-sm:p-0 max-sm:pt-12"],
@@ -272,7 +275,7 @@ export const DialogBody = (props: DialogBodyProps) => {
 
   return (
     <ScrollArea
-      className="min-h-0 min-w-0 flex-1"
+      className="min-w-0 flex-1"
       orientation="vertical"
       overscrollContain
       scrollFade={scrollFade}

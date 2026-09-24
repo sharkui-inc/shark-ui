@@ -52,12 +52,14 @@ const Example = () => {
   return <DesktopContextMenu />;
 };
 
-const triggerClassName =
-  "flex aspect-video items-center justify-center rounded-2xl border border-dashed p-20 text-sm";
-
 const MobileContextMenu = () => (
   <Drawer>
-    <DrawerTrigger className={triggerClassName}>Tap here</DrawerTrigger>
+    <DrawerTrigger className="flex aspect-video items-center justify-center rounded-2xl border border-dashed p-20 text-sm">
+      <span className="pointer-fine:inline-block hidden">Right click here</span>
+      <span className="pointer-coarse:inline-block hidden">
+        Long press here
+      </span>
+    </DrawerTrigger>
     <DrawerContent>
       <DrawerHeader className="sr-only" title="Context menu" />
       <DrawerBody className="p-0!">
@@ -164,8 +166,11 @@ const MoreDrawer = () => (
 
 const DesktopContextMenu = () => (
   <ContextMenu>
-    <ContextMenuTrigger className={triggerClassName}>
-      Right click here
+    <ContextMenuTrigger className="flex aspect-video items-center justify-center rounded-2xl border border-dashed p-20 text-sm">
+      <span className="pointer-fine:inline-block hidden">Right click here</span>
+      <span className="pointer-coarse:inline-block hidden">
+        Long press here
+      </span>
     </ContextMenuTrigger>
     <ContextMenuContent className="w-40">
       <ContextMenuGroup>

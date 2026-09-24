@@ -71,7 +71,12 @@ const TerminalFollow = (props: { followKey: string }) => {
       return;
     }
 
-    scrollToEdge({ edge: "bottom" });
+    scrollToEdge({
+      edge: "bottom",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
   });
 
   React.useLayoutEffect(() => {

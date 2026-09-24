@@ -229,6 +229,7 @@ export const SelectContent = (
             "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
             "data-[state=closed]:animate-out data-[state=open]:animate-in",
             "motion-reduce:animate-none",
+            "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
           )}
           data-slot="select-content"

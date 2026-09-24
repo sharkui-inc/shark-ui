@@ -54,7 +54,7 @@ export const SheetOverlay = (
 
 const sheetPositionerVariants = tv({
   base: [
-    "[--inset:--spacing(0)]",
+    "[--inset:--spacing(3)] sm:[--inset:--spacing(4)]",
     "fixed inset-0 z-50",
     "h-svh w-screen",
     "grid",
@@ -74,7 +74,7 @@ const sheetPositionerVariants = tv({
     variant: {
       default: "",
       inset: [
-        "px-(--inset) sm:[--inset:--spacing(4)]",
+        "px-(--inset)",
         "data-[placement=bottom]:pb-(--inset)",
         "data-[placement=top]:pt-(--inset)",
         "data-[placement=left]:pt-(--inset) data-[placement=left]:pb-(--inset)",
@@ -116,6 +116,7 @@ const sheetContentVariants = tv({
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
     "motion-reduce:animate-none motion-reduce:transition-none",
+    "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
   ],
   defaultVariants: {
     placement: "right",
@@ -149,8 +150,8 @@ const sheetContentVariants = tv({
     variant: {
       default: "",
       inset: [
-        "sm:rounded-2xl sm:border",
-        "sm:**:data-[slot=sheet-footer]:rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
+        "rounded-2xl border",
+        "**:data-[slot=sheet-footer]:rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
       ],
     },
   },

@@ -365,31 +365,33 @@ const planStatusDescriptions: Record<PlanStatus, string> = {
   pending: "Plan ready",
 };
 
-const PlanHeaderStatus = ({ status }: { status: PlanStatus }) => (
-  <span
-    aria-live="polite"
-    className={cn(
-      "flex shrink-0 items-center text-muted-foreground",
-      status === "in-progress" &&
-        "text-foreground transition-[opacity,scale] duration-150 ease-out group-data-[state=open]/collapsible:pointer-events-none group-data-[state=open]/collapsible:scale-75 group-data-[state=open]/collapsible:opacity-0 motion-reduce:transition-none",
-      status === "completed" && "text-success-foreground",
-      status === "error" && "text-destructive-foreground"
-    )}
-    data-slot="plan-header-status"
-    data-status={status}
-  >
-    <PlanStatusIcon className="size-4" status={status} />
-    <span className="sr-only">{planStatusDescriptions[status]}</span>
-  </span>
-);
+const PlanHeaderStatus = (props: { status: PlanStatus }) => {
+  const { status } = props;
 
-const PlanStatusIcon = ({
-  className,
-  status,
-}: {
+  return (
+    <span
+      aria-live="polite"
+      className={cn(
+        "flex shrink-0 items-center text-muted-foreground",
+        status === "in-progress" &&
+          "text-foreground transition-[opacity,scale] duration-150 ease-out group-data-[state=open]/collapsible:pointer-events-none group-data-[state=open]/collapsible:scale-75 group-data-[state=open]/collapsible:opacity-0 motion-reduce:transition-none",
+        status === "completed" && "text-success-foreground",
+        status === "error" && "text-destructive-foreground"
+      )}
+      data-slot="plan-header-status"
+      data-status={status}
+    >
+      <PlanStatusIcon className="size-4" status={status} />
+      <span className="sr-only">{planStatusDescriptions[status]}</span>
+    </span>
+  );
+};
+
+const PlanStatusIcon = (props: {
   className?: string;
   status: PlanItemStatus;
 }) => {
+  const { className, status } = props;
   if (status === "in-progress") {
     return (
       <Spinner aria-hidden className={cn("size-3.5 shrink-0", className)} />

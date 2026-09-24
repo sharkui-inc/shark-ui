@@ -125,7 +125,7 @@ Constrain height so the content scrolls vertically inside the panel.
 
 Long lines overflow and scroll horizontally; the line-number gutter stays sticky.
 
-<ComponentPreview componentName="code-block" fileName="example-scrollable-horizontal" />
+<ComponentPreview componentName="code-block" fileName="example-scrollable-horizontal" autoHeight />
 
 ## Examples
 
@@ -199,9 +199,14 @@ Header for the title and actions.
 
 Right-aligned actions container.
 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
 ### CodeBlockCopy
 
-Copies `code` from `CodeBlock`.
+Copies `code` from `CodeBlock`. 
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -214,9 +219,10 @@ Copies `code` from `CodeBlock`.
 | --- | --- | --- |
 | `showLineNumbers` | `boolean` | `false` |
 | `highlightedLines` | `number[]` | `[]` |
-| `code` | `string` | - |
-| `language` | `CodeBlockLanguage` | - |
-| `isStreaming` | `boolean` | - |
+| `code` | `string` | `-` |
+| `language` | `CodeBlockLanguage` | `-` |
+| `isStreaming` | `boolean` | `-` |
 | `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
 
 `CodeBlockLanguage` accepts every bundled Shiki language and `"text"`.

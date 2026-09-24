@@ -66,14 +66,14 @@ describe("normalizeThemeConfig", () => {
     });
   });
 
-  it("rejects fonts that do not belong to the requested slot", () => {
+  it("accepts any catalog font in Font and Heading", () => {
     const config = normalizeThemeConfig({
       fontHeading: "public-sans",
       fontSans: "fraunces",
     });
 
-    assert.equal(config.fontHeading, DEFAULT_THEME_CONFIG.fontHeading);
-    assert.equal(config.fontSans, DEFAULT_THEME_CONFIG.fontSans);
+    assert.equal(config.fontHeading, "public-sans");
+    assert.equal(config.fontSans, "fraunces");
   });
 
   it("accepts mono faces in Font and Heading", () => {

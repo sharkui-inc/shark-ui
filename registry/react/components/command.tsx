@@ -54,17 +54,17 @@ export const CommandDialogTrigger = (
 ) => <DialogTrigger data-slot="command-dialog-trigger" {...props} />;
 
 const commandDialogPositionerVariants = tv({
-  base: ["[--inset:--spacing(0)]"],
+  base: [
+    "max-sm:h-dvh max-sm:grid-rows-[1fr]",
+    "[--inset:--spacing(3)] sm:[--inset:--spacing(4)]",
+  ],
   defaultVariants: {
     variant: "default",
   },
   variants: {
     variant: {
-      default: "",
-      inset: [
-        "p-(--inset) px-(--inset) pt-(--inset) pb-(--inset)",
-        "sm:[--inset:--spacing(4)]",
-      ],
+      default: ["max-sm:p-0 max-sm:[--inset:0px]"],
+      inset: ["p-(--inset) px-(--inset) pt-(--inset) pb-(--inset)"],
     },
   },
 });
@@ -72,19 +72,31 @@ const commandDialogPositionerVariants = tv({
 const commandDialogContentVariants = tv({
   base: [
     "max-sm:row-start-1",
+    "max-sm:**:data-[slot=command-content]:min-h-0 max-sm:**:data-[slot=command-content]:flex-1",
+    "max-sm:**:data-[slot=scroll-area]:min-h-0 max-sm:**:data-[slot=scroll-area]:flex-1",
     "data-[state=closed]:animate-none data-[state=open]:animate-none",
   ],
   defaultVariants: {
+    fill: false,
     variant: "default",
   },
   variants: {
+    fill: {
+      false:
+        "max-sm:h-auto max-sm:max-h-[min(80dvh,calc(100dvh-2*var(--inset)))] max-sm:self-start max-sm:**:data-[slot=scroll-area]:max-h-[min(80dvh,calc(100dvh-2*var(--inset)))]",
+      true: "max-sm:h-full max-sm:max-h-[calc(100dvh-2*var(--inset))] max-sm:**:data-[slot=scroll-area]:max-h-[calc(100dvh-2*var(--inset))]",
+    },
     variant: {
-      default: ["border-0 p-0"],
+      default: [
+        "border-0 p-0",
+        "max-sm:rounded-none",
+        "max-sm:**:data-[slot=command]:rounded-none max-sm:**:data-[slot=command]:border-0",
+        "max-sm:**:data-[slot=command-footer]:rounded-none",
+      ],
       inset: [
-        "p-0 max-sm:border-0",
-        "sm:rounded-2xl sm:border",
-        "sm:**:data-[slot=command-footer]:rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
-        "sm:**:data-[slot=command]:rounded-none sm:**:data-[slot=command]:border-0",
+        "rounded-2xl border p-0",
+        "**:data-[slot=command-footer]:rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
+        "**:data-[slot=command]:rounded-none **:data-[slot=command]:border-0",
       ],
     },
   },
@@ -92,13 +104,19 @@ const commandDialogContentVariants = tv({
 
 interface CommandDialogContentProps
   extends React.ComponentProps<typeof DialogContent>,
-    VariantProps<typeof commandDialogContentVariants> {
+    Omit<VariantProps<typeof commandDialogContentVariants>, "fill"> {
   /**
    * The description of the dialog
    *
    * @default "Search for a command to run..."
    */
   description?: string;
+  /**
+   * Fill the available mobile viewport
+   *
+   * @default false
+   */
+  fill?: boolean;
   /**
    * The title of the dialog
    *
@@ -109,6 +127,7 @@ interface CommandDialogContentProps
 
 export const CommandDialogContent = (props: CommandDialogContentProps) => {
   const {
+    fill,
     size = "lg",
     variant = "default",
     title = "Command Palette",
@@ -129,7 +148,7 @@ export const CommandDialogContent = (props: CommandDialogContentProps) => {
         <ArkDialog.Content
           className={cn(
             dialogContentVariants({ size }).content(),
-            commandDialogContentVariants({ variant }),
+            commandDialogContentVariants({ fill, variant }),
             className
           )}
           data-slot="command-dialog-content"
@@ -194,7 +213,7 @@ export const CommandContent = (
   return (
     <ArkCombobox.Content
       className={cn(
-        "max-h-(--available-height) min-h-0",
+        "min-h-0",
         "flex flex-1 flex-col",
         "px-1.5",
         "overflow-hidden",

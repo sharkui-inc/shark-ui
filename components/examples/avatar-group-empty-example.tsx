@@ -101,12 +101,12 @@ export const AvatarGroupEmptyExample = (props: React.ComponentProps<"div">) => {
                 </FieldGroup>
               </DialogBody>
               <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant="outline">Cancel</Button>
-                </DialogClose>
                 <Button isLoading={isSending} type="submit">
                   Send invite
                 </Button>
+                <DialogClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DialogClose>
               </DialogFooter>
             </form>
           </DialogContent>

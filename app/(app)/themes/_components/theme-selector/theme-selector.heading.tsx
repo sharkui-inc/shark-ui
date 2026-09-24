@@ -8,6 +8,11 @@ import { Button } from "@/registry/react/components/button";
 import { FieldLabel } from "@/registry/react/components/field";
 import { Kbd } from "@/registry/react/components/kbd";
 import {
+  ToggleTooltip,
+  ToggleTooltipContent,
+  ToggleTooltipTrigger,
+} from "@/registry/react/components/toggle-tooltip";
+import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -32,8 +37,8 @@ export const ThemeSelectorHeading = (props: ThemeSelectorHeadingProps) => {
       <FieldLabel>{title}</FieldLabel>
 
       {description ? (
-        <Tooltip>
-          <TooltipTrigger asChild>
+        <ToggleTooltip positioning={{ placement: "top" }}>
+          <ToggleTooltipTrigger asChild>
             <Button
               aria-label={`${title} info`}
               clickEffect={false}
@@ -42,12 +47,12 @@ export const ThemeSelectorHeading = (props: ThemeSelectorHeadingProps) => {
             >
               <InfoIcon aria-hidden className="text-muted-foreground" />
             </Button>
-          </TooltipTrigger>
-          <TooltipContent className="max-w-56 text-pretty">
+          </ToggleTooltipTrigger>
+          <ToggleTooltipContent className="max-w-56 text-pretty">
             {description}
             {hotkey ? <Kbd>{hotkey}</Kbd> : null}
-          </TooltipContent>
-        </Tooltip>
+          </ToggleTooltipContent>
+        </ToggleTooltip>
       ) : null}
 
       {lockKey ? (

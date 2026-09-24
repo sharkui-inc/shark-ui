@@ -306,6 +306,7 @@ export const TreeViewBranchContent = (
         "data-[state=open]:animate-collapsible-down data-[state=open]:duration-150 data-[state=open]:ease-out",
         "data-[state=closed]:animate-collapsible-up data-[state=closed]:duration-150 data-[state=closed]:ease-out",
         "motion-reduce:animate-none",
+        "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
         className
       )}
       data-slot="tree-view-branch-content"
