@@ -77,10 +77,10 @@ const Example = () => {
                   <FieldLabel>Primary department</FieldLabel>
                   <Combobox
                     collection={collection}
-                    onInteractOutside={field.handleBlur}
                     onInputValueChange={({ inputValue, reason }) =>
                       filter(reason === "item-select" ? "" : inputValue)
                     }
+                    onInteractOutside={field.handleBlur}
                     onValueChange={(e) => {
                       field.handleChange(e.value);
                     }}
