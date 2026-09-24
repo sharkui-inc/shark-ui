@@ -126,32 +126,9 @@ Use `aria-label` on the `BottomNavigationItem` to give the item a label for scre
 
 <ComponentPreview componentName="bottom-navigation" fileName="example-icon-only" />
 
-### With Next.js
+### With links
 
-Use `asChild` with `next/link` to preserve client-side navigation. Set `value` to the current pathname, and keep each item `value` equal to its `href`.
-
-```tsx
-"use client";
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-const BottomNavigationExample = () => {
-  const pathname = usePathname();
-
-  return (
-    <BottomNavigation value={pathname}>
-      <BottomNavigationList aria-label="Main navigation">
-        <BottomNavigationItem asChild value="/docs">
-          <Link href="/docs">Docs</Link>
-        </BottomNavigationItem>
-      </BottomNavigationList>
-    </BottomNavigation>
-  );
-};
-```
-
-Use this component for three to five mutually exclusive top-level sections. Use a standard link list when the destinations are not tabs, or when each link should be reached individually with <kbd>Tab</kbd>.
+Use `asChild` on `BottomNavigationItem` with a `Link`.
 
 <ComponentPreview componentName="bottom-navigation" fileName="example-with-links" />
 
