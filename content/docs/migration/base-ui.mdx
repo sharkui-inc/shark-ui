@@ -1,6 +1,6 @@
 ---
 title: Base UI
-description: "Migrate Base UI to Shark UI: asChild instead of render props, collections for lists."
+description: Migrate your project from Base UI to Shark UI.
 links:
   doc: https://base-ui.com
 ---
@@ -34,6 +34,36 @@ import { Button } from "@/components/ui/button";
 ```
 
 Pass exactly one child. Do not port Base UI composition callbacks unchanged.
+
+For a menu item rendered as a link, replace Base UI's `render` prop with `asChild`:
+
+```tsx
+import { Menu } from "@base-ui/react/menu";
+
+<Menu.Root>
+  <Menu.Trigger>Resources</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Positioner>
+      <Menu.Popup>
+        <Menu.Item render={<a href="/docs" />}>Documentation</Menu.Item>
+      </Menu.Popup>
+    </Menu.Positioner>
+  </Menu.Portal>
+</Menu.Root>;
+```
+
+```tsx
+import { Menu, MenuContent, MenuItem, MenuTrigger } from "@/components/ui/menu";
+
+<Menu>
+  <MenuTrigger>Resources</MenuTrigger>
+  <MenuContent>
+    <MenuItem asChild>
+      <a href="/docs">Documentation</a>
+    </MenuItem>
+  </MenuContent>
+</Menu>;
+```
 
 ## Component equivalents
 

@@ -7,6 +7,7 @@
     "recharts",
     "tailwind-variants"
   ],
+  "description": "Every installable Shark UI component and visual utility. Install `@shark/style` or use `@shark/starter` for the theme foundation.",
   "devDependencies": [
     "tw-animate-css"
   ],
@@ -17,6 +18,7 @@
     "https://shark-ui.com/r/alert.json",
     "https://shark-ui.com/r/alert-dialog.json",
     "https://shark-ui.com/r/announcement.json",
+    "https://shark-ui.com/r/approval-card.json",
     "https://shark-ui.com/r/aspect-ratio.json",
     "https://shark-ui.com/r/attachment.json",
     "https://shark-ui.com/r/autocomplete.json",
@@ -40,6 +42,7 @@
     "https://shark-ui.com/r/color-picker.json",
     "https://shark-ui.com/r/combobox.json",
     "https://shark-ui.com/r/command.json",
+    "https://shark-ui.com/r/context.json",
     "https://shark-ui.com/r/context-menu.json",
     "https://shark-ui.com/r/data-table.json",
     "https://shark-ui.com/r/data-list.json",
@@ -61,6 +64,7 @@
     "https://shark-ui.com/r/hitbox.json",
     "https://shark-ui.com/r/hotkeys.json",
     "https://shark-ui.com/r/hover-card.json",
+    "https://shark-ui.com/r/icon-tile.json",
     "https://shark-ui.com/r/iframe.json",
     "https://shark-ui.com/r/image-cropper.json",
     "https://shark-ui.com/r/input.json",
@@ -73,6 +77,7 @@
     "https://shark-ui.com/r/listbox.json",
     "https://shark-ui.com/r/locale.json",
     "https://shark-ui.com/r/marquee.json",
+    "https://shark-ui.com/r/masonry.json",
     "https://shark-ui.com/r/marker.json",
     "https://shark-ui.com/r/menu.json",
     "https://shark-ui.com/r/message.json",
@@ -90,6 +95,7 @@
     "https://shark-ui.com/r/prose.json",
     "https://shark-ui.com/r/qr-code.json",
     "https://shark-ui.com/r/questionnaire.json",
+    "https://shark-ui.com/r/queue.json",
     "https://shark-ui.com/r/radio-group.json",
     "https://shark-ui.com/r/rating.json",
     "https://shark-ui.com/r/reasoning.json",
@@ -109,6 +115,8 @@
     "https://shark-ui.com/r/state.json",
     "https://shark-ui.com/r/status.json",
     "https://shark-ui.com/r/steps.json",
+    "https://shark-ui.com/r/suggestion.json",
+    "https://shark-ui.com/r/sources.json",
     "https://shark-ui.com/r/swap.json",
     "https://shark-ui.com/r/switch.json",
     "https://shark-ui.com/r/table.json",
@@ -125,7 +133,8 @@
     "https://shark-ui.com/r/toggle-tooltip.json",
     "https://shark-ui.com/r/tooltip.json",
     "https://shark-ui.com/r/tour.json",
-    "https://shark-ui.com/r/tree-view.json"
+    "https://shark-ui.com/r/tree-view.json",
+    "https://shark-ui.com/r/chat.json"
   ],
   "type": "registry:ui"
 }

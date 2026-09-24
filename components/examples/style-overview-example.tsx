@@ -11,17 +11,22 @@ import {
 } from "@/registry/react/components/card";
 import { useConfig } from "@/store/config";
 
+const noop = () => undefined;
+const subscribeToMount = () => noop;
+const getClientMountSnapshot = (): boolean => true;
+const getServerMountSnapshot = (): boolean => false;
+
 export const StyleOverviewExample = (props: React.ComponentProps<"div">) => {
   const config = useConfig();
-  const [ready, setReady] = React.useState(false);
+  const ready = React.useSyncExternalStore(
+    subscribeToMount,
+    getClientMountSnapshot,
+    getServerMountSnapshot
+  );
   const primary = getPrimaryColor(config.primaryColor);
   const base = getBaseColor(config.baseColor);
   const heading = getThemeFont(config.fontHeading);
   const sans = getThemeFont(config.fontSans);
-
-  React.useEffect(() => {
-    setReady(true);
-  }, []);
 
   return (
     <Card {...props}>

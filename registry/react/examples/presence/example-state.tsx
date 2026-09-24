@@ -5,13 +5,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Presence } from "@/registry/react/components/presence";
 
-const statusClassName = cn(
-  "inline-flex h-8 items-center rounded-lg border border-input bg-muted px-3",
-  "font-mono text-muted-foreground text-xs"
-);
-
 const Example = () => {
   const [present, setPresent] = React.useState(true);
+
   const state = present ? "open" : "closed";
 
   return (
@@ -24,7 +20,14 @@ const Example = () => {
         >
           Toggle
         </Button>
-        <span className={statusClassName}>data-state=&quot;{state}&quot;</span>
+        <span
+          className={cn(
+            "inline-flex h-8 items-center rounded-lg border border-input bg-muted px-3",
+            "font-mono text-muted-foreground text-xs"
+          )}
+        >
+          data-state=&quot;{state}&quot;
+        </span>
       </div>
       <Presence asChild present={present} unmountOnExit={false}>
         <div

@@ -122,9 +122,10 @@
   ],
   "extends": "none",
   "registryDependencies": [
-    "https://shark-ui.com/r/utils.json"
+    "https://shark-ui.com/r/utils.json",
+    "https://shark-ui.com/r/ui.json"
   ],
-  "description": "Shark theme foundation: colors, sidebar tokens, fonts, base styles, utilities, and animation support. Add components separately.",
-  "name": "style",
+  "description": "Complete Shark starter: the theme foundation and every installable Shark UI component. Use with `shadcn init` for a new project.",
+  "name": "starter",
   "type": "registry:style"
 }

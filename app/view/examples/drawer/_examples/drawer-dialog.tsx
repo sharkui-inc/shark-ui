@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
   Dialog,
@@ -20,26 +21,11 @@ import {
 } from "@/registry/react/components/drawer";
 import { FieldLabel } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
-
-const useIsDesktop = () => {
-  const [isDesktop, setIsDesktop] = React.useState(false);
-
-  React.useEffect(() => {
-    const matchMedia = window.matchMedia("(min-width: 768px)");
-    const handleChange = () => setIsDesktop(matchMedia.matches);
-
-    handleChange();
-    matchMedia.addEventListener("change", handleChange);
-
-    return () => matchMedia.removeEventListener("change", handleChange);
-  }, []);
-
-  return isDesktop;
-};
+import { useMediaQuery } from "@/registry/react/hooks/use-is-mobile";
 
 const DrawerDialog = () => {
   const [open, setOpen] = React.useState(false);
-  const isDesktop = useIsDesktop();
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
     return (
@@ -50,7 +36,7 @@ const DrawerDialog = () => {
         <DialogTrigger asChild>
           <Button variant="outline">Edit Profile</Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>
@@ -85,26 +71,26 @@ const DrawerDialog = () => {
   );
 };
 
-interface ProfileFormProps {
-  className?: string;
-}
+const ProfileForm = (props: React.ComponentProps<"form">) => {
+  const { className, ...rest } = props;
 
-const ProfileForm = (props: ProfileFormProps) => (
-  <form className={`grid items-start gap-6 ${props.className ?? ""}`}>
-    <div className="grid gap-3">
-      <FieldLabel htmlFor="drawer-dialog-email">Email</FieldLabel>
-      <Input
-        defaultValue="shadcn@example.com"
-        id="drawer-dialog-email"
-        type="email"
-      />
-    </div>
-    <div className="grid gap-3">
-      <FieldLabel htmlFor="drawer-dialog-username">Username</FieldLabel>
-      <Input defaultValue="@shadcn" id="drawer-dialog-username" />
-    </div>
-    <Button type="submit">Save changes</Button>
-  </form>
-);
+  return (
+    <form className={cn("grid items-start gap-6", className)} {...rest}>
+      <div className="grid gap-3">
+        <FieldLabel htmlFor="drawer-dialog-email">Email</FieldLabel>
+        <Input
+          defaultValue="shadcn@example.com"
+          id="drawer-dialog-email"
+          type="email"
+        />
+      </div>
+      <div className="grid gap-3">
+        <FieldLabel htmlFor="drawer-dialog-username">Username</FieldLabel>
+        <Input defaultValue="@shadcn" id="drawer-dialog-username" />
+      </div>
+      <Button type="submit">Save changes</Button>
+    </form>
+  );
+};
 
 export default DrawerDialog;

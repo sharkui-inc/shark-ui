@@ -64,7 +64,11 @@ const Example = () => {
                 const value = field.input as number[];
 
                 return (
-                  <Field invalid={Boolean(field.errors?.length)}>
+                  <Field
+                    invalid={Boolean(field.errors?.length)}
+                    onBlur={field.props.onBlur}
+                    onFocus={field.props.onFocus}
+                  >
                     <Slider
                       max={PRICE_MAX}
                       min={0}

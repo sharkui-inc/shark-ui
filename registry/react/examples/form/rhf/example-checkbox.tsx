@@ -74,7 +74,9 @@ const Example = () => {
                           checked={field.value}
                           disabled
                           name={field.name}
-                          onCheckedChange={field.onChange}
+                          onCheckedChange={({ checked }) =>
+                            field.onChange(checked === true)
+                          }
                         />
                         <FieldLabel>Push notifications</FieldLabel>
                       </Field>

@@ -1,3 +1,4 @@
+import { AccessibilityIcon } from "lucide-react";
 import { BaseUIIcon } from "@/components/icons/base-ui";
 import { RadixIcon } from "@/components/icons/radix";
 import { ShadcnIcon } from "@/components/icons/shadcn";
@@ -42,5 +43,10 @@ const DESIGN_SYSTEMS = [
     href: "/docs/migration/base-ui",
     icon: <BaseUIIcon className="size-8" />,
     name: "Base UI",
+  },
+  {
+    href: "/docs/migration/react-aria",
+    icon: <AccessibilityIcon className="size-8" />,
+    name: "React Aria",
   },
 ];

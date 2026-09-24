@@ -1,4 +1,3 @@
-import { Card } from "@/registry/react/components/card";
 import {
   ImageCropper,
   ImageCropperImage,
@@ -6,15 +5,19 @@ import {
 } from "@/registry/react/components/image-cropper";
 
 const Example = () => (
-  <Card className="w-full max-w-sm [--space:--spacing(0)]">
-    <ImageCropper maxHeight={160} maxWidth={280} minHeight={80} minWidth={80}>
-      <ImageCropperImage
-        alt="Crop me"
-        src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=image+cropper&waveColor=1a6b5c"
-      />
-      <ImageCropperSelection />
-    </ImageCropper>
-  </Card>
+  <ImageCropper
+    className="max-w-sm"
+    maxHeight={160}
+    maxWidth={280}
+    minHeight={80}
+    minWidth={80}
+  >
+    <ImageCropperImage
+      alt="Crop me"
+      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200"
+    />
+    <ImageCropperSelection />
+  </ImageCropper>
 );
 
 export default Example;

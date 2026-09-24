@@ -75,6 +75,7 @@ const Example = () => {
                   <FieldLabel>Primary technology</FieldLabel>
                   <Autocomplete
                     collection={collection}
+                    onInteractOutside={field.handleBlur}
                     onInputValueChange={({ inputValue }) => filter(inputValue)}
                     onValueChange={(e) => field.handleChange(e.value)}
                     value={field.state.value}

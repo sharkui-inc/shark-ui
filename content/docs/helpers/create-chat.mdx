@@ -1,9 +1,7 @@
 ---
-title: Chat
+title: createChat
 description: Create deterministic, local conversations for AI SDK and TanStack AI.
 ---
-
-import manifest from "@/registry/manifest/create-chat";
 
 <ComponentPreview componentName="create-chat" autoHeight showBorders={false} />
 
@@ -16,17 +14,48 @@ import manifest from "@/registry/manifest/create-chat";
 </TabsList>
 <TabsContent value="cli">
 
+<Steps>
+
+<Step>Run the following command:</Step>
+
 ```bash
-npx shadcn@latest add @shark/create-chat
+npx shadcn@latest add @shark/use-chat-helper
 ```
+
+<Step>Using AI SDK:</Step>
+
+<RegistryDependencies dependencies={["@ai-sdk/react", "ai"]} />
+
+</Steps>
+
+<Steps className="[counter-reset:step_1]">
+
+<Step>Using TanStack AI:</Step>
+
+<RegistryDependencies
+  dependencies={["@tanstack/ai", "@tanstack/ai-client", "@tanstack/ai-react"]}
+/>
+
+</Steps>
 
 </TabsContent>
 <TabsContent value="manual">
 
 <Steps>
-<Step>Install the following dependencies:</Step>
+<Step>Using AI SDK:</Step>
 
-<RegistryDependencies dependencies={manifest.dependencies} />
+<RegistryDependencies dependencies={["@ai-sdk/react", "ai"]} />
+</Steps>
+
+<Steps className="[counter-reset:step_1]">
+<Step>Using TanStack AI:</Step>
+
+<RegistryDependencies
+  dependencies={["@tanstack/ai", "@tanstack/ai-client", "@tanstack/ai-react"]}
+/>
+</Steps>
+
+<Steps>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -35,6 +64,7 @@ npx shadcn@latest add @shark/create-chat
 <ComponentSource title="hooks/use-chat-helper.ts" src="../hooks/use-chat-helper.ts" />
 
 <Step>Update the import paths to match your project setup.</Step>
+
 </Steps>
 
 </TabsContent>
@@ -45,7 +75,9 @@ npx shadcn@latest add @shark/create-chat
 ```tsx
 import { createChat } from "@/lib/create-chat"
 import { useChatHelper } from "@/hooks/use-chat-helper"
+```
 
+```tsx
 const chat = createChat({ adapter: "ai-sdk" })
   .user("What changed in this release?")
   .assistant("Keyboard shortcuts and faster search.")
@@ -56,6 +88,7 @@ export function ReleaseChat() {
   const { canSendNext, sendNext, status } = useChatHelper({
     chat,
   })
+  
   const isBusy = status === "submitted" || status === "streaming"
 
   return (
@@ -74,8 +107,8 @@ export function ReleaseChat() {
 
 ### Timing
 
-- `assistant(text, { delayMs })` waits before streaming starts. Default `0`.
-- `useChatHelper({ transport: { delayMs } })` waits between text chunks. Default `50`. Use `0` in tests.
+- `assistant(text, { delayMs })` waits before streaming starts.
+- `useChatHelper({ transport: { delayMs } })` waits between text chunks.
 
 ```tsx
 const chat = createChat({ adapter: "ai-sdk" })
@@ -88,9 +121,11 @@ const chat = createChat({ adapter: "ai-sdk" })
 
 ### createChat
 
-```tsx
-function createChat(options: { adapter: "ai-sdk" | "tanstack-ai" }): Chat
-```
+| Prop | Type | Default |
+| --- | --- | --- |
+| `adapter` | `"ai-sdk" \| "tanstack-ai"` | `-` |
+
+Returns a `Chat` with:
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -112,19 +147,15 @@ function createChat(options: { adapter: "ai-sdk" | "tanstack-ai" }): Chat
 | --- | --- | --- |
 | `id` | `string` | `-` |
 
+Every supplied ID must be unique within a chat, including against automatically generated IDs.
+
 #### Streaming options
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `delayMs` | `number` | `50` |
 
-`get(count)` throws when `count` is negative or not an integer. `sendNext()` rejects with `"No simulated assistant response found."` when the script is exhausted.
-
 ### useChatHelper
-
-```tsx
-function useChatHelper(options: UseChatHelperOptions)
-```
 
 | Prop | Type | Default |
 | --- | --- | --- |

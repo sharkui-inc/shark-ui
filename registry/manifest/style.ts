@@ -1,8 +1,6 @@
 import type { RegistryItemType } from "@/lib/registry";
 import { registryUrl } from "@/lib/url";
 
-const dependencies = ["@base-ui/react", "tailwind-variants", "lucide-react"];
-
 const devDependencies = ["tw-animate-css"];
 
 const registryDependencies = [registryUrl("/r/utils.json")];
@@ -146,16 +144,28 @@ const css = {
   },
 };
 
-const manifest: RegistryItemType = {
+export const styleFoundation = {
   css,
   cssVars,
-  dependencies,
-  description:
-    "Complete Shark theme: colors, sidebar, fonts, and base styles. Use with the shadcn CLI after `init` (e.g. `npx shadcn@latest init @shark/style`).",
+  dependencies: [],
   devDependencies,
   extends: "none",
-  name: "style",
   registryDependencies,
+} satisfies Pick<
+  RegistryItemType,
+  | "css"
+  | "cssVars"
+  | "dependencies"
+  | "devDependencies"
+  | "extends"
+  | "registryDependencies"
+>;
+
+const manifest: RegistryItemType = {
+  ...styleFoundation,
+  description:
+    "Shark theme foundation: colors, sidebar tokens, fonts, base styles, utilities, and animation support. Add components separately.",
+  name: "style",
   type: "registry:style",
 };
 

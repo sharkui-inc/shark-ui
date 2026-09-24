@@ -12,14 +12,6 @@ Wire Shark [Field](/docs/components/field) to React Hook Form, validate with [Zo
 
 A text input and a textarea. Submit runs the schema and shows errors on the fields.
 
-<Alert>
-  <InfoIcon />
-  <AlertTitle>Browser validation disabled</AlertTitle>
-  <AlertDescription>
-    This demo turns off native browser validation so schema errors are visible. Keep native validation on in production.
-  </AlertDescription>
-</Alert>
-
 <ComponentPreview componentName="form/rhf" fileName="example-demo" showBorders={false} autoHeight />
 
 ## Approach
@@ -162,7 +154,7 @@ export const ExampleForm = () => {
 
 ### Modes
 
-Configure when validation runs via the `mode` option:
+Configure when validation first runs via the `mode` option:
 
 ```tsx showLineNumbers title="form.tsx" {3}
 const form = useForm({
@@ -178,6 +170,16 @@ const form = useForm({
 | `"onSubmit"` | Validation triggers on submit. |
 | `"onTouched"` | Validation triggers on first blur, then on every change. |
 | `"all"` | Validation triggers on blur and change. |
+
+After submission, `reValidateMode` controls when fields with errors are validated again. It defaults to `"onChange"`:
+
+```tsx showLineNumbers title="form.tsx" {4}
+const form = useForm({
+  resolver: zodResolver(formSchema),
+  mode: "onSubmit",
+  reValidateMode: "onBlur",
+})
+```
 
 ## Displaying Errors
 

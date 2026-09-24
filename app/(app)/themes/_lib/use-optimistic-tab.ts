@@ -1,28 +1,9 @@
 "use client";
 
 import React from "react";
+import { useMediaQuery } from "@/registry/react/hooks/use-is-mobile";
 
 const LG_MEDIA = "(min-width: 1024px)";
-
-const useIsLg = () => {
-  const [isLg, setIsLg] = React.useState(false);
-
-  React.useEffect(() => {
-    const mediaQuery = window.matchMedia(LG_MEDIA);
-    const onChange = () => {
-      setIsLg(mediaQuery.matches);
-    };
-
-    onChange();
-    mediaQuery.addEventListener("change", onChange);
-
-    return () => {
-      mediaQuery.removeEventListener("change", onChange);
-    };
-  }, []);
-
-  return isLg;
-};
 
 export const useOptimisticTab = (initialTab: string) => {
   const [tab, setTab] = React.useState(initialTab);
@@ -39,7 +20,7 @@ export const useOptimisticTab = (initialTab: string) => {
 };
 
 export const useResponsiveTab = (initialTab: string) => {
-  const isLg = useIsLg();
+  const isLg = useMediaQuery(LG_MEDIA);
   const tab = useOptimisticTab(initialTab);
 
   return {

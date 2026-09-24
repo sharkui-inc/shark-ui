@@ -124,9 +124,9 @@ Use the `readOnly` prop to show files without allowing changes.
 
 ### Multiple Files
 
-Use the `maxFiles` prop to allow uploading multiple files at once.
+Use `maxFiles` to allow multiple files and `onFileReject` to show feedback when validation rejects them.
 
-<ComponentPreview componentName="file-upload" fileName="example-multiple-files" />
+<ComponentPreview componentName="file-upload" fileName="example-multiple-files" autoHeight />
 
 ### Trigger only
 
@@ -134,13 +134,13 @@ Use the `maxFiles` prop to allow uploading multiple files at once.
 
 ### Dropzone only
 
-Use `FileUploadDropzone` to enable drag-and-drop. It exposes a `data-dragging` attribute for styling the drag state.
+Use `FileUploadDropzone` to enable drag-and-drop.
 
 <ComponentPreview componentName="file-upload" fileName="example-dropzone" />
 
 ### Accepted Files
 
-Use the `accept` prop to restrict file types.
+Use the `accept` prop to restrict file types to PNG and JPEG.
 
 <ComponentPreview componentName="file-upload" fileName="example-accepted-file-types" />
 
@@ -151,18 +151,6 @@ Use `Field` to add helper text and error handling.
 <ComponentPreview componentName="file-upload" fileName="example-with-field" />
 
 ### Custom Preview
-
-```tsx
-const { acceptedFiles } = useFileUploadContext();
-
-return (
-  <div>
-    {acceptedFiles.map((file) => (
-      <div key={file.name}>{file.name}</div>
-    ))}
-  </div>
-);
-```
 
 <ComponentPreview componentName="file-upload" fileName="example-custom-preview" />
 

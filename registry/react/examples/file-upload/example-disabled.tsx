@@ -22,7 +22,7 @@ const Example = () => (
         <Separator />
       </div>
       <FileUploadTrigger asChild>
-        <Button disabled>Browse files</Button>
+        <Button>Browse files</Button>
       </FileUploadTrigger>
       <FileUploadHelper>Uploads are currently disabled.</FileUploadHelper>
     </FileUploadDropzone>

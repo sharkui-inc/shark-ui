@@ -83,7 +83,11 @@ const Example = () => {
               {(field) => {
                 const value = field.input as DateValue[];
                 return (
-                  <Field invalid={Boolean(field.errors?.length)}>
+                  <Field
+                    invalid={Boolean(field.errors?.length)}
+                    onBlur={field.props.onBlur}
+                    onFocus={field.props.onFocus}
+                  >
                     <DatePicker
                       onValueChange={({ value: nextValue }) =>
                         field.onChange(nextValue)

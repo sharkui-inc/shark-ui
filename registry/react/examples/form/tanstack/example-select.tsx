@@ -87,6 +87,7 @@ const Example = () => {
                   <Select
                     collection={collection}
                     name={field.name}
+                    onInteractOutside={field.handleBlur}
                     onValueChange={({ value }) => field.handleChange(value)}
                     value={field.state.value}
                   >

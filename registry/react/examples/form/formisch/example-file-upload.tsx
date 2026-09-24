@@ -77,7 +77,11 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["resume"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldLabel>Résumé</FieldLabel>
                   <FileUpload
                     accept=".pdf,.doc,.docx"

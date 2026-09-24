@@ -29,6 +29,8 @@ export const ImageCropper = (props: ImageCropperProps) => {
         "relative",
         "w-full",
         "aspect-video",
+        "rounded-md",
+        "overflow-hidden",
         className
       )}
       data-slot="image-cropper"

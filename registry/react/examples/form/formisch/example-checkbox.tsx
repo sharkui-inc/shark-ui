@@ -64,7 +64,11 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["responses"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldSet>
                     <FieldLegend variant="label">Responses</FieldLegend>
                     <FieldDescription>
@@ -92,7 +96,11 @@ const Example = () => {
             <FieldSeparator />
             <FormischField of={form} path={["tasks"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldSet>
                     <FieldLegend variant="label">Tasks</FieldLegend>
                     <FieldDescription>

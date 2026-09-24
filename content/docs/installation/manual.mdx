@@ -1,27 +1,19 @@
 ---
 title: Manual Installation
-description: Install Shark UI without the shadcn CLI by copying config and files manually.
+description: A guide to manually adding dependencies to your project.
 ---
-
-Manual setup gives you full control over every file. Use this when the CLI does not fit your setup or you prefer to wire the project yourself.
 
 ### Add Tailwind CSS
 
-Components are styled using Tailwind CSS. Install Tailwind CSS in your project first:
-
-[Follow the Tailwind CSS installation instructions.](https://tailwindcss.com/docs/installation)
+[Install Tailwind CSS](https://tailwindcss.com/docs/installation) first.
 
 ### Add dependencies
-
-Add the dependencies used by Shark UI components:
 
 ```bash
 pnpm add @ark-ui/react tailwind-variants clsx tailwind-merge lucide-react tw-animate-css
 ```
 
 ### Configure import aliases
-
-Choose one of the following alias setups.
 
 #### Option A: tsconfig.json paths
 
@@ -57,11 +49,11 @@ Choose one of the following alias setups.
 }
 ```
 
-The `@` alias is a preference. You can use other aliases if needed. If you use `package.json#imports`, keep the matching alias roots in `components.json`.
+`@` is optional. With `package.json#imports`, keep matching alias roots in `components.json`.
 
 ### Configure styles
 
-Create a file `styles/globals.css` and follow [Styling](/docs/styling#css-configuration) to configure the theme.
+Create `styles/globals.css` and follow [Styling](/docs/styling#css-configuration).
 
 ### Add a cn helper
 
@@ -74,7 +66,7 @@ export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs))
 
 ### Create a components.json file
 
-Create a `components.json` file in the project root so the shadcn CLI knows where to write components if you use it later.
+Optional, but required if you use the shadcn CLI later:
 
 ```json title="components.json" showLineNumbers
 {
@@ -103,7 +95,7 @@ Create a `components.json` file in the project root so the shadcn CLI knows wher
 }
 ```
 
-If you're using `package.json#imports`, use the corresponding `#...` aliases instead:
+With `package.json#imports`:
 
 ```json title="components.json" showLineNumbers
 {
@@ -117,15 +109,6 @@ If you're using `package.json#imports`, use the corresponding `#...` aliases ins
 }
 ```
 
-## Adding components
+## Add components
 
-You can add components with the CLI or copy them manually from the component docs:
-
-- **CLI**: Run `npx shadcn@latest add @shark/<component>` (e.g. `button`, `dialog`).
-- **Manual**: Copy component source from Manual tab in the component docs.
-
-You can also install every component at once:
-
-```bash
-npx shadcn@latest add @shark/ui
-```
+Copy source from the Manual tab on each component page and install the listed dependencies. For Starter, Style, and UI, see [Installation](/docs/installation).

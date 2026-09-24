@@ -1,19 +1,24 @@
 ---
-title: React Router
-description: A guide to installing Shark UI in a React Router project.
+title: Remix
+description: A guide to installing Shark UI in a Remix project.
 ---
 
 ## New project
 
 <Steps>
 
-<Step>Install the Shark theme, every component, and visual utilities in a new React Router project:</Step>
+<Step>Create the Remix app first. Remix is not a `shadcn init` template.</Step>
 
 ```bash
-npx shadcn@latest init @shark/starter -t react-router
+npx create-remix@latest my-app
+cd my-app
 ```
 
-For a monorepo, add `--monorepo`.
+<Step>Add the Shark theme, every component, and visual utilities.</Step>
+
+```bash
+npx shadcn@latest init @shark/starter
+```
 
 </Steps>
 
@@ -21,13 +26,7 @@ For a monorepo, add `--monorepo`.
 
 <Steps>
 
-<Step>If needed, create a React Router app first.</Step>
-
-```bash
-npx create-react-router@latest my-app
-```
-
-`create-react-router` configures Tailwind CSS and `~/*`. Shark components use `@/*`, so map it to `app/*`.
+<Step>Configure Tailwind CSS v4 and map `@/*` to `app/*`.</Step>
 
 ```json title="tsconfig.json"
 {
@@ -40,7 +39,7 @@ npx create-react-router@latest my-app
 }
 ```
 
-Configure the same alias in Vite. Custom projects also need Tailwind CSS.
+Configure the same alias in Vite.
 
 <Step>Add the Shark foundation: theme tokens, utils, and animations. No components are added.</Step>
 

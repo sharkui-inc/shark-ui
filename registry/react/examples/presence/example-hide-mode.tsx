@@ -5,13 +5,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Presence } from "@/registry/react/components/presence";
 
-const statusClassName = cn(
-  "inline-flex h-8 items-center rounded-lg border border-input bg-muted px-3",
-  "font-mono text-muted-foreground text-xs"
-);
-
 const Example = () => {
   const [present, setPresent] = React.useState(true);
+
   const [seconds, setSeconds] = React.useState(0);
 
   return (
@@ -24,8 +20,20 @@ const Example = () => {
         >
           {present ? "Hide" : "Show"}
         </Button>
-        <span className={statusClassName}>Timer: {seconds}s</span>
-        <span className={statusClassName}>
+        <span
+          className={cn(
+            "inline-flex h-8 items-center rounded-lg border border-input bg-muted px-3",
+            "font-mono text-muted-foreground text-xs"
+          )}
+        >
+          Timer: {seconds}s
+        </span>
+        <span
+          className={cn(
+            "inline-flex h-8 items-center rounded-lg border border-input bg-muted px-3",
+            "font-mono text-muted-foreground text-xs"
+          )}
+        >
           Effects: {present ? "running" : "paused"}
         </span>
       </div>
@@ -55,12 +63,11 @@ const Example = () => {
 
 const TickingTimer = (props: { onTick: () => void }) => {
   const { onTick } = props;
-  const onTickRef = React.useRef(onTick);
-  onTickRef.current = onTick;
+  const notifyTick = React.useEffectEvent(onTick);
 
   React.useEffect(() => {
     const id = window.setInterval(() => {
-      onTickRef.current();
+      notifyTick();
     }, 1000);
 
     return () => {

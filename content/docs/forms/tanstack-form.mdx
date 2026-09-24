@@ -12,14 +12,6 @@ Wire Shark [Field](/docs/components/field) to TanStack Form, validate with [Zod]
 
 A text input and a textarea. Submit runs the schema and shows errors on the fields.
 
-<Alert>
-  <InfoIcon />
-  <AlertTitle>Browser validation disabled</AlertTitle>
-  <AlertDescription>
-    This demo turns off native browser validation so schema errors are visible. Keep native validation on in production.
-  </AlertDescription>
-</Alert>
-
 <ComponentPreview componentName="form/tanstack" fileName="example-demo" showBorders={false} autoHeight />
 
 ## Approach
@@ -176,9 +168,9 @@ export const ExampleForm = () => {
 }
 ```
 
-### Modes
+### Validation triggers
 
-Configure when validation runs via the `validators` option:
+TanStack Form does not use a form-level validation `mode` option like React Hook Form. Choose when validation runs by adding the corresponding trigger as a key in `validators`:
 
 ```tsx showLineNumbers title="form.tsx" {2}
 const form = useForm({
@@ -186,11 +178,13 @@ const form = useForm({
 })
 ```
 
-| Mode | Description |
+| `validators` key | When validation runs |
 | --- | --- |
-| `"onChange"` | Validation triggers on every change. |
-| `"onBlur"` | Validation triggers on blur. |
-| `"onSubmit"` | Validation triggers on submit. |
+| `onChange` | On every change. |
+| `onBlur` | On blur. |
+| `onSubmit` | On submit. |
+
+For validation that changes behavior after submission, use `validationLogic` with `revalidateLogic()`.
 
 ## Displaying Errors
 
@@ -242,7 +236,7 @@ Set `invalid` on `Field`. Skip it on `Input`, `Checkbox`, and the other controls
 
 ### Select
 
-- Wire `value` and `onValueChange` on `Select`. For overlays, call `field.handleBlur()` from `onInteractOutside` when your example needs blur sync.
+- Wire `value` and `onValueChange` on `Select`. For Select, Combobox, and Autocomplete, call `field.handleBlur()` from `onInteractOutside` when you need blur validation.
 - Set `invalid` on `Field` and pass the message to `FieldError`.
 
 <ComponentPreview componentName="form/tanstack" fileName="example-select" showBorders={false} autoHeight />

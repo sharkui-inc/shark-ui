@@ -1,13 +1,13 @@
 ---
 title: shadcn/ui
-description: "Map shadcn/ui components to Shark UI: triggers, tokens, and API differences."
+description: Migrate your project from shadcn/ui to Shark UI.
 links:
   doc: https://ui.shadcn.com
 ---
 
 [shadcn/ui](https://ui.shadcn.com) ships styled components on Radix, Base UI, or React Aria. Shark UI is built on [Ark UI](https://ark-ui.com) with the same copy-and-own workflow.
 
-What you change depends on which base your project uses. For Radix or Base UI without shadcn styling, see [Radix UI](/docs/migration/radix) and [Base UI](/docs/migration/base-ui).
+What you change depends on which base your project uses. For Radix, Base UI, or React Aria without shadcn styling, see the [Radix UI](/docs/migration/radix), [Base UI](/docs/migration/base-ui), or [React Aria](/docs/migration/react-aria) guide.
 
 ## Which base are you on?
 
@@ -17,7 +17,7 @@ See how triggers and list components are composed in your repo.
 | --- | --- | --- |
 | Radix | `radix` | Part names, collections, value arrays |
 | Base UI | `base` | `render` → `asChild` on triggers; collections on lists |
-| React Aria | `aria` | Slots, labels, anatomy per component |
+| React Aria | `aria` | [React Aria guide](/docs/migration/react-aria) |
 
 Shark uses **`asChild`**, not `render`. Radix-based shadcn already matches that. Base UI shadcn does not.
 
@@ -39,7 +39,7 @@ Shark uses **`asChild`**, not `render`. Radix-based shadcn already matches that.
 | --- | --- |
 | Select, Combobox | Pass Ark `collection`; Combobox filters with `useFilter` |
 | Toggle Group | Array values; no `type` prop |
-| Accordion | Array values; no `type` / `collapsible` |
+| Accordion | Array values; no `type`; `collapsible` is still supported |
 | Input OTP | Drop `input-otp` and `InputOTPGroup` |
 | Sidebar | Check `placement` and provider |
 | Dialog, Sheet, Drawer | Title part still required |
@@ -54,6 +54,58 @@ Shark uses **`asChild`**, not `render`. Radix-based shadcn already matches that.
 
 Full registry: [Components](/docs/components). Shark-only primitives include [Autocomplete](/docs/components/autocomplete), [Segment Group](/docs/components/segment-group), and [Floating Panel](/docs/components/floating-panel).
 
+## Combobox
+
+Shark Combobox uses an Ark collection. Filter it from `onInputValueChange` and render `collection.items`:
+
+```tsx
+"use client";
+
+import { useFilter, useListCollection } from "@ark-ui/react";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
+
+const ComboboxExample = () => {
+  const { contains } = useFilter({ sensitivity: "base" });
+  const { collection, filter } = useListCollection({
+    filter: contains,
+    initialItems: [
+      { label: "Apple", value: "apple" },
+      { label: "Banana", value: "banana" },
+    ],
+  });
+
+  return (
+    <Combobox
+      collection={collection}
+      onInputValueChange={({ inputValue, reason }) =>
+        filter(reason === "item-select" ? "" : inputValue)
+      }
+    >
+      <ComboboxInput placeholder="Select a fruit" />
+      <ComboboxContent>
+        <ComboboxEmpty />
+        <ComboboxList>
+          {collection.items.map((item) => (
+            <ComboboxItem item={item} key={item.value}>
+              {item.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+};
+
+export default ComboboxExample;
+```
+
 ## Colors and tokens
 
 Same semantic model as shadcn (`background`, `primary`, `muted`, and the rest). Shark also ships:
@@ -67,7 +119,9 @@ See [Colors](/docs/colors), [Styling](/docs/styling), and the [Theme editor](/th
 
 ## Checklist
 
-- Match your shadcn base to the trigger pattern above.
-- Check API differences for same-name components; use the equivalents table for renames.
-- Port theme variables; add the extra token pairs if you use status colors.
-- Re-check controlled values, collections, and [RTL](/docs/rtl) spacing.
+- Replace shadcn imports with Shark components from the docs.
+- Match trigger composition to your shadcn base.
+- Add collections where list primitives require them.
+- Re-check controlled values against the Shark docs page.
+- Keep overlay titles and control labels accessible.
+- Use logical spacing for [RTL](/docs/rtl).

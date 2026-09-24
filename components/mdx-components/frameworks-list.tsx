@@ -3,6 +3,7 @@ import { LaravelIcon } from "@/components/icons/laravel";
 import { NextIcon } from "@/components/icons/next";
 import { ReactIcon } from "@/components/icons/react";
 import { ReactRouterIcon } from "@/components/icons/react-router";
+import { RemixIcon } from "@/components/icons/remix";
 import { TanstackIcon } from "@/components/icons/tanstack-start";
 import { ViteIcon } from "@/components/icons/vite";
 import { NavLink } from "@/components/nav-link";
@@ -58,6 +59,11 @@ const FRAMEWORKS = [
     href: "/docs/installation/react-router",
     icon: <ReactRouterIcon className="size-8" />,
     name: "React Router",
+  },
+  {
+    href: "/docs/installation/remix",
+    icon: <RemixIcon className="size-8" />,
+    name: "Remix",
   },
   {
     href: "/docs/installation/laravel",

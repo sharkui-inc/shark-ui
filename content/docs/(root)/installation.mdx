@@ -1,50 +1,58 @@
 ---
 title: Installation
-description: Install Shark UI in a Tailwind CSS v4 project. Components land in your repository.
+description: How to install and set up Shark UI in your project.
 ---
 
 import { FrameworksList } from "@/components/mdx-components/frameworks-list";
 
 ## Prerequisites
 
-Components require [Tailwind CSS v4](https://tailwindcss.com). You need a project with Tailwind already installed.
-
-## Adding components
-
-### CLI
-
-```bash
-npx shadcn@latest add @shark/<component>
-```
-
-### Manual
-
-Copy component source from the component docs via the Manual tab.
-
-### All at once
-
-```bash
-npx shadcn@latest add @shark/ui
-```
+Components are built with [Tailwind CSS v4](https://tailwindcss.com) and need it to work.
 
 ## New Project Setup
 
-For new projects, you have the `CLI` and `Manual` setup.
+One command for a new project: theme, every component, and visual utilities.
 
-### CLI
+<Steps>
+
+<Step>Initialize with Starter:</Step>
+
+```bash
+npx shadcn@latest init @shark/starter
+```
+
+</Steps>
+
+## Existing Project
+
+Add the theme first, then install the full catalog or only the components you need.
+
+<Steps>
+
+<Step>Install theme, utils, and animations:</Step>
 
 ```bash
 npx shadcn@latest init @shark/style
 ```
 
-### Manual
+<Step>Install all components at once (optional):</Step>
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Or install individual components from the [component docs](/docs/components). 
+
+</Steps>
+
+## Manual setup
 
 <FrameworksList />
 
 ## Styling
 
-For theming and layout setup, see [Styling](/docs/styling).
+Theme tokens, `globals.css` setup, and how to customize layout and appearance. See [Styling](/docs/styling).
 
 ## Color system
 
-See [Colors](/docs/colors) for the full palette and variable reference.
+Neutral scales, semantic tokens (`primary`, `muted`, status colors), and the full CSS variable reference. See [Colors](/docs/colors).

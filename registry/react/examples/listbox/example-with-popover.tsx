@@ -4,13 +4,12 @@ import { useListCollection } from "@ark-ui/react/collection";
 import { useFilter } from "@ark-ui/react/locale";
 import { ChevronsUpDown } from "lucide-react";
 import React from "react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
-import { Input } from "@/registry/react/components/input";
 import {
   Listbox,
   ListboxContent,
   ListboxEmpty,
+  ListboxInput,
   ListboxItem,
   ListboxItemText,
   ListboxValueText,
@@ -22,7 +21,6 @@ import {
 } from "@/registry/react/components/popover";
 
 const Example = () => {
-  const [search, setSearch] = React.useState("");
   const [isOpen, setIsOpen] = React.useState(false);
 
   const { contains } = useFilter({ sensitivity: "base" });
@@ -37,8 +35,6 @@ const Example = () => {
     ],
   });
 
-  const isEmpty = collection.items.length === 0 && search;
-
   return (
     <Listbox
       className="max-w-48"
@@ -51,27 +47,22 @@ const Example = () => {
         <PopoverTrigger asChild>
           <Button className="justify-between" variant="outline">
             <ListboxValueText placeholder="Select framework" />
-            <ChevronsUpDown className="size-4 opacity-64" />
+            <ChevronsUpDown className="opacity-64" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className={cn("min-w-64 gap-2")}>
-          <Input
-            onChange={(e) => {
-              const { value } = e.target;
-              setSearch(value);
-              filter(value);
-            }}
-            placeholder="Search..."
-            value={search}
-          />
+        <PopoverContent className="min-w-64 gap-2">
           <ListboxContent>
+            <ListboxInput
+              onChange={(e) => filter(e.target.value)}
+              placeholder="Search..."
+            />
             {collection.items.map((item) => (
               <ListboxItem item={item} key={item.value}>
                 <ListboxItemText>{item.label}</ListboxItemText>
               </ListboxItem>
             ))}
 
-            {isEmpty ? <ListboxEmpty>No results found.</ListboxEmpty> : null}
+            <ListboxEmpty>No results found.</ListboxEmpty>
           </ListboxContent>
         </PopoverContent>
       </Popover>

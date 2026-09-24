@@ -59,7 +59,11 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["recommendScore"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldLabel>How useful is this project?</FieldLabel>
                   <Rating
                     count={5}

@@ -13,14 +13,6 @@ Wire Shark [Field](/docs/components/field) to Formisch, validate with [Valibot](
 
 A text input and a textarea. Submit runs the schema and shows errors on the fields.
 
-<Alert>
-  <InfoIcon />
-  <AlertTitle>Browser validation disabled</AlertTitle>
-  <AlertDescription>
-    This demo turns off native browser validation so schema errors are visible. Keep native validation on in production.
-  </AlertDescription>
-</Alert>
-
 <ComponentPreview componentName="form/formisch" fileName="example-demo" showBorders={false} autoHeight />
 
 ## Approach
@@ -176,6 +168,8 @@ Set `invalid` on `Field`. Skip it on `Input`, `Checkbox`, and the other controls
 ```
 
 ## Different types of fields
+
+For custom controls, wire `field.input` and `field.onChange` to the control’s value API. Forward `field.props.onFocus` and `field.props.onBlur` to the surrounding `Field` so focus and blur validation stay in sync.
 
 ### Input
 

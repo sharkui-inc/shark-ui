@@ -72,7 +72,11 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["stack"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldLabel>Primary technology</FieldLabel>
                   <Autocomplete
                     collection={collection}

@@ -55,25 +55,61 @@ const runtimes = new WeakMap<Chat, ChatRuntime>();
 
 const clone = <VALUE>(value: VALUE): VALUE => structuredClone(value);
 
-const wait = (delayMs: number, signal?: AbortSignal) =>
+const wait = (delayMs: number, signals: readonly AbortSignal[] = []) =>
   new Promise<void>((resolve) => {
-    if (delayMs <= 0 || signal?.aborted) {
+    if (delayMs <= 0 || signals.some((signal) => signal.aborted)) {
       resolve();
       return;
     }
 
-    const timeout = setTimeout(resolve, delayMs);
-    signal?.addEventListener(
-      "abort",
-      () => {
-        clearTimeout(timeout);
-        resolve();
-      },
-      { once: true }
-    );
+    const complete = () => {
+      clearTimeout(timeout);
+      for (const signal of signals) {
+        signal.removeEventListener("abort", complete);
+      }
+      resolve();
+    };
+    const timeout = setTimeout(complete, delayMs);
+
+    for (const signal of signals) {
+      signal.addEventListener("abort", complete, { once: true });
+    }
   });
 
 const textChunks = (text: string) => text.match(/\S+\s*/g) ?? [text];
+
+const createTimedChunkStream = <CHUNK>(
+  chunks: readonly CHUNK[],
+  firstDelayMs: number,
+  delayMs: number,
+  abortSignal?: AbortSignal
+) => {
+  const cancellationController = new AbortController();
+
+  const stream = async function* (): AsyncGenerator<CHUNK> {
+    for (const [index, chunk] of chunks.entries()) {
+      // biome-ignore lint/performance/noAwaitInLoops: Chunks must be scheduled sequentially.
+      await wait(
+        index === 0 ? firstDelayMs : delayMs,
+        abortSignal
+          ? [abortSignal, cancellationController.signal]
+          : [cancellationController.signal]
+      );
+
+      if (abortSignal?.aborted || cancellationController.signal.aborted) {
+        return;
+      }
+
+      yield chunk;
+    }
+  };
+
+  return {
+    cancel: () => cancellationController.abort(),
+    isCancelled: () => cancellationController.signal.aborted,
+    stream: stream(),
+  };
+};
 
 const latestTurnIndex = (
   turns: readonly ChatTurn[],
@@ -102,8 +138,17 @@ const latestTurnIndex = (
 
 const nextAssistantTurn = (
   turns: readonly ChatTurn[],
-  messages: readonly unknown[]
+  messages: readonly unknown[],
+  requestedAssistantId?: string
 ) => {
+  if (requestedAssistantId !== undefined) {
+    return turns.find(
+      (turn) =>
+        turn.message.id === requestedAssistantId &&
+        turn.message.role === "assistant"
+    );
+  }
+
   const userTurnIndex = latestTurnIndex(turns, messages);
   return turns
     .slice(userTurnIndex + 1)
@@ -148,8 +193,14 @@ const createAiSdkTransport = (
   options: CreateChatTransportOptions = {}
 ): ChatTransport<ChatUiMessage> => ({
   reconnectToStream: () => Promise.resolve(null),
-  sendMessages: ({ abortSignal, messages }) => {
-    const assistantTurn = nextAssistantTurn(turns, messages);
+  sendMessages: ({ abortSignal, messageId, messages, trigger }) => {
+    let assistantTurn: ChatTurn | undefined;
+
+    if (trigger === "regenerate-message" && messageId !== undefined) {
+      assistantTurn = nextAssistantTurn(turns, messages, messageId);
+    } else {
+      assistantTurn = nextAssistantTurn(turns, messages);
+    }
 
     if (!assistantTurn) {
       throw new Error("No simulated assistant response found.");
@@ -167,37 +218,67 @@ const createAiSdkTransport = (
       { finishReason: "stop", type: "finish" },
     ];
 
+    const scheduledChunks = createTimedChunkStream(
+      chunks,
+      assistantTurn.delayMs ?? 0,
+      options.delayMs ?? 50,
+      abortSignal
+    );
+    let emittedChunkCount = 0;
+    let pendingPull: Promise<void> | undefined;
+
+    const pullNextChunk = async (
+      controller: ReadableStreamDefaultController<
+        InferUIMessageChunk<ChatUiMessage>
+      >
+    ) => {
+      try {
+        const result = await scheduledChunks.stream.next();
+
+        if (scheduledChunks.isCancelled()) {
+          return;
+        }
+
+        if (result.done) {
+          if (abortSignal?.aborted) {
+            controller.enqueue({ type: "abort" });
+          }
+          controller.close();
+          return;
+        }
+
+        controller.enqueue(result.value);
+        emittedChunkCount += 1;
+
+        if (emittedChunkCount === chunks.length) {
+          controller.close();
+        }
+      } catch (error) {
+        if (!scheduledChunks.isCancelled()) {
+          controller.error(error);
+        }
+      }
+    };
+
     return Promise.resolve(
-      new ReadableStream<InferUIMessageChunk<ChatUiMessage>>({
-        start(controller) {
-          const enqueue = async (index: number): Promise<void> => {
-            await wait(
-              index === 0
-                ? (assistantTurn.delayMs ?? 0)
-                : (options.delayMs ?? 50),
-              abortSignal
-            );
-
-            if (abortSignal?.aborted) {
-              controller.enqueue({ type: "abort" });
-              controller.close();
-              return;
+      new ReadableStream<InferUIMessageChunk<ChatUiMessage>>(
+        {
+          cancel() {
+            scheduledChunks.cancel();
+            return scheduledChunks.stream.return().then(() => undefined);
+          },
+          pull(controller) {
+            if (!pendingPull) {
+              pendingPull = pullNextChunk(controller).finally(() => {
+                pendingPull = undefined;
+              });
             }
 
-            controller.enqueue(chunks[index]);
-            if (index === chunks.length - 1) {
-              controller.close();
-              return;
-            }
-
-            enqueue(index + 1).catch((error: unknown) =>
-              controller.error(error)
-            );
-          };
-
-          enqueue(0).catch((error: unknown) => controller.error(error));
+            return pendingPull;
+          },
         },
-      })
+        { highWaterMark: 0 }
+      )
     );
   },
 });
@@ -241,29 +322,19 @@ const createTanStackTransport = (
       },
     ] as StreamChunk[];
 
-    const stream = async function* (index = 0): AsyncGenerator<StreamChunk> {
-      await wait(
-        index === 0 ? (assistantTurn.delayMs ?? 0) : (options.delayMs ?? 50),
-        abortSignal
-      );
-
-      if (abortSignal?.aborted) {
-        return;
-      }
-
-      yield chunks[index];
-      if (index < chunks.length - 1) {
-        yield* stream(index + 1);
-      }
-    };
-
-    return stream();
+    return createTimedChunkStream(
+      chunks,
+      assistantTurn.delayMs ?? 0,
+      options.delayMs ?? 50,
+      abortSignal
+    ).stream;
   },
 });
 
 /** Creates a text-only chat for the selected AI runtime. */
 export const createChat = (options: { adapter: CreateChatAdapter }): Chat => {
   const turns: ChatTurn[] = [];
+  const messageIds = new Set<string>();
   let messageIndex = 0;
 
   const createMessage = (
@@ -275,9 +346,17 @@ export const createChat = (options: { adapter: CreateChatAdapter }): Chat => {
       messageIndex += 1;
     }
 
+    const messageId = id ?? `create-chat-message-${messageIndex}`;
+
+    if (messageIds.has(messageId)) {
+      throw new Error(`Duplicate chat message ID: ${messageId}`);
+    }
+
+    messageIds.add(messageId);
+
     return {
       content,
-      id: id ?? `create-chat-message-${messageIndex}`,
+      id: messageId,
       role,
     };
   };

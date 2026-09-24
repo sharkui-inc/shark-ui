@@ -72,7 +72,11 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["department"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldLabel>Primary department</FieldLabel>
                   <Combobox
                     collection={collection}

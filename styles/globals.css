@@ -6,6 +6,8 @@
 @import "./shimmer.css";
 @import "./swap.css";
 
+@source "../node_modules/streamdown/dist/*.js";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

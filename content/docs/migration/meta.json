@@ -1,4 +1,4 @@
 {
   "title": "Migration",
-  "pages": ["shadcn", "radix", "base-ui"]
+  "pages": ["shadcn", "radix", "base-ui", "react-aria"]
 }

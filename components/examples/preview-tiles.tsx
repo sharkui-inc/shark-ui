@@ -4,12 +4,17 @@ import { ExampleToaster } from "@/components/examples/example-toast";
 import { MasonryColumns } from "@/components/masonry-columns";
 import { cn } from "@/lib/utils";
 
-const PreviewTileFallback = (props: { className?: string }) => (
-  <div
-    aria-hidden="true"
-    className={cn("w-full rounded-xl bg-muted/4", props.className)}
-  />
-);
+const PreviewTileFallback = (props: React.ComponentProps<"div">) => {
+  const { className, ...rest } = props;
+
+  return (
+    <div
+      aria-hidden="true"
+      className={cn("w-full rounded-xl bg-muted/40", className)}
+      {...rest}
+    />
+  );
+};
 
 const ActivityGoalExample = dynamic(
   () =>

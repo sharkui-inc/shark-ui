@@ -10,6 +10,7 @@ import {
   RefreshCwIcon,
 } from "lucide-react";
 import React from "react";
+import { Streamdown } from "streamdown";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -49,6 +50,7 @@ import {
 import { Prose } from "@/registry/react/components/prose";
 import { useChatHelper } from "@/registry/react/hooks/use-chat-helper";
 import { createChat } from "@/registry/react/lib/create-chat";
+import "streamdown/styles.css";
 
 const CreateChatDemo = () => {
   const [session, setSession] = React.useState(0);
@@ -81,8 +83,8 @@ const ChatThread = ({ onReset }: { onReset: () => void }) => {
     <Card className="h-[32rem] w-full gap-0 overflow-hidden rounded-3xl py-0">
       <CardHeader
         className="shrink-0 border-b py-4"
-        description="How can I help you today?"
-        title="New Chat"
+        description="Weekend pop-up in Lisbon"
+        title="Cafe launch"
       >
         <CardAction>
           <Button
@@ -105,8 +107,10 @@ const ChatThread = ({ onReset }: { onReset: () => void }) => {
               streamedText={latestText}
             />
             <MessageScrollerContent className="gap-4">
-              {messages.map((message) => {
+              {messages.map((message, index) => {
                 const isUser = message.role === "user";
+                const isStreamingMessage =
+                  isBusy && !isUser && index === messages.length - 1;
 
                 return (
                   <MessageScrollerItem key={message.id}>
@@ -120,7 +124,10 @@ const ChatThread = ({ onReset }: { onReset: () => void }) => {
                             {isUser ? (
                               message.content
                             ) : (
-                              <MessageText text={message.content} />
+                              <MessageText
+                                isStreaming={isStreamingMessage}
+                                text={message.content}
+                              />
                             )}
                           </MessageBubbleContent>
                         </MessageBubble>
@@ -147,7 +154,7 @@ const ChatThread = ({ onReset }: { onReset: () => void }) => {
         >
           <PromptInputTextarea
             aria-label="Prompt"
-            placeholder="Ask the agent…"
+            placeholder="Ask about the launch…"
             readOnly
             value={nextText}
           />
@@ -207,19 +214,35 @@ const FollowLatestMessage = ({
 };
 
 const chat = createChat({ adapter: "ai-sdk" })
-  .user(
-    "Every time a reply streams in, the whole thread jumps. I can't keep my place."
-  )
+  .user("I'm opening a weekend pop-up cafe in Lisbon. Where do I start?")
   .assistant(
-    "Put the list in `MessageScroller`. It pins the viewport while tokens arrive, so the new text shows up where you're already looking.\n\nIf you scroll up, it stops. Your place holds until you jump back down.",
+    "Start with a tight menu: one espresso drink, one cold brew, and two pastries. Scarcity makes the line feel intentional.",
     { delayMs: 400 }
   )
-  .user(
-    "Sending a new message still feels like the view lurches. Like the latest turn just appears out of nowhere."
-  )
+  .user("What about the name?")
   .assistant(
-    "Same rule. Follow only if you're already at the bottom. A new send shouldn't drag you there if you scrolled away.",
+    "Try Maré, meaning tide. Short, easy to say in Portuguese and English, and it photographs well on a window vinyl.",
+    { delayMs: 350 }
+  )
+  .user("And the space? I only have a 12m² corner.")
+  .assistant(
+    "Lean into the corner. One long counter, stools facing the street, and a single shelf of merch behind you. No tables. People stand, sip, leave.",
     { delayMs: 400 }
+  )
+  .user("Can you sketch a three-day launch plan?")
+  .assistant(
+    "Friday: soft open for friends, fix the flow.\n\nSaturday: public drop, limited cups, Stories from the queue.\n\nSunday: sell out early, announce next weekend before the last pastry is gone.",
+    { delayMs: 450 }
+  )
+  .user("What should the first Instagram post say?")
+  .assistant(
+    "\"Maré opens Saturday at 8. Two drinks. Two pastries. When they're gone, we're gone.\"\n\nNo hashtag soup. One photo of the counter at dawn.",
+    { delayMs: 350 }
+  )
+  .user("Any merch worth printing for weekend one?")
+  .assistant(
+    "One tote and one enamel pin. Both with just the word Maré. Skip the full menu print. You'll change it next week.",
+    { delayMs: 380 }
   );
 
 const promptActions = [
@@ -250,36 +273,24 @@ const promptActions = [
   },
 ];
 
-const PARAGRAPH_BREAK = /\n\n+/;
+const MessageText = (props: { isStreaming?: boolean; text: string }) => {
+  const { isStreaming = false, text } = props;
 
-const INLINE_CODE = /(`[^`]+`)/g;
-
-const MessageText = ({ text }: { text: string }) => {
   if (!text) {
     return null;
   }
 
-  const paragraphs = text.split(PARAGRAPH_BREAK);
-
   return (
-    <Prose className="max-w-none [&_p:not(:first-child)]:mt-3">
-      {paragraphs.map((paragraph) => (
-        <p key={paragraph}>{renderInline(paragraph)}</p>
-      ))}
+    <Prose className="max-w-none">
+      <Streamdown
+        animated
+        isAnimating={isStreaming}
+        mode={isStreaming ? "streaming" : "static"}
+      >
+        {text}
+      </Streamdown>
     </Prose>
   );
-};
-
-const renderInline = (text: string) => {
-  const parts = text.split(INLINE_CODE).filter(Boolean);
-
-  return parts.map((part) => {
-    if (part.startsWith("`") && part.endsWith("`") && part.length > 2) {
-      return <code key={part}>{part.slice(1, -1)}</code>;
-    }
-
-    return <span key={part}>{part}</span>;
-  });
 };
 
 const toPromptStatus = (status: string): PromptInputStatus => {

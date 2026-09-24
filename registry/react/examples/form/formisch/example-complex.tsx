@@ -75,7 +75,11 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["plan"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldSet>
                     <FieldLegend variant="label">Subscription plan</FieldLegend>
                     <FieldDescription>
@@ -119,7 +123,11 @@ const Example = () => {
             <FieldSeparator />
             <FormischField of={form} path={["billingPeriod"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldLabel>Billing period</FieldLabel>
                   <Select
                     collection={collection}
@@ -150,7 +158,11 @@ const Example = () => {
               {(field) => {
                 const list = Array.isArray(field.input) ? field.input : [];
                 return (
-                  <Field invalid={Boolean(field.errors?.length)}>
+                  <Field
+                    invalid={Boolean(field.errors?.length)}
+                    onBlur={field.props.onBlur}
+                    onFocus={field.props.onFocus}
+                  >
                     <FieldSet>
                       <FieldLegend variant="label">Add-ons</FieldLegend>
                       <FieldDescription>

@@ -61,6 +61,8 @@ const Example = () => {
               {(field) => (
                 <Field
                   invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
                   orientation="horizontal"
                 >
                   <FieldContent>

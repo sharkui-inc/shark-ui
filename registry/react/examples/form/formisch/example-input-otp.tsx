@@ -61,7 +61,11 @@ const Example = () => {
               {(field) => {
                 const value = field.input as string[];
                 return (
-                  <Field invalid={Boolean(field.errors?.length)}>
+                  <Field
+                    invalid={Boolean(field.errors?.length)}
+                    onBlur={field.props.onBlur}
+                    onFocus={field.props.onFocus}
+                  >
                     <FieldLabel>Backup code</FieldLabel>
                     <InputOTP
                       onValueChange={({ value: nextValue }) =>

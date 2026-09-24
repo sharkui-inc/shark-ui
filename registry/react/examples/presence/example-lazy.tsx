@@ -5,13 +5,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Presence } from "@/registry/react/components/presence";
 
-const statusClassName = cn(
-  "inline-flex h-8 items-center rounded-lg border border-input bg-muted px-3",
-  "font-mono text-muted-foreground text-xs"
-);
-
 const Example = () => {
   const [present, setPresent] = React.useState(false);
+
   const [mounts, setMounts] = React.useState(0);
 
   return (
@@ -24,7 +20,14 @@ const Example = () => {
         >
           {present ? "Hide" : "Show"}
         </Button>
-        <span className={statusClassName}>Mounts: {mounts}</span>
+        <span
+          className={cn(
+            "inline-flex h-8 items-center rounded-lg border border-input bg-muted px-3",
+            "font-mono text-muted-foreground text-xs"
+          )}
+        >
+          Mounts: {mounts}
+        </span>
       </div>
       <Presence asChild present={present}>
         <div
@@ -47,11 +50,10 @@ const Example = () => {
 
 const MountedContent = (props: { onMount: () => void }) => {
   const { onMount } = props;
-  const onMountRef = React.useRef(onMount);
-  onMountRef.current = onMount;
+  const notifyMount = React.useEffectEvent(onMount);
 
   React.useEffect(() => {
-    onMountRef.current();
+    notifyMount();
   }, []);
 
   return <p className="text-foreground">Mounted</p>;

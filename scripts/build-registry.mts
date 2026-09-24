@@ -29,10 +29,13 @@ const SOURCE_EXT_PRIORITY = new Map(
 export const STANDALONE_MANIFESTS = [
   "ui",
   "style",
+  "starter",
   "hitbox",
   "shimmer",
   "chat",
 ] as const;
+
+const UI_BUNDLE_STYLE_ITEMS = ["hitbox", "shimmer"] as const;
 
 export const KINDS = {
   component: {
@@ -58,6 +61,7 @@ export const KINDS = {
 export const REGISTRY_KINDS = Object.keys(KINDS) as RegistryKind[];
 
 const LOCALHOST_RE = /localhost|127\.0\.0\.1/i;
+const REGISTRY_ITEM_URL_RE = /\/r\/([^/]+)\.json$/;
 const CWD = process.cwd();
 const PUBLIC_DIR = join(CWD, "public", "r");
 const TRAILING_SLASH = /\/$/;
@@ -173,6 +177,28 @@ export const validatePublishedArtifact = (
   }
 
   assertRegistryDepsOrigin(fileName, parsed.registryDependencies, siteOrigin);
+};
+
+export const assertUiBundleComplete = (
+  manifestTypes: ReadonlyMap<string, string>,
+  uiBundle: readonly string[]
+) => {
+  const expected = [
+    ...Array.from(manifestTypes, ([name, type]) => ({ name, type }))
+      .filter(({ name, type }) => name !== "ui" && type === "registry:ui")
+      .map(({ name }) => name),
+    ...UI_BUNDLE_STYLE_ITEMS,
+  ];
+  const installed = new Set(
+    uiBundle.map((item) => item.match(REGISTRY_ITEM_URL_RE)?.[1] ?? item)
+  );
+  const missing = expected.filter((name) => !installed.has(name));
+
+  if (missing.length > 0) {
+    throw new Error(
+      `@shark/ui is missing installable items: ${missing.sort().join(", ")}`
+    );
+  }
 };
 
 const manifestCache = new Map<string, Promise<RegistryItemType>>();
@@ -354,11 +380,27 @@ const assertPublishedRegistryUrls = async () => {
   }
 };
 
+const assertUiBundleCompleteness = async () => {
+  const names = (await readdir(join(CWD, "registry", "manifest")))
+    .filter((name) => name.endsWith(".ts"))
+    .map((name) => name.slice(0, -3));
+  const manifests = await Promise.all(
+    names.map(async (name) => [name, await loadManifest(name)] as const)
+  );
+  const manifestTypes = new Map(
+    manifests.map(([name, manifest]) => [name, manifest.type])
+  );
+  const uiManifest = await loadManifest("ui");
+
+  assertUiBundleComplete(manifestTypes, uiManifest.registryDependencies ?? []);
+};
+
 const main = async () => {
   await mkdir(PUBLIC_DIR, { recursive: true });
   await Promise.all(REGISTRY_KINDS.map((kind) => processKind(kind)));
   await processCompositions();
   await processStandaloneManifests();
+  await assertUiBundleCompleteness();
   await assertPublishedRegistryUrls();
 };
 

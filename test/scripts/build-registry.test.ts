@@ -1,9 +1,15 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { describe, it } from "node:test";
 import type { CompositionArtifact } from "@/lib/registry";
+import starter from "@/registry/manifest/starter";
+import style, { styleFoundation } from "@/registry/manifest/style";
+import ui, { SHARK_UI_BUNDLE } from "@/registry/manifest/ui";
 import {
   assertNoLocalhost,
   assertRegistryDepsOrigin,
+  assertUiBundleComplete,
   KINDS,
   pickSourceFiles,
   primaryRegistryPath,
@@ -19,6 +25,12 @@ const MUST_USE_SITE_ORIGIN =
 const DEPS_NOT_UNDER_ORIGIN =
   /registryDependency is not under https:\/\/shark-ui\.com\//;
 const LOCALHOST_FOUND = /localhost URL found/;
+const UI_BUNDLE_MISSING_ITEMS = /hitbox, shimmer/;
+
+const readRegistryArtifact = (name: string) =>
+  JSON.parse(
+    readFileSync(join(process.cwd(), "public", "r", `${name}.json`), "utf8")
+  ) as Record<string, unknown>;
 
 const sampleComposition = (): CompositionArtifact => ({
   category: "sidebar",
@@ -244,5 +256,77 @@ describe("validatePublishedArtifact", () => {
         SITE_ORIGIN
       )
     );
+  });
+});
+
+describe("installation manifests", () => {
+  it("keeps style limited to the theme foundation", () => {
+    assert.deepEqual(style.dependencies, []);
+    assert.deepEqual(style.devDependencies, ["tw-animate-css"]);
+    assert.ok(
+      style.registryDependencies?.every((item) => item.includes("utils"))
+    );
+    assert.ok(!JSON.stringify(style).includes("@base-ui/react"));
+  });
+
+  it("makes starter share the style foundation and install the UI bundle", () => {
+    assert.equal(starter.css, styleFoundation.css);
+    assert.equal(starter.cssVars, styleFoundation.cssVars);
+    assert.ok(
+      starter.registryDependencies?.some((item) => item.endsWith("/r/ui.json"))
+    );
+  });
+
+  it("requires the UI bundle to contain every installable UI item", () => {
+    const manifestTypes = new Map([
+      ["button", "registry:ui"],
+      ["chat", "registry:ui"],
+      ["hitbox", "registry:style"],
+      ["shimmer", "registry:style"],
+      ["style", "registry:style"],
+      ["ui", "registry:ui"],
+    ]);
+
+    assert.doesNotThrow(() =>
+      assertUiBundleComplete(manifestTypes, [
+        "button",
+        "chat",
+        "hitbox",
+        "shimmer",
+      ])
+    );
+    assert.throws(
+      () => assertUiBundleComplete(manifestTypes, ["button", "chat"]),
+      UI_BUNDLE_MISSING_ITEMS
+    );
+    assert.ok(SHARK_UI_BUNDLE.includes("masonry"));
+    assert.ok(
+      ui.registryDependencies?.some((item) => item.endsWith("/r/chat.json"))
+    );
+  });
+
+  it("publishes canonical starter, style, and UI artifacts", () => {
+    const styleArtifact = readRegistryArtifact("style");
+    const starterArtifact = readRegistryArtifact("starter");
+    const uiArtifact = readRegistryArtifact("ui");
+    const serialized = JSON.stringify({
+      starterArtifact,
+      styleArtifact,
+      uiArtifact,
+    });
+
+    assert.deepEqual(styleArtifact.dependencies, []);
+    assert.ok(
+      (starterArtifact.registryDependencies as string[]).includes(
+        "https://shark-ui.com/r/ui.json"
+      )
+    );
+    assert.ok(
+      (uiArtifact.registryDependencies as string[]).includes(
+        "https://shark-ui.com/r/masonry.json"
+      )
+    );
+    assert.ok(!serialized.includes("@base-ui/react"));
+    assert.ok(!serialized.includes("shark.vini.one"));
   });
 });

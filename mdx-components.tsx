@@ -293,6 +293,7 @@ export const mdxComponents = {
     <p
       className={cn(
         "not-first:mt-6 text-muted-foreground leading-relaxed",
+        "[&+.steps]:mt-6",
         iframeAfterTextClassName(),
         className
       )}
@@ -335,7 +336,7 @@ export const mdxComponents = {
   Step: ({ className, ...props }: React.ComponentProps<"h3">) => (
     <h3
       className={cn(
-        "mt-8 scroll-m-32 tracking-tight first:mt-2",
+        "mt-8 scroll-m-32 font-medium text-base tracking-tight first:mt-2",
         "before:me-2 before:inline-flex before:size-6 before:items-center before:justify-center before:bg-code",
         "before:text-center before:-indent-px before:font-mono before:text-xs before:tabular-nums",
         "before:rounded-full before:border before:border-border before:font-medium before:content-[counter(step)]",
@@ -346,11 +347,12 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  Steps: ({ ...props }) => (
+  Steps: ({ className, ...props }: React.ComponentProps<"div">) => (
     <div
       className={cn(
         "steps mb-12 [counter-reset:step] md:ms-4 md:border-s md:ps-8",
-        "*:data-[slot=step]:[counter-increment:step]"
+        "*:data-[slot=step]:[counter-increment:step]",
+        className
       )}
       {...props}
     />
@@ -367,10 +369,7 @@ export const mdxComponents = {
     ...props
   }: React.ComponentProps<typeof TabsContent>) => (
     <TabsContent
-      className={cn(
-        "relative [&_h3]:font-medium [&_h3]:text-base *:[figure]:first:mt-0",
-        className
-      )}
+      className={cn("relative *:[figure]:first:mt-0", className)}
       {...props}
     />
   ),

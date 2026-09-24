@@ -11,12 +11,13 @@ const dependencies = [
 
 const devDependencies = ["tw-animate-css"];
 
-const SHARK_UI_BUNDLE = [
+export const SHARK_UI_BUNDLE = [
   "accordion",
   "action-bar",
   "alert",
   "alert-dialog",
   "announcement",
+  "approval-card",
   "aspect-ratio",
   "attachment",
   "autocomplete",
@@ -40,6 +41,7 @@ const SHARK_UI_BUNDLE = [
   "color-picker",
   "combobox",
   "command",
+  "context",
   "context-menu",
   "data-table",
   "data-list",
@@ -61,6 +63,7 @@ const SHARK_UI_BUNDLE = [
   "hitbox",
   "hotkeys",
   "hover-card",
+  "icon-tile",
   "iframe",
   "image-cropper",
   "input",
@@ -73,6 +76,7 @@ const SHARK_UI_BUNDLE = [
   "listbox",
   "locale",
   "marquee",
+  "masonry",
   "marker",
   "menu",
   "message",
@@ -90,6 +94,7 @@ const SHARK_UI_BUNDLE = [
   "prose",
   "qr-code",
   "questionnaire",
+  "queue",
   "radio-group",
   "rating",
   "reasoning",
@@ -109,6 +114,8 @@ const SHARK_UI_BUNDLE = [
   "state",
   "status",
   "steps",
+  "suggestion",
+  "sources",
   "swap",
   "switch",
   "table",
@@ -126,10 +133,13 @@ const SHARK_UI_BUNDLE = [
   "tooltip",
   "tour",
   "tree-view",
+  "chat",
 ] as const;
 
 const manifest: RegistryItemType = {
   dependencies,
+  description:
+    "Every installable Shark UI component and visual utility. Install `@shark/style` or use `@shark/starter` for the theme foundation.",
   devDependencies,
   name: "ui",
   registryDependencies: SHARK_UI_BUNDLE.map((name) =>

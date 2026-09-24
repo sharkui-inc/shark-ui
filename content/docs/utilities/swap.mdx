@@ -77,24 +77,11 @@ import { Swap } from "@/registry/react/components/swap";
 ```
 
 ```tsx
-const Example = () => {
-  const [swap, setSwap] = React.useState(false);
-
-  return (
-    <Button
-      aria-label="Toggle dark mode"
-      onClick={() => setSwap((value) => !value)}
-      size="icon-lg"
-      variant="outline"
-    >
-      <Swap
-        off={<SunIcon aria-hidden="true" className="size-4" />}
-        on={<MoonIcon aria-hidden="true" className="size-4" />}
-        swap={swap}
-      />
-    </Button>
-  );
-};
+<Swap
+  off={<SunIcon aria-hidden="true" />}
+  on={<MoonIcon aria-hidden="true" />}
+  swap={condition}
+/>
 ```
 
 ## Custom animations
@@ -105,8 +92,8 @@ const Example = () => {
     "data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom-1 data-[state=open]:duration-150 data-[state=open]:ease-out",
     "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-1 data-[state=closed]:duration-150 data-[state=closed]:ease-out",
   )}
-  off={<SunIcon aria-hidden="true" className="size-4" />}
-  on={<MoonIcon aria-hidden="true" className="size-4" />}
+  off={<SunIcon aria-hidden="true" />}
+  on={<MoonIcon aria-hidden="true" />}
   swap={swap}
 />
 ```

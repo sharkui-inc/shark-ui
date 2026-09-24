@@ -26,6 +26,7 @@ export const FileUpload = (
         "group/file-upload",
         "relative",
         "flex flex-col justify-center gap-4",
+        "data-disabled:opacity-64",
         className
       )}
       data-slot="file-upload"
@@ -56,6 +57,7 @@ export const FileUploadDropzone = (
         "text-center",
         "rounded-2xl border-2 border-input border-dashed",
         "cursor-pointer outline-hidden",
+        "data-disabled:cursor-default",
         "data-cover:absolute data-cover:inset-0 data-cover:flex data-cover:items-center data-cover:justify-center",
         "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "data-dragging:border-primary/64 data-dragging:bg-primary/8",
@@ -144,83 +146,73 @@ interface FileUploadListProps
 export const FileUploadList = (props: FileUploadListProps) => {
   const { className, ...rest } = props;
 
-  const fileUpload = useFileUploadContext();
-
-  const files = fileUpload.acceptedFiles;
-
-  if (files.length === 0) {
-    return null;
-  }
-
-  const keyCounts = new Map<string, number>();
-
-  for (const file of files) {
-    const baseKey = `${file.name}-${file.size}-${file.lastModified}`;
-    keyCounts.set(baseKey, (keyCounts.get(baseKey) ?? 0) + 1);
-  }
-
   return (
-    <FileUploadItemGroup className="flex flex-col gap-2">
-      {files.map((file, index) => {
-        const isImage = file.type.startsWith("image/");
-
-        const baseKey = `${file.name}-${file.size}-${file.lastModified}`;
-        const key =
-          (keyCounts.get(baseKey) ?? 0) > 1 ? `${baseKey}-${index}` : baseKey;
-
-        const extension = file.name.split(".").pop();
+    <ArkFileUpload.Context>
+      {({ acceptedFiles }) => {
+        if (acceptedFiles.length === 0) {
+          return null;
+        }
 
         return (
-          <FileUploadItem
-            className={cn(
-              "flex-1 items-center justify-start gap-2",
-              "bg-card",
-              "p-2",
-              "rounded-xl border shadow-xs/4",
-              "fade-in-0 slide-in-from-top-5 animate-in",
-              "motion-reduce:animate-none",
-              className
-            )}
-            file={file}
-            key={key}
-            {...rest}
-          >
-            <FileUploadItemPreview
-              className="size-8"
-              {...(isImage ? { type: "image/*" } : { type: ".*" })}
-            >
-              {isImage ? (
-                <FileUploadItemPreviewImage />
-              ) : (
-                <span className="uppercase">{extension}</span>
-              )}
-            </FileUploadItemPreview>
+          <FileUploadItemGroup className="flex flex-col gap-2">
+            {acceptedFiles.map((file) => {
+              const isImage = file.type.startsWith("image/");
+              const extension = file.name.split(".").pop();
 
-            <div className="flex min-w-0 flex-1 flex-col gap-0.5 overflow-hidden">
-              <FileUploadItemName />
-              <FileUploadItemSize />
-            </div>
+              return (
+                <FileUploadItem
+                  className={cn(
+                    "flex-1 items-center justify-start gap-2",
+                    "bg-card",
+                    "p-2",
+                    "rounded-xl border shadow-xs/4",
+                    "fade-in-0 slide-in-from-top-5 animate-in",
+                    "motion-reduce:animate-none",
+                    className
+                  )}
+                  file={file}
+                  key={file.name}
+                  {...rest}
+                >
+                  <FileUploadItemPreview
+                    className="size-8"
+                    {...(isImage ? { type: "image/*" } : { type: ".*" })}
+                  >
+                    {isImage ? (
+                      <FileUploadItemPreviewImage />
+                    ) : (
+                      <span className="uppercase">{extension}</span>
+                    )}
+                  </FileUploadItemPreview>
 
-            <FileUploadItemDeleteTrigger
-              asChild
-              className="me-auto rtl:ms-auto"
-            >
-              <Button
-                className={cn(
-                  "rounded-lg",
-                  "hover:bg-destructive/8 hover:text-destructive",
-                  "dark:hover:bg-destructive-foreground/8 dark:hover:text-destructive-foreground"
-                )}
-                size="icon-xs"
-                variant="ghost"
-              >
-                <XIcon />
-              </Button>
-            </FileUploadItemDeleteTrigger>
-          </FileUploadItem>
+                  <div className="flex min-w-0 flex-1 flex-col gap-0.5 overflow-hidden">
+                    <FileUploadItemName />
+                    <FileUploadItemSize />
+                  </div>
+
+                  <FileUploadItemDeleteTrigger
+                    asChild
+                    className="me-auto rtl:ms-auto"
+                  >
+                    <Button
+                      className={cn(
+                        "rounded-lg",
+                        "hover:bg-destructive/8 hover:text-destructive",
+                        "dark:hover:bg-destructive-foreground/8 dark:hover:text-destructive-foreground"
+                      )}
+                      size="icon-xs"
+                      variant="ghost"
+                    >
+                      <XIcon />
+                    </Button>
+                  </FileUploadItemDeleteTrigger>
+                </FileUploadItem>
+              );
+            })}
+          </FileUploadItemGroup>
         );
-      })}
-    </FileUploadItemGroup>
+      }}
+    </ArkFileUpload.Context>
   );
 };
 

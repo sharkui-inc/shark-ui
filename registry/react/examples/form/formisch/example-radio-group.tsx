@@ -64,7 +64,11 @@ function Example() {
           <FieldGroup>
             <FormischField of={form} path={["plan"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldSet>
                     <FieldLegend>Plan</FieldLegend>
                     <FieldDescription>

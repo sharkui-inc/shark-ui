@@ -1,8 +1,10 @@
 "use client";
 
 import type { Root } from "fumadocs-core/page-tree";
+import { usePathname } from "next/navigation";
 import type React from "react";
 import { NavLink } from "@/components/nav-link";
+import { getActiveNavHref } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -26,6 +28,9 @@ interface MobileNavProps extends React.ComponentProps<typeof Button> {
 export const MobileNav = (props: MobileNavProps) => {
   const { tree, items, className, ...rest } = props;
 
+  const pathname = usePathname();
+  const activeHref = getActiveNavHref(pathname, items);
+
   return (
     <Popover {...rest}>
       <PopoverTrigger asChild>
@@ -38,13 +43,13 @@ export const MobileNav = (props: MobileNavProps) => {
           <div className="relative size-4">
             <span
               className={cn(
-                "absolute inset-s-0 block h-0.5 w-4 bg-foreground transition-[top,rotate] duration-[120ms] ease-out motion-reduce:transition-none",
+                "absolute inset-s-0 block h-0.5 w-4 bg-foreground transition-[top,rotate] duration-150 ease-out motion-reduce:transition-none",
                 "top-1 group-data-[state=open]:top-[0.4rem] group-data-[state=open]:-rotate-45"
               )}
             />
             <span
               className={cn(
-                "absolute inset-s-0 block h-0.5 w-4 bg-foreground transition-[top,rotate] duration-[120ms] ease-out motion-reduce:transition-none",
+                "absolute inset-s-0 block h-0.5 w-4 bg-foreground transition-[top,rotate] duration-150 ease-out motion-reduce:transition-none",
                 "top-2.5 group-data-[state=open]:top-[0.4rem] group-data-[state=open]:rotate-45"
               )}
             />
@@ -62,6 +67,7 @@ export const MobileNav = (props: MobileNavProps) => {
               {items.map((item) => (
                 <PopoverClose asChild key={item.href}>
                   <NavLink
+                    active={item.href === activeHref}
                     className="flex items-center gap-2 font-medium text-2xl"
                     href={item.href}
                   >
