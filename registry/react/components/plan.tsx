@@ -9,6 +9,7 @@ import {
   ListChecksIcon,
 } from "lucide-react";
 import React from "react";
+import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/registry/react/components/badge";
 import {
@@ -21,6 +22,107 @@ import { Spinner } from "@/registry/react/components/spinner";
 
 export type PlanItemStatus = "completed" | "error" | "in-progress" | "pending";
 export type PlanStatus = PlanItemStatus;
+
+const planHeaderVariants = tv({
+  base: [
+    "flex w-full min-w-0 items-center gap-3 px-3 py-2 text-start",
+    "border border-transparent hover:bg-muted/48 focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
+    "transition-colors duration-150 motion-reduce:transition-none",
+  ],
+  defaultVariants: {
+    description: false,
+  },
+  variants: {
+    description: {
+      false: "min-h-10",
+      true: "min-h-14",
+    },
+  },
+});
+
+const planHeaderTitleStackVariants = tv({
+  base: "flex min-w-0 flex-1 flex-col",
+  defaultVariants: {
+    description: false,
+  },
+  variants: {
+    description: {
+      true: "gap-0.5",
+    },
+  },
+});
+
+const planItemTriggerVariants = tv({
+  base: [
+    "grid min-h-9 w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-lg px-2 py-1.5 text-start",
+    "transition-colors duration-150 motion-reduce:transition-none",
+    "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
+  ],
+  defaultVariants: {
+    collapsible: false,
+    status: "pending",
+  },
+  variants: {
+    collapsible: {
+      false: "",
+      true: [
+        "cursor-pointer border border-transparent hover:bg-muted focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
+      ],
+    },
+    status: {
+      completed: "",
+      error: "",
+      "in-progress": "bg-muted/64",
+      pending: "",
+    },
+  },
+});
+
+const planItemTitleVariants = tv({
+  base: "min-w-0 truncate",
+  defaultVariants: {
+    status: "pending",
+  },
+  variants: {
+    status: {
+      completed: "text-muted-foreground",
+      error: "",
+      "in-progress": "",
+      pending: "",
+    },
+  },
+});
+
+const planHeaderStatusVariants = tv({
+  base: "flex shrink-0 items-center text-muted-foreground",
+  defaultVariants: {
+    status: "pending",
+  },
+  variants: {
+    status: {
+      completed: "text-success-foreground",
+      error: "text-destructive-foreground",
+      "in-progress":
+        "text-foreground transition-[opacity,scale] duration-150 ease-out group-data-[state=open]/collapsible:pointer-events-none group-data-[state=open]/collapsible:scale-75 group-data-[state=open]/collapsible:opacity-0 motion-reduce:transition-none",
+      pending: "",
+    },
+  },
+});
+
+const planStatusIconVariants = tv({
+  base: "size-3.5 shrink-0",
+  defaultVariants: {
+    status: "pending",
+  },
+  variants: {
+    status: {
+      completed: "text-success-foreground",
+      error: "text-destructive-foreground",
+      "in-progress": "",
+      pending: "text-muted-foreground",
+    },
+  },
+});
 
 interface PlanContextValue {
   status: PlanStatus;
@@ -91,14 +193,12 @@ export const PlanHeader = (props: PlanHeaderProps) => {
   const { title, className, children, description, ...rest } = props;
 
   const { status } = usePlan();
+  const hasDescription = !!description;
 
   return (
     <CollapsibleTrigger
       className={cn(
-        "flex w-full min-w-0 items-center gap-3 px-3 py-2 text-start",
-        description ? "min-h-14" : "min-h-10",
-        "border border-transparent hover:bg-muted/48 focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
-        "transition-colors duration-150 motion-reduce:transition-none",
+        planHeaderVariants({ description: hasDescription }),
         className
       )}
       data-align="start"
@@ -110,7 +210,9 @@ export const PlanHeader = (props: PlanHeaderProps) => {
         className="h-lh w-4 shrink-0 self-start text-muted-foreground"
       />
       <span
-        className={cn("flex min-w-0 flex-1 flex-col", description && "gap-0.5")}
+        className={planHeaderTitleStackVariants({
+          description: hasDescription,
+        })}
       >
         {title ? <PlanTitle>{title}</PlanTitle> : (children ?? null)}
         {description ? (
@@ -248,12 +350,7 @@ export const PlanItemTrigger = (props: PlanItemTriggerProps) => {
   const content = children ?? (
     <>
       <PlanStatusIcon status={status} />
-      <span
-        className={cn(
-          "min-w-0 truncate",
-          status === "completed" && "text-muted-foreground"
-        )}
-      >
+      <span className={planItemTitleVariants({ status })}>
         <span className="sr-only">{statusLabels[status]}: </span>
         {title}
       </span>
@@ -264,10 +361,7 @@ export const PlanItemTrigger = (props: PlanItemTriggerProps) => {
     return (
       <ark.button
         className={cn(
-          "grid min-h-9 w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-lg px-2 py-1.5 text-start",
-          status === "in-progress" && "bg-muted/64",
-          "transition-colors duration-150 motion-reduce:transition-none",
-          "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
+          planItemTriggerVariants({ collapsible: false, status }),
           className
         )}
         data-slot="plan-item-trigger"
@@ -283,11 +377,7 @@ export const PlanItemTrigger = (props: PlanItemTriggerProps) => {
   return (
     <CollapsibleTrigger
       className={cn(
-        "grid min-h-9 w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-lg px-2 py-1.5 text-start",
-        "cursor-pointer border border-transparent hover:bg-muted focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
-        status === "in-progress" && "bg-muted/64",
-        "transition-colors duration-150 motion-reduce:transition-none",
-        "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
+        planItemTriggerVariants({ collapsible: true, status }),
         className
       )}
       data-align="start"
@@ -371,13 +461,7 @@ const PlanHeaderStatus = (props: { status: PlanStatus }) => {
   return (
     <span
       aria-live="polite"
-      className={cn(
-        "flex shrink-0 items-center text-muted-foreground",
-        status === "in-progress" &&
-          "text-foreground transition-[opacity,scale] duration-150 ease-out group-data-[state=open]/collapsible:pointer-events-none group-data-[state=open]/collapsible:scale-75 group-data-[state=open]/collapsible:opacity-0 motion-reduce:transition-none",
-        status === "completed" && "text-success-foreground",
-        status === "error" && "text-destructive-foreground"
-      )}
+      className={planHeaderStatusVariants({ status })}
       data-slot="plan-header-status"
       data-status={status}
     >
@@ -394,7 +478,10 @@ const PlanStatusIcon = (props: {
   const { className, status } = props;
   if (status === "in-progress") {
     return (
-      <Spinner aria-hidden className={cn("size-3.5 shrink-0", className)} />
+      <Spinner
+        aria-hidden
+        className={cn(planStatusIconVariants({ status }), className)}
+      />
     );
   }
 
@@ -409,13 +496,7 @@ const PlanStatusIcon = (props: {
   return (
     <Icon
       aria-hidden
-      className={cn(
-        "size-3.5 shrink-0",
-        status === "completed" && "text-success-foreground",
-        status === "error" && "text-destructive-foreground",
-        status === "pending" && "text-muted-foreground",
-        className
-      )}
+      className={cn(planStatusIconVariants({ status }), className)}
     />
   );
 };

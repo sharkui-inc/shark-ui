@@ -104,9 +104,10 @@ export const mdxComponents = {
           className={cn(
             "relative",
             "px-1",
-            "bg-primary/8",
-            "font-mono text-primary text-sm",
             "rounded-md",
+            "font-medium font-mono text-sm",
+            "bg-primary/12 dark:bg-primary/16",
+            "text-[color-mix(in_oklab,var(--primary)_58%,black)] dark:text-primary",
             className
           )}
           {...props}
@@ -380,6 +381,7 @@ export const mdxComponents = {
       <Table
         className={cn(
           "relative w-full border-none [&_tbody_tr:last-child]:border-b-0",
+          "[&_code]:bg-muted! [&_code]:font-normal! [&_code]:text-foreground!",
           className
         )}
         isHoverable={false}
@@ -387,14 +389,8 @@ export const mdxComponents = {
       />
     </ScrollArea>
   ),
-  td: ({ className, ...props }: React.ComponentProps<typeof TableCell>) => (
-    <TableCell
-      className={cn(
-        "**:[code]:bg-transparent **:[code]:text-foreground",
-        className
-      )}
-      {...props}
-    />
+  td: (props: React.ComponentProps<typeof TableCell>) => (
+    <TableCell {...props} />
   ),
   th: ({ className, ...props }: React.ComponentProps<typeof TableHead>) => (
     <TableHead className={cn("font-medium", className)} {...props} />

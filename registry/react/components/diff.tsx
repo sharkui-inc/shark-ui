@@ -165,43 +165,52 @@ export const DiffContent = (props: React.ComponentProps<typeof ark.div>) => {
 };
 
 const diffLineVariants = tv({
-  base: [
-    "col-span-2 grid min-h-(--code-surface-line-height) w-full min-w-max grid-cols-subgrid items-stretch",
-  ],
   defaultVariants: {
     type: "context",
   },
+  slots: {
+    code: [
+      "ps-(--code-surface-inline-padding) pe-(--code-surface-inline-padding)",
+      "whitespace-pre text-muted-foreground",
+    ],
+    gutter: [
+      "sticky left-0 z-1",
+      "flex w-full min-w-0 items-center",
+      "bg-card",
+      "before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:w-0.75 before:content-['']",
+    ],
+    number: [
+      "w-full px-(--code-surface-inline-padding)",
+      "select-none text-end text-muted-foreground tabular-nums",
+    ],
+    root: [
+      "col-span-2 grid min-h-(--code-surface-line-height) w-full min-w-max grid-cols-subgrid items-stretch",
+    ],
+  },
   variants: {
     type: {
-      add: "bg-[color-mix(in_srgb,var(--color-success)_10%,var(--card))]",
-      context: "text-muted-foreground",
-      delete:
-        "bg-[color-mix(in_srgb,var(--color-destructive)_10%,var(--card))]",
-    },
-  },
-});
-
-const diffGutterVariants = tv({
-  base: [
-    "sticky left-0 z-1",
-    "flex w-full min-w-0 items-center",
-    "bg-card",
-    "before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:w-0.75 before:content-['']",
-  ],
-  defaultVariants: {
-    type: "context",
-  },
-  variants: {
-    type: {
-      add: [
-        "bg-[color-mix(in_srgb,var(--color-success)_10%,var(--card))]",
-        "before:bg-success",
-      ],
-      context: "before:bg-transparent",
-      delete: [
-        "bg-[color-mix(in_srgb,var(--color-destructive)_10%,var(--card))]",
-        "before:bg-destructive",
-      ],
+      add: {
+        code: "text-foreground",
+        gutter: [
+          "bg-[color-mix(in_srgb,var(--color-success)_10%,var(--card))]",
+          "before:bg-success",
+        ],
+        number: "text-success-foreground",
+        root: "bg-[color-mix(in_srgb,var(--color-success)_10%,var(--card))]",
+      },
+      context: {
+        gutter: "before:bg-transparent",
+        root: "text-muted-foreground",
+      },
+      delete: {
+        code: "text-foreground",
+        gutter: [
+          "bg-[color-mix(in_srgb,var(--color-destructive)_10%,var(--card))]",
+          "before:bg-destructive",
+        ],
+        number: "text-destructive-foreground",
+        root: "bg-[color-mix(in_srgb,var(--color-destructive)_10%,var(--card))]",
+      },
     },
   },
 });
@@ -219,37 +228,23 @@ export const DiffLine = (props: DiffLineProps) => {
   const { className, type = "context", children, line, ...rest } = props;
 
   const lineType: DiffLineType = type ?? "context";
+  const { code, gutter, number, root } = diffLineVariants({ type: lineType });
 
   return (
     <ark.div
       aria-label={getDiffLineAriaLabel(lineType, line)}
-      className={cn(diffLineVariants({ type: lineType }), className)}
+      className={cn(root(), className)}
       data-slot="diff-line"
       data-type={lineType}
       role="group"
       {...rest}
     >
-      <span className={diffGutterVariants({ type: lineType })}>
-        <span
-          className={cn(
-            "w-full px-(--code-surface-inline-padding)",
-            "select-none text-end text-muted-foreground tabular-nums",
-            lineType === "add" && "text-success-foreground",
-            lineType === "delete" && "text-destructive-foreground"
-          )}
-          data-slot="diff-line-number"
-        >
+      <span className={gutter()}>
+        <span className={number()} data-slot="diff-line-number">
           {line ?? ""}
         </span>
       </span>
-      <code
-        className={cn(
-          "ps-(--code-surface-inline-padding) pe-(--code-surface-inline-padding)",
-          "whitespace-pre text-muted-foreground",
-          (lineType === "add" || lineType === "delete") && "text-foreground"
-        )}
-        data-slot="diff-line-code"
-      >
+      <code className={code()} data-slot="diff-line-code">
         {children}
       </code>
     </ark.div>
