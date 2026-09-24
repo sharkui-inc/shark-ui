@@ -187,61 +187,61 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `columns` | `ColumnDef<DataTableFeatures, TData>[]` | - |
-| `data` | `TData[]` | - |
-| `caption` | `ReactNode` | - |
+| `columns` | `ColumnDef<DataTableFeatures, TData>[]` | `-` |
+| `data` | `TData[]` | `-` |
+| `caption` | `ReactNode` | `-` |
 | `emptyMessage` | `ReactNode` | `"No results."` |
-| `tableOptions` | `TableOptions` without `columns`, `data`, and `features` | - |
-| `className` | `string` | - |
+| `tableOptions` | `Omit<TableOptions<DataTableFeatures, TData>, "columns" \| "data" \| "features">` | `-` |
+| `className` | `string` | `-` |
 
 ### DataTableColumnHeader
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `column` | `Column<DataTableFeatures, TData, TValue>` | - |
-| `title` | `string` | - |
-| `className` | `string` | - |
+| `column` | `Column<DataTableFeatures, TData, TValue>` | `-` |
+| `title` | `string` | `-` |
+| `className` | `string` | `-` |
 
 ### DataTablePagination
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `table` | `ReactTable<DataTableFeatures, TData>` | - |
-| `className` | `string` | - |
+| `table` | `ReactTable<DataTableFeatures, TData>` | `-` |
+| `className` | `string` | `-` |
 
 ### DataTablePaginationSelectedCount
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### DataTablePaginationControls
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### DataTablePaginationRowsPerPage
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### DataTablePaginationPageInfo
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### DataTablePaginationNavigation
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### DataTableViewOptions
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `table` | `ReactTable<DataTableFeatures, TData>` | - |
-| `className` | `string` | - |
+| `table` | `ReactTable<DataTableFeatures, TData>` | `-` |
+| `className` | `string` | `-` |

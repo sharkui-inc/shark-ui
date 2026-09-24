@@ -129,17 +129,17 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `count` | `number` | - |
-| `page` | `number` | - |
+| `count` | `number` | `-` |
+| `page` | `number` | `-` |
 | `defaultPage` | `number` | `1` |
-| `pageSize` | `number` | - |
+| `pageSize` | `number` | `-` |
 | `defaultPageSize` | `number` | `10` |
 | `siblingCount` | `number` | `1` |
 | `boundaryCount` | `number` | `1` |
 | `type` | `"button" \| "link"` | `"button"` |
-| `getPageUrl` | `(details: PageUrlDetails) => string` | - |
-| `onPageChange` | `(details: PageChangeDetails) => void` | - |
-| `onPageSizeChange` | `(details: PageSizeChangeDetails) => void` | - |
+| `getPageUrl` | `(details: PageUrlDetails) => string` | `-` |
+| `onPageChange` | `(details: PageChangeDetails) => void` | `-` |
+| `onPageSizeChange` | `(details: PageSizeChangeDetails) => void` | `-` |
 
 ### PaginationRootProvider
 
@@ -147,7 +147,7 @@ Provides a Pagination API created with `usePagination` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UsePaginationReturn` | **required** |
+| `value` | `UsePaginationReturn` | `required` |
 | `type` | `"button" \| "link"` | `"button"` |
 
 Pass the same `type` you used in `usePagination` so link mode renders `<a>` items.
@@ -159,7 +159,7 @@ Public PaginationFirst component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### PaginationPrevious
 
@@ -168,7 +168,7 @@ Public PaginationPrevious component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### PaginationNext
 
@@ -177,7 +177,7 @@ Public PaginationNext component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### PaginationLast
 
@@ -186,7 +186,7 @@ Public PaginationLast component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### PaginationItem
 
@@ -195,7 +195,7 @@ Public PaginationItem component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### PaginationItems
 
@@ -204,7 +204,7 @@ Public PaginationItems component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### PaginationEllipsis
 
@@ -213,7 +213,7 @@ Public PaginationEllipsis component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ---
 

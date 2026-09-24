@@ -240,12 +240,12 @@ Root element of the menu component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `positioning` | `PositioningOptions` | - |
-| `open` | `boolean` | - |
-| `defaultOpen` | `boolean` | - |
-| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
-| `onSelect` | `(details: SelectionDetails) => void` | - |
-| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | - |
+| `positioning` | `PositioningOptions` | `-` |
+| `open` | `boolean` | `-` |
+| `defaultOpen` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
+| `onSelect` | `(details: SelectionDetails) => void` | `-` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
 | `closeOnSelect` | `boolean` | `true` |
 
 ### MenuTrigger
@@ -254,8 +254,8 @@ Opens the menu on click.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `value` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `value` | `string` | `-` |
 
 ### MenuPositioner
 
@@ -263,8 +263,8 @@ Positions the menu content relative to its trigger.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### MenuContent
 
@@ -272,8 +272,8 @@ Holds menu options. Displayed in a portal, positioned relative to the trigger.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### MenuItem
 
@@ -281,12 +281,12 @@ A single selectable menu option.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
+| `value` | `string` | `required` |
 | `variant` | `"default" \| "destructive"` | `"default"` |
-| `asChild` | `boolean` | - |
-| `disabled` | `boolean` | - |
-| `closeOnSelect` | `boolean` | - |
-| `onSelect` | `VoidFunction` | - |
+| `asChild` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
+| `closeOnSelect` | `boolean` | `-` |
+| `onSelect` | `VoidFunction` | `-` |
 
 ### MenuItemDescription
 
@@ -294,7 +294,7 @@ Secondary line under a menu item label. Aligns leading icons to the title when p
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### MenuCheckboxItem
 
@@ -302,10 +302,10 @@ A menu option with a checkbox.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
-| `checked` | `boolean` | - |
-| `onCheckedChange` | `(checked: boolean) => void` | - |
-| `disabled` | `boolean` | - |
+| `value` | `string` | `required` |
+| `checked` | `boolean` | `-` |
+| `onCheckedChange` | `(checked: boolean) => void` | `-` |
+| `disabled` | `boolean` | `-` |
 
 ### MenuRadioGroup
 
@@ -313,9 +313,9 @@ Group of mutually exclusive options.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
-| `heading` | `string` | - |
+| `value` | `string` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
+| `heading` | `string` | `-` |
 
 ### MenuRadioItem
 
@@ -323,8 +323,8 @@ A single option in a radio group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
-| `disabled` | `boolean` | - |
+| `value` | `string` | `required` |
+| `disabled` | `boolean` | `-` |
 
 ### MenuGroup
 
@@ -332,7 +332,7 @@ Groups related items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string` | - |
+| `heading` | `string` | `-` |
 
 ### MenuGroupLabel
 
@@ -340,8 +340,8 @@ Label for a group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### MenuSeparator
 
@@ -349,8 +349,8 @@ Visual divider between groups of menu items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### MenuQuickItem
 
@@ -358,11 +358,11 @@ A menu option with icon-above-text layout for quick actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
-| `asChild` | `boolean` | - |
-| `disabled` | `boolean` | - |
-| `closeOnSelect` | `boolean` | - |
-| `onSelect` | `VoidFunction` | - |
+| `value` | `string` | `required` |
+| `asChild` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
+| `closeOnSelect` | `boolean` | `-` |
+| `onSelect` | `VoidFunction` | `-` |
 
 ### MenuSub
 
@@ -370,10 +370,10 @@ Root element for a nested submenu. It accepts the same state and positioning pro
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `positioning` | `PositioningOptions` | - |
-| `open` | `boolean` | - |
-| `defaultOpen` | `boolean` | - |
-| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
+| `positioning` | `PositioningOptions` | `-` |
+| `open` | `boolean` | `-` |
+| `defaultOpen` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
 | `closeOnSelect` | `boolean` | `true` |
 
 ### MenuSubTrigger
@@ -382,10 +382,10 @@ Menu item that opens its nested submenu.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
-| `disabled` | `boolean` | - |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `value` | `string` | `required` |
+| `disabled` | `boolean` | `-` |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### MenuSubContent
 
@@ -393,8 +393,8 @@ Holds the items rendered by a nested submenu.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### MenuShortcut
 
@@ -402,7 +402,7 @@ Optional keyboard shortcut hint displayed next to a menu item.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### MenuRootProvider
 
@@ -410,7 +410,7 @@ Provides a Menu API created with `useMenu` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseMenuReturn` | **required** |
+| `value` | `UseMenuReturn` | `required` |
 
 ---
 

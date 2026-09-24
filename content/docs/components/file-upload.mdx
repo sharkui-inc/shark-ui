@@ -313,7 +313,7 @@ Single uploaded file with preview and remove button.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `file` | `File` | required |
+| `file` | `File` | `required` |
 | `asChild` | `boolean` | `-` |
 | `className` | `string` | `-` |
 
@@ -378,15 +378,15 @@ Hook to access file upload state and methods. Use inside `FileUpload` or `FileUp
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `acceptedFiles` | `File[]` | - |
-| `rejectedFiles` | `FileRejection[]` | - |
-| `openFilePicker` | `() => void` | - |
-| `deleteFile` | `(file: File, type?: ItemType) => void` | - |
-| `clearFiles` | `() => void` | - |
-| `clearRejectedFiles` | `() => void` | - |
-| `getFileSize` | `(file: File) => string` | - |
-| `createFileUrl` | `(file: File, cb: (url: string) => void) => () => void` | - |
-| `setClipboardFiles` | `(dt: DataTransfer) => boolean` | - |
+| `acceptedFiles` | `File[]` | `-` |
+| `rejectedFiles` | `FileRejection[]` | `-` |
+| `openFilePicker` | `() => void` | `-` |
+| `deleteFile` | `(file: File, type?: ItemType) => void` | `-` |
+| `clearFiles` | `() => void` | `-` |
+| `clearRejectedFiles` | `() => void` | `-` |
+| `getFileSize` | `(file: File) => string` | `-` |
+| `createFileUrl` | `(file: File, cb: (url: string) => void) => () => void` | `-` |
+| `setClipboardFiles` | `(dt: DataTransfer) => boolean` | `-` |
 
 ### FileUploadRootProvider
 
@@ -394,7 +394,7 @@ Provides a FileUpload API created with `useFileUpload` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseFileUploadReturn` | **required** |
+| `value` | `UseFileUploadReturn` | `required` |
 
 ---
 

@@ -152,21 +152,21 @@ Root wrapper. Manages crop state and handles.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `aspectRatio` | `number` | - |
+| `aspectRatio` | `number` | `-` |
 | `cropShape` | `"circle" \| "rectangle"` | `"rectangle"` |
 | `fixedCropArea` | `boolean` | `false` |
-| `initialCrop` | `{ x: number; y: number; width: number; height: number }` | - |
+| `initialCrop` | `{ x: number; y: number; width: number; height: number }` | `-` |
 | `maxHeight` | `number` | `Infinity` |
 | `maxWidth` | `number` | `Infinity` |
 | `maxZoom` | `number` | `5` |
 | `minHeight` | `number` | `40` |
 | `minWidth` | `number` | `40` |
 | `minZoom` | `number` | `1` |
-| `onCropChange` | `(details: CropChangeDetails) => void` | - |
-| `onZoomChange` | `(details: ZoomChangeDetails) => void` | - |
-| `rotation` | `number` | - |
-| `zoom` | `number` | - |
-| `className` | `string` | - |
+| `onCropChange` | `(details: CropChangeDetails) => void` | `-` |
+| `onZoomChange` | `(details: ZoomChangeDetails) => void` | `-` |
+| `rotation` | `number` | `-` |
+| `zoom` | `number` | `-` |
+| `className` | `string` | `-` |
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -180,9 +180,9 @@ Image to crop. Pass `src` and alt.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `alt` | `string` | - |
-| `src` | `string` | - |
-| `className` | `string` | - |
+| `alt` | `string` | `-` |
+| `src` | `string` | `-` |
+| `className` | `string` | `-` |
 
 ### ImageCropperSelection
 
@@ -191,7 +191,7 @@ Crop selection overlay with resize handles and optional grid.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `axis` | `"horizontal" \| "vertical" \| "both"` | `"both"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ImageCropperRootProvider
 
@@ -199,7 +199,7 @@ Provides a ImageCropper API created with `useImageCropper` to descendant compone
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseImageCropperReturn` | **required** |
+| `value` | `UseImageCropperReturn` | `required` |
 
 ### ImageCropperContext
 
@@ -207,7 +207,7 @@ Render-prop access to the surrounding component API.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `children` | `(api: unknown) => React.ReactNode` | **required** |
+| `children` | `(api: unknown) => React.ReactNode` | `required` |
 
 ### ImageCropperHandle
 
@@ -216,7 +216,7 @@ Public ImageCropperHandle component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ImageCropperGrid
 
@@ -225,7 +225,7 @@ Public ImageCropperGrid component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ---
 

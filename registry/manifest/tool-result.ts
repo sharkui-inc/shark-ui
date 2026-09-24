@@ -20,7 +20,10 @@ const manifest: RegistryItemType = {
   description:
     "Collapsible tool result row with title, meta, and trailing actions.",
   name: "tool-result",
-  registryDependencies: [registryUrl("/r/collapsible.json")],
+  registryDependencies: [
+    registryUrl("/r/collapsible.json"),
+    registryUrl("/r/spinner.json"),
+  ],
   type: "registry:ui",
 };
 

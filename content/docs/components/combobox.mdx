@@ -229,19 +229,19 @@ Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `ListCollection<T>` | **required** |
-| `value` | `string \| string[]` | - |
-| `defaultValue` | `string \| string[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
-| `onInputValueChange` | `(details: InputValueChangeDetails) => void` | - |
+| `collection` | `ListCollection<T>` | `required` |
+| `value` | `string \| string[]` | `-` |
+| `defaultValue` | `string \| string[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | `-` |
+| `onInputValueChange` | `(details: InputValueChangeDetails) => void` | `-` |
 | `multiple` | `boolean` | `false` |
 | `selectionBehavior` | `"clear" \| "replace" \| "preserve"` | `"replace"` |
-| `disabled` | `boolean` | - |
+| `disabled` | `boolean` | `-` |
 | `openOnClick` | `boolean` | `true` |
-| `alwaysSubmitOnEnter` | `boolean` | - |
+| `alwaysSubmitOnEnter` | `boolean` | `-` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ComboboxControl
 
@@ -249,8 +249,8 @@ Optional wrapper for custom layouts.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxInput
 
@@ -259,11 +259,11 @@ Input with menu trigger and optional clear button. Combines search and selection
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
-| `variant` | `"ghost"` | - |
+| `variant` | `"ghost"` | `-` |
 | `showTrigger` | `boolean` | `true` |
 | `showClear` | `boolean` | `false` |
-| `disabled` | `boolean` | - |
-| `className` | `string` | - |
+| `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ComboboxChips
 
@@ -273,7 +273,7 @@ Control for multiple selections. Wrap `ComboboxChip` values and a
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ComboboxChipsInput
 
@@ -281,8 +281,8 @@ Search input for use inside `ComboboxChips`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `placeholder` | `string` | - |
-| `className` | `string` | - |
+| `placeholder` | `string` | `-` |
+| `className` | `string` | `-` |
 
 ### ComboboxChip
 
@@ -290,10 +290,10 @@ Displays one selected value and removes it from the combobox when its button is 
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
-| `children` | `ReactNode` | **required** |
-| `removeProps` | `ComponentProps<"button">` | - |
-| `className` | `string` | - |
+| `value` | `string` | `required` |
+| `children` | `ReactNode` | `required` |
+| `removeProps` | `ComponentProps<"button">` | `-` |
+| `className` | `string` | `-` |
 
 ### ComboboxTrigger
 
@@ -301,8 +301,8 @@ Opens the menu on click.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxButtonTrigger
 
@@ -312,10 +312,10 @@ Button trigger that displays the selected value or a placeholder.
 | --- | --- | --- |
 | `placeholder` | `ReactNode` | `"Select an option"` |
 | `showTrigger` | `boolean` | `true` |
-| `size` | [ButtonSize](/docs/components/button#size) | `"md"` |
-| `variant` | [ButtonVariant](/docs/components/button#variants) | `"outline"` |
-| `children` | `ReactNode` | - |
-| `className` | `string` | - |
+| `size` | [`ButtonSize`](/docs/components/button#size) | `"md"` |
+| `variant` | [`ButtonVariant`](/docs/components/button#variants) | `"outline"` |
+| `children` | `ReactNode` | `-` |
+| `className` | `string` | `-` |
 
 ### ComboboxClear
 
@@ -323,7 +323,7 @@ Button to clear the input value.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxContent
 
@@ -331,8 +331,8 @@ Holds the menu options. Displayed in a portal.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxList
 
@@ -340,8 +340,8 @@ Wraps the list of options. Use with collection.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxItem
 
@@ -349,9 +349,9 @@ A single selectable option.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `item` | `T` | **required** |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `item` | `T` | `required` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxGroup
 
@@ -359,9 +359,9 @@ Groups related options under an optional heading.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string \| ReactNode` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `heading` | `string \| ReactNode` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxGroupLabel
 
@@ -369,8 +369,8 @@ Label for an option group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxEmpty
 
@@ -378,7 +378,7 @@ Shown when no options match the current filter. Use for empty state.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `children` | `ReactNode` | `No results found.` |
 
 ### ComboboxRootProvider
@@ -387,7 +387,7 @@ Provides a Combobox API created with `useCombobox` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseComboboxReturn` | **required** |
+| `value` | `UseComboboxReturn` | `required` |
 
 ### ComboboxContext
 
@@ -395,7 +395,7 @@ Render-prop access to the surrounding component API.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `children` | `(api: unknown) => React.ReactNode` | **required** |
+| `children` | `(api: unknown) => React.ReactNode` | `required` |
 
 ### ComboboxFieldInput
 
@@ -404,7 +404,7 @@ Public ComboboxFieldInput component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ComboboxPositioner
 
@@ -413,7 +413,7 @@ Public ComboboxPositioner component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ---
 

@@ -141,11 +141,11 @@ Root component that wraps the tooltip. Manages open state and positioning.
 | `closeDelay` | `number` | `100` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `open` | `boolean` | - |
-| `defaultOpen` | `boolean` | - |
-| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
-| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | - |
-| `disabled` | `boolean` | - |
+| `open` | `boolean` | `-` |
+| `defaultOpen` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
+| `disabled` | `boolean` | `-` |
 | `interactive` | `boolean` | `false` |
 | `closeOnClick` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
@@ -158,8 +158,8 @@ Element that shows the tooltip on hover or focus. Button by default; use `asChil
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `value` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `value` | `string` | `-` |
 
 ### TooltipContent
 
@@ -167,8 +167,8 @@ Tooltip content shown in a popover on hover or focus.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 | `showArrow` | `boolean` | `true` |
 
 ### TooltipArrow
@@ -177,7 +177,7 @@ Optional arrow pointing to the trigger. Place inside `TooltipContent`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -190,7 +190,7 @@ Provides a Tooltip API created with `useTooltip` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseTooltipReturn` | **required** |
+| `value` | `UseTooltipReturn` | `required` |
 
 ---
 

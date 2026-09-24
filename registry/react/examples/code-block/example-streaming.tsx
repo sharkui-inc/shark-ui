@@ -31,9 +31,9 @@ const Example = () => {
       <div className="absolute inset-e-4 top-4">
         <Button
           aria-label="Reload"
+          onClick={() => setLength(initialLength())}
           size="icon-md"
           variant="ghost"
-          onClick={() => setLength(initialLength())}
         >
           <RefreshCwIcon aria-hidden />
         </Button>

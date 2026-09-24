@@ -198,15 +198,15 @@ Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `ListCollection<T>` | **required** |
-| `value` | `string \| string[]` | - |
-| `defaultValue` | `string \| string[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
-| `onInputValueChange` | `(details: InputValueChangeDetails) => void` | - |
-| `disabled` | `boolean` | - |
+| `collection` | `ListCollection<T>` | `required` |
+| `value` | `string \| string[]` | `-` |
+| `defaultValue` | `string \| string[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | `-` |
+| `onInputValueChange` | `(details: InputValueChangeDetails) => void` | `-` |
+| `disabled` | `boolean` | `-` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandDialog
 
@@ -214,10 +214,10 @@ Dialog root for the command palette. Same as `Dialog`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `open` | `boolean` | - |
+| `open` | `boolean` | `-` |
 | `defaultOpen` | `boolean` | `false` |
-| `onOpenChange` | `({ open }: OpenChangeDetails) => void` | - |
-| `className` | `string` | - |
+| `onOpenChange` | `({ open }: OpenChangeDetails) => void` | `-` |
+| `className` | `string` | `-` |
 
 ### CommandDialogTrigger
 
@@ -226,7 +226,7 @@ Opens the command palette on click. Same as `DialogTrigger`.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandDialogContent
 
@@ -239,7 +239,7 @@ Container for the command palette inside the dialog.
 | `fill` | `boolean` | `false` |
 | `title` | `string` | `"Command Palette"` |
 | `description` | `string` | `"Search for a command to run..."` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandInput
 
@@ -249,9 +249,9 @@ Search input with icon. Uses InputGroup for layout.
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"lg"` |
 | `autoFocus` | `boolean` | `true` |
-| `placeholder` | `string` | - |
-| `disabled` | `boolean` | - |
-| `className` | `string` | - |
+| `placeholder` | `string` | `-` |
+| `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### CommandContent
 
@@ -259,7 +259,7 @@ Scrollable content container for the command list.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandList
 
@@ -267,8 +267,8 @@ List container for command items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### CommandEmpty
 
@@ -276,9 +276,9 @@ Content when no items match the filter.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `children` | `ReactNode` | `No results found.` |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 
 ### CommandGroup
 
@@ -286,9 +286,9 @@ Groups related items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string \| ReactNode` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `heading` | `string \| ReactNode` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### CommandGroupLabel
 
@@ -296,8 +296,8 @@ Label for a group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### CommandItem
 
@@ -305,8 +305,8 @@ A single command or action in the palette.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `item` | `T` | **required** |
-| `className` | `string` | - |
+| `item` | `T` | `required` |
+| `className` | `string` | `-` |
 
 ### CommandSeparator
 
@@ -314,7 +314,7 @@ Visual divider between groups or items. Uses `Separator`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandShortcut
 
@@ -322,7 +322,7 @@ Keyboard shortcut hint shown next to a command.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandFooter
 
@@ -330,7 +330,7 @@ Footer area for hints, tips, or extra actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandRootProvider
 
@@ -338,7 +338,7 @@ Provides a Command API created with `useCommand` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseCommandReturn` | **required** |
+| `value` | `UseCommandReturn` | `required` |
 
 ---
 

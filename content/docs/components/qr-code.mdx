@@ -130,13 +130,13 @@ Root wrapper for the QR code and optional overlay/actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | - |
-| `defaultValue` | `string` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `value` | `string` | `-` |
+| `defaultValue` | `string` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `encoding` | `QrCodeGenerateOptions` | `{ ecc: "L" }` |
-| `pixelSize` | `number` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `pixelSize` | `number` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -149,8 +149,8 @@ SVG containing the QR pattern. Scales with size.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### QrCodeOverlay
 
@@ -158,8 +158,8 @@ Optional center overlay on top of the QR pattern.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### QrCodeDownload
 
@@ -167,11 +167,11 @@ Downloads the QR code as an image file.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `fileName` | `string` | - |
-| `mimeType` | `DataUrlType` | - |
-| `quality` | `number` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `fileName` | `string` | `-` |
+| `mimeType` | `DataUrlType` | `-` |
+| `quality` | `number` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### QrCodeRootProvider
 
@@ -179,7 +179,7 @@ Provides a QrCode API created with `useQrCode` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseQrCodeReturn` | **required** |
+| `value` | `UseQrCodeReturn` | `required` |
 
 ---
 

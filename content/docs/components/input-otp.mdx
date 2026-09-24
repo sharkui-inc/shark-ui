@@ -164,16 +164,16 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 | Prop | Type | Default |
 | --- | --- | --- |
 | `withFakeCaret` | `boolean` | `false` |
-| `value` | `string` | - |
-| `defaultValue` | `string` | - |
-| `onValueChange` | `({ value, valueAsString }) => void` | - |
-| `disabled` | `boolean` | - |
-| `invalid` | `boolean` | - |
+| `value` | `string` | `-` |
+| `defaultValue` | `string` | `-` |
+| `onValueChange` | `({ value, valueAsString }) => void` | `-` |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
 | `otp` | `boolean` | `true` |
-| `blurOnComplete` | `boolean` | - |
-| `autoSubmit` | `boolean` | - |
-| `sanitizeValue` | `(value: string) => string` | - |
-| `mask` | `boolean` | - |
+| `blurOnComplete` | `boolean` | `-` |
+| `autoSubmit` | `boolean` | `-` |
+| `sanitizeValue` | `(value: string) => string` | `-` |
+| `mask` | `boolean` | `-` |
 
 ### InputOTPSlot
 
@@ -181,14 +181,14 @@ Single OTP slot. Use `index` to specify position, 0 is the first slot.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `index` | `number` | **required** |
+| `index` | `number` | `required` |
 
 
 ### InputOTPSeparator
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 Visual separator between slots.
 
 ### InputOTPRootProvider
@@ -197,7 +197,7 @@ Provides a InputOTP API created with `useInputOTP` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseInputOTPReturn` | **required** |
+| `value` | `UseInputOTPReturn` | `required` |
 
 ---
 

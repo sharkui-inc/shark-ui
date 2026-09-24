@@ -13,6 +13,8 @@ import {
   THEME_FONTS,
 } from "@/lib/theme/fonts";
 
+const NEWSREADER_CSS_AXES = /family=Newsreader:ital,opsz,wght@/;
+
 describe("theme fonts", () => {
   it("keeps Shark UI's active fonts as the defaults", () => {
     assert.equal(DEFAULT_FONT_SANS, "hanken-grotesk");
@@ -47,10 +49,7 @@ describe("theme fonts", () => {
       getThemeFont("lora").cssUrl,
       "https://fonts.googleapis.com/css2?family=Lora&display=swap"
     );
-    assert.match(
-      getThemeFont("newsreader").cssUrl,
-      /family=Newsreader:ital,opsz,wght@/
-    );
+    assert.match(getThemeFont("newsreader").cssUrl, NEWSREADER_CSS_AXES);
   });
 
   it("only requests selected non-default fonts once", () => {

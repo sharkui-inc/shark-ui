@@ -30,7 +30,7 @@ npx shadcn@latest add @shark/tool-result
 
 <Steps>
 
-<Step>This component depends on [Collapsible](/docs/components/collapsible). Install it first if you haven't already.</Step>
+<Step>This component depends on [Collapsible](/docs/components/collapsible) and [Spinner](/docs/components/spinner). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
@@ -167,12 +167,12 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 ### ToolResult
 
-Root [Collapsible](/docs/components/collapsible). `aria-busy` is set while `status` is `"running"`. `defaultOpen` is `true` when `status` is `"running"`.
+Root [Collapsible](/docs/components/collapsible). `aria-busy` while `status` is `"running"`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `status` | `"running" \| "success" \| "error" \| "cancelled"` | `"success"` |
-| `defaultOpen` | `boolean` | `true` when `status` is `"running"` |
+| `defaultOpen` | `boolean` | `status === "running"` |
 | `className` | `string` | `-` |
 
 ### ToolResultTrigger
@@ -232,10 +232,10 @@ Optional status icon and label. Render it inside `ToolResultAction`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `running` | string | Running |
-| `success` | string | Completed |
-| `error` | string | Failed |
-| `cancelled` | string | Cancelled |
+| `running` | `string` | `Running` |
+| `success` | `string` | `Completed` |
+| `error` | `string` | `Failed` |
+| `cancelled` | `string` | `Cancelled` |
 
 ### ToolResultContent
 

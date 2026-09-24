@@ -1,4 +1,3 @@
-import { Loader2Icon } from "lucide-react";
 import {
   Steps,
   StepsIndicator,
@@ -7,6 +6,7 @@ import {
   StepsSeparator,
   StepsTrigger,
 } from "@/registry/react/components/steps";
+import { Spinner } from "@/registry/react/components/spinner";
 
 const Example = () => (
   <Steps className="w-full max-w-md" count={items.length}>
@@ -15,11 +15,7 @@ const Example = () => (
         <StepsItem index={index} key={item.id}>
           <StepsTrigger disabled>
             <StepsIndicator>
-              {item.loading ? (
-                <Loader2Icon className="animate-spin" />
-              ) : (
-                index + 1
-              )}
+              {item.loading ? <Spinner aria-hidden /> : index + 1}
             </StepsIndicator>
           </StepsTrigger>
 

@@ -135,7 +135,7 @@ Root. Tracks visible headings and owns scroll behavior.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `items` | `TocItemData[]` | `[]` |
-| `scrollEl` | `() => HTMLElement \| null` | - |
+| `scrollEl` | `() => HTMLElement \| null` | `-` |
 | `activeIds` | `string[]` | `-` |
 | `defaultActiveIds` | `string[]` | `-` |
 | `autoScroll` | `boolean` | `true` |
@@ -150,10 +150,10 @@ Root. Tracks visible headings and owns scroll behavior.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `--top` | `string` | - |
-| `--height` | `string` | - |
-| `--left` | `string` | - |
-| `--width` | `string` | - |
+| `--top` | `string` | `-` |
+| `--height` | `string` | `-` |
+| `--left` | `string` | `-` |
+| `--width` | `string` | `-` |
 
 ### TocContent
 
@@ -207,21 +207,21 @@ One TOC entry. Indent follows `--depth` from the item's heading level.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `item` | `TocItemData` | **required** |
+| `item` | `TocItemData` | `required` |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `data-value` | `string` | - |
-| `data-active` | `string` | - |
-| `data-first` | `string` | - |
-| `data-last` | `string` | - |
-| `data-depth` | `string` | - |
+| `data-value` | `string` | `-` |
+| `data-active` | `string` | `-` |
+| `data-first` | `string` | `-` |
+| `data-last` | `string` | `-` |
+| `data-depth` | `string` | `-` |
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `--depth` | `string` | - |
+| `--depth` | `string` | `-` |
 
 ### TocLink
 
@@ -234,8 +234,8 @@ Anchor to a heading. Sets `aria-current="location"` when active. With `scrollEl`
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `data-value` | `string` | - |
-| `data-active` | `string` | - |
+| `data-value` | `string` | `-` |
+| `data-active` | `string` | `-` |
 
 ### TocRootProvider
 
@@ -243,7 +243,7 @@ Provides a Toc API created with `useToc` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseTocReturn` | **required** |
+| `value` | `UseTocReturn` | `required` |
 
 ### TocContext
 
@@ -251,7 +251,7 @@ Render-prop access to the surrounding component API.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `children` | `(api: unknown) => React.ReactNode` | **required** |
+| `children` | `(api: unknown) => React.ReactNode` | `required` |
 
 ---
 

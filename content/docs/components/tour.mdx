@@ -257,12 +257,12 @@ Creates the tour machine. Pass the return value to `Tour` as `tour`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `steps` | `TourStepType[]` | - |
+| `steps` | `TourStepType[]` | `-` |
 | `keyboardNavigation` | `boolean` | `true` |
 | `closeOnInteractOutside` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
-| `onStepChange` | `(details: TourStepChangeDetails) => void` | - |
-| `onStatusChange` | `(details: TourStatusChangeDetails) => void` | - |
+| `onStepChange` | `(details: TourStepChangeDetails) => void` | `-` |
+| `onStatusChange` | `(details: TourStatusChangeDetails) => void` | `-` |
 
 ### Tour
 
@@ -270,7 +270,7 @@ Root provider for a tour created with `useTour`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `tour` | `UseTourReturn` | **required** |
+| `tour` | `UseTourReturn` | `required` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
 | `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
@@ -281,8 +281,8 @@ Starts the tour on click. Use `asChild` for a custom trigger.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### TourContent
 
@@ -293,7 +293,7 @@ Tour panel, including the overlay, spotlight, arrow, and close button.
 | `bottomStickOnMobile` | `boolean` | `false` |
 | `showCloseButton` | `boolean` | `true` |
 | `showArrow` | `boolean` | `true` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -305,9 +305,9 @@ Header area. Accepts `title` and `description` or children.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `title` | `string` | - |
-| `description` | `string` | - |
-| `className` | `string` | - |
+| `title` | `string` | `-` |
+| `description` | `string` | `-` |
+| `className` | `string` | `-` |
 
 ### TourTitle
 
@@ -315,8 +315,8 @@ Accessible title. Falls back to the current step title.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### TourDescription
 
@@ -324,8 +324,8 @@ Accessible description. Falls back to the current step description.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### TourProgressText
 
@@ -333,8 +333,8 @@ Current step and total.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### TourFooter
 
@@ -342,7 +342,7 @@ Footer for `TourPreviousStep` and `TourNextStep`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TourActions
 
@@ -350,7 +350,7 @@ Renders the actions of the current step.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TourPreviousStep
 
@@ -358,7 +358,7 @@ Renders the step's `"prev"` action.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TourNextStep
 
@@ -366,7 +366,7 @@ Renders the `"next"` action, or `"dismiss"` when the step has no `"next"`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TourClose
 
@@ -374,8 +374,8 @@ Closes the tour on click. Use `asChild` for a custom close element.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### TourActionTrigger
 
@@ -383,9 +383,9 @@ Runs one step action.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `action` | `StepAction` | **required** |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `action` | `StepAction` | `required` |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### TourOverlay
 
@@ -393,7 +393,7 @@ Dimmed backdrop. Rendered by `TourContent`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TourPositioner
 
@@ -402,7 +402,7 @@ Positions the panel. Rendered by `TourContent`.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `bottomStickOnMobile` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TourBody
 
@@ -411,7 +411,7 @@ Scrollable body content.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `scrollFade` | `boolean` | `true` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TourSpotlight
 
@@ -419,7 +419,7 @@ Highlight around the step target. Rendered by `TourContent`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TourArrow
 
@@ -427,7 +427,7 @@ Arrow for tooltip steps.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 | Prop | Type | Default |
 | --- | --- | --- |

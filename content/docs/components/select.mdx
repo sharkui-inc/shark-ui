@@ -204,21 +204,21 @@ Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `ListCollection<T>` | - |
-| `value` | `string[]` | - |
-| `defaultValue` | `string[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
+| `collection` | `ListCollection<T>` | `-` |
+| `value` | `string[]` | `-` |
+| `defaultValue` | `string[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | `-` |
 | `multiple` | `boolean` | `false` |
-| `disabled` | `boolean` | - |
-| `invalid` | `boolean` | - |
-| `name` | `string` | - |
-| `required` | `boolean` | - |
-| `autoComplete` | `string` | - |
-| `onSelect` | `(details: SelectionDetails) => void` | - |
-| `positioning` | `PositioningOptions` | - |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
+| `name` | `string` | `-` |
+| `required` | `boolean` | `-` |
+| `autoComplete` | `string` | `-` |
+| `onSelect` | `(details: SelectionDetails) => void` | `-` |
+| `positioning` | `PositioningOptions` | `-` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### SelectTrigger
 
@@ -230,8 +230,8 @@ Opens the menu on click. Displays the selected value or placeholder.
 | `variant` | `"default" \| "ghost"` | `"default"` |
 | `showClear` | `boolean` | `false` |
 | `showTrigger` | `boolean` | `true` |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectValue
 
@@ -239,9 +239,9 @@ Shows the selected value or placeholder. Use `SelectContext` as children for cus
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `placeholder` | `string` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `placeholder` | `string` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectContent
 
@@ -249,8 +249,8 @@ Holds the menu options. Displayed in a portal.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectClearTrigger
 
@@ -258,8 +258,8 @@ Button to clear the selected value. Shown when `showClear` is true on `SelectTri
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectGroup
 
@@ -267,9 +267,9 @@ Groups related options under an optional heading.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string` \| `ReactNode` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `heading` | `string \| ReactNode` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectGroupLabel
 
@@ -277,8 +277,8 @@ Label for an option group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectItem
 
@@ -286,9 +286,9 @@ A single selectable option in the menu.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `item` | `T` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `item` | `T` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectEmpty
 
@@ -296,7 +296,7 @@ Shown when the collection has no items (`collection.size === 0`). Place inside `
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### SelectRootProvider
 
@@ -304,7 +304,7 @@ Provides a Select API created with `useSelect` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseSelectReturn` | **required** |
+| `value` | `UseSelectReturn` | `required` |
 
 ### SelectContext
 
@@ -312,7 +312,7 @@ Render-prop access to the surrounding component API.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `children` | `(api: unknown) => React.ReactNode` | **required** |
+| `children` | `(api: unknown) => React.ReactNode` | `required` |
 
 ### SelectSeparator
 
@@ -321,7 +321,7 @@ Public SelectSeparator component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ---
 

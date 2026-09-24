@@ -101,13 +101,13 @@ Root element of the circular progress indicator.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `number \| null` | - |
-| `defaultValue` | `number` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `value` | `number \| null` | `-` |
+| `defaultValue` | `number` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `indeterminate` | `boolean` | `false` |
 | `size` | `number` | `32` |
 | `thickness` | `number` | `4` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CircularProgressLabel
 
@@ -115,7 +115,7 @@ Accessible label. Render as a child of `CircularProgress`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CircularProgressValue
 
@@ -123,7 +123,7 @@ Displays the current progress value text.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CircularProgressRootProvider
 
@@ -131,7 +131,7 @@ Provides a CircularProgress API created with `useCircularProgress` to descendant
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseCircularProgressReturn` | **required** |
+| `value` | `UseCircularProgressReturn` | `required` |
 
 ### CircularProgressTrack
 
@@ -140,7 +140,7 @@ Public CircularProgressTrack component. It forwards the underlying primitive pro
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ---
 

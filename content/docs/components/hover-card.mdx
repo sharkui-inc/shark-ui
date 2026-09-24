@@ -131,12 +131,12 @@ Root component. Manages hover state and content visibility.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `closeDelay` | `number` | `300` |
-| `defaultOpen` | `boolean` | - |
-| `disabled` | `boolean` | - |
-| `immediate` | `boolean` | - |
-| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
-| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | - |
-| `open` | `boolean` | - |
+| `defaultOpen` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
+| `immediate` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
+| `open` | `boolean` | `-` |
 | `openDelay` | `number` | `600` |
 | `positioning` | `PositioningOptions` | `{ placement: "top" }` |
 | `className` | `string` | `-` |
@@ -148,8 +148,8 @@ Shows the hover card on hover or focus.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
-| `asChild` | `boolean` | - |
-| `value` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `value` | `string` | `-` |
 
 ### HoverCardContent
 
@@ -158,7 +158,7 @@ Content shown in a popover when hover card is open.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 | `showArrow` | `boolean` | `true` |
 
 ### HoverCardArrow
@@ -168,7 +168,7 @@ Optional arrow pointing toward the trigger.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -181,7 +181,7 @@ Provides a HoverCard API created with `useHoverCard` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseHoverCardReturn` | **required** |
+| `value` | `UseHoverCardReturn` | `required` |
 
 ---
 

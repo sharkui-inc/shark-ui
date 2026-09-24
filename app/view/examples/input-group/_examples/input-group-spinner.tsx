@@ -1,4 +1,3 @@
-import { LoaderIcon } from "lucide-react";
 import {
   InputGroup,
   InputGroupAddon,
@@ -31,7 +30,7 @@ const InputGroupSpinner = () => (
     <InputGroup>
       <InputGroupInput placeholder="Refreshing data..." />
       <InputGroupAddon>
-        <LoaderIcon aria-hidden className="animate-spin" />
+        <Spinner aria-hidden />
       </InputGroupAddon>
       <InputGroupAddon align="inline-end">
         <InputGroupText>Please wait...</InputGroupText>

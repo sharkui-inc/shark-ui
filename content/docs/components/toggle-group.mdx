@@ -163,12 +163,12 @@ Root component. Provides shared variant and size to child toggles via context.
 | `spacing` | `"0" \| "1" \| "2" \| "3" \| "4" \| "5" \| "6" \| "8" \| "10"` | `"0"` |
 | `pill` | `boolean` | `false` |
 | `multiple` | `boolean` | `true` |
-| `defaultValue` | `string[]` | - |
-| `value` | `string[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `defaultValue` | `string[]` | `-` |
+| `value` | `string[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `disabled` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -180,10 +180,10 @@ Single toggle in the group. Uses [Toggle](/docs/components/toggle) internally.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
+| `value` | `string` | `required` |
 | `disabled` | `boolean` | `false` |
-| `className` | `string` | - |
-| `aria-label` | `string` | - |
+| `className` | `string` | `-` |
+| `aria-label` | `string` | `-` |
 
 ### ToggleGroupRootProvider
 
@@ -191,7 +191,7 @@ Provides a ToggleGroup API created with `useToggleGroup` to descendant component
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseToggleGroupReturn` | **required** |
+| `value` | `UseToggleGroupReturn` | `required` |
 | `pill` | `boolean` | `false` |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `spacing` | `number` | `0` |

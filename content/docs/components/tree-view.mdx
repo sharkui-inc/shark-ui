@@ -217,24 +217,24 @@ Root component. Provides tree context and manages expand/selection state.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `TreeCollection` | **required** |
-| `fileIcons` | `Record<string, React.JSX.ElementType \| null>` | - |
-| `selectedValue` | `string[]` | - |
-| `checkedValue` | `string[]` | - |
-| `onCheckedChange` | `(details: CheckedChangeDetails) => void` | - |
-| `canRename` | `(details: RenameDetails) => boolean` | - |
-| `onRenameComplete` | `(details: RenameCompleteDetails) => void` | - |
-| `defaultSelectedValue` | `string[]` | - |
-| `onSelectionChange` | `(details: SelectionChangeDetails) => void` | - |
-| `expandedValue` | `string[]` | - |
-| `defaultExpandedValue` | `string[]` | - |
-| `onExpandedChange` | `(details: ExpandedChangeDetails) => void` | - |
+| `collection` | `TreeCollection` | `required` |
+| `fileIcons` | `Record<string, React.JSX.ElementType \| null>` | `-` |
+| `selectedValue` | `string[]` | `-` |
+| `checkedValue` | `string[]` | `-` |
+| `onCheckedChange` | `(details: CheckedChangeDetails) => void` | `-` |
+| `canRename` | `(details: RenameDetails) => boolean` | `-` |
+| `onRenameComplete` | `(details: RenameCompleteDetails) => void` | `-` |
+| `defaultSelectedValue` | `string[]` | `-` |
+| `onSelectionChange` | `(details: SelectionChangeDetails) => void` | `-` |
+| `expandedValue` | `string[]` | `-` |
+| `defaultExpandedValue` | `string[]` | `-` |
+| `onExpandedChange` | `(details: ExpandedChangeDetails) => void` | `-` |
 | `selectionMode` | `"single" \| "multiple"` | `"single"` |
-| `translations` | `Partial<IntlTranslations>` | - |
+| `translations` | `Partial<IntlTranslations>` | `-` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
 | `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -251,7 +251,7 @@ Accessible label for the tree.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewTree
 
@@ -260,7 +260,7 @@ Wraps the root-level tree nodes.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewNode
 
@@ -268,9 +268,9 @@ Provides tree node context. Must wrap each branch or item.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `node` | `TreeNodeType` | **required** |
-| `indexPath` | `number[]` | **required** |
-| `className` | `string` | - |
+| `node` | `TreeNodeType` | `required` |
+| `indexPath` | `number[]` | `required` |
+| `className` | `string` | `-` |
 
 ### TreeViewBranch
 
@@ -279,7 +279,7 @@ Expandable branch with children. Toggles open/closed.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewBranchItem
 
@@ -290,7 +290,7 @@ Clickable area to expand or collapse a branch.
 | `asChild` | `boolean` | `false` |
 | `icon` | `React.JSX.ElementType \| null` | `FolderIcon` |
 | `expandedIcon` | `React.JSX.ElementType \| null` | `FolderOpenIcon` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewBranchContent
 
@@ -299,7 +299,7 @@ Holds the branch children. Shown when expanded.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewContent
 
@@ -308,7 +308,7 @@ Wrapper for leaf (non-expandable) items.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewItem
 
@@ -317,7 +317,7 @@ Leaf node (non-expandable). The `icon` prop is fallback when no `fileIcons` matc
 | Prop | Type | Default |
 | --- | --- | --- |
 | `icon` | `React.JSX.ElementType` | `FileIcon` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewCheckbox
 
@@ -325,7 +325,7 @@ Checkbox for selecting a node in multi-select mode.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### createTreeCollection
 
@@ -335,7 +335,7 @@ Creates a tree collection from node data. Use with `collection` prop on `TreeVie
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `rootNode` | `T extends TreeNodeType` | **required** |
+| `rootNode` | `T extends TreeNodeType` | `required` |
 | `nodeToValue` | `(node: T) => string` | `(node) => node.id` |
 | `nodeToString` | `(node: T) => string` | `(node) => node.name` |
 
@@ -343,8 +343,8 @@ Creates a tree collection from node data. Use with `collection` prop on `TreeVie
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `id` | `string` | - |
-| `name` | `string` | - |
+| `id` | `string` | `-` |
+| `name` | `string` | `-` |
 | `children` | `TreeNodeType<T>[]` | `undefined` |
 | `icon` | `React.JSX.ElementType \| null` | `undefined` |
 | `expandedIcon` | `React.JSX.ElementType \| null` | `undefined` |
@@ -385,7 +385,7 @@ Provides a TreeView API created with `useTreeView` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseTreeViewReturn` | **required** |
+| `value` | `UseTreeViewReturn` | `required` |
 | `fileIcons` | `Record<string, React.JSX.ElementType \| null>` | `-` |
 
 Pass the same `fileIcons` you would use on `TreeView` so leaf items resolve extension icons under the headless path.
@@ -397,7 +397,7 @@ Public TreeViewBranchIndicator component. It forwards the underlying primitive p
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ---
 

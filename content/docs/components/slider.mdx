@@ -139,20 +139,20 @@ Root component. Manages value, track, range, and thumb(s).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `number[]` | - |
-| `defaultValue` | `number[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `value` | `number[]` | `-` |
+| `defaultValue` | `number[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `min` | `number` | `0` |
 | `max` | `number` | `100` |
 | `step` | `number` | `1` |
 | `largeStep` | `number` | `10 * step` |
-| `thumbCollisionBehavior` | `"none" \| "push" \| "swap"` | - |
+| `thumbCollisionBehavior` | `"none" \| "push" \| "swap"` | `-` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `disabled` | `boolean` | `false` |
 | `showMarkers` | `boolean` | `false` |
 | `markerInterval` | `number` | `1` |
 | `markerLabels` | `string[]` | `[]` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### SliderLabel
 
@@ -160,7 +160,7 @@ Label for the slider. Required for accessibility.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### SliderValue
 
@@ -168,7 +168,7 @@ Shows the current value. Useful for numeric display or formatting.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### SliderRootProvider
 
@@ -176,7 +176,7 @@ Provides a Slider API created with `useSlider` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseSliderReturn` | **required** |
+| `value` | `UseSliderReturn` | `required` |
 
 ---
 

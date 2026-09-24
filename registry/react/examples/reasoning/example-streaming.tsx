@@ -19,9 +19,9 @@ const Example = () => {
       <div className="absolute inset-e-4 top-4">
         <Button
           aria-label="Reload"
+          onClick={() => setRunId((id) => id + 1)}
           size="icon-md"
           variant="ghost"
-          onClick={() => setRunId((id) => id + 1)}
         >
           <RefreshCwIcon aria-hidden />
         </Button>

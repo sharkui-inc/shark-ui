@@ -208,28 +208,28 @@ Root component. Composes the control, input, and hidden field for form submissio
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `pill` | `boolean` | `false` |
 | `showClear` | `boolean` | `true` |
-| `defaultValue` | `string[]` | - |
-| `value` | `string[]` | - |
-| `inputValue` | `string` | - |
-| `defaultInputValue` | `string` | - |
+| `defaultValue` | `string[]` | `-` |
+| `value` | `string[]` | `-` |
+| `inputValue` | `string` | `-` |
+| `defaultInputValue` | `string` | `-` |
 | `max` | `number` | `Infinity` |
-| `maxLength` | `number` | - |
+| `maxLength` | `number` | `-` |
 | `delimiter` | `string \| RegExp` | `","` |
 | `allowDuplicates` | `boolean` | `false` |
-| `allowOverflow` | `boolean` | - |
-| `disabled` | `boolean` | - |
-| `invalid` | `boolean` | - |
-| `required` | `boolean` | - |
+| `allowOverflow` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
+| `required` | `boolean` | `-` |
 | `editable` | `boolean` | `false` |
 | `addOnPaste` | `boolean` | `false` |
-| `blurBehavior` | `"add" \| "clear"` | - |
-| `validate` | `(details) => boolean` | - |
+| `blurBehavior` | `"add" \| "clear"` | `-` |
+| `validate` | `(details) => boolean` | `-` |
 | `sanitizeValue` | `(value: string) => string` | `(value) => value.trim()` |
-| `onValueChange` | `(details) => void` | - |
-| `onInputValueChange` | `(details) => void` | - |
-| `onHighlightChange` | `(details) => void` | - |
-| `onValueInvalid` | `(details) => void` | - |
-| `className` | `string` | - |
+| `onValueChange` | `(details) => void` | `-` |
+| `onInputValueChange` | `(details) => void` | `-` |
+| `onHighlightChange` | `(details) => void` | `-` |
+| `onValueInvalid` | `(details) => void` | `-` |
+| `className` | `string` | `-` |
 
 ### TagsInputInput
 
@@ -237,8 +237,8 @@ Borderless text field for adding new tags. Rendered inside `TagsInput` by defaul
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `placeholder` | `string` | - |
-| `className` | `string` | - |
+| `placeholder` | `string` | `-` |
+| `className` | `string` | `-` |
 
 ### TagsInputItem
 
@@ -246,11 +246,11 @@ Represents a single tag. Requires `index` and `value`. Pass the label as childre
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `index` | `number` | **required** |
-| `value` | `string` | **required** |
+| `index` | `number` | `required` |
+| `value` | `string` | `required` |
 | `showDelete` | `boolean` | `true` |
-| `disabled` | `boolean` | - |
-| `className` | `string` | - |
+| `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### TagsInputClearTrigger
 
@@ -258,8 +258,8 @@ Clears all tags.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### TagsInputRootProvider
 
@@ -267,7 +267,7 @@ Provides a TagsInput API created with `useTagsInput` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseTagsInputReturn` | **required** |
+| `value` | `UseTagsInputReturn` | `required` |
 
 ### TagsInputContext
 
@@ -275,7 +275,7 @@ Render-prop access to the surrounding component API.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `children` | `(api: unknown) => React.ReactNode` | **required** |
+| `children` | `(api: unknown) => React.ReactNode` | `required` |
 
 ### TagsInputControl
 
@@ -284,7 +284,7 @@ Public TagsInputControl component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TagsInputItemPreview
 
@@ -293,7 +293,7 @@ Public TagsInputItemPreview component. It forwards the underlying primitive prop
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TagsInputItemText
 
@@ -302,7 +302,7 @@ Public TagsInputItemText component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TagsInputItemDeleteTrigger
 
@@ -311,7 +311,7 @@ Public TagsInputItemDeleteTrigger component. It forwards the underlying primitiv
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TagsInputItemInput
 
@@ -320,7 +320,7 @@ Public TagsInputItemInput component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ---
 

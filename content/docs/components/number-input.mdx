@@ -192,22 +192,22 @@ Root component. Manages numeric value and stepper controls.
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `scrubber` | `boolean` | `false` |
-| `defaultValue` | `string` | - |
-| `value` | `string` | - |
+| `defaultValue` | `string` | `-` |
+| `value` | `string` | `-` |
 | `min` | `number` | `Number.MIN_SAFE_INTEGER` |
 | `max` | `number` | `Number.MAX_SAFE_INTEGER` |
 | `step` | `number` | `1` |
 | `largeStep` | `number` | `10 * step` |
 | `smallStep` | `number` | `step / 10` |
-| `formatOptions` | `Intl.NumberFormatOptions` | - |
-| `disabled` | `boolean` | - |
-| `invalid` | `boolean` | - |
+| `formatOptions` | `Intl.NumberFormatOptions` | `-` |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
 | `focusInputOnChange` | `boolean` | `true` |
 | `clampValueOnBlur` | `boolean` | `true` |
 | `allowMouseWheel` | `boolean` | `false` |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
-| `onValueCommit` | `(details: ValueChangeDetails) => void` | - |
-| `className` | `string` | - |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
+| `onValueCommit` | `(details: ValueChangeDetails) => void` | `-` |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### NumberInputGroup
@@ -216,7 +216,7 @@ Wraps the input and increment/decrement buttons.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### NumberInputDecrement
@@ -225,7 +225,7 @@ Decreases the value by the step amount.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### NumberInputIncrement
@@ -234,7 +234,7 @@ Increases the value by the step amount.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### NumberInputInput
@@ -244,7 +244,7 @@ Numeric input. Accepts number or direct typing.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### NumberInputScrubber
@@ -253,7 +253,7 @@ Drag area for scrubbing the value.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### NumberInputRootProvider
@@ -262,7 +262,7 @@ Provides a NumberInput API created with `useNumberInput` to descendant component
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseNumberInputReturn` | **required** |
+| `value` | `UseNumberInputReturn` | `required` |
 
 ---
 

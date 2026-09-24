@@ -2,12 +2,7 @@
 
 import { ark } from "@ark-ui/react/factory";
 import { createContext } from "@ark-ui/react/utils";
-import {
-  BanIcon,
-  CircleCheckIcon,
-  CircleXIcon,
-  LoaderCircleIcon,
-} from "lucide-react";
+import { BanIcon, CircleCheckIcon, CircleXIcon } from "lucide-react";
 import React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
@@ -17,6 +12,7 @@ import {
   CollapsibleIndicator,
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
+import { Spinner } from "@/registry/react/components/spinner";
 
 export type ToolResultStatus = "cancelled" | "error" | "running" | "success";
 
@@ -60,12 +56,7 @@ const ToolResultStatusIcon = (props: { status: ToolResultStatus }) => {
     case "error":
       return <CircleXIcon aria-hidden className="size-3" />;
     case "running":
-      return (
-        <LoaderCircleIcon
-          aria-hidden
-          className="size-3 animate-spin"
-        />
-      );
+      return <Spinner aria-hidden className="size-3" />;
     case "success":
       return <CircleCheckIcon aria-hidden className="size-3" />;
     default: {

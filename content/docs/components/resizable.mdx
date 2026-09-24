@@ -119,17 +119,17 @@ Root component. Manages resizable panel layout.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `panels` | `PanelData[]` | - |
-| `defaultSize` | `number[]` | - |
-| `size` | `number[]` | - |
+| `panels` | `PanelData[]` | `-` |
+| `defaultSize` | `number[]` | `-` |
+| `size` | `number[]` | `-` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
-| `keyboardResizeBy` | `number` | - |
-| `onResize` | `(details: ResizeDetails) => void` | - |
-| `onResizeStart` | `() => void` | - |
-| `onResizeEnd` | `(details: ResizeEndDetails) => void` | - |
-| `onCollapse` | `(details: ExpandCollapseDetails) => void` | - |
-| `onExpand` | `(details: ExpandCollapseDetails) => void` | - |
-| `className` | `string` | - |
+| `keyboardResizeBy` | `number` | `-` |
+| `onResize` | `(details: ResizeDetails) => void` | `-` |
+| `onResizeStart` | `() => void` | `-` |
+| `onResizeEnd` | `(details: ResizeEndDetails) => void` | `-` |
+| `onCollapse` | `(details: ExpandCollapseDetails) => void` | `-` |
+| `onExpand` | `(details: ExpandCollapseDetails) => void` | `-` |
+| `className` | `string` | `-` |
 
 ### ResizablePanel
 
@@ -137,9 +137,9 @@ A resizable panel. Multiple panels share the available space.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `id` | `string` | - |
+| `id` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ResizableResizeTrigger
 
@@ -147,11 +147,11 @@ Draggable handle between panels for resizing.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `id` | `${string}:${string}` | - |
+| `id` | `${string}:${string}` | `-` |
 | `withHandle` | `boolean` | `false` |
-| `disabled` | `boolean` | - |
+| `disabled` | `boolean` | `-` |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ResizableRootProvider
 
@@ -159,7 +159,7 @@ Provides a Resizable API created with `useResizable` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseResizableReturn` | **required** |
+| `value` | `UseResizableReturn` | `required` |
 
 ---
 

@@ -173,23 +173,23 @@ Root component. Manages date view, selection, and navigation.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `DateValue[]` | - |
-| `defaultValue` | `DateValue[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `value` | `DateValue[]` | `-` |
+| `defaultValue` | `DateValue[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `selectionMode` | `"single" \| "range" \| "multiple"` | `"single"` |
-| `createCalendar` | `(identifier: string) => Calendar` | - |
-| `showWeekNumbers` | `boolean` | - |
-| `maxSelectedDates` | `number` | - |
-| `min` | `DateValue` | - |
-| `max` | `DateValue` | - |
-| `isDateUnavailable` | `(date: DateValue) => boolean` | - |
+| `createCalendar` | `(identifier: string) => Calendar` | `-` |
+| `showWeekNumbers` | `boolean` | `-` |
+| `maxSelectedDates` | `number` | `-` |
+| `min` | `DateValue` | `-` |
+| `max` | `DateValue` | `-` |
+| `isDateUnavailable` | `(date: DateValue) => boolean` | `-` |
 | `fixedWeeks` | `boolean` | `false` |
 | `outsideDaySelectable` | `boolean` | `false` |
 | `numOfMonths` | `number` | `1` |
-| `required` | `boolean` | - |
-| `invalid` | `boolean` | - |
-| `locale` | `string` | - |
-| `className` | `string` | - |
+| `required` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
+| `locale` | `string` | `-` |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 | Prop | Type | Default |
@@ -202,7 +202,7 @@ Holds prev/next buttons and month/year selects.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CalendarMonthSelect
@@ -212,7 +212,7 @@ Month selector menu. Uses NativeSelect internally.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `format` | `"short" \| "long"` | `"short"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarYearSelect
 
@@ -220,7 +220,7 @@ Year selector menu.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarTable
 
@@ -228,7 +228,7 @@ Table layout for the calendar day grid.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CalendarWeekDays
@@ -238,7 +238,7 @@ Header row with week day names (Sun-Sat).
 | Prop | Type | Default |
 | --- | --- | --- |
 | `format` | `"narrow" \| "short" \| "long"` | `"narrow"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarTableDays
 
@@ -246,7 +246,7 @@ Body with day cells for the current month.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarTableNextMonth
 
@@ -255,7 +255,7 @@ Body for additional month(s).
 | Prop | Type | Default |
 | --- | --- | --- |
 | `months` | `number` | `1` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarTableCell
 
@@ -263,8 +263,8 @@ Single day cell. Clickable for selection. Shows disabled/outside styling.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `DateValue` | - |
-| `className` | `string` | - |
+| `value` | `DateValue` | `-` |
+| `className` | `string` | `-` |
 
 ### CalendarRootProvider
 
@@ -272,7 +272,7 @@ Provides a Calendar API created with `useCalendar` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseCalendarReturn` | **required** |
+| `value` | `UseCalendarReturn` | `required` |
 
 ### CalendarControl
 
@@ -281,7 +281,7 @@ Public CalendarControl component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarLabel
 
@@ -290,7 +290,7 @@ Public CalendarLabel component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarTrigger
 
@@ -299,7 +299,7 @@ Public CalendarTrigger component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarPresetTrigger
 
@@ -308,7 +308,7 @@ Public CalendarPresetTrigger component. It forwards the underlying primitive pro
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarViewDate
 
@@ -317,7 +317,7 @@ Public CalendarViewDate component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarTodayTrigger
 
@@ -326,7 +326,7 @@ Public CalendarTodayTrigger component. It forwards the underlying primitive prop
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarClearTrigger
 
@@ -335,7 +335,7 @@ Public CalendarClearTrigger component. It forwards the underlying primitive prop
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarView
 
@@ -344,7 +344,7 @@ Public CalendarView component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarContext
 
@@ -352,7 +352,7 @@ Render-prop access to the surrounding component API.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `children` | `(api: unknown) => React.ReactNode` | **required** |
+| `children` | `(api: unknown) => React.ReactNode` | `required` |
 
 ### CalendarPrevTrigger
 
@@ -361,7 +361,7 @@ Public CalendarPrevTrigger component. It forwards the underlying primitive props
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarNextTrigger
 
@@ -370,7 +370,7 @@ Public CalendarNextTrigger component. It forwards the underlying primitive props
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarWeekNumberHeaderCell
 
@@ -379,7 +379,7 @@ Public CalendarWeekNumberHeaderCell component. It forwards the underlying primit
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarWeekNumberCell
 
@@ -388,7 +388,7 @@ Public CalendarWeekNumberCell component. It forwards the underlying primitive pr
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarTableHead
 
@@ -397,7 +397,7 @@ Public CalendarTableHead component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarTableRow
 
@@ -406,7 +406,7 @@ Public CalendarTableRow component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarTableHeader
 
@@ -415,7 +415,7 @@ Public CalendarTableHeader component. It forwards the underlying primitive props
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CalendarTableBody
 
@@ -424,7 +424,7 @@ Public CalendarTableBody component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ---
 

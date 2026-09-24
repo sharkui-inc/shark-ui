@@ -124,7 +124,7 @@ Example blurbs: at most one objective sentence. No Ark internals, no `Default is
 
 1. Installation → 2. Anatomy → 3. Usage → 4. Controlled → 5. States (`## States` then `### Disabled` / `### Invalid` …) → 6. Variant axes (`## Size` / `## Variants`, then `###` per value) → 7. Examples → 8. API Reference
 
-API tables: `| Prop | Type | Default |`. `-` when no default; no alt headers or description columns.
+API tables: `| Prop | Type | Default |`. Defaults and types always in backticks (mono). `` `-` `` when no default; `` `required` `` for required props (never `**required**`). No alt headers or description columns.
 
 ## Brand
 

@@ -154,14 +154,14 @@ Root component. Manages segmented control state (single or multi-select).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `defaultValue` | `string` | - |
-| `value` | `string` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `defaultValue` | `string` | `-` |
+| `value` | `string` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `variant` | `"default" \| "underline"` | `"default"` |
-| `disabled` | `boolean` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SegmentGroupIndicator
 
@@ -169,8 +169,8 @@ Visual indicator that moves to the selected segment(s).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### SegmentGroupItem
 
@@ -178,10 +178,10 @@ Single segment option. Use `value` for selection.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | - |
-| `disabled` | `boolean` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `value` | `string` | `-` |
+| `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SegmentGroupItemText
 
@@ -189,8 +189,8 @@ Text label for a segment. Often wraps icon + text.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SegmentGroupRootProvider
 
@@ -198,7 +198,7 @@ Provides a SegmentGroup API created with `useSegmentGroup` to descendant compone
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseSegmentGroupReturn` | **required** |
+| `value` | `UseSegmentGroupReturn` | `required` |
 
 ---
 

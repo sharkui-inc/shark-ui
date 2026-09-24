@@ -210,14 +210,14 @@ Root component. Manages selection state and keyboard navigation.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `ListCollection<T>` | **required** |
-| `value` | `string[]` | - |
+| `collection` | `ListCollection<T>` | `required` |
+| `value` | `string[]` | `-` |
 | `defaultValue` | `string[]` | `[]` |
-| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
+| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | `-` |
 | `selectionMode` | `"single" \| "multiple" \| "extended"` | `"single"` |
 | `orientation` | `"vertical" \| "horizontal"` | `"vertical"` |
-| `disabled` | `boolean` | - |
-| `deselectable` | `boolean` | - |
+| `disabled` | `boolean` | `-` |
+| `deselectable` | `boolean` | `-` |
 | `loopFocus` | `boolean` | `false` |
 
 ### ListboxLabel
@@ -226,7 +226,7 @@ Accessible label. Render as a child of `Listbox`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ListboxInput
 
@@ -238,8 +238,8 @@ Filter input for the listbox. Use with `useListCollection` and `onChange` to fil
 | `keyboardPriority` | `"caret" \| "navigate"` | `"caret"` |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `pill` | `boolean` | `false` |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxContent
 
@@ -247,8 +247,8 @@ Holds the list of options.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxItem
 
@@ -256,11 +256,11 @@ A single selectable list option.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `item` | `T` | **required** |
+| `item` | `T` | `required` |
 | `variant` | `"default" \| "destructive"` | `"default"` |
 | `showIndicator` | `boolean` | `true` |
-| `asChild` | `boolean` | - |
-| `highlightOnHover` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
+| `highlightOnHover` | `boolean` | `-` |
 
 ### ListboxItemText
 
@@ -268,8 +268,8 @@ Text content for a list item.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxItemIndicator
 
@@ -278,8 +278,8 @@ Checkmark or icon shown when the item is selected. `ListboxItem` includes this b
 | Prop | Type | Default |
 | --- | --- | --- |
 | `children` | `ReactNode` | `CheckIcon` |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxItemGroup
 
@@ -287,9 +287,9 @@ Groups related options. Use `heading` or `ListboxItemGroupLabel` for a label.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string` | - |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `heading` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxItemGroupLabel
 
@@ -297,8 +297,8 @@ Label for a group. Must be used inside `ListboxItemGroup`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxValueText
 
@@ -306,9 +306,9 @@ Shows the selected value(s) as text. Use for custom trigger or display.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `placeholder` | `string` | - |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `placeholder` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxEmpty
 
@@ -316,15 +316,15 @@ Shown when the list has no items. Use for empty states.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 
 ### ListboxShortcut
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 Optional keyboard shortcut hint shown next to an item.
 
 ### ListboxRootProvider
@@ -333,7 +333,7 @@ Provides a Listbox API created with `useListbox` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseListboxReturn` | **required** |
+| `value` | `UseListboxReturn` | `required` |
 
 ### ListboxItemDescription
 
@@ -342,7 +342,7 @@ Public ListboxItemDescription component. It forwards the underlying primitive pr
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ---
 

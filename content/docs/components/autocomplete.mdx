@@ -193,16 +193,16 @@ Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `ListCollection<T>` | **required** |
-| `value` | `string[]` | - |
-| `defaultValue` | `string[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
-| `onInputValueChange` | `(details: InputValueChangeDetails) => void` | - |
-| `disabled` | `boolean` | - |
+| `collection` | `ListCollection<T>` | `required` |
+| `value` | `string[]` | `-` |
+| `defaultValue` | `string[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | `-` |
+| `onInputValueChange` | `(details: InputValueChangeDetails) => void` | `-` |
+| `disabled` | `boolean` | `-` |
 | `openOnClick` | `boolean` | `false` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### AutocompleteInput
 
@@ -213,8 +213,8 @@ Input with menu trigger and clear button.
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `showTrigger` | `boolean` | `false` |
 | `showClear` | `boolean` | `false` |
-| `disabled` | `boolean` | - |
-| `className` | `string` | - |
+| `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### AutocompleteContent
 
@@ -222,8 +222,8 @@ Holds the menu options. Displayed in a portal.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### AutocompleteGroup
 
@@ -231,8 +231,8 @@ Groups related items. Use with `groupBy` on the collection.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string \| ReactNode` | - |
-| `className` | `string` | - |
+| `heading` | `string \| ReactNode` | `-` |
+| `className` | `string` | `-` |
 
 ### AutocompleteGroupLabel
 
@@ -240,8 +240,8 @@ Label for a group of options. Use inside `AutocompleteGroup`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### AutocompleteItem
 
@@ -249,9 +249,9 @@ Single selectable option in the menu list.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `item` | `T` | **required** |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `item` | `T` | `required` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### AutocompleteEmpty
 
@@ -259,8 +259,8 @@ Shown when no options match the current filter. Use for empty state.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### AutocompleteRootProvider
 
@@ -268,7 +268,7 @@ Provides a Autocomplete API created with `useAutocomplete` to descendant compone
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseAutocompleteReturn` | **required** |
+| `value` | `UseAutocompleteReturn` | `required` |
 
 ### AutocompleteControl
 
@@ -277,7 +277,7 @@ Public AutocompleteControl component. It forwards the underlying primitive props
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### AutocompleteTrigger
 
@@ -286,7 +286,7 @@ Public AutocompleteTrigger component. It forwards the underlying primitive props
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### AutocompleteClear
 
@@ -295,7 +295,7 @@ Public AutocompleteClear component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### AutocompleteList
 
@@ -304,7 +304,7 @@ Public AutocompleteList component. It forwards the underlying primitive props.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### AutocompleteCollection
 
@@ -313,7 +313,7 @@ Public AutocompleteCollection component. It forwards the underlying primitive pr
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### AutocompleteSeparator
 
@@ -322,7 +322,7 @@ Public AutocompleteSeparator component. It forwards the underlying primitive pro
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ---
 

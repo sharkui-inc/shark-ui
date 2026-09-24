@@ -106,12 +106,12 @@ Root component. Canvas for drawing signatures. Manages strokes and export.
 | `disabled` | `boolean` | `false` |
 | `required` | `boolean` | `false` |
 | `readOnly` | `boolean` | `false` |
-| `name` | `string` | - |
-| `paths` | `string[]` | - |
-| `defaultPaths` | `string[]` | - |
-| `onDraw` | `(details: DrawDetails) => void` | - |
-| `onDrawEnd` | `(details: DrawEndDetails) => void` | - |
-| `className` | `string` | - |
+| `name` | `string` | `-` |
+| `paths` | `string[]` | `-` |
+| `defaultPaths` | `string[]` | `-` |
+| `onDraw` | `(details: DrawDetails) => void` | `-` |
+| `onDrawEnd` | `(details: DrawEndDetails) => void` | `-` |
+| `className` | `string` | `-` |
 
 ### SignaturePadRootProvider
 
@@ -119,7 +119,7 @@ Provides a SignaturePad API created with `useSignaturePad` to descendant compone
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseSignaturePadReturn` | **required** |
+| `value` | `UseSignaturePadReturn` | `required` |
 
 ---
 

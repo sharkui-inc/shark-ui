@@ -92,7 +92,7 @@ return <kbd>{formatHotkey("mod+K")}</kbd>
 | --- | --- | --- |
 | `activeScopes` | `string \| string[]` | `["*"]` |
 | `conflictBehavior` | `"warn" \| "error" \| "replace" \| "allow"` | `"warn"` |
-| `defaultOptions` | `HotkeyOptions` | - |
+| `defaultOptions` | `HotkeyOptions` | `-` |
 | `sequenceTimeoutMs` | `number` | `1000` |
 
 ### useHotkey
@@ -103,37 +103,37 @@ Registers one command. Takes every field of `UseHotkeysCommand`, plus an optiona
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `commands` | `UseHotkeysCommand[]` | - |
-| `store` | `HotkeyStore` | - |
-| `id` | `string` | generated |
+| `commands` | `UseHotkeysCommand[]` | `-` |
+| `store` | `HotkeyStore` | `-` |
+| `id` | `string` | `generated` |
 
 ### UseHotkeysCommand
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `id` | `string` | generated |
-| `hotkey` | `string` | - |
-| `action` | `(event: KeyboardEvent) => void` | - |
-| `label` | `string` | - |
-| `description` | `string` | - |
-| `category` | `string` | - |
-| `keywords` | `string[]` | - |
+| `id` | `string` | `generated` |
+| `hotkey` | `string` | `-` |
+| `action` | `(event: KeyboardEvent) => void` | `-` |
+| `label` | `string` | `-` |
+| `description` | `string` | `-` |
+| `category` | `string` | `-` |
+| `keywords` | `string[]` | `-` |
 | `scopes` | `string \| string[]` | `"*"` |
 | `enabled` | `boolean \| (() => boolean)` | `true` |
-| `options` | `HotkeyOptions` | - |
+| `options` | `HotkeyOptions` | `-` |
 
 ### HotkeyOptions
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `preventDefault` | `boolean` | - |
-| `stopPropagation` | `boolean` | - |
+| `preventDefault` | `boolean` | `-` |
+| `stopPropagation` | `boolean` | `-` |
 | `enableOnFormTags` | `boolean \| ("input" \| "textarea" \| "select")[]` | `false` |
 | `enableOnContentEditable` | `boolean` | `false` |
 | `capture` | `boolean` | `true` |
 | `requireReset` | `boolean` | `false` |
 | `eventType` | `"keydown" \| "keyup"` | `"keydown"` |
-| `target` | `Element \| (() => Element \| null)` | - |
+| `target` | `Element \| (() => Element \| null)` | `-` |
 
 ### useHotkeyRegistrations
 
@@ -151,8 +151,8 @@ Returns the keys currently held down.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `hotkey` | `string` | - |
-| `store` | `HotkeyStore` | - |
+| `hotkey` | `string` | `-` |
+| `store` | `HotkeyStore` | `-` |
 
 ### usePlatform
 
@@ -166,11 +166,11 @@ Returns `(hotkey: string, options?: HotkeyFormatOptions) => string`. Prefer this
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `onRecord` | `(hotkey: RecordedHotkey) => void` | - |
-| `onCancel` | `() => void` | - |
-| `onClear` | `() => void` | - |
-| `formatOptions` | `HotkeyFormatOptions` | - |
-| `sequenceTimeoutMs` | `number` | - |
+| `onRecord` | `(hotkey: RecordedHotkey) => void` | `-` |
+| `onCancel` | `() => void` | `-` |
+| `onClear` | `() => void` | `-` |
+| `formatOptions` | `HotkeyFormatOptions` | `-` |
+| `sequenceTimeoutMs` | `number` | `-` |
 
 Returns `{ recording, value, start, stop, cancel, clear }`.
 

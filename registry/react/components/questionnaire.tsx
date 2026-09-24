@@ -671,9 +671,9 @@ export const Questionnaire = (props: QuestionnaireProps) => {
           }
 
           const answer = value[definition.name] ?? EMPTY_ANSWER;
-          return getAnswerFormValues(answer).map((formValue, index) => (
+          return getAnswerFormValues(answer).map((formValue) => (
             <input
-              key={`${definition.name}:${index}`}
+              key={`${definition.name}:${formValue}`}
               name={definition.name}
               type="hidden"
               value={formValue}

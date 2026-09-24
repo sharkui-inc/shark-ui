@@ -199,16 +199,16 @@ Questionnaire form root.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `items` | `readonly QuestionnaireItemDefinition[]` | **required** |
-| `item` | `string` | - |
-| `defaultItem` | `string` | - |
-| `onItemChange` | `(details: QuestionnaireItemChangeDetails) => void` | - |
-| `value` | `QuestionnaireValue` | - |
+| `items` | `readonly QuestionnaireItemDefinition[]` | `required` |
+| `item` | `string` | `-` |
+| `defaultItem` | `string` | `-` |
+| `onItemChange` | `(details: QuestionnaireItemChangeDetails) => void` | `-` |
+| `value` | `QuestionnaireValue` | `-` |
 | `defaultValue` | `QuestionnaireValue` | `{}` |
-| `onValueChange` | `(details: QuestionnaireValueChangeDetails) => void` | - |
-| `shortcuts` | `"letters" \| "numbers"` | - |
-| `onSubmit` | `FormEventHandler<HTMLFormElement>` | - |
-| `className` | `string` | - |
+| `onValueChange` | `(details: QuestionnaireValueChangeDetails) => void` | `-` |
+| `shortcuts` | `"letters" \| "numbers"` | `-` |
+| `onSubmit` | `FormEventHandler<HTMLFormElement>` | `-` |
+| `className` | `string` | `-` |
 
 ### QuestionnaireItem
 
@@ -216,9 +216,9 @@ One question step. Renders a `<fieldset>`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `name` | `string` | **required** |
-| `id` | `string` | generated |
-| `className` | `string` | - |
+| `name` | `string` | `required` |
+| `id` | `string` | `generated` |
+| `className` | `string` | `-` |
 
 ### QuestionnaireTitle
 
@@ -226,7 +226,7 @@ Question legend.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### QuestionnaireDescription
 
@@ -234,7 +234,7 @@ Supporting question text.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### QuestionnaireChoices
 
@@ -242,7 +242,7 @@ Container for radio or checkbox choices.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### QuestionnaireChoice
 
@@ -250,9 +250,9 @@ One selectable answer.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
+| `value` | `string` | `required` |
 | `disabled` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### QuestionnaireChoiceShortcut
 
@@ -260,7 +260,7 @@ Shortcut badge for a choice.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### QuestionnaireInput
 
@@ -268,10 +268,10 @@ Freeform text answer.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `placeholder` | `string` | - |
+| `placeholder` | `string` | `-` |
 | `disabled` | `boolean` | `false` |
-| `onChange` | `ChangeEventHandler<HTMLInputElement>` | - |
-| `className` | `string` | - |
+| `onChange` | `ChangeEventHandler<HTMLInputElement>` | `-` |
+| `className` | `string` | `-` |
 
 ### QuestionnaireError
 
@@ -280,7 +280,7 @@ Validation message for the active question.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `children` | `ReactNode` | `"Choose an answer to continue."` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### QuestionnaireProgress
 
@@ -289,9 +289,9 @@ Current question progress.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `aria-label` | `string` | `"Question progress"` |
-| `aria-valuetext` | `string` | - |
-| `formatProgress` | `(details) => string` | - |
-| `className` | `string` | - |
+| `aria-valuetext` | `string` | `-` |
+| `formatProgress` | `(details) => string` | `-` |
+| `className` | `string` | `-` |
 
 ### QuestionnaireActions
 
@@ -299,7 +299,7 @@ Container for navigation actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### QuestionnairePrevious
 
@@ -308,8 +308,8 @@ Returns to the previous question.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `disabled` | `boolean` | `false` |
-| `onClick` | `MouseEventHandler<HTMLButtonElement>` | - |
-| `className` | `string` | - |
+| `onClick` | `MouseEventHandler<HTMLButtonElement>` | `-` |
+| `className` | `string` | `-` |
 
 ### QuestionnaireNext
 
@@ -318,8 +318,8 @@ Validates and advances to the next question.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `disabled` | `boolean` | `false` |
-| `onClick` | `MouseEventHandler<HTMLButtonElement>` | - |
-| `className` | `string` | - |
+| `onClick` | `MouseEventHandler<HTMLButtonElement>` | `-` |
+| `className` | `string` | `-` |
 
 ### QuestionnaireSkip
 
@@ -327,8 +327,8 @@ Skips an optional question.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `onClick` | `MouseEventHandler<HTMLButtonElement>` | - |
-| `className` | `string` | - |
+| `onClick` | `MouseEventHandler<HTMLButtonElement>` | `-` |
+| `className` | `string` | `-` |
 
 ### QuestionnaireSubmit
 
@@ -337,4 +337,4 @@ Submits the final question.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `disabled` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |

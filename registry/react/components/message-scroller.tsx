@@ -140,7 +140,8 @@ export const MessageScrollerButton = (props: MessageScrollerButtonProps) => {
         }
 
         scrollArea.scrollToEdge({
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches
             ? "auto"
             : "smooth",
           edge: direction === "end" ? "bottom" : "top",

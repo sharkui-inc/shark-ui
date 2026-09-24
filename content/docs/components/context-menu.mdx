@@ -124,10 +124,10 @@ Root element for a context menu. It accepts the same state and positioning props
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `positioning` | `PositioningOptions` | - |
-| `open` | `boolean` | - |
-| `defaultOpen` | `boolean` | - |
-| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
+| `positioning` | `PositioningOptions` | `-` |
+| `open` | `boolean` | `-` |
+| `defaultOpen` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
 
 ### ContextMenuRootProvider
 
@@ -135,7 +135,7 @@ Provides a context-menu API created with `useContextMenu`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseMenuReturn` | **required** |
+| `value` | `UseMenuReturn` | `required` |
 
 ### ContextMenuTrigger
 
@@ -152,8 +152,8 @@ Holds context-menu items in a portal.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ContextMenuGroup
 
@@ -161,7 +161,7 @@ Groups related context-menu items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string` | - |
+| `heading` | `string` | `-` |
 
 ### ContextMenuSeparator
 
@@ -169,8 +169,8 @@ Visual divider between groups of context-menu items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ContextMenuItem
 
@@ -178,9 +178,9 @@ A selectable context-menu option.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
+| `value` | `string` | `required` |
 | `variant` | `"default" \| "destructive"` | `"default"` |
-| `disabled` | `boolean` | - |
+| `disabled` | `boolean` | `-` |
 
 ### ContextMenuSub
 
@@ -188,9 +188,9 @@ Root element for a nested context menu.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `open` | `boolean` | - |
-| `defaultOpen` | `boolean` | - |
-| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
+| `open` | `boolean` | `-` |
+| `defaultOpen` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
 
 ### ContextMenuSubTrigger
 
@@ -198,9 +198,9 @@ Menu item that opens the nested context menu.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
-| `disabled` | `boolean` | - |
-| `asChild` | `boolean` | - |
+| `value` | `string` | `required` |
+| `disabled` | `boolean` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ContextMenuSubContent
 
@@ -208,8 +208,8 @@ Holds the nested context-menu items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ContextMenuShortcut
 
@@ -217,7 +217,7 @@ Optional keyboard shortcut hint displayed next to an item.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ---
 

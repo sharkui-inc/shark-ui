@@ -123,16 +123,16 @@ Root component. Manages angle selection and value.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `number` | - |
+| `value` | `number` | `-` |
 | `defaultValue` | `number` | `0` |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `step` | `number` | `1` |
-| `disabled` | `boolean` | - |
+| `disabled` | `boolean` | `-` |
 | `size` | `number` | `100` |
 | `thickness` | `number` | `6` |
-| `markers` | `boolean \| number[]` | - |
+| `markers` | `boolean \| number[]` | `-` |
 | `markersAtSteps` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CircularSliderLabel
 
@@ -140,7 +140,7 @@ Accessible label. Render as a child of `CircularSlider`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CircularSliderValue
 
@@ -148,9 +148,9 @@ Shows the current angle value (degrees or custom format).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `prefix` | `React.ReactNode \| string` | - |
-| `suffix` | `React.ReactNode \| string` | - |
-| `className` | `string` | - |
+| `prefix` | `React.ReactNode \| string` | `-` |
+| `suffix` | `React.ReactNode \| string` | `-` |
+| `className` | `string` | `-` |
 
 ### CircularSliderRootProvider
 
@@ -158,7 +158,7 @@ Provides a CircularSlider API created with `useCircularSlider` to descendant com
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `UseCircularSliderReturn` | **required** |
+| `value` | `UseCircularSliderReturn` | `required` |
 | `size` | `number` | `100` |
 | `thickness` | `number` | `6` |
 
@@ -171,7 +171,7 @@ Public CircularSliderThumb component. It forwards the underlying primitive props
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CircularSliderMarkerGroup
 
@@ -180,7 +180,7 @@ Public CircularSliderMarkerGroup component. It forwards the underlying primitive
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CircularSliderMarker
 
@@ -189,7 +189,7 @@ Public CircularSliderMarker component. It forwards the underlying primitive prop
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ---
 

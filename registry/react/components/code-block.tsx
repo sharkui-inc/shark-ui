@@ -500,7 +500,9 @@ const CodeToken = (props: { token: ThemedToken }) => {
           color: token.color === "inherit" ? undefined : token.color,
           fontStyle: isItalic(token.fontStyle) ? "italic" : undefined,
           fontWeight: isBold(token.fontStyle) ? "bold" : undefined,
-          textDecoration: isUnderline(token.fontStyle) ? "underline" : undefined,
+          textDecoration: isUnderline(token.fontStyle)
+            ? "underline"
+            : undefined,
           ...token.htmlStyle,
         } as React.CSSProperties
       }

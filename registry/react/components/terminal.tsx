@@ -72,10 +72,10 @@ const TerminalFollow = (props: { followKey: string }) => {
     }
 
     scrollToEdge({
-      edge: "bottom",
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
         ? "auto"
         : "smooth",
+      edge: "bottom",
     });
   });
 
