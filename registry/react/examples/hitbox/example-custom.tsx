@@ -11,13 +11,13 @@ const Example = () => {
 
   return (
     <div className="relative flex size-full items-center justify-center">
-      <div className="absolute top-2 right-2">
+      <div className="absolute inset-e-4 top-4">
         <Field orientation="horizontal">
+          <FieldLabel>Debug</FieldLabel>
           <Switch
             checked={show}
             onCheckedChange={({ checked }) => setShow(checked)}
           />
-          <FieldLabel>Hitbox</FieldLabel>
         </Field>
       </div>
 
