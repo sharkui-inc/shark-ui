@@ -6,9 +6,15 @@ import type {
 import type { ChatTransport, InferUIMessageChunk, UIMessage } from "ai";
 
 export interface CreateChatAssistantOptions {
-  /** Delay before the assistant response starts streaming. */
+  /**
+   * Delay before the assistant response starts streaming.
+   *
+   * @default 0
+   */
   delayMs?: number;
-  /** Stable ID for matching a streamed response to this scripted turn. */
+  /**
+   * Stable ID for matching a streamed response to this scripted turn.
+   */
   id?: string;
 }
 
@@ -86,7 +92,7 @@ const createTimedChunkStream = <CHUNK>(
 ) => {
   const cancellationController = new AbortController();
 
-  const stream = async function* (): AsyncGenerator<CHUNK> {
+  const stream = async function* (): AsyncGenerator<CHUNK, void> {
     for (const [index, chunk] of chunks.entries()) {
       // biome-ignore lint/performance/noAwaitInLoops: Chunks must be scheduled sequentially.
       await wait(
@@ -263,9 +269,9 @@ const createAiSdkTransport = (
     return Promise.resolve(
       new ReadableStream<InferUIMessageChunk<ChatUiMessage>>(
         {
-          cancel() {
+          async cancel() {
             scheduledChunks.cancel();
-            return scheduledChunks.stream.return().then(() => undefined);
+            await scheduledChunks.stream.return(undefined);
           },
           pull(controller) {
             if (!pendingPull) {

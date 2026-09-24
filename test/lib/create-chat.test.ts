@@ -48,6 +48,10 @@ const normalizeAiSdkChunks = (
     throw new Error("Expected an AI SDK start chunk.");
   }
 
+  if (start.messageId === undefined) {
+    throw new Error("Expected an AI SDK start chunk with a messageId.");
+  }
+
   return {
     assistantId: start.messageId,
     completed: chunks.some((chunk) => chunk.type === "finish"),
