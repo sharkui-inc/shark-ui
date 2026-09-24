@@ -1,3 +1,4 @@
+import { Spinner } from "@/registry/react/components/spinner";
 import {
   Steps,
   StepsIndicator,
@@ -6,7 +7,6 @@ import {
   StepsSeparator,
   StepsTrigger,
 } from "@/registry/react/components/steps";
-import { Spinner } from "@/registry/react/components/spinner";
 
 const Example = () => (
   <Steps className="w-full max-w-md" count={items.length}>
