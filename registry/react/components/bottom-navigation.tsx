@@ -34,11 +34,7 @@ export const BottomNavigation = (
 };
 
 const bottomNavigationListVariants = tv({
-  base: [
-    "fixed z-10",
-    "flex items-center justify-around",
-    "shrink-0 border-t bg-background/64 backdrop-blur-sm",
-  ],
+  base: ["fixed z-10", "flex items-center justify-around", "shrink-0 border-t"],
   defaultVariants: {
     variant: "default",
   },
@@ -48,11 +44,14 @@ const bottomNavigationListVariants = tv({
         "inset-x-0 bottom-0",
         "min-h-[calc(var(--spacing)*14+env(safe-area-inset-bottom,0))] w-full",
         "pb-[env(safe-area-inset-bottom,0px)]",
+        "bg-background",
       ],
       inset: [
         "inset-x-4",
         "bottom-[calc(var(--spacing)*4+env(safe-area-inset-bottom,0px))]",
-        "min-h-14 rounded-full shadow-lg/4",
+        "min-h-14",
+        "bg-background/80 backdrop-blur-sm",
+        "rounded-full shadow-lg/4",
       ],
     },
   },
@@ -93,13 +92,13 @@ export const BottomNavigationItem = (
         "min-w-0",
         "flex min-h-11 flex-1 flex-col items-center justify-center gap-0.5",
         "p-2",
-        "text-muted-foreground",
+        "text-foreground opacity-64",
         "cursor-pointer",
-        "transition-colors",
-        "hover:text-foreground",
-        "aria-selected:text-primary",
+        "transition-opacity",
+        "hover:opacity-100",
+        "aria-selected:opacity-100",
         "border border-transparent focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
-        "data-disabled:pointer-events-none data-disabled:opacity-64",
+        "data-disabled:pointer-events-none data-disabled:opacity-32",
         "[&_svg:not([class*='size-'])]:size-5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         "has-[data-slot=bottom-navigation-item-label]:[&_svg:not([class*='size-'])]:size-4",
         "motion-reduce:transition-none",

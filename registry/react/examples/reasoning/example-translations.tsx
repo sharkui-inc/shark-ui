@@ -18,9 +18,9 @@ const Example = () => (
   >
     <ReasoningTrigger />
     <ReasoningContent>
-      O formulário já valida campos vazios. Agora devo adicionar uma verificação
-      de formato a `validateForm` e manter a expressão regular em um helper para
-      que a interface possa reutilizá-la.
+      Pedidos ficam em `pending` porque o webhook de pagamento pode chegar antes
+      do commit da linha. Devo tornar `handlePaymentEvent` idempotente e fazer
+      upsert por `payment_intent_id`.
     </ReasoningContent>
   </Reasoning>
 );

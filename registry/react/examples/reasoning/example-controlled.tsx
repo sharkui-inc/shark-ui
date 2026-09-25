@@ -19,9 +19,9 @@ const Example = () => {
       <Reasoning duration={8} onOpenChange={handleOpenChange} open={open}>
         <ReasoningTrigger />
         <ReasoningContent>
-          The form already validates empty fields. I should add a format check
-          next to `validateForm` and keep the regex in a helper so the UI can
-          reuse it.
+          Orders stall in `pending` because the payment webhook can arrive
+          before the row is committed. I should make `handlePaymentEvent`
+          idempotent and upsert by `payment_intent_id`.
         </ReasoningContent>
       </Reasoning>
       <p className="text-muted-foreground text-sm">

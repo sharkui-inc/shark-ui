@@ -82,7 +82,7 @@ export const SegmentGroupItem = (
     >
       {children}
 
-      <ArkSegmentGroup.ItemControl />
+      <ArkSegmentGroup.ItemControl className="hidden" />
       <ArkSegmentGroup.ItemHiddenInput />
     </ArkSegmentGroup.Item>
   );

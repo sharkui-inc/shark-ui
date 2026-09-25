@@ -15,6 +15,10 @@ import {
   ItemMedia,
   ItemTitle,
 } from "@/registry/react/components/item";
+import {
+  SkeletonCircle,
+  SkeletonText,
+} from "@/registry/react/components/skeleton";
 import { Spinner } from "@/registry/react/components/spinner";
 import { useAsyncList } from "@/registry/react/hooks/use-async-list";
 
@@ -77,34 +81,51 @@ const UseAsyncListDemo = () => {
           <AlertDescription>{list.error.message}</AlertDescription>
         </Alert>
       )}
-      {!!list.loading && (
-        <div className="flex items-center gap-2 text-muted-foreground text-sm">
-          <Spinner /> Loading
-        </div>
-      )}
-      <ItemGroup className="max-h-64 gap-2 overflow-y-auto">
-        {list.items.map((post) => (
-          <Item
-            className="[--space:--spacing(2)]"
-            key={post.id}
-            role="listitem"
-            variant="outline"
-          >
-            <ItemMedia>
-              <Avatar>
-                <AvatarImage
-                  alt={`Author ${post.userId}`}
-                  src={`https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=${encodeURIComponent(`author-${post.userId}`)}&waveColor=ea580c`}
-                />
-                <AvatarFallback>{post.userId}</AvatarFallback>
-              </Avatar>
-            </ItemMedia>
-            <ItemContent>
-              <ItemTitle>{post.title}</ItemTitle>
-              <ItemDescription>{post.body}</ItemDescription>
-            </ItemContent>
-          </Item>
-        ))}
+      <ItemGroup
+        aria-busy={list.loading}
+        className="max-h-64 gap-2 overflow-y-auto"
+      >
+        {list.loading && list.items.length === 0
+          ? skeletons.map((key) => (
+              <Item
+                aria-hidden
+                className="[--space:--spacing(2)]"
+                key={key}
+                variant="outline"
+              >
+                <ItemMedia>
+                  <SkeletonCircle className="size-8" />
+                </ItemMedia>
+                <ItemContent>
+                  <SkeletonText
+                    className="gap-1.5 **:[div]:h-[1.0625rem]"
+                    lines={3}
+                  />
+                </ItemContent>
+              </Item>
+            ))
+          : list.items.map((post) => (
+              <Item
+                className="[--space:--spacing(2)]"
+                key={post.id}
+                role="listitem"
+                variant="outline"
+              >
+                <ItemMedia>
+                  <Avatar>
+                    <AvatarImage
+                      alt={`Author ${post.userId}`}
+                      src={`https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=${encodeURIComponent(`author-${post.userId}`)}&waveColor=ea580c`}
+                    />
+                    <AvatarFallback>{post.userId}</AvatarFallback>
+                  </Avatar>
+                </ItemMedia>
+                <ItemContent>
+                  <ItemTitle>{post.title}</ItemTitle>
+                  <ItemDescription>{post.body}</ItemDescription>
+                </ItemContent>
+              </Item>
+            ))}
       </ItemGroup>
       {!(list.loading || list.error) && !!list.empty && (
         <p className="text-muted-foreground text-sm">No results found.</p>
@@ -117,5 +138,7 @@ const UseAsyncListDemo = () => {
 };
 
 const LIMIT = 4;
+
+const skeletons = ["post-a", "post-b", "post-c", "post-d"] as const;
 
 export default UseAsyncListDemo;

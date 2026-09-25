@@ -49,7 +49,10 @@ const CommandGroups = () => {
             onInputValueChange={({ inputValue }) => filter(inputValue)}
             onValueChange={() => setOpen(false)}
           >
-            <CommandInput placeholder="Type a command or search..." />
+            <CommandInput
+              autoFocus={false}
+              placeholder="Type a command or search..."
+            />
             <CommandContent>
               <CommandEmpty>No results found.</CommandEmpty>
               <CommandList>

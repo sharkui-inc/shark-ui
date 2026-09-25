@@ -30,7 +30,7 @@ const Example = () => {
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <CommandInput placeholder={values.placeholder} />
+      <CommandInput autoFocus={false} placeholder={values.placeholder} />
       <CommandContent>
         <CommandEmpty>{values.empty}</CommandEmpty>
         <CommandList>

@@ -54,7 +54,8 @@ const StreamingReasoning = () => {
     >
       <ReasoningTrigger />
       <ReasoningContent>
-        Scanning helpers.ts for the current validation path...
+        Checking whether the Stripe webhook can land before the order row
+        commits...
       </ReasoningContent>
     </Reasoning>
   );

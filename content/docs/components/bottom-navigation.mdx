@@ -10,7 +10,11 @@ links:
 
 import manifest from "@/registry/manifest/bottom-navigation";
 
-<ComponentPreview componentName="bottom-navigation" />
+<PreviewIframe
+  className="min-h-[640px]"
+  src="/view/examples/bottom-navigation/example-default"
+  title="Bottom Navigation"
+/>
 
 ## Installation
 
@@ -96,7 +100,29 @@ import {
 
 Control the active item with `value` and `onValueChange`.
 
-<ComponentPreview componentName="bottom-navigation" fileName="example-controlled" />
+<PreviewIframe
+  className="min-h-[640px]"
+  src="/view/examples/bottom-navigation/example-controlled"
+  title="Bottom Navigation Controlled"
+/>
+
+```tsx
+const [value, setValue] = React.useState("home");
+
+<BottomNavigation
+  onValueChange={(details) => setValue(details.value)}
+  value={value}
+>
+  <BottomNavigationList>
+    <BottomNavigationItem value="home">
+      <BottomNavigationItemIcon>
+        <HomeIcon />
+      </BottomNavigationItemIcon>
+      <BottomNavigationItemLabel>Home</BottomNavigationItemLabel>
+    </BottomNavigationItem>
+  </BottomNavigationList>
+</BottomNavigation>
+```
 
 ## States
 
@@ -104,7 +130,20 @@ Control the active item with `value` and `onValueChange`.
 
 Disable an item with the `disabled` prop.
 
-<ComponentPreview componentName="bottom-navigation" fileName="example-disabled" />
+<PreviewIframe
+  className="min-h-[640px]"
+  src="/view/examples/bottom-navigation/example-disabled"
+  title="Bottom Navigation Disabled"
+/>
+
+```tsx
+<BottomNavigationItem disabled value="news">
+  <BottomNavigationItemIcon>
+    <BellIcon />
+  </BottomNavigationItemIcon>
+  <BottomNavigationItemLabel>News</BottomNavigationItemLabel>
+</BottomNavigationItem>
+```
 
 ## Variants
 
@@ -112,11 +151,31 @@ Use the prop `variant` to change the appearance.
 
 ### Default
 
-<ComponentPreview componentName="bottom-navigation" fileName="example-variant-default" />
+<PreviewIframe
+  className="min-h-[640px]"
+  src="/view/examples/bottom-navigation/example-variant-default"
+  title="Bottom Navigation Default"
+/>
+
+```tsx
+<BottomNavigationList variant="default">
+  {/* ... */}
+</BottomNavigationList>
+```
 
 ### Inset
 
-<ComponentPreview componentName="bottom-navigation" fileName="example-variant-inset" />
+<PreviewIframe
+  className="min-h-[640px]"
+  src="/view/examples/bottom-navigation/example-variant-inset"
+  title="Bottom Navigation Inset"
+/>
+
+```tsx
+<BottomNavigationList variant="inset">
+  {/* ... */}
+</BottomNavigationList>
+```
 
 ## Examples
 
@@ -124,19 +183,54 @@ Use the prop `variant` to change the appearance.
 
 Use `aria-label` on the `BottomNavigationItem` to give the item a label for screen readers.
 
-<ComponentPreview componentName="bottom-navigation" fileName="example-icon-only" />
+<PreviewIframe
+  className="min-h-[640px]"
+  src="/view/examples/bottom-navigation/example-icon-only"
+  title="Bottom Navigation Icon Only"
+/>
+
+```tsx
+<BottomNavigationItem aria-label="Home" value="home">
+  <BottomNavigationItemIcon>
+    <HomeIcon />
+  </BottomNavigationItemIcon>
+</BottomNavigationItem>
+```
 
 ### With links
 
 Use `asChild` on `BottomNavigationItem` with a `Link`.
 
-<ComponentPreview componentName="bottom-navigation" fileName="example-with-links" />
+<PreviewIframe
+  className="min-h-[640px]"
+  src="/view/examples/bottom-navigation/example-with-links"
+  title="Bottom Navigation With Links"
+/>
+
+```tsx
+<BottomNavigation value={pathname}>
+  <BottomNavigationList aria-label="Main navigation">
+    <BottomNavigationItem asChild value="/docs">
+      <Link href="/docs">
+        <BottomNavigationItemIcon>
+          <BookOpenIcon />
+        </BottomNavigationItemIcon>
+        <BottomNavigationItemLabel>Docs</BottomNavigationItemLabel>
+      </Link>
+    </BottomNavigationItem>
+  </BottomNavigationList>
+</BottomNavigation>
+```
 
 ## RTL
 
 To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
-<RTLComponentPreview componentName="bottom-navigation" />
+<PreviewIframe
+  className="min-h-[640px]"
+  src="/view/examples/bottom-navigation/example-rtl"
+  title="Bottom Navigation RTL"
+/>
 
 ## API Reference
 

@@ -31,7 +31,11 @@ export const PreviewIframe = (props: PreviewIframeProps) => {
     return (
       <div
         className={cn(
-          "relative min-h-[550px] w-full overflow-hidden rounded-2xl border",
+          "relative",
+          "min-h-[550px] w-full",
+          "bg-code",
+          "rounded-2xl border",
+          "overflow-hidden",
           className
         )}
         data-slot="preview-iframe"
@@ -53,6 +57,7 @@ export const PreviewIframe = (props: PreviewIframeProps) => {
     <iframe
       className={cn(
         "min-h-[450px] w-full",
+        "bg-code",
         "rounded-2xl border",
         "overflow-hidden",
         className

@@ -12,7 +12,7 @@ import {
   ItemMedia,
   ItemTitle,
 } from "@/registry/react/components/item";
-import { Spinner } from "@/registry/react/components/spinner";
+import { Skeleton, SkeletonText } from "@/registry/react/components/skeleton";
 import { useAsyncList } from "@/registry/react/hooks/use-async-list";
 
 interface Product {
@@ -28,7 +28,7 @@ const UseAsyncListDemo = () => {
     initialSortDescriptor: { column: "id", direction: "ascending" },
     async load({ sortDescriptor, signal }) {
       const url = new URL("https://fakestoreapi.com/products");
-      url.searchParams.set("limit", "4");
+      url.searchParams.set("limit", String(LIMIT));
       url.searchParams.set(
         "sort",
         sortDescriptor?.direction === "descending" ? "desc" : "asc"
@@ -63,46 +63,60 @@ const UseAsyncListDemo = () => {
           )}
         </Button>
       </div>
-      {!!list.loading && (
-        <div className="flex items-center gap-2 text-muted-foreground text-sm">
-          <Spinner /> Loading
-        </div>
-      )}
       {!!list.error && (
         <Alert role="alert" variant="destructive">
           <AlertDescription>{list.error.message}</AlertDescription>
         </Alert>
       )}
-      <ItemGroup className="gap-2">
-        {list.items.map((product) => (
-          <Item
-            className="[--space:--spacing(2)]"
-            key={product.id}
-            role="listitem"
-            variant="outline"
-          >
-            <ItemMedia variant="image">
-              <img
-                alt={product.title}
-                className="object-contain"
-                height={40}
-                loading="lazy"
-                src={product.image}
-                width={40}
-              />
-            </ItemMedia>
-            <ItemContent>
-              <ItemTitle className="line-clamp-2">{product.title}</ItemTitle>
-              <ItemDescription>
-                <FormatNumber
-                  currency="USD"
-                  style="currency"
-                  value={product.price}
-                />
-              </ItemDescription>
-            </ItemContent>
-          </Item>
-        ))}
+      <ItemGroup aria-busy={list.loading} className="gap-2">
+        {list.loading
+          ? skeletons.map((key) => (
+              <Item
+                aria-hidden
+                className="[--space:--spacing(2)]"
+                key={key}
+                variant="outline"
+              >
+                <ItemMedia variant="image">
+                  <Skeleton className="size-10 rounded-xl" />
+                </ItemMedia>
+                <ItemContent>
+                  <SkeletonText
+                    className="gap-1.5 **:[div]:h-[1.125rem]"
+                    lines={2}
+                  />
+                </ItemContent>
+              </Item>
+            ))
+          : list.items.map((product) => (
+              <Item
+                className="[--space:--spacing(2)]"
+                key={product.id}
+                role="listitem"
+                variant="outline"
+              >
+                <ItemMedia variant="image">
+                  <img
+                    alt={product.title}
+                    className="object-contain"
+                    height={40}
+                    loading="lazy"
+                    src={product.image}
+                    width={40}
+                  />
+                </ItemMedia>
+                <ItemContent>
+                  <ItemTitle>{product.title}</ItemTitle>
+                  <ItemDescription>
+                    <FormatNumber
+                      currency="USD"
+                      style="currency"
+                      value={product.price}
+                    />
+                  </ItemDescription>
+                </ItemContent>
+              </Item>
+            ))}
       </ItemGroup>
       {!(list.loading || list.error) && !!list.empty && (
         <p className="text-muted-foreground text-sm">No results found.</p>
@@ -110,5 +124,9 @@ const UseAsyncListDemo = () => {
     </div>
   );
 };
+
+const LIMIT = 4;
+
+const skeletons = ["product-a", "product-b", "product-c", "product-d"] as const;
 
 export default UseAsyncListDemo;

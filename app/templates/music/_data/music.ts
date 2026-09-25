@@ -63,7 +63,7 @@ export const PLAYLISTS = [
   {
     image: ART[5],
     subtitle: "New music from your favourite corners",
-    title: "Release Radar",
+    title: "Radar",
   },
   {
     image: ART[1],

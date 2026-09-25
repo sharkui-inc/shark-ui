@@ -26,7 +26,7 @@ const Example = () => {
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <CommandInput placeholder="Search frameworks..." />
+      <CommandInput autoFocus={false} placeholder="Search frameworks..." />
       <CommandContent>
         <CommandEmpty />
         <CommandList>

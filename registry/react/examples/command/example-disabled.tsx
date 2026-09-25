@@ -33,7 +33,7 @@ const Example = () => {
       disabled
       onInputValueChange={handleInputValueChange}
     >
-      <CommandInput />
+      <CommandInput autoFocus={false} />
       <CommandContent>
         <CommandEmpty />
         <CommandList>

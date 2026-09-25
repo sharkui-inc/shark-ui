@@ -1,6 +1,6 @@
 "use client";
 
-import { BlocksIcon, BookOpenIcon, HouseIcon, PaletteIcon } from "lucide-react";
+import { HouseIcon, LibraryIcon, SearchIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import {
   BottomNavigation,
@@ -10,16 +10,17 @@ import {
   BottomNavigationList,
 } from "@/registry/react/components/bottom-navigation";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
+import { DemoAppContent } from "./demo-app-content";
+import { DemoPhoneShell } from "./demo-phone-shell";
 
 const Example = () => (
-  <div className="flex h-72 w-full max-w-xs flex-col overflow-y-auto rounded-lg border bg-muted shadow-lg/4">
-    <ScrollArea>
-      <div className="h-96" />
-      <BottomNavigation value="/docs">
-        <BottomNavigationList
-          aria-label="Example navigation"
-          className="absolute"
-        >
+  <div className="grid h-svh place-items-center p-6">
+    <DemoPhoneShell className="flex flex-col">
+      <ScrollArea className="min-h-0 flex-1 **:data-[slot=scroll-area-scrollbar]:hidden">
+        <DemoAppContent />
+      </ScrollArea>
+      <BottomNavigation className="shrink-0" value="/search">
+        <BottomNavigationList aria-label="Music navigation" className="static">
           <BottomNavigationItem asChild value="/">
             <Link href="#">
               <BottomNavigationItemIcon>
@@ -28,33 +29,33 @@ const Example = () => (
               <BottomNavigationItemLabel>Home</BottomNavigationItemLabel>
             </Link>
           </BottomNavigationItem>
-          <BottomNavigationItem asChild value="/docs">
+          <BottomNavigationItem asChild value="/search">
             <Link href="#">
               <BottomNavigationItemIcon>
-                <BookOpenIcon />
+                <SearchIcon />
               </BottomNavigationItemIcon>
-              <BottomNavigationItemLabel>Docs</BottomNavigationItemLabel>
+              <BottomNavigationItemLabel>Search</BottomNavigationItemLabel>
             </Link>
           </BottomNavigationItem>
-          <BottomNavigationItem asChild value="/docs/components">
+          <BottomNavigationItem asChild value="/library">
             <Link href="#">
               <BottomNavigationItemIcon>
-                <BlocksIcon />
+                <LibraryIcon />
               </BottomNavigationItemIcon>
-              <BottomNavigationItemLabel>Components</BottomNavigationItemLabel>
+              <BottomNavigationItemLabel>Library</BottomNavigationItemLabel>
             </Link>
           </BottomNavigationItem>
-          <BottomNavigationItem asChild value="/themes">
+          <BottomNavigationItem asChild value="/you">
             <Link href="#">
               <BottomNavigationItemIcon>
-                <PaletteIcon />
+                <UserIcon />
               </BottomNavigationItemIcon>
-              <BottomNavigationItemLabel>Themes</BottomNavigationItemLabel>
+              <BottomNavigationItemLabel>You</BottomNavigationItemLabel>
             </Link>
           </BottomNavigationItem>
         </BottomNavigationList>
       </BottomNavigation>
-    </ScrollArea>
+    </DemoPhoneShell>
   </div>
 );
 

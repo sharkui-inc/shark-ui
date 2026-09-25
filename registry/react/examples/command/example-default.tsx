@@ -28,7 +28,7 @@ const CommandExample = () => {
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <CommandInput />
+      <CommandInput autoFocus={false} />
       <CommandContent>
         <CommandEmpty />
         <CommandList>

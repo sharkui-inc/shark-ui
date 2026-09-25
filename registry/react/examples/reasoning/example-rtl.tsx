@@ -24,21 +24,21 @@ const translations = {
   ar: {
     values: {
       content:
-        "يتحقق النموذج بالفعل من الحقول الفارغة. يجب أن أضيف فحص التنسيق بعد ذلك إلى `validateForm` وأحتفظ بالتعبير النمطي في دالة مساعدة لإعادة استخدامه في الواجهة.",
+        "تظل الطلبات في حالة `pending` لأن webhook الدفع قد يصل قبل تثبيت الصف. ينبغي أن أجعل `handlePaymentEvent` عديم التأثير الجانبي عند التكرار وأن أُجري upsert حسب `payment_intent_id`.",
       trigger: "فكّر لمدة ٨ ثوانٍ",
     },
   },
   en: {
     values: {
       content:
-        "The form already validates empty fields. I should add a format check next to `validateForm` and keep the regex in a helper so the UI can reuse it.",
+        "Orders stall in `pending` because the payment webhook can arrive before the row is committed. I should make `handlePaymentEvent` idempotent and upsert by `payment_intent_id`.",
       trigger: "Thought for 8s",
     },
   },
   he: {
     values: {
       content:
-        "הטופס כבר מאמת שדות ריקים. עלי להוסיף בדיקת פורמט ל-`validateForm` ולשמור את ה-regex בפונקציית עזר כך שהממשק יוכל לעשות בו שימוש חוזר.",
+        "הזמנות נתקעות ב-`pending` כי ה-webhook של התשלום יכול להגיע לפני שהשורה נשמרת. עלי להפוך את `handlePaymentEvent` לאידמפוטנטי ולבצע upsert לפי `payment_intent_id`.",
       trigger: "חשב במשך 8 שניות",
     },
   },

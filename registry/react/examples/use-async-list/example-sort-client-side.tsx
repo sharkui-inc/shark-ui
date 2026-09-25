@@ -9,7 +9,10 @@ import {
   AvatarImage,
 } from "@/registry/react/components/avatar";
 import { Button } from "@/registry/react/components/button";
-import { Spinner } from "@/registry/react/components/spinner";
+import {
+  SkeletonCircle,
+  SkeletonText,
+} from "@/registry/react/components/skeleton";
 import {
   Table,
   TableBody,
@@ -33,7 +36,7 @@ const UseAsyncListDemo = () => {
     autoReload: true,
     async load({ signal }) {
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users?_limit=4",
+        `https://jsonplaceholder.typicode.com/users?_limit=${LIMIT}`,
         { signal }
       );
       if (!response.ok) {
@@ -67,11 +70,6 @@ const UseAsyncListDemo = () => {
 
   return (
     <div className="flex w-full max-w-xl flex-col gap-3">
-      {!!list.loading && (
-        <div className="flex items-center gap-2 text-muted-foreground text-sm">
-          <Spinner /> Loading
-        </div>
-      )}
       {!!list.error && (
         <Alert role="alert" variant="destructive">
           <AlertDescription>{list.error.message}</AlertDescription>
@@ -83,7 +81,7 @@ const UseAsyncListDemo = () => {
           ? `${list.sortDescriptor.column} (${list.sortDescriptor.direction})`
           : "none"}
       </output>
-      <Table>
+      <Table aria-busy={list.loading}>
         <TableHeader>
           <TableRow>
             {columns.map(({ key, label }) => {
@@ -114,24 +112,41 @@ const UseAsyncListDemo = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {list.items.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <Avatar size="sm">
-                    <AvatarImage
-                      alt={user.name}
-                      src={`https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=${encodeURIComponent(user.username)}&waveColor=ca8a04`}
-                    />
-                    <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  {user.name}
-                </div>
-              </TableCell>
-              <TableCell>{user.username}</TableCell>
-              <TableCell>{user.email}</TableCell>
-            </TableRow>
-          ))}
+          {list.loading
+            ? skeletons.map((key) => (
+                <TableRow aria-hidden key={key}>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <SkeletonCircle className="size-6" />
+                      <SkeletonText className="w-24 **:[div]:h-5" lines={1} />
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <SkeletonText className="w-20 **:[div]:h-5" lines={1} />
+                  </TableCell>
+                  <TableCell>
+                    <SkeletonText className="w-32 **:[div]:h-5" lines={1} />
+                  </TableCell>
+                </TableRow>
+              ))
+            : list.items.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <Avatar size="sm">
+                        <AvatarImage
+                          alt={user.name}
+                          src={`https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=${encodeURIComponent(user.username)}&waveColor=ca8a04`}
+                        />
+                        <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                      </Avatar>
+                      {user.name}
+                    </div>
+                  </TableCell>
+                  <TableCell>{user.username}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                </TableRow>
+              ))}
         </TableBody>
       </Table>
       {!(list.loading || list.error) && !!list.empty && (
@@ -140,6 +155,10 @@ const UseAsyncListDemo = () => {
     </div>
   );
 };
+
+const LIMIT = 4;
+
+const skeletons = ["user-a", "user-b", "user-c", "user-d"] as const;
 
 const sortIcons = {
   ascending: ArrowUpIcon,

@@ -17,7 +17,10 @@ import {
   ItemMedia,
   ItemTitle,
 } from "@/registry/react/components/item";
-import { Spinner } from "@/registry/react/components/spinner";
+import {
+  SkeletonCircle,
+  SkeletonText,
+} from "@/registry/react/components/skeleton";
 import { useAsyncList } from "@/registry/react/hooks/use-async-list";
 
 interface User {
@@ -58,39 +61,53 @@ const UseAsyncListDemo = () => {
           value={list.filterText}
         />
       </Field>
-      {!!list.loading && (
-        <div className="flex items-center gap-2 text-muted-foreground text-sm">
-          <Spinner /> Loading
-        </div>
-      )}
       {!!list.error && (
         <Alert role="alert" variant="destructive">
           <AlertDescription>{list.error.message}</AlertDescription>
         </Alert>
       )}
-      <ItemGroup className="gap-2">
-        {list.items.map((user) => (
-          <Item
-            className="[--space:--spacing(2)]"
-            key={user.id}
-            role="listitem"
-            variant="outline"
-          >
-            <ItemMedia>
-              <Avatar>
-                <AvatarImage
-                  alt={user.name}
-                  src={`https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=${encodeURIComponent(user.email)}&waveColor=7c3aed`}
-                />
-                <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-              </Avatar>
-            </ItemMedia>
-            <ItemContent>
-              <ItemTitle>{user.name}</ItemTitle>
-              <ItemDescription>{user.email}</ItemDescription>
-            </ItemContent>
-          </Item>
-        ))}
+      <ItemGroup aria-busy={list.loading} className="gap-2">
+        {list.loading
+          ? skeletons.map((key) => (
+              <Item
+                aria-hidden
+                className="[--space:--spacing(2)]"
+                key={key}
+                variant="outline"
+              >
+                <ItemMedia>
+                  <SkeletonCircle className="size-8" />
+                </ItemMedia>
+                <ItemContent>
+                  <SkeletonText
+                    className="gap-1.5 **:[div]:h-[1.125rem]"
+                    lines={2}
+                  />
+                </ItemContent>
+              </Item>
+            ))
+          : list.items.map((user) => (
+              <Item
+                className="[--space:--spacing(2)]"
+                key={user.id}
+                role="listitem"
+                variant="outline"
+              >
+                <ItemMedia>
+                  <Avatar>
+                    <AvatarImage
+                      alt={user.name}
+                      src={`https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=${encodeURIComponent(user.email)}&waveColor=7c3aed`}
+                    />
+                    <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                </ItemMedia>
+                <ItemContent>
+                  <ItemTitle>{user.name}</ItemTitle>
+                  <ItemDescription>{user.email}</ItemDescription>
+                </ItemContent>
+              </Item>
+            ))}
       </ItemGroup>
       {!(list.loading || list.error) && !!list.empty && (
         <p className="text-muted-foreground text-sm">No results found.</p>
@@ -100,6 +117,8 @@ const UseAsyncListDemo = () => {
 };
 
 const LIMIT = 3;
+
+const skeletons = ["user-a", "user-b", "user-c"] as const;
 
 const mockUsers: User[] = [
   {

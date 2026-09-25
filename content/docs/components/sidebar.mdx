@@ -266,7 +266,7 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 ### SidebarProvider
 
-`SidebarProvider` must wrap any tree that calls `useSidebar` or renders `Sidebar` / `SidebarTrigger`. It forwards standard `div` props (including `className` and `style`).
+Provides open/collapsed state. Wrap any tree that uses `Sidebar`, `SidebarTrigger`, or `useSidebar`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -276,7 +276,7 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 #### Width
 
-Defaults live beside `SIDEBAR_WIDTH` and `SIDEBAR_WIDTH_MOBILE` inside the registry file. Override per layout with CSS variables on the provider:
+Override with CSS variables on the provider:
 
 ```tsx
 <SidebarProvider
@@ -299,7 +299,7 @@ Defaults live beside `SIDEBAR_WIDTH` and `SIDEBAR_WIDTH_MOBILE` inside the regis
 
 ### Sidebar
 
-Primary column component: desktop fixed strip + mobile sheet
+The sidebar column. Fixed on desktop, sheet on mobile.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -307,7 +307,7 @@ Primary column component: desktop fixed strip + mobile sheet
 | `variant` | `"sidebar" \| "floating" \| "inset"` | `"sidebar"` |
 | `collapsible` | `"offcanvas" \| "icon" \| "none"` | `"offcanvas"` |
 
-`placement` is reading-order: `"left"` = inline-start, `"right"` = inline-end. See [RTL](#rtl).
+`placement` follows reading order: `"left"` = inline-start, `"right"` = inline-end. See [RTL](#rtl).
 
 ### Collapsible modes
 
@@ -317,7 +317,7 @@ Primary column component: desktop fixed strip + mobile sheet
 | `icon` | `string` | `-` |
 | `none` | `string` | `-` |
 
-With **`variant="inset"`**, park page content in **`SidebarInset`** so padding, radius, and background line up with the inset shell:
+With `variant="inset"`, put page content in `SidebarInset`:
 
 ```tsx
 <SidebarProvider>
@@ -330,7 +330,7 @@ With **`variant="inset"`**, park page content in **`SidebarInset`** so padding, 
 
 ### SidebarInset
 
-Public SidebarInset component. It forwards the underlying primitive props.
+Main content beside the sidebar. Required for `variant="inset"`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -338,6 +338,8 @@ Public SidebarInset component. It forwards the underlying primitive props.
 | `className` | `string` | `-` |
 
 ### useSidebar
+
+Access sidebar state and actions.
 
 ```tsx
 import { useSidebar } from "@/components/ui/sidebar";
@@ -366,12 +368,13 @@ export function Example() {
 | `toggleSidebar` | `() => void` | `-` |
 
 ### SidebarHeader
+
+Top section. Brand, workspace switcher, etc.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
-
-Sticky top region. Common pattern: workspace switcher or brand row inside a `SidebarMenu`.
 
 ```tsx
 <Sidebar>
@@ -388,15 +391,14 @@ Sticky top region. Common pattern: workspace switcher or brand row inside a `Sid
 </Sidebar>
 ```
 
-Wire menus or [Menu](/docs/components/menu) triggers to `SidebarMenuButton` as needed.
-
 ### SidebarFooter
+
+Bottom section. Profile, settings, sign-out.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
-
-Sticky bottom slot: profile, settings entry, sign-out, etc.
 
 ```tsx
 <Sidebar>
@@ -414,7 +416,7 @@ Sticky bottom slot: profile, settings entry, sign-out, etc.
 
 ### SidebarInput
 
-Public SidebarInput component. It forwards the underlying primitive props.
+Search or filter input.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -423,7 +425,7 @@ Public SidebarInput component. It forwards the underlying primitive props.
 
 ### SidebarSeparator
 
-Public SidebarSeparator component. It forwards the underlying primitive props.
+Horizontal divider.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -431,12 +433,13 @@ Public SidebarSeparator component. It forwards the underlying primitive props.
 | `className` | `string` | `-` |
 
 ### SidebarContent
+
+Scrollable middle section. Edge fade on overflow (`scrollFade={false}` to disable).
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
-
-Wraps scrollable groups. Fades the edges when the content overflows. Pass **`scrollFade={false}`** to disable.
 
 ```tsx
 <Sidebar>
@@ -452,12 +455,13 @@ Wraps scrollable groups. Fades the edges when the content overflows. Pass **`scr
 | `--fade-size` | `string` | `3rem` |
 
 ### SidebarGroup
+
+Labeled section inside `SidebarContent`.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
-
-A titled block with optional `SidebarGroupAction` and `SidebarGroupContent`.
 
 ```tsx
 <SidebarGroup>
@@ -469,7 +473,7 @@ A titled block with optional `SidebarGroupAction` and `SidebarGroupContent`.
 </SidebarGroup>
 ```
 
-Collapsible groups pair with [Collapsible](/docs/components/collapsible). `SidebarGroupLabel` is a plain label slot. Keep the trigger beside it (or fold the pattern into `SidebarMenu` like the preview at the top of this page):
+For collapsible groups, wrap with [Collapsible](/docs/components/collapsible):
 
 ```tsx
 <Collapsible className="group/collapsible" defaultOpen>
@@ -492,7 +496,7 @@ Collapsible groups pair with [Collapsible](/docs/components/collapsible). `Sideb
 
 ### SidebarGroupLabel
 
-Public SidebarGroupLabel component. It forwards the underlying primitive props.
+Group title.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -501,7 +505,7 @@ Public SidebarGroupLabel component. It forwards the underlying primitive props.
 
 ### SidebarGroupAction
 
-Public SidebarGroupAction component. It forwards the underlying primitive props.
+Action in the group header.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -510,7 +514,7 @@ Public SidebarGroupAction component. It forwards the underlying primitive props.
 
 ### SidebarGroupContent
 
-Public SidebarGroupContent component. It forwards the underlying primitive props.
+Group body.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -518,12 +522,13 @@ Public SidebarGroupContent component. It forwards the underlying primitive props
 | `className` | `string` | `-` |
 
 ### SidebarMenu
+
+Menu list inside a group.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
-
-Row list inside a group. Map data to `SidebarMenuItem` / `SidebarMenuButton`.
 
 ```tsx
 <SidebarMenu>
@@ -542,7 +547,7 @@ Row list inside a group. Map data to `SidebarMenuItem` / `SidebarMenuButton`.
 
 ### SidebarMenuItem
 
-Public SidebarMenuItem component. It forwards the underlying primitive props.
+Single menu row.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -550,12 +555,13 @@ Public SidebarMenuItem component. It forwards the underlying primitive props.
 | `className` | `string` | `-` |
 
 ### SidebarMenuButton
+
+Menu button. Use `asChild` for links, `isActive` for the current route, `tooltip` when collapsed.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
-
-Default renders a **Button**; use **`asChild`** for links. **`isActive`** highlights the active route; **`tooltip`** surfaces collapsed labels.
 
 ```tsx
 <SidebarMenuButton asChild isActive>
@@ -564,12 +570,13 @@ Default renders a **Button**; use **`asChild`** for links. **`isActive`** highli
 ```
 
 ### SidebarMenuAction
+
+Row action. `showOnHover` reveals it on hover.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
-
-Icon-only or compact action aligned to a row. Use **`showOnHover`** to reveal on row hover.
 
 ```tsx
 <SidebarMenuItem>
@@ -586,12 +593,13 @@ Icon-only or compact action aligned to a row. Use **`showOnHover`** to reveal on
 ```
 
 ### SidebarMenuSub
+
+Nested menu under a parent item.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
-
-Nested list hanging off a parent item.
 
 ```tsx
 <SidebarMenuItem>
@@ -606,7 +614,7 @@ Nested list hanging off a parent item.
 
 ### SidebarMenuSubItem
 
-Public SidebarMenuSubItem component. It forwards the underlying primitive props.
+Nested menu row.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -615,7 +623,7 @@ Public SidebarMenuSubItem component. It forwards the underlying primitive props.
 
 ### SidebarMenuSubButton
 
-Public SidebarMenuSubButton component. It forwards the underlying primitive props.
+Nested menu button.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -623,12 +631,13 @@ Public SidebarMenuSubButton component. It forwards the underlying primitive prop
 | `className` | `string` | `-` |
 
 ### SidebarMenuBadge
+
+Badge on a menu row.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
-
-Small count or pill beside a row.
 
 ```tsx
 <SidebarMenuItem>
@@ -638,12 +647,13 @@ Small count or pill beside a row.
 ```
 
 ### SidebarMenuSkeleton
+
+Loading placeholder for a menu row.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
-
-Placeholder rows while async routes or prefs load.
 
 ```tsx
 <SidebarMenu>
@@ -655,14 +665,14 @@ Placeholder rows while async routes or prefs load.
 </SidebarMenu>
 ```
 
-
 ### SidebarTrigger
+
+Toggles the sidebar.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
-Prebuilt toggle wired to context. Drop it next to your page title or in a toolbar.
 
 ```tsx
 import { useSidebar } from "@/components/ui/sidebar";
@@ -674,15 +684,14 @@ export function CustomTrigger() {
 }
 ```
 
-Prefer `SidebarTrigger` when you want the default styling and accessibility bundle.
-
 ### SidebarRail
+
+Edge hit target to expand or collapse. Place inside `Sidebar`.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
-
-Draggable edge control that expands or collapses the desktop rail. Place it after header/content/footer inside `Sidebar`.
 
 ```tsx
 <Sidebar>

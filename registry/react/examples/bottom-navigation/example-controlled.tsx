@@ -1,6 +1,6 @@
 "use client";
 
-import { BellIcon, HomeIcon, SearchIcon, UserIcon } from "lucide-react";
+import { HouseIcon, LibraryIcon, SearchIcon, UserIcon } from "lucide-react";
 import React from "react";
 import {
   BottomNavigation,
@@ -10,6 +10,8 @@ import {
   BottomNavigationList,
 } from "@/registry/react/components/bottom-navigation";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
+import { DemoAppContent } from "./demo-app-content";
+import { DemoPhoneShell } from "./demo-phone-shell";
 
 const Example = () => {
   const [value, setValue] = React.useState("home");
@@ -19,15 +21,25 @@ const Example = () => {
   };
 
   return (
-    <div className="flex w-full max-w-xs flex-col gap-3">
-      <div className="flex h-72 flex-col overflow-y-auto rounded-lg border bg-muted shadow-lg/4">
-        <ScrollArea>
-          <div className="h-96" />
-          <BottomNavigation onValueChange={handleValueChange} value={value}>
-            <BottomNavigationList className="absolute">
+    <div className="grid h-svh place-items-center p-6">
+      <div className="flex w-full max-w-[20rem] flex-col gap-3">
+        <p className="text-muted-foreground text-sm">Selected: {value}</p>
+        <DemoPhoneShell>
+          <ScrollArea className="h-full **:data-[slot=scroll-area-scrollbar]:hidden">
+            <DemoAppContent className="pb-28" />
+          </ScrollArea>
+          <BottomNavigation
+            className="pointer-events-none absolute inset-0 min-h-0"
+            onValueChange={handleValueChange}
+            value={value}
+          >
+            <BottomNavigationList
+              className="pointer-events-auto absolute"
+              variant="inset"
+            >
               <BottomNavigationItem value="home">
                 <BottomNavigationItemIcon>
-                  <HomeIcon />
+                  <HouseIcon />
                 </BottomNavigationItemIcon>
                 <BottomNavigationItemLabel>Home</BottomNavigationItemLabel>
               </BottomNavigationItem>
@@ -37,23 +49,22 @@ const Example = () => {
                 </BottomNavigationItemIcon>
                 <BottomNavigationItemLabel>Search</BottomNavigationItemLabel>
               </BottomNavigationItem>
-              <BottomNavigationItem value="news">
+              <BottomNavigationItem value="library">
                 <BottomNavigationItemIcon>
-                  <BellIcon />
+                  <LibraryIcon />
                 </BottomNavigationItemIcon>
-                <BottomNavigationItemLabel>News</BottomNavigationItemLabel>
+                <BottomNavigationItemLabel>Library</BottomNavigationItemLabel>
               </BottomNavigationItem>
-              <BottomNavigationItem value="profile">
+              <BottomNavigationItem value="you">
                 <BottomNavigationItemIcon>
                   <UserIcon />
                 </BottomNavigationItemIcon>
-                <BottomNavigationItemLabel>Profile</BottomNavigationItemLabel>
+                <BottomNavigationItemLabel>You</BottomNavigationItemLabel>
               </BottomNavigationItem>
             </BottomNavigationList>
           </BottomNavigation>
-        </ScrollArea>
+        </DemoPhoneShell>
       </div>
-      <p className="text-muted-foreground text-sm">Selected: {value}</p>
     </div>
   );
 };

@@ -36,7 +36,7 @@ const CommandRtl = () => {
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <CommandInput placeholder="اكتب أمرًا أو ابحث..." />
+      <CommandInput autoFocus={false} placeholder="اكتب أمرًا أو ابحث..." />
       <CommandContent>
         <CommandEmpty>لم يتم العثور على نتائج.</CommandEmpty>
         <CommandList>

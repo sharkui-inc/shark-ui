@@ -42,7 +42,7 @@ const Example = () => {
         onValueChange={handleValueChange}
         value={value}
       >
-        <CommandInput />
+        <CommandInput autoFocus={false} />
         <CommandContent>
           <CommandEmpty />
           <CommandList>
