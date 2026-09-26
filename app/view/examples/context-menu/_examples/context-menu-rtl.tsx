@@ -4,9 +4,12 @@ import { ArrowLeftIcon, ArrowRightIcon, RotateCwIcon } from "lucide-react";
 import React from "react";
 import {
   ContextMenu,
+  ContextMenuCheckboxItem,
   ContextMenuContent,
   ContextMenuGroup,
   ContextMenuItem,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
   ContextMenuSeparator,
   ContextMenuShortcut,
   ContextMenuSub,
@@ -14,11 +17,6 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@/registry/react/components/context-menu";
-import {
-  MenuCheckboxItem,
-  MenuRadioGroup,
-  MenuRadioItem,
-} from "@/registry/react/components/menu";
 
 const ContextMenuRtl = () => {
   const [people, setPeople] = React.useState("pedro");
@@ -87,21 +85,23 @@ const ContextMenuRtl = () => {
           </ContextMenuSub>
         </ContextMenuGroup>
         <ContextMenuSeparator />
-        <MenuCheckboxItem checked value="show-bookmarks">
+        <ContextMenuCheckboxItem checked value="show-bookmarks">
           إظهار الإشارات المرجعية
-        </MenuCheckboxItem>
-        <MenuCheckboxItem checked={false} value="show-full-urls">
+        </ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem checked={false} value="show-full-urls">
           إظهار عناوين URL الكاملة
-        </MenuCheckboxItem>
+        </ContextMenuCheckboxItem>
         <ContextMenuSeparator />
-        <MenuRadioGroup
+        <ContextMenuRadioGroup
           heading="الأشخاص"
           onValueChange={({ value }) => setPeople(value)}
           value={people}
         >
-          <MenuRadioItem value="pedro">Pedro Duarte</MenuRadioItem>
-          <MenuRadioItem value="colm">Colm Tuite</MenuRadioItem>
-        </MenuRadioGroup>
+          <ContextMenuRadioItem value="pedro">
+            Pedro Duarte
+          </ContextMenuRadioItem>
+          <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
+        </ContextMenuRadioGroup>
       </ContextMenuContent>
     </ContextMenu>
   );

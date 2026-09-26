@@ -47,45 +47,121 @@ const defineThemeFont = (input: ThemeFontInput): ThemeFont => ({
 });
 
 const THEME_FONT_INPUTS = [
-  { category: "sans", label: "Bricolage Grotesque" },
   {
-    axes: "ital,opsz,wght@0,6..72,200..800;1,6..72,200..800",
+    axes: "wght@400..800",
+    category: "sans",
+    label: "Bricolage Grotesque",
+  },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
     category: "serif",
     label: "Newsreader",
   },
   {
-    axes: "ital,wght@0,300;0,400;0,500;1,300;1,400;1,500",
+    axes: "ital,wght@0,400;0,500;1,400;1,500",
     category: "mono",
     label: "DM Mono",
   },
-  { category: "sans", label: "DM Sans" },
-  { category: "serif", label: "EB Garamond" },
-  { category: "sans", label: "Figtree" },
-  { category: "serif", label: "Fraunces" },
-  { category: "sans", label: "Geist" },
-  { category: "mono", label: "Geist Mono" },
-  { category: "sans", label: "Hanken Grotesk" },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
+    category: "sans",
+    label: "DM Sans",
+  },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
+    category: "serif",
+    label: "EB Garamond",
+  },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
+    category: "sans",
+    label: "Figtree",
+  },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
+    category: "serif",
+    label: "Fraunces",
+  },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
+    category: "sans",
+    label: "Geist",
+  },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
+    category: "mono",
+    label: "Geist Mono",
+  },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
+    category: "sans",
+    label: "Hanken Grotesk",
+  },
   {
     axes: "ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700",
     category: "mono",
     label: "IBM Plex Mono",
   },
-  { category: "sans", label: "IBM Plex Sans" },
-  { category: "sans", label: "Instrument Sans" },
-  { category: "sans", label: "Inter" },
-  { category: "mono", label: "JetBrains Mono" },
-  { category: "serif", label: "Lora" },
-  { category: "sans", label: "Manrope" },
-  { category: "sans", label: "Outfit" },
-  { category: "sans", label: "Public Sans" },
-  { category: "serif", label: "Roboto Slab" },
   {
-    axes: "ital,wght@0,200..900;1,200..900",
+    axes: "ital,wght@0,400..700;1,400..700",
+    category: "sans",
+    label: "IBM Plex Sans",
+  },
+  {
+    axes: "ital,wght@0,400..700;1,400..700",
+    category: "sans",
+    label: "Instrument Sans",
+  },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
+    category: "sans",
+    label: "Inter",
+  },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
+    category: "mono",
+    label: "JetBrains Mono",
+  },
+  {
+    axes: "ital,wght@0,400..700;1,400..700",
+    category: "serif",
+    label: "Lora",
+  },
+  {
+    axes: "wght@400..800",
+    category: "sans",
+    label: "Manrope",
+  },
+  {
+    axes: "wght@400..800",
+    category: "sans",
+    label: "Outfit",
+  },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
+    category: "sans",
+    label: "Public Sans",
+  },
+  {
+    axes: "wght@400..800",
+    category: "serif",
+    label: "Roboto Slab",
+  },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
     category: "mono",
     label: "Source Code Pro",
   },
-  { category: "sans", label: "Source Sans 3" },
-  { category: "sans", label: "Space Grotesk" },
+  {
+    axes: "ital,wght@0,400..800;1,400..800",
+    category: "sans",
+    label: "Source Sans 3",
+  },
+  {
+    axes: "wght@400..700",
+    category: "sans",
+    label: "Space Grotesk",
+  },
 ] as const satisfies readonly ThemeFontInput[];
 
 export const THEME_FONTS = THEME_FONT_INPUTS.map(defineThemeFont);

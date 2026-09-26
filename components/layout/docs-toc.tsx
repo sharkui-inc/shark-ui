@@ -81,6 +81,7 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
               "relative",
               "inline-flex items-center gap-2",
               "-mx-1 px-1 py-1",
+              "hitbox-y-1",
               "text-muted-foreground",
               "rounded-md border border-transparent",
               "outline-hidden",

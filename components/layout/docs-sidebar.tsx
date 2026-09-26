@@ -75,7 +75,7 @@ export const DocsSidebar = (props: DocsSidebarProps) => {
                             <SidebarMenuItem className="scroll-my-10">
                               <SidebarMenuButton
                                 asChild
-                                className="text-muted-foreground hover:bg-muted [.active]:bg-muted [.active]:text-foreground"
+                                className="hitbox-y-1 text-muted-foreground hover:bg-muted [.active]:bg-muted [.active]:text-foreground"
                                 isActive={page.url === pathname}
                               >
                                 <NavLink href={page.url}>

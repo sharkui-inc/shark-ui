@@ -14,9 +14,9 @@ import {
 const InputGroupWithButtons = () => (
   <FieldGroup>
     <Field>
-      <FieldLabel htmlFor="input-button-13">Button</FieldLabel>
+      <FieldLabel>Button</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-button-13" />
+        <InputGroupInput />
         <InputGroupAddon>
           <InputGroupButton>Default</InputGroupButton>
         </InputGroupAddon>

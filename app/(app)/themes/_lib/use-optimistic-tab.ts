@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useMediaQuery } from "@/registry/react/hooks/use-is-mobile";
+import { useMediaQuery } from "@/registry/react/hooks/use-media-query";
 
 const LG_MEDIA = "(min-width: 1024px)";
 

@@ -30,7 +30,7 @@ import {
   NativeSelect,
   NativeSelectOption,
 } from "@/registry/react/components/native-select";
-import { useIsMobile } from "@/registry/react/hooks/use-is-mobile";
+import { useIsMobile } from "@/registry/react/hooks/use-media-query";
 
 const Example = () => {
   const isMobile = useIsMobile();

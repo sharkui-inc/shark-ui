@@ -46,9 +46,9 @@ const InputGroupWithTooltip = () => {
   return (
     <FieldGroup>
       <Field>
-        <FieldLabel htmlFor="input-tooltip-20">Tooltip</FieldLabel>
+        <FieldLabel>Tooltip</FieldLabel>
         <InputGroup>
-          <InputGroupInput id="input-tooltip-20" />
+          <InputGroupInput />
           <InputGroupAddon align="inline-end">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -70,9 +70,9 @@ const InputGroupWithTooltip = () => {
       </Field>
 
       <Field>
-        <FieldLabel htmlFor="input-dropdown-21">Dropdown</FieldLabel>
+        <FieldLabel>Dropdown</FieldLabel>
         <InputGroup>
-          <InputGroupInput id="input-dropdown-21" />
+          <InputGroupInput />
           <InputGroupAddon>
             <Menu
               positioning={{
@@ -106,7 +106,7 @@ const InputGroupWithTooltip = () => {
       </Field>
 
       <Field>
-        <FieldLabel htmlFor="input-secure-19">Popover</FieldLabel>
+        <FieldLabel>Popover</FieldLabel>
         <InputGroup>
           <Popover positioning={{ placement: "bottom-start" }}>
             <PopoverTrigger asChild>
@@ -132,7 +132,7 @@ const InputGroupWithTooltip = () => {
           <InputGroupAddon>
             <InputGroupText>https://</InputGroupText>
           </InputGroupAddon>
-          <InputGroupInput id="input-secure-19" />
+          <InputGroupInput />
           <InputGroupAddon align="inline-end">
             <InputGroupButton
               aria-label="Add to favorites"
@@ -149,11 +149,11 @@ const InputGroupWithTooltip = () => {
       </Field>
 
       <Field>
-        <FieldLabel htmlFor="input-url-group">Button Group</FieldLabel>
+        <FieldLabel>Button Group</FieldLabel>
         <ButtonGroup>
           <ButtonGroupText>https://</ButtonGroupText>
           <InputGroup>
-            <InputGroupInput id="input-url-group" />
+            <InputGroupInput />
             <InputGroupAddon align="inline-end">
               <InfoIcon aria-hidden />
             </InputGroupAddon>

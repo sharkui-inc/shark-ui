@@ -35,12 +35,12 @@ const SheetRtl = () => (
         <SheetBody>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="sheet-rtl-name">الاسم</FieldLabel>
-              <Input defaultValue="Pedro Duarte" id="sheet-rtl-name" />
+              <FieldLabel>الاسم</FieldLabel>
+              <Input defaultValue="Pedro Duarte" />
             </Field>
             <Field>
-              <FieldLabel htmlFor="sheet-rtl-username">اسم المستخدم</FieldLabel>
-              <Input defaultValue="peduarte" id="sheet-rtl-username" />
+              <FieldLabel>اسم المستخدم</FieldLabel>
+              <Input defaultValue="peduarte" />
             </Field>
           </FieldGroup>
         </SheetBody>

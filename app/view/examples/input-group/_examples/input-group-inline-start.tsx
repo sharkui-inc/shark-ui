@@ -12,9 +12,9 @@ import {
 
 const InputGroupInlineStart = () => (
   <Field className="w-full max-w-sm">
-    <FieldLabel htmlFor="inline-start-input">Input</FieldLabel>
+    <FieldLabel>Input</FieldLabel>
     <InputGroup>
-      <InputGroupInput id="inline-start-input" placeholder="Search..." />
+      <InputGroupInput placeholder="Search..." />
       <InputGroupAddon align="inline-start">
         <SearchIcon aria-hidden />
       </InputGroupAddon>

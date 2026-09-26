@@ -19,19 +19,13 @@ const FieldRadio = () => (
     </FieldDescription>
     <RadioGroup defaultValue="monthly">
       <Field orientation="horizontal">
-        <RadioGroupItem id="plan-monthly" value="monthly">
-          Monthly ($9.99/month)
-        </RadioGroupItem>
+        <RadioGroupItem value="monthly">Monthly ($9.99/month)</RadioGroupItem>
       </Field>
       <Field orientation="horizontal">
-        <RadioGroupItem id="plan-yearly" value="yearly">
-          Yearly ($99.99/year)
-        </RadioGroupItem>
+        <RadioGroupItem value="yearly">Yearly ($99.99/year)</RadioGroupItem>
       </Field>
       <Field orientation="horizontal">
-        <RadioGroupItem id="plan-lifetime" value="lifetime">
-          Lifetime ($299.99)
-        </RadioGroupItem>
+        <RadioGroupItem value="lifetime">Lifetime ($299.99)</RadioGroupItem>
       </Field>
     </RadioGroup>
   </FieldSet>

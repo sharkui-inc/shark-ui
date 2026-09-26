@@ -55,33 +55,21 @@ const FieldDemo = () => (
           </FieldDescription>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="checkout-7j9-card-name-43j">
-                Name on Card
-              </FieldLabel>
-              <Input
-                id="checkout-7j9-card-name-43j"
-                placeholder="Evil Rabbit"
-                required
-              />
+              <FieldLabel>Name on Card</FieldLabel>
+              <Input placeholder="John Doe" required />
             </Field>
             <Field>
-              <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
-                Card Number
-              </FieldLabel>
-              <Input
-                id="checkout-7j9-card-number-uw1"
-                placeholder="1234 5678 9012 3456"
-                required
-              />
+              <FieldLabel>Card Number</FieldLabel>
+              <Input placeholder="1234 5678 9012 3456" required />
               <FieldDescription>
                 Enter your 16-digit card number
               </FieldDescription>
             </Field>
             <div className="grid grid-cols-3 gap-4">
               <Field>
-                <FieldLabel htmlFor="checkout-exp-month-ts6">Month</FieldLabel>
+                <FieldLabel>Month</FieldLabel>
                 <Select collection={monthCollection}>
-                  <SelectTrigger id="checkout-exp-month-ts6">
+                  <SelectTrigger>
                     <SelectValue placeholder="MM" />
                   </SelectTrigger>
                   <SelectContent>
@@ -96,11 +84,9 @@ const FieldDemo = () => (
                 </Select>
               </Field>
               <Field>
-                <FieldLabel htmlFor="checkout-7j9-exp-year-f59">
-                  Year
-                </FieldLabel>
+                <FieldLabel>Year</FieldLabel>
                 <Select collection={yearCollection}>
-                  <SelectTrigger id="checkout-7j9-exp-year-f59">
+                  <SelectTrigger>
                     <SelectValue placeholder="YYYY" />
                   </SelectTrigger>
                   <SelectContent>
@@ -115,8 +101,8 @@ const FieldDemo = () => (
                 </Select>
               </Field>
               <Field>
-                <FieldLabel htmlFor="checkout-7j9-cvv">CVV</FieldLabel>
-                <Input id="checkout-7j9-cvv" placeholder="123" required />
+                <FieldLabel>CVV</FieldLabel>
+                <Input placeholder="123" required />
               </Field>
             </div>
           </FieldGroup>
@@ -129,11 +115,8 @@ const FieldDemo = () => (
           </FieldDescription>
           <FieldGroup>
             <Field orientation="horizontal">
-              <Checkbox defaultChecked id="checkout-7j9-same-as-shipping-wgm" />
-              <FieldLabel
-                className="font-normal"
-                htmlFor="checkout-7j9-same-as-shipping-wgm"
-              >
+              <Checkbox defaultChecked />
+              <FieldLabel className="font-normal">
                 Same as shipping address
               </FieldLabel>
             </Field>
@@ -142,12 +125,9 @@ const FieldDemo = () => (
         <FieldSet>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="checkout-7j9-optional-comments">
-                Comments
-              </FieldLabel>
+              <FieldLabel>Comments</FieldLabel>
               <Textarea
                 className="resize-none"
-                id="checkout-7j9-optional-comments"
                 placeholder="Add any additional comments"
               />
             </Field>

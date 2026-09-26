@@ -5,8 +5,7 @@ import {
   CheckIcon,
   CircleIcon,
   ClipboardIcon,
-  Shuffle,
-  Undo,
+  ShuffleIcon,
   WandSparklesIcon,
 } from "lucide-react";
 import React from "react";
@@ -82,6 +81,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/registry/react/components/tooltip";
+import { useIsMobile } from "@/registry/react/hooks/use-media-query";
 
 const hideRadioChrome = tv({
   base: [
@@ -166,6 +166,7 @@ export const HeaderCustomize = () => {
   } = useThemeCustomization();
 
   const [isOpen, setIsOpen] = React.useState(false);
+  const isMobile = useIsMobile();
 
   useHotkey({
     action: () => setIsOpen((open) => !open),
@@ -191,7 +192,12 @@ export const HeaderCustomize = () => {
       <Tooltip>
         <TooltipTrigger asChild>
           <SheetTrigger asChild>
-            <Button aria-label="Customize" size="icon-md" variant="ghost">
+            <Button
+              aria-label="Customize"
+              className="hitbox-2"
+              size="icon-md"
+              variant="ghost"
+            >
               <WandSparklesIcon />
             </Button>
           </SheetTrigger>
@@ -201,7 +207,10 @@ export const HeaderCustomize = () => {
         </TooltipContent>
       </Tooltip>
 
-      <SheetContent className="max-sm:w-full max-sm:max-w-full" variant="inset">
+      <SheetContent
+        className="max-sm:w-full max-sm:max-w-full max-sm:[--space:--spacing(4)]"
+        variant="inset"
+      >
         <SheetHeader
           description="Change the theme to match your style."
           title="Make it yours"
@@ -222,13 +231,12 @@ export const HeaderCustomize = () => {
                 <RadioGroupLabel>
                   {THEME_FIELDS.baseColor.label}
                 </RadioGroupLabel>
-                <div className="flex h-11 gap-0.5 overflow-hidden rounded-xl border bg-border">
+                <div className="grid grid-cols-9 gap-0.5 overflow-hidden rounded-xl border bg-border">
                   {BASE_COLORS.map((color) => (
                     <RadioGroupItem
                       aria-label={color.label}
                       className={cn(
-                        "group relative h-full min-w-0 flex-1 justify-center p-0",
-                        "rounded-none border border-transparent",
+                        "group relative aspect-square justify-center rounded-none border border-transparent p-0",
                         "data-[state=checked]:z-10 data-[state=checked]:outline-2 data-[state=checked]:outline-foreground data-[state=checked]:-outline-offset-2",
                         "data-focus-visible:z-20 data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24",
                         "pointer-coarse:after:hidden"
@@ -403,41 +411,54 @@ export const HeaderCustomize = () => {
           </FieldGroup>
         </SheetBody>
 
-        <SheetFooter>
-          <CopyThemeCodeDialog>
-            <DialogTrigger asChild>
-              <Button>
-                <ClipboardIcon />
-                Copy theme
-              </Button>
-            </DialogTrigger>
-          </CopyThemeCodeDialog>
-          <Button onClick={randomize} variant="outline">
-            <Shuffle aria-hidden />
-            Shuffle
-          </Button>
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button disabled={isDefault ? true : undefined} variant="outline">
-                <Undo aria-hidden />
-                Reset
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader
-                description="This will restore colors, radius, fonts, and locks to their default values."
-                title="Reset theme to default?"
-              />
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogClose asChild>
-                  <AlertDialogAction onClick={reset}>
-                    Reset theme
-                  </AlertDialogAction>
-                </AlertDialogClose>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+        <SheetFooter className="flex-row justify-between sm:flex-row sm:justify-between">
+          <div className="order-2 flex items-center gap-2">
+            <CopyThemeCodeDialog>
+              <DialogTrigger asChild>
+                <Button
+                  className="max-md:order-1 md:order-2"
+                  variant={isMobile ? "outline" : "default"}
+                >
+                  <ClipboardIcon aria-hidden data-icon="inline-start" />
+                  Copy
+                </Button>
+              </DialogTrigger>
+            </CopyThemeCodeDialog>
+            <Button
+              className="max-md:order-2 md:order-1"
+              onClick={randomize}
+              variant={isMobile ? "default" : "outline"}
+            >
+              <ShuffleIcon aria-hidden data-icon="inline-start" />
+              Shuffle
+            </Button>
+          </div>
+          <div className="order-1">
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  disabled={isDefault ? true : undefined}
+                  variant="outline"
+                >
+                  Reset
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader
+                  description="This will restore colors, radius, fonts, and locks to their default values."
+                  title="Reset theme to default?"
+                />
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogClose asChild>
+                    <AlertDialogAction onClick={reset}>
+                      Reset theme
+                    </AlertDialogAction>
+                  </AlertDialogClose>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
         </SheetFooter>
       </SheetContent>
     </Sheet>

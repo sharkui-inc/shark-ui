@@ -1,7 +1,6 @@
 "use client";
 
 import { useFilter, useListCollection } from "@ark-ui/react";
-import React from "react";
 import {
   Combobox,
   ComboboxContent,
@@ -20,17 +19,13 @@ import {
 } from "@/registry/react/components/tags-input";
 
 const Example = () => {
-  const uid = React.useId();
-
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
     filter: contains,
     initialItems: frameworkItems,
   });
 
-  const tagsInput = useTagsInput({
-    ids: { control: `tags-control-${uid}`, input: `tags-input-${uid}` },
-  });
+  const tagsInput = useTagsInput();
 
   const availableItems = collection.items.filter(
     (item) => !tagsInput.value.includes(item)
@@ -38,11 +33,10 @@ const Example = () => {
 
   return (
     <Field className="w-full max-w-sm">
-      <FieldLabel htmlFor={`tags-input-${uid}`}>Frameworks</FieldLabel>
+      <FieldLabel>Frameworks</FieldLabel>
       <Combobox
         allowCustomValue
         collection={collection}
-        ids={{ control: `tags-control-${uid}`, input: `tags-input-${uid}` }}
         onInputValueChange={({ inputValue }) => filter(inputValue)}
         onValueChange={({ value }) => {
           const [next] = value;

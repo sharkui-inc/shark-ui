@@ -4,17 +4,13 @@ import { Input } from "@/registry/react/components/input";
 
 const InputBadge = () => (
   <Field className="w-full max-w-64">
-    <FieldLabel htmlFor="input-badge">
+    <FieldLabel>
       Webhook URL{" "}
       <Badge className="ml-auto" variant="secondary">
         Beta
       </Badge>
     </FieldLabel>
-    <Input
-      id="input-badge"
-      placeholder="https://api.example.com/webhook"
-      type="url"
-    />
+    <Input placeholder="https://api.example.com/webhook" type="url" />
   </Field>
 );
 

@@ -5,9 +5,9 @@ import { Input } from "@/registry/react/components/input";
 
 const InputButtonGroup = () => (
   <Field className="w-full max-w-64">
-    <FieldLabel htmlFor="input-button-group">Search</FieldLabel>
+    <FieldLabel>Search</FieldLabel>
     <ButtonGroup className="w-full">
-      <Input id="input-button-group" placeholder="Type to search..." />
+      <Input placeholder="Type to search..." />
       <Button variant="outline">Search</Button>
     </ButtonGroup>
   </Field>

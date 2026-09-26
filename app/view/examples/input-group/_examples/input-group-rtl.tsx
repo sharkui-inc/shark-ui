@@ -41,9 +41,9 @@ const InputGroupRtl = () => (
     </InputGroup>
     <FieldGroup className="max-w-sm">
       <Field>
-        <FieldLabel htmlFor="rtl-textarea">منطقة النص</FieldLabel>
+        <FieldLabel>منطقة النص</FieldLabel>
         <InputGroup>
-          <InputGroupTextarea id="rtl-textarea" placeholder="اكتب تعليقًا..." />
+          <InputGroupTextarea placeholder="اكتب تعليقًا..." />
           <InputGroupAddon align="block-end">
             <InputGroupText>٠/٢٨٠</InputGroupText>
             <InputGroupButton className="ms-auto" size="sm" variant="default">

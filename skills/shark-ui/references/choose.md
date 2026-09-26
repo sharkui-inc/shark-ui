@@ -231,7 +231,7 @@ Use `Separator` instead of `<hr>` or a `border-t` divider. Use `Badge` for a sta
 `content/docs/hooks/<name>.mdx`
 
 - useAsyncList: load, filter, sort, paginate async lists.
-- useIsMobile: viewport below the mobile breakpoint.
+- useMediaQuery: match a CSS media query. `useIsMobile` checks below 768px.
 - useListSelection: single, multiple, and range selection.
 
 ### Helpers

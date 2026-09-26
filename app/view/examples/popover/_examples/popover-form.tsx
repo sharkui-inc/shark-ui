@@ -30,17 +30,13 @@ const PopoverForm = () => (
       <PopoverBody>
         <FieldGroup className="gap-4">
           <Field orientation="horizontal">
-            <FieldLabel className="w-1/2" htmlFor="width">
-              Width
-            </FieldLabel>
-            <Input defaultValue="100%" id="width" />
+            <FieldLabel className="w-1/2">Width</FieldLabel>
+            <Input defaultValue="100%" />
           </Field>
 
           <Field orientation="horizontal">
-            <FieldLabel className="w-1/2" htmlFor="height">
-              Height
-            </FieldLabel>
-            <Input defaultValue="25px" id="height" />
+            <FieldLabel className="w-1/2">Height</FieldLabel>
+            <Input defaultValue="25px" />
           </Field>
         </FieldGroup>
       </PopoverBody>

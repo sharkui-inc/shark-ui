@@ -30,38 +30,31 @@ const InputGroupInCard = () => (
     <CardContent>
       <FieldGroup>
         <Field>
-          <FieldLabel htmlFor="email-input">Email Address</FieldLabel>
+          <FieldLabel>Email Address</FieldLabel>
           <InputGroup>
-            <InputGroupInput
-              id="email-input"
-              placeholder="you@example.com"
-              type="email"
-            />
+            <InputGroupInput placeholder="you@example.com" type="email" />
             <InputGroupAddon align="inline-end">
               <MailIcon aria-hidden />
             </InputGroupAddon>
           </InputGroup>
         </Field>
         <Field>
-          <FieldLabel htmlFor="website-input">Website URL</FieldLabel>
+          <FieldLabel>Website URL</FieldLabel>
           <InputGroup>
             <InputGroupAddon>
               <InputGroupText>https://</InputGroupText>
             </InputGroupAddon>
-            <InputGroupInput id="website-input" placeholder="example.com" />
+            <InputGroupInput placeholder="example.com" />
             <InputGroupAddon align="inline-end">
               <ExternalLinkIcon aria-hidden />
             </InputGroupAddon>
           </InputGroup>
         </Field>
         <Field>
-          <FieldLabel htmlFor="feedback-textarea">
-            Feedback &amp; Comments
-          </FieldLabel>
+          <FieldLabel>Feedback &amp; Comments</FieldLabel>
           <InputGroup>
             <InputGroupTextarea
               className="min-h-[100px]"
-              id="feedback-textarea"
               placeholder="Share your thoughts..."
             />
             <InputGroupAddon align="block-end">

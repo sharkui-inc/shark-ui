@@ -24,19 +24,19 @@ import {
 
 const people = [
   {
+    avatar: "https://github.com/vinihvc.png",
+    email: "vinihvc@vercel.com",
+    username: "vinihvc",
+  },
+  {
     avatar: "https://github.com/shadcn.png",
     email: "shadcn@vercel.com",
     username: "shadcn",
   },
   {
-    avatar: "https://github.com/maxleiter.png",
-    email: "maxleiter@vercel.com",
-    username: "maxleiter",
-  },
-  {
-    avatar: "https://github.com/evilrabbit.png",
-    email: "evilrabbit@vercel.com",
-    username: "evilrabbit",
+    avatar: "https://github.com/segunadebayo.png",
+    email: "segunadebayo@vercel.com",
+    username: "segunadebayo",
   },
 ];
 
@@ -54,8 +54,8 @@ const ItemDropdown = () => (
           <MenuItem key={person.username} value={person.username}>
             <Item className="w-full p-2 [--space:--spacing(2)]">
               <ItemMedia>
-                <Avatar className="size-[--spacing(6.5)]">
-                  <AvatarImage className="grayscale" src={person.avatar} />
+                <Avatar className="size-6.5">
+                  <AvatarImage src={person.avatar} />
                   <AvatarFallback>{person.username.charAt(0)}</AvatarFallback>
                 </Avatar>
               </ItemMedia>

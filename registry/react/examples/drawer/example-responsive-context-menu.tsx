@@ -40,7 +40,7 @@ import {
   DrawerMenuTrigger,
   DrawerTrigger,
 } from "@/registry/react/components/drawer";
-import { useIsMobile } from "@/registry/react/hooks/use-is-mobile";
+import { useIsMobile } from "@/registry/react/hooks/use-media-query";
 
 const Example = () => {
   const isMobile = useIsMobile();

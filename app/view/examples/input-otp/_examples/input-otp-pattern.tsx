@@ -3,8 +3,8 @@ import { InputOTP, InputOTPSlot } from "@/registry/react/components/input-otp";
 
 const InputOTPPattern = () => (
   <Field className="w-full max-w-64">
-    <FieldLabel htmlFor="digits-only">Digits Only</FieldLabel>
-    <InputOTP id="digits-only" pattern="^\d+$">
+    <FieldLabel>Digits Only</FieldLabel>
+    <InputOTP pattern="^\d+$">
       <InputOTPSlot index={0} />
       <InputOTPSlot index={1} />
       <InputOTPSlot index={2} />

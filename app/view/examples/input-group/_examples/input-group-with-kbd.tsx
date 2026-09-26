@@ -16,34 +16,28 @@ import { Spinner } from "@/registry/react/components/spinner";
 const InputGroupWithKbd = () => (
   <FieldGroup>
     <Field>
-      <FieldLabel htmlFor="input-kbd-22">Input Group with Kbd</FieldLabel>
+      <FieldLabel>Input Group with Kbd</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-kbd-22" />
+        <InputGroupInput />
         <InputGroupAddon>
           <Kbd>⌘K</Kbd>
         </InputGroupAddon>
       </InputGroup>
       <InputGroup>
-        <InputGroupInput id="input-kbd-23" />
+        <InputGroupInput />
         <InputGroupAddon align="inline-end">
           <Kbd>⌘K</Kbd>
         </InputGroupAddon>
       </InputGroup>
       <InputGroup>
-        <InputGroupInput
-          id="input-search-apps-24"
-          placeholder="Search for Apps..."
-        />
+        <InputGroupInput placeholder="Search for Apps..." />
         <InputGroupAddon align="inline-end">Ask AI</InputGroupAddon>
         <InputGroupAddon align="inline-end">
           <Kbd>Tab</Kbd>
         </InputGroupAddon>
       </InputGroup>
       <InputGroup>
-        <InputGroupInput
-          id="input-search-type-25"
-          placeholder="Type to search..."
-        />
+        <InputGroupInput placeholder="Type to search..." />
         <InputGroupAddon align="inline-start">
           <SearchIcon aria-hidden />
         </InputGroupAddon>
@@ -56,9 +50,9 @@ const InputGroupWithKbd = () => (
       </InputGroup>
     </Field>
     <Field>
-      <FieldLabel htmlFor="input-username-26">Username</FieldLabel>
+      <FieldLabel>Username</FieldLabel>
       <InputGroup>
-        <InputGroupInput defaultValue="shadcn" id="input-username-26" />
+        <InputGroupInput defaultValue="shadcn" />
         <InputGroupAddon align="inline-end">
           <div className="flex size-4 items-center justify-center rounded-full bg-green-500 dark:bg-green-800">
             <CheckIcon className="size-3 text-white" />
@@ -92,18 +86,18 @@ const InputGroupWithKbd = () => (
     </InputGroup>
     <FieldGroup className="grid grid-cols-2 gap-4">
       <Field>
-        <FieldLabel htmlFor="input-group-11">First Name</FieldLabel>
+        <FieldLabel>First Name</FieldLabel>
         <InputGroup>
-          <InputGroupInput id="input-group-11" placeholder="First Name" />
+          <InputGroupInput placeholder="First Name" />
           <InputGroupAddon align="inline-end">
             <InfoIcon aria-hidden />
           </InputGroupAddon>
         </InputGroup>
       </Field>
       <Field>
-        <FieldLabel htmlFor="input-group-12">Last Name</FieldLabel>
+        <FieldLabel>Last Name</FieldLabel>
         <InputGroup>
-          <InputGroupInput id="input-group-12" placeholder="Last Name" />
+          <InputGroupInput placeholder="Last Name" />
           <InputGroupAddon align="inline-end">
             <InfoIcon aria-hidden />
           </InputGroupAddon>
@@ -111,11 +105,9 @@ const InputGroupWithKbd = () => (
       </Field>
     </FieldGroup>
     <Field disabled>
-      <FieldLabel htmlFor="input-group-29">
-        Loading (&quot;data-disabled=true&quot;)
-      </FieldLabel>
+      <FieldLabel>Loading (&quot;data-disabled=true&quot;)</FieldLabel>
       <InputGroup>
-        <InputGroupInput defaultValue="shadcn" disabled id="input-group-29" />
+        <InputGroupInput defaultValue="shadcn" disabled />
         <InputGroupAddon align="inline-end">
           <Spinner />
         </InputGroupAddon>

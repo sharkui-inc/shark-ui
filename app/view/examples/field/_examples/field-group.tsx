@@ -20,10 +20,8 @@ const FieldGroupExample = () => (
       </FieldDescription>
       <FieldGroup data-slot="checkbox-group">
         <Field orientation="horizontal">
-          <Checkbox defaultChecked disabled id="push" />
-          <FieldLabel className="font-normal" htmlFor="push">
-            Push notifications
-          </FieldLabel>
+          <Checkbox defaultChecked disabled />
+          <FieldLabel className="font-normal">Push notifications</FieldLabel>
         </Field>
       </FieldGroup>
     </FieldSet>
@@ -36,16 +34,12 @@ const FieldGroupExample = () => (
       </FieldDescription>
       <FieldGroup data-slot="checkbox-group">
         <Field orientation="horizontal">
-          <Checkbox id="push-tasks" />
-          <FieldLabel className="font-normal" htmlFor="push-tasks">
-            Push notifications
-          </FieldLabel>
+          <Checkbox />
+          <FieldLabel className="font-normal">Push notifications</FieldLabel>
         </Field>
         <Field orientation="horizontal">
-          <Checkbox id="email-tasks" />
-          <FieldLabel className="font-normal" htmlFor="email-tasks">
-            Email notifications
-          </FieldLabel>
+          <Checkbox />
+          <FieldLabel className="font-normal">Email notifications</FieldLabel>
         </Field>
       </FieldGroup>
     </FieldSet>

@@ -28,9 +28,9 @@ const rowsPerPage = createListCollection({
 const PaginationIconsOnly = () => (
   <div className="flex items-center justify-between gap-4">
     <Field className="w-fit" orientation="horizontal">
-      <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
+      <FieldLabel>Rows per page</FieldLabel>
       <Select collection={rowsPerPage} defaultValue={["25"]}>
-        <SelectTrigger className="w-20" id="select-rows-per-page">
+        <SelectTrigger className="w-20">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>

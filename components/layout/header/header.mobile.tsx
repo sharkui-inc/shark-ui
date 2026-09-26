@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
   Popover,
+  PopoverBody,
   PopoverClose,
   PopoverContent,
   PopoverTrigger,
@@ -32,7 +33,7 @@ export const MobileNav = (props: MobileNavProps) => {
   const activeHref = getActiveNavHref(pathname, items);
 
   return (
-    <Popover {...rest}>
+    <Popover {...rest} positioning={{ overflowPadding: 0 }}>
       <PopoverTrigger asChild>
         <Button
           aria-label="Toggle Menu"
@@ -57,57 +58,79 @@ export const MobileNav = (props: MobileNavProps) => {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="h-(--available-height) w-(--available-width) overflow-y-auto rounded-none border-none bg-background/80 p-0 shadow-none backdrop-blur duration-100">
-        <div className="flex flex-col gap-8 px-4 py-6">
-          <div className="flex flex-col gap-4">
-            <div className="font-medium text-muted-foreground text-sm">
-              Navigation
-            </div>
-            <div className="flex flex-col gap-3">
-              {items.map((item) => (
-                <PopoverClose asChild key={item.href}>
-                  <NavLink
-                    active={item.href === activeHref}
-                    className="flex items-center gap-2 font-medium text-2xl"
-                    href={item.href}
-                  >
-                    {item.label}
-                  </NavLink>
-                </PopoverClose>
-              ))}
-            </div>
-          </div>
+      <PopoverContent
+        className={cn(
+          "h-(--available-height) max-h-(--available-height) min-h-0 w-dvw min-w-0 max-w-dvw",
+          "flex flex-col",
+          "overflow-hidden",
+          "bg-background/80 backdrop-blur",
+          "rounded-none border-none shadow-none",
+          "duration-100",
+          "**:data-[slot=scroll-area-viewport]:overflow-x-hidden!",
+          "**:data-[slot=scroll-area-content]:min-w-0!"
+        )}
+      >
+        <PopoverBody className="flex flex-col gap-6">
           {tree?.children?.map((group) => {
             if (group.type !== "folder") {
               return null;
             }
 
+            const isPages = String(group.name) === "Sections";
+            const links = [
+              ...(isPages
+                ? items.map((item) => ({
+                    active: item.href === activeHref,
+                    href: item.href,
+                    key: `nav:${item.href}`,
+                    label: item.label,
+                  }))
+                : []),
+              ...group.children.flatMap((item) =>
+                item.type === "page"
+                  ? [
+                      {
+                        active: undefined,
+                        href: item.url,
+                        key: item.url,
+                        label: item.name,
+                      },
+                    ]
+                  : []
+              ),
+            ];
+
             return (
               <div className="flex flex-col gap-4" key={String(group.name)}>
                 <div className="font-medium text-muted-foreground text-sm">
-                  {group.name}
+                  {isPages ? "Pages" : group.name}
                 </div>
                 <div className="flex flex-col gap-3">
-                  {group.children
-                    .filter(
-                      (item): item is typeof item & { type: "page" } =>
-                        item.type === "page"
-                    )
-                    .map((item) => (
-                      <PopoverClose asChild key={item.url}>
-                        <NavLink
-                          className="flex items-center gap-2 font-medium text-2xl"
-                          href={item.url}
-                        >
-                          {item.name}
-                        </NavLink>
-                      </PopoverClose>
-                    ))}
+                  {links.map((link) => (
+                    <PopoverClose asChild key={link.key}>
+                      <NavLink
+                        active={link.active}
+                        className={cn(
+                          "flex items-center gap-2",
+                          "-mx-1 px-1",
+                          "hitbox-y-2",
+                          "font-medium text-2xl",
+                          "rounded-md border border-transparent",
+                          "no-underline underline-offset-4",
+                          "outline-hidden",
+                          "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+                        )}
+                        href={link.href}
+                      >
+                        {link.label}
+                      </NavLink>
+                    </PopoverClose>
+                  ))}
                 </div>
               </div>
             );
           })}
-        </div>
+        </PopoverBody>
       </PopoverContent>
     </Popover>
   );

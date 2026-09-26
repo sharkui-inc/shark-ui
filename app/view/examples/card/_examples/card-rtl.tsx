@@ -25,13 +25,8 @@ const CardRtl = () => (
       <form>
         <div className="flex flex-col gap-6">
           <Field>
-            <FieldLabel htmlFor="email-rtl">البريد الإلكتروني</FieldLabel>
-            <Input
-              id="email-rtl"
-              placeholder="m@example.com"
-              required
-              type="email"
-            />
+            <FieldLabel>البريد الإلكتروني</FieldLabel>
+            <Input placeholder="m@example.com" required type="email" />
           </Field>
           <div className="grid gap-2">
             <div className="flex items-center">

@@ -60,6 +60,7 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
           <Button
             aria-label="Visit GitHub"
             asChild
+            className="hitbox-2"
             size="icon-md"
             variant="ghost"
           >

@@ -36,22 +36,12 @@ const DialogRtl = () => (
           <DialogBody>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="dialog-rtl-name">الاسم</FieldLabel>
-                <Input
-                  defaultValue="Pedro Duarte"
-                  id="dialog-rtl-name"
-                  name="name"
-                />
+                <FieldLabel>الاسم</FieldLabel>
+                <Input defaultValue="Pedro Duarte" name="name" />
               </Field>
               <Field>
-                <FieldLabel htmlFor="dialog-rtl-username">
-                  اسم المستخدم
-                </FieldLabel>
-                <Input
-                  defaultValue="@peduarte"
-                  id="dialog-rtl-username"
-                  name="username"
-                />
+                <FieldLabel>اسم المستخدم</FieldLabel>
+                <Input defaultValue="@peduarte" name="username" />
               </Field>
             </FieldGroup>
           </DialogBody>

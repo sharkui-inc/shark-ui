@@ -1012,7 +1012,10 @@ export const DrawerMenuCheckboxItem = (
       {...rest}
     >
       <ArkCheckbox.Indicator className={indicator()}>
-        <CheckIcon />
+        <CheckIcon
+          className="size-4 md:size-3.5"
+          data-slot="menu-item-check-icon"
+        />
       </ArkCheckbox.Indicator>
       <span className="flex min-w-0 flex-1 items-start gap-2">{children}</span>
       <ArkCheckbox.HiddenInput />
@@ -1057,7 +1060,10 @@ export const DrawerMenuRadioItem = (
           "hidden group-data-[state=checked]/menu-item:flex"
         )}
       >
-        <CheckIcon />
+        <CheckIcon
+          className="size-4 md:size-3.5"
+          data-slot="menu-item-check-icon"
+        />
       </span>
       <ArkRadioGroup.ItemText className="flex min-w-0 flex-1 items-start gap-2">
         {children}

@@ -12,35 +12,25 @@ import {
 const InputGroupBasic = () => (
   <FieldGroup className="w-full max-w-sm">
     <Field>
-      <FieldLabel htmlFor="input-default-01">
-        Default (No Input Group)
-      </FieldLabel>
-      <Input id="input-default-01" placeholder="Placeholder" />
+      <FieldLabel>Default (No Input Group)</FieldLabel>
+      <Input placeholder="Placeholder" />
     </Field>
     <Field>
-      <FieldLabel htmlFor="input-group-02">Input Group</FieldLabel>
+      <FieldLabel>Input Group</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-group-02" placeholder="Placeholder" />
+        <InputGroupInput placeholder="Placeholder" />
       </InputGroup>
     </Field>
     <Field disabled>
-      <FieldLabel htmlFor="input-disabled-03">Disabled</FieldLabel>
+      <FieldLabel>Disabled</FieldLabel>
       <InputGroup>
-        <InputGroupInput
-          disabled
-          id="input-disabled-03"
-          placeholder="This field is disabled"
-        />
+        <InputGroupInput disabled placeholder="This field is disabled" />
       </InputGroup>
     </Field>
     <Field invalid>
-      <FieldLabel htmlFor="input-invalid-04">Invalid</FieldLabel>
+      <FieldLabel>Invalid</FieldLabel>
       <InputGroup>
-        <InputGroupInput
-          aria-invalid
-          id="input-invalid-04"
-          placeholder="This field is invalid"
-        />
+        <InputGroupInput aria-invalid placeholder="This field is invalid" />
       </InputGroup>
     </Field>
   </FieldGroup>

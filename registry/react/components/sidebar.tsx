@@ -22,7 +22,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/registry/react/components/tooltip";
-import { useIsMobile } from "@/registry/react/hooks/use-is-mobile";
+import { useIsMobile } from "@/registry/react/hooks/use-media-query";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 

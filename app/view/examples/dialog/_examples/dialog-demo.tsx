@@ -33,20 +33,12 @@ const DialogDemo = () => (
         <DialogBody>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="dialog-demo-name">Name</FieldLabel>
-              <Input
-                defaultValue="Pedro Duarte"
-                id="dialog-demo-name"
-                name="name"
-              />
+              <FieldLabel>Name</FieldLabel>
+              <Input defaultValue="Pedro Duarte" name="name" />
             </Field>
             <Field>
-              <FieldLabel htmlFor="dialog-demo-username">Username</FieldLabel>
-              <Input
-                defaultValue="@peduarte"
-                id="dialog-demo-username"
-                name="username"
-              />
+              <FieldLabel>Username</FieldLabel>
+              <Input defaultValue="@peduarte" name="username" />
             </Field>
           </FieldGroup>
         </DialogBody>

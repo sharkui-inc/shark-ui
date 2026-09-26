@@ -46,7 +46,7 @@ import {
   MenuSubTrigger,
   MenuTrigger,
 } from "@/registry/react/components/menu";
-import { useIsMobile } from "@/registry/react/hooks/use-is-mobile";
+import { useIsMobile } from "@/registry/react/hooks/use-media-query";
 
 const Example = () => {
   const isMobile = useIsMobile();

@@ -5,8 +5,8 @@ import { InputOTP, InputOTPSlot } from "@/registry/react/components/input-otp";
 
 const InputOTPRtl = () => (
   <Field className="mx-auto max-w-xs">
-    <FieldLabel htmlFor="input-otp-rtl">رمز التحقق</FieldLabel>
-    <InputOTP defaultValue={["1", "2", "3", "4", "5", "6"]} id="input-otp-rtl">
+    <FieldLabel>رمز التحقق</FieldLabel>
+    <InputOTP defaultValue={["1", "2", "3", "4", "5", "6"]}>
       <InputOTPSlot index={0} />
       <InputOTPSlot index={1} />
       <InputOTPSlot index={2} />

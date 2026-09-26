@@ -7,8 +7,8 @@ import { Input } from "@/registry/react/components/input";
 
 const InputFile = () => (
   <Field className="w-full max-w-64">
-    <FieldLabel htmlFor="picture">Picture</FieldLabel>
-    <Input id="picture" type="file" />
+    <FieldLabel>Picture</FieldLabel>
+    <Input type="file" />
     <FieldDescription>Select a picture to upload.</FieldDescription>
   </Field>
 );

@@ -36,14 +36,8 @@ const ButtonGroupPopoverExample = () => (
           </PopoverDescription>
         </PopoverHeader>
         <Field>
-          <FieldLabel className="sr-only" htmlFor="task">
-            Task Description
-          </FieldLabel>
-          <Textarea
-            className="resize-none"
-            id="task"
-            placeholder="I need to..."
-          />
+          <FieldLabel className="sr-only">Task Description</FieldLabel>
+          <Textarea className="resize-none" placeholder="I need to..." />
           <FieldDescription>
             Copilot will open a pull request for review.
           </FieldDescription>

@@ -46,7 +46,7 @@ const manifest: RegistryItemType = {
     registryUrl("/r/sheet.json"),
     registryUrl("/r/skeleton.json"),
     registryUrl("/r/tooltip.json"),
-    registryUrl("/r/use-is-mobile.json"),
+    registryUrl("/r/use-media-query.json"),
   ],
   type: "registry:ui",
 };

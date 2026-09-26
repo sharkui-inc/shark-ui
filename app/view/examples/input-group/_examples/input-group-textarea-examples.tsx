@@ -23,32 +23,23 @@ import { Textarea } from "@/registry/react/components/textarea";
 const InputGroupTextareaExamples = () => (
   <FieldGroup>
     <Field>
-      <FieldLabel htmlFor="textarea-header-footer-12">
-        Default Textarea (No Input Group)
-      </FieldLabel>
-      <Textarea
-        id="textarea-header-footer-12"
-        placeholder="Enter your text here..."
-      />
+      <FieldLabel>Default Textarea (No Input Group)</FieldLabel>
+      <Textarea placeholder="Enter your text here..." />
     </Field>
     <Field>
-      <FieldLabel htmlFor="textarea-header-footer-13">Input Group</FieldLabel>
+      <FieldLabel>Input Group</FieldLabel>
       <InputGroup>
-        <InputGroupTextarea
-          id="textarea-header-footer-13"
-          placeholder="Enter your text here..."
-        />
+        <InputGroupTextarea placeholder="Enter your text here..." />
       </InputGroup>
       <FieldDescription>
         This is a description of the input group.
       </FieldDescription>
     </Field>
     <Field invalid>
-      <FieldLabel htmlFor="textarea-header-footer-14">Invalid</FieldLabel>
+      <FieldLabel>Invalid</FieldLabel>
       <InputGroup>
         <InputGroupTextarea
           aria-invalid
-          id="textarea-header-footer-14"
           placeholder="Enter your text here..."
         />
       </InputGroup>
@@ -57,22 +48,18 @@ const InputGroupTextareaExamples = () => (
       </FieldDescription>
     </Field>
     <Field disabled>
-      <FieldLabel htmlFor="textarea-header-footer-15">Disabled</FieldLabel>
+      <FieldLabel>Disabled</FieldLabel>
       <InputGroup>
-        <InputGroupTextarea
-          disabled
-          id="textarea-header-footer-15"
-          placeholder="Enter your text here..."
-        />
+        <InputGroupTextarea disabled placeholder="Enter your text here..." />
       </InputGroup>
       <FieldDescription>
         This is a description of the input group.
       </FieldDescription>
     </Field>
     <Field>
-      <FieldLabel htmlFor="prompt-31">Addon (block-start)</FieldLabel>
+      <FieldLabel>Addon (block-start)</FieldLabel>
       <InputGroup>
-        <InputGroupTextarea id="prompt-31" />
+        <InputGroupTextarea />
         <InputGroupAddon align="block-start">
           <InputGroupText>Ask, Search or Chat...</InputGroupText>
           <InfoIcon aria-hidden className="ml-auto text-muted-foreground" />
@@ -83,14 +70,9 @@ const InputGroupTextareaExamples = () => (
       </FieldDescription>
     </Field>
     <Field>
-      <FieldLabel htmlFor="textarea-header-footer-30">
-        Addon (block-end)
-      </FieldLabel>
+      <FieldLabel>Addon (block-end)</FieldLabel>
       <InputGroup>
-        <InputGroupTextarea
-          id="textarea-header-footer-30"
-          placeholder="Enter your text here..."
-        />
+        <InputGroupTextarea placeholder="Enter your text here..." />
         <InputGroupAddon align="block-end">
           <InputGroupText>0/280 characters</InputGroupText>
           <InputGroupButton
@@ -105,11 +87,10 @@ const InputGroupTextareaExamples = () => (
       </InputGroup>
     </Field>
     <Field>
-      <FieldLabel htmlFor="textarea-comment-31">Addon (Buttons)</FieldLabel>
+      <FieldLabel>Addon (Buttons)</FieldLabel>
       <InputGroup>
         <InputGroupTextarea
           className="min-h-[120px]"
-          id="textarea-comment-31"
           placeholder="Share your thoughts..."
         />
         <InputGroupAddon align="block-end">
@@ -123,11 +104,10 @@ const InputGroupTextareaExamples = () => (
       </InputGroup>
     </Field>
     <Field>
-      <FieldLabel htmlFor="textarea-code-32">Code Editor</FieldLabel>
+      <FieldLabel>Code Editor</FieldLabel>
       <InputGroup>
         <InputGroupTextarea
           className="min-h-[300px] py-3"
-          id="textarea-code-32"
           placeholder="console.log('Hello, world!');"
         />
         <InputGroupAddon align="block-start" className="border-b">

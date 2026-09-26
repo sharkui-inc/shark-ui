@@ -17,19 +17,19 @@ import {
 
 const people = [
   {
+    avatar: "https://github.com/vinihvc.png",
+    email: "vinihvc@vercel.com",
+    username: "vinihvc",
+  },
+  {
     avatar: "https://github.com/shadcn.png",
     email: "shadcn@vercel.com",
     username: "shadcn",
   },
   {
-    avatar: "https://github.com/maxleiter.png",
-    email: "maxleiter@vercel.com",
-    username: "maxleiter",
-  },
-  {
-    avatar: "https://github.com/evilrabbit.png",
-    email: "evilrabbit@vercel.com",
-    username: "evilrabbit",
+    avatar: "https://github.com/segunadebayo.png",
+    email: "segunadebayo@vercel.com",
+    username: "segunadebayo",
   },
 ];
 

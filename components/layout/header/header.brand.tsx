@@ -38,6 +38,7 @@ export const HeaderBrand = (
     <ContextMenu>
       <ContextMenuTrigger
         className={cn(
+          "hitbox-2",
           "flex gap-2",
           "font-bold text-base",
           "rounded-md border border-transparent",

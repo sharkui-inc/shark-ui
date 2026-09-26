@@ -12,13 +12,9 @@ import {
 
 const InputGroupInlineEnd = () => (
   <Field className="w-full max-w-sm">
-    <FieldLabel htmlFor="inline-end-input">Input</FieldLabel>
+    <FieldLabel>Input</FieldLabel>
     <InputGroup>
-      <InputGroupInput
-        id="inline-end-input"
-        placeholder="Enter password"
-        type="password"
-      />
+      <InputGroupInput placeholder="Enter password" type="password" />
       <InputGroupAddon align="inline-end">
         <EyeOffIcon aria-hidden />
       </InputGroupAddon>

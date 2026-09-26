@@ -137,10 +137,10 @@ export const MenuSeparator = (
 
 export const menuItemControlVariants = tv({
   base: [
-    "relative flex min-h-8 w-full items-start gap-2",
+    "relative flex min-h-10 w-full items-center gap-2 md:min-h-8",
     "rounded-lg",
     "px-[calc(--spacing(3)-1px)] py-1.5",
-    "[&_svg]:pointer-events-none [&_svg]:h-lh [&_svg]:w-3.5 [&_svg]:shrink-0",
+    "[&_svg:not([data-slot=menu-item-check-icon])]:pointer-events-none [&_svg:not([data-slot=menu-item-check-icon])]:h-lh [&_svg:not([data-slot=menu-item-check-icon])]:w-3.5 [&_svg:not([data-slot=menu-item-check-icon])]:shrink-0",
   ],
 });
 
@@ -148,7 +148,7 @@ export const menuItemVariants = tv({
   base: [
     menuItemControlVariants(),
     "group/menu-item",
-    "touch-manipulation select-none font-medium text-sm",
+    "touch-manipulation select-none font-medium text-base md:text-sm",
     "outline-hidden",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
   ],
@@ -224,8 +224,8 @@ export const menuItemIndicatorVariants = tv({
   slots: {
     indicator: [
       "pointer-events-none",
-      "absolute inset-e-2 top-1.5",
-      "flex h-lh w-3.5 shrink-0 items-center justify-center",
+      "absolute inset-e-2 top-1/2 -translate-y-1/2",
+      "flex h-lh w-4 shrink-0 items-center justify-center md:w-3.5",
       "[&_svg]:text-muted-foreground",
     ],
     item: "pe-8",
@@ -249,7 +249,10 @@ export const MenuCheckboxItem = (
       {...rest}
     >
       <ArkMenu.ItemIndicator className={indicator()}>
-        <CheckIcon />
+        <CheckIcon
+          className="size-4 md:size-3.5"
+          data-slot="menu-item-check-icon"
+        />
       </ArkMenu.ItemIndicator>
 
       <ArkMenu.ItemText
@@ -280,7 +283,10 @@ export const MenuRadioItem = (
       {...rest}
     >
       <ArkMenu.ItemIndicator className={indicator()}>
-        <CheckIcon />
+        <CheckIcon
+          className="size-4 md:size-3.5"
+          data-slot="menu-item-check-icon"
+        />
       </ArkMenu.ItemIndicator>
 
       <ArkMenu.ItemText

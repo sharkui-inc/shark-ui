@@ -1,10 +1,10 @@
 "use client";
 
 import { MonitorIcon, SmartphoneIcon } from "lucide-react";
-import { useIsMobile } from "@/registry/react/hooks/use-is-mobile";
+import { useMediaQuery } from "@/registry/react/hooks/use-media-query";
 
-const UseIsMobileDemo = () => {
-  const isMobile = useIsMobile();
+const UseMediaQueryDemo = () => {
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   return (
     <div className="flex items-center gap-3">
@@ -27,4 +27,4 @@ const UseIsMobileDemo = () => {
   );
 };
 
-export default UseIsMobileDemo;
+export default UseMediaQueryDemo;

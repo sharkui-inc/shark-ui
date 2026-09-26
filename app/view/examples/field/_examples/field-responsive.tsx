@@ -21,12 +21,12 @@ const FieldResponsive = () => (
         <FieldGroup>
           <Field orientation="responsive">
             <FieldContent>
-              <FieldLabel htmlFor="name">Name</FieldLabel>
+              <FieldLabel>Name</FieldLabel>
               <FieldDescription>
                 Provide your full name for identification
               </FieldDescription>
             </FieldContent>
-            <Input id="name" placeholder="Evil Rabbit" required />
+            <Input placeholder="John Doe" required />
           </Field>
           <Field orientation="responsive">
             <Button type="submit">Submit</Button>

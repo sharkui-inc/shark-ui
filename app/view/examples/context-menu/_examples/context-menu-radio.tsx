@@ -5,13 +5,11 @@ import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuGroup,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from "@/registry/react/components/context-menu";
-import {
-  MenuRadioGroup,
-  MenuRadioItem,
-} from "@/registry/react/components/menu";
 
 const ContextMenuRadio = () => {
   const [user, setUser] = React.useState("pedro");
@@ -29,24 +27,26 @@ const ContextMenuRadio = () => {
       </ContextMenuTrigger>
       <ContextMenuContent>
         <ContextMenuGroup heading="People">
-          <MenuRadioGroup
+          <ContextMenuRadioGroup
             onValueChange={({ value }) => setUser(value)}
             value={user}
           >
-            <MenuRadioItem value="pedro">Pedro Duarte</MenuRadioItem>
-            <MenuRadioItem value="colm">Colm Tuite</MenuRadioItem>
-          </MenuRadioGroup>
+            <ContextMenuRadioItem value="pedro">
+              Pedro Duarte
+            </ContextMenuRadioItem>
+            <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
+          </ContextMenuRadioGroup>
         </ContextMenuGroup>
         <ContextMenuSeparator />
         <ContextMenuGroup heading="Theme">
-          <MenuRadioGroup
+          <ContextMenuRadioGroup
             onValueChange={({ value }) => setTheme(value)}
             value={theme}
           >
-            <MenuRadioItem value="light">Light</MenuRadioItem>
-            <MenuRadioItem value="dark">Dark</MenuRadioItem>
-            <MenuRadioItem value="system">System</MenuRadioItem>
-          </MenuRadioGroup>
+            <ContextMenuRadioItem value="light">Light</ContextMenuRadioItem>
+            <ContextMenuRadioItem value="dark">Dark</ContextMenuRadioItem>
+            <ContextMenuRadioItem value="system">System</ContextMenuRadioItem>
+          </ContextMenuRadioGroup>
         </ContextMenuGroup>
       </ContextMenuContent>
     </ContextMenu>

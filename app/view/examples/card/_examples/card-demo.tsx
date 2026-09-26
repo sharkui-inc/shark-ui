@@ -23,13 +23,8 @@ const CardDemo = () => (
       <form>
         <div className="flex flex-col gap-6">
           <Field>
-            <FieldLabel htmlFor="email">Email</FieldLabel>
-            <Input
-              id="email"
-              placeholder="m@example.com"
-              required
-              type="email"
-            />
+            <FieldLabel>Email</FieldLabel>
+            <Input placeholder="m@example.com" required type="email" />
           </Field>
           <div className="grid gap-2">
             <div className="flex items-center">

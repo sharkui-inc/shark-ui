@@ -7,8 +7,8 @@ import { Input } from "@/registry/react/components/input";
 
 const InputInvalid = () => (
   <Field className="w-full max-w-64" invalid>
-    <FieldLabel htmlFor="input-invalid">Invalid Input</FieldLabel>
-    <Input aria-invalid id="input-invalid" placeholder="Error" />
+    <FieldLabel>Invalid Input</FieldLabel>
+    <Input aria-invalid placeholder="Error" />
     <FieldDescription>This field contains validation errors.</FieldDescription>
   </Field>
 );

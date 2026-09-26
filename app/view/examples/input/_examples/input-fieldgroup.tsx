@@ -10,16 +10,12 @@ import { Input } from "@/registry/react/components/input";
 const InputFieldGroup = () => (
   <FieldGroup className="w-full max-w-64">
     <Field>
-      <FieldLabel htmlFor="fieldgroup-name">Name</FieldLabel>
-      <Input id="fieldgroup-name" placeholder="Jordan Lee" />
+      <FieldLabel>Name</FieldLabel>
+      <Input placeholder="Jordan Lee" />
     </Field>
     <Field>
-      <FieldLabel htmlFor="fieldgroup-email">Email</FieldLabel>
-      <Input
-        id="fieldgroup-email"
-        placeholder="name@example.com"
-        type="email"
-      />
+      <FieldLabel>Email</FieldLabel>
+      <Input placeholder="name@example.com" type="email" />
       <FieldDescription>We'll send updates to this address.</FieldDescription>
     </Field>
     <Field orientation="horizontal">

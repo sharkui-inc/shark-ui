@@ -64,22 +64,15 @@ const sheetPositionerVariants = tv({
     variant: "default",
   },
   variants: {
-    // placement left/right map to inline-start/end.
     placement: {
-      bottom: "grid grid-rows-[1fr_auto] not-data-[variant=inset]:pt-12",
+      bottom: ["grid grid-rows-[1fr_auto]", "not-data-[variant=inset]:pt-12"],
       left: "flex justify-start",
       right: "flex justify-end",
-      top: "grid grid-rows-[auto_1fr] not-data-[variant=inset]:pb-12",
+      top: ["grid grid-rows-[auto_1fr]", "not-data-[variant=inset]:pb-12"],
     },
     variant: {
       default: "",
-      inset: [
-        "px-(--inset)",
-        "data-[placement=bottom]:pb-(--inset)",
-        "data-[placement=top]:pt-(--inset)",
-        "data-[placement=left]:pt-(--inset) data-[placement=left]:pb-(--inset)",
-        "data-[placement=right]:pt-(--inset) data-[placement=right]:pb-(--inset)",
-      ],
+      inset: ["p-(--inset)"],
     },
   },
 });
@@ -129,18 +122,20 @@ const sheetContentVariants = tv({
         "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
       ],
       left: [
-        "w-[calc(100%-(--spacing(12)))] max-w-md ps-[env(safe-area-inset-left,0px)] rtl:ps-[env(safe-area-inset-right,0px)]",
+        "w-[calc(100%-(--spacing(12)))] max-w-md",
+        "ps-[env(safe-area-inset-left,0px)]",
         "col-start-2",
         "border-e",
         "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left",
-        "rtl:data-[state=closed]:slide-out-to-right rtl:data-[state=open]:slide-in-from-right",
+        "rtl:data-[state=closed]:slide-out-to-right rtl:data-[state=open]:slide-in-from-right rtl:ps-[env(safe-area-inset-right,0px)]",
       ],
       right: [
-        "w-[calc(100%-(--spacing(12)))] max-w-md pe-[env(safe-area-inset-right,0px)] rtl:pe-[env(safe-area-inset-left,0px)]",
+        "w-[calc(100%-(--spacing(12)))] max-w-md",
+        "pe-[env(safe-area-inset-right,0px)]",
         "col-start-2",
         "border-s",
         "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
-        "rtl:data-[state=closed]:slide-out-to-left rtl:data-[state=open]:slide-in-from-left",
+        "rtl:data-[state=closed]:slide-out-to-left rtl:data-[state=open]:slide-in-from-left rtl:pe-[env(safe-area-inset-left,0px)]",
       ],
       top: [
         "border-b pt-[env(safe-area-inset-top,0px)]",

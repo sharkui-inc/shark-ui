@@ -27,12 +27,12 @@ const SheetDemo = () => (
       </SheetHeader>
       <SheetBody className="flex flex-col gap-6">
         <Field>
-          <FieldLabel htmlFor="sheet-demo-name">Name</FieldLabel>
-          <Input defaultValue="Pedro Duarte" id="sheet-demo-name" />
+          <FieldLabel>Name</FieldLabel>
+          <Input defaultValue="Pedro Duarte" />
         </Field>
         <Field>
-          <FieldLabel htmlFor="sheet-demo-username">Username</FieldLabel>
-          <Input defaultValue="@peduarte" id="sheet-demo-username" />
+          <FieldLabel>Username</FieldLabel>
+          <Input defaultValue="@peduarte" />
         </Field>
       </SheetBody>
       <SheetFooter>

@@ -138,7 +138,7 @@ Use `DrawerTitle` and `DrawerDescription` as children for more control.
 
 ### Inset
 
-`variant="inset"` on `DrawerContent` gives the panel a 12px inset on mobile and 16px from `sm` upward.
+`variant="inset"` on `DrawerContent` insets the panel from the screen edge.
 
 <ComponentPreview componentName="drawer" fileName="example-inset" />
 
@@ -206,19 +206,19 @@ Nest a `Drawer` inside another.
 
 ### Responsive Dialog
 
-`Drawer` below the mobile breakpoint. [Dialog](/docs/components/dialog#responsive) on larger screens.
+Use `Drawer` on small screens and [Dialog](/docs/components/dialog#responsive) on larger ones. Same content opens as a bottom sheet on mobile and a modal on desktop.
 
 <ComponentPreview componentName="drawer" fileName="example-responsive-dialog" />
 
 ### Responsive Menu
 
-`Drawer` below the mobile breakpoint. [Menu](/docs/components/menu#responsive) on larger screens. `DrawerMenuTrigger` opens the next drawer.
+Use `Drawer` on small screens and [Menu](/docs/components/menu#responsive) on larger ones. Same content opens as a bottom sheet on mobile and a menu on desktop. `DrawerMenuTrigger` opens the next drawer.
 
 <ComponentPreview componentName="drawer" fileName="example-responsive-menu" />
 
 ### Responsive Context Menu
 
-`Drawer` below the mobile breakpoint. [ContextMenu](/docs/components/context-menu#responsive) on larger screens. `DrawerMenuTrigger` opens the next drawer.
+Use `Drawer` on small screens and [ContextMenu](/docs/components/context-menu#responsive) on larger ones. Same content opens as a bottom sheet on mobile and a context menu on desktop. `DrawerMenuTrigger` opens the next drawer.
 
 <ComponentPreview componentName="drawer" fileName="example-responsive-context-menu" />
 
@@ -370,8 +370,6 @@ Provides a Drawer API created with `useDrawer` to descendant components.
 | --- | --- | --- |
 | `value` | `UseDrawerReturn` | `required` |
 | `modal` | `boolean` | `true` |
-
-`modal` gates `DrawerOverlay` the same way as on `Drawer`. Pass the same value you used in `useDrawer` when it is not the default.
 
 ### DrawerProvider
 

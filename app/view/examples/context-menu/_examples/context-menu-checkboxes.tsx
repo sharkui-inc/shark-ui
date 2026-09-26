@@ -3,11 +3,11 @@
 import React from "react";
 import {
   ContextMenu,
+  ContextMenuCheckboxItem,
   ContextMenuContent,
   ContextMenuGroup,
   ContextMenuTrigger,
 } from "@/registry/react/components/context-menu";
-import { MenuCheckboxItem } from "@/registry/react/components/menu";
 
 const ContextMenuCheckboxes = () => {
   const [showBookmarks, setShowBookmarks] = React.useState(true);
@@ -26,27 +26,27 @@ const ContextMenuCheckboxes = () => {
       </ContextMenuTrigger>
       <ContextMenuContent>
         <ContextMenuGroup>
-          <MenuCheckboxItem
+          <ContextMenuCheckboxItem
             checked={showBookmarks}
             onCheckedChange={setShowBookmarks}
             value="show-bookmarks"
           >
             Show Bookmarks Bar
-          </MenuCheckboxItem>
-          <MenuCheckboxItem
+          </ContextMenuCheckboxItem>
+          <ContextMenuCheckboxItem
             checked={showFullUrls}
             onCheckedChange={setShowFullUrls}
             value="show-full-urls"
           >
             Show Full URLs
-          </MenuCheckboxItem>
-          <MenuCheckboxItem
+          </ContextMenuCheckboxItem>
+          <ContextMenuCheckboxItem
             checked={showDeveloperTools}
             onCheckedChange={setShowDeveloperTools}
             value="show-developer-tools"
           >
             Show Developer Tools
-          </MenuCheckboxItem>
+          </ContextMenuCheckboxItem>
         </ContextMenuGroup>
       </ContextMenuContent>
     </ContextMenu>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
 import { NavigationTabs } from "./_components/navigation-tabs";
 import { ThemesFooter } from "./_components/themes-footer";
+import { ThemesWelcomeDialog } from "./_components/themes-welcome-dialog";
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -14,6 +15,8 @@ export const metadata: Metadata = createMetadata({
 
 const ThemesPage = () => (
   <main className="flex h-[calc(100dvh-var(--header-height))] min-h-0 flex-col">
+    <ThemesWelcomeDialog />
+
     <h1 className="sr-only">Theme builder</h1>
 
     <section

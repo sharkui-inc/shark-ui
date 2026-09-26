@@ -110,7 +110,7 @@ Control which side the sheet slides in from using the `side` prop.
 
 ### Inset
 
-Use `variant="inset"` to give the sheet a 12px inset on mobile and 16px from `sm` upward.
+Use `variant="inset"` to give the sheet an inset from the screen edge.
 
 <ComponentPreview componentName="sheet" fileName="example-inset" />
 
@@ -293,8 +293,6 @@ Provides a Sheet API created with `useSheet` to descendant components.
 | --- | --- | --- |
 | `value` | `UseSheetReturn` | `required` |
 | `modal` | `boolean` | `true` |
-
-`modal` gates the overlay the same way as on `Sheet` / `Dialog`. Pass the same value you used in `useSheet` when it is not the default.
 
 ---
 

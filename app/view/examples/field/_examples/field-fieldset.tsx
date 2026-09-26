@@ -18,17 +18,17 @@ const FieldFieldset = () => (
     </FieldDescription>
     <FieldGroup>
       <Field>
-        <FieldLabel htmlFor="street">Street Address</FieldLabel>
-        <Input id="street" placeholder="123 Main St" type="text" />
+        <FieldLabel>Street Address</FieldLabel>
+        <Input placeholder="123 Main St" type="text" />
       </Field>
       <div className="grid grid-cols-2 gap-4">
         <Field>
-          <FieldLabel htmlFor="city">City</FieldLabel>
-          <Input id="city" placeholder="New York" type="text" />
+          <FieldLabel>City</FieldLabel>
+          <Input placeholder="New York" type="text" />
         </Field>
         <Field>
-          <FieldLabel htmlFor="zip">Postal Code</FieldLabel>
-          <Input id="zip" placeholder="90502" type="text" />
+          <FieldLabel>Postal Code</FieldLabel>
+          <Input placeholder="90502" type="text" />
         </Field>
       </div>
     </FieldGroup>

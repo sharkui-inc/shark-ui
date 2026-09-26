@@ -21,7 +21,7 @@ import {
 } from "@/registry/react/components/drawer";
 import { FieldLabel } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
-import { useMediaQuery } from "@/registry/react/hooks/use-is-mobile";
+import { useMediaQuery } from "@/registry/react/hooks/use-media-query";
 
 const DrawerDialog = () => {
   const [open, setOpen] = React.useState(false);

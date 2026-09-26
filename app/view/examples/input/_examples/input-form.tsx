@@ -30,25 +30,25 @@ const InputForm = () => (
   <form className="w-full max-w-sm">
     <FieldGroup>
       <Field>
-        <FieldLabel htmlFor="form-name">Name</FieldLabel>
-        <Input id="form-name" placeholder="Evil Rabbit" required type="text" />
+        <FieldLabel>Name</FieldLabel>
+        <Input placeholder="John Doe" required type="text" />
       </Field>
       <Field>
-        <FieldLabel htmlFor="form-email">Email</FieldLabel>
-        <Input id="form-email" placeholder="john@example.com" type="email" />
+        <FieldLabel>Email</FieldLabel>
+        <Input placeholder="john@example.com" type="email" />
         <FieldDescription>
           We&apos;ll never share your email with anyone.
         </FieldDescription>
       </Field>
       <div className="grid grid-cols-2 gap-4">
         <Field>
-          <FieldLabel htmlFor="form-phone">Phone</FieldLabel>
-          <Input id="form-phone" placeholder="+1 (555) 123-4567" type="tel" />
+          <FieldLabel>Phone</FieldLabel>
+          <Input placeholder="+1 (555) 123-4567" type="tel" />
         </Field>
         <Field>
-          <FieldLabel htmlFor="form-country">Country</FieldLabel>
+          <FieldLabel>Country</FieldLabel>
           <Select collection={collection} defaultValue={["us"]}>
-            <SelectTrigger className="w-full" id="form-country">
+            <SelectTrigger className="w-full">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -64,8 +64,8 @@ const InputForm = () => (
         </Field>
       </div>
       <Field>
-        <FieldLabel htmlFor="form-address">Address</FieldLabel>
-        <Input id="form-address" placeholder="123 Main St" type="text" />
+        <FieldLabel>Address</FieldLabel>
+        <Input placeholder="123 Main St" type="text" />
       </Field>
       <Field orientation="horizontal">
         <Button type="button" variant="outline">

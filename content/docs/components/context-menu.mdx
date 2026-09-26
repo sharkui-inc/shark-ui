@@ -65,7 +65,10 @@ ContextMenu
 ├── ContextMenuTrigger
 └── ContextMenuContent
     ├── ContextMenuGroup
+    │   └── ContextMenuGroupLabel
     ├── ContextMenuItem
+    ├── ContextMenuItemDescription
+    ├── ContextMenuQuickItem
     ├── ContextMenuCheckboxItem
     ├── ContextMenuRadioGroup
     │   └── ContextMenuRadioItem
@@ -163,6 +166,15 @@ Groups related context-menu items.
 | --- | --- | --- |
 | `heading` | `string` | `-` |
 
+### ContextMenuGroupLabel
+
+Label for a group.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
 ### ContextMenuSeparator
 
 Visual divider between groups of context-menu items.
@@ -180,6 +192,56 @@ A selectable context-menu option.
 | --- | --- | --- |
 | `value` | `string` | `required` |
 | `variant` | `"default" \| "destructive"` | `"default"` |
+| `disabled` | `boolean` | `-` |
+
+### ContextMenuItemDescription
+
+Secondary line under a context-menu item label.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ContextMenuQuickItem
+
+A context-menu option with icon-above-text layout for quick actions.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `required` |
+| `asChild` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
+| `closeOnSelect` | `boolean` | `-` |
+| `onSelect` | `VoidFunction` | `-` |
+
+### ContextMenuCheckboxItem
+
+A context-menu option with a checkbox.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `required` |
+| `checked` | `boolean` | `-` |
+| `onCheckedChange` | `(checked: boolean) => void` | `-` |
+| `disabled` | `boolean` | `-` |
+
+### ContextMenuRadioGroup
+
+Group of mutually exclusive options.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
+| `heading` | `string` | `-` |
+
+### ContextMenuRadioItem
+
+A single option in a radio group.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `required` |
 | `disabled` | `boolean` | `-` |
 
 ### ContextMenuSub

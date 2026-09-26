@@ -9,9 +9,9 @@ import {
 
 const InputInputGroup = () => (
   <Field className="w-full max-w-64">
-    <FieldLabel htmlFor="input-group-url">Website URL</FieldLabel>
+    <FieldLabel>Website URL</FieldLabel>
     <InputGroup>
-      <InputGroupInput id="input-group-url" placeholder="example.com" />
+      <InputGroupInput placeholder="example.com" />
       <InputGroupAddon>
         <InputGroupText>https://</InputGroupText>
       </InputGroupAddon>

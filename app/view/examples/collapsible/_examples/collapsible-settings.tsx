@@ -39,29 +39,21 @@ const CollapsibleSettings = () => {
         >
           <FieldGroup className="grid w-full grid-cols-2 gap-2">
             <Field>
-              <FieldLabel className="sr-only" htmlFor="radius-x">
-                Radius X
-              </FieldLabel>
-              <Input defaultValue="0" id="radius-x" placeholder="0" />
+              <FieldLabel className="sr-only">Radius X</FieldLabel>
+              <Input defaultValue="0" placeholder="0" />
             </Field>
             <Field>
-              <FieldLabel className="sr-only" htmlFor="radius-y">
-                Radius Y
-              </FieldLabel>
-              <Input defaultValue="0" id="radius-y" placeholder="0" />
+              <FieldLabel className="sr-only">Radius Y</FieldLabel>
+              <Input defaultValue="0" placeholder="0" />
             </Field>
             <CollapsibleContent className="col-span-full grid grid-cols-subgrid gap-2">
               <Field>
-                <FieldLabel className="sr-only" htmlFor="radius-x-more">
-                  Radius X
-                </FieldLabel>
-                <Input defaultValue="0" id="radius-x-more" placeholder="0" />
+                <FieldLabel className="sr-only">Radius X</FieldLabel>
+                <Input defaultValue="0" placeholder="0" />
               </Field>
               <Field>
-                <FieldLabel className="sr-only" htmlFor="radius-y-more">
-                  Radius Y
-                </FieldLabel>
-                <Input defaultValue="0" id="radius-y-more" placeholder="0" />
+                <FieldLabel className="sr-only">Radius Y</FieldLabel>
+                <Input defaultValue="0" placeholder="0" />
               </Field>
             </CollapsibleContent>
           </FieldGroup>

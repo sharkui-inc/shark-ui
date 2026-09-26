@@ -5,8 +5,8 @@ import { Switch } from "@/registry/react/components/switch";
 
 const FieldSwitch = () => (
   <Field className="w-fit" orientation="horizontal">
-    <FieldLabel htmlFor="2fa">Multi-factor authentication</FieldLabel>
-    <Switch id="2fa" />
+    <FieldLabel>Multi-factor authentication</FieldLabel>
+    <Switch />
   </Field>
 );
 

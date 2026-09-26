@@ -12,7 +12,6 @@ export const fontSans = FontSans({
 export const fontHeading = FontHeading({
   subsets: ["latin"],
   variable: "--font-heading",
-  weight: ["500", "600", "700"],
 });
 
 export const fontMono = FontMono({

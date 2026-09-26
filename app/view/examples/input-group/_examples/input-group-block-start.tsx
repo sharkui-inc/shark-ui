@@ -17,9 +17,9 @@ import {
 const InputGroupBlockStart = () => (
   <FieldGroup className="w-full max-w-sm">
     <Field>
-      <FieldLabel htmlFor="block-start-input">Input</FieldLabel>
+      <FieldLabel>Input</FieldLabel>
       <InputGroup className="h-auto">
-        <InputGroupInput id="block-start-input" placeholder="Enter your name" />
+        <InputGroupInput placeholder="Enter your name" />
         <InputGroupAddon align="block-start">
           <InputGroupText>Full Name</InputGroupText>
         </InputGroupAddon>
@@ -27,11 +27,10 @@ const InputGroupBlockStart = () => (
       <FieldDescription>Header positioned above the input.</FieldDescription>
     </Field>
     <Field>
-      <FieldLabel htmlFor="block-start-textarea">Textarea</FieldLabel>
+      <FieldLabel>Textarea</FieldLabel>
       <InputGroup>
         <InputGroupTextarea
           className="font-mono text-sm"
-          id="block-start-textarea"
           placeholder="console.log('Hello, world!');"
         />
         <InputGroupAddon align="block-start">

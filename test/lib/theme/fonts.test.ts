@@ -13,7 +13,8 @@ import {
   THEME_FONTS,
 } from "@/lib/theme/fonts";
 
-const NEWSREADER_CSS_AXES = /family=Newsreader:ital,opsz,wght@/;
+const NEWSREADER_CSS_AXES = /family=Newsreader:ital,wght@/;
+const WEIGHT_AXIS = /wght@/;
 
 describe("theme fonts", () => {
   it("keeps Shark UI's active fonts as the defaults", () => {
@@ -36,20 +37,24 @@ describe("theme fonts", () => {
     assert.equal(getThemeFont("inter").family, "'Inter', sans-serif");
   });
 
-  it("builds bare Google CSS URLs unless axes are set", () => {
+  it("requests each family's real weight axis and italic", () => {
     assert.equal(
       getThemeFont("ibm-plex-sans").cssUrl,
-      "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap"
+      "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400..700;1,400..700&display=swap"
     );
     assert.equal(
       getThemeFont("source-sans-3").cssUrl,
-      "https://fonts.googleapis.com/css2?family=Source+Sans+3&display=swap"
+      "https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400..800;1,400..800&display=swap"
     );
     assert.equal(
       getThemeFont("lora").cssUrl,
-      "https://fonts.googleapis.com/css2?family=Lora&display=swap"
+      "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
     );
     assert.match(getThemeFont("newsreader").cssUrl, NEWSREADER_CSS_AXES);
+
+    for (const font of THEME_FONTS) {
+      assert.match(font.cssUrl, WEIGHT_AXIS);
+    }
   });
 
   it("only requests selected non-default fonts once", () => {

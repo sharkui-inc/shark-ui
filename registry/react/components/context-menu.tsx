@@ -9,9 +9,15 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 import {
   Menu,
+  MenuCheckboxItem,
   MenuContent,
   MenuGroup,
+  MenuGroupLabel,
   MenuItem,
+  MenuItemDescription,
+  MenuQuickItem,
+  MenuRadioGroup,
+  MenuRadioItem,
   MenuSeparator,
   MenuShortcut,
   MenuSub,
@@ -62,6 +68,10 @@ export const ContextMenuGroup = (
   props: React.ComponentProps<typeof MenuGroup>
 ) => <MenuGroup data-slot="context-menu-group" {...props} />;
 
+export const ContextMenuGroupLabel = (
+  props: React.ComponentProps<typeof MenuGroupLabel>
+) => <MenuGroupLabel data-slot="context-menu-group-label" {...props} />;
+
 export const ContextMenuSeparator = (
   props: React.ComponentProps<typeof MenuSeparator>
 ) => <MenuSeparator data-slot="context-menu-separator" {...props} />;
@@ -69,6 +79,28 @@ export const ContextMenuSeparator = (
 export const ContextMenuItem = (
   props: React.ComponentProps<typeof MenuItem>
 ) => <MenuItem data-slot="context-menu-item" {...props} />;
+
+export const ContextMenuItemDescription = (
+  props: React.ComponentProps<typeof MenuItemDescription>
+) => (
+  <MenuItemDescription data-slot="context-menu-item-description" {...props} />
+);
+
+export const ContextMenuQuickItem = (
+  props: React.ComponentProps<typeof MenuQuickItem>
+) => <MenuQuickItem data-slot="context-menu-quick-item" {...props} />;
+
+export const ContextMenuCheckboxItem = (
+  props: React.ComponentProps<typeof MenuCheckboxItem>
+) => <MenuCheckboxItem data-slot="context-menu-checkbox-item" {...props} />;
+
+export const ContextMenuRadioGroup = (
+  props: React.ComponentProps<typeof MenuRadioGroup>
+) => <MenuRadioGroup data-slot="context-menu-radio-group" {...props} />;
+
+export const ContextMenuRadioItem = (
+  props: React.ComponentProps<typeof MenuRadioItem>
+) => <MenuRadioItem data-slot="context-menu-radio-item" {...props} />;
 
 export const ContextMenuSub = (props: React.ComponentProps<typeof MenuSub>) => (
   <MenuSub data-slot="context-menu-sub" {...props} />

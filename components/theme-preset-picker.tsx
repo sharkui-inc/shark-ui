@@ -65,13 +65,12 @@ const ThemePresetBar = (props: { onSelect?: () => void }) => {
       value={activePreset?.label ?? ""}
     >
       <RadioGroupLabel>{THEME_PRESET_FIELD.label}</RadioGroupLabel>
-      <div className="flex h-11 gap-0.5 overflow-hidden rounded-xl border border-input bg-border">
+      <div className="grid grid-cols-9 gap-0.5 overflow-hidden rounded-xl border border-input bg-border">
         {THEME_PRESETS.map((preset) => (
           <RadioGroupItem
             aria-label={preset.label}
             className={cn(
-              "group relative h-full min-w-0 flex-1 justify-center p-0",
-              "rounded-none border border-transparent",
+              "group relative aspect-square justify-center rounded-none border border-transparent p-0",
               "data-[state=checked]:z-10 data-[state=checked]:outline-2 data-[state=checked]:outline-foreground data-[state=checked]:-outline-offset-2",
               "data-focus-visible:z-20 data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24",
               "pointer-coarse:after:hidden"

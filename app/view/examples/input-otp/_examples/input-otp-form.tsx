@@ -31,13 +31,13 @@ const InputOTPForm = () => (
     <CardContent>
       <Field>
         <div className="flex items-center justify-between">
-          <FieldLabel htmlFor="otp-verification">Verification code</FieldLabel>
+          <FieldLabel>Verification code</FieldLabel>
           <Button size="xs" variant="outline">
             <RefreshCwIcon aria-hidden data-icon="inline-start" />
             Resend Code
           </Button>
         </div>
-        <InputOTP id="otp-verification" required>
+        <InputOTP required>
           <InputOTPSlot index={0} />
           <InputOTPSlot index={1} />
           <InputOTPSlot index={2} />

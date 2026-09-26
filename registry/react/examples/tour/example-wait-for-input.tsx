@@ -49,16 +49,12 @@ const Example = () => {
             </div>
           </div>
           <Field>
-            <FieldLabel htmlFor="tour-input-name">Name</FieldLabel>
-            <Input id="tour-input-name" placeholder="Maya Chen" />
+            <FieldLabel>Name</FieldLabel>
+            <Input placeholder="Maya Chen" />
           </Field>
           <Field>
-            <FieldLabel htmlFor="tour-input-email">Email</FieldLabel>
-            <Input
-              id="tour-input-email"
-              placeholder="maya@onda.dev"
-              type="email"
-            />
+            <FieldLabel>Email</FieldLabel>
+            <Input placeholder="maya@onda.dev" type="email" />
           </Field>
           <Field id="tour-input-terms" orientation="horizontal">
             <Checkbox />

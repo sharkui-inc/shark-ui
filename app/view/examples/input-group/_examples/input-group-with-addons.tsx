@@ -27,29 +27,27 @@ import { toast } from "@/registry/react/components/toast";
 const InputGroupWithAddons = () => (
   <FieldGroup>
     <Field>
-      <FieldLabel htmlFor="input-icon-left-05">Addon (inline-start)</FieldLabel>
+      <FieldLabel>Addon (inline-start)</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-icon-left-05" />
+        <InputGroupInput />
         <InputGroupAddon>
           <SearchIcon aria-hidden />
         </InputGroupAddon>
       </InputGroup>
     </Field>
     <Field>
-      <FieldLabel htmlFor="input-icon-right-07">Addon (inline-end)</FieldLabel>
+      <FieldLabel>Addon (inline-end)</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-icon-right-07" />
+        <InputGroupInput />
         <InputGroupAddon align="inline-end">
           <EyeOffIcon aria-hidden />
         </InputGroupAddon>
       </InputGroup>
     </Field>
     <Field>
-      <FieldLabel htmlFor="input-icon-both-09">
-        Addon (inline-start and inline-end)
-      </FieldLabel>
+      <FieldLabel>Addon (inline-start and inline-end)</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-icon-both-09" />
+        <InputGroupInput />
         <InputGroupAddon>
           <MicIcon aria-hidden />
         </InputGroupAddon>
@@ -59,9 +57,9 @@ const InputGroupWithAddons = () => (
       </InputGroup>
     </Field>
     <Field>
-      <FieldLabel htmlFor="input-addon-20">Addon (block-start)</FieldLabel>
+      <FieldLabel>Addon (block-start)</FieldLabel>
       <InputGroup className="h-auto">
-        <InputGroupInput id="input-addon-20" />
+        <InputGroupInput />
         <InputGroupAddon align="block-start">
           <InputGroupText>First Name</InputGroupText>
           <InfoIcon aria-hidden className="ml-auto text-muted-foreground" />
@@ -69,9 +67,9 @@ const InputGroupWithAddons = () => (
       </InputGroup>
     </Field>
     <Field>
-      <FieldLabel htmlFor="input-addon-21">Addon (block-end)</FieldLabel>
+      <FieldLabel>Addon (block-end)</FieldLabel>
       <InputGroup className="h-auto">
-        <InputGroupInput id="input-addon-21" />
+        <InputGroupInput />
         <InputGroupAddon align="block-end">
           <InputGroupText>20/240 characters</InputGroupText>
           <InfoIcon aria-hidden className="ml-auto text-muted-foreground" />
@@ -79,9 +77,9 @@ const InputGroupWithAddons = () => (
       </InputGroup>
     </Field>
     <Field>
-      <FieldLabel htmlFor="input-icon-both-10">Multiple Icons</FieldLabel>
+      <FieldLabel>Multiple Icons</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-icon-both-10" />
+        <InputGroupInput />
         <InputGroupAddon align="inline-end">
           <StarIcon aria-hidden />
           <InputGroupButton
@@ -98,9 +96,9 @@ const InputGroupWithAddons = () => (
       </InputGroup>
     </Field>
     <Field>
-      <FieldLabel htmlFor="input-description-10">Description</FieldLabel>
+      <FieldLabel>Description</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-description-10" />
+        <InputGroupInput />
         <InputGroupAddon align="inline-end">
           <InfoIcon aria-hidden />
         </InputGroupAddon>
@@ -110,15 +108,15 @@ const InputGroupWithAddons = () => (
       </FieldDescription>
     </Field>
     <Field>
-      <FieldLabel htmlFor="input-label-10">Label</FieldLabel>
+      <FieldLabel>Label</FieldLabel>
       <InputGroup>
         <InputGroupAddon>
-          <FieldLabel htmlFor="input-label-10">Label</FieldLabel>
+          <FieldLabel>Label</FieldLabel>
         </InputGroupAddon>
-        <InputGroupInput id="input-label-10" />
+        <InputGroupInput />
       </InputGroup>
       <InputGroup>
-        <InputGroupInput aria-label="Optional" id="input-optional-12" />
+        <InputGroupInput aria-label="Optional" />
         <InputGroupAddon align="inline-end">
           <InputGroupText>(optional)</InputGroupText>
         </InputGroupAddon>

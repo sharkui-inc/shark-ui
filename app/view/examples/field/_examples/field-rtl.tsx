@@ -32,35 +32,21 @@ const FieldRtl = () => (
           <FieldDescription>جميع المعاملات آمنة ومشفرة</FieldDescription>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="checkout-7j9-card-name-43j-rtl">
-                الاسم على البطاقة
-              </FieldLabel>
-              <Input
-                id="checkout-7j9-card-name-43j-rtl"
-                placeholder="Evil Rabbit"
-                required
-              />
+              <FieldLabel>الاسم على البطاقة</FieldLabel>
+              <Input placeholder="John Doe" required />
             </Field>
             <Field>
-              <FieldLabel htmlFor="checkout-7j9-card-number-uw1-rtl">
-                رقم البطاقة
-              </FieldLabel>
-              <Input
-                id="checkout-7j9-card-number-uw1-rtl"
-                placeholder="1234 5678 9012 3456"
-                required
-              />
+              <FieldLabel>رقم البطاقة</FieldLabel>
+              <Input placeholder="1234 5678 9012 3456" required />
               <FieldDescription>
                 أدخل رقم البطاقة المكون من 16 رقمًا
               </FieldDescription>
             </Field>
             <div className="grid grid-cols-3 gap-4">
               <Field>
-                <FieldLabel htmlFor="checkout-exp-month-ts6-rtl">
-                  الشهر
-                </FieldLabel>
+                <FieldLabel>الشهر</FieldLabel>
                 <Select collection={monthCollection}>
-                  <SelectTrigger id="checkout-exp-month-ts6-rtl">
+                  <SelectTrigger>
                     <SelectValue placeholder="ش.ش" />
                   </SelectTrigger>
                   <SelectContent>
@@ -75,11 +61,9 @@ const FieldRtl = () => (
                 </Select>
               </Field>
               <Field>
-                <FieldLabel htmlFor="checkout-7j9-exp-year-f59-rtl">
-                  السنة
-                </FieldLabel>
+                <FieldLabel>السنة</FieldLabel>
                 <Select collection={yearCollection}>
-                  <SelectTrigger id="checkout-7j9-exp-year-f59-rtl">
+                  <SelectTrigger>
                     <SelectValue placeholder="YYYY" />
                   </SelectTrigger>
                   <SelectContent>
@@ -94,8 +78,8 @@ const FieldRtl = () => (
                 </Select>
               </Field>
               <Field>
-                <FieldLabel htmlFor="checkout-7j9-cvv-rtl">CVV</FieldLabel>
-                <Input id="checkout-7j9-cvv-rtl" placeholder="123" required />
+                <FieldLabel>CVV</FieldLabel>
+                <Input placeholder="123" required />
               </Field>
             </div>
           </FieldGroup>
@@ -108,28 +92,17 @@ const FieldRtl = () => (
           </FieldDescription>
           <FieldGroup>
             <Field orientation="horizontal">
-              <Checkbox
-                defaultChecked
-                id="checkout-7j9-same-as-shipping-wgm-rtl"
-              />
-              <FieldLabel
-                className="font-normal"
-                htmlFor="checkout-7j9-same-as-shipping-wgm-rtl"
-              >
-                نفس عنوان الشحن
-              </FieldLabel>
+              <Checkbox defaultChecked />
+              <FieldLabel className="font-normal">نفس عنوان الشحن</FieldLabel>
             </Field>
           </FieldGroup>
         </FieldSet>
         <FieldSet>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="checkout-7j9-optional-comments-rtl">
-                تعليقات
-              </FieldLabel>
+              <FieldLabel>تعليقات</FieldLabel>
               <Textarea
                 className="resize-none"
-                id="checkout-7j9-optional-comments-rtl"
                 placeholder="أضف أي تعليقات إضافية"
               />
             </Field>
