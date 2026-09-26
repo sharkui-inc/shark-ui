@@ -32,23 +32,14 @@ import {
   FileUploadList,
 } from "@/registry/react/components/file-upload";
 
-const formSchema = v.object({
-  resume: v.pipe(
-    v.array(v.custom<File>((i) => i instanceof File)),
-    v.minLength(1, "Please upload at least one PDF or Word document.")
-  ),
-});
-
 const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: { resume: [] as File[] },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "resume-submitted",
-      title: "Resume uploaded",
       description: (
         <div className="mt-2 flex flex-col gap-2">
           <p className="text-muted-foreground text-sm">
@@ -70,6 +61,8 @@ const Example = () => {
           </pre>
         </div>
       ),
+      id: "resume-submitted",
+      title: "Resume uploaded",
     });
   };
 
@@ -84,7 +77,11 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["resume"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldLabel>Résumé</FieldLabel>
                   <FileUpload
                     accept=".pdf,.doc,.docx"
@@ -115,5 +112,12 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  resume: v.pipe(
+    v.array(v.custom<File>((i) => i instanceof File)),
+    v.minLength(1, "Please upload at least one PDF or Word document.")
+  ),
+});
 
 export default Example;

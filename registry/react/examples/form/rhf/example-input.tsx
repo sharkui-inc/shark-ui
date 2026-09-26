@@ -22,34 +22,23 @@ import {
 } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
 
-const formSchema = z.object({
-  username: z
-    .string()
-    .min(3, "Username must be at least 3 characters.")
-    .max(10, "Username must be at most 10 characters.")
-    .regex(
-      /^[a-zA-Z0-9_]+$/,
-      "Username can only contain letters, numbers, and underscores."
-    ),
-});
-
 const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
     },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "username-submitted",
-      title: "Username submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "username-submitted",
+      title: "Username submitted",
     });
   };
 
@@ -96,5 +85,16 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  username: z
+    .string()
+    .min(3, "Username must be at least 3 characters.")
+    .max(10, "Username must be at most 10 characters.")
+    .regex(
+      /^[a-zA-Z0-9_]+$/,
+      "Username can only contain letters, numbers, and underscores."
+    ),
+});
 
 export default Example;

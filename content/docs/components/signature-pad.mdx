@@ -1,10 +1,14 @@
 ---
 title: Signature Pad
 description: Capture hand-drawn signatures.
+seo:
+  description: Draw signatures on a canvas with clear and export.
 links:
   doc: https://ark-ui.com/docs/components/signature-pad
   api: https://ark-ui.com/docs/components/signature-pad#api-reference
 ---
+
+import manifest from "@/registry/manifest/signature-pad";
 
 <ComponentPreview componentName="signature-pad" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/signature-pad
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -59,21 +61,39 @@ import { SignaturePad } from "@/components/ui/signature-pad";
 <SignaturePad />
 ```
 
+## States
+
+### Disabled
+
+Use the `disabled` prop to prevent drawing.
+
+<ComponentPreview componentName="signature-pad" fileName="example-disabled" />
+
+### Read-only
+
+Use the `readOnly` prop to show a signature without allowing changes.
+
+<ComponentPreview componentName="signature-pad" fileName="example-readonly" />
+
 ## Examples
 
 ### Image preview
 
-Use the `onDrawEnd` callback to capture the signature as an image. 
+Use `onDrawEnd` to capture the signature as an image.
 
-The callback receives the `getDataUrl(type)` method that returns a promise that resolves to a data URL.
-
-<ComponentPreview componentName="signature-pad" fileName="example-image-preview" />
+<ComponentPreview componentName="signature-pad" fileName="example-image-preview" autoHeight />
 
 ### With field
 
-Wrap the signature pad in a `Field` with `FieldLabel` and `FieldHelper` for accessible form integration.
+Use [Field](/docs/components/field) with `FieldLabel` and `FieldHelper`.
 
 <ComponentPreview componentName="signature-pad" fileName="example-field" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="signature-pad" />
 
 ## API Reference
 
@@ -86,10 +106,20 @@ Root component. Canvas for drawing signatures. Manages strokes and export.
 | `disabled` | `boolean` | `false` |
 | `required` | `boolean` | `false` |
 | `readOnly` | `boolean` | `false` |
-| `name` | `string` | - |
-| `onDraw` | `(details: DrawDetails) => void` | - |
-| `onDrawEnd` | `(details: DrawEndDetails) => void` | - |
-| `className` | `string` | - |
+| `name` | `string` | `-` |
+| `paths` | `string[]` | `-` |
+| `defaultPaths` | `string[]` | `-` |
+| `onDraw` | `(details: DrawDetails) => void` | `-` |
+| `onDrawEnd` | `(details: DrawEndDetails) => void` | `-` |
+| `className` | `string` | `-` |
+
+### SignaturePadRootProvider
+
+Provides a SignaturePad API created with `useSignaturePad` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseSignaturePadReturn` | `required` |
 
 ---
 

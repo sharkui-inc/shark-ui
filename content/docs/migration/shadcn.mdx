@@ -1,0 +1,127 @@
+---
+title: shadcn/ui
+description: Migrate your project from shadcn/ui to Shark UI.
+links:
+  doc: https://ui.shadcn.com
+---
+
+[shadcn/ui](https://ui.shadcn.com) ships styled components on Radix, Base UI, or React Aria. Shark UI is built on [Ark UI](https://ark-ui.com) with the same copy-and-own workflow.
+
+What you change depends on which base your project uses. For Radix, Base UI, or React Aria without shadcn styling, see the [Radix UI](/docs/migration/radix), [Base UI](/docs/migration/base-ui), or [React Aria](/docs/migration/react-aria) guide.
+
+## Which base are you on?
+
+See how triggers and list components are composed in your repo.
+
+| Base | Config | What to change |
+| --- | --- | --- |
+| Radix | `radix` | Part names, collections, value arrays |
+| Base UI | `base` | `render` → `asChild` on triggers; collections on lists |
+| React Aria | `aria` | [React Aria guide](/docs/migration/react-aria) |
+
+Shark uses **`asChild`**, not `render`. Radix-based shadcn already matches that. Base UI shadcn does not.
+
+```tsx
+// shadcn (Radix base)
+<DropdownMenuTrigger asChild>
+  <Button variant="outline">Open</Button>
+</DropdownMenuTrigger>
+
+// Shark UI
+<MenuTrigger asChild>
+  <Button variant="outline">Open</Button>
+</MenuTrigger>
+```
+
+## What changes
+
+| Area | Difference |
+| --- | --- |
+| Select, Combobox | Pass Ark `collection`; Combobox filters with `useFilter` |
+| Toggle Group | Array values; no `type` prop |
+| Accordion | Array values; no `type`; `collapsible` is still supported |
+| Input OTP | Drop `input-otp` and `InputOTPGroup` |
+| Sidebar | Check `placement` and provider |
+| Dialog, Sheet, Drawer | Title part still required |
+
+## Component equivalents
+
+| shadcn/ui | Shark UI |
+| --- | --- |
+| Dropdown Menu | [Menu](/docs/components/menu) |
+| Sonner | [Toast](/docs/components/toast) |
+| Form + Label | [Field](/docs/components/field) |
+
+Full registry: [Components](/docs/components). Shark-only primitives include [Autocomplete](/docs/components/autocomplete), [Segment Group](/docs/components/segment-group), and [Floating Panel](/docs/components/floating-panel).
+
+## Combobox
+
+Shark Combobox uses an Ark collection. Filter it from `onInputValueChange` and render `collection.items`:
+
+```tsx
+"use client";
+
+import { useFilter, useListCollection } from "@ark-ui/react";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
+
+const ComboboxExample = () => {
+  const { contains } = useFilter({ sensitivity: "base" });
+  const { collection, filter } = useListCollection({
+    filter: contains,
+    initialItems: [
+      { label: "Apple", value: "apple" },
+      { label: "Banana", value: "banana" },
+    ],
+  });
+
+  return (
+    <Combobox
+      collection={collection}
+      onInputValueChange={({ inputValue, reason }) =>
+        filter(reason === "item-select" ? "" : inputValue)
+      }
+    >
+      <ComboboxInput placeholder="Select a fruit" />
+      <ComboboxContent>
+        <ComboboxEmpty />
+        <ComboboxList>
+          {collection.items.map((item) => (
+            <ComboboxItem item={item} key={item.value}>
+              {item.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+};
+
+export default ComboboxExample;
+```
+
+## Colors and tokens
+
+Same semantic model as shadcn (`background`, `primary`, `muted`, and the rest). Shark also ships:
+
+- `destructive-foreground`
+- `success` / `success-foreground`
+- `warning` / `warning-foreground`
+- `info` / `info-foreground`
+
+See [Colors](/docs/colors), [Styling](/docs/styling), and the [Theme editor](/themes).
+
+## Checklist
+
+- Replace shadcn imports with Shark components from the docs.
+- Match trigger composition to your shadcn base.
+- Add collections where list primitives require them.
+- Re-check controlled values against the Shark docs page.
+- Keep overlay titles and control labels accessible.
+- Use logical spacing for [RTL](/docs/rtl).

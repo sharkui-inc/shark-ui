@@ -1,17 +1,13 @@
 ---
 title: Sidebar
 description: A sidebar for navigation and app structure.
-links:
-  doc: https://ui.shadcn.com/docs/components/sidebar
-  api: https://ui.shadcn.com/docs/components/sidebar
+seo:
+  description: Collapsible app sidebar with groups and a mobile sheet.
 ---
-import { SidebarAnatomy } from "@/components/anatomy/sidebar";
 
-<PreviewIframe src="/view/blocks/sidebar/default" title="Sidebar Default" className="min-h-[550px]" />
+import manifest from "@/registry/manifest/sidebar";
 
-For full-page examples that wire the sidebar:
-
-Browse the Sidebar Components (soon).
+<PreviewIframe wide src="/view/blocks/sidebar/default" title="Sidebar Default" className="min-h-[550px]" />
 
 ## Installation
 
@@ -24,9 +20,34 @@ Browse the Sidebar Components (soon).
 
 <TabsContent value="cli">
 
+<Steps>
+
+<Step>Run the following command:</Step>
+
 ```bash
 npx shadcn@latest add @shark/sidebar
 ```
+
+<Step>Add the SidebarProvider component.</Step>
+
+```tsx title="app/layout.tsx"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
+
+export default function Layout({ children }) {
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <main>
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
+  )
+}
+```
+
+</Steps>
 
 </TabsContent>
 
@@ -34,12 +55,47 @@ npx shadcn@latest add @shark/sidebar
 
 <Steps>
 
-<Step>This component depends on [Button](/docs/components/button), [Input](/docs/components/input), [Scroll Area](/docs/components/scroll-area), [Separator](/docs/components/separator), [Sheet](/docs/components/sheet), [Skeleton](/docs/components/skeleton), [Tooltip](/docs/components/tooltip), and [useIsMobile](/docs/components/use-is-mobile). Install them first if you haven't already.</Step>
+<Step>This component depends on [Button](/docs/components/button), [Input](/docs/components/input), [Scroll Area](/docs/components/scroll-area), [Separator](/docs/components/separator), [Sheet](/docs/components/sheet), [Skeleton](/docs/components/skeleton), [Tooltip](/docs/components/tooltip), and [useMediaQuery](/docs/hooks/use-media-query). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants lucide-react
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Import the following variables into your CSS file:</Step>
+
+```css showLineNumbers
+@theme inline {
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --sidebar: var(--color-neutral-50);
+  --sidebar-foreground: color-mix(in srgb, var(--color-neutral-800) 80%, var(--sidebar));
+  --sidebar-primary: var(--color-neutral-800);
+  --sidebar-primary-foreground: var(--color-neutral-50);
+  --sidebar-accent: color-mix(in srgb, var(--color-neutral-950) 4%, var(--sidebar));
+  --sidebar-accent-foreground: var(--color-neutral-800);
+  --sidebar-border: color-mix(in srgb, var(--color-neutral-950) 6%, var(--sidebar));
+  --sidebar-ring: var(--color-neutral-600);
+}
+
+.dark {
+  --sidebar: color-mix(in srgb, var(--color-neutral-950) 97%, var(--color-neutral-50));
+  --sidebar-foreground: color-mix(in srgb, var(--color-neutral-100) 80%, var(--sidebar));
+  --sidebar-primary: var(--color-neutral-100);
+  --sidebar-primary-foreground: var(--color-neutral-800);
+  --sidebar-accent: color-mix(in srgb, var(--color-neutral-50) 4%, var(--sidebar));
+  --sidebar-accent-foreground: var(--color-neutral-100);
+  --sidebar-border: color-mix(in srgb, var(--color-neutral-50) 5%, var(--sidebar));
+  --sidebar-ring: var(--color-neutral-400);
+}
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -47,6 +103,25 @@ npm install @ark-ui/react tailwind-variants lucide-react
 <ComponentSource title="components/ui/sidebar.tsx" src="/sidebar.tsx" />
 
 <Step>Update the import paths to match your project setup.</Step>
+
+<Step>Add the SidebarProvider component.</Step>
+
+```tsx title="app/layout.tsx"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
+
+export default function Layout({ children }) {
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <main>
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
+  )
+}
+```
 
 </Steps>
 
@@ -66,13 +141,13 @@ SidebarProvider
 │   │       ├── SidebarGroupAction
 │   │       ├── SidebarGroupContent
 │   │       └── SidebarMenu
-│   │           ├── SidebarMenuItem
-│   │           │   ├── SidebarMenuButton
-│   │           │   ├── SidebarMenuAction
-│   │           │   └── SidebarMenuBadge
-│   │           └── SidebarMenuSub
-│   │               ├── SidebarMenuSubButton
-│   │               └── SidebarMenuSubItem
+│   │           └── SidebarMenuItem
+│   │               ├── SidebarMenuButton
+│   │               ├── SidebarMenuAction
+│   │               ├── SidebarMenuBadge
+│   │               └── SidebarMenuSub
+│   │                   └── SidebarMenuSubItem
+│   │                       └── SidebarMenuSubButton
 │   ├── SidebarFooter
 │   ├── SidebarSeparator
 │   └── SidebarInput
@@ -85,38 +160,17 @@ SidebarProvider
 
 Piecing a `Sidebar` together usually means:
 
-- `<SidebarProvider>` — Owns open/collapsed state, mobile sheet state, and keyboard shortcut handling.
-- `<Sidebar>` — Fixed (or sheet) column: `placement`, `variant`, and `collapsible` behavior.
-- `<SidebarHeader>` / `<SidebarFooter>` — Pin content to the top or bottom of the column.
-- `<SidebarContent>` — Scrollable middle; optional `scrollFade` on the inner scroll area.
-- `<SidebarGroup>` — Labeled section inside the scroll region.
-- `<SidebarTrigger>` — Icon/control wired to `useSidebar().toggleSidebar`.
-- `<SidebarInset>` — Main document column beside the sidebar (required for `variant="inset"`).
+- `<SidebarProvider>`: owns open/collapsed state, mobile sheet state, and keyboard shortcut handling.
+- `<Sidebar>`: fixed (or sheet) column: `placement`, `variant`, and `collapsible` behavior.
+- `<SidebarHeader>` / `<SidebarFooter>`: pin content to the top or bottom of the column.
+- `<SidebarContent>`: scrollable middle; edge fade on overflow by default (`scrollFade={false}` to disable).
+- `<SidebarGroup>`: labeled section inside the scroll region.
+- `<SidebarTrigger>`: icon/control wired to `useSidebar().toggleSidebar`.
+- `<SidebarInset>`: main document column beside the sidebar (required for `variant="inset"`).
 
-Optional helpers: `<SidebarRail>` (edge hit target), the `<SidebarMenu>` building blocks (submenus, badges, skeletons, actions)—same roles as in the upstream doc.
-
-<SidebarAnatomy title="Sidebar Anatomy" />
+Optional helpers: `<SidebarRail>` (edge hit target), the `<SidebarMenu>` building blocks (submenus, badges, skeletons, actions). Same roles as in the upstream doc.
 
 ## Usage
-
-`app/layout.tsx` keeps the provider at the top level:
-
-```tsx title="app/layout.tsx"
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
-
-export default function Layout({ children }: React.PropsWithChildren) {
-  return (
-    <SidebarProvider>
-      <AppSidebar />
-      <main>
-        <SidebarTrigger />
-        {children}
-      </main>
-    </SidebarProvider>
-  );
-}
-```
 
 The sidebar column itself is usually a dedicated module:
 
@@ -127,7 +181,7 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarHeader,
-} from "@/components/ui/sidebar";
+} from "@/components/ui/sidebar"
 
 export function AppSidebar() {
   return (
@@ -139,17 +193,15 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter />
     </Sidebar>
-  );
+  )
 }
 ```
 
 ## Controlled
 
-Use the `onOpenChange` prop to control the sidebar open state.
+Use `open` / `onOpenChange` to control the sidebar. On mobile, the sheet follows the same `open` state - set `open={false}` to close it, and mobile toggles fire `onOpenChange`.
 
 ```tsx
-"use client";
-
 import React from "react";
 import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
 
@@ -157,7 +209,7 @@ export const ControlledLayout = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <SidebarProvider onOpenChange={setOpen} open={open}>
+    <SidebarProvider onOpenChange={({ open }) => setOpen(open)} open={open}>
       <Sidebar />
     </SidebarProvider>
   );
@@ -170,12 +222,12 @@ Sidebar uses CSS variables to style the sidebar. See the full palette in [Colors
 
 ### Variable Reference
 
-- <div className="inline-block size-5 rounded border border-border bg-sidebar me-2 align-middle" /> `--sidebar` — Sidebar background
-- <div className="inline-block size-5 rounded border border-border bg-sidebar-foreground me-2 align-middle" /> `--sidebar-foreground` — Sidebar text
-- <div className="inline-block size-5 rounded border border-border bg-sidebar-primary me-2 align-middle" /> `--sidebar-primary` — Active item background
-- <div className="inline-block size-5 rounded border border-border bg-sidebar-accent me-2 align-middle" /> `--sidebar-accent` — Hover and active states
-- <div className="inline-block size-5 rounded border border-border bg-sidebar-border me-2 align-middle" /> `--sidebar-border` — Sidebar borders
-- <div className="inline-block size-5 rounded border border-border bg-sidebar-ring me-2 align-middle" /> `--sidebar-ring` — Focus rings
+- <div className="inline-block size-5 rounded border border-border bg-sidebar me-2 align-middle" /> `--sidebar`: sidebar background
+- <div className="inline-block size-5 rounded border border-border bg-sidebar-foreground me-2 align-middle" /> `--sidebar-foreground`: sidebar text
+- <div className="inline-block size-5 rounded border border-border bg-sidebar-primary me-2 align-middle" /> `--sidebar-primary`: active item background
+- <div className="inline-block size-5 rounded border border-border bg-sidebar-accent me-2 align-middle" /> `--sidebar-accent`: hover and active states
+- <div className="inline-block size-5 rounded border border-border bg-sidebar-border me-2 align-middle" /> `--sidebar-border`: sidebar borders
+- <div className="inline-block size-5 rounded border border-border bg-sidebar-ring me-2 align-middle" /> `--sidebar-ring`: focus rings
 
 Learn more about styling in the [Styling](/docs/styling) section.
 
@@ -202,21 +254,29 @@ React to collapse mode and peer state with utilities.
 
 The toggle listens for **`⌘B`** on macOS and **`Ctrl+B`** elsewhere (`SIDEBAR_KEYBOARD_SHORTCUT` in source). Match that expectation in shortcuts or help copy.
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+`placement` on `Sidebar` maps to **inline edges** like [Sheet](/docs/components/sheet): `"left"` is inline-start, `"right"` is inline-end. Under `dir="rtl"`, the default `placement="left"` sits on the right. Desktop and mobile (Sheet) share that mapping.
+
+<PreviewIframe wide side="right" src="/view/blocks/sidebar/rtl" title="Sidebar RTL" className="min-h-[550px]" />
+
 ## API Reference
 
 ### SidebarProvider
 
-`SidebarProvider` must wrap any tree that calls `useSidebar` or renders `Sidebar` / `SidebarTrigger`. It forwards standard `div` props (including `className` and `style`).
+Provides open/collapsed state. Wrap any tree that uses `Sidebar`, `SidebarTrigger`, or `useSidebar`.
 
-| Name | Type | Description |
+| Prop | Type | Default |
 | --- | --- | --- |
-| `defaultOpen` | `boolean` | Initial open state on desktop (`true` by default). |
-| `open` | `boolean` | Controlled open flag. |
-| `onOpenChange` | `(open: boolean) => void` | Fires when the open flag changes. |
+| `defaultOpen` | `boolean` | `true` |
+| `open` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
 
 #### Width
 
-Defaults live beside `SIDEBAR_WIDTH` and `SIDEBAR_WIDTH_MOBILE` inside the registry file. Override per layout with CSS variables on the provider:
+Override with CSS variables on the provider:
 
 ```tsx
 <SidebarProvider
@@ -231,31 +291,33 @@ Defaults live beside `SIDEBAR_WIDTH` and `SIDEBAR_WIDTH_MOBILE` inside the regis
 </SidebarProvider>
 ```
 
-| Attribute | Default |
-| --- | --- |
-| `--sidebar-width` | `16rem` |
-| `--sidebar-width-mobile` | `18rem` |
-| `--sidebar-width-icon` | `3rem` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--sidebar-width` | `string` | `16rem` |
+| `--sidebar-width-mobile` | `string` | `18rem` |
+| `--sidebar-width-icon` | `string` | `3rem` |
 
 ### Sidebar
 
-Primary column component: desktop fixed strip + mobile sheet (via [Sheet](/docs/components/sheet)).
+The sidebar column. Fixed on desktop, sheet on mobile.
 
-| Property | Type | Description |
+| Prop | Type | Default |
 | --- | --- | --- |
-| `placement` | `"left" \| "right"` | Which horizontal edge the column hugs (same idea as “side” in shadcn). |
-| `variant` | `"sidebar" \| "floating" \| "inset"` | Visual treatment: flush rail, floating panel, or inset shell. |
-| `collapsible` | `"offcanvas" \| "icon" \| "none"` | How width collapses. |
+| `placement` | `"left" \| "right"` | `"left"` |
+| `variant` | `"sidebar" \| "floating" \| "inset"` | `"sidebar"` |
+| `collapsible` | `"offcanvas" \| "icon" \| "none"` | `"offcanvas"` |
+
+`placement` follows reading order: `"left"` = inline-start, `"right"` = inline-end. See [RTL](#rtl).
 
 ### Collapsible modes
 
-| Mode | Behavior |
-| --- | --- |
-| `offcanvas` | Collapses off-screen; rail can recall it. |
-| `icon` | Shrinks to an icon rail. |
-| `none` | Fixed width; no collapse animation. |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `offcanvas` | `string` | `-` |
+| `icon` | `string` | `-` |
+| `none` | `string` | `-` |
 
-With **`variant="inset"`**, park page content in **`SidebarInset`** so padding, radius, and background line up with the inset shell:
+With `variant="inset"`, put page content in `SidebarInset`:
 
 ```tsx
 <SidebarProvider>
@@ -266,7 +328,18 @@ With **`variant="inset"`**, park page content in **`SidebarInset`** so padding, 
 </SidebarProvider>
 ```
 
+### SidebarInset
+
+Main content beside the sidebar. Required for `variant="inset"`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
 ### useSidebar
+
+Access sidebar state and actions.
 
 ```tsx
 import { useSidebar } from "@/components/ui/sidebar";
@@ -284,19 +357,24 @@ export function Example() {
 }
 ```
 
-| Property | Type | Description |
+| Prop | Type | Default |
 | --- | --- | --- |
-| `state` | `"expanded" \| "collapsed"` | Desktop collapse mode. |
-| `open` | `boolean` | Desktop drawer expanded. |
-| `setOpen` | `(open: boolean) => void` | Set desktop open. |
-| `openMobile` | `boolean` | Mobile sheet visibility. |
-| `setOpenMobile` | `(open: boolean) => void` | Control the sheet. |
-| `isMobile` | `boolean` | Breakpoint-derived mobile flag. |
-| `toggleSidebar` | `() => void` | Toggles desktop or mobile as appropriate. |
+| `state` | `"expanded" \| "collapsed"` | `-` |
+| `open` | `boolean` | `-` |
+| `setOpen` | `(open: boolean) => void` | `-` |
+| `openMobile` | `boolean` | `-` |
+| `setOpenMobile` | `(open: boolean) => void` | `-` |
+| `isMobile` | `boolean` | `-` |
+| `toggleSidebar` | `() => void` | `-` |
 
 ### SidebarHeader
 
-Sticky top region—common pattern: workspace switcher or brand row inside a `SidebarMenu`.
+Top section. Brand, workspace switcher, etc.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ```tsx
 <Sidebar>
@@ -313,11 +391,14 @@ Sticky top region—common pattern: workspace switcher or brand row inside a `Si
 </Sidebar>
 ```
 
-Wire menus or [Menu](/docs/components/menu) triggers to `SidebarMenuButton` as needed.
-
 ### SidebarFooter
 
-Sticky bottom slot—profile, settings entry, sign-out, etc.
+Bottom section. Profile, settings, sign-out.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ```tsx
 <Sidebar>
@@ -333,9 +414,32 @@ Sticky bottom slot—profile, settings entry, sign-out, etc.
 </Sidebar>
 ```
 
+### SidebarInput
+
+Search or filter input.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### SidebarSeparator
+
+Horizontal divider.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
 ### SidebarContent
 
-Wraps scrollable groups. Pass **`scrollFade`** when you want a fade on vertical overflow (see component props in source).
+Scrollable middle section. Edge fade on overflow (`scrollFade={false}` to disable).
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ```tsx
 <Sidebar>
@@ -346,13 +450,18 @@ Wraps scrollable groups. Pass **`scrollFade`** when you want a fade on vertical 
 </Sidebar>
 ```
 
-| Attribute | Default |
-| --- | --- |
-| `--fade-size` | `3rem` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--fade-size` | `string` | `3rem` |
 
 ### SidebarGroup
 
-A titled block with optional `SidebarGroupAction` and `SidebarGroupContent`.
+Labeled section inside `SidebarContent`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ```tsx
 <SidebarGroup>
@@ -364,7 +473,7 @@ A titled block with optional `SidebarGroupAction` and `SidebarGroupContent`.
 </SidebarGroup>
 ```
 
-Collapsible groups pair with [Collapsible](/docs/components/collapsible). `SidebarGroupLabel` is a plain label slot—keep the trigger beside it (or fold the pattern into `SidebarMenu` like the preview at the top of this page):
+For collapsible groups, wrap with [Collapsible](/docs/components/collapsible):
 
 ```tsx
 <Collapsible className="group/collapsible" defaultOpen>
@@ -372,7 +481,7 @@ Collapsible groups pair with [Collapsible](/docs/components/collapsible). `Sideb
     <div className="flex items-center gap-2 px-2">
       <SidebarGroupLabel className="flex-1 px-0">Help</SidebarGroupLabel>
       <CollapsibleTrigger
-        className="rounded-md p-1.5 outline-none ring-sidebar-ring focus-visible:ring-2"
+        className="rounded-md border border-transparent p-1.5 outline-hidden focus-visible:border-sidebar-ring/64 focus-visible:ring-2 focus-visible:ring-sidebar-ring/24"
         type="button"
       >
         <ChevronDown className="size-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
@@ -385,9 +494,41 @@ Collapsible groups pair with [Collapsible](/docs/components/collapsible). `Sideb
 </Collapsible>
 ```
 
+### SidebarGroupLabel
+
+Group title.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### SidebarGroupAction
+
+Action in the group header.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### SidebarGroupContent
+
+Group body.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
 ### SidebarMenu
 
-Row list inside a group—map data to `SidebarMenuItem` / `SidebarMenuButton`.
+Menu list inside a group.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ```tsx
 <SidebarMenu>
@@ -404,9 +545,23 @@ Row list inside a group—map data to `SidebarMenuItem` / `SidebarMenuButton`.
 </SidebarMenu>
 ```
 
+### SidebarMenuItem
+
+Single menu row.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
 ### SidebarMenuButton
 
-Default renders a **Button**; use **`asChild`** for links. **`isActive`** highlights the active route; **`tooltip`** surfaces collapsed labels.
+Menu button. Use `asChild` for links, `isActive` for the current route, `tooltip` when collapsed.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ```tsx
 <SidebarMenuButton asChild isActive>
@@ -416,7 +571,12 @@ Default renders a **Button**; use **`asChild`** for links. **`isActive`** highli
 
 ### SidebarMenuAction
 
-Icon-only or compact action aligned to a row. Use **`showOnHover`** to reveal on row hover.
+Row action. `showOnHover` reveals it on hover.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ```tsx
 <SidebarMenuItem>
@@ -434,7 +594,12 @@ Icon-only or compact action aligned to a row. Use **`showOnHover`** to reveal on
 
 ### SidebarMenuSub
 
-Nested list hanging off a parent item.
+Nested menu under a parent item.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ```tsx
 <SidebarMenuItem>
@@ -447,9 +612,32 @@ Nested list hanging off a parent item.
 </SidebarMenuItem>
 ```
 
+### SidebarMenuSubItem
+
+Nested menu row.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### SidebarMenuSubButton
+
+Nested menu button.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
 ### SidebarMenuBadge
 
-Small count or pill beside a row.
+Badge on a menu row.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ```tsx
 <SidebarMenuItem>
@@ -460,7 +648,12 @@ Small count or pill beside a row.
 
 ### SidebarMenuSkeleton
 
-Placeholder rows while async routes or prefs load.
+Loading placeholder for a menu row.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ```tsx
 <SidebarMenu>
@@ -474,22 +667,31 @@ Placeholder rows while async routes or prefs load.
 
 ### SidebarTrigger
 
-Prebuilt toggle wired to context—drop next to your page title or in a toolbar.
+Toggles the sidebar.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ```tsx
 import { useSidebar } from "@/components/ui/sidebar";
 
 export function CustomTrigger() {
   const { toggleSidebar } = useSidebar();
+
   return <button type="button" onClick={toggleSidebar}>Toggle</button>;
 }
 ```
 
-Prefer `SidebarTrigger` when you want the default styling and accessibility bundle.
-
 ### SidebarRail
 
-Draggable edge control that expands or collapses the desktop rail—place after header/content/footer inside `Sidebar`.
+Edge hit target to expand or collapse. Place inside `Sidebar`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ```tsx
 <Sidebar>

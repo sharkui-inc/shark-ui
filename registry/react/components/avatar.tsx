@@ -1,6 +1,10 @@
 "use client";
 
-import { Avatar as ArkAvatar, useAvatarContext } from "@ark-ui/react/avatar";
+import {
+  Avatar as ArkAvatar,
+  useAvatar as useArkAvatar,
+  useAvatarContext as useArkAvatarContext,
+} from "@ark-ui/react/avatar";
 import { ark } from "@ark-ui/react/factory";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
@@ -10,7 +14,9 @@ import {
   type statusVariants,
 } from "@/registry/react/components/status";
 
-export const useAvatar = useAvatarContext;
+export const useAvatar = useArkAvatar;
+export const useAvatarContext = useArkAvatarContext;
+export const AvatarRootProvider = ArkAvatar.RootProvider;
 
 const avatarVariants = tv({
   base: [
@@ -23,15 +29,15 @@ const avatarVariants = tv({
     "rounded-full",
     "after:absolute after:inset-0 after:rounded-[inherit] after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten",
   ],
-  variants: {
-    size: {
-      sm: "size-6",
-      md: "size-8",
-      lg: "size-10",
-    },
-  },
   defaultVariants: {
     size: "md",
+  },
+  variants: {
+    size: {
+      lg: "size-10",
+      md: "size-8",
+      sm: "size-6",
+    },
   },
 });
 
@@ -105,7 +111,7 @@ export const AvatarBadge = (props: AvatarBadgeProps) => {
         "absolute inset-e-0 bottom-0 z-10",
         "flex items-center justify-center",
         "group-data-[size=sm]/avatar:size-2 group-data-[size=sm]/avatar:[&_svg]:hidden",
-        "group-data-[size=default]/avatar:size-2.5 group-data-[size=default]/avatar:[&_svg]:size-2",
+        "group-data-[size=md]/avatar:size-2.5 group-data-[size=md]/avatar:[&_svg]:size-2",
         "group-data-[size=lg]/avatar:size-3 group-data-[size=lg]/avatar:[&_svg]:size-2",
         className
       )}

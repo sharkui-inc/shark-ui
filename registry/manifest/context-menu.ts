@@ -1,13 +1,13 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "lucide-react", "tailwind-variants"];
 
 const manifest: RegistryItemType = {
-  name: "context-menu",
-  type: "registry:ui",
   dependencies,
-  registryDependencies: [absoluteUrl("/r/menu.json")],
+  name: "context-menu",
+  registryDependencies: [registryUrl("/r/menu.json")],
+  type: "registry:ui",
 };
 
 export default manifest;

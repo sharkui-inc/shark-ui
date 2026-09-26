@@ -1,37 +1,69 @@
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
+import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
 export const badgeVariants = tv({
   base: [
     "relative",
-    "inline-flex items-center justify-center gap-1",
+    "inline-flex w-fit shrink-0 items-center justify-center gap-1",
     "select-none whitespace-nowrap font-medium text-xs",
-    "rounded-md border border-transparent",
+    "border border-transparent",
     "overflow-hidden",
     "transition-colors",
-    "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+    "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
     "[&_svg]:pointer-events-none [&_svg]:size-3 [&_svg]:shrink-0",
-    "[button&,a&]:cursor-pointer [button&,a&]:pointer-coarse:after:absolute [button&,a&]:pointer-coarse:after:size-full [button&,a&]:pointer-coarse:after:min-h-11 [button&,a&]:pointer-coarse:after:min-w-11",
-    "motion-reduce:transition-none!",
+    "has-[>[data-icon=inline-start]]:ps-[calc(var(--badge-px)-(--spacing(0.5)))] has-[>[data-icon=inline-end]]:pe-[calc(var(--badge-px)-(--spacing(0.5)))]",
+    "[&_[data-icon=inline-end]]:order-last [&_[data-icon=inline-start]]:order-first",
+    "[button&,a&]:cursor-pointer",
+    "motion-reduce:transition-none",
   ],
+  defaultVariants: {
+    pill: false,
+    size: "md",
+    variant: "default",
+  },
   variants: {
+    pill: {
+      false: "rounded-md",
+      true: [
+        "rounded-full",
+        "has-[>svg]:data-[size=sm]:pe-1.5",
+        "has-[>svg]:data-[size=md]:pe-2",
+        "has-[>svg]:data-[size=lg]:pe-2 sm:has-[>svg]:data-[size=lg]:pe-2.5",
+        "has-[>[data-icon=inline-start]]:pe-(--badge-px)",
+      ],
+    },
+    size: {
+      lg: [
+        "[--badge-px:--spacing(2)]",
+        "h-6.5 min-w-6.5",
+        "px-(--badge-px)",
+        "text-sm",
+      ],
+      md: ["[--badge-px:--spacing(1.5)]", "h-5.5 min-w-5.5", "px-(--badge-px)"],
+      sm: ["[--badge-px:--spacing(1)]", "h-5 min-w-5", "px-(--badge-px)"],
+    },
     variant: {
       default: [
-        "bg-foreground",
-        "text-background",
-        "focus-visible:border-foreground focus-visible:ring-foreground/20",
-        "dark:focus-visible:ring-foreground/40",
-        "[a&]:hover:bg-foreground/90",
+        "bg-primary",
+        "text-primary-foreground",
+        "[a&]:hover:bg-primary-hover",
+        "focus-visible:border-background",
       ],
-      secondary: [
-        "bg-secondary",
-        "text-secondary-foreground",
-        "border-secondary/20",
-        "focus-visible:border-foreground focus-visible:ring-foreground/50",
-        "[a&]:hover:bg-secondary/90",
+      destructive: [
+        "bg-destructive/8 dark:bg-destructive/8",
+        "text-destructive-foreground",
+        "border-destructive-foreground/24",
+        "[a&]:hover:bg-destructive/24",
+      ],
+      info: [
+        "bg-info/8",
+        "text-info-foreground",
+        "border-info-foreground/24",
+        "[a&]:hover:bg-info/24",
       ],
       outline: [
         "text-foreground",
@@ -39,55 +71,25 @@ export const badgeVariants = tv({
         "[a&]:hover:bg-accent",
         "[a&]:hover:text-accent-foreground",
       ],
-      success: [
-        "bg-success/10",
-        "text-success",
-        "border-success/20",
-        "focus-visible:border-success focus-visible:ring-success/20",
-        "[a&]:hover:bg-success/20",
+      secondary: [
+        "bg-secondary",
+        "text-secondary-foreground",
+        "border-secondary/24",
+        "[a&]:hover:bg-secondary-hover",
       ],
-      info: [
-        "bg-info/10",
-        "text-info",
-        "border-info/20",
-        "focus-visible:border-info focus-visible:ring-info/50",
-        "[a&]:hover:bg-info/20",
+      success: [
+        "bg-success/8",
+        "text-success-foreground",
+        "border-success-foreground/24",
+        "[a&]:hover:bg-success/24",
       ],
       warning: [
-        "bg-warning/10",
-        "text-warning",
-        "border-warning/20",
-        "focus-visible:border-warning focus-visible:ring-warning/20",
-        "dark:focus-visible:ring-warning/40",
-        "[a&]:hover:bg-warning/20",
-      ],
-      destructive: [
-        "bg-destructive/10 dark:bg-destructive/5",
-        "text-destructive-foreground",
-        "border-destructive-foreground/20",
-        "focus-visible:border-destructive focus-visible:ring-destructive/24",
-        "dark:focus-visible:ring-destructive/40",
-        "[a&]:hover:bg-destructive/20",
+        "bg-warning/8",
+        "text-warning-foreground",
+        "border-warning-foreground/24",
+        "[a&]:hover:bg-warning/24",
       ],
     },
-    size: {
-      sm: ["h-5 min-w-5", "px-1"],
-      md: ["h-5.5 min-w-5.5", "px-1.5"],
-      lg: ["h-6.5 min-w-6.5", "px-2", "text-sm"],
-    },
-    pill: {
-      true: [
-        "rounded-full",
-        "has-[>svg]:data-[size=sm]:pe-1.5",
-        "has-[>svg]:data-[size=md]:pe-2",
-        "has-[>svg]:data-[size=lg]:pe-2 sm:has-[>svg]:data-[size=lg]:pe-2.5",
-      ],
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-    size: "md",
-    pill: false,
   },
 });
 
@@ -108,7 +110,7 @@ export const Badge = (props: BadgeProps) => {
 
   return (
     <ark.span
-      className={cn(badgeVariants({ variant, size, pill }), className)}
+      className={cn(badgeVariants({ pill, size, variant }), className)}
       data-size={size}
       data-slot="badge"
       data-variant={variant}

@@ -1,0 +1,24 @@
+---
+title: Migration
+description: Guides for moving components from another library to Shark UI.
+---
+
+import { MigrationList } from "@/components/mdx-components/migration-list";
+
+## Migrate from
+
+<MigrationList />
+
+Examples assume you install the Shark components you need from the registry. They show common API changes; check each component's page for its current anatomy, props, and setup before adapting your code.
+
+## How it works
+
+Shark UI follows the copy-and-own model: components land in your repository through the CLI or by copying source from the docs. You edit the files directly. There is no opaque package layer between your app and the implementation.
+
+## Colors and styling
+
+Shark adds `success`, `warning`, and `info` on top of the usual semantic set. Radius scales from a single `--radius` variable.
+
+- [Colors](/docs/colors): token reference and neutral scale
+- [Styling](/docs/styling): `globals.css` setup, token convention, radius scale
+- [Theme editor](/themes): preview primary, gray, and radius without editing CSS by hand

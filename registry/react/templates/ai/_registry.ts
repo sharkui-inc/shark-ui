@@ -1,0 +1,85 @@
+import type { TemplateDefinition } from "@/lib/registry";
+import { registryUrl } from "@/lib/url";
+
+export const aiTemplates = [
+  {
+    category: "ai",
+    dependencies: ["@ark-ui/react", "lucide-react"],
+    description:
+      "Full AI chat workspace with sidebar history, projects, thread, and composer.",
+    files: [
+      {
+        path: "templates/ai/ai-chat-workspace-01/page.tsx",
+        source: "page.tsx",
+        target: "app/ai-chat/page.tsx",
+        type: "registry:page",
+      },
+      {
+        path: "templates/ai/ai-chat-workspace-01/components/ai-chat.tsx",
+        source: "components/ai-chat.tsx",
+        target: "@components/ai-chat/ai-chat.tsx",
+        type: "registry:component",
+      },
+      {
+        path: "templates/ai/ai-chat-workspace-01/components/chat-composer.tsx",
+        source: "components/chat-composer.tsx",
+        target: "@components/ai-chat/chat-composer.tsx",
+        type: "registry:component",
+      },
+      {
+        path: "templates/ai/ai-chat-workspace-01/components/chat-projects.tsx",
+        source: "components/chat-projects.tsx",
+        target: "@components/ai-chat/chat-projects.tsx",
+        type: "registry:component",
+      },
+      {
+        path: "templates/ai/ai-chat-workspace-01/components/chat-sidebar.tsx",
+        source: "components/chat-sidebar.tsx",
+        target: "@components/ai-chat/chat-sidebar.tsx",
+        type: "registry:component",
+      },
+      {
+        path: "templates/ai/ai-chat-workspace-01/components/chat-thread.tsx",
+        source: "components/chat-thread.tsx",
+        target: "@components/ai-chat/chat-thread.tsx",
+        type: "registry:component",
+      },
+    ],
+    meta: {
+      featured: true,
+      order: 1,
+      previewHeight: 820,
+    },
+    name: "ai-chat-workspace-01",
+    preview: () => import("./ai-chat-workspace-01/page"),
+    registryDependencies: [
+      registryUrl("/r/announcement.json"),
+      registryUrl("/r/approval-card.json"),
+      registryUrl("/r/attachment.json"),
+      registryUrl("/r/avatar.json"),
+      registryUrl("/r/badge.json"),
+      registryUrl("/r/breadcrumb.json"),
+      registryUrl("/r/button.json"),
+      registryUrl("/r/card.json"),
+      registryUrl("/r/combobox.json"),
+      registryUrl("/r/context.json"),
+      registryUrl("/r/file-upload.json"),
+      registryUrl("/r/icon-tile.json"),
+      registryUrl("/r/input-group.json"),
+      registryUrl("/r/message.json"),
+      registryUrl("/r/message-bubble.json"),
+      registryUrl("/r/message-scroller.json"),
+      registryUrl("/r/plan.json"),
+      registryUrl("/r/prompt-input.json"),
+      registryUrl("/r/queue.json"),
+      registryUrl("/r/reasoning.json"),
+      registryUrl("/r/sidebar.json"),
+      registryUrl("/r/sources.json"),
+      registryUrl("/r/suggestion.json"),
+      registryUrl("/r/toggle.json"),
+      registryUrl("/r/tool-result.json"),
+    ],
+    title: "AI Chat",
+    type: "registry:block",
+  },
+] as const satisfies readonly TemplateDefinition[];

@@ -1,10 +1,14 @@
 ---
 title: Listbox
-description: Select a single or multiple items from a list.
+description: Select one or many items from a list.
+seo:
+  description: Select one or many items from an inline list.
 links:
   doc: https://ark-ui.com/docs/components/listbox
   api: https://ark-ui.com/docs/components/listbox#api-reference
 ---
+
+import manifest from "@/registry/manifest/listbox";
 
 <ComponentPreview componentName="listbox" />
 
@@ -29,13 +33,11 @@ npx shadcn@latest add @shark/listbox
 
 <Steps>
 
-<Step>This component depends on [Menu](/docs/components/menu). Install it first if you haven't already.</Step>
+<Step>This component depends on [Field](/docs/components/field) and [Menu](/docs/components/menu). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -53,6 +55,8 @@ npm install @ark-ui/react tailwind-variants lucide-react
 
 ```text
 Listbox
+├── ListboxLabel
+├── ListboxInput
 ├── ListboxValueText
 └── ListboxContent
     ├── ListboxEmpty
@@ -60,6 +64,7 @@ Listbox
         ├── ListboxItemGroupLabel
         └── ListboxItem
             ├── ListboxItemText
+            ├── ListboxItemDescription
             ├── ListboxItemIndicator
             └── ListboxShortcut
 ```
@@ -86,6 +91,7 @@ const collection = createListCollection({
 });
 
 <Listbox collection={collection}>
+  <ListboxLabel>Country</ListboxLabel>
   <ListboxContent>
     {collection.items.map((item) => (
       <ListboxItem item={item} key={item.value}>
@@ -113,6 +119,10 @@ Disable the entire listbox with the `disabled` prop.
 ## Orientation
 
 Use `orientation` prop to change the orientation of the listbox.
+
+### Vertical
+
+<ComponentPreview componentName="listbox" fileName="example-vertical" />
 
 ### Horizontal
 
@@ -148,9 +158,11 @@ Set `selectionMode="none"` to disable selection.
 
 <ComponentPreview componentName="listbox" fileName="example-with-description" />
 
-### Image Explorer
+### Without Indicator
 
-<ComponentPreview componentName="listbox" fileName="example-image-explorer" />
+Set `showIndicator={false}` on `ListboxItem` to hide the selected item checkmark.
+
+<ComponentPreview componentName="listbox" fileName="example-without-indicator" />
 
 ### Transfer List
 
@@ -158,27 +170,37 @@ Set `selectionMode="none"` to disable selection.
 
 ### Grouping
 
-Use `groupBy` in `createListCollection` and `<ListboxItemGroup heading={}>` with `<ListboxItemGroupLabel>` to group items.
+Use `groupBy` in `createListCollection`.
 
 <ComponentPreview componentName="listbox" fileName="example-grouping" />
 
 ### With Filter
 
-Filter items using `useListCollection` with `useFilter` from `@ark-ui/react`. Call `filter` when the search input changes to filter items by label.
+Filter items with `ListboxInput`, `useListCollection`, and `useFilter`.
 
 <ComponentPreview componentName="listbox" fileName="example-with-filter" />
 
 ### With Popover
 
-Use the listbox within a popover to create dropdown-like selection menus that overlay other content without taking up permanent screen space.
+Use the listbox inside a popover.
 
 <ComponentPreview componentName="listbox" fileName="example-with-popover" />
 
 ### Grid Layout
 
-Use `createGridCollection` with `columnCount` and grid CSS for a grid layout.
+Use `createGridCollection` with `columnCount`.
 
 <ComponentPreview componentName="listbox" fileName="example-grid" />
+
+### Scrollable
+
+<ComponentPreview componentName="listbox" fileName="example-scrollable" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="listbox" />
 
 ## API Reference
 
@@ -188,15 +210,36 @@ Root component. Manages selection state and keyboard navigation.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `ListCollection<T>` | **required** |
-| `value` | `string[]` | - |
+| `collection` | `ListCollection<T>` | `required` |
+| `value` | `string[]` | `-` |
 | `defaultValue` | `string[]` | `[]` |
-| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
+| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | `-` |
 | `selectionMode` | `"single" \| "multiple" \| "extended"` | `"single"` |
 | `orientation` | `"vertical" \| "horizontal"` | `"vertical"` |
-| `disabled` | `boolean` | - |
-| `deselectable` | `boolean` | - |
+| `disabled` | `boolean` | `-` |
+| `deselectable` | `boolean` | `-` |
 | `loopFocus` | `boolean` | `false` |
+
+### ListboxLabel
+
+Accessible label. Render as a child of `Listbox`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ListboxInput
+
+Filter input for the listbox. Use with `useListCollection` and `onChange` to filter items.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `autoHighlight` | `boolean` | `false` |
+| `keyboardPriority` | `"caret" \| "navigate"` | `"caret"` |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `pill` | `boolean` | `false` |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxContent
 
@@ -204,8 +247,8 @@ Holds the list of options.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxItem
 
@@ -213,10 +256,11 @@ A single selectable list option.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `item` | `T` | **required** |
+| `item` | `T` | `required` |
 | `variant` | `"default" \| "destructive"` | `"default"` |
-| `asChild` | `boolean` | - |
-| `highlightOnHover` | `boolean` | - |
+| `showIndicator` | `boolean` | `true` |
+| `asChild` | `boolean` | `-` |
+| `highlightOnHover` | `boolean` | `-` |
 
 ### ListboxItemText
 
@@ -224,18 +268,18 @@ Text content for a list item.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxItemIndicator
 
-Checkmark or icon shown when the item is selected.
+Checkmark or icon shown when the item is selected. `ListboxItem` includes this by default; use it for custom indicator composition.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `children` | `ReactNode` | `CheckIcon` |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxItemGroup
 
@@ -243,9 +287,9 @@ Groups related options. Use `heading` or `ListboxItemGroupLabel` for a label.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string` | - |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `heading` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxItemGroupLabel
 
@@ -253,8 +297,8 @@ Label for a group. Must be used inside `ListboxItemGroup`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxValueText
 
@@ -262,9 +306,9 @@ Shows the selected value(s) as text. Use for custom trigger or display.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `placeholder` | `string` | - |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `placeholder` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### ListboxEmpty
 
@@ -272,12 +316,33 @@ Shown when the list has no items. Use for empty states.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
 
 ### ListboxShortcut
 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 Optional keyboard shortcut hint shown next to an item.
+
+### ListboxRootProvider
+
+Provides a Listbox API created with `useListbox` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseListboxReturn` | `required` |
+
+### ListboxItemDescription
+
+Public ListboxItemDescription component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

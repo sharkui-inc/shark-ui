@@ -1,11 +1,13 @@
 import type { RegistryItemType } from "@/lib/registry";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react"];
 
 const manifest: RegistryItemType = {
-  name: "textarea",
-  type: "registry:ui",
   dependencies,
+  name: "textarea",
+  registryDependencies: [registryUrl("/r/input.json")],
+  type: "registry:ui",
 };
 
 export default manifest;

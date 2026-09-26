@@ -1,7 +1,11 @@
 ---
 title: Breadcrumb
-description: Shows user location within a hierarchy.
+description: Trail of links in a page hierarchy.
+seo:
+  description: Trail of links that shows where you are in a page hierarchy.
 ---
+
+import manifest from "@/registry/manifest/breadcrumb";
 
 <ComponentPreview componentName="breadcrumb" />
 
@@ -28,9 +32,7 @@ npx shadcn@latest add @shark/breadcrumb
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -104,6 +106,12 @@ import {
 ### With menu
 
 <ComponentPreview componentName="breadcrumb" fileName="example-with-menu" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="breadcrumb" />
 
 ## API Reference
 

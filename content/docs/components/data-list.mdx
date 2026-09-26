@@ -1,7 +1,11 @@
 ---
 title: Data List
-description: A list of label-value pairs.
+description: List of label-value pairs.
+seo:
+  description: Label and value pairs for metadata and detail panels.
 ---
+
+import manifest from "@/registry/manifest/data-list";
 
 <ComponentPreview componentName="data-list" />
 
@@ -24,9 +28,7 @@ npx shadcn@latest add @shark/data-list
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -95,6 +97,12 @@ Use the `divide-y` utility class on `DataList` to add a separator between items.
 
 <ComponentPreview componentName="data-list" fileName="example-separator" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="data-list" />
+
 ## API Reference
 
 ### DataList
@@ -104,7 +112,7 @@ Root wrapper for label-value list layout.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### DataListItem
@@ -113,7 +121,7 @@ Single label-value row.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### DataListItemLabel
@@ -122,7 +130,7 @@ Label or key for the row.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### DataListItemValue
@@ -131,5 +139,5 @@ Value or content for the row.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |

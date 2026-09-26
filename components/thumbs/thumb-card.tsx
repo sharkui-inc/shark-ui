@@ -24,28 +24,37 @@ export const ThumbCard = (props: ThumbCardProps) => {
     <Card
       aria-label={title}
       className={cn(
-        "size-full bg-muted/48 pb-0 [--space:--spacing(4)]",
+        "size-full gap-0 overflow-hidden bg-muted/48 pb-0 [--space:--spacing(4)]",
+        "shadow-xs/4",
+        "transition-[border-color,box-shadow] duration-200 ease-in-out",
+        "hover:border-foreground/8 hover:shadow-xs/8",
+        "motion-reduce:transition-none",
         className
       )}
       {...rest}
     >
       <CardHeader
-        aria-hidden="true"
-        className="flex h-auto flex-col"
+        aria-hidden
+        className={cn(
+          "flex h-auto min-h-18 flex-col pb-4",
+          "**:data-[slot=card-title]:tracking-tight",
+          "**:data-[slot=card-description]:line-clamp-2"
+        )}
         description={description}
         title={title}
       />
 
       <CardContent
-        aria-hidden="true"
+        aria-hidden
         className={cn(
-          "h-40 w-full",
+          "min-h-40 w-full flex-1",
           "flex items-center justify-center",
-          "rounded-b-xl border-t",
+          "px-10 py-4",
           "bg-card",
           "select-none",
-          "[&>div:not([class^='w-'],[class*='_w-'])]:w-full",
-          "px-10 py-4"
+          "rounded-b-xl border-t",
+          "overflow-hidden",
+          "[&>div:not([class^='w-'],[class*='_w-'])]:w-full"
         )}
         role="img"
       >

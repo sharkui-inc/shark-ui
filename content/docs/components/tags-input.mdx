@@ -1,10 +1,14 @@
 ---
 title: Tags Input
-description: Allows users to add tags to an input field.
+description: Add and remove tags in a field.
+seo:
+  description: Type values that become removable tags in one field.
 links:
   doc: https://ark-ui.com/docs/components/tags-input
   api: https://ark-ui.com/docs/components/tags-input#api-reference
 ---
+
+import manifest from "@/registry/manifest/tags-input";
 
 <ComponentPreview componentName="tags-input" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/tags-input
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -117,6 +119,12 @@ Use the `size` prop on `TagsInput` to change the control and input height.
 
 <ComponentPreview componentName="tags-input" fileName="example-size-lg" />
 
+## Pill
+
+The `pill` prop creates fully rounded tag chips.
+
+<ComponentPreview componentName="tags-input" fileName="example-pill" />
+
 ## Examples
 
 ### Blur Behavior
@@ -183,6 +191,12 @@ Wrap with [Field](/docs/components/field) for labels, descriptions, and validati
 
 <ComponentPreview componentName="tags-input" fileName="example-field" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="tags-input" />
+
 ## API Reference
 
 ### TagsInput
@@ -192,29 +206,30 @@ Root component. Composes the control, input, and hidden field for form submissio
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `pill` | `boolean` | `false` |
 | `showClear` | `boolean` | `true` |
-| `defaultValue` | `string[]` | - |
-| `value` | `string[]` | - |
-| `inputValue` | `string` | - |
-| `defaultInputValue` | `string` | - |
+| `defaultValue` | `string[]` | `-` |
+| `value` | `string[]` | `-` |
+| `inputValue` | `string` | `-` |
+| `defaultInputValue` | `string` | `-` |
 | `max` | `number` | `Infinity` |
-| `maxLength` | `number` | - |
+| `maxLength` | `number` | `-` |
 | `delimiter` | `string \| RegExp` | `","` |
 | `allowDuplicates` | `boolean` | `false` |
-| `allowOverflow` | `boolean` | - |
-| `disabled` | `boolean` | - |
-| `invalid` | `boolean` | - |
-| `required` | `boolean` | - |
+| `allowOverflow` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
+| `required` | `boolean` | `-` |
 | `editable` | `boolean` | `false` |
 | `addOnPaste` | `boolean` | `false` |
-| `blurBehavior` | `"add" \| "clear"` | - |
-| `validate` | `(details) => boolean` | - |
+| `blurBehavior` | `"add" \| "clear"` | `-` |
+| `validate` | `(details) => boolean` | `-` |
 | `sanitizeValue` | `(value: string) => string` | `(value) => value.trim()` |
-| `onValueChange` | `(details) => void` | - |
-| `onInputValueChange` | `(details) => void` | - |
-| `onHighlightChange` | `(details) => void` | - |
-| `onValueInvalid` | `(details) => void` | - |
-| `className` | `string` | - |
+| `onValueChange` | `(details) => void` | `-` |
+| `onInputValueChange` | `(details) => void` | `-` |
+| `onHighlightChange` | `(details) => void` | `-` |
+| `onValueInvalid` | `(details) => void` | `-` |
+| `className` | `string` | `-` |
 
 ### TagsInputInput
 
@@ -222,8 +237,8 @@ Borderless text field for adding new tags. Rendered inside `TagsInput` by defaul
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `placeholder` | `string` | - |
-| `className` | `string` | - |
+| `placeholder` | `string` | `-` |
+| `className` | `string` | `-` |
 
 ### TagsInputItem
 
@@ -231,11 +246,11 @@ Represents a single tag. Requires `index` and `value`. Pass the label as childre
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `index` | `number` | **required** |
-| `value` | `string` | **required** |
+| `index` | `number` | `required` |
+| `value` | `string` | `required` |
 | `showDelete` | `boolean` | `true` |
-| `disabled` | `boolean` | - |
-| `className` | `string` | - |
+| `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### TagsInputClearTrigger
 
@@ -243,8 +258,69 @@ Clears all tags.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+
+### TagsInputRootProvider
+
+Provides a TagsInput API created with `useTagsInput` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseTagsInputReturn` | `required` |
+
+### TagsInputContext
+
+Render-prop access to the surrounding component API.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: unknown) => React.ReactNode` | `required` |
+
+### TagsInputControl
+
+Public TagsInputControl component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### TagsInputItemPreview
+
+Public TagsInputItemPreview component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### TagsInputItemText
+
+Public TagsInputItemText component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### TagsInputItemDeleteTrigger
+
+Public TagsInputItemDeleteTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### TagsInputItemInput
+
+Public TagsInputItemInput component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

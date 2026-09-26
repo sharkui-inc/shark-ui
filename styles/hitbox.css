@@ -9,11 +9,11 @@
     left: var(--hitbox-l, 0px);
     pointer-events: inherit;
     content: "";
-    @apply border border-dashed border-info bg-info/10;
+    @apply border border-dashed border-info bg-info/8;
   }
 
   &:hover::before {
-    @apply border border-dashed border-success bg-success/10;
+    @apply border border-dashed border-success bg-success/8;
   }
 }
 

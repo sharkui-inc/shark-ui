@@ -1,4 +1,4 @@
-import { SparklesIcon } from "lucide-react";
+import { RocketIcon } from "lucide-react";
 import {
   Alert,
   AlertDescription,
@@ -7,7 +7,7 @@ import {
 
 const Example = () => (
   <Alert className="max-w-md">
-    <SparklesIcon />
+    <RocketIcon />
     <AlertTitle>New Feature Available</AlertTitle>
     <AlertDescription>
       Icons can be added to alerts to provide visual context and improve user

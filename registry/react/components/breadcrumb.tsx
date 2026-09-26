@@ -55,12 +55,15 @@ export const BreadcrumbLink = (props: React.ComponentProps<typeof ark.a>) => {
   return (
     <ark.a
       className={cn(
+        "relative",
+        "-mx-1 px-1",
         "text-nowrap",
         "rounded-md border border-transparent",
+        "outline-hidden",
         "transition-colors",
         "hover:text-foreground",
-        "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        "motion-reduce:transition-none!",
+        "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="breadcrumb-link"
@@ -76,10 +79,10 @@ export const BreadcrumbPage = (
 
   return (
     <ark.span
-      aria-current="page"
       className={cn("font-normal text-foreground", className)}
       data-slot="breadcrumb-page"
       {...rest}
+      aria-current="page"
     />
   );
 };
@@ -91,13 +94,13 @@ export const BreadcrumbSeparator = (
 
   return (
     <ark.li
-      aria-hidden="true"
       className={cn("opacity-64 [&_svg]:size-4", className)}
       data-slot="breadcrumb-separator"
-      role="presentation"
       {...rest}
+      aria-hidden
+      role="presentation"
     >
-      {children ?? <ChevronRightIcon />}
+      {children ?? <ChevronRightIcon className="size-4 rtl:rotate-180" />}
     </ark.li>
   );
 };
@@ -106,10 +109,10 @@ export const BreadcrumbEllipsis = (
   props: React.ComponentProps<typeof ark.span>
 ) => (
   <ark.span
-    aria-hidden="true"
     data-slot="breadcrumb-ellipsis"
-    role="presentation"
     {...props}
+    aria-hidden
+    role="presentation"
   >
     <MoreHorizontalIcon className="size-4" />
   </ark.span>

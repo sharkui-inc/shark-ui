@@ -1,0 +1,58 @@
+---
+title: Remix
+description: A guide to installing Shark UI in a Remix project.
+---
+
+## New project
+
+<Steps>
+
+<Step>Create the Remix app first. Remix is not a `shadcn init` template.</Step>
+
+```bash
+npx create-remix@latest my-app
+cd my-app
+```
+
+<Step>Add the Shark theme, every component, and visual utilities.</Step>
+
+```bash
+npx shadcn@latest init @shark/starter
+```
+
+</Steps>
+
+## Existing project
+
+<Steps>
+
+<Step>Configure Tailwind CSS v4 and map `@/*` to `app/*`.</Step>
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./app/*"]
+    }
+  }
+}
+```
+
+Configure the same alias in Vite.
+
+<Step>Add the Shark foundation: theme tokens, utils, and animations. No components are added.</Step>
+
+```bash
+npx shadcn@latest init @shark/style
+```
+
+<Step>Add components. Install the full catalog without changing the theme:</Step>
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Or install individual components from the [component docs](/docs/components). 
+
+</Steps>

@@ -1,47 +1,154 @@
-import { ClipboardIcon } from "lucide-react";
+"use client";
+
+import { CodeIcon, RotateCcwIcon, ShuffleIcon } from "lucide-react";
+import React from "react";
 import { CopyThemeCodeDialog } from "@/components/dialog/copy-theme";
-import { ButtonVariantsExample } from "@/components/examples/button-variants-example";
-import { Button } from "@/registry/react/components/button";
+import { useThemeCustomization } from "@/lib/theme/provider";
+import { cn } from "@/lib/utils";
 import {
-  Card,
-  CardAction,
-  CardContent,
-  CardHeader,
-} from "@/registry/react/components/card";
-import { ThemeSelectorGray } from "./theme-selector.gray";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogClose,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTrigger,
+} from "@/registry/react/components/alert-dialog";
+import { Button } from "@/registry/react/components/button";
+import { DialogTrigger } from "@/registry/react/components/dialog";
+import { Field, FieldLabel } from "@/registry/react/components/field";
+import { useHotkey } from "@/registry/react/components/hotkeys";
+import { Kbd } from "@/registry/react/components/kbd";
+import { ScrollArea } from "@/registry/react/components/scroll-area";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/registry/react/components/tooltip";
+import { ThemeSelectorBase } from "./theme-selector.base";
+import { ThemeSelectorFont } from "./theme-selector.font";
+import { ThemeSelectorPreset } from "./theme-selector.preset";
 import { ThemeSelectorPrimary } from "./theme-selector.primary";
+import { ThemeSelectorPrimaryTone } from "./theme-selector.primary-tone";
 import { ThemeSelectorRadius } from "./theme-selector.radius";
 
-export const ThemeSelector = (props: React.ComponentProps<typeof Card>) => {
-  const { children, ...rest } = props;
+export const ThemeSelector = (props: React.ComponentProps<"fieldset">) => {
+  const { className, ...rest } = props;
+
+  const { isDefault, randomize, reset } = useThemeCustomization();
+  const viewCodeTriggerId = React.useId();
+
+  useHotkey({
+    action: randomize,
+    hotkey: "r",
+    options: { preventDefault: true },
+  });
 
   return (
-    <div className="grid gap-4 lg:grid-cols-2">
-      <Card {...rest}>
-        <CardHeader
-          description="Select a theme to preview"
-          title="Theme Selector"
+    <fieldset className={cn("min-w-0 border-0", className)} {...rest}>
+      <legend className="sr-only">Theme settings</legend>
+      <div className="@container">
+        <ScrollArea
+          className={cn(
+            "h-auto",
+            "@[600px]:overflow-visible!",
+            "@[600px]:**:data-[slot=scroll-area-viewport]:overflow-visible!",
+            "@[600px]:**:data-[slot=scroll-area-scrollbar]:hidden"
+          )}
+          orientation="horizontal"
+          scrollFade
         >
-          <CardAction>
-            <CopyThemeCodeDialog>
-              <Button size="sm" variant="outline">
-                <ClipboardIcon />
-                Copy theme
-              </Button>
-            </CopyThemeCodeDialog>
-          </CardAction>
-        </CardHeader>
+          <div className="flex @[600px]:w-full w-max min-w-full @[600px]:flex-wrap items-end @[600px]:justify-center gap-3">
+            <div className="w-36 shrink-0">
+              <ThemeSelectorPreset />
+            </div>
+            <div className="w-36 shrink-0">
+              <ThemeSelectorBase />
+            </div>
+            <div className="w-36 shrink-0">
+              <ThemeSelectorPrimary />
+            </div>
+            <div className="w-36 shrink-0">
+              <ThemeSelectorFont slot="sans" />
+            </div>
+            <div className="w-36 shrink-0">
+              <ThemeSelectorFont slot="heading" />
+            </div>
+            <div className="shrink-0">
+              <ThemeSelectorPrimaryTone />
+            </div>
+            <div className="w-36 shrink-0">
+              <ThemeSelectorRadius />
+            </div>
+            <Field className="w-fit shrink-0 *:w-auto">
+              <FieldLabel>Actions</FieldLabel>
+              <div className="flex items-center gap-2">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      onClick={randomize}
+                      size="icon-md"
+                      variant="outline"
+                    >
+                      <ShuffleIcon aria-hidden />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Randomize <Kbd>R</Kbd>
+                  </TooltipContent>
+                </Tooltip>
 
-        <CardContent>
-          <div className="grid gap-4 sm:grid-cols-3">
-            <ThemeSelectorGray />
-            <ThemeSelectorPrimary />
-            <ThemeSelectorRadius />
+                <AlertDialog>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          aria-label="Reset theme"
+                          disabled={isDefault ? true : undefined}
+                          size="icon-md"
+                          variant="outline"
+                        >
+                          <RotateCcwIcon aria-hidden />
+                        </Button>
+                      </AlertDialogTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent>Reset theme</TooltipContent>
+                  </Tooltip>
+
+                  <AlertDialogContent>
+                    <AlertDialogHeader
+                      description="This will restore colors, radius, fonts, and locks to their default values."
+                      title="Reset theme to default?"
+                    />
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogClose asChild>
+                        <AlertDialogAction onClick={reset}>
+                          Reset theme
+                        </AlertDialogAction>
+                      </AlertDialogClose>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+
+                <CopyThemeCodeDialog ids={{ trigger: viewCodeTriggerId }}>
+                  <Tooltip ids={{ trigger: viewCodeTriggerId }}>
+                    <TooltipTrigger asChild>
+                      <DialogTrigger asChild>
+                        <Button size="icon-md">
+                          <CodeIcon aria-hidden />
+                        </Button>
+                      </DialogTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent>View code</TooltipContent>
+                  </Tooltip>
+                </CopyThemeCodeDialog>
+              </div>
+            </Field>
           </div>
-        </CardContent>
-      </Card>
-
-      <ButtonVariantsExample />
-    </div>
+        </ScrollArea>
+      </div>
+    </fieldset>
   );
 };

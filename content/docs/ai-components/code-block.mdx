@@ -1,0 +1,228 @@
+---
+title: Code Block
+description: Syntax-highlighted code with copy and streaming.
+seo:
+  description: Display syntax-highlighted code with copy and streaming states.
+---
+
+import manifest from "@/registry/manifest/code-block";
+
+<ComponentPreview componentName="code-block" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/code-block
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>This component depends on [Clipboard](/docs/components/clipboard), [Button](/docs/components/button), and [Scroll Area](/docs/components/scroll-area). Install them first if you haven't already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/code-block.tsx" src="/code-block.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+CodeBlock
+├── CodeBlockHeader
+│   ├── CodeBlockTitle
+│   └── CodeBlockActions
+│       └── CodeBlockCopy
+└── CodeBlockContent
+```
+
+## Usage
+
+```tsx
+import {
+  CodeBlock,
+  CodeBlockActions,
+  CodeBlockContent,
+  CodeBlockCopy,
+  CodeBlockHeader,
+} from "@/components/ui/code-block";
+```
+
+```tsx
+<CodeBlock className="max-h-80" code={source}>
+  <CodeBlockHeader title="helpers.ts">
+    <CodeBlockActions>
+      <CodeBlockCopy />
+    </CodeBlockActions>
+  </CodeBlockHeader>
+  <CodeBlockContent highlightedLines={[2]} showLineNumbers />
+</CodeBlock>
+```
+
+## Title
+
+`CodeBlockHeader` supports two title patterns:
+
+### Using props
+
+```tsx showLineNumbers
+<CodeBlockHeader title="helpers.ts">
+  <CodeBlockActions>
+    <CodeBlockCopy />
+  </CodeBlockActions>
+</CodeBlockHeader>
+```
+
+### Using components
+
+```tsx showLineNumbers
+<CodeBlockHeader>
+  <CodeBlockTitle>helpers.ts</CodeBlockTitle>
+  <CodeBlockActions>
+    <CodeBlockCopy />
+  </CodeBlockActions>
+</CodeBlockHeader>
+```
+
+## Streaming
+
+Set `isStreaming` while code is still arriving. Highlighting runs in the browser.
+
+<ComponentPreview componentName="code-block" fileName="example-streaming" />
+
+## Scrollable 
+
+### Vertical
+
+Constrain height so the content scrolls vertically inside the panel.
+
+<ComponentPreview componentName="code-block" fileName="example-scrollable" />
+
+### Horizontal
+
+Long lines overflow and scroll horizontally; the line-number gutter stays sticky.
+
+<ComponentPreview componentName="code-block" fileName="example-scrollable-horizontal" autoHeight />
+
+## Examples
+
+### Minimal
+
+<ComponentPreview componentName="code-block" fileName="example-minimal" />
+
+### Highlighted lines
+
+<ComponentPreview componentName="code-block" fileName="example-highlighted-lines" />
+
+### Language selector
+
+<ComponentPreview componentName="code-block" fileName="example-language-selector" />
+
+### Multiple files
+
+<ComponentPreview componentName="code-block" fileName="example-multiple-files" />
+
+### With Diff
+
+<ComponentPreview componentName="code-block" fileName="example-with-diff" />
+
+### Custom actions
+
+<ComponentPreview componentName="code-block" fileName="example-custom-actions" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="code-block" />
+
+## API Reference
+
+### CodeBlock
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `code` | `string` | `""` |
+| `language` | `CodeBlockLanguage` | `"tsx"` |
+| `isStreaming` | `boolean` | `false` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### CodeBlockHeader
+
+Header for the title and actions.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### CodeBlockTitle
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### CodeBlockFilename
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### CodeBlockActions
+
+Right-aligned actions container.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### CodeBlockCopy
+
+Copies `code` from `CodeBlock`. 
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `timeout` | `number` | `2000` |
+| `className` | `string` | `-` |
+
+### CodeBlockContent
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `showLineNumbers` | `boolean` | `false` |
+| `highlightedLines` | `number[]` | `[]` |
+| `code` | `string` | `-` |
+| `language` | `CodeBlockLanguage` | `-` |
+| `isStreaming` | `boolean` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+`CodeBlockLanguage` accepts every bundled Shiki language and `"text"`.

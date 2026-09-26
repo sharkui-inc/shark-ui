@@ -1,13 +1,62 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm registry:build && pnpm theme:build && next build",
+  "headers": [
+    {
+      "source": "/docs/:path*",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</llms.txt>; rel=\"describedby\""
+        }
+      ]
+    },
+    {
+      "source": "/design.md",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        }
+      ]
+    }
+  ],
   "routes": [
     {
-      "src": "/(docs|view)(/.*)?",
+      "src": "/blocks(/.*)?",
+      "status": 308,
+      "headers": {
+        "Location": "/docs/components"
+      }
+    },
+    {
+      "src": "/templates",
+      "status": 308,
+      "headers": {
+        "Location": "/docs"
+      }
+    },
+    {
+      "src": "/docs/ai-elements",
+      "status": 308,
+      "headers": {
+        "Location": "/docs/ai-components"
+      }
+    },
+    {
+      "src": "/docs/ai-elements/(.*)",
+      "status": 308,
+      "headers": {
+        "Location": "/docs/ai-components/$1"
+      }
+    },
+    {
+      "src": "/view(/.*)?",
       "has": [
         {
           "type": "header",
           "key": "user-agent",
-          "value": ".*(GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-Web|anthropic-ai|PerplexityBot|Perplexity-User|CCBot|Bytespider|Amazonbot|Applebot-Extended|Meta-ExternalAgent|FacebookBot|Diffbot|ImagesiftBot|YouBot|cohere-ai|Timpibot).*"
+          "value": ".*(GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-Web|Claude-User|Claude-SearchBot|anthropic-ai|PerplexityBot|Perplexity-User|CCBot|Bytespider|Amazonbot|Applebot-Extended|Meta-ExternalAgent|FacebookBot|Diffbot|ImagesiftBot|YouBot|cohere-ai|Timpibot).*"
         }
       ],
       "mitigate": {
@@ -15,17 +64,44 @@
       }
     },
     {
-      "src": "/(llms-full\\.txt|llms-components\\.txt|llms-patterns\\.txt|og|api/raw/.*)",
+      "src": "/(docs(/.*)?|llms(?:\\.txt|/.*\\.txt)|llms\\.mdx(/.*)?|design\\.md)",
       "has": [
         {
           "type": "header",
           "key": "user-agent",
-          "value": ".*(GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-Web|anthropic-ai|PerplexityBot|Perplexity-User|CCBot|Bytespider|Amazonbot|Applebot-Extended|Meta-ExternalAgent|FacebookBot|Diffbot|ImagesiftBot|YouBot|cohere-ai|Timpibot).*"
+          "value": ".*(GPTBot|ClaudeBot|anthropic-ai|CCBot|Bytespider|Amazonbot|Applebot-Extended|Meta-ExternalAgent|FacebookBot|Diffbot|ImagesiftBot|YouBot|cohere-ai|Timpibot).*"
         }
       ],
       "mitigate": {
         "action": "deny"
       }
+    },
+    {
+      "src": "/og",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-Web|Claude-User|Claude-SearchBot|anthropic-ai|PerplexityBot|Perplexity-User|CCBot|Bytespider|Amazonbot|Applebot-Extended|Meta-ExternalAgent|FacebookBot|Diffbot|ImagesiftBot|YouBot|cohere-ai|Timpibot).*"
+        }
+      ],
+      "mitigate": {
+        "action": "deny"
+      }
+    },
+    {
+      "src": "/docs\\.md",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8"
+      },
+      "dest": "/llms.mdx/docs/index"
+    },
+    {
+      "src": "/docs/(.*)\\.md",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8"
+      },
+      "dest": "/llms.mdx/docs/$1/index"
     }
   ]
 }

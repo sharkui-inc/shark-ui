@@ -29,37 +29,27 @@ import {
 } from "@/registry/react/components/field";
 import { toast } from "@/registry/react/components/toast";
 
-const formSchema = z.object({
-  stack: z
-    .array(z.string())
-    .min(1, "Pick a suggestion or type your primary technology.")
-    .refine(
-      (val) => val[0] !== "",
-      "Pick a suggestion or type your primary technology."
-    ),
-});
-
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
-    initialItems,
     filter: contains,
+    initialItems,
   });
 
   const form = useForm({
     defaultValues: { stack: [""] },
-    validators: { onSubmit: formSchema },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "stack-submitted",
-        title: "Stack preference saved",
         description: (
           <pre className="mt-2">
             <code>{JSON.stringify(value, null, 2)}</code>
           </pre>
         ),
+        id: "stack-submitted",
+        title: "Stack preference saved",
       });
     },
+    validators: { onSubmit: formSchema },
   });
 
   return (
@@ -86,6 +76,7 @@ const Example = () => {
                   <Autocomplete
                     collection={collection}
                     onInputValueChange={({ inputValue }) => filter(inputValue)}
+                    onInteractOutside={field.handleBlur}
                     onValueChange={(e) => field.handleChange(e.value)}
                     value={field.state.value}
                   >
@@ -137,3 +128,13 @@ const initialItems = [
 ];
 
 export default Example;
+
+const formSchema = z.object({
+  stack: z
+    .array(z.string())
+    .min(1, "Pick a suggestion or type your primary technology.")
+    .refine(
+      (val) => val[0] !== "",
+      "Pick a suggestion or type your primary technology."
+    ),
+});

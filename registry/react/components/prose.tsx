@@ -1,6 +1,7 @@
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
+import type React from "react";
 import { cn } from "@/lib/utils";
 
 export const Prose = (props: React.ComponentProps<typeof ark.div>) => {

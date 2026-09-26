@@ -1,10 +1,14 @@
 ---
 title: Tree View
-description: Hierarchical data in a tree structure.
+description: Hierarchical data in a tree.
+seo:
+  description: Expandable tree for files, folders, and nested data.
 links:
   doc: https://ark-ui.com/docs/components/tree-view
   api: https://ark-ui.com/docs/components/tree-view#api-reference
 ---
+
+import manifest from "@/registry/manifest/tree-view";
 
 <ComponentPreview componentName="tree-view" />
 
@@ -33,23 +37,14 @@ npx shadcn@latest add @shark/tree-view
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Add the following to your `globals.css` for the tree-view expand/collapse animation:</Step>
+<Step>Ensure your CSS entry imports `tw-animate-css`.</Step>
 
 ```css title="globals.css"
-@theme inline {
-  @keyframes expand {
-    from { height: var(--collapsed-height, 0); }
-    to { height: var(--height); }
-  }
-  @keyframes collapse {
-    from { height: var(--height); }
-    to { height: var(--collapsed-height, 0); }
-  }
-}
+@import "tw-animate-css";
+
+/* ... */
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -139,7 +134,7 @@ const TreeNode = (props: React.ComponentProps<typeof TreeViewNode>) => {
 
 ## Controlled
 
-Use `selectedValue` and `onSelectionChange` to control the selected node and react to selection changes.
+Use `selectedValue` and `onSelectionChange` to control selection.
 
 <ComponentPreview componentName="tree-view" fileName="example-controlled" />
 
@@ -147,9 +142,7 @@ Use `selectedValue` and `onSelectionChange` to control the selected node and rea
 
 ### Multiple selection
 
-Use `selectionMode="multiple"` to allow selecting multiple nodes. 
-
-Hold `Shift` and `click` to select a range, or use `Ctrl`/`Cmd`+`click` to toggle individual nodes.
+Use `selectionMode="multiple"`.
 
 <ComponentPreview componentName="tree-view" fileName="example-multiple-selection" />
 
@@ -161,7 +154,7 @@ Right-click on tree items to show a context menu.
 
 ### Renaming nodes
 
-Use the `canRename` prop and `onRenameComplete` callback to enable inline renaming of nodes. Press F2 to activate rename mode on the focused node.
+Use `canRename` and `onRenameComplete`. Press F2 on the focused node.
 
 <ComponentPreview componentName="tree-view" fileName="example-rename" />
 
@@ -173,7 +166,7 @@ Use the `checkedValue` and `onCheckedChange` props to control the checked nodes.
 
 ### Links
 
-Tree items can be rendered as links. Use `asChild` on `TreeViewContent` and wrap an `<a>` element with `TreeViewItem` inside.
+Use `asChild` on `TreeViewContent` with an `<a>` inside `TreeViewItem`.
 
 <ComponentPreview componentName="tree-view" fileName="example-links" />
 
@@ -187,13 +180,13 @@ Use the tree view to create a file editor.
 
 There are three ways to customize icons:
 
-1. **Folder** — `icon` and `expandedIcon` props on `TreeViewBranchItem`, or per-node via `TreeNodeType`
-2. **Single item** — `icon` prop on `TreeViewItem`
-3. **By extension** — `fileIcons` prop on `TreeView` with `createFileIcons`
+1. **Folder**: `icon` and `expandedIcon` props on `TreeViewBranchItem`, or per-node via `TreeNodeType`
+2. **Single item**: `icon` prop on `TreeViewItem`
+3. **By extension**: `fileIcons` prop on `TreeView` with `createFileIcons`
 
 ### Folder icons
 
-Use the `icon` and `expandedIcon` props on `TreeViewBranchItem` to customize folder icons. Pass `null` to hide the icon.
+Use `icon` and `expandedIcon` on `TreeViewBranchItem`. Pass `null` to hide.
 
 <ComponentPreview componentName="tree-view" fileName="example-custom-icons-folder" />
 
@@ -205,10 +198,16 @@ Pass the `icon` prop to `TreeViewItem` to override the icon for a specific leaf 
 
 ### With file extensions
 
-Use the `fileIcons` prop on `TreeView` with `createFileIcons` to map file extensions to icon components. Icons are resolved from each node's id; unmatched extensions fall back to `FileIcon`.
+Use `fileIcons` with `createFileIcons` to map extensions to icons.
 
 <ComponentPreview componentName="tree-view" fileName="example-custom-icons" />
 
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="tree-view" />
 
 ## API Reference
 
@@ -218,30 +217,32 @@ Root component. Provides tree context and manages expand/selection state.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `TreeCollection` | **required** |
-| `fileIcons` | `Record<string, React.JSX.ElementType \| null>` | - |
-| `selectedValue` | `string[]` | - |
-| `checkedValue` | `string[]` | - |
-| `onCheckedChange` | `(details: CheckedChangeDetails) => void` | - |
-| `canRename` | `(details: RenameDetails) => boolean` | - |
-| `onRenameComplete` | `(details: RenameCompleteDetails) => void` | - |
-| `defaultSelectedValue` | `string[]` | - |
-| `onSelectionChange` | `(details: SelectionChangeDetails) => void` | - |
-| `expandedValue` | `string[]` | - |
-| `defaultExpandedValue` | `string[]` | - |
-| `onExpandedChange` | `(details: ExpandedChangeDetails) => void` | - |
+| `collection` | `TreeCollection` | `required` |
+| `fileIcons` | `Record<string, React.JSX.ElementType \| null>` | `-` |
+| `selectedValue` | `string[]` | `-` |
+| `checkedValue` | `string[]` | `-` |
+| `onCheckedChange` | `(details: CheckedChangeDetails) => void` | `-` |
+| `canRename` | `(details: RenameDetails) => boolean` | `-` |
+| `onRenameComplete` | `(details: RenameCompleteDetails) => void` | `-` |
+| `defaultSelectedValue` | `string[]` | `-` |
+| `onSelectionChange` | `(details: SelectionChangeDetails) => void` | `-` |
+| `expandedValue` | `string[]` | `-` |
+| `defaultExpandedValue` | `string[]` | `-` |
+| `onExpandedChange` | `(details: ExpandedChangeDetails) => void` | `-` |
 | `selectionMode` | `"single" \| "multiple"` | `"single"` |
+| `translations` | `Partial<IntlTranslations>` | `-` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `className` | `string` | - |
+| `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
+| `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--indentation` | `--spacing(4)` |
-| `--item-gap` | `--spacing(2)` |
-| `--padding-block` | `--spacing(1.5)` |
-| `--padding-inline` | `--spacing(3)` |
-| `--icon-size` | `--spacing(4)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--indentation` | `string` | `--spacing(4)` |
+| `--item-gap` | `string` | `--spacing(2)` |
+| `--padding-block` | `string` | `--spacing(1.5)` |
+| `--padding-inline` | `string` | `--spacing(3)` |
+| `--icon-size` | `string` | `--spacing(4)` |
 
 ### TreeViewLabel
 
@@ -250,7 +251,7 @@ Accessible label for the tree.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewTree
 
@@ -259,7 +260,7 @@ Wraps the root-level tree nodes.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewNode
 
@@ -267,9 +268,9 @@ Provides tree node context. Must wrap each branch or item.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `node` | `TreeNodeType` | **required** |
-| `indexPath` | `number[]` | **required** |
-| `className` | `string` | - |
+| `node` | `TreeNodeType` | `required` |
+| `indexPath` | `number[]` | `required` |
+| `className` | `string` | `-` |
 
 ### TreeViewBranch
 
@@ -278,7 +279,7 @@ Expandable branch with children. Toggles open/closed.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewBranchItem
 
@@ -289,7 +290,7 @@ Clickable area to expand or collapse a branch.
 | `asChild` | `boolean` | `false` |
 | `icon` | `React.JSX.ElementType \| null` | `FolderIcon` |
 | `expandedIcon` | `React.JSX.ElementType \| null` | `FolderOpenIcon` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewBranchContent
 
@@ -298,7 +299,7 @@ Holds the branch children. Shown when expanded.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewContent
 
@@ -307,7 +308,7 @@ Wrapper for leaf (non-expandable) items.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewItem
 
@@ -316,7 +317,7 @@ Leaf node (non-expandable). The `icon` prop is fallback when no `fileIcons` matc
 | Prop | Type | Default |
 | --- | --- | --- |
 | `icon` | `React.JSX.ElementType` | `FileIcon` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TreeViewCheckbox
 
@@ -324,7 +325,7 @@ Checkbox for selecting a node in multi-select mode.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### createTreeCollection
 
@@ -334,16 +335,16 @@ Creates a tree collection from node data. Use with `collection` prop on `TreeVie
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `rootNode` | `T extends TreeNodeType` | **required** |
+| `rootNode` | `T extends TreeNodeType` | `required` |
 | `nodeToValue` | `(node: T) => string` | `(node) => node.id` |
 | `nodeToString` | `(node: T) => string` | `(node) => node.name` |
 
-**TreeNodeType** — Shape of each node (extend with generic `T` for custom props):
+**TreeNodeType**: shape of each node (extend with generic `T` for custom props):
 
-| Property | Type | Default |
+| Prop | Type | Default |
 | --- | --- | --- |
-| `id` | `string` | - |
-| `name` | `string` | - |
+| `id` | `string` | `-` |
+| `name` | `string` | `-` |
 | `children` | `TreeNodeType<T>[]` | `undefined` |
 | `icon` | `React.JSX.ElementType \| null` | `undefined` |
 | `expandedIcon` | `React.JSX.ElementType \| null` | `undefined` |
@@ -377,6 +378,26 @@ const fileIcons = createFileIcons({
   ".md": FileText,
 });
 ```
+
+### TreeViewRootProvider
+
+Provides a TreeView API created with `useTreeView` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseTreeViewReturn` | `required` |
+| `fileIcons` | `Record<string, React.JSX.ElementType \| null>` | `-` |
+
+Pass the same `fileIcons` you would use on `TreeView` so leaf items resolve extension icons under the headless path.
+
+### TreeViewBranchIndicator
+
+Public TreeViewBranchIndicator component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

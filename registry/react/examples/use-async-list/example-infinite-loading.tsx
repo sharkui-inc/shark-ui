@@ -1,0 +1,144 @@
+"use client";
+
+import { Alert, AlertDescription } from "@/registry/react/components/alert";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/react/components/avatar";
+import { Button } from "@/registry/react/components/button";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemMedia,
+  ItemTitle,
+} from "@/registry/react/components/item";
+import {
+  SkeletonCircle,
+  SkeletonText,
+} from "@/registry/react/components/skeleton";
+import { Spinner } from "@/registry/react/components/spinner";
+import { useAsyncList } from "@/registry/react/hooks/use-async-list";
+
+interface Post {
+  body: string;
+  id: number;
+  title: string;
+  userId: number;
+}
+
+const UseAsyncListDemo = () => {
+  const list = useAsyncList<Post, number>({
+    autoReload: true,
+    async load({ cursor, signal }) {
+      const page = cursor ?? 1;
+      const start = (page - 1) * LIMIT;
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/posts?_start=${start}&_limit=${LIMIT}`,
+        { signal }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch posts");
+      }
+      const posts: Post[] = await response.json();
+      return {
+        cursor: posts.length === LIMIT ? page + 1 : undefined,
+        items: posts,
+      };
+    },
+  });
+
+  const handleLoadMore = () => {
+    if (list.hasMore) {
+      list.loadMore();
+    } else {
+      list.reload();
+    }
+  };
+
+  return (
+    <div className="flex w-full max-w-md flex-col gap-3">
+      <div className="flex items-center justify-between gap-2">
+        <output className="text-muted-foreground text-sm">
+          Loaded {list.items.length} posts
+        </output>
+        {!!(list.hasMore || list.error) && (
+          <Button
+            disabled={list.loading}
+            onClick={handleLoadMore}
+            size="sm"
+            variant="outline"
+          >
+            {!!list.loading && <Spinner data-icon="inline-start" />}
+            {list.error ? "Retry" : "Load more"}
+          </Button>
+        )}
+      </div>
+      {!!list.error && (
+        <Alert role="alert" variant="destructive">
+          <AlertDescription>{list.error.message}</AlertDescription>
+        </Alert>
+      )}
+      <ItemGroup
+        aria-busy={list.loading}
+        className="max-h-64 gap-2 overflow-y-auto"
+      >
+        {list.loading && list.items.length === 0
+          ? skeletons.map((key) => (
+              <Item
+                aria-hidden
+                className="[--space:--spacing(2)]"
+                key={key}
+                variant="outline"
+              >
+                <ItemMedia>
+                  <SkeletonCircle className="size-8" />
+                </ItemMedia>
+                <ItemContent>
+                  <SkeletonText
+                    className="gap-1.5 **:[div]:h-[1.0625rem]"
+                    lines={3}
+                  />
+                </ItemContent>
+              </Item>
+            ))
+          : list.items.map((post) => (
+              <Item
+                className="[--space:--spacing(2)]"
+                key={post.id}
+                role="listitem"
+                variant="outline"
+              >
+                <ItemMedia>
+                  <Avatar>
+                    <AvatarImage
+                      alt={`Author ${post.userId}`}
+                      src={`https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=${encodeURIComponent(`author-${post.userId}`)}&waveColor=ea580c`}
+                    />
+                    <AvatarFallback>{post.userId}</AvatarFallback>
+                  </Avatar>
+                </ItemMedia>
+                <ItemContent>
+                  <ItemTitle>{post.title}</ItemTitle>
+                  <ItemDescription>{post.body}</ItemDescription>
+                </ItemContent>
+              </Item>
+            ))}
+      </ItemGroup>
+      {!(list.loading || list.error) && !!list.empty && (
+        <p className="text-muted-foreground text-sm">No results found.</p>
+      )}
+      {!(list.loading || list.error || list.empty || list.hasMore) && (
+        <p className="text-muted-foreground text-xs">All posts loaded.</p>
+      )}
+    </div>
+  );
+};
+
+const LIMIT = 4;
+
+const skeletons = ["post-a", "post-b", "post-c", "post-d"] as const;
+
+export default UseAsyncListDemo;

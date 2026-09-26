@@ -1,7 +1,10 @@
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 const Example = () => (
-  <ScrollArea className="h-auto max-w-96 rounded-lg border">
+  <ScrollArea
+    className="h-auto max-w-96 rounded-lg border"
+    orientation="horizontal"
+  >
     <div className="flex w-max gap-4 p-4">
       {Array.from({ length: 20 }).map((_, i) => (
         <div

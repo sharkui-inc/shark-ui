@@ -1,5 +1,5 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react"];
 
@@ -17,12 +17,12 @@ const css = {
 };
 
 const manifest: RegistryItemType = {
-  name: "progress",
-  type: "registry:ui",
-  dependencies,
-  cssVars,
   css,
-  registryDependencies: [absoluteUrl("/r/field.json")],
+  cssVars,
+  dependencies,
+  name: "progress",
+  registryDependencies: [registryUrl("/r/field.json")],
+  type: "registry:ui",
 };
 
 export default manifest;

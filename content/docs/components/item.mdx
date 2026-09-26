@@ -1,7 +1,11 @@
 ---
 title: Item
-description: A versatile component for displaying content.
+description: List row for media and actions.
+seo:
+  description: List row for media, title, description, and actions.
 ---
+
+import manifest from "@/registry/manifest/item";
 
 <ComponentPreview componentName="item" />
 
@@ -30,9 +34,7 @@ npx shadcn@latest add @shark/item
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -99,20 +101,6 @@ import {
 
 <ComponentPreview componentName="item" fileName="example-variant-muted" />
 
-## Custom spacing
-
-The `[--space:--spacing("value")]` on `ItemContent` controls the internal spacing.
-
-Default spacing is `--spacing(3)`.
-
-<ComponentPreview componentName="item" fileName="example-custom-spacing" />
-
-> You can use breakpoint utilities to change the internal spacing at different screen sizes.
-
-```css
-  md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
-```
-
 ## Examples
 
 ### Icon
@@ -141,15 +129,33 @@ Use `ItemHeader` to add a header above the item content.
 
 ### Link
 
-Use the `asChild` prop to render the item as a link. The hover and focus states will be applied to the anchor element.
+Use the `asChild` prop to render the item as a link or button. Hover and focus states apply to the host element.
 
 <ComponentPreview componentName="item" fileName="example-link" />
 
-### Dropdown
+### Menu
 
-Use `Item` inside a menu or dropdown to display rich content in menu items.
+Use `Item` inside a menu to display rich content in menu items.
 
-<ComponentPreview componentName="item" fileName="example-dropdown" />
+<ComponentPreview componentName="item" fileName="example-menu" />
+
+### Custom spacing
+
+The `[--space:--spacing("value")]` controls the internal spacing.
+
+<ComponentPreview componentName="item" fileName="example-custom-spacing" />
+
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
+
+```css
+  md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
+```
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="item" />
 
 ## API Reference
 
@@ -161,11 +167,11 @@ Layout for list items with media, title, description, and actions. Use `[--space
 | --- | --- | --- |
 | `variant` | `"default" \| "outline" \| "muted"` | `"default"` |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(3)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(3)` |
 
 ### ItemGroup
 
@@ -173,7 +179,7 @@ Groups related items with consistent spacing. Uses a fixed gap; adjust layout wi
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### ItemSeparator
@@ -182,7 +188,7 @@ Horizontal divider between items in a group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### ItemMedia
@@ -192,7 +198,7 @@ Avatar, icon, or image for the item. Supports icon and image variants.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `variant` | `"default" \| "icon" \| "image"` | `"default"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### ItemContent
@@ -201,7 +207,7 @@ Wraps the item title and description text.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### ItemTitle
@@ -210,7 +216,7 @@ Primary title or heading for the item.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### ItemDescription
@@ -219,7 +225,7 @@ Secondary description or subtitle for the item.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### ItemActions
@@ -228,7 +234,7 @@ Holds action buttons or controls.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### ItemHeader
@@ -237,7 +243,7 @@ Full-width header row above the item content.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### ItemFooter
@@ -246,6 +252,5 @@ Full-width footer row below the item content.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
-

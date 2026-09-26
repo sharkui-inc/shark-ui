@@ -1,0 +1,131 @@
+---
+title: Masonry
+description: Layout items in responsive columns.
+seo:
+  description: Pack items into responsive columns with uneven heights.
+---
+
+import manifest from "@/registry/manifest/masonry";
+
+<ComponentPreview componentName="masonry" autoHeight />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/masonry
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/masonry.tsx" src="/masonry.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+Masonry
+└── MasonryItem
+```
+
+## Usage
+
+```tsx
+import { Masonry, MasonryItem } from "@/components/ui/masonry";
+```
+
+```tsx
+<Masonry className="columns-1 gap-x-4 gap-y-6 sm:columns-2">
+  <MasonryItem>{/* Content */}</MasonryItem>
+  <MasonryItem>{/* Content */}</MasonryItem>
+  <MasonryItem>{/* Content */}</MasonryItem>
+</Masonry>
+```
+
+## Reflow
+
+Reflow is the process of recalculating the layout of the items in the masonry.
+
+### Stable
+
+Keeps items in their column when height changes.
+
+<ComponentPreview componentName="masonry" fileName="example-reflow-stable" autoHeight />
+
+### Balanced
+
+Rebalances columns on each layout pass.
+
+<ComponentPreview componentName="masonry" fileName="example-reflow-balanced" autoHeight />
+
+## Examples
+
+### Responsive columns
+
+<ComponentPreview componentName="masonry" fileName="example-columns" autoHeight />
+
+### Custom spacing
+
+<ComponentPreview componentName="masonry" fileName="example-spacing" autoHeight />
+
+### Expandable items
+
+Use [Collapsible](/docs/components/collapsible) inside `MasonryItem`.
+
+<ComponentPreview componentName="masonry" fileName="example-collapsible" autoHeight />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="masonry" autoHeight />
+
+## API Reference
+
+### Masonry
+
+Root container.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+| `reflow` | `"stable" \| "balanced"` | `"stable"` |
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--gap` | `string` | `--spacing(4)` |
+
+### MasonryItem
+
+Item wrapper.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |

@@ -33,28 +33,21 @@ import {
   RadioGroupItem,
 } from "@/registry/react/components/radio-group";
 
-const formSchema = v.object({
-  plan: v.pipe(
-    v.string(),
-    v.minLength(1, "You must select a subscription plan to continue.")
-  ),
-});
-
-export function Example() {
+function Example() {
   const form = useForm({
-    schema: formSchema,
     initialInput: { plan: "" },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "plan-submitted",
-      title: "Plan submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "plan-submitted",
+      title: "Plan submitted",
     });
   };
 
@@ -71,10 +64,14 @@ export function Example() {
           <FieldGroup>
             <FormischField of={form} path={["plan"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldSet>
                     <FieldLegend>Plan</FieldLegend>
-                    <FieldDescription className="ms-0!">
+                    <FieldDescription>
                       You can upgrade or downgrade your plan at any time.
                     </FieldDescription>
                     <RadioGroup
@@ -115,21 +112,28 @@ export function Example() {
   );
 }
 
+const formSchema = v.object({
+  plan: v.pipe(
+    v.string(),
+    v.minLength(1, "You must select a subscription plan to continue.")
+  ),
+});
+
 const plans = [
   {
+    description: "For everyday use with basic features.",
     id: "starter",
     title: "Starter (100K tokens/month)",
-    description: "For everyday use with basic features.",
   },
   {
+    description: "For advanced AI usage with more features.",
     id: "pro",
     title: "Pro (1M tokens/month)",
-    description: "For advanced AI usage with more features.",
   },
   {
+    description: "For large teams and heavy usage.",
     id: "enterprise",
     title: "Enterprise (Unlimited tokens)",
-    description: "For large teams and heavy usage.",
   },
 ];
 

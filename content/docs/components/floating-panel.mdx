@@ -1,10 +1,14 @@
 ---
 title: Floating Panel
-description: Displays content in a floating window.
+description: Content in a floating window.
+seo:
+  description: Draggable floating window for tools and inspectors.
 links:
   doc: https://ark-ui.com/docs/components/floating-panel
   api: https://ark-ui.com/docs/components/floating-panel#api-reference
 ---
+
+import manifest from "@/registry/manifest/floating-panel";
 
 <ComponentPreview componentName="floating-panel" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/floating-panel
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -98,21 +100,25 @@ import {
 
 ### Controlled Size
 
-Control the panel size programmatically using the `size` and `onSizeChange` props.
+Use `size` and `onSizeChange` to control the panel size.
 
 <ComponentPreview componentName="floating-panel" fileName="example-controlled-size" />
 
+### Size Limits
+
+Use `minSize` and `maxSize` to limit the width and height of a resizable panel.
+
+<ComponentPreview componentName="floating-panel" fileName="example-size-limits" />
+
 ### Controlled Position
 
-Control the panel position programmatically using the `position` and `onPositionChange` props.
+Use `position` and `onPositionChange` to control the panel position.
 
 <ComponentPreview componentName="floating-panel" fileName="example-controlled-position" />
 
 ### Custom spacing
 
-Use `[--space:--spacing("value")]` on `FloatingPanelContent` to adjust internal padding.
-
-Default spacing is `--spacing(4)`.
+The `[--space:--spacing("value")]` controls the internal spacing.
 
 <ComponentPreview componentName="floating-panel" fileName="example-custom-spacing" />
 
@@ -121,6 +127,12 @@ Default spacing is `--spacing(4)`.
 ```css
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="floating-panel" />
 
 ## API Reference
 
@@ -138,10 +150,16 @@ Root component. Manages panel position and drag state.
 | `onPositionChange` | `(details: PositionChangeDetails) => void` | `-` |
 | `size` | `Size` | `-` |
 | `defaultSize` | `Size` | `-` |
+| `minSize` | `Size` | `-` |
+| `maxSize` | `Size` | `-` |
 | `onSizeChange` | `(details: SizeChangeDetails) => void` | `-` |
 | `lazyMount` | `boolean` | `true` |
+| `persistRect` | `boolean` | `-` |
 | `unmountOnExit` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
+| `initialFocusEl` | `() => MaybeElement` | `-` |
+| `finalFocusEl` | `() => MaybeElement` | `-` |
+| `restoreFocus` | `boolean` | `true` |
 | `draggable` | `boolean` | `true` |
 | `resizable` | `boolean` | `true` |
 | `className` | `string` | `-` |
@@ -164,9 +182,9 @@ Holds the panel content.
 | `resizable` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(4)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(4)` |
 
 ### FloatingPanelHeader
 
@@ -187,11 +205,11 @@ Title for the panel.
 
 ### FloatingPanelBody
 
-Scrollable body content. Uses [ScrollArea](/docs/components/scroll-area) for overflow.
+Scrollable body content. 
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `scrollFade` | `boolean` | `false` |
+| `scrollFade` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
 ### FloatingPanelCloseTrigger
@@ -202,6 +220,86 @@ Closes the panel on click.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
+
+### FloatingPanelRootProvider
+
+Provides a FloatingPanel API created with `useFloatingPanel` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseFloatingPanelReturn` | `required` |
+
+### FloatingPanelDragTrigger
+
+Public FloatingPanelDragTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### FloatingPanelControl
+
+Public FloatingPanelControl component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### FloatingPanelMinimize
+
+Public FloatingPanelMinimize component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### FloatingPanelMaximize
+
+Public FloatingPanelMaximize component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### FloatingPanelRestore
+
+Public FloatingPanelRestore component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### FloatingPanelResizeTrigger
+
+Public FloatingPanelResizeTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### FloatingPanelStageTrigger
+
+Public FloatingPanelStageTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### FloatingPanelFooter
+
+Footer area for actions. 
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

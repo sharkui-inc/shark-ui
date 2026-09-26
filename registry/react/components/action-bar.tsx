@@ -1,8 +1,9 @@
 "use client";
 
-import { Portal } from "@ark-ui/react";
 import { ark } from "@ark-ui/react/factory";
-import { Presence } from "@ark-ui/react/presence";
+import { Popover as ArkPopover } from "@ark-ui/react/popover";
+import { Portal } from "@ark-ui/react/portal";
+import { createContext } from "@ark-ui/react/utils";
 import React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
@@ -24,162 +25,55 @@ interface ActionBarPositioning {
   placement?: "bottom" | "bottom-start" | "bottom-end";
 }
 
-interface ActionBarContextValue {
-  /**
-   * The open state of the action bar
-   */
-  isOpen?: boolean;
-  /**
-   * Whether to lazy mount the action bar
-   */
-  lazyMount?: boolean;
-  /**
-   * The function to call when the action bar is closed
-   */
-  onClose?: () => void;
-  /**
-   * The function to call when the action bar is opened
-   */
-  onOpen?: () => void;
-  /**
-   * The positioning of the action bar.
-   */
-  positioning: ActionBarPositioning;
-  /**
-   * The function to call when the action bar is mounted
-   */
-  unmountOnExit?: boolean;
-}
+const defaultPositioning = { gutter: "16px", placement: "bottom" } as const;
 
-const ActionBarContext = React.createContext({} as ActionBarContextValue);
+const [ActionBarProvider, _useActionBar] = createContext<ActionBarPositioning>({
+  name: "ActionBarContext",
+  providerName: "ActionBar",
+});
 
 export interface ActionBarProps
-  extends Pick<ActionBarContextValue, "lazyMount" | "unmountOnExit"> {
-  /**
-   * Whether to close the action bar when the Escape key is pressed.
-   *
-   * @default true
-   */
-  closeOnEscape?: boolean;
-  /**
-   * The default open state of the action bar.
-   */
-  defaultOpen?: boolean;
-  /**
-   * The function to call when the open state of the action bar changes.
-   */
-  onOpenChange?: (open: boolean) => void;
-  /**
-   * The open state of the action bar.
-   */
-  open?: boolean;
+  extends Omit<ArkPopover.RootProps, "positioning"> {
   /**
    * Placement and gutter of the action bar.
    */
-  positioning?: ActionBarContextValue["positioning"];
+  positioning?: ActionBarPositioning;
 }
 
-const defaultPositioning = { placement: "bottom", gutter: "16px" } as const;
-
-export const ActionBar = (props: React.PropsWithChildren<ActionBarProps>) => {
+export const ActionBar = (props: ActionBarProps) => {
   const {
-    open,
-    defaultOpen = false,
-    closeOnEscape = true,
     positioning,
     lazyMount = true,
     unmountOnExit = true,
-    onOpenChange,
     ...rest
   } = props;
 
-  const [internalOpen, setInternalOpen] = React.useState(defaultOpen);
-
-  const isControlled = open !== undefined;
-  const isOpen = isControlled ? open : internalOpen;
-
-  const handleClose = React.useCallback(() => {
-    if (!isControlled) {
-      setInternalOpen(false);
-    }
-
-    onOpenChange?.(false);
-  }, [isControlled, onOpenChange]);
-
-  const handleOpen = React.useCallback(() => {
-    if (!isControlled) {
-      setInternalOpen(true);
-    }
-
-    onOpenChange?.(true);
-  }, [isControlled, onOpenChange]);
-
-  React.useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-
-    if (!closeOnEscape) {
-      return;
-    }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") {
-        return;
-      }
-
-      if (event.defaultPrevented) {
-        return;
-      }
-
-      event.preventDefault();
-      handleClose();
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [closeOnEscape, handleClose, isOpen]);
-
   const context = React.useMemo(
-    () => ({
-      onClose: handleClose,
-      onOpen: handleOpen,
-      isOpen,
-      positioning: { ...defaultPositioning, ...positioning },
-      lazyMount,
-      unmountOnExit,
-    }),
-    [handleClose, handleOpen, isOpen, lazyMount, unmountOnExit, positioning]
+    () => ({ ...defaultPositioning, ...positioning }),
+    [positioning]
   );
 
-  return <ActionBarContext.Provider value={context} {...rest} />;
+  return (
+    <ActionBarProvider value={context}>
+      <ArkPopover.Root
+        lazyMount={lazyMount}
+        unmountOnExit={unmountOnExit}
+        {...rest}
+        autoFocus={false}
+        closeOnEscape={false}
+        closeOnInteractOutside={false}
+        modal={false}
+      />
+    </ActionBarProvider>
+  );
 };
 
 export interface ActionBarTriggerProps
-  extends React.ComponentProps<typeof ark.button> {}
+  extends React.ComponentProps<typeof ArkPopover.Trigger> {}
 
-export const ActionBarTrigger = (props: ActionBarTriggerProps) => {
-  const { onClick, ...rest } = props;
-
-  const { onOpen, isOpen } = _useActionBar();
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onOpen?.();
-    onClick?.(event);
-  };
-
-  return (
-    <ark.button
-      aria-expanded={isOpen}
-      data-slot="action-bar-trigger"
-      data-state={isOpen ? "open" : "closed"}
-      onClick={handleClick}
-      type="button"
-      {...rest}
-    />
-  );
-};
+export const ActionBarTrigger = (props: ActionBarTriggerProps) => (
+  <ArkPopover.Trigger data-slot="action-bar-trigger" {...props} />
+);
 
 const actionBarPositionerVariants = tv({
   base: [
@@ -187,11 +81,10 @@ const actionBarPositionerVariants = tv({
     "flex",
     "px-4 pb-[calc(var(--gutter)+env(safe-area-inset-bottom,0))]",
     "pointer-events-none",
-    "data-[state=closed]:animate-out data-[state=open]:animate-in",
-    "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-    "data-[state=open]:slide-in-from-bottom-2 data-[state=closed]:slide-out-to-bottom-2",
-    "motion-reduce:animate-none!",
   ],
+  defaultVariants: {
+    placement: "bottom",
+  },
   variants: {
     placement: {
       bottom: "justify-center",
@@ -199,54 +92,48 @@ const actionBarPositionerVariants = tv({
       "bottom-start": "justify-start",
     },
   },
-  defaultVariants: {
-    placement: "bottom",
-  },
 });
 
 export interface ActionBarContentProps
   extends React.ComponentProps<typeof ark.div> {}
 
 export const ActionBarContent = (props: ActionBarContentProps) => {
-  const { "aria-labelledby": ariaLabelledby, className, ...rest } = props;
+  const { className, ...rest } = props;
 
-  const { isOpen, lazyMount, unmountOnExit, positioning } = _useActionBar();
-
-  const placement = positioning.placement;
-  const gutter = positioning.gutter;
+  const { placement, gutter } = _useActionBar();
 
   return (
     <Portal>
-      <Presence
-        asChild
-        lazyMount={lazyMount}
-        present={isOpen}
-        unmountOnExit={unmountOnExit}
+      <ark.div
+        className={cn(actionBarPositionerVariants({ placement }))}
+        data-placement={placement}
+        data-slot="action-bar-positioner"
+        style={{ "--gutter": gutter } as React.CSSProperties}
       >
-        <ark.div
-          className={cn(actionBarPositionerVariants({ placement }))}
-          data-placement={placement}
-          data-slot="action-bar-positioner"
-          style={{ "--gutter": gutter } as React.CSSProperties}
-        >
-          <ark.div
-            aria-labelledby={ariaLabelledby}
-            className={cn(
-              "[--space:--spacing(2)]",
-              "flex w-fit items-center gap-1",
-              "rounded-xl border shadow-lg/5",
-              "px-[calc(var(--space)+2px)] py-(--space)",
-              "bg-popover",
-              "text-popover-foreground",
-              "pointer-events-auto",
-              className
-            )}
-            data-slot="action-bar-content"
-            role="toolbar"
-            {...rest}
-          />
-        </ark.div>
-      </Presence>
+        <ArkPopover.Content
+          aria-label="Bulk actions"
+          className={cn(
+            "[--space:--spacing(2)]",
+            "flex w-fit items-center gap-1",
+            "rounded-xl border shadow-lg/4",
+            "px-[calc(var(--space)+2px)] py-(--space)",
+            "bg-popover",
+            "text-popover-foreground",
+            "outline-hidden",
+            "origin-(--transform-origin)",
+            "duration-150 ease-out",
+            "pointer-events-auto",
+            "data-[state=closed]:animate-out data-[state=open]:animate-in",
+            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+            "data-[state=open]:slide-in-from-bottom-2 data-[state=closed]:slide-out-to-bottom-2",
+            "motion-reduce:animate-none",
+            "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+            className
+          )}
+          data-slot="action-bar-content"
+          {...rest}
+        />
+      </ark.div>
     </Portal>
   );
 };
@@ -255,44 +142,34 @@ export interface ActionBarSeparatorProps
   extends React.ComponentProps<typeof Separator> {}
 
 export const ActionBarSeparator = (props: ActionBarSeparatorProps) => {
-  const { className, ...rest } = props;
+  const { className, orientation = "vertical", ...rest } = props;
 
   return (
     <Separator
       className={cn("mx-1 h-1/2", className)}
       data-slot="action-bar-separator"
-      orientation="vertical"
       {...rest}
+      orientation={orientation}
     />
   );
 };
 
 export interface ActionBarCloseProps
-  extends React.ComponentProps<typeof ark.button> {}
+  extends React.ComponentProps<typeof ArkPopover.CloseTrigger> {}
 
 export const ActionBarClose = (props: ActionBarCloseProps) => {
-  const { className, onClick, ...rest } = props;
-
-  const { onClose, isOpen } = _useActionBar();
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onClose?.();
-    onClick?.(event);
-  };
+  const { className, ...rest } = props;
 
   return (
-    <ark.button
+    <ArkPopover.CloseTrigger
       aria-label="Close"
       className={cn(
         "opacity-64 transition-opacity",
         "hover:opacity-100",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="action-bar-close"
-      data-state={isOpen ? "open" : "closed"}
-      onClick={handleClick}
-      type="button"
       {...rest}
     />
   );
@@ -311,14 +188,21 @@ export interface ActionBarValueProps
 }
 
 export const ActionBarValue = (props: ActionBarValueProps) => {
-  const { label, count = 0, className, children, ...rest } = props;
+  const {
+    label,
+    count = 0,
+    className,
+    children,
+    variant = "secondary",
+    ...rest
+  } = props;
 
   return (
     <Badge
       className={cn("shrink-0 font-medium text-sm tabular-nums", className)}
       data-slot="action-bar-value"
-      variant="secondary"
       {...rest}
+      variant={variant}
     >
       {children ?? label ?? count}
     </Badge>
@@ -338,14 +222,4 @@ export const ActionBarBody = (props: React.ComponentProps<typeof ark.div>) => {
       {...rest}
     />
   );
-};
-
-const _useActionBar = () => {
-  const context = React.useContext(ActionBarContext);
-
-  if (!context) {
-    throw new Error("useActionBar must be used within a ActionBarProvider.");
-  }
-
-  return context;
 };

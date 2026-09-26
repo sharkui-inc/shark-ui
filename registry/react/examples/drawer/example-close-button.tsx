@@ -1,6 +1,7 @@
 import { Button } from "@/registry/react/components/button";
 import {
   Drawer,
+  DrawerBody,
   DrawerContent,
   DrawerHeader,
   DrawerTrigger,
@@ -11,12 +12,18 @@ const Example = () => (
     <DrawerTrigger asChild>
       <Button variant="outline">Open</Button>
     </DrawerTrigger>
-
     <DrawerContent showCloseButton>
       <DrawerHeader
-        description="Use the close button in the top right corner, press Escape, or swipe down to dismiss."
+        description="The corner button, Escape, and a downward swipe all dismiss it."
         title="Close button"
       />
+      <DrawerBody>
+        <div className="mx-auto w-full max-w-xs">
+          <p className="text-muted-foreground text-sm">
+            The close button stays in the top corner.
+          </p>
+        </div>
+      </DrawerBody>
     </DrawerContent>
   </Drawer>
 );

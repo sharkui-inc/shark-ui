@@ -8,7 +8,7 @@ const SkipNavDemo = () => (
     <SkipNavLink className="focus:absolute" id="demo-content" />
 
     <SkipNavContent
-      className="max-w-sm rounded-lg border bg-card p-4 focus:ring-2"
+      className="max-w-sm rounded-lg border border-transparent bg-card p-4 outline-hidden focus:border-ring/64 focus:ring-2 focus:ring-ring/24"
       id="demo-content"
       tabIndex={undefined}
     >

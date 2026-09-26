@@ -1,0 +1,116 @@
+---
+title: React Aria
+description: Migrate your project from React Aria to Shark UI.
+links:
+  doc: https://react-aria.adobe.com
+---
+
+[React Aria Components](https://react-aria.adobe.com) and [Ark UI](https://ark-ui.com) are headless libraries with composable parts. Shark UI wraps Ark with Tailwind styles and installs source into your project.
+
+Install the Shark component, read its anatomy, then adapt the markup and state.
+
+## What changes
+
+| React Aria pattern | Shark UI pattern |
+| --- | --- |
+| `items` and render-function children | Ark `collection`; render `collection.items` |
+| `selectedKey` on Select | `value` and `defaultValue` string arrays |
+| `isDisabled` / `isInvalid` | `disabled` / `invalid` |
+| `className` render functions | Tailwind classes on Shark parts |
+| `<Label>` in compound controls | `Field` and `FieldLabel` where applicable |
+
+## Component equivalents
+
+| React Aria Components | Shark UI |
+| --- | --- |
+| Select | [Select](/docs/components/select) |
+| ComboBox | [Combobox](/docs/components/combobox) |
+| ListBox | [Listbox](/docs/components/listbox) |
+| Label | [Field](/docs/components/field) |
+
+Browse [Components](/docs/components) for same-name components such as Dialog, Tabs, and Button.
+
+## Select
+
+React Aria Select uses child items and a single selected key by default:
+
+```tsx
+import {
+  Button,
+  Label,
+  ListBox,
+  ListBoxItem,
+  Popover,
+  Select,
+  SelectValue,
+} from "react-aria-components";
+
+<Select defaultSelectedKey="cat">
+  <Label>Favorite animal</Label>
+  <Button>
+    <SelectValue />
+  </Button>
+  <Popover>
+    <ListBox>
+      <ListBoxItem id="cat">Cat</ListBoxItem>
+      <ListBoxItem id="dog">Dog</ListBoxItem>
+    </ListBox>
+  </Popover>
+</Select>;
+```
+
+Shark Select uses an Ark collection. Its `value` and `defaultValue` are arrays, including for a single selection:
+
+```tsx
+import { createListCollection } from "@ark-ui/react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const animals = createListCollection({ items: ["Cat", "Dog"] });
+
+<Select collection={animals} defaultValue={["Cat"]}>
+  <SelectTrigger>
+    <SelectValue placeholder="Favorite animal" />
+  </SelectTrigger>
+  <SelectContent>
+    {animals.items.map((item) => (
+      <SelectItem item={item} key={item}>
+        {item}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>;
+```
+
+## Combobox
+
+Use `useFilter` and `useListCollection` so filtering updates the collection rendered by [Combobox](/docs/components/combobox).
+
+## Labels and styling
+
+Use [Field](/docs/components/field) and `FieldLabel` to label controls where the component anatomy supports that composition. Shark uses `disabled` and `invalid`; React Aria commonly uses `isDisabled` and `isInvalid`.
+
+React Aria exposes state through render props and data attributes. Shark components include Tailwind styles by default. Use the documented parts and `className` props to customize them.
+
+## Overlays
+
+Include a title part in Dialog, Sheet, and Drawer. Use `className="sr-only"` when the title should not show visually.
+
+## Theming
+
+Map your React Aria theme variables to Shark semantic tokens. See [Colors](/docs/colors) and [Styling](/docs/styling). Shark adds `destructive-foreground`, `success`, `warning`, and `info` pairs.
+
+## Checklist
+
+- Replace `react-aria-components` imports with Shark components from the docs.
+- Add Ark collections where list components require them.
+- Re-check controlled values; do not assume React Aria keys match Shark value shapes.
+- Keep overlay titles and control labels accessible.
+- Use logical spacing for [RTL](/docs/rtl).
+
+Coming from shadcn/ui on the React Aria base? See the [shadcn/ui guide](/docs/migration/shadcn).

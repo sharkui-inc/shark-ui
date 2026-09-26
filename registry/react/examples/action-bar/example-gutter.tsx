@@ -18,8 +18,6 @@ import {
 } from "@/registry/react/components/action-bar";
 import { Button } from "@/registry/react/components/button";
 
-const gutters = ["24px", "32px"] as const;
-
 const Example = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [gutter, setGutter] = React.useState<(typeof gutters)[number]>("24px");
@@ -42,7 +40,7 @@ const Example = () => {
       </div>
 
       <ActionBar
-        onOpenChange={setIsOpen}
+        onOpenChange={({ open }) => setIsOpen(open)}
         open={isOpen}
         positioning={{ gutter, placement: "bottom" }}
       >
@@ -51,20 +49,20 @@ const Example = () => {
           <ActionBarSeparator />
           <ActionBarBody>
             <Button variant="ghost">
-              <PencilIcon />
+              <PencilIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Edit</span>
             </Button>
             <Button variant="ghost">
-              <DownloadIcon />
+              <DownloadIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Export</span>
             </Button>
             <Button variant="ghost">
-              <ArchiveIcon />
+              <ArchiveIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Archive</span>
             </Button>
             <ActionBarSeparator />
             <Button variant="destructive">
-              <Trash2Icon />
+              <Trash2Icon data-icon="inline-start" />
               <span className="max-sm:sr-only">Delete</span>
             </Button>
           </ActionBarBody>
@@ -79,5 +77,7 @@ const Example = () => {
     </>
   );
 };
+
+const gutters = ["24px", "32px"] as const;
 
 export default Example;

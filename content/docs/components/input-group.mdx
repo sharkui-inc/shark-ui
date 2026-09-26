@@ -1,7 +1,11 @@
 ---
 title: Input Group
 description: Group input elements together.
+seo:
+  description: "Input plus inline addons: icons, buttons, prefixes, and kbd hints."
 ---
+
+import manifest from "@/registry/manifest/input-group";
 
 <ComponentPreview componentName="input-group" />
 
@@ -30,9 +34,7 @@ npx shadcn@latest add @shark/input-group
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -79,6 +81,16 @@ import {
 </InputGroup>
 ```
 
+## States
+
+### Disabled
+
+<ComponentPreview componentName="input-group" fileName="example-disabled" />
+
+### Invalid
+
+<ComponentPreview componentName="input-group" fileName="example-invalid" />
+
 ## Align
 
 Use the `align` prop to change the alignment of the input group.
@@ -115,15 +127,11 @@ Use the `size` prop to change the size of the input group.
 
 <ComponentPreview componentName="input-group" fileName="example-size-lg" />
 
-## States
+## Pill
 
-### Disabled
+The `pill` prop creates fully rounded input groups.
 
-<ComponentPreview componentName="input-group" fileName="example-disabled" />
-
-### Invalid
-
-<ComponentPreview componentName="input-group" fileName="example-invalid" />
+<ComponentPreview componentName="input-group" fileName="example-pill" />
 
 ## Examples
 
@@ -167,9 +175,15 @@ Use `FieldGroup` with textarea to build forms. Combine subject input, message te
 
 ### Password Strength Checker
 
-A complete password checker with show/hide toggle, clear button, and real-time strength indicator. A strong password requires at least 8 characters with uppercase, lowercase, number, and special character.
+Password field with visibility toggle, clear, and strength meter.
 
 <ComponentPreview componentName="input-group" fileName="example-password-strength-checker" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="input-group" />
 
 ## API Reference
 
@@ -180,7 +194,8 @@ Wraps input with optional addons (labels, buttons, icons) on any side.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
-| `className` | `string` | - |
+| `pill` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ### InputGroupAddon
 
@@ -189,7 +204,7 @@ Holds addon content (labels, buttons, icons) beside the input.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `align` | `"inline-start" \| "inline-end" \| "block-start" \| "block-end"` | `"inline-start"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### InputGroupButton
 
@@ -197,10 +212,10 @@ Button inside an addon. Typically used for reveal/hide, clear, or search.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `size` | [ButtonSize](/docs/components/button#sizes) | `"xs"` |
-| `variant` | [ButtonVariant](/docs/components/button#variants) | `"ghost"` |
+| `size` | [`ButtonSize`](/docs/components/button#sizes) | `"xs"` |
+| `variant` | [`ButtonVariant`](/docs/components/button#variants) | `"ghost"` |
 | `type` | `"button" \| "submit" \| "reset"` | `"button"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### InputGroupText
 
@@ -208,7 +223,7 @@ Static text label inside an addon.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### InputGroupInput
 
@@ -216,7 +231,7 @@ Text input. Accepts all native input props.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### InputGroupTextarea
 
@@ -224,4 +239,4 @@ Multi-line text input. Accepts all native textarea props.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |

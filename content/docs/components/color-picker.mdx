@@ -1,10 +1,14 @@
 ---
 title: Color Picker
-description: Pick colors with hue and alpha controls.
+description: Pick colors with hue and alpha.
+seo:
+  description: Pick colors with hue, alpha, and channel fields.
 links:
   doc: https://ark-ui.com/docs/components/color-picker
   api: https://ark-ui.com/docs/components/color-picker#api-reference
 ---
+
+import manifest from "@/registry/manifest/color-picker";
 
 <ComponentPreview componentName="color-picker" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/color-picker
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -96,7 +98,7 @@ import {
 
 ### Controlled
 
-Use the `value` and `onValueChange` props to programmatically control the color picker's state.
+Use `value` and `onValueChange` to control the color picker.
 
 <ComponentPreview componentName="color-picker" fileName="example-input-controlled" />
 
@@ -266,7 +268,7 @@ import {
 
 ### Controlled
 
-Use the `value` and `onValueChange` props to programmatically control the swatch picker's state.
+Use `value` and `onValueChange` to control the swatch picker.
 
 <ComponentPreview componentName="color-picker" fileName="example-swatch-picker-controlled" />
 
@@ -400,9 +402,7 @@ import {
 
 ### Custom spacing
 
-Use `[--space:--spacing("value")]` on `ColorPickerContent` to adjust internal spacing.
-
-Default spacing is `--spacing(3)`.
+The `[--space:--spacing("value")]` controls the internal spacing.
 
 <ComponentPreview componentName="color-picker" fileName="example-custom-spacing" />
 
@@ -412,6 +412,28 @@ Default spacing is `--spacing(3)`.
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
 
+## RTL
+
+### Input
+
+<RTLComponentPreview componentName="color-picker" fileName="example-input-rtl" />
+
+### Popover
+
+<RTLComponentPreview componentName="color-picker" fileName="example-popover-rtl" />
+
+### Swatch Picker
+
+<RTLComponentPreview componentName="color-picker" fileName="example-swatch-picker-rtl" />
+
+### Area
+
+<RTLComponentPreview componentName="color-picker" fileName="example-area-rtl" />
+
+### Slider
+
+<RTLComponentPreview componentName="color-picker" fileName="example-slider-rtl" />
+
 ## API Reference
 
 ### ColorPicker
@@ -420,16 +442,16 @@ Root element of the color picker.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | - |
-| `defaultValue` | `string` | - |
-| `onValueChange` | `(details: ColorPickerValueChangeDetails) => void` | - |
+| `value` | `string` | `-` |
+| `defaultValue` | `string` | `-` |
+| `onValueChange` | `(details: ColorPickerValueChangeDetails) => void` | `-` |
 | `disabled` | `boolean` | `false` |
-| `format` | `"hex" \| "hexa" \| "rgb" \| "rgba" \| "hsl" \| "hsla" \| "hsb" \| "hsba" \| "oklch"` | - |
+| `format` | `"hex" \| "hexa" \| "rgb" \| "rgba" \| "hsl" \| "hsla" \| "hsb" \| "hsba" \| "oklch"` | `-` |
 | `inline` | `boolean` | `false` |
 | `positioning` | `PositioningOptions` | `{ placement: "top-start" }` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ColorPickerTrigger
 
@@ -437,7 +459,7 @@ Button or element that opens the color picker popover.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### ColorPickerContent
@@ -446,11 +468,11 @@ Holds the color picker popover. Displayed in a portal.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(3)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(3)` |
 
 ### ColorPickerControl
 
@@ -458,7 +480,7 @@ Container for grouping control elements such as area, sliders, and inputs.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ColorPickerView
 
@@ -466,8 +488,8 @@ Container for sliders and inputs. Can specify `format` for child value display.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `format` | `"hex" \| "hexa" \| "rgb" \| "rgba" \| "hsl" \| "hsla" \| "hsb" \| "hsba" \| "oklch"` | - |
-| `className` | `string` | - |
+| `format` | `"hex" \| "hexa" \| "rgb" \| "rgba" \| "hsl" \| "hsla" \| "hsb" \| "hsba" \| "oklch"` | `-` |
+| `className` | `string` | `-` |
 
 ### ColorPickerArea
 
@@ -476,9 +498,9 @@ Two-dimensional color selection area.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `showDots` | `boolean` | `false` |
-| `xChannel` | `"hue" \| "saturation" \| "brightness" \| "lightness" \| "red" \| "green" \| "blue" \| "alpha"` | - |
-| `yChannel` | `"hue" \| "saturation" \| "brightness" \| "lightness" \| "red" \| "green" \| "blue" \| "alpha"` | - |
-| `className` | `string` | - |
+| `xChannel` | `"hue" \| "saturation" \| "brightness" \| "lightness" \| "red" \| "green" \| "blue" \| "alpha"` | `-` |
+| `yChannel` | `"hue" \| "saturation" \| "brightness" \| "lightness" \| "red" \| "green" \| "blue" \| "alpha"` | `-` |
+| `className` | `string` | `-` |
 
 ### ColorPickerAreaThumb
 
@@ -486,7 +508,7 @@ Draggable thumb within the color area.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ColorPickerSlider
 
@@ -494,9 +516,9 @@ Slider for adjusting a color channel.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `channel` | `"hex" \| "hexa" \| "red" \| "green" \| "blue" \| "hue" \| "saturation" \| "brightness" \| "lightness" \| "alpha"` | - |
+| `channel` | `"hex" \| "hexa" \| "red" \| "green" \| "blue" \| "hue" \| "saturation" \| "brightness" \| "lightness" \| "alpha"` | `-` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ColorPickerTransparencyGrid
 
@@ -504,7 +526,7 @@ Checkerboard pattern for transparency. Shown as child of `ColorPickerSlider` whe
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ColorPickerEyeDropperTrigger
 
@@ -515,7 +537,7 @@ Button that activates the native Eye Dropper API to sample colors from the scree
 | `variant` | `ButtonProps["variant"]` | `"outline"` |
 | `size` | `ButtonProps["size"]` | `"icon-md"` |
 | `children` | `ReactNode` | `Pipette` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ColorPickerInput
 
@@ -532,7 +554,7 @@ Compact swatch that displays the current color. Use inside an input group for in
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ColorPickerSwatchGroup
 
@@ -540,7 +562,7 @@ Container for swatch triggers in swatch picker mode.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ColorPickerSwatchTrigger
 
@@ -548,8 +570,8 @@ Button that selects a color when clicked. Wraps `ColorPickerSwatch` and optional
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | - |
-| `className` | `string` | - |
+| `value` | `string` | `-` |
+| `className` | `string` | `-` |
 
 ### ColorPickerSwatch
 
@@ -557,8 +579,8 @@ Color swatch display. Use as a child of `ColorPickerSwatchTrigger`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | - |
-| `className` | `string` | - |
+| `value` | `string` | `-` |
+| `className` | `string` | `-` |
 
 ### ColorPickerSwatchIndicator
 
@@ -567,7 +589,7 @@ Check mark or custom icon shown when a swatch is selected. Pass children to cust
 | Prop | Type | Default |
 | --- | --- | --- |
 | `children` | `ReactNode` | `CheckIcon` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ColorPickerValue
 
@@ -575,8 +597,8 @@ Displays the current color as formatted text.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `format` | `"hex" \| "hexa" \| "rgb" \| "rgba" \| "hsl" \| "hsla" \| "hsb" \| "hsba" \| "oklch"` | - |
-| `className` | `string` | - |
+| `format` | `"hex" \| "hexa" \| "rgb" \| "rgba" \| "hsl" \| "hsla" \| "hsb" \| "hsba" \| "oklch"` | `-` |
+| `className` | `string` | `-` |
 
 ### ColorPickerValueSwatch
 
@@ -584,11 +606,19 @@ Displays the current color as a swatch. Use for standalone value preview.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### parseColor
 
 Exported utility to parse color strings. Use for programmatic color handling.
+
+### ColorPickerRootProvider
+
+Provides a ColorPicker API created with `useColorPicker` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseColorPickerReturn` | `required` |
 
 ---
 

@@ -21,6 +21,6 @@ const Example = () => (
   </Menu>
 );
 
-const items = Array.from({ length: 15 }, (_, i) => `Item ${i + 1}`);
+const items = Array.from({ length: 40 }, (_, i) => `Item ${i + 1}`);
 
 export default Example;

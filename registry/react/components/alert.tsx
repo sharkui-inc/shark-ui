@@ -16,41 +16,41 @@ export const alertVariants = tv({
     "has-[>svg]:gap-x-2 [&_svg]:h-lh [&_svg]:w-4",
     "has-data-[slot=alert-action]:grid-cols-[1fr_auto]",
   ],
+  defaultVariants: {
+    variant: "default",
+  },
   variants: {
     variant: {
       default: [
-        "bg-input/4",
+        "bg-input/8",
         "[&_svg]:text-muted-foreground",
         "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-muted",
       ],
       destructive: [
-        "bg-destructive/4",
+        "bg-destructive/8",
         "border-destructive/32",
-        "[&_svg]:text-destructive",
-        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-destructive/10",
+        "[&_svg]:text-destructive-foreground",
+        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-destructive/8",
       ],
       info: [
-        "bg-info/4",
+        "bg-info/8",
         "border-info/32",
-        "[&_svg]:text-info",
-        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-info/10",
-      ],
-      warning: [
-        "bg-warning/4",
-        "border-warning/32",
-        "[&_svg]:text-warning",
-        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-warning/10",
+        "[&_svg]:text-info-foreground",
+        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-info/8",
       ],
       success: [
-        "bg-success/4",
+        "bg-success/8",
         "border-success/32",
-        "[&_svg]:text-success",
-        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-success/10",
+        "[&_svg]:text-success-foreground",
+        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-success/8",
+      ],
+      warning: [
+        "bg-warning/8",
+        "border-warning/32",
+        "[&_svg]:text-warning-foreground",
+        "[&_[data-slot=alert-action]_[data-variant=ghost]]:hover:bg-warning/8",
       ],
     },
-  },
-  defaultVariants: {
-    variant: "default",
   },
 });
 
@@ -75,11 +75,7 @@ export const AlertTitle = (props: React.ComponentProps<typeof ark.div>) => {
 
   return (
     <ark.div
-      className={cn(
-        "font-heading font-medium",
-        "[svg~&]:col-start-2",
-        className
-      )}
+      className={cn("font-medium", "[svg~&]:col-start-2", className)}
       data-slot="alert-title"
       {...rest}
     />

@@ -1,21 +1,38 @@
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
-import { PinInput as ArkPinInput } from "@ark-ui/react/pin-input";
+import {
+  PinInput as ArkPinInput,
+  usePinInput as useArkPinInput,
+  usePinInputContext as useArkPinInputContext,
+} from "@ark-ui/react/pin-input";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Input, type InputProps } from "@/registry/react/components/input";
+
+export const useInputOTP = useArkPinInput;
+export const useInputOTPContext = useArkPinInputContext;
+export const InputOTPRootProvider = ArkPinInput.RootProvider;
 
 interface InputOTPProps
   extends React.ComponentProps<typeof ArkPinInput.Root>,
     Pick<InputProps, "size"> {}
 
 export const InputOTP = (props: InputOTPProps) => {
-  const { placeholder, otp = true, className, children, ...rest } = props;
+  const {
+    size = "md",
+    placeholder,
+    otp = true,
+    className,
+    children,
+    tabIndex,
+    ...rest
+  } = props;
 
   return (
     <ArkPinInput.Root
       className="group/input-otp"
+      data-size={size}
       data-slot="input-otp"
       otp={otp}
       placeholder={placeholder ?? ""}
@@ -24,7 +41,9 @@ export const InputOTP = (props: InputOTPProps) => {
       <ArkPinInput.Control
         className={cn(
           "flex items-center gap-2",
-          "*:data-[slot=input-otp-input]:size-9",
+          "*:data-[slot=input-otp-input]:size-8",
+          "in-data-[size=lg]:*:data-[slot=input-otp-input]:size-9",
+          "in-data-[size=sm]:*:data-[slot=input-otp-input]:size-7",
           className
         )}
         data-slot="input-otp-control"
@@ -32,7 +51,7 @@ export const InputOTP = (props: InputOTPProps) => {
         {children}
       </ArkPinInput.Control>
 
-      <ArkPinInput.HiddenInput />
+      <ArkPinInput.HiddenInput tabIndex={tabIndex} />
     </ArkPinInput.Root>
   );
 };

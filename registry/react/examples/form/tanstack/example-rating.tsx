@@ -21,29 +21,22 @@ import {
 } from "@/registry/react/components/field";
 import { Rating } from "@/registry/react/components/rating";
 
-const formSchema = z.object({
-  recommendScore: z
-    .number()
-    .min(1, "Please rate how likely you are to recommend us.")
-    .max(5),
-});
-
 const Example = () => {
   const form = useForm({
     defaultValues: { recommendScore: 0 },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "rating-submitted",
-        title: "Feedback saved",
         description: (
           <pre className="mt-2">
             <code>{JSON.stringify(value, null, 2)}</code>
           </pre>
         ),
+        id: "rating-submitted",
+        title: "Feedback saved",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -96,5 +89,12 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  recommendScore: z
+    .number()
+    .min(1, "Please rate how likely you are to recommend us.")
+    .max(5),
+});
 
 export default Example;

@@ -33,7 +33,7 @@ const Example = () => {
   return (
     <CommandDialog onOpenChange={({ open: o }) => setOpen(o)} open={open}>
       <CommandDialogTrigger asChild>
-        <Button variant="outline">Open Command Palette</Button>
+        <Button variant="outline">Open Command</Button>
       </CommandDialogTrigger>
       <CommandDialogContent>
         <Command
@@ -72,13 +72,53 @@ const Example = () => {
 };
 
 const initialItems = [
-  { label: "New File", shortcut: "⌘N", value: "new", group: "File" },
-  { label: "Save", shortcut: "⌘S", value: "save", group: "File" },
-  { label: "Open", shortcut: "⌘O", value: "open", group: "File" },
-  { label: "Undo", shortcut: "⌘Z", value: "undo", group: "Edit" },
-  { label: "Redo", shortcut: "⌘Z", value: "redo", group: "Edit" },
-  { label: "Cut", shortcut: "⌘X", value: "cut", group: "Edit" },
-  { label: "Copy", shortcut: "⌘C", value: "copy", group: "Edit" },
+  { group: "File", label: "New File", shortcut: "⌘N", value: "new" },
+  { group: "File", label: "Open", shortcut: "⌘O", value: "open" },
+  { group: "File", label: "Save", shortcut: "⌘S", value: "save" },
+  { group: "File", label: "Save As", shortcut: "⌘⇧S", value: "save-as" },
+  { group: "File", label: "Close", shortcut: "⌘W", value: "close" },
+  { group: "File", label: "Export", shortcut: "⌘E", value: "export" },
+  { group: "File", label: "Print", shortcut: "⌘P", value: "print" },
+  { group: "Edit", label: "Undo", shortcut: "⌘Z", value: "undo" },
+  { group: "Edit", label: "Redo", shortcut: "⌘⇧Z", value: "redo" },
+  { group: "Edit", label: "Cut", shortcut: "⌘X", value: "cut" },
+  { group: "Edit", label: "Copy", shortcut: "⌘C", value: "copy" },
+  { group: "Edit", label: "Paste", shortcut: "⌘V", value: "paste" },
+  { group: "Edit", label: "Select All", shortcut: "⌘A", value: "select-all" },
+  { group: "Edit", label: "Find", shortcut: "⌘F", value: "find" },
+  { group: "Edit", label: "Replace", shortcut: "⌘⌥F", value: "replace" },
+  {
+    group: "View",
+    label: "Toggle Sidebar",
+    shortcut: "⌘B",
+    value: "toggle-sidebar",
+  },
+  { group: "View", label: "Zoom In", shortcut: "⌘=", value: "zoom-in" },
+  { group: "View", label: "Zoom Out", shortcut: "⌘-", value: "zoom-out" },
+  {
+    group: "View",
+    label: "Command Palette",
+    shortcut: "⌘K",
+    value: "command-palette",
+  },
+  {
+    group: "Navigation",
+    label: "Go to File",
+    shortcut: "⌘P",
+    value: "go-to-file",
+  },
+  {
+    group: "Navigation",
+    label: "Go to Line",
+    shortcut: "⌃G",
+    value: "go-to-line",
+  },
+  {
+    group: "Navigation",
+    label: "Go to Symbol",
+    shortcut: "⌘⇧O",
+    value: "go-to-symbol",
+  },
 ];
 
 export default Example;

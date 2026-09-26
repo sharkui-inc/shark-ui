@@ -3,15 +3,19 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   Popover as ArkPopover,
-  usePopoverContext,
+  usePopover as useArkPopover,
+  usePopoverContext as useArkPopoverContext,
 } from "@ark-ui/react/popover";
 import { Portal } from "@ark-ui/react/portal";
 import { XIcon } from "lucide-react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
-export const usePopover = usePopoverContext;
+export const usePopover = useArkPopover;
+export const usePopoverContext = useArkPopoverContext;
+export const PopoverRootProvider = ArkPopover.RootProvider;
 
 export const Popover = (
   props: React.ComponentProps<typeof ArkPopover.Root>
@@ -49,39 +53,48 @@ export const PopoverPositioner = (
 interface PopoverContentProps
   extends React.ComponentProps<typeof ArkPopover.Content> {
   /**
+   * Whether to show the arrow
+   *
+   * @default false
+   */
+  showArrow?: boolean;
+  /**
    * Show close button at the top right corner
    *
-   * @default true
+   * @default false
    */
   showCloseButton?: boolean;
 }
 
 export const PopoverContent = (props: PopoverContentProps) => {
-  const { showCloseButton = false, className, children, ...rest } = props;
+  const {
+    showArrow = false,
+    showCloseButton = false,
+    className,
+    children,
+    ...rest
+  } = props;
 
   return (
     <Portal>
       <PopoverPositioner>
         <ArkPopover.Content
           className={cn(
-            "relative",
             "z-[calc(50+var(--layer-index,0))]",
             "[--space:--spacing(4)]",
             "w-auto min-w-32",
             "flex flex-col",
             "bg-popover",
             "text-popover-foreground",
-            "rounded-xl border shadow-lg/5",
+            "rounded-xl border shadow-lg/4",
             "outline-hidden",
             "origin-(--transform-origin)",
+            "duration-150 ease-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
             "data-[state=closed]:animate-out data-[state=open]:animate-in",
-            "data-[placement=bottom]:slide-in-from-top-2",
-            "data-[placement=left]:slide-in-from-end-2",
-            "data-[placement=right]:slide-in-from-start-2",
-            "data-[placement=top]:slide-in-from-bottom-2",
-            "motion-reduce:animate-none!",
+            "motion-reduce:animate-none",
+            "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
           )}
           data-slot="popover-content"
@@ -101,6 +114,8 @@ export const PopoverContent = (props: PopoverContentProps) => {
               </Button>
             </PopoverClose>
           )}
+
+          {showArrow ? <PopoverArrow /> : null}
         </ArkPopover.Content>
       </PopoverPositioner>
     </Portal>
@@ -174,14 +189,11 @@ export const PopoverBody = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
 
   return (
-    <ScrollArea>
+    <ScrollArea className="min-w-0 flex-1" overscrollContain scrollFade>
       <ark.div
         className={cn(
-          "flex-1",
           "p-(--space)",
-          "overflow-auto",
-          "in-[[data-slot=popover-content]:has([data-slot=popover-header])]:pt-1",
-          "in-[[data-slot=popover-content]:has([data-slot=popover-footer]:not(.border-t))]:pb-1",
+          "in-[[data-slot=popover-content]:has([data-slot=popover-header]:not(.sr-only))]:pt-1",
           className
         )}
         data-slot="popover-body"
@@ -198,10 +210,9 @@ export const PopoverFooter = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        "sm:rounded-b-[calc(var(--radius-lg)-1px)]",
         "px-(--space) py-4",
         "bg-muted/64",
-        "border-t",
+        "rounded-b-[max(0px,calc(var(--radius-xl)-1px))] border-t",
         className
       )}
       data-slot="popover-footer"
@@ -217,7 +228,7 @@ export const PopoverClose = (
 export const PopoverArrow = (
   props: React.ComponentProps<typeof ArkPopover.Arrow>
 ) => {
-  const { style, ...rest } = props;
+  const { style, children, ...rest } = props;
 
   return (
     <ArkPopover.Arrow
@@ -231,7 +242,7 @@ export const PopoverArrow = (
       }
       {...rest}
     >
-      <ArkPopover.ArrowTip className="border-s border-t" />
+      {children ?? <ArkPopover.ArrowTip className="border-t border-l" />}
     </ArkPopover.Arrow>
   );
 };

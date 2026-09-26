@@ -1,10 +1,14 @@
 ---
 title: Dialog
-description: A dialog for displaying content.
+description: Modal dialog for focused content.
+seo:
+  description: Modal for confirmations and focused tasks.
 links:
   doc: https://ark-ui.com/docs/components/dialog
   api: https://ark-ui.com/docs/components/dialog#api-reference
 ---
+
+import manifest from "@/registry/manifest/dialog";
 
 <ComponentPreview componentName="dialog" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/dialog
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -172,17 +174,33 @@ Use `initialFocusEl` to control which element receives focus when the dialog ope
 
 <ComponentPreview componentName="dialog" fileName="example-initial-focus" />
 
+### Autofocus
+
+Order: `initialFocusEl`, then `[data-autofocus]`, then the first tabbable. Prefer DOM order for footer actions - see `DialogFooter`.
+
+<ComponentPreview componentName="dialog" fileName="example-autofocus" />
+
+### Multiple triggers
+
+`value` on each `DialogTrigger`. `onTriggerValueChange` tracks which button opened the dialog.
+
+<ComponentPreview componentName="dialog" fileName="example-multiple-triggers" />
+
 ### Nested
 
 Nest dialogs within one another.
 
 <ComponentPreview componentName="dialog" fileName="example-nested" />
 
+### Centered on mobile
+
+Set `bottomStickOnMobile={false}` to keep the dialog centered on mobile.
+
+<ComponentPreview componentName="dialog" fileName="example-centered-on-mobile" />
+
 ### Custom spacing
 
-Use `[--space:--spacing("value")]` on `DialogContent` to adjust internal padding.
-
-Default spacing is `--spacing(6)`.
+The `[--space:--spacing("value")]` controls the internal spacing.
 
 <ComponentPreview componentName="dialog" fileName="example-custom-spacing" />
 
@@ -191,6 +209,24 @@ Default spacing is `--spacing(6)`.
 ```css
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
+
+### Sidebar
+
+Put `Sidebar` in `DialogContent` with a fixed height. Use `DialogBody` inside `SidebarInset` for the scrollable panel. Use `min-h-0` on `SidebarProvider` and `collapsible="none"`.
+
+<ComponentPreview componentName="dialog" fileName="example-sidebar" />
+
+### Responsive
+
+Use [Drawer](/docs/components/drawer#responsive-dialog) below the mobile breakpoint and `Dialog` on larger screens for the same form.
+
+<ComponentPreview componentName="drawer" fileName="example-responsive-dialog" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="dialog" />
 
 ## API Reference
 
@@ -203,11 +239,16 @@ Root context provider. Controls open state and modal behavior.
 | `open` | `boolean` | `-` |
 | `defaultOpen` | `boolean` | `false` |
 | `onOpenChange` | `({ open }: OpenChangeDetails) => void` | `-` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
 | `modal` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
 | `closeOnInteractOutside` | `boolean` | `true` |
 | `initialFocusEl` | `() => MaybeElement` | `-` |
 | `finalFocusEl` | `() => MaybeElement` | `-` |
+| `lazyMount` | `boolean` | `true` |
+| `unmountOnExit` | `boolean` | `true` |
+| `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
+| `onEnterComplete` | `() => void` | `-` |
 | `onEscapeKeyDown` | `(event: KeyboardEvent) => void` | `-` |
 | `onInteractOutside` | `(event: InteractOutsideEvent) => void` | `-` |
 | `className` | `string` | `-` |
@@ -219,6 +260,7 @@ Opens the dialog on click. Use `asChild` for custom trigger elements.
 | Prop | Type | Default |
 |------|------|---------|
 | `asChild` | `boolean` | `false` |
+| `value` | `string` | `-` |
 | `className` | `string` | `-` |
 
 ### DialogContent
@@ -229,11 +271,12 @@ Holds the dialog panel. Supports size variants from sm to fullscreen.
 |------|------|---------|
 | `size` | `"sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "3xl" \| "4xl" \| "5xl" \| "6xl" \| "fullscreen"` | `"md"` |
 | `showCloseButton` | `boolean` | `true` |
+| `bottomStickOnMobile` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(6)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(6)` |
 
 ### DialogHeader
 
@@ -247,15 +290,18 @@ Header area for title and description. Accepts props or children.
 
 ### DialogBody
 
-Scrollable body content. Uses [ScrollArea](/docs/components/scroll-area) for overflow.
+Scrollable body content.
 
 | Prop | Type | Default |
 |------|------|---------|
+| `scrollFade` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
 ### DialogFooter
 
 Footer area for action buttons.
+
+Put the primary action **first in the DOM**, then Cancel. The footer uses `flex-col` / `sm:flex-row-reverse` so the visual order stays Cancel on the left and Confirm on the right (Confirm on top on mobile). That way Tab and initial focus hit Confirm when there is no earlier field.
 
 | Prop | Type | Default |
 |------|------|---------|
@@ -294,6 +340,24 @@ Dimmed overlay behind the dialog panel.
 
 | Prop | Type | Default |
 |------|------|---------|
+| `className` | `string` | `-` |
+
+### DialogRootProvider
+
+Provides a Dialog API created with `useDialog` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseDialogReturn` | `required` |
+| `modal` | `boolean` | `true` |
+
+### DialogPositioner
+
+Public DialogPositioner component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
 ---

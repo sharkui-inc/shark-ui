@@ -1,10 +1,14 @@
 ---
 title: Toast
-description: Provides feedback on an action.
+description: Short-lived feedback on an action.
+seo:
+  description: Short-lived notifications for success, errors, and undo.
 links:
   doc: https://ark-ui.com/docs/components/toast
   api: https://ark-ui.com/docs/components/toast#api-reference
 ---
+
+import manifest from "@/registry/manifest/toast";
 
 <ComponentPreview componentName="toast" />
 
@@ -18,10 +22,33 @@ links:
 </TabsList>
 
 <TabsContent value="cli">
-  
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
 ```bash
 npx shadcn@latest add @shark/toast
 ```
+
+<Step>Add the Toaster component.</Step>
+
+```tsx title="app/layout.tsx"
+import { Toaster } from "@/components/ui/toast"
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <main>{children}</main>
+        <Toaster />
+      </body>
+    </html>
+  )
+}
+```
+
+</Steps>
 
 </TabsContent>
 
@@ -33,52 +60,57 @@ npx shadcn@latest add @shark/toast
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
 @theme inline {
   --color-destructive-foreground: var(--destructive-foreground);
-  --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
-  --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
-  --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
 }
 
 :root {
   --destructive-foreground: var(--color-red-700);
-  --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-700);
-  --success: var(--color-emerald-500);
   --success-foreground: var(--color-emerald-700);
-  --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-700);
 }
 
 .dark {
   --destructive-foreground: var(--color-red-400);
-  --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-400);
-  --success: var(--color-emerald-500);
   --success-foreground: var(--color-emerald-400);
-  --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-400);
 }
 ```
 </CodeCollapsibleWrapper>
-
 
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource title="components/ui/toast.tsx" src="/toast.tsx" />
 
 <Step>Update the import paths to match your project setup.</Step>
+
+<Step>Add the Toaster component.</Step>
+
+```tsx title="app/layout.tsx"
+import { Toaster } from "@/components/ui/toast"
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <main>{children}</main>
+        <Toaster />
+      </body>
+    </html>
+  )
+}
+```
 
 </Steps>
 
@@ -89,21 +121,14 @@ npm install @ark-ui/react lucide-react tailwind-variants
 ## Usage
 
 ```tsx
-import { Toaster } from "@/components/ui/toast";
+import { toast } from "@/components/ui/toast"
 ```
 
 ```tsx
-const toaster = useToast();
-
-// add the toaster to the layout
-<Toaster toaster={toaster} />
-
-// show a toast
-toaster.create({
-  title: "Show Info Toast",
-  description: "This is an info toast",
-  type: "info",
-});
+toast.create({
+  title: "Event created",
+  description: "Sunday, December 3 at 9:00 AM",
+})
 ```
 
 ## Deduplication
@@ -130,7 +155,7 @@ const baseToaster = createToaster({
 
 ## Max toasts
 
-Any extra toasts will be queued and rendered when a toast has been dismissed.
+Any extra toasts will be queued and rendered when a toast has been dismissed. The queue is ordered by `priority` (`1` highest, `8` lowest). Types such as `error` sort ahead of `info` unless you pass `priority` on `toast()`.
 
 By default, the toaster displays up to 3 toasts. Update the `max` option in `createToaster()` to change the maximum number of visible toasts.
 
@@ -174,6 +199,12 @@ Use `closable` prop to control whether the close button is shown.
 
 <ComponentPreview componentName="toast" fileName="example-closable" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="toast" />
+
 ## API Reference
 
 ### Toaster
@@ -196,6 +227,15 @@ Toast instance. Used to create and manage toasts.
 | `type` | `"success" \| "error" \| "warning" \| "info" \| "loading"` | `"info"` |
 | `duration` | `number` | `3000` |
 | `closable` | `boolean` | `true` |
+### ToastItem
+
+Public ToastItem component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/toast#api-reference).

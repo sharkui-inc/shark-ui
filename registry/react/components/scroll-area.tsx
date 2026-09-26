@@ -2,63 +2,155 @@
 
 import {
   ScrollArea as ArkScrollArea,
-  useScrollAreaContext,
+  useScrollArea as useArkScrollArea,
+  useScrollAreaContext as useArkScrollAreaContext,
 } from "@ark-ui/react/scroll-area";
 import type React from "react";
-import { tv, type VariantProps } from "tailwind-variants";
+import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
-export const useScrollArea = useScrollAreaContext;
+export const useScrollArea = useArkScrollArea;
+export const useScrollAreaContext = useArkScrollAreaContext;
+export const ScrollAreaRootProvider = ArkScrollArea.RootProvider;
 
 const scrollAreaVariants = tv({
-  base: [
-    "h-full",
-    "rounded-[inherit]",
-    "outline-none",
-    "scrollbar-none",
-    "outline-none",
-  ],
-  variants: {
-    scrollFade: {
-      true: [
-        "mask-t-from-[calc(100%-var(--fade-size))]",
-        "mask-b-from-[calc(100%-var(--fade-size))]",
-        "data-at-top:mask-t-from-100%",
-        "data-at-bottom:mask-b-from-100%",
-        "transition-shadow",
-        "motion-reduce:transition-none!",
-      ],
-    },
-  },
   defaultVariants: {
+    fill: false,
+    overscrollContain: false,
+    scrollbarGutter: false,
     scrollFade: false,
+  },
+  slots: {
+    content: [],
+    viewport: [
+      "h-full",
+      "rounded-[inherit]",
+      "outline-hidden",
+      "scrollbar-none",
+    ],
+  },
+  variants: {
+    fill: {
+      true: {
+        content: "size-full",
+      },
+    },
+    overscrollContain: {
+      true: {
+        viewport: [
+          "data-overflow-y:overscroll-y-contain",
+          "data-overflow-x:overscroll-x-contain",
+        ],
+      },
+    },
+    scrollbarGutter: {
+      true: {
+        viewport: "pe-2.5 pb-2.5",
+      },
+    },
+    scrollFade: {
+      true: {
+        viewport: [
+          "mask-t-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-y-start)))] mask-b-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-y-end)))]",
+          "mask-l-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-x-start)))] mask-r-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-x-end)))]",
+        ],
+      },
+    },
   },
 });
 
+type ScrollAreaOrientation = "both" | "horizontal" | "vertical";
+
 interface ScrollAreaProps
-  extends React.ComponentProps<typeof ArkScrollArea.Root>,
-    VariantProps<typeof scrollAreaVariants> {}
+  extends React.ComponentProps<typeof ArkScrollArea.Root> {
+  /**
+   * Whether to prevent the content from expanding the scroll area horizontally.
+   *
+   * @default true
+   */
+  clampContentMinWidth?: boolean;
+  /**
+   * Whether the content should fill the scroll area.
+   *
+   * @default false
+   */
+  fill?: boolean;
+  /**
+   * Set the orientation of the scroll area
+   *
+   * @default "both"
+   */
+  orientation?: ScrollAreaOrientation;
+  /**
+   * Whether to prevent scroll chaining to parent scroll containers.
+   *
+   * @default false
+   */
+  overscrollContain?: boolean;
+  /**
+   * Whether to always reserve space for the scrollbar track.
+   *
+   * @default false
+   */
+  scrollbarGutter?: boolean;
+  /**
+   * Fade the edges where the content can scroll.
+   *
+   * @default false
+   */
+  scrollFade?: boolean;
+}
 
 export const ScrollArea = (props: ScrollAreaProps) => {
-  const { scrollFade = false, className, children, ...rest } = props;
+  const {
+    clampContentMinWidth = true,
+    fill = false,
+    overscrollContain = false,
+    scrollFade = false,
+    scrollbarGutter = false,
+    orientation = "both",
+    className,
+    children,
+    ...rest
+  } = props;
+
+  const { content, viewport } = scrollAreaVariants({
+    fill,
+    overscrollContain,
+    scrollbarGutter,
+    scrollFade,
+  });
 
   return (
     <ArkScrollArea.Root
-      className={cn("size-full min-h-0 [--fade-size:1.5rem]", className)}
+      className={cn(
+        "[--fade-size:1.5rem]",
+        "relative size-full min-h-0",
+        className
+      )}
       data-slot="scroll-area"
       {...rest}
     >
       <ArkScrollArea.Viewport
-        className={cn(scrollAreaVariants({ scrollFade }))}
+        className={viewport()}
         data-slot="scroll-area-viewport"
+        style={{ maxHeight: "inherit" }}
       >
-        <ArkScrollArea.Content data-slot="scroll-area-content">
+        <ArkScrollArea.Content
+          className={content()}
+          data-slot="scroll-area-content"
+          style={clampContentMinWidth ? { minWidth: 0 } : undefined}
+        >
           {children}
         </ArkScrollArea.Content>
       </ArkScrollArea.Viewport>
 
-      <ScrollAreaScrollbar orientation="vertical" />
-      <ScrollAreaScrollbar orientation="horizontal" />
+      {orientation === "horizontal" ? null : (
+        <ScrollAreaScrollbar orientation="vertical" />
+      )}
+      {orientation === "vertical" ? null : (
+        <ScrollAreaScrollbar orientation="horizontal" />
+      )}
 
       <ArkScrollArea.Corner data-slot="scroll-area-corner" />
     </ArkScrollArea.Root>
@@ -76,14 +168,15 @@ export const ScrollAreaScrollbar = (
         "flex",
         "m-1",
         "bg-transparent",
-        "opacity-0 transition-opacity delay-300",
+        "pointer-events-none opacity-0",
+        "transition-opacity delay-300",
         "data-[orientation=vertical]:w-1.5",
         "data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:flex-col",
-        "data-hover:opacity-100 data-hover:delay-0 data-hover:duration-100",
-        "data-scrolling:opacity-100 data-scrolling:delay-0 data-scrolling:duration-100",
-        "data-[orientation=vertical]:in-[[data-slot=scroll-area]:not([data-overflow-y])]:hidden",
-        "data-[orientation=horizontal]:in-[[data-slot=scroll-area]:not([data-overflow-x])]:hidden",
-        "motion-reduce:transition-none!",
+        "data-hover:pointer-events-auto data-hover:opacity-100 data-hover:delay-0 data-hover:duration-120",
+        "data-scrolling:pointer-events-auto data-scrolling:opacity-100 data-scrolling:delay-0 data-scrolling:duration-120",
+        "data-[orientation=vertical]:[&:not([data-overflow-y])]:hidden",
+        "data-[orientation=horizontal]:[&:not([data-overflow-x])]:hidden",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="scroll-area-scrollbar"
@@ -91,7 +184,7 @@ export const ScrollAreaScrollbar = (
       {...rest}
     >
       <ArkScrollArea.Thumb
-        className="relative flex-1 rounded-full bg-foreground/20"
+        className="relative flex-1 rounded-full bg-foreground/24"
         data-slot="scroll-area-thumb"
       />
     </ArkScrollArea.Scrollbar>

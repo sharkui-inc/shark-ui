@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "dependencies": [],
+  "name": "use-media-query",
+  "registryDependencies": [],
+  "type": "registry:hook",
+  "files": [
+    {
+      "content": "import React from \"react\";\n\nconst MOBILE_BREAKPOINT = 768;\n\nconst getServerSnapshot = () => false;\n\nexport const useMediaQuery = (query: string) => {\n  const subscribe = React.useCallback(\n    (onStoreChange: () => void) => {\n      const mediaQuery = window.matchMedia(query);\n      mediaQuery.addEventListener(\"change\", onStoreChange);\n\n      return () => mediaQuery.removeEventListener(\"change\", onStoreChange);\n    },\n    [query]\n  );\n\n  const getSnapshot = React.useCallback(\n    () => window.matchMedia(query).matches,\n    [query]\n  );\n\n  return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);\n};\n\nexport const useIsMobile = () =>\n  useMediaQuery(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);\n",
+      "path": "registry/react/hooks/use-media-query.ts",
+      "type": "registry:hook"
+    }
+  ]
+}

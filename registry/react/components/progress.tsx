@@ -2,13 +2,16 @@
 
 import {
   Progress as ArkProgress,
-  useProgressContext,
+  useProgress as useArkProgress,
+  useProgressContext as useArkProgressContext,
 } from "@ark-ui/react/progress";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { FieldLabel } from "@/registry/react/components/field";
 
-export const useProgress = useProgressContext;
+export const useProgress = useArkProgress;
+export const useProgressContext = useArkProgressContext;
+export const ProgressRootProvider = ArkProgress.RootProvider;
 
 interface ProgressProps
   extends Omit<React.ComponentProps<typeof ArkProgress.Root>, "value"> {
@@ -60,36 +63,59 @@ export const Progress = (props: ProgressProps) => {
 
 export const ProgressTrack = (
   props: React.ComponentProps<typeof ArkProgress.Track>
-) => (
-  <ArkProgress.Track
-    className={cn(
-      "bg-input",
-      "rounded-full",
-      "overflow-x-hidden",
-      "data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full",
-      "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2"
-    )}
-    data-slot="progress-track"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkProgress.Track
+      className={cn(
+        "bg-input",
+        "rounded-full",
+        "overflow-x-hidden",
+        "data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full",
+        "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2",
+        className
+      )}
+      data-slot="progress-track"
+      {...rest}
+    />
+  );
+};
 
 export const ProgressRange = (
   props: React.ComponentProps<typeof ArkProgress.Range>
-) => (
-  <ArkProgress.Range
-    className={cn(
-      "bg-primary",
-      "transition-all duration-300 ease-out",
-      "data-[orientation=horizontal]:h-full",
-      "data-[orientation=vertical]:h-full",
-      "motion-reduce:animate-none! motion-reduce:transition-none!",
-      "data-[state=indeterminate]:w-1/3 data-[state=indeterminate]:animate-indeterminate! data-[state=indeterminate]:duration-100"
-    )}
-    data-slot="progress-range"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkProgress.Range
+      className={cn(
+        "bg-primary",
+        "transition-[width,height] duration-150 ease-out",
+        "data-[orientation=horizontal]:h-full",
+        "data-[orientation=vertical]:h-full",
+        "data-[state=indeterminate]:w-1/3 data-[state=indeterminate]:animate-indeterminate",
+        className
+      )}
+      data-slot="progress-range"
+      {...rest}
+    />
+  );
+};
+
+export const ProgressLabel = (
+  props: React.ComponentProps<typeof ArkProgress.Label>
+) => {
+  const { children, ...rest } = props;
+
+  return (
+    <FieldLabel asChild>
+      <ArkProgress.Label data-slot="progress-label" {...rest}>
+        {children}
+      </ArkProgress.Label>
+    </FieldLabel>
+  );
+};
 
 export const ProgressValue = (
   props: React.ComponentProps<typeof ArkProgress.ValueText>

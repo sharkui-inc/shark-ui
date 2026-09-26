@@ -1,7 +1,11 @@
 ---
 title: Button Group
-description: Group button elements together.
+description: Group related buttons together.
+seo:
+  description: Join related buttons into one control surface.
 ---
+
+import manifest from "@/registry/manifest/button-group";
 
 <ComponentPreview componentName="button-group" />
 
@@ -30,9 +34,7 @@ npx shadcn@latest add @shark/button-group
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -50,7 +52,7 @@ npm install @ark-ui/react tailwind-variants
 
 ```text
 ButtonGroup
-└── Button or Input
+├── Button or Input
 ├── ButtonGroupText
 └── ButtonGroupSeparator
 ```
@@ -123,25 +125,39 @@ A popover trigger button can be added to a button group for contextual informati
 
 <ComponentPreview componentName="button-group" fileName="example-with-popover" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="button-group" />
+
 ## API Reference
 
 ### ButtonGroup
 
 Groups buttons together. Uses fieldset for accessibility when applicable.
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `className` | `string` | `-` | 
 | `asChild` | `boolean` | `false` |
+### ButtonGroupText
+
+Public ButtonGroupText component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
 
 ### ButtonGroupSeparator
 
 Visual divider between buttons. Uses [Separator](/docs/components/separator) internally.
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
 | `orientation` | `"horizontal" \| "vertical"` | `"vertical"` |
 | `className` | `string` | `-` | 
 | `asChild` | `boolean` | `false` |
-

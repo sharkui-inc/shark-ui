@@ -1,10 +1,14 @@
 ---
 title: Editable
-description: Allows user to edit text in-place.
+description: Edit text in place.
+seo:
+  description: Click-to-edit text that swaps read and edit modes.
 links:
   doc: https://ark-ui.com/docs/components/editable
   api: https://ark-ui.com/docs/components/editable#api-reference
 ---
+
+import manifest from "@/registry/manifest/editable";
 
 <ComponentPreview componentName="editable" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/editable
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -95,7 +97,7 @@ import {
 
 Make the entire form editable at once by using the `edit` prop.
 
-The `value` and `onValueChange` props control the editable component programmatically.
+Use `value` and `onValueChange` to control the editable.
 
 <ComponentPreview componentName="editable" fileName="example-controlled" />
 
@@ -135,6 +137,10 @@ The `size` prop on `EditablePreview` controls the preview dimensions.
 
 <ComponentPreview componentName="editable" fileName="example-size-sm" />
 
+### Medium
+
+<ComponentPreview componentName="editable" fileName="example-size-md" />
+
 ### Large
 
 <ComponentPreview componentName="editable" fileName="example-size-lg" />
@@ -162,6 +168,12 @@ The `orientation` prop controls the layout of the editable component and its con
 Edit without control buttons. Press Enter to save, Escape to cancel.
 
 <ComponentPreview componentName="editable" fileName="example-without-controls" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="editable" />
 
 ## API Reference
 
@@ -229,7 +241,7 @@ Cancels editing and reverts to previous value.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 | `className` | `string` | `-` |
 
 ### EditableSubmitTrigger
@@ -238,8 +250,16 @@ Submits the edited value and exits edit mode.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 | `className` | `string` | `-` |
+
+### EditableRootProvider
+
+Provides a Editable API created with `useEditable` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseEditableReturn` | `required` |
 
 ---
 

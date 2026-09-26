@@ -1,83 +1,78 @@
 "use client";
 
-import { createListCollection } from "@ark-ui/react";
+import { createGridCollection } from "@ark-ui/react/collection";
+import { BORDER_RADIUS } from "@/lib/theme/catalog";
+import { type BorderRadius, THEME_FIELDS } from "@/lib/theme/config";
+import { useThemeCustomization } from "@/lib/theme/provider";
 import {
-  NativeSelect,
-  NativeSelectOption,
-} from "@registry/react/components/native-select";
-import { useIsMobile } from "@registry/react/hooks/use-is-mobile";
-import { BORDER_RADIUS } from "@/lib/themes";
-import { Badge } from "@/registry/react/components/badge";
-import { Field, FieldLabel } from "@/registry/react/components/field";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/registry/react/components/select";
-import {
-  type BorderRadius,
-  DEFAULT_BORDER_RADIUS,
-  useConfig,
-} from "@/store/config";
+  ListboxItem,
+  ListboxItemText,
+} from "@/registry/react/components/listbox";
+import { ThemeSelectorPopoverGrid } from "./theme-selector.popover-grid";
 
-const collection = createListCollection({
-  items: BORDER_RADIUS,
+const collection = createGridCollection({
+  columnCount: 3,
+  items: [...BORDER_RADIUS],
 });
 
 export const ThemeSelectorRadius = () => {
-  const isMobile = useIsMobile();
-  const [config, setConfig] = useConfig();
+  const { clearThemePreview, config, previewTheme, setBorderRadius } =
+    useThemeCustomization();
 
-  if (isMobile) {
-    return (
-      <Field>
-        <FieldLabel>Radius</FieldLabel>
-        <NativeSelect
-          onChange={({ target }) =>
-            setConfig({ ...config, borderRadius: target.value as BorderRadius })
-          }
-          value={config.borderRadius}
-        >
-          {collection.items.map((item) => (
-            <NativeSelectOption key={item.value} value={item.value}>
-              {item.label}
-            </NativeSelectOption>
-          ))}
-        </NativeSelect>
-      </Field>
-    );
-  }
+  const selectedRadius = collection.items.find(
+    (item) => item.value === config.borderRadius
+  );
 
   return (
-    <Field>
-      <FieldLabel>Radius</FieldLabel>
-      <Select
-        collection={collection}
-        onValueChange={({ value }) =>
-          setConfig({ ...config, borderRadius: value[0] as BorderRadius })
+    <ThemeSelectorPopoverGrid
+      collection={collection}
+      contentClassName="sm:max-w-80"
+      description={THEME_FIELDS.borderRadius.description}
+      label={THEME_FIELDS.borderRadius.label}
+      lockKey="borderRadius"
+      onPreview={(next) => {
+        if (!next) {
+          clearThemePreview();
+          return;
         }
-        value={[config.borderRadius]}
-      >
-        <SelectTrigger className="w-full">
-          <SelectValue placeholder="Select a radius" />
-        </SelectTrigger>
 
-        <SelectContent>
-          {collection.items.map((item) => (
-            <SelectItem item={item.value} key={item.value}>
-              {item.label}
-
-              {item.value === DEFAULT_BORDER_RADIUS && (
-                <Badge size="sm" variant="info">
-                  Default
-                </Badge>
-              )}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </Field>
+        previewTheme({ borderRadius: next as BorderRadius });
+      }}
+      onValueChange={({ value }) => {
+        const [selected] = value;
+        if (selected) {
+          setBorderRadius(selected as BorderRadius);
+        }
+      }}
+      trigger={
+        <>
+          <span
+            aria-hidden
+            className="size-4 shrink-0 bg-primary"
+            style={{ borderRadius: selectedRadius?.cssVars.radius }}
+          />
+          <span className="truncate">{selectedRadius?.description}</span>
+        </>
+      }
+      value={config.borderRadius}
+    >
+      {collection.items.map((item) => (
+        <ListboxItem
+          className="relative flex flex-col items-center justify-center gap-2 rounded-xl border border-input bg-muted/32 p-2.5 text-center hover:border-primary/64 hover:bg-muted/32 hover:text-foreground data-[state=checked]:border-primary data-highlighted:border-primary/64 data-[state=checked]:bg-muted/32 data-highlighted:bg-muted/32 data-[state=checked]:text-foreground data-highlighted:text-foreground"
+          item={item}
+          key={item.value}
+          showIndicator={false}
+        >
+          <span
+            aria-hidden
+            className="size-9 bg-primary"
+            style={{ borderRadius: item.cssVars.radius }}
+          />
+          <ListboxItemText className="flex-none text-muted-foreground text-xs group-data-[state=checked]/listbox-item:text-foreground">
+            {item.value}
+          </ListboxItemText>
+        </ListboxItem>
+      ))}
+    </ThemeSelectorPopoverGrid>
   );
 };

@@ -1,0 +1,198 @@
+---
+title: Queue
+description: Queued and completed prompts.
+seo:
+  description: Show queued and completed prompts.
+---
+
+import manifest from "@/registry/manifest/queue";
+
+<ComponentPreview componentName="queue" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/queue
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>This component depends on [Button](/docs/components/button). Install required dependencies first if you haven&apos;t already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/queue.tsx" src="/queue.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+Queue
+└── QueueSection
+    ├── QueueSectionHeader
+    │   ├── QueueTitle
+    │   └── QueueSectionAction
+    └── QueueSectionContent
+        └── QueueList
+            └── QueueItem
+                ├── QueueItemContent
+                └── QueueItemActions
+                    └── QueueItemAction
+```
+
+## Usage
+
+```tsx
+import {
+  Queue,
+  QueueItem,
+  QueueItemAction,
+  QueueItemActions,
+  QueueItemContent,
+  QueueList,
+  QueueSection,
+  QueueSectionAction,
+  QueueSectionContent,
+  QueueSectionHeader,
+  QueueTitle,
+} from "@/components/ui/queue";
+```
+
+## States
+
+### Completed
+
+Mark finished prompts with `completed` on `QueueItemContent`.
+
+<ComponentPreview componentName="queue" fileName="example-completed" />
+
+### Paused
+
+Use `QueueSectionAction` for a header action such as Resume. Pass an icon as a child of `QueueSectionHeader`.
+
+<ComponentPreview componentName="queue" fileName="example-paused" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="queue" />
+
+## API Reference
+
+### Queue
+
+Root container for prompt sections.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### QueueSection
+
+Bounded panel for one queue group.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### QueueSectionHeader
+
+Toolbar row for the section title and actions.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` | `-` |
+| `className` | `string` | `-` |
+
+### QueueTitle
+
+Section title. Rendered automatically when `title` is set on `QueueSectionHeader`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### QueueSectionAction
+
+Trailing header actions.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### QueueSectionContent
+
+Holds the list of queued items.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### QueueList
+
+List of queued items.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### QueueItem
+
+A single queued prompt row.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### QueueItemContent
+
+Prompt text. Strikes through when `completed` is true.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `completed` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### QueueItemActions
+
+Container for row actions.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### QueueItemAction
+
+Ghost button for a row or header action. Row actions fade in on hover.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "outline" \| "secondary" \| "ghost" \| "link" \| "destructive"` | `"ghost"` |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon-xs" \| "icon-sm" \| "icon-md" \| "icon-lg" \| "icon-xl"` | `"icon-xs"` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |

@@ -1,4 +1,4 @@
-import { GalleryVerticalEndIcon } from "lucide-react";
+import { WavesHorizontalIcon } from "lucide-react";
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
 import { Button } from "@/registry/react/components/button";
@@ -9,12 +9,11 @@ import {
   FieldLabel,
   FieldSeparator,
 } from "@/registry/react/components/field";
+import { IconTile } from "@/registry/react/components/icon-tile";
 import { Input } from "@/registry/react/components/input";
 
 export const metadata: Metadata = createMetadata({
   title: "Auth Template",
-  description:
-    "Complete login and signup flows with form validation. Includes password reset and OAuth-ready structure.",
   url: "/templates/auth",
 });
 
@@ -23,10 +22,10 @@ const AuthTemplate = () => (
     <div className="flex flex-col gap-4 p-6 md:p-10">
       <div className="flex justify-center gap-2 md:justify-start">
         <a className="flex items-center gap-2 font-medium" href="#">
-          <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <GalleryVerticalEndIcon aria-hidden className="size-4" />
-          </div>
-          Acme Inc.
+          <IconTile aria-hidden size="xs">
+            <WavesHorizontalIcon aria-hidden className="size-4" />
+          </IconTile>
+          Onda Inc.
         </a>
       </div>
       <div className="flex flex-1 items-center justify-center">
@@ -89,9 +88,11 @@ const AuthTemplate = () => (
     </div>
     <div className="relative hidden bg-muted lg:block">
       <img
-        alt="placeholder image"
-        className="absolute inset-0 size-full object-cover dark:brightness-[0.2] dark:grayscale"
-        src="/images/placeholder.svg"
+        alt="Onda workspace"
+        className="absolute inset-0 size-full object-cover"
+        height={500}
+        src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Onda+workspace&waveColor=1a6b5c"
+        width={800}
       />
     </div>
   </div>

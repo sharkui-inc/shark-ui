@@ -4,7 +4,7 @@ import { ark } from "@ark-ui/react/factory";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/react/components/button";
+import { Button, type ButtonProps } from "@/registry/react/components/button";
 import { Input } from "@/registry/react/components/input";
 import { Textarea } from "@/registry/react/components/textarea";
 
@@ -14,28 +14,57 @@ const inpuGroupVariants = tv({
     "relative",
     "w-full min-w-0",
     "flex items-center",
-    "bg-background dark:bg-input/30",
-    "rounded-lg border border-input shadow-xs/5",
+    "font-normal text-base md:text-sm",
+    "bg-background dark:bg-input/32",
+    "[--input-group-addon-size:--spacing(6)]",
+    "[--input-group-inset:calc((var(--input-group-height)-2px-var(--input-group-addon-size))/2)]",
+    "rounded-lg",
+    "border border-input shadow-xs/4",
     "transition-[color,box-shadow]",
     "has-[>textarea]:h-auto",
-    "has-[>[data-align=inline-start]]:[&>input]:ps-2",
-    "has-[>[data-align=inline-end]]:[&>input]:pe-2",
     "has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-start]]:[&>input]:pb-3",
     "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3",
-    "outline-none focus-within:border-primary focus-within:ring-[3px] focus-within:ring-ring/32",
+    "[&_[data-inline=true]_:is([data-slot=input-group-button],[data-slot=kbd])]:rounded-[max(0px,calc(var(--radius)-var(--input-group-inset)))]",
+    "data-[size=sm]:not-data-[pill=true]:[&_[data-inline=true]_:is([data-slot=input-group-button],[data-slot=kbd])]:rounded-[max(0px,calc(var(--radius)*0.75-var(--input-group-inset)))]",
+    "data-[pill=true]:[&_[data-inline=true]_:is([data-slot=input-group-button],[data-slot=kbd])]:rounded-full",
+    "focus-within:border-ring/64 focus-within:ring-2 focus-within:ring-ring/24",
     "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-[3px] has-[[data-slot][aria-invalid=true]]:ring-destructive/24",
-    "dark:has-[[data-slot][aria-invalid=true]]:border-destructive-foreground dark:has-[[data-slot][aria-invalid=true]]:ring-destructive-foreground/40",
-    "motion-reduce:transition-none!",
+    "dark:has-[[data-slot][aria-invalid=true]]:border-destructive-foreground dark:has-[[data-slot][aria-invalid=true]]:ring-destructive-foreground/32",
+    "motion-reduce:transition-none",
   ],
-  variants: {
-    size: {
-      sm: ["h-7"],
-      md: ["h-8"],
-      lg: ["h-9"],
+  compoundVariants: [
+    {
+      class: "rounded-full",
+      pill: true,
     },
-  },
+  ],
   defaultVariants: {
+    pill: false,
     size: "md",
+  },
+  variants: {
+    pill: {
+      false: "",
+      true: "",
+    },
+    size: {
+      lg: [
+        "h-9",
+        "[--input-group-height:--spacing(9)]",
+        "px-[calc(--spacing(3.5)-1px)]",
+      ],
+      md: [
+        "h-8",
+        "[--input-group-height:--spacing(8)]",
+        "px-[calc(--spacing(3)-1px)]",
+      ],
+      sm: [
+        "h-7",
+        "[--input-group-height:--spacing(7)]",
+        "px-[calc(--spacing(2.5)-1px)]",
+        "rounded-md",
+      ],
+    },
   },
 });
 
@@ -44,11 +73,12 @@ export interface InputGroupProps
     VariantProps<typeof inpuGroupVariants> {}
 
 export const InputGroup = (props: InputGroupProps) => {
-  const { size = "md", className, ...rest } = props;
+  const { size = "md", pill = false, className, ...rest } = props;
 
   return (
     <ark.div
-      className={cn(inpuGroupVariants({ size }), className)}
+      className={cn(inpuGroupVariants({ pill, size }), className)}
+      data-pill={pill || undefined}
       data-size={size}
       data-slot="input-group"
       role="group"
@@ -59,41 +89,33 @@ export const InputGroup = (props: InputGroupProps) => {
 
 const inputGroupAddonVariants = tv({
   base: [
-    "h-auto",
+    "h-full",
     "flex items-center justify-center gap-2",
-    "py-1.5",
-    "select-none font-medium text-muted-foreground text-sm",
+    "select-none font-medium text-muted-foreground text-xs",
     "cursor-text",
     "group-data-[disabled=true]/input-group:opacity-64",
-    "[&>kbd]:rounded-[calc(var(--radius)-5px)]",
     "[&_svg:not([class*='size-'])]:size-4",
   ],
-  variants: {
-    align: {
-      "inline-start": [
-        "order-first ps-3",
-        "has-[>button]:ms-[-0.45rem]",
-        "has-[>kbd]:ms-[-0.35rem]",
-      ],
-      "inline-end": [
-        "order-last pe-3",
-        "has-[>button]:me-[-0.45rem]",
-        "has-[>kbd]:me-[-0.35rem]",
-      ],
-      "block-start": [
-        "order-first w-full justify-start px-3 pt-3",
-        "group-has-[>input]/input-group:pt-2.5",
-        "[.border-b]:pb-3",
-      ],
-      "block-end": [
-        "order-last w-full justify-start px-3 pb-3",
-        "group-has-[>input]/input-group:pb-2.5",
-        "[.border-t]:pt-3",
-      ],
-    },
-  },
   defaultVariants: {
     align: "inline-start",
+  },
+  variants: {
+    align: {
+      "block-end": [
+        "[--input-group-inset:--spacing(3)]",
+        "order-last w-full justify-start px-0 pb-[calc(--spacing(3)-1px)]",
+        "group-has-[>input]/input-group:pb-2.5",
+        "[.border-t]:pt-[calc(--spacing(3)-1px)]",
+      ],
+      "block-start": [
+        "[--input-group-inset:--spacing(3)]",
+        "order-first w-full justify-start px-0 pt-[calc(--spacing(3)-1px)]",
+        "group-has-[>input]/input-group:pt-2.5",
+        "[.border-b]:pb-[calc(--spacing(3)-1px)]",
+      ],
+      "inline-end": ["order-last ps-2 pe-0", "has-[button]:-me-2"],
+      "inline-start": ["order-first ps-0 pe-2", "has-[button]:-ms-2"],
+    },
   },
 });
 
@@ -102,21 +124,41 @@ interface InputGroupAddonProps
     VariantProps<typeof inputGroupAddonVariants> {}
 
 export const InputGroupAddon = (props: InputGroupAddonProps) => {
-  const { className, align = "inline-start", ...rest } = props;
+  const { className, align = "inline-start", onMouseDown, ...rest } = props;
 
   return (
     <ark.div
       className={cn(inputGroupAddonVariants({ align }), className)}
       data-align={align}
+      data-inline={align.startsWith("inline") || undefined}
       data-slot="input-group-addon"
-      onClick={(e) => {
-        if ((e.target as HTMLElement).closest("button")) {
-          return;
-        }
-        e.currentTarget.parentElement?.querySelector("input")?.focus();
-      }}
       role="group"
       {...rest}
+      onMouseDown={(event) => {
+        onMouseDown?.(event);
+        if (event.defaultPrevented) {
+          return;
+        }
+
+        if (
+          (event.target as HTMLElement).closest(
+            "button, a, input, select, textarea, [role=button], [role=combobox], [role=listbox], [data-slot=select-trigger]"
+          )
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+
+        const parent = event.currentTarget.parentElement;
+        const control = parent?.querySelector<
+          HTMLInputElement | HTMLTextAreaElement
+        >("input, textarea");
+
+        if (control && !parent?.querySelector("input:focus, textarea:focus")) {
+          control.focus();
+        }
+      }}
     />
   );
 };
@@ -124,55 +166,20 @@ export const InputGroupAddon = (props: InputGroupAddonProps) => {
 const inputGroupButtonVariants = tv({
   base: [
     "relative",
-    "flex items-center gap-2",
     "text-sm",
     "shadow-none",
-    "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
+    "focus-visible:border-transparent focus-visible:ring-0",
   ],
-  variants: {
-    size: {
-      xs: [
-        "h-6",
-        "gap-1",
-        "px-2",
-        "rounded-[calc(var(--radius)-5px)]",
-        "has-[>svg]:px-2",
-        "[&_svg:not([class*='size-'])]:size-3.5",
-      ],
-      sm: ["h-8", "gap-1.5", "px-2.5", "rounded-md", "has-[>svg]:px-2.5"],
-      "icon-xs": [
-        "size-6",
-        "rounded-[calc(var(--radius)-5px)]",
-        "p-0",
-        "has-[>svg]:p-0",
-      ],
-      "icon-sm": ["size-8", "p-0", "has-[>svg]:p-0"],
-    },
-  },
-  defaultVariants: {
-    size: "xs",
-  },
 });
 
-interface InputGroupButtonProps
-  extends Omit<React.ComponentProps<typeof Button>, "size">,
-    VariantProps<typeof inputGroupButtonVariants> {}
-
-export const InputGroupButton = (props: InputGroupButtonProps) => {
-  const {
-    className,
-    type = "button",
-    variant = "ghost",
-    size = "xs",
-    ...rest
-  } = props;
+export const InputGroupButton = (props: ButtonProps) => {
+  const { className, variant = "ghost", size = "xs", ...rest } = props;
 
   return (
     <Button
-      className={cn(inputGroupButtonVariants({ size }), className)}
-      data-size={size}
+      className={cn(inputGroupButtonVariants(), className)}
       data-slot="input-group-button"
-      type={type}
+      size={size}
       variant={variant}
       {...rest}
     />
@@ -188,7 +195,7 @@ export const InputGroupText = (
     <ark.span
       className={cn(
         "flex items-center gap-2",
-        "text-muted-foreground text-sm",
+        "font-medium text-muted-foreground text-xs",
         "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
         className
       )}
@@ -204,10 +211,10 @@ export const InputGroupInput = (props: React.ComponentProps<typeof Input>) => {
   return (
     <Input
       className={cn(
-        "flex-1",
+        "h-full flex-1 px-0",
         "bg-transparent",
         "rounded-none border-0 shadow-none",
-        "focus-visible:ring-0",
+        "focus-visible:border-0 focus-visible:ring-0",
         "disabled:bg-transparent aria-invalid:ring-0 data-invalid:ring-0",
         "dark:bg-transparent dark:disabled:bg-transparent",
         className
@@ -226,11 +233,10 @@ export const InputGroupTextarea = (
   return (
     <Textarea
       className={cn(
-        "flex-1",
-        "py-3",
+        "flex-1 px-0",
         "bg-transparent",
-        "resize-none rounded-none border-0 shadow-none",
-        "focus-visible:ring-0",
+        "resize-none rounded-none border-0 py-3 shadow-none",
+        "focus-visible:border-0 focus-visible:ring-0",
         "disabled:bg-transparent aria-invalid:ring-0 data-invalid:ring-0",
         "dark:bg-transparent dark:disabled:bg-transparent",
         className

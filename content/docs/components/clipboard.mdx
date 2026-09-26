@@ -1,10 +1,15 @@
 ---
 title: Clipboard  
 description: Copy text to the clipboard.
+seo:
+  description: Copy a value to the clipboard with copied feedback.
 links:
   doc: https://ark-ui.com/docs/components/clipboard 
   api: https://ark-ui.com/docs/components/clipboard#api-reference
 ---
+
+import manifest from "@/registry/manifest/clipboard";
+
 <ComponentPreview componentName="clipboard" />
 
 ## Installation
@@ -32,9 +37,7 @@ npx shadcn@latest add @shark/clipboard
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -104,6 +107,12 @@ Use the `timeout` prop on `Clipboard` to customize how long the copied state is 
 
 <ComponentPreview componentName="clipboard" fileName="example-custom-timeout" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="clipboard" />
+
 ## API Reference
 
 ### Clipboard
@@ -112,7 +121,7 @@ Root wrapper. Manages copy state and value.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
+| `value` | `string` | `required` |
 | `timeout` | `number` | `2000` |
 | `className` | `string` | `-` |
 
@@ -152,6 +161,22 @@ Text display of the value. Use when input is not needed.
 | `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
+
+### ClipboardRootProvider
+
+Provides a Clipboard API created with `useClipboard` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseClipboardReturn` | `required` |
+
+### ClipboardContext
+
+Render-prop access to the surrounding component API.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: unknown) => React.ReactNode` | `required` |
 
 ---
 

@@ -8,7 +8,7 @@ import {
 } from "@/registry/react/components/field";
 
 const CheckboxDemo = () => (
-  <FieldGroup className="max-w-sm">
+  <FieldGroup className="w-full max-w-sm">
     <Field orientation="horizontal">
       <Checkbox defaultChecked />
       <FieldLabel>Accept terms and conditions</FieldLabel>

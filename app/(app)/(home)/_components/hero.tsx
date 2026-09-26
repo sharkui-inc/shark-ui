@@ -1,17 +1,16 @@
 import { Badge } from "@registry/react/components/badge";
-import { ArrowRightIcon, SparklesIcon } from "lucide-react";
+import { ArrowRightIcon, BotIcon } from "lucide-react";
 import Link from "next/link";
+import type React from "react";
 import { cn } from "@/lib/utils";
 import {
   Announcement,
   AnnouncementTitle,
 } from "@/registry/react/components/announcement";
 import { Button } from "@/registry/react/components/button";
+import { Highlight } from "@/registry/react/components/highlight";
 
 interface HeroSectionProps extends React.ComponentProps<"section"> {
-  /**
-   * The number of components
-   */
   count: number;
 }
 
@@ -20,36 +19,46 @@ export const HeroSection = (props: HeroSectionProps) => {
 
   return (
     <section className={cn("relative", className)} {...rest}>
-      <div className="flex max-w-2xl flex-col gap-4">
-        <div>
-          <Announcement asChild className="bg-background">
-            <Link href="/docs/skills">
-              <Badge>
-                <SparklesIcon />
-              </Badge>
-              <AnnouncementTitle>
-                New skills to help agents write better code.
-              </AnnouncementTitle>
-            </Link>
-          </Announcement>
-        </div>
+      <div className="flex w-full max-w-5xl flex-col items-start gap-6">
+        <Announcement asChild className="bg-background">
+          <Link href="/docs/changelog/26-08">
+            <Badge>
+              <BotIcon aria-hidden />
+            </Badge>
+            <AnnouncementTitle>New AI components</AnnouncementTitle>
+            <ArrowRightIcon aria-hidden />
+          </Link>
+        </Announcement>
 
-        <h1 className="font-extrabold text-4xl sm:text-7xl">
-          Build your own <br /> component library
+        <h1 className="max-w-5xl font-heading font-semibold text-5xl leading-[0.98] tracking-[-0.04em] sm:text-6xl lg:text-7xl xl:text-8xl">
+          <span className="block">Build your own</span>
+          <span className="block lg:whitespace-nowrap">component library</span>
         </h1>
 
-        <div className="max-w-xl">
-          <p className="text-base text-muted-foreground sm:text-xl">
-            {`A beautifully designed and accessible set of ${count}+ components, created to help you build reusable and scalable design systems. `}
-          </p>
-        </div>
+        <p className="max-w-xl text-base text-muted-foreground leading-relaxed sm:text-xl lg:max-w-3xl">
+          <span className="block lg:whitespace-nowrap">
+            <Highlight
+              className="mx-1.5"
+              query={`${count}+ components`}
+              text={`An accessible set of ${count}+ components`}
+            />
+          </span>
+          <span className="block lg:whitespace-nowrap">
+            built on Ark UI. Copy the source into your project.
+          </span>
+        </p>
 
-        <div className="flex gap-4">
-          <Button asChild size="xl">
+        <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:gap-4">
+          <Button asChild className="w-full sm:w-auto" size="xl">
             <Link href="/docs">Get Started</Link>
           </Button>
 
-          <Button asChild size="xl" variant="ghost">
+          <Button
+            asChild
+            className="w-full sm:w-auto"
+            size="xl"
+            variant="outline"
+          >
             <Link href="/docs/components">
               View components
               <ArrowRightIcon aria-hidden />

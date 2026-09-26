@@ -2,30 +2,34 @@
 
 import {
   Carousel as ArkCarousel,
-  useCarouselContext,
+  useCarousel as useArkCarousel,
+  useCarouselContext as useArkCarouselContext,
 } from "@ark-ui/react/carousel";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 
-export const useCarousel = useCarouselContext;
+export const useCarousel = useArkCarousel;
+export const useCarouselContext = useArkCarouselContext;
+export const CarouselRootProvider = ArkCarousel.RootProvider;
 
 export const Carousel = (
   props: React.ComponentProps<typeof ArkCarousel.Root>
 ) => {
-  const { spacing = "16px", className, ...rest } = props;
+  const { spacing, className, ...rest } = props;
 
   return (
     <ArkCarousel.Root
       className={cn(
+        "group/carousel",
         "relative",
         "flex flex-col",
-        "data-[orientation=vertical]:w-max data-[orientation=vertical]:flex-row",
+        "data-[orientation=vertical]:flex-row",
         className
       )}
       data-slot="carousel"
-      spacing={spacing}
+      spacing={spacing ?? "16px"}
       {...rest}
     />
   );
@@ -67,13 +71,16 @@ export const CarouselPrevious = (
       asChild
     >
       <Button
-        aria-label="Previous"
+        aria-label="Previous slide"
         clickEffect={false}
         pill
         size="icon-md"
         variant="outline"
       >
-        <ChevronLeftIcon aria-hidden />
+        <ChevronLeftIcon
+          aria-hidden
+          className="group-data-[orientation=horizontal]/carousel:rtl:rotate-180"
+        />
       </Button>
     </ArkCarousel.PrevTrigger>
   );
@@ -97,13 +104,16 @@ export const CarouselNext = (
       data-slot="carousel-next"
     >
       <Button
-        aria-label="Next"
+        aria-label="Next slide"
         clickEffect={false}
         pill
         size="icon-md"
         variant="outline"
       >
-        <ChevronRightIcon aria-hidden />
+        <ChevronRightIcon
+          aria-hidden
+          className="group-data-[orientation=horizontal]/carousel:rtl:rotate-180"
+        />
       </Button>
     </ArkCarousel.NextTrigger>
   );
@@ -139,9 +149,9 @@ export const CarouselIndicator = (
         "shrink-0",
         "bg-foreground",
         "opacity-64 data-current:opacity-100",
-        "overflow-hidden",
-        "[&_img]:size-full [&_img]:rounded-lg [&_img]:object-cover",
         "rounded-full",
+        "overflow-hidden",
+        "[&_img]:size-full [&_img]:rounded-[inherit] [&_img]:object-cover",
         className
       )}
       data-slot="carousel-indicator"
@@ -158,10 +168,10 @@ export const CarouselContent = (
   return (
     <ArkCarousel.ItemGroup
       className={cn(
-        "min-w-0",
-        "-my-4 py-4",
-        "flex flex-1 gap-4",
-        "overflow-hidden rounded-lg",
+        "min-w-0 flex-1",
+        "data-[orientation=horizontal]:-my-4 data-[orientation=horizontal]:py-4",
+        "rounded-lg",
+        "overflow-hidden",
         className
       )}
       data-slot="carousel-group"
@@ -179,7 +189,6 @@ export const CarouselItem = (
     <ArkCarousel.Item
       className={cn(
         "min-w-0",
-        "shrink-0 grow-0 basis-full",
         "[&_img]:size-full [&_img]:rounded-lg [&_img]:object-cover",
         className
       )}

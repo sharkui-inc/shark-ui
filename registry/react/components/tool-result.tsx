@@ -1,0 +1,231 @@
+"use client";
+
+import { ark } from "@ark-ui/react/factory";
+import { createContext } from "@ark-ui/react/utils";
+import { BanIcon, CircleCheckIcon, CircleXIcon } from "lucide-react";
+import React from "react";
+import { tv } from "tailwind-variants";
+import { cn } from "@/lib/utils";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleIndicator,
+  CollapsibleTrigger,
+} from "@/registry/react/components/collapsible";
+import { Spinner } from "@/registry/react/components/spinner";
+
+export type ToolResultStatus = "cancelled" | "error" | "running" | "success";
+
+interface ToolResultContextValue {
+  /**
+   * The status of the tool result.
+   */
+  status: ToolResultStatus;
+}
+
+const [ToolResultProvider, useToolResult] =
+  createContext<ToolResultContextValue>({
+    name: "ToolResultContext",
+    providerName: "ToolResult",
+  });
+
+const STATUS_LABEL: Record<ToolResultStatus, string> = {
+  cancelled: "Cancelled",
+  error: "Failed",
+  running: "Running",
+  success: "Completed",
+};
+
+const toolResultStatusVariants = tv({
+  variants: {
+    status: {
+      cancelled: "text-muted-foreground",
+      error: "text-destructive-foreground",
+      running: "text-info-foreground",
+      success: "text-success-foreground",
+    },
+  },
+});
+
+const ToolResultStatusIcon = (props: { status: ToolResultStatus }) => {
+  const { status } = props;
+
+  switch (status) {
+    case "cancelled":
+      return <BanIcon aria-hidden className="size-3" />;
+    case "error":
+      return <CircleXIcon aria-hidden className="size-3" />;
+    case "running":
+      return <Spinner aria-hidden className="size-3" />;
+    case "success":
+      return <CircleCheckIcon aria-hidden className="size-3" />;
+    default: {
+      const _exhaustive: never = status;
+      return _exhaustive;
+    }
+  }
+};
+
+interface ToolResultProps
+  extends React.ComponentProps<typeof Collapsible>,
+    ToolResultContextValue {}
+
+export const ToolResult = (props: ToolResultProps) => {
+  const { defaultOpen, status = "success", className, ...rest } = props;
+
+  const value = React.useMemo(() => ({ status }), [status]);
+
+  return (
+    <ToolResultProvider value={value}>
+      <Collapsible
+        className={cn("w-full min-w-0 text-sm", className)}
+        data-slot="tool-result"
+        data-status={status}
+        defaultOpen={defaultOpen ?? status === "running"}
+        {...rest}
+        aria-busy={status === "running"}
+      />
+    </ToolResultProvider>
+  );
+};
+
+export const ToolResultTrigger = (
+  props: React.ComponentProps<typeof CollapsibleTrigger>
+) => {
+  const { className, children, ...rest } = props;
+
+  return (
+    <CollapsibleTrigger
+      className={cn(
+        "min-h-9 w-full min-w-0",
+        "flex items-center gap-2",
+        "px-3 py-1",
+        "text-start",
+        "rounded-md",
+        "outline-hidden",
+        "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        className
+      )}
+      data-align="start"
+      data-slot="tool-result-trigger"
+      {...rest}
+    >
+      {children}
+    </CollapsibleTrigger>
+  );
+};
+
+interface ToolResultActionProps extends React.ComponentProps<typeof ark.span> {
+  /**
+   * Whether to show the collapsible indicator.
+   */
+  showTrigger?: boolean;
+}
+
+export const ToolResultAction = (props: ToolResultActionProps) => {
+  const { showTrigger = true, className, children, ...rest } = props;
+
+  return (
+    <ark.span
+      className={cn("ms-auto flex shrink-0 items-center gap-2", className)}
+      data-slot="tool-result-action"
+      {...rest}
+    >
+      {children}
+      {showTrigger ? (
+        <CollapsibleIndicator className="size-3.5 shrink-0 text-muted-foreground" />
+      ) : null}
+    </ark.span>
+  );
+};
+
+export const ToolResultTitle = (
+  props: React.ComponentProps<typeof ark.span>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.span
+      className={cn(
+        "min-w-0",
+        "truncate font-medium text-foreground",
+        className
+      )}
+      data-slot="tool-result-title"
+      {...rest}
+    />
+  );
+};
+
+export const ToolResultMeta = (
+  props: React.ComponentProps<typeof ark.span>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.span
+      className={cn("shrink-0", "text-muted-foreground text-xs", className)}
+      data-slot="tool-result-meta"
+      {...rest}
+    />
+  );
+};
+
+export const ToolResultName = (
+  props: React.ComponentProps<typeof ark.span>
+) => {
+  const { className, style, ...rest } = props;
+
+  return (
+    <ark.span
+      className={cn(
+        "min-w-0",
+        "truncate font-mono text-muted-foreground text-xs",
+        className
+      )}
+      data-slot="tool-result-name"
+      {...rest}
+      dir="ltr"
+      style={{ unicodeBidi: "isolate", ...style }}
+    />
+  );
+};
+
+export const ToolResultStatus = (
+  props: React.ComponentProps<typeof ark.span>
+) => {
+  const { className, children, ...rest } = props;
+
+  const { status } = useToolResult();
+
+  return (
+    <ark.span
+      className={cn(
+        "inline-flex shrink-0 items-center gap-1",
+        "font-medium text-xs",
+        toolResultStatusVariants({ status }),
+        className
+      )}
+      data-slot="tool-result-status"
+      {...rest}
+    >
+      <ToolResultStatusIcon status={status} />
+      {children ?? STATUS_LABEL[status]}
+    </ark.span>
+  );
+};
+
+export const ToolResultContent = (
+  props: React.ComponentProps<typeof CollapsibleContent>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <CollapsibleContent
+      className={cn("pt-1.5", className)}
+      data-slot="tool-result-content"
+      {...rest}
+    />
+  );
+};

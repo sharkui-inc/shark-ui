@@ -5,7 +5,7 @@ description: Guide to styling components with the color system.
 
 ## Overview
 
-Shark UI’s styling system is built for clarity and consistent theming. It follows [shadcn/ui theme tokens](https://ui.shadcn.com/docs/theming#theme-tokens) and adds three extra tokens: `success`, `warning`, and `info` to cover status states.
+Shark UI uses [shadcn/ui theme tokens](https://ui.shadcn.com/docs/theming#theme-tokens) plus `success`, `warning`, and `info` for status states.
 
 ## CSS Configuration
 
@@ -22,14 +22,17 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-hover: var(--destructive-hover);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
   --color-success: var(--success);
@@ -66,102 +69,108 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
   --radius: 0.5rem;
   --background: var(--color-neutral-50);
   --foreground: var(--color-neutral-800);
-  --card: var(--color-neutral-50);
+  --card: var(--background);
   --card-foreground: var(--color-neutral-800);
-  --popover: var(--color-neutral-50);
+  --popover: var(--background);
   --popover-foreground: var(--color-neutral-800);
   --primary: var(--color-neutral-800);
   --primary-foreground: var(--color-neutral-50);
+  --primary-hover: color-mix(in srgb, var(--color-neutral-800) 92%, var(--color-neutral-950));
   --secondary: color-mix(
     in srgb,
-    var(--color-neutral-950) 6%,
+    var(--color-neutral-950) 8%,
     var(--background)
   );
   --secondary-foreground: var(--color-neutral-800);
-  --muted: color-mix(in srgb, var(--color-neutral-950) 6%, var(--background));
+  --secondary-hover: color-mix(in srgb, var(--color-neutral-950) 16%, var(--background));
+  --muted: color-mix(in srgb, var(--color-neutral-950) 4%, var(--background));
   --muted-foreground: color-mix(
     in srgb,
-    var(--color-neutral-500) 80%,
+    var(--color-neutral-500) 88%,
     var(--color-neutral-950)
   );
-  --accent: color-mix(in srgb, var(--color-neutral-950) 6%, var(--background));
+  --accent: color-mix(in srgb, var(--color-neutral-950) 8%, var(--background));
   --accent-foreground: var(--color-neutral-800);
-  --destructive: var(--color-red-500);
-  --destructive-foreground: var(--color-red-700);
+  --destructive: var(--color-red-600);
+  --destructive-foreground: var(--color-red-800);
+  --destructive-hover: var(--color-red-700);
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-700);
-  --success: var(--color-emerald-500);
+  --success: var(--color-emerald-600);
   --success-foreground: var(--color-emerald-700);
   --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-700);
-  --border: color-mix(in srgb, var(--color-neutral-950) 12%, var(--background));
-  --input: color-mix(in srgb, var(--color-neutral-950) 13%, var(--background));
-  --ring: var(--color-neutral-400);
+  --border: color-mix(in srgb, var(--color-neutral-950) 8%, var(--background));
+  --input: color-mix(in srgb, var(--color-neutral-950) 10%, var(--background));
+  --ring: var(--color-neutral-600);
   --sidebar: var(--color-neutral-50);
   --sidebar-foreground: color-mix(
     in srgb,
-    var(--color-neutral-800) 64%,
+    var(--color-neutral-800) 80%,
     var(--sidebar)
   );
   --sidebar-primary: var(--color-neutral-800);
   --sidebar-primary-foreground: var(--color-neutral-50);
   --sidebar-accent: color-mix(
     in srgb,
-    var(--color-neutral-950) 6%,
+    var(--color-neutral-950) 8%,
     var(--sidebar)
   );
   --sidebar-accent-foreground: var(--color-neutral-800);
   --sidebar-border: color-mix(
     in srgb,
-    var(--color-neutral-950) 11%,
+    var(--color-neutral-950) 6%,
     var(--sidebar)
   );
-  --sidebar-ring: var(--color-neutral-400);
-  --chart-1: var(--color-orange-600);
-  --chart-2: var(--color-teal-600);
-  --chart-3: var(--color-cyan-900);
-  --chart-4: var(--color-amber-400);
-  --chart-5: var(--color-amber-500);
+  --sidebar-ring: var(--color-neutral-600);
+  --chart-1: var(--color-blue-600);
+  --chart-2: var(--color-emerald-600);
+  --chart-3: var(--color-amber-600);
+  --chart-4: var(--color-purple-600);
+  --chart-5: var(--color-rose-600);
 }
 
 .dark {
-  --background: var(--color-neutral-950);
+  --background: color-mix(
+    in srgb,
+    var(--color-neutral-950) 95%,
+    var(--color-neutral-50)
+  );
   --foreground: var(--color-neutral-100);
   --card: color-mix(in srgb, var(--background) 98%, var(--color-neutral-50));
   --card-foreground: var(--color-neutral-100);
   --popover: color-mix(
     in srgb,
-    var(--background) 96%,
+    var(--background) 98%,
     var(--color-neutral-50)
   );
   --popover-foreground: var(--color-neutral-100);
   --primary: var(--color-neutral-100);
   --primary-foreground: var(--color-neutral-800);
-  --secondary: color-mix(in srgb, var(--color-white) 8%, var(--background));
+  --primary-hover: color-mix(in srgb, var(--color-neutral-100) 92%, var(--color-neutral-950));
+  --secondary: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
   --secondary-foreground: var(--color-neutral-100);
-  --muted: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
+  --secondary-hover: color-mix(in srgb, var(--color-neutral-50) 16%, var(--background));
+  --muted: color-mix(in srgb, var(--color-neutral-50) 4%, var(--background));
   --muted-foreground: color-mix(
     in srgb,
-    var(--color-neutral-500) 70%,
+    var(--color-neutral-500) 88%,
     var(--color-neutral-50)
   );
   --accent: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
   --accent-foreground: var(--color-neutral-100);
-  --destructive: color-mix(
-    in srgb,
-    var(--color-red-600) 90%,
-    var(--color-neutral-50)
-  );
+  --destructive: var(--color-red-600);
   --destructive-foreground: var(--color-red-400);
+  --destructive-hover: var(--color-red-700);
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-400);
-  --success: var(--color-emerald-500);
+  --success: var(--color-emerald-600);
   --success-foreground: var(--color-emerald-400);
   --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-400);
-  --border: color-mix(in srgb, var(--color-neutral-50) 12%, var(--background));
-  --input: color-mix(in srgb, var(--color-neutral-50) 13%, var(--background));
-  --ring: var(--color-neutral-500);
+  --border: color-mix(in srgb, var(--color-neutral-50) 6%, var(--background));
+  --input: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
+  --ring: var(--color-neutral-400);
   --sidebar: color-mix(
     in srgb,
     var(--color-neutral-950) 97%,
@@ -169,7 +178,7 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
   );
   --sidebar-foreground: color-mix(
     in srgb,
-    var(--color-neutral-100) 64%,
+    var(--color-neutral-100) 80%,
     var(--sidebar)
   );
   --sidebar-primary: var(--color-neutral-100);
@@ -182,7 +191,7 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
   --sidebar-accent-foreground: var(--color-neutral-100);
   --sidebar-border: color-mix(
     in srgb,
-    var(--color-neutral-50) 11%,
+    var(--color-neutral-50) 5%,
     var(--sidebar)
   );
   --sidebar-ring: var(--color-neutral-400);
@@ -191,6 +200,41 @@ See [Installation](/docs/installation#new-project-setup) for installing with CLI
   --chart-3: var(--color-amber-500);
   --chart-4: var(--color-purple-500);
   --chart-5: var(--color-rose-500);
+}
+```
+</CodeCollapsibleWrapper>
+
+## Base styles
+
+Add the following base layer rules to `globals.css` for default document styling, selection colors, and pointer cursors on interactive elements:
+
+<CodeCollapsibleWrapper>
+```css title="globals.css"
+@layer base {
+  ::selection {
+    @apply bg-primary/80 text-primary-foreground;
+  }
+
+  * {
+    @apply border-border outline-ring ring-ring;
+  }
+
+  body {
+    @apply bg-background text-foreground flex min-h-svh flex-col font-sans;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html {
+    @apply antialiased;
+  }
+
+  main {
+    @apply flex-1 flex flex-col;
+  }
 }
 ```
 </CodeCollapsibleWrapper>
@@ -288,7 +332,19 @@ This means:
 - Larger radius scale up from `--radius`.
 - Changing `--radius` updates the entire radius scale.
 
+### Component usage
+
+Shark UI assigns radius by component type and visual weight:
+
+- `rounded-sm` for compact controls: `Checkbox` and `Kbd`.
+- `rounded-md` for supporting UI: `Badge` and `Skeleton`.
+- `rounded-lg` for standard controls: `Button`, `Input`, `Textarea`, `Select`, `Tooltip`, and `Toast`.
+- `rounded-xl` for contained surfaces: `Card`, `Menu`, `Popover`, and `HoverCard`.
+- `rounded-2xl` for larger overlays: `Dialog`, `Sheet`, `Drawer`, `Command`, and `FloatingPanel`.
+- `rounded-full` for circular UI and pills: `Avatar`, `Switch` and `Progress`.
+
+Small controls use a smaller radius when needed. Nested parts inherit their container's radius so edges stay aligned.
+
 ## Color system
 
 See [Colors](/docs/colors) for the full token reference, and naming rules.
-

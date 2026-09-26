@@ -1,10 +1,14 @@
 ---
 title: Pagination
-description: Navigate through a list of items.
+description: Navigate through pages of items.
+seo:
+  description: Page controls for long lists and tables.
 links:
   doc: https://ark-ui.com/docs/components/pagination
   api: https://ark-ui.com/docs/components/pagination#api-reference
 ---
+
+import manifest from "@/registry/manifest/pagination";
 
 <ComponentPreview componentName="pagination" /> 
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/pagination
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -53,9 +55,11 @@ npm install @ark-ui/react lucide-react
 
 ```text
 Pagination
+├── PaginationFirst
 ├── PaginationPrevious
 ├── PaginationItems
-└── PaginationNext
+├── PaginationNext
+└── PaginationLast
 ```
 
 ## Usage
@@ -63,7 +67,9 @@ Pagination
 ```tsx
 import {
   Pagination,
+  PaginationFirst,
   PaginationItems,
+  PaginationLast,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
@@ -71,9 +77,11 @@ import {
 
 ```tsx
 <Pagination>
+  <PaginationFirst />
   <PaginationPrevious />
   <PaginationItems />
   <PaginationNext />
+  <PaginationLast />
 </Pagination>
 ```
 
@@ -91,9 +99,17 @@ Use `page` and `pageSize` properties to show which items are visible.
 
 <ComponentPreview componentName="pagination" fileName="example-page-range" />
 
+### First and last
+
+Use `PaginationFirst` and `PaginationLast` to jump to the first or last page.
+
+<ComponentPreview componentName="pagination" fileName="example-first-last" />
+
 ### With Links
 
-> Under development
+Set `type="link"` and provide `getPageUrl`.
+
+<ComponentPreview componentName="pagination" fileName="example-links" />
 
 ### Table
 
@@ -101,20 +117,103 @@ Use `Pagination` with `Table` to paginate a table.
 
 <ComponentPreview componentName="pagination" fileName="example-table" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="pagination" />
+
 ## API Reference
 
 ### Pagination
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `count` | `number` | - |
-| `page` | `number` | - |
+| `count` | `number` | `-` |
+| `page` | `number` | `-` |
 | `defaultPage` | `number` | `1` |
-| `pageSize` | `number` | - |
+| `pageSize` | `number` | `-` |
 | `defaultPageSize` | `number` | `10` |
 | `siblingCount` | `number` | `1` |
-| `onPageChange` | `(details: PageChangeDetails) => void` | - |
-| `onPageSizeChange` | `(details: PageSizeChangeDetails) => void` | - |
+| `boundaryCount` | `number` | `1` |
+| `type` | `"button" \| "link"` | `"button"` |
+| `getPageUrl` | `(details: PageUrlDetails) => string` | `-` |
+| `onPageChange` | `(details: PageChangeDetails) => void` | `-` |
+| `onPageSizeChange` | `(details: PageSizeChangeDetails) => void` | `-` |
+
+### PaginationRootProvider
+
+Provides a Pagination API created with `usePagination` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UsePaginationReturn` | `required` |
+| `type` | `"button" \| "link"` | `"button"` |
+
+Pass the same `type` you used in `usePagination` so link mode renders `<a>` items.
+
+### PaginationFirst
+
+Public PaginationFirst component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### PaginationPrevious
+
+Public PaginationPrevious component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### PaginationNext
+
+Public PaginationNext component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### PaginationLast
+
+Public PaginationLast component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### PaginationItem
+
+Public PaginationItem component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### PaginationItems
+
+Public PaginationItems component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### PaginationEllipsis
+
+Public PaginationEllipsis component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

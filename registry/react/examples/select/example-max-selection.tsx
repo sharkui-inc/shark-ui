@@ -11,8 +11,6 @@ import {
   SelectValue,
 } from "@/registry/react/components/select";
 
-const MAX_SELECTION = 3;
-
 const Example = () => {
   const [value, setValue] = React.useState<string[]>([]);
 
@@ -30,7 +28,9 @@ const Example = () => {
     >
       <SelectTrigger className="w-56">
         <SelectValue className="capitalize">
-          <SelectContext>{({ value }) => renderValue(value)}</SelectContext>
+          <SelectContext>
+            {({ value: selectedValue }) => renderValue(selectedValue)}
+          </SelectContext>
         </SelectValue>
       </SelectTrigger>
       <SelectContent>
@@ -44,12 +44,14 @@ const Example = () => {
   );
 };
 
+const MAX_SELECTION = 3;
+
 const renderValue = (value: string[]) => {
   if (value.length === 0) {
     return "Select 3 frameworks";
   }
 
-  const firstValue = value?.at(0) ?? "";
+  const firstValue = value.at(0) ?? "";
   const additionalValues =
     value.length > 1 ? ` (+${value.length - 1} more)` : "";
 

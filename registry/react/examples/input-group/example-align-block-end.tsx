@@ -20,7 +20,7 @@ const Example = () => (
       <InputGroupTextarea placeholder="Write a comment..." />
       <InputGroupAddon align="block-end">
         <InputGroupText>0/280</InputGroupText>
-        <InputGroupButton className="ml-auto" size="xs" variant="default">
+        <InputGroupButton className="ml-auto" variant="default">
           Post
         </InputGroupButton>
       </InputGroupAddon>

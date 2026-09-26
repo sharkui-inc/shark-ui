@@ -1,0 +1,90 @@
+---
+title: Iframe
+description: Render React content inside an iframe.
+links:
+  doc: https://ark-ui.com/docs/utilities/frame
+  api: https://ark-ui.com/docs/utilities/frame#api-reference
+---
+
+import manifest from "@/registry/manifest/iframe";
+
+<ComponentPreview componentName="iframe" />
+
+## Installation
+
+<CodeTabs>
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/iframe
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+<Step>Install the following dependency:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/iframe.tsx" src="/iframe.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+</Steps>
+
+</TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Iframe } from "@/components/ui/iframe";
+```
+
+```tsx
+<Iframe style={{ height: "var(--height)", width: "100%" }} title="Preview">
+  <p>This content is rendered inside the iframe.</p>
+</Iframe>
+```
+
+## Examples
+
+### Injecting script
+
+Use `onMount` to inject a script into the iframe document.
+
+<ComponentPreview componentName="iframe" fileName="example-injecting-script" />
+
+### Custom src doc
+
+Use `srcDoc` to supply the iframe's initial HTML document.
+
+<ComponentPreview componentName="iframe" fileName="example-custom-src-doc" />
+
+## API Reference
+
+### Iframe
+
+Accepts native iframe attributes and a ref.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `head` | `ReactNode` | `-` |
+| `onMount` | `() => void` | `-` |
+| `onUnmount` | `() => void` | `-` |
+| `srcDoc` | `string` | `-` |
+| `title` | `string` | `-` |
+| `sandbox` | `string` | `-` |
+| `allow` | `string` | `-` |
+| `loading` | `"eager" \| "lazy"` | `-` |
+| `className` | `string` | `-` |
+
+---
+
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/utilities/frame#api-reference).

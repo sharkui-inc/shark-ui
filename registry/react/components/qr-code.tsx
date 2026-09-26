@@ -1,10 +1,16 @@
 "use client";
 
-import { QrCode as ArkQrCode, useQrCodeContext } from "@ark-ui/react/qr-code";
+import {
+  QrCode as ArkQrCode,
+  useQrCode as useArkQrCode,
+  useQrCodeContext as useArkQrCodeContext,
+} from "@ark-ui/react/qr-code";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useQrCode = useQrCodeContext;
+export const useQrCode = useArkQrCode;
+export const useQrCodeContext = useArkQrCodeContext;
+export const QrCodeRootProvider = ArkQrCode.RootProvider;
 
 export const QrCode = (props: React.ComponentProps<typeof ArkQrCode.Root>) => {
   const { className, ...rest } = props;
@@ -56,7 +62,6 @@ export const QrCodeOverlay = (
     <ArkQrCode.Overlay
       className={cn(
         "size-(--qr-code-overlay-size)",
-        "absolute inset-0",
         "p-2",
         "flex items-center justify-center",
         "bg-black",

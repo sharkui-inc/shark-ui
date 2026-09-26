@@ -28,27 +28,23 @@ import {
 } from "@/registry/react/components/radio-group";
 import { toast } from "@/registry/react/components/toast";
 
-const formSchema = z.object({
-  plan: z.string().min(1, "You must select a subscription plan to continue."),
-});
-
-export function Example() {
+function Example() {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: {
       plan: "",
     },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "plan-submitted",
-      title: "Plan submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "plan-submitted",
+      title: "Plan submitted",
     });
   };
 
@@ -70,7 +66,7 @@ export function Example() {
                 <Field invalid={fieldState.invalid}>
                   <FieldSet>
                     <FieldLegend>Plan</FieldLegend>
-                    <FieldDescription className="ms-0!">
+                    <FieldDescription>
                       You can upgrade or downgrade your plan at any time.
                     </FieldDescription>
                     <RadioGroup
@@ -111,21 +107,25 @@ export function Example() {
   );
 }
 
+const formSchema = z.object({
+  plan: z.string().min(1, "You must select a subscription plan to continue."),
+});
+
 const plans = [
   {
+    description: "For everyday use with basic features.",
     id: "starter",
     title: "Starter (100K tokens/month)",
-    description: "For everyday use with basic features.",
   },
   {
+    description: "For advanced AI usage with more features.",
     id: "pro",
     title: "Pro (1M tokens/month)",
-    description: "For advanced AI usage with more features.",
   },
   {
+    description: "For large teams and heavy usage.",
     id: "enterprise",
     title: "Enterprise (Unlimited tokens)",
-    description: "For large teams and heavy usage.",
   },
 ];
 

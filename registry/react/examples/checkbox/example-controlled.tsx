@@ -17,7 +17,9 @@ const Example = () => {
       <Field orientation="horizontal">
         <Checkbox
           checked={checked}
-          onCheckedChange={({ checked }) => setChecked(checked)}
+          onCheckedChange={({ checked: nextChecked }) =>
+            setChecked(nextChecked)
+          }
         />
         <FieldLabel>Accept terms and conditions</FieldLabel>
       </Field>

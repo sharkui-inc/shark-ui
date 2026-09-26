@@ -1,0 +1,270 @@
+"use client";
+
+import { ark } from "@ark-ui/react/factory";
+import { createContext } from "@ark-ui/react/utils";
+import React from "react";
+import { tv } from "tailwind-variants";
+import { cn } from "@/lib/utils";
+import {
+  ScrollArea,
+  useScrollAreaContext,
+} from "@/registry/react/components/scroll-area";
+
+interface TerminalContextValue {
+  autoScroll: boolean;
+  output: string;
+}
+
+const [TerminalProvider, _useTerminal] = createContext<TerminalContextValue>({
+  name: "TerminalContext",
+  providerName: "Terminal",
+});
+
+interface TerminalProps extends React.ComponentProps<typeof ark.div> {
+  /**
+   * Follow new output in the viewport.
+   */
+  autoScroll?: boolean;
+  /**
+   * The output of the terminal.
+   */
+  output?: string;
+}
+
+export const Terminal = (props: TerminalProps) => {
+  const { autoScroll = true, className, output = "", ...rest } = props;
+
+  const value = React.useMemo(
+    () => ({
+      autoScroll,
+      output,
+    }),
+    [autoScroll, output]
+  );
+
+  return (
+    <TerminalProvider value={value}>
+      <ark.div
+        className={cn(
+          "w-full min-w-0",
+          "flex flex-col",
+          "bg-card",
+          "text-card-foreground",
+          "rounded-xl border shadow-xs/4",
+          "overflow-hidden",
+          className
+        )}
+        data-slot="terminal"
+        {...rest}
+      />
+    </TerminalProvider>
+  );
+};
+
+const TerminalFollow = (props: { followKey: string }) => {
+  const { followKey } = props;
+  const { autoScroll } = _useTerminal();
+  const { scrollToEdge } = useScrollAreaContext();
+
+  const follow = React.useEffectEvent((_key: string) => {
+    if (!autoScroll) {
+      return;
+    }
+
+    scrollToEdge({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+      edge: "bottom",
+    });
+  });
+
+  React.useLayoutEffect(() => {
+    follow(followKey);
+  }, [followKey]);
+
+  return null;
+};
+
+interface TerminalHeaderProps extends React.ComponentProps<typeof ark.div> {
+  /**
+   * The title of the terminal session.
+   */
+  title?: string;
+}
+
+export const TerminalTitle = (props: React.ComponentProps<typeof ark.div>) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn(
+        "min-w-0 flex-1 truncate text-muted-foreground text-sm",
+        className
+      )}
+      data-slot="terminal-title"
+      {...rest}
+    />
+  );
+};
+
+export const TerminalHeader = (props: TerminalHeaderProps) => {
+  const { title, className, children, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn(
+        "flex min-h-9 min-w-0 items-center gap-2 px-3 py-1",
+        "border-b",
+        "text-muted-foreground text-sm",
+        "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+        className
+      )}
+      data-slot="terminal-header"
+      {...rest}
+    >
+      {!!title && <TerminalTitle>{title}</TerminalTitle>}
+      {!title && typeof children === "string" ? (
+        <TerminalTitle>{children}</TerminalTitle>
+      ) : (
+        children
+      )}
+    </ark.div>
+  );
+};
+
+export const TerminalAction = (props: React.ComponentProps<typeof ark.div>) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn("ms-auto flex shrink-0 items-center gap-1", className)}
+      data-slot="terminal-action"
+      {...rest}
+    />
+  );
+};
+
+interface TerminalContentProps extends React.ComponentProps<typeof ark.div> {
+  /**
+   * The output of the terminal. Falls back to `output` on `Terminal`.
+   */
+  output?: string;
+}
+
+export const TerminalContent = (props: TerminalContentProps) => {
+  const { className, output: outputProp, children, ...rest } = props;
+
+  const { output: outputFromContext } = _useTerminal();
+  const output = outputProp ?? outputFromContext;
+
+  const followKey = typeof children === "string" ? children : output;
+
+  const tokens = React.useMemo(() => {
+    if (children === undefined || children === null) {
+      return parseAnsi(output);
+    }
+    return null;
+  }, [children, output]);
+
+  return (
+    <ark.div
+      className={cn(
+        "min-h-0 w-full min-w-0",
+        "flex flex-1 flex-col",
+        "overflow-hidden",
+        className
+      )}
+      data-slot="terminal-content"
+      {...rest}
+    >
+      <ScrollArea className="flex-1" dir="ltr" overscrollContain>
+        <TerminalFollow followKey={followKey} />
+        <pre
+          className="w-max min-w-full p-3 font-mono text-[0.8125rem] leading-6"
+          dir="ltr"
+        >
+          {children ??
+            tokens?.map((token) => (
+              <span className={token.className} key={token.start}>
+                {token.text}
+              </span>
+            ))}
+        </pre>
+      </ScrollArea>
+    </ark.div>
+  );
+};
+
+const ESC = String.fromCharCode(27);
+
+const ANSI_RE = new RegExp(`${ESC}\\[([0-9;]*)m`, "g");
+
+const ANSI_CODES = ["0", "31", "32", "33", "34", "36", "90"] as const;
+
+type AnsiCode = (typeof ANSI_CODES)[number];
+
+const ansiVariants = tv({
+  variants: {
+    code: {
+      "0": "",
+      "31": "text-destructive-foreground",
+      "32": "text-success-foreground",
+      "33": "text-warning-foreground",
+      "34": "text-info-foreground",
+      "36": "text-info-foreground",
+      "90": "text-muted-foreground",
+    },
+  },
+});
+
+const isAnsiCode = (code: string): code is AnsiCode =>
+  ANSI_CODES.includes(code as AnsiCode);
+
+interface AnsiToken {
+  className: string;
+  start: number;
+  text: string;
+}
+
+export const parseAnsi = (value: string): AnsiToken[] => {
+  const tokens: AnsiToken[] = [];
+  let lastIndex = 0;
+  let currentClass = "";
+
+  for (const match of value.matchAll(ANSI_RE)) {
+    const index = match.index ?? 0;
+    if (index > lastIndex) {
+      tokens.push({
+        className: currentClass,
+        start: lastIndex,
+        text: value.slice(lastIndex, index),
+      });
+    }
+    const codes = (match[1] ?? "0").split(";");
+    for (const code of codes) {
+      if (isAnsiCode(code)) {
+        currentClass = ansiVariants({ code });
+      }
+    }
+    lastIndex = index + match[0].length;
+  }
+
+  if (lastIndex < value.length) {
+    tokens.push({
+      className: currentClass,
+      start: lastIndex,
+      text: value.slice(lastIndex),
+    });
+  }
+
+  return tokens;
+};
+
+/**
+ * Visible terminal text with ANSI SGR codes removed. Line breaks are kept.
+ */
+export const toPlainOutput = (value: string): string =>
+  parseAnsi(value)
+    .map((token) => token.text)
+    .join("");

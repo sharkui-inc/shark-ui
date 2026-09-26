@@ -13,6 +13,7 @@ import {
 } from "@registry/react/components/context-menu";
 import { DownloadTrigger } from "@registry/react/components/download-trigger";
 import { DownloadIcon } from "lucide-react";
+import type React from "react";
 import { SharkIcon } from "@/components/icons/shark";
 import { cn } from "@/lib/utils";
 
@@ -37,11 +38,12 @@ export const HeaderBrand = (
     <ContextMenu>
       <ContextMenuTrigger
         className={cn(
+          "hitbox-2",
           "flex gap-2",
-          "font-bold font-heading text-base",
+          "font-bold text-base",
           "rounded-md border border-transparent",
           "cursor-pointer",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          "focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
           className
         )}
         {...rest}

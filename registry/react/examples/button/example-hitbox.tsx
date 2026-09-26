@@ -12,20 +12,19 @@ const Example = () => {
 
   return (
     <div className="relative flex size-full items-center justify-center">
-      <div className="absolute inset-e-2 top-2">
+      <div className="absolute inset-e-4 top-4">
         <Field orientation="horizontal">
+          <FieldLabel>Debug</FieldLabel>
           <Switch
             checked={show}
             onCheckedChange={({ checked }) => setShow(checked)}
           />
-          <FieldLabel>Show hitbox</FieldLabel>
         </Field>
       </div>
 
       <div className="flex flex-col items-center gap-8 sm:flex-row">
         <Button
           className={cn("hitbox-2", { "hitbox-debug": show })}
-          type="button"
           variant="outline"
         >
           hitbox-6
@@ -34,7 +33,6 @@ const Example = () => {
           aria-label="Menu"
           className={cn("hitbox-2", { "hitbox-debug": show })}
           size="icon-md"
-          type="button"
           variant="ghost"
         >
           <Menu />

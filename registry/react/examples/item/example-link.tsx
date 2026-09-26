@@ -1,4 +1,4 @@
-import { ExternalLinkIcon } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import {
   Item,
   ItemContent,
@@ -9,7 +9,7 @@ import {
 const Example = () => (
   <div className="flex w-full max-w-md flex-col gap-4">
     <Item asChild variant="muted">
-      <a href="/docs">
+      <a href="#">
         <ItemContent>
           <ItemTitle>Visit our documentation</ItemTitle>
           <ItemDescription>
@@ -19,19 +19,25 @@ const Example = () => (
       </a>
     </Item>
     <Item asChild variant="outline">
-      <a
-        href="https://vini.one/twitter"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
+      <a href="#">
         <ItemContent>
           <ItemTitle>External resource</ItemTitle>
           <ItemDescription>
             Opens in a new tab with security attributes.
           </ItemDescription>
         </ItemContent>
-        <ExternalLinkIcon />
+        <ArrowUpRight />
       </a>
+    </Item>
+    <Item asChild variant="outline">
+      <button className="w-full text-start" type="button">
+        <ItemContent>
+          <ItemTitle>Start a conversation</ItemTitle>
+          <ItemDescription>
+            Opens the composer without leaving this page.
+          </ItemDescription>
+        </ItemContent>
+      </button>
     </Item>
   </div>
 );

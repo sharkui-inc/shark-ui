@@ -13,15 +13,15 @@ const Example = () => {
   const [zoom, setZoom] = React.useState(1);
 
   return (
-    <div className="flex w-full max-w-lg flex-col items-end gap-2">
+    <div className="flex w-full max-w-sm flex-col gap-4">
       <ImageCropper onZoomChange={(e) => setZoom(e.zoom)} zoom={zoom}>
         <ImageCropperImage
           alt="Crop me"
-          src="https://images.unsplash.com/photo-1662692735672-544412d65934?w=600&auto=format"
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200"
         />
         <ImageCropperSelection />
       </ImageCropper>
-      <div className="flex gap-1">
+      <div className="flex justify-end gap-2">
         <Button
           aria-label="Zoom out"
           onClick={() => setZoom(Math.max(0, zoom - 0.25))}

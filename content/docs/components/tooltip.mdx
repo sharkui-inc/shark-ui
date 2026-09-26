@@ -1,10 +1,14 @@
 ---
 title: Tooltip
-description: Display information on hover or focus.
+description: Short hint on hover or focus.
+seo:
+  description: Short hint on hover or focus for icons and labels.
 links:
   doc: https://ark-ui.com/docs/components/tooltip
   api: https://ark-ui.com/docs/components/tooltip#api-reference
 ---
+
+import manifest from "@/registry/manifest/tooltip";
 
 <ComponentPreview componentName="tooltip" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/tooltip
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -74,29 +76,21 @@ import {
 </Tooltip>
 ```
 
-## Tooltip vs Toggle Tooltip
+## Controlled
 
-You're viewing **Tooltip**—a label that shows on hover or focus. Use it when the content is supplementary and non-essential, and you're okay with touch users not having access.
+Control open state with `open` and `onOpenChange`.
 
-### Use Tooltip when
+<ComponentPreview componentName="tooltip" fileName="example-controlled" />
 
-- The trigger has its own purpose and the popup is **supplementary**.
-- The content is **non-essential**—nice-to-have clarity for sighted mouse/keyboard users.
-- You're okay with **touch users not seeing it**—tooltips only open on hover/focus, not on tap.
-- The content is **short and non-interactive** (no links or buttons inside).
+## Choose the right primitive
 
-### Tooltip behavior
+Tooltip and Toggle Tooltip share visual treatment. Choose based on how people need to reach and use the content.
 
-- **Hover or focus only** — Opens on hover/focus; touch users cannot access it.
-- **Non-interactive** — Keep content short with no links or buttons.
-- **Supplementary** — Best for nice-to-have information, not critical content.
-
-### Consider Toggle Tooltip when
-
-- The trigger's **primary purpose** is to reveal the content.
-- The content is **essential** and should be accessible to touch users and screen readers.
-- You need **click-to-open** so everyone can access it.
-- The content may be **interactive** (links, buttons).
+| Intent | Use | Why |
+| --- | --- | --- |
+| Name an icon-only control or add a short, optional hint | Tooltip | It opens on hover or keyboard focus, then closes automatically. Keep the content plain text and non-interactive. |
+| Offer supporting details that people may open on touch, keep open, or act on | Toggle Tooltip | It uses a Popover, opened by click, Enter, or Space. Its content can receive focus and include links or buttons. |
+| Give instructions required to complete a task | Visible text, a field description, or Dialog | Do not hide required information behind an overlay. |
 
 ## Positioning
 
@@ -110,11 +104,29 @@ Use the `positioning` prop to change the position of the tooltip.
 
 <ComponentPreview componentName="tooltip" fileName="example-with-keyboard-shortcut" />
 
+### Multiple triggers
+
+`value` on each `TooltipTrigger`. `onTriggerValueChange` updates shared tooltip content.
+
+<ComponentPreview componentName="tooltip" fileName="example-multiple-triggers" />
+
 ### Disabled Button
 
 Show a tooltip on a disabled button by wrapping it with a span.
 
 <ComponentPreview componentName="tooltip" fileName="example-disabled-button" />
+
+### Hide Arrow
+
+Hide the arrow with `showArrow={false}` on `TooltipContent`.
+
+<ComponentPreview componentName="tooltip" fileName="example-without-arrow" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="tooltip" />
 
 ## API Reference
 
@@ -125,14 +137,15 @@ Root component that wraps the tooltip. Manages open state and positioning.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `positioning` | `PositioningOptions` | `{ placement: "top" }` |
-| `openDelay` | `number` | `0` |
+| `openDelay` | `number` | `600` |
 | `closeDelay` | `number` | `100` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `open` | `boolean` | - |
-| `defaultOpen` | `boolean` | - |
-| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
-| `disabled` | `boolean` | - |
+| `open` | `boolean` | `-` |
+| `defaultOpen` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
+| `disabled` | `boolean` | `-` |
 | `interactive` | `boolean` | `false` |
 | `closeOnClick` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
@@ -145,7 +158,8 @@ Element that shows the tooltip on hover or focus. Button by default; use `asChil
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
+| `value` | `string` | `-` |
 
 ### TooltipContent
 
@@ -153,8 +167,9 @@ Tooltip content shown in a popover on hover or focus.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+| `showArrow` | `boolean` | `true` |
 
 ### TooltipArrow
 
@@ -162,12 +177,20 @@ Optional arrow pointing to the trigger. Place inside `TooltipContent`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--arrow-background` | `var(--foreground)` |
-| `--arrow-size` | `calc(1.5 * var(--spacing))` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--arrow-background` | `string` | `var(--foreground)` |
+| `--arrow-size` | `string` | `calc(1.5 * var(--spacing))` |
+
+### TooltipRootProvider
+
+Provides a Tooltip API created with `useTooltip` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseTooltipReturn` | `required` |
 
 ---
 

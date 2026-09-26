@@ -1,10 +1,14 @@
 ---
 title: Circular Slider
 description: Circular slider for selecting values.
+seo:
+  description: Dial-style slider for compact numeric values.
 links:
   doc: https://ark-ui.com/docs/components/angle-slider
   api: https://ark-ui.com/docs/components/angle-slider#api-reference
 ---
+
+import manifest from "@/registry/manifest/circular-slider";
 
 <ComponentPreview componentName="circular-slider" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/circular-slider
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -107,6 +109,12 @@ Pass a `number[]` to `markers` for custom angles.
 
 <ComponentPreview componentName="circular-slider" fileName="example-custom-markers" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="circular-slider" />
+
 ## API Reference
 
 ### CircularSlider
@@ -115,16 +123,24 @@ Root component. Manages angle selection and value.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `number` | - |
+| `value` | `number` | `-` |
 | `defaultValue` | `number` | `0` |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `step` | `number` | `1` |
-| `disabled` | `boolean` | - |
-| `size` | `number` | `120` |
+| `disabled` | `boolean` | `-` |
+| `size` | `number` | `100` |
 | `thickness` | `number` | `6` |
-| `markers` | `boolean \| number[]` | - |
+| `markers` | `boolean \| number[]` | `-` |
 | `markersAtSteps` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
+
+### CircularSliderLabel
+
+Accessible label. Render as a child of `CircularSlider`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 
 ### CircularSliderValue
 
@@ -132,9 +148,48 @@ Shows the current angle value (degrees or custom format).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `prefix` | `React.ReactNode \| string` | - |
-| `suffix` | `React.ReactNode \| string` | - |
-| `className` | `string` | - |
+| `prefix` | `React.ReactNode \| string` | `-` |
+| `suffix` | `React.ReactNode \| string` | `-` |
+| `className` | `string` | `-` |
+
+### CircularSliderRootProvider
+
+Provides a CircularSlider API created with `useCircularSlider` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseCircularSliderReturn` | `required` |
+| `size` | `number` | `100` |
+| `thickness` | `number` | `6` |
+
+`size` and `thickness` must match the visual CSS on the consumer tree so Thumb/Marker metrics stay aligned.
+
+### CircularSliderThumb
+
+Public CircularSliderThumb component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### CircularSliderMarkerGroup
+
+Public CircularSliderMarkerGroup component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### CircularSliderMarker
+
+Public CircularSliderMarker component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

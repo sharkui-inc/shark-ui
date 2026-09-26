@@ -20,7 +20,7 @@ import {
 const Example = () => (
   <ButtonGroup>
     <Button variant="outline">
-      <StarIcon />
+      <StarIcon data-icon="inline-start" />
       Subscribe
     </Button>
     <Menu positioning={{ placement: "bottom-end" }}>

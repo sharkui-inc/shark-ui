@@ -2,7 +2,8 @@
 
 import {
   PasswordInput as ArkPasswordInput,
-  usePasswordInputContext,
+  usePasswordInput as useArkPasswordInput,
+  usePasswordInputContext as useArkPasswordInputContext,
 } from "@ark-ui/react/password-input";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import type React from "react";
@@ -15,14 +16,67 @@ import {
   type InputGroupProps,
 } from "@/registry/react/components/input-group";
 
-export const usePasswordInput = usePasswordInputContext;
+export const usePasswordInput = useArkPasswordInput;
+export const usePasswordInputContext = useArkPasswordInputContext;
+export const PasswordInputRootProvider = ArkPasswordInput.RootProvider;
+
+type PasswordInputControlProps = Pick<
+  React.ComponentProps<typeof InputGroupInput>,
+  | "placeholder"
+  | "value"
+  | "defaultValue"
+  | "onChange"
+  | "onBlur"
+  | "onFocus"
+  | "autoFocus"
+  | "maxLength"
+  | "minLength"
+  | "pattern"
+  | "inputMode"
+  | "spellCheck"
+>;
 
 interface PasswordInputProps
-  extends React.ComponentProps<typeof ArkPasswordInput.Root>,
-    Pick<InputGroupProps, "size"> {}
+  extends Omit<
+      React.ComponentProps<typeof ArkPasswordInput.Root>,
+      "children" | keyof PasswordInputControlProps
+    >,
+    Pick<InputGroupProps, "size">,
+    PasswordInputControlProps {
+  /**
+   * Icon shown when the password is hidden.
+   *
+   * @default `<EyeOffIcon />`
+   */
+  hiddenIcon?: React.ReactNode;
+  /**
+   * Icon shown when the password is visible.
+   *
+   * @default `<EyeIcon />`
+   */
+  visibleIcon?: React.ReactNode;
+}
 
 export const PasswordInput = (props: PasswordInputProps) => {
-  const { size = "md", className, ...rest } = props;
+  const {
+    size = "md",
+    visibleIcon,
+    hiddenIcon,
+    className,
+    placeholder,
+    value,
+    defaultValue,
+    onChange,
+    onBlur,
+    onFocus,
+    autoFocus,
+    maxLength,
+    minLength,
+    pattern,
+    inputMode,
+    spellCheck,
+    ...rest
+  } = props;
 
   return (
     <ArkPasswordInput.Root
@@ -35,68 +89,45 @@ export const PasswordInput = (props: PasswordInputProps) => {
       data-size={size}
       data-slot="password-input"
       {...rest}
-    />
-  );
-};
-
-export const PasswordInputGroup = (
-  props: React.ComponentProps<typeof ArkPasswordInput.Control>
-) => {
-  const { className, ...rest } = props;
-
-  return (
-    <ArkPasswordInput.Control asChild data-slot="password-input-control">
-      <InputGroup
-        className={cn(
-          "in-data-[size=lg]:h-9 in-data-[size=sm]:h-7",
-          "data-disabled:pointer-events-none data-disabled:opacity-64",
-          className
-        )}
-        {...rest}
-      />
-    </ArkPasswordInput.Control>
-  );
-};
-
-export const PasswordInputInput = (
-  props: React.ComponentProps<typeof ArkPasswordInput.Input>
-) => (
-  <ArkPasswordInput.Input asChild data-slot="password-input-input" {...props}>
-    <InputGroupInput />
-  </ArkPasswordInput.Input>
-);
-
-export const PasswordInputTrigger = (
-  props: React.ComponentProps<typeof ArkPasswordInput.VisibilityTrigger>
-) => {
-  const { children, ...rest } = props;
-
-  return (
-    <InputGroupAddon align="inline-end">
-      <ArkPasswordInput.VisibilityTrigger
-        asChild
-        data-slot="password-input-visibility-trigger"
-      >
-        <InputGroupButton size="icon-xs" variant="ghost" {...rest}>
-          {children ?? <PasswordInputIndicator />}
-        </InputGroupButton>
-      </ArkPasswordInput.VisibilityTrigger>
-    </InputGroupAddon>
-  );
-};
-
-export const PasswordInputIndicator = (
-  props: React.ComponentProps<typeof ArkPasswordInput.Indicator>
-) => {
-  const { children, ...rest } = props;
-
-  return (
-    <ArkPasswordInput.Indicator
-      data-slot="password-input-indicator"
-      fallback={<EyeOffIcon />}
-      {...rest}
     >
-      {children ?? <EyeIcon />}
-    </ArkPasswordInput.Indicator>
+      <ArkPasswordInput.Control asChild data-slot="password-input-control">
+        <InputGroup
+          className="data-disabled:pointer-events-none data-disabled:opacity-64"
+          size={size}
+        >
+          <ArkPasswordInput.Input asChild data-slot="password-input-input">
+            <InputGroupInput
+              autoFocus={autoFocus}
+              defaultValue={defaultValue}
+              inputMode={inputMode}
+              maxLength={maxLength}
+              minLength={minLength}
+              onBlur={onBlur}
+              onChange={onChange}
+              onFocus={onFocus}
+              pattern={pattern}
+              placeholder={placeholder}
+              spellCheck={spellCheck}
+              value={value}
+            />
+          </ArkPasswordInput.Input>
+          <InputGroupAddon align="inline-end">
+            <ArkPasswordInput.VisibilityTrigger
+              asChild
+              data-slot="password-input-visibility-trigger"
+            >
+              <InputGroupButton size="icon-xs" variant="ghost">
+                <ArkPasswordInput.Indicator
+                  data-slot="password-input-indicator"
+                  fallback={hiddenIcon ?? <EyeOffIcon aria-hidden />}
+                >
+                  {visibleIcon ?? <EyeIcon aria-hidden />}
+                </ArkPasswordInput.Indicator>
+              </InputGroupButton>
+            </ArkPasswordInput.VisibilityTrigger>
+          </InputGroupAddon>
+        </InputGroup>
+      </ArkPasswordInput.Control>
+    </ArkPasswordInput.Root>
   );
 };

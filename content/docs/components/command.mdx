@@ -1,10 +1,14 @@
 ---
 title: Command
-description: Searchable command input with filtering.
+description: Searchable command palette.
+seo:
+  description: Command palette with filtering, groups, and shortcuts.
 links:
   doc: https://ark-ui.com/docs/components/combobox
   api: https://ark-ui.com/docs/components/combobox#api-reference
 ---
+
+import manifest from "@/registry/manifest/command";
 
 <ComponentPreview componentName="command" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/command
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -112,11 +114,51 @@ const { collection, filter } = useListCollection({
 </Command>
 ```
 
+## Controlled
+
+Control the selected command with `value` and `onValueChange`.
+
+<ComponentPreview componentName="command" fileName="example-controlled" />
+
+## States
+
+### Disabled
+
+Use the `disabled` prop to disable the entire command palette.
+
+<ComponentPreview componentName="command" fileName="example-disabled" />
+
+### Disabled Item
+
+Set `disabled: true` on an item in the collection to disable a specific command.
+
+<ComponentPreview componentName="command" fileName="example-disabled-item" />
+
+## Variants
+
+### Default
+
+On mobile, the default variant is flush with the screen edge.
+
+<ComponentPreview componentName="command" fileName="example-variant-default" />
+
+### Inset
+
+Use `variant="inset"` to give the command palette an inset from the screen edge.
+
+<ComponentPreview componentName="command" fileName="example-inset" />
+
 ## Examples
 
 ### With Dialog
 
 <ComponentPreview componentName="command" fileName="example-dialog" />
+
+### Fill
+
+Set `fill` to use the full available mobile viewport for the command dialog.
+
+<ComponentPreview componentName="command" fileName="example-fill" />
 
 ### Groups
 
@@ -142,6 +184,12 @@ Scrollable command menu with multiple items.
 
 <ComponentPreview componentName="command" fileName="example-scrollable" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="command" />
+
 ## API Reference
 
 ### Command
@@ -150,15 +198,15 @@ Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `ListCollection<T>` | **required** |
-| `value` | `string \| string[]` | - |
-| `defaultValue` | `string \| string[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
-| `onInputValueChange` | `(details: InputValueChangeDetails) => void` | - |
-| `disabled` | `boolean` | - |
+| `collection` | `ListCollection<T>` | `required` |
+| `value` | `string \| string[]` | `-` |
+| `defaultValue` | `string \| string[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | `-` |
+| `onInputValueChange` | `(details: InputValueChangeDetails) => void` | `-` |
+| `disabled` | `boolean` | `-` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandDialog
 
@@ -166,10 +214,10 @@ Dialog root for the command palette. Same as `Dialog`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `open` | `boolean` | - |
+| `open` | `boolean` | `-` |
 | `defaultOpen` | `boolean` | `false` |
-| `onOpenChange` | `({ open }: OpenChangeDetails) => void` | - |
-| `className` | `string` | - |
+| `onOpenChange` | `({ open }: OpenChangeDetails) => void` | `-` |
+| `className` | `string` | `-` |
 
 ### CommandDialogTrigger
 
@@ -178,7 +226,7 @@ Opens the command palette on click. Same as `DialogTrigger`.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandDialogContent
 
@@ -187,9 +235,11 @@ Container for the command palette inside the dialog.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg" \| "xl" \| "fullscreen"` | `"lg"` |
+| `variant` | `"default" \| "inset"` | `"default"` |
+| `fill` | `boolean` | `false` |
 | `title` | `string` | `"Command Palette"` |
 | `description` | `string` | `"Search for a command to run..."` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandInput
 
@@ -197,10 +247,11 @@ Search input with icon. Uses InputGroup for layout.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
-| `placeholder` | `string` | - |
-| `disabled` | `boolean` | - |
-| `className` | `string` | - |
+| `size` | `"sm" \| "md" \| "lg"` | `"lg"` |
+| `autoFocus` | `boolean` | `true` |
+| `placeholder` | `string` | `-` |
+| `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### CommandContent
 
@@ -208,7 +259,7 @@ Scrollable content container for the command list.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandList
 
@@ -216,8 +267,8 @@ List container for command items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### CommandEmpty
 
@@ -225,9 +276,9 @@ Content when no items match the filter.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `children` | `ReactNode` | `No results found.` |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 
 ### CommandGroup
 
@@ -235,9 +286,9 @@ Groups related items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string \| ReactNode` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `heading` | `string \| ReactNode` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### CommandGroupLabel
 
@@ -245,8 +296,8 @@ Label for a group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### CommandItem
 
@@ -254,8 +305,8 @@ A single command or action in the palette.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `item` | `T` | **required** |
-| `className` | `string` | - |
+| `item` | `T` | `required` |
+| `className` | `string` | `-` |
 
 ### CommandSeparator
 
@@ -263,7 +314,7 @@ Visual divider between groups or items. Uses `Separator`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandShortcut
 
@@ -271,7 +322,7 @@ Keyboard shortcut hint shown next to a command.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### CommandFooter
 
@@ -279,9 +330,16 @@ Footer area for hints, tips, or extra actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
+
+### CommandRootProvider
+
+Provides a Command API created with `useCommand` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseCommandReturn` | `required` |
 
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/command#api-reference).
-

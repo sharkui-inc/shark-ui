@@ -1,10 +1,14 @@
 ---
 title: Marquee
-description: Scrolls items in a horizontal container.
+description: Scroll items in a horizontal strip.
+seo:
+  description: Horizontal scrolling strip for logos and highlights.
 links:
   doc: https://ark-ui.com/docs/components/marquee
   api: https://ark-ui.com/docs/components/marquee#api-reference
 ---
+
+import manifest from "@/registry/manifest/marquee";
 
 <ComponentPreview componentName="marquee" />
 
@@ -31,13 +35,11 @@ npx shadcn@latest add @shark/marquee
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Add the following animations to your `globals.css`.</Step>
+<Step>Import the following rules into your CSS file:</Step>
 
-```css title="globals.css" showLineNumbers
+```css showLineNumbers
 @theme inline {
   --animate-marquee-x: marqueeX var(--marquee-duration) linear infinite var(--marquee-delay);
   --animate-marquee-y: marqueeY var(--marquee-duration) linear infinite var(--marquee-delay);
@@ -143,6 +145,12 @@ Use the `speed` prop (pixels per second) to control scroll speed.
 
 <ComponentPreview componentName="marquee" fileName="example-custom-speed" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="marquee" />
+
 ## API Reference
 
 ### Marquee
@@ -158,7 +166,7 @@ Root component. Manages the scrolling viewport and animation.
 | `autoFill` | `boolean` | `false` |
 | `pauseOnInteraction` | `boolean` | `false` |
 | `reverse` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### MarqueeContent
 
@@ -166,8 +174,8 @@ Viewport wrapper. Wrap `MarqueeItem` children with this. Animates content horizo
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### MarqueeItem
 
@@ -175,8 +183,25 @@ Single item in the scrolling marquee.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+
+### MarqueeRootProvider
+
+Provides a Marquee API created with `useMarquee` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseMarqueeReturn` | `required` |
+
+### MarqueeEdge
+
+Public MarqueeEdge component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

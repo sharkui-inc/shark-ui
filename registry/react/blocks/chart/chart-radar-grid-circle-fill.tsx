@@ -21,18 +21,18 @@ import {
 export const description = "A radar chart with a grid and circle fill";
 
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 285 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 203 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 264 },
+  { desktop: 186, month: "January" },
+  { desktop: 285, month: "February" },
+  { desktop: 237, month: "March" },
+  { desktop: 203, month: "April" },
+  { desktop: 209, month: "May" },
+  { desktop: 264, month: "June" },
 ];
 
 const chartConfig = {
   desktop: {
-    label: "Desktop",
     color: "var(--chart-1)",
+    label: "Desktop",
   },
 } satisfies ChartConfig;
 
@@ -53,7 +53,7 @@ function ChartRadarGridCircleFill() {
           <RadarChart data={chartData}>
             <ChartTooltip content={<ChartTooltipContent />} cursor={false} />
             <PolarGrid
-              className="fill-(--color-desktop) opacity-20"
+              className="fill-(--color-desktop) opacity-24"
               gridType="circle"
             />
             <PolarAngleAxis dataKey="month" />

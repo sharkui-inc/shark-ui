@@ -25,37 +25,24 @@ import { toast } from "@registry/react/components/toast";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 
-const formSchema = z.object({
-  responses: z.boolean(),
-  tasks: z
-    .array(z.string())
-    .min(1, "Please select at least one notification type.")
-    .refine(
-      (value) => value.every((task) => tasks.some((t) => t.id === task)),
-      {
-        message: "Invalid notification type selected.",
-      }
-    ),
-});
-
-export const Example = () => {
+const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: {
       responses: true,
       tasks: [],
     },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "tasks-submitted",
-      title: "Tasks submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "tasks-submitted",
+      title: "Tasks submitted",
     });
   };
 
@@ -87,7 +74,9 @@ export const Example = () => {
                           checked={field.value}
                           disabled
                           name={field.name}
-                          onCheckedChange={field.onChange}
+                          onCheckedChange={({ checked }) =>
+                            field.onChange(checked === true)
+                          }
                         />
                         <FieldLabel>Push notifications</FieldLabel>
                       </Field>
@@ -148,6 +137,19 @@ export const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  responses: z.boolean(),
+  tasks: z
+    .array(z.string())
+    .min(1, "Please select at least one notification type.")
+    .refine(
+      (value) => value.every((task) => tasks.some((t) => t.id === task)),
+      {
+        message: "Invalid notification type selected.",
+      }
+    ),
+});
 
 const tasks = [
   {

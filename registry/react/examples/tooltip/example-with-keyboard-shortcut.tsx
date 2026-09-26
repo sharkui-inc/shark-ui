@@ -11,9 +11,9 @@ const Example = () => (
     <TooltipTrigger asChild>
       <Button variant="outline">Add to library</Button>
     </TooltipTrigger>
-    <TooltipContent className="flex items-center gap-2">
+    <TooltipContent>
       <p>Add to library</p>
-      <KbdGroup className="ml-1.5 inline">
+      <KbdGroup>
         <Kbd>⌘</Kbd>
         <Kbd>K</Kbd>
       </KbdGroup>

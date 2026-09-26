@@ -1,10 +1,14 @@
 ---
 title: Sheet  
-description: Content that slides in from the screen edge.
+description: Panel that slides in from the edge.
+seo:
+  description: Panel that slides in from the edge for forms and filters.
 links:
   doc: https://ark-ui.com/docs/components/dialog
   api: https://ark-ui.com/docs/components/dialog#api-reference
 ---
+
+import manifest from "@/registry/manifest/sheet";
 
 <ComponentPreview componentName="sheet" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/sheet
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -100,13 +102,19 @@ Control which side the sheet slides in from using the `side` prop.
 
 <ComponentPreview componentName="sheet" fileName="example-sides" />
 
-## Examples
+## Variants
 
-### Inset Variant
+### Default
 
-Use the `variant="inset"` prop to add padding. The sheet appears as a floating card.
+<ComponentPreview componentName="sheet" fileName="example-variant-default" />
+
+### Inset
+
+Use `variant="inset"` to give the sheet an inset from the screen edge.
 
 <ComponentPreview componentName="sheet" fileName="example-inset" />
+
+## Examples
 
 ### Scrollable
 
@@ -132,11 +140,15 @@ Use `modal={false}` to allow interaction with elements outside the sheet.
 
 <ComponentPreview componentName="sheet" fileName="example-non-modal" />
 
+### Multiple triggers
+
+`value` on each `SheetTrigger`. `onTriggerValueChange` tracks which button opened the sheet.
+
+<ComponentPreview componentName="sheet" fileName="example-multiple-triggers" />
+
 ### Custom spacing
 
-Use `[--space:--spacing("value")]` on `SheetContent` to adjust internal padding.
-
-Default spacing is `--spacing(6)`.
+The `[--space:--spacing("value")]` controls the internal spacing.
 
 <ComponentPreview componentName="sheet" fileName="example-custom-spacing" />
 
@@ -146,22 +158,32 @@ Default spacing is `--spacing(6)`.
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="sheet" />
+
 ## API Reference
 
 ### Sheet
 
-Root component. Uses Ark UI Dialog. Controls open state and slide direction.
+Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `open` | `boolean` | `-` |
 | `defaultOpen` | `boolean` | `false` |
 | `onOpenChange` | `({ open }: OpenChangeDetails) => void` | `-` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
 | `modal` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
 | `closeOnInteractOutside` | `boolean` | `true` |
 | `initialFocusEl` | `() => MaybeElement` | `-` |
 | `finalFocusEl` | `() => MaybeElement` | `-` |
+| `lazyMount` | `boolean` | `true` |
+| `unmountOnExit` | `boolean` | `true` |
+| `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
 | `onEscapeKeyDown` | `(event: KeyboardEvent) => void` | `-` |
 | `onInteractOutside` | `(event: InteractOutsideEvent) => void` | `-` |
 | `className` | `string` | `-` |
@@ -173,22 +195,23 @@ Opens the sheet on click. Use `asChild` for custom triggers.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
+| `value` | `string` | `-` |
 | `className` | `string` | `-` |
 
 ### SheetContent
 
-Holds the sheet panel. Slides in from the configured edge.
+Holds the sheet panel. Slides in from the configured edge. `placement="left"` maps to the inline-start edge (left in LTR, right in RTL); `placement="right"` maps to inline-end.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `side` | `"right" \| "left" \| "top" \| "bottom"` | `"right"` |
+| `placement` | `"right" \| "left" \| "top" \| "bottom"` | `"right"` |
 | `variant` | `"default" \| "inset"` | `"default"` |
 | `showCloseButton` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(6)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(6)` |
 
 ### SheetHeader
 
@@ -202,16 +225,16 @@ Header area for title and description.
 
 ### SheetBody
 
-Scrollable body content. Uses [ScrollArea](/docs/components/scroll-area) for overflow.
+Scrollable body content.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `scrollFade` | `boolean` | `false` |
+| `scrollFade` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
 ### SheetFooter
 
-Footer area for action buttons.
+Footer area for action buttons. Same pattern as `DialogFooter`: primary action first in the DOM; layout classes reverse the visual order (Cancel left / Confirm right).
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -261,6 +284,15 @@ Positioning wrapper for sheet content. Used internally; expose for custom layout
 | `side` | `"right" \| "left" \| "top" \| "bottom"` | `-` |
 | `variant` | `"default" \| "inset"` | `"default"` |
 | `className` | `string` | `-` |
+
+### SheetRootProvider
+
+Provides a Sheet API created with `useSheet` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseSheetReturn` | `required` |
+| `modal` | `boolean` | `true` |
 
 ---
 

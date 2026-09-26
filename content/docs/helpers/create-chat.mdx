@@ -1,0 +1,176 @@
+---
+title: createChat
+description: Create deterministic, local conversations for AI SDK and TanStack AI.
+---
+
+<ComponentPreview componentName="create-chat" autoHeight showBorders={false} />
+
+## Installation
+
+<CodeTabs>
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx shadcn@latest add @shark/use-chat-helper
+```
+
+<Step>Using AI SDK:</Step>
+
+<RegistryDependencies dependencies={["@ai-sdk/react", "ai"]} />
+
+</Steps>
+
+<Steps className="[counter-reset:step_1]">
+
+<Step>Using TanStack AI:</Step>
+
+<RegistryDependencies
+  dependencies={["@tanstack/ai", "@tanstack/ai-client", "@tanstack/ai-react"]}
+/>
+
+</Steps>
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+<Step>Using AI SDK:</Step>
+
+<RegistryDependencies dependencies={["@ai-sdk/react", "ai"]} />
+</Steps>
+
+<Steps className="[counter-reset:step_1]">
+<Step>Using TanStack AI:</Step>
+
+<RegistryDependencies
+  dependencies={["@tanstack/ai", "@tanstack/ai-client", "@tanstack/ai-react"]}
+/>
+</Steps>
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="lib/create-chat.ts" src="../lib/create-chat.ts" />
+
+<ComponentSource title="hooks/use-chat-helper.ts" src="../hooks/use-chat-helper.ts" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { createChat } from "@/lib/create-chat"
+import { useChatHelper } from "@/hooks/use-chat-helper"
+```
+
+```tsx
+const chat = createChat({ adapter: "ai-sdk" })
+  .user("What changed in this release?")
+  .assistant("Keyboard shortcuts and faster search.")
+  .user("Can you show me the shortcuts?")
+  .assistant("Press ⌘K to search and ⌘Enter to submit.")
+
+export function ReleaseChat() {
+  const { canSendNext, sendNext, status } = useChatHelper({
+    chat,
+  })
+  
+  const isBusy = status === "submitted" || status === "streaming"
+
+  return (
+    <button
+      disabled={!canSendNext || isBusy}
+      onClick={() => void sendNext()}
+      type="button"
+    >
+      Send
+    </button>
+  )
+}
+```
+
+## Examples
+
+### Timing
+
+- `assistant(text, { delayMs })` waits before streaming starts.
+- `useChatHelper({ transport: { delayMs } })` waits between text chunks.
+
+```tsx
+const chat = createChat({ adapter: "ai-sdk" })
+  .user("Give me a project update.")
+  .assistant("The first milestone is complete.", { delayMs: 800 })
+
+```
+
+## API Reference
+
+### createChat
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `adapter` | `"ai-sdk" \| "tanstack-ai"` | `-` |
+
+Returns a `Chat` with:
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `user(text, options?)` | `(text: string, options?: { id?: string }) => Chat` | `-` |
+| `assistant(text, options?)` | `(text: string, options?: { id?: string; delayMs?: number }) => Chat` | `-` |
+| `get(count?)` | `(count?: number) => ChatMessage[]` | `-` |
+| `next(messages)` | `(messages: readonly ChatMessage[]) => ChatMessage \| null` | `-` |
+
+#### assistant() options
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `id` | `string` | `-` |
+| `delayMs` | `number` | `0` |
+
+#### user() options
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `id` | `string` | `-` |
+
+Every supplied ID must be unique within a chat, including against automatically generated IDs.
+
+#### Streaming options
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `delayMs` | `number` | `50` |
+
+### useChatHelper
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `chat` | `Chat` | `-` |
+| `initialMessageCount` | `number` | `0` |
+| `transport.delayMs` | `number` | `50` |
+
+Returns a canonical chat state:
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `messages` | `ChatMessage[]` | `-` |
+| `status` | `"ready" \| "submitted" \| "streaming" \| "error"` | `-` |
+| `error` | `Error \| undefined` | `-` |
+| `stop` | `() => void` | `-` |
+| `nextMessage` | `ChatMessage \| null` | `-` |
+| `canSendNext` | `boolean` | `-` |
+| `sendNext` | `() => Promise<void> \| undefined` | `-` |

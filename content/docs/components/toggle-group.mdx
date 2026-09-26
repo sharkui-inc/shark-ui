@@ -1,10 +1,14 @@
 ---
 title: Toggle Group
 description: Toggle buttons for selecting a value.
+seo:
+  description: Set of toggles for exclusive or multi selection.
 links:
   doc: https://ark-ui.com/docs/components/toggle-group
   api: https://ark-ui.com/docs/components/toggle-group#api-reference
 ---
+
+import manifest from "@/registry/manifest/toggle-group";
 
 <ComponentPreview componentName="toggle-group" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/toggle-group
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -74,7 +76,7 @@ import {
 
 ## Controlled
 
-Use the `value` and `onValueChange` props to control the toggle group state programmatically.
+Use the `value` and `onValueChange` props to control the toggle group.
 
 <ComponentPreview componentName="toggle-group" fileName="example-controlled" />
 
@@ -116,6 +118,12 @@ Use `variant` to change the visual style of the toggle buttons.
 
 <ComponentPreview componentName="toggle-group" fileName="example-outline" />
 
+## Pill
+
+The `pill` prop creates a fully rounded segmented toggle group.
+
+<ComponentPreview componentName="toggle-group" fileName="example-pill" />
+
 ## Examples
 
 ### With spacing
@@ -136,6 +144,12 @@ A custom toggle group example with a custom styling for font weight selection.
 
 <ComponentPreview componentName="toggle-group" fileName="example-custom" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="toggle-group" />
+
 ## API Reference
 
 ### ToggleGroup
@@ -147,17 +161,18 @@ Root component. Provides shared variant and size to child toggles via context.
 | `variant` | `"outline" \| "ghost"` | `"ghost"` |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `spacing` | `"0" \| "1" \| "2" \| "3" \| "4" \| "5" \| "6" \| "8" \| "10"` | `"0"` |
+| `pill` | `boolean` | `false` |
 | `multiple` | `boolean` | `true` |
-| `defaultValue` | `string[]` | - |
-| `value` | `string[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `defaultValue` | `string[]` | `-` |
+| `value` | `string[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `disabled` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--gap` | Set from the `spacing` prop (default `0`) |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--gap` | `string` | `0` |
 
 ### ToggleGroupItem
 
@@ -165,10 +180,24 @@ Single toggle in the group. Uses [Toggle](/docs/components/toggle) internally.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
+| `value` | `string` | `required` |
 | `disabled` | `boolean` | `false` |
-| `className` | `string` | - |
-| `aria-label` | `string` | - |
+| `className` | `string` | `-` |
+| `aria-label` | `string` | `-` |
+
+### ToggleGroupRootProvider
+
+Provides a ToggleGroup API created with `useToggleGroup` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseToggleGroupReturn` | `required` |
+| `pill` | `boolean` | `false` |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `spacing` | `number` | `0` |
+| `variant` | `"ghost" \| "outline"` | `"ghost"` |
+
+Pass the same styling props you would use on `ToggleGroup` so `ToggleGroupItem` receives them under the headless path.
 
 ---
 

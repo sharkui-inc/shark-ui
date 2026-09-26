@@ -1,10 +1,14 @@
 ---
 title: Textarea
-description: Form textarea or textarea-styled component.
+description: Multi-line text field.
+seo:
+  description: Multi-line text field for longer notes and messages.
 links:
   doc: https://ark-ui.com/docs/components/field#textarea
   api: https://ark-ui.com/docs/components/field#api-reference
 ---
+
+import manifest from "@/registry/manifest/textarea";
 
 <ComponentPreview componentName="textarea" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/textarea
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -101,6 +103,12 @@ Use `FieldGroup` to group multiple `Field` blocks. Combine textarea with other i
 
 <ComponentPreview componentName="textarea" fileName="example-form" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="textarea" />
+
 ## API Reference
 
 ### Textarea
@@ -109,7 +117,7 @@ Multi-line text input. Accepts all native textarea attributes.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `autoresize` | `boolean` | `true` | 
+| `autoresize` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
 ---

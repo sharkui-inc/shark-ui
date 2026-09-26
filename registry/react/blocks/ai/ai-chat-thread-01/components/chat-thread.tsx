@@ -1,0 +1,395 @@
+"use client";
+
+import {
+  BotIcon,
+  CopyIcon,
+  FileTextIcon,
+  ListTodoIcon,
+  RefreshCcwIcon,
+  ThumbsDownIcon,
+  ThumbsUpIcon,
+} from "lucide-react";
+import {
+  ApprovalCard,
+  ApprovalCardContent,
+  ApprovalCardFooter,
+  ApprovalCardHeader,
+  ApprovalCardReject,
+  ApprovalCardSubmit,
+  ApprovalCardTitle,
+} from "@/registry/react/components/approval-card";
+import {
+  Attachment,
+  AttachmentContent,
+  AttachmentDescription,
+  AttachmentMedia,
+  AttachmentTitle,
+} from "@/registry/react/components/attachment";
+import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
+import {
+  Message,
+  MessageAction,
+  MessageActions,
+  MessageAvatar,
+  MessageContent,
+  MessageFooter,
+  MessageHeader,
+} from "@/registry/react/components/message";
+import {
+  MessageBubble,
+  MessageBubbleContent,
+} from "@/registry/react/components/message-bubble";
+import {
+  MessageScroller,
+  MessageScrollerButton,
+  MessageScrollerContent,
+  MessageScrollerItem,
+  MessageScrollerViewport,
+} from "@/registry/react/components/message-scroller";
+import {
+  Plan,
+  PlanContent,
+  PlanHeader,
+  PlanItem,
+  PlanItemContent,
+  PlanItemDetailFile,
+  PlanItemTrigger,
+} from "@/registry/react/components/plan";
+import {
+  Reasoning,
+  ReasoningContent,
+  ReasoningTrigger,
+} from "@/registry/react/components/reasoning";
+import {
+  InlineCitation,
+  Source,
+  Sources,
+  SourcesContent,
+  SourcesTrigger,
+} from "@/registry/react/components/sources";
+import {
+  Suggestion,
+  Suggestions,
+} from "@/registry/react/components/suggestion";
+import {
+  ToolResult,
+  ToolResultAction,
+  ToolResultName,
+  ToolResultStatus,
+  ToolResultTitle,
+  ToolResultTrigger,
+} from "@/registry/react/components/tool-result";
+
+export interface ChatMessageAttachment {
+  description: string;
+  name: string;
+}
+
+export interface ChatMessageSource {
+  href: string;
+  title: string;
+}
+
+interface ApprovalPlanStep {
+  detail?: string;
+  id: string;
+  title: string;
+}
+
+export interface ChatMessage {
+  approvalPlan?: {
+    steps: ApprovalPlanStep[];
+    summary?: string;
+    title: string;
+  };
+  attachment?: ChatMessageAttachment;
+  confirmation?: string;
+  content: string;
+  id: string;
+  plan?: {
+    tasks: {
+      file?: string;
+      status: "completed" | "in-progress" | "pending";
+      title: string;
+    }[];
+    title: string;
+  };
+  reasoning?: { content: string; duration: number };
+  role: "assistant" | "user";
+  sources?: ChatMessageSource[];
+  tool?: { file: string; name: string; pathLabel?: string };
+}
+
+interface ChatThreadProps {
+  messages: readonly ChatMessage[];
+  onSuggestion: (text: string) => void;
+  userName?: string;
+}
+
+const noop = () => undefined;
+
+const EmptyConversation = ({
+  onSuggestion,
+  userName,
+}: {
+  onSuggestion: (text: string) => void;
+  userName: string;
+}) => (
+  <div className="flex min-h-full flex-col items-center justify-center px-6 py-16 text-center">
+    <span className="mb-5 grid size-8 place-items-center text-muted-foreground">
+      <BotIcon aria-hidden className="size-8" />
+    </span>
+    <h2 className="font-medium text-lg">Hello {userName}</h2>
+    <p className="mt-1 text-muted-foreground text-sm">
+      What can I help you with today?
+    </p>
+    <Suggestions className="mt-6 max-w-lg">
+      <Suggestion
+        onClick={onSuggestion}
+        suggestion="Turn this launch brief into a plan"
+      />
+      <Suggestion
+        onClick={onSuggestion}
+        suggestion="Summarize research themes"
+      />
+      <Suggestion
+        onClick={onSuggestion}
+        suggestion="Draft a release checklist"
+      />
+    </Suggestions>
+  </div>
+);
+
+const MessageSources = ({ sources }: { sources: ChatMessageSource[] }) => (
+  <Sources defaultOpen>
+    <SourcesTrigger count={sources.length} />
+    <SourcesContent>
+      {sources.map((source) => (
+        <Source href={source.href} key={source.href} title={source.title} />
+      ))}
+    </SourcesContent>
+  </Sources>
+);
+
+const MessageReasoning = ({
+  content,
+  duration,
+}: {
+  content: string;
+  duration: number;
+}) => (
+  <Reasoning duration={duration}>
+    <ReasoningTrigger />
+    <ReasoningContent>{content}</ReasoningContent>
+  </Reasoning>
+);
+
+const MessageTool = ({
+  file,
+  name,
+}: {
+  file: string;
+  name: string;
+  pathLabel?: string;
+}) => (
+  <ToolResult status="success">
+    <ToolResultTrigger>
+      <ToolResultTitle>{name}</ToolResultTitle>
+      <ToolResultName>{file}</ToolResultName>
+      <ToolResultAction>
+        <ToolResultStatus />
+      </ToolResultAction>
+    </ToolResultTrigger>
+  </ToolResult>
+);
+
+const MessageConfirmation = ({ title }: { title: string }) => (
+  <ApprovalCard onApprove={noop} onReject={noop}>
+    <ApprovalCardHeader>
+      <ApprovalCardTitle>{title}</ApprovalCardTitle>
+    </ApprovalCardHeader>
+    <ApprovalCardFooter>
+      <ApprovalCardReject variant="outline">Reject</ApprovalCardReject>
+      <ApprovalCardSubmit>Approve</ApprovalCardSubmit>
+    </ApprovalCardFooter>
+  </ApprovalCard>
+);
+
+const MessageApprovalPlan = ({
+  steps,
+  title,
+}: NonNullable<ChatMessage["approvalPlan"]>) => (
+  <ApprovalCard onApprove={noop} onReject={noop}>
+    <ApprovalCardHeader>
+      <ListTodoIcon aria-hidden />
+      <ApprovalCardTitle>{title}</ApprovalCardTitle>
+    </ApprovalCardHeader>
+    <ApprovalCardContent>
+      <ol className="flex flex-col gap-1 rounded-lg border bg-muted/32 p-2">
+        {steps.map((step) => (
+          <li
+            className="flex items-start gap-2 px-2 py-1.5 text-xs"
+            key={step.id}
+          >
+            <span className="mt-1 size-2 shrink-0 rounded-full border border-muted-foreground/48" />
+            <span className="min-w-0">
+              <span className="font-medium">{step.title}</span>
+              {step.detail ? (
+                <span className="mt-0.5 block text-muted-foreground">
+                  {step.detail}
+                </span>
+              ) : null}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </ApprovalCardContent>
+    <ApprovalCardFooter>
+      <ApprovalCardReject>View plan</ApprovalCardReject>
+      <ApprovalCardSubmit>Approve</ApprovalCardSubmit>
+    </ApprovalCardFooter>
+  </ApprovalCard>
+);
+
+const MessagePlan = ({ tasks, title }: NonNullable<ChatMessage["plan"]>) => (
+  <Plan defaultOpen status="in-progress">
+    <PlanHeader title={title} />
+    <PlanContent>
+      {tasks.map((task) => (
+        <PlanItem
+          collapsible={Boolean(task.file)}
+          key={task.title}
+          status={task.status}
+        >
+          <PlanItemTrigger title={task.title} />
+          {task.file ? (
+            <PlanItemContent>
+              <PlanItemDetailFile>{task.file}</PlanItemDetailFile>
+            </PlanItemContent>
+          ) : null}
+        </PlanItem>
+      ))}
+    </PlanContent>
+  </Plan>
+);
+
+const MessageAttachmentBlock = ({
+  description,
+  name,
+}: ChatMessageAttachment) => (
+  <Attachment size="sm">
+    <AttachmentMedia>
+      <FileTextIcon aria-hidden />
+    </AttachmentMedia>
+    <AttachmentContent>
+      <AttachmentTitle>{name}</AttachmentTitle>
+      <AttachmentDescription>{description}</AttachmentDescription>
+    </AttachmentContent>
+  </Attachment>
+);
+
+const AssistantActions = () => (
+  <MessageFooter>
+    <MessageActions>
+      <MessageAction tooltip="Copy">
+        <CopyIcon aria-hidden />
+      </MessageAction>
+      <MessageAction tooltip="Regenerate">
+        <RefreshCcwIcon aria-hidden />
+      </MessageAction>
+      <MessageAction tooltip="Good response">
+        <ThumbsUpIcon aria-hidden />
+      </MessageAction>
+      <MessageAction tooltip="Bad response">
+        <ThumbsDownIcon aria-hidden />
+      </MessageAction>
+    </MessageActions>
+  </MessageFooter>
+);
+
+const ChatMessageItem = ({ message }: { message: ChatMessage }) => {
+  const isUser = message.role === "user";
+  const firstSource = message.sources?.[0];
+
+  return (
+    <MessageScrollerItem className="[content-visibility:visible]">
+      <Message align={isUser ? "end" : "start"}>
+        {isUser ? null : (
+          <MessageAvatar>
+            <Avatar size="sm">
+              <AvatarFallback>
+                <BotIcon aria-hidden className="size-4" />
+              </AvatarFallback>
+            </Avatar>
+          </MessageAvatar>
+        )}
+        <MessageContent>
+          {isUser ? null : <MessageHeader>Shark Assistant</MessageHeader>}
+          {message.sources?.length ? (
+            <MessageSources sources={message.sources} />
+          ) : null}
+          {message.reasoning ? (
+            <MessageReasoning
+              content={message.reasoning.content}
+              duration={message.reasoning.duration}
+            />
+          ) : null}
+          {message.tool ? (
+            <MessageTool
+              file={message.tool.file}
+              name={message.tool.name}
+              pathLabel={message.tool.pathLabel}
+            />
+          ) : null}
+          {message.confirmation ? (
+            <MessageConfirmation title={message.confirmation} />
+          ) : null}
+          {message.approvalPlan ? (
+            <MessageApprovalPlan {...message.approvalPlan} />
+          ) : null}
+          {message.plan ? <MessagePlan {...message.plan} /> : null}
+          <MessageBubble
+            align={isUser ? "end" : "start"}
+            variant={isUser ? "secondary" : "ghost"}
+          >
+            <MessageBubbleContent>
+              {message.content}
+              {firstSource ? (
+                <InlineCitation
+                  href={firstSource.href}
+                  index={1}
+                  title={firstSource.title}
+                />
+              ) : null}
+            </MessageBubbleContent>
+          </MessageBubble>
+          {message.attachment ? (
+            <MessageAttachmentBlock {...message.attachment} />
+          ) : null}
+          {isUser ? null : <AssistantActions />}
+        </MessageContent>
+      </Message>
+    </MessageScrollerItem>
+  );
+};
+
+export const ChatThread = ({
+  messages,
+  onSuggestion,
+  userName = "James",
+}: ChatThreadProps) => (
+  <MessageScroller className="min-h-0 flex-1">
+    <MessageScrollerViewport aria-live="polite">
+      {messages.length === 0 ? (
+        <EmptyConversation onSuggestion={onSuggestion} userName={userName} />
+      ) : (
+        <MessageScrollerContent className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6">
+          {messages.map((message) => (
+            <ChatMessageItem key={message.id} message={message} />
+          ))}
+        </MessageScrollerContent>
+      )}
+    </MessageScrollerViewport>
+    <MessageScrollerButton />
+  </MessageScroller>
+);

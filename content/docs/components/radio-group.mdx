@@ -1,10 +1,14 @@
 ---
 title: Radio Group
-description: Allows single selection from multiple options.
+description: Choose one option from a set.
+seo:
+  description: Choose one option from a small set of radios.
 links:
   doc: https://ark-ui.com/docs/components/radio-group
   api: https://ark-ui.com/docs/components/radio-group#api-reference
 ---
+
+import manifest from "@/registry/manifest/radio-group";
 
 <ComponentPreview componentName="radio-group" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/radio-group
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -106,6 +108,12 @@ Use `FieldLabel` to wrap the entire `Field` for a clickable card-style selection
 
 <ComponentPreview componentName="radio-group" fileName="example-card" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="radio-group" />
+
 ## API Reference
 
 ### RadioGroup
@@ -117,6 +125,8 @@ Root component. Manages single selection from options.
 | `value` | `string` | `-` |
 | `defaultValue` | `string` | `-` |
 | `disabled` | `boolean` | `false` |
+| `invalid` | `boolean` | `false` |
+| `required` | `boolean` | `false` |
 | `name` | `string` | `-` |
 | `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `className` | `string` | `-` |
@@ -130,6 +140,32 @@ Single radio option. Use `value` for selection.
 | `value` | `string` | `-` |
 | `disabled` | `boolean` | `false` |
 | `invalid` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### RadioGroupRootProvider
+
+Provides a RadioGroup API created with `useRadioGroup` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseRadioGroupReturn` | `required` |
+
+### RadioGroupText
+
+Public RadioGroupText component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### RadioGroupLabel
+
+Public RadioGroupLabel component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
 ---

@@ -13,8 +13,6 @@ import {
   StepsTrigger,
 } from "@/registry/react/components/steps";
 
-const steps = Array.from({ length: 3 }, (_, index) => index + 1);
-
 const StepsDemo = () => (
   <Steps className="size-full max-w-md" count={steps.length}>
     <StepsList>
@@ -47,17 +45,22 @@ const StepsDemo = () => (
       <StepsNext asChild>
         <Button>
           Next
-          <ChevronRight />
+          <ChevronRight className="rtl:rotate-180" data-icon="inline-end" />
         </Button>
       </StepsNext>
       <StepsPrevious asChild>
         <Button variant="outline">
-          <ChevronLeftIcon />
+          <ChevronLeftIcon
+            className="rtl:rotate-180"
+            data-icon="inline-start"
+          />
           Back
         </Button>
       </StepsPrevious>
     </div>
   </Steps>
 );
+
+const steps = Array.from({ length: 3 }, (_, index) => index + 1);
 
 export default StepsDemo;

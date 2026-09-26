@@ -4,7 +4,7 @@ import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
 
 const Example = () => (
   <Button variant="outline">
-    <SaveIcon />
+    <SaveIcon data-icon="inline-start" />
     Save
     <KbdGroup className="translate-x-0.5">
       <Kbd variant="outline">Ctrl+S</Kbd>

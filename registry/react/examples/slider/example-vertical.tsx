@@ -1,13 +1,14 @@
 import { Slider } from "@/registry/react/components/slider";
 
 const Example = () => (
-  <div className="mx-auto flex w-full max-w-xs items-center justify-center gap-6">
+  <div className="mx-auto flex w-full max-w-sm items-center justify-center gap-10">
     <Slider
       className="h-40"
-      defaultValue={[75]}
-      max={100}
+      defaultValue={[2]}
+      markerInterval={1}
+      max={4}
       orientation="vertical"
-      step={1}
+      showMarkers
     />
     <Slider
       className="h-40"

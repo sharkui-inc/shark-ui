@@ -4,7 +4,7 @@ import { Button } from "@/registry/react/components/button";
 import { Float } from "@/registry/react/components/float";
 
 const FloatDemo = () => (
-  <div className="relative">
+  <div className="relative inline-flex">
     <Button size="icon-lg" variant="outline">
       <BellIcon />
     </Button>

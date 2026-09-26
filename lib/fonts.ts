@@ -1,4 +1,5 @@
 import {
+  Figtree as FontHeading,
   JetBrains_Mono as FontMono,
   Hanken_Grotesk as FontSans,
 } from "next/font/google";
@@ -8,7 +9,7 @@ export const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-export const fontHeading = FontSans({
+export const fontHeading = FontHeading({
   subsets: ["latin"],
   variable: "--font-heading",
 });

@@ -1,6 +1,7 @@
 "use client";
 
 import { Format as ArkFormat } from "@ark-ui/react/format";
+import type React from "react";
 
 export const FormatByte = (
   props: React.ComponentProps<typeof ArkFormat.Byte>
@@ -13,3 +14,7 @@ export const FormatNumber = (
 export const FormatRelativeTime = (
   props: React.ComponentProps<typeof ArkFormat.RelativeTime>
 ) => <ArkFormat.RelativeTime data-slot="format-relative-time" {...props} />;
+
+export const FormatTime = (
+  props: React.ComponentProps<typeof ArkFormat.Time>
+) => <ArkFormat.Time data-slot="format-time" {...props} />;

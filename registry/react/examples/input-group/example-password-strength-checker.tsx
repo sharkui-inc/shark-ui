@@ -2,6 +2,7 @@
 
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import React from "react";
+import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Field, FieldLabel } from "@/registry/react/components/field";
@@ -12,9 +13,23 @@ import {
   InputGroupInput,
 } from "@/registry/react/components/input-group";
 
+const Example = () => {
+  const [password, setPassword] = React.useState("");
+
+  return (
+    <div className="flex w-full max-w-sm flex-col gap-4">
+      <PasswordChecker onPasswordChange={setPassword} password={password} />
+      <PasswordStrength password={password} />
+    </div>
+  );
+};
+
 const UPPERCASE_REGEX = /[A-Z]/;
+
 const LOWERCASE_REGEX = /[a-z]/;
+
 const NUMBER_REGEX = /\d/;
+
 const NON_ALPHANUMERIC_REGEX = /[^a-zA-Z0-9]/;
 
 type PasswordStrengthLevel = "weak" | "moderate" | "strong";
@@ -51,16 +66,20 @@ interface PasswordStrengthProps {
   password: string;
 }
 
-const STRENGTH_STYLES = {
-  weak: "bg-red-500 text-white dark:bg-red-600 dark:text-white",
-  moderate: "bg-orange-500 text-white dark:bg-orange-600 dark:text-white",
-  strong: "bg-green-500 text-white dark:bg-green-600 dark:text-white",
-} as const;
+const passwordStrengthVariants = tv({
+  variants: {
+    strength: {
+      moderate: "bg-orange-500 text-white dark:bg-orange-600 dark:text-white",
+      strong: "bg-green-500 text-white dark:bg-green-600 dark:text-white",
+      weak: "bg-red-500 text-white dark:bg-red-600 dark:text-white",
+    },
+  },
+});
 
 const STRENGTH_LABELS = {
-  weak: "Weak Password",
   moderate: "Moderate Password",
   strong: "Strong Password",
+  weak: "Weak Password",
 } as const;
 
 function PasswordStrength({ password }: PasswordStrengthProps) {
@@ -71,7 +90,7 @@ function PasswordStrength({ password }: PasswordStrengthProps) {
       aria-live="polite"
       className={cn(
         "flex h-12 w-full items-center justify-center rounded-lg font-medium text-sm transition-colors",
-        STRENGTH_STYLES[strength]
+        passwordStrengthVariants({ strength })
       )}
       data-testid="passwordStrengthDiv"
       role="status"
@@ -100,7 +119,7 @@ function PasswordChecker({ password, onPasswordChange }: PasswordCheckerProps) {
   return (
     <Field className="w-full max-w-sm">
       <FieldLabel>Enter Your Password</FieldLabel>
-      <InputGroup className="w-full">
+      <InputGroup>
         <InputGroupInput
           aria-label="Password"
           autoComplete="current-password"
@@ -114,7 +133,6 @@ function PasswordChecker({ password, onPasswordChange }: PasswordCheckerProps) {
           <InputGroupButton
             aria-label={showPassword ? "Hide password" : "Show password"}
             onClick={handleToggleVisibility}
-            type="button"
           >
             {showPassword ? (
               <EyeOffIcon aria-hidden />
@@ -125,19 +143,13 @@ function PasswordChecker({ password, onPasswordChange }: PasswordCheckerProps) {
         </InputGroupAddon>
       </InputGroup>
       <div className="mt-3 flex gap-2" data-testid="buttonDiv">
-        <Button
-          onClick={handleToggleVisibility}
-          size="sm"
-          type="button"
-          variant="default"
-        >
+        <Button onClick={handleToggleVisibility} size="sm">
           {showPassword ? "Hide Password" : "Show Password"}
         </Button>
         <Button
           disabled={!password}
           onClick={handleClear}
           size="sm"
-          type="button"
           variant="default"
         >
           Clear Password
@@ -146,16 +158,5 @@ function PasswordChecker({ password, onPasswordChange }: PasswordCheckerProps) {
     </Field>
   );
 }
-
-const Example = () => {
-  const [password, setPassword] = React.useState("");
-
-  return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      <PasswordChecker onPasswordChange={setPassword} password={password} />
-      <PasswordStrength password={password} />
-    </div>
-  );
-};
 
 export default Example;

@@ -1,7 +1,11 @@
 ---
 title: Badge
 description: A badge or an element styled as a badge.
+seo:
+  description: Small chips for labels, counts, and status.
 ---
+
+import manifest from "@/registry/manifest/badge";
 
 <ComponentPreview componentName="badge" />
 
@@ -28,15 +32,14 @@ npx shadcn@latest add @shark/badge
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
 @theme inline {
+  --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
@@ -47,20 +50,22 @@ npm install @ark-ui/react tailwind-variants
 }
 
 :root {
+  --destructive: var(--color-red-600);
   --destructive-foreground: var(--color-red-700);
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-700);
-  --success: var(--color-emerald-500);
+  --success: var(--color-emerald-600);
   --success-foreground: var(--color-emerald-700);
   --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-700);
 }
 
 .dark {
+  --destructive: var(--color-red-600);
   --destructive-foreground: var(--color-red-400);
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-400);
-  --success: var(--color-emerald-500);
+  --success: var(--color-emerald-600);
   --success-foreground: var(--color-emerald-400);
   --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-400);
@@ -88,6 +93,25 @@ import { Badge } from "@/components/ui/badge";
 
 ```tsx
 <Badge>Favorite</Badge>
+```
+
+## Icons
+
+Mark inline icons with `data-icon` so they follow the reading direction.
+
+```tsx
+import { CheckIcon, StarIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+
+<Badge>
+  <StarIcon data-icon="inline-start" />
+  Favorite
+</Badge>
+
+<Badge>
+  Verified
+  <CheckIcon data-icon="inline-end" />
+</Badge>
 ```
 
 ## Variants
@@ -158,9 +182,19 @@ The `asChild` prop renders another element with badge styling.
 
 <ComponentPreview componentName="badge" fileName="example-with-spinner" />
 
+### With status
+
+<ComponentPreview componentName="badge" fileName="example-with-status" />
+
 ### Custom color
 
 <ComponentPreview componentName="badge" fileName="example-custom-color" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="badge" />
 
 ## API Reference
 
@@ -168,9 +202,10 @@ The `asChild` prop renders another element with badge styling.
 
 Label, count, or status badge. Supports variants.
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
 | `variant` | `"default" \| "secondary" \| "outline" \| "success" \| "info" \| "warning" \| "destructive"` | `"default"` |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `pill` | `boolean` | `false` |
 | `className` | `string` | `-` | 
 | `asChild` | `boolean` | `false` |

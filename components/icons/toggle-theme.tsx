@@ -1,3 +1,4 @@
+import type React from "react";
 export const ToggleThemeIcon = (props: React.ComponentProps<"svg">) => (
   <svg
     fill="none"
@@ -7,7 +8,7 @@ export const ToggleThemeIcon = (props: React.ComponentProps<"svg">) => (
     strokeWidth="2"
     viewBox="0 0 24 24"
     {...props}
-    aria-hidden="true"
+    aria-hidden
   >
     <path d="M0 0h24v24H0z" fill="none" stroke="none" />
     <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />

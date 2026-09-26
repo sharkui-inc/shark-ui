@@ -1,10 +1,14 @@
 ---
 title: Tour
-description: Displays a guided tour of the application.
+description: Guided tour of the application.
+seo:
+  description: Guided tour that points at UI and steps the user through it.
 links:
   doc: https://ark-ui.com/docs/components/tour
   api: https://ark-ui.com/docs/components/tour#api-reference
 ---
+
+import manifest from "@/registry/manifest/tour";
 
 <ComponentPreview componentName="tour" />
 
@@ -18,10 +22,24 @@ links:
 </TabsList>
 
 <TabsContent value="cli">
-  
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
 ```bash
 npx shadcn@latest add @shark/tour
 ```
+
+<Step>Add the following to your CSS file. The spotlight and tooltip backdrop are positioned against the `body`.</Step>
+
+```css title="globals.css"
+body {
+  position: relative;
+}
+```
+
+</Steps>
 
 </TabsContent>
 
@@ -33,15 +51,21 @@ npx shadcn@latest add @shark/tour
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource title="components/ui/tour.tsx" src="/tour.tsx" />
 
 <Step>Update the import paths to match your project setup.</Step>
+
+<Step>Add the following to your CSS file. The spotlight and tooltip backdrop are positioned against the `body`.</Step>
+
+```css title="globals.css"
+body {
+  position: relative;
+}
+```
 
 </Steps>
 
@@ -84,87 +108,132 @@ import {
   TourFooter,
   TourNextStep,
   TourPreviousStep,
+  useTour,
 } from "@/components/ui/tour";
 ```
 
 ```tsx
-<Tour steps={steps}>
-  <TourTrigger>Open Tour</TourTrigger>
+const tour = useTour({ steps });
+
+<Tour tour={tour}>
+  <TourTrigger />
   <TourContent>
     <TourHeader>
       <TourProgressText />
       <TourTitle />
       <TourDescription />
     </TourHeader>
+    <TourFooter>
+      <TourPreviousStep />
+      <TourNextStep />
+    </TourFooter>
   </TourContent>
-  <TourFooter>
-    <TourNextStep />
-    <TourPreviousStep />
-  </TourFooter>
 </Tour>
+```
+
+## Title & Description
+
+`TourHeader` supports two usage patterns:
+
+### Using props
+
+Pass `title` and `description` props directly to `TourHeader`.
+
+```tsx showLineNumbers
+<TourHeader title="Tour Title" description="Tour description">
+  <TourProgressText />
+</TourHeader>
+```
+
+> This approach does not require `TourTitle` or `TourDescription` components.
+
+### Using components
+
+Use `TourTitle` and `TourDescription` as children for more control.
+
+```tsx showLineNumbers
+<TourHeader>
+  <TourProgressText />
+  <TourTitle>Tour Title</TourTitle>
+  <TourDescription>Tour description</TourDescription>
+</TourHeader>
 ```
 
 ## Examples
 
 ### Step Types
 
-Demonstrate all three step types in a single tour: `dialog` for welcome/completion, `tooltip` anchored to elements, and `floating` for fixed-position content.
+`dialog`, `tooltip`, and `floating`.
 
 <ComponentPreview componentName="tour" fileName="example-step-types" />
 
-### Progress
-
-Display a visual progress indicator at the bottom of the tour content showing how far along the user is.
-
-<ComponentPreview componentName="tour" fileName="example-progress" />
-
 ### Skip
 
-Allow users to skip the entire tour at any step by adding a skip action.
+`action: "dismiss"` ends the tour from any step.
 
 <ComponentPreview componentName="tour" fileName="example-skip" />
 
+### Hide Backdrop
+
+`backdrop: false` hides the backdrop on any step except `wait`.
+
+<ComponentPreview componentName="tour" fileName="example-hide-backdrop" />
+
 ### Keyboard Navigation
 
-Enable arrow key navigation between tour steps using the `keyboardNavigation` prop.
+`keyboardNavigation` on `useTour`. Arrow keys move between steps.
 
 <ComponentPreview componentName="tour" fileName="example-keyboard-navigation" />
 
 ### Events
 
-Listen to tour lifecycle events like `onStepChange` and `onStatusChange` to track user progress.
+`onStepChange` and `onStatusChange` on `useTour`.
 
 <ComponentPreview componentName="tour" fileName="example-events" />
 
 ### Wait for Click
 
-Use the `effect` function with `waitForEvent` to wait for user interaction before proceeding to the next step.
+`effect` and `waitForEvent` advance after a click.
 
 <ComponentPreview componentName="tour" fileName="example-wait-for-click" />
 
 ### Wait for Input
 
-Create form tutorials that wait for users to enter valid input before advancing.
+`effect` enables Continue when the field is valid.
 
 <ComponentPreview componentName="tour" fileName="example-wait-for-input" />
 
 ### Wait for Element
 
-Wait for dynamically rendered elements to appear in the DOM before showing a step.
+`effect` and `waitForElement` wait until the target is in the DOM.
 
-<ComponentPreview componentName="tour" fileName="example-wait-for-element" />
+<ComponentPreview componentName="tour" fileName="example-wait-for-element" autoHeight />
 
 ### Async
 
-Load data asynchronously and update step content before displaying it using the `effect` function with `show()` and `update()`.
+The intro step stays open while the request runs. `show()` and `update()` open the next step when the profile arrives.
 
 <ComponentPreview componentName="tour" fileName="example-async" />
 
+### Hide Arrow
+
+Hide the arrow with `showArrow={false}` on `TourContent`.
+
+<ComponentPreview componentName="tour" fileName="example-without-arrow" />
+
+### Progress
+
+<ComponentPreview componentName="tour" fileName="example-custom-progress" />
+
+### Bottom stick on mobile
+
+Set `bottomStickOnMobile` on `TourContent` to stick dialog steps to the bottom on mobile.
+
+<ComponentPreview componentName="tour" fileName="example-bottom-stick-on-mobile" />
+
 ### Custom spacing
 
-Use `[--space:--spacing("value")]` on `TourContent` to adjust internal spacing.
-
-Default spacing is `--spacing(4)`.
+The `[--space:--spacing("value")]` controls the internal spacing.
 
 <ComponentPreview componentName="tour" fileName="example-custom-spacing" />
 
@@ -174,100 +243,212 @@ Default spacing is `--spacing(4)`.
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="tour" />
+
 ## API Reference
+
+### useTour
+
+Creates the tour machine. Pass the return value to `Tour` as `tour`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `steps` | `TourStepType[]` | `-` |
+| `keyboardNavigation` | `boolean` | `true` |
+| `closeOnInteractOutside` | `boolean` | `true` |
+| `closeOnEscape` | `boolean` | `true` |
+| `onStepChange` | `(details: TourStepChangeDetails) => void` | `-` |
+| `onStatusChange` | `(details: TourStatusChangeDetails) => void` | `-` |
 
 ### Tour
 
+Root provider for a tour created with `useTour`.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `steps` | `TourStepDetails[]` | `[]` |
+| `tour` | `UseTourReturn` | `required` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `keyboardNavigation` | `boolean` | - |
-| `onStepChange` | `(details: { stepId: string \| null }) => void` | - |
-| `onStatusChange` | `(details: { status: string }) => void` | - |
-| `immediate` | `boolean` | - |
-| `present` | `boolean` | - |
-| `onExitComplete` | `() => void` | - |
+| `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
 
 ### TourTrigger
 
+Starts the tour on click. Use `asChild` for a custom trigger.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### TourContent
 
+Tour panel, including the overlay, spotlight, arrow, and close button.
+
 | Prop | Type | Default |
 | --- | --- | --- |
+| `bottomStickOnMobile` | `boolean` | `false` |
 | `showCloseButton` | `boolean` | `true` |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `showArrow` | `boolean` | `true` |
+| `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(4)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(4)` |
 
 ### TourHeader
 
+Header area. Accepts `title` and `description` or children.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `title` | `string` | `-` |
+| `description` | `string` | `-` |
+| `className` | `string` | `-` |
 
 ### TourTitle
 
+Accessible title. Falls back to the current step title.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### TourDescription
 
+Accessible description. Falls back to the current step description.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### TourProgressText
 
+Current step and total.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### TourFooter
 
+Footer for `TourPreviousStep` and `TourNextStep`.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TourActions
 
+Renders the actions of the current step.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### TourPreviousStep
 
+Renders the step's `"prev"` action.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
 
 ### TourNextStep
 
+Renders the `"next"` action, or `"dismiss"` when the step has no `"next"`.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
 
 ### TourClose
 
+Closes the tour on click. Use `asChild` for a custom close element.
+
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
+### TourActionTrigger
+
+Runs one step action.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `action` | `StepAction` | `required` |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
+### TourOverlay
+
+Dimmed backdrop. Rendered by `TourContent`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### TourPositioner
+
+Positions the panel. Rendered by `TourContent`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `bottomStickOnMobile` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### TourBody
+
+Scrollable body content.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `scrollFade` | `boolean` | `true` |
+| `className` | `string` | `-` |
+
+### TourSpotlight
+
+Highlight around the step target. Rendered by `TourContent`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### TourArrow
+
+Arrow for tooltip steps.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--arrow-background` | `string` | `var(--popover)` |
+| `--arrow-size` | `string` | `calc(1.5 * var(--spacing))` |
 
 ### useTourContext
 
-| Return | Type |
+Tour API for components inside `Tour`.
+
+| Property | Type |
 | --- | --- |
-| `tour` | `UseTourReturn` |
-| `handleStart` | `() => void` |
+| `open` | `boolean` |
+| `step` | `TourStepType \| null` |
+| `stepIndex` | `number` |
+| `totalSteps` | `number` |
+| `start` | `(id?: string) => void` |
+| `next` | `() => void` |
+| `prev` | `() => void` |
+| `getProgressText` | `() => string` |
+| `getProgressPercent` | `() => number` |
 
 ---
 

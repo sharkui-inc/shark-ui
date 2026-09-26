@@ -2,33 +2,40 @@
 
 import {
   Collapsible as ArkCollapsible,
-  useCollapsibleContext,
+  useCollapsible as useArkCollapsible,
+  useCollapsibleContext as useArkCollapsibleContext,
 } from "@ark-ui/react/collapsible";
 import { ChevronDownIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useCollapsible = useCollapsibleContext;
+export const useCollapsible = useArkCollapsible;
+export const useCollapsibleContext = useArkCollapsibleContext;
+export const CollapsibleRootProvider = ArkCollapsible.RootProvider;
 
 export const Collapsible = (
   props: React.ComponentProps<typeof ArkCollapsible.Root>
 ) => {
   const {
     collapsedHeight,
+    collapsedWidth,
     lazyMount = true,
     unmountOnExit = true,
     className,
     ...rest
   } = props;
 
+  const isPartialCollapse = Boolean(collapsedHeight || collapsedWidth);
+
   return (
     <ArkCollapsible.Root
       className={cn("group/collapsible", className)}
       collapsedHeight={collapsedHeight}
-      data-partial-collapse={collapsedHeight ? "" : undefined}
+      collapsedWidth={collapsedWidth}
+      data-partial-collapse={isPartialCollapse ? "" : undefined}
       data-slot="collapsible"
-      lazyMount={collapsedHeight ? false : lazyMount}
-      unmountOnExit={collapsedHeight ? false : unmountOnExit}
+      lazyMount={isPartialCollapse ? false : lazyMount}
+      unmountOnExit={isPartialCollapse ? false : unmountOnExit}
       {...rest}
     />
   );
@@ -42,9 +49,9 @@ export const CollapsibleTrigger = (
   return (
     <ArkCollapsible.Trigger
       className={cn(
-        "cursor-pointer",
+        "cursor-pointer touch-manipulation",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
-        "has-data-[slot=collapsible-indicator]:[button]:justify-between",
+        "not-data-[align=start]:has-data-[slot=collapsible-indicator]:[button]:justify-between",
         className
       )}
       data-slot="collapsible-trigger"
@@ -61,13 +68,13 @@ export const CollapsibleContent = (
   return (
     <ArkCollapsible.Content
       className={cn(
-        "h-(--collapsed-height)",
-        "group-data-partial-collapse/collapsible:h-full",
-        "transition-[height] duration-200",
+        "[--radix-collapsible-content-height:var(--height)]",
+        "data-has-collapsed-size:h-full data-has-collapsed-size:min-h-(--collapsed-height)",
         "overflow-hidden",
-        "data-[state=open]:animate-expand",
-        "data-[state=closed]:animate-collapse",
-        "motion-reduce:animate-none! motion-reduce:transition-none!"
+        "data-[state=open]:animate-collapsible-down data-[state=open]:duration-200 data-[state=open]:ease-out",
+        "data-[state=closed]:animate-collapsible-up data-[state=closed]:duration-200 data-[state=closed]:ease-out",
+        "motion-reduce:animate-none motion-reduce:transition-none",
+        "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none"
       )}
       data-slot="collapsible-content"
       {...rest}
@@ -84,11 +91,15 @@ export const CollapsibleIndicator = (
 
   return (
     <ArkCollapsible.Indicator
-      className={cn("data-[state=open]:[&_svg]:rotate-180", className)}
+      className={cn(
+        "inline-flex size-4 items-center justify-center",
+        "data-[state=open]:[&_svg]:rotate-180",
+        className
+      )}
       data-slot="collapsible-indicator"
       {...rest}
     >
-      <ChevronDownIcon className="transition-transform duration-200 motion-reduce:transition-none!" />
+      <ChevronDownIcon className="size-full shrink-0 transition-transform duration-150 ease-out motion-reduce:transition-none" />
     </ArkCollapsible.Indicator>
   );
 };

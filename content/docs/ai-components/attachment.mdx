@@ -1,0 +1,267 @@
+---
+title: Attachment
+description: Uploaded files and images with status and actions.
+seo:
+  description: Display uploaded files and images with status and actions.
+---
+
+import manifest from "@/registry/manifest/attachment";
+
+<ComponentPreview componentName="attachment" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/attachment
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>This component depends on [Button](/docs/components/button), [File Thumbnail](/docs/components/file-thumbnail), [Icon Tile](/docs/components/icon-tile), [Scroll Area](/docs/components/scroll-area), and [Shimmer](/docs/utilities/shimmer). Install them first if you haven't already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/attachment.tsx" src="/attachment.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+AttachmentGroup
+└── Attachment
+    ├── AttachmentTrigger
+    ├── AttachmentMedia
+    ├── AttachmentContent
+    │   ├── AttachmentTitle
+    │   └── AttachmentDescription
+    └── AttachmentActions
+        └── AttachmentAction
+```
+
+## Usage
+
+```tsx
+import {
+  Attachment,
+  AttachmentContent,
+  AttachmentDescription,
+  AttachmentMedia,
+  AttachmentTitle,
+} from "@/components/ui/attachment";
+```
+
+```tsx
+<Attachment>
+  <AttachmentMedia />
+  <AttachmentContent>
+    <AttachmentTitle />
+    <AttachmentDescription />
+  </AttachmentContent>
+</Attachment>
+```
+
+## Types
+
+Use the `variant` to switch between the different types of attachments.
+
+### Icon
+
+<ComponentPreview componentName="attachment" fileName="example-type-icon" />
+
+### File
+
+<ComponentPreview componentName="attachment" fileName="example-type-file" />
+
+### Image
+
+<ComponentPreview componentName="attachment" fileName="example-type-image" />
+
+## States
+
+Set `state` to reflect the upload lifecycle.
+
+### Idle
+
+<ComponentPreview componentName="attachment" fileName="example-state-idle" />
+
+### Uploading
+
+<ComponentPreview componentName="attachment" fileName="example-state-uploading" />
+
+### Processing
+
+<ComponentPreview componentName="attachment" fileName="example-state-processing" />
+
+### Error
+
+<ComponentPreview componentName="attachment" fileName="example-state-error" />
+
+### Done
+
+<ComponentPreview componentName="attachment" fileName="example-state-done" />
+
+## Sizes
+
+Use `size` to switch between the different sizes of attachments.
+
+### Large
+
+<ComponentPreview componentName="attachment" fileName="example-size-lg" />
+
+### Medium
+
+<ComponentPreview componentName="attachment" fileName="example-size-default" />
+
+### Small
+
+<ComponentPreview componentName="attachment" fileName="example-size-sm" />
+
+### Extra small
+
+<ComponentPreview componentName="attachment" fileName="example-size-xs" />
+
+## Orientation
+
+Use `orientation` to switch between the different orientations of attachments.
+
+### Horizontal
+
+<ComponentPreview componentName="attachment" fileName="example-orientation-horizontal" />
+
+### Vertical
+
+<ComponentPreview componentName="attachment" fileName="example-orientation-vertical" />
+
+## Examples
+
+### Actions
+
+<ComponentPreview componentName="attachment" fileName="example-actions" />
+
+### Group
+
+<ComponentPreview componentName="attachment" fileName="example-group" />
+
+### Trigger
+
+<ComponentPreview componentName="attachment" fileName="example-trigger" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="attachment" />
+
+## API Reference
+
+### AttachmentGroup
+
+Horizontal scroller for attachment cards.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### Attachment
+
+File or image card. Sets state, size, and orientation for child parts.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `state` | `"idle" \| "uploading" \| "processing" \| "error" \| "done"` | `"done"` |
+| `size` | `"lg" \| "md" \| "sm" \| "xs"` | `"md"` |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### AttachmentTrigger
+
+Full-card hit target. Place first so it sits under media and actions.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### AttachmentMedia
+
+Thumbnail or icon slot.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"icon" \| "file" \| "image"` | `"icon"` |
+| `format` | `string` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### AttachmentContent
+
+Column for title and description.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### AttachmentTitle
+
+Filename or label.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### AttachmentDescription
+
+Secondary text such as size or status.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### AttachmentActions
+
+Container for action buttons.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### AttachmentAction
+
+Icon button on the card.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "outline" \| "secondary" \| "ghost" \| "link" \| "destructive"` | `"ghost"` |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon-xs" \| "icon-sm" \| "icon-md" \| "icon-lg" \| "icon-xl"` | `"icon-xs"` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |

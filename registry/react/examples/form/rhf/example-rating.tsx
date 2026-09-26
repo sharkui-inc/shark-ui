@@ -22,28 +22,21 @@ import {
 } from "@/registry/react/components/field";
 import { Rating } from "@/registry/react/components/rating";
 
-const formSchema = z.object({
-  recommendScore: z
-    .number()
-    .min(1, "Please rate how likely you are to recommend us.")
-    .max(5),
-});
-
 const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: { recommendScore: 0 },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "rating-submitted",
-      title: "Feedback saved",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "rating-submitted",
+      title: "Feedback saved",
     });
   };
 
@@ -89,5 +82,12 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  recommendScore: z
+    .number()
+    .min(1, "Please rate how likely you are to recommend us.")
+    .max(5),
+});
 
 export default Example;

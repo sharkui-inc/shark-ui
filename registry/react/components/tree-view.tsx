@@ -5,22 +5,18 @@ import {
   TreeView as ArkTreeView,
   createTreeCollection as arkCreateTreeCollection,
   type TreeCollection as arkTreeCollection,
+  useTreeView as useArkTreeView,
   useTreeViewContext as useArkTreeViewContext,
 } from "@ark-ui/react/tree-view";
-import {
-  CheckIcon,
-  ChevronRightIcon,
-  FileIcon,
-  FolderIcon,
-  FolderOpenIcon,
-  MinusIcon,
-} from "lucide-react";
-import React from "react";
+import { createContext } from "@ark-ui/react/utils";
+import { CheckIcon, ChevronRightIcon, MinusIcon } from "lucide-react";
+import type React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { checkboxVariants } from "@/registry/react/components/checkbox";
 
-export const useTreeView = useArkTreeViewContext;
+export const useTreeView = useArkTreeView;
+export const useTreeViewContext = useArkTreeViewContext;
 
 export interface TreeNodeType<T = unknown> {
   children?: TreeNodeType<T>[] | undefined;
@@ -34,8 +30,8 @@ export const createTreeCollection = <T extends TreeNodeType>(
   options: Parameters<typeof arkCreateTreeCollection<T>>[0]
 ) =>
   arkCreateTreeCollection<T>({
-    nodeToValue: (node) => node.id,
     nodeToString: (node) => node.name,
+    nodeToValue: (node) => node.id,
     ...options,
   });
 
@@ -48,7 +44,25 @@ interface TreeViewContextProps {
   fileIcons?: Record<string, React.JSX.ElementType | null>;
 }
 
-const TreeViewContext = React.createContext({} as TreeViewContextProps);
+const [TreeViewContextProvider, _useTreeView] =
+  createContext<TreeViewContextProps>({
+    name: "TreeViewContext",
+    providerName: "TreeView",
+  });
+
+export interface TreeViewRootProviderProps
+  extends React.ComponentProps<typeof ArkTreeView.RootProvider>,
+    TreeViewContextProps {}
+
+export const TreeViewRootProvider = (props: TreeViewRootProviderProps) => {
+  const { fileIcons, children, ...rest } = props;
+
+  return (
+    <TreeViewContextProvider value={{ fileIcons }}>
+      <ArkTreeView.RootProvider {...rest}>{children}</ArkTreeView.RootProvider>
+    </TreeViewContextProvider>
+  );
+};
 
 interface TreeViewProps
   extends ArkTreeView.RootComponentProps,
@@ -64,7 +78,7 @@ export const TreeView: ArkTreeView.RootComponent<TreeViewProps> = (props) => {
   } = props;
 
   return (
-    <TreeViewContext.Provider value={{ fileIcons }}>
+    <TreeViewContextProvider value={{ fileIcons }}>
       <ArkTreeView.Root
         className={cn(
           "[--indentation:--spacing(4)] [--item-gap:--spacing(2)]",
@@ -80,7 +94,7 @@ export const TreeView: ArkTreeView.RootComponent<TreeViewProps> = (props) => {
         unmountOnExit={unmountOnExit}
         {...rest}
       />
-    </TreeViewContext.Provider>
+    </TreeViewContextProvider>
   );
 };
 
@@ -128,13 +142,17 @@ export const TreeViewNode = <T extends TreeNodeType>(
 
 export const TreeViewBranch = (
   props: React.ComponentProps<typeof ArkTreeView.Branch>
-) => (
-  <ArkTreeView.Branch
-    className={cn("relative")}
-    data-slot="tree-view-branch"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkTreeView.Branch
+      className={cn("relative", className)}
+      data-slot="tree-view-branch"
+      {...rest}
+    />
+  );
+};
 
 const treeViewControlVariants = tv({
   base: [
@@ -148,7 +166,7 @@ const treeViewControlVariants = tv({
     "rounded-md border-none",
     "cursor-pointer",
     "hover:bg-muted hover:text-foreground",
-    "outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:-outline-offset-2",
+    "border border-transparent outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
     "data-selected:bg-accent data-selected:text-accent-foreground",
     "data-focus:bg-muted data-focus:text-foreground",
     "data-disabled:opacity-64 data-disabled:grayscale",
@@ -158,10 +176,24 @@ const treeViewControlVariants = tv({
 
 interface TreeViewBranchItemProps
   extends React.ComponentProps<typeof ArkTreeView.BranchControl>,
-    Pick<TreeViewBranchTitleProps, "icon" | "expandedIcon"> {}
+    Pick<TreeViewBranchTitleProps, "icon" | "expandedIcon"> {
+  /**
+   * Whether to show the expand/collapse chevron.
+   *
+   * @default false
+   */
+  showIndicator?: boolean;
+}
 
 export const TreeViewBranchItem = (props: TreeViewBranchItemProps) => {
-  const { icon, expandedIcon, className, children, ...rest } = props;
+  const {
+    icon,
+    expandedIcon,
+    showIndicator = false,
+    className,
+    children,
+    ...rest
+  } = props;
 
   return (
     <ArkTreeView.BranchControl
@@ -169,7 +201,7 @@ export const TreeViewBranchItem = (props: TreeViewBranchItemProps) => {
       data-slot="tree-view-branch-control"
       {...rest}
     >
-      <TreeViewBranchIndicator />
+      {showIndicator ? <TreeViewBranchIndicator /> : null}
       <TreeViewBranchTitle expandedIcon={expandedIcon} icon={icon}>
         {children}
       </TreeViewBranchTitle>
@@ -180,15 +212,15 @@ export const TreeViewBranchItem = (props: TreeViewBranchItemProps) => {
 interface TreeViewBranchTitleProps
   extends React.ComponentProps<typeof ArkTreeView.BranchText> {
   /**
-   * Custom expanded icon
+   * Expanded branch icon. Pass a component to show; omit or `null` to hide.
    *
-   * @default <FolderOpenIcon />
+   * @default null
    */
   expandedIcon?: React.JSX.ElementType | null;
   /**
-   * Custom icon
+   * Collapsed branch icon. Pass a component to show; omit or `null` to hide.
    *
-   * @default <FolderIcon />
+   * @default null
    */
   icon?: React.JSX.ElementType | null;
 }
@@ -218,16 +250,16 @@ const TreeViewBranchTitle = (props: TreeViewBranchTitleProps) => {
               data-slot="tree-view-branch-title"
               {...rest}
             >
-              {Icon !== null && !nodeState.expanded && (
+              {Icon && !nodeState.expanded ? (
                 <TreeViewItemIcon>
-                  {Icon ? <Icon /> : <FolderIcon />}
+                  <Icon />
                 </TreeViewItemIcon>
-              )}
-              {ExpandedIcon !== null && nodeState.expanded && (
+              ) : null}
+              {ExpandedIcon && nodeState.expanded ? (
                 <TreeViewItemIcon>
-                  {ExpandedIcon ? <ExpandedIcon /> : <FolderOpenIcon />}
+                  <ExpandedIcon />
                 </TreeViewItemIcon>
-              )}
+              ) : null}
               {children}
             </ArkTreeView.BranchText>
           )}
@@ -247,16 +279,16 @@ export const TreeViewBranchIndicator = (
       className={cn(
         "inline-flex shrink-0 items-center justify-center",
         "text-muted-foreground",
-        "origin-center transition-transform duration-150",
-        "data-[state=open]:rotate-90",
+        "origin-center transition-transform duration-150 ease-out",
+        "data-[state=open]:rotate-90 rtl:data-[state=closed]:-rotate-180",
         "[&_svg]:size-3.5 [&_svg]:shrink-0",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="tree-view-branch-indicator"
       {...rest}
     >
-      <ChevronRightIcon />
+      <ChevronRightIcon className="size-3.5" />
     </ArkTreeView.BranchIndicator>
   );
 };
@@ -269,10 +301,12 @@ export const TreeViewBranchContent = (
   return (
     <ArkTreeView.BranchContent
       className={cn(
+        "[--radix-collapsible-content-height:var(--height)]",
         "relative overflow-hidden",
-        "data-[state=open]:animate-[expand_150ms_ease-out]",
-        "data-[state=closed]:animate-[collapse_150ms_ease-out]",
-        "motion-reduce:animate-none!",
+        "data-[state=open]:animate-collapsible-down data-[state=open]:duration-150 data-[state=open]:ease-out",
+        "data-[state=closed]:animate-collapsible-up data-[state=closed]:duration-150 data-[state=closed]:ease-out",
+        "motion-reduce:animate-none",
+        "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
         className
       )}
       data-slot="tree-view-branch-content"
@@ -323,22 +357,26 @@ export const TreeViewContent = (
 interface TreeViewItemProps
   extends React.ComponentProps<typeof TreeViewItemTitle> {
   /**
-   * Custom file icon
+   * Leaf icon. Pass a component to show; omit or `null` to hide.
+   * When `fileIcons` matches the node id extension, that mapping wins.
    *
-   * @default <FileIcon />
+   * @default null
    */
-  icon?: React.JSX.ElementType;
+  icon?: React.JSX.ElementType | null;
 }
 
 export const TreeViewItem = (props: TreeViewItemProps) => {
-  const { icon: Icon = FileIcon, className, children, ...rest } = props;
+  const { icon: Icon = null, className, children, ...rest } = props;
 
   const { fileIcons } = _useTreeView();
 
-  const getFileIcon = (value: string): React.JSX.ElementType => {
+  const getFileIcon = (value: string): React.JSX.ElementType | null => {
     const extension = getFileExtension(value);
     const resolved = extension ? fileIcons?.[extension] : undefined;
-    return resolved ?? Icon;
+    if (resolved !== undefined) {
+      return resolved;
+    }
+    return Icon;
   };
 
   return (
@@ -348,14 +386,18 @@ export const TreeViewItem = (props: TreeViewItemProps) => {
 
         return (
           <>
-            <TreeViewItemIcon>
-              <ResolvedIcon />
-            </TreeViewItemIcon>
+            {ResolvedIcon ? (
+              <TreeViewItemIcon>
+                <ResolvedIcon />
+              </TreeViewItemIcon>
+            ) : null}
 
             {nodeState.renaming ? (
               <TreeViewNodeInput />
             ) : (
-              <TreeViewItemTitle {...rest}>{children}</TreeViewItemTitle>
+              <TreeViewItemTitle className={className} {...rest}>
+                {children}
+              </TreeViewItemTitle>
             )}
           </>
         );
@@ -405,7 +447,7 @@ export const TreeViewCheckbox = (
 
   return (
     <ArkTreeView.NodeCheckbox
-      className={cn(checkboxVariants(), "[&_svg]:size-3!", className)}
+      className={cn(checkboxVariants(), "[&_svg]:size-3", className)}
       data-slot="tree-view-checkbox"
       {...rest}
     >
@@ -430,26 +472,14 @@ const TreeViewNodeInput = (
         "text-sm",
         "border-primary bg-popover text-foreground",
         "rounded-md border",
-        "selection:bg-primary/20 selection:text-foreground",
-        "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+        "selection:bg-primary/24 selection:text-foreground",
+        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         className
       )}
       data-slot="tree-view-node-rename-input"
       {...rest}
     />
   );
-};
-
-const _useTreeView = () => {
-  const context = React.useContext(TreeViewContext);
-
-  if (!context) {
-    throw new Error(
-      "useTreeViewContext must be used within a TreeViewProvider"
-    );
-  }
-
-  return context;
 };
 
 type CreateFileIconsArgs = Record<`.${string}`, React.JSX.ElementType | null>;

@@ -4,6 +4,9 @@ import { ark } from "@ark-ui/react/factory";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
+const tableCheckboxSpacing =
+  "has-[[role=checkbox]]:leading-none has-[[role=checkbox]]:ps-2 has-[[role=checkbox]]:pe-0 [&>[role=checkbox]]:align-middle";
+
 interface TableProps extends React.ComponentProps<typeof ark.table> {
   /**
    * Whether the table rows are hoverable.
@@ -94,7 +97,7 @@ export const TableRow = (props: React.ComponentProps<typeof ark.tr>) => {
       className={cn(
         "border-b",
         "data-[state=selected]:bg-muted",
-        "group-data-[variant=striped]/table:even:bg-muted/30",
+        "group-data-[variant=striped]/table:even:bg-muted/32",
         "group-data-[hoverable=true]/table:[&:has(td):hover]:bg-muted/48",
         className
       )}
@@ -111,10 +114,9 @@ export const TableHead = (props: React.ComponentProps<typeof ark.th>) => {
     <ark.th
       className={cn(
         "h-10 px-2",
-        "text-left align-middle",
+        "text-start align-middle",
         "font-medium text-muted-foreground",
-        "rtl:text-right",
-        "has-[[role=checkbox]]:ps-2 has-[[role=checkbox]]:pe-0",
+        tableCheckboxSpacing,
         className
       )}
       data-slot="table-head"
@@ -130,7 +132,7 @@ export const TableCell = (props: React.ComponentProps<typeof ark.td>) => {
     <ark.td
       className={cn(
         "whitespace-nowrap p-2 align-middle",
-        "has-[[role=checkbox]]:ps-2 has-[[role=checkbox]]:pe-0",
+        tableCheckboxSpacing,
         className
       )}
       data-slot="table-cell"

@@ -1,10 +1,14 @@
 ---
 title: Resizable
-description: Divides the interface into resizable sections.
+description: Split a layout into resizable panes.
+seo:
+  description: Split a layout into panes the user can drag to resize.
 links:
   doc: https://ark-ui.com/docs/components/splitter
   api: https://ark-ui.com/docs/components/splitter#api-reference
 ---
+
+import manifest from "@/registry/manifest/resizable";
 
 <ComponentPreview componentName="resizable" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/resizable
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -79,13 +81,9 @@ Use the `orientation` prop to control the orientation of the resizable panels.
 
 ### Horizontal
 
-Set `orientation="horizontal"` to place panels side by side (default).
-
 <ComponentPreview componentName="resizable" fileName="example-orientation-horizontal" />
 
 ### Vertical
-
-Set `orientation="vertical"` to stack panels vertically.
 
 <ComponentPreview componentName="resizable" fileName="example-orientation-vertical" />
 
@@ -107,6 +105,12 @@ Use `panels` with `minSize` and `maxSize` to constrain how small or large a pane
 
 <ComponentPreview componentName="resizable" fileName="example-multiple-panels" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="resizable" />
+
 ## API Reference
 
 ### Resizable
@@ -115,17 +119,17 @@ Root component. Manages resizable panel layout.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `panels` | `PanelData[]` | - |
-| `defaultSize` | `number[]` | - |
-| `size` | `number[]` | - |
+| `panels` | `PanelData[]` | `-` |
+| `defaultSize` | `number[]` | `-` |
+| `size` | `number[]` | `-` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
-| `keyboardResizeBy` | `number` | - |
-| `onResize` | `(details: ResizeDetails) => void` | - |
-| `onResizeStart` | `() => void` | - |
-| `onResizeEnd` | `(details: ResizeEndDetails) => void` | - |
-| `onCollapse` | `(details: ExpandCollapseDetails) => void` | - |
-| `onExpand` | `(details: ExpandCollapseDetails) => void` | - |
-| `className` | `string` | - |
+| `keyboardResizeBy` | `number` | `-` |
+| `onResize` | `(details: ResizeDetails) => void` | `-` |
+| `onResizeStart` | `() => void` | `-` |
+| `onResizeEnd` | `(details: ResizeEndDetails) => void` | `-` |
+| `onCollapse` | `(details: ExpandCollapseDetails) => void` | `-` |
+| `onExpand` | `(details: ExpandCollapseDetails) => void` | `-` |
+| `className` | `string` | `-` |
 
 ### ResizablePanel
 
@@ -133,9 +137,9 @@ A resizable panel. Multiple panels share the available space.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `id` | `string` | - |
+| `id` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ResizableResizeTrigger
 
@@ -143,11 +147,19 @@ Draggable handle between panels for resizing.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `id` | `${string}:${string}` | - |
+| `id` | `${string}:${string}` | `-` |
 | `withHandle` | `boolean` | `false` |
-| `disabled` | `boolean` | - |
+| `disabled` | `boolean` | `-` |
 | `asChild` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
+
+### ResizableRootProvider
+
+Provides a Resizable API created with `useResizable` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseResizableReturn` | `required` |
 
 ---
 

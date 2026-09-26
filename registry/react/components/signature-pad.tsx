@@ -2,14 +2,17 @@
 
 import {
   SignaturePad as ArkSignaturePad,
-  useSignaturePadContext,
+  useSignaturePad as useArkSignaturePad,
+  useSignaturePadContext as useArkSignaturePadContext,
 } from "@ark-ui/react/signature-pad";
 import { RotateCcw } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 
-export const useSignaturePad = useSignaturePadContext;
+export const useSignaturePad = useArkSignaturePad;
+export const useSignaturePadContext = useArkSignaturePadContext;
+export const SignaturePadRootProvider = ArkSignaturePad.RootProvider;
 
 export const SignaturePad = (
   props: React.ComponentProps<typeof ArkSignaturePad.Root>
@@ -40,6 +43,7 @@ const SignaturePadControl = (
   props: React.ComponentProps<typeof ArkSignaturePad.Control>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <ArkSignaturePad.Control
       className={cn(
@@ -47,7 +51,7 @@ const SignaturePadControl = (
         "size-full min-h-0 min-w-0",
         "flex flex-col",
         "bg-muted/64",
-        "rounded-xl border shadow-xs/5",
+        "rounded-xl border shadow-xs/4",
         "data-disabled:cursor-not-allowed",
         className
       )}
@@ -61,6 +65,7 @@ const SignaturePadSegment = (
   props: React.ComponentProps<typeof ArkSignaturePad.Segment>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <ArkSignaturePad.Segment
       className={cn(

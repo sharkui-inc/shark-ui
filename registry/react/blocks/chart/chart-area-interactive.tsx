@@ -131,29 +131,29 @@ const chartData = [
 ];
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
   desktop: {
-    label: "Desktop",
     color: "var(--chart-1)",
+    label: "Desktop",
   },
   mobile: {
-    label: "Mobile",
     color: "var(--chart-2)",
+    label: "Mobile",
+  },
+  visitors: {
+    label: "Visitors",
   },
 } satisfies ChartConfig;
 
 function ChartAreaInteractive() {
-  const [timeRange, setTimeRange] = React.useState("90d");
+  const [timeRange, setTimeRange] = React.useState(["90d"]);
 
   const filteredData = chartData.filter((item) => {
     const date = new Date(item.date);
     const referenceDate = new Date("2024-06-30");
     let daysToSubtract = 90;
-    if (timeRange === "30d") {
+    if (timeRange.includes("30d")) {
       daysToSubtract = 30;
-    } else if (timeRange === "7d") {
+    } else if (timeRange.includes("7d")) {
       daysToSubtract = 7;
     }
     const startDate = new Date(referenceDate);
@@ -172,8 +172,8 @@ function ChartAreaInteractive() {
         </div>
         <Select
           collection={timeRangeCollection}
-          onValueChange={(e) => setTimeRange(e.value[0] ?? "90d")}
-          value={[timeRange]}
+          onValueChange={({ value }) => setTimeRange(value)}
+          value={timeRange}
         >
           <SelectTrigger
             aria-label="Select a value"
@@ -183,7 +183,7 @@ function ChartAreaInteractive() {
           </SelectTrigger>
           <SelectContent className="rounded-xl">
             {timeRangeCollection.items.map((item) => (
-              <SelectItem className="rounded-lg" item={item} key={item.value}>
+              <SelectItem item={item} key={item.value}>
                 {item.label}
               </SelectItem>
             ))}
@@ -230,8 +230,8 @@ function ChartAreaInteractive() {
               tickFormatter={(value) => {
                 const date = new Date(value);
                 return date.toLocaleDateString("en-US", {
-                  month: "short",
                   day: "numeric",
+                  month: "short",
                 });
               }}
               tickLine={false}
@@ -242,9 +242,9 @@ function ChartAreaInteractive() {
                 <ChartTooltipContent
                   indicator="dot"
                   labelFormatter={(value) =>
-                    new Date(value).toLocaleDateString("en-US", {
-                      month: "short",
+                    new Date(String(value)).toLocaleDateString("en-US", {
                       day: "numeric",
+                      month: "short",
                     })
                   }
                 />

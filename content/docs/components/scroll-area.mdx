@@ -1,10 +1,14 @@
 ---
 title: Scroll Area
-description: Custom scrollable area with styled scrollbars.
+description: Scrollable area with styled scrollbars.
+seo:
+  description: Scrollable region with styled scrollbars.
 links:
   doc: https://ark-ui.com/docs/components/scroll-area
   api: https://ark-ui.com/docs/components/scroll-area#api-reference
 ---
+
+import manifest from "@/registry/manifest/scroll-area";
 
 <ComponentPreview componentName="scroll-area" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/scroll-area
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -59,27 +61,75 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 </ScrollArea>
 ```
 
-## Examples
+## Orientation
 
-### Scroll Fade
+### Vertical Scroll
 
-Use `scrollFade` to add a subtle fade effect to the edges of the scroll area.
+Set `orientation="vertical"` to limit scrolling to the vertical axis.
 
-<ComponentPreview componentName="scroll-area" fileName="example-scroll-fade" />
+<ComponentPreview componentName="scroll-area" fileName="example-vertical" />
 
 ### Horizontal Scroll
+
+Set `orientation="horizontal"` to limit scrolling to the horizontal axis.
 
 <ComponentPreview componentName="scroll-area" fileName="example-horizontal" />
 
 ### Both Scrollbars
 
+Set `orientation="both"` to allow scrolling on both axes.
+
 <ComponentPreview componentName="scroll-area" fileName="example-both-directions" />
+
+## Examples
+
+### Scroll Fade
+
+Use `scrollFade` to fade edges on overflowing axes, only toward the scrollable side.
+
+<ComponentPreview componentName="scroll-area" fileName="example-scroll-fade" />
+
+### Scrollbar Gutter
+
+Use `scrollbarGutter` to reserve scrollbar track space.
+
+<ComponentPreview componentName="scroll-area" fileName="example-scrollbar-gutter" />
+
+### Wide Content
+
+Use `clampContentMinWidth` to keep wide content from expanding its scroll area.
+
+<ComponentPreview componentName="scroll-area" fileName="example-clamp-content-min-width" />
+
+### Fill Area
+
+Use `fill` to make the content fill the available scroll area.
+
+<ComponentPreview componentName="scroll-area" fileName="example-fill" />
+
+### Nested Scrolling
+
+Use `overscrollContain` to keep scrolling inside a nested scroll area at its edges.
+
+<ComponentPreview componentName="scroll-area" fileName="example-overscroll-contain" />
+
+### Hide Thumb
+
+Target the `scroll-area-thumb` slot to hide the thumb.
+
+<ComponentPreview componentName="scroll-area" fileName="example-hide-thumb" />
 
 ### Nested
 
-Scroll areas can be nested within each other for complex layouts.
+Nest scroll areas inside each other.
 
 <ComponentPreview componentName="scroll-area" fileName="example-nested" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="scroll-area" />
 
 ## API Reference
 
@@ -87,13 +137,35 @@ Scroll areas can be nested within each other for complex layouts.
 
 Custom-styled scrollable region. Hides native scrollbars; preserves scroll behavior.
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
-| scrollFade | `boolean` | `false` | 
+| `scrollFade` | `boolean` | `false` |
+| `scrollbarGutter` | `boolean` | `false` |
+| `fill` | `boolean` | `false` |
+| `clampContentMinWidth` | `boolean` | `true` |
+| `overscrollContain` | `boolean` | `false` |
+| `orientation` | `"both" \| "horizontal" \| "vertical"` | `"both"` |
 
-| Attribute | Default |
-| --- | --- |
-| `--fade-size` | `1.5rem` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--fade-size` | `string` | `1.5rem` |
+
+### ScrollAreaRootProvider
+
+Provides a ScrollArea API created with `useScrollArea` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseScrollAreaReturn` | `required` |
+
+### ScrollAreaScrollbar
+
+Public ScrollAreaScrollbar component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

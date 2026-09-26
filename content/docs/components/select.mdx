@@ -1,10 +1,14 @@
 ---
 title: Select
-description: Displays a list of options.
+description: Select an option from a list.
+seo:
+  description: Popup select for one option from a scrollable list.
 links:
   doc: https://ark-ui.com/docs/components/select
   api: https://ark-ui.com/docs/components/select#api-reference
 ---
+
+import manifest from "@/registry/manifest/select";
 
 <ComponentPreview componentName="select" />
 
@@ -29,13 +33,11 @@ npx shadcn@latest add @shark/select
 
 <Steps>
 
-<Step>This component depends on [Separator](/docs/components/separator) and [Input](/docs/components/input). Install them first if you haven't already.</Step>
+<Step>This component depends on [Input](/docs/components/input), [Scroll Area](/docs/components/scroll-area), and [Separator](/docs/components/separator). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -102,6 +104,28 @@ Use `value` and `onValueChange` to control the selected items.
 
 <ComponentPreview componentName="select" fileName="example-controlled" />
 
+## States
+
+### Disabled
+
+<ComponentPreview componentName="select" fileName="example-disabled" />
+
+### Invalid
+
+<ComponentPreview componentName="select" fileName="example-invalid" />
+
+## Variants
+
+Control trigger appearance with the `variant` prop on SelectTrigger.
+
+### Default
+
+<ComponentPreview componentName="select" fileName="example-variant-default" />
+
+### Ghost
+
+<ComponentPreview componentName="select" fileName="example-variant-ghost" />
+
 ## Size
 
 Control trigger size with the `size` prop on SelectTrigger.
@@ -118,17 +142,15 @@ Control trigger size with the `size` prop on SelectTrigger.
 
 <ComponentPreview componentName="select" fileName="example-size-lg" />
 
-## States
-
-### Disabled
-
-<ComponentPreview componentName="select" fileName="example-disabled" />
-
-### Invalid
-
-<ComponentPreview componentName="select" fileName="example-invalid" />
-
 ## Examples
+
+### With Icon
+
+<ComponentPreview componentName="select" fileName="example-with-icon" />
+
+### With Description
+
+<ComponentPreview componentName="select" fileName="example-with-description" />
 
 ### Multiple
 
@@ -162,6 +184,18 @@ Use `SelectEmpty` to display a message when the collection has no items.
 
 <ComponentPreview componentName="select" fileName="example-empty" />
 
+### Without trigger
+
+Hide the chevron with `showTrigger={false}`.
+
+<ComponentPreview componentName="select" fileName="example-without-trigger" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="select" />
+
 ## API Reference
 
 ### Select
@@ -170,30 +204,34 @@ Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `ListCollection<T>` | - |
-| `value` | `string[]` | - |
-| `defaultValue` | `string[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
+| `collection` | `ListCollection<T>` | `-` |
+| `value` | `string[]` | `-` |
+| `defaultValue` | `string[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | `-` |
 | `multiple` | `boolean` | `false` |
-| `disabled` | `boolean` | - |
-| `invalid` | `boolean` | - |
-| `name` | `string` | - |
-| `required` | `boolean` | - |
-| `positioning` | `PositioningOptions` | - |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
+| `name` | `string` | `-` |
+| `required` | `boolean` | `-` |
+| `autoComplete` | `string` | `-` |
+| `onSelect` | `(details: SelectionDetails) => void` | `-` |
+| `positioning` | `PositioningOptions` | `-` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### SelectTrigger
 
-Opens the dropdown on click. Displays the selected value or placeholder.
+Opens the menu on click. Displays the selected value or placeholder.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `variant` | `"default" \| "ghost"` | `"default"` |
 | `showClear` | `boolean` | `false` |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `showTrigger` | `boolean` | `true` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectValue
 
@@ -201,18 +239,18 @@ Shows the selected value or placeholder. Use `SelectContext` as children for cus
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `placeholder` | `string` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `placeholder` | `string` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectContent
 
-Holds the dropdown options. Displayed in a portal.
+Holds the menu options. Displayed in a portal.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectClearTrigger
 
@@ -220,8 +258,8 @@ Button to clear the selected value. Shown when `showClear` is true on `SelectTri
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectGroup
 
@@ -229,9 +267,9 @@ Groups related options under an optional heading.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string` \| `ReactNode` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `heading` | `string \| ReactNode` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectGroupLabel
 
@@ -239,18 +277,18 @@ Label for an option group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectItem
 
-A single selectable option in the dropdown.
+A single selectable option in the menu.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `item` | `T` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `item` | `T` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectEmpty
 
@@ -258,7 +296,32 @@ Shown when the collection has no items (`collection.size === 0`). Place inside `
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
+
+### SelectRootProvider
+
+Provides a Select API created with `useSelect` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseSelectReturn` | `required` |
+
+### SelectContext
+
+Render-prop access to the surrounding component API.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: unknown) => React.ReactNode` | `required` |
+
+### SelectSeparator
+
+Public SelectSeparator component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

@@ -1,0 +1,22 @@
+@theme inline {
+  --animate-flip-in: flip-in 400ms ease;
+  --animate-flip-out: flip-out 200ms ease;
+
+  @keyframes flip-in {
+    from {
+      transform: rotateY(180deg);
+    }
+    to {
+      transform: rotateY(0deg);
+    }
+  }
+
+  @keyframes flip-out {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(180deg);
+    }
+  }
+}

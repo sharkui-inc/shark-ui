@@ -10,9 +10,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DocsCopyPage } from "@/components/layout/docs-copy-page";
 import { DocsTableOfContents } from "@/components/layout/docs-toc";
-import { SITE_FEATURES } from "@/config/features";
+import { JsonLd } from "@/components/seo/json-ld";
+import { getDateFromFile } from "@/lib/changelog";
 import { source } from "@/lib/fumadocs";
-import { createMetadata, createOgImageUrl } from "@/lib/metadata";
+import {
+  getBreadcrumbJsonLd,
+  getChangelogTechArticleJsonLd,
+} from "@/lib/json-ld";
+import { createMetadata } from "@/lib/metadata";
+import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
 import { mdxComponents } from "@/mdx-components";
 import { Badge } from "@/registry/react/components/badge";
@@ -24,6 +30,9 @@ export const dynamic = "force-static";
 export const dynamicParams = false;
 
 export const generateStaticParams = () => source.generateParams();
+
+const humanizeSlug = (slug: string) =>
+  slug.replaceAll("-", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 
 export const generateMetadata = async (
   props: PageProps<"/docs/[[...slug]]">
@@ -43,15 +52,10 @@ export const generateMetadata = async (
   }
 
   return createMetadata({
+    description: doc.seo?.description ?? doc.description,
+    markdownUrl: `${page.url}.md`,
     title: doc.title,
-    description: doc.description,
     url: page.url,
-    imageUrl: SITE_FEATURES.dynamicOgImages
-      ? createOgImageUrl({
-          title: doc.title,
-          description: doc.description,
-        })
-      : undefined,
   });
 };
 
@@ -69,19 +73,54 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
   const isIndexPage = params.slug?.[0] === undefined;
 
   const isChangelog = params.slug?.[0] === "changelog";
+  const changelogDate = isChangelog ? getDateFromFile(page.slugs) : null;
+  const { description } = page.data;
+  const breadcrumbItems = [
+    { name: "Home", url: absoluteUrl("/") },
+    { name: "Documentation", url: absoluteUrl("/docs") },
+    ...(page.slugs.length === 0
+      ? []
+      : page.slugs.map((slug, index) => ({
+          name:
+            index === page.slugs.length - 1
+              ? page.data.title
+              : humanizeSlug(slug),
+          url: absoluteUrl(`/docs/${page.slugs.slice(0, index + 1).join("/")}`),
+        }))),
+  ];
   const neighbours = isChangelog
-    ? { previous: null, next: null }
+    ? { next: null, previous: null }
     : findNeighbour(source.pageTree, page.url);
 
   const MDX = page.data.body;
 
-  const links = page.data.links;
+  const { links } = page.data;
 
   return (
     <div className="size-full">
+      <JsonLd data={getBreadcrumbJsonLd(breadcrumbItems)} />
+      {isChangelog && page.slugs.length > 1 && changelogDate ? (
+        <JsonLd
+          data={getChangelogTechArticleJsonLd({
+            datePublished: changelogDate,
+            description: description ?? page.data.title,
+            title: page.data.title,
+            url: absoluteUrl(page.url),
+          })}
+        />
+      ) : null}
       <div className="flex items-stretch xl:w-full" data-slot="docs">
         <div className="relative flex w-full min-w-0 flex-1 flex-col lg:me-4 lg:mt-8">
-          <div className="relative flex w-full flex-col border bg-white text-card-foreground shadow-lg/5 max-lg:border-none lg:rounded-2xl dark:bg-card">
+          <div
+            className={cn(
+              "relative",
+              "w-full",
+              "flex flex-col",
+              "bg-white dark:bg-card",
+              "text-card-foreground",
+              "border shadow-lg/4 max-lg:border-none lg:rounded-2xl"
+            )}
+          >
             <div className="flex-1 px-4 py-6 sm:px-6 lg:p-8">
               <div
                 className={cn("mx-auto w-full", {
@@ -102,15 +141,15 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                       )}
                     </div>
 
-                    {page.data.description && (
+                    {page.data.description ? (
                       <p className="text-[1.05rem] text-muted-foreground sm:text-base md:max-w-[80%]">
                         {page.data.description}
                       </p>
-                    )}
+                    ) : null}
 
-                    {links && (
+                    {links ? (
                       <div className="flex items-center gap-2 pt-4">
-                        {links?.doc && (
+                        {links.doc ? (
                           <Badge asChild size="lg" variant="outline">
                             <a
                               href={links.doc}
@@ -120,9 +159,9 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                               Docs <ArrowUpRightIcon />
                             </a>
                           </Badge>
-                        )}
+                        ) : null}
 
-                        {links?.api && (
+                        {links.api ? (
                           <Badge asChild size="lg" variant="outline">
                             <a
                               href={links.api}
@@ -132,9 +171,9 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                               API <ArrowUpRightIcon />
                             </a>
                           </Badge>
-                        )}
+                        ) : null}
                       </div>
-                    )}
+                    ) : null}
                   </div>
 
                   <SkipNavContent className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
@@ -148,7 +187,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
             {neighbours.previous ? (
               <Link
                 className={cn(
-                  buttonVariants({ variant: "outline", clickEffect: false }),
+                  buttonVariants({ clickEffect: false, variant: "outline" }),
                   "h-auto w-full min-w-0",
                   "p-4",
                   "flex flex-col items-start",
@@ -161,7 +200,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                   Previous page
                 </p>
                 <div className="flex items-center gap-2">
-                  <ChevronLeftIcon className="rtl:rotate-180" />
+                  <ChevronLeftIcon className="size-4 rtl:rotate-180" />
                   <span className="text-base">{neighbours.previous.name}</span>
                 </div>
               </Link>
@@ -172,7 +211,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
             {neighbours.next ? (
               <Link
                 className={cn(
-                  buttonVariants({ variant: "outline", clickEffect: false }),
+                  buttonVariants({ clickEffect: false, variant: "outline" }),
                   "h-auto w-full min-w-0",
                   "p-4",
                   "flex flex-col items-end",
@@ -186,7 +225,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                 </p>
                 <div className="flex items-center gap-2">
                   <span className="text-base">{neighbours.next.name}</span>
-                  <ChevronRightIcon className="rtl:rotate-180" />
+                  <ChevronRightIcon className="size-4 rtl:rotate-180" />
                 </div>
               </Link>
             ) : null}
@@ -197,9 +236,10 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
           <div className="sticky top-(--header-height) z-30 ms-auto hidden h-[calc(100svh-var(--header-height))] w-64 flex-col overflow-hidden xl:flex">
             <ScrollArea
               className="[--fade-size:3rem] **:data-[slot=scroll-area-scrollbar]:hidden"
+              orientation="vertical"
               scrollFade
             >
-              <div className="flex min-h-0 flex-col gap-2 overflow-auto py-2">
+              <div className="flex min-h-0 min-w-0 flex-col gap-2 py-2">
                 <div className="h-(--top-spacing) shrink-0" />
                 <DocsTableOfContents data={page.data.toc} />
               </div>

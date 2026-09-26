@@ -16,10 +16,10 @@ const Example = () => (
   <Field className="max-w-64">
     <FieldLabel>Filter</FieldLabel>
     <InputGroup>
+      <InputGroupInput placeholder="Search..." />
       <InputGroupAddon align="inline-start">
         <FilterIcon aria-hidden />
       </InputGroupAddon>
-      <InputGroupInput placeholder="Search..." />
     </InputGroup>
     <FieldDescription>Icon positioned at the start.</FieldDescription>
   </Field>

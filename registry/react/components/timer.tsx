@@ -3,12 +3,15 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   Timer as ArkTimer,
-  useTimerContext as useArkTimer,
+  useTimer as useArkTimer,
+  useTimerContext as useArkTimerContext,
 } from "@ark-ui/react/timer";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
 export const useTimer = useArkTimer;
+export const useTimerContext = useArkTimerContext;
+export const TimerRootProvider = ArkTimer.RootProvider;
 
 export const remainingMsUntilDate = (date: Date): number => {
   const end = new Date(date).getTime();
@@ -16,7 +19,10 @@ export const remainingMsUntilDate = (date: Date): number => {
   return Math.max(0, end - Date.now());
 };
 
-export const Timer = (props: React.ComponentProps<typeof ArkTimer.Root>) => {
+export interface TimerProps
+  extends React.ComponentProps<typeof ArkTimer.Root> {}
+
+export const Timer = (props: TimerProps) => {
   const { className, ...rest } = props;
 
   return (
@@ -191,7 +197,7 @@ export const TimerRestart = (props: TimerActionProps) => (
 );
 
 export const TimerPlay = (props: TimerActionProps) => {
-  const { paused } = useArkTimer();
+  const { paused } = useArkTimerContext();
 
   if (paused) {
     return <TimerResume {...props} />;

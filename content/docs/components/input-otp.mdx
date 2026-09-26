@@ -1,10 +1,14 @@
 ---
 title: Input OTP
-description: Accessible one-time password input.
+description: One-time password input.
+seo:
+  description: One-time password field with per-digit slots.
 links:
   doc: https://ark-ui.com/docs/components/pin-input
   api: https://ark-ui.com/docs/components/pin-input#api-reference
 ---
+
+import manifest from "@/registry/manifest/input-otp";
 
 <ComponentPreview componentName="input-otp" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/input-otp
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -125,6 +127,18 @@ Use the `blurOnComplete` prop to blur the input when all slots are filled.
 
 <ComponentPreview componentName="input-otp" fileName="example-blur-on-complete" />
 
+### Auto submit
+
+Use `autoSubmit` to submit the owning form when every slot is filled. 
+
+<ComponentPreview componentName="input-otp" fileName="example-auto-submit" />
+
+### Sanitize value
+
+Use `sanitizeValue` to clean pasted text before validation, for example stripping dashes.
+
+<ComponentPreview componentName="input-otp" fileName="example-sanitize-value" />
+
 ### Mask
 
 Use the `mask` prop to mask the input value.
@@ -137,6 +151,12 @@ Pass `*:data-[slot=input-otp-input]:size-*` and `*:data-[slot=input-otp-input]:t
 
 <ComponentPreview componentName="input-otp" fileName="example-custom-size" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="input-otp" />
+
 ## API Reference
 
 ### InputOTP
@@ -144,14 +164,16 @@ Pass `*:data-[slot=input-otp-input]:size-*` and `*:data-[slot=input-otp-input]:t
 | Prop | Type | Default |
 | --- | --- | --- |
 | `withFakeCaret` | `boolean` | `false` |
-| `value` | `string` | - |
-| `defaultValue` | `string` | - |
-| `onValueChange` | `({ value, valueAsString }) => void` | - |
-| `disabled` | `boolean` | - |
-| `invalid` | `boolean` | - |
+| `value` | `string` | `-` |
+| `defaultValue` | `string` | `-` |
+| `onValueChange` | `({ value, valueAsString }) => void` | `-` |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
 | `otp` | `boolean` | `true` |
-| `blurOnComplete` | `boolean` | - |
-| `mask` | `boolean` | - |
+| `blurOnComplete` | `boolean` | `-` |
+| `autoSubmit` | `boolean` | `-` |
+| `sanitizeValue` | `(value: string) => string` | `-` |
+| `mask` | `boolean` | `-` |
 
 ### InputOTPSlot
 
@@ -159,11 +181,23 @@ Single OTP slot. Use `index` to specify position, 0 is the first slot.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `index` | `number` | **required** |
+| `index` | `number` | `required` |
+
 
 ### InputOTPSeparator
 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 Visual separator between slots.
+
+### InputOTPRootProvider
+
+Provides a InputOTP API created with `useInputOTP` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseInputOTPReturn` | `required` |
 
 ---
 

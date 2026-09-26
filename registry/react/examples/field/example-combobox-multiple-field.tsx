@@ -3,8 +3,12 @@
 import { useFilter, useListCollection } from "@ark-ui/react";
 import {
   Combobox,
+  ComboboxChip,
+  ComboboxChips,
+  ComboboxChipsInput,
   ComboboxContent,
-  ComboboxInput,
+  ComboboxContext,
+  ComboboxEmpty,
   ComboboxItem,
   ComboboxList,
 } from "@/registry/react/components/combobox";
@@ -18,8 +22,8 @@ const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
 
   const { collection, filter } = useListCollection({
-    initialItems,
     filter: contains,
+    initialItems,
   });
 
   return (
@@ -28,18 +32,37 @@ const Example = () => {
       <Combobox
         collection={collection}
         multiple
-        onInputValueChange={({ inputValue }) => filter(inputValue)}
+        onInputValueChange={({ inputValue, reason }) =>
+          filter(reason === "item-select" ? "" : inputValue)
+        }
       >
-        <ComboboxInput aria-label="Select items" placeholder="Select items…" />
-        <ComboboxContent>
-          <ComboboxList>
-            {collection.items.map((item) => (
-              <ComboboxItem item={item} key={item.value}>
-                {item.label}
-              </ComboboxItem>
-            ))}
-          </ComboboxList>
-        </ComboboxContent>
+        <ComboboxContext<Framework>>
+          {({ selectedItems }) => (
+            <>
+              <ComboboxChips>
+                {selectedItems.map((item) => (
+                  <ComboboxChip key={item.value} value={item.value}>
+                    {item.label}
+                  </ComboboxChip>
+                ))}
+                <ComboboxChipsInput
+                  aria-label="Select items"
+                  placeholder="Select items…"
+                />
+              </ComboboxChips>
+              <ComboboxContent>
+                <ComboboxEmpty />
+                <ComboboxList>
+                  {collection.items.map((item) => (
+                    <ComboboxItem item={item} key={item.value}>
+                      {item.label}
+                    </ComboboxItem>
+                  ))}
+                </ComboboxList>
+              </ComboboxContent>
+            </>
+          )}
+        </ComboboxContext>
       </Combobox>
       <FieldDescription>Select multiple items.</FieldDescription>
     </Field>
@@ -58,5 +81,7 @@ const initialItems = [
   { label: "Peach", value: "peach" },
   { label: "Pear", value: "pear" },
 ];
+
+type Framework = (typeof initialItems)[number];
 
 export default Example;

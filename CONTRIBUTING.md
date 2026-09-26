@@ -1,63 +1,67 @@
-# Contributing to shark-ui
+# Contributing
 
-Thanks for your interest in contributing to shark-ui. This document covers how to get set up and submit changes.
+How to set up the repo and submit changes.
 
-## Development Setup
+## Setup
 
-1. **Clone and install**
+Requires **Node.js 24+** (`engines` in `package.json`) and [pnpm](https://pnpm.io).
 
-   ```bash
-   git clone https://github.com/sharkui-inc/shark-ui.git
-   cd shark-ui
-   pnpm install
-   ```
+```bash
+git clone https://github.com/sharkui-inc/shark-ui.git
+cd shark-ui
+pnpm install
+pnpm dev
+```
 
-2. **Start the docs site**
-
-   ```bash
-   pnpm dev
-   ```
-
-   Docs run at http://localhost:3000.
+Docs run at http://localhost:3000.
 
 ## Commands
 
-| Command           | Description                          |
-| ----------------- | ------------------------------------ |
-| `pnpm dev`        | Start docs site (Turbo mode)         |
-| `pnpm build`      | Build production                     |
-| `pnpm typecheck`  | Run TypeScript type-check            |
-| `pnpm lint:check` | Run lint (Ultracite/Biome)           |
-| `pnpm lint:fix`   | Auto-fix lint issues                |
-| `pnpm registry:build` | Rebuild component registry JSON |
+| Command               | Description                                                         |
+| --------------------- | ------------------------------------------------------------------- |
+| `pnpm dev`            | Docs site (`next dev`)                                              |
+| `pnpm build`          | `registry:build` + `theme:build` + production Next.js build         |
+| `pnpm typecheck`      | Production Next.js build (typecheck). Slow.                         |
+| `pnpm test`           | Node test runner for files under `test/`                            |
+| `pnpm lint:check`     | Lint (Ultracite/Biome)                                              |
+| `pnpm lint:fix`       | Auto-fix lint issues                                                |
+| `pnpm registry:build` | Rebuild `public/r/*.json` from manifests                            |
+| `pnpm theme:build`    | Generate `styles/themes.css` from `scripts/build-themes.mts`        |
 
-## Before Submitting
+## Before a PR
 
-- Run `pnpm lint:fix` before committing (lint-staged runs automatically on pre-commit).
-- Run `pnpm typecheck` to ensure there are no type errors.
-- Run `pnpm build` to verify the project builds.
+- Run `pnpm lint:fix`. CI runs `pnpm lint:check`.
+- Run `pnpm test`.
+- Run `pnpm build` (covers registry, theme, and typecheck). If you did not touch registry or theme sources, `pnpm typecheck` is enough.
+- If you changed registry source or `registry/manifest`, run `pnpm registry:build` and commit `public/r` so the drift check passes. Vercel regenerates JSON on deploy regardless.
+- If you changed `lib/theme/catalog.ts` or `scripts/build-themes.mts`, run `pnpm theme:build` and commit `styles/themes.css` so the theme drift check passes. Vercel regenerates the CSS on deploy regardless.
+- Do not hand-edit `public/r/*.json` or `styles/themes.css`.
 
-## Project Structure
+## Layout
 
-- **`registry/react/components/`** — Component implementations
-- **`registry/manifest/`** — Component metadata (dependencies, etc.)
-- **`registry/react/examples/`** — Usage examples shown in docs
-- **`content/docs/`** — MDX documentation
-- **`public/r/`** — Built registry output (generated)
+- `registry/react/components/`: component implementations
+- `registry/manifest/`: build metadata (`registryDependencies` use full registry JSON URLs)
+- `registry/react/examples/<name>/example-*.tsx`: usage examples shown in docs
+- `content/docs/{components,ai-components,helpers,utilities,hooks}/`: MDX docs
+- `public/r/`: built registry JSON (generated)
+- `test/`: helper tests mirroring source (`lib/foo.ts` → `test/lib/foo.test.ts`)
+- `app/(llms)/`, `lib/llms.ts`: LLM-oriented surfaces
 
-## Component Guidelines
+## Changing components
 
-- Components wrap Ark UI primitives with Tailwind styling.
-- Use `cn()` from `@/lib/utils` for class merging.
-- Use `tailwind-variants` for variant-based styling.
-- Add `data-slot` on component wrappers.
+Typical path for a registry item:
 
-## Pull Requests
+1. Implement or edit `registry/react/components/<name>.tsx`
+2. Update `registry/manifest/<name>.ts`
+3. Add or update `registry/react/examples/<name>/example-*.tsx`
+4. Document in `content/docs/.../<name>.mdx`
+5. Run `pnpm registry:build` and commit `public/r`
 
-1. Open an issue or discuss the change first if it's substantial.
-2. Fork, create a branch, and make your changes.
-3. Ensure lint and build pass.
-4. Submit a PR with a clear description of the change.
+Style and conventions: [CODE_STYLE.md](CODE_STYLE.md). Shark composition (Ark patterns, forms, collections): [skills/shark-ui/SKILL.md](skills/shark-ui/SKILL.md).
+
+## Pull requests
+
+Open an issue first for substantial changes. Use a focused branch and describe what changed and why. Checklist above before opening the PR.
 
 ## License
 

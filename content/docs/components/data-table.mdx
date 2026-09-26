@@ -1,0 +1,247 @@
+---
+title: Data Table
+description: Data table built with TanStack Table.
+seo:
+  description: Data table with sorting, selection, and composition.
+---
+
+import manifest from "@/registry/manifest/data-table";
+
+<ComponentPreview componentName="data-table" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/data-table
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>This component depends on [Button](/docs/components/button), [Menu](/docs/components/menu), [Native Select](/docs/components/native-select), and [Table](/docs/components/table).</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/data-table.tsx" src="/data-table.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+DataTablePagination
+├── DataTablePaginationSelectedCount
+└── DataTablePaginationControls
+    ├── DataTablePaginationRowsPerPage
+    ├── DataTablePaginationPageInfo
+    └── DataTablePaginationNavigation
+```
+
+## Usage
+
+```tsx
+import { createColumnHelper } from "@tanstack/react-table";
+import {
+  DataTable,
+  DataTableColumnHeader,
+  type DataTableFeatures,
+} from "@/components/ui/data-table";
+import { FormatNumber } from "@/components/ui/format";
+
+type Payment = {
+  amount: number;
+  email: string;
+  id: string;
+  status: "pending" | "processing" | "success" | "failed";
+};
+
+const columnHelper = createColumnHelper<DataTableFeatures, Payment>();
+
+const columns = columnHelper.columns([
+  columnHelper.accessor("status", {
+    header: "Status",
+  }),
+  columnHelper.accessor("email", {
+    header: "Email",
+  }),
+  columnHelper.accessor("amount", {
+    cell: ({ getValue }) => (
+      <FormatNumber currency="USD" style="currency" value={getValue()} />
+    ),
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Amount" />
+    ),
+  }),
+]);
+
+export function PaymentsTable({ data }: { data: Payment[] }) {
+  return (
+    <DataTable
+      caption="Recent payments"
+      columns={columns}
+      data={data}
+    />
+  );
+}
+```
+
+Compose pagination parts and omit what you do not need:
+
+```tsx
+import {
+  DataTablePagination,
+  DataTablePaginationControls,
+  DataTablePaginationNavigation,
+  DataTablePaginationPageInfo,
+  DataTablePaginationRowsPerPage,
+  DataTablePaginationSelectedCount,
+} from "@/components/ui/data-table";
+```
+
+```tsx
+<DataTablePagination table={table}>
+  <DataTablePaginationSelectedCount />
+  <DataTablePaginationControls>
+    <DataTablePaginationRowsPerPage />
+    <DataTablePaginationPageInfo />
+    <DataTablePaginationNavigation />
+  </DataTablePaginationControls>
+</DataTablePagination>
+```
+
+## Examples
+
+### Basic
+
+<ComponentPreview componentName="data-table" fileName="example-basic" />
+
+### Sortable columns
+
+`DataTableColumnHeader` for sort and hide.
+
+<ComponentPreview componentName="data-table" fileName="example-sortable" />
+
+### Pagination
+
+`useTable` with composed `DataTablePagination` parts.
+
+<ComponentPreview
+  componentName="data-table"
+  fileName="example-pagination"
+  autoHeight
+/>
+
+### Manual pagination
+
+Omit `DataTablePaginationSelectedCount` when the table has no row selection.
+
+<ComponentPreview
+  componentName="data-table"
+  fileName="example-manual-pagination"
+  autoHeight
+/>
+
+### Global filter
+
+`globalFilteringFeature` across all columns.
+
+<ComponentPreview componentName="data-table" fileName="example-global-filter" />
+
+### Expandable rows
+
+`rowExpandingFeature` with a detail panel per row.
+
+<ComponentPreview componentName="data-table" fileName="example-expandable" autoHeight />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="data-table" autoHeight />
+
+## API Reference
+
+### DataTable
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `columns` | `ColumnDef<DataTableFeatures, TData>[]` | `-` |
+| `data` | `TData[]` | `-` |
+| `caption` | `ReactNode` | `-` |
+| `emptyMessage` | `ReactNode` | `"No results."` |
+| `tableOptions` | `Omit<TableOptions<DataTableFeatures, TData>, "columns" \| "data" \| "features">` | `-` |
+| `className` | `string` | `-` |
+
+### DataTableColumnHeader
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `column` | `Column<DataTableFeatures, TData, TValue>` | `-` |
+| `title` | `string` | `-` |
+| `className` | `string` | `-` |
+
+### DataTablePagination
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `table` | `ReactTable<DataTableFeatures, TData>` | `-` |
+| `className` | `string` | `-` |
+
+### DataTablePaginationSelectedCount
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DataTablePaginationControls
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DataTablePaginationRowsPerPage
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DataTablePaginationPageInfo
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DataTablePaginationNavigation
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DataTableViewOptions
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `table` | `ReactTable<DataTableFeatures, TData>` | `-` |
+| `className` | `string` | `-` |

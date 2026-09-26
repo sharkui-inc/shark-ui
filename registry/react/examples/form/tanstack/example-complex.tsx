@@ -38,47 +38,26 @@ import {
 import { Switch } from "@/registry/react/components/switch";
 import { toast } from "@/registry/react/components/toast";
 
-const formSchema = z.object({
-  plan: z.enum(["basic", "pro"], {
-    message: "Please select a subscription plan.",
-  }),
-  billingPeriod: z
-    .array(z.string())
-    .min(1, "Please select a billing period.")
-    .refine((val) => val[0] !== "", "Please select a billing period."),
-  addons: z
-    .array(z.string())
-    .min(1, "Please select at least one add-on.")
-    .max(3, "You can select up to 3 add-ons.")
-    .refine(
-      (value) => value.every((addon) => addons.some((a) => a.id === addon)),
-      {
-        message: "You selected an invalid add-on.",
-      }
-    ),
-  emailNotifications: z.boolean(),
-});
-
 const Example = () => {
   const form = useForm({
     defaultValues: {
-      plan: "basic" as "basic" | "pro",
-      billingPeriod: [""],
       addons: [] as string[],
+      billingPeriod: [""],
       emailNotifications: false,
+      plan: "basic" as "basic" | "pro",
     },
-    validators: { onSubmit: formSchema },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "rhf-complex-submitted",
-        title: "Preferences saved",
         description: (
           <pre className="mt-2">
             <code>{JSON.stringify(value, null, 2)}</code>
           </pre>
         ),
+        id: "rhf-complex-submitted",
+        title: "Preferences saved",
       });
     },
+    validators: { onSubmit: formSchema },
   });
 
   return (
@@ -263,6 +242,27 @@ const Example = () => {
   );
 };
 
+const formSchema = z.object({
+  addons: z
+    .array(z.string())
+    .min(1, "Please select at least one add-on.")
+    .max(3, "You can select up to 3 add-ons.")
+    .refine(
+      (value) => value.every((addon) => addons.some((a) => a.id === addon)),
+      {
+        message: "You selected an invalid add-on.",
+      }
+    ),
+  billingPeriod: z
+    .array(z.string())
+    .min(1, "Please select a billing period.")
+    .refine((val) => val[0] !== "", "Please select a billing period."),
+  emailNotifications: z.boolean(),
+  plan: z.enum(["basic", "pro"], {
+    message: "Please select a subscription plan.",
+  }),
+});
+
 const collection = createListCollection({
   items: [
     { label: "Monthly", value: "monthly" },
@@ -272,19 +272,19 @@ const collection = createListCollection({
 
 const addons = [
   {
+    description: "Advanced analytics and reporting",
     id: "analytics",
     title: "Analytics",
-    description: "Advanced analytics and reporting",
   },
   {
+    description: "Automated daily backups",
     id: "backup",
     title: "Backup",
-    description: "Automated daily backups",
   },
   {
+    description: "24/7 premium customer support",
     id: "support",
     title: "Priority Support",
-    description: "24/7 premium customer support",
   },
 ] as const;
 

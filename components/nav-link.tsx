@@ -2,16 +2,22 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type React from "react";
 import { cn } from "@/lib/utils";
 
-interface NavLinkProps extends React.ComponentProps<typeof Link> {}
+interface NavLinkProps extends React.ComponentProps<typeof Link> {
+  /**
+   * Controlled active state. When omitted, matches the pathname exactly.
+   */
+  active?: boolean;
+}
 
 export const NavLink = (props: NavLinkProps) => {
-  const { href, className, prefetch = false, ...rest } = props;
+  const { href, className, prefetch = false, active, ...rest } = props;
 
   const pathname = usePathname();
 
-  const isActive = pathname === href;
+  const isActive = active ?? pathname === href;
 
   return (
     <Link

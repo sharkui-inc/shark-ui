@@ -5,6 +5,8 @@ links:
   doc: https://ark-ui.com/docs/utilities/swap
 ---
 
+import manifest from "@/registry/manifest/swap";
+
 <ComponentPreview componentName="swap" />
 
 ## Installation
@@ -26,16 +28,14 @@ npx shadcn@latest add @shark/swap
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Add the following keyframes to your `globals.css` for the flip variant:</Step>
+<Step>Add the flip animation tokens and keyframes to your CSS entry:</Step>
 
-```css title="globals.css"
+```css
 @theme inline {
-  --animate-flip-in: flip-in 0.2s ease-out;
-  --animate-flip-out: flip-out 0.2s ease-out;
+  --animate-flip-in: flip-in 400ms ease;
+  --animate-flip-out: flip-out 200ms ease;
 
   @keyframes flip-in {
     from {
@@ -70,21 +70,32 @@ npm install @ark-ui/react tailwind-variants
 ## Usage
 
 ```tsx
-import { 
-  Swap, 
-  SwapIndicator
-} from "@/registry/react/components/swap";
+import { MoonIcon, SunIcon } from "lucide-react";
+import React from "react";
+import { Button } from "@/registry/react/components/button";
+import { Swap } from "@/registry/react/components/swap";
 ```
 
 ```tsx
-<Swap>
-  <SwapIndicator type="on">
-    <MoonIcon />
-  </SwapIndicator>
-  <SwapIndicator type="off">
-    <SunIcon />
-  </SwapIndicator>
-</Swap>
+<Swap
+  off={<SunIcon aria-hidden="true" />}
+  on={<MoonIcon aria-hidden="true" />}
+  swap={condition}
+/>
+```
+
+## Custom animations
+
+```tsx
+<Swap
+  indicatorClassName={cn(
+    "data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom-1 data-[state=open]:duration-150 data-[state=open]:ease-out",
+    "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-1 data-[state=closed]:duration-150 data-[state=closed]:ease-out",
+  )}
+  off={<SunIcon aria-hidden="true" />}
+  on={<MoonIcon aria-hidden="true" />}
+  swap={swap}
+/>
 ```
 
 ## Examples
@@ -116,19 +127,13 @@ import {
 | Prop | Type | Default |
 | --- | --- | --- |
 | `variant` | `"fade" \| "scale" \| "flip" \| "rotate" \| "blur"` | `"fade"` |
-| `swap` | `boolean` | `-` |
+| `swap` | `boolean` | `false` |
+| `on` | `ReactNode` | `-` |
+| `off` | `ReactNode` | `-` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
 | `className` | `string` | `-` |
-| `asChild` | `boolean` | `-` |
-
-### SwapIndicator
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `type` | `'on' \| 'off'` | **required** |
-| `className` | `string` | `-` |
-| `asChild` | `boolean` | `-` |
+| `indicatorClassName` | `string` | `-` |
 
 ---
 

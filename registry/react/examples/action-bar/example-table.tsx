@@ -77,7 +77,10 @@ const Example = () => {
 
   return (
     <div className="w-full max-w-2xl rounded-lg border">
-      <ActionBar onOpenChange={(open) => !open && handleClose()} open={isOpen}>
+      <ActionBar
+        onOpenChange={({ open }) => !open && handleClose()}
+        open={isOpen}
+      >
         <Table>
           <TableCaption className="sr-only">
             Orders with checkbox selection and action bar.
@@ -137,17 +140,17 @@ const Example = () => {
           <ActionBarSeparator />
           <ActionBarBody>
             <Button variant="ghost">
-              <SendIcon />
+              <SendIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Send</span>
             </Button>
             <Button variant="ghost">
-              <PencilIcon />
+              <PencilIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Edit</span>
             </Button>
             <Menu positioning={{ placement: "top" }}>
               <MenuTrigger asChild>
                 <Button variant="ghost">
-                  <EllipsisIcon />
+                  <EllipsisIcon data-icon="inline-start" />
                   <span className="max-sm:sr-only">More</span>
                 </Button>
               </MenuTrigger>
@@ -166,7 +169,7 @@ const Example = () => {
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button variant="destructive">
-                  <Trash2Icon />
+                  <Trash2Icon data-icon="inline-start" />
                   <span className="max-sm:sr-only">Delete</span>
                 </Button>
               </AlertDialogTrigger>
@@ -178,15 +181,15 @@ const Example = () => {
                 <AlertDialogBody>
                   <ul>
                     {selectedIds.map((id) => {
-                      const order = orders.find((order) => order.id === id);
+                      const orderItem = orders.find((order) => order.id === id);
 
-                      if (!order) {
+                      if (!orderItem) {
                         return null;
                       }
 
                       return (
                         <li className="py-1 text-sm" key={id}>
-                          {order.id} - {order.name}
+                          {orderItem.id} - {orderItem.name}
                         </li>
                       );
                     })}
@@ -219,39 +222,39 @@ export default Example;
 
 const orders = [
   {
+    amount: "245,12 $",
     id: "SO-01",
     name: "Macbook Pro 16",
     status: "progress",
-    amount: "245,12 $",
   },
   {
+    amount: "122,18 $",
     id: "SO-02",
     name: "Apple Watch Series 9",
     status: "transit",
-    amount: "122,18 $",
   },
   {
+    amount: "89,50 $",
     id: "SO-03",
     name: "AirPods Max",
     status: "pending",
-    amount: "89,50 $",
   },
   {
+    amount: "310,00 $",
     id: "SO-04",
     name: "iPad Pro 13",
     status: "pending",
-    amount: "310,00 $",
   },
   {
+    amount: "156,75 $",
     id: "SO-05",
     name: "iPhone 15 Pro Max",
     status: "transit",
-    amount: "156,75 $",
   },
 ];
 
 const statusVariants: Record<string, BadgeVariant> = {
-  transit: "success",
   pending: "warning",
   progress: "info",
+  transit: "success",
 };

@@ -7,6 +7,7 @@ import {
   Listbox,
   ListboxContent,
   ListboxItem,
+  ListboxItemDescription,
   ListboxItemGroup,
   ListboxItemText,
   ListboxShortcut,
@@ -24,26 +25,18 @@ const Example = () => (
       <ListboxContent>
         <ListboxItemGroup heading="Actions">
           <ListboxItem item={collection.items[0]}>
-            <div className="flex h-8 items-start justify-start">
-              <SquarePlusIcon />
-            </div>
-            <div className="flex min-w-0 flex-1 flex-col">
+            <SquarePlusIcon aria-hidden />
+            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
               <ListboxItemText>New file</ListboxItemText>
-              <span className="text-muted-foreground text-xs">
-                Create a new file
-              </span>
+              <ListboxItemDescription>Create a new file</ListboxItemDescription>
             </div>
             <ListboxShortcut>⌘N</ListboxShortcut>
           </ListboxItem>
           <ListboxItem item={collection.items[1]}>
-            <div className="flex h-8 items-start justify-start">
-              <PencilIcon />
-            </div>
-            <div className="flex min-w-0 flex-1 flex-col">
+            <PencilIcon aria-hidden />
+            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
               <ListboxItemText>Edit file</ListboxItemText>
-              <span className="text-muted-foreground text-xs">
-                Make changes
-              </span>
+              <ListboxItemDescription>Make changes</ListboxItemDescription>
             </div>
             <ListboxShortcut>⌘E</ListboxShortcut>
           </ListboxItem>
@@ -51,14 +44,10 @@ const Example = () => (
         <Separator />
         <ListboxItemGroup heading="Danger zone">
           <ListboxItem item={collection.items[2]} variant="destructive">
-            <div className="flex h-8 items-start justify-start">
-              <Trash2Icon />
-            </div>
-            <div className="flex min-w-0 flex-1 flex-col">
+            <Trash2Icon aria-hidden />
+            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
               <ListboxItemText>Delete file</ListboxItemText>
-              <span className="text-muted-foreground text-xs">
-                Move to trash
-              </span>
+              <ListboxItemDescription>Move to trash</ListboxItemDescription>
             </div>
             <ListboxShortcut>⌘D</ListboxShortcut>
           </ListboxItem>
@@ -70,12 +59,12 @@ const Example = () => (
 
 const collection = createListCollection({
   items: [
-    { label: "New file", value: "new-file", section: "actions" },
-    { label: "Edit file", value: "edit-file", section: "actions" },
+    { label: "New file", section: "actions", value: "new-file" },
+    { label: "Edit file", section: "actions", value: "edit-file" },
     {
       label: "Delete file",
-      value: "delete-file",
       section: "danger",
+      value: "delete-file",
     },
   ],
 });

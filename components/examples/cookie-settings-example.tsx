@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,

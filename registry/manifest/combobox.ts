@@ -1,17 +1,19 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "tailwind-variants", "lucide-react"];
 
 const manifest: RegistryItemType = {
-  name: "combobox",
-  type: "registry:ui",
   dependencies,
+  name: "combobox",
   registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/input.json"),
-    absoluteUrl("/r/input-group.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/input.json"),
+    registryUrl("/r/input-group.json"),
+    registryUrl("/r/menu.json"),
+    registryUrl("/r/scroll-area.json"),
   ],
+  type: "registry:ui",
 };
 
 export default manifest;

@@ -1,0 +1,145 @@
+---
+title: Message Scroller
+description: Scroll conversations and jump to either end.
+seo:
+  description: Scroll conversations with controls to jump to either end.
+---
+
+import manifest from "@/registry/manifest/message-scroller";
+
+<ComponentPreview componentName="message-scroller" autoHeight />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/message-scroller
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>This component depends on [Button](/docs/components/button) and [Scroll Area](/docs/components/scroll-area). Install them first if you haven't already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/message-scroller.tsx" src="/message-scroller.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+MessageScroller
+├── MessageScrollerViewport
+│   └── MessageScrollerContent
+│       └── MessageScrollerItem
+└── MessageScrollerButton
+```
+
+## Usage
+
+```tsx
+import {
+  MessageScroller,
+  MessageScrollerButton,
+  MessageScrollerContent,
+  MessageScrollerItem,
+  MessageScrollerViewport,
+} from "@/components/ui/message-scroller";
+```
+
+```tsx
+<MessageScroller className="h-96">
+  <MessageScrollerViewport>
+    <MessageScrollerContent>
+      <MessageScrollerItem />
+    </MessageScrollerContent>
+  </MessageScrollerViewport>
+  <MessageScrollerButton />
+</MessageScroller>
+```
+
+## Jump controls
+
+Use `direction` to jump to the `start` or `end` of the thread.
+
+<ComponentPreview componentName="message-scroller" fileName="example-jump" autoHeight />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="message-scroller" autoHeight />
+
+## API Reference
+
+### MessageScroller
+
+Root scroll area for a transcript.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--fade-size` | `string` | `1.5rem` |
+
+### MessageScrollerViewport
+
+Scrollable viewport with edge fade masks.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### MessageScrollerContent
+
+Column of messages inside the viewport.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### MessageScrollerItem
+
+A single message row.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### MessageScrollerButton
+
+Jump control.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `direction` | `"start" \| "end"` | `"end"` |
+| `variant` | `"default" \| "outline" \| "secondary" \| "ghost" \| "link" \| "destructive"` | `"secondary"` |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon-xs" \| "icon-sm" \| "icon-md" \| "icon-lg" \| "icon-xl"` | `"icon-sm"` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |

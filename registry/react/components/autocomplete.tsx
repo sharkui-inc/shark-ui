@@ -1,6 +1,10 @@
 "use client";
 
-import type { Combobox as ArkCombobox } from "@ark-ui/react/combobox";
+import {
+  Combobox as ArkCombobox,
+  useCombobox as useArkCombobox,
+  useComboboxContext as useArkComboboxContext,
+} from "@ark-ui/react/combobox";
 import type React from "react";
 import {
   Combobox,
@@ -17,14 +21,23 @@ import {
 } from "@/registry/react/components/combobox";
 import { Separator } from "@/registry/react/components/separator";
 
-export const Autocomplete: ArkCombobox.RootComponent = (props) => (
-  <Combobox
-    allowCustomValue
-    data-slot="autocomplete"
-    inputBehavior="autocomplete"
-    {...props}
-  />
-);
+export const useAutocomplete = useArkCombobox;
+export const useAutocompleteContext = useArkComboboxContext;
+export const AutocompleteRootProvider = ArkCombobox.RootProvider;
+
+export const Autocomplete: ArkCombobox.RootComponent = (props) => {
+  const { openOnClick = false, ...rest } = props;
+
+  return (
+    <Combobox
+      data-slot="autocomplete"
+      openOnClick={openOnClick}
+      {...rest}
+      allowCustomValue
+      inputBehavior="autocomplete"
+    />
+  );
+};
 
 export const AutocompleteControl = (
   props: React.ComponentProps<typeof ComboboxControl>

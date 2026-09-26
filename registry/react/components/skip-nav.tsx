@@ -21,18 +21,18 @@ export const SkipNavLink = (props: SkipNavLinkProps) => {
   return (
     <ark.a
       className={cn(
-        "focus:fixed focus:inset-s-4 focus:top-4 focus:z-9999",
+        "border border-transparent focus:fixed focus:inset-s-4 focus:top-4 focus:z-9999",
         "focus:px-4 focus:py-2",
         "focus:bg-primary",
         "focus:text-primary-foreground focus:text-sm",
         "sr-only focus:not-sr-only",
         "focus:rounded-lg",
-        "focus:outline-none focus:ring-2 focus:ring-ring",
+        "focus:border-background focus:outline-hidden focus:ring-2 focus:ring-ring/24",
         className
       )}
       data-slot="skip-nav-link"
-      href={`#${id}`}
       {...rest}
+      href={`#${id}`}
     >
       {children ?? "Skip to content"}
     </ark.a>
@@ -54,11 +54,11 @@ export const SkipNavContent = (props: SkipNavContentProps) => {
 
   return (
     <ark.div
-      className={cn("outline-none", className)}
+      className={cn("outline-hidden", className)}
       data-slot="skip-nav-content"
       id={id}
-      tabIndex={-1}
       {...rest}
+      tabIndex={-1}
     />
   );
 };

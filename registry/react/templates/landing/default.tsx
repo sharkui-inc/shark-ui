@@ -4,8 +4,6 @@ import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata({
   title: "Landing Template",
-  description:
-    "Marketing landing page with hero, features, pricing, and CTA sections. Optimized for conversions.",
   url: "/templates/landing",
 });
 
@@ -22,41 +20,41 @@ import { Separator } from "@/registry/react/components/separator";
 
 const FEATURES = [
   {
-    title: "Fast",
     description:
       "Built for performance. Ship quickly with pre-optimized components.",
+    title: "Fast",
   },
   {
-    title: "Accessible",
     description:
       "Follows WCAG guidelines. Keyboard navigable and screen-reader friendly.",
+    title: "Accessible",
   },
   {
-    title: "Customizable",
     description:
       "Tailwind-based styling. Themes and tokens for consistent design.",
+    title: "Customizable",
   },
 ];
 
 const PRICING = [
   {
-    name: "Starter",
-    price: "$0",
     description: "For side projects and experiments",
     features: ["5 projects", "Basic components", "Community support"],
+    name: "Starter",
+    price: "$0",
   },
   {
-    name: "Pro",
-    price: "$29",
     description: "For teams and professionals",
     features: ["Unlimited projects", "All components", "Priority support"],
+    name: "Pro",
+    price: "$29",
   },
 ];
 
 const LandingTemplate = () => (
   <div className="flex min-h-svh flex-col">
     <header className="container flex h-16 items-center justify-between">
-      <span className="font-semibold">Acme</span>
+      <span className="font-semibold">Onda</span>
       <nav className="flex gap-4">
         <Link
           className="text-muted-foreground text-sm hover:text-foreground"
@@ -89,7 +87,7 @@ const LandingTemplate = () => (
           <Button asChild size="lg">
             <Link href="#">
               Get Started
-              <ArrowRightIcon aria-hidden className="size-4" />
+              <ArrowRightIcon aria-hidden />
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline">
@@ -172,7 +170,7 @@ const LandingTemplate = () => (
     <footer className="border-t">
       <div className="container flex h-16 items-center justify-between">
         <span className="text-muted-foreground text-sm">
-          © {new Date().getFullYear()} Acme. All rights reserved.
+          © {new Date().getFullYear()} Onda. All rights reserved.
         </span>
       </div>
     </footer>

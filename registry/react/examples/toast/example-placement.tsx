@@ -4,36 +4,6 @@ import { createToaster } from "@ark-ui/react/toast";
 import { Button } from "@/registry/react/components/button";
 import { Toaster } from "@/registry/react/components/toast";
 
-const topStartToaster = createToaster({
-  placement: "top-start",
-  overlap: true,
-});
-
-const topToaster = createToaster({
-  placement: "top",
-  overlap: true,
-});
-
-const topEndToaster = createToaster({
-  placement: "top-end",
-  overlap: true,
-});
-
-const bottomStartToaster = createToaster({
-  placement: "bottom-start",
-  overlap: true,
-});
-
-const bottomToaster = createToaster({
-  placement: "bottom",
-  overlap: true,
-});
-
-const bottomEndToaster = createToaster({
-  placement: "bottom-end",
-  overlap: true,
-});
-
 const Example = () => (
   <>
     <Toaster toaster={topStartToaster} />
@@ -48,8 +18,8 @@ const Example = () => (
         <Button
           onClick={() =>
             topStartToaster.create({
-              title: "Top start",
               description: "placement: top-start",
+              title: "Top start",
             })
           }
           variant="outline"
@@ -59,8 +29,8 @@ const Example = () => (
         <Button
           onClick={() =>
             topToaster.create({
-              title: "Top end",
               description: "placement: top-end",
+              title: "Top end",
             })
           }
           variant="outline"
@@ -70,8 +40,8 @@ const Example = () => (
         <Button
           onClick={() =>
             topEndToaster.create({
-              title: "Top end",
               description: "placement: top-end",
+              title: "Top end",
             })
           }
           variant="outline"
@@ -84,8 +54,8 @@ const Example = () => (
         <Button
           onClick={() =>
             bottomStartToaster.create({
-              title: "Bottom start",
               description: "placement: bottom-start",
+              title: "Bottom start",
             })
           }
           variant="outline"
@@ -95,8 +65,8 @@ const Example = () => (
         <Button
           onClick={() =>
             bottomToaster.create({
-              title: "Bottom center",
               description: "placement: bottom-center",
+              title: "Bottom center",
             })
           }
           variant="outline"
@@ -106,8 +76,8 @@ const Example = () => (
         <Button
           onClick={() =>
             bottomEndToaster.create({
-              title: "Bottom end",
               description: "placement: bottom-end",
+              title: "Bottom end",
             })
           }
           variant="outline"
@@ -118,5 +88,35 @@ const Example = () => (
     </div>
   </>
 );
+
+const topStartToaster = createToaster({
+  overlap: true,
+  placement: "top-start",
+});
+
+const topToaster = createToaster({
+  overlap: true,
+  placement: "top",
+});
+
+const topEndToaster = createToaster({
+  overlap: true,
+  placement: "top-end",
+});
+
+const bottomStartToaster = createToaster({
+  overlap: true,
+  placement: "bottom-start",
+});
+
+const bottomToaster = createToaster({
+  overlap: true,
+  placement: "bottom",
+});
+
+const bottomEndToaster = createToaster({
+  overlap: true,
+  placement: "bottom-end",
+});
 
 export default Example;

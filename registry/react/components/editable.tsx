@@ -2,7 +2,8 @@
 
 import {
   Editable as ArkEditable,
-  useEditableContext,
+  useEditable as useArkEditable,
+  useEditableContext as useArkEditableContext,
 } from "@ark-ui/react/editable";
 import type React from "react";
 import { cn } from "@/lib/utils";
@@ -11,7 +12,9 @@ import {
   buttonVariants,
 } from "@/registry/react/components/button";
 
-export const useEditable = useEditableContext;
+export const useEditable = useArkEditable;
+export const useEditableContext = useArkEditableContext;
+export const EditableRootProvider = ArkEditable.RootProvider;
 
 export interface EditableProps
   extends React.ComponentProps<typeof ArkEditable.Root> {
@@ -84,13 +87,15 @@ export const EditablePreview = (props: EditablePreviewProps) => {
   return (
     <ArkEditable.Preview
       className={cn(
-        buttonVariants({ variant, size, clickEffect: false }),
+        buttonVariants({ clickEffect: false, size, variant }),
         "w-full justify-start",
         "px-3",
         "whitespace-pre-wrap font-normal text-base sm:text-sm",
         "dark:hover:bg-input/32",
         "data-placeholder-shown:text-muted-foreground",
+        "in-[[data-slot=editable-area]:has(textarea)]:h-auto",
         "in-[[data-slot=editable-area]:has(textarea)]:items-start",
+        "in-[[data-slot=editable-area]:has(textarea)]:py-2",
         className
       )}
       data-slot="editable-preview"

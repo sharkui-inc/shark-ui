@@ -1,7 +1,11 @@
 ---
 title: Prose
-description: Typography styles for HTML content.
+description: Typography for HTML content.
+seo:
+  description: Typography defaults for long-form HTML.
 ---
+
+import manifest from "@/registry/manifest/prose";
 
 <ComponentPreview componentName="prose" />
 
@@ -28,11 +32,9 @@ npx shadcn@latest add @shark/prose
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following CSS rules into your `globals.css`</Step>
+<Step>Import the following rules into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
@@ -140,8 +142,8 @@ npm install @ark-ui/react
 
 .prose blockquote:not(.not-prose blockquote) {
   margin-top: calc(var(--spacing) * 6);
-  border-left: 2px solid var(--color-border);
-  padding-left: calc(var(--spacing) * 6);
+  border-inline-start: 2px solid var(--color-border);
+  padding-inline-start: calc(var(--spacing) * 6);
   font-style: italic;
 }
 
@@ -165,7 +167,7 @@ npm install @ark-ui/react
 .prose table:not(.not-prose table) th {
   border: 1px solid var(--color-border);
   padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
-  text-align: left;
+  text-align: start;
   font-weight: 700;
 }
 
@@ -189,7 +191,7 @@ npm install @ark-ui/react
 .prose table:not(.not-prose table) td {
   border: 1px solid var(--color-border);
   padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
-  text-align: left;
+  text-align: start;
 }
 
 .prose table:not(.not-prose table) td[align="center"] {
@@ -202,7 +204,7 @@ npm install @ark-ui/react
 
 .prose ul:not(.not-prose ul) {
   margin-top: calc(var(--spacing) * 6);
-  margin-left: calc(var(--spacing) * 6);
+  margin-inline-start: calc(var(--spacing) * 6);
   list-style: disc;
 }
 
@@ -218,7 +220,7 @@ npm install @ark-ui/react
 
 .prose ol:not(.not-prose ol) {
   margin-top: calc(var(--spacing) * 6);
-  margin-left: calc(var(--spacing) * 6);
+  margin-inline-start: calc(var(--spacing) * 6);
   list-style: decimal;
 }
 
@@ -258,7 +260,8 @@ npm install @ark-ui/react
 
 .prose img:not(.not-prose img),
 .prose picture:not(.not-prose picture),
-.prose video:not(.not-prose video) {
+.prose video:not(.not-prose video),
+.prose iframe:not(.not-prose iframe) {
   margin-top: calc(var(--spacing) * 6);
   margin-bottom: calc(var(--spacing) * 6);
 }
@@ -443,6 +446,12 @@ Use the `not-prose` class in a child to exclude it from prose styles. Useful whe
 
 <ComponentPreview componentName="prose" fileName="example-small" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="prose" autoHeight />
+
 ## API Reference
 
   ### Prose
@@ -453,3 +462,11 @@ Root wrapper for typography-styled content.
   | --- | --- | --- |
   | `className` | `string` | - |
   | `asChild` | `boolean` | `false` |
+### Prose
+
+Public Prose component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |

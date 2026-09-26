@@ -1,6 +1,6 @@
 import {
+  ArrowUpRight,
   DownloadIcon,
-  ExternalLinkIcon,
   HeartIcon,
   PlusIcon,
   SettingsIcon,
@@ -10,24 +10,24 @@ import { Button } from "@/registry/react/components/button";
 const Example = () => (
   <div className="flex flex-wrap gap-2">
     <Button>
-      <PlusIcon />
+      <PlusIcon aria-hidden data-icon="inline-start" />
       Add
     </Button>
     <Button variant="outline">
-      <SettingsIcon />
+      <SettingsIcon aria-hidden data-icon="inline-start" />
       Settings
     </Button>
     <Button variant="secondary">
-      <HeartIcon />
+      <HeartIcon aria-hidden data-icon="inline-start" />
       Favorite
     </Button>
     <Button variant="ghost">
-      <DownloadIcon />
+      <DownloadIcon aria-hidden data-icon="inline-start" />
       Download
     </Button>
     <Button variant="link">
       Visit website
-      <ExternalLinkIcon />
+      <ArrowUpRight aria-hidden data-icon="inline-end" />
     </Button>
   </div>
 );

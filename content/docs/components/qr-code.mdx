@@ -1,10 +1,14 @@
 ---
 title: QR Code
 description: Displays a QR code.
+seo:
+  description: Render QR codes for share and connect flows.
 links:
   doc: https://ark-ui.com/docs/components/qr-code
   api: https://ark-ui.com/docs/components/qr-code#api-reference
 ---
+
+import manifest from "@/registry/manifest/qr-code";
 
 <ComponentPreview componentName="qr-code" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/qr-code
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -75,6 +77,12 @@ import {
 </QrCode>
 ```
 
+## Controlled
+
+Control the encoded value with `value`.
+
+<ComponentPreview componentName="qr-code" fileName="example-controlled" />
+
 ## Size
 
 Override the size with the `--qr-code-size` CSS variable on `QrCode` 
@@ -87,28 +95,32 @@ For example, `--qr-code-size:6rem` for small, `--qr-code-size:10rem` for large
 
 ### With an overlay
 
-Use `QrCodeOverlay` to add an overlay in the center.
+Use `QrCodeOverlay` to place an image in the center.
 
 <ComponentPreview componentName="qr-code" fileName="example-overlay" />
 
 ### Error correction
 
-In cases where the link is too long or the logo overlay covers a significant area, the error correction level can be increased.
+Set `encoding.ecc`:
 
-Use the `encoding.ecc` property to set the error correction level:
-
-- **L:** Allows recovery of up to 7% data loss (default)
-- **M:** Allows recovery of up to 15% data loss
-- **Q:** Allows recovery of up to 25% data loss
-- **H:** Allows recovery of up to 30% data loss
+- **L:** up to 7% recovery
+- **M:** up to 15%
+- **Q:** up to 25%
+- **H:** up to 30%
 
 <ComponentPreview componentName="qr-code" fileName="example-error-correction" />
 
 ### Download
 
-Use `QrCodeDownload` with `fileName` and `mimeType` to let users download the QR code as an image.
+Use `QrCodeDownload` with `fileName` and `mimeType`.
 
 <ComponentPreview componentName="qr-code" fileName="example-download" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="qr-code" />
 
 ## API Reference
 
@@ -118,18 +130,18 @@ Root wrapper for the QR code and optional overlay/actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | - |
-| `defaultValue` | `string` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
-| `encoding` | `QrCodeGenerateOptions` | - |
-| `pixelSize` | `number` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `value` | `string` | `-` |
+| `defaultValue` | `string` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
+| `encoding` | `QrCodeGenerateOptions` | `{ ecc: "L" }` |
+| `pixelSize` | `number` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--qr-code-size` | `--spacing(32)` |
-| `--qr-code-overlay-size` | `calc(var(--qr-code-size)/4)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--qr-code-size` | `string` | `--spacing(32)` |
+| `--qr-code-overlay-size` | `string` | `calc(var(--qr-code-size)/4)` |
 
 ### QrCodeFrame
 
@@ -137,8 +149,8 @@ SVG containing the QR pattern. Scales with size.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### QrCodeOverlay
 
@@ -146,8 +158,8 @@ Optional center overlay on top of the QR pattern.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### QrCodeDownload
 
@@ -155,11 +167,19 @@ Downloads the QR code as an image file.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `fileName` | `string` | - |
-| `mimeType` | `DataUrlType` | - |
-| `quality` | `number` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `fileName` | `string` | `-` |
+| `mimeType` | `DataUrlType` | `-` |
+| `quality` | `number` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+
+### QrCodeRootProvider
+
+Provides a QrCode API created with `useQrCode` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseQrCodeReturn` | `required` |
 
 ---
 

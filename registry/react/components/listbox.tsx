@@ -1,16 +1,29 @@
 "use client";
 
+import { ark } from "@ark-ui/react/factory";
 import {
   Listbox as ArkListbox,
-  useListboxContext,
+  useListbox as useArkListbox,
+  useListboxContext as useArkListboxContext,
 } from "@ark-ui/react/listbox";
 import { CheckIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import { MenuShortcut } from "@/registry/react/components/menu";
+import { FieldLabel } from "@/registry/react/components/field";
+import { Input, inputItemVariants } from "@/registry/react/components/input";
+import {
+  MenuShortcut,
+  menuEmptyVariants,
+  menuGroupLabelVariants,
+  menuItemControlVariants,
+  menuItemDescriptionVariants,
+  menuItemIndicatorVariants,
+} from "@/registry/react/components/menu";
 
-export const useListbox = useListboxContext;
+export const useListbox = useArkListbox;
+export const useListboxContext = useArkListboxContext;
+export const ListboxRootProvider = ArkListbox.RootProvider;
 
 export const Listbox: ArkListbox.RootComponent = (props) => {
   const { className, ...rest } = props;
@@ -29,75 +42,119 @@ export const Listbox: ArkListbox.RootComponent = (props) => {
   );
 };
 
+export const ListboxLabel = (
+  props: React.ComponentProps<typeof ArkListbox.Label>
+) => {
+  const { children, ...rest } = props;
+
+  return (
+    <FieldLabel asChild>
+      <ArkListbox.Label data-slot="listbox-label" {...rest}>
+        {children}
+      </ArkListbox.Label>
+    </FieldLabel>
+  );
+};
+
+export const ListboxInput = (props: React.ComponentProps<typeof Input>) => (
+  <ArkListbox.Input asChild data-slot="listbox-input">
+    <Input {...props} />
+  </ArkListbox.Input>
+);
+
 export const ListboxContent = (
   props: React.ComponentProps<typeof ArkListbox.Content>
 ) => {
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ArkListbox.Content
       className={cn(
-        "w-full",
-        "flex flex-col gap-1",
+        "flex min-h-0 w-full min-w-0 flex-col *:shrink-0",
+        "p-1.5",
+        "overflow-y-auto overflow-x-hidden overscroll-y-contain",
+        "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20",
         "outline-hidden",
-        "overflow-hidden",
-        "data-[orientation=horizontal]:max-h-none data-[orientation=horizontal]:flex-row",
+        "data-[orientation=horizontal]:max-h-none data-[orientation=horizontal]:flex-row data-[orientation=horizontal]:overflow-x-auto data-[orientation=horizontal]:overflow-y-hidden data-[orientation=horizontal]:overscroll-x-contain",
         className
       )}
       data-slot="listbox-content"
       {...rest}
-    />
+    >
+      {children}
+    </ArkListbox.Content>
   );
 };
 
 const listboxItemVariants = tv({
   base: [
     "group/listbox-item",
-    "relative",
-    "flex items-center gap-2",
-    "px-2.5 py-2",
-    "rounded-xl",
-    "select-none text-sm",
+    menuItemControlVariants(),
+    inputItemVariants(),
     "cursor-pointer",
     "outline-hidden",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
-    "[&_svg:not([class*='size-'])]:size-3.5 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    "[&_svg:not([class*='text-'])]:text-muted-foreground",
   ],
+  defaultVariants: {
+    variant: "default",
+  },
   variants: {
     variant: {
       default: [
         "text-popover-foreground",
-        "data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground",
-        "hover:bg-accent hover:text-accent-foreground",
         "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
+        "hover:bg-accent hover:text-accent-foreground",
       ],
       destructive: [
         "text-destructive dark:text-destructive-foreground",
-        "hover:bg-destructive/10 dark:hover:bg-destructive-foreground/10",
-        "data-highlighted:bg-destructive/10 dark:data-highlighted:bg-destructive-foreground/10",
-        "**:[svg]:text-destructive! dark:**:[svg]:text-destructive-foreground!",
+        "hover:bg-destructive/8 dark:hover:bg-destructive-foreground/8",
+        "data-highlighted:bg-destructive/8 dark:data-highlighted:bg-destructive-foreground/8",
+        "**:[svg]:text-destructive dark:**:[svg]:text-destructive-foreground",
       ],
     },
-  },
-  defaultVariants: {
-    variant: "default",
   },
 });
 
 interface ListboxItemProps
   extends React.ComponentProps<typeof ArkListbox.Item>,
-    VariantProps<typeof listboxItemVariants> {}
+    VariantProps<typeof listboxItemVariants> {
+  /**
+   * Whether to show the selected item check.
+   *
+   * @default true
+   */
+  showIndicator?: boolean;
+}
 
 export const ListboxItem = (props: ListboxItemProps) => {
-  const { variant = "default", className, ...rest } = props;
+  const {
+    highlightOnHover = true,
+    showIndicator = true,
+    variant = "default",
+    className,
+    children,
+    ...rest
+  } = props;
+
+  const { item } = menuItemIndicatorVariants();
 
   return (
     <ArkListbox.Item
-      className={cn(listboxItemVariants({ variant }), className)}
+      className={cn(
+        listboxItemVariants({ variant }),
+        className,
+        showIndicator && item()
+      )}
       data-slot="listbox-item"
       data-variant={variant}
+      highlightOnHover={highlightOnHover}
       {...rest}
-    />
+    >
+      <span className="flex min-w-0 flex-1 items-start gap-2">{children}</span>
+
+      {showIndicator ? <ListboxItemIndicator /> : null}
+    </ArkListbox.Item>
   );
 };
 
@@ -108,13 +165,7 @@ export const ListboxItemText = (
 
   return (
     <ArkListbox.ItemText
-      className={cn(
-        "min-w-0",
-        "flex-1",
-        "text-ellipsis whitespace-nowrap",
-        "overflow-hidden",
-        className
-      )}
+      className={cn("min-h-lh min-w-0 flex-1", "whitespace-nowrap", className)}
       data-slot="listbox-item-text"
       {...rest}
     />
@@ -134,7 +185,7 @@ export const ListboxItemGroup = (props: ListboxItemGroupProps) => {
 
   return (
     <ArkListbox.ItemGroup
-      className={cn("flex flex-col gap-1", className)}
+      className={cn("flex flex-col", className)}
       data-slot="listbox-item-group"
       {...rest}
     >
@@ -148,14 +199,10 @@ export const ListboxItemGroupLabel = (
   props: React.ComponentProps<typeof ArkListbox.ItemGroupLabel>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <ArkListbox.ItemGroupLabel
-      className={cn(
-        "px-2.5 py-2",
-        "font-medium text-muted-foreground",
-        "pointer-events-none",
-        className
-      )}
+      className={cn(menuGroupLabelVariants(), className)}
       data-slot="listbox-item-group-label"
       {...rest}
     />
@@ -176,20 +223,29 @@ export const ListboxValueText = (
   );
 };
 
+export const ListboxItemDescription = (
+  props: React.ComponentProps<typeof ark.span>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.span
+      className={cn(menuItemDescriptionVariants(), className)}
+      data-slot="listbox-item-description"
+      {...rest}
+    />
+  );
+};
+
 export const ListboxItemIndicator = (
   props: React.ComponentProps<typeof ArkListbox.ItemIndicator>
 ) => {
   const { className, children, ...rest } = props;
+  const { indicator } = menuItemIndicatorVariants();
 
   return (
     <ArkListbox.ItemIndicator
-      className={cn(
-        "flex shrink-0 items-center justify-center",
-        "[&_svg]:text-primary!",
-        "zoom-in-95 fade-in-0 animate-in",
-        "motion-reduce:animate-none!",
-        className
-      )}
+      className={cn(indicator(), className)}
       data-slot="listbox-item-indicator"
       {...rest}
     >
@@ -201,18 +257,16 @@ export const ListboxItemIndicator = (
 export const ListboxEmpty = (
   props: React.ComponentProps<typeof ArkListbox.Empty>
 ) => {
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ArkListbox.Empty
-      className={cn(
-        "px-2 py-1.5",
-        "text-center text-muted-foreground text-sm",
-        className
-      )}
+      className={cn(menuEmptyVariants(), className)}
       data-slot="listbox-empty"
       {...rest}
-    />
+    >
+      {children ?? "No results found."}
+    </ArkListbox.Empty>
   );
 };
 

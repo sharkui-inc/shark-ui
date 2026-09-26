@@ -1,10 +1,14 @@
 ---
 title: Tabs
-description: A tabs for navigating between content.
+description: Switch between panels of content.
+seo:
+  description: Switch panels with tabs and keyboard support.
 links:
   doc: https://ark-ui.com/docs/components/tabs
   api: https://ark-ui.com/docs/components/tabs#api-reference
 ---
+
+import manifest from "@/registry/manifest/tabs";
 
 <ComponentPreview componentName="tabs" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/tabs
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -80,7 +82,7 @@ import {
 
 ## Controlled
 
-Use `value` and `onValueChange` to control the active tab programmatically.
+Use `value` and `onValueChange` to control the active tab.
 
 <ComponentPreview componentName="tabs" fileName="example-controlled" />
 
@@ -94,6 +96,11 @@ Use `value` and `onValueChange` to control the active tab programmatically.
 
 <ComponentPreview componentName="tabs" fileName="example-variant-underline" />
 
+## Pill
+
+The `pill` prop on `TabsList` creates fully rounded tabs. Only applies when `variant` is `"default"`.
+
+<ComponentPreview componentName="tabs" fileName="example-pill" />
 
 ## Orientation
 
@@ -128,6 +135,12 @@ Combine `orientation="vertical"` on `Tabs` with `variant="underline"` on `TabsLi
 
 <ComponentPreview componentName="tabs" fileName="example-with-icons" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="tabs" />
+
 ## API Reference
 
 ### Tabs
@@ -149,6 +162,7 @@ Container for tab triggers and the selection indicator.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `variant` | `"default" \| "underline"` | `"default"` |
+| `pill` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
 ### TabsTrigger
@@ -157,7 +171,7 @@ Button that selects a tab. Must have a `value` matching a `TabsContent` panel.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
+| `value` | `string` | `required` |
 | `disabled` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
@@ -167,8 +181,16 @@ Panel shown when its tab is selected. Must have a `value` matching a `TabsTrigge
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
+| `value` | `string` | `required` |
 | `className` | `string` | `-` |
+
+### TabsRootProvider
+
+Provides a Tabs API created with `useTabs` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseTabsReturn` | `required` |
 
 ---
 

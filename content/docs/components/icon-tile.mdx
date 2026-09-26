@@ -1,0 +1,138 @@
+---
+title: Icon Tile
+description: Tile for icons, initials, or short text.
+seo:
+  description: Square tile for icons, initials, or short labels.
+---
+
+import manifest from "@/registry/manifest/icon-tile";
+
+<ComponentPreview componentName="icon-tile" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/icon-tile
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/icon-tile.tsx" src="/icon-tile.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { FolderIcon } from "lucide-react";
+import { IconTile } from "@/components/ui/icon-tile";
+```
+
+```tsx
+<IconTile aria-hidden="true">
+  <FolderIcon />
+</IconTile>
+```
+
+## Variants
+
+### Default
+
+<ComponentPreview componentName="icon-tile" fileName="example-variant-default" />
+
+### Secondary
+
+<ComponentPreview componentName="icon-tile" fileName="example-variant-secondary" />
+
+### Outline
+
+<ComponentPreview componentName="icon-tile" fileName="example-variant-outline" />
+
+## Sizes
+
+Use the `size` prop to set the tile size.
+
+### Extra Small
+
+<ComponentPreview componentName="icon-tile" fileName="example-size-xs" />
+
+### Small
+
+<ComponentPreview componentName="icon-tile" fileName="example-size-sm" />
+
+### Medium
+
+<ComponentPreview componentName="icon-tile" fileName="example-size-md" />
+
+### Large
+
+<ComponentPreview componentName="icon-tile" fileName="example-size-lg" />
+
+### Extra Large
+
+<ComponentPreview componentName="icon-tile" fileName="example-size-xl" />
+
+## Fill
+
+Use `fill` to create a circular tile.
+
+<ComponentPreview componentName="icon-tile" fileName="example-circular" />
+
+## Examples
+
+### Custom size
+
+Use `size-*` to set the sizee.
+
+<ComponentPreview componentName="icon-tile" fileName="example-custom-size" />
+
+### Custom color
+
+Use `className` to apply a custom foreground, border, and surface color.
+
+<ComponentPreview componentName="icon-tile" fileName="example-custom-color" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="icon-tile" />
+
+## API Reference
+
+### IconTile
+
+A single surface that centers an icon, initials, or short text. 
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "outline" \| "primary"` | `"default"` |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` |
+| `fill` | `boolean` | `false` |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |

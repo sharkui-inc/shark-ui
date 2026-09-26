@@ -2,15 +2,43 @@
 /** biome-ignore-all lint/style/noParameterAssign: it's ok */
 
 import { readFileSync } from "node:fs";
-import { join } from "node:path";
-import type React from "react";
+import { resolve, sep } from "node:path";
 import { REGISTRY_PATH } from "@/config/constants";
+import { highlightCode } from "@/lib/highlight-code";
 import { replaceContentForCopy } from "@/utils/formatter";
-import { CodeBlock } from "./code-block";
 import { CodeCollapsibleWrapper } from "./code-collapsible-wrapper";
+import {
+  DocsCodeFrame,
+  type DocsCodeFrameProps,
+  isDocsTextLanguage,
+} from "./docs-code-block";
 
-export interface ComponentSourceProps
-  extends React.ComponentProps<typeof CodeBlock> {
+const REGISTRY_ROOT = "registry/react";
+const LEADING_SLASHES = /^\/+/;
+
+const resolveRegistrySourcePath = (src: string) => {
+  const relativeSrc = src.replace(LEADING_SLASHES, "");
+  const resolved = resolve(process.cwd(), REGISTRY_PATH, relativeSrc);
+  const root = resolve(process.cwd(), REGISTRY_ROOT);
+
+  if (resolved !== root && !resolved.startsWith(`${root}${sep}`)) {
+    throw new Error("ComponentSource src is outside the registry");
+  }
+
+  return resolved;
+};
+
+export interface ComponentSourceProps extends DocsCodeFrameProps {
+  /**
+   * The source code to display
+   */
+  code: string;
+  /**
+   * Whether to show the copy button
+   *
+   * @default true
+   */
+  copyButton?: boolean;
   /**
    * Whether to make the code block collapsible
    *
@@ -22,14 +50,50 @@ export interface ComponentSourceProps
    */
   language?: string;
   /**
-   * The source code to display
+   * Whether to show the line numbers
+   *
+   * @default true
+   */
+  showLineNumbers?: boolean;
+  /**
+   * The source file to read
    */
   src?: string;
-  /**
-   * The title of the code block
-   */
-  title?: string;
 }
+
+const DocsCodeBlock = async (props: ComponentSourceProps) => {
+  const {
+    title,
+    code,
+    copyButton = true,
+    lang = "tsx",
+    showLineNumbers = true,
+    className,
+    ...rest
+  } = props;
+
+  const highlightedCode = isDocsTextLanguage(lang)
+    ? undefined
+    : await highlightCode(code, lang, { showLineNumbers });
+
+  return (
+    <DocsCodeFrame
+      {...rest}
+      className={className}
+      copyValue={copyButton ? code : undefined}
+      language={lang}
+      rawCode={code}
+      title={title}
+    >
+      {highlightedCode ? (
+        <div
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki highlights trusted source code.
+          dangerouslySetInnerHTML={{ __html: highlightedCode }}
+        />
+      ) : null}
+    </DocsCodeFrame>
+  );
+};
 
 export const ComponentSource = (props: ComponentSourceProps) => {
   const {
@@ -48,8 +112,7 @@ export const ComponentSource = (props: ComponentSourceProps) => {
   }
 
   if (src) {
-    const sourcePath = join(process.cwd(), REGISTRY_PATH, src);
-    codeContent = readFileSync(sourcePath, "utf-8");
+    codeContent = readFileSync(resolveRegistrySourcePath(src), "utf-8");
   }
 
   if (!codeContent) {
@@ -63,10 +126,17 @@ export const ComponentSource = (props: ComponentSourceProps) => {
   if (isCollapsible) {
     return (
       <CodeCollapsibleWrapper>
-        <CodeBlock code={replacedCode} lang={lang} title={title} {...rest} />
+        <DocsCodeBlock
+          code={replacedCode}
+          lang={lang}
+          title={title}
+          {...rest}
+        />
       </CodeCollapsibleWrapper>
     );
   }
 
-  return <CodeBlock code={replacedCode} lang={lang} title={title} {...rest} />;
+  return (
+    <DocsCodeBlock code={replacedCode} lang={lang} title={title} {...rest} />
+  );
 };

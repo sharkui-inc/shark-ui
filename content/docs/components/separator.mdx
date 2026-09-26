@@ -1,7 +1,11 @@
 ---
 title: Separator  
-description: Visually separate content with a line.
+description: Visual line that separates content.
+seo:
+  description: Horizontal or vertical rule to group content.
 ---
+
+import manifest from "@/registry/manifest/separator";
 
 <ComponentPreview componentName="separator" />
 
@@ -28,9 +32,7 @@ npx shadcn@latest add @shark/separator
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -71,13 +73,19 @@ Use `orientation` prop to control the orientation of the separator.
 
 <ComponentPreview componentName="separator" fileName="example-list" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="separator" />
+
 ## API Reference
 
 ### Separator
 
 Horizontal or vertical divider between content.
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `className` | `string` | `-` |

@@ -3,6 +3,7 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   FileUpload as ArkFileUpload,
+  useFileUpload as useArkFileUpload,
   useFileUploadContext as useArkFileUploadContext,
 } from "@ark-ui/react/file-upload";
 import { UploadIcon, XIcon } from "lucide-react";
@@ -10,7 +11,9 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 
-export const useFileUpload = useArkFileUploadContext;
+export const useFileUpload = useArkFileUpload;
+export const useFileUploadContext = useArkFileUploadContext;
+export const FileUploadRootProvider = ArkFileUpload.RootProvider;
 
 export const FileUpload = (
   props: React.ComponentProps<typeof ArkFileUpload.Root>
@@ -23,6 +26,7 @@ export const FileUpload = (
         "group/file-upload",
         "relative",
         "flex flex-col justify-center gap-4",
+        "data-disabled:opacity-64",
         className
       )}
       data-slot="file-upload"
@@ -52,9 +56,11 @@ export const FileUploadDropzone = (
         "flex flex-col items-center justify-center gap-2",
         "text-center",
         "rounded-2xl border-2 border-input border-dashed",
-        "cursor-pointer",
+        "cursor-pointer outline-hidden",
+        "data-disabled:cursor-default",
         "data-cover:absolute data-cover:inset-0 data-cover:flex data-cover:items-center data-cover:justify-center",
-        "data-dragging:border-primary data-dragging:bg-primary/10",
+        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "data-dragging:border-primary/64 data-dragging:bg-primary/8",
         "data-invalid:border-destructive dark:data-invalid:border-destructive-foreground",
         className
       )}
@@ -76,14 +82,14 @@ export const FileUploadDropzoneIcon = (
         "bg-muted/48",
         "text-muted-foreground",
         "rounded-full border",
-        "group-data-dragging/file-upload:border-primary/24 group-data-dragging/file-upload:bg-primary/5 group-data-dragging/file-upload:text-primary",
+        "group-data-dragging/file-upload:border-primary/24 group-data-dragging/file-upload:bg-primary/8 group-data-dragging/file-upload:text-primary",
         "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className
       )}
       data-slot="file-upload-dropzone-icon"
       {...rest}
     >
-      {children || <UploadIcon />}
+      {children ?? <UploadIcon />}
     </ark.div>
   );
 };
@@ -110,7 +116,7 @@ export const FileUploadDescription = (
   return (
     <ark.div
       className={cn("font-medium text-muted-foreground text-sm", className)}
-      data-slot="file-upload-title"
+      data-slot="file-upload-description"
       {...rest}
     />
   );
@@ -140,74 +146,73 @@ interface FileUploadListProps
 export const FileUploadList = (props: FileUploadListProps) => {
   const { className, ...rest } = props;
 
-  const fileUpload = useFileUpload();
-
-  const files = fileUpload.acceptedFiles;
-
-  if (files.length === 0) {
-    return null;
-  }
-
   return (
-    <FileUploadItemGroup className="flex flex-col gap-2">
-      {files.map((file, index) => {
-        const isImage = file.type.startsWith("image/");
-
-        const key = `${file.name}-${index}`;
-
-        const extension = file.name.split(".").pop();
+    <ArkFileUpload.Context>
+      {({ acceptedFiles }) => {
+        if (acceptedFiles.length === 0) {
+          return null;
+        }
 
         return (
-          <FileUploadItem
-            className={cn(
-              "flex-1 items-start justify-start gap-4",
-              "bg-card",
-              "p-2",
-              "rounded-xl border",
-              "fade-in-0 slide-in-from-top-5 animate-in",
-              "motion-reduce:animate-none!",
-              className
-            )}
-            file={file}
-            key={key}
-            {...rest}
-          >
-            <FileUploadItemPreview
-              className="size-8"
-              {...(isImage ? { type: "image/*" } : { type: ".*" })}
-            >
-              {isImage ? (
-                <FileUploadItemPreviewImage />
-              ) : (
-                <span className="uppercase">{extension}</span>
-              )}
-            </FileUploadItemPreview>
+          <FileUploadItemGroup className="flex flex-col gap-2">
+            {acceptedFiles.map((file) => {
+              const isImage = file.type.startsWith("image/");
+              const extension = file.name.split(".").pop();
 
-            <div className="min-w-0 flex-1 overflow-hidden">
-              <FileUploadItemName />
-              <FileUploadItemSize />
-            </div>
+              return (
+                <FileUploadItem
+                  className={cn(
+                    "flex-1 items-center justify-start gap-2",
+                    "bg-card",
+                    "p-2",
+                    "rounded-xl border shadow-xs/4",
+                    "fade-in-0 slide-in-from-top-5 animate-in",
+                    "motion-reduce:animate-none",
+                    className
+                  )}
+                  file={file}
+                  key={file.name}
+                  {...rest}
+                >
+                  <FileUploadItemPreview
+                    className="size-8"
+                    {...(isImage ? { type: "image/*" } : { type: ".*" })}
+                  >
+                    {isImage ? (
+                      <FileUploadItemPreviewImage />
+                    ) : (
+                      <span className="uppercase">{extension}</span>
+                    )}
+                  </FileUploadItemPreview>
 
-            <FileUploadItemDeleteTrigger
-              asChild
-              className="me-auto rtl:ms-auto"
-            >
-              <Button
-                className={cn(
-                  "rounded-lg",
-                  "hover:bg-destructive/10 hover:text-destructive",
-                  "dark:hover:bg-destructive-foreground/10 dark:hover:text-destructive-foreground"
-                )}
-                size="icon-xs"
-                variant="ghost"
-              >
-                <XIcon />
-              </Button>
-            </FileUploadItemDeleteTrigger>
-          </FileUploadItem>
+                  <div className="flex min-w-0 flex-1 flex-col gap-0.5 overflow-hidden">
+                    <FileUploadItemName />
+                    <FileUploadItemSize />
+                  </div>
+
+                  <FileUploadItemDeleteTrigger
+                    asChild
+                    className="me-auto rtl:ms-auto"
+                  >
+                    <Button
+                      className={cn(
+                        "rounded-lg",
+                        "hover:bg-destructive/8 hover:text-destructive",
+                        "dark:hover:bg-destructive-foreground/8 dark:hover:text-destructive-foreground"
+                      )}
+                      size="icon-xs"
+                      variant="ghost"
+                    >
+                      <XIcon />
+                    </Button>
+                  </FileUploadItemDeleteTrigger>
+                </FileUploadItem>
+              );
+            })}
+          </FileUploadItemGroup>
         );
-      })}
-    </FileUploadItemGroup>
+      }}
+    </ArkFileUpload.Context>
   );
 };
 
@@ -218,7 +223,7 @@ export const FileUploadItem = (
 
   return (
     <ArkFileUpload.Item
-      className={cn("relative inline-flex", className)}
+      className={cn("relative inline-flex items-center", className)}
       data-slot="file-upload-item"
       {...rest}
     />
@@ -235,7 +240,7 @@ export const FileUploadItemPreview = (
       className={cn(
         "flex shrink-0 items-center justify-center",
         "font-semibold text-[0.5rem] text-primary",
-        "bg-primary/10",
+        "bg-primary/8",
         "select-none",
         "rounded-full",
         className
@@ -312,15 +317,6 @@ export const FileUploadClearTrigger = (
 ) => (
   <ArkFileUpload.ClearTrigger
     data-slot="file-upload-clear-trigger"
-    {...props}
-  />
-);
-
-export const FileUploadRootProvider = (
-  props: React.ComponentProps<typeof ArkFileUpload.RootProvider>
-) => (
-  <ArkFileUpload.RootProvider
-    data-slot="file-upload-root-provider"
     {...props}
   />
 );

@@ -1,11 +1,18 @@
 "use client";
 
-import { Tabs as ArkTabs, useTabsContext } from "@ark-ui/react/tabs";
+import {
+  Tabs as ArkTabs,
+  useTabs as useArkTabs,
+  useTabsContext as useArkTabsContext,
+} from "@ark-ui/react/tabs";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+import { buttonControlVariants } from "@/registry/react/components/button";
 
-export const useTabs = useTabsContext;
+export const useTabs = useArkTabs;
+export const useTabsContext = useArkTabsContext;
+export const TabsRootProvider = ArkTabs.RootProvider;
 
 export const Tabs = (props: React.ComponentProps<typeof ArkTabs.Root>) => {
   const { lazyMount = true, unmountOnExit = true, className, ...rest } = props;
@@ -26,8 +33,31 @@ export const Tabs = (props: React.ComponentProps<typeof ArkTabs.Root>) => {
 };
 
 const tabsListVariants = tv({
+  compoundVariants: [
+    {
+      class: {
+        base: "rounded-lg",
+        indicator: "rounded-lg",
+      },
+      pill: false,
+      variant: "default",
+    },
+    {
+      class: {
+        base: "rounded-full",
+        indicator: "rounded-full",
+      },
+      pill: true,
+      variant: "default",
+    },
+  ],
+  defaultVariants: {
+    pill: false,
+    variant: "default",
+  },
   slots: {
     base: [
+      "group/tabs-list",
       "relative z-0",
       "w-fit",
       "text-muted-foreground",
@@ -35,36 +65,37 @@ const tabsListVariants = tv({
       "data-[orientation=vertical]:flex-col",
     ],
     indicator: [
-      "absolute inset-s-0 bottom-0",
+      "absolute top-(--top) left-(--left)",
       "h-(--height) w-(--width)",
-      "transition-[width,translate] duration-200 ease-in-out",
-      "motion-reduce:transition-none!",
+      "transition-[width,height,left,top] duration-150 ease-in-out",
+      "motion-reduce:transition-none",
     ],
   },
   variants: {
+    pill: {
+      false: {},
+      true: {},
+    },
     variant: {
       default: {
-        base: ["rounded-lg"],
-        indicator: ["-z-1 rounded-lg bg-accent"],
+        indicator: ["-z-1 bg-accent"],
       },
       underline: {
         base: [
           "data-[orientation=vertical]:px-1",
           "data-[orientation=horizontal]:py-1",
-          "*:data-[slot=tabs-tab]:hover:bg-accent",
+          "*:data-[slot=tabs-trigger]:hover:bg-accent",
         ],
         indicator: [
           "z-10",
-          "absolute bottom-0",
           "bg-primary",
+          "data-[orientation=horizontal]:top-[calc(var(--top)+var(--height)-1px)]",
           "data-[orientation=horizontal]:h-0.5",
+          "data-[orientation=vertical]:left-[calc(var(--left)+var(--width)-1px)]",
           "data-[orientation=vertical]:w-0.5",
         ],
       },
     },
-  },
-  defaultVariants: {
-    variant: "default",
   },
 });
 interface TabsListProps
@@ -72,13 +103,20 @@ interface TabsListProps
     VariantProps<typeof tabsListVariants> {}
 
 export const TabsList = (props: TabsListProps) => {
-  const { variant = "default", className, children, ...rest } = props;
+  const {
+    variant = "default",
+    pill = false,
+    className,
+    children,
+    ...rest
+  } = props;
 
-  const { base, indicator } = tabsListVariants({ variant });
+  const { base, indicator } = tabsListVariants({ pill, variant });
 
   return (
     <ArkTabs.List
       className={cn(base(), className)}
+      data-pill={pill}
       data-slot="tabs-list"
       {...rest}
     >
@@ -101,20 +139,19 @@ export const TabsTrigger = (
     <ArkTabs.Trigger
       className={cn(
         "relative",
-        "h-9 sm:h-8",
-        "flex shrink-0 grow items-center justify-center gap-1.5",
-        "px-[calc(--spacing(2.5)-1px)]",
-        "whitespace-nowrap font-medium text-sm",
-        "rounded-lg border border-transparent",
+        buttonControlVariants(),
+        "h-8 gap-2 px-[calc(--spacing(3)-1px)]",
+        "flex shrink-0 grow",
+        "in-data-[pill=true]/tabs-list:rounded-full rounded-lg border border-transparent",
         "cursor-pointer",
         "transition-[color,background-color,box-shadow]",
         "data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
-        "hover:text-foreground/72",
+        "hover:text-foreground",
         "aria-selected:text-foreground",
-        "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "[&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:shrink-0",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="tabs-trigger"
@@ -130,7 +167,7 @@ export const TabsContent = (
 
   return (
     <ArkTabs.Content
-      className={cn("flex-1 outline-none", className)}
+      className={cn("flex-1", className)}
       data-slot="tabs-content"
       {...rest}
     />

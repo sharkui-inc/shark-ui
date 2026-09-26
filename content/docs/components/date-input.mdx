@@ -1,10 +1,14 @@
 ---
 title: Date Input
 description: Segmented input for dates and times.
+seo:
+  description: Segmented date and time fields with spinbutton parts.
 links:
   doc: https://ark-ui.com/docs/components/date-input
   api: https://ark-ui.com/docs/components/date-input#api-reference
 ---
+
+import manifest from "@/registry/manifest/date-input";
 
 <ComponentPreview componentName="date-input" />
 
@@ -29,11 +33,11 @@ npx shadcn@latest add @shark/date-input
 
 <Steps>
 
+<Step>This component depends on [Field](/docs/components/field) and [Input Group](/docs/components/input-group). Install them first if you haven't already.</Step>
+
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -59,7 +63,7 @@ import { DateInput } from "@/components/ui/date-input";
 
 ## Controlled
 
-Use `value` and `onValueChange` to control the date input programmatically.
+Use `value` and `onValueChange` to control the date input.
 
 <ComponentPreview componentName="date-input" fileName="example-controlled" />
 
@@ -97,13 +101,13 @@ Use the `size` prop to change the input height.
 
 ### With Field
 
-Use [Field](/docs/components/field) components for a labeled date input with helper text.
+Use [Field](/docs/components/field) for helper text. Put `DateInputLabel` inside `DateInput`.
 
 <ComponentPreview componentName="date-input" fileName="example-with-field" />
 
 ### Granularity
 
-Use the `granularity` prop to control which date fields are displayed.
+Use `granularity` to choose which fields to show. Set `hideTimeZone` to hide the zone.
 
 <ComponentPreview componentName="date-input" fileName="example-granularity" />
 
@@ -137,6 +141,12 @@ Use the `showClear` prop to display a clear button when the date input has a val
 
 <ComponentPreview componentName="date-input" fileName="example-custom-separator" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="date-input" />
+
 ## API Reference
 
 ### DateInput
@@ -147,20 +157,37 @@ Root component for the date input.
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `showClear` | `boolean` | `false` |
-| `value` | `DateValue[]` | - |
-| `defaultValue` | `DateValue[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `value` | `DateValue[]` | `-` |
+| `defaultValue` | `DateValue[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `selectionMode` | `"single" \| "range"` | `"single"` |
 | `separator` | `string \| React.ReactNode` | `"-"` |
 | `granularity` | `"day" \| "hour" \| "minute" \| "second"` | `"day"` |
-| `hourCycle` | `12 \| 24` | - |
-| `formatter` | `DateFormatter` | - |
-| `min` | `DateValue` | - |
-| `max` | `DateValue` | - |
+| `hourCycle` | `12 \| 24` | `-` |
+| `formatter` | `DateFormatter` | `-` |
+| `min` | `DateValue` | `-` |
+| `max` | `DateValue` | `-` |
 | `shouldForceLeadingZeros` | `boolean` | `true` |
-| `disabled` | `boolean` | - |
-| `invalid` | `boolean` | - |
-| `className` | `string` | - |
+| `hideTimeZone` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
+### DateInputLabel
+
+Accessible label. Render as a child of `DateInput`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DateInputRootProvider
+
+Provides a DateInput API created with `useDateInput` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseDateInputReturn` | `required` |
 
 ---
 

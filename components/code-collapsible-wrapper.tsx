@@ -1,118 +1,93 @@
 "use client";
 
+import { Collapsible as ArkCollapsible } from "@ark-ui/react/collapsible";
+import { createContext } from "@ark-ui/react/utils";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 
-const CONTENT_ID = "code-collapsible-content";
+interface CodeCollapsibleWrapperProps
+  extends React.ComponentProps<typeof ArkCollapsible.Root> {}
 
-interface CodeCollapsibleWrapperProps extends React.ComponentProps<"div"> {
-  collapsedHeight?: string;
-}
+const [CodeCollapsibleActionsProvider, useCodeCollapsibleActions] =
+  createContext<HTMLElement | null>({
+    defaultValue: null,
+    hookName: "useCodeCollapsibleActions",
+    name: "CodeCollapsibleActionsContext",
+    providerName: "CodeCollapsibleWrapper",
+    strict: false,
+  });
+
+export { useCodeCollapsibleActions };
 
 export const CodeCollapsibleWrapper = (props: CodeCollapsibleWrapperProps) => {
   const { className, children, collapsedHeight = "256px", ...rest } = props;
-
-  const [isOpened, setIsOpened] = React.useState(false);
-  const [contentHeight, setContentHeight] = React.useState<number | null>(null);
-  const contentRef = React.useRef<HTMLDivElement>(null);
-
-  React.useLayoutEffect(() => {
-    const element = contentRef.current;
-    if (!element) {
-      return;
-    }
-
-    const updateHeight = () => {
-      setContentHeight(element.scrollHeight);
-    };
-
-    updateHeight();
-
-    const resizeObserver = new ResizeObserver(updateHeight);
-    resizeObserver.observe(element);
-
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, []);
-
-  const toggle = () => {
-    setIsOpened((value) => !value);
-  };
-
-  const getContentHeight = () => {
-    if (!isOpened) {
-      return "var(--collapsed-height)";
-    }
-    if (contentHeight) {
-      return "var(--height)";
-    }
-    return collapsedHeight;
-  };
-
-  const heightStyle = {
-    "--collapsed-height": collapsedHeight,
-    "--height": contentHeight ? `${contentHeight}px` : undefined,
-    height: getContentHeight(),
-  } as React.CSSProperties;
+  const [actionsElement, setActionsElement] =
+    React.useState<HTMLElement | null>(null);
 
   return (
-    <div className={cn("relative md:-mx-1", className)} {...rest}>
-      <div className="absolute inset-e-10 top-1.5 z-10 flex items-center">
-        <Button
-          aria-controls={CONTENT_ID}
-          aria-expanded={isOpened}
-          className="text-muted-foreground"
-          onClick={toggle}
-          type="button"
-          variant="ghost"
-        >
-          {isOpened ? "Collapse" : "Expand"}
-        </Button>
-      </div>
-
-      <div className="mt-6">
+    <ArkCollapsible.Root
+      className={cn("group/code-collapsible relative md:-mx-1", className)}
+      collapsedHeight={collapsedHeight}
+      lazyMount={false}
+      unmountOnExit={false}
+      {...rest}
+    >
+      <CodeCollapsibleActionsProvider value={actionsElement}>
+        {/*
+          Ark marks tabbable elements inside partial collapses as inert while
+          closed. Keep visible actions outside Content so they remain usable.
+          https://ark-ui.com/docs/components/collapsible#partial-collapse
+        */}
         <div
-          className={cn(
-            "overflow-hidden",
-            "transition-[height] duration-200",
-            isOpened ? "animate-expand" : "animate-collapse",
-            "motion-reduce:animate-none! motion-reduce:transition-none!"
-          )}
-          style={heightStyle}
-        >
-          <div
-            className="relative overflow-hidden [&>figure]:mt-0 [&>figure]:md:mx-0!"
-            id={CONTENT_ID}
-            ref={contentRef}
-          >
-            {children}
-          </div>
+          className="pointer-events-none absolute inset-0 z-10"
+          ref={setActionsElement}
+        />
+        <div className="absolute inset-e-10 top-1.5 z-10 flex items-center">
+          <ArkCollapsible.Trigger asChild>
+            <Button className="opacity-64 hover:opacity-100" variant="ghost">
+              <span className="group-data-[state=closed]/code-collapsible:hidden">
+                Collapse
+              </span>
+              <span className="group-data-[state=open]/code-collapsible:hidden">
+                Expand
+              </span>
+            </Button>
+          </ArkCollapsible.Trigger>
         </div>
-      </div>
 
-      {isOpened ? null : (
-        <button
-          aria-controls={CONTENT_ID}
-          aria-expanded={isOpened}
+        <ArkCollapsible.Content
           className={cn(
-            "absolute inset-x-0 -bottom-4",
-            "h-20",
-            "flex items-center justify-center",
-            "bg-linear-to-b from-transparent via-card/64 to-card",
-            "font-medium text-muted-foreground text-sm",
-            "rounded-b-lg border border-t-0",
-            "transition-colors",
-            "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/32",
-            "hover:text-foreground"
+            "[--radix-collapsible-content-height:var(--height)]",
+            "relative mt-6 overflow-hidden [&>figure]:mt-0 [&>figure]:md:mx-0!",
+            "transition-[height] duration-200",
+            "data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down data-[state=closed]:duration-200 data-[state=open]:duration-200 data-[state=closed]:ease-out data-[state=open]:ease-out",
+            "motion-reduce:animate-none motion-reduce:transition-none"
           )}
-          onClick={toggle}
-          type="button"
         >
-          Expand
-        </button>
-      )}
-    </div>
+          {children}
+        </ArkCollapsible.Content>
+
+        <ArkCollapsible.Trigger asChild>
+          <button
+            className={cn(
+              "absolute inset-x-px -bottom-4 -mx-px",
+              "h-20",
+              "flex items-center justify-center",
+              "bg-linear-to-b from-transparent via-background/64 to-background",
+              "font-medium text-muted-foreground text-sm",
+              "rounded-b-lg",
+              "transition-colors",
+              "border border-t-0 outline-hidden focus-visible:border-ring/64 focus-visible:border-t focus-visible:ring-2 focus-visible:ring-ring/24",
+              "hover:text-foreground",
+              "group-data-[state=open]/code-collapsible:hidden"
+            )}
+            type="button"
+          >
+            Expand
+          </button>
+        </ArkCollapsible.Trigger>
+      </CodeCollapsibleActionsProvider>
+    </ArkCollapsible.Root>
   );
 };

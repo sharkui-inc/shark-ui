@@ -6,6 +6,8 @@ links:
   api: https://ark-ui.com/docs/components/format
 ---
 
+import manifest from "@/registry/manifest/format";
+
 <ComponentPreview componentName="format" />
 
 ## Installation
@@ -27,9 +29,7 @@ npx shadcn@latest add @shark/format
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -47,71 +47,85 @@ npm install @ark-ui/react
 import { 
   FormatByte, 
   FormatNumber, 
-  FormatRelativeTime 
-} from "@/registry/react/components/format";
+  FormatRelativeTime,
+  FormatTime,
+} from "@/components/ui/format";
 ```
 
 ```tsx
 <FormatByte value={120_000} />
 <FormatNumber value={1234567} />
 <FormatRelativeTime value={new Date("2025-05-05")} />
+<FormatTime value={new Date("2026-08-24T14:30:00")} />
 ```
 
 ## Examples
 
 ### Format Byte
 
-Format byte values as file sizes.
+Byte count as a file size.
 
 <ComponentPreview componentName="format" fileName="example-byte" />
 
 #### Unit display
 
-Use the `unitDisplay` prop to control how the unit is displayed.
+`unitDisplay`: `"long"`, `"short"`, or `"narrow"`.
 
 <ComponentPreview componentName="format" fileName="example-byte-unit-display" />
 
 #### Unit system
 
-Use `unitSystem` to choose between decimal (1000 bytes) or binary (1024 bytes).
+`unitSystem`: `"decimal"` (1000) or `"binary"` (1024).
 
 <ComponentPreview componentName="format" fileName="example-byte-unit-system" />
 
 ### Format Relative Time
 
-Format dates as relative time.
+Date as relative time.
 
 <ComponentPreview componentName="format" fileName="example-relative-time" />
 
 #### Style
 
-Use the `style` prop for long, short, or narrow format.
+`style`: `"long"`, `"short"`, or `"narrow"`.
 
 <ComponentPreview componentName="format" fileName="example-relative-time-short" />
 
+### Format Time
+
+`Date` or ISO string. With `format="12h"`, set `amLabel` / `pmLabel`.
+
+<ComponentPreview componentName="format" fileName="example-time" />
+
 ### Format Number
 
-Format numbers with locale-aware options.
+Locale-aware number via `Intl.NumberFormat` options.
 
 <ComponentPreview componentName="format" fileName="example-number" />
 
 #### Currency
 
-Use `style="currency"` with the `currency` prop for currency formatting.
+`style="currency"` and `currency`.
 
 <ComponentPreview componentName="format" fileName="example-number-currency" />
 
 #### Percentage
 
-Use `style="percent"` to format numbers as percentages.
+`style="percent"`.
 
 <ComponentPreview componentName="format" fileName="example-number-percent" />
 
 #### Compact notation
 
-Use `notation="compact"` for compact display.
+`notation="compact"`.
 
 <ComponentPreview componentName="format" fileName="example-number-compact" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="format" />
 
 ## API Reference
 
@@ -119,33 +133,44 @@ Use `notation="compact"` for compact display.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `number` | - |
-| `unit` | `"byte"` \| `"bit"` | `"byte"` |
-| `unitDisplay` | `"long"` \| `"short"` \| `"narrow"` | - |
-| `unitSystem` | `"decimal"` \| `"binary"` | - |
-| `locale` | `string` | - |
+| `value` | `number` | `-` |
+| `unit` | `"byte" \| "bit"` | `"byte"` |
+| `unitDisplay` | `"long" \| "short" \| "narrow"` | `-` |
+| `unitSystem` | `"decimal" \| "binary"` | `-` |
+| `locale` | `string` | `-` |
 
 ### FormatRelativeTime
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `Date` \| `number` | - |
-| `numeric` | `"always"` \| `"auto"` | - |
-| `style` | `"long"` \| `"short"` \| `"narrow"` | - |
-| `locale` | `string` | - |
+| `value` | `Date \| number` | `-` |
+| `numeric` | `"always" \| "auto"` | `-` |
+| `style` | `"long" \| "short" \| "narrow"` | `-` |
+| `locale` | `string` | `-` |
+
+### FormatTime
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `Date \| string` | `-` |
+| `format` | `"12h" \| "24h"` | `-` |
+| `amLabel` | `string` | `-` |
+| `pmLabel` | `string` | `-` |
+| `withSeconds` | `boolean` | `-` |
+| `locale` | `string` | `-` |
 
 ### FormatNumber
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `number` | - |
-| `locale` | `string` | - |
-| `style` | `"decimal"` \| `"percent"` \| `"currency"` \| `"unit"` | `"decimal"` |
-| `currency` | `string` | - |
-| `unit` | `string` | - |
-| `notation` | `"standard"` \| `"compact"` \| `"scientific"` \| `"engineering"` | `"standard"` |
-| `minimumFractionDigits` | `number` | - |
-| `maximumFractionDigits` | `number` | - |
+| `value` | `number` | `-` |
+| `locale` | `string` | `-` |
+| `style` | `"decimal" \| "percent" \| "currency" \| "unit"` | `"decimal"` |
+| `currency` | `string` | `-` |
+| `unit` | `string` | `-` |
+| `notation` | `"standard" \| "compact" \| "scientific" \| "engineering"` | `"standard"` |
+| `minimumFractionDigits` | `number` | `-` |
+| `maximumFractionDigits` | `number` | `-` |
 
 ---
 

@@ -1,0 +1,268 @@
+---
+title: Context
+description: Context-window token usage, breakdown, and cost.
+seo:
+  description: Show context-window token usage, breakdown, and cost.
+---
+
+import manifest from "@/registry/manifest/context";
+
+<Alert>
+  <InfoIcon />
+  <AlertDescription>
+  Context is built on top of the [Popover](/docs/components/popover) component. Check it out for more examples.
+  </AlertDescription>
+</Alert>
+
+<ComponentPreview componentName="context" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/context
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>This component depends on [Popover](/docs/components/popover), [Circular Progress](/docs/components/circular-progress), and [Format](/docs/utilities/format). Install required dependencies first if you haven&apos;t already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/context.tsx" src="/context.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+Context
+├── ContextTrigger
+│   └── ContextIcon
+└── ContextContent
+    ├── ContextHeader
+    │   ├── ContextTitle
+    │   └── ContextMeter
+    ├── ContextBody
+    │   └── ContextUsageRow
+    └── ContextFooter
+```
+
+## Usage
+
+```tsx
+import {
+  Context,
+  ContextBody,
+  ContextContent,
+  ContextFooter,
+  ContextHeader,
+  ContextMeter,
+  ContextTitle,
+  ContextTrigger,
+  ContextUsageRow,
+} from "@/components/ui/context";
+```
+
+```tsx
+<Context maxTokens={128000} usedTokens={18420} costLabel="$0.042">
+  <ContextTrigger />
+  <ContextContent>
+    <ContextHeader title="Context Usage">
+      <ContextMeter />
+    </ContextHeader>
+    <ContextBody>
+      <ContextUsageRow title="Input" value={4200} />
+      <ContextUsageRow title="Output" value={860} />
+    </ContextBody>
+    <ContextFooter />
+  </ContextContent>
+</Context>
+```
+
+## Title
+
+`ContextHeader` supports two title patterns:
+
+### Using props
+
+Pass the `title` prop directly to `ContextHeader`.
+
+```tsx showLineNumbers
+<ContextHeader title="Context Usage">
+  <ContextMeter />
+</ContextHeader>
+```
+
+> This approach does not require the `ContextTitle` component.
+
+### Using components
+
+Use `ContextTitle` as a child when you need more control, such as a close
+button.
+
+```tsx showLineNumbers
+<ContextHeader>
+  <ContextTitle showCloseButton>Context Usage</ContextTitle>
+  <ContextMeter />
+</ContextHeader>
+```
+
+## Examples
+
+### Without cost
+
+<ComponentPreview componentName="context" fileName="example-without-cost" />
+
+### Icon-only trigger
+
+<ComponentPreview componentName="context" fileName="example-icon-only-trigger" />
+
+### Title and close button
+
+Use with `showCloseButton` for an identifiable, dismissible
+context panel.
+
+<ComponentPreview componentName="context" fileName="example-title-close-button" />
+
+### Tooltip
+
+<ComponentPreview componentName="context" fileName="example-tooltip" />
+
+### Custom spacing
+
+The `[--space:--spacing("value")]` controls the internal spacing.
+
+Default spacing is `--spacing(2)`.
+
+<ComponentPreview componentName="context" fileName="example-custom-spacing" />
+
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
+
+```css
+sm:[--space:--spacing(3)]
+```
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="context" />
+
+## API Reference
+
+### Context
+
+Root [Popover](/docs/components/popover). Provides token usage to child parts.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `usedTokens` | `number` | `required` |
+| `maxTokens` | `number` | `required` |
+| `costLabel` | `string` | `-` |
+| `className` | `string` | `-` |
+
+### ContextTrigger
+
+Opens the popover on click. Default children are a usage ring and percent label. Default renders a ghost `Button`; with `asChild`, pass a single custom child as the trigger.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### ContextIcon
+
+Displays context usage as a circular progress icon.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ContextContent
+
+Holds the usage panel. Forwards [PopoverContent](/docs/components/popover) props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(2)` |
+
+### ContextHeader
+
+Layout container for `ContextTitle` and `ContextMeter`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` | `-` |
+| `className` | `string` | `-` |
+
+### ContextTitle
+
+Title for the context panel.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `showCloseButton` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### ContextMeter
+
+Displays the percentage, token count, and progress bar.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ContextBody
+
+Body for token breakdown rows.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ContextFooter
+
+Footer with total cost.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` | `Total cost` |
+| `className` | `string` | `-` |
+
+### ContextUsageRow
+
+Usage row with a user-defined title and value.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` | `required` |
+| `value` | `number` | `required` |
+| `className` | `string` | `-` |

@@ -1,10 +1,14 @@
 ---
 title: Segment Group
-description: Follows the selected item.
+description: Segmented control for a choice.
+seo:
+  description: Segmented control that highlights the active choice.
 links:
   doc: https://ark-ui.com/docs/components/segment-group
   api: https://ark-ui.com/docs/components/segment-group#api-reference
 ---
+
+import manifest from "@/registry/manifest/segment-group";
 
 <ComponentPreview componentName="segment-group" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/segment-group
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -80,7 +82,7 @@ import {
 
 ## Controlled
 
-Control the selected value programmatically with `value` and `onValueChange` props.
+Use `value` and `onValueChange` to control the selected value.
 
 <ComponentPreview componentName="segment-group" fileName="example-controlled" />
 
@@ -138,6 +140,12 @@ Use `*:data-[slot=segment-group-indicator]:bg-*` classes to change the color of 
 
 <ComponentPreview componentName="segment-group" fileName="example-custom-indicator" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="segment-group" />
+
 ## API Reference
 
 ### SegmentGroup
@@ -146,14 +154,14 @@ Root component. Manages segmented control state (single or multi-select).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `defaultValue` | `string` | - |
-| `value` | `string` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `defaultValue` | `string` | `-` |
+| `value` | `string` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `variant` | `"default" \| "underline"` | `"default"` |
-| `disabled` | `boolean` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SegmentGroupIndicator
 
@@ -161,8 +169,8 @@ Visual indicator that moves to the selected segment(s).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### SegmentGroupItem
 
@@ -170,10 +178,10 @@ Single segment option. Use `value` for selection.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | - |
-| `disabled` | `boolean` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `value` | `string` | `-` |
+| `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SegmentGroupItemText
 
@@ -181,8 +189,16 @@ Text label for a segment. Often wraps icon + text.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+
+### SegmentGroupRootProvider
+
+Provides a SegmentGroup API created with `useSegmentGroup` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseSegmentGroupReturn` | `required` |
 
 ---
 

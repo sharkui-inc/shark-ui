@@ -13,44 +13,48 @@ import {
   type TourStepType,
   TourTitle,
   TourTrigger,
+  useTour,
 } from "@/registry/react/components/tour";
+
+const Example = () => {
+  const tour = useTour({ steps });
+
+  return (
+    <Tour tour={tour}>
+      <TourTrigger asChild>
+        <Button variant="outline">Start tour</Button>
+      </TourTrigger>
+      <TourContent className="max-w-md [--space:--spacing(6)]">
+        <TourHeader>
+          <TourProgressText />
+          <TourTitle />
+          <TourDescription />
+        </TourHeader>
+
+        <TourFooter>
+          <TourPreviousStep />
+          <TourNextStep />
+        </TourFooter>
+      </TourContent>
+    </Tour>
+  );
+};
 
 const steps: TourStepType[] = [
   {
-    id: "step-1",
-    type: "dialog",
+    actions: [{ action: "next", label: "Next" }],
+    description: "`[--space:--spacing(6)]` on this dialog.",
+    id: "spacing",
     title: "Custom spacing",
-    description:
-      "`TourContent` uses `[--space:--spacing(2)]` here for tighter padding than the default.",
-    actions: [{ label: "Next", action: "next" as const }],
+    type: "dialog",
   },
   {
-    id: "step-2",
-    type: "dialog",
+    actions: [{ action: "dismiss", label: "Done" }],
+    description: "`md:[--space:--spacing(6)]` changes spacing by screen size.",
+    id: "breakpoints",
     title: "Breakpoint utilities",
-    description:
-      "You can pair `[--space]` with responsive variants, e.g. `md:[--space:--spacing(6)]`.",
-    actions: [{ label: "Done", action: "dismiss" as const }],
+    type: "dialog",
   },
 ];
-
-const Example = () => (
-  <Tour steps={steps}>
-    <TourTrigger asChild>
-      <Button variant="outline">Open</Button>
-    </TourTrigger>
-    <TourContent className="max-w-md [--space:--spacing(2)]">
-      <TourHeader>
-        <TourProgressText />
-        <TourTitle />
-        <TourDescription />
-      </TourHeader>
-      <TourFooter>
-        <TourPreviousStep />
-        <TourNextStep />
-      </TourFooter>
-    </TourContent>
-  </Tour>
-);
 
 export default Example;

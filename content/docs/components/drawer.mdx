@@ -1,7 +1,11 @@
 ---
 title: Drawer
-description: A sliding panel with swipe support.
+description: Sliding panel with swipe support.
+seo:
+  description: Swipeable sliding panel for mobile sheets.
 ---
+
+import manifest from "@/registry/manifest/drawer";
 
 <ComponentPreview componentName="drawer" />
 
@@ -26,9 +30,7 @@ npx shadcn@latest add @shark/drawer
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -44,14 +46,16 @@ npm install @ark-ui/react lucide-react tailwind-variants
 
 ```text
 Drawer
+├── DrawerSwipeArea
 ├── DrawerTrigger
 └── DrawerContent
     ├── DrawerGrabber
-    ├── drawer-main
-    │   ├── DrawerHeader
-    │   ├── DrawerBody
-    │   └── DrawerFooter
-    │       └── DrawerClose
+    ├── DrawerHeader
+    │   ├── DrawerTitle
+    │   └── DrawerDescription
+    ├── DrawerBody
+    └── DrawerFooter
+        └── DrawerClose
 ```
 
 ## Usage
@@ -59,6 +63,7 @@ Drawer
 ```tsx
 import {
   Drawer,
+  DrawerSwipeArea,
   DrawerTrigger,
   DrawerContent,
   DrawerHeader,
@@ -72,6 +77,7 @@ import {
 
 ```tsx
 <Drawer>
+  <DrawerSwipeArea />
   <DrawerTrigger />
   <DrawerContent>
     <DrawerHeader>
@@ -90,7 +96,7 @@ import {
 
 ## Controlled
 
-Use `open` and `onOpenChange` on the root to control the drawer state.
+`open` and `onOpenChange` on `Drawer`.
 
 <ComponentPreview componentName="drawer" fileName="example-controlled" />
 
@@ -124,57 +130,101 @@ Use `DrawerTitle` and `DrawerDescription` as children for more control.
 </DrawerHeader>
 ```
 
-## Examples
+## Variants
 
-### Inset Variant
+### Default
 
-Use `variant="inset"` on `DrawerContent` so the drawer appears as a floating card rather than edge-to-edge.
+<ComponentPreview componentName="drawer" fileName="example-variant-default" />
+
+### Inset
+
+`variant="inset"` on `DrawerContent` insets the panel from the screen edge.
 
 <ComponentPreview componentName="drawer" fileName="example-inset" />
 
+## Examples
+
 ### Swipe Directions
 
-Control which direction the drawer slides and swipes using `swipeDirection` on the root.
+`swipeDirection` on `Drawer`: `down`, `up`, `start`, or `end`.
 
 <ComponentPreview componentName="drawer" fileName="example-swipe-directions" />
 
+### Scrollable
+
+`DrawerBody` scrolls. Header and footer stay fixed.
+
+<ComponentPreview componentName="drawer" fileName="example-scrollable" />
+
 ### Snap Points
 
-Use `snapPoints` to allow the drawer to snap to multiple heights.
+`snapPoints` on `Drawer`. This example uses `0.25`, `0.5`, and `1`.
 
 <ComponentPreview componentName="drawer" fileName="example-snap-points" />
 
 ### Non-Modal
 
-Use `modal={false}` to allow interaction with elements outside the drawer.
+`modal={false}` leaves the page interactive.
 
 <ComponentPreview componentName="drawer" fileName="example-non-modal" />
 
+### Indent background
+
+`DrawerProvider` wraps the page. An open drawer scales that page and reveals the background behind it.
+
+<ComponentPreview componentName="drawer" fileName="example-indent-background" />
+
+### Multiple triggers
+
+`value` on each `DrawerTrigger`. `onTriggerValueChange` tracks which button opened the drawer.
+
+<ComponentPreview componentName="drawer" fileName="example-multiple-triggers" />
+
+### Nested
+
+Nest a `Drawer` inside another.
+
+<ComponentPreview componentName="drawer" fileName="example-nested" />
+
 ### Close button
 
-Use the `showCloseButton` prop to show a close button in the top-right corner.
+`showCloseButton` on `DrawerContent`.
 
 <ComponentPreview componentName="drawer" fileName="example-close-button" />
 
 ### No Drag Area
 
-Apply the `data-no-drag` attribute to any element inside the drawer to prevent dragging from starting on it.
+`data-no-drag` stops a drag from starting on that element.
 
 <ComponentPreview componentName="drawer" fileName="example-no-drag-area" />
 
 ### Non Draggable
 
-Set `draggable={false}` on `DrawerContent` to disable drag-to-dismiss on the panel. 
-
-The drawer can still be dragged by the grabber.
+`draggable={false}` on `DrawerContent`. The grabber still drags.
 
 <ComponentPreview componentName="drawer" fileName="example-non-draggable" />
 
+### Responsive Dialog
+
+Use `Drawer` on small screens and [Dialog](/docs/components/dialog#responsive) on larger ones. Same content opens as a bottom sheet on mobile and a modal on desktop.
+
+<ComponentPreview componentName="drawer" fileName="example-responsive-dialog" />
+
+### Responsive Menu
+
+Use `Drawer` on small screens and [Menu](/docs/components/menu#responsive) on larger ones. Same content opens as a bottom sheet on mobile and a menu on desktop. `DrawerMenuTrigger` opens the next drawer.
+
+<ComponentPreview componentName="drawer" fileName="example-responsive-menu" />
+
+### Responsive Context Menu
+
+Use `Drawer` on small screens and [ContextMenu](/docs/components/context-menu#responsive) on larger ones. Same content opens as a bottom sheet on mobile and a context menu on desktop. `DrawerMenuTrigger` opens the next drawer.
+
+<ComponentPreview componentName="drawer" fileName="example-responsive-context-menu" />
+
 ### Custom spacing
 
-Use `[--space:--spacing("value")]` on `DrawerContent` to adjust internal spacing.
-
-Default spacing is `--spacing(6)`.
+The `[--space:--spacing("value")]` controls the internal spacing. 
 
 <ComponentPreview componentName="drawer" fileName="example-custom-spacing" />
 
@@ -183,6 +233,12 @@ Default spacing is `--spacing(6)`.
 ```css
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="drawer" />
 
 ## API Reference
 
@@ -195,7 +251,8 @@ Root element of the drawer.
 | `open` | `boolean` | `-` |
 | `defaultOpen` | `boolean` | `false` |
 | `onOpenChange` | `({ open }: OpenChangeDetails) => void` | `-` |
-| `swipeDirection` | `"up" \| "down" \| "left" \| "right"` | `"down"` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
+| `swipeDirection` | `"up" \| "down" \| "start" \| "end"` | `"down"` |
 | `snapPoints` | `(number \| string)[]` | `[1]` |
 | `defaultSnapPoint` | `number \| string \| null` | `1` |
 | `snapToSequentialPoints` | `boolean` | `false` |
@@ -205,7 +262,12 @@ Root element of the drawer.
 | `modal` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
 | `closeOnInteractOutside` | `boolean` | `true` |
+| `lazyMount` | `boolean` | `true` |
+| `unmountOnExit` | `boolean` | `true` |
+| `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
 | `className` | `string` | `-` |
+
+`swipeDirection` uses logical `start` and `end`. The DOM `data-swipe-direction` attribute is resolved to physical `left` or `right` for styling.
 
 ### DrawerTrigger
 
@@ -213,6 +275,18 @@ Opens the drawer on click. Use `asChild` for custom trigger elements.
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `value` | `string` | `-` |
+| `className` | `string` | `-` |
+
+### DrawerSwipeArea
+
+An invisible edge hit area that opens the drawer by swipe. Its position follows the resolved physical swipe direction.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `disabled` | `boolean` | `false` |
+| `swipeDirection` | `"up" \| "down" \| "start" \| "end"` | `opposite of the drawer direction` |
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
@@ -228,10 +302,10 @@ Holds the drawer panel. Supports swipe-to-close; direction inherited from root `
 | `draggable` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--bleed` | `--spacing(12)` |
-| `--space` | `--spacing(4)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--bleed` | `string` | `--spacing(12)` |
+| `--space` | `string` | `--spacing(6)` |
 
 ### DrawerHeader
 
@@ -264,16 +338,16 @@ Accessible description for the drawer. Announced to screen readers.
 
 ### DrawerBody
 
-Scrollable body content. Uses [ScrollArea](/docs/components/scroll-area) for overflow. Supports `scrollFade` for gradient edges.
+Scrollable body content.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `scrollFade` | `boolean` | `false` |
+| `scrollFade` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
 ### DrawerFooter
 
-Footer area for action buttons.
+Footer area for action buttons. Same pattern as `DialogFooter`: primary action first in the DOM; layout classes reverse the visual order (Cancel left / Confirm right).
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -286,6 +360,127 @@ Closes the drawer on click. Use `asChild` for custom close elements.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### DrawerRootProvider
+
+Provides a Drawer API created with `useDrawer` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseDrawerReturn` | `required` |
+| `modal` | `boolean` | `true` |
+
+### DrawerProvider
+
+Wraps the page. Open drawers scale this surface and reveal the background behind it.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### DrawerOverlay
+
+Public DrawerOverlay component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### DrawerPositioner
+
+Public DrawerPositioner component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### DrawerGrabber
+
+Public DrawerGrabber component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### DrawerMenu
+
+Menu list rendered inside a drawer. Uses the same row metrics as `Menu`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DrawerMenuItem
+
+Action row. Closes the drawer when wrapped in `DrawerClose`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "destructive"` | `"default"` |
+| `className` | `string` | `-` |
+
+### DrawerMenuSeparator
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DrawerMenuGroup
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DrawerMenuGroupLabel
+
+Section label. In a nested drawer, use it as the title and swipe down to go back.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DrawerMenuTrigger
+
+Opens a nested drawer. Renders the row and a trailing chevron.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### DrawerMenuCheckboxItem
+
+Checkbox row with the menu check indicator.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `checked` | `boolean` | `-` |
+| `defaultChecked` | `boolean` | `-` |
+| `disabled` | `boolean` | `false` |
+| `onCheckedChange` | `(details: { checked: boolean }) => void` | `-` |
+| `className` | `string` | `-` |
+
+### DrawerMenuRadioGroup
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `-` |
+| `defaultValue` | `string` | `-` |
+| `onValueChange` | `(details: { value: string }) => void` | `-` |
+| `className` | `string` | `-` |
+
+### DrawerMenuRadioItem
+
+Radio row with the same check indicator as `MenuRadioItem`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `required` |
+| `disabled` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
 ---

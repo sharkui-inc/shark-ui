@@ -1,8 +1,16 @@
 "use client";
 
-import { Marquee as ArkMarquee } from "@ark-ui/react/marquee";
+import {
+  Marquee as ArkMarquee,
+  useMarquee as useArkMarquee,
+  useMarqueeContext as useArkMarqueeContext,
+} from "@ark-ui/react/marquee";
 import type React from "react";
 import { cn } from "@/lib/utils";
+
+export const useMarquee = useArkMarquee;
+export const useMarqueeContext = useArkMarqueeContext;
+export const MarqueeRootProvider = ArkMarquee.RootProvider;
 
 interface MarqueeProps
   extends Omit<React.ComponentProps<typeof ArkMarquee.Root>, "side"> {
@@ -50,12 +58,12 @@ export const Marquee = (props: MarqueeProps) => {
     >
       {children}
 
-      {showEdges && (
+      {showEdges ? (
         <>
           <MarqueeEdge side={orientation === "horizontal" ? "start" : "top"} />
           <MarqueeEdge side={orientation === "horizontal" ? "end" : "bottom"} />
         </>
-      )}
+      ) : null}
     </ArkMarquee.Root>
   );
 };
@@ -77,8 +85,8 @@ export const MarqueeContent = (
           "delay-(--marquee-delay)",
           "data-[orientation=vertical]:animate-marquee-y data-[orientation=vertical]:flex-col",
           "data-[orientation=horizontal]:animate-marquee-x data-[orientation=horizontal]:flex-row",
-          "data-reverse:direction-[reverse]!",
-          "group-data-paused/marquee:paused!",
+          "data-reverse:shimmer-reverse",
+          "group-data-paused/marquee:paused",
           className
         )}
         data-slot="marquee-content"
@@ -114,6 +122,7 @@ export const MarqueeEdge = (
         "group-data-[orientation=horizontal]/marquee:h-full group-data-[orientation=horizontal]/marquee:w-1/4",
         "group-data-[orientation=vertical]/marquee:h-1/4 group-data-[orientation=vertical]/marquee:w-full",
         "pointer-events-none",
+        "rtl:rotate-180",
         "from-background to-transparent",
         "data-[side=start]:bg-linear-to-r",
         "data-[side=end]:bg-linear-to-l",

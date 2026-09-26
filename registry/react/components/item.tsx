@@ -45,22 +45,23 @@ const itemVariants = tv({
     "flex w-full flex-wrap items-center",
     "gap-(--space) p-(--space)",
     "in-data-[slot=menu-content]:p-0",
-    "text-sm",
+    "font-sans text-sm",
     "rounded-xl border",
-    "transition-colors duration-100",
-    "[a]:transition-colors [a]:hover:bg-muted",
-    "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
-    "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    "transition-colors duration-[120ms]",
+    "motion-reduce:transition-none",
+    "[&:is(a,button)]:hover:bg-muted",
+    "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+    "[&>svg:not([class*='size-']):not([class*='h-'])]:size-4 [&>svg]:pointer-events-none [&>svg]:shrink-0",
   ],
+  defaultVariants: {
+    variant: "default",
+  },
   variants: {
     variant: {
       default: "border-transparent",
-      outline: "border-border shadow-xs/5",
-      muted: "border-transparent bg-muted/48 shadow-muted/5 shadow-xs",
+      muted: "border-transparent bg-muted/48 shadow-xs/4",
+      outline: "border-border shadow-xs/4",
     },
-  },
-  defaultVariants: {
-    variant: "default",
   },
 });
 
@@ -84,23 +85,28 @@ export const Item = (props: ItemProps) => {
 const itemMediaVariants = tv({
   base: [
     "flex shrink-0 items-center justify-center gap-2",
-    "group-has-data-[slot=item-description]/item:translate-y-0.5 group-has-data-[slot=item-description]/item:self-start",
     "[&_svg]:pointer-events-none",
   ],
+  defaultVariants: {
+    variant: "default",
+  },
   variants: {
     variant: {
       default: "bg-transparent",
-      icon: ["[&_svg:not([class*='size-'])]:size-4"],
+      icon: [
+        "group-has-data-[slot=item-description]/item:self-start",
+        "[&_svg:not([class*='size-']):not([class*='h-'])]:h-lh",
+        "[&_svg:not([class*='size-']):not([class*='w-'])]:w-4",
+      ],
       image: [
+        "relative",
         "size-10",
         "rounded-xl",
         "overflow-hidden",
+        "after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten",
         "[&_img]:size-full [&_img]:object-cover",
       ],
     },
-  },
-  defaultVariants: {
-    variant: "default",
   },
 });
 
@@ -113,7 +119,7 @@ export const ItemMedia = (props: ItemMediaProps) => {
 
   return (
     <ark.div
-      className={cn(itemMediaVariants({ variant, className }))}
+      className={cn(itemMediaVariants({ className, variant }))}
       data-slot="item-media"
       data-variant={variant}
       {...rest}
@@ -161,7 +167,7 @@ export const ItemDescription = (props: React.ComponentProps<typeof ark.p>) => {
   return (
     <ark.p
       className={cn(
-        "line-clamp-2 text-left font-normal text-muted-foreground text-sm leading-normal",
+        "line-clamp-2 text-start font-normal text-muted-foreground text-sm leading-normal",
         "[&>a:hover]:text-primary",
         "[&>a]:underline [&>a]:underline-offset-4",
         className

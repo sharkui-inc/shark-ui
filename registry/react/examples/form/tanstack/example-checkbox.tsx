@@ -24,49 +24,25 @@ import {
   FieldSet,
 } from "@/registry/react/components/field";
 
-const tasks = [
-  {
-    id: "push",
-    label: "Push notifications",
-  },
-  {
-    id: "email",
-    label: "Email notifications",
-  },
-];
-
-const formSchema = z.object({
-  responses: z.boolean(),
-  tasks: z
-    .array(z.string())
-    .min(1, "Please select at least one notification type.")
-    .refine(
-      (value) => value.every((task) => tasks.some((t) => t.id === task)),
-      {
-        message: "Invalid notification type selected.",
-      }
-    ),
-});
-
-export const Example = () => {
+const Example = () => {
   const form = useForm({
     defaultValues: {
       responses: true,
       tasks: [] as string[],
     },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "tasks-submitted",
-        title: "Tasks submitted",
         description: (
           <pre className="mt-2">
             <code>{JSON.stringify(value, null, 2)}</code>
           </pre>
         ),
+        id: "tasks-submitted",
+        title: "Tasks submitted",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -169,5 +145,29 @@ export const Example = () => {
     </Card>
   );
 };
+
+const tasks = [
+  {
+    id: "push",
+    label: "Push notifications",
+  },
+  {
+    id: "email",
+    label: "Email notifications",
+  },
+];
+
+const formSchema = z.object({
+  responses: z.boolean(),
+  tasks: z
+    .array(z.string())
+    .min(1, "Please select at least one notification type.")
+    .refine(
+      (value) => value.every((task) => tasks.some((t) => t.id === task)),
+      {
+        message: "Invalid notification type selected.",
+      }
+    ),
+});
 
 export default Example;

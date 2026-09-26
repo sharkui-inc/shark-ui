@@ -1,11 +1,9 @@
 "use client";
 
-import {
-  BORDER_RADIUS,
-  createCssVars,
-  GRAY_COLORS,
-  PRIMARY_COLORS,
-} from "@/lib/themes";
+import type React from "react";
+import { CopyButton } from "@/components/copy-button";
+import { createCssVars } from "@/lib/theme/catalog";
+import { DEFAULT_PRIMARY_TONE } from "@/lib/theme/config";
 import {
   Dialog,
   DialogBody,
@@ -13,85 +11,86 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/registry/react/components/dialog";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { useConfig } from "@/store/config";
-import { getIconForLanguageExtension } from "@/utils/file-extension";
-import { CopyButton } from "../copy-button";
 
 export const CopyThemeCodeDialog = (
   props: React.ComponentProps<typeof Dialog>
 ) => {
   const { children, ...rest } = props;
+  const cfg = useConfig();
 
-  const [cfg] = useConfig();
-
-  const primary = PRIMARY_COLORS.find(
-    ({ value }) => value === cfg.primaryColor
-  );
-  const gray = GRAY_COLORS.find(({ value }) => value === cfg.grayColor);
-  const radius = BORDER_RADIUS.find(({ value }) => value === cfg.borderRadius);
-
-  const cssCode =
-    primary && gray && radius
-      ? createCssVars(primary.cssVars, gray.cssVars, radius.cssVars)
-      : "";
-
-  const lines = cssCode.split("\n");
+  const cssCode = createCssVars({
+    baseColor: cfg.baseColor,
+    borderRadius: cfg.borderRadius,
+    primaryColor: cfg.primaryColor,
+    primaryTone: cfg.primaryTone ?? DEFAULT_PRIMARY_TONE,
+  });
 
   return (
     <Dialog {...rest}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      {children}
 
-      <DialogContent size="xl">
+      <DialogContent size="lg">
         <DialogHeader>
-          <DialogTitle className="capitalize">{cfg.primaryColor}</DialogTitle>
+          <DialogTitle>Theme Tokens</DialogTitle>
           <DialogDescription>
-            Copy and paste the following code into your CSS file.
+            Copy the CSS variables for this preset.
           </DialogDescription>
         </DialogHeader>
+
         <DialogBody>
-          <figure
-            className="relative overflow-hidden rounded-xl"
-            data-rehype-pretty-code-figure
-          >
-            <figcaption
-              className="flex items-center gap-2 text-[.8125rem] text-muted-foreground [&_svg]:size-4.5 [&_svg]:text-muted-foreground [&_svg]:opacity-64 sm:[&_svg]:size-4"
-              data-language="css"
-              data-rehype-pretty-code-title=""
-              data-theme="github-dark github-light-default"
-            >
-              {getIconForLanguageExtension("css")}
-              globals.css
-            </figcaption>
-            <CopyButton
-              className="absolute inset-e-1.5 top-1.5"
-              value={cssCode}
-            />
-
-            <ScrollArea className="h-[300px] md:h-[450px]">
-              <pre className="min-w-0 max-w-xl bg-code px-4 py-3.5 text-sm outline-none has-data-highlighted-line:px-0 has-data-line-numbers:px-0">
-                <code data-language="css" data-line-numbers>
-                  {lines.map((line, index) => {
-                    const key = line ? `line-${index}` : `blank-${index}`;
-
-                    return (
-                      <span
-                        className="line text-code-foreground"
-                        data-line
-                        key={key}
-                      >
-                        {line || "\u00a0"}
-                      </span>
-                    );
-                  })}
-                </code>
-              </pre>
-            </ScrollArea>
-          </figure>
+          <ThemeCodeFigure code={cssCode} language="css" title="globals.css" />
         </DialogBody>
       </DialogContent>
     </Dialog>
+  );
+};
+
+const ThemeCodeFigure = ({
+  code,
+  language,
+  title,
+}: {
+  code: string;
+  language: string;
+  title: string;
+}) => {
+  const lines = code.split("\n");
+
+  return (
+    <figure
+      className="relative mt-0 w-full min-w-0 overflow-hidden rounded-2xl border bg-code text-code-foreground"
+      data-slot="theme-code"
+    >
+      <figcaption
+        className="flex min-h-11 items-center gap-2 border-b px-4 py-2.5 font-mono text-[.8125rem] text-muted-foreground"
+        data-language={language}
+      >
+        {title}
+      </figcaption>
+      <CopyButton className="absolute inset-e-1.5 top-1.5" value={code} />
+      <div className="max-h-72 w-full min-w-0 overflow-auto">
+        <pre className="m-0 w-max min-w-full bg-code px-4 py-3.5 font-mono text-sm leading-6">
+          <code
+            className="flex w-max min-w-full flex-col"
+            data-language={language}
+          >
+            {lines.map((line, index) => {
+              const key = line ? `line-${index}` : `blank-${index}`;
+
+              return (
+                <span
+                  className="min-h-6 w-max min-w-full whitespace-pre pe-4 text-code-foreground"
+                  key={key}
+                >
+                  {line || "\u00a0"}
+                </span>
+              );
+            })}
+          </code>
+        </pre>
+      </div>
+    </figure>
   );
 };

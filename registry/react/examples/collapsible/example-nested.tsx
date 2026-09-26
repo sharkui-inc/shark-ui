@@ -13,7 +13,7 @@ import {
 } from "@/registry/react/components/collapsible";
 
 const Example = () => (
-  <Card className="w-80">
+  <Card className="w-full max-w-80 [--space:--spacing(6)]">
     <CardHeader
       description="We'll help you get started"
       title="Getting started"

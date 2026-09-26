@@ -103,10 +103,10 @@
 }
 
 .prose blockquote:not(.not-prose blockquote) {
-  padding-left: calc(var(--spacing) * 6);
+  padding-inline-start: calc(var(--spacing) * 6);
   margin-top: calc(var(--spacing) * 6);
   font-style: italic;
-  border-left: 2px solid var(--color-border);
+  border-inline-start: 2px solid var(--color-border);
 }
 
 .prose table:not(.not-prose table) {
@@ -129,7 +129,7 @@
 .prose table:not(.not-prose table) th {
   padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
   font-weight: 700;
-  text-align: left;
+  text-align: start;
   border: 1px solid var(--color-border);
 }
 
@@ -152,7 +152,7 @@
 
 .prose table:not(.not-prose table) td {
   padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
-  text-align: left;
+  text-align: start;
   border: 1px solid var(--color-border);
 }
 
@@ -165,8 +165,8 @@
 }
 
 .prose ul:not(.not-prose ul) {
+  margin-inline-start: calc(var(--spacing) * 6);
   margin-top: calc(var(--spacing) * 6);
-  margin-left: calc(var(--spacing) * 6);
   list-style: disc;
 }
 
@@ -181,8 +181,8 @@
 }
 
 .prose ol:not(.not-prose ol) {
+  margin-inline-start: calc(var(--spacing) * 6);
   margin-top: calc(var(--spacing) * 6);
-  margin-left: calc(var(--spacing) * 6);
   list-style: decimal;
 }
 
@@ -198,7 +198,8 @@
 
 .prose img:not(.not-prose img),
 .prose picture:not(.not-prose picture),
-.prose video:not(.not-prose video) {
+.prose video:not(.not-prose video),
+.prose iframe:not(.not-prose iframe) {
   margin-top: calc(var(--spacing) * 6);
   margin-bottom: calc(var(--spacing) * 6);
 }
@@ -266,9 +267,13 @@
   margin-bottom: calc(var(--spacing) * 6);
 }
 
-.prose figure:not(.not-prose figure) img {
+.prose figure:not(.not-prose figure) img,
+.prose figure:not(.not-prose figure) iframe {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.prose figure:not(.not-prose figure) img {
   border-radius: var(--radius);
 }
 
@@ -287,5 +292,5 @@
   line-height: var(--text-xs--line-height);
   color: var(--color-muted-foreground);
   background-color: var(--color-muted);
-  border-radius: var(--radius-sm);
+  border-radius: calc(var(--radius) * 0.5);
 }

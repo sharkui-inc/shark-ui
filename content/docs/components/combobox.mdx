@@ -1,10 +1,14 @@
 ---
 title: Combobox
-description: Displays a searchable list of options.
+description: Searchable list of options.
+seo:
+  description: Searchable list of options in a popup.
 links:
   doc: https://ark-ui.com/docs/components/combobox
   api: https://ark-ui.com/docs/components/combobox#api-reference
 ---
+
+import manifest from "@/registry/manifest/combobox";
 
 <ComponentPreview componentName="combobox" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/combobox
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -53,7 +55,9 @@ npm install @ark-ui/react lucide-react tailwind-variants
 
 ```text
 Combobox
-  ├── ComboboxInput
+  ├── ComboboxInput | ComboboxChips | ComboboxButtonTrigger
+  │   ├── ComboboxChip
+  │   └── ComboboxChipsInput
   └── ComboboxContent
       ├── ComboboxEmpty
       └── ComboboxList
@@ -69,6 +73,7 @@ import { useFilter, useListCollection } from "@ark-ui/react";
 import {
   Combobox,
   ComboboxContent,
+  ComboboxEmpty,
   ComboboxGroup,
   ComboboxInput,
   ComboboxItem,
@@ -88,10 +93,13 @@ const { collection, filter } = useListCollection({
 
 <Combobox
   collection={collection}
-  onInputValueChange={({ inputValue }) => filter(inputValue)}
+  onInputValueChange={({ inputValue, reason }) =>
+    filter(reason === "item-select" ? "" : inputValue)
+  }
 >
   <ComboboxInput placeholder="Select an option" />
   <ComboboxContent>
+    <ComboboxEmpty />
     <ComboboxList>
       {items.map((item) => (
         <ComboboxItem item={item} key={item.value}>
@@ -105,9 +113,31 @@ const { collection, filter } = useListCollection({
 
 ## Controlled
 
-Control the selected value with `inputValue` and `onValueChange` props.
+Control the selected value with `value` and `onValueChange` props.
 
 <ComponentPreview componentName="combobox" fileName="example-controlled" />
+
+## States
+
+### Invalid
+
+<ComponentPreview componentName="combobox" fileName="example-invalid" />
+
+### Disabled
+
+<ComponentPreview componentName="combobox" fileName="example-disabled" />
+
+## Variants
+
+Control input appearance with the `variant` prop on `ComboboxInput`.
+
+### Default
+
+<ComponentPreview componentName="combobox" fileName="example-variant-default" />
+
+### Ghost
+
+<ComponentPreview componentName="combobox" fileName="example-variant-ghost" />
 
 ## Size
 
@@ -123,17 +153,13 @@ Control the selected value with `inputValue` and `onValueChange` props.
 
 <ComponentPreview componentName="combobox" fileName="example-size-lg" />
 
-## States
-
-### Invalid
-
-<ComponentPreview componentName="combobox" fileName="example-invalid" />
-
-### Disabled
-
-<ComponentPreview componentName="combobox" fileName="example-disabled" />
-
 ## Examples
+
+### Trigger with search
+
+Use a button trigger to open a searchable list without a chevron indicator.
+
+<ComponentPreview componentName="combobox" fileName="example-button-trigger" />
 
 ### Auto highlight
 
@@ -153,11 +179,13 @@ Use Combobox with `Field` components to style the combobox with the field compon
 
 ### Scrollable
 
+Long lists scroll, and the selected option is shown when reopened.
+
 <ComponentPreview componentName="combobox" fileName="example-with-scroll" />
 
 ### Multiple
 
-Enable multiple selection by setting the `multiple` prop to `Combobox`.
+Use `multiple` to select more than one option.
 
 <ComponentPreview componentName="combobox" fileName="example-multiple" />
 
@@ -167,9 +195,31 @@ Pass `showClear` to `ComboboxInput` to show a clear button.
 
 <ComponentPreview componentName="combobox" fileName="example-with-clear-button" />
 
+### Without trigger
+
+Hide the chevron with `showTrigger={false}`.
+
+<ComponentPreview componentName="combobox" fileName="example-without-trigger" />
+
+### Open on typing
+
+Set `openOnClick={false}` to open the list only when typing or using the trigger.
+
+<ComponentPreview componentName="combobox" fileName="example-without-open-on-click" />
+
 ### With start icon
 
 <ComponentPreview componentName="combobox" fileName="example-with-start-icon" />
+
+### With Description
+
+<ComponentPreview componentName="combobox" fileName="example-with-description" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="combobox" />
 
 ## API Reference
 
@@ -179,17 +229,19 @@ Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `ListCollection<T>` | **required** |
-| `value` | `string \| string[]` | - |
-| `defaultValue` | `string \| string[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
-| `onInputValueChange` | `(details: InputValueChangeDetails) => void` | - |
+| `collection` | `ListCollection<T>` | `required` |
+| `value` | `string \| string[]` | `-` |
+| `defaultValue` | `string \| string[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | `-` |
+| `onInputValueChange` | `(details: InputValueChangeDetails) => void` | `-` |
 | `multiple` | `boolean` | `false` |
-| `disabled` | `boolean` | - |
+| `selectionBehavior` | `"clear" \| "replace" \| "preserve"` | `"replace"` |
+| `disabled` | `boolean` | `-` |
 | `openOnClick` | `boolean` | `true` |
+| `alwaysSubmitOnEnter` | `boolean` | `-` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### ComboboxControl
 
@@ -197,29 +249,73 @@ Optional wrapper for custom layouts.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxInput
 
-Input with dropdown trigger and optional clear button. Combines search and selection.
+Input with menu trigger and optional clear button. Combines search and selection.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `variant` | `"ghost"` | `-` |
 | `showTrigger` | `boolean` | `true` |
 | `showClear` | `boolean` | `false` |
-| `disabled` | `boolean` | - |
-| `className` | `string` | - |
+| `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
-### ComboboxTrigger
+### ComboboxChips
 
-Opens the dropdown on click.
+Control for multiple selections. Wrap `ComboboxChip` values and a
+`ComboboxChipsInput` inside it.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `className` | `string` | `-` |
+
+### ComboboxChipsInput
+
+Search input for use inside `ComboboxChips`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `placeholder` | `string` | `-` |
+| `className` | `string` | `-` |
+
+### ComboboxChip
+
+Displays one selected value and removes it from the combobox when its button is pressed.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `required` |
+| `children` | `ReactNode` | `required` |
+| `removeProps` | `ComponentProps<"button">` | `-` |
+| `className` | `string` | `-` |
+
+### ComboboxTrigger
+
+Opens the menu on click.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+
+### ComboboxButtonTrigger
+
+Button trigger that displays the selected value or a placeholder.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `placeholder` | `ReactNode` | `"Select an option"` |
+| `showTrigger` | `boolean` | `true` |
+| `size` | [`ButtonSize`](/docs/components/button#size) | `"md"` |
+| `variant` | [`ButtonVariant`](/docs/components/button#variants) | `"outline"` |
+| `children` | `ReactNode` | `-` |
+| `className` | `string` | `-` |
 
 ### ComboboxClear
 
@@ -227,16 +323,16 @@ Button to clear the input value.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxContent
 
-Holds the dropdown options. Displayed in a portal.
+Holds the menu options. Displayed in a portal.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxList
 
@@ -244,8 +340,8 @@ Wraps the list of options. Use with collection.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxItem
 
@@ -253,9 +349,9 @@ A single selectable option.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `item` | `T` | **required** |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `item` | `T` | `required` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxGroup
 
@@ -263,9 +359,9 @@ Groups related options under an optional heading.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string \| ReactNode` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `heading` | `string \| ReactNode` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxGroupLabel
 
@@ -273,8 +369,8 @@ Label for an option group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ComboboxEmpty
 
@@ -282,8 +378,42 @@ Shown when no options match the current filter. Use for empty state.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `children` | `ReactNode` | `No results found.` |
+
+### ComboboxRootProvider
+
+Provides a Combobox API created with `useCombobox` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseComboboxReturn` | `required` |
+
+### ComboboxContext
+
+Render-prop access to the surrounding component API.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: unknown) => React.ReactNode` | `required` |
+
+### ComboboxFieldInput
+
+Public ComboboxFieldInput component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### ComboboxPositioner
+
+Public ComboboxPositioner component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

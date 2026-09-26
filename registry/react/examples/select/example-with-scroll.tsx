@@ -25,7 +25,7 @@ const Example = () => (
 );
 
 const collection = createListCollection({
-  items: Array.from({ length: 20 }, (_, i) => ({
+  items: Array.from({ length: 40 }, (_, i) => ({
     label: `Framework ${i + 1}`,
     value: `framework-${i + 1}`,
   })),

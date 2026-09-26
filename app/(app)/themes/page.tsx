@@ -1,39 +1,35 @@
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
-import { CardsDemo } from "./_components/cards/cards";
-import { ThemeSelector } from "./_components/theme-selector/theme-selector";
+import { NavigationTabs } from "./_components/navigation-tabs";
+import { ThemesFooter } from "./_components/themes-footer";
+import { ThemesWelcomeDialog } from "./_components/themes-welcome-dialog";
 
 export const dynamic = "force-static";
 export const revalidate = false;
 
 export const metadata: Metadata = createMetadata({
-  title: "Themes",
   description: "Hand-picked color themes for Shark UI.",
+  title: "Themes",
   url: "/themes",
 });
 
-const ThemesPage = () => {
-  return (
-    <>
-      <main className="container flex flex-col gap-4">
-        <div className="grid gap-2 pt-8 pb-4">
-          <h1 className="font-extrabold text-3xl">
-            Pick a Color. Make it yours.
-          </h1>
+const ThemesPage = () => (
+  <main className="flex h-[calc(100dvh-var(--header-height))] min-h-0 flex-col">
+    <ThemesWelcomeDialog />
 
-          <p className="text-lg text-muted-foreground">
-            Try our hand-picked themes. Copy and paste them into your project.
-          </p>
-        </div>
+    <h1 className="sr-only">Theme builder</h1>
 
-        <ThemeSelector />
+    <section
+      aria-label="Theme preview"
+      className="flex min-h-0 flex-1 flex-col"
+    >
+      <div className="container flex min-h-0 flex-1 flex-col py-4">
+        <NavigationTabs />
+      </div>
+    </section>
 
-        <CardsDemo className="pb-8" />
-      </main>
-
-      {/* <Footer /> */}
-    </>
-  );
-};
+    <ThemesFooter />
+  </main>
+);
 
 export default ThemesPage;

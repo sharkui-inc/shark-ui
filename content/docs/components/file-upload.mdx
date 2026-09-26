@@ -1,10 +1,14 @@
 ---
 title: File Upload
-description: A component that allows users to upload files.
+description: Upload files with a dropzone.
+seo:
+  description: Dropzone and file list for uploads with previews.
 links:
   doc: https://ark-ui.com/docs/components/file-upload
   api: https://ark-ui.com/docs/components/file-upload#api-reference
 ---
+
+import manifest from "@/registry/manifest/file-upload";
 
 <ComponentPreview componentName="file-upload" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/file-upload
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -98,13 +100,33 @@ import {
 </FileUpload>
 ```
 
+## States
+
+### Disabled
+
+Use the `disabled` prop to prevent uploading.
+
+<ComponentPreview componentName="file-upload" fileName="example-disabled" />
+
+### Invalid
+
+Use the `invalid` prop to mark the uploader as invalid.
+
+<ComponentPreview componentName="file-upload" fileName="example-invalid" />
+
+### Read-only
+
+Use the `readOnly` prop to show files without allowing changes.
+
+<ComponentPreview componentName="file-upload" fileName="example-readonly" />
+
 ## Examples
 
 ### Multiple Files
 
-Use the `maxFiles` prop to allow uploading multiple files at once.
+Use `maxFiles` to allow multiple files and `onFileReject` to show feedback when validation rejects them.
 
-<ComponentPreview componentName="file-upload" fileName="example-multiple-files" />
+<ComponentPreview componentName="file-upload" fileName="example-multiple-files" autoHeight />
 
 ### Trigger only
 
@@ -112,13 +134,13 @@ Use the `maxFiles` prop to allow uploading multiple files at once.
 
 ### Dropzone only
 
-Use `FileUploadDropzone` to enable drag-and-drop. It exposes a `data-dragging` attribute for styling the drag state.
+Use `FileUploadDropzone` to enable drag-and-drop.
 
 <ComponentPreview componentName="file-upload" fileName="example-dropzone" />
 
 ### Accepted Files
 
-Use the `accept` prop to restrict file types.
+Use the `accept` prop to restrict file types to PNG and JPEG.
 
 <ComponentPreview componentName="file-upload" fileName="example-accepted-file-types" />
 
@@ -130,18 +152,6 @@ Use `Field` to add helper text and error handling.
 
 ### Custom Preview
 
-```tsx
-const { acceptedFiles } = useFileUploadContext();
-
-return (
-  <div>
-    {acceptedFiles.map((file) => (
-      <div key={file.name}>{file.name}</div>
-    ))}
-  </div>
-);
-```
-
 <ComponentPreview componentName="file-upload" fileName="example-custom-preview" />
 
 ### Media Capture
@@ -152,7 +162,7 @@ Use the `capture` prop to capture and upload media directly from the device came
 
 <Alert variant="warning">
 <InfoIcon />
-<AlertTitle>The capture prop is only supported on mobile devices.</AlertTitle>
+<AlertTitle>The capture prop is only supported on mobile devices. It will open file selector on desktop devices.</AlertTitle>
 </Alert>
 
 ### Directory Upload
@@ -178,9 +188,7 @@ Use `FileUploadClearTrigger` to remove all uploaded files at once.
 
 ### Custom spacing
 
-Use `[--space:--spacing("value")]` on `FileUploadDropzone` to adjust internal spacing.
-
-Default spacing is `--spacing(6)`.
+The `[--space:--spacing("value")]` controls the internal spacing.
 
 <ComponentPreview componentName="file-upload" fileName="example-custom-spacing" />
 
@@ -189,6 +197,12 @@ Default spacing is `--spacing(6)`.
 ```css
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="file-upload" />
 
 ## API Reference
 
@@ -213,6 +227,7 @@ Root component. Manages file state and wraps the upload UI.
 | `onFileAccept` | `(details: FileAcceptDetails) => void` | `-` |
 | `onFileChange` | `(details: FileChangeDetails) => void` | `-` |
 | `onFileReject` | `(details: FileRejectDetails) => void` | `-` |
+| `preventDocumentDrop` | `boolean` | `true` |
 | `readOnly` | `boolean` | `-` |
 | `required` | `boolean` | `-` |
 | `transformFiles` | `(files: File[]) => Promise<File[]>` | `-` |
@@ -238,9 +253,9 @@ Drop zone for drag-and-drop. Exposes `data-dragging` when files are dragged over
 | `disableClick` | `boolean` | `-` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(8)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(6)` |
 
 ### FileUploadDropzoneIcon
 
@@ -298,7 +313,7 @@ Single uploaded file with preview and remove button.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `file` | `File` | required |
+| `file` | `File` | `required` |
 | `asChild` | `boolean` | `-` |
 | `className` | `string` | `-` |
 
@@ -361,17 +376,25 @@ Removes all files from the list.
 
 Hook to access file upload state and methods. Use inside `FileUpload` or `FileUploadRootProvider`.
 
-| Property | Type |
-| --- | --- |
-| `acceptedFiles` | `File[]` |
-| `rejectedFiles` | `FileRejection[]` |
-| `openFilePicker` | `() => void` |
-| `deleteFile` | `(file: File, type?: ItemType) => void` |
-| `clearFiles` | `() => void` |
-| `clearRejectedFiles` | `() => void` |
-| `getFileSize` | `(file: File) => string` |
-| `createFileUrl` | `(file: File, cb: (url: string) => void) => () => void` |
-| `setClipboardFiles` | `(dt: DataTransfer) => boolean` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `acceptedFiles` | `File[]` | `-` |
+| `rejectedFiles` | `FileRejection[]` | `-` |
+| `openFilePicker` | `() => void` | `-` |
+| `deleteFile` | `(file: File, type?: ItemType) => void` | `-` |
+| `clearFiles` | `() => void` | `-` |
+| `clearRejectedFiles` | `() => void` | `-` |
+| `getFileSize` | `(file: File) => string` | `-` |
+| `createFileUrl` | `(file: File, cb: (url: string) => void) => () => void` | `-` |
+| `setClipboardFiles` | `(dt: DataTransfer) => boolean` | `-` |
+
+### FileUploadRootProvider
+
+Provides a FileUpload API created with `useFileUpload` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseFileUploadReturn` | `required` |
 
 ---
 

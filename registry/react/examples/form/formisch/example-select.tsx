@@ -35,32 +35,21 @@ import {
   SelectValue,
 } from "@/registry/react/components/select";
 
-const formSchema = v.object({
-  language: v.pipe(
-    v.array(v.string()),
-    v.check((val) => val[0] !== "", "Please select your spoken language."),
-    v.check(
-      (val) => !val.includes("auto"),
-      "Auto-detection is not allowed. Please select a specific language."
-    )
-  ),
-});
-
 const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: { language: [""] },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "language-submitted",
-      title: "Language submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "language-submitted",
+      title: "Language submitted",
     });
   };
 
@@ -79,6 +68,8 @@ const Example = () => {
               {(field) => (
                 <Field
                   invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
                   orientation="responsive"
                 >
                   <FieldContent>
@@ -120,6 +111,17 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  language: v.pipe(
+    v.array(v.string()),
+    v.check((val) => val[0] !== "", "Please select your spoken language."),
+    v.check(
+      (val) => !val.includes("auto"),
+      "Auto-detection is not allowed. Please select a specific language."
+    )
+  ),
+});
 
 const collection = createListCollection({
   items: [

@@ -2,26 +2,29 @@
 
 import {
   RatingGroup as ArkRatingGroup,
-  useRatingGroupContext,
+  useRatingGroup as useArkRatingGroup,
+  useRatingGroupContext as useArkRatingGroupContext,
 } from "@ark-ui/react/rating-group";
 import { StarIcon } from "lucide-react";
-import React from "react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useRating = useRatingGroupContext;
+export const useRating = useArkRatingGroup;
+export const useRatingContext = useArkRatingGroupContext;
+export const RatingRootProvider = ArkRatingGroup.RootProvider;
 
 interface RatingProps extends React.ComponentProps<typeof ArkRatingGroup.Root> {
   /**
    * The icon to use for the rating.
    *
-   * @default <StarIcon />
+   * @default StarIcon
    */
-  icon?: React.ReactNode;
+  icon?: React.JSX.ElementType;
 }
 
 export const Rating = (props: RatingProps) => {
   const {
-    icon = <StarIcon />,
+    icon: Icon = StarIcon,
     allowHalf = false,
     count = 5,
     className,
@@ -56,6 +59,7 @@ export const Rating = (props: RatingProps) => {
                         "relative inline-flex",
                         "**:data-fg:text-current **:data-fg:[clip-path:inset(0_0_0_0)]",
                         "[&[data-half]_[data-fg]]:[clip-path:inset(0_50%_0_0)]",
+                        "rtl:[&[data-half]_[data-fg]]:[clip-path:inset(0_0_0_50%)]",
                         "[&:not([data-highlighted])_[data-fg]]:[clip-path:inset(0_100%_0_0)]",
                         "[&_svg]:absolute [&_svg]:inset-0 [&_svg]:size-full [&_svg]:text-current"
                       )}
@@ -63,20 +67,8 @@ export const Rating = (props: RatingProps) => {
                       data-highlighted={highlighted ? "" : undefined}
                       data-slot="rating-item-indicator"
                     >
-                      {React.cloneElement(
-                        icon as React.ReactElement,
-                        {
-                          "data-bg": "",
-                        } as React.ComponentProps<"svg">
-                      )}
-
-                      {React.cloneElement(
-                        icon as React.ReactElement,
-                        {
-                          "data-fg": "",
-                          fill: "currentColor",
-                        } as React.ComponentProps<"svg">
-                      )}
+                      <Icon data-bg="" />
+                      <Icon data-fg="" fill="currentColor" />
                     </span>
                   )}
                 </ArkRatingGroup.ItemContext>
@@ -100,10 +92,9 @@ export const RatingItem = (
     <ArkRatingGroup.Item
       className={cn(
         "inline-flex items-center justify-center",
-        "rounded-md",
         "not-[[data-disabled],[data-readonly]]:cursor-pointer",
         "data-disabled:opacity-64 data-disabled:grayscale",
-        "outline-none focus-visible:ring-current not-data-readonly:focus-visible:ring-[3px] focus-visible:ring-offset-1 focus-visible:ring-offset-background",
+        "outline-hidden",
         className
       )}
       data-slot="rating-item"

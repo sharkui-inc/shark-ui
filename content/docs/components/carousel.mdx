@@ -1,10 +1,14 @@
 ---
 title: Carousel
-description: Lets users cycle through a series of items.
+description: Cycle through a series of items.
+seo:
+  description: Slide through items with next/previous controls.
 links:
   doc: https://ark-ui.com/docs/components/carousel
   api: https://ark-ui.com/docs/components/carousel#api-reference
 ---
+
+import manifest from "@/registry/manifest/carousel";
 
 <ComponentPreview componentName="carousel" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/carousel
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -90,6 +92,12 @@ import {
 </Carousel>
 ```
 
+## Controlled
+
+Use `page` and `onPageChange` to control the carousel.
+
+<ComponentPreview componentName="carousel" fileName="example-controlled" />
+
 ## Orientation
 
 ### Horizontal
@@ -102,7 +110,7 @@ import {
 
 ## Thumbnail Indicators
 
-Render each thumbnail inside `CarouselIndicator` to create a visual preview of each slide.
+Render each thumbnail inside `CarouselIndicator`.
 
 ### Horizontal
 
@@ -116,7 +124,7 @@ Render each thumbnail inside `CarouselIndicator` to create a visual preview of e
 
 ### Autoplay
 
-Use `autoplay` props on `Carousel` to make the carousel play automatically.
+Use the `autoplay` prop to play automatically.
 
 <ComponentPreview componentName="carousel" fileName="example-autoplay" />
 
@@ -126,29 +134,35 @@ Use `loop` prop to make the carousel loop.
 
 <ComponentPreview componentName="carousel" fileName="example-loop" />
 
-### Controlled
-
-Use `page` and `onPageChange` props to control the carousel state programmatically.
-
-<ComponentPreview componentName="carousel" fileName="example-controlled" />
-
-### Slides Per Page
-
-Display multiple slides simultaneously by setting the `slidesPerPage` prop on `Carousel`.
-
-<ComponentPreview componentName="carousel" fileName="example-slides-per-page" />
-
 ### Spacing
 
-Control the gap between slides using the `spacing` prop on `Carousel`.
+Use the `spacing` prop to control the gap between slides.
 
 <ComponentPreview componentName="carousel" fileName="example-spacing" />
 
+### Slides Per Page
+
+Use the `slidesPerPage` prop to show multiple slides at once.
+
+<ComponentPreview componentName="carousel" fileName="example-slides-per-page" />
+
+### Responsive
+
+Use `matchMedia` to update `slidesPerPage` at the `md` and `lg` breakpoints.
+
+<ComponentPreview componentName="carousel" fileName="example-responsive" />
+
 ### Mouse Drag
 
-To allow mouse drag, set the `allowMouseDrag` prop on `Carousel`.
+Use the `allowMouseDrag` prop to enable mouse drag.
 
 <ComponentPreview componentName="carousel" fileName="example-mouse-drag" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="carousel" />
 
 ## API Reference
 
@@ -158,7 +172,7 @@ Root component. Manages slide state and navigation.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `slideCount` | `number` | **required** |
+| `slideCount` | `number` | `required` |
 | `allowMouseDrag` | `boolean` | `false` |
 | `autoplay` | `boolean \| { delay: number }` | `false` |
 | `defaultPage` | `number` | `0` |
@@ -168,7 +182,7 @@ Root component. Manages slide state and navigation.
 | `slidesPerPage` | `number` | `1` |
 | `slidesPerMove` | `number \| 'auto'` | `'auto'` |
 | `spacing` | `string` | `"16px"` |
-| `padding` | `number` | `0` |
+| `padding` | `string` | `-` |
 | `className` | `string` | `-` |
 
 ### CarouselContent
@@ -186,7 +200,7 @@ Wraps a single slide.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `index` | `number` | **required** |
+| `index` | `number` | `required` |
 | `snapAlign` | `"start" \| "center" \| "end"` | `"start"` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
@@ -207,6 +221,7 @@ Goes to the previous slide.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
+| `label` | `string` | `"Previous"` |
 
 ### CarouselNext
 
@@ -215,6 +230,7 @@ Goes to the next slide.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
+| `label` | `string` | `"Next"` |
 
 ### CarouselIndicatorGroup
 
@@ -231,10 +247,18 @@ Indicator for a slide. Click to jump to that slide.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `index` | `number` | **required** |
+| `index` | `number` | `required` |
 | `readOnly` | `boolean` | `false` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
+
+### CarouselRootProvider
+
+Provides a Carousel API created with `useCarousel` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseCarouselReturn` | `required` |
 
 ---
 

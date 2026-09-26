@@ -1,7 +1,11 @@
 ---
 title: Aspect Ratio
-description: Wrapper that maintains aspect ratio for content.
+description: Maintains a fixed aspect ratio for content.
+seo:
+  description: Fixed aspect ratio for media and embeds.
 ---
+
+import manifest from "@/registry/manifest/aspect-ratio";
 
 <ComponentPreview componentName="aspect-ratio" />
 
@@ -28,9 +32,7 @@ npx shadcn@latest add @shark/aspect-ratio
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -86,6 +88,12 @@ Use `[--ratio:*]` with breakpoints to change the ratio at different screen sizes
   md:[--ratio:16/9] lg:[--ratio:16/9]
 ```
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="aspect-ratio" />
+
 ## API Reference
 
 ### AspectRatio
@@ -97,6 +105,6 @@ Root component.
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
-| Attribute | Description |
-| --- | --- |
-| `--ratio` | `1` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--ratio` | `string` | `1` |

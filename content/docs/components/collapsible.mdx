@@ -1,10 +1,14 @@
 ---
 title: Collapsible
-description: Collapsible content in a vertical stack.
+description: Show or hide content behind a trigger.
+seo:
+  description: Show or hide a block of content behind a trigger.
 links:
   doc: https://ark-ui.com/docs/components/collapsible
   api: https://ark-ui.com/docs/components/collapsible#api-reference
 ---
+
+import manifest from "@/registry/manifest/collapsible";
 
 <ComponentPreview componentName="collapsible" />
 
@@ -31,26 +35,14 @@ npx shadcn@latest add @shark/collapsible
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Add the following animations to your `globals.css`.</Step>
+<Step>Ensure your CSS entry imports `tw-animate-css`.</Step>
 
-```css title="globals.css" showLineNumbers
-@theme inline {
-  --animate-expand: expand 0.2s ease-out;
-  --animate-collapse: collapse 0.2s ease-out;
+```css title="globals.css"
+@import "tw-animate-css";
 
-  @keyframes expand {
-    from { height: var(--collapsed-height, 0); }
-    to { height: var(--height); }
-  }
-  @keyframes collapse {
-    from { height: var(--height); }
-    to { height: var(--collapsed-height, 0); }
-  }
-}
+/* ... */
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -95,7 +87,7 @@ import {
 
 ## Controlled
 
-Use the `open` and `onOpenChange` props to control the collapsible state programmatically.
+Use the `open` and `onOpenChange` props to control the collapsible.
 
 <ComponentPreview componentName="collapsible" fileName="example-controlled" />
 
@@ -115,7 +107,7 @@ Collapsibles can be nested to create hierarchical structures.
 
 ### Partial Collapse
 
-Use the `collapsedHeight` prop to show a portion of the content when collapsed.
+Use the `collapsedHeight` or `collapsedWidth` prop to show a portion of the content when collapsed.
 
 <ComponentPreview componentName="collapsible" fileName="example-partial-collapse" />
 
@@ -127,6 +119,12 @@ Use the `collapsedHeight` prop to show a portion of the content when collapsed.
   Interactive elements (links, buttons, inputs) within the collapsed area automatically become inaccesible to prevent keyboard navigation to hidden content.
   </AlertDescription>
 </Alert>
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="collapsible" />
 
 ## API Reference
 
@@ -140,6 +138,10 @@ Root component. Controls expand/collapse state and animation.
 | `defaultOpen` | `boolean` | `false` |
 | `onOpenChange` | `({ open }: OpenChangeDetails) => void` | `-` |
 | `collapsedHeight` | `string` | `-` |
+| `collapsedWidth` | `string` | `-` |
+| `lazyMount` | `boolean` | `true` |
+| `unmountOnExit` | `boolean` | `true` |
+| `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
 | `className` | `string` | `-` |
 
 ### CollapsibleTrigger
@@ -168,6 +170,14 @@ Chevron or icon that rotates to indicate open/closed state.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
+
+### CollapsibleRootProvider
+
+Provides a Collapsible API created with `useCollapsible` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseCollapsibleReturn` | `required` |
 
 ---
 

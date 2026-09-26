@@ -1,17 +1,14 @@
+import type React from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/registry/react/components/tabs";
 
-export const TabsExample = () => (
-  <Tabs defaultValue="tab-1">
-    <TabsList>
-      <TabsTrigger tabIndex={-1} value="tab-1">
-        Profile
-      </TabsTrigger>
-      <TabsTrigger tabIndex={-1} value="tab-2">
-        Settings
-      </TabsTrigger>
-      <TabsTrigger tabIndex={-1} value="tab-3">
-        Security
-      </TabsTrigger>
+export const TabsExample = (
+  props: Omit<React.ComponentProps<"div">, "defaultValue">
+) => (
+  <Tabs className="w-full" defaultValue="profile" {...props}>
+    <TabsList className="w-full">
+      <TabsTrigger value="profile">Profile</TabsTrigger>
+      <TabsTrigger value="settings">Settings</TabsTrigger>
+      <TabsTrigger value="security">Security</TabsTrigger>
     </TabsList>
   </Tabs>
 );

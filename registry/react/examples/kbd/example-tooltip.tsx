@@ -13,9 +13,9 @@ const Example = () => (
         Dark mode
       </Button>
     </TooltipTrigger>
-    <TooltipContent className="flex items-center gap-2">
+    <TooltipContent>
       Toggle mode
-      <KbdGroup className="ml-1.5 inline">
+      <KbdGroup>
         <Kbd>D</Kbd>
       </KbdGroup>
     </TooltipContent>

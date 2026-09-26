@@ -1,10 +1,14 @@
 ---
 title: Rating
-description: Show reviews and ratings in a visual format.
+description: Star ratings for reviews.
+seo:
+  description: Star ratings with half stars and read-only mode.
 links:
   doc: https://ark-ui.com/docs/components/rating-group
   api: https://ark-ui.com/docs/components/rating-group#api-reference
 ---
+
+import manifest from "@/registry/manifest/rating";
 
 <ComponentPreview componentName="rating" />
 
@@ -31,42 +35,22 @@ npx shadcn@latest add @shark/rating
 
 <Step>Install the dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
 @theme inline {
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-info: var(--info);
-  --color-info-foreground: var(--info-foreground);
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
-  --color-warning-foreground: var(--warning-foreground);
 }
 
 :root {
-  --destructive-foreground: var(--color-red-700);
-  --info: var(--color-blue-500);
-  --info-foreground: var(--color-blue-700);
-  --success: var(--color-emerald-500);
-  --success-foreground: var(--color-emerald-700);
   --warning: var(--color-amber-500);
-  --warning-foreground: var(--color-amber-700);
 }
 
 .dark {
-  --destructive-foreground: var(--color-red-400);
-  --info: var(--color-blue-500);
-  --info-foreground: var(--color-blue-400);
-  --success: var(--color-emerald-500);
-  --success-foreground: var(--color-emerald-400);
   --warning: var(--color-amber-500);
-  --warning-foreground: var(--color-amber-400);
 }
 ```
 </CodeCollapsibleWrapper>
@@ -95,7 +79,7 @@ import { RatingGroup } from "@/components/ui/rating";
 
 ## Controlled
 
-Use `value` and `onValueChange` to control the rating programmatically.
+Use `value` and `onValueChange` to control the rating.
 
 <ComponentPreview componentName="rating" fileName="example-controlled" />
 
@@ -135,7 +119,7 @@ Display a read-only rating inside a testimonial card.
 
 ### Customize size
 
-Use the `className` prop to set the size of the rating.
+Use the `className` prop to override the default size of the rating indicator.
 
 <ComponentPreview componentName="rating" fileName="example-custom-size" />
 
@@ -151,6 +135,12 @@ Override the filled color with `className`.
 
 <ComponentPreview componentName="rating" fileName="example-custom-color" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="rating" />
+
 ## API Reference
 
 ### Rating
@@ -161,6 +151,7 @@ Root component.
 | --- | --- | --- |
 | `allowHalf` | `boolean` | `false` |
 | `count` | `number` | `5` |
+| `icon` | `React.JSX.ElementType` | `StarIcon` |
 | `defaultValue` | `number` | `-` |
 | `value` | `number` | `-` |
 | `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
@@ -168,7 +159,23 @@ Root component.
 | `disabled` | `boolean` | `-` |
 | `className` | `string` | `-` |
 
+### RatingRootProvider
+
+Provides a Rating API created with `useRating` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseRatingReturn` | `required` |
+
+### RatingItem
+
+Public RatingItem component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/rating-group#api-reference).
-

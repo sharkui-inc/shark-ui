@@ -1,12 +1,22 @@
+import {
+  Attachment,
+  AttachmentContent,
+  AttachmentDescription,
+  AttachmentMedia,
+  AttachmentTitle,
+} from "@/registry/react/components/attachment";
 import { FormatByte } from "@/registry/react/components/format";
 
 const Example = () => (
-  <div className="flex flex-col gap-1">
-    <span className="text-muted-foreground text-sm">File size</span>
-    <span className="font-semibold text-2xl text-foreground tabular-nums tracking-tight">
-      <FormatByte value={120_000} />
-    </span>
-  </div>
+  <Attachment state="done">
+    <AttachmentMedia format="pdf" variant="file" />
+    <AttachmentContent>
+      <AttachmentTitle>brand-guidelines.pdf</AttachmentTitle>
+      <AttachmentDescription>
+        PDF · <FormatByte value={120_000} />
+      </AttachmentDescription>
+    </AttachmentContent>
+  </Attachment>
 );
 
 export default Example;

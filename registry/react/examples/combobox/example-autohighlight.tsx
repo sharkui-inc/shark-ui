@@ -4,6 +4,7 @@ import { useFilter, useListCollection } from "@ark-ui/react";
 import {
   Combobox,
   ComboboxContent,
+  ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
@@ -13,8 +14,8 @@ const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
 
   const { collection, filter } = useListCollection({
-    initialItems,
     filter: contains,
+    initialItems,
   });
 
   return (
@@ -22,10 +23,13 @@ const Example = () => {
       className="w-full max-w-64"
       collection={collection}
       inputBehavior="autohighlight"
-      onInputValueChange={({ inputValue }) => filter(inputValue)}
+      onInputValueChange={({ inputValue, reason }) =>
+        filter(reason === "item-select" ? "" : inputValue)
+      }
     >
       <ComboboxInput placeholder="Type to highlight..." />
       <ComboboxContent>
+        <ComboboxEmpty />
         <ComboboxList>
           {collection.items.map((item) => (
             <ComboboxItem item={item} key={item.value}>

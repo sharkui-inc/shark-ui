@@ -1,15 +1,19 @@
 ---
 title: Toggle Tooltip
-description: Display information on click.
+description: Hint that opens on click.
+seo:
+  description: Hint that stays open on click instead of hover-only.
 links:
   doc: https://ark-ui.com/docs/components/popover
   api: https://ark-ui.com/docs/components/popover#api-reference
 ---
 
+import manifest from "@/registry/manifest/toggle-tooltip";
+
 <Alert>
   <InfoIcon />
   <AlertDescription>
-  Toggle Tooltip is built on top of the [Popover](/docs/components/popover) component. Check it out for more examples.
+  Toggle Tooltip is built on top of the [Popover](/docs/components/popover) component. Visual styles come from [Tooltip](/docs/components/tooltip).
   </AlertDescription>
 </Alert>
 
@@ -36,13 +40,11 @@ npx shadcn@latest add @shark/toggle-tooltip
 
 <Steps>
 
-<Step>This component depends on [Popover](/docs/components/popover). Install it first if you haven't already.</Step>
+<Step>This component depends on [Popover](/docs/components/popover) and [Tooltip](/docs/components/tooltip). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -78,35 +80,26 @@ import {
 <ToggleTooltip>
   <ToggleTooltipTrigger />
   <ToggleTooltipContent>
-    Hover or click to see this content.
+    Select to see this content.
   </ToggleTooltipContent>
 </ToggleTooltip>
 ```
 
-## Tooltip vs Toggle Tooltip
+## Controlled
 
-You're viewing **Toggle Tooltip**—a popover that opens on hover or click. Use it when the content is essential and should be accessible to everyone, including touch users and screen readers.
+Control open state with `open` and `onOpenChange`.
 
-### Use Toggle Tooltip when
+<ComponentPreview componentName="toggle-tooltip" fileName="example-controlled" />
 
-- The trigger's **primary purpose** is to reveal the content.
-- The content is **essential** and should be accessible to touch users and screen readers.
-- You need **click-to-open** so everyone can access it—no hover required.
-- The content may be **interactive** (links, buttons) since Toggle Tooltip is a popover under the hood.
+## Choose the right primitive
 
-### Toggle Tooltip behavior
+Tooltip and Toggle Tooltip share visual treatment. Choose based on how people need to reach and use the content.
 
-- **Touch and keyboard** — Opens on click as well as hover, so touch and keyboard users can access the content.
-- **Screen reader exposure** — Content is exposed to assistive technologies.
-- **Escape to close** — Press Escape to dismiss when open.
-- **Icon-only triggers** — Add an `aria-label` when the trigger is an icon without visible text.
-
-### Consider Tooltip when
-
-- The trigger has its own purpose and the popup is **supplementary**.
-- The content is **non-essential**—nice-to-have clarity.
-- Touch users don't need to access it—tooltips only open on hover/focus.
-- The content is **short and non-interactive** (no links or buttons inside).
+| Intent | Use | Why |
+| --- | --- | --- |
+| Name an icon-only control or add a short, optional hint | Tooltip | It opens on hover or keyboard focus, then closes automatically. Keep the content plain text and non-interactive. |
+| Offer supporting details that people may open on touch, keep open, or act on | Toggle Tooltip | It uses a Popover, opened by click, Enter, or Space. Its content can receive focus and include links or buttons. |
+| Give instructions required to complete a task | Visible text, a field description, or Dialog | Do not hide required information behind an overlay. |
 
 ## Positioning
 
@@ -114,7 +107,21 @@ Use the `positioning` prop to change the position.
 
 <ComponentPreview componentName="toggle-tooltip" fileName="example-side" />
 
-## API Reference 
+## Examples
+
+### Hide Arrow
+
+Hide the arrow with `showArrow={false}` on `ToggleTooltipContent`.
+
+<ComponentPreview componentName="toggle-tooltip" fileName="example-without-arrow" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="toggle-tooltip" />
+
+## API Reference
 
 ### ToggleTooltip
 
@@ -126,8 +133,8 @@ Root component. Combines toggle with tooltip on click.
 | `modal` | `boolean` | `false` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `open` | `boolean` | - |
-| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
+| `open` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
 
 ### ToggleTooltipTrigger
 
@@ -135,8 +142,8 @@ Shows the tooltip on click. Button by default; use `asChild` for custom elements
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ToggleTooltipContent
 
@@ -144,8 +151,9 @@ Tooltip content shown in a popover on click.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+| `showArrow` | `boolean` | `true` |
 
 ### ToggleTooltipArrow
 
@@ -153,13 +161,21 @@ Optional arrow pointing to the trigger. Place inside `ToggleTooltipContent`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--arrow-background` | `var(--foreground)` |
-| `--arrow-size` | `calc(1.5 * var(--spacing))` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--arrow-background` | `string` | `var(--foreground)` |
+| `--arrow-size` | `string` | `calc(1.5 * var(--spacing))` |
+
+### ToggleTooltipRootProvider
+
+Provides a ToggleTooltip API created with `useToggleTooltip` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseToggleTooltipReturn` | `required` |
 
 ---
 

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "dependencies": [
+    "@ark-ui/react",
+    "tailwind-variants"
+  ],
+  "name": "icon-tile",
+  "type": "registry:ui",
+  "files": [
+    {
+      "content": "import { ark } from \"@ark-ui/react/factory\";\nimport type React from \"react\";\nimport { tv, type VariantProps } from \"tailwind-variants\";\nimport { cn } from \"@/lib/utils\";\n\nexport const iconTileVariants = tv({\n  base: [\n    \"inline-flex shrink-0 items-center justify-center\",\n    \"font-medium text-muted-foreground\",\n    \"rounded-md\",\n    \"overflow-hidden\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0\",\n    \"[&:is(a,button)]:cursor-pointer\",\n    \"[&:is(a,button)]:transition-colors\",\n    \"disabled:pointer-events-none disabled:opacity-64\",\n    \"aria-disabled:pointer-events-none aria-disabled:opacity-64\",\n    \"border border-transparent outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24\",\n    \"motion-reduce:transition-none\",\n  ],\n  defaultVariants: {\n    fill: false,\n    size: \"md\",\n    variant: \"default\",\n  },\n  variants: {\n    fill: {\n      false: \"\",\n      true: \"rounded-full\",\n    },\n    size: {\n      lg: \"size-9 [&_svg:not([class*='size-'])]:size-4.5\",\n      md: \"size-8 [&_svg:not([class*='size-'])]:size-4\",\n      sm: \"size-7 [&_svg:not([class*='size-'])]:size-3.5\",\n      xl: \"size-10 [&_svg:not([class*='size-'])]:size-5\",\n      xs: \"size-6 [&_svg:not([class*='size-'])]:size-3\",\n    },\n    variant: {\n      default: [\n        \"bg-primary\",\n        \"text-primary-foreground\",\n        \"[&:is(a,button)]:hover:bg-primary-hover\",\n        \"focus-visible:border-background\",\n      ],\n      outline: [\n        \"bg-background\",\n        \"border border-input\",\n        \"[&:is(a,button)]:hover:bg-accent\",\n        \"[&:is(a,button)]:hover:text-accent-foreground\",\n      ],\n      secondary: [\n        \"bg-secondary\",\n        \"text-secondary-foreground\",\n        \"[&:is(a,button)]:hover:bg-accent\",\n        \"[&:is(a,button)]:hover:text-accent-foreground\",\n      ],\n    },\n  },\n});\n\nexport interface IconTileProps\n  extends React.ComponentProps<typeof ark.span>,\n    VariantProps<typeof iconTileVariants> {}\n\nexport const IconTile = (props: IconTileProps) => {\n  const {\n    variant = \"default\",\n    size = \"md\",\n    fill = false,\n    className,\n    ...rest\n  } = props;\n\n  return (\n    <ark.span\n      className={cn(iconTileVariants({ fill, size, variant }), className)}\n      data-fill={fill}\n      data-size={size}\n      data-slot=\"icon-tile\"\n      data-variant={variant}\n      {...rest}\n    />\n  );\n};\n",
+      "path": "registry/react/components/icon-tile.tsx",
+      "type": "registry:ui"
+    }
+  ]
+}

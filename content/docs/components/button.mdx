@@ -1,7 +1,11 @@
 ---
 title: Button
 description: A button or an element styled as a button.
+seo:
+  description: Button with variants, sizes, and a loading state.
 ---
+
+import manifest from "@/registry/manifest/button";
 
 <ComponentPreview componentName="button" />
 
@@ -28,47 +32,27 @@ npx shadcn@latest add @shark/button
 
 <Step>This component depends on [Spinner](/docs/components/spinner). Install it first if you haven't already.</Step>
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
 @theme inline {
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-info: var(--info);
-  --color-info-foreground: var(--info-foreground);
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
-  --color-warning: var(--warning);
-  --color-warning-foreground: var(--warning-foreground);
+  --color-destructive: var(--destructive);
 }
 
 :root {
-  --destructive-foreground: var(--color-red-700);
-  --info: var(--color-blue-500);
-  --info-foreground: var(--color-blue-700);
-  --success: var(--color-emerald-500);
-  --success-foreground: var(--color-emerald-700);
-  --warning: var(--color-amber-500);
-  --warning-foreground: var(--color-amber-700);
+  --destructive: var(--color-red-600);
 }
 
 .dark {
-  --destructive-foreground: var(--color-red-400);
-  --info: var(--color-blue-500);
-  --info-foreground: var(--color-blue-400);
-  --success: var(--color-emerald-500);
-  --success-foreground: var(--color-emerald-400);
-  --warning: var(--color-amber-500);
-  --warning-foreground: var(--color-amber-400);
+  --destructive: var(--color-red-600);
 }
 ```
 </CodeCollapsibleWrapper>
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -92,9 +76,31 @@ import { Button } from "@/components/ui/button";
 <Button>Button</Button>
 ```
 
+## Icons
+
+Mark inline icons with `data-icon` so they follow the reading direction.
+
+```tsx
+import { ArrowRightIcon, PlusIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+<Button>
+  <PlusIcon data-icon="inline-start" />
+  Add
+</Button>
+
+<Button variant="outline">
+  Continue
+  <ArrowRightIcon data-icon="inline-end" className="rtl:rotate-180" />
+</Button>
+```
+
 ## Link
 
-The `asChild` prop renders another element with button styling.
+There are two ways to render another element with button styling: 
+
+- Pass `asChild` on `Button`;
+- Apply `buttonVariants` as `className` on the element itself;
 
 <ComponentPreview componentName="button" fileName="example-state-as-child" />
 
@@ -154,6 +160,8 @@ The `asChild` prop renders another element with button styling.
 
 ## Pill
 
+The `pill` prop creates fully rounded buttons.
+
 <ComponentPreview componentName="button" fileName="example-pill" />
 
 ## Disabling click effect
@@ -182,13 +190,28 @@ For increasing the tap target area, use [Hitbox](/docs/utilities/hitbox).
 
 <ComponentPreview componentName="button" fileName="example-custom-color" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="button" />
+
 ## API Reference
 
-| Prop | Type | Default | 
+| Prop | Type | Default |
 | --- | --- | --- | 
 | `variant` | `"default" \| "outline" \| "secondary" \| "ghost" \| "link" \| "destructive"` | `"default"` | 
 | `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon-xs" \| "icon-sm" \| "icon-md" \| "icon-lg" \| "icon-xl"` | `"md"` |
+| `pill` | `boolean` | `false` |
 | `clickEffect` | `boolean` | `true` | 
 | `isLoading` | `boolean` | `false` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
+### Button
+
+Public Button component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |

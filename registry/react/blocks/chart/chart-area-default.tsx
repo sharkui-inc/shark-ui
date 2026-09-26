@@ -21,18 +21,18 @@ import {
 export const description = "A simple area chart";
 
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
+  { desktop: 186, month: "January" },
+  { desktop: 305, month: "February" },
+  { desktop: 237, month: "March" },
+  { desktop: 73, month: "April" },
+  { desktop: 209, month: "May" },
+  { desktop: 214, month: "June" },
 ];
 
 const chartConfig = {
   desktop: {
-    label: "Desktop",
     color: "var(--chart-1)",
+    label: "Desktop",
   },
 } satisfies ChartConfig;
 
@@ -77,15 +77,13 @@ function ChartAreaDefault() {
           </AreaChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter>
-        <div className="flex w-full items-start gap-2 text-sm">
-          <div className="grid gap-2">
-            <div className="flex items-center gap-2 font-medium leading-none">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="flex items-center gap-2 text-muted-foreground leading-none">
-              January - June 2024
-            </div>
+      <CardFooter className="w-full items-start text-sm">
+        <div className="grid gap-2">
+          <div className="flex items-center gap-2 font-medium leading-none">
+            Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          </div>
+          <div className="flex items-center gap-2 text-muted-foreground leading-none">
+            January - June 2024
           </div>
         </div>
       </CardFooter>

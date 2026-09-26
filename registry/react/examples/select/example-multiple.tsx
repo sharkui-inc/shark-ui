@@ -36,7 +36,7 @@ const renderValue = (value: string[]) => {
     return "Select languages…";
   }
 
-  const firstValue = value?.at(0) ?? "";
+  const firstValue = value.at(0) ?? "";
   const additionalValues =
     value.length > 1 ? ` (+${value.length - 1} more)` : "";
 

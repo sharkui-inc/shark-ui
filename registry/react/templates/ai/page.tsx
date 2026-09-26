@@ -1,15 +1,16 @@
 "use client";
 
 import {
+  ArrowUpIcon,
   BookIcon,
   LayoutGridIcon,
   MessageSquareIcon,
-  SparklesIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
 import { Button } from "@/registry/react/components/button";
 import { Card, CardHeader } from "@/registry/react/components/card";
+import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   SidebarContent,
   SidebarFooter,
@@ -27,8 +28,8 @@ import {
 import { Textarea } from "@/registry/react/components/textarea";
 
 const AI_TEMPLATE_SIDEBAR = [
-  { label: "Projects", icon: LayoutGridIcon, href: "#" },
-  { label: "Library", icon: BookIcon, href: "#" },
+  { href: "#", icon: LayoutGridIcon, label: "Projects" },
+  { href: "#", icon: BookIcon, label: "Library" },
 ];
 
 const PINNED = ["Research & Analysis", "Web Search", "Knowledge Base"];
@@ -51,16 +52,16 @@ const AITemplatePage = () => (
     >
       <SidebarHeader className="border-b">
         <div className="flex items-center gap-2 px-2 py-2">
-          <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+          <IconTile aria-hidden size="xs">
             <MessageSquareIcon aria-hidden className="size-4" />
-          </div>
+          </IconTile>
           <span className="font-semibold">New chat</span>
         </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
+            <SidebarMenu>
               {AI_TEMPLATE_SIDEBAR.map(({ label, icon: Icon, href }) => (
                 <SidebarMenuItem key={label}>
                   <SidebarMenuButton asChild>
@@ -77,7 +78,7 @@ const AITemplatePage = () => (
         <SidebarGroup>
           <SidebarGroupLabel>Pinned</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
+            <SidebarMenu>
               {PINNED.map((item) => (
                 <SidebarMenuItem key={item}>
                   <SidebarMenuButton asChild>
@@ -91,7 +92,7 @@ const AITemplatePage = () => (
         <SidebarGroup>
           <SidebarGroupLabel>Recents</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
+            <SidebarMenu>
               {RECENTS.slice(0, 3).map((item) => (
                 <SidebarMenuItem key={item}>
                   <SidebarMenuButton asChild>
@@ -105,7 +106,7 @@ const AITemplatePage = () => (
         <SidebarGroup>
           <SidebarGroupLabel>Yesterday</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
+            <SidebarMenu>
               {RECENTS.slice(3, 6).map((item) => (
                 <SidebarMenuItem key={item}>
                   <SidebarMenuButton asChild>
@@ -161,11 +162,11 @@ const AITemplatePage = () => (
                 type="submit"
                 variant="ghost"
               >
-                <SparklesIcon aria-hidden className="size-4" />
+                <ArrowUpIcon aria-hidden />
               </Button>
             </div>
             <p className="mt-2 text-center text-muted-foreground text-xs">
-              GPT-4 · AI can make mistakes — please double-check
+              GPT-4 · AI can make mistakes. Please double-check
             </p>
           </div>
         </div>

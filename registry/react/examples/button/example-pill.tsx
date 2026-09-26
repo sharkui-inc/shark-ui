@@ -3,7 +3,7 @@ import { Button } from "@/registry/react/components/button";
 
 const Example = () => (
   <Button pill variant="outline">
-    <PlusIcon />
+    <PlusIcon data-icon="inline-start" />
     Add
   </Button>
 );

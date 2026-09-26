@@ -1,3 +1,4 @@
+import { SkipNavLink } from "@registry/react/components/skip-nav";
 import { SiteHeader } from "@/components/layout/header/header";
 
 export const dynamic = "force-static";
@@ -8,6 +9,8 @@ const AppLayout = (props: LayoutProps<"/">) => {
 
   return (
     <>
+      <SkipNavLink />
+
       <SiteHeader />
 
       {children}

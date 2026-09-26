@@ -73,7 +73,10 @@ const Example = () => {
 
   return (
     <div className="w-full max-w-2xl rounded-lg border">
-      <ActionBar onOpenChange={(open) => !open && handleClose()} open={isOpen}>
+      <ActionBar
+        onOpenChange={({ open }) => !open && handleClose()}
+        open={isOpen}
+      >
         <Table>
           <TableCaption className="sr-only">
             Orders with checkbox selection and action bar.
@@ -132,11 +135,11 @@ const Example = () => {
           <ActionBarValue count={selectedIds.length} />
           <div className="ml-auto flex gap-2">
             <Button size="sm" variant="secondary">
-              <SendIcon />
+              <SendIcon data-icon="inline-start" />
               Send
             </Button>
             <Button size="sm" variant="secondary">
-              <PencilIcon />
+              <PencilIcon data-icon="inline-start" />
               Edit
             </Button>
             <Menu positioning={{ placement: "top" }}>
@@ -159,7 +162,7 @@ const Example = () => {
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button size="sm" variant="destructive">
-                  <Trash2Icon />
+                  <Trash2Icon data-icon="inline-start" />
                   Delete
                 </Button>
               </AlertDialogTrigger>
@@ -206,39 +209,39 @@ export default Example;
 
 const orders = [
   {
+    amount: "245,12 $",
     id: "SO-01",
     name: "Macbook Pro 16",
     status: "progress",
-    amount: "245,12 $",
   },
   {
+    amount: "122,18 $",
     id: "SO-02",
     name: "Apple Watch Series 9",
     status: "transit",
-    amount: "122,18 $",
   },
   {
+    amount: "89,50 $",
     id: "SO-03",
     name: "AirPods Max",
     status: "pending",
-    amount: "89,50 $",
   },
   {
+    amount: "310,00 $",
     id: "SO-04",
     name: "iPad Pro 13",
     status: "pending",
-    amount: "310,00 $",
   },
   {
+    amount: "156,75 $",
     id: "SO-05",
     name: "iPhone 15 Pro Max",
     status: "transit",
-    amount: "156,75 $",
   },
 ];
 
 const statusVariants: Record<string, BadgeVariant> = {
-  transit: "success",
   pending: "warning",
   progress: "info",
+  transit: "success",
 };

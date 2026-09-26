@@ -1,13 +1,23 @@
 "use client";
 
-import { Menu as ArkMenu, useMenuContext } from "@ark-ui/react/menu";
+import {
+  Menu as ArkMenu,
+  useMenu as useArkMenu,
+  useMenuContext as useArkMenuContext,
+} from "@ark-ui/react/menu";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import {
   Menu,
+  MenuCheckboxItem,
   MenuContent,
   MenuGroup,
+  MenuGroupLabel,
   MenuItem,
+  MenuItemDescription,
+  MenuQuickItem,
+  MenuRadioGroup,
+  MenuRadioItem,
   MenuSeparator,
   MenuShortcut,
   MenuSub,
@@ -15,7 +25,9 @@ import {
   MenuSubTrigger,
 } from "@/registry/react/components/menu";
 
-export const useContextMenu = useMenuContext;
+export const useContextMenu = useArkMenu;
+export const useContextMenuContext = useArkMenuContext;
+export const ContextMenuRootProvider = ArkMenu.RootProvider;
 
 export const ContextMenu = (props: React.ComponentProps<typeof Menu>) => (
   <Menu data-slot="context-menu" {...props} />
@@ -37,11 +49,28 @@ export const ContextMenuTrigger = (
 
 export const ContextMenuContent = (
   props: React.ComponentProps<typeof MenuContent>
-) => <MenuContent data-slot="context-menu-content" {...props} />;
+) => {
+  const { onContextMenu, ...rest } = props;
+
+  return (
+    <MenuContent
+      data-slot="context-menu-content"
+      onContextMenu={(event) => {
+        onContextMenu?.(event);
+        event.preventDefault();
+      }}
+      {...rest}
+    />
+  );
+};
 
 export const ContextMenuGroup = (
   props: React.ComponentProps<typeof MenuGroup>
 ) => <MenuGroup data-slot="context-menu-group" {...props} />;
+
+export const ContextMenuGroupLabel = (
+  props: React.ComponentProps<typeof MenuGroupLabel>
+) => <MenuGroupLabel data-slot="context-menu-group-label" {...props} />;
 
 export const ContextMenuSeparator = (
   props: React.ComponentProps<typeof MenuSeparator>
@@ -51,13 +80,48 @@ export const ContextMenuItem = (
   props: React.ComponentProps<typeof MenuItem>
 ) => <MenuItem data-slot="context-menu-item" {...props} />;
 
+export const ContextMenuItemDescription = (
+  props: React.ComponentProps<typeof MenuItemDescription>
+) => (
+  <MenuItemDescription data-slot="context-menu-item-description" {...props} />
+);
+
+export const ContextMenuQuickItem = (
+  props: React.ComponentProps<typeof MenuQuickItem>
+) => <MenuQuickItem data-slot="context-menu-quick-item" {...props} />;
+
+export const ContextMenuCheckboxItem = (
+  props: React.ComponentProps<typeof MenuCheckboxItem>
+) => <MenuCheckboxItem data-slot="context-menu-checkbox-item" {...props} />;
+
+export const ContextMenuRadioGroup = (
+  props: React.ComponentProps<typeof MenuRadioGroup>
+) => <MenuRadioGroup data-slot="context-menu-radio-group" {...props} />;
+
+export const ContextMenuRadioItem = (
+  props: React.ComponentProps<typeof MenuRadioItem>
+) => <MenuRadioItem data-slot="context-menu-radio-item" {...props} />;
+
 export const ContextMenuSub = (props: React.ComponentProps<typeof MenuSub>) => (
   <MenuSub data-slot="context-menu-sub" {...props} />
 );
 
 export const ContextMenuSubContent = (
-  props: React.ComponentProps<typeof MenuContent>
-) => <MenuSubContent data-slot="context-menu-sub-content" {...props} />;
+  props: React.ComponentProps<typeof MenuSubContent>
+) => {
+  const { onContextMenu, ...rest } = props;
+
+  return (
+    <MenuSubContent
+      data-slot="context-menu-sub-content"
+      onContextMenu={(event) => {
+        onContextMenu?.(event);
+        event.preventDefault();
+      }}
+      {...rest}
+    />
+  );
+};
 
 export const ContextMenuSubTrigger = (
   props: React.ComponentProps<typeof MenuSubTrigger>

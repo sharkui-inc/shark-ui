@@ -1,10 +1,14 @@
 ---
 title: Input
-description: A field that allows users to enter text.
+description: Text field for user input.
+seo:
+  description: Text input with size variants and invalid styles.
 links:
   doc: https://ark-ui.com/docs/components/field#input
   api: https://ark-ui.com/docs/components/field#api-reference
 ---
+
+import manifest from "@/registry/manifest/input";
 
 <ComponentPreview componentName="input" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/input
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -93,6 +95,12 @@ Use the `size` prop to change the input height.
 
 <ComponentPreview componentName="input" fileName="example-size-lg" />
 
+## Pill
+
+The `pill` prop creates fully rounded inputs.
+
+<ComponentPreview componentName="input" fileName="example-pill" />
+
 ## Examples
 
 ### With Field
@@ -149,15 +157,31 @@ Use `ButtonGroup` to create a button group.
 
 <ComponentPreview componentName="input" fileName="example-button-group" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="input" />
+
 ## API Reference
 
 ### Input
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
 
 Text input. Accepts all native input attributes.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `pill` | `boolean` | `false` |
 | `type` | `string` | `text` |
 | `className` | `string` | `-` |
 

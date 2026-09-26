@@ -1,10 +1,14 @@
 ---
 title: Progress
-description: Displays task progress with a linear indicator.
+description: Linear progress indicator.
+seo:
+  description: Linear bar for determinate and indeterminate progress.
 links:
   doc: https://ark-ui.com/docs/components/progress-linear
   api: https://ark-ui.com/docs/components/progress-linear#api-reference
 ---
+
+import manifest from "@/registry/manifest/progress";
 
 <ComponentPreview componentName="progress" />
 
@@ -33,13 +37,11 @@ npx shadcn@latest add @shark/progress
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Add the following animations to your `globals.css`.</Step>
+<Step>Import the following rules into your CSS file:</Step>
 
-```css title="globals.css" showLineNumbers
+```css showLineNumbers
 @theme inline {
   --animate-indeterminate: indeterminate 1.5s ease-in-out infinite;
 
@@ -94,7 +96,7 @@ Use the `orientation` prop to orient the progress bar horizontally or vertically
 
 ### With label
 
-Use `ProgressValue` and `FieldLabel` to add a label to the progress bar.
+Use `ProgressLabel` inside `Progress` to label the bar. `FieldLabel` as a sibling does not associate.
 
 <ComponentPreview componentName="progress" fileName="example-with-label" />
 
@@ -104,6 +106,12 @@ Use the `indeterminate` prop when the completion percentage is unknown.
 
 <ComponentPreview componentName="progress" fileName="example-indeterminate" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="progress" />
+
 ## API Reference
 
 ### Progress
@@ -112,14 +120,57 @@ Root element of the progress bar.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `number \| null` | - |
-| `defaultValue` | `number` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `value` | `number \| null` | `-` |
+| `defaultValue` | `number` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `indeterminate` | `boolean` | `false` |
 | `min` | `number` | `0` |
 | `max` | `number` | `100` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
+
+### ProgressLabel
+
+Accessible label. Render as a child of `Progress`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ProgressRootProvider
+
+Provides a Progress API created with `useProgress` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseProgressReturn` | `required` |
+
+### ProgressTrack
+
+Public ProgressTrack component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### ProgressRange
+
+Public ProgressRange component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### ProgressValue
+
+Public ProgressValue component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

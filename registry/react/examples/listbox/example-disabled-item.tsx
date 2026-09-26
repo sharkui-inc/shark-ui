@@ -6,7 +6,6 @@ import {
   Listbox,
   ListboxContent,
   ListboxItem,
-  ListboxItemIndicator,
   ListboxItemText,
 } from "@/registry/react/components/listbox";
 
@@ -17,7 +16,6 @@ const Example = () => (
         {collection.items.map((item) => (
           <ListboxItem item={item} key={item.value}>
             <ListboxItemText>{item.label}</ListboxItemText>
-            <ListboxItemIndicator />
           </ListboxItem>
         ))}
       </ListboxContent>
@@ -30,9 +28,9 @@ const collection = createListCollection({
     { label: "Free", value: "free" },
     { label: "Pro", value: "pro" },
     {
+      disabled: true,
       label: "Enterprise",
       value: "enterprise",
-      disabled: true,
     },
     { label: "Custom", value: "custom" },
   ],

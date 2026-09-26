@@ -2,10 +2,11 @@
 
 import { Button } from "@registry/react/components/button";
 import type React from "react";
-import { GRAY_COLORS } from "@/lib/themes";
+import { BASE_COLORS } from "@/lib/theme/catalog";
+import type { BaseColor } from "@/lib/theme/config";
 import { cn } from "@/lib/utils";
 import { Card } from "@/registry/react/components/card";
-import { type GrayColor, useConfig } from "@/store/config";
+import { useUpdateConfig } from "@/store/config";
 
 function formatScaleTitle(label: string) {
   return label.trim().replaceAll(/\s+/g, "-");
@@ -14,12 +15,11 @@ function formatScaleTitle(label: string) {
 export const ColorsConcept = (props: React.ComponentProps<"div">) => {
   const { className, ...rest } = props;
 
-  const [config, setConfig] = useConfig();
+  const updateConfig = useUpdateConfig();
 
-  const handleSelectColor = (color: GrayColor) => {
-    setConfig({
-      ...config,
-      grayColor: color,
+  const handleSelectColor = (color: BaseColor) => {
+    updateConfig({
+      baseColor: color,
     });
   };
   return (
@@ -32,7 +32,7 @@ export const ColorsConcept = (props: React.ComponentProps<"div">) => {
       )}
       {...rest}
     >
-      {GRAY_COLORS.map((color) => (
+      {BASE_COLORS.map((color) => (
         <Button
           aria-label={`Select ${color.label} color`}
           className="h-auto w-full rounded-xl p-0"
@@ -57,14 +57,14 @@ export const ColorsConcept = (props: React.ComponentProps<"div">) => {
               <div
                 className={cn(
                   "min-h-24",
-                  "shadow-xs/5",
+                  "shadow-xs/4",
                   "flex items-end justify-center",
                   "pb-2",
                   "rounded-lg",
                   color.hex
                 )}
               >
-                <span className="font-medium font-mono text-white text-xs drop-shadow-xs">
+                <span className="font-medium font-mono text-white text-xs drop-shadow-xs/4">
                   500
                 </span>
               </div>

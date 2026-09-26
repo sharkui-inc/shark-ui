@@ -3,7 +3,8 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   FloatingPanel as ArkFloatingPanel,
-  useFloatingPanelContext,
+  useFloatingPanel as useArkFloatingPanel,
+  useFloatingPanelContext as useArkFloatingPanelContext,
 } from "@ark-ui/react/floating-panel";
 import { Portal } from "@ark-ui/react/portal";
 import { Maximize, MaximizeIcon, MinimizeIcon, MinusIcon } from "lucide-react";
@@ -12,7 +13,9 @@ import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
-export const useFloatingPanel = useFloatingPanelContext;
+export const useFloatingPanel = useArkFloatingPanel;
+export const useFloatingPanelContext = useArkFloatingPanelContext;
+export const FloatingPanelRootProvider = ArkFloatingPanel.RootProvider;
 
 export const FloatingPanel = (
   props: React.ComponentProps<typeof ArkFloatingPanel.Root>
@@ -49,22 +52,30 @@ export const FloatingPanelContent = (props: FloatingPanelContentProps) => {
   return (
     <Portal>
       <ArkFloatingPanel.Positioner
-        className="inset-s-(--x) top-(--y) z-50"
+        className="inset-s-(--x) top-(--y)"
         data-slot="floating-panel-positioner"
+        // Position coordinates are physical, so the portal geometry stays LTR.
+        // Content dir comes from Ark LocaleContext via getContentProps().
+        dir="ltr"
+        style={{ zIndex: "calc(50 + var(--z-index))" }}
       >
         <ArkFloatingPanel.Content
           className={cn(
             "[--space:--spacing(4)]",
+            "z-[calc(50+var(--z-index))]",
             "group/floating-panel",
             "relative",
             "flex flex-col",
             "h-(--height) min-h-0 w-(--width)",
             "bg-popover",
             "text-popover-foreground",
-            "rounded-2xl border shadow-lg/5",
-            "transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform",
+            "rounded-2xl border shadow-lg/4",
+            "outline-hidden",
+            "origin-center transition-[scale,opacity,translate] duration-200 ease-out will-change-transform",
+            "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
             "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
-            "motion-reduce:animate-none! motion-reduce:transition-none!",
+            "motion-reduce:animate-none motion-reduce:transition-none",
+            "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
           )}
           data-slot="floating-panel-content"
@@ -72,7 +83,7 @@ export const FloatingPanelContent = (props: FloatingPanelContentProps) => {
         >
           {children}
 
-          {resizable && (
+          {!!resizable && (
             <>
               <FloatingPanelResizeTrigger axis="n" />
               <FloatingPanelResizeTrigger axis="e" />
@@ -92,12 +103,17 @@ export const FloatingPanelContent = (props: FloatingPanelContentProps) => {
 
 export const FloatingPanelDragTrigger = (
   props: React.ComponentProps<typeof ArkFloatingPanel.DragTrigger>
-) => (
-  <ArkFloatingPanel.DragTrigger
-    data-slot="floating-panel-drag-trigger"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkFloatingPanel.DragTrigger
+      className={cn("cursor-grab has-data-dragging:cursor-grabbing", className)}
+      data-slot="floating-panel-drag-trigger"
+      {...rest}
+    />
+  );
+};
 
 export const FloatingPanelHeader = (
   props: React.ComponentProps<typeof ArkFloatingPanel.Header>
@@ -113,11 +129,12 @@ export const FloatingPanelHeader = (
           "px-(--space) py-[calc(var(--space)*0.5)]",
           "flex flex-1 shrink-0 items-center gap-2",
           "bg-muted/48",
-          "rounded-t-2xl border-b",
+          "rounded-t-[max(0px,calc(var(--radius-2xl)-1px))] border-b",
           "overflow-hidden",
           "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
           className
         )}
+        data-slot="floating-panel-header"
         {...rest}
       />
     </FloatingPanelDragTrigger>
@@ -131,7 +148,8 @@ export const FloatingPanelControl = (
 
   return (
     <ArkFloatingPanel.Control
-      className={cn("ms-auto flex items-center gap-2 rtl:me-auto", className)}
+      className={cn("ms-auto flex items-center gap-2", className)}
+      data-slot="floating-panel-control"
       {...rest}
     />
   );
@@ -206,12 +224,22 @@ export const FloatingPanelTitle = (
 
 export const FloatingPanelResizeTrigger = (
   props: React.ComponentProps<typeof ArkFloatingPanel.ResizeTrigger>
-) => (
-  <ArkFloatingPanel.ResizeTrigger
-    data-slot="floating-panel-resize-trigger"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkFloatingPanel.ResizeTrigger
+      className={cn(
+        "data-[axis=n]:h-1.5 data-[axis=s]:h-1.5 data-[axis=n]:max-w-[90%] data-[axis=s]:max-w-[90%]",
+        "data-[axis=e]:max-h-[90%] data-[axis=w]:max-h-[90%] data-[axis=e]:w-1.5 data-[axis=w]:w-1.5",
+        "data-[axis=ne]:size-2.5 data-[axis=nw]:size-2.5 data-[axis=se]:size-2.5 data-[axis=sw]:size-2.5",
+        className
+      )}
+      data-slot="floating-panel-resize-trigger"
+      {...rest}
+    />
+  );
+};
 
 export const FloatingPanelStageTrigger = (
   props: React.ComponentProps<typeof ArkFloatingPanel.StageTrigger>
@@ -236,24 +264,22 @@ interface FloatingPanelBodyProps
   /**
    * Add a fade effect to the scroll area
    *
-   * @default false
+   * @default true
    */
   scrollFade?: boolean;
 }
 
 export const FloatingPanelBody = (props: FloatingPanelBodyProps) => {
-  const { scrollFade = false, className, children, ...rest } = props;
+  const { scrollFade = true, className, children, ...rest } = props;
 
   return (
-    <ScrollArea scrollFade={scrollFade}>
+    <ScrollArea
+      className="min-w-0 flex-1"
+      overscrollContain
+      scrollFade={scrollFade}
+    >
       <ArkFloatingPanel.Body
-        className={cn(
-          "flex flex-col gap-4",
-          "p-(--space)",
-          "overflow-auto",
-          "in-[[data-slot=floating-panel-content]:has([data-slot=floating-panel-footer]:not(.border-t))]:pb-1",
-          className
-        )}
+        className={cn("flex flex-col gap-4", "p-(--space)", className)}
         data-slot="floating-panel-body"
         {...rest}
       >
@@ -272,7 +298,7 @@ export const FloatingPanelFooter = (
     <ark.div
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        "sm:rounded-b-[calc(var(--radius-2xl)-1px)]",
+        "rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
         "px-(--space) py-4",
         "bg-muted/48",
         "border-t",

@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLinkIcon, Link } from "lucide-react";
+import { ArrowUpRight, Link } from "lucide-react";
 import {
   createTreeCollection,
   type NodeProviderProps,
@@ -16,10 +16,6 @@ import {
   TreeViewTree,
 } from "@/registry/react/components/tree-view";
 
-interface TreeNodeWithLinks extends TreeNodeType<unknown> {
-  href?: string;
-}
-
 const Example = () => (
   <div className="w-full max-w-48">
     <TreeView collection={collection}>
@@ -33,40 +29,46 @@ const Example = () => (
   </div>
 );
 
+interface TreeNodeWithLinks extends TreeNodeType<unknown> {
+  external?: boolean;
+  href?: string;
+}
+
 const collection = createTreeCollection({
   rootNode: {
-    id: "ROOT",
-    name: "",
     children: [
       {
-        id: "docs",
-        name: "Documentation",
         children: [
           {
+            href: "#",
             id: "docs/introduction",
             name: "Introduction",
-            href: "/docs",
           },
           {
+            href: "#",
             id: "docs/components",
             name: "Components",
-            href: "/docs/components",
           },
         ],
+        id: "docs",
+        name: "Documentation",
       },
       {
-        id: "external",
-        name: "External Links",
         children: [
           {
+            external: true,
+            href: "#",
             id: "external/github",
             name: "GitHub Repository",
-            href: "https://github.com/sharkui-inc/shark-ui",
           },
         ],
+        id: "external",
+        name: "External Links",
       },
-      { id: "llms.txt", name: "llms.txt", href: "/llms.txt" },
+      { href: "#", id: "llms.txt", name: "llms.txt" },
     ],
+    id: "ROOT",
+    name: "",
   },
 });
 
@@ -77,7 +79,7 @@ const TreeNode = (props: NodeProviderProps<TreeNodeWithLinks>) => {
     <TreeViewNode indexPath={indexPath} node={node}>
       {node.children ? (
         <TreeViewBranch>
-          <TreeViewBranchItem icon={null}>{node.name}</TreeViewBranchItem>
+          <TreeViewBranchItem showIndicator>{node.name}</TreeViewBranchItem>
           <TreeViewBranchContent>
             {node.children.map((child, index) => (
               <TreeNode
@@ -90,16 +92,10 @@ const TreeNode = (props: NodeProviderProps<TreeNodeWithLinks>) => {
         </TreeViewBranch>
       ) : (
         <TreeViewContent asChild>
-          <a
-            href={node.href ?? "#"}
-            rel={
-              node.href?.startsWith("http") ? "noopener noreferrer" : undefined
-            }
-            target={node.href?.startsWith("http") ? "_blank" : undefined}
-          >
+          <a href={node.href ?? "#"}>
             <TreeViewItem icon={Link}>
               {node.name}
-              {node.href?.startsWith("http") && <ExternalLinkIcon />}
+              {node.external ? <ArrowUpRight /> : null}
             </TreeViewItem>
           </a>
         </TreeViewContent>

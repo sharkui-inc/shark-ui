@@ -9,7 +9,7 @@ const Example = () => (
         key={placement}
       >
         <span className="text-muted-foreground text-xs">{placement}</span>
-        <div className="relative size-16 rounded-lg border bg-muted/30">
+        <div className="relative size-16 rounded-lg border bg-muted/32">
           <Float placement={placement}>
             <Badge>3</Badge>
           </Float>

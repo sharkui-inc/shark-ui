@@ -1,16 +1,16 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "tailwind-variants", "lucide-react"];
 
 const manifest: RegistryItemType = {
-  name: "alert-dialog",
-  type: "registry:ui",
   dependencies,
+  name: "alert-dialog",
   registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/dialog.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/dialog.json"),
   ],
+  type: "registry:ui",
 };
 
 export default manifest;

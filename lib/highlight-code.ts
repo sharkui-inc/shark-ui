@@ -1,8 +1,20 @@
 import { createHash } from "node:crypto";
-import { transformerNotationWordHighlight } from "@shikijs/transformers";
+import {
+  transformerMetaHighlight,
+  transformerMetaWordHighlight,
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+} from "@shikijs/transformers";
 import { LRUCache } from "lru-cache";
 import type { ShikiTransformer } from "shiki";
 import { codeToHtml } from "shiki";
+import { packageManagerCommandVariants } from "./installation-command";
+
+export const shikiThemes = {
+  dark: "github-dark",
+  light: "github-light-default",
+} as const;
 
 // LRU cache for cross-request caching of highlighted code.
 // Shiki highlighting is CPU-intensive and deterministic, so caching is safe.
@@ -11,100 +23,100 @@ const highlightCache = new LRUCache<string, string>({
   ttl: 1000 * 60 * 60, // 1 hour.
 });
 
-export const transformers = [
-  {
-    code(node) {
-      if (node.tagName === "code") {
-        const raw = this.source;
-        node.properties.__raw__ = raw;
+const showLineNumbersPattern = /\bshowLineNumbers\b/;
 
-        if (raw.startsWith("npm install")) {
-          node.properties.__npm__ = raw;
-          node.properties.__yarn__ = raw.replace("npm install", "yarn add");
-          node.properties.__pnpm__ = raw.replace("npm install", "pnpm add");
-          node.properties.__bun__ = raw.replace("npm install", "bun add");
-        }
+const getMetaValue = (meta: string, name: string) => {
+  const match = meta.match(
+    new RegExp(`(?:^|\\s)${name}=(?:"([^"]*)"|'([^']*)'|([^\\s]+))`)
+  );
 
-        if (raw.startsWith("npx create-")) {
-          node.properties.__npm__ = raw;
-          node.properties.__yarn__ = raw.replace("npx create-", "yarn create ");
-          node.properties.__pnpm__ = raw.replace("npx create-", "pnpm create ");
-          node.properties.__bun__ = raw.replace("npx", "bunx --bun");
-        }
+  return match?.[1] ?? match?.[2] ?? match?.[3];
+};
 
-        // npm create.
-        if (raw.startsWith("npm create")) {
-          node.properties.__npm__ = raw;
-          node.properties.__yarn__ = raw.replace("npm create", "yarn create");
-          node.properties.__pnpm__ = raw.replace("npm create", "pnpm create");
-          node.properties.__bun__ = raw.replace("npm create", "bun create");
-        }
+const metadataTransformer = {
+  code(node) {
+    if (node.tagName !== "code") {
+      return;
+    }
 
-        // npx.
-        if (raw.startsWith("npx")) {
-          node.properties.__npm__ = raw;
-          node.properties.__yarn__ = raw.replace("npx", "yarn");
-          node.properties.__pnpm__ = raw.replace("npx", "pnpm dlx");
-          node.properties.__bun__ = raw.replace("npx", "bunx --bun");
-        }
+    const meta = this.options.meta?.__raw ?? "";
+    node.properties["data-language"] = this.options.lang;
 
-        // npm run.
-        if (raw.startsWith("npm run")) {
-          node.properties.__npm__ = raw;
-          node.properties.__yarn__ = raw.replace("npm run", "yarn");
-          node.properties.__pnpm__ = raw.replace("npm run", "pnpm");
-          node.properties.__bun__ = raw.replace("npm run", "bun");
-        }
-      }
-    },
+    if (showLineNumbersPattern.test(meta)) {
+      node.properties["data-line-numbers"] = "";
+    }
   },
+  pre(node) {
+    const meta = this.options.meta?.__raw ?? "";
+    const title = getMetaValue(meta, "title");
+
+    node.properties["data-language"] = this.options.lang;
+    if (title) {
+      node.properties["data-title"] = title;
+    }
+  },
+} satisfies ShikiTransformer;
+
+const mdxCopyTransformer = {
+  code(node) {
+    if (node.tagName !== "code") {
+      return;
+    }
+
+    node.properties.__raw__ = this.source;
+  },
+  pre(node) {
+    node.properties.__raw__ = this.source;
+
+    const variants = packageManagerCommandVariants(this.source);
+    if (variants) {
+      node.properties.__npm__ = variants.npm;
+    }
+  },
+} satisfies ShikiTransformer;
+
+export const shikiTransformers = [
+  metadataTransformer,
+  transformerMetaHighlight(),
+  transformerMetaWordHighlight(),
+  transformerNotationDiff(),
+  transformerNotationHighlight(),
+  transformerNotationWordHighlight(),
 ] as ShikiTransformer[];
+
+export const shikiMdxTransformers = [
+  ...shikiTransformers,
+  mdxCopyTransformer,
+] as ShikiTransformer[];
+
+export const shikiHighlightOptions = {
+  defaultColor: false as const,
+  themes: shikiThemes,
+  transformers: shikiTransformers,
+};
 
 export const highlightCode = async (
   code: string,
   language = "tsx",
   options?: { showLineNumbers?: boolean }
 ) => {
-  // Create cache key from code content and language.
+  const { showLineNumbers = true } = options ?? {};
+  const meta = showLineNumbers ? "showLineNumbers" : "";
   const cacheKey = createHash("sha256")
-    .update(`pre-tab-size-2:${language}:${code}`)
+    .update(`shiki-v2:${language}:${meta}:${code}`)
     .digest("hex");
 
-  // Check cache first.
   const cached = highlightCache.get(cacheKey);
   if (cached) {
     return cached;
   }
 
-  const { showLineNumbers = true } = options ?? {};
-
   const html = await codeToHtml(code, {
+    ...shikiHighlightOptions,
     lang: language,
-    themes: {
-      light: "github-light",
-      dark: "github-dark",
-    },
-    defaultColor: false,
-    transformers: [
-      {
-        code(node) {
-          if (showLineNumbers) {
-            node.properties["data-line-numbers"] = "";
-          }
-        },
-        line(node) {
-          node.properties["data-line"] = "";
-        },
-        pre(node) {
-          node.properties.class =
-            "text-[.8125rem] min-w-0 w-max px-4 py-3.5 [tab-size:2] outline-none has-data-[highlighted-line]:px-0 has-data-[line-numbers]:ps-0 has-data-[slot=tabs]:p-0 bg-transparent!";
-        },
-      },
-      transformerNotationWordHighlight(),
-    ],
+    meta: { __raw: meta },
   });
 
-  // Cache the result.
   highlightCache.set(cacheKey, html);
 
   return html;

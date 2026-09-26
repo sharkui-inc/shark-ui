@@ -1,0 +1,105 @@
+---
+title: Suggestion
+description: Suggested prompts for empty and quick-start states.
+seo:
+  description: Offer suggested prompts for empty and quick-start states.
+---
+
+import manifest from "@/registry/manifest/suggestion";
+
+<ComponentPreview componentName="suggestion" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/suggestion
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>This component depends on [Button](/docs/components/button). Install required dependencies first if you haven&apos;t already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/suggestion.tsx" src="/suggestion.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+Suggestions
+└── Suggestion
+```
+
+## Usage
+
+```tsx
+import { Suggestion, Suggestions } from "@/components/ui/suggestion";
+```
+
+```tsx
+<Suggestions>
+  <Suggestion suggestion="Summarize this brief" onClick={send} />
+</Suggestions>
+```
+
+## Pill
+
+The `pill` prop creates fully rounded suggestion chips. Defaults to `true`.
+
+<ComponentPreview componentName="suggestion" fileName="example-pill" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="suggestion" />
+
+## API Reference
+
+### Suggestions
+
+Container for suggestion chips.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### Suggestion
+
+Prompt chip built on [Button](/docs/components/button).
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `suggestion` | `string` | `required` |
+| `pill` | `boolean` | `true` |
+| `variant` | `"default" \| "outline" \| "secondary" \| "ghost" \| "link" \| "destructive"` | `"outline"` |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon-xs" \| "icon-sm" \| "icon-md" \| "icon-lg" \| "icon-xl"` | `"sm"` |
+| `onClick` | `(suggestion: string) => void` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |

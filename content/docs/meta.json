@@ -1,4 +1,13 @@
 {
   "root": true,
-  "pages": ["(root)", "components", "utilities", "forms", "hooks"]
+  "pages": [
+    "(root)",
+    "components",
+    "ai-components",
+    "helpers",
+    "utilities",
+    "forms",
+    "migration",
+    "hooks"
+  ]
 }

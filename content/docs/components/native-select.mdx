@@ -1,7 +1,11 @@
 ---
 title: Native Select
-description: Styled native HTML select element.
+description: Styled native HTML select.
+seo:
+  description: Styled native select that keeps platform behavior.
 ---
+
+import manifest from "@/registry/manifest/native-select";
 
 <ComponentPreview componentName="native-select" />
 
@@ -30,9 +34,7 @@ npx shadcn@latest add @shark/native-select
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -77,8 +79,12 @@ import {
 
 ## Native Select vs Select
 
-- **NativeSelect** — Use for native browser behavior, better performance, or mobile-optimized dropdowns.
-- **Select** — Use for custom styling, animations, or complex interactions.
+- **NativeSelect**: use for native browser behavior, better performance, or mobile-optimized menus.
+- **Select**: use for custom styling, animations, or complex interactions.
+
+## Controlled
+
+Use `value` and `onChange` to control the select externally.
 
 ## Sizes
 
@@ -97,10 +103,6 @@ Use the `size` prop to change the select height.
 <ComponentPreview componentName="native-select" fileName="example-size-lg" />
 
 ## States
-
-### Controlled
-
-Use `value` and `onChange` to control the select externally.
 
 <ComponentPreview componentName="native-select" fileName="example-controlled" />
 
@@ -130,6 +132,12 @@ Wrap in `Field` with `FieldLabel` and `FieldDescription` for proper labeling and
 
 <ComponentPreview componentName="native-select" fileName="example-with-field" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="native-select" />
+
 ## API Reference
 
 ### NativeSelect
@@ -139,15 +147,24 @@ Extends native `<select>` props. Additional props:
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
-| `disabled` | `boolean` | - |
-| `invalid` | `boolean` | - |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
 
 ### NativeSelectOptGroup
+| Prop | Type | Default |
+| --- | --- | --- |
+| `label` | `string` | `-` |
+| `disabled` | `boolean` | `false` |
 
 Extends native `<optgroup>` props. Use `label` for the group label.
 
+
 ### NativeSelectOption
 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `-` |
+| `disabled` | `boolean` | `false` |
 Extends native `<option>` props. Use `value` and children for option value and label.
 
 ---

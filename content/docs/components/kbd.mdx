@@ -1,7 +1,11 @@
 ---
 title: Kbd
-description: Styled representation of a single key.
+description: Styled representation of a key.
+seo:
+  description: Keyboard key glyph for shortcuts and docs.
 ---
+
+import manifest from "@/registry/manifest/kbd";
 
 <ComponentPreview componentName="kbd" />
 
@@ -28,9 +32,7 @@ npx shadcn@latest add @shark/kbd
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -102,6 +104,12 @@ Show keyboard shortcuts in `Tooltip` content.
 
 <ComponentPreview componentName="kbd" fileName="example-tooltip" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="kbd" />
+
 ## API Reference
 
 ### Kbd
@@ -111,7 +119,7 @@ Styled representation of a single key.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `variant` | `"default" \| "outline"` | `"default"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### KbdGroup
@@ -120,5 +128,5 @@ Groups multiple keys into one shortcut.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |

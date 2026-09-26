@@ -7,7 +7,7 @@ import {
 } from "@/registry/react/components/collapsible";
 
 const Example = () => (
-  <Collapsible className="w-96" collapsedHeight="50px">
+  <Collapsible className="w-full max-w-96" collapsedHeight="50px">
     <CollapsibleTrigger asChild>
       <Button className="w-full" clickEffect={false} variant="outline">
         Read more

@@ -1,10 +1,33 @@
 allowBuilds:
   esbuild: true
+  node-pty: true
   sharp: true
 minimumReleaseAgeExclude:
-  - '@tanstack/form-core@1.33.0'
-  - '@tanstack/react-form@1.33.0'
-  - fumadocs-core@16.9.2
-  - fumadocs-ui@16.9.2
-  - lucide-react@1.17.0
-  - '@formisch/react@1.0.0'
+  - '@ai-sdk/gateway@4.0.76 || 4.0.89 || 4.0.92'
+  - '@ai-sdk/mcp@2.0.46 || 2.0.58'
+  - '@ai-sdk/provider-utils@5.0.37 || 5.0.47'
+  - '@ai-sdk/provider@4.0.11'
+  - '@ai-sdk/react@4.0.98 || 4.0.114 || 4.0.117'
+  - ai@7.0.95 || 7.0.111 || 7.0.114
+  - ultracite@7.11.1
+  - valibot@1.5.0
+  - '@ark-ui/react@5.39.2'
+  - '@tanstack/ai-client@0.32.1 || 0.35.1'
+  - '@tanstack/ai-react@0.27.0 || 0.29.1'
+  - '@tanstack/ai@0.55.0 || 0.61.0'
+  - jsdom@30.1.0 || 30.1.1
+  - lucide-react@1.47.0 || 1.48.0
+  - '@next/env@16.3.6'
+  - '@next/swc-darwin-arm64@16.3.6'
+  - '@next/swc-darwin-x64@16.3.6'
+  - '@next/swc-linux-arm64-gnu@16.3.6'
+  - '@next/swc-linux-arm64-musl@16.3.6'
+  - '@next/swc-linux-x64-gnu@16.3.6'
+  - '@next/swc-linux-x64-musl@16.3.6'
+  - '@next/swc-win32-arm64-msvc@16.3.6'
+  - '@next/swc-win32-x64-msvc@16.3.6'
+  - fumadocs-core@16.15.13 || 16.15.14
+  - fumadocs-ui@16.15.13 || 16.15.14
+  - next@16.3.6
+  - '@tanstack/ai-event-client@0.13.0'
+  - fumadocs-mdx@15.4.4

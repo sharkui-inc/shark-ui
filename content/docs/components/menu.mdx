@@ -1,10 +1,14 @@
 ---
 title: Menu
-description: List of options on button interaction.
+description: Dropdown menu of actions.
+seo:
+  description: Dropdown of actions from a button, including submenus.
 links:
   doc: https://ark-ui.com/docs/components/menu
   api: https://ark-ui.com/docs/components/menu#api-reference
 ---
+
+import manifest from "@/registry/manifest/menu";
 
 <ComponentPreview componentName="menu" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/menu
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -52,21 +54,20 @@ npm install @ark-ui/react lucide-react tailwind-variants
 ```text
 Menu
 ├── MenuTrigger
-└── MenuPositioner
-    └── MenuContent
-        ├── MenuGroup
-        │   └── MenuGroupLabel
-        ├── MenuItem
-        ├── MenuQuickItem
-        ├── MenuCheckboxItem
-        ├── MenuRadioGroup
-        │   └── MenuRadioItem
-        ├── MenuSub
-        │   ├── MenuSubTrigger
-        │   └── MenuSubContent
-        ├── MenuSeparator
-        ├── MenuShortcut
-        └── MenuArrow
+└── MenuContent
+    ├── MenuGroup
+    │   └── MenuGroupLabel
+    ├── MenuItem
+    ├── MenuItemDescription
+    ├── MenuQuickItem
+    ├── MenuCheckboxItem
+    ├── MenuRadioGroup
+    │   └── MenuRadioItem
+    ├── MenuSub
+    │   ├── MenuSubTrigger
+    │   └── MenuSubContent
+    ├── MenuSeparator
+    └── MenuShortcut
 ```
 
 ## Usage
@@ -114,6 +115,20 @@ import {
 </Menu>
 ```
 
+## Controlled
+
+Control open state with `open` and `onOpenChange`.
+
+<ComponentPreview componentName="menu" fileName="example-controlled" />
+
+## States
+
+### Disabled
+
+Disable individual items with the `disabled` prop.
+
+<ComponentPreview componentName="menu" fileName="example-disabled" />
+
 ## Positioning
 
 Control the position of the menu relative to the trigger using the `positioning` prop.
@@ -122,7 +137,7 @@ Control the position of the menu relative to the trigger using the `positioning`
 
 ## Examples
 
-### Nested Menu
+### Nested
 
 Use `MenuSub`, `MenuSubTrigger`, and `MenuSubContent` for nested submenus.
 
@@ -133,6 +148,12 @@ Use `MenuSub`, `MenuSubTrigger`, and `MenuSubContent` for nested submenus.
 Combine icons with labels for quick scanning.
 
 <ComponentPreview componentName="menu" fileName="example-icons" />
+
+### With Description
+
+Add supporting text to clarify the outcome of each menu action.
+
+<ComponentPreview componentName="menu" fileName="example-with-description" />
 
 ### Shortcuts
 
@@ -154,15 +175,9 @@ Use `MenuRadioGroup` and `MenuRadioItem` for a single selection from a set of op
 
 ### With Link
 
-Use the `asChild` prop on `MenuItem` with a `anchor` element to render a link.
+Use the `asChild` prop on `MenuItem`.
 
 <ComponentPreview componentName="menu" fileName="example-link" />
-
-### With Group Label
-
-Use `MenuGroup` with  `MenuGroupLabel` or the `heading` prop to group related items under a label.
-
-<ComponentPreview componentName="menu" fileName="example-group-label" />
 
 ### With Separator
 
@@ -170,15 +185,19 @@ Use `MenuSeparator` to add visual dividers between related groups of menu items.
 
 <ComponentPreview componentName="menu" fileName="example-with-separator" />
 
+### With Group Label
+
+Use `MenuGroup` with  `MenuGroupLabel` or the `heading` prop to group related items under a label.
+
+<ComponentPreview componentName="menu" fileName="example-group-label" />
+
 ### Quick Items
 
-Use `MenuQuickItem` for actions with icon-above-text layout, ideal for quick actions like Copy and Share displayed horizontally.
+Use `MenuQuickItem` for actions with icon-above-text layout, ideal for quick actions.
 
 <ComponentPreview componentName="menu" fileName="example-quick-item" />
 
 ### Scrollable
-
-Add `max-h-*` and `overflow-y-auto` to `MenuContent` to constrain height and enable native scrolling when there are many items.
 
 <ComponentPreview componentName="menu" fileName="example-with-scroll" />
 
@@ -188,11 +207,29 @@ Open a dialog from a `MenuItem` with the `onSelect` prop and controlled state.
 
 <ComponentPreview componentName="menu" fileName="example-dialog" />
 
+### Multiple triggers
+
+`value` on each `MenuTrigger`. `onTriggerValueChange` tracks which row opened the menu.
+
+<ComponentPreview componentName="menu" fileName="example-multiple-triggers" />
+
 ### Destructive
 
 Use `variant="destructive"` on `MenuItem` for irreversible actions like delete.
 
 <ComponentPreview componentName="menu" fileName="example-destructive" />
+
+### Responsive
+
+Use [Drawer](/docs/components/drawer#responsive-menu) below the mobile breakpoint and `Menu` on larger screens. `DrawerMenuTrigger` opens the next drawer.
+
+<ComponentPreview componentName="drawer" fileName="example-responsive-menu" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="menu" />
 
 ## API Reference
 
@@ -202,20 +239,31 @@ Root element of the menu component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `positioning` | `PositioningOptions` | - |
-| `open` | `boolean` | - |
-| `defaultOpen` | `boolean` | - |
-| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
-| `onSelect` | `(details: SelectionDetails) => void` | - |
+| `positioning` | `PositioningOptions` | `-` |
+| `open` | `boolean` | `-` |
+| `defaultOpen` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
+| `onSelect` | `(details: SelectionDetails) => void` | `-` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
 | `closeOnSelect` | `boolean` | `true` |
 
 ### MenuTrigger
 
-Opens the menu on click. Use `asChild` to delegate to a child element.
+Opens the menu on click.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
+| `value` | `string` | `-` |
+
+### MenuPositioner
+
+Positions the menu content relative to its trigger.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### MenuContent
 
@@ -223,42 +271,50 @@ Holds menu options. Displayed in a portal, positioned relative to the trigger.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### MenuItem
 
-A single selectable menu option. Supports `asChild` for custom elements.
+A single selectable menu option.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
+| `value` | `string` | `required` |
 | `variant` | `"default" \| "destructive"` | `"default"` |
-| `asChild` | `boolean` | - |
-| `disabled` | `boolean` | - |
-| `closeOnSelect` | `boolean` | - |
-| `onSelect` | `VoidFunction` | - |
+| `asChild` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
+| `closeOnSelect` | `boolean` | `-` |
+| `onSelect` | `VoidFunction` | `-` |
+
+### MenuItemDescription
+
+Secondary line under a menu item label. Aligns leading icons to the title when present.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 
 ### MenuCheckboxItem
 
-A menu option with a checkbox. Use `checked` and `onCheckedChange` for controlled state.
+A menu option with a checkbox.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
-| `checked` | `boolean` | - |
-| `onCheckedChange` | `(checked: boolean) => void` | - |
-| `disabled` | `boolean` | - |
+| `value` | `string` | `required` |
+| `checked` | `boolean` | `-` |
+| `onCheckedChange` | `(checked: boolean) => void` | `-` |
+| `disabled` | `boolean` | `-` |
 
 ### MenuRadioGroup
 
-Group of mutually exclusive options. Use `value` and `onValueChange` for controlled state.
+Group of mutually exclusive options.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
-| `heading` | `string` | - |
+| `value` | `string` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
+| `heading` | `string` | `-` |
 
 ### MenuRadioItem
 
@@ -266,57 +322,94 @@ A single option in a radio group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
-| `disabled` | `boolean` | - |
+| `value` | `string` | `required` |
+| `disabled` | `boolean` | `-` |
 
 ### MenuGroup
 
-Groups related items. Use `heading` or `MenuGroupLabel` for a label.
+Groups related items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string` | - |
+| `heading` | `string` | `-` |
 
 ### MenuGroupLabel
 
-Label for a group. Must be used inside `MenuGroup`.
+Label for a group.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### MenuSeparator
 
 Visual divider between groups of menu items.
 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
 ### MenuQuickItem
 
-A menu option with icon-above-text layout for quick actions. Use with `flex` to display multiple items horizontally.
+A menu option with icon-above-text layout for quick actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
-| `asChild` | `boolean` | - |
-| `disabled` | `boolean` | - |
-| `closeOnSelect` | `boolean` | - |
-| `onSelect` | `VoidFunction` | - |
+| `value` | `string` | `required` |
+| `asChild` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
+| `closeOnSelect` | `boolean` | `-` |
+| `onSelect` | `VoidFunction` | `-` |
 
-### MenuSub / MenuSubTrigger / MenuSubContent
+### MenuSub
 
-Submenu: wrap a nested `Menu`-like structure. `MenuSubTrigger` opens the submenu; `MenuSubContent` holds the nested items.
+Root element for a nested submenu. It accepts the same state and positioning props as `Menu`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `positioning` | `PositioningOptions` | `-` |
+| `open` | `boolean` | `-` |
+| `defaultOpen` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
+| `closeOnSelect` | `boolean` | `true` |
+
+### MenuSubTrigger
+
+Menu item that opens its nested submenu.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `required` |
+| `disabled` | `boolean` | `-` |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
+### MenuSubContent
+
+Holds the items rendered by a nested submenu.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### MenuShortcut
 
 Optional keyboard shortcut hint displayed next to a menu item.
 
-### MenuArrow
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 
-Optional arrow pointing toward the trigger.
+### MenuRootProvider
+
+Provides a Menu API created with `useMenu` to descendant components.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-
-| Attribute | Default |
-| --- | --- |
-| `--arrow-background` | `var(--popover)` |
-| `--arrow-size` | `calc(1.5 * var(--spacing))` |
+| `value` | `UseMenuReturn` | `required` |
 
 ---
 

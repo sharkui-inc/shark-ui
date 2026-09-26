@@ -1,10 +1,14 @@
 ---
 title: Image Cropper
 description: Crop and transform images.
+seo:
+  description: Crop and transform images with handles and aspect presets.
 links:
   doc: https://ark-ui.com/docs/components/image-cropper
   api: https://ark-ui.com/docs/components/image-cropper#api-reference
 ---
+
+import manifest from "@/registry/manifest/image-cropper";
 
 <ComponentPreview componentName="image-cropper" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/image-cropper
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -96,7 +98,7 @@ Start with a pre-defined crop area using the `initialCrop` prop.
 
 ### Controlled zoom
 
-Control zoom programmatically with the `zoom` and `onZoomChange` props.
+Use `zoom` and `onZoomChange` to control zoom.
 
 <ComponentPreview componentName="image-cropper" fileName="example-controlled-zoom" />
 
@@ -118,6 +120,30 @@ Set `fixedCropArea` to `true` when the crop area should stay fixed while the ima
 
 <ComponentPreview componentName="image-cropper" fileName="example-fixed-crop-area" />
 
+### Crop preview
+
+Generate and inspect the current crop.
+
+<ComponentPreview componentName="image-cropper" fileName="example-crop-preview" />
+
+### Controls
+
+Control zoom, rotation, flip, and reset from the cropper context.
+
+<ComponentPreview componentName="image-cropper" fileName="example-controls" />
+
+### Events
+
+Track crop position and zoom changes.
+
+<ComponentPreview componentName="image-cropper" fileName="example-events" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="image-cropper" />
+
 ## API Reference
 
 ### ImageCropper
@@ -126,27 +152,27 @@ Root wrapper. Manages crop state and handles.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `aspectRatio` | `number` | - |
+| `aspectRatio` | `number` | `-` |
 | `cropShape` | `"circle" \| "rectangle"` | `"rectangle"` |
 | `fixedCropArea` | `boolean` | `false` |
-| `initialCrop` | `{ x: number; y: number; width: number; height: number }` | - |
+| `initialCrop` | `{ x: number; y: number; width: number; height: number }` | `-` |
 | `maxHeight` | `number` | `Infinity` |
 | `maxWidth` | `number` | `Infinity` |
 | `maxZoom` | `number` | `5` |
 | `minHeight` | `number` | `40` |
 | `minWidth` | `number` | `40` |
 | `minZoom` | `number` | `1` |
-| `onCropChange` | `(details: CropChangeDetails) => void` | - |
-| `onZoomChange` | `(details: ZoomChangeDetails) => void` | - |
-| `rotation` | `number` | - |
-| `zoom` | `number` | - |
-| `className` | `string` | - |
+| `onCropChange` | `(details: CropChangeDetails) => void` | `-` |
+| `onZoomChange` | `(details: ZoomChangeDetails) => void` | `-` |
+| `rotation` | `number` | `-` |
+| `zoom` | `number` | `-` |
+| `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--cropper-accent` | `var(--color-white)` |
-| `--cropper-handler-size` | `--spacing(2)` |
-| `--cropper-handler-width` | `--spacing(1)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--cropper-accent` | `string` | `var(--color-white)` |
+| `--cropper-handler-size` | `string` | `--spacing(2)` |
+| `--cropper-handler-width` | `string` | `--spacing(1)` |
 
 ### ImageCropperImage
 
@@ -154,9 +180,9 @@ Image to crop. Pass `src` and alt.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `alt` | `string` | - |
-| `src` | `string` | - |
-| `className` | `string` | - |
+| `alt` | `string` | `-` |
+| `src` | `string` | `-` |
+| `className` | `string` | `-` |
 
 ### ImageCropperSelection
 
@@ -165,7 +191,41 @@ Crop selection overlay with resize handles and optional grid.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `axis` | `"horizontal" \| "vertical" \| "both"` | `"both"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
+
+### ImageCropperRootProvider
+
+Provides a ImageCropper API created with `useImageCropper` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseImageCropperReturn` | `required` |
+
+### ImageCropperContext
+
+Render-prop access to the surrounding component API.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: unknown) => React.ReactNode` | `required` |
+
+### ImageCropperHandle
+
+Public ImageCropperHandle component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### ImageCropperGrid
+
+Public ImageCropperGrid component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

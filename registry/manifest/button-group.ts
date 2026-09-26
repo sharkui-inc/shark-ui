@@ -1,13 +1,13 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "tailwind-variants"];
 
 const manifest: RegistryItemType = {
-  name: "button-group",
-  type: "registry:ui",
   dependencies,
-  registryDependencies: [absoluteUrl("/r/separator.json")],
+  name: "button-group",
+  registryDependencies: [registryUrl("/r/separator.json")],
+  type: "registry:ui",
 };
 
 export default manifest;

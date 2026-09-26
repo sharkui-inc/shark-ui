@@ -26,22 +26,11 @@ import {
   FileUploadList,
 } from "@/registry/react/components/file-upload";
 
-const formSchema = z.object({
-  resume: z
-    .array(z.instanceof(File))
-    .min(1, "Please upload at least one PDF or Word document."),
-});
-
 const Example = () => {
   const form = useForm({
     defaultValues: { resume: [] as File[] },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "resume-submitted",
-        title: "Resume uploaded",
         description: (
           <div className="mt-2 flex flex-col gap-2">
             <p className="text-muted-foreground text-sm">
@@ -63,7 +52,12 @@ const Example = () => {
             </pre>
           </div>
         ),
+        id: "resume-submitted",
+        title: "Resume uploaded",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -118,5 +112,11 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  resume: z
+    .array(z.instanceof(File))
+    .min(1, "Please upload at least one PDF or Word document."),
+});
 
 export default Example;

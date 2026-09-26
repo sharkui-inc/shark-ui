@@ -1,47 +1,77 @@
 "use client";
 
-import { Swap as ArkSwap, useSwapContext } from "@ark-ui/react/swap";
+import {
+  Swap as ArkSwap,
+  useSwap as useArkSwap,
+  useSwapContext as useArkSwapContext,
+} from "@ark-ui/react/swap";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
-export const useSwap = useSwapContext;
+export const useSwap = useArkSwap;
+export const useSwapContext = useArkSwapContext;
+export const SwapRootProvider = ArkSwap.RootProvider;
 
 const swapIndicatorVariants = tv({
-  base: ["[&>span]:motion-reduce:animate-none!"],
-  variants: {
-    variant: {
-      fade: [
-        "[&>span]:data-[state=open]:fade-in-0 [&>span]:data-[state=open]:animate-in [&>span]:data-[state=open]:duration-200",
-        "[&>span]:data-[state=closed]:fade-out-0 [&>span]:data-[state=closed]:animate-out [&>span]:data-[state=closed]:duration-100",
-      ],
-      scale: [
-        "[&>span]:data-[state=open]:zoom-in-0 [&>span]:data-[state=open]:fade-in-0 [&>span]:data-[state=open]:animate-in [&>span]:data-[state=open]:duration-200",
-        "[&>span]:data-[state=closed]:zoom-out-100 [&>span]:data-[state=closed]:fade-out-0 [&>span]:data-[state=closed]:animate-out [&>span]:data-[state=closed]:duration-100",
-      ],
-      flip: [
-        "[&>span]:backface-hidden",
-        "[&>span]:data-[state=open]:animate-[flip-in_400ms_ease]",
-        "[&>span]:data-[state=closed]:animate-[flip-out_200ms_ease]",
-      ],
-      rotate: [
-        "[&>span]:data-[state=open]:spin-in-[-90deg] [&>span]:data-[state=open]:fade-in-0 [&>span]:data-[state=open]:animate-in [&>span]:data-[state=open]:duration-250",
-        "[&>span]:data-[state=closed]:spin-out-[90deg] [&>span]:data-[state=closed]:fade-out-0 [&>span]:data-[state=closed]:animate-out [&>span]:data-[state=closed]:duration-100",
-      ],
-      blur: [
-        "[&>span]:data-[state=open]:fade-in-0 [&>span]:data-[state=open]:zoom-in-50 [&>span]:data-[state=open]:animate-in [&>span]:data-[state=open]:blur-in-sm [&>span]:data-[state=open]:duration-250",
-        "[&>span]:data-[state=closed]:fade-out-0 [&>span]:data-[state=closed]:zoom-out-50 [&>span]:data-[state=closed]:animate-out [&>span]:data-[state=closed]:blur-out-sm [&>span]:data-[state=closed]:duration-150",
-      ],
-    },
-  },
   defaultVariants: {
     variant: "fade",
   },
+  slots: {
+    indicator: [
+      "motion-reduce:animate-none",
+      "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+    ],
+    root: "",
+  },
+  variants: {
+    variant: {
+      blur: {
+        indicator: [
+          "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-50 data-[state=open]:animate-in data-[state=open]:blur-in-sm data-[state=open]:duration-250",
+          "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-50 data-[state=closed]:animate-out data-[state=closed]:blur-out-sm data-[state=closed]:duration-150",
+        ],
+      },
+      fade: {
+        indicator: [
+          "data-[state=open]:fade-in-0 data-[state=open]:animate-in data-[state=open]:duration-200",
+          "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out data-[state=closed]:duration-100",
+        ],
+      },
+      flip: {
+        indicator: [
+          "backface-hidden",
+          "data-[state=open]:animate-flip-in",
+          "data-[state=closed]:animate-flip-out",
+        ],
+      },
+      rotate: {
+        indicator: [
+          "data-[state=open]:spin-in-[-90deg] data-[state=open]:fade-in-0 data-[state=open]:animate-in data-[state=open]:duration-250",
+          "data-[state=closed]:spin-out-[90deg] data-[state=closed]:fade-out-0 data-[state=closed]:animate-out data-[state=closed]:duration-100",
+        ],
+      },
+      scale: {
+        indicator: [
+          "data-[state=open]:zoom-in-0 data-[state=open]:fade-in-0 data-[state=open]:animate-in data-[state=open]:duration-200",
+          "data-[state=closed]:zoom-out-100 data-[state=closed]:fade-out-0 data-[state=closed]:animate-out data-[state=closed]:duration-100",
+        ],
+      },
+    },
+  },
 });
 
-interface SwapProps
-  extends React.ComponentProps<typeof ArkSwap.Root>,
-    VariantProps<typeof swapIndicatorVariants> {}
+type SwapBaseProps = Omit<
+  React.ComponentProps<typeof ArkSwap.Root>,
+  "asChild" | "children"
+> &
+  VariantProps<typeof swapIndicatorVariants>;
+
+type SwapProps = SwapBaseProps & {
+  indicatorClassName?: string;
+  off: React.ReactNode;
+  on: React.ReactNode;
+};
 
 export const Swap = (props: SwapProps) => {
   const {
@@ -49,20 +79,35 @@ export const Swap = (props: SwapProps) => {
     lazyMount = true,
     unmountOnExit = true,
     className,
+    indicatorClassName,
+    on,
+    off,
     ...rest
   } = props;
+  const { indicator, root } = swapIndicatorVariants({ variant });
 
   return (
     <ArkSwap.Root
-      className={cn(swapIndicatorVariants({ variant }), className)}
+      className={cn(root(), className)}
       data-slot="swap"
       lazyMount={lazyMount}
       unmountOnExit={unmountOnExit}
       {...rest}
-    />
+    >
+      <ArkSwap.Indicator
+        className={cn(indicator(), indicatorClassName)}
+        data-slot="swap-indicator"
+        type="on"
+      >
+        {on}
+      </ArkSwap.Indicator>
+      <ArkSwap.Indicator
+        className={cn(indicator(), indicatorClassName)}
+        data-slot="swap-indicator"
+        type="off"
+      >
+        {off}
+      </ArkSwap.Indicator>
+    </ArkSwap.Root>
   );
 };
-
-export const SwapIndicator = (
-  props: React.ComponentProps<typeof ArkSwap.Indicator>
-) => <ArkSwap.Indicator data-slot="swap-indicator" {...props} />;

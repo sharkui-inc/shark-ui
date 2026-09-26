@@ -1,10 +1,14 @@
 ---
 title: Switch
-description: A switch for toggling a binary state.
+description: Toggle a binary on/off state.
+seo:
+  description: On/off switch for settings and feature toggles.
 links:
   doc: https://ark-ui.com/docs/components/switch
   api: https://ark-ui.com/docs/components/switch#api-reference
 ---
+
+import manifest from "@/registry/manifest/switch";
 
 <ComponentPreview componentName="switch" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/switch
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -59,7 +61,7 @@ import { Switch } from "@/components/ui/switch";
 
 ## Controlled
 
-Use the `checked` and `onCheckedChange` props to control the switch state programmatically.
+Use the `checked` and `onCheckedChange` props to control the switch.
 
 <ComponentPreview componentName="switch" fileName="example-controlled" />
 
@@ -103,6 +105,12 @@ The switch size is controlled by the `[--size-*]` CSS variable.
 
 <ComponentPreview componentName="switch" fileName="example-size" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="switch" />
+
 ## API Reference
 
 ### Switch
@@ -120,9 +128,17 @@ Toggle switch for on/off state. Use with a form control.
 | `onCheckedChange` | `(details: CheckedChangeDetails) => void` | `-` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--size` | `--spacing(4)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--size` | `string` | `--spacing(5)` |
+
+### SwitchRootProvider
+
+Provides a Switch API created with `useSwitch` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseSwitchReturn` | `required` |
 
 ---
 

@@ -1,0 +1,67 @@
+import { Button } from "@/registry/react/components/button";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/registry/react/components/hover-card";
+
+const HoverCardRtl = () => (
+  <div className="grid gap-4">
+    <div className="flex flex-wrap justify-center gap-2">
+      {physicalSides.map((side) => (
+        <HoverCard key={side} positioning={{ placement: side }}>
+          <HoverCardTrigger asChild>
+            <Button variant="outline">{translations[side]}</Button>
+          </HoverCardTrigger>
+          <HoverCardContent className="flex w-64 flex-col gap-1">
+            <div className="font-semibold">{translations.name}</div>
+            <div className="text-muted-foreground text-sm">
+              {translations.price}
+            </div>
+          </HoverCardContent>
+        </HoverCard>
+      ))}
+    </div>
+
+    <div className="flex flex-wrap justify-center gap-2">
+      {logicalSides.map((side) => (
+        <HoverCard
+          key={side}
+          positioning={{ placement: logicalPlacement[side] }}
+        >
+          <HoverCardTrigger asChild>
+            <Button variant="outline">{translations[side]}</Button>
+          </HoverCardTrigger>
+          <HoverCardContent className="flex w-64 flex-col gap-1">
+            <div className="font-semibold">{translations.name}</div>
+            <div className="text-muted-foreground text-sm">
+              {translations.price}
+            </div>
+          </HoverCardContent>
+        </HoverCard>
+      ))}
+    </div>
+  </div>
+);
+
+const physicalSides = ["left", "top", "bottom", "right"] as const;
+
+const logicalSides = ["inline-start", "inline-end"] as const;
+
+const translations = {
+  bottom: "أسفل",
+  "inline-end": "نهاية السطر",
+  "inline-start": "بداية السطر",
+  left: "يسار",
+  name: "سماعات لاسلكية",
+  price: "٩٩.٩٩ $",
+  right: "يمين",
+  top: "أعلى",
+} as const;
+
+const logicalPlacement: Record<string, "left" | "right"> = {
+  "inline-end": "left",
+  "inline-start": "right",
+};
+
+export default HoverCardRtl;

@@ -4,8 +4,9 @@ import { Portal } from "@ark-ui/react/portal";
 import {
   Toast as ArkToast,
   Toaster as ArkToaster,
+  type CreateToasterReturn,
   createToaster,
-  useToastContext,
+  useToastContext as useArkToastContext,
 } from "@ark-ui/react/toast";
 import {
   CircleAlertIcon,
@@ -19,24 +20,23 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Spinner } from "@/registry/react/components/spinner";
 
-export const useToast = useToastContext;
+export const useToastContext = useArkToastContext;
 
 export const toast = createToaster({
-  placement: "bottom-end",
-  overlap: true,
   max: 3,
+  overlap: true,
+  placement: "bottom-end",
 });
 
-interface ToasterProps
-  extends Omit<
-    React.ComponentProps<typeof ArkToaster>,
-    "toaster" | "children"
-  > {
+type ToasterProps = Omit<
+  React.ComponentProps<typeof ArkToaster>,
+  "children" | "toaster"
+> & {
   /**
    * Toaster instance
    */
-  toaster?: ReturnType<typeof createToaster>;
-}
+  toaster?: CreateToasterReturn<React.ReactNode>;
+};
 
 export const Toaster = (props: ToasterProps) => {
   const { toaster: toasterInstance = toast, className, style, ...rest } = props;
@@ -46,12 +46,14 @@ export const Toaster = (props: ToasterProps) => {
       <ArkToaster
         className={cn(
           "w-[calc(100%-var(--viewport-offset-left))] sm:w-(--width)",
-          "data-[align=center]:left-[calc(var(--viewport-offset-right)/2)]!",
+          "data-[align=center]:inset-s-[calc(var(--viewport-offset-right)/2)]",
           "sm:data-[align=center]:w-full",
           className
         )}
         style={{ "--width": "356px", ...style } as React.CSSProperties}
-        toaster={toasterInstance}
+        toaster={
+          toasterInstance as React.ComponentProps<typeof ArkToaster>["toaster"]
+        }
         {...rest}
       >
         {(toastItem) => <ToastItem toast={toastItem} />}
@@ -61,11 +63,11 @@ export const Toaster = (props: ToasterProps) => {
 };
 
 const TOAST_ICONS = {
-  loading: <Spinner />,
-  success: <CircleCheckIcon />,
-  error: <CircleAlertIcon />,
-  info: <InfoIcon />,
-  warning: <TriangleAlertIcon />,
+  error: CircleAlertIcon,
+  info: InfoIcon,
+  loading: Spinner,
+  success: CircleCheckIcon,
+  warning: TriangleAlertIcon,
 } as const;
 
 interface ToastItemProps extends React.ComponentProps<typeof ArkToast.Root> {
@@ -80,7 +82,7 @@ export const ToastItem = (props: ToastItemProps) => {
 
   const ToastIcon = toastData.type
     ? TOAST_ICONS[toastData.type as keyof typeof TOAST_ICONS]
-    : null;
+    : undefined;
 
   const isExplicitClosable = toastData.closable === false;
 
@@ -93,15 +95,15 @@ export const ToastItem = (props: ToastItemProps) => {
         "px-3.5 py-3",
         "flex items-start justify-between gap-1.5",
         "bg-popover",
-        "select-none text-card-foreground text-sm",
-        "rounded-lg border shadow-lg/5",
+        "text-card-foreground text-sm",
+        "rounded-lg border shadow-lg/4",
+        "outline-hidden",
         "scale-(--scale) opacity-(--opacity)",
-        "transition-all duration-250 will-change-[translate,opacity,scale]",
-        "ease-[cubic-bezier(0.21,1.02,0.73,1)]",
+        "transition-[translate,scale,opacity] duration-200 ease-out will-change-[translate,opacity,scale]",
         "data-[state=closed]:transition-[translate,scale,opacity]",
-        "data-[state=closed]:duration-[300ms,300ms,150ms]",
-        "data-[state=closed]:ease-[cubic-bezier(0.06,0.71,0.55,1)]",
-        "motion-reduce:transition-none!",
+        "data-[state=closed]:duration-150 data-[state=closed]:ease-out",
+        "motion-reduce:transition-none",
+        "motion-reduce:data-[state=closed]:transition-none",
         className
       )}
       data-slot="toast"
@@ -110,15 +112,15 @@ export const ToastItem = (props: ToastItemProps) => {
       <div className="flex items-start gap-1.5">
         <div
           className={cn(
-            "in-data-[type=warning]:text-warning",
-            "in-data-[type=success]:text-success",
-            "in-data-[type=error]:text-destructive",
-            "in-data-[type=info]:text-info",
+            "in-data-[type=warning]:text-warning-foreground",
+            "in-data-[type=success]:text-success-foreground",
+            "in-data-[type=error]:text-destructive-foreground",
+            "in-data-[type=info]:text-info-foreground",
             "[&_svg]:pointer-events-none [&_svg]:h-lh [&_svg]:w-4 [&_svg]:shrink-0"
           )}
           data-slot="toast-icon"
         >
-          {ToastIcon}
+          {ToastIcon ? <ToastIcon /> : null}
         </div>
 
         <div className="flex flex-col gap-0.5">
@@ -129,7 +131,7 @@ export const ToastItem = (props: ToastItemProps) => {
             {toastData.title}
           </ArkToast.Title>
 
-          {toastData.description && (
+          {!!toastData.description && (
             <ArkToast.Description
               className="text-muted-foreground text-sm"
               data-slot="toast-description"
@@ -141,12 +143,8 @@ export const ToastItem = (props: ToastItemProps) => {
       </div>
 
       <div className="flex items-center gap-2">
-        {toastData.action && (
-          <ArkToast.ActionTrigger
-            asChild
-            data-slot="toast-action-trigger"
-            onClick={toastData.action.onClick}
-          >
+        {!!toastData.action && (
+          <ArkToast.ActionTrigger asChild data-slot="toast-action-trigger">
             <Button size="sm" variant="secondary">
               {toastData.action.label}
             </Button>

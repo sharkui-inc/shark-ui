@@ -16,6 +16,10 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/registry/react/components/chart";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@/registry/react/components/toggle-group";
 
 export const description = "An interactive line chart";
 
@@ -114,22 +118,25 @@ const chartData = [
 ];
 
 const chartConfig = {
-  views: {
-    label: "Page Views",
-  },
   desktop: {
-    label: "Desktop",
     color: "var(--chart-1)",
+    label: "Desktop",
   },
   mobile: {
-    label: "Mobile",
     color: "var(--chart-2)",
+    label: "Mobile",
+  },
+  views: {
+    label: "Page Views",
   },
 } satisfies ChartConfig;
 
 function ChartLineInteractive() {
-  const [activeChart, setActiveChart] =
-    React.useState<keyof typeof chartConfig>("desktop");
+  const [activeChart, setActiveChart] = React.useState(["desktop"]);
+  const selectedChart =
+    activeChart.find(
+      (value): value is keyof typeof chartConfig => value in chartConfig
+    ) ?? "desktop";
 
   const total = React.useMemo(
     () => ({
@@ -141,23 +148,27 @@ function ChartLineInteractive() {
 
   return (
     <Card className="py-4 sm:py-0">
-      <CardHeader className="flex flex-col items-stretch border-b p-0! sm:flex-row">
+      <CardHeader className="flex flex-col items-stretch border-b px-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 pb-3 sm:pb-0">
           <CardTitle>Line Chart - Interactive</CardTitle>
           <CardDescription>
             Showing total visitors for the last 3 months
           </CardDescription>
         </div>
-        <div className="flex">
+        <ToggleGroup
+          className="flex flex-1"
+          deselectable={false}
+          multiple={false}
+          onValueChange={({ value }) => setActiveChart(value)}
+          value={activeChart}
+        >
           {["desktop", "mobile"].map((key) => {
             const chart = key as keyof typeof chartConfig;
             return (
-              <button
-                className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-t-0 sm:border-l sm:px-8 sm:py-6"
-                data-active={activeChart === chart}
+              <ToggleGroupItem
+                className="h-auto flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-start data-[state=on]:bg-muted/48 sm:border-t-0 sm:border-l sm:px-8 sm:py-6"
                 key={chart}
-                onClick={() => setActiveChart(chart)}
-                type="button"
+                value={chart}
               >
                 <span className="text-muted-foreground text-xs">
                   {chartConfig[chart].label}
@@ -165,10 +176,10 @@ function ChartLineInteractive() {
                 <span className="font-bold text-lg leading-none sm:text-3xl">
                   {total[key as keyof typeof total].toLocaleString()}
                 </span>
-              </button>
+              </ToggleGroupItem>
             );
           })}
-        </div>
+        </ToggleGroup>
       </CardHeader>
       <CardContent className="px-2 sm:p-6">
         <ChartContainer
@@ -191,8 +202,8 @@ function ChartLineInteractive() {
               tickFormatter={(value) => {
                 const date = new Date(value);
                 return date.toLocaleDateString("en-US", {
-                  month: "short",
                   day: "numeric",
+                  month: "short",
                 });
               }}
               tickLine={false}
@@ -203,9 +214,9 @@ function ChartLineInteractive() {
                 <ChartTooltipContent
                   className="w-[150px]"
                   labelFormatter={(value) =>
-                    new Date(value).toLocaleDateString("en-US", {
-                      month: "short",
+                    new Date(String(value)).toLocaleDateString("en-US", {
                       day: "numeric",
+                      month: "short",
                       year: "numeric",
                     })
                   }
@@ -214,9 +225,9 @@ function ChartLineInteractive() {
               }
             />
             <Line
-              dataKey={activeChart}
+              dataKey={selectedChart}
               dot={false}
-              stroke={`var(--color-${activeChart})`}
+              stroke={`var(--color-${selectedChart})`}
               strokeWidth={2}
               type="monotone"
             />

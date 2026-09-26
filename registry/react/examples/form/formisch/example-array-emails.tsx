@@ -38,39 +38,21 @@ import {
   InputGroupInput,
 } from "@/registry/react/components/input-group";
 
-const formSchema = v.object({
-  emails: v.pipe(
-    v.array(
-      v.object({
-        contact: v.object({
-          address: v.pipe(
-            v.string(),
-            v.nonEmpty("Enter an email address."),
-            v.email("Enter a valid email address.")
-          ),
-        }),
-      })
-    ),
-    v.minLength(1, "Add at least one email address."),
-    v.maxLength(5, "You can add up to 5 email addresses.")
-  ),
-});
-
 const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: { emails: [{ contact: { address: "" } }] },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "formisch-array-emails-submitted",
-      title: "Contact emails saved",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "formisch-array-emails-submitted",
+      title: "Contact emails saved",
     });
   };
 
@@ -119,8 +101,8 @@ const Example = () => {
                                     aria-label={`Remove email ${String(index + 1)}`}
                                     onClick={() =>
                                       remove(form, {
-                                        path: ["emails"],
                                         at: index,
+                                        path: ["emails"],
                                       })
                                     }
                                     size="icon-xs"
@@ -141,8 +123,8 @@ const Example = () => {
                     disabled={arrayField.items.length >= 5}
                     onClick={() =>
                       insert(form, {
-                        path: ["emails"],
                         initialInput: { contact: { address: "" } },
+                        path: ["emails"],
                       })
                     }
                     size="sm"
@@ -151,11 +133,11 @@ const Example = () => {
                     Add email address
                   </Button>
                 </FieldGroup>
-                {arrayField.errors?.[0] && (
+                {arrayField.errors?.[0] ? (
                   <Field invalid>
                     <FieldError>{arrayField.errors[0]}</FieldError>
                   </Field>
-                )}
+                ) : null}
               </FieldSet>
             )}
           </FieldArray>
@@ -170,5 +152,23 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  emails: v.pipe(
+    v.array(
+      v.object({
+        contact: v.object({
+          address: v.pipe(
+            v.string(),
+            v.nonEmpty("Enter an email address."),
+            v.email("Enter a valid email address.")
+          ),
+        }),
+      })
+    ),
+    v.minLength(1, "Add at least one email address."),
+    v.maxLength(5, "You can add up to 5 email addresses.")
+  ),
+});
 
 export default Example;

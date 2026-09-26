@@ -1,16 +1,22 @@
 "use client";
 
-import { Dialog as ArkDialog, useDialogContext } from "@ark-ui/react/dialog";
+import {
+  Dialog as ArkDialog,
+  useDialog as useArkDialog,
+  useDialogContext as useArkDialogContext,
+} from "@ark-ui/react/dialog";
 import { ark } from "@ark-ui/react/factory";
 import { Portal } from "@ark-ui/react/portal";
+import { createContext } from "@ark-ui/react/utils";
 import { XIcon } from "lucide-react";
-import React from "react";
+import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
-export const useDialog = useDialogContext;
+export const useDialog = useArkDialog;
+export const useDialogContext = useArkDialogContext;
 
 interface DialogContextProps {
   /**
@@ -21,9 +27,36 @@ interface DialogContextProps {
   modal?: boolean;
 }
 
-const DialogContext = React.createContext({} as DialogContextProps);
+const [DialogModalProvider, _useDialog] = createContext<DialogContextProps>({
+  name: "DialogModalContext",
+  providerName: "Dialog",
+});
 
-export const Dialog = (props: React.ComponentProps<typeof ArkDialog.Root>) => {
+export interface DialogRootProviderProps
+  extends React.ComponentProps<typeof ArkDialog.RootProvider> {
+  /**
+   * Used internally to show or hide overlay. Match the `modal` option
+   * passed to `useDialog` when non-default.
+   *
+   * @default true
+   */
+  modal?: boolean;
+}
+
+export const DialogRootProvider = (props: DialogRootProviderProps) => {
+  const { modal = true, children, ...rest } = props;
+
+  return (
+    <DialogModalProvider value={{ modal }}>
+      <ArkDialog.RootProvider {...rest}>{children}</ArkDialog.RootProvider>
+    </DialogModalProvider>
+  );
+};
+
+export interface DialogProps
+  extends React.ComponentProps<typeof ArkDialog.Root> {}
+
+export const Dialog = (props: DialogProps) => {
   const {
     modal = true,
     lazyMount = true,
@@ -32,30 +65,36 @@ export const Dialog = (props: React.ComponentProps<typeof ArkDialog.Root>) => {
   } = props;
 
   return (
-    <DialogContext.Provider value={{ modal }}>
+    <DialogModalProvider
+      value={{
+        modal,
+      }}
+    >
       <ArkDialog.Root
+        data-slot="dialog"
         lazyMount={lazyMount}
         modal={modal}
         unmountOnExit={unmountOnExit}
         {...rest}
       />
-    </DialogContext.Provider>
+    </DialogModalProvider>
   );
 };
 
 export const DialogTrigger = (
   props: React.ComponentProps<typeof ArkDialog.Trigger>
-) => <ArkDialog.Trigger {...props} />;
+) => <ArkDialog.Trigger data-slot="dialog-trigger" {...props} />;
 
 export const dialogOverlayVariants = tv({
   base: [
     "fixed inset-0 z-50",
     "bg-black/32 backdrop-blur-xs",
-    "duration-200",
+    "duration-200 ease-out",
     "peer peer-data-[slot=dialog-overlay]:hidden",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
-    "motion-reduce:animate-none!",
+    "motion-reduce:animate-none",
+    "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
   ],
 });
 
@@ -100,51 +139,63 @@ export const DialogPositioner = (
 };
 
 export const dialogContentVariants = tv({
-  base: [
-    "[--space:--spacing(6)]",
-    "z-[calc(50+var(--layer-index,0))]",
-    "relative",
-    "row-start-2",
-    "max-h-[calc(100svh-2rem)] min-h-0 w-full min-w-0",
-    "flex flex-col overflow-hidden",
-    "bg-popover",
-    "text-popover-foreground",
-    "rounded-2xl border shadow-lg/5",
-    "outline-none",
-    "translate-y-[calc(-1.25rem*var(--nested-layer-count))]",
-    "transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform",
-    "data-[nested=dialog]:data-[state=closed]:slide-in-from-bottom-10 data-[nested=dialog]:data-[state=open]:slide-in-from-bottom-10 data-[has-nested=dialog]:origin-top",
-    "scale-[calc(1-0.1*var(--nested-layer-count))] opacity-[calc(1-0.1*var(--nested-layer-count))]",
-    "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
-    "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
-    "motion-reduce:animate-none! motion-reduce:transition-none!",
-  ],
-  variants: {
-    size: {
-      sm: ["max-w-md"],
-      md: ["max-w-lg"],
-      lg: ["max-w-xl"],
-      xl: ["max-w-2xl"],
-      "2xl": ["max-w-3xl"],
-      "3xl": ["max-w-4xl"],
-      "4xl": ["max-w-5xl"],
-      "5xl": ["max-w-6xl"],
-      "6xl": ["max-w-7xl"],
-      fullscreen: ["size-full"],
-    },
-    bottomStickOnMobile: {
-      true: [
-        "max-sm:max-h-[calc(100svh-3rem)]",
-        "max-sm:max-w-none",
-        "max-sm:rounded-none max-sm:rounded-t-2xl max-sm:border-x-0 max-sm:border-t max-sm:border-b-0",
-        "max-sm:opacity-[calc(1-min(var(--nested-dialogs),1))]",
-        "max-sm:data-[state=closed]:slide-out-to-bottom-5 max-sm:data-[state=open]:slide-in-from-bottom-5",
-        "max-sm:data-[state=closed]:zoom-out-100 max-sm:data-[state=open]:zoom-in-100",
-      ],
-    },
-  },
   defaultVariants: {
     size: "md",
+  },
+  slots: {
+    content: [
+      "[--space:--spacing(6)]",
+      "z-[calc(50+var(--layer-index,0))]",
+      "relative",
+      "row-start-2",
+      "max-h-[calc(100svh-2rem)] min-h-0 w-full min-w-0",
+      "flex flex-col",
+      "bg-popover",
+      "text-popover-foreground",
+      "rounded-2xl border shadow-lg/4",
+      "overflow-hidden",
+      "outline-hidden",
+      "translate-y-[calc(-1.25rem*var(--nested-layer-count))]",
+      "origin-center transition-[scale,opacity,translate] duration-200 ease-out will-change-transform",
+      "data-[nested=dialog]:data-[state=open]:slide-in-from-bottom-10 data-[has-nested=dialog]:origin-top",
+      "scale-[calc(1-0.1*var(--nested-layer-count))] opacity-[calc(1-0.1*var(--nested-layer-count))]",
+      "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
+      "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
+      "motion-reduce:animate-none motion-reduce:transition-none",
+      "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+    ],
+    positioner: [],
+  },
+  variants: {
+    bottomStickOnMobile: {
+      true: {
+        content: [
+          "max-sm:max-h-[calc(100svh-3rem)]",
+          "max-sm:max-w-none",
+          "max-sm:pb-[env(safe-area-inset-bottom,0px)]",
+          "max-sm:rounded-none max-sm:rounded-t-2xl max-sm:border-x-0 max-sm:border-t max-sm:border-b-0",
+          "max-sm:**:data-[slot=dialog-footer]:rounded-none",
+          "max-sm:**:data-[slot=alert-dialog-footer]:rounded-none",
+          "max-sm:opacity-[calc(1-min(var(--nested-dialogs),1))]",
+          "max-sm:origin-bottom",
+          "max-sm:data-[state=closed]:slide-out-to-bottom-1/2 max-sm:data-[state=open]:slide-in-from-bottom-1/2",
+          "max-sm:data-[state=closed]:zoom-out-100 max-sm:data-[state=open]:zoom-in-100",
+        ],
+        positioner: ["max-sm:grid-rows-[1fr_auto] max-sm:p-0 max-sm:pt-12"],
+      },
+    },
+    size: {
+      "2xl": { content: ["max-w-3xl"] },
+      "3xl": { content: ["max-w-4xl"] },
+      "4xl": { content: ["max-w-5xl"] },
+      "5xl": { content: ["max-w-6xl"] },
+      "6xl": { content: ["max-w-7xl"] },
+      fullscreen: { content: ["size-full"] },
+      lg: { content: ["max-w-xl"] },
+      md: { content: ["max-w-lg"] },
+      sm: { content: ["max-w-md"] },
+      xl: { content: ["max-w-2xl"] },
+    },
   },
 });
 
@@ -175,21 +226,18 @@ export const DialogContent = (props: DialogContentProps) => {
     ...rest
   } = props;
 
+  const { content, positioner } = dialogContentVariants({
+    bottomStickOnMobile,
+    size,
+  });
+
   return (
     <Portal>
       <DialogOverlay />
 
-      <DialogPositioner
-        className={cn(
-          bottomStickOnMobile &&
-            "max-sm:grid-rows-[1fr_auto] max-sm:p-0 max-sm:pt-12"
-        )}
-      >
+      <DialogPositioner className={positioner()}>
         <ArkDialog.Content
-          className={cn(
-            dialogContentVariants({ size, bottomStickOnMobile }),
-            className
-          )}
+          className={cn(content(), className)}
           data-slot="dialog-content"
           {...rest}
         >
@@ -217,21 +265,25 @@ interface DialogBodyProps extends React.ComponentProps<typeof ark.div> {
   /**
    * Add a fade effect to the scroll area
    *
-   * @default false
+   * @default true
    */
   scrollFade?: boolean;
 }
 
 export const DialogBody = (props: DialogBodyProps) => {
-  const { scrollFade = false, className, ...rest } = props;
+  const { scrollFade = true, className, ...rest } = props;
 
   return (
-    <ScrollArea className="min-h-0 flex-1" scrollFade={scrollFade}>
+    <ScrollArea
+      className="min-w-0 flex-1"
+      orientation="vertical"
+      overscrollContain
+      scrollFade={scrollFade}
+    >
       <ark.div
         className={cn(
           "p-(--space)",
-          "in-[[data-slot=dialog-content]:has([data-slot=dialog-header])]:pt-0",
-          "in-[[data-slot=dialog-content]:has([data-slot=dialog-footer]:not(.border-t))]:pb-1",
+          "in-[[data-slot=dialog-content]:has([data-slot=dialog-header]:not(.sr-only))]:pt-1",
           className
         )}
         data-slot="dialog-body"
@@ -240,6 +292,10 @@ export const DialogBody = (props: DialogBodyProps) => {
     </ScrollArea>
   );
 };
+
+export const dialogHeaderVariants = tv({
+  base: ["shrink-0", "p-(--space)", "flex flex-col gap-2"],
+});
 
 interface DialogHeaderProps extends React.ComponentProps<typeof ark.div> {
   /**
@@ -258,10 +314,9 @@ export const DialogHeader = (props: DialogHeaderProps) => {
   return (
     <ark.div
       className={cn(
-        "shrink-0",
-        "p-(--space)",
-        "flex flex-col gap-2",
+        dialogHeaderVariants(),
         "in-[[data-slot=dialog-content]:has([data-slot=dialog-body])]:pb-3",
+        "max-sm:pb-4",
         className
       )}
       data-slot="dialog-header"
@@ -280,6 +335,10 @@ export const DialogHeader = (props: DialogHeaderProps) => {
   );
 };
 
+export const dialogTitleVariants = tv({
+  base: ["font-heading font-semibold text-xl leading-none"],
+});
+
 export const DialogTitle = (
   props: React.ComponentProps<typeof ArkDialog.Title>
 ) => {
@@ -287,15 +346,16 @@ export const DialogTitle = (
 
   return (
     <ArkDialog.Title
-      className={cn(
-        "font-heading font-semibold text-lg leading-none",
-        className
-      )}
+      className={cn(dialogTitleVariants(), className)}
       data-slot="dialog-title"
       {...rest}
     />
   );
 };
+
+export const dialogDescriptionVariants = tv({
+  base: ["text-muted-foreground text-sm"],
+});
 
 export const DialogDescription = (
   props: React.ComponentProps<typeof ArkDialog.Description>
@@ -304,7 +364,7 @@ export const DialogDescription = (
 
   return (
     <ArkDialog.Description
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn(dialogDescriptionVariants(), className)}
       data-slot="dialog-description"
       {...rest}
     />
@@ -315,32 +375,25 @@ export const DialogClose = (
   props: React.ComponentProps<typeof ArkDialog.CloseTrigger>
 ) => <ArkDialog.CloseTrigger data-slot="dialog-close-trigger" {...props} />;
 
+export const dialogFooterVariants = tv({
+  base: [
+    "shrink-0",
+    "flex flex-col gap-2 sm:flex-row-reverse sm:justify-start",
+    "rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
+    "px-(--space) py-4",
+    "bg-muted/48",
+    "border-t",
+  ],
+});
+
 export const DialogFooter = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
 
   return (
     <ark.div
-      className={cn(
-        "shrink-0",
-        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        "sm:rounded-b-[calc(var(--radius-2xl)-1px)]",
-        "px-(--space) py-4",
-        "bg-muted/48",
-        "border-t",
-        className
-      )}
+      className={cn(dialogFooterVariants(), className)}
       data-slot="dialog-footer"
       {...rest}
     />
   );
-};
-
-const _useDialog = () => {
-  const context = React.useContext(DialogContext);
-
-  if (!context) {
-    throw new Error("useDialog must be used within a DialogProvider");
-  }
-
-  return context;
 };

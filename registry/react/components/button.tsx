@@ -4,109 +4,127 @@ import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Spinner } from "@/registry/react/components/spinner";
 
-export const buttonVariants = tv({
+export const buttonControlVariants = tv({
   base: [
     "relative",
     "inline-flex shrink-0 items-center justify-center gap-2",
-    "whitespace-nowrap font-medium text-sm",
+    "touch-manipulation",
+    "select-none whitespace-nowrap font-medium font-sans text-sm",
+  ],
+});
+
+export const buttonVariants = tv({
+  base: [
+    buttonControlVariants(),
     "rounded-lg",
-    "transition-all",
-    "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/32",
+    "transition-[background-color,border-color,color,box-shadow,opacity,scale]",
+    "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
     "disabled:pointer-events-none disabled:opacity-64",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
     "aria-disabled:pointer-events-none aria-disabled:opacity-64",
     "data-[state=loading]:pointer-events-none",
     "aria-invalid:border-destructive aria-invalid:ring-destructive/24",
-    "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
-    "motion-reduce:transition-none!",
+    "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:shrink-0",
+    "has-[>[data-icon=inline-start]]:ps-[calc(var(--btn-px)-(--spacing(0.5)))] has-[>[data-icon=inline-end]]:pe-[calc(var(--btn-px)-(--spacing(0.5)))]",
+    "**:data-[icon=inline-end]:order-last **:data-[icon=inline-start]:order-first **:data-icon:mx-0",
+    "motion-reduce:transition-none",
   ],
+  compoundVariants: [
+    {
+      class: "rounded-full",
+      pill: true,
+    },
+  ],
+  defaultVariants: {
+    clickEffect: true,
+    pill: false,
+    size: "md",
+    variant: "default",
+  },
   variants: {
+    clickEffect: {
+      true: "active:not-aria-[haspopup]:scale-[0.98]",
+    },
+    pill: {
+      false: "",
+      true: "px-[calc(var(--btn-px)+(--spacing(1.5)))]",
+    },
+    size: {
+      "icon-lg": "size-9",
+      "icon-md": "size-8",
+      "icon-sm": ["size-7", "rounded-md"],
+      "icon-xl": "size-10 [&_svg:not([class*='size-'])]:size-5",
+      "icon-xs": [
+        "size-6",
+        "rounded-md",
+        "[&_svg:not([class*='size-'])]:size-3",
+        "in-data-[slot=input-group]:[&_svg:not([class*='size-'])]:size-3.5",
+      ],
+      lg: ["h-9", "[--btn-px:calc(--spacing(3.5)-1px)]", "px-(--btn-px)"],
+      md: ["h-8", "[--btn-px:calc(--spacing(3)-1px)]", "px-(--btn-px)"],
+      sm: [
+        "h-7",
+        "gap-1.5",
+        "[--btn-px:calc(--spacing(2.5)-1px)]",
+        "px-(--btn-px)",
+        "rounded-md",
+        "[&_svg:not([class*='size-'])]:size-3.5",
+      ],
+      xl: [
+        "h-10",
+        "text-base",
+        "[--btn-px:calc(--spacing(4)-1px)]",
+        "px-(--btn-px)",
+      ],
+      xs: [
+        "h-6",
+        "gap-1",
+        "[--btn-px:calc(--spacing(2)-1px)]",
+        "px-(--btn-px)",
+        "text-xs",
+        "rounded-md",
+        "[&_svg:not([class*='size-'])]:size-3",
+        "in-data-[slot=input-group]:[&_svg:not([class*='size-'])]:size-3.5",
+      ],
+    },
     variant: {
       default: [
         "bg-primary",
-        "border border-transparent shadow-primary/24 shadow-sm",
+        "border border-transparent shadow-sm/4",
         "text-primary-foreground",
-        "hover:bg-primary/90",
+        "hover:bg-primary-hover",
         "focus-visible:border-background",
-      ],
-      outline: [
-        "bg-transparent",
-        "text-foreground",
-        "border border-input shadow-sm/5",
-        "hover:bg-accent hover:text-accent-foreground",
-        "dark:bg-input/32 dark:hover:bg-input/64",
-        "focus-visible:border-primary",
       ],
       destructive: [
         "bg-destructive",
         "text-white",
-        "border border-transparent shadow-destructive/24 shadow-sm",
-        "hover:bg-destructive/90",
-        "focus-visible:border-background focus-visible:ring-destructive-foreground/32",
-      ],
-      secondary: [
-        "bg-secondary",
-        "text-secondary-foreground",
-        "border border-transparent",
-        "focus-visible:border-primary",
-        "hover:bg-secondary/80",
+        "border border-transparent shadow-sm/4",
+        "hover:bg-destructive-hover",
       ],
       ghost: [
         "hover:bg-accent hover:text-accent-foreground",
         "border border-transparent",
-        "focus-visible:border-primary",
       ],
       link: [
         "text-primary",
         "underline-offset-4",
         "border border-transparent",
         "hover:underline",
-        "focus-visible:border-primary",
+      ],
+      outline: [
+        "bg-transparent",
+        "text-foreground",
+        "border border-input shadow-xs/4",
+        "hover:bg-accent hover:text-accent-foreground",
+        "dark:bg-input/32 dark:hover:bg-input/64",
+      ],
+      secondary: [
+        "bg-secondary",
+        "text-secondary-foreground",
+        "border border-transparent shadow-sm/4",
+        "hover:bg-secondary-hover",
       ],
     },
-    size: {
-      xs: [
-        "h-6",
-        "gap-1.5",
-        "px-2",
-        "text-xs",
-        "rounded-sm",
-        "[&_svg:not([class*='size-'])]:size-2.5",
-      ],
-      sm: [
-        "h-7",
-        "px-2.5",
-        "gap-1.5",
-        "[&_svg:not([class*='size-'])]:size-3.5",
-      ],
-      md: ["h-8", "px-3", "py-2"],
-      lg: ["h-9", "px-3.5"],
-      xl: ["h-10", "text-base", "px-4"],
-      "icon-xs": "size-6 rounded-sm",
-      "icon-sm": "size-7",
-      "icon-md": "size-8",
-      "icon-lg": "size-9",
-      "icon-xl": "size-10 [&_svg:not([class*='size-'])]:size-5",
-    },
-    clickEffect: {
-      true: "active:not-aria-[haspopup]:scale-[0.98]",
-    },
-    pill: {
-      true: [
-        "rounded-full",
-        "has-[>svg]:data-[size=xs]:pe-3",
-        "has-[>svg]:data-[size=sm]:pe-3.5",
-        "has-[>svg]:data-[size=md]:pe-4",
-        "has-[>svg]:data-[size=lg]:pe-4.5",
-        "has-[>svg]:data-[size=xl]:pe-5",
-      ],
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-    size: "md",
-    clickEffect: true,
-    pill: false,
   },
 });
 
@@ -134,25 +152,28 @@ export const Button = (props: ButtonProps) => {
     clickEffect = true,
     pill = false,
     isLoading = false,
+    disabled,
     className,
     children,
+    "aria-disabled": ariaDisabled,
     ...rest
   } = props;
 
   return (
     <ark.button
       className={cn(
-        buttonVariants({ variant, size, clickEffect, pill }),
+        buttonVariants({ clickEffect, pill, size, variant }),
         className
       )}
       data-size={size}
       data-slot="button"
       data-state={isLoading ? "loading" : "idle"}
       data-variant={variant}
+      disabled={disabled || isLoading}
       type="button"
       {...rest}
-      aria-busy={isLoading}
-      aria-disabled={isLoading}
+      aria-busy={isLoading || undefined}
+      aria-disabled={isLoading || ariaDisabled}
     >
       {isLoading ? (
         <>

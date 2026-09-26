@@ -1,20 +1,32 @@
 "use client";
 
-import { Popover as ArkPopover } from "@ark-ui/react/popover";
+import {
+  Popover as ArkPopover,
+  usePopover as useArkPopover,
+  usePopoverContext as useArkPopoverContext,
+} from "@ark-ui/react/popover";
 import { Portal } from "@ark-ui/react/portal";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { Popover, PopoverTrigger } from "@/registry/react/components/popover";
+import {
+  Popover,
+  PopoverArrow,
+  PopoverTrigger,
+} from "@/registry/react/components/popover";
+import { tooltipContentVariants } from "@/registry/react/components/tooltip";
+
+export const useToggleTooltip = useArkPopover;
+export const useToggleTooltipContext = useArkPopoverContext;
+export const ToggleTooltipRootProvider = ArkPopover.RootProvider;
 
 export const ToggleTooltip = (
   props: React.ComponentProps<typeof ArkPopover.Root>
 ) => {
   const {
-    positioning = { placement: "top" },
+    positioning,
     lazyMount = true,
     unmountOnExit = true,
     modal = false,
-    open: controlledOpen,
     ...rest
   } = props;
 
@@ -23,7 +35,10 @@ export const ToggleTooltip = (
       data-slot="toggle-tooltip"
       lazyMount={lazyMount}
       modal={modal}
-      positioning={positioning}
+      positioning={{
+        placement: "top",
+        ...positioning,
+      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     />
@@ -34,37 +49,30 @@ export const ToggleTooltipTrigger = (
   props: React.ComponentProps<typeof ArkPopover.Trigger>
 ) => <PopoverTrigger data-slot="toggle-tooltip-trigger" {...props} />;
 
-export const ToggleTooltipContent = (
-  props: React.ComponentProps<typeof ArkPopover.Content>
-) => {
-  const { className, children, ...rest } = props;
+interface ToggleTooltipContentProps
+  extends React.ComponentProps<typeof ArkPopover.Content> {
+  /**
+   * Whether to show the arrow
+   *
+   * @default true
+   */
+  showArrow?: boolean;
+}
+
+export const ToggleTooltipContent = (props: ToggleTooltipContentProps) => {
+  const { showArrow = true, className, children, ...rest } = props;
 
   return (
     <Portal>
       <ArkPopover.Positioner data-slot="toggle-tooltip-positioner">
         <ArkPopover.Content
-          className={cn(
-            "z-50 w-fit",
-            "px-3 py-1.5",
-            "bg-foreground",
-            "text-background text-xs",
-            "rounded-lg shadow-lg/5",
-            "origin-(--transform-origin) animate-in",
-            "fade-in-0 zoom-in-[98%]",
-            "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%]",
-            "data-[state=closed]:animate-out",
-            "data-[placement=bottom]:slide-in-from-top-2",
-            "data-[placement=left]:slide-in-from-end-2",
-            "data-[placement=right]:slide-in-from-start-2",
-            "data-[placement=top]:slide-in-from-bottom-2",
-            "motion-reduce:animate-none!",
-            className
-          )}
+          className={cn(tooltipContentVariants(), className)}
           data-slot="toggle-tooltip-content"
           {...rest}
         >
           {children}
-          <ToggleTooltipArrow />
+
+          {showArrow ? <ToggleTooltipArrow /> : null}
         </ArkPopover.Content>
       </ArkPopover.Positioner>
     </Portal>
@@ -77,18 +85,18 @@ export const ToggleTooltipArrow = (
   const { style, ...rest } = props;
 
   return (
-    <ArkPopover.Arrow
+    <PopoverArrow
       data-slot="toggle-tooltip-arrow"
-      style={
-        {
+      style={{
+        ...({
           "--arrow-background": "var(--foreground)",
           "--arrow-size": "calc(1.5 * var(--spacing))",
-          ...style,
-        } as React.CSSProperties
-      }
+        } as React.CSSProperties),
+        ...style,
+      }}
       {...rest}
     >
       <ArkPopover.ArrowTip />
-    </ArkPopover.Arrow>
+    </PopoverArrow>
   );
 };

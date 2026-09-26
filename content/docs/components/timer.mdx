@@ -1,10 +1,14 @@
 ---
 title: Timer
-description: Countdown or stopwatch with controls.
+description: Countdown or stopwatch.
+seo:
+  description: Countdown or stopwatch with start, pause, and reset.
 links:
   doc: https://ark-ui.com/docs/components/timer
   api: https://ark-ui.com/docs/components/timer#api-reference
 ---
+
+import manifest from "@/registry/manifest/timer";
 
 <ComponentPreview componentName="timer" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/timer
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -171,6 +173,12 @@ Pass children to `TimerSeparator` to override the default colon (`:`).
 
 <ComponentPreview componentName="timer" fileName="example-custom-separator" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="timer" />
+
 ## API Reference
 
 ### Timer
@@ -226,10 +234,11 @@ Renders one time field from the current timer value.
 
 ### TimerSeparator
 
-Visual delimiter between item groups (defaults to `:` when children are omitted).
+Visual delimiter between item groups.
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `children` | `React.ReactNode` | `":"` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
@@ -314,11 +323,19 @@ Shorthand for a single "go" control: renders `TimerResume` when the timer is `pa
 
 ### `remainingMsUntilDate`
 
-| Parameter | Type |
-| --- | --- |
-| `date` | `Date` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `date` | `Date` | `-` |
 
 Returns a `number` of milliseconds until `date`, or `0` if `date` is in the past.
+
+### TimerRootProvider
+
+Provides a Timer API created with `useTimer` to descendant components.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `UseTimerReturn` | `required` |
 
 ---
 

@@ -27,29 +27,21 @@ import {
 } from "@/registry/react/components/field";
 import { Textarea } from "@/registry/react/components/textarea";
 
-const formSchema = v.object({
-  about: v.pipe(
-    v.string(),
-    v.minLength(10, "Please provide at least 10 characters."),
-    v.maxLength(200, "Please keep it under 200 characters.")
-  ),
-});
-
 const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: { about: "" },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "about-submitted",
-      title: "About submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "about-submitted",
+      title: "About submitted",
     });
   };
 
@@ -94,5 +86,13 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  about: v.pipe(
+    v.string(),
+    v.minLength(10, "Please provide at least 10 characters."),
+    v.maxLength(200, "Please keep it under 200 characters.")
+  ),
+});
 
 export default Example;

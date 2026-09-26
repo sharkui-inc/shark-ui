@@ -13,19 +13,26 @@ import {
 const Example = () => (
   <Item className="w-full max-w-64 p-1" variant="outline">
     <Listbox collection={collection}>
-      <ListboxContent
-        className="grid grid-cols-[repeat(var(--column-count),1fr)] gap-1"
-        style={
-          { "--column-count": collection.columnCount } as React.CSSProperties
-        }
-      >
-        {collection.items.map((item) => (
-          <ListboxItem item={item} key={item.value}>
-            <ListboxItemText className="text-center text-xl">
-              {item.label}
-            </ListboxItemText>
-          </ListboxItem>
-        ))}
+      <ListboxContent>
+        <div
+          className="grid grid-cols-[repeat(var(--column-count),1fr)] gap-1"
+          style={
+            { "--column-count": collection.columnCount } as React.CSSProperties
+          }
+        >
+          {collection.items.map((item) => (
+            <ListboxItem
+              className="data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
+              item={item}
+              key={item.value}
+              showIndicator={false}
+            >
+              <ListboxItemText className="text-center text-xl">
+                {item.label}
+              </ListboxItemText>
+            </ListboxItem>
+          ))}
+        </div>
       </ListboxContent>
     </Listbox>
   </Item>

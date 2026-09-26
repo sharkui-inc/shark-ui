@@ -5,13 +5,12 @@ import { useFilter } from "@ark-ui/react/locale";
 import { ChevronsUpDown } from "lucide-react";
 import React from "react";
 import { Button } from "@/registry/react/components/button";
-import { Input } from "@/registry/react/components/input";
 import {
   Listbox,
   ListboxContent,
   ListboxEmpty,
+  ListboxInput,
   ListboxItem,
-  ListboxItemIndicator,
   ListboxItemText,
   ListboxValueText,
 } from "@/registry/react/components/listbox";
@@ -22,26 +21,23 @@ import {
 } from "@/registry/react/components/popover";
 
 const Example = () => {
-  const [search, setSearch] = React.useState("");
   const [isOpen, setIsOpen] = React.useState(false);
 
   const { contains } = useFilter({ sensitivity: "base" });
 
   const { collection, filter } = useListCollection({
+    filter: contains,
     initialItems: [
       { label: "Brazil", value: "br" },
       { label: "Mexico", value: "mx" },
       { label: "Ireland", value: "ie" },
       { label: "Canada", value: "ca" },
     ],
-    filter: contains,
   });
-
-  const isEmpty = collection.items.length === 0 && search;
 
   return (
     <Listbox
-      className="w-full max-w-48"
+      className="max-w-48"
       collection={collection}
       onSelect={() => {
         setIsOpen(false);
@@ -49,34 +45,24 @@ const Example = () => {
     >
       <Popover onOpenChange={({ open }) => setIsOpen(open)} open={isOpen}>
         <PopoverTrigger asChild>
-          <Button
-            className="justify-between"
-            clickEffect={false}
-            variant="outline"
-          >
+          <Button className="justify-between" variant="outline">
             <ListboxValueText placeholder="Select framework" />
             <ChevronsUpDown className="opacity-64" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="min-w-64 gap-2 p-1">
-          <Input
-            onChange={(e) => {
-              const value = e.target.value;
-              setSearch(value);
-              filter(value);
-            }}
-            placeholder="Search..."
-            value={search}
-          />
+        <PopoverContent className="min-w-64 gap-2">
           <ListboxContent>
+            <ListboxInput
+              onChange={(e) => filter(e.target.value)}
+              placeholder="Search..."
+            />
             {collection.items.map((item) => (
               <ListboxItem item={item} key={item.value}>
                 <ListboxItemText>{item.label}</ListboxItemText>
-                <ListboxItemIndicator />
               </ListboxItem>
             ))}
 
-            {isEmpty && <ListboxEmpty>No results found.</ListboxEmpty>}
+            <ListboxEmpty>No results found.</ListboxEmpty>
           </ListboxContent>
         </PopoverContent>
       </Popover>
