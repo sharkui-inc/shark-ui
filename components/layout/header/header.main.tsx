@@ -23,7 +23,7 @@ export const MainNav = (props: MainNavProps) => {
   return (
     <nav className={cn("items-center", className)} {...rest}>
       {items.map((item) => (
-        <Button asChild key={item.href} variant="ghost">
+        <Button asChild key={item.href} size="sm" variant="ghost">
           <NavLink
             active={item.href === activeHref}
             className={cn(

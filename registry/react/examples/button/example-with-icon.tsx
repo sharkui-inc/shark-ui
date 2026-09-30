@@ -1,5 +1,5 @@
 import {
-  ArrowUpRight,
+  ArrowUpRightIcon,
   DownloadIcon,
   HeartIcon,
   PlusIcon,
@@ -27,7 +27,7 @@ const Example = () => (
     </Button>
     <Button variant="link">
       Visit website
-      <ArrowUpRight aria-hidden data-icon="inline-end" />
+      <ArrowUpRightIcon aria-hidden data-icon="inline-end" />
     </Button>
   </div>
 );

@@ -55,6 +55,7 @@ npx shadcn@latest add @shark/tags-input
 
 ```text
 TagsInput
+├── TagsInputLabel
 └── TagsInputContext
     └── TagsInputItem
 ```
@@ -187,9 +188,9 @@ Use `validate` to accept or reject tags before they are added.
 
 ### With Field
 
-Wrap with [Field](/docs/components/field) for labels, descriptions, and validation messaging.
+Use `TagsInputLabel` to name the interactive input. Wrap it with [Field](/docs/components/field) to add descriptions and validation messaging.
 
-<ComponentPreview componentName="tags-input" fileName="example-field" />
+<ComponentPreview componentName="tags-input" fileName="example-with-field" />
 
 ## RTL
 
@@ -229,6 +230,14 @@ Root component. Composes the control, input, and hidden field for form submissio
 | `onInputValueChange` | `(details) => void` | `-` |
 | `onHighlightChange` | `(details) => void` | `-` |
 | `onValueInvalid` | `(details) => void` | `-` |
+| `className` | `string` | `-` |
+
+### TagsInputLabel
+
+Label for the TagsInput. Use inside `TagsInput` so Ark UI associates it with the input.
+
+| Prop | Type | Default |
+| --- | --- | --- |
 | `className` | `string` | `-` |
 
 ### TagsInputInput

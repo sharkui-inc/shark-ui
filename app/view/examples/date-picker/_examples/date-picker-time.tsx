@@ -25,7 +25,7 @@ import {
 
 const DatePickerTime = () => (
   <FieldGroup className="w-fit max-w-full sm:flex-row">
-    <Field className="w-44">
+    <Field className="min-w-44">
       <FieldLabel>Date</FieldLabel>
       <DatePicker>
         <DatePickerTrigger asChild>
@@ -48,7 +48,7 @@ const DatePickerTime = () => (
         </DatePickerContent>
       </DatePicker>
     </Field>
-    <Field className="w-44">
+    <Field className="min-w-44">
       <FieldLabel>Time</FieldLabel>
       <DatePickerTimer defaultValue="10:30:00" />
     </Field>

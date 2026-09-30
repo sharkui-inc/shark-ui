@@ -18,12 +18,11 @@ export const NAV_ITEMS = [
 
 export type NavItem = (typeof NAV_ITEMS)[number];
 
-export function getActiveNavHref(
+export const getActiveNavHref = (
   pathname: string,
   items: { href: string }[]
-): string | undefined {
-  return items
+): string | undefined =>
+  items
     .map((item) => item.href)
     .filter((href) => pathname === href || pathname.startsWith(`${href}/`))
     .sort((a, b) => b.length - a.length)[0];
-}

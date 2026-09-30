@@ -2,7 +2,6 @@
 
 import { CheckIcon } from "lucide-react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -89,10 +88,6 @@ export const ActivateAgentExample = (props: React.ComponentProps<"div">) => {
                     <AlertDialogAction
                       onClick={() => {
                         setStatus("idle");
-                        toast.info({
-                          description: "You can enable it again anytime.",
-                          title: "Agent disabled",
-                        });
                       }}
                       variant="destructive"
                     >
@@ -117,10 +112,6 @@ export const ActivateAgentExample = (props: React.ComponentProps<"div">) => {
               });
               setIsEnabling(false);
               setStatus("enabled");
-              toast.success({
-                description: "Reviews and traces are on for this repo.",
-                title: "Agent enabled",
-              });
             }}
           >
             {status === "enabled" ? "Enabled" : "Enable"}

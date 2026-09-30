@@ -39,36 +39,6 @@ npx shadcn@latest add @shark/chart
 
 <RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file:</Step>
-
-<CodeCollapsibleWrapper>
-```css
-@theme inline {
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-}
-
-:root {
-  --chart-1: var(--color-orange-600);
-  --chart-2: var(--color-teal-600);
-  --chart-3: var(--color-cyan-900);
-  --chart-4: var(--color-amber-400);
-  --chart-5: var(--color-amber-500);
-}
-
-.dark {
-  --chart-1: var(--color-blue-700);
-  --chart-2: var(--color-emerald-500);
-  --chart-3: var(--color-amber-500);
-  --chart-4: var(--color-purple-500);
-  --chart-5: var(--color-rose-500);
-}
-```
-</CodeCollapsibleWrapper>
-
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource title="components/ui/chart.tsx" src="/chart.tsx" />
@@ -254,13 +224,13 @@ import { ChartLegend, ChartLegendContent } from "@/components/ui/chart"
 `ChartConfig` maps each series key to a label, optional icon, and either `color` or a `theme` object with `light` and `dark` values.
 
 ```tsx
-import { Monitor } from "lucide-react"
+import { MonitorIcon } from "lucide-react"
 import { type ChartConfig } from "@/components/ui/chart"
 
 const chartConfig = {
   desktop: {
     label: "Desktop",
-    icon: Monitor,
+    icon: MonitorIcon,
     color: "#2563eb",
     theme: {
       light: "#2563eb",
@@ -400,6 +370,8 @@ const chartConfig = {
 ## Accessibility
 
 Pass `accessibilityLayer` for keyboard and screen reader support. Skip it on decorative charts that should not take focus.
+
+When a chart communicates important data, also provide a concise title and a text or table summary of the values and trends. Do not rely on color alone to distinguish series; verify the contrast of marks against the chart background.
 
 ```tsx
 <BarChart accessibilityLayer data={chartData}>

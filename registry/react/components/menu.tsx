@@ -7,7 +7,7 @@ import {
   useMenu as useArkMenu,
   useMenuContext as useArkMenuContext,
 } from "@ark-ui/react/menu";
-import { CheckIcon, ChevronRight } from "lucide-react";
+import { CheckIcon, ChevronRightIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
@@ -59,7 +59,7 @@ export const MenuPositioner = (
 export const menuContentVariants = tv({
   base: [
     "z-[calc(50+var(--layer-index,0))]",
-    "max-h-(--available-height) min-w-32",
+    "max-h-(--available-height) min-w-40",
     "p-1.5",
     "overflow-y-auto overflow-x-hidden overscroll-y-contain",
     "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20",
@@ -379,7 +379,7 @@ export const MenuSubTrigger = (
       {children}
 
       <MenuShortcut>
-        <ChevronRight className="size-3.5 rtl:rotate-180" />
+        <ChevronRightIcon className="size-3.5 rtl:rotate-180" />
       </MenuShortcut>
     </ArkMenu.TriggerItem>
   );

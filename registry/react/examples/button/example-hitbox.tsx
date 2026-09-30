@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
@@ -35,7 +35,7 @@ const Example = () => {
           size="icon-md"
           variant="ghost"
         >
-          <Menu />
+          <MenuIcon />
         </Button>
       </div>
     </div>

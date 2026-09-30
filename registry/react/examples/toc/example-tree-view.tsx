@@ -47,8 +47,8 @@ const Example = () => {
       <TocContent className="h-80 overflow-y-auto pe-4" ref={contentRef}>
         <Article items={items} />
       </TocContent>
-      <TocNav className="w-48">
-        <TocTitle>On this page</TocTitle>
+      <TocNav className="min-w-48">
+        <TocTitle>Page headings</TocTitle>
         <TreeView
           collection={collection}
           expandedValue={expandedValue}
@@ -210,9 +210,13 @@ const TreeNode = (props: NodeProviderProps<TocNode>) => {
 
   return (
     <TreeViewNode indexPath={indexPath} node={node}>
-      <TocItem className="contents" item={item}>
+      <TocItem className="contents" item={item} role="presentation">
         <TreeViewContent asChild>
-          <TocLink className="mx-0 w-full px-0" href={`#${item.value}`}>
+          <TocLink
+            className="mx-0 w-full px-0"
+            href={`#${item.value}`}
+            role="treeitem"
+          >
             <TreeViewItem>{node.name}</TreeViewItem>
           </TocLink>
         </TreeViewContent>

@@ -88,15 +88,15 @@ export const ChatPromptComposer = ({
         status={status}
       >
         <PromptInputTextarea aria-label="Message" readOnly value={value} />
-        <PromptInputFooter>
-          <PromptInputTools>
+        <PromptInputFooter className="max-sm:flex-wrap max-sm:justify-start max-sm:gap-1">
+          <PromptInputTools className="max-sm:basis-full">
             <Menu positioning={{ placement: "top-start" }}>
               <MenuTrigger asChild>
                 <PromptInputButton aria-label="Add to prompt" size="icon-sm">
                   <PlusIcon aria-hidden />
                 </PromptInputButton>
               </MenuTrigger>
-              <MenuContent className="w-52">
+              <MenuContent className="min-w-52">
                 {promptActions.map((action) => {
                   const Icon = action.icon;
 
@@ -145,7 +145,7 @@ export const ChatPromptComposer = ({
               size="sm"
               variant="ghost"
             />
-            <ComboboxContent className="max-h-72 w-52">
+            <ComboboxContent className="max-h-72 min-w-52">
               <ComboboxList>
                 {collection.items.map((item) => (
                   <ComboboxItem item={item} key={item.value}>

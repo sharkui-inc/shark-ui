@@ -53,13 +53,7 @@ export const SheetOverlay = (
 };
 
 const sheetPositionerVariants = tv({
-  base: [
-    "[--inset:--spacing(3)] sm:[--inset:--spacing(4)]",
-    "fixed inset-0 z-50",
-    "h-svh w-screen",
-    "grid",
-    "overflow-hidden",
-  ],
+  base: ["fixed inset-0 z-50", "h-svh w-screen", "grid", "overflow-hidden"],
   defaultVariants: {
     variant: "default",
   },
@@ -72,7 +66,7 @@ const sheetPositionerVariants = tv({
     },
     variant: {
       default: "",
-      inset: ["p-(--inset)"],
+      inset: ["p-3 sm:p-4"],
     },
   },
 });
@@ -145,8 +139,8 @@ const sheetContentVariants = tv({
     variant: {
       default: "",
       inset: [
-        "rounded-2xl border",
-        "**:data-[slot=sheet-footer]:rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
+        "rounded-[calc(var(--radius)*2)] border",
+        "**:data-[slot=sheet-footer]:rounded-b-[max(0px,calc(var(--radius)*2-1px))]",
       ],
     },
   },
@@ -192,7 +186,7 @@ export const SheetContent = (props: SheetContentProps) => {
             <SheetClose asChild>
               <Button
                 aria-label="Close"
-                className="absolute inset-e-2 top-2 opacity-64 hover:opacity-100"
+                className="absolute inset-e-2 top-2 opacity-64 pointer-coarse:after:absolute pointer-coarse:after:size-11 hover:opacity-100"
                 size="icon-sm"
                 variant="ghost"
               >

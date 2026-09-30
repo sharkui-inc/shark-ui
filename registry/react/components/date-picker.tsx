@@ -9,11 +9,8 @@ import { Portal } from "@ark-ui/react/portal";
 import { CalendarIcon, ClockIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import {
-  CalendarLabel,
-  CalendarPresetTrigger,
-} from "@/registry/react/components/calendar";
-import { FieldLabel } from "@/registry/react/components/field";
+import { CalendarPresetTrigger } from "@/registry/react/components/calendar";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import type { Input, InputProps } from "@/registry/react/components/input";
 import {
   InputGroup,
@@ -24,6 +21,7 @@ import {
 
 export const useDatePicker = useArkDatePicker;
 export const useDatePickerContext = useArkDatePickerContext;
+
 export const DatePickerRootProvider = ArkDatePicker.RootProvider;
 
 export const DatePicker = (
@@ -54,27 +52,36 @@ export const DatePicker = (
 };
 
 export const DatePickerLabel = (
-  props: React.ComponentProps<typeof CalendarLabel>
+  props: React.ComponentProps<typeof ArkDatePicker.Label>
 ) => {
-  const { children, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
-    <FieldLabel asChild>
-      <CalendarLabel data-slot="date-picker-label" {...rest}>
-        {children}
-      </CalendarLabel>
-    </FieldLabel>
+    <ArkDatePicker.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="date-picker-label"
+      {...rest}
+    />
   );
 };
 
 export const DatePickerTrigger = (
   props: React.ComponentProps<typeof ArkDatePicker.Trigger>
 ) => {
-  const { className, children, ...rest } = props;
+  const {
+    className,
+    children,
+    "aria-labelledby": ariaLabelledBy,
+    ...rest
+  } = props;
+  const datePicker = useDatePickerContext();
+  const labelId = datePicker.getLabelProps().id;
+  const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
 
   return (
     <ArkDatePicker.Control data-slot="date-picker-control">
       <ArkDatePicker.Trigger
+        aria-labelledby={labelledBy || undefined}
         className={cn(
           "justify-start",
           "text-start data-placeholder-shown:[&>span]:text-muted-foreground",

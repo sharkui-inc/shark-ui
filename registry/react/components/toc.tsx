@@ -34,12 +34,14 @@ export const TocContent = (
 
   return (
     <ArkToc.Content
+      aria-label="Table of contents content"
       className={cn(
         "min-w-0 flex-1",
         "[&_h2]:scroll-mt-4 [&_h3]:scroll-mt-4",
         className
       )}
       data-slot="toc-content"
+      tabIndex={0}
       {...rest}
     />
   );
@@ -98,8 +100,8 @@ export const TocIndicator = (
   return (
     <ArkToc.Indicator
       className={cn(
-        "absolute inset-s-0 w-0.5 rounded-full bg-foreground",
-        "h-(--height) -translate-x-1/2 translate-y-(--top) rtl:translate-x-1/2",
+        "absolute inset-s-0 z-10 w-0.5 bg-foreground",
+        "h-(--height) translate-y-(--top)",
         "transition-[height,translate] duration-150 ease-in-out",
         "motion-reduce:transition-none",
         className

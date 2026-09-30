@@ -13,7 +13,7 @@ const MenuBasic = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-40">
+    <MenuContent className="min-w-40">
       <MenuGroup heading="My Account">
         <MenuItem value="profile">Profile</MenuItem>
         <MenuItem value="billing">Billing</MenuItem>

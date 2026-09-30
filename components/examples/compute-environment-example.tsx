@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -85,10 +84,6 @@ export const ComputeEnvironmentExample = (
             window.setTimeout(resolve, 600);
           });
           setIsSaving(false);
-          toast.success({
-            description: "Compute settings are saved in this preview.",
-            title: "Config saved",
-          });
         }}
       >
         Save config

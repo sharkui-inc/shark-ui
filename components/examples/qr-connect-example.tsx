@@ -2,7 +2,6 @@
 
 import { CopyIcon, LaptopIcon, RefreshCwIcon } from "lucide-react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import { Badge } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -97,10 +96,6 @@ export const QrConnectExample = (props: React.ComponentProps<"div">) => {
                         aria-label="Copy pairing code"
                         onClick={async () => {
                           await navigator.clipboard.writeText(pairing.code);
-                          toast.success({
-                            description: pairing.code,
-                            title: "Copied",
-                          });
                         }}
                         size="icon-xs"
                       >
@@ -121,7 +116,6 @@ export const QrConnectExample = (props: React.ComponentProps<"div">) => {
             className="w-full"
             onClick={() => {
               setIsLinked(false);
-              toast.info({ title: "Device disconnected" });
             }}
             variant="outline"
           >
@@ -133,7 +127,6 @@ export const QrConnectExample = (props: React.ComponentProps<"div">) => {
               disabled={isVerifying}
               onClick={() => {
                 setSession((current) => current + 1);
-                toast.info({ title: "New code ready" });
               }}
               variant="outline"
             >
@@ -149,10 +142,6 @@ export const QrConnectExample = (props: React.ComponentProps<"div">) => {
                 });
                 setIsVerifying(false);
                 setIsLinked(true);
-                toast.success({
-                  description: "This preview session is linked.",
-                  title: "Device linked",
-                });
               }}
             >
               Verify

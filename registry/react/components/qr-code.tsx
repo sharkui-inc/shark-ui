@@ -17,6 +17,7 @@ export const QrCode = (props: React.ComponentProps<typeof ArkQrCode.Root>) => {
 
   return (
     <ArkQrCode.Root
+      aria-label={`QR code for ${props.value}`}
       className={cn(
         "[--qr-code-overlay-size:calc(var(--qr-code-size)/4)] [--qr-code-size:--spacing(32)]",
         "relative",
@@ -25,6 +26,7 @@ export const QrCode = (props: React.ComponentProps<typeof ArkQrCode.Root>) => {
         className
       )}
       data-slot="qr-code"
+      role="group"
       {...rest}
     />
   );

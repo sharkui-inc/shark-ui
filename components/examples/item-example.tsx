@@ -1,6 +1,6 @@
 "use client";
 
-import { BadgeCheck, ChevronRight } from "lucide-react";
+import { BadgeCheckIcon, ChevronRightIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   Dialog,
@@ -25,13 +25,13 @@ export const ItemExample = () => (
       <Item asChild variant="outline">
         <button className="w-full text-start" type="button">
           <ItemMedia>
-            <BadgeCheck aria-hidden className="size-5" />
+            <BadgeCheckIcon aria-hidden className="size-5" />
           </ItemMedia>
           <ItemContent>
             <ItemTitle>Your profile has been verified.</ItemTitle>
           </ItemContent>
           <ItemActions>
-            <ChevronRight aria-hidden className="size-4" />
+            <ChevronRightIcon aria-hidden className="size-4" />
           </ItemActions>
         </button>
       </Item>

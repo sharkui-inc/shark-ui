@@ -39,7 +39,6 @@ npx shadcn@latest add @shark/file-thumbnail
 <CodeCollapsibleWrapper>
 ```css
 @theme inline {
-  --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
@@ -50,8 +49,7 @@ npx shadcn@latest add @shark/file-thumbnail
 }
 
 :root {
-  --destructive: var(--color-red-600);
-  --destructive-foreground: var(--color-red-700);
+  --destructive-foreground: var(--color-red-800);
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-700);
   --success: var(--color-emerald-600);
@@ -61,7 +59,6 @@ npx shadcn@latest add @shark/file-thumbnail
 }
 
 .dark {
-  --destructive: var(--color-red-600);
   --destructive-foreground: var(--color-red-400);
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-400);
@@ -116,8 +113,6 @@ Use `size` to change the sheet and extension badge together.
 ## Tones
 
 Pass `tone` to override the inferred value.
-
-Badge labels use the semantic foreground token so the compact extension text stays legible across every supported tone.
 
 <ComponentPreview componentName="file-thumbnail" fileName="example-tone" />
 

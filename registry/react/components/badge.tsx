@@ -50,7 +50,7 @@ export const badgeVariants = tv({
       default: [
         "bg-primary",
         "text-primary-foreground",
-        "[a&]:hover:bg-primary-hover",
+        "[a&]:hover:bg-primary/80",
         "focus-visible:border-background",
       ],
       destructive: [
@@ -75,7 +75,7 @@ export const badgeVariants = tv({
         "bg-secondary",
         "text-secondary-foreground",
         "border-secondary/24",
-        "[a&]:hover:bg-secondary-hover",
+        "[a&]:hover:bg-accent",
       ],
       success: [
         "bg-success/8",
@@ -85,7 +85,7 @@ export const badgeVariants = tv({
       ],
       warning: [
         "bg-warning/8",
-        "text-warning-foreground",
+        "text-amber-800 dark:text-warning-foreground",
         "border-warning-foreground/24",
         "[a&]:hover:bg-warning/24",
       ],

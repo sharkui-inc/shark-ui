@@ -27,7 +27,7 @@ const Example = () => {
         <Button variant="outline">{values.open}</Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-80">
+      <PopoverContent className="min-w-80">
         <PopoverHeader description={values.description} title={values.title} />
         <PopoverBody>
           <FieldGroup className="gap-2">

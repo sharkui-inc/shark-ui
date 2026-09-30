@@ -32,7 +32,10 @@ const ComboboxPopup = () => {
       }
     >
       <ComboboxTrigger asChild>
-        <Button className="w-64 justify-between font-normal" variant="outline">
+        <Button
+          className="min-w-64 justify-between font-normal"
+          variant="outline"
+        >
           <ComboboxContext<Country>>
             {({ selectedItems }) => (
               <span className="truncate">

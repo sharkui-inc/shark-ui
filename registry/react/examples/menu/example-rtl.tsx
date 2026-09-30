@@ -1,6 +1,12 @@
 "use client";
 
-import { Archive, FolderInput, Reply, Send, Trash2 } from "lucide-react";
+import {
+  ArchiveIcon,
+  FolderInputIcon,
+  ReplyIcon,
+  SendIcon,
+  Trash2Icon,
+} from "lucide-react";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -27,26 +33,32 @@ const Example = () => {
       <MenuTrigger asChild>
         <Button variant="outline">{values.open}</Button>
       </MenuTrigger>
-      <MenuContent className="w-40">
+      <MenuContent className="min-w-40">
         <MenuGroup>
           <MenuItem value="forward">
-            <Send />
+            <SendIcon />
             {values.forward}
-            <MenuShortcut>{values.shortcutForward}</MenuShortcut>
+            <MenuShortcut className="hidden sm:inline-flex">
+              {values.shortcutForward}
+            </MenuShortcut>
           </MenuItem>
           <MenuItem value="reply">
-            <Reply />
+            <ReplyIcon />
             {values.reply}
-            <MenuShortcut>{values.shortcutReply}</MenuShortcut>
+            <MenuShortcut className="hidden sm:inline-flex">
+              {values.shortcutReply}
+            </MenuShortcut>
           </MenuItem>
           <MenuItem value="archive">
-            <Archive />
+            <ArchiveIcon />
             {values.archive}
-            <MenuShortcut>{values.shortcutArchive}</MenuShortcut>
+            <MenuShortcut className="hidden sm:inline-flex">
+              {values.shortcutArchive}
+            </MenuShortcut>
           </MenuItem>
           <MenuSub>
             <MenuSubTrigger>
-              <FolderInput />
+              <FolderInputIcon />
               {values.moveTo}
             </MenuSubTrigger>
             <MenuSubContent>
@@ -66,9 +78,11 @@ const Example = () => {
           </MenuCheckboxItem>
           <MenuSeparator />
           <MenuItem value="delete" variant="destructive">
-            <Trash2 />
+            <Trash2Icon />
             {values.delete}
-            <MenuShortcut>{values.shortcutDelete}</MenuShortcut>
+            <MenuShortcut className="hidden sm:inline-flex">
+              {values.shortcutDelete}
+            </MenuShortcut>
           </MenuItem>
         </MenuGroup>
       </MenuContent>

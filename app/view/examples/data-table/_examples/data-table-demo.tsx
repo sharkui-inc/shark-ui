@@ -279,7 +279,7 @@ const PaymentActions = ({ payment }: { payment: Payment }) => (
         <MoreHorizontalIcon aria-hidden />
       </Button>
     </MenuTrigger>
-    <MenuContent className="w-44">
+    <MenuContent className="min-w-44">
       <MenuGroup heading="Actions">
         <MenuItem
           onClick={() => navigator.clipboard.writeText(payment.id)}

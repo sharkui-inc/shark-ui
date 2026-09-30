@@ -1,7 +1,7 @@
 import {
   CopyIcon,
   HandIcon,
-  MessageCircle,
+  MessageCircleIcon,
   PencilIcon,
   RotateCwIcon,
   ShareIcon,
@@ -22,7 +22,7 @@ const Example = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-44">
+    <MenuContent className="min-w-44">
       <MenuGroup heading="Actions">
         <MenuItem value="edit">
           <PencilIcon />
@@ -37,7 +37,7 @@ const Example = () => (
           Key Point
         </MenuItem>
         <MenuItem value="comment">
-          <MessageCircle />
+          <MessageCircleIcon />
           Comment
         </MenuItem>
       </MenuGroup>

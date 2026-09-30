@@ -17,7 +17,6 @@ export const ItemGroup = (props: React.ComponentProps<typeof ark.div>) => {
         className
       )}
       data-slot="item-group"
-      role="list"
       {...rest}
     />
   );

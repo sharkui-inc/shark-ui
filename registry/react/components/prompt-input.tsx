@@ -113,7 +113,7 @@ export const PromptInput = (props: PromptInputProps) => {
         }}
         {...rest}
       >
-        <InputGroup className="h-auto flex-col items-stretch rounded-2xl">
+        <InputGroup className="h-auto flex-col items-stretch rounded-2xl md:h-auto">
           {inputGroupChildren}
         </InputGroup>
         {bottomChildren}

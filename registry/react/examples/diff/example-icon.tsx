@@ -15,7 +15,7 @@ const Example = () => (
     </DiffHeader>
     <DiffContent>
       <DiffLine line={1} type="context">
-        {"export function isValidEmail(email: string) {"}
+        {"export const isValidEmail = (email: string) => {"}
       </DiffLine>
       <DiffLine line={2} type="delete">
         {"  return Boolean(email);"}

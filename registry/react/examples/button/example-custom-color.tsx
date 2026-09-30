@@ -6,7 +6,7 @@ const Example = () => (
       Indigo
     </Button>
     <Button className="bg-pink-600 text-white hover:bg-pink-700">Pink</Button>
-    <Button className="bg-sky-600 text-white hover:bg-sky-700">Sky</Button>
+    <Button className="bg-sky-700 text-white hover:bg-sky-800">Sky</Button>
     <Button className="bg-purple-600 text-white hover:bg-purple-700">
       Purple
     </Button>

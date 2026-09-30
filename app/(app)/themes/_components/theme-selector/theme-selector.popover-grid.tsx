@@ -87,7 +87,11 @@ export const ThemeSelectorPopoverGrid = (
         open={isOpen}
       >
         <PopoverTrigger asChild>
-          <Button className="w-full justify-between" variant="outline">
+          <Button
+            className="w-full justify-between"
+            size="sm"
+            variant="outline"
+          >
             <span className="flex min-w-0 flex-1 items-center justify-start gap-2 text-start">
               {trigger}
             </span>

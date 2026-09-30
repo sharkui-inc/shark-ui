@@ -11,7 +11,10 @@ import {
 
 const Example = () => (
   <InputGroup className="max-w-xs" pill>
-    <InputGroupTextarea placeholder="Ask, Search or Chat…" />
+    <InputGroupTextarea
+      aria-label="Message"
+      placeholder="Ask, Search or Chat…"
+    />
     <InputGroupAddon align="block-end">
       <Button aria-label="Add files" pill size="icon-sm" variant="ghost">
         <PlusIcon />

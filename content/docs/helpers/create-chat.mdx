@@ -84,10 +84,12 @@ const chat = createChat({ adapter: "ai-sdk" })
   .user("Can you show me the shortcuts?")
   .assistant("Press ⌘K to search and ⌘Enter to submit.")
 
-export function ReleaseChat() {
-  const { canSendNext, sendNext, status } = useChatHelper({
-    chat,
-  })
+export const ReleaseChat = () => {
+  const { 
+    canSendNext,
+    sendNext,
+    status,
+  } = useChatHelper({ chat })
   
   const isBusy = status === "submitted" || status === "streaming"
 

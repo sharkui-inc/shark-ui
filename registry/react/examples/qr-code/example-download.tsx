@@ -21,6 +21,7 @@ const Example = () => {
       <Card className="w-full max-w-xs [--space:--spacing(6)]">
         <CardContent className="flex flex-col justify-center gap-6">
           <Input
+            aria-label="QR code content"
             onChange={(e) => setValue(e.target.value)}
             placeholder="Generate a QR code"
             value={value}
@@ -35,14 +36,18 @@ const Example = () => {
 
           <div className="flex items-center gap-2">
             <QrCodeDownload asChild fileName="qr-code" mimeType="image/png">
-              <Button className="w-1/2" size="icon-md" variant="outline">
+              <Button
+                aria-label="Download QR code as PNG"
+                className="w-1/2"
+                variant="outline"
+              >
                 <DownloadIcon data-icon="inline-start" />
                 PNG
               </Button>
             </QrCodeDownload>
 
             <QrCodeDownload asChild fileName="qr-code" mimeType="image/svg+xml">
-              <Button className="w-1/2" size="icon-md">
+              <Button aria-label="Download QR code as SVG" className="w-1/2">
                 <DownloadIcon data-icon="inline-start" />
                 SVG
               </Button>

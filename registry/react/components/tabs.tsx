@@ -33,26 +33,7 @@ export const Tabs = (props: React.ComponentProps<typeof ArkTabs.Root>) => {
 };
 
 const tabsListVariants = tv({
-  compoundVariants: [
-    {
-      class: {
-        base: "rounded-lg",
-        indicator: "rounded-lg",
-      },
-      pill: false,
-      variant: "default",
-    },
-    {
-      class: {
-        base: "rounded-full",
-        indicator: "rounded-full",
-      },
-      pill: true,
-      variant: "default",
-    },
-  ],
   defaultVariants: {
-    pill: false,
     variant: "default",
   },
   slots: {
@@ -60,39 +41,40 @@ const tabsListVariants = tv({
       "group/tabs-list",
       "relative z-0",
       "w-fit",
+      "flex items-center gap-x-0.5",
       "text-muted-foreground",
-      "flex items-center justify-center gap-x-0.5",
       "data-[orientation=vertical]:flex-col",
     ],
     indicator: [
-      "absolute top-(--top) left-(--left)",
-      "h-(--height) w-(--width)",
-      "transition-[width,height,left,top] duration-150 ease-in-out",
-      "motion-reduce:transition-none",
+      "top-(--top) left-(--left)",
+      "h-(--height)",
+      "motion-reduce:[--transition-duration:0ms]",
     ],
   },
   variants: {
-    pill: {
-      false: {},
-      true: {},
-    },
     variant: {
       default: {
-        indicator: ["-z-1 bg-accent"],
+        base: ["p-1", "bg-muted", "rounded-lg data-[pill=true]:rounded-full"],
+        indicator: [
+          "-z-1",
+          "w-(--width)",
+          "bg-background dark:bg-input",
+          "rounded-md shadow-sm/4",
+          "group-data-[pill=true]/tabs-list:rounded-full",
+        ],
       },
       underline: {
         base: [
-          "data-[orientation=vertical]:px-1",
+          "data-[orientation=vertical]:border-s data-[orientation=vertical]:px-1",
           "data-[orientation=horizontal]:py-1",
-          "*:data-[slot=tabs-trigger]:hover:bg-accent",
+          "data-[orientation=horizontal]:*:data-[slot=tabs-trigger]:hover:bg-accent",
         ],
         indicator: [
           "z-10",
           "bg-primary",
           "data-[orientation=horizontal]:top-[calc(var(--top)+var(--height)-1px)]",
-          "data-[orientation=horizontal]:h-0.5",
-          "data-[orientation=vertical]:left-[calc(var(--left)+var(--width)-1px)]",
-          "data-[orientation=vertical]:w-0.5",
+          "data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:w-(--width)",
+          "data-[orientation=vertical]:left-0 data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:-translate-x-px",
         ],
       },
     },
@@ -100,7 +82,14 @@ const tabsListVariants = tv({
 });
 interface TabsListProps
   extends React.ComponentProps<typeof ArkTabs.List>,
-    VariantProps<typeof tabsListVariants> {}
+    VariantProps<typeof tabsListVariants> {
+  /**
+   * Rounded tabs, only applies when `variant` is `"default"`.
+   *
+   * @default false
+   */
+  pill?: boolean;
+}
 
 export const TabsList = (props: TabsListProps) => {
   const {
@@ -111,7 +100,7 @@ export const TabsList = (props: TabsListProps) => {
     ...rest
   } = props;
 
-  const { base, indicator } = tabsListVariants({ pill, variant });
+  const { base, indicator } = tabsListVariants({ variant });
 
   return (
     <ArkTabs.List
@@ -138,11 +127,11 @@ export const TabsTrigger = (
   return (
     <ArkTabs.Trigger
       className={cn(
-        "relative",
         buttonControlVariants(),
-        "h-8 gap-2 px-[calc(--spacing(3)-1px)]",
-        "flex shrink-0 grow",
-        "in-data-[pill=true]/tabs-list:rounded-full rounded-lg border border-transparent",
+        "h-8.5 sm:h-7.5",
+        "flex grow gap-1.5",
+        "px-[calc(--spacing(2.5)-1px)]",
+        "rounded-md border border-transparent group-data-[pill=true]/tabs-list:rounded-full",
         "cursor-pointer",
         "transition-[color,background-color,box-shadow]",
         "data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",

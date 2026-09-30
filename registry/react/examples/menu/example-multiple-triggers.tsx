@@ -53,7 +53,7 @@ const Example = () => {
           </div>
         ))}
       </div>
-      <MenuContent className="w-40">
+      <MenuContent className="min-w-40">
         <MenuGroup heading={activeMessage?.sender ?? "Actions"}>
           <MenuItem value="reply">
             <ReplyIcon />

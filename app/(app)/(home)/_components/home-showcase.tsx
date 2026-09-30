@@ -1,6 +1,5 @@
 "use client";
 
-import { Tabs, TabsList, TabsTrigger } from "@registry/react/components/tabs";
 import { CheckIcon, PaletteIcon } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
@@ -30,20 +29,31 @@ export const HomeShowcase = (props: React.PropsWithChildren) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <Tabs
-          className="min-w-0 max-lg:hidden"
-          onValueChange={onValueChange}
-          value={visibleTab}
-        >
-          <TabsList>
-            <TabsTrigger value={COMPONENTS_SLUG}>Preview</TabsTrigger>
-            {THEME_TEMPLATES.map((item) => (
-              <TabsTrigger key={item.slug} value={item.slug}>
+        <fieldset className="hidden min-w-0 items-center gap-x-0.5 text-muted-foreground lg:flex">
+          <legend className="sr-only">Preview template</legend>
+          {[
+            { label: "Preview", slug: COMPONENTS_SLUG },
+            ...THEME_TEMPLATES,
+          ].map((item) => {
+            const selected = visibleTab === item.slug;
+
+            return (
+              <Button
+                aria-pressed={selected}
+                className={cn(
+                  "h-8 shrink-0 grow border border-transparent px-3",
+                  selected && "bg-accent text-foreground"
+                )}
+                key={item.slug}
+                onClick={() => onValueChange({ value: item.slug })}
+                size="sm"
+                variant="ghost"
+              >
                 {item.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
+              </Button>
+            );
+          })}
+        </fieldset>
 
         <div className="flex shrink-0 items-center gap-2 self-center sm:self-auto">
           <HomeThemePicker />

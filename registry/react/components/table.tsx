@@ -1,3 +1,5 @@
+// biome-ignore-all lint/a11y/noNoninteractiveTabindex: Scrollable table regions need keyboard access.
+// biome-ignore-all lint/a11y/useSemanticElements: A labeled group avoids adding a repeated landmark for every table.
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
@@ -26,7 +28,13 @@ export const Table = (props: TableProps) => {
   const { variant = "plain", isHoverable = true, className, ...rest } = props;
 
   return (
-    <div className="relative w-full overflow-auto" data-slot="table-wrapper">
+    <div
+      aria-label="Scrollable table"
+      className="relative w-full overflow-auto focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+      data-slot="table-wrapper"
+      role="group"
+      tabIndex={0}
+    >
       <ark.table
         className={cn(
           "group/table",

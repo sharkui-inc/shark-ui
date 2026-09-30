@@ -71,7 +71,7 @@ const Example = () => (
   </Tabs>
 );
 
-const UPDATED_CODE = `export function profileDetails(user: User) {
+const UPDATED_CODE = `export const profileDetails = (user: User) => {
   return {
     name: user.name,
     email: user.email.toLowerCase(),

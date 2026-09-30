@@ -13,11 +13,13 @@ import {
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import { FormatNumber } from "@/registry/react/components/format";
 import { nativeSelectVariants } from "@/registry/react/components/native-select";
 
 export const useCalendar = useArkDatePicker;
 export const useCalendarContext = useArkDatePickerContext;
+
 export const CalendarRootProvider = ArkCalendar.RootProvider;
 
 export const Calendar = (
@@ -58,7 +60,7 @@ export const CalendarLabel = (
 
   return (
     <ArkCalendar.Label
-      className={cn("font-medium text-sm", className)}
+      className={cn(fieldLabelVariants(), className)}
       data-slot="calendar-label"
       {...rest}
     />
@@ -222,10 +224,14 @@ export const CalendarNextTrigger = (
 export const CalendarTable = (
   props: React.ComponentProps<typeof ArkCalendar.Table>
 ) => {
-  const { className, ...rest } = props;
+  const { className, "aria-labelledby": ariaLabelledBy, ...rest } = props;
+  const calendar = useCalendarContext();
+  const labelId = calendar.getLabelProps().id;
+  const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
 
   return (
     <ArkCalendar.Table
+      aria-labelledby={labelledBy || undefined}
       className={cn("group", "w-full min-w-60", "border-collapse", className)}
       data-slot="calendar-table"
       {...rest}

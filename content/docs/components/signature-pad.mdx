@@ -61,6 +61,14 @@ import { SignaturePad } from "@/components/ui/signature-pad";
 <SignaturePad />
 ```
 
+## Anatomy
+
+```text
+SignaturePad
+├── SignaturePadLabel
+└── SignaturePadControl
+```
+
 ## States
 
 ### Disabled
@@ -85,9 +93,9 @@ Use `onDrawEnd` to capture the signature as an image.
 
 ### With field
 
-Use [Field](/docs/components/field) with `FieldLabel` and `FieldHelper`.
+Use `SignaturePadLabel` inside `SignaturePad` to focus its drawing surface when clicked. Wrap it with [Field](/docs/components/field) to add descriptions and validation messaging. The control keeps Ark's `signature pad` accessible name.
 
-<ComponentPreview componentName="signature-pad" fileName="example-field" />
+<ComponentPreview componentName="signature-pad" fileName="example-with-field" />
 
 ## RTL
 
@@ -111,6 +119,14 @@ Root component. Canvas for drawing signatures. Manages strokes and export.
 | `defaultPaths` | `string[]` | `-` |
 | `onDraw` | `(details: DrawDetails) => void` | `-` |
 | `onDrawEnd` | `(details: DrawEndDetails) => void` | `-` |
+| `className` | `string` | `-` |
+
+### SignaturePadLabel
+
+Label for the signature drawing surface. Clicking it focuses the control. The control keeps Ark's `signature pad` accessible name.
+
+| Prop | Type | Default |
+| --- | --- | --- |
 | `className` | `string` | `-` |
 
 ### SignaturePadRootProvider

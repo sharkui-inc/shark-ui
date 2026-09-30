@@ -42,17 +42,23 @@ const Example = () => (
             <ContextMenuItem value="view">
               <EyeIcon />
               View
-              <ContextMenuShortcut>⌘ V</ContextMenuShortcut>
+              <ContextMenuShortcut className="hidden sm:inline-flex">
+                ⌘ V
+              </ContextMenuShortcut>
             </ContextMenuItem>
             <ContextMenuItem value="edit">
               <PencilIcon />
               Edit
-              <ContextMenuShortcut>⌘ E</ContextMenuShortcut>
+              <ContextMenuShortcut className="hidden sm:inline-flex">
+                ⌘ E
+              </ContextMenuShortcut>
             </ContextMenuItem>
             <ContextMenuItem value="delete" variant="destructive">
               <Trash2Icon />
               Delete
-              <ContextMenuShortcut>⌘ ⌫</ContextMenuShortcut>
+              <ContextMenuShortcut className="hidden sm:inline-flex">
+                ⌘ ⌫
+              </ContextMenuShortcut>
             </ContextMenuItem>
           </ContextMenuContent>
         </ContextMenu>

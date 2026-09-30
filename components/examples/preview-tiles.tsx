@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import type React from "react";
-import { ExampleToaster } from "@/components/examples/example-toast";
 import { MasonryColumns } from "@/components/masonry-columns";
 import { cn } from "@/lib/utils";
 
@@ -237,7 +236,6 @@ export const PreviewGallery = (props: React.ComponentProps<"div">) => {
 
   return (
     <div className={cn("**:data-[slot=card]:shadow-none", className)} {...rest}>
-      <ExampleToaster />
       <MasonryColumns>
         {PREVIEW_TILES.map((tile) => (
           <div

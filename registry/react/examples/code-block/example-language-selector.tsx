@@ -38,7 +38,7 @@ const Example = () => {
             value={language}
           >
             <SelectTrigger
-              className="h-6 border-transparent bg-transparent px-2 text-sm shadow-none"
+              className="h-6 bg-transparent px-2 text-sm shadow-none"
               size="sm"
               variant="ghost"
             >

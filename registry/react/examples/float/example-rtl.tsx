@@ -13,11 +13,11 @@ const Example = () => {
 
   return (
     <div className="relative">
-      <Button size="icon-lg" variant="outline">
+      <Button aria-label="Notifications" size="icon-lg" variant="outline">
         <BellIcon />
       </Button>
       <Float>
-        <Badge pill size="sm" variant="default">
+        <Badge pill size="sm">
           {values.count}
         </Badge>
       </Float>

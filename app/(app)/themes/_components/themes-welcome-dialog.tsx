@@ -31,12 +31,14 @@ export const ThemesWelcomeDialog = () => {
   const handleOpenChange = (details: { open: boolean }) => {
     setOpen(details.open);
 
-    if (!details.open) {
-      try {
-        window.localStorage.setItem(STORAGE_KEY, "true");
-      } catch {
-        // Keep the page usable when browser storage is unavailable.
-      }
+    if (details.open) {
+      return;
+    }
+
+    try {
+      window.localStorage.setItem(STORAGE_KEY, "true");
+    } catch {
+      // Storage can throw when it is blocked.
     }
   };
 
@@ -46,7 +48,7 @@ export const ThemesWelcomeDialog = () => {
       onOpenChange={handleOpenChange}
       open={open}
     >
-      <AlertDialogContent bottomStickOnMobile={false} size="sm">
+      <AlertDialogContent size="sm">
         <div
           aria-hidden="true"
           className="relative flex min-h-44 items-center justify-center overflow-hidden border-b bg-muted text-foreground"
@@ -54,7 +56,7 @@ export const ThemesWelcomeDialog = () => {
           <div className="absolute inset-[-50%] flex rotate-45 items-center justify-center gap-1 opacity-32">
             {PRIMARY_COLORS.map((color) => (
               <span
-                className="h-[150%] w-6 flex-none"
+                className="h-[220%] w-6 flex-none"
                 key={color.value}
                 style={{
                   backgroundColor: getPrimaryFillCss(
@@ -65,13 +67,14 @@ export const ThemesWelcomeDialog = () => {
               />
             ))}
           </div>
-          <SharkIcon className="relative size-12" />
+          <SharkIcon className="relative size-12 drop-shadow-xs" />
         </div>
 
         <AlertDialogHeader>
           <AlertDialogTitle>Adapt the theme to your brand</AlertDialogTitle>
           <AlertDialogDescription>
-            Change colors, fonts, and corner radius, then preview them across
+            Change colors, fonts, corner radius, and primary tone, using a token
+            system that keeps every component consistent. See each change across
             the site.
           </AlertDialogDescription>
         </AlertDialogHeader>

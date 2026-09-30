@@ -7,7 +7,7 @@ import {
 
 const Example = () => (
   <Tabs defaultValue="tab-1">
-    <TabsList variant="default">
+    <TabsList>
       <TabsTrigger value="tab-1">Profile</TabsTrigger>
       <TabsTrigger value="tab-2">Settings</TabsTrigger>
       <TabsTrigger value="tab-3">Security</TabsTrigger>

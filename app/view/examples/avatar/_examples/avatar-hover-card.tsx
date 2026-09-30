@@ -22,7 +22,7 @@ const AvatarHoverCard = () => (
           </Avatar>
         </Button>
       </HoverCardTrigger>
-      <HoverCardContent className="w-max">
+      <HoverCardContent className="w-max min-w-0">
         <div className="flex gap-4">
           <Avatar>
             <AvatarImage alt="@vinihvc" src="https://github.com/vinihvc.png" />
@@ -45,7 +45,7 @@ const AvatarHoverCard = () => (
         </Button>
       </HoverCardTrigger>
 
-      <HoverCardContent className="w-max">
+      <HoverCardContent className="w-max min-w-0">
         <div className="flex gap-4">
           <Avatar>
             <AvatarImage alt="@shadcn" src="https://github.com/shadcn.png" />

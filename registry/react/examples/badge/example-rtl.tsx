@@ -1,6 +1,6 @@
 "use client";
 
-import { Star } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { Badge } from "@/registry/react/components/badge";
 
@@ -11,7 +11,7 @@ const Example = () => {
 
   return (
     <Badge>
-      <Star data-icon="inline-start" />
+      <StarIcon data-icon="inline-start" />
       {values.favorite}
     </Badge>
   );

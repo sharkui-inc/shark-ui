@@ -132,7 +132,10 @@ export const ScrollArea = (props: ScrollAreaProps) => {
       {...rest}
     >
       <ArkScrollArea.Viewport
-        className={viewport()}
+        className={cn(
+          viewport(),
+          "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+        )}
         data-slot="scroll-area-viewport"
         style={{ maxHeight: "inherit" }}
       >

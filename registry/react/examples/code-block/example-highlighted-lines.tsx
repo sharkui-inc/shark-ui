@@ -17,7 +17,7 @@ const Example = () => (
   </CodeBlock>
 );
 
-const CODE = `export function isAuthenticated(session: Session | null) {
+const CODE = `export const isAuthenticated = (session: Session | null) => {
   if (!session) return false;
   return session.expiresAt > new Date();
 }`;

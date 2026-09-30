@@ -45,9 +45,9 @@ export const inputVariants = tv({
       true: "",
     },
     size: {
-      lg: ["h-9", "px-[calc(--spacing(3.5)-1px)]"],
-      md: ["h-8", "px-[calc(--spacing(3)-1px)]"],
-      sm: ["h-7", "px-[calc(--spacing(2.5)-1px)]", "rounded-md"],
+      lg: ["h-11 md:h-10", "px-[calc(--spacing(3.5)-1px)]"],
+      md: ["h-10 md:h-9", "px-[calc(--spacing(3)-1px)]"],
+      sm: ["h-9 md:h-8", "px-[calc(--spacing(2.5)-1px)]", "rounded-md"],
     },
   },
 });

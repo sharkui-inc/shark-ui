@@ -27,7 +27,7 @@ export const ColorsConcept = (props: React.ComponentProps<"div">) => {
       className={cn(
         "mt-10",
         "not-prose",
-        "grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-3",
+        "grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] items-start gap-3",
         className
       )}
       {...rest}
@@ -35,7 +35,7 @@ export const ColorsConcept = (props: React.ComponentProps<"div">) => {
       {BASE_COLORS.map((color) => (
         <Button
           aria-label={`Select ${color.label} color`}
-          className="h-auto w-full rounded-xl p-0"
+          className="h-auto min-h-36 w-full items-stretch rounded-xl p-0 md:h-auto"
           key={color.value}
           onClick={() => handleSelectColor(color.value)}
           variant="ghost"

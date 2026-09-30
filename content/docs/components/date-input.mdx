@@ -51,6 +51,16 @@ npx shadcn@latest add @shark/date-input
 
 </CodeTabs>
 
+## Anatomy
+
+```text
+DateInput
+├── DateInputLabel
+└── DateInputControl (rendered automatically)
+    └── DateInputSegmentGroup
+        └── DateInputSegment (rendered automatically)
+```
+
 ## Usage
 
 ```tsx
@@ -101,9 +111,16 @@ Use the `size` prop to change the input height.
 
 ### With Field
 
-Use [Field](/docs/components/field) for helper text. Put `DateInputLabel` inside `DateInput`.
+Put `DateInputLabel` inside `DateInput` to name and focus the visible date
+segments. `Field` is optional for the label association and provides helper text.
 
 <ComponentPreview componentName="date-input" fileName="example-with-field" />
+
+### Without Field
+
+`DateInputLabel` also works when `DateInput` is used outside `Field`.
+
+<ComponentPreview componentName="date-input" fileName="example-without-field" />
 
 ### Granularity
 

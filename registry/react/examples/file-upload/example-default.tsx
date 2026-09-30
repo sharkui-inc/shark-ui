@@ -15,7 +15,7 @@ import { Separator } from "@/registry/react/components/separator";
 
 const FileUploadDemo = () => (
   <FileUpload className="mx-auto w-full max-w-xs">
-    <FileUploadDropzone>
+    <FileUploadDropzone disableClick>
       <FileUploadDropzoneIcon />
       <FileUploadTitle>Drop files here</FileUploadTitle>
       <div className="flex items-center justify-center gap-2">

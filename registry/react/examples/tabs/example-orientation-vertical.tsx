@@ -7,7 +7,7 @@ import {
 
 const Example = () => (
   <Tabs className="w-full max-w-48" defaultValue="tab-1" orientation="vertical">
-    <TabsList variant="default">
+    <TabsList>
       <TabsTrigger value="tab-1">Tab 1</TabsTrigger>
       <TabsTrigger value="tab-2">Tab 2</TabsTrigger>
       <TabsTrigger value="tab-3">Tab 3</TabsTrigger>

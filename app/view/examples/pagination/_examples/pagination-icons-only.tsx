@@ -30,7 +30,7 @@ const PaginationIconsOnly = () => (
     <Field className="w-fit" orientation="horizontal">
       <FieldLabel>Rows per page</FieldLabel>
       <Select collection={rowsPerPage} defaultValue={["25"]}>
-        <SelectTrigger className="w-20">
+        <SelectTrigger className="min-w-20">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>

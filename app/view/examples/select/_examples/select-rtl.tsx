@@ -12,7 +12,7 @@ import {
 
 const SelectRtl = () => (
   <Select collection={collection} positioning={{ fitViewport: true }}>
-    <SelectTrigger className="w-48">
+    <SelectTrigger className="min-w-48">
       <SelectValue placeholder="اختر فاكهة" />
     </SelectTrigger>
     <SelectContent>

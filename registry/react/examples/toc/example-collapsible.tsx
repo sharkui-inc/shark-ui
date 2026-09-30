@@ -50,7 +50,7 @@ const Example = () => {
                     thickness={2.5}
                     value={value}
                   >
-                    <CircularProgressValue className="absolute font-semibold text-[10px]">
+                    <CircularProgressValue className="absolute font-semibold text-[0.5625rem]">
                       {activeIndex >= 0 ? activeIndex + 1 : "-"}
                     </CircularProgressValue>
                   </CircularProgress>

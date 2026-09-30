@@ -29,7 +29,7 @@ const Example = () => {
       }
     >
       <ComboboxInput placeholder="Select a timezone" />
-      <ComboboxContent className="w-60">
+      <ComboboxContent className="min-w-60">
         <ComboboxEmpty />
         <ComboboxList>
           {collection.group().map(([continent, group]) => (

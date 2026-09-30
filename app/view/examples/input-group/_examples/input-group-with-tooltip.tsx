@@ -120,7 +120,7 @@ const InputGroupWithTooltip = () => {
                 </InputGroupButton>
               </InputGroupAddon>
             </PopoverTrigger>
-            <PopoverContent className="w-64">
+            <PopoverContent className="min-w-64">
               <PopoverHeader>
                 <PopoverTitle>Your connection is not secure.</PopoverTitle>
                 <PopoverDescription>

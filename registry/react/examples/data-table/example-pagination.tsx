@@ -57,6 +57,9 @@ const Example = () => {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <TableHead
+                    aria-label={
+                      header.column.id === "select" ? "Select rows" : undefined
+                    }
                     className={
                       header.column.id === "select" ? "w-[1%]" : undefined
                     }
@@ -131,16 +134,19 @@ const SelectAllCheckbox = ({
 }: {
   table: TanStackTable<DataTableFeatures, InventoryItem>;
 }) => (
-  <Checkbox
-    aria-label="Select all"
-    checked={
-      table.getIsAllPageRowsSelected() ||
-      (table.getIsSomePageRowsSelected() && "indeterminate")
-    }
-    onCheckedChange={({ checked }) => {
-      table.toggleAllPageRowsSelected(!!checked);
-    }}
-  />
+  <>
+    <span className="sr-only">Select rows</span>
+    <Checkbox
+      aria-label="Select all"
+      checked={
+        table.getIsAllPageRowsSelected() ||
+        (table.getIsSomePageRowsSelected() && "indeterminate")
+      }
+      onCheckedChange={({ checked }) => {
+        table.toggleAllPageRowsSelected(!!checked);
+      }}
+    />
+  </>
 );
 
 const SelectRowCheckbox = ({

@@ -13,7 +13,7 @@ const InputGroupKbd = () => (
       <SearchIcon aria-hidden />
     </InputGroupAddon>
     <InputGroupAddon align="inline-end">
-      <Kbd>⌘K</Kbd>
+      <Kbd>/</Kbd>
     </InputGroupAddon>
   </InputGroup>
 );

@@ -115,7 +115,18 @@ const Example = () => {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead
+                    aria-hidden={header.isPlaceholder || undefined}
+                    aria-label={
+                      header.column.id === "select"
+                        ? values.selectAll
+                        : header.column.id
+                    }
+                    key={header.id}
+                  >
+                    {header.column.id === "select" ? (
+                      <span className="sr-only">{values.selectAll}</span>
+                    ) : null}
                     {header.isPlaceholder ? null : (
                       <table.FlexRender header={header} />
                     )}
@@ -236,16 +247,19 @@ const SelectAllCheckbox = ({
   const { values } = useRtlValues();
 
   return (
-    <Checkbox
-      aria-label={values.selectAll}
-      checked={
-        table.getIsAllPageRowsSelected() ||
-        (table.getIsSomePageRowsSelected() && "indeterminate")
-      }
-      onCheckedChange={({ checked }) => {
-        table.toggleAllPageRowsSelected(!!checked);
-      }}
-    />
+    <>
+      <span className="sr-only">{values.selectAll}</span>
+      <Checkbox
+        aria-label={values.selectAll}
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={({ checked }) => {
+          table.toggleAllPageRowsSelected(!!checked);
+        }}
+      />
+    </>
   );
 };
 
@@ -320,11 +334,7 @@ const PaymentActions = ({ payment }: { payment: Payment }) => {
   return (
     <Menu>
       <MenuTrigger asChild>
-        <Button
-          aria-label={values.openMenu}
-          className="size-8 p-0"
-          variant="ghost"
-        >
+        <Button aria-label={values.openMenu} size="icon-md" variant="ghost">
           <MoreHorizontalIcon aria-hidden />
         </Button>
       </MenuTrigger>

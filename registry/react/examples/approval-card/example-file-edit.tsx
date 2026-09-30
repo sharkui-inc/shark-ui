@@ -53,7 +53,7 @@ const Example = () => {
             </DiffHeader>
             <DiffContent>
               <DiffLine line={1}>
-                {"export function getOffset(page: number) {"}
+                {"export const getOffset = (page: number) => {"}
               </DiffLine>
               <DiffLine line={2}>{"  const pageSize = 20;"}</DiffLine>
               <DiffLine line={3} type="delete">

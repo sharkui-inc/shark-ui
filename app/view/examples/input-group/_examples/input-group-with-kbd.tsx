@@ -20,15 +20,21 @@ const InputGroupWithKbd = () => (
       <InputGroup>
         <InputGroupInput />
         <InputGroupAddon>
-          <Kbd>⌘K</Kbd>
+          <Kbd>/</Kbd>
         </InputGroupAddon>
       </InputGroup>
+    </Field>
+    <Field>
+      <FieldLabel className="sr-only">Keyboard shortcut input</FieldLabel>
       <InputGroup>
         <InputGroupInput />
         <InputGroupAddon align="inline-end">
-          <Kbd>⌘K</Kbd>
+          <Kbd>/</Kbd>
         </InputGroupAddon>
       </InputGroup>
+    </Field>
+    <Field>
+      <FieldLabel className="sr-only">App search input</FieldLabel>
       <InputGroup>
         <InputGroupInput placeholder="Search for Apps..." />
         <InputGroupAddon align="inline-end">Ask AI</InputGroupAddon>
@@ -36,6 +42,11 @@ const InputGroupWithKbd = () => (
           <Kbd>Tab</Kbd>
         </InputGroupAddon>
       </InputGroup>
+    </Field>
+    <Field>
+      <FieldLabel className="sr-only">
+        Search input with keyboard shortcut
+      </FieldLabel>
       <InputGroup>
         <InputGroupInput placeholder="Type to search..." />
         <InputGroupAddon align="inline-start">

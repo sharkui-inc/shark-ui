@@ -13,7 +13,7 @@ const Example = () => (
     </DiffHeader>
     <DiffContent>
       <DiffLine line={4} type="context">
-        {"export function buildQuery(filters: QueryFilters) {"}
+        {"export const buildQuery = (filters: QueryFilters) => {"}
       </DiffLine>
       <DiffLine line={5} type="delete">
         {

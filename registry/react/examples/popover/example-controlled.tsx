@@ -25,7 +25,7 @@ const Example = () => {
         <PopoverTrigger asChild>
           <Button variant="outline">Open uncontrolled</Button>
         </PopoverTrigger>
-        <PopoverContent className="w-80">
+        <PopoverContent className="min-w-80">
           <PopoverHeader
             description="The open state is managed with open and onOpenChange."
             title="Controlled popover"

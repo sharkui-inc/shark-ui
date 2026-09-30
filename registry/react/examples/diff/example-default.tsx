@@ -13,7 +13,7 @@ const Example = () => (
     </DiffHeader>
     <DiffContent>
       <DiffLine line={12} type="context">
-        {"export function getToken() {"}
+        {"export const getToken = () => {"}
       </DiffLine>
       <DiffLine line={13} type="delete">
         {"  return localStorage.token;"}

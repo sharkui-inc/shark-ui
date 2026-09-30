@@ -14,6 +14,7 @@ import type React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { checkboxVariants } from "@/registry/react/components/checkbox";
+import { FieldLabel } from "@/registry/react/components/field";
 
 export const useTreeView = useArkTreeView;
 export const useTreeViewContext = useArkTreeViewContext;
@@ -101,17 +102,14 @@ export const TreeView: ArkTreeView.RootComponent<TreeViewProps> = (props) => {
 export const TreeViewLabel = (
   props: React.ComponentProps<typeof ArkTreeView.Label>
 ) => {
-  const { className, ...rest } = props;
+  const { children, ...rest } = props;
 
   return (
-    <ArkTreeView.Label
-      className={cn(
-        "select-none font-medium text-foreground text-sm",
-        className
-      )}
-      data-slot="tree-view-label"
-      {...rest}
-    />
+    <FieldLabel asChild>
+      <ArkTreeView.Label data-slot="tree-view-label" {...rest}>
+        {children}
+      </ArkTreeView.Label>
+    </FieldLabel>
   );
 };
 
@@ -446,15 +444,20 @@ export const TreeViewCheckbox = (
   const { className, ...rest } = props;
 
   return (
-    <ArkTreeView.NodeCheckbox
-      className={cn(checkboxVariants(), "[&_svg]:size-3", className)}
-      data-slot="tree-view-checkbox"
-      {...rest}
-    >
-      <ArkTreeView.NodeCheckboxIndicator indeterminate={<MinusIcon />}>
-        <CheckIcon />
-      </ArkTreeView.NodeCheckboxIndicator>
-    </ArkTreeView.NodeCheckbox>
+    <ArkTreeView.NodeContext>
+      {(node) => (
+        <ArkTreeView.NodeCheckbox
+          aria-label={rest["aria-label"] ?? `Select ${node.value}`}
+          className={cn(checkboxVariants(), "[&_svg]:size-3", className)}
+          data-slot="tree-view-checkbox"
+          {...rest}
+        >
+          <ArkTreeView.NodeCheckboxIndicator indeterminate={<MinusIcon />}>
+            <CheckIcon />
+          </ArkTreeView.NodeCheckboxIndicator>
+        </ArkTreeView.NodeCheckbox>
+      )}
+    </ArkTreeView.NodeContext>
   );
 };
 

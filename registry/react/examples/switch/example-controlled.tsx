@@ -14,7 +14,7 @@ const Example = () => {
 
   return (
     <FieldGroup className="flex max-w-sm flex-col items-center gap-4">
-      <Field className="w-48" orientation="horizontal">
+      <Field className="min-w-48" orientation="horizontal">
         <Switch
           checked={checked}
           onCheckedChange={({ checked: nextChecked }) =>

@@ -9,9 +9,9 @@ import { Kbd } from "@/registry/react/components/kbd";
 
 const Example = () => (
   <InputGroup className="max-w-64">
-    <InputGroupInput placeholder="Search..." />
+    <InputGroupInput aria-label="Search" placeholder="Search..." />
     <InputGroupAddon align="inline-end">
-      <Kbd>⌘K</Kbd>
+      <Kbd>/</Kbd>
     </InputGroupAddon>
   </InputGroup>
 );

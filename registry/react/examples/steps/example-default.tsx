@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRight } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   Steps,
@@ -18,7 +18,7 @@ const StepsDemo = () => (
     <StepsList>
       {steps.map((step) => (
         <StepsItem index={step - 1} key={step}>
-          <StepsTrigger>
+          <StepsTrigger aria-label={`Step ${step}`}>
             <StepsIndicator>{step}</StepsIndicator>
           </StepsTrigger>
           <StepsSeparator />
@@ -45,7 +45,7 @@ const StepsDemo = () => (
       <StepsNext asChild>
         <Button>
           Next
-          <ChevronRight className="rtl:rotate-180" data-icon="inline-end" />
+          <ChevronRightIcon className="rtl:rotate-180" data-icon="inline-end" />
         </Button>
       </StepsNext>
       <StepsPrevious asChild>

@@ -7,7 +7,10 @@ import {
 } from "@ark-ui/react/slider";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { FieldLabel } from "@/registry/react/components/field";
+import {
+  FieldLabel,
+  fieldLabelVariants,
+} from "@/registry/react/components/field";
 
 export const useSlider = useArkSlider;
 export const useSliderContext = useArkSliderContext;
@@ -196,14 +199,14 @@ export const Slider = (props: SliderProps) => {
 export const SliderLabel = (
   props: React.ComponentProps<typeof ArkSlider.Label>
 ) => {
-  const { children, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
-    <FieldLabel asChild>
-      <ArkSlider.Label data-slot="slider-label" {...rest}>
-        {children}
-      </ArkSlider.Label>
-    </FieldLabel>
+    <ArkSlider.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="slider-label"
+      {...rest}
+    />
   );
 };
 

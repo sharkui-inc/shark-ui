@@ -35,7 +35,7 @@ const ComboboxInputGroup = () => {
           <GlobeIcon aria-hidden />
         </InputGroupAddon>
       </ComboboxInput>
-      <ComboboxContent className="w-60">
+      <ComboboxContent className="min-w-60">
         <ComboboxEmpty>No timezones found.</ComboboxEmpty>
         <ComboboxList>
           {collection.group().map(([region, group]) => (

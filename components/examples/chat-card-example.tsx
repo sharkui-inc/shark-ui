@@ -197,27 +197,20 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
         <form className="relative w-full" onSubmit={sendMessage}>
           <InputGroup>
             <InputGroupInput
+              aria-label="Message"
               autoComplete="off"
               onChange={(event) => setInput(event.target.value)}
               placeholder="Type your message..."
               value={input}
             />
             <InputGroupAddon align="inline-end">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <InputGroupButton
-                    aria-label="Send"
-                    className="rounded-sm"
-                    disabled={isTyping}
-                    size="icon-xs"
-                    type="submit"
-                    variant="default"
-                  >
-                    <ArrowUpIcon aria-hidden />
-                  </InputGroupButton>
-                </TooltipTrigger>
-                <TooltipContent>Send</TooltipContent>
-              </Tooltip>
+              <InputGroupButton
+                aria-label="Send"
+                disabled={isTyping}
+                type="submit"
+              >
+                <ArrowUpIcon aria-hidden />
+              </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>
         </form>

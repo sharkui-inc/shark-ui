@@ -48,7 +48,7 @@ export const DashboardNotifications = () => {
           ) : null}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80">
+      <PopoverContent className="min-w-80">
         <PopoverHeader
           className="h-12 flex-row items-center justify-between"
           title="Notifications"

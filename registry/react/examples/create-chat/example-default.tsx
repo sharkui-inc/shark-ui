@@ -166,7 +166,7 @@ const ChatThread = ({ onReset }: { onReset: () => void }) => {
                     <PlusIcon aria-hidden />
                   </PromptInputButton>
                 </MenuTrigger>
-                <MenuContent className="w-52">
+                <MenuContent className="min-w-52">
                   {promptActions.map((action) => (
                     <MenuItem key={action.value} value={action.value}>
                       {action.icon}

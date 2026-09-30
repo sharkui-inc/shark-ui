@@ -45,10 +45,7 @@ const Example = () => {
                     {item.label}
                   </ComboboxChip>
                 ))}
-                <ComboboxChipsInput
-                  aria-label="Select items"
-                  placeholder="Select items…"
-                />
+                <ComboboxChipsInput placeholder="Select items…" />
               </ComboboxChips>
               <ComboboxContent>
                 <ComboboxEmpty />

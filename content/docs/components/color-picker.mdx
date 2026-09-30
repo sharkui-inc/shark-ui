@@ -67,6 +67,7 @@ You can use multiple modes to build the color picker that fits your needs:
 
 ```text
 ColorPicker
+├── ColorPickerLabel
 ├── ColorPickerControl
 │   └── InputGroup
 │       ├── ColorPickerTrigger
@@ -115,6 +116,8 @@ Use `value` and `onValueChange` to control the color picker.
 ### Examples
 
 #### With Field
+
+Use `ColorPickerLabel` inside `ColorPicker` to focus the visible hex input when clicked. Wrap it with [Field](/docs/components/field) for descriptions and validation messaging. The hex input keeps Ark's channel accessible name.
 
 <ComponentPreview componentName="color-picker" fileName="example-with-field" />
 
@@ -451,6 +454,14 @@ Root element of the color picker.
 | `positioning` | `PositioningOptions` | `{ placement: "top-start" }` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
+| `className` | `string` | `-` |
+
+### ColorPickerLabel
+
+Label for the ColorPicker. Clicking it focuses the visible hex input. The input keeps its channel-based accessible name from Ark UI.
+
+| Prop | Type | Default |
+| --- | --- | --- |
 | `className` | `string` | `-` |
 
 ### ColorPickerTrigger

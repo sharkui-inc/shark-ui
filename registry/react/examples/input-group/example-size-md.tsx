@@ -9,7 +9,7 @@ import {
 
 const Example = () => (
   <InputGroup className="max-w-64" size="md">
-    <InputGroupInput placeholder="Search..." />
+    <InputGroupInput aria-label="Search" placeholder="Search..." />
     <InputGroupAddon>
       <SearchIcon aria-hidden />
     </InputGroupAddon>

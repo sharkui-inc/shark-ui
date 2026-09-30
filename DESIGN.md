@@ -93,7 +93,7 @@ Colors are **role-driven and themeable**. Never bind reusable UI to raw palette 
 | `background` / `foreground` | Page canvas and highest-emphasis content |
 | `card`, `popover`, `sidebar`, `code` | Bounded surface + matching `*-foreground` |
 | `muted` | Neutral `/4` recessive layer |
-| `accent`, `secondary`, `sidebar-accent` | Neutral `/8` interactive or supporting fill (`secondary-hover` = `/16`) |
+| `accent`, `secondary`, `sidebar-accent` | Neutral `/8` interactive or supporting fill |
 | `primary` | Sole chromatic action / durable emphasis |
 | Feedback (`destructive`, success, warning, info) | Real outcomes, not decoration |
 | `border` / `input` / `ring` | Structure and focus |

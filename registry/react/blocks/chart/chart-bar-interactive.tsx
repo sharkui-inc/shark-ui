@@ -165,7 +165,7 @@ function ChartBarInteractive() {
             const chart = key as keyof typeof chartConfig;
             return (
               <ToggleGroupItem
-                className="relative z-30 h-auto flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-start data-[state=on]:bg-muted/48 sm:border-t-0 sm:border-l sm:px-8 sm:py-6"
+                className="relative z-30 h-auto flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-start data-[state=on]:bg-muted/48 sm:border-t-0 sm:border-l sm:px-8 sm:py-6 md:h-auto"
                 key={chart}
                 value={chart}
               >

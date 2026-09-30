@@ -13,7 +13,7 @@ import { packageManagerCommandVariants } from "./installation-command";
 
 export const shikiThemes = {
   dark: "github-dark",
-  light: "github-light-default",
+  light: "github-light-high-contrast",
 } as const;
 
 // LRU cache for cross-request caching of highlighted code.
@@ -57,6 +57,19 @@ const metadataTransformer = {
   },
 } satisfies ShikiTransformer;
 
+const commentContrastTransformer = {
+  span(node) {
+    const { style } = node.properties;
+
+    if (typeof style === "string") {
+      node.properties.style = style.replaceAll(
+        "--shiki-light:#66707B",
+        "--shiki-light:#58616B"
+      );
+    }
+  },
+} satisfies ShikiTransformer;
+
 const mdxCopyTransformer = {
   code(node) {
     if (node.tagName !== "code") {
@@ -77,6 +90,7 @@ const mdxCopyTransformer = {
 
 export const shikiTransformers = [
   metadataTransformer,
+  commentContrastTransformer,
   transformerMetaHighlight(),
   transformerMetaWordHighlight(),
   transformerNotationDiff(),

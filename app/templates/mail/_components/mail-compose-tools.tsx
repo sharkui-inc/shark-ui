@@ -116,7 +116,7 @@ export const MailComposeTools = () => (
         <Undo2Icon aria-hidden />
       </MailToolbarButton>
       <MailToolbarButton label="Formatting">
-        <span aria-hidden className="font-medium text-[11px] leading-none">
+        <span aria-hidden className="font-medium text-[0.625rem] leading-none">
           Aa
         </span>
       </MailToolbarButton>

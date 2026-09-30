@@ -55,6 +55,7 @@ npx shadcn@latest add @shark/calendar
 
 ```text
 Calendar
+├── CalendarLabel
 ├── CalendarViewControl
 │   ├── CalendarPrevTrigger
 │   ├── CalendarMonthSelect
@@ -100,6 +101,19 @@ import {
 <ComponentPreview componentName="calendar" fileName="example-controlled" />
 
 ## Examples
+
+### With Field
+
+Use `CalendarLabel` to name the calendar grid. `Field` is optional for the label
+association.
+
+<ComponentPreview componentName="calendar" fileName="example-with-field" />
+
+### Without Field
+
+`CalendarLabel` also works when the calendar is used outside `Field`.
+
+<ComponentPreview componentName="calendar" fileName="example-without-field" />
 
 ### Date Range
 

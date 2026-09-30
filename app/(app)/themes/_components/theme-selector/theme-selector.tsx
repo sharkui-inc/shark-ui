@@ -20,7 +20,6 @@ import { DialogTrigger } from "@/registry/react/components/dialog";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 import { useHotkey } from "@/registry/react/components/hotkeys";
 import { Kbd } from "@/registry/react/components/kbd";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 import {
   Tooltip,
   TooltipContent,
@@ -46,108 +45,102 @@ export const ThemeSelector = (props: React.ComponentProps<"fieldset">) => {
   });
 
   return (
-    <fieldset className={cn("min-w-0 border-0", className)} {...rest}>
+    <fieldset
+      className={cn(
+        "min-w-0 overflow-x-auto border-0 sm:overflow-visible",
+        className
+      )}
+      {...rest}
+    >
       <legend className="sr-only">Theme settings</legend>
-      <div className="@container">
-        <ScrollArea
-          className={cn(
-            "h-auto",
-            "@[600px]:overflow-visible!",
-            "@[600px]:**:data-[slot=scroll-area-viewport]:overflow-visible!",
-            "@[600px]:**:data-[slot=scroll-area-scrollbar]:hidden"
-          )}
-          orientation="horizontal"
-          scrollFade
-        >
-          <div className="flex @[600px]:w-full w-max min-w-full @[600px]:flex-wrap items-end @[600px]:justify-center gap-3">
-            <div className="w-36 shrink-0">
-              <ThemeSelectorPreset />
-            </div>
-            <div className="w-36 shrink-0">
-              <ThemeSelectorBase />
-            </div>
-            <div className="w-36 shrink-0">
-              <ThemeSelectorPrimary />
-            </div>
-            <div className="w-36 shrink-0">
-              <ThemeSelectorFont slot="sans" />
-            </div>
-            <div className="w-36 shrink-0">
-              <ThemeSelectorFont slot="heading" />
-            </div>
-            <div className="shrink-0">
-              <ThemeSelectorPrimaryTone />
-            </div>
-            <div className="w-36 shrink-0">
-              <ThemeSelectorRadius />
-            </div>
-            <Field className="w-fit shrink-0 *:w-auto">
-              <FieldLabel>Actions</FieldLabel>
-              <div className="flex items-center gap-2">
-                <Tooltip>
-                  <TooltipTrigger asChild>
+      <div className="flex w-max min-w-full items-end gap-3 sm:w-full sm:flex-wrap sm:justify-center">
+        <div className="w-36 shrink-0">
+          <ThemeSelectorPreset />
+        </div>
+        <div className="w-36 shrink-0">
+          <ThemeSelectorBase />
+        </div>
+        <div className="w-36 shrink-0">
+          <ThemeSelectorPrimary />
+        </div>
+        <div className="w-36 shrink-0">
+          <ThemeSelectorFont slot="sans" />
+        </div>
+        <div className="w-36 shrink-0">
+          <ThemeSelectorFont slot="heading" />
+        </div>
+        <div className="shrink-0">
+          <ThemeSelectorPrimaryTone />
+        </div>
+        <div className="w-36 shrink-0">
+          <ThemeSelectorRadius />
+        </div>
+        <Field className="w-fit shrink-0 *:w-auto">
+          <FieldLabel>Actions</FieldLabel>
+          <div className="flex items-center gap-3">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  aria-label="Randomize theme"
+                  onClick={randomize}
+                  size="icon-sm"
+                  variant="outline"
+                >
+                  <ShuffleIcon aria-hidden />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                Randomize <Kbd>R</Kbd>
+              </TooltipContent>
+            </Tooltip>
+
+            <AlertDialog>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <AlertDialogTrigger asChild>
                     <Button
-                      onClick={randomize}
-                      size="icon-md"
+                      aria-label="Reset theme"
+                      disabled={isDefault ? true : undefined}
+                      size="icon-sm"
                       variant="outline"
                     >
-                      <ShuffleIcon aria-hidden />
+                      <RotateCcwIcon aria-hidden />
                     </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    Randomize <Kbd>R</Kbd>
-                  </TooltipContent>
-                </Tooltip>
+                  </AlertDialogTrigger>
+                </TooltipTrigger>
+                <TooltipContent>Reset theme</TooltipContent>
+              </Tooltip>
 
-                <AlertDialog>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <AlertDialogTrigger asChild>
-                        <Button
-                          aria-label="Reset theme"
-                          disabled={isDefault ? true : undefined}
-                          size="icon-md"
-                          variant="outline"
-                        >
-                          <RotateCcwIcon aria-hidden />
-                        </Button>
-                      </AlertDialogTrigger>
-                    </TooltipTrigger>
-                    <TooltipContent>Reset theme</TooltipContent>
-                  </Tooltip>
+              <AlertDialogContent>
+                <AlertDialogHeader
+                  description="This will restore colors, radius, fonts, and locks to their default values."
+                  title="Reset theme to default?"
+                />
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogClose asChild>
+                    <AlertDialogAction onClick={reset}>
+                      Reset theme
+                    </AlertDialogAction>
+                  </AlertDialogClose>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
 
-                  <AlertDialogContent>
-                    <AlertDialogHeader
-                      description="This will restore colors, radius, fonts, and locks to their default values."
-                      title="Reset theme to default?"
-                    />
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogClose asChild>
-                        <AlertDialogAction onClick={reset}>
-                          Reset theme
-                        </AlertDialogAction>
-                      </AlertDialogClose>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-
-                <CopyThemeCodeDialog ids={{ trigger: viewCodeTriggerId }}>
-                  <Tooltip ids={{ trigger: viewCodeTriggerId }}>
-                    <TooltipTrigger asChild>
-                      <DialogTrigger asChild>
-                        <Button size="icon-md">
-                          <CodeIcon aria-hidden />
-                        </Button>
-                      </DialogTrigger>
-                    </TooltipTrigger>
-                    <TooltipContent>View code</TooltipContent>
-                  </Tooltip>
-                </CopyThemeCodeDialog>
-              </div>
-            </Field>
+            <CopyThemeCodeDialog ids={{ trigger: viewCodeTriggerId }}>
+              <Tooltip ids={{ trigger: viewCodeTriggerId }}>
+                <TooltipTrigger asChild>
+                  <DialogTrigger asChild>
+                    <Button aria-label="View theme code" size="icon-sm">
+                      <CodeIcon aria-hidden />
+                    </Button>
+                  </DialogTrigger>
+                </TooltipTrigger>
+                <TooltipContent>View code</TooltipContent>
+              </Tooltip>
+            </CopyThemeCodeDialog>
           </div>
-        </ScrollArea>
+        </Field>
       </div>
     </fieldset>
   );

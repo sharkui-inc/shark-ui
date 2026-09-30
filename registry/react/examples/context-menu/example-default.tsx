@@ -1,16 +1,16 @@
 import {
-  Archive,
-  ArchiveX,
-  Bell,
-  CirclePlus,
-  FolderInput,
-  MailX,
-  Reply,
-  ReplyAll,
-  Send,
-  SquarePen,
-  Trash,
-  Trash2,
+  ArchiveIcon,
+  ArchiveXIcon,
+  BellIcon,
+  CirclePlusIcon,
+  FolderInputIcon,
+  MailXIcon,
+  ReplyAllIcon,
+  ReplyIcon,
+  SendIcon,
+  SquarePenIcon,
+  Trash2Icon,
+  TrashIcon,
 } from "lucide-react";
 import {
   ContextMenu,
@@ -27,65 +27,76 @@ import {
 
 const ContextMenuDemo = () => (
   <ContextMenu>
-    <ContextMenuTrigger className="flex aspect-video items-center justify-center rounded-2xl border border-dashed p-20 text-sm">
+    <ContextMenuTrigger
+      aria-label="Right click here or long press here to open context menu"
+      className="flex aspect-video pointer-coarse:select-none items-center justify-center rounded-2xl border border-dashed p-20 text-sm"
+    >
       <span className="pointer-fine:inline-block hidden">Right click here</span>
       <span className="pointer-coarse:inline-block hidden">
         Long press here
       </span>
     </ContextMenuTrigger>
-    <ContextMenuContent className="w-40">
+    <ContextMenuContent className="min-w-40">
       <ContextMenuGroup>
         <ContextMenuItem value="forward">
-          <Send /> Forward
-          <ContextMenuShortcut>⌘F</ContextMenuShortcut>
+          <SendIcon /> Forward
+          <ContextMenuShortcut className="hidden sm:inline-flex">
+            ⌘F
+          </ContextMenuShortcut>
         </ContextMenuItem>
 
         <ContextMenuItem value="reply">
-          <Reply /> Reply
-          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+          <ReplyIcon /> Reply
+          <ContextMenuShortcut className="hidden sm:inline-flex">
+            ⌘R
+          </ContextMenuShortcut>
         </ContextMenuItem>
 
         <ContextMenuItem value="reply-all">
-          <ReplyAll /> Reply all
-          <ContextMenuShortcut>⌘A</ContextMenuShortcut>
+          <ReplyAllIcon /> Reply all
+          <ContextMenuShortcut className="hidden sm:inline-flex">
+            ⌘A
+          </ContextMenuShortcut>
         </ContextMenuItem>
 
         <ContextMenuItem value="archive">
-          <Archive /> Archive
-          <ContextMenuShortcut>⌘Z</ContextMenuShortcut>
+          <ArchiveIcon /> Archive
+          <ContextMenuShortcut className="hidden sm:inline-flex">
+            ⌘Z
+          </ContextMenuShortcut>
         </ContextMenuItem>
 
         <ContextMenuSub>
           <ContextMenuSubTrigger>
-            <FolderInput /> Move to
+            <FolderInputIcon /> Move to
           </ContextMenuSubTrigger>
 
           <ContextMenuSubContent>
             <ContextMenuItem value="move-to-folder-1">
-              <ArchiveX /> Junk
+              <ArchiveXIcon /> Junk
             </ContextMenuItem>
 
             <ContextMenuItem value="move-to-folder-2">
-              <Trash /> Trash
+              <TrashIcon /> Trash
             </ContextMenuItem>
 
             <ContextMenuItem value="move-to-folder-3">
-              <Bell /> Reminders
+              <BellIcon /> Reminders
             </ContextMenuItem>
 
             <ContextMenuSub>
               <ContextMenuSubTrigger>
-                <CirclePlus />
+                <CirclePlusIcon />
                 More
               </ContextMenuSubTrigger>
 
               <ContextMenuSubContent>
                 <ContextMenuItem value="move-to-folder-4">
-                  <SquarePen />
+                  <SquarePenIcon />
                   Drafts
                 </ContextMenuItem>
                 <ContextMenuItem value="move-to-folder-6">
-                  <MailX />
+                  <MailXIcon />
                   Spam
                 </ContextMenuItem>
               </ContextMenuSubContent>
@@ -95,8 +106,10 @@ const ContextMenuDemo = () => (
 
         <ContextMenuSeparator />
         <ContextMenuItem value="delete" variant="destructive">
-          <Trash2 /> Delete
-          <ContextMenuShortcut>⌘ ⌫</ContextMenuShortcut>
+          <Trash2Icon /> Delete
+          <ContextMenuShortcut className="hidden sm:inline-flex">
+            ⌘ ⌫
+          </ContextMenuShortcut>
         </ContextMenuItem>
       </ContextMenuGroup>
     </ContextMenuContent>

@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 
 const ChatTemplatePage = () => (
   <div className="absolute inset-0 overflow-hidden">
+    <h1 className="sr-only">Chat preview</h1>
     <SidebarProvider className="h-full min-h-0">
       <ChatSidebar />
       <SidebarInset className="min-w-0 bg-background">

@@ -5,7 +5,7 @@ import {
   useSplitter as useArkSplitter,
   useSplitterContext as useArkSplitterContext,
 } from "@ark-ui/react/splitter";
-import { GripVertical } from "lucide-react";
+import { GripVerticalIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
@@ -13,15 +13,20 @@ export const useResizable = useArkSplitter;
 export const useResizableContext = useArkSplitterContext;
 export const ResizableRootProvider = ArkSplitter.RootProvider;
 
+const resizableRegistry = ArkSplitter.createRegistry({
+  hitAreaMargins: { coarse: 24, fine: 5 },
+});
+
 export const Resizable = (
   props: React.ComponentProps<typeof ArkSplitter.Root>
 ) => {
-  const { className, ...rest } = props;
+  const { className, registry = resizableRegistry, ...rest } = props;
 
   return (
     <ArkSplitter.Root
       className={cn("flex size-full", className)}
       data-slot="resizable"
+      registry={registry}
       {...rest}
     />
   );
@@ -51,6 +56,7 @@ export const ResizableResizeTrigger = (props: ResizableResizeTriggerProps) => {
         "relative bg-border",
         "flex w-px items-center justify-center",
         "cursor-col-resize data-[orientation=vertical]:cursor-row-resize",
+        "data-[dragging]:bg-primary",
         "after:-translate-x-1/2 data-[orientation=vertical]:after:-translate-y-1/2",
         "after:absolute after:inset-s-1/2 after:inset-y-0 after:w-1",
         "focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
@@ -64,17 +70,19 @@ export const ResizableResizeTrigger = (props: ResizableResizeTriggerProps) => {
       {...rest}
     >
       {withHandle ? (
-        <div
+        <ArkSplitter.ResizeTriggerIndicator
           className={cn(
             "z-10",
             "h-4 w-3",
             "flex items-center justify-center",
             "bg-border",
-            "rounded-xs border"
+            "rounded-xs border",
+            "data-[dragging]:bg-primary",
+            "data-[orientation=vertical]:rotate-90"
           )}
         >
-          <GripVertical className="size-2.5" />
-        </div>
+          <GripVerticalIcon className="size-2.5" />
+        </ArkSplitter.ResizeTriggerIndicator>
       ) : null}
     </ArkSplitter.ResizeTrigger>
   );

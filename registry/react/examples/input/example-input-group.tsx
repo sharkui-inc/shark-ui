@@ -7,7 +7,7 @@ import {
 
 const Example = () => (
   <InputGroup className="max-w-64">
-    <InputGroupInput placeholder="Search..." />
+    <InputGroupInput aria-label="Search" placeholder="Search..." />
     <InputGroupAddon>
       <SearchIcon />
     </InputGroupAddon>

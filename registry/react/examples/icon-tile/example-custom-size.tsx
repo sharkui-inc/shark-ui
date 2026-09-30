@@ -2,7 +2,7 @@ import { ImageIcon } from "lucide-react";
 import { IconTile } from "@/registry/react/components/icon-tile";
 
 const Example = () => (
-  <IconTile aria-hidden className="size-14" variant="default">
+  <IconTile aria-hidden className="size-14">
     <ImageIcon className="size-7" />
   </IconTile>
 );

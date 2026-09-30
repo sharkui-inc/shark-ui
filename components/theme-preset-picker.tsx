@@ -65,7 +65,7 @@ const ThemePresetBar = (props: { onSelect?: () => void }) => {
       value={activePreset?.label ?? ""}
     >
       <RadioGroupLabel>{THEME_PRESET_FIELD.label}</RadioGroupLabel>
-      <div className="grid grid-cols-9 gap-0.5 overflow-hidden rounded-xl border border-input bg-border">
+      <div className="grid grid-cols-9 gap-0.5 overflow-hidden rounded-xl border">
         {THEME_PRESETS.map((preset) => (
           <RadioGroupItem
             aria-label={preset.label}

@@ -79,11 +79,11 @@ const clipboardValueVariants = tv({
   },
   variants: {
     size: {
-      lg: ["h-9", "px-[calc(--spacing(3.5)-1px)]"],
-      md: ["h-8", "px-[calc(--spacing(3)-1px)]"],
-      sm: ["h-7", "px-[calc(--spacing(2.5)-1px)]"],
-      xl: ["h-10", "px-[calc(--spacing(3)-1px)]"],
-      xs: ["h-6", "px-[calc(--spacing(3)-1px)]"],
+      lg: ["h-11 md:h-10", "px-[calc(--spacing(3.5)-1px)]"],
+      md: ["h-10 md:h-9", "px-[calc(--spacing(3)-1px)]"],
+      sm: ["h-9 md:h-8", "px-[calc(--spacing(2.5)-1px)]"],
+      xl: ["h-12 md:h-11", "px-[calc(--spacing(3)-1px)]"],
+      xs: ["h-8 md:h-7", "px-[calc(--spacing(3)-1px)]"],
     },
   },
 });

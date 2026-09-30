@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import {
   Avatar,
   AvatarFallback,
@@ -94,10 +93,6 @@ export const RatingExample = (props: React.ComponentProps<"div">) => {
             });
             setIsSubmitting(false);
             setIsSubmitted(true);
-            toast.success({
-              description: copyForRating(rating),
-              title: "Review sent",
-            });
           }}
         >
           {isSubmitted ? "Thanks for the review" : "Send"}

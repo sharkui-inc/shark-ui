@@ -14,7 +14,7 @@ const Example = () => (
     <DrawerTrigger asChild>
       <Button variant="outline">Open</Button>
     </DrawerTrigger>
-    <DrawerContent variant="default">
+    <DrawerContent>
       <DrawerHeader
         description="This drawer uses the default variant, flush with the screen edge."
         title="Default drawer"

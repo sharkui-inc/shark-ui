@@ -26,8 +26,11 @@ const Example = () => {
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <AutocompleteInput placeholder="Select a timezone" />
-      <AutocompleteContent className="w-60">
+      <AutocompleteInput
+        aria-label="Select a timezone"
+        placeholder="Select a timezone"
+      />
+      <AutocompleteContent className="min-w-60">
         <AutocompleteEmpty />
         <AutocompleteList>
           {collection.group().map(([continent, group]) => (

@@ -6,8 +6,8 @@ import {
   ArrowLeftRightIcon,
   BlocksIcon,
   CheckIcon,
-  CircleDashed,
-  CircleDotDashed,
+  CircleDashedIcon,
+  CircleDotDashedIcon,
   CornerDownLeftIcon,
   FileTextIcon,
   SquarePenIcon,
@@ -57,15 +57,15 @@ interface PageItem {
 }
 
 const GROUP_ICON_MAP: Record<string, LucideIcon> = {
-  "ai components": CircleDashed,
+  "ai components": CircleDashedIcon,
   blocks: BlocksIcon,
-  components: CircleDashed,
+  components: CircleDashedIcon,
   forms: SquarePenIcon,
-  helpers: CircleDotDashed,
-  hooks: CircleDotDashed,
+  helpers: CircleDotDashedIcon,
+  hooks: CircleDotDashedIcon,
   migration: ArrowLeftRightIcon,
   pages: FileTextIcon,
-  utilities: CircleDotDashed,
+  utilities: CircleDotDashedIcon,
 };
 
 const COMPONENT_PAGE_PATHS = [
@@ -224,6 +224,7 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
             "bg-white dark:bg-input/32",
             "w-full md:w-48 lg:w-40"
           )}
+          size="sm"
           variant="outline"
         >
           <span className="inline-flex">Search...</span>

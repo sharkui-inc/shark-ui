@@ -6,7 +6,7 @@ import {
 } from "@/registry/react/components/field";
 
 const CheckboxInvalid = () => (
-  <FieldGroup className="mx-auto w-56">
+  <FieldGroup className="mx-auto min-w-56">
     <Field invalid orientation="horizontal">
       <Checkbox />
       <FieldLabel>Accept terms and conditions</FieldLabel>

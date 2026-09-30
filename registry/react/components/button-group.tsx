@@ -21,6 +21,7 @@ const buttonGroupVariants = tv({
   variants: {
     orientation: {
       horizontal: [
+        "pointer-coarse:*:after:min-w-auto",
         "[&>*:not(:first-child)]:rounded-s-none",
         "[&>*:not(:first-child)]:border-s-0",
         "[&>*:not(:last-child)]:rounded-e-none",
@@ -30,6 +31,7 @@ const buttonGroupVariants = tv({
       ],
       vertical: [
         "flex-col",
+        "pointer-coarse:*:after:min-h-auto",
         "[&>*:not(:first-child)]:rounded-t-none",
         "[&>*:not(:first-child)]:border-t-0",
         "[&>*:not(:last-child)]:rounded-b-none [&>*:not(:last-child)]:shadow-none",

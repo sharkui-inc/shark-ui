@@ -17,6 +17,7 @@ const Example = () => {
           <ProgressLabel>Controlled progress</ProgressLabel>
           <ButtonGroup className="ms-auto">
             <Button
+              aria-label="Decrease progress"
               clickEffect={false}
               onClick={() => setValue(Math.max(0, value - 10))}
               size="icon-sm"
@@ -25,6 +26,7 @@ const Example = () => {
               <MinusIcon />
             </Button>
             <Button
+              aria-label="Increase progress"
               clickEffect={false}
               onClick={() => setValue(Math.min(100, value + 10))}
               size="icon-sm"

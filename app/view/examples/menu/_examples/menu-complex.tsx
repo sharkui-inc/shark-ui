@@ -58,7 +58,7 @@ const MenuComplex = () => {
       <MenuTrigger asChild>
         <Button variant="outline">Complex Menu</Button>
       </MenuTrigger>
-      <MenuContent className="w-44">
+      <MenuContent className="min-w-44">
         <MenuGroup heading="File">
           <MenuItem value="new-file">
             <FileIcon />

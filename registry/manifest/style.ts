@@ -21,7 +21,6 @@ const cssVars = {
     "chart-5": "var(--color-rose-500)",
     destructive: "var(--color-red-600)",
     "destructive-foreground": "var(--color-red-400)",
-    "destructive-hover": "var(--color-red-700)",
     foreground: "var(--color-neutral-100)",
     info: "var(--color-blue-600)",
     "info-foreground": "var(--color-blue-300)",
@@ -34,14 +33,10 @@ const cssVars = {
     "popover-foreground": "var(--color-neutral-100)",
     primary: "var(--color-neutral-100)",
     "primary-foreground": "var(--color-neutral-800)",
-    "primary-hover":
-      "color-mix(in srgb, var(--color-neutral-100) 92%, var(--color-neutral-950))",
     ring: "var(--color-neutral-400)",
     secondary:
       "color-mix(in srgb, var(--color-neutral-50) 8%, var(--background))",
     "secondary-foreground": "var(--color-neutral-100)",
-    "secondary-hover":
-      "color-mix(in srgb, var(--color-neutral-50) 16%, var(--background))",
     sidebar:
       "color-mix(in srgb, var(--color-neutral-950) 97%, var(--color-neutral-50))",
     "sidebar-accent":
@@ -75,7 +70,6 @@ const cssVars = {
     "chart-5": "var(--color-rose-600)",
     destructive: "var(--color-red-600)",
     "destructive-foreground": "var(--color-red-800)",
-    "destructive-hover": "var(--color-red-700)",
     foreground: "var(--color-neutral-800)",
     info: "var(--color-blue-600)",
     "info-foreground": "var(--color-blue-800)",
@@ -88,15 +82,11 @@ const cssVars = {
     "popover-foreground": "var(--color-neutral-800)",
     primary: "var(--color-neutral-800)",
     "primary-foreground": "var(--color-neutral-50)",
-    "primary-hover":
-      "color-mix(in srgb, var(--color-neutral-800) 92%, var(--color-neutral-950))",
     radius: "0.5rem",
     ring: "var(--color-neutral-600)",
     secondary:
       "color-mix(in srgb, var(--color-neutral-950) 8%, var(--background))",
     "secondary-foreground": "var(--color-neutral-800)",
-    "secondary-hover":
-      "color-mix(in srgb, var(--color-neutral-950) 16%, var(--background))",
     sidebar: "var(--color-neutral-50)",
     "sidebar-accent":
       "color-mix(in srgb, var(--color-neutral-950) 4%, var(--sidebar))",

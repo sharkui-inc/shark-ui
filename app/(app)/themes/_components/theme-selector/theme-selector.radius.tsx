@@ -63,14 +63,16 @@ export const ThemeSelectorRadius = () => {
           key={item.value}
           showIndicator={false}
         >
-          <span
-            aria-hidden
-            className="size-9 bg-primary"
-            style={{ borderRadius: item.cssVars.radius }}
-          />
-          <ListboxItemText className="flex-none text-muted-foreground text-xs group-data-[state=checked]/listbox-item:text-foreground">
-            {item.value}
-          </ListboxItemText>
+          <span className="flex w-full min-w-0 flex-col items-center gap-2">
+            <span
+              aria-hidden
+              className="size-9 bg-primary"
+              style={{ borderRadius: item.cssVars.radius }}
+            />
+            <ListboxItemText className="flex-none text-muted-foreground text-xs group-data-[state=checked]/listbox-item:text-foreground">
+              {item.value}
+            </ListboxItemText>
+          </span>
         </ListboxItem>
       ))}
     </ThemeSelectorPopoverGrid>

@@ -485,6 +485,7 @@ export const SidebarGroup = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn(
         "relative flex w-full min-w-0 flex-col p-2",
+        "has-data-[slot=sidebar-group-action]:gap-2",
         "group-data-[collapsible=icon]:py-0",
         "first:group-data-[collapsible=icon]:pt-2",
         "last:group-data-[collapsible=icon]:pb-2",
@@ -531,7 +532,8 @@ export const SidebarGroupAction = (
   return (
     <Button
       className={cn(
-        "absolute inset-e-3 top-3.5",
+        "absolute inset-e-3 top-3",
+        "size-6 md:size-6",
         "text-sidebar-foreground",
         "transition-transform duration-200 ease-linear",
         "motion-reduce:transition-none",
@@ -634,7 +636,7 @@ export const SidebarMenuButton = ({
         "peer/menu-button group/menu-button",
         "flex w-full min-w-0",
         "justify-start",
-        "h-8 p-2",
+        "h-8 p-2 md:h-8",
         "overflow-hidden",
         "transition-[width,height,padding] duration-200 ease-linear",
         "motion-reduce:transition-none",
@@ -691,14 +693,11 @@ export const SidebarMenuAction = (props: SidebarMenuActionProps) => {
   return (
     <Button
       className={cn(
-        "absolute inset-e-1 top-1.5",
+        "absolute inset-e-1 top-1/2 -translate-y-1/2",
         "text-sidebar-foreground",
-        "transition-transform duration-200 ease-linear",
-        "motion-reduce:transition-none",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         "peer-hover/menu-button:text-sidebar-accent-foreground",
         "after:absolute after:-inset-2 md:after:hidden",
-        "peer-data-[size=lg]/menu-button:top-2.5 peer-data-[size=md]/menu-button:top-1.5 peer-data-[size=sm]/menu-button:top-1",
         "group-data-[collapsible=icon]:hidden",
         "[&_svg]:size-4",
         !showOnHover &&

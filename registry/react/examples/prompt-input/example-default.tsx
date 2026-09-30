@@ -151,7 +151,7 @@ const PromptInputDemo = () => {
               size="sm"
               variant="ghost"
             />
-            <ComboboxContent className="max-h-72 w-52">
+            <ComboboxContent className="max-h-72 min-w-52">
               <ComboboxList>
                 {collection.items.map((item) => (
                   <ComboboxItem item={item} key={item.value}>

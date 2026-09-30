@@ -16,7 +16,7 @@ import {
 
 const Example = () => (
   <InputGroup className="max-w-64">
-    <InputGroupInput placeholder="Select file..." />
+    <InputGroupInput aria-label="File" placeholder="Select file..." />
     <InputGroupAddon align="inline-end">
       <Menu>
         <MenuTrigger asChild>
@@ -28,7 +28,7 @@ const Example = () => (
             <EllipsisIcon aria-hidden />
           </InputGroupButton>
         </MenuTrigger>
-        <MenuContent className="w-48">
+        <MenuContent className="min-w-48">
           <MenuItem value="file">
             <FileIcon />
             Select file

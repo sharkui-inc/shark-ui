@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRightIcon } from "lucide-react";
 import {
   Item,
   ItemContent,
@@ -26,7 +26,7 @@ const Example = () => (
             Opens in a new tab with security attributes.
           </ItemDescription>
         </ItemContent>
-        <ArrowUpRight />
+        <ArrowUpRightIcon />
       </a>
     </Item>
     <Item asChild variant="outline">

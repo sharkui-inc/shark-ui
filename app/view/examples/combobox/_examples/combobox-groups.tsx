@@ -29,7 +29,7 @@ const ComboboxGroups = () => {
       }
     >
       <ComboboxInput placeholder="Select a timezone" />
-      <ComboboxContent className="w-60">
+      <ComboboxContent className="min-w-60">
         <ComboboxEmpty>No timezones found.</ComboboxEmpty>
         <ComboboxList>
           {collection.group().map(([region, group]) => (

@@ -7,7 +7,6 @@ import ExampleCustomDelimiter from "@/registry/react/examples/tags-input/example
 import ExampleDefault from "@/registry/react/examples/tags-input/example-default";
 import ExampleDisableEditing from "@/registry/react/examples/tags-input/example-disable-editing";
 import ExampleDisabled from "@/registry/react/examples/tags-input/example-disabled";
-import ExampleField from "@/registry/react/examples/tags-input/example-field";
 import ExampleInvalid from "@/registry/react/examples/tags-input/example-invalid";
 import ExampleMaxLength from "@/registry/react/examples/tags-input/example-max-length";
 import ExampleMaxTags from "@/registry/react/examples/tags-input/example-max-tags";
@@ -20,6 +19,7 @@ import ExampleSizeLg from "@/registry/react/examples/tags-input/example-size-lg"
 import ExampleSizeMd from "@/registry/react/examples/tags-input/example-size-md";
 import ExampleSizeSm from "@/registry/react/examples/tags-input/example-size-sm";
 import ExampleValidation from "@/registry/react/examples/tags-input/example-validation";
+import ExampleField from "@/registry/react/examples/tags-input/example-with-field";
 
 const TagsInputExamplePage = () => (
   <PreviewLocaleProvider>

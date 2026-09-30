@@ -42,25 +42,35 @@ const Example = () => (
           <TableCell className="text-right">
             <Menu positioning={{ placement: "left-end" }}>
               <MenuTrigger asChild>
-                <Button size="icon-sm" variant="outline">
-                  <EllipsisVerticalIcon />
+                <Button
+                  aria-label={`Actions for ${user.name}`}
+                  size="icon-sm"
+                  variant="outline"
+                >
+                  <EllipsisVerticalIcon aria-hidden />
                 </Button>
               </MenuTrigger>
               <MenuContent className="min-w-40">
                 <MenuItem value="view">
                   <EyeIcon />
                   View
-                  <MenuShortcut>⌘ V</MenuShortcut>
+                  <MenuShortcut className="hidden sm:inline-flex">
+                    ⌘ V
+                  </MenuShortcut>
                 </MenuItem>
                 <MenuItem value="edit">
                   <PencilIcon />
                   Edit
-                  <MenuShortcut>⌘ E</MenuShortcut>
+                  <MenuShortcut className="hidden sm:inline-flex">
+                    ⌘ E
+                  </MenuShortcut>
                 </MenuItem>
                 <MenuItem value="delete" variant="destructive">
                   <Trash2Icon />
                   Delete
-                  <MenuShortcut>⌘ ⌫</MenuShortcut>
+                  <MenuShortcut className="hidden sm:inline-flex">
+                    ⌘ ⌫
+                  </MenuShortcut>
                 </MenuItem>
               </MenuContent>
             </Menu>

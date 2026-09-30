@@ -1,4 +1,4 @@
-import { Slider } from "@/registry/react/components/slider";
+import { Slider, SliderLabel } from "@/registry/react/components/slider";
 
 const Example = () => (
   <Slider
@@ -7,7 +7,9 @@ const Example = () => (
     markerInterval={2}
     max={12}
     showMarkers
-  />
+  >
+    <SliderLabel>Volume</SliderLabel>
+  </Slider>
 );
 
 export default Example;

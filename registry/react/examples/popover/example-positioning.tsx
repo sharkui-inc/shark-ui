@@ -15,7 +15,7 @@ const Example = () => (
             {placement}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-56">
+        <PopoverContent className="min-w-56">
           <PopoverHeader
             description={`This popover appears on the ${placement} placement of the trigger.`}
             title="Popover"

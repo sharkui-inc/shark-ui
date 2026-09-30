@@ -9,7 +9,7 @@ import {
 const Example = () => (
   <Clipboard value="https://x.com/vinihvc">
     <ClipboardTrigger asChild>
-      <Button size="icon-md">
+      <Button aria-label="Copy URL" size="icon-md">
         <ClipboardIndicator copied={<ClipboardCheckIcon />}>
           <LinkIcon />
         </ClipboardIndicator>

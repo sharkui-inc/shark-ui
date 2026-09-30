@@ -40,7 +40,6 @@ import {
   MenuShortcut,
   menuSeparatorVariants,
 } from "@/registry/react/components/menu";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
 
 export const useCommand = useArkCombobox;
@@ -54,17 +53,14 @@ export const CommandDialogTrigger = (
 ) => <DialogTrigger data-slot="command-dialog-trigger" {...props} />;
 
 const commandDialogPositionerVariants = tv({
-  base: [
-    "max-sm:h-dvh max-sm:grid-rows-[1fr]",
-    "[--inset:--spacing(3)] sm:[--inset:--spacing(4)]",
-  ],
+  base: ["max-sm:h-dvh max-sm:grid-rows-[1fr]"],
   defaultVariants: {
     variant: "default",
   },
   variants: {
     variant: {
-      default: ["max-sm:p-0 max-sm:[--inset:0px]"],
-      inset: ["p-(--inset) px-(--inset) pt-(--inset) pb-(--inset)"],
+      default: ["max-sm:p-0"],
+      inset: ["p-3 sm:p-4"],
     },
   },
 });
@@ -82,9 +78,14 @@ const commandDialogContentVariants = tv({
   },
   variants: {
     fill: {
-      false:
-        "max-sm:h-auto max-sm:max-h-[min(80dvh,calc(100dvh-2*var(--inset)))] max-sm:self-start max-sm:**:data-[slot=scroll-area]:max-h-[min(80dvh,calc(100dvh-2*var(--inset)))]",
-      true: "max-sm:h-full max-sm:max-h-[calc(100dvh-2*var(--inset))] max-sm:**:data-[slot=scroll-area]:max-h-[calc(100dvh-2*var(--inset))]",
+      false: [
+        "max-sm:h-auto max-sm:max-h-[80dvh] max-sm:**:data-[slot=scroll-area]:max-h-[80dvh]",
+        "max-sm:self-start",
+      ],
+      true: [
+        "max-sm:h-full max-sm:max-h-dvh max-sm:**:data-[slot=scroll-area]:max-h-dvh",
+        "max-sm:self-start",
+      ],
     },
     variant: {
       default: [
@@ -94,8 +95,8 @@ const commandDialogContentVariants = tv({
         "max-sm:**:data-[slot=command-footer]:rounded-none",
       ],
       inset: [
-        "rounded-2xl border p-0",
-        "**:data-[slot=command-footer]:rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
+        "rounded-[calc(var(--radius)*2)] border p-0",
+        "**:data-[slot=command-footer]:rounded-b-[max(0px,calc(var(--radius)*2-1px))]",
         "**:data-[slot=command]:rounded-none **:data-[slot=command]:border-0",
       ],
     },
@@ -128,7 +129,7 @@ interface CommandDialogContentProps
 export const CommandDialogContent = (props: CommandDialogContentProps) => {
   const {
     fill,
-    size = "lg",
+    size = "md",
     variant = "default",
     title = "Command Palette",
     description = "Search for a command to run...",
@@ -136,6 +137,8 @@ export const CommandDialogContent = (props: CommandDialogContentProps) => {
     children,
     ...rest
   } = props;
+
+  const { content } = dialogContentVariants({ size });
 
   return (
     <Portal>
@@ -147,7 +150,7 @@ export const CommandDialogContent = (props: CommandDialogContentProps) => {
       >
         <ArkDialog.Content
           className={cn(
-            dialogContentVariants({ size }).content(),
+            content(),
             commandDialogContentVariants({ fill, variant }),
             className
           )}
@@ -178,7 +181,7 @@ export const Command: ArkCombobox.RootComponent = (props) => {
         "flex min-h-0 flex-1 flex-col",
         "bg-popover",
         "text-popover-foreground",
-        "overflow-hidden rounded-2xl border",
+        "overflow-hidden rounded-[calc(var(--radius)*2)] border",
         className
       )}
       data-slot="command"
@@ -218,7 +221,7 @@ export const CommandContent = (
         "px-1.5",
         "overflow-hidden",
         "outline-hidden",
-        "[:not(.has-[+[data-slot=command-footer]])]:rounded-b-2xl [:not(.has-[+[data-slot=command-footer]])]:border-b",
+        "rounded-b-[max(0px,calc(var(--radius)*2-1px))] border-b",
         className
       )}
       data-slot="command-content"
@@ -230,7 +233,13 @@ export const CommandContent = (
 };
 
 export const CommandInput = (props: CommandInputProps) => {
-  const { size = "lg", className, autoFocus = true, ...rest } = props;
+  const {
+    size = "lg",
+    className,
+    autoFocus = true,
+    "aria-label": ariaLabel = "Search commands",
+    ...rest
+  } = props;
 
   return (
     <ComboboxControl className="m-1.5">
@@ -246,7 +255,11 @@ export const CommandInput = (props: CommandInputProps) => {
           <SearchIcon aria-hidden className="opacity-64" />
         </InputGroupAddon>
         <ArkCombobox.Input asChild data-slot="command-input">
-          <InputGroupInput autoFocus={autoFocus} {...rest} />
+          <InputGroupInput
+            aria-label={ariaLabel}
+            autoFocus={autoFocus}
+            {...rest}
+          />
         </ArkCombobox.Input>
       </InputGroup>
     </ComboboxControl>
@@ -259,18 +272,15 @@ export const CommandList = (
   const { className, ...rest } = props;
 
   return (
-    <ScrollArea
-      className="max-h-72 flex-1"
-      orientation="vertical"
-      overscrollContain
-      scrollFade
-    >
-      <ArkCombobox.List
-        className={cn("flex flex-col not-empty:pb-2", className)}
-        data-slot="command-list"
-        {...rest}
-      />
-    </ScrollArea>
+    <ArkCombobox.List
+      className={cn(
+        "max-h-72 flex-1 overflow-y-auto",
+        "flex flex-col not-empty:pb-2",
+        className
+      )}
+      data-slot="command-list"
+      {...rest}
+    />
   );
 };
 
@@ -320,6 +330,7 @@ export const CommandSeparator = (
 
   return (
     <Separator
+      aria-hidden="true"
       className={cn(menuSeparatorVariants(), className)}
       data-slot="command-separator"
       {...rest}
@@ -342,7 +353,7 @@ export const CommandFooter = (props: React.ComponentProps<typeof ark.div>) => {
         "px-3 py-2",
         "bg-muted/48",
         "text-muted-foreground text-xs leading-none",
-        "rounded-b-[max(0px,calc(var(--radius-2xl)-1px))] border-t",
+        "rounded-b-[max(0px,calc(var(--radius)*2-1px))] border-t",
         className
       )}
       data-slot="command-footer"

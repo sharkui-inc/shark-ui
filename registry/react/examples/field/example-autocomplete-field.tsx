@@ -30,10 +30,7 @@ const Example = () => {
         collection={collection}
         onInputValueChange={({ inputValue }) => filter(inputValue)}
       >
-        <AutocompleteInput
-          aria-label="Search items"
-          placeholder="Search items…"
-        />
+        <AutocompleteInput placeholder="Search items…" />
         <AutocompleteContent>
           <AutocompleteEmpty>No items found.</AutocompleteEmpty>
           <ComboboxList>

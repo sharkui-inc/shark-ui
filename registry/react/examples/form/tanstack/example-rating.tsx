@@ -17,9 +17,12 @@ import {
   FieldDescription,
   FieldError,
   FieldGroup,
-  FieldLabel,
 } from "@/registry/react/components/field";
-import { Rating } from "@/registry/react/components/rating";
+import {
+  Rating,
+  RatingLabel,
+  RatingStars,
+} from "@/registry/react/components/rating";
 
 const Example = () => {
   const form = useForm({
@@ -61,12 +64,14 @@ const Example = () => {
             <form.Field
               children={(field) => (
                 <Field invalid={!field.state.meta.isValid}>
-                  <FieldLabel>How useful is this project?</FieldLabel>
                   <Rating
                     count={5}
                     onValueChange={(e) => field.handleChange(e.value ?? 0)}
                     value={field.state.value ?? 0}
-                  />
+                  >
+                    <RatingLabel>How useful is this project?</RatingLabel>
+                    <RatingStars />
+                  </Rating>
                   <FieldDescription>
                     1 = not likely, 5 = very likely.
                   </FieldDescription>

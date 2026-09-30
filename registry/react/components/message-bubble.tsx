@@ -38,7 +38,7 @@ export const messageBubbleVariants = tv({
       default: [
         "[--message-bubble-surface:var(--primary)]",
         "*:data-[slot=message-bubble-content]:bg-primary *:data-[slot=message-bubble-content]:text-primary-foreground",
-        "[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-primary-hover",
+        "[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-primary/80",
       ],
       destructive: [
         "[--message-bubble-surface:color-mix(in_oklab,var(--destructive)_10%,var(--background))]",
@@ -128,13 +128,14 @@ export const MessageBubbleTrigger = (
       className={cn(
         "group/message-bubble-trigger",
         "absolute inset-e-0 top-0 z-10",
-        "pointer-fine:flex hidden h-8 w-16 shrink-0 items-center justify-end overflow-hidden pe-2",
+        "pointer-coarse:flex pointer-fine:flex hidden h-8 w-16 shrink-0 items-center justify-end overflow-hidden pe-2",
         "rounded-se-xl",
         "group-data-[variant=ghost]/message-bubble:rounded-none",
         "ltr:bg-linear-to-tr rtl:bg-linear-to-tl",
         "from-transparent to-(--message-bubble-surface)",
         "pointer-fine:opacity-0",
         "pointer-fine:group-hover/message-bubble:opacity-100",
+        "pointer-coarse:opacity-100",
         "focus-visible:opacity-100",
         "data-[state=open]:opacity-100",
         "group-data-[variant=default]/message-bubble:text-primary-foreground",

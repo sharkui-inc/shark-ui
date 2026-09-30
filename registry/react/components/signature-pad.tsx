@@ -5,19 +5,34 @@ import {
   useSignaturePad as useArkSignaturePad,
   useSignaturePadContext as useArkSignaturePadContext,
 } from "@ark-ui/react/signature-pad";
-import { RotateCcw } from "lucide-react";
+import { RotateCcwIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 
 export const useSignaturePad = useArkSignaturePad;
 export const useSignaturePadContext = useArkSignaturePadContext;
 export const SignaturePadRootProvider = ArkSignaturePad.RootProvider;
 
+export const SignaturePadLabel = (
+  props: React.ComponentProps<typeof ArkSignaturePad.Label>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkSignaturePad.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="signature-pad-label"
+      {...rest}
+    />
+  );
+};
+
 export const SignaturePad = (
   props: React.ComponentProps<typeof ArkSignaturePad.Root>
 ) => {
-  const { className, ...rest } = props;
+  const { children, className, ...rest } = props;
 
   return (
     <ArkSignaturePad.Root
@@ -30,6 +45,7 @@ export const SignaturePad = (
       data-slot="signature-pad"
       {...rest}
     >
+      {children}
       <SignaturePadControl>
         <SignaturePadSegment />
         <SignaturePadClear />
@@ -99,7 +115,7 @@ const SignaturePadClear = (
       {...rest}
     >
       <Button size="icon-md" variant="ghost">
-        <RotateCcw />
+        <RotateCcwIcon />
       </Button>
     </ArkSignaturePad.ClearTrigger>
   );

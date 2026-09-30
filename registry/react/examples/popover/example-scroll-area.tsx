@@ -14,7 +14,7 @@ const Example = () => (
     <PopoverTrigger asChild>
       <Button variant="outline">Open</Button>
     </PopoverTrigger>
-    <PopoverContent className="h-80 w-72">
+    <PopoverContent className="h-80 min-w-72">
       <PopoverHeader title="Scrollable content" />
       <PopoverBody>
         <div className="flex flex-col gap-2">

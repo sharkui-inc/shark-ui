@@ -1,6 +1,7 @@
 import { CreditCardIcon, HardDriveIcon, UserIcon } from "lucide-react";
 import {
   Steps,
+  StepsContent,
   StepsIndicator,
   StepsItem,
   StepsList,
@@ -13,7 +14,7 @@ const Example = () => (
     <StepsList>
       {items.map((item, index) => (
         <StepsItem index={index} key={item.name}>
-          <StepsTrigger>
+          <StepsTrigger aria-label={item.name}>
             <StepsIndicator>
               <item.icon />
             </StepsIndicator>
@@ -22,6 +23,11 @@ const Example = () => (
         </StepsItem>
       ))}
     </StepsList>
+    {items.map((item, index) => (
+      <StepsContent index={index} key={item.name}>
+        {item.name}
+      </StepsContent>
+    ))}
   </Steps>
 );
 

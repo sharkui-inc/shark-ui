@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronLeftIcon, ChevronRight } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -26,7 +26,7 @@ const Example = () => {
       <StepsList>
         {values.steps.map((step) => (
           <StepsItem index={step.index} key={step.index}>
-            <StepsTrigger>
+            <StepsTrigger aria-label={step.label}>
               <StepsIndicator>{step.number}</StepsIndicator>
             </StepsTrigger>
             <StepsSeparator />
@@ -51,7 +51,10 @@ const Example = () => {
         <StepsNext asChild>
           <Button>
             {values.next}
-            <ChevronRight className="rtl:rotate-180" data-icon="inline-end" />
+            <ChevronRightIcon
+              className="rtl:rotate-180"
+              data-icon="inline-end"
+            />
           </Button>
         </StepsNext>
         <StepsPrevious asChild>

@@ -3,17 +3,7 @@ import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "tailwind-variants"];
 
-const cssVars = {
-  dark: {
-    destructive: "var(--color-red-600)",
-  },
-  light: {
-    destructive: "var(--color-red-600)",
-  },
-};
-
 const manifest: RegistryItemType = {
-  cssVars,
   dependencies,
   name: "button",
   registryDependencies: [registryUrl("/r/spinner.json")],

@@ -85,7 +85,7 @@ const TreeNode = (props: NodeProviderProps) => {
                 {node.name}
               </TreeViewBranchItem>
             </ContextMenuTrigger>
-            <ContextMenuContent className="w-40">
+            <ContextMenuContent className="min-w-40">
               <ContextMenuItem value="add-folder">
                 <FolderPlusIcon aria-hidden />
                 Add folder
@@ -123,7 +123,7 @@ const TreeNode = (props: NodeProviderProps) => {
               <TreeViewItem icon={FileIcon}>{node.name}</TreeViewItem>
             </TreeViewContent>
           </ContextMenuTrigger>
-          <ContextMenuContent className="w-40">
+          <ContextMenuContent className="min-w-40">
             <ContextMenuItem value="add-file">
               <PencilIcon aria-hidden />
               Rename

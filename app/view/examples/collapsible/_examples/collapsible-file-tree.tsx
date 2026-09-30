@@ -69,7 +69,7 @@ const CollapsibleFileTree = () => {
         <Collapsible key={fileItem.name}>
           <CollapsibleTrigger asChild>
             <Button
-              className="w-full justify-start transition-none hover:bg-accent hover:text-accent-foreground"
+              className="w-full justify-start transition-none"
               size="sm"
               variant="ghost"
             >

@@ -10,7 +10,7 @@ import { CheckIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import { FieldLabel } from "@/registry/react/components/field";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import { Input, inputItemVariants } from "@/registry/react/components/input";
 import {
   MenuShortcut,
@@ -23,6 +23,7 @@ import {
 
 export const useListbox = useArkListbox;
 export const useListboxContext = useArkListboxContext;
+
 export const ListboxRootProvider = ArkListbox.RootProvider;
 
 export const Listbox: ArkListbox.RootComponent = (props) => {
@@ -45,30 +46,44 @@ export const Listbox: ArkListbox.RootComponent = (props) => {
 export const ListboxLabel = (
   props: React.ComponentProps<typeof ArkListbox.Label>
 ) => {
-  const { children, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
-    <FieldLabel asChild>
-      <ArkListbox.Label data-slot="listbox-label" {...rest}>
-        {children}
-      </ArkListbox.Label>
-    </FieldLabel>
+    <ArkListbox.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="listbox-label"
+      {...rest}
+    />
   );
 };
 
-export const ListboxInput = (props: React.ComponentProps<typeof Input>) => (
-  <ArkListbox.Input asChild data-slot="listbox-input">
-    <Input {...props} />
-  </ArkListbox.Input>
-);
+export const ListboxInput = (props: React.ComponentProps<typeof Input>) => {
+  const { "aria-labelledby": ariaLabelledBy, ...rest } = props;
+  const listbox = useListboxContext();
+  const labelId = listbox.getLabelProps().id;
+  const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
+
+  return (
+    <ArkListbox.Input asChild data-slot="listbox-input">
+      <Input aria-labelledby={labelledBy || undefined} {...rest} />
+    </ArkListbox.Input>
+  );
+};
 
 export const ListboxContent = (
   props: React.ComponentProps<typeof ArkListbox.Content>
 ) => {
-  const { className, children, ...rest } = props;
-
+  const {
+    className,
+    children,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
+    ...rest
+  } = props;
   return (
     <ArkListbox.Content
+      aria-label={ariaLabel ?? "Options"}
+      aria-labelledby={ariaLabelledBy || undefined}
       className={cn(
         "flex min-h-0 w-full min-w-0 flex-col *:shrink-0",
         "p-1.5",

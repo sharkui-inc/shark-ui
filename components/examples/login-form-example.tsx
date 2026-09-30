@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import { AppleIcon } from "@/components/icons/apple";
 import { GoogleIcon } from "@/components/icons/google";
 import {
@@ -45,10 +44,6 @@ export const LoginFormExample = (props: React.ComponentProps<"div">) => {
       window.setTimeout(resolve, 600);
     });
     setOauth(null);
-    toast.success({
-      description: `Continue with ${provider === "google" ? "Google" : "Apple"} is a preview.`,
-      title: "Signed in",
-    });
   };
 
   return (
@@ -91,10 +86,6 @@ export const LoginFormExample = (props: React.ComponentProps<"div">) => {
                 });
                 setIsCreating(false);
                 setOpen(false);
-                toast.success({
-                  description: "Your 7-day trial is ready.",
-                  title: "Account created",
-                });
               }}
             >
               <DialogHeader

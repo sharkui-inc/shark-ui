@@ -30,7 +30,10 @@ const Example = () => {
         onValueChange={(details) => setValue(details.value)}
         value={value}
       >
-        <AutocompleteInput placeholder="Select a fruit..." />
+        <AutocompleteInput
+          aria-label="Select a fruit"
+          placeholder="Select a fruit..."
+        />
         <AutocompleteContent>
           <AutocompleteEmpty />
           <AutocompleteList>

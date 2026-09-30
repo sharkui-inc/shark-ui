@@ -156,6 +156,17 @@ export const FieldContent = (props: React.ComponentProps<typeof ark.div>) => {
   );
 };
 
+export const fieldLabelVariants = tv({
+  base: [
+    "group/field-label peer/field-label",
+    "select-none font-medium text-sm leading-snug",
+    "flex w-fit gap-1",
+    "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-2.5",
+    "has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/8",
+    "group-data-disabled/field:opacity-64",
+  ],
+});
+
 export const FieldLabel = (
   props: React.ComponentProps<typeof ArkField.Label>
 ) => {
@@ -163,15 +174,7 @@ export const FieldLabel = (
 
   return (
     <ArkField.Label
-      className={cn(
-        "group/field-label peer/field-label",
-        "select-none font-medium text-sm leading-snug",
-        "flex w-fit gap-1",
-        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-2.5",
-        "has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/8",
-        "group-data-disabled/field:opacity-64",
-        className
-      )}
+      className={cn(fieldLabelVariants(), className)}
       data-slot="field-label"
       {...rest}
     />

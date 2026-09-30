@@ -110,7 +110,21 @@ const DataTableDemo = () => {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead
+                    aria-hidden={header.isPlaceholder || undefined}
+                    aria-label={
+                      header.column.id === "select"
+                        ? "Select rows"
+                        : header.column.id
+                    }
+                    key={header.id}
+                  >
+                    {header.column.id === "select" ? (
+                      <span className="sr-only">Select rows</span>
+                    ) : null}
+                    {header.column.id === "actions" ? (
+                      <span className="sr-only">Actions</span>
+                    ) : null}
                     {header.isPlaceholder ? null : (
                       <table.FlexRender header={header} />
                     )}
@@ -228,16 +242,19 @@ const SelectAllCheckbox = ({
 }: {
   table: TanStackTable<typeof features, Payment>;
 }) => (
-  <Checkbox
-    aria-label="Select all"
-    checked={
-      table.getIsAllPageRowsSelected() ||
-      (table.getIsSomePageRowsSelected() && "indeterminate")
-    }
-    onCheckedChange={({ checked }) => {
-      table.toggleAllPageRowsSelected(!!checked);
-    }}
-  />
+  <>
+    <span className="sr-only">Select rows</span>
+    <Checkbox
+      aria-label="Select all"
+      checked={
+        table.getIsAllPageRowsSelected() ||
+        (table.getIsSomePageRowsSelected() && "indeterminate")
+      }
+      onCheckedChange={({ checked }) => {
+        table.toggleAllPageRowsSelected(!!checked);
+      }}
+    />
+  </>
 );
 
 const SelectRowCheckbox = ({ row }: { row: Row<typeof features, Payment> }) => (
@@ -267,7 +284,7 @@ const EmailSortHeader = ({
 const PaymentActions = ({ payment }: { payment: Payment }) => (
   <Menu>
     <MenuTrigger asChild>
-      <Button aria-label="Open menu" className="size-8 p-0" variant="ghost">
+      <Button aria-label="Open menu" size="icon-md" variant="ghost">
         <MoreHorizontalIcon aria-hidden />
       </Button>
     </MenuTrigger>

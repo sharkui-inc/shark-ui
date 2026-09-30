@@ -79,12 +79,12 @@ const TreeNode = (props: { node: TreeNodeType; indexPath: number[] }) => {
     <TreeViewNode indexPath={indexPath} node={node}>
       {node.children ? (
         <TreeViewBranch>
+          <TreeViewCheckbox />
           <TreeViewBranchItem
             expandedIcon={FolderOpenIcon}
             icon={FolderIcon}
             showIndicator
           >
-            <TreeViewCheckbox />
             {node.name}
           </TreeViewBranchItem>
           <TreeViewBranchContent>

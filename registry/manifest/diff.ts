@@ -3,15 +3,13 @@ import { registryUrl } from "@/lib/url";
 
 const cssVars = {
   dark: {
-    destructive: "var(--color-red-600)",
     "destructive-foreground": "var(--color-red-400)",
-    success: "var(--color-emerald-500)",
+    success: "var(--color-emerald-600)",
     "success-foreground": "var(--color-emerald-400)",
   },
   light: {
-    destructive: "var(--color-red-600)",
-    "destructive-foreground": "var(--color-red-700)",
-    success: "var(--color-emerald-500)",
+    "destructive-foreground": "var(--color-red-800)",
+    success: "var(--color-emerald-600)",
     "success-foreground": "var(--color-emerald-700)",
   },
 };

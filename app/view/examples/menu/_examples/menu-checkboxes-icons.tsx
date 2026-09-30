@@ -23,7 +23,7 @@ const MenuCheckboxesIcons = () => {
       <MenuTrigger asChild>
         <Button variant="outline">Notifications</Button>
       </MenuTrigger>
-      <MenuContent className="w-48">
+      <MenuContent className="min-w-48">
         <MenuGroup heading="Notification Preferences">
           <MenuCheckboxItem
             checked={notifications.email}

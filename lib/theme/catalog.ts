@@ -109,7 +109,6 @@ export type BaseColorName = (typeof BASE_COLOR_OPTIONS)[number]["value"];
 interface PrimaryTokenMap {
   primary: string;
   "primary-foreground": string;
-  "primary-hover": string;
   ring: string;
   "sidebar-primary": string;
   "sidebar-primary-foreground": string;
@@ -129,7 +128,6 @@ export const primaryTokens = (
 ): PrimaryTokenMap => ({
   primary: `var(--color-${palette}-${shade})`,
   "primary-foreground": `var(--color-${palette}-${foreground})`,
-  "primary-hover": `color-mix(in srgb, var(--color-${palette}-${shade}) 92%, var(--color-${palette}-950))`,
   ring: `var(--color-${palette}-${ringShade})`,
   "sidebar-primary": `var(--color-${palette}-${shade})`,
   "sidebar-primary-foreground": `var(--color-${palette}-${foreground})`,
@@ -220,13 +218,13 @@ export const baseThemeTokens = (palette: string, mode: "light" | "dark") => {
     background: light
       ? `var(--color-${palette}-50)`
       : `color-mix(in srgb, var(--color-${palette}-950) 95%, var(--color-${palette}-50))`,
-    border: `color-mix(in srgb, ${surface} ${light ? 8 : 6}%, var(--background))`,
+    border: `color-mix(in srgb, ${surface} ${light ? 10 : 8}%, var(--background))`,
     card: light
       ? "var(--background)"
       : `color-mix(in srgb, var(--background) 98%, var(--color-${palette}-50))`,
     "card-foreground": foreground,
     foreground,
-    input: `color-mix(in srgb, ${surface} ${light ? 10 : 8}%, var(--background))`,
+    input: `color-mix(in srgb, ${surface} ${light ? 12 : 10}%, var(--background))`,
     muted: `color-mix(in srgb, ${surface} 4%, var(--background))`,
     "muted-foreground": `color-mix(in srgb, var(--color-${palette}-500) 88%, ${surface})`,
     popover: light
@@ -235,11 +233,9 @@ export const baseThemeTokens = (palette: string, mode: "light" | "dark") => {
     "popover-foreground": foreground,
     primary: foreground,
     "primary-foreground": foregroundSurface,
-    "primary-hover": `color-mix(in srgb, ${foreground} 92%, var(--color-${palette}-950))`,
     ring: `var(--color-${palette}-${light ? "950" : "50"})`,
     secondary: `color-mix(in srgb, ${surface} 8%, var(--background))`,
     "secondary-foreground": foreground,
-    "secondary-hover": `color-mix(in srgb, ${surface} 16%, var(--background))`,
     sidebar,
     "sidebar-accent": `color-mix(in srgb, ${surface} 8%, var(--sidebar))`,
     "sidebar-accent-foreground": foreground,
@@ -364,7 +360,6 @@ export const STATUS_LIGHT = {
   "chart-5": "var(--color-rose-600)",
   destructive: "var(--color-red-600)",
   "destructive-foreground": "var(--color-red-800)",
-  "destructive-hover": "var(--color-red-700)",
   info: "var(--color-blue-500)",
   "info-foreground": "var(--color-blue-700)",
   success: "var(--color-emerald-600)",
@@ -381,7 +376,6 @@ export const STATUS_DARK = {
   "chart-5": "var(--color-rose-500)",
   destructive: "var(--color-red-600)",
   "destructive-foreground": "var(--color-red-400)",
-  "destructive-hover": "var(--color-red-700)",
   info: "var(--color-blue-500)",
   "info-foreground": "var(--color-blue-400)",
   success: "var(--color-emerald-600)",

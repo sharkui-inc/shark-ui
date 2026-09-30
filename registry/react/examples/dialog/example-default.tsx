@@ -1,3 +1,6 @@
+"use client";
+
+import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Dialog,
@@ -20,52 +23,58 @@ import {
   NativeSelectOption,
 } from "@/registry/react/components/native-select";
 
-const DialogDemo = () => (
-  <Dialog>
-    <DialogTrigger asChild>
-      <Button variant="outline">Open</Button>
-    </DialogTrigger>
+const DialogDemo = () => {
+  const nameInputRef = React.useRef<HTMLInputElement>(null);
 
-    <DialogContent>
-      <DialogHeader
-        description="Make changes to your project settings."
-        title="Edit project"
-      />
-      <DialogBody>
-        <FieldSet>
-          <FieldGroup>
-            <Field>
-              <FieldLabel>Name</FieldLabel>
-              <Input placeholder="My Project" />
-            </Field>
+  return (
+    <Dialog initialFocusEl={() => nameInputRef.current}>
+      <DialogTrigger asChild>
+        <Button variant="outline">Open</Button>
+      </DialogTrigger>
 
-            <Field>
-              <FieldLabel>Main branch</FieldLabel>
-              <NativeSelect>
-                <NativeSelectOption value="main">main</NativeSelectOption>
-                <NativeSelectOption value="develop">develop</NativeSelectOption>
-                <NativeSelectOption value="feature/123">
-                  feature/123
-                </NativeSelectOption>
-                <NativeSelectOption value="release/1.0.0">
-                  release/1.0.0
-                </NativeSelectOption>
-              </NativeSelect>
-            </Field>
-          </FieldGroup>
-        </FieldSet>
-      </DialogBody>
-      <DialogFooter>
-        <DialogClose asChild>
-          <Button>Save</Button>
-        </DialogClose>
+      <DialogContent>
+        <DialogHeader
+          description="Make changes to your project settings."
+          title="Edit project"
+        />
+        <DialogBody>
+          <FieldSet>
+            <FieldGroup>
+              <Field>
+                <FieldLabel>Name</FieldLabel>
+                <Input placeholder="My Project" ref={nameInputRef} />
+              </Field>
 
-        <DialogClose asChild>
-          <Button variant="outline">Cancel</Button>
-        </DialogClose>
-      </DialogFooter>
-    </DialogContent>
-  </Dialog>
-);
+              <Field>
+                <FieldLabel>Main branch</FieldLabel>
+                <NativeSelect>
+                  <NativeSelectOption value="main">main</NativeSelectOption>
+                  <NativeSelectOption value="develop">
+                    develop
+                  </NativeSelectOption>
+                  <NativeSelectOption value="feature/123">
+                    feature/123
+                  </NativeSelectOption>
+                  <NativeSelectOption value="release/1.0.0">
+                    release/1.0.0
+                  </NativeSelectOption>
+                </NativeSelect>
+              </Field>
+            </FieldGroup>
+          </FieldSet>
+        </DialogBody>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button>Save</Button>
+          </DialogClose>
+
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 export default DialogDemo;

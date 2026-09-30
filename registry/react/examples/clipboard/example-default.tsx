@@ -9,10 +9,10 @@ import {
 const ClipboardDemo = () => (
   <div className="max-w-sm">
     <Clipboard value="https://x.com/vinihvc">
-      <ClipboardInput />
+      <ClipboardInput aria-label="URL to copy" />
 
       <ClipboardTrigger asChild>
-        <Button size="icon-md">
+        <Button aria-label="Copy URL" size="icon-md">
           <ClipboardIndicator />
         </Button>
       </ClipboardTrigger>

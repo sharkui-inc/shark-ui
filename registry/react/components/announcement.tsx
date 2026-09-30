@@ -25,24 +25,16 @@ export const announcementVariants = tv({
 });
 
 interface AnnouncementProps
-  extends React.ComponentProps<typeof ark.div>,
-    VariantProps<typeof announcementVariants> {
-  /**
-   * The ARIA role of the announcement.
-   *
-   * @default "status"
-   */
-  role?: "status" | "alert";
-}
+  extends Omit<React.ComponentProps<typeof ark.div>, "role">,
+    VariantProps<typeof announcementVariants> {}
 
 export const Announcement = (props: AnnouncementProps) => {
-  const { className, role = "status", ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
     <ark.div
       className={cn(announcementVariants(), className)}
       data-slot="announcement"
-      role={role}
       {...rest}
     />
   );

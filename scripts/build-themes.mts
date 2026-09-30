@@ -21,7 +21,6 @@ const THEME_COLOR_SHADES = ["50", "100", "400", "500", "800", "950"] as const;
 const PRIMARY_VAR_KEYS = [
   "primary",
   "primary-foreground",
-  "primary-hover",
   "ring",
   "sidebar-primary",
   "sidebar-primary-foreground",
@@ -37,7 +36,6 @@ const SURFACE_VAR_KEYS = [
   "popover-foreground",
   "secondary",
   "secondary-foreground",
-  "secondary-hover",
   "muted",
   "muted-foreground",
   "accent",

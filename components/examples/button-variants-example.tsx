@@ -1,8 +1,7 @@
 "use client";
 
-import { ArrowUpRight, PlusIcon, Trash2Icon } from "lucide-react";
+import { ArrowUpRightIcon, PlusIcon, Trash2Icon } from "lucide-react";
 import type React from "react";
-import { toast } from "@/components/examples/example-toast";
 import { Button } from "@/registry/react/components/button";
 import { ButtonGroup } from "@/registry/react/components/button-group";
 import {
@@ -60,7 +59,7 @@ export const ButtonVariantsExample = (props: React.ComponentProps<"div">) => (
           <Button>Solid</Button>
         </PopoverTrigger>
 
-        <PopoverContent className="w-80">
+        <PopoverContent className="min-w-80">
           <PopoverHeader
             description="This is a description of the Popover component"
             title="This is a Popover component"
@@ -111,16 +110,7 @@ export const ButtonVariantsExample = (props: React.ComponentProps<"div">) => (
           </DialogBody>
           <DialogFooter>
             <DialogClose asChild>
-              <Button
-                onClick={() =>
-                  toast.success({
-                    description: "Username is saved in this preview.",
-                    title: "Changes saved",
-                  })
-                }
-              >
-                Save changes
-              </Button>
+              <Button>Save changes</Button>
             </DialogClose>
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
@@ -146,21 +136,9 @@ export const ButtonVariantsExample = (props: React.ComponentProps<"div">) => (
           </Button>
         </ClipboardTrigger>
       </Clipboard>
-      <Button
-        onClick={() =>
-          toast.create({
-            description: "Congratulations!",
-            id: "easter-egg",
-            title: "You found the easter egg!",
-            type: "success",
-          })
-        }
-        variant="ghost"
-      >
-        Ghost
-      </Button>
+      <Button variant="ghost">Ghost</Button>
       <Button variant="link">
-        Link <ArrowUpRight aria-hidden />
+        Link <ArrowUpRightIcon aria-hidden />
       </Button>
     </CardContent>
   </Card>

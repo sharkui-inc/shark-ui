@@ -14,27 +14,27 @@ const Example = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-40">
+    <MenuContent className="min-w-40">
       <MenuItem value="profile">
         <UserIcon />
         Profile
-        <MenuShortcut>⌘P</MenuShortcut>
+        <MenuShortcut className="hidden sm:inline-flex">⌘P</MenuShortcut>
       </MenuItem>
       <MenuItem value="settings">
         <SettingsIcon />
         Settings
-        <MenuShortcut>⌘S</MenuShortcut>
+        <MenuShortcut className="hidden sm:inline-flex">⌘S</MenuShortcut>
       </MenuItem>
       <MenuItem value="copy">
         <CopyIcon />
         Copy
-        <MenuShortcut>⌘C</MenuShortcut>
+        <MenuShortcut className="hidden sm:inline-flex">⌘C</MenuShortcut>
       </MenuItem>
       <MenuSeparator />
       <MenuItem value="logout">
         <LogOutIcon />
         Log out
-        <MenuShortcut>⌘Q</MenuShortcut>
+        <MenuShortcut className="hidden sm:inline-flex">⌘Q</MenuShortcut>
       </MenuItem>
     </MenuContent>
   </Menu>

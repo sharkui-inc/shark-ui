@@ -23,10 +23,10 @@ const FILES: Record<string, string> = {
     "test": "vitest"
   }
 }`,
-  "src/app.tsx": `export function App() {
+  "src/app.tsx": `export const App = () => {
   return <form>Contact</form>;
 }`,
-  "src/utils/helpers.ts": `export function isValidEmail(email: string) {
+  "src/utils/helpers.ts": `export const isValidEmail = (email: string) => {
   return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
 }`,
 };

@@ -2,7 +2,7 @@
 
 import { Separator } from "@registry/react/components/separator";
 import {
-  ArrowUpRight,
+  ArrowUpRightIcon,
   MonitorIcon,
   RefreshCwIcon,
   SmartphoneIcon,
@@ -250,7 +250,7 @@ export const CompositionViewer = ({
                   rel="noreferrer"
                   target="_blank"
                 >
-                  <ArrowUpRight aria-hidden className="size-4" />
+                  <ArrowUpRightIcon aria-hidden className="size-4" />
                 </a>
               </Button>
             </div>

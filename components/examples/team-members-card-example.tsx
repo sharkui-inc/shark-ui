@@ -2,7 +2,6 @@
 
 import { createListCollection } from "@ark-ui/react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import {
   Avatar,
   AvatarFallback,
@@ -111,20 +110,12 @@ export const TeamMembersCardExample = (props: React.ComponentProps<"div">) => {
                 className="contents"
                 onSubmit={async (event) => {
                   event.preventDefault();
-                  const form = new FormData(event.currentTarget);
-                  const email = String(form.get("email") ?? "");
                   setIsInviting(true);
                   await new Promise((resolve) => {
                     window.setTimeout(resolve, 600);
                   });
                   setIsInviting(false);
                   setOpen(false);
-                  toast.success({
-                    description: email
-                      ? `Invite sent to ${email}.`
-                      : "Invite sent.",
-                    title: "Invite sent",
-                  });
                 }}
               >
                 <DialogHeader
@@ -190,22 +181,7 @@ export const TeamMembersCardExample = (props: React.ComponentProps<"div">) => {
             </ItemContent>
 
             <ItemActions>
-              <Select
-                collection={collection}
-                defaultValue={[member.role]}
-                onValueChange={({ value }) => {
-                  const role = value.at(0);
-
-                  if (!role) {
-                    return;
-                  }
-
-                  toast.info({
-                    description: `${member.name} is now ${role}.`,
-                    title: "Role updated",
-                  });
-                }}
-              >
+              <Select collection={collection} defaultValue={[member.role]}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select role..." />
                 </SelectTrigger>

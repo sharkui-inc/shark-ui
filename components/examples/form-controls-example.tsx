@@ -2,7 +2,6 @@
 
 import { CrownIcon, FileTextIcon, PencilIcon } from "lucide-react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import {
   Avatar,
   AvatarBadge,
@@ -138,20 +137,7 @@ export const FormControlsExample = (props: React.ComponentProps<"div">) => {
           ) : (
             <Field>
               <FieldLabel>Link</FieldLabel>
-              <Clipboard
-                className="w-full"
-                onStatusChange={({ copied }) => {
-                  if (!copied) {
-                    return;
-                  }
-
-                  toast.success({
-                    description: SHARE_URL,
-                    title: "Link copied",
-                  });
-                }}
-                value={SHARE_URL}
-              >
+              <Clipboard className="w-full" value={SHARE_URL}>
                 <InputGroup>
                   <ClipboardInput
                     asChild
@@ -202,12 +188,6 @@ export const FormControlsExample = (props: React.ComponentProps<"div">) => {
               window.setTimeout(resolve, 600);
             });
             setIsSaving(false);
-            toast.success({
-              description: isInvite
-                ? "Invited people can open this file."
-                : "Anyone with the link can open this file.",
-              title: "Access updated",
-            });
           }}
         >
           Save changes

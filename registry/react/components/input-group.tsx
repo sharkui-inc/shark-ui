@@ -49,18 +49,18 @@ const inpuGroupVariants = tv({
     },
     size: {
       lg: [
-        "h-9",
-        "[--input-group-height:--spacing(9)]",
+        "h-11 md:h-10",
+        "[--input-group-height:--spacing(11)] md:[--input-group-height:--spacing(10)]",
         "px-[calc(--spacing(3.5)-1px)]",
       ],
       md: [
-        "h-8",
-        "[--input-group-height:--spacing(8)]",
+        "h-10 md:h-9",
+        "[--input-group-height:--spacing(10)] md:[--input-group-height:--spacing(9)]",
         "px-[calc(--spacing(3)-1px)]",
       ],
       sm: [
-        "h-7",
-        "[--input-group-height:--spacing(7)]",
+        "h-9 md:h-8",
+        "[--input-group-height:--spacing(9)] md:[--input-group-height:--spacing(8)]",
         "px-[calc(--spacing(2.5)-1px)]",
         "rounded-md",
       ],

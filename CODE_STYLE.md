@@ -20,8 +20,8 @@ Conflict order: explicit user or system instructions → `biome.json` → this f
 - Variants + tokens before restyling; `className` for layout. Prefer `data-slot` / `in-*` / `peer` when extending registry styles.
 - `flex`/`grid` + `gap-*` (not `space-x-*`/`space-y-*`). `size-*` for squares/icons. `truncate` shorthand.
 - Overlays own stacking — no `z-index` on dialogs, menus, popovers, tooltips, etc.
-- Named Lucide icons; size with Tailwind, never numeric `size`. Inside `Button`, omit `className="size-*"` — Button already sizes SVGs via `[&_svg:not([class*='size-'])]:size-4` (and size variants); explicit `size-*` only for intentional overrides. Decorative: `aria-hidden="true"`; keep semantic icons exposed unless equivalent text exists.
-- Logical utils (`ms-*`, `me-*`, `ps-*`, `pe-*`, `start-*`, `end-*`); `slide-*-from-start|end`; inherit `dir` from ambient Ark `LocaleProvider` / ancestor `dir`. Do not import `LocaleProvider` or `useLocale` inside `registry/react/components` (except `locale.tsx`). Physical direction only for explicit LTR, visual coordinates, or non-reading-order geometry — document why.
+- Lucide imports use the `Icon` export (`ArchiveIcon`). Size with Tailwind, never numeric `size`. Inside `Button`, omit `className="size-*"` — Button already sizes SVGs via `[&_svg:not([class*='size-'])]:size-4` (and size variants); explicit `size-*` only for intentional overrides. Decorative: `aria-hidden="true"`; keep semantic icons exposed unless equivalent text exists.
+- Logical utils (`ms-*`, `me-*`, `ps-*`, `pe-*`, `start-*`, `end-*`); `slide-*-from-start|end`; inherit `dir` from ambient Ark `LocaleProvider` / ancestor `dir`. Do not import `LocaleProvider` or `useLocale` inside `registry/react/components` (except `locale.tsx`). Physical direction only for explicit LTR, visual coordinates, or non-reading-order geometry.
 
 ## Motion
 
@@ -71,8 +71,8 @@ className={cn(
 
 Alphas only: `0`, `4`, `8`, `16`, `24`, `32`, `48`, `64`, `80`, `96`, `100` (modifiers, `opacity-*`, shadows, CSS alpha). Carve-out: `color-mix()` recipes, user-entered colors, calculated gesture opacity.
 
-- Surfaces: `muted` = neutral `/4`; `accent` / `secondary` / `sidebar-accent` = `/8`; `secondary-hover` = `/16`. Accent = interactive context, not a second primary.
-- Solid controls: opaque `primary-hover` / `secondary-hover` / `destructive-hover`. No translucent `primary` / `secondary` / destructive `/80` hover fills. Status may use `/8`–`/24`.
+- Surfaces: `muted` = neutral `/4`; `accent` / `secondary` / `sidebar-accent` = `/8`. Accent = interactive context, not a second primary.
+- Solid controls: use translucent `/80` hover fills for primary, secondary, and destructive variants. Status may use `/8`–`/24`.
 - Roles: `/4` elevation; `/8` `/16` feedback/selection; `/24` validation/decoration/outer focus ring; `/32` scrims; `/48` muted surfaces; `/64` supporting content + focus border; `/80` strong translucent; `/96` fixed blur.
 - Text/icons: opaque tokens; placeholders WCAG AA. Disabled: `opacity-64` + disabled state + blocked interaction — never dim still-interactive controls. Transitions: `opacity-0`/`opacity-100` (gesture/animation may use CSS var or `calc()` when documented locally).
 - Translucent only as intentional contextual layer (disabled, reveal, elevation, media, charts, decoration) with validated contrast on the composited background.

@@ -90,6 +90,7 @@ const Example = () => {
                             <FieldContent>
                               <InputGroup>
                                 <InputGroupInput
+                                  aria-label={`Email address ${index + 1}`}
                                   autoComplete="email"
                                   name={subField.name}
                                   onBlur={subField.handleBlur}

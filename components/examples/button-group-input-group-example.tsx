@@ -2,7 +2,6 @@
 
 import { AudioLinesIcon, ImageIcon, PlusIcon, VideoIcon } from "lucide-react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import {
   InputGroup,
   InputGroupAddon,
@@ -35,7 +34,6 @@ export const ButtonGroupInputGroupExample = () => {
               className="size-6 min-w-0 px-0"
               onPressedChange={(pressed) => {
                 setVoice(pressed);
-                toast.info({ title: pressed ? "Voice on" : "Voice off" });
               }}
               pressed={voice}
               size="sm"
@@ -63,31 +61,19 @@ export const ButtonGroupInputGroupExample = () => {
             </InputGroupButton>
           </MenuTrigger>
           <MenuContent>
-            <MenuItem
-              onSelect={() => toast.info({ title: "Upload file" })}
-              value="add-new-item"
-            >
+            <MenuItem value="add-new-item">
               <PlusIcon />
               Upload file
             </MenuItem>
-            <MenuItem
-              onSelect={() => toast.info({ title: "Upload image" })}
-              value="upload-image"
-            >
+            <MenuItem value="upload-image">
               <ImageIcon />
               Upload image
             </MenuItem>
-            <MenuItem
-              onSelect={() => toast.info({ title: "Upload video" })}
-              value="upload-video"
-            >
+            <MenuItem value="upload-video">
               <VideoIcon />
               Upload video
             </MenuItem>
-            <MenuItem
-              onSelect={() => toast.info({ title: "Upload audio" })}
-              value="upload-audio"
-            >
+            <MenuItem value="upload-audio">
               <AudioLinesIcon />
               Upload audio
             </MenuItem>

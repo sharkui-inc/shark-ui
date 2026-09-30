@@ -63,7 +63,7 @@ export const MusicHeader = () => (
             </Avatar>
           </Button>
         </MenuTrigger>
-        <MenuContent className="w-52">
+        <MenuContent className="min-w-52">
           <MenuGroup heading="Mira Vale">
             <MenuItem value="profile">Profile</MenuItem>
             <MenuItem value="followers">Friends activity</MenuItem>

@@ -13,7 +13,7 @@ const Example = () => (
     </DiffHeader>
     <DiffContent>
       <DiffLine line={1023} type="context">
-        {"export function formatResponse(payload: ApiResponse) {"}
+        {"export const formatResponse = (payload: ApiResponse) => {"}
       </DiffLine>
       <DiffLine line={1024} type="delete">
         {"  return JSON.stringify(payload);"}

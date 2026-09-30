@@ -167,6 +167,7 @@ export const CarouselContent = (
 
   return (
     <ArkCarousel.ItemGroup
+      aria-label="Carousel slides"
       className={cn(
         "min-w-0 flex-1",
         "data-[orientation=horizontal]:-my-4 data-[orientation=horizontal]:py-4",
@@ -175,6 +176,7 @@ export const CarouselContent = (
         className
       )}
       data-slot="carousel-group"
+      role="group"
       {...rest}
     />
   );

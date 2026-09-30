@@ -29,7 +29,7 @@ const Example = () => (
           <TimerItem className="text-5xl" type="seconds" />
         </TimerArea>
 
-        <span className="mt-0.5 font-medium text-[10px] text-muted-foreground uppercase tracking-[0.22em]">
+        <span className="mt-0.5 font-medium text-[0.5625rem] text-muted-foreground uppercase tracking-[0.22em]">
           Focus
         </span>
 

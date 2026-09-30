@@ -27,7 +27,7 @@ const CODE = `export const sql = \`
   LIMIT 50 OFFSET $3
 \`;
 
-export function buildQuery(filters: QueryFilters) {
+export const buildQuery = (filters: QueryFilters) => {
   return sql.replace("$1", filters.since).replace("$2", filters.email).replace("$3", String(filters.offset));
 }`;
 

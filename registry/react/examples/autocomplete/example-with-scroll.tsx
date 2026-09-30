@@ -24,7 +24,11 @@ const Example = () => {
       defaultValue={["option-24"]}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <AutocompleteInput placeholder="Search..." showTrigger />
+      <AutocompleteInput
+        aria-label="Search options"
+        placeholder="Search..."
+        showTrigger
+      />
       <AutocompleteContent className="max-h-60">
         <AutocompleteList>
           {collection.items.map((item) => (

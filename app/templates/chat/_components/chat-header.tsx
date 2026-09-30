@@ -50,7 +50,7 @@ const EnvironmentMenu = () => (
         <SlidersHorizontalIcon aria-hidden />
       </Button>
     </MenuTrigger>
-    <MenuContent className="w-80">
+    <MenuContent className="min-w-80">
       <MenuGroup heading="Environment">
         <MenuItem value="changes">
           <GitBranchIcon aria-hidden />

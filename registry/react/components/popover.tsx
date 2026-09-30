@@ -82,11 +82,11 @@ export const PopoverContent = (props: PopoverContentProps) => {
           className={cn(
             "z-[calc(50+var(--layer-index,0))]",
             "[--space:--spacing(4)]",
-            "w-auto min-w-32",
+            "w-auto min-w-40",
             "flex flex-col",
             "bg-popover",
             "text-popover-foreground",
-            "rounded-xl border shadow-lg/4",
+            "rounded-[calc(var(--radius)*1.5)] border shadow-lg/4",
             "outline-hidden",
             "origin-(--transform-origin)",
             "duration-150 ease-out",
@@ -106,7 +106,7 @@ export const PopoverContent = (props: PopoverContentProps) => {
             <PopoverClose asChild>
               <Button
                 aria-label="Close"
-                className="absolute inset-e-2 top-2 opacity-64 hover:opacity-100"
+                className="absolute inset-e-2 top-2 opacity-64 pointer-coarse:after:absolute pointer-coarse:after:size-11 hover:opacity-100"
                 size="icon-sm"
                 variant="ghost"
               >
@@ -212,7 +212,7 @@ export const PopoverFooter = (props: React.ComponentProps<typeof ark.div>) => {
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
         "px-(--space) py-4",
         "bg-muted/64",
-        "rounded-b-[max(0px,calc(var(--radius-xl)-1px))] border-t",
+        "rounded-b-[max(0px,calc(var(--radius)*1.5-1px))] border-t",
         className
       )}
       data-slot="popover-footer"

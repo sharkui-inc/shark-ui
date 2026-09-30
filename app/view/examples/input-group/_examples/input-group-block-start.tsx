@@ -18,7 +18,7 @@ const InputGroupBlockStart = () => (
   <FieldGroup className="w-full max-w-sm">
     <Field>
       <FieldLabel>Input</FieldLabel>
-      <InputGroup className="h-auto">
+      <InputGroup className="h-auto md:h-auto">
         <InputGroupInput placeholder="Enter your name" />
         <InputGroupAddon align="block-start">
           <InputGroupText>Full Name</InputGroupText>

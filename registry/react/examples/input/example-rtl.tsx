@@ -7,7 +7,13 @@ const Example = () => {
   const { locale } = usePreviewLocale();
   const { values } = translations[locale];
 
-  return <Input className="max-w-64" placeholder={values.placeholder} />;
+  return (
+    <Input
+      aria-label={values.placeholder}
+      className="max-w-64"
+      placeholder={values.placeholder}
+    />
+  );
 };
 
 const translations = {

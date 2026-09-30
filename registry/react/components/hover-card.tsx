@@ -65,7 +65,7 @@ export const HoverCardContent = (props: HoverCardContentProps) => {
         <ArkHoverCard.Content
           className={cn(
             "z-[calc(50+var(--layer-index,0))]",
-            "w-64",
+            "min-w-64",
             "p-4",
             "bg-popover",
             "text-popover-foreground",

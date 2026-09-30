@@ -10,6 +10,7 @@ const Example = () => {
   return (
     <Field className="w-full max-w-64">
       <PasswordInput
+        aria-label="Password"
         onChange={(event) => setPassword(event.target.value)}
         placeholder="Enter password"
         value={password}

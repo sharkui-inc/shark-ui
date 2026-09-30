@@ -1,3 +1,5 @@
+// biome-ignore-all lint/a11y/useSemanticElements: The horizontal scroll viewport is a labeled group, not a landmark.
+// biome-ignore-all lint/a11y/noNoninteractiveTabindex: Keyboard access is required to scroll the playlist strip.
 import { cn } from "@/lib/utils";
 import {
   Avatar,
@@ -127,8 +129,6 @@ export const DemoAppContent = (props: DemoAppContentProps) => {
     <div
       className={cn(
         "relative min-h-full bg-background text-foreground",
-        // Recess the fake app so Bottom Navigation reads first.
-        "opacity-72",
         className
       )}
     >
@@ -141,7 +141,7 @@ export const DemoAppContent = (props: DemoAppContentProps) => {
           <p className="font-heading font-semibold text-base leading-tight">
             {labels.greeting}
           </p>
-          <p className="truncate text-muted-foreground text-xs">
+          <p className="truncate text-neutral-600 text-xs dark:text-neutral-300">
             {labels.name}
           </p>
         </div>
@@ -158,10 +158,15 @@ export const DemoAppContent = (props: DemoAppContentProps) => {
       </header>
 
       <section className="pb-4">
-        <p className="mb-2 px-4 text-muted-foreground text-xs">
+        <p className="mb-2 px-4 text-neutral-600 text-xs dark:text-neutral-300">
           {labels.jumpBackIn}
         </p>
-        <div className="scrollbar-none flex gap-2.5 overflow-x-auto px-4">
+        <section
+          aria-label="Playlists"
+          className="scrollbar-none flex gap-2.5 overflow-x-auto px-4 focus-visible:outline-2 focus-visible:outline-ring"
+          role="group"
+          tabIndex={0}
+        >
           {labels.playlists.map((playlist) => (
             <div
               className="flex w-14 shrink-0 flex-col gap-1.5"
@@ -181,11 +186,11 @@ export const DemoAppContent = (props: DemoAppContentProps) => {
               </span>
             </div>
           ))}
-        </div>
+        </section>
       </section>
 
       <section className="px-1 pb-2">
-        <p className="mb-0.5 px-3 text-muted-foreground text-xs">
+        <p className="mb-0.5 px-3 text-neutral-600 text-xs dark:text-neutral-300">
           {labels.recentlyPlayed}
         </p>
         <ItemGroup className="gap-0">

@@ -89,6 +89,7 @@ const Example = () => {
                             <InputGroup>
                               <InputGroupInput
                                 {...field.props}
+                                aria-label={`Email address ${index + 1}`}
                                 autoComplete="email"
                                 onChange={(e) => field.onChange(e.target.value)}
                                 placeholder="name@example.com"

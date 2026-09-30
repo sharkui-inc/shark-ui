@@ -3,12 +3,12 @@ allowBuilds:
   node-pty: true
   sharp: true
 minimumReleaseAgeExclude:
-  - '@ai-sdk/gateway@4.0.76 || 4.0.89 || 4.0.92'
-  - '@ai-sdk/mcp@2.0.46 || 2.0.58'
-  - '@ai-sdk/provider-utils@5.0.37 || 5.0.47'
-  - '@ai-sdk/provider@4.0.11'
-  - '@ai-sdk/react@4.0.98 || 4.0.114 || 4.0.117'
-  - ai@7.0.95 || 7.0.111 || 7.0.114
+  - '@ai-sdk/gateway@4.0.76 || 4.0.89 || 4.0.92 || 4.0.100'
+  - '@ai-sdk/mcp@2.0.46 || 2.0.58 || 2.0.62'
+  - '@ai-sdk/provider-utils@5.0.37 || 5.0.47 || 5.0.51'
+  - '@ai-sdk/provider@4.0.11 || 4.0.19'
+  - '@ai-sdk/react@4.0.98 || 4.0.114 || 4.0.117 || 4.0.125'
+  - ai@7.0.95 || 7.0.111 || 7.0.114 || 7.0.122
   - ultracite@7.11.1
   - valibot@1.5.0
   - '@ark-ui/react@5.39.2'

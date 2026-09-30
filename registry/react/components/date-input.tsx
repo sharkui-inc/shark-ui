@@ -8,7 +8,7 @@ import {
 import { XIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { FieldLabel } from "@/registry/react/components/field";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import type { InputProps } from "@/registry/react/components/input";
 import {
   InputGroup,
@@ -100,14 +100,14 @@ export const DateInput = (props: DateInputProps) => {
 export const DateInputLabel = (
   props: React.ComponentProps<typeof ArkDateInput.Label>
 ) => {
-  const { children, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
-    <FieldLabel asChild>
-      <ArkDateInput.Label data-slot="date-input-label" {...rest}>
-        {children}
-      </ArkDateInput.Label>
-    </FieldLabel>
+    <ArkDateInput.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="date-input-label"
+      {...rest}
+    />
   );
 };
 
@@ -181,6 +181,7 @@ const DateInputSegment = (
   return (
     <ArkDateInput.Segment
       className={cn(
+        "not-data-[type=literal]:inline-flex not-data-[type=literal]:min-h-6 not-data-[type=literal]:min-w-6 not-data-[type=literal]:items-center not-data-[type=literal]:justify-center",
         "tabular-nums",
         "rounded-sm border-0 shadow-none ring-0",
         "not-data-[type=literal]:px-0.5",

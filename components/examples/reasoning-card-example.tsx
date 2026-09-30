@@ -2,7 +2,6 @@
 
 import { PaperclipIcon } from "lucide-react";
 import type React from "react";
-import { toast } from "@/components/examples/example-toast";
 import {
   Card,
   CardContent,
@@ -89,17 +88,7 @@ export const ReasoningCardExample = (props: React.ComponentProps<"div">) => {
           />
           <PromptInputFooter>
             <PromptInputTools>
-              <PromptInputButton
-                aria-label="Attach file"
-                onClick={() =>
-                  toast.info({
-                    description:
-                      "File attachments are not wired in this preview.",
-                    title: "Attach file",
-                  })
-                }
-                size="icon-xs"
-              >
+              <PromptInputButton aria-label="Attach file" size="icon-xs">
                 <PaperclipIcon aria-hidden />
               </PromptInputButton>
             </PromptInputTools>

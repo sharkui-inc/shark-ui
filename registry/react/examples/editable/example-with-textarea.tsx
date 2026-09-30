@@ -1,4 +1,4 @@
-import { CheckIcon, X } from "lucide-react";
+import { CheckIcon, XIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -44,7 +44,7 @@ const Example = () => (
             <EditableControl>
               <EditableCancelTrigger asChild>
                 <Button aria-label="Cancel" size="icon-md" variant="outline">
-                  <X />
+                  <XIcon />
                 </Button>
               </EditableCancelTrigger>
               <EditableSubmitTrigger asChild>

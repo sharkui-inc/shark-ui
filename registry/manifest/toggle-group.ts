@@ -6,7 +6,10 @@ const dependencies = ["@ark-ui/react", "tailwind-variants"];
 const manifest: RegistryItemType = {
   dependencies,
   name: "toggle-group",
-  registryDependencies: [registryUrl("/r/toggle.json")],
+  registryDependencies: [
+    registryUrl("/r/field.json"),
+    registryUrl("/r/toggle.json"),
+  ],
   type: "registry:ui",
 };
 

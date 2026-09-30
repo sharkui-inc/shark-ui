@@ -13,7 +13,7 @@ import {
 const Example = () => (
   <InputGroup className="max-w-64">
     <NumberInput aria-label="Enter the amount" defaultValue="10">
-      <NumberInputInput />
+      <NumberInputInput aria-label="Enter the amount" />
     </NumberInput>
     <InputGroupAddon>
       <InputGroupText>€</InputGroupText>

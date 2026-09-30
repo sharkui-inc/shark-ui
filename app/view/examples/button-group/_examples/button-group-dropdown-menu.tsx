@@ -30,7 +30,7 @@ const ButtonGroupDropdownMenuExample = () => (
           <ChevronDownIcon />
         </Button>
       </MenuTrigger>
-      <MenuContent className="w-44">
+      <MenuContent className="min-w-44">
         <MenuGroup>
           <MenuItem value="mute-conversation">
             <VolumeOffIcon />

@@ -47,6 +47,7 @@ const Example = () => {
         <div className="flex shrink-0 items-center gap-2">
           <div className="text-muted-foreground text-sm">Items per page:</div>
           <NativeSelect
+            aria-label="Items per page"
             onChange={(e) => setPageSize(Number(e.target.value))}
             value={pageSize}
           >

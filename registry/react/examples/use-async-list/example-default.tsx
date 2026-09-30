@@ -55,7 +55,7 @@ const UseAsyncListDemo = () => {
         {!!list.loading && <Spinner data-icon="inline-start" />}
         {list.loading ? "Loading" : "Reload quotes"}
       </Button>
-      <ItemGroup aria-busy={list.loading} className="gap-2">
+      <ItemGroup aria-busy={list.loading} className="gap-2" role="list">
         {list.loading
           ? skeletons.map((key) => (
               <Item

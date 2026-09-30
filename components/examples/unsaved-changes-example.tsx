@@ -2,7 +2,6 @@
 
 import { FileTextIcon } from "lucide-react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -79,7 +78,6 @@ export const UnsavedChangesExample = (props: React.ComponentProps<"div">) => {
                 <AlertDialogAction
                   onClick={() => {
                     setStatus("discarded");
-                    toast.info({ title: "Changes discarded" });
                   }}
                   variant="destructive"
                 >
@@ -99,7 +97,6 @@ export const UnsavedChangesExample = (props: React.ComponentProps<"div">) => {
             });
             setIsSaving(false);
             setStatus("saved");
-            toast.success({ title: "Changes saved" });
           }}
         >
           Save

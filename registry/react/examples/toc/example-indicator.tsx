@@ -27,14 +27,16 @@ const Example = () => {
       </TocContent>
       <TocNav>
         <TocTitle>On this page</TocTitle>
-        <TocList>
+        <div className="relative">
           <TocIndicator />
-          {items.map((item) => (
-            <TocItem item={item} key={item.value}>
-              <TocLink href={`#${item.value}`}>{item.label}</TocLink>
-            </TocItem>
-          ))}
-        </TocList>
+          <TocList>
+            {items.map((item) => (
+              <TocItem item={item} key={item.value}>
+                <TocLink href={`#${item.value}`}>{item.label}</TocLink>
+              </TocItem>
+            ))}
+          </TocList>
+        </div>
       </TocNav>
     </Toc>
   );

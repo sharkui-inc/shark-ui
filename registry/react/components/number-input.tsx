@@ -78,7 +78,7 @@ export const NumberInputDecrement = (
       asChild
       className={cn(
         "relative",
-        "h-8 in-data-[size=lg]:h-9 in-data-[size=sm]:h-7",
+        "h-10 in-data-[size=lg]:h-11 in-data-[size=sm]:h-9 md:h-9 md:in-data-[size=lg]:h-10 md:in-data-[size=sm]:h-8",
         "flex shrink-0",
         "text-foreground",
         "rounded-none rounded-s-[calc(var(--radius)+1px)]",
@@ -110,7 +110,7 @@ export const NumberInputIncrement = (
       asChild
       className={cn(
         "relative",
-        "h-8 in-data-[size=lg]:h-9 in-data-[size=sm]:h-7",
+        "h-10 in-data-[size=lg]:h-11 in-data-[size=sm]:h-9 md:h-9 md:in-data-[size=lg]:h-10 md:in-data-[size=sm]:h-8",
         "flex shrink-0",
         "text-foreground",
         "rounded-none rounded-e-[calc(var(--radius)+1px)]",
@@ -140,7 +140,7 @@ export const NumberInputInput = (props: React.ComponentProps<typeof Input>) => {
       <Input
         className={cn(
           "grow",
-          "h-8 in-data-[size=lg]:h-9 in-data-[size=sm]:h-7",
+          "h-10 in-data-[size=lg]:h-11 in-data-[size=sm]:h-9 md:h-9 md:in-data-[size=lg]:h-10 md:in-data-[size=sm]:h-8",
           "tabular-nums",
           "border-0 shadow-none ring-0",
           "focus-visible:border-0 focus-visible:ring-0 aria-invalid:ring-0 data-invalid:ring-0",

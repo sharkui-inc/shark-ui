@@ -2,7 +2,6 @@
 
 import { BadgeCheckIcon, MailIcon } from "lucide-react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -105,10 +104,6 @@ export const SocialProfileExample = (props: React.ComponentProps<"div">) => {
                   });
                   setIsSending(false);
                   setMessageOpen(false);
-                  toast.success({
-                    description: "Your note was sent to @shark_ui.",
-                    title: "Message sent",
-                  });
                 }}
               >
                 <DialogHeader

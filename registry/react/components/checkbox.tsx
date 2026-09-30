@@ -58,7 +58,6 @@ export const Checkbox = (
     <ArkCheckbox.Root
       className={cn(checkboxVariants(), className)}
       data-slot="checkbox"
-      role="checkbox"
       {...rest}
     >
       <ArkCheckbox.Control data-slot="checkbox-control">

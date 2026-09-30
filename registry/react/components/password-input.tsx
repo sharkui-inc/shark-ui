@@ -69,6 +69,7 @@ export const PasswordInput = (props: PasswordInputProps) => {
     onChange,
     onBlur,
     onFocus,
+    "aria-label": ariaLabel,
     autoFocus,
     maxLength,
     minLength,
@@ -97,6 +98,7 @@ export const PasswordInput = (props: PasswordInputProps) => {
         >
           <ArkPasswordInput.Input asChild data-slot="password-input-input">
             <InputGroupInput
+              aria-label={ariaLabel}
               autoFocus={autoFocus}
               defaultValue={defaultValue}
               inputMode={inputMode}

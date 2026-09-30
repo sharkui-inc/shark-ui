@@ -20,7 +20,7 @@ const Example = () => {
 
   return (
     <Select collection={collection}>
-      <SelectTrigger className="w-48">
+      <SelectTrigger className="min-w-48">
         <SelectValue placeholder={values.placeholder} />
       </SelectTrigger>
 

@@ -2,7 +2,6 @@
 
 import { EllipsisIcon } from "lucide-react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import { cn } from "@/lib/utils";
 import {
   AlertDialog,
@@ -72,17 +71,7 @@ export const CommerceTableExample = (props: React.ComponentProps<"div">) => {
                       </Button>
                     </MenuTrigger>
                     <MenuContent>
-                      <MenuItem
-                        onSelect={() =>
-                          toast.info({
-                            description: row.name,
-                            title: "Customer",
-                          })
-                        }
-                        value="view"
-                      >
-                        View
-                      </MenuItem>
+                      <MenuItem value="view">View</MenuItem>
                       <MenuItem onSelect={() => setRefund(row)} value="refund">
                         Refund
                       </MenuItem>
@@ -117,10 +106,6 @@ export const CommerceTableExample = (props: React.ComponentProps<"div">) => {
             <AlertDialogClose asChild>
               <AlertDialogAction
                 onClick={() => {
-                  toast.success({
-                    description: refund?.name,
-                    title: "Refund issued",
-                  });
                   setRefund(null);
                 }}
                 variant="destructive"

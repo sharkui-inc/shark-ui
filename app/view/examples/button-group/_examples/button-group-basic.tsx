@@ -50,7 +50,7 @@ const ButtonGroupBasic = () => {
               <MoreHorizontalIcon />
             </Button>
           </MenuTrigger>
-          <MenuContent className="w-40">
+          <MenuContent className="min-w-40">
             <MenuGroup>
               <MenuItem value="mark-as-read">
                 <MailCheckIcon />

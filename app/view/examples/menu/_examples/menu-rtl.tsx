@@ -30,7 +30,7 @@ const MenuRtl = () => {
       <MenuTrigger asChild>
         <Button variant="outline">افتح القائمة</Button>
       </MenuTrigger>
-      <MenuContent className="w-36">
+      <MenuContent>
         <MenuGroup>
           <MenuSub>
             <MenuSubTrigger>الحساب</MenuSubTrigger>

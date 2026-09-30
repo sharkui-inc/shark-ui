@@ -34,7 +34,7 @@ export const ModeSwitcher = () => {
           className={cn("group", "hitbox-2")}
           data-mode={resolvedTheme ?? "light"}
           onClick={toggleTheme}
-          size="icon-md"
+          size="icon-sm"
           suppressHydrationWarning
           variant="ghost"
         >

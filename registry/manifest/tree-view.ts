@@ -6,7 +6,10 @@ const dependencies = ["@ark-ui/react", "lucide-react", "tailwind-variants"];
 const manifest: RegistryItemType = {
   dependencies,
   name: "tree-view",
-  registryDependencies: [registryUrl("/r/checkbox.json")],
+  registryDependencies: [
+    registryUrl("/r/checkbox.json"),
+    registryUrl("/r/field.json"),
+  ],
   type: "registry:ui",
 };
 

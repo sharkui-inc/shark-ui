@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 
 const MailTemplatePage = () => (
   <div className="absolute inset-0 overflow-hidden">
+    <h1 className="sr-only">Mail preview</h1>
     <MailLayout
       content={<MailPane />}
       list={<MailList />}

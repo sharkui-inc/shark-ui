@@ -83,7 +83,7 @@ export const ChatComposer = ({
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-3">
       <div className="w-full rounded-2xl bg-muted/48 p-0.5">
-        <Announcement className="w-full rounded-t-[15px] border-0 bg-transparent px-3 py-2 shadow-none">
+        <Announcement className="w-full rounded-t-2xl border-0 bg-transparent px-3 py-2 shadow-none">
           <CrownIcon aria-hidden className="text-muted-foreground" />
           <AnnouncementTitle className="text-muted-foreground text-xs">
             Access premium models & features
@@ -91,14 +91,14 @@ export const ChatComposer = ({
           <span aria-hidden className="text-muted-foreground/64 text-xs">
             ·
           </span>
-          <Button className="h-auto px-0 text-xs" variant="link">
+          <Button className="h-auto px-0 text-xs md:h-auto" variant="link">
             Upgrade
           </Button>
         </Announcement>
 
         <FileUpload accept="image/*,.pdf,.txt" className="gap-0" maxFiles={4}>
           <PromptInput
-            className="rounded-[15px] border-0 bg-card shadow-xs/4"
+            className="rounded-2xl border-0 bg-card shadow-xs/4"
             onStop={() => setStatus("ready")}
             onSubmit={({ text }) => {
               onSend(text);
@@ -138,7 +138,7 @@ export const ChatComposer = ({
                     size="xs"
                     variant="ghost"
                   />
-                  <ComboboxContent className="max-h-72 w-52">
+                  <ComboboxContent className="max-h-72 min-w-52">
                     <ComboboxSearch />
                     <ComboboxList>
                       <ComboboxEmpty>No models found.</ComboboxEmpty>

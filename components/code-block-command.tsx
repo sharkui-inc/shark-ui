@@ -93,7 +93,7 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
         <div className="flex items-center gap-2 border-border/64 border-b px-4 py-1 font-mono">
           <TerminalIcon aria-hidden className="size-4" />
 
-          <TabsList className="bg-transparent">
+          <TabsList className="bg-transparent p-0 **:data-[slot=tab-indicator]:rounded-lg **:data-[slot=tab-indicator]:bg-accent **:data-[slot=tab-indicator]:shadow-none **:data-[slot=tab-indicator]:dark:bg-accent">
             {packageManagers.map((manager) => (
               <TabsTrigger className="rounded-lg" key={manager} value={manager}>
                 {manager}

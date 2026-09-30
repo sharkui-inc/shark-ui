@@ -1,6 +1,12 @@
 "use client";
 
-import { Archive, FolderInput, Reply, Send, Trash2 } from "lucide-react";
+import {
+  ArchiveIcon,
+  FolderInputIcon,
+  ReplyIcon,
+  SendIcon,
+  Trash2Icon,
+} from "lucide-react";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import {
   ContextMenu,
@@ -20,29 +26,35 @@ const Example = () => {
   const { values } = translations[locale];
   return (
     <ContextMenu>
-      <ContextMenuTrigger className="flex aspect-video items-center justify-center rounded-2xl border border-dashed p-20 text-sm">
+      <ContextMenuTrigger className="flex aspect-video pointer-coarse:select-none items-center justify-center rounded-2xl border border-dashed p-20 text-sm">
         {values.hint}
       </ContextMenuTrigger>
-      <ContextMenuContent className="w-40">
+      <ContextMenuContent className="min-w-40">
         <ContextMenuGroup>
           <ContextMenuItem value="forward">
-            <Send />
+            <SendIcon />
             {values.forward}
-            <ContextMenuShortcut>{values.shortcutForward}</ContextMenuShortcut>
+            <ContextMenuShortcut className="hidden sm:inline-flex">
+              {values.shortcutForward}
+            </ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuItem value="reply">
-            <Reply />
+            <ReplyIcon />
             {values.reply}
-            <ContextMenuShortcut>{values.shortcutReply}</ContextMenuShortcut>
+            <ContextMenuShortcut className="hidden sm:inline-flex">
+              {values.shortcutReply}
+            </ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuItem value="archive">
-            <Archive />
+            <ArchiveIcon />
             {values.archive}
-            <ContextMenuShortcut>{values.shortcutArchive}</ContextMenuShortcut>
+            <ContextMenuShortcut className="hidden sm:inline-flex">
+              {values.shortcutArchive}
+            </ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuSub>
             <ContextMenuSubTrigger>
-              <FolderInput />
+              <FolderInputIcon />
               {values.moveTo}
             </ContextMenuSubTrigger>
             <ContextMenuSubContent>
@@ -52,9 +64,11 @@ const Example = () => {
           </ContextMenuSub>
           <ContextMenuSeparator />
           <ContextMenuItem value="delete" variant="destructive">
-            <Trash2 />
+            <Trash2Icon />
             {values.delete}
-            <ContextMenuShortcut>{values.shortcutDelete}</ContextMenuShortcut>
+            <ContextMenuShortcut className="hidden sm:inline-flex">
+              {values.shortcutDelete}
+            </ContextMenuShortcut>
           </ContextMenuItem>
         </ContextMenuGroup>
       </ContextMenuContent>

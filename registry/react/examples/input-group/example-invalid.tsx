@@ -7,7 +7,12 @@ import {
 
 const Example = () => (
   <InputGroup className="max-w-64">
-    <InputGroupInput aria-invalid className="pl-1" placeholder="example.com" />
+    <InputGroupInput
+      aria-invalid
+      aria-label="Website domain"
+      className="pl-1"
+      placeholder="example.com"
+    />
     <InputGroupAddon>
       <InputGroupText>https://</InputGroupText>
     </InputGroupAddon>

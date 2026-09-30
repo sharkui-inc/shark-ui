@@ -40,6 +40,7 @@ export const HeaderBrand = (
         className={cn(
           "hitbox-2",
           "flex gap-2",
+          "-m-1 p-1",
           "font-bold text-base",
           "rounded-md border border-transparent",
           "cursor-pointer",

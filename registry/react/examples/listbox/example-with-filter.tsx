@@ -26,6 +26,7 @@ const Example = () => {
   return (
     <Listbox className="max-w-64" collection={collection}>
       <ListboxInput
+        aria-label="Search countries"
         onChange={(e) => filter(e.target.value)}
         placeholder="Search..."
       />

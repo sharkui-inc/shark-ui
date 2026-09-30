@@ -75,38 +75,35 @@ export const ComponentPreviewFrame = (props: ComponentPreviewFrameProps) => {
         <TabsTrigger value="code">Code</TabsTrigger>
       </TabsList>
 
-      <div className="group/stage relative overflow-hidden rounded-2xl border">
-        <div
-          className={cn(
-            "relative w-full",
-            "flex flex-col bg-code",
-            "group-has-[[data-slot=tab-code]:not([hidden])]/stage:pointer-events-none",
-            "group-has-[[data-slot=tab-code]:not([hidden])]/stage:invisible"
-          )}
-          data-slot="preview"
-        >
-          {previewHeader}
+      <div className="group/stage relative min-h-[450px] overflow-hidden rounded-2xl border">
+        <TabsContent className="m-0" data-slot="tab-preview" value="preview">
           <div
-            className={cn(
-              "relative",
-              autoHeight ? "min-h-[450px]" : "h-[450px] min-h-0",
-              "flex items-center justify-center",
-              autoHeight ? "px-4 py-8 sm:px-10 sm:py-16" : "p-4 sm:p-10",
-              "overflow-y-auto"
-            )}
-            data-slot="preview-content"
+            className={cn("relative w-full", "flex flex-col bg-code")}
+            data-slot="preview"
           >
-            {showBorders ? (
-              <>
-                <div className="absolute inset-x-0 top-4 border border-border/64 border-dashed max-sm:hidden sm:top-10" />
-                <div className="absolute inset-x-0 bottom-4 border border-border/64 border-dashed max-sm:hidden sm:bottom-10" />
-                <div className="absolute inset-s-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-s-10" />
-                <div className="absolute inset-e-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-e-10" />
-              </>
-            ) : null}
-            {preview}
+            {previewHeader}
+            <div
+              className={cn(
+                "relative",
+                autoHeight ? "min-h-[450px]" : "h-[450px] min-h-0",
+                "flex items-center justify-center",
+                autoHeight ? "px-4 py-8 sm:px-10 sm:py-16" : "p-4 sm:p-10",
+                "overflow-y-auto"
+              )}
+              data-slot="preview-content"
+            >
+              {showBorders ? (
+                <>
+                  <div className="absolute inset-x-0 top-4 border border-border/64 border-dashed max-sm:hidden sm:top-10" />
+                  <div className="absolute inset-x-0 bottom-4 border border-border/64 border-dashed max-sm:hidden sm:bottom-10" />
+                  <div className="absolute inset-s-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-s-10" />
+                  <div className="absolute inset-e-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-e-10" />
+                </>
+              ) : null}
+              {preview}
+            </div>
           </div>
-        </div>
+        </TabsContent>
         <TabsContent
           className="absolute inset-0"
           data-slot="tab-code"

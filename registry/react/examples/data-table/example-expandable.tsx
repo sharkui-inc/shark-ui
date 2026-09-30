@@ -124,7 +124,6 @@ const ExpandToggle = ({ row }: { row: Row<typeof features, Order> }) => (
   <Button
     aria-expanded={row.getIsExpanded()}
     aria-label={row.getIsExpanded() ? "Collapse order" : "Expand order"}
-    className="size-8"
     onClick={() => row.toggleExpanded()}
     size="icon-sm"
     variant="ghost"

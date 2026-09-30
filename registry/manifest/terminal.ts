@@ -9,7 +9,7 @@ const cssVars = {
     "warning-foreground": "var(--color-amber-400)",
   },
   light: {
-    "destructive-foreground": "var(--color-red-700)",
+    "destructive-foreground": "var(--color-red-800)",
     "info-foreground": "var(--color-blue-700)",
     "success-foreground": "var(--color-emerald-700)",
     "warning-foreground": "var(--color-amber-700)",

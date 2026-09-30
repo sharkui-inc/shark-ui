@@ -63,7 +63,7 @@ export const ThemeSelectorField = <T extends CollectionItem>(
         onValueChange={onValueChange}
         value={value}
       >
-        <SelectTrigger className="w-full">
+        <SelectTrigger className="w-full" size="sm">
           <span className="flex min-w-0 flex-1 items-center gap-2">
             {trigger}
             <SelectValue placeholder={placeholder} />

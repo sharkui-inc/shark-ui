@@ -96,7 +96,7 @@ const columns = columnHelper.columns([
   }),
 ]);
 
-export function PaymentsTable({ data }: { data: Payment[] }) {
+export const PaymentsTable = ({ data }: { data: Payment[] }) => {
   return (
     <DataTable
       caption="Recent payments"

@@ -30,27 +30,23 @@ npx shadcn@latest add @shark/status
 
 <RegistryDependencies dependencies={manifest.dependencies} />
 
-
 <Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
 @theme inline {
-  --color-destructive: var(--destructive);
   --color-info: var(--info);
   --color-success: var(--success);
   --color-warning: var(--warning);
 }
 
 :root {
-  --destructive: var(--color-red-600);
   --info: var(--color-blue-500);
   --success: var(--color-emerald-600);
   --warning: var(--color-amber-500);
 }
 
 .dark {
-  --destructive: var(--color-red-600);
   --info: var(--color-blue-500);
   --success: var(--color-emerald-600);
   --warning: var(--color-amber-500);

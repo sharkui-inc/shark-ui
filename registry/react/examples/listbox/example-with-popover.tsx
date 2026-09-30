@@ -2,7 +2,7 @@
 
 import { useListCollection } from "@ark-ui/react/collection";
 import { useFilter } from "@ark-ui/react/locale";
-import { ChevronsUpDown } from "lucide-react";
+import { ChevronsUpDownIcon } from "lucide-react";
 import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -47,12 +47,13 @@ const Example = () => {
         <PopoverTrigger asChild>
           <Button className="justify-between" variant="outline">
             <ListboxValueText placeholder="Select framework" />
-            <ChevronsUpDown className="opacity-64" />
+            <ChevronsUpDownIcon className="opacity-64" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="min-w-64 gap-2">
           <ListboxContent>
             <ListboxInput
+              aria-label="Search frameworks"
               onChange={(e) => filter(e.target.value)}
               placeholder="Search..."
             />

@@ -12,7 +12,7 @@ const Example = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-40">
+    <MenuContent className="min-w-40">
       <MenuItem value="new">New file</MenuItem>
       <MenuItem value="open">Open file</MenuItem>
       <MenuItem value="save">Save</MenuItem>

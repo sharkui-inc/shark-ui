@@ -195,7 +195,7 @@ export const HeaderCustomize = () => {
             <Button
               aria-label="Customize"
               className="hitbox-2"
-              size="icon-md"
+              size="icon-sm"
               variant="ghost"
             >
               <WandSparklesIcon />
@@ -231,7 +231,7 @@ export const HeaderCustomize = () => {
                 <RadioGroupLabel>
                   {THEME_FIELDS.baseColor.label}
                 </RadioGroupLabel>
-                <div className="grid grid-cols-9 gap-0.5 overflow-hidden rounded-xl border bg-border">
+                <div className="grid grid-cols-9 gap-0.5 overflow-hidden rounded-xl border">
                   {BASE_COLORS.map((color) => (
                     <RadioGroupItem
                       aria-label={color.label}

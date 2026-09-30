@@ -713,7 +713,6 @@ export const QuestionnaireItem = (props: QuestionnaireItemProps) => {
   const invalid = context.invalidItems.includes(name) && !hasAnswer(answer);
 
   const itemRef = React.useRef<HTMLFieldSetElement>(null);
-  // Start false so remounting an active item (after unmount while inactive) still focuses.
   const wasActive = React.useRef<boolean>(false);
   const lastRequest = React.useRef(context.focusRequest);
 

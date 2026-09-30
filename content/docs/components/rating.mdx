@@ -70,12 +70,14 @@ npx shadcn@latest add @shark/rating
 ## Usage
 
 ```tsx
-import { RatingGroup } from "@/components/ui/rating";
+import { Rating } from "@/components/ui/rating";
 ```
 
 ```tsx
-<RatingGroup />
+<Rating aria-label="Rate your experience" />
 ```
+
+For custom layouts, `Rating` also supports composing `RatingLabel` and `RatingStars`.
 
 ## Controlled
 
@@ -99,6 +101,12 @@ Use the `disabled` prop to prevent interaction and show a disabled state.
 
 ## Examples
 
+### With Field
+
+Use `RatingLabel` inside `Rating` to name the control, and `FieldDescription` for helper text.
+
+<ComponentPreview componentName="rating" fileName="example-with-field" />
+
 ### Half star
 
 Use `allowHalf` to allow half-star selections.
@@ -119,7 +127,7 @@ Display a read-only rating inside a testimonial card.
 
 ### Customize size
 
-Use the `className` prop to override the default size of the rating indicator.
+Use `RatingStars` `className` to override the default size of the rating indicator.
 
 <ComponentPreview componentName="rating" fileName="example-custom-size" />
 
@@ -131,7 +139,7 @@ Compose the rating with a different icon.
 
 ### Custom color
 
-Override the filled color with `className`.
+Set `RatingStars` `className` to change the color of the stars.
 
 <ComponentPreview componentName="rating" fileName="example-custom-color" />
 
@@ -157,6 +165,25 @@ Root component.
 | `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `readOnly` | `boolean` | `-` |
 | `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
+| `children` | `ReactNode` | `-` |
+
+### RatingLabel
+
+Labels the `Rating` and focuses its selected star when clicked.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `ReactNode` | `required` |
+| `className` | `string` | `-` |
+
+### RatingStars
+
+Renders the rating stars and hidden input.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `icon` | `React.JSX.ElementType` | `StarIcon` |
 | `className` | `string` | `-` |
 
 ### RatingRootProvider

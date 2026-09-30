@@ -8,11 +8,26 @@ import {
 } from "@ark-ui/react/pin-input";
 import type React from "react";
 import { cn } from "@/lib/utils";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import { Input, type InputProps } from "@/registry/react/components/input";
 
 export const useInputOTP = useArkPinInput;
 export const useInputOTPContext = useArkPinInputContext;
 export const InputOTPRootProvider = ArkPinInput.RootProvider;
+
+export const InputOTPLabel = (
+  props: React.ComponentProps<typeof ArkPinInput.Label>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkPinInput.Label
+      className={cn(fieldLabelVariants(), "basis-full", className)}
+      data-slot="input-otp-label"
+      {...rest}
+    />
+  );
+};
 
 interface InputOTPProps
   extends React.ComponentProps<typeof ArkPinInput.Root>,

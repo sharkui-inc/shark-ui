@@ -48,76 +48,74 @@ const navigation = [
   },
 ];
 
-export function AppSidebar() {
-  return (
-    <Sidebar>
-      <SidebarHeader>
+export const AppSidebar = () => (
+  <Sidebar>
+    <SidebarHeader>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton className="font-semibold" size="lg">
+            <ChartNoAxesCombinedIcon aria-hidden />
+            <span>Northstar</span>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarHeader>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Workspace</SidebarGroupLabel>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton className="font-semibold" size="lg">
-              <ChartNoAxesCombinedIcon aria-hidden />
-              <span>Northstar</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Workspace</SidebarGroupLabel>
-          <SidebarMenu>
-            {navigation.map((item, index) => (
-              <Collapsible
-                asChild
-                className="group/collapsible"
-                defaultOpen={index === 0}
-                key={item.label}
-              >
-                <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton tooltip={item.label}>
-                      <item.icon aria-hidden />
-                      <span>{item.label}</span>
-                      <ChevronRightIcon
-                        aria-hidden
-                        className="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-90 motion-reduce:transition-none"
-                      />
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <SidebarMenuSub>
-                      {item.items.map((subItem) => (
-                        <SidebarMenuSubItem key={subItem}>
-                          <SidebarMenuSubButton asChild>
-                            <a href="#">{subItem}</a>
-                          </SidebarMenuSubButton>
-                        </SidebarMenuSubItem>
-                      ))}
-                    </SidebarMenuSub>
-                  </CollapsibleContent>
-                </SidebarMenuItem>
-              </Collapsible>
-            ))}
-          </SidebarMenu>
-        </SidebarGroup>
-      </SidebarContent>
-      <SidebarFooter>
-        <SidebarMenu>
-          {[
-            { icon: FileTextIcon, label: "Documentation" },
-            { icon: SettingsIcon, label: "Settings" },
-          ].map((item) => (
-            <SidebarMenuItem key={item.label}>
-              <SidebarMenuButton asChild>
-                <a href="#">
-                  <item.icon aria-hidden />
-                  <span>{item.label}</span>
-                </a>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+          {navigation.map((item, index) => (
+            <Collapsible
+              asChild
+              className="group/collapsible"
+              defaultOpen={index === 0}
+              key={item.label}
+            >
+              <SidebarMenuItem>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuButton tooltip={item.label}>
+                    <item.icon aria-hidden />
+                    <span>{item.label}</span>
+                    <ChevronRightIcon
+                      aria-hidden
+                      className="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-90 motion-reduce:transition-none"
+                    />
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <SidebarMenuSub>
+                    {item.items.map((subItem) => (
+                      <SidebarMenuSubItem key={subItem}>
+                        <SidebarMenuSubButton asChild>
+                          <a href="#">{subItem}</a>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </SidebarMenuItem>
+            </Collapsible>
           ))}
         </SidebarMenu>
-      </SidebarFooter>
-      <SidebarRail />
-    </Sidebar>
-  );
-}
+      </SidebarGroup>
+    </SidebarContent>
+    <SidebarFooter>
+      <SidebarMenu>
+        {[
+          { icon: FileTextIcon, label: "Documentation" },
+          { icon: SettingsIcon, label: "Settings" },
+        ].map((item) => (
+          <SidebarMenuItem key={item.label}>
+            <SidebarMenuButton asChild>
+              <a href="#">
+                <item.icon aria-hidden />
+                <span>{item.label}</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        ))}
+      </SidebarMenu>
+    </SidebarFooter>
+    <SidebarRail />
+  </Sidebar>
+);

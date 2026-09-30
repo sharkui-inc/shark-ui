@@ -105,6 +105,7 @@ const Example = () => {
                         <InputGroup>
                           <InputGroupInput
                             {...controllerField}
+                            aria-label={`Email address ${index + 1}`}
                             autoComplete="email"
                             placeholder="name@example.com"
                             type="email"

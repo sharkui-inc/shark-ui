@@ -3,11 +3,11 @@ import type { RegistryItemType } from "@/lib/registry";
 const cssVars = {
   dark: {
     info: "var(--color-blue-500)",
-    success: "var(--color-emerald-500)",
+    success: "var(--color-emerald-600)",
   },
   light: {
     info: "var(--color-blue-500)",
-    success: "var(--color-emerald-500)",
+    success: "var(--color-emerald-600)",
   },
 };
 

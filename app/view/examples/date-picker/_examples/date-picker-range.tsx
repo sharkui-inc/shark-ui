@@ -23,7 +23,7 @@ const DatePickerRange = () => {
   const year = new Date().getFullYear();
 
   return (
-    <Field className="mx-auto w-64">
+    <Field className="mx-auto min-w-64">
       <FieldLabel>Date Picker Range</FieldLabel>
       <DatePicker
         defaultValue={[

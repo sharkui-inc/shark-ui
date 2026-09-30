@@ -9,7 +9,7 @@ import manifest from "@/registry/manifest/alert";
 
 import { Alert, AlertDescription, AlertTitle } from "@/registry/react/components/alert";
 import { TabsContent } from "@/registry/react/components/tabs";
-import { Info, AlertCircle, AlertTriangle, CheckCircle } from "lucide-react";
+import { InfoIcon, AlertCircleIcon, AlertTriangleIcon, CheckCircleIcon } from "lucide-react";
 
 <ComponentPreview componentName="alert" />
 
@@ -43,7 +43,6 @@ npx shadcn@latest add @shark/alert
 <CodeCollapsibleWrapper>
 ```css
 @theme inline {
-  --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
@@ -54,8 +53,7 @@ npx shadcn@latest add @shark/alert
 }
 
 :root {
-  --destructive: var(--color-red-600);
-  --destructive-foreground: var(--color-red-700);
+  --destructive-foreground: var(--color-red-800);
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-700);
   --success: var(--color-emerald-600);
@@ -65,7 +63,6 @@ npx shadcn@latest add @shark/alert
 }
 
 .dark {
-  --destructive: var(--color-red-600);
   --destructive-foreground: var(--color-red-400);
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-400);

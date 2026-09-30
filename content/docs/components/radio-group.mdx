@@ -55,6 +55,7 @@ npx shadcn@latest add @shark/radio-group
 
 ```text
 RadioGroup
+├── RadioGroupLabel
 └── RadioGroupItem
 ```
 
@@ -95,6 +96,19 @@ Use the `disabled` on `RadioGroup` to disable  all the radio group items or on `
 <ComponentPreview componentName="radio-group" fileName="example-disabled" />
 
 ## Examples
+
+### With Field
+
+Use `RadioGroupLabel` inside the group to name it and focus its selected radio.
+`Field` is optional for the label association.
+
+<ComponentPreview componentName="radio-group" fileName="example-with-field" />
+
+### Without Field
+
+`RadioGroupLabel` also works when the group is used outside `Field`.
+
+<ComponentPreview componentName="radio-group" fileName="example-without-field" />
 
 ### With Description
 

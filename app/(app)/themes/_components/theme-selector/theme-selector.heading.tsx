@@ -29,11 +29,13 @@ export const ThemeSelectorHeading = (props: ThemeSelectorHeadingProps) => {
   const { description, hotkey, lockKey, title } = props;
 
   const { locks, toggleLock } = useThemeCustomization();
+
   const locked = lockKey ? locks[lockKey] : false;
+
   const LockGlyph = locked ? LockIcon : LockOpenIcon;
 
   return (
-    <div className="flex items-center gap-0.5">
+    <div className="flex items-center gap-1">
       <FieldLabel>{title}</FieldLabel>
 
       {description ? (
@@ -41,6 +43,7 @@ export const ThemeSelectorHeading = (props: ThemeSelectorHeadingProps) => {
           <ToggleTooltipTrigger asChild>
             <Button
               aria-label={`${title} info`}
+              className="size-5 md:size-5"
               clickEffect={false}
               size="icon-xs"
               variant="ghost"
@@ -62,6 +65,7 @@ export const ThemeSelectorHeading = (props: ThemeSelectorHeadingProps) => {
               aria-label={locked ? `Unlock ${title}` : `Lock ${title}`}
               aria-pressed={locked}
               className={cn(
+                "size-5 md:size-5",
                 "ms-auto transition-opacity",
                 locked
                   ? "opacity-100"

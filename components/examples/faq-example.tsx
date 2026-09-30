@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import {
   Accordion,
   AccordionContent,
@@ -73,10 +72,6 @@ export const FaqExample = (props: React.ComponentProps<"div">) => {
                 });
                 setIsSending(false);
                 setOpen(false);
-                toast.success({
-                  description: "We’ll reply to the address you entered.",
-                  title: "Message sent",
-                });
               }}
             >
               <DialogHeader

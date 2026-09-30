@@ -23,9 +23,9 @@ export const toggleVariants = tv({
   },
   variants: {
     size: {
-      lg: "min-w-9",
-      md: "min-w-8",
-      sm: "min-w-7",
+      lg: "min-w-11 md:min-w-10",
+      md: "min-w-10 md:min-w-9",
+      sm: "min-w-9 md:min-w-8",
     },
   },
 });

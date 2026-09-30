@@ -16,7 +16,7 @@ import {
 import { Field, FieldLabel } from "@/registry/react/components/field";
 
 const DatePickerInputExample = () => (
-  <Field className="mx-auto w-56">
+  <Field className="mx-auto min-w-56">
     <FieldLabel>Subscription Date</FieldLabel>
     <DatePicker>
       <DatePickerInput placeholder="June 01, 2025" />

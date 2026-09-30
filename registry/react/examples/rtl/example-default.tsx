@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "@/components/examples/example-toast";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -29,12 +28,7 @@ const RTLDemo = () => {
         <CardTitle>{t.title}</CardTitle>
         <CardDescription>{t.description}</CardDescription>
         <CardAction>
-          <Button
-            onClick={() => toast.info({ title: t.signUp })}
-            variant="link"
-          >
-            {t.signUp}
-          </Button>
+          <Button variant="link">{t.signUp}</Button>
         </CardAction>
       </CardHeader>
       <CardContent>
@@ -42,10 +36,6 @@ const RTLDemo = () => {
           id="rtl-login"
           onSubmit={(event) => {
             event.preventDefault();
-            toast.success({
-              description: t.title,
-              title: t.login,
-            });
           }}
         >
           <FieldGroup>
@@ -72,15 +62,7 @@ const RTLDemo = () => {
         <Button className="w-full" form="rtl-login" type="submit">
           {t.login}
         </Button>
-        <Button
-          className="w-full"
-          onClick={() =>
-            toast.success({
-              title: t.loginWithGoogle,
-            })
-          }
-          variant="outline"
-        >
+        <Button className="w-full" variant="outline">
           {t.loginWithGoogle}
         </Button>
       </CardFooter>

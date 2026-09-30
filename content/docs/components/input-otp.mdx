@@ -55,6 +55,7 @@ npx shadcn@latest add @shark/input-otp
 
 ```text
 InputOTP
+├── InputOTPLabel
 ├── InputOTPSlot
 └── InputOTPSeparator
 ```
@@ -64,6 +65,7 @@ InputOTP
 ```tsx
 import {
   InputOTP,
+  InputOTPLabel,
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
@@ -71,6 +73,7 @@ import {
 
 ```tsx
 <InputOTP>
+  <InputOTPLabel>Verification code</InputOTPLabel>
   <InputOTPSlot index={0} />
   <InputOTPSlot index={1} />
   <InputOTPSlot index={2} />
@@ -102,6 +105,12 @@ Use the `invalid` prop to mark the input as invalid and show error styling.
 <ComponentPreview componentName="input-otp" fileName="example-invalid" />
 
 ## Examples
+
+### With Field
+
+Use `InputOTPLabel` to focus the first slot when clicked. Ark UI keeps its positional accessible name for each slot. Wrap the control with `Field` to add descriptions and validation messaging.
+
+<ComponentPreview componentName="input-otp" fileName="example-with-field" />
 
 ### Four Digits
 
@@ -174,6 +183,14 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 | `autoSubmit` | `boolean` | `-` |
 | `sanitizeValue` | `(value: string) => string` | `-` |
 | `mask` | `boolean` | `-` |
+
+### InputOTPLabel
+
+Label for the InputOTP. Use inside `InputOTP` to focus the first slot when clicked. Ark UI gives each slot its own positional accessible name, which this label does not replace.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 
 ### InputOTPSlot
 

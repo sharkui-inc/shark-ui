@@ -38,7 +38,7 @@ export const MobileNav = (props: MobileNavProps) => {
         <Button
           aria-label="Toggle Menu"
           className={cn("group", "hitbox-2", "pe-0", className)}
-          size="icon-md"
+          size="icon-sm"
           variant="ghost"
         >
           <div className="relative size-4">
@@ -63,7 +63,7 @@ export const MobileNav = (props: MobileNavProps) => {
           "h-(--available-height) max-h-(--available-height) min-h-0 w-dvw min-w-0 max-w-dvw",
           "flex flex-col",
           "overflow-hidden",
-          "bg-background/80 backdrop-blur",
+          "bg-background/80 backdrop-blur-sm",
           "rounded-none border-none shadow-none",
           "duration-100",
           "**:data-[slot=scroll-area-viewport]:overflow-x-hidden!",

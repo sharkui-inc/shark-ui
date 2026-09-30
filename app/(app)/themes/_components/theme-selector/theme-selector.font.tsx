@@ -108,11 +108,13 @@ export const ThemeSelectorFont = (props: { slot: ThemeFontSlot }) => {
           showIndicator={false}
           style={{ fontFamily: item.family }}
         >
-          <ListboxItemText className="flex-none font-medium text-xl">
-            Ag
-          </ListboxItemText>
-          <span className="w-full min-w-0 self-stretch truncate text-center text-[0.625rem] text-muted-foreground group-data-[state=checked]/listbox-item:text-foreground">
-            {item.label}
+          <span className="flex w-full min-w-0 flex-col items-center gap-2">
+            <ListboxItemText className="flex-none font-medium text-xl">
+              Ag
+            </ListboxItemText>
+            <span className="w-full min-w-0 truncate text-center text-[0.625rem] text-muted-foreground group-data-[state=checked]/listbox-item:text-foreground">
+              {item.label}
+            </span>
           </span>
         </ListboxItem>
       ))}

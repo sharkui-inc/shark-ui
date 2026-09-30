@@ -25,7 +25,7 @@ const Example = () => {
         </TooltipTrigger>
         <TooltipContent>Show more details</TooltipContent>
       </Tooltip>
-      <PopoverContent className="w-64">
+      <PopoverContent className="min-w-64">
         <PopoverHeader
           description="Additional information appears here."
           title="Details"

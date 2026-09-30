@@ -124,7 +124,12 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
             <div className="flex-1 px-4 py-6 sm:px-6 lg:p-8">
               <div
                 className={cn("mx-auto w-full", {
-                  "max-w-3xl": page.data.toc.length > 0,
+                  // Sidebar previews are a full-width iframe. The desktop
+                  // sidebar starts at 768px, and max-w-3xl leaves the iframe
+                  // viewport just under that.
+                  "max-w-3xl":
+                    page.data.toc.length > 0 &&
+                    page.slugs.join("/") !== "components/sidebar",
                 })}
               >
                 <div className="flex min-w-0 flex-col gap-8">
@@ -188,7 +193,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
               <Link
                 className={cn(
                   buttonVariants({ clickEffect: false, variant: "outline" }),
-                  "h-auto w-full min-w-0",
+                  "h-auto w-full min-w-0 md:h-auto",
                   "p-4",
                   "flex flex-col items-start",
                   "bg-white dark:bg-card",
@@ -212,7 +217,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
               <Link
                 className={cn(
                   buttonVariants({ clickEffect: false, variant: "outline" }),
-                  "h-auto w-full min-w-0",
+                  "h-auto w-full min-w-0 md:h-auto",
                   "p-4",
                   "flex flex-col items-end",
                   "bg-white dark:bg-card",

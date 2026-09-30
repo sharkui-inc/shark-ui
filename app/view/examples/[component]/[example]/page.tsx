@@ -49,11 +49,27 @@ const ViewExamplePage = async (props: {
     return (
       <PreviewLocaleProvider>
         <LocaleProvider locale="ar-SA">
-          <div className="min-h-svh" dir="rtl" lang="ar-SA">
+          <div
+            className={
+              component === "bottom-navigation"
+                ? "grid min-h-svh w-full place-items-center bg-background"
+                : "min-h-svh"
+            }
+            dir="rtl"
+            lang="ar-SA"
+          >
             <Preview />
           </div>
         </LocaleProvider>
       </PreviewLocaleProvider>
+    );
+  }
+
+  if (component === "bottom-navigation" && example !== "example-default") {
+    return (
+      <div className="grid min-h-svh w-full place-items-center bg-background">
+        <Preview />
+      </div>
     );
   }
 

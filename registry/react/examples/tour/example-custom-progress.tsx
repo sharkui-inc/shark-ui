@@ -38,8 +38,8 @@ const Example = () => {
           <TourFooter className="grid-cols-[minmax(0,1fr)_auto]">
             <TourProgressMeter />
             <div className="col-start-2 row-start-1 flex gap-2">
-              <TourPreviousStep className="col-start-auto row-start-auto justify-self-auto" />
-              <TourNextStep className="col-start-auto row-start-auto justify-self-auto" />
+              <TourPreviousStep />
+              <TourNextStep />
             </div>
           </TourFooter>
         </TourContent>

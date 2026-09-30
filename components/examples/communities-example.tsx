@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -62,10 +61,6 @@ export const CommunitiesExample = (props: React.ComponentProps<"div">) => {
                 <Button
                   onClick={() => {
                     setJoined((current) => [...current, community.name]);
-                    toast.success({
-                      description: `You’re in ${community.name}.`,
-                      title: "Joined",
-                    });
                   }}
                   size="sm"
                 >
@@ -100,10 +95,6 @@ export const CommunitiesExample = (props: React.ComponentProps<"div">) => {
                     current.filter((item) => item !== name)
                   );
                   setLeaving(null);
-                  toast.info({
-                    description: name ? `You left ${name}.` : undefined,
-                    title: "Left community",
-                  });
                 }}
                 variant="destructive"
               >

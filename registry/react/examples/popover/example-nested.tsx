@@ -25,7 +25,7 @@ const Example = () => (
             </Button>
           </PopoverTrigger>
 
-          <PopoverContent className="w-56">
+          <PopoverContent className="min-w-56">
             <PopoverHeader
               description="You are all caught up!"
               title="Nested popover"

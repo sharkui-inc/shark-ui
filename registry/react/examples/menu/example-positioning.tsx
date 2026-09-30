@@ -15,7 +15,7 @@ const Example = () => (
             {placement}
           </Button>
         </MenuTrigger>
-        <MenuContent className="w-36">
+        <MenuContent>
           <MenuItem value="edit">Edit</MenuItem>
           <MenuItem value="copy">Copy</MenuItem>
           <MenuItem value="share">Share</MenuItem>

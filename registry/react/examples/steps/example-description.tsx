@@ -1,5 +1,6 @@
 import {
   Steps,
+  StepsContent,
   StepsDescription,
   StepsIndicator,
   StepsItem,
@@ -25,6 +26,11 @@ const Example = () => (
         </StepsItem>
       ))}
     </StepsList>
+    {items.map((item, index) => (
+      <StepsContent index={index} key={item.title}>
+        {item.description}
+      </StepsContent>
+    ))}
   </Steps>
 );
 

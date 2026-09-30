@@ -113,6 +113,20 @@ Use the `invalid` prop to mark the date picker as invalid.
 
 ## Examples
 
+### With Field
+
+Use `DatePickerLabel` to name the visible trigger or input. The label uses the
+DatePicker association directly; it does not depend on `Field`.
+
+<ComponentPreview componentName="date-picker" fileName="example-with-field" />
+
+### Without Field
+
+`DatePickerLabel` keeps its Ark association when the picker is used without
+`Field`.
+
+<ComponentPreview componentName="date-picker" fileName="example-without-field" />
+
 ### Input
 
 Use `DatePickerInput` for a text input with calendar icon that opens the date picker.

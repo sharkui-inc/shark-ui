@@ -29,7 +29,7 @@ const Example = () => (
           <MoreHorizontalIcon />
         </Button>
       </MenuTrigger>
-      <MenuContent className="w-48">
+      <MenuContent className="min-w-48">
         <MenuGroup>
           <MenuItem value="share">
             <Share2Icon /> Share

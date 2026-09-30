@@ -55,6 +55,7 @@ npx shadcn@latest add @shark/toggle-group
 
 ```text
 ToggleGroup
+├── ToggleGroupLabel
 └── ToggleGroupItem
 ```
 
@@ -63,12 +64,14 @@ ToggleGroup
 ```tsx
 import { 
   ToggleGroup, 
+  ToggleGroupLabel,
   ToggleGroupItem 
 } from "@/components/ui/toggle-group"; 
 ```
 
 ```tsx
 <ToggleGroup>
+  <ToggleGroupLabel>Text formatting</ToggleGroupLabel>
   <ToggleGroupItem value="1">Item 1</ToggleGroupItem>
   <ToggleGroupItem value="2">Item 2</ToggleGroupItem>
 </ToggleGroup>
@@ -124,7 +127,27 @@ The `pill` prop creates a fully rounded segmented toggle group.
 
 <ComponentPreview componentName="toggle-group" fileName="example-pill" />
 
+## Sizes
+
+### Small
+
+<ComponentPreview componentName="toggle-group" fileName="example-size-sm" />
+
+### Medium
+
+<ComponentPreview componentName="toggle-group" fileName="example-size-md" />
+
+### Large
+
+<ComponentPreview componentName="toggle-group" fileName="example-size-lg" />
+
 ## Examples
+
+### With label
+
+Use `ToggleGroupLabel` to name the group. It is associated automatically.
+
+<ComponentPreview componentName="toggle-group" fileName="example-with-label" />
 
 ### With spacing
 
@@ -169,10 +192,16 @@ Root component. Provides shared variant and size to child toggles via context.
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `disabled` | `boolean` | `false` |
 | `className` | `string` | `-` |
+| `--gap` | `string` | `0` |
+
+### ToggleGroupLabel
+
+Names the `ToggleGroup` that directly contains it.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `--gap` | `string` | `0` |
+| `children` | `ReactNode` | `required` |
+| `className` | `string` | `-` |
 
 ### ToggleGroupItem
 

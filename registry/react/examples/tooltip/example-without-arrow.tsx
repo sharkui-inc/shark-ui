@@ -16,8 +16,13 @@ const Example = () => (
   <ButtonGroup>
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button clickEffect={false} size="icon-md" variant="outline">
-          <BoldIcon />
+        <Button
+          aria-label="Bold"
+          clickEffect={false}
+          size="icon-md"
+          variant="outline"
+        >
+          <BoldIcon aria-hidden />
         </Button>
       </TooltipTrigger>
       <TooltipContent showArrow={false}>Bold</TooltipContent>
@@ -25,8 +30,13 @@ const Example = () => (
 
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button clickEffect={false} size="icon-md" variant="outline">
-          <ItalicIcon />
+        <Button
+          aria-label="Italic"
+          clickEffect={false}
+          size="icon-md"
+          variant="outline"
+        >
+          <ItalicIcon aria-hidden />
         </Button>
       </TooltipTrigger>
       <TooltipContent showArrow={false}>Italic</TooltipContent>
@@ -34,8 +44,13 @@ const Example = () => (
 
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button clickEffect={false} size="icon-md" variant="outline">
-          <UnderlineIcon />
+        <Button
+          aria-label="Underline"
+          clickEffect={false}
+          size="icon-md"
+          variant="outline"
+        >
+          <UnderlineIcon aria-hidden />
         </Button>
       </TooltipTrigger>
       <TooltipContent showArrow={false}>Underline</TooltipContent>
@@ -43,8 +58,13 @@ const Example = () => (
 
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button clickEffect={false} size="icon-md" variant="outline">
-          <StrikethroughIcon />
+        <Button
+          aria-label="Strikethrough"
+          clickEffect={false}
+          size="icon-md"
+          variant="outline"
+        >
+          <StrikethroughIcon aria-hidden />
         </Button>
       </TooltipTrigger>
       <TooltipContent showArrow={false}>Strikethrough</TooltipContent>

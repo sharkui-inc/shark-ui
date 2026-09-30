@@ -22,11 +22,9 @@
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-primary-hover: var(--primary-hover);
 
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary-hover: var(--secondary-hover);
 
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -51,7 +49,6 @@
 
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
-  --color-destructive-hover: var(--destructive-hover);
 
   --color-border: var(--border);
   --color-input: var(--input);
@@ -134,11 +131,6 @@
 
   --primary: var(--color-neutral-800);
   --primary-foreground: var(--color-neutral-50);
-  --primary-hover: color-mix(
-    in srgb,
-    var(--color-neutral-800) 92%,
-    var(--color-neutral-950)
-  );
 
   --secondary: color-mix(
     in srgb,
@@ -146,11 +138,6 @@
     var(--background)
   );
   --secondary-foreground: var(--color-neutral-800);
-  --secondary-hover: color-mix(
-    in srgb,
-    var(--color-neutral-950) 16%,
-    var(--background)
-  );
 
   --muted: color-mix(in srgb, var(--color-neutral-950) 4%, var(--background));
   --muted-foreground: color-mix(
@@ -164,7 +151,6 @@
 
   --destructive: var(--color-red-600);
   --destructive-foreground: var(--color-red-800);
-  --destructive-hover: var(--color-red-700);
 
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-700);
@@ -175,8 +161,8 @@
   --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-700);
 
-  --border: color-mix(in srgb, var(--color-neutral-950) 8%, var(--background));
-  --input: color-mix(in srgb, var(--color-neutral-950) 10%, var(--background));
+  --border: color-mix(in srgb, var(--color-neutral-950) 10%, var(--background));
+  --input: color-mix(in srgb, var(--color-neutral-950) 12%, var(--background));
   --ring: var(--color-neutral-600);
 
   --sidebar: var(--color-neutral-50);
@@ -231,11 +217,6 @@
 
   --primary: var(--color-neutral-100);
   --primary-foreground: var(--color-neutral-800);
-  --primary-hover: color-mix(
-    in srgb,
-    var(--color-neutral-100) 92%,
-    var(--color-neutral-950)
-  );
 
   --secondary: color-mix(
     in srgb,
@@ -243,11 +224,6 @@
     var(--background)
   );
   --secondary-foreground: var(--color-neutral-100);
-  --secondary-hover: color-mix(
-    in srgb,
-    var(--color-neutral-50) 16%,
-    var(--background)
-  );
 
   --muted: color-mix(in srgb, var(--color-neutral-50) 4%, var(--background));
   --muted-foreground: color-mix(
@@ -261,7 +237,6 @@
 
   --destructive: var(--color-red-600);
   --destructive-foreground: var(--color-red-400);
-  --destructive-hover: var(--color-red-700);
 
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-400);
@@ -272,8 +247,8 @@
   --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-400);
 
-  --border: color-mix(in srgb, var(--color-neutral-50) 6%, var(--background));
-  --input: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
+  --border: color-mix(in srgb, var(--color-neutral-50) 8%, var(--background));
+  --input: color-mix(in srgb, var(--color-neutral-50) 10%, var(--background));
   --ring: var(--color-neutral-400);
 
   --sidebar: color-mix(

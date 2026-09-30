@@ -24,8 +24,13 @@ const Example = () => {
     <ButtonGroup>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button clickEffect={false} size="icon-md" variant="outline">
-            <BoldIcon />
+          <Button
+            aria-label={values.bold}
+            clickEffect={false}
+            size="icon-md"
+            variant="outline"
+          >
+            <BoldIcon aria-hidden />
           </Button>
         </TooltipTrigger>
         <TooltipContent>{values.bold}</TooltipContent>
@@ -33,8 +38,13 @@ const Example = () => {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button clickEffect={false} size="icon-md" variant="outline">
-            <ItalicIcon />
+          <Button
+            aria-label={values.italic}
+            clickEffect={false}
+            size="icon-md"
+            variant="outline"
+          >
+            <ItalicIcon aria-hidden />
           </Button>
         </TooltipTrigger>
         <TooltipContent>{values.italic}</TooltipContent>
@@ -42,8 +52,13 @@ const Example = () => {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button clickEffect={false} size="icon-md" variant="outline">
-            <UnderlineIcon />
+          <Button
+            aria-label={values.underline}
+            clickEffect={false}
+            size="icon-md"
+            variant="outline"
+          >
+            <UnderlineIcon aria-hidden />
           </Button>
         </TooltipTrigger>
         <TooltipContent>{values.underline}</TooltipContent>
@@ -51,8 +66,13 @@ const Example = () => {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button clickEffect={false} size="icon-md" variant="outline">
-            <StrikethroughIcon />
+          <Button
+            aria-label={values.strikethrough}
+            clickEffect={false}
+            size="icon-md"
+            variant="outline"
+          >
+            <StrikethroughIcon aria-hidden />
           </Button>
         </TooltipTrigger>
         <TooltipContent>{values.strikethrough}</TooltipContent>

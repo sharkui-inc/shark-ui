@@ -41,7 +41,7 @@ const Example = () => {
           size="sm"
           variant="ghost"
         />
-        <ComboboxContent className="max-h-72 w-52">
+        <ComboboxContent className="max-h-72 min-w-52">
           <ComboboxSearch />
           <ComboboxList>
             <ComboboxEmpty>No models found.</ComboboxEmpty>

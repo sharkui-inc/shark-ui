@@ -22,7 +22,7 @@ const AvatarMenu = () => (
         </Avatar>
       </Button>
     </MenuTrigger>
-    <MenuContent className="w-40">
+    <MenuContent className="min-w-40">
       <MenuItem value="profile">Profile</MenuItem>
       <MenuItem value="settings">Settings</MenuItem>
       <MenuSeparator />

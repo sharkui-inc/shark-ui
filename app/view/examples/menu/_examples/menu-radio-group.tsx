@@ -19,7 +19,7 @@ const MenuRadioGroupDemo = () => {
       <MenuTrigger asChild>
         <Button variant="outline">Open</Button>
       </MenuTrigger>
-      <MenuContent className="w-32">
+      <MenuContent>
         <MenuGroup heading="Panel Position">
           <MenuRadioGroup
             onValueChange={({ value }) => setPosition(value)}

@@ -20,7 +20,7 @@ const Example = () => (
     <SheetTrigger asChild>
       <Button variant="outline">Open</Button>
     </SheetTrigger>
-    <SheetContent variant="default">
+    <SheetContent>
       <SheetHeader
         description="This sheet uses the default variant, flush with the screen edge."
         title="Default Sheet"

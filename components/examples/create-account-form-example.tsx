@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -28,10 +27,6 @@ export const CreateAccountFormExample = (
       window.setTimeout(resolve, 600);
     });
     setOauth(null);
-    toast.success({
-      description: `${provider === "github" ? "GitHub" : "Google"} is a preview.`,
-      title: "Signed in",
-    });
   };
 
   return (
@@ -49,10 +44,6 @@ export const CreateAccountFormExample = (
               window.setTimeout(resolve, 600);
             });
             setIsCreating(false);
-            toast.success({
-              description: "Your account is ready in this preview.",
-              title: "Account created",
-            });
           }}
         >
           <FieldGroup>

@@ -8,6 +8,7 @@ import {
 import { XIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import {
   InputGroup,
   InputGroupButton,
@@ -19,6 +20,20 @@ export const useTagsInput = useArkTagsInput;
 export const useTagsInputContext = useArkTagsInputContext;
 export const TagsInputRootProvider = ArkTagsInput.RootProvider;
 export const TagsInputContext = ArkTagsInput.Context;
+
+export const TagsInputLabel = (
+  props: React.ComponentProps<typeof ArkTagsInput.Label>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkTagsInput.Label
+      className={cn(fieldLabelVariants(), "basis-full", className)}
+      data-slot="tags-input-label"
+      {...rest}
+    />
+  );
+};
 
 interface TagsInputProps
   extends React.ComponentProps<typeof ArkTagsInput.Root>,
@@ -100,7 +115,7 @@ export const TagsInputControl = (props: TagsInputControlProps) => {
     <ArkTagsInput.Control asChild data-slot="tags-input-control">
       <InputGroup
         className={cn(
-          "h-auto in-data-[size=lg]:min-h-9 in-data-[size=sm]:min-h-7 min-h-8",
+          "h-auto in-data-[size=lg]:min-h-11 in-data-[size=sm]:min-h-9 min-h-10 md:in-data-[size=lg]:min-h-10 md:in-data-[size=sm]:min-h-8 md:min-h-9",
           "py-1 [--input-group-inset:--spacing(1)]",
           "flex-wrap content-start items-center gap-1",
           "data-disabled:pointer-events-none data-disabled:opacity-64",

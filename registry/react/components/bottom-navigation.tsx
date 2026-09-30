@@ -92,11 +92,11 @@ export const BottomNavigationItem = (
         "min-w-0",
         "flex min-h-11 flex-1 flex-col items-center justify-center gap-0.5",
         "p-2",
-        "text-foreground opacity-64",
+        "text-muted-foreground",
         "cursor-pointer",
-        "transition-opacity",
-        "hover:opacity-100",
-        "aria-selected:opacity-100",
+        "transition-[color,opacity]",
+        "hover:text-foreground",
+        "aria-selected:text-foreground",
         "border border-transparent focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
         "data-disabled:pointer-events-none data-disabled:opacity-32",
         "[&_svg:not([class*='size-'])]:size-5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
@@ -106,6 +106,7 @@ export const BottomNavigationItem = (
       )}
       data-slot="bottom-navigation-item"
       {...rest}
+      aria-controls={null as unknown as undefined}
     />
   );
 };

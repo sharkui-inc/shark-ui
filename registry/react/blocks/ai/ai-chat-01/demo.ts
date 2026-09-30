@@ -107,7 +107,7 @@ export const MESSAGE_EXTRAS: Record<string, DemoMessageExtras> = {
   "assistant-plan": {
     approval: "Allow applying the viewport pin and adding a regression test?",
     code: {
-      code: `export function pinLatestTurn(node: HTMLElement) {
+      code: `export const pinLatestTurn = (node: HTMLElement) => {
   node.scrollTop = node.scrollHeight;
 }`,
       title: "lib/pin-latest-turn.ts",

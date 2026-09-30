@@ -135,14 +135,13 @@ export const ImageCropperHandle = (
         "data-[position=e]:cursor-ew-resize data-[position=w]:cursor-ew-resize",
         "border-(--cropper-accent)",
         "[&>span]:bg-(--cropper-accent) [&>span]:shadow-[0_1px_3px_rgb(0_0_0/0.32)]",
-        "[&[data-position=nw]_*]:size-(--cropper-handler-size) [&[data-position=nw]_*]:border-t-[length:(--cropper-handler-width)] [&[data-position=nw]_*]:border-l-[length:(--cropper-handler-width)] [&[data-position=nw]_*]:bg-(--cropper-accent) [@media(hover:hover)_and_(pointer:fine)]:data-[position=nw]:hover:**:scale-110",
-        "[&[data-position=ne]_*]:size-(--cropper-handler-size) [&[data-position=ne]_*]:border-t-[length:(--cropper-handler-width)] [&[data-position=ne]_*]:border-r-[length:(--cropper-handler-width)] [&[data-position=ne]_*]:bg-(--cropper-accent) [@media(hover:hover)_and_(pointer:fine)]:data-[position=ne]:hover:**:scale-110",
-        "[&[data-position=se]_*]:size-(--cropper-handler-size) [&[data-position=se]_*]:border-r-[length:(--cropper-handler-width)] [&[data-position=se]_*]:border-b-[length:(--cropper-handler-width)] [&[data-position=se]_*]:bg-(--cropper-accent) [@media(hover:hover)_and_(pointer:fine)]:data-[position=se]:hover:**:scale-110",
-        "[&[data-position=sw]_*]:size-(--cropper-handler-size) [&[data-position=sw]_*]:border-b-[length:(--cropper-handler-width)] [&[data-position=sw]_*]:border-l-[length:(--cropper-handler-width)] [&[data-position=sw]_*]:bg-(--cropper-accent) [@media(hover:hover)_and_(pointer:fine)]:data-[position=sw]:hover:**:scale-110",
-        "data-[position=n]:hover:**:opacity-100 [&[data-position=n]_*]:size-1.5 [&[data-position=n]_*]:bg-(--cropper-accent) [&[data-position=n]_*]:opacity-0",
-        "data-[position=s]:hover:**:opacity-100 [&[data-position=s]_*]:size-1.5 [&[data-position=s]_*]:bg-(--cropper-accent) [&[data-position=s]_*]:opacity-0",
-        "data-[position=e]:hover:**:opacity-100 [&[data-position=e]_*]:size-1.5 [&[data-position=e]_*]:bg-(--cropper-accent) [&[data-position=e]_*]:opacity-0",
-        "data-[position=w]:hover:**:opacity-100 [&[data-position=w]_*]:size-1.5 [&[data-position=w]_*]:bg-(--cropper-accent) [&[data-position=w]_*]:opacity-0",
+        "[@media(hover:hover)_and_(pointer:fine)]:[[data-position=nw],[data-position=ne],[data-position=se],[data-position=sw]]:hover:**:scale-110",
+        "data-[position=nw]:[&>span]:border-t-[length:(--cropper-handler-width)] data-[position=nw]:[&>span]:border-l-[length:(--cropper-handler-width)]",
+        "data-[position=ne]:[&>span]:border-t-[length:(--cropper-handler-width)] data-[position=ne]:[&>span]:border-r-[length:(--cropper-handler-width)]",
+        "data-[position=se]:[&>span]:border-r-[length:(--cropper-handler-width)] data-[position=se]:[&>span]:border-b-[length:(--cropper-handler-width)]",
+        "data-[position=sw]:[&>span]:border-b-[length:(--cropper-handler-width)] data-[position=sw]:[&>span]:border-l-[length:(--cropper-handler-width)]",
+        "[&:is([data-position=n],[data-position=s],[data-position=e],[data-position=w])>*]:size-1.5 [&:is([data-position=n],[data-position=s],[data-position=e],[data-position=w])>*]:opacity-0",
+        "[[data-position=n],[data-position=s],[data-position=e],[data-position=w]]:hover:**:opacity-100",
         className
       )}
       data-slot="image-cropper-handle"

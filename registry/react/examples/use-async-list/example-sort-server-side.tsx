@@ -68,7 +68,7 @@ const UseAsyncListDemo = () => {
           <AlertDescription>{list.error.message}</AlertDescription>
         </Alert>
       )}
-      <ItemGroup aria-busy={list.loading} className="gap-2">
+      <ItemGroup aria-busy={list.loading} className="gap-2" role="list">
         {list.loading
           ? skeletons.map((key) => (
               <Item

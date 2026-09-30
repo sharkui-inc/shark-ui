@@ -251,7 +251,6 @@ export const ComboboxClear = (
   props: React.ComponentProps<typeof ArkCombobox.ClearTrigger>
 ) => <ArkCombobox.ClearTrigger data-slot="combobox-clear" {...props} />;
 
-/** Composable combobox input for custom controls (e.g. Tags Input). */
 export const ComboboxFieldInput = (
   props: React.ComponentProps<typeof ArkCombobox.Input>
 ) => <ArkCombobox.Input data-slot="combobox-field-input" {...props} />;
@@ -267,7 +266,7 @@ export const ComboboxChips = (props: ComboboxChipsProps) => {
     <ArkCombobox.Control asChild data-slot="combobox-chips-control" {...rest}>
       <InputGroup
         className={cn(
-          "h-auto min-h-8 data-[size=lg]:min-h-9 data-[size=sm]:min-h-7",
+          "h-auto min-h-10 data-[size=lg]:min-h-11 data-[size=sm]:min-h-9 md:min-h-9 md:data-[size=lg]:min-h-10 md:data-[size=sm]:min-h-8",
           "flex-wrap content-start items-center gap-1 py-1",
           "[--input-group-inset:--spacing(1)]",
           "data-disabled:pointer-events-none data-disabled:opacity-64",

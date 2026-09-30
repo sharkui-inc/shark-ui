@@ -56,7 +56,7 @@ const Example = () => {
   );
 };
 
-const STREAMED_CODE = `export function Greeting({ name }) {
+const STREAMED_CODE = `export const Greeting = ({ name }) => {
   return (
     <section>
       <h1>Welcome back</h1>

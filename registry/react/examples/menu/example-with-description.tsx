@@ -16,7 +16,7 @@ const Example = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-72">
+    <MenuContent className="min-w-72">
       <MenuGroup heading="Actions">
         <MenuItem value="new-file">
           <SquarePlusIcon aria-hidden />
@@ -24,7 +24,7 @@ const Example = () => (
             <span>New file</span>
             <MenuItemDescription>Create a new file</MenuItemDescription>
           </span>
-          <MenuShortcut>⌘N</MenuShortcut>
+          <MenuShortcut className="hidden sm:inline-flex">⌘N</MenuShortcut>
         </MenuItem>
         <MenuItem value="edit-file">
           <PencilIcon aria-hidden />
@@ -32,7 +32,7 @@ const Example = () => (
             <span>Edit file</span>
             <MenuItemDescription>Make changes</MenuItemDescription>
           </span>
-          <MenuShortcut>⌘E</MenuShortcut>
+          <MenuShortcut className="hidden sm:inline-flex">⌘E</MenuShortcut>
         </MenuItem>
       </MenuGroup>
       <MenuSeparator />
@@ -43,7 +43,7 @@ const Example = () => (
             <span>Delete file</span>
             <MenuItemDescription>Move to trash</MenuItemDescription>
           </span>
-          <MenuShortcut>⌘D</MenuShortcut>
+          <MenuShortcut className="hidden sm:inline-flex">⌘D</MenuShortcut>
         </MenuItem>
       </MenuGroup>
     </MenuContent>

@@ -4,7 +4,7 @@ import { Button } from "@/registry/react/components/button";
 const Example = () => (
   <div className="flex items-center gap-2">
     <Button size="xs">Button</Button>
-    <Button size="icon-xs">
+    <Button aria-label="Add" size="icon-xs">
       <PlusIcon />
     </Button>
   </div>

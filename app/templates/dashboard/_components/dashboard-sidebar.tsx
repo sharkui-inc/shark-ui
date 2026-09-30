@@ -56,7 +56,7 @@ export const DashboardSidebar = () => {
             <p className="truncate font-semibold text-sm">Onda</p>
           </div>
 
-          <Button size="icon-xs" variant="ghost">
+          <Button aria-label="Search" size="icon-xs" variant="ghost">
             <SearchIcon aria-hidden />
           </Button>
         </SidebarHeader>

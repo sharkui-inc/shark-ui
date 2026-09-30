@@ -20,7 +20,7 @@ const MenuCheckboxes = () => {
       <MenuTrigger asChild>
         <Button variant="outline">Open</Button>
       </MenuTrigger>
-      <MenuContent className="w-40">
+      <MenuContent className="min-w-40">
         <MenuGroup heading="Appearance">
           <MenuCheckboxItem
             checked={showStatusBar}

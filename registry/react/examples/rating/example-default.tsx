@@ -28,7 +28,7 @@ const RatingDemo = () => (
     </CardHeader>
     <CardContent className="space-y-2 text-center">
       <p className="font-medium text-sm">Rate your driver</p>
-      <Rating />
+      <Rating aria-label="Rate your driver" />
     </CardContent>
     <CardFooter>
       <Button className="w-full" variant="outline">

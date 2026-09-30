@@ -15,23 +15,24 @@ export const fileThumbnailVariants = tv({
   slots: {
     badge: [
       "absolute",
+      "py-px",
       "select-none whitespace-nowrap font-medium uppercase leading-none",
-      "rounded-[0.35em] border-t shadow-xs/4",
+      "rounded-sm border-t shadow-xs/4",
     ],
     sheet: "rounded-md border border-border bg-white",
   },
   variants: {
     size: {
       lg: {
-        badge: ["-inset-s-2 bottom-2", "text-[11px]", "px-1.5 py-0.5"],
+        badge: ["-inset-s-2 bottom-2", "text-[0.625rem]", "px-1"],
         sheet: "h-14 w-11",
       },
       md: {
-        badge: ["-inset-s-1.5 bottom-1.5", "text-[10px]", "px-1 py-px"],
+        badge: ["-inset-s-1.5 bottom-1.5", "text-[0.5625rem]", "px-0.5"],
         sheet: "h-10 w-8",
       },
       sm: {
-        badge: ["-inset-s-1 bottom-1", "text-[9px]", "px-1 py-px"],
+        badge: ["-inset-s-1 bottom-1", "text-[0.5rem]", "px-0.5"],
         sheet: "h-8 w-6.5",
       },
     },
@@ -49,16 +50,13 @@ export const fileThumbnailVariants = tv({
         badge: ["bg-info text-white", "border-t-info-foreground"],
       },
       primary: {
-        badge: [
-          "bg-primary text-primary-foreground",
-          "border-t-primary-foreground/32",
-        ],
+        badge: ["bg-primary-foreground text-white", "border-t-primary/32"],
       },
       success: {
-        badge: ["white bg-success", "border-t-success-foreground"],
+        badge: ["bg-success text-white", "border-t-success-foreground"],
       },
       warning: {
-        badge: ["white bg-warning", "border-t-warning-foreground"],
+        badge: ["bg-warning text-white", "border-t-warning-foreground"],
       },
     },
   },

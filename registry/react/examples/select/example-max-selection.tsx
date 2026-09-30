@@ -26,7 +26,7 @@ const Example = () => {
       onValueChange={handleValueChange}
       value={value}
     >
-      <SelectTrigger className="w-56">
+      <SelectTrigger className="min-w-56">
         <SelectValue className="capitalize">
           <SelectContext>
             {({ value: selectedValue }) => renderValue(selectedValue)}

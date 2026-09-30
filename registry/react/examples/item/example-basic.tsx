@@ -16,7 +16,7 @@ const Example = () => (
       </ItemDescription>
     </ItemContent>
     <ItemActions>
-      <Button size="icon-sm" variant="outline">
+      <Button aria-label="More item actions" size="sm" variant="outline">
         Action
       </Button>
     </ItemActions>

@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 
 const MusicTemplatePage = () => (
   <div className="absolute inset-0 overflow-hidden">
+    <h1 className="sr-only">Music preview</h1>
     <SidebarProvider className="h-full min-h-0">
       <MusicSidebar />
       <SidebarInset className="flex min-w-0 flex-col">

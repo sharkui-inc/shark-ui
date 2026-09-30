@@ -21,7 +21,7 @@ const Example = () => {
 
   return (
     <FileUpload className="mx-auto w-full max-w-xs">
-      <FileUploadDropzone>
+      <FileUploadDropzone disableClick>
         <FileUploadDropzoneIcon />
         <FileUploadTitle>{values.title}</FileUploadTitle>
         <div className="flex items-center justify-center gap-2">

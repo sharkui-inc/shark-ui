@@ -11,7 +11,7 @@ import {
 
 const Example = () => (
   <Select collection={collection}>
-    <SelectTrigger className="w-48" variant="default">
+    <SelectTrigger className="min-w-48">
       <SelectValue placeholder="Select framework" />
     </SelectTrigger>
     <SelectContent>

@@ -1,6 +1,7 @@
 import { Spinner } from "@/registry/react/components/spinner";
 import {
   Steps,
+  StepsContent,
   StepsIndicator,
   StepsItem,
   StepsList,
@@ -13,7 +14,7 @@ const Example = () => (
     <StepsList>
       {items.map((item, index) => (
         <StepsItem index={index} key={item.id}>
-          <StepsTrigger disabled>
+          <StepsTrigger aria-label={`Step ${index + 1}: ${item.id}`} disabled>
             <StepsIndicator>
               {item.loading ? <Spinner aria-hidden /> : index + 1}
             </StepsIndicator>
@@ -23,6 +24,11 @@ const Example = () => (
         </StepsItem>
       ))}
     </StepsList>
+    {items.map((item, index) => (
+      <StepsContent index={index} key={item.id}>
+        {item.id}
+      </StepsContent>
+    ))}
   </Steps>
 );
 

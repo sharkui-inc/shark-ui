@@ -156,7 +156,7 @@ const drawerOverlayVariants = tv({
     "fixed inset-0 z-50",
     "peer peer-data-[slot=drawer-backdrop]:hidden",
     "motion-safe:bg-[rgb(0_0_0/calc(0.32*(1-max(0,var(--drawer-swipe-progress,0)))))] motion-safe:backdrop-blur-[calc(4px*(1-max(0,var(--drawer-swipe-progress,0))))]",
-    "motion-reduce:bg-[rgb(0_0_0/0.32)] motion-reduce:backdrop-blur-[4px]",
+    "motion-reduce:bg-[rgb(0_0_0/0.32)] motion-reduce:backdrop-blur-xs",
     "data-[has-nested=drawer]:pointer-events-none",
     "motion-safe:transition-opacity motion-safe:duration-300 motion-safe:ease-out",
     "motion-safe:data-[state=open]:fade-in-0 motion-safe:data-[state=open]:animate-in",
@@ -204,7 +204,6 @@ export const DrawerOverlay = (
 const drawerPositionerVariants = tv({
   base: [
     "[--bleed:--spacing(12)]",
-    "[--inset:--spacing(3)] sm:[--inset:--spacing(4)]",
     "fixed inset-0 z-[calc(50+var(--layer-index,0))] overflow-hidden",
     "flex w-screen items-end justify-center",
     "data-[has-nested=drawer]:pointer-events-none",
@@ -219,12 +218,7 @@ const drawerPositionerVariants = tv({
   variants: {
     variant: {
       default: "",
-      inset: [
-        "px-(--inset)",
-        "data-[swipe-direction=down]:pb-(--inset)",
-        "data-[swipe-direction=up]:pt-(--inset)",
-        "[&[data-swipe-direction=left],&[data-swipe-direction=right]]:py-(--inset)",
-      ],
+      inset: ["p-3 sm:p-4"],
     },
   },
 });
@@ -251,14 +245,13 @@ const drawerContentVariants = tv({
     "[--stack-depth:max(0,calc(var(--nested-drawers,0)-clamp(0,var(--nested-swipe-progress,0),1)))]",
     "[--stack-scale:clamp(0,calc(1-(var(--stack-depth)*0.05)),1)]",
     "[--stack-peek-offset:calc(var(--stack-depth)*calc(--spacing(6)-1px))]",
-    "[--stack-height:var(--drawer-frontmost-height,var(--drawer-rest-height,0px))]",
+    "[--stack-height:var(--drawer-frontmost-height,var(--drawer-height,0px))]",
     "[--stack-x:0px] [--stack-y:0px]",
     "[--snap-gap:calc(var(--drawer-snap-point-offset-y,0px)+clamp(0,1,var(--drawer-snap-point-offset-y,0px)/1px)*var(--drawer-swipe-movement-y,0px))]",
     "group/drawer",
     "relative",
     "flex min-h-0 w-full flex-col",
     "[&[data-swipe-direction=up],&[data-swipe-direction=down]]:max-h-[96svh]",
-    "[&[data-swipe-direction=up],&[data-swipe-direction=down]]:h-(--drawer-rest-height,auto)",
     "data-nested-drawer-open:[&[data-swipe-direction=up],&[data-swipe-direction=down]]:h-(--stack-height)!",
     "[&[data-swipe-direction=left],&[data-swipe-direction=right]]:h-full [&[data-swipe-direction=left],&[data-swipe-direction=right]]:max-h-none [&[data-swipe-direction=left],&[data-swipe-direction=right]]:min-h-0 [&[data-swipe-direction=left],&[data-swipe-direction=right]]:w-full [&[data-swipe-direction=left],&[data-swipe-direction=right]]:max-w-md",
     "data-nested-drawer-open:overflow-hidden",
@@ -267,7 +260,7 @@ const drawerContentVariants = tv({
     "text-popover-foreground",
     "shadow-lg/4",
     "outline-hidden",
-    "transition-[box-shadow,height,transform] duration-450 ease-[cubic-bezier(0.32,0.72,0,1)]",
+    "transition-[box-shadow,height,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
     "data-[state=closed]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
     "data-[state=closed]:animate-out data-[state=open]:animate-in",
     "data-swiping:select-none data-swiping:transition-none",
@@ -283,20 +276,27 @@ const drawerContentVariants = tv({
     "data-[swipe-direction=right]:[--stack-x:calc(0px-var(--stack-peek-offset))]",
     "data-nested-drawer-open:transform-[translate3d(var(--stack-x),var(--stack-y),0)_scale(var(--stack-scale))]!",
     "after:pointer-events-none after:absolute after:bg-inherit after:content-['']",
+    "has-data-[slot=drawer-footer]:after:bg-card/48",
     "data-[swipe-direction=down]:rounded-t-2xl data-[swipe-direction=down]:border-t",
     "data-[swipe-direction=down]:-mb-[max(0px,var(--snap-gap))]",
     "data-[swipe-direction=down]:pb-[max(0px,calc(env(safe-area-inset-bottom,0px)+var(--snap-gap)))]",
+    "max-sm:data-[swipe-direction=down]:pb-[max(0px,calc(1.5rem+env(safe-area-inset-bottom,0px)+var(--snap-gap)))]",
+    "max-sm:data-[swipe-direction=up]:pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]",
     "[&[data-swipe-direction=up],&[data-swipe-direction=down]]:after:inset-x-0 [&[data-swipe-direction=up],&[data-swipe-direction=down]]:after:h-(--bleed)",
     "data-[swipe-direction=down]:after:top-full",
     "data-[swipe-direction=up]:rounded-b-2xl data-[swipe-direction=up]:border-b",
     "data-[swipe-direction=up]:pt-[env(safe-area-inset-top,0)]",
     "data-[swipe-direction=up]:after:bottom-full",
     "data-[swipe-direction=left]:rounded-e-2xl data-[swipe-direction=left]:border-e",
-    "data-[swipe-direction=left]:ps-[env(safe-area-inset-left,0)]",
-    "data-[swipe-direction=left]:after:inset-e-full",
+    "data-[swipe-direction=left]:pl-[env(safe-area-inset-left,0)]",
+    "max-sm:data-[swipe-direction=left]:pt-[env(safe-area-inset-top,0px)]",
+    "max-sm:data-[swipe-direction=left]:pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]",
+    "data-[swipe-direction=left]:after:right-full",
     "data-[swipe-direction=right]:rounded-s-2xl data-[swipe-direction=right]:border-s",
-    "data-[swipe-direction=right]:pe-[env(safe-area-inset-right,0)]",
-    "data-[swipe-direction=right]:after:inset-s-full",
+    "data-[swipe-direction=right]:pr-[env(safe-area-inset-right,0)]",
+    "max-sm:data-[swipe-direction=right]:pt-[env(safe-area-inset-top,0px)]",
+    "max-sm:data-[swipe-direction=right]:pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]",
+    "data-[swipe-direction=right]:after:left-full",
     "[&[data-swipe-direction=left],&[data-swipe-direction=right]]:after:inset-y-0 [&[data-swipe-direction=left],&[data-swipe-direction=right]]:after:h-auto [&[data-swipe-direction=left],&[data-swipe-direction=right]]:after:w-(--bleed)",
     "motion-reduce:animate-none motion-reduce:transition-none",
     "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
@@ -330,7 +330,6 @@ const drawerAnimationVariants = tv({
   },
 });
 
-const DRAWER_REST_HEIGHT = "--drawer-rest-height";
 const NESTED_SWIPE_PROGRESS = "--nested-swipe-progress";
 const SWIPING_DRAWER = "[data-slot=drawer-content][data-swiping]";
 
@@ -350,52 +349,9 @@ function readSwipeProgress(front: HTMLElement) {
   return Math.min(1, distance / size);
 }
 
-function transitionWait(content: HTMLElement) {
-  const style = getComputedStyle(content);
-
-  if (style.transitionProperty === "none") {
-    return 0;
-  }
-
-  return style.transitionDuration.split(",").reduce((max, part) => {
-    const time = Number.parseFloat(part);
-
-    if (!Number.isFinite(time)) {
-      return max;
-    }
-
-    const milliseconds = part.trim().endsWith("ms") ? time : time * 1000;
-    return Math.max(max, milliseconds);
-  }, 0);
-}
-
-function measureRestHeight(
-  content: HTMLElement,
-  resizeObserver: ResizeObserver
-) {
-  resizeObserver.unobserve(content);
-
-  const previous = content.style.getPropertyValue(DRAWER_REST_HEIGHT);
-  content.style.setProperty(DRAWER_REST_HEIGHT, "auto");
-  const height = content.offsetHeight;
-
-  if (height > 0) {
-    content.style.setProperty(DRAWER_REST_HEIGHT, `${height}px`);
-  } else if (previous) {
-    content.style.setProperty(DRAWER_REST_HEIGHT, previous);
-  } else {
-    content.style.removeProperty(DRAWER_REST_HEIGHT);
-  }
-
-  resizeObserver.observe(content);
-}
-
 function bindNestedDrawerStack(content: HTMLElement) {
   let frame = 0;
   let tracking = false;
-  let freeze = false;
-  let wasNested = false;
-  let unfreezeTimer = 0;
   let front: HTMLElement | null = null;
 
   const clearProgress = () => {
@@ -405,38 +361,6 @@ function bindNestedDrawerStack(content: HTMLElement) {
 
   const setProgress = (value: number) => {
     content.style.setProperty(NESTED_SWIPE_PROGRESS, value.toFixed(4));
-  };
-
-  const resizeObserver = new ResizeObserver(() => {
-    if (freeze || content.hasAttribute("data-nested-drawer-open")) {
-      return;
-    }
-
-    measureRestHeight(content, resizeObserver);
-  });
-
-  const unfreeze = () => {
-    window.clearTimeout(unfreezeTimer);
-    unfreezeTimer = 0;
-
-    if (content.hasAttribute("data-nested-drawer-open")) {
-      return;
-    }
-
-    freeze = false;
-    measureRestHeight(content, resizeObserver);
-  };
-
-  const scheduleUnfreeze = () => {
-    window.clearTimeout(unfreezeTimer);
-    const wait = transitionWait(content);
-
-    if (wait === 0) {
-      unfreeze();
-      return;
-    }
-
-    unfreezeTimer = window.setTimeout(unfreeze, wait + 80);
   };
 
   const stopTracking = () => {
@@ -449,8 +373,6 @@ function bindNestedDrawerStack(content: HTMLElement) {
   };
 
   const activeSwipe = () => {
-    // Prefer the portal host (custom container or body) so independent drawer
-    // trees in separate frames do not cross-wire nested swipe progress.
     const positioner = content.closest("[data-slot=drawer-positioner]");
     const scope: ParentNode =
       positioner?.parentElement ?? content.ownerDocument ?? document;
@@ -539,15 +461,6 @@ function bindNestedDrawerStack(content: HTMLElement) {
     const nested = content.hasAttribute("data-nested-drawer-open");
     const swiping = content.hasAttribute("data-nested-drawer-swiping");
 
-    if (nested) {
-      freeze = true;
-    } else if (wasNested) {
-      clearProgress();
-      scheduleUnfreeze();
-    }
-
-    wasNested = nested;
-
     if (swiping) {
       startTracking();
       return;
@@ -557,22 +470,13 @@ function bindNestedDrawerStack(content: HTMLElement) {
       endTracking();
     }
 
-    if (!(freeze || nested) && content.getAttribute("data-state") === "open") {
-      measureRestHeight(content, resizeObserver);
+    if (!nested) {
+      clearProgress();
     }
-  };
-
-  const onTransitionEnd = (event: TransitionEvent) => {
-    if (event.target !== content || event.propertyName !== "height") {
-      return;
-    }
-
-    unfreeze();
   };
 
   const attributeObserver = new MutationObserver(sync);
 
-  resizeObserver.observe(content);
   attributeObserver.observe(content, {
     attributeFilter: [
       "data-nested-drawer-open",
@@ -581,16 +485,11 @@ function bindNestedDrawerStack(content: HTMLElement) {
     ],
     attributes: true,
   });
-  content.addEventListener("transitionend", onTransitionEnd);
   sync();
 
   return () => {
     stopTracking();
-    window.clearTimeout(unfreezeTimer);
-    resizeObserver.disconnect();
     attributeObserver.disconnect();
-    content.removeEventListener("transitionend", onTransitionEnd);
-    content.style.removeProperty(DRAWER_REST_HEIGHT);
     content.style.removeProperty(NESTED_SWIPE_PROGRESS);
   };
 }
@@ -603,16 +502,6 @@ function useNestedDrawerStack(content: HTMLElement | null) {
 
     return bindNestedDrawerStack(content);
   }, [content]);
-}
-
-type SnapPoint = number | string;
-
-function needsFullHeightForSnapPoints(snapPoints: SnapPoint[]): boolean {
-  if (snapPoints.length !== 1) {
-    return true;
-  }
-
-  return snapPoints[0] !== 1;
 }
 
 interface DrawerContentProps
@@ -679,7 +568,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
             swipeDirection === "down" || swipeDirection === "up";
 
           const fullHeight =
-            isVertical && needsFullHeightForSnapPoints(snapPoints);
+            isVertical && (snapPoints.length > 1 || snapPoints[0] !== 1);
 
           return (
             <DrawerPositioner
@@ -715,7 +604,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
                   <DrawerClose asChild>
                     <Button
                       aria-label="Close"
-                      className="absolute inset-e-4 top-4 opacity-64 hover:opacity-100 group-data-[swipe-direction=up]/drawer:top-[calc(1rem+env(safe-area-inset-top,0))]"
+                      className="absolute inset-e-4 top-4 opacity-64 pointer-coarse:after:absolute pointer-coarse:after:size-11 hover:opacity-100 group-data-[swipe-direction=up]/drawer:top-[calc(1rem+env(safe-area-inset-top,0))]"
                       size="icon-sm"
                       variant="ghost"
                     >
@@ -870,7 +759,6 @@ export const DrawerBody = (props: DrawerBodyProps) => {
           "p-(--space)",
           "group-data-[swipe-direction=down]/drawer:pt-0",
           "in-[[data-slot=drawer-content]:has([data-slot=drawer-header]:not(.sr-only))]:pt-1",
-          "in-[[data-slot=drawer-content]:has([data-slot=drawer-footer])]:pb-1",
           className
         )}
         data-slot="drawer-body"
@@ -892,6 +780,7 @@ export const DrawerFooter = (props: React.ComponentProps<typeof ark.div>) => {
       className={cn(
         "flex shrink-0 flex-col gap-2 sm:flex-row-reverse sm:justify-start",
         "px-(--space) py-4",
+        "border-t bg-muted/48",
         "sm:rounded-none",
         className
       )}

@@ -26,12 +26,17 @@ export const EmptyConversation = ({ onSelect }: { onSelect: () => void }) => (
         <h2>What are we building?</h2>
       </StateTitle>
     </StateHeader>
-    <StateContent className="max-w-3xl flex-row flex-nowrap">
+    <StateContent className="max-w-3xl flex-row flex-wrap justify-center">
       {emptyStateSuggestions.map((item) => {
         const Icon = item.icon;
 
         return (
-          <Item asChild className="flex-1" key={item.label} variant="outline">
+          <Item
+            asChild
+            className="min-w-36 flex-1"
+            key={item.label}
+            variant="outline"
+          >
             <button onClick={onSelect} type="button">
               <ItemMedia className="text-primary" variant="icon">
                 <Icon aria-hidden />

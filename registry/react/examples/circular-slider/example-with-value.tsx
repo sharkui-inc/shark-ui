@@ -1,6 +1,6 @@
 "use client";
 
-import { Thermometer } from "lucide-react";
+import { ThermometerIcon } from "lucide-react";
 import {
   CircularSlider,
   CircularSliderValue,
@@ -15,7 +15,7 @@ function Example() {
       thickness={10}
     >
       <CircularSliderValue
-        prefix={<Thermometer className="size-4" />}
+        prefix={<ThermometerIcon className="size-4" />}
         suffix="°"
       />
     </CircularSlider>

@@ -25,7 +25,7 @@ const Example = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-72">
+    <MenuContent className="min-w-72">
       {people.map((person) => (
         <MenuItem key={person.username} value={person.username}>
           <Item className="[--space:--spacing(2)]">

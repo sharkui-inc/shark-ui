@@ -3,7 +3,6 @@
 import { type DateValue, parseDate } from "@ark-ui/react";
 import { CalendarCheckIcon, CalendarDaysIcon } from "lucide-react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import { Button } from "@/registry/react/components/button";
 import {
   Calendar,
@@ -41,8 +40,6 @@ export const BookAppointmentExample = (props: React.ComponentProps<"div">) => {
   const [isBooked, setIsBooked] = React.useState(false);
   const [isConfirming, setIsConfirming] = React.useState(false);
   const selectedDay = value[0] ?? today;
-  const selectedSlot =
-    slots.find((item) => item.value === slot[0])?.label ?? slots[0].label;
 
   return (
     <Card data-slot="example-book-appointment" {...props}>
@@ -119,10 +116,6 @@ export const BookAppointmentExample = (props: React.ComponentProps<"div">) => {
             });
             setIsConfirming(false);
             setIsBooked(true);
-            toast.success({
-              description: `${formatWeekday(selectedDay)} at ${selectedSlot}.`,
-              title: "Visit booked",
-            });
           }}
         >
           <CalendarCheckIcon aria-hidden />

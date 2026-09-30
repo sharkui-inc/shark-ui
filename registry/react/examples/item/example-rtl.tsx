@@ -1,6 +1,6 @@
 "use client";
 
-import { BadgeCheck, ChevronRight, Ellipsis } from "lucide-react";
+import { BadgeCheckIcon, ChevronRightIcon, EllipsisIcon } from "lucide-react";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -25,20 +25,24 @@ const Example = () => {
           <ItemDescription>{values.description}</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <Button size="icon-sm" variant="outline">
-            <Ellipsis />
+          <Button
+            aria-label="More item actions"
+            size="icon-sm"
+            variant="outline"
+          >
+            <EllipsisIcon />
           </Button>
         </ItemActions>
       </Item>
       <Item variant="outline">
         <ItemMedia>
-          <BadgeCheck className="size-5" />
+          <BadgeCheckIcon className="size-5" />
         </ItemMedia>
         <ItemContent>
           <ItemTitle>{values.verified}</ItemTitle>
         </ItemContent>
         <ItemActions>
-          <ChevronRight className="size-4 rtl:rotate-180" />
+          <ChevronRightIcon className="size-4 rtl:rotate-180" />
         </ItemActions>
       </Item>
     </div>

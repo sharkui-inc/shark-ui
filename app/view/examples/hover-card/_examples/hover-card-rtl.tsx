@@ -13,7 +13,7 @@ const HoverCardRtl = () => (
           <HoverCardTrigger asChild>
             <Button variant="outline">{translations[side]}</Button>
           </HoverCardTrigger>
-          <HoverCardContent className="flex w-64 flex-col gap-1">
+          <HoverCardContent className="flex min-w-64 flex-col gap-1">
             <div className="font-semibold">{translations.name}</div>
             <div className="text-muted-foreground text-sm">
               {translations.price}
@@ -32,7 +32,7 @@ const HoverCardRtl = () => (
           <HoverCardTrigger asChild>
             <Button variant="outline">{translations[side]}</Button>
           </HoverCardTrigger>
-          <HoverCardContent className="flex w-64 flex-col gap-1">
+          <HoverCardContent className="flex min-w-64 flex-col gap-1">
             <div className="font-semibold">{translations.name}</div>
             <div className="text-muted-foreground text-sm">
               {translations.price}

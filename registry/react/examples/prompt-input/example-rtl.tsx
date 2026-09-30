@@ -106,7 +106,7 @@ const Example = () => {
                   <PlusIcon aria-hidden />
                 </PromptInputButton>
               </MenuTrigger>
-              <MenuContent className="w-80">
+              <MenuContent className="min-w-80">
                 <MenuGroup heading={values.actionSections.context}>
                   {contextActions.map((action) => (
                     <MenuItem key={action.value} value={action.value}>
@@ -162,7 +162,7 @@ const Example = () => {
               size="sm"
               variant="ghost"
             />
-            <ComboboxContent className="max-h-72 w-52">
+            <ComboboxContent className="max-h-72 min-w-52">
               <ComboboxList>
                 {collection.items.map((item) => (
                   <ComboboxItem item={item} key={item.value}>

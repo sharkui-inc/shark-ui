@@ -15,7 +15,6 @@ import {
   UploadIcon,
 } from "lucide-react";
 import type React from "react";
-import { toast } from "@/components/examples/example-toast";
 import { Button } from "@/registry/react/components/button";
 import { Card, CardContent } from "@/registry/react/components/card";
 
@@ -42,7 +41,6 @@ export const IconsGridExample = (props: React.ComponentProps<"div">) => (
           <Button
             aria-label={label}
             key={label}
-            onClick={() => toast.info({ title: label })}
             size="icon-md"
             variant="outline"
           >

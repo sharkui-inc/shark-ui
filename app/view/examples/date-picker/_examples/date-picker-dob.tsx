@@ -25,7 +25,7 @@ const DatePickerDob = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Field className="mx-auto w-56">
+    <Field className="mx-auto min-w-56">
       <FieldLabel>Date of birth</FieldLabel>
       <DatePicker
         closeOnSelect

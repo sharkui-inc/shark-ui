@@ -1,25 +1,25 @@
 "use client";
 
 import {
-  BadgeCheck,
-  Bell,
-  BookOpen,
-  Bot,
-  ChevronRight,
-  ChevronsUpDown,
-  CreditCard,
-  Crown,
-  Folder,
-  Forward,
-  Frame,
-  LogOut,
-  Map as MapIcon,
-  MoreHorizontal,
-  PieChart,
-  Plus,
-  Settings2,
-  SquareTerminal,
-  Trash2,
+  BadgeCheckIcon,
+  BellIcon,
+  BookOpenIcon,
+  BotIcon,
+  ChevronRightIcon,
+  ChevronsUpDownIcon,
+  CreditCardIcon,
+  CrownIcon,
+  FolderIcon,
+  ForwardIcon,
+  FrameIcon,
+  LogOutIcon,
+  MapIcon,
+  MoreHorizontalIcon,
+  PieChartIcon,
+  PlusIcon,
+  Settings2Icon,
+  SquareTerminalIcon,
+  Trash2Icon,
   WavesHorizontalIcon,
 } from "lucide-react";
 import React from "react";
@@ -69,7 +69,7 @@ import {
 const data = {
   navMain: [
     {
-      icon: SquareTerminal,
+      icon: SquareTerminalIcon,
       isActive: true,
       items: [
         {
@@ -89,7 +89,7 @@ const data = {
       url: "#",
     },
     {
-      icon: Bot,
+      icon: BotIcon,
       items: [
         {
           title: "Genesis",
@@ -108,7 +108,7 @@ const data = {
       url: "#",
     },
     {
-      icon: BookOpen,
+      icon: BookOpenIcon,
       items: [
         {
           title: "Introduction",
@@ -131,7 +131,7 @@ const data = {
       url: "#",
     },
     {
-      icon: Settings2,
+      icon: Settings2Icon,
       items: [
         {
           title: "General",
@@ -156,12 +156,12 @@ const data = {
   ],
   projects: [
     {
-      icon: Frame,
+      icon: FrameIcon,
       name: "Design Engineering",
       url: "#",
     },
     {
-      icon: PieChart,
+      icon: PieChartIcon,
       name: "Sales & Marketing",
       url: "#",
     },
@@ -225,7 +225,7 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
                 <span className="truncate font-medium">{activeTeam.name}</span>
                 <span className="truncate text-xs">{activeTeam.plan}</span>
               </div>
-              <ChevronsUpDown className="ms-auto size-4" />
+              <ChevronsUpDownIcon className="ms-auto size-4" />
             </SidebarMenuButton>
           </MenuTrigger>
           <MenuContent className="min-w-56">
@@ -252,7 +252,7 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
             <MenuGroup>
               <MenuItem className="gap-2" value="add-team">
                 <IconTile aria-hidden size="xs">
-                  <Plus className="size-4" />
+                  <PlusIcon className="size-4" />
                 </IconTile>
                 <div className="font-medium text-muted-foreground">
                   Add team
@@ -295,7 +295,7 @@ const NavMain = ({ items }: NavMainProps) => (
               <SidebarMenuButton tooltip={item.title}>
                 {item.icon ? <item.icon /> : null}
                 <span>{item.title}</span>
-                <ChevronRight className="ms-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                <ChevronRightIcon className="ms-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
               </SidebarMenuButton>
             </CollapsibleTrigger>
             <CollapsibleContent>
@@ -345,25 +345,25 @@ const NavProjects = ({ projects }: NavProjectsProps) => (
           >
             <MenuTrigger asChild>
               <SidebarMenuAction showOnHover>
-                <MoreHorizontal />
+                <MoreHorizontalIcon />
                 <span className="sr-only">More</span>
               </SidebarMenuAction>
             </MenuTrigger>
-            <MenuContent className="w-48">
+            <MenuContent className="min-w-48">
               <MenuGroup>
                 <MenuItem value={`${item.name}-view`}>
-                  <Folder />
+                  <FolderIcon />
                   View Project
                 </MenuItem>
                 <MenuItem value={`${item.name}-share`}>
-                  <Forward />
+                  <ForwardIcon />
                   Share Project
                 </MenuItem>
               </MenuGroup>
               <MenuSeparator />
               <MenuGroup>
                 <MenuItem value={`${item.name}-delete`} variant="destructive">
-                  <Trash2 />
+                  <Trash2Icon />
                   Delete Project
                 </MenuItem>
               </MenuGroup>
@@ -373,7 +373,7 @@ const NavProjects = ({ projects }: NavProjectsProps) => (
       ))}
       <SidebarMenuItem>
         <SidebarMenuButton className="text-sidebar-foreground">
-          <MoreHorizontal className="text-sidebar-foreground" />
+          <MoreHorizontalIcon className="text-sidebar-foreground" />
           <span>More</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
@@ -413,7 +413,7 @@ const NavUser = ({ user }: NavUserProps) => {
                 <span className="truncate font-medium">{user.name}</span>
                 <span className="truncate text-xs">{user.email}</span>
               </div>
-              <ChevronsUpDown className="ms-auto size-4" />
+              <ChevronsUpDownIcon className="ms-auto size-4" />
             </SidebarMenuButton>
           </MenuTrigger>
           <MenuContent className="w-full sm:w-64">
@@ -434,29 +434,29 @@ const NavUser = ({ user }: NavUserProps) => {
             <MenuSeparator />
             <MenuGroup>
               <MenuItem value="upgrade">
-                <Crown />
+                <CrownIcon />
                 Upgrade to Pro
               </MenuItem>
             </MenuGroup>
             <MenuSeparator />
             <MenuGroup>
               <MenuItem value="account">
-                <BadgeCheck />
+                <BadgeCheckIcon />
                 Account
               </MenuItem>
               <MenuItem value="billing">
-                <CreditCard />
+                <CreditCardIcon />
                 Billing
               </MenuItem>
               <MenuItem value="notifications">
-                <Bell />
+                <BellIcon />
                 Notifications
               </MenuItem>
             </MenuGroup>
             <MenuSeparator />
             <MenuGroup>
               <MenuItem value="logout">
-                <LogOut />
+                <LogOutIcon />
                 Log out
               </MenuItem>
             </MenuGroup>

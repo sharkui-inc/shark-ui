@@ -83,7 +83,10 @@ const UseAsyncListDemo = () => {
       )}
       <ItemGroup
         aria-busy={list.loading}
-        className="max-h-64 gap-2 overflow-y-auto"
+        aria-label="Posts"
+        className="max-h-64 gap-2 overflow-y-auto focus-visible:outline-2 focus-visible:outline-ring"
+        role="list"
+        tabIndex={0}
       >
         {list.loading && list.items.length === 0
           ? skeletons.map((key) => (

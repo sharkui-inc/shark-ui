@@ -58,7 +58,7 @@ const InputGroupWithAddons = () => (
     </Field>
     <Field>
       <FieldLabel>Addon (block-start)</FieldLabel>
-      <InputGroup className="h-auto">
+      <InputGroup className="h-auto md:h-auto">
         <InputGroupInput />
         <InputGroupAddon align="block-start">
           <InputGroupText>First Name</InputGroupText>
@@ -68,7 +68,7 @@ const InputGroupWithAddons = () => (
     </Field>
     <Field>
       <FieldLabel>Addon (block-end)</FieldLabel>
-      <InputGroup className="h-auto">
+      <InputGroup className="h-auto md:h-auto">
         <InputGroupInput />
         <InputGroupAddon align="block-end">
           <InputGroupText>20/240 characters</InputGroupText>
@@ -115,13 +115,13 @@ const InputGroupWithAddons = () => (
         </InputGroupAddon>
         <InputGroupInput />
       </InputGroup>
-      <InputGroup>
-        <InputGroupInput aria-label="Optional" />
-        <InputGroupAddon align="inline-end">
-          <InputGroupText>(optional)</InputGroupText>
-        </InputGroupAddon>
-      </InputGroup>
     </Field>
+    <InputGroup>
+      <InputGroupInput aria-label="Optional" />
+      <InputGroupAddon align="inline-end">
+        <InputGroupText>(optional)</InputGroupText>
+      </InputGroupAddon>
+    </InputGroup>
   </FieldGroup>
 );
 

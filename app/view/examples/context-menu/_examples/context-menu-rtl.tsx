@@ -31,11 +31,11 @@ const ContextMenuRtl = () => {
           اضغط مطولاً هنا
         </span>
       </ContextMenuTrigger>
-      <ContextMenuContent className="w-48">
+      <ContextMenuContent className="min-w-48">
         <ContextMenuGroup>
           <ContextMenuSub>
             <ContextMenuSubTrigger>التنقل</ContextMenuSubTrigger>
-            <ContextMenuSubContent className="w-44">
+            <ContextMenuSubContent className="min-w-44">
               <ContextMenuGroup>
                 <ContextMenuItem value="back">
                   <ArrowLeftIcon />
@@ -57,7 +57,7 @@ const ContextMenuRtl = () => {
           </ContextMenuSub>
           <ContextMenuSub>
             <ContextMenuSubTrigger>المزيد من الأدوات</ContextMenuSubTrigger>
-            <ContextMenuSubContent className="w-44">
+            <ContextMenuSubContent className="min-w-44">
               <ContextMenuGroup>
                 <ContextMenuItem value="save-page">
                   حفظ الصفحة...

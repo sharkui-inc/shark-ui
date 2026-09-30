@@ -2,7 +2,6 @@
 
 import { CopyIcon } from "lucide-react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -85,10 +84,6 @@ export const ColorPickerExample = (props: React.ComponentProps<"div">) => {
                       aria-label="Copy hex"
                       onClick={async () => {
                         await navigator.clipboard.writeText(hex);
-                        toast.success({
-                          description: hex,
-                          title: "Copied",
-                        });
                       }}
                       size="icon-xs"
                       variant="ghost"

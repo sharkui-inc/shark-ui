@@ -79,12 +79,15 @@ export const selectTriggerVariants = tv({
   variants: {
     size: {
       lg: [
-        "h-9",
+        "h-11 md:h-10",
         "ps-[calc(--spacing(3.5)-1px)] pe-[calc(--spacing(3.5)-1px)]",
       ],
-      md: ["h-8", "ps-[calc(--spacing(3)-1px)] pe-[calc(--spacing(3)-1px)]"],
+      md: [
+        "h-10 md:h-9",
+        "ps-[calc(--spacing(3)-1px)] pe-[calc(--spacing(3)-1px)]",
+      ],
       sm: [
-        "h-7",
+        "h-9 md:h-8",
         "ps-[calc(--spacing(2.5)-1px)] pe-[calc(--spacing(2.5)-1px)]",
         "rounded-md",
       ],

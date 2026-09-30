@@ -7,7 +7,10 @@ import {
 } from "@ark-ui/react/radio-group";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { FieldLabel } from "@/registry/react/components/field";
+import {
+  FieldLabel,
+  fieldLabelVariants,
+} from "@/registry/react/components/field";
 
 export const useRadioGroup = useArkRadioGroup;
 export const useRadioGroupContext = useArkRadioGroupContext;
@@ -99,13 +102,13 @@ export const RadioGroupText = (
 export const RadioGroupLabel = (
   props: React.ComponentProps<typeof ArkRadioGroup.Label>
 ) => {
-  const { children, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
-    <FieldLabel asChild>
-      <ArkRadioGroup.Label data-slot="radio-group-label" {...rest}>
-        {children}
-      </ArkRadioGroup.Label>
-    </FieldLabel>
+    <ArkRadioGroup.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="radio-group-label"
+      {...rest}
+    />
   );
 };

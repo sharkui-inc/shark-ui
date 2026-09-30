@@ -14,12 +14,20 @@ import { useMediaQuery } from "@/registry/react/hooks/use-media-query";
 const Example = () => {
   const isMedium = useMediaQuery("(min-width: 768px)");
   const isLarge = useMediaQuery("(min-width: 1024px)");
+  let slidesPerPage = 2;
 
-  const slidesPerPage = [2, 3, 4][Number(isMedium) + Number(isLarge)];
+  if (isMedium) {
+    slidesPerPage = 3;
+  }
+
+  if (isLarge) {
+    slidesPerPage = 4;
+  }
 
   return (
     <Carousel
-      className="w-full max-w-lg"
+      className="w-full max-w-3xl"
+      key={slidesPerPage}
       slideCount={slides.length}
       slidesPerPage={slidesPerPage}
       spacing="16px"

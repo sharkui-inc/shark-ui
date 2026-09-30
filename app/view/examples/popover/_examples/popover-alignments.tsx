@@ -13,7 +13,7 @@ const PopoverAlignments = () => (
           Start
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-40">Aligned to start</PopoverContent>
+      <PopoverContent className="min-w-40">Aligned to start</PopoverContent>
     </Popover>
 
     <Popover>
@@ -22,7 +22,7 @@ const PopoverAlignments = () => (
           Center
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-40">Aligned to center</PopoverContent>
+      <PopoverContent className="min-w-40">Aligned to center</PopoverContent>
     </Popover>
 
     <Popover positioning={{ placement: "bottom-end" }}>
@@ -31,7 +31,7 @@ const PopoverAlignments = () => (
           End
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-40">Aligned to end</PopoverContent>
+      <PopoverContent className="min-w-40">Aligned to end</PopoverContent>
     </Popover>
   </div>
 );

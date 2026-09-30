@@ -32,6 +32,10 @@ npx shadcn@latest add @shark/terminal
 
 <Step>This component depends on [ScrollArea](/docs/components/scroll-area), [Clipboard](/docs/components/clipboard), and [Button](/docs/components/button). Install them first if you haven't already.</Step>
 
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
 <Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
@@ -44,7 +48,7 @@ npx shadcn@latest add @shark/terminal
 }
 
 :root {
-  --destructive-foreground: var(--color-red-700);
+  --destructive-foreground: var(--color-red-800);
   --info-foreground: var(--color-blue-700);
   --success-foreground: var(--color-emerald-700);
   --warning-foreground: var(--color-amber-700);
@@ -58,10 +62,6 @@ npx shadcn@latest add @shark/terminal
 }
 ```
 </CodeCollapsibleWrapper>
-
-<Step>Install the following dependencies:</Step>
-
-<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 

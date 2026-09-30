@@ -17,7 +17,7 @@ const CodeBlockDemo = () => (
   </CodeBlock>
 );
 
-const CODE = `export function isValidEmail(email: string) {
+const CODE = `export const isValidEmail = (email: string) => {
   return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
 }`;
 

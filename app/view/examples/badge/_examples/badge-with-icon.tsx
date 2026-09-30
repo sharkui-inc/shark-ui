@@ -1,10 +1,10 @@
-import { BadgeCheck, BookmarkIcon } from "lucide-react";
+import { BadgeCheckIcon, BookmarkIcon } from "lucide-react";
 import { Badge } from "@/registry/react/components/badge";
 
 const BadgeWithIcon = () => (
   <div className="flex flex-wrap items-center gap-2">
     <Badge>
-      <BadgeCheck data-icon="inline-start" />
+      <BadgeCheckIcon data-icon="inline-start" />
       Verified
     </Badge>
     <Badge>

@@ -19,7 +19,7 @@ const Example = () => (
   <Field className="mx-auto w-full max-w-xs" invalid>
     <FieldLabel>Attachments</FieldLabel>
     <FileUpload className="w-full" invalid>
-      <FileUploadDropzone>
+      <FileUploadDropzone disableClick>
         <FileUploadDropzoneIcon />
         <FileUploadTitle>Drop files here</FileUploadTitle>
         <div className="flex items-center justify-center gap-2">

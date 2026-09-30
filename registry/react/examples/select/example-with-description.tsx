@@ -13,7 +13,7 @@ import {
 
 const Example = () => (
   <Select collection={collection} defaultValue={["available"]}>
-    <SelectTrigger className="w-64">
+    <SelectTrigger className="min-w-64">
       <SelectValue placeholder="Select a status" />
     </SelectTrigger>
     <SelectContent>

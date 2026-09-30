@@ -22,6 +22,7 @@ const Example = () => {
 
   return (
     <PasswordInput
+      aria-label="Password"
       className="w-full max-w-64"
       onVisibilityChange={({ visible: nextVisible }) => setVisible(nextVisible)}
       placeholder="Enter password"

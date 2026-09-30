@@ -34,7 +34,7 @@ const BreadcrumbRtl = () => (
               <ChevronDownIcon data-icon="inline-end" />
             </Button>
           </MenuTrigger>
-          <MenuContent className="w-44">
+          <MenuContent className="min-w-44">
             <MenuItem asChild value="documentation">
               <a href="#">التوثيق</a>
             </MenuItem>

@@ -10,6 +10,7 @@ const Example = () => {
   return (
     <Field className="flex w-full max-w-xs flex-col gap-3">
       <Input
+        aria-label="Message"
         onChange={({ target }) => setValue(target.value)}
         placeholder="Enter your message"
         value={value}

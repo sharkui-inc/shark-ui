@@ -25,7 +25,7 @@ const Example = () => (
       })
     }
   >
-    <FileUploadDropzone>
+    <FileUploadDropzone disableClick>
       <FileUploadDropzoneIcon />
       <FileUploadTitle>Drop files here</FileUploadTitle>
       <div className="flex items-center justify-center gap-2">

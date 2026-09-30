@@ -1,5 +1,10 @@
 import type React from "react";
-import { Tabs, TabsList, TabsTrigger } from "@/registry/react/components/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/registry/react/components/tabs";
 
 export const TabsExample = (
   props: Omit<React.ComponentProps<"div">, "defaultValue">
@@ -10,5 +15,8 @@ export const TabsExample = (
       <TabsTrigger value="settings">Settings</TabsTrigger>
       <TabsTrigger value="security">Security</TabsTrigger>
     </TabsList>
+    <TabsContent value="profile">Profile settings</TabsContent>
+    <TabsContent value="settings">Account settings</TabsContent>
+    <TabsContent value="security">Security settings</TabsContent>
   </Tabs>
 );

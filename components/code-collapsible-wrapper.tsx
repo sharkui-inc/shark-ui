@@ -60,9 +60,8 @@ export const CodeCollapsibleWrapper = (props: CodeCollapsibleWrapperProps) => {
           className={cn(
             "[--radix-collapsible-content-height:var(--height)]",
             "relative mt-6 overflow-hidden [&>figure]:mt-0 [&>figure]:md:mx-0!",
-            "transition-[height] duration-200",
-            "data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down data-[state=closed]:duration-200 data-[state=open]:duration-200 data-[state=closed]:ease-out data-[state=open]:ease-out",
-            "motion-reduce:animate-none motion-reduce:transition-none"
+            "data-[state=closed]:h-(--collapsed-height) data-[state=open]:h-(--height)",
+            "transition-[height] duration-200 ease-out motion-reduce:transition-none"
           )}
         >
           {children}

@@ -59,14 +59,16 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
           <AlignLeftIcon aria-hidden className="size-3 rtl:scale-x-[-1]" />
           On This Page
         </TocTitle>
-        <TocList>
+        <div className="relative">
           <TocIndicator className="bg-primary" />
-          {items.map((item) => (
-            <TocItem item={item} key={item.value}>
-              <TocLink href={item.href}>{item.title}</TocLink>
-            </TocItem>
-          ))}
-        </TocList>
+          <TocList>
+            {items.map((item) => (
+              <TocItem item={item} key={item.value}>
+                <TocLink href={item.href}>{item.title}</TocLink>
+              </TocItem>
+            ))}
+          </TocList>
+        </div>
         <Presence
           className={cn(
             "mt-2 ps-3.5",

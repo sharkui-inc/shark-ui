@@ -41,7 +41,7 @@ const Example = () => (
             <ListboxShortcut>⌘E</ListboxShortcut>
           </ListboxItem>
         </ListboxItemGroup>
-        <Separator />
+        <Separator aria-hidden="true" />
         <ListboxItemGroup heading="Danger zone">
           <ListboxItem item={collection.items[2]} variant="destructive">
             <Trash2Icon aria-hidden />

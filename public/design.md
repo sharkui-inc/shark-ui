@@ -41,7 +41,7 @@ Use semantic Tailwind utilities such as `bg-background`, `text-foreground`, `bg-
 | `primary` | Primary actions and persistent emphasis. | General decoration. |
 | Feedback roles | Meaningful success, warning, info, or destructive feedback. | Decorative variation. |
 
-Pair card, popover, sidebar, code, and feedback surfaces with their matching foreground tokens. Validate the final composited contrast in light and dark modes. Solid semantic controls use opaque `primary-hover`, `secondary-hover`, or `destructive-hover` values rather than translucent hover fills over an unknown parent.
+Pair card, popover, sidebar, code, and feedback surfaces with their matching foreground tokens. Validate the final composited contrast in light and dark modes. Solid semantic controls use translucent `/80` hover fills.
 
 ## Typography and geometry
 

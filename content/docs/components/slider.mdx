@@ -51,6 +51,17 @@ npx shadcn@latest add @shark/slider
 
 </CodeTabs>
 
+## Anatomy
+
+```text
+Slider
+├── SliderLabel
+└── SliderControl (rendered automatically)
+    ├── SliderTrack
+    ├── SliderRange
+    └── SliderThumb (rendered automatically)
+```
+
 ## Usage
 
 ```tsx
@@ -76,6 +87,19 @@ Use the `disabled` prop to disable the slider.
 <ComponentPreview componentName="slider" fileName="example-disabled" />
 
 ## Examples
+
+### With Field
+
+Use `SliderLabel` inside `Slider` to name and focus the slider thumb. `Field` is
+optional for the label association.
+
+<ComponentPreview componentName="slider" fileName="example-with-field" />
+
+### Without Field
+
+`SliderLabel` also works when `Slider` is used outside `Field`.
+
+<ComponentPreview componentName="slider" fileName="example-without-field" />
 
 ### With label and value
 

@@ -11,7 +11,7 @@ const Example = () => {
   const { values } = translations[locale];
 
   return (
-    <NativeSelect className="w-fit">
+    <NativeSelect aria-label={values.placeholder} className="w-fit">
       <NativeSelectOption value="">{values.placeholder}</NativeSelectOption>
       <NativeSelectOption value="banana">{values.banana}</NativeSelectOption>
       <NativeSelectOption value="apple">{values.apple}</NativeSelectOption>

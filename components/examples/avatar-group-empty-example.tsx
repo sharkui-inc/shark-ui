@@ -2,7 +2,6 @@
 
 import { PlusIcon } from "lucide-react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import {
   Avatar,
   AvatarFallback,
@@ -66,20 +65,12 @@ export const AvatarGroupEmptyExample = (props: React.ComponentProps<"div">) => {
               className="contents"
               onSubmit={async (event) => {
                 event.preventDefault();
-                const form = new FormData(event.currentTarget);
-                const email = String(form.get("email") ?? "");
                 setIsSending(true);
                 await new Promise((resolve) => {
                   window.setTimeout(resolve, 600);
                 });
                 setIsSending(false);
                 setOpen(false);
-                toast.success({
-                  description: email
-                    ? `Invite sent to ${email}.`
-                    : "Invite sent.",
-                  title: "Invite sent",
-                });
               }}
             >
               <DialogHeader

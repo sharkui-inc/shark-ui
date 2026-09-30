@@ -30,7 +30,7 @@ Do not set `id` / `htmlFor` inside Field. Ark wires that.
 - Slider → `SliderLabel`
 - RadioGroup → `RadioGroupLabel` or `FieldSet` + `FieldLegend`
 - DateInput / DatePicker / Listbox / Progress / CircularProgress / CircularSlider → their `*Label`
-- ToggleGroup → title `id` + `aria-labelledby` on the group
+- ToggleGroup → `ToggleGroupLabel` directly inside `ToggleGroup`
 
 `FieldTitle` is visual only. It does not set `htmlFor`.
 

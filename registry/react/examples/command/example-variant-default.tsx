@@ -47,7 +47,7 @@ const Example = () => {
       <CommandDialogTrigger asChild>
         <Button variant="outline">Open Command</Button>
       </CommandDialogTrigger>
-      <CommandDialogContent variant="default">
+      <CommandDialogContent>
         <Command
           collection={collection}
           onInputValueChange={onInputValueChange}

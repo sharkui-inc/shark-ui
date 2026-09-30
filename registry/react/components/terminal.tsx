@@ -261,9 +261,6 @@ export const parseAnsi = (value: string): AnsiToken[] => {
   return tokens;
 };
 
-/**
- * Visible terminal text with ANSI SGR codes removed. Line breaks are kept.
- */
 export const toPlainOutput = (value: string): string =>
   parseAnsi(value)
     .map((token) => token.text)

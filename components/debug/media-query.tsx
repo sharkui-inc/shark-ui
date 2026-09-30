@@ -5,6 +5,7 @@ export const MediaQuery = () => {
 
   return (
     <div
+      aria-hidden="true"
       style={{
         alignItems: "center",
         backgroundColor: "var(--foreground)",

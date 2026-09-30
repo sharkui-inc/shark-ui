@@ -28,7 +28,7 @@ const Example = () => {
           </PopoverTrigger>
         ))}
       </div>
-      <PopoverContent className="w-72">
+      <PopoverContent className="min-w-72">
         <PopoverHeader
           description={
             activeItem?.detail ?? "Pick an action to see its details."

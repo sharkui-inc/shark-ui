@@ -8,15 +8,30 @@ import {
 } from "@ark-ui/react/color-picker";
 import { ark } from "@ark-ui/react/factory";
 import { Portal } from "@ark-ui/react/portal";
-import { CheckIcon, Pipette } from "lucide-react";
+import { CheckIcon, PipetteIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 
 export const parseColor = parseColorArk;
 export const useColorPicker = useArkColorPicker;
 export const useColorPickerContext = useArkColorPickerContext;
 export const ColorPickerRootProvider = ArkColorPicker.RootProvider;
+
+export const ColorPickerLabel = (
+  props: React.ComponentProps<typeof ArkColorPicker.Label>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkColorPicker.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="color-picker-label"
+      {...rest}
+    />
+  );
+};
 
 export interface ColorPickerProps
   extends Omit<
@@ -219,7 +234,7 @@ export const ColorPickerEyeDropperTrigger = (
       asChild
     >
       <Button size={size} variant={variant}>
-        {children ?? <Pipette />}
+        {children ?? <PipetteIcon />}
       </Button>
     </ArkColorPicker.EyeDropperTrigger>
   );

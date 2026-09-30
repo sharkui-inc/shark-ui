@@ -152,7 +152,7 @@ export const dialogContentVariants = tv({
       "flex flex-col",
       "bg-popover",
       "text-popover-foreground",
-      "rounded-2xl border shadow-lg/4",
+      "rounded-[calc(var(--radius)*2)] border shadow-lg/4",
       "overflow-hidden",
       "outline-hidden",
       "translate-y-[calc(-1.25rem*var(--nested-layer-count))]",
@@ -173,7 +173,7 @@ export const dialogContentVariants = tv({
           "max-sm:max-h-[calc(100svh-3rem)]",
           "max-sm:max-w-none",
           "max-sm:pb-[env(safe-area-inset-bottom,0px)]",
-          "max-sm:rounded-none max-sm:rounded-t-2xl max-sm:border-x-0 max-sm:border-t max-sm:border-b-0",
+          "max-sm:rounded-none max-sm:rounded-t-[calc(var(--radius)*2)] max-sm:border-x-0 max-sm:border-t max-sm:border-b-0",
           "max-sm:**:data-[slot=dialog-footer]:rounded-none",
           "max-sm:**:data-[slot=alert-dialog-footer]:rounded-none",
           "max-sm:opacity-[calc(1-min(var(--nested-dialogs),1))]",
@@ -247,7 +247,7 @@ export const DialogContent = (props: DialogContentProps) => {
             <DialogClose asChild>
               <Button
                 aria-label="Close"
-                className="absolute inset-e-2 top-2 opacity-64 hover:opacity-100"
+                className="absolute inset-e-2 top-2 opacity-64 pointer-coarse:after:absolute pointer-coarse:after:size-11 hover:opacity-100"
                 size="icon-sm"
                 variant="ghost"
               >
@@ -379,7 +379,7 @@ export const dialogFooterVariants = tv({
   base: [
     "shrink-0",
     "flex flex-col gap-2 sm:flex-row-reverse sm:justify-start",
-    "rounded-b-[max(0px,calc(var(--radius-2xl)-1px))]",
+    "rounded-b-[max(0px,calc(var(--radius)*2-1px))]",
     "px-(--space) py-4",
     "bg-muted/48",
     "border-t",

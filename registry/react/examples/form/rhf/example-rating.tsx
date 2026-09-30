@@ -18,9 +18,12 @@ import {
   FieldDescription,
   FieldError,
   FieldGroup,
-  FieldLabel,
 } from "@/registry/react/components/field";
-import { Rating } from "@/registry/react/components/rating";
+import {
+  Rating,
+  RatingLabel,
+  RatingStars,
+} from "@/registry/react/components/rating";
 
 const Example = () => {
   const form = useForm({
@@ -57,12 +60,14 @@ const Example = () => {
               name="recommendScore"
               render={({ field, fieldState }) => (
                 <Field invalid={fieldState.invalid}>
-                  <FieldLabel>How useful is this project?</FieldLabel>
                   <Rating
                     count={5}
                     onValueChange={(e) => field.onChange(e.value ?? 0)}
                     value={field.value ?? 0}
-                  />
+                  >
+                    <RatingLabel>How useful is this project?</RatingLabel>
+                    <RatingStars />
+                  </Rating>
                   <FieldDescription>
                     1 = not likely, 5 = very likely.
                   </FieldDescription>

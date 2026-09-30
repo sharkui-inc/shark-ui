@@ -21,34 +21,49 @@ const InputGroupWithButtons = () => (
           <InputGroupButton>Default</InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
+    </Field>
+    <Field>
+      <FieldLabel className="sr-only">Outline button input</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-button-14" />
+        <InputGroupInput />
         <InputGroupAddon>
           <InputGroupButton variant="outline">Outline</InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
+    </Field>
+    <Field>
+      <FieldLabel className="sr-only">Secondary button input</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-button-15" />
+        <InputGroupInput />
         <InputGroupAddon>
           <InputGroupButton variant="secondary">Secondary</InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
+    </Field>
+    <Field>
+      <FieldLabel className="sr-only">Inline secondary button input</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-button-16" />
+        <InputGroupInput />
         <InputGroupAddon align="inline-end">
           <InputGroupButton variant="secondary">Button</InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
+    </Field>
+    <Field>
+      <FieldLabel className="sr-only">Copy button input</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-button-17" />
+        <InputGroupInput />
         <InputGroupAddon align="inline-end">
           <InputGroupButton aria-label="Copy" size="icon-xs">
             <CopyIcon />
           </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
+    </Field>
+    <Field>
+      <FieldLabel className="sr-only">Delete button input</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="input-button-18" />
+        <InputGroupInput />
         <InputGroupAddon align="inline-end">
           <InputGroupButton
             aria-label="Delete"

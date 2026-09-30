@@ -20,7 +20,7 @@ import {
 const DatePickerRtl = () => (
   <DatePicker>
     <DatePickerTrigger asChild>
-      <Button className="w-56" variant="outline">
+      <Button className="min-w-56" variant="outline">
         <DatePickerValue placeholder="اختر تاريخًا" />
         <ChevronDownIcon aria-hidden data-icon="inline-end" />
       </Button>

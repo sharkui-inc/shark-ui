@@ -9,6 +9,7 @@ const Example = () => {
 
   return (
     <PasswordInput
+      aria-label={values.password}
       className="w-full max-w-64"
       placeholder={values.placeholder}
     />
@@ -16,9 +17,9 @@ const Example = () => {
 };
 
 const translations = {
-  ar: { values: { placeholder: "أدخل كلمة المرور" } },
-  en: { values: { placeholder: "Enter password" } },
-  he: { values: { placeholder: "הזן סיסמה" } },
+  ar: { values: { password: "كلمة المرور", placeholder: "أدخل كلمة المرور" } },
+  en: { values: { password: "Password", placeholder: "Enter password" } },
+  he: { values: { password: "סיסמה", placeholder: "הזן סיסמה" } },
 };
 
 export default Example;

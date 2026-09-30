@@ -15,7 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/registry/react/components/card";
-import { Rating } from "@/registry/react/components/rating";
+import { Rating, RatingStars } from "@/registry/react/components/rating";
 
 const Example = () => {
   const { locale } = usePreviewLocale();
@@ -39,7 +39,9 @@ const Example = () => {
       </CardHeader>
       <CardContent className="space-y-2 text-center">
         <p className="font-medium text-sm">{values.rate}</p>
-        <Rating />
+        <Rating>
+          <RatingStars />
+        </Rating>
       </CardContent>
       <CardFooter>
         <Button className="w-full" variant="outline">

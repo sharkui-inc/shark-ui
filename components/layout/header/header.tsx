@@ -61,7 +61,7 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
             aria-label="Visit GitHub"
             asChild
             className="hitbox-2"
-            size="icon-md"
+            size="icon-sm"
             variant="ghost"
           >
             <a

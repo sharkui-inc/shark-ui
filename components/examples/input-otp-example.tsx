@@ -2,7 +2,6 @@
 
 import { RefreshCwIcon } from "lucide-react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import {
   Avatar,
   AvatarFallback,
@@ -59,10 +58,6 @@ export const InputOTPExample = (props: React.ComponentProps<"div">) => {
         return current - 1;
       });
     }, 1000);
-    toast.info({
-      description: `Sent to ${EMAIL}.`,
-      title: "Code resent",
-    });
   };
 
   return (
@@ -103,10 +98,6 @@ export const InputOTPExample = (props: React.ComponentProps<"div">) => {
                 window.setTimeout(resolve, 600);
               });
               setIsContinuing(false);
-              toast.success({
-                description: "This preview does not open a workspace.",
-                title: "Welcome in",
-              });
             }}
             size="lg"
           >
@@ -117,10 +108,6 @@ export const InputOTPExample = (props: React.ComponentProps<"div">) => {
             onClick={() => {
               setIsVerified(false);
               setValue([...EMPTY_VALUE]);
-              toast.info({
-                description: "This preview keeps you on this step.",
-                title: "Use a different email",
-              });
             }}
             variant="outline"
           >
@@ -137,10 +124,6 @@ export const InputOTPExample = (props: React.ComponentProps<"div">) => {
               onValueChange={({ value: next }) => setValue(next)}
               onValueComplete={() => {
                 setIsVerified(true);
-                toast.success({
-                  description: `${EMAIL} is verified.`,
-                  title: "Code accepted",
-                });
               }}
               value={value}
             >
@@ -167,12 +150,6 @@ export const InputOTPExample = (props: React.ComponentProps<"div">) => {
               </Button>
               <Button
                 className="text-muted-foreground"
-                onClick={() => {
-                  toast.info({
-                    description: "This preview keeps you on this step.",
-                    title: "Use a different email",
-                  });
-                }}
                 size="sm"
                 variant="ghost"
               >

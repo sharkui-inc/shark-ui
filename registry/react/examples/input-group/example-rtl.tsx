@@ -15,7 +15,10 @@ const Example = () => {
 
   return (
     <InputGroup className="max-w-64">
-      <InputGroupInput placeholder={values.placeholder} />
+      <InputGroupInput
+        aria-label={values.search}
+        placeholder={values.placeholder}
+      />
       <InputGroupAddon>
         <SearchIcon />
       </InputGroupAddon>
@@ -27,16 +30,19 @@ const translations = {
   ar: {
     values: {
       placeholder: "ابحث...",
+      search: "بحث",
     },
   },
   en: {
     values: {
       placeholder: "Search...",
+      search: "Search",
     },
   },
   he: {
     values: {
       placeholder: "חפש...",
+      search: "חיפוש",
     },
   },
 };

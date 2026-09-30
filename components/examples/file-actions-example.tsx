@@ -3,7 +3,6 @@
 import { createListCollection } from "@ark-ui/react";
 import { PencilIcon, SquarePlusIcon, Trash2Icon } from "lucide-react";
 import React from "react";
-import { toast } from "@/components/examples/example-toast";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -85,7 +84,7 @@ export const FileActionsExample = (props: React.ComponentProps<"div">) => {
                 <ListboxShortcut>⌘E</ListboxShortcut>
               </ListboxItem>
             </ListboxItemGroup>
-            <Separator />
+            <Separator aria-hidden="true" />
             <ListboxItemGroup heading="Danger zone">
               <ListboxItem item={collection.items[2]} variant="destructive">
                 <Trash2Icon aria-hidden />
@@ -113,19 +112,12 @@ export const FileActionsExample = (props: React.ComponentProps<"div">) => {
             className="contents"
             onSubmit={async (event) => {
               event.preventDefault();
-              const form = new FormData(event.currentTarget);
-              const name = String(form.get("filename") ?? "untitled.md");
               setIsSaving(true);
               await new Promise((resolve) => {
                 window.setTimeout(resolve, 600);
               });
               setIsSaving(false);
-              const isNew = dialog === "new";
               setDialog(null);
-              toast.success({
-                description: name,
-                title: isNew ? "File created" : "File updated",
-              });
             }}
           >
             <DialogHeader
@@ -180,10 +172,6 @@ export const FileActionsExample = (props: React.ComponentProps<"div">) => {
               <AlertDialogAction
                 onClick={() => {
                   setDialog(null);
-                  toast.success({
-                    description: "notes.md was moved to trash.",
-                    title: "File deleted",
-                  });
                 }}
                 variant="destructive"
               >

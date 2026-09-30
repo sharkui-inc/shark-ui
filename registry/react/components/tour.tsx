@@ -9,7 +9,7 @@ import {
   useTour as useArkTour,
   useTourContext as useArkTourContext,
 } from "@ark-ui/react/tour";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, XIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
@@ -83,7 +83,7 @@ export const TourOverlay = (
     <ArkTour.Backdrop
       className={cn(
         dialogOverlayVariants(),
-        "z-[calc(var(--tour-layer)+50+var(--layer-index,0))]",
+        "z-[calc(100+var(--layer-index,0)+var(--tour-layer))]",
         "duration-initial",
         className
       )}
@@ -95,7 +95,6 @@ export const TourOverlay = (
 
 export const tourPositionerVariants = tv({
   base: [
-    "z-[calc(var(--tour-layer)+50+var(--layer-index,0))]",
     "data-[type=dialog]:fixed data-[type=dialog]:inset-0 data-[type=dialog]:p-4",
     "data-[type=tooltip]:absolute",
     "data-[type=tooltip]:max-w-[calc(100dvw-1rem)] data-[type=tooltip]:max-sm:min-w-0!",
@@ -154,7 +153,8 @@ export const tourContentVariants = tv({
   slots: {
     content: [
       "[--space:--spacing(4)]",
-      "relative z-[calc(var(--tour-layer,2)+50+var(--layer-index,0))]",
+      "relative",
+      "z-[calc(100+var(--layer-index,0)+var(--tour-layer))]",
       "w-full max-w-md",
       "data-[type=tooltip]:w-fit data-[type=tooltip]:max-w-[min(28rem,calc(100dvw-2rem))] data-[type=tooltip]:max-sm:min-w-0 data-[type=tooltip]:sm:min-w-xs",
       "outline-hidden",
@@ -171,7 +171,7 @@ export const tourContentVariants = tv({
       "flex flex-col",
       "bg-popover",
       "text-popover-foreground",
-      "rounded-2xl border shadow-lg/4",
+      "rounded-[calc(var(--radius)*2)] border shadow-lg/4",
       "overflow-hidden",
     ],
   },
@@ -231,6 +231,7 @@ export const TourContent = (props: TourContentProps) => {
   return (
     <Portal>
       <TourOverlay />
+      <TourSpotlight />
       <TourPositioner bottomStickOnMobile={bottomStickOnMobile}>
         <ArkTour.Content
           className={cn(content(), className)}
@@ -243,11 +244,11 @@ export const TourContent = (props: TourContentProps) => {
             {!!showCloseButton && (
               <TourClose asChild className="absolute inset-e-4 top-4">
                 <Button
-                  className="size-8 border-none text-muted-foreground hover:text-foreground"
+                  className="text-muted-foreground hover:text-foreground"
                   size="icon-md"
                   variant="ghost"
                 >
-                  <X aria-hidden />
+                  <XIcon aria-hidden />
 
                   <span className="sr-only">Close</span>
                 </Button>
@@ -258,8 +259,6 @@ export const TourContent = (props: TourContentProps) => {
           {showArrow ? <TourArrow /> : null}
         </ArkTour.Content>
       </TourPositioner>
-
-      <TourSpotlight />
     </Portal>
   );
 };
@@ -309,7 +308,7 @@ export const TourSpotlight = (
   return (
     <ArkTour.Spotlight
       className={cn(
-        "z-[calc(var(--tour-layer)+50+var(--layer-index,0))]",
+        "z-[calc(100+var(--layer-index,0)+var(--tour-layer))]",
         "border-2 border-ring/64 ring-2 ring-ring/24",
         className
       )}
@@ -401,47 +400,16 @@ export const TourClose = (
   props: React.ComponentProps<typeof ArkTour.CloseTrigger>
 ) => <ArkTour.CloseTrigger data-slot="tour-close-trigger" {...props} />;
 
-const tourActionPlacementVariants = tv({
-  defaultVariants: {
-    placement: "middle",
-  },
-  variants: {
-    placement: {
-      end: "col-start-3 row-start-1 justify-self-end",
-      middle: "col-start-2 row-start-1 justify-self-end",
-      start: "col-start-1 row-start-1 justify-self-start",
-    },
-  },
-});
-
-type TourStepAction = NonNullable<TourStepType["actions"]>[number];
-type TourActionPlacement = "end" | "middle" | "start";
-
-const getTourActionPlacement = (
-  action: TourStepAction,
-  hasNext: boolean
-): TourActionPlacement => {
-  const kind = action.action;
-
-  if (typeof kind === "function" || kind === undefined) {
-    return "middle";
-  }
-
-  switch (kind) {
-    case "prev":
-      return "start";
-    case "next":
-      return "end";
-    case "skip":
-      return "middle";
-    case "dismiss":
-      return hasNext ? "middle" : "end";
-    default: {
-      const _exhaustive: never = kind;
-      return _exhaustive;
-    }
-  }
-};
+const tourActionLayoutClassName = [
+  "grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2",
+  "[&>[data-tour-action]]:row-start-1",
+  "[&>[data-tour-action=prev]]:col-start-1 [&>[data-tour-action=prev]]:justify-self-start",
+  "[&>[data-tour-action=next]]:col-start-3 [&>[data-tour-action=next]]:justify-self-end",
+  "[&>[data-tour-action=skip]]:col-start-2 [&>[data-tour-action=skip]]:justify-self-end",
+  "[&>[data-tour-action=custom]]:col-start-2 [&>[data-tour-action=custom]]:justify-self-end",
+  "[&>[data-tour-action=dismiss]]:col-start-3 [&>[data-tour-action=dismiss]]:justify-self-end",
+  "has-[[data-tour-action=next]]:[&>[data-tour-action=dismiss]]:col-start-2",
+];
 
 export const TourFooter = (
   props: React.ComponentProps<typeof DialogFooter>
@@ -453,7 +421,8 @@ export const TourFooter = (
       <DialogFooter
         className={cn(
           "w-full",
-          "grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2",
+          "rounded-b-[max(0px,calc(var(--radius)*2-1px))]",
+          tourActionLayoutClassName,
           className
         )}
         data-slot="tour-control"
@@ -483,7 +452,8 @@ export const TourActions = (
             <DialogFooter
               className={cn(
                 "w-full",
-                "grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2",
+                "rounded-b-[max(0px,calc(var(--radius)*2-1px))]",
+                tourActionLayoutClassName,
                 className
               )}
               data-slot="tour-actions"
@@ -497,21 +467,23 @@ export const TourActions = (
                 return (
                   <TourActionTrigger action={action} asChild key={action.label}>
                     <Button
-                      className={tourActionPlacementVariants({
-                        placement: getTourActionPlacement(action, hasNext),
-                      })}
+                      data-tour-action={
+                        typeof action.action === "string"
+                          ? action.action
+                          : "custom"
+                      }
                       disabled={action.attrs?.disabled ? true : undefined}
                       {...(isOutline ? { variant: "outline" as const } : {})}
                     >
                       {action.action === "prev" && (
-                        <ChevronLeft
+                        <ChevronLeftIcon
                           aria-hidden
                           className="size-3.5 rtl:rotate-180"
                         />
                       )}
                       {action.label}
                       {action.action === "next" && (
-                        <ChevronRight
+                        <ChevronRightIcon
                           aria-hidden
                           className="size-3.5 rtl:rotate-180"
                         />
@@ -550,14 +522,8 @@ export const TourPreviousStep = (
       action={prevAction}
       asChild
     >
-      <Button
-        className={cn(
-          tourActionPlacementVariants({ placement: "start" }),
-          className
-        )}
-        variant="outline"
-      >
-        <ChevronLeft aria-hidden className="size-3.5 rtl:rotate-180" />
+      <Button className={className} data-tour-action="prev" variant="outline">
+        <ChevronLeftIcon aria-hidden className="size-3.5 rtl:rotate-180" />
         {prevAction.label}
       </Button>
     </TourActionTrigger>
@@ -588,16 +554,14 @@ export const TourNextStep = (
       asChild
     >
       <Button
-        className={cn(
-          tourActionPlacementVariants({ placement: "end" }),
-          className
-        )}
+        className={className}
+        data-tour-action={action.action === "dismiss" ? "dismiss" : "next"}
         disabled={action.attrs?.disabled ? true : undefined}
       >
         {action.label}
 
         {action.action === "next" && (
-          <ChevronRight aria-hidden className="size-3.5 rtl:rotate-180" />
+          <ChevronRightIcon aria-hidden className="size-3.5 rtl:rotate-180" />
         )}
       </Button>
     </TourActionTrigger>

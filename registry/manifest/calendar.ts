@@ -8,6 +8,7 @@ const manifest: RegistryItemType = {
   name: "calendar",
   registryDependencies: [
     registryUrl("/r/button.json"),
+    registryUrl("/r/field.json"),
     registryUrl("/r/format.json"),
     registryUrl("/r/native-select.json"),
   ],

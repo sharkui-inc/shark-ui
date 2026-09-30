@@ -6,7 +6,7 @@ import {
 } from "@/registry/react/components/field";
 
 const CheckboxDisabled = () => (
-  <FieldGroup className="mx-auto w-56">
+  <FieldGroup className="mx-auto min-w-56">
     <Field disabled orientation="horizontal">
       <Checkbox disabled />
       <FieldLabel>Enable notifications</FieldLabel>

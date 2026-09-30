@@ -8,6 +8,7 @@ const Example = () => {
 
   return (
     <PasswordInput
+      aria-label="Password"
       className="w-full max-w-64"
       onVisibilityChange={(details) => setVisible(details.visible)}
       placeholder="Enter password"

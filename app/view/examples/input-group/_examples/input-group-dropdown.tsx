@@ -26,7 +26,7 @@ const InputGroupDropdown = () => (
               <EllipsisIcon aria-hidden />
             </InputGroupButton>
           </MenuTrigger>
-          <MenuContent className="w-40">
+          <MenuContent className="min-w-40">
             <MenuGroup>
               <MenuItem value="settings">Settings</MenuItem>
               <MenuItem value="copy-path">Copy path</MenuItem>
@@ -47,7 +47,7 @@ const InputGroupDropdown = () => (
               <ChevronDownIcon aria-hidden className="size-3" />
             </InputGroupButton>
           </MenuTrigger>
-          <MenuContent className="w-40">
+          <MenuContent className="min-w-40">
             <MenuGroup>
               <MenuItem value="documentation">Documentation</MenuItem>
               <MenuItem value="blog-posts">Blog Posts</MenuItem>
