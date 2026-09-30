@@ -8,7 +8,7 @@ import {
 
 const Example = () => (
   <Field className="w-full max-w-sm">
-    <InputOTP maxLength={6}>
+    <InputOTP count={6}>
       <InputOTPLabel>Verification code</InputOTPLabel>
       <InputOTPSlot index={0} />
       <InputOTPSlot index={1} />

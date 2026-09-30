@@ -49,7 +49,7 @@ export const MusicPlayerExtras = ({
       </HoverCardTrigger>
       <HoverCardContent className="w-auto min-w-0 p-2" showArrow={false}>
         <Slider
-          aria-label="Volume"
+          aria-label={["Volume"]}
           className="h-40"
           max={100}
           onValueChange={(details) => onVolumeChange(details.value[0] ?? 0)}

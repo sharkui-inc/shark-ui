@@ -15,12 +15,7 @@ export const useStepsContext = useArkStepsContext;
 export const StepsRootProvider = ArkSteps.RootProvider;
 
 export const Steps = (props: React.ComponentProps<typeof ArkSteps.Root>) => {
-  const {
-    className,
-    lazyMount = false,
-    unmountOnExit = false,
-    ...rest
-  } = props;
+  const { className, ...rest } = props;
 
   return (
     <ArkSteps.Root
@@ -30,8 +25,6 @@ export const Steps = (props: React.ComponentProps<typeof ArkSteps.Root>) => {
         className
       )}
       data-slot="steps"
-      lazyMount={lazyMount}
-      unmountOnExit={unmountOnExit}
       {...rest}
     />
   );

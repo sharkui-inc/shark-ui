@@ -76,7 +76,7 @@ export const MusicTransport = ({
         {String(Math.floor((progress % 30) * 2)).padStart(2, "0")}
       </span>
       <Slider
-        aria-label="Position in track"
+        aria-label={["Position in track"]}
         className="flex-1"
         max={100}
         onValueChange={(details) => onProgressChange(details.value[0] ?? 0)}
