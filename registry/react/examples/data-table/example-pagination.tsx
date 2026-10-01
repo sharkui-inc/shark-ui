@@ -112,7 +112,7 @@ const Example = () => {
         <DataTablePaginationControls>
           <DataTablePaginationRowsPerPage />
           <DataTablePaginationPageInfo />
-          <DataTablePaginationNavigation />
+          <DataTablePaginationNavigation aria-label="Payments pagination" />
         </DataTablePaginationControls>
       </DataTablePagination>
     </div>

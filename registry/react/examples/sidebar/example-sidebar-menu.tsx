@@ -41,10 +41,10 @@ const Example = () => (
     </Sidebar>
     <SidebarInset>
       <div className="flex flex-1 flex-col gap-3 p-4">
-        <Skeleton className="h-28" />
+        <Skeleton className="h-28 animate-none" />
         <div className="grid flex-1 grid-cols-2 gap-3">
-          <Skeleton />
-          <Skeleton />
+          <Skeleton className="animate-none" />
+          <Skeleton className="animate-none" />
         </div>
       </div>
     </SidebarInset>

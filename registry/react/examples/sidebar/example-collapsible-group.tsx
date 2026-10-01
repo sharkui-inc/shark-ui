@@ -47,13 +47,13 @@ const Example = () => (
     </Sidebar>
     <SidebarInset>
       <div className="flex flex-1 flex-col gap-3 p-4">
-        <Skeleton className="h-10" />
+        <Skeleton className="h-10 animate-none" />
         <div className="grid grid-cols-3 gap-3">
-          <Skeleton className="h-20" />
-          <Skeleton className="h-20" />
-          <Skeleton className="h-20" />
+          <Skeleton className="h-20 animate-none" />
+          <Skeleton className="h-20 animate-none" />
+          <Skeleton className="h-20 animate-none" />
         </div>
-        <Skeleton className="min-h-24 flex-1" />
+        <Skeleton className="min-h-24 flex-1 animate-none" />
       </div>
     </SidebarInset>
   </SidebarProvider>

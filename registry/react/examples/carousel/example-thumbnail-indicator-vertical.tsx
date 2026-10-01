@@ -11,6 +11,7 @@ import {
 
 const Example = () => (
   <Carousel
+    aria-label="Vertical carousel with thumbnail indicators"
     className="h-40 w-full max-w-48 gap-4"
     loop
     orientation="vertical"

@@ -8,7 +8,7 @@ import {
 } from "@/registry/react/components/breadcrumb";
 
 const Example = () => (
-  <Breadcrumb>
+  <Breadcrumb aria-label="Current location breadcrumb">
     <BreadcrumbList>
       <BreadcrumbItem>
         <BreadcrumbLink href="#">Home</BreadcrumbLink>

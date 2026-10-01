@@ -34,6 +34,13 @@ import {
   SidebarMenuItem,
   SidebarProvider,
 } from "@/registry/react/components/sidebar";
+import {
+  State,
+  StateDescription,
+  StateHeader,
+  StateMedia,
+  StateTitle,
+} from "@/registry/react/components/state";
 
 export interface BrowserBlock {
   block: PublishedBlock;
@@ -207,20 +214,19 @@ export const BlocksBrowser = ({
                 tree={activeEntry.tree}
               />
             ) : (
-              <div className="grid min-h-80 place-items-center rounded-xl border border-dashed px-6 text-center">
-                <div className="max-w-sm">
-                  <SearchXIcon
-                    aria-hidden
-                    className="mx-auto size-8 text-muted-foreground"
-                  />
-                  <h2 className="mt-4 font-semibold text-lg">
-                    No blocks in this category
-                  </h2>
-                  <p className="mt-1 text-muted-foreground text-sm">
+              <State className="min-h-80 border border-dashed">
+                <StateHeader>
+                  <StateMedia variant="icon">
+                    <SearchXIcon aria-hidden />
+                  </StateMedia>
+                  <StateTitle asChild>
+                    <h2>No blocks in this category</h2>
+                  </StateTitle>
+                  <StateDescription>
                     Choose another category from the sidebar.
-                  </p>
-                </div>
-              </div>
+                  </StateDescription>
+                </StateHeader>
+              </State>
             )}
           </div>
         </div>

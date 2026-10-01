@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-table";
 import React from "react";
 import { dataTableFeatures } from "@/registry/react/components/data-table";
+import { ScrollArea } from "@/registry/react/components/scroll-area";
 import {
   EMPTY_DRAFT,
   INITIAL_TASKS,
@@ -21,6 +22,7 @@ import { createTaskColumns } from "./task-columns";
 import { TaskEditorDialog } from "./task-editor-dialog";
 import { TaskFilters } from "./task-filters";
 import { TaskGrid } from "./task-grid";
+import { TaskHeader } from "./task-header";
 import { TaskSelectionActionBar } from "./task-selection-action-bar";
 
 const INITIAL_ROW_SELECTION: RowSelectionState = {
@@ -209,49 +211,58 @@ export const TaskTable = () => {
   };
 
   return (
-    <TaskSelectionActionBar
-      onClearSelection={() => setRowSelection({})}
-      onDelete={deleteSelectedTasks}
-      onDuplicate={duplicateSelectedTasks}
-      onMove={moveSelectedTasks}
-      selectedCount={selectedTasks.length}
-    >
-      <div className="flex flex-col gap-4">
-        <TaskFilters
-          hasFilters={hasFilters}
-          onClearFilters={clearFilters}
-          onPriorityChange={(value) =>
-            table.getColumn("priority")?.setFilterValue(value ?? undefined)
-          }
-          onQueryChange={(value) =>
-            table.getColumn("title")?.setFilterValue(value)
-          }
-          onStatusChange={(value) =>
-            table.getColumn("status")?.setFilterValue(value ?? undefined)
-          }
-          priority={priority as TaskDraft["priority"] | null}
-          query={query}
-          status={status as TaskDraft["status"] | null}
-          table={table}
-        />
-        <TaskEditorDialog
-          draft={draft}
-          editor={editor}
-          onDraftChange={setDraft}
-          onOpenChange={(open) => {
-            if (!open) {
-              closeEditor();
-            }
-          }}
-          onSubmit={saveTask}
-        />
-        <TaskGrid
-          hasFilters={hasFilters}
-          onClearFilters={clearFilters}
-          onCreate={openCreateEditor}
-          table={table}
-        />
-      </div>
-    </TaskSelectionActionBar>
+    <div className="flex h-full min-h-0 flex-col bg-background">
+      <TaskHeader onNewTask={openCreateEditor} />
+      <ScrollArea className="flex-1">
+        <div className="flex flex-col gap-4 p-4 sm:p-6">
+          <TaskSelectionActionBar
+            onClearSelection={() => setRowSelection({})}
+            onDelete={deleteSelectedTasks}
+            onDuplicate={duplicateSelectedTasks}
+            onMove={moveSelectedTasks}
+            selectedCount={selectedTasks.length}
+          >
+            <div className="flex flex-col gap-4">
+              <TaskFilters
+                hasFilters={hasFilters}
+                onClearFilters={clearFilters}
+                onPriorityChange={(value) =>
+                  table
+                    .getColumn("priority")
+                    ?.setFilterValue(value ?? undefined)
+                }
+                onQueryChange={(value) =>
+                  table.getColumn("title")?.setFilterValue(value)
+                }
+                onStatusChange={(value) =>
+                  table.getColumn("status")?.setFilterValue(value ?? undefined)
+                }
+                priority={priority as TaskDraft["priority"] | null}
+                query={query}
+                status={status as TaskDraft["status"] | null}
+                table={table}
+              />
+              <TaskEditorDialog
+                draft={draft}
+                editor={editor}
+                onDraftChange={setDraft}
+                onOpenChange={(open) => {
+                  if (!open) {
+                    closeEditor();
+                  }
+                }}
+                onSubmit={saveTask}
+              />
+              <TaskGrid
+                hasFilters={hasFilters}
+                onClearFilters={clearFilters}
+                onCreate={openCreateEditor}
+                table={table}
+              />
+            </div>
+          </TaskSelectionActionBar>
+        </div>
+      </ScrollArea>
+    </div>
   );
 };

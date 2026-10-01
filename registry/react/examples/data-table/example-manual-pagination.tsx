@@ -85,7 +85,7 @@ const Example = () => {
         <DataTablePaginationRowsPerPage className="flex-1" />
         <DataTablePaginationControls>
           <DataTablePaginationPageInfo />
-          <DataTablePaginationNavigation />
+          <DataTablePaginationNavigation aria-label="Orders pagination" />
         </DataTablePaginationControls>
       </DataTablePagination>
     </div>

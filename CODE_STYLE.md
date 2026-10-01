@@ -19,13 +19,13 @@ Conflict order: explicit user or system instructions → `biome.json` → this f
 - Focus: `outline-hidden` + `border-ring/64 ring-2 ring-ring/24`. Base `border border-transparent` when no structural border (fields keep `border-input` until focused). Solid `bg-primary`: opaque `border-background` + same ring. No `outline-none` unless a documented a11y exception must suppress focus in forced-colors. No outline utils on static/decorative elements. Command search field: no focus ring or border shift (`focus-within:border-input focus-within:ring-0`); highlighted list item is the focus cue.
 - Variants + tokens before restyling; `className` for layout. Prefer `data-slot` / `in-*` / `peer` when extending registry styles.
 - `flex`/`grid` + `gap-*` (not `space-x-*`/`space-y-*`). `size-*` for squares/icons. `truncate` shorthand.
-- Overlays own stacking — no `z-index` on dialogs, menus, popovers, tooltips, etc.
+- Preserve layer-aware `z-index` on overlays. Ark-positioned layers use `z-[calc(50+var(--layer-index,0))]`; Tour and FloatingPanel use their own layer variables. Keep the matching layer classes on backdrops/positioners where defined. Do not replace these with a shared static `z-index` or remove them as cleanup.
 - Lucide imports use the `Icon` export (`ArchiveIcon`). Size with Tailwind, never numeric `size`. Inside `Button`, omit `className="size-*"` — Button already sizes SVGs via `[&_svg:not([class*='size-'])]:size-4` (and size variants); explicit `size-*` only for intentional overrides. Decorative: `aria-hidden="true"`; keep semantic icons exposed unless equivalent text exists.
 - Logical utils (`ms-*`, `me-*`, `ps-*`, `pe-*`, `start-*`, `end-*`); `slide-*-from-start|end`; inherit `dir` from ambient Ark `LocaleProvider` / ancestor `dir`. Do not import `LocaleProvider` or `useLocale` inside `registry/react/components` (except `locale.tsx`). Physical direction only for explicit LTR, visual coordinates, or non-reading-order geometry.
 
 ## Motion
 
-- Local via Tailwind + `tw-animate-css`. Press `duration-[120ms] ease-out`; controls/anchored overlays `duration-150 ease-out`; dialogs/sheets `duration-200 ease-out`; Ark geometry `duration-150 ease-in-out`.
+- Local via Tailwind + `tw-animate-css`. Press `duration-150 ease-out`; controls/anchored overlays `duration-150 ease-out`; dialogs/sheets `duration-200 ease-out`; Ark geometry `duration-150 ease-in-out`.
 - No duration/easing/animation/keyframe tokens in `styles/globals.css` — compose in the owning component.
 - Ark-positioned overlays: `origin-(--transform-origin)`, 98% scale, fade, placement-aware travel, local overlay classes. Centered dialogs / coordinate-positioned panels: `origin-center`. Ban `scale(0)`, `ease-in`, `ease-linear`, `transition-all`, arbitrary easing — except Drawer (`drawer.tsx`) and Sidebar geometry (`sidebar.tsx`).
 - Overlays: disable animations with `motion-reduce:animate-none` and CSS transitions with `motion-reduce:transition-none`. When an animation or transition is qualified by a state selector such as `data-[state=open]:`, repeat that state selector under `motion-reduce:` (for example, `motion-reduce:data-[state=open]:animate-none`) so the reduced-motion rule has enough specificity; class-string order alone does not guarantee it wins. Drawer (`drawer.tsx`) disables open/close animations and transitions under reduced motion while keeping direct swipe tracking responsive. Continuous non-overlay motion (spinners, marquees, and progress indicators) remains animated when reduced motion is enabled. Gate hover transforms with `(hover: hover)` and `(pointer: fine)`.
@@ -123,6 +123,8 @@ Skip N/A sections. Nothing after API Reference except Ark UI link.
 Example blurbs: at most one objective sentence. No Ark internals, no `Default is…` when the API table lists it. Self-explanatory headings need no blurb.
 
 1. Installation → 2. Anatomy → 3. Usage → 4. Controlled → 5. States (`## States` then `### Disabled` / `### Invalid` …) → 6. Variant axes (`## Size` / `## Variants`, then `###` per value) → 7. Examples → 8. API Reference
+
+`## Usage` snippets take no `className`, except utilities whose API is the class (`hitbox`, `shimmer`).
 
 API tables: `| Prop | Type | Default |`. Defaults and types always in backticks (mono). `` `-` `` when no default; `` `required` `` for required props (never `**required**`). No alt headers or description columns.
 

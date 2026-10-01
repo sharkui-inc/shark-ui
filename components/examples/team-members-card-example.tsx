@@ -182,7 +182,7 @@ export const TeamMembersCardExample = (props: React.ComponentProps<"div">) => {
 
             <ItemActions>
               <Select collection={collection} defaultValue={[member.role]}>
-                <SelectTrigger>
+                <SelectTrigger aria-label={`Role for ${member.name}`}>
                   <SelectValue placeholder="Select role..." />
                 </SelectTrigger>
 

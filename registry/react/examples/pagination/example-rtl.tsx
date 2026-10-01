@@ -14,7 +14,7 @@ const Example = () => {
   const { values } = translations[locale];
 
   return (
-    <Pagination count={50} pageSize={10}>
+    <Pagination aria-label={values.pagination} count={50} pageSize={10}>
       <PaginationPrevious>{values.previous}</PaginationPrevious>
       <PaginationItems />
       <PaginationNext>{values.next}</PaginationNext>
@@ -26,18 +26,21 @@ const translations = {
   ar: {
     values: {
       next: "التالي",
+      pagination: "ترقيم الصفحات",
       previous: "السابق",
     },
   },
   en: {
     values: {
       next: "Next",
+      pagination: "Pagination",
       previous: "Previous",
     },
   },
   he: {
     values: {
       next: "הבא",
+      pagination: "עימוד",
       previous: "הקודם",
     },
   },

@@ -78,7 +78,10 @@ export const TaskFilters = ({
         }}
         value={[status ?? FILTER_ALL]}
       >
-        <SelectTrigger className="w-full sm:w-35">
+        <SelectTrigger
+          aria-label="Filter tasks by status"
+          className="w-full sm:w-35"
+        >
           <TaskStatusSelectValue placeholder="All" />
         </SelectTrigger>
         <SelectContent>
@@ -102,7 +105,10 @@ export const TaskFilters = ({
         }}
         value={[priority ?? FILTER_ALL]}
       >
-        <SelectTrigger className="w-full sm:w-35">
+        <SelectTrigger
+          aria-label="Filter tasks by priority"
+          className="w-full sm:w-35"
+        >
           <TaskPrioritySelectValue placeholder="All" />
         </SelectTrigger>
         <SelectContent>

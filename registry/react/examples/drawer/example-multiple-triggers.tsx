@@ -41,7 +41,7 @@ const Example = () => {
         />
         <DrawerBody className="text-start">
           {activeUser ? (
-            <div className="mx-auto w-full max-w-xs">
+            <div className="mx-auto w-full max-w-sm">
               <FieldGroup key={activeUser.value}>
                 <Field>
                   <FieldLabel>Name</FieldLabel>
@@ -56,12 +56,12 @@ const Example = () => {
           ) : null}
         </DrawerBody>
         <DrawerFooter>
-          <div className="mx-auto flex w-full max-w-xs flex-col gap-2 sm:flex-row-reverse">
+          <div className="mx-auto flex w-full max-w-sm flex-col gap-2 sm:flex-row-reverse">
             <DrawerClose asChild>
-              <Button className="flex-1">Save</Button>
+              <Button className="w-full sm:flex-1">Save</Button>
             </DrawerClose>
             <DrawerClose asChild>
-              <Button className="flex-1" variant="outline">
+              <Button className="w-full sm:flex-1" variant="outline">
                 Cancel
               </Button>
             </DrawerClose>

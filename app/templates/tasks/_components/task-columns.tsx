@@ -75,7 +75,9 @@ export const TaskRowMenu = ({
   onDuplicate,
   onEdit,
   task,
-}: TaskTableActions & { task: Task }) => (
+}: TaskTableActions & {
+  task: Task;
+}) => (
   <Menu>
     <MenuTrigger asChild>
       <Button
@@ -164,7 +166,7 @@ export const createTaskColumns = (actions: TaskTableActions) => {
         return (
           <div className="flex min-w-0 items-center gap-2">
             <Avatar size="sm">
-              <AvatarImage alt={assignee.name} src={assignee.avatar} />
+              <AvatarImage alt="" src={assignee.avatar} />
               <AvatarFallback>{assignee.initials}</AvatarFallback>
             </Avatar>
             <span className="truncate font-medium">{assignee.name}</span>
@@ -199,6 +201,7 @@ export const createTaskColumns = (actions: TaskTableActions) => {
       ),
       enableHiding: false,
       enableSorting: false,
+      header: "Actions",
       id: "actions",
     }),
   ]);

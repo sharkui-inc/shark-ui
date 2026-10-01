@@ -26,7 +26,7 @@ const Example = () => {
         filter(reason === "item-select" ? "" : inputValue)
       }
     >
-      <ComboboxInput size="sm" />
+      <ComboboxInput aria-label="Fruit, small size" size="sm" />
       <ComboboxContent>
         <ComboboxEmpty />
         <ComboboxList>

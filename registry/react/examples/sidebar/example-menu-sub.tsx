@@ -57,10 +57,10 @@ const Example = () => (
     </Sidebar>
     <SidebarInset>
       <div className="grid flex-1 grid-cols-[minmax(0,1fr)_8rem] gap-3 p-4">
-        <Skeleton />
+        <Skeleton className="animate-none" />
         <div className="flex flex-col gap-3">
-          <Skeleton className="h-16" />
-          <Skeleton className="flex-1" />
+          <Skeleton className="h-16 animate-none" />
+          <Skeleton className="flex-1 animate-none" />
         </div>
       </div>
     </SidebarInset>

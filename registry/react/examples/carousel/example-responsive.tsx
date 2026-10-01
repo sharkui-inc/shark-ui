@@ -26,6 +26,7 @@ const Example = () => {
 
   return (
     <Carousel
+      aria-label="Responsive carousel"
       className="w-full max-w-3xl"
       key={slidesPerPage}
       slideCount={slides.length}

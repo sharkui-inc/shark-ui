@@ -18,14 +18,14 @@ export default function Sidebar14Page() {
           </div>
           <SidebarTrigger className="ms-auto rotate-180 rtl:rotate-0" />
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4">
+        <div className="flex flex-1 flex-col gap-4 p-4">
           <div className="grid gap-4 md:grid-cols-3">
             {["routing", "caching", "rendering"].map((card) => (
               <div className="aspect-video rounded-xl bg-muted/48" key={card} />
             ))}
           </div>
           <div className="min-h-96 flex-1 rounded-xl bg-muted/48" />
-        </main>
+        </div>
       </SidebarInset>
       <AppSidebar />
     </SidebarProvider>

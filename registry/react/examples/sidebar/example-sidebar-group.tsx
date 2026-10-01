@@ -46,10 +46,10 @@ const Example = () => (
     </Sidebar>
     <SidebarInset>
       <div className="grid flex-1 grid-cols-2 gap-3 p-4">
-        <Skeleton className="min-h-24" />
-        <Skeleton className="min-h-24" />
-        <Skeleton className="min-h-24" />
-        <Skeleton className="min-h-24" />
+        <Skeleton className="min-h-24 animate-none" />
+        <Skeleton className="min-h-24 animate-none" />
+        <Skeleton className="min-h-24 animate-none" />
+        <Skeleton className="min-h-24 animate-none" />
       </div>
     </SidebarInset>
   </SidebarProvider>

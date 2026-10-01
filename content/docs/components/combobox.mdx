@@ -97,11 +97,11 @@ const { collection, filter } = useListCollection({
     filter(reason === "item-select" ? "" : inputValue)
   }
 >
-  <ComboboxInput placeholder="Select an option" />
+  <ComboboxInput placeholder="Select a fruit" />
   <ComboboxContent>
     <ComboboxEmpty />
     <ComboboxList>
-      {items.map((item) => (
+      {collection.items.map((item) => (
         <ComboboxItem item={item} key={item.value}>
           {item.label}
         </ComboboxItem>

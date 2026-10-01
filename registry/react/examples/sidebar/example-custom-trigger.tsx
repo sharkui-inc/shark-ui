@@ -75,10 +75,10 @@ const Example = () => (
       <div className="flex flex-1 flex-col gap-4 p-4">
         <CustomTrigger />
         <div className="flex flex-1 flex-col gap-3">
-          <Skeleton className="h-10" />
-          <Skeleton className="h-10" />
-          <Skeleton className="h-10" />
-          <Skeleton className="min-h-32 flex-1" />
+          <Skeleton className="h-10 animate-none" />
+          <Skeleton className="h-10 animate-none" />
+          <Skeleton className="h-10 animate-none" />
+          <Skeleton className="min-h-32 flex-1 animate-none" />
         </div>
       </div>
     </SidebarInset>

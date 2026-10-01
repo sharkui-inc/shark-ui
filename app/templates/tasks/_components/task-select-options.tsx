@@ -104,6 +104,8 @@ export const TaskTypeSelectValue = () => (
 
 export const TaskPrioritySelectValue = ({
   placeholder = "Select a priority",
+}: {
+  placeholder?: string;
 }) => (
   <SelectValue placeholder={placeholder}>
     <SelectContext>
@@ -120,7 +122,11 @@ export const TaskPrioritySelectValue = ({
   </SelectValue>
 );
 
-export const TaskStatusSelectValue = ({ placeholder = "Select a status" }) => (
+export const TaskStatusSelectValue = ({
+  placeholder = "Select a status",
+}: {
+  placeholder?: string;
+}) => (
   <SelectValue placeholder={placeholder}>
     <SelectContext>
       {({ value: [status] }) => {

@@ -44,7 +44,15 @@ const ComponentExamplePage = async (
     notFound();
   }
 
-  return <Preview />;
+  if (component === "sidebar") {
+    return <Preview />;
+  }
+
+  return (
+    <main>
+      <Preview />
+    </main>
+  );
 };
 
 export default ComponentExamplePage;

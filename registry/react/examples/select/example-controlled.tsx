@@ -19,7 +19,7 @@ const Example = () => {
       onValueChange={(e) => setValue(e.value)}
       value={value}
     >
-      <SelectTrigger className="min-w-48">
+      <SelectTrigger aria-label="Select a framework" className="min-w-48">
         <SelectValue placeholder="Select a framework" />
       </SelectTrigger>
       <SelectContent>

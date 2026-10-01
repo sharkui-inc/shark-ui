@@ -10,6 +10,7 @@ import {
 
 const Example = () => (
   <Carousel
+    aria-label="Autoplay carousel"
     autoplay
     className="w-full max-w-48"
     loop

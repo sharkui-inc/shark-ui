@@ -16,8 +16,13 @@ import { MailToolbarButton } from "./mail-toolbar-button";
 
 const INBOX = EMAILS.filter((email) => email.folder === "Inbox");
 
-export const MailList = () => {
-  const [query] = React.useState("");
+export const MailList = ({
+  onCompose,
+  query,
+}: {
+  onCompose: () => void;
+  query: string;
+}) => {
   const [selectedId, setSelectedId] = React.useState(INBOX[0]?.id ?? null);
   const [favoriteIds, setFavoriteIds] = React.useState<string[]>([
     ...STARRED_IDS,
@@ -42,7 +47,11 @@ export const MailList = () => {
       <header className="flex h-14 min-h-14 shrink-0 items-center gap-2 border-b px-4 py-0">
         <h2 className="min-w-0 flex-1 truncate font-semibold text-sm">Inbox</h2>
 
-        <MailToolbarButton label="New message" variant="default">
+        <MailToolbarButton
+          label="New message"
+          onClick={onCompose}
+          variant="default"
+        >
           <PlusIcon aria-hidden />
         </MailToolbarButton>
       </header>

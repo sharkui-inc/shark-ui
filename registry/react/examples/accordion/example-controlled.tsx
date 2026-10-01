@@ -18,7 +18,9 @@ const Example = () => {
         value={value}
       >
         <AccordionItem value="item-1">
-          <AccordionTrigger>Product Information</AccordionTrigger>
+          <AccordionTrigger aria-label="Product Information, controlled accordion example">
+            Product Information
+          </AccordionTrigger>
           <AccordionContent className="text-muted-foreground">
             <p>
               Our flagship product combines cutting-edge technology with sleek

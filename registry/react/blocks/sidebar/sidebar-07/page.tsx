@@ -27,14 +27,14 @@ export default function Sidebar07Page() {
             <span className="truncate font-medium">Design system</span>
           </div>
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
+        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <div className="grid gap-4 md:grid-cols-3">
             {overviewCards.map((card) => (
               <div className="aspect-video rounded-xl bg-muted/48" key={card} />
             ))}
           </div>
           <div className="min-h-96 flex-1 rounded-xl bg-muted/48" />
-        </main>
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

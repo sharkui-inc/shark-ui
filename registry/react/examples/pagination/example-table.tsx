@@ -58,6 +58,7 @@ const Example = () => {
         </div>
 
         <Pagination
+          aria-label="Table pagination"
           className="flex-1 justify-end"
           count={users.length}
           onPageChange={({ page: nextPage }) => setPage(nextPage)}

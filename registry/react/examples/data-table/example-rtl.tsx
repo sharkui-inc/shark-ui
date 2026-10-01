@@ -63,6 +63,11 @@ const Example = () => {
 
   const { values } = translations[locale];
 
+  const headerLabels = {
+    actions: values.actions,
+    select: values.selectAll,
+  };
+
   const table = useTable({
     columns,
     data,
@@ -118,14 +123,17 @@ const Example = () => {
                   <TableHead
                     aria-hidden={header.isPlaceholder || undefined}
                     aria-label={
-                      header.column.id === "select"
-                        ? values.selectAll
-                        : header.column.id
+                      headerLabels[
+                        header.column.id as keyof typeof headerLabels
+                      ] ?? header.column.id
                     }
                     key={header.id}
                   >
                     {header.column.id === "select" ? (
                       <span className="sr-only">{values.selectAll}</span>
+                    ) : null}
+                    {header.column.id === "actions" ? (
+                      <span className="sr-only">{values.actions}</span>
                     ) : null}
                     {header.isPlaceholder ? null : (
                       <table.FlexRender header={header} />

@@ -15,7 +15,11 @@ const Example = () => {
   return (
     <Accordion className="w-full max-w-lg" defaultValue={["item-1"]}>
       <AccordionItem value="item-1">
-        <AccordionTrigger>{values.product.title}</AccordionTrigger>
+        <AccordionTrigger
+          aria-label={`${values.product.title}, RTL accordion example`}
+        >
+          {values.product.title}
+        </AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-muted-foreground">
           {values.product.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>

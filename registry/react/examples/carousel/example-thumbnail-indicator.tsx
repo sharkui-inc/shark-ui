@@ -10,7 +10,12 @@ import {
 } from "@/registry/react/components/carousel";
 
 const Example = () => (
-  <Carousel className="w-full max-w-48" loop slideCount={slides.length}>
+  <Carousel
+    aria-label="Carousel with thumbnail indicators"
+    className="w-full max-w-48"
+    loop
+    slideCount={slides.length}
+  >
     <CarouselControl className="relative">
       <CarouselPrevious>Previous</CarouselPrevious>
       <CarouselNext>Next</CarouselNext>

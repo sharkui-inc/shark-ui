@@ -38,6 +38,7 @@ export const DashboardSettings = ({
 }) => {
   const [page, setPage] = React.useState<SettingsPage>("general");
   const [lastSaved, setLastSaved] = React.useState("All changes saved");
+
   const saveSettings = () => setLastSaved("Saved just now");
 
   const renderPage = () => {
@@ -98,10 +99,15 @@ export const DashboardSettings = ({
               </SidebarGroup>
             </SidebarContent>
           </Sidebar>
-          <SidebarInset className="min-h-0 overflow-hidden bg-transparent">
-            <ScrollArea>
-              <div className="p-(--space)">{renderPage()}</div>
-            </ScrollArea>
+          <SidebarInset
+            asChild
+            className="min-h-0 overflow-hidden bg-transparent"
+          >
+            <div>
+              <ScrollArea>
+                <div className="p-(--space)">{renderPage()}</div>
+              </ScrollArea>
+            </div>
           </SidebarInset>
         </SidebarProvider>
         <DialogFooter className="sm:justify-start">

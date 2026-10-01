@@ -8,7 +8,9 @@ import {
 const Example = () => (
   <Accordion className="w-full max-w-lg" defaultValue={["item-1"]}>
     <AccordionItem value="item-1">
-      <AccordionTrigger>Product Information</AccordionTrigger>
+      <AccordionTrigger aria-label="Product Information, disabled accordion example">
+        Product Information
+      </AccordionTrigger>
       <AccordionContent className="text-muted-foreground">
         <p>
           Our flagship product combines cutting-edge technology with sleek

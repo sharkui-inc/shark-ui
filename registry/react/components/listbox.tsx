@@ -73,22 +73,15 @@ export const ListboxInput = (props: React.ComponentProps<typeof Input>) => {
 export const ListboxContent = (
   props: React.ComponentProps<typeof ArkListbox.Content>
 ) => {
-  const {
-    className,
-    children,
-    "aria-label": ariaLabel,
-    "aria-labelledby": ariaLabelledBy,
-    ...rest
-  } = props;
+  const { className, children, ...rest } = props;
+
   return (
     <ArkListbox.Content
-      aria-label={ariaLabel ?? "Options"}
-      aria-labelledby={ariaLabelledBy || undefined}
       className={cn(
         "flex min-h-0 w-full min-w-0 flex-col *:shrink-0",
         "p-1.5",
         "overflow-y-auto overflow-x-hidden overscroll-y-contain",
-        "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20",
+        "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/24",
         "outline-hidden",
         "data-[orientation=horizontal]:max-h-none data-[orientation=horizontal]:flex-row data-[orientation=horizontal]:overflow-x-auto data-[orientation=horizontal]:overflow-y-hidden data-[orientation=horizontal]:overscroll-x-contain",
         className

@@ -1,7 +1,7 @@
 import type React from "react";
 
 const ViewRegistryLayout = ({ children }: React.PropsWithChildren) => (
-  <main>{children}</main>
+  <div>{children}</div>
 );
 
 export default ViewRegistryLayout;

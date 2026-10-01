@@ -30,6 +30,13 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { Skeleton } from "@/registry/react/components/skeleton";
 import {
+  State,
+  StateContent,
+  StateDescription,
+  StateHeader,
+  StateTitle,
+} from "@/registry/react/components/state";
+import {
   Tabs,
   TabsContent,
   TabsList,
@@ -275,20 +282,22 @@ export const CompositionViewer = ({
               {(!loaded || failed) && (
                 <div className="absolute inset-0 z-10 grid place-items-center bg-background">
                   {failed ? (
-                    <div className="max-w-sm px-6 text-center">
-                      <p className="font-medium">Preview did not load</p>
-                      <p className="mt-1 text-muted-foreground text-sm">
-                        Retry the preview or open it in a new tab.
-                      </p>
-                      <Button
-                        className="mt-4"
-                        onClick={reload}
-                        variant="outline"
-                      >
-                        <RefreshCwIcon aria-hidden />
-                        Retry preview
-                      </Button>
-                    </div>
+                    <State className="max-w-sm flex-none gap-4 border-0 px-6 py-0 md:px-6 md:py-0">
+                      <StateHeader>
+                        <StateTitle asChild>
+                          <h2>Preview did not load</h2>
+                        </StateTitle>
+                        <StateDescription>
+                          Retry the preview or open it in a new tab.
+                        </StateDescription>
+                      </StateHeader>
+                      <StateContent>
+                        <Button onClick={reload} variant="outline">
+                          <RefreshCwIcon aria-hidden />
+                          Retry preview
+                        </Button>
+                      </StateContent>
+                    </State>
                   ) : (
                     <div
                       className="flex w-full flex-col gap-3 px-6"

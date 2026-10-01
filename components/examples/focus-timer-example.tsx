@@ -12,6 +12,7 @@ import React from "react";
 import { Badge } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
 import { Card, CardContent } from "@/registry/react/components/card";
+import { ClientOnly } from "@/registry/react/components/client-only";
 import {
   Timer,
   TimerArea,
@@ -32,7 +33,6 @@ export const FocusTimerExample = (props: React.ComponentProps<"div">) => {
   const { className, ...rest } = props;
 
   const [session, setSession] = React.useState<"break" | "focus">("focus");
-  const isFocus = session === "focus";
 
   const skipSession = () => {
     setSession((current) => (current === "focus" ? "break" : "focus"));
@@ -41,88 +41,107 @@ export const FocusTimerExample = (props: React.ComponentProps<"div">) => {
   return (
     <Card className={className} {...rest}>
       <CardContent>
-        <Timer
-          autoStart
-          className="items-center"
-          countdown
-          key={session}
-          onComplete={skipSession}
-          startMs={isFocus ? focusMs : breakMs}
+        <ClientOnly
+          fallback={
+            <FocusTimerSession onSkip={skipSession} session={session} />
+          }
         >
-          <Badge variant={isFocus ? "default" : "secondary"}>
-            {isFocus ? <TimerIcon aria-hidden /> : <CoffeeIcon aria-hidden />}
-            {isFocus ? "Focus" : "Break"}
-          </Badge>
-          <TimerArea>
-            <TimerItem
-              className="font-mono text-5xl tracking-tight"
-              type="minutes"
-            />
-            <TimerSeparator className="font-mono text-5xl" />
-            <TimerItem
-              className="font-mono text-5xl tracking-tight"
-              type="seconds"
-            />
-          </TimerArea>
-
-          <TimerControl className="w-full justify-center">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className="inline-flex">
-                  <TimerReset asChild hidden={false}>
-                    <Button aria-label="Reset" size="icon-md" variant="ghost">
-                      <RotateCcwIcon aria-hidden />
-                    </Button>
-                  </TimerReset>
-                </span>
-              </TooltipTrigger>
-              <TooltipContent>Reset</TooltipContent>
-            </Tooltip>
-            <div className="grid *:col-start-1 *:row-start-1">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span className="inline-flex">
-                    <TimerPause asChild>
-                      <Button aria-label="Pause" pill size="icon-lg">
-                        <PauseIcon aria-hidden />
-                      </Button>
-                    </TimerPause>
-                  </span>
-                </TooltipTrigger>
-                <TooltipContent>Pause</TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span className="inline-flex">
-                    <TimerPlay asChild>
-                      <Button aria-label="Play" pill size="icon-lg">
-                        <PlayIcon aria-hidden className="translate-x-px" />
-                      </Button>
-                    </TimerPlay>
-                  </span>
-                </TooltipTrigger>
-                <TooltipContent>Play</TooltipContent>
-              </Tooltip>
-            </div>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  aria-label={isFocus ? "Skip to break" : "Skip to focus"}
-                  onClick={skipSession}
-                  size="icon-md"
-                  variant="ghost"
-                >
-                  <SkipForwardIcon aria-hidden />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                {isFocus ? "Skip to break" : "Skip to focus"}
-              </TooltipContent>
-            </Tooltip>
-          </TimerControl>
-        </Timer>
+          <FocusTimerSession autoStart onSkip={skipSession} session={session} />
+        </ClientOnly>
       </CardContent>
     </Card>
+  );
+};
+
+const FocusTimerSession = (props: {
+  autoStart?: boolean;
+  onSkip: () => void;
+  session: "break" | "focus";
+}) => {
+  const { autoStart = false, onSkip, session } = props;
+  const isFocus = session === "focus";
+
+  return (
+    <Timer
+      autoStart={autoStart}
+      className="items-center"
+      countdown
+      key={session}
+      onComplete={onSkip}
+      startMs={isFocus ? focusMs : breakMs}
+    >
+      <Badge variant={isFocus ? "default" : "secondary"}>
+        {isFocus ? <TimerIcon aria-hidden /> : <CoffeeIcon aria-hidden />}
+        {isFocus ? "Focus" : "Break"}
+      </Badge>
+      <TimerArea>
+        <TimerItem
+          className="font-mono text-5xl tracking-tight"
+          type="minutes"
+        />
+        <TimerSeparator className="font-mono text-5xl" />
+        <TimerItem
+          className="font-mono text-5xl tracking-tight"
+          type="seconds"
+        />
+      </TimerArea>
+
+      <TimerControl className="w-full justify-center">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="inline-flex">
+              <TimerReset asChild hidden={false}>
+                <Button aria-label="Reset" size="icon-md" variant="ghost">
+                  <RotateCcwIcon aria-hidden />
+                </Button>
+              </TimerReset>
+            </span>
+          </TooltipTrigger>
+          <TooltipContent>Reset</TooltipContent>
+        </Tooltip>
+        <div className="grid *:col-start-1 *:row-start-1">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="inline-flex">
+                <TimerPause asChild>
+                  <Button aria-label="Pause" pill size="icon-lg">
+                    <PauseIcon aria-hidden />
+                  </Button>
+                </TimerPause>
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>Pause</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="inline-flex">
+                <TimerPlay asChild>
+                  <Button aria-label="Play" pill size="icon-lg">
+                    <PlayIcon aria-hidden className="translate-x-px" />
+                  </Button>
+                </TimerPlay>
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>Play</TooltipContent>
+          </Tooltip>
+        </div>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              aria-label={isFocus ? "Skip to break" : "Skip to focus"}
+              onClick={onSkip}
+              size="icon-md"
+              variant="ghost"
+            >
+              <SkipForwardIcon aria-hidden />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            {isFocus ? "Skip to break" : "Skip to focus"}
+          </TooltipContent>
+        </Tooltip>
+      </TimerControl>
+    </Timer>
   );
 };
 

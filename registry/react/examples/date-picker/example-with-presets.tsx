@@ -22,7 +22,7 @@ import {
 } from "@/registry/react/components/date-picker";
 
 const Example = () => (
-  <DatePicker defaultValue={[parseDate(new Date())]}>
+  <DatePicker defaultValue={[parseDate("2025-01-15")]}>
     <DatePickerTrigger asChild>
       <Button className="min-w-40" variant="outline">
         <CalendarIcon />

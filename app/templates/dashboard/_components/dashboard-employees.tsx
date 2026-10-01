@@ -45,7 +45,7 @@ const employeeColumns = employeeColumnHelper.columns([
       return (
         <div className="flex items-center gap-2">
           <Avatar size="sm">
-            <AvatarImage alt={name} src={employeeAvatars[row.original.id]} />
+            <AvatarImage alt="" src={employeeAvatars[row.original.id]} />
             <AvatarFallback>{getInitials(name)}</AvatarFallback>
           </Avatar>
           <span className="font-medium">{name}</span>
@@ -72,7 +72,7 @@ const employeeColumns = employeeColumnHelper.columns([
   }),
   employeeColumnHelper.display({
     cell: ({ row }) => <EmployeeActions employee={row.original} />,
-    header: "",
+    header: "Actions",
     id: "actions",
   }),
 ]);
@@ -92,6 +92,7 @@ export const DashboardEmployees = () => {
           <InputGroup className="sm:w-56">
             <InputGroupInput
               aria-label="Search employees"
+              id="dashboard-employee-search"
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search..."
               type="search"

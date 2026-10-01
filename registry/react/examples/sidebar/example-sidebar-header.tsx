@@ -59,13 +59,13 @@ const Example = () => (
     <SidebarInset>
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex items-center gap-3">
-          <Skeleton className="size-9 rounded-lg" />
-          <Skeleton className="h-9 w-32" />
+          <Skeleton className="size-9 animate-none rounded-lg" />
+          <Skeleton className="h-9 w-32 animate-none" />
         </div>
         <div className="grid flex-1 grid-cols-3 gap-3">
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
+          <Skeleton className="animate-none" />
+          <Skeleton className="animate-none" />
+          <Skeleton className="animate-none" />
         </div>
       </div>
     </SidebarInset>

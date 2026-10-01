@@ -9,6 +9,7 @@ import {
 
 const Example = () => (
   <Pagination
+    aria-label="Pagination links"
     count={50}
     getPageUrl={({ page }) => `/products?page=${page}`}
     onClick={(event) => event.preventDefault()} // just to don't navigate to the page

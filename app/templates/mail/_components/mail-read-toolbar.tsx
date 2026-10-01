@@ -24,14 +24,18 @@ export const MailReadToolbar = ({
   isStarred,
   isUnread,
   onComposeChange,
+  onSearchChange,
   onToggleFavorite,
   onToggleUnread,
+  query,
 }: {
   isStarred: boolean;
   isUnread: boolean;
   onComposeChange: (mode: MailComposeMode) => void;
+  onSearchChange: (query: string) => void;
   onToggleFavorite: () => void;
   onToggleUnread: () => void;
+  query: string;
 }) => (
   <>
     <ButtonGroup aria-label="Message actions" className="min-w-0">
@@ -83,9 +87,10 @@ export const MailReadToolbar = ({
     <InputGroup className="ms-auto w-40 shrink-0 sm:w-44" size="sm">
       <InputGroupInput
         aria-label="Search messages"
-        defaultValue=""
+        onChange={(event) => onSearchChange(event.target.value)}
         placeholder="Search mail"
         type="search"
+        value={query}
       />
       <InputGroupAddon>
         <SearchIcon aria-hidden />

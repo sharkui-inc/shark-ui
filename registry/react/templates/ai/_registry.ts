@@ -75,6 +75,7 @@ export const aiTemplates = [
       registryUrl("/r/reasoning.json"),
       registryUrl("/r/sidebar.json"),
       registryUrl("/r/sources.json"),
+      registryUrl("/r/state.json"),
       registryUrl("/r/suggestion.json"),
       registryUrl("/r/toggle.json"),
       registryUrl("/r/tool-result.json"),

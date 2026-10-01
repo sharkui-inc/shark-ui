@@ -14,6 +14,7 @@ export const alertVariants = tv({
     "rounded-xl border",
     "has-[>svg]:has-data-[slot=alert-action]:grid-cols-[--spacing(4)_1fr_auto] has-[>svg]:grid-cols-[--spacing(4)_1fr]",
     "has-[>svg]:gap-x-2 [&_svg]:h-lh [&_svg]:w-4",
+    "[&>svg]:in-[[data-slot=alert]:not(:has([data-slot=alert-title]))]:self-center",
     "has-data-[slot=alert-action]:grid-cols-[1fr_auto]",
   ],
   defaultVariants: {

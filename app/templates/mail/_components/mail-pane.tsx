@@ -9,8 +9,17 @@ import { MailToolbar } from "./mail-toolbar";
 
 const [selectedEmail] = EMAILS;
 
-export const MailPane = () => {
-  const [composeMode, setComposeMode] = React.useState<MailComposeMode>(null);
+export const MailPane = ({
+  composeMode,
+  onComposeChange,
+  onSearchChange,
+  query,
+}: {
+  composeMode: MailComposeMode;
+  onComposeChange: (mode: MailComposeMode) => void;
+  onSearchChange: (query: string) => void;
+  query: string;
+}) => {
   const [isStarred, setIsStarred] = React.useState(
     selectedEmail ? STARRED_IDS.includes(selectedEmail.id) : false
   );
@@ -20,7 +29,7 @@ export const MailPane = () => {
 
   const closeCompose = (event?: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
-    setComposeMode(null);
+    onComposeChange(null);
   };
 
   return (
@@ -29,13 +38,15 @@ export const MailPane = () => {
         composeMode={composeMode}
         isStarred={isStarred}
         isUnread={isUnread}
-        onComposeChange={setComposeMode}
+        onComposeChange={onComposeChange}
+        onSearchChange={onSearchChange}
         onToggleFavorite={() => setIsStarred((starred) => !starred)}
         onToggleUnread={() => setIsUnread((unread) => !unread)}
+        query={query}
       />
       <MailPaneBody
         composeMode={composeMode}
-        onCompose={() => setComposeMode("new")}
+        onCompose={() => onComposeChange("new")}
         onSend={closeCompose}
       />
     </div>

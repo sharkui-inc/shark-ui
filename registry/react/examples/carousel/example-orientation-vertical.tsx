@@ -9,6 +9,7 @@ import {
 
 const Example = () => (
   <Carousel
+    aria-label="Vertical carousel"
     className="h-40 w-full max-w-48"
     orientation="vertical"
     slideCount={slides.length}

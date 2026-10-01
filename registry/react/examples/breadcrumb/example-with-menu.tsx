@@ -18,7 +18,7 @@ import {
 } from "@/registry/react/components/menu";
 
 const Example = () => (
-  <Breadcrumb>
+  <Breadcrumb aria-label="Breadcrumb with collapsed menu">
     <BreadcrumbList>
       <BreadcrumbItem>
         <BreadcrumbLink href="#">Home</BreadcrumbLink>

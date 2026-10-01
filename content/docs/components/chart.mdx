@@ -1,8 +1,8 @@
 ---
 title: Chart
-description: Charts built on Recharts.
+description: Build themed charts with Recharts.
 seo:
-  description: Themed chart helpers on top of Recharts.
+  description: Composable chart containers, tooltips, and legends for Recharts.
 links:
   doc: https://recharts.github.io/en-US/guide/getting-started
   api: https://recharts.github.io/en-US/api
@@ -11,8 +11,6 @@ links:
 import manifest from "@/registry/manifest/chart";
 
 <ComponentPreview componentName="chart" />
-
-Browse the Charts Examples (soon).
 
 ## Installation
 
@@ -67,161 +65,92 @@ ChartContainer
 
 ```tsx
 import { Bar, BarChart } from "recharts"
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { ChartContainer, type ChartConfig } from "@/components/ui/chart"
 
-export const MyChart = () => {
-  return (
-    <ChartContainer>
-      <BarChart data={data}>
-        <Bar dataKey="value" />
-        <ChartTooltip content={<ChartTooltipContent />} />
-      </BarChart>
-    </ChartContainer>
-  )
-}
+const chartData = [{ month: "Jan", customers: 186 }, { month: "Feb", customers: 305 }]
+const chartConfig = { customers: { label: "Customers", color: "var(--chart-1)" } } satisfies ChartConfig
+
+<ChartContainer config={chartConfig} className="h-[200px] w-full max-w-sm">
+  <BarChart accessibilityLayer data={chartData}>
+    <Bar dataKey="customers" fill="var(--color-customers)" />
+  </BarChart>
+</ChartContainer>
 ```
 
-### Start with data
+## Examples
 
-Each row is a month. `dataKey` maps fields to series:
+Each example highlights one part of a chart.
+
+### Structure the data
+
+Use one object per month and a key for each series:
+
+<ComponentPreview componentName="chart" fileName="example-usage-data" />
 
 ```tsx
 const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
+  { month: "Jan", organic: 126, paid: 78 },
+  { month: "Feb", organic: 142, paid: 83 },
 ]
 ```
 
-### Add a chart config
+### Name each series
 
-`ChartConfig` holds labels, optional icons, and colors. Keep it separate from the data so charts can share it.
+Map each series key to a label and theme color:
+
+<ComponentPreview componentName="chart" fileName="example-usage-config" />
 
 ```tsx
 import { type ChartConfig } from "@/components/ui/chart"
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "#2563eb",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "#60a5fa",
-  },
+  organic: { label: "Organic search", color: "var(--chart-1)" },
+  paid: { label: "Paid search", color: "var(--chart-2)" },
 } satisfies ChartConfig
 ```
 
-### Render the chart
+### Plot the series
 
-Pass `config` to `ChartContainer`. Set a height (`min-h-[200px]` or a fixed `h-*`) or keep the default `aspect-video` so Recharts can size the SVG.
+Use `dataKey` to connect each series to a field in the data:
+
+<ComponentPreview componentName="chart" fileName="example-usage-chart" />
 
 ```tsx
-import { Bar, BarChart } from "recharts"
-import { ChartContainer, type ChartConfig } from "@/components/ui/chart"
-
-<ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+<ChartContainer config={chartConfig} className="h-[200px] w-full max-w-sm">
   <BarChart accessibilityLayer data={chartData}>
-    <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-    <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+    <Bar dataKey="organic" fill="var(--color-organic)" />
+    <Bar dataKey="paid" fill="var(--color-paid)" />
   </BarChart>
 </ChartContainer>
 ```
 
-### Add a grid
+### Show value guides
 
-Add `CartesianGrid` from Recharts. `vertical={false}` draws horizontal lines only:
+Add horizontal value guides with `CartesianGrid`:
 
-```tsx
-import { Bar, BarChart, CartesianGrid } from "recharts"
+<ComponentPreview componentName="chart" fileName="example-usage-grid" />
 
-<ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-  <BarChart accessibilityLayer data={chartData}>
-    <CartesianGrid vertical={false} />
-    <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-    <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
-  </BarChart>
-</ChartContainer>
-```
+### Label the timeline
 
-### Add an axis
+Use `XAxis` to label each point by month:
 
-Use `XAxis` for categories. This example shortens month labels and hides tick and axis lines:
+<ComponentPreview componentName="chart" fileName="example-usage-axis" />
 
-```tsx
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
+### Inspect values
 
-<ChartContainer config={chartConfig} className="h-[200px] w-full">
-  <BarChart accessibilityLayer data={chartData}>
-    <CartesianGrid vertical={false} />
-    <XAxis
-      dataKey="month"
-      tickLine={false}
-      tickMargin={10}
-      axisLine={false}
-      tickFormatter={(value) => value.slice(0, 3)}
-    />
-    <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-    <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
-  </BarChart>
-</ChartContainer>
-```
+Add a tooltip to reveal values on hover and keyboard focus:
 
-### Add a tooltip
+<ComponentPreview componentName="chart" fileName="example-usage-tooltip" />
 
-`ChartTooltip` and `ChartTooltipContent` take labels, colors, and values from `chartConfig`:
+### Identify series
 
-```tsx
-import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+`ChartLegendContent` shows the labels and colors from `chartConfig`:
 
-<ChartContainer config={chartConfig} className="h-[200px] w-full">
-  <BarChart accessibilityLayer data={chartData}>
-    <CartesianGrid vertical={false} />
-    <XAxis
-      dataKey="month"
-      tickLine={false}
-      tickMargin={10}
-      axisLine={false}
-      tickFormatter={(value) => value.slice(0, 3)}
-    />
-    <ChartTooltip content={<ChartTooltipContent />} />
-    <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-    <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
-  </BarChart>
-</ChartContainer>
-```
+<ComponentPreview componentName="chart" fileName="example-usage-legend" />
 
-### Add a legend
+## Series configuration
 
-`ChartLegend` and `ChartLegendContent` use the same config:
-
-```tsx
-import { ChartLegend, ChartLegendContent } from "@/components/ui/chart"
-
-<ChartContainer config={chartConfig} className="h-[200px] w-full">
-  <BarChart accessibilityLayer data={chartData}>
-    <CartesianGrid vertical={false} />
-    <XAxis
-      dataKey="month"
-      tickLine={false}
-      tickMargin={10}
-      axisLine={false}
-      tickFormatter={(value) => value.slice(0, 3)}
-    />
-    <ChartTooltip content={<ChartTooltipContent />} />
-    <ChartLegend content={<ChartLegendContent />} />
-    <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-    <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
-  </BarChart>
-</ChartContainer>
-```
-
-## Chart config
-
-`ChartConfig` maps each series key to a label, optional icon, and either `color` or a `theme` object with `light` and `dark` values.
+Add a label, color, and optional icon to each series. Use `theme` to set separate colors for light and dark mode.
 
 ```tsx
 import { MonitorIcon } from "lucide-react"
@@ -231,22 +160,18 @@ const chartConfig = {
   desktop: {
     label: "Desktop",
     icon: MonitorIcon,
-    color: "#2563eb",
-    theme: {
-      light: "#2563eb",
-      dark: "#dc2626",
-    },
+    theme: { light: "#2563eb", dark: "#93c5fd" },
   },
 } satisfies ChartConfig
 ```
 
-Use `color` when both themes share a value. Use `theme` when they differ.
+Use `color` instead of `theme` when a series keeps the same color in both modes.
 
 ## Theming
 
-Chart uses CSS variables to style series. See the full palette in [Colors](/docs/colors).
+Charts use the theme's `--chart-*` variables. See the [color palette](/docs/colors) and [styling guide](/docs/styling).
 
-### Variable Reference
+### Theme color tokens
 
 - <div className="inline-block size-5 rounded border border-border bg-chart-1 me-2 align-middle" /> `--chart-1`: first series
 - <div className="inline-block size-5 rounded border border-border bg-chart-2 me-2 align-middle" /> `--chart-2`: second series
@@ -254,9 +179,9 @@ Chart uses CSS variables to style series. See the full palette in [Colors](/docs
 - <div className="inline-block size-5 rounded border border-border bg-chart-4 me-2 align-middle" /> `--chart-4`: fourth series
 - <div className="inline-block size-5 rounded border border-border bg-chart-5 me-2 align-middle" /> `--chart-5`: fifth series
 
-Learn more about styling in the [Styling](/docs/styling) section.
+Assign these variables in `chartConfig` to make series follow the active theme:
 
-Set `color` to those variables so series follow the theme:
+<ComponentPreview componentName="chart" fileName="example-theming-variables" />
 
 ```tsx
 const chartConfig = {
@@ -271,118 +196,125 @@ const chartConfig = {
 } satisfies ChartConfig
 ```
 
-### Hex, HSL, or OKLCH
+### Light and dark colors
 
-You can also pass hex, HSL, OKLCH, or mix them with variables:
+Set separate values when a series needs different colors in light and dark mode:
+
+<ComponentPreview componentName="chart" fileName="example-theming-theme" />
+
+```tsx
+const chartConfig = {
+  signups: {
+    label: "New customers",
+    theme: {
+      light: "#2563eb",
+      dark: "#93c5fd",
+    },
+  },
+  target: {
+    label: "Monthly target",
+    theme: {
+      light: "#b45309",
+      dark: "#fbbf24",
+    },
+  },
+} satisfies ChartConfig
+```
+
+### CSS color values
+
+Use any CSS color value, including hex, HSL, and OKLCH:
+
+<ComponentPreview componentName="chart" fileName="example-theming-formats" />
 
 ```tsx
 const chartConfig = {
   desktop: { label: "Desktop", color: "#2563eb" },
-  mobile: { label: "Mobile", color: "hsl(220, 98%, 61%)" },
-  tablet: { label: "Tablet", color: "oklch(0.5 0.2 240)" },
-  laptop: { label: "Laptop", color: "var(--chart-2)" },
+  mobile: { label: "Mobile", color: "hsl(150, 60%, 40%)" },
+  tablet: { label: "Tablet", color: "oklch(0.68 0.16 75)" },
+  laptop: { label: "Laptop", color: "var(--chart-4)" },
 } satisfies ChartConfig
 ```
 
-### Applying colors in markup and data
+### Color chart elements
 
-`ChartContainer` sets `var(--color-*)` for each config key. Use it on fills, in the data, or in Tailwind:
+`ChartContainer` exposes `--color-*` for each config key. Use the variable on a line or area:
+
+<ComponentPreview componentName="chart" fileName="example-theming-elements" />
+
+For pie charts, set each slice's `fill` to its config variable:
+
+<ComponentPreview componentName="chart" fileName="example-theming-pie" />
 
 ```tsx
-<Bar dataKey="desktop" fill="var(--color-desktop)" />
+const chartConfig = {
+  organic: { label: "Organic search", color: "var(--chart-1)" },
+  paid: { label: "Paid search", color: "var(--chart-2)" },
+} satisfies ChartConfig
 
-{ browser: "chrome", visitors: 275, fill: "var(--color-chrome)" }
+const chartData = [
+  { channel: "organic", customers: 427, fill: "var(--color-organic)" },
+  { channel: "paid", customers: 235, fill: "var(--color-paid)" },
+]
 
-<LabelList className="fill-(--color-desktop)" />
+<Pie data={chartData} dataKey="customers" nameKey="channel" />
+```
+
+### Override the palette
+
+Override variables on `ChartContainer` to change one chart's palette:
+
+<ComponentPreview componentName="chart" fileName="example-theming-palette" />
+
+```tsx
+<ChartContainer
+  config={chartConfig}
+  className="[--chart-1:var(--color-cyan-600)] [--chart-2:var(--color-amber-600)]"
+>
+  <BarChart data={chartData}>
+    <Bar dataKey="organic" fill="var(--color-organic)" />
+    <Bar dataKey="paid" fill="var(--color-paid)" />
+  </BarChart>
+</ChartContainer>
 ```
 
 ## Tooltip
 
-```tsx
-import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+Use `labelKey` and `nameKey` when the tooltip title and series names come from custom data fields:
 
-<ChartTooltip content={<ChartTooltipContent />} />
-```
-
-### Custom label and name keys
-
-Pass `labelKey` and `nameKey` when the tooltip header and row titles should come from other fields:
+<ComponentPreview componentName="chart" fileName="example-usage-tooltip" />
 
 ```tsx
+import { type ChartConfig, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+
 const chartData = [
-  { browser: "chrome", visitors: 187, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+  { browser: "chrome", visitors: 187 },
+  { browser: "safari", visitors: 200 },
 ]
 
 const chartConfig = {
-  visitors: {
-    label: "Total Visitors",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "var(--chart-1)",
-  },
-  safari: {
-    label: "Safari",
-    color: "var(--chart-2)",
-  },
+  visitors: { label: "Visitors" },
+  chrome: { label: "Chrome", color: "var(--chart-1)" },
+  safari: { label: "Safari", color: "var(--chart-2)" },
 } satisfies ChartConfig
 
-<ChartTooltip
-  content={<ChartTooltipContent labelKey="visitors" nameKey="browser" />}
-/>
+<ChartTooltip content={<ChartTooltipContent labelKey="visitors" nameKey="browser" />} />
 ```
 
 ## Legend
 
-`ChartLegendContent` builds legend items from `chartConfig`.
+`ChartLegendContent` reads labels and colors from `chartConfig`. Set `nameKey` when the series key is stored in a custom data field.
 
-```tsx
-import { ChartLegend, ChartLegendContent } from "@/components/ui/chart"
-
-<ChartLegend content={<ChartLegendContent />} />
-```
-
-### Custom name key
-
-Pass `nameKey` when legend labels should come from a field on the data (such as `browser`):
-
-```tsx
-const chartData = [
-  { browser: "chrome", visitors: 187, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-]
-
-const chartConfig = {
-  chrome: {
-    label: "Chrome",
-    color: "var(--chart-1)",
-  },
-  safari: {
-    label: "Safari",
-    color: "var(--chart-2)",
-  },
-} satisfies ChartConfig
-
-<ChartLegend content={<ChartLegendContent nameKey="browser" />} />
-```
+<ComponentPreview componentName="chart" fileName="example-usage-legend" />
 
 ## Accessibility
 
-Pass `accessibilityLayer` for keyboard and screen reader support. Skip it on decorative charts that should not take focus.
-
-When a chart communicates important data, also provide a concise title and a text or table summary of the values and trends. Do not rely on color alone to distinguish series; verify the contrast of marks against the chart background.
+Set `accessibilityLayer` to make chart elements keyboard accessible. Add a text summary when the data matters; color alone should not distinguish series.
 
 ```tsx
 <BarChart accessibilityLayer data={chartData}>
   {/* children */}
 </BarChart>
-```
-
-```tsx
-<LineChart accessibilityLayer data={chartData}>
-  {/* children */}
-</LineChart>
 ```
 
 ## RTL

@@ -11,6 +11,7 @@ import {
 const Example = () => (
   <Carousel
     allowMouseDrag
+    aria-label="Carousel with mouse drag"
     className="w-full max-w-48"
     slideCount={slides.length}
   >

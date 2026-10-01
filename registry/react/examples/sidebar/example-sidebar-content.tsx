@@ -46,12 +46,12 @@ const Example = () => (
     </Sidebar>
     <SidebarInset>
       <div className="flex flex-1 flex-col gap-2 p-4">
-        <Skeleton className="h-9" />
-        <Skeleton className="h-9" />
-        <Skeleton className="h-9" />
-        <Skeleton className="h-9" />
-        <Skeleton className="h-9" />
-        <Skeleton className="min-h-16 flex-1" />
+        <Skeleton className="h-9 animate-none" />
+        <Skeleton className="h-9 animate-none" />
+        <Skeleton className="h-9 animate-none" />
+        <Skeleton className="h-9 animate-none" />
+        <Skeleton className="h-9 animate-none" />
+        <Skeleton className="min-h-16 flex-1 animate-none" />
       </div>
     </SidebarInset>
   </SidebarProvider>

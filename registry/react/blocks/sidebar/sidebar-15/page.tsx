@@ -19,7 +19,7 @@ export default function Sidebar15Page() {
             Project management and task tracking
           </p>
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4">
+        <div className="flex flex-1 flex-col gap-4 p-4">
           <section className="mx-auto flex w-full max-w-3xl flex-col gap-2 rounded-xl border p-5">
             <p className="font-medium text-sm">Ship the sidebar examples</p>
             <p className="text-muted-foreground text-sm">
@@ -27,7 +27,7 @@ export default function Sidebar15Page() {
             </p>
           </section>
           <div className="mx-auto min-h-96 w-full max-w-3xl rounded-xl bg-muted/48" />
-        </main>
+        </div>
       </SidebarInset>
       <SidebarRight />
     </SidebarProvider>

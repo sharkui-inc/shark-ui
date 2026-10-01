@@ -29,7 +29,7 @@ export default function Sidebar01Page() {
             <span className="truncate font-medium">Getting started</span>
           </div>
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4">
+        <div className="flex flex-1 flex-col gap-4 p-4">
           <div className="grid gap-4 md:grid-cols-3">
             {summaryCards.map((card) => (
               <div
@@ -39,7 +39,7 @@ export default function Sidebar01Page() {
             ))}
           </div>
           <div className="min-h-96 flex-1 rounded-xl border bg-muted/48" />
-        </main>
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

@@ -71,11 +71,11 @@ const Example = () => (
     <SidebarInset>
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="grid grid-cols-3 gap-3">
-          <Skeleton className="h-16" />
-          <Skeleton className="h-16" />
-          <Skeleton className="h-16" />
+          <Skeleton className="h-16 animate-none" />
+          <Skeleton className="h-16 animate-none" />
+          <Skeleton className="h-16 animate-none" />
         </div>
-        <Skeleton className="min-h-40 flex-1" />
+        <Skeleton className="min-h-40 flex-1 animate-none" />
       </div>
     </SidebarInset>
   </SidebarProvider>

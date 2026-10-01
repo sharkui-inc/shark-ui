@@ -84,6 +84,11 @@ const interactiveCharts = new Set([
   "chart-pie-interactive",
 ]);
 
+const toggleGroupCharts = new Set([
+  "chart-bar-interactive",
+  "chart-line-interactive",
+]);
+
 const CHART_PREFIX_PATTERN = /^chart-/;
 
 const titleCase = (value: string) =>
@@ -122,6 +127,10 @@ export const chartBlocks = Object.entries(chartPreviews).map(
 
     if (interactiveCharts.has(name)) {
       registryDependencies.push(registryUrl("/r/select.json"));
+    }
+
+    if (toggleGroupCharts.has(name)) {
+      registryDependencies.push(registryUrl("/r/toggle-group.json"));
     }
 
     return {

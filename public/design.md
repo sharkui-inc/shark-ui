@@ -124,7 +124,7 @@ Motion is tactile, contained, and local to the owning component.
 
 | Context | Motion |
 | --- | --- |
-| Button press | `duration-[120ms] ease-out`, with a 98% press scale when motion is allowed. |
+| Button press | `duration-150 ease-out`, with a 98% press scale when motion is allowed. |
 | Controls and anchored overlays | `duration-150 ease-out`. |
 | Dialogs and sheets | `duration-200 ease-out`. |
 | Live Ark geometry | `duration-150 ease-in-out` only for documented geometry exceptions. |

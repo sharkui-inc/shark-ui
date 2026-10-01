@@ -34,7 +34,7 @@ const DashboardPage = () => (
         </Button>
       </header>
 
-      <main className="flex flex-1 flex-col gap-6 p-4 sm:p-6">
+      <div className="flex flex-1 flex-col gap-6 p-4 sm:p-6">
         <div>
           <h1 className="font-semibold text-2xl tracking-[-0.02em]">
             Good morning, Maya
@@ -48,7 +48,7 @@ const DashboardPage = () => (
           <VisitorsChart />
           <ChannelsTable data={channelData} />
         </div>
-      </main>
+      </div>
     </SidebarInset>
   </SidebarProvider>
 );

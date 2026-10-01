@@ -8,7 +8,11 @@ import {
 } from "@/registry/react/components/carousel";
 
 const Example = () => (
-  <Carousel className="w-full max-w-48" slideCount={slides.length}>
+  <Carousel
+    aria-label="Horizontal carousel"
+    className="w-full max-w-48"
+    slideCount={slides.length}
+  >
     <CarouselControl>
       <CarouselPrevious>Previous</CarouselPrevious>
       <CarouselNext>Next</CarouselNext>

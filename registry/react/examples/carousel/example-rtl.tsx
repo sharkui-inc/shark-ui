@@ -21,7 +21,11 @@ const Example = () => {
   }));
 
   return (
-    <Carousel className="w-full max-w-48" slideCount={slides.length}>
+    <Carousel
+      aria-label={values.carousel}
+      className="w-full max-w-48"
+      slideCount={slides.length}
+    >
       <CarouselControl>
         <CarouselPrevious>{values.previous}</CarouselPrevious>
         <CarouselNext>{values.next}</CarouselNext>
@@ -47,6 +51,7 @@ const Example = () => {
 const translations = {
   ar: {
     values: {
+      carousel: "دوّار الشرائح",
       next: "التالي",
       numbers: ["١", "٢", "٣", "٤", "٥", "٦", "٧", "٨"],
       previous: "السابق",
@@ -54,6 +59,7 @@ const translations = {
   },
   en: {
     values: {
+      carousel: "RTL carousel",
       next: "Next",
       numbers: ["1", "2", "3", "4", "5", "6", "7", "8"],
       previous: "Previous",
@@ -61,6 +67,7 @@ const translations = {
   },
   he: {
     values: {
+      carousel: "קרוסלת שקופיות",
       next: "הבא",
       numbers: ["1", "2", "3", "4", "5", "6", "7", "8"],
       previous: "קודם",

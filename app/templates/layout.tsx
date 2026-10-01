@@ -1,7 +1,7 @@
 import type React from "react";
 
 const TemplatesLayout = ({ children }: React.PropsWithChildren) => (
-  <main className="min-h-svh [--sidebar-width:15rem]">{children}</main>
+  <div className="min-h-svh [--sidebar-width:15rem]">{children}</div>
 );
 
 export default TemplatesLayout;

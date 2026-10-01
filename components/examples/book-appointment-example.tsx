@@ -35,11 +35,11 @@ import {
 } from "@/registry/react/components/toggle-group";
 
 export const BookAppointmentExample = (props: React.ComponentProps<"div">) => {
-  const [value, setValue] = React.useState<DateValue[]>([today]);
+  const [value, setValue] = React.useState<DateValue[]>([initialDate]);
   const [slot, setSlot] = React.useState(["slot-0"]);
   const [isBooked, setIsBooked] = React.useState(false);
   const [isConfirming, setIsConfirming] = React.useState(false);
-  const selectedDay = value[0] ?? today;
+  const selectedDay = value[0] ?? initialDate;
 
   return (
     <Card data-slot="example-book-appointment" {...props}>
@@ -126,11 +126,11 @@ export const BookAppointmentExample = (props: React.ComponentProps<"div">) => {
   );
 };
 
-const today = parseDate(new Date());
+const initialDate = parseDate("2025-01-15");
 
 const formatWeekday = (date: DateValue) =>
-  new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(
-    new Date(date.year, date.month - 1, date.day)
+  new Intl.DateTimeFormat("en-US", { timeZone: "UTC", weekday: "long" }).format(
+    new Date(Date.UTC(date.year, date.month - 1, date.day))
   );
 
 const slots = [

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 
 const ViewExamplesLayout = ({ children }: React.PropsWithChildren) => (
-  <main className="min-h-svh bg-background text-foreground">{children}</main>
+  <div className="min-h-svh bg-background text-foreground">{children}</div>
 );
 
 export default ViewExamplesLayout;

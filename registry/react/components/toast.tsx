@@ -116,7 +116,8 @@ export const ToastItem = (props: ToastItemProps) => {
             "in-data-[type=success]:text-success-foreground",
             "in-data-[type=error]:text-destructive-foreground",
             "in-data-[type=info]:text-info-foreground",
-            "[&_svg]:pointer-events-none [&_svg]:h-lh [&_svg]:w-4 [&_svg]:shrink-0"
+            "[&_svg]:pointer-events-none [&_svg]:h-lh [&_svg]:w-4 [&_svg]:shrink-0",
+            "in-[[data-slot=toast]:not(:has([data-slot=toast-title]))]:self-center"
           )}
           data-slot="toast-icon"
         >
@@ -124,12 +125,14 @@ export const ToastItem = (props: ToastItemProps) => {
         </div>
 
         <div className="flex flex-col gap-0.5">
-          <ArkToast.Title
-            className="font-medium text-sm"
-            data-slot="toast-title"
-          >
-            {toastData.title}
-          </ArkToast.Title>
+          {!!toastData.title && (
+            <ArkToast.Title
+              className="font-medium text-sm"
+              data-slot="toast-title"
+            >
+              {toastData.title}
+            </ArkToast.Title>
+          )}
 
           {!!toastData.description && (
             <ArkToast.Description

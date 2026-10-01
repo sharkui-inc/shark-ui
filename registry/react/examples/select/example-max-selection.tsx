@@ -26,7 +26,10 @@ const Example = () => {
       onValueChange={handleValueChange}
       value={value}
     >
-      <SelectTrigger className="min-w-56">
+      <SelectTrigger
+        aria-label="Select up to three frameworks"
+        className="min-w-56"
+      >
         <SelectValue className="capitalize">
           <SelectContext>
             {({ value: selectedValue }) => renderValue(selectedValue)}

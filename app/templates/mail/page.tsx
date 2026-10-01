@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import { MailLayout } from "./_components/mail-layout";
-import { MailList } from "./_components/mail-list";
-import { MailPane } from "./_components/mail-pane";
-import { MailSidebar } from "./_components/mail-sidebar";
+import { MailWorkspace } from "./_components/mail-workspace";
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -13,14 +10,10 @@ export const metadata: Metadata = {
 };
 
 const MailTemplatePage = () => (
-  <div className="absolute inset-0 overflow-hidden">
+  <main className="absolute inset-0 overflow-hidden">
     <h1 className="sr-only">Mail preview</h1>
-    <MailLayout
-      content={<MailPane />}
-      list={<MailList />}
-      sidebar={<MailSidebar />}
-    />
-  </div>
+    <MailWorkspace />
+  </main>
 );
 
 export default MailTemplatePage;

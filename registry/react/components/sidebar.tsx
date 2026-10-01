@@ -506,7 +506,7 @@ export const SidebarGroupLabel = (
   return (
     <ark.div
       className={cn(
-        "h-8",
+        "h-8 w-full",
         "px-2",
         "flex shrink-0 items-center",
         "font-medium text-sidebar-foreground text-xs",
@@ -514,6 +514,7 @@ export const SidebarGroupLabel = (
         "transition-[margin,opacity] duration-200 ease-linear",
         "motion-reduce:transition-none",
         "[&_svg]:size-4 [&_svg]:shrink-0",
+        "[&>svg:last-child]:ms-auto",
         "group-data-[collapsible=icon]:pointer-events-none group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
         className
       )}

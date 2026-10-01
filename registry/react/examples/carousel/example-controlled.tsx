@@ -17,6 +17,7 @@ const Example = () => {
   return (
     <div className="flex flex-col gap-4">
       <Carousel
+        aria-label="Controlled carousel"
         className="w-full max-w-48"
         onPageChange={({ page: nextPage }) => setPage(nextPage)}
         page={page}

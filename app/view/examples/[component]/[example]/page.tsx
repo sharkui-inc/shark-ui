@@ -58,7 +58,13 @@ const ViewExamplePage = async (props: {
             dir="rtl"
             lang="ar-SA"
           >
-            <Preview />
+            {component === "sidebar" ? (
+              <Preview />
+            ) : (
+              <main>
+                <Preview />
+              </main>
+            )}
           </div>
         </LocaleProvider>
       </PreviewLocaleProvider>
@@ -73,7 +79,15 @@ const ViewExamplePage = async (props: {
     );
   }
 
-  return <Preview />;
+  if (component === "sidebar") {
+    return <Preview />;
+  }
+
+  return (
+    <main>
+      <Preview />
+    </main>
+  );
 };
 
 export default ViewExamplePage;

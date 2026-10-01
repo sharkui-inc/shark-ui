@@ -9,7 +9,7 @@ import {
 } from "@/registry/react/components/breadcrumb";
 
 const Example = () => (
-  <Breadcrumb>
+  <Breadcrumb aria-label="Breadcrumb with Next.js links">
     <BreadcrumbList>
       <BreadcrumbItem>
         <BreadcrumbLink asChild>

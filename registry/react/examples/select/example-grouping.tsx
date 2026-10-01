@@ -12,7 +12,7 @@ import {
 
 const Example = () => (
   <Select collection={collection}>
-    <SelectTrigger className="min-w-56">
+    <SelectTrigger aria-label="Select a framework" className="min-w-56">
       <SelectValue placeholder="Select framework" />
     </SelectTrigger>
     <SelectContent>

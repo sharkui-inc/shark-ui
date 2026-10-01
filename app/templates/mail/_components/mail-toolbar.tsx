@@ -9,15 +9,19 @@ export const MailToolbar = ({
   isStarred,
   isUnread,
   onComposeChange,
+  onSearchChange,
   onToggleFavorite,
   onToggleUnread,
+  query,
 }: {
   composeMode: MailComposeMode;
   isStarred: boolean;
   isUnread: boolean;
   onComposeChange: (mode: MailComposeMode) => void;
+  onSearchChange: (query: string) => void;
   onToggleFavorite: () => void;
   onToggleUnread: () => void;
+  query: string;
 }) => (
   <div className="flex h-14 min-h-14 shrink-0 items-center gap-2 overflow-x-auto border-b bg-muted/16 px-3 py-0 sm:px-4">
     {composeMode ? (
@@ -27,8 +31,10 @@ export const MailToolbar = ({
         isStarred={isStarred}
         isUnread={isUnread}
         onComposeChange={onComposeChange}
+        onSearchChange={onSearchChange}
         onToggleFavorite={onToggleFavorite}
         onToggleUnread={onToggleUnread}
+        query={query}
       />
     )}
   </div>

@@ -60,8 +60,8 @@ const Example = () => (
     </Sidebar>
     <SidebarInset>
       <div className="grid flex-1 grid-cols-3 gap-3 p-4">
-        <Skeleton />
-        <Skeleton className="col-span-2" />
+        <Skeleton className="animate-none" />
+        <Skeleton className="col-span-2 animate-none" />
       </div>
     </SidebarInset>
   </SidebarProvider>

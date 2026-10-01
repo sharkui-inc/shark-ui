@@ -272,7 +272,7 @@ const ChartTooltipItem = ({
           {swatch}
           <div
             className={cn(
-              "flex flex-1 justify-between leading-none",
+              "flex flex-1 justify-between gap-3 leading-none",
               nestLabel ? "items-end" : "items-center"
             )}
           >
@@ -385,7 +385,7 @@ export const ChartTooltipContent = (props: ChartTooltipContentProps) => {
             index={index}
             indicator={indicator}
             item={item}
-            key={`${nameKey ?? item.name ?? item.dataKey ?? "value"}`}
+            key={`${item.name ?? item.dataKey ?? "value"}`}
             nameKey={nameKey}
             nestLabel={nestLabel}
             tooltipLabel={tooltipLabel}
@@ -433,7 +433,7 @@ export const ChartLegendContent = (props: ChartLegendContentProps) => {
                 "flex items-center gap-1.5",
                 "[&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"
               )}
-              key={key}
+              key={`${item.value ?? item.dataKey ?? "value"}`}
             >
               {itemConfig?.icon && !hideIcon ? (
                 <itemConfig.icon />

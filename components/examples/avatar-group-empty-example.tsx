@@ -45,7 +45,7 @@ export const AvatarGroupEmptyExample = (props: React.ComponentProps<"div">) => {
           ))}
         </AvatarGroup>
         <div className="text-center">
-          <h3 className="font-medium">No Team Members</h3>
+          <p className="font-medium">No Team Members</p>
           <p className="text-muted-foreground text-sm">
             Invite your team to collaborate on this project.
           </p>

@@ -221,7 +221,7 @@ export const SelectContent = (
             "max-h-96 min-w-(--reference-width)",
             "p-1.5",
             "overflow-y-auto overflow-x-hidden overscroll-y-contain",
-            "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20",
+            "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/24",
             "bg-popover",
             "text-popover-foreground",
             "rounded-xl border shadow-lg/4",

@@ -9,6 +9,7 @@ import {
   ComboboxItem,
   ComboboxList,
 } from "@/registry/react/components/combobox";
+import { Field, FieldLabel } from "@/registry/react/components/field";
 
 const ComboboxDemo = () => {
   const { contains } = useFilter({ sensitivity: "base" });
@@ -19,25 +20,27 @@ const ComboboxDemo = () => {
   });
 
   return (
-    <Combobox
-      className="max-w-xs"
-      collection={collection}
-      onInputValueChange={({ inputValue, reason }) =>
-        filter(reason === "item-select" ? "" : inputValue)
-      }
-    >
-      <ComboboxInput placeholder="Select an option" />
-      <ComboboxContent>
-        <ComboboxEmpty />
-        <ComboboxList>
-          {collection.items.map((item) => (
-            <ComboboxItem item={item} key={item.value}>
-              {item.label}
-            </ComboboxItem>
-          ))}
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox>
+    <Field className="w-full max-w-xs">
+      <FieldLabel>Fruit</FieldLabel>
+      <Combobox
+        collection={collection}
+        onInputValueChange={({ inputValue, reason }) =>
+          filter(reason === "item-select" ? "" : inputValue)
+        }
+      >
+        <ComboboxInput placeholder="Select a fruit" />
+        <ComboboxContent>
+          <ComboboxEmpty />
+          <ComboboxList>
+            {collection.items.map((item) => (
+              <ComboboxItem item={item} key={item.value}>
+                {item.label}
+              </ComboboxItem>
+            ))}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+    </Field>
   );
 };
 

@@ -46,9 +46,9 @@ const itemVariants = tv({
     "in-data-[slot=menu-content]:p-0",
     "font-sans text-sm",
     "rounded-xl border",
-    "transition-colors duration-[120ms]",
+    "transition-colors duration-150",
     "motion-reduce:transition-none",
-    "[&:is(a,button)]:hover:bg-muted",
+    "[a,button]:hover:bg-muted",
     "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
     "[&>svg:not([class*='size-']):not([class*='h-'])]:size-4 [&>svg]:pointer-events-none [&>svg]:shrink-0",
   ],
@@ -93,7 +93,8 @@ const itemMediaVariants = tv({
     variant: {
       default: "bg-transparent",
       icon: [
-        "group-has-data-[slot=item-description]/item:self-start",
+        "group-has-data-[slot=item-title]/item:group-has-data-[slot=item-description]/item:self-start",
+        "in-[[data-slot=item]:not(:has([data-slot=item-title]))]:self-center",
         "[&_svg:not([class*='size-']):not([class*='h-'])]:h-lh",
         "[&_svg:not([class*='size-']):not([class*='w-'])]:w-4",
       ],

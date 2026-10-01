@@ -121,13 +121,15 @@ const HomeThemePicker = () => {
                     aria-hidden
                     className={cn(
                       "absolute inset-0 rounded-full",
-                      preset.swatchClass
+                      preset.swatchClass,
+                      selected &&
+                        "before:absolute before:inset-0 before:rounded-full before:bg-black/32"
                     )}
                   />
                   {selected ? (
                     <CheckIcon
                       aria-hidden
-                      className="absolute inset-0 m-auto size-3 text-primary-foreground"
+                      className="absolute inset-0 z-10 m-auto size-3 text-white"
                     />
                   ) : null}
                 </button>

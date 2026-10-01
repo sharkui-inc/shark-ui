@@ -23,7 +23,9 @@ const AccordionCardDemo = () => (
     <CardContent>
       <Accordion defaultValue={["item-1"]}>
         <AccordionItem value="item-1">
-          <AccordionTrigger>Product Information</AccordionTrigger>
+          <AccordionTrigger aria-label="Product Information, card accordion example">
+            Product Information
+          </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-4 text-muted-foreground">
             <p>
               Our flagship product combines cutting-edge technology with sleek

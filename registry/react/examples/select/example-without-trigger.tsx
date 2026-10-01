@@ -11,7 +11,12 @@ import {
 
 const Example = () => (
   <Select collection={collection}>
-    <SelectTrigger className="w-fit" showTrigger={false} variant="ghost">
+    <SelectTrigger
+      aria-label="Select a framework"
+      className="w-fit"
+      showTrigger={false}
+      variant="ghost"
+    >
       <SelectValue placeholder="Select framework" />
     </SelectTrigger>
     <SelectContent>

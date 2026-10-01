@@ -29,9 +29,9 @@ const Example = () => (
     </Sidebar>
     <SidebarInset>
       <div className="flex flex-1 flex-col gap-3 p-4">
-        <Skeleton className="h-8 w-1/3" />
-        <Skeleton className="h-24" />
-        <Skeleton className="min-h-40 flex-1" />
+        <Skeleton className="h-8 w-1/3 animate-none" />
+        <Skeleton className="h-24 animate-none" />
+        <Skeleton className="min-h-40 flex-1 animate-none" />
       </div>
     </SidebarInset>
   </SidebarProvider>

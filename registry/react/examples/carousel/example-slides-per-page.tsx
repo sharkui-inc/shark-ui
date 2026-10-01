@@ -10,6 +10,7 @@ import {
 
 const Example = () => (
   <Carousel
+    aria-label="Carousel with multiple slides per page"
     className="w-full max-w-lg"
     slideCount={slides.length}
     slidesPerPage={3}

@@ -16,7 +16,7 @@ const Example = () => {
   const { values } = translations[locale];
 
   return (
-    <Breadcrumb>
+    <Breadcrumb aria-label={values.breadcrumbNavigation}>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="#">{values.home}</BreadcrumbLink>
@@ -38,6 +38,7 @@ const translations = {
   ar: {
     values: {
       breadcrumb: "مسار التنقل",
+      breadcrumbNavigation: "مسار التنقل",
       components: "المكونات",
       home: "الرئيسية",
     },
@@ -45,6 +46,7 @@ const translations = {
   en: {
     values: {
       breadcrumb: "Breadcrumb",
+      breadcrumbNavigation: "Breadcrumb navigation",
       components: "Components",
       home: "Home",
     },
@@ -52,6 +54,7 @@ const translations = {
   he: {
     values: {
       breadcrumb: "ניווט שביל",
+      breadcrumbNavigation: "ניווט שביל",
       components: "רכיבים",
       home: "בית",
     },

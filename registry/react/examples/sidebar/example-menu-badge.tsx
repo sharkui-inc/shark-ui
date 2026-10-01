@@ -36,18 +36,18 @@ const Example = () => (
     <SidebarInset>
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex items-center gap-3">
-          <Skeleton className="size-8 rounded-full" />
-          <Skeleton className="h-8 flex-1" />
+          <Skeleton className="size-8 animate-none rounded-full" />
+          <Skeleton className="h-8 flex-1 animate-none" />
         </div>
         <div className="flex items-center gap-3">
-          <Skeleton className="size-8 rounded-full" />
-          <Skeleton className="h-8 flex-1" />
+          <Skeleton className="size-8 animate-none rounded-full" />
+          <Skeleton className="h-8 flex-1 animate-none" />
         </div>
         <div className="flex items-center gap-3">
-          <Skeleton className="size-8 rounded-full" />
-          <Skeleton className="h-8 flex-1" />
+          <Skeleton className="size-8 animate-none rounded-full" />
+          <Skeleton className="h-8 flex-1 animate-none" />
         </div>
-        <Skeleton className="min-h-24 flex-1" />
+        <Skeleton className="min-h-24 flex-1 animate-none" />
       </div>
     </SidebarInset>
   </SidebarProvider>

@@ -11,7 +11,7 @@ import {
 
 const Example = () => (
   <Select collection={collection} positioning={{ fitViewport: true }}>
-    <SelectTrigger className="min-w-56">
+    <SelectTrigger aria-label="Select a framework" className="min-w-56">
       <SelectValue placeholder="Select framework" />
     </SelectTrigger>
     <SelectContent className="max-h-56">

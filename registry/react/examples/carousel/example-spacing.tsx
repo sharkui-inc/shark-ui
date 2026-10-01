@@ -10,6 +10,7 @@ import {
 
 const Example = () => (
   <Carousel
+    aria-label="Carousel with custom spacing"
     className="w-full max-w-lg"
     slideCount={slides.length}
     slidesPerPage={2}

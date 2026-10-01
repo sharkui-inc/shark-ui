@@ -21,10 +21,10 @@ export const metadata: Metadata = {
 
 const MusicTemplatePage = () => (
   <div className="absolute inset-0 overflow-hidden">
-    <h1 className="sr-only">Music preview</h1>
     <SidebarProvider className="h-full min-h-0">
       <MusicSidebar />
       <SidebarInset className="flex min-w-0 flex-col">
+        <h1 className="sr-only">Music preview</h1>
         <MusicHeader />
         <ScrollArea className="flex-1">
           <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-4 py-3 sm:px-6 lg:px-8">
