@@ -318,6 +318,7 @@ export const ContextUsageRow = (props: ContextUsageRowProps) => {
         "flex items-center justify-between gap-2 text-xs",
         className
       )}
+      data-slot="context-usage-row"
       {...rest}
     >
       <span className="text-foreground">{title}</span>

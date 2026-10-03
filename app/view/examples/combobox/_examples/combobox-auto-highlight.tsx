@@ -23,9 +23,7 @@ const ComboboxAutoHighlight = () => {
       className="w-full max-w-64"
       collection={collection}
       inputBehavior="autohighlight"
-      onInputValueChange={({ inputValue, reason }) =>
-        filter(reason === "item-select" ? "" : inputValue)
-      }
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
       <ComboboxInput placeholder="Type to highlight..." />
       <ComboboxContent>

@@ -23,7 +23,6 @@ import {
   WavesHorizontalIcon,
 } from "lucide-react";
 import React from "react";
-import { SharkIcon } from "@/components/icons/shark";
 import {
   Avatar,
   AvatarFallback,
@@ -178,8 +177,8 @@ const data = {
       plan: "مؤسسية",
     },
     {
-      logo: SharkIcon,
-      name: "Shark Corp.",
+      logo: WavesHorizontalIcon,
+      name: "Onda Labs",
       plan: "ناشئة",
     },
   ],
@@ -198,7 +197,8 @@ interface TeamSwitcherProps {
   }[];
 }
 
-const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
+const TeamSwitcher = (props: TeamSwitcherProps) => {
+  const { teams } = props;
   const [activeTeam, setActiveTeam] = React.useState(teams[0]);
 
   if (!activeTeam) {
@@ -279,44 +279,47 @@ interface NavMainProps {
   }[];
 }
 
-const NavMain = ({ items }: NavMainProps) => (
-  <SidebarGroup>
-    <SidebarGroupLabel>المنصة</SidebarGroupLabel>
-    <SidebarMenu>
-      {items.map((item) => (
-        <Collapsible
-          asChild
-          className="group/collapsible"
-          defaultOpen={item.isActive}
-          key={item.title}
-        >
-          <SidebarMenuItem>
-            <CollapsibleTrigger asChild>
-              <SidebarMenuButton tooltip={item.title}>
-                {item.icon ? <item.icon /> : null}
-                <span>{item.title}</span>
-                <ChevronRightIcon className="ms-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-              </SidebarMenuButton>
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <SidebarMenuSub>
-                {item.items?.map((subItem) => (
-                  <SidebarMenuSubItem key={subItem.title}>
-                    <SidebarMenuSubButton asChild>
-                      <a href={subItem.url}>
-                        <span>{subItem.title}</span>
-                      </a>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                ))}
-              </SidebarMenuSub>
-            </CollapsibleContent>
-          </SidebarMenuItem>
-        </Collapsible>
-      ))}
-    </SidebarMenu>
-  </SidebarGroup>
-);
+const NavMain = (props: NavMainProps) => {
+  const { items } = props;
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel>المنصة</SidebarGroupLabel>
+      <SidebarMenu>
+        {items.map((item) => (
+          <Collapsible
+            asChild
+            className="group/collapsible"
+            defaultOpen={item.isActive}
+            key={item.title}
+          >
+            <SidebarMenuItem>
+              <CollapsibleTrigger asChild>
+                <SidebarMenuButton tooltip={item.title}>
+                  {item.icon ? <item.icon /> : null}
+                  <span>{item.title}</span>
+                  <ChevronRightIcon className="ms-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                </SidebarMenuButton>
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <SidebarMenuSub>
+                  {item.items?.map((subItem) => (
+                    <SidebarMenuSubItem key={subItem.title}>
+                      <SidebarMenuSubButton asChild>
+                        <a href={subItem.url}>
+                          <span>{subItem.title}</span>
+                        </a>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  ))}
+                </SidebarMenuSub>
+              </CollapsibleContent>
+            </SidebarMenuItem>
+          </Collapsible>
+        ))}
+      </SidebarMenu>
+    </SidebarGroup>
+  );
+};
 
 interface NavProjectsProps {
   projects: {
@@ -326,60 +329,63 @@ interface NavProjectsProps {
   }[];
 }
 
-const NavProjects = ({ projects }: NavProjectsProps) => (
-  <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-    <SidebarGroupLabel>المشاريع</SidebarGroupLabel>
-    <SidebarMenu>
-      {projects.map((item) => (
-        <SidebarMenuItem key={item.name}>
-          <SidebarMenuButton asChild>
-            <a href={item.url}>
-              <item.icon />
-              <span>{item.name}</span>
-            </a>
+const NavProjects = (props: NavProjectsProps) => {
+  const { projects } = props;
+  return (
+    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+      <SidebarGroupLabel>المشاريع</SidebarGroupLabel>
+      <SidebarMenu>
+        {projects.map((item) => (
+          <SidebarMenuItem key={item.name}>
+            <SidebarMenuButton asChild>
+              <a href={item.url}>
+                <item.icon />
+                <span>{item.name}</span>
+              </a>
+            </SidebarMenuButton>
+            <Menu
+              positioning={{
+                placement: "right-start",
+              }}
+            >
+              <MenuTrigger asChild>
+                <SidebarMenuAction showOnHover>
+                  <MoreHorizontalIcon />
+                  <span className="sr-only">المزيد</span>
+                </SidebarMenuAction>
+              </MenuTrigger>
+              <MenuContent className="min-w-48">
+                <MenuGroup>
+                  <MenuItem value={`${item.name}-view`}>
+                    <FolderIcon />
+                    عرض المشروع
+                  </MenuItem>
+                  <MenuItem value={`${item.name}-share`}>
+                    <ForwardIcon />
+                    مشاركة المشروع
+                  </MenuItem>
+                </MenuGroup>
+                <MenuSeparator />
+                <MenuGroup>
+                  <MenuItem value={`${item.name}-delete`} variant="destructive">
+                    <Trash2Icon />
+                    حذف المشروع
+                  </MenuItem>
+                </MenuGroup>
+              </MenuContent>
+            </Menu>
+          </SidebarMenuItem>
+        ))}
+        <SidebarMenuItem>
+          <SidebarMenuButton className="text-sidebar-foreground">
+            <MoreHorizontalIcon className="text-sidebar-foreground" />
+            <span>المزيد</span>
           </SidebarMenuButton>
-          <Menu
-            positioning={{
-              placement: "right-start",
-            }}
-          >
-            <MenuTrigger asChild>
-              <SidebarMenuAction showOnHover>
-                <MoreHorizontalIcon />
-                <span className="sr-only">المزيد</span>
-              </SidebarMenuAction>
-            </MenuTrigger>
-            <MenuContent className="min-w-48">
-              <MenuGroup>
-                <MenuItem value={`${item.name}-view`}>
-                  <FolderIcon />
-                  عرض المشروع
-                </MenuItem>
-                <MenuItem value={`${item.name}-share`}>
-                  <ForwardIcon />
-                  مشاركة المشروع
-                </MenuItem>
-              </MenuGroup>
-              <MenuSeparator />
-              <MenuGroup>
-                <MenuItem value={`${item.name}-delete`} variant="destructive">
-                  <Trash2Icon />
-                  حذف المشروع
-                </MenuItem>
-              </MenuGroup>
-            </MenuContent>
-          </Menu>
         </SidebarMenuItem>
-      ))}
-      <SidebarMenuItem>
-        <SidebarMenuButton className="text-sidebar-foreground">
-          <MoreHorizontalIcon className="text-sidebar-foreground" />
-          <span>المزيد</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-    </SidebarMenu>
-  </SidebarGroup>
-);
+      </SidebarMenu>
+    </SidebarGroup>
+  );
+};
 
 interface NavUserProps {
   user: {
@@ -389,7 +395,8 @@ interface NavUserProps {
   };
 }
 
-const NavUser = ({ user }: NavUserProps) => {
+const NavUser = (props: NavUserProps) => {
+  const { user } = props;
   const { isMobile } = useSidebar();
 
   return (
@@ -468,7 +475,7 @@ const NavUser = ({ user }: NavUserProps) => {
 };
 
 const AppSidebar = () => (
-  <SidebarProvider dir="rtl" lang="ar">
+  <SidebarProvider defaultOpenMobile dir="rtl" lang="ar">
     <Sidebar collapsible="icon">
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />

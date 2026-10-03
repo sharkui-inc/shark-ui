@@ -16,38 +16,41 @@ import {
 } from "@/registry/react/components/state";
 import { emptyStateSuggestions } from "../_data/chat-demo";
 
-export const EmptyConversation = ({ onSelect }: { onSelect: () => void }) => (
-  <State className="min-h-full">
-    <StateHeader>
-      <IconTile aria-hidden size="sm">
-        <SharkIcon aria-hidden />
-      </IconTile>
-      <StateTitle asChild>
-        <h2>What are we building?</h2>
-      </StateTitle>
-    </StateHeader>
-    <StateContent className="max-w-3xl flex-row flex-wrap justify-center">
-      {emptyStateSuggestions.map((item) => {
-        const Icon = item.icon;
+export const EmptyConversation = (props: { onSelect: () => void }) => {
+  const { onSelect } = props;
+  return (
+    <State className="min-h-full">
+      <StateHeader>
+        <IconTile aria-hidden size="sm">
+          <SharkIcon aria-hidden />
+        </IconTile>
+        <StateTitle asChild>
+          <h2>What are we building?</h2>
+        </StateTitle>
+      </StateHeader>
+      <StateContent className="max-w-3xl flex-row flex-wrap justify-center">
+        {emptyStateSuggestions.map((item) => {
+          const Icon = item.icon;
 
-        return (
-          <Item
-            asChild
-            className="min-w-36 flex-1"
-            key={item.label}
-            variant="outline"
-          >
-            <button onClick={onSelect} type="button">
-              <ItemMedia className="text-primary" variant="icon">
-                <Icon aria-hidden />
-              </ItemMedia>
-              <ItemContent>
-                <ItemTitle>{item.label}</ItemTitle>
-              </ItemContent>
-            </button>
-          </Item>
-        );
-      })}
-    </StateContent>
-  </State>
-);
+          return (
+            <Item
+              asChild
+              className="min-w-36 flex-1"
+              key={item.label}
+              variant="outline"
+            >
+              <button onClick={onSelect} type="button">
+                <ItemMedia className="text-primary" variant="icon">
+                  <Icon aria-hidden />
+                </ItemMedia>
+                <ItemContent>
+                  <ItemTitle>{item.label}</ItemTitle>
+                </ItemContent>
+              </button>
+            </Item>
+          );
+        })}
+      </StateContent>
+    </State>
+  );
+};

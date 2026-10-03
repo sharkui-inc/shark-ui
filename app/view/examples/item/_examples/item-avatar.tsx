@@ -40,7 +40,7 @@ const ItemAvatar = () => (
     </Item>
     <Item variant="outline">
       <ItemMedia>
-        <div className="flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale">
+        <div className="flex *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale [&>*:not(:last-child)]:-me-2">
           <Avatar className="hidden sm:flex">
             <AvatarImage alt="@vinihvc" src="https://github.com/vinihvc.png" />
             <AvatarFallback>VV</AvatarFallback>

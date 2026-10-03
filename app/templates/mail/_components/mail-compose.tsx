@@ -35,11 +35,8 @@ const composeHeading = (mode: Exclude<MailComposeMode, null>) => {
 const replySubject = (subject: string) =>
   REPLY_PREFIX.test(subject) ? subject : `Re: ${subject}`;
 
-export const MailCompose = ({
-  composeMode,
-  onSend,
-  selectedEmail,
-}: MailComposeProps) => {
+export const MailCompose = (props: MailComposeProps) => {
+  const { composeMode, onSend, selectedEmail } = props;
   const isReply = composeMode === "reply" || composeMode === "reply-all";
 
   return (

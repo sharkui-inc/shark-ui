@@ -18,7 +18,7 @@ interface AutocompleteDemoProps {
   placeholder?: string;
 }
 
-export const AutocompleteDemo = (props: AutocompleteDemoProps) => {
+const AutocompleteDemo = (props: AutocompleteDemoProps) => {
   const {
     emptyLabel = "No results found.",
     items = initialItems,
@@ -62,6 +62,4 @@ const initialItems = [
   { label: "Date", value: "date" },
 ];
 
-const AutocompleteDefaultExample = () => <AutocompleteDemo />;
-
-export default AutocompleteDefaultExample;
+export default AutocompleteDemo;

@@ -19,7 +19,7 @@ import {
   ToolResultTrigger,
 } from "@/registry/react/components/tool-result";
 
-const Example = () => {
+const ToolResultDemo = () => {
   const [lineCount, setLineCount] = React.useState(1);
   const [status, setStatus] = React.useState<ToolResultStatus>("running");
 
@@ -97,4 +97,4 @@ const LINES = [
   "\u001B[90m2 passed (2.9s)\u001B[0m",
 ];
 
-export default Example;
+export default ToolResultDemo;

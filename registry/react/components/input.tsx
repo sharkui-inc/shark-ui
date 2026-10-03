@@ -5,14 +5,16 @@ import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
-export const inputItemVariants = tv({
-  base: ["touch-manipulation select-none font-normal text-base md:text-sm"],
-});
+export const inputHeightVars = {
+  lg: "[--field-height:--spacing(11)] md:[--field-height:--spacing(10)]",
+  md: "[--field-height:--spacing(10)] md:[--field-height:--spacing(9)]",
+  sm: "[--field-height:--spacing(9)] md:[--field-height:--spacing(8)]",
+} as const;
 
 export const inputVariants = tv({
   base: [
     "peer",
-    "w-full min-w-0",
+    "h-(--field-height) w-full min-w-0",
     "bg-transparent dark:bg-input/32",
     "font-normal text-base md:text-sm",
     "rounded-lg",
@@ -29,12 +31,6 @@ export const inputVariants = tv({
     "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-64",
     "motion-reduce:transition-none",
   ],
-  compoundVariants: [
-    {
-      class: "rounded-full",
-      pill: true,
-    },
-  ],
   defaultVariants: {
     pill: false,
     size: "md",
@@ -42,12 +38,12 @@ export const inputVariants = tv({
   variants: {
     pill: {
       false: "",
-      true: "",
+      true: "rounded-full",
     },
     size: {
-      lg: ["h-11 md:h-10", "px-[calc(--spacing(3.5)-1px)]"],
-      md: ["h-10 md:h-9", "px-[calc(--spacing(3)-1px)]"],
-      sm: ["h-9 md:h-8", "px-[calc(--spacing(2.5)-1px)]", "rounded-md"],
+      lg: [inputHeightVars.lg, "px-[calc(--spacing(3.5)-1px)]"],
+      md: [inputHeightVars.md, "px-[calc(--spacing(3)-1px)]"],
+      sm: [inputHeightVars.sm, "px-[calc(--spacing(2.5)-1px)]"],
     },
   },
 });
@@ -67,7 +63,11 @@ export const Input = (props: InputProps) => {
 
   return (
     <FieldInput
-      className={cn(inputVariants({ pill, size }), className)}
+      className={cn(
+        inputVariants({ pill, size }),
+        !pill && size === "sm" && "rounded-md",
+        className
+      )}
       data-size={size}
       data-slot="input"
       type={type}

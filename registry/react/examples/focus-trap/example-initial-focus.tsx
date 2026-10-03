@@ -11,7 +11,7 @@ import { FocusTrap } from "@/registry/react/components/focus-trap";
 import { Input } from "@/registry/react/components/input";
 import { Textarea } from "@/registry/react/components/textarea";
 
-const FocusTrapDemo = () => {
+const Example = () => {
   const [trapped, setTrapped] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -49,4 +49,4 @@ const FocusTrapDemo = () => {
   );
 };
 
-export default FocusTrapDemo;
+export default Example;

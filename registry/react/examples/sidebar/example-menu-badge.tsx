@@ -14,9 +14,9 @@ import {
 import { Skeleton } from "@/registry/react/components/skeleton";
 
 const Example = () => (
-  <SidebarProvider className="h-svh">
-    <Sidebar collapsible="none">
-      <SidebarContent>
+  <SidebarProvider className="h-svh" defaultOpenMobile>
+    <Sidebar>
+      <SidebarContent overscrollContain={false}>
         <SidebarGroup>
           <SidebarGroupLabel>Workspace</SidebarGroupLabel>
           <SidebarMenu>

@@ -2,7 +2,6 @@
 
 import {
   Pagination as ArkPagination,
-  usePagination as useArkPagination,
   usePaginationContext as useArkPaginationContext,
 } from "@ark-ui/react/pagination";
 import { createContext } from "@ark-ui/react/utils";
@@ -18,9 +17,6 @@ import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
 import { FormatNumber } from "@/registry/react/components/format";
 
-export const usePagination = useArkPagination;
-export const usePaginationContext = useArkPaginationContext;
-
 const [PaginationTypeProvider, usePaginationType] = createContext<
   "button" | "link"
 >({
@@ -29,32 +25,10 @@ const [PaginationTypeProvider, usePaginationType] = createContext<
   providerName: "Pagination",
 });
 
-export interface PaginationRootProviderProps
-  extends React.ComponentProps<typeof ArkPagination.RootProvider> {
-  /**
-   * Whether pagination items render as buttons or links.
-   * Match the `type` option passed to `usePagination` when non-default.
-   *
-   * @default "button"
-   */
-  type?: "button" | "link";
-}
-
-export const PaginationRootProvider = (props: PaginationRootProviderProps) => {
-  const { type = "button", children, ...rest } = props;
-
-  return (
-    <PaginationTypeProvider value={type}>
-      <ArkPagination.RootProvider {...rest}>
-        {children}
-      </ArkPagination.RootProvider>
-    </PaginationTypeProvider>
-  );
-};
-
 interface PaginationProps
   extends React.ComponentProps<typeof ArkPagination.Root> {}
 
+export const usePaginationContext = useArkPaginationContext;
 export const Pagination = (props: PaginationProps) => {
   const { type = "button", className, ...rest } = props;
 

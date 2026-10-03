@@ -20,9 +20,9 @@ import {
 import { Skeleton } from "@/registry/react/components/skeleton";
 
 const Example = () => (
-  <SidebarProvider defaultOpen={false}>
+  <SidebarProvider defaultOpen={false} defaultOpenMobile>
     <Sidebar collapsible="icon">
-      <SidebarContent>
+      <SidebarContent overscrollContain={false}>
         <SidebarGroup>
           <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarMenu>

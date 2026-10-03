@@ -120,21 +120,24 @@ const formatCurrency = (amount: number) =>
     style: "currency",
   }).format(amount);
 
-const ExpandToggle = ({ row }: { row: Row<typeof features, Order> }) => (
-  <Button
-    aria-expanded={row.getIsExpanded()}
-    aria-label={row.getIsExpanded() ? "Collapse order" : "Expand order"}
-    onClick={() => row.toggleExpanded()}
-    size="icon-sm"
-    variant="ghost"
-  >
-    {row.getIsExpanded() ? (
-      <ChevronDownIcon aria-hidden />
-    ) : (
-      <ChevronRightIcon aria-hidden />
-    )}
-  </Button>
-);
+const ExpandToggle = (props: { row: Row<typeof features, Order> }) => {
+  const { row } = props;
+  return (
+    <Button
+      aria-expanded={row.getIsExpanded()}
+      aria-label={row.getIsExpanded() ? "Collapse order" : "Expand order"}
+      onClick={() => row.toggleExpanded()}
+      size="icon-sm"
+      variant="ghost"
+    >
+      {row.getIsExpanded() ? (
+        <ChevronDownIcon aria-hidden />
+      ) : (
+        <ChevronRightIcon aria-hidden />
+      )}
+    </Button>
+  );
+};
 
 const columns = columnHelper.columns([
   columnHelper.display({
@@ -179,36 +182,39 @@ const data: Order[] = [
   },
 ];
 
-const OrderDetail = ({ order }: { order: Order }) => (
-  <div className="bg-muted/32 px-4 py-3">
-    <p className="mb-2 font-medium text-muted-foreground text-xs uppercase tracking-wide">
-      Line items
-    </p>
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Product</TableHead>
-          <TableHead className="w-20">Qty</TableHead>
-          <TableHead className="w-28 text-right">Unit</TableHead>
-          <TableHead className="w-28 text-right">Line</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {order.items.map((item) => (
-          <TableRow key={`${order.id}-${item.product}`}>
-            <TableCell>{item.product}</TableCell>
-            <TableCell className="tabular-nums">{item.qty}</TableCell>
-            <TableCell className="text-right tabular-nums">
-              {formatCurrency(item.unitPrice)}
-            </TableCell>
-            <TableCell className="text-right font-medium tabular-nums">
-              {formatCurrency(item.qty * item.unitPrice)}
-            </TableCell>
+const OrderDetail = (props: { order: Order }) => {
+  const { order } = props;
+  return (
+    <div className="bg-muted/32 px-4 py-3">
+      <p className="mb-2 font-medium text-muted-foreground text-xs uppercase tracking-wide">
+        Line items
+      </p>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Product</TableHead>
+            <TableHead className="w-20">Qty</TableHead>
+            <TableHead className="w-28 text-right">Unit</TableHead>
+            <TableHead className="w-28 text-right">Line</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </div>
-);
+        </TableHeader>
+        <TableBody>
+          {order.items.map((item) => (
+            <TableRow key={`${order.id}-${item.product}`}>
+              <TableCell>{item.product}</TableCell>
+              <TableCell className="tabular-nums">{item.qty}</TableCell>
+              <TableCell className="text-right tabular-nums">
+                {formatCurrency(item.unitPrice)}
+              </TableCell>
+              <TableCell className="text-right font-medium tabular-nums">
+                {formatCurrency(item.qty * item.unitPrice)}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
+};
 
 export default Example;

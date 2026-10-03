@@ -5,7 +5,7 @@ const Example = () => (
     className="h-64 max-w-80 rounded-lg border **:[p]:min-w-100"
     orientation="both"
   >
-    <div className="space-y-4 p-8">
+    <div className="flex flex-col gap-4 p-8">
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut nulla
         metus. Ut consequat augue et semper porttitor. Integer vel ante arcu.

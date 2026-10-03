@@ -108,45 +108,44 @@ interface HeaderCommandProps
   tree: typeof source.pageTree;
 }
 
-const getCommandItems = ({
-  compositionItems,
-  navItems,
-  tree,
-}: Pick<
-  HeaderCommandProps,
-  "compositionItems" | "navItems" | "tree"
->): PageItem[] => [
-  ...navItems.map((item) => ({
-    group: "Pages",
-    isComponent: false,
-    label: item.label,
-    url: item.href,
-    value: item.href,
-  })),
-  ...tree.children.flatMap((group) => {
-    if (group.type !== "folder") {
-      return [];
-    }
+const getCommandItems = (
+  props: Pick<HeaderCommandProps, "compositionItems" | "navItems" | "tree">
+): PageItem[] => {
+  const { compositionItems, navItems, tree } = props;
 
-    const groupName =
-      String(group.name) === "Sections" ? "Pages" : String(group.name);
-
-    return group.children.flatMap((item) => {
-      if (item.type !== "page") {
+  return [
+    ...navItems.map((item) => ({
+      group: "Pages",
+      isComponent: false,
+      label: item.label,
+      url: item.href,
+      value: item.href,
+    })),
+    ...tree.children.flatMap((group) => {
+      if (group.type !== "folder") {
         return [];
       }
 
-      return {
-        group: groupName,
-        isComponent: isComponentPage(item.url),
-        label: item.name?.toString() || "",
-        url: item.url,
-        value: item.url,
-      };
-    });
-  }),
-  ...compositionItems,
-];
+      const groupName =
+        String(group.name) === "Sections" ? "Pages" : String(group.name);
+
+      return group.children.flatMap((item) => {
+        if (item.type !== "page") {
+          return [];
+        }
+
+        return {
+          group: groupName,
+          isComponent: isComponentPage(item.url),
+          label: item.name?.toString() || "",
+          url: item.url,
+          value: item.url,
+        };
+      });
+    }),
+    ...compositionItems,
+  ];
+};
 
 export const HeaderCommand = (props: HeaderCommandProps) => {
   const { compositionItems, navItems, tree, ...rest } = props;
@@ -222,8 +221,10 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
           className={cn(
             "justify-between",
             "bg-white dark:bg-input/32",
-            "w-full md:w-48 lg:w-40"
+            "w-full md:w-48 lg:w-40",
+            "[anchor-name:--site-search]"
           )}
+          id="site-search-trigger"
           size="sm"
           variant="outline"
         >

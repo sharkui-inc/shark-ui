@@ -105,7 +105,8 @@ const FontPicker = (props: FontPickerProps) => {
   );
   const selectedFont = fonts.find((font) => font.value === value);
 
-  const handleValueChange = ({ value: next }: { value: string[] }) => {
+  const handleValueChange = (details: { value: string[] }) => {
+    const { value: next } = details;
     const [selected] = next;
     if (selected) {
       onValueChange(selected as ThemeFontName);

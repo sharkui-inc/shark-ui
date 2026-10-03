@@ -52,7 +52,7 @@ const InputGroupWithAddons = () => (
           <MicIcon aria-hidden />
         </InputGroupAddon>
         <InputGroupAddon align="inline-end">
-          <RadioIcon aria-hidden className="animate-pulse text-red-500" />
+          <RadioIcon aria-hidden className="animate-pulse text-destructive" />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -91,7 +91,7 @@ const InputGroupWithAddons = () => (
           </InputGroupButton>
         </InputGroupAddon>
         <InputGroupAddon>
-          <RadioIcon aria-hidden className="animate-pulse text-red-500" />
+          <RadioIcon aria-hidden className="animate-pulse text-destructive" />
         </InputGroupAddon>
       </InputGroup>
     </Field>

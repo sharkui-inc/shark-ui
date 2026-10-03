@@ -7,9 +7,8 @@ interface RegistryDependenciesProps {
   dependencies?: string[];
 }
 
-export const RegistryDependencies = ({
-  dependencies = [],
-}: RegistryDependenciesProps) => {
+export const RegistryDependencies = (props: RegistryDependenciesProps) => {
+  const { dependencies = [] } = props;
   if (dependencies.length === 0) {
     return null;
   }

@@ -2,7 +2,6 @@
 
 import {
   Avatar as ArkAvatar,
-  useAvatar as useArkAvatar,
   useAvatarContext as useArkAvatarContext,
 } from "@ark-ui/react/avatar";
 import { ark } from "@ark-ui/react/factory";
@@ -13,10 +12,6 @@ import {
   Status,
   type statusVariants,
 } from "@/registry/react/components/status";
-
-export const useAvatar = useArkAvatar;
-export const useAvatarContext = useArkAvatarContext;
-export const AvatarRootProvider = ArkAvatar.RootProvider;
 
 const avatarVariants = tv({
   base: [
@@ -45,6 +40,7 @@ interface AvatarProps
   extends React.ComponentProps<typeof ArkAvatar.Root>,
     VariantProps<typeof avatarVariants> {}
 
+export const useAvatarContext = useArkAvatarContext;
 export const Avatar = (props: AvatarProps) => {
   const { size = "md", className, ...rest } = props;
 
@@ -128,7 +124,7 @@ export const AvatarGroup = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex -space-x-2",
+        "flex [&>*:not(:last-child)]:-me-2",
         "**:data-[slot=avatar]:ring-2 **:data-[slot=avatar]:ring-background",
         className
       )}

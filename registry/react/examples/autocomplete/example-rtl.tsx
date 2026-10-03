@@ -1,7 +1,13 @@
 "use client";
 
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
-import { AutocompleteDemo } from "./example-default";
+import AutocompleteDemo from "./example-default";
+
+const Example = () => {
+  const { locale } = usePreviewLocale();
+
+  return <AutocompleteDemo key={locale} {...translations[locale]} />;
+};
 
 const translations = {
   ar: {
@@ -39,10 +45,4 @@ const translations = {
   },
 };
 
-const AutocompleteRTLExample = () => {
-  const { locale } = usePreviewLocale();
-
-  return <AutocompleteDemo key={locale} {...translations[locale]} />;
-};
-
-export default AutocompleteRTLExample;
+export default Example;

@@ -16,13 +16,11 @@ import {
 } from "@/registry/react/components/sheet";
 import { TRACKS, type Track } from "../_data/music";
 
-export const MusicQueue = ({
-  currentTrack,
-  onTrackSelect,
-}: {
+export const MusicQueue = (props: {
   currentTrack: Track;
   onTrackSelect: (track: Track) => void;
 }) => {
+  const { currentTrack, onTrackSelect } = props;
   const upcoming = TRACKS.filter((track) => track.title !== currentTrack.title);
 
   return (

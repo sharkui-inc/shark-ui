@@ -34,17 +34,7 @@ import {
   TaskStatusSelectValue,
 } from "./task-select-options";
 
-export const TaskFilters = ({
-  hasFilters,
-  onClearFilters,
-  onPriorityChange,
-  onQueryChange,
-  onStatusChange,
-  priority,
-  query,
-  status,
-  table,
-}: {
+export const TaskFilters = (props: {
   hasFilters: boolean;
   onClearFilters: () => void;
   onPriorityChange: (priority: TaskPriority | null) => void;
@@ -54,91 +44,104 @@ export const TaskFilters = ({
   query: string;
   status: TaskStatus | null;
   table: ReactTable<DataTableFeatures, Task>;
-}) => (
-  <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-    <InputGroup className="lg:max-w-48">
-      <InputGroupAddon>
-        <SearchIcon aria-hidden />
-      </InputGroupAddon>
-      <InputGroupInput
-        aria-label="Search tasks"
-        onChange={(event) => onQueryChange(event.target.value)}
-        placeholder="Search"
-        type="search"
-        value={query}
+}) => {
+  const {
+    hasFilters,
+    onClearFilters,
+    onPriorityChange,
+    onQueryChange,
+    onStatusChange,
+    priority,
+    query,
+    status,
+    table,
+  } = props;
+  return (
+    <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+      <InputGroup className="lg:max-w-48">
+        <InputGroupAddon>
+          <SearchIcon aria-hidden />
+        </InputGroupAddon>
+        <InputGroupInput
+          aria-label="Search tasks"
+          onChange={(event) => onQueryChange(event.target.value)}
+          placeholder="Search"
+          type="search"
+          value={query}
+        />
+      </InputGroup>
+      <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
+        <Select
+          collection={statusFilterCollection}
+          onValueChange={({ value: [next] }) => {
+            onStatusChange(
+              !next || next === FILTER_ALL ? null : (next as TaskStatus)
+            );
+          }}
+          value={[status ?? FILTER_ALL]}
+        >
+          <SelectTrigger
+            aria-label="Filter tasks by status"
+            className="w-full sm:w-35"
+          >
+            <TaskStatusSelectValue placeholder="All" />
+          </SelectTrigger>
+          <SelectContent>
+            {statusFilterCollection.items.map((item) => (
+              <SelectItem item={item} key={item}>
+                {item === FILTER_ALL ? (
+                  <TaskAllOption />
+                ) : (
+                  <TaskStatusOption status={item as TaskStatus} />
+                )}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select
+          collection={priorityFilterCollection}
+          onValueChange={({ value: [next] }) => {
+            onPriorityChange(
+              !next || next === FILTER_ALL ? null : (next as TaskPriority)
+            );
+          }}
+          value={[priority ?? FILTER_ALL]}
+        >
+          <SelectTrigger
+            aria-label="Filter tasks by priority"
+            className="w-full sm:w-35"
+          >
+            <TaskPrioritySelectValue placeholder="All" />
+          </SelectTrigger>
+          <SelectContent>
+            {priorityFilterCollection.items.map((item) => (
+              <SelectItem item={item} key={item}>
+                {item === FILTER_ALL ? (
+                  <TaskAllOption />
+                ) : (
+                  <TaskPriorityOption priority={item as TaskPriority} />
+                )}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        {hasFilters ? (
+          <Button
+            className="col-span-2 sm:col-auto"
+            onClick={onClearFilters}
+            size="sm"
+            variant="ghost"
+          >
+            <XIcon aria-hidden />
+            Clear
+          </Button>
+        ) : null}
+      </div>
+      <DataTableViewOptions
+        className="ms-0 hidden w-full sm:w-auto md:inline-flex lg:ms-auto"
+        table={table}
+        variant="outline"
       />
-    </InputGroup>
-    <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
-      <Select
-        collection={statusFilterCollection}
-        onValueChange={({ value: [next] }) => {
-          onStatusChange(
-            !next || next === FILTER_ALL ? null : (next as TaskStatus)
-          );
-        }}
-        value={[status ?? FILTER_ALL]}
-      >
-        <SelectTrigger
-          aria-label="Filter tasks by status"
-          className="w-full sm:w-35"
-        >
-          <TaskStatusSelectValue placeholder="All" />
-        </SelectTrigger>
-        <SelectContent>
-          {statusFilterCollection.items.map((item) => (
-            <SelectItem item={item} key={item}>
-              {item === FILTER_ALL ? (
-                <TaskAllOption />
-              ) : (
-                <TaskStatusOption status={item as TaskStatus} />
-              )}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <Select
-        collection={priorityFilterCollection}
-        onValueChange={({ value: [next] }) => {
-          onPriorityChange(
-            !next || next === FILTER_ALL ? null : (next as TaskPriority)
-          );
-        }}
-        value={[priority ?? FILTER_ALL]}
-      >
-        <SelectTrigger
-          aria-label="Filter tasks by priority"
-          className="w-full sm:w-35"
-        >
-          <TaskPrioritySelectValue placeholder="All" />
-        </SelectTrigger>
-        <SelectContent>
-          {priorityFilterCollection.items.map((item) => (
-            <SelectItem item={item} key={item}>
-              {item === FILTER_ALL ? (
-                <TaskAllOption />
-              ) : (
-                <TaskPriorityOption priority={item as TaskPriority} />
-              )}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      {hasFilters ? (
-        <Button
-          className="col-span-2 sm:col-auto"
-          onClick={onClearFilters}
-          size="sm"
-          variant="ghost"
-        >
-          <XIcon aria-hidden />
-          Clear
-        </Button>
-      ) : null}
     </div>
-    <DataTableViewOptions
-      className="ms-0 hidden w-full sm:w-auto md:inline-flex lg:ms-auto"
-      table={table}
-      variant="outline"
-    />
-  </div>
-);
+  );
+};

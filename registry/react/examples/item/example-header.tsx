@@ -15,7 +15,7 @@ const Example = () => (
           <ItemHeader>
             <img
               alt={model.name}
-              className="aspect-square grayscale"
+              className="aspect-square"
               height={128}
               src={model.image}
               width={128}

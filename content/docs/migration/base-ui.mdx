@@ -5,43 +5,33 @@ links:
   doc: https://base-ui.com
 ---
 
-[Base UI](https://base-ui.com) and [Ark UI](https://ark-ui.com) are both headless libraries with named parts. Shark UI wraps Ark with Tailwind styling and installs source into your repo.
+[Base UI](https://base-ui.com) and [Ark UI](https://ark-ui.com) solve the same problem: accessible headless behavior you style yourself.
 
-Install the Shark component, read its anatomy, then adapt markup and state. The main composition shift is `render` to `asChild`.
+> Shark UI wraps Ark with Tailwind defaults and a copy-and-own install flow.
 
 ## What changes
 
-| Base UI habit | Shark / Ark pattern |
+| Base UI | Shark |
 | --- | --- |
 | `render` on triggers and items | `asChild` with one host child |
-| Inline item lists on Select / Menu | Ark `collection` where the docs require it |
+| Select `items` plus `Select.Item` children | Ark `collection`. `defaultValue` is a string array |
+| Combobox `items` and a `Combobox.List` render function | `useFilter` and `useListCollection`; render `collection.items` |
 | `@base-ui/react/*` imports | Shark component from [Components](/docs/components) |
 | Unstyled primitive parts | Named Shark parts with default Tailwind classes |
 
+## Component equivalents
+
+Names match. Toggle group item is `Toggle` in Base UI and `ToggleGroupItem` in Shark.
+
 ## Triggers
 
-Base UI composes triggers with `render`; replace that composition with `asChild` in Shark:
+`render` receives the element. The text is its children.
 
-```tsx
-import { Menu, MenuTrigger } from "@/components/ui/menu";
-import { Button } from "@/components/ui/button";
-
-<Menu>
-  <MenuTrigger asChild>
-    <Button variant="outline">Open</Button>
-  </MenuTrigger>
-</Menu>;
-```
-
-Pass exactly one child. Do not port Base UI composition callbacks unchanged.
-
-For a menu item rendered as a link, replace Base UI's `render` prop with `asChild`:
-
-```tsx
+```tsx title="Base UI" showLineNumbers
 import { Menu } from "@base-ui/react/menu";
 
 <Menu.Root>
-  <Menu.Trigger>Resources</Menu.Trigger>
+  <Menu.Trigger render={<button type="button" />}>Open</Menu.Trigger>
   <Menu.Portal>
     <Menu.Positioner>
       <Menu.Popup>
@@ -52,11 +42,16 @@ import { Menu } from "@base-ui/react/menu";
 </Menu.Root>;
 ```
 
-```tsx
+The element is the `asChild` child. The text stays inside it.
+
+```tsx title="Shark UI" showLineNumbers
+import { Button } from "@/components/ui/button";
 import { Menu, MenuContent, MenuItem, MenuTrigger } from "@/components/ui/menu";
 
 <Menu>
-  <MenuTrigger>Resources</MenuTrigger>
+  <MenuTrigger asChild>
+    <Button variant="outline">Open</Button>
+  </MenuTrigger>
   <MenuContent>
     <MenuItem asChild>
       <a href="/docs">Documentation</a>
@@ -65,17 +60,31 @@ import { Menu, MenuContent, MenuItem, MenuTrigger } from "@/components/ui/menu";
 </Menu>;
 ```
 
-## Component equivalents
-
-| Base UI | Shark UI |
-| --- | --- |
-| Number Field | [Number Input](/docs/components/number-input) |
-
-Browse [Components](/docs/components) for same-name primitives (Menu, Dialog, Select, and others).
-
 ## Select
 
-```tsx
+`Select.Item` children. `defaultValue` is a string. Root `items` is the selected-label map.
+
+```tsx title="Base UI" showLineNumbers
+import { Select } from "@base-ui/react/select";
+
+<Select.Root defaultValue="next">
+  <Select.Trigger>
+    <Select.Value placeholder="Framework" />
+  </Select.Trigger>
+  <Select.Portal>
+    <Select.Positioner>
+      <Select.Popup>
+        <Select.Item value="next">Next.js</Select.Item>
+        <Select.Item value="vite">Vite</Select.Item>
+      </Select.Popup>
+    </Select.Positioner>
+  </Select.Portal>
+</Select.Root>;
+```
+
+`collection`. `defaultValue` is `string[]`.
+
+```tsx title="Shark UI" showLineNumbers
 import { createListCollection } from "@ark-ui/react";
 import {
   Select,
@@ -95,7 +104,7 @@ const frameworks = createListCollection({
   </SelectTrigger>
   <SelectContent>
     {frameworks.items.map((item) => (
-      <SelectItem key={item} value={item}>
+      <SelectItem item={item} key={item}>
         {item}
       </SelectItem>
     ))}
@@ -103,21 +112,121 @@ const frameworks = createListCollection({
 </Select>;
 ```
 
-For [Combobox](/docs/components/combobox), wire `useFilter` and `useListCollection` so filtering updates the same collection that renders items.
+## Combobox
 
-## Toggle Group and Accordion
+`items`. `Combobox.List` is a render function.
 
-Base UI and Ark both use value arrays on these primitives. Drop Base UI-specific `type` props and match the Shark docs page:
+```tsx title="Base UI" showLineNumbers
+import { Combobox } from "@base-ui/react/combobox";
 
-```tsx
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+const fruits = [
+  { label: "Apple", value: "apple" },
+  { label: "Banana", value: "banana" },
+];
+
+<Combobox.Root items={fruits}>
+  <Combobox.Input placeholder="Select a fruit" />
+  <Combobox.Portal>
+    <Combobox.Positioner>
+      <Combobox.Popup>
+        <Combobox.Empty>No fruits found.</Combobox.Empty>
+        <Combobox.List>
+          {(item) => (
+            <Combobox.Item key={item.value} value={item}>
+              {item.label}
+            </Combobox.Item>
+          )}
+        </Combobox.List>
+      </Combobox.Popup>
+    </Combobox.Positioner>
+  </Combobox.Portal>
+</Combobox.Root>;
+```
+
+`useFilter` and `useListCollection`. Render `collection.items`.
+
+```tsx title="Shark UI" showLineNumbers
+"use client";
+
+import { useFilter, useListCollection } from "@ark-ui/react";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
+
+const ComboboxExample = () => {
+  const { contains } = useFilter({ sensitivity: "base" });
+  const { collection, filter } = useListCollection({
+    filter: contains,
+    initialItems: [
+      { label: "Apple", value: "apple" },
+      { label: "Banana", value: "banana" },
+    ],
+  });
+
+  return (
+    <Combobox
+      collection={collection}
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
+    >
+      <ComboboxInput placeholder="Select a fruit" />
+      <ComboboxContent>
+        <ComboboxEmpty />
+        <ComboboxList>
+          {collection.items.map((item) => (
+            <ComboboxItem item={item} key={item.value}>
+              {item.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+};
+```
+
+## Toggle Group
+
+String array. `multiple` defaults to `false`.
+
+```tsx title="Base UI" showLineNumbers
+import { Toggle } from "@base-ui/react/toggle";
+import { ToggleGroup } from "@base-ui/react/toggle-group";
 
 <ToggleGroup defaultValue={["daily"]}>
+  <Toggle value="daily">Daily</Toggle>
+</ToggleGroup>;
+```
+
+String array. `multiple` defaults to `true`.
+
+```tsx title="Shark UI" showLineNumbers
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+
+<ToggleGroup defaultValue={["daily"]} multiple={false}>
   <ToggleGroupItem value="daily">Daily</ToggleGroupItem>
 </ToggleGroup>;
 ```
 
-```tsx
+## Accordion
+
+String array. `multiple` defaults to `false`.
+
+```tsx title="Base UI" showLineNumbers
+import { Accordion } from "@base-ui/react/accordion";
+
+<Accordion.Root defaultValue={["details"]}>
+  <Accordion.Item value="details">...</Accordion.Item>
+</Accordion.Root>;
+```
+
+String array. `collapsible` defaults to `true`.
+
+```tsx title="Shark UI" showLineNumbers
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 
 <Accordion defaultValue={["details"]}>
@@ -125,13 +234,9 @@ import { Accordion, AccordionItem } from "@/components/ui/accordion";
 </Accordion>;
 ```
 
-## Overlays
-
-Include a title part on Dialog, Sheet, and Drawer. Use `className="sr-only"` when the title should not show visually.
-
 ## Theming
 
-Map your Base UI theme variables to Shark semantic tokens. See [Colors](/docs/colors) and [Styling](/docs/styling). Shark adds `destructive-foreground`, `success`, `warning`, and `info` pairs.
+Base UI ships unstyled. Map your CSS variables to Shark tokens. See [Colors](/docs/colors) and [Styling](/docs/styling).
 
 ## Checklist
 

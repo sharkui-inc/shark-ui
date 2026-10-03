@@ -140,7 +140,7 @@ const AITemplatePage = () => (
             </p>
           </div>
           <Card className="w-full max-w-md">
-            <CardHeader className="flex flex-row items-center justify-between gap-4 space-y-0 pb-2">
+            <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
               <span className="font-medium text-sm">
                 Access premium models and features
               </span>

@@ -1,10 +1,5 @@
 import { Iframe } from "@/registry/react/components/iframe";
 
-const srcDoc = `<html><head>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&display=swap" rel="stylesheet" />
-<base target=_blank>
-</head><body style='overflow: hidden'><div></div></body></html>`;
-
 const Example = () => (
   <div className="mx-auto max-w-4xl">
     <Iframe
@@ -31,5 +26,10 @@ const Example = () => (
     </Iframe>
   </div>
 );
+
+const srcDoc = `<html><head>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&display=swap" rel="stylesheet" />
+<base target=_blank>
+</head><body style='overflow: hidden'><div></div></body></html>`;
 
 export default Example;

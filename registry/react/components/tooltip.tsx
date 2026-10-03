@@ -3,17 +3,13 @@
 import { Portal } from "@ark-ui/react/portal";
 import {
   Tooltip as ArkTooltip,
-  useTooltip as useArkTooltip,
   useTooltipContext as useArkTooltipContext,
 } from "@ark-ui/react/tooltip";
 import type React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
-export const useTooltip = useArkTooltip;
 export const useTooltipContext = useArkTooltipContext;
-export const TooltipRootProvider = ArkTooltip.RootProvider;
-
 export const tooltipContentVariants = tv({
   base: [
     "z-[calc(50+var(--layer-index,0))] w-fit",

@@ -11,7 +11,7 @@ const Example = () => {
   return (
     <div className="flex max-w-sm flex-col gap-4 text-sm">
       <div className="flex flex-col gap-1">
-        <p className="font-medium leading-none">Shark UI</p>
+        <p className="font-medium leading-none">Onda</p>
         <p className="text-muted-foreground">{values.primitive}</p>
       </div>
       <Separator />

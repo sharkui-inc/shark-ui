@@ -54,57 +54,55 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function ChartBarActive() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Bar Chart - Active</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
-            <CartesianGrid vertical={false} />
-            <XAxis
-              axisLine={false}
-              dataKey="browser"
-              tickFormatter={(value) =>
-                chartConfig[value as keyof typeof chartConfig]?.label
-              }
-              tickLine={false}
-              tickMargin={10}
-            />
-            <ChartTooltip
-              content={<ChartTooltipContent hideLabel />}
-              cursor={false}
-            />
-            <Bar
-              activeBar={({ ...props }) => (
-                <Rectangle
-                  {...props}
-                  fillOpacity={0.8}
-                  stroke={props.payload.fill}
-                  strokeDasharray={4}
-                  strokeDashoffset={4}
-                />
-              )}
-              dataKey="visitors"
-              radius={8}
-              strokeWidth={2}
-            />
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
-        </div>
-        <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter>
-    </Card>
-  );
-}
+const ChartBarActive = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle>Bar Chart - Active</CardTitle>
+      <CardDescription>January - June 2024</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <ChartContainer config={chartConfig}>
+        <BarChart accessibilityLayer data={chartData}>
+          <CartesianGrid vertical={false} />
+          <XAxis
+            axisLine={false}
+            dataKey="browser"
+            tickFormatter={(value) =>
+              chartConfig[value as keyof typeof chartConfig]?.label
+            }
+            tickLine={false}
+            tickMargin={10}
+          />
+          <ChartTooltip
+            content={<ChartTooltipContent hideLabel />}
+            cursor={false}
+          />
+          <Bar
+            activeBar={({ ...props }) => (
+              <Rectangle
+                {...props}
+                fillOpacity={0.8}
+                stroke={props.payload.fill}
+                strokeDasharray={4}
+                strokeDashoffset={4}
+              />
+            )}
+            dataKey="visitors"
+            radius={8}
+            strokeWidth={2}
+          />
+        </BarChart>
+      </ChartContainer>
+    </CardContent>
+    <CardFooter className="flex-col items-start gap-2 text-sm">
+      <div className="flex gap-2 font-medium leading-none">
+        Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
+      </div>
+      <div className="text-muted-foreground leading-none">
+        Showing total visitors for the last 6 months
+      </div>
+    </CardFooter>
+  </Card>
+);
 
 export default ChartBarActive;

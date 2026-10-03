@@ -2,7 +2,6 @@
 
 import {
   SignaturePad as ArkSignaturePad,
-  useSignaturePad as useArkSignaturePad,
   useSignaturePadContext as useArkSignaturePadContext,
 } from "@ark-ui/react/signature-pad";
 import { RotateCcwIcon } from "lucide-react";
@@ -11,10 +10,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { fieldLabelVariants } from "@/registry/react/components/field";
 
-export const useSignaturePad = useArkSignaturePad;
 export const useSignaturePadContext = useArkSignaturePadContext;
-export const SignaturePadRootProvider = ArkSignaturePad.RootProvider;
-
 export const SignaturePadLabel = (
   props: React.ComponentProps<typeof ArkSignaturePad.Label>
 ) => {

@@ -59,19 +59,14 @@ import {
   promptActions,
 } from "../_data/chat-demo";
 
-export const ChatPromptComposer = ({
-  onStop,
-  onSubmit,
-  status,
-  usedTokens,
-  value,
-}: {
+export const ChatPromptComposer = (props: {
   onStop: () => void;
   onSubmit: () => void;
   status: PromptInputStatus;
   usedTokens: number;
   value: string;
 }) => {
+  const { onStop, onSubmit, status, usedTokens, value } = props;
   const [model, setModel] = React.useState<string[]>([MODEL_OPTIONS[0].value]);
   const [effort, setEffort] = React.useState(["medium"]);
   const [access, setAccess] = React.useState(["full"]);

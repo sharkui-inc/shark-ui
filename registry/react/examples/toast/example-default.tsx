@@ -7,7 +7,10 @@ const ToastDemo = () => (
   <Button
     onClick={() => {
       toast.create({
-        description: "Tuesday, February 10, 2026 at 10:00 AM.",
+        description: new Date().toLocaleString("en-US", {
+          dateStyle: "full",
+          timeStyle: "short",
+        }),
         title: "Event has been created.",
       });
     }}

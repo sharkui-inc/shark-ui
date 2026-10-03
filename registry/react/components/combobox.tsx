@@ -3,7 +3,6 @@
 import {
   Combobox as ArkCombobox,
   type ComboboxList as ArkComboboxList,
-  useCombobox as useArkCombobox,
   useComboboxContext as useArkComboboxContext,
 } from "@ark-ui/react/combobox";
 import { Portal } from "@ark-ui/react/portal";
@@ -12,10 +11,7 @@ import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
-import {
-  inputItemVariants,
-  type inputVariants,
-} from "@/registry/react/components/input";
+import type { inputVariants } from "@/registry/react/components/input";
 import {
   InputGroup,
   InputGroupAddon,
@@ -30,10 +26,7 @@ import {
 } from "@/registry/react/components/menu";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
-export const useCombobox = useArkCombobox;
 export const useComboboxContext = useArkComboboxContext;
-export const ComboboxRootProvider = ArkCombobox.RootProvider;
-
 export const ComboboxContext = ArkCombobox.Context;
 
 export const Combobox: ArkCombobox.RootComponent = (props) => {
@@ -123,7 +116,7 @@ export const comboboxInputVariants = tv({
   variants: {
     variant: {
       ghost: [
-        "bg-transparent dark:bg-transparent",
+        "bg-transparent",
         "border-transparent shadow-none",
         "hover:bg-accent hover:text-accent-foreground",
       ],
@@ -266,8 +259,8 @@ export const ComboboxChips = (props: ComboboxChipsProps) => {
     <ArkCombobox.Control asChild data-slot="combobox-chips-control" {...rest}>
       <InputGroup
         className={cn(
-          "h-auto min-h-10 data-[size=lg]:min-h-11 data-[size=sm]:min-h-9 md:min-h-9 md:data-[size=lg]:min-h-10 md:data-[size=sm]:min-h-8",
-          "flex-wrap content-start items-center gap-1 py-1",
+          "h-auto",
+          "flex-wrap content-center items-center gap-1 py-1",
           "[--input-group-inset:--spacing(1)]",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
           "has-data-[slot=combobox-chip]:px-1",
@@ -290,7 +283,7 @@ export const ComboboxChipsInput = (
     <ArkCombobox.Input asChild data-slot="combobox-chips-input">
       <InputGroupInput
         className={cn(
-          "h-5.5 in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5 w-auto min-w-18 max-w-full flex-auto basis-auto",
+          "w-auto min-w-18 max-w-full flex-auto basis-auto",
           className
         )}
         {...rest}
@@ -334,7 +327,8 @@ export const ComboboxChip = (props: ComboboxChipProps) => {
         <InputGroupButton
           aria-label={`Remove ${value}`}
           className={cn(
-            "in-data-[size=lg]:size-5.5 in-data-[size=sm]:size-3.5 size-4.5",
+            "in-data-[size=lg]:size-5 in-data-[size=sm]:size-3 size-4 md:in-data-[size=lg]:size-5 md:in-data-[size=sm]:size-3 md:size-4",
+            "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
             "shrink-0",
             "text-muted-foreground",
             "[&_svg:not([class*='size-'])]:size-2 in-data-[size=lg]:[&_svg:not([class*='size-'])]:size-2.5 in-data-[size=sm]:[&_svg:not([class*='size-'])]:size-1.5",
@@ -443,8 +437,7 @@ export const ComboboxGroupLabel = (
 export const comboboxItemVariants = tv({
   base: [
     menuItemControlVariants(),
-    inputItemVariants(),
-    "select-none",
+    "touch-manipulation select-none font-normal text-base md:text-sm",
     "cursor-default",
     "outline-hidden",
     "data-highlighted:bg-accent data-highlighted:text-accent-foreground",

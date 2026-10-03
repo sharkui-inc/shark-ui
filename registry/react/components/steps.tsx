@@ -3,17 +3,14 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   Steps as ArkSteps,
-  useSteps as useArkSteps,
   useStepsContext as useArkStepsContext,
 } from "@ark-ui/react/steps";
 import { CheckIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
+import { Separator } from "@/registry/react/components/separator";
 
-export const useSteps = useArkSteps;
 export const useStepsContext = useArkStepsContext;
-export const StepsRootProvider = ArkSteps.RootProvider;
-
 export const Steps = (props: React.ComponentProps<typeof ArkSteps.Root>) => {
   const { className, ...rest } = props;
 
@@ -127,21 +124,24 @@ export const StepsSeparator = (
   const { className, ...rest } = props;
 
   return (
-    <ArkSteps.Separator
-      className={cn(
-        "flex-1",
-        "bg-border",
-        "rounded-full",
-        "transition-colors",
-        "data-complete:bg-primary",
-        "data-[orientation=horizontal]:mx-(--steps-gutter) data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:w-full",
-        "data-[orientation=vertical]:absolute data-[orientation=vertical]:inset-s-[calc(var(--steps-size)/2-1px)] data-[orientation=vertical]:top-[calc(var(--steps-size)+var(--steps-gutter))] data-[orientation=vertical]:h-full data-[orientation=vertical]:max-h-[calc(100%-(var(--steps-size)+var(--steps-gutter)*2))] data-[orientation=vertical]:w-0.5",
-        "motion-reduce:transition-none",
-        className
-      )}
-      data-slot="steps-separator"
-      {...rest}
-    />
+    <Separator asChild>
+      <ArkSteps.Separator
+        aria-hidden
+        className={cn(
+          "flex-1",
+          "bg-border",
+          "rounded-full",
+          "transition-colors",
+          "data-complete:bg-primary",
+          "data-[orientation=horizontal]:mx-(--steps-gutter) data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:w-full data-[orientation=horizontal]:self-center",
+          "data-[orientation=vertical]:absolute data-[orientation=vertical]:inset-s-[calc(var(--steps-size)/2-1px)] data-[orientation=vertical]:top-[calc(var(--steps-size)+var(--steps-gutter))] data-[orientation=vertical]:h-full data-[orientation=vertical]:max-h-[calc(100%-(var(--steps-size)+var(--steps-gutter)*2))] data-[orientation=vertical]:w-0.5",
+          "motion-reduce:transition-none",
+          className
+        )}
+        data-slot="steps-separator"
+        {...rest}
+      />
+    </Separator>
   );
 };
 

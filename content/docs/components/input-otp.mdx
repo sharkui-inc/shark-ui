@@ -33,7 +33,7 @@ npx shadcn@latest add @shark/input-otp
 
 <Steps>
 
-<Step>This component depends on [Input](/docs/components/input). Install it first if you haven't already.</Step>
+<Step>This component depends on [Input](/docs/components/input) and [Separator](/docs/components/separator). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
@@ -76,11 +76,9 @@ import {
   <InputOTPLabel>Verification code</InputOTPLabel>
   <InputOTPSlot index={0} />
   <InputOTPSlot index={1} />
-  <InputOTPSlot index={2} />
   <InputOTPSeparator />
+  <InputOTPSlot index={2} />
   <InputOTPSlot index={3} />
-  <InputOTPSlot index={4} />
-  <InputOTPSlot index={5} />
 </InputOTP>
 ```
 
@@ -94,13 +92,9 @@ Use `value` and `onValueChange` to control the input.
 
 ### Disabled
 
-Use the `disabled` prop to disable the input.
-
 <ComponentPreview componentName="input-otp" fileName="example-disabled" />
 
 ### Invalid
-
-Use the `invalid` prop to mark the input as invalid and show error styling.
 
 <ComponentPreview componentName="input-otp" fileName="example-invalid" />
 
@@ -108,15 +102,9 @@ Use the `invalid` prop to mark the input as invalid and show error styling.
 
 ### With Field
 
-Use `InputOTPLabel` to focus the first slot when clicked. Ark UI keeps its positional accessible name for each slot. Wrap the control with `Field` to add descriptions and validation messaging.
+Use `InputOTPLabel` to name the code, and [Field](/docs/components/field) for a description.
 
 <ComponentPreview componentName="input-otp" fileName="example-with-field" />
-
-### Four Digits
-
-Use four `InputOTPSlot` elements for a 4-digit OTP.
-
-<ComponentPreview componentName="input-otp" fileName="example-four-digits" />
 
 ### Separator
 
@@ -138,7 +126,7 @@ Use the `blurOnComplete` prop to blur the input when all slots are filled.
 
 ### Auto submit
 
-Use `autoSubmit` to submit the owning form when every slot is filled. 
+Use `autoSubmit` to submit the owning form when every slot is filled.
 
 <ComponentPreview componentName="input-otp" fileName="example-auto-submit" />
 
@@ -154,9 +142,13 @@ Use the `mask` prop to mask the input value.
 
 <ComponentPreview componentName="input-otp" fileName="example-mask" />
 
+### Form Integration
+
+<ComponentPreview componentName="input-otp" fileName="example-form" />
+
 ### Custom Size
 
-Pass `*:data-[slot=input-otp-input]:size-*` and `*:data-[slot=input-otp-input]:text-*` to `InputOTP` to override slot dimensions and text size.
+Pass `*:data-[slot=input-otp-input]:size-*` to override slot dimensions.
 
 <ComponentPreview componentName="input-otp" fileName="example-custom-size" />
 
@@ -207,15 +199,6 @@ Single OTP slot. Use `index` to specify position, 0 is the first slot.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 Visual separator between slots.
-
-### InputOTPRootProvider
-
-Provides a InputOTP API created with `useInputOTP` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseInputOTPReturn` | `required` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/pin-input#api-reference).

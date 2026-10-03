@@ -36,60 +36,57 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function ChartAreaLinear() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Area Chart - Linear</CardTitle>
-        <CardDescription>
-          Showing total visitors for the last 6 months
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <AreaChart
-            accessibilityLayer
-            data={chartData}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              axisLine={false}
-              dataKey="month"
-              tickFormatter={(value) => value.slice(0, 3)}
-              tickLine={false}
-              tickMargin={8}
-            />
-            <ChartTooltip
-              content={<ChartTooltipContent hideLabel indicator="dot" />}
-              cursor={false}
-            />
-            <Area
-              dataKey="desktop"
-              fill="var(--color-desktop)"
-              fillOpacity={0.4}
-              stroke="var(--color-desktop)"
-              type="linear"
-            />
-          </AreaChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter className="w-full items-start text-sm">
-        <div className="grid gap-2">
-          <div className="flex items-center gap-2 font-medium leading-none">
-            Trending up by 5.2% this month{" "}
-            <TrendingUpIcon className="h-4 w-4" />
-          </div>
-          <div className="flex items-center gap-2 text-muted-foreground leading-none">
-            January - June 2024
-          </div>
+const ChartAreaLinear = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle>Area Chart - Linear</CardTitle>
+      <CardDescription>
+        Showing total visitors for the last 6 months
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <ChartContainer config={chartConfig}>
+        <AreaChart
+          accessibilityLayer
+          data={chartData}
+          margin={{
+            left: 12,
+            right: 12,
+          }}
+        >
+          <CartesianGrid vertical={false} />
+          <XAxis
+            axisLine={false}
+            dataKey="month"
+            tickFormatter={(value) => value.slice(0, 3)}
+            tickLine={false}
+            tickMargin={8}
+          />
+          <ChartTooltip
+            content={<ChartTooltipContent hideLabel indicator="dot" />}
+            cursor={false}
+          />
+          <Area
+            dataKey="desktop"
+            fill="var(--color-desktop)"
+            fillOpacity={0.4}
+            stroke="var(--color-desktop)"
+            type="linear"
+          />
+        </AreaChart>
+      </ChartContainer>
+    </CardContent>
+    <CardFooter className="w-full items-start text-sm">
+      <div className="grid gap-2">
+        <div className="flex items-center gap-2 font-medium leading-none">
+          Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
         </div>
-      </CardFooter>
-    </Card>
-  );
-}
+        <div className="flex items-center gap-2 text-muted-foreground leading-none">
+          January - June 2024
+        </div>
+      </div>
+    </CardFooter>
+  </Card>
+);
 
 export default ChartAreaLinear;

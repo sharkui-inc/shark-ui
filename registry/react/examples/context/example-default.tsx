@@ -10,7 +10,7 @@ import {
   ContextUsageRow,
 } from "@/registry/react/components/context";
 
-const Example = () => (
+const ContextDemo = () => (
   <div className="flex justify-center">
     <Context costLabel="$0.042" maxTokens={128_000} usedTokens={18_420}>
       <ContextTrigger />
@@ -37,4 +37,4 @@ const contextUsage = [
   { title: "Cache", value: 1200 },
 ];
 
-export default Example;
+export default ContextDemo;

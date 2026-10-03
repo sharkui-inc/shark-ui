@@ -11,24 +11,27 @@ import {
   StateTitle,
 } from "@/registry/react/components/state";
 
-export const MailEmpty = ({ onCompose }: { onCompose: () => void }) => (
-  <State className="border-0 bg-muted/16">
-    <StateHeader>
-      <StateMedia variant="icon">
-        <InboxIcon aria-hidden />
-      </StateMedia>
-      <StateTitle asChild>
-        <h2>No email selected</h2>
-      </StateTitle>
-      <StateDescription>
-        Select a message from the list to read it here.
-      </StateDescription>
-    </StateHeader>
-    <StateContent>
-      <Button onClick={onCompose} size="sm" variant="outline">
-        <PenLineIcon aria-hidden />
-        New message
-      </Button>
-    </StateContent>
-  </State>
-);
+export const MailEmpty = (props: { onCompose: () => void }) => {
+  const { onCompose } = props;
+  return (
+    <State className="border-0 bg-muted/16">
+      <StateHeader>
+        <StateMedia variant="icon">
+          <InboxIcon aria-hidden />
+        </StateMedia>
+        <StateTitle asChild>
+          <h2>No email selected</h2>
+        </StateTitle>
+        <StateDescription>
+          Select a message from the list to read it here.
+        </StateDescription>
+      </StateHeader>
+      <StateContent>
+        <Button onClick={onCompose} size="sm" variant="outline">
+          <PenLineIcon aria-hidden />
+          New message
+        </Button>
+      </StateContent>
+    </State>
+  );
+};

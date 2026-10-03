@@ -42,12 +42,15 @@ const Example = () => {
   );
 };
 
-const EventValue = ({ label, value }: { label: string; value: string }) => (
-  <div className="flex min-w-0 flex-col justify-center gap-0.5 border-input border-s px-2 py-1.5">
-    <dt className="text-muted-foreground text-xs">{label}</dt>
-    <dd className="font-medium font-mono tabular-nums">{value}</dd>
-  </div>
-);
+const EventValue = (props: { label: string; value: string }) => {
+  const { label, value } = props;
+  return (
+    <div className="flex min-w-0 flex-col justify-center gap-0.5 border-input border-s px-2 py-1.5">
+      <dt className="text-muted-foreground text-xs">{label}</dt>
+      <dd className="font-medium font-mono tabular-nums">{value}</dd>
+    </div>
+  );
+};
 
 const formatValue = (value: number | undefined) =>
   value === undefined ? "—" : Math.round(value).toString();

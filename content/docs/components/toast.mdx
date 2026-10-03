@@ -126,22 +126,22 @@ import { toast } from "@/components/ui/toast"
 
 ```tsx
 toast.create({
-  title: "Event created",
+  title: "Event has been created.",
   description: "Sunday, December 3 at 9:00 AM",
 })
 ```
 
 ## Deduplication
 
-Toasts with the same `id` are deduplicated. If no `id` is passed, a new toast is created.
+Toasts with the same `id` are deduplicated, and a call without an `id` creates a new toast.
 
 <ComponentPreview componentName="toast" fileName="example-dedupe" />
 
 ## Placement
 
-<ComponentPreview componentName="toast" fileName="example-placement" />
+Toaster is placed at the `bottom-right` by default.
 
-By default, the toaster is placed at the bottom right corner of the screen. 
+<ComponentPreview componentName="toast" fileName="example-placement" />
 
 Update the `placement` option in `createToaster()` to customize the toaster position.
 
@@ -155,7 +155,7 @@ const baseToaster = createToaster({
 
 ## Max toasts
 
-Any extra toasts will be queued and rendered when a toast has been dismissed. The queue is ordered by `priority` (`1` highest, `8` lowest). Types such as `error` sort ahead of `info` unless you pass `priority` on `toast()`.
+Extra toasts queue until one is dismissed, ordered by `priority` (`1` highest, `8` lowest) with `error` ahead of `info`.
 
 By default, the toaster displays up to 3 toasts. Update the `max` option in `createToaster()` to change the maximum number of visible toasts.
 
@@ -171,7 +171,7 @@ const baseToaster = createToaster({
 
 ### Variants
 
-Use `success`, `error`, `warning`, and `info` for the matching icon and accent color. 
+Use `success`, `error`, `warning`, and `info` for the matching icon and accent color.
 
 You can also pass `type` on `toast.create`.
 
@@ -213,8 +213,8 @@ Toast container. Place once in your app layout.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `toaster` | `ReturnType<typeof createToaster>` | `-` | 
-| `className` | `string` | `-` | 
+| `toaster` | `ReturnType<typeof createToaster>` | `-` |
+| `className` | `string` | `-` |
 
 ### toast
 
@@ -227,6 +227,7 @@ Toast instance. Used to create and manage toasts.
 | `type` | `"success" \| "error" \| "warning" \| "info" \| "loading"` | `"info"` |
 | `duration` | `number` | `3000` |
 | `closable` | `boolean` | `true` |
+
 ### ToastItem
 
 Public ToastItem component. It forwards the underlying primitive props.

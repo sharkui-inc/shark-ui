@@ -2,21 +2,17 @@
 
 import {
   Splitter as ArkSplitter,
-  useSplitter as useArkSplitter,
   useSplitterContext as useArkSplitterContext,
 } from "@ark-ui/react/splitter";
 import { GripVerticalIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useResizable = useArkSplitter;
-export const useResizableContext = useArkSplitterContext;
-export const ResizableRootProvider = ArkSplitter.RootProvider;
-
 const resizableRegistry = ArkSplitter.createRegistry({
-  hitAreaMargins: { coarse: 24, fine: 5 },
+  hitAreaMargins: { coarse: 24, fine: 4 },
 });
 
+export const useResizableContext = useArkSplitterContext;
 export const Resizable = (
   props: React.ComponentProps<typeof ArkSplitter.Root>
 ) => {
@@ -56,7 +52,7 @@ export const ResizableResizeTrigger = (props: ResizableResizeTriggerProps) => {
         "relative bg-border",
         "flex w-px items-center justify-center",
         "cursor-col-resize data-[orientation=vertical]:cursor-row-resize",
-        "data-[dragging]:bg-primary",
+        "data-dragging:bg-primary",
         "after:-translate-x-1/2 data-[orientation=vertical]:after:-translate-y-1/2",
         "after:absolute after:inset-s-1/2 after:inset-y-0 after:w-1",
         "focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
@@ -77,7 +73,7 @@ export const ResizableResizeTrigger = (props: ResizableResizeTriggerProps) => {
             "flex items-center justify-center",
             "bg-border",
             "rounded-xs border",
-            "data-[dragging]:bg-primary",
+            "data-dragging:bg-primary",
             "data-[orientation=vertical]:rotate-90"
           )}
         >

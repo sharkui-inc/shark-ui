@@ -173,133 +173,141 @@ const EmptyConversation = (props: {
   );
 };
 
-const MessageSources = ({ sources }: { sources: ChatMessageSource[] }) => (
-  <Sources defaultOpen>
-    <SourcesTrigger count={sources.length} />
-    <SourcesContent>
-      {sources.map((source) => (
-        <Source href={source.href} key={source.href} title={source.title} />
-      ))}
-    </SourcesContent>
-  </Sources>
-);
+const MessageSources = (props: { sources: ChatMessageSource[] }) => {
+  const { sources } = props;
+  return (
+    <Sources defaultOpen>
+      <SourcesTrigger count={sources.length} />
+      <SourcesContent>
+        {sources.map((source) => (
+          <Source href={source.href} key={source.href} title={source.title} />
+        ))}
+      </SourcesContent>
+    </Sources>
+  );
+};
 
-const MessageReasoning = ({
-  content,
-  duration,
-}: {
-  content: string;
-  duration: number;
-}) => (
-  <Reasoning duration={duration}>
-    <ReasoningTrigger />
-    <ReasoningContent>{content}</ReasoningContent>
-  </Reasoning>
-);
+const MessageReasoning = (props: { content: string; duration: number }) => {
+  const { content, duration } = props;
+  return (
+    <Reasoning duration={duration}>
+      <ReasoningTrigger />
+      <ReasoningContent>{content}</ReasoningContent>
+    </Reasoning>
+  );
+};
 
-const MessageTool = ({
-  file,
-  name,
-}: {
+const MessageTool = (props: {
   file: string;
   name: string;
   pathLabel?: string;
-}) => (
-  <ToolResult status="success">
-    <ToolResultTrigger>
-      <ToolResultTitle>{name}</ToolResultTitle>
-      <ToolResultName>{file}</ToolResultName>
-      <ToolResultAction>
-        <ToolResultStatus />
-      </ToolResultAction>
-    </ToolResultTrigger>
-  </ToolResult>
-);
+}) => {
+  const { file, name } = props;
+  return (
+    <ToolResult status="success">
+      <ToolResultTrigger>
+        <ToolResultTitle>{name}</ToolResultTitle>
+        <ToolResultName>{file}</ToolResultName>
+        <ToolResultAction>
+          <ToolResultStatus />
+        </ToolResultAction>
+      </ToolResultTrigger>
+    </ToolResult>
+  );
+};
 
-const MessageConfirmation = ({ title }: { title: string }) => (
-  <ApprovalCard onApprove={noop} onReject={noop}>
-    <ApprovalCardHeader>
-      <ApprovalCardTitle>{title}</ApprovalCardTitle>
-    </ApprovalCardHeader>
-    <ApprovalCardFooter>
-      <ApprovalCardReject variant="outline">Reject</ApprovalCardReject>
-      <ApprovalCardSubmit>Approve</ApprovalCardSubmit>
-    </ApprovalCardFooter>
-  </ApprovalCard>
-);
+const MessageConfirmation = (props: { title: string }) => {
+  const { title } = props;
+  return (
+    <ApprovalCard onApprove={noop} onReject={noop}>
+      <ApprovalCardHeader>
+        <ApprovalCardTitle>{title}</ApprovalCardTitle>
+      </ApprovalCardHeader>
+      <ApprovalCardFooter>
+        <ApprovalCardReject variant="outline">Reject</ApprovalCardReject>
+        <ApprovalCardSubmit>Approve</ApprovalCardSubmit>
+      </ApprovalCardFooter>
+    </ApprovalCard>
+  );
+};
 
-const MessageApprovalPlan = ({
-  steps,
-  title,
-}: NonNullable<ChatMessage["approvalPlan"]>) => (
-  <ApprovalCard onApprove={noop} onReject={noop}>
-    <ApprovalCardHeader>
-      <ListTodoIcon aria-hidden />
-      <ApprovalCardTitle>{title}</ApprovalCardTitle>
-    </ApprovalCardHeader>
-    <ApprovalCardContent>
-      <ol className="flex flex-col gap-1 rounded-lg border bg-muted/32 p-2">
-        {steps.map((step) => (
-          <li
-            className="flex items-start gap-2 px-2 py-1.5 text-xs"
-            key={step.id}
+const MessageApprovalPlan = (
+  props: NonNullable<ChatMessage["approvalPlan"]>
+) => {
+  const { steps, title } = props;
+  return (
+    <ApprovalCard onApprove={noop} onReject={noop}>
+      <ApprovalCardHeader>
+        <ListTodoIcon aria-hidden />
+        <ApprovalCardTitle>{title}</ApprovalCardTitle>
+      </ApprovalCardHeader>
+      <ApprovalCardContent>
+        <ol className="flex flex-col gap-1 rounded-lg border bg-muted/32 p-2">
+          {steps.map((step) => (
+            <li
+              className="flex items-start gap-2 px-2 py-1.5 text-xs"
+              key={step.id}
+            >
+              <span className="mt-1 size-2 shrink-0 rounded-full border border-muted-foreground/48" />
+              <span className="min-w-0">
+                <span className="font-medium">{step.title}</span>
+                {step.detail ? (
+                  <span className="mt-0.5 block text-muted-foreground">
+                    {step.detail}
+                  </span>
+                ) : null}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </ApprovalCardContent>
+      <ApprovalCardFooter>
+        <ApprovalCardReject>View plan</ApprovalCardReject>
+        <ApprovalCardSubmit>Approve</ApprovalCardSubmit>
+      </ApprovalCardFooter>
+    </ApprovalCard>
+  );
+};
+
+const MessagePlan = (props: NonNullable<ChatMessage["plan"]>) => {
+  const { tasks, title } = props;
+  return (
+    <Plan defaultOpen status="in-progress">
+      <PlanHeader title={title} />
+      <PlanContent>
+        {tasks.map((task) => (
+          <PlanItem
+            collapsible={Boolean(task.file)}
+            key={task.title}
+            status={task.status}
           >
-            <span className="mt-1 size-2 shrink-0 rounded-full border border-muted-foreground/48" />
-            <span className="min-w-0">
-              <span className="font-medium">{step.title}</span>
-              {step.detail ? (
-                <span className="mt-0.5 block text-muted-foreground">
-                  {step.detail}
-                </span>
-              ) : null}
-            </span>
-          </li>
+            <PlanItemTrigger title={task.title} />
+            {task.file ? (
+              <PlanItemContent>
+                <PlanItemDetailFile>{task.file}</PlanItemDetailFile>
+              </PlanItemContent>
+            ) : null}
+          </PlanItem>
         ))}
-      </ol>
-    </ApprovalCardContent>
-    <ApprovalCardFooter>
-      <ApprovalCardReject>View plan</ApprovalCardReject>
-      <ApprovalCardSubmit>Approve</ApprovalCardSubmit>
-    </ApprovalCardFooter>
-  </ApprovalCard>
-);
+      </PlanContent>
+    </Plan>
+  );
+};
 
-const MessagePlan = ({ tasks, title }: NonNullable<ChatMessage["plan"]>) => (
-  <Plan defaultOpen status="in-progress">
-    <PlanHeader title={title} />
-    <PlanContent>
-      {tasks.map((task) => (
-        <PlanItem
-          collapsible={Boolean(task.file)}
-          key={task.title}
-          status={task.status}
-        >
-          <PlanItemTrigger title={task.title} />
-          {task.file ? (
-            <PlanItemContent>
-              <PlanItemDetailFile>{task.file}</PlanItemDetailFile>
-            </PlanItemContent>
-          ) : null}
-        </PlanItem>
-      ))}
-    </PlanContent>
-  </Plan>
-);
-
-const MessageAttachmentBlock = ({
-  description,
-  name,
-}: ChatMessageAttachment) => (
-  <Attachment size="sm">
-    <AttachmentMedia>
-      <FileTextIcon aria-hidden />
-    </AttachmentMedia>
-    <AttachmentContent>
-      <AttachmentTitle>{name}</AttachmentTitle>
-      <AttachmentDescription>{description}</AttachmentDescription>
-    </AttachmentContent>
-  </Attachment>
-);
+const MessageAttachmentBlock = (props: ChatMessageAttachment) => {
+  const { description, name } = props;
+  return (
+    <Attachment size="sm">
+      <AttachmentMedia>
+        <FileTextIcon aria-hidden />
+      </AttachmentMedia>
+      <AttachmentContent>
+        <AttachmentTitle>{name}</AttachmentTitle>
+        <AttachmentDescription>{description}</AttachmentDescription>
+      </AttachmentContent>
+    </Attachment>
+  );
+};
 
 const AssistantActions = () => (
   <MessageFooter>
@@ -320,7 +328,8 @@ const AssistantActions = () => (
   </MessageFooter>
 );
 
-const ChatMessageItem = ({ message }: { message: ChatMessage }) => {
+const ChatMessageItem = (props: { message: ChatMessage }) => {
+  const { message } = props;
   const isUser = message.role === "user";
   const firstSource = message.sources?.[0];
 
@@ -337,7 +346,7 @@ const ChatMessageItem = ({ message }: { message: ChatMessage }) => {
           </MessageAvatar>
         )}
         <MessageContent>
-          {isUser ? null : <MessageHeader>Shark Assistant</MessageHeader>}
+          {isUser ? null : <MessageHeader>Onda Assistant</MessageHeader>}
           {message.sources?.length ? (
             <MessageSources sources={message.sources} />
           ) : null}
@@ -386,23 +395,22 @@ const ChatMessageItem = ({ message }: { message: ChatMessage }) => {
   );
 };
 
-export const ChatThread = ({
-  messages,
-  onSuggestion,
-  userName = "James",
-}: ChatThreadProps) => (
-  <MessageScroller className="min-h-0 flex-1">
-    <MessageScrollerViewport aria-live="polite">
-      {messages.length === 0 ? (
-        <EmptyConversation onSuggestion={onSuggestion} userName={userName} />
-      ) : (
-        <MessageScrollerContent className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6">
-          {messages.map((message) => (
-            <ChatMessageItem key={message.id} message={message} />
-          ))}
-        </MessageScrollerContent>
-      )}
-    </MessageScrollerViewport>
-    <MessageScrollerButton />
-  </MessageScroller>
-);
+export const ChatThread = (props: ChatThreadProps) => {
+  const { messages, onSuggestion, userName = "James" } = props;
+  return (
+    <MessageScroller className="min-h-0 flex-1">
+      <MessageScrollerViewport aria-live="polite">
+        {messages.length === 0 ? (
+          <EmptyConversation onSuggestion={onSuggestion} userName={userName} />
+        ) : (
+          <MessageScrollerContent className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6">
+            {messages.map((message) => (
+              <ChatMessageItem key={message.id} message={message} />
+            ))}
+          </MessageScrollerContent>
+        )}
+      </MessageScrollerViewport>
+      <MessageScrollerButton />
+    </MessageScroller>
+  );
+};

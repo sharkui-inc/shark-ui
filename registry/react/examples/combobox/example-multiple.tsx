@@ -26,9 +26,7 @@ const Example = () => {
       className="w-full max-w-64"
       collection={collection}
       multiple
-      onInputValueChange={({ inputValue, reason }) =>
-        filter(reason === "item-select" ? "" : inputValue)
-      }
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
       <ComboboxContext<Framework>>
         {({ selectedItems }) => (

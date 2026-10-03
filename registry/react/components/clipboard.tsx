@@ -2,18 +2,18 @@
 
 import {
   Clipboard as ArkClipboard,
-  useClipboard as useArkClipboard,
   useClipboardContext as useArkClipboardContext,
 } from "@ark-ui/react/clipboard";
 import { CheckIcon, ClipboardIcon } from "lucide-react";
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import { inputVariants } from "@/registry/react/components/input";
+import {
+  inputHeightVars,
+  inputVariants,
+} from "@/registry/react/components/input";
 
-export const useClipboard = useArkClipboard;
 export const useClipboardContext = useArkClipboardContext;
-export const ClipboardRootProvider = ArkClipboard.RootProvider;
 export const ClipboardContext = ArkClipboard.Context;
 
 interface ClipboardProps
@@ -69,6 +69,7 @@ export const ClipboardInput = (
 
 const clipboardValueVariants = tv({
   base: [
+    "h-(--field-height)",
     "inline-flex items-center",
     "font-normal text-base md:text-sm",
     "bg-transparent dark:bg-input/32",
@@ -79,11 +80,17 @@ const clipboardValueVariants = tv({
   },
   variants: {
     size: {
-      lg: ["h-11 md:h-10", "px-[calc(--spacing(3.5)-1px)]"],
-      md: ["h-10 md:h-9", "px-[calc(--spacing(3)-1px)]"],
-      sm: ["h-9 md:h-8", "px-[calc(--spacing(2.5)-1px)]"],
-      xl: ["h-12 md:h-11", "px-[calc(--spacing(3)-1px)]"],
-      xs: ["h-8 md:h-7", "px-[calc(--spacing(3)-1px)]"],
+      lg: [inputHeightVars.lg, "px-[calc(--spacing(3.5)-1px)]"],
+      md: [inputHeightVars.md, "px-[calc(--spacing(3)-1px)]"],
+      sm: [inputHeightVars.sm, "px-[calc(--spacing(2.5)-1px)]"],
+      xl: [
+        "[--field-height:--spacing(12)] md:[--field-height:--spacing(11)]",
+        "px-[calc(--spacing(3)-1px)]",
+      ],
+      xs: [
+        "[--field-height:--spacing(8)] md:[--field-height:--spacing(7)]",
+        "px-[calc(--spacing(3)-1px)]",
+      ],
     },
   },
 });

@@ -26,7 +26,7 @@ const Example = () => {
           {FONT_WEIGHTS.map((weight) => (
             <ToggleGroupItem
               aria-label={`Set font weight to ${weight.label}`}
-              className="size-16 flex-col gap-1 py-2"
+              className="h-auto min-h-16 w-14 flex-col gap-1 px-2 py-2 sm:w-16"
               key={weight.value}
               value={weight.value}
             >

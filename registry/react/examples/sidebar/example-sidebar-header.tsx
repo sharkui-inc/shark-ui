@@ -22,25 +22,24 @@ import {
 import { Skeleton } from "@/registry/react/components/skeleton";
 
 const Example = () => (
-  <SidebarProvider className="h-svh">
-    <Sidebar collapsible="none">
+  <SidebarProvider className="h-svh" defaultOpenMobile>
+    <Sidebar>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <IconTile aria-hidden size="lg">
+              <IconTile aria-hidden size="xs">
                 <WavesHorizontalIcon />
               </IconTile>
               <span>
-                <span>Onda</span>
-                <span>Studio</span>
+                <span>Onda Studio</span>
               </span>
               <ChevronDownIcon aria-hidden="true" />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent overscrollContain={false}>
         <SidebarGroup>
           <SidebarGroupLabel>Workspace</SidebarGroupLabel>
           <SidebarMenu>

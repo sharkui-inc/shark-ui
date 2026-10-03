@@ -3,7 +3,6 @@
 import {
   ColorPicker as ArkColorPicker,
   parseColor as parseColorArk,
-  useColorPicker as useArkColorPicker,
   useColorPickerContext as useArkColorPickerContext,
 } from "@ark-ui/react/color-picker";
 import { ark } from "@ark-ui/react/factory";
@@ -14,10 +13,8 @@ import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
 import { fieldLabelVariants } from "@/registry/react/components/field";
 
-export const parseColor = parseColorArk;
-export const useColorPicker = useArkColorPicker;
 export const useColorPickerContext = useArkColorPickerContext;
-export const ColorPickerRootProvider = ArkColorPicker.RootProvider;
+export const parseColor = parseColorArk;
 
 export const ColorPickerLabel = (
   props: React.ComponentProps<typeof ArkColorPicker.Label>

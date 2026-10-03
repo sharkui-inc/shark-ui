@@ -2,7 +2,6 @@
 
 import {
   Checkbox as ArkCheckbox,
-  useCheckbox as useArkCheckbox,
   useCheckboxContext as useArkCheckboxContext,
 } from "@ark-ui/react/checkbox";
 import { CheckIcon, MinusIcon } from "lucide-react";
@@ -10,10 +9,7 @@ import type React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
-export const useCheckbox = useArkCheckbox;
 export const useCheckboxContext = useArkCheckboxContext;
-export const CheckboxRootProvider = ArkCheckbox.RootProvider;
-
 export const CheckboxGroup = (
   props: React.ComponentProps<typeof ArkCheckbox.Group>
 ) => {

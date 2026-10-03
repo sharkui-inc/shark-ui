@@ -1,4 +1,4 @@
-import { SharkIcon } from "@/components/icons/shark";
+import { WavesHorizontalIcon } from "lucide-react";
 import {
   QrCode,
   QrCodeFrame,
@@ -9,7 +9,7 @@ const Example = () => (
   <QrCode value="https://x.com/vinihvc">
     <QrCodeFrame />
     <QrCodeOverlay>
-      <SharkIcon />
+      <WavesHorizontalIcon />
     </QrCodeOverlay>
   </QrCode>
 );

@@ -12,7 +12,8 @@ import {
   useCarouselContext,
 } from "@/registry/react/components/carousel";
 
-const AutoplayControl = ({ isPlaying }: { isPlaying: boolean }) => {
+const AutoplayControl = (props: { isPlaying: boolean }) => {
+  const { isPlaying } = props;
   const { scrollNext } = useCarouselContext();
 
   React.useEffect(() => {

@@ -31,7 +31,6 @@ const Example = () => {
             onPressedChange={setShowLineNumbers}
             pressed={showLineNumbers}
             size="sm"
-            variant="ghost"
           >
             <ListOrderedIcon aria-hidden />
           </Toggle>

@@ -25,7 +25,7 @@ import {
   InputGroupTextarea,
 } from "@/registry/react/components/input-group";
 
-const BugReportForm = () => {
+const Example = () => {
   const form = useForm({
     defaultValues: {
       description: "",
@@ -136,4 +136,4 @@ const formSchema = z.object({
     .max(32, "Bug title must be at most 32 characters."),
 });
 
-export default BugReportForm;
+export default Example;

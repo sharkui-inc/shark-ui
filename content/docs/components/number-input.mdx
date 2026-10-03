@@ -65,12 +65,12 @@ NumberInput
 ## Usage
 
 ```tsx
-import { 
-  NumberInput, 
-  NumberInputGroup, 
-  NumberInputInput, 
-  NumberInputIncrement, 
-  NumberInputDecrement 
+import {
+  NumberInput,
+  NumberInputGroup,
+  NumberInputInput,
+  NumberInputIncrement,
+  NumberInputDecrement
 } from "@/comopnents/ui/number-input";
 ```
 
@@ -94,17 +94,13 @@ Use `value` and `onValueChange` to control the number input. Keep the value as a
 
 ### Disabled
 
-Use the `disabled` prop to disable the number input.
-
 <ComponentPreview componentName="number-input" fileName="example-disabled" />
 
 ### Invalid
 
-Use the `invalid` prop to mark the number input as invalid.
-
 <ComponentPreview componentName="number-input" fileName="example-invalid" />
 
-## Sizes
+## Size
 
 Use the `size` prop to change the input height.
 
@@ -128,7 +124,7 @@ Use the `size` prop to change the input height.
 
 ### With Field
 
-Use [Field](/docs/components/field) components for a labeled number input with helper text.
+Use [Field](/docs/components/field) for a label and description.
 
 <ComponentPreview componentName="number-input" fileName="example-with-field" />
 
@@ -175,6 +171,10 @@ Hold `Shift` for `largeStep` and `Alt` for `smallStep`.
 Use the `allowMouseWheel` prop to increment or decrement the value with the mouse wheel.
 
 <ComponentPreview componentName="number-input" fileName="example-mouse-wheel" />
+
+### Form Integration
+
+<ComponentPreview componentName="number-input" fileName="example-form" />
 
 ## RTL
 
@@ -255,15 +255,6 @@ Drag area for scrubbing the value.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
-
-### NumberInputRootProvider
-
-Provides a NumberInput API created with `useNumberInput` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseNumberInputReturn` | `required` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/number-input#api-reference).

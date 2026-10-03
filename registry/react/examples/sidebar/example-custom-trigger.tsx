@@ -41,13 +41,13 @@ const CustomTrigger = () => {
 };
 
 const Example = () => (
-  <SidebarProvider>
+  <SidebarProvider defaultOpenMobile>
     <Sidebar>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <IconTile aria-hidden size="lg">
+              <IconTile aria-hidden size="xs">
                 <WavesHorizontalIcon />
               </IconTile>
               <span>Onda</span>
@@ -55,7 +55,7 @@ const Example = () => (
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent overscrollContain={false}>
         <SidebarGroup>
           <SidebarGroupLabel>Workspace</SidebarGroupLabel>
           <SidebarMenu>

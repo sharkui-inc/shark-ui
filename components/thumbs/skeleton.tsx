@@ -8,7 +8,7 @@ export const SkeletonThumb = (props: ThumbCardProps) => (
         <div className="h-2 w-full rounded-full bg-muted-foreground/24" />
         <div className="h-2 w-2/3 rounded-full bg-muted-foreground/24" />
       </div>
-      <div className="absolute inset-0 z-10 rounded-lg bg-linear-to-r from-muted/82 via-muted/82 to-transparent" />
+      <div className="absolute inset-0 z-10 rounded-lg bg-linear-to-r from-muted/80 via-muted/80 to-transparent" />
     </div>
   </ThumbCard>
 );

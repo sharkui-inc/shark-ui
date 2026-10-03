@@ -5,8 +5,11 @@ export const metadata: Metadata = {
   robots: { follow: false, index: false },
 };
 
-const ViewExamplesLayout = ({ children }: React.PropsWithChildren) => (
-  <div className="min-h-svh bg-background text-foreground">{children}</div>
-);
+const ViewExamplesLayout = (props: React.PropsWithChildren) => {
+  const { children } = props;
+  return (
+    <div className="min-h-svh bg-background text-foreground">{children}</div>
+  );
+};
 
 export default ViewExamplesLayout;

@@ -68,7 +68,8 @@ const CreateChatDemo = () => {
   );
 };
 
-const ChatThread = ({ onReset }: { onReset: () => void }) => {
+const ChatThread = (props: { onReset: () => void }) => {
+  const { onReset } = props;
   const { canSendNext, messages, nextMessage, sendNext, status, stop } =
     useChatHelper({
       chat,
@@ -184,15 +185,12 @@ const ChatThread = ({ onReset }: { onReset: () => void }) => {
   );
 };
 
-const FollowLatestMessage = ({
-  enabled,
-  messageCount,
-  streamedText,
-}: {
+const FollowLatestMessage = (props: {
   enabled: boolean;
   messageCount: number;
   streamedText: string;
 }) => {
+  const { enabled, messageCount, streamedText } = props;
   const previousMessageCount = React.useRef(messageCount);
   const scrollArea = useMessageScroller();
 

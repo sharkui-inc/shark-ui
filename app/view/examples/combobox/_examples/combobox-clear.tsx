@@ -23,9 +23,7 @@ const ComboboxClear = () => {
       className="w-full max-w-64"
       collection={collection}
       defaultValue={[initialItems[0].value]}
-      onInputValueChange={({ inputValue, reason }) =>
-        filter(reason === "item-select" ? "" : inputValue)
-      }
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
       <ComboboxInput placeholder="Select a framework" showClear />
       <ComboboxContent>

@@ -15,7 +15,7 @@ const Example = () => {
         placeholder="Search..."
         value={query}
       />
-      <ul className="space-y-2">
+      <ul className="flex flex-col gap-2">
         {searchResults.map((item) => (
           <li className="text-base text-foreground" key={item}>
             {query ? (

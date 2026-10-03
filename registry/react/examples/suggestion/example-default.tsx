@@ -3,7 +3,7 @@ import {
   Suggestions,
 } from "@/registry/react/components/suggestion";
 
-const Example = () => (
+const SuggestionDemo = () => (
   <Suggestions>
     <Suggestion suggestion="Summarize this brief" />
     <Suggestion suggestion="Draft a launch checklist" />
@@ -11,4 +11,4 @@ const Example = () => (
   </Suggestions>
 );
 
-export default Example;
+export default SuggestionDemo;

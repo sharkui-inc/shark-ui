@@ -2,7 +2,7 @@ import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 const Example = () => (
   <ScrollArea className="h-64 w-64 rounded-md border text-sm">
-    <div className="space-y-4 p-4">
+    <div className="flex flex-col gap-4 p-4">
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

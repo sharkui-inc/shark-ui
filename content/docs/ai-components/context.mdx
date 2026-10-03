@@ -7,13 +7,6 @@ seo:
 
 import manifest from "@/registry/manifest/context";
 
-<Alert>
-  <InfoIcon />
-  <AlertDescription>
-  Context is built on top of the [Popover](/docs/components/popover) component. Check it out for more examples.
-  </AlertDescription>
-</Alert>
-
 <ComponentPreview componentName="context" />
 
 ## Installation
@@ -132,6 +125,13 @@ button.
 
 ## Examples
 
+<Alert>
+  <InfoIcon />
+  <AlertDescription>
+  Context is built on top of the [Popover](/docs/components/popover) component. Check it out for more examples.
+  </AlertDescription>
+</Alert>
+
 ### Without cost
 
 <ComponentPreview componentName="context" fileName="example-without-cost" />
@@ -186,7 +186,7 @@ Root [Popover](/docs/components/popover). Provides token usage to child parts.
 
 ### ContextTrigger
 
-Opens the popover on click. Default children are a usage ring and percent label. Default renders a ghost `Button`; with `asChild`, pass a single custom child as the trigger.
+Opens the popover on click.
 
 | Prop | Type | Default |
 | --- | --- | --- |

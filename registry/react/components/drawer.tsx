@@ -3,7 +3,6 @@
 import { Checkbox as ArkCheckbox } from "@ark-ui/react/checkbox";
 import {
   Drawer as ArkDrawer,
-  useDrawer as useArkDrawer,
   useDrawerContext as useArkDrawerContext,
 } from "@ark-ui/react/drawer";
 import { ark } from "@ark-ui/react/factory";
@@ -19,17 +18,14 @@ import {
   menuGroupLabelVariants,
   menuItemIndicatorVariants,
   menuItemVariants,
-  menuSeparatorVariants,
 } from "@/registry/react/components/menu";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
+import { Separator } from "@/registry/react/components/separator";
 import {
   dialogDescriptionVariants,
   dialogHeaderVariants,
   dialogTitleVariants,
 } from "./dialog";
-
-export const useDrawer = useArkDrawer;
-export const useDrawerContext = useArkDrawerContext;
 
 interface DrawerModalContextProps {
   /**
@@ -46,27 +42,7 @@ const [DrawerModalProvider, _useDrawerModal] =
     providerName: "Drawer",
   });
 
-export interface DrawerRootProviderProps
-  extends React.ComponentProps<typeof ArkDrawer.RootProvider> {
-  /**
-   * Used internally to show or hide overlay. Match the `modal` option
-   * passed to `useDrawer` when non-default.
-   *
-   * @default true
-   */
-  modal?: boolean;
-}
-
-export const DrawerRootProvider = (props: DrawerRootProviderProps) => {
-  const { modal = true, children, ...rest } = props;
-
-  return (
-    <DrawerModalProvider value={{ modal }}>
-      <ArkDrawer.RootProvider {...rest}>{children}</ArkDrawer.RootProvider>
-    </DrawerModalProvider>
-  );
-};
-
+export const useDrawerContext = useArkDrawerContext;
 export const DrawerProvider = (
   props: React.ComponentProps<typeof ArkDrawer.Indent>
 ) => {
@@ -152,14 +128,16 @@ export const DrawerSwipeArea = (
 
 const drawerOverlayVariants = tv({
   base: [
-    "fixed inset-0 z-50",
+    "fixed inset-0 z-[calc(50+var(--layer-index,0))]",
     "peer peer-data-[slot=drawer-backdrop]:hidden",
     "bg-[rgb(0_0_0/0.32)] opacity-[calc(1-max(0,var(--drawer-swipe-progress,0)))] backdrop-blur-[calc(4px*(1-max(0,var(--drawer-swipe-progress,0))))]",
     "data-[has-nested=drawer]:pointer-events-none",
     "transition-[opacity,backdrop-filter] duration-250 ease-[cubic-bezier(0.32,0.72,0,1)]",
-    "data-[state=closed]:opacity-0 data-[state=open]:opacity-100 data-[state=closed]:duration-[calc(var(--drawer-swipe-strength)*250ms)]",
+    "data-[state=closed]:opacity-0 data-[state=open]:opacity-100 starting:data-[state=open]:opacity-0",
+    "data-[state=closed]:animate-drawer-exit",
     "data-swiping:transition-none",
-    "motion-reduce:transition-none",
+    "data-swiping:animate-none",
+    "motion-reduce:animate-none motion-reduce:transition-none motion-reduce:data-[state=closed]:animate-none",
   ],
 });
 
@@ -241,7 +219,6 @@ const drawerContentVariants = tv({
     "shadow-lg/4",
     "outline-hidden",
     "transition-[background-color,box-shadow,height,margin,padding,scale,transform,translate,opacity] duration-250 ease-[cubic-bezier(0.32,0.72,0,1)]",
-    "data-[state=closed]:duration-[calc(var(--drawer-swipe-strength)*250ms)]",
     "data-[state=closed]:opacity-0 data-[state=open]:opacity-100",
     "data-swiping:select-none data-swiping:transition-none",
     "data-nested-drawer-open:shadow-sm/4",
@@ -280,7 +257,9 @@ const drawerContentVariants = tv({
     "data-[swipe-direction=right]:after:left-full",
     "[&[data-swipe-direction=left],&[data-swipe-direction=right]]:after:inset-y-0 [&[data-swipe-direction=left],&[data-swipe-direction=right]]:after:h-auto [&[data-swipe-direction=left],&[data-swipe-direction=right]]:after:w-(--bleed)",
     "data-[swipe-direction=left]:data-[state=closed]:-translate-x-full data-[swipe-direction=right]:data-[state=closed]:translate-x-full data-[swipe-direction=down]:data-[state=closed]:translate-y-full data-[swipe-direction=up]:data-[state=closed]:-translate-y-full",
-    "[@starting-style]:opacity-0 [@starting-style]:data-[swipe-direction=left]:-translate-x-full [@starting-style]:data-[swipe-direction=right]:translate-x-full [@starting-style]:data-[swipe-direction=down]:translate-y-full [@starting-style]:data-[swipe-direction=up]:-translate-y-full",
+    "starting:data-[state=open]:data-[swipe-direction=left]:-translate-x-full starting:data-[state=open]:data-[swipe-direction=right]:translate-x-full starting:data-[state=open]:data-[swipe-direction=down]:translate-y-full starting:data-[state=open]:data-[swipe-direction=up]:-translate-y-full starting:data-[state=open]:opacity-0",
+    "data-[state=closed]:animate-drawer-exit",
+    "data-swiping:animate-none",
     "has-data-[slot=drawer-footer]:max-sm:pb-0",
     "motion-reduce:animate-none motion-reduce:transition-none",
     "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
@@ -557,7 +536,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
             <DrawerClose asChild>
               <Button
                 aria-label="Close"
-                className="absolute inset-e-4 top-4 opacity-64 pointer-coarse:after:absolute pointer-coarse:after:size-11 hover:opacity-100 group-data-[swipe-direction=up]/drawer:top-[calc(1rem+env(safe-area-inset-top,0))]"
+                className="absolute inset-e-4 top-4 opacity-64 hover:opacity-100 group-data-[swipe-direction=up]/drawer:top-[calc(1rem+env(safe-area-inset-top,0))]"
                 size="icon-sm"
                 variant="ghost"
               >
@@ -783,11 +762,9 @@ export const DrawerMenuSeparator = (props: React.ComponentProps<"hr">) => {
   const { className, ...rest } = props;
 
   return (
-    <hr
-      className={cn(menuSeparatorVariants(), "border-0", className)}
-      data-slot="drawer-menu-separator"
-      {...rest}
-    />
+    <Separator asChild className={cn("my-1 border-0", className)}>
+      <hr data-slot="drawer-menu-separator" {...rest} />
+    </Separator>
   );
 };
 

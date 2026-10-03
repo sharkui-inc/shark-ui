@@ -21,9 +21,9 @@ import {
   ThumbsDownIcon,
   ThumbsUpIcon,
   Trash2Icon,
+  WavesHorizontalIcon,
 } from "lucide-react";
 import React from "react";
-import { SharkIcon } from "@/components/icons/shark";
 import { cn } from "@/lib/utils";
 import {
   ApprovalCard,
@@ -293,15 +293,12 @@ const emptyStateSuggestions = [
   },
 ] as const;
 
-const FollowLatestMessage = ({
-  enabled,
-  messageCount,
-  streamedText,
-}: {
+const FollowLatestMessage = (props: {
   enabled: boolean;
   messageCount: number;
   streamedText: string;
 }) => {
+  const { enabled, messageCount, streamedText } = props;
   const previousMessageCount = React.useRef(messageCount);
   const scrollArea = useMessageScroller();
 
@@ -335,48 +332,48 @@ const toPromptStatus = (status: string): PromptInputStatus => {
   }
 };
 
-const EmptyConversation = ({
-  onSuggestion,
-  welcomeTitle,
-}: {
+const EmptyConversation = (props: {
   onSuggestion: (text: string) => void;
   welcomeTitle: string;
-}) => (
-  <div className="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-center px-4 py-10 text-center sm:px-6">
-    <IconTile aria-hidden size="lg">
-      <SharkIcon aria-hidden />
-    </IconTile>
-    <h2 className="mt-7 max-w-3xl text-balance font-medium text-2xl tracking-tight">
-      {welcomeTitle}
-    </h2>
+}) => {
+  const { onSuggestion, welcomeTitle } = props;
+  return (
+    <div className="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-center px-4 py-10 text-center sm:px-6">
+      <IconTile aria-hidden size="lg">
+        <WavesHorizontalIcon aria-hidden />
+      </IconTile>
+      <h2 className="mt-7 max-w-3xl text-balance font-medium text-2xl tracking-tight">
+        {welcomeTitle}
+      </h2>
 
-    <div className="mt-8 flex w-full flex-nowrap justify-start gap-3 overflow-x-auto pb-1">
-      {emptyStateSuggestions.map((item) => (
-        <Item
-          asChild
-          className="h-auto min-h-14 min-w-40 flex-1 hover:bg-muted"
-          key={item.label}
-          variant="outline"
-        >
-          <button
-            className="w-full text-start font-sans"
-            onClick={() => onSuggestion(item.text)}
-            type="button"
+      <div className="mt-8 flex w-full flex-nowrap justify-start gap-3 overflow-x-auto pb-1">
+        {emptyStateSuggestions.map((item) => (
+          <Item
+            asChild
+            className="h-auto min-h-14 min-w-40 flex-1 hover:bg-muted"
+            key={item.label}
+            variant="outline"
           >
-            <span className="flex min-w-0 items-center gap-2">
-              <span className="grid size-7 shrink-0 place-items-center text-primary">
-                {item.icon}
+            <button
+              className="w-full text-start font-sans"
+              onClick={() => onSuggestion(item.text)}
+              type="button"
+            >
+              <span className="flex min-w-0 items-center gap-2">
+                <span className="grid size-7 shrink-0 place-items-center text-primary">
+                  {item.icon}
+                </span>
+                <ItemTitle className="line-clamp-2 text-start leading-4">
+                  {item.label}
+                </ItemTitle>
               </span>
-              <ItemTitle className="line-clamp-2 text-start leading-4">
-                {item.label}
-              </ItemTitle>
-            </span>
-          </button>
-        </Item>
-      ))}
+            </button>
+          </Item>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const AssistantActions = () => (
   <MessageFooter>
@@ -394,7 +391,8 @@ const AssistantActions = () => (
   </MessageFooter>
 );
 
-const MessageExtras = ({ extras }: { extras: DemoMessageExtras }) => {
+const MessageExtras = (props: { extras: DemoMessageExtras }) => {
+  const { extras } = props;
   const added = extras.diff?.lines.filter((line) => line.type === "add").length;
   const removed = extras.diff?.lines.filter(
     (line) => line.type === "delete"
@@ -526,17 +524,13 @@ const MessageExtras = ({ extras }: { extras: DemoMessageExtras }) => {
   );
 };
 
-const ChatMessageItem = ({
-  assistantName,
-  extras,
-  isStreaming = false,
-  message,
-}: {
+const ChatMessageItem = (props: {
   assistantName: string;
   extras?: DemoMessageExtras;
   isStreaming?: boolean;
   message: ChatMessage;
 }) => {
+  const { assistantName, extras, isStreaming = false, message } = props;
   const isUser = message.role === "user";
   const text = message.content;
   const firstSource = extras?.sources?.[0];
@@ -588,13 +582,7 @@ const ChatMessageItem = ({
   );
 };
 
-const ChatSession = ({
-  assistantName,
-  className,
-  headerAction,
-  showDemoArtifacts,
-  welcomeTitle,
-}: {
+const ChatSession = (props: {
   assistantName: string;
   className?: string;
   headerAction?: React.ReactNode;
@@ -602,6 +590,13 @@ const ChatSession = ({
   showDemoArtifacts: boolean;
   welcomeTitle: string;
 }) => {
+  const {
+    assistantName,
+    className,
+    headerAction,
+    showDemoArtifacts,
+    welcomeTitle,
+  } = props;
   const [model, setModel] = React.useState<string[]>([MODEL_OPTIONS[0].value]);
   const [effort, setEffort] = React.useState(["medium"]);
   const [access, setAccess] = React.useState(["full"]);
@@ -870,14 +865,15 @@ const ChatSession = ({
   );
 };
 
-export const AiChat = ({
-  assistantName = "Shark Assistant",
-  className,
-  headerAction,
-  rightSidebar,
-  showDemoArtifacts = true,
-  welcomeTitle = "What should we build in shark-ui?",
-}: AiChatProps) => {
+export const AiChat = (props: AiChatProps) => {
+  const {
+    assistantName = "Onda Assistant",
+    className,
+    headerAction,
+    rightSidebar,
+    showDemoArtifacts = true,
+    welcomeTitle = "What should we build in shark-ui?",
+  } = props;
   const [session, setSession] = React.useState(0);
 
   const sessionContent = (

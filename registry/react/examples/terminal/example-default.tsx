@@ -4,7 +4,7 @@ import {
   TerminalHeader,
 } from "@/registry/react/components/terminal";
 
-const Example = () => (
+const TerminalDemo = () => (
   <Terminal className="max-w-lg" output={output}>
     <TerminalHeader>zsh · pnpm test</TerminalHeader>
     <TerminalContent />
@@ -21,4 +21,4 @@ const output = [
   "\u001B[90m2 passed, 1 failed\u001B[0m",
 ].join("\n");
 
-export default Example;
+export default TerminalDemo;

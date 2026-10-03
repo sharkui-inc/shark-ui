@@ -54,52 +54,50 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function ChartBarMixed() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Bar Chart - Mixed</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <BarChart
-            accessibilityLayer
-            data={chartData}
-            layout="vertical"
-            margin={{
-              left: 0,
-            }}
-          >
-            <YAxis
-              axisLine={false}
-              dataKey="browser"
-              tickFormatter={(value) =>
-                chartConfig[value as keyof typeof chartConfig]?.label
-              }
-              tickLine={false}
-              tickMargin={10}
-              type="category"
-            />
-            <XAxis dataKey="visitors" hide type="number" />
-            <ChartTooltip
-              content={<ChartTooltipContent hideLabel />}
-              cursor={false}
-            />
-            <Bar dataKey="visitors" radius={5} />
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
-        </div>
-        <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter>
-    </Card>
-  );
-}
+const ChartBarMixed = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle>Bar Chart - Mixed</CardTitle>
+      <CardDescription>January - June 2024</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <ChartContainer config={chartConfig}>
+        <BarChart
+          accessibilityLayer
+          data={chartData}
+          layout="vertical"
+          margin={{
+            left: 0,
+          }}
+        >
+          <YAxis
+            axisLine={false}
+            dataKey="browser"
+            tickFormatter={(value) =>
+              chartConfig[value as keyof typeof chartConfig]?.label
+            }
+            tickLine={false}
+            tickMargin={10}
+            type="category"
+          />
+          <XAxis dataKey="visitors" hide type="number" />
+          <ChartTooltip
+            content={<ChartTooltipContent hideLabel />}
+            cursor={false}
+          />
+          <Bar dataKey="visitors" radius={5} />
+        </BarChart>
+      </ChartContainer>
+    </CardContent>
+    <CardFooter className="flex-col items-start gap-2 text-sm">
+      <div className="flex gap-2 font-medium leading-none">
+        Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
+      </div>
+      <div className="text-muted-foreground leading-none">
+        Showing total visitors for the last 6 months
+      </div>
+    </CardFooter>
+  </Card>
+);
 
 export default ChartBarMixed;

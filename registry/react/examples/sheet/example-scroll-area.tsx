@@ -18,7 +18,7 @@ const Example = () => (
     <SheetContent>
       <SheetHeader title="Terms & Conditions" />
       <SheetBody scrollFade>
-        <div className="space-y-2 **:[h3]:font-semibold **:[p]:text-muted-foreground **:[p]:text-sm">
+        <div className="flex flex-col gap-2 **:[h3]:font-semibold **:[p]:text-muted-foreground **:[p]:text-sm">
           {sections.flatMap((section) => [
             <h3 key={`${section.title}-title`}>{section.title}</h3>,
             <p key={`${section.title}-body`}>{section.body}</p>,

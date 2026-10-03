@@ -39,7 +39,7 @@ interface User {
   role: string;
 }
 
-const UseAsyncListDemo = () => {
+const Example = () => {
   const [department, setDepartment] = React.useState("");
   const [role, setRole] = React.useState("");
   const list = useAsyncList<User>({
@@ -322,4 +322,4 @@ const departments = [...new Set(mockUsers.map((user) => user.department))];
 
 const roles = [...new Set(mockUsers.map((user) => user.role))];
 
-export default UseAsyncListDemo;
+export default Example;

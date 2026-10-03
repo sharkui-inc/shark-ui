@@ -99,7 +99,7 @@ export const IdeChat = () => {
                   </Avatar>
                 </MessageAvatar>
                 <MessageContent>
-                  <MessageHeader>Shark Agent</MessageHeader>
+                  <MessageHeader>Onda Agent</MessageHeader>
                   <ToolResult status="success">
                     <ToolResultTrigger>
                       <ToolResultTitle>Read helpers.ts</ToolResultTitle>

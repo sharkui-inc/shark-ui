@@ -15,13 +15,13 @@ import {
 import { Skeleton } from "@/registry/react/components/skeleton";
 
 const Example = () => (
-  <SidebarProvider className="h-svh">
-    <Sidebar collapsible="none">
+  <SidebarProvider className="h-svh" defaultOpenMobile>
+    <Sidebar>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <IconTile aria-hidden size="lg">
+              <IconTile aria-hidden size="xs">
                 <WavesHorizontalIcon />
               </IconTile>
               <span>Onda</span>
@@ -29,7 +29,7 @@ const Example = () => (
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent overscrollContain={false}>
         {sections.map((section) => (
           <SidebarGroup key={section.label}>
             <SidebarGroupLabel>{section.label}</SidebarGroupLabel>

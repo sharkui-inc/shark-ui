@@ -4,27 +4,22 @@ import { Portal } from "@ark-ui/react";
 import { ark } from "@ark-ui/react/factory";
 import {
   Select as ArkSelect,
-  useSelect as useArkSelect,
   useSelectContext as useArkSelectContext,
 } from "@ark-ui/react/select";
 import { CheckIcon, ChevronsUpDownIcon, XIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import { inputItemVariants } from "@/registry/react/components/input";
+import { inputHeightVars } from "@/registry/react/components/input";
 import {
   menuEmptyVariants,
   menuGroupLabelVariants,
   menuItemControlVariants,
   menuItemIndicatorVariants,
-  menuSeparatorVariants,
 } from "@/registry/react/components/menu";
 import { Separator } from "@/registry/react/components/separator";
 
-export const useSelect = useArkSelect;
 export const useSelectContext = useArkSelectContext;
-export const SelectRootProvider = ArkSelect.RootProvider;
-
 export const SelectContext = ArkSelect.Context;
 
 export const Select: ArkSelect.RootComponent = (props) => {
@@ -60,7 +55,7 @@ export const Select: ArkSelect.RootComponent = (props) => {
 
 export const selectTriggerVariants = tv({
   base: [
-    "w-fit min-w-0",
+    "h-(--field-height) w-fit min-w-0",
     "flex items-center gap-2",
     "touch-manipulation select-none",
     "font-normal text-base md:text-sm",
@@ -79,15 +74,15 @@ export const selectTriggerVariants = tv({
   variants: {
     size: {
       lg: [
-        "h-11 md:h-10",
+        inputHeightVars.lg,
         "ps-[calc(--spacing(3.5)-1px)] pe-[calc(--spacing(3.5)-1px)]",
       ],
       md: [
-        "h-10 md:h-9",
+        inputHeightVars.md,
         "ps-[calc(--spacing(3)-1px)] pe-[calc(--spacing(3)-1px)]",
       ],
       sm: [
-        "h-9 md:h-8",
+        inputHeightVars.sm,
         "ps-[calc(--spacing(2.5)-1px)] pe-[calc(--spacing(2.5)-1px)]",
         "rounded-md",
       ],
@@ -177,11 +172,7 @@ export const SelectSeparator = (
 
   return (
     <Separator
-      className={cn(
-        "pointer-events-none -mx-1",
-        menuSeparatorVariants(),
-        className
-      )}
+      className={cn("pointer-events-none -mx-1 my-1", className)}
       data-slot="select-separator"
       {...rest}
     />
@@ -289,7 +280,7 @@ export const SelectItem = (
     <ArkSelect.Item
       className={cn(
         menuItemControlVariants(),
-        inputItemVariants(),
+        "touch-manipulation select-none font-normal text-base md:text-sm",
         "cursor-default",
         "outline-hidden",
         "in-[[data-slot=select-content]:has([data-slot=select-group-label])]:ps-4",
@@ -351,6 +342,7 @@ export const SelectEmpty = (props: React.ComponentProps<typeof ark.div>) => {
     return (
       <ark.div
         className={cn(menuEmptyVariants(), className)}
+        data-slot="select-empty"
         role="presentation"
         {...rest}
       />

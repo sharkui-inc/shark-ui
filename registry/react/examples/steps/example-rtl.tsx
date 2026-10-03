@@ -22,7 +22,10 @@ const Example = () => {
   const { values } = translations[locale];
 
   return (
-    <Steps className="size-full max-w-md" count={values.steps.length}>
+    <Steps
+      className="mx-auto h-[300px] w-full max-w-xl"
+      count={values.steps.length}
+    >
       <StepsList>
         {values.steps.map((step) => (
           <StepsItem index={step.index} key={step.index}>

@@ -141,7 +141,7 @@ export const DemoAppContent = (props: DemoAppContentProps) => {
           <p className="font-heading font-semibold text-base leading-tight">
             {labels.greeting}
           </p>
-          <p className="truncate text-neutral-600 text-xs dark:text-neutral-300">
+          <p className="truncate text-muted-foreground text-xs">
             {labels.name}
           </p>
         </div>
@@ -158,12 +158,12 @@ export const DemoAppContent = (props: DemoAppContentProps) => {
       </header>
 
       <section className="pb-4">
-        <p className="mb-2 px-4 text-neutral-600 text-xs dark:text-neutral-300">
+        <p className="mb-2 px-4 text-muted-foreground text-xs">
           {labels.jumpBackIn}
         </p>
         <section
           aria-label="Playlists"
-          className="scrollbar-none flex gap-2.5 overflow-x-auto px-4 focus-visible:outline-2 focus-visible:outline-ring"
+          className="scrollbar-none flex gap-2.5 overflow-x-auto px-4 outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
           role="group"
           tabIndex={0}
         >
@@ -190,7 +190,7 @@ export const DemoAppContent = (props: DemoAppContentProps) => {
       </section>
 
       <section className="px-1 pb-2">
-        <p className="mb-0.5 px-3 text-neutral-600 text-xs dark:text-neutral-300">
+        <p className="mb-0.5 px-3 text-muted-foreground text-xs">
           {labels.recentlyPlayed}
         </p>
         <ItemGroup className="gap-0">

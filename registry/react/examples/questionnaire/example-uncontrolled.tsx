@@ -17,7 +17,7 @@ import {
 } from "@/registry/react/components/questionnaire";
 import { toast } from "@/registry/react/components/toast";
 
-const QuestionnaireUncontrolledDemo = () => {
+const Example = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const answers = new FormData(event.currentTarget);
@@ -96,4 +96,4 @@ const items = [
   },
 ] as const;
 
-export default QuestionnaireUncontrolledDemo;
+export default Example;

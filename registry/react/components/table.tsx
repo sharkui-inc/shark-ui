@@ -30,7 +30,7 @@ export const Table = (props: TableProps) => {
   return (
     <div
       aria-label="Scrollable table"
-      className="relative w-full overflow-auto focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+      className="relative w-full overflow-auto outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
       data-slot="table-wrapper"
       role="group"
       tabIndex={0}

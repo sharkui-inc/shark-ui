@@ -118,20 +118,23 @@ export const DashboardEmployees = () => {
   );
 };
 
-const EmployeeActions = ({ employee }: { employee: Employee }) => (
-  <Menu>
-    <MenuTrigger asChild>
-      <Button
-        aria-label={`Actions for ${employee.name}`}
-        size="icon-xs"
-        variant="ghost"
-      >
-        <MoreHorizontalIcon aria-hidden />
-      </Button>
-    </MenuTrigger>
-    <MenuContent>
-      <MenuItem value="view-profile">View profile</MenuItem>
-      <MenuItem value="message">Send message</MenuItem>
-    </MenuContent>
-  </Menu>
-);
+const EmployeeActions = (props: { employee: Employee }) => {
+  const { employee } = props;
+  return (
+    <Menu>
+      <MenuTrigger asChild>
+        <Button
+          aria-label={`Actions for ${employee.name}`}
+          size="icon-xs"
+          variant="ghost"
+        >
+          <MoreHorizontalIcon aria-hidden />
+        </Button>
+      </MenuTrigger>
+      <MenuContent>
+        <MenuItem value="view-profile">View profile</MenuItem>
+        <MenuItem value="message">Send message</MenuItem>
+      </MenuContent>
+    </Menu>
+  );
+};

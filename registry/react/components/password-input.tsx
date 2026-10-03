@@ -2,7 +2,6 @@
 
 import {
   PasswordInput as ArkPasswordInput,
-  usePasswordInput as useArkPasswordInput,
   usePasswordInputContext as useArkPasswordInputContext,
 } from "@ark-ui/react/password-input";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
@@ -15,10 +14,6 @@ import {
   InputGroupInput,
   type InputGroupProps,
 } from "@/registry/react/components/input-group";
-
-export const usePasswordInput = useArkPasswordInput;
-export const usePasswordInputContext = useArkPasswordInputContext;
-export const PasswordInputRootProvider = ArkPasswordInput.RootProvider;
 
 type PasswordInputControlProps = Pick<
   React.ComponentProps<typeof InputGroupInput>,
@@ -57,6 +52,7 @@ interface PasswordInputProps
   visibleIcon?: React.ReactNode;
 }
 
+export const usePasswordInputContext = useArkPasswordInputContext;
 export const PasswordInput = (props: PasswordInputProps) => {
   const {
     size = "md",

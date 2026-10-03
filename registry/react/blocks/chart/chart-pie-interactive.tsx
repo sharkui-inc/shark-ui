@@ -76,7 +76,7 @@ const monthCollection = createListCollection({
   })),
 });
 
-function ChartPieInteractive() {
+const ChartPieInteractive = () => {
   const id = "pie-interactive";
   const [activeMonth, setActiveMonth] = React.useState([desktopData[0].month]);
 
@@ -87,7 +87,7 @@ function ChartPieInteractive() {
   return (
     <Card data-chart={id}>
       <ChartStyle config={chartConfig} id={id} />
-      <CardHeader className="flex-row items-start space-y-0 pb-0">
+      <CardHeader className="flex-row items-start pb-0">
         <div className="grid gap-1">
           <CardTitle>Pie Chart - Interactive</CardTitle>
           <CardDescription>January - June 2024</CardDescription>
@@ -183,6 +183,6 @@ function ChartPieInteractive() {
       </CardContent>
     </Card>
   );
-}
+};
 
 export default ChartPieInteractive;

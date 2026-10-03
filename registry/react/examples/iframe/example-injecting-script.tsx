@@ -3,13 +3,6 @@
 import React from "react";
 import { Iframe } from "@/registry/react/components/iframe";
 
-const srcDoc = `<html><head>
-<style>
-*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { overflow: hidden; }
-</style>
-</head><body><div class="frame-root"></div></body></html>`;
-
 const Example = () => {
   const ref = React.useRef<HTMLIFrameElement>(null);
 
@@ -47,5 +40,12 @@ const Example = () => {
     </div>
   );
 };
+
+const srcDoc = `<html><head>
+<style>
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow: hidden; }
+</style>
+</head><body><div class="frame-root"></div></body></html>`;
 
 export default Example;

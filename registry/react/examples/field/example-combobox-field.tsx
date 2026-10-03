@@ -28,9 +28,7 @@ const Example = () => {
       <FieldLabel>Fruits</FieldLabel>
       <Combobox
         collection={collection}
-        onInputValueChange={({ inputValue, reason }) =>
-          filter(reason === "item-select" ? "" : inputValue)
-        }
+        onInputValueChange={({ inputValue }) => filter(inputValue)}
       >
         <ComboboxInput placeholder="Select an item..." />
         <ComboboxContent>

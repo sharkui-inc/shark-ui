@@ -9,6 +9,7 @@ const manifest: RegistryItemType = {
   registryDependencies: [
     registryUrl("/r/button.json"),
     registryUrl("/r/scroll-area.json"),
+    registryUrl("/r/separator.json"),
   ],
   type: "registry:ui",
 };

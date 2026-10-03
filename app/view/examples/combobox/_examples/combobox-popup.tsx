@@ -27,9 +27,7 @@ const ComboboxPopup = () => {
       className="max-w-xs"
       collection={collection}
       defaultValue={[countries[0].value]}
-      onInputValueChange={({ inputValue, reason }) =>
-        filter(reason === "item-select" ? "" : inputValue)
-      }
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
       <ComboboxTrigger asChild>
         <Button

@@ -9,49 +9,44 @@ import {
 import { Input } from "@/registry/react/components/input";
 import { Switch } from "@/registry/react/components/switch";
 
-export const SettingsSwitchField = ({
-  checked,
-  description,
-  label,
-  onCheckedChange,
-}: {
+export const SettingsSwitchField = (props: {
   checked: boolean;
   description: string;
   label: string;
   onCheckedChange: (checked: boolean) => void;
-}) => (
-  <Field orientation="horizontal">
-    <Switch
-      checked={checked}
-      onCheckedChange={({ checked: next }) => onCheckedChange(Boolean(next))}
-    />
-    <FieldContent>
-      <FieldLabel>{label}</FieldLabel>
-      <FieldDescription>{description}</FieldDescription>
-    </FieldContent>
-  </Field>
-);
+}) => {
+  const { checked, description, label, onCheckedChange } = props;
+  return (
+    <Field orientation="horizontal">
+      <Switch
+        checked={checked}
+        onCheckedChange={({ checked: next }) => onCheckedChange(Boolean(next))}
+      />
+      <FieldContent>
+        <FieldLabel>{label}</FieldLabel>
+        <FieldDescription>{description}</FieldDescription>
+      </FieldContent>
+    </Field>
+  );
+};
 
-export const SettingsTextField = ({
-  description,
-  label,
-  onChange,
-  type = "text",
-  value,
-}: {
+export const SettingsTextField = (props: {
   description: string;
   label: string;
   onChange: (value: string) => void;
   type?: "email" | "text";
   value: string;
-}) => (
-  <Field>
-    <FieldLabel>{label}</FieldLabel>
-    <Input
-      onChange={(event) => onChange(event.target.value)}
-      type={type}
-      value={value}
-    />
-    <FieldDescription>{description}</FieldDescription>
-  </Field>
-);
+}) => {
+  const { description, label, onChange, type = "text", value } = props;
+  return (
+    <Field>
+      <FieldLabel>{label}</FieldLabel>
+      <Input
+        onChange={(event) => onChange(event.target.value)}
+        type={type}
+        value={value}
+      />
+      <FieldDescription>{description}</FieldDescription>
+    </Field>
+  );
+};

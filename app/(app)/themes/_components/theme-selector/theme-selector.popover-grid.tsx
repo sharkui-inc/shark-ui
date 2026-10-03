@@ -63,11 +63,10 @@ export const ThemeSelectorPopoverGrid = (
     setIsOpen(open);
   };
 
-  const handleHighlightChange = ({
-    highlightedValue: next,
-  }: {
+  const handleHighlightChange = (details: {
     highlightedValue: string | null;
   }) => {
+    const { highlightedValue: next } = details;
     setHighlightedValue(next);
     preview.onHighlightChange({ highlightedValue: next });
   };

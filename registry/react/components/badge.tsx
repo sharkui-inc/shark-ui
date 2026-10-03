@@ -54,7 +54,7 @@ export const badgeVariants = tv({
         "focus-visible:border-background",
       ],
       destructive: [
-        "bg-destructive/8 dark:bg-destructive/8",
+        "bg-destructive/8",
         "text-destructive-foreground",
         "border-destructive-foreground/24",
         "[a&]:hover:bg-destructive/24",
@@ -85,7 +85,7 @@ export const badgeVariants = tv({
       ],
       warning: [
         "bg-warning/8",
-        "text-amber-800 dark:text-warning-foreground",
+        "text-warning-foreground",
         "border-warning-foreground/24",
         "[a&]:hover:bg-warning/24",
       ],

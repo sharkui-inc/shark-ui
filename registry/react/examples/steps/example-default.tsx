@@ -14,7 +14,7 @@ import {
 } from "@/registry/react/components/steps";
 
 const StepsDemo = () => (
-  <Steps className="size-full max-w-md" count={steps.length}>
+  <Steps className="mx-auto h-[300px] w-full max-w-xl" count={steps.length}>
     <StepsList>
       {steps.map((step) => (
         <StepsItem index={step - 1} key={step}>

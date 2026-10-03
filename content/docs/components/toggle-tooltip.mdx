@@ -10,13 +10,6 @@ links:
 
 import manifest from "@/registry/manifest/toggle-tooltip";
 
-<Alert>
-  <InfoIcon />
-  <AlertDescription>
-  Toggle Tooltip is built on top of the [Popover](/docs/components/popover) component. Check it out for more examples.
-  </AlertDescription>
-</Alert>
-
 <ComponentPreview componentName="toggle-tooltip" />
 
 ## Installation
@@ -109,6 +102,13 @@ Use the `positioning` prop to change the position.
 
 ## Examples
 
+<Alert>
+  <InfoIcon />
+  <AlertDescription>
+  Toggle Tooltip is built on top of the [Popover](/docs/components/popover) component. Check it out for more examples.
+  </AlertDescription>
+</Alert>
+
 ### Hide Arrow
 
 Hide the arrow with `showArrow={false}` on `ToggleTooltipContent`.
@@ -168,15 +168,6 @@ Optional arrow pointing to the trigger. Place inside `ToggleTooltipContent`.
 | --- | --- | --- |
 | `--arrow-background` | `string` | `var(--foreground)` |
 | `--arrow-size` | `string` | `calc(1.5 * var(--spacing))` |
-
-### ToggleTooltipRootProvider
-
-Provides a ToggleTooltip API created with `useToggleTooltip` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseToggleTooltipReturn` | `required` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/popover#api-reference).

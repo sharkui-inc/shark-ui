@@ -6,7 +6,7 @@ import { Button } from "@/registry/react/components/button";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 import { Switch } from "@/registry/react/components/switch";
 
-const Example = () => {
+const HitboxDemo = () => {
   const [show, setShow] = React.useState(true);
 
   return (
@@ -36,4 +36,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default HitboxDemo;

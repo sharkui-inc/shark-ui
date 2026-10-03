@@ -2,16 +2,11 @@
 
 import {
   SegmentGroup as ArkSegmentGroup,
-  useSegmentGroup as useArkSegmentGroup,
   useSegmentGroupContext as useArkSegmentGroupContext,
 } from "@ark-ui/react/segment-group";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { buttonControlVariants } from "@/registry/react/components/button";
-
-export const useSegmentGroup = useArkSegmentGroup;
-export const useSegmentGroupContext = useArkSegmentGroupContext;
-export const SegmentGroupRootProvider = ArkSegmentGroup.RootProvider;
 
 type SegmentGroupVariant = "default" | "underline";
 
@@ -25,6 +20,7 @@ interface SegmentGroupProps
   variant?: SegmentGroupVariant;
 }
 
+export const useSegmentGroupContext = useArkSegmentGroupContext;
 export const SegmentGroup = (props: SegmentGroupProps) => {
   const {
     orientation = "horizontal",

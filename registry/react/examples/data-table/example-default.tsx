@@ -237,90 +237,99 @@ const data: Payment[] = [
   },
 ];
 
-const SelectAllCheckbox = ({
-  table,
-}: {
+const SelectAllCheckbox = (props: {
   table: TanStackTable<typeof features, Payment>;
-}) => (
-  <>
-    <span className="sr-only">Select rows</span>
+}) => {
+  const { table } = props;
+  return (
+    <>
+      <span className="sr-only">Select rows</span>
+      <Checkbox
+        aria-label="Select all"
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={({ checked }) => {
+          table.toggleAllPageRowsSelected(!!checked);
+        }}
+      />
+    </>
+  );
+};
+
+const SelectRowCheckbox = (props: { row: Row<typeof features, Payment> }) => {
+  const { row } = props;
+  return (
     <Checkbox
-      aria-label="Select all"
-      checked={
-        table.getIsAllPageRowsSelected() ||
-        (table.getIsSomePageRowsSelected() && "indeterminate")
-      }
+      aria-label="Select row"
+      checked={row.getIsSelected()}
       onCheckedChange={({ checked }) => {
-        table.toggleAllPageRowsSelected(!!checked);
+        row.toggleSelected(!!checked);
       }}
     />
-  </>
-);
+  );
+};
 
-const SelectRowCheckbox = ({ row }: { row: Row<typeof features, Payment> }) => (
-  <Checkbox
-    aria-label="Select row"
-    checked={row.getIsSelected()}
-    onCheckedChange={({ checked }) => {
-      row.toggleSelected(!!checked);
-    }}
-  />
-);
-
-const EmailSortHeader = ({
-  column,
-}: {
+const EmailSortHeader = (props: {
   column: Column<typeof features, Payment, string>;
-}) => (
-  <Button
-    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-    variant="ghost"
-  >
-    Email
-    <ArrowUpDownIcon aria-hidden data-icon="inline-end" />
-  </Button>
-);
+}) => {
+  const { column } = props;
+  return (
+    <Button
+      onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      variant="ghost"
+    >
+      Email
+      <ArrowUpDownIcon aria-hidden data-icon="inline-end" />
+    </Button>
+  );
+};
 
-const PaymentActions = ({ payment }: { payment: Payment }) => (
-  <Menu>
-    <MenuTrigger asChild>
-      <Button aria-label="Open menu" size="icon-md" variant="ghost">
-        <MoreHorizontalIcon aria-hidden />
-      </Button>
-    </MenuTrigger>
-    <MenuContent>
-      <MenuGroup heading="Actions">
-        <MenuItem
-          onClick={() => navigator.clipboard.writeText(payment.id)}
-          value="copy-payment-id"
-        >
-          Copy payment ID
-        </MenuItem>
-        <MenuSeparator />
-        <MenuItem value="view-customer">View customer</MenuItem>
-        <MenuItem value="view-payment-details">View payment details</MenuItem>
-      </MenuGroup>
-    </MenuContent>
-  </Menu>
-);
+const PaymentActions = (props: { payment: Payment }) => {
+  const { payment } = props;
+  return (
+    <Menu>
+      <MenuTrigger asChild>
+        <Button aria-label="Open menu" size="icon-md" variant="ghost">
+          <MoreHorizontalIcon aria-hidden />
+        </Button>
+      </MenuTrigger>
+      <MenuContent>
+        <MenuGroup heading="Actions">
+          <MenuItem
+            onClick={() => navigator.clipboard.writeText(payment.id)}
+            value="copy-payment-id"
+          >
+            Copy payment ID
+          </MenuItem>
+          <MenuSeparator />
+          <MenuItem value="view-customer">View customer</MenuItem>
+          <MenuItem value="view-payment-details">View payment details</MenuItem>
+        </MenuGroup>
+      </MenuContent>
+    </Menu>
+  );
+};
 
-const ColumnVisibilityItem = ({
-  column,
-}: {
+const ColumnVisibilityItem = (props: {
   column: Column<typeof features, Payment, unknown>;
-}) => (
-  <MenuCheckboxItem
-    checked={column.getIsVisible()}
-    className="capitalize"
-    closeOnSelect={false}
-    onCheckedChange={(value) => {
-      column.toggleVisibility(value);
-    }}
-    value={column.id}
-  >
-    {column.id}
-  </MenuCheckboxItem>
-);
+}) => {
+  const { column } = props;
+  return (
+    <MenuCheckboxItem
+      checked={column.getIsVisible()}
+      className="capitalize"
+      closeOnSelect={false}
+      onCheckedChange={(value) => {
+        column.toggleVisibility(value);
+      }}
+      value={column.id}
+    >
+      {column.id}
+    </MenuCheckboxItem>
+  );
+};
 
 export const columns = columnHelper.columns([
   columnHelper.display({

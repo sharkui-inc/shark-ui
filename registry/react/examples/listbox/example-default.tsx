@@ -13,7 +13,7 @@ import {
   ListboxItemText,
 } from "@/registry/react/components/listbox";
 
-const Example = () => (
+const ListboxDemo = () => (
   <Listbox
     className="w-full max-w-xs"
     collection={collection}
@@ -81,4 +81,4 @@ const collection = createListCollection({
   ],
 });
 
-export default Example;
+export default ListboxDemo;

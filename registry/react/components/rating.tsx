@@ -2,7 +2,6 @@
 
 import {
   RatingGroup as ArkRatingGroup,
-  useRatingGroup as useArkRatingGroup,
   useRatingGroupContext as useArkRatingGroupContext,
 } from "@ark-ui/react/rating-group";
 import { StarIcon } from "lucide-react";
@@ -10,15 +9,12 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 import { FieldLabel } from "@/registry/react/components/field";
 
-export const useRating = useArkRatingGroup;
-export const useRatingContext = useArkRatingGroupContext;
-export const RatingRootProvider = ArkRatingGroup.RootProvider;
-
 interface RatingProps extends React.ComponentProps<typeof ArkRatingGroup.Root> {
   /** The icon used for each rating item. */
   icon?: React.JSX.ElementType;
 }
 
+export const useRatingContext = useArkRatingGroupContext;
 export const Rating = (props: RatingProps) => {
   const {
     allowHalf = false,

@@ -49,14 +49,14 @@ export const HeroSection = (props: HeroSectionProps) => {
         </p>
 
         <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:gap-4">
-          <Button asChild className="w-full sm:w-auto" size="xl">
+          <Button asChild className="w-full sm:w-auto" size="lg">
             <Link href="/docs">Get Started</Link>
           </Button>
 
           <Button
             asChild
             className="w-full sm:w-auto"
-            size="xl"
+            size="lg"
             variant="outline"
           >
             <Link href="/docs/components">

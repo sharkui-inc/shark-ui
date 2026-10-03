@@ -13,7 +13,7 @@ import { Rating, RatingStars } from "@/registry/react/components/rating";
 
 const Example = () => (
   <Card className="w-full max-w-xs">
-    <CardContent className="space-y-2">
+    <CardContent className="flex flex-col gap-2">
       <Rating defaultValue={5} readOnly>
         <RatingStars className="**:data-[slot=rating-item-indicator]:size-4" />
       </Rating>

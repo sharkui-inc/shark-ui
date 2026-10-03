@@ -54,50 +54,48 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function ChartRadialLabel() {
-  return (
-    <Card>
-      <CardHeader className="items-center pb-0">
-        <CardTitle>Radial Chart - Label</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-1 pb-0">
-        <ChartContainer
-          className="mx-auto aspect-square max-h-[250px]"
-          config={chartConfig}
+const ChartRadialLabel = () => (
+  <Card>
+    <CardHeader className="items-center pb-0">
+      <CardTitle>Radial Chart - Label</CardTitle>
+      <CardDescription>January - June 2024</CardDescription>
+    </CardHeader>
+    <CardContent className="flex-1 pb-0">
+      <ChartContainer
+        className="mx-auto aspect-square max-h-[250px]"
+        config={chartConfig}
+      >
+        <RadialBarChart
+          data={chartData}
+          endAngle={380}
+          innerRadius={30}
+          outerRadius={110}
+          startAngle={-90}
         >
-          <RadialBarChart
-            data={chartData}
-            endAngle={380}
-            innerRadius={30}
-            outerRadius={110}
-            startAngle={-90}
-          >
-            <ChartTooltip
-              content={<ChartTooltipContent hideLabel nameKey="browser" />}
-              cursor={false}
+          <ChartTooltip
+            content={<ChartTooltipContent hideLabel nameKey="browser" />}
+            cursor={false}
+          />
+          <RadialBar background dataKey="visitors">
+            <LabelList
+              className="fill-white capitalize mix-blend-luminosity"
+              dataKey="browser"
+              fontSize={11}
+              position="insideStart"
             />
-            <RadialBar background dataKey="visitors">
-              <LabelList
-                className="fill-white capitalize mix-blend-luminosity"
-                dataKey="browser"
-                fontSize={11}
-                position="insideStart"
-              />
-            </RadialBar>
-          </RadialBarChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
-        </div>
-        <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter>
-    </Card>
-  );
-}
+          </RadialBar>
+        </RadialBarChart>
+      </ChartContainer>
+    </CardContent>
+    <CardFooter className="flex-col gap-2 text-sm">
+      <div className="flex items-center gap-2 font-medium leading-none">
+        Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
+      </div>
+      <div className="text-muted-foreground leading-none">
+        Showing total visitors for the last 6 months
+      </div>
+    </CardFooter>
+  </Card>
+);
 
 export default ChartRadialLabel;

@@ -16,7 +16,8 @@ export const Card = (props: React.ComponentProps<typeof ark.div>) => {
         "bg-card",
         "text-card-foreground",
         "has-[>_[data-variant=image]]:pt-0 has-[>_[data-slot=card-footer]]:pb-0",
-        "overflow-hidden rounded-[calc(var(--radius)*1.5)] border shadow-xs/4",
+        "rounded-xl border shadow-xs/4",
+        "overflow-hidden",
         className
       )}
       data-slot="card"
@@ -40,7 +41,7 @@ const cardMediaVariants = tv({
       icon: "[&_svg:not([class*='size-'])]:size-4",
       image: [
         "px-0",
-        "rounded-t-[calc(var(--radius)*1.5)]",
+        "rounded-t-xl",
         "overflow-hidden",
         "[&_img]:size-full [&_img]:object-cover [&_video]:size-full [&_video]:object-cover",
       ],
@@ -167,7 +168,7 @@ export const CardFooter = (props: React.ComponentProps<typeof ark.div>) => {
         "flex items-center gap-2",
         "px-(--space)",
         "bg-muted/48",
-        "rounded-b-[max(0px,calc(var(--radius)*1.5-1px))] border-t",
+        "rounded-b-xl border-t",
         "py-(--space)",
         className
       )}

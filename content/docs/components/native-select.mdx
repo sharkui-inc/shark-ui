@@ -60,10 +60,10 @@ NativeSelect
 ## Usage
 
 ```tsx
-import { 
-  NativeSelect, 
-  NativeSelectOptGroup, 
-  NativeSelectOption, 
+import {
+  NativeSelect,
+  NativeSelectOptGroup,
+  NativeSelectOption,
 } from "@/components/ui/native-select";
 ```
 
@@ -86,7 +86,23 @@ import {
 
 Use `value` and `onChange` to control the select externally.
 
-## Sizes
+<ComponentPreview componentName="native-select" fileName="example-controlled" />
+
+## States
+
+### Disabled
+
+Use the `disabled` prop to disable the select.
+
+<ComponentPreview componentName="native-select" fileName="example-disabled" />
+
+### Invalid
+
+Use the `invalid` prop to mark the select as invalid.
+
+<ComponentPreview componentName="native-select" fileName="example-invalid" />
+
+## Size
 
 Use the `size` prop to change the select height.
 
@@ -102,22 +118,6 @@ Use the `size` prop to change the select height.
 
 <ComponentPreview componentName="native-select" fileName="example-size-lg" />
 
-## States
-
-<ComponentPreview componentName="native-select" fileName="example-controlled" />
-
-### Disabled
-
-Use the `disabled` prop to disable the select.
-
-<ComponentPreview componentName="native-select" fileName="example-disabled" />
-
-### Invalid
-
-Use the `invalid` prop to mark the select as invalid.
-
-<ComponentPreview componentName="native-select" fileName="example-invalid" />
-
 ## Examples
 
 ### Groups
@@ -128,9 +128,13 @@ Use `NativeSelectOptGroup` to group options with a label.
 
 ### With Field
 
-Wrap in `Field` with `FieldLabel` and `FieldDescription` for proper labeling and accessibility.
+Use [Field](/docs/components/field) for a label and description.
 
 <ComponentPreview componentName="native-select" fileName="example-with-field" />
+
+### Form Integration
+
+<ComponentPreview componentName="native-select" fileName="example-form" />
 
 ## RTL
 
@@ -165,8 +169,6 @@ Extends native `<optgroup>` props. Use `label` for the group label.
 | --- | --- | --- |
 | `value` | `string` | `-` |
 | `disabled` | `boolean` | `false` |
+
 Extends native `<option>` props. Use `value` and children for option value and label.
 
----
-
-For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/field#api-reference).

@@ -65,14 +65,15 @@ const viewportWidths: Record<Viewport, number | "100%"> = {
   tablet: 768,
 };
 
-export const CompositionViewer = ({
-  compact = false,
-  headingLevel = "h2",
-  item,
-  kind,
-  showDescription = false,
-  tree,
-}: CompositionViewerProps) => {
+export const CompositionViewer = (props: CompositionViewerProps) => {
+  const {
+    compact = false,
+    headingLevel = "h2",
+    item,
+    kind,
+    showDescription = false,
+    tree,
+  } = props;
   const config = useConfig();
   const updateConfig = useUpdateConfig();
 
@@ -214,7 +215,6 @@ export const CompositionViewer = ({
                 }}
                 size="sm"
                 value={[viewport]}
-                variant="ghost"
               >
                 <ToggleGroupItem
                   aria-label="Desktop preview"

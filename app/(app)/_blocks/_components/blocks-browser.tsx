@@ -64,14 +64,15 @@ interface CatalogNavigationProps {
   onNavigate?: () => void;
 }
 
-const CatalogNavigation = ({
-  activeBlockCategory,
-  activeBlockName,
-  blocks,
-  categories,
-  getBlockHref,
-  onNavigate,
-}: CatalogNavigationProps) => {
+const CatalogNavigation = (props: CatalogNavigationProps) => {
+  const {
+    activeBlockCategory,
+    activeBlockName,
+    blocks,
+    categories,
+    getBlockHref,
+    onNavigate,
+  } = props;
   const visibleCategories = categories.map((category) => ({
     category,
     categoryBlocks: blocks.filter(
@@ -139,13 +140,14 @@ const CatalogNavigation = ({
   );
 };
 
-export const BlocksBrowser = ({
-  blocks,
-  categories,
-  activeBlockName,
-  categorySlug,
-  isDetailPage = false,
-}: BlocksBrowserProps) => {
+export const BlocksBrowser = (props: BlocksBrowserProps) => {
+  const {
+    blocks,
+    categories,
+    activeBlockName,
+    categorySlug,
+    isDetailPage = false,
+  } = props;
   const [navigationOpen, setNavigationOpen] = React.useState(false);
 
   const visibleBlocks = blocks.filter(

@@ -68,13 +68,13 @@ Dialog
 ## Usage
 
 ```tsx
-import { 
-  Dialog, 
-  DialogTrigger, 
-  DialogContent, 
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
   DialogHeader,
-  DialogTitle, 
-  DialogDescription, 
+  DialogTitle,
+  DialogDescription,
   DialogBody,
   DialogFooter,
   DialogClose,
@@ -111,7 +111,7 @@ Use `open` and `onOpenChange` on the root to control the dialog state.
 
 ### Using props
 
-Pass `title` and `description` props directly to `DialogHeader`. 
+Pass `title` and `description` props directly to `DialogHeader`.
 
 ```tsx showLineNumbers
 <DialogHeader title="Dialog Title" description="Dialog description" />
@@ -255,7 +255,7 @@ Root context provider. Controls open state and modal behavior.
 
 ### DialogTrigger
 
-Opens the dialog on click. Use `asChild` for custom trigger elements. 
+Opens the dialog on click. Use `asChild` for custom trigger elements.
 
 | Prop | Type | Default |
 |------|------|---------|
@@ -265,7 +265,7 @@ Opens the dialog on click. Use `asChild` for custom trigger elements.
 
 ### DialogContent
 
-Holds the dialog panel. Supports size variants from sm to fullscreen. 
+Holds the dialog panel. Supports size variants from sm to fullscreen.
 
 | Prop | Type | Default |
 |------|------|---------|
@@ -318,7 +318,7 @@ Accessible title for the dialog. Announced to screen readers.
 
 ### DialogDescription
 
-Accessible description for the dialog. Announced to screen readers. 
+Accessible description for the dialog. Announced to screen readers.
 
 | Prop | Type | Default |
 |------|------|---------|
@@ -327,7 +327,7 @@ Accessible description for the dialog. Announced to screen readers.
 
 ### DialogClose
 
-Closes the dialog on click. Use `asChild` for custom close elements. 
+Closes the dialog on click. Use `asChild` for custom close elements.
 
 | Prop | Type | Default |
 |------|------|---------|
@@ -341,15 +341,6 @@ Dimmed overlay behind the dialog panel.
 | Prop | Type | Default |
 |------|------|---------|
 | `className` | `string` | `-` |
-
-### DialogRootProvider
-
-Provides a Dialog API created with `useDialog` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseDialogReturn` | `required` |
-| `modal` | `boolean` | `true` |
 
 ### DialogPositioner
 

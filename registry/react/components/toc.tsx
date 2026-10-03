@@ -2,15 +2,12 @@
 
 import {
   Toc as ArkToc,
-  useToc as useArkToc,
   useTocContext as useArkTocContext,
 } from "@ark-ui/react/toc";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useToc = useArkToc;
 export const useTocContext = useArkTocContext;
-export const TocRootProvider = ArkToc.RootProvider;
 export const TocContext = ArkToc.Context;
 
 export type { TocActiveChangeDetails, TocItemData } from "@ark-ui/react/toc";

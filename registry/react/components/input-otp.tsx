@@ -3,18 +3,19 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   PinInput as ArkPinInput,
-  usePinInput as useArkPinInput,
   usePinInputContext as useArkPinInputContext,
 } from "@ark-ui/react/pin-input";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { fieldLabelVariants } from "@/registry/react/components/field";
-import { Input, type InputProps } from "@/registry/react/components/input";
+import {
+  Input,
+  type InputProps,
+  inputHeightVars,
+} from "@/registry/react/components/input";
+import { Separator } from "@/registry/react/components/separator";
 
-export const useInputOTP = useArkPinInput;
 export const useInputOTPContext = useArkPinInputContext;
-export const InputOTPRootProvider = ArkPinInput.RootProvider;
-
 export const InputOTPLabel = (
   props: React.ComponentProps<typeof ArkPinInput.Label>
 ) => {
@@ -46,7 +47,7 @@ export const InputOTP = (props: InputOTPProps) => {
 
   return (
     <ArkPinInput.Root
-      className="group/input-otp"
+      className={cn("group/input-otp", inputHeightVars[size])}
       data-size={size}
       data-slot="input-otp"
       otp={otp}
@@ -54,13 +55,7 @@ export const InputOTP = (props: InputOTPProps) => {
       {...rest}
     >
       <ArkPinInput.Control
-        className={cn(
-          "flex items-center gap-2",
-          "*:data-[slot=input-otp-input]:size-8",
-          "in-data-[size=lg]:*:data-[slot=input-otp-input]:size-9",
-          "in-data-[size=sm]:*:data-[slot=input-otp-input]:size-7",
-          className
-        )}
+        className={cn("flex w-full flex-wrap items-center gap-2", className)}
         data-slot="input-otp-control"
       >
         {children}
@@ -80,7 +75,7 @@ export const InputOTPSlot = (
     <ArkPinInput.Input asChild data-slot="input-otp-input" {...rest}>
       <Input
         className={cn(
-          "relative p-0 text-center text-base tabular-nums",
+          "relative w-(--field-height) p-0 text-center text-base tabular-nums [--field-height:inherit]",
           className
         )}
       />
@@ -94,10 +89,15 @@ export const InputOTPSeparator = (
   const { className, ...rest } = props;
 
   return (
-    <ark.hr
-      className={cn("h-0.5 w-2 rounded-full bg-foreground", className)}
-      data-slot="input-otp-separator"
-      {...rest}
-    />
+    <Separator
+      asChild
+      className={cn(
+        "rounded-full border-0 bg-foreground",
+        "data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:w-2",
+        className
+      )}
+    >
+      <ark.hr data-slot="input-otp-separator" {...rest} />
+    </Separator>
   );
 };

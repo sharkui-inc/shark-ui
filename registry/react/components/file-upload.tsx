@@ -3,7 +3,6 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   FileUpload as ArkFileUpload,
-  useFileUpload as useArkFileUpload,
   useFileUploadContext as useArkFileUploadContext,
 } from "@ark-ui/react/file-upload";
 import { UploadIcon, XIcon } from "lucide-react";
@@ -11,10 +10,7 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 
-export const useFileUpload = useArkFileUpload;
 export const useFileUploadContext = useArkFileUploadContext;
-export const FileUploadRootProvider = ArkFileUpload.RootProvider;
-
 export const FileUpload = (
   props: React.ComponentProps<typeof ArkFileUpload.Root>
 ) => {

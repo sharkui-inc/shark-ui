@@ -55,23 +55,17 @@ npx shadcn@latest add @shark/toggle-group
 
 ```text
 ToggleGroup
-├── ToggleGroupLabel
 └── ToggleGroupItem
 ```
 
 ## Usage
 
 ```tsx
-import { 
-  ToggleGroup, 
-  ToggleGroupLabel,
-  ToggleGroupItem 
-} from "@/components/ui/toggle-group"; 
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 ```
 
 ```tsx
 <ToggleGroup>
-  <ToggleGroupLabel>Text formatting</ToggleGroupLabel>
   <ToggleGroupItem value="1">Item 1</ToggleGroupItem>
   <ToggleGroupItem value="2">Item 2</ToggleGroupItem>
 </ToggleGroup>
@@ -87,11 +81,9 @@ Use the `value` and `onValueChange` props to control the toggle group.
 
 ### Disabled
 
-Disable the entire group with the `disabled` prop.
-
 <ComponentPreview componentName="toggle-group" fileName="example-disabled" />
 
-### With disabled toggle
+### Disabled toggle
 
 Disable individual toggles by setting `disabled` on a specific item.
 
@@ -109,25 +101,19 @@ Use `orientation` to change the orientation of the toggle group.
 
 <ComponentPreview componentName="toggle-group" fileName="example-vertical" />
 
-## Variant
+## Variants
 
 Use `variant` to change the visual style of the toggle buttons.
 
-### Ghost
+### Default
 
-<ComponentPreview componentName="toggle-group" fileName="example-ghost" />
+<ComponentPreview componentName="toggle-group" fileName="example-default" />
 
 ### Outline
 
 <ComponentPreview componentName="toggle-group" fileName="example-outline" />
 
-## Pill
-
-The `pill` prop creates a fully rounded segmented toggle group.
-
-<ComponentPreview componentName="toggle-group" fileName="example-pill" />
-
-## Sizes
+## Size
 
 ### Small
 
@@ -141,13 +127,13 @@ The `pill` prop creates a fully rounded segmented toggle group.
 
 <ComponentPreview componentName="toggle-group" fileName="example-size-lg" />
 
+## Pill
+
+The `pill` prop creates a fully rounded segmented toggle group.
+
+<ComponentPreview componentName="toggle-group" fileName="example-pill" />
+
 ## Examples
-
-### With label
-
-Use `ToggleGroupLabel` to name the group. It is associated automatically.
-
-<ComponentPreview componentName="toggle-group" fileName="example-with-label" />
 
 ### With spacing
 
@@ -161,7 +147,11 @@ Use `multiple={false}` to allow only one toggle to be selected at a time.
 
 <ComponentPreview componentName="toggle-group" fileName="example-single" />
 
-### Custom toggle group
+### Form Integration
+
+<ComponentPreview componentName="toggle-group" fileName="example-form" />
+
+### Custom toggle
 
 A custom toggle group example with a custom styling for font weight selection.
 
@@ -181,7 +171,7 @@ Root component. Provides shared variant and size to child toggles via context.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `variant` | `"outline" \| "ghost"` | `"ghost"` |
+| `variant` | `"default" \| "outline"` | `"default"` |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `spacing` | `"0" \| "1" \| "2" \| "3" \| "4" \| "5" \| "6" \| "8" \| "10"` | `"0"` |
 | `pill` | `boolean` | `false` |
@@ -194,15 +184,6 @@ Root component. Provides shared variant and size to child toggles via context.
 | `className` | `string` | `-` |
 | `--gap` | `string` | `0` |
 
-### ToggleGroupLabel
-
-Names the `ToggleGroup` that directly contains it.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `children` | `ReactNode` | `required` |
-| `className` | `string` | `-` |
-
 ### ToggleGroupItem
 
 Single toggle in the group. Uses [Toggle](/docs/components/toggle) internally.
@@ -213,21 +194,6 @@ Single toggle in the group. Uses [Toggle](/docs/components/toggle) internally.
 | `disabled` | `boolean` | `false` |
 | `className` | `string` | `-` |
 | `aria-label` | `string` | `-` |
-
-### ToggleGroupRootProvider
-
-Provides a ToggleGroup API created with `useToggleGroup` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseToggleGroupReturn` | `required` |
-| `pill` | `boolean` | `false` |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
-| `spacing` | `number` | `0` |
-| `variant` | `"ghost" \| "outline"` | `"ghost"` |
-
-Pass the same styling props you would use on `ToggleGroup` so `ToggleGroupItem` receives them under the headless path.
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/toggle-group#api-reference).

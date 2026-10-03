@@ -51,19 +51,7 @@ npx shadcn@latest add @shark/color-picker
 
 </CodeTabs>
 
-## Modes
-
-You can use multiple modes to build the color picker that fits your needs:
-
-- [Input](#input) for hex or channel editing
-- [Popover](#popover) for area and slider selection
-- [Swatch](#swatch-picker) picker for preset colors
-- [Area](#area) standalone component for color selection
-- [Slider](#slider) for color adjustment
-
-## Input
-
-### Anatomy
+## Anatomy
 
 ```text
 ColorPicker
@@ -80,7 +68,7 @@ ColorPicker
         └── ColorPickerSlider
 ```
 
-### Usage
+## Usage
 
 ```tsx
 import {
@@ -96,6 +84,18 @@ import {
   </ColorPickerInput>
 </ColorPicker>
 ```
+
+## Modes
+
+You can use multiple modes to build the color picker that fits your needs:
+
+- [Input](#input) for hex or channel editing
+- [Popover](#popover) for area and slider selection
+- [Swatch](#swatch-picker) picker for preset colors
+- [Area](#area) standalone component for color selection
+- [Slider](#slider) for color adjustment
+
+## Input
 
 ### Controlled
 
@@ -117,7 +117,7 @@ Use `value` and `onValueChange` to control the color picker.
 
 #### With Field
 
-Use `ColorPickerLabel` inside `ColorPicker` to focus the visible hex input when clicked. Wrap it with [Field](/docs/components/field) for descriptions and validation messaging. The hex input keeps Ark's channel accessible name.
+Use `ColorPickerLabel` to name the input, and [Field](/docs/components/field) for helper text.
 
 <ComponentPreview componentName="color-picker" fileName="example-with-field" />
 
@@ -257,7 +257,7 @@ import {
 } from "@/components/ui/color-picker";
 ```
 
-```tsx 
+```tsx
 <ColorPicker>
   <ColorPickerSwatchGroup>
     <ColorPickerSwatchTrigger value="#0485F7">
@@ -325,7 +325,7 @@ import {
 } from "@/components/ui/color-picker";
 ```
 
-```tsx 
+```tsx
 <ColorPicker>
   <ColorPickerArea>
     <ColorPickerAreaThumb />
@@ -345,7 +345,7 @@ import {
 
 ## Slider
 
-Set `inline` on `ColorPicker` for standalone sliders. Wrap multiple sliders in `ColorPickerView`.
+Set `inline` on `ColorPicker` for standalone sliders, and wrap several sliders in `ColorPickerView`.
 
 ### Anatomy
 
@@ -365,7 +365,7 @@ import {
 } from "@/components/ui/color-picker";
 ```
 
-```tsx 
+```tsx
 <ColorPicker>
   <ColorPickerSlider channel="hue" />
 </ColorPicker>
@@ -403,7 +403,11 @@ import {
 
 <ComponentPreview componentName="color-picker" fileName="example-slider-vertical" />
 
-### Custom spacing
+#### Form Integration
+
+<ComponentPreview componentName="color-picker" fileName="example-form" />
+
+#### Custom Spacing
 
 The `[--space:--spacing("value")]` controls the internal spacing.
 
@@ -622,15 +626,6 @@ Displays the current color as a swatch. Use for standalone value preview.
 ### parseColor
 
 Exported utility to parse color strings. Use for programmatic color handling.
-
-### ColorPickerRootProvider
-
-Provides a ColorPicker API created with `useColorPicker` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseColorPickerReturn` | `required` |
-
 ---
 
 For the complete list of props and additional subcomponents, see the [Ark UI Color Picker documentation](https://ark-ui.com/docs/components/color-picker#api-reference).

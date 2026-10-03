@@ -4,7 +4,7 @@ import {
   AnnouncementTitle,
 } from "@/registry/react/components/announcement";
 
-const Example = () => (
+const AnnouncementDemo = () => (
   <Announcement>
     <Badge>Release</Badge>
     <AnnouncementTitle>
@@ -13,4 +13,4 @@ const Example = () => (
   </Announcement>
 );
 
-export default Example;
+export default AnnouncementDemo;

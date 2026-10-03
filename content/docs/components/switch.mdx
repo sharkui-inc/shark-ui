@@ -67,7 +67,7 @@ Use the `checked` and `onCheckedChange` props to control the switch.
 
 ## States
 
-### Invalid 
+### Invalid
 
 Use the `invalid` prop on the `Field` or in the `Switch` component to mark the switch as invalid.
 
@@ -77,7 +77,7 @@ Use the `invalid` prop on the `Field` or in the `Switch` component to mark the s
 
 ### With Field
 
-Use `Field` and `FieldLabel` to label the switch and describe its effect.
+Use [Field](/docs/components/field) for a label and description.
 
 <ComponentPreview componentName="switch" fileName="example-with-field" />
 
@@ -100,8 +100,6 @@ Use a card-style layout with the switch for a more prominent display.
 <ComponentPreview componentName="switch" fileName="example-card" />
 
 ### Form Integration
-
-Integrate the switch into a form with proper validation and error handling.
 
 <ComponentPreview componentName="switch" fileName="example-form" />
 
@@ -137,15 +135,6 @@ Toggle switch for on/off state. Use with a form control.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `--size` | `string` | `--spacing(5)` |
-
-### SwitchRootProvider
-
-Provides a Switch API created with `useSwitch` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseSwitchReturn` | `required` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/switch#api-reference).

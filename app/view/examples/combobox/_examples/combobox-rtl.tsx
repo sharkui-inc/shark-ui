@@ -29,9 +29,7 @@ const ComboboxRtl = () => {
         collection={collection}
         defaultValue={[initialItems[0].value]}
         multiple
-        onInputValueChange={({ inputValue, reason }) =>
-          filter(reason === "item-select" ? "" : inputValue)
-        }
+        onInputValueChange={({ inputValue }) => filter(inputValue)}
       >
         <ComboboxContext<Framework>>
           {({ selectedItems }) => (

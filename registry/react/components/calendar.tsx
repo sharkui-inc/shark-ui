@@ -2,7 +2,6 @@
 
 import {
   DatePicker as ArkCalendar,
-  useDatePicker as useArkDatePicker,
   useDatePickerContext as useArkDatePickerContext,
 } from "@ark-ui/react/date-picker";
 import {
@@ -17,11 +16,7 @@ import { fieldLabelVariants } from "@/registry/react/components/field";
 import { FormatNumber } from "@/registry/react/components/format";
 import { nativeSelectVariants } from "@/registry/react/components/native-select";
 
-export const useCalendar = useArkDatePicker;
 export const useCalendarContext = useArkDatePickerContext;
-
-export const CalendarRootProvider = ArkCalendar.RootProvider;
-
 export const Calendar = (
   props: Omit<React.ComponentProps<typeof ArkCalendar.Root>, "inline">
 ) => {

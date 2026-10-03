@@ -31,7 +31,7 @@ import {
   InputGroupTextarea,
 } from "@/registry/react/components/input-group";
 
-const BugReportForm = () => {
+const Example = () => {
   const form = useForm({
     initialInput: {
       description: "",
@@ -127,4 +127,4 @@ const formSchema = v.object({
   ),
 });
 
-export default BugReportForm;
+export default Example;

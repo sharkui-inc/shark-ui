@@ -30,11 +30,13 @@ const Example = () => {
     initialItems,
   });
 
-  const onOpenChange = ({ open: nextOpen }: { open: boolean }) => {
+  const onOpenChange = (props: { open: boolean }) => {
+    const { open: nextOpen } = props;
     setOpen(nextOpen);
   };
 
-  const onInputValueChange = ({ inputValue }: { inputValue: string }) => {
+  const onInputValueChange = (props: { inputValue: string }) => {
+    const { inputValue } = props;
     filter(inputValue);
   };
 

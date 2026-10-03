@@ -10,7 +10,7 @@ import {
 import { FocusTrap } from "@/registry/react/components/focus-trap";
 import { Input } from "@/registry/react/components/input";
 
-const FocusTrapDemo = () => {
+const Example = () => {
   const [trapped, setTrapped] = React.useState(false);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 
@@ -48,4 +48,4 @@ const FocusTrapDemo = () => {
   );
 };
 
-export default FocusTrapDemo;
+export default Example;

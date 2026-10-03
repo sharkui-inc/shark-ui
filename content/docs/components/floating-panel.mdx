@@ -74,7 +74,7 @@ FloatingPanel
 ## Usage
 
 ```tsx
-import { 
+import {
   FloatingPanel,
   FloatingPanelTrigger,
   FloatingPanelContent,
@@ -109,6 +109,12 @@ Use `size` and `onSizeChange` to control the panel size.
 Use `minSize` and `maxSize` to limit the width and height of a resizable panel.
 
 <ComponentPreview componentName="floating-panel" fileName="example-size-limits" />
+
+### Disable resize
+
+Set `resizable` to `false` on the panel and its content.
+
+<ComponentPreview componentName="floating-panel" fileName="example-disabled-resize" />
 
 ### Controlled Position
 
@@ -205,7 +211,7 @@ Title for the panel.
 
 ### FloatingPanelBody
 
-Scrollable body content. 
+Scrollable body content.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -220,14 +226,6 @@ Closes the panel on click.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
-
-### FloatingPanelRootProvider
-
-Provides a FloatingPanel API created with `useFloatingPanel` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseFloatingPanelReturn` | `required` |
 
 ### FloatingPanelDragTrigger
 
@@ -294,7 +292,7 @@ Public FloatingPanelStageTrigger component. It forwards the underlying primitive
 
 ### FloatingPanelFooter
 
-Footer area for actions. 
+Footer area for actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |

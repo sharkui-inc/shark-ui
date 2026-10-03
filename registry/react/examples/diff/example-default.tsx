@@ -6,7 +6,7 @@ import {
   DiffStats,
 } from "@/registry/react/components/diff";
 
-const Example = () => (
+const DiffDemo = () => (
   <Diff className="max-w-lg">
     <DiffHeader title="src/auth.ts">
       <DiffStats added={4} removed={1} />
@@ -34,4 +34,4 @@ const Example = () => (
   </Diff>
 );
 
-export default Example;
+export default DiffDemo;

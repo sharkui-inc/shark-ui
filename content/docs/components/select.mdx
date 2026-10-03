@@ -166,7 +166,7 @@ Organize options into groups using `groupBy` and `SelectGroup`.
 
 ### With Field
 
-Use `Field` for labels, helper text, and error handling.
+Use [Field](/docs/components/field) for a label and description.
 
 <ComponentPreview componentName="select" fileName="example-with-field" />
 
@@ -189,6 +189,10 @@ Use `SelectEmpty` to display a message when the collection has no items.
 Hide the chevron with `showTrigger={false}`.
 
 <ComponentPreview componentName="select" fileName="example-without-trigger" />
+
+### Form Integration
+
+<ComponentPreview componentName="select" fileName="example-form" />
 
 ## RTL
 
@@ -297,14 +301,6 @@ Shown when the collection has no items (`collection.size === 0`). Place inside `
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
-
-### SelectRootProvider
-
-Provides a Select API created with `useSelect` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseSelectReturn` | `required` |
 
 ### SelectContext
 

@@ -247,11 +247,10 @@ const data: Payment[] = [
   },
 ];
 
-const SelectAllCheckbox = ({
-  table,
-}: {
+const SelectAllCheckbox = (props: {
   table: TanStackTable<typeof features, Payment>;
 }) => {
+  const { table } = props;
   const { values } = useRtlValues();
 
   return (
@@ -271,7 +270,8 @@ const SelectAllCheckbox = ({
   );
 };
 
-const SelectRowCheckbox = ({ row }: { row: Row<typeof features, Payment> }) => {
+const SelectRowCheckbox = (props: { row: Row<typeof features, Payment> }) => {
+  const { row } = props;
   const { values } = useRtlValues();
 
   return (
@@ -285,7 +285,8 @@ const SelectRowCheckbox = ({ row }: { row: Row<typeof features, Payment> }) => {
   );
 };
 
-const StatusCell = ({ status }: { status: Payment["status"] }) => {
+const StatusCell = (props: { status: Payment["status"] }) => {
+  const { status } = props;
   const { values } = useRtlValues();
 
   const label = {
@@ -304,11 +305,10 @@ const StatusHeader = () => {
   return values.status;
 };
 
-const EmailSortHeader = ({
-  column,
-}: {
+const EmailSortHeader = (props: {
   column: Column<typeof features, Payment, string>;
 }) => {
+  const { column } = props;
   const { values } = useRtlValues();
 
   return (
@@ -328,7 +328,8 @@ const AmountHeader = () => {
   return <div className="text-end">{values.amount}</div>;
 };
 
-const AmountCell = ({ row }: { row: Row<typeof features, Payment> }) => {
+const AmountCell = (props: { row: Row<typeof features, Payment> }) => {
+  const { row } = props;
   const { values } = useRtlValues();
 
   return (
@@ -336,7 +337,8 @@ const AmountCell = ({ row }: { row: Row<typeof features, Payment> }) => {
   );
 };
 
-const PaymentActions = ({ payment }: { payment: Payment }) => {
+const PaymentActions = (props: { payment: Payment }) => {
+  const { payment } = props;
   const { values } = useRtlValues();
 
   return (
@@ -365,23 +367,24 @@ const PaymentActions = ({ payment }: { payment: Payment }) => {
   );
 };
 
-const ColumnVisibilityItem = ({
-  column,
-}: {
+const ColumnVisibilityItem = (props: {
   column: Column<typeof features, Payment, unknown>;
-}) => (
-  <MenuCheckboxItem
-    checked={column.getIsVisible()}
-    className="capitalize"
-    closeOnSelect={false}
-    onCheckedChange={(value) => {
-      column.toggleVisibility(value);
-    }}
-    value={column.id}
-  >
-    {column.id}
-  </MenuCheckboxItem>
-);
+}) => {
+  const { column } = props;
+  return (
+    <MenuCheckboxItem
+      checked={column.getIsVisible()}
+      className="capitalize"
+      closeOnSelect={false}
+      onCheckedChange={(value) => {
+        column.toggleVisibility(value);
+      }}
+      value={column.id}
+    >
+      {column.id}
+    </MenuCheckboxItem>
+  );
+};
 
 const columns = columnHelper.columns([
   columnHelper.display({

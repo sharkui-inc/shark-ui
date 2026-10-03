@@ -85,13 +85,11 @@ Use the `value` and `onValueChange` props to control the radio group.
 
 ### Invalid
 
-Use the `invalid` prop on `RadioGroup` to indicate an invalid state.
-
 <ComponentPreview componentName="radio-group" fileName="example-invalid" />
 
 ### Disabled
 
-Use the `disabled` on `RadioGroup` to disable  all the radio group items or on `RadioGroupItem` to disable a single item.
+Use the `disabled` prop on `RadioGroup` to disable all the radio group items, or on `RadioGroupItem` to disable a single item.
 
 <ComponentPreview componentName="radio-group" fileName="example-disabled" />
 
@@ -99,8 +97,7 @@ Use the `disabled` on `RadioGroup` to disable  all the radio group items or on `
 
 ### With Field
 
-Use `RadioGroupLabel` inside the group to name it and focus its selected radio.
-`Field` is optional for the label association.
+Use `RadioGroupLabel` to name the group.
 
 <ComponentPreview componentName="radio-group" fileName="example-with-field" />
 
@@ -121,6 +118,10 @@ Use `FieldDescription` to add a description to the radio group.
 Use `FieldLabel` to wrap the entire `Field` for a clickable card-style selection.
 
 <ComponentPreview componentName="radio-group" fileName="example-card" />
+
+### Form Integration
+
+<ComponentPreview componentName="radio-group" fileName="example-form" />
 
 ## RTL
 
@@ -155,14 +156,6 @@ Single radio option. Use `value` for selection.
 | `disabled` | `boolean` | `false` |
 | `invalid` | `boolean` | `false` |
 | `className` | `string` | `-` |
-
-### RadioGroupRootProvider
-
-Provides a RadioGroup API created with `useRadioGroup` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseRadioGroupReturn` | `required` |
 
 ### RadioGroupText
 

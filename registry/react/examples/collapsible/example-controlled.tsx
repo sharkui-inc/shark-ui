@@ -13,7 +13,7 @@ const Example = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="min-w-64 space-y-2">
+    <div className="flex min-w-64 flex-col gap-2">
       <Collapsible
         onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)}
         open={open}

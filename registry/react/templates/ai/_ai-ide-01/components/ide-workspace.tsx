@@ -42,7 +42,8 @@ interface IdeWorkspaceProps {
   path: string;
 }
 
-export const IdeWorkspace = ({ path }: IdeWorkspaceProps) => {
+export const IdeWorkspace = (props: IdeWorkspaceProps) => {
+  const { path } = props;
   const code = FILES[path] ?? FILES["src/utils/helpers.ts"];
 
   return (

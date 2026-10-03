@@ -30,7 +30,7 @@ interface User {
   username: string;
 }
 
-const UseAsyncListDemo = () => {
+const Example = () => {
   const collator = useCollator();
   const list = useAsyncList<User>({
     autoReload: true,
@@ -172,4 +172,4 @@ const columns: { key: keyof User; label: string }[] = [
   { key: "email", label: "Email" },
 ];
 
-export default UseAsyncListDemo;
+export default Example;

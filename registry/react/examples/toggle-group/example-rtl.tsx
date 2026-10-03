@@ -13,7 +13,7 @@ const Example = () => {
   const { values } = translations[locale];
 
   return (
-    <ToggleGroup defaultValue={["bold"]} multiple>
+    <ToggleGroup defaultValue={["bold"]}>
       <ToggleGroupItem aria-label={values.bold} value="bold">
         <BoldIcon />
       </ToggleGroupItem>

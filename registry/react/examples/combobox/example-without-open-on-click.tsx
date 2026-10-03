@@ -21,9 +21,7 @@ const Example = () => {
     <Combobox
       className="max-w-xs"
       collection={collection}
-      onInputValueChange={({ inputValue, reason }) =>
-        filter(reason === "item-select" ? "" : inputValue)
-      }
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
       openOnClick={false}
     >
       <ComboboxInput placeholder="Click or type to search" />

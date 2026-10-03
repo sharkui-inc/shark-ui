@@ -125,7 +125,7 @@ Control the selected value with `value` and `onValueChange` props.
 
 <ComponentPreview componentName="autocomplete" fileName="example-disabled" />
 
-## Sizes
+## Size
 
 ### Small
 
@@ -147,7 +147,7 @@ Control the selected value with `value` and `onValueChange` props.
 
 ### With Field
 
-Use [Field](/docs/components/field) components to style with the field components.
+Use [Field](/docs/components/field) for a label, helper text, and error.
 
 <ComponentPreview componentName="autocomplete" fileName="example-with-field" />
 
@@ -178,6 +178,10 @@ Use `InputGroupAddon` to add a start icon to the input.
 ### With Description
 
 <ComponentPreview componentName="autocomplete" fileName="example-with-description" />
+
+### Form Integration
+
+<ComponentPreview componentName="autocomplete" fileName="example-form" />
 
 ## RTL
 
@@ -261,14 +265,6 @@ Shown when no options match the current filter. Use for empty state.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `-` |
-
-### AutocompleteRootProvider
-
-Provides a Autocomplete API created with `useAutocomplete` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseAutocompleteReturn` | `required` |
 
 ### AutocompleteControl
 

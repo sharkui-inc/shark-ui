@@ -54,37 +54,35 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function ChartPieSimple() {
-  return (
-    <Card>
-      <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-1 pb-0">
-        <ChartContainer
-          className="mx-auto aspect-square max-h-[250px]"
-          config={chartConfig}
-        >
-          <PieChart>
-            <ChartTooltip
-              content={<ChartTooltipContent hideLabel />}
-              cursor={false}
-            />
-            <Pie data={chartData} dataKey="visitors" nameKey="browser" />
-          </PieChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
-        </div>
-        <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter>
-    </Card>
-  );
-}
+const ChartPieSimple = () => (
+  <Card>
+    <CardHeader className="items-center pb-0">
+      <CardTitle>Pie Chart</CardTitle>
+      <CardDescription>January - June 2024</CardDescription>
+    </CardHeader>
+    <CardContent className="flex-1 pb-0">
+      <ChartContainer
+        className="mx-auto aspect-square max-h-[250px]"
+        config={chartConfig}
+      >
+        <PieChart>
+          <ChartTooltip
+            content={<ChartTooltipContent hideLabel />}
+            cursor={false}
+          />
+          <Pie data={chartData} dataKey="visitors" nameKey="browser" />
+        </PieChart>
+      </ChartContainer>
+    </CardContent>
+    <CardFooter className="flex-col gap-2 text-sm">
+      <div className="flex items-center gap-2 font-medium leading-none">
+        Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
+      </div>
+      <div className="text-muted-foreground leading-none">
+        Showing total visitors for the last 6 months
+      </div>
+    </CardFooter>
+  </Card>
+);
 
 export default ChartPieSimple;

@@ -5,7 +5,6 @@ import {
   TreeView as ArkTreeView,
   createTreeCollection as arkCreateTreeCollection,
   type TreeCollection as arkTreeCollection,
-  useTreeView as useArkTreeView,
   useTreeViewContext as useArkTreeViewContext,
 } from "@ark-ui/react/tree-view";
 import { createContext } from "@ark-ui/react/utils";
@@ -16,9 +15,7 @@ import { cn } from "@/lib/utils";
 import { checkboxVariants } from "@/registry/react/components/checkbox";
 import { FieldLabel } from "@/registry/react/components/field";
 
-export const useTreeView = useArkTreeView;
 export const useTreeViewContext = useArkTreeViewContext;
-
 export interface TreeNodeType<T = unknown> {
   children?: TreeNodeType<T>[] | undefined;
   expandedIcon?: React.JSX.ElementType | null;
@@ -50,20 +47,6 @@ const [TreeViewContextProvider, _useTreeView] =
     name: "TreeViewContext",
     providerName: "TreeView",
   });
-
-export interface TreeViewRootProviderProps
-  extends React.ComponentProps<typeof ArkTreeView.RootProvider>,
-    TreeViewContextProps {}
-
-export const TreeViewRootProvider = (props: TreeViewRootProviderProps) => {
-  const { fileIcons, children, ...rest } = props;
-
-  return (
-    <TreeViewContextProvider value={{ fileIcons }}>
-      <ArkTreeView.RootProvider {...rest}>{children}</ArkTreeView.RootProvider>
-    </TreeViewContextProvider>
-  );
-};
 
 interface TreeViewProps
   extends ArkTreeView.RootComponentProps,

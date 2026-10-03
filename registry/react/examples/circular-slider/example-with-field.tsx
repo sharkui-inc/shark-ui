@@ -7,7 +7,7 @@ import { Field } from "@/registry/react/components/field";
 
 const Example = () => (
   <Field className="w-full max-w-56">
-    <CircularSlider aria-label="Angle" defaultValue={45}>
+    <CircularSlider defaultValue={45}>
       <CircularSliderLabel>Angle</CircularSliderLabel>
       <CircularSliderValue suffix="°" />
     </CircularSlider>

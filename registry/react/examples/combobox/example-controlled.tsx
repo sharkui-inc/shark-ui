@@ -26,9 +26,7 @@ const Example = () => {
       <Combobox
         className="w-full"
         collection={collection}
-        onInputValueChange={({ inputValue, reason }) =>
-          filter(reason === "item-select" ? "" : inputValue)
-        }
+        onInputValueChange={({ inputValue }) => filter(inputValue)}
         onValueChange={(details) => setValue(details.value)}
         value={value}
       >

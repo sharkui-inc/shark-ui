@@ -61,7 +61,7 @@ Tabs
 ## Usage
 
 ```tsx
-import { 
+import {
   Tabs,
   TabsList,
   TabsTrigger,
@@ -86,7 +86,15 @@ Use `value` and `onValueChange` to control the active tab.
 
 <ComponentPreview componentName="tabs" fileName="example-controlled" />
 
-## Variant
+## States
+
+### Disabled
+
+Disable individual tabs with the `disabled` prop on `TabsTrigger`.
+
+<ComponentPreview componentName="tabs" fileName="example-disabled" />
+
+## Variants
 
 ### Default
 
@@ -98,7 +106,7 @@ Use `value` and `onValueChange` to control the active tab.
 
 ## Pill
 
-The `pill` prop on `TabsList` creates fully rounded tabs. 
+The `pill` prop on `TabsList` creates fully rounded tabs.
 
 <ComponentPreview componentName="tabs" fileName="example-pill" />
 
@@ -106,7 +114,7 @@ The `pill` prop on `TabsList` creates fully rounded tabs.
 <InfoIcon />
 <AlertTitle>Note</AlertTitle>
 <AlertDescription>
-The `pill` prop is only applies when `variant` is `"default"`.
+The `pill` prop only applies when `variant` is `"default"`.
 </AlertDescription>
 </Alert>
 
@@ -121,15 +129,6 @@ Use the `orientation` prop on `Tabs` to lay out tabs horizontally or vertically.
 ### Vertical
 
 <ComponentPreview componentName="tabs" fileName="example-orientation-vertical" />
-
-
-## States
-
-### Disabled
-
-Disable individual tabs with the `disabled` prop on `TabsTrigger`. Disabled tabs are not focusable or selectable.
-
-<ComponentPreview componentName="tabs" fileName="example-disabled" />
 
 ## Examples
 
@@ -191,15 +190,6 @@ Panel shown when its tab is selected. Must have a `value` matching a `TabsTrigge
 | --- | --- | --- |
 | `value` | `string` | `required` |
 | `className` | `string` | `-` |
-
-### TabsRootProvider
-
-Provides a Tabs API created with `useTabs` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseTabsReturn` | `required` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/tabs#api-reference).

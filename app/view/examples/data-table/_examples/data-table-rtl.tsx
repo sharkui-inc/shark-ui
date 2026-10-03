@@ -257,93 +257,105 @@ const data: Payment[] = [
   },
 ];
 
-const SelectAllCheckbox = ({
-  table,
-}: {
+const SelectAllCheckbox = (props: {
   table: TanStackTable<typeof features, Payment>;
-}) => (
-  <Checkbox
-    aria-label={t.selectAll}
-    checked={
-      table.getIsAllPageRowsSelected() ||
-      (table.getIsSomePageRowsSelected() && "indeterminate")
-    }
-    onCheckedChange={({ checked }) => {
-      table.toggleAllPageRowsSelected(!!checked);
-    }}
-  />
-);
+}) => {
+  const { table } = props;
+  return (
+    <Checkbox
+      aria-label={t.selectAll}
+      checked={
+        table.getIsAllPageRowsSelected() ||
+        (table.getIsSomePageRowsSelected() && "indeterminate")
+      }
+      onCheckedChange={({ checked }) => {
+        table.toggleAllPageRowsSelected(!!checked);
+      }}
+    />
+  );
+};
 
-const SelectRowCheckbox = ({ row }: { row: Row<typeof features, Payment> }) => (
-  <Checkbox
-    aria-label={t.selectRow}
-    checked={row.getIsSelected()}
-    onCheckedChange={({ checked }) => {
-      row.toggleSelected(!!checked);
-    }}
-  />
-);
+const SelectRowCheckbox = (props: { row: Row<typeof features, Payment> }) => {
+  const { row } = props;
+  return (
+    <Checkbox
+      aria-label={t.selectRow}
+      checked={row.getIsSelected()}
+      onCheckedChange={({ checked }) => {
+        row.toggleSelected(!!checked);
+      }}
+    />
+  );
+};
 
-const StatusCell = ({ status }: { status: Payment["status"] }) => (
-  <div className="capitalize">{t.statuses[status]}</div>
-);
+const StatusCell = (props: { status: Payment["status"] }) => {
+  const { status } = props;
+  return <div className="capitalize">{t.statuses[status]}</div>;
+};
 
-const EmailSortHeader = ({
-  column,
-}: {
+const EmailSortHeader = (props: {
   column: Column<typeof features, Payment, string>;
-}) => (
-  <Button
-    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-    variant="ghost"
-  >
-    {t.email}
-    <ArrowUpDownIcon aria-hidden data-icon="inline-end" />
-  </Button>
-);
+}) => {
+  const { column } = props;
+  return (
+    <Button
+      onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      variant="ghost"
+    >
+      {t.email}
+      <ArrowUpDownIcon aria-hidden data-icon="inline-end" />
+    </Button>
+  );
+};
 
-const PaymentActions = ({ payment }: { payment: Payment }) => (
-  <Menu>
-    <MenuTrigger asChild>
-      <Button aria-label={t.openMenu} size="icon-md" variant="ghost">
-        <MoreHorizontalIcon aria-hidden />
-      </Button>
-    </MenuTrigger>
-    <MenuContent className="min-w-44">
-      <MenuGroup heading={t.actions}>
-        <MenuItem
-          onClick={() => navigator.clipboard.writeText(payment.id)}
-          value="copy-payment-id"
-        >
-          {t.copyPaymentId}
-        </MenuItem>
-      </MenuGroup>
-      <MenuSeparator />
-      <MenuGroup>
-        <MenuItem value="view-customer">{t.viewCustomer}</MenuItem>
-        <MenuItem value="view-payment-details">{t.viewPaymentDetails}</MenuItem>
-      </MenuGroup>
-    </MenuContent>
-  </Menu>
-);
+const PaymentActions = (props: { payment: Payment }) => {
+  const { payment } = props;
+  return (
+    <Menu>
+      <MenuTrigger asChild>
+        <Button aria-label={t.openMenu} size="icon-md" variant="ghost">
+          <MoreHorizontalIcon aria-hidden />
+        </Button>
+      </MenuTrigger>
+      <MenuContent className="min-w-44">
+        <MenuGroup heading={t.actions}>
+          <MenuItem
+            onClick={() => navigator.clipboard.writeText(payment.id)}
+            value="copy-payment-id"
+          >
+            {t.copyPaymentId}
+          </MenuItem>
+        </MenuGroup>
+        <MenuSeparator />
+        <MenuGroup>
+          <MenuItem value="view-customer">{t.viewCustomer}</MenuItem>
+          <MenuItem value="view-payment-details">
+            {t.viewPaymentDetails}
+          </MenuItem>
+        </MenuGroup>
+      </MenuContent>
+    </Menu>
+  );
+};
 
-const ColumnVisibilityItem = ({
-  column,
-}: {
+const ColumnVisibilityItem = (props: {
   column: Column<typeof features, Payment, unknown>;
-}) => (
-  <MenuCheckboxItem
-    checked={column.getIsVisible()}
-    className="capitalize"
-    closeOnSelect={false}
-    onCheckedChange={(value) => {
-      column.toggleVisibility(value);
-    }}
-    value={column.id}
-  >
-    {column.id}
-  </MenuCheckboxItem>
-);
+}) => {
+  const { column } = props;
+  return (
+    <MenuCheckboxItem
+      checked={column.getIsVisible()}
+      className="capitalize"
+      closeOnSelect={false}
+      onCheckedChange={(value) => {
+        column.toggleVisibility(value);
+      }}
+      value={column.id}
+    >
+      {column.id}
+    </MenuCheckboxItem>
+  );
+};
 
 const columns = columnHelper.columns([
   columnHelper.display({

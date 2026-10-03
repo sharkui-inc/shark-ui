@@ -1,4 +1,4 @@
-import { SharkIcon } from "@/components/icons/shark";
+import { WavesHorizontalIcon } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
 import { Marker, MarkerContent } from "@/registry/react/components/marker";
 import {
@@ -38,13 +38,13 @@ const MessageScrollerDemo = () => (
                   <MessageAvatar>
                     <Avatar size="sm">
                       <AvatarFallback>
-                        <SharkIcon />
+                        <WavesHorizontalIcon />
                       </AvatarFallback>
                     </Avatar>
                   </MessageAvatar>
                 )}
                 <MessageContent>
-                  {isYou ? null : <MessageHeader>Shark AI</MessageHeader>}
+                  {isYou ? null : <MessageHeader>Onda AI</MessageHeader>}
                   <MessageBubble
                     align={isYou ? "end" : "start"}
                     variant={isYou ? "default" : "secondary"}

@@ -16,7 +16,7 @@ import {
 } from "@/registry/react/components/questionnaire";
 import { toast } from "@/registry/react/components/toast";
 
-const QuestionnaireLetterShortcutsDemo = () => {
+const Example = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const answer = String(new FormData(event.currentTarget).get("format"));
@@ -68,4 +68,4 @@ const items = [
   },
 ] as const;
 
-export default QuestionnaireLetterShortcutsDemo;
+export default Example;

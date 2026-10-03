@@ -122,13 +122,14 @@ export const ChartContainer = (props: ChartContainerProps) => {
   );
 };
 
-export const ChartStyle = ({
-  config,
-  id,
-}: {
+interface ChartStyleProps {
   config: ChartConfig;
   id: string;
-}) => {
+}
+
+export const ChartStyle = (props: ChartStyleProps) => {
+  const { config, id } = props;
+
   const colorConfig = Object.entries(config).filter(
     ([, itemConfig]) => itemConfig.theme ?? itemConfig.color
   );
@@ -201,18 +202,7 @@ const getPayload = (config: ChartConfig, payload: unknown, key: string) => {
   return configLabelKey in config ? config[configLabelKey] : config[key];
 };
 
-const ChartTooltipItem = ({
-  color,
-  config,
-  formatter,
-  hideIndicator,
-  index,
-  indicator,
-  item,
-  nameKey,
-  nestLabel,
-  tooltipLabel,
-}: {
+interface ChartTooltipItemProps {
   color?: string;
   config: ChartConfig;
   formatter: ChartTooltipContentProps["formatter"];
@@ -223,7 +213,22 @@ const ChartTooltipItem = ({
   nameKey?: string;
   nestLabel: boolean;
   tooltipLabel: React.JSX.Element | null;
-}) => {
+}
+
+const ChartTooltipItem = (props: ChartTooltipItemProps) => {
+  const {
+    color,
+    config,
+    formatter,
+    hideIndicator,
+    index,
+    indicator,
+    item,
+    nameKey,
+    nestLabel,
+    tooltipLabel,
+  } = props;
+
   const key = `${nameKey ?? item.name ?? item.dataKey ?? "value"}`;
   const itemConfig = getPayload(config, item, key);
   const indicatorColor = color ?? item.payload?.fill ?? item.color;
@@ -373,6 +378,7 @@ export const ChartTooltipContent = (props: ChartTooltipContentProps) => {
         "rounded-lg border border-border/48 shadow-lg/4",
         className
       )}
+      data-slot="chart-tooltip-content"
     >
       {nestLabel ? null : <div className="contents">{tooltipLabel}</div>}
       <div className="grid gap-1.5">
@@ -420,6 +426,7 @@ export const ChartLegendContent = (props: ChartLegendContentProps) => {
         verticalAlign === "top" ? "pb-3" : "pt-3",
         className
       )}
+      data-slot="chart-legend-content"
     >
       {payload
         .filter((item) => item.type !== "none")

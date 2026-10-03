@@ -10,13 +10,6 @@ links:
 
 import manifest from "@/registry/manifest/context-menu";
 
-<Alert>
-  <InfoIcon />
-  <AlertDescription>
-    Context Menu is built on top of the [Menu](/docs/components/menu) component. Check it out for more examples.
-  </AlertDescription>
-</Alert>
- 
 <ComponentPreview componentName="context-menu" />
 
 ## Installation
@@ -82,10 +75,10 @@ ContextMenu
 ## Usage
 
 ```tsx
-import { 
-  ContextMenu, 
-  ContextMenuTrigger, 
-  ContextMenuContent, 
+import {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
   ContextMenuItemGroup,
   ContextMenuItemGroupLabel,
   ContextMenuItem,
@@ -106,6 +99,13 @@ import {
 ```
 
 ## Examples
+
+<Alert>
+  <InfoIcon />
+  <AlertDescription>
+    Context Menu is built on top of the [Menu](/docs/components/menu) component. Check it out for more examples.
+  </AlertDescription>
+</Alert>
 
 ### Responsive
 
@@ -131,14 +131,6 @@ Root element for a context menu. It accepts the same state and positioning props
 | `open` | `boolean` | `-` |
 | `defaultOpen` | `boolean` | `-` |
 | `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
-
-### ContextMenuRootProvider
-
-Provides a context-menu API created with `useContextMenu`.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseMenuReturn` | `required` |
 
 ### ContextMenuTrigger
 
@@ -283,4 +275,4 @@ Optional keyboard shortcut hint displayed next to an item.
 
 ---
 
-For a complete list of props, see the [Menu API Reference](/docs/components/menu#api-reference).
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/menu#api-reference).

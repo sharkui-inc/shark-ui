@@ -9,7 +9,7 @@ const PreviewTileFallback = (props: React.ComponentProps<"div">) => {
   return (
     <div
       aria-hidden="true"
-      className={cn("w-full rounded-xl bg-muted/40", className)}
+      className={cn("w-full rounded-xl bg-muted/48", className)}
       {...rest}
     />
   );

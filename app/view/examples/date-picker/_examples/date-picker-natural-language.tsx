@@ -16,7 +16,7 @@ import {
   DatePicker,
   DatePickerContent,
   DatePickerInput,
-  useDatePicker,
+  useDatePickerContext,
 } from "@/registry/react/components/date-picker";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 
@@ -47,7 +47,7 @@ const DatePickerNaturalLanguage = () => (
 );
 
 const PublishedDate = () => {
-  const { value } = useDatePicker();
+  const { value } = useDatePickerContext();
 
   return (
     <p className="px-1 text-muted-foreground text-sm">

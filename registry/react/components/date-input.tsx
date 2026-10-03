@@ -2,7 +2,6 @@
 
 import {
   DateInput as ArkDateInput,
-  useDateInput as useArkDateInput,
   useDateInputContext as useArkDateInputContext,
 } from "@ark-ui/react/date-input";
 import { XIcon } from "lucide-react";
@@ -16,10 +15,6 @@ import {
   InputGroupButton,
   type InputGroupProps,
 } from "@/registry/react/components/input-group";
-
-export const useDateInput = useArkDateInput;
-export const useDateInputContext = useArkDateInputContext;
-export const DateInputRootProvider = ArkDateInput.RootProvider;
 
 interface DateInputProps
   extends React.ComponentProps<typeof ArkDateInput.Root>,
@@ -49,6 +44,7 @@ interface DateInputControlProps
   showClear: boolean;
 }
 
+export const useDateInputContext = useArkDateInputContext;
 export const DateInput = (props: DateInputProps) => {
   const {
     size = "md",

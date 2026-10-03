@@ -39,7 +39,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function ChartTooltipAdvanced() {
+const ChartTooltipAdvanced = () => {
   return (
     <Card>
       <CardHeader>
@@ -121,6 +121,6 @@ function ChartTooltipAdvanced() {
       </CardContent>
     </Card>
   );
-}
+};
 
 export default ChartTooltipAdvanced;

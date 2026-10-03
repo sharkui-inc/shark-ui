@@ -35,11 +35,15 @@ import {
 } from "@/registry/react/components/toggle-group";
 
 export const BookAppointmentExample = (props: React.ComponentProps<"div">) => {
-  const [value, setValue] = React.useState<DateValue[]>([initialDate]);
+  const [value, setValue] = React.useState<DateValue[]>([]);
   const [slot, setSlot] = React.useState(["slot-0"]);
   const [isBooked, setIsBooked] = React.useState(false);
   const [isConfirming, setIsConfirming] = React.useState(false);
-  const selectedDay = value[0] ?? initialDate;
+  const [selectedDay] = value;
+
+  React.useEffect(() => {
+    setValue([parseDate(toLocalDateString(new Date()))]);
+  }, []);
 
   return (
     <Card data-slot="example-book-appointment" {...props}>
@@ -49,7 +53,9 @@ export const BookAppointmentExample = (props: React.ComponentProps<"div">) => {
         </IconTile>
         <div className="flex min-w-0 flex-col gap-0.5">
           <CardTitle>Book a visit</CardTitle>
-          <CardDescription>{formatWeekday(selectedDay)}</CardDescription>
+          <CardDescription>
+            {selectedDay ? formatWeekday(selectedDay) : "Today"}
+          </CardDescription>
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
@@ -126,7 +132,8 @@ export const BookAppointmentExample = (props: React.ComponentProps<"div">) => {
   );
 };
 
-const initialDate = parseDate("2025-01-15");
+const toLocalDateString = (date: Date) =>
+  `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 
 const formatWeekday = (date: DateValue) =>
   new Intl.DateTimeFormat("en-US", { timeZone: "UTC", weekday: "long" }).format(

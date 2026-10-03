@@ -102,6 +102,7 @@ import {
   <StepsNext />
 </Steps>
 ```
+
 ## Controlled
 
 Use the `step` and `onStepChange` props to control the active step.
@@ -112,7 +113,7 @@ Use the `step` and `onStepChange` props to control the active step.
 
 ### Title
 
-Use `StepsTitle` to display a description for each step.
+Use `StepsTitle` to display a title for each step.
 
 <ComponentPreview componentName="steps" fileName="example-title" />
 
@@ -175,14 +176,6 @@ Wraps the list of steps. Handles connector layout.
 | `--steps-gutter` | `string` | `--spacing(2)` |
 | `--steps-icon-size` | `string` | `--spacing(4)` |
 | `--steps-size` | `string` | `--spacing(8)` |
-
-### StepsRootProvider
-
-Provides a Steps API created with `useSteps` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseStepsReturn` | `required` |
 
 ### StepsItem
 

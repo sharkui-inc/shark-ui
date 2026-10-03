@@ -23,9 +23,7 @@ const Example = () => {
       className="w-full max-w-64"
       collection={collection}
       defaultValue={["option-24"]}
-      onInputValueChange={({ inputValue, reason }) =>
-        filter(reason === "item-select" ? "" : inputValue)
-      }
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
       <ComboboxInput placeholder="Search..." />
       <ComboboxContent className="max-h-60">

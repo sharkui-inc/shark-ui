@@ -11,8 +11,6 @@ import {
   CodeBlockHeader,
 } from "@/registry/react/components/code-block";
 
-const initialLength = () => STREAMED_CODE.indexOf("\n") + 1;
-
 const Example = () => {
   const [length, setLength] = React.useState(initialLength);
   const isStreaming = length < STREAMED_CODE.length;
@@ -56,7 +54,8 @@ const Example = () => {
   );
 };
 
-const STREAMED_CODE = `export const Greeting = ({ name }) => {
+const STREAMED_CODE = `export const Greeting = (props) => {
+  const { name } = props;
   return (
     <section>
       <h1>Welcome back</h1>
@@ -66,5 +65,7 @@ const STREAMED_CODE = `export const Greeting = ({ name }) => {
     </section>
   );
 }`;
+
+const initialLength = () => STREAMED_CODE.indexOf("\n") + 1;
 
 export default Example;

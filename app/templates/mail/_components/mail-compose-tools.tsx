@@ -80,34 +80,33 @@ const SEND_ITEMS: ComposeMenuItem[] = [
   },
 ];
 
-const ComposeMenu = ({
-  icon,
-  items,
-  label,
-}: {
+const ComposeMenu = (props: {
   icon: React.ReactNode;
   items: readonly ComposeMenuItem[];
   label: string;
-}) => (
-  <Menu positioning={{ placement: "bottom-start" }}>
-    <MenuTrigger asChild>
-      <Button aria-label={label} size="sm" variant="outline">
-        {icon}
-        <ChevronDownIcon aria-hidden />
-      </Button>
-    </MenuTrigger>
-    <MenuContent className="min-w-44">
-      <MenuGroup>
-        {items.map((item) => (
-          <MenuItem key={item.value} value={item.value}>
-            {item.icon}
-            {item.label}
-          </MenuItem>
-        ))}
-      </MenuGroup>
-    </MenuContent>
-  </Menu>
-);
+}) => {
+  const { icon, items, label } = props;
+  return (
+    <Menu positioning={{ placement: "bottom-start" }}>
+      <MenuTrigger asChild>
+        <Button aria-label={label} size="sm" variant="outline">
+          {icon}
+          <ChevronDownIcon aria-hidden />
+        </Button>
+      </MenuTrigger>
+      <MenuContent className="min-w-44">
+        <MenuGroup>
+          {items.map((item) => (
+            <MenuItem key={item.value} value={item.value}>
+              {item.icon}
+              {item.label}
+            </MenuItem>
+          ))}
+        </MenuGroup>
+      </MenuContent>
+    </Menu>
+  );
+};
 
 export const MailComposeTools = () => (
   <ButtonGroup aria-label="Compose tools" className="min-w-0 shrink-0">

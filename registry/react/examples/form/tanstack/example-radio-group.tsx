@@ -27,7 +27,7 @@ import {
   RadioGroupItem,
 } from "@/registry/react/components/radio-group";
 
-function Example() {
+const Example = () => {
   const form = useForm({
     defaultValues: {
       plan: "",
@@ -116,7 +116,7 @@ function Example() {
       </form>
     </Card>
   );
-}
+};
 
 const plans = [
   {

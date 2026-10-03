@@ -16,19 +16,19 @@ Conflict order: explicit user or system instructions → `biome.json` → this f
 ## Tailwind
 
 - Semantic tokens (`text-muted-foreground`, `bg-destructive`, `border-input`), not raw palette. No manual `dark:` pairs when tokens cover it.
-- Focus: `outline-hidden` + `border-ring/64 ring-2 ring-ring/24`. Base `border border-transparent` when no structural border (fields keep `border-input` until focused). Solid `bg-primary`: opaque `border-background` + same ring. No `outline-none` unless a documented a11y exception must suppress focus in forced-colors. No outline utils on static/decorative elements. Command search field: no focus ring or border shift (`focus-within:border-input focus-within:ring-0`); highlighted list item is the focus cue.
+- Focus: `outline-hidden` + `border-ring/64 ring-2 ring-ring/24`. No structural border → `border border-transparent` (fields keep `border-input` until focused). Solid `bg-primary`: opaque `border-background` + same ring. `outline-none` only for a documented a11y exception that must hide focus in forced-colors. No outline utils on static/decorative elements. Command search: no focus ring or border shift (`focus-within:border-input focus-within:ring-0`); the highlighted item is the focus cue.
 - Variants + tokens before restyling; `className` for layout. Prefer `data-slot` / `in-*` / `peer` when extending registry styles.
 - `flex`/`grid` + `gap-*` (not `space-x-*`/`space-y-*`). `size-*` for squares/icons. `truncate` shorthand.
-- Preserve layer-aware `z-index` on overlays. Ark-positioned layers use `z-[calc(50+var(--layer-index,0))]`; Tour and FloatingPanel use their own layer variables. Keep the matching layer classes on backdrops/positioners where defined. Do not replace these with a shared static `z-index` or remove them as cleanup.
-- Lucide imports use the `Icon` export (`ArchiveIcon`). Size with Tailwind, never numeric `size`. Inside `Button`, omit `className="size-*"` — Button already sizes SVGs via `[&_svg:not([class*='size-'])]:size-4` (and size variants); explicit `size-*` only for intentional overrides. Decorative: `aria-hidden="true"`; keep semantic icons exposed unless equivalent text exists.
+- Overlay `z-index` stays layer-aware: Ark layers `z-[calc(50+var(--layer-index,0))]`; Tour and FloatingPanel use their own layer variables. Keep those classes on backdrops/positioners where defined. Do not swap them for a shared static `z-index` or drop them as cleanup.
+- Lucide: `Icon` export (`ArchiveIcon`); size with Tailwind, never numeric `size`. Inside `Button`, omit `className="size-*"` — Button sizes SVGs with `[&_svg:not([class*='size-'])]:size-4` (and size variants); explicit `size-*` only to override. Decorative: `aria-hidden="true"`; keep semantic icons exposed unless equivalent text exists.
 - Logical utils (`ms-*`, `me-*`, `ps-*`, `pe-*`, `start-*`, `end-*`); `slide-*-from-start|end`; inherit `dir` from ambient Ark `LocaleProvider` / ancestor `dir`. Do not import `LocaleProvider` or `useLocale` inside `registry/react/components` (except `locale.tsx`). Physical direction only for explicit LTR, visual coordinates, or non-reading-order geometry.
 
 ## Motion
 
-- Local via Tailwind + `tw-animate-css`. Press `duration-150 ease-out`; controls/anchored overlays `duration-150 ease-out`; dialogs/sheets `duration-200 ease-out`; Ark geometry `duration-150 ease-in-out`.
+- Local via Tailwind + `tw-animate-css`. Press, controls, and anchored overlays: `duration-150 ease-out`. Dialogs/sheets: `duration-200 ease-out`. Ark geometry: `duration-150 ease-in-out`.
 - No duration/easing/animation/keyframe tokens in `styles/globals.css` — compose in the owning component.
 - Ark-positioned overlays: `origin-(--transform-origin)`, 98% scale, fade, placement-aware travel, local overlay classes. Centered dialogs / coordinate-positioned panels: `origin-center`. Ban `scale(0)`, `ease-in`, `ease-linear`, `transition-all`, arbitrary easing — except Drawer (`drawer.tsx`) and Sidebar geometry (`sidebar.tsx`).
-- Overlays: disable animations with `motion-reduce:animate-none` and CSS transitions with `motion-reduce:transition-none`. When an animation or transition is qualified by a state selector such as `data-[state=open]:`, repeat that state selector under `motion-reduce:` (for example, `motion-reduce:data-[state=open]:animate-none`) so the reduced-motion rule has enough specificity; class-string order alone does not guarantee it wins. Drawer (`drawer.tsx`) disables open/close animations and transitions under reduced motion while keeping direct swipe tracking responsive. Continuous non-overlay motion (spinners, marquees, and progress indicators) remains animated when reduced motion is enabled. Gate hover transforms with `(hover: hover)` and `(pointer: fine)`.
+- Overlays: `motion-reduce:animate-none` and `motion-reduce:transition-none`. If a state selector qualifies the animation (`data-[state=open]:`), repeat it under `motion-reduce:` (`motion-reduce:data-[state=open]:animate-none`); string order alone does not win specificity. Drawer (`drawer.tsx`) disables open/close motion under reduced motion and keeps direct swipe tracking. Spinners, marquees, and progress stay animated. Gate hover transforms with `(hover: hover)` and `(pointer: fine)`.
 
 ## Class lists
 
@@ -54,15 +54,13 @@ One group → one string (`"flex items-center gap-2"`). Multi-group → `cn()` o
 ```tsx
 className={cn(
   "[--space:--spacing(4)]",
-  "relative z-50 max-h-[calc(100svh-2rem)] w-full",
+  "relative z-50 w-full",
   "flex flex-col gap-(--space) p-(--space)",
   "bg-popover rounded-2xl border shadow-lg/4 overflow-hidden outline-hidden",
   "origin-(--transform-origin) transition-[opacity,translate] duration-150 ease-out",
-  "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
-  "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
   "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
   "motion-reduce:animate-none motion-reduce:transition-none",
-  "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+  "motion-reduce:data-[state=open]:animate-none",
   className
 )}
 ```
@@ -71,18 +69,14 @@ className={cn(
 
 Alphas only: `0`, `4`, `8`, `16`, `24`, `32`, `48`, `64`, `80`, `96`, `100` (modifiers, `opacity-*`, shadows, CSS alpha). Carve-out: `color-mix()` recipes, user-entered colors, calculated gesture opacity.
 
-- Surfaces: `muted` = neutral `/4`; `accent` / `secondary` / `sidebar-accent` = `/8`. Accent = interactive context, not a second primary.
-- Solid controls: use translucent `/80` hover fills for primary, secondary, and destructive variants. Status may use `/8`–`/24`.
-- Roles: `/4` elevation; `/8` `/16` feedback/selection; `/24` validation/decoration/outer focus ring; `/32` scrims; `/48` muted surfaces; `/64` supporting content + focus border; `/80` strong translucent; `/96` fixed blur.
+- `/4` elevation (`muted` = neutral `/4`); `/8` `/16` feedback/selection (`accent`, `secondary`, `sidebar-accent` = `/8` — accent is interactive context, not a second primary); `/24` validation/decoration/outer focus ring; `/32` scrims; `/48` muted surfaces; `/64` supporting content + focus border; `/80` strong translucent; `/96` fixed blur.
+- Solid controls: translucent `/80` hover fills for primary, secondary, and destructive. Status may use `/8`–`/24`.
 - Text/icons: opaque tokens; placeholders WCAG AA. Disabled: `opacity-64` + disabled state + blocked interaction — never dim still-interactive controls. Transitions: `opacity-0`/`opacity-100` (gesture/animation may use CSS var or `calc()` when documented locally).
 - Translucent only as intentional contextual layer (disabled, reveal, elevation, media, charts, decoration) with validated contrast on the composited background.
 
 ## Shadows
 
-`shadow-xs/4` structural; `shadow-xs/8` hover; `shadow-sm/4` raised controls/previews; `shadow-lg/4` overlays. Fields/outlined → `shadow-xs/4`; filled `default`/`destructive`/`secondary` → `shadow-sm/4`; ghost/link → none. Hover shadow only when needed.
-
-- Always geometry + alpha. No bare, color-/status-tinted, or sizes outside `xs`/`sm`/`lg`. Arbitrary only when already documented in that component; alpha still from the ladder.
-- Borders/tonal separation before elevation; shadows ≠ focus rings or contrast borders.
+`shadow-xs/4` structural; `shadow-xs/8` hover; `shadow-sm/4` raised controls/previews; `shadow-lg/4` overlays. Fields/outlined → `shadow-xs/4`; filled `default`/`destructive`/`secondary` → `shadow-sm/4`; ghost/link → none. Hover shadow only when needed. Always geometry + alpha: no bare, color-/status-tinted, or sizes outside `xs`/`sm`/`lg`. Arbitrary only when already documented in that component; alpha still from the ladder. Borders or tonal separation before elevation; shadows are not focus rings or contrast borders.
 
 ## Control shape
 

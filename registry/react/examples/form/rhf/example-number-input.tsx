@@ -69,8 +69,8 @@ const Example = () => {
                   <InputGroup>
                     <NumberInput
                       name={field.name}
-                      onValueChange={({ value }) => {
-                        field.onChange(Number(value) ?? 0);
+                      onValueChange={({ valueAsNumber }) => {
+                        field.onChange(valueAsNumber);
                       }}
                       value={String(field.value)}
                     >

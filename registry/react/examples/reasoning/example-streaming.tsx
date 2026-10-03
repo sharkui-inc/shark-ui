@@ -9,8 +9,6 @@ import {
   ReasoningTrigger,
 } from "@/registry/react/components/reasoning";
 
-const STREAM_MS = 3000;
-
 const Example = () => {
   const [runId, setRunId] = React.useState(0);
 
@@ -60,5 +58,7 @@ const StreamingReasoning = () => {
     </Reasoning>
   );
 };
+
+const STREAM_MS = 3000;
 
 export default Example;

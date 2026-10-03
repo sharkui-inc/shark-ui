@@ -1,5 +1,6 @@
 "use client";
 
+import { Input } from "@registry/react/components/input";
 import {
   BookOpenIcon,
   BotIcon,
@@ -17,7 +18,6 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
-  SidebarInput,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -51,11 +51,11 @@ export const AppSidebar = () => (
             <IconTile aria-hidden size="sm">
               S
             </IconTile>
-            <span>Shark UI</span>
+            <span>Onda</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
-      <SidebarInput
+      <Input
         aria-label="Search documentation"
         placeholder="Search"
         type="search"

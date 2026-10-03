@@ -29,8 +29,8 @@ const Example = () => (
         <Button
           onClick={() =>
             topToaster.create({
-              description: "placement: top-end",
-              title: "Top end",
+              description: "placement: top-center",
+              title: "Top center",
             })
           }
           variant="outline"

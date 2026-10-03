@@ -7,7 +7,7 @@ const InputOTPControlled = () => {
   const [value, setValue] = React.useState<string[]>([""]);
 
   return (
-    <div className="space-y-2">
+    <div className="flex flex-col gap-2">
       <InputOTP
         onValueChange={(details) => setValue(details.value)}
         value={value}

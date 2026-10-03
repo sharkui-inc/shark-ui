@@ -37,9 +37,9 @@ const Example = () => (
 );
 
 const chartData = [
-  { month: "Jan", signups: 240, target: 250 },
-  { month: "Feb", signups: 267, target: 260 },
-  { month: "Mar", signups: 284, target: 280 },
+  { month: "Jan", signups: 240, target: 180 },
+  { month: "Feb", signups: 267, target: 205 },
+  { month: "Mar", signups: 284, target: 220 },
 ];
 
 const chartConfig = {

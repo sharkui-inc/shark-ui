@@ -106,7 +106,7 @@ export const mdxComponents = {
             "px-1",
             "rounded-md",
             "font-medium font-mono text-sm",
-            "bg-primary/12 dark:bg-primary/16",
+            "bg-primary/8 dark:bg-primary/16",
             "text-[color-mix(in_oklab,var(--primary)_58%,black)] dark:text-primary",
             className
           )}

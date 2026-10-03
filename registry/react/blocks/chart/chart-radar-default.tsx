@@ -36,42 +36,40 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function ChartRadarDefault() {
-  return (
-    <Card>
-      <CardHeader className="items-center pb-4">
-        <CardTitle>Radar Chart</CardTitle>
-        <CardDescription>
-          Showing total visitors for the last 6 months
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="pb-0">
-        <ChartContainer
-          className="mx-auto aspect-square max-h-[250px]"
-          config={chartConfig}
-        >
-          <RadarChart data={chartData}>
-            <ChartTooltip content={<ChartTooltipContent />} cursor={false} />
-            <PolarAngleAxis dataKey="month" />
-            <PolarGrid />
-            <Radar
-              dataKey="desktop"
-              fill="var(--color-desktop)"
-              fillOpacity={0.6}
-            />
-          </RadarChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
-        </div>
-        <div className="flex items-center gap-2 text-muted-foreground leading-none">
-          January - June 2024
-        </div>
-      </CardFooter>
-    </Card>
-  );
-}
+const ChartRadarDefault = () => (
+  <Card>
+    <CardHeader className="items-center pb-4">
+      <CardTitle>Radar Chart</CardTitle>
+      <CardDescription>
+        Showing total visitors for the last 6 months
+      </CardDescription>
+    </CardHeader>
+    <CardContent className="pb-0">
+      <ChartContainer
+        className="mx-auto aspect-square max-h-[250px]"
+        config={chartConfig}
+      >
+        <RadarChart data={chartData}>
+          <ChartTooltip content={<ChartTooltipContent />} cursor={false} />
+          <PolarAngleAxis dataKey="month" />
+          <PolarGrid />
+          <Radar
+            dataKey="desktop"
+            fill="var(--color-desktop)"
+            fillOpacity={0.6}
+          />
+        </RadarChart>
+      </ChartContainer>
+    </CardContent>
+    <CardFooter className="flex-col gap-2 text-sm">
+      <div className="flex items-center gap-2 font-medium leading-none">
+        Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
+      </div>
+      <div className="flex items-center gap-2 text-muted-foreground leading-none">
+        January - June 2024
+      </div>
+    </CardFooter>
+  </Card>
+);
 
 export default ChartRadarDefault;

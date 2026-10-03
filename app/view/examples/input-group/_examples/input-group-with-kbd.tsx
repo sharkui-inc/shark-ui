@@ -65,12 +65,12 @@ const InputGroupWithKbd = () => (
       <InputGroup>
         <InputGroupInput defaultValue="shadcn" />
         <InputGroupAddon align="inline-end">
-          <div className="flex size-4 items-center justify-center rounded-full bg-green-500 dark:bg-green-800">
-            <CheckIcon className="size-3 text-white" />
+          <div className="flex size-4 items-center justify-center rounded-full bg-success">
+            <CheckIcon className="size-3 text-success-foreground" />
           </div>
         </InputGroupAddon>
       </InputGroup>
-      <FieldDescription className="text-green-700">
+      <FieldDescription className="text-success-foreground">
         This username is available.
       </FieldDescription>
     </Field>

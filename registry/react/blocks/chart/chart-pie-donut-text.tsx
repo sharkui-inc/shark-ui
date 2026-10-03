@@ -55,7 +55,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function ChartPieDonutText() {
+const ChartPieDonutText = () => {
   const totalVisitors = React.useMemo(
     () => chartData.reduce((acc, curr) => acc + curr.visitors, 0),
     []
@@ -127,6 +127,6 @@ function ChartPieDonutText() {
       </CardFooter>
     </Card>
   );
-}
+};
 
 export default ChartPieDonutText;

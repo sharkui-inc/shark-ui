@@ -2,17 +2,14 @@
 
 import {
   ToggleGroup as ArkToggleGroup,
-  useToggleGroup as useArkToggleGroup,
   useToggleGroupContext as useArkToggleGroupContext,
 } from "@ark-ui/react/toggle-group";
 import { createContext } from "@ark-ui/react/utils";
-import React from "react";
+import type React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import { FieldLabel } from "@/registry/react/components/field";
 import { Toggle, type ToggleProps } from "@/registry/react/components/toggle";
 
-export const useToggleGroup = useArkToggleGroup;
 export const useToggleGroupContext = useArkToggleGroupContext;
 
 type ToggleGroupContextProps = Pick<
@@ -33,48 +30,9 @@ const [ToggleGroupProvider, _useToggleGroup] =
     providerName: "ToggleGroup",
   });
 
-export interface ToggleGroupRootProviderProps
-  extends React.ComponentProps<typeof ArkToggleGroup.RootProvider>,
-    ToggleGroupContextProps {}
-
-export const ToggleGroupRootProvider = (
-  props: ToggleGroupRootProviderProps
-) => {
-  const {
-    pill = false,
-    size = "md",
-    spacing = 0,
-    variant = "ghost",
-    children,
-    ...rest
-  } = props;
-
-  return (
-    <ToggleGroupProvider value={{ pill, size, spacing, variant }}>
-      <ArkToggleGroup.RootProvider {...rest}>
-        {children}
-      </ArkToggleGroup.RootProvider>
-    </ToggleGroupProvider>
-  );
-};
-
 interface ToggleGroupProps
   extends React.ComponentProps<typeof ArkToggleGroup.Root>,
     ToggleGroupContextProps {}
-
-type ToggleGroupLabelProps = React.ComponentProps<"span">;
-
-export const ToggleGroupLabel = (props: ToggleGroupLabelProps) => {
-  const { children, ...rest } = props;
-
-  return (
-    <FieldLabel asChild>
-      <span data-slot="toggle-group-label" {...rest}>
-        {children}
-      </span>
-    </FieldLabel>
-  );
-};
 
 const toggleGroupVariants = tv({
   base: ["w-fit", "flex items-center gap-[--spacing(var(--gap))]"],
@@ -98,69 +56,33 @@ export const ToggleGroup = (props: ToggleGroupProps) => {
   const {
     multiple = true,
     orientation = "horizontal",
-    variant = "ghost",
+    variant = "default",
     size = "md",
     spacing = 0,
     pill = false,
     className,
     style,
     children,
-    "aria-labelledby": ariaLabelledby,
     ...rest
   } = props;
 
-  const childrenArray = React.Children.toArray(children);
-  const labelElement = childrenArray.find(
-    (child) => React.isValidElement(child) && child.type === ToggleGroupLabel
-  );
-  const groupChildren = childrenArray.filter(
-    (child) => !(React.isValidElement(child) && child.type === ToggleGroupLabel)
-  );
-  const generatedLabelId = React.useId();
-  const labelId = React.isValidElement<ToggleGroupLabelProps>(labelElement)
-    ? (labelElement.props.id ?? generatedLabelId)
-    : undefined;
-  const label = React.isValidElement<ToggleGroupLabelProps>(labelElement)
-    ? React.cloneElement(labelElement, { id: labelId })
-    : null;
-  const labelledBy = [labelId, ariaLabelledby].filter(Boolean).join(" ");
-  const rootChildren = (label ? groupChildren : childrenArray).map(
-    (child, index) => (
-      <React.Fragment key={React.isValidElement(child) ? child.key : index}>
-        {child}
-      </React.Fragment>
-    )
-  );
-
-  const toggleGroup = (
-    <ArkToggleGroup.Root
-      aria-labelledby={labelledBy || undefined}
-      className={cn(toggleGroupVariants({ orientation, pill }), className)}
-      data-slot="toggle-group"
-      multiple={multiple}
-      orientation={orientation}
-      style={
-        {
-          ...style,
-          "--gap": spacing,
-        } as React.CSSProperties
-      }
-      {...rest}
-    >
-      {rootChildren}
-    </ArkToggleGroup.Root>
-  );
-
   return (
     <ToggleGroupProvider value={{ pill, size, spacing, variant }}>
-      {label ? (
-        <div className="flex flex-col items-start gap-2">
-          {label}
-          {toggleGroup}
-        </div>
-      ) : (
-        toggleGroup
-      )}
+      <ArkToggleGroup.Root
+        className={cn(toggleGroupVariants({ orientation, pill }), className)}
+        data-slot="toggle-group"
+        multiple={multiple}
+        orientation={orientation}
+        style={
+          {
+            ...style,
+            "--gap": spacing,
+          } as React.CSSProperties
+        }
+        {...rest}
+      >
+        {children}
+      </ArkToggleGroup.Root>
     </ToggleGroupProvider>
   );
 };

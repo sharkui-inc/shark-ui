@@ -75,7 +75,7 @@ FileUpload
 ## Usage
 
 ```tsx
-import { 
+import {
   FileUpload,
   FileUploadDropzone,
   FileUploadDropzoneIcon,
@@ -104,19 +104,13 @@ import {
 
 ### Disabled
 
-Use the `disabled` prop to prevent uploading.
-
 <ComponentPreview componentName="file-upload" fileName="example-disabled" />
 
 ### Invalid
 
-Use the `invalid` prop to mark the uploader as invalid.
-
 <ComponentPreview componentName="file-upload" fileName="example-invalid" />
 
 ### Read-only
-
-Use the `readOnly` prop to show files without allowing changes.
 
 <ComponentPreview componentName="file-upload" fileName="example-readonly" />
 
@@ -146,7 +140,7 @@ Use the `accept` prop to restrict file types to PNG and JPEG.
 
 ### With Field
 
-Use `Field` to add helper text and error handling.
+Use [Field](/docs/components/field) for a label.
 
 <ComponentPreview componentName="file-upload" fileName="example-with-field" />
 
@@ -185,6 +179,10 @@ Use the `directory` prop to upload entire folders.
 Use `FileUploadClearTrigger` to remove all uploaded files at once.
 
 <ComponentPreview componentName="file-upload" fileName="example-clear-trigger" />
+
+### Form Integration
+
+<ComponentPreview componentName="file-upload" fileName="example-form" />
 
 ### Custom spacing
 
@@ -329,7 +327,7 @@ Preview container for a file.
 
 ### FileUploadItemPreviewImage
 
-Image thumbnail for image files. 
+Image thumbnail for image files.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -387,15 +385,6 @@ Hook to access file upload state and methods.
 | `getFileSize` | `(file: File) => string` | `-` |
 | `createFileUrl` | `(file: File, cb: (url: string) => void) => () => void` | `-` |
 | `setClipboardFiles` | `(dt: DataTransfer) => boolean` | `-` |
-
-### FileUploadRootProvider
-
-Provides a FileUpload API created with `useFileUpload` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseFileUploadReturn` | `required` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/file-upload#api-reference).

@@ -3,7 +3,6 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   Listbox as ArkListbox,
-  useListbox as useArkListbox,
   useListboxContext as useArkListboxContext,
 } from "@ark-ui/react/listbox";
 import { CheckIcon } from "lucide-react";
@@ -11,7 +10,7 @@ import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { fieldLabelVariants } from "@/registry/react/components/field";
-import { Input, inputItemVariants } from "@/registry/react/components/input";
+import { Input } from "@/registry/react/components/input";
 import {
   MenuShortcut,
   menuEmptyVariants,
@@ -20,12 +19,9 @@ import {
   menuItemDescriptionVariants,
   menuItemIndicatorVariants,
 } from "@/registry/react/components/menu";
+import { Separator } from "@/registry/react/components/separator";
 
-export const useListbox = useArkListbox;
 export const useListboxContext = useArkListboxContext;
-
-export const ListboxRootProvider = ArkListbox.RootProvider;
-
 export const Listbox: ArkListbox.RootComponent = (props) => {
   const { className, ...rest } = props;
 
@@ -98,7 +94,7 @@ const listboxItemVariants = tv({
   base: [
     "group/listbox-item",
     menuItemControlVariants(),
-    inputItemVariants(),
+    "touch-manipulation select-none font-normal text-base md:text-sm",
     "cursor-pointer",
     "outline-hidden",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
@@ -200,6 +196,20 @@ export const ListboxItemGroup = (props: ListboxItemGroupProps) => {
       {!!heading && <ListboxItemGroupLabel>{heading}</ListboxItemGroupLabel>}
       {children}
     </ArkListbox.ItemGroup>
+  );
+};
+
+export const ListboxSeparator = (
+  props: React.ComponentProps<typeof Separator>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <Separator
+      className={cn("my-1", className)}
+      data-slot="listbox-separator"
+      {...rest}
+    />
   );
 };
 

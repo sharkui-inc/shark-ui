@@ -33,7 +33,7 @@ import {
 } from "@/registry/react/components/input-group";
 import {
   ScrollArea,
-  useScrollArea,
+  useScrollAreaContext,
 } from "@/registry/react/components/scroll-area";
 import {
   Tooltip,
@@ -219,8 +219,9 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
   );
 };
 
-const FollowThread = ({ threadSize }: { threadSize: number }) => {
-  const { scrollToEdge } = useScrollArea();
+const FollowThread = (props: { threadSize: number }) => {
+  const { threadSize } = props;
+  const { scrollToEdge } = useScrollAreaContext();
 
   const followThread = React.useEffectEvent((size: number) => {
     if (size < 1) {

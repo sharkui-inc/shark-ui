@@ -2,7 +2,6 @@
 
 import {
   Dialog as ArkDialog,
-  useDialog as useArkDialog,
   useDialogContext as useArkDialogContext,
 } from "@ark-ui/react/dialog";
 import { Portal } from "@ark-ui/react/portal";
@@ -18,14 +17,10 @@ import {
   DialogFooter,
   DialogHeader,
   DialogOverlay,
-  DialogRootProvider,
   DialogTitle,
 } from "@/registry/react/components/dialog";
 
-export const useSheet = useArkDialog;
 export const useSheetContext = useArkDialogContext;
-export const SheetRootProvider = DialogRootProvider;
-
 export const Sheet = (props: React.ComponentProps<typeof Dialog>) => (
   <Dialog data-slot="sheet" {...props} />
 );
@@ -53,7 +48,12 @@ export const SheetOverlay = (
 };
 
 const sheetPositionerVariants = tv({
-  base: ["fixed inset-0 z-50", "h-svh w-screen", "grid", "overflow-hidden"],
+  base: [
+    "fixed inset-0 z-[calc(50+var(--layer-index,0))]",
+    "h-svh w-screen",
+    "grid",
+    "overflow-hidden",
+  ],
   defaultVariants: {
     variant: "default",
   },
@@ -139,8 +139,8 @@ const sheetContentVariants = tv({
     variant: {
       default: "",
       inset: [
-        "rounded-[calc(var(--radius)*2)] border",
-        "**:data-[slot=sheet-footer]:rounded-b-[max(0px,calc(var(--radius)*2-1px))]",
+        "rounded-2xl border",
+        "**:data-[slot=sheet-footer]:rounded-b-2xl",
       ],
     },
   },
@@ -186,7 +186,7 @@ export const SheetContent = (props: SheetContentProps) => {
             <SheetClose asChild>
               <Button
                 aria-label="Close"
-                className="absolute inset-e-2 top-2 opacity-64 pointer-coarse:after:absolute pointer-coarse:after:size-11 hover:opacity-100"
+                className="absolute inset-e-2 top-2 opacity-64 hover:opacity-100"
                 size="icon-sm"
                 variant="ghost"
               >

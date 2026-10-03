@@ -2,7 +2,6 @@
 
 import {
   Slider as ArkSlider,
-  useSlider as useArkSlider,
   useSliderContext as useArkSliderContext,
 } from "@ark-ui/react/slider";
 import type React from "react";
@@ -11,10 +10,6 @@ import {
   FieldLabel,
   fieldLabelVariants,
 } from "@/registry/react/components/field";
-
-export const useSlider = useArkSlider;
-export const useSliderContext = useArkSliderContext;
-export const SliderRootProvider = ArkSlider.RootProvider;
 
 interface SliderProps extends React.ComponentProps<typeof ArkSlider.Root> {
   /**
@@ -37,6 +32,7 @@ interface SliderProps extends React.ComponentProps<typeof ArkSlider.Root> {
   showMarkers?: boolean;
 }
 
+export const useSliderContext = useArkSliderContext;
 export const Slider = (props: SliderProps) => {
   const {
     value,

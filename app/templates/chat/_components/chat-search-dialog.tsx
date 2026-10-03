@@ -15,17 +15,13 @@ import {
 } from "@/registry/react/components/command";
 import { commandItems } from "../_data/chat";
 
-export const ChatSearchDialog = ({
-  onNewChat,
-  onOpenChange,
-  onSelectConversation,
-  open,
-}: {
+export const ChatSearchDialog = (props: {
   onNewChat: () => void;
   onOpenChange: (open: boolean) => void;
   onSelectConversation: (conversation: string) => void;
   open: boolean;
 }) => {
+  const { onNewChat, onOpenChange, onSelectConversation, open } = props;
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
     filter: contains,

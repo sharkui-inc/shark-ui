@@ -2,17 +2,13 @@
 
 import {
   Accordion as ArkAccordion,
-  useAccordion as useArkAccordion,
   useAccordionContext as useArkAccordionContext,
 } from "@ark-ui/react/accordion";
 import { ChevronDownIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useAccordion = useArkAccordion;
 export const useAccordionContext = useArkAccordionContext;
-export const AccordionRootProvider = ArkAccordion.RootProvider;
-
 export const Accordion = (
   props: React.ComponentProps<typeof ArkAccordion.Root>
 ) => {

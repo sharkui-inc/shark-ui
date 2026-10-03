@@ -1,64 +1,41 @@
 "use client";
 
-import React from "react";
+import type React from "react";
+
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
   CardContent,
   CardFooter,
 } from "@/registry/react/components/card";
-import {
-  Field,
-  FieldError,
-  FieldLabel,
-} from "@/registry/react/components/field";
+import { Field, FieldLabel } from "@/registry/react/components/field";
 import { Textarea } from "@/registry/react/components/textarea";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const [message, setMessage] = React.useState("");
-  const [error, setError] = React.useState<string | null>(null);
-
-  const onSubmit = (e: React.SubmitEvent) => {
-    e.preventDefault();
-
-    if (message.trim().length < 10) {
-      setError("Message must be at least 10 characters.");
-      return;
-    }
-    setError(null);
+  const onSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const value = new FormData(event.currentTarget).get("message");
+    toast.info({
+      description: String(value || "Empty"),
+      title: "Form submitted",
+    });
   };
 
   return (
-    <Card asChild>
-      <form className="w-full max-w-xs" onSubmit={onSubmit}>
+    <Card asChild className="w-full max-w-md">
+      <form onSubmit={onSubmit}>
         <CardContent>
-          <Field invalid={!!error}>
+          <Field>
             <FieldLabel>Message</FieldLabel>
-            <Textarea
-              name="message"
-              onChange={(e) => {
-                setMessage(e.target.value);
-                setError(null);
-              }}
-              placeholder="Type your message here"
-              value={message}
-            />
-            {error ? <FieldError>{error}</FieldError> : null}
+            <Textarea name="message" placeholder="Type your message here" />
           </Field>
         </CardContent>
-        <CardFooter>
-          <Field orientation="horizontal" reverse>
-            <Button type="submit">Submit</Button>
-            <Button
-              onClick={() => {
-                setMessage("");
-                setError(null);
-              }}
-              variant="outline"
-            >
-              Clear
-            </Button>
-          </Field>
+        <CardFooter className="justify-end">
+          <Button type="reset" variant="outline">
+            Clear
+          </Button>
+          <Button type="submit">Submit</Button>
         </CardFooter>
       </form>
     </Card>

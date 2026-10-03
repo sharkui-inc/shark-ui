@@ -67,7 +67,7 @@ Editable
 ## Usage
 
 ```tsx
-import { 
+import {
   Editable,
   EditableArea,
   EditableInput,
@@ -129,7 +129,7 @@ No automatic activation. Use `EditableEditTrigger` to manually start editing.
 
 <ComponentPreview componentName="editable" fileName="example-activation-none" />
 
-## Sizes
+## Size
 
 The `size` prop on `EditablePreview` controls the preview dimensions.
 
@@ -168,6 +168,10 @@ The `orientation` prop controls the layout of the editable component and its con
 Edit without control buttons. Press Enter to save, Escape to cancel.
 
 <ComponentPreview componentName="editable" fileName="example-without-controls" />
+
+### Form Integration
+
+<ComponentPreview componentName="editable" fileName="example-form" />
 
 ## RTL
 
@@ -252,15 +256,6 @@ Submits the edited value and exits edit mode.
 | --- | --- | --- |
 | `asChild` | `boolean` | `-` |
 | `className` | `string` | `-` |
-
-### EditableRootProvider
-
-Provides a Editable API created with `useEditable` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseEditableReturn` | `required` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/editable#api-reference).

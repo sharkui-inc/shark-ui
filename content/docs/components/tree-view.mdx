@@ -367,7 +367,7 @@ const links = createTreeCollection<LinkNode>({
 
 ### createFileIcons
 
-Creates a type-safe mapping of file extensions to icon components. Use with `fileIcons` prop on `TreeView`. 
+Creates a type-safe mapping of file extensions to icon components. Use with `fileIcons` prop on `TreeView`.
 
 Keys use dotted extensions.
 
@@ -378,17 +378,6 @@ const fileIcons = createFileIcons({
   ".md": FileText,
 });
 ```
-
-### TreeViewRootProvider
-
-Provides a TreeView API created with `useTreeView` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseTreeViewReturn` | `required` |
-| `fileIcons` | `Record<string, React.JSX.ElementType \| null>` | `-` |
-
-Pass the same `fileIcons` you would use on `TreeView` so leaf items resolve extension icons under the headless path.
 
 ### TreeViewBranchIndicator
 

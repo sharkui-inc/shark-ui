@@ -3,16 +3,11 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   Progress as ArkProgress,
-  useProgress as useArkProgress,
   useProgressContext as useArkProgressContext,
 } from "@ark-ui/react/progress";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { FieldLabel } from "@/registry/react/components/field";
-
-export const useCircularProgress = useArkProgress;
-export const useCircularProgressContext = useArkProgressContext;
-export const CircularProgressRootProvider = ArkProgress.RootProvider;
 
 interface CircularProgressProps
   extends React.ComponentProps<typeof ArkProgress.Root>,
@@ -25,6 +20,7 @@ interface CircularProgressProps
   indeterminate?: boolean;
 }
 
+export const useCircularProgressContext = useArkProgressContext;
 export const CircularProgress = (props: CircularProgressProps) => {
   const {
     value,

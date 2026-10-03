@@ -19,7 +19,7 @@ import {
   DatePickerValue,
 } from "@/registry/react/components/date-picker";
 
-const Example = () => (
+const DatePickerDemo = () => (
   <DatePicker>
     <DatePickerTrigger asChild>
       <Button className="min-w-56" variant="outline">
@@ -42,4 +42,4 @@ const Example = () => (
   </DatePicker>
 );
 
-export default Example;
+export default DatePickerDemo;

@@ -5,17 +5,17 @@ links:
   doc: https://radix-ui.com/primitives
 ---
 
-[Radix Primitives](https://radix-ui.com/primitives) and [Ark UI](https://ark-ui.com) solve the same problem: accessible headless behavior you style yourself. Shark UI wraps Ark with Tailwind defaults and a copy-and-own install flow.
+[Radix Primitives](https://radix-ui.com/primitives) and [Ark UI](https://ark-ui.com) solve the same problem: accessible headless behavior you style yourself.
 
-Install the Shark component, read its anatomy, then adapt markup and state. `asChild` works the same way on triggers.
+> Shark UI wraps Ark with Tailwind defaults and a copy-and-own install flow.
 
 ## What changes
 
-| Radix habit | Shark / Ark pattern |
+| Radix | Shark |
 | --- | --- |
-| Map children as the list data source | Pass an Ark `collection` on Select, Combobox, and similar |
-| `type="single"` / string `defaultValue` on Toggle Group | Value arrays |
-| `type` / `collapsible` on Accordion | Value arrays; check Shark defaults |
+| Select items mapped from children | Ark `collection`. `defaultValue` is a string array |
+| `type="single"` and a string value on Toggle Group | Value array. Shark `multiple` defaults to `true` |
+| `type="single"` string, or `type="multiple"` array, on Accordion | Always a value array. Shark `collapsible` defaults to `true` |
 | `@radix-ui/react-dropdown-menu` | [Menu](/docs/components/menu) |
 | Separate primitive imports per package | One Shark component per feature area |
 
@@ -30,9 +30,9 @@ Browse [Components](/docs/components) for same-name primitives (Dialog, Select, 
 
 ## Triggers
 
-Keep `asChild` with one host child:
+`Open` sits inside the single `asChild` child.
 
-```tsx
+```tsx title="Radix UI" showLineNumbers
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 <DropdownMenu.Root>
@@ -42,7 +42,9 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 </DropdownMenu.Root>
 ```
 
-```tsx
+`Open` sits inside the single `asChild` child.
+
+```tsx title="Shark UI" showLineNumbers
 import { Menu, MenuTrigger } from "@/components/ui/menu";
 import { Button } from "@/components/ui/button";
 
@@ -55,9 +57,9 @@ import { Button } from "@/components/ui/button";
 
 ## Select
 
-Radix Select maps items from JSX. Shark Select reads from a collection:
+Items are children. `defaultValue` is a string.
 
-```tsx
+```tsx title="Radix UI" showLineNumbers
 import * as Select from "@radix-ui/react-select";
 
 <Select.Root defaultValue="next">
@@ -71,7 +73,9 @@ import * as Select from "@radix-ui/react-select";
 </Select.Root>
 ```
 
-```tsx
+`collection`. `defaultValue` is `string[]`.
+
+```tsx title="Shark UI" showLineNumbers
 import { createListCollection } from "@ark-ui/react";
 import {
   Select,
@@ -91,7 +95,7 @@ const frameworks = createListCollection({
   </SelectTrigger>
   <SelectContent>
     {frameworks.items.map((item) => (
-      <SelectItem key={item} value={item}>
+      <SelectItem item={item} key={item}>
         {item}
       </SelectItem>
     ))}
@@ -99,9 +103,11 @@ const frameworks = createListCollection({
 </Select>;
 ```
 
-## Toggle Group and Accordion
+## Toggle Group
 
-```tsx
+`type="single"` is a string. `type="multiple"` is a string array.
+
+```tsx title="Radix UI" showLineNumbers
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 
 <ToggleGroup.Root type="single" defaultValue="daily">
@@ -109,15 +115,21 @@ import * as ToggleGroup from "@radix-ui/react-toggle-group";
 </ToggleGroup.Root>
 ```
 
-```tsx
+Always a string array. `multiple` defaults to `true`.
+
+```tsx title="Shark UI" showLineNumbers
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
-<ToggleGroup defaultValue={["daily"]}>
+<ToggleGroup defaultValue={["daily"]} multiple={false}>
   <ToggleGroupItem value="daily">Daily</ToggleGroupItem>
 </ToggleGroup>;
 ```
 
-```tsx
+## Accordion
+
+`type="single"` is a string. `type="multiple"` is a string array. `collapsible` is opt-in.
+
+```tsx title="Radix UI" showLineNumbers
 import * as Accordion from "@radix-ui/react-accordion";
 
 <Accordion.Root type="single" collapsible defaultValue="details">
@@ -125,7 +137,9 @@ import * as Accordion from "@radix-ui/react-accordion";
 </Accordion.Root>
 ```
 
-```tsx
+Always a string array. `collapsible` defaults to `true`.
+
+```tsx title="Shark UI" showLineNumbers
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 
 <Accordion defaultValue={["details"]}>
@@ -133,13 +147,9 @@ import { Accordion, AccordionItem } from "@/components/ui/accordion";
 </Accordion>;
 ```
 
-## Overlays
-
-Radix Dialog expects a `Title`. Shark uses the same rule with named parts (`DialogTitle`, `SheetTitle`, `DrawerTitle`). Hide visually with `className="sr-only"` when needed.
-
 ## Theming
 
-Radix ships unstyled. If you styled primitives yourself, map your CSS variables to Shark tokens. See [Colors](/docs/colors) and [Styling](/docs/styling). Shark adds `destructive-foreground`, `success`, `warning`, and `info` pairs.
+Radix ships unstyled. Map your CSS variables to Shark tokens. See [Colors](/docs/colors) and [Styling](/docs/styling).
 
 ## Checklist
 
@@ -149,4 +159,4 @@ Radix ships unstyled. If you styled primitives yourself, map your CSS variables 
 - Keep overlay titles and control labels accessible.
 - Use logical spacing for [RTL](/docs/rtl).
 
-Coming from styled shadcn on top of Radix? See the [shadcn/ui guide](/docs/migration/shadcn).
+Older shadcn projects created with `radix` share these primitive differences. Current shadcn defaults to [Base UI](/docs/migration/base-ui).

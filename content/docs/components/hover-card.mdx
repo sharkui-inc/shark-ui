@@ -61,8 +61,8 @@ HoverCard
 ## Usage
 
 ```tsx
-import { 
-  HoverCard, 
+import {
+  HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
@@ -76,11 +76,16 @@ import {
   </HoverCardContent>
 </HoverCard>
 ```
+
+## Controlled
+
+Use `open` and `onOpenChange` to control the open state.
+
+<ComponentPreview componentName="hover-card" fileName="example-controlled" />
+
 ## Trigger Delays
 
-The `openDelay` and `closeDelay` props control the delay before the hover card opens and closes respectively.
-
-Default values are `600ms` for `openDelay` and `300ms` for `closeDelay`.
+The `openDelay` and `closeDelay` props control the delay before the hover card opens and closes.
 
 <ComponentPreview componentName="hover-card" fileName="example-triggers-delays" />
 
@@ -90,13 +95,9 @@ Control the position of the hover card relative to the trigger using the `positi
 
 <ComponentPreview componentName="hover-card" fileName="example-positioning" />
 
-## Controlled
+## States
 
-Use `open` and `onOpenChange` to control the open state.
-
-<ComponentPreview componentName="hover-card" fileName="example-controlled" />
-
-## Disabled
+### Disabled
 
 Use the `disabled` prop to prevent the hover card from opening on hover.
 
@@ -174,15 +175,6 @@ Optional arrow pointing toward the trigger.
 | --- | --- | --- |
 | `--arrow-background` | `string` | `var(--popover)` |
 | `--arrow-size` | `string` | `calc(1.5 * var(--spacing))` |
-
-### HoverCardRootProvider
-
-Provides a HoverCard API created with `useHoverCard` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseHoverCardReturn` | `required` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/hover-card#api-reference).

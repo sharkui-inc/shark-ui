@@ -2,16 +2,11 @@
 
 import {
   ScrollArea as ArkScrollArea,
-  useScrollArea as useArkScrollArea,
   useScrollAreaContext as useArkScrollAreaContext,
 } from "@ark-ui/react/scroll-area";
 import type React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-
-export const useScrollArea = useArkScrollArea;
-export const useScrollAreaContext = useArkScrollAreaContext;
-export const ScrollAreaRootProvider = ArkScrollArea.RootProvider;
 
 const scrollAreaVariants = tv({
   defaultVariants: {
@@ -101,6 +96,7 @@ interface ScrollAreaProps
   scrollFade?: boolean;
 }
 
+export const useScrollAreaContext = useArkScrollAreaContext;
 export const ScrollArea = (props: ScrollAreaProps) => {
   const {
     clampContentMinWidth = true,
@@ -134,7 +130,7 @@ export const ScrollArea = (props: ScrollAreaProps) => {
       <ArkScrollArea.Viewport
         className={cn(
           viewport(),
-          "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+          "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
         )}
         data-slot="scroll-area-viewport"
         style={{ maxHeight: "inherit" }}

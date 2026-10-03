@@ -2,7 +2,6 @@
 
 import {
   Dialog as ArkDialog,
-  useDialog as useArkDialog,
   useDialogContext as useArkDialogContext,
 } from "@ark-ui/react/dialog";
 import { ark } from "@ark-ui/react/factory";
@@ -14,9 +13,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
-
-export const useDialog = useArkDialog;
-export const useDialogContext = useArkDialogContext;
 
 interface DialogContextProps {
   /**
@@ -32,27 +28,7 @@ const [DialogModalProvider, _useDialog] = createContext<DialogContextProps>({
   providerName: "Dialog",
 });
 
-export interface DialogRootProviderProps
-  extends React.ComponentProps<typeof ArkDialog.RootProvider> {
-  /**
-   * Used internally to show or hide overlay. Match the `modal` option
-   * passed to `useDialog` when non-default.
-   *
-   * @default true
-   */
-  modal?: boolean;
-}
-
-export const DialogRootProvider = (props: DialogRootProviderProps) => {
-  const { modal = true, children, ...rest } = props;
-
-  return (
-    <DialogModalProvider value={{ modal }}>
-      <ArkDialog.RootProvider {...rest}>{children}</ArkDialog.RootProvider>
-    </DialogModalProvider>
-  );
-};
-
+export const useDialogContext = useArkDialogContext;
 export interface DialogProps
   extends React.ComponentProps<typeof ArkDialog.Root> {}
 
@@ -87,7 +63,7 @@ export const DialogTrigger = (
 
 export const dialogOverlayVariants = tv({
   base: [
-    "fixed inset-0 z-50",
+    "fixed inset-0 z-[calc(50+var(--layer-index,0))]",
     "bg-black/32 backdrop-blur-xs",
     "duration-200 ease-out",
     "peer peer-data-[slot=dialog-overlay]:hidden",
@@ -126,7 +102,7 @@ export const DialogPositioner = (
   return (
     <ArkDialog.Positioner
       className={cn(
-        "fixed inset-0 z-50",
+        "fixed inset-0 z-[calc(50+var(--layer-index,0))]",
         "h-svh w-screen",
         "grid grid-rows-[1fr_auto_3fr] justify-items-center",
         "p-4",
@@ -152,7 +128,7 @@ export const dialogContentVariants = tv({
       "flex flex-col",
       "bg-popover",
       "text-popover-foreground",
-      "rounded-[calc(var(--radius)*2)] border shadow-lg/4",
+      "rounded-2xl border shadow-lg/4",
       "overflow-hidden",
       "outline-hidden",
       "translate-y-[calc(-1.25rem*var(--nested-layer-count))]",
@@ -247,7 +223,7 @@ export const DialogContent = (props: DialogContentProps) => {
             <DialogClose asChild>
               <Button
                 aria-label="Close"
-                className="absolute inset-e-2 top-2 opacity-64 pointer-coarse:after:absolute pointer-coarse:after:size-11 hover:opacity-100"
+                className="absolute inset-e-2 top-2 opacity-64 hover:opacity-100"
                 size="icon-sm"
                 variant="ghost"
               >
@@ -379,7 +355,7 @@ export const dialogFooterVariants = tv({
   base: [
     "shrink-0",
     "flex flex-col gap-2 sm:flex-row-reverse sm:justify-start",
-    "rounded-b-[max(0px,calc(var(--radius)*2-1px))]",
+    "rounded-b-2xl",
     "px-(--space) py-4",
     "bg-muted/48",
     "border-t",

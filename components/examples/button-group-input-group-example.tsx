@@ -37,7 +37,6 @@ export const ButtonGroupInputGroupExample = () => {
               }}
               pressed={voice}
               size="sm"
-              variant="ghost"
             >
               <AudioLinesIcon aria-hidden />
             </Toggle>

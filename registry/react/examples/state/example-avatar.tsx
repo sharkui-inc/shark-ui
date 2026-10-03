@@ -1,8 +1,5 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/registry/react/components/avatar";
+import { WavesHorizontalIcon } from "lucide-react";
+import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
 import { Button } from "@/registry/react/components/button";
 import {
   State,
@@ -18,20 +15,16 @@ const Example = () => (
     <StateHeader>
       <StateMedia>
         <Avatar className="size-12">
-          <AvatarImage
-            alt="User avatar"
-            className="grayscale"
-            src="https://github.com/shadcn.png"
-          />
-          <AvatarFallback>LR</AvatarFallback>
+          <AvatarFallback>
+            <WavesHorizontalIcon />
+          </AvatarFallback>
         </Avatar>
       </StateMedia>
       <StateTitle asChild>
-        <h2>User Offline</h2>
+        <h2>We are working on it</h2>
       </StateTitle>
       <StateDescription>
-        This user is currently offline. You can leave a message to notify them
-        or try again later.
+        You can leave a message to notify us or try again later.
       </StateDescription>
     </StateHeader>
     <StateContent>

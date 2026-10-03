@@ -93,9 +93,7 @@ const { collection, filter } = useListCollection({
 
 <Combobox
   collection={collection}
-  onInputValueChange={({ inputValue, reason }) =>
-    filter(reason === "item-select" ? "" : inputValue)
-  }
+  onInputValueChange={({ inputValue }) => filter(inputValue)}
 >
   <ComboboxInput placeholder="Select a fruit" />
   <ComboboxContent>
@@ -173,7 +171,7 @@ Automatically highlight the first matching item as the user types.
 
 ### With Field
 
-Use Combobox with `Field` components to style the combobox with the field components.
+Use [Field](/docs/components/field) for a label, helper text, and error.
 
 <ComponentPreview componentName="combobox" fileName="example-with-field" />
 
@@ -214,6 +212,10 @@ Set `openOnClick={false}` to open the list only when typing or using the trigger
 ### With Description
 
 <ComponentPreview componentName="combobox" fileName="example-with-description" />
+
+### Form Integration
+
+<ComponentPreview componentName="combobox" fileName="example-form" />
 
 ## RTL
 
@@ -319,7 +321,7 @@ Button trigger that displays the selected value or a placeholder.
 
 ### ComboboxClear
 
-Button to clear the input value. 
+Button to clear the input value.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -380,14 +382,6 @@ Shown when no options match the current filter. Use for empty state.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `children` | `ReactNode` | `No results found.` |
-
-### ComboboxRootProvider
-
-Provides a Combobox API created with `useCombobox` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseComboboxReturn` | `required` |
 
 ### ComboboxContext
 

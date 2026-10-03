@@ -41,49 +41,47 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function ChartTooltipIndicatorLine() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Tooltip - Line Indicator</CardTitle>
-        <CardDescription>Tooltip with line indicator.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
-            <XAxis
-              axisLine={false}
-              dataKey="date"
-              tickFormatter={(value) =>
-                new Date(value).toLocaleDateString("en-US", {
-                  weekday: "short",
-                })
-              }
-              tickLine={false}
-              tickMargin={10}
-            />
-            <Bar
-              dataKey="running"
-              fill="var(--color-running)"
-              radius={[0, 0, 4, 4]}
-              stackId="a"
-            />
-            <Bar
-              dataKey="swimming"
-              fill="var(--color-swimming)"
-              radius={[4, 4, 0, 0]}
-              stackId="a"
-            />
-            <ChartTooltip
-              content={<ChartTooltipContent indicator="line" />}
-              cursor={false}
-              defaultIndex={1}
-            />
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
-  );
-}
+const ChartTooltipIndicatorLine = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle>Tooltip - Line Indicator</CardTitle>
+      <CardDescription>Tooltip with line indicator.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <ChartContainer config={chartConfig}>
+        <BarChart accessibilityLayer data={chartData}>
+          <XAxis
+            axisLine={false}
+            dataKey="date"
+            tickFormatter={(value) =>
+              new Date(value).toLocaleDateString("en-US", {
+                weekday: "short",
+              })
+            }
+            tickLine={false}
+            tickMargin={10}
+          />
+          <Bar
+            dataKey="running"
+            fill="var(--color-running)"
+            radius={[0, 0, 4, 4]}
+            stackId="a"
+          />
+          <Bar
+            dataKey="swimming"
+            fill="var(--color-swimming)"
+            radius={[4, 4, 0, 0]}
+            stackId="a"
+          />
+          <ChartTooltip
+            content={<ChartTooltipContent indicator="line" />}
+            cursor={false}
+            defaultIndex={1}
+          />
+        </BarChart>
+      </ChartContainer>
+    </CardContent>
+  </Card>
+);
 
 export default ChartTooltipIndicatorLine;

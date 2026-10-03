@@ -1,5 +1,5 @@
 ---
-title: Sheet  
+title: Sheet
 description: Panel that slides in from the edge.
 seo:
   description: Panel that slides in from the edge for forms and filters.
@@ -68,13 +68,13 @@ Sheet
 ## Usage
 
 ```tsx
-import { 
-  Sheet, 
-  SheetContent, 
-  SheetDescription, 
-  SheetHeader, 
-  SheetTitle, 
-  SheetTrigger 
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
 } from "@/components/ui/sheet";
 ```
 
@@ -83,7 +83,7 @@ import {
   <SheetTrigger>Open</SheetTrigger>
   <SheetContent>
     <SheetHeader>
-      <SheetTitle>Sheet Title</SheetTitle>     
+      <SheetTitle>Sheet Title</SheetTitle>
       <SheetDescription>Sheet Description</SheetDescription>
     </SheetHeader>
   </SheetContent>
@@ -284,16 +284,6 @@ Positioning wrapper for sheet content. Used internally; expose for custom layout
 | `side` | `"right" \| "left" \| "top" \| "bottom"` | `-` |
 | `variant` | `"default" \| "inset"` | `"default"` |
 | `className` | `string` | `-` |
-
-### SheetRootProvider
-
-Provides a Sheet API created with `useSheet` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseSheetReturn` | `required` |
-| `modal` | `boolean` | `true` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/dialog#api-reference).

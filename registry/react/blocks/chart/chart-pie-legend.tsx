@@ -52,33 +52,31 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function ChartPieLegend() {
-  return (
-    <Card>
-      <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Legend</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-1 pb-0">
-        <ChartContainer
-          className="mx-auto aspect-square max-h-[300px]"
-          config={chartConfig}
-        >
-          <PieChart>
-            <Pie data={chartData} dataKey="visitors" />
-            <ChartLegend
-              content={
-                <ChartLegendContent
-                  className="-translate-y-2 flex-wrap gap-2 *:basis-1/4 *:justify-center"
-                  nameKey="browser"
-                />
-              }
-            />
-          </PieChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
-  );
-}
+const ChartPieLegend = () => (
+  <Card>
+    <CardHeader className="items-center pb-0">
+      <CardTitle>Pie Chart - Legend</CardTitle>
+      <CardDescription>January - June 2024</CardDescription>
+    </CardHeader>
+    <CardContent className="flex-1 pb-0">
+      <ChartContainer
+        className="mx-auto aspect-square max-h-[300px]"
+        config={chartConfig}
+      >
+        <PieChart>
+          <Pie data={chartData} dataKey="visitors" />
+          <ChartLegend
+            content={
+              <ChartLegendContent
+                className="-translate-y-2 flex-wrap gap-2 *:basis-1/4 *:justify-center"
+                nameKey="browser"
+              />
+            }
+          />
+        </PieChart>
+      </ChartContainer>
+    </CardContent>
+  </Card>
+);
 
 export default ChartPieLegend;

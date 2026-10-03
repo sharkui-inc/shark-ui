@@ -29,7 +29,7 @@ interface Post {
   userId: number;
 }
 
-const UseAsyncListDemo = () => {
+const Example = () => {
   const list = useAsyncList<Post, number>({
     autoReload: true,
     async load({ cursor, signal }) {
@@ -84,7 +84,7 @@ const UseAsyncListDemo = () => {
       <ItemGroup
         aria-busy={list.loading}
         aria-label="Posts"
-        className="max-h-64 gap-2 overflow-y-auto focus-visible:outline-2 focus-visible:outline-ring"
+        className="max-h-64 gap-2 overflow-y-auto outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
         role="list"
         tabIndex={0}
       >
@@ -144,4 +144,4 @@ const LIMIT = 4;
 
 const skeletons = ["post-a", "post-b", "post-c", "post-d"] as const;
 
-export default UseAsyncListDemo;
+export default Example;

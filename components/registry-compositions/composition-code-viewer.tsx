@@ -30,11 +30,8 @@ interface CompositionCodeViewerProps {
 
 const getLanguageFromPath = (path: string) => path.split(".").pop() ?? "tsx";
 
-export const CompositionCodeViewer = ({
-  files,
-  label,
-  tree,
-}: CompositionCodeViewerProps) => {
+export const CompositionCodeViewer = (props: CompositionCodeViewerProps) => {
+  const { files, label, tree } = props;
   const [activePath, setActivePath] = React.useState(
     files[0]?.displayPath ?? ""
   );

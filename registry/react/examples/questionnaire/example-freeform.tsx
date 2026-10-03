@@ -15,7 +15,7 @@ import {
 } from "@/registry/react/components/questionnaire";
 import { toast } from "@/registry/react/components/toast";
 
-const QuestionnaireDemo = () => {
+const Example = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const answers = new FormData(event.currentTarget);
@@ -60,4 +60,4 @@ const QuestionnaireDemo = () => {
 
 const items = [{ name: "destination", required: true }] as const;
 
-export default QuestionnaireDemo;
+export default Example;

@@ -1,7 +1,6 @@
 import { Spinner } from "@/registry/react/components/spinner";
 import {
   Steps,
-  StepsContent,
   StepsIndicator,
   StepsItem,
   StepsList,
@@ -10,32 +9,37 @@ import {
 } from "@/registry/react/components/steps";
 
 const Example = () => (
-  <Steps className="w-full max-w-md" count={items.length}>
-    <StepsList>
-      {items.map((item, index) => (
-        <StepsItem index={index} key={item.id}>
-          <StepsTrigger aria-label={`Step ${index + 1}: ${item.id}`} disabled>
-            <StepsIndicator>
-              {item.loading ? <Spinner aria-hidden /> : index + 1}
-            </StepsIndicator>
-          </StepsTrigger>
-
-          <StepsSeparator />
-        </StepsItem>
-      ))}
-    </StepsList>
-    {items.map((item, index) => (
-      <StepsContent index={index} key={item.id}>
-        {item.id}
-      </StepsContent>
-    ))}
-  </Steps>
+  <div className="mx-auto w-full max-w-xl">
+    <Steps className="w-full" count={items.length}>
+      <StepsList>
+        {items.map((item, index) => (
+          <StepsItem index={index} key={item.title}>
+            <StepsTrigger aria-label={item.title} disabled>
+              <StepsIndicator>
+                {item.loading ? <Spinner aria-hidden="true" /> : index + 1}
+              </StepsIndicator>
+            </StepsTrigger>
+            <StepsSeparator />
+          </StepsItem>
+        ))}
+      </StepsList>
+    </Steps>
+  </div>
 );
 
 const items = [
-  { id: "loading", loading: true },
-  { id: "review", loading: false },
-  { id: "complete", loading: false },
+  {
+    loading: true,
+    title: "Build the file",
+  },
+  {
+    loading: false,
+    title: "Validate data",
+  },
+  {
+    loading: false,
+    title: "Download export",
+  },
 ];
 
 export default Example;

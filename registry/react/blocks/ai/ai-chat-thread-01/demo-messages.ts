@@ -49,7 +49,7 @@ export const LAUNCH_PLAN_MESSAGES: readonly ChatMessage[] = [
     sources: [
       {
         href: "https://shark-ui.com/docs",
-        title: "Shark UI Docs",
+        title: "Onda Docs",
       },
       {
         href: "https://ark-ui.com",

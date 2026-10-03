@@ -18,7 +18,8 @@ import {
 import { Progress } from "@/registry/react/components/progress";
 import { SettingsTextField } from "./settings-fields";
 
-export const SettingsBillingPage = ({ onSave }: { onSave: () => void }) => {
+export const SettingsBillingPage = (props: { onSave: () => void }) => {
+  const { onSave } = props;
   const [billingEmail, setBillingEmail] = React.useState("billing@onda.io");
 
   return (

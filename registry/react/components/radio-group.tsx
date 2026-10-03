@@ -2,7 +2,6 @@
 
 import {
   RadioGroup as ArkRadioGroup,
-  useRadioGroup as useArkRadioGroup,
   useRadioGroupContext as useArkRadioGroupContext,
 } from "@ark-ui/react/radio-group";
 import type React from "react";
@@ -12,10 +11,7 @@ import {
   fieldLabelVariants,
 } from "@/registry/react/components/field";
 
-export const useRadioGroup = useArkRadioGroup;
 export const useRadioGroupContext = useArkRadioGroupContext;
-export const RadioGroupRootProvider = ArkRadioGroup.RootProvider;
-
 export const RadioGroup = (
   props: React.ComponentProps<typeof ArkRadioGroup.Root>
 ) => {

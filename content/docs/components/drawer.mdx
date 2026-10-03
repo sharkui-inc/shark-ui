@@ -26,7 +26,7 @@ npx shadcn@latest add @shark/drawer
 <TabsContent value="manual">
 
 <Steps>
-<Step>This component depends on [Button](/docs/components/button) and [Scroll Area](/docs/components/scroll-area). Install them first if you haven't already.</Step>
+<Step>This component depends on [Button](/docs/components/button), [Scroll Area](/docs/components/scroll-area), and [Separator](/docs/components/separator). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
@@ -106,11 +106,11 @@ import {
 
 ### Using props
 
-Pass `title` and `description` props directly to `DrawerHeader`. 
+Pass `title` and `description` props directly to `DrawerHeader`.
 
 ```tsx showLineNumbers
-<DrawerHeader 
-  title="Allow accessory to connect?" 
+<DrawerHeader
+  title="Allow accessory to connect?"
   description="Do you want to allow the USB accessory to connect to this device?"
 />
 ```
@@ -206,25 +206,25 @@ Nest a `Drawer` inside another.
 
 ### Responsive Dialog
 
-Use `Drawer` on small screens and [Dialog](/docs/components/dialog#responsive) on larger ones. Same content opens as a bottom sheet on mobile and a modal on desktop.
+Use `Drawer` on small screens and [Dialog](/docs/components/dialog#responsive) on larger ones.
 
 <ComponentPreview componentName="drawer" fileName="example-responsive-dialog" />
 
 ### Responsive Menu
 
-Use `Drawer` on small screens and [Menu](/docs/components/menu#responsive) on larger ones. Same content opens as a bottom sheet on mobile and a menu on desktop. `DrawerMenuTrigger` opens the next drawer.
+Use `Drawer` on small screens and [Menu](/docs/components/menu#responsive) on larger ones. `DrawerMenuTrigger` opens the next drawer.
 
 <ComponentPreview componentName="drawer" fileName="example-responsive-menu" />
 
 ### Responsive Context Menu
 
-Use `Drawer` on small screens and [ContextMenu](/docs/components/context-menu#responsive) on larger ones. Same content opens as a bottom sheet on mobile and a context menu on desktop. `DrawerMenuTrigger` opens the next drawer.
+Use `Drawer` on small screens and [ContextMenu](/docs/components/context-menu#responsive) on larger ones. `DrawerMenuTrigger` opens the next drawer.
 
 <ComponentPreview componentName="drawer" fileName="example-responsive-context-menu" />
 
 ### Custom spacing
 
-The `[--space:--spacing("value")]` controls the internal spacing. 
+The `[--space:--spacing("value")]` controls the internal spacing.
 
 <ComponentPreview componentName="drawer" fileName="example-custom-spacing" />
 
@@ -362,15 +362,6 @@ Closes the drawer on click. Use `asChild` for custom close elements.
 | `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
-### DrawerRootProvider
-
-Provides a Drawer API created with `useDrawer` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseDrawerReturn` | `required` |
-| `modal` | `boolean` | `true` |
-
 ### DrawerProvider
 
 Wraps the page. Open drawers scale this surface and reveal the background behind it.
@@ -485,4 +476,4 @@ Radio row with the same check indicator as `MenuRadioItem`.
 
 ---
 
-For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/dialog#api-reference).
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/drawer#api-reference).

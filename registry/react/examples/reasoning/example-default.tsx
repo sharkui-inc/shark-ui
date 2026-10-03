@@ -4,7 +4,7 @@ import {
   ReasoningTrigger,
 } from "@/registry/react/components/reasoning";
 
-const Example = () => (
+const ReasoningDemo = () => (
   <Reasoning className="max-w-lg" duration={8}>
     <ReasoningTrigger />
     <ReasoningContent>
@@ -15,4 +15,4 @@ const Example = () => (
   </Reasoning>
 );
 
-export default Example;
+export default ReasoningDemo;

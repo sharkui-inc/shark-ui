@@ -13,7 +13,7 @@ import {
   CommandShortcut,
 } from "@/registry/react/components/command";
 
-const CommandExample = () => {
+const CommandDemo = () => {
   const { contains } = useFilter({ sensitivity: "base" });
 
   const { collection, filter } = useListCollection({
@@ -66,4 +66,4 @@ const initialItems = [
   { group: "Settings", label: "Sign in", shortcut: "⌘I", value: "sign in" },
 ];
 
-export default CommandExample;
+export default CommandDemo;

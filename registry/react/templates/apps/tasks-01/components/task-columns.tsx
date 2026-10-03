@@ -49,14 +49,18 @@ export interface TaskTableActions {
   onEdit: (task: Task) => void;
 }
 
-export const TaskStatusBadge = ({ status }: { status: TaskStatus }) => (
-  <Badge className="gap-1.5" size="sm" variant="outline">
-    <Status size="sm" variant={statusIndicatorVariantMap[status]} />
-    {status}
-  </Badge>
-);
+export const TaskStatusBadge = (props: { status: TaskStatus }) => {
+  const { status } = props;
+  return (
+    <Badge className="gap-1.5" size="sm" variant="outline">
+      <Status size="sm" variant={statusIndicatorVariantMap[status]} />
+      {status}
+    </Badge>
+  );
+};
 
-export const TaskPriorityLabel = ({ priority }: { priority: TaskPriority }) => {
+export const TaskPriorityLabel = (props: { priority: TaskPriority }) => {
+  const { priority } = props;
   const PriorityIcon = priorityIconMap[priority];
 
   return (
@@ -70,45 +74,43 @@ export const TaskPriorityLabel = ({ priority }: { priority: TaskPriority }) => {
   );
 };
 
-export const TaskRowMenu = ({
-  onDelete,
-  onDuplicate,
-  onEdit,
-  task,
-}: TaskTableActions & { task: Task }) => (
-  <Menu>
-    <MenuTrigger asChild>
-      <Button
-        aria-label={`Open actions for ${task.id}`}
-        size="icon-sm"
-        variant="ghost"
-      >
-        <EllipsisIcon aria-hidden />
-      </Button>
-    </MenuTrigger>
-    <MenuContent>
-      <MenuItem onClick={() => onEdit(task)} value={`edit-${task.id}`}>
-        <PencilIcon aria-hidden />
-        Edit task
-      </MenuItem>
-      <MenuItem
-        onClick={() => onDuplicate(task)}
-        value={`duplicate-${task.id}`}
-      >
-        <CopyIcon aria-hidden />
-        Duplicate task
-      </MenuItem>
-      <MenuItem
-        onClick={() => onDelete(task)}
-        value={`delete-${task.id}`}
-        variant="destructive"
-      >
-        <Trash2Icon aria-hidden />
-        Delete task
-      </MenuItem>
-    </MenuContent>
-  </Menu>
-);
+export const TaskRowMenu = (props: TaskTableActions & { task: Task }) => {
+  const { onDelete, onDuplicate, onEdit, task } = props;
+  return (
+    <Menu>
+      <MenuTrigger asChild>
+        <Button
+          aria-label={`Open actions for ${task.id}`}
+          size="icon-sm"
+          variant="ghost"
+        >
+          <EllipsisIcon aria-hidden />
+        </Button>
+      </MenuTrigger>
+      <MenuContent>
+        <MenuItem onClick={() => onEdit(task)} value={`edit-${task.id}`}>
+          <PencilIcon aria-hidden />
+          Edit task
+        </MenuItem>
+        <MenuItem
+          onClick={() => onDuplicate(task)}
+          value={`duplicate-${task.id}`}
+        >
+          <CopyIcon aria-hidden />
+          Duplicate task
+        </MenuItem>
+        <MenuItem
+          onClick={() => onDelete(task)}
+          value={`delete-${task.id}`}
+          variant="destructive"
+        >
+          <Trash2Icon aria-hidden />
+          Delete task
+        </MenuItem>
+      </MenuContent>
+    </Menu>
+  );
+};
 
 export const createTaskColumns = (actions: TaskTableActions) => {
   const { onDelete, onDuplicate, onEdit } = actions;

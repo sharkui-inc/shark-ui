@@ -69,12 +69,12 @@ Popover
 ## Usage
 
 ```tsx
-import { 
-  Popover, 
-  PopoverTrigger, 
-  PopoverContent, 
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
   PopoverHeader,
-  PopoverTitle, 
+  PopoverTitle,
   PopoverDescription,
   PopoverBody,
   PopoverFooter,
@@ -118,7 +118,7 @@ Control the position of the popover relative to the trigger using the `positioni
 
 ### Using props
 
-Pass `title` and `description` props directly to `PopoverHeader`. 
+Pass `title` and `description` props directly to `PopoverHeader`.
 
 ```tsx showLineNumbers
 <PopoverHeader title="Popover Title" description="Popover description" />
@@ -306,7 +306,7 @@ Scrollable content area.
 
 ### PopoverFooter
 
-Footer area for actions or secondary content. 
+Footer area for actions or secondary content.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -332,14 +332,6 @@ Optional arrow pointing toward the trigger element.
 | --- | --- | --- |
 | `--arrow-background` | `string` | `var(--popover)` |
 | `--arrow-size` | `string` | `calc(1.5 * var(--spacing))` |
-
-### PopoverRootProvider
-
-Provides a Popover API created with `usePopover` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UsePopoverReturn` | `required` |
 
 ### PopoverPositioner
 

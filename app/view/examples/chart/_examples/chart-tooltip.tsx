@@ -117,14 +117,7 @@ const ChartTooltipDemo = () => (
   </div>
 );
 
-const TooltipDemo = ({
-  className,
-  hideLabel,
-  indicator = "dot",
-  label,
-  payload,
-  hideIndicator,
-}: {
+const TooltipDemo = (props: {
   className?: string;
   hideIndicator?: boolean;
   hideLabel?: boolean;
@@ -136,6 +129,14 @@ const TooltipDemo = ({
     value: number;
   }[];
 }) => {
+  const {
+    className,
+    hideLabel,
+    indicator = "dot",
+    label,
+    payload,
+    hideIndicator,
+  } = props;
   if (!payload.length) {
     return null;
   }

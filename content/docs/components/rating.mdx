@@ -89,13 +89,9 @@ Use `value` and `onValueChange` to control the rating.
 
 ### Readonly
 
-Use the `readOnly` prop to display a rating without interaction.
-
 <ComponentPreview componentName="rating" fileName="example-readonly" />
 
 ### Disabled
-
-Use the `disabled` prop to prevent interaction and show a disabled state.
 
 <ComponentPreview componentName="rating" fileName="example-disabled" />
 
@@ -103,7 +99,7 @@ Use the `disabled` prop to prevent interaction and show a disabled state.
 
 ### With Field
 
-Use `RatingLabel` inside `Rating` to name the control, and `FieldDescription` for helper text.
+Use `RatingLabel` to name the rating, and [Field](/docs/components/field) for a description.
 
 <ComponentPreview componentName="rating" fileName="example-with-field" />
 
@@ -136,6 +132,10 @@ Use `RatingStars` `className` to override the default size of the rating indicat
 Compose the rating with a different icon.
 
 <ComponentPreview componentName="rating" fileName="example-custom-icon" />
+
+### Form Integration
+
+<ComponentPreview componentName="rating" fileName="example-form" />
 
 ### Custom color
 
@@ -185,14 +185,6 @@ Renders the rating stars and hidden input.
 | --- | --- | --- |
 | `icon` | `React.JSX.ElementType` | `StarIcon` |
 | `className` | `string` | `-` |
-
-### RatingRootProvider
-
-Provides a Rating API created with `useRating` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseRatingReturn` | `required` |
 
 ### RatingItem
 

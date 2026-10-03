@@ -3,7 +3,6 @@ import InputOTPControlled from "./_examples/input-otp-controlled";
 import InputOTPDemo from "./_examples/input-otp-demo";
 import InputOTPDisabled from "./_examples/input-otp-disabled";
 import InputOTPForm from "./_examples/input-otp-form";
-import InputOTPFourDigits from "./_examples/input-otp-four-digits";
 import InputOTPInvalid from "./_examples/input-otp-invalid";
 import InputOTPPattern from "./_examples/input-otp-pattern";
 import InputOTPRtl from "./_examples/input-otp-rtl";
@@ -69,21 +68,6 @@ const InputOTPExamplePage = () => (
         </h2>
         <div className="rounded-3xl bg-muted p-6 sm:p-10">
           <InputOTPForm />
-        </div>
-      </section>
-
-      <section
-        aria-labelledby="four-digits-heading"
-        className="flex flex-col gap-5"
-      >
-        <h2
-          className="font-medium text-muted-foreground"
-          id="four-digits-heading"
-        >
-          Four Digits
-        </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
-          <InputOTPFourDigits />
         </div>
       </section>
 

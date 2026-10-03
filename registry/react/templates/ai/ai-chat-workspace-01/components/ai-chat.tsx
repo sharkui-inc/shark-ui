@@ -119,7 +119,7 @@ const conversations: readonly Conversation[] = [
         sources: [
           {
             href: "https://shark-ui.com/docs",
-            title: "Shark UI Docs",
+            title: "Onda Docs",
           },
           {
             href: "https://ark-ui.com",

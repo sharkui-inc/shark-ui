@@ -22,7 +22,7 @@ interface Product {
   title: string;
 }
 
-const UseAsyncListDemo = () => {
+const Example = () => {
   const list = useAsyncList<Product>({
     autoReload: true,
     initialSortDescriptor: { column: "id", direction: "ascending" },
@@ -129,4 +129,4 @@ const LIMIT = 4;
 
 const skeletons = ["product-a", "product-b", "product-c", "product-d"] as const;
 
-export default UseAsyncListDemo;
+export default Example;

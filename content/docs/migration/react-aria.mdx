@@ -5,19 +5,20 @@ links:
   doc: https://react-aria.adobe.com
 ---
 
-[React Aria Components](https://react-aria.adobe.com) and [Ark UI](https://ark-ui.com) are headless libraries with composable parts. Shark UI wraps Ark with Tailwind styles and installs source into your project.
+[React Aria](https://react-aria.adobe.com) and [Ark UI](https://ark-ui.com) solve the same problem: accessible headless behavior you style yourself.
 
-Install the Shark component, read its anatomy, then adapt the markup and state.
+> Shark UI wraps Ark with Tailwind defaults and a copy-and-own install flow.
 
 ## What changes
 
-| React Aria pattern | Shark UI pattern |
+| React Aria | Shark |
 | --- | --- |
 | `items` and render-function children | Ark `collection`; render `collection.items` |
-| `selectedKey` on Select | `value` and `defaultValue` string arrays |
+| Select `value` / `defaultValue` (`string` or `string[]`) | Always a string array |
+| ListBox `selectedKeys` (`Set`) | `value` string array on a collection |
 | `isDisabled` / `isInvalid` | `disabled` / `invalid` |
 | `className` render functions | Tailwind classes on Shark parts |
-| `<Label>` in compound controls | `Field` and `FieldLabel` where applicable |
+| `<Label>` | `Field` / `FieldLabel` |
 
 ## Component equivalents
 
@@ -32,36 +33,20 @@ Browse [Components](/docs/components) for same-name components such as Dialog, T
 
 ## Select
 
-React Aria Select uses child items and a single selected key by default:
+`SelectItem` by `id`. `defaultValue` is `string | string[]`.
 
-```tsx
-import {
-  Button,
-  Label,
-  ListBox,
-  ListBoxItem,
-  Popover,
-  Select,
-  SelectValue,
-} from "react-aria-components";
+```tsx title="React Aria"
+import { Select, SelectItem } from "react-aria-components";
 
-<Select defaultSelectedKey="cat">
-  <Label>Favorite animal</Label>
-  <Button>
-    <SelectValue />
-  </Button>
-  <Popover>
-    <ListBox>
-      <ListBoxItem id="cat">Cat</ListBoxItem>
-      <ListBoxItem id="dog">Dog</ListBoxItem>
-    </ListBox>
-  </Popover>
+<Select defaultValue="cat" label="Favorite animal">
+  <SelectItem id="cat">Cat</SelectItem>
+  <SelectItem id="dog">Dog</SelectItem>
 </Select>;
 ```
 
-Shark Select uses an Ark collection. Its `value` and `defaultValue` are arrays, including for a single selection:
+`collection`. `defaultValue` is `string[]`.
 
-```tsx
+```tsx title="Shark UI"
 import { createListCollection } from "@ark-ui/react";
 import {
   Select,
@@ -89,21 +74,111 @@ const animals = createListCollection({ items: ["Cat", "Dog"] });
 
 ## Combobox
 
-Use `useFilter` and `useListCollection` so filtering updates the collection rendered by [Combobox](/docs/components/combobox).
+`ComboBoxItem` children.
+
+```tsx title="React Aria"
+import { ComboBox, ComboBoxItem } from "react-aria-components";
+
+<ComboBox label="Favorite animal">
+  <ComboBoxItem id="cat">Cat</ComboBoxItem>
+  <ComboBoxItem id="dog">Dog</ComboBoxItem>
+</ComboBox>;
+```
+
+`useFilter` and `useListCollection`. Render `collection.items`.
+
+```tsx title="Shark UI"
+"use client";
+
+import { useFilter, useListCollection } from "@ark-ui/react";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
+
+const ComboboxExample = () => {
+  const { contains } = useFilter({ sensitivity: "base" });
+  const { collection, filter } = useListCollection({
+    filter: contains,
+    initialItems: [
+      { label: "Cat", value: "cat" },
+      { label: "Dog", value: "dog" },
+    ],
+  });
+
+  return (
+    <Combobox
+      collection={collection}
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
+    >
+      <ComboboxInput placeholder="Favorite animal" />
+      <ComboboxContent>
+        <ComboboxEmpty />
+        <ComboboxList>
+          {collection.items.map((item) => (
+            <ComboboxItem item={item} key={item.value}>
+              {item.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+};
+```
+
+## Listbox
+
+`defaultSelectedKeys` is a `Set`.
+
+```tsx title="React Aria"
+import { ListBox, ListBoxItem } from "react-aria-components";
+
+<ListBox aria-label="Animals" defaultSelectedKeys={new Set(["cat"])}>
+  <ListBoxItem id="cat">Cat</ListBoxItem>
+  <ListBoxItem id="dog">Dog</ListBoxItem>
+</ListBox>;
+```
+
+`collection`. `defaultValue` is `string[]`.
+
+```tsx title="Shark UI"
+import { createListCollection } from "@ark-ui/react";
+import {
+  Listbox,
+  ListboxContent,
+  ListboxItem,
+} from "@/components/ui/listbox";
+
+const animals = createListCollection({
+  items: [
+    { label: "Cat", value: "cat" },
+    { label: "Dog", value: "dog" },
+  ],
+});
+
+<Listbox collection={animals} defaultValue={["cat"]}>
+  <ListboxContent>
+    {animals.items.map((item) => (
+      <ListboxItem item={item} key={item.value}>
+        {item.label}
+      </ListboxItem>
+    ))}
+  </ListboxContent>
+</Listbox>;
+```
 
 ## Labels and styling
 
-Use [Field](/docs/components/field) and `FieldLabel` to label controls where the component anatomy supports that composition. Shark uses `disabled` and `invalid`; React Aria commonly uses `isDisabled` and `isInvalid`.
-
-React Aria exposes state through render props and data attributes. Shark components include Tailwind styles by default. Use the documented parts and `className` props to customize them.
-
-## Overlays
-
-Include a title part in Dialog, Sheet, and Drawer. Use `className="sr-only"` when the title should not show visually.
+`isDisabled` / `isInvalid` are `disabled` / `invalid`. Label is [Field](/docs/components/field).
 
 ## Theming
 
-Map your React Aria theme variables to Shark semantic tokens. See [Colors](/docs/colors) and [Styling](/docs/styling). Shark adds `destructive-foreground`, `success`, `warning`, and `info` pairs.
+Map your React Aria theme variables to Shark semantic tokens. See [Colors](/docs/colors) and [Styling](/docs/styling).
 
 ## Checklist
 

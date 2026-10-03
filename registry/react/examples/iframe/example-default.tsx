@@ -1,13 +1,5 @@
 import { Iframe } from "@/registry/react/components/iframe";
 
-const srcDoc = `<html><head>
-<style>
-*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { overflow: hidden; }
-body { background-color: #f0f0f0; }
-</style>
-</head><body><div class="frame-root"></div></body></html>`;
-
 const IframeDemo = () => (
   <div className="mx-auto max-w-4xl">
     <Iframe
@@ -30,5 +22,13 @@ const IframeDemo = () => (
     </Iframe>
   </div>
 );
+
+const srcDoc = `<html><head>
+<style>
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow: hidden; }
+body { background-color: #f0f0f0; }
+</style>
+</head><body><div class="frame-root"></div></body></html>`;
 
 export default IframeDemo;

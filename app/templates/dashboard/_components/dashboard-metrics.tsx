@@ -49,32 +49,29 @@ export const DashboardMetrics = () => (
   </div>
 );
 
-const MetricSparkline = ({
-  data,
-  label,
-}: {
-  data: number[];
-  label: string;
-}) => (
-  <ChartContainer
-    aria-hidden
-    className="aspect-auto! h-12 w-full"
-    config={metricChartConfig}
-  >
-    <LineChart
-      accessibilityLayer={false}
-      data={data.map((value, index) => ({ index, value }))}
-      margin={{ bottom: 2, left: 0, right: 0, top: 2 }}
+const MetricSparkline = (props: { data: number[]; label: string }) => {
+  const { data, label } = props;
+  return (
+    <ChartContainer
+      aria-hidden
+      className="aspect-auto! h-12 w-full"
+      config={metricChartConfig}
     >
-      <Line
-        dataKey="value"
-        dot={false}
-        isAnimationActive={false}
-        name={`${label} trend`}
-        stroke="var(--color-value)"
-        strokeWidth={2}
-        type="monotone"
-      />
-    </LineChart>
-  </ChartContainer>
-);
+      <LineChart
+        accessibilityLayer={false}
+        data={data.map((value, index) => ({ index, value }))}
+        margin={{ bottom: 2, left: 0, right: 0, top: 2 }}
+      >
+        <Line
+          dataKey="value"
+          dot={false}
+          isAnimationActive={false}
+          name={`${label} trend`}
+          stroke="var(--color-value)"
+          strokeWidth={2}
+          type="monotone"
+        />
+      </LineChart>
+    </ChartContainer>
+  );
+};

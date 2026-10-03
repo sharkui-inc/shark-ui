@@ -9,7 +9,7 @@ import {
 } from "@/registry/react/components/hotkeys";
 import { Kbd } from "@/registry/react/components/kbd";
 
-const Example = () => {
+const HotkeysDemo = () => {
   const formatHotkey = useFormatHotkey();
 
   const [count, setCount] = React.useState(0);
@@ -43,4 +43,4 @@ const Example = () => {
 
 const HOTKEY = "mod+shift+H";
 
-export default Example;
+export default HotkeysDemo;

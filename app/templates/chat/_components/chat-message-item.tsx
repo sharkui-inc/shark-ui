@@ -36,13 +36,11 @@ const AssistantActions = () => (
   </MessageFooter>
 );
 
-export const ChatMessageItem = ({
-  isStreaming = false,
-  message,
-}: {
+export const ChatMessageItem = (props: {
   isStreaming?: boolean;
   message: ChatMessage;
 }) => {
+  const { isStreaming = false, message } = props;
   const isUser = message.role === "user";
   const text = message.content;
 

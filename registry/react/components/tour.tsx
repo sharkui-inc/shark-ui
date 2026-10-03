@@ -171,7 +171,7 @@ export const tourContentVariants = tv({
       "flex flex-col",
       "bg-popover",
       "text-popover-foreground",
-      "rounded-[calc(var(--radius)*2)] border shadow-lg/4",
+      "rounded-2xl border shadow-lg/4",
       "overflow-hidden",
     ],
   },
@@ -421,7 +421,7 @@ export const TourFooter = (
       <DialogFooter
         className={cn(
           "w-full",
-          "rounded-b-[max(0px,calc(var(--radius)*2-1px))]",
+          "rounded-b-2xl",
           tourActionLayoutClassName,
           className
         )}
@@ -452,7 +452,7 @@ export const TourActions = (
             <DialogFooter
               className={cn(
                 "w-full",
-                "rounded-b-[max(0px,calc(var(--radius)*2-1px))]",
+                "rounded-b-2xl",
                 tourActionLayoutClassName,
                 className
               )}

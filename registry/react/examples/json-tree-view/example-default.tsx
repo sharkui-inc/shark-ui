@@ -1,6 +1,6 @@
 import { JsonTreeView } from "@/registry/react/components/json-tree-view";
 
-const Example = () => (
+const JsonTreeViewDemo = () => (
   <JsonTreeView
     className="w-full max-w-xl"
     data={data}
@@ -18,4 +18,4 @@ const data = {
   source: "onda-commerce",
 };
 
-export default Example;
+export default JsonTreeViewDemo;

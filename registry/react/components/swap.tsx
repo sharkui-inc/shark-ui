@@ -2,16 +2,11 @@
 
 import {
   Swap as ArkSwap,
-  useSwap as useArkSwap,
   useSwapContext as useArkSwapContext,
 } from "@ark-ui/react/swap";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-
-export const useSwap = useArkSwap;
-export const useSwapContext = useArkSwapContext;
-export const SwapRootProvider = ArkSwap.RootProvider;
 
 const swapIndicatorVariants = tv({
   defaultVariants: {
@@ -73,6 +68,7 @@ type SwapProps = SwapBaseProps & {
   on: React.ReactNode;
 };
 
+export const useSwapContext = useArkSwapContext;
 export const Swap = (props: SwapProps) => {
   const {
     variant = "fade",

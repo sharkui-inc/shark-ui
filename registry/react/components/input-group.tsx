@@ -5,19 +5,20 @@ import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "@/registry/react/components/button";
-import { Input } from "@/registry/react/components/input";
+import { Input, inputHeightVars } from "@/registry/react/components/input";
 import { Textarea } from "@/registry/react/components/textarea";
 
 const inpuGroupVariants = tv({
   base: [
+    "[--input-group-addon-size:--spacing(6)]",
+    "[--input-group-height:var(--field-height)]",
+    "[--input-group-inset:calc((var(--input-group-height)-2px-var(--input-group-addon-size))/2)]",
     "group/input-group",
     "relative",
-    "w-full min-w-0",
+    "h-(--field-height) min-h-(--field-height) w-full min-w-0",
     "flex items-center",
     "font-normal text-base md:text-sm",
     "bg-background dark:bg-input/32",
-    "[--input-group-addon-size:--spacing(6)]",
-    "[--input-group-inset:calc((var(--input-group-height)-2px-var(--input-group-addon-size))/2)]",
     "rounded-lg",
     "border border-input shadow-xs/4",
     "transition-[color,box-shadow]",
@@ -28,6 +29,8 @@ const inpuGroupVariants = tv({
     "data-[size=sm]:not-data-[pill=true]:[&_[data-inline=true]_:is([data-slot=input-group-button],[data-slot=kbd])]:rounded-[max(0px,calc(var(--radius)*0.75-var(--input-group-inset)))]",
     "data-[pill=true]:[&_[data-inline=true]_:is([data-slot=input-group-button],[data-slot=kbd])]:rounded-full",
     "focus-within:border-ring/64 focus-within:ring-2 focus-within:ring-ring/24",
+    "pointer-coarse:*:data-[slot=input-group-button]:min-h-11 pointer-coarse:*:data-[slot=input-group-button]:min-w-11",
+    "pointer-coarse:[&>[data-slot=input-group-addon]_[data-slot=input-group-button]]:min-h-11 pointer-coarse:[&>[data-slot=input-group-addon]_[data-slot=input-group-button]]:min-w-11",
     "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-[3px] has-[[data-slot][aria-invalid=true]]:ring-destructive/24",
     "dark:has-[[data-slot][aria-invalid=true]]:border-destructive-foreground dark:has-[[data-slot][aria-invalid=true]]:ring-destructive-foreground/32",
     "motion-reduce:transition-none",
@@ -48,22 +51,9 @@ const inpuGroupVariants = tv({
       true: "",
     },
     size: {
-      lg: [
-        "h-11 md:h-10",
-        "[--input-group-height:--spacing(11)] md:[--input-group-height:--spacing(10)]",
-        "px-[calc(--spacing(3.5)-1px)]",
-      ],
-      md: [
-        "h-10 md:h-9",
-        "[--input-group-height:--spacing(10)] md:[--input-group-height:--spacing(9)]",
-        "px-[calc(--spacing(3)-1px)]",
-      ],
-      sm: [
-        "h-9 md:h-8",
-        "[--input-group-height:--spacing(9)] md:[--input-group-height:--spacing(8)]",
-        "px-[calc(--spacing(2.5)-1px)]",
-        "rounded-md",
-      ],
+      lg: [inputHeightVars.lg, "px-[calc(--spacing(3.5)-1px)]"],
+      md: [inputHeightVars.md, "px-[calc(--spacing(3)-1px)]"],
+      sm: [inputHeightVars.sm, "px-[calc(--spacing(2.5)-1px)]", "rounded-md"],
     },
   },
 });
@@ -165,7 +155,6 @@ export const InputGroupAddon = (props: InputGroupAddonProps) => {
 
 const inputGroupButtonVariants = tv({
   base: [
-    "relative",
     "text-sm",
     "shadow-none",
     "focus-visible:border-transparent focus-visible:ring-0",

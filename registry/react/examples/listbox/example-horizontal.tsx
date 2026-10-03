@@ -13,45 +13,44 @@ import {
 const Example = () => (
   <Field className="w-full">
     <Listbox
-      className="mx-auto w-full max-w-5xl gap-5 px-4 sm:px-6 lg:px-8"
+      className="w-full"
       collection={collection}
       defaultValue={[collection.items[0].title]}
       orientation="horizontal"
     >
-      <ListboxContent>
-        <div className="flex min-w-max gap-3 pb-2 sm:gap-4">
-          {collection.items.map((item) => (
-            <ListboxItem
-              className="group/album relative w-40 shrink-0 flex-col gap-3 rounded-2xl border border-transparent bg-transparent p-0 text-start transition-[border-color,box-shadow,transform] duration-150 ease-out sm:w-48"
-              item={item}
-              key={item.title}
-              showIndicator={false}
-            >
-              <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-muted shadow-xs/4">
+      <ListboxContent className="gap-3">
+        {collection.items.map((item) => (
+          <ListboxItem
+            className="group/album w-44 shrink-0 flex-col items-stretch gap-0 rounded-2xl p-1.5 data-[state=checked]:bg-accent"
+            item={item}
+            key={item.title}
+            showIndicator={false}
+          >
+            <div className="flex w-full min-w-0 flex-col gap-2.5">
+              <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-muted">
                 <img
                   alt=""
-                  className="size-full object-cover transition-transform duration-150 ease-out motion-reduce:transition-none"
-                  height={384}
+                  className="size-full object-cover"
+                  height={352}
                   src={item.artwork}
-                  width={384}
+                  width={352}
                 />
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-foreground/64 to-transparent" />
-                <span className="absolute inset-s-3 bottom-3 inline-flex h-7 items-center rounded-full bg-background/96 px-2.5 font-medium text-foreground text-xs shadow-xs/4">
+                <span className="absolute inset-s-2 bottom-2 inline-flex h-7 items-center rounded-full bg-background/96 px-2.5 font-medium text-foreground text-xs">
                   {item.year}
                 </span>
+                <ListboxItemIndicator className="inset-e-2 top-2 size-7 translate-y-0 rounded-full bg-background/96 opacity-0 group-data-[state=checked]/album:opacity-100 [&_svg]:size-3.5 [&_svg]:text-foreground" />
               </div>
-              <div className="min-w-0 px-3 pb-3">
-                <ListboxItemText className="block truncate font-medium text-base">
+              <div className="min-w-0 px-1 pb-1">
+                <ListboxItemText className="block w-full truncate font-medium">
                   {item.title}
                 </ListboxItemText>
                 <p className="truncate text-muted-foreground text-sm">
                   {item.artist}
                 </p>
               </div>
-              <ListboxItemIndicator className="absolute inset-e-3 top-3 flex size-7 shrink-0 items-center justify-center rounded-full border border-transparent bg-background/96 opacity-0 shadow-xs/4 transition-opacity duration-150 ease-out group-data-[state=checked]/album:opacity-100 motion-reduce:transition-none [&_svg]:size-3.5 [&_svg]:text-foreground" />
-            </ListboxItem>
-          ))}
-        </div>
+            </div>
+          </ListboxItem>
+        ))}
       </ListboxContent>
     </Listbox>
   </Field>

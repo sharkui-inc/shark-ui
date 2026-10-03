@@ -2,7 +2,6 @@
 
 import {
   AngleSlider as ArkAngleSlider,
-  useAngleSlider as useArkAngleSlider,
   useAngleSliderContext as useArkAngleSliderContext,
 } from "@ark-ui/react/angle-slider";
 import { createContext } from "@ark-ui/react/utils";
@@ -10,9 +9,6 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { FieldLabel } from "@/registry/react/components/field";
 import { FormatNumber } from "@/registry/react/components/format";
-
-export const useCircularSlider = useArkAngleSlider;
-export const useCircularSliderContext = useArkAngleSliderContext;
 
 interface CircularSliderContextValue {
   ringRadius: number;
@@ -27,26 +23,7 @@ const [CircularSliderContextProvider, _useCircularSlider] =
     providerName: "CircularSlider",
   });
 
-export interface CircularSliderRootProviderProps
-  extends React.ComponentProps<typeof ArkAngleSlider.RootProvider>,
-    Partial<Pick<CircularSliderContextValue, "thickness" | "size">> {}
-
-export const CircularSliderRootProvider = (
-  props: CircularSliderRootProviderProps
-) => {
-  const { size = 100, thickness = 6, children, ...rest } = props;
-
-  return (
-    <CircularSliderContextProvider
-      value={getCircularSliderContextValue(size, thickness)}
-    >
-      <ArkAngleSlider.RootProvider {...rest}>
-        {children}
-      </ArkAngleSlider.RootProvider>
-    </CircularSliderContextProvider>
-  );
-};
-
+export const useCircularSliderContext = useArkAngleSliderContext;
 export interface CircularSliderProps
   extends React.ComponentProps<typeof ArkAngleSlider.Root>,
     Partial<Pick<CircularSliderContextValue, "thickness" | "size">> {

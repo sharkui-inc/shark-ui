@@ -24,9 +24,7 @@ const ComboboxGroups = () => {
     <Combobox
       className="w-full max-w-64"
       collection={collection}
-      onInputValueChange={({ inputValue, reason }) =>
-        filter(reason === "item-select" ? "" : inputValue)
-      }
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
       <ComboboxInput placeholder="Select a timezone" />
       <ComboboxContent className="min-w-60">

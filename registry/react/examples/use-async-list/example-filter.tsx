@@ -31,7 +31,7 @@ interface User {
   role: string;
 }
 
-const UseAsyncListDemo = () => {
+const Example = () => {
   const list = useAsyncList<User>({
     initialItems: mockUsers.slice(0, LIMIT),
     async load({ filterText, signal }) {
@@ -263,4 +263,4 @@ const mockUsers: User[] = [
   },
 ];
 
-export default UseAsyncListDemo;
+export default Example;

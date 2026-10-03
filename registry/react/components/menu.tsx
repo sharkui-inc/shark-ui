@@ -4,18 +4,15 @@ import { Portal } from "@ark-ui/react";
 import { ark } from "@ark-ui/react/factory";
 import {
   Menu as ArkMenu,
-  useMenu as useArkMenu,
   useMenuContext as useArkMenuContext,
 } from "@ark-ui/react/menu";
 import { CheckIcon, ChevronRightIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+import { Separator } from "@/registry/react/components/separator";
 
-export const useMenu = useArkMenu;
 export const useMenuContext = useArkMenuContext;
-export const MenuRootProvider = ArkMenu.RootProvider;
-
 export const Menu = (props: React.ComponentProps<typeof ArkMenu.Root>) => {
   const {
     lazyMount = true,
@@ -117,21 +114,15 @@ export const MenuGroup = (props: MenuGroupProps) => {
   );
 };
 
-export const menuSeparatorVariants = tv({
-  base: "my-1 h-px bg-border",
-});
-
 export const MenuSeparator = (
   props: React.ComponentProps<typeof ArkMenu.Separator>
 ) => {
   const { className, ...rest } = props;
 
   return (
-    <ArkMenu.Separator
-      className={cn(menuSeparatorVariants(), className)}
-      data-slot="menu-separator"
-      {...rest}
-    />
+    <Separator asChild className={cn("my-1 border-0", className)}>
+      <ArkMenu.Separator data-slot="menu-separator" {...rest} />
+    </Separator>
   );
 };
 

@@ -3,7 +3,7 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export interface TagsInputThumbProps extends ThumbCardProps {}
 
-export const TagsInputThumb = ({ ...props }: TagsInputThumbProps) => (
+export const TagsInputThumb = (props: TagsInputThumbProps) => (
   <ThumbCard {...props}>
     <div className="flex min-h-8 w-full max-w-52 flex-wrap items-center gap-1 rounded-lg border border-input bg-muted p-1 pe-4 shadow-sm/4">
       <div className="flex h-4.5 items-center gap-1 rounded-md border border-border bg-secondary px-1.5">

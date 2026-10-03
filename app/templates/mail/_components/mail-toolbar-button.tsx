@@ -20,17 +20,18 @@ interface MailToolbarButtonProps {
   variant?: "default" | "outline" | "secondary";
 }
 
-export const MailToolbarButton = ({
-  children,
-  form,
-  label,
-  onClick,
-  pressed,
-  size = "icon-sm",
-  tooltip = true,
-  type = "button",
-  variant,
-}: MailToolbarButtonProps) => {
+export const MailToolbarButton = (props: MailToolbarButtonProps) => {
+  const {
+    children,
+    form,
+    label,
+    onClick,
+    pressed,
+    size = "icon-sm",
+    tooltip = true,
+    type = "button",
+    variant,
+  } = props;
   const button = (
     <Button
       aria-label={label}

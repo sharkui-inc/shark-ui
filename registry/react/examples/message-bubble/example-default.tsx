@@ -3,7 +3,7 @@ import {
   MessageBubbleContent,
 } from "@/registry/react/components/message-bubble";
 
-const Example = () => (
+const MessageBubbleDemo = () => (
   <div className="flex w-full max-w-sm flex-col gap-3">
     <MessageBubble>
       <MessageBubbleContent>
@@ -13,4 +13,4 @@ const Example = () => (
   </div>
 );
 
-export default Example;
+export default MessageBubbleDemo;

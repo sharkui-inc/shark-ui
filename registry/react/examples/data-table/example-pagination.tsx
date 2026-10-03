@@ -129,39 +129,41 @@ interface InventoryItem {
 
 const columnHelper = createColumnHelper<DataTableFeatures, InventoryItem>();
 
-const SelectAllCheckbox = ({
-  table,
-}: {
+const SelectAllCheckbox = (props: {
   table: TanStackTable<DataTableFeatures, InventoryItem>;
-}) => (
-  <>
-    <span className="sr-only">Select rows</span>
+}) => {
+  const { table } = props;
+  return (
+    <>
+      <span className="sr-only">Select rows</span>
+      <Checkbox
+        aria-label="Select all"
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={({ checked }) => {
+          table.toggleAllPageRowsSelected(!!checked);
+        }}
+      />
+    </>
+  );
+};
+
+const SelectRowCheckbox = (props: {
+  row: Row<DataTableFeatures, InventoryItem>;
+}) => {
+  const { row } = props;
+  return (
     <Checkbox
-      aria-label="Select all"
-      checked={
-        table.getIsAllPageRowsSelected() ||
-        (table.getIsSomePageRowsSelected() && "indeterminate")
-      }
+      aria-label="Select row"
+      checked={row.getIsSelected()}
       onCheckedChange={({ checked }) => {
-        table.toggleAllPageRowsSelected(!!checked);
+        row.toggleSelected(!!checked);
       }}
     />
-  </>
-);
-
-const SelectRowCheckbox = ({
-  row,
-}: {
-  row: Row<DataTableFeatures, InventoryItem>;
-}) => (
-  <Checkbox
-    aria-label="Select row"
-    checked={row.getIsSelected()}
-    onCheckedChange={({ checked }) => {
-      row.toggleSelected(!!checked);
-    }}
-  />
-);
+  );
+};
 
 const columns = columnHelper.columns([
   columnHelper.display({

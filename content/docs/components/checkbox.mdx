@@ -69,13 +69,9 @@ Use the `checked` and `onCheckedChange` props to control the checkbox.
 
 ### Invalid
 
-Use the `invalid` prop to indicate an invalid state.
-
 <ComponentPreview componentName="checkbox" fileName="example-invalid" />
 
 ### Disabled
-
-Use the `disabled` prop to disable the checkbox.
 
 <ComponentPreview componentName="checkbox" fileName="example-disabled" />
 
@@ -83,7 +79,7 @@ Use the `disabled` prop to disable the checkbox.
 
 ### With Field
 
-Use `Field` and `FieldLabel` to label a checkbox and add supporting text.
+Use [Field](/docs/components/field) for a label and description.
 
 <ComponentPreview componentName="checkbox" fileName="example-with-field" />
 
@@ -108,6 +104,10 @@ Use `maxSelectedValues` on `CheckboxGroup` to cap how many boxes can be checked.
 ### Card Style
 
 <ComponentPreview componentName="checkbox" fileName="example-card" />
+
+### Form Integration
+
+<ComponentPreview componentName="checkbox" fileName="example-form" />
 
 ## RTL
 
@@ -141,14 +141,6 @@ Groups related checkboxes with consistent layout.
 | `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `maxSelectedValues` | `number` | `-` |
 | `className` | `string` | `-` |
-
-### CheckboxRootProvider
-
-Provides a Checkbox API created with `useCheckbox` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseCheckboxReturn` | `required` |
 
 ### CheckboxIndicator
 

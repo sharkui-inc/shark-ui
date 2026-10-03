@@ -33,7 +33,7 @@ npx shadcn@latest add @shark/listbox
 
 <Steps>
 
-<Step>This component depends on [Field](/docs/components/field) and [Menu](/docs/components/menu). Install them first if you haven't already.</Step>
+<Step>This component depends on [Field](/docs/components/field), [Menu](/docs/components/menu), and [Separator](/docs/components/separator). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
@@ -60,6 +60,7 @@ Listbox
 ├── ListboxValueText
 └── ListboxContent
     ├── ListboxEmpty
+    ├── ListboxSeparator
     └── ListboxItemGroup
         ├── ListboxItemGroupLabel
         └── ListboxItem
@@ -71,7 +72,7 @@ Listbox
 
 ## Usage
 
-```tsx 
+```tsx
 import { createListCollection } from "@ark-ui/react";
 import {
   Listbox,
@@ -112,9 +113,13 @@ Use `value` and `onValueChange` to control the listbox externally.
 
 ### Disabled
 
-Disable the entire listbox with the `disabled` prop.
-
 <ComponentPreview componentName="listbox" fileName="example-disabled" />
+
+### Disabled Item
+
+Set `disabled: true` on a collection item to disable that option.
+
+<ComponentPreview componentName="listbox" fileName="example-disabled-item" />
 
 ## Orientation
 
@@ -152,8 +157,7 @@ Set `selectionMode="none"` to disable selection.
 
 ### With Field
 
-Use `ListboxLabel` inside `Listbox` to name both the filter input and the
-selectable list. `Field` is optional for the label association.
+Use `ListboxLabel` to name the list.
 
 <ComponentPreview componentName="listbox" fileName="example-with-field" />
 
@@ -208,6 +212,10 @@ Use `createGridCollection` with `columnCount`.
 ### Scrollable
 
 <ComponentPreview componentName="listbox" fileName="example-scrollable" />
+
+### Form Integration
+
+<ComponentPreview componentName="listbox" fileName="example-form" />
 
 ## RTL
 
@@ -313,6 +321,15 @@ Label for a group. Must be used inside `ListboxItemGroup`.
 | `asChild` | `boolean` | `-` |
 | `className` | `string` | `-` |
 
+### ListboxSeparator
+
+Visual divider between groups of list items.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
 ### ListboxValueText
 
 Shows the selected value(s) as text. Use for custom trigger or display.
@@ -339,14 +356,6 @@ Shown when the list has no items. Use for empty states.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 Optional keyboard shortcut hint shown next to an item.
-
-### ListboxRootProvider
-
-Provides a Listbox API created with `useListbox` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseListboxReturn` | `required` |
 
 ### ListboxItemDescription
 

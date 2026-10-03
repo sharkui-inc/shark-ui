@@ -77,7 +77,7 @@ export const ActionBarTrigger = (props: ActionBarTriggerProps) => (
 
 const actionBarPositionerVariants = tv({
   base: [
-    "fixed inset-x-0 bottom-0 z-50",
+    "fixed inset-e-(--scrollbar-width,0px) inset-s-0 bottom-0 z-50",
     "flex",
     "px-4 pb-[calc(var(--gutter)+env(safe-area-inset-bottom,0))]",
     "pointer-events-none",
@@ -219,6 +219,7 @@ export const ActionBarBody = (props: React.ComponentProps<typeof ark.div>) => {
         "**:data-[slot=action-bar-separator]:h-2",
         className
       )}
+      data-slot="action-bar-body"
       {...rest}
     />
   );

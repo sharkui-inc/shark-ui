@@ -6,11 +6,12 @@ import { ChevronsUpDownIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+import { inputHeightVars } from "@/registry/react/components/input";
 
 export const nativeSelectVariants = tv({
   base: [
     "appearance-none",
-    "w-full min-w-0",
+    "h-(--field-height) w-full min-w-0",
     "ps-2.5 pe-8 text-start",
     "touch-manipulation select-none",
     "font-normal text-base md:text-sm",
@@ -31,9 +32,9 @@ export const nativeSelectVariants = tv({
   },
   variants: {
     size: {
-      lg: ["h-11 md:h-10", "ps-[calc(--spacing(3.5)-1px)]"],
-      md: ["h-10 md:h-9", "ps-[calc(--spacing(3)-1px)]"],
-      sm: ["h-9 md:h-8", "ps-[calc(--spacing(2.5)-1px)]", "rounded-md"],
+      lg: [inputHeightVars.lg, "ps-[calc(--spacing(3.5)-1px)]"],
+      md: [inputHeightVars.md, "ps-[calc(--spacing(3)-1px)]"],
+      sm: [inputHeightVars.sm, "ps-[calc(--spacing(2.5)-1px)]", "rounded-md"],
     },
   },
 });

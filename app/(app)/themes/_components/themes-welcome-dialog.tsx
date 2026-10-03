@@ -67,7 +67,7 @@ export const ThemesWelcomeDialog = () => {
               />
             ))}
           </div>
-          <SharkIcon className="relative size-12 drop-shadow-xs" />
+          <SharkIcon className="relative size-12 drop-shadow-xs/4" />
         </div>
 
         <AlertDialogHeader>

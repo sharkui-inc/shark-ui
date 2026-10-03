@@ -33,7 +33,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function ChartRadialStacked() {
+const ChartRadialStacked = () => {
   const totalVisitors = chartData[0].desktop + chartData[0].mobile;
 
   return (
@@ -110,6 +110,6 @@ function ChartRadialStacked() {
       </CardFooter>
     </Card>
   );
-}
+};
 
 export default ChartRadialStacked;

@@ -109,7 +109,7 @@ const items = [{ name: "delivery", required: true }] as const;
 
 ## Reading answers
 
-Answers are in the native `FormData`, including hidden steps. Empty optional answers and whitespace-only freeform answers are omitted.
+Answers are in the native `FormData`, including hidden steps, with empty and whitespace-only answers omitted.
 
 ```tsx
 function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -184,6 +184,10 @@ Add `QuestionnaireInput` with a visible label or `aria-label`.
 Skip clears the current optional answer and advances if another question exists.
 
 <ComponentPreview componentName="questionnaire" fileName="example-optional" />
+
+### Form Integration
+
+<ComponentPreview componentName="questionnaire" fileName="example-form" />
 
 ## RTL
 

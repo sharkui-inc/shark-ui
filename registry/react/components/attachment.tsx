@@ -256,7 +256,6 @@ export const AttachmentRemove = (props: ButtonProps) => {
         "transition-opacity duration-150 ease-out",
         "[@media(hover:hover)_and_(pointer:fine)]:opacity-0",
         "group-focus-within:opacity-100 group-hover:opacity-100",
-        "motion-reduce:transition-none",
         className
       )}
       data-slot="attachment-remove"

@@ -23,9 +23,7 @@ const ComboboxInvalid = () => {
       className="w-full max-w-64"
       collection={collection}
       invalid
-      onInputValueChange={({ inputValue, reason }) =>
-        filter(reason === "item-select" ? "" : inputValue)
-      }
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
       <ComboboxInput placeholder="Select a framework" />
       <ComboboxContent>

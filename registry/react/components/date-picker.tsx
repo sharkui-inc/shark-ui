@@ -2,7 +2,6 @@
 
 import {
   DatePicker as ArkDatePicker,
-  useDatePicker as useArkDatePicker,
   useDatePickerContext as useArkDatePickerContext,
 } from "@ark-ui/react/date-picker";
 import { Portal } from "@ark-ui/react/portal";
@@ -19,11 +18,7 @@ import {
   InputGroupInput,
 } from "@/registry/react/components/input-group";
 
-export const useDatePicker = useArkDatePicker;
 export const useDatePickerContext = useArkDatePickerContext;
-
-export const DatePickerRootProvider = ArkDatePicker.RootProvider;
-
 export const DatePicker = (
   props: Omit<React.ComponentProps<typeof ArkDatePicker.Root>, "inline">
 ) => {

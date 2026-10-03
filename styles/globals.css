@@ -5,6 +5,7 @@
 @import "./hitbox.css";
 @import "./shimmer.css";
 @import "./swap.css";
+@import "./drawer.css";
 
 @source "../node_modules/streamdown/dist/*.js";
 

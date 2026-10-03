@@ -57,15 +57,16 @@ interface ChatSidebarProps {
   onViewChange: (view: ChatView) => void;
 }
 
-export const ChatSidebar = ({
-  activeConversationId,
-  activeView,
-  conversations,
-  onConversationSelect,
-  onNewChat,
-  onProjectsSelect,
-  onViewChange,
-}: ChatSidebarProps) => {
+export const ChatSidebar = (props: ChatSidebarProps) => {
+  const {
+    activeConversationId,
+    activeView,
+    conversations,
+    onConversationSelect,
+    onNewChat,
+    onProjectsSelect,
+    onViewChange,
+  } = props;
   const [query, setQuery] = React.useState("");
 
   const filtered = React.useMemo(() => {
@@ -106,12 +107,12 @@ export const ChatSidebar = ({
             <SidebarMenuButton
               className="font-semibold text-foreground"
               size="lg"
-              tooltip="Shark Assistant"
+              tooltip="Onda Assistant"
             >
               <IconTile aria-hidden size="sm">
                 <BotIcon aria-hidden className="size-4" />
               </IconTile>
-              <span>Shark Assistant</span>
+              <span>Onda Assistant</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

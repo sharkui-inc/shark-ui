@@ -335,9 +335,9 @@ Render each item from `arrayField.items` with the matching path.
 ```tsx showLineNumbers title="form.tsx"
 {
   arrayField.items.map((itemId, index) => (
-    <FormischField 
-      key={itemId} 
-      of={form} 
+    <FormischField
+      key={itemId}
+      of={form}
       path={["emails", index, "contact", "address"]}
     >
       {(field) => (

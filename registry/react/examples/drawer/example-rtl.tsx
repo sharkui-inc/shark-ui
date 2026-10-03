@@ -24,9 +24,6 @@ import {
   RadioGroupItem,
 } from "@/registry/react/components/radio-group";
 
-const verticalDirections = [undefined, "up"] as const;
-const sideDirections = ["start", "end"] as const;
-
 const Example = () => {
   const { locale } = usePreviewLocale();
 
@@ -258,5 +255,8 @@ const translations = {
     },
   },
 };
+
+const verticalDirections = [undefined, "up"] as const;
+const sideDirections = ["start", "end"] as const;
 
 export default Example;

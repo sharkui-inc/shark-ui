@@ -108,12 +108,8 @@ const sleepBarShape: Record<
   rem: (props) => <SleepStackedBar dataKey="rem" {...props} />,
 };
 
-const SleepStackedBar = ({
-  dataKey,
-  height,
-  payload,
-  ...rest
-}: BarShapeProps & { dataKey: SleepStage }) => {
+const SleepStackedBar = (props: BarShapeProps & { dataKey: SleepStage }) => {
+  const { dataKey, height, payload, ...rest } = props;
   if (height <= 0) {
     return null;
   }

@@ -7,7 +7,7 @@ import {
   AttachmentTitle,
 } from "@/registry/react/components/attachment";
 
-const Example = () => (
+const AttachmentDemo = () => (
   <Attachment state="done">
     <AttachmentMedia>
       <FileTextIcon aria-hidden />
@@ -19,4 +19,4 @@ const Example = () => (
   </Attachment>
 );
 
-export default Example;
+export default AttachmentDemo;

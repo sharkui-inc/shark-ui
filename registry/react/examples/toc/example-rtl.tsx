@@ -51,22 +51,25 @@ interface TocItemProps {
   value: string;
 }
 
-const Article = ({ items }: { items: TocItemProps[] }) => (
-  <>
-    {items.map((item) => (
-      <section className="flex flex-col gap-3 pb-8" key={item.value}>
-        <h2 className="font-semibold text-lg" id={item.value}>
-          {item.label}
-        </h2>
-        <SkeletonText
-          aria-hidden
-          className="animate-none **:[div]:h-2"
-          lines={item.lines}
-        />
-      </section>
-    ))}
-  </>
-);
+const Article = (props: { items: TocItemProps[] }) => {
+  const { items } = props;
+  return (
+    <>
+      {items.map((item) => (
+        <section className="flex flex-col gap-3 pb-8" key={item.value}>
+          <h2 className="font-semibold text-lg" id={item.value}>
+            {item.label}
+          </h2>
+          <SkeletonText
+            aria-hidden
+            className="animate-none **:[div]:h-2"
+            lines={item.lines}
+          />
+        </section>
+      ))}
+    </>
+  );
+};
 
 const translations = {
   ar: {

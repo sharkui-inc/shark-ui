@@ -2,7 +2,6 @@
 
 import {
   Popover as ArkPopover,
-  usePopover as useArkPopover,
   usePopoverContext as useArkPopoverContext,
 } from "@ark-ui/react/popover";
 import { Portal } from "@ark-ui/react/portal";
@@ -15,10 +14,7 @@ import {
 } from "@/registry/react/components/popover";
 import { tooltipContentVariants } from "@/registry/react/components/tooltip";
 
-export const useToggleTooltip = useArkPopover;
 export const useToggleTooltipContext = useArkPopoverContext;
-export const ToggleTooltipRootProvider = ArkPopover.RootProvider;
-
 export const ToggleTooltip = (
   props: React.ComponentProps<typeof ArkPopover.Root>
 ) => {

@@ -37,7 +37,8 @@ export const TaskAllOption = () => (
   </>
 );
 
-export const TaskTypeOption = ({ type }: { type: TaskType }) => {
+export const TaskTypeOption = (props: { type: TaskType }) => {
+  const { type } = props;
   const TypeIcon = typeIconMap[type];
 
   return (
@@ -48,11 +49,8 @@ export const TaskTypeOption = ({ type }: { type: TaskType }) => {
   );
 };
 
-export const TaskPriorityOption = ({
-  priority,
-}: {
-  priority: TaskPriority;
-}) => {
+export const TaskPriorityOption = (props: { priority: TaskPriority }) => {
+  const { priority } = props;
   const PriorityIcon = priorityIconMap[priority];
 
   return (
@@ -66,18 +64,18 @@ export const TaskPriorityOption = ({
   );
 };
 
-export const TaskStatusOption = ({ status }: { status: TaskStatus }) => (
-  <>
-    <Status size="sm" variant={statusIndicatorVariantMap[status]} />
-    {status}
-  </>
-);
+export const TaskStatusOption = (props: { status: TaskStatus }) => {
+  const { status } = props;
+  return (
+    <>
+      <Status size="sm" variant={statusIndicatorVariantMap[status]} />
+      {status}
+    </>
+  );
+};
 
-export const TaskAssigneeOption = ({
-  assigneeId,
-}: {
-  assigneeId: TaskAssigneeId;
-}) => {
+export const TaskAssigneeOption = (props: { assigneeId: TaskAssigneeId }) => {
+  const { assigneeId } = props;
   const assignee = ASSIGNEES[assigneeId];
 
   return (
@@ -102,39 +100,43 @@ export const TaskTypeSelectValue = () => (
   </SelectValue>
 );
 
-export const TaskPrioritySelectValue = ({
-  placeholder = "Select a priority",
-}) => (
-  <SelectValue placeholder={placeholder}>
-    <SelectContext>
-      {({ value: [priority] }) => {
-        if (!priority) {
-          return null;
-        }
-        if (priority === FILTER_ALL) {
-          return <TaskAllOption />;
-        }
-        return <TaskPriorityOption priority={priority as TaskPriority} />;
-      }}
-    </SelectContext>
-  </SelectValue>
-);
+export const TaskPrioritySelectValue = (props: { placeholder?: string }) => {
+  const { placeholder = "Select a priority" } = props;
+  return (
+    <SelectValue placeholder={placeholder}>
+      <SelectContext>
+        {({ value: [priority] }) => {
+          if (!priority) {
+            return null;
+          }
+          if (priority === FILTER_ALL) {
+            return <TaskAllOption />;
+          }
+          return <TaskPriorityOption priority={priority as TaskPriority} />;
+        }}
+      </SelectContext>
+    </SelectValue>
+  );
+};
 
-export const TaskStatusSelectValue = ({ placeholder = "Select a status" }) => (
-  <SelectValue placeholder={placeholder}>
-    <SelectContext>
-      {({ value: [status] }) => {
-        if (!status) {
-          return null;
-        }
-        if (status === FILTER_ALL) {
-          return <TaskAllOption />;
-        }
-        return <TaskStatusOption status={status as TaskStatus} />;
-      }}
-    </SelectContext>
-  </SelectValue>
-);
+export const TaskStatusSelectValue = (props: { placeholder?: string }) => {
+  const { placeholder = "Select a status" } = props;
+  return (
+    <SelectValue placeholder={placeholder}>
+      <SelectContext>
+        {({ value: [status] }) => {
+          if (!status) {
+            return null;
+          }
+          if (status === FILTER_ALL) {
+            return <TaskAllOption />;
+          }
+          return <TaskStatusOption status={status as TaskStatus} />;
+        }}
+      </SelectContext>
+    </SelectValue>
+  );
+};
 
 export const TaskAssigneeSelectValue = () => (
   <SelectValue placeholder="Select an owner">

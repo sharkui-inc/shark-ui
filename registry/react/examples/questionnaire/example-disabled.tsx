@@ -15,7 +15,7 @@ import {
 } from "@/registry/react/components/questionnaire";
 import { toast } from "@/registry/react/components/toast";
 
-const QuestionnaireDisabledDemo = () => (
+const Example = () => (
   <div className="w-full max-w-md">
     <Questionnaire items={items} onSubmit={handleSubmit}>
       <QuestionnaireItem name="plan">
@@ -64,4 +64,4 @@ const choices = [
   { label: "Enterprise", value: "enterprise" },
 ] as const;
 
-export default QuestionnaireDisabledDemo;
+export default Example;

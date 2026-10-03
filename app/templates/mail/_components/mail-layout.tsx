@@ -7,15 +7,12 @@ import {
   ResizableResizeTrigger,
 } from "@/registry/react/components/resizable";
 
-export const MailLayout = ({
-  content,
-  list,
-  sidebar,
-}: {
+export const MailLayout = (props: {
   content: React.ReactNode;
   list: React.ReactNode;
   sidebar: React.ReactNode;
 }) => {
+  const { content, list, sidebar } = props;
   const isNarrow = React.useSyncExternalStore(
     (callback) => {
       const media = window.matchMedia("(max-width: 639px)");

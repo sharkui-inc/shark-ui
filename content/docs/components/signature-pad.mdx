@@ -51,6 +51,14 @@ npx shadcn@latest add @shark/signature-pad
 
 </CodeTabs>
 
+## Anatomy
+
+```text
+SignaturePad
+├── SignaturePadLabel
+└── SignaturePadControl
+```
+
 ## Usage
 
 ```tsx
@@ -59,14 +67,6 @@ import { SignaturePad } from "@/components/ui/signature-pad";
 
 ```tsx
 <SignaturePad />
-```
-
-## Anatomy
-
-```text
-SignaturePad
-├── SignaturePadLabel
-└── SignaturePadControl
 ```
 
 ## States
@@ -91,11 +91,15 @@ Use `onDrawEnd` to capture the signature as an image.
 
 <ComponentPreview componentName="signature-pad" fileName="example-image-preview" autoHeight />
 
-### With field
+### With Field
 
-Use `SignaturePadLabel` inside `SignaturePad` to focus its drawing surface when clicked. Wrap it with [Field](/docs/components/field) to add descriptions and validation messaging. The control keeps Ark's `signature pad` accessible name.
+Use `SignaturePadLabel` to name the pad, and [Field](/docs/components/field) for helper text.
 
 <ComponentPreview componentName="signature-pad" fileName="example-with-field" />
+
+### Form Integration
+
+<ComponentPreview componentName="signature-pad" fileName="example-form" />
 
 ## RTL
 
@@ -123,20 +127,11 @@ Root component. Canvas for drawing signatures. Manages strokes and export.
 
 ### SignaturePadLabel
 
-Label for the signature drawing surface. Clicking it focuses the control. The control keeps Ark's `signature pad` accessible name.
+Label for the signature drawing surface; clicking it focuses the control.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
-
-### SignaturePadRootProvider
-
-Provides a SignaturePad API created with `useSignaturePad` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseSignaturePadReturn` | `required` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/signature-pad#api-reference).

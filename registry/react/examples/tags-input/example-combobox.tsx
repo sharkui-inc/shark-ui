@@ -1,6 +1,7 @@
 "use client";
 
 import { useFilter, useListCollection } from "@ark-ui/react";
+import React from "react";
 import {
   Combobox,
   ComboboxContent,
@@ -11,11 +12,10 @@ import {
 } from "@/registry/react/components/combobox";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 import {
+  TagsInput,
   TagsInputContext,
   TagsInputInput,
   TagsInputItem,
-  TagsInputRootProvider,
-  useTagsInput,
 } from "@/registry/react/components/tags-input";
 
 const Example = () => {
@@ -25,10 +25,10 @@ const Example = () => {
     initialItems: frameworkItems,
   });
 
-  const tagsInput = useTagsInput();
+  const [tags, setTags] = React.useState<string[]>([]);
 
   const availableItems = collection.items.filter(
-    (item) => !tagsInput.value.includes(item)
+    (item) => !tags.includes(item)
   );
 
   return (
@@ -40,14 +40,18 @@ const Example = () => {
         onInputValueChange={({ inputValue }) => filter(inputValue)}
         onValueChange={({ value }) => {
           const [next] = value;
-          if (next && !tagsInput.value.includes(next)) {
-            tagsInput.addValue(next);
+          if (next && !tags.includes(next)) {
+            setTags((current) => [...current, next]);
           }
         }}
         selectionBehavior="clear"
         value={[]}
       >
-        <TagsInputRootProvider className="w-full" value={tagsInput}>
+        <TagsInput
+          className="w-full"
+          onValueChange={({ value }) => setTags(value)}
+          value={tags}
+        >
           <TagsInputContext>
             {({ value }) => (
               <>
@@ -62,7 +66,7 @@ const Example = () => {
               </>
             )}
           </TagsInputContext>
-        </TagsInputRootProvider>
+        </TagsInput>
         <ComboboxContent>
           <ComboboxList>
             <ComboboxEmpty>No frameworks found</ComboboxEmpty>

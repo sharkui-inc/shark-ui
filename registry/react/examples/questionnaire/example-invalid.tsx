@@ -17,7 +17,7 @@ import {
 } from "@/registry/react/components/questionnaire";
 import { toast } from "@/registry/react/components/toast";
 
-const QuestionnaireInvalidDemo = () => {
+const Example = () => {
   const formRef = React.useRef<HTMLFormElement>(null);
 
   React.useEffect(() => {
@@ -86,4 +86,4 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   });
 };
 
-export default QuestionnaireInvalidDemo;
+export default Example;

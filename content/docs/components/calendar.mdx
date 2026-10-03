@@ -104,8 +104,7 @@ import {
 
 ### With Field
 
-Use `CalendarLabel` to name the calendar grid. `Field` is optional for the label
-association.
+Use `CalendarLabel` to name the calendar.
 
 <ComponentPreview componentName="calendar" fileName="example-with-field" />
 
@@ -158,6 +157,10 @@ Set `showWeekNumbers` to render a week-number column. `CalendarWeekDays` and `Ca
 In `selectionMode="multiple"`, `maxSelectedDates` caps how many days can be selected.
 
 <ComponentPreview componentName="calendar" fileName="example-max-selected" />
+
+### Form Integration
+
+<ComponentPreview componentName="calendar" fileName="example-form" />
 
 ### Custom Cell Size
 
@@ -279,14 +282,6 @@ Single day cell. Clickable for selection. Shows disabled/outside styling.
 | --- | --- | --- |
 | `value` | `DateValue` | `-` |
 | `className` | `string` | `-` |
-
-### CalendarRootProvider
-
-Provides a Calendar API created with `useCalendar` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseCalendarReturn` | `required` |
 
 ### CalendarControl
 

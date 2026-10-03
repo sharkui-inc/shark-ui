@@ -62,13 +62,13 @@ Card
 ## Usage
 
 ```tsx
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle, 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
   CardAction,
   CardMedia,
 } from "@/components/ui/card";
@@ -93,7 +93,7 @@ import {
 
 ### Using props
 
-Pass `title` and `description` props directly to `CardHeader`. 
+Pass `title` and `description` props directly to `CardHeader`.
 
 ```tsx showLineNumbers
 <CardHeader title="Card Title" description="Card description">
@@ -126,8 +126,6 @@ Use the default variant for inline media content, such as a badge and metadata.
 <ComponentPreview componentName="card" fileName="example-media-default" />
 
 ### Icon
-
-Use the icon variant to apply the default icon sizing.
 
 
 <ComponentPreview componentName="card" fileName="example-icon" />
@@ -167,8 +165,8 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 Root wrapper for card layout.
 
 | Prop | Type | Default |
-| --- | --- | --- | 
-| `className` | `string` | `-` | 
+| --- | --- | --- |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 | Prop | Type | Default |
@@ -180,9 +178,9 @@ Root wrapper for card layout.
 Image, video, or media area. Often full-width at top.
 
 | Prop | Type | Default |
-| --- | --- | --- | 
+| --- | --- | --- |
 | `variant` | `"default" \| "icon" \| "image"` | `"default"` |
-| `className` | `string` | `-` | 
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CardHeader
@@ -190,10 +188,10 @@ Image, video, or media area. Often full-width at top.
 Header area. Typically holds title and optional actions.
 
 | Prop | Type | Default |
-| --- | --- | --- | 
-| `title` | `string` | `-` | 
-| `description` | `string` | `-` | 
-| `className` | `string` | `-` | 
+| --- | --- | --- |
+| `title` | `string` | `-` |
+| `description` | `string` | `-` |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CardTitle
@@ -201,8 +199,8 @@ Header area. Typically holds title and optional actions.
 Card title or heading. Bold by default.
 
 | Prop | Type | Default |
-| --- | --- | --- | 
-| `className` | `string` | `-` | 
+| --- | --- | --- |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CardDescription
@@ -210,8 +208,8 @@ Card title or heading. Bold by default.
 Card description or body text. Muted foreground for hierarchy.
 
 | Prop | Type | Default |
-| --- | --- | --- | 
-| `className` | `string` | `-` | 
+| --- | --- | --- |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CardAction
@@ -219,8 +217,8 @@ Card description or body text. Muted foreground for hierarchy.
 Action button or link in the card header.
 
 | Prop | Type | Default |
-| --- | --- | --- | 
-| `className` | `string` | `-` | 
+| --- | --- | --- |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CardContent
@@ -228,8 +226,8 @@ Action button or link in the card header.
 Main body content of the card.
 
 | Prop | Type | Default |
-| --- | --- | --- | 
-| `className` | `string` | `-` | 
+| --- | --- | --- |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CardFooter
@@ -237,6 +235,6 @@ Main body content of the card.
 Footer area. Typically holds secondary actions or metadata.
 
 | Prop | Type | Default |
-| --- | --- | --- | 
+| --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |

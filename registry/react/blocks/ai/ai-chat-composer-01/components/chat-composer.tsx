@@ -61,14 +61,15 @@ interface ChatComposerProps {
   thinkMode: boolean;
 }
 
-export const ChatComposer = ({
-  model,
-  modelOptions,
-  onModelChange,
-  onSend,
-  onThinkModeChange,
-  thinkMode,
-}: ChatComposerProps) => {
+export const ChatComposer = (props: ChatComposerProps) => {
+  const {
+    model,
+    modelOptions,
+    onModelChange,
+    onSend,
+    onThinkModeChange,
+    thinkMode,
+  } = props;
   const [draft, setDraft] = React.useState("");
   const [status, setStatus] = React.useState<PromptInputStatus>("ready");
 

@@ -7,8 +7,8 @@ Other primitives import these `tv()` bases onto their Ark parts. Do not redeclar
 | Base | Exports | Used by |
 | --- | --- | --- |
 | Button | `buttonControlVariants`, `buttonVariants` | Toggle, Tabs, Segment Group, Sidebar, Editable, Pagination |
-| Input | `inputVariants`, `inputItemVariants` | Clipboard, Combobox, Select/Listbox rows (`inputItemVariants`) |
-| Menu | `menuItemControlVariants`, `menuListVariants`, plus group/empty/separator variants | list-row density |
+| Input | `inputVariants`, `inputHeightVars` | Clipboard, Combobox, Select, Native Select, Number Input, Input Group |
+| Menu | `menuItemControlVariants`, `menuListVariants`, plus group/empty variants | list-row density |
 | Dialog | `dialogOverlayVariants`, `dialogContentVariants` | Command (content); Tour (overlay); Sheet and Alert Dialog re-export Dialog parts |
 | Tooltip | `tooltipContentVariants` | Toggle Tooltip |
 
@@ -18,8 +18,8 @@ Menu, ContextMenu, Select, Combobox, Autocomplete, Command, and Listbox use Menu
 
 - Rows: `menuItemControlVariants` (`min-h-8`, `rounded-lg`, `gap-2`). Not `rounded-xl`.
 - Floating list overlays: `menuListVariants` (`p-1`).
-- Labels / empty / separators: `menuGroupLabelVariants`, `menuEmptyVariants`, `menuSeparatorVariants`.
-- Selection rows: `menuItemControlVariants` + `inputItemVariants` (typography only).
+- Labels / empty: `menuGroupLabelVariants`, `menuEmptyVariants`. Separators render `Separator`; menu-like dividers add `my-1` inline.
+- Selection rows: `menuItemControlVariants` plus local typography classes (`touch-manipulation select-none font-normal text-base md:text-sm`).
 - `ScrollArea` wrapping a list: `p-0` on the shell, not `p-1.5` / `p-2`.
 
 HoverCard, DatePicker, ColorPicker, and default Popover are content popovers. They keep their own padding.

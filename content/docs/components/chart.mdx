@@ -70,7 +70,7 @@ import { ChartContainer, type ChartConfig } from "@/components/ui/chart"
 const chartData = [{ month: "Jan", customers: 186 }, { month: "Feb", customers: 305 }]
 const chartConfig = { customers: { label: "Customers", color: "var(--chart-1)" } } satisfies ChartConfig
 
-<ChartContainer config={chartConfig} className="h-[200px] w-full max-w-sm">
+<ChartContainer config={chartConfig}>
   <BarChart accessibilityLayer data={chartData}>
     <Bar dataKey="customers" fill="var(--color-customers)" />
   </BarChart>
@@ -150,7 +150,7 @@ Add a tooltip to reveal values on hover and keyboard focus:
 
 ## Series configuration
 
-Add a label, color, and optional icon to each series. Use `theme` to set separate colors for light and dark mode.
+Add a label, color, and optional icon to each series, and set `theme` for separate light and dark colors.
 
 ```tsx
 import { MonitorIcon } from "lucide-react"

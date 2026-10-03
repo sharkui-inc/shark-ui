@@ -14,10 +14,7 @@ export const useToggle = useArkToggle;
 export const useToggleContext = useArkToggleContext;
 
 export const toggleVariants = tv({
-  base: [
-    "relative",
-    "data-[state=on]:bg-input/64 dark:data-[state=on]:bg-input/64",
-  ],
+  base: ["data-[state=on]:bg-input/64 dark:data-[state=on]:bg-input/64"],
   defaultVariants: {
     size: "md",
   },
@@ -37,27 +34,30 @@ export interface ToggleProps
   /**
    * The variant of the toggle
    *
-   * @default "outline"
+   * @default "default"
    */
-  variant?: Extract<
-    VariantProps<typeof buttonVariants>["variant"],
-    "outline" | "ghost"
-  >;
+  variant?: "default" | "outline";
 }
 
 export const Toggle = (props: ToggleProps) => {
   const {
-    variant = "ghost",
+    variant = "default",
     size = "md",
     pill = false,
     className,
     ...rest
   } = props;
+  const buttonVariant = variant === "default" ? "ghost" : variant;
 
   return (
     <ArkToggle.Root
       className={cn(
-        buttonVariants({ clickEffect: false, pill, size, variant }),
+        buttonVariants({
+          clickEffect: false,
+          pill,
+          size,
+          variant: buttonVariant,
+        }),
         toggleVariants({ size }),
         className
       )}

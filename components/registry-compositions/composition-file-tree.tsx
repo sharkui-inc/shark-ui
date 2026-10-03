@@ -59,44 +59,40 @@ interface CompositionTreeNodeViewProps {
   node: CompositionTreeNode;
 }
 
-const CompositionTreeNodeView = ({
-  indexPath,
-  node,
-}: CompositionTreeNodeViewProps) => (
-  <TreeViewNode indexPath={indexPath} node={node}>
-    {node.children ? (
-      <TreeViewBranch>
-        <TreeViewBranchItem
-          expandedIcon={FolderOpenIcon}
-          icon={FolderIcon}
-          showIndicator
-        >
-          {node.name}
-        </TreeViewBranchItem>
-        <TreeViewBranchContent>
-          {node.children.map((child, index) => (
-            <CompositionTreeNodeView
-              indexPath={[...indexPath, index]}
-              key={child.id}
-              node={child}
-            />
-          ))}
-        </TreeViewBranchContent>
-      </TreeViewBranch>
-    ) : (
-      <TreeViewContent>
-        <TreeViewItem icon={FileCode2Icon}>{node.name}</TreeViewItem>
-      </TreeViewContent>
-    )}
-  </TreeViewNode>
-);
+const CompositionTreeNodeView = (props: CompositionTreeNodeViewProps) => {
+  const { indexPath, node } = props;
+  return (
+    <TreeViewNode indexPath={indexPath} node={node}>
+      {node.children ? (
+        <TreeViewBranch>
+          <TreeViewBranchItem
+            expandedIcon={FolderOpenIcon}
+            icon={FolderIcon}
+            showIndicator
+          >
+            {node.name}
+          </TreeViewBranchItem>
+          <TreeViewBranchContent>
+            {node.children.map((child, index) => (
+              <CompositionTreeNodeView
+                indexPath={[...indexPath, index]}
+                key={child.id}
+                node={child}
+              />
+            ))}
+          </TreeViewBranchContent>
+        </TreeViewBranch>
+      ) : (
+        <TreeViewContent>
+          <TreeViewItem icon={FileCode2Icon}>{node.name}</TreeViewItem>
+        </TreeViewContent>
+      )}
+    </TreeViewNode>
+  );
+};
 
-export const CompositionFileTree = ({
-  activePath,
-  label,
-  onSelect,
-  tree,
-}: CompositionFileTreeProps) => {
+export const CompositionFileTree = (props: CompositionFileTreeProps) => {
+  const { activePath, label, onSelect, tree } = props;
   const nodes = tree.flatMap((node, index) => {
     const treeNode = toTreeNode(node, [index]);
     return treeNode ? [treeNode] : [];

@@ -5,7 +5,7 @@ import {
   SourcesTrigger,
 } from "@/registry/react/components/sources";
 
-const Example = () => (
+const SourcesDemo = () => (
   <div className="flex w-full max-w-md flex-col gap-3">
     <Sources defaultOpen>
       <SourcesTrigger count={2} />
@@ -17,4 +17,4 @@ const Example = () => (
   </div>
 );
 
-export default Example;
+export default SourcesDemo;

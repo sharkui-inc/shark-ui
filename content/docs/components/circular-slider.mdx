@@ -75,7 +75,7 @@ import { CircularSlider } from "@/components/ui/circular-slider";
 
 ### With Field
 
-Use `CircularSliderLabel` inside `CircularSlider` to provide its accessible name.
+Use `CircularSliderLabel` to name the slider.
 
 <ComponentPreview componentName="circular-slider" fileName="example-with-field" />
 
@@ -108,6 +108,10 @@ Use `markersAtSteps` with `step` to align markers with step positions.
 Use `CircularSliderValue` to show the current value. The `prefix` and `suffix` props customize the display.
 
 <ComponentPreview componentName="circular-slider" fileName="example-with-value" />
+
+### Form Integration
+
+<ComponentPreview componentName="circular-slider" fileName="example-form" />
 
 ### Custom markers
 
@@ -157,18 +161,6 @@ Shows the current angle value (degrees or custom format).
 | `prefix` | `React.ReactNode \| string` | `-` |
 | `suffix` | `React.ReactNode \| string` | `-` |
 | `className` | `string` | `-` |
-
-### CircularSliderRootProvider
-
-Provides a CircularSlider API created with `useCircularSlider` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseCircularSliderReturn` | `required` |
-| `size` | `number` | `100` |
-| `thickness` | `number` | `6` |
-
-`size` and `thickness` must match the visual CSS on the consumer tree so Thumb/Marker metrics stay aligned.
 
 ### CircularSliderThumb
 

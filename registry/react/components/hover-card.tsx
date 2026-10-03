@@ -3,19 +3,15 @@
 import { Portal } from "@ark-ui/react";
 import {
   HoverCard as ArkHoverCard,
-  useHoverCard as useArkHoverCard,
   useHoverCardContext as useArkHoverCardContext,
 } from "@ark-ui/react/hover-card";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useHoverCard = useArkHoverCard;
-export const useHoverCardContext = useArkHoverCardContext;
-export const HoverCardRootProvider = ArkHoverCard.RootProvider;
-
 interface HoverCardProps
   extends React.ComponentProps<typeof ArkHoverCard.Root> {}
 
+export const useHoverCardContext = useArkHoverCardContext;
 export const HoverCard = (props: HoverCardProps) => {
   const {
     lazyMount = true,

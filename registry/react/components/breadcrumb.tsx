@@ -4,6 +4,7 @@ import { ark } from "@ark-ui/react/factory";
 import { ChevronRightIcon, MoreHorizontalIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
+import { Separator } from "@/registry/react/components/separator";
 
 interface BreadcrumbProps extends React.ComponentProps<typeof ark.nav> {
   /**
@@ -93,15 +94,24 @@ export const BreadcrumbSeparator = (
   const { children, className, ...rest } = props;
 
   return (
-    <ark.li
-      className={cn("opacity-64 [&_svg]:size-4", className)}
-      data-slot="breadcrumb-separator"
-      {...rest}
-      aria-hidden
-      role="presentation"
+    <Separator
+      asChild
+      className={cn(
+        "bg-transparent opacity-64",
+        "data-[orientation=horizontal]:h-auto data-[orientation=horizontal]:w-auto",
+        "[&_svg]:size-4",
+        className
+      )}
     >
-      {children ?? <ChevronRightIcon className="size-4 rtl:rotate-180" />}
-    </ark.li>
+      <ark.li
+        data-slot="breadcrumb-separator"
+        {...rest}
+        aria-hidden
+        role="presentation"
+      >
+        {children ?? <ChevronRightIcon className="size-4 rtl:rotate-180" />}
+      </ark.li>
+    </Separator>
   );
 };
 

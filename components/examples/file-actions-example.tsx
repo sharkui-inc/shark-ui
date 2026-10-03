@@ -35,9 +35,9 @@ import {
   ListboxItemDescription,
   ListboxItemGroup,
   ListboxItemText,
+  ListboxSeparator,
   ListboxShortcut,
 } from "@/registry/react/components/listbox";
-import { Separator } from "@/registry/react/components/separator";
 
 export const FileActionsExample = (props: React.ComponentProps<"div">) => {
   const [dialog, setDialog] = React.useState<"delete" | "edit" | "new" | null>(
@@ -84,7 +84,7 @@ export const FileActionsExample = (props: React.ComponentProps<"div">) => {
                 <ListboxShortcut>⌘E</ListboxShortcut>
               </ListboxItem>
             </ListboxItemGroup>
-            <Separator aria-hidden="true" />
+            <ListboxSeparator />
             <ListboxItemGroup heading="Danger zone">
               <ListboxItem item={collection.items[2]} variant="destructive">
                 <Trash2Icon aria-hidden />

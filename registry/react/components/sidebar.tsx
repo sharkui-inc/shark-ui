@@ -8,7 +8,6 @@ import type { VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/registry/react/components/button";
 import { useHotkey } from "@/registry/react/components/hotkeys";
-import { Input } from "@/registry/react/components/input";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
 import {
@@ -62,6 +61,12 @@ interface SidebarProviderProps extends React.ComponentProps<typeof ark.div> {
    */
   defaultOpen?: boolean;
   /**
+   * The default open state of the mobile sheet.
+   *
+   * @default false
+   */
+  defaultOpenMobile?: boolean;
+  /**
    * The function to call when the open state of the sidebar changes.
    */
   onOpenChange?: (details: { open: boolean }) => void;
@@ -74,6 +79,7 @@ interface SidebarProviderProps extends React.ComponentProps<typeof ark.div> {
 export const SidebarProvider = (props: SidebarProviderProps) => {
   const {
     defaultOpen = true,
+    defaultOpenMobile = false,
     open: openProp,
     onOpenChange: setOpenProp,
     className,
@@ -82,7 +88,7 @@ export const SidebarProvider = (props: SidebarProviderProps) => {
   } = props;
 
   const isMobile = useIsMobile();
-  const [openMobile, setOpenMobile] = React.useState(false);
+  const [openMobile, setOpenMobile] = React.useState(defaultOpenMobile);
 
   const [_open, _setOpen] = React.useState(defaultOpen);
   const open = openProp ?? _open;
@@ -391,19 +397,6 @@ export const SidebarInset = (props: React.ComponentProps<typeof ark.main>) => {
   );
 };
 
-export const SidebarInput = (props: React.ComponentProps<typeof Input>) => {
-  const { className, ...rest } = props;
-
-  return (
-    <Input
-      className={cn("h-8 w-full bg-background shadow-none", className)}
-      data-sidebar="input"
-      data-slot="sidebar-input"
-      {...rest}
-    />
-  );
-};
-
 export const SidebarHeader = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
 
@@ -447,6 +440,12 @@ export const SidebarSeparator = (
 
 interface SidebarContentProps extends React.ComponentProps<typeof ark.div> {
   /**
+   * Whether to prevent scroll chaining to the parent.
+   *
+   * @default true
+   */
+  overscrollContain?: boolean;
+  /**
    * Whether to add a scroll fade effect to the sidebar content.
    *
    * @default true
@@ -454,14 +453,19 @@ interface SidebarContentProps extends React.ComponentProps<typeof ark.div> {
   scrollFade?: boolean;
 }
 export const SidebarContent = (props: SidebarContentProps) => {
-  const { scrollFade = true, className, ...rest } = props;
+  const {
+    overscrollContain = true,
+    scrollFade = true,
+    className,
+    ...rest
+  } = props;
 
   return (
     <ScrollArea
       className="flex-1 [--fade-size:3rem] **:data-[slot=scroll-area-scrollbar]:hidden"
       fill
       orientation="vertical"
-      overscrollContain
+      overscrollContain={overscrollContain}
       scrollFade={scrollFade}
     >
       <ark.div
@@ -537,7 +541,6 @@ export const SidebarGroupAction = (
         "size-6 md:size-6",
         "text-sidebar-foreground",
         "transition-transform duration-200 ease-linear",
-        "motion-reduce:transition-none",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         "[&_svg]:size-4",
         "after:absolute after:-inset-2 md:after:hidden",
@@ -616,11 +619,9 @@ interface SidebarMenuButtonProps
   tooltip?: string | React.ComponentProps<typeof TooltipContent>;
 }
 
-export const SidebarMenuButton = ({
-  tooltip,
-  ...props
-}: SidebarMenuButtonProps) => {
+export const SidebarMenuButton = (props: SidebarMenuButtonProps) => {
   const {
+    tooltip,
     isActive = false,
     size = "md",
     variant = "ghost",
@@ -640,7 +641,6 @@ export const SidebarMenuButton = ({
         "h-8 p-2 md:h-8",
         "overflow-hidden",
         "transition-[width,height,padding] duration-200 ease-linear",
-        "motion-reduce:transition-none",
         "data-[size=sm]:h-7 data-[size=sm]:text-xs",
         "data-[size=lg]:h-12",
         "[&_svg]:mx-0",
@@ -649,9 +649,8 @@ export const SidebarMenuButton = ({
         "group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0!",
         "group-data-[collapsible=icon]:[&>:not(:first-child)]:hidden",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "active:bg-sidebar-accent active:text-sidebar-accent-foreground",
-        "data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground",
+        "data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground",
         "group-has-data-[sidebar=menu-action]/menu-item:pe-8",
         className
       )}
@@ -670,16 +669,16 @@ export const SidebarMenuButton = ({
     return button;
   }
 
-  if (typeof tooltip === "string") {
-    tooltip = {
-      children: tooltip,
-    };
-  }
+  const tooltipProps =
+    typeof tooltip === "string" ? { children: tooltip } : tooltip;
 
   return (
     <Tooltip ids={{ trigger: triggerId }} positioning={{ placement: "right" }}>
       <TooltipTrigger asChild>{button}</TooltipTrigger>
-      <TooltipContent hidden={state !== "collapsed" || isMobile} {...tooltip} />
+      <TooltipContent
+        hidden={state !== "collapsed" || isMobile}
+        {...tooltipProps}
+      />
     </Tooltip>
   );
 };
@@ -799,17 +798,20 @@ export const SidebarMenuSub = (props: React.ComponentProps<typeof ark.ul>) => {
   );
 };
 
-export const SidebarMenuSubItem = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof ark.li>) => (
-  <ark.li
-    className={cn("group/menu-sub-item relative", className)}
-    data-sidebar="menu-sub-item"
-    data-slot="sidebar-menu-sub-item"
-    {...props}
-  />
-);
+export const SidebarMenuSubItem = (
+  props: React.ComponentProps<typeof ark.li>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.li
+      className={cn("group/menu-sub-item relative", className)}
+      data-sidebar="menu-sub-item"
+      data-slot="sidebar-menu-sub-item"
+      {...rest}
+    />
+  );
+};
 
 interface SidebarMenuSubButtonProps
   extends React.ComponentProps<typeof ark.a>,
@@ -833,7 +835,6 @@ export const SidebarMenuSubButton = (props: SidebarMenuSubButtonProps) => {
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         "active:bg-sidebar-accent active:text-sidebar-accent-foreground",
         "data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground",
-        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "[&>span:last-child]:truncate",
         "[&_svg]:text-sidebar-accent-foreground",
         className

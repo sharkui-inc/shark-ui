@@ -81,17 +81,13 @@ Use `value` and `onValueChange` to control the date input.
 
 ### Disabled
 
-Use the `disabled` prop to prevent user interaction.
-
 <ComponentPreview componentName="date-input" fileName="example-disabled" />
 
 ### Invalid
 
-Use the `invalid` prop to indicate an error state.
-
 <ComponentPreview componentName="date-input" fileName="example-invalid" />
 
-## Sizes
+## Size
 
 Use the `size` prop to change the input height.
 
@@ -111,8 +107,7 @@ Use the `size` prop to change the input height.
 
 ### With Field
 
-Put `DateInputLabel` inside `DateInput` to name and focus the visible date
-segments. `Field` is optional for the label association and provides helper text.
+Use `DateInputLabel` to name the input, and [Field](/docs/components/field) for a description.
 
 <ComponentPreview componentName="date-input" fileName="example-with-field" />
 
@@ -153,6 +148,10 @@ Use `min` and `max` to restrict the selectable date range.
 Use the `showClear` prop to display a clear button when the date input has a value.
 
 <ComponentPreview componentName="date-input" fileName="example-with-clear-button" />
+
+### Form Integration
+
+<ComponentPreview componentName="date-input" fileName="example-form" />
 
 ### Custom Separator
 
@@ -197,15 +196,6 @@ Accessible label. Render as a child of `DateInput`.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
-
-### DateInputRootProvider
-
-Provides a DateInput API created with `useDateInput` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseDateInputReturn` | `required` |
-
 ---
 
 For additional props and behavior, see the [Ark UI documentation](https://ark-ui.com/docs/components/date-input#api-reference).

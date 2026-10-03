@@ -107,16 +107,13 @@ Control the selected date with `value` and `onValueChange`.
 
 ### Invalid
 
-Use the `invalid` prop to mark the date picker as invalid.
-
 <ComponentPreview componentName="date-picker" fileName="example-invalid" />
 
 ## Examples
 
 ### With Field
 
-Use `DatePickerLabel` to name the visible trigger or input. The label uses the
-DatePicker association directly; it does not depend on `Field`.
+Use `DatePickerLabel` to name the trigger or input.
 
 <ComponentPreview componentName="date-picker" fileName="example-with-field" />
 
@@ -150,6 +147,10 @@ Use `DatePickerTimer` for time selection.
 Add quick single-date presets in a side panel.
 
 <ComponentPreview componentName="date-picker" fileName="example-with-presets" />
+
+### Form Integration
+
+<ComponentPreview componentName="date-picker" fileName="example-form" />
 
 ### Custom format
 
@@ -255,15 +256,6 @@ Quick preset button for dates. `button`
 | `className` | `string` | `-` |
 | `value` | `DateValue[]` | `-` |
 | `asChild` | `boolean` | `-` |
-
-### DatePickerRootProvider
-
-Provides a DatePicker API created with `useDatePicker` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseDatePickerReturn` | `required` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/date-picker#api-reference).

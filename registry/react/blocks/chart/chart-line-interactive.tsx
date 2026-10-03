@@ -131,7 +131,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function ChartLineInteractive() {
+const ChartLineInteractive = () => {
   const [activeChart, setActiveChart] = React.useState(["desktop"]);
   const selectedChart =
     activeChart.find(
@@ -236,6 +236,6 @@ function ChartLineInteractive() {
       </CardContent>
     </Card>
   );
-}
+};
 
 export default ChartLineInteractive;

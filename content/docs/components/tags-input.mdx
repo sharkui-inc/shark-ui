@@ -100,11 +100,9 @@ Use the `disabled` prop to disable the tags input. Users cannot add, remove, or 
 
 ### Invalid
 
-Use the `invalid` prop to mark the tags input as invalid for form validation.
-
 <ComponentPreview componentName="tags-input" fileName="example-invalid" />
 
-## Sizes
+## Size
 
 Use the `size` prop on `TagsInput` to change the control and input height.
 
@@ -182,15 +180,25 @@ Use `validate` to accept or reject tags before they are added.
 
 <ComponentPreview componentName="tags-input" fileName="example-validation" />
 
+### With Clear Button
+
+Use the `showClear` prop to display a button that clears all tags when the field has a value.
+
+<ComponentPreview componentName="tags-input" fileName="example-with-clear-button" />
+
 ### With Combobox
 
 <ComponentPreview componentName="tags-input" fileName="example-combobox" />
 
 ### With Field
 
-Use `TagsInputLabel` to name the interactive input. Wrap it with [Field](/docs/components/field) to add descriptions and validation messaging.
+Use [Field](/docs/components/field) for a label and helper text.
 
 <ComponentPreview componentName="tags-input" fileName="example-with-field" />
+
+### Form Integration
+
+<ComponentPreview componentName="tags-input" fileName="example-form" />
 
 ## RTL
 
@@ -208,7 +216,7 @@ Root component. Composes the control, input, and hidden field for form submissio
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `pill` | `boolean` | `false` |
-| `showClear` | `boolean` | `true` |
+| `showClear` | `boolean` | `false` |
 | `defaultValue` | `string[]` | `-` |
 | `value` | `string[]` | `-` |
 | `inputValue` | `string` | `-` |
@@ -269,14 +277,6 @@ Clears all tags.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `-` |
-
-### TagsInputRootProvider
-
-Provides a TagsInput API created with `useTagsInput` to descendant components.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `UseTagsInputReturn` | `required` |
 
 ### TagsInputContext
 

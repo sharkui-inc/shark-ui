@@ -6,7 +6,10 @@ const dependencies = ["@ark-ui/react"];
 const manifest: RegistryItemType = {
   dependencies,
   name: "input-otp",
-  registryDependencies: [registryUrl("/r/input.json")],
+  registryDependencies: [
+    registryUrl("/r/input.json"),
+    registryUrl("/r/separator.json"),
+  ],
   type: "registry:ui",
 };
 

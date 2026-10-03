@@ -48,17 +48,14 @@ const questionnaireSchema = z
 type QuestionnaireItemName = keyof z.infer<typeof questionnaireSchema>;
 type QuestionnaireErrors = Partial<Record<QuestionnaireItemName, string>>;
 
-const ValidationProgress = ({
-  index,
-  total,
-}: {
-  index: number;
-  total: number;
-}) => (
-  <span className="min-w-0 text-muted-foreground tabular-nums">
-    {index} / {total}
-  </span>
-);
+const ValidationProgress = (props: { index: number; total: number }) => {
+  const { index, total } = props;
+  return (
+    <span className="min-w-0 text-muted-foreground tabular-nums">
+      {index} / {total}
+    </span>
+  );
+};
 
 const QuestionnaireValidation = () => {
   const [item, setItem] = React.useState<QuestionnaireItemName>("detail");

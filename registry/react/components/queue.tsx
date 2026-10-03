@@ -201,7 +201,7 @@ export const QueueItemAction = (props: React.ComponentProps<typeof Button>) => {
     <Button
       className={cn(
         "text-muted-foreground hover:text-foreground",
-        "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:text-muted-foreground",
+        "[&_svg]:text-muted-foreground",
         className
       )}
       data-slot="queue-item-action"

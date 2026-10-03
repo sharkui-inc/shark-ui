@@ -10,13 +10,6 @@ links:
 
 import manifest from "@/registry/manifest/alert-dialog";
 
-<Alert>
-  <InfoIcon />
-  <AlertDescription>
-  Alert Dialog is built on top of the [Dialog](/docs/components/dialog) component. Check it out for more examples.
-  </AlertDescription>
-</Alert>
-
 <ComponentPreview componentName="alert-dialog" />
 
 ## Installation
@@ -77,13 +70,13 @@ AlertDialog
 ## Usage
 
 ```tsx
-import { 
-  AlertDialog, 
-  AlertDialogTrigger, 
-  AlertDialogContent, 
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
   AlertDialogHeader,
-  AlertDialogTitle, 
-  AlertDialogDescription, 
+  AlertDialogTitle,
+  AlertDialogDescription,
   AlertDialogBody,
   AlertDialogFooter,
   AlertDialogAction,
@@ -119,11 +112,11 @@ import {
 
 ### Using props
 
-Pass `title` and `description` props directly to `AlertDialogHeader`. 
+Pass `title` and `description` props directly to `AlertDialogHeader`.
 
 ```tsx showLineNumbers
-<AlertDialogHeader 
-  title="Allow accessory to connect?" 
+<AlertDialogHeader
+  title="Allow accessory to connect?"
   description="Do you want to allow the USB accessory to connect to this device?"
 >
   <AlertDialogAction />
@@ -147,6 +140,13 @@ Use `AlertDialogTitle` and `AlertDialogDescription` as children for more control
 ```
 
 ## Examples
+
+<Alert>
+  <InfoIcon />
+  <AlertDescription>
+  Alert Dialog is built on top of the [Dialog](/docs/components/dialog) component. Check it out for more examples.
+  </AlertDescription>
+</Alert>
 
 ### Destructive
 
@@ -253,7 +253,7 @@ Public AlertDialogClose component. It forwards the underlying primitive props.
 
 ### AlertDialogFooter
 
-Footer for action buttons. 
+Footer for action buttons.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -262,4 +262,4 @@ Footer for action buttons.
 
 ---
 
-For a complete list of props, see the [Dialog API Reference](/docs/components/dialog#api-reference).
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/dialog#api-reference).

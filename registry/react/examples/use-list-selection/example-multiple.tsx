@@ -13,7 +13,7 @@ import {
 } from "@/registry/react/components/field";
 import { useListSelection } from "@/registry/react/hooks/use-list-selection";
 
-const UseListSelectionDemo = () => {
+const Example = () => {
   const selection = useListSelection({ collection, selectionMode: "multiple" });
   const handleSelectAll = () => {
     if (selection.isAllSelected()) {
@@ -78,4 +78,4 @@ const collection = createListCollection({
   ],
 });
 
-export default UseListSelectionDemo;
+export default Example;

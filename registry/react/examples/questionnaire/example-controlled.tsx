@@ -20,7 +20,7 @@ import {
 } from "@/registry/react/components/questionnaire";
 import { toast } from "@/registry/react/components/toast";
 
-const QuestionnaireDemo = () => {
+const Example = () => {
   const [item, setItem] = React.useState("workspace");
   const [value, setValue] = React.useState<QuestionnaireValue>({});
   const handleItemChange = (details: QuestionnaireItemChangeDetails) =>
@@ -105,4 +105,4 @@ const items = [
   },
 ] as const;
 
-export default QuestionnaireDemo;
+export default Example;

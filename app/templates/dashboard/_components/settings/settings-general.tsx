@@ -9,7 +9,8 @@ import {
 } from "@/registry/react/components/field";
 import { SettingsTextField } from "./settings-fields";
 
-export const SettingsGeneralPage = ({ onSave }: { onSave: () => void }) => {
+export const SettingsGeneralPage = (props: { onSave: () => void }) => {
+  const { onSave } = props;
   const [workspaceName, setWorkspaceName] = React.useState("Onda");
   const [workspaceUrl, setWorkspaceUrl] = React.useState("onda");
 
