@@ -16,8 +16,8 @@ import {
 const Example = () => (
   <Marquee className="max-h-80 w-full max-w-28" orientation="vertical">
     <MarqueeContent>
-      {items.map((Icon, index) => (
-        <MarqueeItem key={index}>
+      {items.map((Icon) => (
+        <MarqueeItem key={Icon.name}>
           <Card>
             <CardContent className="flex justify-center">
               <Icon className="size-10" />

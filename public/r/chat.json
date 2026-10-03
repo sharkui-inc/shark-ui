@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "dependencies": [],
+  "description": "Conversation primitives for chat: transcript, composer, tool calls, and reasoning.",
+  "name": "chat",
+  "registryDependencies": [
+    "https://shark-ui.com/r/attachment.json",
+    "https://shark-ui.com/r/marker.json",
+    "https://shark-ui.com/r/message.json",
+    "https://shark-ui.com/r/message-bubble.json",
+    "https://shark-ui.com/r/message-scroller.json",
+    "https://shark-ui.com/r/prompt-input.json",
+    "https://shark-ui.com/r/reasoning.json",
+    "https://shark-ui.com/r/shimmer.json",
+    "https://shark-ui.com/r/tool-result.json"
+  ],
+  "type": "registry:ui"
+}

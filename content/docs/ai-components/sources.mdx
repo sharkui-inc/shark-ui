@@ -1,0 +1,145 @@
+---
+title: Sources
+description: Citations and footnotes for assistant responses.
+seo:
+  description: Attach citations and footnotes to assistant responses.
+---
+
+import manifest from "@/registry/manifest/sources";
+
+<ComponentPreview componentName="sources" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/sources
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>This component depends on [Collapsible](/docs/components/collapsible). Install required dependencies first if you haven&apos;t already.</Step>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/sources.tsx" src="/sources.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+Sources
+├── SourcesTrigger
+└── SourcesContent
+    └── Source
+
+InlineCitation
+```
+
+## Usage
+
+```tsx
+import {
+  InlineCitation,
+  Source,
+  Sources,
+  SourcesContent,
+  SourcesTrigger,
+} from "@/components/ui/sources";
+```
+
+```tsx
+<Sources>
+  <SourcesTrigger count={2} />
+  <SourcesContent>
+    <Source href="https://react.dev" title="React Documentation" />
+  </SourcesContent>
+</Sources>
+```
+
+Use `InlineCitation` inside message text for superscript footnotes with an optional hover card.
+
+## Controlled
+
+Control expand state with `open` and `onOpenChange`.
+
+<ComponentPreview componentName="sources" fileName="example-controlled" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="sources" />
+
+## API Reference
+
+### Sources
+
+Root collapsible. Forwards [Collapsible](/docs/components/collapsible) props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### SourcesTrigger
+
+Toggles the citation list. Default children are `Used {count} sources`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `count` | `number` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### SourcesContent
+
+Holds the list of sources.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### Source
+
+Link to a cited source. Children replace `title` when provided.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `href` | `string` | `-` |
+| `title` | `string` | `-` |
+| `className` | `string` | `-` |
+
+### InlineCitation
+
+Superscript footnote. Shows a [Hover Card](/docs/components/hover-card) when `title` or `href` is set.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `index` | `number` | `-` |
+| `href` | `string` | `-` |
+| `title` | `string` | `-` |
+| `className` | `string` | `-` |

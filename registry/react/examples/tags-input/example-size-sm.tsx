@@ -7,17 +7,20 @@ import {
   TagsInputItem,
 } from "@/registry/react/components/tags-input";
 
-const defaultValue = ["React", "Solid"];
-
 const Example = () => (
   <Field className="w-full max-w-sm">
     <FieldLabel>Frameworks</FieldLabel>
-    <TagsInput className="w-full" defaultValue={defaultValue} size="sm">
+    <TagsInput
+      className="w-full"
+      defaultValue={defaultValue}
+      placeholder="Add framework"
+      size="sm"
+    >
       <TagsInputContext>
-        {({ value }) =>
-          value.map((value, index) => (
-            <TagsInputItem index={index} key={value} value={value}>
-              {value}
+        {({ value: tags }) =>
+          tags.map((tag, index) => (
+            <TagsInputItem index={index} key={tag} value={tag}>
+              {tag}
             </TagsInputItem>
           ))
         }
@@ -25,5 +28,7 @@ const Example = () => (
     </TagsInput>
   </Field>
 );
+
+const defaultValue = ["React", "Solid"];
 
 export default Example;

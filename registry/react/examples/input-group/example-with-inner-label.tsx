@@ -16,7 +16,7 @@ import {
 
 const Example = () => (
   <InputGroup className="max-w-64">
-    <InputGroupInput placeholder="John Doe" />
+    <InputGroupInput aria-label="Username" placeholder="John Doe" />
     <InputGroupAddon align="block-start">
       <FieldLabel>Username</FieldLabel>
 

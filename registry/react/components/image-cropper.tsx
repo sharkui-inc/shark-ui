@@ -2,12 +2,15 @@
 
 import {
   ImageCropper as ArkImageCropper,
-  useImageCropper as useArkImageCropper,
+  useImageCropperContext as useArkImageCropperContext,
 } from "@ark-ui/react/image-cropper";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useImageCropper = useArkImageCropper;
+export const useImageCropperContext = useArkImageCropperContext;
+export const ImageCropperContext = (
+  props: React.ComponentProps<typeof ArkImageCropper.Context>
+) => <ArkImageCropper.Context {...props} />;
 
 interface ImageCropperProps
   extends React.ComponentProps<typeof ArkImageCropper.Root> {}
@@ -22,6 +25,8 @@ export const ImageCropper = (props: ImageCropperProps) => {
         "relative",
         "w-full",
         "aspect-video",
+        "rounded-md",
+        "overflow-hidden",
         className
       )}
       data-slot="image-cropper"
@@ -75,14 +80,14 @@ export const ImageCropperSelection = (props: ImageCropperSelectionProps) => {
   return (
     <ArkImageCropper.Selection
       className={cn(
-        "shadow-[0_0_0_9999px_rgb(0_0_0/0.5)]",
+        "shadow-[0_0_0_9999px_rgb(0_0_0/0.48)]",
         "border-2 border-white/64",
         "backface-visibility-hidden",
         "cursor-move",
         "data-[shape=circle]:rounded-full",
-        "outline-none focus-visible:border-(--cropper-accent)",
+        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
         "data-disabled:cursor-default",
-        "data-dragging:cursor-grabbing data-dragging:border-white/84",
+        "data-dragging:cursor-grabbing data-dragging:border-white/80",
         className
       )}
       data-slot="image-cropper-selection"
@@ -118,6 +123,7 @@ export const ImageCropperHandle = (
     <ArkImageCropper.Handle
       className={cn(
         "absolute flex touch-none items-center justify-center",
+        "data-[position=ne]:z-1 data-[position=nw]:z-1 data-[position=se]:z-1 data-[position=sw]:z-1",
         "h-[calc(var(--cropper-handler-size)+8px)] w-[calc(var(--cropper-handler-size)+8px)]",
         "data-disabled:hidden",
         "data-[position=ne]:cursor-nesw-resize data-[position=nw]:cursor-nwse-resize",
@@ -125,15 +131,31 @@ export const ImageCropperHandle = (
         "data-[position=n]:cursor-ns-resize data-[position=s]:cursor-ns-resize",
         "data-[position=e]:cursor-ew-resize data-[position=w]:cursor-ew-resize",
         "border-(--cropper-accent)",
-        "[&>span]:bg-(--cropper-accent) [&>span]:shadow-[0_1px_3px_rgb(0_0_0/0.3)]",
-        "data-[position=nw]:hover:**:scale-110 [&[data-position=nw]_*]:size-(--cropper-handler-size) [&[data-position=nw]_*]:border-t-[length:(--cropper-handler-width)] [&[data-position=nw]_*]:border-l-[length:(--cropper-handler-width)] [&[data-position=nw]_*]:bg-(--cropper-accent)",
-        "data-[position=ne]:hover:**:scale-110 [&[data-position=ne]_*]:size-(--cropper-handler-size) [&[data-position=ne]_*]:border-t-[length:(--cropper-handler-width)] [&[data-position=ne]_*]:border-r-[length:(--cropper-handler-width)] [&[data-position=ne]_*]:bg-(--cropper-accent)",
-        "data-[position=se]:hover:**:scale-110 [&[data-position=se]_*]:size-(--cropper-handler-size) [&[data-position=se]_*]:border-r-[length:(--cropper-handler-width)] [&[data-position=se]_*]:border-b-[length:(--cropper-handler-width)] [&[data-position=se]_*]:bg-(--cropper-accent)",
-        "data-[position=sw]:hover:**:scale-110 [&[data-position=sw]_*]:size-(--cropper-handler-size) [&[data-position=sw]_*]:border-b-[length:(--cropper-handler-width)] [&[data-position=sw]_*]:border-l-[length:(--cropper-handler-width)] [&[data-position=sw]_*]:bg-(--cropper-accent)",
-        "[&[data-position=n]_*]: data-[position=n]:hover:**:opacity-100 [&[data-position=n]_*]:size-1.5 [&[data-position=n]_*]:opacity-0",
-        "data-[position=s]:hover:**:opacity-100 [&[data-position=s]_*]:size-1.5 [&[data-position=s]_*]:bg-(--cropper-accent) [&[data-position=s]_*]:opacity-0",
-        "data-[position=e]:hover:**:opacity-100 [&[data-position=e]_*]:size-1.5 [&[data-position=e]_*]:bg-(--cropper-accent) [&[data-position=e]_*]:opacity-0",
-        "data-[position=w]:hover:**:opacity-100 [&[data-position=w]_*]:size-1.5 [&[data-position=w]_*]:bg-(--cropper-accent) [&[data-position=w]_*]:opacity-0",
+        "[&>span]:bg-(--cropper-accent) [&>span]:shadow-[0_1px_3px_rgb(0_0_0/0.32)]",
+        "[@media(hover:hover)_and_(pointer:fine)]:[[data-position=nw],[data-position=ne],[data-position=se],[data-position=sw]]:hover:**:scale-110",
+        "data-[position=nw]:[&>span]:border-t-[length:(--cropper-handler-width)] data-[position=nw]:[&>span]:border-l-[length:(--cropper-handler-width)]",
+        "data-[position=ne]:[&>span]:border-t-[length:(--cropper-handler-width)] data-[position=ne]:[&>span]:border-r-[length:(--cropper-handler-width)]",
+        "data-[position=se]:[&>span]:border-r-[length:(--cropper-handler-width)] data-[position=se]:[&>span]:border-b-[length:(--cropper-handler-width)]",
+        "data-[position=sw]:[&>span]:border-b-[length:(--cropper-handler-width)] data-[position=sw]:[&>span]:border-l-[length:(--cropper-handler-width)]",
+        "[&:is([data-position=n],[data-position=s],[data-position=e],[data-position=w])>*]:size-1.5 [&:is([data-position=n],[data-position=s],[data-position=e],[data-position=w])>*]:opacity-0",
+        "[[data-position=n],[data-position=s],[data-position=e],[data-position=w]]:hover:**:opacity-100",
+        "after:absolute",
+        "pointer-fine:data-[position=n]:after:inset-x-0 pointer-fine:data-[position=n]:after:-top-1 pointer-fine:data-[position=n]:after:h-1",
+        "pointer-fine:data-[position=s]:after:inset-x-0 pointer-fine:data-[position=s]:after:-bottom-1 pointer-fine:data-[position=s]:after:h-1",
+        "pointer-fine:data-[position=e]:after:inset-y-0 pointer-fine:data-[position=e]:after:-right-1 pointer-fine:data-[position=e]:after:w-1",
+        "pointer-fine:data-[position=w]:after:inset-y-0 pointer-fine:data-[position=w]:after:-left-1 pointer-fine:data-[position=w]:after:w-1",
+        "pointer-fine:data-[position=nw]:after:-top-1 pointer-fine:data-[position=nw]:after:-left-1 pointer-fine:data-[position=nw]:after:size-[calc(100%+--spacing(1))]",
+        "pointer-fine:data-[position=ne]:after:-top-1 pointer-fine:data-[position=ne]:after:-right-1 pointer-fine:data-[position=ne]:after:size-[calc(100%+--spacing(1))]",
+        "pointer-fine:data-[position=se]:after:-right-1 pointer-fine:data-[position=se]:after:-bottom-1 pointer-fine:data-[position=se]:after:size-[calc(100%+--spacing(1))]",
+        "pointer-fine:data-[position=sw]:after:-bottom-1 pointer-fine:data-[position=sw]:after:-left-1 pointer-fine:data-[position=sw]:after:size-[calc(100%+--spacing(1))]",
+        "pointer-coarse:data-[position=n]:after:inset-x-0 pointer-coarse:data-[position=n]:after:-top-6 pointer-coarse:data-[position=n]:after:h-6",
+        "pointer-coarse:data-[position=s]:after:inset-x-0 pointer-coarse:data-[position=s]:after:-bottom-6 pointer-coarse:data-[position=s]:after:h-6",
+        "pointer-coarse:data-[position=e]:after:inset-y-0 pointer-coarse:data-[position=e]:after:-right-6 pointer-coarse:data-[position=e]:after:w-6",
+        "pointer-coarse:data-[position=w]:after:inset-y-0 pointer-coarse:data-[position=w]:after:-left-6 pointer-coarse:data-[position=w]:after:w-6",
+        "pointer-coarse:data-[position=nw]:after:-top-6 pointer-coarse:data-[position=nw]:after:-left-6 pointer-coarse:data-[position=nw]:after:size-[calc(100%+--spacing(6))]",
+        "pointer-coarse:data-[position=ne]:after:-top-6 pointer-coarse:data-[position=ne]:after:-right-6 pointer-coarse:data-[position=ne]:after:size-[calc(100%+--spacing(6))]",
+        "pointer-coarse:data-[position=se]:after:-right-6 pointer-coarse:data-[position=se]:after:-bottom-6 pointer-coarse:data-[position=se]:after:size-[calc(100%+--spacing(6))]",
+        "pointer-coarse:data-[position=sw]:after:-bottom-6 pointer-coarse:data-[position=sw]:after:-left-6 pointer-coarse:data-[position=sw]:after:size-[calc(100%+--spacing(6))]",
         className
       )}
       data-slot="image-cropper-handle"
@@ -155,12 +177,12 @@ export const ImageCropperGrid = (
         "absolute",
         "opacity-0",
         "pointer-events-none",
-        "transition-opacity duration-200",
-        "data-[axis=horizontal]:inset-[33.33%_0] data-[axis=horizontal]:border-white/40 data-[axis=horizontal]:border-t data-[axis=horizontal]:border-b",
-        "data-[axis=vertical]:inset-0_[33.33%] data-[axis=vertical]:border-white/40 data-[axis=vertical]:border-r data-[axis=vertical]:border-l",
+        "transition-opacity duration-200 ease-out",
+        "data-[axis=horizontal]:inset-[33.33%_0] data-[axis=horizontal]:border-white/32 data-[axis=horizontal]:border-t data-[axis=horizontal]:border-b",
+        "data-[axis=vertical]:inset-0_[33.33%] data-[axis=vertical]:border-white/32 data-[axis=vertical]:border-r data-[axis=vertical]:border-l",
         "data-dragging:opacity-100",
         "data-panning:opacity-100",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="image-cropper-grid"

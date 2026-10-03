@@ -12,6 +12,7 @@ const Example = () => {
   return (
     <div className="flex flex-col gap-2">
       <NativeSelect
+        aria-label="Select an option"
         className="w-full max-w-48"
         onChange={(e) => setValue(e.target.value)}
         value={value}
@@ -21,7 +22,7 @@ const Example = () => {
         <NativeSelectOption value="apple">Apple</NativeSelectOption>
         <NativeSelectOption value="orange">Orange</NativeSelectOption>
       </NativeSelect>
-      <p className="text-muted-foreground text-sm">Selected: {value || "—"}</p>
+      <p className="text-muted-foreground text-sm">Selected: {value || "-"}</p>
     </div>
   );
 };

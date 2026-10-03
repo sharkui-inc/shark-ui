@@ -25,7 +25,10 @@ const Example = () => {
       invalid
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <AutocompleteInput placeholder="Select a fruit..." />
+      <AutocompleteInput
+        aria-label="Select a fruit"
+        placeholder="Select a fruit..."
+      />
       <AutocompleteContent>
         <AutocompleteEmpty />
         <AutocompleteList>

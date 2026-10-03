@@ -1,0 +1,74 @@
+---
+title: useMediaQuery
+description: Subscribe to a CSS media query and read whether it matches.
+---
+
+<ComponentPreview componentName="use-media-query" />
+
+## Installation
+
+<CodeTabs>
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/use-media-query
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+<Step>This hook has no package dependencies beyond React.</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="hooks/use-media-query.ts" src="../hooks/use-media-query.ts" />
+
+<Step>Update the import paths to match your project setup.</Step>
+</Steps>
+
+</TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { useMediaQuery, useIsMobile } from "@/hooks/use-media-query";
+```
+
+```tsx
+const isDesktop = useMediaQuery("(min-width: 768px)");
+const isMobile = useIsMobile();
+```
+
+## API Reference
+
+### useMediaQuery
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `query` | `string` | `required` |
+
+### Return value
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `matches` | `boolean` | `false` |
+
+`true` when `query` matches. `false` on the server.
+
+### useIsMobile
+
+Shorthand for `useMediaQuery("(max-width: 767px)")`.
+
+### Return value
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `isMobile` | `boolean` | `false` |
+
+`true` below 768px. `false` on the server.

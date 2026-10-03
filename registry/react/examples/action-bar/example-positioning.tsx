@@ -18,8 +18,6 @@ import {
 } from "@/registry/react/components/action-bar";
 import { Button } from "@/registry/react/components/button";
 
-type Placement = "bottom" | "bottom-start" | "bottom-end";
-
 const Example = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [placement, setPlacement] = React.useState<Placement>("bottom");
@@ -50,7 +48,7 @@ const Example = () => {
       </div>
 
       <ActionBar
-        onOpenChange={setIsOpen}
+        onOpenChange={({ open }) => setIsOpen(open)}
         open={isOpen}
         positioning={{ placement }}
       >
@@ -59,20 +57,20 @@ const Example = () => {
           <ActionBarSeparator />
           <ActionBarBody>
             <Button variant="ghost">
-              <PencilIcon />
+              <PencilIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Edit</span>
             </Button>
             <Button variant="ghost">
-              <DownloadIcon />
+              <DownloadIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Export</span>
             </Button>
             <Button variant="ghost">
-              <ArchiveIcon />
+              <ArchiveIcon data-icon="inline-start" />
               <span className="max-sm:sr-only">Archive</span>
             </Button>
             <ActionBarSeparator />
             <Button variant="destructive">
-              <Trash2Icon />
+              <Trash2Icon data-icon="inline-start" />
               <span className="max-sm:sr-only">Delete</span>
             </Button>
           </ActionBarBody>
@@ -87,5 +85,7 @@ const Example = () => {
     </>
   );
 };
+
+type Placement = "bottom" | "bottom-start" | "bottom-end";
 
 export default Example;

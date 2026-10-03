@@ -8,7 +8,7 @@ import {
 const Example = () => (
   <Announcement>
     <Badge variant="warning">
-      <TriangleAlertIcon /> Trial ending
+      <TriangleAlertIcon data-icon="inline-start" /> Trial ending
     </Badge>
     <AnnouncementTitle>
       Your free trial expires in 3 days. Upgrade to keep access.

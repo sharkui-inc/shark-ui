@@ -14,7 +14,7 @@ export const FormsList = () => (
     {FORM_LIBRARIES.map((library) => (
       <Item asChild className="[--space:--spacing(4)]" key={library.name}>
         <NavLink
-          className="w-full border-input transition-all"
+          className="w-full border-input transition-[background-color,border-color,box-shadow]"
           href={library.href}
         >
           <ItemMedia>{library.icon}</ItemMedia>
@@ -29,18 +29,18 @@ export const FormsList = () => (
 
 const FORM_LIBRARIES = [
   {
-    name: "React Hook Form",
     href: "/docs/forms/react-hook-form",
     icon: <ReactHookFormIcon className="size-8" />,
+    name: "React Hook Form",
   },
   {
-    name: "TanStack Form",
     href: "/docs/forms/tanstack-form",
     icon: <TanstackFormIcon className="size-8" />,
+    name: "TanStack Form",
   },
   {
-    name: "Formisch",
     href: "/docs/forms/formisch",
     icon: <BotIcon className="size-8 stroke-[1.5px]" />,
+    name: "Formisch",
   },
 ];

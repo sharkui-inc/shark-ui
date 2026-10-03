@@ -4,12 +4,12 @@ import { Button } from "@/registry/react/components/button";
 import { Float } from "@/registry/react/components/float";
 
 const FloatDemo = () => (
-  <div className="relative">
-    <Button size="icon-lg" variant="outline">
+  <div className="relative inline-flex">
+    <Button aria-label="Notifications" size="icon-lg" variant="outline">
       <BellIcon />
     </Button>
     <Float>
-      <Badge pill size="sm" variant="default">
+      <Badge pill size="sm">
         9+
       </Badge>
     </Float>

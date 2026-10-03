@@ -1,0 +1,191 @@
+---
+title: React Aria
+description: Migrate your project from React Aria to Shark UI.
+links:
+  doc: https://react-aria.adobe.com
+---
+
+[React Aria](https://react-aria.adobe.com) and [Ark UI](https://ark-ui.com) solve the same problem: accessible headless behavior you style yourself.
+
+> Shark UI wraps Ark with Tailwind defaults and a copy-and-own install flow.
+
+## What changes
+
+| React Aria | Shark |
+| --- | --- |
+| `items` and render-function children | Ark `collection`; render `collection.items` |
+| Select `value` / `defaultValue` (`string` or `string[]`) | Always a string array |
+| ListBox `selectedKeys` (`Set`) | `value` string array on a collection |
+| `isDisabled` / `isInvalid` | `disabled` / `invalid` |
+| `className` render functions | Tailwind classes on Shark parts |
+| `<Label>` | `Field` / `FieldLabel` |
+
+## Component equivalents
+
+| React Aria Components | Shark UI |
+| --- | --- |
+| Select | [Select](/docs/components/select) |
+| ComboBox | [Combobox](/docs/components/combobox) |
+| ListBox | [Listbox](/docs/components/listbox) |
+| Label | [Field](/docs/components/field) |
+
+Browse [Components](/docs/components) for same-name components such as Dialog, Tabs, and Button.
+
+## Select
+
+`SelectItem` by `id`. `defaultValue` is `string | string[]`.
+
+```tsx title="React Aria"
+import { Select, SelectItem } from "react-aria-components";
+
+<Select defaultValue="cat" label="Favorite animal">
+  <SelectItem id="cat">Cat</SelectItem>
+  <SelectItem id="dog">Dog</SelectItem>
+</Select>;
+```
+
+`collection`. `defaultValue` is `string[]`.
+
+```tsx title="Shark UI"
+import { createListCollection } from "@ark-ui/react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const animals = createListCollection({ items: ["Cat", "Dog"] });
+
+<Select collection={animals} defaultValue={["Cat"]}>
+  <SelectTrigger>
+    <SelectValue placeholder="Favorite animal" />
+  </SelectTrigger>
+  <SelectContent>
+    {animals.items.map((item) => (
+      <SelectItem item={item} key={item}>
+        {item}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>;
+```
+
+## Combobox
+
+`ComboBoxItem` children.
+
+```tsx title="React Aria"
+import { ComboBox, ComboBoxItem } from "react-aria-components";
+
+<ComboBox label="Favorite animal">
+  <ComboBoxItem id="cat">Cat</ComboBoxItem>
+  <ComboBoxItem id="dog">Dog</ComboBoxItem>
+</ComboBox>;
+```
+
+`useFilter` and `useListCollection`. Render `collection.items`.
+
+```tsx title="Shark UI"
+"use client";
+
+import { useFilter, useListCollection } from "@ark-ui/react";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
+
+const ComboboxExample = () => {
+  const { contains } = useFilter({ sensitivity: "base" });
+  const { collection, filter } = useListCollection({
+    filter: contains,
+    initialItems: [
+      { label: "Cat", value: "cat" },
+      { label: "Dog", value: "dog" },
+    ],
+  });
+
+  return (
+    <Combobox
+      collection={collection}
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
+    >
+      <ComboboxInput placeholder="Favorite animal" />
+      <ComboboxContent>
+        <ComboboxEmpty />
+        <ComboboxList>
+          {collection.items.map((item) => (
+            <ComboboxItem item={item} key={item.value}>
+              {item.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+};
+```
+
+## Listbox
+
+`defaultSelectedKeys` is a `Set`.
+
+```tsx title="React Aria"
+import { ListBox, ListBoxItem } from "react-aria-components";
+
+<ListBox aria-label="Animals" defaultSelectedKeys={new Set(["cat"])}>
+  <ListBoxItem id="cat">Cat</ListBoxItem>
+  <ListBoxItem id="dog">Dog</ListBoxItem>
+</ListBox>;
+```
+
+`collection`. `defaultValue` is `string[]`.
+
+```tsx title="Shark UI"
+import { createListCollection } from "@ark-ui/react";
+import {
+  Listbox,
+  ListboxContent,
+  ListboxItem,
+} from "@/components/ui/listbox";
+
+const animals = createListCollection({
+  items: [
+    { label: "Cat", value: "cat" },
+    { label: "Dog", value: "dog" },
+  ],
+});
+
+<Listbox collection={animals} defaultValue={["cat"]}>
+  <ListboxContent>
+    {animals.items.map((item) => (
+      <ListboxItem item={item} key={item.value}>
+        {item.label}
+      </ListboxItem>
+    ))}
+  </ListboxContent>
+</Listbox>;
+```
+
+## Labels and styling
+
+`isDisabled` / `isInvalid` are `disabled` / `invalid`. Label is [Field](/docs/components/field).
+
+## Theming
+
+Map your React Aria theme variables to Shark semantic tokens. See [Colors](/docs/colors) and [Styling](/docs/styling).
+
+## Checklist
+
+- Replace `react-aria-components` imports with Shark components from the docs.
+- Add Ark collections where list components require them.
+- Re-check controlled values; do not assume React Aria keys match Shark value shapes.
+- Keep overlay titles and control labels accessible.
+- Use logical spacing for [RTL](/docs/rtl).
+
+Coming from shadcn/ui on the React Aria base? See the [shadcn/ui guide](/docs/migration/shadcn).

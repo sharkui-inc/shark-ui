@@ -17,6 +17,7 @@ import {
 import {
   Combobox,
   ComboboxContent,
+  ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
@@ -29,37 +30,27 @@ import {
   FieldLabel,
 } from "@/registry/react/components/field";
 
-const formSchema = z.object({
-  department: z
-    .array(z.string())
-    .min(1, "Select the department that best matches your role.")
-    .refine(
-      (val) => val[0] !== "",
-      "Select the department that best matches your role."
-    ),
-});
-
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
-    initialItems,
     filter: contains,
+    initialItems,
   });
 
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: { department: [""] },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "department-submitted",
-      title: "Team preference saved",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "department-submitted",
+      title: "Team preference saved",
     });
   };
 
@@ -83,7 +74,9 @@ const Example = () => {
                   <Combobox
                     collection={collection}
                     onInputValueChange={({ inputValue }) => filter(inputValue)}
-                    onValueChange={(e) => field.onChange(e.value)}
+                    onValueChange={(e) => {
+                      field.onChange(e.value);
+                    }}
                     value={field.value}
                   >
                     <ComboboxInput
@@ -91,6 +84,7 @@ const Example = () => {
                       showClear
                     />
                     <ComboboxContent>
+                      <ComboboxEmpty />
                       <ComboboxList>
                         {collection.items.map((item) => (
                           <ComboboxItem item={item} key={item.value}>
@@ -119,6 +113,16 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  department: z
+    .array(z.string())
+    .min(1, "Select the department that best matches your role.")
+    .refine(
+      (val) => val[0] !== "",
+      "Select the department that best matches your role."
+    ),
+});
 
 const initialItems = [
   { label: "Engineering", value: "engineering" },

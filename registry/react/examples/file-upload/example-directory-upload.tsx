@@ -1,6 +1,6 @@
 "use client";
 
-import { Folder } from "lucide-react";
+import { FolderIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   FileUpload,
@@ -13,7 +13,7 @@ const Example = () => (
     <div className="flex justify-center">
       <FileUploadTrigger asChild>
         <Button size="sm" variant="outline">
-          <Folder />
+          <FolderIcon />
           Select Folder
         </Button>
       </FileUploadTrigger>

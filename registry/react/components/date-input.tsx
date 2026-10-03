@@ -2,12 +2,12 @@
 
 import {
   DateInput as ArkDateInput,
-  useDateInput as useArkDateInput,
   useDateInputContext as useArkDateInputContext,
 } from "@ark-ui/react/date-input";
 import { XIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import type { InputProps } from "@/registry/react/components/input";
 import {
   InputGroup,
@@ -15,9 +15,6 @@ import {
   InputGroupButton,
   type InputGroupProps,
 } from "@/registry/react/components/input-group";
-
-export const useDateInput = useArkDateInput;
-export const useDateInputContext = useArkDateInputContext;
 
 interface DateInputProps
   extends React.ComponentProps<typeof ArkDateInput.Root>,
@@ -47,6 +44,7 @@ interface DateInputControlProps
   showClear: boolean;
 }
 
+export const useDateInputContext = useArkDateInputContext;
 export const DateInput = (props: DateInputProps) => {
   const {
     size = "md",
@@ -55,6 +53,7 @@ export const DateInput = (props: DateInputProps) => {
     shouldForceLeadingZeros = true,
     separator = "-",
     className,
+    children,
     ...rest
   } = props;
 
@@ -71,6 +70,7 @@ export const DateInput = (props: DateInputProps) => {
       shouldForceLeadingZeros={shouldForceLeadingZeros}
       {...rest}
     >
+      {children}
       <DateInputControl showClear={showClear} size={size}>
         <DateInputSegmentGroup index={0} />
         {selectionMode === "range" && (
@@ -93,6 +93,20 @@ export const DateInput = (props: DateInputProps) => {
   );
 };
 
+export const DateInputLabel = (
+  props: React.ComponentProps<typeof ArkDateInput.Label>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkDateInput.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="date-input-label"
+      {...rest}
+    />
+  );
+};
+
 const DateInputControl = (props: DateInputControlProps) => {
   const { size = "md", showClear, children } = props;
 
@@ -103,9 +117,7 @@ const DateInputControl = (props: DateInputControlProps) => {
     <ArkDateInput.Control asChild data-slot="date-input-control">
       <InputGroup
         className={cn(
-          "px-3",
-          "data-disabled:pointer-events-none data-disabled:opacity-64",
-          "has-data-[slot=date-input-clear]:pr-0"
+          "data-disabled:pointer-events-none data-disabled:opacity-64"
         )}
         size={size}
       >
@@ -114,7 +126,7 @@ const DateInputControl = (props: DateInputControlProps) => {
           className={cn(
             "min-w-0",
             "flex flex-1 items-center gap-2",
-            "text-base md:text-sm"
+            "font-normal text-base md:text-sm"
           )}
           data-slot="date-input-field"
         >
@@ -165,13 +177,14 @@ const DateInputSegment = (
   return (
     <ArkDateInput.Segment
       className={cn(
+        "not-data-[type=literal]:inline-flex not-data-[type=literal]:min-h-6 not-data-[type=literal]:min-w-6 not-data-[type=literal]:items-center not-data-[type=literal]:justify-center",
         "tabular-nums",
         "rounded-sm border-0 shadow-none ring-0",
         "not-data-[type=literal]:px-0.5",
         "not-data-[type=literal]:focus:bg-primary not-data-[type=literal]:focus:text-primary-foreground",
-        "data-[type=literal]:select-none data-[type=literal]:px-px data-[type=literal]:text-muted-foreground/64",
-        "data-placeholder-shown:text-muted-foreground/64",
-        "outline-none",
+        "data-[type=literal]:select-none data-[type=literal]:px-px data-[type=literal]:text-muted-foreground",
+        "data-placeholder-shown:text-muted-foreground",
+        "outline-hidden",
         "data-readonly:cursor-default",
         "group-aria-invalid/date-input:text-destructive group-data-invalid/date-input:text-destructive",
         "not-data-[type=literal]:focus:group-data-invalid/date-input:bg-destructive not-data-[type=literal]:focus:group-data-invalid/date-input:text-white",

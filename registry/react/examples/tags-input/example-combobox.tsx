@@ -12,59 +12,46 @@ import {
 } from "@/registry/react/components/combobox";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 import {
+  TagsInput,
   TagsInputContext,
   TagsInputInput,
   TagsInputItem,
-  TagsInputRootProvider,
-  useTagsInput,
 } from "@/registry/react/components/tags-input";
 
-const frameworkItems = [
-  "React",
-  "Solid",
-  "Vue",
-  "Svelte",
-  "Angular",
-  "Preact",
-  "Next.js",
-  "Astro",
-];
-
 const Example = () => {
-  const uid = React.useId();
-
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
-    initialItems: frameworkItems,
     filter: contains,
+    initialItems: frameworkItems,
   });
 
-  const tagsInput = useTagsInput({
-    ids: { input: `tags-input-${uid}`, control: `tags-control-${uid}` },
-  });
+  const [tags, setTags] = React.useState<string[]>([]);
 
   const availableItems = collection.items.filter(
-    (item) => !tagsInput.value.includes(item)
+    (item) => !tags.includes(item)
   );
 
   return (
     <Field className="w-full max-w-sm">
-      <FieldLabel htmlFor={`tags-input-${uid}`}>Frameworks</FieldLabel>
+      <FieldLabel>Frameworks</FieldLabel>
       <Combobox
         allowCustomValue
         collection={collection}
-        ids={{ input: `tags-input-${uid}`, control: `tags-control-${uid}` }}
         onInputValueChange={({ inputValue }) => filter(inputValue)}
         onValueChange={({ value }) => {
-          const next = value[0];
-          if (next && !tagsInput.value.includes(next)) {
-            tagsInput.addValue(next);
+          const [next] = value;
+          if (next && !tags.includes(next)) {
+            setTags((current) => [...current, next]);
           }
         }}
         selectionBehavior="clear"
         value={[]}
       >
-        <TagsInputRootProvider className="w-full" value={tagsInput}>
+        <TagsInput
+          className="w-full"
+          onValueChange={({ value }) => setTags(value)}
+          value={tags}
+        >
           <TagsInputContext>
             {({ value }) => (
               <>
@@ -79,7 +66,7 @@ const Example = () => {
               </>
             )}
           </TagsInputContext>
-        </TagsInputRootProvider>
+        </TagsInput>
         <ComboboxContent>
           <ComboboxList>
             <ComboboxEmpty>No frameworks found</ComboboxEmpty>
@@ -94,5 +81,16 @@ const Example = () => {
     </Field>
   );
 };
+
+const frameworkItems = [
+  "React",
+  "Solid",
+  "Vue",
+  "Svelte",
+  "Angular",
+  "Preact",
+  "Next.js",
+  "Astro",
+];
 
 export default Example;

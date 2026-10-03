@@ -14,6 +14,7 @@ import {
   Trash2Icon,
   UploadIcon,
 } from "lucide-react";
+import type React from "react";
 import { Button } from "@/registry/react/components/button";
 import { Card, CardContent } from "@/registry/react/components/card";
 
@@ -41,7 +42,6 @@ export const IconsGridExample = (props: React.ComponentProps<"div">) => (
             aria-label={label}
             key={label}
             size="icon-md"
-            tabIndex={-1}
             variant="outline"
           >
             <Icon aria-hidden />

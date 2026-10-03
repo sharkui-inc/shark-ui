@@ -17,33 +17,29 @@ import {
   FieldDescription,
   FieldError,
   FieldGroup,
-  FieldLabel,
 } from "@/registry/react/components/field";
-import { Rating } from "@/registry/react/components/rating";
-
-const formSchema = z.object({
-  recommendScore: z
-    .number()
-    .min(1, "Please rate how likely you are to recommend us.")
-    .max(5),
-});
+import {
+  Rating,
+  RatingLabel,
+  RatingStars,
+} from "@/registry/react/components/rating";
 
 const Example = () => {
   const form = useForm({
     defaultValues: { recommendScore: 0 },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "rating-submitted",
-        title: "Feedback saved",
         description: (
           <pre className="mt-2">
             <code>{JSON.stringify(value, null, 2)}</code>
           </pre>
         ),
+        id: "rating-submitted",
+        title: "Feedback saved",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -68,12 +64,14 @@ const Example = () => {
             <form.Field
               children={(field) => (
                 <Field invalid={!field.state.meta.isValid}>
-                  <FieldLabel>How useful is this project?</FieldLabel>
                   <Rating
                     count={5}
                     onValueChange={(e) => field.handleChange(e.value ?? 0)}
                     value={field.state.value ?? 0}
-                  />
+                  >
+                    <RatingLabel>How useful is this project?</RatingLabel>
+                    <RatingStars />
+                  </Rating>
                   <FieldDescription>
                     1 = not likely, 5 = very likely.
                   </FieldDescription>
@@ -96,5 +94,12 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  recommendScore: z
+    .number()
+    .min(1, "Please rate how likely you are to recommend us.")
+    .max(5),
+});
 
 export default Example;

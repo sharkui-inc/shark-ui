@@ -1,10 +1,14 @@
 ---
 title: Editable
-description: Allows user to edit text in-place.
+description: Edit text in place.
+seo:
+  description: Click-to-edit text that swaps read and edit modes.
 links:
   doc: https://ark-ui.com/docs/components/editable
   api: https://ark-ui.com/docs/components/editable#api-reference
 ---
+
+import manifest from "@/registry/manifest/editable";
 
 <ComponentPreview componentName="editable" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/editable
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -65,7 +67,7 @@ Editable
 ## Usage
 
 ```tsx
-import { 
+import {
   Editable,
   EditableArea,
   EditableInput,
@@ -95,7 +97,7 @@ import {
 
 Make the entire form editable at once by using the `edit` prop.
 
-The `value` and `onValueChange` props control the editable component programmatically.
+Use `value` and `onValueChange` to control the editable.
 
 <ComponentPreview componentName="editable" fileName="example-controlled" />
 
@@ -103,37 +105,41 @@ The `value` and `onValueChange` props control the editable component programmati
 
 The `activationMode` prop controls how editing is triggered.
 
-#### Focus
+### Focus
 
 Editing starts when the field receives focus.
 
 <ComponentPreview componentName="editable" fileName="example-activation-focus" />
 
-#### Click
+### Click
 
 Editing starts with a single click on the preview.
 
 <ComponentPreview componentName="editable" fileName="example-activation-click" />
 
-#### Double-Click
+### Double-Click
 
 Editing starts with a double-click on the preview.
 
 <ComponentPreview componentName="editable" fileName="example-dblclick" />
 
-#### None
+### None
 
 No automatic activation. Use `EditableEditTrigger` to manually start editing.
 
 <ComponentPreview componentName="editable" fileName="example-activation-none" />
 
-## Sizes
+## Size
 
 The `size` prop on `EditablePreview` controls the preview dimensions.
 
 ### Small
 
 <ComponentPreview componentName="editable" fileName="example-size-sm" />
+
+### Medium
+
+<ComponentPreview componentName="editable" fileName="example-size-md" />
 
 ### Large
 
@@ -143,11 +149,11 @@ The `size` prop on `EditablePreview` controls the preview dimensions.
 
 The `orientation` prop controls the layout of the editable component and its controls.
 
-#### Horizontal
+### Horizontal
 
 <ComponentPreview componentName="editable" fileName="example-orientation-horizontal" />
 
-#### Vertical
+### Vertical
 
 <ComponentPreview componentName="editable" fileName="example-orientation-vertical" />
 
@@ -162,6 +168,16 @@ The `orientation` prop controls the layout of the editable component and its con
 Edit without control buttons. Press Enter to save, Escape to cancel.
 
 <ComponentPreview componentName="editable" fileName="example-without-controls" />
+
+### Form Integration
+
+<ComponentPreview componentName="editable" fileName="example-form" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="editable" />
 
 ## API Reference
 
@@ -229,7 +245,7 @@ Cancels editing and reverts to previous value.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 | `className` | `string` | `-` |
 
 ### EditableSubmitTrigger
@@ -238,9 +254,8 @@ Submits the edited value and exits edit mode.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 | `className` | `string` | `-` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/editable#api-reference).

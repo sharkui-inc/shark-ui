@@ -15,18 +15,19 @@ const Example = () => (
       <Button variant="outline">Open</Button>
     </DrawerTrigger>
     <DrawerContent>
-      <DrawerHeader title="Drawer Title" />
-      <DrawerBody className="flex flex-col gap-4 text-start text-sm">
-        <p className="text-muted-foreground">
-          Drag from the header or grabber to move the drawer. This paragraph is
-          outside the no-drag area.
-        </p>
-        <p
-          className="rounded-lg border bg-muted/48 p-4 text-foreground"
-          data-no-drag
-        >
-          This is the no-drag area of the drawer. Dragging cannot start here.
-        </p>
+      <DrawerHeader title="No drag area" />
+      <DrawerBody className="text-start text-sm">
+        <div className="mx-auto flex w-full max-w-xs flex-col gap-4">
+          <p className="text-muted-foreground">
+            Drag the header or the grabber. This paragraph still starts a drag.
+          </p>
+          <p
+            className="rounded-lg border bg-muted p-4 text-foreground"
+            data-no-drag
+          >
+            Dragging cannot start in this area.
+          </p>
+        </div>
       </DrawerBody>
       <DrawerFooter>
         <div className="mx-auto w-full max-w-xs">

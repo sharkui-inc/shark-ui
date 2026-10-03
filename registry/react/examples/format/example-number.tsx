@@ -1,13 +1,25 @@
+import { DownloadIcon } from "lucide-react";
 import { FormatNumber } from "@/registry/react/components/format";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from "@/registry/react/components/item";
 
 const Example = () => (
-  <div className="inline-flex items-baseline gap-1">
-    <span className="text-muted-foreground text-sm">Downloads</span>
-    <span className="font-medium text-foreground tabular-nums tracking-tight">
-      <FormatNumber value={1_234_567} />
-    </span>
-    <span className="text-muted-foreground text-sm">per month</span>
-  </div>
+  <Item className="w-full max-w-sm" variant="outline">
+    <ItemMedia variant="icon">
+      <DownloadIcon aria-hidden />
+    </ItemMedia>
+    <ItemContent>
+      <ItemTitle>onda</ItemTitle>
+      <ItemDescription>
+        <FormatNumber value={1_234_567} /> downloads this month
+      </ItemDescription>
+    </ItemContent>
+  </Item>
 );
 
 export default Example;

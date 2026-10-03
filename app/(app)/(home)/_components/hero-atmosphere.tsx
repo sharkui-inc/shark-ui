@@ -1,0 +1,31 @@
+import { cn } from "@/lib/utils";
+
+const RIPPLE_RINGS = [36, 52, 68, 84, 100] as const;
+
+export const HeroAtmosphere = () => (
+  <div
+    aria-hidden
+    className="pointer-events-none absolute inset-0 hidden lg:block"
+  >
+    <div className="absolute end-[-6%] top-[20rem] size-0">
+      {RIPPLE_RINGS.map((size, index) => (
+        <div
+          className={cn(
+            "absolute start-1/2 top-1/2 rounded-full",
+            "-translate-x-1/2 -translate-y-1/2",
+            "border [border-color:color-mix(in_oklch,color-mix(in_oklch,var(--primary)_82%,var(--foreground))_42%,transparent)]",
+            "dark:[border-color:color-mix(in_oklch,var(--primary)_40%,transparent)]",
+            "animate-[pulse_8s_ease-in-out_infinite]",
+            "motion-reduce:animate-none!"
+          )}
+          key={size}
+          style={{
+            animationDelay: `${index * 0.7}s`,
+            height: `${size}rem`,
+            width: `${size}rem`,
+          }}
+        />
+      ))}
+    </div>
+  </div>
+);

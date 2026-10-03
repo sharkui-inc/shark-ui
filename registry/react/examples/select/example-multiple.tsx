@@ -16,7 +16,7 @@ const Example = () => (
     defaultValue={["javascript", "typescript"]}
     multiple
   >
-    <SelectTrigger className="w-full max-w-64">
+    <SelectTrigger aria-label="Select frameworks" className="w-full max-w-64">
       <SelectValue className="capitalize">
         <SelectContext>{({ value }) => renderValue(value)}</SelectContext>
       </SelectValue>
@@ -36,7 +36,7 @@ const renderValue = (value: string[]) => {
     return "Select languages…";
   }
 
-  const firstValue = value?.at(0) ?? "";
+  const firstValue = value.at(0) ?? "";
   const additionalValues =
     value.length > 1 ? ` (+${value.length - 1} more)` : "";
 

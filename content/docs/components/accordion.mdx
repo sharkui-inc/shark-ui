@@ -1,10 +1,14 @@
 ---
 title: Accordion
-description: A collapsible for displaying content.
+description: Expand and collapse stacked sections.
+seo:
+  description: Expand and collapse stacked sections of content.
 links:
   doc: https://ark-ui.com/docs/components/accordion
   api: https://ark-ui.com/docs/components/accordion#api-reference
 ---
+
+import manifest from "@/registry/manifest/accordion";
 
 <ComponentPreview componentName="accordion" />
 
@@ -31,26 +35,14 @@ npx shadcn@latest add @shark/accordion
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Add the following animations to your `globals.css`.</Step>
+<Step>Ensure your CSS entry imports `tw-animate-css`.</Step>
 
-```css title="globals.css" showLineNumbers
-@theme inline {
-  --animate-slide-up: slideUp 0.2s ease-out;
-  --animate-slide-down: slideDown 0.2s ease-out;
+```css title="globals.css"
+@import "tw-animate-css";
 
-  @keyframes slideUp {
-    from { height: var(--height); }
-    to { height: 0; }
-  }
-  @keyframes slideDown {
-    from { height: 0; }
-    to { height: var(--height); }
-  }
-}
+/* ... */
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -77,11 +69,11 @@ Accordion
 ## Usage
 
 ```tsx
-import { 
-  Accordion, 
-  AccordionItem, 
-  AccordionTrigger, 
-  AccordionContent 
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent
 } from "@/components/ui/accordion";
 ```
 
@@ -100,13 +92,15 @@ import {
 
 ## Controlled
 
-Use the `value` and `onValueChange` props to control the accordion state programmatically.
+Use the `value` and `onValueChange` props to control the accordion.
 
 <ComponentPreview componentName="accordion" fileName="example-controlled" />
 
 ## States
 
 ### Disabled
+
+Disable one item or the entire accordion.
 
 <ComponentPreview componentName="accordion" fileName="example-disabled" />
 
@@ -120,15 +114,15 @@ Set the `collapsible` prop to `false` to disable the collapsible behavior.
 
 ### Multiple
 
-Use the `multiple` prop to allow multiple items to be open simultaneously.
+Use the `multiple` prop to allow multiple open items.
 
 <ComponentPreview componentName="accordion" fileName="example-multiple" />
 
-### Card
+## RTL
 
-Wrap the `Accordion` in a `Card` component.
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview componentName="accordion" fileName="example-card" />
+<RTLComponentPreview componentName="accordion" />
 
 ## API Reference
 
@@ -143,6 +137,9 @@ Root component.
 | `collapsible` | `boolean` | `true` |
 | `multiple` | `boolean` | `false` |
 | `onValueChange` | `ValueChangeDetails` | `-` |
+| `lazyMount` | `boolean` | `true` |
+| `unmountOnExit` | `boolean` | `true` |
+| `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
@@ -152,7 +149,7 @@ Single accordion item.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
+| `value` | `string` | `required` |
 | `disabled` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
@@ -173,7 +170,6 @@ Holds the collapsible content for the item.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/accordion#api-reference).

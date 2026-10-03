@@ -42,17 +42,23 @@ const Example = () => (
             <ContextMenuItem value="view">
               <EyeIcon />
               View
-              <ContextMenuShortcut>⌘ V</ContextMenuShortcut>
+              <ContextMenuShortcut className="hidden sm:inline-flex">
+                ⌘ V
+              </ContextMenuShortcut>
             </ContextMenuItem>
             <ContextMenuItem value="edit">
               <PencilIcon />
               Edit
-              <ContextMenuShortcut>⌘ E</ContextMenuShortcut>
+              <ContextMenuShortcut className="hidden sm:inline-flex">
+                ⌘ E
+              </ContextMenuShortcut>
             </ContextMenuItem>
             <ContextMenuItem value="delete" variant="destructive">
               <Trash2Icon />
               Delete
-              <ContextMenuShortcut>⌘ ⌫</ContextMenuShortcut>
+              <ContextMenuShortcut className="hidden sm:inline-flex">
+                ⌘ ⌫
+              </ContextMenuShortcut>
             </ContextMenuItem>
           </ContextMenuContent>
         </ContextMenu>
@@ -62,9 +68,9 @@ const Example = () => (
 );
 
 const users = [
-  { id: "1", name: "Alice Johnson", email: "alice@example.com" },
-  { id: "2", name: "Bruno Silva", email: "bruno@example.com" },
-  { id: "3", name: "Clara Mendes", email: "clara@example.com" },
+  { email: "alice@example.com", id: "1", name: "Alice Johnson" },
+  { email: "bruno@example.com", id: "2", name: "Bruno Silva" },
+  { email: "clara@example.com", id: "3", name: "Clara Mendes" },
 ];
 
 export default Example;

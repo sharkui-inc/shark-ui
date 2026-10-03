@@ -1,0 +1,40 @@
+import {
+  Terminal,
+  TerminalContent,
+} from "@/registry/react/components/terminal";
+import {
+  ToolResult,
+  ToolResultAction,
+  ToolResultContent,
+  ToolResultMeta,
+  ToolResultName,
+  ToolResultStatus,
+  ToolResultTitle,
+  ToolResultTrigger,
+} from "@/registry/react/components/tool-result";
+
+const Example = () => (
+  <ToolResult className="w-full max-w-lg" defaultOpen status="success">
+    <ToolResultTrigger>
+      <ToolResultTitle>Tests passed</ToolResultTitle>
+      <ToolResultMeta>2.9s</ToolResultMeta>
+      <ToolResultName>terminal.run</ToolResultName>
+      <ToolResultAction showTrigger={false}>
+        <ToolResultStatus />
+      </ToolResultAction>
+    </ToolResultTrigger>
+    <ToolResultContent>
+      <Terminal output={output}>
+        <TerminalContent />
+      </Terminal>
+    </ToolResultContent>
+  </ToolResult>
+);
+
+const output = [
+  " \u001B[32m✓\u001B[0m src/utils/helpers.test.ts (2)",
+  "",
+  "\u001B[32m Test Files  1 passed (2.9s)\u001B[0m",
+].join("\n");
+
+export default Example;

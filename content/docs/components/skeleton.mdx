@@ -1,10 +1,14 @@
 ---
 title: Skeleton
-description: Displays a loading state.
+description: Placeholder while content loads.
+seo:
+  description: Placeholder blocks that mirror layout while data loads.
 links:
   doc: https://ark-ui.com/docs/components/skeleton
   api: https://ark-ui.com/docs/components/skeleton#api-reference
 ---
+
+import manifest from "@/registry/manifest/skeleton";
 
 <ComponentPreview componentName="skeleton" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/skeleton
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -50,7 +52,7 @@ npm install @ark-ui/react
 ## Usage
 
 ```tsx
-import { 
+import {
   Skeleton,
   SkeletonCircle,
   SkeletonText,
@@ -65,7 +67,7 @@ import {
 
 ## Examples
 
-### Skeleton
+### Rectangle
 
 Rectangular skeleton placeholder.
 
@@ -83,9 +85,15 @@ Use the `lines` prop to control the number of placeholder lines; the last line i
 
 <ComponentPreview componentName="skeleton" fileName="example-skeleton-text" />
 
-### Loading cards
+### Loading Cards
 
 <ComponentPreview componentName="skeleton" fileName="example-loading-card" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="skeleton" />
 
 ## API Reference
 
@@ -95,8 +103,8 @@ Rectangular loading placeholder.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
 
 ### SkeletonCircle
 
@@ -104,8 +112,8 @@ Circular loading placeholder.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SkeletonText
 
@@ -114,8 +122,8 @@ Multi-line text placeholder. Last line is shorter by default to mimic text.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `lines` | `number` | `2` |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ---
 

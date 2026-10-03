@@ -30,34 +30,23 @@ import {
 } from "@/registry/react/components/select";
 import { toast } from "@/registry/react/components/toast";
 
-const formSchema = z.object({
-  language: z
-    .array(z.string())
-    .min(1, "Please select your spoken language.")
-    .refine((val) => val[0] !== "", "Please select your spoken language.")
-    .refine(
-      (val) => !val.includes("auto"),
-      "Auto-detection is not allowed. Please select a specific language."
-    ),
-});
-
 const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: {
       language: [""],
     },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "language-submitted",
-      title: "Language submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "language-submitted",
+      title: "Language submitted",
     });
   };
 
@@ -116,6 +105,17 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  language: z
+    .array(z.string())
+    .min(1, "Please select your spoken language.")
+    .refine((val) => val[0] !== "", "Please select your spoken language.")
+    .refine(
+      (val) => !val.includes("auto"),
+      "Auto-detection is not allowed. Please select a specific language."
+    ),
+});
 
 const collection = createListCollection({
   items: [

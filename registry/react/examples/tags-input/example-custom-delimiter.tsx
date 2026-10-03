@@ -7,8 +7,6 @@ import {
   TagsInputItem,
 } from "@/registry/react/components/tags-input";
 
-const tagDelimiter = /[,\s]+/;
-
 const Example = () => (
   <Field className="w-full max-w-sm">
     <FieldLabel>Frameworks</FieldLabel>
@@ -16,6 +14,7 @@ const Example = () => (
       className="w-full"
       defaultValue={["React"]}
       delimiter={tagDelimiter}
+      placeholder="Add framework"
     >
       <TagsInputContext>
         {({ value }) =>
@@ -29,5 +28,7 @@ const Example = () => (
     </TagsInput>
   </Field>
 );
+
+const tagDelimiter = /[,\s]+/;
 
 export default Example;

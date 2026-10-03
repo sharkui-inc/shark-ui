@@ -1,0 +1,250 @@
+---
+title: Base UI
+description: Migrate your project from Base UI to Shark UI.
+links:
+  doc: https://base-ui.com
+---
+
+[Base UI](https://base-ui.com) and [Ark UI](https://ark-ui.com) solve the same problem: accessible headless behavior you style yourself.
+
+> Shark UI wraps Ark with Tailwind defaults and a copy-and-own install flow.
+
+## What changes
+
+| Base UI | Shark |
+| --- | --- |
+| `render` on triggers and items | `asChild` with one host child |
+| Select `items` plus `Select.Item` children | Ark `collection`. `defaultValue` is a string array |
+| Combobox `items` and a `Combobox.List` render function | `useFilter` and `useListCollection`; render `collection.items` |
+| `@base-ui/react/*` imports | Shark component from [Components](/docs/components) |
+| Unstyled primitive parts | Named Shark parts with default Tailwind classes |
+
+## Component equivalents
+
+Names match. Toggle group item is `Toggle` in Base UI and `ToggleGroupItem` in Shark.
+
+## Triggers
+
+`render` receives the element. The text is its children.
+
+```tsx title="Base UI" showLineNumbers
+import { Menu } from "@base-ui/react/menu";
+
+<Menu.Root>
+  <Menu.Trigger render={<button type="button" />}>Open</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Positioner>
+      <Menu.Popup>
+        <Menu.Item render={<a href="/docs" />}>Documentation</Menu.Item>
+      </Menu.Popup>
+    </Menu.Positioner>
+  </Menu.Portal>
+</Menu.Root>;
+```
+
+The element is the `asChild` child. The text stays inside it.
+
+```tsx title="Shark UI" showLineNumbers
+import { Button } from "@/components/ui/button";
+import { Menu, MenuContent, MenuItem, MenuTrigger } from "@/components/ui/menu";
+
+<Menu>
+  <MenuTrigger asChild>
+    <Button variant="outline">Open</Button>
+  </MenuTrigger>
+  <MenuContent>
+    <MenuItem asChild>
+      <a href="/docs">Documentation</a>
+    </MenuItem>
+  </MenuContent>
+</Menu>;
+```
+
+## Select
+
+`Select.Item` children. `defaultValue` is a string. Root `items` is the selected-label map.
+
+```tsx title="Base UI" showLineNumbers
+import { Select } from "@base-ui/react/select";
+
+<Select.Root defaultValue="next">
+  <Select.Trigger>
+    <Select.Value placeholder="Framework" />
+  </Select.Trigger>
+  <Select.Portal>
+    <Select.Positioner>
+      <Select.Popup>
+        <Select.Item value="next">Next.js</Select.Item>
+        <Select.Item value="vite">Vite</Select.Item>
+      </Select.Popup>
+    </Select.Positioner>
+  </Select.Portal>
+</Select.Root>;
+```
+
+`collection`. `defaultValue` is `string[]`.
+
+```tsx title="Shark UI" showLineNumbers
+import { createListCollection } from "@ark-ui/react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const frameworks = createListCollection({
+  items: ["Next.js", "Vite"],
+});
+
+<Select collection={frameworks} defaultValue={["Next.js"]}>
+  <SelectTrigger>
+    <SelectValue placeholder="Framework" />
+  </SelectTrigger>
+  <SelectContent>
+    {frameworks.items.map((item) => (
+      <SelectItem item={item} key={item}>
+        {item}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>;
+```
+
+## Combobox
+
+`items`. `Combobox.List` is a render function.
+
+```tsx title="Base UI" showLineNumbers
+import { Combobox } from "@base-ui/react/combobox";
+
+const fruits = [
+  { label: "Apple", value: "apple" },
+  { label: "Banana", value: "banana" },
+];
+
+<Combobox.Root items={fruits}>
+  <Combobox.Input placeholder="Select a fruit" />
+  <Combobox.Portal>
+    <Combobox.Positioner>
+      <Combobox.Popup>
+        <Combobox.Empty>No fruits found.</Combobox.Empty>
+        <Combobox.List>
+          {(item) => (
+            <Combobox.Item key={item.value} value={item}>
+              {item.label}
+            </Combobox.Item>
+          )}
+        </Combobox.List>
+      </Combobox.Popup>
+    </Combobox.Positioner>
+  </Combobox.Portal>
+</Combobox.Root>;
+```
+
+`useFilter` and `useListCollection`. Render `collection.items`.
+
+```tsx title="Shark UI" showLineNumbers
+"use client";
+
+import { useFilter, useListCollection } from "@ark-ui/react";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
+
+const ComboboxExample = () => {
+  const { contains } = useFilter({ sensitivity: "base" });
+  const { collection, filter } = useListCollection({
+    filter: contains,
+    initialItems: [
+      { label: "Apple", value: "apple" },
+      { label: "Banana", value: "banana" },
+    ],
+  });
+
+  return (
+    <Combobox
+      collection={collection}
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
+    >
+      <ComboboxInput placeholder="Select a fruit" />
+      <ComboboxContent>
+        <ComboboxEmpty />
+        <ComboboxList>
+          {collection.items.map((item) => (
+            <ComboboxItem item={item} key={item.value}>
+              {item.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+};
+```
+
+## Toggle Group
+
+String array. `multiple` defaults to `false`.
+
+```tsx title="Base UI" showLineNumbers
+import { Toggle } from "@base-ui/react/toggle";
+import { ToggleGroup } from "@base-ui/react/toggle-group";
+
+<ToggleGroup defaultValue={["daily"]}>
+  <Toggle value="daily">Daily</Toggle>
+</ToggleGroup>;
+```
+
+String array. `multiple` defaults to `true`.
+
+```tsx title="Shark UI" showLineNumbers
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+
+<ToggleGroup defaultValue={["daily"]} multiple={false}>
+  <ToggleGroupItem value="daily">Daily</ToggleGroupItem>
+</ToggleGroup>;
+```
+
+## Accordion
+
+String array. `multiple` defaults to `false`.
+
+```tsx title="Base UI" showLineNumbers
+import { Accordion } from "@base-ui/react/accordion";
+
+<Accordion.Root defaultValue={["details"]}>
+  <Accordion.Item value="details">...</Accordion.Item>
+</Accordion.Root>;
+```
+
+String array. `collapsible` defaults to `true`.
+
+```tsx title="Shark UI" showLineNumbers
+import { Accordion, AccordionItem } from "@/components/ui/accordion";
+
+<Accordion defaultValue={["details"]}>
+  <AccordionItem value="details">...</AccordionItem>
+</Accordion>;
+```
+
+## Theming
+
+Base UI ships unstyled. Map your CSS variables to Shark tokens. See [Colors](/docs/colors) and [Styling](/docs/styling).
+
+## Checklist
+
+- Rewrite `render` to `asChild` on triggers and slotted controls.
+- Install Shark components from the docs; do not keep `@base-ui/react` imports.
+- Add collections on list primitives when required.
+- Re-check controlled values against the Shark docs page.
+- Keep overlay titles and labels accessible.
+- Use logical spacing for [RTL](/docs/rtl).
+
+Coming from shadcn on the Base UI base? See the [shadcn/ui guide](/docs/migration/shadcn).

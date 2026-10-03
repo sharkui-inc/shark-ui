@@ -2,102 +2,78 @@
 
 import { createListCollection } from "@ark-ui/react";
 import {
-  NativeSelect,
-  NativeSelectOption,
-} from "@registry/react/components/native-select";
-import { useIsMobile } from "@registry/react/hooks/use-is-mobile";
-import { useTheme } from "@teispace/next-themes";
-import { PRIMARY_COLORS } from "@/lib/themes";
-import { cn } from "@/lib/utils";
-import { Badge } from "@/registry/react/components/badge";
-import { Field, FieldLabel } from "@/registry/react/components/field";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/registry/react/components/select";
+  getPrimaryFillCss,
+  PRIMARY_COLORS,
+  withDefaultFirst,
+} from "@/lib/theme/catalog";
 import {
   DEFAULT_PRIMARY_COLOR,
+  DEFAULT_PRIMARY_TONE,
   type PrimaryColor,
-  useConfig,
-} from "@/store/config";
+  type PrimaryTone,
+  THEME_FIELDS,
+} from "@/lib/theme/config";
+import { useThemeCustomization } from "@/lib/theme/provider";
+import { ThemeSelectorField } from "./theme-selector.field";
+
+const collection = createListCollection({
+  items: withDefaultFirst(PRIMARY_COLORS, DEFAULT_PRIMARY_COLOR),
+});
+
+const renderPrimaryItem = (
+  item: (typeof PRIMARY_COLORS)[number],
+  primaryTone: PrimaryTone
+) => (
+  <div className="flex items-center gap-2">
+    <div
+      aria-hidden
+      className="size-4 rounded-full"
+      style={{ backgroundColor: getPrimaryFillCss(item.value, primaryTone) }}
+    />
+    {item.label}
+  </div>
+);
 
 export const ThemeSelectorPrimary = () => {
-  const isMobile = useIsMobile();
-  const { resolvedTheme } = useTheme();
-  const [config, setConfig] = useConfig();
-
-  const isLight = resolvedTheme === "light";
-
-  const collection = createListCollection({
-    items: PRIMARY_COLORS,
-  });
-
-  if (isMobile) {
-    return (
-      <Field>
-        <FieldLabel>Primary</FieldLabel>
-        <NativeSelect
-          onChange={({ target }) =>
-            setConfig({ ...config, primaryColor: target.value as PrimaryColor })
-          }
-          value={config.primaryColor}
-        >
-          {collection.items.map((item) => (
-            <NativeSelectOption key={item.value} value={item.value}>
-              {item.label}
-            </NativeSelectOption>
-          ))}
-        </NativeSelect>
-      </Field>
-    );
-  }
+  const { clearThemePreview, config, previewTheme, setPrimaryColor } =
+    useThemeCustomization();
+  const primaryTone = config.primaryTone ?? DEFAULT_PRIMARY_TONE;
 
   return (
-    <Field>
-      <FieldLabel>Primary</FieldLabel>
-      <Select
-        collection={collection}
-        onValueChange={({ value }) =>
-          setConfig({
-            ...config,
-            primaryColor: value[0] as PrimaryColor,
-          })
+    <ThemeSelectorField
+      collection={collection}
+      description={THEME_FIELDS.primaryColor.description}
+      label={THEME_FIELDS.primaryColor.label}
+      lockKey="primaryColor"
+      onPreview={(next) => {
+        if (!next) {
+          clearThemePreview();
+          return;
         }
-        value={[config.primaryColor]}
-      >
-        <SelectTrigger className="w-full">
-          <div className="flex items-center gap-2">
-            <div className="size-4 rounded-2xl bg-primary" />
-            <SelectValue placeholder="Select a theme" />
-          </div>
-        </SelectTrigger>
 
-        <SelectContent>
-          {collection.items.map((item) => {
-            const hexColor =
-              typeof item.hex === "string"
-                ? item.hex
-                : item.hex[isLight ? "light" : "dark"];
-
-            return (
-              <SelectItem item={item.value} key={item.value}>
-                <div className="flex items-center gap-2">
-                  <div className={cn("size-3 rounded-2xl", hexColor)} />
-                  {item.label}
-                  {item.value === DEFAULT_PRIMARY_COLOR && (
-                    <Badge size="sm" variant="info">
-                      Default
-                    </Badge>
-                  )}
-                </div>
-              </SelectItem>
-            );
-          })}
-        </SelectContent>
-      </Select>
-    </Field>
+        previewTheme({ primaryColor: next as PrimaryColor });
+      }}
+      onValueChange={({ value }) => {
+        const [next] = value;
+        if (next) {
+          setPrimaryColor(next as PrimaryColor);
+        }
+      }}
+      placeholder="Select a primary color"
+      renderItem={(item) => renderPrimaryItem(item, primaryTone)}
+      trigger={
+        <div
+          aria-hidden
+          className="size-4 rounded-full"
+          style={{
+            backgroundColor: getPrimaryFillCss(
+              config.primaryColor,
+              primaryTone
+            ),
+          }}
+        />
+      }
+      value={[config.primaryColor]}
+    />
   );
 };

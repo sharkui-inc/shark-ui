@@ -1,9 +1,12 @@
+interface SiteFeatures {
+  dynamicOgImages: boolean;
+}
+
 /**
- * Feature flags disabled to reduce Vercel Hobby (free) tier usage.
- * Dynamic OG images and raw markdown API routes consume serverless
- * function invocations. Re-enable when upgrading plan or self-hosting.
+ * Feature flags for surfaces that used to require serverless functions.
+ * Query-string OG (`/og?title=`) stays off on Hobby. Per-page Markdown uses
+ * static routes and does not need a feature flag.
  */
-export const SITE_FEATURES = {
+export const SITE_FEATURES: SiteFeatures = {
   dynamicOgImages: false,
-  rawMarkdownRoutes: false,
-} as const;
+};

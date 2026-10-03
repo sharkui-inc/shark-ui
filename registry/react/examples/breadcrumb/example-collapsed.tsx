@@ -9,7 +9,7 @@ import {
 } from "@/registry/react/components/breadcrumb";
 
 const Example = () => (
-  <Breadcrumb>
+  <Breadcrumb aria-label="Collapsed breadcrumb example">
     <BreadcrumbList>
       <BreadcrumbItem>
         <BreadcrumbLink href="#">Home</BreadcrumbLink>

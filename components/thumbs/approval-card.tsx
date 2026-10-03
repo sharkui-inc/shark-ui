@@ -1,0 +1,14 @@
+import { ThumbCard, type ThumbCardProps } from "./thumb-card";
+
+export const ApprovalCardThumb = (props: ThumbCardProps) => (
+  <ThumbCard {...props}>
+    <div className="flex w-full flex-col gap-2 rounded-xl border border-input bg-muted p-2 shadow-sm/4">
+      <div className="h-3 w-2/3 rounded bg-muted-foreground/32" />
+      <div className="h-16 rounded-md bg-muted-foreground/16" />
+      <div className="flex justify-end gap-2">
+        <div className="h-6 w-14 rounded-md bg-muted-foreground/24" />
+        <div className="h-6 w-16 rounded-md bg-primary" />
+      </div>
+    </div>
+  </ThumbCard>
+);

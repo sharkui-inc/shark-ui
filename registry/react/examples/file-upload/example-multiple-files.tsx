@@ -12,10 +12,20 @@ import {
   FileUploadTrigger,
 } from "@/registry/react/components/file-upload";
 import { Separator } from "@/registry/react/components/separator";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => (
-  <FileUpload className="mx-auto w-full max-w-xs" maxFiles={5}>
-    <FileUploadDropzone>
+  <FileUpload
+    className="mx-auto w-full max-w-xs"
+    maxFiles={5}
+    onFileReject={() =>
+      toast.error({
+        description: "You can upload up to 5 files at a time.",
+        title: "Upload failed.",
+      })
+    }
+  >
+    <FileUploadDropzone disableClick>
       <FileUploadDropzoneIcon />
       <FileUploadTitle>Drop files here</FileUploadTitle>
       <div className="flex items-center justify-center gap-2">

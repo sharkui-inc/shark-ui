@@ -21,31 +21,22 @@ import {
 } from "@/registry/react/components/field";
 import { InputOTP, InputOTPSlot } from "@/registry/react/components/input-otp";
 
-const formSchema = z.object({
-  backupCode: z
-    .array(z.string())
-    .length(6)
-    .refine((digits) => digits.every((d) => d.length === 1), {
-      message: "Enter all 6 digits of your backup code.",
-    }),
-});
-
 const Example = () => {
   const form = useForm({
     defaultValues: { backupCode: ["", "", "", "", "", ""] },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "backup-code-submitted",
-        title: "Backup code verified",
         description: (
           <pre className="mt-2">
             <code>{JSON.stringify(value, null, 2)}</code>
           </pre>
         ),
+        id: "backup-code-submitted",
+        title: "Backup code verified",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -104,5 +95,14 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  backupCode: z
+    .array(z.string())
+    .length(6)
+    .refine((digits) => digits.every((d) => d.length === 1), {
+      message: "Enter all 6 digits of your backup code.",
+    }),
+});
 
 export default Example;

@@ -4,8 +4,6 @@ import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata({
   title: "Ecommerce Template",
-  description:
-    "Online store with product grid, cart, checkout, and product detail pages.",
   url: "/templates/ecommerce",
 });
 
@@ -24,39 +22,45 @@ import { Separator } from "@/registry/react/components/separator";
 const PRODUCTS = [
   {
     id: "1",
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Wireless+Headphones&waveColor=1a6b5c",
     name: "Wireless Headphones",
     price: "$99",
-    image: "/images/placeholder.svg",
   },
   {
     id: "2",
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Smart+Watch&waveColor=2b6cb0",
     name: "Smart Watch",
     price: "$249",
-    image: "/images/placeholder.svg",
   },
   {
     id: "3",
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=Portable+Speaker&waveColor=7c3aed",
     name: "Portable Speaker",
     price: "$79",
-    image: "/images/placeholder.svg",
   },
   {
     id: "4",
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=USB-C+Hub&waveColor=ea580c",
     name: "USB-C Hub",
     price: "$45",
-    image: "/images/placeholder.svg",
   },
   {
     id: "5",
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=Mechanical+Keyboard&waveColor=e11d48",
     name: "Mechanical Keyboard",
     price: "$149",
-    image: "/images/placeholder.svg",
   },
   {
     id: "6",
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=Ergonomic+Mouse&waveColor=ca8a04",
     name: "Ergonomic Mouse",
     price: "$59",
-    image: "/images/placeholder.svg",
   },
 ];
 
@@ -80,7 +84,7 @@ const EcommerceTemplate = () => (
         </div>
         <Button asChild size="icon-md" variant="ghost">
           <Link aria-label="Shopping cart" href="#">
-            <ShoppingCartIcon aria-hidden className="size-5" />
+            <ShoppingCartIcon aria-hidden />
           </Link>
         </Button>
       </div>

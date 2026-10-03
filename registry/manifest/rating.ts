@@ -1,33 +1,23 @@
 import type { RegistryItemType } from "@/lib/registry";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "lucide-react"];
 
 const cssVars = {
-  light: {
-    "destructive-foreground": "var(--color-red-700)",
-    info: "var(--color-blue-500)",
-    "info-foreground": "var(--color-blue-700)",
-    success: "var(--color-emerald-500)",
-    "success-foreground": "var(--color-emerald-700)",
-    warning: "var(--color-amber-500)",
-    "warning-foreground": "var(--color-amber-700)",
-  },
   dark: {
-    "destructive-foreground": "var(--color-red-400)",
-    info: "var(--color-blue-500)",
-    "info-foreground": "var(--color-blue-400)",
-    success: "var(--color-emerald-500)",
-    "success-foreground": "var(--color-emerald-400)",
     warning: "var(--color-amber-500)",
-    "warning-foreground": "var(--color-amber-400)",
+  },
+  light: {
+    warning: "var(--color-amber-500)",
   },
 };
 
 const manifest: RegistryItemType = {
-  name: "rating",
-  type: "registry:ui",
-  dependencies,
   cssVars,
+  dependencies,
+  name: "rating",
+  registryDependencies: [registryUrl("/r/field.json")],
+  type: "registry:ui",
 };
 
 export default manifest;

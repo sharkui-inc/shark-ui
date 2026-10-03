@@ -1,6 +1,6 @@
 "use client";
 
-import { XIcon } from "lucide-react";
+import { FileIcon, FolderIcon, FolderOpenIcon, XIcon } from "lucide-react";
 import React from "react";
 import { buttonVariants } from "@/registry/react/components/button";
 import {
@@ -26,7 +26,7 @@ const Example = () => {
   const [activeItem, setActiveItem] = React.useState("");
 
   const handleSelectNode = (selectedNodes: TreeNodeType[]) => {
-    const selectedItem = selectedNodes.map((node) => node.name)[0];
+    const [selectedItem] = selectedNodes.map((node) => node.name);
 
     const isFolder = selectedNodes.every((node) => node.children?.length ?? 0);
 
@@ -57,24 +57,21 @@ const Example = () => {
       </div>
 
       <div className="flex flex-1 flex-col rounded-lg border p-0.5">
-        {activeItem && (
+        {activeItem ? (
           <Tabs className="flex-1" value={activeItem}>
             <TabsList variant="underline">
-              <TabsTrigger value={activeItem}>
-                {activeItem}
-
-                <div
-                  className={buttonVariants({
-                    variant: "ghost",
-                    size: "icon-xs",
-                  })}
-                  onClick={() => setActiveItem("")}
-                  role="button"
-                  tabIndex={0}
-                >
-                  <XIcon />
-                </div>
-              </TabsTrigger>
+              <TabsTrigger value={activeItem}>{activeItem}</TabsTrigger>
+              <button
+                aria-label="Close tab"
+                className={buttonVariants({
+                  size: "icon-xs",
+                  variant: "ghost",
+                })}
+                onClick={() => setActiveItem("")}
+                type="button"
+              >
+                <XIcon aria-hidden />
+              </button>
             </TabsList>
             <TabsContent
               className="p-2 text-muted-foreground text-sm"
@@ -83,7 +80,7 @@ const Example = () => {
               {"// File content"}
             </TabsContent>
           </Tabs>
-        )}
+        ) : null}
       </div>
     </div>
   );
@@ -91,28 +88,28 @@ const Example = () => {
 
 const collection = createTreeCollection({
   rootNode: {
-    id: "ROOT",
-    name: "",
     children: [
       {
-        id: "app",
-        name: "app",
         children: [
           { id: "app/page.tsx", name: "page.tsx" },
           { id: "app/layout.tsx", name: "layout.tsx" },
         ],
+        id: "app",
+        name: "app",
       },
       {
-        id: "components",
-        name: "components",
         children: [
           { id: "components/button.tsx", name: "button.tsx" },
           { id: "components/input.tsx", name: "input.tsx" },
         ],
+        id: "components",
+        name: "components",
       },
       { id: "package.json", name: "package.json" },
       { id: "readme.md", name: "README.md" },
     ],
+    id: "ROOT",
+    name: "",
   },
 });
 
@@ -123,7 +120,13 @@ const TreeNode = (props: React.ComponentProps<typeof TreeViewNode>) => {
     <TreeViewNode indexPath={indexPath} node={node} {...rest}>
       {node.children ? (
         <TreeViewBranch>
-          <TreeViewBranchItem>{node.name}</TreeViewBranchItem>
+          <TreeViewBranchItem
+            expandedIcon={FolderOpenIcon}
+            icon={FolderIcon}
+            showIndicator
+          >
+            {node.name}
+          </TreeViewBranchItem>
 
           <TreeViewBranchContent>
             {node.children.map((child, index) => (
@@ -137,7 +140,7 @@ const TreeNode = (props: React.ComponentProps<typeof TreeViewNode>) => {
         </TreeViewBranch>
       ) : (
         <TreeViewContent>
-          <TreeViewItem>{node.name}</TreeViewItem>
+          <TreeViewItem icon={FileIcon}>{node.name}</TreeViewItem>
         </TreeViewContent>
       )}
     </TreeViewNode>

@@ -1,4 +1,4 @@
-import { Loader2Icon } from "lucide-react";
+import { Spinner } from "@/registry/react/components/spinner";
 import {
   Steps,
   StepsIndicator,
@@ -9,23 +9,37 @@ import {
 } from "@/registry/react/components/steps";
 
 const Example = () => (
-  <Steps className="w-full max-w-md" count={items.length}>
-    <StepsList>
-      {items.map((item, index) => (
-        <StepsItem index={index} key={index}>
-          <StepsTrigger disabled>
-            <StepsIndicator>
-              {item ? <Loader2Icon className="animate-spin" /> : index + 1}
-            </StepsIndicator>
-          </StepsTrigger>
-
-          <StepsSeparator />
-        </StepsItem>
-      ))}
-    </StepsList>
-  </Steps>
+  <div className="mx-auto w-full max-w-xl">
+    <Steps className="w-full" count={items.length}>
+      <StepsList>
+        {items.map((item, index) => (
+          <StepsItem index={index} key={item.title}>
+            <StepsTrigger aria-label={item.title} disabled>
+              <StepsIndicator>
+                {item.loading ? <Spinner aria-hidden="true" /> : index + 1}
+              </StepsIndicator>
+            </StepsTrigger>
+            <StepsSeparator />
+          </StepsItem>
+        ))}
+      </StepsList>
+    </Steps>
+  </div>
 );
 
-const items = [true, false, false];
+const items = [
+  {
+    loading: true,
+    title: "Build the file",
+  },
+  {
+    loading: false,
+    title: "Validate data",
+  },
+  {
+    loading: false,
+    title: "Download export",
+  },
+];
 
 export default Example;

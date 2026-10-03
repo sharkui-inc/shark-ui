@@ -1,6 +1,6 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
+import { TrendingUpIcon } from "lucide-react";
 import { PolarAngleAxis, Radar, RadarChart } from "recharts";
 
 import {
@@ -21,63 +21,61 @@ import {
 export const description = "A radar chart with no grid";
 
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 273 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
+  { desktop: 186, month: "January" },
+  { desktop: 305, month: "February" },
+  { desktop: 237, month: "March" },
+  { desktop: 273, month: "April" },
+  { desktop: 209, month: "May" },
+  { desktop: 214, month: "June" },
 ];
 
 const chartConfig = {
   desktop: {
-    label: "Desktop",
     color: "var(--chart-1)",
+    label: "Desktop",
   },
 } satisfies ChartConfig;
 
-function ChartRadarGridNone() {
-  return (
-    <Card>
-      <CardHeader className="items-center pb-4">
-        <CardTitle>Radar Chart - Grid None</CardTitle>
-        <CardDescription>
-          Showing total visitors for the last 6 months
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="pb-0">
-        <ChartContainer
-          className="mx-auto aspect-square max-h-[250px]"
-          config={chartConfig}
-        >
-          <RadarChart data={chartData}>
-            <ChartTooltip
-              content={<ChartTooltipContent hideLabel />}
-              cursor={false}
-            />
-            <PolarAngleAxis dataKey="month" />
-            <Radar
-              dataKey="desktop"
-              dot={{
-                r: 4,
-                fillOpacity: 1,
-              }}
-              fill="var(--color-desktop)"
-              fillOpacity={0.6}
-            />
-          </RadarChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="flex items-center gap-2 text-muted-foreground leading-none">
-          January - June 2024
-        </div>
-      </CardFooter>
-    </Card>
-  );
-}
+const ChartRadarGridNone = () => (
+  <Card>
+    <CardHeader className="items-center pb-4">
+      <CardTitle>Radar Chart - Grid None</CardTitle>
+      <CardDescription>
+        Showing total visitors for the last 6 months
+      </CardDescription>
+    </CardHeader>
+    <CardContent className="pb-0">
+      <ChartContainer
+        className="mx-auto aspect-square max-h-[250px]"
+        config={chartConfig}
+      >
+        <RadarChart data={chartData}>
+          <ChartTooltip
+            content={<ChartTooltipContent hideLabel />}
+            cursor={false}
+          />
+          <PolarAngleAxis dataKey="month" />
+          <Radar
+            dataKey="desktop"
+            dot={{
+              fillOpacity: 1,
+              r: 4,
+            }}
+            fill="var(--color-desktop)"
+            fillOpacity={0.6}
+          />
+        </RadarChart>
+      </ChartContainer>
+    </CardContent>
+    <CardFooter className="flex-col gap-2 text-sm">
+      <div className="flex items-center gap-2 font-medium leading-none">
+        Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
+      </div>
+      <div className="flex items-center gap-2 text-muted-foreground leading-none">
+        January - June 2024
+      </div>
+    </CardFooter>
+  </Card>
+);
 
 export default ChartRadarGridNone;

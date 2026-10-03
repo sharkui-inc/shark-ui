@@ -1,0 +1,283 @@
+---
+title: shadcn/ui
+description: Migrate your project from shadcn/ui to Shark UI.
+links:
+  doc: https://ui.shadcn.com
+---
+
+[shadcn/ui](https://ui.shadcn.com) ships styled components on [Base UI](https://base-ui.com), [Radix UI](https://www.radix-ui.com/), and [React Aria](https://react-aria.dev/).
+
+> Shark UI is built on [Ark UI](https://ark-ui.com) with the same copy-and-own workflow.
+
+## What changes
+
+| Area | Difference |
+| --- | --- |
+| Triggers | Base UI `render` is Shark `asChild`. Radix already uses `asChild` |
+| Select | `items` + `SelectItem` is Shark `collection`. `defaultValue` is `string[]` |
+| Combobox | `items` + list render function is `useFilter` / `useListCollection` |
+| Toggle Group | `multiple` defaults to `false` in shadcn, `true` in Shark. Radix base uses `type` |
+| Accordion | `multiple` defaults to `false`. Shark `collapsible` defaults to `true`. Radix `type="single"` is a string |
+| Input OTP | No `input-otp` package, no `InputOTPGroup` |
+| Sidebar | `side` is `placement` |
+
+## Component equivalents
+
+| shadcn/ui | Shark UI |
+| --- | --- |
+| Dropdown Menu | [Menu](/docs/components/menu) |
+| Sonner | [Toast](/docs/components/toast) |
+| Label | [Field](/docs/components/field) |
+
+Label, control, and error. Form state stays in react-hook-form.
+
+## Triggers
+
+`render` receives the `Button`. `Open` is its children.
+
+```tsx title="Base UI" showLineNumbers
+<DropdownMenuTrigger render={<Button variant="outline" />}>
+  Open
+</DropdownMenuTrigger>
+```
+
+`Open` sits inside the `Button`, the only `asChild` child.
+
+```tsx title="Radix UI" showLineNumbers
+<DropdownMenuTrigger asChild>
+  <Button variant="outline">Open</Button>
+</DropdownMenuTrigger>
+```
+
+Same shape. `Open` sits inside the `Button`.
+
+```tsx title="Shark UI" showLineNumbers
+<MenuTrigger asChild>
+  <Button variant="outline">Open</Button>
+</MenuTrigger>
+```
+
+## Select
+
+`items` with `label` / `value`, plus `SelectItem`. `defaultValue` is a string.
+
+```tsx title="shadcn/ui" showLineNumbers
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const frameworks = [
+  { label: "Next.js", value: "next" },
+  { label: "Vite", value: "vite" },
+];
+
+<Select defaultValue="next" items={frameworks}>
+  <SelectTrigger>
+    <SelectValue placeholder="Framework" />
+  </SelectTrigger>
+  <SelectContent>
+    {frameworks.map((item) => (
+      <SelectItem key={item.value} value={item.value}>
+        {item.label}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>;
+```
+
+`collection`. `defaultValue` is `string[]`.
+
+```tsx title="Shark UI" showLineNumbers
+import { createListCollection } from "@ark-ui/react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const frameworks = createListCollection({
+  items: ["Next.js", "Vite"],
+});
+
+<Select collection={frameworks} defaultValue={["Next.js"]}>
+  <SelectTrigger>
+    <SelectValue placeholder="Framework" />
+  </SelectTrigger>
+  <SelectContent>
+    {frameworks.items.map((item) => (
+      <SelectItem item={item} key={item}>
+        {item}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>;
+```
+
+## Combobox
+
+`items`. `ComboboxList` is a render function.
+
+```tsx title="shadcn/ui" showLineNumbers
+"use client";
+
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
+
+const fruits = ["Apple", "Banana"];
+
+<Combobox items={fruits}>
+  <ComboboxInput placeholder="Select a fruit" />
+  <ComboboxContent>
+    <ComboboxEmpty>No fruits found.</ComboboxEmpty>
+    <ComboboxList>
+      {(item) => (
+        <ComboboxItem key={item} value={item}>
+          {item}
+        </ComboboxItem>
+      )}
+    </ComboboxList>
+  </ComboboxContent>
+</Combobox>;
+```
+
+`useFilter` and `useListCollection`. Render `collection.items`.
+
+```tsx title="Shark UI" showLineNumbers
+"use client";
+
+import { useFilter, useListCollection } from "@ark-ui/react";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
+
+const ComboboxExample = () => {
+  const { contains } = useFilter({ sensitivity: "base" });
+  const { collection, filter } = useListCollection({
+    filter: contains,
+    initialItems: [
+      { label: "Apple", value: "apple" },
+      { label: "Banana", value: "banana" },
+    ],
+  });
+
+  return (
+    <Combobox
+      collection={collection}
+      onInputValueChange={({ inputValue }) => filter(inputValue)}
+    >
+      <ComboboxInput placeholder="Select a fruit" />
+      <ComboboxContent>
+        <ComboboxEmpty />
+        <ComboboxList>
+          {collection.items.map((item) => (
+            <ComboboxItem item={item} key={item.value}>
+              {item.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+};
+```
+
+## Toggle Group
+
+Radix base: [Radix UI](/docs/migration/radix).
+
+String array. `multiple` defaults to `false`.
+
+```tsx title="shadcn/ui" showLineNumbers
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+
+<ToggleGroup defaultValue={["daily"]}>
+  <ToggleGroupItem value="daily">Daily</ToggleGroupItem>
+</ToggleGroup>;
+```
+
+String array. `multiple` defaults to `true`.
+
+```tsx title="Shark UI" showLineNumbers
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+
+<ToggleGroup defaultValue={["daily"]} multiple={false}>
+  <ToggleGroupItem value="daily">Daily</ToggleGroupItem>
+</ToggleGroup>;
+```
+
+## Accordion
+
+Radix base: [Radix UI](/docs/migration/radix).
+
+String array. `multiple` defaults to `false`.
+
+```tsx title="shadcn/ui" showLineNumbers
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+<Accordion defaultValue={["details"]}>
+  <AccordionItem value="details">
+    <AccordionTrigger>Details</AccordionTrigger>
+    <AccordionContent>...</AccordionContent>
+  </AccordionItem>
+</Accordion>;
+```
+
+String array. `collapsible` defaults to `true`.
+
+```tsx title="Shark UI" showLineNumbers
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+<Accordion defaultValue={["details"]}>
+  <AccordionItem value="details">
+    <AccordionTrigger>Details</AccordionTrigger>
+    <AccordionContent>...</AccordionContent>
+  </AccordionItem>
+</Accordion>;
+```
+
+## Colors and tokens
+
+Same semantic model as shadcn (`background`, `primary`, `muted`, and the rest). Shark also ships:
+
+- `destructive-foreground`
+- `success` / `success-foreground`
+- `warning` / `warning-foreground`
+- `info` / `info-foreground`
+
+See [Colors](/docs/colors), [Styling](/docs/styling), and the [Theme editor](/themes).
+
+## Checklist
+
+- Replace shadcn imports with Shark components from the docs.
+- Rewrite `render` to `asChild` on triggers and slotted controls.
+- Add collections where list primitives require them.
+- Re-check controlled values against the Shark docs page.
+- Keep overlay titles and control labels accessible.
+- Use logical spacing for [RTL](/docs/rtl).

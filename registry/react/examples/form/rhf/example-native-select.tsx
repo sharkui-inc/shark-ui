@@ -26,43 +26,23 @@ import {
 } from "@/registry/react/components/native-select";
 import { toast } from "@/registry/react/components/toast";
 
-const spokenLanguages = [
-  { label: "English", value: "en" },
-  { label: "Spanish", value: "es" },
-  { label: "French", value: "fr" },
-  { label: "German", value: "de" },
-  { label: "Italian", value: "it" },
-  { label: "Chinese", value: "zh" },
-  { label: "Japanese", value: "ja" },
-] as const;
-
-const formSchema = z.object({
-  language: z
-    .string()
-    .min(1, "Please select your spoken language.")
-    .refine((val) => val !== "auto", {
-      message:
-        "Auto-detection is not allowed. Please select a specific language.",
-    }),
-});
-
 const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: {
       language: "",
     },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "about-submitted",
-      title: "About submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "about-submitted",
+      title: "About submitted",
     });
   };
 
@@ -115,5 +95,25 @@ const Example = () => {
     </Card>
   );
 };
+
+const spokenLanguages = [
+  { label: "English", value: "en" },
+  { label: "Spanish", value: "es" },
+  { label: "French", value: "fr" },
+  { label: "German", value: "de" },
+  { label: "Italian", value: "it" },
+  { label: "Chinese", value: "zh" },
+  { label: "Japanese", value: "ja" },
+] as const;
+
+const formSchema = z.object({
+  language: z
+    .string()
+    .min(1, "Please select your spoken language.")
+    .refine((val) => val !== "auto", {
+      message:
+        "Auto-detection is not allowed. Please select a specific language.",
+    }),
+});
 
 export default Example;

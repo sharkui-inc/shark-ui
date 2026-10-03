@@ -2,14 +2,16 @@
 
 import {
   RadioGroup as ArkRadioGroup,
-  useRadioGroupContext,
+  useRadioGroupContext as useArkRadioGroupContext,
 } from "@ark-ui/react/radio-group";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { FieldLabel } from "@/registry/react/components/field";
+import {
+  FieldLabel,
+  fieldLabelVariants,
+} from "@/registry/react/components/field";
 
-export const useRadioGroup = useRadioGroupContext;
-
+export const useRadioGroupContext = useArkRadioGroupContext;
 export const RadioGroup = (
   props: React.ComponentProps<typeof ArkRadioGroup.Root>
 ) => {
@@ -38,7 +40,10 @@ export const RadioGroupItem = (
   return (
     <ArkRadioGroup.Item
       className={cn(
+        "relative",
         "inline-flex items-center gap-2",
+        "touch-manipulation",
+        "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
         "data-disabled:opacity-64",
         className
       )}
@@ -50,16 +55,17 @@ export const RadioGroupItem = (
           "relative",
           "inline-flex shrink-0 items-center justify-center",
           "size-4",
-          "border border-input shadow-xs/5",
-          "bg-input/30",
+          "border border-input shadow-xs/4",
+          "bg-input/32",
           "rounded-full",
           "before:size-1.5 before:rounded-full",
-          "data-focus-visible:border-primary data-focus-visible:ring-[3px] data-focus-visible:ring-ring/32 data-focus-visible:ring-offset-1 data-focus-visible:ring-offset-background",
-          "data-focus-visible:data-invalid:border-destructive/64 data-focus-visible:data-invalid:ring-destructive/48",
+          "data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24",
+          "data-[state=checked]:data-focus-visible:border-background",
           "data-invalid:border-destructive data-invalid:text-destructive data-invalid:ring-[3px] data-invalid:ring-destructive/24",
-          "dark:data-invalid:border-destructive-foreground dark:data-invalid:text-destructive dark:data-invalid:ring-[3px] dark:data-invalid:ring-destructive-foreground/20",
-          "data-[state=checked]:bg-primary data-[state=checked]:before:bg-primary-foreground",
-          "data-invalid:data-[state=checked]:bg-transparent data-invalid:data-[state=checked]:before:bg-destructive-foreground"
+          "dark:data-invalid:border-destructive-foreground dark:data-invalid:text-destructive dark:data-invalid:ring-[3px] dark:data-invalid:ring-destructive-foreground/24",
+          "data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:shadow-none data-[state=checked]:before:bg-primary-foreground",
+          "data-invalid:data-[state=checked]:border-destructive data-invalid:data-[state=checked]:bg-transparent data-invalid:data-[state=checked]:before:bg-destructive-foreground",
+          "dark:data-invalid:data-[state=checked]:border-destructive-foreground"
         )}
         data-slot="radio-group-item-control"
       />
@@ -78,7 +84,11 @@ export const RadioGroupText = (
 
   return (
     <FieldLabel asChild>
-      <ArkRadioGroup.ItemText data-slot="radio-group-item-text" {...rest}>
+      <ArkRadioGroup.ItemText
+        className={className}
+        data-slot="radio-group-item-text"
+        {...rest}
+      >
         {children}
       </ArkRadioGroup.ItemText>
     </FieldLabel>
@@ -88,13 +98,13 @@ export const RadioGroupText = (
 export const RadioGroupLabel = (
   props: React.ComponentProps<typeof ArkRadioGroup.Label>
 ) => {
-  const { children, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
-    <FieldLabel asChild>
-      <ArkRadioGroup.Label data-slot="radio-group-label" {...rest}>
-        {children}
-      </ArkRadioGroup.Label>
-    </FieldLabel>
+    <ArkRadioGroup.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="radio-group-label"
+      {...rest}
+    />
   );
 };

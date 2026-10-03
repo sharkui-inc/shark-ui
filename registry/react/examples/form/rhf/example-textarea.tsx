@@ -22,30 +22,23 @@ import {
 } from "@/registry/react/components/field";
 import { Textarea } from "@/registry/react/components/textarea";
 
-const formSchema = z.object({
-  about: z
-    .string()
-    .min(10, "Please provide at least 10 characters.")
-    .max(200, "Please keep it under 200 characters."),
-});
-
 const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: {
       about: "",
     },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "about-submitted",
-      title: "About submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "about-submitted",
+      title: "About submitted",
     });
   };
 
@@ -91,5 +84,12 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  about: z
+    .string()
+    .min(10, "Please provide at least 10 characters.")
+    .max(200, "Please keep it under 200 characters."),
+});
 
 export default Example;

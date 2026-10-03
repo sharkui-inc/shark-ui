@@ -1,18 +1,19 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "lucide-react"];
 
 const manifest: RegistryItemType = {
-  name: "date-picker",
-  type: "registry:ui",
   dependencies,
+  name: "date-picker",
   registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/calendar.json"),
-    absoluteUrl("/r/input.json"),
-    absoluteUrl("/r/input-group.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/calendar.json"),
+    registryUrl("/r/field.json"),
+    registryUrl("/r/input.json"),
+    registryUrl("/r/input-group.json"),
   ],
+  type: "registry:ui",
 };
 
 export default manifest;

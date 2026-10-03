@@ -1,0 +1,44 @@
+import {
+  Plan,
+  PlanContent,
+  PlanItem,
+  PlanItemContent,
+  PlanItemDetail,
+  PlanItemDetailFile,
+  PlanItemTrigger,
+} from "@/registry/react/components/plan";
+
+const Example = () => (
+  <Plan className="max-w-lg" status="in-progress">
+    <PlanContent>
+      <PlanItem collapsible status="completed">
+        <PlanItemTrigger title="Collect approved tenant documents" />
+        <PlanItemContent>
+          <PlanItemDetail>
+            Collected 428 documents from
+            <PlanItemDetailFile>content/customers/onda</PlanItemDetailFile>
+          </PlanItemDetail>
+        </PlanItemContent>
+      </PlanItem>
+      <PlanItem collapsible status="in-progress">
+        <PlanItemTrigger title="Index the tenant knowledge base" />
+        <PlanItemContent>
+          <PlanItemDetail>
+            Creating embeddings for 312 of 428 documents.
+          </PlanItemDetail>
+          <PlanItemDetail>
+            The next batch includes
+            <PlanItemDetailFile>
+              security/incident-response.md
+            </PlanItemDetailFile>
+          </PlanItemDetail>
+        </PlanItemContent>
+      </PlanItem>
+      <PlanItem status="pending">
+        <PlanItemTrigger title="Publish the tenant search index" />
+      </PlanItem>
+    </PlanContent>
+  </Plan>
+);
+
+export default Example;

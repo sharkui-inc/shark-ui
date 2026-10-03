@@ -13,8 +13,11 @@ const Example = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="w-64 space-y-2">
-      <Collapsible onOpenChange={({ open }) => setOpen(open)} open={open}>
+    <div className="flex min-w-64 flex-col gap-2">
+      <Collapsible
+        onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)}
+        open={open}
+      >
         <CollapsibleTrigger asChild>
           <Button className="w-full" clickEffect={false} variant="outline">
             {open ? "Collapse" : "Expand"}

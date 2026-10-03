@@ -15,24 +15,6 @@ import {
   ItemTitle,
 } from "@/registry/react/components/item";
 
-const people = [
-  {
-    username: "vinihvc",
-    avatar: "https://github.com/vinihvc.png",
-    email: "vinihvc@example.com",
-  },
-  {
-    username: "segunadebayo",
-    avatar: "https://github.com/segunadebayo.png",
-    email: "segunadebayo@example.com",
-  },
-  {
-    username: "pasqualevitiello",
-    avatar: "https://github.com/pasqualevitiello.png",
-    email: "pasqualevitiello@example.com",
-  },
-];
-
 const Example = () => (
   <ItemGroup className="max-w-sm">
     {people.map((person) => (
@@ -48,7 +30,12 @@ const Example = () => (
           <ItemDescription>{person.email}</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <Button className="rounded-full" size="icon-md" variant="ghost">
+          <Button
+            aria-label="More item actions"
+            className="rounded-full"
+            size="icon-md"
+            variant="ghost"
+          >
             <PlusIcon />
           </Button>
         </ItemActions>
@@ -56,5 +43,23 @@ const Example = () => (
     ))}
   </ItemGroup>
 );
+
+const people = [
+  {
+    avatar: "https://github.com/vinihvc.png",
+    email: "vinihvc@example.com",
+    username: "vinihvc",
+  },
+  {
+    avatar: "https://github.com/segunadebayo.png",
+    email: "segunadebayo@example.com",
+    username: "segunadebayo",
+  },
+  {
+    avatar: "https://github.com/pasqualevitiello.png",
+    email: "pasqualevitiello@example.com",
+    username: "pasqualevitiello",
+  },
+];
 
 export default Example;

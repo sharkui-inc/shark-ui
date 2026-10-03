@@ -10,7 +10,7 @@ import {
 
 const Example = () => (
   <InputGroup className="max-w-64">
-    <InputGroupInput placeholder="Enter tag" />
+    <InputGroupInput aria-label="Tag" placeholder="Enter tag" />
     <InputGroupAddon align="inline-end">
       <Badge pill size="sm" variant="success">
         Available

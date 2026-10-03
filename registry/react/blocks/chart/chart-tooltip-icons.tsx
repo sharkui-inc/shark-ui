@@ -1,6 +1,6 @@
 "use client";
 
-import { Footprints, Waves } from "lucide-react";
+import { FootprintsIcon, WavesIcon } from "lucide-react";
 import { Bar, BarChart, XAxis } from "recharts";
 
 import {
@@ -30,60 +30,58 @@ const chartData = [
 
 const chartConfig = {
   running: {
-    label: "Running",
     color: "var(--chart-1)",
-    icon: Footprints,
+    icon: FootprintsIcon,
+    label: "Running",
   },
   swimming: {
-    label: "Swimming",
     color: "var(--chart-2)",
-    icon: Waves,
+    icon: WavesIcon,
+    label: "Swimming",
   },
 } satisfies ChartConfig;
 
-function ChartTooltipIcons() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Tooltip - Icons</CardTitle>
-        <CardDescription>Tooltip with icons.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
-            <XAxis
-              axisLine={false}
-              dataKey="date"
-              tickFormatter={(value) =>
-                new Date(value).toLocaleDateString("en-US", {
-                  weekday: "short",
-                })
-              }
-              tickLine={false}
-              tickMargin={10}
-            />
-            <Bar
-              dataKey="running"
-              fill="var(--color-running)"
-              radius={[0, 0, 4, 4]}
-              stackId="a"
-            />
-            <Bar
-              dataKey="swimming"
-              fill="var(--color-swimming)"
-              radius={[4, 4, 0, 0]}
-              stackId="a"
-            />
-            <ChartTooltip
-              content={<ChartTooltipContent hideLabel />}
-              cursor={false}
-              defaultIndex={1}
-            />
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
-  );
-}
+const ChartTooltipIcons = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle>Tooltip - Icons</CardTitle>
+      <CardDescription>Tooltip with icons.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <ChartContainer config={chartConfig}>
+        <BarChart accessibilityLayer data={chartData}>
+          <XAxis
+            axisLine={false}
+            dataKey="date"
+            tickFormatter={(value) =>
+              new Date(value).toLocaleDateString("en-US", {
+                weekday: "short",
+              })
+            }
+            tickLine={false}
+            tickMargin={10}
+          />
+          <Bar
+            dataKey="running"
+            fill="var(--color-running)"
+            radius={[0, 0, 4, 4]}
+            stackId="a"
+          />
+          <Bar
+            dataKey="swimming"
+            fill="var(--color-swimming)"
+            radius={[4, 4, 0, 0]}
+            stackId="a"
+          />
+          <ChartTooltip
+            content={<ChartTooltipContent hideLabel />}
+            cursor={false}
+            defaultIndex={1}
+          />
+        </BarChart>
+      </ChartContainer>
+    </CardContent>
+  </Card>
+);
 
 export default ChartTooltipIcons;

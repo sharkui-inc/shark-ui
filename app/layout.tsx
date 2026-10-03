@@ -3,19 +3,32 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { MediaQuery } from "@/components/debug/media-query";
+import { JsonLd } from "@/components/seo/json-ld";
 import { SITE_CONFIG } from "@/config/site";
 import { fontHeading, fontMono, fontSans } from "@/lib/fonts";
+import {
+  getOrganizationJsonLd,
+  getSoftwareApplicationJsonLd,
+  getWebSiteJsonLd,
+} from "@/lib/json-ld";
+import { themeBootstrapScript } from "@/lib/theme/apply";
 import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
-import { SkipNavLink } from "@/registry/react/components/skip-nav";
 import { Toaster } from "@/registry/react/components/toast";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(absoluteUrl("/")),
-  title: {
-    default: SITE_CONFIG.name,
-    template: `%s | ${SITE_CONFIG.name}`,
+  alternates: {
+    types: {
+      "application/rss+xml": `${SITE_CONFIG.url}/rss.xml`,
+    },
+  },
+  creator: SITE_CONFIG.creator,
+  description: SITE_CONFIG.description,
+  icons: {
+    apple: "/apple-touch-icon.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
   },
   keywords: [
     "shark-ui",
@@ -26,42 +39,27 @@ export const metadata: Metadata = {
     "react",
     "ui",
   ],
-  creator: SITE_CONFIG.creator,
-  description: SITE_CONFIG.description,
+  metadataBase: new URL(absoluteUrl("/")),
   openGraph: {
-    title: SITE_CONFIG.name,
-    description: SITE_CONFIG.description,
     images: [
       {
-        url: absoluteUrl("/opengraph-image.png"),
-        width: 1200,
-        height: 630,
         alt: SITE_CONFIG.name,
+        height: 630,
+        url: absoluteUrl(SITE_CONFIG.ogImage),
+        width: 1200,
       },
     ],
-    url: absoluteUrl("/"),
-    type: "website",
     locale: "en_US",
     siteName: SITE_CONFIG.name,
   },
+  title: {
+    default: SITE_CONFIG.name,
+    template: `%s - ${SITE_CONFIG.name}`,
+  },
   twitter: {
     card: "summary_large_image",
-    title: SITE_CONFIG.name,
-    description: SITE_CONFIG.description,
-    images: [absoluteUrl("/opengraph-image.png")],
     creator: SITE_CONFIG.creator,
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
-  },
-  manifest: `${SITE_CONFIG.url}/site.webmanifest`,
-  alternates: {
-    canonical: absoluteUrl("/"),
-    types: {
-      "application/rss+xml": `${SITE_CONFIG.url}/rss.xml`,
-    },
+    images: [absoluteUrl(SITE_CONFIG.ogImage)],
   },
 };
 
@@ -74,10 +72,15 @@ const RootLayout = (props: LayoutProps<"/">) => {
       lang="en"
       suppressHydrationWarning
     >
-      <body>
+      <body suppressHydrationWarning>
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: The script is generated exclusively from local, allowlisted theme metadata.
+          dangerouslySetInnerHTML={{ __html: themeBootstrapScript }}
+        />
+        <JsonLd data={getOrganizationJsonLd()} />
+        <JsonLd data={getWebSiteJsonLd()} />
+        <JsonLd data={getSoftwareApplicationJsonLd()} />
         <Providers>
-          <SkipNavLink />
-
           {children}
 
           <Toaster />

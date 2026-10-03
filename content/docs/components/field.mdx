@@ -1,10 +1,14 @@
 ---
 title: Field
-description: Container for inputs, labels, and helper text.
+description: Label, control, and helper text.
+seo:
+  description: Wraps label, control, and helper or error text.
 links:
   doc: https://ark-ui.com/docs/components/field
   api: https://ark-ui.com/docs/components/field#api-reference
 ---
+
+import manifest from "@/registry/manifest/field";
 
 <ComponentPreview componentName="field" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/field
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -52,28 +54,28 @@ npm install @ark-ui/react tailwind-variants
 ## Anatomy
 
 ```text
-FieldSet
-├── FieldLegend
-└── FieldGroup
-    ├── Field
-    ├── FieldLabel
-    │   └── FieldRequiredIndicator
-    ├── FieldTitle
-    ├── FieldDescription
-    ├── FieldSeparator
-    ├── FieldHelper
-    └── FieldError
+FieldGroup
+├── FieldSet
+│   ├── FieldLegend
+│   └── Field
+│       ├── FieldLabel
+│       │   └── FieldRequiredIndicator
+│       ├── FieldTitle
+│       ├── FieldDescription
+│       ├── FieldHelper
+│       └── FieldError
+└── FieldSeparator
 ```
 
 ## Usage
 
 ```tsx
-import { 
-  Field, 
-  FieldLabel, 
-  FieldInput, 
-  FieldHelper, 
-  FieldError 
+import {
+  Field,
+  FieldLabel,
+  FieldInput,
+  FieldHelper,
+  FieldError
 } from "@/components/ui/field";
 ```
 
@@ -85,6 +87,26 @@ import {
   <FieldError>Email is required</FieldError>
 </Field>
 ```
+
+## States
+
+### Disabled
+
+<ComponentPreview componentName="field" fileName="example-disabled-field" />
+
+### Invalid
+
+<ComponentPreview componentName="field" fileName="example-with-error" />
+
+### Required
+
+Use the `required` prop with `FieldRequiredIndicator`.
+
+<ComponentPreview componentName="field" fileName="example-required-field" />
+
+### Read-only
+
+<ComponentPreview componentName="field" fileName="example-readonly" />
 
 ## Examples
 
@@ -132,7 +154,7 @@ import {
 
 Use `SliderLabel` inside the `Slider` to label the slider.
 
-<ComponentPreview componentName="field" fileName="example-slider-field" /> 
+<ComponentPreview componentName="field" fileName="example-slider-field" />
 
 ### Number Input
 
@@ -141,6 +163,12 @@ Use `SliderLabel` inside the `Slider` to label the slider.
 ### Field Group
 
 <ComponentPreview componentName="field" fileName="example-field-group" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="field" />
 
 ## API Reference
 
@@ -194,7 +222,7 @@ Wraps label, description, and error. Use with horizontal orientation.
 
 ### FieldLabel
 
-Label associated with the control.
+Label associated with Field-aware controls (`Input`, `Select`, `Combobox`, `Checkbox`, `Switch`, and similar). For Slider, Date Input, Date Picker, Listbox, Progress, and Radio Group, use that primitive's own Label inside its root.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -211,7 +239,7 @@ Label associated with the control.
 
 ### FieldTitle
 
-Title wrapper for grouped field content.
+Visual title for grouped field content (for example inside a wrapping `FieldLabel` card). Not a `<label>` and does not set `htmlFor`.
 
 | Prop | Type | Default |
 | --- | --- | --- |

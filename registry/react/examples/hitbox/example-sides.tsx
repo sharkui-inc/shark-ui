@@ -7,17 +7,17 @@ import { Field, FieldLabel } from "@/registry/react/components/field";
 import { Switch } from "@/registry/react/components/switch";
 
 const Example = () => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = React.useState(true);
 
   return (
     <div className="relative flex size-full items-center justify-center">
-      <div className="absolute top-2 right-2">
+      <div className="absolute inset-e-4 top-4">
         <Field orientation="horizontal">
+          <FieldLabel>Debug</FieldLabel>
           <Switch
             checked={show}
             onCheckedChange={({ checked }) => setShow(checked)}
           />
-          <FieldLabel>Show hitbox</FieldLabel>
         </Field>
       </div>
 
@@ -25,28 +25,28 @@ const Example = () => {
         <Button
           className={cn("hitbox-l-4", { "hitbox-debug": show })}
           clickEffect={false}
-          size="sm"
+          variant="secondary"
         >
           Left
         </Button>
         <Button
           className={cn("hitbox-t-4", { "hitbox-debug": show })}
           clickEffect={false}
-          size="sm"
+          variant="secondary"
         >
           Top
         </Button>
         <Button
           className={cn("hitbox-b-4", { "hitbox-debug": show })}
           clickEffect={false}
-          size="sm"
+          variant="secondary"
         >
           Bottom
         </Button>
         <Button
           className={cn("hitbox-r-4", { "hitbox-debug": show })}
           clickEffect={false}
-          size="sm"
+          variant="secondary"
         >
           Right
         </Button>

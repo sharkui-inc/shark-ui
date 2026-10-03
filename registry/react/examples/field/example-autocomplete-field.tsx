@@ -19,8 +19,8 @@ const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
 
   const { collection, filter } = useListCollection({
-    initialItems,
     filter: contains,
+    initialItems,
   });
 
   return (
@@ -30,10 +30,7 @@ const Example = () => {
         collection={collection}
         onInputValueChange={({ inputValue }) => filter(inputValue)}
       >
-        <AutocompleteInput
-          aria-label="Search items"
-          placeholder="Search items…"
-        />
+        <AutocompleteInput placeholder="Search items…" />
         <AutocompleteContent>
           <AutocompleteEmpty>No items found.</AutocompleteEmpty>
           <ComboboxList>

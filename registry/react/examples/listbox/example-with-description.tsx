@@ -1,12 +1,13 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
+import { BellOffIcon, CircleIcon, MoonIcon } from "lucide-react";
 import { Item } from "@/registry/react/components/item";
 import {
   Listbox,
   ListboxContent,
   ListboxItem,
-  ListboxItemIndicator,
+  ListboxItemDescription,
   ListboxItemText,
 } from "@/registry/react/components/listbox";
 
@@ -14,17 +15,21 @@ const Example = () => (
   <Item className="w-full max-w-xs p-1" variant="outline">
     <Listbox collection={collection}>
       <ListboxContent>
-        {collection.items.map((item) => (
-          <ListboxItem item={item} key={item.value}>
-            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-              <ListboxItemText>{item.label}</ListboxItemText>
-              <span className="text-muted-foreground text-xs">
-                {item.description}
-              </span>
-            </div>
-            <ListboxItemIndicator />
-          </ListboxItem>
-        ))}
+        {collection.items.map((item) => {
+          const Icon = item.icon;
+
+          return (
+            <ListboxItem item={item} key={item.value}>
+              <Icon aria-hidden />
+              <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                <ListboxItemText>{item.label}</ListboxItemText>
+                <ListboxItemDescription>
+                  {item.description}
+                </ListboxItemDescription>
+              </div>
+            </ListboxItem>
+          );
+        })}
       </ListboxContent>
     </Listbox>
   </Item>
@@ -33,19 +38,22 @@ const Example = () => (
 const collection = createListCollection({
   items: [
     {
-      label: "Brazil",
-      value: "br",
-      description: "South America's country, Portuguese speaking.",
+      description: "Ready for new messages.",
+      icon: CircleIcon,
+      label: "Available",
+      value: "available",
     },
     {
-      label: "Mexico",
-      value: "mx",
-      description: "North America's country, Spanish speaking.",
+      description: "Away until later today.",
+      icon: MoonIcon,
+      label: "Away",
+      value: "away",
     },
     {
-      label: "Ireland",
-      value: "ie",
-      description: "Europe's country, Irish/English speaking.",
+      description: "Mute all notifications.",
+      icon: BellOffIcon,
+      label: "Do not disturb",
+      value: "dnd",
     },
   ],
 });

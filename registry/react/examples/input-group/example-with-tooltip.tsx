@@ -15,7 +15,7 @@ import {
 
 const Example = () => (
   <InputGroup className="max-w-64">
-    <InputGroupInput placeholder="Enter value" />
+    <InputGroupInput aria-label="Value" placeholder="Enter value" />
     <InputGroupAddon align="inline-end">
       <Tooltip>
         <TooltipTrigger asChild>

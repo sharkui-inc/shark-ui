@@ -10,16 +10,16 @@ const Example = () => {
   });
 
   return (
-    <p className="font-medium text-foreground text-lg leading-relaxed">
-      {chunks.map((chunk, index) =>
+    <p className="text-foreground text-lg leading-relaxed">
+      {chunks.map((chunk) =>
         chunk.match ? (
           <mark
             className="relative bg-transparent px-0 font-semibold text-primary"
-            key={`${chunk.text}-${index}`}
+            key={chunk.text}
           >
             {chunk.text}
             <svg
-              aria-hidden="true"
+              aria-hidden
               className="pointer-events-none absolute -bottom-1 left-0 select-none"
               viewBox="0 0 580 23"
               xmlns="http://www.w3.org/2000/svg"
@@ -31,9 +31,7 @@ const Example = () => {
             </svg>
           </mark>
         ) : (
-          <React.Fragment key={`${chunk.text}-${index}`}>
-            {chunk.text}
-          </React.Fragment>
+          <React.Fragment key={chunk.text}>{chunk.text}</React.Fragment>
         )
       )}
     </p>

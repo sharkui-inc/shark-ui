@@ -1,0 +1,194 @@
+"use client";
+
+import { createListCollection } from "@ark-ui/react";
+import { PencilIcon, SquarePlusIcon, Trash2Icon } from "lucide-react";
+import React from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogClose,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+} from "@/registry/react/components/alert-dialog";
+import { Button } from "@/registry/react/components/button";
+import {
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+} from "@/registry/react/components/dialog";
+import {
+  Field,
+  FieldGroup,
+  FieldLabel,
+} from "@/registry/react/components/field";
+import { Input } from "@/registry/react/components/input";
+import { Item } from "@/registry/react/components/item";
+import {
+  Listbox,
+  ListboxContent,
+  ListboxItem,
+  ListboxItemDescription,
+  ListboxItemGroup,
+  ListboxItemText,
+  ListboxSeparator,
+  ListboxShortcut,
+} from "@/registry/react/components/listbox";
+
+export const FileActionsExample = (props: React.ComponentProps<"div">) => {
+  const [dialog, setDialog] = React.useState<"delete" | "edit" | "new" | null>(
+    null
+  );
+  const [isSaving, setIsSaving] = React.useState(false);
+
+  return (
+    <>
+      <Item className="p-1" variant="outline" {...props}>
+        <Listbox
+          aria-label="File actions"
+          className="w-full"
+          collection={collection}
+          onSelect={({ value }) => {
+            if (value === "new-file") {
+              setDialog("new");
+            } else if (value === "edit-file") {
+              setDialog("edit");
+            } else if (value === "delete-file") {
+              setDialog("delete");
+            }
+          }}
+          selectionMode="none"
+        >
+          <ListboxContent>
+            <ListboxItemGroup heading="Actions">
+              <ListboxItem item={collection.items[0]}>
+                <SquarePlusIcon aria-hidden />
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                  <ListboxItemText>New file</ListboxItemText>
+                  <ListboxItemDescription>
+                    Create a new file
+                  </ListboxItemDescription>
+                </div>
+                <ListboxShortcut>⌘N</ListboxShortcut>
+              </ListboxItem>
+              <ListboxItem item={collection.items[1]}>
+                <PencilIcon aria-hidden />
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                  <ListboxItemText>Edit file</ListboxItemText>
+                  <ListboxItemDescription>Make changes</ListboxItemDescription>
+                </div>
+                <ListboxShortcut>⌘E</ListboxShortcut>
+              </ListboxItem>
+            </ListboxItemGroup>
+            <ListboxSeparator />
+            <ListboxItemGroup heading="Danger zone">
+              <ListboxItem item={collection.items[2]} variant="destructive">
+                <Trash2Icon aria-hidden />
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                  <ListboxItemText>Delete file</ListboxItemText>
+                  <ListboxItemDescription>Move to trash</ListboxItemDescription>
+                </div>
+                <ListboxShortcut>⌘⇧D</ListboxShortcut>
+              </ListboxItem>
+            </ListboxItemGroup>
+          </ListboxContent>
+        </Listbox>
+      </Item>
+
+      <Dialog
+        onOpenChange={({ open }) => {
+          if (!open) {
+            setDialog(null);
+          }
+        }}
+        open={dialog === "new" || dialog === "edit"}
+      >
+        <DialogContent>
+          <form
+            className="contents"
+            onSubmit={async (event) => {
+              event.preventDefault();
+              setIsSaving(true);
+              await new Promise((resolve) => {
+                window.setTimeout(resolve, 600);
+              });
+              setIsSaving(false);
+              setDialog(null);
+            }}
+          >
+            <DialogHeader
+              description={
+                dialog === "new"
+                  ? "Name the file to add it to this preview."
+                  : "Rename the current file in this preview."
+              }
+              title={dialog === "new" ? "New file" : "Edit file"}
+            />
+            <DialogBody>
+              <FieldGroup>
+                <Field>
+                  <FieldLabel>Filename</FieldLabel>
+                  <Input
+                    defaultValue={dialog === "edit" ? "notes.md" : ""}
+                    name="filename"
+                    placeholder="notes.md"
+                    required
+                  />
+                </Field>
+              </FieldGroup>
+            </DialogBody>
+            <DialogFooter>
+              <Button isLoading={isSaving} type="submit">
+                {dialog === "new" ? "Create" : "Save"}
+              </Button>
+              <DialogClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DialogClose>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      <AlertDialog
+        onOpenChange={({ open }) => {
+          if (!open) {
+            setDialog(null);
+          }
+        }}
+        open={dialog === "delete"}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader
+            description="This preview will move notes.md to trash."
+            title="Delete this file?"
+          />
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogClose asChild>
+              <AlertDialogAction
+                onClick={() => {
+                  setDialog(null);
+                }}
+                variant="destructive"
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogClose>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
+  );
+};
+
+const collection = createListCollection({
+  items: [
+    { label: "New file", value: "new-file" },
+    { label: "Edit file", value: "edit-file" },
+    { label: "Delete file", value: "delete-file" },
+  ],
+});

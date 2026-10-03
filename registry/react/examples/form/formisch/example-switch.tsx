@@ -28,31 +28,21 @@ import {
 } from "@/registry/react/components/field";
 import { Switch } from "@/registry/react/components/switch";
 
-const formSchema = v.object({
-  twoFactor: v.pipe(
-    v.boolean(),
-    v.check(
-      (val) => val === true,
-      "It is highly recommended to enable two-factor authentication."
-    )
-  ),
-});
-
-export const Example = () => {
+const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: { twoFactor: false },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "about-submitted",
-      title: "About submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "about-submitted",
+      title: "About submitted",
     });
   };
 
@@ -71,6 +61,8 @@ export const Example = () => {
               {(field) => (
                 <Field
                   invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
                   orientation="horizontal"
                 >
                   <FieldContent>
@@ -100,5 +92,15 @@ export const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  twoFactor: v.pipe(
+    v.boolean(),
+    v.check(
+      (val) => val === true,
+      "It is highly recommended to enable two-factor authentication."
+    )
+  ),
+});
 
 export default Example;

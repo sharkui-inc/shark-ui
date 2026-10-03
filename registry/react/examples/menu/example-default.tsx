@@ -1,15 +1,15 @@
 import {
-  Archive,
-  ArchiveX,
-  Bell,
-  CirclePlus,
-  FolderInput,
-  MailX,
-  Reply,
-  Send,
-  SquarePen,
-  Trash,
-  Trash2,
+  ArchiveIcon,
+  ArchiveXIcon,
+  BellIcon,
+  CirclePlusIcon,
+  FolderInputIcon,
+  MailXIcon,
+  ReplyIcon,
+  SendIcon,
+  SquarePenIcon,
+  Trash2Icon,
+  TrashIcon,
 } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -33,46 +33,46 @@ const MenuDemo = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-40">
+    <MenuContent className="min-w-40">
       <MenuGroup>
         <MenuItem value="forward">
-          <Send /> Forward
-          <MenuShortcut>⌘F</MenuShortcut>
+          <SendIcon /> Forward
+          <MenuShortcut className="hidden sm:inline-flex">⌘F</MenuShortcut>
         </MenuItem>
         <MenuItem value="reply">
-          <Reply /> Reply
-          <MenuShortcut>⌘R</MenuShortcut>
+          <ReplyIcon /> Reply
+          <MenuShortcut className="hidden sm:inline-flex">⌘R</MenuShortcut>
         </MenuItem>
         <MenuItem value="archive">
-          <Archive /> Archive
-          <MenuShortcut>⌘Z</MenuShortcut>
+          <ArchiveIcon /> Archive
+          <MenuShortcut className="hidden sm:inline-flex">⌘Z</MenuShortcut>
         </MenuItem>
         <MenuSub>
           <MenuSubTrigger>
-            <FolderInput /> Move to
+            <FolderInputIcon /> Move to
           </MenuSubTrigger>
           <MenuSubContent>
             <MenuItem value="move-to-folder-1">
-              <ArchiveX /> Junk
+              <ArchiveXIcon /> Junk
             </MenuItem>
             <MenuItem value="move-to-folder-2">
-              <Trash /> Trash
+              <TrashIcon /> Trash
             </MenuItem>
             <MenuItem value="move-to-folder-3">
-              <Bell /> Reminders
+              <BellIcon /> Reminders
             </MenuItem>
             <MenuSub>
               <MenuSubTrigger>
-                <CirclePlus />
+                <CirclePlusIcon />
                 More
               </MenuSubTrigger>
               <MenuSubContent>
                 <MenuItem value="move-to-folder-4">
-                  <SquarePen />
+                  <SquarePenIcon />
                   Drafts
                 </MenuItem>
                 <MenuItem value="move-to-folder-6">
-                  <MailX />
+                  <MailXIcon />
                   Spam
                 </MenuItem>
               </MenuSubContent>
@@ -91,8 +91,8 @@ const MenuDemo = () => (
         </MenuCheckboxItem>
         <MenuSeparator />
         <MenuItem value="delete" variant="destructive">
-          <Trash2 /> Delete
-          <MenuShortcut>⌘ ⌫</MenuShortcut>
+          <Trash2Icon /> Delete
+          <MenuShortcut className="hidden sm:inline-flex">⌘ ⌫</MenuShortcut>
         </MenuItem>
       </MenuGroup>
     </MenuContent>

@@ -1,11 +1,11 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const manifest: RegistryItemType = {
-  name: "color-picker",
-  type: "registry:ui",
   dependencies: ["@ark-ui/react", "lucide-react"],
-  registryDependencies: [absoluteUrl("/r/button.json")],
+  name: "color-picker",
+  registryDependencies: [registryUrl("/r/button.json")],
+  type: "registry:ui",
 };
 
 export default manifest;

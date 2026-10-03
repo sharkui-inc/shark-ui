@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { Bar, BarChart, XAxis } from "recharts";
 
 import {
@@ -29,16 +30,16 @@ const chartData = [
 
 const chartConfig = {
   running: {
-    label: "Running",
     color: "var(--chart-1)",
+    label: "Running",
   },
   swimming: {
-    label: "Swimming",
     color: "var(--chart-2)",
+    label: "Swimming",
   },
 } satisfies ChartConfig;
 
-function ChartTooltipAdvanced() {
+const ChartTooltipAdvanced = () => {
   return (
     <Card>
       <CardHeader>
@@ -76,11 +77,11 @@ function ChartTooltipAdvanced() {
             <ChartTooltip
               content={
                 <ChartTooltipContent
-                  className="w-[180px]"
+                  className="w-44"
                   formatter={(value, name, item, index) => (
                     <>
                       <div
-                        className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
+                        className="h-2.5 w-2.5 shrink-0 rounded-sm bg-(--color-bg)"
                         style={
                           {
                             "--color-bg": `var(--color-${name})`,
@@ -120,6 +121,6 @@ function ChartTooltipAdvanced() {
       </CardContent>
     </Card>
   );
-}
+};
 
 export default ChartTooltipAdvanced;

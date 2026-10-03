@@ -14,6 +14,7 @@ const Example = () => {
   return (
     <div className="flex flex-col gap-4">
       <Pagination
+        aria-label="Controlled pagination"
         count={50}
         onPageChange={(details) => setPage(details.page)}
         page={page}

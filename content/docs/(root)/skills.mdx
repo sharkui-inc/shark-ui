@@ -1,60 +1,51 @@
 ---
 title: Skills
-description: Give your agent knowledge to ship correct components, patterns, and migrations.
+description: Install the Shark UI skill so agents follow registry patterns, Ark composition, and migrations.
 ---
 
-This skill covers Shark UI components, patterns, and styling. Your assistant uses it to implement those pieces correctly in your project.
+This [Agent Skills](https://agentskills.io/specification) package teaches an agent how to add, compose, style, and migrate Shark UI components in your project.
 
-You can ask for something concrete:
+Examples of what to ask:
 
 - _“Add a settings dialog with a form and save/cancel buttons.”_
-- _“Add a combobox with search filtering.”_
-- _“Migrate this shadcn dropdown to Shark’s Menu.”_
-- _“Add a Select with grouped options and a placeholder.”_
+- _“Replace this Radix dropdown with Shark Menu.”_
+- _“Build a filter bar with Shark tokens that works in RTL.”_
 
-## Installation
+## Install
 
 ```bash
 npx skills add sharkui-inc/shark-ui
 ```
 
-The public directory and leaderboard live at [skills.sh](https://skills.sh).
+Open a new agent session in the repo and try a component task to confirm it loaded. If the client does not pick it up, follow the setup steps on [skills.sh](https://www.skills.sh/).
 
-## What you get
+## What it helps with
 
-The layout matches other mature UI skills: a compact entry file and deeper material you load only when the task needs it.
+### Build and compose
 
-### Component knowledge
+Pick the right component, add it with the [registry and CLI](/docs/installation), and follow its Ark UI parts. The skill covers nesting, `asChild` triggers, collections, form fields, and accessible overlays.
 
-Your assistant gets a map of the registry: what to import, how parts nest, and where the sharp edges are. Overlays (**Dialog** vs **Sheet**), menus (**Menu** vs **Context Menu**), list controls (**Select** vs **Combobox** with collections and filters), **Field**-driven forms, and **Sidebar** shells each have a short guide in the skill pack. That material stays aligned with the published component list in this project and the MDX on this site, so “what the skill says” and “what the docs say” stay in sync.
+### Migrate and refactor
 
-### Styling conventions
+Rewrite Radix UI, Base UI, or shadcn-style code into Shark while keeping semantics and keyboard behavior. Use the [migration guides](/docs/migration) for API differences; do not treat a migration as an import rename.
 
-Tailwind CSS v4, semantic tokens, and the small habits that keep Shark visually consistent, plus the editorial rules we keep for examples and previews (thumbs, field widths, chart tooltips, sidebar preview framing, and similar detail).
+### Style consistently
 
-### Migration patterns
+Reach for semantic tokens, existing variants, logical RTL-safe utilities, and documented patterns before custom CSS. For visual rules, use [Styling](/docs/styling) and the [design contract](/design.md). Use the [design handbook](https://github.com/sharkui-inc/shark-ui/blob/main/DESIGN.md) when you need rationale or want to propose an extension.
 
-When someone pastes radix, base-ui, or shadcn-shaped code, the skill nudges the rewrite toward **Shark UI**: collection objects for list primitives, and the chart or sidebar patterns we actually ship, not a generic “swap the import path” pass.
+## Use it with the docs
 
-### CLI and registry
+The skill is project guidance. Published docs stay the source of truth for APIs, installation, and visual rules.
 
-The same workflow this site documents for adding components (shadcn-style CLI and the public registry JSON hosted here). The skill reminds agents to follow each component’s installation section, dependency list, and registry entry.
+- Start at [/llms.txt](/llms.txt), then load the smallest matching index and Markdown pages.
+- Before changing a component, read its Markdown page and a shipped example.
+- Read [/design.md](/design.md) before generating or refining UI. Use the handbook for rationale or extension decisions.
+- Shark UI is React, Ark UI, and Tailwind CSS v4. Do not swap in Radix UI or Base UI APIs.
 
-### Registry examples
+## Keeping it current
 
-Every serious answer should look at the shipped examples that sit beside each component in source. Those snippets are the library’s own compositions; matching them keeps generated UI aligned with how Shark is maintained, not a one-line stub from a model’s training cut-off.
+Reinstall the skill when you update the library or spot a mismatch. If the skill and docs disagree, follow the docs and report it in the [repository](https://github.com/sharkui-inc/shark-ui).
 
-## How it works
+## Compatibility
 
-1. **Activation:** After install, your agent discovers the skill the same way it discovers other Agent Skills.
-2. **Progressive depth:** The **SKILL.md** file links into the registry index, shared rule files, and per-component notes only when the prompt touches that surface.
-3. **Pattern enforcement:** The assistant follows Shark composition, combobox collection and filtering, chart tooltip wiring where applicable, sidebar preview layout, and the import conventions.
-4. **Examples before invention:** The workflow tells the model to read the MDX for the component and the matching example snippets.
-
-## Supported agents
-
-Any editor or CLI that implements the [Agent Skills](https://agentskills.io) layout can consume this bundle: Claude Code, Cursor, Codex, Cline, Windsurf, GitHub Copilot, and the rest of the list on [skills.sh](https://skills.sh).
-
-## In the repository
-
-The skill is versioned in the same open-source project as Shark UI. If you want to read or change it, open the project on [GitHub](https://github.com/sharkui-inc/shark-ui/tree/main/skills/shark-ui).
+Works with agents that support the Agent Skills format. Client support differs; see the list and setup notes on [skills.sh](https://www.skills.sh/).

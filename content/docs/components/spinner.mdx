@@ -1,7 +1,11 @@
 ---
 title: Spinner
-description: A spinner for displaying a loading state.
+description: Loading spinner.
+seo:
+  description: Loading spinner for pending requests and busy buttons.
 ---
+
+import manifest from "@/registry/manifest/spinner";
 
 <ComponentPreview componentName="spinner" />
 
@@ -28,9 +32,7 @@ npx shadcn@latest add @shark/spinner
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -76,6 +78,12 @@ Use a spinner in an input group addon to indicate a loading or validating state.
 
 <ComponentPreview componentName="spinner" fileName="example-input-group" />
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="spinner" />
+
 ## API Reference
 
 ### Spinner
@@ -84,5 +92,5 @@ Use the `Spinner` component to display a loading indicator. It forwards SVG prop
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `aria-label` | `string` | `"Loading"` |

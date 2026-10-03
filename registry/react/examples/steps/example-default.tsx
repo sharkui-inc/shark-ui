@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRight } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   Steps,
@@ -13,14 +13,12 @@ import {
   StepsTrigger,
 } from "@/registry/react/components/steps";
 
-const steps = Array.from({ length: 3 }, (_, index) => index + 1);
-
 const StepsDemo = () => (
-  <Steps className="size-full max-w-md" count={steps.length}>
+  <Steps className="mx-auto h-[300px] w-full max-w-xl" count={steps.length}>
     <StepsList>
       {steps.map((step) => (
         <StepsItem index={step - 1} key={step}>
-          <StepsTrigger>
+          <StepsTrigger aria-label={`Step ${step}`}>
             <StepsIndicator>{step}</StepsIndicator>
           </StepsTrigger>
           <StepsSeparator />
@@ -47,17 +45,22 @@ const StepsDemo = () => (
       <StepsNext asChild>
         <Button>
           Next
-          <ChevronRight />
+          <ChevronRightIcon className="rtl:rotate-180" data-icon="inline-end" />
         </Button>
       </StepsNext>
       <StepsPrevious asChild>
         <Button variant="outline">
-          <ChevronLeftIcon />
+          <ChevronLeftIcon
+            className="rtl:rotate-180"
+            data-icon="inline-start"
+          />
           Back
         </Button>
       </StepsPrevious>
     </div>
   </Steps>
 );
+
+const steps = Array.from({ length: 3 }, (_, index) => index + 1);
 
 export default StepsDemo;

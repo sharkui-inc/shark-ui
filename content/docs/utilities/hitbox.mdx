@@ -24,7 +24,7 @@ npx shadcn@latest add @shark/hitbox
 <TabsContent value="manual">
 
 <Steps>
-<Step>Import the following semantic color variables into your CSS file when using `hitbox-debug`</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
@@ -35,19 +35,19 @@ npx shadcn@latest add @shark/hitbox
 
 :root {
   --info: var(--color-blue-500);
-  --success: var(--color-emerald-500);
+  --success: var(--color-emerald-600);
 }
 
 .dark {
   --info: var(--color-blue-500);
-  --success: var(--color-emerald-500);
+  --success: var(--color-emerald-600);
 }
 ```
 </CodeCollapsibleWrapper>
 
-<Step>Import the following CSS rules into your `globals.css`</Step>
+<Step>Import the following rules into your CSS file:</Step>
 
-```css title="globals.css" showLineNumbers
+```css showLineNumbers
 @utility hitbox-debug {
   position: relative;
   &::before {
@@ -58,10 +58,10 @@ npx shadcn@latest add @shark/hitbox
     bottom: var(--hitbox-b, 0px);
     left: var(--hitbox-l, 0px);
     pointer-events: inherit;
-    @apply border border-dashed border-info bg-info/10;
+    @apply border border-dashed border-info bg-info/8;
   }
   &:hover::before {
-    @apply border border-dashed border-success bg-success/10;
+    @apply border border-dashed border-success bg-success/8;
   }
 }
 @utility hitbox {
@@ -181,14 +181,14 @@ Use `hitbox-y-*` so adjacent items feel continuous.
 
 ## API Reference
 
-| Class | Expansion |
-| --- | --- |
-| `hitbox` | Base (no expansion) |
-| `hitbox-*` | All sides (spacing or `[value]`) |
-| `hitbox-l-*` | Left |
-| `hitbox-r-*` | Right |
-| `hitbox-t-*` | Top |
-| `hitbox-b-*` | Bottom |
-| `hitbox-x-*` | Left and right |
-| `hitbox-y-*` | Top and bottom |
-| `hitbox-debug` | Debug overlay |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `hitbox` | `string` | `-` |
+| `hitbox-*` | `string` | `-` |
+| `hitbox-l-*` | `string` | `-` |
+| `hitbox-r-*` | `string` | `-` |
+| `hitbox-t-*` | `string` | `-` |
+| `hitbox-b-*` | `string` | `-` |
+| `hitbox-x-*` | `string` | `-` |
+| `hitbox-y-*` | `string` | `-` |
+| `hitbox-debug` | `string` | `-` |

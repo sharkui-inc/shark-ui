@@ -35,38 +35,27 @@ import {
   FieldLabel,
 } from "@/registry/react/components/field";
 
-const formSchema = v.object({
-  stack: v.pipe(
-    v.array(v.string()),
-    v.minLength(1, "Pick a suggestion or type your primary technology."),
-    v.check(
-      (val) => val[0] !== "",
-      "Pick a suggestion or type your primary technology."
-    )
-  ),
-});
-
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
-    initialItems,
     filter: contains,
+    initialItems,
   });
 
   const form = useForm({
-    schema: formSchema,
     initialInput: { stack: [""] },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "stack-submitted",
-      title: "Stack preference saved",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "stack-submitted",
+      title: "Stack preference saved",
     });
   };
 
@@ -83,7 +72,11 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["stack"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldLabel>Primary technology</FieldLabel>
                   <Autocomplete
                     collection={collection}
@@ -125,6 +118,17 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  stack: v.pipe(
+    v.array(v.string()),
+    v.minLength(1, "Pick a suggestion or type your primary technology."),
+    v.check(
+      (val) => val[0] !== "",
+      "Pick a suggestion or type your primary technology."
+    )
+  ),
+});
 
 const initialItems = [
   { label: "React", value: "react" },

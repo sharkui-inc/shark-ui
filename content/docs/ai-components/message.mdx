@@ -1,0 +1,230 @@
+---
+title: Message
+description: Chat message with avatar, header, and footer.
+seo:
+  description: Structure a chat message with an avatar, header, and footer.
+---
+
+import manifest from "@/registry/manifest/message";
+
+<ComponentPreview componentName="message" autoHeight />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/message
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/message.tsx" src="/message.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+MessageGroup
+└── Message
+    ├── MessageAvatar
+    └── MessageContent
+        ├── MessageHeader
+        ├── MessageBubble
+        └── MessageFooter
+            └── MessageActions
+                └── MessageAction
+```
+
+## Usage
+
+```tsx
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Message,
+  MessageAvatar,
+  MessageContent,
+} from "@/components/ui/message";
+import {
+  MessageBubble,
+  MessageBubbleContent,
+} from "@/components/ui/message-bubble";
+```
+
+```tsx
+<Message>
+  <MessageAvatar>
+    <Avatar>
+      <AvatarImage alt="@vinihvc" src="https://github.com/vinihvc.png" />
+      <AvatarFallback>VV</AvatarFallback>
+    </Avatar>
+  </MessageAvatar>
+  <MessageContent>
+    <MessageBubble>
+      <MessageBubbleContent>How can I help you today?</MessageBubbleContent>
+    </MessageBubble>
+  </MessageContent>
+</Message>
+```
+
+The row is `Message`. Put the surface in [Message Bubble](/docs/ai-components/message-bubble), set `align="end"` for the current user, and scroll the thread with [Message Scroller](/docs/ai-components/message-scroller).
+
+## Alignment
+
+Flip the row with `align`.
+
+<ComponentPreview componentName="message" fileName="example-align" />
+
+## Avatar
+
+`MessageAvatar` sits beside the bubble and follows `align`.
+
+<ComponentPreview componentName="message" fileName="example-avatar" />
+
+## Group
+
+Stack same-sender turns in `MessageGroup`. Leave `MessageAvatar` empty on earlier rows so the last avatar still lines up.
+
+<ComponentPreview componentName="message" fileName="example-group" />
+
+## Header and Footer
+
+Name in `MessageHeader`, status in `MessageFooter`.
+
+<ComponentPreview componentName="message" fileName="example-header-footer" />
+
+## Actions
+
+`MessageActions` go in `MessageFooter`. Pass `tooltip` or `label` on each `MessageAction`.
+
+<ComponentPreview componentName="message" fileName="example-actions" />
+
+## Context Menu
+
+<ComponentPreview componentName="message" fileName="example-context-menu" />
+
+## Attachment
+
+Put [Attachment](/docs/ai-components/attachment) in `MessageContent`.
+
+<ComponentPreview
+  autoHeight
+  componentName="message"
+  fileName="example-attachment"
+/>
+
+## Open Graph
+
+<ComponentPreview
+  componentName="message"
+  fileName="example-open-graph"
+/>
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="message" />
+
+## API Reference
+
+### MessageGroup
+
+Stacks related messages.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### Message
+
+Transcript row. `align="end"` is the current user.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `align` | `"start" \| "end"` | `"start"` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### MessageAvatar
+
+Bottom of the bubble. Shifts up past a footer or bottom reactions.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### MessageContent
+
+Column for header, bubble, and footer.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### MessageHeader
+
+Name or timestamp above the bubble.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### MessageFooter
+
+Timestamp or actions below the bubble.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### MessageActions
+
+Container for message action buttons.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### MessageAction
+
+Icon button with an optional tooltip.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `tooltip` | `string` | `-` |
+| `label` | `string` | `-` |
+| `variant` | `"default" \| "outline" \| "secondary" \| "ghost" \| "link" \| "destructive"` | `"ghost"` |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon-xs" \| "icon-sm" \| "icon-md" \| "icon-lg" \| "icon-xl"` | `"icon-xs"` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |

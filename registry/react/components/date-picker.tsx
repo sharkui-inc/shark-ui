@@ -2,17 +2,14 @@
 
 import {
   DatePicker as ArkDatePicker,
-  useDatePickerContext,
+  useDatePickerContext as useArkDatePickerContext,
 } from "@ark-ui/react/date-picker";
 import { Portal } from "@ark-ui/react/portal";
 import { CalendarIcon, ClockIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/react/components/button";
-import {
-  Calendar,
-  CalendarPresetTrigger,
-} from "@/registry/react/components/calendar";
+import { CalendarPresetTrigger } from "@/registry/react/components/calendar";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import type { Input, InputProps } from "@/registry/react/components/input";
 import {
   InputGroup,
@@ -21,16 +18,43 @@ import {
   InputGroupInput,
 } from "@/registry/react/components/input-group";
 
-export const useDatePicker = useDatePickerContext;
-
-export const DatePicker = (props: React.ComponentProps<typeof Calendar>) => {
-  const { positioning = { placement: "top" }, ...rest } = props;
+export const useDatePickerContext = useArkDatePickerContext;
+export const DatePicker = (
+  props: Omit<React.ComponentProps<typeof ArkDatePicker.Root>, "inline">
+) => {
+  const {
+    lazyMount = true,
+    unmountOnExit = true,
+    positioning,
+    className,
+    ...rest
+  } = props;
 
   return (
-    <Calendar
+    <ArkDatePicker.Root
+      className={cn("[--cell-size:--spacing(9)]", "w-fit", className)}
       data-slot="date-picker"
+      lazyMount={lazyMount}
+      positioning={{
+        placement: "top",
+        ...positioning,
+      }}
+      unmountOnExit={unmountOnExit}
+      {...rest}
       inline={false}
-      positioning={positioning}
+    />
+  );
+};
+
+export const DatePickerLabel = (
+  props: React.ComponentProps<typeof ArkDatePicker.Label>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkDatePicker.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="date-picker-label"
       {...rest}
     />
   );
@@ -39,14 +63,23 @@ export const DatePicker = (props: React.ComponentProps<typeof Calendar>) => {
 export const DatePickerTrigger = (
   props: React.ComponentProps<typeof ArkDatePicker.Trigger>
 ) => {
-  const { className, children, ...rest } = props;
+  const {
+    className,
+    children,
+    "aria-labelledby": ariaLabelledBy,
+    ...rest
+  } = props;
+  const datePicker = useDatePickerContext();
+  const labelId = datePicker.getLabelProps().id;
+  const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
 
   return (
     <ArkDatePicker.Control data-slot="date-picker-control">
       <ArkDatePicker.Trigger
+        aria-labelledby={labelledBy || undefined}
         className={cn(
           "justify-start",
-          "text-left data-placeholder-shown:[&>span]:text-muted-foreground",
+          "text-start data-placeholder-shown:[&>span]:text-muted-foreground",
           "active:scale-100",
           "[&_svg:not([class*='text-'])]:opacity-64",
           className
@@ -71,22 +104,15 @@ export const DatePickerInput = (props: DatePickerInputProps) => {
     <ArkDatePicker.Control data-slot="date-picker-control">
       <InputGroup size={size}>
         <ArkDatePicker.Input asChild data-slot="date-picker-input" {...rest}>
-          <InputGroupInput />
+          <InputGroupInput className={className} />
         </ArkDatePicker.Input>
 
         <InputGroupAddon align="inline-end">
-          <InputGroupButton
-            asChild
-            data-slot="input-group-button"
-            size="icon-xs"
-            variant="ghost"
-          >
-            <ArkDatePicker.Trigger asChild data-slot="date-picker-trigger">
-              <Button size="icon-md" variant="ghost">
-                <CalendarIcon aria-hidden className="text-muted-foreground" />
-              </Button>
-            </ArkDatePicker.Trigger>
-          </InputGroupButton>
+          <ArkDatePicker.Trigger asChild data-slot="date-picker-trigger">
+            <InputGroupButton size="icon-xs" variant="ghost">
+              <CalendarIcon aria-hidden className="text-muted-foreground" />
+            </InputGroupButton>
+          </ArkDatePicker.Trigger>
         </InputGroupAddon>
       </InputGroup>
     </ArkDatePicker.Control>
@@ -97,11 +123,9 @@ export const DatePickerTimer = (props: React.ComponentProps<typeof Input>) => {
   const { id, value, defaultValue, className, ...rest } = props;
 
   return (
-    <InputGroup {...rest}>
-      <InputGroupAddon>
-        <ClockIcon />
-      </InputGroupAddon>
+    <InputGroup>
       <InputGroupInput
+        {...rest}
         className={cn(
           "[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none",
           className
@@ -112,6 +136,9 @@ export const DatePickerTimer = (props: React.ComponentProps<typeof Input>) => {
         type="time"
         value={value}
       />
+      <InputGroupAddon>
+        <ClockIcon />
+      </InputGroupAddon>
     </InputGroup>
   );
 };
@@ -126,19 +153,21 @@ export const DatePickerContent = (
       <ArkDatePicker.Positioner data-slot="date-picker-positioner">
         <ArkDatePicker.Content
           className={cn(
-            "[--cell-size:--spacing(8)]",
+            "[--cell-size:--spacing(9)]",
             "z-[calc(50+var(--layer-index,0))]",
             "w-fit min-w-72",
             "p-3",
             "bg-popover",
             "text-popover-foreground",
-            "rounded-xl border shadow-lg/5",
-            "outline-none",
+            "rounded-xl border shadow-lg/4",
+            "outline-hidden",
             "origin-(--transform-origin)",
+            "duration-150 ease-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=closed]:animate-out data-[state=open]:animate-in",
             "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
-            "motion-reduce:animate-none!",
+            "motion-reduce:animate-none",
+            "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
           )}
           data-slot="date-picker-content"

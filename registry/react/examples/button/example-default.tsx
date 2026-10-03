@@ -4,7 +4,7 @@ import { Button } from "@/registry/react/components/button";
 const ButtonDemo = () => (
   <div className="flex flex-wrap gap-2">
     <Button variant="outline">Button</Button>
-    <Button size="icon-md" variant="outline">
+    <Button aria-label="Add" size="icon-md" variant="outline">
       <CirclePlusIcon />
     </Button>
   </div>

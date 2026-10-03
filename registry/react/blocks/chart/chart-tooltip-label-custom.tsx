@@ -32,62 +32,60 @@ const chartConfig = {
     label: "Activities",
   },
   running: {
-    label: "Running",
     color: "var(--chart-1)",
+    label: "Running",
   },
   swimming: {
-    label: "Swimming",
     color: "var(--chart-2)",
+    label: "Swimming",
   },
 } satisfies ChartConfig;
 
-function ChartTooltipLabelCustom() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Tooltip - Custom label</CardTitle>
-        <CardDescription>
-          Tooltip with custom label from chartConfig.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
-            <XAxis
-              axisLine={false}
-              dataKey="date"
-              tickFormatter={(value) =>
-                new Date(value).toLocaleDateString("en-US", {
-                  weekday: "short",
-                })
-              }
-              tickLine={false}
-              tickMargin={10}
-            />
-            <Bar
-              dataKey="running"
-              fill="var(--color-running)"
-              radius={[0, 0, 4, 4]}
-              stackId="a"
-            />
-            <Bar
-              dataKey="swimming"
-              fill="var(--color-swimming)"
-              radius={[4, 4, 0, 0]}
-              stackId="a"
-            />
-            <ChartTooltip
-              content={
-                <ChartTooltipContent indicator="line" labelKey="activities" />
-              }
-              cursor={false}
-              defaultIndex={1}
-            />
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
-  );
-}
+const ChartTooltipLabelCustom = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle>Tooltip - Custom label</CardTitle>
+      <CardDescription>
+        Tooltip with custom label from chartConfig.
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <ChartContainer config={chartConfig}>
+        <BarChart accessibilityLayer data={chartData}>
+          <XAxis
+            axisLine={false}
+            dataKey="date"
+            tickFormatter={(value) =>
+              new Date(value).toLocaleDateString("en-US", {
+                weekday: "short",
+              })
+            }
+            tickLine={false}
+            tickMargin={10}
+          />
+          <Bar
+            dataKey="running"
+            fill="var(--color-running)"
+            radius={[0, 0, 4, 4]}
+            stackId="a"
+          />
+          <Bar
+            dataKey="swimming"
+            fill="var(--color-swimming)"
+            radius={[4, 4, 0, 0]}
+            stackId="a"
+          />
+          <ChartTooltip
+            content={
+              <ChartTooltipContent indicator="line" labelKey="activities" />
+            }
+            cursor={false}
+            defaultIndex={1}
+          />
+        </BarChart>
+      </ChartContainer>
+    </CardContent>
+  </Card>
+);
 
 export default ChartTooltipLabelCustom;

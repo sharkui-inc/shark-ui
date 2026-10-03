@@ -22,30 +22,24 @@ import {
 } from "@/registry/react/components/field";
 import { Switch } from "@/registry/react/components/switch";
 
-const formSchema = z.object({
-  twoFactor: z.boolean().refine((val) => val === true, {
-    message: "It is highly recommended to enable two-factor authentication.",
-  }),
-});
-
-export const Example = () => {
+const Example = () => {
   const form = useForm({
     defaultValues: {
       twoFactor: false,
     },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "about-submitted",
-        title: "About submitted",
         description: (
           <pre className="mt-2">
             <code>{JSON.stringify(value, null, 2)}</code>
           </pre>
         ),
+        id: "about-submitted",
+        title: "About submitted",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -106,5 +100,11 @@ export const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  twoFactor: z.boolean().refine((val) => val === true, {
+    message: "It is highly recommended to enable two-factor authentication.",
+  }),
+});
 
 export default Example;

@@ -1,102 +1,114 @@
-import type { InferPageType } from "fumadocs-core/source";
 import { SITE_CONFIG } from "@/config/site";
-import { source } from "@/lib/fumadocs";
 
-export type LLMPage = InferPageType<typeof source>;
-
-const SECTIONS = [
-  "components",
+export const LLM_INDEXES = [
+  "foundations",
   "installation",
-  "utilities",
-  "hooks",
-  "forms",
+  "components",
+  "patterns",
   "changelog",
 ] as const;
 
-const SECTION_LABELS: Record<(typeof SECTIONS)[number], string> = {
-  components: "Components",
-  installation: "Installation",
-  utilities: "Utilities",
-  hooks: "Hooks",
-  forms: "Forms",
-  changelog: "Changelog",
-};
+export type LLMIndexName = (typeof LLM_INDEXES)[number];
 
-function groupPagesBySection(pages: LLMPage[]) {
-  const bySection = new Map<string, LLMPage[]>();
-  for (const page of pages) {
-    const first = page.slugs[0];
-    const section =
-      first && SECTIONS.includes(first as (typeof SECTIONS)[number])
-        ? first
-        : "handbook";
-    const list = bySection.get(section) ?? [];
-    list.push(page);
-    bySection.set(section, list);
-  }
-  return bySection;
+export const LLM_INDEX_CONTENT_TYPE = "text/plain; charset=utf-8";
+
+export interface LLMDocPage {
+  data: {
+    description?: string;
+    seo?: {
+      description?: string;
+    };
+    title: string;
+  };
+  slugs: string[];
+  url: string;
 }
 
-function appendComponentsSection(
-  lines: string[],
-  bySection: Map<string, LLMPage[]>,
-  baseUrl: string
-) {
-  const componentPages = bySection.get("components") ?? [];
-  const components = componentPages.filter((p) => p.slugs.length > 1);
-  const hasIndex = componentPages.some((p) => p.slugs.length === 1);
-  if (!hasIndex && components.length === 0) {
-    return;
-  }
-
-  lines.push("### Components", "");
-  if (hasIndex) {
-    lines.push(
-      `- [All Components](${baseUrl}/docs/components): Explore the full list of components available in the library.`,
-      ""
-    );
-  }
-  for (const p of components) {
-    lines.push(
-      `- [${p.data.title}](${baseUrl}${p.url}): ${p.data.description}`
-    );
-  }
-  lines.push("");
-}
-
-export const buildLLMIndex = (baseUrl = SITE_CONFIG.url) => {
-  const pages = source.getPages();
-  const bySection = groupPagesBySection(pages);
-  const lines: string[] = [];
-
-  appendComponentsSection(lines, bySection, baseUrl);
-
-  const handbook = bySection.get("handbook") ?? [];
-  if (handbook.length > 0) {
-    lines.push("### Handbook", "");
-    for (const p of handbook) {
-      lines.push(
-        `- [${p.data.title}](${baseUrl}${p.url}): ${p.data.description}`
-      );
-    }
-    lines.push("");
-  }
-
-  for (const key of SECTIONS) {
-    if (key === "components") {
-      continue;
-    }
-    const list = bySection.get(key) ?? [];
-    if (list.length > 0) {
-      lines.push(`### ${SECTION_LABELS[key]}`, "");
-      for (const p of list) {
-        lines.push(
-          `- [${p.data.title}](${baseUrl}${p.url}): ${p.data.description}`
-        );
-      }
-      lines.push("");
-    }
-  }
-
-  return lines.join("\n").trimEnd();
+const INDEXES: Record<
+  LLMIndexName,
+  { description: string; intro?: string; title: string }
+> = {
+  changelog: {
+    description: "Release notes and migration-relevant changes.",
+    title: "Changelog",
+  },
+  components: {
+    description: "Component APIs, installation, and examples.",
+    intro:
+      "Use the component documentation and shipped examples before writing code. Shark UI is built on Ark UI, not Radix UI or Base UI.",
+    title: "Components",
+  },
+  foundations: {
+    description:
+      "Copy-and-own architecture, Ark UI composition, Tailwind v4, tokens, RTL, and Skills.",
+    intro:
+      "Shark UI is React components you copy into your project. It uses Ark UI and Tailwind CSS v4; do not substitute Radix UI or Base UI APIs. Install the Shark UI Skill when your agent supports Agent Skills.",
+    title: "Foundations",
+  },
+  installation: {
+    description: "Setup for supported frameworks and manual installation.",
+    title: "Installation",
+  },
+  patterns: {
+    description:
+      "AI Components, form integrations, helpers, hooks, utilities, and migrations.",
+    intro:
+      "Load only the section below that matches the task. For form, collection, or overlay UI, use the Components index.",
+    title: "Patterns",
+  },
 };
+
+/** Top-level docs section → which LLM index owns it. Everything else is Foundations. */
+const SECTION_INDEX: Record<string, LLMIndexName> = {
+  "ai-components": "patterns",
+  changelog: "changelog",
+  components: "components",
+  forms: "patterns",
+  helpers: "patterns",
+  hooks: "patterns",
+  installation: "installation",
+  migration: "patterns",
+  utilities: "patterns",
+};
+
+const indexForPage = (page: LLMDocPage): LLMIndexName =>
+  SECTION_INDEX[page.slugs[0] ?? ""] ?? "foundations";
+
+const pageLink = (page: LLMDocPage, baseUrl: string) => {
+  const description =
+    page.data.seo?.description ??
+    page.data.description ??
+    "Documentation for Shark UI.";
+  return `- [${page.data.title}](${baseUrl}${page.url}.md): ${description}`;
+};
+
+export const buildLLMIndexSection = (
+  index: LLMIndexName,
+  pages: LLMDocPage[],
+  baseUrl: string = SITE_CONFIG.url
+) => {
+  const { description, intro, title } = INDEXES[index];
+
+  const links = pages
+    .filter((page) => indexForPage(page) === index)
+    .map((page) => pageLink(page, baseUrl));
+
+  return [
+    `# Shark UI ${title}`,
+    "",
+    `> ${description}`,
+    "",
+    ...(intro ? [intro, ""] : []),
+    "## Documentation",
+    "",
+    ...links,
+  ].join("\n");
+};
+
+export const isLLMIndexName = (value: string): value is LLMIndexName =>
+  (LLM_INDEXES as readonly string[]).includes(value);
+
+export const createLLMIndexResponse = (content: string) =>
+  new Response(content, {
+    headers: { "Content-Type": LLM_INDEX_CONTENT_TYPE },
+  });

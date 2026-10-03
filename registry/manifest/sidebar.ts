@@ -1,22 +1,23 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "tailwind-variants", "lucide-react"];
 
 const manifest: RegistryItemType = {
-  name: "sidebar",
-  type: "registry:ui",
   dependencies,
+  name: "sidebar",
   registryDependencies: [
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/input.json"),
-    absoluteUrl("/r/scroll-area.json"),
-    absoluteUrl("/r/separator.json"),
-    absoluteUrl("/r/sheet.json"),
-    absoluteUrl("/r/skeleton.json"),
-    absoluteUrl("/r/tooltip.json"),
-    absoluteUrl("/r/use-is-mobile.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/hotkeys.json"),
+    registryUrl("/r/input.json"),
+    registryUrl("/r/scroll-area.json"),
+    registryUrl("/r/separator.json"),
+    registryUrl("/r/sheet.json"),
+    registryUrl("/r/skeleton.json"),
+    registryUrl("/r/tooltip.json"),
+    registryUrl("/r/use-media-query.json"),
   ],
+  type: "registry:ui",
 };
 
 export default manifest;

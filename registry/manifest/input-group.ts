@@ -1,17 +1,17 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "tailwind-variants"];
 
 const manifest: RegistryItemType = {
-  name: "input-group",
-  type: "registry:ui",
   dependencies,
+  name: "input-group",
   registryDependencies: [
-    absoluteUrl("/r/input.json"),
-    absoluteUrl("/r/button.json"),
-    absoluteUrl("/r/textarea.json"),
+    registryUrl("/r/input.json"),
+    registryUrl("/r/button.json"),
+    registryUrl("/r/textarea.json"),
   ],
+  type: "registry:ui",
 };
 
 export default manifest;

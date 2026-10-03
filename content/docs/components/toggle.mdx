@@ -1,10 +1,14 @@
 ---
 title: Toggle
-description: Two-state button that can be toggled on or off.
+description: Two-state pressed/unpressed button.
+seo:
+  description: Pressed/unpressed button for toolbars and filters.
 links:
   doc: https://ark-ui.com/docs/components/toggle
   api: https://ark-ui.com/docs/components/toggle#api-reference
 ---
+
+import manifest from "@/registry/manifest/toggle";
 
 <ComponentPreview componentName="toggle" />
 
@@ -33,9 +37,7 @@ npx shadcn@latest add @shark/toggle
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -52,29 +54,22 @@ npm install @ark-ui/react tailwind-variants
 ## Usage
 
 ```tsx
-import { 
-  Toggle,   
-  ToggleIndicator 
-} from "@/components/ui/toggle"; 
+import { Toggle } from "@/components/ui/toggle";
 ```
 
 ```tsx
-<Toggle>
-  <ToggleIndicator />
-</Toggle>
+<Toggle>Toggle</Toggle>
 ```
 
 ## Controlled
 
-Use the `pressed` and `onPressedChange` props to control the toggle state programmatically.
+Use the `pressed` and `onPressedChange` props to control the toggle.
 
 <ComponentPreview componentName="toggle" fileName="example-controlled" />
 
 ## States
 
 ### Disabled
-
-Use the `disabled` prop to disable the toggle.
 
 <ComponentPreview componentName="toggle" fileName="example-disabled" />
 
@@ -89,7 +84,7 @@ Use the `disabled` prop to disable the toggle.
 
 <ComponentPreview componentName="toggle" fileName="example-outline" />
 
-## Sizes
+## Size
 
 ### Small
 
@@ -103,6 +98,12 @@ Use the `disabled` prop to disable the toggle.
 
 <ComponentPreview componentName="toggle" fileName="example-size-lg" />
 
+## Pill
+
+The `pill` prop creates fully rounded toggles.
+
+<ComponentPreview componentName="toggle" fileName="example-pill" />
+
 ## Examples
 
 ### Icon Group
@@ -110,6 +111,22 @@ Use the `disabled` prop to disable the toggle.
 Use multiple toggles with icons for toolbar-style controls.
 
 <ComponentPreview componentName="toggle" fileName="example-icon-group" />
+
+### Stateful label
+
+`ToggleIndicator` renders its children when pressed and `fallback` when not.
+
+<ComponentPreview componentName="toggle" fileName="example-indicator" />
+
+### Form Integration
+
+<ComponentPreview componentName="toggle" fileName="example-form" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="toggle" />
 
 ## API Reference
 
@@ -119,8 +136,9 @@ Toggle button for on/off or selected state. Use `asChild` for custom elements.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `variant` | `"outline" \| "ghost"` | `"ghost"` |
+| `variant` | `"default" \| "outline"` | `"default"` |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `pill` | `boolean` | `false` |
 | `pressed` | `boolean` | `-` |
 | `defaultPressed` | `boolean` | `false` |
 | `disabled` | `boolean` | `false` |
@@ -130,10 +148,11 @@ Toggle button for on/off or selected state. Use `asChild` for custom elements.
 
 ### ToggleIndicator
 
-Icon or indicator shown when toggle is active. Omitted when used as child.
+Renders its children when the toggle is pressed and `fallback` when it is not.
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `fallback` | `ReactNode` | `-` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 

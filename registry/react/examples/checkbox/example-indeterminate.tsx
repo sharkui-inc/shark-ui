@@ -7,7 +7,7 @@ import {
 } from "@/registry/react/components/field";
 
 const Example = () => (
-  <FieldGroup className="mx-auto w-40">
+  <FieldGroup className="mx-auto min-w-40">
     <Field orientation="horizontal">
       <Checkbox checked="indeterminate" />
       <FieldContent>

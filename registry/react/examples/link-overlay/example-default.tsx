@@ -1,7 +1,5 @@
-import { Button } from "@/registry/react/components/button";
 import {
   Card,
-  CardFooter,
   CardHeader,
   CardMedia,
   CardTitle,
@@ -11,20 +9,21 @@ import { LinkBox, LinkOverlay } from "@/registry/react/components/link-overlay";
 const LinkOverlayDemo = () => (
   <LinkBox asChild>
     <Card className="w-full max-w-xs">
-      <CardMedia className="h-32 bg-muted" variant="image" />
+      <CardMedia className="h-32 bg-muted" variant="image">
+        <img
+          alt="Green mesh gradient"
+          height={128}
+          src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Living+room+Sofa&waveColor=1a6b5c"
+          width={500}
+        />
+      </CardMedia>
       <CardHeader description="This sofa is perfect for modern tropical spaces, baroque inspired spaces.">
-        <LinkOverlay asChild>
-          <CardTitle asChild>
-            <a href="#">Living room Sofa</a>
-          </CardTitle>
-        </LinkOverlay>
+        <CardTitle asChild>
+          <h2>
+            <LinkOverlay href="#">Living room Sofa</LinkOverlay>
+          </h2>
+        </CardTitle>
       </CardHeader>
-      <CardFooter className="flex-row-reverse gap-2">
-        <Button className="flex-1">Buy now</Button>
-        <Button className="flex-1" variant="outline">
-          Add to cart
-        </Button>
-      </CardFooter>
     </Card>
   </LinkBox>
 );

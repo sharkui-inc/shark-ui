@@ -29,34 +29,24 @@ import {
   SelectValue,
 } from "@/registry/react/components/select";
 
-const formSchema = z.object({
-  language: z
-    .array(z.string())
-    .refine((val) => val[0] !== "", "Please select your spoken language.")
-    .refine((val) => !val.includes("auto"), {
-      message:
-        "Auto-detection is not allowed. Please select a specific language.",
-    }),
-});
-
 const Example = () => {
   const form = useForm({
     defaultValues: {
       language: [""],
     },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "language-submitted",
-        title: "Language submitted",
         description: (
           <pre className="mt-2">
             <code>{JSON.stringify(value, null, 2)}</code>
           </pre>
         ),
+        id: "language-submitted",
+        title: "Language submitted",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -97,6 +87,7 @@ const Example = () => {
                   <Select
                     collection={collection}
                     name={field.name}
+                    onInteractOutside={field.handleBlur}
                     onValueChange={({ value }) => field.handleChange(value)}
                     value={field.state.value}
                   >
@@ -127,6 +118,16 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  language: z
+    .array(z.string())
+    .refine((val) => val[0] !== "", "Please select your spoken language.")
+    .refine((val) => !val.includes("auto"), {
+      message:
+        "Auto-detection is not allowed. Please select a specific language.",
+    }),
+});
 
 const collection = createListCollection({
   items: [

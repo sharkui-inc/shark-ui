@@ -30,36 +30,24 @@ import {
 } from "@/registry/react/components/field";
 import { toast } from "@/registry/react/components/toast";
 
-const formSchema = v.object({
-  responses: v.boolean(),
-  tasks: v.pipe(
-    v.array(v.string()),
-    v.minLength(1, "Please select at least one notification type."),
-    v.check(
-      (value) => value.every((task) => tasks.some((t) => t.id === task)),
-      "Invalid notification type selected."
-    )
-  ),
-});
-
-export const Example = () => {
+const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: {
       responses: true,
       tasks: [],
     },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "tasks-submitted",
-      title: "Tasks submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "tasks-submitted",
+      title: "Tasks submitted",
     });
   };
 
@@ -76,7 +64,11 @@ export const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["responses"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldSet>
                     <FieldLegend variant="label">Responses</FieldLegend>
                     <FieldDescription>
@@ -104,7 +96,11 @@ export const Example = () => {
             <FieldSeparator />
             <FormischField of={form} path={["tasks"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldSet>
                     <FieldLegend variant="label">Tasks</FieldLegend>
                     <FieldDescription>
@@ -150,6 +146,18 @@ export const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  responses: v.boolean(),
+  tasks: v.pipe(
+    v.array(v.string()),
+    v.minLength(1, "Please select at least one notification type."),
+    v.check(
+      (value) => value.every((task) => tasks.some((t) => t.id === task)),
+      "Invalid notification type selected."
+    )
+  ),
+});
 
 const tasks = [
   {

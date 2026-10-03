@@ -13,7 +13,10 @@ const Example = () => {
       <p className="text-center text-muted-foreground text-sm">
         Enter the code 1234
       </p>
-      <InputOTP onValueChange={({ value }) => setValue(value)} value={value}>
+      <InputOTP
+        onValueChange={({ value: nextValue }) => setValue(nextValue)}
+        value={value}
+      >
         <InputOTPSlot index={0} />
         <InputOTPSlot index={1} />
         <InputOTPSlot index={2} />

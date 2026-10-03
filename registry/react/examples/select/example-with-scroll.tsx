@@ -11,7 +11,7 @@ import {
 
 const Example = () => (
   <Select collection={collection} positioning={{ fitViewport: true }}>
-    <SelectTrigger className="w-56">
+    <SelectTrigger aria-label="Select a framework" className="min-w-56">
       <SelectValue placeholder="Select framework" />
     </SelectTrigger>
     <SelectContent className="max-h-56">
@@ -25,7 +25,7 @@ const Example = () => (
 );
 
 const collection = createListCollection({
-  items: Array.from({ length: 20 }, (_, i) => ({
+  items: Array.from({ length: 40 }, (_, i) => ({
     label: `Framework ${i + 1}`,
     value: `framework-${i + 1}`,
   })),

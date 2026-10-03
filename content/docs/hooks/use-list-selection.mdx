@@ -1,0 +1,111 @@
+---
+title: useListSelection
+description: Manage single, multiple, and range selection in a collection.
+links:
+  doc: https://ark-ui.com/docs/collections/list-selection
+  api: https://ark-ui.com/docs/collections/list-selection#api-reference
+---
+
+import manifest from "@/registry/manifest/use-list-selection";
+
+<ComponentPreview componentName="use-list-selection" />
+
+## Installation
+
+<CodeTabs>
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/use-list-selection
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="hooks/use-list-selection.ts" src="../hooks/use-list-selection.ts" />
+
+<Step>Update the import paths to match your project setup.</Step>
+</Steps>
+
+</TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { createListCollection } from "@ark-ui/react/collection";
+import { useListSelection } from "@/hooks/use-list-selection";
+```
+
+```tsx
+const collection = createListCollection({
+  items: [
+    { label: "React", value: "react" },
+    { label: "Vue", value: "vue" },
+  ],
+});
+
+const selection = useListSelection({ collection });
+```
+
+## Examples
+
+### Multiple selection
+
+Set `selectionMode` to `multiple`.
+
+<ComponentPreview componentName="use-list-selection" fileName="example-multiple" />
+
+### Range selection
+
+Use `extend` to select a range.
+
+<ComponentPreview componentName="use-list-selection" fileName="example-range" />
+
+## API Reference
+
+### useListSelection
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `collection` | `ListCollection<T>` | `required` |
+| `selectionMode` | `"single" \| "multiple" \| "none"` | `"single"` |
+| `deselectable` | `boolean` | `true` |
+| `initialSelectedValues` | `string[]` | `[]` |
+| `resetOnCollectionChange` | `boolean` | `false` |
+
+### Return value
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `selectedValues` | `string[]` | `-` |
+| `isEmpty` | `boolean` | `-` |
+| `firstSelectedValue` | `string \| null` | `-` |
+| `lastSelectedValue` | `string \| null` | `-` |
+| `isSelected` | `(value: string \| null) => boolean` | `-` |
+| `canSelect` | `(value: string) => boolean` | `-` |
+| `isAllSelected` | `() => boolean` | `-` |
+| `isSomeSelected` | `() => boolean` | `-` |
+| `select` | `(value: string, forceToggle?: boolean) => void` | `-` |
+| `deselect` | `(value: string) => void` | `-` |
+| `toggle` | `(value: string) => void` | `-` |
+| `replace` | `(value: string \| null) => void` | `-` |
+| `extend` | `(anchorValue: string, targetValue: string) => void` | `-` |
+| `setSelectedValues` | `(values: string[]) => void` | `-` |
+| `clear` | `() => void` | `-` |
+| `resetSelection` | `() => void` | `-` |
+
+---
+
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/collections/list-selection#api-reference).

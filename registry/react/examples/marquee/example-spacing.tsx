@@ -16,8 +16,8 @@ import {
 const Example = () => (
   <Marquee pauseOnInteraction spacing="40px">
     <MarqueeContent>
-      {items.map((Icon, index) => (
-        <MarqueeItem key={index}>
+      {items.map((Icon) => (
+        <MarqueeItem key={Icon.name}>
           <Card>
             <CardContent>
               <Icon className="size-10" />

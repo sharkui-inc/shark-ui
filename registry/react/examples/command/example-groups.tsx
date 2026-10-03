@@ -1,6 +1,7 @@
 "use client";
 
 import { useFilter, useListCollection } from "@ark-ui/react";
+import React from "react";
 import {
   Command,
   CommandContent,
@@ -27,21 +28,21 @@ const Example = () => {
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <CommandInput placeholder="Search..." />
+      <CommandInput autoFocus={false} placeholder="Search..." />
       <CommandContent>
         <CommandEmpty />
         <CommandList>
           {collection.group().map(([group, items], index) => (
-            <>
+            <React.Fragment key={group}>
               {index !== 0 && <CommandSeparator />}
-              <CommandGroup heading={group} key={group}>
+              <CommandGroup heading={group}>
                 {items.map((item) => (
                   <CommandItem item={item} key={item.value}>
                     {item.label}
                   </CommandItem>
                 ))}
               </CommandGroup>
-            </>
+            </React.Fragment>
           ))}
         </CommandList>
       </CommandContent>
@@ -50,12 +51,12 @@ const Example = () => {
 };
 
 const initialItems = [
-  { label: "Apple", value: "apple", group: "Fruit" },
-  { label: "Banana", value: "banana", group: "Fruit" },
-  { label: "Cherry", value: "cherry", group: "Fruit" },
-  { label: "United States", value: "us", group: "Countries" },
-  { label: "United Kingdom", value: "uk", group: "Countries" },
-  { label: "Germany", value: "de", group: "Countries" },
+  { group: "Fruit", label: "Apple", value: "apple" },
+  { group: "Fruit", label: "Banana", value: "banana" },
+  { group: "Fruit", label: "Cherry", value: "cherry" },
+  { group: "Countries", label: "United States", value: "us" },
+  { group: "Countries", label: "United Kingdom", value: "uk" },
+  { group: "Countries", label: "Germany", value: "de" },
 ];
 
 export default Example;

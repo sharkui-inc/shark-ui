@@ -6,39 +6,53 @@ import {
 } from "@/registry/react/components/accordion";
 
 const Example = () => (
-  <Accordion className="w-full max-w-lg" defaultValue={["item-1"]}>
-    <AccordionItem value="item-1">
-      <AccordionTrigger>Product Information</AccordionTrigger>
-      <AccordionContent className="text-muted-foreground">
-        <p>
-          Our flagship product combines cutting-edge technology with sleek
-          design. Built with premium materials, it offers unparalleled
-          performance and reliability.
-        </p>
-      </AccordionContent>
-    </AccordionItem>
+  <div className="flex w-full max-w-lg flex-col gap-6">
+    <section
+      aria-labelledby="item-disabled-title"
+      className="flex flex-col gap-2"
+    >
+      <h3
+        className="font-medium text-muted-foreground text-sm"
+        id="item-disabled-title"
+      >
+        Item disabled
+      </h3>
+      <Accordion defaultValue={["overview"]}>
+        <AccordionItem value="overview">
+          <AccordionTrigger>Overview</AccordionTrigger>
+          <AccordionContent className="text-muted-foreground">
+            Product details are available.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem disabled value="shipping">
+          <AccordionTrigger>Shipping</AccordionTrigger>
+          <AccordionContent>Shipping details are unavailable.</AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </section>
 
-    <AccordionItem disabled value="item-2">
-      <AccordionTrigger>Shipping Details</AccordionTrigger>
-      <AccordionContent className="text-muted-foreground">
-        <p>
-          We offer worldwide shipping through trusted courier partners. Standard
-          delivery takes 3-5 business days.
-        </p>
-      </AccordionContent>
-    </AccordionItem>
-
-    <AccordionItem value="item-3">
-      <AccordionTrigger>Return Policy</AccordionTrigger>
-      <AccordionContent className="text-muted-foreground">
-        <p>
-          We stand behind our products with a comprehensive 30-day return
-          policy. If you&apos;re not completely satisfied, simply return the
-          item in its original condition.
-        </p>
-      </AccordionContent>
-    </AccordionItem>
-  </Accordion>
+    <section
+      aria-labelledby="root-disabled-title"
+      className="flex flex-col gap-2"
+    >
+      <h3
+        className="font-medium text-muted-foreground text-sm"
+        id="root-disabled-title"
+      >
+        Root disabled
+      </h3>
+      <Accordion disabled>
+        <AccordionItem value="overview">
+          <AccordionTrigger>Overview</AccordionTrigger>
+          <AccordionContent>Product details are available.</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="shipping">
+          <AccordionTrigger>Shipping</AccordionTrigger>
+          <AccordionContent>Shipping details are available.</AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </section>
+  </div>
 );
 
 export default Example;

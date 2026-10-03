@@ -4,13 +4,28 @@ import { ButtonGroup } from "@/registry/react/components/button-group";
 
 const Example = () => (
   <ButtonGroup orientation="horizontal">
-    <Button clickEffect={false} size="icon-md" variant="outline">
+    <Button
+      aria-label="Previous track"
+      clickEffect={false}
+      size="icon-md"
+      variant="outline"
+    >
       <SkipBackIcon />
     </Button>
-    <Button clickEffect={false} size="icon-md" variant="outline">
+    <Button
+      aria-label="Play"
+      clickEffect={false}
+      size="icon-md"
+      variant="outline"
+    >
       <PlayIcon />
     </Button>
-    <Button clickEffect={false} size="icon-md" variant="outline">
+    <Button
+      aria-label="Next track"
+      clickEffect={false}
+      size="icon-md"
+      variant="outline"
+    >
       <SkipForwardIcon />
     </Button>
   </ButtonGroup>

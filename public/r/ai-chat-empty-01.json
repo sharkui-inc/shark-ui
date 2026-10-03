@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "categories": [
+    "ai"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "description": "Personalized empty chat state with greeting and suggestion chips.",
+  "files": [
+    {
+      "content": "import { ChatEmpty } from \"@/components/ai-chat-empty/chat-empty\";\n\nconst EmptyChatPage = () => <ChatEmpty />;\n\nexport default EmptyChatPage;\n",
+      "path": "blocks/ai/ai-chat-empty-01/page.tsx",
+      "target": "app/ai-chat-empty/page.tsx",
+      "type": "registry:page"
+    },
+    {
+      "content": "\"use client\";\n\nimport { BotIcon } from \"lucide-react\";\nimport {\n  State,\n  StateContent,\n  StateDescription,\n  StateHeader,\n  StateMedia,\n  StateTitle,\n} from \"@/components/ui/state\";\nimport {\n  Suggestion,\n  Suggestions,\n} from \"@/components/ui/suggestion\";\n\ninterface ChatEmptyProps {\n  onSuggestion?: (text: string) => void;\n  userName?: string;\n}\n\nexport const ChatEmpty = (props: ChatEmptyProps) => {\n  const { onSuggestion, userName = \"James\" } = props;\n\n  return (\n    <State className=\"min-h-svh px-6 py-16 md:px-6 md:py-16\">\n      <StateHeader>\n        <StateMedia>\n          <BotIcon aria-hidden className=\"size-8 text-muted-foreground\" />\n        </StateMedia>\n        <StateTitle asChild>\n          <h2>Hello {userName}</h2>\n        </StateTitle>\n        <StateDescription>What can I help you with today?</StateDescription>\n      </StateHeader>\n      <StateContent className=\"max-w-lg\">\n        <Suggestions>\n          <Suggestion\n            onClick={onSuggestion}\n            suggestion=\"Turn this launch brief into a plan\"\n          />\n          <Suggestion\n            onClick={onSuggestion}\n            suggestion=\"Summarize research themes\"\n          />\n          <Suggestion\n            onClick={onSuggestion}\n            suggestion=\"Draft a release checklist\"\n          />\n        </Suggestions>\n      </StateContent>\n    </State>\n  );\n};\n",
+      "path": "blocks/ai/ai-chat-empty-01/components/chat-empty.tsx",
+      "target": "@components/ai-chat-empty/chat-empty.tsx",
+      "type": "registry:component"
+    }
+  ],
+  "meta": {
+    "featured": false,
+    "order": 4,
+    "previewHeight": 480
+  },
+  "name": "ai-chat-empty-01",
+  "registryDependencies": [
+    "https://shark-ui.com/r/state.json",
+    "https://shark-ui.com/r/suggestion.json"
+  ],
+  "title": "AI Chat Empty State",
+  "type": "registry:block"
+}

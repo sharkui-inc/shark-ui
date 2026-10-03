@@ -1,8 +1,13 @@
+// biome-ignore-all lint/a11y/noNoninteractiveTabindex: Scrollable table regions need keyboard access.
+// biome-ignore-all lint/a11y/useSemanticElements: A labeled group avoids adding a repeated landmark for every table.
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
 import type React from "react";
 import { cn } from "@/lib/utils";
+
+const tableCheckboxSpacing =
+  "has-[[role=checkbox]]:leading-none has-[[role=checkbox]]:ps-2 has-[[role=checkbox]]:pe-0 [&>[role=checkbox]]:align-middle";
 
 interface TableProps extends React.ComponentProps<typeof ark.table> {
   /**
@@ -23,7 +28,13 @@ export const Table = (props: TableProps) => {
   const { variant = "plain", isHoverable = true, className, ...rest } = props;
 
   return (
-    <div className="relative w-full overflow-auto" data-slot="table-wrapper">
+    <div
+      aria-label="Scrollable table"
+      className="relative w-full overflow-auto outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+      data-slot="table-wrapper"
+      role="group"
+      tabIndex={0}
+    >
       <ark.table
         className={cn(
           "group/table",
@@ -94,7 +105,7 @@ export const TableRow = (props: React.ComponentProps<typeof ark.tr>) => {
       className={cn(
         "border-b",
         "data-[state=selected]:bg-muted",
-        "group-data-[variant=striped]/table:even:bg-muted/30",
+        "group-data-[variant=striped]/table:even:bg-muted/32",
         "group-data-[hoverable=true]/table:[&:has(td):hover]:bg-muted/48",
         className
       )}
@@ -111,10 +122,9 @@ export const TableHead = (props: React.ComponentProps<typeof ark.th>) => {
     <ark.th
       className={cn(
         "h-10 px-2",
-        "text-left align-middle",
+        "text-start align-middle",
         "font-medium text-muted-foreground",
-        "rtl:text-right",
-        "has-[[role=checkbox]]:ps-2 has-[[role=checkbox]]:pe-0",
+        tableCheckboxSpacing,
         className
       )}
       data-slot="table-head"
@@ -130,7 +140,7 @@ export const TableCell = (props: React.ComponentProps<typeof ark.td>) => {
     <ark.td
       className={cn(
         "whitespace-nowrap p-2 align-middle",
-        "has-[[role=checkbox]]:ps-2 has-[[role=checkbox]]:pe-0",
+        tableCheckboxSpacing,
         className
       )}
       data-slot="table-cell"

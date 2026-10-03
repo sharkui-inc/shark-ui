@@ -18,7 +18,7 @@ import {
 } from "@/registry/react/components/menu";
 
 const Example = () => (
-  <Breadcrumb>
+  <Breadcrumb aria-label="Breadcrumb with collapsed menu">
     <BreadcrumbList>
       <BreadcrumbItem>
         <BreadcrumbLink href="#">Home</BreadcrumbLink>
@@ -35,7 +35,7 @@ const Example = () => (
               <BreadcrumbEllipsis />
             </Button>
           </MenuTrigger>
-          <MenuContent className="w-40">
+          <MenuContent className="min-w-40">
             <MenuItem asChild value="docs">
               <a href="#">Documentation</a>
             </MenuItem>

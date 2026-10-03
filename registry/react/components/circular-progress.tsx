@@ -1,14 +1,13 @@
 "use client";
 
-import { ark } from "@ark-ui/react/";
+import { ark } from "@ark-ui/react/factory";
 import {
   Progress as ArkProgress,
-  useProgressContext,
+  useProgressContext as useArkProgressContext,
 } from "@ark-ui/react/progress";
 import type React from "react";
 import { cn } from "@/lib/utils";
-
-export const useCircularProgress = useProgressContext;
+import { FieldLabel } from "@/registry/react/components/field";
 
 interface CircularProgressProps
   extends React.ComponentProps<typeof ArkProgress.Root>,
@@ -21,6 +20,7 @@ interface CircularProgressProps
   indeterminate?: boolean;
 }
 
+export const useCircularProgressContext = useArkProgressContext;
 export const CircularProgress = (props: CircularProgressProps) => {
   const {
     value,
@@ -70,25 +70,24 @@ interface CircularProgressTrackProps
 export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
   const { size = 32, thickness = 4, className, ...rest } = props;
 
-  const { max, min, value } = useCircularProgress();
+  const { max, min, value } = useCircularProgressContext();
 
   const radius = size / 2 - thickness / 2;
   const circumference = 2 * Math.PI * radius;
   const range = Math.max(max - min, 1);
   const normalizedValue =
-    value == null ? min : Math.min(Math.max(value, min), max);
+    value === null ? min : Math.min(Math.max(value, min), max);
   const percent = (normalizedValue - min) / range;
   const dashOffset = circumference * (1 - percent);
 
   return (
     <ark.svg
-      aria-hidden="true"
       className={cn(
         "block",
         "-rotate-90",
+        "rtl:rotate-90",
         "pointer-events-none",
-        "motion-reduce:animate-none!",
-        "group-data-[state=indeterminate]/circular-progress:animate-spin!",
+        "group-data-[state=indeterminate]/circular-progress:animate-spin",
         className
       )}
       data-slot="circular-progress-circle"
@@ -96,6 +95,7 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
       viewBox={`0 0 ${size} ${size}`}
       width={size}
       {...rest}
+      aria-hidden
     >
       <circle
         className="fill-none stroke-input"
@@ -106,17 +106,31 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
         strokeWidth={thickness}
       />
       <circle
-        className="fill-none stroke-primary transition-all duration-300 ease-out motion-reduce:transition-none!"
+        className="fill-none stroke-primary transition-[stroke-dashoffset] duration-150 ease-out"
         cx={size / 2}
         cy={size / 2}
         data-slot="circular-progress-range"
         r={radius}
         strokeDasharray={circumference}
-        strokeDashoffset={value == null ? circumference * 0.7 : dashOffset}
+        strokeDashoffset={value === null ? circumference * 0.7 : dashOffset}
         strokeLinecap="round"
         strokeWidth={thickness}
       />
     </ark.svg>
+  );
+};
+
+export const CircularProgressLabel = (
+  props: React.ComponentProps<typeof ArkProgress.Label>
+) => {
+  const { children, ...rest } = props;
+
+  return (
+    <FieldLabel asChild>
+      <ArkProgress.Label data-slot="circular-progress-label" {...rest}>
+        {children}
+      </ArkProgress.Label>
+    </FieldLabel>
   );
 };
 

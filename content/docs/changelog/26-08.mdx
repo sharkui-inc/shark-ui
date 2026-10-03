@@ -1,0 +1,65 @@
+---
+title: AI Components is here
+description: AI Components for chat and coding agents, createChat helper, new primitives, Hotkeys, migration guides, and theme updates.
+date: 2026-09-23
+---
+
+## AI Components
+
+Building blocks for agent and chat surfaces:
+
+- **[Prompt Input](/docs/ai-components/prompt-input)**: Composer with tool slots, attach, Enter to send, and stop while streaming.
+- **[Message](/docs/ai-components/message)** / **[Message Bubble](/docs/ai-components/message-bubble)** / **[Message Scroller](/docs/ai-components/message-scroller)**: Conversation row, surface variants, and transcript scrolling with jump controls.
+- **[Attachment](/docs/ai-components/attachment)**: File and image cards with upload state and actions.
+- **[Marker](/docs/ai-components/marker)**: System notes, date breaks, and labeled separators.
+- **[Reasoning](/docs/ai-components/reasoning)**: Expandable thinking with duration and shimmer.
+- **[Tool Result](/docs/ai-components/tool-result)**: Collapsible tool row with title, meta, and status.
+- **[Code Block](/docs/ai-components/code-block)**: Filename, copy, and line numbers for agent artifacts.
+- **[Diff](/docs/ai-components/diff)**: Unified add, delete, and context hunks.
+- **[Plan](/docs/ai-components/plan)**: Collapsible plan with nested, status-aware steps.
+- **[Terminal](/docs/ai-components/terminal)**: Shell output with basic ANSI colors.
+- **[Approval Card](/docs/ai-components/approval-card)**: Approvals and clarifications in agent workflows.
+- **[Context](/docs/ai-components/context)**: Context-window token usage, breakdown, and cost.
+- **[Queue](/docs/ai-components/queue)**: Queued and completed prompts.
+- **[Sources](/docs/ai-components/sources)**: Citations and footnotes on assistant responses.
+- **[Suggestion](/docs/ai-components/suggestion)**: Suggested prompts for empty and quick-start states.
+
+## Helper
+
+- **[Chat](/docs/helpers/create-chat)**: Deterministic local conversations for AI SDK and TanStack AI, with a matching chat helper hook.
+
+## New components
+
+- **[Table of Contents](/docs/components/toc)**: Active heading tracking, nested indent and sliding indicator.
+- **[Questionnaire](/docs/components/questionnaire)**: Composable multi-step form.
+- **[Data Table](/docs/components/data-table)**: Composable table built on TanStack Table.
+- **[Masonry](/docs/components/masonry)**: Responsive columns with varied item heights.
+- **[State](/docs/components/state)**: Layout for empty, error, and other contextual screen states.
+- **[File Thumbnail](/docs/components/file-thumbnail)**: Compact file-format identifier.
+- **[Icon Tile](/docs/components/icon-tile)**: Consistent surface for icons, initials, and short text.
+
+## New utilities
+
+- **[Shimmer](/docs/utilities/shimmer)**: Text shimmer for live status such as thinking or uploading.
+- **[Hotkeys](/docs/utilities/hotkeys)**: Shortcuts, sequences, and scopes.
+- **[Focus Trap](/docs/utilities/focus-trap)**: Keep keyboard focus inside a region.
+- **[Iframe](/docs/utilities/iframe)**: Controlled iframe embedding for previews and embeds.
+
+## New hooks
+
+- **[useAsyncList](/docs/hooks/use-async-list)**: Load, filter, sort, and paginate asynchronous lists.
+- **[useListSelection](/docs/hooks/use-list-selection)**: Single, multiple, and range selection for collections.
+
+## Migration
+
+Guides for moving into Shark UI from [shadcn](/docs/migration/shadcn), [Radix](/docs/migration/radix), and [Base UI](/docs/migration/base-ui).
+
+## Theme & site
+
+- Theme editor: font selection, heading controls, primary tone, radius, and the existing color system.
+- Home and docs polish around AI Components and the expanded registry surface.
+
+## Removals
+
+- **Hint**: Removed in favor of [Tooltip](/docs/components/tooltip).
+- **CodeBlockLanguageSelector**: Removed; use [Select](/docs/components/select) in the header actions instead.

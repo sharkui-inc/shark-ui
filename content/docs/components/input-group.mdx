@@ -1,7 +1,11 @@
 ---
 title: Input Group
 description: Group input elements together.
+seo:
+  description: "Input plus inline addons: icons, buttons, prefixes, and kbd hints."
 ---
+
+import manifest from "@/registry/manifest/input-group";
 
 <ComponentPreview componentName="input-group" />
 
@@ -30,9 +34,7 @@ npx shadcn@latest add @shark/input-group
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -60,7 +62,7 @@ InputGroup
 ## Usage
 
 ```tsx
-import { 
+import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
@@ -78,6 +80,16 @@ import {
   </InputGroupAddon>
 </InputGroup>
 ```
+
+## States
+
+### Disabled
+
+<ComponentPreview componentName="input-group" fileName="example-disabled" />
+
+### Invalid
+
+<ComponentPreview componentName="input-group" fileName="example-invalid" />
 
 ## Align
 
@@ -115,15 +127,11 @@ Use the `size` prop to change the size of the input group.
 
 <ComponentPreview componentName="input-group" fileName="example-size-lg" />
 
-## States
+## Pill
 
-### Disabled
+The `pill` prop creates fully rounded input groups.
 
-<ComponentPreview componentName="input-group" fileName="example-disabled" />
-
-### Invalid
-
-<ComponentPreview componentName="input-group" fileName="example-invalid" />
+<ComponentPreview componentName="input-group" fileName="example-pill" />
 
 ## Examples
 
@@ -143,9 +151,9 @@ Use the `size` prop to change the size of the input group.
 
 <ComponentPreview componentName="input-group" fileName="example-with-badge" />
 
-### With Keyboard Shortcut
+### With Shortcuts
 
-<ComponentPreview componentName="input-group" fileName="example-with-keyboard-shortcut" />
+<ComponentPreview componentName="input-group" fileName="example-with-shortcut" />
 
 ### With Inner Label
 
@@ -165,11 +173,11 @@ Use `FieldGroup` with textarea to build forms. Combine subject input, message te
 
 <ComponentPreview componentName="input-group" fileName="example-input-group" />
 
-### Password Strength Checker
+## RTL
 
-A complete password checker with show/hide toggle, clear button, and real-time strength indicator. A strong password requires at least 8 characters with uppercase, lowercase, number, and special character.
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview componentName="input-group" fileName="example-password-strength-checker" />
+<RTLComponentPreview componentName="input-group" />
 
 ## API Reference
 
@@ -180,7 +188,8 @@ Wraps input with optional addons (labels, buttons, icons) on any side.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
-| `className` | `string` | - |
+| `pill` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ### InputGroupAddon
 
@@ -189,7 +198,7 @@ Holds addon content (labels, buttons, icons) beside the input.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `align` | `"inline-start" \| "inline-end" \| "block-start" \| "block-end"` | `"inline-start"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### InputGroupButton
 
@@ -197,10 +206,10 @@ Button inside an addon. Typically used for reveal/hide, clear, or search.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `size` | [ButtonSize](/docs/components/button#sizes) | `"xs"` |
-| `variant` | [ButtonVariant](/docs/components/button#variants) | `"ghost"` |
+| `size` | [`ButtonSize`](/docs/components/button#size) | `"xs"` |
+| `variant` | [`ButtonVariant`](/docs/components/button#variants) | `"ghost"` |
 | `type` | `"button" \| "submit" \| "reset"` | `"button"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### InputGroupText
 
@@ -208,7 +217,7 @@ Static text label inside an addon.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### InputGroupInput
 
@@ -216,7 +225,7 @@ Text input. Accepts all native input props.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### InputGroupTextarea
 
@@ -224,4 +233,4 @@ Multi-line text input. Accepts all native textarea props.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |

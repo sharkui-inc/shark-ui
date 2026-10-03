@@ -10,7 +10,7 @@ const Example = () => (
     mimeType="image/svg+xml"
   >
     <Button size="lg" variant="outline">
-      <DownloadIcon />
+      <DownloadIcon data-icon="inline-start" />
       Download SVG
     </Button>
   </DownloadTrigger>

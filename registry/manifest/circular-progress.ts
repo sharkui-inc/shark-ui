@@ -1,11 +1,13 @@
 import type { RegistryItemType } from "@/lib/registry";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react"];
 
 const manifest: RegistryItemType = {
-  name: "circular-progress",
-  type: "registry:ui",
   dependencies,
+  name: "circular-progress",
+  registryDependencies: [registryUrl("/r/field.json")],
+  type: "registry:ui",
 };
 
 export default manifest;

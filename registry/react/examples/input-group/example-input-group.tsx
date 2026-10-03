@@ -8,7 +8,7 @@ import {
 } from "@/registry/react/components/input-group";
 
 const Example = () => (
-  <InputGroup className="w-full max-w-sm">
+  <InputGroup className="max-w-sm">
     <InputGroupTextarea
       className="font-mono text-sm"
       placeholder="console.log('Hello, world!');"

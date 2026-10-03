@@ -3,36 +3,71 @@ import { SITE_CONFIG } from "@/config/site";
 import { absoluteUrl } from "@/lib/url";
 
 interface CreateMetadataProps {
-  description: string;
+  description?: string;
+  imageAlt?: string;
   imageUrl?: string;
-  title: string;
-  url: string;
+  markdownUrl?: string;
+  title?: string;
+  url?: string;
 }
 
+const omitUndefined = <T extends object>(object: T): T =>
+  Object.fromEntries(
+    Object.entries(object).filter(([, value]) => value !== undefined)
+  ) as T;
+
 export const createMetadata = ({
-  title,
   description,
+  imageAlt,
+  imageUrl,
+  markdownUrl,
+  title,
   url,
-  imageUrl = "/opengraph-image.png",
-}: CreateMetadataProps): Metadata => ({
-  title,
-  description,
-  alternates: { canonical: absoluteUrl(url) },
-  openGraph: {
-    title,
+}: CreateMetadataProps): Metadata => {
+  const canonical = url === undefined ? undefined : absoluteUrl(url);
+  const markdown =
+    markdownUrl === undefined ? undefined : absoluteUrl(markdownUrl);
+  const image =
+    imageUrl === undefined
+      ? undefined
+      : omitUndefined({
+          alt: imageAlt,
+          height: 630,
+          url: absoluteUrl(imageUrl),
+          width: 1200,
+        });
+
+  return omitUndefined<Metadata>({
+    alternates:
+      canonical === undefined
+        ? undefined
+        : {
+            canonical,
+            types:
+              markdown === undefined
+                ? undefined
+                : { "text/markdown": markdown },
+          },
     description,
-    type: "website",
-    url: absoluteUrl(url),
-    images: [{ url: absoluteUrl(imageUrl) }],
-  },
-  twitter: {
-    card: "summary_large_image",
+    openGraph: omitUndefined({
+      description,
+      images: image === undefined ? undefined : [image],
+      locale: "en_US",
+      siteName: SITE_CONFIG.name,
+      title,
+      type: "website",
+      url: canonical,
+    }),
     title,
-    description,
-    images: [absoluteUrl(imageUrl)],
-    creator: SITE_CONFIG.creator,
-  },
-});
+    twitter: omitUndefined({
+      card: "summary_large_image",
+      creator: SITE_CONFIG.creator,
+      description,
+      images: image === undefined ? undefined : [image],
+      title,
+    }),
+  });
+};
 
 interface CreateOgImageUrlProps {
   description: string;
@@ -43,8 +78,11 @@ interface CreateOgImageUrlProps {
  * Builds a dynamic OG image URL for `/og`. Requires `SITE_FEATURES.dynamicOgImages`
  * and an active `app/(api)/og/route.tsx` (rename from `route.tsx.disabled`).
  */
-export const createOgImageUrl = ({
-  title,
-  description,
-}: CreateOgImageUrlProps) =>
-  `/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
+export const createOgImageUrl = (props: CreateOgImageUrlProps) => {
+  const { title, description } = props;
+
+  const encodedTitle = encodeURIComponent(title);
+  const encodedDescription = encodeURIComponent(description);
+
+  return `/og?title=${encodedTitle}&description=${encodedDescription}`;
+};

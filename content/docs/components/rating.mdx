@@ -1,10 +1,14 @@
 ---
 title: Rating
-description: Show reviews and ratings in a visual format.
+description: Star ratings for reviews.
+seo:
+  description: Star ratings with half stars and read-only mode.
 links:
   doc: https://ark-ui.com/docs/components/rating-group
   api: https://ark-ui.com/docs/components/rating-group#api-reference
 ---
+
+import manifest from "@/registry/manifest/rating";
 
 <ComponentPreview componentName="rating" />
 
@@ -31,42 +35,22 @@ npx shadcn@latest add @shark/rating
 
 <Step>Install the dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
 @theme inline {
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-info: var(--info);
-  --color-info-foreground: var(--info-foreground);
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
-  --color-warning-foreground: var(--warning-foreground);
 }
 
 :root {
-  --destructive-foreground: var(--color-red-700);
-  --info: var(--color-blue-500);
-  --info-foreground: var(--color-blue-700);
-  --success: var(--color-emerald-500);
-  --success-foreground: var(--color-emerald-700);
   --warning: var(--color-amber-500);
-  --warning-foreground: var(--color-amber-700);
 }
 
 .dark {
-  --destructive-foreground: var(--color-red-400);
-  --info: var(--color-blue-500);
-  --info-foreground: var(--color-blue-400);
-  --success: var(--color-emerald-500);
-  --success-foreground: var(--color-emerald-400);
   --warning: var(--color-amber-500);
-  --warning-foreground: var(--color-amber-400);
 }
 ```
 </CodeCollapsibleWrapper>
@@ -86,16 +70,18 @@ npm install @ark-ui/react lucide-react
 ## Usage
 
 ```tsx
-import { RatingGroup } from "@/components/ui/rating";
+import { Rating } from "@/components/ui/rating";
 ```
 
 ```tsx
-<RatingGroup />
+<Rating aria-label="Rate your experience" />
 ```
+
+For custom layouts, `Rating` also supports composing `RatingLabel` and `RatingStars`.
 
 ## Controlled
 
-Use `value` and `onValueChange` to control the rating programmatically.
+Use `value` and `onValueChange` to control the rating.
 
 <ComponentPreview componentName="rating" fileName="example-controlled" />
 
@@ -103,17 +89,19 @@ Use `value` and `onValueChange` to control the rating programmatically.
 
 ### Readonly
 
-Use the `readOnly` prop to display a rating without interaction.
-
 <ComponentPreview componentName="rating" fileName="example-readonly" />
 
 ### Disabled
 
-Use the `disabled` prop to prevent interaction and show a disabled state.
-
 <ComponentPreview componentName="rating" fileName="example-disabled" />
 
 ## Examples
+
+### With Field
+
+Use `RatingLabel` to name the rating, and [Field](/docs/components/field) for a description.
+
+<ComponentPreview componentName="rating" fileName="example-with-field" />
 
 ### Half star
 
@@ -135,7 +123,7 @@ Display a read-only rating inside a testimonial card.
 
 ### Customize size
 
-Use the `className` prop to set the size of the rating.
+Use `RatingStars` `className` to override the default size of the rating indicator.
 
 <ComponentPreview componentName="rating" fileName="example-custom-size" />
 
@@ -145,11 +133,21 @@ Compose the rating with a different icon.
 
 <ComponentPreview componentName="rating" fileName="example-custom-icon" />
 
+### Form Integration
+
+<ComponentPreview componentName="rating" fileName="example-form" />
+
 ### Custom color
 
-Override the filled color with `className`.
+Set `RatingStars` `className` to change the color of the stars.
 
 <ComponentPreview componentName="rating" fileName="example-custom-color" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="rating" />
 
 ## API Reference
 
@@ -161,14 +159,42 @@ Root component.
 | --- | --- | --- |
 | `allowHalf` | `boolean` | `false` |
 | `count` | `number` | `5` |
+| `icon` | `React.JSX.ElementType` | `StarIcon` |
 | `defaultValue` | `number` | `-` |
 | `value` | `number` | `-` |
 | `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `readOnly` | `boolean` | `-` |
 | `disabled` | `boolean` | `-` |
 | `className` | `string` | `-` |
+| `children` | `ReactNode` | `-` |
+
+### RatingLabel
+
+Labels the `Rating` and focuses its selected star when clicked.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `ReactNode` | `required` |
+| `className` | `string` | `-` |
+
+### RatingStars
+
+Renders the rating stars and hidden input.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `icon` | `React.JSX.ElementType` | `StarIcon` |
+| `className` | `string` | `-` |
+
+### RatingItem
+
+Public RatingItem component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/rating-group#api-reference).
-

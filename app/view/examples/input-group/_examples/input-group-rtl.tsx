@@ -1,0 +1,60 @@
+"use client";
+
+import { SearchIcon } from "lucide-react";
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+} from "@/registry/react/components/field";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+  InputGroupTextarea,
+} from "@/registry/react/components/input-group";
+import { Spinner } from "@/registry/react/components/spinner";
+
+const InputGroupRtl = () => (
+  <div className="grid w-full max-w-sm gap-6">
+    <InputGroup className="max-w-xs">
+      <InputGroupInput placeholder="بحث..." />
+      <InputGroupAddon>
+        <SearchIcon aria-hidden />
+      </InputGroupAddon>
+      <InputGroupAddon align="inline-end">١٢ نتيجة</InputGroupAddon>
+    </InputGroup>
+    <InputGroup>
+      <InputGroupInput placeholder="جاري البحث..." />
+      <InputGroupAddon align="inline-end">
+        <Spinner />
+      </InputGroupAddon>
+    </InputGroup>
+    <InputGroup>
+      <InputGroupInput placeholder="جاري حفظ التغييرات..." />
+      <InputGroupAddon align="inline-end">
+        <InputGroupText>جاري الحفظ...</InputGroupText>
+        <Spinner />
+      </InputGroupAddon>
+    </InputGroup>
+    <FieldGroup className="max-w-sm">
+      <Field>
+        <FieldLabel>منطقة النص</FieldLabel>
+        <InputGroup>
+          <InputGroupTextarea placeholder="اكتب تعليقًا..." />
+          <InputGroupAddon align="block-end">
+            <InputGroupText>٠/٢٨٠</InputGroupText>
+            <InputGroupButton className="ms-auto" size="sm" variant="default">
+              نشر
+            </InputGroupButton>
+          </InputGroupAddon>
+        </InputGroup>
+        <FieldDescription>تذييل موضع أسفل منطقة النص.</FieldDescription>
+      </Field>
+    </FieldGroup>
+  </div>
+);
+
+export default InputGroupRtl;

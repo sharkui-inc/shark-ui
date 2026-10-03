@@ -17,8 +17,8 @@ const Example = () => (
   <div className="flex w-full flex-col gap-6 overflow-hidden">
     <Marquee pauseOnInteraction showEdges={false}>
       <MarqueeContent>
-        {items.map((Icon, index) => (
-          <MarqueeItem key={index}>
+        {items.map((Icon) => (
+          <MarqueeItem key={Icon.name}>
             <Card>
               <CardContent>
                 <Icon className="size-10" />
@@ -31,8 +31,8 @@ const Example = () => (
 
     <Marquee pauseOnInteraction reverse>
       <MarqueeContent>
-        {items.map((Icon, index) => (
-          <MarqueeItem key={index}>
+        {items.map((Icon) => (
+          <MarqueeItem key={Icon.name}>
             <Card>
               <CardContent>
                 <Icon className="size-10" />

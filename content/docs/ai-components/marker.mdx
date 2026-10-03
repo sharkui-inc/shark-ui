@@ -1,0 +1,144 @@
+---
+title: Marker
+description: Labeled status line between transcript events.
+seo:
+  description: Separate transcript events with a labeled status line.
+---
+
+import manifest from "@/registry/manifest/marker";
+
+<ComponentPreview componentName="marker" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/marker
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/marker.tsx" src="/marker.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+Marker
+├── MarkerIcon
+└── MarkerContent
+```
+
+## Usage
+
+```tsx
+import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker";
+```
+
+```tsx
+<Marker>
+  <MarkerIcon />
+  <MarkerContent />
+</Marker>
+```
+
+## Variants
+
+Use `variant` to switch between an inline marker, bordered row, and labeled separator.
+
+### Default
+
+<ComponentPreview componentName="marker" fileName="example-variant-default" />
+
+### Border
+
+<ComponentPreview componentName="marker" fileName="example-variant-border" />
+
+### Separator
+
+<ComponentPreview componentName="marker" fileName="example-variant-separator" />
+
+## Examples
+
+### Status
+
+Set `role="status"` and include a [Spinner](/docs/components/spinner) for streaming or in-progress markers so updates are announced.
+
+<ComponentPreview componentName="marker" fileName="example-status" />
+
+### Shimmer
+
+Add the [shimmer](/docs/utilities/shimmer) utility class to `MarkerContent` for an animated streaming-text effect.
+
+<ComponentPreview componentName="marker" fileName="example-shimmer" />
+
+### With Icon
+
+<ComponentPreview componentName="marker" fileName="example-icon" />
+
+### Links and Buttons
+
+Turn a marker into a link or button with `asChild` on `Marker`.
+
+<ComponentPreview componentName="marker" fileName="example-links" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="marker" />
+
+## API Reference
+
+### Marker
+
+Root status line, bordered row, or labeled separator.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "separator" \| "border"` | `"default"` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### MarkerIcon
+
+Decorative icon slot.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |
+
+### MarkerContent
+
+Label text for the marker.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `false` |

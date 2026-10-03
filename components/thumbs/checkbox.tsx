@@ -4,12 +4,12 @@ export const CheckboxThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
     <div className="flex w-40 flex-col gap-2">
       <div className="flex items-center gap-2">
-        <div className="size-4 shrink-0 rounded-lg bg-muted-foreground/16" />
-        <div className="h-2 w-16 rounded-lg bg-muted-foreground/16" />
+        <div className="size-4 shrink-0 rounded-lg bg-muted-foreground/24" />
+        <div className="h-2 w-16 rounded-lg bg-muted-foreground/24" />
       </div>
       <div className="flex items-center gap-2">
         <div className="flex size-4 shrink-0 items-center justify-center rounded-lg bg-primary" />
-        <div className="h-2 w-20 rounded-lg bg-muted-foreground/16" />
+        <div className="h-2 w-20 rounded-lg bg-muted-foreground/24" />
       </div>
     </div>
   </ThumbCard>

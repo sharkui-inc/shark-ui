@@ -40,7 +40,12 @@ const Example = () => (
     <Popover positioning={{ placement: "bottom-end" }}>
       <AvatarGroupCount asChild>
         <PopoverTrigger asChild>
-          <Button pill size="icon-md" variant="ghost">
+          <Button
+            aria-label="Show 5 more members (+5)"
+            pill
+            size="icon-md"
+            variant="ghost"
+          >
             +5
           </Button>
         </PopoverTrigger>

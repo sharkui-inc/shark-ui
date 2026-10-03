@@ -1,17 +1,14 @@
 ---
 title: Alert Dialog
-description: Dialog for displaying important content.
+description: Confirmation dialog for important actions.
+seo:
+  description: Confirmation dialog that blocks until the user accepts or cancels.
 links:
   doc: https://ark-ui.com/docs/components/dialog
   api: https://ark-ui.com/docs/components/dialog#api-reference
 ---
 
-<Alert>
-  <InfoIcon />
-  <AlertDescription>
-  Alert Dialog is built on top of the [Dialog](/docs/components/dialog) component. Check it out for more examples.
-  </AlertDescription>
-</Alert>
+import manifest from "@/registry/manifest/alert-dialog";
 
 <ComponentPreview componentName="alert-dialog" />
 
@@ -40,9 +37,7 @@ npx shadcn@latest add @shark/alert-dialog
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -75,13 +70,13 @@ AlertDialog
 ## Usage
 
 ```tsx
-import { 
-  AlertDialog, 
-  AlertDialogTrigger, 
-  AlertDialogContent, 
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
   AlertDialogHeader,
-  AlertDialogTitle, 
-  AlertDialogDescription, 
+  AlertDialogTitle,
+  AlertDialogDescription,
   AlertDialogBody,
   AlertDialogFooter,
   AlertDialogAction,
@@ -105,9 +100,7 @@ import {
       <AlertDialogCancel>
         Don't allow
       </AlertDialogCancel>
-      <AlertDialogClose asChild>
-        <AlertDialogAction>Allow</AlertDialogAction>
-      </AlertDialogClose>
+      <AlertDialogAction>Allow</AlertDialogAction>
     </AlertDialogFooter>
   </AlertDialogContent>
 </AlertDialog>
@@ -119,11 +112,11 @@ import {
 
 ### Using props
 
-Pass `title` and `description` props directly to `AlertDialogHeader`. 
+Pass `title` and `description` props directly to `AlertDialogHeader`.
 
 ```tsx showLineNumbers
-<AlertDialogHeader 
-  title="Allow accessory to connect?" 
+<AlertDialogHeader
+  title="Allow accessory to connect?"
   description="Do you want to allow the USB accessory to connect to this device?"
 >
   <AlertDialogAction />
@@ -148,9 +141,22 @@ Use `AlertDialogTitle` and `AlertDialogDescription` as children for more control
 
 ## Examples
 
+<Alert>
+  <InfoIcon />
+  <AlertDescription>
+  Alert Dialog is built on top of the [Dialog](/docs/components/dialog) component. Check it out for more examples.
+  </AlertDescription>
+</Alert>
+
 ### Destructive
 
 <ComponentPreview componentName="alert-dialog" fileName="example-variant-destructive" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="alert-dialog" />
 
 ## API Reference
 
@@ -173,6 +179,87 @@ Cancel action.
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
+### AlertDialog
+
+Public AlertDialog component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AlertDialogTrigger
+
+Public AlertDialogTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AlertDialogContent
+
+Public AlertDialogContent component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AlertDialogBody
+
+Public AlertDialogBody component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AlertDialogHeader
+
+Public AlertDialogHeader component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AlertDialogTitle
+
+Public AlertDialogTitle component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AlertDialogDescription
+
+Public AlertDialogDescription component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AlertDialogClose
+
+Public AlertDialogClose component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AlertDialogFooter
+
+Footer for action buttons.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
 ---
 
-For a complete list of props, see the [Dialog API Reference](/docs/components/dialog#api-reference).
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/dialog#api-reference).

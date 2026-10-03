@@ -1,9 +1,8 @@
-import { Badge } from "@registry/react/components/badge";
 import { ChevronDownIcon } from "lucide-react";
+import type React from "react";
 import { ChatGptIcon } from "@/components/icons/chat-gpt";
 import { ClaudeIcon } from "@/components/icons/claude";
 import { MarkdownIcon } from "@/components/icons/markdown";
-import { SITE_FEATURES } from "@/config/features";
 import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
@@ -16,6 +15,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuGroup,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -34,14 +34,14 @@ interface DocsCopyPageProps extends React.ComponentProps<typeof ButtonGroup> {
 export const DocsCopyPage = (props: DocsCopyPageProps) => {
   const { data, url, className, ...rest } = props;
 
-  const pageUrl = absoluteUrl(`${url}`);
+  const pageUrl = absoluteUrl(url);
 
   return (
     <ButtonGroup className={cn("hidden sm:flex", className)} {...rest}>
       <ButtonGroup>
         <Clipboard value={data}>
           <ClipboardTrigger asChild>
-            <Button className="rounded-e-none" size="sm" variant="outline">
+            <Button size="sm" variant="outline">
               <ClipboardIndicator />
               Copy Markdown
             </Button>
@@ -56,57 +56,39 @@ export const DocsCopyPage = (props: DocsCopyPageProps) => {
           </MenuTrigger>
 
           <MenuContent>
-            {Object.entries(menuItems).map(([key, value]) => (
-              <MenuItem
-                asChild
-                className="aria-disabled:opacity-64"
-                key={key}
-                value={key}
-              >
-                {value(pageUrl)}
+            <MenuGroup>
+              <MenuItem asChild value="chatgpt">
+                <a
+                  href={getPromptUrl("https://chatgpt.com", pageUrl)}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <ChatGptIcon />
+                  Open in ChatGPT
+                </a>
               </MenuItem>
-            ))}
+              <MenuItem asChild value="claude">
+                <a
+                  href={getPromptUrl("https://claude.ai/new", pageUrl)}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <ClaudeIcon />
+                  Open in Claude
+                </a>
+              </MenuItem>
+              <MenuItem asChild value="markdown">
+                <a href={`${url}.md`} rel="noopener noreferrer" target="_blank">
+                  <MarkdownIcon />
+                  View as Markdown
+                </a>
+              </MenuItem>
+            </MenuGroup>
           </MenuContent>
         </Menu>
       </ButtonGroup>
     </ButtonGroup>
   );
-};
-
-const menuItems = {
-  markdown: (url: string) =>
-    SITE_FEATURES.rawMarkdownRoutes ? (
-      <a href={`${url}.md`} rel="noopener noreferrer" target="_blank">
-        <MarkdownIcon />
-        View as Markdown
-      </a>
-    ) : (
-      <div aria-disabled>
-        <MarkdownIcon />
-        View as Markdown
-        <Badge variant="outline">Disabled</Badge>
-      </div>
-    ),
-  chatgpt: (url: string) => (
-    <a
-      href={getPromptUrl("https://chatgpt.com", url)}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <ChatGptIcon />
-      Open in ChatGPT
-    </a>
-  ),
-  claude: (url: string) => (
-    <a
-      href={getPromptUrl("https://claude.ai/new", url)}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <ClaudeIcon />
-      Open in Claude
-    </a>
-  ),
 };
 
 const getPromptUrl = (baseURL: string, url: string) =>

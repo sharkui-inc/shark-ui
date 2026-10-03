@@ -20,13 +20,11 @@ const Example = () => (
         title="Non-Draggable Drawer"
       />
       <DrawerBody>
-        <p className="text-muted-foreground text-sm">
-          Set <code className="text-foreground">draggable</code> to{" "}
-          <code className="text-foreground">false</code> on{" "}
-          <code className="text-foreground">DrawerContent</code> to disable
-          drag-to-dismiss on the panel. The drawer can still be dragged by the
-          grabber.
-        </p>
+        <div className="mx-auto w-full max-w-xs">
+          <p className="text-muted-foreground text-sm">
+            Dragging this panel does nothing. Use the grabber to move it.
+          </p>
+        </div>
       </DrawerBody>
       <DrawerFooter>
         <div className="mx-auto w-full max-w-xs">

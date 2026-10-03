@@ -1,9 +1,9 @@
 "use client";
 
-import { waitForEvent } from "@ark-ui/react/tour";
-import { Checkbox } from "@registry/react/components/checkbox";
-import { Field, FieldLabel } from "@registry/react/components/field";
+import type { TourStepEffectArgs } from "@ark-ui/react/tour";
 import { Button } from "@/registry/react/components/button";
+import { Checkbox } from "@/registry/react/components/checkbox";
+import { Field, FieldLabel } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
 import {
   Tour,
@@ -15,120 +15,183 @@ import {
   type TourStepType,
   TourTitle,
   TourTrigger,
+  useTour,
 } from "@/registry/react/components/tour";
+
+const Example = () => {
+  const tour = useTour({
+    closeOnInteractOutside: false,
+    keyboardNavigation: false,
+    steps,
+  });
+
+  return (
+    <div className="flex w-full max-w-xs flex-col gap-4">
+      <Tour tour={tour}>
+        <TourTrigger asChild>
+          <Button variant="outline">Start tour</Button>
+        </TourTrigger>
+
+        <div className="flex flex-col gap-4 rounded-lg border bg-card p-4 shadow-xs/4">
+          <div className="flex items-center gap-3">
+            <img
+              alt=""
+              className="size-10 rounded-md"
+              height={40}
+              src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=maya-chen&waveColor=2b6cb0"
+              width={40}
+            />
+            <div className="flex min-w-0 flex-col">
+              <span className="truncate font-medium text-sm">New member</span>
+              <span className="truncate text-muted-foreground text-xs">
+                Onda workspace
+              </span>
+            </div>
+          </div>
+          <Field>
+            <FieldLabel>Name</FieldLabel>
+            <Input placeholder="Maya Chen" />
+          </Field>
+          <Field>
+            <FieldLabel>Email</FieldLabel>
+            <Input placeholder="maya@onda.dev" type="email" />
+          </Field>
+          <Field id="tour-input-terms" orientation="horizontal">
+            <Checkbox />
+            <FieldLabel>I agree to the Onda workspace terms</FieldLabel>
+          </Field>
+        </div>
+
+        <TourContent>
+          <TourHeader>
+            <TourProgressText />
+            <TourTitle />
+            <TourDescription />
+          </TourHeader>
+          <TourActions />
+        </TourContent>
+      </Tour>
+    </div>
+  );
+};
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const continueAction = {
+  action: "next" as const,
+  label: "Continue",
+};
+
+const disabledContinueAction = {
+  ...continueAction,
+  attrs: { disabled: true },
+};
+
+const syncContinue = (
+  target: TourStepEffectArgs["target"],
+  update: TourStepEffectArgs["update"],
+  eventName: "change" | "input",
+  isValid: (element: HTMLInputElement) => boolean
+) => {
+  const element = target?.();
+  const input =
+    element instanceof HTMLInputElement
+      ? element
+      : element?.querySelector("input");
+
+  if (!(input instanceof HTMLInputElement)) {
+    return;
+  }
+
+  let enabled: boolean | undefined;
+
+  const sync = () => {
+    const valid = isValid(input);
+
+    if (valid === enabled) {
+      return;
+    }
+
+    enabled = valid;
+    update({
+      actions: [valid ? continueAction : disabledContinueAction],
+    });
+  };
+
+  input.addEventListener(eventName, sync);
+  sync();
+
+  return () => {
+    input.removeEventListener(eventName, sync);
+  };
+};
+
 const steps: TourStepType[] = [
   {
+    actions: [{ action: "next", label: "Start" }],
+    description: "Continue enables when a field is valid.",
     id: "intro",
+    title: "Join the workspace",
     type: "dialog",
-    title: "Form Tutorial",
+  },
+  {
+    actions: [disabledContinueAction],
     description:
-      "Learn how to fill out the form by following the guided steps.",
-    actions: [{ label: "Start", action: "next" }],
-  },
-  {
+      "Enter a name with at least two characters. Continue stays off until then.",
+    effect({ show, target, update }) {
+      show();
+      return syncContinue(
+        target,
+        update,
+        "input",
+        (element) => element.value.trim().length >= 2
+      );
+    },
     id: "enter-name",
+    target: () => document.querySelector<HTMLInputElement>("#tour-input-name"),
+    title: "Your name",
     type: "tooltip",
-    title: "Enter Your Name",
-    description: "Type your name in the input field to continue.",
-    target: () => document.querySelector<HTMLInputElement>("#input-name"),
-    effect({ next, target, show }) {
-      show();
-      const [promise, cancel] = waitForEvent<HTMLInputElement>(
-        target,
-        "input",
-        {
-          predicate: (el) => el.value.trim().length >= 2,
-        }
-      );
-      promise.then(() => next());
-      return cancel;
-    },
   },
   {
+    actions: [disabledContinueAction],
+    description:
+      "Enter an address like maya@onda.dev. Continue stays off until it looks like an email.",
+    effect({ show, target, update }) {
+      show();
+      return syncContinue(target, update, "input", (element) =>
+        emailRegex.test(element.value)
+      );
+    },
     id: "enter-email",
+    target: () => document.querySelector<HTMLInputElement>("#tour-input-email"),
+    title: "Your email",
     type: "tooltip",
-    title: "Enter Your Email",
-    description: "Now enter a valid email address.",
-    target: () => document.querySelector<HTMLInputElement>("#input-email"),
-    effect({ next, target, show }) {
-      show();
-      const [promise, cancel] = waitForEvent<HTMLInputElement>(
-        target,
-        "input",
-        {
-          predicate: (el) => emailRegex.test(el.value),
-        }
-      );
-      promise.then(() => next());
-      return cancel;
-    },
   },
   {
-    id: "check-terms",
-    type: "tooltip",
-    title: "Accept Terms",
-    description: "Check the checkbox to accept the terms.",
-    target: () => document.querySelector<HTMLInputElement>("#checkbox-terms"),
-    effect({ next, target, show }) {
+    actions: [disabledContinueAction],
+    description:
+      "Agree to the Onda workspace terms. Continue stays off until the box is checked.",
+    effect({ show, target, update }) {
       show();
-      const [promise, cancel] = waitForEvent<HTMLInputElement>(
+      return syncContinue(
         target,
+        update,
         "change",
-        {
-          predicate: (el) => el.checked,
-        }
+        (element) => element.checked
       );
-      promise.then(() => next());
-      return cancel;
     },
+    id: "check-terms",
+    target: () => document.getElementById("field::tour-input-terms"),
+    title: "Workspace terms",
+    type: "tooltip",
   },
   {
+    actions: [{ action: "dismiss", label: "Done" }],
+    description: "The profile is saved.",
     id: "complete",
+    title: "Profile saved",
     type: "dialog",
-    title: "Form Complete!",
-    description: "You have successfully filled out the form.",
-    actions: [{ label: "Done", action: "dismiss" }],
   },
 ];
-
-const Example = () => (
-  <div className="flex flex-col gap-4">
-    <Tour steps={steps}>
-      <TourTrigger asChild>
-        <Button variant="outline">Start Form Tutorial</Button>
-      </TourTrigger>
-
-      <div className="flex max-w-xs flex-col gap-4 rounded-lg border border-border bg-muted/50 p-4">
-        <Field>
-          <FieldLabel htmlFor="input-name">Name</FieldLabel>
-          <Input id="input-name" placeholder="Enter your name" type="text" />
-        </Field>
-        <Field>
-          <FieldLabel htmlFor="input-email">Email</FieldLabel>
-          <Input id="input-email" placeholder="Enter your email" type="email" />
-        </Field>
-        <Field orientation="horizontal">
-          <Checkbox id="checkbox-terms" />
-          <FieldLabel htmlFor="checkbox-terms">
-            I accept the terms and conditions
-          </FieldLabel>
-        </Field>
-      </div>
-
-      <TourContent>
-        <TourHeader>
-          <TourProgressText />
-          <TourTitle />
-          <TourDescription />
-        </TourHeader>
-
-        <TourActions />
-      </TourContent>
-    </Tour>
-  </div>
-);
 
 export default Example;

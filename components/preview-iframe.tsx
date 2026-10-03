@@ -1,31 +1,37 @@
-import type { Frame } from "@ark-ui/react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 
-interface PreviewIframeProps extends React.ComponentProps<typeof Frame> {
-  /**
-   * The source URL of the iframe
-   */
+type PreviewIframeProps = React.ComponentProps<"iframe"> & {
   src: string;
-  /**
-   * The title of the iframe
-   */
   title: string;
-}
+};
 
 export const PreviewIframe = (props: PreviewIframeProps) => {
-  const { src, title, className, ...rest } = props;
+  const { className, height = 450, src, title, ...rest } = props;
+  const style: React.CSSProperties & { "--height": string } = {
+    "--height": `${height}px`,
+  };
 
   return (
-    <iframe
+    <div
       className={cn(
-        "min-h-[450px] w-full",
-        "rounded-2xl border",
+        "h-(--height) w-full",
+        "bg-background",
+        "rounded-xl border",
         "overflow-hidden",
         className
       )}
-      src={src}
-      title={title}
-      {...rest}
-    />
+      data-slot="preview-iframe"
+      style={style}
+    >
+      <iframe
+        className="size-full bg-background"
+        loading="lazy"
+        {...rest}
+        height={height}
+        src={src}
+        title={title}
+      />
+    </div>
   );
 };

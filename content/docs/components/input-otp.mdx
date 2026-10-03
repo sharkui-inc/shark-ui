@@ -1,10 +1,14 @@
 ---
 title: Input OTP
-description: Accessible one-time password input.
+description: One-time password input.
+seo:
+  description: One-time password field with per-digit slots.
 links:
   doc: https://ark-ui.com/docs/components/pin-input
   api: https://ark-ui.com/docs/components/pin-input#api-reference
 ---
+
+import manifest from "@/registry/manifest/input-otp";
 
 <ComponentPreview componentName="input-otp" />
 
@@ -29,13 +33,11 @@ npx shadcn@latest add @shark/input-otp
 
 <Steps>
 
-<Step>This component depends on [Input](/docs/components/input). Install it first if you haven't already.</Step>
+<Step>This component depends on [Input](/docs/components/input) and [Separator](/docs/components/separator). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -53,6 +55,7 @@ npm install @ark-ui/react
 
 ```text
 InputOTP
+├── InputOTPLabel
 ├── InputOTPSlot
 └── InputOTPSeparator
 ```
@@ -62,6 +65,7 @@ InputOTP
 ```tsx
 import {
   InputOTP,
+  InputOTPLabel,
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
@@ -69,13 +73,12 @@ import {
 
 ```tsx
 <InputOTP>
+  <InputOTPLabel>Verification code</InputOTPLabel>
   <InputOTPSlot index={0} />
   <InputOTPSlot index={1} />
-  <InputOTPSlot index={2} />
   <InputOTPSeparator />
+  <InputOTPSlot index={2} />
   <InputOTPSlot index={3} />
-  <InputOTPSlot index={4} />
-  <InputOTPSlot index={5} />
 </InputOTP>
 ```
 
@@ -89,23 +92,19 @@ Use `value` and `onValueChange` to control the input.
 
 ### Disabled
 
-Use the `disabled` prop to disable the input.
-
 <ComponentPreview componentName="input-otp" fileName="example-disabled" />
 
 ### Invalid
-
-Use the `invalid` prop to mark the input as invalid and show error styling.
 
 <ComponentPreview componentName="input-otp" fileName="example-invalid" />
 
 ## Examples
 
-### Four Digits
+### With Field
 
-Use four `InputOTPSlot` elements for a 4-digit OTP.
+Use `InputOTPLabel` to name the code, and [Field](/docs/components/field) for a description.
 
-<ComponentPreview componentName="input-otp" fileName="example-four-digits" />
+<ComponentPreview componentName="input-otp" fileName="example-with-field" />
 
 ### Separator
 
@@ -125,17 +124,39 @@ Use the `blurOnComplete` prop to blur the input when all slots are filled.
 
 <ComponentPreview componentName="input-otp" fileName="example-blur-on-complete" />
 
+### Auto submit
+
+Use `autoSubmit` to submit the owning form when every slot is filled.
+
+<ComponentPreview componentName="input-otp" fileName="example-auto-submit" />
+
+### Sanitize value
+
+Use `sanitizeValue` to clean pasted text before validation, for example stripping dashes.
+
+<ComponentPreview componentName="input-otp" fileName="example-sanitize-value" />
+
 ### Mask
 
 Use the `mask` prop to mask the input value.
 
 <ComponentPreview componentName="input-otp" fileName="example-mask" />
 
+### Form Integration
+
+<ComponentPreview componentName="input-otp" fileName="example-form" />
+
 ### Custom Size
 
-Pass `*:data-[slot=input-otp-input]:size-*` and `*:data-[slot=input-otp-input]:text-*` to `InputOTP` to override slot dimensions and text size.
+Pass `*:data-[slot=input-otp-input]:size-*` to override slot dimensions.
 
 <ComponentPreview componentName="input-otp" fileName="example-custom-size" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="input-otp" />
 
 ## API Reference
 
@@ -144,14 +165,24 @@ Pass `*:data-[slot=input-otp-input]:size-*` and `*:data-[slot=input-otp-input]:t
 | Prop | Type | Default |
 | --- | --- | --- |
 | `withFakeCaret` | `boolean` | `false` |
-| `value` | `string` | - |
-| `defaultValue` | `string` | - |
-| `onValueChange` | `({ value, valueAsString }) => void` | - |
-| `disabled` | `boolean` | - |
-| `invalid` | `boolean` | - |
+| `value` | `string` | `-` |
+| `defaultValue` | `string` | `-` |
+| `onValueChange` | `({ value, valueAsString }) => void` | `-` |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
 | `otp` | `boolean` | `true` |
-| `blurOnComplete` | `boolean` | - |
-| `mask` | `boolean` | - |
+| `blurOnComplete` | `boolean` | `-` |
+| `autoSubmit` | `boolean` | `-` |
+| `sanitizeValue` | `(value: string) => string` | `-` |
+| `mask` | `boolean` | `-` |
+
+### InputOTPLabel
+
+Label for the InputOTP.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 
 ### InputOTPSlot
 
@@ -159,12 +190,15 @@ Single OTP slot. Use `index` to specify position, 0 is the first slot.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `index` | `number` | **required** |
+| `index` | `number` | `required` |
+
 
 ### InputOTPSeparator
 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 Visual separator between slots.
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/pin-input#api-reference).

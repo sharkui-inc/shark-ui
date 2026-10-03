@@ -27,35 +27,21 @@ import {
 } from "@/registry/react/components/field";
 import { InputOTP, InputOTPSlot } from "@/registry/react/components/input-otp";
 
-const formSchema = v.object({
-  backupCode: v.pipe(
-    v.array(v.string()),
-    v.minLength(6, "Enter all 6 digits of your backup code."),
-    v.maxLength(6, "Enter all 6 digits of your backup code."),
-    v.check(
-      (digits) => digits.every((d) => d.length === 1),
-      "Enter all 6 digits of your backup code."
-    )
-  ),
-});
-
-const emptyCode = ["", "", "", "", "", ""] as const;
-
 const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: { backupCode: [...emptyCode] },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "backup-code-submitted",
-      title: "Backup code verified",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "backup-code-submitted",
+      title: "Backup code verified",
     });
   };
 
@@ -73,12 +59,18 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["backupCode"]}>
               {(field) => {
-                const value = (field.input as string[]) ?? [...emptyCode];
+                const value = field.input as string[];
                 return (
-                  <Field invalid={Boolean(field.errors?.length)}>
+                  <Field
+                    invalid={Boolean(field.errors?.length)}
+                    onBlur={field.props.onBlur}
+                    onFocus={field.props.onFocus}
+                  >
                     <FieldLabel>Backup code</FieldLabel>
                     <InputOTP
-                      onValueChange={({ value }) => field.onChange(value)}
+                      onValueChange={({ value: nextValue }) =>
+                        field.onChange(nextValue)
+                      }
                       value={value}
                     >
                       <InputOTPSlot index={0} />
@@ -108,5 +100,19 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  backupCode: v.pipe(
+    v.array(v.string()),
+    v.minLength(6, "Enter all 6 digits of your backup code."),
+    v.maxLength(6, "Enter all 6 digits of your backup code."),
+    v.check(
+      (digits) => digits.every((d) => d.length === 1),
+      "Enter all 6 digits of your backup code."
+    )
+  ),
+});
+
+const emptyCode = ["", "", "", "", "", ""] as const;
 
 export default Example;

@@ -1,4 +1,4 @@
-import { BellIcon, HomeIcon, SearchIcon, UserIcon } from "lucide-react";
+import { HouseIcon, LibraryIcon, SearchIcon, UserIcon } from "lucide-react";
 import {
   BottomNavigation,
   BottomNavigationItem,
@@ -7,16 +7,26 @@ import {
   BottomNavigationList,
 } from "@/registry/react/components/bottom-navigation";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
+import { DemoAppContent } from "./demo-app-content";
+import { DemoPhoneShell } from "./demo-phone-shell";
 
-const Example = () => (
-  <div className="flex h-72 w-full max-w-xs flex-col overflow-y-auto rounded-lg border bg-muted shadow-lg/5">
-    <ScrollArea>
-      <div className="h-96" />
-      <BottomNavigation defaultValue="home">
-        <BottomNavigationList className="absolute">
+const BottomNavigationDemo = () => (
+  <div className="grid h-svh place-items-center p-6">
+    <DemoPhoneShell>
+      <ScrollArea className="h-full **:data-[slot=scroll-area-scrollbar]:hidden">
+        <DemoAppContent className="pb-28" />
+      </ScrollArea>
+      <BottomNavigation
+        className="pointer-events-none absolute inset-0 min-h-0"
+        defaultValue="home"
+      >
+        <BottomNavigationList
+          className="pointer-events-auto absolute"
+          variant="inset"
+        >
           <BottomNavigationItem value="home">
             <BottomNavigationItemIcon>
-              <HomeIcon />
+              <HouseIcon />
             </BottomNavigationItemIcon>
             <BottomNavigationItemLabel>Home</BottomNavigationItemLabel>
           </BottomNavigationItem>
@@ -26,22 +36,22 @@ const Example = () => (
             </BottomNavigationItemIcon>
             <BottomNavigationItemLabel>Search</BottomNavigationItemLabel>
           </BottomNavigationItem>
-          <BottomNavigationItem value="news">
+          <BottomNavigationItem value="library">
             <BottomNavigationItemIcon>
-              <BellIcon />
+              <LibraryIcon />
             </BottomNavigationItemIcon>
-            <BottomNavigationItemLabel>News</BottomNavigationItemLabel>
+            <BottomNavigationItemLabel>Library</BottomNavigationItemLabel>
           </BottomNavigationItem>
-          <BottomNavigationItem value="profile">
+          <BottomNavigationItem value="you">
             <BottomNavigationItemIcon>
               <UserIcon />
             </BottomNavigationItemIcon>
-            <BottomNavigationItemLabel>Profile</BottomNavigationItemLabel>
+            <BottomNavigationItemLabel>You</BottomNavigationItemLabel>
           </BottomNavigationItem>
         </BottomNavigationList>
       </BottomNavigation>
-    </ScrollArea>
+    </DemoPhoneShell>
   </div>
 );
 
-export default Example;
+export default BottomNavigationDemo;

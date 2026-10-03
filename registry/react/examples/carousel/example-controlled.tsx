@@ -14,13 +14,12 @@ import {
 const Example = () => {
   const [page, setPage] = React.useState(0);
 
-  const slides = Array.from({ length: 8 });
-
   return (
     <div className="flex flex-col gap-4">
       <Carousel
-        className="w-full max-w-48 sm:max-w-64"
-        onPageChange={({ page }) => setPage(page)}
+        aria-label="Controlled carousel"
+        className="w-full max-w-48"
+        onPageChange={({ page: nextPage }) => setPage(nextPage)}
         page={page}
         slideCount={slides.length}
       >
@@ -30,8 +29,8 @@ const Example = () => {
         </CarouselControl>
 
         <CarouselContent>
-          {slides.map((_, index) => (
-            <CarouselItem index={index} key={index}>
+          {slides.map((slide, index) => (
+            <CarouselItem index={index} key={slide.id}>
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center">
                   <span className="font-semibold text-4xl">{index + 1}</span>
@@ -47,5 +46,7 @@ const Example = () => {
     </div>
   );
 };
+
+const slides = Array.from({ length: 8 }, (_, id) => ({ id }));
 
 export default Example;

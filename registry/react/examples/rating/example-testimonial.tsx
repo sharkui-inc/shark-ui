@@ -9,16 +9,14 @@ import {
   CardDescription,
   CardTitle,
 } from "@/registry/react/components/card";
-import { Rating } from "@/registry/react/components/rating";
+import { Rating, RatingStars } from "@/registry/react/components/rating";
 
 const Example = () => (
   <Card className="w-full max-w-xs">
-    <CardContent className="space-y-2">
-      <Rating
-        className="**:data-[slot=rating-item-indicator]:size-4"
-        defaultValue={5}
-        readOnly
-      />
+    <CardContent className="flex flex-col gap-2">
+      <Rating defaultValue={5} readOnly>
+        <RatingStars className="**:data-[slot=rating-item-indicator]:size-4" />
+      </Rating>
       <blockquote className="text-muted-foreground">
         &ldquo;This completely changed our workflow. Fast, reliable, and the
         team loves it. Would recommend to anyone.&rdquo;

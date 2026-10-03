@@ -7,8 +7,8 @@ import {
   BreadcrumbSeparator,
 } from "@/registry/react/components/breadcrumb";
 
-const Example = () => (
-  <Breadcrumb>
+const BreadcrumbDemo = () => (
+  <Breadcrumb aria-label="Current location breadcrumb">
     <BreadcrumbList>
       <BreadcrumbItem>
         <BreadcrumbLink href="#">Home</BreadcrumbLink>
@@ -25,4 +25,4 @@ const Example = () => (
   </Breadcrumb>
 );
 
-export default Example;
+export default BreadcrumbDemo;

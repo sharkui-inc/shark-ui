@@ -1,6 +1,7 @@
 "use client";
 
 import { Card, CardContent } from "@/registry/react/components/card";
+import { ClientOnly } from "@/registry/react/components/client-only";
 import {
   remainingMsUntilDate,
   Timer,
@@ -14,14 +15,28 @@ import {
 const Example = () => (
   <Card className="rounded-3xl [--space:--spacing(6)]">
     <CardContent className="flex flex-col items-center gap-3">
+      <ClientOnly fallback={<Countdown />}>
+        <Countdown live />
+      </ClientOnly>
+    </CardContent>
+  </Card>
+);
+
+const Countdown = (props: { live?: boolean }) => {
+  const { live = false } = props;
+
+  const date = live ? daysFromNow(7) : null;
+
+  return (
+    <>
       <p className="text-center text-muted-foreground text-xs">
-        Until {formatDate(targetDate)}
+        {date ? `Until ${formatDate(date)}` : "7 days from today"}
       </p>
       <Timer
-        autoStart
+        autoStart={live}
         className="items-center gap-4"
         countdown
-        startMs={remainingMsUntilDate(targetDate)}
+        startMs={date ? remainingMsUntilDate(date) : weekMs}
       >
         <TimerArea>
           <TimerItemGroup>
@@ -45,14 +60,22 @@ const Example = () => (
           </TimerItemGroup>
         </TimerArea>
       </Timer>
-    </CardContent>
-  </Card>
-);
+    </>
+  );
+};
+
+const weekMs = 7 * 24 * 60 * 60 * 1000;
+
+const daysFromNow = (days: number) => {
+  const date = new Date();
+  date.setDate(date.getDate() + days);
+  return date;
+};
 
 const formatDate = (date: Date) =>
-  date.toLocaleDateString(undefined, { dateStyle: "medium" });
-
-const targetDate = new Date();
-targetDate.setDate(targetDate.getDate() + 7);
+  new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+    timeZone: "UTC",
+  }).format(date);
 
 export default Example;

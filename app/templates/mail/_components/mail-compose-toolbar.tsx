@@ -1,0 +1,37 @@
+"use client";
+
+import { ArrowLeftIcon, SendIcon, XIcon } from "lucide-react";
+import { ButtonGroup } from "@/registry/react/components/button-group";
+import type { MailComposeMode } from "../_data/mail";
+import { MailComposeTools } from "./mail-compose-tools";
+import { MailToolbarButton } from "./mail-toolbar-button";
+
+export const MailComposeToolbar = (props: {
+  onComposeChange: (mode: MailComposeMode) => void;
+}) => {
+  const { onComposeChange } = props;
+  return (
+    <>
+      <MailToolbarButton label="Back" onClick={() => onComposeChange(null)}>
+        <ArrowLeftIcon aria-hidden />
+      </MailToolbarButton>
+      <MailComposeTools />
+      <ButtonGroup aria-label="Compose" className="ms-auto shrink-0">
+        <MailToolbarButton
+          label="Discard"
+          onClick={() => onComposeChange(null)}
+        >
+          <XIcon aria-hidden />
+        </MailToolbarButton>
+        <MailToolbarButton
+          form="mail-compose-form"
+          label="Send"
+          type="submit"
+          variant="default"
+        >
+          <SendIcon aria-hidden />
+        </MailToolbarButton>
+      </ButtonGroup>
+    </>
+  );
+};

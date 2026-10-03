@@ -10,7 +10,7 @@ import { Input } from "@/registry/react/components/input";
 const Example = () => (
   <Field className="w-full max-w-xs" orientation="vertical">
     <FieldLabel>Name</FieldLabel>
-    <Input placeholder="Enter your name" type="text" />
+    <Input placeholder="Enter your name" />
     <FieldDescription>
       Stacks label, control, and description vertically.
     </FieldDescription>

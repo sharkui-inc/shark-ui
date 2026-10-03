@@ -23,46 +23,28 @@ import {
   FieldDescription,
   FieldError,
   FieldGroup,
-  FieldLabel,
 } from "@/registry/react/components/field";
-import { Slider, SliderLabel } from "@/registry/react/components/slider";
-
-const PRICE_MIN = 200;
-const PRICE_MAX = 10_000;
-
-const formSchema = v.object({
-  priceRange: v.pipe(
-    v.array(v.number()),
-    v.minLength(2, "Select a lower and upper price."),
-    v.maxLength(2, "Select a lower and upper price."),
-    v.check(
-      ([low, high]) => low < high,
-      "The minimum price must be less than the maximum."
-    ),
-    v.check(
-      ([low, high]) => low >= PRICE_MIN && high <= PRICE_MAX,
-      `Keep both values between $${PRICE_MIN.toLocaleString()} and $${PRICE_MAX.toLocaleString()}.`
-    )
-  ),
-});
-
-const defaultRange = [0, PRICE_MAX];
+import {
+  Slider,
+  SliderLabel,
+  SliderValue,
+} from "@/registry/react/components/slider";
 
 const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: { priceRange: defaultRange },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "price-range-submitted",
-      title: "Price filter saved",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "price-range-submitted",
+      title: "Price filter saved",
     });
   };
 
@@ -79,10 +61,14 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["priceRange"]}>
               {(field) => {
-                const value = (field.input as number[]) ?? defaultRange;
+                const value = field.input as number[];
 
                 return (
-                  <Field invalid={Boolean(field.errors?.length)}>
+                  <Field
+                    invalid={Boolean(field.errors?.length)}
+                    onBlur={field.props.onBlur}
+                    onFocus={field.props.onFocus}
+                  >
                     <Slider
                       max={PRICE_MAX}
                       min={0}
@@ -92,9 +78,9 @@ const Example = () => {
                     >
                       <div className="flex items-center justify-between gap-4">
                         <SliderLabel>Price range</SliderLabel>
-                        <FieldLabel>
+                        <SliderValue>
                           {`$${value[0]}`} - {`$${value[1]}`}
-                        </FieldLabel>
+                        </SliderValue>
                       </div>
                     </Slider>
                     <FieldDescription>
@@ -117,5 +103,27 @@ const Example = () => {
     </Card>
   );
 };
+
+const PRICE_MIN = 200;
+
+const PRICE_MAX = 10_000;
+
+const formSchema = v.object({
+  priceRange: v.pipe(
+    v.array(v.number()),
+    v.minLength(2, "Select a lower and upper price."),
+    v.maxLength(2, "Select a lower and upper price."),
+    v.check(
+      ([low, high]) => low < high,
+      "The minimum price must be less than the maximum."
+    ),
+    v.check(
+      ([low, high]) => low >= PRICE_MIN && high <= PRICE_MAX,
+      `Keep both values between $${PRICE_MIN.toLocaleString()} and $${PRICE_MAX.toLocaleString()}.`
+    )
+  ),
+});
+
+const defaultRange = [0, PRICE_MAX];
 
 export default Example;

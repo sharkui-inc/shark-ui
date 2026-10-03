@@ -3,20 +3,23 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   Timer as ArkTimer,
-  useTimerContext as useArkTimer,
+  useTimerContext as useArkTimerContext,
 } from "@ark-ui/react/timer";
 import type React from "react";
 import { cn } from "@/lib/utils";
+import { Separator } from "@/registry/react/components/separator";
 
-export const useTimer = useArkTimer;
-
+export const useTimerContext = useArkTimerContext;
 export const remainingMsUntilDate = (date: Date): number => {
   const end = new Date(date).getTime();
 
   return Math.max(0, end - Date.now());
 };
 
-export const Timer = (props: React.ComponentProps<typeof ArkTimer.Root>) => {
+export interface TimerProps
+  extends React.ComponentProps<typeof ArkTimer.Root> {}
+
+export const Timer = (props: TimerProps) => {
   const { className, ...rest } = props;
 
   return (
@@ -114,13 +117,19 @@ export const TimerSeparator = (
   const { className, children, ...rest } = props;
 
   return (
-    <ArkTimer.Separator
-      className={cn("font-semibold text-2xl text-muted-foreground", className)}
-      data-slot="timer-separator"
-      {...rest}
+    <Separator
+      asChild
+      className={cn(
+        "bg-transparent",
+        "font-semibold text-2xl text-muted-foreground",
+        "data-[orientation=horizontal]:h-auto data-[orientation=horizontal]:w-auto",
+        className
+      )}
     >
-      {children ?? ":"}
-    </ArkTimer.Separator>
+      <ArkTimer.Separator data-slot="timer-separator" {...rest}>
+        {children ?? ":"}
+      </ArkTimer.Separator>
+    </Separator>
   );
 };
 
@@ -191,7 +200,7 @@ export const TimerRestart = (props: TimerActionProps) => (
 );
 
 export const TimerPlay = (props: TimerActionProps) => {
-  const { paused } = useArkTimer();
+  const { paused } = useArkTimerContext();
 
   if (paused) {
     return <TimerResume {...props} />;

@@ -27,6 +27,7 @@ import {
 import {
   DatePicker,
   DatePickerContent,
+  DatePickerLabel,
   DatePickerTrigger,
   DatePickerValue,
 } from "@/registry/react/components/date-picker";
@@ -34,29 +35,15 @@ import {
   Field,
   FieldError,
   FieldGroup,
-  FieldLabel,
 } from "@/registry/react/components/field";
-
-const formSchema = z.object({
-  interviewDate: z
-    .array(z.custom<DateValue>((val) => val != null && typeof val === "object"))
-    .min(1, {
-      message: "Please choose your preferred interview date.",
-    }),
-});
 
 const Example = () => {
   const form = useForm({
     defaultValues: {
       interviewDate: [] as DateValue[],
     },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "interview-date-submitted",
-        title: "Interview preference saved",
         description: (
           <pre className="mt-2">
             <code>
@@ -68,7 +55,12 @@ const Example = () => {
             </code>
           </pre>
         ),
+        id: "interview-date-submitted",
+        title: "Interview preference saved",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -93,11 +85,11 @@ const Example = () => {
             <form.Field
               children={(field) => (
                 <Field invalid={!field.state.meta.isValid}>
-                  <FieldLabel>Preferred interview date</FieldLabel>
                   <DatePicker
                     onValueChange={({ value }) => field.handleChange(value)}
                     value={field.state.value}
                   >
+                    <DatePickerLabel>Preferred interview date</DatePickerLabel>
                     <DatePickerTrigger asChild>
                       <Button className="w-full" variant="outline">
                         <CalendarIcon />
@@ -127,7 +119,7 @@ const Example = () => {
           </FieldGroup>
         </CardContent>
         <CardFooter>
-          <Button onClick={() => form.reset()} type="button" variant="outline">
+          <Button onClick={() => form.reset()} variant="outline">
             Reset
           </Button>
           <Button type="submit">Save</Button>
@@ -136,5 +128,15 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  interviewDate: z
+    .array(
+      z.custom<DateValue>((val) => val !== null && typeof val === "object")
+    )
+    .min(1, {
+      message: "Please choose your preferred interview date.",
+    }),
+});
 
 export default Example;

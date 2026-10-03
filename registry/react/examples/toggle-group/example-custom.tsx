@@ -7,13 +7,6 @@ import {
   ToggleGroupItem,
 } from "@/registry/react/components/toggle-group";
 
-const FONT_WEIGHTS = [
-  { value: "light", label: "Light", className: "font-light" },
-  { value: "normal", label: "Normal", className: "font-normal" },
-  { value: "medium", label: "Medium", className: "font-medium" },
-  { value: "bold", label: "Bold", className: "font-bold" },
-] as const;
-
 const Example = () => {
   const [value, setValue] = React.useState<string[]>(["normal"]);
 
@@ -33,7 +26,7 @@ const Example = () => {
           {FONT_WEIGHTS.map((weight) => (
             <ToggleGroupItem
               aria-label={`Set font weight to ${weight.label}`}
-              className="size-16 flex-col gap-1 py-2"
+              className="h-auto min-h-16 w-14 flex-col gap-1 px-2 py-2 sm:w-16"
               key={weight.value}
               value={weight.value}
             >
@@ -48,5 +41,12 @@ const Example = () => {
     </div>
   );
 };
+
+const FONT_WEIGHTS = [
+  { className: "font-light", label: "Light", value: "light" },
+  { className: "font-normal", label: "Normal", value: "normal" },
+  { className: "font-medium", label: "Medium", value: "medium" },
+  { className: "font-bold", label: "Bold", value: "bold" },
+] as const;
 
 export default Example;

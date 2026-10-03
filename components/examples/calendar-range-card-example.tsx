@@ -1,3 +1,4 @@
+import type React from "react";
 import {
   Calendar,
   CalendarNextTrigger,
@@ -19,7 +20,7 @@ export const CalendarRangeCardExample = (
     {...props}
   >
     <CardContent>
-      <Calendar selectionMode="range">
+      <Calendar className="w-full" selectionMode="range">
         <CalendarViewControl>
           <CalendarPrevTrigger />
           <CalendarViewDate />

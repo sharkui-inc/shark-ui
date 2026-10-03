@@ -33,6 +33,7 @@ const Example = () => {
           defaultValue={["React"]}
           inputValue={inputValue}
           onInputValueChange={(details) => setInputValue(details.inputValue)}
+          placeholder="Add framework"
         >
           <TagsInputContext>
             {({ value }) =>

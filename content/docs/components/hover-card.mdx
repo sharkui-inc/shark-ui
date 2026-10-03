@@ -1,10 +1,14 @@
 ---
 title: Hover Card
-description: Popover that appears on hover.
+description: Preview card on hover or focus.
+seo:
+  description: Rich preview card that opens on hover or focus.
 links:
   doc: https://ark-ui.com/docs/components/hover-card
   api: https://ark-ui.com/docs/components/hover-card#api-reference
 ---
+
+import manifest from "@/registry/manifest/hover-card";
 
 <ComponentPreview componentName="hover-card" />
 
@@ -31,9 +35,7 @@ npx shadcn@latest add @shark/hover-card
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -53,13 +55,14 @@ npm install @ark-ui/react
 HoverCard
 ├── HoverCardTrigger
 └── HoverCardContent
+    └── HoverCardArrow
 ```
 
 ## Usage
 
 ```tsx
-import { 
-  HoverCard, 
+import {
+  HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
@@ -73,11 +76,16 @@ import {
   </HoverCardContent>
 </HoverCard>
 ```
-## Triggers Delays
 
-The `openDelay` and `closeDelay` props control the delay before the hover card opens and closes respectively.
+## Controlled
 
-Default values are `100ms` for `closeDelay` and `10ms` for `openDelay`.
+Use `open` and `onOpenChange` to control the open state.
+
+<ComponentPreview componentName="hover-card" fileName="example-controlled" />
+
+## Trigger Delays
+
+The `openDelay` and `closeDelay` props control the delay before the hover card opens and closes.
 
 <ComponentPreview componentName="hover-card" fileName="example-triggers-delays" />
 
@@ -87,17 +95,33 @@ Control the position of the hover card relative to the trigger using the `positi
 
 <ComponentPreview componentName="hover-card" fileName="example-positioning" />
 
-## Controlled
+## States
 
-Control the open state programmatically using the `open` and `onOpenChange` props.
-
-<ComponentPreview componentName="hover-card" fileName="example-controlled" />
-
-## Disabled
+### Disabled
 
 Use the `disabled` prop to prevent the hover card from opening on hover.
 
 <ComponentPreview componentName="hover-card" fileName="example-disabled" />
+
+## Examples
+
+### Multiple triggers
+
+`value` on each `HoverCardTrigger`. `onTriggerValueChange` tracks which trigger is hovered.
+
+<ComponentPreview componentName="hover-card" fileName="example-multiple-triggers" />
+
+### Hide Arrow
+
+Hide the arrow with `showArrow={false}` on `HoverCardContent`.
+
+<ComponentPreview componentName="hover-card" fileName="example-without-arrow" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="hover-card" />
 
 ## API Reference
 
@@ -107,13 +131,14 @@ Root component. Manages hover state and content visibility.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `closeDelay` | `number` | `100` |
-| `defaultOpen` | `boolean` | - |
-| `disabled` | `boolean` | - |
-| `immediate` | `boolean` | - |
-| `onOpenChange` | `(details: OpenChangeDetails) => void` | - |
-| `open` | `boolean` | - |
-| `openDelay` | `number` | `10` |
+| `closeDelay` | `number` | `300` |
+| `defaultOpen` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
+| `immediate` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
+| `open` | `boolean` | `-` |
+| `openDelay` | `number` | `600` |
 | `positioning` | `PositioningOptions` | `{ placement: "top" }` |
 | `className` | `string` | `-` |
 
@@ -124,7 +149,8 @@ Shows the hover card on hover or focus.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
+| `value` | `string` | `-` |
 
 ### HoverCardContent
 
@@ -133,7 +159,8 @@ Content shown in a popover when hover card is open.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
+| `showArrow` | `boolean` | `true` |
 
 ### HoverCardArrow
 
@@ -142,13 +169,12 @@ Optional arrow pointing toward the trigger.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `className` | `string` | `-` |
-| `asChild` | `boolean` | - |
+| `asChild` | `boolean` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--arrow-background` | `var(--popover)` |
-| `--arrow-size` | `calc(1.5 * var(--spacing))` |
-
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--arrow-background` | `string` | `var(--popover)` |
+| `--arrow-size` | `string` | `calc(1.5 * var(--spacing))` |
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/hover-card#api-reference).

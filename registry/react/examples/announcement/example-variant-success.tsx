@@ -10,7 +10,7 @@ const Example = () => (
   <Announcement asChild>
     <Link href="#">
       <Badge variant="success">
-        <CheckCircleIcon /> Deployed
+        <CheckCircleIcon data-icon="inline-start" /> Deployed
       </Badge>
       <AnnouncementTitle>
         Production build completed in 2m 34s <ArrowUpRightIcon />

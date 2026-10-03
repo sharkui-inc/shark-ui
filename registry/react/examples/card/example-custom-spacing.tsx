@@ -35,7 +35,7 @@ const Example = () => (
         <Button className="w-full">Login</Button>
 
         <Button className="w-full" variant="outline">
-          <GoogleIcon />
+          <GoogleIcon data-icon="inline-start" />
           Login with Google
         </Button>
       </CardFooter>

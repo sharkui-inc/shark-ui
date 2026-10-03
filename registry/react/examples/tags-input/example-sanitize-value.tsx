@@ -13,6 +13,7 @@ const Example = () => (
     <TagsInput
       className="w-full"
       defaultValue={["react"]}
+      placeholder="Add framework"
       sanitizeValue={(value) => value.trim().toLowerCase()}
     >
       <TagsInputContext>

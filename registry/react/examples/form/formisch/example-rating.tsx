@@ -23,33 +23,28 @@ import {
   FieldDescription,
   FieldError,
   FieldGroup,
-  FieldLabel,
 } from "@/registry/react/components/field";
-import { Rating } from "@/registry/react/components/rating";
-
-const formSchema = v.object({
-  recommendScore: v.pipe(
-    v.number(),
-    v.minValue(1, "Please rate how likely you are to recommend us."),
-    v.maxValue(5)
-  ),
-});
+import {
+  Rating,
+  RatingLabel,
+  RatingStars,
+} from "@/registry/react/components/rating";
 
 const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: { recommendScore: 0 },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "rating-submitted",
-      title: "Feedback saved",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "rating-submitted",
+      title: "Feedback saved",
     });
   };
 
@@ -67,13 +62,19 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["recommendScore"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
-                  <FieldLabel>How useful is this project?</FieldLabel>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <Rating
                     count={5}
                     onValueChange={(e) => field.onChange(e.value ?? 0)}
-                    value={(field.input as number) ?? 0}
-                  />
+                    value={field.input as number}
+                  >
+                    <RatingLabel>How useful is this project?</RatingLabel>
+                    <RatingStars />
+                  </Rating>
                   <FieldDescription>
                     1 = not likely, 5 = very likely.
                   </FieldDescription>
@@ -93,5 +94,13 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  recommendScore: v.pipe(
+    v.number(),
+    v.minValue(1, "Please rate how likely you are to recommend us."),
+    v.maxValue(5)
+  ),
+});
 
 export default Example;

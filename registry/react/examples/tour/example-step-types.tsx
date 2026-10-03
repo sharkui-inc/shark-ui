@@ -1,5 +1,6 @@
 "use client";
 
+import { Share2Icon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   Tour,
@@ -11,75 +12,92 @@ import {
   type TourStepType,
   TourTitle,
   TourTrigger,
+  useTour,
 } from "@/registry/react/components/tour";
+
+const Example = () => {
+  const tour = useTour({ steps });
+
+  return (
+    <div className="flex w-full max-w-sm flex-col gap-4">
+      <Tour tour={tour}>
+        <TourTrigger asChild>
+          <Button variant="outline">Start tour</Button>
+        </TourTrigger>
+
+        <div className="overflow-hidden rounded-lg border bg-card shadow-xs/4">
+          <img
+            alt="Studio print"
+            className="h-28 w-full object-cover"
+            height={112}
+            id="tour-step-types-cover"
+            src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=studio-print&waveColor=ea580c"
+            width={320}
+          />
+          <div className="flex items-center justify-between gap-3 p-3">
+            <div className="flex min-w-0 flex-col">
+              <span className="truncate font-medium text-sm">Studio print</span>
+              <span className="truncate text-muted-foreground text-xs">
+                Sage ground, teal wash
+              </span>
+            </div>
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground">
+              <Share2Icon aria-hidden className="size-4" />
+            </span>
+          </div>
+        </div>
+
+        <TourContent>
+          <TourHeader>
+            <TourProgressText />
+            <TourTitle />
+            <TourDescription />
+          </TourHeader>
+          <TourActions />
+        </TourContent>
+      </Tour>
+    </div>
+  );
+};
 
 const steps: TourStepType[] = [
   {
+    actions: [{ action: "next", label: "Start tour" }],
+    description: "Centered on the page, with no target.",
     id: "welcome",
+    title: "This is a dialog",
     type: "dialog",
-    title: "Welcome!",
-    description:
-      "This tour demonstrates different step types: dialog, tooltip, and floating.",
-    actions: [{ label: "Start Tour", action: "next" }],
   },
   {
+    actions: [
+      { action: "prev", label: "Back" },
+      { action: "next", label: "Next" },
+    ],
+    description:
+      "Anchored to the print. Tooltip steps point at a target on the page.",
     id: "tooltip-step",
+    target: () => document.querySelector<HTMLElement>("#tour-step-types-cover"),
+    title: "This is a tooltip",
     type: "tooltip",
-    title: "Tooltip Step",
-    description:
-      "This step appears as a tooltip anchored to a specific element.",
-    target: () => document.querySelector<HTMLElement>("#tour-target-element"),
-    actions: [
-      { label: "Back", action: "prev" },
-      { label: "Next", action: "next" },
-    ],
   },
   {
+    actions: [
+      { action: "prev", label: "Back" },
+      { action: "next", label: "Next" },
+    ],
+    description: "Fixed in the corner, with no target.",
     id: "floating-step",
-    type: "floating",
     placement: "bottom-end",
-    title: "Floating Step",
-    description:
-      "This step floats at a fixed position on the screen, independent of any target.",
-    actions: [
-      { label: "Back", action: "prev" },
-      { label: "Next", action: "next" },
-    ],
+    title: "This is a floating step",
+    type: "floating",
   },
   {
+    actions: [{ action: "dismiss", label: "Done" }],
+    description: "The tour ends on another dialog.",
     id: "complete",
+    title: "This is a dialog",
     type: "dialog",
-    title: "Tour Complete!",
-    description: "You have seen all the different step types available.",
-    actions: [{ label: "Done", action: "dismiss" }],
   },
 ];
-
-const Example = () => (
-  <div className="flex flex-col gap-4">
-    <Tour steps={steps}>
-      <TourTrigger asChild>
-        <Button variant="outline">Start Tour</Button>
-      </TourTrigger>
-
-      <div
-        className="flex items-center justify-center rounded-lg border border-border bg-muted px-8 py-4 font-medium text-sm"
-        id="tour-target-element"
-      >
-        Target Element
-      </div>
-
-      <TourContent>
-        <TourHeader>
-          <TourProgressText />
-          <TourTitle />
-          <TourDescription />
-        </TourHeader>
-
-        <TourActions />
-      </TourContent>
-    </Tour>
-  </div>
-);
 
 export default Example;

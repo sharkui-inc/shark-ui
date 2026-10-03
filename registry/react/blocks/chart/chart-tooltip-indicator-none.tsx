@@ -29,58 +29,56 @@ const chartData = [
 
 const chartConfig = {
   running: {
-    label: "Running",
     color: "var(--chart-1)",
+    label: "Running",
   },
   swimming: {
-    label: "Swimming",
     color: "var(--chart-2)",
+    label: "Swimming",
   },
 } satisfies ChartConfig;
 
-function ChartTooltipIndicatorNone() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Tooltip - No Indicator</CardTitle>
-        <CardDescription>Tooltip with no indicator.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
-            <XAxis
-              axisLine={false}
-              dataKey="date"
-              tickFormatter={(value) =>
-                new Date(value).toLocaleDateString("en-US", {
-                  weekday: "short",
-                })
-              }
-              tickLine={false}
-              tickMargin={10}
-            />
-            <Bar
-              dataKey="running"
-              fill="var(--color-running)"
-              radius={[0, 0, 4, 4]}
-              stackId="a"
-            />
-            <Bar
-              dataKey="swimming"
-              fill="var(--color-swimming)"
-              radius={[4, 4, 0, 0]}
-              stackId="a"
-            />
-            <ChartTooltip
-              content={<ChartTooltipContent hideIndicator />}
-              cursor={false}
-              defaultIndex={1}
-            />
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
-  );
-}
+const ChartTooltipIndicatorNone = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle>Tooltip - No Indicator</CardTitle>
+      <CardDescription>Tooltip with no indicator.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <ChartContainer config={chartConfig}>
+        <BarChart accessibilityLayer data={chartData}>
+          <XAxis
+            axisLine={false}
+            dataKey="date"
+            tickFormatter={(value) =>
+              new Date(value).toLocaleDateString("en-US", {
+                weekday: "short",
+              })
+            }
+            tickLine={false}
+            tickMargin={10}
+          />
+          <Bar
+            dataKey="running"
+            fill="var(--color-running)"
+            radius={[0, 0, 4, 4]}
+            stackId="a"
+          />
+          <Bar
+            dataKey="swimming"
+            fill="var(--color-swimming)"
+            radius={[4, 4, 0, 0]}
+            stackId="a"
+          />
+          <ChartTooltip
+            content={<ChartTooltipContent hideIndicator />}
+            cursor={false}
+            defaultIndex={1}
+          />
+        </BarChart>
+      </ChartContainer>
+    </CardContent>
+  </Card>
+);
 
 export default ChartTooltipIndicatorNone;

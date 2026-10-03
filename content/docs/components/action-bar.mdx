@@ -1,7 +1,11 @@
 ---
 title: Action Bar
-description: Display an action bar for selected items.
+description: Bulk actions for selected items.
+seo:
+  description: Bulk action bar for selected rows in lists and tables.
 ---
+
+import manifest from "@/registry/manifest/action-bar";
 
 <ComponentPreview componentName="action-bar" />
 
@@ -22,13 +26,11 @@ npx shadcn@latest add @shark/action-bar
 <TabsContent value="manual">
 
 <Steps>
-<Step>This component depends on [Badge](/docs/components/badge), and [Separator](/docs/components/separator). Install them first if you haven't already.</Step>
+<Step>This component depends on [Badge](/docs/components/badge) and [Separator](/docs/components/separator). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -49,7 +51,7 @@ ActionBar
     ├── ActionBarValue
     ├── ActionBarSeparator
     ├── ActionBarBody
-    │   ├── Button
+    │   └── Button
     ├── ActionBarSeparator
     └── ActionBarClose
 ```
@@ -81,24 +83,24 @@ import { Button } from "@/components/ui/button";
   <ActionBarTrigger asChild>
     <Button variant="outline">Open</Button>
   </ActionBarTrigger>
-  <ActionBarContent>
+  <ActionBarContent aria-label="Bulk actions">
     <ActionBarValue count={3} />
     <ActionBarSeparator />
     <ActionBarBody>
       <Button variant="ghost">
-        <PencilIcon />
-        <span className="max-sm:sr-only">Edit</span>
+        <PencilIcon aria-hidden="true" data-icon="inline-start" />
+        <span>Edit</span>
       </Button>
       <ActionBarSeparator />
       <Button variant="destructive">
-        <Trash2Icon />
-        <span className="max-sm:sr-only">Delete</span>
+        <Trash2Icon aria-hidden="true" data-icon="inline-start" />
+        <span>Delete</span>
       </Button>
     </ActionBarBody>
     <ActionBarSeparator />
     <ActionBarClose asChild>
       <Button size="icon-md" variant="ghost">
-        <XIcon />
+        <XIcon aria-hidden="true" />
       </Button>
     </ActionBarClose>
   </ActionBarContent>
@@ -141,9 +143,7 @@ Use `positioning.gutter` to control the distance from the bottom edge.
 
 ### Custom Spacing
 
-The `[--space:--spacing("value")]` on `ActionBarContent` controls the internal spacing.
-
-Default spacing is `--spacing(2)`.
+The `[--space:--spacing("value")]` controls the internal spacing.
 
 <ComponentPreview componentName="action-bar" fileName="example-custom-spacing" />
 
@@ -153,44 +153,50 @@ Default spacing is `--spacing(2)`.
 md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
 
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="action-bar" />
+
 ## API Reference
 
 ### ActionBar
-
-Root component. Provides open state and positioning to descendants.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `open` | `boolean` | - |
-| `defaultOpen` | `boolean` | `false` |
-| `positioning` | `ActionBarPositioning` | `{ placement: "bottom", gutter: "16px" }` |
-| `lazyMount` | `boolean` | `true` |
-| `unmountOnExit` | `boolean` | `true` |
-| `closeOnEscape` | `boolean` | `true` |
-| `onOpenChange` | `(open: boolean) => void` | - |
-
-### ActionBarContent
 
 Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `aria-label` | `string` | - |
-| `asChild` | `boolean` | - |
+| `open` | `boolean` | `-` |
+| `defaultOpen` | `boolean` | `false` |
+| `positioning` | `ActionBarPositioning` | `{ placement: "bottom", gutter: "16px" }` |
+| `lazyMount` | `boolean` | `true` |
+| `unmountOnExit` | `boolean` | `true` |
+| `onOpenChange` | `({ open }: OpenChangeDetails) => void` | `-` |
 
-| CSS variable | Default |
-| --- | --- |
-| `--space` | `--spacing(2)` |
+### ActionBarContent
 
-### ActionBarTrigger
-
-Button that opens the action bar.
+Non-modal action surface.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `aria-label` | `string` | `"Bulk actions"` |
+| `aria-labelledby` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(2)` |
+
+### ActionBarTrigger
+
+Button that toggles the action bar.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ActionBarValue
 
@@ -198,10 +204,10 @@ Displays the selection count.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `count` | `number` | - |
-| `label` | `string` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `count` | `number` | `-` |
+| `label` | `string` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ActionBarSeparator
 
@@ -209,8 +215,8 @@ Vertical rule. Renders a [Separator](/docs/components/separator).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ActionBarBody
 
@@ -218,8 +224,8 @@ Flex row for primary actions.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### ActionBarClose
 
@@ -227,5 +233,5 @@ Closes the action bar.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
