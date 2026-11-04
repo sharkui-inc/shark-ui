@@ -94,11 +94,14 @@ const Example = () => {
   );
 };
 
-const SignaturePadClearButton = (props: {
+interface SignaturePadClearButtonProps {
   onClear: () => void;
   previewRef: React.RefObject<(() => Promise<string>) | null>;
-}) => {
+}
+
+const SignaturePadClearButton = (props: SignaturePadClearButtonProps) => {
   const { onClear, previewRef } = props;
+
   const signaturePad = useSignaturePadContext();
 
   previewRef.current = () => signaturePad.getDataUrl("image/png");

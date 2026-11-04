@@ -47,6 +47,7 @@ export const Toggle = (props: ToggleProps) => {
     className,
     ...rest
   } = props;
+  
   const buttonVariant = variant === "default" ? "ghost" : variant;
 
   return (

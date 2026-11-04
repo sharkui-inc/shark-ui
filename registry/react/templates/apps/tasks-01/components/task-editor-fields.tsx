@@ -77,11 +77,16 @@ const TaskEditorSelect: ArkSelect.RootComponent<TaskEditorSelectProps> = (
   );
 };
 
-export const TaskEditorFields = (props: {
+
+interface TaskEditorFieldsProps {
   draft: TaskDraft;
   onDraftChange: React.Dispatch<React.SetStateAction<TaskDraft>>;
-}) => {
+}
+
+
+export const TaskEditorFields = (props: TaskEditorFieldsProps) => {
   const { draft, onDraftChange } = props;
+
   const patchDraft = <K extends keyof TaskDraft>(
     key: K,
     value: TaskDraft[K]

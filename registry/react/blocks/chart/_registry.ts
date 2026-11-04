@@ -93,7 +93,7 @@ const CHART_PREFIX_PATTERN = /^chart-/u;
 
 const titleCase = (value: string) =>
   value.replace(
-    /(^|-)([a-z])/gu,
+    /(?<separator>^|-)(?<letter>[a-z])/gu,
     (_match, separator: string, letter: string) =>
       `${separator ? " " : ""}${letter.toUpperCase()}`
   );

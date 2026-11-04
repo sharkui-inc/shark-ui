@@ -1,8 +1,8 @@
+import { Message, MessageContent } from "@/registry/react/components/message";
 import {
   MessageBubble,
   MessageBubbleContent,
-} from "@registry/react/components/message-bubble";
-import { Message, MessageContent } from "@/registry/react/components/message";
+} from "@/registry/react/components/message-bubble";
 
 const Example = () => (
   <div className="flex w-full max-w-md flex-col gap-6">

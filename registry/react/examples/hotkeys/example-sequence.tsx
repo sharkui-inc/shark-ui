@@ -1,13 +1,13 @@
 "use client";
 
-import { Card, CardContent } from "@registry/react/components/card";
-import { Separator } from "@registry/react/components/separator";
 import React from "react";
+import { Card, CardContent } from "@/registry/react/components/card";
 import {
   useFormatHotkey,
   useHotkeys,
 } from "@/registry/react/components/hotkeys";
 import { Kbd } from "@/registry/react/components/kbd";
+import { Separator } from "@/registry/react/components/separator";
 
 const Example = () => {
   const formatHotkey = useFormatHotkey();

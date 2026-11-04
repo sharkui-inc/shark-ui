@@ -1,6 +1,5 @@
 "use client";
 
-import { Separator } from "@registry/react/components/separator";
 import {
   ArrowUpRightIcon,
   MonitorIcon,
@@ -28,6 +27,7 @@ import type {
 } from "@/lib/registry";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
+import { Separator } from "@/registry/react/components/separator";
 import { Skeleton } from "@/registry/react/components/skeleton";
 import {
   State,
@@ -74,6 +74,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
     showDescription = false,
     tree,
   } = props;
+  
   const config = useConfig();
   const updateConfig = useUpdateConfig();
 
@@ -327,6 +328,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
                     setFailed(false);
                     setLoaded(true);
                   }}
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"
                   src={previewUrl}
                   title={`${item.title} ${label.toLowerCase()} preview`}
                 />

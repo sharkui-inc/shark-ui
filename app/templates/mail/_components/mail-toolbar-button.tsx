@@ -32,6 +32,7 @@ export const MailToolbarButton = (props: MailToolbarButtonProps) => {
     type = "button",
     variant,
   } = props;
+  
   const button = (
     <Button
       aria-label={label}

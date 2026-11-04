@@ -23,7 +23,7 @@ const FileUploadDemo = () => (
         className="text-muted-foreground group-data-dragging/file-upload:text-primary size-8"
         strokeWidth={1.5}
       />
-      <div className="space-y-0.5">
+      <div className="flex flex-col gap-0.5">
         <FileUploadTitle>Drag and drop your files</FileUploadTitle>
         <FileUploadHelper>Up to 2 files, 10 MB each</FileUploadHelper>
       </div>

@@ -181,7 +181,8 @@ const steps: TourStepType[] = [
       );
     },
     id: "check-terms",
-    target: () => document.getElementById("field::tour-input-terms"),
+    target: () =>
+      document.querySelector<HTMLElement>('[id="field::tour-input-terms"]'),
     title: "Workspace terms",
     type: "tooltip",
   },

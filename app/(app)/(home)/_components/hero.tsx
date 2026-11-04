@@ -1,4 +1,3 @@
-import { Badge } from "@registry/react/components/badge";
 import { ArrowRightIcon, BotIcon } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
@@ -7,6 +6,7 @@ import {
   Announcement,
   AnnouncementTitle,
 } from "@/registry/react/components/announcement";
+import { Badge } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
 import { Highlight } from "@/registry/react/components/highlight";
 

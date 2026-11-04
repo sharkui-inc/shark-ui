@@ -123,6 +123,7 @@ interface SourceProps extends React.ComponentProps<typeof ark.a> {
 
 export const Source = (props: SourceProps) => {
   const { href, title, className, children, ...rest } = props;
+  
   const safeHref = toSafeHref(href);
 
   return (
@@ -170,6 +171,7 @@ interface InlineCitationProps extends React.ComponentProps<typeof ark.button> {
 
 export const InlineCitation = (props: InlineCitationProps) => {
   const { href, index, title, className, children, ...rest } = props;
+ 
   const safeHref = toSafeHref(href);
 
   const label = index === undefined ? "Source" : String(index);

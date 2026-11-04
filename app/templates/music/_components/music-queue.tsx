@@ -21,6 +21,7 @@ export const MusicQueue = (props: {
   onTrackSelect: (track: Track) => void;
 }) => {
   const { currentTrack, onTrackSelect } = props;
+  
   const upcoming = TRACKS.filter((track) => track.title !== currentTrack.title);
 
   return (

@@ -7,7 +7,6 @@ import {
   type SubmitHandler,
   useForm,
 } from "@formisch/react";
-import { toast } from "@registry/react/components/toast";
 import * as v from "valibot";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -27,6 +26,7 @@ import {
   FieldLabel,
 } from "@/registry/react/components/field";
 import { Switch } from "@/registry/react/components/switch";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({

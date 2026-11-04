@@ -18,6 +18,7 @@ import {
   ContextHeader,
   ContextMeter,
   ContextTrigger,
+  ContextTriggerLabel,
   ContextUsageRow,
 } from "@/registry/react/components/context";
 import {
@@ -294,7 +295,15 @@ export const AIChat = () => {
                   maxTokens={128_000}
                   usedTokens={usedTokens}
                 >
-                  <ContextTrigger />
+                  <ContextTrigger asChild>
+                    <Button
+                      className="text-muted-foreground font-normal"
+                      size="sm"
+                      variant="ghost"
+                    >
+                      <ContextTriggerLabel />
+                    </Button>
+                  </ContextTrigger>
                   <ContextContent>
                     <ContextHeader>
                       <ContextMeter />

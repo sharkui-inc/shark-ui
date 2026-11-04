@@ -153,6 +153,7 @@ export const DrawerOverlay = (
   props: React.ComponentProps<typeof ArkDrawer.Backdrop>
 ) => {
   const { className, ...rest } = props;
+
   const { modal } = _useDrawerModal();
 
   if (!modal) {
@@ -504,6 +505,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
     onPointerDown,
     ...rest
   } = props;
+
   const forwardedRef = React.useRef(ref);
   const [content, setContent] = React.useState<HTMLDivElement | null>(null);
 
@@ -856,7 +858,8 @@ export const DrawerMenuTrigger = (
 export const DrawerMenuCheckboxItem = (
   props: React.ComponentProps<typeof ArkCheckbox.Root>
 ) => {
-  const { children, className, ...rest } = props;
+  const {className, children,  ...rest } = props;
+
   const { item, indicator } = menuItemIndicatorVariants();
 
   return (
@@ -902,6 +905,7 @@ export const DrawerMenuRadioItem = (
   props: React.ComponentProps<typeof ArkRadioGroup.Item>
 ) => {
   const { children, className, ...rest } = props;
+  
   const { item, indicator } = menuItemIndicatorVariants();
 
   return (

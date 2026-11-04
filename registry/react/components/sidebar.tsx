@@ -113,7 +113,7 @@ export const SidebarProvider = (props: SidebarProviderProps) => {
       return;
     }
     setOpen((prev) => !prev);
-  }, [isMobile, setOpen, setOpenMobile]);
+  }, [isMobile, setOpen]);
 
   useHotkey({
     action: toggleSidebar,
@@ -355,7 +355,7 @@ export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
         "w-4",
         "hidden sm:flex",
         "after:absolute after:inset-y-0 after:start-1/2 after:w-[2px]",
-        "hover:after:bg-foreground/12",
+        "hover:after:bg-foreground/16",
         "group-data-[placement=left]:-inset-e-4",
         "group-data-[placement=right]:inset-s-0",
         "in-data-[placement=left]:cursor-w-resize in-data-[placement=right]:cursor-e-resize",

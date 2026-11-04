@@ -1,6 +1,7 @@
 "use client";
 
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
+import { Button } from "@/registry/react/components/button";
 import {
   Context,
   ContextBody,
@@ -10,6 +11,7 @@ import {
   ContextMeter,
   ContextTitle,
   ContextTrigger,
+  ContextTriggerLabel,
   ContextUsageRow,
 } from "@/registry/react/components/context";
 
@@ -25,7 +27,15 @@ const Example = () => {
         maxTokens={128_000}
         usedTokens={18_420}
       >
-        <ContextTrigger />
+        <ContextTrigger asChild>
+          <Button
+            className="text-muted-foreground font-normal"
+            size="sm"
+            variant="ghost"
+          >
+            <ContextTriggerLabel />
+          </Button>
+        </ContextTrigger>
         <ContextContent>
           <ContextHeader>
             <ContextTitle showCloseButton>{values.title}</ContextTitle>

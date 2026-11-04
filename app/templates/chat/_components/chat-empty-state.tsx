@@ -1,7 +1,7 @@
 "use client";
 
-import { IconTile } from "@registry/react/components/icon-tile";
 import { SharkIcon } from "@/components/icons/shark";
+import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Item,
   ItemContent,

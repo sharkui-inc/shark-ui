@@ -94,6 +94,7 @@ const CompositionTreeNodeView = (props: CompositionTreeNodeViewProps) => {
 
 export const CompositionFileTree = (props: CompositionFileTreeProps) => {
   const { activePath, label, onSelect, tree } = props;
+  
   const nodes = tree.flatMap((node, index) => {
     const treeNode = toTreeNode(node, [index]);
     return treeNode ? [treeNode] : [];

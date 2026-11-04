@@ -22,6 +22,7 @@ export { useCodeCollapsibleActions };
 
 export const CodeCollapsibleWrapper = (props: CodeCollapsibleWrapperProps) => {
   const { className, children, collapsedHeight = "256px", ...rest } = props;
+  
   const [actionsElement, setActionsElement] =
     React.useState<HTMLElement | null>(null);
 

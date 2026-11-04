@@ -1,4 +1,3 @@
-import { buttonVariants } from "@registry/react/components/button";
 import { findNeighbour } from "fumadocs-core/page-tree";
 import {
   ArrowUpRightIcon,
@@ -22,6 +21,7 @@ import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
 import { mdxComponents } from "@/mdx-components";
 import { Badge } from "@/registry/react/components/badge";
+import { buttonVariants } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { SkipNavContent } from "@/registry/react/components/skip-nav";
 

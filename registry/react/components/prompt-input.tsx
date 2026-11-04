@@ -187,6 +187,7 @@ export const PromptInputTextarea = (
 ) => {
   const { className, defaultValue, onChange, onKeyDown, value, ...rest } =
     props;
+
   const { setHasText, status } = usePromptInput();
 
   React.useLayoutEffect(() => {
@@ -264,12 +265,15 @@ export const PromptInputSubmit = (
     variant = "default",
     ...rest
   } = props;
+
   const { hasText, onStop, status } = usePromptInput();
+
   const isStreaming = status === "streaming";
   const isSubmitted = status === "submitted";
   const isDisabled = disabled ?? (isSubmitted || !(isStreaming || hasText));
 
   let submitIcon = <ArrowUpIcon aria-hidden className="size-4" />;
+  
   if (isSubmitted) {
     submitIcon = <Spinner />;
   } else if (isStreaming) {

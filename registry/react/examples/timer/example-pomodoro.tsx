@@ -1,8 +1,8 @@
 "use client";
 
-import { Card, CardContent } from "@registry/react/components/card";
 import { PauseIcon, PlayIcon, RotateCcwIcon, SettingsIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
+import { Card, CardContent } from "@/registry/react/components/card";
 import {
   Timer,
   TimerArea,

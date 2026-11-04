@@ -183,6 +183,7 @@ const ancestorValues = (activeId: string) => {
 
 const TreeNode = (props: NodeProviderProps<TocNode>) => {
   const { node, indexPath } = props;
+  
   const item = items.find((entry) => entry.value === node.id);
 
   if (node.children) {

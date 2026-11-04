@@ -2,7 +2,6 @@
 
 import type { DateValue } from "@ark-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "@registry/react/components/toast";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -35,6 +34,7 @@ import {
   FieldError,
   FieldGroup,
 } from "@/registry/react/components/field";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({

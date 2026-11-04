@@ -97,12 +97,15 @@ const lineOffset = (depth: number) => BASE + levelOf(depth) * RAIL_STEP;
 
 const textOffset = (depth: number) => BASE + (levelOf(depth) + 1) * TEXT_STEP;
 
-const Rail = (props: {
+interface RailProps {
   depth: number;
   nextDepth?: number;
   prevDepth?: number;
-}) => {
+}
+
+const Rail = (props: RailProps) => {
   const { depth, prevDepth = depth, nextDepth = depth } = props;
+  
   const line = lineOffset(depth);
   const prevLine = lineOffset(prevDepth);
   const nextLine = lineOffset(nextDepth);

@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "@registry/react/components/toast";
 import { useForm } from "@tanstack/react-form";
 import { CloudUploadIcon } from "lucide-react";
 import * as z from "zod";
@@ -25,6 +24,7 @@ import {
   FileUploadDropzone,
   FileUploadList,
 } from "@/registry/react/components/file-upload";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({

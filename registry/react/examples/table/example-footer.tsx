@@ -28,10 +28,10 @@ const Example = () => (
           <TableCell>{row.item}</TableCell>
           <TableCell className="text-right">{row.qty}</TableCell>
           <TableCell className="text-right">
-            ${row.unitPrice.toFixed(2)}
+            {`$${row.unitPrice.toFixed(2)}`}
           </TableCell>
           <TableCell className="text-right">
-            ${(row.qty * row.unitPrice).toFixed(2)}
+            {`$${(row.qty * row.unitPrice).toFixed(2)}`}
           </TableCell>
         </TableRow>
       ))}

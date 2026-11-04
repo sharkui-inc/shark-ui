@@ -23,6 +23,7 @@ export const InputOTPLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkPinInput.Label
       className={cn(fieldLabelVariants(), "basis-full", className)}
       data-slot="input-otp-label"

@@ -1,41 +1,42 @@
 # Code Style Guide
 
-Conflict order: explicit user or system instructions → `biome.json` → this file. Change conventions here, not in `AGENTS.md`.
+Conflict order: explicit user or system instructions → `biome.json` → this file. Change conventions here, not in `AGENTS.md`. Biome + Ultracite; follow the existing config; no local exceptions without need.
 
-## Imports & React
+## Imports
 
-- Biome + Ultracite; follow existing config; no local exceptions without need.
 - Components/examples: `@/registry/react/components/<name>`. Utils (`cn`): `@/lib/utils`. MDX Usage: `@/components/ui/<name>`.
-- `cn()` for merged/conditional classes. `tv()` (`tailwind-variants`) for visual variants.
-- React namespace: `import React from "react"` → `React.useState`. Types: `import type React from "react"`. Do not destructure (`import { useState } from "react"`).
-- Never destructure in the parameter list. Always `(props: T)` then `const { …, ...rest } = props` in the body.
-- Blank line before `return (` when another statement precedes it in the same block. None when `return (` is the first line after `{` or a `case` label.
-- `data-slot` on component wrappers. Compound hierarchy: `TabsTrigger` in `TabsList`; `CardHeader` as its own part.
-- Host triggers (`Button`, link): `asChild` with exactly one child.
-- Overlays need titles (`DialogTitle`, `SheetTitle`, `DrawerTitle`); `className="sr-only"` when hidden.
+- `cn()` for merged or conditional classes. `tv()` (`tailwind-variants`) for visual variants.
+- `import React from "react"` → `React.useState`. Types: `import type React from "react"`. No `import { useState } from "react"`.
+
+## Component body
+
+- Props: `interface ${Name}Props`, declared above the component. No inline object or `React.ComponentProps<…>` on the parameter. When `{...rest}` spreads onto an element or component, `extends React.ComponentProps<typeof Target>` (`ark.div`, `Button`, `Collapsible`). Own fields go on the interface. `export` only if another module imports it.
+- `(props: T)`, then `const { …, ...rest } = props` in the body — never in the parameter list. Blank line after `= props`. Blank line before `return (` when a statement precedes it; none when `return (` is the first line after `{` or a `case` label.
+- Destructure order: data props, then functions (`onValueChange`), then `className`, then `children`, then `...rest`.
+- Blank line between groups: `= props`; value hooks (`useState`, `useReducer`, `useRef`, `useId`, context/`useX`); derived consts, plain functions, `useMemo`; `useCallback` / `useEffectEvent`; `useEffect` / `useLayoutEffect` / `useImperativeHandle`; `return`. Declare before use inside a group. Every hook stays above any conditional `return`.
 
 ## Tailwind
 
-- Semantic tokens (`text-muted-foreground`, `bg-destructive`, `border-input`), not raw palette. No manual `dark:` pairs when tokens cover it.
-- Focus: `outline-hidden` + `border-ring/64 ring-2 ring-ring/24`. No structural border → `border border-transparent` (fields keep `border-input` until focused). Solid `bg-primary`: opaque `border-background` + same ring. `outline-none` only for a documented a11y exception that must hide focus in forced-colors. No outline utils on static/decorative elements. Command search: no focus ring or border shift (`focus-within:border-input focus-within:ring-0`); the highlighted item is the focus cue.
-- Variants + tokens before restyling; `className` for layout. Prefer `data-slot` / `in-*` / `peer` when extending registry styles.
-- `flex`/`grid` + `gap-*` (not `space-x-*`/`space-y-*`). `size-*` for squares/icons. `truncate` shorthand.
-- Overlay `z-index` stays layer-aware: Ark layers `z-[calc(50+var(--layer-index,0))]`; Tour uses its own layer variable. FloatingPanel positioner and content use `calc(40 + var(--z-index))` so the stack (41, 42, …) stays above the header (`z-40`) and below dismissible overlays. Keep those classes on backdrops/positioners where defined. Do not swap them for a shared static `z-index`, raise the FloatingPanel base back to 50, or drop them as cleanup.
-- Lucide: `Icon` export (`ArchiveIcon`); size with Tailwind, never numeric `size`. Inside `Button`, omit `className="size-*"` — Button sizes SVGs with `[&_svg:not([class*='size-'])]:size-4` (and size variants); explicit `size-*` only to override. Decorative: `aria-hidden="true"`; keep semantic icons exposed unless equivalent text exists.
-- Logical utils (`ms-*`, `me-*`, `ps-*`, `pe-*`, `start-*`, `end-*`); `slide-*-from-start|end`; inherit `dir` from ambient Ark `LocaleProvider` / ancestor `dir`. Do not import `LocaleProvider` or `useLocale` inside `registry/react/components` (except `locale.tsx`). Physical direction only for explicit LTR, visual coordinates, or non-reading-order geometry.
+- Semantic tokens (`text-muted-foreground`, `bg-destructive`, `border-input`). No raw palette. No manual `dark:` when a token covers it.
+- Focus: `outline-hidden` + `border-ring/64 ring-2 ring-ring/24`. No structural border → `border border-transparent`. Solid `bg-primary`: opaque `border-background` + the same ring. `outline-none` only for a documented forced-colors exception. No outline utils on static or decorative elements.
+- Variants and tokens before restyling. `className` is layout. Extend registry styles with `data-slot` / `in-*` / `peer`.
+- `flex` / `grid` + `gap-*` (not `space-x-*` / `space-y-*`). `size-*` for squares and icons. `truncate`.
+- Overlay stacking stays on the backdrop or positioner that defines the layer. No local `z-index`.
+- Lucide: `Icon` export (`ArchiveIcon`). Size with Tailwind, never numeric `size`. Decorative: `aria-hidden="true"`. Keep a semantic icon exposed unless equivalent text exists.
+- Logical utils (`ms-*`, `me-*`, `ps-*`, `pe-*`, `start-*`, `end-*`) and `slide-*-from-start|end`. Inherit `dir`. Physical direction only for explicit LTR, visual coordinates, or non-reading-order geometry.
 
 ## Motion
 
-- Height keyframes (`animate-collapse-*` and any new token in that shape): put duration and easing in the token as literals (`collapse-down 200ms ease-out`). Do not add `duration-*`, `ease-*`, or a duration custom property on that element. `ease-*` sets `--tw-ease` to `cubic-bezier(...)`, and those commas drop an `animation` shorthand that reads `var(--tw-ease)`. `duration-*` also sets `transition-duration` while `transition-property` stays `all`, so height transitions fight the keyframe. `ease-*` and `duration-*` stay on `transition-*` / `transition-[...]` (chevrons, indicators, switches) and on `animate-in` / `animate-out`, which read `--tw-duration` and `--tw-ease` on purpose.
-- Overlay enter/exit: Ark Presence `data-[state=open|closed]` + `tw-animate-css` (`animate-in` / `animate-out`, `duration-*`, fade/zoom/slide). Do not use Base UI `data-starting-style` / `data-ending-style` or `@starting-style` for these components. Compose durations in the owning component — no duration/easing/animation/keyframe tokens in `styles/globals.css`. When open and close differ, set both `data-[state=open]:duration-*` and `data-[state=closed]:duration-*` (a shared `duration-*` locks them together). Do not pair enter/exit with competing `transition-[…]` property lists — tw-animate owns the open/close animation. Do not leave `will-change-*` on short overlay enter/exit; Drawer swipe may keep it.
-- Tiers (`ease-out` unless noted; timings from shadcn Base UI / base-nova): **A — Anchored** (popover, hover-card, tooltip, action-bar, menu, select, combobox, date-picker, color-picker): `duration-100`, `zoom-in/out-95`, placement `slide-in-from-*-2`, enter **and** exit animated. **B — Modal** (dialog, alert-dialog, floating-panel, tour): overlay + content `duration-100`, content `zoom-in/out-95`. **C — Panel** (sheet): overlay `duration-150` fade; content `duration-200 ease-in-out` + fade + travel ±`2.5rem` via `slide-*-10`. **D — Gesture** (drawer): Shark gesture system unchanged (`duration-250` drawer curve). **Toast**: open `duration-200`, close `duration-150` (CSS transition stack). Ark geometry indicators: `duration-150 ease-in-out`.
-- Ark-positioned overlays: `origin-(--transform-origin)`, 95% scale, fade, `data-[placement^=…]:slide-in-from-*-2`, local overlay classes. Centered dialogs / coordinate-positioned panels: `origin-center`. Dialog mobile bottom-stick: `slide-*-bottom-4`. Ban `scale(0)`, `ease-in`, `ease-linear`, `transition-all`, arbitrary easing — except Drawer (`drawer.tsx`), Sheet content (`ease-in-out`), and Sidebar geometry (`sidebar.tsx`).
-- Choice and reading popups use enter and exit fade/zoom (`animate-in` / `animate-out`).
-- Reduced motion: gate with `motion-reduce:animate-none`, `motion-reduce:transition-none`, and when animation is state-qualified also `motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none` (string order alone does not win specificity). Never use bare `data-[state=closed]:animate-none` / `data-[state=open]:animate-none` for reduced-motion — that disables motion for everyone. Exception: Command (`command.tsx`) may keep always-off animate-none (high-frequency keyboard palette). Drawer disables open/close under reduced motion and keeps direct swipe tracking. Spinners, marquees, and progress stay animated. Gate hover transforms with `(hover: hover)` and `(pointer: fine)`.
+- Duration and easing live with the animation, not in `styles/globals.css`.
+- Enter/exit uses `data-[state=open|closed]`.
+- Reduced motion uses the `motion-reduce:` prefix. A bare `data-[state=open|closed]:animate-none` disables motion for everyone.
+- No `transition-all`.
+- Gate hover transforms with `(hover: hover)` and `(pointer: fine)`.
+- Height keyframes carry duration and easing as literals in the token (`collapse-down 200ms ease-out`).
 
 ## Class lists
 
-One group → one string (`"flex items-center gap-2"`). Multi-group → `cn()` or `tv()` array; related utils same line; skip unused groups; same-family states on one line; `className` last in `cn()`.
+One group → one string (`"flex items-center gap-2"`). Several groups → a `cn()` or `tv()` array: related utils on one line, unused groups omitted, same-family states on one line, `className` last.
 
 1. CSS vars (`[--space:--spacing(6)]`)
 2. Group/peer/slot (`group/item`, `peer`)
@@ -54,50 +55,30 @@ One group → one string (`"flex items-center gap-2"`). Multi-group → `cn()` o
 15. Descendants/slots (`[&_svg]:`, `in-data-[slot=...]`)
 16. Reduced motion last (`motion-reduce:*`)
 
-```tsx
-className={cn(
-  "[--space:--spacing(4)]",
-  "relative z-50 w-full",
-  "flex flex-col gap-(--space) p-(--space)",
-  "bg-popover rounded-2xl border shadow-lg/4 overflow-hidden outline-hidden",
-  "origin-(--transform-origin) transition-[opacity,translate] duration-150 ease-out",
-  "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
-  "motion-reduce:animate-none motion-reduce:transition-none",
-  "motion-reduce:data-[state=open]:animate-none",
-  className
-)}
-```
-
-## Tokens & opacity
+## Surface
 
 Alphas only: `0`, `4`, `8`, `16`, `24`, `32`, `48`, `64`, `80`, `96`, `100` (modifiers, `opacity-*`, shadows, CSS alpha). Carve-out: `color-mix()` recipes, user-entered colors, calculated gesture opacity.
 
-- `/4` elevation (`muted` = neutral `/4`); `/8` `/16` feedback/selection (`accent`, `secondary`, `sidebar-accent` = `/8` — accent is interactive context, not a second primary); `/24` validation/decoration/outer focus ring; `/32` scrims; `/48` muted surfaces; `/64` supporting content + focus border; `/80` strong translucent; `/96` fixed blur.
-- Solid controls: translucent `/80` hover fills for primary, secondary, and destructive. Status may use `/8`–`/24`.
-- Text/icons: opaque tokens; placeholders WCAG AA. Disabled: `opacity-64` + disabled state + blocked interaction — never dim still-interactive controls. Transitions: `opacity-0`/`opacity-100` (gesture/animation may use CSS var or `calc()` when documented locally).
-- Translucent only as intentional contextual layer (disabled, reveal, elevation, media, charts, decoration) with validated contrast on the composited background.
+- `/4` elevation (`muted` = neutral `/4`). `/8` `/16` feedback and selection (`accent`, `secondary`, `sidebar-accent` = `/8`; accent is context, not a second primary). `/24` validation, decoration, outer focus ring. `/32` scrims. `/48` muted surfaces. `/64` supporting content and the focus border. `/80` strong translucent. `/96` fixed blur.
+- Solid primary, secondary, and destructive hover fills: `/80`. Status may use `/8`–`/24`.
+- Text and icons: opaque tokens; placeholders meet WCAG AA. Disabled: `opacity-64` + disabled state + blocked interaction. Leave a still-interactive control at full opacity. Transitions: `opacity-0` / `opacity-100` (a documented gesture may use a CSS var or `calc()`).
+- Translucency is a layer only (disabled, reveal, elevation, media, charts, decoration), with contrast checked on the composited background.
+- Shadows: `shadow-xs/4` structural; `shadow-xs/8` hover; `shadow-sm/4` raised controls and previews; `shadow-lg/4` overlays. Outlined → `shadow-xs/4`. Filled → `shadow-sm/4`. Ghost and link → none. Hover shadow only when that state needs it. Geometry + ladder alpha: no bare, tinted, or non-`xs`/`sm`/`lg` shadow. Border or tonal split before elevation. A shadow is not a focus ring or a contrast border.
+- Radius: controls use `rounded-lg` at md/lg and `rounded-md` at sm/xs. Tailwind radius utilities; inner geometry may use `--radius`, never `--*-radius`. Only `pill` is full radius.
 
-## Shadows
-
-`shadow-xs/4` structural; `shadow-xs/8` hover; `shadow-sm/4` raised controls/previews; `shadow-lg/4` overlays. Fields/outlined → `shadow-xs/4`; filled `default`/`destructive`/`secondary` → `shadow-sm/4`; ghost/link → none. Hover shadow only when needed. Always geometry + alpha: no bare, color-/status-tinted, or sizes outside `xs`/`sm`/`lg`. Arbitrary only when already documented in that component; alpha still from the ladder. Borders or tonal separation before elevation; shadows are not focus rings or contrast borders.
-
-## Control shape
-
-Button, Input, InputGroup, Select, NativeSelect, NumberInput: `rounded-lg` md/lg; `rounded-md` sm/xs. ButtonGroup owns joined contours. Direct Tailwind radius; inner geometry may use `--radius`, never `--*-radius`. Only `pill` = full radius.
-
-## Files, examples, and docs
+## Files and docs
 
 ### Names
 
 - kebab-case: `registry/react/components/select.tsx`, `registry/manifest/select.ts`, `content/docs/components/select.mdx`.
-- Examples: `registry/react/examples/<component>/example-<topic>.tsx`. Form guides: `registry/react/examples/form/<rhf|tanstack|formisch>/example-<topic>.tsx`.
-- Topics: `default`, `controlled`, `disabled`/`invalid`, `size-sm`, `variant-ghost` → `example-<topic>.tsx`.
+- Examples: `registry/react/examples/<component>/example-<topic>.tsx`. Forms: `registry/react/examples/form/<rhf|tanstack|formisch>/example-<topic>.tsx`.
+- Topics: `default`, `controlled`, `disabled` / `invalid`, `size-sm`, `variant-ghost`.
 
 ### Example modules
 
-- `const` arrow; default export last. `example-default.tsx` → `{Component}Demo`; others → `Example`.
-- `"use client"` only for hooks/browser/interactive state (first line).
-- Statics after component, before `export default`:
+- `const` arrow; default export last. `example-default.tsx` → `{Component}Demo`. Other files → `Example`.
+- `"use client"` only for hooks, browser APIs, or interactive state, as the first line.
+- Statics after the component, before `export default`:
 
 ```tsx
 const SelectDemo = () => (
@@ -111,29 +92,24 @@ const collection = createListCollection({
 export default SelectDemo;
 ```
 
-- Hero: `<ComponentPreview componentName="select" />` → `example-default.tsx`. Else `fileName="example-..."`.
+- `<ComponentPreview componentName="select" />` loads `example-default.tsx`. Other files pass `fileName="example-..."`.
 
 ### Docs
 
-Skip N/A sections. Nothing after API Reference except Ark UI link.
+Skip a section that does not apply. API Reference is last; only the Ark UI link follows it.
 
-Example blurbs: at most one objective sentence. No Ark internals, no `Default is…` when the API table lists it. Self-explanatory headings need no blurb.
+A blurb is at most one objective sentence. Skip Ark internals and any default the API table already lists. A self-explanatory heading gets no blurb.
 
-1. Installation → 2. Anatomy → 3. Usage → 4. Controlled → 5. States (`## States` then `### Disabled` / `### Invalid` …) → 6. Variant axes (`## Size` / `## Variants`, then `###` per value) → 7. Examples → 8. API Reference
+1. Installation → 2. Anatomy → 3. Usage → 4. Controlled → 5. States (`## States`, then `### Disabled` / `### Invalid` …) → 6. Variant axes (`## Size` / `## Variants`, then `###` per value) → 7. Examples → 8. API Reference
 
-`## Usage` snippets take no `className`, except utilities whose API is the class (`hitbox`, `shimmer`).
+`## Usage` snippets omit `className`, except a utility whose API is the class.
 
-API tables: `| Prop | Type | Default |`. Defaults and types always in backticks (mono). `` `-` `` when no default; `` `required` `` for required props (never `**required**`). No alt headers or description columns.
+API tables: `| Prop | Type | Default |`. Defaults and types in backticks. `` `-` `` when there is no default; `` `required` `` for a required prop. No other headers, no description column.
 
-## Brand
+## Examples chrome
 
-**Onda** in examples/blocks/templates. Logo: `WavesHorizontalIcon`. Extensions OK (`Onda Mail`); root stays Onda.
+Brand and thumbnails apply to examples, blocks, and templates.
 
-## Thumbnails
-
-Decorative monochrome. Tokens only: `foreground`, `primary`, `primary-foreground`, `muted`, `muted-foreground`, `background`, `card`, `secondary`, `border`, `border-input`, `input` (+ opacity). No status/chart/raw hue.
-
-- Shell: opaque `bg-muted` (never translucent `bg-muted/*` on the illustration container).
-- Nested fills: `muted-foreground` opacity ladder — `/16` faint · `/24` default · `/32` strong. Keep at least two steps inside a thumb when hierarchy matters.
-- Icons / supporting chrome: `text-muted-foreground/64`.
-- Accent: solid `primary` / `primary-foreground`. Nested chips on a muted shell use `bg-background` (or `bg-card`), not another `bg-muted`.
+- **Onda**. Logo: `WavesHorizontalIcon`. Extensions are fine (`Onda Mail`); the root name stays Onda.
+- Thumbnails: decorative, monochrome. Tokens only: `foreground`, `primary`, `primary-foreground`, `muted`, `muted-foreground`, `background`, `card`, `secondary`, `border`, `border-input`, `input`, plus opacity. No status, chart, or raw hue.
+- Shell: opaque `bg-muted`. Nested fills: `muted-foreground` at `/16` faint, `/24` default, `/32` strong — at least two steps when hierarchy matters. Icons and chrome: `text-muted-foreground/64`. Accent: solid `primary` / `primary-foreground`. A chip on a muted shell uses `bg-background` or `bg-card`.

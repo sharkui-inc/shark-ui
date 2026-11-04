@@ -22,7 +22,7 @@ const Example = () => {
         </Button>
         <span
           className={cn(
-            "border-input bg-muted inline-flex h-8 items-center rounded-lg border px-3",
+            "bg-muted border-input inline-flex h-8 items-center rounded-lg border px-3",
             "text-muted-foreground font-mono text-xs"
           )}
         >

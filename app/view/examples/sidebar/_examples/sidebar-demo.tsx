@@ -136,6 +136,7 @@ interface TeamSwitcherProps {
 
 const TeamSwitcher = (props: TeamSwitcherProps) => {
   const { teams } = props;
+  
   const [activeTeam, setActiveTeam] = React.useState(teams[0]);
 
   if (!activeTeam) {

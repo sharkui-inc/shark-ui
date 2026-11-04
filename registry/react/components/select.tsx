@@ -63,6 +63,7 @@ export const SelectLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkSelect.Label
       className={cn(fieldLabelVariants(), className)}
       data-slot="select-label"
@@ -296,6 +297,7 @@ export const SelectItem = (
   props: React.ComponentProps<typeof ArkSelect.Item>
 ) => {
   const { className, children, ...rest } = props;
+  
   const { item, indicator } = menuItemIndicatorVariants();
 
   return (

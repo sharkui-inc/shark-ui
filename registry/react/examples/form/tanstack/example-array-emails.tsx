@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "@registry/react/components/toast";
 import { useForm } from "@tanstack/react-form";
 import { XIcon } from "lucide-react";
 import * as z from "zod";
@@ -28,6 +27,7 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/registry/react/components/input-group";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({

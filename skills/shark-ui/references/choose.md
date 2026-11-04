@@ -145,6 +145,7 @@ Use `Separator` instead of `<hr>` or a `border-t` divider. Use `Badge` for a sta
 - LinkOverlay: make a card or article clickable.
 - Listbox: visible list selection.
 - Marquee: horizontal scrolling items.
+- Masonry: columns of uneven height.
 - Menu: dropdown actions.
 - NativeSelect: native `<select>`.
 - NumberInput: numeric entry.

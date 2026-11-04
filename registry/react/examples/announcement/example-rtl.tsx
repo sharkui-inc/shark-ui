@@ -1,11 +1,11 @@
 "use client";
 
-import { Badge } from "@registry/react/components/badge";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import {
   Announcement,
   AnnouncementTitle,
 } from "@/registry/react/components/announcement";
+import { Badge } from "@/registry/react/components/badge";
 
 const Example = () => {
   const { locale } = usePreviewLocale();

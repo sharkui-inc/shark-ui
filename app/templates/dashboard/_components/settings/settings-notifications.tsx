@@ -11,6 +11,7 @@ import { SettingsSwitchField } from "./settings-fields";
 
 export const SettingsNotificationsPage = (props: { onSave: () => void }) => {
   const { onSave } = props;
+  
   const [weeklySummary, setWeeklySummary] = React.useState(true);
   const [customerAlerts, setCustomerAlerts] = React.useState(true);
   const [securityAlerts, setSecurityAlerts] = React.useState(true);

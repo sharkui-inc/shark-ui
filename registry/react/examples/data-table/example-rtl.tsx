@@ -247,6 +247,7 @@ const SelectAllCheckbox = (props: {
   table: TanStackTable<typeof features, Payment>;
 }) => {
   const { table } = props;
+
   const { values } = useRtlValues();
 
   return (
@@ -263,8 +264,13 @@ const SelectAllCheckbox = (props: {
   );
 };
 
-const SelectRowCheckbox = (props: { row: Row<typeof features, Payment> }) => {
+interface SelectRowCheckboxProps {
+  row: Row<typeof features, Payment>;
+}
+
+const SelectRowCheckbox = (props: SelectRowCheckboxProps) => {
   const { row } = props;
+
   const { values } = useRtlValues();
 
   return (
@@ -278,8 +284,13 @@ const SelectRowCheckbox = (props: { row: Row<typeof features, Payment> }) => {
   );
 };
 
-const StatusCell = (props: { status: Payment["status"] }) => {
+interface StatusCellProps {
+  status: Payment["status"];
+}
+
+const StatusCell = (props: StatusCellProps) => {
   const { status } = props;
+
   const { values } = useRtlValues();
 
   const label = {
@@ -298,10 +309,13 @@ const StatusHeader = () => {
   return values.status;
 };
 
-const EmailSortHeader = (props: {
+interface EmailSortHeaderProps {
   column: Column<typeof features, Payment, string>;
-}) => {
+}
+
+const EmailSortHeader = (props: EmailSortHeaderProps) => {
   const { column } = props;
+
   const { values } = useRtlValues();
 
   return (
@@ -321,8 +335,13 @@ const AmountHeader = () => {
   return <div className="text-end">{values.amount}</div>;
 };
 
-const AmountCell = (props: { row: Row<typeof features, Payment> }) => {
+interface AmountCellProps {
+  row: Row<typeof features, Payment>;
+}
+
+const AmountCell = (props: AmountCellProps) => {
   const { row } = props;
+
   const { values } = useRtlValues();
 
   return (
@@ -330,8 +349,13 @@ const AmountCell = (props: { row: Row<typeof features, Payment> }) => {
   );
 };
 
-const PaymentActions = (props: { payment: Payment }) => {
+interface PaymentActionsProps {
+  payment: Payment;
+}
+
+const PaymentActions = (props: PaymentActionsProps) => {
   const { payment } = props;
+
   const { values } = useRtlValues();
 
   return (
@@ -360,9 +384,11 @@ const PaymentActions = (props: { payment: Payment }) => {
   );
 };
 
-const ColumnVisibilityItem = (props: {
+interface ColumnVisibilityItemProps {
   column: Column<typeof features, Payment, unknown>;
-}) => {
+}
+
+const ColumnVisibilityItem = (props: ColumnVisibilityItemProps) => {
   const { column } = props;
 
   return (

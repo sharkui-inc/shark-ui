@@ -8,7 +8,6 @@ import {
   type SubmitHandler,
   useForm,
 } from "@formisch/react";
-import { toast } from "@registry/react/components/toast";
 import * as v from "valibot";
 import {
   Autocomplete,
@@ -34,6 +33,7 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/registry/react/components/field";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });

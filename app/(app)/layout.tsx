@@ -1,5 +1,5 @@
-import { SkipNavLink } from "@registry/react/components/skip-nav";
 import { SiteHeader } from "@/components/layout/header/header";
+import { SkipNavLink } from "@/registry/react/components/skip-nav";
 
 export const dynamic = "force-static";
 export const revalidate = false;

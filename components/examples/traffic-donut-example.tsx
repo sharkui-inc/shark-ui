@@ -55,6 +55,7 @@ export const TrafficDonutExample = (props: React.ComponentProps<"div">) => {
               stroke="var(--card)"
               strokeWidth={5}
             >
+              {/* biome-ignore lint/a11y/noLabelWithoutControl: chart label, not a form label */}
               <Label
                 content={({ viewBox }) =>
                   viewBox && "cx" in viewBox && "cy" in viewBox ? (

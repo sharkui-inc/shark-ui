@@ -184,6 +184,7 @@ export const NumberInputScrubber = (
       data-slot="number-field-scrubber"
       {...rest}
     >
+      {/* biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context */}
       <ArkNumberInput.Label className={fieldLabelVariants()}>
         {children}
       </ArkNumberInput.Label>

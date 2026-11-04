@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import { Card, CardContent } from "@/registry/react/components/card";
 import {
   Carousel,
@@ -12,34 +12,34 @@ import {
   useCarouselContext,
 } from "@/registry/react/components/carousel";
 
-const AutoplayControl = (props: { isPlaying: boolean }) => {
-  const { isPlaying } = props;
-  const { scrollNext } = useCarouselContext();
+interface PauseOnHoverProps {
+  children: React.ReactNode;
+}
 
-  React.useEffect(() => {
-    if (!isPlaying) {
-      return;
-    }
+const PauseOnHover = (props: PauseOnHoverProps) => {
+  const { children } = props;
 
-    const id = window.setInterval(() => scrollNext(), 2000);
-
-    return () => window.clearInterval(id);
-  }, [isPlaying, scrollNext]);
-
-  return null;
-};
-
-const CarouselPlugin = () => {
-  const [isPlaying, setIsPlaying] = React.useState(true);
+  const { pause, play } = useCarouselContext();
 
   return (
-    <Carousel
-      className="w-full max-w-48"
-      onMouseEnter={() => setIsPlaying(false)}
-      onMouseLeave={() => setIsPlaying(true)}
-      slideCount={slides.length}
+    <div
+      className="flex min-w-0 flex-1 flex-col"
+      onPointerEnter={pause}
+      onPointerLeave={play}
     >
-      <AutoplayControl isPlaying={isPlaying} />
+      {children}
+    </div>
+  );
+};
+
+const CarouselPlugin = () => (
+  <Carousel
+    autoplay={{ delay: 2000 }}
+    className="w-full max-w-48"
+    loop
+    slideCount={slides.length}
+  >
+    <PauseOnHover>
       <CarouselControl>
         <CarouselPrevious>Previous</CarouselPrevious>
         <CarouselNext>Next</CarouselNext>
@@ -56,9 +56,9 @@ const CarouselPlugin = () => {
           </CarouselItem>
         ))}
       </CarouselContent>
-    </Carousel>
-  );
-};
+    </PauseOnHover>
+  </Carousel>
+);
 
 const slides = Array.from({ length: 5 }, (_, i) => i + 1);
 

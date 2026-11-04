@@ -1,15 +1,15 @@
 "use client";
 
-import { Badge } from "@registry/react/components/badge";
-import { Card, CardContent } from "@registry/react/components/card";
-import { Separator } from "@registry/react/components/separator";
 import React from "react";
+import { Badge } from "@/registry/react/components/badge";
+import { Card, CardContent } from "@/registry/react/components/card";
 import {
   useFormatHotkey,
   useHotkeys,
   usePlatform,
 } from "@/registry/react/components/hotkeys";
 import { Kbd } from "@/registry/react/components/kbd";
+import { Separator } from "@/registry/react/components/separator";
 
 const Example = () => {
   const platform = usePlatform();

@@ -58,14 +58,10 @@ const swapIndicatorVariants = tv({
   },
 });
 
-type SwapBaseProps = Omit<
-  React.ComponentProps<typeof ArkSwap.Root>,
-  "asChild" | "children"
-> &
+type SwapBaseProps = React.ComponentProps<typeof ArkSwap.Root> &
   VariantProps<typeof swapIndicatorVariants>;
 
 type SwapProps = SwapBaseProps & {
-  indicatorClassName?: string;
   off: React.ReactNode;
   on: React.ReactNode;
 };
@@ -76,11 +72,11 @@ export const Swap = (props: SwapProps) => {
     lazyMount = true,
     unmountOnExit = true,
     className,
-    indicatorClassName,
     on,
     off,
     ...rest
   } = props;
+
   const { indicator, root } = swapIndicatorVariants({ variant });
 
   return (
@@ -91,20 +87,16 @@ export const Swap = (props: SwapProps) => {
       unmountOnExit={unmountOnExit}
       {...rest}
     >
-      <ArkSwap.Indicator
-        className={cn(indicator(), indicatorClassName)}
-        data-slot="swap-indicator"
-        type="on"
-      >
+      <SwapIndicator className={indicator()} type="on">
         {on}
-      </ArkSwap.Indicator>
-      <ArkSwap.Indicator
-        className={cn(indicator(), indicatorClassName)}
-        data-slot="swap-indicator"
-        type="off"
-      >
+      </SwapIndicator>
+      <SwapIndicator className={indicator()} type="off">
         {off}
-      </ArkSwap.Indicator>
+      </SwapIndicator>
     </ArkSwap.Root>
   );
 };
+
+const SwapIndicator = (
+  props: React.ComponentProps<typeof ArkSwap.Indicator>
+) => <ArkSwap.Indicator data-slot="swap-indicator" {...props} />;

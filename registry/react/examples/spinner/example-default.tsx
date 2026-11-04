@@ -8,7 +8,7 @@ import { Spinner } from "@/registry/react/components/spinner";
 
 const SpinnerDemo = () => (
   <div className="flex w-full max-w-xs flex-col gap-4">
-    <Item className="border- rounded-full" variant="muted">
+    <Item className="rounded-full" variant="muted">
       <ItemMedia>
         <Spinner />
       </ItemMedia>

@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "@registry/react/components/toast";
 import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -20,6 +19,7 @@ import {
   FieldLabel,
 } from "@/registry/react/components/field";
 import { InputOTP, InputOTPSlot } from "@/registry/react/components/input-otp";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({

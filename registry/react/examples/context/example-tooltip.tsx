@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Button } from "@/registry/react/components/button";
 import {
   Context,
   ContextBody,
@@ -29,8 +30,15 @@ const Example = () => {
       >
         <Tooltip ids={{ trigger: triggerId }}>
           <TooltipTrigger asChild>
-            <ContextTrigger aria-label="Context usage" size="icon-sm">
-              <ContextIcon />
+            <ContextTrigger asChild>
+              <Button
+                aria-label="Context usage"
+                className="text-muted-foreground font-normal"
+                size="icon-sm"
+                variant="ghost"
+              >
+                <ContextIcon />
+              </Button>
             </ContextTrigger>
           </TooltipTrigger>
           <TooltipContent>Show context usage</TooltipContent>

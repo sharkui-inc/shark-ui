@@ -21,6 +21,7 @@ import { SettingsSwitchField } from "./settings-fields";
 
 export const SettingsAppearancePage = (props: { onSave: () => void }) => {
   const { onSave } = props;
+  
   const [systemPreference, setSystemPreference] = React.useState(true);
   const [compactNavigation, setCompactNavigation] = React.useState(true);
   const [appearance, setAppearance] = React.useState<AppearanceOption[]>([

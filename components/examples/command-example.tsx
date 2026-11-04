@@ -28,7 +28,9 @@ import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
 
 export const CommandExample = (props: React.ComponentProps<"div">) => {
   const { className, ...rest } = props;
+
   const rootRef = React.useRef<HTMLDivElement>(null);
+  
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
     filter: contains,

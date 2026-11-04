@@ -61,6 +61,7 @@ export const DatePickerLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkDatePicker.Label
       className={cn(fieldLabelVariants(), className)}
       data-slot="date-picker-label"
@@ -78,6 +79,7 @@ export const DatePickerTrigger = (
     "aria-labelledby": ariaLabelledBy,
     ...rest
   } = props;
+  
   const datePicker = useDatePickerContext();
   const labelId = datePicker.getLabelProps().id;
   const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");

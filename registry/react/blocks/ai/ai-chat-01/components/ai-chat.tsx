@@ -299,6 +299,7 @@ const FollowLatestMessage = (props: {
   streamedText: string;
 }) => {
   const { enabled, messageCount, streamedText } = props;
+
   const previousMessageCount = React.useRef(messageCount);
   const scrollArea = useMessageScroller();
 
@@ -394,6 +395,7 @@ const AssistantActions = () => (
 
 const MessageExtras = (props: { extras: DemoMessageExtras }) => {
   const { extras } = props;
+
   const added = extras.diff?.lines.filter((line) => line.type === "add").length;
   const removed = extras.diff?.lines.filter(
     (line) => line.type === "delete"
@@ -525,13 +527,16 @@ const MessageExtras = (props: { extras: DemoMessageExtras }) => {
   );
 };
 
-const ChatMessageItem = (props: {
+interface ChatMessageItemProps {
   assistantName: string;
   extras?: DemoMessageExtras;
   isStreaming?: boolean;
   message: ChatMessage;
-}) => {
+}
+
+const ChatMessageItem = (props: ChatMessageItemProps) => {
   const { assistantName, extras, isStreaming = false, message } = props;
+ 
   const isUser = message.role === "user";
   const text = message.content;
   const firstSource = extras?.sources?.[0];
@@ -583,14 +588,16 @@ const ChatMessageItem = (props: {
   );
 };
 
-const ChatSession = (props: {
+interface ChatSessionProps {
   assistantName: string;
   className?: string;
   headerAction?: React.ReactNode;
   onReset: () => void;
   showDemoArtifacts: boolean;
   welcomeTitle: string;
-}) => {
+}
+
+const ChatSession = (props: ChatSessionProps) => {
   const {
     assistantName,
     className,
@@ -598,6 +605,7 @@ const ChatSession = (props: {
     showDemoArtifacts,
     welcomeTitle,
   } = props;
+
   const [model, setModel] = React.useState<string[]>([MODEL_OPTIONS[0].value]);
   const [effort, setEffort] = React.useState(["medium"]);
   const [access, setAccess] = React.useState(["full"]);
@@ -844,8 +852,15 @@ const ChatSession = (props: {
                 positioning={{ placement: "top-end" }}
                 usedTokens={usedTokens}
               >
-                <ContextTrigger aria-label="Context usage" size="icon-sm">
-                  <ContextIcon />
+                <ContextTrigger asChild>
+                  <Button
+                    aria-label="Context usage"
+                    className="text-muted-foreground font-normal"
+                    size="icon-sm"
+                    variant="ghost"
+                  >
+                    <ContextIcon />
+                  </Button>
                 </ContextTrigger>
                 <ContextContent>
                   <ContextHeader>
@@ -875,6 +890,7 @@ export const AiChat = (props: AiChatProps) => {
     showDemoArtifacts = true,
     welcomeTitle = "What should we build in shark-ui?",
   } = props;
+  
   const [session, setSession] = React.useState(0);
 
   const sessionContent = (

@@ -63,6 +63,7 @@ export const CalendarLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkCalendar.Label
       className={cn(fieldLabelVariants(), className)}
       data-slot="calendar-label"
@@ -99,6 +100,7 @@ export const CalendarTodayTrigger = (
   props: React.ComponentProps<typeof Button>
 ) => {
   const { variant = "outline", size = "lg", onClick, ...rest } = props;
+  
   const calendar = useCalendarContext();
 
   return (
@@ -241,6 +243,7 @@ export const CalendarTable = (
   props: React.ComponentProps<typeof ArkCalendar.Table>
 ) => {
   const { className, "aria-labelledby": ariaLabelledBy, ...rest } = props;
+ 
   const calendar = useCalendarContext();
   const labelId = calendar.getLabelProps().id;
   const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
@@ -489,9 +492,9 @@ export const CalendarTableCell = (
           "data-disabled:pointer-events-none data-disabled:opacity-64",
           "data-unavailable:pointer-events-none data-unavailable:line-through data-unavailable:opacity-64",
           "data-[view=day]:data-in-range:not-data-selected:bg-primary/8",
-          "data-selected:border-transparent data-selected:bg-primary data-selected:text-primary-foreground data-selected:ring-0",
-          "data-selected:hover:border-transparent data-selected:hover:bg-primary data-selected:hover:text-primary-foreground",
-          "data-selected:data-focus:not-data-today:border-transparent data-selected:data-focus:not-data-today:bg-primary data-selected:data-focus:not-data-today:text-primary-foreground data-selected:data-focus:not-data-today:ring-0",
+          "data-selected:bg-primary data-selected:text-primary-foreground data-selected:border-transparent data-selected:ring-0",
+          "data-selected:hover:bg-primary data-selected:hover:text-primary-foreground data-selected:hover:border-transparent",
+          "data-selected:data-focus:not-data-today:bg-primary data-selected:data-focus:not-data-today:text-primary-foreground data-selected:data-focus:not-data-today:border-transparent data-selected:data-focus:not-data-today:ring-0",
           "data-selected:focus-visible:not-data-today:border-transparent data-selected:focus-visible:not-data-today:ring-0",
           "data-[view=day]:[[data-slot=calendar-table-cell]:not(:first-child):not([data-slot=calendar-week-number-cell]+[data-slot=calendar-table-cell])>&]:data-in-range:not-data-range-start:not-data-hover-range-start:rounded-s-none",
           "data-[view=day]:[[data-slot=calendar-table-cell]:not(:last-child)>&]:data-in-range:not-data-range-end:not-data-hover-range-end:rounded-e-none",

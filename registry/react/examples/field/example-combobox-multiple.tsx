@@ -38,11 +38,13 @@ const Example = () => {
           {({ selectedItems }) => (
             <>
               <ComboboxChips>
-                {selectedItems.map((item) => (
-                  <ComboboxChip key={item.value} value={item.value}>
-                    {item.label}
-                  </ComboboxChip>
-                ))}
+                <span className="contents">
+                  {selectedItems.map((item) => (
+                    <ComboboxChip key={item.value} value={item.value}>
+                      {item.label}
+                    </ComboboxChip>
+                  ))}
+                </span>
                 <ComboboxChipsInput placeholder="Select items…" />
               </ComboboxChips>
               <ComboboxContent>

@@ -21,7 +21,7 @@ Do not set `id` / `htmlFor` inside Field. Ark wires that.
 <Field invalid>
   <FieldLabel>Email</FieldLabel>
   <Input type="email" />
-  <FieldDescription>Invalid email address.</FieldDescription>
+  <FieldError>Invalid email address.</FieldError>
 </Field>
 ```
 

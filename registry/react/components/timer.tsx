@@ -76,18 +76,33 @@ export const TimerItemGroup = (props: TimerItemGroupProps) => {
 export const TimerItem = (
   props: React.ComponentProps<typeof ArkTimer.Item>
 ) => {
-  const { className, ...rest } = props;
+  const { className, type, ...rest } = props;
+
+  const timer = useTimerContext();
+  const value = timer.formattedTime[type];
 
   return (
-    <ArkTimer.Item
+    <ark.div
+      {...timer.getItemProps({ type })}
       className={cn(
-        "w-fit min-w-[2.5ch]",
-        "text-foreground text-center text-3xl font-semibold tracking-wider tabular-nums",
+        "shrink-0",
+        "inline-flex items-center gap-[0.05em]",
+        "text-foreground text-center text-3xl font-semibold tabular-nums",
         className
       )}
       data-slot="timer-item"
       {...rest}
-    />
+    >
+      {value.split("").map((digit, index) => {
+        const key = `${type}-${index}`;
+
+        return (
+          <span className="w-[1ch] shrink-0 text-center" key={key}>
+            {digit}
+          </span>
+        );
+      })}
+    </ark.div>
   );
 };
 

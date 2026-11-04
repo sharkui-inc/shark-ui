@@ -1,9 +1,3 @@
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@registry/react/components/tabs";
 import { CreditCardIcon, UserRoundIcon, UsersIcon } from "lucide-react";
 import type React from "react";
 import { Button } from "@/registry/react/components/button";
@@ -34,6 +28,12 @@ import {
   SidebarMenuItem,
   SidebarProvider,
 } from "@/registry/react/components/sidebar";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/registry/react/components/tabs";
 
 const Example = () => (
   <Dialog>

@@ -117,6 +117,7 @@ export const ClipboardIndicator = (
     children,
     ...rest
   } = props;
+  
   const clipboard = useClipboardContext();
 
   return (

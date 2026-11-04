@@ -63,6 +63,7 @@ export const Terminal = (props: TerminalProps) => {
 
 const TerminalFollow = (props: { followKey: string }) => {
   const { followKey } = props;
+  
   const { autoScroll } = _useTerminal();
   const { scrollToEdge } = useScrollAreaContext();
 

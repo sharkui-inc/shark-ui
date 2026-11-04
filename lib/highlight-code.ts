@@ -27,7 +27,7 @@ const showLineNumbersPattern = /\bshowLineNumbers\b/u;
 
 const getMetaValue = (meta: string, name: string) => {
   const match = meta.match(
-    new RegExp(`(?:^|\\s)${name}=(?:"([^"]*)"|'([^']*)'|([^\\s]+))`)
+    new RegExp(`(?:^|\\s)${name}=(?:"([^"]*)"|'([^']*)'|([^\\s]+))`, "u")
   );
 
   return match?.[1] ?? match?.[2] ?? match?.[3];

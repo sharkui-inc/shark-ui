@@ -202,6 +202,7 @@ export const SliderLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkSlider.Label
       className={cn(fieldLabelVariants(), className)}
       data-slot="slider-label"

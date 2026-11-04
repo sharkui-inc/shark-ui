@@ -1,7 +1,6 @@
 "use client";
 
 import { Toc as ArkToc } from "@ark-ui/react/toc";
-import { Status } from "@registry/react/components/status";
 import { usePathname } from "next/navigation";
 import type React from "react";
 import { NavLink } from "@/components/nav-link";
@@ -17,6 +16,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/registry/react/components/sidebar";
+import { Status } from "@/registry/react/components/status";
 
 interface DocsSidebarProps extends React.ComponentProps<typeof Sidebar> {
   /**

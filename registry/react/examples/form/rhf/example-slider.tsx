@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "@registry/react/components/toast";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -24,6 +23,7 @@ import {
   SliderLabel,
   SliderValue,
 } from "@/registry/react/components/slider";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({

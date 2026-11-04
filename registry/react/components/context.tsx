@@ -4,12 +4,8 @@ import { ark } from "@ark-ui/react/factory";
 import { createContext } from "@ark-ui/react/utils";
 import { XIcon } from "lucide-react";
 import type React from "react";
-import type { VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import {
-  Button,
-  type buttonVariants,
-} from "@/registry/react/components/button";
+import { Button } from "@/registry/react/components/button";
 import { CircularProgress } from "@/registry/react/components/circular-progress";
 import { FormatNumber } from "@/registry/react/components/format";
 import {
@@ -73,6 +69,7 @@ export const Context = (props: ContextProps) => {
 
 export const ContextIcon = (props: { className?: string }) => {
   const { className } = props;
+
   const { usedPercent } = _useContextValue();
 
   return (
@@ -86,22 +83,10 @@ export const ContextIcon = (props: { className?: string }) => {
   );
 };
 
-interface ContextButtonProps
-  extends React.ComponentProps<typeof PopoverTrigger>,
-    VariantProps<typeof buttonVariants> {}
-
-export const ContextTrigger = (props: ContextButtonProps) => {
-  const {
-    size = "sm",
-    variant = "ghost",
-    asChild = false,
-    children,
-    ...rest
-  } = props;
-
+export const ContextTriggerLabel = () => {
   const { usedPercent } = _useContextValue();
 
-  const content = (
+  return (
     <>
       <span>
         <span className="sr-only">Context used </span>
@@ -114,24 +99,16 @@ export const ContextTrigger = (props: ContextButtonProps) => {
       <ContextIcon />
     </>
   );
+};
 
-  if (asChild) {
-    return (
-      <PopoverTrigger asChild data-slot="context-trigger" {...rest}>
-        {children}
-      </PopoverTrigger>
-    );
-  }
+export const ContextTrigger = (
+  props: React.ComponentProps<typeof PopoverTrigger>
+) => {
+  const { children, ...rest } = props;
 
   return (
-    <PopoverTrigger asChild data-slot="context-trigger" {...rest}>
-      <Button
-        className="text-muted-foreground font-normal"
-        size={size}
-        variant={variant}
-      >
-        {children ?? content}
-      </Button>
+    <PopoverTrigger data-slot="context-trigger" {...rest} asChild>
+      {children}
     </PopoverTrigger>
   );
 };
@@ -210,7 +187,6 @@ export const ContextTitle = (props: ContextTitleProps) => {
           <Button
             aria-label="Close"
             className={cn("text-muted-foreground", "hover:text-foreground")}
-            pill
             size="icon-xs"
             variant="ghost"
           >

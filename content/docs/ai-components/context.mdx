@@ -55,7 +55,8 @@ npx shadcn@latest add @shark/context
 ```text
 Context
 ├── ContextTrigger
-│   └── ContextIcon
+│   └── Button
+│       └── ContextTriggerLabel
 └── ContextContent
     ├── ContextHeader
     │   ├── ContextTitle
@@ -68,6 +69,7 @@ Context
 ## Usage
 
 ```tsx
+import { Button } from "@/components/ui/button";
 import {
   Context,
   ContextBody,
@@ -77,13 +79,18 @@ import {
   ContextMeter,
   ContextTitle,
   ContextTrigger,
+  ContextTriggerLabel,
   ContextUsageRow,
 } from "@/components/ui/context";
 ```
 
 ```tsx
 <Context maxTokens={128000} usedTokens={18420} costLabel="$0.042">
-  <ContextTrigger />
+  <ContextTrigger asChild>
+    <Button size="sm" variant="ghost">
+      <ContextTriggerLabel />
+    </Button>
+  </ContextTrigger>
   <ContextContent>
     <ContextHeader title="Context Usage">
       <ContextMeter />
@@ -188,12 +195,16 @@ Root [Popover](/docs/components/popover). Provides token usage to child parts.
 
 ### ContextTrigger
 
-Opens the popover on click.
+Opens the popover on click. Use `asChild` with a single `Button`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | `false` |
+| `asChild` | `boolean` | `required` |
 | `className` | `string` | `-` |
+
+### ContextTriggerLabel
+
+Percent label and usage icon for the trigger.
 
 ### ContextIcon
 

@@ -11,6 +11,7 @@ import { SettingsTextField } from "./settings-fields";
 
 export const SettingsGeneralPage = (props: { onSave: () => void }) => {
   const { onSave } = props;
+  
   const [workspaceName, setWorkspaceName] = React.useState("Onda");
   const [workspaceUrl, setWorkspaceUrl] = React.useState("onda");
 

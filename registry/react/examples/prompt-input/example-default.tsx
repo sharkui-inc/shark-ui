@@ -214,8 +214,15 @@ const PromptInputDemo = () => {
               positioning={{ placement: "top-end" }}
               usedTokens={18_420}
             >
-              <ContextTrigger aria-label="Context usage" size="icon-sm">
-                <ContextIcon />
+              <ContextTrigger asChild>
+                <Button
+                  aria-label="Context usage"
+                  className="text-muted-foreground font-normal"
+                  size="icon-sm"
+                  variant="ghost"
+                >
+                  <ContextIcon />
+                </Button>
               </ContextTrigger>
               <ContextContent>
                 <ContextHeader>

@@ -300,6 +300,7 @@ export const PlanItem = (props: PlanItemProps) => {
     status = "pending",
     ...rest
   } = props;
+  
   const isOpenControlled = open !== undefined;
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(
     () => defaultOpen ?? status === "in-progress"

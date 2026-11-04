@@ -99,6 +99,7 @@ interface FontPickerProps {
 
 const FontPicker = (props: FontPickerProps) => {
   const { fonts, label, onValueChange, value } = props;
+  
   const collection = React.useMemo(
     () => createListCollection({ items: [...fonts] }),
     [fonts]

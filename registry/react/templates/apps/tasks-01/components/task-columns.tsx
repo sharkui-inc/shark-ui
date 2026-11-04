@@ -62,6 +62,7 @@ export const TaskStatusBadge = (props: { status: TaskStatus }) => {
 
 export const TaskPriorityLabel = (props: { priority: TaskPriority }) => {
   const { priority } = props;
+  
   const PriorityIcon = priorityIconMap[priority];
 
   return (

@@ -164,6 +164,7 @@ export const CircularSliderLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkAngleSlider.Label
       className={cn(fieldLabelVariants(), className)}
       data-slot="circular-slider-label"

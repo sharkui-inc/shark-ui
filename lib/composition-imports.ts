@@ -5,7 +5,7 @@ import { replaceRegistryImportsForCopy } from "@/utils/formatter";
 const CODE_EXTENSION_PATTERN = /\.(?:tsx?|jsx?)$/u;
 
 export const RELATIVE_IMPORT_PATTERN =
-  /(from\s+["']|import\s+["'])(\.[^"']+)(["'])/gu;
+  /(?<prefix>from\s+["']|import\s+["'])(?<specifier>\.[^"']+)(?<suffix>["'])/gu;
 
 const stripCodeExtension = (path: string) =>
   path.replace(CODE_EXTENSION_PATTERN, "");

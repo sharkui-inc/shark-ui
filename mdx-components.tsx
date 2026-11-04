@@ -177,7 +177,7 @@ export const mdxComponents = {
           "[&+.steps]:mt-0",
           "[&+h3]:mt-6",
           "[&+p]:mt-4!",
-          "[&+]*:[code]:text-xl",
+          "[&_code]:text-xl",
           iframeAfterTextClassName(),
           className
         )}
@@ -197,7 +197,7 @@ export const mdxComponents = {
           "font-heading text-lg",
           "font-medium tracking-tight",
           "[&+p]:mt-4!",
-          "*:[code]:text-xl",
+          "[&_code]:text-lg",
           iframeAfterTextClassName(),
           className
         )}

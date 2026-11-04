@@ -2,9 +2,9 @@
 
 import { createListCollection } from "@ark-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@registry/react/components/button";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
+import { Button } from "@/registry/react/components/button";
 import {
   Card,
   CardContent,

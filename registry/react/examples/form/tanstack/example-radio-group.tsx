@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "@registry/react/components/toast";
 import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -26,6 +25,7 @@ import {
   RadioGroup,
   RadioGroupItem,
 } from "@/registry/react/components/radio-group";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({

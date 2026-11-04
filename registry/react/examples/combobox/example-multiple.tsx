@@ -32,11 +32,13 @@ const Example = () => {
         {({ selectedItems }) => (
           <>
             <ComboboxChips>
-              {selectedItems.map((item) => (
-                <ComboboxChip key={item.value} value={item.value}>
-                  {item.label}
-                </ComboboxChip>
-              ))}
+              <span className="contents">
+                {selectedItems.map((item) => (
+                  <ComboboxChip key={item.value} value={item.value}>
+                    {item.label}
+                  </ComboboxChip>
+                ))}
+              </span>
               <ComboboxChipsInput
                 aria-label="Add framework"
                 placeholder="Select frameworks..."

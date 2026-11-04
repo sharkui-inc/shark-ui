@@ -109,7 +109,9 @@ export const MessageScrollerButton = (props: MessageScrollerButtonProps) => {
     size = "icon-sm",
     ...rest
   } = props;
+  
   const scrollArea = useScrollAreaContext();
+
   const isAtEdge =
     direction === "end" ? scrollArea.isAtBottom : scrollArea.isAtTop;
   const isActive = scrollArea.hasOverflowY && !isAtEdge;

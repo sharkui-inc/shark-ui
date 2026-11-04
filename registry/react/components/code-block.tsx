@@ -3,12 +3,15 @@
 import { ark } from "@ark-ui/react/factory";
 import { createContext } from "@ark-ui/react/utils";
 import React from "react";
-import type {
-  BundledLanguage,
-  BundledTheme,
-  HighlighterGeneric,
-  ThemedToken,
-} from "shiki";
+import type { BundledLanguage, GrammarState, ThemedToken } from "shiki";
+import {
+  createBundledHighlighter,
+  createSingletonShorthands,
+} from "shiki/core";
+import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
+import { bundledLanguages } from "shiki/langs";
+import githubDark from "shiki/themes/github-dark.mjs";
+import githubLight from "shiki/themes/github-light.mjs";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -18,9 +21,30 @@ import {
 } from "@/registry/react/components/clipboard";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
-const TOKEN_CACHE_LIMIT = 100;
+const CODE_THEMES = {
+  dark: "github-dark",
+  light: "github-light",
+} as const;
 
-const STREAM_HIGHLIGHT_INTERVAL = 300;
+const codeThemes = {
+  "github-dark": githubDark,
+  "github-light": githubLight,
+};
+
+const createCodeHighlighter = createBundledHighlighter<
+  BundledLanguage,
+  "github-dark" | "github-light"
+>({
+  engine: () => createJavaScriptRegexEngine({ forgiving: true }),
+  langs: bundledLanguages,
+  themes: codeThemes,
+});
+
+const { getSingletonHighlighter } = createSingletonShorthands(
+  createCodeHighlighter
+);
+
+type CodeHighlighter = Awaited<ReturnType<typeof getSingletonHighlighter>>;
 
 export type CodeBlockLanguage = BundledLanguage | "text";
 
@@ -50,6 +74,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
     children,
     ...rest
   } = props;
+
   const value = React.useMemo(
     () => ({
       code,
@@ -81,12 +106,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
   );
 };
 
-interface CodeBlockHeaderProps extends React.ComponentProps<typeof ark.div> {
-  /**
-   * The title of the code block.
-   */
-  title?: string;
-}
+
 
 export const CodeBlockTitle = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
@@ -105,6 +125,13 @@ export const CodeBlockTitle = (props: React.ComponentProps<typeof ark.div>) => {
     />
   );
 };
+
+interface CodeBlockHeaderProps extends React.ComponentProps<typeof ark.div> {
+  /**
+   * The title of the code block.
+   */
+  title?: string;
+}
 
 export const CodeBlockHeader = (props: CodeBlockHeaderProps) => {
   const { title, className, children, ...rest } = props;
@@ -177,6 +204,7 @@ export const CodeBlockCopy = (
   props: Omit<React.ComponentProps<typeof Clipboard>, "value" | "children">
 ) => {
   const { className, ...rest } = props;
+
   const { code } = useCodeBlock();
 
   return (
@@ -195,354 +223,200 @@ export const CodeBlockCopy = (
   );
 };
 
-interface TokenizedCode {
+type CodeLine = string | ThemedToken[];
+
+interface HighlightProgress {
+  grammarState?: GrammarState;
+  language: BundledLanguage;
+  text: string;
   tokens: ThemedToken[][];
 }
 
-interface TokenizedCodeSnapshot extends TokenizedCode {
-  code: string;
-  isHighlighted: boolean;
-  language: CodeBlockLanguage;
-}
+let codeHighlighter: CodeHighlighter | undefined;
 
-let shikiPromise: Promise<typeof import("shiki")> | undefined;
-let highlighterPromise:
-  | Promise<HighlighterGeneric<BundledLanguage, BundledTheme>>
-  | undefined;
+const languagePromises = new Map<BundledLanguage, Promise<CodeHighlighter>>();
 
-const languageLoadPromises = new Map<BundledLanguage, Promise<void>>();
-
-let languageLoadQueue = Promise.resolve();
-
-const tokenCache = new Map<string, TokenizedCode>();
-
-const tokenPromiseCache = new Map<string, Promise<TokenizedCode>>();
-
-const getTokenCacheKey = (code: string, language: CodeBlockLanguage) =>
-  `${language}\u0000${code}`;
-
-const createRawTokens = (code: string): TokenizedCode => ({
-  tokens: code.split("\n").map((line) =>
-    line
-      ? [
-          {
-            color: "inherit",
-            content: line,
-          } as ThemedToken,
-        ]
-      : []
-  ),
-});
-
-const createRawLineTokens = (line: string) =>
-  line
-    ? [
-        {
-          color: "inherit",
-          content: line,
-        } as ThemedToken,
-      ]
-    : [];
-
-const getShiki = () => {
-  if (!shikiPromise) {
-    shikiPromise = import("shiki").catch((error: unknown) => {
-      shikiPromise = undefined;
-      throw error;
-    });
-  }
-
-  return shikiPromise;
-};
-
-const getHighlighter = () => {
-  if (!highlighterPromise) {
-    highlighterPromise = getShiki()
-      .then(({ createHighlighter }) =>
-        createHighlighter({
-          langs: [],
-          themes: ["github-light", "github-dark"],
-        })
-      )
-      .catch((error: unknown) => {
-        highlighterPromise = undefined;
-        throw error;
-      });
-  }
-
-  return highlighterPromise;
-};
-
-const loadLanguage = (language: BundledLanguage) => {
-  const cached = languageLoadPromises.get(language);
+const ensureHighlighter = (language: BundledLanguage) => {
+  const cached = languagePromises.get(language);
   if (cached) {
     return cached;
   }
 
-  const load = languageLoadQueue.then(async () => {
-    const highlighter = await getHighlighter();
-    await highlighter.loadLanguage(language);
+  const pending = getSingletonHighlighter({
+    langs: [language],
+    themes: ["github-dark", "github-light"],
+  }).then((highlighter) => {
+    codeHighlighter = highlighter;
+    return highlighter;
   });
-  languageLoadQueue = load.catch(() => undefined);
-  languageLoadPromises.set(language, load);
-  load.catch(() => {
-    languageLoadPromises.delete(language);
+  languagePromises.set(language, pending);
+  pending.catch(() => {
+    languagePromises.delete(language);
   });
-  return load;
+  return pending;
 };
 
-const cacheTokens = (key: string, tokenized: TokenizedCode) => {
-  if (tokenCache.size >= TOKEN_CACHE_LIMIT) {
-    const oldestKey = tokenCache.keys().next().value;
-    if (oldestKey) {
-      tokenCache.delete(oldestKey);
-      tokenPromiseCache.delete(oldestKey);
-    }
-  }
-  tokenCache.set(key, tokenized);
-};
-
-const getTokens = (code: string, language: BundledLanguage) => {
-  const key = getTokenCacheKey(code, language);
-  const cachedPromise = tokenPromiseCache.get(key);
-  if (cachedPromise) {
-    return cachedPromise;
-  }
-
-  const cachedTokens = tokenCache.get(key);
-  if (cachedTokens) {
-    const cached = Promise.resolve(cachedTokens);
-    tokenPromiseCache.set(key, cached);
-    return cached;
-  }
-
-  const tokens = (async () => {
-    try {
-      await loadLanguage(language);
-      const highlighter = await getHighlighter();
-      const result = highlighter.codeToTokens(code, {
-        lang: language,
-        themes: { dark: "github-dark", light: "github-light" },
-      });
-      const tokenized = { tokens: result.tokens };
-      cacheTokens(key, tokenized);
-      return tokenized;
-    } catch {
-      return createRawTokens(code);
-    }
-  })();
-  tokenPromiseCache.set(key, tokens);
-  return tokens;
-};
-
-const isHighlightedCodeCurrent = (
-  latestCode: string,
-  highlightedCode: string,
-  streaming: boolean
+const tokenizeCode = (
+  highlighter: CodeHighlighter,
+  code: string,
+  language: BundledLanguage,
+  grammarState?: GrammarState
 ) =>
-  streaming
-    ? latestCode === highlightedCode || latestCode.startsWith(highlightedCode)
-    : latestCode === highlightedCode;
+  highlighter.codeToTokens(code, {
+    defaultColor: false,
+    grammarState,
+    lang: language,
+    themes: CODE_THEMES,
+  });
 
-const useCodeTokens = (
+const highlightStreamingCode = (
+  highlighter: CodeHighlighter,
+  code: string,
+  language: BundledLanguage,
+  progress: HighlightProgress | null
+) => {
+  let current =
+    progress?.language === language && code.startsWith(progress.text)
+      ? progress
+      : {
+          language,
+          text: "",
+          tokens: [],
+        };
+
+  const end = code.lastIndexOf("\n") + 1;
+
+  if (end > current.text.length) {
+    const slice = code.slice(current.text.length, end - 1);
+    const result = tokenizeCode(
+      highlighter,
+      slice,
+      language,
+      current.grammarState
+    );
+    current = {
+      grammarState: result.grammarState,
+      language,
+      text: code.slice(0, end),
+      tokens: [...current.tokens, ...result.tokens],
+    };
+  }
+
+  const tail = code.slice(end);
+  const tailTokens = tail
+    ? tokenizeCode(highlighter, tail, language, current.grammarState).tokens
+    : [];
+  let tokens = [...current.tokens, ...tailTokens];
+
+  if (!tail && code.endsWith("\n")) {
+    tokens = [...tokens, []];
+  }
+
+  if (!code) {
+    tokens = [[]];
+  }
+
+  return { progress: current, tokens };
+};
+
+const readCodeLines = (
+  code: string,
+  language: CodeBlockLanguage,
+  isStreaming: boolean,
+  highlighter: CodeHighlighter | undefined,
+  progress: HighlightProgress | null
+) => {
+  if (!highlighter || language === "text") {
+    return {
+      lines: code.split("\n"),
+      progress: null,
+    };
+  }
+
+  if (!isStreaming) {
+    return {
+      lines: tokenizeCode(highlighter, code, language).tokens,
+      progress: null,
+    };
+  }
+
+  const highlighted = highlightStreamingCode(
+    highlighter,
+    code,
+    language,
+    progress
+  );
+
+  return {
+    lines: highlighted.tokens,
+    progress: highlighted.progress,
+  };
+};
+
+const useCodeLines = (
   code: string,
   language: CodeBlockLanguage,
   isStreaming: boolean
 ) => {
-  const [snapshot, setSnapshot] = React.useState<TokenizedCodeSnapshot>(() => ({
-    code,
-    isHighlighted: false,
-    language,
-    tokens: createRawTokens(code).tokens,
-  }));
-  const codeRef = React.useRef(code);
-  const languageRef = React.useRef(language);
-  const isStreamingRef = React.useRef(isStreaming);
-  const lastHighlightedCodeRef = React.useRef<string | null>(null);
-
-  React.useEffect(() => {
-    codeRef.current = code;
-    languageRef.current = language;
-  }, [code, language]);
-
-  React.useEffect(() => {
-    isStreamingRef.current = isStreaming;
-  }, [isStreaming]);
-
-  const highlight = React.useCallback(
-    (codeToHighlight: string, languageToHighlight: CodeBlockLanguage) => {
-      lastHighlightedCodeRef.current = codeToHighlight;
-
-      if (languageToHighlight === "text") {
-        setSnapshot({
-          code: codeToHighlight,
-          isHighlighted: true,
-          language: languageToHighlight,
-          tokens: createRawTokens(codeToHighlight).tokens,
-        });
-        return;
-      }
-
-      getTokens(codeToHighlight, languageToHighlight).then(({ tokens }) => {
-        const latestCode = codeRef.current;
-        const streaming = isStreamingRef.current;
-
-        if (
-          languageRef.current !== languageToHighlight ||
-          !isHighlightedCodeCurrent(latestCode, codeToHighlight, streaming)
-        ) {
-          return;
-        }
-
-        setSnapshot((current) => {
-          if (streaming) {
-            if (
-              current.language === languageToHighlight &&
-              ((current.code.length > codeToHighlight.length &&
-                current.code.startsWith(codeToHighlight)) ||
-                (current.code === codeToHighlight && current.isHighlighted))
-            ) {
-              return current;
-            }
-          } else if (
-            current.language === languageToHighlight &&
-            current.code === codeToHighlight &&
-            current.isHighlighted
-          ) {
-            return current;
-          }
-
-          return {
-            code: codeToHighlight,
-            isHighlighted: true,
-            language: languageToHighlight,
-            tokens,
-          };
-        });
-      });
-    },
-    []
+  const [loadedLanguage, setLoadedLanguage] =
+    React.useState<BundledLanguage | null>(null);
+  const [progress, setProgress] = React.useState<HighlightProgress | null>(
+    null
   );
 
   React.useEffect(() => {
-    if (!isStreaming || language === "text") {
-      highlight(code, language);
-    }
-  }, [code, highlight, isStreaming, language]);
-
-  React.useEffect(() => {
-    if (!isStreaming || language === "text") {
+    if (language === "text") {
       return;
     }
 
-    highlight(codeRef.current, language);
-    const interval = window.setInterval(() => {
-      const currentCode = codeRef.current;
-      if (currentCode === lastHighlightedCodeRef.current) {
-        return;
-      }
-      highlight(currentCode, languageRef.current);
-    }, STREAM_HIGHLIGHT_INTERVAL);
+    let cancelled = false;
+    ensureHighlighter(language)
+      .then(() => {
+        if (!cancelled) {
+          setLoadedLanguage(language);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setLoadedLanguage(null);
+        }
+      });
 
-    return () => window.clearInterval(interval);
-  }, [highlight, isStreaming, language]);
+    return () => {
+      cancelled = true;
+    };
+  }, [language]);
 
-  return snapshot;
-};
-
-const getDisplayedTokens = (
-  code: string,
-  language: CodeBlockLanguage,
-  snapshot: TokenizedCodeSnapshot
-) => {
-  if (snapshot.language !== language || !code.startsWith(snapshot.code)) {
-    return createRawTokens(code).tokens;
-  }
-
-  if (snapshot.code === code) {
-    return snapshot.tokens;
-  }
-
-  const tokens = snapshot.tokens.map((line) => [...line]);
-  const suffixLines = code.slice(snapshot.code.length).split("\n");
-  const firstSuffixLine = suffixLines.shift() ?? "";
-
-  if (!tokens.length) {
-    tokens.push([]);
-  }
-  tokens.at(-1)?.push(...createRawLineTokens(firstSuffixLine));
-  tokens.push(...suffixLines.map(createRawLineTokens));
-
-  return tokens;
-};
-
-const ITALIC = 1;
-const BOLD = 2;
-const UNDERLINE = 4;
-
-const hasFontStyle = (fontStyle: number | undefined, flag: number) =>
-  Math.trunc((fontStyle ?? 0) / flag) % 2 === 1;
-
-const tokenKeys = new WeakMap<ThemedToken, number>();
-let nextTokenKey = 0;
-
-const getTokenKey = (token: ThemedToken) => {
-  const existingKey = tokenKeys.get(token);
-
-  if (existingKey) {
-    return existingKey;
-  }
-
-  nextTokenKey += 1;
-  tokenKeys.set(token, nextTokenKey);
-  return nextTokenKey;
-};
-
-const CodeToken = (props: { token: ThemedToken }) => {
-  const { token } = props;
-
-  return (
-    <span
-      className={cn(
-        "dark:bg-(--shiki-dark-bg)! dark:text-(--shiki-dark)!",
-        "[font-style:var(--shiki-light-font-style,normal)]",
-        "dark:[font-style:var(--shiki-dark-font-style,var(--shiki-light-font-style,normal))]",
-        "font-(--shiki-light-font-weight,inherit)",
-        "dark:font-(--shiki-dark-font-weight,var(--shiki-light-font-weight,inherit))",
-        "[text-decoration:var(--shiki-light-text-decoration,none)]",
-        "dark:[text-decoration:var(--shiki-dark-text-decoration,var(--shiki-light-text-decoration,none))]"
-      )}
-      style={
-        {
-          backgroundColor: token.bgColor,
-          color: token.color === "inherit" ? undefined : token.color,
-          fontStyle: hasFontStyle(token.fontStyle, ITALIC)
-            ? "italic"
-            : undefined,
-          fontWeight: hasFontStyle(token.fontStyle, BOLD) ? "bold" : undefined,
-          textDecoration: hasFontStyle(token.fontStyle, UNDERLINE)
-            ? "underline"
-            : undefined,
-          ...token.htmlStyle,
-        } as React.CSSProperties
-      }
-    >
-      {token.content}
-    </span>
+  const highlighter =
+    language !== "text" && loadedLanguage === language
+      ? codeHighlighter
+      : undefined;
+  const highlighted = readCodeLines(
+    code,
+    language,
+    isStreaming,
+    highlighter,
+    progress?.language === language ? progress : null
   );
+
+  if (highlighted.progress !== progress) {
+    setProgress(highlighted.progress);
+  }
+
+  return highlighted.lines;
 };
 
 interface CodeBlockPreProps
   extends Omit<React.ComponentProps<typeof ark.pre>, "children"> {
   highlightedLines: number[];
+  lines: CodeLine[];
   showLineNumbers: boolean;
-  tokens: ThemedToken[][];
 }
 
 interface CodeBlockContentProps
   extends Omit<
     CodeBlockPreProps,
-    "tokens" | "highlightedLines" | "showLineNumbers"
+    "lines" | "highlightedLines" | "showLineNumbers"
   > {
   children?: string;
   code?: string;
@@ -552,9 +426,29 @@ interface CodeBlockContentProps
   showLineNumbers?: boolean;
 }
 
+const renderCodeLine = (line: CodeLine, lineNumber: number) => {
+  if (typeof line === "string") {
+    return line || "\n";
+  }
+
+  if (!line.length) {
+    return "\n";
+  }
+
+  return line.map((token) => (
+    <span
+      key={`${lineNumber}:${token.offset}`}
+      style={token.htmlStyle as React.CSSProperties | undefined}
+    >
+      {token.content}
+    </span>
+  ));
+};
+
 const CodeBlockPre = (props: CodeBlockPreProps) => {
-  const { className, highlightedLines, showLineNumbers, tokens, ...rest } =
+  const { className, highlightedLines, lines, showLineNumbers, ...rest } =
     props;
+    
   const highlightedLineSet = React.useMemo(
     () => new Set(highlightedLines),
     [highlightedLines]
@@ -581,7 +475,7 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
         )}
         data-slot="code-block-code"
       >
-        {tokens.map((line, index) => {
+        {lines.map((line, index) => {
           const lineNumber = index + 1;
           const highlighted = highlightedLineSet.has(lineNumber);
 
@@ -635,17 +529,18 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
                   showLineNumbers
                     ? "ps-(--code-surface-inline-padding) pe-(--code-surface-inline-padding)"
                     : "px-(--code-surface-inline-padding)",
-                  highlighted && !showLineNumbers && "ps-2.5"
+                  highlighted && !showLineNumbers && "ps-2.5",
+                  "[&_span]:bg-(--shiki-light-bg) dark:[&_span]:bg-(--shiki-dark-bg)",
+                  "[&_span]:text-(--shiki-light) dark:[&_span]:text-(--shiki-dark)",
+                  "[&_span]:[font-style:var(--shiki-light-font-style,normal)]",
+                  "dark:[&_span]:[font-style:var(--shiki-dark-font-style,var(--shiki-light-font-style,normal))]",
+                  "[&_span]:font-(--shiki-light-font-weight,inherit)",
+                  "dark:[&_span]:font-(--shiki-dark-font-weight,var(--shiki-light-font-weight,inherit))",
+                  "[&_span]:[text-decoration:var(--shiki-light-text-decoration,none)]",
+                  "dark:[&_span]:[text-decoration:var(--shiki-dark-text-decoration,var(--shiki-light-text-decoration,none))]"
                 )}
               >
-                {line.length
-                  ? line.map((token) => (
-                      <CodeToken
-                        key={`${lineNumber}:${getTokenKey(token)}`}
-                        token={token}
-                      />
-                    ))
-                  : "\u00a0"}
+                {renderCodeLine(line, lineNumber)}
               </span>
             </span>
           );
@@ -676,15 +571,14 @@ export const CodeBlockContent = (props: CodeBlockContentProps) => {
     codeProp ?? (typeof children === "string" ? children : contextCode);
   const language = languageProp ?? contextLanguage;
   const isStreaming = isStreamingProp ?? contextIsStreaming;
-  const snapshot = useCodeTokens(code, language, isStreaming);
-  const tokens = getDisplayedTokens(code, language, snapshot);
+  const lines = useCodeLines(code, language, isStreaming);
 
   return (
     <ScrollArea className="flex-1" dir="ltr" overscrollContain>
       <CodeBlockPre
         highlightedLines={highlightedLines}
+        lines={lines}
         showLineNumbers={showLineNumbers}
-        tokens={tokens}
         {...rest}
       />
     </ScrollArea>

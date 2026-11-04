@@ -337,6 +337,7 @@ const AssistantActions = () => (
 
 const ChatMessageItem = (props: { message: ChatMessage }) => {
   const { message } = props;
+  
   const isUser = message.role === "user";
   const firstSource = message.sources?.[0];
 

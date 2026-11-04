@@ -113,7 +113,7 @@ const ChartPieInteractive = () => {
               >
                 <div className="flex items-center gap-2 text-xs">
                   <span
-                    className="flex h-3 w-3 shrink-0 rounded-xs"
+                    className="flex size-3 shrink-0 rounded-xs"
                     style={{
                       backgroundColor: `var(--color-${item.value})`,
                     }}
@@ -149,6 +149,7 @@ const ChartPieInteractive = () => {
                   key={entry.month}
                 />
               ))}
+              {/* biome-ignore lint/a11y/noLabelWithoutControl: chart label, not a form label */}
               <Label
                 content={({ viewBox }) => {
                   if (viewBox && "cx" in viewBox && "cy" in viewBox) {

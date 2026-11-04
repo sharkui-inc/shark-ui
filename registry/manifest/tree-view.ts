@@ -5,10 +5,8 @@ const dependencies = ["@ark-ui/react", "lucide-react", "tailwind-variants"];
 
 const cssVars = {
   theme: {
-    "--animate-collapse-down":
-      "collapse-down 200ms ease-out",
-    "--animate-collapse-up":
-      "collapse-up 200ms ease-out",
+    "--animate-collapse-down": "collapse-down 200ms ease-out",
+    "--animate-collapse-up": "collapse-up 200ms ease-out",
   },
 };
 

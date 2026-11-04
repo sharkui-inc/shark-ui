@@ -35,12 +35,15 @@ const Example = () => (
   </div>
 );
 
-const ChatRow = (props: {
+interface ChatRowProps {
   align?: "end" | "start";
   text: string;
   variant?: "default" | "secondary";
-}) => {
+}
+
+const ChatRow = (props: ChatRowProps) => {
   const { align = "start", text, variant = "default" } = props;
+  
   const [open, setOpen] = React.useState(false);
   const [reaction, setReaction] = React.useState<string[]>([]);
   const emoji = collection.items.find((item) =>

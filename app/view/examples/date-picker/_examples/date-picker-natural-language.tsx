@@ -74,7 +74,8 @@ const parseNaturalLanguage = (value: string) => {
   return date ? parseDate(date) : undefined;
 };
 
-const relativeDatePattern = /^in (\d+) (day|week|month|year)s?$/u;
+const relativeDatePattern =
+  /^in (?<count>\d+) (?<unit>day|week|month|year)s?$/u;
 
 const parseDateString = (value: string): Date | undefined => {
   const trimmed = value.trim().toLowerCase();

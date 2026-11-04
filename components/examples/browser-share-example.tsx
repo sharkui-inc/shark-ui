@@ -98,6 +98,7 @@ export const BrowserShareExample = (props: React.ComponentProps<"div">) => {
                   strokeWidth={5}
                 />
               ))}
+              {/* biome-ignore lint/a11y/noLabelWithoutControl: chart label, not a form label */}
               <Label
                 content={({ viewBox }) =>
                   viewBox && "cx" in viewBox && "cy" in viewBox ? (

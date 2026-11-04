@@ -191,7 +191,7 @@ export const ImageCropperGrid = (
         "pointer-events-none",
         "transition-opacity duration-200 ease-out",
         "data-[axis=horizontal]:inset-[33.33%_0] data-[axis=horizontal]:border-t data-[axis=horizontal]:border-b data-[axis=horizontal]:border-white/32",
-        "data-[axis=vertical]:inset-0_[33.33%] data-[axis=vertical]:border-white/32 data-[axis=vertical]:border-r data-[axis=vertical]:border-l",
+        "data-[axis=vertical]:inset-[0_33.33%] data-[axis=vertical]:border-r data-[axis=vertical]:border-l data-[axis=vertical]:border-white/32",
         "data-dragging:opacity-100",
         "data-panning:opacity-100",
         "motion-reduce:transition-none",

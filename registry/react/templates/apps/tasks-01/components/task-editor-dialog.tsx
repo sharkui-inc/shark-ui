@@ -23,6 +23,7 @@ interface TaskEditorDialogProps {
 
 export const TaskEditorDialog = (props: TaskEditorDialogProps) => {
   const { draft, editor, onDraftChange, onOpenChange, onSubmit } = props;
+ 
   const isCreating = editor?.mode === "create";
 
   return (

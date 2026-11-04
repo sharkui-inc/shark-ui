@@ -1,13 +1,7 @@
 import { ArrowRightIcon } from "lucide-react";
 import type { Metadata } from "next";
-import { createMetadata } from "@/lib/metadata";
-
-export const metadata: Metadata = createMetadata({
-  title: "Landing Template",
-  url: "/templates/landing",
-});
-
 import Link from "next/link";
+import { createMetadata } from "@/lib/metadata";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -17,6 +11,11 @@ import {
   CardTitle,
 } from "@/registry/react/components/card";
 import { Separator } from "@/registry/react/components/separator";
+
+export const metadata: Metadata = createMetadata({
+  title: "Landing Template",
+  url: "/templates/landing",
+});
 
 const FEATURES = [
   {

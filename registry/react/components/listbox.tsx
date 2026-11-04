@@ -46,6 +46,7 @@ export const ListboxLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkListbox.Label
       className={cn(fieldLabelVariants(), className)}
       data-slot="listbox-label"
@@ -56,6 +57,7 @@ export const ListboxLabel = (
 
 export const ListboxInput = (props: React.ComponentProps<typeof Input>) => {
   const { "aria-labelledby": ariaLabelledBy, ...rest } = props;
+ 
   const listbox = useListboxContext();
   const labelId = listbox.getLabelProps().id;
   const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
@@ -274,6 +276,7 @@ export const ListboxItemIndicator = (
   props: React.ComponentProps<typeof ArkListbox.ItemIndicator>
 ) => {
   const { className, children, ...rest } = props;
+  
   const { indicator } = menuItemIndicatorVariants();
 
   return (

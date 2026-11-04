@@ -73,6 +73,7 @@ const CatalogNavigation = (props: CatalogNavigationProps) => {
     getBlockHref,
     onNavigate,
   } = props;
+
   const visibleCategories = categories.map((category) => ({
     category,
     categoryBlocks: blocks.filter(
@@ -148,6 +149,7 @@ export const BlocksBrowser = (props: BlocksBrowserProps) => {
     categorySlug,
     isDetailPage = false,
   } = props;
+
   const [navigationOpen, setNavigationOpen] = React.useState(false);
 
   const visibleBlocks = blocks.filter(

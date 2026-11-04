@@ -1,7 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@registry/react/components/button";
+import { Controller, useForm } from "react-hook-form";
+import * as z from "zod";
+import { Button } from "@/registry/react/components/button";
 import {
   Card,
   CardContent,
@@ -9,7 +11,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@registry/react/components/card";
+} from "@/registry/react/components/card";
 import {
   Field,
   FieldContent,
@@ -17,11 +19,9 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@registry/react/components/field";
-import { Switch } from "@registry/react/components/switch";
-import { toast } from "@registry/react/components/toast";
-import { Controller, useForm } from "react-hook-form";
-import * as z from "zod";
+} from "@/registry/react/components/field";
+import { Switch } from "@/registry/react/components/switch";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({

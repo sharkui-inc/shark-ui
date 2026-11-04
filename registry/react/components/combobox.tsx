@@ -5,6 +5,7 @@ import {
   type ComboboxList as ArkComboboxList,
   useComboboxContext as useArkComboboxContext,
 } from "@ark-ui/react/combobox";
+import { ark } from "@ark-ui/react/factory";
 import { Portal } from "@ark-ui/react/portal";
 import { CheckIcon, ChevronsUpDownIcon, XIcon } from "lucide-react";
 import type React from "react";
@@ -219,6 +220,7 @@ export const ComboboxButtonTrigger = (props: ComboboxButtonTriggerProps) => {
     children,
     ...rest
   } = props;
+
   const { hasSelectedItems, valueAsString } = useComboboxContext();
   const label = children ?? (hasSelectedItems ? valueAsString : placeholder);
   const ariaLabel =
@@ -305,25 +307,17 @@ export const ComboboxChipsInput = (
   );
 };
 
-interface ComboboxChipProps {
-  children: React.ReactNode;
-  className?: string;
-  removeProps?: React.ComponentProps<"button">;
+interface ComboboxChipProps extends React.ComponentProps<typeof ark.span> {
   value: string;
 }
 
 export const ComboboxChip = (props: ComboboxChipProps) => {
-  const { children, className, removeProps, value } = props;
+  const { children, className, value, ...rest } = props;
+
   const { clearValue, disabled } = useComboboxContext();
-  const {
-    className: removeClassName,
-    onClick,
-    type = "button",
-    ...removeRest
-  } = removeProps ?? {};
 
   return (
-    <span
+    <ark.span
       className={cn(
         "h-5.5 max-w-full",
         "in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5",
@@ -337,6 +331,7 @@ export const ComboboxChip = (props: ComboboxChipProps) => {
         className
       )}
       data-slot="combobox-chip"
+      {...rest}
     >
       <span className="truncate">{children}</span>
       {disabled ? null : (
@@ -349,24 +344,18 @@ export const ComboboxChip = (props: ComboboxChipProps) => {
             "shrink-0",
             "text-muted-foreground",
             "[&_svg:not([class*='size-'])]:size-2 in-data-[size=lg]:[&_svg:not([class*='size-'])]:size-2.5 in-data-[size=sm]:[&_svg:not([class*='size-'])]:size-1.5",
-            "hover:text-foreground",
-            removeClassName
+            "hover:text-foreground"
           )}
-          size="icon-xs"
-          {...removeRest}
-          onClick={(event) => {
-            onClick?.(event);
-
-            if (!event.defaultPrevented) {
-              clearValue(value);
-            }
+          onClick={() => {
+            clearValue(value);
           }}
-          type={type}
+          size="icon-xs"
+          type="button"
         >
           <XIcon aria-hidden />
         </InputGroupButton>
       )}
-    </span>
+    </ark.span>
   );
 };
 
@@ -479,6 +468,7 @@ interface ComboboxItemProps
 
 export const ComboboxItem = (props: ComboboxItemProps) => {
   const { showIndicator = true, className, children, ...rest } = props;
+
   const { item, indicator } = menuItemIndicatorVariants();
 
   return (

@@ -81,7 +81,7 @@ const ChartTooltipAdvanced = () => {
                   formatter={(value, name, item, index) => (
                     <>
                       <div
-                        className="h-2.5 w-2.5 shrink-0 rounded-sm bg-(--color-bg)"
+                        className="size-2.5 shrink-0 rounded-sm bg-(--color-bg)"
                         style={
                           {
                             "--color-bg": `var(--color-${name})`,

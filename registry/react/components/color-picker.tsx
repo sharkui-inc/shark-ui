@@ -21,6 +21,7 @@ export const ColorPickerLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkColorPicker.Label
       className={cn(fieldLabelVariants(), className)}
       data-slot="color-picker-label"
@@ -178,6 +179,7 @@ export const ColorPickerSlider = (
   props: React.ComponentProps<typeof ArkColorPicker.ChannelSlider>
 ) => {
   const { className, children, ...rest } = props;
+
   const { dragging } = useColorPickerContext();
 
   return (
@@ -414,6 +416,7 @@ export const ColorPickerAreaThumb = (
   props: React.ComponentProps<typeof ArkColorPicker.AreaThumb>
 ) => {
   const { className, ...rest } = props;
+  
   const { dragging } = useColorPickerContext();
 
   return (

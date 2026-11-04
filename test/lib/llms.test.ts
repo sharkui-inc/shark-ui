@@ -16,7 +16,7 @@ const buttonComponentLink =
   /Button\]\(https:\/\/example\.test\/docs\/components\/button\.md\)/u;
 const fieldComponentLink =
   /Field\]\(https:\/\/example\.test\/docs\/components\/field\.md\)/u;
-const markdownLink = /\]\((https:\/\/[^)]+)\)/gu;
+const markdownLink = /\]\((?<url>https:\/\/[^)]+)\)/gu;
 
 const getMarkdownLinks = (content: string) =>
   [...content.matchAll(markdownLink)].map((match) => match[1]);

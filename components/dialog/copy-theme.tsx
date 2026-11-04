@@ -18,6 +18,7 @@ export const CopyThemeCodeDialog = (
   props: React.ComponentProps<typeof Dialog>
 ) => {
   const { children, ...rest } = props;
+
   const cfg = useConfig();
 
   const cssCode = createCssVars({
@@ -53,6 +54,7 @@ const ThemeCodeFigure = (props: {
   title: string;
 }) => {
   const { code, language, title } = props;
+  
   const lines = code.split("\n");
 
   return (

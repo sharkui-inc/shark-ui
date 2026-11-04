@@ -16,6 +16,7 @@ export const MailPane = (props: {
   query: string;
 }) => {
   const { composeMode, onComposeChange, onSearchChange, query } = props;
+  
   const [isStarred, setIsStarred] = React.useState(
     selectedEmail ? STARRED_IDS.includes(selectedEmail.id) : false
   );

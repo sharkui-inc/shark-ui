@@ -1,8 +1,4 @@
 import {
-  MessageBubble,
-  MessageBubbleContent,
-} from "@registry/react/components/message-bubble";
-import {
   CopyIcon,
   RefreshCcwIcon,
   ThumbsDownIcon,
@@ -15,6 +11,10 @@ import {
   MessageContent,
   MessageFooter,
 } from "@/registry/react/components/message";
+import {
+  MessageBubble,
+  MessageBubbleContent,
+} from "@/registry/react/components/message-bubble";
 
 const Example = () => (
   <div className="flex w-full max-w-md flex-col gap-6">

@@ -2,7 +2,6 @@
 
 import { useFilter, useListCollection } from "@ark-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "@registry/react/components/toast";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 import {
@@ -29,6 +28,7 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/registry/react/components/field";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });

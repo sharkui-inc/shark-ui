@@ -67,6 +67,7 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
     onProjectsSelect,
     onViewChange,
   } = props;
+  
   const [query, setQuery] = React.useState("");
 
   const filtered = React.useMemo(() => {

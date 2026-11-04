@@ -327,6 +327,7 @@ export const DataTablePaginationSelectedCount = (
   props: DataTablePaginationSelectedCountProps
 ) => {
   const { className, ...rest } = props;
+
   const { table } = useDataTablePagination();
 
   const rowCount = table.getRowCount();
@@ -368,6 +369,7 @@ export const DataTablePaginationRowsPerPage = (
   props: DataTablePaginationRowsPerPageProps
 ) => {
   const { className, ...rest } = props;
+
   const { table } = useDataTablePagination();
   const { pageSize } = table.state.pagination;
 
@@ -407,6 +409,7 @@ export const DataTablePaginationPageInfo = (
   props: DataTablePaginationPageInfoProps
 ) => {
   const { className, ...rest } = props;
+
   const { table } = useDataTablePagination();
 
   const pageCount = table.getPageCount();
@@ -440,6 +443,7 @@ export const DataTablePaginationNavigation = (
   props: DataTablePaginationNavigationProps
 ) => {
   const { className, ...rest } = props;
+  
   const { table } = useDataTablePagination();
 
   const pageCount = table.getPageCount();

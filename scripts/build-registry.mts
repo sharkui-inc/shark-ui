@@ -65,7 +65,7 @@ export const KINDS = {
 export const REGISTRY_KINDS = Object.keys(KINDS) as RegistryKind[];
 
 const LOCALHOST_RE = /localhost|127\.0\.0\.1/iu;
-const REGISTRY_ITEM_URL_RE = /\/r\/([^/]+)\.json$/u;
+const REGISTRY_ITEM_URL_RE = /\/r\/(?<item>[^/]+)\.json$/u;
 const CWD = process.cwd();
 const PUBLIC_DIR = join(CWD, "public", "r");
 const TRAILING_SLASH = /\/$/u;

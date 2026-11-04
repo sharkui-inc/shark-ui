@@ -1,3 +1,4 @@
+import { Button } from "@/registry/react/components/button";
 import {
   Context,
   ContextBody,
@@ -7,13 +8,22 @@ import {
   ContextMeter,
   ContextTitle,
   ContextTrigger,
+  ContextTriggerLabel,
   ContextUsageRow,
 } from "@/registry/react/components/context";
 
 const ContextDemo = () => (
   <div className="flex justify-center">
     <Context costLabel="$0.042" maxTokens={128_000} usedTokens={18_420}>
-      <ContextTrigger />
+      <ContextTrigger asChild>
+        <Button
+          className="text-muted-foreground font-normal"
+          size="sm"
+          variant="ghost"
+        >
+          <ContextTriggerLabel />
+        </Button>
+      </ContextTrigger>
       <ContextContent>
         <ContextHeader>
           <ContextTitle showCloseButton>Context Usage</ContextTitle>

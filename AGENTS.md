@@ -1,6 +1,8 @@
 # Shark UI
 
-Ark UI, Tailwind CSS v4, Next.js. https://shark-ui.com. Before editing source, examples, docs, or manifests: [`CODE_STYLE.md`](CODE_STYLE.md). Composition: [`skills/shark-ui/SKILL.md`](skills/shark-ui/SKILL.md). Format/lint: `biome.json`.
+Ark UI, Tailwind CSS v4, Next.js. https://shark-ui.com. Style: [`CODE_STYLE.md`](CODE_STYLE.md). Composition: [`skills/shark-ui/SKILL.md`](skills/shark-ui/SKILL.md). Lint: `biome.json`.
+
+## Map
 
 - Docs: `content/docs/{components,ai-components,helpers,utilities,hooks}/<name>.mdx`
 - Examples: `registry/react/examples/<name>/example-*.tsx`
@@ -8,12 +10,12 @@ Ark UI, Tailwind CSS v4, Next.js. https://shark-ui.com. Before editing source, e
 - Manifests: `registry/manifest/<name>.ts` (`registryDependencies`: full registry JSON URLs)
 - LLM: `app/(llms)/`, `lib/llms.ts`
 
-## Boundaries
+## Do not
 
-- Do not hand-edit `public/r/*.json` (from manifests) or `styles/themes.css` (from `scripts/build-themes.mts`).
-- No component `*.test.tsx` / `*.spec.tsx` unless asked. Helper tests: `test/` (mirror source); harness: `test/setup-dom.ts`.
-- Do not run `pnpm test`, `pnpm typecheck`, `pnpm registry:build`, `pnpm theme:build`, or any browser (Playwright, MCP, screenshots, localhost) unless the user names that action. `ok` / `implement` is not approval.
-- Lint OK: `pnpm lint:fix`, `pnpm lint:check`. `pnpm typecheck` runs `next build`.
+- Hand-edit generated files: `public/r/*.json` (from manifests), `styles/themes.css` (from `scripts/build-themes.mts`).
+- Add component `*.test.tsx` / `*.spec.tsx` unless asked. Helper tests: `test/` (mirror source); harness: `test/setup-dom.ts`.
+- Run `pnpm test`, `pnpm typecheck`, `pnpm registry:build`, `pnpm theme:build`, or any browser (Playwright, MCP, screenshots, localhost) unless the user names that action. `ok` / `implement` is not approval.
+- Lint is allowed: `pnpm lint:fix`, `pnpm lint:check`. `pnpm typecheck` runs `next build`.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

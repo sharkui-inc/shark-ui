@@ -20,6 +20,7 @@ import { SettingsTextField } from "./settings-fields";
 
 export const SettingsBillingPage = (props: { onSave: () => void }) => {
   const { onSave } = props;
+  
   const [billingEmail, setBillingEmail] = React.useState("billing@onda.io");
 
   return (

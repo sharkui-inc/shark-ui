@@ -1,6 +1,5 @@
 "use client";
 
-import { Input } from "@registry/react/components/input";
 import {
   BookOpenIcon,
   BotIcon,
@@ -10,6 +9,7 @@ import {
   ShapesIcon,
 } from "lucide-react";
 import { IconTile } from "@/registry/react/components/icon-tile";
+import { Input } from "@/registry/react/components/input";
 import {
   Sidebar,
   SidebarContent,

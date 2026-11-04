@@ -59,14 +59,17 @@ import {
   promptActions,
 } from "../_data/chat-demo";
 
-export const ChatPromptComposer = (props: {
+interface ChatPromptComposerProps {
   onStop: () => void;
   onSubmit: () => void;
   status: PromptInputStatus;
   usedTokens: number;
   value: string;
-}) => {
+}
+
+export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
   const { onStop, onSubmit, status, usedTokens, value } = props;
+
   const [model, setModel] = React.useState<string[]>([MODEL_OPTIONS[0].value]);
   const [effort, setEffort] = React.useState(["medium"]);
   const [access, setAccess] = React.useState(["full"]);
@@ -191,8 +194,15 @@ export const ChatPromptComposer = (props: {
               positioning={{ placement: "top-end" }}
               usedTokens={usedTokens}
             >
-              <ContextTrigger aria-label="Context usage" size="icon-sm">
-                <ContextIcon />
+              <ContextTrigger asChild>
+                <Button
+                  aria-label="Context usage"
+                  className="text-muted-foreground font-normal"
+                  size="icon-sm"
+                  variant="ghost"
+                >
+                  <ContextIcon />
+                </Button>
               </ContextTrigger>
               <ContextContent>
                 <ContextHeader>

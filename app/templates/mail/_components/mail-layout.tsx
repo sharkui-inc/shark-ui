@@ -13,6 +13,7 @@ export const MailLayout = (props: {
   sidebar: React.ReactNode;
 }) => {
   const { content, list, sidebar } = props;
+  
   const isNarrow = React.useSyncExternalStore(
     (callback) => {
       const media = window.matchMedia("(max-width: 639px)");

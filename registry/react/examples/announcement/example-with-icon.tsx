@@ -1,9 +1,9 @@
-import { Badge } from "@registry/react/components/badge";
 import { RocketIcon } from "lucide-react";
 import {
   Announcement,
   AnnouncementTitle,
 } from "@/registry/react/components/announcement";
+import { Badge } from "@/registry/react/components/badge";
 
 const Example = () => (
   <Announcement>

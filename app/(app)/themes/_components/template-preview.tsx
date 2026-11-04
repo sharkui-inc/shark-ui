@@ -108,6 +108,7 @@ export const TemplatePreviewHost = (props: TemplatePreviewHostProps) => {
                 return next;
               });
             }}
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"
             src={frame.src}
             title={`${frame.label} preview`}
           />

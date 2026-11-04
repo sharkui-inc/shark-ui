@@ -83,7 +83,8 @@ export const TourOverlay = (
     <ArkTour.Backdrop
       className={cn(
         dialogOverlayVariants(),
-        "z-[calc(100+var(--layer-index,0)+var(--tour-layer))]",
+        "[--tour-z-index:calc(100+var(--layer-index,0))]",
+        "z-[calc(var(--tour-layer)+var(--tour-z-index))]",
         "duration-initial",
         className
       )}
@@ -95,7 +96,8 @@ export const TourOverlay = (
 
 export const tourPositionerVariants = tv({
   base: [
-    "z-[calc(100+var(--layer-index,0)+var(--tour-layer)+1)]",
+    "[--tour-z-index:calc(100+var(--layer-index,0))]",
+    "z-[calc(var(--tour-layer)+var(--tour-z-index))]",
     "data-[type=dialog]:fixed data-[type=dialog]:inset-0 data-[type=dialog]:p-4",
     "data-[type=tooltip]:absolute",
     "data-[type=tooltip]:max-w-[calc(100dvw-1rem)] data-[type=tooltip]:max-sm:min-w-0!",
@@ -153,9 +155,9 @@ export const tourContentVariants = tv({
   },
   slots: {
     content: [
-      "[--space:--spacing(4)]",
+      "[--space:--spacing(4)] [--tour-z-index:calc(100+var(--layer-index,0))]",
       "relative",
-      "z-[calc(100+var(--layer-index,0)+var(--tour-layer))]",
+      "z-[calc(var(--tour-layer)+var(--tour-z-index))]",
       "w-full max-w-md",
       "data-[type=tooltip]:w-fit data-[type=tooltip]:max-w-[min(28rem,calc(100dvw-2rem))] data-[type=tooltip]:max-sm:min-w-0 data-[type=tooltip]:sm:min-w-xs",
       "outline-hidden",
@@ -318,7 +320,8 @@ export const TourSpotlight = (
   return (
     <ArkTour.Spotlight
       className={cn(
-        "z-[calc(100+var(--layer-index,0)+var(--tour-layer))]",
+        "[--tour-z-index:calc(100+var(--layer-index,0))]",
+        "z-[calc(var(--tour-layer)+var(--tour-z-index))]",
         "border-ring/64 ring-ring/24 border-2 ring-2",
         className
       )}

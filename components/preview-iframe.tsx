@@ -8,6 +8,7 @@ type PreviewIframeProps = React.ComponentProps<"iframe"> & {
 
 export const PreviewIframe = (props: PreviewIframeProps) => {
   const { className, height = 450, src, title, ...rest } = props;
+  
   const style: React.CSSProperties & { "--height": string } = {
     "--height": `${height}px`,
   };

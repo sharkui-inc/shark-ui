@@ -59,7 +59,9 @@ export const DashboardSidebar = () => {
           <Button
             aria-label="Search employees"
             onClick={() =>
-              document.getElementById("dashboard-employee-search")?.focus()
+              document
+                .querySelector<HTMLElement>("#dashboard-employee-search")
+                ?.focus()
             }
             size="icon-xs"
             variant="ghost"

@@ -99,6 +99,7 @@ export const RadioGroupLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkRadioGroup.Label
       className={cn(fieldLabelVariants(), className)}
       data-slot="radio-group-label"

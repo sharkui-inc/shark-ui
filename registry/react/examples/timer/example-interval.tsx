@@ -1,5 +1,5 @@
-import { Button } from "@registry/react/components/button";
 import { PauseIcon, PlayIcon } from "lucide-react";
+import { Button } from "@/registry/react/components/button";
 import { Card, CardContent } from "@/registry/react/components/card";
 import {
   Timer,

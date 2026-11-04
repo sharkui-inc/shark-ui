@@ -221,6 +221,7 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
 
 const FollowThread = (props: { threadSize: number }) => {
   const { threadSize } = props;
+  
   const { scrollToEdge } = useScrollAreaContext();
 
   const followThread = React.useEffectEvent((size: number) => {

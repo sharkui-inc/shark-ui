@@ -1,7 +1,6 @@
 "use client";
 
 import { useFilter, useListCollection } from "@ark-ui/react";
-import { Field, FieldLabel } from "@registry/react/components/field";
 import {
   Autocomplete,
   AutocompleteContent,
@@ -10,6 +9,7 @@ import {
   AutocompleteItem,
   AutocompleteList,
 } from "@/registry/react/components/autocomplete";
+import { Field, FieldLabel } from "@/registry/react/components/field";
 
 interface AutocompleteDemoProps {
   emptyLabel?: string;
@@ -25,6 +25,7 @@ const AutocompleteDemo = (props: AutocompleteDemoProps) => {
     label = "Search fruits",
     placeholder = "e.g. Apple",
   } = props;
+  
   const { contains } = useFilter({ sensitivity: "base" });
 
   const { collection, filter } = useListCollection({

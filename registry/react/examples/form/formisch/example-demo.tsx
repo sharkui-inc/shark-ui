@@ -7,7 +7,6 @@ import {
   type SubmitHandler,
   useForm,
 } from "@formisch/react";
-import { toast } from "@registry/react/components/toast";
 import * as v from "valibot";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -30,6 +29,7 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from "@/registry/react/components/input-group";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({

@@ -22,6 +22,7 @@ export const ChatSearchDialog = (props: {
   open: boolean;
 }) => {
   const { onNewChat, onOpenChange, onSelectConversation, open } = props;
+
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
     filter: contains,

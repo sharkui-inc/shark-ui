@@ -67,13 +67,16 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
     onProjectsSelect,
     onViewChange,
   } = props;
+
   const [query, setQuery] = React.useState("");
 
   const filtered = React.useMemo(() => {
     const needle = query.trim().toLowerCase();
+
     if (!needle) {
       return conversations;
     }
+
     return conversations.filter((conversation) =>
       conversation.title.toLowerCase().includes(needle)
     );
@@ -82,6 +85,7 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
   const groups = React.useMemo(() => {
     const order: string[] = [];
     const map = new Map<string, ConversationSummary[]>();
+
     for (const conversation of filtered) {
       if (!map.has(conversation.group)) {
         order.push(conversation.group);
@@ -89,6 +93,7 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
       }
       map.get(conversation.group)?.push(conversation);
     }
+    
     return order.map((group) => ({
       group,
       items: map.get(group) ?? [],

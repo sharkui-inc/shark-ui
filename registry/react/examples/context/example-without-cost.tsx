@@ -1,3 +1,4 @@
+import { Button } from "@/registry/react/components/button";
 import {
   Context,
   ContextBody,
@@ -5,13 +6,22 @@ import {
   ContextHeader,
   ContextMeter,
   ContextTrigger,
+  ContextTriggerLabel,
   ContextUsageRow,
 } from "@/registry/react/components/context";
 
 const Example = () => (
   <div className="flex justify-center">
     <Context maxTokens={128_000} usedTokens={18_420}>
-      <ContextTrigger />
+      <ContextTrigger asChild>
+        <Button
+          className="text-muted-foreground font-normal"
+          size="sm"
+          variant="ghost"
+        >
+          <ContextTriggerLabel />
+        </Button>
+      </ContextTrigger>
       <ContextContent>
         <ContextHeader>
           <ContextMeter />

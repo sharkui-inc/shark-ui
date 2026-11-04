@@ -36,6 +36,7 @@ const collections = {
 
 export const ThemeSelectorFont = (props: { slot: ThemeFontSlot }) => {
   const { slot } = props;
+
   const {
     clearThemePreview,
     config,
@@ -43,6 +44,7 @@ export const ThemeSelectorFont = (props: { slot: ThemeFontSlot }) => {
     setFontHeading,
     setFontSans,
   } = useThemeCustomization();
+
   const detail = THEME_FONT_SLOTS[slot];
   const collection = collections[slot];
 

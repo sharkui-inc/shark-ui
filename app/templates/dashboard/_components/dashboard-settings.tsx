@@ -29,11 +29,14 @@ import { SettingsNotificationsPage } from "./settings/settings-notifications";
 
 type SettingsPage = (typeof settingsNavigation)[number]["value"];
 
-export const DashboardSettings = (props: {
+interface DashboardSettingsProps {
   onOpenChange: (open: boolean) => void;
   open: boolean;
-}) => {
+}
+
+export const DashboardSettings = (props: DashboardSettingsProps) => {
   const { onOpenChange, open } = props;
+
   const [page, setPage] = React.useState<SettingsPage>("general");
   const [lastSaved, setLastSaved] = React.useState("All changes saved");
 

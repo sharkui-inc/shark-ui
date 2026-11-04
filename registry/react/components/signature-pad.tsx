@@ -44,6 +44,7 @@ export const SignaturePadLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkSignaturePad.Label
       className={cn(fieldLabelVariants(), className)}
       data-slot="signature-pad-label"

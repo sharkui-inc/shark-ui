@@ -105,6 +105,7 @@ export const DateInputLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkDateInput.Label
       className={cn(fieldLabelVariants(), className)}
       data-slot="date-input-label"

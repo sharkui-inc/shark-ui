@@ -39,6 +39,7 @@ export const TaskAllOption = () => (
 
 export const TaskTypeOption = (props: { type: TaskType }) => {
   const { type } = props;
+
   const TypeIcon = typeIconMap[type];
 
   return (
@@ -51,6 +52,7 @@ export const TaskTypeOption = (props: { type: TaskType }) => {
 
 export const TaskPriorityOption = (props: { priority: TaskPriority }) => {
   const { priority } = props;
+
   const PriorityIcon = priorityIconMap[priority];
 
   return (
@@ -77,6 +79,7 @@ export const TaskStatusOption = (props: { status: TaskStatus }) => {
 
 export const TaskAssigneeOption = (props: { assigneeId: TaskAssigneeId }) => {
   const { assigneeId } = props;
+  
   const assignee = ASSIGNEES[assigneeId];
 
   return (

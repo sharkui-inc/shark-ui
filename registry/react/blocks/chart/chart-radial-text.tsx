@@ -65,6 +65,7 @@ const ChartRadialText = () => (
           />
           <RadialBar background cornerRadius={10} dataKey="visitors" />
           <PolarRadiusAxis axisLine={false} tick={false} tickLine={false}>
+            {/* biome-ignore lint/a11y/noLabelWithoutControl: chart label, not a form label */}
             <Label
               content={({ viewBox }) => {
                 if (viewBox && "cx" in viewBox && "cy" in viewBox) {
@@ -100,7 +101,7 @@ const ChartRadialText = () => (
     </CardContent>
     <CardFooter className="flex-col gap-2 text-sm">
       <div className="flex items-center gap-2 leading-none font-medium">
-        Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
+        Trending up by 5.2% this month <TrendingUpIcon className="size-4" />
       </div>
       <div className="text-muted-foreground leading-none">
         Showing total visitors for the last 6 months

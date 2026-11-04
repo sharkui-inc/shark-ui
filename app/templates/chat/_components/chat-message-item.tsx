@@ -41,6 +41,7 @@ export const ChatMessageItem = (props: {
   message: ChatMessage;
 }) => {
   const { isStreaming = false, message } = props;
+
   const isUser = message.role === "user";
   const text = message.content;
 

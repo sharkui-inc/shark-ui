@@ -53,12 +53,15 @@ export const FocusTimerExample = (props: React.ComponentProps<"div">) => {
   );
 };
 
-const FocusTimerSession = (props: {
+interface FocusTimerSessionProps {
   autoStart?: boolean;
   onSkip: () => void;
   session: "break" | "focus";
-}) => {
+}
+
+const FocusTimerSession = (props: FocusTimerSessionProps) => {
   const { autoStart = false, onSkip, session } = props;
+
   const isFocus = session === "focus";
 
   return (

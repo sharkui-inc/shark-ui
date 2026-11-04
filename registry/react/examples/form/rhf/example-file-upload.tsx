@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "@registry/react/components/toast";
 import { CloudUploadIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
@@ -26,6 +25,7 @@ import {
   FileUploadDropzone,
   FileUploadList,
 } from "@/registry/react/components/file-upload";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({

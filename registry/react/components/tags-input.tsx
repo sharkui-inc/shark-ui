@@ -25,6 +25,7 @@ export const TagsInputLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkTagsInput.Label
       className={cn(fieldLabelVariants(), "basis-full", className)}
       data-slot="tags-input-label"

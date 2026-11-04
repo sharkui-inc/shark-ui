@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "@registry/react/components/button";
 import type React from "react";
 import { BASE_COLORS } from "@/lib/theme/catalog";
 import type { BaseColor } from "@/lib/theme/config";
 import { cn } from "@/lib/utils";
+import { Button } from "@/registry/react/components/button";
 import { Card } from "@/registry/react/components/card";
 import { useUpdateConfig } from "@/store/config";
 

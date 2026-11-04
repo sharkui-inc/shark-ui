@@ -246,8 +246,8 @@ const ChartTooltipItem = (props: ChartTooltipItemProps) => {
           "bg-(--color-bg)",
           "rounded-sm border-(--color-border)",
           {
-            "h-2.5 w-2.5": indicator === "dot",
             "my-0.5": nestLabel && indicator === "dashed",
+            "size-2.5": indicator === "dot",
             [cn("w-0", "bg-transparent", "border-[1.5px] border-dashed")]:
               indicator === "dashed",
             "w-1": indicator === "line",
@@ -268,7 +268,7 @@ const ChartTooltipItem = (props: ChartTooltipItemProps) => {
       className={cn(
         "w-full",
         "flex flex-wrap items-stretch gap-2",
-        "[&>svg]:text-muted-foreground [&>svg]:h-2.5 [&>svg]:w-2.5",
+        "[&>svg]:text-muted-foreground [&>svg]:size-2.5",
         indicator === "dot" && "items-center"
       )}
     >
@@ -442,7 +442,7 @@ export const ChartLegendContent = (props: ChartLegendContentProps) => {
             <div
               className={cn(
                 "flex items-center gap-1.5",
-                "[&>svg]:text-muted-foreground [&>svg]:h-3 [&>svg]:w-3"
+                "[&>svg]:text-muted-foreground [&>svg]:size-3"
               )}
               key={`${item.value ?? item.dataKey ?? "value"}`}
             >

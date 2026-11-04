@@ -82,6 +82,7 @@ export const TaskEditorFields = (props: {
   onDraftChange: React.Dispatch<React.SetStateAction<TaskDraft>>;
 }) => {
   const { draft, onDraftChange } = props;
+  
   const patchDraft = <K extends keyof TaskDraft>(
     key: K,
     value: TaskDraft[K]

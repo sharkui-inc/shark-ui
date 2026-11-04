@@ -69,7 +69,9 @@ const ComboboxSearch = () => {
             const { currentTarget, relatedTarget } = event;
             const contentId = currentTarget.getAttribute("aria-controls");
             const content = contentId
-              ? currentTarget.ownerDocument.getElementById(contentId)
+              ? currentTarget.ownerDocument.querySelector(
+                  `#${CSS.escape(contentId)}`
+                )
               : null;
             const isInsideContent =
               relatedTarget instanceof Node && content?.contains(relatedTarget);

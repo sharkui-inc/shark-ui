@@ -335,8 +335,13 @@ const AssistantActions = () => (
   </MessageFooter>
 );
 
-const ChatMessageItem = (props: { message: ChatMessage }) => {
+interface ChatMessageItemProps {
+  message: ChatMessage;
+}
+
+const ChatMessageItem = (props: ChatMessageItemProps) => {
   const { message } = props;
+
   const isUser = message.role === "user";
   const firstSource = message.sources?.[0];
 

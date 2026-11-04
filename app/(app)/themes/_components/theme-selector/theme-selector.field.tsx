@@ -42,6 +42,7 @@ export const ThemeSelectorField = <T extends CollectionItem>(
     trigger,
     value,
   } = props;
+
   const preview = useThemeHighlightPreview(onPreview);
 
   return (

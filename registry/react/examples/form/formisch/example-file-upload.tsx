@@ -7,7 +7,6 @@ import {
   type SubmitHandler,
   useForm,
 } from "@formisch/react";
-import { toast } from "@registry/react/components/toast";
 import { CloudUploadIcon } from "lucide-react";
 import * as v from "valibot";
 import { Button } from "@/registry/react/components/button";
@@ -31,6 +30,7 @@ import {
   FileUploadDropzone,
   FileUploadList,
 } from "@/registry/react/components/file-upload";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({

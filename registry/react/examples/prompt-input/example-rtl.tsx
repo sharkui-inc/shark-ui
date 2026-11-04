@@ -228,11 +228,15 @@ const Example = () => {
               positioning={{ placement: "top-end" }}
               usedTokens={18_420}
             >
-              <ContextTrigger
-                aria-label={values.contextTriggerAria}
-                size="icon-sm"
-              >
-                <ContextIcon />
+              <ContextTrigger asChild>
+                <Button
+                  aria-label={values.contextTriggerAria}
+                  className="text-muted-foreground font-normal"
+                  size="icon-sm"
+                  variant="ghost"
+                >
+                  <ContextIcon />
+                </Button>
               </ContextTrigger>
               <ContextContent>
                 <ContextHeader>

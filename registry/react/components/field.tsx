@@ -184,6 +184,7 @@ export const FieldLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkField.Label
       className={cn(fieldLabelVariants(), className)}
       data-slot="field-label"

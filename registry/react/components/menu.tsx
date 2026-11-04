@@ -136,7 +136,7 @@ export const menuItemControlVariants = tv({
     "min-h-10 w-full md:min-h-8",
     "flex items-start gap-2",
     "rounded-lg",
-    "px-[calc(--spacing(3)-1px)] py-1.5",
+    "px-[calc(--spacing(3)-1px)] py-2 md:py-1.5",
     "[&_svg:not([data-slot=menu-item-check-icon])]:pointer-events-none [&_svg:not([data-slot=menu-item-check-icon])]:h-lh [&_svg:not([data-slot=menu-item-check-icon])]:w-3.5 [&_svg:not([data-slot=menu-item-check-icon])]:shrink-0",
   ],
 });

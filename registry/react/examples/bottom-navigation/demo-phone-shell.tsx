@@ -1,9 +1,8 @@
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-interface DemoPhoneShellProps {
+interface DemoPhoneShellProps extends React.ComponentProps<"div"> {
   children: React.ReactNode;
-  className?: string;
 }
 
 export const DemoPhoneShell = (props: DemoPhoneShellProps) => {
@@ -13,7 +12,7 @@ export const DemoPhoneShell = (props: DemoPhoneShellProps) => {
     <div
       className={cn(
         "relative h-[36rem] w-full max-w-[20rem] overflow-hidden",
-        "border-border bg-background rounded-4xl border shadow-lg/4",
+        "bg-background border-border rounded-4xl border shadow-lg/4",
         className
       )}
     >

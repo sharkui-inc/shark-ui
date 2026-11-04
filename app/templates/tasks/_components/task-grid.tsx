@@ -22,13 +22,16 @@ import type { Task } from "../_data/tasks";
 import { columnWidthClasses } from "./task-columns";
 import { TaskEmptyState } from "./task-empty-state";
 
-export const TaskGrid = (props: {
+interface TaskGridProps {
   hasFilters: boolean;
   onClearFilters: () => void;
   onCreate: () => void;
   table: ReactTable<DataTableFeatures, Task>;
-}) => {
+}
+
+export const TaskGrid = (props: TaskGridProps) => {
   const { hasFilters, onClearFilters, onCreate, table } = props;
+  
   const hasTasks = table.getFilteredRowModel().rows.length > 0;
 
   if (!hasTasks) {

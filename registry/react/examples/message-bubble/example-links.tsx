@@ -1,7 +1,7 @@
 import {
   MessageBubble,
   MessageBubbleContent,
-} from "@registry/react/components/message-bubble";
+} from "@/registry/react/components/message-bubble";
 
 const Example = () => (
   <div className="flex w-full max-w-sm flex-col gap-2">

@@ -1,21 +1,21 @@
 "use client";
 
+import { DownloadIcon } from "lucide-react";
+import type React from "react";
+import { SharkIcon } from "@/components/icons/shark";
+import { cn } from "@/lib/utils";
 import {
   Clipboard,
   ClipboardTrigger,
-} from "@registry/react/components/clipboard";
+} from "@/registry/react/components/clipboard";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuSeparator,
   ContextMenuTrigger,
-} from "@registry/react/components/context-menu";
-import { DownloadTrigger } from "@registry/react/components/download-trigger";
-import { DownloadIcon } from "lucide-react";
-import type React from "react";
-import { SharkIcon } from "@/components/icons/shark";
-import { cn } from "@/lib/utils";
+} from "@/registry/react/components/context-menu";
+import { DownloadTrigger } from "@/registry/react/components/download-trigger";
 
 export const HeaderBrand = (
   props: React.ComponentProps<typeof ContextMenuTrigger>

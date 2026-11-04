@@ -9,7 +9,7 @@ import {
 import { Textarea } from "@/registry/react/components/textarea";
 import type { Email, MailComposeMode } from "../_data/mail";
 
-const REPLY_PREFIX = /^(re|fw|fwd):/iu;
+const REPLY_PREFIX = /^(?:re|fw|fwd):/iu;
 
 interface MailComposeProps {
   composeMode: Exclude<MailComposeMode, null>;
@@ -37,6 +37,7 @@ const replySubject = (subject: string) =>
 
 export const MailCompose = (props: MailComposeProps) => {
   const { composeMode, onSend, selectedEmail } = props;
+  
   const isReply = composeMode === "reply" || composeMode === "reply-all";
 
   return (

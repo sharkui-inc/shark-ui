@@ -18,6 +18,7 @@ const INBOX = EMAILS.filter((email) => email.folder === "Inbox");
 
 export const MailList = (props: { onCompose: () => void; query: string }) => {
   const { onCompose, query } = props;
+  
   const [selectedId, setSelectedId] = React.useState(INBOX[0]?.id ?? null);
   const [favoriteIds, setFavoriteIds] = React.useState<string[]>([
     ...STARRED_IDS,

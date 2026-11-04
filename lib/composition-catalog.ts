@@ -25,7 +25,7 @@ import { TEMPLATES } from "@/registry/react/templates/_registry";
 const SOURCE_EXTENSIONS = [".tsx", ".ts", ".jsx", ".js", ".json"] as const;
 
 const REGISTRY_COMPONENT_IMPORT_PATTERN =
-  /@\/registry\/react\/components\/([a-z0-9-]+)/gu;
+  /@\/registry\/react\/components\/(?<dependency>[a-z0-9-]+)/gu;
 
 export const COMPOSITION_KINDS = ["blocks", "templates"] as const;
 export type CompositionKind = (typeof COMPOSITION_KINDS)[number];

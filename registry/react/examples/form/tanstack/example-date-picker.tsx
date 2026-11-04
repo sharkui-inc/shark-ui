@@ -1,7 +1,6 @@
 "use client";
 
 import type { DateValue } from "@ark-ui/react";
-import { toast } from "@registry/react/components/toast";
 import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -34,6 +33,7 @@ import {
   FieldError,
   FieldGroup,
 } from "@/registry/react/components/field";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({

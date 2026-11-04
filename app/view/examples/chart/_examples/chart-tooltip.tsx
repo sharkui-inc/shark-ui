@@ -146,7 +146,12 @@ const TooltipDemo = (props: {
   return (
     <div
       className={cn(
-        "border-border/48 bg-background grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-lg/4 transition-[translate] duration-150 ease-out hover:-translate-y-0.5",
+        "min-w-[8rem]",
+        "grid items-start gap-1.5",
+        "bg-background px-2.5 py-1.5",
+        "text-xs",
+        "border-border/48 rounded-lg border shadow-lg/4",
+        "transition-[translate] duration-150 ease-out hover:-translate-y-0.5",
         className
       )}
     >
@@ -160,7 +165,8 @@ const TooltipDemo = (props: {
           return (
             <div
               className={cn(
-                "[&>svg]:text-muted-foreground flex w-full items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
+                "flex w-full items-stretch gap-2",
+                "[&>svg]:text-muted-foreground [&>svg]:size-2.5",
                 indicator === "dot" && "items-center"
               )}
               key={item.name}
@@ -170,8 +176,8 @@ const TooltipDemo = (props: {
                   className={cn(
                     "shrink-0 rounded-xs border-(--color-border) bg-(--color-bg)",
                     {
-                      "h-2.5 w-2.5": indicator === "dot",
                       "my-0.5": nestLabel && indicator === "dashed",
+                      "size-2.5": indicator === "dot",
                       "w-0 border-[1.5px] border-dashed bg-transparent":
                         indicator === "dashed",
                       "w-1": indicator === "line",

@@ -1,14 +1,8 @@
 import { SearchIcon, ShoppingCartIcon } from "lucide-react";
 import type { Metadata } from "next";
-import { createMetadata } from "@/lib/metadata";
-
-export const metadata: Metadata = createMetadata({
-  title: "Ecommerce Template",
-  url: "/templates/ecommerce",
-});
-
 import Image from "next/image";
 import Link from "next/link";
+import { createMetadata } from "@/lib/metadata";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -18,6 +12,11 @@ import {
 } from "@/registry/react/components/card";
 import { Input } from "@/registry/react/components/input";
 import { Separator } from "@/registry/react/components/separator";
+
+export const metadata: Metadata = createMetadata({
+  title: "Ecommerce Template",
+  url: "/templates/ecommerce",
+});
 
 const PRODUCTS = [
   {

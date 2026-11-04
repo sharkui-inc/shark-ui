@@ -106,6 +106,7 @@ export const ProgressLabel = (
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkProgress.Label
       className={cn(fieldLabelVariants(), className)}
       data-slot="progress-label"
