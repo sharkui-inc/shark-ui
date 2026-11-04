@@ -9,7 +9,7 @@ import {
 const Example = () => (
   <div className="w-full max-w-xs">
     <Card>
-      <CardMedia className="h-32 bg-muted" variant="image">
+      <CardMedia className="bg-muted h-32" variant="image">
         <img
           alt="Green mesh gradient"
           height={128}

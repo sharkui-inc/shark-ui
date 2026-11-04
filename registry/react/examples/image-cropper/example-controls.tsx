@@ -28,7 +28,7 @@ const Example = () => (
     <ImageCropperContext>
       {(cropper) => (
         <div className="pointer-events-none absolute inset-x-3 bottom-3 flex justify-center">
-          <div className="pointer-events-auto flex w-fit flex-wrap justify-center gap-2 rounded-lg bg-background/96 p-1.5 shadow-sm/4">
+          <div className="bg-background/96 pointer-events-auto flex w-fit flex-wrap justify-center gap-2 rounded-lg p-1.5 shadow-sm/4">
             <ButtonGroup aria-label="Zoom controls">
               <Button
                 aria-label="Zoom out"

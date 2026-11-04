@@ -8,7 +8,7 @@ const Example = () => (
   <CodeBlock className="w-full max-w-lg" code={CODE} language="bash">
     <div className="relative min-w-0">
       <CodeBlockContent />
-      <CodeBlockCopy className="absolute end-2 top-2 bg-card/80" />
+      <CodeBlockCopy className="bg-card/80 absolute end-2 top-2" />
     </div>
   </CodeBlock>
 );

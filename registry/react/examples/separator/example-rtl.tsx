@@ -11,11 +11,17 @@ const Example = () => {
   return (
     <div className="flex max-w-sm flex-col gap-4 text-sm">
       <div className="flex flex-col gap-1">
-        <p className="font-medium leading-none">Onda</p>
+        <p className="leading-none font-medium">Shark UI</p>
         <p className="text-muted-foreground">{values.primitive}</p>
       </div>
       <Separator />
-      <div>{values.collection}</div>
+      <div className="flex h-5 items-center gap-4">
+        <span>{values.components}</span>
+        <Separator orientation="vertical" />
+        <span>{values.blocks}</span>
+        <Separator orientation="vertical" />
+        <span>{values.themes}</span>
+      </div>
     </div>
   );
 };
@@ -23,21 +29,26 @@ const Example = () => {
 const translations = {
   ar: {
     values: {
-      collection: "مجموعة من المكونات سهلة الوصول والجميلة والقابلة للتخصيص.",
+      blocks: "كتل",
+      components: "مكونات",
       primitive: "مجموعة من المكونات الأساسية لبناء الواجهات.",
+      themes: "سمات",
     },
   },
   en: {
     values: {
-      collection:
-        "A collection of accessible, beautiful, and customizable components.",
+      blocks: "Blocks",
+      components: "Components",
       primitive: "A set of primitive components for building UI.",
+      themes: "Themes",
     },
   },
   he: {
     values: {
-      collection: "אוסף של קומפוננטות נגישות, יפות וניתנות להתאמה אישית.",
+      blocks: "בלוקים",
+      components: "קומפוננטות",
       primitive: "אוסף של קומפוננטות פרימיטיביות לבניית UI.",
+      themes: "ערכות נושא",
     },
   },
 };

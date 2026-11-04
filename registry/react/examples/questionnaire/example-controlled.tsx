@@ -27,7 +27,7 @@ const Example = () => {
     setItem(details.item);
   const handleValueChange = (details: QuestionnaireValueChangeDetails) =>
     setValue(details.value);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const answers = new FormData(event.currentTarget);
     const selections = items.map((question) => {

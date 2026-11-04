@@ -20,7 +20,7 @@ const Example = () => (
         <div className="flex flex-col gap-2">
           {Array.from({ length: 96 }, (_, i) => `box-${i}`).map((key) => (
             <div
-              className="h-12 shrink-0 rounded-xl border bg-muted"
+              className="bg-muted h-12 shrink-0 rounded-xl border"
               key={key}
             />
           ))}

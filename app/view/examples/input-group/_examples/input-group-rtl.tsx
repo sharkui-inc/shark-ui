@@ -46,7 +46,7 @@ const InputGroupRtl = () => (
           <InputGroupTextarea placeholder="اكتب تعليقًا..." />
           <InputGroupAddon align="block-end">
             <InputGroupText>٠/٢٨٠</InputGroupText>
-            <InputGroupButton className="ms-auto" size="sm" variant="default">
+            <InputGroupButton className="ms-auto" size="sm">
               نشر
             </InputGroupButton>
           </InputGroupAddon>

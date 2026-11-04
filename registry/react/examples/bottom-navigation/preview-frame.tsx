@@ -10,7 +10,7 @@ export const PreviewFrame = (props: PreviewFrameProps) => {
 
   return (
     <div
-      className="relative h-[18rem] w-full max-w-[20rem] overflow-hidden rounded-xl border border-border bg-card"
+      className="border-border bg-card relative h-[18rem] w-full max-w-[20rem] overflow-hidden rounded-xl border"
       dir={dir}
     >
       {scrollable ? (

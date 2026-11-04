@@ -2,9 +2,9 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 
 const ChartTooltipDemo = () => (
-  <div className="grid aspect-video w-full max-w-md justify-center text-foreground md:grid-cols-2 [&>div]:relative [&>div]:flex [&>div]:h-[137px] [&>div]:w-[224px] [&>div]:items-center [&>div]:justify-center [&>div]:p-4">
+  <div className="text-foreground grid aspect-video w-full max-w-md justify-center md:grid-cols-2 [&>div]:relative [&>div]:flex [&>div]:h-[137px] [&>div]:w-[224px] [&>div]:items-center [&>div]:justify-center [&>div]:p-4">
     <div>
-      <div className="absolute top-[45px] left-[-35px] z-10 font-medium text-sm">
+      <div className="absolute top-[45px] left-[-35px] z-10 text-sm font-medium">
         Label
       </div>
       <svg
@@ -38,7 +38,7 @@ const ChartTooltipDemo = () => (
       />
     </div>
     <div className="items-end">
-      <div className="absolute top-[0px] left-[122px] z-10 font-medium text-sm">
+      <div className="absolute top-[0px] left-[122px] z-10 text-sm font-medium">
         Name
       </div>
       <svg
@@ -82,7 +82,7 @@ const ChartTooltipDemo = () => (
       />
     </div>
     <div className="items-start! justify-start!">
-      <div className="absolute top-[60px] left-[50px] z-10 font-medium text-sm">
+      <div className="absolute top-[60px] left-[50px] z-10 text-sm font-medium">
         Indicator
       </div>
       <TooltipDemo
@@ -146,7 +146,7 @@ const TooltipDemo = (props: {
   return (
     <div
       className={cn(
-        "grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/48 bg-background px-2.5 py-1.5 text-xs shadow-lg/4 transition-[translate] duration-150 ease-out hover:-translate-y-0.5",
+        "border-border/48 bg-background grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-lg/4 transition-[translate] duration-150 ease-out hover:-translate-y-0.5",
         className
       )}
     >
@@ -160,7 +160,7 @@ const TooltipDemo = (props: {
           return (
             <div
               className={cn(
-                "flex w-full items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
+                "[&>svg]:text-muted-foreground flex w-full items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
                 indicator === "dot" && "items-center"
               )}
               key={item.name}
@@ -197,7 +197,7 @@ const TooltipDemo = (props: {
                   ) : null}
                   <span className="text-muted-foreground">{item.name}</span>
                 </div>
-                <span className="font-medium font-mono text-foreground tabular-nums">
+                <span className="text-foreground font-mono font-medium tabular-nums">
                   {item.value.toLocaleString()}
                 </span>
               </div>

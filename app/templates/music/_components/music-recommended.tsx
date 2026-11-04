@@ -35,7 +35,7 @@ export const MusicRecommended = () => {
   return (
     <section aria-labelledby="recommended-tracks-heading">
       <h2
-        className="font-heading font-semibold text-xl tracking-[-0.02em]"
+        className="font-heading text-xl font-semibold tracking-[-0.02em]"
         id="recommended-tracks-heading"
       >
         Recommended new tracks

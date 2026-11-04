@@ -34,42 +34,37 @@ const isRetiredView = (type: string, category: string, file: string) =>
       entry.type === type && entry.category === category && entry.file === file
   );
 
-export const generateStaticParams = async () => {
-  const byFolder = await Promise.all(
-    VIEW_REGISTRY_FOLDER_TYPES.map(async (folderType) => {
-      const items = await getRegistryItem({
-        folderType,
-        framework: "react",
-      });
-      return items
-        .filter((item) => extname(item.name) === ".tsx")
-        .map((item) => ({
-          category: item.category,
-          file: item.name.slice(0, -".tsx".length),
-          type: folderType,
-        }));
-    })
+const getViewStaticParams = async () => {
+  const looseFiles = (
+    await Promise.all(
+      VIEW_REGISTRY_FOLDER_TYPES.map(async (folderType) => {
+        const items = await getRegistryItem({
+          folderType,
+          framework: "react",
+        });
+        return items
+          .filter((item) => extname(item.name) === ".tsx")
+          .map((item) => ({
+            category: item.category,
+            file: item.name.slice(0, -".tsx".length),
+            type: folderType,
+          }));
+      })
+    )
+  ).flat();
+
+  const compositions = VIEW_REGISTRY_FOLDER_TYPES.flatMap((folderType) =>
+    getDefinitions(folderType).map((composition) => ({
+      category: composition.category,
+      file: composition.name,
+      type: folderType,
+    }))
   );
 
-  const publishedBlocks = getDefinitions("blocks").map((block) => ({
-    category: block.category,
-    file: block.name,
-    type: "blocks" as const,
-  }));
-
-  const publishedTemplates = getDefinitions("templates").map((template) => ({
-    category: template.category,
-    file: template.name,
-    type: "templates" as const,
-  }));
-
-  return [
-    ...byFolder.flat(),
-    ...publishedBlocks,
-    ...publishedTemplates,
-    ...RETIRED_VIEW_PARAMS,
-  ];
+  return [...looseFiles, ...compositions, ...RETIRED_VIEW_PARAMS];
 };
+
+export const generateStaticParams = () => getViewStaticParams();
 
 export const generateMetadata = async (
   props: PageProps<"/view/[type]/[category]/[file]">

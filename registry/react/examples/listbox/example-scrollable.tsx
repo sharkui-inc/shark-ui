@@ -31,10 +31,10 @@ const Example = () => (
             <AvatarFallback>{item.initials}</AvatarFallback>
           </Avatar>
           <div className="min-w-0 flex-1">
-            <ListboxItemText className="block truncate font-medium text-sm">
+            <ListboxItemText className="block truncate text-sm font-medium">
               {item.label}
             </ListboxItemText>
-            <p className="truncate text-muted-foreground text-xs" dir="ltr">
+            <p className="text-muted-foreground truncate text-xs" dir="ltr">
               {item.email}
             </p>
           </div>

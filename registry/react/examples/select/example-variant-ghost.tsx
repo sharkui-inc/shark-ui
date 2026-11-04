@@ -14,6 +14,7 @@ const Example = () => (
     <SelectTrigger
       aria-label="Select a framework"
       className="min-w-48"
+      showTrigger={false}
       variant="ghost"
     >
       <SelectValue placeholder="Select framework" />

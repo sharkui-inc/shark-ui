@@ -1,6 +1,9 @@
 ---
 title: File Upload
 description: Upload files with a dropzone.
+aliases:
+  - Dropzone
+  - Drag and drop
 seo:
   description: Dropzone and file list for uploads with previews.
 links:
@@ -100,6 +103,12 @@ import {
 </FileUpload>
 ```
 
+## With Field
+
+Use [Field](/docs/components/field) for a label.
+
+<ComponentPreview componentName="file-upload" fileName="example-with-field" />
+
 ## States
 
 ### Disabled
@@ -138,16 +147,6 @@ Use the `accept` prop to restrict file types to PNG and JPEG.
 
 <ComponentPreview componentName="file-upload" fileName="example-accepted-file-types" />
 
-### With Field
-
-Use [Field](/docs/components/field) for a label.
-
-<ComponentPreview componentName="file-upload" fileName="example-with-field" />
-
-### Custom Preview
-
-<ComponentPreview componentName="file-upload" fileName="example-custom-preview" />
-
 ### Media Capture
 
 Use the `capture` prop to capture and upload media directly from the device camera.
@@ -169,7 +168,7 @@ Use the `directory` prop to upload entire folders.
 <InfoIcon />
 <AlertTitle>Attention: Directory Upload</AlertTitle>
 <AlertDescription>
-  When uploading directories with many files, set `maxFiles` to a higher value or remove it entirely to prevent rejections.
+  When uploading directories with many files, set **maxFiles** to a higher value or remove it entirely to prevent rejections.
 </AlertDescription>
 
 </Alert>
@@ -183,6 +182,10 @@ Use `FileUploadClearTrigger` to remove all uploaded files at once.
 ### Form Integration
 
 <ComponentPreview componentName="file-upload" fileName="example-form" />
+
+### Custom Preview
+
+<ComponentPreview componentName="file-upload" fileName="example-custom-preview" />
 
 ### Custom spacing
 

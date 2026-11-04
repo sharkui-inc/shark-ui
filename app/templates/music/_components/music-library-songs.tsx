@@ -17,6 +17,7 @@ export const MusicLibrarySongs = (props: {
   onToggleFavorite: (title: string) => void;
 }) => {
   const { favoriteTitles, onToggleFavorite } = props;
+
   return (
     <Table>
       <TableHeader>
@@ -66,13 +67,13 @@ export const MusicLibrarySongs = (props: {
                     <span className="block truncate font-medium">
                       {track.title}
                     </span>
-                    <span className="mt-1 block truncate text-muted-foreground text-xs">
+                    <span className="text-muted-foreground mt-1 block truncate text-xs">
                       {track.artist}
                     </span>
                   </span>
                 </div>
               </TableCell>
-              <TableCell className="hidden text-muted-foreground sm:table-cell">
+              <TableCell className="text-muted-foreground hidden sm:table-cell">
                 Signal Bloom
               </TableCell>
               <TableCell>

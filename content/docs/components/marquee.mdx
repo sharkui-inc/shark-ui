@@ -1,6 +1,8 @@
 ---
 title: Marquee
 description: Scroll items in a horizontal strip.
+aliases:
+  - Ticker
 seo:
   description: Horizontal scrolling strip for logos and highlights.
 links:
@@ -133,11 +135,11 @@ Use the `spacing` prop to control the gap between items.
 
 <ComponentPreview componentName="marquee" fileName="example-spacing" />
 
-### Fade
+### Without fade
 
-Use the `showEdges` prop to show or hide the gradient fade at the start and end of the marquee.
+Use `fade={false}` to disable the edge mask fade.
 
-<ComponentPreview componentName="marquee" fileName="example-fade" />
+<ComponentPreview componentName="marquee" fileName="example-without-fade" />
 
 ### Custom speed
 
@@ -162,7 +164,7 @@ Root component. Manages the scrolling viewport and animation.
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `speed` | `number` | `50` |
 | `spacing` | `string` | `"16px"` |
-| `showEdges` | `boolean` | `true` |
+| `fade` | `boolean` | `true` |
 | `autoFill` | `boolean` | `false` |
 | `pauseOnInteraction` | `boolean` | `false` |
 | `reverse` | `boolean` | `false` |
@@ -170,7 +172,7 @@ Root component. Manages the scrolling viewport and animation.
 
 ### MarqueeContent
 
-Viewport wrapper. Wrap `MarqueeItem` children with this. Animates content horizontally.
+Viewport wrapper.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -185,15 +187,6 @@ Single item in the scrolling marquee.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `-` |
-
-### MarqueeEdge
-
-Public MarqueeEdge component. It forwards the underlying primitive props.
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `asChild` | `boolean` | `false` |
-| `className` | `string` | `-` |
 
 ---
 

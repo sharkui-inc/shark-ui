@@ -13,8 +13,9 @@ import {
 
 export const MailEmpty = (props: { onCompose: () => void }) => {
   const { onCompose } = props;
+
   return (
-    <State className="border-0 bg-muted/16">
+    <State className="bg-muted/16 border-0">
       <StateHeader>
         <StateMedia variant="icon">
           <InboxIcon aria-hidden />

@@ -11,6 +11,8 @@ import {
   DialogFooter,
   DialogHeader,
 } from "@/registry/react/components/dialog";
+import { Field, FieldLabel } from "@/registry/react/components/field";
+import { Input } from "@/registry/react/components/input";
 import {
   Menu,
   MenuContent,
@@ -46,14 +48,14 @@ const Example = () => {
       <Dialog onOpenChange={({ open }) => setIsOpen(open)} open={isOpen}>
         <DialogContent>
           <DialogHeader
-            description="This dialog was opened from a menu item"
+            description="Update how your name appears."
             title="Settings"
           />
           <DialogBody>
-            <p className="text-muted-foreground text-sm">
-              You can open dialogs imperatively from menu items using the
-              onSelect handler.
-            </p>
+            <Field>
+              <FieldLabel>Display name</FieldLabel>
+              <Input defaultValue="Ada Lovelace" />
+            </Field>
           </DialogBody>
           <DialogFooter>
             <DialogClose asChild>

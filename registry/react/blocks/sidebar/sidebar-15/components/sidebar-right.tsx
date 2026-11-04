@@ -29,8 +29,8 @@ export const SidebarRight = () => (
       <div className="flex items-center gap-2 px-2 py-1.5">
         <CalendarPlusIcon aria-hidden className="size-4" />
         <div className="min-w-0">
-          <p className="truncate font-medium text-sm">September 2026</p>
-          <p className="truncate text-sidebar-foreground text-xs">
+          <p className="truncate text-sm font-medium">September 2026</p>
+          <p className="text-sidebar-foreground truncate text-xs">
             3 events today
           </p>
         </div>
@@ -61,7 +61,7 @@ export const SidebarRight = () => (
       <SidebarGroup>
         <SidebarGroupLabel>Upcoming</SidebarGroupLabel>
         <SidebarGroupContent>
-          <p className="px-2 text-sidebar-foreground text-sm">
+          <p className="text-sidebar-foreground px-2 text-sm">
             Design review at 10:30 AM
           </p>
         </SidebarGroupContent>

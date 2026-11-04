@@ -1,6 +1,5 @@
 "use client";
 
-import { ChevronRightIcon } from "lucide-react";
 import React from "react";
 import {
   CircularProgress,
@@ -9,6 +8,7 @@ import {
 import {
   Collapsible,
   CollapsibleContent,
+  CollapsibleIndicator,
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
 import { SkeletonText } from "@/registry/react/components/skeleton";
@@ -24,6 +24,7 @@ import {
 
 const Example = () => {
   const contentRef = React.useRef<HTMLElement>(null);
+
   return (
     <Toc
       autoScroll={false}
@@ -42,7 +43,7 @@ const Example = () => {
               activeIndex === -1 ? 0 : ((activeIndex + 1) / items.length) * 100;
 
             return (
-              <CollapsibleTrigger className="flex w-full items-center justify-between gap-3 rounded-lg border border-border bg-transparent px-3 py-2.5 text-start font-medium text-sm outline-hidden hover:bg-muted focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24">
+              <CollapsibleTrigger className="border-border hover:bg-muted focus-visible:border-ring/64 focus-visible:ring-ring/24 flex w-full items-center justify-between gap-3 rounded-lg border bg-transparent px-3 py-2.5 text-start text-sm font-medium outline-hidden focus-visible:ring-2">
                 <span className="flex min-w-0 flex-1 items-center gap-2">
                   <CircularProgress
                     className="shrink-0"
@@ -50,7 +51,7 @@ const Example = () => {
                     thickness={2.5}
                     value={value}
                   >
-                    <CircularProgressValue className="absolute font-semibold text-[0.5625rem]">
+                    <CircularProgressValue className="absolute text-[0.5625rem] font-semibold">
                       {activeIndex >= 0 ? activeIndex + 1 : "-"}
                     </CircularProgressValue>
                   </CircularProgress>
@@ -58,9 +59,7 @@ const Example = () => {
                     {activeLabel}
                   </span>
                 </span>
-                <span className="inline-flex size-4 shrink-0 items-center justify-center text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 motion-reduce:transition-none">
-                  <ChevronRightIcon aria-hidden className="size-4" />
-                </span>
+                <CollapsibleIndicator className="text-muted-foreground" />
               </CollapsibleTrigger>
             );
           }}
@@ -71,10 +70,10 @@ const Example = () => {
             {items.map((item, index) => (
               <TocItem className="ps-0" item={item} key={item.value}>
                 <TocLink
-                  className="mx-0 flex items-center gap-2 rounded-md px-2 py-1.5 data-active:text-primary"
+                  className="data-active:text-primary mx-0 flex items-center gap-2 rounded-md px-2 py-1.5"
                   href={`#${item.value}`}
                 >
-                  <span className="min-w-6 font-semibold text-[0.6875rem] text-muted-foreground tabular-nums">
+                  <span className="text-muted-foreground min-w-6 text-[0.6875rem] font-semibold tabular-nums">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   {item.label}
@@ -108,7 +107,7 @@ const Article = () => (
   <>
     {items.map((item) => (
       <section className="flex flex-col gap-3 pb-8" key={item.value}>
-        <h2 className="font-semibold text-lg" id={item.value}>
+        <h2 className="text-lg font-semibold" id={item.value}>
           {item.label}
         </h2>
         <SkeletonText

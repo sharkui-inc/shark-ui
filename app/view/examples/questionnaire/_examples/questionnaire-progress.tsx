@@ -33,7 +33,7 @@ const QuestionnaireProgressExample = () => {
       pageNames.indexOf(details.item as (typeof pageNames)[number]) + 1
     );
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -59,8 +59,8 @@ const QuestionnaireProgressExample = () => {
             <span
               className={
                 index < current
-                  ? "h-1.5 flex-1 rounded-full bg-primary"
-                  : "h-1.5 flex-1 rounded-full bg-muted"
+                  ? "bg-primary h-1.5 flex-1 rounded-full"
+                  : "bg-muted h-1.5 flex-1 rounded-full"
               }
               key={definition.name}
             />

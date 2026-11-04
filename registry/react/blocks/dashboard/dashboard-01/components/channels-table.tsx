@@ -28,6 +28,7 @@ interface ChannelsTableProps {
 
 export const ChannelsTable = (props: ChannelsTableProps) => {
   const { data } = props;
+
   return (
     <Card>
       <CardHeader>

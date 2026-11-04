@@ -7,21 +7,24 @@ import { cn } from "@/lib/utils";
 
 export const markerVariants = tv({
   base: [
-    "group/marker relative flex min-h-4 w-full items-center gap-2",
-    "text-start text-muted-foreground text-sm",
+    "group/marker",
+    "relative",
+    "min-h-4 w-full",
+    "flex items-center gap-2",
+    "text-muted-foreground text-start text-sm",
     "[&_svg:not([class*='size-'])]:size-4",
-    "[a]:underline [a]:underline-offset-3 [a]:hover:text-foreground",
+    "[a]:hover:text-foreground [a]:underline [a]:underline-offset-3",
   ],
   defaultVariants: {
     variant: "default",
   },
   variants: {
     variant: {
-      border: "border-border border-b pb-2",
+      border: ["pb-2", "border-border border-b"],
       default: "",
       separator: [
-        "before:me-1 before:h-px before:min-w-0 before:flex-1 before:bg-border",
-        "after:ms-1 after:h-px after:min-w-0 after:flex-1 after:bg-border",
+        "before:bg-border before:me-1 before:h-px before:min-w-0 before:flex-1",
+        "after:bg-border after:ms-1 after:h-px after:min-w-0 after:flex-1",
       ],
     },
   },
@@ -50,7 +53,8 @@ export const MarkerIcon = (props: React.ComponentProps<typeof ark.span>) => {
   return (
     <ark.span
       className={cn(
-        "size-4 shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "size-4 shrink-0",
+        "[&_svg:not([class*='size-'])]:size-4",
         className
       )}
       data-slot="marker-icon"
@@ -66,9 +70,10 @@ export const MarkerContent = (props: React.ComponentProps<typeof ark.span>) => {
   return (
     <ark.span
       className={cn(
-        "wrap-break-word min-w-0",
+        "min-w-0",
+        "wrap-break-word",
         "group-data-[variant=separator]/marker:flex-none group-data-[variant=separator]/marker:text-center",
-        "*:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
+        "*:[a]:hover:text-foreground *:[a]:underline *:[a]:underline-offset-3",
         className
       )}
       data-slot="marker-content"

@@ -19,7 +19,7 @@ const DrawerNonModal = () => (
         <DrawerTitle>Non Modal Drawer</DrawerTitle>
       </DrawerHeader>
       <div className="flex-1 p-4">
-        <div className="h-64 w-full rounded-2xl bg-muted" />
+        <div className="bg-muted h-64 w-full rounded-2xl" />
       </div>
       <DrawerFooter>
         <DrawerClose asChild>

@@ -8,9 +8,8 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 
 export const useImageCropperContext = useArkImageCropperContext;
-export const ImageCropperContext = (
-  props: React.ComponentProps<typeof ArkImageCropper.Context>
-) => <ArkImageCropper.Context {...props} />;
+
+export const ImageCropperContext = ArkImageCropper.Context;
 
 interface ImageCropperProps
   extends React.ComponentProps<typeof ArkImageCropper.Root> {}
@@ -85,7 +84,8 @@ export const ImageCropperSelection = (props: ImageCropperSelectionProps) => {
         "backface-visibility-hidden",
         "cursor-move",
         "data-[shape=circle]:rounded-full",
-        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "outline-hidden",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
         "data-disabled:cursor-default",
         "data-dragging:cursor-grabbing data-dragging:border-white/80",
         className
@@ -122,14 +122,23 @@ export const ImageCropperHandle = (
   return (
     <ArkImageCropper.Handle
       className={cn(
-        "absolute flex touch-none items-center justify-center",
-        "data-[position=ne]:z-1 data-[position=nw]:z-1 data-[position=se]:z-1 data-[position=sw]:z-1",
+        "absolute",
+        "flex items-center justify-center",
+        "touch-none",
+        "data-[position=ne]:z-1",
+        "data-[position=nw]:z-1",
+        "data-[position=se]:z-1",
+        "data-[position=sw]:z-1",
         "h-[calc(var(--cropper-handler-size)+8px)] w-[calc(var(--cropper-handler-size)+8px)]",
         "data-disabled:hidden",
-        "data-[position=ne]:cursor-nesw-resize data-[position=nw]:cursor-nwse-resize",
-        "data-[position=se]:cursor-nwse-resize data-[position=sw]:cursor-nesw-resize",
-        "data-[position=n]:cursor-ns-resize data-[position=s]:cursor-ns-resize",
-        "data-[position=e]:cursor-ew-resize data-[position=w]:cursor-ew-resize",
+        "data-[position=ne]:cursor-nesw-resize",
+        "data-[position=nw]:cursor-nwse-resize",
+        "data-[position=se]:cursor-nwse-resize",
+        "data-[position=sw]:cursor-nesw-resize",
+        "data-[position=n]:cursor-ns-resize",
+        "data-[position=s]:cursor-ns-resize",
+        "data-[position=e]:cursor-ew-resize",
+        "data-[position=w]:cursor-ew-resize",
         "border-(--cropper-accent)",
         "[&>span]:bg-(--cropper-accent) [&>span]:shadow-[0_1px_3px_rgb(0_0_0/0.32)]",
         "[@media(hover:hover)_and_(pointer:fine)]:[[data-position=nw],[data-position=ne],[data-position=se],[data-position=sw]]:hover:**:scale-110",
@@ -161,7 +170,10 @@ export const ImageCropperHandle = (
       data-slot="image-cropper-handle"
       {...rest}
     >
-      <span aria-hidden className="block size-(--cropper-handler-size)" />
+      <span
+        aria-hidden
+        className={cn("size-(--cropper-handler-size)", "block")}
+      />
     </ArkImageCropper.Handle>
   );
 };
@@ -178,7 +190,7 @@ export const ImageCropperGrid = (
         "opacity-0",
         "pointer-events-none",
         "transition-opacity duration-200 ease-out",
-        "data-[axis=horizontal]:inset-[33.33%_0] data-[axis=horizontal]:border-white/32 data-[axis=horizontal]:border-t data-[axis=horizontal]:border-b",
+        "data-[axis=horizontal]:inset-[33.33%_0] data-[axis=horizontal]:border-t data-[axis=horizontal]:border-b data-[axis=horizontal]:border-white/32",
         "data-[axis=vertical]:inset-0_[33.33%] data-[axis=vertical]:border-white/32 data-[axis=vertical]:border-r data-[axis=vertical]:border-l",
         "data-dragging:opacity-100",
         "data-panning:opacity-100",

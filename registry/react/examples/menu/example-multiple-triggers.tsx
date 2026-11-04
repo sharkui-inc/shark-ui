@@ -35,12 +35,12 @@ const Example = () => {
       <div className="flex w-full max-w-sm flex-col gap-2">
         {messages.map((message) => (
           <div
-            className="flex items-center gap-3 rounded-lg border border-border px-3 py-2"
+            className="border-border flex items-center gap-3 rounded-lg border px-3 py-2"
             key={message.value}
           >
             <div className="min-w-0 flex-1">
-              <p className="truncate font-medium text-sm">{message.sender}</p>
-              <p className="truncate text-muted-foreground text-xs">
+              <p className="truncate text-sm font-medium">{message.sender}</p>
+              <p className="text-muted-foreground truncate text-xs">
                 {message.preview}
               </p>
             </div>

@@ -1,6 +1,8 @@
 ---
 title: Badge
 description: A badge or an element styled as a badge.
+aliases:
+  - Chip
 seo:
   description: Small chips for labels, counts, and status.
 ---
@@ -92,25 +94,6 @@ import { Badge } from "@/components/ui/badge";
 <Badge>Favorite</Badge>
 ```
 
-## Icons
-
-Mark inline icons with `data-icon` so they follow the reading direction.
-
-```tsx
-import { CheckIcon, StarIcon } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-
-<Badge>
-  <StarIcon data-icon="inline-start" />
-  Favorite
-</Badge>
-
-<Badge>
-  Verified
-  <CheckIcon data-icon="inline-end" />
-</Badge>
-```
-
 ## Variants
 
 ### Default
@@ -162,6 +145,25 @@ The `size` prop controls the badge dimensions.
 The `pill` prop creates fully rounded badges.
 
 <ComponentPreview componentName="badge" fileName="example-pill" />
+
+## Icons
+
+Mark inline icons with `data-icon` so they follow the reading direction.
+
+```tsx
+import { CheckIcon, StarIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+
+<Badge>
+  <StarIcon data-icon="inline-start" />
+  Favorite
+</Badge>
+
+<Badge>
+  Verified
+  <CheckIcon data-icon="inline-end" />
+</Badge>
+```
 
 ## Examples
 

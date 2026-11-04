@@ -28,7 +28,7 @@ const Example = () => {
           />
 
           <div className="flex flex-col items-center gap-2">
-            <p className="font-medium text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-sm font-medium">
               Live Preview
             </p>
             <QrCodeFrame />

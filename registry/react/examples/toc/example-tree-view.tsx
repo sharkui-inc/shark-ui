@@ -79,7 +79,7 @@ const Article = (props: {
         <section className="flex flex-col gap-3 pb-8" key={item.value}>
           <Heading
             className={
-              item.depth === 2 ? "font-semibold text-lg" : "font-medium"
+              item.depth === 2 ? "text-lg font-semibold" : "font-medium"
             }
             id={item.value}
           >

@@ -46,7 +46,7 @@ export const AppSidebar = () => (
       <SidebarMenu>
         <SidebarMenuItem>
           <SidebarMenuButton
-            className="font-semibold text-foreground"
+            className="text-foreground font-semibold"
             size="lg"
           >
             <IconTile aria-hidden size="sm">
@@ -101,13 +101,13 @@ export const AppSidebar = () => (
         <SidebarMenuItem>
           <SidebarMenuButton className="text-foreground" size="lg">
             <Avatar className="size-8 rounded-lg">
-              <AvatarFallback className="rounded-lg text-foreground">
+              <AvatarFallback className="text-foreground rounded-lg">
                 MC
               </AvatarFallback>
             </Avatar>
             <span className="grid min-w-0 flex-1 text-start text-sm leading-tight">
               <span className="truncate font-medium">Maya Chen</span>
-              <span className="truncate text-foreground/64 text-xs">
+              <span className="text-foreground/64 truncate text-xs">
                 maya@northstar.dev
               </span>
             </span>

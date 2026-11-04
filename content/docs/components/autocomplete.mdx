@@ -1,6 +1,9 @@
 ---
 title: Autocomplete
 description: Filter options as you type.
+aliases:
+  - Typeahead
+  - Autosuggest
 seo:
   description: Searchable input that filters a list of options as you type.
 links:
@@ -109,6 +112,12 @@ const { collection, filter } = useListCollection({
 
 Click to focus, then type to open and filter the list.
 
+## With Field
+
+Use [Field](/docs/components/field) for a label, helper text, and error.
+
+<ComponentPreview componentName="autocomplete" fileName="example-with-field" />
+
 ## Controlled
 
 Control the selected value with `value` and `onValueChange` props.
@@ -124,6 +133,18 @@ Control the selected value with `value` and `onValueChange` props.
 ### Disabled
 
 <ComponentPreview componentName="autocomplete" fileName="example-disabled" />
+
+## Variants
+
+Control input appearance with the `variant` prop on `AutocompleteInput`.
+
+### Default
+
+<ComponentPreview componentName="autocomplete" fileName="example-variant-default" />
+
+### Ghost
+
+<ComponentPreview componentName="autocomplete" fileName="example-variant-ghost" />
 
 ## Size
 
@@ -144,12 +165,6 @@ Control the selected value with `value` and `onValueChange` props.
 ### Group
 
 <ComponentPreview componentName="autocomplete" fileName="example-group" />
-
-### With Field
-
-Use [Field](/docs/components/field) for a label, helper text, and error.
-
-<ComponentPreview componentName="autocomplete" fileName="example-with-field" />
 
 ### Scrollable
 
@@ -215,6 +230,7 @@ Input with menu trigger and clear button.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `variant` | `"ghost"` | `-` |
 | `showTrigger` | `boolean` | `false` |
 | `showClear` | `boolean` | `false` |
 | `disabled` | `boolean` | `-` |

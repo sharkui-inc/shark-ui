@@ -10,6 +10,7 @@ export const MailComposeToolbar = (props: {
   onComposeChange: (mode: MailComposeMode) => void;
 }) => {
   const { onComposeChange } = props;
+
   return (
     <>
       <MailToolbarButton label="Back" onClick={() => onComposeChange(null)}>
@@ -23,12 +24,7 @@ export const MailComposeToolbar = (props: {
         >
           <XIcon aria-hidden />
         </MailToolbarButton>
-        <MailToolbarButton
-          form="mail-compose-form"
-          label="Send"
-          type="submit"
-          variant="default"
-        >
+        <MailToolbarButton form="mail-compose-form" label="Send" type="submit">
           <SendIcon aria-hidden />
         </MailToolbarButton>
       </ButtonGroup>

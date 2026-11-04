@@ -8,11 +8,11 @@ import {
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-interface HoverCardProps
-  extends React.ComponentProps<typeof ArkHoverCard.Root> {}
-
 export const useHoverCardContext = useArkHoverCardContext;
-export const HoverCard = (props: HoverCardProps) => {
+
+export const HoverCard = (
+  props: React.ComponentProps<typeof ArkHoverCard.Root>
+) => {
   const {
     lazyMount = true,
     unmountOnExit = true,
@@ -66,12 +66,19 @@ export const HoverCardContent = (props: HoverCardContentProps) => {
             "bg-popover",
             "text-popover-foreground",
             "origin-(--transform-origin)",
-            "duration-150 ease-out",
-            "rounded-xl border shadow-lg/4",
+            "duration-100 ease-out",
+            "ring-border rounded-xl shadow-lg/4 ring-1 ring-inset",
             "outline-hidden",
-            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-            "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
-            "data-[state=closed]:animate-out data-[state=open]:animate-in",
+            "data-[placement^=bottom]:slide-in-from-top-2",
+            "data-[placement^=top]:slide-in-from-bottom-2",
+            "data-[placement^=left]:slide-in-from-right-2",
+            "data-[placement^=right]:slide-in-from-left-2",
+            "data-[state=closed]:fade-out-0",
+            "data-[state=open]:fade-in-0",
+            "data-[state=closed]:zoom-out-95",
+            "data-[state=open]:zoom-in-95",
+            "data-[state=closed]:animate-out",
+            "data-[state=open]:animate-in",
             "motion-reduce:animate-none",
             "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
@@ -105,7 +112,7 @@ export const HoverCardArrow = (
       }
       {...rest}
     >
-      <ArkHoverCard.ArrowTip className="border-t border-l" />
+      <ArkHoverCard.ArrowTip className="border-border border-t border-l" />
     </ArkHoverCard.Arrow>
   );
 };

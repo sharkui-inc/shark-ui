@@ -28,7 +28,7 @@ export const BreadcrumbList = (props: React.ComponentProps<typeof ark.ol>) => {
     <ark.ol
       className={cn(
         "flex flex-wrap items-center gap-1.5 sm:gap-2.5",
-        "wrap-break-word text-muted-foreground text-sm",
+        "text-muted-foreground text-sm wrap-break-word",
         className
       )}
       data-slot="breadcrumb-list"
@@ -63,7 +63,7 @@ export const BreadcrumbLink = (props: React.ComponentProps<typeof ark.a>) => {
         "outline-hidden",
         "transition-colors",
         "hover:text-foreground",
-        "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:z-10 focus-visible:ring-2",
         "motion-reduce:transition-none",
         className
       )}
@@ -80,7 +80,7 @@ export const BreadcrumbPage = (
 
   return (
     <ark.span
-      className={cn("font-normal text-foreground", className)}
+      className={cn("text-foreground font-normal", className)}
       data-slot="breadcrumb-page"
       {...rest}
       aria-current="page"
@@ -97,7 +97,8 @@ export const BreadcrumbSeparator = (
     <Separator
       asChild
       className={cn(
-        "bg-transparent opacity-64",
+        "bg-transparent",
+        "opacity-64",
         "data-[orientation=horizontal]:h-auto data-[orientation=horizontal]:w-auto",
         "[&_svg]:size-4",
         className
@@ -109,7 +110,9 @@ export const BreadcrumbSeparator = (
         aria-hidden
         role="presentation"
       >
-        {children ?? <ChevronRightIcon className="size-4 rtl:rotate-180" />}
+        {children ?? (
+          <ChevronRightIcon className={cn("size-4", "rtl:rotate-180")} />
+        )}
       </ark.li>
     </Separator>
   );

@@ -1,11 +1,7 @@
 "use client";
 
 import { CopyIcon, FileCodeIcon } from "lucide-react";
-import {
-  Field,
-  FieldDescription,
-  FieldLabel,
-} from "@/registry/react/components/field";
+import { Field, FieldLabel } from "@/registry/react/components/field";
 import {
   InputGroup,
   InputGroupAddon,
@@ -31,7 +27,6 @@ const Example = () => (
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>
-    <FieldDescription>Header positioned above the textarea.</FieldDescription>
   </Field>
 );
 

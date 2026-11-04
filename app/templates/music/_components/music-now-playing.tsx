@@ -10,6 +10,7 @@ export const MusicNowPlaying = (props: {
   track: Track;
 }) => {
   const { isFavorite, onToggleFavorite, track } = props;
+
   return (
     <div className="flex min-w-0 items-center gap-3">
       <img
@@ -20,8 +21,8 @@ export const MusicNowPlaying = (props: {
         width={40}
       />
       <div className="min-w-0">
-        <p className="truncate font-medium text-sm">{track.title}</p>
-        <p className="truncate text-muted-foreground text-xs">{track.artist}</p>
+        <p className="truncate text-sm font-medium">{track.title}</p>
+        <p className="text-muted-foreground truncate text-xs">{track.artist}</p>
       </div>
       <Button
         aria-label="Save current track"

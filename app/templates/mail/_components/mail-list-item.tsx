@@ -28,6 +28,7 @@ export const MailListItem = (props: {
   onToggleFavorite: (emailId: string) => void;
 }) => {
   const { email, isSelected, isStarred, onSelect, onToggleFavorite } = props;
+
   return (
     <Item
       className={cn(
@@ -78,7 +79,7 @@ export const MailListItem = (props: {
           <StarIcon
             aria-hidden
             className={
-              isStarred ? "fill-current text-primary" : "text-muted-foreground"
+              isStarred ? "text-primary fill-current" : "text-muted-foreground"
             }
           />
         </Button>

@@ -10,13 +10,13 @@ import {
 } from "@/registry/react/components/card";
 import {
   DateInput,
-  useDateInputContext,
+  DateInputLabel,
 } from "@/registry/react/components/date-input";
-import { Field, FieldLabel } from "@/registry/react/components/field";
+import { Field } from "@/registry/react/components/field";
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const resetRef = React.useRef<(() => void) | null>(null);
+  const [value, setValue] = React.useState([parseDate("2025-04-15")]);
 
   const onSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -33,18 +33,18 @@ const Example = () => {
       <form onSubmit={onSubmit}>
         <CardContent>
           <Field>
-            <FieldLabel>Appointment date</FieldLabel>
-            <DateInput defaultValue={initialValue} name="date" showClear>
-              <DateInputReset resetRef={resetRef} />
+            <DateInput
+              name="date"
+              onValueChange={({ value: nextValue }) => setValue(nextValue)}
+              showClear
+              value={value}
+            >
+              <DateInputLabel>Appointment date</DateInputLabel>
             </DateInput>
           </Field>
         </CardContent>
         <CardFooter className="justify-end">
-          <Button
-            onClick={() => resetRef.current?.()}
-            type="button"
-            variant="outline"
-          >
+          <Button onClick={() => setValue([])} type="button" variant="outline">
             Clear
           </Button>
           <Button type="submit">Submit</Button>
@@ -53,23 +53,5 @@ const Example = () => {
     </Card>
   );
 };
-
-const DateInputReset = (props: {
-  resetRef: { current: (() => void) | null };
-}) => {
-  const { resetRef } = props;
-  const dateInput = useDateInputContext();
-
-  React.useEffect(() => {
-    resetRef.current = () => dateInput.setValue(initialValue);
-    return () => {
-      resetRef.current = null;
-    };
-  }, [dateInput, resetRef]);
-
-  return null;
-};
-
-const initialValue = [parseDate("2025-04-15")];
 
 export default Example;

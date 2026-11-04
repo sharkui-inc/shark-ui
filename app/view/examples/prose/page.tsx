@@ -30,74 +30,74 @@ const ProseExamplePage = () => (
         aria-labelledby="default-heading"
         className="flex flex-col gap-5"
       >
-        <h1 className="font-medium text-muted-foreground" id="default-heading">
+        <h1 className="text-muted-foreground font-medium" id="default-heading">
           Default
         </h1>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ExampleDefault />
         </div>
       </section>
       <section aria-labelledby="h1-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="h1-heading">
+        <h2 className="text-muted-foreground font-medium" id="h1-heading">
           H1
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ExampleH1 />
         </div>
       </section>
       <section aria-labelledby="h2-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="h2-heading">
+        <h2 className="text-muted-foreground font-medium" id="h2-heading">
           H2
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ExampleH2 />
         </div>
       </section>
       <section aria-labelledby="h3-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="h3-heading">
+        <h2 className="text-muted-foreground font-medium" id="h3-heading">
           H3
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ExampleH3 />
         </div>
       </section>
       <section aria-labelledby="h4-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="h4-heading">
+        <h2 className="text-muted-foreground font-medium" id="h4-heading">
           H4
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ExampleH4 />
         </div>
       </section>
       <section aria-labelledby="h5-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="h5-heading">
+        <h2 className="text-muted-foreground font-medium" id="h5-heading">
           H5
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ExampleH5 />
         </div>
       </section>
       <section aria-labelledby="h6-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="h6-heading">
+        <h2 className="text-muted-foreground font-medium" id="h6-heading">
           H6
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ExampleH6 />
         </div>
       </section>
       <section aria-labelledby="p-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="p-heading">
+        <h2 className="text-muted-foreground font-medium" id="p-heading">
           P
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ExampleP />
         </div>
       </section>
       <section aria-labelledby="a-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="a-heading">
+        <h2 className="text-muted-foreground font-medium" id="a-heading">
           A
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ExampleA />
         </div>
       </section>
@@ -106,44 +106,44 @@ const ProseExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="blockquote-heading"
         >
           Blockquote
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ExampleBlockquote />
         </div>
       </section>
       <section aria-labelledby="list-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="list-heading">
+        <h2 className="text-muted-foreground font-medium" id="list-heading">
           List
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ExampleList />
         </div>
       </section>
       <section aria-labelledby="ol-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="ol-heading">
+        <h2 className="text-muted-foreground font-medium" id="ol-heading">
           OL
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ExampleOl />
         </div>
       </section>
       <section aria-labelledby="small-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="small-heading">
+        <h2 className="text-muted-foreground font-medium" id="small-heading">
           Small
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ExampleSmall />
         </div>
       </section>
       <section aria-labelledby="mark-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="mark-heading">
+        <h2 className="text-muted-foreground font-medium" id="mark-heading">
           Mark
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ExampleMark />
         </div>
       </section>
@@ -152,20 +152,20 @@ const ProseExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="inline-code-heading"
         >
           Inline Code
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ExampleInlineCode />
         </div>
       </section>
       <section aria-labelledby="kbd-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="kbd-heading">
+        <h2 className="text-muted-foreground font-medium" id="kbd-heading">
           Kbd
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ExampleKbd />
         </div>
       </section>
@@ -173,34 +173,34 @@ const ProseExamplePage = () => (
         aria-labelledby="details-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="details-heading">
+        <h2 className="text-muted-foreground font-medium" id="details-heading">
           Details
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ExampleDetails />
         </div>
       </section>
       <section aria-labelledby="dl-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="dl-heading">
+        <h2 className="text-muted-foreground font-medium" id="dl-heading">
           DL
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ExampleDl />
         </div>
       </section>
       <section aria-labelledby="table-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="table-heading">
+        <h2 className="text-muted-foreground font-medium" id="table-heading">
           Table
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ExampleTable />
         </div>
       </section>
       <section aria-labelledby="media-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="media-heading">
+        <h2 className="text-muted-foreground font-medium" id="media-heading">
           Media
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ExampleMedia />
         </div>
       </section>
@@ -209,12 +209,12 @@ const ProseExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="separator-heading"
         >
           Separator
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ExampleSeparator />
         </div>
       </section>
@@ -223,20 +223,20 @@ const ProseExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="not-prose-heading"
         >
           Not Prose
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ExampleNotProse />
         </div>
       </section>
       <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="rtl-heading">
+        <h2 className="text-muted-foreground font-medium" id="rtl-heading">
           RTL
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <PreviewLocaleProvider>
             <ExampleRtl />
           </PreviewLocaleProvider>

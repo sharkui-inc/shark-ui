@@ -51,13 +51,13 @@ export const ComponentResizer = (props: ComponentResizerProps) => {
   return (
     <figure
       className={cn(
-        "h-[600px] w-full gap-4 overflow-hidden rounded-md border bg-card",
+        "bg-card h-[600px] w-full gap-4 overflow-hidden rounded-md border",
         className
       )}
       {...rest}
     >
-      <figcaption className="flex h-14 items-center justify-between bg-muted px-4">
-        <div className="font-medium text-sm">{title}</div>
+      <figcaption className="bg-muted flex h-14 items-center justify-between px-4">
+        <div className="text-sm font-medium">{title}</div>
 
         <div className="flex items-center gap-2">
           <ToggleGroup
@@ -135,7 +135,7 @@ export const ComponentResizer = (props: ComponentResizerProps) => {
 
         <ResizableResizeTrigger id="1:2" withHandle />
         <ResizablePanel
-          className="relative z-10 flex size-full after:absolute after:inset-0 after:inset-e-3 after:z-0 after:bg-muted/48"
+          className="after:bg-muted/48 relative z-10 flex size-full after:absolute after:inset-0 after:inset-e-3 after:z-0"
           id="2"
         />
       </Resizable>

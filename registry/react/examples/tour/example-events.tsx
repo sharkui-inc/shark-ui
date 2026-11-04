@@ -39,39 +39,39 @@ const Example = () => {
 
         <div className="flex flex-col gap-2">
           <div
-            className="flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm shadow-xs/4"
+            className="bg-card flex items-center gap-2 rounded-md border px-3 py-2 text-sm shadow-xs/4"
             id="tour-events-started"
           >
             <PlayIcon
               aria-hidden
-              className="size-4 shrink-0 text-muted-foreground"
+              className="text-muted-foreground size-4 shrink-0"
             />
             Started
           </div>
           <div
-            className="flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm shadow-xs/4"
+            className="bg-card flex items-center gap-2 rounded-md border px-3 py-2 text-sm shadow-xs/4"
             id="tour-events-advanced"
           >
             <ArrowRightIcon
               aria-hidden
-              className="size-4 shrink-0 text-muted-foreground rtl:rotate-180"
+              className="text-muted-foreground size-4 shrink-0 rtl:rotate-180"
             />
             Advanced
           </div>
           <div
-            className="flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm shadow-xs/4"
+            className="bg-card flex items-center gap-2 rounded-md border px-3 py-2 text-sm shadow-xs/4"
             id="tour-events-finished"
           >
             <CircleCheckIcon
               aria-hidden
-              className="size-4 shrink-0 text-muted-foreground"
+              className="text-muted-foreground size-4 shrink-0"
             />
             Finished
           </div>
         </div>
 
-        <div className="flex h-28 flex-col gap-1 overflow-y-auto rounded-lg border bg-muted p-3 font-mono text-muted-foreground text-xs">
-          <span className="font-medium font-sans text-foreground text-sm">
+        <div className="bg-muted text-muted-foreground flex h-28 flex-col gap-1 overflow-y-auto rounded-lg border p-3 font-mono text-xs">
+          <span className="text-foreground font-sans text-sm font-medium">
             Event log
           </span>
           {logs.length === 0 ? (

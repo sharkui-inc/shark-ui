@@ -38,7 +38,7 @@ const Example = () => {
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-2 text-center">
-        <p className="font-medium text-sm">{values.rate}</p>
+        <p className="text-sm font-medium">{values.rate}</p>
         <Rating>
           <RatingStars />
         </Rating>

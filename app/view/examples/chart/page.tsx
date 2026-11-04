@@ -11,10 +11,10 @@ const ChartExamplePage = () => (
   <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
     <div className="grid min-w-0 grid-cols-1 gap-16 sm:grid-cols-2 [&>section]:min-w-0">
       <section aria-labelledby="demo-heading" className="flex flex-col gap-5">
-        <h1 className="font-medium text-muted-foreground" id="demo-heading">
+        <h1 className="text-muted-foreground font-medium" id="demo-heading">
           Demo
         </h1>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ChartDemo />
         </div>
       </section>
@@ -23,37 +23,37 @@ const ChartExamplePage = () => (
         aria-labelledby="example-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="example-heading">
+        <h2 className="text-muted-foreground font-medium" id="example-heading">
           Example
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ChartExample />
         </div>
       </section>
 
       <section aria-labelledby="axis-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="axis-heading">
+        <h2 className="text-muted-foreground font-medium" id="axis-heading">
           Axis
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ChartExampleAxis />
         </div>
       </section>
 
       <section aria-labelledby="grid-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="grid-heading">
+        <h2 className="text-muted-foreground font-medium" id="grid-heading">
           Grid
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ChartExampleGrid />
         </div>
       </section>
 
       <section aria-labelledby="legend-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="legend-heading">
+        <h2 className="text-muted-foreground font-medium" id="legend-heading">
           Legend
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ChartExampleLegend />
         </div>
       </section>
@@ -62,19 +62,19 @@ const ChartExamplePage = () => (
         aria-labelledby="tooltip-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="tooltip-heading">
+        <h2 className="text-muted-foreground font-medium" id="tooltip-heading">
           Tooltip
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ChartExampleTooltip />
         </div>
       </section>
 
       <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="rtl-heading">
+        <h2 className="text-muted-foreground font-medium" id="rtl-heading">
           RTL
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ChartRtl />
         </div>
       </section>
@@ -84,12 +84,12 @@ const ChartExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="chart-tooltip-heading"
         >
           Tooltip
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ChartTooltip />
         </div>
       </section>

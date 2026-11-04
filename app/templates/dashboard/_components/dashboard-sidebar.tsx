@@ -53,7 +53,7 @@ export const DashboardSidebar = () => {
             <IconTile aria-hidden size="xs">
               <WavesHorizontalIcon aria-hidden />
             </IconTile>
-            <p className="truncate font-semibold text-sm">Onda</p>
+            <p className="truncate text-sm font-semibold">Onda</p>
           </div>
 
           <Button

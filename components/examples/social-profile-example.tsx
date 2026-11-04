@@ -69,17 +69,17 @@ export const SocialProfileExample = (props: React.ComponentProps<"div">) => {
       </CardContent>
       <CardFooter className="flex-wrap justify-between gap-3">
         <div className="flex gap-4">
-          <p className="whitespace-nowrap text-sm">
-            <span className="font-medium text-foreground">4</span>{" "}
+          <p className="text-sm whitespace-nowrap">
+            <span className="text-foreground font-medium">4</span>{" "}
             <span className="text-muted-foreground sm:hidden">Follows</span>
-            <span className="hidden text-muted-foreground sm:inline">
+            <span className="text-muted-foreground hidden sm:inline">
               Following
             </span>
           </p>
-          <p className="whitespace-nowrap text-sm">
-            <span className="font-medium text-foreground">{followers}</span>{" "}
+          <p className="text-sm whitespace-nowrap">
+            <span className="text-foreground font-medium">{followers}</span>{" "}
             <span className="text-muted-foreground sm:hidden">Foll.</span>
-            <span className="hidden text-muted-foreground sm:inline">
+            <span className="text-muted-foreground hidden sm:inline">
               Followers
             </span>
           </p>

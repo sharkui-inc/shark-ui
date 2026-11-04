@@ -24,7 +24,7 @@ const CarouselRtl = () => (
         <CarouselItem index={index} key={number}>
           <Card>
             <CardContent className="flex aspect-square items-center justify-center">
-              <span className="font-semibold text-4xl">{number}</span>
+              <span className="text-4xl font-semibold">{number}</span>
             </CardContent>
           </Card>
         </CarouselItem>

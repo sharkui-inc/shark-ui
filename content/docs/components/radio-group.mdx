@@ -1,6 +1,8 @@
 ---
 title: Radio Group
 description: Choose one option from a set.
+aliases:
+  - Radio button
 seo:
   description: Choose one option from a small set of radios.
 links:
@@ -75,6 +77,12 @@ import {
 </RadioGroup>
 ```
 
+## With Field
+
+Use `FieldLegend` inside `FieldSet` to name the group.
+
+<ComponentPreview componentName="radio-group" fileName="example-with-field" />
+
 ## Controlled
 
 Use the `value` and `onValueChange` props to control the radio group.
@@ -94,18 +102,6 @@ Use the `disabled` prop on `RadioGroup` to disable all the radio group items, or
 <ComponentPreview componentName="radio-group" fileName="example-disabled" />
 
 ## Examples
-
-### With Field
-
-Use `RadioGroupLabel` to name the group.
-
-<ComponentPreview componentName="radio-group" fileName="example-with-field" />
-
-### Without Field
-
-`RadioGroupLabel` also works when the group is used outside `Field`.
-
-<ComponentPreview componentName="radio-group" fileName="example-without-field" />
 
 ### With Description
 

@@ -6,10 +6,9 @@ import {
 } from "@ark-ui/react/slider";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import {
-  FieldLabel,
-  fieldLabelVariants,
-} from "@/registry/react/components/field";
+import { fieldLabelVariants } from "@/registry/react/components/field";
+
+export const useSliderContext = useArkSliderContext;
 
 interface SliderProps extends React.ComponentProps<typeof ArkSlider.Root> {
   /**
@@ -32,7 +31,6 @@ interface SliderProps extends React.ComponentProps<typeof ArkSlider.Root> {
   showMarkers?: boolean;
 }
 
-export const useSliderContext = useArkSliderContext;
 export const Slider = (props: SliderProps) => {
   const {
     value,
@@ -90,7 +88,8 @@ export const Slider = (props: SliderProps) => {
             "grow",
             "bg-input/64",
             "rounded-full",
-            "select-none overflow-hidden",
+            "overflow-hidden",
+            "select-none",
             "data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full",
             "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2"
           )}
@@ -119,11 +118,13 @@ export const Slider = (props: SliderProps) => {
                 "h-4.5 w-[calc(--spacing(4.5)*1.375)]",
                 "data-[orientation=vertical]:h-[calc(--spacing(4.5)*1.375)] data-[orientation=vertical]:w-4.5",
                 "bg-white",
-                "rounded-full border border-input shadow-xs/4",
+                "border-input rounded-full border shadow-xs/4",
                 "cursor-grab select-none",
-                "origin-left data-[orientation=vertical]:origin-bottom rtl:origin-right",
+                "origin-left",
+                "data-[orientation=vertical]:origin-bottom",
+                "rtl:origin-right",
                 "transition-[box-shadow,scale] duration-150 ease-out",
-                "focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
+                "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2 focus-visible:outline-hidden",
                 "data-dragging:scale-105 data-dragging:cursor-grabbing",
                 "pointer-coarse:after:absolute pointer-coarse:after:h-full pointer-coarse:after:min-h-11",
                 "motion-reduce:transition-none"
@@ -142,10 +143,10 @@ export const Slider = (props: SliderProps) => {
           <ArkSlider.MarkerGroup
             className={cn(
               "absolute!",
-              "font-medium text-muted-foreground text-xs",
+              "text-muted-foreground text-xs font-medium",
               "pointer-events-none",
               "data-[orientation=horizontal]:inset-x-[calc(var(--slider-thumb-width)/-4)] data-[orientation=horizontal]:top-full data-[orientation=horizontal]:mt-2",
-              "data-[orientation=vertical]:inset-s-full data-[orientation=vertical]:inset-y-[calc(var(--slider-thumb-height)/-4)] data-[orientation=vertical]:ms-2"
+              "data-[orientation=vertical]:inset-y-[calc(var(--slider-thumb-height)/-4)] data-[orientation=vertical]:inset-s-full data-[orientation=vertical]:ms-2"
             )}
             data-slot="slider-marker-group"
           >
@@ -159,7 +160,8 @@ export const Slider = (props: SliderProps) => {
                     "flex items-center justify-center gap-2",
                     "data-[orientation=horizontal]:w-0 data-[orientation=horizontal]:flex-col",
                     "data-[orientation=vertical]:h-0 data-[orientation=vertical]:flex-row",
-                    "data-[state=at-value]:text-foreground data-[state=under-value]:text-foreground"
+                    "data-[state=at-value]:text-foreground",
+                    "data-[state=under-value]:text-foreground"
                   )}
                   data-interval={
                     markerValue % markerInterval === 0 ? undefined : ""
@@ -171,7 +173,9 @@ export const Slider = (props: SliderProps) => {
                   <span
                     aria-hidden
                     className={cn(
-                      "bg-muted-foreground/64 group-data-[state=at-value]/marker:bg-foreground group-data-[state=under-value]/marker:bg-foreground",
+                      "bg-muted-foreground/64",
+                      "group-data-[state=at-value]/marker:bg-foreground",
+                      "group-data-[state=under-value]/marker:bg-foreground",
                       "group-data-[orientation=horizontal]/marker:h-1 group-data-[orientation=horizontal]/marker:w-px",
                       "group-data-[orientation=vertical]/marker:h-px group-data-[orientation=vertical]/marker:w-1",
                       "group-data-interval/marker:group-data-[orientation=horizontal]/marker:h-0.5",
@@ -212,12 +216,10 @@ export const SliderValue = (
   const { className, ...rest } = props;
 
   return (
-    <FieldLabel asChild>
-      <ArkSlider.ValueText
-        className={cn("ms-auto tabular-nums", className)}
-        data-slot="slider-value"
-        {...rest}
-      />
-    </FieldLabel>
+    <ArkSlider.ValueText
+      className={cn(fieldLabelVariants(), "ms-auto", "tabular-nums", className)}
+      data-slot="slider-value"
+      {...rest}
+    />
   );
 };

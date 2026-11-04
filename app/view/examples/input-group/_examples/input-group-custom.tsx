@@ -15,7 +15,7 @@ const InputGroupCustom = () => (
         placeholder="Autoresize textarea..."
       />
       <InputGroupAddon align="block-end">
-        <InputGroupButton className="ml-auto" size="sm" variant="default">
+        <InputGroupButton className="ml-auto" size="sm">
           Submit
         </InputGroupButton>
       </InputGroupAddon>

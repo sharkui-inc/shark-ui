@@ -25,7 +25,7 @@ export const PreviewIframe = (props: PreviewIframeProps) => {
       style={style}
     >
       <iframe
-        className="size-full bg-background"
+        className="bg-background size-full"
         loading="lazy"
         {...rest}
         height={height}

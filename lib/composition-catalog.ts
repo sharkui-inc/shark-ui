@@ -1,6 +1,11 @@
 import { readFile } from "node:fs/promises";
-import { dirname, extname, join, posix, resolve } from "node:path";
+import { dirname, extname, join, resolve } from "node:path";
 import React from "react";
+import {
+  RELATIVE_IMPORT_PATTERN,
+  rewriteCompositionImports,
+  toDisplayPath,
+} from "@/lib/composition-imports";
 import { highlightCode } from "@/lib/highlight-code";
 import type {
   CompositionArtifact,
@@ -16,16 +21,11 @@ import { BLOCK_CATEGORIES } from "@/registry/react/blocks/_categories";
 import { BLOCKS } from "@/registry/react/blocks/_registry";
 import { TEMPLATE_CATEGORIES } from "@/registry/react/templates/_categories";
 import { TEMPLATES } from "@/registry/react/templates/_registry";
-import { replaceRegistryImportsForCopy } from "@/utils/formatter";
 
 const SOURCE_EXTENSIONS = [".tsx", ".ts", ".jsx", ".js", ".json"] as const;
 
-const RELATIVE_IMPORT_PATTERN = /(from\s+["']|import\s+["'])(\.[^"']+)(["'])/g;
-
 const REGISTRY_COMPONENT_IMPORT_PATTERN =
-  /@\/registry\/react\/components\/([a-z0-9-]+)/g;
-
-const CODE_EXTENSION_PATTERN = /\.(?:tsx?|jsx?)$/;
+  /@\/registry\/react\/components\/([a-z0-9-]+)/gu;
 
 export const COMPOSITION_KINDS = ["blocks", "templates"] as const;
 export type CompositionKind = (typeof COMPOSITION_KINDS)[number];
@@ -59,60 +59,13 @@ const COMPOSITION_CATALOGS = {
   },
 } as const satisfies Record<CompositionKind, CompositionCatalogOptions>;
 
-const stripCodeExtension = (path: string) =>
-  path.replace(CODE_EXTENSION_PATTERN, "");
-
-const toConsumerImport = (target: string) => {
-  if (target.startsWith("@components/")) {
-    return stripCodeExtension(target.replace("@components/", "@/components/"));
-  }
-  if (target.startsWith("@ui/")) {
-    return stripCodeExtension(target.replace("@ui/", "@/components/ui/"));
-  }
-  if (target.startsWith("@lib/")) {
-    return stripCodeExtension(target.replace("@lib/", "@/lib/"));
-  }
-  if (target.startsWith("@hooks/")) {
-    return stripCodeExtension(target.replace("@hooks/", "@/hooks/"));
-  }
-  return null;
-};
-
-const getConsumerImport = (
-  currentFile: CompositionFileDefinition,
-  importedFile: CompositionFileDefinition
-) => {
-  const aliasedTarget = importedFile.target
-    ? toConsumerImport(importedFile.target)
-    : null;
-  if (aliasedTarget) {
-    return aliasedTarget;
-  }
-  if (!(currentFile.target && importedFile.target)) {
-    return null;
-  }
-
-  const relativeTarget = posix.relative(
-    posix.dirname(currentFile.target),
-    importedFile.target
-  );
-  const normalized = relativeTarget.startsWith(".")
-    ? relativeTarget
-    : `./${relativeTarget}`;
-  return stripCodeExtension(normalized);
-};
-
 const getLanguage = (path: string) => extname(path).slice(1) || "tsx";
 
 export const getDisplayPath = (file: CompositionFileDefinition) => {
   if (!file.target) {
     return file.path;
   }
-  return file.target
-    .replace("@components/", "components/")
-    .replace("@ui/", "components/ui/")
-    .replace("@lib/", "lib/")
-    .replace("@hooks/", "hooks/");
+  return toDisplayPath(file.target);
 };
 
 export const getFileTree = (files: CompositionFileDefinition[]) => {
@@ -202,25 +155,6 @@ const createCatalog = ({
     );
   };
 
-  const prepareFileContent = (
-    composition: CompositionDefinition,
-    file: CompositionFileDefinition,
-    source: string
-  ) => {
-    const withConsumerImports = source.replace(
-      RELATIVE_IMPORT_PATTERN,
-      (match, prefix: string, specifier: string, suffix: string) => {
-        const importedFile = resolveRelativeFile(composition, file, specifier);
-        if (!importedFile) {
-          return match;
-        }
-        const consumerImport = getConsumerImport(file, importedFile);
-        return consumerImport ? `${prefix}${consumerImport}${suffix}` : match;
-      }
-    );
-    return replaceRegistryImportsForCopy(withConsumerImports);
-  };
-
   const validateComposition = (composition: CompositionDefinition) => {
     const knownCategory = categories.some(
       (category) => category.slug === composition.category
@@ -292,7 +226,9 @@ const createCatalog = ({
 
     return {
       ...file,
-      content: prepareFileContent(composition, file, source),
+      content: rewriteCompositionImports(source, file, (specifier) =>
+        resolveRelativeFile(composition, file, specifier)
+      ),
       displayPath: getDisplayPath(file),
     };
   };
@@ -348,6 +284,7 @@ const createCatalog = ({
       const categoryB = categories.find(
         (category) => category.slug === b.category
       );
+
       return (
         (categoryA?.order ?? 999) - (categoryB?.order ?? 999) ||
         a.meta.order - b.meta.order
@@ -442,29 +379,5 @@ export const validateCompositionDefinitions = async () => {
   await Promise.all(COMPOSITION_KINDS.map((kind) => catalogs[kind].validate()));
 };
 
-const toCommandItem = (
-  definition: Pick<
-    CompositionDefinition,
-    "category" | "description" | "name" | "title"
-  >
-): CommandCompositionItem => {
-  const url = `/blocks/${definition.category}?block=${definition.name}`;
-  return {
-    group: "Blocks",
-    installName: definition.name,
-    isComponent: true,
-    keywords: [
-      definition.name,
-      definition.title,
-      definition.description,
-      definition.category,
-    ].join(" "),
-    label: definition.title,
-    url,
-    value: url,
-  };
-};
-
-export const getCommandCompositionItems = (): CommandCompositionItem[] =>
-  // Blocks catalog route is temporarily disabled (`app/(app)/_blocks`).
-  getDefinitions("blocks").map(toCommandItem).slice(0, 0);
+// Blocks catalog route is temporarily disabled (`app/(app)/_blocks`).
+export const getCommandCompositionItems = (): CommandCompositionItem[] => [];

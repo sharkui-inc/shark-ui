@@ -8,12 +8,13 @@ import {
   CardContent,
   CardFooter,
 } from "@/registry/react/components/card";
-import { Field, FieldLabel } from "@/registry/react/components/field";
+import { Field } from "@/registry/react/components/field";
 import {
   Listbox,
   ListboxContent,
   ListboxItem,
   ListboxItemText,
+  ListboxLabel,
 } from "@/registry/react/components/listbox";
 import { toast } from "@/registry/react/components/toast";
 
@@ -33,12 +34,12 @@ const Example = () => {
       <form onSubmit={onSubmit}>
         <CardContent>
           <Field>
-            <FieldLabel>Favorite size</FieldLabel>
             <Listbox
               collection={collection}
               onValueChange={({ value: nextValue }) => setValue(nextValue)}
               value={value}
             >
+              <ListboxLabel>Favorite size</ListboxLabel>
               <ListboxContent className="rounded-lg border shadow-xs/4">
                 {collection.items.map((item) => (
                   <ListboxItem item={item} key={item.value}>

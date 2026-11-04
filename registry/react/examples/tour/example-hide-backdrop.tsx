@@ -25,10 +25,10 @@ const Example = () => {
         </TourTrigger>
 
         <div
-          className="flex flex-col gap-1 rounded-lg border bg-card px-3 py-2.5 shadow-xs/4"
+          className="bg-card flex flex-col gap-1 rounded-lg border px-3 py-2.5 shadow-xs/4"
           id="tour-hide-backdrop-note"
         >
-          <span className="font-medium text-sm">Release note</span>
+          <span className="text-sm font-medium">Release note</span>
           <span className="text-muted-foreground text-xs">
             Stays readable while the tour is open.
           </span>

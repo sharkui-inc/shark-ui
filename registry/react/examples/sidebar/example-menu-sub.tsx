@@ -1,7 +1,8 @@
-import { ChevronRightIcon, FolderIcon } from "lucide-react";
+import { FolderIcon } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
+  CollapsibleIndicator,
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
 import {
@@ -34,7 +35,7 @@ const Example = () => (
                     <SidebarMenuButton>
                       <FolderIcon aria-hidden="true" />
                       <span>{project.name}</span>
-                      <ChevronRightIcon aria-hidden="true" />
+                      <CollapsibleIndicator />
                     </SidebarMenuButton>
                   </CollapsibleTrigger>
                   <CollapsibleContent>

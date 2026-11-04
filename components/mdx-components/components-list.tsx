@@ -259,7 +259,7 @@ export const ComponentsList = (props: ComponentsListProps) => {
                   className={cn(
                     "flex",
                     "rounded-lg",
-                    "border border-transparent outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+                    "focus-visible:border-ring/64 focus-visible:ring-ring/24 border border-transparent outline-hidden focus-visible:ring-2"
                   )}
                   href={item.url}
                   key={item.url}

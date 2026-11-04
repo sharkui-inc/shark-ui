@@ -47,7 +47,7 @@ const Example = () => {
         <CollapsibleContent className="text-sm">
           <div className="mt-(--space) grid gap-3 px-(--space)">
             <div className="grid grid-cols-3 items-center gap-4">
-              <div className="col-span-2 text-muted-foreground">
+              <div className="text-muted-foreground col-span-2">
                 {values.google}
               </div>
               <div className="place-self-end">
@@ -55,7 +55,7 @@ const Example = () => {
               </div>
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
-              <div className="col-span-2 text-muted-foreground">
+              <div className="text-muted-foreground col-span-2">
                 {values.facebook}
               </div>
               <div className="place-self-end">
@@ -63,7 +63,7 @@ const Example = () => {
               </div>
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
-              <div className="col-span-2 text-muted-foreground">
+              <div className="text-muted-foreground col-span-2">
                 {values.tiktok}
               </div>
               <div className="place-self-end">
@@ -71,7 +71,7 @@ const Example = () => {
               </div>
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
-              <div className="col-span-2 text-muted-foreground">
+              <div className="text-muted-foreground col-span-2">
                 {values.instagram}
               </div>
               <div className="place-self-end">

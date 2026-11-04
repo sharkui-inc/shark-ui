@@ -199,7 +199,7 @@ interface AiChatProps {
 const noop = () => undefined;
 
 const getCompactThreadTitle = (message: ChatMessage) => {
-  const prompt = message.content.trim().replace(/\s+/g, " ");
+  const prompt = message.content.trim().replace(/\s+/gu, " ");
   const matchingTurn = USER_TURNS.find(
     (turn) => turn.id === message.id || turn.text === prompt
   );
@@ -337,12 +337,13 @@ const EmptyConversation = (props: {
   welcomeTitle: string;
 }) => {
   const { onSuggestion, welcomeTitle } = props;
+
   return (
     <div className="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-center px-4 py-10 text-center sm:px-6">
       <IconTile aria-hidden size="lg">
         <WavesHorizontalIcon aria-hidden />
       </IconTile>
-      <h2 className="mt-7 max-w-3xl text-balance font-medium text-2xl tracking-tight">
+      <h2 className="mt-7 max-w-3xl text-2xl font-medium tracking-tight text-balance">
         {welcomeTitle}
       </h2>
 
@@ -350,7 +351,7 @@ const EmptyConversation = (props: {
         {emptyStateSuggestions.map((item) => (
           <Item
             asChild
-            className="h-auto min-h-14 min-w-40 flex-1 hover:bg-muted"
+            className="hover:bg-muted h-auto min-h-14 min-w-40 flex-1"
             key={item.label}
             variant="outline"
           >
@@ -360,7 +361,7 @@ const EmptyConversation = (props: {
               type="button"
             >
               <span className="flex min-w-0 items-center gap-2">
-                <span className="grid size-7 shrink-0 place-items-center text-primary">
+                <span className="text-primary grid size-7 shrink-0 place-items-center">
                   {item.icon}
                 </span>
                 <ItemTitle className="line-clamp-2 text-start leading-4">
@@ -550,7 +551,7 @@ const ChatMessageItem = (props: {
         <MessageContent>
           {isUser ? null : <MessageHeader>{assistantName}</MessageHeader>}
           {isUser || !isStreaming ? null : (
-            <Marker className="w-fit rounded-lg bg-muted px-3 py-2">
+            <Marker className="bg-muted w-fit rounded-lg px-3 py-2">
               <MarkerIcon>
                 <BotIcon aria-hidden />
               </MarkerIcon>
@@ -630,7 +631,7 @@ const ChatSession = (props: {
 
   return (
     <div
-      className={cn("flex min-h-0 w-full flex-col bg-background", className)}
+      className={cn("bg-background flex min-h-0 w-full flex-col", className)}
     >
       <header
         className={cn(
@@ -639,7 +640,7 @@ const ChatSession = (props: {
         )}
       >
         {hasMessages ? (
-          <h2 className="min-w-0 flex-1 truncate font-medium text-sm">
+          <h2 className="min-w-0 flex-1 truncate text-sm font-medium">
             {threadTitle}
           </h2>
         ) : null}

@@ -14,19 +14,21 @@ import {
 } from "@/registry/react/components/marquee";
 
 const Example = () => (
-  <Marquee autoFill speed={100}>
-    <MarqueeContent>
-      {items.map((Icon) => (
-        <MarqueeItem key={Icon.name}>
-          <Card>
-            <CardContent>
-              <Icon className="size-10" />
-            </CardContent>
-          </Card>
-        </MarqueeItem>
-      ))}
-    </MarqueeContent>
-  </Marquee>
+  <div className="w-full px-4">
+    <Marquee autoFill speed={100}>
+      <MarqueeContent>
+        {items.map((Icon) => (
+          <MarqueeItem key={Icon.name}>
+            <Card>
+              <CardContent>
+                <Icon className="size-10" />
+              </CardContent>
+            </Card>
+          </MarqueeItem>
+        ))}
+      </MarqueeContent>
+    </Marquee>
+  </div>
 );
 
 const items = [

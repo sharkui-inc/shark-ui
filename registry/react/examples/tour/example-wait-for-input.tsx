@@ -32,7 +32,7 @@ const Example = () => {
           <Button variant="outline">Start tour</Button>
         </TourTrigger>
 
-        <div className="flex flex-col gap-4 rounded-lg border bg-card p-4 shadow-xs/4">
+        <div className="bg-card flex flex-col gap-4 rounded-lg border p-4 shadow-xs/4">
           <div className="flex items-center gap-3">
             <img
               alt=""
@@ -42,8 +42,8 @@ const Example = () => {
               width={40}
             />
             <div className="flex min-w-0 flex-col">
-              <span className="truncate font-medium text-sm">New member</span>
-              <span className="truncate text-muted-foreground text-xs">
+              <span className="truncate text-sm font-medium">New member</span>
+              <span className="text-muted-foreground truncate text-xs">
                 Onda workspace
               </span>
             </div>
@@ -75,7 +75,7 @@ const Example = () => {
   );
 };
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/u;
 
 const continueAction = {
   action: "next" as const,

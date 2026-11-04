@@ -39,7 +39,7 @@ export const ChatConversation = () => {
   };
 
   return (
-    <div className="flex h-full min-h-0 w-full flex-col bg-background">
+    <div className="bg-background flex h-full min-h-0 w-full flex-col">
       <header className="flex h-12 shrink-0 items-center gap-3 border-b px-4">
         <div className="ms-auto">
           <ChatHeader />

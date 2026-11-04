@@ -44,7 +44,7 @@ export const RatingExample = (props: React.ComponentProps<"div">) => {
       </CardHeader>
       <CardContent className="flex flex-col gap-5">
         <div className="flex flex-col gap-2">
-          <p className="font-heading font-semibold text-xl tracking-[-0.02em]">
+          <p className="font-heading text-xl font-semibold tracking-[-0.02em]">
             {copyForRating(rating)}
           </p>
           <Rating
@@ -70,7 +70,7 @@ export const RatingExample = (props: React.ComponentProps<"div">) => {
             >
               {tripTags.map((tag) => (
                 <ToggleGroupItem
-                  className="text-muted-foreground data-[state=on]:border-transparent data-[state=on]:bg-foreground data-[state=on]:text-background data-[state=on]:hover:bg-foreground data-[state=on]:hover:text-background dark:data-[state=on]:bg-foreground dark:data-[state=on]:text-background dark:data-[state=on]:hover:bg-foreground dark:data-[state=on]:hover:text-background"
+                  className="text-muted-foreground data-[state=on]:bg-foreground data-[state=on]:text-background data-[state=on]:hover:bg-foreground data-[state=on]:hover:text-background dark:data-[state=on]:bg-foreground dark:data-[state=on]:text-background dark:data-[state=on]:hover:bg-foreground dark:data-[state=on]:hover:text-background data-[state=on]:border-transparent"
                   key={tag.value}
                   value={tag.value}
                 >

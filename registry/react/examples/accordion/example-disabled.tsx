@@ -12,7 +12,7 @@ const Example = () => (
       className="flex flex-col gap-2"
     >
       <h3
-        className="font-medium text-muted-foreground text-sm"
+        className="text-muted-foreground text-sm font-medium"
         id="item-disabled-title"
       >
         Item disabled
@@ -36,7 +36,7 @@ const Example = () => (
       className="flex flex-col gap-2"
     >
       <h3
-        className="font-medium text-muted-foreground text-sm"
+        className="text-muted-foreground text-sm font-medium"
         id="root-disabled-title"
       >
         Root disabled

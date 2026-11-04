@@ -8,18 +8,20 @@ import {
 } from "@/registry/react/components/field";
 
 const Example = () => (
-  <FieldGroup className="mx-auto min-w-72">
-    <Field orientation="horizontal">
-      <Checkbox defaultChecked />
-      <FieldContent>
-        <FieldLabel>Receive notifications</FieldLabel>
-        <FieldDescription>
-          You'll receive a notification when someone posts a comment on your
-          post
-        </FieldDescription>
-      </FieldContent>
-    </Field>
-  </FieldGroup>
+  <div className="flex w-full justify-center">
+    <FieldGroup className="w-full max-w-xs">
+      <Field orientation="horizontal">
+        <Checkbox defaultChecked />
+        <FieldContent>
+          <FieldLabel>Receive notifications</FieldLabel>
+          <FieldDescription>
+            You'll receive a notification when someone posts a comment on your
+            post
+          </FieldDescription>
+        </FieldContent>
+      </Field>
+    </FieldGroup>
+  </div>
 );
 
 export default Example;

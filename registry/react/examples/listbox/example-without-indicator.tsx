@@ -24,24 +24,24 @@ const Example = () => {
         onValueChange={(e) => setValue(e.value)}
         value={value}
       >
-        <ListboxContent className="overflow-visible rounded-2xl bg-muted">
+        <ListboxContent className="bg-muted overflow-visible rounded-2xl">
           {collection.items.map((item) => (
             <ListboxItem
-              className="relative flex w-full flex-row items-center gap-3 rounded-xl border border-transparent bg-transparent px-3 py-3 text-start transition-[background-color,border-color,box-shadow] duration-150 ease-out hover:bg-accent/64 data-[selected]:border-input data-[selected]:bg-background data-[selected]:shadow-xs/4"
+              className="hover:bg-accent/64 data-[selected]:border-input data-[selected]:bg-background relative flex w-full flex-row items-center gap-3 rounded-xl border border-transparent bg-transparent px-3 py-3 text-start transition-[background-color,border-color,box-shadow] duration-150 ease-out data-[selected]:shadow-xs/4"
               data-selected={value.includes(item.value) || undefined}
               item={item}
               key={item.value}
               showIndicator={false}
             >
               <div className="min-w-0 flex-1">
-                <ListboxItemText className="block truncate font-medium text-sm">
+                <ListboxItemText className="block truncate text-sm font-medium">
                   {item.label}
                 </ListboxItemText>
               </div>
             </ListboxItem>
           ))}
         </ListboxContent>
-        <div className="relative min-h-80 overflow-hidden rounded-2xl bg-muted shadow-xs/4 sm:min-h-full">
+        <div className="bg-muted relative min-h-80 overflow-hidden rounded-2xl shadow-xs/4 sm:min-h-full">
           <img
             alt={selectedImage?.alt ?? ""}
             className="absolute inset-0 size-full object-cover"
@@ -49,8 +49,8 @@ const Example = () => {
             src={selectedImage?.artwork}
             width={640}
           />
-          <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-foreground/80 via-foreground/64 to-transparent px-5 pt-16 pb-5 sm:px-7 sm:pt-24 sm:pb-7">
-            <h3 className="font-heading font-medium text-background text-xl tracking-tight sm:text-2xl">
+          <div className="from-foreground/80 via-foreground/64 absolute inset-x-0 bottom-0 bg-linear-to-t to-transparent px-5 pt-16 pb-5 sm:px-7 sm:pt-24 sm:pb-7">
+            <h3 className="font-heading text-background text-xl font-medium tracking-tight sm:text-2xl">
               {selectedImage?.label}
             </h3>
           </div>

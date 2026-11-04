@@ -3,7 +3,7 @@ import { describe, it } from "node:test";
 import { createRuntimeThemeCss } from "@/scripts/build-themes.mts";
 
 const HEADER = "/* Generated from scripts/build-themes.mts. Do not edit. */";
-const LOCALHOST_RE = /localhost|127\.0\.0\.1/i;
+const LOCALHOST_RE = /localhost|127\.0\.0\.1/iu;
 
 describe("createRuntimeThemeCss", () => {
   it("starts with the generated-file header", () => {

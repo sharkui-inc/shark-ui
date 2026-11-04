@@ -47,7 +47,12 @@ export const PromptInputBottom = (
 
   return (
     <ark.div
-      className={cn("flex w-full items-center gap-2", "px-6 py-2", className)}
+      className={cn(
+        "w-full",
+        "flex items-center gap-2",
+        "px-6 py-2",
+        className
+      )}
       data-slot="prompt-input-bottom"
       {...rest}
     />
@@ -95,7 +100,7 @@ export const PromptInput = (props: PromptInputProps) => {
   return (
     <PromptInputProvider value={{ hasText, onStop, setHasText, status }}>
       <ark.form
-        className={cn("flex w-full flex-col", className)}
+        className={cn("w-full", "flex flex-col", className)}
         data-slot="prompt-input"
         data-status={status}
         onSubmit={(event) => {
@@ -113,7 +118,13 @@ export const PromptInput = (props: PromptInputProps) => {
         }}
         {...rest}
       >
-        <InputGroup className="h-auto flex-col items-stretch rounded-2xl md:h-auto">
+        <InputGroup
+          className={cn(
+            "h-auto md:h-auto",
+            "flex-col items-stretch",
+            "rounded-2xl"
+          )}
+        >
           {inputGroupChildren}
         </InputGroup>
         {bottomChildren}
@@ -130,7 +141,7 @@ export const PromptInputHeader = (
   return (
     <InputGroupAddon
       align="block-start"
-      className={cn("h-auto flex-wrap items-start gap-2", className)}
+      className={cn("h-auto", "flex-wrap items-start gap-2", className)}
       data-slot="prompt-input-header"
       {...rest}
     />
@@ -145,7 +156,12 @@ export const PromptInputFooter = (
   return (
     <InputGroupAddon
       align="block-end"
-      className={cn("h-auto min-h-8 justify-between gap-0.5 pb-2", className)}
+      className={cn(
+        "h-auto min-h-8",
+        "justify-between gap-0.5",
+        "pb-2",
+        className
+      )}
       data-slot="prompt-input-footer"
       {...rest}
     />
@@ -159,7 +175,7 @@ export const PromptInputTools = (
 
   return (
     <ark.div
-      className={cn("flex min-w-0 flex-1 items-center gap-1", className)}
+      className={cn("min-w-0 flex-1", "flex items-center gap-1", className)}
       data-slot="prompt-input-tools"
       {...rest}
     />
@@ -180,7 +196,10 @@ export const PromptInputTextarea = (
   return (
     <InputGroupTextarea
       className={cn(
-        "max-h-52 min-h-12 overflow-y-auto pt-2 pb-1 leading-6",
+        "max-h-52 min-h-12",
+        "pt-2 pb-1",
+        "leading-6",
+        "overflow-y-auto",
         className
       )}
       data-slot="prompt-input-textarea"
@@ -254,13 +273,15 @@ export const PromptInputSubmit = (
   if (isSubmitted) {
     submitIcon = <Spinner />;
   } else if (isStreaming) {
-    submitIcon = <SquareIcon aria-hidden className="size-3 fill-current" />;
+    submitIcon = (
+      <SquareIcon aria-hidden className={cn("size-3", "fill-current")} />
+    );
   }
 
   return (
     <PromptInputButton
       aria-label={isStreaming ? "Stop generating" : "Send prompt"}
-      className={cn("ms-auto rounded-full", className)}
+      className={cn("ms-auto", "rounded-full", className)}
       data-slot="prompt-input-submit"
       disabled={isDisabled ? true : undefined}
       onClick={(event) => {

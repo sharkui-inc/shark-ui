@@ -21,7 +21,6 @@ const Example = () => {
     <Autocomplete
       className="w-full max-w-64"
       collection={collection}
-      defaultValue={["option-24"]}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
       <AutocompleteInput

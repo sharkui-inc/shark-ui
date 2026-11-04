@@ -1,61 +1,41 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { Field } from "@/registry/react/components/field";
 import {
   Listbox,
   ListboxContent,
   ListboxItem,
-  ListboxItemIndicator,
+  ListboxItemDescription,
   ListboxItemText,
 } from "@/registry/react/components/listbox";
 
 const Example = () => (
-  <Field className="w-full">
-    <Listbox
-      className="mx-auto w-full max-w-md"
-      collection={collection}
-      defaultValue={[collection.items[0].title]}
-      orientation="vertical"
-    >
-      <ListboxContent className="gap-1">
-        {collection.items.map((item) => (
-          <ListboxItem
-            className="group/album rounded-xl data-[state=checked]:bg-accent"
-            item={item}
-            key={item.title}
-            showIndicator={false}
-          >
-            <div className="flex w-full min-w-0 items-center gap-3">
-              <div className="relative size-14 shrink-0 overflow-hidden rounded-lg bg-muted">
-                <img
-                  alt=""
-                  className="size-full object-cover"
-                  height={112}
-                  src={item.artwork}
-                  width={112}
-                />
-              </div>
-              <div className="min-w-0 flex-1">
-                <ListboxItemText className="block font-medium">
-                  {item.title}
-                </ListboxItemText>
-                <p className="truncate text-muted-foreground text-sm">
-                  {item.artist}
-                  <span aria-hidden className="text-muted-foreground/64">
-                    {" "}
-                    ·{" "}
-                  </span>
-                  <span dir="ltr">{item.year}</span>
-                </p>
-              </div>
-              <ListboxItemIndicator className="relative inset-auto top-auto size-7 translate-y-0 rounded-full bg-background opacity-0 group-data-[state=checked]/album:opacity-100 [&_svg]:size-3.5 [&_svg]:text-foreground" />
-            </div>
-          </ListboxItem>
-        ))}
-      </ListboxContent>
-    </Listbox>
-  </Field>
+  <Listbox
+    className="w-full max-w-xs"
+    collection={collection}
+    defaultValue={[collection.items[0].title]}
+    orientation="vertical"
+  >
+    <ListboxContent className="gap-1.5">
+      {collection.items.map((item) => (
+        <ListboxItem className="gap-1.5 p-1.5" item={item} key={item.title}>
+          <img
+            alt=""
+            className="size-10 rounded-md object-cover"
+            height={40}
+            src={item.artwork}
+            width={40}
+          />
+          <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+            <ListboxItemText>{item.title}</ListboxItemText>
+            <ListboxItemDescription>
+              {item.artist} · {item.year}
+            </ListboxItemDescription>
+          </div>
+        </ListboxItem>
+      ))}
+    </ListboxContent>
+  </Listbox>
 );
 
 const collection = createListCollection({

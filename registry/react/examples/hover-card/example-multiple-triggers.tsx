@@ -25,7 +25,7 @@ const Example = () => {
         Reviewed by{" "}
         <HoverCardTrigger asChild value="alice">
           <button
-            className="font-medium text-foreground underline underline-offset-4"
+            className="text-foreground font-medium underline underline-offset-4"
             type="button"
           >
             @alice
@@ -34,7 +34,7 @@ const Example = () => {
         ,{" "}
         <HoverCardTrigger asChild value="bob">
           <button
-            className="font-medium text-foreground underline underline-offset-4"
+            className="text-foreground font-medium underline underline-offset-4"
             type="button"
           >
             @bob
@@ -43,7 +43,7 @@ const Example = () => {
         , and{" "}
         <HoverCardTrigger asChild value="carol">
           <button
-            className="font-medium text-foreground underline underline-offset-4"
+            className="text-foreground font-medium underline underline-offset-4"
             type="button"
           >
             @carol
@@ -59,7 +59,7 @@ const Example = () => {
             </Avatar>
             <div className="flex flex-col gap-2">
               <div className="flex flex-col">
-                <span className="font-medium text-sm">
+                <span className="text-sm font-medium">
                   {activeProfile.name}
                 </span>
                 <span className="text-muted-foreground text-sm">

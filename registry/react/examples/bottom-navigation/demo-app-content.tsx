@@ -1,5 +1,3 @@
-// biome-ignore-all lint/a11y/useSemanticElements: The horizontal scroll viewport is a labeled group, not a landmark.
-// biome-ignore-all lint/a11y/noNoninteractiveTabindex: Keyboard access is required to scroll the playlist strip.
 import { cn } from "@/lib/utils";
 import {
   Avatar,
@@ -15,7 +13,6 @@ import {
   ItemTitle,
 } from "@/registry/react/components/item";
 
-/** Same Dicebear waves covers as `app/templates/music/_data/music.ts`. */
 export const DEMO_MUSIC_ART = [
   "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Mira+Vale&waveColor=1a6b5c",
   "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Northbound&waveColor=2b6cb0",
@@ -128,20 +125,20 @@ export const DemoAppContent = (props: DemoAppContentProps) => {
   return (
     <div
       className={cn(
-        "relative min-h-full bg-background text-foreground",
+        "bg-background text-foreground relative min-h-full",
         className
       )}
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none sticky top-0 z-10 -mb-[100px] h-[100px] bg-linear-to-t from-transparent via-background/64 to-background"
+        className="via-background/64 to-background pointer-events-none sticky top-0 z-10 -mb-24 h-24 bg-linear-to-t from-transparent"
       />
       <header className="relative flex items-center justify-between gap-3 px-4 pt-12 pb-3">
         <div className="min-w-0">
-          <p className="font-heading font-semibold text-base leading-tight">
+          <p className="font-heading text-base leading-tight font-semibold">
             {labels.greeting}
           </p>
-          <p className="truncate text-muted-foreground text-xs">
+          <p className="text-muted-foreground truncate text-xs">
             {labels.name}
           </p>
         </div>
@@ -158,21 +155,19 @@ export const DemoAppContent = (props: DemoAppContentProps) => {
       </header>
 
       <section className="pb-4">
-        <p className="mb-2 px-4 text-muted-foreground text-xs">
+        <p className="text-muted-foreground mb-2 px-4 text-xs">
           {labels.jumpBackIn}
         </p>
         <section
           aria-label="Playlists"
-          className="scrollbar-none flex gap-2.5 overflow-x-auto px-4 outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
-          role="group"
-          tabIndex={0}
+          className="focus-visible:border-ring/64 focus-visible:ring-ring/24 flex scrollbar-none gap-2.5 overflow-x-auto px-4 outline-hidden focus-visible:ring-2"
         >
           {labels.playlists.map((playlist) => (
             <div
               className="flex w-14 shrink-0 flex-col gap-1.5"
               key={playlist.title}
             >
-              <div className="relative aspect-square overflow-hidden rounded-lg after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten">
+              <div className="after:border-border relative aspect-square overflow-hidden rounded-lg after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:border after:mix-blend-darken dark:after:mix-blend-lighten">
                 <img
                   alt=""
                   className="size-full object-cover"
@@ -190,16 +185,12 @@ export const DemoAppContent = (props: DemoAppContentProps) => {
       </section>
 
       <section className="px-1 pb-2">
-        <p className="mb-0.5 px-3 text-muted-foreground text-xs">
+        <p className="text-muted-foreground mb-0.5 px-3 text-xs">
           {labels.recentlyPlayed}
         </p>
         <ItemGroup className="gap-0">
           {labels.tracks.map((track) => (
-            <Item
-              className="px-3 py-2 hover:bg-transparent"
-              key={track.title}
-              variant="default"
-            >
+            <Item className="px-3 py-2 hover:bg-transparent" key={track.title}>
               <ItemMedia variant="image">
                 <img alt="" height={40} src={track.image} width={40} />
               </ItemMedia>

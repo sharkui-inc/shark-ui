@@ -51,7 +51,7 @@ const Example = () => {
               </FloatingPanelCloseTrigger>
             </FloatingPanelControl>
           </FloatingPanelHeader>
-          <FloatingPanelBody className="text-center text-muted-foreground text-sm">
+          <FloatingPanelBody className="text-muted-foreground text-center text-sm">
             <p>
               Position: ({position.x}, {position.y}).
             </p>

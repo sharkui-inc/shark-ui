@@ -23,7 +23,7 @@ export const MailPane = (props: {
     selectedEmail?.unread ?? false
   );
 
-  const closeCompose = (event?: React.FormEvent<HTMLFormElement>) => {
+  const closeCompose = (event?: React.SubmitEvent<HTMLFormElement>) => {
     event?.preventDefault();
     onComposeChange(null);
   };
@@ -52,7 +52,7 @@ export const MailPane = (props: {
 const MailPaneBody = (props: {
   composeMode: MailComposeMode;
   onCompose: () => void;
-  onSend: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSend: (event: React.SubmitEvent<HTMLFormElement>) => void;
 }) => {
   const { composeMode, onCompose, onSend } = props;
   if (composeMode) {

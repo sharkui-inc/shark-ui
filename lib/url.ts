@@ -1,6 +1,6 @@
 import { SITE_CONFIG } from "@/config/site";
 
-const TRAILING_SLASH = /\/$/;
+const TRAILING_SLASH = /\/$/u;
 
 const joinUrl = (base: string, path: string) => {
   const normalizedBase = base.replace(TRAILING_SLASH, "");

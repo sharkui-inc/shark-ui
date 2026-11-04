@@ -95,6 +95,7 @@ export const TourOverlay = (
 
 export const tourPositionerVariants = tv({
   base: [
+    "z-[calc(100+var(--layer-index,0)+var(--tour-layer)+1)]",
     "data-[type=dialog]:fixed data-[type=dialog]:inset-0 data-[type=dialog]:p-4",
     "data-[type=tooltip]:absolute",
     "data-[type=tooltip]:max-w-[calc(100dvw-1rem)] data-[type=tooltip]:max-sm:min-w-0!",
@@ -158,11 +159,15 @@ export const tourContentVariants = tv({
       "w-full max-w-md",
       "data-[type=tooltip]:w-fit data-[type=tooltip]:max-w-[min(28rem,calc(100dvw-2rem))] data-[type=tooltip]:max-sm:min-w-0 data-[type=tooltip]:sm:min-w-xs",
       "outline-hidden",
-      "origin-center data-[type=tooltip]:origin-(--transform-origin)",
-      "duration-200 ease-out",
-      "data-[state=closed]:animate-out data-[state=open]:animate-in",
-      "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-      "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
+      "origin-center",
+      "data-[type=tooltip]:origin-(--transform-origin)",
+      "duration-100 ease-out",
+      "data-[state=closed]:animate-out",
+      "data-[state=open]:animate-in",
+      "data-[state=open]:fade-in-0",
+      "data-[state=closed]:fade-out-0",
+      "data-[state=open]:zoom-in-95",
+      "data-[state=closed]:zoom-out-95",
       "motion-reduce:animate-none",
       "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
     ],
@@ -171,7 +176,7 @@ export const tourContentVariants = tv({
       "flex flex-col",
       "bg-popover",
       "text-popover-foreground",
-      "rounded-2xl border shadow-lg/4",
+      "ring-border rounded-2xl shadow-lg/4 ring-1 ring-inset",
       "overflow-hidden",
     ],
   },
@@ -179,10 +184,10 @@ export const tourContentVariants = tv({
     bottomStickOnMobile: {
       true: {
         content: [
-          "data-[type=dialog]:max-sm:row-start-2 data-[type=dialog]:max-sm:min-w-0 data-[type=dialog]:max-sm:max-w-none",
+          "data-[type=dialog]:max-sm:row-start-2 data-[type=dialog]:max-sm:max-w-none data-[type=dialog]:max-sm:min-w-0",
           "data-[type=dialog]:max-sm:origin-bottom",
-          "data-[type=dialog]:max-sm:data-[state=closed]:slide-out-to-bottom-1/2 data-[type=dialog]:max-sm:data-[state=closed]:zoom-out-100",
-          "data-[type=dialog]:max-sm:data-[state=open]:slide-in-from-bottom-1/2 data-[type=dialog]:max-sm:data-[state=open]:zoom-in-100",
+          "data-[type=dialog]:max-sm:data-[state=closed]:slide-out-to-bottom-4 data-[type=dialog]:max-sm:data-[state=closed]:zoom-out-100",
+          "data-[type=dialog]:max-sm:data-[state=open]:slide-in-from-bottom-4 data-[type=dialog]:max-sm:data-[state=open]:zoom-in-100",
         ],
         panel: [
           "in-data-[type=dialog]:max-sm:max-h-[calc(100svh-3rem)] in-data-[type=dialog]:max-sm:min-h-0",
@@ -244,7 +249,10 @@ export const TourContent = (props: TourContentProps) => {
             {!!showCloseButton && (
               <TourClose asChild className="absolute inset-e-4 top-4">
                 <Button
-                  className="text-muted-foreground hover:text-foreground"
+                  className={cn(
+                    "text-muted-foreground",
+                    "hover:text-foreground"
+                  )}
                   size="icon-md"
                   variant="ghost"
                 >
@@ -280,7 +288,9 @@ export const TourArrow = (
       }
       {...rest}
     >
-      {children ?? <ArkTour.ArrowTip className="border-t border-l" />}
+      {children ?? (
+        <ArkTour.ArrowTip className="border-border border-t border-l" />
+      )}
     </ArkTour.Arrow>
   );
 };
@@ -309,7 +319,7 @@ export const TourSpotlight = (
     <ArkTour.Spotlight
       className={cn(
         "z-[calc(100+var(--layer-index,0)+var(--tour-layer))]",
-        "border-2 border-ring/64 ring-2 ring-ring/24",
+        "border-ring/64 ring-ring/24 border-2 ring-2",
         className
       )}
       data-slot="tour-spotlight"
@@ -478,14 +488,14 @@ export const TourActions = (
                       {action.action === "prev" && (
                         <ChevronLeftIcon
                           aria-hidden
-                          className="size-3.5 rtl:rotate-180"
+                          className={cn("size-3.5", "rtl:rotate-180")}
                         />
                       )}
                       {action.label}
                       {action.action === "next" && (
                         <ChevronRightIcon
                           aria-hidden
-                          className="size-3.5 rtl:rotate-180"
+                          className={cn("size-3.5", "rtl:rotate-180")}
                         />
                       )}
                     </Button>
@@ -523,7 +533,10 @@ export const TourPreviousStep = (
       asChild
     >
       <Button className={className} data-tour-action="prev" variant="outline">
-        <ChevronLeftIcon aria-hidden className="size-3.5 rtl:rotate-180" />
+        <ChevronLeftIcon
+          aria-hidden
+          className={cn("size-3.5", "rtl:rotate-180")}
+        />
         {prevAction.label}
       </Button>
     </TourActionTrigger>
@@ -561,7 +574,10 @@ export const TourNextStep = (
         {action.label}
 
         {action.action === "next" && (
-          <ChevronRightIcon aria-hidden className="size-3.5 rtl:rotate-180" />
+          <ChevronRightIcon
+            aria-hidden
+            className={cn("size-3.5", "rtl:rotate-180")}
+          />
         )}
       </Button>
     </TourActionTrigger>

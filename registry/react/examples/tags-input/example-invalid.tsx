@@ -13,7 +13,6 @@ const Example = () => (
     <TagsInput
       className="w-full"
       defaultValue={["React"]}
-      invalid
       placeholder="Add framework"
     >
       <TagsInputContext>

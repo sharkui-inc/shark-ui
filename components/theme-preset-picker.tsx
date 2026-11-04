@@ -71,8 +71,8 @@ const ThemePresetBar = (props: { onSelect?: () => void }) => {
             aria-label={preset.label}
             className={cn(
               "group relative aspect-square justify-center rounded-none border border-transparent p-0",
-              "data-[state=checked]:z-10 data-[state=checked]:outline-2 data-[state=checked]:outline-foreground data-[state=checked]:-outline-offset-2",
-              "data-focus-visible:z-20 data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24",
+              "data-[state=checked]:outline-foreground data-[state=checked]:z-10 data-[state=checked]:outline-2 data-[state=checked]:-outline-offset-2",
+              "data-focus-visible:border-ring/64 data-focus-visible:ring-ring/24 data-focus-visible:z-20 data-focus-visible:ring-2",
               "pointer-coarse:after:hidden"
             )}
             key={preset.label}
@@ -134,7 +134,7 @@ const ThemePresetGrid = (props: { onSelect?: () => void }) => {
           className={cn(
             "group flex flex-col items-center gap-1.5 rounded-lg p-1",
             "cursor-pointer outline-hidden",
-            "border border-transparent focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+            "focus-visible:border-ring/64 focus-visible:ring-ring/24 border border-transparent focus-visible:ring-2"
           )}
           key={preset.label}
           value={preset.label}
@@ -143,10 +143,10 @@ const ThemePresetGrid = (props: { onSelect?: () => void }) => {
             className={cn(
               "size-8 rounded-full",
               preset.swatchClass,
-              "group-data-[state=checked]:ring-2 group-data-[state=checked]:ring-foreground/24 group-data-[state=checked]:ring-offset-2 group-data-[state=checked]:ring-offset-background"
+              "group-data-[state=checked]:ring-foreground/24 group-data-[state=checked]:ring-offset-background group-data-[state=checked]:ring-2 group-data-[state=checked]:ring-offset-2"
             )}
           />
-          <span className="text-muted-foreground text-xs group-data-[state=checked]:text-foreground">
+          <span className="text-muted-foreground group-data-[state=checked]:text-foreground text-xs">
             {preset.label}
           </span>
         </RadioGroupItem>

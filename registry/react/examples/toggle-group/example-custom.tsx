@@ -13,7 +13,7 @@ const Example = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <span className="font-medium text-sm">Font Weight</span>
+        <span className="text-sm font-medium">Font Weight</span>
         <ToggleGroup
           className="flex-wrap"
           multiple={false}

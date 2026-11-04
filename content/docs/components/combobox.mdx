@@ -1,6 +1,8 @@
 ---
 title: Combobox
 description: Searchable list of options.
+aliases:
+  - Searchable select
 seo:
   description: Searchable list of options in a popup.
 links:
@@ -109,6 +111,12 @@ const { collection, filter } = useListCollection({
 </Combobox>
 ```
 
+## With Field
+
+Use [Field](/docs/components/field) for a label, helper text, and error.
+
+<ComponentPreview componentName="combobox" fileName="example-with-field" />
+
 ## Controlled
 
 Control the selected value with `value` and `onValueChange` props.
@@ -168,12 +176,6 @@ Automatically highlight the first matching item as the user types.
 ### Group
 
 <ComponentPreview componentName="combobox" fileName="example-group" />
-
-### With Field
-
-Use [Field](/docs/components/field) for a label, helper text, and error.
-
-<ComponentPreview componentName="combobox" fileName="example-with-field" />
 
 ### Scrollable
 

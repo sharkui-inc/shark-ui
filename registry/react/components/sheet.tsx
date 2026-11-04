@@ -21,6 +21,7 @@ import {
 } from "@/registry/react/components/dialog";
 
 export const useSheetContext = useArkDialogContext;
+
 export const Sheet = (props: React.ComponentProps<typeof Dialog>) => (
   <Dialog data-slot="sheet" {...props} />
 );
@@ -28,6 +29,22 @@ export const Sheet = (props: React.ComponentProps<typeof Dialog>) => (
 export const SheetTrigger = (
   props: React.ComponentProps<typeof ArkDialog.Trigger>
 ) => <ArkDialog.Trigger data-slot="sheet-trigger" {...props} />;
+
+const sheetOverlayMotion = [
+  "duration-150 ease-out",
+  "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
+  "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
+  "motion-reduce:animate-none motion-reduce:transition-none",
+  "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+] as const;
+
+const sheetContentMotion = [
+  "duration-200 ease-in-out",
+  "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
+  "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
+  "motion-reduce:animate-none motion-reduce:transition-none",
+  "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+] as const;
 
 export const SheetOverlay = (
   props: React.ComponentProps<typeof DialogOverlay>
@@ -39,6 +56,7 @@ export const SheetOverlay = (
       className={cn(
         "peer-data-[slot=dialog-overlay]:block!",
         "peer-data-[slot=sheet-overlay]:hidden",
+        sheetOverlayMotion,
         className
       )}
       data-slot="sheet-overlay"
@@ -49,7 +67,7 @@ export const SheetOverlay = (
 
 const sheetPositionerVariants = tv({
   base: [
-    "fixed inset-0 z-[calc(50+var(--layer-index,0))]",
+    "fixed inset-0 z-[calc(50+var(--layer-index,0)+1)]",
     "h-svh w-screen",
     "grid",
     "overflow-hidden",
@@ -99,11 +117,8 @@ const sheetContentVariants = tv({
     "text-popover-foreground",
     "shadow-lg/4",
     "outline-hidden",
-    "origin-center transition-[opacity,translate] duration-200 ease-out will-change-transform",
-    "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
-    "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
-    "motion-reduce:animate-none motion-reduce:transition-none",
-    "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+    "origin-center",
+    ...sheetContentMotion,
   ],
   defaultVariants: {
     placement: "right",
@@ -112,28 +127,35 @@ const sheetContentVariants = tv({
   variants: {
     placement: {
       bottom: [
-        "row-start-2 border-t pb-[env(safe-area-inset-bottom,0px)]",
-        "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
+        "row-start-2",
+        "pb-[env(safe-area-inset-bottom,0px)]",
+        "border-t",
+        "data-[state=closed]:slide-out-to-bottom-10",
+        "data-[state=open]:slide-in-from-bottom-10",
       ],
       left: [
         "w-[calc(100%-(--spacing(12)))] max-w-md",
         "ps-[env(safe-area-inset-left,0px)]",
         "col-start-2",
         "border-e",
-        "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left",
-        "rtl:data-[state=closed]:slide-out-to-right rtl:data-[state=open]:slide-in-from-right rtl:ps-[env(safe-area-inset-right,0px)]",
+        "data-[state=closed]:slide-out-to-left-10",
+        "data-[state=open]:slide-in-from-left-10",
+        "rtl:data-[state=closed]:slide-out-to-right-10 rtl:data-[state=open]:slide-in-from-right-10 rtl:ps-[env(safe-area-inset-right,0px)]",
       ],
       right: [
         "w-[calc(100%-(--spacing(12)))] max-w-md",
         "pe-[env(safe-area-inset-right,0px)]",
         "col-start-2",
         "border-s",
-        "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
-        "rtl:data-[state=closed]:slide-out-to-left rtl:data-[state=open]:slide-in-from-left rtl:pe-[env(safe-area-inset-left,0px)]",
+        "data-[state=closed]:slide-out-to-right-10",
+        "data-[state=open]:slide-in-from-right-10",
+        "rtl:data-[state=closed]:slide-out-to-left-10 rtl:data-[state=open]:slide-in-from-left-10 rtl:pe-[env(safe-area-inset-left,0px)]",
       ],
       top: [
-        "border-b pt-[env(safe-area-inset-top,0px)]",
-        "data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
+        "pt-[env(safe-area-inset-top,0px)]",
+        "border-b",
+        "data-[state=closed]:slide-out-to-top-10",
+        "data-[state=open]:slide-in-from-top-10",
       ],
     },
     variant: {
@@ -186,7 +208,11 @@ export const SheetContent = (props: SheetContentProps) => {
             <SheetClose asChild>
               <Button
                 aria-label="Close"
-                className="absolute inset-e-2 top-2 opacity-64 hover:opacity-100"
+                className={cn(
+                  "absolute inset-e-2 top-2",
+                  "opacity-64",
+                  "hover:opacity-100"
+                )}
                 size="icon-sm"
                 variant="ghost"
               >

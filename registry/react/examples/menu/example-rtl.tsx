@@ -28,6 +28,7 @@ import {
 const Example = () => {
   const { locale } = usePreviewLocale();
   const { values } = translations[locale];
+
   return (
     <Menu>
       <MenuTrigger asChild>

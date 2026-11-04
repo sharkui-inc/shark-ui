@@ -31,6 +31,7 @@ import { getInitials } from "../../_utils/get-initials";
 
 export const SettingsMembersPage = (props: { onSave: () => void }) => {
   const { onSave } = props;
+
   return (
     <FieldGroup className="max-w-xl">
       <FieldSet>

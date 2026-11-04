@@ -1,6 +1,8 @@
 ---
 title: Signature Pad
 description: Capture hand-drawn signatures.
+aliases:
+  - Signature
 seo:
   description: Draw signatures on a canvas with clear and export.
 links:
@@ -69,6 +71,12 @@ import { SignaturePad } from "@/components/ui/signature-pad";
 <SignaturePad />
 ```
 
+## With Field
+
+Use `SignaturePadLabel` inside [Field](/docs/components/field) to name the pad. Clicking it focuses the drawing surface.
+
+<ComponentPreview componentName="signature-pad" fileName="example-with-field" />
+
 ## States
 
 ### Disabled
@@ -91,12 +99,6 @@ Use `onDrawEnd` to capture the signature as an image.
 
 <ComponentPreview componentName="signature-pad" fileName="example-image-preview" autoHeight />
 
-### With Field
-
-Use `SignaturePadLabel` to name the pad, and [Field](/docs/components/field) for helper text.
-
-<ComponentPreview componentName="signature-pad" fileName="example-with-field" />
-
 ### Form Integration
 
 <ComponentPreview componentName="signature-pad" fileName="example-form" />
@@ -111,7 +113,7 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 ### SignaturePad
 
-Root component. Canvas for drawing signatures. Manages strokes and export.
+Root component. Canvas for drawing signatures.
 
 | Prop | Type | Default |
 | --- | --- | --- |

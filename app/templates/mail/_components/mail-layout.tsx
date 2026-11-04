@@ -17,6 +17,7 @@ export const MailLayout = (props: {
     (callback) => {
       const media = window.matchMedia("(max-width: 639px)");
       media.addEventListener("change", callback);
+
       return () => media.removeEventListener("change", callback);
     },
     () => window.matchMedia("(max-width: 639px)").matches,
@@ -24,7 +25,7 @@ export const MailLayout = (props: {
   );
 
   return (
-    <div className="flex h-full min-h-0 flex-col overflow-hidden bg-background">
+    <div className="bg-background flex h-full min-h-0 flex-col overflow-hidden">
       <Resizable
         className="min-h-0 flex-1"
         defaultSize={isNarrow ? [28, 72] : [16, 84]}
@@ -51,14 +52,14 @@ export const MailLayout = (props: {
             ]}
           >
             <ResizablePanel
-              className="flex min-h-0 min-w-0 flex-col overflow-hidden bg-background"
+              className="bg-background flex min-h-0 min-w-0 flex-col overflow-hidden"
               id="list"
             >
               {list}
             </ResizablePanel>
             <ResizableResizeTrigger id="list:content" />
             <ResizablePanel
-              className="flex min-h-0 min-w-0 flex-col overflow-hidden bg-muted/16"
+              className="bg-muted/16 flex min-h-0 min-w-0 flex-col overflow-hidden"
               id="content"
             >
               {content}

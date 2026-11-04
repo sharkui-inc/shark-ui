@@ -1,6 +1,10 @@
 ---
 title: Input OTP
 description: One-time password input.
+aliases:
+  - OTP
+  - Pin input
+  - Verification code
 seo:
   description: One-time password field with per-digit slots.
 links:
@@ -82,6 +86,12 @@ import {
 </InputOTP>
 ```
 
+## With Field
+
+Use `InputOTPLabel` inside [Field](/docs/components/field) to name the code, and `FieldDescription` for a description. Clicking the label focuses the first digit.
+
+<ComponentPreview componentName="input-otp" fileName="example-with-field" />
+
 ## Controlled
 
 Use `value` and `onValueChange` to control the input.
@@ -99,12 +109,6 @@ Use `value` and `onValueChange` to control the input.
 <ComponentPreview componentName="input-otp" fileName="example-invalid" />
 
 ## Examples
-
-### With Field
-
-Use `InputOTPLabel` to name the code, and [Field](/docs/components/field) for a description.
-
-<ComponentPreview componentName="input-otp" fileName="example-with-field" />
 
 ### Separator
 

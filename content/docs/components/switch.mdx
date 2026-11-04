@@ -1,6 +1,8 @@
 ---
 title: Switch
 description: Toggle a binary on/off state.
+aliases:
+  - Toggle switch
 seo:
   description: On/off switch for settings and feature toggles.
 links:
@@ -59,6 +61,12 @@ import { Switch } from "@/components/ui/switch";
 <Switch />
 ```
 
+## With Field
+
+Use [Field](/docs/components/field) for a label and description.
+
+<ComponentPreview componentName="switch" fileName="example-with-field" />
+
 ## Controlled
 
 Use the `checked` and `onCheckedChange` props to control the switch.
@@ -73,25 +81,13 @@ Use the `invalid` prop on the `Field` or in the `Switch` component to mark the s
 
 <ComponentPreview componentName="switch" fileName="example-invalid" />
 
-## Examples
-
-### With Field
-
-Use [Field](/docs/components/field) for a label and description.
-
-<ComponentPreview componentName="switch" fileName="example-with-field" />
-
 ### Disabled
 
 Use the `disabled` prop to disable the switch.
 
 <ComponentPreview componentName="switch" fileName="example-disabled" />
 
-### With Description
-
-Use `FieldDescription` to add a description to the switch.
-
-<ComponentPreview componentName="switch" fileName="example-description" />
+## Examples
 
 ### Card Style
 

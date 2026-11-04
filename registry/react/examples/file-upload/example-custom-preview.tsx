@@ -1,12 +1,13 @@
 "use client";
 
-import { XIcon } from "lucide-react";
+import type { FileUploadFileRejectDetails } from "@ark-ui/react/file-upload";
+import { CloudUploadIcon, XIcon } from "lucide-react";
 import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   FileUpload,
   FileUploadDropzone,
-  FileUploadDropzoneIcon,
+  FileUploadHelper,
   FileUploadItem,
   FileUploadItemDeleteTrigger,
   FileUploadItemGroup,
@@ -16,6 +17,8 @@ import {
   useFileUploadContext,
 } from "@/registry/react/components/file-upload";
 
+const MAX_FILES = 3;
+
 const Example = () => {
   const [acceptedFiles, setAcceptedFiles] = React.useState<File[]>([
     new File([img], "image-cropper.svg", {
@@ -23,17 +26,42 @@ const Example = () => {
     }),
   ]);
 
+  const onFileReject = (details: FileUploadFileRejectDetails) => {
+    const overflow = details.files
+      .filter(({ errors }) =>
+        errors.every((error) => error === "TOO_MANY_FILES")
+      )
+      .map(({ file }) => file);
+
+    if (overflow.length === 0) {
+      return;
+    }
+
+    setAcceptedFiles((files) => [
+      ...files,
+      ...overflow.slice(0, Math.max(0, MAX_FILES - files.length)),
+    ]);
+  };
+
   return (
     <FileUpload
       accept="image/*"
       acceptedFiles={acceptedFiles}
       className="w-full max-w-xs"
-      maxFiles={3}
-      onFileChange={(details) => setAcceptedFiles(details.acceptedFiles)}
+      maxFiles={MAX_FILES}
+      onFileAccept={(details) => setAcceptedFiles(details.files)}
+      onFileReject={onFileReject}
     >
       <FileUploadDropzone className="min-h-36">
-        <FileUploadDropzoneIcon />
-        <FileUploadTitle>Drop images here</FileUploadTitle>
+        <CloudUploadIcon
+          aria-hidden="true"
+          className="text-muted-foreground group-data-dragging/file-upload:text-primary size-8"
+          strokeWidth={1.5}
+        />
+        <div className="flex flex-col gap-0.5">
+          <FileUploadTitle>Drop images here</FileUploadTitle>
+          <FileUploadHelper>Up to {MAX_FILES} images</FileUploadHelper>
+        </div>
       </FileUploadDropzone>
       <CustomPreviewList />
     </FileUpload>
@@ -51,7 +79,7 @@ const CustomPreviewList = () => {
     <FileUploadItemGroup className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {acceptedFiles.map((file) => (
         <FileUploadItem
-          className="group/item aspect-square overflow-hidden rounded-xl border bg-muted shadow-xs/4"
+          className="group/item bg-muted aspect-square overflow-hidden rounded-xl border shadow-xs/4"
           file={file}
           key={file.name}
         >
@@ -61,7 +89,7 @@ const CustomPreviewList = () => {
           <FileUploadItemDeleteTrigger asChild>
             <Button
               aria-label={`Remove ${file.name}`}
-              className="absolute inset-e-2 top-2 opacity-100 shadow-sm/4 transition-opacity duration-150 ease-out motion-reduce:transition-none sm:opacity-0 sm:group-hover/item:opacity-100 sm:group-focus-within/item:opacity-100"
+              className="absolute inset-e-2 top-2 opacity-100 shadow-sm/4 transition-opacity duration-150 ease-out motion-reduce:transition-none sm:opacity-0 sm:group-focus-within/item:opacity-100 sm:group-hover/item:opacity-100"
               pill
               size="icon-xs"
               variant="secondary"

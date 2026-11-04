@@ -22,14 +22,15 @@ import {
 import {
   DatePicker,
   DatePickerContent,
+  DatePickerLabel,
   DatePickerTrigger,
   DatePickerValue,
 } from "@/registry/react/components/date-picker";
-import { Field, FieldLabel } from "@/registry/react/components/field";
+import { Field } from "@/registry/react/components/field";
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const [value, setValue] = React.useState(initialValue);
+  const [value, setValue] = React.useState([parseDate("2025-04-15")]);
 
   const onSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -45,11 +46,11 @@ const Example = () => {
       <form onSubmit={onSubmit}>
         <CardContent>
           <Field>
-            <FieldLabel>Appointment date</FieldLabel>
             <DatePicker
               onValueChange={({ value: nextValue }) => setValue(nextValue)}
               value={value}
             >
+              <DatePickerLabel>Appointment date</DatePickerLabel>
               <DatePickerTrigger asChild>
                 <Button className="w-full justify-start" variant="outline">
                   <CalendarIcon aria-hidden="true" />
@@ -72,11 +73,7 @@ const Example = () => {
           </Field>
         </CardContent>
         <CardFooter className="justify-end">
-          <Button
-            onClick={() => setValue(initialValue)}
-            type="button"
-            variant="outline"
-          >
+          <Button onClick={() => setValue([])} type="button" variant="outline">
             Clear
           </Button>
           <Button type="submit">Submit</Button>
@@ -85,7 +82,5 @@ const Example = () => {
     </Card>
   );
 };
-
-const initialValue = [parseDate("2025-04-15")];
 
 export default Example;

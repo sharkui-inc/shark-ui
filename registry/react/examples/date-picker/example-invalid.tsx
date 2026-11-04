@@ -13,19 +13,16 @@ import {
 import {
   DatePicker,
   DatePickerContent,
+  DatePickerLabel,
   DatePickerTrigger,
   DatePickerValue,
 } from "@/registry/react/components/date-picker";
-import {
-  Field,
-  FieldError,
-  FieldLabel,
-} from "@/registry/react/components/field";
+import { Field, FieldError } from "@/registry/react/components/field";
 
 const Example = () => (
   <Field className="w-fit" invalid>
-    <FieldLabel>Appointment</FieldLabel>
     <DatePicker invalid>
+      <DatePickerLabel>Appointment</DatePickerLabel>
       <DatePickerTrigger asChild>
         <Button className="min-w-56" variant="outline">
           <CalendarIcon />

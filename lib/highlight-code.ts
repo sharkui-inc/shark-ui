@@ -23,7 +23,7 @@ const highlightCache = new LRUCache<string, string>({
   ttl: 1000 * 60 * 60, // 1 hour.
 });
 
-const showLineNumbersPattern = /\bshowLineNumbers\b/;
+const showLineNumbersPattern = /\bshowLineNumbers\b/u;
 
 const getMetaValue = (meta: string, name: string) => {
   const match = meta.match(

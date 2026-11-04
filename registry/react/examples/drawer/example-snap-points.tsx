@@ -21,7 +21,7 @@ const Example = () => (
         <div className="mx-auto flex w-full max-w-xs flex-col gap-2">
           {steps.map((step) => (
             <div
-              className="rounded-lg border bg-muted px-3 py-2 text-start text-sm"
+              className="bg-muted rounded-lg border px-3 py-2 text-start text-sm"
               key={step}
             >
               {step}

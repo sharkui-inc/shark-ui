@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { buttonControlVariants } from "@/registry/react/components/button";
 
 export const useTabsContext = useArkTabsContext;
+
 export const Tabs = (props: React.ComponentProps<typeof ArkTabs.Root>) => {
   const { lazyMount = true, unmountOnExit = true, className, ...rest } = props;
 
@@ -50,11 +51,17 @@ const tabsListVariants = tv({
   variants: {
     variant: {
       default: {
-        base: ["p-1", "bg-muted", "rounded-lg data-[pill=true]:rounded-full"],
+        base: [
+          "p-1",
+          "bg-muted",
+          "rounded-lg",
+          "data-[pill=true]:rounded-full",
+        ],
         indicator: [
           "-z-1",
           "w-(--width)",
-          "bg-background dark:bg-input",
+          "bg-background",
+          "dark:bg-input",
           "rounded-md shadow-sm/4",
           "group-data-[pill=true]/tabs-list:rounded-full",
         ],
@@ -125,17 +132,20 @@ export const TabsTrigger = (
       className={cn(
         buttonControlVariants(),
         "h-8.5 sm:h-7.5",
-        "flex grow gap-1.5",
+        "grow",
+        "flex gap-1.5",
         "px-[calc(--spacing(2.5)-1px)]",
-        "rounded-md border border-transparent group-data-[pill=true]/tabs-list:rounded-full",
+        "rounded-md border border-transparent",
+        "group-data-[pill=true]/tabs-list:rounded-full",
         "cursor-pointer",
         "transition-[color,background-color,box-shadow]",
         "data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
         "hover:text-foreground",
         "aria-selected:text-foreground",
-        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "outline-hidden",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
-        "[&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:shrink-0",
+        "[&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4",
         "motion-reduce:transition-none",
         className
       )}

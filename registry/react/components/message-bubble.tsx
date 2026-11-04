@@ -13,7 +13,7 @@ export const MessageBubbleGroup = (
 
   return (
     <ark.div
-      className={cn("flex min-w-0 flex-col gap-2", className)}
+      className={cn("min-w-0", "flex flex-col gap-2", className)}
       data-slot="message-bubble-group"
       {...rest}
     />
@@ -22,8 +22,12 @@ export const MessageBubbleGroup = (
 
 export const messageBubbleVariants = tv({
   base: [
-    "group/message-bubble relative flex w-fit min-w-0 max-w-[80%] flex-col gap-1",
-    "data-[align=end]:self-end group-data-[align=end]/message:self-end",
+    "group/message-bubble",
+    "relative",
+    "w-fit max-w-[80%] min-w-0",
+    "flex flex-col gap-1",
+    "data-[align=end]:self-end",
+    "group-data-[align=end]/message:self-end",
     "data-[variant=ghost]:max-w-full",
     "has-[[data-slot=message-bubble-reactions][data-side=bottom]]:mb-5",
     "has-[[data-slot=message-bubble-reactions][data-side=top]]:mt-5",
@@ -50,7 +54,8 @@ export const messageBubbleVariants = tv({
       ],
       ghost: [
         "[--message-bubble-surface:var(--background)]",
-        "border-none *:data-[slot=message-bubble-content]:rounded-none *:data-[slot=message-bubble-content]:bg-transparent *:data-[slot=message-bubble-content]:p-0",
+        "border-none",
+        "*:data-[slot=message-bubble-content]:rounded-none *:data-[slot=message-bubble-content]:bg-transparent *:data-[slot=message-bubble-content]:p-0",
         "dark:[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-muted/48",
       ],
       outline: [
@@ -66,7 +71,7 @@ export const messageBubbleVariants = tv({
       tinted: [
         "[--message-bubble-surface:oklch(from_var(--primary)_0.93_calc(c*0.4)_h)]",
         "dark:[--message-bubble-surface:oklch(from_var(--primary)_0.3_calc(c*0.4)_h)]",
-        "*:data-[slot=message-bubble-content]:bg-[oklch(from_var(--primary)_0.93_calc(c*0.4)_h)] *:data-[slot=message-bubble-content]:text-foreground",
+        "*:data-[slot=message-bubble-content]:text-foreground *:data-[slot=message-bubble-content]:bg-[oklch(from_var(--primary)_0.93_calc(c*0.4)_h)]",
         "dark:*:data-[slot=message-bubble-content]:bg-[oklch(from_var(--primary)_0.3_calc(c*0.4)_h)]",
         "[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-[oklch(from_var(--primary)_0.88_calc(c*0.5)_h)]",
         "dark:[&>[data-slot=message-bubble-content]:is(button,a):hover]:bg-[oklch(from_var(--primary)_0.35_calc(c*0.5)_h)]",
@@ -103,11 +108,15 @@ export const MessageBubbleContent = (
   return (
     <ark.div
       className={cn(
-        "wrap-break-word w-fit min-w-0 max-w-full overflow-hidden rounded-xl border border-transparent px-3 py-2 text-sm leading-relaxed",
+        "w-fit max-w-full min-w-0",
+        "px-3 py-2",
+        "text-sm leading-relaxed wrap-break-word",
+        "rounded-xl border border-transparent",
+        "overflow-hidden",
         "group-data-[align=end]/message-bubble:self-end",
-        "[&_button,&_a]:outline-hidden [&_button,&_a]:transition-colors [&_button]:text-start",
+        "[&_button]:text-start [&_button,&_a]:outline-hidden [&_button,&_a]:transition-colors",
         "[&_button,&_a]:motion-reduce:transition-none",
-        "[&_button,&_a]:focus-visible:border-ring/64 [&_button,&_a]:focus-visible:ring-2 [&_button,&_a]:focus-visible:ring-ring/24",
+        "[&_button,&_a]:focus-visible:border-ring/64 [&_button,&_a]:focus-visible:ring-ring/24 [&_button,&_a]:focus-visible:ring-2",
         "group-data-[variant=default]/message-bubble:[&_button,&_a]:focus-visible:border-background",
         className
       )}
@@ -128,10 +137,16 @@ export const MessageBubbleTrigger = (
       className={cn(
         "group/message-bubble-trigger",
         "absolute inset-e-0 top-0 z-10",
-        "pointer-coarse:flex pointer-fine:flex hidden h-8 w-16 shrink-0 items-center justify-end overflow-hidden pe-2",
+        "h-8 w-16 shrink-0",
+        "hidden items-center justify-end",
+        "pe-2",
+        "overflow-hidden",
+        "pointer-coarse:flex",
+        "pointer-fine:flex",
         "rounded-se-xl",
         "group-data-[variant=ghost]/message-bubble:rounded-none",
-        "ltr:bg-linear-to-tr rtl:bg-linear-to-tl",
+        "ltr:bg-linear-to-tr",
+        "rtl:bg-linear-to-tl",
         "from-transparent to-(--message-bubble-surface)",
         "pointer-fine:opacity-0",
         "pointer-fine:group-hover/message-bubble:opacity-100",
@@ -145,7 +160,7 @@ export const MessageBubbleTrigger = (
         "group-data-[variant=secondary]/message-bubble:text-secondary-foreground",
         "group-data-[variant=tinted]/message-bubble:text-foreground",
         "outline-hidden",
-        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
         "group-data-[variant=default]/message-bubble:focus-visible:border-background",
         "[&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0",
         "transition-opacity duration-150 ease-out",
@@ -179,11 +194,12 @@ export const messageBubbleReactionsVariants = tv({
     "absolute z-10",
     "w-fit",
     "px-1.5 py-0.5",
-    "flex shrink-0 items-center justify-center gap-1",
+    "shrink-0",
+    "flex items-center justify-center gap-1",
     "overflow-hidden",
     "bg-muted",
     "text-sm leading-none",
-    "rounded-full border border-input",
+    "border-input rounded-full border",
     "has-[button]:p-0",
   ],
   defaultVariants: {
@@ -196,8 +212,8 @@ export const messageBubbleReactionsVariants = tv({
       start: "inset-s-3",
     },
     side: {
-      bottom: "bottom-0 translate-y-3/4",
-      top: "top-0 -translate-y-3/4",
+      bottom: ["bottom-0", "translate-y-3/4"],
+      top: ["top-0", "-translate-y-3/4"],
     },
   },
 });

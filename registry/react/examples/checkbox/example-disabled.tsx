@@ -2,10 +2,16 @@ import { Checkbox } from "@/registry/react/components/checkbox";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 
 const Example = () => (
-  <Field className="mx-auto min-w-40" disabled orientation="horizontal">
-    <Checkbox />
-    <FieldLabel>Receive newsletter</FieldLabel>
-  </Field>
+  <div className="flex w-full justify-center">
+    <Field
+      className="w-max whitespace-nowrap"
+      disabled
+      orientation="horizontal"
+    >
+      <Checkbox />
+      <FieldLabel>Receive newsletter</FieldLabel>
+    </Field>
+  </div>
 );
 
 export default Example;

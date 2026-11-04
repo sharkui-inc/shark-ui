@@ -11,19 +11,6 @@ import { Button } from "@/registry/react/components/button";
 import { fieldLabelVariants } from "@/registry/react/components/field";
 
 export const useSignaturePadContext = useArkSignaturePadContext;
-export const SignaturePadLabel = (
-  props: React.ComponentProps<typeof ArkSignaturePad.Label>
-) => {
-  const { className, ...rest } = props;
-
-  return (
-    <ArkSignaturePad.Label
-      className={cn(fieldLabelVariants(), className)}
-      data-slot="signature-pad-label"
-      {...rest}
-    />
-  );
-};
 
 export const SignaturePad = (
   props: React.ComponentProps<typeof ArkSignaturePad.Root>
@@ -48,6 +35,20 @@ export const SignaturePad = (
         <SignaturePadGuide />
       </SignaturePadControl>
     </ArkSignaturePad.Root>
+  );
+};
+
+export const SignaturePadLabel = (
+  props: React.ComponentProps<typeof ArkSignaturePad.Label>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkSignaturePad.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="signature-pad-label"
+      {...rest}
+    />
   );
 };
 

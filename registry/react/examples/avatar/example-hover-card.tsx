@@ -1,3 +1,4 @@
+import { CalendarIcon, MapPinIcon } from "lucide-react";
 import {
   Avatar,
   AvatarFallback,
@@ -10,64 +11,80 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/registry/react/components/hover-card";
+import { Separator } from "@/registry/react/components/separator";
+
+const profiles = [
+  {
+    handle: "vinihvc",
+    initials: "VV",
+    joined: "Joined Dec 2016",
+    location: "São Paulo",
+    name: "Vinicius Vicentini",
+    role: "Design Engineer at Shark UI",
+    src: "https://github.com/vinihvc.png",
+  },
+  {
+    handle: "shadcn",
+    initials: "CN",
+    joined: "Joined Mar 2020",
+    location: "Remote",
+    name: "shadcn",
+    role: "Building open source UI",
+    src: "https://github.com/shadcn.png",
+  },
+] as const;
 
 const Example = () => (
   <AvatarGroup>
-    <HoverCard>
-      <HoverCardTrigger asChild>
-        <Button
-          aria-label="View profile for VV, Vinicius Vicentini"
-          pill
-          size="icon-lg"
-          variant="ghost"
-        >
-          <Avatar size="lg">
-            <AvatarImage alt="@vinihvc" src="https://github.com/vinihvc.png" />
-            <AvatarFallback>VV</AvatarFallback>
+    {profiles.map((profile) => (
+      <HoverCard key={profile.handle}>
+        <HoverCardTrigger asChild>
+          <Avatar
+            aria-label={`View profile for ${profile.name}`}
+            className="cursor-pointer"
+            size="lg"
+          >
+            <AvatarImage alt={`@${profile.handle}`} src={profile.src} />
+            <AvatarFallback>{profile.initials}</AvatarFallback>
           </Avatar>
-        </Button>
-      </HoverCardTrigger>
-      <HoverCardContent className="w-max min-w-0">
-        <div className="flex gap-4">
-          <Avatar>
-            <AvatarImage alt="@vinihvc" src="https://github.com/vinihvc.png" />
-            <AvatarFallback>VV</AvatarFallback>
-          </Avatar>
-          <div>
-            <h4 className="font-semibold text-sm">Vinicius Vicentini</h4>
-            <p className="text-muted-foreground text-sm">@vinihvc</p>
+        </HoverCardTrigger>
+        <HoverCardContent className="w-72">
+          <div className="flex flex-col gap-3">
+            <div className="flex items-start justify-between gap-3">
+              <Avatar size="lg">
+                <AvatarImage alt={`@${profile.handle}`} src={profile.src} />
+                <AvatarFallback>{profile.initials}</AvatarFallback>
+              </Avatar>
+              <Button size="sm" variant="outline">
+                Follow
+              </Button>
+            </div>
+            <div className="flex flex-col gap-1">
+              <div>
+                <h4 className="text-sm leading-none font-semibold">
+                  {profile.name}
+                </h4>
+                <p className="text-muted-foreground text-sm">
+                  @{profile.handle}
+                </p>
+              </div>
+              <p className="text-sm">{profile.role}</p>
+            </div>
+            <Separator />
+            <div className="text-muted-foreground flex flex-col gap-1.5 text-xs">
+              <p className="flex items-center gap-1.5">
+                <MapPinIcon aria-hidden className="size-3.5" />
+                {profile.location}
+              </p>
+              <p className="flex items-center gap-1.5">
+                <CalendarIcon aria-hidden className="size-3.5" />
+                {profile.joined}
+              </p>
+            </div>
           </div>
-        </div>
-      </HoverCardContent>
-    </HoverCard>
-    <HoverCard>
-      <HoverCardTrigger asChild>
-        <Button
-          aria-label="View profile for CN, Shadcn"
-          pill
-          size="icon-lg"
-          variant="ghost"
-        >
-          <Avatar size="lg">
-            <AvatarImage alt="@shadcn" src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-        </Button>
-      </HoverCardTrigger>
-
-      <HoverCardContent className="w-max min-w-0">
-        <div className="flex gap-4">
-          <Avatar>
-            <AvatarImage alt="@shadcn" src="https://github.com/shadcn.png" />
-            <AvatarFallback>VV</AvatarFallback>
-          </Avatar>
-          <div>
-            <h4 className="font-semibold text-sm">Shadcn</h4>
-            <p className="text-muted-foreground text-sm">@shadcn</p>
-          </div>
-        </div>
-      </HoverCardContent>
-    </HoverCard>
+        </HoverCardContent>
+      </HoverCard>
+    ))}
   </AvatarGroup>
 );
 

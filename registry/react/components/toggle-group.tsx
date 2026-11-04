@@ -42,8 +42,8 @@ const toggleGroupVariants = tv({
   },
   variants: {
     orientation: {
-      horizontal: "flex-row pointer-coarse:*:after:min-w-auto",
-      vertical: "flex-col items-stretch pointer-coarse:*:after:min-h-auto",
+      horizontal: ["flex-row", "pointer-coarse:*:after:min-w-auto"],
+      vertical: ["flex-col items-stretch", "pointer-coarse:*:after:min-h-auto"],
     },
     pill: {
       false: "rounded-lg",
@@ -99,7 +99,9 @@ export const ToggleGroupItem = (props: ToggleGroupItemProps) => {
     <ArkToggleGroup.Item asChild data-slot="toggle-group-item" value={value}>
       <Toggle
         className={cn(
-          "shrink-0 focus:z-10 focus-visible:z-10",
+          "shrink-0",
+          "focus:z-10",
+          "focus-visible:z-10",
           "data-[spacing=0]:rounded-none",
           "data-[spacing=0]:px-2",
           "data-[orientation=horizontal]:data-[spacing=0]:data-[pill=false]:first:rounded-s-lg",

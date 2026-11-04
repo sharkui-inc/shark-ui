@@ -28,11 +28,12 @@ const Example = () => {
   return (
     <div className="flex w-full max-w-sm flex-col gap-3">
       <output className="text-muted-foreground text-sm">
-        Selected: {selection.selectedValues.join(", ") || "None"}
+        {selection.selectedValues.join(", ") || "None"}
       </output>
       <FieldGroup className="gap-2" role="list">
         {collection.items.map((item) => {
           const selected = selection.isSelected(item.value);
+
           return (
             <FieldLabel className="w-full" key={item.value} role="listitem">
               <Field orientation="horizontal">

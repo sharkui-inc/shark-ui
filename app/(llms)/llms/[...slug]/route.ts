@@ -10,14 +10,14 @@ export const dynamic = "force-static";
 export const dynamicParams = false;
 export const revalidate = false;
 
-const indexExtension = /\.txt$/;
+const indexExtension = /\.txt$/u;
 
 export const generateStaticParams = () =>
   LLM_INDEXES.map((index) => ({ slug: [`${index}.txt`] }));
 
 export const GET = async (
   _request: Request,
-  props: { params: Promise<{ slug: string[] }> }
+  props: RouteContext<"/llms/[...slug]">
 ) => {
   const { slug } = await props.params;
   const indexName = slug[0]?.replace(indexExtension, "") ?? "";

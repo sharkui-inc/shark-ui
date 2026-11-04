@@ -37,10 +37,18 @@ const renderValue = (value: string[]) => {
   }
 
   const firstValue = value.at(0) ?? "";
-  const additionalValues =
-    value.length > 1 ? ` (+${value.length - 1} more)` : "";
+  const remaining = value.length - 1;
 
-  return firstValue + additionalValues;
+  return (
+    <>
+      {firstValue}
+      {remaining > 0 ? (
+        <span className="text-muted-foreground text-xs">
+          {` (+${remaining} more)`}
+        </span>
+      ) : null}
+    </>
+  );
 };
 
 const collection = createListCollection({

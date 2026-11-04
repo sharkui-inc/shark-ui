@@ -14,8 +14,8 @@ import {
 const ContextMenuSubmenu = () => (
   <ContextMenu>
     <ContextMenuTrigger className="flex aspect-video items-center justify-center rounded-2xl border border-dashed p-20 text-sm">
-      <span className="pointer-fine:inline-block hidden">Right click here</span>
-      <span className="pointer-coarse:inline-block hidden">
+      <span className="hidden pointer-fine:inline-block">Right click here</span>
+      <span className="hidden pointer-coarse:inline-block">
         Long press here
       </span>
     </ContextMenuTrigger>

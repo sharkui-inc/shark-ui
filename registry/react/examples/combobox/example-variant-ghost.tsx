@@ -23,7 +23,11 @@ const Example = () => {
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <ComboboxInput placeholder="Select an option" variant="ghost" />
+      <ComboboxInput
+        placeholder="Select an option"
+        showTrigger={false}
+        variant="ghost"
+      />
       <ComboboxContent>
         <ComboboxList>
           {collection.items.map((item) => (

@@ -45,7 +45,11 @@ export const CodeCollapsibleWrapper = (props: CodeCollapsibleWrapperProps) => {
         />
         <div className="absolute inset-e-10 top-1.5 z-10 flex items-center">
           <ArkCollapsible.Trigger asChild>
-            <Button className="opacity-64 hover:opacity-100" variant="ghost">
+            <Button
+              className="opacity-64 hover:opacity-100"
+              size="sm"
+              variant="ghost"
+            >
               <span className="group-data-[state=closed]/code-collapsible:hidden">
                 Collapse
               </span>
@@ -70,14 +74,14 @@ export const CodeCollapsibleWrapper = (props: CodeCollapsibleWrapperProps) => {
         <ArkCollapsible.Trigger asChild>
           <button
             className={cn(
-              "absolute inset-x-px -bottom-4 -mx-px",
+              "absolute inset-x-px bottom-0 -mx-px",
               "h-20",
               "flex items-center justify-center",
-              "bg-linear-to-b from-transparent via-background/64 to-background",
-              "font-medium text-muted-foreground text-sm",
+              "via-code/64 to-code bg-linear-to-b from-transparent",
+              "text-muted-foreground text-sm font-medium",
               "rounded-b-lg",
               "transition-colors",
-              "border border-t-0 outline-hidden focus-visible:border-ring/64 focus-visible:border-t focus-visible:ring-2 focus-visible:ring-ring/24",
+              "focus-visible:border-ring/64 focus-visible:ring-ring/24 border border-t-0 outline-hidden focus-visible:border-t focus-visible:ring-2",
               "hover:text-foreground",
               "group-data-[state=open]/code-collapsible:hidden"
             )}

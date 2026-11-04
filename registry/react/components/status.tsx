@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 
 export const statusVariants = tv({
   base: [
-    "shrink-0 rounded-full",
+    "shrink-0",
+    "rounded-full",
     "flex items-center justify-center",
-    "font-medium text-[0.5625rem]",
-    "ring-2 ring-background",
+    "text-[0.5625rem] font-medium",
   ],
   defaultVariants: {
     size: "md",
@@ -18,16 +18,25 @@ export const statusVariants = tv({
   },
   variants: {
     size: {
-      lg: "size-3 [&_svg:not([class*='size-'])]:size-2.5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
-      md: "size-2.5 [&_svg:not([class*='size-'])]:size-2 [&_svg]:pointer-events-none [&_svg]:shrink-0",
-      sm: "size-2 [&_svg:not([class*='size-'])]:size-1.5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+      lg: [
+        "size-3",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-2.5",
+      ],
+      md: [
+        "size-2.5",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-2",
+      ],
+      sm: [
+        "size-2",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-1.5",
+      ],
     },
     variant: {
-      default: "bg-foreground text-background",
-      destructive: "bg-destructive text-white",
-      info: "bg-info text-white",
-      success: "bg-success text-white",
-      warning: "bg-warning text-white",
+      default: ["bg-foreground", "text-background"],
+      destructive: ["bg-destructive", "text-white"],
+      info: ["bg-info", "text-white"],
+      success: ["bg-success", "text-white"],
+      warning: ["bg-warning", "text-white"],
     },
   },
 });

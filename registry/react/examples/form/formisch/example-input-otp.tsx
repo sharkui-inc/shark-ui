@@ -60,6 +60,7 @@ const Example = () => {
             <FormischField of={form} path={["backupCode"]}>
               {(field) => {
                 const value = field.input as string[];
+
                 return (
                   <Field
                     invalid={Boolean(field.errors?.length)}

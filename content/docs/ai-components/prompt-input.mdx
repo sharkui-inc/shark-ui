@@ -1,6 +1,9 @@
 ---
 title: Prompt Input
 description: Compose and send chat prompts.
+aliases:
+  - Composer
+  - Chat input
 seo:
   description: Compose and send chat prompts with attachments and tools.
 ---
@@ -154,7 +157,7 @@ The textarea sits above a footer toolbar inside the same field. Enter submits, S
 | Prop | Type | Default |
 | --- | --- | --- |
 | `status` | `"ready" \| "submitted" \| "streaming" \| "error"` | `"ready"` |
-| `onSubmit` | `(detail: { text: string; event: FormEvent }) => void` | `-` |
+| `onSubmit` | `(detail: { text: string; event: SubmitEvent<HTMLFormElement> }) => void` | `-` |
 | `onStop` | `() => void` | `-` |
 | `className` | `string` | `-` |
 

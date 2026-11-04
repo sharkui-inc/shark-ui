@@ -29,7 +29,7 @@ export const HomeShowcase = (props: React.PropsWithChildren) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <fieldset className="hidden min-w-0 items-center gap-x-0.5 text-muted-foreground lg:flex">
+        <fieldset className="text-muted-foreground hidden min-w-0 items-center gap-x-0.5 lg:flex">
           <legend className="sr-only">Preview template</legend>
           {[
             { label: "Preview", slug: COMPONENTS_SLUG },
@@ -79,7 +79,7 @@ export const HomeShowcase = (props: React.PropsWithChildren) => {
         {gallery ? (
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-48 bg-linear-to-t from-background via-background/80 to-transparent lg:h-64"
+            className="from-background via-background/80 pointer-events-none absolute inset-x-0 bottom-0 z-10 h-48 bg-linear-to-t to-transparent lg:h-64"
           />
         ) : null}
       </div>
@@ -109,8 +109,8 @@ const HomeThemePicker = () => {
                     "cursor-pointer outline-hidden",
                     "transition-shadow duration-100 ease-out",
                     "motion-reduce:transition-none!",
-                    "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
-                    selected && "ring-2 ring-primary"
+                    "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
+                    selected && "ring-primary ring-2"
                   )}
                   onClick={() => {
                     applyPreset(preset);

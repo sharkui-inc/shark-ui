@@ -18,7 +18,7 @@ interface TaskEditorDialogProps {
   editor: TaskEditorState | null;
   onDraftChange: React.Dispatch<React.SetStateAction<TaskDraft>>;
   onOpenChange: (open: boolean) => void;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (event: React.SubmitEvent<HTMLFormElement>) => void;
 }
 
 export const TaskEditorDialog = (props: TaskEditorDialogProps) => {

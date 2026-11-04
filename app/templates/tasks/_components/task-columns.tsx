@@ -51,6 +51,7 @@ export interface TaskTableActions {
 
 export const TaskStatusBadge = (props: { status: TaskStatus }) => {
   const { status } = props;
+
   return (
     <Badge className="gap-1.5" size="sm" variant="outline">
       <Status size="sm" variant={statusIndicatorVariantMap[status]} />
@@ -64,7 +65,7 @@ export const TaskPriorityLabel = (props: { priority: TaskPriority }) => {
   const PriorityIcon = priorityIconMap[priority];
 
   return (
-    <span className="inline-flex items-center gap-1.5 font-medium text-sm">
+    <span className="inline-flex items-center gap-1.5 text-sm font-medium">
       <PriorityIcon
         aria-hidden
         className={cn("size-3.5", priorityIconVariants({ priority }))}
@@ -80,6 +81,7 @@ export const TaskRowMenu = (
   }
 ) => {
   const { onDelete, onDuplicate, onEdit, task } = props;
+
   return (
     <Menu>
       <MenuTrigger asChild>

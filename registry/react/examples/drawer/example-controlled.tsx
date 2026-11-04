@@ -8,7 +8,6 @@ import {
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
-  DrawerTrigger,
 } from "@/registry/react/components/drawer";
 
 const Example = () => {
@@ -20,15 +19,12 @@ const Example = () => {
         {open ? "Open" : "Closed"}
       </p>
       <Button onClick={() => setOpen(true)} variant="outline">
-        Open from state
+        Open
       </Button>
       <Drawer onOpenChange={({ open: isOpen }) => setOpen(isOpen)} open={open}>
-        <DrawerTrigger asChild>
-          <Button variant="outline">Open from trigger</Button>
-        </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader
-            description="Both buttons write the same open state."
+            description="The open state is managed with open and onOpenChange."
             title="Controlled"
           />
           <DrawerFooter>

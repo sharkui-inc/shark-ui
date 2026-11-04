@@ -32,7 +32,7 @@ const typeIconMap = {
 
 export const TaskAllOption = () => (
   <>
-    <ListFilterIcon aria-hidden className="size-4 text-muted-foreground" />
+    <ListFilterIcon aria-hidden className="text-muted-foreground size-4" />
     All
   </>
 );
@@ -43,7 +43,7 @@ export const TaskTypeOption = (props: { type: TaskType }) => {
 
   return (
     <>
-      <TypeIcon aria-hidden className="size-4 text-muted-foreground" />
+      <TypeIcon aria-hidden className="text-muted-foreground size-4" />
       {type}
     </>
   );
@@ -66,6 +66,7 @@ export const TaskPriorityOption = (props: { priority: TaskPriority }) => {
 
 export const TaskStatusOption = (props: { status: TaskStatus }) => {
   const { status } = props;
+
   return (
     <>
       <Status size="sm" variant={statusIndicatorVariantMap[status]} />
@@ -102,6 +103,7 @@ export const TaskTypeSelectValue = () => (
 
 export const TaskPrioritySelectValue = (props: { placeholder?: string }) => {
   const { placeholder = "Select a priority" } = props;
+
   return (
     <SelectValue placeholder={placeholder}>
       <SelectContext>
@@ -121,6 +123,7 @@ export const TaskPrioritySelectValue = (props: { placeholder?: string }) => {
 
 export const TaskStatusSelectValue = (props: { placeholder?: string }) => {
   const { placeholder = "Select a status" } = props;
+
   return (
     <SelectValue placeholder={placeholder}>
       <SelectContext>

@@ -15,7 +15,7 @@ const Example = () => (
   </form>
 );
 
-const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
   event.preventDefault();
   const code = String(new FormData(event.currentTarget).get("otp") ?? "");
 

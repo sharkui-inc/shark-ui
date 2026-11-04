@@ -29,6 +29,6 @@ const Example = () => (
   </Field>
 );
 
-const tagDelimiter = /[,\s]+/;
+const tagDelimiter = /[,\s]+/u;
 
 export default Example;

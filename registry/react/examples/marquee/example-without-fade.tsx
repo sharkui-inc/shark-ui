@@ -14,22 +14,8 @@ import {
 } from "@/registry/react/components/marquee";
 
 const Example = () => (
-  <div className="flex w-full flex-col gap-6 overflow-hidden">
-    <Marquee pauseOnInteraction showEdges={false}>
-      <MarqueeContent>
-        {items.map((Icon) => (
-          <MarqueeItem key={Icon.name}>
-            <Card>
-              <CardContent>
-                <Icon className="size-10" />
-              </CardContent>
-            </Card>
-          </MarqueeItem>
-        ))}
-      </MarqueeContent>
-    </Marquee>
-
-    <Marquee pauseOnInteraction reverse>
+  <div className="flex w-full flex-col gap-6 overflow-hidden px-4">
+    <Marquee fade={false} pauseOnInteraction>
       <MarqueeContent>
         {items.map((Icon) => (
           <MarqueeItem key={Icon.name}>

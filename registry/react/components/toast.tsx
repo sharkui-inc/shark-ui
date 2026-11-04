@@ -89,7 +89,8 @@ export const ToastItem = (props: ToastItemProps) => {
   return (
     <ArkToast.Root
       className={cn(
-        "z-(--z-index) translate-x-(--x) translate-y-(--y)",
+        "z-(--z-index)",
+        "translate-x-(--x) translate-y-(--y)",
         "relative",
         "w-full max-w-(--width)",
         "px-3.5 py-3",
@@ -98,7 +99,8 @@ export const ToastItem = (props: ToastItemProps) => {
         "text-card-foreground text-sm",
         "rounded-lg border shadow-lg/4",
         "outline-hidden",
-        "scale-(--scale) opacity-(--opacity)",
+        "opacity-(--opacity)",
+        "scale-(--scale)",
         "transition-[translate,scale,opacity] duration-200 ease-out will-change-[translate,opacity,scale]",
         "data-[state=closed]:transition-[translate,scale,opacity]",
         "data-[state=closed]:duration-150 data-[state=closed]:ease-out",
@@ -127,7 +129,7 @@ export const ToastItem = (props: ToastItemProps) => {
         <div className="flex flex-col gap-0.5">
           {!!toastData.title && (
             <ArkToast.Title
-              className="font-medium text-sm"
+              className="text-sm font-medium"
               data-slot="toast-title"
             >
               {toastData.title}
@@ -158,7 +160,7 @@ export const ToastItem = (props: ToastItemProps) => {
           <ArkToast.CloseTrigger asChild data-slot="toast-close-trigger">
             <Button
               aria-label="Close"
-              className="opacity-64 hover:opacity-100"
+              className={cn("opacity-64", "hover:opacity-100")}
               size="icon-xs"
               variant="ghost"
             >

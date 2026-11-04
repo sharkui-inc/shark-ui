@@ -56,12 +56,12 @@ const Example = () => {
           <Button variant="outline">Start tour</Button>
         </TourTrigger>
 
-        <div className="flex flex-col gap-3 rounded-lg border bg-card p-3 shadow-xs/4">
+        <div className="bg-card flex flex-col gap-3 rounded-lg border p-3 shadow-xs/4">
           <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-2 font-medium text-sm">
+            <div className="flex items-center gap-2 text-sm font-medium">
               <WavesHorizontalIcon
                 aria-hidden
-                className="size-4 text-primary"
+                className="text-primary size-4"
               />
               Notes
             </div>
@@ -79,7 +79,7 @@ const Example = () => {
           <div className="flex flex-col gap-2">
             {notes.map((note) => (
               <div
-                className="flex items-center gap-3 rounded-md border bg-background p-2"
+                className="bg-background flex items-center gap-3 rounded-md border p-2"
                 data-tour-note={note.isNew ? "new" : undefined}
                 key={note.id}
               >
@@ -166,6 +166,7 @@ const steps: TourStepType[] = [
         { timeout: 5000 }
       );
       promise.then(() => show());
+
       return () => cancel();
     },
     id: "new-item",

@@ -29,7 +29,7 @@ const Countdown = (props: { live?: boolean }) => {
 
   return (
     <>
-      <p className="text-center text-muted-foreground text-xs">
+      <p className="text-muted-foreground text-center text-xs">
         {date ? `Until ${formatDate(date)}` : "7 days from today"}
       </p>
       <Timer

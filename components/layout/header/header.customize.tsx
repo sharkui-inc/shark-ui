@@ -125,7 +125,7 @@ const FontPicker = (props: FontPickerProps) => {
           <span className="flex min-w-0 items-center gap-2">
             <span
               aria-hidden
-              className="w-4 text-center font-medium text-sm"
+              className="w-4 text-center text-sm font-medium"
               style={{ fontFamily: selectedFont?.family }}
             >
               Ag
@@ -138,7 +138,7 @@ const FontPicker = (props: FontPickerProps) => {
             <SelectItem item={item} key={item.value}>
               <span
                 aria-hidden
-                className="w-4 text-center font-medium text-sm"
+                className="w-4 text-center text-sm font-medium"
                 style={{ fontFamily: item.family }}
               >
                 Ag
@@ -238,8 +238,8 @@ export const HeaderCustomize = () => {
                       aria-label={color.label}
                       className={cn(
                         "group relative aspect-square justify-center rounded-none border border-transparent p-0",
-                        "data-[state=checked]:z-10 data-[state=checked]:outline-2 data-[state=checked]:outline-foreground data-[state=checked]:-outline-offset-2",
-                        "data-focus-visible:z-20 data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24",
+                        "data-[state=checked]:outline-foreground data-[state=checked]:z-10 data-[state=checked]:outline-2 data-[state=checked]:-outline-offset-2",
+                        "data-focus-visible:border-ring/64 data-focus-visible:ring-ring/24 data-focus-visible:z-20 data-focus-visible:ring-2",
                         "pointer-coarse:after:hidden"
                       )}
                       key={color.value}
@@ -287,8 +287,8 @@ export const HeaderCustomize = () => {
                       className={cn(
                         "group relative aspect-square justify-center p-0",
                         "rounded-none border border-transparent",
-                        "data-[state=checked]:z-10 data-[state=checked]:outline-2 data-[state=checked]:outline-foreground data-[state=checked]:-outline-offset-2",
-                        "data-focus-visible:z-20 data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24",
+                        "data-[state=checked]:outline-foreground data-[state=checked]:z-10 data-[state=checked]:outline-2 data-[state=checked]:-outline-offset-2",
+                        "data-focus-visible:border-ring/64 data-focus-visible:ring-ring/24 data-focus-visible:z-20 data-focus-visible:ring-2",
                         "pointer-coarse:after:hidden"
                       )}
                       key={color.value}
@@ -318,14 +318,14 @@ export const HeaderCustomize = () => {
                 </div>
               </RadioGroup>
               <div className="flex items-center justify-between gap-3">
-                <span className="font-medium text-muted-foreground text-xs">
+                <span className="text-muted-foreground text-xs font-medium">
                   {THEME_FIELDS.primaryTone.label}
                 </span>
-                <div className="h-8 w-40 overflow-hidden rounded-lg border border-input shadow-xs/4 transition-[color,box-shadow] has-focus-visible:border-ring/64 has-focus-visible:ring-2 has-focus-visible:ring-ring/24">
+                <div className="border-input has-focus-visible:border-ring/64 has-focus-visible:ring-ring/24 h-8 w-40 overflow-hidden rounded-lg border shadow-xs/4 transition-[color,box-shadow] has-focus-visible:ring-2">
                   <SegmentGroup
                     aria-label="Primary tone"
                     className={cn(
-                      "size-full gap-0 bg-transparent dark:bg-input/32",
+                      "dark:bg-input/32 size-full gap-0 bg-transparent",
                       "*:data-[slot=segment-group-indicator]:rounded-none",
                       "*:data-[slot=segment-group-indicator]:bg-primary"
                     )}
@@ -339,7 +339,7 @@ export const HeaderCustomize = () => {
                     {PRIMARY_TONES.map((tone) => (
                       <SegmentGroupItem
                         aria-label={tone.label}
-                        className="relative h-auto min-w-0 flex-1 gap-0 rounded-none p-0 text-muted-foreground data-focus-visible:border-transparent data-[state=checked]:text-primary-foreground data-focus-visible:ring-0"
+                        className="text-muted-foreground data-[state=checked]:text-primary-foreground relative h-auto min-w-0 flex-1 gap-0 rounded-none p-0 data-focus-visible:border-transparent data-focus-visible:ring-0"
                         key={tone.value}
                         value={tone.value}
                       >
@@ -389,17 +389,17 @@ export const HeaderCustomize = () => {
                   <RadioGroupItem
                     className={cn(
                       "flex flex-col items-center gap-2",
-                      "rounded-xl border bg-muted/32 p-2.5",
+                      "bg-muted/32 rounded-xl border p-2.5",
                       "pointer-coarse:after:hidden",
-                      "data-[state=checked]:border-primary data-[state=checked]:bg-primary/8 data-[state=checked]:ring-1 data-[state=checked]:ring-primary/48 data-[state=checked]:ring-inset",
-                      "data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24"
+                      "data-[state=checked]:border-primary data-[state=checked]:bg-primary/8 data-[state=checked]:ring-primary/48 data-[state=checked]:ring-1 data-[state=checked]:ring-inset",
+                      "data-focus-visible:border-ring/64 data-focus-visible:ring-ring/24 data-focus-visible:ring-2"
                     )}
                     key={radius.value}
                     value={radius.value}
                   >
                     <span
                       aria-hidden
-                      className="size-9 bg-primary"
+                      className="bg-primary size-9"
                       style={{ borderRadius: radius.cssVars.radius }}
                     />
                     <span className="text-muted-foreground text-xs">

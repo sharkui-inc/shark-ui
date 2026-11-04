@@ -13,17 +13,17 @@ const Example = () => (
       <TabsTrigger value="security">Security</TabsTrigger>
     </TabsList>
 
-    <TabsContent className="pt-2 text-muted-foreground text-sm" value="profile">
+    <TabsContent className="text-muted-foreground pt-2 text-sm" value="profile">
       Manage your profile information.
     </TabsContent>
     <TabsContent
-      className="pt-2 text-muted-foreground text-sm"
+      className="text-muted-foreground pt-2 text-sm"
       value="settings"
     >
       Update your preferences.
     </TabsContent>
     <TabsContent
-      className="pt-2 text-muted-foreground text-sm"
+      className="text-muted-foreground pt-2 text-sm"
       value="security"
     >
       Protect your account and data.

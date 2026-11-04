@@ -50,7 +50,7 @@ const PublishedDate = () => {
   const { value } = useDatePickerContext();
 
   return (
-    <p className="px-1 text-muted-foreground text-sm">
+    <p className="text-muted-foreground px-1 text-sm">
       Your post will be published on{" "}
       <span className="font-medium">{formatDate(value[0])}</span>.
     </p>
@@ -74,7 +74,7 @@ const parseNaturalLanguage = (value: string) => {
   return date ? parseDate(date) : undefined;
 };
 
-const relativeDatePattern = /^in (\d+) (day|week|month|year)s?$/;
+const relativeDatePattern = /^in (\d+) (day|week|month|year)s?$/u;
 
 const parseDateString = (value: string): Date | undefined => {
   const trimmed = value.trim().toLowerCase();

@@ -78,7 +78,7 @@ export const ToolResult = (props: ToolResultProps) => {
   return (
     <ToolResultProvider value={value}>
       <Collapsible
-        className={cn("w-full min-w-0 text-sm", className)}
+        className={cn("w-full min-w-0", "text-sm", className)}
         data-slot="tool-result"
         data-status={status}
         defaultOpen={defaultOpen ?? status === "running"}
@@ -103,8 +103,8 @@ export const ToolResultTrigger = (
         "text-start",
         "rounded-md",
         "outline-hidden",
-        "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
-        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
         className
       )}
       data-align="start"
@@ -128,13 +128,20 @@ export const ToolResultAction = (props: ToolResultActionProps) => {
 
   return (
     <ark.span
-      className={cn("ms-auto flex shrink-0 items-center gap-2", className)}
+      className={cn(
+        "shrink-0",
+        "flex items-center gap-2",
+        "ms-auto",
+        className
+      )}
       data-slot="tool-result-action"
       {...rest}
     >
       {children}
       {showTrigger ? (
-        <CollapsibleIndicator className="size-3.5 shrink-0 text-muted-foreground" />
+        <CollapsibleIndicator
+          className={cn("size-3.5 shrink-0", "text-muted-foreground")}
+        />
       ) : null}
     </ark.span>
   );
@@ -149,7 +156,7 @@ export const ToolResultTitle = (
     <ark.span
       className={cn(
         "min-w-0",
-        "truncate font-medium text-foreground",
+        "text-foreground truncate font-medium",
         className
       )}
       data-slot="tool-result-title"
@@ -181,7 +188,7 @@ export const ToolResultName = (
     <ark.span
       className={cn(
         "min-w-0",
-        "truncate font-mono text-muted-foreground text-xs",
+        "text-muted-foreground truncate font-mono text-xs",
         className
       )}
       data-slot="tool-result-name"
@@ -202,8 +209,9 @@ export const ToolResultStatus = (
   return (
     <ark.span
       className={cn(
-        "inline-flex shrink-0 items-center gap-1",
-        "font-medium text-xs",
+        "shrink-0",
+        "inline-flex items-center gap-1",
+        "text-xs font-medium",
         toolResultStatusVariants({ status }),
         className
       )}

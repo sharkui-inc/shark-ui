@@ -1,10 +1,10 @@
 "use client";
 
+import { CloudUploadIcon } from "lucide-react";
 import type React from "react";
 import {
   FileUpload,
   FileUploadDropzone,
-  FileUploadDropzoneIcon,
   FileUploadHelper,
   FileUploadList,
   FileUploadTitle,
@@ -13,7 +13,11 @@ import {
 export const FileUploadExample = (props: React.ComponentProps<"div">) => (
   <FileUpload accept={acceptedTypes} maxFileSize={maxFileSize} {...props}>
     <FileUploadDropzone>
-      <FileUploadDropzoneIcon className="border-0 bg-transparent p-0" />
+      <CloudUploadIcon
+        aria-hidden="true"
+        className="text-muted-foreground group-data-dragging/file-upload:text-primary size-8"
+        strokeWidth={1.5}
+      />
       <FileUploadTitle>Drop files here</FileUploadTitle>
       <FileUploadHelper>PNG, JPG, or PDF up to 10MB</FileUploadHelper>
     </FileUploadDropzone>

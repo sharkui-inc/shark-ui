@@ -5,28 +5,47 @@ import {
   useMarqueeContext as useArkMarqueeContext,
 } from "@ark-ui/react/marquee";
 import type React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
+export const useMarqueeContext = useArkMarqueeContext;
+
+const marqueeVariants = tv({
+  base: [
+    "group/marquee",
+    "relative",
+    "w-full max-w-full",
+    "isolate",
+    "data-paused:**:paused!",
+  ],
+  defaultVariants: {
+    fade: true,
+  },
+  variants: {
+    fade: {
+      true: [
+        "[--fade-size:25%]",
+        "data-[orientation=horizontal]:mask-r-from-[calc(100%-var(--fade-size))] data-[orientation=horizontal]:mask-l-from-[calc(100%-var(--fade-size))]",
+        "data-[orientation=vertical]:mask-t-from-[calc(100%-var(--fade-size))] data-[orientation=vertical]:mask-b-from-[calc(100%-var(--fade-size))]",
+      ],
+    },
+  },
+});
+
 interface MarqueeProps
-  extends Omit<React.ComponentProps<typeof ArkMarquee.Root>, "side"> {
+  extends Omit<React.ComponentProps<typeof ArkMarquee.Root>, "side">,
+    VariantProps<typeof marqueeVariants> {
   /**
    *
    * @default "horizontal"
    */
   orientation?: "horizontal" | "vertical";
-  /**
-   * Whether to show the edges of the marquee
-   *
-   * @default true
-   */
-  showEdges?: boolean;
 }
 
-export const useMarqueeContext = useArkMarqueeContext;
 export const Marquee = (props: MarqueeProps) => {
   const {
     speed = 50,
-    showEdges = true,
+    fade = true,
     spacing = "16px",
     orientation = "horizontal",
     className,
@@ -38,13 +57,7 @@ export const Marquee = (props: MarqueeProps) => {
 
   return (
     <ArkMarquee.Root
-      className={cn(
-        "group/marquee",
-        "relative",
-        "w-full max-w-full",
-        "isolate",
-        className
-      )}
+      className={cn(marqueeVariants({ fade }), className)}
       data-orientation={orientation}
       data-slot="marquee"
       side={side}
@@ -53,13 +66,6 @@ export const Marquee = (props: MarqueeProps) => {
       {...rest}
     >
       {children}
-
-      {showEdges ? (
-        <>
-          <MarqueeEdge side={orientation === "horizontal" ? "start" : "top"} />
-          <MarqueeEdge side={orientation === "horizontal" ? "end" : "bottom"} />
-        </>
-      ) : null}
     </ArkMarquee.Root>
   );
 };
@@ -71,7 +77,7 @@ export const MarqueeContent = (
 
   return (
     <ArkMarquee.Viewport
-      className="flex overflow-hidden"
+      className={cn("flex", "overflow-hidden")}
       data-slot="marquee-viewport"
     >
       <ArkMarquee.Content
@@ -81,8 +87,7 @@ export const MarqueeContent = (
           "delay-(--marquee-delay)",
           "data-[orientation=vertical]:animate-marquee-y data-[orientation=vertical]:flex-col",
           "data-[orientation=horizontal]:animate-marquee-x data-[orientation=horizontal]:flex-row",
-          "data-reverse:shimmer-reverse",
-          "group-data-paused/marquee:paused",
+          "data-reverse:shimmer-reverse!",
           className
         )}
         data-slot="marquee-content"
@@ -99,34 +104,8 @@ export const MarqueeItem = (
 
   return (
     <ArkMarquee.Item
-      className={cn("w-full text-nowrap", className)}
+      className={cn("w-full", "text-nowrap", className)}
       data-slot="marquee-item"
-      {...rest}
-    />
-  );
-};
-
-export const MarqueeEdge = (
-  props: React.ComponentProps<typeof ArkMarquee.Edge>
-) => {
-  const { className, ...rest } = props;
-
-  return (
-    <ArkMarquee.Edge
-      className={cn(
-        "absolute z-10",
-        "group-data-[orientation=horizontal]/marquee:h-full group-data-[orientation=horizontal]/marquee:w-1/4",
-        "group-data-[orientation=vertical]/marquee:h-1/4 group-data-[orientation=vertical]/marquee:w-full",
-        "pointer-events-none",
-        "rtl:rotate-180",
-        "from-background to-transparent",
-        "data-[side=start]:bg-linear-to-r",
-        "data-[side=end]:bg-linear-to-l",
-        "data-[side=top]:bg-linear-to-b",
-        "data-[side=bottom]:bg-linear-to-t",
-        className
-      )}
-      data-slot="marquee-edge"
       {...rest}
     />
   );

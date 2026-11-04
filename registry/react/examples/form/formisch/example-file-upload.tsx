@@ -8,6 +8,7 @@ import {
   useForm,
 } from "@formisch/react";
 import { toast } from "@registry/react/components/toast";
+import { CloudUploadIcon } from "lucide-react";
 import * as v from "valibot";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -28,7 +29,6 @@ import {
 import {
   FileUpload,
   FileUploadDropzone,
-  FileUploadDropzoneIcon,
   FileUploadList,
 } from "@/registry/react/components/file-upload";
 
@@ -89,7 +89,11 @@ const Example = () => {
                     onFileAccept={(e) => field.onChange(e.files)}
                   >
                     <FileUploadDropzone>
-                      <FileUploadDropzoneIcon />
+                      <CloudUploadIcon
+                        aria-hidden="true"
+                        className="text-muted-foreground group-data-dragging/file-upload:text-primary size-8"
+                        strokeWidth={1.5}
+                      />
                     </FileUploadDropzone>
                     <FileUploadList />
                   </FileUpload>

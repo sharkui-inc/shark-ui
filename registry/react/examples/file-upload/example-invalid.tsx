@@ -1,3 +1,4 @@
+import { CloudUploadIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   Field,
@@ -6,29 +7,33 @@ import {
 } from "@/registry/react/components/field";
 import {
   FileUpload,
-  FileUploadDescription,
   FileUploadDropzone,
-  FileUploadDropzoneIcon,
+  FileUploadHelper,
   FileUploadList,
   FileUploadTitle,
   FileUploadTrigger,
 } from "@/registry/react/components/file-upload";
-import { Separator } from "@/registry/react/components/separator";
 
 const Example = () => (
-  <Field className="mx-auto w-full max-w-xs" invalid>
+  <Field className="mx-auto w-full max-w-sm" invalid>
     <FieldLabel>Attachments</FieldLabel>
-    <FileUpload className="w-full" invalid>
-      <FileUploadDropzone disableClick>
-        <FileUploadDropzoneIcon />
-        <FileUploadTitle>Drop files here</FileUploadTitle>
-        <div className="flex items-center justify-center gap-2">
-          <Separator />
-          <FileUploadDescription>or</FileUploadDescription>
-          <Separator />
+    <FileUpload
+      accept="application/pdf,image/png,image/jpeg"
+      className="w-full"
+      invalid
+    >
+      <FileUploadDropzone className="gap-4 py-10" disableClick>
+        <CloudUploadIcon
+          aria-hidden="true"
+          className="text-muted-foreground group-data-dragging/file-upload:text-primary size-8"
+          strokeWidth={1.5}
+        />
+        <div className="flex flex-col gap-0.5">
+          <FileUploadTitle>Drag and drop your files</FileUploadTitle>
+          <FileUploadHelper>PDF, PNG, or JPG</FileUploadHelper>
         </div>
         <FileUploadTrigger asChild>
-          <Button>Browse files</Button>
+          <Button size="sm">Select files</Button>
         </FileUploadTrigger>
       </FileUploadDropzone>
       <FileUploadList />

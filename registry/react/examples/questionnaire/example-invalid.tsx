@@ -73,7 +73,7 @@ const items = [
   { name: "channel", required: true },
 ] as const;
 
-const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
   event.preventDefault();
   const answers = new FormData(event.currentTarget);
 

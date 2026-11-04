@@ -120,7 +120,7 @@ export const InputOTPExample = (props: React.ComponentProps<"div">) => {
             <FieldLabel className="sr-only">Verification code</FieldLabel>
             <InputOTP
               blurOnComplete
-              className="w-full *:data-[slot=input-otp-input]:h-11 *:data-[slot=input-otp-input]:min-w-0 *:data-[slot=input-otp-input]:flex-1 *:data-[slot=input-otp-input]:font-medium *:data-[slot=input-otp-input]:text-lg"
+              className="w-full *:data-[slot=input-otp-input]:h-11 *:data-[slot=input-otp-input]:min-w-0 *:data-[slot=input-otp-input]:flex-1 *:data-[slot=input-otp-input]:text-lg *:data-[slot=input-otp-input]:font-medium"
               onValueChange={({ value: next }) => setValue(next)}
               onValueComplete={() => {
                 setIsVerified(true);

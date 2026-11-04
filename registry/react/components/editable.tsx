@@ -12,6 +12,7 @@ import {
 } from "@/registry/react/components/button";
 
 export const useEditableContext = useArkEditableContext;
+
 export interface EditableProps
   extends React.ComponentProps<typeof ArkEditable.Root> {
   /**
@@ -47,7 +48,7 @@ export const EditableArea = (
 
   return (
     <ArkEditable.Area
-      className={cn("w-full", className)}
+      className={cn("w-full", "grid", "*:col-start-1 *:row-start-1", className)}
       data-slot="editable-area"
       {...rest}
     />
@@ -62,20 +63,8 @@ export const EditableInput = (props: EditableInputProps) => (
 );
 
 interface EditablePreviewProps
-  extends React.ComponentProps<typeof ArkEditable.Preview> {
-  /**
-   * The size of the preview
-   *
-   * @default "md"
-   */
-  size?: ButtonProps["size"];
-  /**
-   * The variant of the preview
-   *
-   * @default "outline"
-   */
-  variant?: ButtonProps["variant"];
-}
+  extends React.ComponentProps<typeof ArkEditable.Preview>,
+    Pick<ButtonProps, "size" | "variant"> {}
 
 export const EditablePreview = (props: EditablePreviewProps) => {
   const { variant = "outline", size = "md", className, ...rest } = props;
@@ -84,9 +73,10 @@ export const EditablePreview = (props: EditablePreviewProps) => {
     <ArkEditable.Preview
       className={cn(
         buttonVariants({ clickEffect: false, size, variant }),
-        "w-full justify-start",
+        "w-full",
+        "justify-start",
         "px-3",
-        "whitespace-pre-wrap font-normal text-base sm:text-sm",
+        "text-base font-normal whitespace-pre-wrap sm:text-sm",
         "dark:hover:bg-input/32",
         "data-placeholder-shown:text-muted-foreground",
         "in-[[data-slot=editable-area]:has(textarea)]:h-auto",

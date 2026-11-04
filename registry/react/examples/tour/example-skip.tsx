@@ -27,45 +27,45 @@ const Example = () => {
 
         <div className="flex flex-col gap-2">
           <div
-            className="flex items-center gap-3 rounded-lg border bg-card px-3 py-2.5 shadow-xs/4"
+            className="bg-card flex items-center gap-3 rounded-lg border px-3 py-2.5 shadow-xs/4"
             id="tour-skip-notifications"
           >
             <BellIcon
               aria-hidden
-              className="size-4 shrink-0 text-muted-foreground"
+              className="text-muted-foreground size-4 shrink-0"
             />
             <div className="flex min-w-0 flex-col">
-              <span className="font-medium text-sm">Notifications</span>
+              <span className="text-sm font-medium">Notifications</span>
               <span className="text-muted-foreground text-xs">
                 Mentions and replies
               </span>
             </div>
           </div>
           <div
-            className="flex items-center gap-3 rounded-lg border bg-card px-3 py-2.5 shadow-xs/4"
+            className="bg-card flex items-center gap-3 rounded-lg border px-3 py-2.5 shadow-xs/4"
             id="tour-skip-digest"
           >
             <MailIcon
               aria-hidden
-              className="size-4 shrink-0 text-muted-foreground"
+              className="text-muted-foreground size-4 shrink-0"
             />
             <div className="flex min-w-0 flex-col">
-              <span className="font-medium text-sm">Weekly digest</span>
+              <span className="text-sm font-medium">Weekly digest</span>
               <span className="text-muted-foreground text-xs">
                 Monday morning summary
               </span>
             </div>
           </div>
           <div
-            className="flex items-center gap-3 rounded-lg border bg-card px-3 py-2.5 shadow-xs/4"
+            className="bg-card flex items-center gap-3 rounded-lg border px-3 py-2.5 shadow-xs/4"
             id="tour-skip-quiet"
           >
             <MoonIcon
               aria-hidden
-              className="size-4 shrink-0 text-muted-foreground"
+              className="text-muted-foreground size-4 shrink-0"
             />
             <div className="flex min-w-0 flex-col">
-              <span className="font-medium text-sm">Quiet hours</span>
+              <span className="text-sm font-medium">Quiet hours</span>
               <span className="text-muted-foreground text-xs">10pm to 7am</span>
             </div>
           </div>

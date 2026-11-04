@@ -17,19 +17,19 @@ const InputExamplePage = () => (
   <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
     <div className="grid min-w-0 grid-cols-1 gap-16 sm:grid-cols-2 [&>section]:min-w-0">
       <section aria-labelledby="basic-heading" className="flex flex-col gap-5">
-        <h1 className="font-medium text-muted-foreground" id="basic-heading">
+        <h1 className="text-muted-foreground font-medium" id="basic-heading">
           Basic
         </h1>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputBasic />
         </div>
       </section>
 
       <section aria-labelledby="badge-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="badge-heading">
+        <h2 className="text-muted-foreground font-medium" id="badge-heading">
           Badge
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputBadge />
         </div>
       </section>
@@ -39,12 +39,12 @@ const InputExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="button-group-heading"
         >
           Button Group
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputButtonGroup />
         </div>
       </section>
@@ -53,19 +53,19 @@ const InputExamplePage = () => (
         aria-labelledby="disabled-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="disabled-heading">
+        <h2 className="text-muted-foreground font-medium" id="disabled-heading">
           Disabled
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputDisabled />
         </div>
       </section>
 
       <section aria-labelledby="field-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="field-heading">
+        <h2 className="text-muted-foreground font-medium" id="field-heading">
           Field
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputField />
         </div>
       </section>
@@ -75,48 +75,48 @@ const InputExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="field-group-heading"
         >
           Field Group
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputFieldGroup />
         </div>
       </section>
 
       <section aria-labelledby="file-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="file-heading">
+        <h2 className="text-muted-foreground font-medium" id="file-heading">
           File
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputFile />
         </div>
       </section>
 
       <section aria-labelledby="form-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="form-heading">
+        <h2 className="text-muted-foreground font-medium" id="form-heading">
           Form
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputForm />
         </div>
       </section>
 
       <section aria-labelledby="grid-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="grid-heading">
+        <h2 className="text-muted-foreground font-medium" id="grid-heading">
           Grid
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGrid />
         </div>
       </section>
 
       <section aria-labelledby="inline-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="inline-heading">
+        <h2 className="text-muted-foreground font-medium" id="inline-heading">
           Inline
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputInline />
         </div>
       </section>
@@ -126,12 +126,12 @@ const InputExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="input-group-heading"
         >
           Input Group
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputInputGroup />
         </div>
       </section>
@@ -140,10 +140,10 @@ const InputExamplePage = () => (
         aria-labelledby="invalid-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="invalid-heading">
+        <h2 className="text-muted-foreground font-medium" id="invalid-heading">
           Invalid
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputInvalid />
         </div>
       </section>
@@ -152,19 +152,19 @@ const InputExamplePage = () => (
         aria-labelledby="required-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="required-heading">
+        <h2 className="text-muted-foreground font-medium" id="required-heading">
           Required
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputRequired />
         </div>
       </section>
 
       <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="rtl-heading">
+        <h2 className="text-muted-foreground font-medium" id="rtl-heading">
           RTL
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputRtl />
         </div>
       </section>

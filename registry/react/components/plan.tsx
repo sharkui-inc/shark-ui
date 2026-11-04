@@ -25,9 +25,15 @@ export type PlanStatus = PlanItemStatus;
 
 const planHeaderVariants = tv({
   base: [
-    "flex w-full min-w-0 items-center gap-3 px-3 py-2 text-start",
-    "border border-transparent hover:bg-muted/48 focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
-    "transition-colors duration-150 motion-reduce:transition-none",
+    "w-full min-w-0",
+    "flex items-center gap-3",
+    "px-3 py-2",
+    "text-start",
+    "border border-transparent",
+    "hover:bg-muted/48",
+    "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2 focus-visible:outline-hidden",
+    "transition-colors duration-150",
+    "motion-reduce:transition-none",
   ],
   defaultVariants: {
     description: false,
@@ -41,7 +47,7 @@ const planHeaderVariants = tv({
 });
 
 const planHeaderTitleStackVariants = tv({
-  base: "flex min-w-0 flex-1 flex-col",
+  base: ["min-w-0 flex-1", "flex flex-col"],
   defaultVariants: {
     description: false,
   },
@@ -54,9 +60,14 @@ const planHeaderTitleStackVariants = tv({
 
 const planItemTriggerVariants = tv({
   base: [
-    "grid min-h-9 w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-lg px-2 py-1.5 text-start",
-    "transition-colors duration-150 motion-reduce:transition-none",
-    "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
+    "min-h-9 w-full min-w-0",
+    "grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2",
+    "px-2 py-1.5",
+    "text-start",
+    "rounded-lg",
+    "transition-colors duration-150",
+    "motion-reduce:transition-none",
+    "[&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
   ],
   defaultVariants: {
     collapsible: false,
@@ -66,7 +77,10 @@ const planItemTriggerVariants = tv({
     collapsible: {
       false: "",
       true: [
-        "cursor-pointer border border-transparent hover:bg-muted focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
+        "border border-transparent",
+        "cursor-pointer",
+        "hover:bg-muted",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2 focus-visible:outline-hidden",
       ],
     },
     status: {
@@ -79,7 +93,7 @@ const planItemTriggerVariants = tv({
 });
 
 const planItemTitleVariants = tv({
-  base: "min-w-0 truncate",
+  base: ["min-w-0", "truncate"],
   defaultVariants: {
     status: "pending",
   },
@@ -94,7 +108,7 @@ const planItemTitleVariants = tv({
 });
 
 const planHeaderStatusVariants = tv({
-  base: "flex shrink-0 items-center text-muted-foreground",
+  base: ["shrink-0", "flex items-center", "text-muted-foreground"],
   defaultVariants: {
     status: "pending",
   },
@@ -102,8 +116,12 @@ const planHeaderStatusVariants = tv({
     status: {
       completed: "text-success-foreground",
       error: "text-destructive-foreground",
-      "in-progress":
-        "text-foreground transition-[opacity,scale] duration-150 ease-out group-data-[state=open]/collapsible:pointer-events-none group-data-[state=open]/collapsible:scale-75 group-data-[state=open]/collapsible:opacity-0 motion-reduce:transition-none",
+      "in-progress": [
+        "text-foreground",
+        "transition-[opacity,scale] duration-150 ease-out",
+        "group-data-[state=open]/collapsible:pointer-events-none group-data-[state=open]/collapsible:scale-75 group-data-[state=open]/collapsible:opacity-0",
+        "motion-reduce:transition-none",
+      ],
       pending: "",
     },
   },
@@ -163,7 +181,11 @@ export const Plan = (props: PlanProps) => {
     <PlanProvider value={{ status }}>
       <Collapsible
         className={cn(
-          "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground",
+          "w-full min-w-0",
+          "bg-card",
+          "text-card-foreground",
+          "rounded-xl border",
+          "overflow-hidden",
           className
         )}
         data-slot="plan"
@@ -207,7 +229,11 @@ export const PlanHeader = (props: PlanHeaderProps) => {
     >
       <ListChecksIcon
         aria-hidden
-        className="h-lh w-4 shrink-0 self-start text-muted-foreground"
+        className={cn(
+          "h-lh w-4 shrink-0",
+          "self-start",
+          "text-muted-foreground"
+        )}
       />
       <span
         className={planHeaderTitleStackVariants({
@@ -220,7 +246,9 @@ export const PlanHeader = (props: PlanHeaderProps) => {
         ) : null}
       </span>
       <PlanHeaderStatus status={status} />
-      <CollapsibleIndicator className="ms-auto size-3.5 shrink-0 text-muted-foreground" />
+      <CollapsibleIndicator
+        className={cn("size-3.5 shrink-0", "ms-auto", "text-muted-foreground")}
+      />
     </CollapsibleTrigger>
   );
 };
@@ -230,7 +258,7 @@ export const PlanTitle = (props: React.ComponentProps<typeof ark.span>) => {
 
   return (
     <ark.span
-      className={cn("min-w-0 truncate font-medium text-sm", className)}
+      className={cn("min-w-0", "truncate text-sm font-medium", className)}
       data-slot="plan-title"
       {...rest}
     />
@@ -244,7 +272,7 @@ export const PlanContent = (
 
   return (
     <CollapsibleContent
-      className={cn("flex flex-col gap-0.5 border-t p-2", className)}
+      className={cn("flex flex-col gap-0.5", "p-2", "border-t", className)}
       data-slot="plan-content"
       {...rest}
     />
@@ -307,7 +335,8 @@ export const PlanItem = (props: PlanItemProps) => {
     <PlanItemProvider value={{ collapsible, status }}>
       <Collapsible
         className={cn(
-          "w-full min-w-0 text-sm",
+          "w-full min-w-0",
+          "text-sm",
           "*:data-[slot=collapsible-content]:w-full",
           "*:data-[slot=collapsible-content]:min-w-0",
           className
@@ -385,7 +414,9 @@ export const PlanItemTrigger = (props: PlanItemTriggerProps) => {
       {...rest}
     >
       {content}
-      <CollapsibleIndicator className="size-3.5 text-muted-foreground" />
+      <CollapsibleIndicator
+        className={cn("size-3.5", "text-muted-foreground")}
+      />
     </CollapsibleTrigger>
   );
 };
@@ -398,7 +429,10 @@ export const PlanItemContent = (
   return (
     <CollapsibleContent
       className={cn(
-        "ms-7 me-2 flex min-w-0 flex-col gap-1 border-s px-3 pt-1 pb-2",
+        "min-w-0",
+        "flex flex-col gap-1",
+        "ms-7 me-2 px-3 pt-1 pb-2",
+        "border-s",
         "text-muted-foreground text-sm leading-6",
         className
       )}
@@ -413,7 +447,7 @@ export const PlanItemDetail = (props: React.ComponentProps<typeof ark.div>) => {
 
   return (
     <ark.div
-      className={cn("min-w-0 leading-6", className)}
+      className={cn("min-w-0", "leading-6", className)}
       data-slot="plan-item-detail"
       {...rest}
     />
@@ -428,7 +462,10 @@ export const PlanItemDetailFile = (
   return (
     <Badge
       className={cn(
-        "mx-1 w-fit max-w-full truncate align-baseline font-mono text-xs",
+        "w-fit max-w-full",
+        "align-baseline",
+        "mx-1",
+        "truncate font-mono text-xs",
         className
       )}
       data-slot="plan-item-detail-file"

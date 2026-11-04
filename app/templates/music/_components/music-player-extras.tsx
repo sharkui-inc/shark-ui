@@ -28,6 +28,7 @@ export const MusicPlayerExtras = (props: {
     track,
     volume,
   } = props;
+
   return (
     <div className="hidden items-center justify-end gap-0.5 self-end lg:flex">
       <Sheet closeOnInteractOutside modal={false}>

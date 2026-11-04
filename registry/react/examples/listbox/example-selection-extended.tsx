@@ -12,7 +12,7 @@ import {
 
 const Example = () => (
   <div className="flex w-full max-w-64 flex-col gap-4">
-    <p className="text-center text-muted-foreground text-sm">
+    <p className="text-muted-foreground text-center text-sm">
       Hold <Kbd>⌘</Kbd> or <Kbd>Ctrl</Kbd> to select multiple
     </p>
     <Item className="w-full p-1" variant="outline">

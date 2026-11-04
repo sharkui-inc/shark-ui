@@ -21,21 +21,21 @@ const CardSmall = () => {
           <li className="flex gap-2">
             <ChevronRightIcon
               aria-hidden
-              className="mt-0.5 size-4 shrink-0 text-muted-foreground"
+              className="text-muted-foreground mt-0.5 size-4 shrink-0"
             />
             <span>Choose a schedule (daily, or weekly).</span>
           </li>
           <li className="flex gap-2">
             <ChevronRightIcon
               aria-hidden
-              className="mt-0.5 size-4 shrink-0 text-muted-foreground"
+              className="text-muted-foreground mt-0.5 size-4 shrink-0"
             />
             <span>Send to channels or specific teammates.</span>
           </li>
           <li className="flex gap-2">
             <ChevronRightIcon
               aria-hidden
-              className="mt-0.5 size-4 shrink-0 text-muted-foreground"
+              className="text-muted-foreground mt-0.5 size-4 shrink-0"
             />
             <span>Include charts, tables, and key metrics.</span>
           </li>

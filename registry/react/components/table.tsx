@@ -1,15 +1,27 @@
-// biome-ignore-all lint/a11y/noNoninteractiveTabindex: Scrollable table regions need keyboard access.
-// biome-ignore-all lint/a11y/useSemanticElements: A labeled group avoids adding a repeated landmark for every table.
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
 import type React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
-const tableCheckboxSpacing =
-  "has-[[role=checkbox]]:leading-none has-[[role=checkbox]]:ps-2 has-[[role=checkbox]]:pe-0 [&>[role=checkbox]]:align-middle";
+const tableVariants = tv({
+  base: ["group/table", "w-full", "caption-bottom", "text-foreground text-sm"],
+  defaultVariants: {
+    size: "default",
+  },
+  variants: {
+    size: {
+      comfortable: "[--space:--spacing(4)]",
+      compact: "[--space:--spacing(1)]",
+      default: "[--space:--spacing(2)]",
+    },
+  },
+});
 
-interface TableProps extends React.ComponentProps<typeof ark.table> {
+interface TableProps
+  extends React.ComponentProps<typeof ark.table>,
+    VariantProps<typeof tableVariants> {
   /**
    * Whether the table rows are hoverable.
    *
@@ -25,25 +37,23 @@ interface TableProps extends React.ComponentProps<typeof ark.table> {
 }
 
 export const Table = (props: TableProps) => {
-  const { variant = "plain", isHoverable = true, className, ...rest } = props;
+  const {
+    variant = "plain",
+    size = "default",
+    isHoverable = true,
+    className,
+    ...rest
+  } = props;
 
   return (
     <div
-      aria-label="Scrollable table"
-      className="relative w-full overflow-auto outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+      className={cn("relative", "w-full", "overflow-auto")}
       data-slot="table-wrapper"
-      role="group"
-      tabIndex={0}
     >
       <ark.table
-        className={cn(
-          "group/table",
-          "w-full",
-          "caption-bottom",
-          "text-foreground text-sm",
-          className
-        )}
+        className={cn(tableVariants({ size }), className)}
         data-hoverable={isHoverable}
+        data-size={size}
         data-slot="table"
         data-variant={variant}
         {...rest}
@@ -121,10 +131,10 @@ export const TableHead = (props: React.ComponentProps<typeof ark.th>) => {
   return (
     <ark.th
       className={cn(
-        "h-10 px-2",
-        "text-start align-middle",
-        "font-medium text-muted-foreground",
-        tableCheckboxSpacing,
+        "align-middle",
+        "px-2 py-(--space) has-[[role=checkbox]]:ps-2 has-[[role=checkbox]]:pe-0",
+        "text-muted-foreground text-start font-medium has-[[role=checkbox]]:leading-none",
+        "[&>[data-slot=checkbox]]:align-middle [&>[role=checkbox]]:align-middle",
         className
       )}
       data-slot="table-head"
@@ -139,8 +149,10 @@ export const TableCell = (props: React.ComponentProps<typeof ark.td>) => {
   return (
     <ark.td
       className={cn(
-        "whitespace-nowrap p-2 align-middle",
-        tableCheckboxSpacing,
+        "align-middle",
+        "px-2 py-(--space) has-[[role=checkbox]]:ps-2 has-[[role=checkbox]]:pe-0",
+        "whitespace-nowrap has-[[role=checkbox]]:leading-none",
+        "*:data-[slot=checkbox]:align-middle *:[[role=checkbox]]:align-middle",
         className
       )}
       data-slot="table-cell"

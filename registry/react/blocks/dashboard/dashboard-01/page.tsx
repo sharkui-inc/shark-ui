@@ -16,12 +16,12 @@ const DashboardPage = () => (
   <SidebarProvider>
     <AppSidebar />
     <SidebarInset>
-      <header className="sticky top-0 z-10 flex h-16 items-center gap-3 border-b bg-background/96 px-4 backdrop-blur sm:px-6">
+      <header className="bg-background/96 sticky top-0 z-10 flex h-16 items-center gap-3 border-b px-4 backdrop-blur sm:px-6">
         <SidebarTrigger />
         <Separator className="h-5" orientation="vertical" />
         <div className="min-w-0 flex-1">
           <p className="truncate font-semibold">Overview</p>
-          <p className="hidden text-muted-foreground text-xs sm:block">
+          <p className="text-muted-foreground hidden text-xs sm:block">
             Monday, June 24
           </p>
         </div>
@@ -36,10 +36,10 @@ const DashboardPage = () => (
 
       <div className="flex flex-1 flex-col gap-6 p-4 sm:p-6">
         <div>
-          <h1 className="font-semibold text-2xl tracking-[-0.02em]">
+          <h1 className="text-2xl font-semibold tracking-[-0.02em]">
             Good morning, Maya
           </h1>
-          <p className="mt-1 text-muted-foreground text-sm">
+          <p className="text-muted-foreground mt-1 text-sm">
             Traffic, conversion, and channel mix for the last 30 days.
           </p>
         </div>

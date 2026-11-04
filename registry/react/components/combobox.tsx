@@ -27,6 +27,7 @@ import {
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const useComboboxContext = useArkComboboxContext;
+
 export const ComboboxContext = ArkCombobox.Context;
 
 export const Combobox: ArkCombobox.RootComponent = (props) => {
@@ -78,7 +79,8 @@ export const ComboboxControl = (
     <ArkCombobox.Control
       className={cn(
         "group/combobox-control",
-        "relative flex flex-wrap items-center gap-1",
+        "relative",
+        "flex flex-wrap items-center gap-1",
         className
       )}
       data-slot="combobox-control"
@@ -117,8 +119,13 @@ export const comboboxInputVariants = tv({
     variant: {
       ghost: [
         "bg-transparent",
+        "dark:bg-transparent",
         "border-transparent shadow-none",
         "hover:bg-accent hover:text-accent-foreground",
+        "dark:hover:bg-accent dark:hover:text-accent-foreground",
+        "data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
+        "dark:data-[state=open]:bg-accent dark:data-[state=open]:text-accent-foreground",
+        "focus-within:data-[state=open]:border-transparent focus-within:data-[state=open]:ring-0",
       ],
     },
   },
@@ -135,12 +142,13 @@ export const ComboboxInput = (props: ComboboxInputProps) => {
     ...rest
   } = props;
 
-  const { inputValue } = useComboboxContext();
+  const { inputValue, open } = useComboboxContext();
 
   return (
     <ComboboxControl data-size={size}>
       <InputGroup
         className={cn(comboboxInputVariants({ variant }), className)}
+        data-state={open ? "open" : "closed"}
         size={size}
       >
         {children}
@@ -221,7 +229,8 @@ export const ComboboxButtonTrigger = (props: ComboboxButtonTriggerProps) => {
     <ArkCombobox.Trigger asChild focusable>
       <Button
         className={cn(
-          "min-w-0 max-w-64 font-normal",
+          "max-w-64 min-w-0",
+          "font-normal",
           showTrigger && "justify-between",
           className
         )}
@@ -231,9 +240,12 @@ export const ComboboxButtonTrigger = (props: ComboboxButtonTriggerProps) => {
         {...rest}
         aria-label={ariaLabel}
       >
-        <span className="min-w-0 flex-1 truncate">{label}</span>
+        <span className={cn("min-w-0 flex-1", "truncate")}>{label}</span>
         {showTrigger ? (
-          <ChevronsUpDownIcon aria-hidden className="shrink-0 opacity-64" />
+          <ChevronsUpDownIcon
+            aria-hidden
+            className={cn("shrink-0", "opacity-64")}
+          />
         ) : null}
       </Button>
     </ArkCombobox.Trigger>
@@ -260,7 +272,8 @@ export const ComboboxChips = (props: ComboboxChipsProps) => {
       <InputGroup
         className={cn(
           "h-auto",
-          "flex-wrap content-center items-center gap-1 py-1",
+          "flex-wrap content-center items-center gap-1",
+          "py-1",
           "[--input-group-inset:--spacing(1)]",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
           "has-data-[slot=combobox-chip]:px-1",
@@ -283,7 +296,7 @@ export const ComboboxChipsInput = (
     <ArkCombobox.Input asChild data-slot="combobox-chips-input">
       <InputGroupInput
         className={cn(
-          "w-auto min-w-18 max-w-full flex-auto basis-auto",
+          "w-auto max-w-full min-w-18 flex-auto basis-auto",
           className
         )}
         {...rest}
@@ -312,9 +325,12 @@ export const ComboboxChip = (props: ComboboxChipProps) => {
   return (
     <span
       className={cn(
-        "h-5.5 in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5 max-w-full",
-        "inline-flex shrink-0 items-center gap-1",
-        "in-data-[size=lg]:ps-2 in-data-[size=sm]:ps-1 ps-1.5 pe-0.5",
+        "h-5.5 max-w-full",
+        "in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5",
+        "shrink-0",
+        "inline-flex items-center gap-1",
+        "ps-1.5 pe-0.5",
+        "in-data-[size=lg]:ps-2 in-data-[size=sm]:ps-1",
         "bg-secondary",
         "rounded-md border",
         "text-secondary-foreground text-xs",
@@ -327,7 +343,8 @@ export const ComboboxChip = (props: ComboboxChipProps) => {
         <InputGroupButton
           aria-label={`Remove ${value}`}
           className={cn(
-            "in-data-[size=lg]:size-5 in-data-[size=sm]:size-3 size-4 md:in-data-[size=lg]:size-5 md:in-data-[size=sm]:size-3 md:size-4",
+            "size-4 md:size-4",
+            "in-data-[size=lg]:size-5 in-data-[size=sm]:size-3 md:in-data-[size=lg]:size-5 md:in-data-[size=sm]:size-3",
             "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
             "shrink-0",
             "text-muted-foreground",
@@ -366,10 +383,13 @@ export const comboboxContentVariants = tv({
     "text-popover-foreground",
     "rounded-xl border shadow-lg/4",
     "outline-hidden",
-    "duration-150 ease-out",
-    "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-    "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
-    "data-[state=closed]:animate-out data-[state=open]:animate-in",
+    "duration-100 ease-out",
+    "data-[placement^=bottom]:slide-in-from-top-2",
+    "data-[placement^=top]:slide-in-from-bottom-2",
+    "data-[placement^=left]:slide-in-from-right-2",
+    "data-[placement^=right]:slide-in-from-left-2",
+    "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in",
+    "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out",
     "motion-reduce:animate-none",
     "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
   ],
@@ -437,7 +457,8 @@ export const ComboboxGroupLabel = (
 export const comboboxItemVariants = tv({
   base: [
     menuItemControlVariants(),
-    "touch-manipulation select-none font-normal text-base md:text-sm",
+    "text-base font-normal md:text-sm",
+    "touch-manipulation select-none",
     "cursor-default",
     "outline-hidden",
     "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
@@ -468,7 +489,7 @@ export const ComboboxItem = (props: ComboboxItemProps) => {
       persistFocus
     >
       <ArkCombobox.ItemText
-        className="flex min-w-0 flex-1 items-start gap-2"
+        className={cn("min-w-0 flex-1", "flex items-start gap-2")}
         data-slot="combobox-item-text"
       >
         {children}
@@ -509,7 +530,10 @@ export const ComboboxList = (
 
   return (
     <ScrollArea
-      className="h-auto max-h-[inherit] **:data-[slot=scroll-area-viewport]:h-auto"
+      className={cn(
+        "h-auto max-h-[inherit]",
+        "**:data-[slot=scroll-area-viewport]:h-auto"
+      )}
       orientation="vertical"
       overscrollContain
       scrollFade

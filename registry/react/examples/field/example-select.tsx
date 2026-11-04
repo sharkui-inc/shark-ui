@@ -3,7 +3,7 @@
 import { createListCollection } from "@ark-ui/react";
 import {
   Field,
-  FieldDescription,
+  FieldHelper,
   FieldLabel,
 } from "@/registry/react/components/field";
 import {
@@ -29,7 +29,7 @@ const Example = () => (
         ))}
       </SelectContent>
     </Select>
-    <FieldDescription>Used for shipping estimates</FieldDescription>
+    <FieldHelper>Used for shipping estimates</FieldHelper>
   </Field>
 );
 

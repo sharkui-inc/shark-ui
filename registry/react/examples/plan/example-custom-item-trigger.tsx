@@ -11,7 +11,7 @@ const Example = () => (
     <PlanItemTrigger title="Refresh the warehouse inventory cache">
       <CircleAlertIcon
         aria-hidden
-        className="size-3.5 shrink-0 text-destructive-foreground"
+        className="text-destructive-foreground size-3.5 shrink-0"
       />
       <span className="min-w-0 truncate font-medium">
         <span className="sr-only">Failed: </span>

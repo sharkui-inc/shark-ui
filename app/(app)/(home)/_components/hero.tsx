@@ -30,12 +30,12 @@ export const HeroSection = (props: HeroSectionProps) => {
           </Link>
         </Announcement>
 
-        <h1 className="max-w-5xl font-heading font-semibold text-5xl leading-[0.98] tracking-[-0.04em] sm:text-6xl lg:text-7xl xl:text-8xl">
+        <h1 className="font-heading max-w-5xl text-5xl leading-[0.98] font-semibold tracking-[-0.04em] sm:text-6xl lg:text-7xl xl:text-8xl">
           <span className="block">Build your own</span>
           <span className="block lg:whitespace-nowrap">component library</span>
         </h1>
 
-        <p className="max-w-xl text-base text-muted-foreground leading-relaxed sm:text-xl lg:max-w-3xl">
+        <p className="text-muted-foreground max-w-xl text-base leading-relaxed sm:text-xl lg:max-w-3xl">
           <span className="block lg:whitespace-nowrap">
             <Highlight
               className="mx-1.5"

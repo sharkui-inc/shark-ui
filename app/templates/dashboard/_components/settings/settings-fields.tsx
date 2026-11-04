@@ -16,6 +16,7 @@ export const SettingsSwitchField = (props: {
   onCheckedChange: (checked: boolean) => void;
 }) => {
   const { checked, description, label, onCheckedChange } = props;
+
   return (
     <Field orientation="horizontal">
       <Switch
@@ -38,6 +39,7 @@ export const SettingsTextField = (props: {
   value: string;
 }) => {
   const { description, label, onChange, type = "text", value } = props;
+
   return (
     <Field>
       <FieldLabel>{label}</FieldLabel>

@@ -21,7 +21,7 @@ const FieldChoiceCard = () => (
       </FieldDescription>
       <RadioGroup defaultValue="kubernetes">
         <RadioGroupItem
-          className="w-full flex-row-reverse items-start gap-3 rounded-xl border border-input p-3 shadow-xs/4 data-[state=checked]:border-primary data-[state=checked]:bg-primary/8"
+          className="border-input data-[state=checked]:border-primary data-[state=checked]:bg-primary/8 w-full flex-row-reverse items-start gap-3 rounded-xl border p-3 shadow-xs/4"
           value="kubernetes"
         >
           <FieldTitle>Kubernetes</FieldTitle>
@@ -30,7 +30,7 @@ const FieldChoiceCard = () => (
           </FieldDescription>
         </RadioGroupItem>
         <RadioGroupItem
-          className="w-full flex-row-reverse items-start gap-3 rounded-xl border border-input p-3 shadow-xs/4 data-[state=checked]:border-primary data-[state=checked]:bg-primary/8"
+          className="border-input data-[state=checked]:border-primary data-[state=checked]:bg-primary/8 w-full flex-row-reverse items-start gap-3 rounded-xl border p-3 shadow-xs/4"
           value="vm"
         >
           <FieldTitle>Virtual Machine</FieldTitle>

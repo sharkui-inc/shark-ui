@@ -8,7 +8,12 @@ import {
   CardContent,
   CardFooter,
 } from "@/registry/react/components/card";
-import { Field, FieldLabel } from "@/registry/react/components/field";
+import {
+  Field,
+  FieldContent,
+  FieldGroup,
+  FieldLabel,
+} from "@/registry/react/components/field";
 import {
   Select,
   SelectContent,
@@ -32,21 +37,29 @@ const Example = () => {
     <Card asChild className="w-full max-w-md">
       <form onSubmit={onSubmit}>
         <CardContent>
-          <Field>
-            <FieldLabel>Favorite framework</FieldLabel>
-            <Select collection={collection} defaultValue={[]} name="framework">
-              <SelectTrigger>
-                <SelectValue placeholder="Choose a framework" />
-              </SelectTrigger>
-              <SelectContent>
-                {collection.items.map((item) => (
-                  <SelectItem item={item} key={item.value}>
-                    {item.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </Field>
+          <FieldGroup>
+            <Field orientation="responsive">
+              <FieldContent>
+                <FieldLabel>Favorite framework</FieldLabel>
+              </FieldContent>
+              <Select
+                collection={collection}
+                defaultValue={[]}
+                name="framework"
+              >
+                <SelectTrigger className="w-full min-w-32">
+                  <SelectValue placeholder="Choose a framework" />
+                </SelectTrigger>
+                <SelectContent>
+                  {collection.items.map((item) => (
+                    <SelectItem item={item} key={item.value}>
+                      {item.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Field>
+          </FieldGroup>
         </CardContent>
         <CardFooter className="justify-end">
           <Button type="reset" variant="outline">

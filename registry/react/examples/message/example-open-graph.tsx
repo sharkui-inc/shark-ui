@@ -19,7 +19,7 @@ const Example = () => (
       <MessageContent>
         <LinkBox asChild>
           <Card className="w-full max-w-64 [--space:--spacing(3)]">
-            <CardMedia className="h-32 bg-muted" variant="image">
+            <CardMedia className="bg-muted h-32" variant="image">
               <img
                 alt=""
                 height={144}

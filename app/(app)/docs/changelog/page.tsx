@@ -35,7 +35,7 @@ const ChangelogPage = () => {
     <div className="size-full">
       <div className="flex items-stretch xl:w-full" data-slot="docs">
         <div className="relative flex w-full min-w-0 flex-1 flex-col lg:me-4 lg:mt-8">
-          <div className="relative mb-8 flex w-full flex-col border bg-white text-card-foreground shadow-lg/4 max-lg:border-none lg:rounded-2xl dark:bg-card">
+          <div className="text-card-foreground dark:bg-card relative mb-8 flex w-full flex-col border bg-white shadow-lg/4 max-lg:border-none lg:rounded-2xl">
             <div className="flex-1 px-4 py-6 sm:px-6 lg:p-8">
               <div
                 className={cn("mx-auto w-full", {
@@ -46,7 +46,7 @@ const ChangelogPage = () => {
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between gap-2">
                       <h1
-                        className="scroll-m-20 font-heading font-semibold text-3xl"
+                        className="font-heading scroll-m-20 text-3xl font-semibold"
                         id="page-title"
                       >
                         Changelog
@@ -64,7 +64,7 @@ const ChangelogPage = () => {
                       </Button>
                     </div>
 
-                    <p className="text-[1.05rem] text-muted-foreground sm:text-base md:max-w-[80%]">
+                    <p className="text-muted-foreground text-[1.05rem] sm:text-base md:max-w-[80%]">
                       Latest updates and announcements.
                     </p>
                   </div>
@@ -83,7 +83,7 @@ const ChangelogPage = () => {
                           key={page.url}
                         >
                           <div className="flex flex-col gap-2">
-                            <h2 className="font-heading font-semibold text-xl tracking-tight">
+                            <h2 className="font-heading text-xl font-semibold tracking-tight">
                               <Link className="hover:underline" href={page.url}>
                                 {data.title}
                               </Link>
@@ -97,7 +97,7 @@ const ChangelogPage = () => {
                               </time>
                             ) : null}
                             {data.description ? (
-                              <p className="max-w-2xl text-muted-foreground">
+                              <p className="text-muted-foreground max-w-2xl">
                                 {data.description}
                               </p>
                             ) : null}
@@ -107,7 +107,7 @@ const ChangelogPage = () => {
                     })}
                     {olderPages.length > 0 && (
                       <div className="scroll-mt-24">
-                        <h2 className="mb-6 font-heading font-semibold text-xl tracking-tight">
+                        <h2 className="font-heading mb-6 text-xl font-semibold tracking-tight">
                           More Updates
                         </h2>
                         <ul className="flex flex-col gap-4">
@@ -145,8 +145,8 @@ const ChangelogPage = () => {
               orientation="vertical"
               scrollFade
             >
-              <div className="flex min-h-0 min-w-0 flex-col gap-2 py-2">
-                <div className="h-(--top-spacing) shrink-0" />
+              <div className="flex min-h-0 min-w-0 flex-col py-2">
+                <div className="shrink-0" />
                 {latestPages.length > 0 && (
                   <DocsTableOfContents
                     data={latestPages.map((page) => ({

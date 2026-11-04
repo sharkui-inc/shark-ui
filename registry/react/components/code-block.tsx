@@ -65,7 +65,8 @@ export const CodeBlock = (props: CodeBlockProps) => {
         className={cn(
           "w-full min-w-0",
           "flex flex-col",
-          "bg-card text-card-foreground",
+          "bg-card",
+          "text-card-foreground",
           "rounded-xl border shadow-xs/4",
           "overflow-hidden",
           "[--code-surface-gutter-min:--spacing(11)] [--code-surface-header-height:--spacing(9)] [--code-surface-inline-padding:--spacing(3)] [--code-surface-line-height:--spacing(6)]",
@@ -94,8 +95,9 @@ export const CodeBlockTitle = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn(
         "min-w-0",
-        "flex flex-1 items-center gap-2",
-        "truncate text-muted-foreground text-sm",
+        "flex-1",
+        "flex items-center gap-2",
+        "text-muted-foreground truncate text-sm",
         className
       )}
       data-slot="code-block-title"
@@ -110,10 +112,12 @@ export const CodeBlockHeader = (props: CodeBlockHeaderProps) => {
   return (
     <ark.div
       className={cn(
-        "flex min-h-(--code-surface-header-height) min-w-0 shrink-0 items-center gap-2 px-(--code-surface-inline-padding) py-1",
+        "min-h-(--code-surface-header-height) min-w-0 shrink-0",
+        "flex items-center gap-2",
+        "px-(--code-surface-inline-padding) py-1",
         "border-b",
         "text-muted-foreground text-sm",
-        "[&>svg]:order-first [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
+        "[&>svg]:text-muted-foreground [&>svg]:order-first [&>svg]:shrink-0",
         "[&>svg:not([class*='size-'])]:size-3.5",
         className
       )}
@@ -139,7 +143,7 @@ export const CodeBlockFilename = (
     <ark.span
       className={cn(
         "min-w-0",
-        "truncate text-muted-foreground text-sm",
+        "text-muted-foreground truncate text-sm",
         className
       )}
       data-slot="code-block-filename"
@@ -157,7 +161,12 @@ export const CodeBlockActions = (
 
   return (
     <ark.div
-      className={cn("ms-auto flex shrink-0 items-center gap-1", className)}
+      className={cn(
+        "shrink-0",
+        "flex items-center gap-1",
+        "ms-auto",
+        className
+      )}
       data-slot="code-block-actions"
       {...rest}
     />
@@ -175,7 +184,7 @@ export const CodeBlockCopy = (
       <ClipboardTrigger asChild>
         <Button
           aria-label="Copy code"
-          className="text-muted-foreground hover:text-foreground"
+          className={cn("text-muted-foreground", "hover:text-foreground")}
           size="icon-xs"
           variant="ghost"
         >
@@ -326,6 +335,15 @@ const getTokens = (code: string, language: BundledLanguage) => {
   return tokens;
 };
 
+const isHighlightedCodeCurrent = (
+  latestCode: string,
+  highlightedCode: string,
+  streaming: boolean
+) =>
+  streaming
+    ? latestCode === highlightedCode || latestCode.startsWith(highlightedCode)
+    : latestCode === highlightedCode;
+
 const useCodeTokens = (
   code: string,
   language: CodeBlockLanguage,
@@ -368,12 +386,11 @@ const useCodeTokens = (
       getTokens(codeToHighlight, languageToHighlight).then(({ tokens }) => {
         const latestCode = codeRef.current;
         const streaming = isStreamingRef.current;
-        const codeMatches = streaming
-          ? latestCode === codeToHighlight ||
-            latestCode.startsWith(codeToHighlight)
-          : latestCode === codeToHighlight;
 
-        if (languageRef.current !== languageToHighlight || !codeMatches) {
+        if (
+          languageRef.current !== languageToHighlight ||
+          !isHighlightedCodeCurrent(latestCode, codeToHighlight, streaming)
+        ) {
           return;
         }
 
@@ -459,14 +476,12 @@ const getDisplayedTokens = (
   return tokens;
 };
 
-const isItalic = (fontStyle: number | undefined) =>
-  [1, 3, 5, 7].includes(fontStyle ?? 0);
+const ITALIC = 1;
+const BOLD = 2;
+const UNDERLINE = 4;
 
-const isBold = (fontStyle: number | undefined) =>
-  [2, 3, 6, 7].includes(fontStyle ?? 0);
-
-const isUnderline = (fontStyle: number | undefined) =>
-  [4, 5, 6, 7].includes(fontStyle ?? 0);
+const hasFontStyle = (fontStyle: number | undefined, flag: number) =>
+  Math.trunc((fontStyle ?? 0) / flag) % 2 === 1;
 
 const tokenKeys = new WeakMap<ThemedToken, number>();
 let nextTokenKey = 0;
@@ -490,17 +505,22 @@ const CodeToken = (props: { token: ThemedToken }) => {
     <span
       className={cn(
         "dark:bg-(--shiki-dark-bg)! dark:text-(--shiki-dark)!",
-        "[font-style:var(--shiki-light-font-style,normal)] dark:[font-style:var(--shiki-dark-font-style,var(--shiki-light-font-style,normal))]",
-        "font-(--shiki-light-font-weight,inherit) dark:font-(--shiki-dark-font-weight,var(--shiki-light-font-weight,inherit))",
-        "[text-decoration:var(--shiki-light-text-decoration,none)] dark:[text-decoration:var(--shiki-dark-text-decoration,var(--shiki-light-text-decoration,none))]"
+        "[font-style:var(--shiki-light-font-style,normal)]",
+        "dark:[font-style:var(--shiki-dark-font-style,var(--shiki-light-font-style,normal))]",
+        "font-(--shiki-light-font-weight,inherit)",
+        "dark:font-(--shiki-dark-font-weight,var(--shiki-light-font-weight,inherit))",
+        "[text-decoration:var(--shiki-light-text-decoration,none)]",
+        "dark:[text-decoration:var(--shiki-dark-text-decoration,var(--shiki-light-text-decoration,none))]"
       )}
       style={
         {
           backgroundColor: token.bgColor,
           color: token.color === "inherit" ? undefined : token.color,
-          fontStyle: isItalic(token.fontStyle) ? "italic" : undefined,
-          fontWeight: isBold(token.fontStyle) ? "bold" : undefined,
-          textDecoration: isUnderline(token.fontStyle)
+          fontStyle: hasFontStyle(token.fontStyle, ITALIC)
+            ? "italic"
+            : undefined,
+          fontWeight: hasFontStyle(token.fontStyle, BOLD) ? "bold" : undefined,
+          textDecoration: hasFontStyle(token.fontStyle, UNDERLINE)
             ? "underline"
             : undefined,
           ...token.htmlStyle,
@@ -543,7 +563,9 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
   return (
     <ark.pre
       className={cn(
-        "min-w-max py-3 font-mono text-sm leading-(--code-surface-line-height)",
+        "min-w-max",
+        "py-3",
+        "font-mono text-sm leading-(--code-surface-line-height)",
         className
       )}
       data-slot="code-block-content"
@@ -552,7 +574,8 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
     >
       <code
         className={cn(
-          "grid min-w-max",
+          "min-w-max",
+          "grid",
           showLineNumbers &&
             "grid-cols-[minmax(var(--code-surface-gutter-min),max-content)_minmax(max-content,1fr)]"
         )}
@@ -561,10 +584,12 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
         {tokens.map((line, index) => {
           const lineNumber = index + 1;
           const highlighted = highlightedLineSet.has(lineNumber);
+
           return (
             <span
               className={cn(
-                "min-h-(--code-surface-line-height) w-full min-w-max py-0",
+                "min-h-(--code-surface-line-height) w-full min-w-max",
+                "py-0",
                 showLineNumbers
                   ? "col-span-2 grid grid-cols-subgrid items-stretch"
                   : "flex items-stretch",
@@ -581,13 +606,26 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
                 <span
                   aria-hidden
                   className={cn(
-                    "sticky inset-s-0 z-10 flex w-full min-w-0 items-center bg-card",
+                    "sticky inset-s-0 z-10",
+                    "w-full min-w-0",
+                    "flex items-center",
+                    "bg-card",
                     highlighted &&
-                      "border-muted-foreground/48 border-s-2 bg-code-highlight"
+                      cn(
+                        "bg-code-highlight",
+                        "border-muted-foreground/48 border-s-2"
+                      )
                   )}
                   data-slot="code-block-line-number"
                 >
-                  <span className="w-full select-none px-(--code-surface-inline-padding) text-end text-muted-foreground tabular-nums">
+                  <span
+                    className={cn(
+                      "w-full",
+                      "px-(--code-surface-inline-padding)",
+                      "text-muted-foreground text-end tabular-nums",
+                      "select-none"
+                    )}
+                  >
                     {lineNumber}
                   </span>
                 </span>

@@ -62,7 +62,7 @@ const InputGroupTextareaExamples = () => (
         <InputGroupTextarea />
         <InputGroupAddon align="block-start">
           <InputGroupText>Ask, Search or Chat...</InputGroupText>
-          <InfoIcon aria-hidden className="ml-auto text-muted-foreground" />
+          <InfoIcon aria-hidden className="text-muted-foreground ml-auto" />
         </InputGroupAddon>
       </InputGroup>
       <FieldDescription>
@@ -79,7 +79,6 @@ const InputGroupTextareaExamples = () => (
             aria-label="Send"
             className="ml-auto rounded-full"
             size="icon-xs"
-            variant="default"
           >
             <ArrowUpIcon />
           </InputGroupButton>
@@ -97,9 +96,7 @@ const InputGroupTextareaExamples = () => (
           <InputGroupButton className="ml-auto" size="sm" variant="ghost">
             Cancel
           </InputGroupButton>
-          <InputGroupButton size="sm" variant="default">
-            Post Comment
-          </InputGroupButton>
+          <InputGroupButton size="sm">Post Comment</InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -111,7 +108,7 @@ const InputGroupTextareaExamples = () => (
           placeholder="console.log('Hello, world!');"
         />
         <InputGroupAddon align="block-start" className="border-b">
-          <InputGroupText className="font-medium font-mono">
+          <InputGroupText className="font-mono font-medium">
             <CodeIcon aria-hidden />
             script.js
           </InputGroupText>

@@ -21,7 +21,7 @@ const Example = () => (
           {Array.from({ length: 96 }, (_, index) => `box-${index}`).map(
             (key) => (
               <div
-                className="h-12 shrink-0 rounded-xl border bg-muted"
+                className="bg-muted h-12 shrink-0 rounded-xl border"
                 key={key}
               />
             )

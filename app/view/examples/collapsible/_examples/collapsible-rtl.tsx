@@ -20,7 +20,7 @@ const CollapsibleRtl = () => {
         open={isOpen}
       >
         <div className="flex items-center justify-between gap-4 px-4">
-          <h4 className="font-semibold text-sm">الطلب #4189</h4>
+          <h4 className="text-sm font-semibold">الطلب #4189</h4>
           <CollapsibleTrigger asChild>
             <Button size="icon-md" variant="ghost">
               <ChevronsUpDownIcon aria-hidden />

@@ -57,12 +57,6 @@ const Example = () => {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <TableHead
-                    aria-label={
-                      header.column.id === "select" ? "Select rows" : undefined
-                    }
-                    className={
-                      header.column.id === "select" ? "w-[1%]" : undefined
-                    }
                     colSpan={header.colSpan}
                     key={header.id}
                     rowSpan={header.rowSpan}
@@ -83,12 +77,7 @@ const Example = () => {
                   key={row.id}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      className={
-                        cell.column.id === "select" ? "w-[1%]" : undefined
-                      }
-                      key={cell.id}
-                    >
+                    <TableCell key={cell.id}>
                       <table.FlexRender cell={cell} />
                     </TableCell>
                   ))}
@@ -133,20 +122,18 @@ const SelectAllCheckbox = (props: {
   table: TanStackTable<DataTableFeatures, InventoryItem>;
 }) => {
   const { table } = props;
+
   return (
-    <>
-      <span className="sr-only">Select rows</span>
-      <Checkbox
-        aria-label="Select all"
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={({ checked }) => {
-          table.toggleAllPageRowsSelected(!!checked);
-        }}
-      />
-    </>
+    <Checkbox
+      aria-label="Select all"
+      checked={
+        table.getIsAllPageRowsSelected() ||
+        (table.getIsSomePageRowsSelected() && "indeterminate")
+      }
+      onCheckedChange={({ checked }) => {
+        table.toggleAllPageRowsSelected(!!checked);
+      }}
+    />
   );
 };
 
@@ -154,6 +141,7 @@ const SelectRowCheckbox = (props: {
   row: Row<DataTableFeatures, InventoryItem>;
 }) => {
   const { row } = props;
+
   return (
     <Checkbox
       aria-label="Select row"
@@ -166,15 +154,19 @@ const SelectRowCheckbox = (props: {
 };
 
 const columns = columnHelper.columns([
-  columnHelper.display({
-    cell: ({ row }) => <SelectRowCheckbox row={row} />,
-    enableHiding: false,
-    enableSorting: false,
-    header: ({ table }) => <SelectAllCheckbox table={table} />,
-    id: "select",
-  }),
   columnHelper.accessor("sku", {
-    header: "SKU",
+    cell: ({ row }) => (
+      <div className="flex items-center gap-2">
+        <SelectRowCheckbox row={row} />
+        {row.getValue("sku")}
+      </div>
+    ),
+    header: ({ table }) => (
+      <div className="flex items-center gap-2">
+        <SelectAllCheckbox table={table} />
+        SKU
+      </div>
+    ),
   }),
   columnHelper.accessor("location", {
     header: "Location",

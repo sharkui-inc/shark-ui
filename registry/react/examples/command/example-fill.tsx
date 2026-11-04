@@ -41,7 +41,7 @@ const Example = () => {
       >
         <div className="flex items-start justify-between gap-4 px-3 pt-4">
           <div className="min-w-0">
-            <h2 className="font-heading font-semibold text-xl tracking-tight">
+            <h2 className="font-heading text-xl font-semibold tracking-tight">
               Where from?
             </h2>
           </div>
@@ -75,7 +75,7 @@ const Example = () => {
                       item={airport}
                       key={airport.value}
                     >
-                      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-muted text-muted-foreground">
+                      <span className="bg-muted text-muted-foreground flex size-10 shrink-0 items-center justify-center rounded-xl">
                         {airport.value === "nearby" ? (
                           <MapPinIcon aria-hidden />
                         ) : (
@@ -83,17 +83,17 @@ const Example = () => {
                         )}
                       </span>
                       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-                        <span className="font-medium leading-tight">
+                        <span className="leading-tight font-medium">
                           {airport.name}
                         </span>
-                        <span className="truncate text-muted-foreground text-sm">
+                        <span className="text-muted-foreground truncate text-sm">
                           {airport.country
                             ? `${airport.city}, ${airport.country}`
                             : airport.city}
                         </span>
                       </span>
                       {airport.code ? (
-                        <CommandShortcut className="rounded-md border bg-muted px-2 py-1 font-mono text-xs tracking-wide">
+                        <CommandShortcut className="bg-muted rounded-md border px-2 py-1 font-mono text-xs tracking-wide">
                           {airport.code}
                         </CommandShortcut>
                       ) : null}

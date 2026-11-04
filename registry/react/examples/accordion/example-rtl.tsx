@@ -20,7 +20,7 @@ const Example = () => {
         >
           {values.product.title}
         </AccordionTrigger>
-        <AccordionContent className="flex flex-col gap-4 text-muted-foreground">
+        <AccordionContent className="text-muted-foreground flex flex-col gap-4">
           {values.product.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -29,7 +29,7 @@ const Example = () => {
 
       <AccordionItem value="item-2">
         <AccordionTrigger>{values.shipping.title}</AccordionTrigger>
-        <AccordionContent className="flex flex-col gap-4 text-muted-foreground">
+        <AccordionContent className="text-muted-foreground flex flex-col gap-4">
           {values.shipping.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -38,7 +38,7 @@ const Example = () => {
 
       <AccordionItem value="item-3">
         <AccordionTrigger>{values.returns.title}</AccordionTrigger>
-        <AccordionContent className="flex flex-col gap-4 text-muted-foreground">
+        <AccordionContent className="text-muted-foreground flex flex-col gap-4">
           {values.returns.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}

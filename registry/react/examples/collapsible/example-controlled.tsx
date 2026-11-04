@@ -13,7 +13,7 @@ const Example = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="flex min-w-64 flex-col gap-2">
+    <div className="flex w-full max-w-64 flex-col gap-2">
       <Collapsible
         onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)}
         open={open}
@@ -32,7 +32,7 @@ const Example = () => {
         </CollapsibleContent>
       </Collapsible>
 
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         {open ? "✅" : "❌"}
       </p>
     </div>

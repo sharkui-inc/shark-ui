@@ -27,7 +27,7 @@ export const MailSidebar = () => {
             <IconTile aria-hidden size="xs">
               <MailIcon aria-hidden />
             </IconTile>
-            <p className="truncate font-semibold text-sm">Onda Mail</p>
+            <p className="truncate text-sm font-semibold">Onda Mail</p>
           </div>
         </SidebarHeader>
         <SidebarContent>

@@ -10,6 +10,7 @@ import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
 export const useCheckboxContext = useArkCheckboxContext;
+
 export const CheckboxGroup = (
   props: React.ComponentProps<typeof ArkCheckbox.Group>
 ) => {
@@ -27,18 +28,19 @@ export const CheckboxGroup = (
 export const checkboxVariants = tv({
   base: [
     "relative",
-    "inline-flex shrink-0 items-center justify-center",
+    "shrink-0",
+    "inline-flex items-center justify-center",
     "touch-manipulation",
     "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
     "size-4",
     "bg-transparent",
-    "rounded-sm border border-input shadow-xs/4",
+    "border-input rounded-sm border shadow-xs/4",
     "transition-shadow",
-    "data-focus-visible:border-ring/64 data-focus-visible:ring-2 data-focus-visible:ring-ring/24",
+    "data-focus-visible:border-ring/64 data-focus-visible:ring-ring/24 data-focus-visible:ring-2",
     "data-checked:data-focus-visible:border-background",
     "data-disabled:opacity-64",
     "[[data-disabled],[data-checked],[data-invalid]]:shadow-none",
-    "data-invalid:border-destructive data-invalid:ring-[3px] data-invalid:ring-destructive/24",
+    "data-invalid:border-destructive data-invalid:ring-destructive/24 data-invalid:ring-[3px]",
     "dark:data-invalid:border-destructive-foreground dark:data-invalid:text-destructive-foreground dark:data-invalid:ring-destructive-foreground/24",
     "dark:not-data-checked:bg-input/32 dark:data-invalid:ring-destructive-foreground/24",
     "motion-reduce:transition-none",

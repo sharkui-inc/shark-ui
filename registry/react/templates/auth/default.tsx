@@ -33,7 +33,7 @@ const AuthTemplate = () => (
           <form className="flex flex-col gap-6">
             <FieldGroup>
               <div className="flex flex-col items-center gap-1 text-center">
-                <h1 className="font-bold text-2xl">Login to your account</h1>
+                <h1 className="text-2xl font-bold">Login to your account</h1>
                 <p className="text-muted-foreground text-sm">
                   Enter your email below to login to your account
                 </p>
@@ -86,7 +86,7 @@ const AuthTemplate = () => (
         </div>
       </div>
     </div>
-    <div className="relative hidden bg-muted lg:block">
+    <div className="bg-muted relative hidden lg:block">
       <img
         alt="Onda workspace"
         className="absolute inset-0 size-full object-cover"

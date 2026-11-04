@@ -12,7 +12,7 @@ export const BadgeExample = (props: React.ComponentProps<"div">) => (
     <CardHeader description="Semantic roles on this release." title="Labels" />
     <CardContent className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <p className="font-medium text-muted-foreground text-xs">Tags</p>
+        <p className="text-muted-foreground text-xs font-medium">Tags</p>
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
             <Badge key={tag.label} variant={tag.variant}>
@@ -22,7 +22,7 @@ export const BadgeExample = (props: React.ComponentProps<"div">) => (
         </div>
       </div>
       <div className="flex flex-col gap-2">
-        <p className="font-medium text-muted-foreground text-xs">Presence</p>
+        <p className="text-muted-foreground text-xs font-medium">Presence</p>
         <div className="flex flex-wrap gap-2">
           {presence.map((item) => (
             <Badge key={item.label} variant="outline">

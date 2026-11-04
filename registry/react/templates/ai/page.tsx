@@ -124,8 +124,8 @@ const AITemplatePage = () => (
             <AvatarFallback>JB</AvatarFallback>
           </Avatar>
           <div className="flex flex-1 flex-col gap-0 overflow-hidden">
-            <span className="truncate font-medium text-sm">James Brown</span>
-            <span className="truncate text-muted-foreground text-xs">Pro</span>
+            <span className="truncate text-sm font-medium">James Brown</span>
+            <span className="text-muted-foreground truncate text-xs">Pro</span>
           </div>
         </div>
       </SidebarFooter>
@@ -134,14 +134,14 @@ const AITemplatePage = () => (
       <div className="flex h-svh flex-col">
         <div className="flex flex-1 flex-col items-center justify-center gap-6 p-6">
           <div className="flex flex-col items-center gap-2 text-center">
-            <h1 className="font-semibold text-2xl">Hello James</h1>
-            <p className="text-lg text-muted-foreground">
+            <h1 className="text-2xl font-semibold">Hello James</h1>
+            <p className="text-muted-foreground text-lg">
               What can I help you with today?
             </p>
           </div>
           <Card className="w-full max-w-md">
             <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
-              <span className="font-medium text-sm">
+              <span className="text-sm font-medium">
                 Access premium models and features
               </span>
               <Button size="sm" variant="outline">
@@ -165,7 +165,7 @@ const AITemplatePage = () => (
                 <ArrowUpIcon aria-hidden />
               </Button>
             </div>
-            <p className="mt-2 text-center text-muted-foreground text-xs">
+            <p className="text-muted-foreground mt-2 text-center text-xs">
               GPT-4 · AI can make mistakes. Please double-check
             </p>
           </div>

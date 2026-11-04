@@ -1,4 +1,4 @@
-import { ChevronRightIcon, FileIcon, FolderIcon } from "lucide-react";
+import { FileIcon, FolderIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -8,6 +8,7 @@ import {
 import {
   Collapsible,
   CollapsibleContent,
+  CollapsibleIndicator,
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
 import { Tabs, TabsList, TabsTrigger } from "@/registry/react/components/tabs";
@@ -67,16 +68,13 @@ const CollapsibleFileTree = () => {
     if ("items" in fileItem) {
       return (
         <Collapsible key={fileItem.name}>
-          <CollapsibleTrigger asChild>
+          <CollapsibleTrigger asChild data-align="start">
             <Button
               className="w-full justify-start transition-none"
               size="sm"
               variant="ghost"
             >
-              <ChevronRightIcon
-                aria-hidden
-                className="transition-transform group-data-[state=open]/collapsible:rotate-90"
-              />
+              <CollapsibleIndicator />
               <FolderIcon aria-hidden data-icon="inline-start" />
               {fileItem.name}
             </Button>
@@ -92,7 +90,7 @@ const CollapsibleFileTree = () => {
 
     return (
       <Button
-        className="w-full justify-start gap-2 text-foreground"
+        className="text-foreground w-full justify-start gap-2"
         key={fileItem.name}
         size="sm"
         variant="link"

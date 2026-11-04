@@ -24,7 +24,7 @@ const CarouselDemo = () => (
         <CarouselItem index={index} key={slide.id}>
           <Card>
             <CardContent className="flex aspect-square items-center justify-center">
-              <span className="font-semibold text-4xl">{index + 1}</span>
+              <span className="text-4xl font-semibold">{index + 1}</span>
             </CardContent>
           </Card>
         </CarouselItem>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useFilter, useListCollection } from "@ark-ui/react";
-import { CornerDownLeftIcon } from "lucide-react";
+import { ArrowDownIcon, ArrowUpIcon, CornerDownLeftIcon } from "lucide-react";
 import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -18,7 +18,7 @@ import {
   CommandList,
   CommandShortcut,
 } from "@/registry/react/components/command";
-import { Kbd } from "@/registry/react/components/kbd";
+import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
 
 const Example = () => {
   const [open, setOpen] = React.useState(false);
@@ -58,11 +58,28 @@ const Example = () => {
             </CommandList>
           </CommandContent>
           <CommandFooter>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <KbdGroup>
+                  <Kbd variant="outline">
+                    <ArrowUpIcon />
+                  </Kbd>
+                  <Kbd variant="outline">
+                    <ArrowDownIcon />
+                  </Kbd>
+                </KbdGroup>
+                <span>Navigate</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Kbd variant="outline">
+                  <CornerDownLeftIcon />
+                </Kbd>
+                <span>Open</span>
+              </div>
+            </div>
             <div className="flex items-center gap-2">
-              <Kbd variant="outline">
-                <CornerDownLeftIcon className="size-3" />
-              </Kbd>
-              <span className="text-muted-foreground">To select</span>
+              <Kbd variant="outline">Esc</Kbd>
+              <span>Close</span>
             </div>
           </CommandFooter>
         </Command>

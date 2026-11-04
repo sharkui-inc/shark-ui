@@ -13,8 +13,8 @@ import {
   THEME_FONTS,
 } from "@/lib/theme/fonts";
 
-const NEWSREADER_CSS_AXES = /family=Newsreader:ital,wght@/;
-const WEIGHT_AXIS = /wght@/;
+const NEWSREADER_CSS_AXES = /family=Newsreader:ital,wght@/u;
+const WEIGHT_AXIS = /wght@/u;
 
 describe("theme fonts", () => {
   it("keeps Shark UI's active fonts as the defaults", () => {

@@ -6,10 +6,10 @@ const Example = () => (
     orientation="vertical"
   >
     <div className="p-4">
-      <h4 className="mb-4 font-medium text-sm leading-none">Notifications</h4>
+      <h4 className="mb-4 text-sm leading-none font-medium">Notifications</h4>
       <div className="grid gap-3 text-sm">
         {notifications.map((notification) => (
-          <div className="rounded-md bg-muted p-3" key={notification}>
+          <div className="bg-muted rounded-md p-3" key={notification}>
             {notification}
           </div>
         ))}

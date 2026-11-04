@@ -8,7 +8,7 @@ const Example = () => (
         key={price.currency}
       >
         <span className="text-muted-foreground">{price.label}</span>
-        <span className="font-medium tabular-nums tracking-tight">
+        <span className="font-medium tracking-tight tabular-nums">
           <FormatNumber
             currency={price.currency}
             style="currency"

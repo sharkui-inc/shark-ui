@@ -11,7 +11,8 @@ export const Suggestions = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex w-full flex-wrap items-center justify-center gap-2",
+        "w-full",
+        "flex flex-wrap items-center justify-center gap-2",
         className
       )}
       data-slot="suggestions"

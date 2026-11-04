@@ -26,7 +26,7 @@ export const ChatEmpty = (props: ChatEmptyProps) => {
     <State className="min-h-svh px-6 py-16 md:px-6 md:py-16">
       <StateHeader>
         <StateMedia>
-          <BotIcon aria-hidden className="size-8 text-muted-foreground" />
+          <BotIcon aria-hidden className="text-muted-foreground size-8" />
         </StateMedia>
         <StateTitle asChild>
           <h2>Hello {userName}</h2>

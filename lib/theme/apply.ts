@@ -10,7 +10,7 @@ import {
   DEFAULT_FONT_SANS,
   DEFAULT_PRIMARY_COLOR,
   DEFAULT_THEME_CONFIG,
-  pickVisualThemeSource,
+  pickVisualTheme,
   type VisualThemePick,
 } from "./config";
 import {
@@ -162,7 +162,7 @@ const themeBootstrapFonts = Object.fromEntries(
 export const themeBootstrapScript = `
 (() => {
   try {
-    const pickVisualTheme = ${pickVisualThemeSource};
+    const pickVisualTheme = ${pickVisualTheme.toString()};
     const lists = ${JSON.stringify(visualThemeLists)};
     const fonts = ${JSON.stringify(themeBootstrapFonts)};
     const stored = window.localStorage.getItem("config");

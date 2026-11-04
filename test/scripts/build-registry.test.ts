@@ -19,13 +19,13 @@ import {
 } from "@/scripts/build-registry.mts";
 
 const SITE_ORIGIN = "https://shark-ui.com";
-const LOCALHOST_IN_BUTTON = /localhost URL found in public\/r\/button\.json/;
+const LOCALHOST_IN_BUTTON = /localhost URL found in public\/r\/button\.json/u;
 const MUST_USE_SITE_ORIGIN =
-  /Registry artifacts must use https:\/\/shark-ui\.com/;
+  /Registry artifacts must use https:\/\/shark-ui\.com/u;
 const DEPS_NOT_UNDER_ORIGIN =
-  /registryDependency is not under https:\/\/shark-ui\.com\//;
-const LOCALHOST_FOUND = /localhost URL found/;
-const UI_BUNDLE_MISSING_ITEMS = /hitbox, shimmer/;
+  /registryDependency is not under https:\/\/shark-ui\.com\//u;
+const LOCALHOST_FOUND = /localhost URL found/u;
+const UI_BUNDLE_MISSING_ITEMS = /hitbox, shimmer/u;
 
 const readRegistryArtifact = (name: string) =>
   JSON.parse(

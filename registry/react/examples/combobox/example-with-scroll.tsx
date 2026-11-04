@@ -22,7 +22,6 @@ const Example = () => {
     <Combobox
       className="w-full max-w-64"
       collection={collection}
-      defaultValue={["option-24"]}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
       <ComboboxInput placeholder="Search..." />

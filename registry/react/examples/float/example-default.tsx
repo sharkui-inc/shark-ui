@@ -10,7 +10,7 @@ const FloatDemo = () => (
     </Button>
     <Float>
       <Badge pill size="sm">
-        9+
+        2
       </Badge>
     </Float>
   </div>

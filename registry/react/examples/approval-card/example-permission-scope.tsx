@@ -73,7 +73,7 @@ const Example = () => {
           <ApprovalCardTitle>Allow the agent to run tests?</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent className="flex flex-col gap-4">
-          <Terminal className="rounded-lg bg-muted/32" output={command}>
+          <Terminal className="bg-muted/32 rounded-lg" output={command}>
             <TerminalHeader>storefront · zsh</TerminalHeader>
             <TerminalContent />
           </Terminal>

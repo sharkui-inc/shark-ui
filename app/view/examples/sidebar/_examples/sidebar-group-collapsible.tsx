@@ -1,9 +1,10 @@
 "use client";
 
-import { ChevronDownIcon, LifeBuoyIcon, SendIcon } from "lucide-react";
+import { LifeBuoyIcon, SendIcon } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
+  CollapsibleIndicator,
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
 import {
@@ -22,18 +23,15 @@ const SidebarGroupCollapsible = () => (
   <SidebarProvider>
     <Sidebar>
       <SidebarContent>
-        <Collapsible className="group/collapsible" defaultOpen>
+        <Collapsible defaultOpen>
           <SidebarGroup>
             <SidebarGroupLabel
               asChild
-              className="text-sm hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              className="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm"
             >
               <CollapsibleTrigger>
                 Help
-                <ChevronDownIcon
-                  aria-hidden
-                  className="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
-                />
+                <CollapsibleIndicator />
               </CollapsibleTrigger>
             </SidebarGroupLabel>
             <CollapsibleContent>

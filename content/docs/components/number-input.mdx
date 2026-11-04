@@ -1,6 +1,9 @@
 ---
 title: Number Input
 description: Numeric input with steppers.
+aliases:
+  - Numeric input
+  - Spinbutton
 seo:
   description: Numeric field with steppers for discrete increments.
 links:
@@ -84,6 +87,12 @@ import {
 </NumberInput>
 ```
 
+## With Field
+
+Use [Field](/docs/components/field) for a label and description.
+
+<ComponentPreview componentName="number-input" fileName="example-with-field" />
+
 ## Controlled
 
 Use `value` and `onValueChange` to control the number input. Keep the value as a string when using `formatOptions` to preserve locale formatting.
@@ -121,12 +130,6 @@ Use the `size` prop to change the input height.
 ### Field Only
 
 <ComponentPreview componentName="number-input" fileName="example-field-only" />
-
-### With Field
-
-Use [Field](/docs/components/field) for a label and description.
-
-<ComponentPreview componentName="number-input" fileName="example-with-field" />
 
 ### With Input Group
 

@@ -8,31 +8,38 @@ import { Button, type ButtonProps } from "@/registry/react/components/button";
 import { Input, inputHeightVars } from "@/registry/react/components/input";
 import { Textarea } from "@/registry/react/components/textarea";
 
-const inpuGroupVariants = tv({
+const inputGroupVariants = tv({
   base: [
-    "[--input-group-addon-size:--spacing(6)]",
-    "[--input-group-height:var(--field-height)]",
-    "[--input-group-inset:calc((var(--input-group-height)-2px-var(--input-group-addon-size))/2)]",
+    "[--input-group-px:calc(--spacing(3)-1px)]",
+    "[--input-group-inset:calc(--spacing(1)-1px)]",
+    "[--input-group-radius:var(--radius)]",
+    "[--input-group-textarea-pb:var(--input-group-px)] [--input-group-textarea-pt:var(--input-group-px)]",
+    "has-[>[data-align=block-start]_:is(button,a,[role=button])]:[--input-group-textarea-pt:--spacing(1)]",
+    "has-[>[data-align=block-end]_:is(button,a,[role=button])]:[--input-group-textarea-pb:--spacing(1)]",
     "group/input-group",
     "relative",
     "h-(--field-height) min-h-(--field-height) w-full min-w-0",
     "flex items-center",
-    "font-normal text-base md:text-sm",
-    "bg-background dark:bg-input/32",
+    "px-(--input-group-px)",
+    "text-base font-normal md:text-sm",
+    "bg-background",
+    "dark:bg-input/32",
     "rounded-lg",
-    "border border-input shadow-xs/4",
+    "border-input border shadow-xs/4",
     "transition-[color,box-shadow]",
     "has-[>textarea]:h-auto",
-    "has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-start]]:[&>input]:pb-3",
-    "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3",
-    "[&_[data-inline=true]_:is([data-slot=input-group-button],[data-slot=kbd])]:rounded-[max(0px,calc(var(--radius)-var(--input-group-inset)))]",
-    "data-[size=sm]:not-data-[pill=true]:[&_[data-inline=true]_:is([data-slot=input-group-button],[data-slot=kbd])]:rounded-[max(0px,calc(var(--radius)*0.75-var(--input-group-inset)))]",
-    "data-[pill=true]:[&_[data-inline=true]_:is([data-slot=input-group-button],[data-slot=kbd])]:rounded-full",
-    "focus-within:border-ring/64 focus-within:ring-2 focus-within:ring-ring/24",
-    "pointer-coarse:*:data-[slot=input-group-button]:min-h-11 pointer-coarse:*:data-[slot=input-group-button]:min-w-11",
-    "pointer-coarse:[&>[data-slot=input-group-addon]_[data-slot=input-group-button]]:min-h-11 pointer-coarse:[&>[data-slot=input-group-addon]_[data-slot=input-group-button]]:min-w-11",
-    "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-[3px] has-[[data-slot][aria-invalid=true]]:ring-destructive/24",
+    "has-[>[data-align^=block]]:h-auto has-[>[data-align^=block]]:flex-col",
+    "has-[>[data-align=block-start]]:[&>input]:pb-3",
+    "has-[>[data-align=block-end]]:[&>input]:pt-3",
+    "[&_[data-inline=true]_:is(button,a,[role=button],kbd)]:rounded-[max(var(--radius-sm),calc(var(--input-group-radius)-var(--input-group-inset)))]",
+    "data-[pill=true]:[&_[data-inline=true]_:is(button,a,[role=button],kbd)]:rounded-full",
+    "focus-within:border-ring/64 focus-within:ring-ring/24 focus-within:ring-2",
+    "pointer-coarse:[&>:is(button,a,[role=button])]:min-h-11 pointer-coarse:[&>:is(button,a,[role=button])]:min-w-11",
+    "pointer-coarse:[&>[data-slot=input-group-addon]_:is(button,a,[role=button])]:min-h-11 pointer-coarse:[&>[data-slot=input-group-addon]_:is(button,a,[role=button])]:min-w-11",
+    "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-destructive/24 has-[[data-slot][aria-invalid=true]]:ring-[3px]",
     "dark:has-[[data-slot][aria-invalid=true]]:border-destructive-foreground dark:has-[[data-slot][aria-invalid=true]]:ring-destructive-foreground/32",
+    "has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:opacity-64",
+    "data-disabled:pointer-events-none data-disabled:opacity-64",
     "motion-reduce:transition-none",
   ],
   compoundVariants: [
@@ -51,23 +58,28 @@ const inpuGroupVariants = tv({
       true: "",
     },
     size: {
-      lg: [inputHeightVars.lg, "px-[calc(--spacing(3.5)-1px)]"],
-      md: [inputHeightVars.md, "px-[calc(--spacing(3)-1px)]"],
-      sm: [inputHeightVars.sm, "px-[calc(--spacing(2.5)-1px)]", "rounded-md"],
+      lg: inputHeightVars.lg,
+      md: inputHeightVars.md,
+      sm: [
+        inputHeightVars.sm,
+        "[--input-group-px:calc(--spacing(2)-1px)]",
+        "[--input-group-radius:calc(var(--radius)*0.75)]",
+        "rounded-md",
+      ],
     },
   },
 });
 
 export interface InputGroupProps
   extends React.ComponentProps<typeof ark.div>,
-    VariantProps<typeof inpuGroupVariants> {}
+    VariantProps<typeof inputGroupVariants> {}
 
 export const InputGroup = (props: InputGroupProps) => {
   const { size = "md", pill = false, className, ...rest } = props;
 
   return (
     <ark.div
-      className={cn(inpuGroupVariants({ pill, size }), className)}
+      className={cn(inputGroupVariants({ pill, size }), className)}
       data-pill={pill || undefined}
       data-size={size}
       data-slot="input-group"
@@ -79,11 +91,13 @@ export const InputGroup = (props: InputGroupProps) => {
 
 const inputGroupAddonVariants = tv({
   base: [
+    "[--input-group-addon-py:var(--input-group-px)]",
+    "has-[:is(button,a,[role=button])]:[--input-group-addon-py:var(--input-group-inset)]",
     "h-full",
     "flex items-center justify-center gap-2",
-    "select-none font-medium text-muted-foreground text-xs",
+    "text-muted-foreground text-xs font-medium",
+    "select-none",
     "cursor-text",
-    "group-data-[disabled=true]/input-group:opacity-64",
     "[&_svg:not([class*='size-'])]:size-4",
   ],
   defaultVariants: {
@@ -92,19 +106,25 @@ const inputGroupAddonVariants = tv({
   variants: {
     align: {
       "block-end": [
-        "[--input-group-inset:--spacing(3)]",
-        "order-last w-full justify-start px-0 pb-[calc(--spacing(3)-1px)]",
-        "group-has-[>input]/input-group:pb-2.5",
-        "[.border-t]:pt-[calc(--spacing(3)-1px)]",
+        "w-full",
+        "order-last justify-start",
+        "pb-(--input-group-addon-py) [.border-t]:pt-(--input-group-px)",
       ],
       "block-start": [
-        "[--input-group-inset:--spacing(3)]",
-        "order-first w-full justify-start px-0 pt-[calc(--spacing(3)-1px)]",
-        "group-has-[>input]/input-group:pt-2.5",
-        "[.border-b]:pb-[calc(--spacing(3)-1px)]",
+        "w-full",
+        "order-first justify-start",
+        "pt-(--input-group-addon-py) [.border-b]:pb-(--input-group-px)",
       ],
-      "inline-end": ["order-last ps-2 pe-0", "has-[button]:-me-2"],
-      "inline-start": ["order-first ps-0 pe-2", "has-[button]:-ms-2"],
+      "inline-end": [
+        "order-last",
+        "ps-2 pe-0",
+        "has-[:is(button,a,[role=button])]:-me-[calc(var(--input-group-px)-var(--input-group-inset))]",
+      ],
+      "inline-start": [
+        "order-first",
+        "ps-0 pe-2",
+        "has-[:is(button,a,[role=button])]:-ms-[calc(var(--input-group-px)-var(--input-group-inset))]",
+      ],
     },
   },
 });
@@ -126,47 +146,32 @@ export const InputGroupAddon = (props: InputGroupAddonProps) => {
       {...rest}
       onMouseDown={(event) => {
         onMouseDown?.(event);
-        if (event.defaultPrevented) {
-          return;
-        }
-
         if (
+          event.defaultPrevented ||
           (event.target as HTMLElement).closest(
-            "button, a, input, select, textarea, [role=button], [role=combobox], [role=listbox], [data-slot=select-trigger]"
+            "a, button, input, select, textarea, [role=button]"
           )
         ) {
           return;
         }
 
         event.preventDefault();
-
-        const parent = event.currentTarget.parentElement;
-        const control = parent?.querySelector<
-          HTMLInputElement | HTMLTextAreaElement
-        >("input, textarea");
-
-        if (control && !parent?.querySelector("input:focus, textarea:focus")) {
-          control.focus();
-        }
+        event.currentTarget.parentElement
+          ?.querySelector<HTMLElement>(
+            "input:not(:focus), textarea:not(:focus)"
+          )
+          ?.focus();
       }}
     />
   );
 };
-
-const inputGroupButtonVariants = tv({
-  base: [
-    "text-sm",
-    "shadow-none",
-    "focus-visible:border-transparent focus-visible:ring-0",
-  ],
-});
 
 export const InputGroupButton = (props: ButtonProps) => {
   const { className, variant = "ghost", size = "xs", ...rest } = props;
 
   return (
     <Button
-      className={cn(inputGroupButtonVariants(), className)}
+      className={cn("text-sm", "shadow-none", className)}
       data-slot="input-group-button"
       size={size}
       variant={variant}
@@ -184,8 +189,8 @@ export const InputGroupText = (
     <ark.span
       className={cn(
         "flex items-center gap-2",
-        "font-medium text-muted-foreground text-xs",
-        "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
+        "text-muted-foreground text-xs font-medium",
+        "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       data-slot="input-group-text"
@@ -200,11 +205,14 @@ export const InputGroupInput = (props: React.ComponentProps<typeof Input>) => {
   return (
     <Input
       className={cn(
-        "h-full flex-1 px-0",
+        "h-full flex-1",
+        "px-0",
         "bg-transparent",
         "rounded-none border-0 shadow-none",
         "focus-visible:border-0 focus-visible:ring-0",
-        "disabled:bg-transparent aria-invalid:ring-0 data-invalid:ring-0",
+        "disabled:bg-transparent disabled:opacity-100",
+        "aria-invalid:ring-0",
+        "data-invalid:ring-0",
         "dark:bg-transparent dark:disabled:bg-transparent",
         className
       )}
@@ -222,11 +230,16 @@ export const InputGroupTextarea = (
   return (
     <Textarea
       className={cn(
-        "flex-1 px-0",
+        "flex-1",
+        "px-0",
         "bg-transparent",
-        "resize-none rounded-none border-0 py-3 shadow-none",
+        "pt-(--input-group-textarea-pt) pb-(--input-group-textarea-pb)",
+        "rounded-none border-0 shadow-none",
+        "resize-none",
         "focus-visible:border-0 focus-visible:ring-0",
-        "disabled:bg-transparent aria-invalid:ring-0 data-invalid:ring-0",
+        "disabled:bg-transparent disabled:opacity-100",
+        "aria-invalid:ring-0",
+        "data-invalid:ring-0",
         "dark:bg-transparent dark:disabled:bg-transparent",
         className
       )}

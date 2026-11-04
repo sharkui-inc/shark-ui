@@ -8,6 +8,7 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 
 export const useQrCodeContext = useArkQrCodeContext;
+
 export const QrCode = (props: React.ComponentProps<typeof ArkQrCode.Root>) => {
   const { className, ...rest } = props;
 
@@ -18,7 +19,8 @@ export const QrCode = (props: React.ComponentProps<typeof ArkQrCode.Root>) => {
         "[--qr-code-overlay-size:calc(var(--qr-code-size)/4)] [--qr-code-size:--spacing(32)]",
         "relative",
         "w-fit",
-        "flex shrink-0 flex-col gap-4",
+        "shrink-0",
+        "flex flex-col gap-4",
         className
       )}
       data-slot="qr-code"

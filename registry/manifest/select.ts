@@ -7,6 +7,7 @@ const manifest: RegistryItemType = {
   dependencies,
   name: "select",
   registryDependencies: [
+    registryUrl("/r/field.json"),
     registryUrl("/r/input.json"),
     registryUrl("/r/menu.json"),
     registryUrl("/r/scroll-area.json"),

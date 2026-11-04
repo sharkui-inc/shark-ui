@@ -21,7 +21,12 @@ export const MessageScroller = (
   return (
     <ArkScrollArea.Root
       className={cn(
-        "group/message-scroller relative flex size-full min-h-0 flex-col overflow-hidden [--fade-size:1.5rem]",
+        "[--fade-size:1.5rem]",
+        "group/message-scroller",
+        "relative",
+        "size-full min-h-0",
+        "flex flex-col",
+        "overflow-hidden",
         className
       )}
       data-slot="message-scroller"
@@ -42,7 +47,9 @@ export const MessageScrollerViewport = (
   return (
     <ArkScrollArea.Viewport
       className={cn(
-        "scrollbar-none size-full min-h-0 min-w-0 overflow-y-auto overscroll-y-contain outline-hidden contain-content",
+        "size-full min-h-0 min-w-0",
+        "scrollbar-none overflow-y-auto overscroll-y-contain contain-content",
+        "outline-hidden",
         "data-overflow-y:not-data-at-top:mask-t-from-[calc(100%-var(--fade-size))]",
         "data-overflow-y:not-data-at-bottom:mask-b-from-[calc(100%-var(--fade-size))]",
         "data-overflow-x:not-data-at-left:mask-l-from-[calc(100%-var(--fade-size))]",
@@ -63,7 +70,7 @@ export const MessageScrollerContent = (
 
   return (
     <ArkScrollArea.Content
-      className={cn("flex h-max min-h-full flex-col gap-8", className)}
+      className={cn("h-max min-h-full", "flex flex-col gap-8", className)}
       data-slot="message-scroller-content"
       {...rest}
     />
@@ -78,7 +85,8 @@ export const MessageScrollerItem = (
   return (
     <ark.div
       className={cn(
-        "min-w-0 shrink-0 [contain-intrinsic-size:auto_10rem] [content-visibility:auto]",
+        "[contain-intrinsic-size:auto_10rem] [content-visibility:auto]",
+        "min-w-0 shrink-0",
         className
       )}
       data-slot="message-scroller-item"
@@ -115,13 +123,18 @@ export const MessageScrollerButton = (props: MessageScrollerButtonProps) => {
     <Button
       aria-label={ariaLabel}
       className={cn(
-        "absolute inset-s-1/2 -translate-x-1/2 border-border bg-background text-foreground rtl:translate-x-1/2",
+        "absolute inset-s-1/2",
+        "bg-background",
+        "text-foreground",
+        "border-border",
+        "-translate-x-1/2",
+        "rtl:translate-x-1/2",
         "transition-[translate,scale,opacity] duration-150 ease-out",
         "hover:bg-muted hover:text-foreground",
         "data-[active=false]:pointer-events-none data-[active=false]:scale-95 data-[active=false]:opacity-0",
         "data-[active=true]:translate-y-0 data-[active=true]:scale-100 data-[active=true]:opacity-100",
-        "data-[direction=end]:data-[active=false]:translate-y-full data-[direction=end]:bottom-4",
-        "data-[direction=start]:data-[active=false]:-translate-y-full data-[direction=start]:top-4",
+        "data-[direction=end]:bottom-4 data-[direction=end]:data-[active=false]:translate-y-full",
+        "data-[direction=start]:top-4 data-[direction=start]:data-[active=false]:-translate-y-full",
         "data-[direction=start]:[&_svg]:rotate-180",
         className
       )}

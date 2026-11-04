@@ -10,10 +10,10 @@ const CarouselExamplePage = () => (
   <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
     <div className="grid min-w-0 grid-cols-1 gap-16 sm:grid-cols-2 [&>section]:min-w-0">
       <section aria-labelledby="demo-heading" className="flex flex-col gap-5">
-        <h1 className="font-medium text-muted-foreground" id="demo-heading">
+        <h1 className="text-muted-foreground font-medium" id="demo-heading">
           Demo
         </h1>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <CarouselDemo />
         </div>
       </section>
@@ -22,10 +22,10 @@ const CarouselExamplePage = () => (
         aria-labelledby="multiple-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="multiple-heading">
+        <h2 className="text-muted-foreground font-medium" id="multiple-heading">
           Multiple
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <CarouselMultiple />
         </div>
       </section>
@@ -35,39 +35,39 @@ const CarouselExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="orientation-heading"
         >
           Orientation
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <CarouselOrientation />
         </div>
       </section>
 
       <section aria-labelledby="plugin-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="plugin-heading">
+        <h2 className="text-muted-foreground font-medium" id="plugin-heading">
           Plugin
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <CarouselPlugin />
         </div>
       </section>
 
       <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="rtl-heading">
+        <h2 className="text-muted-foreground font-medium" id="rtl-heading">
           RTL
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <CarouselRtl />
         </div>
       </section>
 
       <section aria-labelledby="size-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="size-heading">
+        <h2 className="text-muted-foreground font-medium" id="size-heading">
           Size
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <CarouselSize />
         </div>
       </section>
@@ -76,10 +76,10 @@ const CarouselExamplePage = () => (
         aria-labelledby="spacing-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="spacing-heading">
+        <h2 className="text-muted-foreground font-medium" id="spacing-heading">
           Spacing
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <CarouselSpacing />
         </div>
       </section>

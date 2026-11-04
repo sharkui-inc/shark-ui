@@ -164,7 +164,7 @@ const Example = () => {
       {!(list.loading || list.error) && !!list.empty && (
         <p className="text-muted-foreground text-sm">No results found.</p>
       )}
-      <output className="self-end text-muted-foreground text-sm">
+      <output className="text-muted-foreground self-end text-sm">
         Found {list.items.length} users
       </output>
     </div>

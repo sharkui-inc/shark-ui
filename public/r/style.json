@@ -111,14 +111,14 @@
     }
   },
   "dependencies": [],
+  "description": "Shark theme foundation: colors, sidebar tokens, fonts, base styles, utilities, and animation support. Add components separately.",
   "devDependencies": [
     "tw-animate-css"
   ],
   "extends": "none",
+  "name": "style",
   "registryDependencies": [
     "https://shark-ui.com/r/utils.json"
   ],
-  "description": "Shark theme foundation: colors, sidebar tokens, fonts, base styles, utilities, and animation support. Add components separately.",
-  "name": "style",
   "type": "registry:style"
 }

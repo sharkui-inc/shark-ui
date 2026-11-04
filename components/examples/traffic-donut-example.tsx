@@ -65,7 +65,7 @@ export const TrafficDonutExample = (props: React.ComponentProps<"div">) => {
                       y={viewBox.cy}
                     >
                       <tspan
-                        className="fill-foreground font-bold text-3xl"
+                        className="fill-foreground text-3xl font-bold"
                         x={viewBox.cx}
                         y={viewBox.cy}
                       >
@@ -103,7 +103,7 @@ export const TrafficDonutExample = (props: React.ComponentProps<"div">) => {
 
             return (
               <ToggleGroupItem
-                className="h-auto gap-1.5 rounded-md px-1.5 py-0.5 text-muted-foreground text-xs hover:bg-muted md:h-auto data-[state=off]:[&_span]:opacity-48"
+                className="text-muted-foreground hover:bg-muted h-auto gap-1.5 rounded-md px-1.5 py-0.5 text-xs md:h-auto data-[state=off]:[&_span]:opacity-48"
                 key={item.browser}
                 value={item.browser}
               >

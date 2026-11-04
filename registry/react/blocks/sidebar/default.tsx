@@ -5,7 +5,6 @@ import {
   BellIcon,
   BookOpenIcon,
   BotIcon,
-  ChevronRightIcon,
   ChevronsUpDownIcon,
   CreditCardIcon,
   CrownIcon,
@@ -31,6 +30,7 @@ import {
 import {
   Collapsible,
   CollapsibleContent,
+  CollapsibleIndicator,
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
 import { IconTile } from "@/registry/react/components/icon-tile";
@@ -62,7 +62,6 @@ import {
   SidebarProvider,
   SidebarRail,
   SidebarTrigger,
-  useSidebar,
 } from "@/registry/react/components/sidebar";
 
 const data = {
@@ -218,7 +217,7 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               size="lg"
             >
-              <IconTile aria-hidden size="lg">
+              <IconTile aria-hidden size="md">
                 <activeTeam.logo className="size-4" />
               </IconTile>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -254,7 +253,7 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
                 <IconTile aria-hidden size="xs">
                   <PlusIcon className="size-4" />
                 </IconTile>
-                <div className="font-medium text-muted-foreground">
+                <div className="text-muted-foreground font-medium">
                   Add team
                 </div>
               </MenuItem>
@@ -281,23 +280,19 @@ interface NavMainProps {
 
 const NavMain = (props: NavMainProps) => {
   const { items } = props;
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
-          <Collapsible
-            asChild
-            className="group/collapsible"
-            defaultOpen={item.isActive}
-            key={item.title}
-          >
+          <Collapsible asChild defaultOpen={item.isActive} key={item.title}>
             <SidebarMenuItem>
               <CollapsibleTrigger asChild>
                 <SidebarMenuButton tooltip={item.title}>
                   {item.icon ? <item.icon /> : null}
                   <span>{item.title}</span>
-                  <ChevronRightIcon className="ms-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                  <CollapsibleIndicator />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               <CollapsibleContent>
@@ -331,6 +326,7 @@ interface NavProjectsProps {
 
 const NavProjects = (props: NavProjectsProps) => {
   const { projects } = props;
+
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>Projects</SidebarGroupLabel>
@@ -397,14 +393,14 @@ interface NavUserProps {
 
 const NavUser = (props: NavUserProps) => {
   const { user } = props;
-  const { isMobile } = useSidebar();
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <Menu
           positioning={{
-            placement: isMobile ? "bottom-end" : "right-end",
+            gutter: 16,
+            placement: "right-end",
           }}
         >
           <MenuTrigger asChild>

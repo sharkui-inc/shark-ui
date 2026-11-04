@@ -22,13 +22,13 @@ const InputGroupTextareaExample = () => (
       />
       <InputGroupAddon align="block-end" className="border-t">
         <InputGroupText>Line 1, Column 1</InputGroupText>
-        <InputGroupButton className="ml-auto" size="sm" variant="default">
+        <InputGroupButton className="ml-auto" size="sm">
           Run
           <CornerDownLeftIcon aria-hidden />
         </InputGroupButton>
       </InputGroupAddon>
       <InputGroupAddon align="block-start" className="border-b">
-        <InputGroupText className="font-medium font-mono">
+        <InputGroupText className="font-mono font-medium">
           <FileCodeIcon aria-hidden />
           script.js
         </InputGroupText>

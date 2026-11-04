@@ -67,7 +67,7 @@ export const ActivityGoalExample = (props: React.ComponentProps<"div">) => {
               Daily calorie goal
             </CircularProgressLabel>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="font-heading font-semibold text-4xl tabular-nums tracking-[-0.03em]">
+              <span className="font-heading text-4xl font-semibold tracking-[-0.03em] tabular-nums">
                 {goal}
               </span>
               <span className="text-muted-foreground text-xs">

@@ -14,6 +14,7 @@ import {
 
 const Example = () => {
   const contentRef = React.useRef<HTMLElement>(null);
+
   return (
     <Toc
       autoScroll={false}
@@ -58,7 +59,7 @@ const Article = () => (
         <section className="flex flex-col gap-3 pb-8" key={item.value}>
           <Heading
             className={
-              item.depth === 2 ? "font-semibold text-lg" : "font-medium"
+              item.depth === 2 ? "text-lg font-semibold" : "font-medium"
             }
             id={item.value}
           >

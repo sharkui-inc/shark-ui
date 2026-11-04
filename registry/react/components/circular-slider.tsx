@@ -7,8 +7,10 @@ import {
 import { createContext } from "@ark-ui/react/utils";
 import React from "react";
 import { cn } from "@/lib/utils";
-import { FieldLabel } from "@/registry/react/components/field";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import { FormatNumber } from "@/registry/react/components/format";
+
+export const useCircularSliderContext = useArkAngleSliderContext;
 
 interface CircularSliderContextValue {
   ringRadius: number;
@@ -23,7 +25,6 @@ const [CircularSliderContextProvider, _useCircularSlider] =
     providerName: "CircularSlider",
   });
 
-export const useCircularSliderContext = useArkAngleSliderContext;
 export interface CircularSliderProps
   extends React.ComponentProps<typeof ArkAngleSlider.Root>,
     Partial<Pick<CircularSliderContextValue, "thickness" | "size">> {
@@ -83,7 +84,12 @@ export const CircularSlider = (props: CircularSliderProps) => {
         }
       >
         <ArkAngleSlider.Control
-          className="group/circular-slider-control absolute inset-0 cursor-grab active:cursor-grabbing"
+          className={cn(
+            "group/circular-slider-control",
+            "absolute inset-0",
+            "cursor-grab",
+            "active:cursor-grabbing"
+          )}
           data-slot="circular-slider-control"
         >
           <CircularSliderProgressRing />
@@ -141,7 +147,7 @@ const CircularSliderProgressRing = () => {
           style={{ transformOrigin: `${center}px ${center}px` }}
         >
           <path
-            className="stroke-primary [stroke-linecap:round]"
+            className={cn("[stroke-linecap:round]", "stroke-primary")}
             d={progressPath}
             fill="transparent"
             strokeWidth={thickness}
@@ -155,14 +161,14 @@ const CircularSliderProgressRing = () => {
 export const CircularSliderLabel = (
   props: React.ComponentProps<typeof ArkAngleSlider.Label>
 ) => {
-  const { children, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
-    <FieldLabel asChild>
-      <ArkAngleSlider.Label data-slot="circular-slider-label" {...rest}>
-        {children}
-      </ArkAngleSlider.Label>
-    </FieldLabel>
+    <ArkAngleSlider.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="circular-slider-label"
+      {...rest}
+    />
   );
 };
 
@@ -179,9 +185,10 @@ export const CircularSliderThumb = (
   return (
     <ArkAngleSlider.Thumb
       className={cn(
-        "absolute inset-0 z-10 flex items-center justify-center",
+        "absolute inset-0 z-10",
+        "flex items-center justify-center",
         "outline-hidden",
-        "focus-visible:[&_span]:border-ring/64 focus-visible:[&_span]:outline-hidden focus-visible:[&_span]:ring-2 focus-visible:[&_span]:ring-ring/24",
+        "focus-visible:[&_span]:border-ring/64 focus-visible:[&_span]:ring-ring/24 focus-visible:[&_span]:ring-2 focus-visible:[&_span]:outline-hidden",
         "active:[&_span]:scale-110",
         "rtl:pointer-events-none",
         className
@@ -201,9 +208,10 @@ export const CircularSliderThumb = (
           "shrink-0",
           "bg-white",
           "size-(--size)",
-          "rounded-full shadow-xs/4 ring-2 ring-border",
+          "ring-border rounded-full shadow-xs/4 ring-2",
           "transition-[box-shadow,scale]",
-          "cursor-grab hover:ring-[3px]",
+          "cursor-grab",
+          "hover:ring-[3px]",
           dragging && "cursor-grabbing",
           "motion-reduce:transition-none"
         )}
@@ -233,20 +241,19 @@ export const CircularSliderValue = (props: CircularSliderValueProps) => {
   const { value } = useCircularSliderContext();
 
   return (
-    <FieldLabel asChild>
-      <ArkAngleSlider.ValueText
-        className={cn(
-          "gap-1",
-          "tabular-nums",
-          "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
-          className
-        )}
-        data-slot="circular-slider-value"
-        {...rest}
-      >
-        {prefix} <FormatNumber useGrouping={false} value={value} /> {suffix}
-      </ArkAngleSlider.ValueText>
-    </FieldLabel>
+    <ArkAngleSlider.ValueText
+      className={cn(
+        fieldLabelVariants(),
+        "gap-1",
+        "tabular-nums",
+        "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+        className
+      )}
+      data-slot="circular-slider-value"
+      {...rest}
+    >
+      {prefix} <FormatNumber useGrouping={false} value={value} /> {suffix}
+    </ArkAngleSlider.ValueText>
   );
 };
 
@@ -285,9 +292,10 @@ export const CircularSliderMarker = (
   return (
     <ArkAngleSlider.Marker
       className={cn(
-        "absolute inset-s-[calc(50%-1px)] top-0 bottom-0 w-0.5",
+        "absolute inset-s-[calc(50%-1px)] top-0 bottom-0",
+        "w-0.5",
         "before:absolute before:inset-s-1/2 before:top-(--marker-offset) before:-translate-x-1/2",
-        "before:h-(--marker-height) before:w-(--marker-width) before:rounded-md before:bg-border",
+        "before:bg-border before:h-(--marker-height) before:w-(--marker-width) before:rounded-md",
         "data-[state=at-value]:before:bg-primary",
         "data-[state=under-value]:before:bg-primary",
         className

@@ -13,7 +13,8 @@ export const ItemGroup = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn(
         "group/item-group",
-        "flex w-full flex-col gap-4",
+        "w-full",
+        "flex flex-col gap-4",
         className
       )}
       data-slot="item-group"
@@ -41,16 +42,19 @@ const itemVariants = tv({
   base: [
     "[--space:--spacing(3)]",
     "group/item",
-    "flex w-full flex-wrap items-center",
-    "gap-(--space) p-(--space)",
+    "w-full",
+    "flex flex-wrap items-center",
+    "gap-(--space)",
+    "p-(--space)",
     "in-data-[slot=menu-content]:p-0",
     "font-sans text-sm",
     "rounded-xl border",
     "transition-colors duration-150",
     "motion-reduce:transition-none",
     "[a,button]:hover:bg-muted",
-    "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
-    "[&>svg:not([class*='size-']):not([class*='h-'])]:size-4 [&>svg]:pointer-events-none [&>svg]:shrink-0",
+    "outline-hidden",
+    "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
+    "[&>svg]:pointer-events-none [&>svg]:shrink-0 [&>svg:not([class*='size-']):not([class*='h-'])]:size-4",
   ],
   defaultVariants: {
     variant: "default",
@@ -58,7 +62,7 @@ const itemVariants = tv({
   variants: {
     variant: {
       default: "border-transparent",
-      muted: "border-transparent bg-muted/48 shadow-xs/4",
+      muted: ["bg-muted/48", "border-transparent shadow-xs/4"],
       outline: "border-border shadow-xs/4",
     },
   },
@@ -83,7 +87,8 @@ export const Item = (props: ItemProps) => {
 
 const itemMediaVariants = tv({
   base: [
-    "flex shrink-0 items-center justify-center gap-2",
+    "shrink-0",
+    "flex items-center justify-center gap-2",
     "[&_svg]:pointer-events-none",
   ],
   defaultVariants: {
@@ -103,7 +108,8 @@ const itemMediaVariants = tv({
         "size-10",
         "rounded-xl",
         "overflow-hidden",
-        "after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten",
+        "after:border-border after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:border after:mix-blend-darken",
+        "dark:after:mix-blend-lighten",
         "[&_img]:size-full [&_img]:object-cover",
       ],
     },
@@ -133,7 +139,8 @@ export const ItemContent = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex flex-1 flex-col gap-0.5",
+        "flex-1",
+        "flex flex-col gap-0.5",
         "[&+[data-slot=item-content]]:flex-none",
         className
       )}
@@ -151,7 +158,7 @@ export const ItemTitle = (props: React.ComponentProps<typeof ark.div>) => {
       className={cn(
         "w-fit",
         "flex items-center gap-2",
-        "line-clamp-1 font-medium text-sm leading-snug",
+        "line-clamp-1 text-sm leading-snug font-medium",
         "underline-offset-4",
         className
       )}
@@ -167,7 +174,7 @@ export const ItemDescription = (props: React.ComponentProps<typeof ark.p>) => {
   return (
     <ark.p
       className={cn(
-        "line-clamp-2 text-start font-normal text-muted-foreground text-sm leading-normal",
+        "text-muted-foreground line-clamp-2 text-start text-sm leading-normal font-normal",
         "[&>a:hover]:text-primary",
         "[&>a]:underline [&>a]:underline-offset-4",
         className
@@ -196,7 +203,8 @@ export const ItemHeader = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex basis-full items-center justify-between gap-2",
+        "basis-full",
+        "flex items-center justify-between gap-2",
         "[&_img]:size-full [&_img]:rounded-xl [&_img]:object-cover",
         className
       )}
@@ -212,7 +220,8 @@ export const ItemFooter = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex basis-full items-center justify-between gap-2",
+        "basis-full",
+        "flex items-center justify-between gap-2",
         className
       )}
       data-slot="item-footer"

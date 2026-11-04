@@ -45,7 +45,7 @@ const Example = () => {
 
         <div
           aria-busy={profileStatus === "loading"}
-          className="flex items-center gap-3 rounded-lg border bg-card p-3 shadow-xs/4"
+          className="bg-card flex items-center gap-3 rounded-lg border p-3 shadow-xs/4"
           id="tour-async-profile"
         >
           <ProfileCard profile={profile} status={profileStatus} />
@@ -112,8 +112,8 @@ const ProfileCard = (props: {
             width={48}
           />
           <div className="flex min-w-0 flex-col">
-            <span className="truncate font-medium text-sm">{profile.name}</span>
-            <span className="truncate text-muted-foreground text-xs">
+            <span className="truncate text-sm font-medium">{profile.name}</span>
+            <span className="text-muted-foreground truncate text-xs">
               {profile.repos} repos · {profile.followers} followers
             </span>
           </div>
@@ -123,14 +123,14 @@ const ProfileCard = (props: {
     case "loading":
       return (
         <>
-          <span className="flex size-12 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
+          <span className="bg-muted text-muted-foreground flex size-12 shrink-0 items-center justify-center rounded-md">
             <Spinner />
           </span>
           <div className="flex min-w-0 flex-col">
-            <span className="truncate font-medium text-sm">
+            <span className="truncate text-sm font-medium">
               Loading profile
             </span>
-            <span className="truncate text-muted-foreground text-xs">
+            <span className="text-muted-foreground truncate text-xs">
               Fetching from GitHub
             </span>
           </div>
@@ -139,14 +139,14 @@ const ProfileCard = (props: {
     case "error":
       return (
         <>
-          <span className="flex size-12 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
+          <span className="bg-muted text-muted-foreground flex size-12 shrink-0 items-center justify-center rounded-md">
             <CircleAlertIcon aria-hidden className="size-4" />
           </span>
           <div className="flex min-w-0 flex-col">
-            <span className="truncate font-medium text-sm">
+            <span className="truncate text-sm font-medium">
               Profile unavailable
             </span>
-            <span className="truncate text-muted-foreground text-xs">
+            <span className="text-muted-foreground truncate text-xs">
               GitHub did not respond
             </span>
           </div>
@@ -163,12 +163,12 @@ const ProfileCard = (props: {
 
 const ProfilePlaceholder = () => (
   <>
-    <span className="flex size-12 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
+    <span className="bg-muted text-muted-foreground flex size-12 shrink-0 items-center justify-center rounded-md">
       <WavesHorizontalIcon aria-hidden className="size-4" />
     </span>
     <div className="flex min-w-0 flex-col">
-      <span className="truncate font-medium text-sm">Waiting for GitHub</span>
-      <span className="truncate text-muted-foreground text-xs">
+      <span className="truncate text-sm font-medium">Waiting for GitHub</span>
+      <span className="text-muted-foreground truncate text-xs">
         The profile loads with the next step
       </span>
     </div>

@@ -90,12 +90,30 @@ const isFormFieldFocused = () => {
   );
 };
 
+const rankItem = (
+  item: PageItem,
+  query: string,
+  startsWith: (string: string, substring: string) => boolean
+) => {
+  if (startsWith(item.label, query) && startsWith(query, item.label)) {
+    return 2;
+  }
+  if (startsWith(item.label, query)) {
+    return 1;
+  }
+  return 0;
+};
+
 interface HeaderCommandProps
   extends React.ComponentProps<typeof CommandDialog> {
   /**
    * Blocks indexed for search
    */
   compositionItems: CommandCompositionItem[];
+  /**
+   * Alternate names keyed by docs URL, so "modal" finds Dialog.
+   */
+  keywordsByUrl: Record<string, string>;
   /**
    * The navigation items to display in the command menu
    */
@@ -109,9 +127,12 @@ interface HeaderCommandProps
 }
 
 const getCommandItems = (
-  props: Pick<HeaderCommandProps, "compositionItems" | "navItems" | "tree">
+  props: Pick<
+    HeaderCommandProps,
+    "compositionItems" | "keywordsByUrl" | "navItems" | "tree"
+  >
 ): PageItem[] => {
-  const { compositionItems, navItems, tree } = props;
+  const { compositionItems, keywordsByUrl, navItems, tree } = props;
 
   return [
     ...navItems.map((item) => ({
@@ -137,6 +158,7 @@ const getCommandItems = (
         return {
           group: groupName,
           isComponent: isComponentPage(item.url),
+          keywords: keywordsByUrl[item.url],
           label: item.name?.toString() || "",
           url: item.url,
           value: item.url,
@@ -148,7 +170,7 @@ const getCommandItems = (
 };
 
 export const HeaderCommand = (props: HeaderCommandProps) => {
-  const { compositionItems, navItems, tree, ...rest } = props;
+  const { compositionItems, keywordsByUrl, navItems, tree, ...rest } = props;
 
   const router = useRouter();
 
@@ -158,33 +180,49 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
 
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const { contains } = useFilter({ sensitivity: "base" });
+  const { contains, startsWith } = useFilter({ sensitivity: "base" });
+
+  const groupedItems = React.useMemo(
+    () => getCommandItems({ compositionItems, keywordsByUrl, navItems, tree }),
+    [compositionItems, keywordsByUrl, navItems, tree]
+  );
+
+  const { collection, reset, set } = useListCollection({
+    groupBy: (item) => item.group,
+    initialItems: groupedItems,
+  });
+
+  const filterAndRank = React.useCallback(
+    (inputValue: string) => {
+      if (!inputValue) {
+        reset();
+        return;
+      }
+
+      const matched = groupedItems
+        .filter((item) =>
+          contains(
+            [item.label, item.keywords ?? "", item.url].join(" "),
+            inputValue
+          )
+        )
+        .sort(
+          (a, b) =>
+            rankItem(b, inputValue, startsWith) -
+            rankItem(a, inputValue, startsWith)
+        );
+
+      set(matched);
+    },
+    [contains, groupedItems, reset, set, startsWith]
+  );
 
   React.useEffect(() => {
     if (!isOpen) {
       clipboard.setValue("");
+      reset();
     }
-  }, [clipboard.setValue, isOpen]);
-
-  const groupedItems = React.useMemo(
-    () => getCommandItems({ compositionItems, navItems, tree }),
-    [compositionItems, navItems, tree]
-  );
-
-  const filterItems = React.useCallback(
-    (_itemText: string, inputValue: string, item: PageItem) =>
-      contains(
-        [item.label, item.keywords ?? "", item.url].join(" "),
-        inputValue
-      ),
-    [contains]
-  );
-
-  const { collection, filter } = useListCollection({
-    filter: filterItems,
-    groupBy: (item) => item.group,
-    initialItems: groupedItems,
-  });
+  }, [clipboard.setValue, isOpen, reset]);
 
   const toggleOpen = React.useCallback(() => {
     setIsOpen((open) => !open);
@@ -220,7 +258,7 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
         <Button
           className={cn(
             "justify-between",
-            "bg-white dark:bg-input/32",
+            "dark:bg-input/32 bg-white",
             "w-full md:w-48 lg:w-40",
             "[anchor-name:--site-search]"
           )}
@@ -257,7 +295,7 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
             const addCmd = createShadcnAddCommand(packageManager);
             clipboard.setValue(`${addCmd} @shark/${componentName}`);
           }}
-          onInputValueChange={({ inputValue }) => filter(inputValue)}
+          onInputValueChange={({ inputValue }) => filterAndRank(inputValue)}
           onValueChange={(e) => {
             router.push(e.items[0].url);
             requestAnimationFrame(() => {
@@ -275,6 +313,7 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
                   {items.map((item) => {
                     const ItemIcon =
                       GROUP_ICON_MAP[item.group.toLowerCase()] ?? FileTextIcon;
+
                     return (
                       <CommandItem item={item} key={item.value}>
                         <ItemIcon aria-hidden className="size-3.5" />

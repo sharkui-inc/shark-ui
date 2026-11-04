@@ -7,11 +7,15 @@ import {
   PencilIcon,
   SendIcon,
   Trash2Icon,
+  XIcon,
 } from "lucide-react";
 import React from "react";
 import {
   ActionBar,
+  ActionBarBody,
+  ActionBarClose,
   ActionBarContent,
+  ActionBarSeparator,
   ActionBarValue,
 } from "@/registry/react/components/action-bar";
 import {
@@ -83,14 +87,16 @@ const Example = () => {
           </TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-12">
-                <Checkbox
-                  aria-label="Select all orders"
-                  checked={allSelected}
-                  onCheckedChange={({ checked }) => handleSelectAll(checked)}
-                />
+              <TableHead>
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    aria-label="Select all orders"
+                    checked={allSelected}
+                    onCheckedChange={({ checked }) => handleSelectAll(checked)}
+                  />
+                  ID
+                </div>
               </TableHead>
-              <TableHead>ID</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Amount</TableHead>
@@ -105,16 +111,18 @@ const Example = () => {
                   data-state={isSelected ? "selected" : undefined}
                   key={order.id}
                 >
-                  <TableCell className="w-12">
-                    <Checkbox
-                      aria-label={`Select order ${order.id}`}
-                      checked={isSelected}
-                      onCheckedChange={({ checked }) =>
-                        handleSelectRow(order.id, checked)
-                      }
-                    />
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        aria-label={`Select order ${order.id}`}
+                        checked={isSelected}
+                        onCheckedChange={({ checked }) =>
+                          handleSelectRow(order.id, checked)
+                        }
+                      />
+                      <span className="font-medium">{order.id}</span>
+                    </div>
                   </TableCell>
-                  <TableCell className="font-medium">{order.id}</TableCell>
                   <TableCell>{order.name}</TableCell>
                   <TableCell>
                     <Badge
@@ -131,21 +139,23 @@ const Example = () => {
           </TableBody>
         </Table>
 
-        <ActionBarContent className="w-full max-w-xl">
+        <ActionBarContent aria-label="Actions for selected orders">
           <ActionBarValue count={selectedIds.length} />
-          <div className="ml-auto flex gap-2">
-            <Button size="sm" variant="secondary">
+          <ActionBarSeparator />
+          <ActionBarBody>
+            <Button variant="ghost">
               <SendIcon data-icon="inline-start" />
-              Send
+              <span className="max-sm:sr-only">Send</span>
             </Button>
-            <Button size="sm" variant="secondary">
+            <Button variant="ghost">
               <PencilIcon data-icon="inline-start" />
-              Edit
+              <span className="max-sm:sr-only">Edit</span>
             </Button>
             <Menu positioning={{ placement: "top" }}>
               <MenuTrigger asChild>
-                <Button size="sm" variant="secondary">
-                  <EllipsisIcon />
+                <Button variant="ghost">
+                  <EllipsisIcon data-icon="inline-start" />
+                  <span className="max-sm:sr-only">More</span>
                 </Button>
               </MenuTrigger>
               <MenuContent>
@@ -159,11 +169,12 @@ const Example = () => {
                 </MenuItem>
               </MenuContent>
             </Menu>
+            <ActionBarSeparator />
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button size="sm" variant="destructive">
+                <Button variant="destructive">
                   <Trash2Icon data-icon="inline-start" />
-                  Delete
+                  <span className="max-sm:sr-only">Delete</span>
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
@@ -198,7 +209,13 @@ const Example = () => {
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
-          </div>
+          </ActionBarBody>
+          <ActionBarSeparator />
+          <ActionBarClose asChild>
+            <Button size="icon-md" variant="ghost">
+              <XIcon />
+            </Button>
+          </ActionBarClose>
         </ActionBarContent>
       </ActionBar>
     </div>

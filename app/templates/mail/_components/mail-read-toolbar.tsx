@@ -38,6 +38,7 @@ export const MailReadToolbar = (props: {
     onToggleUnread,
     query,
   } = props;
+
   return (
     <>
       <ButtonGroup aria-label="Message actions" className="min-w-0">
@@ -67,7 +68,7 @@ export const MailReadToolbar = (props: {
           >
             <StarIcon
               aria-hidden
-              className={isStarred ? "fill-current text-primary" : undefined}
+              className={isStarred ? "text-primary fill-current" : undefined}
             />
           </MailToolbarButton>
         </ButtonGroup>

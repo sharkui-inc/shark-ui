@@ -32,7 +32,7 @@ const Example = () => {
           </Avatar>
           <div className="flex flex-col gap-2">
             <a
-              className="font-medium text-sm underline underline-offset-4"
+              className="text-sm font-medium underline underline-offset-4"
               href="#"
             >
               @vinihvc
@@ -40,7 +40,7 @@ const Example = () => {
 
             <p className="text-muted-foreground text-sm">{values.role}</p>
 
-            <p className="flex items-center gap-1 text-muted-foreground text-xs">
+            <p className="text-muted-foreground flex items-center gap-1 text-xs">
               <MapPinIcon className="size-4" />
               {values.joinedIn}
             </p>

@@ -24,7 +24,7 @@ const CarouselOrientation = () => (
         <CarouselItem index={index} key={slide}>
           <Card>
             <CardContent className="flex aspect-square items-center justify-center">
-              <span className="font-semibold text-3xl">{slide}</span>
+              <span className="text-3xl font-semibold">{slide}</span>
             </CardContent>
           </Card>
         </CarouselItem>

@@ -8,11 +8,12 @@ import { GripVerticalIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
+export const useResizableContext = useArkSplitterContext;
+
 const resizableRegistry = ArkSplitter.createRegistry({
   hitAreaMargins: { coarse: 24, fine: 4 },
 });
 
-export const useResizableContext = useArkSplitterContext;
 export const Resizable = (
   props: React.ComponentProps<typeof ArkSplitter.Root>
 ) => {
@@ -20,7 +21,7 @@ export const Resizable = (
 
   return (
     <ArkSplitter.Root
-      className={cn("flex size-full", className)}
+      className={cn("size-full", "flex", className)}
       data-slot="resizable"
       registry={registry}
       {...rest}
@@ -49,13 +50,17 @@ export const ResizableResizeTrigger = (props: ResizableResizeTriggerProps) => {
     <ArkSplitter.ResizeTrigger
       aria-label="Resize"
       className={cn(
-        "relative bg-border",
-        "flex w-px items-center justify-center",
-        "cursor-col-resize data-[orientation=vertical]:cursor-row-resize",
+        "relative",
+        "bg-border",
+        "w-px",
+        "flex items-center justify-center",
+        "cursor-col-resize",
+        "data-[orientation=vertical]:cursor-row-resize",
         "data-dragging:bg-primary",
-        "after:-translate-x-1/2 data-[orientation=vertical]:after:-translate-y-1/2",
-        "after:absolute after:inset-s-1/2 after:inset-y-0 after:w-1",
-        "focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
+        "after:-translate-x-1/2",
+        "data-[orientation=vertical]:after:-translate-y-1/2",
+        "after:absolute after:inset-y-0 after:inset-s-1/2 after:w-1",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2 focus-visible:outline-hidden",
         "data-[orientation=vertical]:h-px data-[orientation=vertical]:w-full",
         "data-[orientation=vertical]:after:inset-s-0 data-[orientation=vertical]:after:h-1 data-[orientation=vertical]:after:w-full",
         "data-[orientation=vertical]:after:translate-x-0",

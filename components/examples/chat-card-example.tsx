@@ -81,7 +81,7 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
     []
   );
 
-  const sendMessage = (event: React.FormEvent<HTMLFormElement>) => {
+  const sendMessage = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (inputLength === 0 || isTyping) {
@@ -120,7 +120,7 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
             <AvatarFallback>VV</AvatarFallback>
           </Avatar>
           <div className="flex flex-col gap-0.5">
-            <p className="font-medium text-sm leading-none">
+            <p className="text-sm leading-none font-medium">
               Vinicius Vicentini
             </p>
             <p className="text-muted-foreground text-xs">m@example.com</p>
@@ -176,7 +176,7 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
                   className={cn(
                     "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
                     message.role === "user"
-                      ? "ms-auto bg-primary text-primary-foreground"
+                      ? "bg-primary text-primary-foreground ms-auto"
                       : "bg-muted"
                   )}
                   key={key}
@@ -186,7 +186,7 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
               );
             })}
             {isTyping ? (
-              <div className="flex w-max max-w-[75%] flex-col gap-2 rounded-lg bg-muted px-3 py-2 text-muted-foreground text-sm">
+              <div className="bg-muted text-muted-foreground flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm">
                 Typing…
               </div>
             ) : null}

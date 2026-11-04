@@ -23,13 +23,13 @@ export const MusicLibraryPodcasts = () => (
         </CardMedia>
         <CardContent className="flex min-w-0 flex-1 flex-col justify-between gap-4 p-4">
           <div>
-            <p className="line-clamp-2 font-heading font-semibold text-base leading-tight tracking-[-0.02em] sm:text-lg">
+            <p className="font-heading line-clamp-2 text-base leading-tight font-semibold tracking-[-0.02em] sm:text-lg">
               {podcast.episode}
             </p>
-            <p className="mt-2 text-muted-foreground text-sm">{podcast.show}</p>
+            <p className="text-muted-foreground mt-2 text-sm">{podcast.show}</p>
           </div>
           <div className="flex items-center justify-between gap-3">
-            <span className="flex items-center gap-1 text-muted-foreground text-sm">
+            <span className="text-muted-foreground flex items-center gap-1 text-sm">
               <Clock3Icon aria-hidden className="size-3.5" />
               {podcast.time}
             </span>

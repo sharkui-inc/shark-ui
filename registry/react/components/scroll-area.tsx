@@ -8,6 +8,8 @@ import type React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
+export const useScrollAreaContext = useArkScrollAreaContext;
+
 const scrollAreaVariants = tv({
   defaultVariants: {
     fill: false,
@@ -47,7 +49,7 @@ const scrollAreaVariants = tv({
       true: {
         viewport: [
           "mask-t-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-y-start)))] mask-b-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-y-end)))]",
-          "mask-l-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-x-start)))] mask-r-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-x-end)))]",
+          "mask-r-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-x-end)))] mask-l-from-[calc(100%-min(var(--fade-size),var(--scroll-area-overflow-x-start)))]",
         ],
       },
     },
@@ -96,7 +98,6 @@ interface ScrollAreaProps
   scrollFade?: boolean;
 }
 
-export const useScrollAreaContext = useArkScrollAreaContext;
 export const ScrollArea = (props: ScrollAreaProps) => {
   const {
     clampContentMinWidth = true,
@@ -121,7 +122,8 @@ export const ScrollArea = (props: ScrollAreaProps) => {
     <ArkScrollArea.Root
       className={cn(
         "[--fade-size:1.5rem]",
-        "relative size-full min-h-0",
+        "relative",
+        "size-full min-h-0",
         className
       )}
       data-slot="scroll-area"
@@ -130,7 +132,8 @@ export const ScrollArea = (props: ScrollAreaProps) => {
       <ArkScrollArea.Viewport
         className={cn(
           viewport(),
-          "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+          "outline-hidden",
+          "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2"
         )}
         data-slot="scroll-area-viewport"
         style={{ maxHeight: "inherit" }}
@@ -167,7 +170,8 @@ export const ScrollAreaScrollbar = (
         "flex",
         "m-1",
         "bg-transparent",
-        "pointer-events-none opacity-0",
+        "opacity-0",
+        "pointer-events-none",
         "transition-opacity delay-300",
         "data-[orientation=vertical]:w-1.5",
         "data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:flex-col",
@@ -183,7 +187,7 @@ export const ScrollAreaScrollbar = (
       {...rest}
     >
       <ArkScrollArea.Thumb
-        className="relative flex-1 rounded-full bg-foreground/24"
+        className={cn("relative", "flex-1", "bg-foreground/24", "rounded-full")}
         data-slot="scroll-area-thumb"
       />
     </ArkScrollArea.Scrollbar>

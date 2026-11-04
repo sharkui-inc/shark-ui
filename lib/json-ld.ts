@@ -19,7 +19,7 @@ const ORGANIZATION_ID = "#organization";
 
 const SOFTWARE_ID = "#software";
 
-const TWITTER_HANDLE = /^@/;
+const TWITTER_HANDLE = /^@/u;
 
 const WEBSITE_ID = "#website";
 

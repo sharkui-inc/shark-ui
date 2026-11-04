@@ -16,6 +16,7 @@ import {
 } from "@/registry/react/components/input-group";
 
 export const useTagsInputContext = useArkTagsInputContext;
+
 export const TagsInputContext = ArkTagsInput.Context;
 
 export const TagsInputLabel = (
@@ -36,12 +37,6 @@ interface TagsInputProps
   extends React.ComponentProps<typeof ArkTagsInput.Root>,
     Pick<InputGroupProps, "size"> {
   /**
-   * Whether tag chips use fully rounded corners.
-   *
-   * @default false
-   */
-  pill?: boolean;
-  /**
    * Placeholder text for the root input.
    *
    * @default ""
@@ -59,7 +54,6 @@ export const TagsInput = (props: TagsInputProps) => {
   const {
     size = "md",
     showClear = false,
-    pill = false,
     placeholder = "",
     editable = false,
     tabIndex,
@@ -72,10 +66,10 @@ export const TagsInput = (props: TagsInputProps) => {
     <ArkTagsInput.Root
       className={cn(
         "group/tags-input",
-        "flex w-full flex-col gap-2",
+        "w-full",
+        "flex flex-col gap-2",
         className
       )}
-      data-pill={pill}
       data-size={size}
       data-slot="tags-input"
       editable={editable}
@@ -113,7 +107,8 @@ export const TagsInputControl = (props: TagsInputControlProps) => {
       <InputGroup
         className={cn(
           "h-auto",
-          "py-1 [--input-group-inset:--spacing(1)]",
+          "[--input-group-inset:--spacing(1)]",
+          "py-1",
           "flex-wrap content-center items-center gap-1",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
           "has-data-[slot=tags-input-item]:px-1",
@@ -146,13 +141,18 @@ export const TagsInputItem = (props: TagsInputItemProps) => {
   return (
     <ArkTagsInput.Item
       className={cn(
-        "h-5.5 in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5 max-w-full",
-        "in-data-[size=lg]:ps-2 in-data-[size=sm]:ps-1 ps-1.5 pe-0.5",
-        "inline-flex shrink-0 items-center gap-1",
+        "h-5.5 max-w-full",
+        "in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5",
+        "ps-1.5 pe-0.5",
+        "in-data-[size=lg]:ps-2 in-data-[size=sm]:ps-1",
+        "shrink-0",
+        "inline-flex items-center gap-1",
         "bg-secondary",
-        "in-data-[size=lg]:text-sm text-secondary-foreground text-xs",
+        "text-secondary-foreground text-xs",
+        "in-data-[size=lg]:text-sm",
         "[--input-group-inset:--spacing(0.5)]",
-        "in-data-[pill=true]/tags-input:rounded-full rounded-md border outline-hidden",
+        "rounded-md border",
+        "outline-hidden",
         "data-highlighted:border-primary/32 data-highlighted:bg-primary/8",
         className
       )}
@@ -175,7 +175,7 @@ export const TagsInputItemPreview = (
 
   return (
     <ArkTagsInput.ItemPreview
-      className={cn("inline-flex max-w-full items-center gap-1", className)}
+      className={cn("max-w-full", "inline-flex items-center gap-1", className)}
       data-slot="tags-input-item-preview"
       {...rest}
     />
@@ -209,7 +209,8 @@ export const TagsInputItemDeleteTrigger = (
     >
       <InputGroupButton
         className={cn(
-          "in-data-[size=lg]:size-5 in-data-[size=sm]:size-3 size-4 md:in-data-[size=lg]:size-5 md:in-data-[size=sm]:size-3 md:size-4",
+          "size-4 md:size-4",
+          "in-data-[size=lg]:size-5 in-data-[size=sm]:size-3 md:in-data-[size=lg]:size-5 md:in-data-[size=sm]:size-3",
           "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
           "shrink-0",
           "text-muted-foreground",
@@ -230,7 +231,7 @@ export const TagsInputItemInput = (
   props: React.ComponentProps<typeof ArkTagsInput.ItemInput>
 ) => (
   <ArkTagsInput.ItemInput asChild data-slot="tags-input-item-input" {...props}>
-    <InputGroupInput className="px-1 text-xs" />
+    <InputGroupInput className={cn("px-1", "text-xs")} />
   </ArkTagsInput.ItemInput>
 );
 
@@ -238,7 +239,7 @@ export const TagsInputInput = (
   props: React.ComponentProps<typeof ArkTagsInput.Input>
 ) => (
   <ArkTagsInput.Input asChild data-slot="tags-input-input" {...props}>
-    <InputGroupInput className="w-auto min-w-18 max-w-full flex-auto shrink basis-auto" />
+    <InputGroupInput className="w-auto max-w-full min-w-18 flex-auto shrink basis-auto" />
   </ArkTagsInput.Input>
 );
 
@@ -255,8 +256,13 @@ export const TagsInputClearTrigger = (
     >
       <InputGroupButton
         className={cn(
-          "in-data-[size=lg]:size-6.5 in-data-[size=sm]:size-4.5 size-5.5",
-          "ms-auto shrink-0 self-center text-muted-foreground hover:text-foreground",
+          "size-5.5",
+          "in-data-[size=lg]:size-6.5 in-data-[size=sm]:size-4.5",
+          "shrink-0",
+          "self-center",
+          "ms-auto",
+          "text-muted-foreground",
+          "hover:text-foreground",
           className
         )}
         size="icon-xs"

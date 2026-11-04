@@ -12,27 +12,29 @@ export interface SkipNavLinkProps extends React.ComponentProps<typeof ark.a> {
    *
    * @default "skip-nav-content"
    */
-  id?: string;
+  contentId?: string;
 }
 
 export const SkipNavLink = (props: SkipNavLinkProps) => {
-  const { id = SKIP_NAV_ID, className, children, ...rest } = props;
+  const { contentId = SKIP_NAV_ID, className, children, ...rest } = props;
 
   return (
     <ark.a
       className={cn(
-        "border border-transparent focus:fixed focus:inset-s-4 focus:top-4 focus:z-9999",
+        "border border-transparent",
+        "focus:fixed focus:inset-s-4 focus:top-4 focus:z-50",
         "focus:px-4 focus:py-2",
         "focus:bg-primary",
         "focus:text-primary-foreground focus:text-sm",
-        "sr-only focus:not-sr-only",
+        "sr-only",
+        "focus:not-sr-only",
         "focus:rounded-lg",
-        "focus:border-background focus:outline-hidden focus:ring-2 focus:ring-ring/24",
+        "focus:border-background focus:ring-ring/24 focus:ring-2 focus:outline-hidden",
         className
       )}
       data-slot="skip-nav-link"
       {...rest}
-      href={`#${id}`}
+      href={`#${contentId}`}
     >
       {children ?? "Skip to content"}
     </ark.a>
@@ -54,7 +56,12 @@ export const SkipNavContent = (props: SkipNavContentProps) => {
 
   return (
     <ark.div
-      className={cn("outline-hidden", className)}
+      className={cn(
+        "scroll-mt-14",
+        "outline-hidden",
+        "focus-visible:ring-ring/24 focus-visible:ring-2",
+        className
+      )}
       data-slot="skip-nav-content"
       id={id}
       {...rest}

@@ -6,7 +6,7 @@ export const Footer = (props: React.ComponentProps<"footer">) => {
 
   return (
     <footer className={cn("container py-8 sm:py-10", className)} {...rest}>
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         &copy; {new Date().getFullYear()} Built by{" "}
         <a
           className={cn(
@@ -17,7 +17,7 @@ export const Footer = (props: React.ComponentProps<"footer">) => {
             "no-underline underline-offset-2",
             "outline-hidden",
             "hover:text-primary",
-            "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+            "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:z-10 focus-visible:ring-2"
           )}
           href="https://vini.one"
           rel="noopener noreferrer"

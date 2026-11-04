@@ -1,6 +1,9 @@
 ---
 title: Questionnaire
 description: Step through questions and answers.
+aliases:
+  - Wizard
+  - Survey
 seo:
   description: Multi-step question flow with progress and answers.
 ---
@@ -112,7 +115,7 @@ const items = [{ name: "delivery", required: true }] as const;
 Answers are in the native `FormData`, including hidden steps, with empty and whitespace-only answers omitted.
 
 ```tsx
-function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
   event.preventDefault();
   const answers = new FormData(event.currentTarget);
   const delivery = answers.get("delivery");
@@ -211,7 +214,7 @@ Questionnaire form root.
 | `defaultValue` | `QuestionnaireValue` | `{}` |
 | `onValueChange` | `(details: QuestionnaireValueChangeDetails) => void` | `-` |
 | `shortcuts` | `"letters" \| "numbers"` | `-` |
-| `onSubmit` | `FormEventHandler<HTMLFormElement>` | `-` |
+| `onSubmit` | `SubmitEventHandler<HTMLFormElement>` | `-` |
 | `className` | `string` | `-` |
 
 ### QuestionnaireItem

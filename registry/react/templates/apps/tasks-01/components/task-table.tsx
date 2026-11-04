@@ -71,7 +71,7 @@ export const TaskTable = () => {
     return id;
   };
 
-  const saveTask = (event: React.FormEvent<HTMLFormElement>) => {
+  const saveTask = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const title = draft.title.trim();
     if (!(title && editor)) {

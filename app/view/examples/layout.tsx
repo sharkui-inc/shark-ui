@@ -7,8 +7,9 @@ export const metadata: Metadata = {
 
 const ViewExamplesLayout = (props: React.PropsWithChildren) => {
   const { children } = props;
+
   return (
-    <div className="min-h-svh bg-background text-foreground">{children}</div>
+    <div className="bg-background text-foreground min-h-svh">{children}</div>
   );
 };
 

@@ -11,20 +11,21 @@ import { getInitials } from "../_utils/get-initials";
 
 export const MailMessage = (props: { email: Email }) => {
   const { email } = props;
+
   return (
     <ScrollArea className="flex-1" scrollFade>
       <article className="mx-auto flex w-full max-w-3xl flex-col gap-6 p-4 sm:p-7">
         <div className="min-w-0">
-          <h2 className="text-balance font-heading font-semibold text-xl tracking-[-0.03em] sm:text-2xl">
+          <h2 className="font-heading text-xl font-semibold tracking-[-0.03em] text-balance sm:text-2xl">
             {email.subject}
           </h2>
-          <div className="mt-4 flex items-center gap-3 text-muted-foreground text-sm">
+          <div className="text-muted-foreground mt-4 flex items-center gap-3 text-sm">
             <Avatar>
               <AvatarImage alt="" src={getSenderAvatar(email.sender)} />
               <AvatarFallback>{getInitials(email.sender)}</AvatarFallback>
             </Avatar>
             <div className="min-w-0">
-              <p className="truncate font-medium text-foreground">
+              <p className="text-foreground truncate font-medium">
                 {email.sender}
               </p>
               <p className="truncate text-xs">
@@ -33,7 +34,7 @@ export const MailMessage = (props: { email: Email }) => {
             </div>
           </div>
         </div>
-        <div className="whitespace-pre-wrap text-base leading-7">
+        <div className="text-base leading-7 whitespace-pre-wrap">
           {email.body}
         </div>
       </article>

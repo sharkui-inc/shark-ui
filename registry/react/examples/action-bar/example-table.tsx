@@ -109,7 +109,7 @@ const Example = () => {
                   data-state={isSelected ? "selected" : undefined}
                   key={order.id}
                 >
-                  <TableCell className="w-12">
+                  <TableCell className="w-8">
                     <Checkbox
                       aria-label={`Select order ${order.id}`}
                       checked={isSelected}

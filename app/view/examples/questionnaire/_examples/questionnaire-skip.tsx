@@ -47,7 +47,7 @@ const QuestionnaireSkipExample = () => {
   const handleValueChange = (details: QuestionnaireValueChangeDetails) =>
     setValue(details.value);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);

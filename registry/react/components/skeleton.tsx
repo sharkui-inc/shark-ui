@@ -10,7 +10,8 @@ export const Skeleton = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "rounded-md bg-muted",
+        "bg-muted",
+        "rounded-md",
         "animate-pulse",
         "motion-reduce:animate-none",
         className
@@ -71,7 +72,7 @@ export const SkeletonText = (props: SkeletonTextProps) => {
 
         return (
           <div
-            className="w-full rounded-md bg-muted last:w-3/4"
+            className={cn("w-full", "bg-muted", "rounded-md", "last:w-3/4")}
             data-slot="skeleton-text-line"
             key={key}
           />

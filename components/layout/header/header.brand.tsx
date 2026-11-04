@@ -41,10 +41,10 @@ export const HeaderBrand = (
           "hitbox-2",
           "flex gap-2",
           "-m-1 p-1",
-          "font-bold text-base",
+          "text-base font-bold",
           "rounded-md border border-transparent",
           "cursor-pointer",
-          "focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
+          "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2 focus-visible:outline-hidden",
           className
         )}
         {...rest}

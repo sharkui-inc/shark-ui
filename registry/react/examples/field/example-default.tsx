@@ -11,9 +11,7 @@ const FieldDemo = () => (
   <Field className="w-full max-w-xs">
     <FieldLabel>Username</FieldLabel>
     <Input placeholder="John Doe" />
-    <FieldDescription>
-      Choose a unique username for your account.
-    </FieldDescription>
+    <FieldDescription>Choose a unique username.</FieldDescription>
   </Field>
 );
 

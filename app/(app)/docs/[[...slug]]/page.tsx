@@ -11,7 +11,7 @@ import { notFound } from "next/navigation";
 import { DocsCopyPage } from "@/components/layout/docs-copy-page";
 import { DocsTableOfContents } from "@/components/layout/docs-toc";
 import { JsonLd } from "@/components/seo/json-ld";
-import { getDateFromFile } from "@/lib/changelog";
+import { getDocSeo } from "@/lib/doc-aliases";
 import { source } from "@/lib/fumadocs";
 import {
   getBreadcrumbJsonLd,
@@ -32,7 +32,7 @@ export const dynamicParams = false;
 export const generateStaticParams = () => source.generateParams();
 
 const humanizeSlug = (slug: string) =>
-  slug.replaceAll("-", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+  slug.replaceAll("-", " ").replace(/\b\w/gu, (letter) => letter.toUpperCase());
 
 export const generateMetadata = async (
   props: PageProps<"/docs/[[...slug]]">
@@ -51,8 +51,10 @@ export const generateMetadata = async (
     notFound();
   }
 
+  const seo = getDocSeo(doc);
+
   return createMetadata({
-    description: doc.seo?.description ?? doc.description,
+    description: seo.description,
     markdownUrl: `${page.url}.md`,
     title: doc.title,
     url: page.url,
@@ -73,8 +75,11 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
   const isIndexPage = params.slug?.[0] === undefined;
 
   const isChangelog = params.slug?.[0] === "changelog";
-  const changelogDate = isChangelog ? getDateFromFile(page.slugs) : null;
+  const changelogDate =
+    isChangelog && page.data.date ? new Date(page.data.date) : null;
+
   const { description } = page.data;
+
   const breadcrumbItems = [
     { name: "Home", url: absoluteUrl("/") },
     { name: "Documentation", url: absoluteUrl("/docs") },
@@ -88,6 +93,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
           url: absoluteUrl(`/docs/${page.slugs.slice(0, index + 1).join("/")}`),
         }))),
   ];
+
   const neighbours = isChangelog
     ? { next: null, previous: null }
     : findNeighbour(source.pageTree, page.url);
@@ -116,7 +122,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
               "relative",
               "w-full",
               "flex flex-col",
-              "bg-white dark:bg-card",
+              "dark:bg-card bg-white",
               "text-card-foreground",
               "border shadow-lg/4 max-lg:border-none lg:rounded-2xl"
             )}
@@ -136,7 +142,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between gap-2">
                       <h1
-                        className="scroll-m-20 font-heading font-semibold text-3xl"
+                        className="font-heading scroll-m-20 text-3xl font-semibold"
                         id="page-title"
                       >
                         {page.data.title}
@@ -147,7 +153,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                     </div>
 
                     {page.data.description ? (
-                      <p className="text-[1.05rem] text-muted-foreground sm:text-base md:max-w-[80%]">
+                      <p className="text-muted-foreground text-[1.05rem] sm:text-base md:max-w-[80%]">
                         {page.data.description}
                       </p>
                     ) : null}
@@ -188,7 +194,7 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
               </div>
             </div>
           </div>
-          <div className="grid w-full min-w-0 grid-cols-1 gap-4 pt-4 pb-8 max-lg:container max-lg:bg-white sm:grid-cols-2 max-lg:dark:bg-card">
+          <div className="max-lg:dark:bg-card grid w-full min-w-0 grid-cols-1 gap-4 pt-4 pb-8 max-lg:container max-lg:bg-white sm:grid-cols-2">
             {neighbours.previous ? (
               <Link
                 className={cn(
@@ -196,12 +202,12 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                   "h-auto w-full min-w-0 md:h-auto",
                   "p-4",
                   "flex flex-col items-start",
-                  "bg-white dark:bg-card",
+                  "dark:bg-card bg-white",
                   "lg:rounded-2xl"
                 )}
                 href={neighbours.previous.url}
               >
-                <p className="text-muted-foreground text-xs uppercase tracking-wide">
+                <p className="text-muted-foreground text-xs tracking-wide uppercase">
                   Previous page
                 </p>
                 <div className="flex items-center gap-2">
@@ -220,12 +226,12 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                   "h-auto w-full min-w-0 md:h-auto",
                   "p-4",
                   "flex flex-col items-end",
-                  "bg-white dark:bg-card",
+                  "dark:bg-card bg-white",
                   "lg:rounded-2xl"
                 )}
                 href={neighbours.next.url}
               >
-                <p className="text-muted-foreground text-xs uppercase tracking-wide">
+                <p className="text-muted-foreground text-xs tracking-wide uppercase">
                   Next page
                 </p>
                 <div className="flex items-center gap-2">
@@ -244,8 +250,8 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
               orientation="vertical"
               scrollFade
             >
-              <div className="flex min-h-0 min-w-0 flex-col gap-2 py-2">
-                <div className="h-(--top-spacing) shrink-0" />
+              <div className="flex min-h-0 min-w-0 flex-col py-2">
+                <div className="shrink-0" />
                 <DocsTableOfContents data={page.data.toc} />
               </div>
             </ScrollArea>

@@ -21,7 +21,7 @@ import { CopyButton } from "./copy-button";
 
 const renderCommand = (command: string) => {
   const parts: React.ReactNode[] = [];
-  const pattern = /shadcn@latest/g;
+  const pattern = /shadcn@latest/gu;
   let cursor = 0;
 
   for (const match of command.matchAll(pattern)) {
@@ -90,10 +90,10 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
         }}
         value={packageManager}
       >
-        <div className="flex items-center gap-2 border-border/64 border-b px-4 py-1 font-mono">
+        <div className="border-border/64 flex items-center gap-2 border-b px-4 py-1 font-mono">
           <TerminalIcon aria-hidden className="size-4" />
 
-          <TabsList className="bg-transparent p-0 **:data-[slot=tab-indicator]:rounded-lg **:data-[slot=tab-indicator]:bg-accent **:data-[slot=tab-indicator]:shadow-none **:data-[slot=tab-indicator]:dark:bg-accent">
+          <TabsList className="**:data-[slot=tab-indicator]:bg-accent **:data-[slot=tab-indicator]:dark:bg-accent bg-transparent p-0 **:data-[slot=tab-indicator]:rounded-lg **:data-[slot=tab-indicator]:shadow-none">
             {packageManagers.map((manager) => (
               <TabsTrigger className="rounded-lg" key={manager} value={manager}>
                 {manager}
@@ -111,7 +111,7 @@ export const CodeBlockCommand = (props: CodeBlockCommandProps) => {
               className={cn(
                 "mt-0 w-max px-4 py-3.5",
                 "border border-transparent outline-hidden",
-                "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24 focus-visible:ring-inset"
+                "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2 focus-visible:ring-inset"
               )}
               key={manager}
               value={manager}

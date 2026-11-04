@@ -5,7 +5,7 @@ export type PackageManager = (typeof packageManagers)[number];
 export type PackageManagerCommands = Record<PackageManager, string>;
 
 const commandSegmentPattern =
-  /(^|(?:&&|\|\||;|\n)[\t ]*)(npx create-[^\s;&|]+|npm install|npm create|npm run|npx)(?=\s|$)/g;
+  /(^|(?:&&|\|\||;|\n)[\t ]*)(npx create-[^\s;&|]+|npm install|npm create|npm run|npx)(?=\s|$)/gu;
 
 const getCommandReplacement = (
   packageManager: PackageManager,

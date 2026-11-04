@@ -157,6 +157,7 @@ const Example = () => {
             <FormischField of={form} path={["addons"]}>
               {(field) => {
                 const list = Array.isArray(field.input) ? field.input : [];
+
                 return (
                   <Field
                     invalid={Boolean(field.errors?.length)}

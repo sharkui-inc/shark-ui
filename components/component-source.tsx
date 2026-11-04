@@ -1,6 +1,3 @@
-/** biome-ignore-all lint/correctness/noConstAssign: it's ok */
-/** biome-ignore-all lint/style/noParameterAssign: it's ok */
-
 import { readFileSync } from "node:fs";
 import { resolve, sep } from "node:path";
 import { REGISTRY_PATH } from "@/config/constants";
@@ -14,7 +11,7 @@ import {
 } from "./docs-code-block";
 
 const REGISTRY_ROOT = "registry/react";
-const LEADING_SLASHES = /^\/+/;
+const LEADING_SLASHES = /^\/+/u;
 
 const resolveRegistrySourcePath = (src: string) => {
   const relativeSrc = src.replace(LEADING_SLASHES, "");
@@ -105,15 +102,9 @@ export const ComponentSource = (props: ComponentSourceProps) => {
     ...rest
   } = props;
 
-  let codeContent: string | undefined;
-
-  if (code) {
-    codeContent = code;
-  }
-
-  if (src) {
-    codeContent = readFileSync(resolveRegistrySourcePath(src), "utf-8");
-  }
+  const codeContent = src
+    ? readFileSync(resolveRegistrySourcePath(src), "utf-8")
+    : code;
 
   if (!codeContent) {
     throw new Error("Code content not found");

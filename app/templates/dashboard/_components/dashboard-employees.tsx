@@ -120,6 +120,7 @@ export const DashboardEmployees = () => {
 
 const EmployeeActions = (props: { employee: Employee }) => {
   const { employee } = props;
+
   return (
     <Menu>
       <MenuTrigger asChild>

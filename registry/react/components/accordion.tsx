@@ -9,6 +9,7 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 
 export const useAccordionContext = useArkAccordionContext;
+
 export const Accordion = (
   props: React.ComponentProps<typeof ArkAccordion.Root>
 ) => {
@@ -37,7 +38,7 @@ export const AccordionItem = (
 
   return (
     <ArkAccordion.Item
-      className={cn("flex flex-col border-b last:border-b-0", className)}
+      className={cn("flex flex-col", "border-b", "last:border-b-0", className)}
       data-slot="accordion-item"
       {...rest}
     />
@@ -52,15 +53,16 @@ export const AccordionTrigger = (
   return (
     <ArkAccordion.ItemTrigger
       className={cn(
-        "flex flex-1 items-center justify-between gap-3",
+        "flex-1",
+        "flex items-center justify-between gap-3",
         "touch-manipulation",
         "py-4",
-        "text-start font-medium text-sm",
+        "text-start text-sm font-medium",
         "rounded-md border border-transparent",
         "outline-hidden",
         "transition-[border-color,box-shadow,opacity]",
         "disabled:pointer-events-none disabled:opacity-64 disabled:grayscale",
-        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
         "[&_[data-state=open]>svg]:rotate-180",
         "motion-reduce:transition-none",
         className
@@ -96,7 +98,9 @@ export const AccordionContent = (
     <ArkAccordion.ItemContent
       className={cn(
         "[--radix-accordion-content-height:var(--height)]",
-        "overflow-hidden rounded-md text-sm",
+        "text-sm",
+        "rounded-md",
+        "overflow-hidden",
         "data-[state=open]:animate-accordion-down data-[state=open]:duration-200 data-[state=open]:ease-out",
         "data-[state=closed]:animate-accordion-up data-[state=closed]:duration-200 data-[state=closed]:ease-out",
         "motion-reduce:animate-none",

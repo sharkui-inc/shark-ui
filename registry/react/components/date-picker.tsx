@@ -5,12 +5,12 @@ import {
   useDatePickerContext as useArkDatePickerContext,
 } from "@ark-ui/react/date-picker";
 import { Portal } from "@ark-ui/react/portal";
-import { CalendarIcon, ClockIcon } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { CalendarPresetTrigger } from "@/registry/react/components/calendar";
 import { fieldLabelVariants } from "@/registry/react/components/field";
-import type { Input, InputProps } from "@/registry/react/components/input";
+import type { InputProps } from "@/registry/react/components/input";
 import {
   InputGroup,
   InputGroupAddon,
@@ -19,6 +19,7 @@ import {
 } from "@/registry/react/components/input-group";
 
 export const useDatePickerContext = useArkDatePickerContext;
+
 export const DatePicker = (
   props: Omit<React.ComponentProps<typeof ArkDatePicker.Root>, "inline">
 ) => {
@@ -32,7 +33,12 @@ export const DatePicker = (
 
   return (
     <ArkDatePicker.Root
-      className={cn("[--cell-size:--spacing(9)]", "w-fit", className)}
+      className={cn(
+        "[--cell-size:--spacing(9)]",
+        "w-fit",
+        "flex flex-col gap-2",
+        className
+      )}
       data-slot="date-picker"
       lazyMount={lazyMount}
       positioning={{
@@ -79,7 +85,8 @@ export const DatePickerTrigger = (
         aria-labelledby={labelledBy || undefined}
         className={cn(
           "justify-start",
-          "text-start data-placeholder-shown:[&>span]:text-muted-foreground",
+          "text-start",
+          "data-placeholder-shown:[&>span]:text-muted-foreground",
           "active:scale-100",
           "[&_svg:not([class*='text-'])]:opacity-64",
           className
@@ -119,30 +126,6 @@ export const DatePickerInput = (props: DatePickerInputProps) => {
   );
 };
 
-export const DatePickerTimer = (props: React.ComponentProps<typeof Input>) => {
-  const { id, value, defaultValue, className, ...rest } = props;
-
-  return (
-    <InputGroup>
-      <InputGroupInput
-        {...rest}
-        className={cn(
-          "[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none",
-          className
-        )}
-        defaultValue={defaultValue}
-        id={id}
-        step="1"
-        type="time"
-        value={value}
-      />
-      <InputGroupAddon>
-        <ClockIcon />
-      </InputGroupAddon>
-    </InputGroup>
-  );
-};
-
 export const DatePickerContent = (
   props: React.ComponentProps<typeof ArkDatePicker.Content>
 ) => {
@@ -162,10 +145,13 @@ export const DatePickerContent = (
             "rounded-xl border shadow-lg/4",
             "outline-hidden",
             "origin-(--transform-origin)",
-            "duration-150 ease-out",
-            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-            "data-[state=closed]:animate-out data-[state=open]:animate-in",
-            "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
+            "duration-100 ease-out",
+            "data-[placement^=bottom]:slide-in-from-top-2",
+            "data-[placement^=top]:slide-in-from-bottom-2",
+            "data-[placement^=left]:slide-in-from-right-2",
+            "data-[placement^=right]:slide-in-from-left-2",
+            "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in",
+            "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out",
             "motion-reduce:animate-none",
             "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
@@ -185,7 +171,7 @@ export const DatePickerValue = (
 
   return (
     <ArkDatePicker.ValueText
-      className={cn("font-medium text-sm", className)}
+      className={cn("text-sm font-medium", className)}
       data-slot="date-picker-value"
       {...rest}
     />

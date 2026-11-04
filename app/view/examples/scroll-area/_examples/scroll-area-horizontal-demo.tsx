@@ -23,7 +23,7 @@ const works: Artwork[] = [
 
 const ScrollAreaHorizontalDemo = () => (
   <ScrollArea
-    className="w-full max-w-96 whitespace-nowrap rounded-md border"
+    className="w-full max-w-96 rounded-md border whitespace-nowrap"
     orientation="horizontal"
   >
     <div className="flex w-max gap-4 p-4">
@@ -38,9 +38,9 @@ const ScrollAreaHorizontalDemo = () => (
               width={300}
             />
           </div>
-          <figcaption className="pt-2 text-muted-foreground text-xs">
+          <figcaption className="text-muted-foreground pt-2 text-xs">
             Photo by{" "}
-            <span className="font-semibold text-foreground">
+            <span className="text-foreground font-semibold">
               {artwork.artist}
             </span>
           </figcaption>

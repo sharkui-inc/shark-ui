@@ -33,6 +33,8 @@ export const docs = defineDocs({
     },
     schema: z.object({
       ...pageSchema.shape,
+      aliases: z.array(z.string().min(1)).max(4).optional(),
+      date: z.iso.date().optional(),
       links: z
         .object({
           api: z.url().optional(),

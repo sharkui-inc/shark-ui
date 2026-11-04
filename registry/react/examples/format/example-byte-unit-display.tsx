@@ -27,7 +27,7 @@ const Example = () => (
           <span className="text-muted-foreground capitalize">
             {unitDisplay}
           </span>
-          <span className="font-medium tabular-nums tracking-tight">
+          <span className="font-medium tracking-tight tabular-nums">
             <FormatByte unitDisplay={unitDisplay} value={1_500_000} />
           </span>
         </li>

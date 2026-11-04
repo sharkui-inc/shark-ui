@@ -1,6 +1,8 @@
 ---
 title: Progress
 description: Linear progress indicator.
+aliases:
+  - Progress bar
 seo:
   description: Linear bar for determinate and indeterminate progress.
 links:
@@ -92,6 +94,14 @@ Use the `orientation` prop to orient the progress bar horizontally or vertically
 
 <ComponentPreview componentName="progress" fileName="example-orientation-vertical" />
 
+## States
+
+### Indeterminate
+
+Use the `indeterminate` prop when the completion percentage is unknown.
+
+<ComponentPreview componentName="progress" fileName="example-indeterminate" />
+
 ## Examples
 
 ### With label
@@ -99,12 +109,6 @@ Use the `orientation` prop to orient the progress bar horizontally or vertically
 Use `ProgressLabel` inside `Progress` to label the bar. `FieldLabel` as a sibling does not associate.
 
 <ComponentPreview componentName="progress" fileName="example-with-label" />
-
-### Indeterminate
-
-Use the `indeterminate` prop when the completion percentage is unknown.
-
-<ComponentPreview componentName="progress" fileName="example-indeterminate" />
 
 ## RTL
 

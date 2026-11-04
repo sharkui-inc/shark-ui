@@ -20,7 +20,20 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
   const { className, ...rest } = props;
 
   const { pageTree } = source;
+
   const compositionItems = getCommandCompositionItems();
+
+  const keywordsByUrl = Object.fromEntries(
+    source.getPages().flatMap((page) => {
+      const { aliases } = page.data;
+
+      if (!aliases?.length) {
+        return [];
+      }
+
+      return [[page.url, aliases.join(" ")]];
+    })
+  );
 
   return (
     <header
@@ -47,6 +60,7 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
           <div className="hidden w-full flex-1 sm:flex md:w-auto md:flex-none">
             <HeaderCommand
               compositionItems={compositionItems}
+              keywordsByUrl={keywordsByUrl}
               navItems={NAV_ITEMS.filter((item) => item.label !== "Docs")}
               tree={pageTree}
             />

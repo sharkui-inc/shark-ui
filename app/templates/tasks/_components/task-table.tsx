@@ -73,7 +73,7 @@ export const TaskTable = () => {
     return id;
   };
 
-  const saveTask = (event: React.FormEvent<HTMLFormElement>) => {
+  const saveTask = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const title = draft.title.trim();
     if (!(title && editor)) {
@@ -211,7 +211,7 @@ export const TaskTable = () => {
   };
 
   return (
-    <div className="flex h-full min-h-0 flex-col bg-background">
+    <div className="bg-background flex h-full min-h-0 flex-col">
       <TaskHeader onNewTask={openCreateEditor} />
       <ScrollArea className="flex-1">
         <div className="flex flex-col gap-4 p-4 sm:p-6">

@@ -85,9 +85,9 @@ const CatalogNavigation = (props: CatalogNavigationProps) => {
 
   return (
     <SidebarContent className="px-4 py-2" scrollFade>
-      <div className="h-(--top-spacing) shrink-0" />
+      <div className="shrink-0" />
       <SidebarGroup className="gap-1">
-        <SidebarGroupLabel className="h-7 px-0 text-sidebar-accent-foreground">
+        <SidebarGroupLabel className="text-sidebar-accent-foreground h-7 px-0">
           Categories
         </SidebarGroupLabel>
         <SidebarGroupContent>
@@ -104,9 +104,9 @@ const CatalogNavigation = (props: CatalogNavigationProps) => {
                   key={category.slug}
                   value={category.slug}
                 >
-                  <AccordionTrigger className="w-full justify-start gap-2 rounded-lg px-3 py-2 font-medium text-muted-foreground text-xs hover:bg-muted hover:text-foreground [&_[data-slot=accordion-indicator]_svg]:size-3.5 [&_[data-slot=accordion-indicator]_svg]:translate-y-0 [&_[data-slot=accordion-indicator]_svg]:text-muted-foreground">
+                  <AccordionTrigger className="text-muted-foreground hover:bg-muted hover:text-foreground [&_[data-slot=accordion-indicator]_svg]:text-muted-foreground w-full justify-start gap-2 rounded-lg px-3 py-2 text-xs font-medium [&_[data-slot=accordion-indicator]_svg]:size-3.5 [&_[data-slot=accordion-indicator]_svg]:translate-y-0">
                     <span className="min-w-0 truncate">{category.label}</span>
-                    <span className="ms-auto font-normal text-xs tabular-nums">
+                    <span className="ms-auto text-xs font-normal tabular-nums">
                       {categoryCount}
                     </span>
                   </AccordionTrigger>
@@ -116,7 +116,7 @@ const CatalogNavigation = (props: CatalogNavigationProps) => {
                         <SidebarMenuItem key={entry.block.name}>
                           <SidebarMenuButton
                             asChild
-                            className="h-8 px-3 py-2 ps-5 font-normal text-muted-foreground text-sm hover:bg-muted data-[active=true]:bg-muted data-[active=true]:font-medium data-[active=true]:text-foreground"
+                            className="text-muted-foreground hover:bg-muted data-[active=true]:bg-muted data-[active=true]:text-foreground h-8 px-3 py-2 ps-5 text-sm font-normal data-[active=true]:font-medium"
                             isActive={activeBlockName === entry.block.name}
                           >
                             <Link
@@ -169,7 +169,7 @@ export const BlocksBrowser = (props: BlocksBrowserProps) => {
 
   return (
     <main id="blocks-catalog">
-      <SidebarProvider className="container min-h-[calc(100svh-var(--header-height))] px-0 [--sidebar-width:17rem] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:border-x lg:[--top-spacing:--spacing(4)]">
+      <SidebarProvider className="container min-h-[calc(100svh-var(--header-height))] px-0 [--sidebar-width:17rem] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:border-x">
         <Sidebar
           className="sticky top-(--header-height) z-30 hidden h-[calc(100svh-var(--header-height))] border-e bg-transparent lg:flex"
           collapsible="none"
@@ -178,7 +178,7 @@ export const BlocksBrowser = (props: BlocksBrowserProps) => {
         </Sidebar>
 
         <div className="min-w-0">
-          <div className="sticky top-(--header-height) z-20 flex items-center gap-3 border-b bg-background/96 px-4 py-2 backdrop-blur lg:hidden">
+          <div className="bg-background/96 sticky top-(--header-height) z-20 flex items-center gap-3 border-b px-4 py-2 backdrop-blur lg:hidden">
             <Sheet
               onOpenChange={({ open }) => setNavigationOpen(open)}
               open={navigationOpen}
@@ -201,7 +201,7 @@ export const BlocksBrowser = (props: BlocksBrowserProps) => {
                 </SheetBody>
               </SheetContent>
             </Sheet>
-            <p className="min-w-0 truncate font-medium text-sm">{heading}</p>
+            <p className="min-w-0 truncate text-sm font-medium">{heading}</p>
           </div>
 
           <div className="flex flex-col gap-4 p-4 sm:p-6">

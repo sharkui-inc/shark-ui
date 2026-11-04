@@ -13,7 +13,7 @@ export const generateStaticParams = () =>
 
 export const GET = async (
   _request: Request,
-  props: { params: Promise<{ slug: string[] }> }
+  props: RouteContext<"/llms.mdx/docs/[...slug]">
 ) => {
   const { slug } = await props.params;
   const page = source.getPage(slug.slice(0, -1));

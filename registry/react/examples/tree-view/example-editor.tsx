@@ -74,7 +74,7 @@ const Example = () => {
               </button>
             </TabsList>
             <TabsContent
-              className="p-2 text-muted-foreground text-sm"
+              className="text-muted-foreground p-2 text-sm"
               value={activeItem}
             >
               {"// File content"}

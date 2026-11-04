@@ -20,7 +20,7 @@ const Example = () => (
         title="Custom spacing"
       />
       <DrawerBody>
-        <div className="mx-auto w-full max-w-xs rounded-lg border bg-muted px-3 py-3 text-sm">
+        <div className="bg-muted mx-auto w-full max-w-xs rounded-lg border px-3 py-3 text-sm">
           The gap around this block comes from the spacing variable.
         </div>
       </DrawerBody>

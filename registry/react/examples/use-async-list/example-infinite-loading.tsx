@@ -84,7 +84,7 @@ const Example = () => {
       <ItemGroup
         aria-busy={list.loading}
         aria-label="Posts"
-        className="max-h-64 gap-2 overflow-y-auto outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+        className="focus-visible:border-ring/64 focus-visible:ring-ring/24 max-h-64 gap-2 overflow-y-auto outline-hidden focus-visible:ring-2"
         role="list"
         tabIndex={0}
       >

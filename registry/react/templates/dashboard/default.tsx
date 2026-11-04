@@ -88,8 +88,8 @@ const DashboardTemplate = () => (
             <WavesIcon aria-hidden className="size-4" />
           </IconTile>
           <div className="grid min-w-0 gap-0.5">
-            <span className="truncate font-semibold text-sm">Catalyst</span>
-            <span className="truncate text-muted-foreground text-xs">
+            <span className="truncate text-sm font-semibold">Catalyst</span>
+            <span className="text-muted-foreground truncate text-xs">
               Analytics workspace
             </span>
           </div>
@@ -137,8 +137,8 @@ const DashboardTemplate = () => (
             <AvatarFallback>JB</AvatarFallback>
           </Avatar>
           <div className="flex flex-1 flex-col gap-0 overflow-hidden">
-            <span className="truncate font-medium text-sm">James Brown</span>
-            <span className="truncate text-muted-foreground text-xs">
+            <span className="truncate text-sm font-medium">James Brown</span>
+            <span className="text-muted-foreground truncate text-xs">
               james@example.com
             </span>
           </div>
@@ -148,7 +148,7 @@ const DashboardTemplate = () => (
     <SidebarInset>
       <header className="flex h-14 items-center gap-3 border-b px-6">
         <div className="min-w-0 flex-1">
-          <p className="truncate font-semibold text-sm">Dashboard</p>
+          <p className="truncate text-sm font-semibold">Dashboard</p>
           <p className="text-muted-foreground text-xs">Performance overview</p>
         </div>
         <Button size="sm" variant="outline">
@@ -158,10 +158,10 @@ const DashboardTemplate = () => (
       <div className="flex flex-col gap-6 p-6">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h1 className="font-semibold text-2xl tracking-[-0.03em]">
+            <h1 className="text-2xl font-semibold tracking-[-0.03em]">
               Welcome back to Catalyst
             </h1>
-            <p className="mt-1 text-muted-foreground text-sm">
+            <p className="text-muted-foreground mt-1 text-sm">
               A concise view of your business performance.
             </p>
           </div>
@@ -171,44 +171,44 @@ const DashboardTemplate = () => (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between gap-2 pb-2">
-              <CardTitle className="font-medium text-sm">Total Sales</CardTitle>
+              <CardTitle className="text-sm font-medium">Total Sales</CardTitle>
               <Badge variant="secondary">+2%</Badge>
             </CardHeader>
             <CardContent>
-              <span className="font-semibold text-2xl">$128.32</span>
+              <span className="text-2xl font-semibold">$128.32</span>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between gap-2 pb-2">
-              <CardTitle className="font-medium text-sm">
+              <CardTitle className="text-sm font-medium">
                 Online Store
               </CardTitle>
               <Badge variant="secondary">+4.5%</Badge>
             </CardHeader>
             <CardContent>
-              <span className="font-semibold text-2xl">$52.12</span>
+              <span className="text-2xl font-semibold">$52.12</span>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between gap-2 pb-2">
-              <CardTitle className="font-medium text-sm">
+              <CardTitle className="text-sm font-medium">
                 Total Visitors
               </CardTitle>
               <Badge variant="destructive">-1.4%</Badge>
             </CardHeader>
             <CardContent>
-              <span className="font-semibold text-2xl">237,456</span>
+              <span className="text-2xl font-semibold">237,456</span>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between gap-2 pb-2">
-              <CardTitle className="font-medium text-sm">
+              <CardTitle className="text-sm font-medium">
                 Conversion Rate
               </CardTitle>
               <Badge variant="secondary">+2.1%</Badge>
             </CardHeader>
             <CardContent>
-              <span className="font-semibold text-2xl">16.9%</span>
+              <span className="text-2xl font-semibold">16.9%</span>
             </CardContent>
           </Card>
         </div>

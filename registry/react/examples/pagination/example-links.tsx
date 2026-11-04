@@ -12,7 +12,7 @@ const Example = () => (
     aria-label="Pagination links"
     count={50}
     getPageUrl={({ page }) => `/products?page=${page}`}
-    onClick={(event) => event.preventDefault()} // just to don't navigate to the page
+    onClick={(event) => event.preventDefault()}
     pageSize={10}
     type="link"
   >

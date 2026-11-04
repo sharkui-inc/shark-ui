@@ -28,17 +28,17 @@ const Example = () => {
 const translations = {
   ar: {
     values: {
-      count: "٩+",
+      count: "٢",
     },
   },
   en: {
     values: {
-      count: "9+",
+      count: "2",
     },
   },
   he: {
     values: {
-      count: "9+",
+      count: "2",
     },
   },
 };

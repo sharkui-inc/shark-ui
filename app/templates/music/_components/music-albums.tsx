@@ -30,7 +30,7 @@ export const MusicAlbums = () => (
       spacing="16px"
     >
       <div className="mb-4 flex items-center justify-between gap-4">
-        <h2 className="font-heading font-semibold text-xl tracking-[-0.02em]">
+        <h2 className="font-heading text-xl font-semibold tracking-[-0.02em]">
           Albums for your next listen
         </h2>
         <CarouselControl className="w-auto shrink-0">

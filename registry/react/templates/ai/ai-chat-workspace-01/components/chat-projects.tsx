@@ -53,7 +53,7 @@ export const ChatProjects = () => (
   <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 py-8 sm:px-6">
     <div className="flex flex-wrap items-center justify-between gap-3">
       <div>
-        <h2 className="font-semibold text-xl">Projects</h2>
+        <h2 className="text-xl font-semibold">Projects</h2>
         <p className="text-muted-foreground text-sm">
           Organize chats around a goal, document set, or workflow.
         </p>
@@ -67,6 +67,7 @@ export const ChatProjects = () => (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
       {PROJECTS.map((project) => {
         const Icon = project.icon;
+
         return (
           <Card key={project.id}>
             <CardMedia variant="icon">

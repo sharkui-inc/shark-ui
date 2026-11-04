@@ -129,7 +129,7 @@ export const DataTable = <TData extends RowData>(
 
   return (
     <ark.div
-      className={cn("overflow-hidden rounded-md border", className)}
+      className={cn("rounded-md border", "overflow-hidden", className)}
       {...rest}
     >
       <Table>
@@ -172,7 +172,7 @@ export const DataTable = <TData extends RowData>(
           ) : (
             <TableRow>
               <TableCell
-                className="h-24 text-center"
+                className={cn("h-24", "text-center")}
                 colSpan={Math.max(table.getVisibleLeafColumns().length, 1)}
               >
                 {emptyMessage}
@@ -306,7 +306,9 @@ export const DataTablePagination = <TData extends RowData>(
     >
       <ark.div
         className={cn(
-          "flex w-full flex-wrap items-center justify-between gap-4 px-2",
+          "w-full",
+          "flex flex-wrap items-center justify-between gap-4",
+          "px-2",
           className
         )}
         data-slot="data-table-pagination"
@@ -332,7 +334,7 @@ export const DataTablePaginationSelectedCount = (
 
   return (
     <ark.div
-      className={cn("flex-1 text-muted-foreground text-sm", className)}
+      className={cn("flex-1", "text-muted-foreground text-sm", className)}
       data-slot="data-table-pagination-selected-count"
       {...rest}
     >
@@ -371,7 +373,11 @@ export const DataTablePaginationRowsPerPage = (
 
   return (
     <ark.div
-      className={cn("flex items-center gap-2 font-medium text-sm", className)}
+      className={cn(
+        "flex items-center gap-2",
+        "text-sm font-medium",
+        className
+      )}
       data-slot="data-table-pagination-rows-per-page"
       {...rest}
     >
@@ -409,7 +415,7 @@ export const DataTablePaginationPageInfo = (
 
   return (
     <ark.div
-      className={cn("w-28 text-center font-medium text-sm", className)}
+      className={cn("w-28", "text-center text-sm font-medium", className)}
       data-slot="data-table-pagination-page-info"
       {...rest}
     >
@@ -450,7 +456,7 @@ export const DataTablePaginationNavigation = (
         {...rest}
       >
         <Pagination
-          className="mx-0 w-auto justify-start gap-1"
+          className={cn("w-auto", "justify-start gap-1", "mx-0")}
           count={rowCount}
           onPageChange={(details) => {
             table.setPageIndex(details.page - 1);

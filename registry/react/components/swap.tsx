@@ -8,6 +8,8 @@ import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
+export const useSwapContext = useArkSwapContext;
+
 const swapIndicatorVariants = tv({
   defaultVariants: {
     variant: "fade",
@@ -68,7 +70,6 @@ type SwapProps = SwapBaseProps & {
   on: React.ReactNode;
 };
 
-export const useSwapContext = useArkSwapContext;
 export const Swap = (props: SwapProps) => {
   const {
     variant = "fade",

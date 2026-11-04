@@ -39,7 +39,7 @@ export const DocsSidebar = (props: DocsSidebarProps) => {
       {...rest}
     >
       <SidebarContent className="px-4 py-2" scrollFade>
-        <div className="h-(--top-spacing) shrink-0" />
+        <div className="shrink-0" />
         {tree.children.map((folder) => {
           const pages =
             folder.type === "folder"
@@ -60,7 +60,7 @@ export const DocsSidebar = (props: DocsSidebarProps) => {
             >
               <SidebarGroup className="gap-1">
                 <ArkToc.Title asChild>
-                  <SidebarGroupLabel className="h-7 px-0 text-sidebar-accent-foreground">
+                  <SidebarGroupLabel className="text-sidebar-accent-foreground h-7 px-0">
                     {folder.name}
                   </SidebarGroupLabel>
                 </ArkToc.Title>

@@ -135,14 +135,14 @@ export const ChatSidebar = () => {
         <SidebarFooter className="overflow-hidden">
           <Card className="w-[calc(var(--sidebar-width)-(--spacing(4)))] shrink-0 gap-2 [--space:--spacing(3)] group-data-[collapsible=icon]:hidden">
             <CardContent className="flex flex-col gap-2">
-              <div className="text-nowrap text-xs">Monthly token usage</div>
+              <div className="text-xs text-nowrap">Monthly token usage</div>
               <Progress
                 aria-label="Monthly token usage: 620K of 1M tokens used"
                 className="flex-nowrap"
                 value={62}
               />
-              <p className="text-nowrap text-muted-foreground text-xs">
-                <span className="font-medium text-foreground tabular-nums">
+              <p className="text-muted-foreground text-xs text-nowrap">
+                <span className="text-foreground font-medium tabular-nums">
                   620K
                 </span>{" "}
                 of 1M tokens used
@@ -197,7 +197,7 @@ const WorkspaceSwitcher = () => {
                 <MenuRadioItem key={value} value={value}>
                   <span className="flex min-w-0 flex-col gap-0.5">
                     <span className="truncate font-medium">{name}</span>
-                    <span className="truncate text-muted-foreground">
+                    <span className="text-muted-foreground truncate">
                       {description}
                     </span>
                   </span>

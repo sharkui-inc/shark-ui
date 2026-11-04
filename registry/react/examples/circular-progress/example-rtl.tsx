@@ -8,6 +8,7 @@ const Example = () => {
 
   React.useEffect(() => {
     const timer = setTimeout(() => setProgress(72), 500);
+
     return () => clearTimeout(timer);
   }, []);
 

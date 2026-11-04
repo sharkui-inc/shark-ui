@@ -7,7 +7,9 @@ import {
 } from "@ark-ui/react/progress";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { FieldLabel } from "@/registry/react/components/field";
+import { fieldLabelVariants } from "@/registry/react/components/field";
+
+export const useCircularProgressContext = useArkProgressContext;
 
 interface CircularProgressProps
   extends React.ComponentProps<typeof ArkProgress.Root>,
@@ -20,7 +22,6 @@ interface CircularProgressProps
   indeterminate?: boolean;
 }
 
-export const useCircularProgressContext = useArkProgressContext;
 export const CircularProgress = (props: CircularProgressProps) => {
   const {
     value,
@@ -98,7 +99,7 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
       aria-hidden
     >
       <circle
-        className="fill-none stroke-input"
+        className="stroke-input fill-none"
         cx={size / 2}
         cy={size / 2}
         data-slot="circular-progress-track"
@@ -106,7 +107,10 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
         strokeWidth={thickness}
       />
       <circle
-        className="fill-none stroke-primary transition-[stroke-dashoffset] duration-150 ease-out"
+        className={cn(
+          "stroke-primary fill-none",
+          "transition-[stroke-dashoffset] duration-150 ease-out"
+        )}
         cx={size / 2}
         cy={size / 2}
         data-slot="circular-progress-range"
@@ -123,14 +127,14 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
 export const CircularProgressLabel = (
   props: React.ComponentProps<typeof ArkProgress.Label>
 ) => {
-  const { children, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
-    <FieldLabel asChild>
-      <ArkProgress.Label data-slot="circular-progress-label" {...rest}>
-        {children}
-      </ArkProgress.Label>
-    </FieldLabel>
+    <ArkProgress.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="circular-progress-label"
+      {...rest}
+    />
   );
 };
 
@@ -142,7 +146,7 @@ export const CircularProgressValue = (
   return (
     <ArkProgress.ValueText
       className={cn(
-        "font-medium text-xs tabular-nums",
+        "text-xs font-medium tabular-nums",
         "pointer-events-none",
         className
       )}

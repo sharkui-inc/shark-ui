@@ -25,6 +25,7 @@ import {
 } from "@/registry/react/components/menu";
 
 export const useContextMenuContext = useArkMenuContext;
+
 export const ContextMenu = (props: React.ComponentProps<typeof Menu>) => (
   <Menu data-slot="context-menu" {...props} />
 );

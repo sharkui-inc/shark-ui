@@ -15,6 +15,7 @@ const Example = () => (
       placeholder="Add framework"
       validate={({ value, inputValue }) => {
         const next = inputValue.trim();
+
         return (
           Boolean(next) &&
           !value.includes(next) &&
@@ -36,6 +37,6 @@ const Example = () => (
   </Field>
 );
 
-const validTagPattern = /^[a-zA-Z0-9-]+$/;
+const validTagPattern = /^[a-zA-Z0-9-]+$/u;
 
 export default Example;

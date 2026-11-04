@@ -60,13 +60,13 @@ const Example = () => {
         {previewUrl ? (
           <img
             alt="Crop preview"
-            className="fade-in-0 size-full animate-in object-contain duration-150 ease-out"
+            className="fade-in-0 animate-in size-full object-contain duration-150 ease-out"
             height={512}
             src={previewUrl}
             width={512}
           />
         ) : (
-          <div className="flex size-full flex-col items-center justify-center gap-2 text-center text-muted-foreground">
+          <div className="text-muted-foreground flex size-full flex-col items-center justify-center gap-2 text-center">
             <ImageIcon aria-hidden className="size-5" />
             <span className="text-xs">Preview appears here</span>
           </div>

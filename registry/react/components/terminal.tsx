@@ -99,7 +99,8 @@ export const TerminalTitle = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "min-w-0 flex-1 truncate text-muted-foreground text-sm",
+        "min-w-0 flex-1",
+        "text-muted-foreground truncate text-sm",
         className
       )}
       data-slot="terminal-title"
@@ -114,10 +115,12 @@ export const TerminalHeader = (props: TerminalHeaderProps) => {
   return (
     <ark.div
       className={cn(
-        "flex min-h-9 min-w-0 items-center gap-2 px-3 py-1",
+        "min-h-9 min-w-0",
+        "flex items-center gap-2",
+        "px-3 py-1",
         "border-b",
         "text-muted-foreground text-sm",
-        "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+        "[&_svg]:text-muted-foreground [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
         className
       )}
       data-slot="terminal-header"
@@ -138,7 +141,12 @@ export const TerminalAction = (props: React.ComponentProps<typeof ark.div>) => {
 
   return (
     <ark.div
-      className={cn("ms-auto flex shrink-0 items-center gap-1", className)}
+      className={cn(
+        "shrink-0",
+        "flex items-center gap-1",
+        "ms-auto",
+        className
+      )}
       data-slot="terminal-action"
       {...rest}
     />
@@ -171,7 +179,8 @@ export const TerminalContent = (props: TerminalContentProps) => {
     <ark.div
       className={cn(
         "min-h-0 w-full min-w-0",
-        "flex flex-1 flex-col",
+        "flex-1",
+        "flex flex-col",
         "overflow-hidden",
         className
       )}
@@ -181,7 +190,11 @@ export const TerminalContent = (props: TerminalContentProps) => {
       <ScrollArea className="flex-1" dir="ltr" overscrollContain>
         <TerminalFollow followKey={followKey} />
         <pre
-          className="w-max min-w-full p-3 font-mono text-[0.8125rem] leading-6"
+          className={cn(
+            "w-max min-w-full",
+            "p-3",
+            "font-mono text-[0.8125rem] leading-6"
+          )}
           dir="ltr"
         >
           {children ??
@@ -198,7 +211,7 @@ export const TerminalContent = (props: TerminalContentProps) => {
 
 const ESC = String.fromCharCode(27);
 
-const ANSI_RE = new RegExp(`${ESC}\\[([0-9;]*)m`, "g");
+const ANSI_RE = new RegExp(`${ESC}\\[([0-9;]*)m`, "gu");
 
 const ANSI_CODES = ["0", "31", "32", "33", "34", "36", "90"] as const;
 

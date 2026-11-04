@@ -39,7 +39,7 @@ const BlogTemplate = () => (
       </Link>
       <nav className="flex gap-4">
         <Link
-          className="text-muted-foreground text-sm hover:text-foreground"
+          className="text-muted-foreground hover:text-foreground text-sm"
           href="#"
         >
           All posts
@@ -49,8 +49,8 @@ const BlogTemplate = () => (
 
     <main className="container flex flex-1 flex-col gap-12 py-12">
       <div>
-        <h1 className="font-bold text-3xl tracking-tight">Latest posts</h1>
-        <p className="mt-2 text-muted-foreground">
+        <h1 className="text-3xl font-bold tracking-tight">Latest posts</h1>
+        <p className="text-muted-foreground mt-2">
           Insights and updates from the team.
         </p>
       </div>
@@ -82,7 +82,7 @@ const BlogTemplate = () => (
         <aside className="hidden lg:block">
           <Card>
             <CardHeader>
-              <CardTitle className="font-medium text-base">About</CardTitle>
+              <CardTitle className="text-base font-medium">About</CardTitle>
               <CardDescription>
                 A blog template built with accessible components. Perfect for
                 documentation, changelogs, and updates.

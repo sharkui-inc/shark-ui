@@ -63,7 +63,7 @@ export const ThemeSelectorPreset = () => {
           className={cn(
             "size-4 shrink-0 rounded-full",
             activePreset?.swatchClass,
-            !activePreset && "ring-1 ring-border ring-inset"
+            !activePreset && "ring-border ring-1 ring-inset"
           )}
           style={
             activePreset

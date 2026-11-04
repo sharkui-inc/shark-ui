@@ -1,6 +1,8 @@
 ---
 title: Native Select
 description: Styled native HTML select.
+aliases:
+  - Native dropdown
 seo:
   description: Styled native select that keeps platform behavior.
 ---
@@ -77,6 +79,12 @@ import {
 </NativeSelect>
 ```
 
+## With Field
+
+Use [Field](/docs/components/field) for a label and description.
+
+<ComponentPreview componentName="native-select" fileName="example-with-field" />
+
 ## Native Select vs Select
 
 - **NativeSelect**: use for native browser behavior, better performance, or mobile-optimized menus.
@@ -102,6 +110,18 @@ Use the `invalid` prop to mark the select as invalid.
 
 <ComponentPreview componentName="native-select" fileName="example-invalid" />
 
+## Variants
+
+Control appearance with the `variant` prop on `NativeSelect`.
+
+### Default
+
+<ComponentPreview componentName="native-select" fileName="example-variant-default" />
+
+### Ghost
+
+<ComponentPreview componentName="native-select" fileName="example-variant-ghost" />
+
 ## Size
 
 Use the `size` prop to change the select height.
@@ -120,17 +140,17 @@ Use the `size` prop to change the select height.
 
 ## Examples
 
+### Without trigger
+
+Hide the chevron with `showTrigger={false}`.
+
+<ComponentPreview componentName="native-select" fileName="example-without-trigger" />
+
 ### Groups
 
 Use `NativeSelectOptGroup` to group options with a label.
 
 <ComponentPreview componentName="native-select" fileName="example-groups" />
-
-### With Field
-
-Use [Field](/docs/components/field) for a label and description.
-
-<ComponentPreview componentName="native-select" fileName="example-with-field" />
 
 ### Form Integration
 
@@ -151,6 +171,8 @@ Extends native `<select>` props. Additional props:
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `variant` | `"default" \| "ghost"` | `"default"` |
+| `showTrigger` | `boolean` | `true` |
 | `disabled` | `boolean` | `-` |
 | `invalid` | `boolean` | `-` |
 
@@ -171,4 +193,3 @@ Extends native `<optgroup>` props. Use `label` for the group label.
 | `disabled` | `boolean` | `false` |
 
 Extends native `<option>` props. Use `value` and children for option value and label.
-

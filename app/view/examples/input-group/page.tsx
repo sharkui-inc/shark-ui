@@ -26,10 +26,10 @@ const InputGroupExamplePage = () => (
   <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
     <div className="grid min-w-0 grid-cols-1 gap-16 sm:grid-cols-2 [&>section]:min-w-0">
       <section aria-labelledby="basic-heading" className="flex flex-col gap-5">
-        <h1 className="font-medium text-muted-foreground" id="basic-heading">
+        <h1 className="text-muted-foreground font-medium" id="basic-heading">
           Basic
         </h1>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGroupBasic />
         </div>
       </section>
@@ -39,12 +39,12 @@ const InputGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="block-end-heading"
         >
           Block End
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputGroupBlockEnd />
         </div>
       </section>
@@ -54,21 +54,21 @@ const InputGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="block-start-heading"
         >
           Block Start
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGroupBlockStart />
         </div>
       </section>
 
       <section aria-labelledby="button-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="button-heading">
+        <h2 className="text-muted-foreground font-medium" id="button-heading">
           Button
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputGroupButton />
         </div>
       </section>
@@ -78,21 +78,21 @@ const InputGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="button-group-heading"
         >
           Button Group
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGroupButtonGroup />
         </div>
       </section>
 
       <section aria-labelledby="custom-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="custom-heading">
+        <h2 className="text-muted-foreground font-medium" id="custom-heading">
           Custom
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputGroupCustom />
         </div>
       </section>
@@ -101,19 +101,19 @@ const InputGroupExamplePage = () => (
         aria-labelledby="dropdown-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="dropdown-heading">
+        <h2 className="text-muted-foreground font-medium" id="dropdown-heading">
           Dropdown
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGroupDropdown />
         </div>
       </section>
 
       <section aria-labelledby="icon-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="icon-heading">
+        <h2 className="text-muted-foreground font-medium" id="icon-heading">
           Icon
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputGroupIcon />
         </div>
       </section>
@@ -122,10 +122,10 @@ const InputGroupExamplePage = () => (
         aria-labelledby="in-card-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="in-card-heading">
+        <h2 className="text-muted-foreground font-medium" id="in-card-heading">
           In Card
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGroupInCard />
         </div>
       </section>
@@ -135,12 +135,12 @@ const InputGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="inline-end-heading"
         >
           Inline End
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputGroupInlineEnd />
         </div>
       </section>
@@ -150,39 +150,39 @@ const InputGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="inline-start-heading"
         >
           Inline Start
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGroupInlineStart />
         </div>
       </section>
 
       <section aria-labelledby="kbd-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="kbd-heading">
+        <h2 className="text-muted-foreground font-medium" id="kbd-heading">
           Kbd
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputGroupKbd />
         </div>
       </section>
 
       <section aria-labelledby="label-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="label-heading">
+        <h2 className="text-muted-foreground font-medium" id="label-heading">
           Label
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGroupLabel />
         </div>
       </section>
 
       <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="rtl-heading">
+        <h2 className="text-muted-foreground font-medium" id="rtl-heading">
           RTL
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputGroupRtl />
         </div>
       </section>
@@ -191,19 +191,19 @@ const InputGroupExamplePage = () => (
         aria-labelledby="spinner-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="spinner-heading">
+        <h2 className="text-muted-foreground font-medium" id="spinner-heading">
           Spinner
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGroupSpinner />
         </div>
       </section>
 
       <section aria-labelledby="text-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="text-heading">
+        <h2 className="text-muted-foreground font-medium" id="text-heading">
           Text
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputGroupText />
         </div>
       </section>
@@ -212,10 +212,10 @@ const InputGroupExamplePage = () => (
         aria-labelledby="textarea-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="textarea-heading">
+        <h2 className="text-muted-foreground font-medium" id="textarea-heading">
           Textarea
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGroupTextarea />
         </div>
       </section>
@@ -225,12 +225,12 @@ const InputGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="textarea-examples-heading"
         >
           Textarea Examples
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputGroupTextareaExamples />
         </div>
       </section>
@@ -239,10 +239,10 @@ const InputGroupExamplePage = () => (
         aria-labelledby="tooltip-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="tooltip-heading">
+        <h2 className="text-muted-foreground font-medium" id="tooltip-heading">
           Tooltip
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGroupTooltip />
         </div>
       </section>
@@ -252,12 +252,12 @@ const InputGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="with-addons-heading"
         >
           With Addons
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputGroupWithAddons />
         </div>
       </section>
@@ -267,12 +267,12 @@ const InputGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="with-buttons-heading"
         >
           With Buttons
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGroupWithButtons />
         </div>
       </section>
@@ -281,10 +281,10 @@ const InputGroupExamplePage = () => (
         aria-labelledby="with-kbd-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="with-kbd-heading">
+        <h2 className="text-muted-foreground font-medium" id="with-kbd-heading">
           With Kbd
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <InputGroupWithKbd />
         </div>
       </section>
@@ -294,12 +294,12 @@ const InputGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="with-tooltip-heading"
         >
           With Tooltip
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <InputGroupWithTooltip />
         </div>
       </section>

@@ -109,6 +109,22 @@ Use `TableCaption`. Add `sr-only` to hide it visually.
 </Table>
 ```
 
+## Size
+
+The `size` prop controls row spacing.
+
+### Compact
+
+<ComponentPreview componentName="table" fileName="example-size-compact" />
+
+### Default
+
+<ComponentPreview componentName="table" fileName="example-size-default" />
+
+### Comfortable
+
+<ComponentPreview componentName="table" fileName="example-size-comfortable" />
+
 ## Examples
 
 ### Striped
@@ -135,17 +151,23 @@ Row selection with [action bar](/docs/components/action-bar).
 
 <ComponentPreview componentName="table" fileName="example-action-bar" />
 
-### With context menu
-
-Wrap each row with `ContextMenuTrigger`.
-
-<ComponentPreview componentName="table" fileName="example-context-menu" />
-
 ### Disable row hover
 
 Set `isHoverable={false}` on `Table` to disable the hover background on body rows.
 
 <ComponentPreview componentName="table" fileName="example-not-hoverable" />
+
+### Custom spacing
+
+The `[--space:--spacing("value")]` controls the internal spacing.
+
+<ComponentPreview componentName="table" fileName="example-custom-spacing" />
+
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
+
+```css
+  md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
+```
 
 ## RTL
 
@@ -162,9 +184,14 @@ Scrollable wrapper around a native table. Supports striped and hover variants.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `variant` | `"plain" \| "striped"` | `"plain"` |
+| `size` | `"compact" \| "comfortable" \| "default"` | `"default"` |
 | `isHoverable` | `boolean` | `true` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(2)` |
 
 ### TableHeader
 

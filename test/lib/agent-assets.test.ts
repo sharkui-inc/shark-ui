@@ -14,20 +14,20 @@ interface VercelConfig {
 
 const root = process.cwd();
 const designContract = readFileSync(join(root, "public/design.md"), "utf8");
-const designHeading = /^# Shark UI Design Contract\n/m;
-const arkAndTailwind = /Ark UI and Tailwind CSS v4/;
-const semanticTokens = /semantic Tailwind/;
+const designHeading = /^# Shark UI Design Contract\n/mu;
+const arkAndTailwind = /Ark UI and Tailwind CSS v4/u;
+const semanticTokens = /semantic Tailwind/u;
 const concreteTokens =
-  /bg-background.*text-foreground.*border-input.*ring-ring/;
-const logicalDirections = /logical direction utilities/;
+  /bg-background.*text-foreground.*border-input.*ring-ring/u;
+const logicalDirections = /logical direction utilities/u;
 const consistencyRule =
-  /arbitrary colors, corner radii, font families, overlay z-index values/;
-const decisionOrder = /^## Decision order$/m;
-const compositionRecipes = /^## Composition recipes$/m;
-const formRecipe = /^### Form with validation and actions$/m;
-const collectionRecipe = /^### Collection with filters and navigation$/m;
-const stateRecipes = /^## State recipes$/m;
-const reviewChecklist = /^## Review checklist$/m;
+  /arbitrary colors, corner radii, font families, overlay z-index values/u;
+const decisionOrder = /^## Decision order$/mu;
+const compositionRecipes = /^## Composition recipes$/mu;
+const formRecipe = /^### Form with validation and actions$/mu;
+const collectionRecipe = /^### Collection with filters and navigation$/mu;
+const stateRecipes = /^## State recipes$/mu;
+const reviewChecklist = /^## Review checklist$/mu;
 const vercelConfig = JSON.parse(
   readFileSync(join(root, "vercel.json"), "utf8")
 ) as VercelConfig;

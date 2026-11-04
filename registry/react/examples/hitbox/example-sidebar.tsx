@@ -23,7 +23,7 @@ const Example = () => {
       <nav className="flex w-48 flex-col gap-2 rounded-lg border p-1">
         <a
           className={cn(
-            "hitbox-y-1 block rounded-md px-4 py-2 text-sm hover:bg-muted",
+            "hitbox-y-1 hover:bg-muted block rounded-md px-4 py-2 text-sm",
             { "hitbox-debug": show }
           )}
           href="#"
@@ -32,7 +32,7 @@ const Example = () => {
         </a>
         <a
           className={cn(
-            "hitbox-y-1 block rounded-md px-4 py-2 text-sm hover:bg-muted",
+            "hitbox-y-1 hover:bg-muted block rounded-md px-4 py-2 text-sm",
             { "hitbox-debug": show }
           )}
           href="#"
@@ -41,7 +41,7 @@ const Example = () => {
         </a>
         <a
           className={cn(
-            "hitbox-y-1 block rounded-md px-4 py-2 text-sm hover:bg-muted",
+            "hitbox-y-1 hover:bg-muted block rounded-md px-4 py-2 text-sm",
             { "hitbox-debug": show }
           )}
           href="#"

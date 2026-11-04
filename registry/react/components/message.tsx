@@ -15,7 +15,7 @@ export const MessageGroup = (props: React.ComponentProps<typeof ark.div>) => {
 
   return (
     <ark.div
-      className={cn("flex min-w-0 flex-col gap-2", className)}
+      className={cn("min-w-0", "flex flex-col gap-2", className)}
       data-slot="message-group"
       {...rest}
     />
@@ -32,7 +32,12 @@ export const Message = (props: MessageProps) => {
   return (
     <ark.div
       className={cn(
-        "group/message relative flex w-full min-w-0 gap-2 text-sm data-[align=end]:flex-row-reverse",
+        "group/message",
+        "relative",
+        "w-full min-w-0",
+        "flex gap-2",
+        "text-sm",
+        "data-[align=end]:flex-row-reverse",
         className
       )}
       data-align={align}
@@ -48,7 +53,8 @@ export const MessageAvatar = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex w-fit min-w-0 shrink-0 self-end",
+        "w-fit min-w-0 shrink-0",
+        "flex self-end",
         "group-has-data-[slot=message-footer]/message:-translate-y-8",
         "group-has-[[data-slot=message-bubble-reactions][data-side=bottom]]/message:-translate-y-5",
         className
@@ -65,7 +71,10 @@ export const MessageContent = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "wrap-break-word flex w-full min-w-0 flex-col gap-2.5 group-data-[align=end]/message:*:data-slot:self-end",
+        "w-full min-w-0",
+        "flex flex-col gap-2.5",
+        "wrap-break-word",
+        "group-data-[align=end]/message:*:data-slot:self-end",
         className
       )}
       data-slot="message-content"
@@ -80,7 +89,11 @@ export const MessageHeader = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex min-w-0 max-w-full items-center px-3 font-medium text-muted-foreground text-xs group-has-data-[variant=ghost]/message:px-0",
+        "max-w-full min-w-0",
+        "flex items-center",
+        "px-3",
+        "text-muted-foreground text-xs font-medium",
+        "group-has-data-[variant=ghost]/message:px-0",
         className
       )}
       data-slot="message-header"
@@ -95,7 +108,12 @@ export const MessageFooter = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex min-w-0 max-w-full items-center px-3 font-medium text-muted-foreground text-xs group-has-data-[variant=ghost]/message:px-0 group-data-[align=end]/message:justify-end",
+        "max-w-full min-w-0",
+        "flex items-center",
+        "px-3",
+        "text-muted-foreground text-xs font-medium",
+        "group-has-data-[variant=ghost]/message:px-0",
+        "group-data-[align=end]/message:justify-end",
         className
       )}
       data-slot="message-footer"

@@ -1,6 +1,8 @@
 ---
 title: Dialog
 description: Modal dialog for focused content.
+aliases:
+  - Modal
 seo:
   description: Modal for confirmations and focused tasks.
 links:
@@ -168,15 +170,15 @@ Use `modal={false}` to allow interaction with elements outside the dialog.
 
 <ComponentPreview componentName="dialog" fileName="example-non-modal" />
 
-### Initial Focus
+### Final Focus
 
-Use `initialFocusEl` to control which element receives focus when the dialog opens.
+Use `finalFocusEl` to move focus to a specific element when the dialog closes.
 
-<ComponentPreview componentName="dialog" fileName="example-initial-focus" />
+<ComponentPreview componentName="dialog" fileName="example-final-focus" />
 
 ### Autofocus
 
-Order: `initialFocusEl`, then `[data-autofocus]`, then the first tabbable. Prefer DOM order for footer actions - see `DialogFooter`.
+Use `data-autofocus` to focus an element when the dialog opens.
 
 <ComponentPreview componentName="dialog" fileName="example-autofocus" />
 
@@ -198,6 +200,16 @@ Set `bottomStickOnMobile={false}` to keep the dialog centered on mobile.
 
 <ComponentPreview componentName="dialog" fileName="example-centered-on-mobile" />
 
+### Sidebar
+
+<ComponentPreview componentName="dialog" fileName="example-sidebar" />
+
+### Responsive
+
+Use [Drawer](/docs/components/drawer#responsive-dialog) below the mobile breakpoint and `Dialog` on larger screens for the same form.
+
+<ComponentPreview componentName="drawer" fileName="example-responsive-dialog" />
+
 ### Custom spacing
 
 The `[--space:--spacing("value")]` controls the internal spacing.
@@ -209,18 +221,6 @@ The `[--space:--spacing("value")]` controls the internal spacing.
 ```css
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
-
-### Sidebar
-
-Put `Sidebar` in `DialogContent` with a fixed height. Use `DialogBody` inside `SidebarInset` for the scrollable panel. Use `min-h-0` on `SidebarProvider` and `collapsible="none"`.
-
-<ComponentPreview componentName="dialog" fileName="example-sidebar" />
-
-### Responsive
-
-Use [Drawer](/docs/components/drawer#responsive-dialog) below the mobile breakpoint and `Dialog` on larger screens for the same form.
-
-<ComponentPreview componentName="drawer" fileName="example-responsive-dialog" />
 
 ## RTL
 

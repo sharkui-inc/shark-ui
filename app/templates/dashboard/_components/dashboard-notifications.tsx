@@ -44,7 +44,7 @@ export const DashboardNotifications = () => {
         >
           <BellIcon aria-hidden />
           {unreadCount > 0 ? (
-            <span className="absolute end-1 top-1 size-1.5 rounded-full bg-primary" />
+            <span className="bg-primary absolute end-1 top-1 size-1.5 rounded-full" />
           ) : null}
         </Button>
       </PopoverTrigger>

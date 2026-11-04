@@ -4,11 +4,14 @@ import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Dialog,
+  DialogBody,
   DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
 } from "@/registry/react/components/dialog";
+import { Field, FieldLabel } from "@/registry/react/components/field";
+import { Input } from "@/registry/react/components/input";
 import {
   Menu,
   MenuContent,
@@ -27,7 +30,7 @@ const Example = () => {
         </MenuTrigger>
         <MenuContent className="min-w-40">
           <MenuItem onSelect={() => setDialogOpen(true)} value="dialog">
-            Open dialog
+            Settings
           </MenuItem>
         </MenuContent>
       </Menu>
@@ -37,9 +40,18 @@ const Example = () => {
             description="Change your preferences."
             title="Settings"
           />
+          <DialogBody>
+            <Field>
+              <FieldLabel>Email</FieldLabel>
+              <Input defaultValue="ada@example.com" type="email" />
+            </Field>
+          </DialogBody>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Close</Button>
+              <Button>Save</Button>
+            </DialogClose>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>

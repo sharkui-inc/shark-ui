@@ -16,10 +16,10 @@ const CalendarExamplePage = () => (
   <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
     <div className="grid min-w-0 grid-cols-1 gap-16 sm:grid-cols-2 [&>section]:min-w-0">
       <section aria-labelledby="basic-heading" className="flex flex-col gap-5">
-        <h1 className="font-medium text-muted-foreground" id="basic-heading">
+        <h1 className="text-muted-foreground font-medium" id="basic-heading">
           Basic
         </h1>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <CalendarBasic />
         </div>
       </section>
@@ -29,12 +29,12 @@ const CalendarExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="booked-dates-heading"
         >
           Booked Dates
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <CalendarBookedDates />
         </div>
       </section>
@@ -43,10 +43,10 @@ const CalendarExamplePage = () => (
         aria-labelledby="caption-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="caption-heading">
+        <h2 className="text-muted-foreground font-medium" id="caption-heading">
           Caption
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <CalendarCaption />
         </div>
       </section>
@@ -56,21 +56,21 @@ const CalendarExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="custom-days-heading"
         >
           Custom Days
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <CalendarCustomDays />
         </div>
       </section>
 
       <section aria-labelledby="hijri-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="hijri-heading">
+        <h2 className="text-muted-foreground font-medium" id="hijri-heading">
           Hijri
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <CalendarHijri />
         </div>
       </section>
@@ -79,10 +79,10 @@ const CalendarExamplePage = () => (
         aria-labelledby="multiple-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="multiple-heading">
+        <h2 className="text-muted-foreground font-medium" id="multiple-heading">
           Multiple
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <CalendarMultiple />
         </div>
       </section>
@@ -91,37 +91,37 @@ const CalendarExamplePage = () => (
         aria-labelledby="presets-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="presets-heading">
+        <h2 className="text-muted-foreground font-medium" id="presets-heading">
           Presets
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <CalendarPresets />
         </div>
       </section>
 
       <section aria-labelledby="range-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="range-heading">
+        <h2 className="text-muted-foreground font-medium" id="range-heading">
           Range
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <CalendarRange />
         </div>
       </section>
 
       <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="rtl-heading">
+        <h2 className="text-muted-foreground font-medium" id="rtl-heading">
           RTL
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <CalendarRtl />
         </div>
       </section>
 
       <section aria-labelledby="time-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="time-heading">
+        <h2 className="text-muted-foreground font-medium" id="time-heading">
           Time
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <CalendarTime />
         </div>
       </section>
@@ -131,12 +131,12 @@ const CalendarExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="week-numbers-heading"
         >
           Week Numbers
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <CalendarWeekNumbers />
         </div>
       </section>

@@ -1,6 +1,8 @@
 ---
 title: Chart
 description: Build themed charts with Recharts.
+aliases:
+  - Graph
 seo:
   description: Composable chart containers, tooltips, and legends for Recharts.
 links:
@@ -78,8 +80,6 @@ const chartConfig = { customers: { label: "Customers", color: "var(--chart-1)" }
 ```
 
 ## Examples
-
-Each example highlights one part of a chart.
 
 ### Structure the data
 
@@ -303,13 +303,15 @@ const chartConfig = {
 
 ## Legend
 
-`ChartLegendContent` reads labels and colors from `chartConfig`. Set `nameKey` when the series key is stored in a custom data field.
+`ChartLegendContent` reads labels and colors from `chartConfig`. 
+
+Set `nameKey` when the series key is stored in a custom data field.
 
 <ComponentPreview componentName="chart" fileName="example-usage-legend" />
 
 ## Accessibility
 
-Set `accessibilityLayer` to make chart elements keyboard accessible. Add a text summary when the data matters; color alone should not distinguish series.
+Set `accessibilityLayer` to make chart elements keyboard accessible.
 
 ```tsx
 <BarChart accessibilityLayer data={chartData}>

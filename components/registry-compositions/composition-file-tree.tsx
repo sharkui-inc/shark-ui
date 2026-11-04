@@ -61,6 +61,7 @@ interface CompositionTreeNodeViewProps {
 
 const CompositionTreeNodeView = (props: CompositionTreeNodeViewProps) => {
   const { indexPath, node } = props;
+
   return (
     <TreeViewNode indexPath={indexPath} node={node}>
       {node.children ? (

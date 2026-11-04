@@ -13,6 +13,7 @@ export const MailFolderNav = (props: {
   onFolderChange: (folder: Mailbox) => void;
 }) => {
   const { activeFolder, onFolderChange } = props;
+
   return (
     <SidebarMenu>
       {FOLDERS.map(({ label, icon: Icon }) => {

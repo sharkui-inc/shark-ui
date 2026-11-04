@@ -1,5 +1,6 @@
 "use client";
 
+import { parseColor } from "@ark-ui/react";
 import React from "react";
 import {
   ColorPicker,
@@ -7,7 +8,6 @@ import {
   ColorPickerSwatchGroup,
   ColorPickerSwatchIndicator,
   ColorPickerSwatchTrigger,
-  parseColor,
 } from "@/registry/react/components/color-picker";
 
 const Example = () => {
@@ -31,7 +31,7 @@ const Example = () => {
         </ColorPickerSwatchGroup>
       </ColorPicker>
 
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         {parseColor(value).toString("hex")}
       </p>
     </div>

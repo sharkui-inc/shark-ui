@@ -1,7 +1,7 @@
 import { Toggle } from "@/registry/react/components/toggle";
 
 const Example = () => (
-  <Toggle defaultPressed pill variant="default">
+  <Toggle defaultPressed pill>
     Pill toggle
   </Toggle>
 );

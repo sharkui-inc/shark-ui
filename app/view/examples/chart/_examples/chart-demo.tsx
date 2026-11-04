@@ -92,7 +92,7 @@ const ChartDemo = () => {
 
               return (
                 <button
-                  className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-l px-6 py-4 text-left data-[active=true]:bg-muted/48 sm:px-8 sm:py-6"
+                  className="data-[active=true]:bg-muted/48 relative z-30 flex flex-1 flex-col justify-center gap-1 border-l px-6 py-4 text-left sm:px-8 sm:py-6"
                   data-active={activeChart === chart}
                   key={chart}
                   onClick={() => setActiveChart(chart)}
@@ -101,7 +101,7 @@ const ChartDemo = () => {
                   <span className="text-muted-foreground text-xs">
                     {chartConfig[chart].label}
                   </span>
-                  <span className="font-bold text-lg leading-none sm:text-3xl">
+                  <span className="text-lg leading-none font-bold sm:text-3xl">
                     {total[key].toLocaleString()}
                   </span>
                 </button>

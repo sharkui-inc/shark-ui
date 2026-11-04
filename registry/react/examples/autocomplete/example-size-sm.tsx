@@ -26,6 +26,7 @@ const Example = () => {
     >
       <AutocompleteInput
         aria-label="Search options"
+        placeholder="Small"
         showClear
         showTrigger
         size="sm"

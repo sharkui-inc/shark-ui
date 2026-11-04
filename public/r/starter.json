@@ -111,15 +111,15 @@
     }
   },
   "dependencies": [],
+  "description": "Complete Shark starter: the theme foundation and every installable Shark UI component. Use with `shadcn init` for a new project.",
   "devDependencies": [
     "tw-animate-css"
   ],
   "extends": "none",
+  "name": "starter",
   "registryDependencies": [
     "https://shark-ui.com/r/utils.json",
     "https://shark-ui.com/r/ui.json"
   ],
-  "description": "Complete Shark starter: the theme foundation and every installable Shark UI component. Use with `shadcn init` for a new project.",
-  "name": "starter",
   "type": "registry:style"
 }

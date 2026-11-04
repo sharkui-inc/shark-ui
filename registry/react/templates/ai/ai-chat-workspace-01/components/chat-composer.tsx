@@ -83,7 +83,7 @@ export const ChatComposer = (props: ChatComposerProps) => {
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-3">
-      <div className="w-full rounded-2xl bg-muted/48 p-0.5">
+      <div className="bg-muted/48 w-full rounded-2xl p-0.5">
         <Announcement className="w-full rounded-t-2xl border-0 bg-transparent px-3 py-2 shadow-none">
           <CrownIcon aria-hidden className="text-muted-foreground" />
           <AnnouncementTitle className="text-muted-foreground text-xs">
@@ -99,7 +99,7 @@ export const ChatComposer = (props: ChatComposerProps) => {
 
         <FileUpload accept="image/*,.pdf,.txt" className="gap-0" maxFiles={4}>
           <PromptInput
-            className="rounded-2xl border-0 bg-card shadow-xs/4"
+            className="bg-card rounded-2xl border-0 shadow-xs/4"
             onStop={() => setStatus("ready")}
             onSubmit={({ text }) => {
               onSend(text);
@@ -181,9 +181,9 @@ export const ChatComposer = (props: ChatComposerProps) => {
         </FileUpload>
       </div>
 
-      <p className="text-center text-muted-foreground text-xs">
+      <p className="text-muted-foreground text-center text-xs">
         AI can make{" "}
-        <span className="font-medium text-foreground">mistakes</span>. Please
+        <span className="text-foreground font-medium">mistakes</span>. Please
         double-check.
       </p>
     </div>
@@ -194,7 +194,7 @@ const ComboboxSearch = () => {
   const { setInputValue } = useComboboxContext();
 
   return (
-    <InputGroup className="mb-2 rounded-xl bg-input/32" size="md">
+    <InputGroup className="bg-input/32 mb-2 rounded-xl" size="md">
       <ArkCombobox.Input asChild>
         <InputGroupInput
           aria-label="Search models"

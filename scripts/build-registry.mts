@@ -4,7 +4,11 @@ import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { SITE_CONFIG } from "../config/site";
 import { getRegistryArtifacts } from "../lib/composition-catalog";
-import type { CompositionArtifact, RegistryItemType } from "../lib/registry";
+import {
+  type CompositionArtifact,
+  type RegistryItemType,
+  registryItemSchema,
+} from "../lib/registry";
 import { replaceRegistryImportsForCopy } from "../utils/formatter";
 
 export type RegistryKind = "component" | "hook" | "lib";
@@ -60,11 +64,11 @@ export const KINDS = {
 
 export const REGISTRY_KINDS = Object.keys(KINDS) as RegistryKind[];
 
-const LOCALHOST_RE = /localhost|127\.0\.0\.1/i;
-const REGISTRY_ITEM_URL_RE = /\/r\/([^/]+)\.json$/;
+const LOCALHOST_RE = /localhost|127\.0\.0\.1/iu;
+const REGISTRY_ITEM_URL_RE = /\/r\/([^/]+)\.json$/u;
 const CWD = process.cwd();
 const PUBLIC_DIR = join(CWD, "public", "r");
-const TRAILING_SLASH = /\/$/;
+const TRAILING_SLASH = /\/$/u;
 
 const COMPOSITION_GROUPS = [
   { emoji: "🧱", kind: "blocks", label: "blocks" },
@@ -218,11 +222,19 @@ const loadManifest = (itemName: string): Promise<RegistryItemType> => {
   }
 
   const pending = (async () => {
+    let mod: { default?: unknown };
     try {
-      const mod = await import(pathToFileURL(manifestPath(itemName)).href);
-      return mod.default as RegistryItemType;
+      mod = await import(pathToFileURL(manifestPath(itemName)).href);
     } catch (error) {
       throw new Error(`Manifest not found for ${itemName}`, { cause: error });
+    }
+
+    try {
+      return registryItemSchema.parse(mod.default);
+    } catch (error) {
+      throw new Error(`[build-registry] ${itemName}: invalid manifest`, {
+        cause: error,
+      });
     }
   })();
 
@@ -266,18 +278,16 @@ const buildKindMetadata = async (
   const base = { $schema: SCHEMA, ...manifest };
 
   if (!source.code.trim()) {
-    console.warn(
-      `[build-registry] ${itemName}: manifest type is "${manifest.type}"; skipping embedded`
+    throw new Error(
+      `[build-registry] ${itemName}: source is empty; refusing to publish without embedded files.`
     );
-    return base;
   }
 
   const { manifestType } = KINDS[kind];
   if (manifest.type !== manifestType) {
-    console.warn(
-      `[build-registry] ${itemName}: kind="${kind}" expects manifest type "${manifestType}" but got "${manifest.type}"; skipping embedded files.`
+    throw new Error(
+      `[build-registry] ${itemName}: kind="${kind}" expects manifest type "${manifestType}" but got "${manifest.type}".`
     );
-    return base;
   }
 
   const primaryPath = primaryRegistryPath(

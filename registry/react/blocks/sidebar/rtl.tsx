@@ -5,7 +5,6 @@ import {
   BellIcon,
   BookOpenIcon,
   BotIcon,
-  ChevronRightIcon,
   ChevronsUpDownIcon,
   CreditCardIcon,
   CrownIcon,
@@ -31,9 +30,11 @@ import {
 import {
   Collapsible,
   CollapsibleContent,
+  CollapsibleIndicator,
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
 import { IconTile } from "@/registry/react/components/icon-tile";
+import { LocaleProvider } from "@/registry/react/components/locale";
 import {
   Menu,
   MenuContent,
@@ -218,7 +219,7 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               size="lg"
             >
-              <IconTile aria-hidden size="lg">
+              <IconTile aria-hidden size="md">
                 <activeTeam.logo className="size-4" />
               </IconTile>
               <div className="grid flex-1 text-start text-sm leading-tight">
@@ -254,7 +255,7 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
                 <IconTile aria-hidden size="xs">
                   <PlusIcon className="size-4" />
                 </IconTile>
-                <div className="font-medium text-muted-foreground">
+                <div className="text-muted-foreground font-medium">
                   إضافة فريق
                 </div>
               </MenuItem>
@@ -281,23 +282,19 @@ interface NavMainProps {
 
 const NavMain = (props: NavMainProps) => {
   const { items } = props;
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>المنصة</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
-          <Collapsible
-            asChild
-            className="group/collapsible"
-            defaultOpen={item.isActive}
-            key={item.title}
-          >
+          <Collapsible asChild defaultOpen={item.isActive} key={item.title}>
             <SidebarMenuItem>
               <CollapsibleTrigger asChild>
                 <SidebarMenuButton tooltip={item.title}>
                   {item.icon ? <item.icon /> : null}
                   <span>{item.title}</span>
-                  <ChevronRightIcon className="ms-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                  <CollapsibleIndicator />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               <CollapsibleContent>
@@ -331,6 +328,7 @@ interface NavProjectsProps {
 
 const NavProjects = (props: NavProjectsProps) => {
   const { projects } = props;
+
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>المشاريع</SidebarGroupLabel>
@@ -475,26 +473,28 @@ const NavUser = (props: NavUserProps) => {
 };
 
 const AppSidebar = () => (
-  <SidebarProvider defaultOpenMobile dir="rtl" lang="ar">
-    <Sidebar collapsible="icon">
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
-      </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
-      </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
-      <SidebarRail />
-    </Sidebar>
-    <SidebarInset>
-      <header className="flex h-16 shrink-0 items-center gap-2 px-4 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 motion-reduce:transition-none">
-        <SidebarTrigger className="-ms-1" />
-      </header>
-    </SidebarInset>
-  </SidebarProvider>
+  <LocaleProvider locale="ar-SA">
+    <SidebarProvider defaultOpenMobile dir="rtl" lang="ar">
+      <Sidebar collapsible="icon">
+        <SidebarHeader>
+          <TeamSwitcher teams={data.teams} />
+        </SidebarHeader>
+        <SidebarContent>
+          <NavMain items={data.navMain} />
+          <NavProjects projects={data.projects} />
+        </SidebarContent>
+        <SidebarFooter>
+          <NavUser user={data.user} />
+        </SidebarFooter>
+        <SidebarRail />
+      </Sidebar>
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 px-4 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 motion-reduce:transition-none">
+          <SidebarTrigger className="-ms-1" />
+        </header>
+      </SidebarInset>
+    </SidebarProvider>
+  </LocaleProvider>
 );
 
 export default AppSidebar;

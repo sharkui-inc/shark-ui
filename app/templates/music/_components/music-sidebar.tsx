@@ -37,7 +37,7 @@ export const MusicSidebar = () => {
           <IconTile aria-hidden size="xs">
             <AudioWaveformIcon aria-hidden />
           </IconTile>
-          <p className="truncate font-semibold text-sm">Ondafy</p>
+          <p className="truncate text-sm font-semibold">Ondafy</p>
         </div>
         <SidebarTrigger
           aria-label="Collapse sidebar"

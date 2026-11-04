@@ -8,9 +8,9 @@ import {
 import { CheckIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { Separator } from "@/registry/react/components/separator";
 
 export const useStepsContext = useArkStepsContext;
+
 export const Steps = (props: React.ComponentProps<typeof ArkSteps.Root>) => {
   const { className, ...rest } = props;
 
@@ -56,10 +56,13 @@ export const StepsItem = (
     <ArkSteps.Item
       className={cn(
         "group/step",
-        "relative flex flex-1",
+        "relative",
+        "flex-1",
+        "flex",
         "data-[orientation=vertical]:items-start",
         "data-[orientation=horizontal]:items-center",
-        "last:flex-initial last:**:data-[slot=steps-separator]:hidden",
+        "last:flex-initial",
+        "last:*:data-[slot=steps-separator]:hidden",
         className
       )}
       data-slot="steps-item"
@@ -78,7 +81,7 @@ export const StepsTrigger = (props: StepsTriggerProps) => {
     <ArkSteps.Trigger
       className={cn(
         "inline-flex items-center gap-3",
-        "cursor-pointer rounded-full outline-hidden",
+        "cursor-pointer outline-hidden",
         "disabled:pointer-events-none disabled:opacity-64",
         className
       )}
@@ -96,15 +99,19 @@ export const StepsIndicator = (
   return (
     <ArkSteps.Indicator
       className={cn(
-        "flex shrink-0 items-center justify-center tabular-nums",
+        "shrink-0",
+        "flex items-center justify-center",
+        "tabular-nums",
         "size-(--steps-size)",
-        "bg-muted text-muted-foreground",
-        "font-medium text-sm",
+        "bg-muted",
+        "text-muted-foreground",
+        "text-sm font-medium",
         "rounded-full border",
         "transition-colors",
-        "in-focus-visible:border-ring/64 in-focus-visible:ring-2 in-focus-visible:ring-ring/24",
+        "in-focus-visible:border-ring/64 in-focus-visible:ring-ring/24 in-focus-visible:ring-2",
         "data-complete:in-focus-visible:border-background data-current:in-focus-visible:border-background",
-        "[[data-current],[data-complete]]:border-primary [[data-current],[data-complete]]:bg-primary [[data-current],[data-complete]]:text-primary-foreground",
+        "data-current:border-primary data-current:bg-primary data-current:text-primary-foreground",
+        "data-complete:border-primary data-complete:bg-primary data-complete:text-primary-foreground",
         "[&_svg]:size-(--steps-icon-size) [&_svg]:shrink-0",
         "motion-reduce:transition-none",
         className
@@ -124,24 +131,21 @@ export const StepsSeparator = (
   const { className, ...rest } = props;
 
   return (
-    <Separator asChild>
-      <ArkSteps.Separator
-        aria-hidden
-        className={cn(
-          "flex-1",
-          "bg-border",
-          "rounded-full",
-          "transition-colors",
-          "data-complete:bg-primary",
-          "data-[orientation=horizontal]:mx-(--steps-gutter) data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:w-full data-[orientation=horizontal]:self-center",
-          "data-[orientation=vertical]:absolute data-[orientation=vertical]:inset-s-[calc(var(--steps-size)/2-1px)] data-[orientation=vertical]:top-[calc(var(--steps-size)+var(--steps-gutter))] data-[orientation=vertical]:h-full data-[orientation=vertical]:max-h-[calc(100%-(var(--steps-size)+var(--steps-gutter)*2))] data-[orientation=vertical]:w-0.5",
-          "motion-reduce:transition-none",
-          className
-        )}
-        data-slot="steps-separator"
-        {...rest}
-      />
-    </Separator>
+    <ArkSteps.Separator
+      aria-hidden
+      className={cn(
+        "shrink-0",
+        "bg-border rounded-full",
+        "transition-colors",
+        "data-complete:bg-primary",
+        "data-[orientation=horizontal]:mx-(--steps-gutter) data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:flex-1 data-[orientation=horizontal]:self-center",
+        "data-[orientation=vertical]:absolute data-[orientation=vertical]:start-[calc(var(--steps-size)/2)] data-[orientation=vertical]:top-[calc(var(--steps-size)+var(--steps-gutter))] data-[orientation=vertical]:bottom-(--steps-gutter) data-[orientation=vertical]:-ms-px data-[orientation=vertical]:w-0.5",
+        "motion-reduce:transition-none",
+        className
+      )}
+      data-slot="steps-separator"
+      {...rest}
+    />
   );
 };
 
@@ -150,7 +154,7 @@ export const StepsTitle = (props: React.ComponentProps<typeof ark.span>) => {
 
   return (
     <ark.span
-      className={cn("font-medium text-sm leading-none", className)}
+      className={cn("text-sm leading-none font-medium", className)}
       data-slot="steps-title"
       {...rest}
     />

@@ -113,7 +113,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
   let description: React.ReactNode = null;
   if (showDescription) {
     description = (
-      <p className="w-full text-muted-foreground text-sm">{item.description}</p>
+      <p className="text-muted-foreground w-full text-sm">{item.description}</p>
     );
   } else if (!compact) {
     description = <p className="sr-only">{item.description}</p>;
@@ -139,6 +139,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
       { rootMargin: "600px 0px" }
     );
     observer.observe(container);
+
     return () => observer.disconnect();
   }, []);
 
@@ -147,6 +148,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
       return;
     }
     const timeout = window.setTimeout(() => setFailed(true), 15_000);
+
     return () => window.clearTimeout(timeout);
   }, [failed, loaded, shouldLoad]);
 
@@ -165,7 +167,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
             <TabsTrigger value="code">Code</TabsTrigger>
           </TabsList>
           <Separator className="hidden h-4 sm:block" orientation="vertical" />
-          <Heading className="min-w-0 flex-1 basis-32 truncate font-medium text-sm">
+          <Heading className="min-w-0 flex-1 basis-32 truncate text-sm font-medium">
             <a
               className={cn(
                 "relative",
@@ -175,7 +177,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
                 "rounded-md border border-transparent",
                 "outline-hidden",
                 "hover:text-foreground",
-                "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+                "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:z-10 focus-visible:ring-2"
               )}
               href={`#${item.name}`}
             >
@@ -185,7 +187,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
           {description}
           <div className="flex min-w-0 items-center gap-2 sm:ms-auto">
             <Snippet
-              className="min-w-0 max-w-80 text-xs"
+              className="max-w-80 min-w-0 text-xs"
               copyText={installCopyCommand}
               items={installItems}
               onValueChange={(value) => {
@@ -218,21 +220,21 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
               >
                 <ToggleGroupItem
                   aria-label="Desktop preview"
-                  className="size-7 px-0 data-[state=on]:bg-secondary"
+                  className="data-[state=on]:bg-secondary size-7 px-0"
                   value="desktop"
                 >
                   <MonitorIcon aria-hidden className="size-4" />
                 </ToggleGroupItem>
                 <ToggleGroupItem
                   aria-label="Tablet preview"
-                  className="size-7 px-0 data-[state=on]:bg-secondary"
+                  className="data-[state=on]:bg-secondary size-7 px-0"
                   value="tablet"
                 >
                   <TabletIcon aria-hidden className="size-4" />
                 </ToggleGroupItem>
                 <ToggleGroupItem
                   aria-label="Mobile preview"
-                  className="size-7 px-0 data-[state=on]:bg-secondary"
+                  className="data-[state=on]:bg-secondary size-7 px-0"
                   value="mobile"
                 >
                   <SmartphoneIcon aria-hidden className="size-4" />
@@ -271,7 +273,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
           >
             <div
               className={cn(
-                "relative max-w-full overflow-hidden rounded-lg border bg-background shadow-sm/4",
+                "bg-background relative max-w-full overflow-hidden rounded-lg border shadow-sm/4",
                 "lg:resize-x"
               )}
               style={{
@@ -280,7 +282,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
               }}
             >
               {(!loaded || failed) && (
-                <div className="absolute inset-0 z-10 grid place-items-center bg-background">
+                <div className="bg-background absolute inset-0 z-10 grid place-items-center">
                   {failed ? (
                     <State className="max-w-sm flex-none gap-4 border-0 px-6 py-0 md:px-6 md:py-0">
                       <StateHeader>
@@ -318,7 +320,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
               {shouldLoad ? (
                 // biome-ignore lint/a11y/noNoninteractiveElementInteractions: load reports the iframe resource state
                 <iframe
-                  className="size-full bg-background"
+                  className="bg-background size-full"
                   key={frameKey}
                   loading="lazy"
                   onLoad={() => {

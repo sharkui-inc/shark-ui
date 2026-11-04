@@ -53,12 +53,12 @@ export const CompositionCodeViewer = (props: CompositionCodeViewerProps) => {
 
   return (
     <div
-      className="grid min-h-[32rem] overflow-hidden bg-background text-foreground lg:grid-cols-[13.75rem_minmax(0,1fr)]"
+      className="bg-background text-foreground grid min-h-[32rem] overflow-hidden lg:grid-cols-[13.75rem_minmax(0,1fr)]"
       data-slot="composition-code-viewer"
     >
-      <aside className="hidden min-h-0 border-border border-e lg:flex lg:flex-col">
+      <aside className="border-border hidden min-h-0 border-e lg:flex lg:flex-col">
         <div className="shrink-0 px-4 py-3">
-          <p className="font-medium text-sm">Files</p>
+          <p className="text-sm font-medium">Files</p>
         </div>
         <ScrollArea className="flex-1">
           <div className="px-2 pb-3">
@@ -73,7 +73,7 @@ export const CompositionCodeViewer = (props: CompositionCodeViewerProps) => {
       </aside>
 
       <div className="flex min-h-[32rem] min-w-0 flex-col">
-        <header className="flex h-10 shrink-0 items-center gap-2 border-border border-b px-3">
+        <header className="border-border flex h-10 shrink-0 items-center gap-2 border-b px-3">
           <Sheet
             onOpenChange={({ open }) => setSheetOpen(open)}
             open={sheetOpen}
@@ -104,7 +104,7 @@ export const CompositionCodeViewer = (props: CompositionCodeViewerProps) => {
           <span className="text-muted-foreground [&_svg]:size-3.5">
             {getIconForLanguageExtension(activeLanguage)}
           </span>
-          <span className="min-w-0 flex-1 truncate font-mono text-muted-foreground text-xs">
+          <span className="text-muted-foreground min-w-0 flex-1 truncate font-mono text-xs">
             {activeFile.displayPath}
           </span>
           <CopyButton className="size-7" value={activeFile.content} />

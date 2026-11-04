@@ -5,7 +5,7 @@ import { Separator } from "@/registry/react/components/separator";
 const Example = () => (
   <ScrollArea className="h-64 w-48 rounded-md border" scrollFade>
     <div className="p-4">
-      <h4 className="mb-4 font-medium text-sm leading-none">Tags</h4>
+      <h4 className="mb-4 text-sm leading-none font-medium">Tags</h4>
       {tags.map((tag) => (
         <React.Fragment key={tag}>
           <div className="text-sm">{tag}</div>

@@ -102,17 +102,17 @@ export const ThemeSelectorFont = (props: { slot: ThemeFontSlot }) => {
     >
       {collection.items.map((item) => (
         <ListboxItem
-          className="relative flex flex-col items-center justify-center gap-2 rounded-2xl border px-2 py-3 text-center hover:border-primary/64 hover:bg-transparent data-[state=checked]:border-primary data-highlighted:border-primary/64 data-[state=checked]:bg-transparent data-highlighted:bg-transparent data-[state=checked]:text-foreground"
+          className="hover:border-primary/64 data-[state=checked]:border-primary data-highlighted:border-primary/64 data-[state=checked]:text-foreground relative flex flex-col items-center justify-center gap-2 rounded-2xl border px-2 py-3 text-center hover:bg-transparent data-highlighted:bg-transparent data-[state=checked]:bg-transparent"
           item={item}
           key={item.value}
           showIndicator={false}
           style={{ fontFamily: item.family }}
         >
           <span className="flex w-full min-w-0 flex-col items-center gap-2">
-            <ListboxItemText className="flex-none font-medium text-xl">
+            <ListboxItemText className="flex-none text-xl font-medium">
               Ag
             </ListboxItemText>
-            <span className="w-full min-w-0 truncate text-center text-[0.625rem] text-muted-foreground group-data-[state=checked]/listbox-item:text-foreground">
+            <span className="text-muted-foreground group-data-[state=checked]/listbox-item:text-foreground w-full min-w-0 truncate text-center text-[0.625rem]">
               {item.label}
             </span>
           </span>

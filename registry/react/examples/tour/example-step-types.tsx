@@ -25,7 +25,7 @@ const Example = () => {
           <Button variant="outline">Start tour</Button>
         </TourTrigger>
 
-        <div className="overflow-hidden rounded-lg border bg-card shadow-xs/4">
+        <div className="bg-card overflow-hidden rounded-lg border shadow-xs/4">
           <img
             alt="Studio print"
             className="h-28 w-full object-cover"
@@ -36,12 +36,12 @@ const Example = () => {
           />
           <div className="flex items-center justify-between gap-3 p-3">
             <div className="flex min-w-0 flex-col">
-              <span className="truncate font-medium text-sm">Studio print</span>
-              <span className="truncate text-muted-foreground text-xs">
+              <span className="truncate text-sm font-medium">Studio print</span>
+              <span className="text-muted-foreground truncate text-xs">
                 Sage ground, teal wash
               </span>
             </div>
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground">
+            <span className="bg-background text-muted-foreground flex size-8 shrink-0 items-center justify-center rounded-md border">
               <Share2Icon aria-hidden className="size-4" />
             </span>
           </div>

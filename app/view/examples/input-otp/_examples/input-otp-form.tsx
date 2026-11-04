@@ -59,7 +59,7 @@ const InputOTPForm = () => (
         <div className="text-muted-foreground text-sm">
           Having trouble signing in?{" "}
           <a
-            className="underline underline-offset-4 transition-colors hover:text-primary"
+            className="hover:text-primary underline underline-offset-4 transition-colors"
             href="#"
           >
             Contact support

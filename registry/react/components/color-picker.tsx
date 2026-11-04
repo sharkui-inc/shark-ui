@@ -2,7 +2,7 @@
 
 import {
   ColorPicker as ArkColorPicker,
-  parseColor as parseColorArk,
+  parseColor,
   useColorPickerContext as useArkColorPickerContext,
 } from "@ark-ui/react/color-picker";
 import { ark } from "@ark-ui/react/factory";
@@ -14,7 +14,6 @@ import { Button, type ButtonProps } from "@/registry/react/components/button";
 import { fieldLabelVariants } from "@/registry/react/components/field";
 
 export const useColorPickerContext = useArkColorPickerContext;
-export const parseColor = parseColorArk;
 
 export const ColorPickerLabel = (
   props: React.ComponentProps<typeof ArkColorPicker.Label>
@@ -106,9 +105,10 @@ export const ColorPickerTransparencyGrid = (
   return (
     <ArkColorPicker.TransparencyGrid
       className={cn(
-        "size-full rounded-[max(0px,calc(var(--radius)*0.5-0.5px))]",
+        "size-full",
+        "rounded-[max(0px,calc(var(--radius)*0.5-0.5px))]",
         "bg-[linear-gradient(45deg,#e4e4e4_25%,transparent_25%),linear-gradient(-45deg,#e4e4e4_25%,transparent_25%),linear-gradient(45deg,transparent_75%,#e4e4e4_75%),linear-gradient(-45deg,transparent_75%,#e4e4e4_75%)]",
-        "bg-position-[0_0,0_4px,4px_-4px,-4px_0] bg-size-(--spacing(2))",
+        "bg-size-(--spacing(2)) bg-position-[0_0,0_4px,4px_-4px,-4px_0]",
         className
       )}
       {...rest}
@@ -136,9 +136,13 @@ export const ColorPickerContent = (
             "rounded-xl border shadow-lg/4",
             "outline-hidden",
             "origin-(--transform-origin)",
-            "duration-150 ease-out",
-            "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
-            "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
+            "duration-100 ease-out",
+            "data-[placement^=bottom]:slide-in-from-top-2",
+            "data-[placement^=top]:slide-in-from-bottom-2",
+            "data-[placement^=left]:slide-in-from-right-2",
+            "data-[placement^=right]:slide-in-from-left-2",
+            "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in",
+            "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out",
             "motion-reduce:animate-none",
             "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
@@ -158,7 +162,12 @@ export const ColorPickerView = (
 
   return (
     <ArkColorPicker.View
-      className={cn("relative flex size-full flex-1 flex-col gap-4", className)}
+      className={cn(
+        "relative",
+        "size-full flex-1",
+        "flex flex-col gap-4",
+        className
+      )}
       data-slot="color-picker-view"
       {...rest}
     />
@@ -192,7 +201,8 @@ export const ColorPickerSlider = (
         className={cn(
           "grow",
           "rounded-full",
-          "select-none overflow-hidden",
+          "overflow-hidden",
+          "select-none",
           "data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full",
           "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2"
         )}
@@ -200,12 +210,16 @@ export const ColorPickerSlider = (
       />
       <ArkColorPicker.ChannelSliderThumb
         className={cn(
-          "relative shrink-0",
+          "relative",
+          "shrink-0",
           "size-4.5",
           "-translate-1/2",
           "rounded-full border-[3px] border-white shadow-[0_0_0_1px_rgb(0_0_0/0.08),inset_0_0_0_1px_rgb(0_0_0/0.08)]",
-          "outline-hidden ring-1 ring-border/64",
-          "origin-left data-[orientation=vertical]:origin-bottom rtl:origin-right",
+          "ring-border/64 ring-1",
+          "outline-hidden",
+          "origin-left",
+          "data-[orientation=vertical]:origin-bottom",
+          "rtl:origin-right",
           "cursor-grab",
           dragging && "cursor-grabbing"
         )}
@@ -264,9 +278,10 @@ export const ColorPickerSwatchTrigger = (
         "flex items-center justify-center",
         "rounded-full border border-transparent",
         "transition-[border-color,box-shadow] duration-150 ease-out will-change-transform",
-        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "outline-hidden",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
-        "data-[state=checked]:shadow-sm/4 data-[state=checked]:ring-2 data-[state=checked]:ring-foreground/24",
+        "data-[state=checked]:ring-foreground/24 data-[state=checked]:shadow-sm/4 data-[state=checked]:ring-2",
         "motion-reduce:transition-none",
         className
       )}
@@ -331,7 +346,7 @@ export const ColorPickerValue = (
 
   return (
     <ArkColorPicker.ValueText
-      className={cn("font-medium text-sm", className)}
+      className={cn("text-sm font-medium", className)}
       data-slot="color-picker-value"
       {...rest}
     />
@@ -346,7 +361,8 @@ export const ColorPickerValueSwatch = (
   return (
     <ArkColorPicker.ValueSwatch
       className={cn(
-        "relative size-8 shrink-0",
+        "relative",
+        "size-8 shrink-0",
         "overflow-hidden",
         "rounded-full border",
         className
@@ -385,7 +401,7 @@ export const ColorPickerArea = (props: ColorPickerAreaProps) => {
       {...rest}
     >
       <ArkColorPicker.AreaBackground
-        className="size-full rounded-[inherit]"
+        className={cn("size-full", "rounded-[inherit]")}
         data-slot="color-picker-area-background"
       />
 
@@ -405,7 +421,8 @@ export const ColorPickerAreaThumb = (
       className={cn(
         "size-4.5",
         "rounded-full border-[3px] border-white shadow-[0_0_0_1px_rgb(0_0_0/0.08),inset_0_0_0_1px_rgb(0_0_0/0.08)]",
-        "outline-hidden ring-border/64",
+        "ring-border/64",
+        "outline-hidden",
         "cursor-grab",
         dragging && "cursor-grabbing",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
@@ -443,7 +460,8 @@ export const ColorPickerSwatchPreview = (
         "size-8",
         "shrink-0",
         "rounded-full border",
-        "pointer-events-none overflow-hidden",
+        "overflow-hidden",
+        "pointer-events-none",
         "group-data-[size=lg]/input-group:size-5",
         "group-data-[size=md]/input-group:size-4",
         "group-data-[size=sm]/input-group:size-3.5",
@@ -454,7 +472,7 @@ export const ColorPickerSwatchPreview = (
       {...rest}
     >
       <ColorPickerTransparencyGrid />
-      <ArkColorPicker.ValueSwatch className="z-1 size-full" />
+      <ArkColorPicker.ValueSwatch className={cn("z-1", "size-full")} />
     </ark.div>
   );
 };

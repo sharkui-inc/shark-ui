@@ -61,7 +61,7 @@ const Example = () => {
         </CommandContent>
       </Command>
       <p className="text-muted-foreground text-sm">
-        Selected: {selected?.label ?? "(none)"}
+        {selected?.label ?? "(none)"}
       </p>
     </div>
   );

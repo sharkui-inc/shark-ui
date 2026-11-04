@@ -10,16 +10,8 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/registry/react/components/separator";
 
 export const useTimerContext = useArkTimerContext;
-export const remainingMsUntilDate = (date: Date): number => {
-  const end = new Date(date).getTime();
 
-  return Math.max(0, end - Date.now());
-};
-
-export interface TimerProps
-  extends React.ComponentProps<typeof ArkTimer.Root> {}
-
-export const Timer = (props: TimerProps) => {
+export const Timer = (props: React.ComponentProps<typeof ArkTimer.Root>) => {
   const { className, ...rest } = props;
 
   return (
@@ -90,7 +82,7 @@ export const TimerItem = (
     <ArkTimer.Item
       className={cn(
         "w-fit min-w-[2.5ch]",
-        "text-center font-semibold text-3xl text-foreground tabular-nums tracking-wider",
+        "text-foreground text-center text-3xl font-semibold tracking-wider tabular-nums",
         className
       )}
       data-slot="timer-item"
@@ -121,7 +113,7 @@ export const TimerSeparator = (
       asChild
       className={cn(
         "bg-transparent",
-        "font-semibold text-2xl text-muted-foreground",
+        "text-muted-foreground text-2xl font-semibold",
         "data-[orientation=horizontal]:h-auto data-[orientation=horizontal]:w-auto",
         className
       )}
@@ -207,4 +199,10 @@ export const TimerPlay = (props: TimerActionProps) => {
   }
 
   return <TimerStart {...props} />;
+};
+
+export const remainingMsUntilDate = (date: Date): number => {
+  const end = new Date(date).getTime();
+
+  return Math.max(0, end - Date.now());
 };

@@ -13,10 +13,10 @@ const ContextMenuExamplePage = () => (
   <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
     <div className="grid min-w-0 grid-cols-1 gap-16 sm:grid-cols-2 [&>section]:min-w-0">
       <section aria-labelledby="basic-heading" className="flex flex-col gap-5">
-        <h1 className="font-medium text-muted-foreground" id="basic-heading">
+        <h1 className="text-muted-foreground font-medium" id="basic-heading">
           Basic
         </h1>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ContextMenuBasic />
         </div>
       </section>
@@ -26,12 +26,12 @@ const ContextMenuExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="checkboxes-heading"
         >
           Checkboxes
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ContextMenuCheckboxes />
         </div>
       </section>
@@ -41,48 +41,48 @@ const ContextMenuExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="destructive-heading"
         >
           Destructive
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ContextMenuDestructive />
         </div>
       </section>
 
       <section aria-labelledby="groups-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="groups-heading">
+        <h2 className="text-muted-foreground font-medium" id="groups-heading">
           Groups
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ContextMenuGroups />
         </div>
       </section>
 
       <section aria-labelledby="icons-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="icons-heading">
+        <h2 className="text-muted-foreground font-medium" id="icons-heading">
           Icons
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ContextMenuIcons />
         </div>
       </section>
 
       <section aria-labelledby="radio-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="radio-heading">
+        <h2 className="text-muted-foreground font-medium" id="radio-heading">
           Radio
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ContextMenuRadio />
         </div>
       </section>
 
       <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="rtl-heading">
+        <h2 className="text-muted-foreground font-medium" id="rtl-heading">
           RTL
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ContextMenuRtl />
         </div>
       </section>
@@ -92,21 +92,21 @@ const ContextMenuExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="shortcuts-heading"
         >
           Shortcuts
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ContextMenuShortcuts />
         </div>
       </section>
 
       <section aria-labelledby="sides-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="sides-heading">
+        <h2 className="text-muted-foreground font-medium" id="sides-heading">
           Sides
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ContextMenuSides />
         </div>
       </section>
@@ -115,10 +115,10 @@ const ContextMenuExamplePage = () => (
         aria-labelledby="submenu-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="submenu-heading">
+        <h2 className="text-muted-foreground font-medium" id="submenu-heading">
           Submenu
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ContextMenuSubmenu />
         </div>
       </section>

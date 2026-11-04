@@ -52,7 +52,7 @@ const Example = () => {
         </AccordionItem>
       </Accordion>
 
-      <div className="text-center text-muted-foreground text-sm">{value}</div>
+      <div className="text-muted-foreground text-center text-sm">{value}</div>
     </div>
   );
 };

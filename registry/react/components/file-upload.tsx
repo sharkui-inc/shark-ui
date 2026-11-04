@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 
 export const useFileUploadContext = useArkFileUploadContext;
+
 export const FileUpload = (
   props: React.ComponentProps<typeof ArkFileUpload.Root>
 ) => {
@@ -51,13 +52,14 @@ export const FileUploadDropzone = (
         "p-(--space)",
         "flex flex-col items-center justify-center gap-2",
         "text-center",
-        "rounded-2xl border-2 border-input border-dashed",
+        "border-input rounded-2xl border-2 border-dashed",
         "cursor-pointer outline-hidden",
         "data-disabled:cursor-default",
         "data-cover:absolute data-cover:inset-0 data-cover:flex data-cover:items-center data-cover:justify-center",
-        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
         "data-dragging:border-primary/64 data-dragging:bg-primary/8",
-        "data-invalid:border-destructive dark:data-invalid:border-destructive-foreground",
+        "data-invalid:border-destructive",
+        "dark:data-invalid:border-destructive-foreground",
         className
       )}
       data-slot="file-upload-dropzone"
@@ -79,7 +81,7 @@ export const FileUploadDropzoneIcon = (
         "text-muted-foreground",
         "rounded-full border",
         "group-data-dragging/file-upload:border-primary/24 group-data-dragging/file-upload:bg-primary/8 group-data-dragging/file-upload:text-primary",
-        "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       data-slot="file-upload-dropzone-icon"
@@ -97,7 +99,7 @@ export const FileUploadTitle = (
 
   return (
     <ark.div
-      className={cn("font-medium text-foreground text-sm", className)}
+      className={cn("text-foreground text-sm font-medium", className)}
       data-slot="file-upload-title"
       {...rest}
     />
@@ -111,7 +113,7 @@ export const FileUploadDescription = (
 
   return (
     <ark.div
-      className={cn("font-medium text-muted-foreground text-sm", className)}
+      className={cn("text-muted-foreground text-sm font-medium", className)}
       data-slot="file-upload-description"
       {...rest}
     />
@@ -158,7 +160,8 @@ export const FileUploadList = (props: FileUploadListProps) => {
               return (
                 <FileUploadItem
                   className={cn(
-                    "flex-1 items-center justify-start gap-2",
+                    "flex-1",
+                    "items-center justify-start gap-2",
                     "bg-card",
                     "p-2",
                     "rounded-xl border shadow-xs/4",
@@ -181,14 +184,20 @@ export const FileUploadList = (props: FileUploadListProps) => {
                     )}
                   </FileUploadItemPreview>
 
-                  <div className="flex min-w-0 flex-1 flex-col gap-0.5 overflow-hidden">
+                  <div
+                    className={cn(
+                      "min-w-0 flex-1",
+                      "flex flex-col gap-0.5",
+                      "overflow-hidden"
+                    )}
+                  >
                     <FileUploadItemName />
                     <FileUploadItemSize />
                   </div>
 
                   <FileUploadItemDeleteTrigger
                     asChild
-                    className="me-auto rtl:ms-auto"
+                    className={cn("me-auto", "rtl:ms-auto")}
                   >
                     <Button
                       className={cn(
@@ -219,7 +228,7 @@ export const FileUploadItem = (
 
   return (
     <ArkFileUpload.Item
-      className={cn("relative inline-flex items-center", className)}
+      className={cn("relative", "inline-flex items-center", className)}
       data-slot="file-upload-item"
       {...rest}
     />
@@ -234,8 +243,9 @@ export const FileUploadItemPreview = (
   return (
     <ArkFileUpload.ItemPreview
       className={cn(
-        "flex shrink-0 items-center justify-center",
-        "font-semibold text-[0.5rem] text-primary",
+        "shrink-0",
+        "flex items-center justify-center",
+        "text-primary text-[0.5rem] font-semibold",
         "bg-primary/8",
         "select-none",
         "rounded-full",
@@ -274,7 +284,7 @@ export const FileUploadItemName = (
   return (
     <ArkFileUpload.ItemName
       className={cn(
-        "truncate font-medium text-xs",
+        "truncate text-xs font-medium",
         "min-w-0",
         "overflow-hidden",
         className

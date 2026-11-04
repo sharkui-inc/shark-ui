@@ -56,6 +56,7 @@ const Example = () => {
 
 const STREAMED_CODE = `export const Greeting = (props) => {
   const { name } = props;
+
   return (
     <section>
       <h1>Welcome back</h1>

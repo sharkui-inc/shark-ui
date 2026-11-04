@@ -1,6 +1,8 @@
 ---
 title: Clipboard
 description: Copy text to the clipboard.
+aliases:
+  - Copy button
 seo:
   description: Copy a value to the clipboard with copied feedback.
 links:
@@ -107,6 +109,10 @@ Use the `timeout` prop on `Clipboard` to customize how long the copied state is 
 
 <ComponentPreview componentName="clipboard" fileName="example-custom-timeout" />
 
+### Hook Only
+
+<ComponentPreview componentName="clipboard" fileName="example-hook-only" />
+
 ## RTL
 
 To enable RTL support, see the [RTL configuration guide](/docs/rtl).
@@ -169,6 +175,27 @@ Render-prop access to the surrounding component API.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `children` | `(api: unknown) => React.ReactNode` | `required` |
+
+### useClipboard
+
+Copy a value without the clipboard parts.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `-` |
+| `defaultValue` | `string` | `""` |
+| `timeout` | `number` | `3000` |
+| `onValueChange` | `(details: { value: string }) => void` | `-` |
+| `onStatusChange` | `(details: { copied: boolean }) => void` | `-` |
+
+### Return value
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `copied` | `boolean` | `-` |
+| `value` | `string` | `-` |
+| `setValue` | `(value: string) => void` | `-` |
+| `copy` | `() => void` | `-` |
 
 ---
 

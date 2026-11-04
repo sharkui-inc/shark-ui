@@ -94,7 +94,7 @@ const formSchema = v.object({
     v.minLength(3, "Username must be at least 3 characters."),
     v.maxLength(10, "Username must be at most 10 characters."),
     v.regex(
-      /^[a-zA-Z0-9_]+$/,
+      /^[a-zA-Z0-9_]+$/u,
       "Username can only contain letters, numbers, and underscores."
     )
   ),

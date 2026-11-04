@@ -22,6 +22,7 @@ import {
 import { Separator } from "@/registry/react/components/separator";
 
 export const useListboxContext = useArkListboxContext;
+
 export const Listbox: ArkListbox.RootComponent = (props) => {
   const { className, ...rest } = props;
 
@@ -74,10 +75,12 @@ export const ListboxContent = (
   return (
     <ArkListbox.Content
       className={cn(
-        "flex min-h-0 w-full min-w-0 flex-col *:shrink-0",
+        "min-h-0 w-full min-w-0",
+        "flex flex-col",
+        "*:shrink-0",
         "p-1.5",
-        "overflow-y-auto overflow-x-hidden overscroll-y-contain",
-        "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/24",
+        "overflow-x-hidden overflow-y-auto overscroll-y-contain",
+        "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
         "outline-hidden",
         "data-[orientation=horizontal]:max-h-none data-[orientation=horizontal]:flex-row data-[orientation=horizontal]:overflow-x-auto data-[orientation=horizontal]:overflow-y-hidden data-[orientation=horizontal]:overscroll-x-contain",
         className
@@ -94,7 +97,8 @@ const listboxItemVariants = tv({
   base: [
     "group/listbox-item",
     menuItemControlVariants(),
-    "touch-manipulation select-none font-normal text-base md:text-sm",
+    "text-base font-normal md:text-sm",
+    "touch-manipulation select-none",
     "cursor-pointer",
     "outline-hidden",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
@@ -111,9 +115,12 @@ const listboxItemVariants = tv({
         "hover:bg-accent hover:text-accent-foreground",
       ],
       destructive: [
-        "text-destructive dark:text-destructive-foreground",
-        "hover:bg-destructive/8 dark:hover:bg-destructive-foreground/8",
-        "data-highlighted:bg-destructive/8 dark:data-highlighted:bg-destructive-foreground/8",
+        "text-destructive",
+        "dark:text-destructive-foreground",
+        "hover:bg-destructive/8",
+        "dark:hover:bg-destructive-foreground/8",
+        "data-highlighted:bg-destructive/8",
+        "dark:data-highlighted:bg-destructive-foreground/8",
         "**:[svg]:text-destructive dark:**:[svg]:text-destructive-foreground",
       ],
     },
@@ -155,7 +162,9 @@ export const ListboxItem = (props: ListboxItemProps) => {
       highlightOnHover={highlightOnHover}
       {...rest}
     >
-      <span className="flex min-w-0 flex-1 items-start gap-2">{children}</span>
+      <span className={cn("min-w-0 flex-1", "flex items-start gap-2")}>
+        {children}
+      </span>
 
       {showIndicator ? <ListboxItemIndicator /> : null}
     </ArkListbox.Item>
@@ -232,9 +241,15 @@ export const ListboxValueText = (
 ) => {
   const { className, ...rest } = props;
 
+  const listbox = useListboxContext();
+
   return (
     <ArkListbox.ValueText
-      className={cn("font-normal", className)}
+      className={cn(
+        "font-normal",
+        !listbox.hasSelectedItems && "text-muted-foreground",
+        className
+      )}
       data-slot="listbox-value-text"
       {...rest}
     />

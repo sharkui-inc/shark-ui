@@ -24,7 +24,7 @@ const CarouselSize = () => (
         <CarouselItem className="basis-1/3" index={index} key={slide}>
           <Card>
             <CardContent className="flex h-40 items-center justify-center">
-              <span className="font-semibold text-2xl">{slide}</span>
+              <span className="text-2xl font-semibold">{slide}</span>
             </CardContent>
           </Card>
         </CarouselItem>

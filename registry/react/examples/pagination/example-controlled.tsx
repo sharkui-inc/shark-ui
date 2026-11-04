@@ -25,7 +25,7 @@ const Example = () => {
         <PaginationNext />
       </Pagination>
 
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         Page {page} of 5
       </p>
     </div>

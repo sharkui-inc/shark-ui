@@ -50,8 +50,9 @@ type QuestionnaireErrors = Partial<Record<QuestionnaireItemName, string>>;
 
 const ValidationProgress = (props: { index: number; total: number }) => {
   const { index, total } = props;
+
   return (
-    <span className="min-w-0 text-muted-foreground tabular-nums">
+    <span className="text-muted-foreground min-w-0 tabular-nums">
       {index} / {total}
     </span>
   );
@@ -78,7 +79,7 @@ const QuestionnaireValidation = () => {
   const handleItemChange = (details: QuestionnaireItemChangeDetails) =>
     setItem(details.item as QuestionnaireItemName);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const result = questionnaireSchema.safeParse(

@@ -14,7 +14,7 @@ const Example = () => {
       {chunks.map((chunk) =>
         chunk.match ? (
           <mark
-            className="relative bg-transparent px-0 font-semibold text-primary"
+            className="text-primary relative bg-transparent px-0 font-semibold"
             key={chunk.text}
           >
             {chunk.text}

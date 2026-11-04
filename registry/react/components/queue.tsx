@@ -10,7 +10,7 @@ export const Queue = (props: React.ComponentProps<typeof ark.div>) => {
 
   return (
     <ark.div
-      className={cn("flex w-full min-w-0 flex-col gap-2", className)}
+      className={cn("w-full min-w-0", "flex flex-col gap-2", className)}
       data-slot="queue"
       {...rest}
     />
@@ -23,7 +23,11 @@ export const QueueSection = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground shadow-xs/4",
+        "w-full min-w-0",
+        "bg-card",
+        "text-card-foreground",
+        "rounded-xl border shadow-xs/4",
+        "overflow-hidden",
         className
       )}
       data-slot="queue-section"
@@ -45,8 +49,10 @@ export const QueueSectionHeader = (props: QueueSectionHeaderProps) => {
   return (
     <ark.div
       className={cn(
-        "flex min-h-9 min-w-0 items-center gap-2 px-3 py-1",
-        "[&>svg]:order-first [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
+        "min-h-9 min-w-0",
+        "flex items-center gap-2",
+        "px-3 py-1",
+        "[&>svg]:text-muted-foreground [&>svg]:order-first [&>svg]:shrink-0",
         "[&>svg:not([class*='size-'])]:size-3.5",
         className
       )}
@@ -71,7 +77,7 @@ export const QueueTitle = (props: React.ComponentProps<typeof ark.div>) => {
       className={cn(
         "min-w-0",
         "flex-1",
-        "truncate text-muted-foreground text-sm",
+        "text-muted-foreground truncate text-sm",
         className
       )}
       data-slot="queue-title"
@@ -87,7 +93,12 @@ export const QueueSectionAction = (
 
   return (
     <ark.div
-      className={cn("flex shrink-0 items-center gap-1", "ms-auto", className)}
+      className={cn(
+        "shrink-0",
+        "flex items-center gap-1",
+        "ms-auto",
+        className
+      )}
       data-slot="queue-section-action"
       {...rest}
     />
@@ -101,7 +112,7 @@ export const QueueSectionContent = (
 
   return (
     <ark.div
-      className={cn("border-t p-1", className)}
+      className={cn("p-1", "border-t", className)}
       data-slot="queue-section-content"
       {...rest}
     />
@@ -127,13 +138,16 @@ export const QueueItem = (props: React.ComponentProps<typeof ark.li>) => {
     <ark.li
       className={cn(
         "group/queue-item",
-        "flex min-h-8 min-w-0 items-center gap-2",
-        "rounded-lg px-2 py-1",
+        "min-h-8 min-w-0",
+        "flex items-center gap-2",
+        "px-2 py-1",
+        "rounded-lg",
         "text-sm",
         "transition-colors duration-150",
         "hover:bg-muted",
-        "has-focus-visible:border-ring/64 has-focus-visible:bg-muted has-focus-visible:ring-2 has-focus-visible:ring-ring/24",
-        "[&>svg:not([class*='size-'])]:size-3.5 [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
+        "has-focus-visible:bg-muted",
+        "has-focus-visible:border-ring/64 has-focus-visible:ring-ring/24 has-focus-visible:ring-2",
+        "[&>svg]:text-muted-foreground [&>svg]:shrink-0 [&>svg:not([class*='size-'])]:size-3.5",
         "motion-reduce:transition-none",
         className
       )}
@@ -156,7 +170,8 @@ export const QueueItemContent = (props: QueueItemContentProps) => {
   return (
     <span
       className={cn(
-        "min-w-0 flex-1 truncate",
+        "min-w-0 flex-1",
+        "truncate",
         completed && "text-muted-foreground line-through",
         className
       )}
@@ -174,7 +189,8 @@ export const QueueItemActions = (
   return (
     <ark.div
       className={cn(
-        "flex shrink-0 items-center gap-0.5",
+        "shrink-0",
+        "flex items-center gap-0.5",
         "opacity-0",
         "group-hover/queue-item:opacity-100",
         "group-focus-within/queue-item:opacity-100",
@@ -200,7 +216,8 @@ export const QueueItemAction = (props: React.ComponentProps<typeof Button>) => {
   return (
     <Button
       className={cn(
-        "text-muted-foreground hover:text-foreground",
+        "text-muted-foreground",
+        "hover:text-foreground",
         "[&_svg]:text-muted-foreground",
         className
       )}

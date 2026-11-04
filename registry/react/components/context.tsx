@@ -126,7 +126,7 @@ export const ContextTrigger = (props: ContextButtonProps) => {
   return (
     <PopoverTrigger asChild data-slot="context-trigger" {...rest}>
       <Button
-        className="font-normal text-muted-foreground"
+        className="text-muted-foreground font-normal"
         size={size}
         variant={variant}
       >
@@ -143,7 +143,13 @@ export const ContextContent = (
 
   return (
     <PopoverContent
-      className={cn("w-72 gap-0 p-0 [--space:--spacing(2)]", className)}
+      className={cn(
+        "[--space:--spacing(2)]",
+        "w-72",
+        "gap-0",
+        "p-0",
+        className
+      )}
       data-slot="context-content"
       {...rest}
     />
@@ -163,7 +169,7 @@ export const ContextHeader = (props: ContextHeaderProps) => {
 
   return (
     <PopoverHeader
-      className={cn("flex flex-col gap-2 border-b", className)}
+      className={cn("flex flex-col gap-2", "border-b", className)}
       data-slot="context-header"
       {...rest}
     >
@@ -195,7 +201,7 @@ export const ContextTitle = (props: ContextTitleProps) => {
       data-slot="context-title"
     >
       <PopoverTitle
-        className={cn("font-normal text-muted-foreground text-xs", className)}
+        className={cn("text-muted-foreground text-xs font-normal", className)}
         {...rest}
       />
 
@@ -203,7 +209,7 @@ export const ContextTitle = (props: ContextTitleProps) => {
         <PopoverClose asChild>
           <Button
             aria-label="Close"
-            className="text-muted-foreground hover:text-foreground"
+            className={cn("text-muted-foreground", "hover:text-foreground")}
             pill
             size="icon-xs"
             variant="ghost"
@@ -227,8 +233,8 @@ export const ContextMeter = (props: React.ComponentProps<typeof ark.div>) => {
       data-slot="context-meter"
       {...rest}
     >
-      <div className="flex items-center justify-between gap-2 text-xs">
-        <span className="font-medium text-muted-foreground">
+      <div className={cn("flex items-center justify-between gap-2", "text-xs")}>
+        <span className="text-muted-foreground font-medium">
           <FormatNumber
             maximumFractionDigits={1}
             style="percent"
@@ -288,7 +294,7 @@ export const ContextFooter = (props: ContextFooterProps) => {
       {children ?? (
         <>
           <span className="text-foreground">{title}</span>
-          <span className="font-medium text-muted-foreground tabular-nums">
+          <span className="text-muted-foreground font-medium tabular-nums">
             {costLabel ?? "-"}
           </span>
         </>
@@ -315,7 +321,8 @@ export const ContextUsageRow = (props: ContextUsageRowProps) => {
   return (
     <ark.div
       className={cn(
-        "flex items-center justify-between gap-2 text-xs",
+        "flex items-center justify-between gap-2",
+        "text-xs",
         className
       )}
       data-slot="context-usage-row"

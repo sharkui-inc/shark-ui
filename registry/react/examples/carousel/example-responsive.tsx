@@ -13,7 +13,9 @@ import { useMediaQuery } from "@/registry/react/hooks/use-media-query";
 
 const Example = () => {
   const isMedium = useMediaQuery("(min-width: 768px)");
+
   const isLarge = useMediaQuery("(min-width: 1024px)");
+
   let slidesPerPage = 2;
 
   if (isMedium) {
@@ -25,31 +27,33 @@ const Example = () => {
   }
 
   return (
-    <Carousel
-      aria-label="Responsive carousel"
-      className="w-full max-w-3xl"
-      key={slidesPerPage}
-      slideCount={slides.length}
-      slidesPerPage={slidesPerPage}
-      spacing="16px"
-    >
-      <CarouselControl>
-        <CarouselPrevious>Previous</CarouselPrevious>
-        <CarouselNext>Next</CarouselNext>
-      </CarouselControl>
+    <div className="w-full px-12">
+      <Carousel
+        aria-label="Responsive carousel"
+        className="mx-auto w-full max-w-lg"
+        key={slidesPerPage}
+        slideCount={slides.length}
+        slidesPerPage={slidesPerPage}
+        spacing="16px"
+      >
+        <CarouselControl>
+          <CarouselPrevious>Previous</CarouselPrevious>
+          <CarouselNext>Next</CarouselNext>
+        </CarouselControl>
 
-      <CarouselContent>
-        {slides.map((slide, index) => (
-          <CarouselItem index={index} key={slide.id}>
-            <Card>
-              <CardContent className="flex aspect-square items-center justify-center">
-                <span className="font-semibold text-2xl">{index + 1}</span>
-              </CardContent>
-            </Card>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-    </Carousel>
+        <CarouselContent>
+          {slides.map((slide, index) => (
+            <CarouselItem index={index} key={slide.id}>
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center">
+                  <span className="text-2xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+    </div>
   );
 };
 

@@ -36,7 +36,7 @@ const TemplatesPage = async () => {
             <div className="flex min-h-[calc(100svh-var(--header-height)-5rem)] flex-col items-center justify-center border-x px-4 py-16 text-center sm:min-h-[42rem] sm:px-8 sm:py-20 lg:min-h-[46rem]">
               <h1
                 aria-label="Start with a complete product, not a blank page."
-                className="max-w-5xl text-balance font-heading font-semibold text-5xl leading-[0.98] tracking-[-0.04em] sm:text-6xl lg:text-7xl xl:text-8xl"
+                className="font-heading max-w-5xl text-5xl leading-[0.98] font-semibold tracking-[-0.04em] text-balance sm:text-6xl lg:text-7xl xl:text-8xl"
               >
                 Start with a complete product,
                 <span className="text-muted-foreground">
@@ -45,7 +45,7 @@ const TemplatesPage = async () => {
                 </span>
               </h1>
 
-              <p className="mt-7 max-w-2xl text-balance text-base text-muted-foreground leading-relaxed sm:text-xl">
+              <p className="text-muted-foreground mt-7 max-w-2xl text-base leading-relaxed text-balance sm:text-xl">
                 Shark UI starters with live previews and copy-ready files.
               </p>
 
@@ -58,9 +58,9 @@ const TemplatesPage = async () => {
                 </Button>
               </div>
 
-              <Announcement className="mt-6 bg-background p-0 shadow-sm/4">
+              <Announcement className="bg-background mt-6 p-0 shadow-sm/4">
                 <Link
-                  className="inline-flex min-w-0 max-w-full items-center gap-2 rounded-2xl border border-transparent py-0.5 ps-0.5 pe-3 outline-hidden transition-colors hover:bg-input/8 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24 motion-reduce:transition-none"
+                  className="hover:bg-input/8 focus-visible:border-ring/64 focus-visible:ring-ring/24 inline-flex max-w-full min-w-0 items-center gap-2 rounded-2xl border border-transparent py-0.5 ps-0.5 pe-3 outline-hidden transition-colors focus-visible:ring-2 motion-reduce:transition-none"
                   href="#ai-chat-workspace-01"
                 >
                   <Badge pill size="sm" variant="secondary">

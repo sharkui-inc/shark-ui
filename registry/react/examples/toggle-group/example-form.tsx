@@ -17,9 +17,9 @@ import {
 } from "@/registry/react/components/toggle-group";
 
 const Example = () => {
-  const [value, setValue] = React.useState(initialValue);
+  const [value, setValue] = React.useState(["bold"]);
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     toast.info({
@@ -33,7 +33,7 @@ const Example = () => {
       <form onSubmit={onSubmit}>
         <CardHeader>
           <h3
-            className="font-heading font-semibold text-card-foreground text-xl"
+            className="font-heading text-card-foreground text-xl font-semibold"
             id="formatting-label"
           >
             Text formatting
@@ -98,7 +98,5 @@ const Example = () => {
     </Card>
   );
 };
-
-const initialValue = ["bold"];
 
 export default Example;

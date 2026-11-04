@@ -11,7 +11,7 @@ const Example = () => (
   <InputGroup className="max-w-64">
     <InputGroupInput aria-label="Search" placeholder="Search..." />
     <InputGroupAddon align="inline-end">
-      <Kbd>/</Kbd>
+      <Kbd variant="outline">/</Kbd>
     </InputGroupAddon>
   </InputGroup>
 );

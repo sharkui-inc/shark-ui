@@ -15,6 +15,7 @@ import {
 
 const Example = () => {
   const contentRef = React.useRef<HTMLElement>(null);
+
   return (
     <Toc
       autoScroll={false}
@@ -74,7 +75,7 @@ const Article = () => (
   <>
     {items.map((item) => (
       <section className="flex flex-col gap-3 pb-8" key={item.value}>
-        <h2 className="font-semibold text-lg" id={item.value}>
+        <h2 className="text-lg font-semibold" id={item.value}>
           {item.label}
         </h2>
         <SkeletonText

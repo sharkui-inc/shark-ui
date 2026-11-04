@@ -38,7 +38,7 @@ const Example = () => {
         </TreeView>
       </div>
 
-      <p className="whitespace-pre-wrap text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-sm whitespace-pre-wrap">
         {JSON.stringify(checkedNodes, null, 2)}
       </p>
     </div>

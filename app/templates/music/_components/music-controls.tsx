@@ -23,7 +23,7 @@ export const MusicControls = () => {
   } = useMusicPlayer();
 
   return (
-    <footer className="shrink-0 border-t bg-background/96 px-4 py-3 backdrop-blur-sm">
+    <footer className="bg-background/96 shrink-0 border-t px-4 py-3 backdrop-blur-sm">
       <div className="grid items-center gap-3 lg:grid-cols-[minmax(12rem,1fr)_minmax(20rem,1.5fr)_minmax(12rem,1fr)]">
         <MusicNowPlaying
           isFavorite={isFavorite}

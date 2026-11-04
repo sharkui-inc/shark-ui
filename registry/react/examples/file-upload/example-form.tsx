@@ -1,5 +1,6 @@
 "use client";
 
+import { CloudUploadIcon } from "lucide-react";
 import type React from "react";
 
 import { Button } from "@/registry/react/components/button";
@@ -11,12 +12,9 @@ import {
 import {
   FileUpload,
   FileUploadClearTrigger,
-  FileUploadDescription,
   FileUploadDropzone,
-  FileUploadDropzoneIcon,
   FileUploadList,
   FileUploadTitle,
-  FileUploadTrigger,
 } from "@/registry/react/components/file-upload";
 import { toast } from "@/registry/react/components/toast";
 
@@ -36,21 +34,17 @@ const Example = () => {
   };
 
   return (
-    <Card asChild className="w-full max-w-md">
+    <Card asChild className="w-full max-w-md pb-0">
       <form onSubmit={onSubmit}>
-        <FileUpload maxFiles={3} name="attachments">
+        <FileUpload maxFiles={2} name="attachments">
           <CardContent>
             <FileUploadDropzone>
-              <FileUploadDropzoneIcon />
+              <CloudUploadIcon
+                aria-hidden="true"
+                className="text-muted-foreground group-data-dragging/file-upload:text-primary size-8"
+                strokeWidth={1.5}
+              />
               <FileUploadTitle>Drop files here</FileUploadTitle>
-              <FileUploadDescription>
-                or choose files from your device
-              </FileUploadDescription>
-              <FileUploadTrigger asChild>
-                <Button type="button" variant="outline">
-                  Browse files
-                </Button>
-              </FileUploadTrigger>
             </FileUploadDropzone>
             <FileUploadList />
           </CardContent>

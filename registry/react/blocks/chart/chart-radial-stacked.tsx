@@ -64,7 +64,7 @@ const ChartRadialStacked = () => {
                     return (
                       <text textAnchor="middle" x={viewBox.cx} y={viewBox.cy}>
                         <tspan
-                          className="fill-foreground font-bold text-2xl"
+                          className="fill-foreground text-2xl font-bold"
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) - 16}
                         >
@@ -84,14 +84,14 @@ const ChartRadialStacked = () => {
               />
             </PolarRadiusAxis>
             <RadialBar
-              className="stroke-2 stroke-transparent"
+              className="stroke-transparent stroke-2"
               cornerRadius={5}
               dataKey="desktop"
               fill="var(--color-desktop)"
               stackId="a"
             />
             <RadialBar
-              className="stroke-2 stroke-transparent"
+              className="stroke-transparent stroke-2"
               cornerRadius={5}
               dataKey="mobile"
               fill="var(--color-mobile)"
@@ -101,7 +101,7 @@ const ChartRadialStacked = () => {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
+        <div className="flex items-center gap-2 leading-none font-medium">
           Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
         </div>
         <div className="text-muted-foreground leading-none">

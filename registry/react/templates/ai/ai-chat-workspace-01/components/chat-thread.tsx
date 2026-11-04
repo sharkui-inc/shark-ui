@@ -146,7 +146,7 @@ const EmptyConversation = (props: {
     <State className="min-h-full px-6 py-16 md:px-6 md:py-16">
       <StateHeader>
         <StateMedia>
-          <BotIcon aria-hidden className="size-8 text-muted-foreground" />
+          <BotIcon aria-hidden className="text-muted-foreground size-8" />
         </StateMedia>
         <StateTitle asChild>
           <h2>Hello {userName}</h2>
@@ -175,6 +175,7 @@ const EmptyConversation = (props: {
 
 const MessageSources = (props: { sources: ChatMessageSource[] }) => {
   const { sources } = props;
+
   return (
     <Sources defaultOpen>
       <SourcesTrigger count={sources.length} />
@@ -189,6 +190,7 @@ const MessageSources = (props: { sources: ChatMessageSource[] }) => {
 
 const MessageReasoning = (props: { content: string; duration: number }) => {
   const { content, duration } = props;
+
   return (
     <Reasoning duration={duration}>
       <ReasoningTrigger />
@@ -203,6 +205,7 @@ const MessageTool = (props: {
   pathLabel?: string;
 }) => {
   const { file, name } = props;
+
   return (
     <ToolResult status="success">
       <ToolResultTrigger>
@@ -218,6 +221,7 @@ const MessageTool = (props: {
 
 const MessageConfirmation = (props: { title: string }) => {
   const { title } = props;
+
   return (
     <ApprovalCard onApprove={noop} onReject={noop}>
       <ApprovalCardHeader>
@@ -235,6 +239,7 @@ const MessageApprovalPlan = (
   props: NonNullable<ChatMessage["approvalPlan"]>
 ) => {
   const { steps, title } = props;
+
   return (
     <ApprovalCard onApprove={noop} onReject={noop}>
       <ApprovalCardHeader>
@@ -242,17 +247,17 @@ const MessageApprovalPlan = (
         <ApprovalCardTitle>{title}</ApprovalCardTitle>
       </ApprovalCardHeader>
       <ApprovalCardContent>
-        <ol className="flex flex-col gap-1 rounded-lg border bg-muted/32 p-2">
+        <ol className="bg-muted/32 flex flex-col gap-1 rounded-lg border p-2">
           {steps.map((step) => (
             <li
               className="flex items-start gap-2 px-2 py-1.5 text-xs"
               key={step.id}
             >
-              <span className="mt-1 size-2 shrink-0 rounded-full border border-muted-foreground/48" />
+              <span className="border-muted-foreground/48 mt-1 size-2 shrink-0 rounded-full border" />
               <span className="min-w-0">
                 <span className="font-medium">{step.title}</span>
                 {step.detail ? (
-                  <span className="mt-0.5 block text-muted-foreground">
+                  <span className="text-muted-foreground mt-0.5 block">
                     {step.detail}
                   </span>
                 ) : null}
@@ -271,6 +276,7 @@ const MessageApprovalPlan = (
 
 const MessagePlan = (props: NonNullable<ChatMessage["plan"]>) => {
   const { tasks, title } = props;
+
   return (
     <Plan defaultOpen status="in-progress">
       <PlanHeader title={title} />
@@ -296,6 +302,7 @@ const MessagePlan = (props: NonNullable<ChatMessage["plan"]>) => {
 
 const MessageAttachmentBlock = (props: ChatMessageAttachment) => {
   const { description, name } = props;
+
   return (
     <Attachment size="sm">
       <AttachmentMedia>
@@ -397,6 +404,7 @@ const ChatMessageItem = (props: { message: ChatMessage }) => {
 
 export const ChatThread = (props: ChatThreadProps) => {
   const { messages, onSuggestion, userName = "James" } = props;
+
   return (
     <MessageScroller className="min-h-0 flex-1">
       <MessageScrollerViewport aria-live="polite">

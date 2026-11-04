@@ -105,7 +105,7 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
-              className="font-semibold text-foreground"
+              className="text-foreground font-semibold"
               size="lg"
               tooltip="Onda Assistant"
             >
@@ -240,7 +240,7 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
                     Pro
                   </Badge>
                 </span>
-                <span className="truncate text-muted-foreground text-xs">
+                <span className="text-muted-foreground truncate text-xs">
                   james@northstar.dev
                 </span>
               </span>

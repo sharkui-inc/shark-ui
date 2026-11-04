@@ -77,7 +77,7 @@ export const ActionBarTrigger = (props: ActionBarTriggerProps) => (
 
 const actionBarPositionerVariants = tv({
   base: [
-    "fixed inset-e-(--scrollbar-width,0px) inset-s-0 bottom-0 z-50",
+    "fixed inset-s-0 inset-e-(--scrollbar-width,0px) bottom-0 z-50",
     "flex",
     "px-4 pb-[calc(var(--gutter)+env(safe-area-inset-bottom,0))]",
     "pointer-events-none",
@@ -114,18 +114,22 @@ export const ActionBarContent = (props: ActionBarContentProps) => {
           aria-label="Bulk actions"
           className={cn(
             "[--space:--spacing(2)]",
-            "flex w-fit items-center gap-1",
+            "w-fit",
+            "flex items-center gap-1",
             "rounded-xl border shadow-lg/4",
             "px-[calc(var(--space)+2px)] py-(--space)",
             "bg-popover",
             "text-popover-foreground",
             "outline-hidden",
             "origin-(--transform-origin)",
-            "duration-150 ease-out",
+            "duration-100 ease-out",
             "pointer-events-auto",
-            "data-[state=closed]:animate-out data-[state=open]:animate-in",
-            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-            "data-[state=open]:slide-in-from-bottom-2 data-[state=closed]:slide-out-to-bottom-2",
+            "data-[state=closed]:animate-out",
+            "data-[state=open]:animate-in",
+            "data-[state=closed]:fade-out-0",
+            "data-[state=open]:fade-in-0",
+            "data-[state=open]:slide-in-from-bottom-2",
+            "data-[state=closed]:slide-out-to-bottom-2",
             "motion-reduce:animate-none",
             "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
@@ -146,7 +150,7 @@ export const ActionBarSeparator = (props: ActionBarSeparatorProps) => {
 
   return (
     <Separator
-      className={cn("mx-1 h-1/2", className)}
+      className={cn("h-1/2", "mx-1", className)}
       data-slot="action-bar-separator"
       {...rest}
       orientation={orientation}
@@ -164,7 +168,8 @@ export const ActionBarClose = (props: ActionBarCloseProps) => {
     <ArkPopover.CloseTrigger
       aria-label="Close"
       className={cn(
-        "opacity-64 transition-opacity",
+        "opacity-64",
+        "transition-opacity",
         "hover:opacity-100",
         "motion-reduce:transition-none",
         className
@@ -199,7 +204,7 @@ export const ActionBarValue = (props: ActionBarValueProps) => {
 
   return (
     <Badge
-      className={cn("shrink-0 font-medium text-sm tabular-nums", className)}
+      className={cn("shrink-0", "text-sm font-medium tabular-nums", className)}
       data-slot="action-bar-value"
       {...rest}
       variant={variant}

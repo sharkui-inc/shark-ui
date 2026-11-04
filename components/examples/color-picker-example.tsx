@@ -1,5 +1,6 @@
 "use client";
 
+import { parseColor } from "@ark-ui/react";
 import { CopyIcon } from "lucide-react";
 import React from "react";
 import { Button } from "@/registry/react/components/button";
@@ -19,7 +20,6 @@ import {
   ColorPickerSwatchIndicator,
   ColorPickerSwatchPreview,
   ColorPickerSwatchTrigger,
-  parseColor,
 } from "@/registry/react/components/color-picker";
 import {
   InputGroup,

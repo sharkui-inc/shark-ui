@@ -7,7 +7,7 @@ const tags = Array.from({ length: 50 }, (_, i) => `v1.2.0-beta.${50 - i}`);
 const ScrollAreaRtl = () => (
   <ScrollArea className="h-72 w-48 rounded-md border">
     <div className="p-4">
-      <h4 className="mb-4 font-medium text-sm leading-none">العلامات</h4>
+      <h4 className="mb-4 text-sm leading-none font-medium">العلامات</h4>
       {tags.map((tag) => (
         <React.Fragment key={tag}>
           <div className="text-sm">{tag}</div>

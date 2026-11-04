@@ -131,7 +131,7 @@ export const IdeChat = () => {
                       </ToolResultAction>
                     </ToolResultTrigger>
                     <ToolResultContent>
-                      <p className="font-mono text-muted-foreground text-xs">
+                      <p className="text-muted-foreground font-mono text-xs">
                         All tests passed
                       </p>
                     </ToolResultContent>

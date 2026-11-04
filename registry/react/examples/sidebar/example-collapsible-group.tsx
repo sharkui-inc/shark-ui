@@ -1,7 +1,7 @@
-import { ChevronDownIcon } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
+  CollapsibleIndicator,
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
 import {
@@ -27,7 +27,7 @@ const Example = () => (
             <SidebarGroupLabel asChild>
               <CollapsibleTrigger>
                 Help
-                <ChevronDownIcon aria-hidden="true" />
+                <CollapsibleIndicator />
               </CollapsibleTrigger>
             </SidebarGroupLabel>
             <CollapsibleContent>

@@ -13,9 +13,10 @@ import type React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { checkboxVariants } from "@/registry/react/components/checkbox";
-import { FieldLabel } from "@/registry/react/components/field";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 
 export const useTreeViewContext = useArkTreeViewContext;
+
 export interface TreeNodeType<T = unknown> {
   children?: TreeNodeType<T>[] | undefined;
   expandedIcon?: React.JSX.ElementType | null;
@@ -85,14 +86,14 @@ export const TreeView: ArkTreeView.RootComponent<TreeViewProps> = (props) => {
 export const TreeViewLabel = (
   props: React.ComponentProps<typeof ArkTreeView.Label>
 ) => {
-  const { children, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
-    <FieldLabel asChild>
-      <ArkTreeView.Label data-slot="tree-view-label" {...rest}>
-        {children}
-      </ArkTreeView.Label>
-    </FieldLabel>
+    <ArkTreeView.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="tree-view-label"
+      {...rest}
+    />
   );
 };
 
@@ -104,7 +105,8 @@ export const TreeViewTree = (
   return (
     <ArkTreeView.Tree
       className={cn(
-        "flex flex-col text-sm",
+        "flex flex-col",
+        "text-sm",
         "[&_svg]:size-(--icon-size) [&_svg]:shrink-0",
         className
       )}
@@ -138,16 +140,20 @@ export const TreeViewBranch = (
 const treeViewControlVariants = tv({
   base: [
     "peer",
-    "relative my-px",
+    "relative",
+    "my-px",
     "flex items-center gap-(--item-gap)",
     "min-h-8 w-full",
     "py-(--padding-block) ps-[calc(var(--padding-inline)+var(--indentation)*(var(--depth)-1)+var(--icon-size)*(var(--depth)-1)*0.5)] pe-(--padding-inline)",
     "bg-transparent",
-    "select-none text-start font-inherit text-muted-foreground",
+    "font-inherit text-muted-foreground text-start",
+    "select-none",
     "rounded-md border-none",
     "cursor-pointer",
     "hover:bg-muted hover:text-foreground",
-    "border border-transparent outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+    "border border-transparent",
+    "outline-hidden",
+    "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
     "data-selected:bg-accent data-selected:text-accent-foreground",
     "data-focus:bg-muted data-focus:text-foreground",
     "data-disabled:opacity-64 data-disabled:grayscale",
@@ -224,8 +230,10 @@ const TreeViewBranchTitle = (props: TreeViewBranchTitleProps) => {
           ) : (
             <ArkTreeView.BranchText
               className={cn(
-                "flex flex-1 items-center gap-(--item-gap)",
-                "overflow-hidden text-ellipsis whitespace-nowrap",
+                "flex-1",
+                "flex items-center gap-(--item-gap)",
+                "text-ellipsis whitespace-nowrap",
+                "overflow-hidden",
                 className
               )}
               data-slot="tree-view-branch-title"
@@ -258,10 +266,13 @@ export const TreeViewBranchIndicator = (
   return (
     <ArkTreeView.BranchIndicator
       className={cn(
-        "inline-flex shrink-0 items-center justify-center",
+        "shrink-0",
+        "inline-flex items-center justify-center",
         "text-muted-foreground",
-        "origin-center transition-transform duration-150 ease-out",
-        "data-[state=open]:rotate-90 rtl:data-[state=closed]:-rotate-180",
+        "origin-center",
+        "transition-transform duration-150 ease-out",
+        "data-[state=open]:rotate-90",
+        "rtl:data-[state=closed]:-rotate-180",
         "[&_svg]:size-3.5 [&_svg]:shrink-0",
         "motion-reduce:transition-none",
         className
@@ -283,7 +294,8 @@ export const TreeViewBranchContent = (
     <ArkTreeView.BranchContent
       className={cn(
         "[--radix-collapsible-content-height:var(--height)]",
-        "relative overflow-hidden",
+        "relative",
+        "overflow-hidden",
         "data-[state=open]:animate-collapsible-down data-[state=open]:duration-150 data-[state=open]:ease-out",
         "data-[state=closed]:animate-collapsible-up data-[state=closed]:duration-150 data-[state=closed]:ease-out",
         "motion-reduce:animate-none",
@@ -410,7 +422,8 @@ const TreeViewItemTitle = (
   return (
     <ArkTreeView.ItemText
       className={cn(
-        "flex flex-1 items-center gap-(--item-gap)",
+        "flex-1",
+        "flex items-center gap-(--item-gap)",
         "text-ellipsis whitespace-nowrap",
         "overflow-hidden",
         className
@@ -456,10 +469,13 @@ const TreeViewNodeInput = (
         "flex-1",
         "-my-px px-2 py-0",
         "text-sm",
-        "border-primary bg-popover text-foreground",
+        "bg-popover",
+        "text-foreground",
+        "border-primary",
         "rounded-md border",
         "selection:bg-primary/24 selection:text-foreground",
-        "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "outline-hidden",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
         className
       )}
       data-slot="tree-view-node-rename-input"

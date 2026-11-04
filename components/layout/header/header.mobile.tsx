@@ -44,13 +44,13 @@ export const MobileNav = (props: MobileNavProps) => {
           <div className="relative size-4">
             <span
               className={cn(
-                "absolute inset-s-0 block h-0.5 w-4 bg-foreground transition-[top,rotate] duration-150 ease-out motion-reduce:transition-none",
+                "bg-foreground absolute inset-s-0 block h-0.5 w-4 transition-[top,rotate] duration-150 ease-out motion-reduce:transition-none",
                 "top-1 group-data-[state=open]:top-[0.4rem] group-data-[state=open]:-rotate-45"
               )}
             />
             <span
               className={cn(
-                "absolute inset-s-0 block h-0.5 w-4 bg-foreground transition-[top,rotate] duration-150 ease-out motion-reduce:transition-none",
+                "bg-foreground absolute inset-s-0 block h-0.5 w-4 transition-[top,rotate] duration-150 ease-out motion-reduce:transition-none",
                 "top-2.5 group-data-[state=open]:top-[0.4rem] group-data-[state=open]:rotate-45"
               )}
             />
@@ -60,7 +60,7 @@ export const MobileNav = (props: MobileNavProps) => {
 
       <PopoverContent
         className={cn(
-          "h-(--available-height) max-h-(--available-height) min-h-0 w-dvw min-w-0 max-w-dvw",
+          "h-(--available-height) max-h-(--available-height) min-h-0 w-dvw max-w-dvw min-w-0",
           "flex flex-col",
           "overflow-hidden",
           "bg-background/80 backdrop-blur-sm",
@@ -102,7 +102,7 @@ export const MobileNav = (props: MobileNavProps) => {
 
             return (
               <div className="flex flex-col gap-4" key={String(group.name)}>
-                <div className="font-medium text-muted-foreground text-sm">
+                <div className="text-muted-foreground text-sm font-medium">
                   {isPages ? "Pages" : group.name}
                 </div>
                 <div className="flex flex-col gap-3">
@@ -114,11 +114,11 @@ export const MobileNav = (props: MobileNavProps) => {
                           "flex items-center gap-2",
                           "-mx-1 px-1",
                           "hitbox-y-2",
-                          "font-medium text-2xl",
+                          "text-2xl font-medium",
                           "rounded-md border border-transparent",
                           "no-underline underline-offset-4",
                           "outline-hidden",
-                          "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+                          "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2"
                         )}
                         href={link.href}
                       >

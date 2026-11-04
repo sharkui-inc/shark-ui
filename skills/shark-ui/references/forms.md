@@ -25,12 +25,16 @@ Do not set `id` / `htmlFor` inside Field. Ark wires that.
 </Field>
 ```
 
-`FieldLabel` works with Field-aware controls (`Input`, `Select`, `Combobox`, `Checkbox`, `Switch`, `NumberInput`, and similar). Controls that own a label part keep it inside their root:
+`FieldLabel` is the label of a `Field`. It renders a `<label>` wired to that field (`htmlFor`, `id`, disabled, invalid, readonly, required). Use it when the control has no label part (`Input`, `Textarea`, `NativeSelect`, `Checkbox`, `Switch`, `Combobox`).
+
+A control that owns a label part styles that part with `fieldLabelVariants()` and keeps the part's element, `id`, `htmlFor`, and `aria-labelledby`. Put that `*Label` inside the control root:
 
 - Slider → `SliderLabel`
 - RadioGroup → `RadioGroupLabel` or `FieldSet` + `FieldLegend`
-- DateInput / DatePicker / Listbox / Progress / CircularProgress / CircularSlider → their `*Label`
+- Select / SignaturePad / Rating / DateInput / DatePicker / Listbox / TagsInput / ColorPicker / Calendar / NumberInput / Progress / CircularProgress / CircularSlider / TreeView → their `*Label`
 - ToggleGroup → `ToggleGroupLabel` directly inside `ToggleGroup`
+
+Value text that uses the same type (`SliderValue`, `ProgressValue`, `CircularSliderValue`) uses `fieldLabelVariants()` on the value part.
 
 `FieldTitle` is visual only. It does not set `htmlFor`.
 

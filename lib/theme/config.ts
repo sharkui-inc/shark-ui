@@ -126,55 +126,76 @@ export const createVisualThemeLists = (
   };
 };
 
-export const pickVisualThemeSource = `function pickVisualTheme(value, lists) {
+export const pickVisualTheme = (
+  value: unknown,
+  lists: VisualThemeLists
+): VisualThemePick => {
   const defaults = lists.defaultConfig;
 
   if (!value || typeof value !== "object" || Array.isArray(value)) {
     return defaults;
   }
 
-  const stored = value;
-  const pick = function (items, candidate, fallback) {
-    if (typeof candidate === "string" && items.includes(candidate)) {
-      return candidate;
-    }
-
-    return fallback;
+  const stored = value as Record<string, unknown>;
+  const picked: VisualThemePick = {
+    baseColor: defaults.baseColor,
+    borderRadius: defaults.borderRadius,
+    fontHeading: defaults.fontHeading,
+    fontSans: defaults.fontSans,
+    primaryColor: defaults.primaryColor,
+    primaryTone: defaults.primaryTone,
   };
+  if (
+    typeof stored.baseColor === "string" &&
+    lists.baseColors.includes(stored.baseColor)
+  ) {
+    picked.baseColor = stored.baseColor as VisualThemePick["baseColor"];
+  } else if (
+    typeof stored.grayColor === "string" &&
+    lists.baseColors.includes(stored.grayColor)
+  ) {
+    picked.baseColor = stored.grayColor as VisualThemePick["baseColor"];
+  }
 
-  return {
-    baseColor: pick(
-      lists.baseColors,
-      stored.baseColor,
-      pick(lists.baseColors, stored.grayColor, defaults.baseColor)
-    ),
-    borderRadius: pick(
-      lists.borderRadii,
-      stored.borderRadius,
-      defaults.borderRadius
-    ),
-    fontHeading: pick(
-      lists.fontSlots.heading,
-      stored.fontHeading,
-      defaults.fontHeading
-    ),
-    fontSans: pick(lists.fontSlots.sans, stored.fontSans, defaults.fontSans),
-    primaryColor: pick(
-      lists.primaryColors,
-      stored.primaryColor,
-      defaults.primaryColor
-    ),
-    primaryTone: pick(
-      lists.primaryTones,
-      stored.primaryTone,
-      defaults.primaryTone
-    )
-  };
-}`;
+  if (
+    typeof stored.borderRadius === "string" &&
+    lists.borderRadii.includes(stored.borderRadius)
+  ) {
+    picked.borderRadius =
+      stored.borderRadius as VisualThemePick["borderRadius"];
+  }
 
-export const pickVisualTheme = Function(
-  `return (${pickVisualThemeSource});`
-)() as (value: unknown, lists: VisualThemeLists) => VisualThemePick;
+  if (
+    typeof stored.fontHeading === "string" &&
+    lists.fontSlots.heading.includes(stored.fontHeading)
+  ) {
+    picked.fontHeading = stored.fontHeading as VisualThemePick["fontHeading"];
+  }
+
+  if (
+    typeof stored.fontSans === "string" &&
+    lists.fontSlots.sans.includes(stored.fontSans)
+  ) {
+    picked.fontSans = stored.fontSans as VisualThemePick["fontSans"];
+  }
+
+  if (
+    typeof stored.primaryColor === "string" &&
+    lists.primaryColors.includes(stored.primaryColor)
+  ) {
+    picked.primaryColor =
+      stored.primaryColor as VisualThemePick["primaryColor"];
+  }
+
+  if (
+    typeof stored.primaryTone === "string" &&
+    lists.primaryTones.includes(stored.primaryTone)
+  ) {
+    picked.primaryTone = stored.primaryTone as VisualThemePick["primaryTone"];
+  }
+
+  return picked;
+};
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);

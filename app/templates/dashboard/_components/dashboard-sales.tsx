@@ -39,13 +39,13 @@ export const DashboardSales = () => (
       <div className="grid grid-cols-2 gap-3">
         <div>
           <p className="text-muted-foreground text-xs">Net revenue</p>
-          <p className="mt-1 font-heading font-semibold text-xl tabular-nums tracking-[-0.02em]">
+          <p className="font-heading mt-1 text-xl font-semibold tracking-[-0.02em] tabular-nums">
             {salesSummary.netRevenue}
           </p>
         </div>
         <div className="border-s ps-3">
           <p className="text-muted-foreground text-xs">Completed orders</p>
-          <p className="mt-1 font-heading font-semibold text-xl tabular-nums tracking-[-0.02em]">
+          <p className="font-heading mt-1 text-xl font-semibold tracking-[-0.02em] tabular-nums">
             {salesSummary.orders}
           </p>
         </div>

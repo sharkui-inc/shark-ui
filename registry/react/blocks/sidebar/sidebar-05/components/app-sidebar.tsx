@@ -2,7 +2,6 @@
 
 import {
   ChartNoAxesCombinedIcon,
-  ChevronRightIcon,
   CircleGaugeIcon,
   FileTextIcon,
   FolderKanbanIcon,
@@ -12,6 +11,7 @@ import {
 import {
   Collapsible,
   CollapsibleContent,
+  CollapsibleIndicator,
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
 import {
@@ -65,21 +65,13 @@ export const AppSidebar = () => (
         <SidebarGroupLabel>Workspace</SidebarGroupLabel>
         <SidebarMenu>
           {navigation.map((item, index) => (
-            <Collapsible
-              asChild
-              className="group/collapsible"
-              defaultOpen={index === 0}
-              key={item.label}
-            >
+            <Collapsible asChild defaultOpen={index === 0} key={item.label}>
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
                   <SidebarMenuButton tooltip={item.label}>
                     <item.icon aria-hidden />
                     <span>{item.label}</span>
-                    <ChevronRightIcon
-                      aria-hidden
-                      className="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-90 motion-reduce:transition-none"
-                    />
+                    <CollapsibleIndicator />
                   </SidebarMenuButton>
                 </CollapsibleTrigger>
                 <CollapsibleContent>

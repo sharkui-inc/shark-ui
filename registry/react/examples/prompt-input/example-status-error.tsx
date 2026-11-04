@@ -21,7 +21,7 @@ const Example = () => {
     <div className="flex w-full max-w-lg flex-col gap-2">
       {status === "error" ? (
         <div className="flex items-center justify-between gap-2 px-1">
-          <span className="flex items-center gap-2 text-destructive text-xs">
+          <span className="text-destructive flex items-center gap-2 text-xs">
             <TriangleAlertIcon aria-hidden className="size-3.5" />
             Couldn’t finish the review.
           </span>

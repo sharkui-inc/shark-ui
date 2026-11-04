@@ -27,7 +27,7 @@ const Example = () => (
           <AvatarFallback>VV</AvatarFallback>
         </Avatar>
         <div>
-          <CardTitle className="font-medium text-sm">
+          <CardTitle className="text-sm font-medium">
             Vinicius Vicentini
           </CardTitle>
           <CardDescription>Frontend Developer</CardDescription>

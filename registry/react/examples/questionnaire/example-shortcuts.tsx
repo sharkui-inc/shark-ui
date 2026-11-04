@@ -17,7 +17,7 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const answer = String(new FormData(event.currentTarget).get("format"));
     const label = items[0].choices.find(

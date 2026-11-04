@@ -103,6 +103,7 @@ export const IframeHotkeys = () => {
       };
 
       window.addEventListener("message", handleMessage);
+
       return () => window.removeEventListener("message", handleMessage);
     }
 
@@ -135,6 +136,7 @@ export const IframeHotkeys = () => {
     };
 
     document.addEventListener("keydown", handleKeyDown);
+
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [platform]);
 

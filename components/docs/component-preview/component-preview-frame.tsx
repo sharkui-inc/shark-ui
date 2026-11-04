@@ -78,7 +78,7 @@ export const ComponentPreviewFrame = (props: ComponentPreviewFrameProps) => {
       <div className="group/stage relative min-h-[450px] overflow-hidden rounded-2xl border">
         <TabsContent className="m-0" data-slot="tab-preview" value="preview">
           <div
-            className={cn("relative w-full", "flex flex-col bg-code")}
+            className={cn("relative w-full", "bg-code flex flex-col")}
             data-slot="preview"
           >
             {previewHeader}
@@ -94,10 +94,10 @@ export const ComponentPreviewFrame = (props: ComponentPreviewFrameProps) => {
             >
               {showBorders ? (
                 <>
-                  <div className="absolute inset-x-0 top-4 border border-border/64 border-dashed max-sm:hidden sm:top-10" />
-                  <div className="absolute inset-x-0 bottom-4 border border-border/64 border-dashed max-sm:hidden sm:bottom-10" />
-                  <div className="absolute inset-s-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-s-10" />
-                  <div className="absolute inset-e-4 inset-y-0 border border-border/64 border-dashed max-sm:hidden sm:inset-e-10" />
+                  <div className="border-border/64 absolute inset-x-0 top-4 border border-dashed max-sm:hidden sm:top-10" />
+                  <div className="border-border/64 absolute inset-x-0 bottom-4 border border-dashed max-sm:hidden sm:bottom-10" />
+                  <div className="border-border/64 absolute inset-y-0 inset-s-4 border border-dashed max-sm:hidden sm:inset-s-10" />
+                  <div className="border-border/64 absolute inset-y-0 inset-e-4 border border-dashed max-sm:hidden sm:inset-e-10" />
                 </>
               ) : null}
               {preview}
@@ -212,7 +212,7 @@ export const RTLPreviewHeader = () => {
             "p-0",
             "bg-background",
             "text-foreground text-sm leading-6",
-            "divide-y divide-border border"
+            "divide-border divide-y border"
           )}
           showArrow={false}
         >

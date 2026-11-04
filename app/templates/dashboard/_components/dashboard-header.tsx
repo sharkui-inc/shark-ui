@@ -19,7 +19,7 @@ export const DashboardHeader = () => {
   return (
     <header className="flex h-14 shrink-0 items-center gap-3 border-b px-4">
       <SidebarTrigger />
-      <p className="min-w-0 flex-1 truncate font-medium text-sm">Dashboard</p>
+      <p className="min-w-0 flex-1 truncate text-sm font-medium">Dashboard</p>
       <DashboardNotifications />
       <Menu>
         <MenuTrigger asChild>

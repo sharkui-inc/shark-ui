@@ -68,7 +68,7 @@ const RUNTIME_THEME_PALETTE = "slate";
 
 const CSS_PRINT_WIDTH = 80;
 
-const COLOR_MIX_ARGS_RE = /,\s*/;
+const COLOR_MIX_ARGS_RE = /,\s*/u;
 
 const aliasThemeColorVars = (value: string, palette: string) =>
   value.replaceAll(`var(--color-${palette}-`, "var(--theme-color-");

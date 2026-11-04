@@ -3,15 +3,18 @@ import { Separator } from "@/registry/react/components/separator";
 const SeparatorDemo = () => (
   <div className="flex max-w-sm flex-col gap-4 text-sm">
     <div className="flex flex-col gap-1.5">
-      <div className="font-medium leading-none">shadcn/ui</div>
+      <div className="leading-none font-medium">Onda</div>
       <div className="text-muted-foreground">
-        The Foundation for your Design System
+        A set of primitive components for building UI.
       </div>
     </div>
     <Separator />
-    <div>
-      A set of beautifully designed components that you can customize, extend,
-      and build on.
+    <div className="flex h-5 items-center gap-4">
+      <span>Components</span>
+      <Separator orientation="vertical" />
+      <span>Blocks</span>
+      <Separator orientation="vertical" />
+      <span>Themes</span>
     </div>
   </div>
 );

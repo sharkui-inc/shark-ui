@@ -3,10 +3,10 @@ import { ScrollArea } from "@/registry/react/components/scroll-area";
 const Example = () => (
   <ScrollArea className="h-64 w-48 rounded-md border" orientation="vertical">
     <div className="p-4">
-      <h4 className="mb-4 font-medium text-sm leading-none">Changelog</h4>
+      <h4 className="mb-4 text-sm leading-none font-medium">Changelog</h4>
       <div className="grid gap-3 text-sm">
         {releases.map((release) => (
-          <div className="rounded-md bg-muted p-3" key={release}>
+          <div className="bg-muted rounded-md p-3" key={release}>
             {release}
           </div>
         ))}

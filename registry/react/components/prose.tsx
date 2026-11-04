@@ -9,7 +9,7 @@ export const Prose = (props: React.ComponentProps<typeof ark.div>) => {
 
   return (
     <ark.div
-      className={cn("prose mx-auto max-w-[65ch]", className)}
+      className={cn("max-w-[65ch]", "mx-auto", "prose", className)}
       data-slot="prose"
       {...rest}
     />

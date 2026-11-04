@@ -16,6 +16,7 @@ import {
 import { Separator } from "@/registry/react/components/separator";
 
 export const useInputOTPContext = useArkPinInputContext;
+
 export const InputOTPLabel = (
   props: React.ComponentProps<typeof ArkPinInput.Label>
 ) => {
@@ -55,7 +56,7 @@ export const InputOTP = (props: InputOTPProps) => {
       {...rest}
     >
       <ArkPinInput.Control
-        className={cn("flex w-full flex-wrap items-center gap-2", className)}
+        className={cn("w-full", "flex flex-wrap items-center gap-2", className)}
         data-slot="input-otp-control"
       >
         {children}
@@ -75,7 +76,11 @@ export const InputOTPSlot = (
     <ArkPinInput.Input asChild data-slot="input-otp-input" {...rest}>
       <Input
         className={cn(
-          "relative w-(--field-height) p-0 text-center text-base tabular-nums [--field-height:inherit]",
+          "[--field-height:inherit]",
+          "relative",
+          "w-(--field-height)",
+          "p-0",
+          "text-center text-lg font-medium tabular-nums md:text-lg",
           className
         )}
       />
@@ -92,7 +97,8 @@ export const InputOTPSeparator = (
     <Separator
       asChild
       className={cn(
-        "rounded-full border-0 bg-foreground",
+        "bg-foreground",
+        "rounded-full border-0",
         "data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:w-2",
         className
       )}

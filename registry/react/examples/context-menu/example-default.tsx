@@ -29,10 +29,10 @@ const ContextMenuDemo = () => (
   <ContextMenu>
     <ContextMenuTrigger
       aria-label="Right click here or long press here to open context menu"
-      className="flex aspect-video pointer-coarse:select-none items-center justify-center rounded-2xl border border-dashed p-20 text-sm"
+      className="flex aspect-video items-center justify-center rounded-2xl border border-dashed p-20 text-sm pointer-coarse:select-none"
     >
-      <span className="pointer-fine:inline-block hidden">Right click here</span>
-      <span className="pointer-coarse:inline-block hidden">
+      <span className="hidden pointer-fine:inline-block">Right click here</span>
+      <span className="hidden pointer-coarse:inline-block">
         Long press here
       </span>
     </ContextMenuTrigger>

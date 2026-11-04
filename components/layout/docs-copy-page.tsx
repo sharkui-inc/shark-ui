@@ -2,7 +2,10 @@ import { ChevronDownIcon } from "lucide-react";
 import type React from "react";
 import { ChatGptIcon } from "@/components/icons/chat-gpt";
 import { ClaudeIcon } from "@/components/icons/claude";
+import { CursorIcon } from "@/components/icons/cursor";
 import { MarkdownIcon } from "@/components/icons/markdown";
+import { PerplexityIcon } from "@/components/icons/perplexity";
+import { V0Icon } from "@/components/icons/v0";
 import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
@@ -34,7 +37,7 @@ interface DocsCopyPageProps extends React.ComponentProps<typeof ButtonGroup> {
 export const DocsCopyPage = (props: DocsCopyPageProps) => {
   const { data, url, className, ...rest } = props;
 
-  const pageUrl = absoluteUrl(url);
+  const markdownUrl = absoluteUrl(`${url}.md`);
 
   return (
     <ButtonGroup className={cn("hidden sm:flex", className)} {...rest}>
@@ -59,7 +62,7 @@ export const DocsCopyPage = (props: DocsCopyPageProps) => {
             <MenuGroup>
               <MenuItem asChild value="chatgpt">
                 <a
-                  href={getPromptUrl("https://chatgpt.com", pageUrl)}
+                  href={getPromptUrl("https://chatgpt.com", markdownUrl)}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
@@ -67,14 +70,63 @@ export const DocsCopyPage = (props: DocsCopyPageProps) => {
                   Open in ChatGPT
                 </a>
               </MenuItem>
+              <MenuItem asChild value="chatgpt-desktop">
+                <a href={getPromptUrl("codex://new", markdownUrl, "prompt")}>
+                  <ChatGptIcon />
+                  Open in ChatGPT Desktop
+                </a>
+              </MenuItem>
               <MenuItem asChild value="claude">
                 <a
-                  href={getPromptUrl("https://claude.ai/new", pageUrl)}
+                  href={getPromptUrl("https://claude.ai/new", markdownUrl)}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
                   <ClaudeIcon />
                   Open in Claude
+                </a>
+              </MenuItem>
+              <MenuItem asChild value="claude-desktop">
+                <a href={getPromptUrl("claude://claude.ai/new", markdownUrl)}>
+                  <ClaudeIcon />
+                  Open in Claude Desktop
+                </a>
+              </MenuItem>
+              <MenuItem asChild value="v0">
+                <a
+                  href={getPromptUrl("https://v0.dev", markdownUrl)}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <V0Icon />
+                  Open in v0
+                </a>
+              </MenuItem>
+              <MenuItem asChild value="cursor">
+                <a
+                  href={getPromptUrl(
+                    "https://cursor.com/link/prompt",
+                    markdownUrl,
+                    "text"
+                  )}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <CursorIcon />
+                  Open in Cursor
+                </a>
+              </MenuItem>
+              <MenuItem asChild value="perplexity">
+                <a
+                  href={getPromptUrl(
+                    "https://www.perplexity.ai/search",
+                    markdownUrl
+                  )}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <PerplexityIcon />
+                  Open in Perplexity
                 </a>
               </MenuItem>
               <MenuItem asChild value="markdown">
@@ -91,9 +143,7 @@ export const DocsCopyPage = (props: DocsCopyPageProps) => {
   );
 };
 
-const getPromptUrl = (baseURL: string, url: string) =>
-  `${baseURL}?q=${encodeURIComponent(
-    `I’m looking at this shark-ui documentation: ${url}.
-Help me understand how to use it. Be ready to explain concepts, give examples, or help debug based on it.
-  `
+const getPromptUrl = (baseURL: string, url: string, queryParam = "q") =>
+  `${baseURL}?${queryParam}=${encodeURIComponent(
+    `Read ${url}, I want to ask questions about it.`
   )}`;

@@ -4,7 +4,6 @@ import {
   Pagination as ArkPagination,
   usePaginationContext as useArkPaginationContext,
 } from "@ark-ui/react/pagination";
-import { createContext } from "@ark-ui/react/utils";
 import {
   ChevronFirstIcon,
   ChevronLastIcon,
@@ -14,148 +13,167 @@ import {
 } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { Button, type ButtonProps } from "@/registry/react/components/button";
+import {
+  type ButtonProps,
+  buttonVariants,
+} from "@/registry/react/components/button";
 import { FormatNumber } from "@/registry/react/components/format";
 
-const [PaginationTypeProvider, usePaginationType] = createContext<
-  "button" | "link"
->({
-  defaultValue: "button",
-  name: "PaginationTypeContext",
-  providerName: "Pagination",
-});
+export const usePaginationContext = useArkPaginationContext;
 
 interface PaginationProps
   extends React.ComponentProps<typeof ArkPagination.Root> {}
 
-export const usePaginationContext = useArkPaginationContext;
 export const Pagination = (props: PaginationProps) => {
   const { type = "button", className, ...rest } = props;
 
   return (
-    <PaginationTypeProvider value={type}>
-      <ArkPagination.Root
-        className={cn(
-          "mx-auto",
-          "w-full",
-          "flex justify-center gap-1",
-          className
-        )}
-        data-slot="pagination"
-        type={type}
-        {...rest}
-      />
-    </PaginationTypeProvider>
+    <ArkPagination.Root
+      className={cn(
+        "mx-auto",
+        "w-full",
+        "flex justify-center gap-1",
+        className
+      )}
+      data-slot="pagination"
+      type={type}
+      {...rest}
+    />
   );
 };
 
-const PaginationButton = (props: ButtonProps) => {
-  const { children, ...rest } = props;
-  const type = usePaginationType();
+type PaginationTriggerStyleProps = Pick<
+  ButtonProps,
+  "className" | "size" | "variant"
+>;
 
-  if (type === "link") {
-    return (
-      <Button asChild {...rest}>
-        <a>{children}</a>
-      </Button>
-    );
-  }
-
-  return <Button {...rest}>{children}</Button>;
-};
-
-interface PaginationFirstProps
-  extends React.ComponentProps<typeof ArkPagination.FirstTrigger>,
-    ButtonProps {
+interface PaginationTriggerProps extends PaginationTriggerStyleProps {
   /**
    * Whether to show the label.
    */
   withLabel?: boolean;
 }
 
+interface PaginationFirstProps
+  extends Omit<
+      React.ComponentProps<typeof ArkPagination.FirstTrigger>,
+      "asChild" | keyof PaginationTriggerStyleProps
+    >,
+    PaginationTriggerProps {}
+
 export const PaginationFirst = (props: PaginationFirstProps) => {
-  const { withLabel = true, variant = "ghost", children, ...rest } = props;
+  const {
+    withLabel = true,
+    variant = "ghost",
+    size,
+    className,
+    children,
+    ...rest
+  } = props;
 
   return (
-    <ArkPagination.FirstTrigger asChild data-slot="pagination-first">
-      <PaginationButton variant={variant} {...rest}>
-        <ChevronFirstIcon className="rtl:rotate-180" />
-        <span className={cn({ "sr-only": !withLabel })}>
-          {children ?? "First"}
-        </span>
-      </PaginationButton>
+    <ArkPagination.FirstTrigger
+      className={cn(buttonVariants({ size, variant }), className)}
+      data-slot="pagination-first"
+      {...rest}
+    >
+      <ChevronFirstIcon className="rtl:rotate-180" />
+      <span className={cn({ "sr-only": !withLabel })}>
+        {children ?? "First"}
+      </span>
     </ArkPagination.FirstTrigger>
   );
 };
 
 interface PaginationPreviousProps
-  extends React.ComponentProps<typeof ArkPagination.PrevTrigger>,
-    ButtonProps {
-  /**
-   * Whether to show the label.
-   */
-  withLabel?: boolean;
-}
+  extends Omit<
+      React.ComponentProps<typeof ArkPagination.PrevTrigger>,
+      "asChild" | keyof PaginationTriggerStyleProps
+    >,
+    PaginationTriggerProps {}
 
 export const PaginationPrevious = (props: PaginationPreviousProps) => {
-  const { withLabel = true, variant = "ghost", children, ...rest } = props;
+  const {
+    withLabel = true,
+    variant = "ghost",
+    size,
+    className,
+    children,
+    ...rest
+  } = props;
 
   return (
-    <ArkPagination.PrevTrigger asChild data-slot="pagination-previous">
-      <PaginationButton variant={variant} {...rest}>
-        <ChevronLeftIcon className="rtl:rotate-180" />
-        <span className={cn({ "sr-only": !withLabel })}>
-          {children ?? "Previous"}
-        </span>
-      </PaginationButton>
+    <ArkPagination.PrevTrigger
+      className={cn(buttonVariants({ size, variant }), className)}
+      data-slot="pagination-previous"
+      {...rest}
+    >
+      <ChevronLeftIcon className="rtl:rotate-180" />
+      <span className={cn({ "sr-only": !withLabel })}>
+        {children ?? "Previous"}
+      </span>
     </ArkPagination.PrevTrigger>
   );
 };
 
 interface PaginationNextProps
-  extends React.ComponentProps<typeof ArkPagination.NextTrigger>,
-    ButtonProps {
-  /**
-   * Whether to show the label.
-   */
-  withLabel?: boolean;
-}
+  extends Omit<
+      React.ComponentProps<typeof ArkPagination.NextTrigger>,
+      "asChild" | keyof PaginationTriggerStyleProps
+    >,
+    PaginationTriggerProps {}
 
 export const PaginationNext = (props: PaginationNextProps) => {
-  const { withLabel = true, variant = "ghost", children, ...rest } = props;
+  const {
+    withLabel = true,
+    variant = "ghost",
+    size,
+    className,
+    children,
+    ...rest
+  } = props;
 
   return (
-    <ArkPagination.NextTrigger asChild data-slot="pagination-next">
-      <PaginationButton variant={variant} {...rest}>
-        <span className={cn({ "sr-only": !withLabel })}>
-          {children ?? "Next"}
-        </span>
-        <ChevronRightIcon className="rtl:rotate-180" />
-      </PaginationButton>
+    <ArkPagination.NextTrigger
+      className={cn(buttonVariants({ size, variant }), className)}
+      data-slot="pagination-next"
+      {...rest}
+    >
+      <span className={cn({ "sr-only": !withLabel })}>
+        {children ?? "Next"}
+      </span>
+      <ChevronRightIcon className="rtl:rotate-180" />
     </ArkPagination.NextTrigger>
   );
 };
 
 interface PaginationLastProps
-  extends React.ComponentProps<typeof ArkPagination.LastTrigger>,
-    ButtonProps {
-  /**
-   * Whether to show the label.
-   */
-  withLabel?: boolean;
-}
+  extends Omit<
+      React.ComponentProps<typeof ArkPagination.LastTrigger>,
+      "asChild" | keyof PaginationTriggerStyleProps
+    >,
+    PaginationTriggerProps {}
 
 export const PaginationLast = (props: PaginationLastProps) => {
-  const { withLabel = true, variant = "ghost", children, ...rest } = props;
+  const {
+    withLabel = true,
+    variant = "ghost",
+    size,
+    className,
+    children,
+    ...rest
+  } = props;
 
   return (
-    <ArkPagination.LastTrigger asChild data-slot="pagination-last">
-      <PaginationButton variant={variant} {...rest}>
-        <span className={cn({ "sr-only": !withLabel })}>
-          {children ?? "Last"}
-        </span>
-        <ChevronLastIcon className="rtl:rotate-180" />
-      </PaginationButton>
+    <ArkPagination.LastTrigger
+      className={cn(buttonVariants({ size, variant }), className)}
+      data-slot="pagination-last"
+      {...rest}
+    >
+      <span className={cn({ "sr-only": !withLabel })}>
+        {children ?? "Last"}
+      </span>
+      <ChevronLastIcon className="rtl:rotate-180" />
     </ArkPagination.LastTrigger>
   );
 };
@@ -166,20 +184,20 @@ export const PaginationItem = (
   const { className, children, ...rest } = props;
 
   return (
-    <ArkPagination.Item asChild data-slot="pagination-item" {...rest}>
-      <PaginationButton
-        className={cn(
-          "tabular-nums",
-          "data-selected:not-[hover]:bg-transparent dark:data-selected:not-[hover]:bg-input/32",
-          "data-selected:not-[hover]:text-foreground",
-          "data-selected:not-[hover]:border-input",
-          className
-        )}
-        size="icon-md"
-        variant="ghost"
-      >
-        {children}
-      </PaginationButton>
+    <ArkPagination.Item
+      className={cn(
+        buttonVariants({ size: "icon-md", variant: "ghost" }),
+        "tabular-nums",
+        "data-selected:not-[hover]:bg-transparent",
+        "dark:data-selected:not-[hover]:bg-input/32",
+        "data-selected:not-[hover]:text-foreground",
+        "data-selected:not-[hover]:border-input",
+        className
+      )}
+      data-slot="pagination-item"
+      {...rest}
+    >
+      {children}
     </ArkPagination.Item>
   );
 };

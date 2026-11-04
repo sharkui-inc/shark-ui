@@ -2,23 +2,26 @@ import {
   ColorPicker,
   ColorPickerControl,
   ColorPickerInput,
-  ColorPickerLabel,
 } from "@/registry/react/components/color-picker";
-import { Field, FieldHelper } from "@/registry/react/components/field";
+import {
+  Field,
+  FieldHelper,
+  FieldLabel,
+} from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
 
 const Example = () => (
-  <ColorPicker className="w-full max-w-64" defaultValue="#eb5e41">
-    <Field>
-      <ColorPickerLabel>Color</ColorPickerLabel>
+  <Field className="w-full max-w-64">
+    <FieldLabel>Color</FieldLabel>
+    <ColorPicker defaultValue="#eb5e41">
       <ColorPickerControl>
         <ColorPickerInput asChild>
           <Input />
         </ColorPickerInput>
       </ColorPickerControl>
-      <FieldHelper>Enter your brand's primary color</FieldHelper>
-    </Field>
-  </ColorPicker>
+    </ColorPicker>
+    <FieldHelper>Enter your brand's primary color</FieldHelper>
+  </Field>
 );
 
 export default Example;

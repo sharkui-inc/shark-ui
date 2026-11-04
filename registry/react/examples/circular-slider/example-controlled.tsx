@@ -14,7 +14,7 @@ const Example = () => {
         onValueChange={(e) => setValue(e.value)}
         value={value}
       />
-      <div className="text-center text-muted-foreground text-sm">
+      <div className="text-muted-foreground text-center text-sm">
         {value > 180 ? "✅" : "❌"}
       </div>
     </div>

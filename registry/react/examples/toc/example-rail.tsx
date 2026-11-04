@@ -14,6 +14,7 @@ import {
 
 const Example = () => {
   const contentRef = React.useRef<HTMLElement>(null);
+
   return (
     <Toc
       autoScroll={false}
@@ -110,7 +111,7 @@ const Rail = (props: {
   return (
     <svg
       aria-hidden
-      className="pointer-events-none absolute inset-s-0 -z-10 overflow-visible in-data-active:stroke-foreground stroke-1 stroke-border transition-[stroke]"
+      className="in-data-active:stroke-foreground stroke-border pointer-events-none absolute inset-s-0 -z-10 overflow-visible stroke-1 transition-[stroke]"
       style={{
         height: line === nextLine ? `calc(100% + ${BRIDGE}px)` : "100%",
         top: -BRIDGE,
@@ -147,7 +148,7 @@ const Article = () => (
         <section className="flex flex-col gap-3 pb-8" key={item.value}>
           <Heading
             className={
-              item.depth === 2 ? "font-semibold text-lg" : "font-medium"
+              item.depth === 2 ? "text-lg font-semibold" : "font-medium"
             }
             id={item.value}
           >

@@ -1,6 +1,8 @@
 ---
 title: Approval Card
 description: Collect approvals or clarifications.
+aliases:
+  - Human in the loop
 seo:
   description: Collect approvals or clarifications in agent workflows.
 ---
@@ -235,7 +237,7 @@ Form root.
 | `defaultValue` | `ApprovalCardValue` | `{}` |
 | `onValueChange` | `(details: ApprovalCardValueChangeDetails) => void` | `-` |
 | `shortcuts` | `"letters" \| "numbers"` | `-` |
-| `onSubmit` | `FormEventHandler<HTMLFormElement>` | `-` |
+| `onSubmit` | `SubmitEventHandler<HTMLFormElement>` | `-` |
 | `onApprove` | `(details?: ApprovalCardSubmitDetails) => void` | `-` |
 | `onReject` | `() => void` | `-` |
 | `className` | `string` | `-` |

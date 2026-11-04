@@ -24,7 +24,11 @@ const Example = () => {
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <ComboboxInput aria-label="Fruit, medium size" size="md" />
+      <ComboboxInput
+        aria-label="Fruit, medium size"
+        placeholder="Medium"
+        size="md"
+      />
       <ComboboxContent>
         <ComboboxEmpty />
         <ComboboxList>

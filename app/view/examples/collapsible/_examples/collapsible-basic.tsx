@@ -1,24 +1,20 @@
-import { ChevronDownIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import { Card, CardContent } from "@/registry/react/components/card";
 import {
   Collapsible,
   CollapsibleContent,
+  CollapsibleIndicator,
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
 
 const CollapsibleBasic = () => (
   <Card className="mx-auto w-full max-w-sm">
     <CardContent>
-      <Collapsible className="rounded-md data-[state=open]:bg-muted">
+      <Collapsible className="data-[state=open]:bg-muted rounded-md">
         <CollapsibleTrigger asChild>
           <Button className="w-full" variant="ghost">
             Product details
-            <ChevronDownIcon
-              aria-hidden
-              className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
-              data-icon="inline-end"
-            />
+            <CollapsibleIndicator data-icon="inline-end" />
           </Button>
         </CollapsibleTrigger>
         <CollapsibleContent className="flex flex-col items-start gap-2 p-2.5 pt-0 text-sm">

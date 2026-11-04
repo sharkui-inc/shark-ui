@@ -44,7 +44,7 @@ const Example = () => (
               <MenuTrigger asChild>
                 <Button
                   aria-label={`Actions for ${user.name}`}
-                  size="icon-sm"
+                  size="icon-xs"
                   variant="outline"
                 >
                   <EllipsisVerticalIcon aria-hidden />

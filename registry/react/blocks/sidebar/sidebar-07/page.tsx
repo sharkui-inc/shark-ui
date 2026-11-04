@@ -17,10 +17,10 @@ export default function Sidebar07Page() {
           <SidebarTrigger className="-ms-1" />
           <Separator className="h-4" orientation="vertical" />
           <div className="flex min-w-0 items-center gap-2 text-sm">
-            <span className="hidden text-muted-foreground sm:inline">Onda</span>
+            <span className="text-muted-foreground hidden sm:inline">Onda</span>
             <span
               aria-hidden
-              className="hidden text-muted-foreground sm:inline"
+              className="text-muted-foreground hidden sm:inline"
             >
               /
             </span>
@@ -30,10 +30,10 @@ export default function Sidebar07Page() {
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <div className="grid gap-4 md:grid-cols-3">
             {overviewCards.map((card) => (
-              <div className="aspect-video rounded-xl bg-muted/48" key={card} />
+              <div className="bg-muted/48 aspect-video rounded-xl" key={card} />
             ))}
           </div>
-          <div className="min-h-96 flex-1 rounded-xl bg-muted/48" />
+          <div className="bg-muted/48 min-h-96 flex-1 rounded-xl" />
         </div>
       </SidebarInset>
     </SidebarProvider>

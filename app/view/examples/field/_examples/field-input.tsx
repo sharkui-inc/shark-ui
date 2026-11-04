@@ -15,9 +15,7 @@ const FieldInput = () => (
       <Field>
         <FieldLabel>Username</FieldLabel>
         <Input placeholder="Max Leiter" type="text" />
-        <FieldDescription>
-          Choose a unique username for your account.
-        </FieldDescription>
+        <FieldDescription>Choose a unique username.</FieldDescription>
       </Field>
       <Field>
         <FieldLabel>Password</FieldLabel>

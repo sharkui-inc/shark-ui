@@ -109,7 +109,7 @@ export const DashboardSettings = (props: {
           </SidebarInset>
         </SidebarProvider>
         <DialogFooter className="sm:justify-start">
-          <CheckIcon aria-hidden className="h-lh w-3.5 text-primary" />
+          <CheckIcon aria-hidden className="text-primary h-lh w-3.5" />
           <span className="text-muted-foreground text-sm">{lastSaved}</span>
         </DialogFooter>
       </DialogContent>

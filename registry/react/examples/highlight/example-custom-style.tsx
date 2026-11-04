@@ -1,7 +1,7 @@
 import { Highlight } from "@/registry/react/components/highlight";
 
 const Example = () => (
-  <p className="text-base text-foreground leading-relaxed">
+  <p className="text-foreground text-base leading-relaxed">
     <Highlight
       className="rounded-md bg-amber-200 px-1.5 font-bold text-amber-900 dark:bg-amber-900/48 dark:text-amber-100"
       query="spotlight"

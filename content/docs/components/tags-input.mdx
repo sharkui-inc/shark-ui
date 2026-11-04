@@ -1,6 +1,9 @@
 ---
 title: Tags Input
 description: Add and remove tags in a field.
+aliases:
+  - Tag input
+  - Token field
 seo:
   description: Type values that become removable tags in one field.
 links:
@@ -84,11 +87,23 @@ import {
 </TagsInput>
 ```
 
-## Controlled
+## With Field
+
+Use `FieldLabel` inside [Field](/docs/components/field) to name the tags. Ark connects the field to the input.
+
+<ComponentPreview componentName="tags-input" fileName="example-with-field" />
+
+## Controlled Tags
 
 Use `value` and `onValueChange` to control the tags array.
 
 <ComponentPreview componentName="tags-input" fileName="example-controlled" />
+
+## Controlled Input
+
+Use `inputValue` and `onInputValueChange` to control the text field independently.
+
+<ComponentPreview componentName="tags-input" fileName="example-controlled-input-value" />
 
 ## States
 
@@ -118,12 +133,6 @@ Use the `size` prop on `TagsInput` to change the control and input height.
 
 <ComponentPreview componentName="tags-input" fileName="example-size-lg" />
 
-## Pill
-
-The `pill` prop creates fully rounded tag chips.
-
-<ComponentPreview componentName="tags-input" fileName="example-pill" />
-
 ## Examples
 
 ### Blur Behavior
@@ -131,12 +140,6 @@ The `pill` prop creates fully rounded tag chips.
 Use `blurBehavior="add"` to add the current input value as a tag when the field loses focus.
 
 <ComponentPreview componentName="tags-input" fileName="example-blur-behavior" />
-
-### Controlled Input Value
-
-Use `inputValue` and `onInputValueChange` to control the text field independently.
-
-<ComponentPreview componentName="tags-input" fileName="example-controlled-input-value" />
 
 ### Delimiter
 
@@ -190,12 +193,6 @@ Use the `showClear` prop to display a button that clears all tags when the field
 
 <ComponentPreview componentName="tags-input" fileName="example-combobox" />
 
-### With Field
-
-Use [Field](/docs/components/field) for a label and helper text.
-
-<ComponentPreview componentName="tags-input" fileName="example-with-field" />
-
 ### Form Integration
 
 <ComponentPreview componentName="tags-input" fileName="example-form" />
@@ -215,7 +212,6 @@ Root component. Composes the control, input, and hidden field for form submissio
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
-| `pill` | `boolean` | `false` |
 | `showClear` | `boolean` | `false` |
 | `defaultValue` | `string[]` | `-` |
 | `value` | `string[]` | `-` |

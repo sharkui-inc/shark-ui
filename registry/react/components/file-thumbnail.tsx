@@ -16,10 +16,11 @@ export const fileThumbnailVariants = tv({
     badge: [
       "absolute",
       "py-px",
-      "select-none whitespace-nowrap font-medium uppercase leading-none",
+      "leading-none font-medium whitespace-nowrap uppercase",
+      "select-none",
       "rounded-sm border-t shadow-xs/4",
     ],
-    sheet: "rounded-md border border-border bg-white",
+    sheet: ["bg-white", "border-border rounded-md border"],
   },
   variants: {
     size: {
@@ -39,24 +40,29 @@ export const fileThumbnailVariants = tv({
     tone: {
       default: {
         badge: [
-          "bg-secondary text-secondary-foreground",
+          "bg-secondary",
+          "text-secondary-foreground",
           "border-t-secondary-foreground/32",
         ],
       },
       destructive: {
-        badge: ["bg-destructive text-white", "border-t-destructive-foreground"],
+        badge: [
+          "bg-destructive",
+          "text-white",
+          "border-t-destructive-foreground",
+        ],
       },
       info: {
-        badge: ["bg-info text-white", "border-t-info-foreground"],
+        badge: ["bg-info", "text-white", "border-t-info-foreground"],
       },
       primary: {
-        badge: ["bg-primary-foreground text-white", "border-t-primary/32"],
+        badge: ["bg-primary-foreground", "text-white", "border-t-primary/32"],
       },
       success: {
-        badge: ["bg-success text-white", "border-t-success-foreground"],
+        badge: ["bg-success", "text-white", "border-t-success-foreground"],
       },
       warning: {
-        badge: ["bg-warning text-white", "border-t-warning-foreground"],
+        badge: ["bg-warning", "text-white", "border-t-warning-foreground"],
       },
     },
   },
@@ -83,7 +89,7 @@ export const FileThumbnail = (props: FileThumbnailProps) => {
 
   return (
     <ark.div
-      className={cn("relative inline-block size-fit", className)}
+      className={cn("relative", "size-fit", "inline-block", className)}
       data-slot="file-thumbnail"
       {...rest}
     >
@@ -95,7 +101,7 @@ export const FileThumbnail = (props: FileThumbnailProps) => {
   );
 };
 
-const LEADING_DOT_RE = /^\./;
+const LEADING_DOT_RE = /^\./u;
 
 const toneForFormat = (format: string): FileThumbnailTone =>
   FORMAT_TONES[format.trim().toLowerCase().replace(LEADING_DOT_RE, "")] ??

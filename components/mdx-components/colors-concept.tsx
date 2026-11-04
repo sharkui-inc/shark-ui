@@ -9,7 +9,7 @@ import { Card } from "@/registry/react/components/card";
 import { useUpdateConfig } from "@/store/config";
 
 function formatScaleTitle(label: string) {
-  return label.trim().replaceAll(/\s+/g, "-");
+  return label.trim().replaceAll(/\s+/gu, "-");
 }
 
 export const ColorsConcept = (props: React.ComponentProps<"div">) => {
@@ -22,6 +22,7 @@ export const ColorsConcept = (props: React.ComponentProps<"div">) => {
       baseColor: color,
     });
   };
+
   return (
     <div
       className={cn(
@@ -49,7 +50,7 @@ export const ColorsConcept = (props: React.ComponentProps<"div">) => {
             )}
           >
             <div className="flex items-center px-3 py-2.5">
-              <span className="font-medium font-mono text-[0.65rem] uppercase tracking-wide">
+              <span className="font-mono text-[0.65rem] font-medium tracking-wide uppercase">
                 {formatScaleTitle(color.label)}
               </span>
             </div>
@@ -64,7 +65,7 @@ export const ColorsConcept = (props: React.ComponentProps<"div">) => {
                   color.hex
                 )}
               >
-                <span className="font-medium font-mono text-white text-xs drop-shadow-xs/4">
+                <span className="font-mono text-xs font-medium text-white drop-shadow-xs/4">
                   500
                 </span>
               </div>

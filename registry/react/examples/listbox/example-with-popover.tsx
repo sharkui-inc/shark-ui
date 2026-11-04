@@ -50,13 +50,13 @@ const Example = () => {
             <ChevronsUpDownIcon className="opacity-64" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="min-w-64 gap-2">
-          <ListboxContent>
-            <ListboxInput
-              aria-label="Search frameworks"
-              onChange={(e) => filter(e.target.value)}
-              placeholder="Search..."
-            />
+        <PopoverContent className="min-w-64 gap-1.5 p-1.5">
+          <ListboxInput
+            aria-label="Search frameworks"
+            onChange={(e) => filter(e.target.value)}
+            placeholder="Search..."
+          />
+          <ListboxContent className="p-0">
             {collection.items.map((item) => (
               <ListboxItem item={item} key={item.value}>
                 <ListboxItemText>{item.label}</ListboxItemText>

@@ -94,11 +94,6 @@ interface QuestionnaireItemContextValue {
   titleId: string;
 }
 
-interface QuestionnaireChoicesContextValue {
-  claimShortcut: (disabled?: boolean) => string | undefined;
-  renderId: number;
-}
-
 interface QuestionnaireChoiceContextValue {
   shortcut: string | undefined;
 }
@@ -107,12 +102,6 @@ const [QuestionnaireItemProvider, _useQuestionnaireItem] =
   createContext<QuestionnaireItemContextValue>({
     name: "QuestionnaireItemContext",
     providerName: "QuestionnaireItem",
-  });
-
-const [QuestionnaireChoicesProvider, useQuestionnaireChoices] =
-  createContext<QuestionnaireChoicesContextValue>({
-    name: "QuestionnaireChoicesContext",
-    providerName: "QuestionnaireChoices",
   });
 
 const [QuestionnaireChoiceProvider, useQuestionnaireChoiceContext] =
@@ -610,7 +599,12 @@ export const Questionnaire = (props: QuestionnaireProps) => {
     >
       <ark.form
         {...rest}
-        className={cn("flex w-full min-w-0 flex-col gap-4 text-sm", className)}
+        className={cn(
+          "w-full min-w-0",
+          "flex flex-col gap-4",
+          "text-sm",
+          className
+        )}
         data-slot="questionnaire"
         noValidate
         onPointerDown={(event) => {
@@ -782,7 +776,7 @@ export const QuestionnaireItem = (props: QuestionnaireItemProps) => {
         aria-describedby={getDescribedBy(describedBy, rest["aria-describedby"])}
         aria-invalid={invalid || undefined}
         aria-labelledby={titleId}
-        className={cn("min-w-0 gap-4 outline-hidden", className)}
+        className={cn("min-w-0", "gap-4", "outline-hidden", className)}
         data-active=""
         data-multiple={definition.multiple ? "" : undefined}
         data-name={name}
@@ -811,7 +805,9 @@ export const QuestionnaireTitle = (
     <FieldLegend
       {...rest}
       className={cn(
-        "mb-0 text-pretty [&:not(:has(~[data-slot=questionnaire-description]))]:mb-4",
+        "mb-0",
+        "text-pretty",
+        "[&:not(:has(~[data-slot=questionnaire-description]))]:mb-4",
         className
       )}
       data-slot="questionnaire-title"
@@ -830,109 +826,10 @@ export const QuestionnaireDescription = (
   return (
     <ark.p
       {...rest}
-      className={cn("text-pretty text-muted-foreground", className)}
+      className={cn("text-muted-foreground text-pretty", className)}
       data-slot="questionnaire-description"
       id={descriptionId}
     />
-  );
-};
-
-export const QuestionnaireChoices = (
-  props: React.ComponentProps<typeof ark.div>
-) => {
-  const { children, className, defaultValue: _defaultValue, ...rest } = props;
-
-  const { answer, definition, describedBy, invalid, titleId } =
-    _useQuestionnaireItem();
-
-  const { setAnswer, shortcuts } = _useQuestionnaire();
-
-  const shortcutKeys = getShortcutKeys(shortcuts);
-  const cursorRef = React.useRef({
-    index: 0,
-    keys: shortcutKeys,
-    renderId: 0,
-  });
-  cursorRef.current = {
-    index: 0,
-    keys: shortcutKeys,
-    renderId: cursorRef.current.renderId + 1,
-  };
-
-  const claimShortcut = (disabled?: boolean) => {
-    if (disabled) {
-      return;
-    }
-
-    const { keys, index } = cursorRef.current;
-    cursorRef.current.index = index + 1;
-    return keys[index];
-  };
-
-  const choicesValue = {
-    claimShortcut,
-    renderId: cursorRef.current.renderId,
-  };
-
-  const groupDescribedBy = getDescribedBy(
-    describedBy,
-    rest["aria-describedby"]
-  );
-
-  if (definition.multiple) {
-    return (
-      <ark.div
-        {...rest}
-        className={cn("flex flex-col gap-2", className)}
-        data-slot="questionnaire-choices"
-      >
-        <QuestionnaireChoicesProvider value={choicesValue}>
-          <CheckboxGroup
-            aria-describedby={groupDescribedBy}
-            aria-labelledby={titleId}
-            className="flex flex-col gap-2"
-            invalid={invalid}
-            name={definition.name}
-            onValueChange={(values) => {
-              setAnswer(definition.name, {
-                input: answer.input,
-                values,
-              });
-            }}
-            value={answer.values}
-          >
-            {children}
-          </CheckboxGroup>
-        </QuestionnaireChoicesProvider>
-      </ark.div>
-    );
-  }
-
-  return (
-    <ark.div
-      {...rest}
-      className={cn("flex flex-col gap-2", className)}
-      data-slot="questionnaire-choices"
-    >
-      <QuestionnaireChoicesProvider value={choicesValue}>
-        <RadioGroup
-          aria-describedby={groupDescribedBy}
-          aria-labelledby={titleId}
-          className="flex flex-col gap-2"
-          invalid={invalid}
-          name={definition.name}
-          onValueChange={({ value }) => {
-            setAnswer(definition.name, {
-              input: "",
-              values: value ? [value] : [],
-            });
-          }}
-          value={answer.input.trim() ? null : (answer.values[0] ?? null)}
-        >
-          {children}
-        </RadioGroup>
-      </QuestionnaireChoicesProvider>
-    </ark.div>
   );
 };
 
@@ -965,21 +862,6 @@ export const QuestionnaireChoice = (props: QuestionnaireChoiceProps) => {
   } = props;
 
   const { answer, definition, describedBy, invalid } = _useQuestionnaireItem();
-  const { claimShortcut, renderId } = useQuestionnaireChoices();
-
-  const claimedRef = React.useRef<{
-    renderId: number;
-    shortcut: string | undefined;
-  }>({ renderId: -1, shortcut: undefined });
-
-  if (shortcut === undefined && claimedRef.current.renderId !== renderId) {
-    claimedRef.current = {
-      renderId,
-      shortcut: claimShortcut(disabled),
-    };
-  }
-
-  const resolvedShortcut = shortcut ?? claimedRef.current.shortcut;
 
   const checked =
     (definition.multiple || !answer.input.trim()) &&
@@ -1008,15 +890,15 @@ export const QuestionnaireChoice = (props: QuestionnaireChoiceProps) => {
   };
 
   return (
-    <QuestionnaireChoiceProvider value={{ shortcut: resolvedShortcut }}>
+    <QuestionnaireChoiceProvider value={{ shortcut }}>
       <ark.div
         className={cn(
           "relative",
           "min-w-0",
           "text-start",
-          "rounded-xl border border-input",
+          "border-input rounded-xl border",
           "data-[state=checked]:border-primary data-[state=checked]:bg-primary/8",
-          "has-focus-visible:border-ring/64 has-focus-visible:ring-2 has-focus-visible:ring-ring/24",
+          "has-focus-visible:border-ring/64 has-focus-visible:ring-ring/24 has-focus-visible:ring-2",
           "data-disabled:opacity-64",
           className
         )}
@@ -1028,31 +910,39 @@ export const QuestionnaireChoice = (props: QuestionnaireChoiceProps) => {
         {definition.multiple ? (
           <Field
             className={cn(
-              "items-start p-2.5",
+              "items-start",
+              "p-2.5",
               !disabled && "cursor-pointer",
-              resolvedShortcut && "pe-12"
+              shortcut && "pe-12"
             )}
             disabled={disabled}
             invalid={invalid}
             orientation="horizontal"
           >
-            <span className="flex h-lh shrink-0 items-center">
+            <span className={cn("h-lh shrink-0", "flex items-center")}>
               <Checkbox
                 aria-describedby={describedBy}
-                aria-keyshortcuts={resolvedShortcut}
+                aria-keyshortcuts={shortcut}
                 data-questionnaire-answer="choice"
                 value={value}
               />
             </span>
-            <FieldLabel className="flex min-w-0 flex-1 cursor-pointer flex-col gap-0.5">
+            <FieldLabel
+              className={cn(
+                "min-w-0 flex-1",
+                "flex flex-col gap-0.5",
+                "cursor-pointer"
+              )}
+            >
               {children}
             </FieldLabel>
           </Field>
         ) : (
           <RadioGroupItem
-            aria-keyshortcuts={resolvedShortcut}
+            aria-keyshortcuts={shortcut}
             className={cn(
-              "flex w-full items-start",
+              "w-full",
+              "flex items-start",
               "p-2.5",
               "cursor-pointer",
               "*:data-[slot=radio-group-item-control]:mt-[calc((1lh-1rem)/2)]",
@@ -1061,7 +951,7 @@ export const QuestionnaireChoice = (props: QuestionnaireChoiceProps) => {
               "*:data-[slot=radio-group-item-text]:flex-1",
               "*:data-[slot=radio-group-item-text]:flex-col",
               "*:data-[slot=radio-group-item-text]:gap-0.5",
-              resolvedShortcut && "pe-12"
+              shortcut && "pe-12"
             )}
             data-questionnaire-answer="choice"
             disabled={disabled}
@@ -1072,6 +962,104 @@ export const QuestionnaireChoice = (props: QuestionnaireChoiceProps) => {
         )}
       </ark.div>
     </QuestionnaireChoiceProvider>
+  );
+};
+
+const assignChoiceShortcuts = (
+  children: React.ReactNode,
+  shortcutKeys: readonly string[]
+) => {
+  let index = 0;
+
+  return React.Children.map(children, (child) => {
+    if (
+      !React.isValidElement<QuestionnaireChoiceProps>(child) ||
+      child.type !== QuestionnaireChoice
+    ) {
+      return child;
+    }
+
+    if (child.props.disabled || child.props.shortcut !== undefined) {
+      return child;
+    }
+
+    const shortcut = shortcutKeys[index];
+    index += 1;
+
+    if (shortcut === undefined) {
+      return child;
+    }
+
+    return React.cloneElement(child, { shortcut });
+  });
+};
+
+export const QuestionnaireChoices = (
+  props: React.ComponentProps<typeof ark.div>
+) => {
+  const { children, className, defaultValue: _defaultValue, ...rest } = props;
+
+  const { answer, definition, describedBy, invalid, titleId } =
+    _useQuestionnaireItem();
+
+  const { setAnswer, shortcuts } = _useQuestionnaire();
+  const choices = assignChoiceShortcuts(children, getShortcutKeys(shortcuts));
+
+  const groupDescribedBy = getDescribedBy(
+    describedBy,
+    rest["aria-describedby"]
+  );
+
+  if (definition.multiple) {
+    return (
+      <ark.div
+        {...rest}
+        className={cn("flex flex-col gap-2", className)}
+        data-slot="questionnaire-choices"
+      >
+        <CheckboxGroup
+          aria-describedby={groupDescribedBy}
+          aria-labelledby={titleId}
+          className="flex flex-col gap-2"
+          invalid={invalid}
+          name={definition.name}
+          onValueChange={(values) => {
+            setAnswer(definition.name, {
+              input: answer.input,
+              values,
+            });
+          }}
+          value={answer.values}
+        >
+          {choices}
+        </CheckboxGroup>
+      </ark.div>
+    );
+  }
+
+  return (
+    <ark.div
+      {...rest}
+      className={cn("flex flex-col gap-2", className)}
+      data-slot="questionnaire-choices"
+    >
+      <RadioGroup
+        aria-describedby={groupDescribedBy}
+        aria-labelledby={titleId}
+        className="flex flex-col gap-2"
+        invalid={invalid}
+        name={definition.name}
+        onValueChange={({ value }) => {
+          setAnswer(definition.name, {
+            input: "",
+            values: value ? [value] : [],
+          });
+        }}
+        value={answer.input.trim() ? null : (answer.values[0] ?? null)}
+      >
+        {choices}
+      </RadioGroup>
+    </ark.div>
   );
 };
 
@@ -1089,8 +1077,9 @@ export const QuestionnaireChoiceShortcut = (
       className={cn(
         "z-10",
         "absolute inset-e-3 top-2.5",
-        "bg-background/64 text-foreground",
-        "border border-input",
+        "bg-background/64",
+        "text-foreground",
+        "border-input border",
         "pointer-events-none",
         className
       )}
@@ -1151,7 +1140,8 @@ export const QuestionnaireError = (
       {...rest}
       aria-live="polite"
       className={cn(
-        "text-destructive dark:text-destructive-foreground",
+        "text-destructive",
+        "dark:text-destructive-foreground",
         className
       )}
       data-slot="questionnaire-error"

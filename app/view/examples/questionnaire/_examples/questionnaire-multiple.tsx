@@ -29,7 +29,7 @@ const items = [
 ] as const;
 
 const QuestionnaireMultiple = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const context = new FormData(event.currentTarget).getAll("context");

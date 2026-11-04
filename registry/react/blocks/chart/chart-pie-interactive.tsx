@@ -84,6 +84,7 @@ const ChartPieInteractive = () => {
     () => desktopData.findIndex((item) => activeMonth.includes(item.month)),
     [activeMonth]
   );
+
   return (
     <Card data-chart={id}>
       <ChartStyle config={chartConfig} id={id} />
@@ -159,7 +160,7 @@ const ChartPieInteractive = () => {
                         y={viewBox.cy}
                       >
                         <tspan
-                          className="fill-foreground font-bold text-3xl"
+                          className="fill-foreground text-3xl font-bold"
                           x={viewBox.cx}
                           y={viewBox.cy}
                         >

@@ -25,14 +25,14 @@ const Example = () => {
   return (
     <Card className="w-full max-w-sm">
       <CardContent>
-        <p className="flex items-center gap-2 text-muted-foreground text-sm">
+        <p className="text-muted-foreground flex items-center gap-2 text-sm">
           Press the keys in order, one after the other
         </p>
         <Separator className="my-4" />
         <ul className="flex flex-col gap-2">
           {commands.map((command) => (
             <li
-              className="flex items-center justify-between gap-3 rounded-lg p-2 text-sm data-[selected=true]:bg-primary data-[selected=true]:text-primary-foreground"
+              className="data-[selected=true]:bg-primary data-[selected=true]:text-primary-foreground flex items-center justify-between gap-3 rounded-lg p-2 text-sm"
               data-selected={selected === command.id}
               key={command.id}
             >

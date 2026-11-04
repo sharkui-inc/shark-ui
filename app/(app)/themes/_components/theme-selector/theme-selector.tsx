@@ -59,7 +59,7 @@ export const ThemeSelector = (props: React.ComponentProps<"fieldset">) => {
           orientation="horizontal"
           scrollFade
         >
-          <div className="flex @[600px]:w-full w-max min-w-full @[600px]:flex-wrap items-end @[600px]:justify-center gap-3">
+          <div className="flex w-max min-w-full items-end gap-3 @[600px]:w-full @[600px]:flex-wrap @[600px]:justify-center">
             <div className="w-36 shrink-0">
               <ThemeSelectorPreset />
             </div>

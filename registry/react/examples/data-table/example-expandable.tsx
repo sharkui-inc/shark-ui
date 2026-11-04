@@ -122,6 +122,7 @@ const formatCurrency = (amount: number) =>
 
 const ExpandToggle = (props: { row: Row<typeof features, Order> }) => {
   const { row } = props;
+
   return (
     <Button
       aria-expanded={row.getIsExpanded()}
@@ -184,9 +185,10 @@ const data: Order[] = [
 
 const OrderDetail = (props: { order: Order }) => {
   const { order } = props;
+
   return (
     <div className="bg-muted/32 px-4 py-3">
-      <p className="mb-2 font-medium text-muted-foreground text-xs uppercase tracking-wide">
+      <p className="text-muted-foreground mb-2 text-xs font-medium tracking-wide uppercase">
         Line items
       </p>
       <Table>

@@ -56,6 +56,7 @@ export const TaskFilters = (props: {
     status,
     table,
   } = props;
+
   return (
     <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
       <InputGroup className="lg:max-w-48">

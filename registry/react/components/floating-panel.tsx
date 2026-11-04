@@ -13,15 +13,17 @@ import { Button, type ButtonProps } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const useFloatingPanelContext = useArkFloatingPanelContext;
+
 export const FloatingPanel = (
   props: React.ComponentProps<typeof ArkFloatingPanel.Root>
 ) => {
-  const { lazyMount = true, unmountOnExit = true, ...rest } = props;
+  const { lazyMount = true, minSize, unmountOnExit = true, ...rest } = props;
 
   return (
     <ArkFloatingPanel.Root
       data-slot="floating-panel"
       lazyMount={lazyMount}
+      minSize={{ height: 240, width: 320, ...minSize }}
       unmountOnExit={unmountOnExit}
       {...rest}
     />
@@ -51,12 +53,12 @@ export const FloatingPanelContent = (props: FloatingPanelContentProps) => {
         className="inset-s-(--x) top-(--y)"
         data-slot="floating-panel-positioner"
         dir="ltr"
-        style={{ zIndex: "calc(50 + var(--z-index))" }}
+        style={{ zIndex: "calc(40 + var(--z-index))" }}
       >
         <ArkFloatingPanel.Content
           className={cn(
             "[--space:--spacing(4)]",
-            "z-[calc(50+var(--z-index))]",
+            "z-[calc(40+var(--z-index))]",
             "group/floating-panel",
             "relative",
             "flex flex-col",
@@ -65,10 +67,11 @@ export const FloatingPanelContent = (props: FloatingPanelContentProps) => {
             "text-popover-foreground",
             "rounded-2xl border shadow-lg/4",
             "outline-hidden",
-            "origin-center transition-[scale,opacity,translate] duration-200 ease-out will-change-transform",
-            "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
+            "origin-center",
+            "duration-100 ease-out",
+            "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in",
             "motion-reduce:animate-none motion-reduce:transition-none",
-            "motion-reduce:data-[state=open]:animate-none",
+            "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
           )}
           data-slot="floating-panel-content"
@@ -114,13 +117,14 @@ export const FloatingPanelHeader = (
         className={cn(
           "relative",
           "min-w-0",
-          "px-(--space) py-[calc(var(--space)*0.5)]",
-          "flex flex-1 shrink-0 items-center gap-2",
+          "py-1.5 ps-3 pe-1.5",
+          "flex-1 shrink-0",
+          "flex items-center gap-2",
           "bg-muted/48",
           "rounded-t-[max(0px,calc(var(--radius)*2-1px))] border-b",
           "overflow-hidden",
           "in-data-disabled:cursor-default",
-          "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+          "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
           className
         )}
         data-slot="floating-panel-header"
@@ -137,7 +141,7 @@ export const FloatingPanelControl = (
 
   return (
     <ArkFloatingPanel.Control
-      className={cn("ms-auto flex items-center gap-2", className)}
+      className={cn("flex items-center gap-1", "ms-auto", className)}
       data-slot="floating-panel-control"
       {...rest}
     />
@@ -185,8 +189,12 @@ export const FloatingPanelRestore = (props: FloatingPanelStageTriggerProps) => {
   return (
     <ArkFloatingPanel.StageTrigger {...rest} asChild stage="default">
       <Button aria-label="Restore" size={size} variant={variant}>
-        <MinimizeIcon className="hidden group-data-maximized/floating-panel:block" />
-        <MaximizeIcon className="hidden group-data-minimized/floating-panel:block" />
+        <MinimizeIcon
+          className={cn("hidden", "group-data-maximized/floating-panel:block")}
+        />
+        <MaximizeIcon
+          className={cn("hidden", "group-data-minimized/floating-panel:block")}
+        />
       </Button>
     </ArkFloatingPanel.StageTrigger>
   );
@@ -202,7 +210,7 @@ export const FloatingPanelTitle = (
       className={cn(
         "min-w-0 flex-1",
         "flex items-center gap-2",
-        "truncate whitespace-nowrap font-medium text-sm leading-none",
+        "truncate text-sm leading-none font-medium whitespace-nowrap",
         className
       )}
       data-slot="floating-panel-title"
@@ -219,27 +227,35 @@ export const FloatingPanelResizeTrigger = (
   return (
     <ArkFloatingPanel.ResizeTrigger
       className={cn(
-        "data-[axis=ne]:z-1 data-[axis=nw]:z-1 data-[axis=se]:z-1 data-[axis=sw]:z-1",
-        "data-[axis=n]:h-1.5 data-[axis=s]:h-1.5 data-[axis=n]:max-w-[90%] data-[axis=s]:max-w-[90%]",
-        "data-[axis=e]:max-h-[90%] data-[axis=w]:max-h-[90%] data-[axis=e]:w-1.5 data-[axis=w]:w-1.5",
-        "data-[axis=ne]:size-2.5 data-[axis=nw]:size-2.5 data-[axis=se]:size-2.5 data-[axis=sw]:size-2.5",
+        "data-[axis=ne]:z-1",
+        "data-[axis=nw]:z-1",
+        "data-[axis=se]:z-1",
+        "data-[axis=sw]:z-1",
+        "data-[axis=n]:h-1.5 data-[axis=n]:max-w-[90%]",
+        "data-[axis=s]:h-1.5 data-[axis=s]:max-w-[90%]",
+        "data-[axis=e]:max-h-[90%] data-[axis=e]:w-1.5",
+        "data-[axis=w]:max-h-[90%] data-[axis=w]:w-1.5",
+        "data-[axis=ne]:size-2.5",
+        "data-[axis=nw]:size-2.5",
+        "data-[axis=se]:size-2.5",
+        "data-[axis=sw]:size-2.5",
         "after:absolute",
         "pointer-fine:data-[axis=n]:after:inset-x-0 pointer-fine:data-[axis=n]:after:-top-1 pointer-fine:data-[axis=n]:after:h-1",
         "pointer-fine:data-[axis=s]:after:inset-x-0 pointer-fine:data-[axis=s]:after:-bottom-1 pointer-fine:data-[axis=s]:after:h-1",
         "pointer-fine:data-[axis=e]:after:inset-y-0 pointer-fine:data-[axis=e]:after:-right-1 pointer-fine:data-[axis=e]:after:w-1",
         "pointer-fine:data-[axis=w]:after:inset-y-0 pointer-fine:data-[axis=w]:after:-left-1 pointer-fine:data-[axis=w]:after:w-1",
-        "pointer-fine:data-[axis=nw]:after:-top-1 pointer-fine:data-[axis=nw]:after:-left-1 pointer-fine:data-[axis=nw]:after:size-[calc(100%+--spacing(1))]",
-        "pointer-fine:data-[axis=ne]:after:-top-1 pointer-fine:data-[axis=ne]:after:-right-1 pointer-fine:data-[axis=ne]:after:size-[calc(100%+--spacing(1))]",
-        "pointer-fine:data-[axis=se]:after:-right-1 pointer-fine:data-[axis=se]:after:-bottom-1 pointer-fine:data-[axis=se]:after:size-[calc(100%+--spacing(1))]",
-        "pointer-fine:data-[axis=sw]:after:-bottom-1 pointer-fine:data-[axis=sw]:after:-left-1 pointer-fine:data-[axis=sw]:after:size-[calc(100%+--spacing(1))]",
+        "pointer-fine:data-[axis=nw]:after:-top-1 pointer-fine:data-[axis=nw]:after:-left-1 pointer-fine:data-[axis=nw]:after:size-[calc(100%+(--spacing(1)))]",
+        "pointer-fine:data-[axis=ne]:after:-top-1 pointer-fine:data-[axis=ne]:after:-right-1 pointer-fine:data-[axis=ne]:after:size-[calc(100%+(--spacing(1)))]",
+        "pointer-fine:data-[axis=se]:after:-right-1 pointer-fine:data-[axis=se]:after:-bottom-1 pointer-fine:data-[axis=se]:after:size-[calc(100%+(--spacing(1)))]",
+        "pointer-fine:data-[axis=sw]:after:-bottom-1 pointer-fine:data-[axis=sw]:after:-left-1 pointer-fine:data-[axis=sw]:after:size-[calc(100%+(--spacing(1)))]",
         "pointer-coarse:data-[axis=n]:after:inset-x-0 pointer-coarse:data-[axis=n]:after:-top-6 pointer-coarse:data-[axis=n]:after:h-6",
         "pointer-coarse:data-[axis=s]:after:inset-x-0 pointer-coarse:data-[axis=s]:after:-bottom-6 pointer-coarse:data-[axis=s]:after:h-6",
         "pointer-coarse:data-[axis=e]:after:inset-y-0 pointer-coarse:data-[axis=e]:after:-right-6 pointer-coarse:data-[axis=e]:after:w-6",
         "pointer-coarse:data-[axis=w]:after:inset-y-0 pointer-coarse:data-[axis=w]:after:-left-6 pointer-coarse:data-[axis=w]:after:w-6",
-        "pointer-coarse:data-[axis=nw]:after:-top-6 pointer-coarse:data-[axis=nw]:after:-left-6 pointer-coarse:data-[axis=nw]:after:size-[calc(100%+--spacing(6))]",
-        "pointer-coarse:data-[axis=ne]:after:-top-6 pointer-coarse:data-[axis=ne]:after:-right-6 pointer-coarse:data-[axis=ne]:after:size-[calc(100%+--spacing(6))]",
-        "pointer-coarse:data-[axis=se]:after:-right-6 pointer-coarse:data-[axis=se]:after:-bottom-6 pointer-coarse:data-[axis=se]:after:size-[calc(100%+--spacing(6))]",
-        "pointer-coarse:data-[axis=sw]:after:-bottom-6 pointer-coarse:data-[axis=sw]:after:-left-6 pointer-coarse:data-[axis=sw]:after:size-[calc(100%+--spacing(6))]",
+        "pointer-coarse:data-[axis=nw]:after:-top-6 pointer-coarse:data-[axis=nw]:after:-left-6 pointer-coarse:data-[axis=nw]:after:size-[calc(100%+(--spacing(6)))]",
+        "pointer-coarse:data-[axis=ne]:after:-top-6 pointer-coarse:data-[axis=ne]:after:-right-6 pointer-coarse:data-[axis=ne]:after:size-[calc(100%+(--spacing(6)))]",
+        "pointer-coarse:data-[axis=se]:after:-right-6 pointer-coarse:data-[axis=se]:after:-bottom-6 pointer-coarse:data-[axis=se]:after:size-[calc(100%+(--spacing(6)))]",
+        "pointer-coarse:data-[axis=sw]:after:-bottom-6 pointer-coarse:data-[axis=sw]:after:-left-6 pointer-coarse:data-[axis=sw]:after:size-[calc(100%+(--spacing(6)))]",
         "data-disabled:hidden",
         className
       )}

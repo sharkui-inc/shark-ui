@@ -27,7 +27,7 @@ const RatingDemo = () => (
       </div>
     </CardHeader>
     <CardContent className="flex flex-col gap-2 text-center">
-      <p className="font-medium text-sm">Rate your driver</p>
+      <p className="text-sm font-medium">Rate your driver</p>
       <Rating aria-label="Rate your driver" />
     </CardContent>
     <CardFooter>

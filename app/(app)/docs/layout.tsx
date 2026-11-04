@@ -8,11 +8,12 @@ export const revalidate = false;
 
 const DocsLayout = (props: LayoutProps<"/docs">) => {
   const { children } = props;
+
   return (
     <main>
       <SidebarProvider
         className={cn(
-          "[--sidebar-width:220px] [--top-spacing:0] lg:[--sidebar-width:240px] lg:[--top-spacing:--spacing(4)]",
+          "[--sidebar-width:220px] lg:[--sidebar-width:240px]",
           "container",
           "min-h-min",
           "flex-1 items-start",

@@ -94,10 +94,10 @@ const ChartAreaLegend = () => (
     </CardContent>
     <CardFooter className="w-full items-start text-sm">
       <div className="grid gap-2">
-        <div className="flex items-center gap-2 font-medium leading-none">
+        <div className="flex items-center gap-2 leading-none font-medium">
           Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
         </div>
-        <div className="flex items-center gap-2 text-muted-foreground leading-none">
+        <div className="text-muted-foreground flex items-center gap-2 leading-none">
           January - June 2024
         </div>
       </div>

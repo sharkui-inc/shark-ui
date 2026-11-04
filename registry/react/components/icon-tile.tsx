@@ -5,8 +5,9 @@ import { cn } from "@/lib/utils";
 
 export const iconTileVariants = tv({
   base: [
-    "inline-flex shrink-0 items-center justify-center",
-    "font-medium text-muted-foreground",
+    "shrink-0",
+    "inline-flex items-center justify-center",
+    "text-muted-foreground font-medium",
     "rounded-md",
     "overflow-hidden",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0",
@@ -14,7 +15,9 @@ export const iconTileVariants = tv({
     "transition-colors",
     "disabled:pointer-events-none disabled:opacity-64",
     "aria-disabled:pointer-events-none aria-disabled:opacity-64",
-    "border border-transparent outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+    "border border-transparent",
+    "outline-hidden",
+    "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
     "motion-reduce:transition-none",
   ],
   defaultVariants: {
@@ -28,11 +31,11 @@ export const iconTileVariants = tv({
       true: "rounded-full",
     },
     size: {
-      lg: "size-9 [&_svg:not([class*='size-'])]:size-4.5",
-      md: "size-8 [&_svg:not([class*='size-'])]:size-4",
-      sm: "size-7 [&_svg:not([class*='size-'])]:size-3.5",
-      xl: "size-10 [&_svg:not([class*='size-'])]:size-5",
-      xs: "size-6 [&_svg:not([class*='size-'])]:size-3",
+      lg: ["size-9", "[&_svg:not([class*='size-'])]:size-4.5"],
+      md: ["size-8", "[&_svg:not([class*='size-'])]:size-4"],
+      sm: ["size-7", "[&_svg:not([class*='size-'])]:size-3.5"],
+      xl: ["size-10", "[&_svg:not([class*='size-'])]:size-5"],
+      xs: ["size-6", "[&_svg:not([class*='size-'])]:size-3"],
     },
     variant: {
       default: [
@@ -43,7 +46,7 @@ export const iconTileVariants = tv({
       ],
       outline: [
         "bg-background",
-        "border border-input",
+        "border-input border",
         "[a,button]:hover:bg-accent",
         "[a,button]:hover:text-accent-foreground",
       ],

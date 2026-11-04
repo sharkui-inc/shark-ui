@@ -52,7 +52,7 @@ const InputGroupWithAddons = () => (
           <MicIcon aria-hidden />
         </InputGroupAddon>
         <InputGroupAddon align="inline-end">
-          <RadioIcon aria-hidden className="animate-pulse text-destructive" />
+          <RadioIcon aria-hidden className="text-destructive animate-pulse" />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -62,7 +62,7 @@ const InputGroupWithAddons = () => (
         <InputGroupInput />
         <InputGroupAddon align="block-start">
           <InputGroupText>First Name</InputGroupText>
-          <InfoIcon aria-hidden className="ml-auto text-muted-foreground" />
+          <InfoIcon aria-hidden className="text-muted-foreground ml-auto" />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -72,7 +72,7 @@ const InputGroupWithAddons = () => (
         <InputGroupInput />
         <InputGroupAddon align="block-end">
           <InputGroupText>20/240 characters</InputGroupText>
-          <InfoIcon aria-hidden className="ml-auto text-muted-foreground" />
+          <InfoIcon aria-hidden className="text-muted-foreground ml-auto" />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -91,7 +91,7 @@ const InputGroupWithAddons = () => (
           </InputGroupButton>
         </InputGroupAddon>
         <InputGroupAddon>
-          <RadioIcon aria-hidden className="animate-pulse text-destructive" />
+          <RadioIcon aria-hidden className="text-destructive animate-pulse" />
         </InputGroupAddon>
       </InputGroup>
     </Field>

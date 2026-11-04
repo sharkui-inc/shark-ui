@@ -7,14 +7,19 @@ import {
 import { StarIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { FieldLabel } from "@/registry/react/components/field";
+import { fieldLabelVariants } from "@/registry/react/components/field";
+
+export const useRatingContext = useArkRatingGroupContext;
 
 interface RatingProps extends React.ComponentProps<typeof ArkRatingGroup.Root> {
-  /** The icon used for each rating item. */
+  /**
+   * The icon to use for the rating.
+   *
+   * @default StarIcon
+   */
   icon?: React.JSX.ElementType;
 }
 
-export const useRatingContext = useArkRatingGroupContext;
 export const Rating = (props: RatingProps) => {
   const {
     allowHalf = false,
@@ -73,7 +78,8 @@ export const RatingStars = (props: RatingStarsProps) => {
                 {({ half, highlighted }) => (
                   <span
                     className={cn(
-                      "relative inline-flex",
+                      "relative",
+                      "inline-flex",
                       "**:data-fg:text-current **:data-fg:[clip-path:inset(0_0_0_0)]",
                       "[&[data-half]_[data-fg]]:[clip-path:inset(0_50%_0_0)]",
                       "rtl:[&[data-half]_[data-fg]]:[clip-path:inset(0_0_0_50%)]",
@@ -101,11 +107,17 @@ export const RatingStars = (props: RatingStarsProps) => {
 
 export const RatingLabel = (
   props: React.ComponentProps<typeof ArkRatingGroup.Label>
-) => (
-  <FieldLabel asChild>
-    <ArkRatingGroup.Label data-slot="field-label" {...props} />
-  </FieldLabel>
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkRatingGroup.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="rating-label"
+      {...rest}
+    />
+  );
+};
 
 export const RatingItem = (
   props: React.ComponentProps<typeof ArkRatingGroup.Item>

@@ -24,7 +24,7 @@ const Example = () => (
     </DialogTrigger>
     <DialogContent showCloseButton={false}>
       <DialogHeader
-        description="Email is focused via data-autofocus."
+        description="Email receives focus when the dialog opens."
         title="Autofocus"
       />
       <DialogBody>

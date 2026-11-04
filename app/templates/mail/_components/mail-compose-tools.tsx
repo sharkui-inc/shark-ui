@@ -86,6 +86,7 @@ const ComposeMenu = (props: {
   label: string;
 }) => {
   const { icon, items, label } = props;
+
   return (
     <Menu positioning={{ placement: "bottom-start" }}>
       <MenuTrigger asChild>
@@ -115,7 +116,7 @@ export const MailComposeTools = () => (
         <Undo2Icon aria-hidden />
       </MailToolbarButton>
       <MailToolbarButton label="Formatting">
-        <span aria-hidden className="font-medium text-[0.625rem] leading-none">
+        <span aria-hidden className="text-[0.625rem] leading-none font-medium">
           Aa
         </span>
       </MailToolbarButton>

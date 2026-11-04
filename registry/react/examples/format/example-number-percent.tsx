@@ -7,7 +7,7 @@ const Example = () => (
     <Field>
       <Progress value={75}>
         <ProgressLabel>Storage used</ProgressLabel>
-        <span className="ms-auto text-sm tabular-nums tracking-tight">
+        <span className="ms-auto text-sm tracking-tight tabular-nums">
           <FormatNumber style="percent" value={0.75} />
         </span>
       </Progress>
@@ -15,7 +15,7 @@ const Example = () => (
     <Field>
       <Progress value={75.67}>
         <ProgressLabel>Precise fill</ProgressLabel>
-        <span className="ms-auto text-sm tabular-nums tracking-tight">
+        <span className="ms-auto text-sm tracking-tight tabular-nums">
           <FormatNumber
             minimumFractionDigits={2}
             style="percent"

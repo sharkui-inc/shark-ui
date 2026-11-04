@@ -45,8 +45,8 @@ const Example = () => {
           <Button variant="outline">Start tour</Button>
         </TourTrigger>
 
-        <div className="flex flex-col gap-3 rounded-lg border bg-card p-3 shadow-xs/4">
-          <div className="flex min-h-16 items-center gap-3 rounded-md border bg-background p-2">
+        <div className="bg-card flex flex-col gap-3 rounded-lg border p-3 shadow-xs/4">
+          <div className="bg-background flex min-h-16 items-center gap-3 rounded-md border p-2">
             {track ? (
               <>
                 <img
@@ -56,13 +56,13 @@ const Example = () => {
                   src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=studio-print&waveColor=ea580c"
                   width={48}
                 />
-                <span className="min-w-0 truncate font-medium text-sm">
+                <span className="min-w-0 truncate text-sm font-medium">
                   {track}
                 </span>
               </>
             ) : (
               <>
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
+                <span className="bg-muted text-muted-foreground flex size-12 shrink-0 items-center justify-center rounded-md">
                   <Music2Icon aria-hidden />
                 </span>
                 <span className="text-muted-foreground text-sm">

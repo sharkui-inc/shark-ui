@@ -1,6 +1,8 @@
 ---
 title: Date Picker
 description: Input with a built-in calendar.
+aliases:
+  - Datepicker
 seo:
   description: Text field plus calendar for choosing dates.
 links:
@@ -97,6 +99,12 @@ import {
 </DatePicker>
 ```
 
+## With Field
+
+Use `DatePickerLabel` inside [Field](/docs/components/field) to name the input.
+
+<ComponentPreview componentName="date-picker" fileName="example-with-field" />
+
 ## Controlled
 
 Control the selected date with `value` and `onValueChange`.
@@ -105,24 +113,15 @@ Control the selected date with `value` and `onValueChange`.
 
 ## States
 
+### Disabled
+
+<ComponentPreview componentName="date-picker" fileName="example-disabled" />
+
 ### Invalid
 
 <ComponentPreview componentName="date-picker" fileName="example-invalid" />
 
 ## Examples
-
-### With Field
-
-Use `DatePickerLabel` to name the trigger or input.
-
-<ComponentPreview componentName="date-picker" fileName="example-with-field" />
-
-### Without Field
-
-`DatePickerLabel` keeps its Ark association when the picker is used without
-`Field`.
-
-<ComponentPreview componentName="date-picker" fileName="example-without-field" />
 
 ### Input
 
@@ -136,27 +135,21 @@ Select a date range with `selectionMode="range"`.
 
 <ComponentPreview componentName="date-picker" fileName="example-range" />
 
-### Time
-
-Use `DatePickerTimer` for time selection.
-
-<ComponentPreview componentName="date-picker" fileName="example-time" />
-
 ### With Presets
 
 Add quick single-date presets in a side panel.
 
 <ComponentPreview componentName="date-picker" fileName="example-with-presets" />
 
+### Custom format
+
+Customize the format of the presets using external date formatting library.
+
+<ComponentPreview componentName="date-picker" fileName="example-custom-format" />
+
 ### Form Integration
 
 <ComponentPreview componentName="date-picker" fileName="example-form" />
-
-### Custom format
-
-Customize the format of the presets using external date formatting library like `date-fns`.
-
-<ComponentPreview componentName="date-picker" fileName="example-custom-format" />
 
 ## RTL
 
@@ -181,6 +174,7 @@ Root element. Extends [Calendar](/docs/components/calendar#api-reference).
 | `maxSelectedDates` | `number` | `-` |
 | `openOnClick` | `boolean` | `-` |
 | `required` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
 | `invalid` | `boolean` | `-` |
 | `positioning` | `PositioningOptions` | `{ placement: "top" }` |
 | `lazyMount` | `boolean` | `true` |
@@ -235,17 +229,6 @@ Displays the selected date(s) as text.
 | `placeholder` | `string` | `-` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `-` |
-
-### DatePickerTimer
-
-Time input for selecting hour and minute. Use alongside the calendar for date-time selection. `input`
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `string` | `-` |
-| `defaultValue` | `string` | `-` |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
-| `className` | `string` | `-` |
 
 ### DatePickerPresetTrigger
 

@@ -40,7 +40,7 @@ export const DashboardMetrics = () => (
           <span className="text-muted-foreground text-xs">
             Monthly progress
           </span>
-          <span className="ms-auto font-medium text-xs tabular-nums">
+          <span className="ms-auto text-xs font-medium tabular-nums">
             {metric.target}
           </span>
         </CardFooter>
@@ -51,6 +51,7 @@ export const DashboardMetrics = () => (
 
 const MetricSparkline = (props: { data: number[]; label: string }) => {
   const { data, label } = props;
+
   return (
     <ChartContainer
       aria-hidden

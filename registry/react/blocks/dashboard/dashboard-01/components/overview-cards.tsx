@@ -57,7 +57,7 @@ export const OverviewCards = () => (
         <CardHeader className="flex-row items-start justify-between gap-3">
           <div>
             <CardDescription>{metric.label}</CardDescription>
-            <CardTitle className="mt-2 font-semibold text-2xl tabular-nums tracking-[-0.02em]">
+            <CardTitle className="mt-2 text-2xl font-semibold tracking-[-0.02em] tabular-nums">
               {metric.value}
             </CardTitle>
           </div>
@@ -74,7 +74,7 @@ export const OverviewCards = () => (
             )}
             {metric.change}
           </Badge>
-          <span className="ms-2 text-muted-foreground text-xs">
+          <span className="text-muted-foreground ms-2 text-xs">
             vs. last month
           </span>
         </CardContent>

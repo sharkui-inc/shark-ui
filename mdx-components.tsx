@@ -55,11 +55,11 @@ export const mdxComponents = {
           "max-w-full",
           "inline-flex items-center gap-0.5",
           "-mx-1 px-1",
-          "font-medium text-foreground",
+          "text-foreground font-medium",
           "rounded-md border border-transparent",
           "no-underline",
           "outline-hidden",
-          "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+          "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:z-10 focus-visible:ring-2",
           "**:[code]:decoration-primary",
           className
         )}
@@ -105,9 +105,9 @@ export const mdxComponents = {
             "relative",
             "px-1",
             "rounded-md",
-            "font-medium font-mono text-sm",
+            "font-mono text-sm font-medium",
             "bg-primary/8 dark:bg-primary/16",
-            "text-[color-mix(in_oklab,var(--primary)_58%,black)] dark:text-primary",
+            "dark:text-primary text-[color-mix(in_oklab,var(--primary)_58%,black)]",
             className
           )}
           {...props}
@@ -140,8 +140,8 @@ export const mdxComponents = {
       <figcaption
         className={cn(
           "flex items-center gap-2",
-          "text-[.8125rem] text-code-foreground",
-          "[&_svg]:size-4.5 [&_svg]:text-code-foreground [&_svg]:opacity-64 sm:[&_svg]:size-4",
+          "text-code-foreground text-[.8125rem]",
+          "[&_svg]:text-code-foreground [&_svg]:size-4.5 [&_svg]:opacity-64 sm:[&_svg]:size-4",
           className
         )}
         {...props}
@@ -155,7 +155,7 @@ export const mdxComponents = {
     <h1
       className={cn(
         "mt-2 scroll-m-28",
-        "font-heading font-semibold text-3xl tracking-tight",
+        "font-heading text-3xl font-semibold tracking-tight",
         iframeAfterTextClassName(),
         className
       )}
@@ -170,7 +170,7 @@ export const mdxComponents = {
         {...props}
         className={cn(
           "mt-10 scroll-m-28",
-          "font-heading font-medium text-xl tracking-tight",
+          "font-heading text-xl font-medium tracking-tight",
           "first:mt-0",
           "lg:mt-12",
           "[&+.steps>h3]:mt-4",
@@ -215,7 +215,7 @@ export const mdxComponents = {
       <h4
         className={cn(
           "mt-8 scroll-m-28",
-          "font-heading font-medium text-base tracking-tight",
+          "font-heading text-base font-medium tracking-tight",
           iframeAfterTextClassName(),
           className
         )}
@@ -233,7 +233,7 @@ export const mdxComponents = {
       <h5
         className={cn(
           "mt-8 scroll-m-28",
-          "font-heading font-medium text-base tracking-tight",
+          "font-heading text-base font-medium tracking-tight",
           iframeAfterTextClassName(),
           className
         )}
@@ -250,7 +250,7 @@ export const mdxComponents = {
       <h6
         className={cn(
           "mt-8 scroll-m-28",
-          "font-medium text-base tracking-tight",
+          "text-base font-medium tracking-tight",
           iframeAfterTextClassName(),
           className
         )}
@@ -285,7 +285,7 @@ export const mdxComponents = {
   ),
   ol: ({ className, ...props }: React.ComponentProps<"ol">) => (
     <ol
-      className={cn("my-6 ms-6 list-decimal text-muted-foreground", className)}
+      className={cn("text-muted-foreground my-6 ms-6 list-decimal", className)}
       {...props}
     />
   ),
@@ -293,7 +293,7 @@ export const mdxComponents = {
   p: ({ className, ...props }: React.ComponentProps<"p">) => (
     <p
       className={cn(
-        "not-first:mt-6 text-muted-foreground leading-relaxed",
+        "text-muted-foreground leading-relaxed not-first:mt-6",
         "[&+.steps]:mt-6",
         iframeAfterTextClassName(),
         className
@@ -337,10 +337,10 @@ export const mdxComponents = {
   Step: ({ className, ...props }: React.ComponentProps<"h3">) => (
     <h3
       className={cn(
-        "mt-8 scroll-m-32 font-medium text-base tracking-tight first:mt-2",
-        "before:me-2 before:inline-flex before:size-6 before:items-center before:justify-center before:bg-code",
+        "mt-8 scroll-m-32 text-base font-medium tracking-tight first:mt-2",
+        "before:bg-code before:me-2 before:inline-flex before:size-6 before:items-center before:justify-center",
         "before:text-center before:-indent-px before:font-mono before:text-xs before:tabular-nums",
-        "before:rounded-full before:border before:border-border before:font-medium before:content-[counter(step)]",
+        "before:border-border before:rounded-full before:border before:font-medium before:content-[counter(step)]",
         "md:before:absolute md:before:-ms-12.5 md:before:-mt-1 md:before:size-8",
         className
       )}
@@ -360,7 +360,7 @@ export const mdxComponents = {
   ),
   strong: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <strong
-      className={cn("font-medium text-foreground", className)}
+      className={cn("text-foreground font-medium", className)}
       {...props}
     />
   ),
@@ -381,7 +381,7 @@ export const mdxComponents = {
       <Table
         className={cn(
           "relative w-full border-none [&_tbody_tr:last-child]:border-b-0",
-          "[&_code]:bg-muted! [&_code]:font-normal! [&_code]:text-foreground!",
+          "[&_code]:bg-muted! [&_code]:text-foreground! [&_code]:font-normal!",
           className
         )}
         isHoverable={false}
@@ -404,7 +404,7 @@ export const mdxComponents = {
   tr: (props: React.ComponentProps<typeof TableRow>) => <TableRow {...props} />,
   ul: ({ className, ...props }: React.ComponentProps<"ul">) => (
     <ul
-      className={cn("my-6 ms-6 list-disc text-muted-foreground", className)}
+      className={cn("text-muted-foreground my-6 ms-6 list-disc", className)}
       {...props}
     />
   ),
@@ -417,9 +417,9 @@ const iframeAfterTextClassName = tv({
 const getHeadingId = (children: React.ReactNode) =>
   children
     ?.toString()
-    .replace(/ /g, "-")
-    .replace(/'/g, "")
-    .replace(/\?/g, "")
+    .replace(/ /gu, "-")
+    .replace(/'/gu, "")
+    .replace(/\?/gu, "")
     .toLowerCase();
 
 const HeadingAnchor = ({ id, children }: React.ComponentProps<"a">) => {
@@ -438,7 +438,7 @@ const HeadingAnchor = ({ id, children }: React.ComponentProps<"a">) => {
         "rounded-md border border-transparent",
         "no-underline underline-offset-4",
         "outline-hidden",
-        "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:z-10 focus-visible:ring-2"
       )}
       href={`#${id}`}
     >
@@ -447,7 +447,7 @@ const HeadingAnchor = ({ id, children }: React.ComponentProps<"a">) => {
       </span>
       <span
         aria-hidden
-        className="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+        className="text-muted-foreground ml-2 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
       >
         #
       </span>

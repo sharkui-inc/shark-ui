@@ -3,7 +3,7 @@
 import { createListCollection } from "@ark-ui/react";
 import {
   Field,
-  FieldDescription,
+  FieldHelper,
   FieldLabel,
 } from "@/registry/react/components/field";
 import {
@@ -45,7 +45,7 @@ const FieldSelect = () => (
         </SelectGroup>
       </SelectContent>
     </Select>
-    <FieldDescription>Select your department or area of work.</FieldDescription>
+    <FieldHelper>Select your department or area of work.</FieldHelper>
   </Field>
 );
 

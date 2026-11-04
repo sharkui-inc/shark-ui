@@ -9,30 +9,32 @@ import {
 } from "@/registry/react/components/carousel";
 
 const Example = () => (
-  <Carousel
-    aria-label="Carousel with multiple slides per page"
-    className="w-full max-w-lg"
-    slideCount={slides.length}
-    slidesPerPage={3}
-    spacing="16px"
-  >
-    <CarouselControl>
-      <CarouselPrevious>Previous</CarouselPrevious>
-      <CarouselNext>Next</CarouselNext>
-    </CarouselControl>
+  <div className="w-full px-12">
+    <Carousel
+      aria-label="Carousel with multiple slides per page"
+      className="mx-auto w-full max-w-lg"
+      slideCount={slides.length}
+      slidesPerPage={3}
+      spacing="16px"
+    >
+      <CarouselControl>
+        <CarouselPrevious>Previous</CarouselPrevious>
+        <CarouselNext>Next</CarouselNext>
+      </CarouselControl>
 
-    <CarouselContent>
-      {slides.map((slide, index) => (
-        <CarouselItem index={index} key={slide.id}>
-          <Card>
-            <CardContent className="flex aspect-square items-center justify-center">
-              <span className="font-semibold text-2xl">{index + 1}</span>
-            </CardContent>
-          </Card>
-        </CarouselItem>
-      ))}
-    </CarouselContent>
-  </Carousel>
+      <CarouselContent>
+        {slides.map((slide, index) => (
+          <CarouselItem index={index} key={slide.id}>
+            <Card>
+              <CardContent className="flex aspect-square items-center justify-center">
+                <span className="text-2xl font-semibold">{index + 1}</span>
+              </CardContent>
+            </Card>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+    </Carousel>
+  </div>
 );
 
 const slides = Array.from({ length: 16 }, (_, id) => ({ id }));

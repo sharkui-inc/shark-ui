@@ -15,7 +15,7 @@ export const Card = (props: React.ComponentProps<typeof ark.div>) => {
         "flex flex-col gap-4",
         "bg-card",
         "text-card-foreground",
-        "has-[>_[data-variant=image]]:pt-0 has-[>_[data-slot=card-footer]]:pb-0",
+        "has-[>_[data-slot=card-footer]]:pb-0 has-[>_[data-variant=image]]:pt-0",
         "rounded-xl border shadow-xs/4",
         "overflow-hidden",
         className
@@ -28,7 +28,8 @@ export const Card = (props: React.ComponentProps<typeof ark.div>) => {
 
 const cardMediaVariants = tv({
   base: [
-    "flex shrink-0 items-center gap-2",
+    "shrink-0",
+    "flex items-center gap-2",
     "[&_svg]:pointer-events-none",
     "px-(--space)",
   ],
@@ -109,7 +110,7 @@ export const CardTitle = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "font-heading font-semibold text-card-foreground text-xl",
+        "font-heading text-card-foreground text-xl font-semibold",
         className
       )}
       data-slot="card-title"

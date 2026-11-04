@@ -6,6 +6,7 @@ import { ThemeConfigurationProvider } from "@/lib/theme/provider";
 
 export const Providers = (props: React.PropsWithChildren) => {
   const { children } = props;
+
   return (
     <JotaiProvider>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

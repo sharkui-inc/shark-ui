@@ -115,5 +115,6 @@ export const subscribeThemeVisual = (
   };
 
   window.addEventListener("message", handleMessage);
+
   return () => window.removeEventListener("message", handleMessage);
 };

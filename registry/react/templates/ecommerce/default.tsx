@@ -66,7 +66,7 @@ const PRODUCTS = [
 
 const EcommerceTemplate = () => (
   <div className="flex min-h-svh flex-col">
-    <header className="sticky top-0 z-10 border-b bg-background">
+    <header className="bg-background sticky top-0 z-10 border-b">
       <div className="container flex h-16 items-center gap-6">
         <Link className="font-semibold" href="#">
           Store
@@ -74,7 +74,7 @@ const EcommerceTemplate = () => (
         <div className="relative max-w-sm flex-1">
           <SearchIcon
             aria-hidden
-            className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
+            className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2"
           />
           <Input
             className="pl-9"
@@ -92,8 +92,8 @@ const EcommerceTemplate = () => (
 
     <main className="container flex flex-1 flex-col gap-8 py-8">
       <div>
-        <h1 className="font-bold text-2xl tracking-tight">Products</h1>
-        <p className="mt-1 text-muted-foreground">
+        <h1 className="text-2xl font-bold tracking-tight">Products</h1>
+        <p className="text-muted-foreground mt-1">
           Browse our collection of premium products.
         </p>
       </div>
@@ -116,7 +116,7 @@ const EcommerceTemplate = () => (
             </CardMedia>
             <CardContent className="flex flex-col gap-2 pt-4">
               <h3 className="font-semibold">{product.name}</h3>
-              <span className="font-medium text-primary">{product.price}</span>
+              <span className="text-primary font-medium">{product.price}</span>
             </CardContent>
             <CardFooter className="pt-0">
               <Button asChild className="w-full">

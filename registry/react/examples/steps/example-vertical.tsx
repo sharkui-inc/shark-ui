@@ -15,6 +15,35 @@ import {
   StepsTrigger,
 } from "@/registry/react/components/steps";
 
+const StepPanel = (props: {
+  content: string;
+  details: { label: string; value: string }[];
+  title: string;
+}) => {
+  const { content, details, title } = props;
+
+  return (
+    <div className="flex max-w-sm flex-col gap-4 py-1">
+      <div className="flex flex-col gap-1.5">
+        <h4 className="font-heading min-h-5 text-base leading-tight font-semibold">
+          {title}
+        </h4>
+        <p className="text-muted-foreground min-h-12 text-sm leading-relaxed">
+          {content}
+        </p>
+      </div>
+      <dl className="flex flex-col gap-1.5">
+        {details.map((detail) => (
+          <div className="flex items-baseline gap-2" key={detail.label}>
+            <dt className="text-muted-foreground text-xs">{detail.label}</dt>
+            <dd className="text-sm">{detail.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+};
+
 const Example = () => (
   <div className="mx-auto w-full max-w-xl">
     <Steps
@@ -40,38 +69,23 @@ const Example = () => (
       <div className="flex min-w-0 flex-1 flex-col">
         {items.map((item, index) => (
           <StepsContent index={index} key={item.title}>
-            <div className="flex min-h-48 flex-col justify-between py-2">
-              <div>
-                <h4 className="mt-1 font-semibold text-base">
-                  {item.panelTitle}
-                </h4>
-                <p className="mt-2 max-w-sm text-muted-foreground text-sm">
-                  {item.content}
-                </p>
-              </div>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {item.tags.map((tag) => (
-                  <span
-                    className="rounded-md border bg-background px-2.5 py-1 text-xs"
-                    key={tag}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <StepPanel
+              content={item.content}
+              details={item.details}
+              title={item.panelTitle}
+            />
           </StepsContent>
         ))}
 
         <StepsCompletedContent>
-          <div className="flex min-h-48 items-center py-2">
-            <div>
-              <p className="font-semibold">Project space is ready</p>
-              <p className="mt-1 text-muted-foreground text-sm">
-                Your team can start planning the first milestone.
-              </p>
-            </div>
-          </div>
+          <StepPanel
+            content="Your team can start planning the first milestone."
+            details={[
+              { label: "Status", value: "Ready" },
+              { label: "Next", value: "First milestone" },
+            ]}
+            title="Project space is ready"
+          />
         </StepsCompletedContent>
 
         <div className="mt-4 flex flex-row-reverse gap-2">
@@ -103,22 +117,31 @@ const items = [
   {
     content: "Name the project and give the team a shared starting point.",
     description: "Name and purpose",
+    details: [
+      { label: "Project name", value: "Northstar" },
+      { label: "Purpose", value: "First release" },
+    ],
     panelTitle: "Project details",
-    tags: ["Project name", "Purpose"],
     title: "Details",
   },
   {
     content: "Set an initial milestone so everyone knows what comes first.",
     description: "Set a first milestone",
+    details: [
+      { label: "Milestone", value: "Design review" },
+      { label: "Target date", value: "Jun 12" },
+    ],
     panelTitle: "Project plan",
-    tags: ["Milestone", "Target date"],
     title: "Plan",
   },
   {
     content: "Invite the people who will help move this project forward.",
     description: "Add your collaborators",
+    details: [
+      { label: "Teammates", value: "4 invited" },
+      { label: "Roles", value: "Owner, editors" },
+    ],
     panelTitle: "Team members",
-    tags: ["Invite teammates", "Set roles"],
     title: "Team",
   },
 ];

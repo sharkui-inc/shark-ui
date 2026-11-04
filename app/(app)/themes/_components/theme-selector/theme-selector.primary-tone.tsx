@@ -48,7 +48,7 @@ export const ThemeSelectorPrimaryTone = () => {
         title={THEME_FIELDS.primaryTone.label}
       />
       <div
-        className="h-9 max-h-9 min-h-9 w-fit overflow-hidden rounded-md border border-input bg-transparent shadow-xs/4 transition-[color,box-shadow] has-focus-visible:border-ring/64 has-focus-visible:ring-2 has-focus-visible:ring-ring/24 md:h-8 md:max-h-8 md:min-h-8 dark:bg-input/32"
+        className="border-input has-focus-visible:border-ring/64 has-focus-visible:ring-ring/24 dark:bg-input/32 h-9 max-h-9 min-h-9 w-fit overflow-hidden rounded-md border bg-transparent shadow-xs/4 transition-[color,box-shadow] has-focus-visible:ring-2 md:h-8 md:max-h-8 md:min-h-8"
         onPointerLeave={() => {
           if (canPointerPreview()) {
             clearThemePreview();
@@ -71,7 +71,7 @@ export const ThemeSelectorPrimaryTone = () => {
           {PRIMARY_TONES.map((tone) => (
             <SegmentGroupItem
               aria-label={tone.label}
-              className="relative h-full min-h-0 w-9 min-w-9 flex-1 gap-0 rounded-none p-0 text-muted-foreground data-focus-visible:border-transparent data-[state=checked]:text-primary-foreground data-focus-visible:ring-0 md:w-8 md:min-w-8"
+              className="text-muted-foreground data-[state=checked]:text-primary-foreground relative h-full min-h-0 w-9 min-w-9 flex-1 gap-0 rounded-none p-0 data-focus-visible:border-transparent data-focus-visible:ring-0 md:w-8 md:min-w-8"
               key={tone.value}
               onPointerEnter={() => {
                 if (canPointerPreview()) {

@@ -9,6 +9,7 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 
 export const useCollapsibleContext = useArkCollapsibleContext;
+
 export const Collapsible = (
   props: React.ComponentProps<typeof ArkCollapsible.Root>
 ) => {
@@ -88,14 +89,21 @@ export const CollapsibleIndicator = (
   return (
     <ArkCollapsible.Indicator
       className={cn(
-        "inline-flex size-4 items-center justify-center",
+        "size-4",
+        "inline-flex items-center justify-center",
         "data-[state=open]:[&_svg]:rotate-180",
         className
       )}
       data-slot="collapsible-indicator"
       {...rest}
     >
-      <ChevronDownIcon className="size-full shrink-0 transition-transform duration-150 ease-out motion-reduce:transition-none" />
+      <ChevronDownIcon
+        className={cn(
+          "size-full shrink-0",
+          "transition-transform duration-150 ease-out",
+          "motion-reduce:transition-none"
+        )}
+      />
     </ArkCollapsible.Indicator>
   );
 };

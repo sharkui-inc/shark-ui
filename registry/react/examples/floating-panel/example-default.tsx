@@ -1,7 +1,7 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { Settings2Icon, XIcon } from "lucide-react";
+import { TypeIcon, XIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 import {
@@ -40,7 +40,7 @@ const FloatingPanelDemo = () => (
     </FloatingPanelTrigger>
     <FloatingPanelContent>
       <FloatingPanelHeader>
-        <Settings2Icon />
+        <TypeIcon aria-hidden />
         <FloatingPanelTitle>Settings</FloatingPanelTitle>
         <FloatingPanelControl>
           <FloatingPanelMinimize />

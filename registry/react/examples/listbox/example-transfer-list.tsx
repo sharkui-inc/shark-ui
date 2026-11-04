@@ -88,13 +88,14 @@ interface MemberListProps {
 
 const MemberList = (props: MemberListProps) => {
   const { collection, label, onValueChange, value } = props;
+
   return (
     <Item
       className="flex-col flex-nowrap items-stretch gap-0 overflow-hidden p-0"
       variant="outline"
     >
-      <div className="flex items-center justify-between gap-3 border-border border-b px-4 py-3">
-        <h4 className="font-medium text-sm">{label}</h4>
+      <div className="border-border flex items-center justify-between gap-3 border-b px-4 py-3">
+        <h4 className="text-sm font-medium">{label}</h4>
         <span className="text-muted-foreground text-xs tabular-nums">
           {collection.items.length} people
         </span>
@@ -109,7 +110,7 @@ const MemberList = (props: MemberListProps) => {
         <ListboxContent className="overflow-visible">
           {collection.items.map((person) => (
             <ListboxItem
-              className="flex w-full items-center gap-3 rounded-xl border border-transparent px-2 py-2.5 text-start data-selected:border-input data-selected:bg-accent"
+              className="data-selected:border-input data-selected:bg-accent flex w-full items-center gap-3 rounded-xl border border-transparent px-2 py-2.5 text-start"
               item={person}
               key={person.value}
               showIndicator={false}
@@ -119,10 +120,10 @@ const MemberList = (props: MemberListProps) => {
                 <AvatarFallback>{person.initials}</AvatarFallback>
               </Avatar>
               <div className="min-w-0 flex-1">
-                <ListboxItemText className="block truncate font-medium text-sm">
+                <ListboxItemText className="block truncate text-sm font-medium">
                   {person.label}
                 </ListboxItemText>
-                <p className="truncate text-muted-foreground text-xs">
+                <p className="text-muted-foreground truncate text-xs">
                   {person.role}
                 </p>
               </div>

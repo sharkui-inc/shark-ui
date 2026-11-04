@@ -5,7 +5,7 @@ import {
   useClipboardContext as useArkClipboardContext,
 } from "@ark-ui/react/clipboard";
 import { CheckIcon, ClipboardIcon } from "lucide-react";
-import React from "react";
+import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import {
@@ -14,6 +14,7 @@ import {
 } from "@/registry/react/components/input";
 
 export const useClipboardContext = useArkClipboardContext;
+
 export const ClipboardContext = ArkClipboard.Context;
 
 interface ClipboardProps
@@ -26,21 +27,15 @@ interface ClipboardProps
 
 export const Clipboard = (props: ClipboardProps) => {
   const { rootClassName, className, children, ...rest } = props;
-  const hasMultipleParts = React.Children.toArray(children).length > 1;
 
   return (
     <ArkClipboard.Root
-      className={cn("contents", rootClassName)}
+      className={cn("w-fit flex-none", rootClassName, className)}
       data-slot="clipboard"
       {...rest}
     >
       <ArkClipboard.Control
-        asChild={!hasMultipleParts}
-        className={cn(
-          hasMultipleParts && "flex items-center gap-2",
-          rootClassName,
-          className
-        )}
+        className="flex w-full items-center gap-2"
         data-slot="clipboard-control"
       >
         {children}
@@ -71,9 +66,10 @@ const clipboardValueVariants = tv({
   base: [
     "h-(--field-height)",
     "inline-flex items-center",
-    "font-normal text-base md:text-sm",
-    "bg-transparent dark:bg-input/32",
-    "rounded-lg border border-input shadow-xs/4",
+    "text-base font-normal md:text-sm",
+    "bg-transparent",
+    "dark:bg-input/32",
+    "border-input rounded-lg border shadow-xs/4",
   ],
   defaultVariants: {
     size: "md",
@@ -114,17 +110,24 @@ export const ClipboardValue = (props: ClipboardValueProps) => {
 export const ClipboardIndicator = (
   props: React.ComponentProps<typeof ArkClipboard.Indicator>
 ) => {
-  const { copied = <CheckIcon />, className, children, ...rest } = props;
+  const {
+    asChild: _asChild,
+    copied = <CheckIcon />,
+    className,
+    children,
+    ...rest
+  } = props;
+  const clipboard = useClipboardContext();
 
   return (
-    <ArkClipboard.Indicator
+    <span
+      {...clipboard.getIndicatorProps({ copied: clipboard.copied })}
       className={cn("pointer-events-none", className)}
-      copied={copied}
       data-slot="clipboard-indicator"
       {...rest}
       aria-hidden
     >
-      {children ?? <ClipboardIcon />}
-    </ArkClipboard.Indicator>
+      {clipboard.copied ? copied : (children ?? <ClipboardIcon />)}
+    </span>
   );
 };

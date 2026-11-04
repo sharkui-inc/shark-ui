@@ -9,14 +9,14 @@ import {
 } from "@/lib/llms";
 
 const baseUrl = "https://example.test";
-const formsDocsLink = /Forms\]\(https:\/\/example\.test\/docs\/forms\.md\)/;
+const formsDocsLink = /Forms\]\(https:\/\/example\.test\/docs\/forms\.md\)/u;
 const migrationLink =
-  /From Radix\]\(https:\/\/example\.test\/docs\/migration\/radix\.md\)/;
+  /From Radix\]\(https:\/\/example\.test\/docs\/migration\/radix\.md\)/u;
 const buttonComponentLink =
-  /Button\]\(https:\/\/example\.test\/docs\/components\/button\.md\)/;
+  /Button\]\(https:\/\/example\.test\/docs\/components\/button\.md\)/u;
 const fieldComponentLink =
-  /Field\]\(https:\/\/example\.test\/docs\/components\/field\.md\)/;
-const markdownLink = /\]\((https:\/\/[^)]+)\)/g;
+  /Field\]\(https:\/\/example\.test\/docs\/components\/field\.md\)/u;
+const markdownLink = /\]\((https:\/\/[^)]+)\)/gu;
 
 const getMarkdownLinks = (content: string) =>
   [...content.matchAll(markdownLink)].map((match) => match[1]);

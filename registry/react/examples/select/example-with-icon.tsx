@@ -1,36 +1,56 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { CableIcon } from "lucide-react";
+import type React from "react";
+import { AstroIcon } from "@/components/icons/astro";
+import { NextIcon } from "@/components/icons/next";
+import { ViteIcon } from "@/components/icons/vite";
 import {
   Select,
   SelectContent,
+  SelectContext,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
 
+interface Framework {
+  icon: React.ComponentType<React.ComponentProps<"svg">>;
+  label: string;
+  value: string;
+}
+
 const Example = () => (
   <Select collection={collection} defaultValue={["next"]}>
     <SelectTrigger aria-label="Select a framework" className="min-w-48">
-      <CableIcon aria-hidden />
+      <SelectContext<Framework>>
+        {({ selectedItems }) => {
+          const Icon = selectedItems[0]?.icon;
+          return Icon ? <Icon aria-hidden /> : null;
+        }}
+      </SelectContext>
       <SelectValue placeholder="Select framework" />
     </SelectTrigger>
     <SelectContent>
-      {collection.items.map((item) => (
-        <SelectItem item={item} key={item.value}>
-          {item.label}
-        </SelectItem>
-      ))}
+      {collection.items.map((item) => {
+        const Icon = item.icon;
+
+        return (
+          <SelectItem item={item} key={item.value}>
+            <Icon aria-hidden />
+            {item.label}
+          </SelectItem>
+        );
+      })}
     </SelectContent>
   </Select>
 );
 
-const collection = createListCollection({
+const collection = createListCollection<Framework>({
   items: [
-    { label: "Next.js", value: "next" },
-    { label: "Vite", value: "vite" },
-    { label: "Astro", value: "astro" },
+    { icon: NextIcon, label: "Next.js", value: "next" },
+    { icon: ViteIcon, label: "Vite", value: "vite" },
+    { icon: AstroIcon, label: "Astro", value: "astro" },
   ],
 });
 

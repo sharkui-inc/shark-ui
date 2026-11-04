@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/footer";
 import { SITE_CONFIG } from "@/config/site";
 import { source } from "@/lib/fumadocs";
 import { createMetadata } from "@/lib/metadata";
+import { SkipNavContent } from "@/registry/react/components/skip-nav";
 import { HeroSection } from "./_components/hero";
 import { HeroAtmosphere } from "./_components/hero-atmosphere";
 import { HomeShowcase } from "./_components/home-showcase";
@@ -29,23 +30,25 @@ const HomePage = () => {
   const componentsCount = rawCount - (rawCount % 10);
 
   return (
-    <main className="relative w-full min-w-0 overflow-x-clip">
-      <HeroAtmosphere />
-      <div className="container flex flex-col gap-8 pt-12 pb-10 sm:gap-10 sm:pt-16 lg:pt-20">
-        <HeroSection count={componentsCount} />
-      </div>
+    <SkipNavContent asChild>
+      <main className="relative w-full min-w-0 overflow-x-clip">
+        <HeroAtmosphere />
+        <div className="container flex flex-col gap-8 pt-12 pb-10 sm:gap-10 sm:pt-16 lg:pt-20">
+          <HeroSection count={componentsCount} />
+        </div>
 
-      <section
-        aria-label="Component examples"
-        className="container pb-8 sm:pb-10"
-      >
-        <HomeShowcase>
-          <PreviewGallery />
-        </HomeShowcase>
-      </section>
+        <section
+          aria-label="Component examples"
+          className="container pb-8 sm:pb-10"
+        >
+          <HomeShowcase>
+            <PreviewGallery />
+          </HomeShowcase>
+        </section>
 
-      <Footer />
-    </main>
+        <Footer />
+      </main>
+    </SkipNavContent>
   );
 };
 

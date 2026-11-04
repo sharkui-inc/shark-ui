@@ -40,6 +40,7 @@ import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { Separator } from "@/registry/react/components/separator";
 
 export const useCommandContext = useArkComboboxContext;
+
 export const CommandDialog = Dialog;
 
 export const CommandDialogTrigger = (
@@ -47,7 +48,7 @@ export const CommandDialogTrigger = (
 ) => <DialogTrigger data-slot="command-dialog-trigger" {...props} />;
 
 const commandDialogPositionerVariants = tv({
-  base: ["max-sm:h-dvh max-sm:grid-rows-[1fr]"],
+  base: ["max-sm:h-dvh", "max-sm:grid-rows-[1fr]"],
   defaultVariants: {
     variant: "default",
   },
@@ -64,7 +65,8 @@ const commandDialogContentVariants = tv({
     "max-sm:row-start-1",
     "max-sm:**:data-[slot=command-content]:min-h-0 max-sm:**:data-[slot=command-content]:flex-1",
     "max-sm:**:data-[slot=scroll-area]:min-h-0 max-sm:**:data-[slot=scroll-area]:flex-1",
-    "data-[state=closed]:animate-none data-[state=open]:animate-none",
+    "data-[state=closed]:animate-none",
+    "data-[state=open]:animate-none",
   ],
   defaultVariants: {
     fill: false,
@@ -73,23 +75,27 @@ const commandDialogContentVariants = tv({
   variants: {
     fill: {
       false: [
-        "max-sm:h-auto max-sm:max-h-[80dvh] max-sm:**:data-[slot=scroll-area]:max-h-[80dvh]",
+        "max-sm:h-auto max-sm:max-h-[80dvh]",
+        "max-sm:**:data-[slot=scroll-area]:max-h-[80dvh]",
         "max-sm:self-start",
       ],
       true: [
-        "max-sm:h-full max-sm:max-h-dvh max-sm:**:data-[slot=scroll-area]:max-h-dvh",
+        "max-sm:h-full max-sm:max-h-dvh",
+        "max-sm:**:data-[slot=scroll-area]:max-h-dvh",
         "max-sm:self-start",
       ],
     },
     variant: {
       default: [
-        "border-0 p-0",
+        "p-0",
+        "border-0",
         "max-sm:rounded-none",
         "max-sm:**:data-[slot=command]:rounded-none max-sm:**:data-[slot=command]:border-0",
         "max-sm:**:data-[slot=command-footer]:rounded-none",
       ],
       inset: [
-        "rounded-2xl border p-0",
+        "p-0",
+        "rounded-2xl border",
         "**:data-[slot=command-footer]:rounded-b-2xl",
         "**:data-[slot=command]:rounded-none **:data-[slot=command]:border-0",
       ],
@@ -136,7 +142,12 @@ export const CommandDialogContent = (props: CommandDialogContentProps) => {
 
   return (
     <Portal>
-      <DialogOverlay className="data-[state=closed]:animate-none data-[state=open]:animate-none" />
+      <DialogOverlay
+        className={cn(
+          "data-[state=closed]:animate-none",
+          "data-[state=open]:animate-none"
+        )}
+      />
 
       <DialogPositioner
         className={commandDialogPositionerVariants({ variant })}
@@ -172,10 +183,12 @@ export const Command: ArkCombobox.RootComponent = (props) => {
     <Combobox
       className={cn(
         "isolate",
-        "flex min-h-0 flex-1 flex-col",
+        "min-h-0 flex-1",
+        "flex flex-col",
         "bg-popover",
         "text-popover-foreground",
-        "overflow-hidden rounded-2xl border",
+        "rounded-2xl border",
+        "overflow-hidden",
         className
       )}
       data-slot="command"
@@ -211,7 +224,8 @@ export const CommandContent = (
     <ArkCombobox.Content
       className={cn(
         "min-h-0",
-        "flex flex-1 flex-col",
+        "flex-1",
+        "flex flex-col",
         "px-1.5",
         "overflow-hidden",
         "outline-hidden",
@@ -238,7 +252,8 @@ export const CommandInput = (props: CommandInputProps) => {
     <ComboboxControl className="m-1.5">
       <InputGroup
         className={cn(
-          "rounded-xl bg-input/32",
+          "bg-input/32",
+          "rounded-xl",
           "focus-within:border-input focus-within:ring-0",
           className
         )}
@@ -272,7 +287,7 @@ export const CommandList = (
       scrollFade
     >
       <ArkCombobox.List
-        className={cn("flex flex-col not-empty:pb-2", className)}
+        className={cn("flex flex-col", "not-empty:pb-2", className)}
         data-slot="command-list"
         {...rest}
       />
@@ -287,7 +302,7 @@ export const CommandEmpty = (
 
   return (
     <ComboboxEmpty
-      className={cn("py-6 text-center text-sm", className)}
+      className={cn("py-6", "text-center text-sm", className)}
       data-slot="command-empty"
       {...rest}
     >

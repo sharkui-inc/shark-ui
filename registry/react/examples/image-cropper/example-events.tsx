@@ -25,11 +25,11 @@ const Example = () => {
 
       <dl
         aria-label="Image cropper event values"
-        className="pointer-events-none absolute inset-x-3 bottom-3 grid grid-cols-[auto_repeat(4,minmax(0,1fr))] overflow-hidden rounded-lg bg-background/96 text-sm shadow-sm/4"
+        className="bg-background/96 pointer-events-none absolute inset-x-3 bottom-3 grid grid-cols-[auto_repeat(4,minmax(0,1fr))] overflow-hidden rounded-lg text-sm shadow-sm/4"
       >
         <div className="flex flex-col justify-center gap-0.5 px-3 py-1.5">
-          <dt className="font-medium text-xs">Events</dt>
-          <dd className="font-mono text-muted-foreground text-xs tabular-nums">
+          <dt className="text-xs font-medium">Events</dt>
+          <dd className="text-muted-foreground font-mono text-xs tabular-nums">
             {zoom.toFixed(2)}×
           </dd>
         </div>
@@ -44,10 +44,11 @@ const Example = () => {
 
 const EventValue = (props: { label: string; value: string }) => {
   const { label, value } = props;
+
   return (
-    <div className="flex min-w-0 flex-col justify-center gap-0.5 border-input border-s px-2 py-1.5">
+    <div className="border-input flex min-w-0 flex-col justify-center gap-0.5 border-s px-2 py-1.5">
       <dt className="text-muted-foreground text-xs">{label}</dt>
-      <dd className="font-medium font-mono tabular-nums">{value}</dd>
+      <dd className="font-mono font-medium tabular-nums">{value}</dd>
     </div>
   );
 };

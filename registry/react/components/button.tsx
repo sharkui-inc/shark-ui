@@ -7,9 +7,11 @@ import { Spinner } from "@/registry/react/components/spinner";
 export const buttonControlVariants = tv({
   base: [
     "relative",
-    "inline-flex shrink-0 items-center justify-center gap-2",
+    "shrink-0",
+    "inline-flex items-center justify-center gap-2",
     "touch-manipulation",
-    "select-none whitespace-nowrap font-medium font-sans text-sm",
+    "font-sans text-sm font-medium whitespace-nowrap",
+    "select-none",
   ],
 });
 
@@ -18,16 +20,17 @@ export const buttonVariants = tv({
     buttonControlVariants(),
     "rounded-lg",
     "transition-[background-color,border-color,color,box-shadow,opacity,scale]",
-    "outline-hidden focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+    "outline-hidden",
+    "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
     "disabled:pointer-events-none disabled:opacity-64",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
     "aria-disabled:pointer-events-none aria-disabled:opacity-64",
     "data-[state=loading]:pointer-events-none",
     "aria-invalid:border-destructive aria-invalid:ring-destructive/24",
     "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
-    "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:shrink-0",
-    "has-[>[data-icon=inline-start]]:ps-[calc(var(--btn-px)-(--spacing(0.5)))] has-[>[data-icon=inline-end]]:pe-[calc(var(--btn-px)-(--spacing(0.5)))]",
-    "**:data-[icon=inline-end]:order-last **:data-[icon=inline-start]:order-first **:data-icon:mx-0",
+    "[&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    "has-[>[data-icon=inline-end]]:pe-[calc(var(--btn-px)-(--spacing(0.5)))] has-[>[data-icon=inline-start]]:ps-[calc(var(--btn-px)-(--spacing(0.5)))]",
+    "**:data-icon:mx-0 **:data-[icon=inline-end]:order-last **:data-[icon=inline-start]:order-first",
     "motion-reduce:transition-none",
   ],
   compoundVariants: [
@@ -131,7 +134,7 @@ export const buttonVariants = tv({
       outline: [
         "bg-transparent",
         "text-foreground",
-        "border border-input shadow-xs/4",
+        "border-input border shadow-xs/4",
         "hover:bg-accent hover:text-accent-foreground",
         "dark:bg-input/32 dark:hover:bg-input/64",
       ],
@@ -200,7 +203,12 @@ export const Button = (props: ButtonProps) => {
 
           <span className="sr-only">{children}</span>
 
-          <span className="absolute inset-0 flex items-center justify-center">
+          <span
+            className={cn(
+              "absolute inset-0",
+              "flex items-center justify-center"
+            )}
+          >
             <Spinner aria-hidden />
           </span>
         </>

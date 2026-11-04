@@ -13,6 +13,7 @@ import { Button } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const usePopoverContext = useArkPopoverContext;
+
 export const Popover = (
   props: React.ComponentProps<typeof ArkPopover.Root>
 ) => {
@@ -78,17 +79,24 @@ export const PopoverContent = (props: PopoverContentProps) => {
           className={cn(
             "z-[calc(50+var(--layer-index,0))]",
             "[--space:--spacing(4)]",
-            "w-auto min-w-40 max-w-[calc(100vw-2rem)]",
+            "w-auto max-w-[calc(100vw-2rem)] min-w-40",
             "flex flex-col",
             "bg-popover",
             "text-popover-foreground",
-            "rounded-[calc(var(--radius)*1.5)] border shadow-lg/4",
+            "ring-border rounded-[calc(var(--radius)*1.5)] shadow-lg/4 ring-1 ring-inset",
             "outline-hidden",
             "origin-(--transform-origin)",
-            "duration-150 ease-out",
-            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-            "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
-            "data-[state=closed]:animate-out data-[state=open]:animate-in",
+            "duration-100 ease-out",
+            "data-[placement^=bottom]:slide-in-from-top-2",
+            "data-[placement^=top]:slide-in-from-bottom-2",
+            "data-[placement^=left]:slide-in-from-right-2",
+            "data-[placement^=right]:slide-in-from-left-2",
+            "data-[state=closed]:fade-out-0",
+            "data-[state=open]:fade-in-0",
+            "data-[state=closed]:zoom-out-95",
+            "data-[state=open]:zoom-in-95",
+            "data-[state=closed]:animate-out",
+            "data-[state=open]:animate-in",
             "motion-reduce:animate-none",
             "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
@@ -102,7 +110,11 @@ export const PopoverContent = (props: PopoverContentProps) => {
             <PopoverClose asChild>
               <Button
                 aria-label="Close"
-                className="absolute inset-e-2 top-2 opacity-64 hover:opacity-100"
+                className={cn(
+                  "absolute inset-e-2 top-2",
+                  "opacity-64",
+                  "hover:opacity-100"
+                )}
                 size="icon-sm"
                 variant="ghost"
               >
@@ -135,7 +147,8 @@ export const PopoverHeader = (props: PopoverHeaderProps) => {
   return (
     <ark.div
       className={cn(
-        "flex flex-col gap-2 p-(--space)",
+        "flex flex-col gap-2",
+        "p-(--space)",
         "in-[[data-slot=popover-content]:has([data-slot=popover-body])]:pb-3",
         className
       )}
@@ -160,7 +173,7 @@ export const PopoverTitle = (
 
   return (
     <ArkPopover.Title
-      className={cn("font-semibold text-base leading-none", className)}
+      className={cn("text-base leading-none font-semibold", className)}
       data-slot="popover-title"
       {...rest}
     />
@@ -238,7 +251,9 @@ export const PopoverArrow = (
       }
       {...rest}
     >
-      {children ?? <ArkPopover.ArrowTip className="border-t border-l" />}
+      {children ?? (
+        <ArkPopover.ArrowTip className="border-border border-t border-l" />
+      )}
     </ArkPopover.Arrow>
   );
 };

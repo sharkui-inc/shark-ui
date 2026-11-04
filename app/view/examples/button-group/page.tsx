@@ -15,10 +15,10 @@ const ButtonGroupExamplePage = () => (
   <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
     <div className="grid min-w-0 grid-cols-1 gap-16 sm:grid-cols-2 [&>section]:min-w-0">
       <section aria-labelledby="basic-heading" className="flex flex-col gap-5">
-        <h1 className="font-medium text-muted-foreground" id="basic-heading">
+        <h1 className="text-muted-foreground font-medium" id="basic-heading">
           Basic
         </h1>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ButtonGroupBasic />
         </div>
       </section>
@@ -28,30 +28,30 @@ const ButtonGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="orientation-heading"
         >
           Orientation
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ButtonGroupOrientation />
         </div>
       </section>
 
       <section aria-labelledby="size-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="size-heading">
+        <h2 className="text-muted-foreground font-medium" id="size-heading">
           Size
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ButtonGroupSize />
         </div>
       </section>
 
       <section aria-labelledby="nested-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="nested-heading">
+        <h2 className="text-muted-foreground font-medium" id="nested-heading">
           Nested
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ButtonGroupNested />
         </div>
       </section>
@@ -61,30 +61,30 @@ const ButtonGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="separator-heading"
         >
           Separator
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ButtonGroupSeparatorExample />
         </div>
       </section>
 
       <section aria-labelledby="split-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="split-heading">
+        <h2 className="text-muted-foreground font-medium" id="split-heading">
           Split
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ButtonGroupSplit />
         </div>
       </section>
 
       <section aria-labelledby="input-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="input-heading">
+        <h2 className="text-muted-foreground font-medium" id="input-heading">
           Input
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ButtonGroupInput />
         </div>
       </section>
@@ -94,12 +94,12 @@ const ButtonGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="input-group-heading"
         >
           Input Group
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ButtonGroupInputGroup />
         </div>
       </section>
@@ -109,21 +109,21 @@ const ButtonGroupExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="dropdown-menu-heading"
         >
           Dropdown Menu
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ButtonGroupDropdownMenu />
         </div>
       </section>
 
       <section aria-labelledby="select-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="select-heading">
+        <h2 className="text-muted-foreground font-medium" id="select-heading">
           Select
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ButtonGroupSelect />
         </div>
       </section>
@@ -132,19 +132,19 @@ const ButtonGroupExamplePage = () => (
         aria-labelledby="popover-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="popover-heading">
+        <h2 className="text-muted-foreground font-medium" id="popover-heading">
           Popover
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <ButtonGroupPopover />
         </div>
       </section>
 
       <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="rtl-heading">
+        <h2 className="text-muted-foreground font-medium" id="rtl-heading">
           RTL
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <ButtonGroupRtl />
         </div>
       </section>

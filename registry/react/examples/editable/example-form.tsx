@@ -47,11 +47,7 @@ const Example = () => {
           </Field>
         </CardContent>
         <CardFooter className="justify-end">
-          <Button
-            onClick={() => setValue("Onda")}
-            type="button"
-            variant="outline"
-          >
+          <Button onClick={() => setValue("")} type="button" variant="outline">
             Clear
           </Button>
           <Button type="submit">Submit</Button>

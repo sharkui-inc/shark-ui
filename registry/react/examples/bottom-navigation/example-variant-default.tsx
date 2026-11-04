@@ -14,7 +14,7 @@ const Example = () => (
       className="absolute inset-x-0 bottom-0 min-h-0"
       defaultValue="home"
     >
-      <BottomNavigationList className="absolute" variant="default">
+      <BottomNavigationList className="absolute">
         <BottomNavigationItem value="home">
           <BottomNavigationItemIcon>
             <HouseIcon />

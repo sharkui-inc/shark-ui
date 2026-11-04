@@ -9,8 +9,10 @@ const kbdVariants = tv({
   base: [
     "h-5 min-w-5",
     "px-1",
-    "inline-flex w-fit max-w-full shrink-0 items-center justify-center gap-1",
-    "select-none font-medium font-sans text-foreground text-xs leading-none",
+    "w-fit max-w-full shrink-0",
+    "inline-flex items-center justify-center gap-1",
+    "text-foreground font-sans text-xs leading-none font-medium",
+    "select-none",
     "rounded-sm border border-transparent",
     "pointer-events-none",
     "in-data-[slot=tooltip-content]:bg-background/24 in-data-[slot=tooltip-content]:text-background",
@@ -22,7 +24,7 @@ const kbdVariants = tv({
   variants: {
     variant: {
       default: "bg-muted",
-      outline: "border border-border",
+      outline: "border-border border",
     },
   },
 });

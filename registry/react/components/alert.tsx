@@ -9,11 +9,13 @@ export const alertVariants = tv({
   base: [
     "relative",
     "px-3.5 py-3",
-    "grid w-full items-start gap-x-2 gap-y-0.5",
+    "w-full",
+    "grid items-start gap-x-2 gap-y-0.5",
     "text-card-foreground text-sm",
     "rounded-xl border",
-    "has-[>svg]:has-data-[slot=alert-action]:grid-cols-[--spacing(4)_1fr_auto] has-[>svg]:grid-cols-[--spacing(4)_1fr]",
-    "has-[>svg]:gap-x-2 [&_svg]:h-lh [&_svg]:w-4",
+    "has-[>svg]:grid-cols-[--spacing(4)_1fr] has-[>svg]:has-data-[slot=alert-action]:grid-cols-[--spacing(4)_1fr_auto]",
+    "has-[>svg]:gap-x-2",
+    "[&_svg]:h-lh [&_svg]:w-4",
     "[&>svg]:in-[[data-slot=alert]:not(:has([data-slot=alert-title]))]:self-center",
     "has-data-[slot=alert-action]:grid-cols-[1fr_auto]",
   ],
@@ -109,7 +111,8 @@ export const AlertAction = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn(
         "flex gap-1",
-        "max-sm:col-start-2 max-sm:mt-2",
+        "max-sm:col-start-2",
+        "max-sm:mt-2",
         "sm:[svg~[data-slot=alert-title]~&]:col-start-3",
         "sm:row-start-1 sm:row-end-3 sm:self-center",
         "sm:[[data-slot=alert-description]~&]:col-start-2",

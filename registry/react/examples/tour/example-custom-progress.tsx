@@ -54,7 +54,7 @@ const ReleaseGates = () => {
   const active = tour.open ? current : -1;
 
   return (
-    <div className="flex w-full flex-col gap-1 rounded-lg border bg-card p-1">
+    <div className="bg-card flex w-full flex-col gap-1 rounded-lg border p-1">
       {gates.map((gate, index) => {
         const Icon = gate.icon;
         const isCurrent = index === active;
@@ -77,8 +77,8 @@ const ReleaseGates = () => {
               )}
             />
             <span className="flex min-w-0 flex-col">
-              <span className="truncate font-medium text-sm">{gate.label}</span>
-              <span className="truncate text-muted-foreground text-xs">
+              <span className="truncate text-sm font-medium">{gate.label}</span>
+              <span className="text-muted-foreground truncate text-xs">
                 {gate.detail}
               </span>
             </span>

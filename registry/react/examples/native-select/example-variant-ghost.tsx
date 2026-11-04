@@ -1,0 +1,21 @@
+import {
+  NativeSelect,
+  NativeSelectOption,
+} from "@/registry/react/components/native-select";
+
+const Example = () => (
+  <NativeSelect
+    aria-label="Select an option"
+    className="w-full max-w-48"
+    showTrigger={false}
+    variant="ghost"
+  >
+    <NativeSelectOption value="">Select an option</NativeSelectOption>
+    <NativeSelectOption value="banana">Banana</NativeSelectOption>
+    <NativeSelectOption value="apple">Apple</NativeSelectOption>
+    <NativeSelectOption value="orange">Orange</NativeSelectOption>
+    <NativeSelectOption value="pineapple">Pineapple</NativeSelectOption>
+  </NativeSelect>
+);
+
+export default Example;

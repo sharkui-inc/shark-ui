@@ -91,6 +91,7 @@ const Example = () => {
                   : "none";
               const Icon = sortIcons[direction];
               const handleColumnSort = () => handleSort(key);
+
               return (
                 <TableHead aria-sort={direction} key={key}>
                   <Button

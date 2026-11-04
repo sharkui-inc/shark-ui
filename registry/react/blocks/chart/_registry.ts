@@ -89,11 +89,11 @@ const toggleGroupCharts = new Set([
   "chart-line-interactive",
 ]);
 
-const CHART_PREFIX_PATTERN = /^chart-/;
+const CHART_PREFIX_PATTERN = /^chart-/u;
 
 const titleCase = (value: string) =>
   value.replace(
-    /(^|-)([a-z])/g,
+    /(^|-)([a-z])/gu,
     (_match, separator: string, letter: string) =>
       `${separator ? " " : ""}${letter.toUpperCase()}`
   );

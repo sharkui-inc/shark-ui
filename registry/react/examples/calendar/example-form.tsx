@@ -21,7 +21,7 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const [value, setValue] = React.useState(initialValue);
+  const [value, setValue] = React.useState([parseDate("2025-04-15")]);
 
   const onSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -33,7 +33,7 @@ const Example = () => {
   };
 
   return (
-    <Card asChild className="w-full max-w-md">
+    <Card asChild className="w-full max-w-xs">
       <form onSubmit={onSubmit}>
         <CardContent className="flex justify-center">
           <Calendar
@@ -52,11 +52,7 @@ const Example = () => {
           </Calendar>
         </CardContent>
         <CardFooter className="justify-end">
-          <Button
-            onClick={() => setValue(initialValue)}
-            type="button"
-            variant="outline"
-          >
+          <Button onClick={() => setValue([])} type="button" variant="outline">
             Clear
           </Button>
           <Button type="submit">Submit</Button>
@@ -65,7 +61,5 @@ const Example = () => {
     </Card>
   );
 };
-
-const initialValue = [parseDate("2025-04-15")];
 
 export default Example;

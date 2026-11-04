@@ -191,7 +191,7 @@ export const TeamMembersCardExample = (props: React.ComponentProps<"div">) => {
                     {collection.items.map((role) => (
                       <SelectItem item={role} key={role.value}>
                         <div className="flex flex-col">
-                          <p className="font-medium text-sm">{role.value}</p>
+                          <p className="text-sm font-medium">{role.value}</p>
                           <p className="text-muted-foreground">
                             {role.description}
                           </p>

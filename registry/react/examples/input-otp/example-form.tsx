@@ -8,17 +8,17 @@ import {
   CardContent,
   CardFooter,
 } from "@/registry/react/components/card";
-import { Field, FieldLabel } from "@/registry/react/components/field";
+import { Field } from "@/registry/react/components/field";
 import {
   InputOTP,
+  InputOTPLabel,
   InputOTPSeparator,
   InputOTPSlot,
-  useInputOTPContext,
 } from "@/registry/react/components/input-otp";
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const resetRef = React.useRef<(() => void) | null>(null);
+  const [value, setValue] = React.useState<string[]>([]);
 
   const onSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,8 +34,12 @@ const Example = () => {
       <form onSubmit={onSubmit}>
         <CardContent>
           <Field>
-            <FieldLabel>Verification code</FieldLabel>
-            <InputOTP defaultValue={[]} name="code">
+            <InputOTP
+              name="code"
+              onValueChange={({ value: nextValue }) => setValue(nextValue)}
+              value={value}
+            >
+              <InputOTPLabel>Verification code</InputOTPLabel>
               <InputOTPSlot index={0} />
               <InputOTPSlot index={1} />
               <InputOTPSlot index={2} />
@@ -43,16 +47,11 @@ const Example = () => {
               <InputOTPSlot index={3} />
               <InputOTPSlot index={4} />
               <InputOTPSlot index={5} />
-              <InputOTPReset resetRef={resetRef} />
             </InputOTP>
           </Field>
         </CardContent>
         <CardFooter className="justify-end">
-          <Button
-            onClick={() => resetRef.current?.()}
-            type="button"
-            variant="outline"
-          >
+          <Button onClick={() => setValue([])} type="button" variant="outline">
             Clear
           </Button>
           <Button type="submit">Submit</Button>
@@ -60,22 +59,6 @@ const Example = () => {
       </form>
     </Card>
   );
-};
-
-const InputOTPReset = (props: {
-  resetRef: { current: (() => void) | null };
-}) => {
-  const { resetRef } = props;
-  const inputOTP = useInputOTPContext();
-
-  React.useEffect(() => {
-    resetRef.current = () => inputOTP.setValue([]);
-    return () => {
-      resetRef.current = null;
-    };
-  }, [inputOTP, resetRef]);
-
-  return null;
 };
 
 export default Example;

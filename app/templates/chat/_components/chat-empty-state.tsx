@@ -18,6 +18,7 @@ import { emptyStateSuggestions } from "../_data/chat-demo";
 
 export const EmptyConversation = (props: { onSelect: () => void }) => {
   const { onSelect } = props;
+
   return (
     <State className="min-h-full">
       <StateHeader>

@@ -2,6 +2,7 @@ import { PlusIcon } from "lucide-react";
 import {
   Avatar,
   AvatarFallback,
+  AvatarGroup,
   AvatarImage,
 } from "@/registry/react/components/avatar";
 import { Button } from "@/registry/react/components/button";
@@ -40,12 +41,12 @@ const ItemAvatar = () => (
     </Item>
     <Item variant="outline">
       <ItemMedia>
-        <div className="flex *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale [&>*:not(:last-child)]:-me-2">
-          <Avatar className="hidden sm:flex">
+        <AvatarGroup className="hidden grayscale sm:flex">
+          <Avatar>
             <AvatarImage alt="@vinihvc" src="https://github.com/vinihvc.png" />
             <AvatarFallback>VV</AvatarFallback>
           </Avatar>
-          <Avatar className="hidden sm:flex">
+          <Avatar>
             <AvatarImage alt="@shadcn" src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
@@ -56,7 +57,14 @@ const ItemAvatar = () => (
             />
             <AvatarFallback>SA</AvatarFallback>
           </Avatar>
-        </div>
+        </AvatarGroup>
+        <Avatar className="grayscale sm:hidden">
+          <AvatarImage
+            alt="@segunadebayo"
+            src="https://github.com/segunadebayo.png"
+          />
+          <AvatarFallback>SA</AvatarFallback>
+        </Avatar>
       </ItemMedia>
       <ItemContent>
         <ItemTitle>No Team Members</ItemTitle>

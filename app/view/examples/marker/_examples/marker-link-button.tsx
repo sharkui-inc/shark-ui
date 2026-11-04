@@ -16,7 +16,7 @@ const MarkerLinkButton = () => (
       </a>
     </Marker>
     <Marker asChild>
-      <button className="transition-colors hover:text-foreground" type="button">
+      <button className="hover:text-foreground transition-colors" type="button">
         <MarkerIcon>
           <RotateCcwIcon />
         </MarkerIcon>

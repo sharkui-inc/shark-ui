@@ -15,6 +15,8 @@ import {
   type InputGroupProps,
 } from "@/registry/react/components/input-group";
 
+export const usePasswordInputContext = useArkPasswordInputContext;
+
 type PasswordInputControlProps = Pick<
   React.ComponentProps<typeof InputGroupInput>,
   | "placeholder"
@@ -52,7 +54,6 @@ interface PasswordInputProps
   visibleIcon?: React.ReactNode;
 }
 
-export const usePasswordInputContext = useArkPasswordInputContext;
 export const PasswordInput = (props: PasswordInputProps) => {
   const {
     size = "md",

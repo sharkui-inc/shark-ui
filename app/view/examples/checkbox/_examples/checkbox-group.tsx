@@ -1,7 +1,6 @@
 import { Checkbox, CheckboxGroup } from "@/registry/react/components/checkbox";
 import {
   Field,
-  FieldDescription,
   FieldGroup,
   FieldLabel,
   FieldLegend,
@@ -10,10 +9,7 @@ import {
 
 const CheckboxGroupExample = () => (
   <FieldSet>
-    <FieldLegend variant="label">Show these items on the desktop:</FieldLegend>
-    <FieldDescription>
-      Select the items you want to show on the desktop.
-    </FieldDescription>
+    <FieldLegend variant="label">Show these items on the desktop</FieldLegend>
     <FieldGroup>
       <CheckboxGroup
         className="gap-3"

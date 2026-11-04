@@ -38,6 +38,7 @@ const Example = () => {
         {collection.items.map((item) => {
           const handleCheckedChange = () => selection.select(item.value);
           const selected = selection.isSelected(item.value);
+
           return (
             <FieldLabel className="w-full" key={item.value} role="listitem">
               <Field orientation="horizontal">

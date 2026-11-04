@@ -48,7 +48,7 @@ export const ThemeSelectorRadius = () => {
         <>
           <span
             aria-hidden
-            className="size-4 shrink-0 bg-primary"
+            className="bg-primary size-4 shrink-0"
             style={{ borderRadius: selectedRadius?.cssVars.radius }}
           />
           <span className="truncate">{selectedRadius?.description}</span>
@@ -58,7 +58,7 @@ export const ThemeSelectorRadius = () => {
     >
       {collection.items.map((item) => (
         <ListboxItem
-          className="relative flex flex-col items-center justify-center gap-2 rounded-xl border border-input bg-muted/32 p-2.5 text-center hover:border-primary/64 hover:bg-muted/32 hover:text-foreground data-[state=checked]:border-primary data-highlighted:border-primary/64 data-[state=checked]:bg-muted/32 data-highlighted:bg-muted/32 data-[state=checked]:text-foreground data-highlighted:text-foreground"
+          className="border-input bg-muted/32 hover:border-primary/64 hover:bg-muted/32 hover:text-foreground data-[state=checked]:border-primary data-highlighted:border-primary/64 data-[state=checked]:bg-muted/32 data-highlighted:bg-muted/32 data-[state=checked]:text-foreground data-highlighted:text-foreground relative flex flex-col items-center justify-center gap-2 rounded-xl border p-2.5 text-center"
           item={item}
           key={item.value}
           showIndicator={false}
@@ -66,10 +66,10 @@ export const ThemeSelectorRadius = () => {
           <span className="flex w-full min-w-0 flex-col items-center gap-2">
             <span
               aria-hidden
-              className="size-9 bg-primary"
+              className="bg-primary size-9"
               style={{ borderRadius: item.cssVars.radius }}
             />
-            <ListboxItemText className="flex-none text-muted-foreground text-xs group-data-[state=checked]/listbox-item:text-foreground">
+            <ListboxItemText className="text-muted-foreground group-data-[state=checked]/listbox-item:text-foreground flex-none text-xs">
               {item.value}
             </ListboxItemText>
           </span>

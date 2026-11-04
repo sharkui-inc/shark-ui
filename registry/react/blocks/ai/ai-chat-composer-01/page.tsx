@@ -14,7 +14,7 @@ const ComposerDemo = () => {
   const [thinkMode, setThinkMode] = React.useState(true);
 
   return (
-    <main className="grid min-h-svh place-items-center bg-background p-6">
+    <main className="bg-background grid min-h-svh place-items-center p-6">
       <ChatComposer
         model={model}
         modelOptions={MODEL_OPTIONS}

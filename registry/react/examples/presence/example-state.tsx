@@ -22,8 +22,8 @@ const Example = () => {
         </Button>
         <span
           className={cn(
-            "inline-flex h-8 items-center rounded-lg border border-input bg-muted px-3",
-            "font-mono text-muted-foreground text-xs"
+            "border-input bg-muted inline-flex h-8 items-center rounded-lg border px-3",
+            "text-muted-foreground font-mono text-xs"
           )}
         >
           data-state=&quot;{state}&quot;

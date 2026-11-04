@@ -9,11 +9,11 @@ import {
 import { Textarea } from "@/registry/react/components/textarea";
 import type { Email, MailComposeMode } from "../_data/mail";
 
-const REPLY_PREFIX = /^(re|fw|fwd):/i;
+const REPLY_PREFIX = /^(re|fw|fwd):/iu;
 
 interface MailComposeProps {
   composeMode: Exclude<MailComposeMode, null>;
-  onSend: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSend: (event: React.SubmitEvent<HTMLFormElement>) => void;
   selectedEmail?: Email;
 }
 
@@ -45,12 +45,12 @@ export const MailCompose = (props: MailComposeProps) => {
       id="mail-compose-form"
       onSubmit={onSend}
     >
-      <div className="border-b bg-muted/16 px-4 py-3 sm:px-5">
-        <h2 className="font-semibold text-sm tracking-[-0.02em]">
+      <div className="bg-muted/16 border-b px-4 py-3 sm:px-5">
+        <h2 className="text-sm font-semibold tracking-[-0.02em]">
           {composeHeading(composeMode)}
         </h2>
       </div>
-      <div className="flex min-h-0 flex-1 flex-col gap-3 bg-background p-4 sm:p-5">
+      <div className="bg-background flex min-h-0 flex-1 flex-col gap-3 p-4 sm:p-5">
         <InputGroup>
           <InputGroupAddon>To</InputGroupAddon>
           <InputGroupInput

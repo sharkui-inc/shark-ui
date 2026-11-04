@@ -17,7 +17,7 @@ const Example = () => {
 
   return (
     <div className="flex w-full max-w-64 flex-col gap-4">
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         Selected the Large size
       </p>
       <Item className="p-1" variant="outline">
@@ -35,7 +35,7 @@ const Example = () => {
           </ListboxContent>
         </Listbox>
       </Item>
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         {isLarge ? "✅" : "❌"}
       </p>
     </div>

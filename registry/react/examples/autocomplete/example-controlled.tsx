@@ -45,8 +45,8 @@ const Example = () => {
           </AutocompleteList>
         </AutocompleteContent>
       </Autocomplete>
-      <p className="text-center text-muted-foreground text-sm">
-        Selected: {value.join(", ") || "(none)"}
+      <p className="text-muted-foreground text-center text-sm">
+        {value.join(", ") || "(none)"}
       </p>
     </div>
   );

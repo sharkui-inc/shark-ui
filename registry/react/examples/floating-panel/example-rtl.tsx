@@ -1,7 +1,7 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { Settings2Icon, XIcon } from "lucide-react";
+import { TypeIcon, XIcon } from "lucide-react";
 import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { Button } from "@/registry/react/components/button";
 import { Field, FieldLabel } from "@/registry/react/components/field";
@@ -46,7 +46,7 @@ const Example = () => {
       </FloatingPanelTrigger>
       <FloatingPanelContent>
         <FloatingPanelHeader>
-          <Settings2Icon />
+          <TypeIcon aria-hidden />
           <FloatingPanelTitle>{values.title}</FloatingPanelTitle>
           <FloatingPanelControl>
             <FloatingPanelMinimize />

@@ -14,6 +14,8 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
+export const useDialogContext = useArkDialogContext;
+
 interface DialogContextProps {
   /**
    * Used internally to show or hide overlay
@@ -28,7 +30,6 @@ const [DialogModalProvider, _useDialog] = createContext<DialogContextProps>({
   providerName: "Dialog",
 });
 
-export const useDialogContext = useArkDialogContext;
 export interface DialogProps
   extends React.ComponentProps<typeof ArkDialog.Root> {}
 
@@ -65,11 +66,12 @@ export const dialogOverlayVariants = tv({
   base: [
     "fixed inset-0 z-[calc(50+var(--layer-index,0))]",
     "bg-black/32 backdrop-blur-xs",
-    "duration-200 ease-out",
-    "peer peer-data-[slot=dialog-overlay]:hidden",
+    "duration-100 ease-out",
+    "peer",
+    "peer-data-[slot=dialog-overlay]:hidden",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
-    "motion-reduce:animate-none",
+    "motion-reduce:animate-none motion-reduce:transition-none",
     "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
   ],
 });
@@ -102,7 +104,7 @@ export const DialogPositioner = (
   return (
     <ArkDialog.Positioner
       className={cn(
-        "fixed inset-0 z-[calc(50+var(--layer-index,0))]",
+        "fixed inset-0 z-[calc(50+var(--layer-index,0)+1)]",
         "h-svh w-screen",
         "grid grid-rows-[1fr_auto_3fr] justify-items-center",
         "p-4",
@@ -132,11 +134,13 @@ export const dialogContentVariants = tv({
       "overflow-hidden",
       "outline-hidden",
       "translate-y-[calc(-1.25rem*var(--nested-layer-count))]",
-      "origin-center transition-[scale,opacity,translate] duration-200 ease-out will-change-transform",
-      "data-[nested=dialog]:data-[state=open]:slide-in-from-bottom-10 data-[has-nested=dialog]:origin-top",
-      "scale-[calc(1-0.1*var(--nested-layer-count))] opacity-[calc(1-0.1*var(--nested-layer-count))]",
-      "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
-      "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
+      "origin-center duration-100 ease-out",
+      "data-[nested=dialog]:data-[state=open]:slide-in-from-bottom-10",
+      "data-[has-nested=dialog]:origin-top",
+      "opacity-[calc(1-0.1*var(--nested-layer-count))]",
+      "scale-[calc(1-0.1*var(--nested-layer-count))]",
+      "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out",
+      "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in",
       "motion-reduce:animate-none motion-reduce:transition-none",
       "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
     ],
@@ -154,10 +158,12 @@ export const dialogContentVariants = tv({
           "max-sm:**:data-[slot=alert-dialog-footer]:rounded-none",
           "max-sm:opacity-[calc(1-min(var(--nested-dialogs),1))]",
           "max-sm:origin-bottom",
-          "max-sm:data-[state=closed]:slide-out-to-bottom-1/2 max-sm:data-[state=open]:slide-in-from-bottom-1/2",
-          "max-sm:data-[state=closed]:zoom-out-100 max-sm:data-[state=open]:zoom-in-100",
+          "max-sm:data-[state=closed]:slide-out-to-bottom-4",
+          "max-sm:data-[state=open]:slide-in-from-bottom-4",
+          "max-sm:data-[state=closed]:zoom-out-100",
+          "max-sm:data-[state=open]:zoom-in-100",
         ],
-        positioner: ["max-sm:grid-rows-[1fr_auto] max-sm:p-0 max-sm:pt-12"],
+        positioner: ["max-sm:grid-rows-[1fr_auto]", "max-sm:p-0 max-sm:pt-12"],
       },
     },
     size: {
@@ -223,7 +229,11 @@ export const DialogContent = (props: DialogContentProps) => {
             <DialogClose asChild>
               <Button
                 aria-label="Close"
-                className="absolute inset-e-2 top-2 opacity-64 hover:opacity-100"
+                className={cn(
+                  "absolute inset-e-2 top-2",
+                  "opacity-64",
+                  "hover:opacity-100"
+                )}
                 size="icon-sm"
                 variant="ghost"
               >
@@ -312,7 +322,7 @@ export const DialogHeader = (props: DialogHeaderProps) => {
 };
 
 export const dialogTitleVariants = tv({
-  base: ["font-heading font-semibold text-xl leading-none"],
+  base: ["font-heading text-xl leading-none font-semibold"],
 });
 
 export const DialogTitle = (

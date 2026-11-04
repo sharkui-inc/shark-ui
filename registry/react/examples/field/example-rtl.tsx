@@ -11,6 +11,7 @@ import { Input } from "@/registry/react/components/input";
 const Example = () => {
   const { locale } = usePreviewLocale();
   const { values } = translations[locale];
+
   return (
     <Field className="w-full max-w-xs">
       <FieldLabel>{values.label}</FieldLabel>
@@ -23,21 +24,21 @@ const Example = () => {
 const translations = {
   ar: {
     values: {
-      description: "اختر اسم مستخدم فريدًا لحسابك.",
+      description: "اختر اسم مستخدم فريدًا.",
       label: "اسم المستخدم",
       placeholder: "أحمد علي",
     },
   },
   en: {
     values: {
-      description: "Choose a unique username for your account.",
+      description: "Choose a unique username.",
       label: "Username",
       placeholder: "John Doe",
     },
   },
   he: {
     values: {
-      description: "בחר שם משתמש ייחודי לחשבון שלך.",
+      description: "בחר שם משתמש ייחודי.",
       label: "שם משתמש",
       placeholder: "יונתן כהן",
     },

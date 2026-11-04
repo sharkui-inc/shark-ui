@@ -12,7 +12,6 @@ import ExampleMaxLength from "@/registry/react/examples/tags-input/example-max-l
 import ExampleMaxTags from "@/registry/react/examples/tags-input/example-max-tags";
 import ExampleMaxWithOverflow from "@/registry/react/examples/tags-input/example-max-with-overflow";
 import ExamplePasteBehavior from "@/registry/react/examples/tags-input/example-paste-behavior";
-import ExamplePill from "@/registry/react/examples/tags-input/example-pill";
 import ExampleRtl from "@/registry/react/examples/tags-input/example-rtl";
 import ExampleSanitizeValue from "@/registry/react/examples/tags-input/example-sanitize-value";
 import ExampleSizeLg from "@/registry/react/examples/tags-input/example-size-lg";
@@ -30,12 +29,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h1
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="default-heading"
           >
             Default
           </h1>
-          <div className="rounded-3xl bg-muted p-6 sm:p-10">
+          <div className="bg-muted rounded-3xl p-6 sm:p-10">
             <ExampleDefault />
           </div>
         </section>
@@ -44,12 +43,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="blur-behavior-heading"
           >
             Blur Behavior
           </h2>
-          <div className="rounded-3xl border bg-card p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleBlurBehavior />
           </div>
         </section>
@@ -58,12 +57,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="combobox-heading"
           >
             Combobox
           </h2>
-          <div className="rounded-3xl bg-muted p-6 sm:p-10">
+          <div className="bg-muted rounded-3xl p-6 sm:p-10">
             <ExampleCombobox />
           </div>
         </section>
@@ -72,26 +71,26 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="controlled-heading"
           >
             Controlled
           </h2>
-          <div className="rounded-3xl border bg-card p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleControlled />
           </div>
         </section>
         <section
-          aria-labelledby="controlled-input-value-heading"
+          aria-labelledby="input-value-heading"
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
-            id="controlled-input-value-heading"
+            className="text-muted-foreground font-medium"
+            id="input-value-heading"
           >
-            Controlled Input Value
+            Input Value
           </h2>
-          <div className="rounded-3xl bg-muted p-6 sm:p-10">
+          <div className="bg-muted rounded-3xl p-6 sm:p-10">
             <ExampleControlledInputValue />
           </div>
         </section>
@@ -100,12 +99,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="custom-delimiter-heading"
           >
             Custom Delimiter
           </h2>
-          <div className="rounded-3xl border bg-card p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleCustomDelimiter />
           </div>
         </section>
@@ -114,12 +113,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="disable-editing-heading"
           >
             Disable Editing
           </h2>
-          <div className="rounded-3xl bg-muted p-6 sm:p-10">
+          <div className="bg-muted rounded-3xl p-6 sm:p-10">
             <ExampleDisableEditing />
           </div>
         </section>
@@ -128,12 +127,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="disabled-heading"
           >
             Disabled
           </h2>
-          <div className="rounded-3xl border bg-card p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleDisabled />
           </div>
         </section>
@@ -141,10 +140,10 @@ const TagsInputExamplePage = () => (
           aria-labelledby="field-heading"
           className="flex flex-col gap-5"
         >
-          <h2 className="font-medium text-muted-foreground" id="field-heading">
+          <h2 className="text-muted-foreground font-medium" id="field-heading">
             Field
           </h2>
-          <div className="rounded-3xl bg-muted p-6 sm:p-10">
+          <div className="bg-muted rounded-3xl p-6 sm:p-10">
             <ExampleField />
           </div>
         </section>
@@ -153,12 +152,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="invalid-heading"
           >
             Invalid
           </h2>
-          <div className="rounded-3xl border bg-card p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleInvalid />
           </div>
         </section>
@@ -167,12 +166,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="max-length-heading"
           >
             Max Length
           </h2>
-          <div className="rounded-3xl bg-muted p-6 sm:p-10">
+          <div className="bg-muted rounded-3xl p-6 sm:p-10">
             <ExampleMaxLength />
           </div>
         </section>
@@ -181,12 +180,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="max-tags-heading"
           >
             Max Tags
           </h2>
-          <div className="rounded-3xl border bg-card p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleMaxTags />
           </div>
         </section>
@@ -195,12 +194,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="max-with-overflow-heading"
           >
             Max With Overflow
           </h2>
-          <div className="rounded-3xl bg-muted p-6 sm:p-10">
+          <div className="bg-muted rounded-3xl p-6 sm:p-10">
             <ExampleMaxWithOverflow />
           </div>
         </section>
@@ -209,28 +208,20 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="paste-behavior-heading"
           >
             Paste Behavior
           </h2>
-          <div className="rounded-3xl border bg-card p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExamplePasteBehavior />
           </div>
         </section>
-        <section aria-labelledby="pill-heading" className="flex flex-col gap-5">
-          <h2 className="font-medium text-muted-foreground" id="pill-heading">
-            Pill
-          </h2>
-          <div className="rounded-3xl bg-muted p-6 sm:p-10">
-            <ExamplePill />
-          </div>
-        </section>
         <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
-          <h2 className="font-medium text-muted-foreground" id="rtl-heading">
+          <h2 className="text-muted-foreground font-medium" id="rtl-heading">
             RTL
           </h2>
-          <div className="rounded-3xl border bg-card p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleRtl />
           </div>
         </section>
@@ -239,12 +230,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="sanitize-value-heading"
           >
             Sanitize Value
           </h2>
-          <div className="rounded-3xl bg-muted p-6 sm:p-10">
+          <div className="bg-muted rounded-3xl p-6 sm:p-10">
             <ExampleSanitizeValue />
           </div>
         </section>
@@ -253,12 +244,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="size-lg-heading"
           >
             Size LG
           </h2>
-          <div className="rounded-3xl border bg-card p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSizeLg />
           </div>
         </section>
@@ -267,12 +258,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="size-md-heading"
           >
             Size MD
           </h2>
-          <div className="rounded-3xl bg-muted p-6 sm:p-10">
+          <div className="bg-muted rounded-3xl p-6 sm:p-10">
             <ExampleSizeMd />
           </div>
         </section>
@@ -281,12 +272,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="size-sm-heading"
           >
             Size SM
           </h2>
-          <div className="rounded-3xl border bg-card p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSizeSm />
           </div>
         </section>
@@ -295,12 +286,12 @@ const TagsInputExamplePage = () => (
           className="flex flex-col gap-5"
         >
           <h2
-            className="font-medium text-muted-foreground"
+            className="text-muted-foreground font-medium"
             id="validation-heading"
           >
             Validation
           </h2>
-          <div className="rounded-3xl bg-muted p-6 sm:p-10">
+          <div className="bg-muted rounded-3xl p-6 sm:p-10">
             <ExampleValidation />
           </div>
         </section>

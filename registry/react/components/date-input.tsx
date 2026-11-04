@@ -16,6 +16,8 @@ import {
   type InputGroupProps,
 } from "@/registry/react/components/input-group";
 
+export const useDateInputContext = useArkDateInputContext;
+
 interface DateInputProps
   extends React.ComponentProps<typeof ArkDateInput.Root>,
     Pick<InputProps, "size"> {
@@ -44,7 +46,6 @@ interface DateInputControlProps
   showClear: boolean;
 }
 
-export const useDateInputContext = useArkDateInputContext;
 export const DateInput = (props: DateInputProps) => {
   const {
     size = "md",
@@ -61,7 +62,8 @@ export const DateInput = (props: DateInputProps) => {
     <ArkDateInput.Root
       className={cn(
         "group/date-input",
-        "flex w-full flex-col items-start gap-2",
+        "w-full",
+        "flex flex-col items-start gap-2",
         className
       )}
       data-size={size}
@@ -77,7 +79,11 @@ export const DateInput = (props: DateInputProps) => {
           <>
             <span
               aria-hidden
-              className="pointer-events-none select-none text-muted-foreground [&_svg]:size-3 [&_svg]:shrink-0"
+              className={cn(
+                "text-muted-foreground",
+                "pointer-events-none select-none",
+                "[&_svg]:size-3 [&_svg]:shrink-0"
+              )}
             >
               {separator}
             </span>
@@ -125,8 +131,9 @@ const DateInputControl = (props: DateInputControlProps) => {
           aria-invalid={dateInput.invalid || undefined}
           className={cn(
             "min-w-0",
-            "flex flex-1 items-center gap-2",
-            "font-normal text-base md:text-sm"
+            "flex-1",
+            "flex items-center gap-2",
+            "text-base font-normal md:text-sm"
           )}
           data-slot="date-input-field"
         >
@@ -157,7 +164,7 @@ const DateInputSegmentGroup = (
 
   return (
     <ArkDateInput.SegmentGroup
-      className={cn("flex min-w-0 grow items-center gap-px", className)}
+      className={cn("min-w-0", "flex items-center gap-px", className)}
       data-slot="date-input-segment-group"
       index={index}
       {...rest}
@@ -182,11 +189,12 @@ const DateInputSegment = (
         "rounded-sm border-0 shadow-none ring-0",
         "not-data-[type=literal]:px-0.5",
         "not-data-[type=literal]:focus:bg-primary not-data-[type=literal]:focus:text-primary-foreground",
-        "data-[type=literal]:select-none data-[type=literal]:px-px data-[type=literal]:text-muted-foreground",
+        "data-[type=literal]:text-muted-foreground data-[type=literal]:px-px data-[type=literal]:select-none",
         "data-placeholder-shown:text-muted-foreground",
         "outline-hidden",
         "data-readonly:cursor-default",
-        "group-aria-invalid/date-input:text-destructive group-data-invalid/date-input:text-destructive",
+        "group-aria-invalid/date-input:text-destructive",
+        "group-data-invalid/date-input:text-destructive",
         "not-data-[type=literal]:focus:group-data-invalid/date-input:bg-destructive not-data-[type=literal]:focus:group-data-invalid/date-input:text-white",
         "dark:group-data-invalid/date-input:text-destructive-foreground dark:group-aria-invalid/date-input:text-destructive-foreground",
         "dark:not-data-[type=literal]:focus:group-data-invalid/date-input:bg-destructive-foreground dark:not-data-[type=literal]:focus:group-data-invalid/date-input:text-white",

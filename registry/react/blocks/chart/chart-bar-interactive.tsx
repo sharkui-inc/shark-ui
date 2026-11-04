@@ -163,16 +163,17 @@ const ChartBarInteractive = () => {
         >
           {["desktop", "mobile"].map((key) => {
             const chart = key as keyof typeof chartConfig;
+
             return (
               <ToggleGroupItem
-                className="relative z-30 h-auto flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-start data-[state=on]:bg-muted/48 sm:border-t-0 sm:border-l sm:px-8 sm:py-6 md:h-auto"
+                className="data-[state=on]:bg-muted/48 relative z-30 h-auto flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-start sm:border-t-0 sm:border-l sm:px-8 sm:py-6 md:h-auto"
                 key={chart}
                 value={chart}
               >
                 <span className="text-muted-foreground text-xs">
                   {chartConfig[chart].label}
                 </span>
-                <span className="font-bold text-lg leading-none sm:text-3xl">
+                <span className="text-lg leading-none font-bold sm:text-3xl">
                   {total[key as keyof typeof total].toLocaleString()}
                 </span>
               </ToggleGroupItem>

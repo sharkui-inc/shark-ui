@@ -18,28 +18,28 @@ const AvatarExamplePage = () => (
   <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
     <div className="grid min-w-0 grid-cols-1 gap-16 sm:grid-cols-2 [&>section]:min-w-0">
       <section aria-labelledby="basic-heading" className="flex flex-col gap-5">
-        <h1 className="font-medium text-muted-foreground" id="basic-heading">
+        <h1 className="text-muted-foreground font-medium" id="basic-heading">
           Basic
         </h1>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <AvatarBasic />
         </div>
       </section>
 
       <section aria-labelledby="sizes-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="sizes-heading">
+        <h2 className="text-muted-foreground font-medium" id="sizes-heading">
           Sizes
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <AvatarSizes />
         </div>
       </section>
 
       <section aria-labelledby="badge-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="badge-heading">
+        <h2 className="text-muted-foreground font-medium" id="badge-heading">
           Badge
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <AvatarWithStatus />
         </div>
       </section>
@@ -49,12 +49,12 @@ const AvatarExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="badge-custom-heading"
         >
           Badge with Custom Style
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <AvatarBadgeCustom />
         </div>
       </section>
@@ -64,21 +64,21 @@ const AvatarExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="badge-with-icon-heading"
         >
           Badge with Icon
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <AvatarBadgeWithIcon />
         </div>
       </section>
 
       <section aria-labelledby="group-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="group-heading">
+        <h2 className="text-muted-foreground font-medium" id="group-heading">
           Avatar Group
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <AvatarGroupExample />
         </div>
       </section>
@@ -88,12 +88,12 @@ const AvatarExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="group-count-heading"
         >
           Avatar Group Count
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <AvatarGroupCountExample />
         </div>
       </section>
@@ -103,21 +103,21 @@ const AvatarExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="group-with-icon-heading"
         >
           Avatar Group with Icon
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <AvatarGroupCountIcon />
         </div>
       </section>
 
       <section aria-labelledby="menu-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="menu-heading">
+        <h2 className="text-muted-foreground font-medium" id="menu-heading">
           Menu
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <AvatarMenu />
         </div>
       </section>
@@ -127,12 +127,12 @@ const AvatarExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="size-custom-heading"
         >
           Custom Size
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <AvatarSizeCustom />
         </div>
       </section>
@@ -142,12 +142,12 @@ const AvatarExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="custom-radius-heading"
         >
           Custom Radius
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <AvatarCustomRadius />
         </div>
       </section>
@@ -157,12 +157,12 @@ const AvatarExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="fallback-icon-heading"
         >
           Fallback with Icon
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <AvatarFallbackIcon />
         </div>
       </section>
@@ -172,12 +172,12 @@ const AvatarExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="group-popover-heading"
         >
           Avatar with Popover
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <AvatarGroupPopover />
         </div>
       </section>
@@ -187,21 +187,21 @@ const AvatarExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="hover-card-heading"
         >
           Avatar with Hover Card
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <AvatarHoverCard />
         </div>
       </section>
 
       <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="rtl-heading">
+        <h2 className="text-muted-foreground font-medium" id="rtl-heading">
           RTL
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <AvatarRtl />
         </div>
       </section>

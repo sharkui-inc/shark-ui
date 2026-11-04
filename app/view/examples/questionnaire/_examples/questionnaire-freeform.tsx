@@ -28,7 +28,7 @@ const items = [
 ] as const;
 
 const QuestionnaireFreeform = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const approach = new FormData(event.currentTarget).get("approach");

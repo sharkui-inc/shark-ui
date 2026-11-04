@@ -13,19 +13,19 @@ const Example = () => (
       <TabsTrigger value="tab-3">Tab 3</TabsTrigger>
     </TabsList>
     <TabsContent
-      className="p-4 text-center text-muted-foreground text-xs"
+      className="text-muted-foreground rounded-md border p-4 text-center"
       value="tab-1"
     >
       Content 1
     </TabsContent>
     <TabsContent
-      className="p-4 text-center text-muted-foreground text-xs"
+      className="text-muted-foreground rounded-md border p-4 text-center"
       value="tab-2"
     >
       Content 2
     </TabsContent>
     <TabsContent
-      className="p-4 text-center text-muted-foreground text-xs"
+      className="text-muted-foreground rounded-md border p-4 text-center"
       value="tab-3"
     >
       Content 3

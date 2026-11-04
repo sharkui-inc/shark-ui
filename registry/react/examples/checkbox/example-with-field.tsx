@@ -1,6 +1,7 @@
 import { Checkbox } from "@/registry/react/components/checkbox";
 import {
   Field,
+  FieldContent,
   FieldDescription,
   FieldLabel,
 } from "@/registry/react/components/field";
@@ -8,12 +9,12 @@ import {
 const Example = () => (
   <Field className="w-full max-w-sm" orientation="horizontal">
     <Checkbox />
-    <div className="flex flex-col gap-1">
+    <FieldContent>
       <FieldLabel>Receive product updates</FieldLabel>
       <FieldDescription>
         Get occasional news about features and improvements.
       </FieldDescription>
-    </div>
+    </FieldContent>
   </Field>
 );
 

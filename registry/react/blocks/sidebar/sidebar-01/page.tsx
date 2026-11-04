@@ -17,12 +17,12 @@ export default function Sidebar01Page() {
           <SidebarTrigger className="-ms-1" />
           <Separator className="h-4" orientation="vertical" />
           <div className="flex min-w-0 items-center gap-2 text-sm">
-            <span className="hidden text-muted-foreground sm:inline">
+            <span className="text-muted-foreground hidden sm:inline">
               Documentation
             </span>
             <span
               aria-hidden
-              className="hidden text-muted-foreground sm:inline"
+              className="text-muted-foreground hidden sm:inline"
             >
               /
             </span>
@@ -33,12 +33,12 @@ export default function Sidebar01Page() {
           <div className="grid gap-4 md:grid-cols-3">
             {summaryCards.map((card) => (
               <div
-                className="aspect-video rounded-xl border bg-muted/48"
+                className="bg-muted/48 aspect-video rounded-xl border"
                 key={card}
               />
             ))}
           </div>
-          <div className="min-h-96 flex-1 rounded-xl border bg-muted/48" />
+          <div className="bg-muted/48 min-h-96 flex-1 rounded-xl border" />
         </div>
       </SidebarInset>
     </SidebarProvider>

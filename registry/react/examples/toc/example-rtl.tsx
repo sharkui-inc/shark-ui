@@ -53,11 +53,12 @@ interface TocItemProps {
 
 const Article = (props: { items: TocItemProps[] }) => {
   const { items } = props;
+
   return (
     <>
       {items.map((item) => (
         <section className="flex flex-col gap-3 pb-8" key={item.value}>
-          <h2 className="font-semibold text-lg" id={item.value}>
+          <h2 className="text-lg font-semibold" id={item.value}>
             {item.label}
           </h2>
           <SkeletonText

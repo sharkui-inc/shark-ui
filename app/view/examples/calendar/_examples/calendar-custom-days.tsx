@@ -36,12 +36,12 @@ const CalendarCustomDays = () => (
                   >
                     {week.map((day) => (
                       <ArkCalendar.TableCell
-                        className="relative flex h-[calc(var(--cell-size)*1.5)] w-full select-none items-center justify-center text-center"
+                        className="relative flex h-[calc(var(--cell-size)*1.5)] w-full items-center justify-center text-center select-none"
                         key={day.toString()}
                         value={day}
                         visibleRange={calendar.visibleRange}
                       >
-                        <ArkCalendar.TableCellTrigger className="inline-flex size-full select-none flex-col items-center justify-center gap-0.5 rounded-lg border border-transparent font-normal text-sm leading-none outline-hidden hover:bg-accent hover:text-accent-foreground data-selected:bg-primary data-selected:text-primary-foreground">
+                        <ArkCalendar.TableCellTrigger className="hover:bg-accent hover:text-accent-foreground data-selected:bg-primary data-selected:text-primary-foreground inline-flex size-full flex-col items-center justify-center gap-0.5 rounded-lg border border-transparent text-sm leading-none font-normal outline-hidden select-none">
                           {day.day}
                           <span className="text-xs opacity-64">
                             {isWeekend(day) ? "$120" : "$100"}

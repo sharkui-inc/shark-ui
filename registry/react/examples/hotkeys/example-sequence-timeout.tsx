@@ -35,8 +35,8 @@ const Example = () => {
 
         <Separator className="my-4" />
 
-        <p className="flex items-end gap-2 text-muted-foreground">
-          <span className="font-bold text-2xl text-foreground tabular-nums">
+        <p className="text-muted-foreground flex items-end gap-2">
+          <span className="text-foreground text-2xl font-bold tabular-nums">
             {count}
           </span>{" "}
           {count === 1 ? "completion" : "completions"}

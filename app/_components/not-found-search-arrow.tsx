@@ -20,7 +20,7 @@ export const NotFoundSearchArrow = () => (
         transform="translate(88 0) scale(-1 1)"
       />
     </svg>
-    <span className="absolute top-[calc(100%+0.75rem)] left-1/2 -translate-x-1/2 whitespace-nowrap font-mono font-semibold text-primary text-xs tracking-[-0.02em] sm:text-sm">
+    <span className="text-primary absolute top-[calc(100%+0.75rem)] left-1/2 -translate-x-1/2 font-mono text-xs font-semibold tracking-[-0.02em] whitespace-nowrap sm:text-sm">
       Look up, little fish!
     </span>
   </div>

@@ -10,9 +10,11 @@ import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
 export const useTooltipContext = useArkTooltipContext;
+
 export const tooltipContentVariants = tv({
   base: [
-    "z-[calc(50+var(--layer-index,0))] w-fit",
+    "z-[calc(50+var(--layer-index,0))]",
+    "w-fit",
     "px-3 py-1.5",
     "has-[[data-slot=kbd],[data-slot=kbd-group]]:flex has-[[data-slot=kbd],[data-slot=kbd-group]]:items-center has-[[data-slot=kbd],[data-slot=kbd-group]]:gap-2",
     "has-[>:is([data-slot=kbd],[data-slot=kbd-group]):last-child]:pe-2",
@@ -21,9 +23,14 @@ export const tooltipContentVariants = tv({
     "text-background text-xs",
     "rounded-lg shadow-lg/4",
     "outline-hidden",
-    "origin-(--transform-origin) animate-in duration-150 ease-out",
-    "fade-in-0 zoom-in-[98%]",
-    "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%]",
+    "origin-(--transform-origin)",
+    "animate-in duration-100 ease-out",
+    "fade-in-0 zoom-in-95",
+    "data-[placement^=bottom]:slide-in-from-top-2",
+    "data-[placement^=top]:slide-in-from-bottom-2",
+    "data-[placement^=left]:slide-in-from-right-2",
+    "data-[placement^=right]:slide-in-from-left-2",
+    "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
     "data-[state=closed]:animate-out",
     "motion-reduce:animate-none",
     "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",

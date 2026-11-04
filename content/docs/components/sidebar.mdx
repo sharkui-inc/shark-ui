@@ -1,6 +1,8 @@
 ---
 title: Sidebar
 description: A sidebar for navigation and app structure.
+aliases:
+  - Side nav
 seo:
   description: Collapsible app sidebar with groups and a mobile sheet.
 ---
@@ -198,13 +200,229 @@ React to collapse mode and peer state with utilities.
 
 The toggle listens for **`⌘B`** on macOS and **`Ctrl+B`** elsewhere (`SIDEBAR_KEYBOARD_SHORTCUT` in source).
 
+## Variants
+
+### Sidebar
+
+The sidebar sits flush against the page edge.
+
+<PreviewIframe src="/view/examples/sidebar/example-variant-sidebar" title="Sidebar" />
+
+```tsx
+<SidebarProvider>
+  <Sidebar variant="sidebar">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>Overview</SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+  <SidebarInset>
+    {children}
+  </SidebarInset>
+</SidebarProvider>
+```
+
+### Floating
+
+Use `variant="floating"` for a padded, rounded sidebar while the page content stays flat.
+
+<PreviewIframe src="/view/examples/sidebar/example-floating" title="Floating" />
+
+```tsx
+<SidebarProvider>
+  <Sidebar variant="floating">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>Overview</SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+  <SidebarInset>
+    {children}
+  </SidebarInset>
+</SidebarProvider>
+```
+
+### Inset
+
+Pair `variant="inset"` with `SidebarInset` for the page content.
+
+<PreviewIframe src="/view/examples/sidebar/example-inset-layout" title="Inset" />
+
+```tsx
+<SidebarProvider>
+  <Sidebar variant="inset">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton isActive>Overview</SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+  <SidebarInset>
+    {children}
+  </SidebarInset>
+</SidebarProvider>
+```
+
+## Placement
+
+### Left
+
+Place the sidebar on the left, before the page content.
+
+<PreviewIframe src="/view/examples/sidebar/example-placement-left" title="Left" />
+
+```tsx
+<SidebarProvider>
+  <Sidebar placement="left">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>Overview</SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+  <SidebarInset>
+    {children}
+  </SidebarInset>
+</SidebarProvider>
+```
+
+### Right
+
+Place the sidebar on the right, with `SidebarInset` first so the page content stays on the left.
+
+<PreviewIframe src="/view/examples/sidebar/example-placement" title="Right" />
+
+```tsx
+<SidebarProvider>
+  <SidebarInset>
+    {children}
+  </SidebarInset>
+  <Sidebar placement="right">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>Overview</SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+</SidebarProvider>
+```
+
+## Collapsible
+
+Use `collapsible` to control the collapsibility of the sidebar.
+
+### Icon
+
+Collapse the sidebar to icons.
+
+<PreviewIframe src="/view/examples/sidebar/example-collapsible-icon" title="Icon" />
+
+```tsx
+<SidebarProvider defaultOpen={false}>
+  <Sidebar collapsible="icon">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton tooltip="Overview">
+              <HomeIcon />
+              <span>Overview</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    </SidebarContent>
+    <SidebarRail />
+  </Sidebar>
+  <SidebarInset>
+    <SidebarTrigger />
+    {children}
+  </SidebarInset>
+</SidebarProvider>
+```
+
+### Offcanvas
+
+Collapse the sidebar to an offcanvas panel.
+
+<PreviewIframe src="/view/examples/sidebar/example-collapsible-offcanvas" title="Offcanvas" />
+
+```tsx
+<SidebarProvider defaultOpen={false}>
+  <Sidebar collapsible="offcanvas">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>Overview</SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    </SidebarContent>
+    <SidebarRail />
+  </Sidebar>
+  <SidebarInset>
+    <SidebarTrigger />
+    {children}
+  </SidebarInset>
+</SidebarProvider>
+```
+
+### None
+
+Keep the sidebar expanded.
+
+```tsx
+<Sidebar collapsible="none">
+  <SidebarContent>
+    <SidebarGroup>
+      <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton>Overview</SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarGroup>
+  </SidebarContent>
+</Sidebar>
+```
+
 ## Examples
 
 ### Provider width
 
 Set the sidebar width on the provider.
 
-<PreviewIframe src="/view/examples/sidebar/example-provider-width" title="Sidebar Provider Width" />
+<PreviewIframe src="/view/examples/sidebar/example-provider-width" title="Provider width" />
 
 ```tsx
 <SidebarProvider
@@ -229,37 +447,11 @@ Set the sidebar width on the provider.
 </SidebarProvider>
 ```
 
-### Inset layout
-
-Pair `variant="inset"` with `SidebarInset` for the page content.
-
-<PreviewIframe src="/view/examples/sidebar/example-inset-layout" title="Sidebar Inset Layout" />
-
-```tsx
-<SidebarProvider>
-  <Sidebar variant="inset">
-    <SidebarContent>
-      <SidebarGroup>
-        <SidebarGroupLabel>Workspace</SidebarGroupLabel>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton isActive>Overview</SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarGroup>
-    </SidebarContent>
-  </Sidebar>
-  <SidebarInset>
-    {children}
-  </SidebarInset>
-</SidebarProvider>
-```
-
-### Sidebar state
+### State
 
 Read the current state and toggle the sidebar from a descendant.
 
-<PreviewIframe src="/view/examples/sidebar/example-use-sidebar" title="Sidebar State" />
+<PreviewIframe src="/view/examples/sidebar/example-state" title="State" />
 
 ```tsx
 import { PanelLeftIcon } from "lucide-react";
@@ -283,9 +475,9 @@ const SidebarState = () => {
 };
 ```
 
-### Sidebar header
+### Header
 
-<PreviewIframe src="/view/examples/sidebar/example-sidebar-header" title="Sidebar Header" />
+<PreviewIframe src="/view/examples/sidebar/example-header" title="Header" />
 
 ```tsx
 <Sidebar>
@@ -302,9 +494,9 @@ const SidebarState = () => {
 </Sidebar>
 ```
 
-### Sidebar footer
+### Footer
 
-<PreviewIframe src="/view/examples/sidebar/example-sidebar-footer" title="Sidebar Footer" />
+<PreviewIframe src="/view/examples/sidebar/example-footer" title="Footer" />
 
 ```tsx
 <Sidebar>
@@ -323,7 +515,7 @@ const SidebarState = () => {
 
 ### Scrollable content
 
-<PreviewIframe src="/view/examples/sidebar/example-sidebar-content" title="Sidebar Content" />
+<PreviewIframe src="/view/examples/sidebar/example-content" title="Scrollable content" />
 
 ```tsx
 <Sidebar>
@@ -340,9 +532,9 @@ const SidebarState = () => {
 </Sidebar>
 ```
 
-### Sidebar group
+### Group
 
-<PreviewIframe src="/view/examples/sidebar/example-sidebar-group" title="Sidebar Group" />
+<PreviewIframe src="/view/examples/sidebar/example-group" title="Group" />
 
 ```tsx
 <SidebarGroup>
@@ -362,7 +554,7 @@ const SidebarState = () => {
 
 ### Collapsible group
 
-<PreviewIframe src="/view/examples/sidebar/example-collapsible-group" title="Collapsible Sidebar Group" />
+<PreviewIframe src="/view/examples/sidebar/example-collapsible-group" title="Collapsible group" />
 
 ```tsx
 <Collapsible defaultOpen>
@@ -370,7 +562,7 @@ const SidebarState = () => {
     <SidebarGroupLabel asChild>
       <CollapsibleTrigger>
         Help
-        <ChevronDownIcon />
+        <CollapsibleIndicator />
       </CollapsibleTrigger>
     </SidebarGroupLabel>
     <CollapsibleContent>
@@ -386,30 +578,9 @@ const SidebarState = () => {
 </Collapsible>
 ```
 
-### Data-driven menu
+### Active item
 
-Render menu items from a data collection.
-
-<PreviewIframe src="/view/examples/sidebar/example-sidebar-menu" title="Sidebar Menu" />
-
-```tsx
-<SidebarMenu>
-  {projects.map((project) => (
-    <SidebarMenuItem key={project.name}>
-      <SidebarMenuButton asChild>
-        <a href={project.url}>
-          <project.icon />
-          <span>{project.name}</span>
-        </a>
-      </SidebarMenuButton>
-    </SidebarMenuItem>
-  ))}
-</SidebarMenu>
-```
-
-### Active menu button
-
-<PreviewIframe src="/view/examples/sidebar/example-active-menu-button" title="Active Sidebar Menu Button" />
+<PreviewIframe src="/view/examples/sidebar/example-active-menu-button" title="Active menu button" />
 
 ```tsx
 <SidebarMenuButton asChild isActive>
@@ -422,7 +593,7 @@ Render menu items from a data collection.
 
 ### Menu action
 
-<PreviewIframe src="/view/examples/sidebar/example-menu-action" title="Sidebar Menu Action" />
+<PreviewIframe src="/view/examples/sidebar/example-menu-action" title="Menu action" />
 
 ```tsx
 <SidebarMenuItem>
@@ -440,7 +611,7 @@ Render menu items from a data collection.
 
 ### Nested menu
 
-<PreviewIframe src="/view/examples/sidebar/example-menu-sub" title="Sidebar Menu Sub" />
+<PreviewIframe src="/view/examples/sidebar/example-menu-sub" title="Nested menu" />
 
 ```tsx
 <Collapsible defaultOpen>
@@ -449,7 +620,7 @@ Render menu items from a data collection.
       <SidebarMenuButton>
         <FolderIcon />
         <span>Design</span>
-        <ChevronRightIcon />
+        <CollapsibleIndicator />
       </SidebarMenuButton>
     </CollapsibleTrigger>
     <CollapsibleContent>
@@ -467,7 +638,7 @@ Render menu items from a data collection.
 
 ### Menu badge
 
-<PreviewIframe src="/view/examples/sidebar/example-menu-badge" title="Sidebar Menu Badge" />
+<PreviewIframe src="/view/examples/sidebar/example-menu-badge" title="Menu badge" />
 
 ```tsx
 <SidebarMenuItem>
@@ -481,7 +652,7 @@ Render menu items from a data collection.
 
 ### Loading skeleton
 
-<PreviewIframe src="/view/examples/sidebar/example-menu-skeleton" title="Sidebar Menu Skeleton" />
+<PreviewIframe src="/view/examples/sidebar/example-menu-skeleton" title="Loading skeleton" />
 
 ```tsx
 <SidebarMenu>
@@ -497,7 +668,7 @@ Render menu items from a data collection.
 
 Use `useSidebar` to connect a custom control to the sidebar state.
 
-<PreviewIframe src="/view/examples/sidebar/example-custom-trigger" title="Custom Sidebar Trigger" />
+<PreviewIframe src="/view/examples/sidebar/example-custom-trigger" title="Custom trigger" />
 
 ```tsx
 import { PanelLeftIcon } from "lucide-react";
@@ -520,11 +691,11 @@ const CustomTrigger = () => {
 };
 ```
 
-### Sidebar rail
+### Rail
 
 Use `SidebarRail` on a `collapsible="icon"` sidebar to expand or collapse from the edge.
 
-<PreviewIframe src="/view/examples/sidebar/example-sidebar-rail" title="Sidebar Rail" />
+<PreviewIframe src="/view/examples/sidebar/example-rail" title="Rail" />
 
 ```tsx
 <Sidebar collapsible="icon">

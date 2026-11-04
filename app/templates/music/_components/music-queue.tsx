@@ -33,12 +33,12 @@ export const MusicQueue = (props: {
       <SheetBody className="flex min-h-0 flex-1 flex-col gap-6 overflow-y-auto">
         <section aria-labelledby="now-playing-heading">
           <h2
-            className="font-heading font-semibold text-xl tracking-[-0.02em]"
+            className="font-heading text-xl font-semibold tracking-[-0.02em]"
             id="now-playing-heading"
           >
             Now playing
           </h2>
-          <Item asChild className="mt-3 hover:bg-muted">
+          <Item asChild className="hover:bg-muted mt-3">
             <button onClick={() => onTrackSelect(currentTrack)} type="button">
               <ItemMedia variant="image">
                 <img alt="" height={64} src={currentTrack.image} width={64} />
@@ -55,7 +55,7 @@ export const MusicQueue = (props: {
         </section>
         <section aria-labelledby="next-up-heading">
           <h2
-            className="font-heading font-semibold text-xl tracking-[-0.02em]"
+            className="font-heading text-xl font-semibold tracking-[-0.02em]"
             id="next-up-heading"
           >
             Next up

@@ -1,6 +1,8 @@
 ---
 title: Rating
 description: Star ratings for reviews.
+aliases:
+  - Star rating
 seo:
   description: Star ratings with half stars and read-only mode.
 links:
@@ -79,6 +81,12 @@ import { Rating } from "@/components/ui/rating";
 
 For custom layouts, `Rating` also supports composing `RatingLabel` and `RatingStars`.
 
+## With Field
+
+Use `RatingLabel` inside [Field](/docs/components/field) to name the rating, and `FieldDescription` for a description. Clicking the label focuses the current star.
+
+<ComponentPreview componentName="rating" fileName="example-with-field" />
+
 ## Controlled
 
 Use `value` and `onValueChange` to control the rating.
@@ -96,12 +104,6 @@ Use `value` and `onValueChange` to control the rating.
 <ComponentPreview componentName="rating" fileName="example-disabled" />
 
 ## Examples
-
-### With Field
-
-Use `RatingLabel` to name the rating, and [Field](/docs/components/field) for a description.
-
-<ComponentPreview componentName="rating" fileName="example-with-field" />
 
 ### Half star
 

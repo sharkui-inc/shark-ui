@@ -51,7 +51,7 @@ export const ThemesWelcomeDialog = () => {
       <AlertDialogContent size="sm">
         <div
           aria-hidden="true"
-          className="relative flex min-h-44 items-center justify-center overflow-hidden border-b bg-muted text-foreground"
+          className="bg-muted text-foreground relative flex min-h-44 items-center justify-center overflow-hidden border-b"
         >
           <div className="absolute inset-[-50%] flex rotate-45 items-center justify-center gap-1 opacity-32">
             {PRIMARY_COLORS.map((color) => (

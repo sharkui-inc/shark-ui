@@ -8,7 +8,7 @@ export const dynamicParams = false;
 export const revalidate = false;
 
 const EXAMPLES_ROOT = join(process.cwd(), "registry/react/examples");
-const EXAMPLE_EXTENSION = /\.tsx$/;
+const EXAMPLE_EXTENSION = /\.tsx$/u;
 
 const listExampleParams = () => {
   const components = readdirSync(EXAMPLES_ROOT, { withFileTypes: true })
@@ -29,9 +29,9 @@ const listExampleParams = () => {
 
 export const generateStaticParams = () => listExampleParams();
 
-const ViewExamplePage = async (props: {
-  params: Promise<{ component: string; example: string }>;
-}) => {
+const ViewExamplePage = async (
+  props: PageProps<"/view/examples/[component]/[example]">
+) => {
   const { component, example } = await props.params;
 
   const module = await import(
@@ -52,7 +52,7 @@ const ViewExamplePage = async (props: {
           <div
             className={
               component === "bottom-navigation"
-                ? "grid min-h-svh w-full place-items-center bg-background"
+                ? "bg-background grid min-h-svh w-full place-items-center"
                 : "min-h-svh"
             }
             dir="rtl"
@@ -73,7 +73,7 @@ const ViewExamplePage = async (props: {
 
   if (component === "bottom-navigation" && example !== "example-default") {
     return (
-      <div className="grid min-h-svh w-full place-items-center bg-background">
+      <div className="bg-background grid min-h-svh w-full place-items-center">
         <Preview />
       </div>
     );

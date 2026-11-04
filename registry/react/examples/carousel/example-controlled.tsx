@@ -33,14 +33,14 @@ const Example = () => {
             <CarouselItem index={index} key={slide.id}>
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center">
-                  <span className="font-semibold text-4xl">{index + 1}</span>
+                  <span className="text-4xl font-semibold">{index + 1}</span>
                 </CardContent>
               </Card>
             </CarouselItem>
           ))}
         </CarouselContent>
       </Carousel>
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         Current page: {page + 1} of 5
       </p>
     </div>

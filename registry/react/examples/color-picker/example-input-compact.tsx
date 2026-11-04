@@ -1,5 +1,6 @@
 "use client";
 
+import { parseColor } from "@ark-ui/react";
 import { PercentIcon } from "lucide-react";
 import {
   ColorPicker,
@@ -13,7 +14,6 @@ import {
   ColorPickerTransparencyGrid,
   ColorPickerTrigger,
   ColorPickerView,
-  parseColor,
 } from "@/registry/react/components/color-picker";
 import {
   InputGroup,

@@ -8,18 +8,19 @@ import { MinusIcon, PlusIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
-import { FieldLabel } from "@/registry/react/components/field";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import {
   Input,
   type InputProps,
   inputHeightVars,
 } from "@/registry/react/components/input";
 
+export const useNumberInputContext = useArkNumberInputContext;
+
 interface NumberInputProps
   extends React.ComponentProps<typeof ArkNumberInput.Root>,
     Pick<InputProps, "size"> {}
 
-export const useNumberInputContext = useArkNumberInputContext;
 export const NumberInput = (props: NumberInputProps) => {
   const { size = "md", className, children, ...rest } = props;
 
@@ -31,7 +32,8 @@ export const NumberInput = (props: NumberInputProps) => {
         "data-[size=md]:[--number-field-input-padding:calc(--spacing(3)-1px)]",
         "data-[size=sm]:[--number-field-input-padding:calc(--spacing(2.5)-1px)]",
         "group/number-field",
-        "flex w-full flex-col items-start gap-2",
+        "w-full",
+        "flex flex-col items-start gap-2",
         "has-data-[slot=number-field-increment]:has-data-[slot=number-field-decrement]:**:data-[slot=number-field-input]:text-center",
         className
       )}
@@ -56,16 +58,17 @@ export const NumberInputGroup = (
         "h-(--field-height)",
         "w-full",
         "flex justify-between",
-        "bg-transparent dark:bg-input/32",
-        "font-normal text-base md:text-sm",
+        "bg-transparent",
+        "dark:bg-input/32",
+        "text-base font-normal md:text-sm",
         "rounded-lg",
         "in-data-[size=sm]:rounded-md",
         "overflow-hidden",
-        "border border-input shadow-xs/4",
+        "border-input border shadow-xs/4",
         "transition-[border-color,box-shadow]",
-        "focus-within:border-ring/64 focus-within:ring-2 focus-within:ring-ring/24",
+        "focus-within:border-ring/64 focus-within:ring-ring/24 focus-within:ring-2",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
-        "aria-invalid:border-destructive aria-invalid:ring-[3px] aria-invalid:ring-destructive/24",
+        "aria-invalid:border-destructive aria-invalid:ring-destructive/24 aria-invalid:ring-[3px]",
         "dark:aria-invalid:border-destructive-foreground dark:aria-invalid:text-destructive-foreground dark:aria-invalid:ring-destructive-foreground/24",
         "motion-reduce:transition-none",
         className
@@ -85,8 +88,10 @@ export const NumberInputDecrement = (
     <ArkNumberInput.DecrementTrigger
       asChild
       className={cn(
-        "relative h-full",
-        "flex shrink-0",
+        "relative",
+        "h-full",
+        "shrink-0",
+        "flex",
         "text-foreground",
         "rounded-none",
         "cursor-pointer",
@@ -97,7 +102,10 @@ export const NumberInputDecrement = (
     >
       <Button
         aria-label="Decrement"
-        className="h-full focus-visible:border-transparent focus-visible:ring-0 md:h-full"
+        className={cn(
+          "h-full md:h-full",
+          "focus-visible:border-transparent focus-visible:ring-0"
+        )}
         variant="ghost"
       >
         <MinusIcon aria-hidden />
@@ -115,8 +123,10 @@ export const NumberInputIncrement = (
     <ArkNumberInput.IncrementTrigger
       asChild
       className={cn(
-        "relative h-full",
-        "flex shrink-0",
+        "relative",
+        "h-full",
+        "shrink-0",
+        "flex",
         "text-foreground",
         "rounded-none",
         "cursor-pointer",
@@ -127,7 +137,10 @@ export const NumberInputIncrement = (
     >
       <Button
         aria-label="Increment"
-        className="h-full focus-visible:border-transparent focus-visible:ring-0 md:h-full"
+        className={cn(
+          "h-full md:h-full",
+          "focus-visible:border-transparent focus-visible:ring-0"
+        )}
         variant="ghost"
       >
         <PlusIcon aria-hidden />
@@ -147,7 +160,9 @@ export const NumberInputInput = (props: React.ComponentProps<typeof Input>) => {
           inputSize ? "" : "px-(--number-field-input-padding)",
           "tabular-nums",
           "border-0 shadow-none ring-0",
-          "focus-visible:border-0 focus-visible:ring-0 aria-invalid:ring-0 data-invalid:ring-0",
+          "focus-visible:border-0 focus-visible:ring-0",
+          "aria-invalid:ring-0",
+          "data-invalid:ring-0",
           "dark:bg-transparent",
           className
         )}
@@ -165,12 +180,12 @@ export const NumberInputScrubber = (
   return (
     <ArkNumberInput.Scrubber
       asChild
-      className={cn("flex cursor-ew-resize", className)}
+      className={cn("flex", "cursor-ew-resize", className)}
       data-slot="number-field-scrubber"
       {...rest}
     >
-      <ArkNumberInput.Label asChild>
-        <FieldLabel>{children}</FieldLabel>
+      <ArkNumberInput.Label className={fieldLabelVariants()}>
+        {children}
       </ArkNumberInput.Label>
     </ArkNumberInput.Scrubber>
   );

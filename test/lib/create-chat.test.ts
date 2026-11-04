@@ -6,6 +6,11 @@ import { createChat, getChatRuntime } from "@/registry/react/lib/create-chat";
 
 const adapters = ["ai-sdk", "tanstack-ai"] as const;
 
+const testRunContext = {
+  runId: "run-test",
+  threadId: "thread-test",
+};
+
 const readChunks = async (
   reader: ReadableStreamDefaultReader<InferUIMessageChunk<UIMessage>>
 ): Promise<InferUIMessageChunk<UIMessage>[]> => {
@@ -236,7 +241,9 @@ describe("createChat", () => {
         const message = runtime.toMessage(chat.get(1)[0]);
         assert.equal(message.id, "user-scripted");
         const chunks = await collectChunks(
-          runtime.createTransport({ delayMs: 0 }).connect([message])
+          runtime
+            .createTransport({ delayMs: 0 })
+            .connect([message], undefined, undefined, testRunContext)
         );
 
         assert.equal(chunks.at(0)?.type, "RUN_STARTED");
@@ -277,7 +284,8 @@ describe("createChat", () => {
             .connect(
               [runtime.toMessage(chat.get(1)[0])],
               undefined,
-              abortController.signal
+              abortController.signal,
+              testRunContext
             )
         );
 

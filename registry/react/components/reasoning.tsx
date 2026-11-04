@@ -99,7 +99,7 @@ export const Reasoning = (props: ReasoningProps) => {
       }}
     >
       <Collapsible
-        className={cn("w-full min-w-0 text-sm", className)}
+        className={cn("w-full min-w-0", "text-sm", className)}
         data-duration={duration}
         data-slot="reasoning"
         data-streaming={isStreaming ? "" : undefined}
@@ -139,9 +139,13 @@ export const ReasoningTrigger = (
   return (
     <CollapsibleTrigger
       className={cn(
-        "flex min-h-9 w-fit max-w-full items-center justify-start gap-2 rounded-lg py-1 text-start text-muted-foreground text-sm",
+        "min-h-9 w-fit max-w-full",
+        "flex items-center justify-start gap-2",
+        "py-1",
+        "text-muted-foreground text-start text-sm",
+        "rounded-lg",
         "hover:text-foreground",
-        "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
+        "[&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
         className
       )}
       data-align="start"

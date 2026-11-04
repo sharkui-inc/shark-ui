@@ -6,7 +6,9 @@ import {
 } from "@ark-ui/react/progress";
 import type React from "react";
 import { cn } from "@/lib/utils";
-import { FieldLabel } from "@/registry/react/components/field";
+import { fieldLabelVariants } from "@/registry/react/components/field";
+
+export const useProgressContext = useArkProgressContext;
 
 interface ProgressProps
   extends Omit<React.ComponentProps<typeof ArkProgress.Root>, "value"> {
@@ -24,7 +26,6 @@ interface ProgressProps
   value?: number;
 }
 
-export const useProgressContext = useArkProgressContext;
 export const Progress = (props: ProgressProps) => {
   const {
     value,
@@ -90,7 +91,7 @@ export const ProgressRange = (
         "transition-[width,height] duration-150 ease-out",
         "data-[orientation=horizontal]:h-full",
         "data-[orientation=vertical]:h-full",
-        "data-[state=indeterminate]:w-1/3 data-[state=indeterminate]:animate-indeterminate",
+        "data-[state=indeterminate]:animate-indeterminate data-[state=indeterminate]:w-1/3",
         className
       )}
       data-slot="progress-range"
@@ -102,14 +103,14 @@ export const ProgressRange = (
 export const ProgressLabel = (
   props: React.ComponentProps<typeof ArkProgress.Label>
 ) => {
-  const { children, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
-    <FieldLabel asChild>
-      <ArkProgress.Label data-slot="progress-label" {...rest}>
-        {children}
-      </ArkProgress.Label>
-    </FieldLabel>
+    <ArkProgress.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="progress-label"
+      {...rest}
+    />
   );
 };
 
@@ -119,12 +120,10 @@ export const ProgressValue = (
   const { className, ...rest } = props;
 
   return (
-    <FieldLabel asChild>
-      <ArkProgress.ValueText
-        className={cn("ms-auto tabular-nums", className)}
-        data-slot="progress-value"
-        {...rest}
-      />
-    </FieldLabel>
+    <ArkProgress.ValueText
+      className={cn(fieldLabelVariants(), "ms-auto", "tabular-nums", className)}
+      data-slot="progress-value"
+      {...rest}
+    />
   );
 };

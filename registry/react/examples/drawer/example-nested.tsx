@@ -29,11 +29,11 @@ const Example = () => (
         <div className="mx-auto grid w-full max-w-xs gap-4">
           <div className="grid gap-1">
             <p className="text-muted-foreground text-sm">Name</p>
-            <p className="font-medium text-sm">Vinicius Vicentini</p>
+            <p className="text-sm font-medium">Vinicius Vicentini</p>
           </div>
           <div className="grid gap-1">
             <p className="text-muted-foreground text-sm">Email</p>
-            <p className="font-medium text-sm">vinihvc@example.com</p>
+            <p className="text-sm font-medium">vinihvc@example.com</p>
           </div>
         </div>
       </DrawerBody>

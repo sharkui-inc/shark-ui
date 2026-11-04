@@ -82,6 +82,7 @@ const Example = () => {
             <FormischField of={form} path={["interviewDate"]}>
               {(field) => {
                 const value = field.input as DateValue[];
+
                 return (
                   <Field
                     invalid={Boolean(field.errors?.length)}

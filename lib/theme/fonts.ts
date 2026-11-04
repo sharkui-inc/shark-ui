@@ -25,8 +25,8 @@ const toKebabCase = (label: string) =>
   label
     .trim()
     .toLowerCase()
-    .replaceAll(/[^a-z0-9]+/g, "-")
-    .replaceAll(/(^-)|(-$)/g, "");
+    .replaceAll(/[^a-z0-9]+/gu, "-")
+    .replaceAll(/(^-)|(-$)/gu, "");
 
 const toGoogleFamily = (label: string) => label.trim().replaceAll(" ", "+");
 

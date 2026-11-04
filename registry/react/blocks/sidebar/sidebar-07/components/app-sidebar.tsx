@@ -103,7 +103,7 @@ export const AppSidebar = () => (
           <SidebarMenuButton size="lg" tooltip="vini@example.com">
             <IconTile
               aria-hidden
-              className="border-transparent bg-sidebar-accent text-sidebar-foreground shadow-none"
+              className="bg-sidebar-accent text-sidebar-foreground border-transparent shadow-none"
               size="sm"
             >
               <CircleUserRoundIcon aria-hidden className="size-4" />

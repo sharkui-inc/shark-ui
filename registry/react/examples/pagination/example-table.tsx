@@ -45,16 +45,17 @@ const Example = () => {
       </Table>
       <div className="flex items-center justify-between gap-22">
         <div className="flex shrink-0 items-center gap-2">
-          <div className="text-muted-foreground text-sm">Items per page:</div>
           <NativeSelect
             aria-label="Items per page"
             onChange={(e) => setPageSize(Number(e.target.value))}
+            size="sm"
             value={pageSize}
           >
             <NativeSelectOption value="2">2</NativeSelectOption>
             <NativeSelectOption value="3">3</NativeSelectOption>
             <NativeSelectOption value="4">4</NativeSelectOption>
           </NativeSelect>
+          <div className="text-muted-foreground text-sm">Items per page</div>
         </div>
 
         <Pagination

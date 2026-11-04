@@ -1,7 +1,7 @@
 import { ChatProjects } from "./components/chat-projects";
 
 const ProjectsPage = () => (
-  <main className="min-h-svh bg-background">
+  <main className="bg-background min-h-svh">
     <ChatProjects />
   </main>
 );

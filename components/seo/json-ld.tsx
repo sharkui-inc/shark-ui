@@ -4,6 +4,7 @@ interface JsonLdProps {
 
 export const JsonLd = (props: JsonLdProps) => {
   const { data } = props;
+
   return (
     <script
       // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON is serialized locally and escapes the only HTML-breaking character.

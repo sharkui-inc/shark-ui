@@ -43,7 +43,7 @@ const Example = () => {
             </FloatingPanelCloseTrigger>
           </FloatingPanelControl>
         </FloatingPanelHeader>
-        <FloatingPanelBody className="text-center text-muted-foreground text-sm">
+        <FloatingPanelBody className="text-muted-foreground text-center text-sm">
           <p>
             Size: {size.width} × {size.height}.
           </p>

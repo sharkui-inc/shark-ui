@@ -10,7 +10,7 @@ const Example = () => (
       <div className="flex w-max gap-3 p-3">
         {items.map((item) => (
           <div
-            className="flex h-16 w-36 shrink-0 items-center justify-center rounded-md bg-muted text-sm"
+            className="bg-muted flex h-16 w-36 shrink-0 items-center justify-center rounded-md text-sm"
             key={item}
           >
             {item}

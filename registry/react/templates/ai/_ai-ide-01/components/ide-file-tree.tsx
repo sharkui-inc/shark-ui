@@ -39,9 +39,10 @@ interface IdeFileTreeProps {
 
 export const IdeFileTree = (props: IdeFileTreeProps) => {
   const { onSelect, selectedPath } = props;
+
   return (
     <div className="flex h-full min-h-0 flex-col gap-2 p-2">
-      <p className="px-2 font-medium text-muted-foreground text-xs uppercase">
+      <p className="text-muted-foreground px-2 text-xs font-medium uppercase">
         Files
       </p>
       <TreeView

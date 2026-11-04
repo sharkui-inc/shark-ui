@@ -66,7 +66,7 @@ export const LoginForm = () => (
           </Button>
           <FieldDescription className="text-center">
             New to Northstar?{" "}
-            <a className="font-medium text-foreground" href="#">
+            <a className="text-foreground font-medium" href="#">
               Create an account
             </a>
           </FieldDescription>

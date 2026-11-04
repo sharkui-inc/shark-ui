@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 
 export const useCarouselContext = useArkCarouselContext;
+
 export const Carousel = (
   props: React.ComponentProps<typeof ArkCarousel.Root>
 ) => {
@@ -144,7 +145,8 @@ export const CarouselIndicator = (
         "size-2",
         "shrink-0",
         "bg-foreground",
-        "opacity-64 data-current:opacity-100",
+        "opacity-64",
+        "data-current:opacity-100",
         "rounded-full",
         "overflow-hidden",
         "[&_img]:size-full [&_img]:rounded-[inherit] [&_img]:object-cover",

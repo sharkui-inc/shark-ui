@@ -11,12 +11,12 @@ const Example = () => (
       <AvatarFallback>VV</AvatarFallback>
     </Avatar>
 
-    <Avatar className="rounded-md">
+    <Avatar className="rounded-lg">
       <AvatarImage alt="@shadcn" src="https://github.com/shadcn.png" />
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
 
-    <Avatar className="rounded-lg">
+    <Avatar className="rounded-xl">
       <AvatarImage
         alt="@segunadebayo"
         src="https://github.com/segunadebayo.png"
@@ -24,7 +24,7 @@ const Example = () => (
       <AvatarFallback>SA</AvatarFallback>
     </Avatar>
 
-    <Avatar className="rounded-xl">
+    <Avatar className="rounded-2xl">
       <AvatarImage
         alt="@pasqualevitiello"
         src="https://github.com/pasqualevitiello.png"

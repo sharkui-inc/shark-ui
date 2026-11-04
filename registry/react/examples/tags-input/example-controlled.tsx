@@ -9,7 +9,11 @@ import {
 } from "@/registry/react/components/tags-input";
 
 const Example = () => {
-  const [value, setValue] = React.useState(initialValue);
+  const [value, setValue] = React.useState([
+    "React",
+    "Next.js",
+    "Tailwind CSS",
+  ]);
 
   return (
     <Field className="w-full max-w-sm">
@@ -33,7 +37,5 @@ const Example = () => {
     </Field>
   );
 };
-
-const initialValue = ["React", "Solid"];
 
 export default Example;

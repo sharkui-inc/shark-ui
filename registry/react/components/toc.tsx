@@ -8,6 +8,7 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 
 export const useTocContext = useArkTocContext;
+
 export const TocContext = ArkToc.Context;
 
 export type { TocActiveChangeDetails, TocItemData } from "@ark-ui/react/toc";
@@ -50,7 +51,8 @@ export const TocNav = (props: React.ComponentProps<typeof ArkToc.Nav>) => {
   return (
     <ArkToc.Nav
       className={cn(
-        "sticky top-0 w-40 shrink-0",
+        "sticky top-0",
+        "w-40 shrink-0",
         "text-sm",
         "data-[placement=left]:order-first",
         className
@@ -66,7 +68,7 @@ export const TocTitle = (props: React.ComponentProps<typeof ArkToc.Title>) => {
 
   return (
     <ArkToc.Title
-      className={cn("mb-2 font-medium text-foreground", className)}
+      className={cn("mb-2", "text-foreground font-medium", className)}
       data-slot="toc-title"
       {...rest}
     />
@@ -79,7 +81,8 @@ export const TocList = (props: React.ComponentProps<typeof ArkToc.List>) => {
   return (
     <ArkToc.List
       className={cn(
-        "relative flex flex-col",
+        "relative",
+        "flex flex-col",
         "border-border border-s",
         className
       )}
@@ -97,8 +100,11 @@ export const TocIndicator = (
   return (
     <ArkToc.Indicator
       className={cn(
-        "absolute inset-s-0 z-10 w-0.5 bg-foreground",
-        "h-(--height) translate-y-(--top)",
+        "absolute inset-s-0 z-10",
+        "w-0.5",
+        "bg-foreground",
+        "h-(--height)",
+        "translate-y-(--top)",
         "transition-[height,translate] duration-150 ease-in-out",
         "motion-reduce:transition-none",
         className
@@ -135,8 +141,8 @@ export const TocLink = (props: React.ComponentProps<typeof ArkToc.Link>) => {
         "rounded-md border border-transparent",
         "outline-hidden",
         "hover:text-foreground",
-        "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
-        "data-active:font-medium data-active:text-foreground",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:z-10 focus-visible:ring-2",
+        "data-active:text-foreground data-active:font-medium",
         className
       )}
       data-slot="toc-link"

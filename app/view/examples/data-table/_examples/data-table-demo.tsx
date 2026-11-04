@@ -149,7 +149,7 @@ const DataTableDemo = () => {
         </Table>
       </div>
       <div className="flex items-center justify-end gap-2 py-4">
-        <div className="flex-1 text-muted-foreground text-sm">
+        <div className="text-muted-foreground flex-1 text-sm">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
@@ -235,6 +235,7 @@ const SelectAllCheckbox = (props: {
   table: TanStackTable<typeof features, Payment>;
 }) => {
   const { table } = props;
+
   return (
     <Checkbox
       aria-label="Select all"
@@ -251,6 +252,7 @@ const SelectAllCheckbox = (props: {
 
 const SelectRowCheckbox = (props: { row: Row<typeof features, Payment> }) => {
   const { row } = props;
+
   return (
     <Checkbox
       aria-label="Select row"
@@ -266,6 +268,7 @@ const EmailSortHeader = (props: {
   column: Column<typeof features, Payment, string>;
 }) => {
   const { column } = props;
+
   return (
     <Button
       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
@@ -279,6 +282,7 @@ const EmailSortHeader = (props: {
 
 const PaymentActions = (props: { payment: Payment }) => {
   const { payment } = props;
+
   return (
     <Menu>
       <MenuTrigger asChild>
@@ -309,6 +313,7 @@ const ColumnVisibilityItem = (props: {
   column: Column<typeof features, Payment, unknown>;
 }) => {
   const { column } = props;
+
   return (
     <MenuCheckboxItem
       checked={column.getIsVisible()}
@@ -325,18 +330,19 @@ const ColumnVisibilityItem = (props: {
 };
 
 const columns = columnHelper.columns([
-  columnHelper.display({
-    cell: ({ row }) => <SelectRowCheckbox row={row} />,
-    enableHiding: false,
-    enableSorting: false,
-    header: ({ table }) => <SelectAllCheckbox table={table} />,
-    id: "select",
-  }),
   columnHelper.accessor("status", {
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      <div className="flex items-center gap-2">
+        <SelectRowCheckbox row={row} />
+        <div className="capitalize">{row.getValue("status")}</div>
+      </div>
     ),
-    header: "Status",
+    header: ({ table }) => (
+      <div className="flex items-center gap-2">
+        <SelectAllCheckbox table={table} />
+        Status
+      </div>
+    ),
   }),
   columnHelper.accessor("email", {
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,

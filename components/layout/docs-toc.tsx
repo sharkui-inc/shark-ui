@@ -47,7 +47,7 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
         "z-10",
         "w-full min-w-0",
         "flex-col gap-1",
-        "py-2 ps-6 pe-4",
+        "p-2 ps-6 pe-4",
         "text-sm",
         className
       )}
@@ -59,7 +59,7 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
           <AlignLeftIcon aria-hidden className="size-3 rtl:scale-x-[-1]" />
           On This Page
         </TocTitle>
-        <div className="relative">
+        <div className="relative ms-[calc((--spacing(3)-1px)/2)]">
           <TocIndicator className="bg-primary" />
           <TocList>
             {items.map((item) => (
@@ -71,7 +71,7 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
         </div>
         <Presence
           className={cn(
-            "mt-2 ps-3.5",
+            "ms-[calc((--spacing(3)-1px)/2)] mt-2 ps-3.5",
             "duration-200",
             "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
             "data-[state=open]:fade-in-0 data-[state=open]:animate-in"
@@ -88,7 +88,7 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
               "rounded-md border border-transparent",
               "outline-hidden",
               "hover:text-foreground",
-              "focus-visible:z-10 focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24"
+              "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:z-10 focus-visible:ring-2"
             )}
             href="#page-title"
           >

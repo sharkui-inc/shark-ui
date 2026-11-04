@@ -17,7 +17,7 @@ const Example = () => {
       />
       <ul className="flex flex-col gap-2">
         {searchResults.map((item) => (
-          <li className="text-base text-foreground" key={item}>
+          <li className="text-foreground text-base" key={item}>
             {query ? (
               <Highlight ignoreCase query={query} text={item} />
             ) : (

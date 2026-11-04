@@ -15,18 +15,18 @@ export default function Sidebar15Page() {
         <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ms-1" />
           <Separator className="h-4" orientation="vertical" />
-          <p className="truncate font-medium text-sm">
+          <p className="truncate text-sm font-medium">
             Project management and task tracking
           </p>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
           <section className="mx-auto flex w-full max-w-3xl flex-col gap-2 rounded-xl border p-5">
-            <p className="font-medium text-sm">Ship the sidebar examples</p>
+            <p className="text-sm font-medium">Ship the sidebar examples</p>
             <p className="text-muted-foreground text-sm">
               Review the navigation and scheduling details before publishing.
             </p>
           </section>
-          <div className="mx-auto min-h-96 w-full max-w-3xl rounded-xl bg-muted/48" />
+          <div className="bg-muted/48 mx-auto min-h-96 w-full max-w-3xl rounded-xl" />
         </div>
       </SidebarInset>
       <SidebarRight />

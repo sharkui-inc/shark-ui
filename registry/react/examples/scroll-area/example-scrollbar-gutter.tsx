@@ -8,7 +8,7 @@ const Example = () => (
   >
     <div className="grid gap-3 p-4 text-sm">
       {items.map((item) => (
-        <div className="rounded-md bg-muted p-3" key={item}>
+        <div className="bg-muted rounded-md p-3" key={item}>
           {item}
         </div>
       ))}

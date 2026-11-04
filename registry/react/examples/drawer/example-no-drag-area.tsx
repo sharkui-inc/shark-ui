@@ -22,7 +22,7 @@ const Example = () => (
             Drag the header or the grabber. This paragraph still starts a drag.
           </p>
           <p
-            className="rounded-lg border bg-muted p-4 text-foreground"
+            className="bg-muted text-foreground rounded-lg border p-4"
             data-no-drag
           >
             Dragging cannot start in this area.

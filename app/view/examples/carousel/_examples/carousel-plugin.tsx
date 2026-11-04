@@ -50,7 +50,7 @@ const CarouselPlugin = () => {
           <CarouselItem index={index} key={slide}>
             <Card>
               <CardContent className="flex aspect-square items-center justify-center">
-                <span className="font-semibold text-4xl">{slide}</span>
+                <span className="text-4xl font-semibold">{slide}</span>
               </CardContent>
             </Card>
           </CarouselItem>

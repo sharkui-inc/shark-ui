@@ -1,9 +1,9 @@
 import { AspectRatio } from "@/registry/react/components/aspect-ratio";
 
 const Example = () => (
-  <AspectRatio className="w-full max-w-48 rounded-xl border bg-muted [--ratio:16/9]">
+  <AspectRatio className="bg-muted w-full max-w-48 rounded-xl border [--ratio:16/9]">
     <div className="flex size-full items-center justify-center">
-      <span className="select-none text-muted-foreground text-xs">16:9</span>
+      <span className="text-muted-foreground text-xs select-none">16:9</span>
     </div>
   </AspectRatio>
 );

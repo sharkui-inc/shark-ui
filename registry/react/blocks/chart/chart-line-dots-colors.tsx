@@ -103,7 +103,7 @@ const ChartLineDotsColors = () => (
       </ChartContainer>
     </CardContent>
     <CardFooter className="flex-col items-start gap-2 text-sm">
-      <div className="flex gap-2 font-medium leading-none">
+      <div className="flex gap-2 leading-none font-medium">
         Trending up by 5.2% this month <TrendingUpIcon className="h-4 w-4" />
       </div>
       <div className="text-muted-foreground leading-none">

@@ -30,7 +30,7 @@ export const MusicLibrary = () => {
       <Tabs defaultValue="songs">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <h2
-            className="font-heading font-semibold text-2xl tracking-[-0.02em]"
+            className="font-heading text-2xl font-semibold tracking-[-0.02em]"
             id="library-heading"
           >
             Your library, in focus

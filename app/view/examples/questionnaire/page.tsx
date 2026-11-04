@@ -17,10 +17,10 @@ const QuestionnaireExamplePage = () => (
   <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
     <div className="grid min-w-0 grid-cols-1 gap-16 sm:grid-cols-2 [&>section]:min-w-0">
       <section aria-labelledby="demo-heading" className="flex flex-col gap-5">
-        <h1 className="font-medium text-muted-foreground" id="demo-heading">
+        <h1 className="text-muted-foreground font-medium" id="demo-heading">
           Demo
         </h1>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <QuestionnaireDemo />
         </div>
       </section>
@@ -29,19 +29,19 @@ const QuestionnaireExamplePage = () => (
         aria-labelledby="animated-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="animated-heading">
+        <h2 className="text-muted-foreground font-medium" id="animated-heading">
           Animated
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <QuestionnaireAnimated />
         </div>
       </section>
 
       <section aria-labelledby="card-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="card-heading">
+        <h2 className="text-muted-foreground font-medium" id="card-heading">
           Card
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <QuestionnaireCard />
         </div>
       </section>
@@ -51,12 +51,12 @@ const QuestionnaireExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="conditional-heading"
         >
           Conditional
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <QuestionnaireConditional />
         </div>
       </section>
@@ -66,21 +66,21 @@ const QuestionnaireExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="controlled-heading"
         >
           Controlled
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <QuestionnaireControlled />
         </div>
       </section>
 
       <section aria-labelledby="dialog-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="dialog-heading">
+        <h2 className="text-muted-foreground font-medium" id="dialog-heading">
           Dialog
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <QuestionnaireDialog />
         </div>
       </section>
@@ -89,10 +89,10 @@ const QuestionnaireExamplePage = () => (
         aria-labelledby="freeform-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="freeform-heading">
+        <h2 className="text-muted-foreground font-medium" id="freeform-heading">
           Freeform
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <QuestionnaireFreeform />
         </div>
       </section>
@@ -101,10 +101,10 @@ const QuestionnaireExamplePage = () => (
         aria-labelledby="multiple-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="multiple-heading">
+        <h2 className="text-muted-foreground font-medium" id="multiple-heading">
           Multiple
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <QuestionnaireMultiple />
         </div>
       </section>
@@ -114,12 +114,12 @@ const QuestionnaireExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="navigation-state-heading"
         >
           Navigation State
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <QuestionnaireNavigationState />
         </div>
       </section>
@@ -128,19 +128,19 @@ const QuestionnaireExamplePage = () => (
         aria-labelledby="progress-heading"
         className="flex flex-col gap-5"
       >
-        <h2 className="font-medium text-muted-foreground" id="progress-heading">
+        <h2 className="text-muted-foreground font-medium" id="progress-heading">
           Progress
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <QuestionnaireProgressExample />
         </div>
       </section>
 
       <section aria-labelledby="resume-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="resume-heading">
+        <h2 className="text-muted-foreground font-medium" id="resume-heading">
           Resume
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <QuestionnaireResume />
         </div>
       </section>
@@ -150,21 +150,21 @@ const QuestionnaireExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="shortcuts-heading"
         >
           Shortcuts
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <QuestionnaireShortcuts />
         </div>
       </section>
 
       <section aria-labelledby="skip-heading" className="flex flex-col gap-5">
-        <h2 className="font-medium text-muted-foreground" id="skip-heading">
+        <h2 className="text-muted-foreground font-medium" id="skip-heading">
           Skip
         </h2>
-        <div className="rounded-3xl bg-muted p-6 sm:p-10">
+        <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <QuestionnaireSkipExample />
         </div>
       </section>
@@ -174,12 +174,12 @@ const QuestionnaireExamplePage = () => (
         className="flex flex-col gap-5"
       >
         <h2
-          className="font-medium text-muted-foreground"
+          className="text-muted-foreground font-medium"
           id="validation-heading"
         >
           Validation
         </h2>
-        <div className="rounded-3xl border bg-card p-6 sm:p-10">
+        <div className="bg-card rounded-3xl border p-6 sm:p-10">
           <QuestionnaireValidation />
         </div>
       </section>

@@ -15,6 +15,7 @@ import {
 import { tooltipContentVariants } from "@/registry/react/components/tooltip";
 
 export const useToggleTooltipContext = useArkPopoverContext;
+
 export const ToggleTooltip = (
   props: React.ComponentProps<typeof ArkPopover.Root>
 ) => {

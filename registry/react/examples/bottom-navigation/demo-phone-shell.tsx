@@ -13,7 +13,7 @@ export const DemoPhoneShell = (props: DemoPhoneShellProps) => {
     <div
       className={cn(
         "relative h-[36rem] w-full max-w-[20rem] overflow-hidden",
-        "rounded-4xl border border-border bg-background shadow-lg/4",
+        "border-border bg-background rounded-4xl border shadow-lg/4",
         className
       )}
     >

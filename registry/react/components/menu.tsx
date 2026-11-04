@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/registry/react/components/separator";
 
 export const useMenuContext = useArkMenuContext;
+
 export const Menu = (props: React.ComponentProps<typeof ArkMenu.Root>) => {
   const {
     lazyMount = true,
@@ -58,17 +59,20 @@ export const menuContentVariants = tv({
     "z-[calc(50+var(--layer-index,0))]",
     "max-h-(--available-height) min-w-40",
     "p-1.5",
-    "overflow-y-auto overflow-x-hidden overscroll-y-contain",
-    "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/24",
+    "overflow-x-hidden overflow-y-auto overscroll-y-contain",
+    "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
     "bg-popover",
     "text-popover-foreground",
     "rounded-xl border shadow-lg/4",
     "origin-(--transform-origin)",
     "outline-hidden",
-    "duration-150 ease-out",
-    "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-    "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
-    "data-[state=closed]:animate-out data-[state=open]:animate-in",
+    "duration-100 ease-out",
+    "data-[placement^=bottom]:slide-in-from-top-2",
+    "data-[placement^=top]:slide-in-from-bottom-2",
+    "data-[placement^=left]:slide-in-from-right-2",
+    "data-[placement^=right]:slide-in-from-left-2",
+    "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in",
+    "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out",
     "motion-reduce:animate-none",
     "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
   ],
@@ -120,7 +124,7 @@ export const MenuSeparator = (
   const { className, ...rest } = props;
 
   return (
-    <Separator asChild className={cn("my-1 border-0", className)}>
+    <Separator asChild className={cn("my-1", "border-0", className)}>
       <ArkMenu.Separator data-slot="menu-separator" {...rest} />
     </Separator>
   );
@@ -128,7 +132,9 @@ export const MenuSeparator = (
 
 export const menuItemControlVariants = tv({
   base: [
-    "relative flex min-h-10 w-full items-center gap-2 md:min-h-8",
+    "relative",
+    "min-h-10 w-full md:min-h-8",
+    "flex items-start gap-2",
     "rounded-lg",
     "px-[calc(--spacing(3)-1px)] py-1.5",
     "[&_svg:not([data-slot=menu-item-check-icon])]:pointer-events-none [&_svg:not([data-slot=menu-item-check-icon])]:h-lh [&_svg:not([data-slot=menu-item-check-icon])]:w-3.5 [&_svg:not([data-slot=menu-item-check-icon])]:shrink-0",
@@ -139,7 +145,8 @@ export const menuItemVariants = tv({
   base: [
     menuItemControlVariants(),
     "group/menu-item",
-    "touch-manipulation select-none font-medium text-base md:text-sm",
+    "text-base font-medium md:text-sm",
+    "touch-manipulation select-none",
     "outline-hidden",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
   ],
@@ -151,8 +158,10 @@ export const menuItemVariants = tv({
       default:
         "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
       destructive: [
-        "text-destructive dark:text-destructive-foreground",
-        "data-highlighted:bg-destructive/8 dark:data-highlighted:bg-destructive-foreground/8",
+        "text-destructive",
+        "dark:text-destructive-foreground",
+        "data-highlighted:bg-destructive/8",
+        "dark:data-highlighted:bg-destructive-foreground/8",
         "**:[svg]:text-destructive dark:**:[svg]:text-destructive-foreground",
       ],
     },
@@ -184,7 +193,7 @@ export const MenuQuickItem = (props: MenuItemProps) => {
     <ArkMenu.Item
       className={cn(
         menuItemVariants({ variant }),
-        "flex-col gap-1",
+        "flex-col gap-1 py-2.5",
         "[&_svg]:size-4.5",
         className
       )}
@@ -215,8 +224,9 @@ export const menuItemIndicatorVariants = tv({
   slots: {
     indicator: [
       "pointer-events-none",
-      "absolute inset-e-2 top-1/2 -translate-y-1/2",
-      "flex h-lh w-4 shrink-0 items-center justify-center md:w-3.5",
+      "absolute inset-e-2 top-1.5",
+      "h-lh w-4 shrink-0 md:w-3.5",
+      "flex items-center justify-center",
       "[&_svg]:text-muted-foreground",
     ],
     item: "pe-8",
@@ -247,7 +257,7 @@ export const MenuCheckboxItem = (
       </ArkMenu.ItemIndicator>
 
       <ArkMenu.ItemText
-        className="flex min-w-0 flex-1 items-start gap-2"
+        className={cn("min-w-0 flex-1", "flex items-start gap-2")}
         data-slot="menu-checkbox-item-text"
       >
         {children}
@@ -281,7 +291,7 @@ export const MenuRadioItem = (
       </ArkMenu.ItemIndicator>
 
       <ArkMenu.ItemText
-        className="flex min-w-0 flex-1 items-start gap-2"
+        className={cn("min-w-0 flex-1", "flex items-start gap-2")}
         data-slot="menu-radio-item-text"
       >
         {children}
@@ -311,7 +321,11 @@ export const MenuRadioGroup = (props: MenuRadioGroupProps) => {
 };
 
 export const menuGroupLabelVariants = tv({
-  base: "pointer-events-none px-2 py-1.5 font-medium text-muted-foreground text-xs",
+  base: [
+    "px-2 py-1.5",
+    "text-muted-foreground text-xs font-medium",
+    "pointer-events-none",
+  ],
 });
 
 export const MenuGroupLabel = (
@@ -370,7 +384,7 @@ export const MenuSubTrigger = (
       {children}
 
       <MenuShortcut>
-        <ChevronRightIcon className="size-3.5 rtl:rotate-180" />
+        <ChevronRightIcon className={cn("size-3.5", "rtl:rotate-180")} />
       </MenuShortcut>
     </ArkMenu.TriggerItem>
   );
@@ -382,8 +396,10 @@ export const MenuShortcut = (props: React.ComponentProps<typeof ark.span>) => {
   return (
     <ark.span
       className={cn(
-        "ms-auto font-medium text-muted-foreground text-xs tracking-widest",
-        "group-data-highlighted/menu-item:group-data-[variant=destructive]/menu-item:text-destructive dark:group-data-highlighted/menu-item:group-data-[variant=destructive]/menu-item:text-destructive-foreground",
+        "ms-auto self-center",
+        "text-muted-foreground text-xs font-medium tracking-widest",
+        "group-data-highlighted/menu-item:group-data-[variant=destructive]/menu-item:text-destructive",
+        "dark:group-data-highlighted/menu-item:group-data-[variant=destructive]/menu-item:text-destructive-foreground",
         className
       )}
       data-slot="menu-shortcut"
@@ -397,5 +413,5 @@ export const MenuShortcut = (props: React.ComponentProps<typeof ark.span>) => {
 };
 
 export const menuEmptyVariants = tv({
-  base: "px-2 py-1.5 text-center text-muted-foreground text-sm",
+  base: ["px-2 py-1.5", "text-muted-foreground text-center text-sm"],
 });

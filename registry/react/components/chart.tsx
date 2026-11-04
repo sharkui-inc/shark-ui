@@ -86,7 +86,7 @@ export const ChartContainer = (props: ChartContainerProps) => {
   } = props;
 
   const uniqueId = React.useId();
-  const chartId = `chart-${id ?? uniqueId.replace(/:/g, "")}`;
+  const chartId = `chart-${id ?? uniqueId.replace(/:/gu, "")}`;
 
   return (
     <ChartProvider value={{ config }}>
@@ -242,11 +242,13 @@ const ChartTooltipItem = (props: ChartTooltipItemProps) => {
     swatch = (
       <div
         className={cn(
-          "shrink-0 rounded-sm border-(--color-border) bg-(--color-bg)",
+          "shrink-0",
+          "bg-(--color-bg)",
+          "rounded-sm border-(--color-border)",
           {
             "h-2.5 w-2.5": indicator === "dot",
             "my-0.5": nestLabel && indicator === "dashed",
-            "w-0 border-[1.5px] border-dashed bg-transparent":
+            [cn("w-0", "bg-transparent", "border-[1.5px] border-dashed")]:
               indicator === "dashed",
             "w-1": indicator === "line",
           }
@@ -266,7 +268,7 @@ const ChartTooltipItem = (props: ChartTooltipItemProps) => {
       className={cn(
         "w-full",
         "flex flex-wrap items-stretch gap-2",
-        "[&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
+        "[&>svg]:text-muted-foreground [&>svg]:h-2.5 [&>svg]:w-2.5",
         indicator === "dot" && "items-center"
       )}
     >
@@ -277,7 +279,9 @@ const ChartTooltipItem = (props: ChartTooltipItemProps) => {
           {swatch}
           <div
             className={cn(
-              "flex flex-1 justify-between gap-3 leading-none",
+              "flex-1",
+              "flex justify-between gap-3",
+              "leading-none",
               nestLabel ? "items-end" : "items-center"
             )}
           >
@@ -289,7 +293,7 @@ const ChartTooltipItem = (props: ChartTooltipItemProps) => {
             </div>
             {formattedValue === null ? null : (
               <span
-                className="font-medium font-mono text-foreground tabular-nums"
+                className="text-foreground font-mono font-medium tabular-nums"
                 dir="ltr"
                 style={{ unicodeBidi: "isolate" }}
               >
@@ -375,7 +379,7 @@ export const ChartTooltipContent = (props: ChartTooltipContentProps) => {
         "px-2.5 py-1.5",
         "bg-background",
         "text-xs",
-        "rounded-lg border border-border/48 shadow-lg/4",
+        "border-border/48 rounded-lg border shadow-lg/4",
         className
       )}
       data-slot="chart-tooltip-content"
@@ -438,7 +442,7 @@ export const ChartLegendContent = (props: ChartLegendContentProps) => {
             <div
               className={cn(
                 "flex items-center gap-1.5",
-                "[&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"
+                "[&>svg]:text-muted-foreground [&>svg]:h-3 [&>svg]:w-3"
               )}
               key={`${item.value ?? item.dataKey ?? "value"}`}
             >
@@ -446,7 +450,7 @@ export const ChartLegendContent = (props: ChartLegendContentProps) => {
                 <itemConfig.icon />
               ) : (
                 <div
-                  className="size-2 shrink-0 rounded-sm"
+                  className={cn("size-2 shrink-0", "rounded-sm")}
                   style={{
                     backgroundColor: item.color,
                   }}

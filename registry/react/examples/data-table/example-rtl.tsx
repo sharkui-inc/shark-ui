@@ -65,7 +65,6 @@ const Example = () => {
 
   const headerLabels = {
     actions: values.actions,
-    select: values.selectAll,
   };
 
   const table = useTable({
@@ -129,9 +128,6 @@ const Example = () => {
                     }
                     key={header.id}
                   >
-                    {header.column.id === "select" ? (
-                      <span className="sr-only">{values.selectAll}</span>
-                    ) : null}
                     {header.column.id === "actions" ? (
                       <span className="sr-only">{values.actions}</span>
                     ) : null}
@@ -171,7 +167,7 @@ const Example = () => {
         </Table>
       </div>
       <div className="flex items-center justify-end gap-2 py-4">
-        <div className="flex-1 text-muted-foreground text-sm">
+        <div className="text-muted-foreground flex-1 text-sm">
           {table.getFilteredSelectedRowModel().rows.length} {values.of}{" "}
           {table.getFilteredRowModel().rows.length} {values.rowsSelected}
         </div>
@@ -254,19 +250,16 @@ const SelectAllCheckbox = (props: {
   const { values } = useRtlValues();
 
   return (
-    <>
-      <span className="sr-only">{values.selectAll}</span>
-      <Checkbox
-        aria-label={values.selectAll}
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={({ checked }) => {
-          table.toggleAllPageRowsSelected(!!checked);
-        }}
-      />
-    </>
+    <Checkbox
+      aria-label={values.selectAll}
+      checked={
+        table.getIsAllPageRowsSelected() ||
+        (table.getIsSomePageRowsSelected() && "indeterminate")
+      }
+      onCheckedChange={({ checked }) => {
+        table.toggleAllPageRowsSelected(!!checked);
+      }}
+    />
   );
 };
 
@@ -371,6 +364,7 @@ const ColumnVisibilityItem = (props: {
   column: Column<typeof features, Payment, unknown>;
 }) => {
   const { column } = props;
+
   return (
     <MenuCheckboxItem
       checked={column.getIsVisible()}
@@ -387,18 +381,19 @@ const ColumnVisibilityItem = (props: {
 };
 
 const columns = columnHelper.columns([
-  columnHelper.display({
-    cell: ({ row }) => <SelectRowCheckbox row={row} />,
-    enableHiding: false,
-    enableSorting: false,
-    header: ({ table }) => <SelectAllCheckbox table={table} />,
-    id: "select",
-  }),
   columnHelper.accessor("status", {
     cell: ({ row }) => (
-      <StatusCell status={row.getValue("status") as Payment["status"]} />
+      <div className="flex items-center gap-2">
+        <SelectRowCheckbox row={row} />
+        <StatusCell status={row.getValue("status") as Payment["status"]} />
+      </div>
     ),
-    header: () => <StatusHeader />,
+    header: ({ table }) => (
+      <div className="flex items-center gap-2">
+        <SelectAllCheckbox table={table} />
+        <StatusHeader />
+      </div>
+    ),
   }),
   columnHelper.accessor("email", {
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,

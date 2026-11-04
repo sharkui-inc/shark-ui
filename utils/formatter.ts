@@ -1,20 +1,15 @@
+const TRAILING_NEWLINES = /\n+$/u;
+
 export const slugify = (text: string) =>
   text
     .toLowerCase()
-    .replace(/ /g, "-")
-    .replace(/[^\w-]+/g, "");
+    .replace(/ /gu, "-")
+    .replace(/[^\w-]+/gu, "");
 
-export const replaceContentForCopy = (inputCode: string) => {
-  let code = inputCode;
-  code = replaceRegistryImportsForCopy(code);
-  code = code.replaceAll(/export const (\w+) = \(/g, "export const $1 = (");
-  code = code.replaceAll(/export default (\w+);/g, "");
-  code = code.replaceAll(/\n$/g, "");
-  code = code.replaceAll(/\n$/g, "");
-  code = code.replaceAll(/\n$/g, "");
-
-  return code;
-};
+export const replaceContentForCopy = (inputCode: string) =>
+  replaceRegistryImportsForCopy(inputCode)
+    .replaceAll(/export default (\w+);/gu, "")
+    .replace(TRAILING_NEWLINES, "");
 
 export const replaceRegistryImportsForCopy = (inputCode: string) =>
   inputCode

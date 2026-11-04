@@ -1,6 +1,8 @@
 ---
 title: Skip Nav
 description: Skip link to main content.
+aliases:
+  - Skip link
 seo:
   description: Skip link so keyboard users jump to main content.
 ---
@@ -39,8 +41,9 @@ export default function RootLayout({ children }) {
       <body>
         <SkipNavLink />
         <nav>...</nav>
-        <SkipNavContent />
-        <main>{children}</main>
+        <SkipNavContent asChild>
+          <main>{children}</main>
+        </SkipNavContent>
       </body>
     </html>
   )
@@ -74,8 +77,9 @@ export default function RootLayout({ children }) {
       <body>
         <SkipNavLink />
         <nav>...</nav>
-        <SkipNavContent />
-        <main>{children}</main>
+        <SkipNavContent asChild>
+          <main>{children}</main>
+        </SkipNavContent>
       </body>
     </html>
   )
@@ -90,7 +94,7 @@ export default function RootLayout({ children }) {
 ## Usage
 
 - Place `SkipNavLink` as one of the first focusable elements on the page.
-- Use `SkipNavContent` to wrap your main content. It renders a div with an id that the link targets.
+- Use `SkipNavContent` with `asChild` on the main element. It sets the id that the link targets.
 
 ```tsx
 import { SkipNavContent, SkipNavLink } from "@/components/ui/skip-nav"
@@ -99,8 +103,9 @@ import { SkipNavContent, SkipNavLink } from "@/components/ui/skip-nav"
 ```tsx
 <SkipNavLink />
 <nav>...</nav>
-<SkipNavContent />
-<main>Your main content</main>
+<SkipNavContent asChild>
+  <main>Your main content</main>
+</SkipNavContent>
 ```
 
 ## RTL
@@ -115,7 +120,7 @@ To enable RTL support, see the [RTL configuration guide](/docs/rtl).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `id` | `string` | `"skip-nav-content"` |
+| `contentId` | `string` | `"skip-nav-content"` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 

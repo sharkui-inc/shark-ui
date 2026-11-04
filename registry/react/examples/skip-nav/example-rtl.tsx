@@ -13,14 +13,13 @@ const Example = () => {
 
   return (
     <>
-      <SkipNavLink className="focus:absolute" id="demo-content">
+      <SkipNavLink className="focus:absolute" contentId="demo-content">
         {values.skip}
       </SkipNavLink>
 
       <SkipNavContent
-        className="max-w-sm rounded-lg border border-transparent bg-card p-4 outline-hidden focus:border-ring/64 focus:ring-2 focus:ring-ring/24"
+        className="bg-card max-w-sm rounded-lg border border-transparent p-4"
         id="demo-content"
-        tabIndex={undefined}
       >
         <h2 className="mb-2 font-semibold">{values.heading}</h2>
         <p className="text-muted-foreground text-sm">{values.description}</p>

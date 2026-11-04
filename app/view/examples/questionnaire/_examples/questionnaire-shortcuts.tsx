@@ -32,7 +32,7 @@ type ShortcutMode = "letters" | "numbers" | undefined;
 const QuestionnaireShortcuts = () => {
   const [shortcuts, setShortcuts] = React.useState<ShortcutMode>("letters");
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const action = new FormData(event.currentTarget).get("action");

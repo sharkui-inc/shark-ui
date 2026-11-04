@@ -4,6 +4,7 @@ import React from "react";
 import { NavLink } from "@/components/nav-link";
 import { SITE_CONFIG } from "@/config/site";
 import { Button } from "@/registry/react/components/button";
+import { SkipNavContent } from "@/registry/react/components/skip-nav";
 
 type ErrorAction =
   | { external?: boolean; href: string; label: string }
@@ -60,15 +61,15 @@ const ErrorIllustration = (props: { code: string }) => {
       aria-hidden="true"
       className="relative flex h-44 w-full max-w-sm items-center justify-center sm:h-48"
     >
-      <div className="relative z-10 w-64 -rotate-2 overflow-hidden rounded-xl border border-border bg-card shadow-sm/4 sm:w-72">
-        <div className="flex h-8 items-center gap-1.5 border-border border-b px-3">
-          <span className="size-2 rounded-full bg-muted-foreground/24" />
-          <span className="size-2 rounded-full bg-muted-foreground/24" />
-          <span className="size-2 rounded-full bg-muted-foreground/24" />
-          <span className="ms-2 h-1.5 w-20 rounded-full bg-muted" />
+      <div className="border-border bg-card relative z-10 w-64 -rotate-2 overflow-hidden rounded-xl border shadow-sm/4 sm:w-72">
+        <div className="border-border flex h-8 items-center gap-1.5 border-b px-3">
+          <span className="bg-muted-foreground/24 size-2 rounded-full" />
+          <span className="bg-muted-foreground/24 size-2 rounded-full" />
+          <span className="bg-muted-foreground/24 size-2 rounded-full" />
+          <span className="bg-muted ms-2 h-1.5 w-20 rounded-full" />
         </div>
-        <div className="grid h-28 place-items-center bg-card">
-          <span className="font-heading font-semibold text-4xl text-muted-foreground tracking-tight sm:text-5xl lg:text-6xl">
+        <div className="bg-card grid h-28 place-items-center">
+          <span className="font-heading text-muted-foreground text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
             {code}
           </span>
         </div>
@@ -135,50 +136,49 @@ export const ErrorPage = (props: ErrorPageProps) => {
     : { href: "/", label: "Swim Home" };
 
   return (
-    <main
-      className="relative isolate flex min-h-[calc(100svh-var(--header-height))] w-full flex-col overflow-x-clip px-4 pt-8 pb-16 sm:px-6 sm:pt-10 sm:pb-20 [@media(max-height:42rem)]:pt-4 [@media(max-height:42rem)]:pb-8"
-      id="skip-nav-content"
-    >
-      <ErrorAtmosphere />
-      <section
-        aria-describedby="error-state-description"
-        aria-labelledby="error-state-title"
-        className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 -translate-y-16 flex-col items-center justify-center gap-6 text-center [@media(max-height:42rem)]:translate-y-0 [@media(max-height:42rem)]:gap-4"
-      >
-        <ErrorIllustration code={code} />
+    <SkipNavContent asChild>
+      <main className="relative isolate flex min-h-[calc(100svh-var(--header-height))] w-full flex-col overflow-x-clip px-4 pt-8 pb-16 sm:px-6 sm:pt-10 sm:pb-20 [@media(max-height:42rem)]:pt-4 [@media(max-height:42rem)]:pb-8">
+        <ErrorAtmosphere />
+        <section
+          aria-describedby="error-state-description"
+          aria-labelledby="error-state-title"
+          className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 -translate-y-16 flex-col items-center justify-center gap-6 text-center [@media(max-height:42rem)]:translate-y-0 [@media(max-height:42rem)]:gap-4"
+        >
+          <ErrorIllustration code={code} />
 
-        <div className="flex w-full flex-col items-center gap-6">
-          <div className="flex flex-col items-center gap-4">
-            <h1
-              className="w-fit max-w-full font-heading font-semibold text-5xl leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl"
-              id="error-state-title"
-            >
-              {titleLines.map((line) => (
-                <span className="block whitespace-nowrap" key={line}>
-                  {line}
-                </span>
-              ))}
-            </h1>
-            <p
-              className="max-w-xl text-lg text-muted-foreground leading-relaxed sm:text-xl"
-              id="error-state-description"
-            >
-              {description}
-            </p>
+          <div className="flex w-full flex-col items-center gap-6">
+            <div className="flex flex-col items-center gap-4">
+              <h1
+                className="font-heading w-fit max-w-full text-4xl leading-[1.02] font-semibold tracking-tight sm:text-5xl lg:text-6xl"
+                id="error-state-title"
+              >
+                {titleLines.map((line) => (
+                  <span className="block whitespace-nowrap" key={line}>
+                    {line}
+                  </span>
+                ))}
+              </h1>
+              <p
+                className="text-muted-foreground max-w-xl text-lg leading-relaxed sm:text-xl"
+                id="error-state-description"
+              >
+                {description}
+              </p>
+            </div>
+
+            {error?.message && process.env.NODE_ENV === "development" && (
+              <pre className="border-border bg-muted text-muted-foreground max-h-48 w-full max-w-3xl overflow-auto rounded-lg border px-3 py-2 text-start font-mono text-xs">
+                {error.message}
+              </pre>
+            )}
+
+            <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
+              <ErrorActionButton action={primaryAction} />
+              <ErrorActionButton action={secondaryAction} variant="outline" />
+            </div>
           </div>
-
-          {error?.message && process.env.NODE_ENV === "development" && (
-            <pre className="max-h-48 w-full max-w-[42ch] overflow-auto rounded-lg border border-border bg-muted px-3 py-2 text-start font-mono text-muted-foreground text-xs">
-              {error.message}
-            </pre>
-          )}
-
-          <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
-            <ErrorActionButton action={primaryAction} />
-            <ErrorActionButton action={secondaryAction} variant="outline" />
-          </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </SkipNavContent>
   );
 };

@@ -74,6 +74,7 @@ const useTanStackChatHelper = (
   options: UseChatHelperOptions
 ): ChatHelperState => {
   const runtime = getChatRuntime(chat);
+
   if (runtime.adapter !== "tanstack-ai") {
     throw new Error("Expected a TanStack AI chat runtime.");
   }
@@ -89,12 +90,18 @@ const useTanStackChatHelper = (
     () => runtime.createTransport(options.transport),
     [options.transport, runtime]
   );
+
+  const threadId = React.useId();
+
   const chatState = useTanStackChat({
     connection,
     initialMessages,
+    threadId,
   });
+
   const messages = chatState.messages.map(runtime.fromMessage);
   const nextMessage = chat.next(messages);
+
   const sendNext = React.useCallback(() => {
     if (nextMessage) {
       return chatState.append(runtime.toMessage(nextMessage));

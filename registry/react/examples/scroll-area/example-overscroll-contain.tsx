@@ -10,7 +10,7 @@ const Example = () => (
       >
         <div className="grid gap-2 p-3">
           {items.map((item) => (
-            <div className="rounded-md bg-muted p-3" key={item}>
+            <div className="bg-muted rounded-md p-3" key={item}>
               {item}
             </div>
           ))}
@@ -18,7 +18,7 @@ const Example = () => (
       </ScrollArea>
       <div className="grid gap-2">
         {outerItems.map((item) => (
-          <div className="rounded-md bg-muted p-3" key={item}>
+          <div className="bg-muted rounded-md p-3" key={item}>
             {item}
           </div>
         ))}

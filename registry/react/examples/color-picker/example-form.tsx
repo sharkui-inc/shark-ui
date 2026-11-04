@@ -40,7 +40,7 @@ const Example = () => {
         <CardContent>
           <Field>
             <FieldLabel>Brand color</FieldLabel>
-            <ColorPicker defaultValue={initialValue} name="color">
+            <ColorPicker defaultValue="#eb5e41" name="color">
               <ColorPickerControl>
                 <ColorPickerTrigger asChild>
                   <Button className="w-full justify-start" variant="outline">
@@ -74,7 +74,5 @@ const Example = () => {
     </Card>
   );
 };
-
-const initialValue = "#eb5e41";
 
 export default Example;

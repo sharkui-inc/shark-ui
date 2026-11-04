@@ -46,7 +46,7 @@ const Example = () => (
 
 const items = [{ name: "plan", required: true }] as const;
 
-const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
   event.preventDefault();
   const answer = String(new FormData(event.currentTarget).get("plan"));
   const label = choices.find((choice) => choice.value === answer)?.label;

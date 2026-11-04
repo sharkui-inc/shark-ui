@@ -36,7 +36,7 @@ const Example = () => {
           <CarouselItem index={index} key={slide.id}>
             <Card>
               <CardContent className="flex aspect-square items-center justify-center">
-                <span className="font-semibold text-4xl">
+                <span className="text-4xl font-semibold">
                   {values.numbers[index]}
                 </span>
               </CardContent>

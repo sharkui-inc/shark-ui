@@ -125,7 +125,7 @@ const SnippetCommand = (props: {
 
   if (isEmpty) {
     return (
-      <span className="min-w-0 flex-1 truncate px-2 font-mono text-muted-foreground/64 text-sm">
+      <span className="text-muted-foreground/64 min-w-0 flex-1 truncate px-2 font-mono text-sm">
         {placeholder}
       </span>
     );
@@ -149,7 +149,7 @@ const SnippetCommand = (props: {
   return (
     <code className="flex min-w-0 flex-1 items-center gap-2 px-2 font-mono text-sm">
       {prompt}
-      <span className="min-w-0 select-text truncate">{displayLines[0]}</span>
+      <span className="min-w-0 truncate select-text">{displayLines[0]}</span>
     </code>
   );
 };
@@ -268,7 +268,7 @@ const SnippetMenuItem = (props: { item: SnippetOption }) => {
       {item.icon}
       {item.label}
       {isSelected ? (
-        <CheckIcon className="ms-auto size-3.5 text-foreground" />
+        <CheckIcon className="text-foreground ms-auto size-3.5" />
       ) : (
         <span className="ms-auto size-3.5 shrink-0" />
       )}
@@ -312,10 +312,10 @@ export const SnippetSelect = (props: SnippetSelectProps) => {
         <MenuTrigger asChild>
           <InputGroupButton
             aria-label={triggerLabel}
-            className="h-6.5 gap-1 rounded-md ps-1 pe-0.5 text-foreground"
+            className="text-foreground h-6.5 gap-1 rounded-md ps-1 pe-0.5"
           >
             {triggerOption?.icon}
-            <ChevronsUpDownIcon className="size-2.5 shrink-0 text-muted-foreground" />
+            <ChevronsUpDownIcon className="text-muted-foreground size-2.5 shrink-0" />
           </InputGroupButton>
         </MenuTrigger>
         <MenuContent className="min-w-40">
@@ -324,7 +324,7 @@ export const SnippetSelect = (props: SnippetSelectProps) => {
           ))}
         </MenuContent>
       </Menu>
-      <span aria-hidden className="h-4 w-px shrink-0 bg-border" />
+      <span aria-hidden className="bg-border h-4 w-px shrink-0" />
     </InputGroupAddon>
   );
 };

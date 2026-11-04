@@ -17,8 +17,8 @@ import {
 const Example = () => (
   <ToolResult className="w-full max-w-lg" status="success">
     <ToolResultTrigger>
-      <ToolResultTitle className="font-normal text-muted-foreground">
-        Edited <span className="font-medium text-foreground">settings.tsx</span>
+      <ToolResultTitle className="text-muted-foreground font-normal">
+        Edited <span className="text-foreground font-medium">settings.tsx</span>
       </ToolResultTitle>
       <ToolResultAction>
         <DiffStats added={21} removed={0} />

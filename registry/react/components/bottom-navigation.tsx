@@ -10,6 +10,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
 export const useBottomNavigationContext = useArkTabsContext;
+
 export const BottomNavigation = (
   props: React.ComponentProps<typeof ArkTabs.Root>
 ) => {
@@ -30,7 +31,12 @@ export const BottomNavigation = (
 };
 
 const bottomNavigationListVariants = tv({
-  base: ["fixed z-10", "flex items-center justify-around", "shrink-0 border-t"],
+  base: [
+    "fixed z-10",
+    "flex items-center justify-around",
+    "shrink-0",
+    "border-t",
+  ],
   defaultVariants: {
     variant: "default",
   },
@@ -86,16 +92,18 @@ export const BottomNavigationItem = (
       className={cn(
         "relative",
         "min-w-0",
-        "flex min-h-11 flex-1 flex-col items-center justify-center gap-0.5",
+        "min-h-11 flex-1",
+        "flex flex-col items-center justify-center gap-0.5",
         "p-2",
         "text-muted-foreground",
         "cursor-pointer",
         "transition-[color,opacity]",
         "hover:text-foreground",
         "aria-selected:text-foreground",
-        "border border-transparent focus-visible:border-ring/64 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/24",
+        "border border-transparent",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2 focus-visible:outline-hidden",
         "data-disabled:pointer-events-none data-disabled:opacity-32",
-        "[&_svg:not([class*='size-'])]:size-5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-5",
         "has-[data-slot=bottom-navigation-item-label]:[&_svg:not([class*='size-'])]:size-4",
         "motion-reduce:transition-none",
         className
@@ -129,7 +137,7 @@ export const BottomNavigationItemLabel = (
 
   return (
     <ark.span
-      className={cn("truncate font-medium text-xs", className)}
+      className={cn("truncate text-xs font-medium", className)}
       data-slot="bottom-navigation-item-label"
       {...rest}
     />

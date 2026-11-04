@@ -28,6 +28,7 @@ export const MusicTransport = (props: {
     progress,
     track,
   } = props;
+
   return (
     <div className="flex min-w-0 flex-col gap-1">
       <div className="flex items-center justify-center gap-1">

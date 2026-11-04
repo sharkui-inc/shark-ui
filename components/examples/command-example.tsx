@@ -86,22 +86,28 @@ export const CommandExample = (props: React.ComponentProps<"div">) => {
           </CommandList>
         </CommandContent>
         <CommandFooter>
-          <div className="flex items-center gap-1.5">
-            <Kbd variant="outline">
-              <CornerDownLeftIcon />
-            </Kbd>
-            <span>Select</span>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <KbdGroup>
+                <Kbd variant="outline">
+                  <ArrowUpIcon />
+                </Kbd>
+                <Kbd variant="outline">
+                  <ArrowDownIcon />
+                </Kbd>
+              </KbdGroup>
+              <span>Navigate</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Kbd variant="outline">
+                <CornerDownLeftIcon />
+              </Kbd>
+              <span>Open</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <KbdGroup>
-              <Kbd variant="outline">
-                <ArrowUpIcon />
-              </Kbd>
-              <Kbd variant="outline">
-                <ArrowDownIcon />
-              </Kbd>
-            </KbdGroup>
-            <span>Navigate</span>
+          <div className="flex items-center gap-2">
+            <Kbd variant="outline">Esc</Kbd>
+            <span>Close</span>
           </div>
         </CommandFooter>
       </Command>

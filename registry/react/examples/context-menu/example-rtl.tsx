@@ -24,9 +24,10 @@ import {
 const Example = () => {
   const { locale } = usePreviewLocale();
   const { values } = translations[locale];
+
   return (
     <ContextMenu>
-      <ContextMenuTrigger className="flex aspect-video pointer-coarse:select-none items-center justify-center rounded-2xl border border-dashed p-20 text-sm">
+      <ContextMenuTrigger className="flex aspect-video items-center justify-center rounded-2xl border border-dashed p-20 text-sm pointer-coarse:select-none">
         {values.hint}
       </ContextMenuTrigger>
       <ContextMenuContent className="min-w-40">

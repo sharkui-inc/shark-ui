@@ -1,6 +1,8 @@
 ---
 title: Textarea
 description: Multi-line text field.
+aliases:
+  - Text area
 seo:
   description: Multi-line text field for longer notes and messages.
 links:
@@ -59,6 +61,12 @@ import { Textarea } from "@/components/ui/textarea";
 <Textarea />
 ```
 
+## With Field
+
+Use [Field](/docs/components/field) for a label and description.
+
+<ComponentPreview componentName="textarea" fileName="example-with-field" />
+
 ## Controlled
 
 Control the value with `value` and `onChange`.
@@ -68,8 +76,6 @@ Control the value with `value` and `onChange`.
 ## States
 
 ### Disabled
-
-Disable the textarea with the `disabled` prop. Use `Field` with `disabled` to disable the whole field (label + textarea).
 
 <ComponentPreview componentName="textarea" fileName="example-disabled" />
 
@@ -85,17 +91,11 @@ Use `autoresize` to make the textarea grow with content.
 
 <ComponentPreview componentName="textarea" fileName="example-autoresize" />
 
-### With Field
-
-Use [Field](/docs/components/field) for a label and description.
-
-<ComponentPreview componentName="textarea" fileName="example-with-field" />
-
 ### With Input Group
 
 Use `FieldGroup` to group multiple `Field` blocks. Combine textarea with other inputs and action buttons.
 
-<ComponentPreview componentName="input-group" fileName="example-input-group" />
+<ComponentPreview componentName="input-group" fileName="example-code-file" />
 
 ### Form Integration
 

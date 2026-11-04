@@ -57,18 +57,18 @@ const ThemeCodeFigure = (props: {
 
   return (
     <figure
-      className="relative mt-0 w-full min-w-0 overflow-hidden rounded-2xl border bg-code text-code-foreground"
+      className="bg-code text-code-foreground relative mt-0 w-full min-w-0 overflow-hidden rounded-2xl border"
       data-slot="theme-code"
     >
       <figcaption
-        className="flex min-h-11 items-center gap-2 border-b px-4 py-2.5 font-mono text-[.8125rem] text-muted-foreground"
+        className="text-muted-foreground flex min-h-11 items-center gap-2 border-b px-4 py-2.5 font-mono text-[.8125rem]"
         data-language={language}
       >
         {title}
       </figcaption>
       <CopyButton className="absolute inset-e-1.5 top-1.5" value={code} />
       <div className="max-h-72 w-full min-w-0 overflow-auto">
-        <pre className="m-0 w-max min-w-full bg-code px-4 py-3.5 font-mono text-sm leading-6">
+        <pre className="bg-code m-0 w-max min-w-full px-4 py-3.5 font-mono text-sm leading-6">
           <code
             className="flex w-max min-w-full flex-col"
             data-language={language}
@@ -78,7 +78,7 @@ const ThemeCodeFigure = (props: {
 
               return (
                 <span
-                  className="min-h-6 w-max min-w-full whitespace-pre pe-4 text-code-foreground"
+                  className="text-code-foreground min-h-6 w-max min-w-full pe-4 whitespace-pre"
                   key={key}
                 >
                   {line || "\u00a0"}

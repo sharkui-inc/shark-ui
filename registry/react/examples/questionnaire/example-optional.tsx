@@ -20,7 +20,7 @@ import {
 import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const answers = new FormData(event.currentTarget);
     const selections = items.flatMap((question) =>

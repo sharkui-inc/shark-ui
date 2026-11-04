@@ -14,7 +14,7 @@ export const AIIde = () => {
   const [path, setPath] = React.useState("src/utils/helpers.ts");
 
   return (
-    <div className="h-svh min-h-0 bg-background">
+    <div className="bg-background h-svh min-h-0">
       <Resizable
         className="h-full min-h-0"
         defaultSize={[18, 52, 30]}

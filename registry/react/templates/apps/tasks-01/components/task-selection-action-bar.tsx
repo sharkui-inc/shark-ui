@@ -45,6 +45,7 @@ export const TaskSelectionActionBar = (props: TaskSelectionActionBarProps) => {
     onMove,
     selectedCount,
   } = props;
+
   return (
     <ActionBar
       onOpenChange={({ open }) => {

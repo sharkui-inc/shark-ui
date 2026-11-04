@@ -8,6 +8,7 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 
 export const useSwitchContext = useArkSwitchContext;
+
 export const Switch = (props: React.ComponentProps<typeof ArkSwitch.Root>) => {
   const { className, tabIndex, ...rest } = props;
 
@@ -22,18 +23,21 @@ export const Switch = (props: React.ComponentProps<typeof ArkSwitch.Root>) => {
         "h-(--switch-size) w-[calc(var(--switch-size)*2)]",
         "relative",
         "p-0.5",
-        "inline-flex shrink-0 items-center",
+        "shrink-0",
+        "inline-flex items-center",
         "touch-manipulation",
         "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
         "rounded-full border border-transparent",
         "transition-[background-color,border-color,box-shadow,opacity] duration-200 ease-out",
-        "outline-hidden data-focus-visible:ring-2",
+        "outline-hidden",
+        "data-focus-visible:ring-2",
         "data-focus-visible:border-ring/64 data-focus-visible:ring-ring/24",
         "data-[state=checked]:data-focus-visible:border-background",
         "data-invalid:border-destructive data-invalid:ring-destructive/24",
         "dark:data-invalid:border-destructive-foreground dark:data-invalid:ring-destructive-foreground/24",
         "data-[state=checked]:bg-primary",
-        "data-[state=unchecked]:bg-input dark:data-[state=unchecked]:bg-input",
+        "data-[state=unchecked]:bg-input",
+        "dark:data-[state=unchecked]:bg-input",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         "motion-reduce:transition-none",
         className
@@ -42,18 +46,20 @@ export const Switch = (props: React.ComponentProps<typeof ArkSwitch.Root>) => {
       {...rest}
     >
       <ArkSwitch.Control
-        className="relative flex size-full items-center"
+        className={cn("relative", "size-full", "flex items-center")}
         data-slot="switch-control"
       >
         <ArkSwitch.Thumb
           className={cn(
-            "absolute inset-s-[-1px] block",
+            "absolute inset-s-[-1px]",
+            "block",
             "h-(--switch-thumb-height) w-(--switch-thumb-width)",
             "bg-background",
             "rounded-full shadow-xs/4 ring-0",
             "pointer-events-none",
             "transition-[translate,background-color] duration-200 ease-out",
-            "data-[state=checked]:translate-x-(--switch-thumb-translate) rtl:data-[state=checked]:-translate-x-(--switch-thumb-translate)",
+            "data-[state=checked]:translate-x-(--switch-thumb-translate)",
+            "rtl:data-[state=checked]:-translate-x-(--switch-thumb-translate)",
             "dark:data-[state=checked]:bg-primary-foreground",
             "dark:data-[state=unchecked]:bg-foreground",
             "motion-reduce:transition-none"

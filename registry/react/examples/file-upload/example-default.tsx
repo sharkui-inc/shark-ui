@@ -1,34 +1,35 @@
 "use client";
 
+import { CloudUploadIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   FileUpload,
-  FileUploadDescription,
   FileUploadDropzone,
-  FileUploadDropzoneIcon,
   FileUploadHelper,
   FileUploadList,
   FileUploadTitle,
   FileUploadTrigger,
 } from "@/registry/react/components/file-upload";
-import { Separator } from "@/registry/react/components/separator";
 
 const FileUploadDemo = () => (
-  <FileUpload className="mx-auto w-full max-w-xs">
-    <FileUploadDropzone disableClick>
-      <FileUploadDropzoneIcon />
-      <FileUploadTitle>Drop files here</FileUploadTitle>
-      <div className="flex items-center justify-center gap-2">
-        <Separator />
-        <FileUploadDescription>or</FileUploadDescription>
-        <Separator />
+  <FileUpload
+    className="mx-auto w-full max-w-sm"
+    maxFileSize={10 * 1024 * 1024}
+    maxFiles={2}
+  >
+    <FileUploadDropzone className="gap-4 py-10" disableClick>
+      <CloudUploadIcon
+        aria-hidden="true"
+        className="text-muted-foreground group-data-dragging/file-upload:text-primary size-8"
+        strokeWidth={1.5}
+      />
+      <div className="space-y-0.5">
+        <FileUploadTitle>Drag and drop your files</FileUploadTitle>
+        <FileUploadHelper>Up to 2 files, 10 MB each</FileUploadHelper>
       </div>
       <FileUploadTrigger asChild>
-        <Button>Browse files</Button>
+        <Button size="sm">Select files</Button>
       </FileUploadTrigger>
-      <FileUploadHelper>
-        You can upload up to 2 files at a time.
-      </FileUploadHelper>
     </FileUploadDropzone>
     <FileUploadList />
   </FileUpload>

@@ -27,35 +27,35 @@ const Example = () => {
 
         <div className="flex flex-col gap-2">
           <div
-            className="flex items-center justify-between gap-3 rounded-lg border bg-card px-3 py-2.5 shadow-xs/4"
+            className="bg-card flex items-center justify-between gap-3 rounded-lg border px-3 py-2.5 shadow-xs/4"
             id="tour-keyboard-next"
           >
-            <span className="flex items-center gap-2 font-medium text-sm">
+            <span className="flex items-center gap-2 text-sm font-medium">
               <ArrowRightIcon
                 aria-hidden
-                className="size-4 text-muted-foreground rtl:rotate-180"
+                className="text-muted-foreground size-4 rtl:rotate-180"
               />
               Next step
             </span>
           </div>
           <div
-            className="flex items-center justify-between gap-3 rounded-lg border bg-card px-3 py-2.5 shadow-xs/4"
+            className="bg-card flex items-center justify-between gap-3 rounded-lg border px-3 py-2.5 shadow-xs/4"
             id="tour-keyboard-back"
           >
-            <span className="flex items-center gap-2 font-medium text-sm">
+            <span className="flex items-center gap-2 text-sm font-medium">
               <ArrowLeftIcon
                 aria-hidden
-                className="size-4 text-muted-foreground rtl:rotate-180"
+                className="text-muted-foreground size-4 rtl:rotate-180"
               />
               Previous step
             </span>
           </div>
           <div
-            className="flex items-center justify-between gap-3 rounded-lg border bg-card px-3 py-2.5 shadow-xs/4"
+            className="bg-card flex items-center justify-between gap-3 rounded-lg border px-3 py-2.5 shadow-xs/4"
             id="tour-keyboard-close"
           >
-            <span className="flex items-center gap-2 font-medium text-sm">
-              <XIcon aria-hidden className="size-4 text-muted-foreground" />
+            <span className="flex items-center gap-2 text-sm font-medium">
+              <XIcon aria-hidden className="text-muted-foreground size-4" />
               Close tour
             </span>
           </div>

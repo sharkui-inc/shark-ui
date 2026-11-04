@@ -82,7 +82,7 @@ const wait = (delayMs: number, signals: readonly AbortSignal[] = []) =>
     }
   });
 
-const textChunks = (text: string) => text.match(/\S+\s*/g) ?? [text];
+const textChunks = (text: string) => text.match(/\S+\s*/gu) ?? [text];
 
 const createTimedChunkStream = <CHUNK>(
   chunks: readonly CHUNK[],

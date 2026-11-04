@@ -22,9 +22,11 @@ import { toast } from "@/registry/react/components/toast";
 const Example = () => {
   const onSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const answer = new FormData(event.currentTarget).get("experience");
+
+    const formData = new FormData(event.currentTarget).get("experience");
+
     toast.info({
-      description: String(answer ?? "No answer"),
+      description: String(formData ?? "No answer"),
       title: "Form submitted",
     });
   };

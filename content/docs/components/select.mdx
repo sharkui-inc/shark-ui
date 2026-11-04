@@ -1,6 +1,8 @@
 ---
 title: Select
 description: Select an option from a list.
+aliases:
+  - Dropdown
 seo:
   description: Popup select for one option from a scrollable list.
 links:
@@ -33,7 +35,7 @@ npx shadcn@latest add @shark/select
 
 <Steps>
 
-<Step>This component depends on [Input](/docs/components/input), [Scroll Area](/docs/components/scroll-area), and [Separator](/docs/components/separator). Install them first if you haven't already.</Step>
+<Step>This component depends on [Field](/docs/components/field), [Input](/docs/components/input), [Scroll Area](/docs/components/scroll-area), and [Separator](/docs/components/separator). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
@@ -55,6 +57,7 @@ npx shadcn@latest add @shark/select
 
 ```text
 Select
+├── SelectLabel
 ├── SelectTrigger
 │   └── SelectValue
 └── SelectContent
@@ -97,6 +100,12 @@ const collection = createListCollection({
   </SelectContent>
 </Select>
 ```
+
+## With Field
+
+Use `FieldLabel` to name the control. 
+
+<ComponentPreview componentName="select" fileName="example-with-field" />
 
 ## Controlled
 
@@ -146,6 +155,8 @@ Control trigger size with the `size` prop on SelectTrigger.
 
 ### With Icon
 
+Pass the collection item type to `SelectContext` so custom fields such as `icon` are typed.
+
 <ComponentPreview componentName="select" fileName="example-with-icon" />
 
 ### With Description
@@ -164,13 +175,9 @@ Organize options into groups using `groupBy` and `SelectGroup`.
 
 <ComponentPreview componentName="select" fileName="example-grouping" />
 
-### With Field
-
-Use [Field](/docs/components/field) for a label and description.
-
-<ComponentPreview componentName="select" fileName="example-with-field" />
-
 ### Max Selection
+
+Cap how many items can be selected.
 
 <ComponentPreview componentName="select" fileName="example-max-selection" />
 
@@ -304,11 +311,11 @@ Shown when the collection has no items (`collection.size === 0`). Place inside `
 
 ### SelectContext
 
-Render-prop access to the surrounding component API.
+Render-prop access to the surrounding component API. Pass the collection item type (`SelectContext<Item>`) to read fields beyond the default item.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `children` | `(api: unknown) => React.ReactNode` | `required` |
+| `children` | `(api: UseSelectContext<Item>) => React.ReactNode` | `required` |
 
 ### SelectSeparator
 

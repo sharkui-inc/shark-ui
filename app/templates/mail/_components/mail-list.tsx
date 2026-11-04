@@ -38,15 +38,11 @@ export const MailList = (props: { onCompose: () => void; query: string }) => {
   };
 
   return (
-    <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden bg-background">
+    <div className="bg-background flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
       <header className="flex h-14 min-h-14 shrink-0 items-center gap-2 border-b px-4 py-0">
-        <h2 className="min-w-0 flex-1 truncate font-semibold text-sm">Inbox</h2>
+        <h2 className="min-w-0 flex-1 truncate text-sm font-semibold">Inbox</h2>
 
-        <MailToolbarButton
-          label="New message"
-          onClick={onCompose}
-          variant="default"
-        >
+        <MailToolbarButton label="New message" onClick={onCompose}>
           <PlusIcon aria-hidden />
         </MailToolbarButton>
       </header>

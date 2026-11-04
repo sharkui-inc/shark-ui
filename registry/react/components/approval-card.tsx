@@ -94,7 +94,8 @@ export const ApprovalCard = (props: ApprovalCardProps) => {
       >
         <Card
           className={cn(
-            "w-full has-data-[slot=approval-card-footer]:pb-0",
+            "w-full",
+            "has-data-[slot=approval-card-footer]:pb-0",
             className
           )}
         >
@@ -121,7 +122,8 @@ export const ApprovalCardHeader = (props: ApprovalCardHeaderProps) => {
       {...rest}
       className={cn(
         "flex flex-row items-start gap-2",
-        "min-w-0 text-muted-foreground",
+        "min-w-0",
+        "text-muted-foreground",
         "[&_svg:not([class*='h-'])]:h-lh [&_svg:not([class*='w-'])]:w-4",
         "[&_svg]:shrink-0 [&_svg]:self-start",
         className
@@ -146,7 +148,8 @@ export const ApprovalCardTitle = (
   return (
     <CardTitle
       className={cn(
-        "h-lh min-w-0 font-medium font-sans text-muted-foreground text-sm",
+        "h-lh min-w-0",
+        "text-muted-foreground font-sans text-sm font-medium",
         className
       )}
       data-slot="approval-card-title"
@@ -165,7 +168,9 @@ export const ApprovalCardAction = (
       {...rest}
       className={cn(
         "col-start-auto row-span-1 row-start-auto",
-        "ms-auto self-center text-xs/none",
+        "self-center",
+        "ms-auto",
+        "text-xs/none",
         className
       )}
       data-slot="approval-card-action"

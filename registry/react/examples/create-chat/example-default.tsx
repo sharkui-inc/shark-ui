@@ -61,7 +61,7 @@ const CreateChatDemo = () => {
         key={session}
         onReset={() => setSession((value) => value + 1)}
       />
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         Demo is read only. Press send to send messages.
       </p>
     </div>

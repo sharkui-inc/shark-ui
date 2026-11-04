@@ -149,7 +149,7 @@ export const BrowserShareExample = (props: React.ComponentProps<"div">) => {
           {data.map((item) => (
             <RadioGroupItem
               className={cn(
-                "gap-1.5 text-muted-foreground text-xs",
+                "text-muted-foreground gap-1.5 text-xs",
                 "hover:text-foreground",
                 "data-[state=checked]:text-foreground",
                 "**:data-[slot=radio-group-item-control]:hidden",
@@ -170,7 +170,7 @@ export const BrowserShareExample = (props: React.ComponentProps<"div">) => {
       <CardFooter className="flex flex-col items-stretch gap-2">
         <div className="flex items-center text-xs">
           <span className="font-medium">{active.label}</span>
-          <span className="ms-auto text-muted-foreground tabular-nums">
+          <span className="text-muted-foreground ms-auto tabular-nums">
             {percent}%
           </span>
         </div>

@@ -3,14 +3,14 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const LinkOverlayThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="max-w-40 rounded-lg border border-input bg-muted shadow-sm/4">
+    <div className="border-input bg-muted max-w-40 rounded-lg border shadow-sm/4">
       <div className="relative flex h-16 w-full items-center justify-center p-3">
-        <div className="size-full rounded-md bg-muted-foreground/24" />
+        <div className="bg-muted-foreground/24 size-full rounded-md" />
         <div
           aria-hidden
-          className="absolute inset-0 flex items-center justify-center rounded-md border border-input border-dashed"
+          className="border-input absolute inset-0 flex items-center justify-center rounded-md border border-dashed"
         >
-          <ArrowUpRightIcon className="size-4 text-muted-foreground/64" />
+          <ArrowUpRightIcon className="text-muted-foreground/64 size-4" />
         </div>
       </div>
     </div>

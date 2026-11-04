@@ -90,7 +90,7 @@ export const TemplatePreviewHost = (props: TemplatePreviewHostProps) => {
           // biome-ignore lint/a11y/noNoninteractiveElementInteractions: load reports the iframe resource state
           <iframe
             className={cn(
-              "absolute inset-0 size-full bg-background",
+              "bg-background absolute inset-0 size-full",
               canInteract ? null : "pointer-events-none",
               isFrameActive && loaded ? null : "invisible"
             )}
@@ -118,7 +118,7 @@ export const TemplatePreviewHost = (props: TemplatePreviewHostProps) => {
 };
 
 const PreviewLoading = () => (
-  <div className="absolute inset-0 z-10 grid place-items-center bg-background">
+  <div className="bg-background absolute inset-0 z-10 grid place-items-center">
     <Spinner className="size-8" />
   </div>
 );

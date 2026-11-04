@@ -34,7 +34,11 @@ export const Diff = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "w-full min-w-0 overflow-hidden rounded-xl border bg-card text-card-foreground shadow-xs/4",
+        "w-full min-w-0",
+        "bg-card",
+        "text-card-foreground",
+        "rounded-xl border shadow-xs/4",
+        "overflow-hidden",
         "flex flex-col",
         "[--code-surface-gutter-min:--spacing(11)] [--code-surface-header-height:--spacing(9)] [--code-surface-inline-padding:--spacing(3)] [--code-surface-line-height:--spacing(6)]",
         className
@@ -58,7 +62,9 @@ export const DiffFile = (props: React.ComponentProps<typeof ark.span>) => {
   return (
     <ark.span
       className={cn(
-        "min-w-0 flex-1 truncate text-muted-foreground text-sm [text-align:match-parent]",
+        "[text-align:match-parent]",
+        "min-w-0 flex-1",
+        "text-muted-foreground truncate text-sm",
         className
       )}
       data-slot="diff-file"
@@ -75,10 +81,12 @@ export const DiffHeader = (props: DiffHeaderProps) => {
   return (
     <ark.div
       className={cn(
-        "flex min-h-(--code-surface-header-height) min-w-0 items-center gap-2 px-(--code-surface-inline-padding) py-1",
+        "min-h-(--code-surface-header-height) min-w-0",
+        "flex items-center gap-2",
+        "px-(--code-surface-inline-padding) py-1",
         "border-b",
         "text-muted-foreground text-sm",
-        "[&>svg]:order-first [&>svg]:shrink-0 [&>svg]:text-muted-foreground",
+        "[&>svg]:text-muted-foreground [&>svg]:order-first [&>svg]:shrink-0",
         "[&>svg:not([class*='size-'])]:size-3.5",
         className
       )}
@@ -100,7 +108,12 @@ export const DiffAction = (props: React.ComponentProps<typeof ark.div>) => {
 
   return (
     <ark.div
-      className={cn("ms-auto flex shrink-0 items-center gap-1", className)}
+      className={cn(
+        "shrink-0",
+        "flex items-center gap-1",
+        "ms-auto",
+        className
+      )}
       data-slot="diff-action"
       {...rest}
     />
@@ -125,7 +138,8 @@ export const DiffStats = (props: DiffStatsProps) => {
     <ark.span
       aria-label={`${added} added, ${removed} removed`}
       className={cn(
-        "inline-flex shrink-0 items-center gap-2",
+        "shrink-0",
+        "inline-flex items-center gap-2",
         "ms-auto",
         "text-sm tabular-nums",
         className
@@ -147,7 +161,8 @@ export const DiffContent = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn(
         "min-h-0 w-full min-w-0",
-        "flex flex-1 flex-col",
+        "flex-1",
+        "flex flex-col",
         "overflow-hidden",
         className
       )}
@@ -156,7 +171,14 @@ export const DiffContent = (props: React.ComponentProps<typeof ark.div>) => {
       dir="ltr"
     >
       <ScrollArea className="flex-1" dir="ltr" overscrollContain>
-        <div className="grid w-max min-w-full grid-cols-[minmax(var(--code-surface-gutter-min),max-content)_minmax(max-content,1fr)] py-3 font-mono text-sm leading-(--code-surface-line-height)">
+        <div
+          className={cn(
+            "w-max min-w-full",
+            "grid grid-cols-[minmax(var(--code-surface-gutter-min),max-content)_minmax(max-content,1fr)]",
+            "py-3",
+            "font-mono text-sm leading-(--code-surface-line-height)"
+          )}
+        >
           {children}
         </div>
       </ScrollArea>
@@ -171,20 +193,24 @@ const diffLineVariants = tv({
   slots: {
     code: [
       "ps-(--code-surface-inline-padding) pe-(--code-surface-inline-padding)",
-      "whitespace-pre text-muted-foreground",
+      "text-muted-foreground whitespace-pre",
     ],
     gutter: [
       "sticky left-0 z-1",
-      "flex w-full min-w-0 items-center",
+      "w-full min-w-0",
+      "flex items-center",
       "bg-card",
       "before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:w-0.75 before:content-['']",
     ],
     number: [
-      "w-full px-(--code-surface-inline-padding)",
-      "select-none text-end text-muted-foreground tabular-nums",
+      "w-full",
+      "px-(--code-surface-inline-padding)",
+      "text-muted-foreground text-end tabular-nums",
+      "select-none",
     ],
     root: [
-      "col-span-2 grid min-h-(--code-surface-line-height) w-full min-w-max grid-cols-subgrid items-stretch",
+      "min-h-(--code-surface-line-height) w-full min-w-max",
+      "col-span-2 grid grid-cols-subgrid items-stretch",
     ],
   },
   variants: {

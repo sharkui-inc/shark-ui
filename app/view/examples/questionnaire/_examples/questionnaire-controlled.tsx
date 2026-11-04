@@ -36,7 +36,7 @@ const QuestionnaireControlled = () => {
   const handleItemChange = (details: QuestionnaireItemChangeDetails) =>
     setItem(details.item);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -51,7 +51,7 @@ const QuestionnaireControlled = () => {
   return (
     <div className="relative mx-auto flex h-full w-full max-w-md flex-col">
       <p
-        className="absolute end-0 top-0 text-muted-foreground text-sm"
+        className="text-muted-foreground absolute end-0 top-0 text-sm"
         role="status"
       >
         Current checkpoint: {itemLabels[item]}

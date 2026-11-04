@@ -42,7 +42,6 @@ const InputGroupBlockStart = () => (
           </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
-      <FieldDescription>Header positioned above the textarea.</FieldDescription>
     </Field>
   </FieldGroup>
 );

@@ -10,6 +10,7 @@ import { CheckIcon, ChevronsUpDownIcon, XIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import { inputHeightVars } from "@/registry/react/components/input";
 import {
   menuEmptyVariants,
@@ -20,12 +21,14 @@ import {
 import { Separator } from "@/registry/react/components/separator";
 
 export const useSelectContext = useArkSelectContext;
+
 export const SelectContext = ArkSelect.Context;
 
 export const Select: ArkSelect.RootComponent = (props) => {
   const {
     lazyMount = true,
     unmountOnExit = true,
+    className,
     children,
     scrollToIndexFn,
     ...rest
@@ -33,6 +36,7 @@ export const Select: ArkSelect.RootComponent = (props) => {
 
   return (
     <ArkSelect.Root
+      className={cn("flex flex-col gap-2", className)}
       data-slot="select"
       lazyMount={lazyMount}
       scrollToIndexFn={(details) => {
@@ -53,17 +57,31 @@ export const Select: ArkSelect.RootComponent = (props) => {
   );
 };
 
+export const SelectLabel = (
+  props: React.ComponentProps<typeof ArkSelect.Label>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkSelect.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="select-label"
+      {...rest}
+    />
+  );
+};
+
 export const selectTriggerVariants = tv({
   base: [
     "h-(--field-height) w-fit min-w-0",
     "flex items-center gap-2",
     "touch-manipulation select-none",
-    "font-normal text-base md:text-sm",
+    "text-base font-normal md:text-sm",
     "rounded-lg",
     "outline-hidden",
     "transition-[color,box-shadow]",
     "data-placeholder-shown:text-muted-foreground",
-    "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+    "[&_svg]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
     "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-64",
     "motion-reduce:transition-none",
   ],
@@ -89,19 +107,20 @@ export const selectTriggerVariants = tv({
     },
     variant: {
       default: [
-        "bg-transparent dark:bg-input/32",
-        "border border-input shadow-xs/4",
-        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
-        "data-[state=open]:border-ring/64 data-[state=open]:ring-2 data-[state=open]:ring-ring/24",
-        "aria-invalid:border-destructive aria-invalid:text-destructive aria-invalid:ring-[3px] aria-invalid:ring-destructive/24",
-        "data-invalid:border-destructive data-invalid:text-destructive data-invalid:ring-[3px] data-invalid:ring-destructive/24",
+        "bg-transparent",
+        "dark:bg-input/32",
+        "border-input border shadow-xs/4",
+        "group-focus-within:border-ring/64 group-focus-within:ring-ring/24 group-focus-within:ring-2",
+        "data-[state=open]:border-ring/64 data-[state=open]:ring-ring/24 data-[state=open]:ring-2",
+        "aria-invalid:border-destructive aria-invalid:text-destructive aria-invalid:ring-destructive/24 aria-invalid:ring-[3px]",
+        "data-invalid:border-destructive data-invalid:text-destructive data-invalid:ring-destructive/24 data-invalid:ring-[3px]",
         "dark:aria-invalid:border-destructive-foreground dark:aria-invalid:text-destructive-foreground dark:aria-invalid:ring-destructive-foreground/32",
         "dark:data-invalid:border-destructive-foreground dark:data-invalid:text-destructive-foreground dark:data-invalid:ring-destructive-foreground/32",
       ],
       ghost: [
         "border border-transparent",
         "hover:bg-accent hover:text-accent-foreground",
-        "focus-visible:border-ring/64 focus-visible:ring-2 focus-visible:ring-ring/24",
+        "group-focus-within:border-ring/64 group-focus-within:ring-ring/24 group-focus-within:ring-2",
       ],
     },
   },
@@ -138,7 +157,7 @@ export const SelectTrigger = (props: SelectTriggerProps) => {
   const showTrailing = showClear || showTrigger;
 
   return (
-    <ArkSelect.Control data-slot="select-control">
+    <ArkSelect.Control className="group" data-slot="select-control">
       <ArkSelect.Trigger
         className={cn(selectTriggerVariants({ size, variant }), className)}
         data-slot="select-trigger"
@@ -147,7 +166,7 @@ export const SelectTrigger = (props: SelectTriggerProps) => {
         {children}
 
         {showTrailing ? (
-          <div className="ms-auto flex items-center gap-1">
+          <div className={cn("flex items-center gap-1", "ms-auto")}>
             {showClear ? (
               <SelectClearTrigger>
                 <XIcon />
@@ -172,7 +191,7 @@ export const SelectSeparator = (
 
   return (
     <Separator
-      className={cn("pointer-events-none -mx-1 my-1", className)}
+      className={cn("-mx-1 my-1", "pointer-events-none", className)}
       data-slot="select-separator"
       {...rest}
     />
@@ -211,17 +230,20 @@ export const SelectContent = (
             "relative",
             "max-h-96 min-w-(--reference-width)",
             "p-1.5",
-            "overflow-y-auto overflow-x-hidden overscroll-y-contain",
-            "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/24",
+            "overflow-x-hidden overflow-y-auto overscroll-y-contain",
+            "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
             "bg-popover",
             "text-popover-foreground",
             "rounded-xl border shadow-lg/4",
             "origin-(--transform-origin)",
             "outline-hidden",
-            "duration-150 ease-out",
-            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-            "data-[state=closed]:zoom-out-[98%] data-[state=open]:zoom-in-[98%]",
-            "data-[state=closed]:animate-out data-[state=open]:animate-in",
+            "duration-100 ease-out",
+            "data-[placement^=bottom]:slide-in-from-top-2",
+            "data-[placement^=top]:slide-in-from-bottom-2",
+            "data-[placement^=left]:slide-in-from-right-2",
+            "data-[placement^=right]:slide-in-from-left-2",
+            "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in",
+            "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out",
             "motion-reduce:animate-none",
             "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
             className
@@ -280,7 +302,8 @@ export const SelectItem = (
     <ArkSelect.Item
       className={cn(
         menuItemControlVariants(),
-        "touch-manipulation select-none font-normal text-base md:text-sm",
+        "text-base font-normal md:text-sm",
+        "touch-manipulation select-none",
         "cursor-default",
         "outline-hidden",
         "in-[[data-slot=select-content]:has([data-slot=select-group-label])]:ps-4",
@@ -294,7 +317,7 @@ export const SelectItem = (
       {...rest}
     >
       <ArkSelect.ItemText
-        className="flex min-w-0 items-start gap-2"
+        className={cn("min-w-0", "flex items-start gap-2")}
         data-slot="select-item-text"
       >
         {children}
@@ -319,10 +342,11 @@ export const SelectClearTrigger = (
     <ArkSelect.ClearTrigger
       aria-label="Clear selection"
       className={cn(
-        "[&_svg]:pointer-events-none [&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+        "[&_svg]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:size-3.5 [&_svg]:shrink-0",
         "transition-opacity",
         "opacity-64",
-        "outline-hidden focus-visible:opacity-100",
+        "outline-hidden",
+        "focus-visible:opacity-100",
         "hover:opacity-100",
         "motion-reduce:transition-none",
         className

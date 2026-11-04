@@ -21,6 +21,7 @@ import {
 import { Separator } from "@/registry/react/components/separator";
 
 export const useAutocompleteContext = useArkComboboxContext;
+
 export const Autocomplete: ArkCombobox.RootComponent = (props) => {
   const { openOnClick = false, ...rest } = props;
 

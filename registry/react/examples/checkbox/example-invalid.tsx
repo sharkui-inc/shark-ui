@@ -1,17 +1,13 @@
 import { Checkbox } from "@/registry/react/components/checkbox";
-import {
-  Field,
-  FieldGroup,
-  FieldLabel,
-} from "@/registry/react/components/field";
+import { Field, FieldLabel } from "@/registry/react/components/field";
 
 const Example = () => (
-  <FieldGroup className="mx-auto min-w-56">
-    <Field invalid orientation="horizontal">
+  <div className="flex w-full justify-center">
+    <Field className="w-max whitespace-nowrap" invalid orientation="horizontal">
       <Checkbox />
       <FieldLabel>Accept terms and conditions</FieldLabel>
     </Field>
-  </FieldGroup>
+  </div>
 );
 
 export default Example;

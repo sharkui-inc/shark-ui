@@ -7,29 +7,29 @@ export const InputOTPThumb = (props: ThumbCardProps) => (
         <div
           className={
             i === 0
-              ? "flex size-8 items-center justify-center rounded-lg border border-primary bg-muted shadow-sm/4"
-              : "flex size-8 items-center justify-center rounded-lg border border-input bg-muted shadow-sm/4"
+              ? "border-primary bg-muted flex size-8 items-center justify-center rounded-lg border shadow-sm/4"
+              : "border-input bg-muted flex size-8 items-center justify-center rounded-lg border shadow-sm/4"
           }
           key={key}
         >
           <div
             className={
               i === 0
-                ? "h-4 w-px rounded-full bg-primary"
-                : "size-1.5 rounded-full bg-muted-foreground/24"
+                ? "bg-primary h-4 w-px rounded-full"
+                : "bg-muted-foreground/24 size-1.5 rounded-full"
             }
           />
         </div>
       ))}
 
-      <hr className="mx-1 h-1 w-2 shrink-0 rounded-full bg-muted-foreground/24" />
+      <hr className="bg-muted-foreground/24 mx-1 h-1 w-2 shrink-0 rounded-full" />
 
       {Array.from({ length: 3 }, (_, i) => `otp-end-${i}`).map((key) => (
         <div
-          className="flex size-8 items-center justify-center rounded-lg border border-input bg-muted shadow-sm/4"
+          className="border-input bg-muted flex size-8 items-center justify-center rounded-lg border shadow-sm/4"
           key={key}
         >
-          <div className="size-1.5 rounded-full bg-muted-foreground/24" />
+          <div className="bg-muted-foreground/24 size-1.5 rounded-full" />
         </div>
       ))}
     </div>

@@ -14,18 +14,18 @@ export const isDocsTextLanguage = (language?: string) =>
 export const docsShikiContentClassName = tv({
   base: [
     "font-mono",
-    "**:[pre]:tab-2 **:[pre]:w-max **:[pre]:min-w-full **:[pre]:bg-transparent **:[pre]:px-0 **:[pre]:py-3.5 **:[pre]:text-[.8125rem] **:[pre]:leading-6",
+    "**:[pre]:w-max **:[pre]:min-w-full **:[pre]:bg-transparent **:[pre]:px-0 **:[pre]:py-3.5 **:[pre]:text-[.8125rem] **:[pre]:leading-6 **:[pre]:tab-2",
     "**:[code]:grid **:[code]:min-w-full",
     "**:[.line]:relative **:[.line]:block **:[.line]:min-h-6",
     "[&_.line_span]:text-(--shiki-light) dark:[&_.line_span]:text-(--shiki-dark)",
     "[&_.line_span]:[font-style:var(--shiki-light-font-style,normal)] dark:[&_.line_span]:[font-style:var(--shiki-dark-font-style,var(--shiki-light-font-style,normal))]",
     "[&_.line_span]:font-(--shiki-light-font-weight,inherit) dark:[&_.line_span]:font-(--shiki-dark-font-weight,var(--shiki-light-font-weight,inherit))",
     "[&_code[data-line-numbers]]:[counter-reset:line] [&_code[data-line-numbers]_.line]:block",
-    "[&_code[data-line-numbers]_.line]:before:sticky [&_code[data-line-numbers]_.line]:before:inset-s-0 [&_code[data-line-numbers]_.line]:before:inline-block [&_code[data-line-numbers]_.line]:before:w-12 [&_code[data-line-numbers]_.line]:before:shrink-0 [&_code[data-line-numbers]_.line]:before:bg-code [&_code[data-line-numbers]_.line]:before:pe-4 [&_code[data-line-numbers]_.line]:before:text-end [&_code[data-line-numbers]_.line]:before:text-muted-foreground [&_code[data-line-numbers]_.line]:before:content-[counter(line)] [&_code[data-line-numbers]_.line]:before:[counter-increment:line]",
-    "[&_code[data-line-numbers]_.line.highlighted]:before:bg-code-highlight! **:[.highlighted]:bg-code-highlight **:[.highlighted]:before:bg-code-highlight **:[.highlighted]:after:absolute **:[.highlighted]:after:inset-s-0 **:[.highlighted]:after:inset-y-0 **:[.highlighted]:after:w-0.5 **:[.highlighted]:after:bg-muted-foreground/48",
-    "**:[.highlighted-word]:rounded-sm **:[.highlighted-word]:bg-code-highlight **:[.highlighted-word]:px-1 **:[.highlighted-word]:py-0.5",
-    "**:[.diff.add]:bg-success/8 **:[.diff.add]:after:absolute **:[.diff.add]:after:inset-s-0 **:[.diff.add]:after:inset-y-0 **:[.diff.add]:after:w-0.5 **:[.diff.add]:after:bg-success",
-    "**:[.diff.remove]:bg-destructive/8 **:[.diff.remove]:after:absolute **:[.diff.remove]:after:inset-s-0 **:[.diff.remove]:after:inset-y-0 **:[.diff.remove]:after:w-0.5 **:[.diff.remove]:after:bg-destructive",
+    "[&_code[data-line-numbers]_.line]:before:bg-code [&_code[data-line-numbers]_.line]:before:text-muted-foreground [&_code[data-line-numbers]_.line]:before:sticky [&_code[data-line-numbers]_.line]:before:inset-s-0 [&_code[data-line-numbers]_.line]:before:inline-block [&_code[data-line-numbers]_.line]:before:w-12 [&_code[data-line-numbers]_.line]:before:shrink-0 [&_code[data-line-numbers]_.line]:before:pe-4 [&_code[data-line-numbers]_.line]:before:text-end [&_code[data-line-numbers]_.line]:before:content-[counter(line)] [&_code[data-line-numbers]_.line]:before:[counter-increment:line]",
+    "[&_code[data-line-numbers]_.line.highlighted]:before:bg-code-highlight! **:[.highlighted]:bg-code-highlight **:[.highlighted]:before:bg-code-highlight **:[.highlighted]:after:bg-muted-foreground/48 **:[.highlighted]:after:absolute **:[.highlighted]:after:inset-y-0 **:[.highlighted]:after:inset-s-0 **:[.highlighted]:after:w-0.5",
+    "**:[.highlighted-word]:bg-code-highlight **:[.highlighted-word]:rounded-sm **:[.highlighted-word]:px-1 **:[.highlighted-word]:py-0.5",
+    "**:[.diff.add]:bg-success/8 **:[.diff.add]:after:bg-success **:[.diff.add]:after:absolute **:[.diff.add]:after:inset-y-0 **:[.diff.add]:after:inset-s-0 **:[.diff.add]:after:w-0.5",
+    "**:[.diff.remove]:bg-destructive/8 **:[.diff.remove]:after:bg-destructive **:[.diff.remove]:after:absolute **:[.diff.remove]:after:inset-y-0 **:[.diff.remove]:after:inset-s-0 **:[.diff.remove]:after:w-0.5",
     "[&_code:not([data-line-numbers])_.line]:px-4",
   ],
 });
@@ -46,7 +46,7 @@ export const DocsCodeFrame = (props: DocsCodeFrameProps) => {
   return (
     <figure
       className={cn(
-        "relative mt-6 overflow-hidden rounded-2xl border in-data-[tab=code]:border-0 bg-code text-code-foreground",
+        "bg-code text-code-foreground relative mt-6 overflow-hidden rounded-2xl border in-data-[tab=code]:border-0",
         className
       )}
       data-slot="docs-code-block"
@@ -54,7 +54,7 @@ export const DocsCodeFrame = (props: DocsCodeFrameProps) => {
       dir="ltr"
     >
       {title ? (
-        <figcaption className="flex min-h-11 items-center gap-2 border-b px-4 py-2.5 font-mono text-[.8125rem] text-muted-foreground [&_svg]:size-4">
+        <figcaption className="text-muted-foreground flex min-h-11 items-center gap-2 border-b px-4 py-2.5 font-mono text-[.8125rem] [&_svg]:size-4">
           {getIconForLanguageExtension(
             languageFromFileName(title) ?? language ?? "tsx"
           )}

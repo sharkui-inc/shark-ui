@@ -244,9 +244,11 @@ export const Masonry = (props: MasonryProps) => {
     <ark.ul
       className={cn(
         "[--gap:--spacing(4)]",
-        "relative columns-1 gap-x-(--gap) gap-y-(--gap)",
+        "relative",
+        "columns-1 gap-x-(--gap) gap-y-(--gap)",
         "w-full min-w-0",
-        "m-0 list-none p-0",
+        "m-0 p-0",
+        "list-none",
         className
       )}
       data-slot="masonry"
@@ -263,7 +265,8 @@ export const MasonryItem = (props: React.ComponentProps<typeof ark.li>) => {
     <ark.li
       className={cn(
         "min-w-0",
-        "mb-(--gap) break-inside-avoid",
+        "mb-(--gap)",
+        "break-inside-avoid",
         "data-[masonry-layout=ready]:absolute data-[masonry-layout=ready]:inset-s-0 data-[masonry-layout=ready]:top-0",
         "data-[masonry-layout=ready]:mb-0 data-[masonry-layout=ready]:w-(--masonry-item-width)",
         "data-[masonry-layout=ready]:translate-x-(--masonry-item-x) data-[masonry-layout=ready]:translate-y-(--masonry-item-y)",

@@ -27,6 +27,8 @@ import {
   dialogTitleVariants,
 } from "./dialog";
 
+export const useDrawerContext = useArkDrawerContext;
+
 interface DrawerModalContextProps {
   /**
    * Used internally to show or hide overlay
@@ -42,7 +44,6 @@ const [DrawerModalProvider, _useDrawerModal] =
     providerName: "Drawer",
   });
 
-export const useDrawerContext = useArkDrawerContext;
 export const DrawerProvider = (
   props: React.ComponentProps<typeof ArkDrawer.Indent>
 ) => {
@@ -58,7 +59,8 @@ export const DrawerProvider = (
         className={cn(
           "relative z-10",
           "bg-background",
-          "origin-top will-change-transform",
+          "origin-top",
+          "will-change-transform",
           "transition-[border-radius,transform] duration-[calc(250ms*(1-clamp(0,var(--drawer-swipe-progress,0)*100000,1)))] ease-[cubic-bezier(0.32,0.72,0,1)]",
           "data-active:transform-[scale(calc(0.97+(0.03*var(--drawer-swipe-progress,0))))_translateY(calc(0.5rem*(1-var(--drawer-swipe-progress,0))))] data-active:overflow-hidden data-active:rounded-[calc(1rem*(1-var(--drawer-swipe-progress,0)))]",
           "motion-reduce:transition-none",
@@ -113,7 +115,8 @@ export const DrawerSwipeArea = (
   return (
     <ArkDrawer.SwipeArea
       className={cn(
-        "fixed z-[calc(50+var(--layer-index,0))] touch-none",
+        "fixed z-[calc(50+var(--layer-index,0))]",
+        "touch-none",
         "data-[swipe-direction=up]:inset-x-0 data-[swipe-direction=up]:bottom-0 data-[swipe-direction=up]:h-8",
         "data-[swipe-direction=down]:inset-x-0 data-[swipe-direction=down]:top-0 data-[swipe-direction=down]:h-8",
         "data-[swipe-direction=left]:inset-y-0 data-[swipe-direction=left]:right-0 data-[swipe-direction=left]:w-8",
@@ -129,15 +132,20 @@ export const DrawerSwipeArea = (
 const drawerOverlayVariants = tv({
   base: [
     "fixed inset-0 z-[calc(50+var(--layer-index,0))]",
-    "peer peer-data-[slot=drawer-backdrop]:hidden",
-    "bg-[rgb(0_0_0/0.32)] opacity-[calc(1-max(0,var(--drawer-swipe-progress,0)))] backdrop-blur-[calc(4px*(1-max(0,var(--drawer-swipe-progress,0))))]",
+    "peer",
+    "peer-data-[slot=drawer-backdrop]:hidden",
+    "bg-[rgb(0_0_0/0.32)] backdrop-blur-[calc(4px*(1-max(0,var(--drawer-swipe-progress,0))))]",
+    "opacity-[calc(1-max(0,var(--drawer-swipe-progress,0)))]",
     "data-[has-nested=drawer]:pointer-events-none",
     "transition-[opacity,backdrop-filter] duration-250 ease-[cubic-bezier(0.32,0.72,0,1)]",
-    "data-[state=closed]:opacity-0 data-[state=open]:opacity-100 starting:data-[state=open]:opacity-0",
+    "data-[state=closed]:opacity-0",
+    "data-[state=open]:opacity-100",
+    "starting:data-[state=open]:opacity-0",
     "data-[state=closed]:animate-drawer-exit",
     "data-swiping:transition-none",
     "data-swiping:animate-none",
-    "motion-reduce:animate-none motion-reduce:transition-none motion-reduce:data-[state=closed]:animate-none",
+    "motion-reduce:animate-none motion-reduce:transition-none",
+    "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
   ],
 });
 
@@ -163,13 +171,17 @@ export const DrawerOverlay = (
 const drawerPositionerVariants = tv({
   base: [
     "[--bleed:--spacing(12)]",
-    "fixed inset-0 z-[calc(50+var(--layer-index,0))] overflow-hidden",
-    "flex w-screen items-end justify-center",
+    "fixed inset-0 z-[calc(50+var(--layer-index,0)+1)]",
+    "overflow-hidden",
+    "w-screen",
+    "flex items-end justify-center",
     "data-[has-nested=drawer]:pointer-events-none",
     "data-[swipe-direction=up]:items-start",
     "[&[data-swipe-direction=left],&[data-swipe-direction=right]]:items-stretch",
-    "data-[swipe-direction=left]:justify-start rtl:data-[swipe-direction=left]:justify-end",
-    "data-[swipe-direction=right]:justify-end rtl:data-[swipe-direction=right]:justify-start",
+    "data-[swipe-direction=left]:justify-start",
+    "rtl:data-[swipe-direction=left]:justify-end",
+    "data-[swipe-direction=right]:justify-end",
+    "rtl:data-[swipe-direction=right]:justify-start",
   ],
   defaultVariants: {
     variant: "default",
@@ -208,7 +220,8 @@ const drawerContentVariants = tv({
     "[--stack-x:0px] [--stack-y:0px]",
     "group/drawer",
     "relative",
-    "flex min-h-0 w-full flex-col",
+    "min-h-0 w-full",
+    "flex flex-col",
     "[&[data-swipe-direction=up],&[data-swipe-direction=down]]:max-h-[96svh]",
     "data-nested-drawer-open:[&[data-swipe-direction=up],&[data-swipe-direction=down]]:h-(--stack-height)!",
     "[&[data-swipe-direction=left],&[data-swipe-direction=right]]:h-full [&[data-swipe-direction=left],&[data-swipe-direction=right]]:max-h-none [&[data-swipe-direction=left],&[data-swipe-direction=right]]:min-h-0 [&[data-swipe-direction=left],&[data-swipe-direction=right]]:w-[calc(100%-(--spacing(12)))] [&[data-swipe-direction=left],&[data-swipe-direction=right]]:max-w-md",
@@ -219,8 +232,9 @@ const drawerContentVariants = tv({
     "shadow-lg/4",
     "outline-hidden",
     "transition-[background-color,box-shadow,height,margin,padding,scale,transform,translate,opacity] duration-250 ease-[cubic-bezier(0.32,0.72,0,1)]",
-    "data-[state=closed]:opacity-0 data-[state=open]:opacity-100",
-    "data-swiping:select-none data-swiping:transition-none",
+    "data-[state=closed]:opacity-0",
+    "data-[state=open]:opacity-100",
+    "data-swiping:transition-none data-swiping:select-none",
     "data-nested-drawer-open:shadow-sm/4",
     "data-nested-drawer-swiping:transition-none",
     "data-[swipe-direction=down]:origin-[center_bottom]",
@@ -231,7 +245,7 @@ const drawerContentVariants = tv({
     "data-[swipe-direction=left]:[--stack-x:calc(0px+var(--stack-peek-offset))]",
     "data-[swipe-direction=right]:origin-left",
     "data-[swipe-direction=right]:[--stack-x:calc(0px-var(--stack-peek-offset))]",
-    "data-nested-drawer-open:scale-(--stack-scale) data-nested-drawer-open:[translate:var(--stack-x)_var(--stack-y)]",
+    "data-nested-drawer-open:[translate:var(--stack-x)_var(--stack-y)] data-nested-drawer-open:scale-(--stack-scale)",
     "after:pointer-events-none after:absolute after:bg-inherit after:content-['']",
     "has-data-[slot=drawer-footer]:after:bg-card",
     "data-[swipe-direction=down]:rounded-t-2xl data-[swipe-direction=down]:border-t",
@@ -256,8 +270,11 @@ const drawerContentVariants = tv({
     "max-sm:[&:not(:has([data-slot=drawer-footer]))]:data-[swipe-direction=right]:pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]",
     "data-[swipe-direction=right]:after:left-full",
     "[&[data-swipe-direction=left],&[data-swipe-direction=right]]:after:inset-y-0 [&[data-swipe-direction=left],&[data-swipe-direction=right]]:after:h-auto [&[data-swipe-direction=left],&[data-swipe-direction=right]]:after:w-(--bleed)",
-    "data-[swipe-direction=left]:data-[state=closed]:-translate-x-full data-[swipe-direction=right]:data-[state=closed]:translate-x-full data-[swipe-direction=down]:data-[state=closed]:translate-y-full data-[swipe-direction=up]:data-[state=closed]:-translate-y-full",
-    "starting:data-[state=open]:data-[swipe-direction=left]:-translate-x-full starting:data-[state=open]:data-[swipe-direction=right]:translate-x-full starting:data-[state=open]:data-[swipe-direction=down]:translate-y-full starting:data-[state=open]:data-[swipe-direction=up]:-translate-y-full starting:data-[state=open]:opacity-0",
+    "data-[swipe-direction=left]:data-[state=closed]:-translate-x-full",
+    "data-[swipe-direction=right]:data-[state=closed]:translate-x-full",
+    "data-[swipe-direction=down]:data-[state=closed]:translate-y-full",
+    "data-[swipe-direction=up]:data-[state=closed]:-translate-y-full",
+    "starting:data-[state=open]:opacity-0 starting:data-[state=open]:data-[swipe-direction=down]:translate-y-full starting:data-[state=open]:data-[swipe-direction=left]:-translate-x-full starting:data-[state=open]:data-[swipe-direction=right]:translate-x-full starting:data-[state=open]:data-[swipe-direction=up]:-translate-y-full",
     "data-[state=closed]:animate-drawer-exit",
     "data-swiping:animate-none",
     "has-data-[slot=drawer-footer]:max-sm:pb-0",
@@ -272,7 +289,8 @@ const drawerContentVariants = tv({
     variant: {
       default: "",
       inset: [
-        "rounded-2xl border [--bleed:0px]",
+        "[--bleed:0px]",
+        "rounded-2xl border",
         "[&[data-swipe-direction=down],&[data-swipe-direction=up],&[data-swipe-direction=left],&[data-swipe-direction=right]]:rounded-2xl",
       ],
     },
@@ -512,7 +530,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
       <DrawerOverlay className={cn(container && "absolute")} />
 
       <DrawerPositioner
-        className={cn(container && "absolute w-full")}
+        className={cn(container && cn("absolute", "w-full"))}
         variant={variant}
       >
         <ArkDrawer.Content
@@ -536,7 +554,12 @@ export const DrawerContent = (props: DrawerContentProps) => {
             <DrawerClose asChild>
               <Button
                 aria-label="Close"
-                className="absolute inset-e-4 top-4 opacity-64 hover:opacity-100 group-data-[swipe-direction=up]/drawer:top-[calc(1rem+env(safe-area-inset-top,0))]"
+                className={cn(
+                  "absolute inset-e-4 top-4",
+                  "opacity-64",
+                  "hover:opacity-100",
+                  "group-data-[swipe-direction=up]/drawer:top-[calc(1rem+env(safe-area-inset-top,0))]"
+                )}
                 size="icon-sm"
                 variant="ghost"
               >
@@ -570,7 +593,8 @@ export const DrawerGrabber = (props: DrawerGrabberProps) => {
   return (
     <ArkDrawer.Grabber
       className={cn(
-        "hidden shrink-0",
+        "shrink-0",
+        "hidden",
         "p-3",
         "select-none",
         "cursor-grab touch-none",
@@ -584,7 +608,12 @@ export const DrawerGrabber = (props: DrawerGrabberProps) => {
       {...rest}
     >
       <ArkDrawer.GrabberIndicator
-        className="h-1 w-10 rounded-full bg-muted-foreground/32 group-hover/drawer:bg-muted-foreground/48"
+        className={cn(
+          "h-1 w-10",
+          "bg-muted-foreground/32",
+          "rounded-full",
+          "group-hover/drawer:bg-muted-foreground/48"
+        )}
         data-slot="drawer-grabber-indicator"
       />
     </ArkDrawer.Grabber>
@@ -675,7 +704,10 @@ export const DrawerBody = (props: DrawerBodyProps) => {
   return (
     <ScrollArea
       className={cn(
-        "flex min-w-0 flex-1 touch-pan-y flex-col overflow-hidden",
+        "min-w-0 flex-1",
+        "flex flex-col",
+        "overflow-hidden",
+        "touch-pan-y",
         "*:data-[slot=scroll-area-viewport]:h-auto!",
         "*:data-[slot=scroll-area-viewport]:min-h-0",
         "*:data-[slot=scroll-area-viewport]:flex-auto",
@@ -709,10 +741,13 @@ export const DrawerFooter = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex shrink-0 flex-col gap-2 px-(--space) py-4 sm:flex-row-reverse sm:justify-start",
+        "shrink-0",
+        "flex flex-col gap-2 sm:flex-row-reverse sm:justify-start",
+        "px-(--space) py-4",
         "max-sm:**:data-[slot=button]:w-full",
         "max-sm:pb-[calc(1rem+env(safe-area-inset-bottom,0px))]",
-        "border-t bg-muted/48",
+        "bg-muted/48",
+        "border-t",
         "sm:rounded-none",
         className
       )}
@@ -727,7 +762,7 @@ export const DrawerMenu = (props: React.ComponentProps<"div">) => {
 
   return (
     <div
-      className={cn("flex flex-col p-1.5 text-start", className)}
+      className={cn("flex flex-col", "p-1.5", "text-start", className)}
       data-slot="drawer-menu"
       {...rest}
     />
@@ -746,7 +781,10 @@ export const DrawerMenuItem = (props: DrawerMenuItemProps) => {
       className={cn(
         menuItemVariants({ variant }),
         variant === "destructive"
-          ? "hover:bg-destructive/8 dark:hover:bg-destructive-foreground/8"
+          ? cn(
+              "hover:bg-destructive/8",
+              "dark:hover:bg-destructive-foreground/8"
+            )
           : "hover:bg-accent hover:text-accent-foreground",
         className
       )}
@@ -762,7 +800,7 @@ export const DrawerMenuSeparator = (props: React.ComponentProps<"hr">) => {
   const { className, ...rest } = props;
 
   return (
-    <Separator asChild className={cn("my-1 border-0", className)}>
+    <Separator asChild className={cn("my-1", "border-0", className)}>
       <hr data-slot="drawer-menu-separator" {...rest} />
     </Separator>
   );
@@ -808,7 +846,9 @@ export const DrawerMenuTrigger = (
       {...rest}
     >
       {children}
-      <ChevronRightIcon className="ms-auto size-3.5 rtl:rotate-180" />
+      <ChevronRightIcon
+        className={cn("size-3.5", "ms-auto", "rtl:rotate-180")}
+      />
     </ArkDrawer.Trigger>
   );
 };
@@ -836,7 +876,9 @@ export const DrawerMenuCheckboxItem = (
           data-slot="menu-item-check-icon"
         />
       </ArkCheckbox.Indicator>
-      <span className="flex min-w-0 flex-1 items-start gap-2">{children}</span>
+      <span className={cn("min-w-0 flex-1", "flex items-start gap-2")}>
+        {children}
+      </span>
       <ArkCheckbox.HiddenInput />
     </ArkCheckbox.Root>
   );
@@ -876,7 +918,8 @@ export const DrawerMenuRadioItem = (
       <span
         className={cn(
           indicator(),
-          "hidden group-data-[state=checked]/menu-item:flex"
+          "hidden",
+          "group-data-[state=checked]/menu-item:flex"
         )}
       >
         <CheckIcon
@@ -884,7 +927,9 @@ export const DrawerMenuRadioItem = (
           data-slot="menu-item-check-icon"
         />
       </span>
-      <ArkRadioGroup.ItemText className="flex min-w-0 flex-1 items-start gap-2">
+      <ArkRadioGroup.ItemText
+        className={cn("min-w-0 flex-1", "flex items-start gap-2")}
+      >
         {children}
       </ArkRadioGroup.ItemText>
       <ArkRadioGroup.ItemHiddenInput />

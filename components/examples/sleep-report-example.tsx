@@ -46,7 +46,7 @@ export const SleepReportExample = (props: React.ComponentProps<"div">) => (
       <div className="flex flex-wrap gap-3">
         {sleepLegend.map((item) => (
           <div
-            className="flex items-center gap-1.5 text-muted-foreground text-xs"
+            className="text-muted-foreground flex items-center gap-1.5 text-xs"
             key={item.label}
           >
             <span

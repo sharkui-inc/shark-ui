@@ -8,6 +8,7 @@ import {
 } from "@/lib/composition-catalog";
 import { createMetadata } from "@/lib/metadata";
 import { Skeleton } from "@/registry/react/components/skeleton";
+import { SkipNavContent } from "@/registry/react/components/skip-nav";
 import { BlocksBrowser } from "../_components/blocks-browser";
 
 export const dynamic = "force-static";
@@ -52,15 +53,17 @@ const BlocksCategoryPage = async (props: {
   }));
 
   return (
-    <React.Suspense
-      fallback={<Skeleton className="container h-[900px] w-full" />}
-    >
-      <BlocksBrowser
-        blocks={browserBlocks}
-        categories={categories}
-        categorySlug={category.slug}
-      />
-    </React.Suspense>
+    <SkipNavContent>
+      <React.Suspense
+        fallback={<Skeleton className="container h-[900px] w-full" />}
+      >
+        <BlocksBrowser
+          blocks={browserBlocks}
+          categories={categories}
+          categorySlug={category.slug}
+        />
+      </React.Suspense>
+    </SkipNavContent>
   );
 };
 

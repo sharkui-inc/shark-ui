@@ -270,14 +270,14 @@ export const AIChat = () => {
       />
       <SidebarInset className="min-h-0 overflow-hidden">
         <div className="flex h-svh min-h-0 flex-col lg:p-1.5 lg:ps-0">
-          <div className="relative flex min-h-0 flex-1 flex-col bg-background lg:rounded-3xl lg:border lg:py-4 lg:ps-5 lg:pe-4">
+          <div className="bg-background relative flex min-h-0 flex-1 flex-col lg:rounded-3xl lg:border lg:py-4 lg:ps-5 lg:pe-4">
             <header className="flex shrink-0 items-center justify-between gap-3 px-4 pt-4 lg:px-0 lg:pt-0">
               <div className="flex min-w-0 items-center gap-2">
                 <SidebarTrigger className="lg:hidden" />
                 <Breadcrumb>
                   <BreadcrumbList>
                     <BreadcrumbItem>
-                      <BreadcrumbPage className="font-normal text-muted-foreground">
+                      <BreadcrumbPage className="text-muted-foreground font-normal">
                         {breadcrumbProject}
                       </BreadcrumbPage>
                     </BreadcrumbItem>
