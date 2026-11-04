@@ -5,6 +5,7 @@ import {
   useDatePickerContext as useArkDatePickerContext,
 } from "@ark-ui/react/date-picker";
 import { Portal } from "@ark-ui/react/portal";
+import { getLocalTimeZone } from "@internationalized/date";
 import { CalendarIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
@@ -28,6 +29,7 @@ export const DatePicker = (
     unmountOnExit = true,
     positioning,
     className,
+    timeZone = getLocalTimeZone(),
     ...rest
   } = props;
 
@@ -48,6 +50,7 @@ export const DatePicker = (
       unmountOnExit={unmountOnExit}
       {...rest}
       inline={false}
+      timeZone={timeZone}
     />
   );
 };

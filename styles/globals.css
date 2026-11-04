@@ -83,12 +83,14 @@
   --radius-3xl: calc(var(--radius) * 3);
   --radius-4xl: calc(var(--radius) * 4);
 
-  /* Existing technical animations only: marquee and indeterminate progress. */
+  /* Technical animations: marquee, indeterminate progress, and Ark collapse height. */
   --animate-marquee-x: marqueeX var(--marquee-duration) linear infinite
     var(--marquee-delay);
   --animate-marquee-y: marqueeY var(--marquee-duration) linear infinite
     var(--marquee-delay);
   --animate-indeterminate: indeterminate 1.5s ease-in-out infinite;
+  --animate-collapse-down: collapse-down 200ms ease-out;
+  --animate-collapse-up: collapse-up 200ms ease-out;
 
   @keyframes marqueeX {
     from {
@@ -114,6 +116,24 @@
     }
     100% {
       transform: translateX(400%);
+    }
+  }
+
+  @keyframes collapse-down {
+    from {
+      height: var(--collapsed-height, 0);
+    }
+    to {
+      height: var(--height);
+    }
+  }
+
+  @keyframes collapse-up {
+    from {
+      height: var(--height);
+    }
+    to {
+      height: var(--collapsed-height, 0);
     }
   }
 }

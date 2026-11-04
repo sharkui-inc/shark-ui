@@ -62,7 +62,6 @@ export const CodeCollapsibleWrapper = (props: CodeCollapsibleWrapperProps) => {
 
         <ArkCollapsible.Content
           className={cn(
-            "[--radix-collapsible-content-height:var(--height)]",
             "relative mt-6 overflow-hidden [&>figure]:mt-0 [&>figure]:md:mx-0!",
             "data-[state=closed]:h-(--collapsed-height) data-[state=open]:h-(--height)",
             "transition-[height] duration-200 ease-out motion-reduce:transition-none"

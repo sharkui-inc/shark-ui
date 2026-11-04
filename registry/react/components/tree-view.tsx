@@ -130,7 +130,7 @@ export const TreeViewBranch = (
 
   return (
     <ArkTreeView.Branch
-      className={cn("relative", className)}
+      className={cn("relative", "min-h-0", className)}
       data-slot="tree-view-branch"
       {...rest}
     />
@@ -293,11 +293,10 @@ export const TreeViewBranchContent = (
   return (
     <ArkTreeView.BranchContent
       className={cn(
-        "[--radix-collapsible-content-height:var(--height)]",
         "relative",
         "overflow-hidden",
-        "data-[state=open]:animate-collapsible-down data-[state=open]:duration-150 data-[state=open]:ease-out",
-        "data-[state=closed]:animate-collapsible-up data-[state=closed]:duration-150 data-[state=closed]:ease-out",
+        "data-[state=open]:animate-collapse-down",
+        "data-[state=closed]:animate-collapse-up",
         "motion-reduce:animate-none",
         "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
         className
@@ -320,8 +319,8 @@ const TreeViewBranchIndentGuide = (
   return (
     <ArkTreeView.BranchIndentGuide
       className={cn(
-        "absolute z-1",
-        "h-full w-px",
+        "absolute inset-y-0 z-1",
+        "w-px",
         "bg-border",
         "inset-s-[calc(var(--padding-inline)+var(--indentation)*(var(--depth)-1)+var(--icon-size)*0.5*var(--depth))]",
         "pointer-events-none",

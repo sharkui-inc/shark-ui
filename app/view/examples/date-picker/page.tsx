@@ -30,7 +30,7 @@ const DatePickerExamplePage = () => (
 
       <section aria-labelledby="input-heading" className="flex flex-col gap-5">
         <h2 className="text-muted-foreground font-medium" id="input-heading">
-          Input
+          With Input
         </h2>
         <div className="bg-muted rounded-3xl p-6 sm:p-10">
           <DatePickerInput />

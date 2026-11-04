@@ -3,7 +3,6 @@
 import type { DateValue } from "@ark-ui/react";
 import { toast } from "@registry/react/components/toast";
 import { useForm } from "@tanstack/react-form";
-import { CalendarIcon } from "lucide-react";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -27,9 +26,8 @@ import {
 import {
   DatePicker,
   DatePickerContent,
+  DatePickerInput,
   DatePickerLabel,
-  DatePickerTrigger,
-  DatePickerValue,
 } from "@/registry/react/components/date-picker";
 import {
   Field,
@@ -86,16 +84,12 @@ const Example = () => {
               children={(field) => (
                 <Field invalid={!field.state.meta.isValid}>
                   <DatePicker
+                    className="w-full"
                     onValueChange={({ value }) => field.handleChange(value)}
                     value={field.state.value}
                   >
                     <DatePickerLabel>Preferred interview date</DatePickerLabel>
-                    <DatePickerTrigger asChild>
-                      <Button className="w-full" variant="outline">
-                        <CalendarIcon />
-                        <DatePickerValue placeholder="Pick a date" />
-                      </Button>
-                    </DatePickerTrigger>
+                    <DatePickerInput placeholder="Pick a date" />
                     <DatePickerContent>
                       <CalendarViewControl>
                         <CalendarPrevTrigger />

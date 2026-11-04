@@ -9,7 +9,6 @@ import {
   useForm,
 } from "@formisch/react";
 import { toast } from "@registry/react/components/toast";
-import { CalendarIcon } from "lucide-react";
 import * as v from "valibot";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -33,9 +32,8 @@ import {
 import {
   DatePicker,
   DatePickerContent,
+  DatePickerInput,
   DatePickerLabel,
-  DatePickerTrigger,
-  DatePickerValue,
 } from "@/registry/react/components/date-picker";
 import {
   Field,
@@ -90,6 +88,7 @@ const Example = () => {
                     onFocus={field.props.onFocus}
                   >
                     <DatePicker
+                      className="w-full"
                       onValueChange={({ value: nextValue }) =>
                         field.onChange(nextValue)
                       }
@@ -98,12 +97,7 @@ const Example = () => {
                       <DatePickerLabel>
                         Preferred interview date
                       </DatePickerLabel>
-                      <DatePickerTrigger asChild>
-                        <Button className="w-full" variant="outline">
-                          <CalendarIcon />
-                          <DatePickerValue placeholder="Pick a date" />
-                        </Button>
-                      </DatePickerTrigger>
+                      <DatePickerInput placeholder="Pick a date" />
                       <DatePickerContent>
                         <CalendarViewControl>
                           <CalendarPrevTrigger />

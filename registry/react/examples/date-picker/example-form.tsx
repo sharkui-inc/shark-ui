@@ -1,7 +1,6 @@
 "use client";
 
 import { parseDate } from "@ark-ui/react";
-import { CalendarIcon } from "lucide-react";
 import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -22,9 +21,8 @@ import {
 import {
   DatePicker,
   DatePickerContent,
+  DatePickerInput,
   DatePickerLabel,
-  DatePickerTrigger,
-  DatePickerValue,
 } from "@/registry/react/components/date-picker";
 import { Field } from "@/registry/react/components/field";
 import { toast } from "@/registry/react/components/toast";
@@ -47,16 +45,12 @@ const Example = () => {
         <CardContent>
           <Field>
             <DatePicker
+              className="w-full"
               onValueChange={({ value: nextValue }) => setValue(nextValue)}
               value={value}
             >
               <DatePickerLabel>Appointment date</DatePickerLabel>
-              <DatePickerTrigger asChild>
-                <Button className="w-full justify-start" variant="outline">
-                  <CalendarIcon aria-hidden="true" />
-                  <DatePickerValue placeholder="Pick a date" />
-                </Button>
-              </DatePickerTrigger>
+              <DatePickerInput placeholder="Pick a date" />
               <DatePickerContent>
                 <CalendarViewControl>
                   <CalendarPrevTrigger />

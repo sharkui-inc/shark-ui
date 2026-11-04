@@ -97,12 +97,11 @@ export const AccordionContent = (
   return (
     <ArkAccordion.ItemContent
       className={cn(
-        "[--radix-accordion-content-height:var(--height)]",
         "text-sm",
         "rounded-md",
         "overflow-hidden",
-        "data-[state=open]:animate-accordion-down data-[state=open]:duration-200 data-[state=open]:ease-out",
-        "data-[state=closed]:animate-accordion-up data-[state=closed]:duration-200 data-[state=closed]:ease-out",
+        "data-[state=open]:animate-collapse-down",
+        "data-[state=closed]:animate-collapse-up",
         "motion-reduce:animate-none",
         "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
         className

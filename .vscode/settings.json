@@ -2,10 +2,10 @@
   "js/ts.experimental.useTsgo": true,
   "js/ts.tsdk.path": "node_modules/tsrs/tsdk",
   "attribution": { "commit": "", "pr": "" },
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "explicit",
-    "source.organizeImports.biome": "never"
+    "source.organizeImports.biome": "explicit"
   },
   "tailwindCSS.classFunctions": ["tv", "cn"],
   "[javascript]": {

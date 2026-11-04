@@ -65,12 +65,11 @@ export const CollapsibleContent = (
   return (
     <ArkCollapsible.Content
       className={cn(
-        "[--radix-collapsible-content-height:var(--height)]",
-        "data-has-collapsed-size:h-full data-has-collapsed-size:min-h-(--collapsed-height)",
+        "data-has-collapsed-size:min-h-(--collapsed-height)",
         "overflow-hidden",
-        "data-[state=open]:animate-collapsible-down data-[state=open]:duration-200 data-[state=open]:ease-out",
-        "data-[state=closed]:animate-collapsible-up data-[state=closed]:duration-200 data-[state=closed]:ease-out",
-        "motion-reduce:animate-none motion-reduce:transition-none",
+        "data-[state=open]:animate-collapse-down",
+        "data-[state=closed]:animate-collapse-up",
+        "motion-reduce:animate-none",
         "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none"
       )}
       data-slot="collapsible-content"

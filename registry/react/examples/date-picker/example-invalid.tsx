@@ -1,5 +1,3 @@
-import { CalendarIcon } from "lucide-react";
-import { Button } from "@/registry/react/components/button";
 import {
   CalendarMonthSelect,
   CalendarNextTrigger,
@@ -13,22 +11,16 @@ import {
 import {
   DatePicker,
   DatePickerContent,
+  DatePickerInput,
   DatePickerLabel,
-  DatePickerTrigger,
-  DatePickerValue,
 } from "@/registry/react/components/date-picker";
 import { Field, FieldError } from "@/registry/react/components/field";
 
 const Example = () => (
-  <Field className="w-fit" invalid>
-    <DatePicker invalid>
+  <Field className="w-full max-w-64" invalid>
+    <DatePicker className="w-full" invalid>
       <DatePickerLabel>Appointment</DatePickerLabel>
-      <DatePickerTrigger asChild>
-        <Button className="min-w-56" variant="outline">
-          <CalendarIcon />
-          <DatePickerValue placeholder="Pick a date" />
-        </Button>
-      </DatePickerTrigger>
+      <DatePickerInput placeholder="Pick a date" />
       <DatePickerContent>
         <CalendarViewControl>
           <CalendarPrevTrigger />

@@ -4,6 +4,7 @@ import {
   DatePicker as ArkCalendar,
   useDatePickerContext as useArkDatePickerContext,
 } from "@ark-ui/react/date-picker";
+import { getLocalTimeZone } from "@internationalized/date";
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
@@ -21,7 +22,13 @@ export const useCalendarContext = useArkDatePickerContext;
 export const Calendar = (
   props: Omit<React.ComponentProps<typeof ArkCalendar.Root>, "inline">
 ) => {
-  const { lazyMount = true, unmountOnExit = true, className, ...rest } = props;
+  const {
+    lazyMount = true,
+    unmountOnExit = true,
+    className,
+    timeZone = getLocalTimeZone(),
+    ...rest
+  } = props;
 
   return (
     <ArkCalendar.Root
@@ -31,6 +38,7 @@ export const Calendar = (
       unmountOnExit={unmountOnExit}
       {...rest}
       inline
+      timeZone={timeZone}
     />
   );
 };
@@ -475,14 +483,16 @@ export const CalendarTableCell = (
           "rounded-lg border border-transparent",
           "hover:bg-accent hover:text-accent-foreground",
           "data-today:data-selected:after:bg-background data-today:after:bg-primary data-today:after:absolute data-today:after:bottom-1 data-today:after:left-1/2 data-today:after:size-1 data-today:after:-translate-x-1/2 data-today:after:rounded-full",
-          "data-focus:border-ring/64 data-focus:bg-accent data-focus:text-foreground data-focus:ring-ring/24 data-focus:ring-2",
+          "data-focus:not-data-today:border-ring/64 data-focus:not-data-today:bg-accent data-focus:not-data-today:text-foreground data-focus:not-data-today:ring-ring/24 data-focus:not-data-today:ring-2",
           "outline-hidden",
-          "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
-          "data-selected:data-focus:border-background data-selected:focus-visible:border-background",
+          "focus-visible:not-data-today:border-ring/64 focus-visible:not-data-today:ring-ring/24 focus-visible:not-data-today:ring-2",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
           "data-unavailable:pointer-events-none data-unavailable:line-through data-unavailable:opacity-64",
           "data-[view=day]:data-in-range:not-data-selected:bg-primary/8",
-          "data-selected:bg-primary data-selected:text-primary-foreground",
+          "data-selected:border-transparent data-selected:bg-primary data-selected:text-primary-foreground data-selected:ring-0",
+          "data-selected:hover:border-transparent data-selected:hover:bg-primary data-selected:hover:text-primary-foreground",
+          "data-selected:data-focus:not-data-today:border-transparent data-selected:data-focus:not-data-today:bg-primary data-selected:data-focus:not-data-today:text-primary-foreground data-selected:data-focus:not-data-today:ring-0",
+          "data-selected:focus-visible:not-data-today:border-transparent data-selected:focus-visible:not-data-today:ring-0",
           "data-[view=day]:[[data-slot=calendar-table-cell]:not(:first-child):not([data-slot=calendar-week-number-cell]+[data-slot=calendar-table-cell])>&]:data-in-range:not-data-range-start:not-data-hover-range-start:rounded-s-none",
           "data-[view=day]:[[data-slot=calendar-table-cell]:not(:last-child)>&]:data-in-range:not-data-range-end:not-data-hover-range-end:rounded-e-none",
           "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",

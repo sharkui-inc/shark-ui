@@ -41,12 +41,31 @@ npx shadcn@latest add @shark/tree-view
 
 <RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Ensure your CSS entry imports `tw-animate-css`.</Step>
+<Step>Add the collapse animation tokens and keyframes to your CSS entry:</Step>
 
 ```css title="globals.css"
-@import "tw-animate-css";
+@theme inline {
+  --animate-collapse-down: collapse-down 200ms ease-out;
+  --animate-collapse-up: collapse-up 200ms ease-out;
 
-/* ... */
+  @keyframes collapse-down {
+    from {
+      height: var(--collapsed-height, 0);
+    }
+    to {
+      height: var(--height);
+    }
+  }
+
+  @keyframes collapse-up {
+    from {
+      height: var(--height);
+    }
+    to {
+      height: var(--collapsed-height, 0);
+    }
+  }
+}
 ```
 
 <Step>Copy and paste the following code into your project.</Step>

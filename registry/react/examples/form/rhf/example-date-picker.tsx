@@ -3,7 +3,6 @@
 import type { DateValue } from "@ark-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "@registry/react/components/toast";
-import { CalendarIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -28,9 +27,8 @@ import {
 import {
   DatePicker,
   DatePickerContent,
+  DatePickerInput,
   DatePickerLabel,
-  DatePickerTrigger,
-  DatePickerValue,
 } from "@/registry/react/components/date-picker";
 import {
   Field,
@@ -78,16 +76,12 @@ const Example = () => {
               render={({ field, fieldState }) => (
                 <Field invalid={fieldState.invalid}>
                   <DatePicker
+                    className="w-full"
                     onValueChange={({ value }) => field.onChange(value)}
                     value={field.value}
                   >
                     <DatePickerLabel>Preferred interview date</DatePickerLabel>
-                    <DatePickerTrigger asChild>
-                      <Button className="w-full" variant="outline">
-                        <CalendarIcon />
-                        <DatePickerValue placeholder="Pick a date" />
-                      </Button>
-                    </DatePickerTrigger>
+                    <DatePickerInput placeholder="Pick a date" />
                     <DatePickerContent>
                       <CalendarViewControl>
                         <CalendarPrevTrigger />
