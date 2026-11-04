@@ -34,32 +34,28 @@ const Example = () => {
         multiple
         onInputValueChange={({ inputValue }) => filter(inputValue)}
       >
-        <ComboboxContext<Framework>>
-          {({ selectedItems }) => (
-            <>
-              <ComboboxChips>
-                <span className="contents">
-                  {selectedItems.map((item) => (
-                    <ComboboxChip key={item.value} value={item.value}>
-                      {item.label}
-                    </ComboboxChip>
-                  ))}
-                </span>
-                <ComboboxChipsInput placeholder="Select items…" />
-              </ComboboxChips>
-              <ComboboxContent>
-                <ComboboxEmpty />
-                <ComboboxList>
-                  {collection.items.map((item) => (
-                    <ComboboxItem item={item} key={item.value}>
-                      {item.label}
-                    </ComboboxItem>
-                  ))}
-                </ComboboxList>
-              </ComboboxContent>
-            </>
-          )}
-        </ComboboxContext>
+        <ComboboxChips>
+          <ComboboxContext<Framework>>
+            {({ selectedItems }) =>
+              selectedItems.map((item) => (
+                <ComboboxChip key={item.value} value={item.value}>
+                  {item.label}
+                </ComboboxChip>
+              ))
+            }
+          </ComboboxContext>
+          <ComboboxChipsInput placeholder="Select items…" />
+        </ComboboxChips>
+        <ComboboxContent>
+          <ComboboxEmpty />
+          <ComboboxList>
+            {collection.items.map((item) => (
+              <ComboboxItem item={item} key={item.value}>
+                {item.label}
+              </ComboboxItem>
+            ))}
+          </ComboboxList>
+        </ComboboxContent>
       </Combobox>
       <FieldDescription>Select multiple items.</FieldDescription>
     </Field>
