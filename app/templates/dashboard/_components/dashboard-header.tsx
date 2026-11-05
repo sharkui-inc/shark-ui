@@ -21,7 +21,7 @@ export const DashboardHeader = () => {
       <SidebarTrigger />
       <p className="min-w-0 flex-1 truncate text-sm font-medium">Dashboard</p>
       <DashboardNotifications />
-      <Menu>
+      <Menu positioning={{ gutter: 16 }}>
         <MenuTrigger asChild>
           <Button size="sm" variant="outline">
             {dateRange}

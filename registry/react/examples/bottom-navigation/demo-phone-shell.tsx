@@ -11,7 +11,7 @@ export const DemoPhoneShell = (props: DemoPhoneShellProps) => {
   return (
     <div
       className={cn(
-        "relative h-[36rem] w-full max-w-[20rem] overflow-hidden",
+        "relative h-144 w-full max-w-[20rem] overflow-hidden",
         "bg-background border-border rounded-4xl border shadow-lg/4",
         className
       )}
@@ -20,7 +20,7 @@ export const DemoPhoneShell = (props: DemoPhoneShellProps) => {
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 z-20 flex justify-center pt-2.5"
       >
-        <div className="h-[1.125rem] w-[5.5rem] rounded-full bg-black" />
+        <div className="h-4.5 w-22 rounded-full bg-black" />
       </div>
       {children}
     </div>

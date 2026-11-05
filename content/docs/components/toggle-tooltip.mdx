@@ -84,15 +84,15 @@ Control open state with `open` and `onOpenChange`.
 
 <ComponentPreview componentName="toggle-tooltip" fileName="example-controlled" />
 
-## Choose the right primitive
+## Tooltip vs Toggle Tooltip
 
-Tooltip and Toggle Tooltip share visual treatment. Choose based on how people need to reach and use the content.
+Same look, different access. Choose by how the content opens and what it can contain.
 
-| Intent | Use | Why |
-| --- | --- | --- |
-| Name an icon-only control or add a short, optional hint | Tooltip | It opens on hover or keyboard focus, then closes automatically. Keep the content plain text and non-interactive. |
-| Offer supporting details that people may open on touch, keep open, or act on | Toggle Tooltip | It uses a Popover, opened by click, Enter, or Space. Its content can receive focus and include links or buttons. |
-| Give instructions required to complete a task | Visible text, a field description, or Dialog | Do not hide required information behind an overlay. |
+| Need | Use | Access | Content |
+| --- | --- | --- | --- |
+| Label an icon-only control or show an optional hint | Tooltip | Hover or keyboard focus; closes automatically | Plain, non-interactive text |
+| Show details on touch, keep them open, or let people act on them | Toggle Tooltip | Click, Enter, or Space; stays open until dismissed | Focusable, can include links and buttons |
+| Give instructions required to finish a task | Visible text, a field description, or Dialog | Always visible | Not hidden behind an overlay |
 
 ## Positioning
 
@@ -157,7 +157,7 @@ Tooltip content shown in a popover on click.
 
 ### ToggleTooltipArrow
 
-Optional arrow pointing to the trigger. Place inside `ToggleTooltipContent`.
+Optional arrow pointing to the trigger. 
 
 | Prop | Type | Default |
 | --- | --- | --- |

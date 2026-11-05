@@ -46,7 +46,7 @@ export const MusicHeader = () => (
           type="search"
         />
       </InputGroup>
-      <Menu>
+      <Menu positioning={{ gutter: 16 }}>
         <MenuTrigger asChild>
           <Button
             aria-label="Open profile menu"

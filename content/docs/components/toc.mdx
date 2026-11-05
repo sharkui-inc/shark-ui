@@ -94,8 +94,6 @@ import {
 </Toc>
 ```
 
-Pass `scrollEl` when the document scrolls inside a container. Omit it to observe the page viewport; clicks then use native hash navigation.
-
 ## Examples
 
 ### Nested
@@ -157,7 +155,7 @@ Root. Tracks visible headings and owns scroll behavior.
 
 ### TocContent
 
-Document region for headings. Observation and click-to-scroll use `scrollEl` on `Toc`, not this part.
+Document region for headings.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -185,7 +183,7 @@ Accessible title for the navigation.
 
 ### TocList
 
-List container for items. Relatively positioned so `TocIndicator` can slide.
+List container for items. 
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -194,7 +192,7 @@ List container for items. Relatively positioned so `TocIndicator` can slide.
 
 ### TocIndicator
 
-Optional marker that slides to span the active item(s). Place inside `TocList`.
+Optional marker that slides to span the active item(s).
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -203,7 +201,7 @@ Optional marker that slides to span the active item(s). Place inside `TocList`.
 
 ### TocItem
 
-One TOC entry. Indent follows `--depth` from the item's heading level.
+One TOC entry. 
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -225,7 +223,7 @@ One TOC entry. Indent follows `--depth` from the item's heading level.
 
 ### TocLink
 
-Anchor to a heading. Sets `aria-current="location"` when active. With `scrollEl`, clicks scroll that container and update the hash. Without it, the browser handles the hash.
+Anchor to a heading. 
 
 | Prop | Type | Default |
 | --- | --- | --- |

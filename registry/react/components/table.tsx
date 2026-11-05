@@ -134,7 +134,7 @@ export const TableHead = (props: React.ComponentProps<typeof ark.th>) => {
         "align-middle",
         "px-2 py-(--space) has-[[role=checkbox]]:ps-2 has-[[role=checkbox]]:pe-0",
         "text-muted-foreground text-start font-medium has-[[role=checkbox]]:leading-none",
-        "[&>[data-slot=checkbox]]:align-middle [&>[role=checkbox]]:align-middle",
+        "*:data-[slot=checkbox]:align-middle *:[[role=checkbox]]:align-middle",
         className
       )}
       data-slot="table-head"

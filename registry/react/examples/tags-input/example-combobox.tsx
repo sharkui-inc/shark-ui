@@ -25,7 +25,7 @@ const Example = () => {
     initialItems: frameworkItems,
   });
 
-  const [tags, setTags] = React.useState<string[]>([]);
+  const [tags, setTags] = React.useState<string[]>(["React", "Vue"]);
 
   const availableItems = collection.items.filter(
     (item) => !tags.includes(item)

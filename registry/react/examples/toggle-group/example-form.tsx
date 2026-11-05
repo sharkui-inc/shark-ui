@@ -53,7 +53,6 @@ const Example = () => {
             onValueChange={({ value: newValue }) => setValue(newValue)}
             spacing={2}
             value={value}
-            variant="outline"
           >
             <ToggleGroupItem
               aria-label="Bold"
@@ -61,7 +60,6 @@ const Example = () => {
               value="bold"
             >
               <BoldIcon aria-hidden="true" />
-              <span>Bold</span>
             </ToggleGroupItem>
             <ToggleGroupItem
               aria-label="Italic"
@@ -69,7 +67,6 @@ const Example = () => {
               value="italic"
             >
               <ItalicIcon aria-hidden="true" />
-              <span>Italic</span>
             </ToggleGroupItem>
             <ToggleGroupItem
               aria-label="Underline"
@@ -77,7 +74,6 @@ const Example = () => {
               value="underline"
             >
               <UnderlineIcon aria-hidden="true" />
-              <span>Underline</span>
             </ToggleGroupItem>
           </ToggleGroup>
         </CardContent>

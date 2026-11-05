@@ -50,6 +50,19 @@
       }
     },
     {
+      "includes": [
+        "registry/react/examples/hitbox/example-custom.tsx",
+        "registry/react/examples/shimmer/example-color.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "useTailwindSortedClasses": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": ["scripts/normalize-component-mdx-prop-unions.mts"],
       "linter": {
         "rules": {

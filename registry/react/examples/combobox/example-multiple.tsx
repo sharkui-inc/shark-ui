@@ -25,6 +25,7 @@ const Example = () => {
     <Combobox
       className="w-full max-w-64"
       collection={collection}
+      defaultValue={["react", "vue"]}
       multiple
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >

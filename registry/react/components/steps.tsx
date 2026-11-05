@@ -142,7 +142,7 @@ export const StepsSeparator = (
         "transition-colors",
         "data-complete:bg-primary",
         "data-[orientation=horizontal]:mx-(--steps-gutter) data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:flex-1 data-[orientation=horizontal]:self-center",
-        "data-[orientation=vertical]:absolute data-[orientation=vertical]:start-[calc(var(--steps-size)/2)] data-[orientation=vertical]:top-[calc(var(--steps-size)+var(--steps-gutter))] data-[orientation=vertical]:bottom-(--steps-gutter) data-[orientation=vertical]:-ms-px data-[orientation=vertical]:w-0.5",
+        "data-[orientation=vertical]:absolute data-[orientation=vertical]:inset-s-[calc(var(--steps-size)/2)] data-[orientation=vertical]:top-[calc(var(--steps-size)+var(--steps-gutter))] data-[orientation=vertical]:bottom-(--steps-gutter) data-[orientation=vertical]:-ms-px data-[orientation=vertical]:w-0.5",
         "motion-reduce:transition-none",
         className
       )}

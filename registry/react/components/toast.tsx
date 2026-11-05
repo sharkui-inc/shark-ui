@@ -46,7 +46,7 @@ export const Toaster = (props: ToasterProps) => {
     <Portal>
       <ArkToaster
         className={cn(
-          "w-[calc(100vw_-_var(--viewport-offset-left)_-_var(--viewport-offset-right)_-_env(safe-area-inset-left,0px)_-_env(safe-area-inset-right,0px))]",
+          "w-[calc(100vw-var(--viewport-offset-left)-var(--viewport-offset-right)-env(safe-area-inset-left,0px)-env(safe-area-inset-right,0px))]",
           "sm:w-(--width)",
           "sm:data-[align=center]:w-full",
           className

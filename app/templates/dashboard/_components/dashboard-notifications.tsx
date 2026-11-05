@@ -31,7 +31,10 @@ export const DashboardNotifications = () => {
   };
 
   return (
-    <Popover modal={false} positioning={{ placement: "bottom-end" }}>
+    <Popover
+      modal={false}
+      positioning={{ gutter: 16, placement: "bottom-end" }}
+    >
       <PopoverTrigger asChild>
         <Button
           aria-label={
@@ -44,7 +47,7 @@ export const DashboardNotifications = () => {
         >
           <BellIcon aria-hidden="true" />
           {unreadCount > 0 ? (
-            <span className="bg-primary absolute end-1 top-1 size-1.5 rounded-full" />
+            <span className="bg-primary absolute inset-e-1 top-1 size-1.5 rounded-full" />
           ) : null}
         </Button>
       </PopoverTrigger>
