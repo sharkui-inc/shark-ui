@@ -19,9 +19,13 @@ import {
 } from "../../_data/dashboard";
 import { SettingsSwitchField } from "./settings-fields";
 
-export const SettingsAppearancePage = (props: { onSave: () => void }) => {
+interface SettingsAppearancePageProps {
+  onSave: () => void;
+}
+
+export const SettingsAppearancePage = (props: SettingsAppearancePageProps) => {
   const { onSave } = props;
-  
+
   const [systemPreference, setSystemPreference] = React.useState(true);
   const [compactNavigation, setCompactNavigation] = React.useState(true);
   const [appearance, setAppearance] = React.useState<AppearanceOption[]>([

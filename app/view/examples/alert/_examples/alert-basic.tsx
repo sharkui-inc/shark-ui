@@ -7,7 +7,7 @@ import {
 
 const AlertBasic = () => (
   <Alert className="max-w-md">
-    <CheckCircle2Icon aria-hidden />
+    <CheckCircle2Icon aria-hidden="true" />
     <AlertTitle>Account updated successfully</AlertTitle>
     <AlertDescription>
       Your profile information has been saved. Changes will be reflected

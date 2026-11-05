@@ -31,26 +31,26 @@ export type ChartConfig = Record<
   }
 >;
 
-type ChartTooltipContentProps = Omit<
-  React.ComponentProps<typeof Tooltip>,
-  "content"
-> &
-  Omit<React.ComponentProps<"div">, "content"> & {
-    hideIndicator?: boolean;
-    hideLabel?: boolean;
-    indicator?: "dashed" | "dot" | "line";
-    labelKey?: string;
-    nameKey?: string;
-  } & Omit<
-    DefaultTooltipContentProps<TooltipValueType, TooltipNameType>,
-    "accessibilityLayer" | "content"
-  >;
+interface ChartTooltipContentProps
+  extends Omit<React.ComponentProps<typeof Tooltip>, "content">,
+    Omit<React.ComponentProps<"div">, "content">,
+    Omit<
+      DefaultTooltipContentProps<TooltipValueType, TooltipNameType>,
+      "accessibilityLayer" | "content"
+    > {
+  hideIndicator?: boolean;
+  hideLabel?: boolean;
+  indicator?: "dashed" | "dot" | "line";
+  labelKey?: string;
+  nameKey?: string;
+}
 
-type ChartLegendContentProps = React.ComponentProps<"div"> &
-  DefaultLegendContentProps & {
-    hideIcon?: boolean;
-    nameKey?: string;
-  };
+interface ChartLegendContentProps
+  extends React.ComponentProps<"div">,
+    DefaultLegendContentProps {
+  hideIcon?: boolean;
+  nameKey?: string;
+}
 
 type TooltipPayloadItem = NonNullable<
   ChartTooltipContentProps["payload"]
@@ -77,11 +77,11 @@ interface ChartContainerProps extends React.ComponentProps<typeof ark.div> {
 
 export const ChartContainer = (props: ChartContainerProps) => {
   const {
-    children,
-    className,
     config,
     id,
     initialDimension = INITIAL_DIMENSION,
+    className,
+    children,
     ...rest
   } = props;
 
@@ -312,7 +312,6 @@ export const ChartTooltip = Tooltip;
 export const ChartTooltipContent = (props: ChartTooltipContentProps) => {
   const {
     active,
-    className,
     color,
     formatter,
     hideIndicator = false,
@@ -324,6 +323,7 @@ export const ChartTooltipContent = (props: ChartTooltipContentProps) => {
     labelKey,
     nameKey,
     payload,
+    className,
   } = props;
 
   const { config } = useChart();
@@ -410,11 +410,11 @@ export const ChartLegend = Legend;
 
 export const ChartLegendContent = (props: ChartLegendContentProps) => {
   const {
-    className,
     hideIcon = false,
     nameKey,
     payload,
     verticalAlign = "bottom",
+    className,
   } = props;
 
   const { config } = useChart();

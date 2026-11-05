@@ -146,7 +146,7 @@ export interface ActionBarSeparatorProps
   extends React.ComponentProps<typeof Separator> {}
 
 export const ActionBarSeparator = (props: ActionBarSeparatorProps) => {
-  const { className, orientation = "vertical", ...rest } = props;
+  const { orientation = "vertical", className, ...rest } = props;
 
   return (
     <Separator
@@ -196,9 +196,9 @@ export const ActionBarValue = (props: ActionBarValueProps) => {
   const {
     label,
     count = 0,
+    variant = "secondary",
     className,
     children,
-    variant = "secondary",
     ...rest
   } = props;
 

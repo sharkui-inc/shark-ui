@@ -25,7 +25,7 @@ export const DashboardHeader = () => {
         <MenuTrigger asChild>
           <Button size="sm" variant="outline">
             {dateRange}
-            <ChevronDownIcon aria-hidden />
+            <ChevronDownIcon aria-hidden="true" />
           </Button>
         </MenuTrigger>
         <MenuContent>
@@ -41,7 +41,7 @@ export const DashboardHeader = () => {
         </MenuContent>
       </Menu>
       <Button size="sm">
-        <DownloadIcon aria-hidden />
+        <DownloadIcon aria-hidden="true" />
         <span className="sr-only sm:not-sr-only">Download</span>
       </Button>
     </header>

@@ -171,7 +171,7 @@ export const ImageCropperHandle = (
       {...rest}
     >
       <span
-        aria-hidden
+        aria-hidden="true"
         className={cn("size-(--cropper-handler-size)", "block")}
       />
     </ArkImageCropper.Handle>

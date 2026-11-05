@@ -49,7 +49,11 @@ export interface TaskTableActions {
   onEdit: (task: Task) => void;
 }
 
-export const TaskStatusBadge = (props: { status: TaskStatus }) => {
+interface TaskStatusBadgeProps {
+  status: TaskStatus;
+}
+
+export const TaskStatusBadge = (props: TaskStatusBadgeProps) => {
   const { status } = props;
 
   return (
@@ -60,15 +64,19 @@ export const TaskStatusBadge = (props: { status: TaskStatus }) => {
   );
 };
 
-export const TaskPriorityLabel = (props: { priority: TaskPriority }) => {
+interface TaskPriorityLabelProps {
+  priority: TaskPriority;
+}
+
+export const TaskPriorityLabel = (props: TaskPriorityLabelProps) => {
   const { priority } = props;
-  
+
   const PriorityIcon = priorityIconMap[priority];
 
   return (
     <span className="inline-flex items-center gap-1.5 text-sm font-medium">
       <PriorityIcon
-        aria-hidden
+        aria-hidden="true"
         className={cn("size-3.5", priorityIconVariants({ priority }))}
       />
       {priority}
@@ -77,7 +85,7 @@ export const TaskPriorityLabel = (props: { priority: TaskPriority }) => {
 };
 
 export const TaskRowMenu = (props: TaskTableActions & { task: Task }) => {
-  const { onDelete, onDuplicate, onEdit, task } = props;
+  const { task, onDelete, onDuplicate, onEdit } = props;
 
   return (
     <Menu>
@@ -87,19 +95,19 @@ export const TaskRowMenu = (props: TaskTableActions & { task: Task }) => {
           size="icon-sm"
           variant="ghost"
         >
-          <EllipsisIcon aria-hidden />
+          <EllipsisIcon aria-hidden="true" />
         </Button>
       </MenuTrigger>
       <MenuContent>
         <MenuItem onClick={() => onEdit(task)} value={`edit-${task.id}`}>
-          <PencilIcon aria-hidden />
+          <PencilIcon aria-hidden="true" />
           Edit task
         </MenuItem>
         <MenuItem
           onClick={() => onDuplicate(task)}
           value={`duplicate-${task.id}`}
         >
-          <CopyIcon aria-hidden />
+          <CopyIcon aria-hidden="true" />
           Duplicate task
         </MenuItem>
         <MenuItem
@@ -107,7 +115,7 @@ export const TaskRowMenu = (props: TaskTableActions & { task: Task }) => {
           value={`delete-${task.id}`}
           variant="destructive"
         >
-          <Trash2Icon aria-hidden />
+          <Trash2Icon aria-hidden="true" />
           Delete task
         </MenuItem>
       </MenuContent>

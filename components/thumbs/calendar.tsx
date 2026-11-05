@@ -7,7 +7,7 @@ export const CalendarThumb = (props: ThumbCardProps) => (
       <div className="flex items-center justify-between gap-3">
         <div className="border-input bg-muted flex size-5 items-center justify-center rounded-lg border">
           <ChevronLeftIcon
-            aria-hidden
+            aria-hidden="true"
             className="text-muted-foreground/64 size-3"
           />
         </div>
@@ -17,7 +17,7 @@ export const CalendarThumb = (props: ThumbCardProps) => (
         </div>
         <div className="border-input bg-muted flex size-5 items-center justify-center rounded-lg border">
           <ChevronLeftIcon
-            aria-hidden
+            aria-hidden="true"
             className="text-muted-foreground/64 size-3 rotate-180"
           />
         </div>

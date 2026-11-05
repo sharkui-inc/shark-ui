@@ -111,7 +111,10 @@ const Example = () => {
                                       size="icon-xs"
                                       variant="ghost"
                                     >
-                                      <XIcon aria-hidden className="size-4" />
+                                      <XIcon
+                                        aria-hidden="true"
+                                        className="size-4"
+                                      />
                                     </InputGroupButton>
                                   </InputGroupAddon>
                                 ) : null}

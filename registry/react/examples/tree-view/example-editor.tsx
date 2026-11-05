@@ -70,7 +70,7 @@ const Example = () => {
                 onClick={() => setActiveItem("")}
                 type="button"
               >
-                <XIcon aria-hidden />
+                <XIcon aria-hidden="true" />
               </button>
             </TabsList>
             <TabsContent

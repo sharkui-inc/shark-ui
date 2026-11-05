@@ -4,7 +4,7 @@ const RIPPLE_RINGS = [36, 52, 68, 84, 100] as const;
 
 export const HeroAtmosphere = () => (
   <div
-    aria-hidden
+    aria-hidden="true"
     className="pointer-events-none absolute inset-0 hidden lg:block"
   >
     <div className="absolute end-[-6%] top-[20rem] size-0">

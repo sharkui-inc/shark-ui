@@ -15,11 +15,13 @@ import {
   StepsTrigger,
 } from "@/registry/react/components/steps";
 
-const StepPanel = (props: {
+interface StepPanelProps {
   content: string;
   details: { label: string; value: string }[];
   title: string;
-}) => {
+}
+
+const StepPanel = (props: StepPanelProps) => {
   const { content, details, title } = props;
 
   return (

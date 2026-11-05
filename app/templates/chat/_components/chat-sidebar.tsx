@@ -70,11 +70,11 @@ export const ChatSidebar = () => {
           />
           <div className="group/brand-toggle hidden size-6 group-data-[collapsible=icon]:grid">
             <IconTile
-              aria-hidden
+              aria-hidden="true"
               className="col-start-1 row-start-1 transition-opacity group-focus-within/brand-toggle:opacity-0 group-hover/brand-toggle:opacity-0"
               size="xs"
             >
-              <SharkIcon aria-hidden />
+              <SharkIcon aria-hidden="true" />
             </IconTile>
             <SidebarTrigger
               aria-label="Expand sidebar"
@@ -95,7 +95,7 @@ export const ChatSidebar = () => {
                     onClick={handleNewChat}
                     tooltip="New chat"
                   >
-                    <MessageSquarePlusIcon aria-hidden />
+                    <MessageSquarePlusIcon aria-hidden="true" />
                     <span>New chat</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -104,7 +104,7 @@ export const ChatSidebar = () => {
                     onClick={() => setSearchOpen(true)}
                     tooltip="Search"
                   >
-                    <SearchIcon aria-hidden />
+                    <SearchIcon aria-hidden="true" />
                     <span>Search</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -122,7 +122,7 @@ export const ChatSidebar = () => {
                       onClick={() => setActiveConversation(conversation)}
                       tooltip={conversation}
                     >
-                      <MessageSquareIcon aria-hidden />
+                      <MessageSquareIcon aria-hidden="true" />
                       <span className="truncate">{conversation}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -181,11 +181,11 @@ const WorkspaceSwitcher = () => {
               tooltip={`${workspace.name}: ${workspace.description}`}
               variant="ghost"
             >
-              <IconTile aria-hidden size="xs">
-                <SharkIcon aria-hidden />
+              <IconTile aria-hidden="true" size="xs">
+                <SharkIcon aria-hidden="true" />
               </IconTile>
               <span className="font-semibold">{workspace.name}</span>
-              <ChevronDownIcon aria-hidden />
+              <ChevronDownIcon aria-hidden="true" />
             </SidebarMenuButton>
           </MenuTrigger>
           <MenuContent>
@@ -232,17 +232,17 @@ const AccountMenu = () => {
           >
             <MenuGroup heading={account.name}>
               <MenuItem value="account">
-                <CreditCardIcon aria-hidden />
+                <CreditCardIcon aria-hidden="true" />
                 Account & billing
               </MenuItem>
               <MenuItem value="settings">
-                <Settings2Icon aria-hidden />
+                <Settings2Icon aria-hidden="true" />
                 Settings
               </MenuItem>
             </MenuGroup>
             <MenuSeparator />
             <MenuItem value="sign-out">
-              <LogOutIcon aria-hidden />
+              <LogOutIcon aria-hidden="true" />
               Sign out
             </MenuItem>
           </MenuContent>

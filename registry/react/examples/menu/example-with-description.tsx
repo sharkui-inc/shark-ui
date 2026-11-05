@@ -19,7 +19,7 @@ const Example = () => (
     <MenuContent className="min-w-72">
       <MenuGroup heading="Actions">
         <MenuItem value="new-file">
-          <SquarePlusIcon aria-hidden />
+          <SquarePlusIcon aria-hidden="true" />
           <span className="flex min-w-0 flex-1 flex-col gap-0.5">
             <span>New file</span>
             <MenuItemDescription>Create a new file</MenuItemDescription>
@@ -27,7 +27,7 @@ const Example = () => (
           <MenuShortcut className="hidden sm:inline-flex">⌘N</MenuShortcut>
         </MenuItem>
         <MenuItem value="edit-file">
-          <PencilIcon aria-hidden />
+          <PencilIcon aria-hidden="true" />
           <span className="flex min-w-0 flex-1 flex-col gap-0.5">
             <span>Edit file</span>
             <MenuItemDescription>Make changes</MenuItemDescription>
@@ -38,7 +38,7 @@ const Example = () => (
       <MenuSeparator />
       <MenuGroup heading="Danger zone">
         <MenuItem value="delete-file" variant="destructive">
-          <Trash2Icon aria-hidden />
+          <Trash2Icon aria-hidden="true" />
           <span className="flex min-w-0 flex-1 flex-col gap-0.5">
             <span>Delete file</span>
             <MenuItemDescription>Move to trash</MenuItemDescription>

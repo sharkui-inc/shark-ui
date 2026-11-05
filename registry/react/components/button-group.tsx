@@ -10,8 +10,8 @@ const buttonGroupVariants = tv({
   base: [
     "w-fit",
     "flex items-stretch",
-    "*:not([class*='w-']):w-fit",
-    "*:not([class*='flex-']):flex-1",
+    "[&>*:not([class*='w-'])]:w-fit",
+    "[&>*:not([class*='flex-'])]:flex-1",
     "*:focus-visible:relative *:focus-visible:z-10",
     "has-[>[data-slot=button-group]]:gap-2",
     "has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-e-md",
@@ -50,7 +50,7 @@ interface ButtonGroupProps
     VariantProps<typeof buttonGroupVariants> {}
 
 export const ButtonGroup = (props: ButtonGroupProps) => {
-  const { className, orientation, ...rest } = props;
+  const { orientation, className, ...rest } = props;
 
   return (
     <ark.fieldset

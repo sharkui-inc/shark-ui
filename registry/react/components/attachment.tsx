@@ -146,7 +146,7 @@ interface AttachmentMediaProps
 }
 
 export const AttachmentMedia = (props: AttachmentMediaProps) => {
-  const { children, className, format, variant = "icon", ...rest } = props;
+  const { format, variant = "icon", className, children, ...rest } = props;
   let content = children;
 
   if (variant === "file") {
@@ -163,7 +163,7 @@ export const AttachmentMedia = (props: AttachmentMediaProps) => {
     );
   } else if (variant === "icon") {
     content = (
-      <IconTile aria-hidden className="size-full">
+      <IconTile aria-hidden="true" className="size-full">
         {children}
       </IconTile>
     );
@@ -281,7 +281,7 @@ export const AttachmentAction = (props: ButtonProps) => {
 };
 
 export const AttachmentRemove = (props: ButtonProps) => {
-  const { className, "aria-label": ariaLabel = "Remove", ...rest } = props;
+  const { "aria-label": ariaLabel = "Remove", className, ...rest } = props;
 
   return (
     <AttachmentAction
@@ -296,7 +296,7 @@ export const AttachmentRemove = (props: ButtonProps) => {
       data-slot="attachment-remove"
       {...rest}
     >
-      <XIcon aria-hidden />
+      <XIcon aria-hidden="true" />
     </AttachmentAction>
   );
 };
@@ -304,7 +304,7 @@ export const AttachmentRemove = (props: ButtonProps) => {
 export const AttachmentTrigger = (
   props: React.ComponentProps<typeof ark.button>
 ) => {
-  const { className, type, ...rest } = props;
+  const { type, className, ...rest } = props;
 
   return (
     <ark.button
@@ -319,7 +319,7 @@ export const AttachmentTrigger = (
 export const AttachmentGroup = (
   props: React.ComponentProps<typeof ark.div>
 ) => {
-  const { children, className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ScrollArea

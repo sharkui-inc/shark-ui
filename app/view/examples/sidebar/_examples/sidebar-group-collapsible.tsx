@@ -39,13 +39,13 @@ const SidebarGroupCollapsible = () => (
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton>
-                      <LifeBuoyIcon aria-hidden />
+                      <LifeBuoyIcon aria-hidden="true" />
                       Support
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton>
-                      <SendIcon aria-hidden />
+                      <SendIcon aria-hidden="true" />
                       Feedback
                     </SidebarMenuButton>
                   </SidebarMenuItem>

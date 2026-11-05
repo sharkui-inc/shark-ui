@@ -102,14 +102,14 @@ interface MessageScrollerButtonProps extends ButtonProps {
 export const MessageScrollerButton = (props: MessageScrollerButtonProps) => {
   const {
     direction = "end",
-    className,
-    children,
-    onClick,
     variant = "secondary",
     size = "icon-sm",
+    onClick,
+    className,
+    children,
     ...rest
   } = props;
-  
+
   const scrollArea = useScrollAreaContext();
 
   const isAtEdge =
@@ -162,7 +162,7 @@ export const MessageScrollerButton = (props: MessageScrollerButtonProps) => {
         });
       }}
     >
-      {children ?? <ArrowDownIcon aria-hidden />}
+      {children ?? <ArrowDownIcon aria-hidden="true" />}
     </Button>
   );
 };

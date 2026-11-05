@@ -35,7 +35,7 @@ export const useTour = useArkTour;
 export const useTourContext = useArkTourContext;
 
 export const Tour = (props: React.ComponentProps<typeof ArkTour.Root>) => {
-  const { children, lazyMount = true, unmountOnExit = true, ...rest } = props;
+  const { lazyMount = true, unmountOnExit = true, children, ...rest } = props;
 
   return (
     <ArkTour.Root
@@ -258,7 +258,7 @@ export const TourContent = (props: TourContentProps) => {
                   size="icon-md"
                   variant="ghost"
                 >
-                  <XIcon aria-hidden />
+                  <XIcon aria-hidden="true" />
 
                   <span className="sr-only">Close</span>
                 </Button>
@@ -427,7 +427,7 @@ const tourActionLayoutClassName = [
 export const TourFooter = (
   props: React.ComponentProps<typeof DialogFooter>
 ) => {
-  const { children, className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ArkTour.Control {...rest} asChild>
@@ -490,14 +490,14 @@ export const TourActions = (
                     >
                       {action.action === "prev" && (
                         <ChevronLeftIcon
-                          aria-hidden
+                          aria-hidden="true"
                           className={cn("size-3.5", "rtl:rotate-180")}
                         />
                       )}
                       {action.label}
                       {action.action === "next" && (
                         <ChevronRightIcon
-                          aria-hidden
+                          aria-hidden="true"
                           className={cn("size-3.5", "rtl:rotate-180")}
                         />
                       )}
@@ -537,7 +537,7 @@ export const TourPreviousStep = (
     >
       <Button className={className} data-tour-action="prev" variant="outline">
         <ChevronLeftIcon
-          aria-hidden
+          aria-hidden="true"
           className={cn("size-3.5", "rtl:rotate-180")}
         />
         {prevAction.label}
@@ -578,7 +578,7 @@ export const TourNextStep = (
 
         {action.action === "next" && (
           <ChevronRightIcon
-            aria-hidden
+            aria-hidden="true"
             className={cn("size-3.5", "rtl:rotate-180")}
           />
         )}

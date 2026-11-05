@@ -112,11 +112,11 @@ export const DataTable = <TData extends RowData>(
 ) => {
   const {
     caption,
-    className,
     columns,
     data,
     emptyMessage = "No results.",
     tableOptions,
+    className,
     ...rest
   } = props;
 
@@ -200,7 +200,7 @@ interface DataTableColumnHeaderProps<TData extends RowData, TValue>
 export const DataTableColumnHeader = <TData extends RowData, TValue>(
   props: DataTableColumnHeaderProps<TData, TValue>
 ) => {
-  const { className, column, title, ...rest } = props;
+  const { column, title, className, ...rest } = props;
 
   const canSort = column.getCanSort();
 
@@ -218,12 +218,12 @@ export const DataTableColumnHeader = <TData extends RowData, TValue>(
 
   const sortDirection = column.getIsSorted();
 
-  let sortIcon = <ChevronsUpDownIcon aria-hidden className="size-3.5" />;
+  let sortIcon = <ChevronsUpDownIcon aria-hidden="true" className="size-3.5" />;
 
   if (sortDirection === "desc") {
-    sortIcon = <ArrowDownIcon aria-hidden className="size-3.5" />;
+    sortIcon = <ArrowDownIcon aria-hidden="true" className="size-3.5" />;
   } else if (sortDirection === "asc") {
-    sortIcon = <ArrowUpIcon aria-hidden className="size-3.5" />;
+    sortIcon = <ArrowUpIcon aria-hidden="true" className="size-3.5" />;
   }
 
   return (
@@ -249,14 +249,14 @@ export const DataTableColumnHeader = <TData extends RowData, TValue>(
             onClick={() => column.toggleSorting(false)}
             value="sort-ascending"
           >
-            <ArrowUpIcon aria-hidden />
+            <ArrowUpIcon aria-hidden="true" />
             Ascending
           </MenuItem>
           <MenuItem
             onClick={() => column.toggleSorting(true)}
             value="sort-descending"
           >
-            <ArrowDownIcon aria-hidden />
+            <ArrowDownIcon aria-hidden="true" />
             Descending
           </MenuItem>
           {column.getCanHide() && (
@@ -266,7 +266,7 @@ export const DataTableColumnHeader = <TData extends RowData, TValue>(
                 onClick={() => column.toggleVisibility(false)}
                 value="hide"
               >
-                <EyeOffIcon aria-hidden />
+                <EyeOffIcon aria-hidden="true" />
                 Hide
               </MenuItem>
             </>
@@ -298,7 +298,7 @@ export interface DataTablePaginationProps<TData extends RowData>
 export const DataTablePagination = <TData extends RowData>(
   props: DataTablePaginationProps<TData>
 ) => {
-  const { children, className, table, ...rest } = props;
+  const { table, className, children, ...rest } = props;
 
   return (
     <DataTablePaginationProvider
@@ -443,7 +443,7 @@ export const DataTablePaginationNavigation = (
   props: DataTablePaginationNavigationProps
 ) => {
   const { className, ...rest } = props;
-  
+
   const { table } = useDataTablePagination();
 
   const pageCount = table.getPageCount();
@@ -492,7 +492,7 @@ export const DataTablePaginationNavigation = (
         size="icon-sm"
         variant="outline"
       >
-        <ChevronLeftIcon aria-hidden className="rtl:rotate-180" />
+        <ChevronLeftIcon aria-hidden="true" className="rtl:rotate-180" />
       </Button>
       <Button
         aria-label="Next page"
@@ -501,7 +501,7 @@ export const DataTablePaginationNavigation = (
         size="icon-sm"
         variant="outline"
       >
-        <ChevronRightIcon aria-hidden className="rtl:rotate-180" />
+        <ChevronRightIcon aria-hidden="true" className="rtl:rotate-180" />
       </Button>
     </ark.div>
   );
@@ -518,7 +518,7 @@ export interface DataTableViewOptionsProps<TData extends RowData>
 export const DataTableViewOptions = <TData extends RowData>(
   props: DataTableViewOptionsProps<TData>
 ) => {
-  const { className, table, ...rest } = props;
+  const { table, className, ...rest } = props;
 
   const columns = table.getAllColumns().filter((column) => column.getCanHide());
 
@@ -530,7 +530,7 @@ export const DataTableViewOptions = <TData extends RowData>(
     <Menu>
       <MenuTrigger asChild>
         <Button className={cn("ms-auto", className)} size="sm" {...rest}>
-          <Settings2Icon aria-hidden />
+          <Settings2Icon aria-hidden="true" />
           View
         </Button>
       </MenuTrigger>

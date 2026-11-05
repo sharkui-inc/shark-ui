@@ -23,7 +23,7 @@ const CollapsibleRtl = () => {
           <h4 className="text-sm font-semibold">الطلب #4189</h4>
           <CollapsibleTrigger asChild>
             <Button size="icon-md" variant="ghost">
-              <ChevronsUpDownIcon aria-hidden />
+              <ChevronsUpDownIcon aria-hidden="true" />
               <span className="sr-only">Toggle details</span>
             </Button>
           </CollapsibleTrigger>

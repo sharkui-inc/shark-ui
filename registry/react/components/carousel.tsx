@@ -75,7 +75,7 @@ export const CarouselPrevious = (
         variant="outline"
       >
         <ChevronLeftIcon
-          aria-hidden
+          aria-hidden="true"
           className="group-data-[orientation=horizontal]/carousel:rtl:rotate-180"
         />
       </Button>
@@ -108,7 +108,7 @@ export const CarouselNext = (
         variant="outline"
       >
         <ChevronRightIcon
-          aria-hidden
+          aria-hidden="true"
           className="group-data-[orientation=horizontal]/carousel:rtl:rotate-180"
         />
       </Button>

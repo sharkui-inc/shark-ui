@@ -2,7 +2,7 @@ import type React from "react";
 
 export const ReactHookFormIcon = (props: React.ComponentProps<"svg">) => (
   <svg
-    aria-hidden
+    aria-hidden="true"
     fill="none"
     stroke="currentColor"
     strokeLinecap="round"

@@ -59,11 +59,13 @@ const Example = () => {
   );
 };
 
-const SideDeliveryDrawer = (props: {
+interface SideDeliveryDrawerProps {
   copy: (typeof translations)["en"]["values"]["delivery"];
   swipeDirection: "start" | "end";
   trigger: string;
-}) => {
+}
+
+const SideDeliveryDrawer = (props: SideDeliveryDrawerProps) => {
   const { copy, swipeDirection, trigger } = props;
 
   return (

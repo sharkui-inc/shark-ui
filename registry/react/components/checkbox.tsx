@@ -50,7 +50,7 @@ export const checkboxVariants = tv({
 export const Checkbox = (
   props: React.ComponentProps<typeof ArkCheckbox.Root>
 ) => {
-  const { className, tabIndex, ...rest } = props;
+  const { tabIndex, className, ...rest } = props;
 
   return (
     <ArkCheckbox.Root
@@ -60,11 +60,11 @@ export const Checkbox = (
     >
       <ArkCheckbox.Control data-slot="checkbox-control">
         <CheckboxIndicator>
-          <CheckIcon />
+          <CheckIcon aria-hidden="true" />
         </CheckboxIndicator>
 
         <CheckboxIndicator indeterminate>
-          <MinusIcon />
+          <MinusIcon aria-hidden="true" />
         </CheckboxIndicator>
       </ArkCheckbox.Control>
 

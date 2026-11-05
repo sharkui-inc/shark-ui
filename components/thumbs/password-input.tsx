@@ -6,13 +6,13 @@ export const PasswordInputThumb = (props: ThumbCardProps) => (
     <div className="border-input bg-muted relative flex h-8 w-48 items-center justify-between overflow-hidden rounded-lg border px-3 shadow-sm/4">
       <div className="flex flex-1 items-center">
         <span
-          aria-hidden
+          aria-hidden="true"
           className="text-muted-foreground/64 relative mt-2 text-xl leading-none select-none"
         >
           ********
         </span>
       </div>
-      <EyeIcon aria-hidden className="text-muted-foreground/64 size-3" />
+      <EyeIcon aria-hidden="true" className="text-muted-foreground/64 size-3" />
     </div>
   </ThumbCard>
 );

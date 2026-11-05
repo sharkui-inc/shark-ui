@@ -173,7 +173,7 @@ interface MenuItemProps
     VariantProps<typeof menuItemVariants> {}
 
 export const MenuItem = (props: MenuItemProps) => {
-  const { variant = "default", className, tabIndex = -1, ...rest } = props;
+  const { variant = "default", tabIndex = -1, className, ...rest } = props;
 
   return (
     <ArkMenu.Item
@@ -251,6 +251,7 @@ export const MenuCheckboxItem = (
     >
       <ArkMenu.ItemIndicator className={indicator()}>
         <CheckIcon
+          aria-hidden="true"
           className="size-4 md:size-3.5"
           data-slot="menu-item-check-icon"
         />
@@ -285,6 +286,7 @@ export const MenuRadioItem = (
     >
       <ArkMenu.ItemIndicator className={indicator()}>
         <CheckIcon
+          aria-hidden="true"
           className="size-4 md:size-3.5"
           data-slot="menu-item-check-icon"
         />
@@ -384,7 +386,10 @@ export const MenuSubTrigger = (
       {children}
 
       <MenuShortcut>
-        <ChevronRightIcon className={cn("size-3.5", "rtl:rotate-180")} />
+        <ChevronRightIcon
+          aria-hidden="true"
+          className={cn("size-3.5", "rtl:rotate-180")}
+        />
       </MenuShortcut>
     </ArkMenu.TriggerItem>
   );

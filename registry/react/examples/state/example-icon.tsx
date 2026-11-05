@@ -11,7 +11,7 @@ const Example = () => (
   <State>
     <StateHeader>
       <StateMedia variant="icon">
-        <BookmarkIcon aria-hidden />
+        <BookmarkIcon aria-hidden="true" />
       </StateMedia>
       <StateTitle asChild>
         <h2>No bookmarks</h2>

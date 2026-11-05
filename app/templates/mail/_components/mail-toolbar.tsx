@@ -4,7 +4,7 @@ import type { MailComposeMode } from "../_data/mail";
 import { MailComposeToolbar } from "./mail-compose-toolbar";
 import { MailReadToolbar } from "./mail-read-toolbar";
 
-export const MailToolbar = (props: {
+interface MailToolbarProps {
   composeMode: MailComposeMode;
   isStarred: boolean;
   isUnread: boolean;
@@ -13,16 +13,18 @@ export const MailToolbar = (props: {
   onToggleFavorite: () => void;
   onToggleUnread: () => void;
   query: string;
-}) => {
+}
+
+export const MailToolbar = (props: MailToolbarProps) => {
   const {
     composeMode,
     isStarred,
     isUnread,
+    query,
     onComposeChange,
     onSearchChange,
     onToggleFavorite,
     onToggleUnread,
-    query,
   } = props;
 
   return (

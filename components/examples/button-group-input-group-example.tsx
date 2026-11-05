@@ -38,7 +38,7 @@ export const ButtonGroupInputGroupExample = () => {
               pressed={voice}
               size="sm"
             >
-              <AudioLinesIcon aria-hidden />
+              <AudioLinesIcon aria-hidden="true" />
             </Toggle>
           </TooltipTrigger>
           <TooltipContent>Voice Mode</TooltipContent>
@@ -56,7 +56,7 @@ export const ButtonGroupInputGroupExample = () => {
               size="icon-xs"
               variant="ghost"
             >
-              <PlusIcon aria-hidden />
+              <PlusIcon aria-hidden="true" />
             </InputGroupButton>
           </MenuTrigger>
           <MenuContent>

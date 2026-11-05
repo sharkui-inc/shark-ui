@@ -14,7 +14,7 @@ const Example = () => (
     {unitSystems.map((system) => (
       <Item key={system.unitSystem} variant="outline">
         <ItemMedia variant="icon">
-          <HardDriveIcon aria-hidden />
+          <HardDriveIcon aria-hidden="true" />
         </ItemMedia>
         <ItemContent>
           <ItemTitle>{system.title}</ItemTitle>

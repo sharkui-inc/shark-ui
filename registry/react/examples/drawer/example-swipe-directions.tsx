@@ -30,10 +30,12 @@ const Example = () => (
   </div>
 );
 
-const DeliveryDrawer = (props: {
+interface DeliveryDrawerProps {
   swipeDirection: "up" | "down" | "start" | "end";
   trigger: string;
-}) => {
+}
+
+const DeliveryDrawer = (props: DeliveryDrawerProps) => {
   const { swipeDirection, trigger } = props;
 
   const isSide = swipeDirection === "start" || swipeDirection === "end";

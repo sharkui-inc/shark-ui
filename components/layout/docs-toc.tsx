@@ -56,7 +56,10 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
     >
       <TocNav className="static w-full">
         <TocTitle className="mb-0 inline-flex h-7 items-center gap-2 text-xs">
-          <AlignLeftIcon aria-hidden className="size-3 rtl:scale-x-[-1]" />
+          <AlignLeftIcon
+            aria-hidden="true"
+            className="size-3 rtl:scale-x-[-1]"
+          />
           On This Page
         </TocTitle>
         <div className="relative ms-[calc((--spacing(3)-1px)/2)]">
@@ -92,7 +95,8 @@ export const DocsTableOfContents = (props: DocsTableOfContentsProps) => {
             )}
             href="#page-title"
           >
-            <CircleArrowUpIcon aria-hidden className="size-4" /> Scroll to top
+            <CircleArrowUpIcon aria-hidden="true" className="size-4" /> Scroll
+            to top
           </a>
         </Presence>
       </TocNav>

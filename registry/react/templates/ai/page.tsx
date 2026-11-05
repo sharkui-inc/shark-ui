@@ -52,8 +52,8 @@ const AITemplatePage = () => (
     >
       <SidebarHeader className="border-b">
         <div className="flex items-center gap-2 px-2 py-2">
-          <IconTile aria-hidden size="xs">
-            <MessageSquareIcon aria-hidden className="size-4" />
+          <IconTile aria-hidden="true" size="xs">
+            <MessageSquareIcon aria-hidden="true" className="size-4" />
           </IconTile>
           <span className="font-semibold">New chat</span>
         </div>
@@ -66,7 +66,7 @@ const AITemplatePage = () => (
                 <SidebarMenuItem key={label}>
                   <SidebarMenuButton asChild>
                     <Link href={href}>
-                      <Icon aria-hidden className="size-4" />
+                      <Icon aria-hidden="true" className="size-4" />
                       {label}
                     </Link>
                   </SidebarMenuButton>
@@ -152,17 +152,17 @@ const AITemplatePage = () => (
           <div className="w-full max-w-2xl">
             <div className="relative">
               <Textarea
-                className="min-h-24 resize-none pr-12"
+                className="min-h-24 resize-none pe-12"
                 placeholder="How can I help you today?"
                 rows={3}
               />
               <Button
-                className="absolute top-2 right-2"
+                className="absolute end-2 top-2"
                 size="icon-sm"
                 type="submit"
                 variant="ghost"
               >
-                <ArrowUpIcon aria-hidden />
+                <ArrowUpIcon aria-hidden="true" />
               </Button>
             </div>
             <p className="text-muted-foreground mt-2 text-center text-xs">

@@ -17,20 +17,20 @@ const Example = () => (
     <TableHeader>
       <TableRow>
         <TableHead>Item</TableHead>
-        <TableHead className="text-right">Qty</TableHead>
-        <TableHead className="text-right">Unit price</TableHead>
-        <TableHead className="text-right">Amount</TableHead>
+        <TableHead className="text-end">Qty</TableHead>
+        <TableHead className="text-end">Unit price</TableHead>
+        <TableHead className="text-end">Amount</TableHead>
       </TableRow>
     </TableHeader>
     <TableBody>
       {items.map((row) => (
         <TableRow key={row.id}>
           <TableCell>{row.item}</TableCell>
-          <TableCell className="text-right">{row.qty}</TableCell>
-          <TableCell className="text-right">
+          <TableCell className="text-end">{row.qty}</TableCell>
+          <TableCell className="text-end">
             {`$${row.unitPrice.toFixed(2)}`}
           </TableCell>
-          <TableCell className="text-right">
+          <TableCell className="text-end">
             {`$${(row.qty * row.unitPrice).toFixed(2)}`}
           </TableCell>
         </TableRow>
@@ -39,7 +39,7 @@ const Example = () => (
     <TableFooter>
       <TableRow>
         <TableCell colSpan={3}>Total</TableCell>
-        <TableCell className="text-right">$379.47</TableCell>
+        <TableCell className="text-end">$379.47</TableCell>
       </TableRow>
     </TableFooter>
   </Table>

@@ -35,10 +35,10 @@ export const Combobox: ArkCombobox.RootComponent = (props) => {
   const {
     allowCustomValue = false,
     openOnClick = true,
-    onInputValueChange,
     scrollToIndexFn,
     lazyMount = true,
     unmountOnExit = true,
+    onInputValueChange,
     ...rest
   } = props;
 
@@ -163,7 +163,7 @@ export const ComboboxInput = (props: ComboboxInputProps) => {
           {showClear && inputValue ? (
             <ComboboxClear asChild>
               <InputGroupButton size="icon-xs" variant="ghost">
-                <XIcon />
+                <XIcon aria-hidden="true" />
               </InputGroupButton>
             </ComboboxClear>
           ) : null}
@@ -187,7 +187,7 @@ export const ComboboxTrigger = (
     >
       {children ?? (
         <InputGroupButton className={className} size="icon-xs" variant="ghost">
-          <ChevronsUpDownIcon />
+          <ChevronsUpDownIcon aria-hidden="true" />
         </InputGroupButton>
       )}
     </ArkCombobox.Trigger>
@@ -245,7 +245,7 @@ export const ComboboxButtonTrigger = (props: ComboboxButtonTriggerProps) => {
         <span className={cn("min-w-0 flex-1", "truncate")}>{label}</span>
         {showTrigger ? (
           <ChevronsUpDownIcon
-            aria-hidden
+            aria-hidden="true"
             className={cn("shrink-0", "opacity-64")}
           />
         ) : null}
@@ -312,7 +312,7 @@ interface ComboboxChipProps extends React.ComponentProps<typeof ark.span> {
 }
 
 export const ComboboxChip = (props: ComboboxChipProps) => {
-  const { children, className, value, ...rest } = props;
+  const { value, className, children, ...rest } = props;
 
   const { clearValue, disabled } = useComboboxContext();
 
@@ -352,7 +352,7 @@ export const ComboboxChip = (props: ComboboxChipProps) => {
           size="icon-xs"
           type="button"
         >
-          <XIcon aria-hidden />
+          <XIcon aria-hidden="true" />
         </InputGroupButton>
       )}
     </ark.span>
@@ -490,7 +490,7 @@ export const ComboboxItem = (props: ComboboxItemProps) => {
           className={indicator()}
           data-slot="combobox-item-indicator"
         >
-          <CheckIcon />
+          <CheckIcon aria-hidden="true" />
         </ArkCombobox.ItemIndicator>
       ) : null}
     </ArkCombobox.Item>

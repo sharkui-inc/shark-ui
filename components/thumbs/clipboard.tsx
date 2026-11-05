@@ -8,7 +8,7 @@ export const ClipboardThumb = (props: ThumbCardProps) => (
         <div className="bg-muted-foreground/24 h-2 w-2/3 rounded-full" />
       </div>
       <div className="bg-primary flex size-8 shrink-0 items-center justify-center rounded-lg shadow-sm/4">
-        <span aria-hidden className="text-primary-foreground">
+        <span aria-hidden="true" className="text-primary-foreground">
           <ClipboardIcon className="size-3" />
         </span>
       </div>

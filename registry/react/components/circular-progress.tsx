@@ -96,7 +96,7 @@ export const CircularProgressTrack = (props: CircularProgressTrackProps) => {
       viewBox={`0 0 ${size} ${size}`}
       width={size}
       {...rest}
-      aria-hidden
+      aria-hidden="true"
     >
       <circle
         className="stroke-input fill-none"

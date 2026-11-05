@@ -50,10 +50,10 @@ const TaskEditorSelect: ArkSelect.RootComponent<TaskEditorSelectProps> = (
     collection,
     itemKey,
     label,
-    onValueChange,
     renderItem,
     selectValue,
     value,
+    onValueChange,
   } = props;
 
   return (
@@ -77,12 +77,10 @@ const TaskEditorSelect: ArkSelect.RootComponent<TaskEditorSelectProps> = (
   );
 };
 
-
 interface TaskEditorFieldsProps {
   draft: TaskDraft;
   onDraftChange: React.Dispatch<React.SetStateAction<TaskDraft>>;
 }
-
 
 export const TaskEditorFields = (props: TaskEditorFieldsProps) => {
   const { draft, onDraftChange } = props;

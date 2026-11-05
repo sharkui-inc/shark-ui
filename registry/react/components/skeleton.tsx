@@ -52,7 +52,7 @@ interface SkeletonTextProps extends React.ComponentProps<typeof ark.div> {
 }
 
 export const SkeletonText = (props: SkeletonTextProps) => {
-  const { className, lines = 2, ...rest } = props;
+  const { lines = 2, className, ...rest } = props;
 
   return (
     <ark.div

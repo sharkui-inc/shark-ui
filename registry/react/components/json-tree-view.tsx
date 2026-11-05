@@ -5,18 +5,19 @@ import { ChevronRightIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-type JsonTreeViewProps = React.ComponentProps<typeof ArkJsonTreeView.Root> & {
+interface JsonTreeViewProps
+  extends React.ComponentProps<typeof ArkJsonTreeView.Root> {
   renderValue?: React.ComponentProps<
     typeof ArkJsonTreeView.Tree
   >["renderValue"];
-};
+}
 
 export const JsonTreeView = (props: JsonTreeViewProps) => {
   const {
     lazyMount = true,
     unmountOnExit = true,
-    className,
     renderValue,
+    className,
     ...rest
   } = props;
 
@@ -73,7 +74,7 @@ const JsonTreeViewTree = (
 
   return (
     <ArkJsonTreeView.Tree
-      arrow={<ChevronRightIcon className="size-3.5" />}
+      arrow={<ChevronRightIcon aria-hidden="true" className="size-3.5" />}
       className={cn(
         "w-full min-w-0",
         "flex flex-col",

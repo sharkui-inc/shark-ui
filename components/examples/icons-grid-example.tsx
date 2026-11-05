@@ -44,7 +44,7 @@ export const IconsGridExample = (props: React.ComponentProps<"div">) => (
             size="icon-md"
             variant="outline"
           >
-            <Icon aria-hidden />
+            <Icon aria-hidden="true" />
           </Button>
         ))}
       </div>

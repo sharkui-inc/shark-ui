@@ -11,7 +11,7 @@ const TooltipKeyboard = () => (
   <Tooltip>
     <TooltipTrigger asChild>
       <Button size="icon-sm" variant="outline">
-        <SaveIcon aria-hidden />
+        <SaveIcon aria-hidden="true" />
       </Button>
     </TooltipTrigger>
     <TooltipContent>

@@ -33,7 +33,7 @@ interface HighlightProps
     VariantProps<typeof highlightVariants> {}
 
 export const Highlight = (props: HighlightProps) => {
-  const { className, variant = "default", ...rest } = props;
+  const { variant = "default", className, ...rest } = props;
 
   return (
     <ArkHighlight

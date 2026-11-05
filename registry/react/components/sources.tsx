@@ -123,7 +123,7 @@ interface SourceProps extends React.ComponentProps<typeof ark.a> {
 
 export const Source = (props: SourceProps) => {
   const { href, title, className, children, ...rest } = props;
-  
+
   const safeHref = toSafeHref(href);
 
   return (
@@ -147,9 +147,9 @@ export const Source = (props: SourceProps) => {
       rel="noreferrer"
       target={safeHref ? "_blank" : undefined}
     >
-      <BookIcon aria-hidden />
+      <BookIcon aria-hidden="true" />
       <span className={cn("min-w-0", "truncate")}>{children ?? title}</span>
-      <ArrowUpRightIcon aria-hidden className="rtl:-scale-x-100" />
+      <ArrowUpRightIcon aria-hidden="true" className="rtl:-scale-x-100" />
     </ark.a>
   );
 };
@@ -171,7 +171,7 @@ interface InlineCitationProps extends React.ComponentProps<typeof ark.button> {
 
 export const InlineCitation = (props: InlineCitationProps) => {
   const { href, index, title, className, children, ...rest } = props;
- 
+
   const safeHref = toSafeHref(href);
 
   const label = index === undefined ? "Source" : String(index);

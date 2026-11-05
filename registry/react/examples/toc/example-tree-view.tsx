@@ -68,9 +68,11 @@ const Example = () => {
   );
 };
 
-const Article = (props: {
+interface ArticleProps {
   items: { depth: number; label: string; lines: number; value: string }[];
-}) => (
+}
+
+const Article = (props: ArticleProps) => (
   <>
     {props.items.map((item) => {
       const Heading = item.depth === 3 ? "h3" : "h2";
@@ -86,7 +88,7 @@ const Article = (props: {
             {item.label}
           </Heading>
           <SkeletonText
-            aria-hidden
+            aria-hidden="true"
             className="animate-none **:[div]:h-2"
             lines={item.lines}
           />
@@ -183,7 +185,7 @@ const ancestorValues = (activeId: string) => {
 
 const TreeNode = (props: NodeProviderProps<TocNode>) => {
   const { node, indexPath } = props;
-  
+
   const item = items.find((entry) => entry.value === node.id);
 
   if (node.children) {

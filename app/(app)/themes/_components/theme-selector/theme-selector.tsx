@@ -92,7 +92,7 @@ export const ThemeSelector = (props: React.ComponentProps<"fieldset">) => {
                       size="icon-sm"
                       variant="outline"
                     >
-                      <ShuffleIcon aria-hidden />
+                      <ShuffleIcon aria-hidden="true" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
@@ -110,7 +110,7 @@ export const ThemeSelector = (props: React.ComponentProps<"fieldset">) => {
                           size="icon-sm"
                           variant="outline"
                         >
-                          <RotateCcwIcon aria-hidden />
+                          <RotateCcwIcon aria-hidden="true" />
                         </Button>
                       </AlertDialogTrigger>
                     </TooltipTrigger>
@@ -138,7 +138,7 @@ export const ThemeSelector = (props: React.ComponentProps<"fieldset">) => {
                     <TooltipTrigger asChild>
                       <DialogTrigger asChild>
                         <Button aria-label="View theme code" size="icon-sm">
-                          <CodeIcon aria-hidden />
+                          <CodeIcon aria-hidden="true" />
                         </Button>
                       </DialogTrigger>
                     </TooltipTrigger>

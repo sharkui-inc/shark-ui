@@ -20,7 +20,7 @@ const Example = () => (
 
           return (
             <ListboxItem item={item} key={item.value}>
-              <Icon aria-hidden />
+              <Icon aria-hidden="true" />
               <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                 <ListboxItemText>{item.label}</ListboxItemText>
                 <ListboxItemDescription>

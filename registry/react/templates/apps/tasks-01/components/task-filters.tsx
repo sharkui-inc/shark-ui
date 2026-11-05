@@ -34,7 +34,7 @@ import {
   TaskStatusSelectValue,
 } from "./task-select-options";
 
-export const TaskFilters = (props: {
+interface TaskFiltersProps {
   hasFilters: boolean;
   onClearFilters: () => void;
   onPriorityChange: (priority: TaskPriority | null) => void;
@@ -44,24 +44,26 @@ export const TaskFilters = (props: {
   query: string;
   status: TaskStatus | null;
   table: ReactTable<DataTableFeatures, Task>;
-}) => {
+}
+
+export const TaskFilters = (props: TaskFiltersProps) => {
   const {
     hasFilters,
-    onClearFilters,
-    onPriorityChange,
-    onQueryChange,
-    onStatusChange,
     priority,
     query,
     status,
     table,
+    onClearFilters,
+    onPriorityChange,
+    onQueryChange,
+    onStatusChange,
   } = props;
 
   return (
     <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
       <InputGroup className="lg:max-w-48">
         <InputGroupAddon>
-          <SearchIcon aria-hidden />
+          <SearchIcon aria-hidden="true" />
         </InputGroupAddon>
         <InputGroupInput
           aria-label="Search tasks"
@@ -127,7 +129,7 @@ export const TaskFilters = (props: {
             size="sm"
             variant="ghost"
           >
-            <XIcon aria-hidden />
+            <XIcon aria-hidden="true" />
             Clear
           </Button>
         ) : null}

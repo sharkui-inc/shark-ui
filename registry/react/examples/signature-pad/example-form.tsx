@@ -100,7 +100,7 @@ interface SignaturePadClearButtonProps {
 }
 
 const SignaturePadClearButton = (props: SignaturePadClearButtonProps) => {
-  const { onClear, previewRef } = props;
+  const { previewRef, onClear } = props;
 
   const signaturePad = useSignaturePadContext();
 

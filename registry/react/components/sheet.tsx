@@ -216,7 +216,7 @@ export const SheetContent = (props: SheetContentProps) => {
                 size="icon-sm"
                 variant="ghost"
               >
-                <XIcon />
+                <XIcon aria-hidden="true" />
               </Button>
             </SheetClose>
           )}

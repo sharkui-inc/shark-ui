@@ -28,18 +28,19 @@ export const toast = createToaster({
   placement: "bottom-end",
 });
 
-type ToasterProps = Omit<
-  React.ComponentProps<typeof ArkToaster>,
-  "children" | "toaster"
-> & {
+interface ToasterProps
+  extends Omit<
+    React.ComponentProps<typeof ArkToaster>,
+    "children" | "toaster"
+  > {
   /**
    * Toaster instance
    */
   toaster?: CreateToasterReturn<React.ReactNode>;
-};
+}
 
 export const Toaster = (props: ToasterProps) => {
-  const { toaster: toasterInstance = toast, className, style, ...rest } = props;
+  const { toaster: toasterInstance = toast, style, className, ...rest } = props;
 
   return (
     <Portal>
@@ -164,7 +165,7 @@ export const ToastItem = (props: ToastItemProps) => {
               size="icon-xs"
               variant="ghost"
             >
-              <XIcon />
+              <XIcon aria-hidden="true" />
             </Button>
           </ArkToast.CloseTrigger>
         )}

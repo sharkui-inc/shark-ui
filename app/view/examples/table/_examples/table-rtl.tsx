@@ -34,7 +34,7 @@ const TableRtl = () => (
         <TableHead className="w-[100px]">{t.invoice}</TableHead>
         <TableHead>{t.status}</TableHead>
         <TableHead>{t.method}</TableHead>
-        <TableHead className="text-right">{t.amount}</TableHead>
+        <TableHead className="text-end">{t.amount}</TableHead>
       </TableRow>
     </TableHeader>
     <TableBody>
@@ -43,14 +43,14 @@ const TableRtl = () => (
           <TableCell className="font-medium">{invoice.invoice}</TableCell>
           <TableCell>{t[invoice.paymentStatus]}</TableCell>
           <TableCell>{t[invoice.paymentMethod]}</TableCell>
-          <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+          <TableCell className="text-end">{invoice.totalAmount}</TableCell>
         </TableRow>
       ))}
     </TableBody>
     <TableFooter>
       <TableRow>
         <TableCell colSpan={3}>{t.total}</TableCell>
-        <TableCell className="text-right">$2,500.00</TableCell>
+        <TableCell className="text-end">$2,500.00</TableCell>
       </TableRow>
     </TableFooter>
   </Table>

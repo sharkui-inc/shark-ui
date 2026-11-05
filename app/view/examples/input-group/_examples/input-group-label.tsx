@@ -32,11 +32,11 @@ const InputGroupLabel = () => (
           <TooltipTrigger asChild>
             <InputGroupButton
               aria-label="Help"
-              className="ml-auto rounded-full"
+              className="ms-auto rounded-full"
               size="icon-xs"
               variant="ghost"
             >
-              <InfoIcon aria-hidden />
+              <InfoIcon aria-hidden="true" />
             </InputGroupButton>
           </TooltipTrigger>
           <TooltipContent>

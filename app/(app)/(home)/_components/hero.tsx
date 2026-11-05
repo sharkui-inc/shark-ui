@@ -23,10 +23,10 @@ export const HeroSection = (props: HeroSectionProps) => {
         <Announcement asChild className="bg-background">
           <Link href="/docs/changelog/26-08">
             <Badge>
-              <BotIcon aria-hidden />
+              <BotIcon aria-hidden="true" />
             </Badge>
             <AnnouncementTitle>New AI components</AnnouncementTitle>
-            <ArrowRightIcon aria-hidden />
+            <ArrowRightIcon aria-hidden="true" />
           </Link>
         </Announcement>
 
@@ -61,7 +61,7 @@ export const HeroSection = (props: HeroSectionProps) => {
           >
             <Link href="/docs/components">
               View components
-              <ArrowRightIcon aria-hidden />
+              <ArrowRightIcon aria-hidden="true" />
             </Link>
           </Button>
         </div>

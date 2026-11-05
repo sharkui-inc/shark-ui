@@ -16,7 +16,7 @@ const InputGroupInlineEnd = () => (
     <InputGroup>
       <InputGroupInput placeholder="Enter password" type="password" />
       <InputGroupAddon align="inline-end">
-        <EyeOffIcon aria-hidden />
+        <EyeOffIcon aria-hidden="true" />
       </InputGroupAddon>
     </InputGroup>
     <FieldDescription>Icon positioned at the end.</FieldDescription>

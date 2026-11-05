@@ -70,7 +70,7 @@ const Example = () => {
         {list.loading
           ? skeletons.map((key) => (
               <Item
-                aria-hidden
+                aria-hidden="true"
                 className="[--space:--spacing(2)]"
                 key={key}
                 variant="outline"

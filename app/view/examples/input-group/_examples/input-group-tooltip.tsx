@@ -21,7 +21,7 @@ const InputGroupTooltip = () => (
         <Tooltip>
           <TooltipTrigger asChild>
             <InputGroupButton aria-label="Info" size="icon-xs" variant="ghost">
-              <InfoIcon aria-hidden />
+              <InfoIcon aria-hidden="true" />
             </InputGroupButton>
           </TooltipTrigger>
           <TooltipContent>
@@ -36,7 +36,7 @@ const InputGroupTooltip = () => (
         <Tooltip>
           <TooltipTrigger asChild>
             <InputGroupButton aria-label="Help" size="icon-xs" variant="ghost">
-              <HelpCircleIcon aria-hidden />
+              <HelpCircleIcon aria-hidden="true" />
             </InputGroupButton>
           </TooltipTrigger>
           <TooltipContent>
@@ -51,7 +51,7 @@ const InputGroupTooltip = () => (
         <TooltipTrigger asChild>
           <InputGroupAddon>
             <InputGroupButton aria-label="Help" size="icon-xs" variant="ghost">
-              <HelpCircleIcon aria-hidden />
+              <HelpCircleIcon aria-hidden="true" />
             </InputGroupButton>
           </InputGroupAddon>
         </TooltipTrigger>

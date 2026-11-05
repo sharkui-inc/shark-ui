@@ -112,12 +112,12 @@ export const ClipboardIndicator = (
 ) => {
   const {
     asChild: _asChild,
-    copied = <CheckIcon />,
+    copied = <CheckIcon aria-hidden="true" />,
     className,
     children,
     ...rest
   } = props;
-  
+
   const clipboard = useClipboardContext();
 
   return (
@@ -126,9 +126,11 @@ export const ClipboardIndicator = (
       className={cn("pointer-events-none", className)}
       data-slot="clipboard-indicator"
       {...rest}
-      aria-hidden
+      aria-hidden="true"
     >
-      {clipboard.copied ? copied : (children ?? <ClipboardIcon />)}
+      {clipboard.copied
+        ? copied
+        : (children ?? <ClipboardIcon aria-hidden="true" />)}
     </span>
   );
 };

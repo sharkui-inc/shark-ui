@@ -61,7 +61,7 @@ export const LoginForm = () => (
           </Button>
           <FieldSeparator>or continue with</FieldSeparator>
           <Button className="w-full" variant="outline">
-            <KeyRoundIcon aria-hidden />
+            <KeyRoundIcon aria-hidden="true" />
             Single sign-on
           </Button>
           <FieldDescription className="text-center">

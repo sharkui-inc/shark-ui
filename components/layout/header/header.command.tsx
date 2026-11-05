@@ -316,7 +316,7 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
 
                     return (
                       <CommandItem item={item} key={item.value}>
-                        <ItemIcon aria-hidden className="size-3.5" />
+                        <ItemIcon aria-hidden="true" className="size-3.5" />
                         {item.label}
                         {DOCS_UPDATED_ITEMS.includes(item.url) && (
                           <>

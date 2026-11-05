@@ -103,7 +103,7 @@ const Example = () => {
                   aria-label={values.addToPromptAriaLabel}
                   size="icon-sm"
                 >
-                  <PlusIcon aria-hidden />
+                  <PlusIcon aria-hidden="true" />
                 </PromptInputButton>
               </MenuTrigger>
               <MenuContent className="min-w-80">
@@ -133,7 +133,7 @@ const Example = () => {
               value={access}
             >
               <SelectTrigger showTrigger={false} size="sm" variant="ghost">
-                <ShieldAlertIcon aria-hidden />
+                <ShieldAlertIcon aria-hidden="true" />
                 <SelectValue placeholder={values.accessLevels[0].label} />
               </SelectTrigger>
               <SelectContent>
@@ -193,7 +193,7 @@ const Example = () => {
             aria-label={values.voiceInputAriaLabel}
             size="icon-sm"
           >
-            <MicIcon aria-hidden />
+            <MicIcon aria-hidden="true" />
           </PromptInputButton>
           <PromptInputSubmit className="ms-2" size="icon-sm" />
         </PromptInputFooter>
@@ -203,7 +203,7 @@ const Example = () => {
             size="sm"
             variant="ghost"
           >
-            <FolderIcon aria-hidden data-icon="inline-start" />
+            <FolderIcon aria-hidden="true" data-icon="inline-start" />
             viajuntos
           </Button>
           <Button
@@ -211,7 +211,7 @@ const Example = () => {
             size="sm"
             variant="ghost"
           >
-            <MonitorIcon aria-hidden data-icon="inline-start" />
+            <MonitorIcon aria-hidden="true" data-icon="inline-start" />
             {values.local}
           </Button>
           <Button
@@ -219,7 +219,7 @@ const Example = () => {
             size="sm"
             variant="ghost"
           >
-            <GitBranchIcon aria-hidden data-icon="inline-start" />
+            <GitBranchIcon aria-hidden="true" data-icon="inline-start" />
             main
           </Button>
           <div className="ms-auto">
@@ -272,32 +272,32 @@ const models = [
 const actionItemsByValue = [
   {
     group: "context",
-    icon: <PaperclipIcon aria-hidden />,
+    icon: <PaperclipIcon aria-hidden="true" />,
     value: "files",
   },
   {
     group: "context",
-    icon: <ImagePlusIcon aria-hidden />,
+    icon: <ImagePlusIcon aria-hidden="true" />,
     value: "image",
   },
   {
     group: "context",
-    icon: <GlobeIcon aria-hidden />,
+    icon: <GlobeIcon aria-hidden="true" />,
     value: "web-page",
   },
   {
     group: "context",
-    icon: <FileTextIcon aria-hidden />,
+    icon: <FileTextIcon aria-hidden="true" />,
     value: "instructions",
   },
   {
     group: "agent",
-    icon: <ListTodoIcon aria-hidden />,
+    icon: <ListTodoIcon aria-hidden="true" />,
     value: "plan",
   },
   {
     group: "agent",
-    icon: <CircleHelpIcon aria-hidden />,
+    icon: <CircleHelpIcon aria-hidden="true" />,
     value: "ask",
   },
 ] as const;

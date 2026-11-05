@@ -73,7 +73,7 @@ export const StyleOverviewExample = (props: React.ComponentProps<"div">) => {
             </p>
           </div>
           <span
-            aria-hidden
+            aria-hidden="true"
             className="bg-primary size-10 shrink-0"
             style={{ borderRadius: "var(--radius)" }}
           />

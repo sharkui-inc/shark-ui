@@ -54,7 +54,7 @@ export const AppSidebar = () => (
       <SidebarMenu>
         <SidebarMenuItem>
           <SidebarMenuButton className="font-semibold" size="lg">
-            <ChartNoAxesCombinedIcon aria-hidden />
+            <ChartNoAxesCombinedIcon aria-hidden="true" />
             <span>Northstar</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
@@ -69,7 +69,7 @@ export const AppSidebar = () => (
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
                   <SidebarMenuButton tooltip={item.label}>
-                    <item.icon aria-hidden />
+                    <item.icon aria-hidden="true" />
                     <span>{item.label}</span>
                     <CollapsibleIndicator />
                   </SidebarMenuButton>
@@ -100,7 +100,7 @@ export const AppSidebar = () => (
           <SidebarMenuItem key={item.label}>
             <SidebarMenuButton asChild>
               <a href="#">
-                <item.icon aria-hidden />
+                <item.icon aria-hidden="true" />
                 <span>{item.label}</span>
               </a>
             </SidebarMenuButton>

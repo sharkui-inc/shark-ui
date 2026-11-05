@@ -33,7 +33,7 @@ const Example = () => {
           size="icon-md"
           variant="ghost"
         >
-          <RefreshCwIcon aria-hidden />
+          <RefreshCwIcon aria-hidden="true" />
         </Button>
       </div>
 

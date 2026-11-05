@@ -35,14 +35,14 @@ interface SuggestionProps
 
 export const Suggestion = (props: SuggestionProps) => {
   const {
-    children,
-    className,
-    onClick,
     suggestion,
     type = "button",
     variant = "outline",
     size = "sm",
     pill = true,
+    onClick,
+    className,
+    children,
     ...rest
   } = props;
 

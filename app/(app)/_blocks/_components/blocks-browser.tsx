@@ -187,7 +187,7 @@ export const BlocksBrowser = (props: BlocksBrowserProps) => {
             >
               <SheetTrigger asChild>
                 <Button variant="outline">
-                  <PanelLeftIcon aria-hidden />
+                  <PanelLeftIcon aria-hidden="true" />
                   Browse
                 </Button>
               </SheetTrigger>
@@ -221,7 +221,7 @@ export const BlocksBrowser = (props: BlocksBrowserProps) => {
               <State className="min-h-80 border border-dashed">
                 <StateHeader>
                   <StateMedia variant="icon">
-                    <SearchXIcon aria-hidden />
+                    <SearchXIcon aria-hidden="true" />
                   </StateMedia>
                   <StateTitle asChild>
                     <h2>No blocks in this category</h2>

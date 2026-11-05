@@ -66,7 +66,7 @@ const Article = () => (
             {item.label}
           </Heading>
           <SkeletonText
-            aria-hidden
+            aria-hidden="true"
             className="animate-none **:[div]:h-2"
             lines={item.lines}
           />

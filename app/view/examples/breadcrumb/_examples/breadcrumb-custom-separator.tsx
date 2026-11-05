@@ -15,13 +15,13 @@ const BreadcrumbCustomSeparator = () => (
         <BreadcrumbLink href="/">Home</BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator>
-        <DotIcon aria-hidden />
+        <DotIcon aria-hidden="true" />
       </BreadcrumbSeparator>
       <BreadcrumbItem>
         <BreadcrumbLink href="/components">Components</BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator>
-        <DotIcon aria-hidden />
+        <DotIcon aria-hidden="true" />
       </BreadcrumbSeparator>
       <BreadcrumbItem>
         <BreadcrumbPage>Breadcrumb</BreadcrumbPage>

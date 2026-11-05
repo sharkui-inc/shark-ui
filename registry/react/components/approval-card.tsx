@@ -64,11 +64,11 @@ const DEFAULT_ITEMS = [{ name: "approval" }] as const;
 
 export const ApprovalCard = (props: ApprovalCardProps) => {
   const {
-    className,
     items = DEFAULT_ITEMS,
     onApprove,
     onReject,
     onSubmit,
+    className,
     children,
     ...rest
   } = props;
@@ -245,7 +245,7 @@ export const ApprovalCardError = (
 export const ApprovalCardFooter = (
   props: React.ComponentProps<typeof CardFooter>
 ) => {
-  const { children, className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <CardFooter
@@ -311,10 +311,8 @@ export const ApprovalCardSubmit = (
   );
 };
 
-export type ApprovalCardRejectProps = Omit<
-  React.ComponentProps<typeof Button>,
-  "type"
->;
+export interface ApprovalCardRejectProps
+  extends Omit<React.ComponentProps<typeof Button>, "type"> {}
 
 export const ApprovalCardReject = (props: ApprovalCardRejectProps) => {
   const { variant = "ghost", onClick, className, children, ...rest } = props;

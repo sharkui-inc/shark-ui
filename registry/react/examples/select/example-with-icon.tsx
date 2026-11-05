@@ -26,7 +26,7 @@ const Example = () => (
       <SelectContext<Framework>>
         {({ selectedItems }) => {
           const Icon = selectedItems[0]?.icon;
-          return Icon ? <Icon aria-hidden /> : null;
+          return Icon ? <Icon aria-hidden="true" /> : null;
         }}
       </SelectContext>
       <SelectValue placeholder="Select framework" />
@@ -37,7 +37,7 @@ const Example = () => (
 
         return (
           <SelectItem item={item} key={item.value}>
-            <Icon aria-hidden />
+            <Icon aria-hidden="true" />
             {item.label}
           </SelectItem>
         );

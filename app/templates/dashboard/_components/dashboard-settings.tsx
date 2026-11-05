@@ -35,7 +35,7 @@ interface DashboardSettingsProps {
 }
 
 export const DashboardSettings = (props: DashboardSettingsProps) => {
-  const { onOpenChange, open } = props;
+  const { open, onOpenChange } = props;
 
   const [page, setPage] = React.useState<SettingsPage>("general");
   const [lastSaved, setLastSaved] = React.useState("All changes saved");
@@ -90,7 +90,7 @@ export const DashboardSettings = (props: DashboardSettingsProps) => {
                           isActive={page === value}
                           onClick={() => setPage(value)}
                         >
-                          <Icon aria-hidden />
+                          <Icon aria-hidden="true" />
                           <span>{label}</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
@@ -112,7 +112,7 @@ export const DashboardSettings = (props: DashboardSettingsProps) => {
           </SidebarInset>
         </SidebarProvider>
         <DialogFooter className="sm:justify-start">
-          <CheckIcon aria-hidden className="text-primary h-lh w-3.5" />
+          <CheckIcon aria-hidden="true" className="text-primary h-lh w-3.5" />
           <span className="text-muted-foreground text-sm">{lastSaved}</span>
         </DialogFooter>
       </DialogContent>

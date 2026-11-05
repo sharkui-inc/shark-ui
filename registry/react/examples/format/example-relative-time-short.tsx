@@ -14,7 +14,7 @@ const Example = () => (
     {styles.map((style) => (
       <Item key={style} variant="outline">
         <ItemMedia variant="icon">
-          <BellIcon aria-hidden />
+          <BellIcon aria-hidden="true" />
         </ItemMedia>
         <ItemContent>
           <ItemTitle className="capitalize">{style}</ItemTitle>

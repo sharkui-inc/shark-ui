@@ -60,8 +60,8 @@ export const ToggleGroup = (props: ToggleGroupProps) => {
     size = "md",
     spacing = 0,
     pill = false,
-    className,
     style,
+    className,
     children,
     ...rest
   } = props;

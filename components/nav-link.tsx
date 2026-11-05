@@ -13,7 +13,7 @@ interface NavLinkProps extends React.ComponentProps<typeof Link> {
 }
 
 export const NavLink = (props: NavLinkProps) => {
-  const { href, className, prefetch = false, active, ...rest } = props;
+  const { href, prefetch = false, active, className, ...rest } = props;
 
   const pathname = usePathname();
 

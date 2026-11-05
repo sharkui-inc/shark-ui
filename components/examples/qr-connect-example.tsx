@@ -63,7 +63,7 @@ export const QrConnectExample = (props: React.ComponentProps<"div">) => {
         {isLinked ? (
           <Item variant="outline">
             <ItemMedia variant="icon">
-              <LaptopIcon aria-hidden />
+              <LaptopIcon aria-hidden="true" />
             </ItemMedia>
             <ItemContent>
               <ItemTitle>MacBook Pro</ItemTitle>
@@ -99,7 +99,7 @@ export const QrConnectExample = (props: React.ComponentProps<"div">) => {
                         }}
                         size="icon-xs"
                       >
-                        <CopyIcon aria-hidden />
+                        <CopyIcon aria-hidden="true" />
                       </InputGroupButton>
                     </TooltipTrigger>
                     <TooltipContent>Copy code</TooltipContent>
@@ -130,7 +130,7 @@ export const QrConnectExample = (props: React.ComponentProps<"div">) => {
               }}
               variant="outline"
             >
-              <RefreshCwIcon aria-hidden />
+              <RefreshCwIcon aria-hidden="true" />
               Refresh
             </Button>
             <Button

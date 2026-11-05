@@ -30,7 +30,7 @@ const ComboboxInputGroup = () => {
     >
       <ComboboxInput placeholder="Select a timezone">
         <InputGroupAddon align="inline-start">
-          <GlobeIcon aria-hidden />
+          <GlobeIcon aria-hidden="true" />
         </InputGroupAddon>
       </ComboboxInput>
       <ComboboxContent className="min-w-60">

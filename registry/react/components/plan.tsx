@@ -170,10 +170,10 @@ interface PlanProps extends React.ComponentProps<typeof Collapsible> {
 
 export const Plan = (props: PlanProps) => {
   const {
-    children,
-    className,
     defaultOpen = true,
     status = "pending",
+    className,
+    children,
     ...rest
   } = props;
 
@@ -212,7 +212,7 @@ interface PlanHeaderProps
 }
 
 export const PlanHeader = (props: PlanHeaderProps) => {
-  const { title, className, children, description, ...rest } = props;
+  const { title, description, className, children, ...rest } = props;
 
   const { status } = usePlan();
   const hasDescription = !!description;
@@ -228,7 +228,7 @@ export const PlanHeader = (props: PlanHeaderProps) => {
       {...rest}
     >
       <ListChecksIcon
-        aria-hidden
+        aria-hidden="true"
         className={cn(
           "h-lh w-4 shrink-0",
           "self-start",
@@ -292,15 +292,15 @@ interface PlanItemProps extends React.ComponentProps<typeof Collapsible> {
 
 export const PlanItem = (props: PlanItemProps) => {
   const {
-    className,
     collapsible = false,
     defaultOpen,
-    onOpenChange,
     open,
     status = "pending",
+    onOpenChange,
+    className,
     ...rest
   } = props;
-  
+
   const isOpenControlled = open !== undefined;
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(
     () => defaultOpen ?? status === "in-progress"
@@ -458,7 +458,7 @@ export const PlanItemDetail = (props: React.ComponentProps<typeof ark.div>) => {
 export const PlanItemDetailFile = (
   props: React.ComponentProps<typeof Badge>
 ) => {
-  const { variant = "outline", className, style, ...rest } = props;
+  const { variant = "outline", style, className, ...rest } = props;
 
   return (
     <Badge
@@ -493,7 +493,11 @@ const planStatusDescriptions: Record<PlanStatus, string> = {
   pending: "Plan ready",
 };
 
-const PlanHeaderStatus = (props: { status: PlanStatus }) => {
+interface PlanHeaderStatusProps {
+  status: PlanStatus;
+}
+
+const PlanHeaderStatus = (props: PlanHeaderStatusProps) => {
   const { status } = props;
 
   return (
@@ -509,15 +513,17 @@ const PlanHeaderStatus = (props: { status: PlanStatus }) => {
   );
 };
 
-const PlanStatusIcon = (props: {
+interface PlanStatusIconProps {
   className?: string;
   status: PlanItemStatus;
-}) => {
-  const { className, status } = props;
+}
+
+const PlanStatusIcon = (props: PlanStatusIconProps) => {
+  const { status, className } = props;
   if (status === "in-progress") {
     return (
       <Spinner
-        aria-hidden
+        aria-hidden="true"
         className={cn(planStatusIconVariants({ status }), className)}
       />
     );
@@ -533,7 +539,7 @@ const PlanStatusIcon = (props: {
 
   return (
     <Icon
-      aria-hidden
+      aria-hidden="true"
       className={cn(planStatusIconVariants({ status }), className)}
     />
   );

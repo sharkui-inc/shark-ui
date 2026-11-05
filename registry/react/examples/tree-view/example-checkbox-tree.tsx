@@ -72,7 +72,12 @@ const collection = createTreeCollection({
   },
 });
 
-const TreeNode = (props: { node: TreeNodeType; indexPath: number[] }) => {
+interface TreeNodeProps {
+  indexPath: number[];
+  node: TreeNodeType;
+}
+
+const TreeNode = (props: TreeNodeProps) => {
   const { node, indexPath } = props;
 
   return (

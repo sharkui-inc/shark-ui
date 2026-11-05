@@ -90,7 +90,7 @@ const ChartTooltipAdvanced = () => {
                       />
                       {chartConfig[name as keyof typeof chartConfig]?.label ||
                         name}
-                      <div className="text-foreground ml-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums">
+                      <div className="text-foreground ms-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums">
                         {value}
                         <span className="text-muted-foreground font-normal">
                           kcal
@@ -100,7 +100,7 @@ const ChartTooltipAdvanced = () => {
                       {index === 1 && (
                         <div className="text-foreground mt-1.5 flex basis-full items-center border-t pt-1.5 text-xs font-medium">
                           Total
-                          <div className="text-foreground ml-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums">
+                          <div className="text-foreground ms-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums">
                             {item.payload.running + item.payload.swimming}
                             <span className="text-muted-foreground font-normal">
                               kcal

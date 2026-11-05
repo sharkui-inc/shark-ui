@@ -10,7 +10,7 @@ const Example = () => (
     <InputGroupInput
       aria-invalid
       aria-label="Website domain"
-      className="pl-1"
+      className="ps-1"
       placeholder="example.com"
     />
     <InputGroupAddon>

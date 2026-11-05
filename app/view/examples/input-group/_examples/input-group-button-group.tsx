@@ -21,7 +21,7 @@ const InputGroupButtonGroup = () => (
       <InputGroup>
         <InputGroupInput id="url" />
         <InputGroupAddon align="inline-end">
-          <Link2Icon aria-hidden />
+          <Link2Icon aria-hidden="true" />
         </InputGroupAddon>
       </InputGroup>
       <ButtonGroupText>.com</ButtonGroupText>

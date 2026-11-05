@@ -28,7 +28,7 @@ interface MasonryColumnsProps extends React.ComponentProps<"div"> {
 }
 
 export const MasonryColumns = (props: MasonryColumnsProps) => {
-  const { children, className, columnClassName, ...rest } = props;
+  const { columnClassName, className, children, ...rest } = props;
 
   const items = React.Children.toArray(children);
   const columns = COLUMN_IDS.map((columnId) => ({

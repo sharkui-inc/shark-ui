@@ -695,7 +695,7 @@ export interface QuestionnaireItemProps
 }
 
 export const QuestionnaireItem = (props: QuestionnaireItemProps) => {
-  const { children, className, id: providedId, name, ref, ...rest } = props;
+  const { id: providedId, name, ref, className, children, ...rest } = props;
 
   const context = _useQuestionnaire();
   const generatedId = React.useId();
@@ -851,13 +851,13 @@ export interface QuestionnaireChoiceProps
 
 export const QuestionnaireChoice = (props: QuestionnaireChoiceProps) => {
   const {
-    children,
-    className,
     disabled,
-    onClick,
-    onClickCapture,
     shortcut,
     value,
+    onClick,
+    onClickCapture,
+    className,
+    children,
     ...rest
   } = props;
 
@@ -997,7 +997,7 @@ const assignChoiceShortcuts = (
 export const QuestionnaireChoices = (
   props: React.ComponentProps<typeof ark.div>
 ) => {
-  const { children, className, defaultValue: _defaultValue, ...rest } = props;
+  const { defaultValue: _defaultValue, className, children, ...rest } = props;
 
   const { answer, definition, describedBy, invalid, titleId } =
     _useQuestionnaireItem();
@@ -1066,14 +1066,14 @@ export const QuestionnaireChoices = (
 export const QuestionnaireChoiceShortcut = (
   props: Omit<React.ComponentProps<typeof Kbd>, "hidden">
 ) => {
-  const { children, className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   const { shortcut } = useQuestionnaireChoiceContext();
 
   return (
     <Kbd
       {...rest}
-      aria-hidden
+      aria-hidden="true"
       className={cn(
         "z-10",
         "absolute inset-e-3 top-2.5",
@@ -1160,8 +1160,8 @@ export const QuestionnaireProgress = (props: QuestionnaireProgressProps) => {
   const {
     "aria-label": ariaLabel,
     "aria-valuetext": ariaValueText,
-    children,
     className,
+    children,
     ...rest
   } = props;
 
@@ -1229,13 +1229,11 @@ export const QuestionnaireActions = (
   );
 };
 
-type QuestionnaireActionProps = Omit<
-  React.ComponentProps<typeof Button>,
-  "type"
->;
+interface QuestionnaireActionProps
+  extends Omit<React.ComponentProps<typeof Button>, "type"> {}
 
 export const QuestionnairePrevious = (props: QuestionnaireActionProps) => {
-  const { children, className, disabled, onClick, ...rest } = props;
+  const { disabled, onClick, className, children, ...rest } = props;
 
   const { index, navigate } = _useQuestionnaire();
 
@@ -1264,7 +1262,7 @@ export const QuestionnairePrevious = (props: QuestionnaireActionProps) => {
 };
 
 export const QuestionnaireNext = (props: QuestionnaireActionProps) => {
-  const { className, disabled, onClick, children, ...rest } = props;
+  const { disabled, onClick, className, children, ...rest } = props;
 
   const { index, items, next } = _useQuestionnaire();
 
@@ -1293,7 +1291,7 @@ export const QuestionnaireNext = (props: QuestionnaireActionProps) => {
 };
 
 export const QuestionnaireSkip = (props: QuestionnaireActionProps) => {
-  const { className, onClick, children, ...rest } = props;
+  const { onClick, className, children, ...rest } = props;
 
   const { activeItem, index, items, skip } = _useQuestionnaire();
 
@@ -1321,7 +1319,7 @@ export const QuestionnaireSkip = (props: QuestionnaireActionProps) => {
 };
 
 export const QuestionnaireSubmit = (props: QuestionnaireActionProps) => {
-  const { children, className, disabled, ...rest } = props;
+  const { disabled, className, children, ...rest } = props;
 
   const { index, items } = _useQuestionnaire();
 

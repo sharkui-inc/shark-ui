@@ -8,7 +8,10 @@ export const ToggleTooltipThumb = (props: ThumbCardProps) => (
         <div className="bg-muted-foreground/24 h-2 w-3/4 rounded-full" />
       </div>
       <div className="bg-primary flex size-6 items-center justify-center rounded-lg shadow-sm/4">
-        <InfoIcon aria-hidden className="text-primary-foreground size-3" />
+        <InfoIcon
+          aria-hidden="true"
+          className="text-primary-foreground size-3"
+        />
       </div>
     </div>
   </ThumbCard>

@@ -74,7 +74,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
     showDescription = false,
     tree,
   } = props;
-  
+
   const config = useConfig();
   const updateConfig = useUpdateConfig();
 
@@ -224,21 +224,21 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
                   className="data-[state=on]:bg-secondary size-7 px-0"
                   value="desktop"
                 >
-                  <MonitorIcon aria-hidden className="size-4" />
+                  <MonitorIcon aria-hidden="true" className="size-4" />
                 </ToggleGroupItem>
                 <ToggleGroupItem
                   aria-label="Tablet preview"
                   className="data-[state=on]:bg-secondary size-7 px-0"
                   value="tablet"
                 >
-                  <TabletIcon aria-hidden className="size-4" />
+                  <TabletIcon aria-hidden="true" className="size-4" />
                 </ToggleGroupItem>
                 <ToggleGroupItem
                   aria-label="Mobile preview"
                   className="data-[state=on]:bg-secondary size-7 px-0"
                   value="mobile"
                 >
-                  <SmartphoneIcon aria-hidden className="size-4" />
+                  <SmartphoneIcon aria-hidden="true" className="size-4" />
                 </ToggleGroupItem>
               </ToggleGroup>
               <Separator
@@ -251,7 +251,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
                 size="icon-sm"
                 variant="ghost"
               >
-                <RefreshCwIcon aria-hidden />
+                <RefreshCwIcon aria-hidden="true" />
               </Button>
               <Button asChild size="icon-sm" variant="ghost">
                 <a
@@ -260,7 +260,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
                   rel="noreferrer"
                   target="_blank"
                 >
-                  <ArrowUpRightIcon aria-hidden className="size-4" />
+                  <ArrowUpRightIcon aria-hidden="true" className="size-4" />
                 </a>
               </Button>
             </div>
@@ -296,7 +296,7 @@ export const CompositionViewer = (props: CompositionViewerProps) => {
                       </StateHeader>
                       <StateContent>
                         <Button onClick={reload} variant="outline">
-                          <RefreshCwIcon aria-hidden />
+                          <RefreshCwIcon aria-hidden="true" />
                           Retry preview
                         </Button>
                       </StateContent>

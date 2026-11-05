@@ -49,7 +49,7 @@ export const UnsavedChangesExample = (props: React.ComponentProps<"div">) => {
       <CardContent>
         <Item variant="outline">
           <ItemMedia variant="icon">
-            <FileTextIcon aria-hidden />
+            <FileTextIcon aria-hidden="true" />
           </ItemMedia>
           <ItemContent>
             <ItemTitle>Q3 launch notes</ItemTitle>

@@ -59,7 +59,7 @@ const ChangelogPage = () => {
                           target="_blank"
                         >
                           RSS
-                          <RssIcon aria-hidden />
+                          <RssIcon aria-hidden="true" />
                         </Link>
                       </Button>
                     </div>

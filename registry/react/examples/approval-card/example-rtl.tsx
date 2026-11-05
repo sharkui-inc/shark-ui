@@ -53,7 +53,7 @@ const Example = () => {
         shortcuts="letters"
       >
         <ApprovalCardHeader>
-          <MessageCircleQuestionIcon aria-hidden />
+          <MessageCircleQuestionIcon aria-hidden="true" />
           <ApprovalCardTitle>{values.title}</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent>

@@ -43,13 +43,13 @@ interface PasswordInputProps
   /**
    * Icon shown when the password is hidden.
    *
-   * @default `<EyeOffIcon />`
+   * @default `<EyeOffIcon aria-hidden="true" />`
    */
   hiddenIcon?: React.ReactNode;
   /**
    * Icon shown when the password is visible.
    *
-   * @default `<EyeIcon />`
+   * @default `<EyeIcon aria-hidden="true" />`
    */
   visibleIcon?: React.ReactNode;
 }
@@ -59,13 +59,9 @@ export const PasswordInput = (props: PasswordInputProps) => {
     size = "md",
     visibleIcon,
     hiddenIcon,
-    className,
     placeholder,
     value,
     defaultValue,
-    onChange,
-    onBlur,
-    onFocus,
     "aria-label": ariaLabel,
     autoFocus,
     maxLength,
@@ -73,6 +69,10 @@ export const PasswordInput = (props: PasswordInputProps) => {
     pattern,
     inputMode,
     spellCheck,
+    onChange,
+    onBlur,
+    onFocus,
+    className,
     ...rest
   } = props;
 
@@ -118,9 +118,9 @@ export const PasswordInput = (props: PasswordInputProps) => {
               <InputGroupButton size="icon-xs" variant="ghost">
                 <ArkPasswordInput.Indicator
                   data-slot="password-input-indicator"
-                  fallback={hiddenIcon ?? <EyeOffIcon aria-hidden />}
+                  fallback={hiddenIcon ?? <EyeOffIcon aria-hidden="true" />}
                 >
-                  {visibleIcon ?? <EyeIcon aria-hidden />}
+                  {visibleIcon ?? <EyeIcon aria-hidden="true" />}
                 </ArkPasswordInput.Indicator>
               </InputGroupButton>
             </ArkPasswordInput.VisibilityTrigger>

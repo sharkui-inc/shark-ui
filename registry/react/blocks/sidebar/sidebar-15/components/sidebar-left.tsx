@@ -38,7 +38,7 @@ export const SidebarLeft = () => (
       <SidebarMenu>
         <SidebarMenuItem>
           <SidebarMenuButton className="font-semibold" size="lg" tooltip="Onda">
-            <WavesHorizontalIcon aria-hidden />
+            <WavesHorizontalIcon aria-hidden="true" />
             <span>Onda</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
@@ -56,7 +56,7 @@ export const SidebarLeft = () => (
                 tooltip={item.label}
               >
                 <a href="#">
-                  <item.icon aria-hidden />
+                  <item.icon aria-hidden="true" />
                   <span>{item.label}</span>
                 </a>
               </SidebarMenuButton>
@@ -71,7 +71,7 @@ export const SidebarLeft = () => (
             <SidebarMenuItem key={workspace}>
               <SidebarMenuButton asChild>
                 <a href="#">
-                  <FolderKanbanIcon aria-hidden />
+                  <FolderKanbanIcon aria-hidden="true" />
                   <span>{workspace}</span>
                 </a>
               </SidebarMenuButton>
@@ -85,7 +85,7 @@ export const SidebarLeft = () => (
         <SidebarMenuItem>
           <SidebarMenuButton asChild tooltip="Calendar">
             <a href="#">
-              <CalendarDaysIcon aria-hidden />
+              <CalendarDaysIcon aria-hidden="true" />
               <span>Calendar</span>
             </a>
           </SidebarMenuButton>
@@ -93,7 +93,7 @@ export const SidebarLeft = () => (
         <SidebarMenuItem>
           <SidebarMenuButton asChild tooltip="Settings">
             <a href="#">
-              <Settings2Icon aria-hidden />
+              <Settings2Icon aria-hidden="true" />
               <span>Settings</span>
             </a>
           </SidebarMenuButton>

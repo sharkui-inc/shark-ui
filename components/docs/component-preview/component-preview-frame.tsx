@@ -162,7 +162,7 @@ type RTLPreviewContentProps = React.ComponentProps<"div"> & {
 };
 
 export const RTLPreviewProvider = (props: RTLPreviewProviderProps) => {
-  const { children, className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <PreviewLocaleProvider>
@@ -203,7 +203,7 @@ export const RTLPreviewHeader = () => {
       <ToggleTooltip positioning={{ placement: "bottom-end" }}>
         <ToggleTooltipTrigger asChild>
           <Button aria-label={current.a11yLabel} size="icon-sm" variant="ghost">
-            <InfoIcon aria-hidden />
+            <InfoIcon aria-hidden="true" />
           </Button>
         </ToggleTooltipTrigger>
         <ToggleTooltipContent
@@ -248,7 +248,7 @@ export const RTLPreviewContent = (props: RTLPreviewContentProps) => {
 };
 
 const RTLPreviewLocalizedContent = (props: RTLPreviewContentProps) => {
-  const { autoHeight = false, children, className, ...rest } = props;
+  const { autoHeight = false, className, children, ...rest } = props;
 
   const { dir, locale } = useLocale();
 

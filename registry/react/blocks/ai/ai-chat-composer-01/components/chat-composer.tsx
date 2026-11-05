@@ -65,12 +65,12 @@ export const ChatComposer = (props: ChatComposerProps) => {
   const {
     model,
     modelOptions,
+    thinkMode,
     onModelChange,
     onSend,
     onThinkModeChange,
-    thinkMode,
   } = props;
-  
+
   const [draft, setDraft] = React.useState("");
   const [status, setStatus] = React.useState<PromptInputStatus>("ready");
 
@@ -86,11 +86,11 @@ export const ChatComposer = (props: ChatComposerProps) => {
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-3">
       <div className="bg-muted/48 w-full rounded-2xl p-0.5">
         <Announcement className="w-full rounded-t-2xl border-0 bg-transparent px-3 py-2 shadow-none">
-          <CrownIcon aria-hidden className="text-muted-foreground" />
+          <CrownIcon aria-hidden="true" className="text-muted-foreground" />
           <AnnouncementTitle className="text-muted-foreground text-xs">
             Access premium models & features
           </AnnouncementTitle>
-          <span aria-hidden className="text-muted-foreground/64 text-xs">
+          <span aria-hidden="true" className="text-muted-foreground/64 text-xs">
             ·
           </span>
           <Button className="h-auto px-0 text-xs md:h-auto" variant="link">
@@ -122,7 +122,7 @@ export const ChatComposer = (props: ChatComposerProps) => {
               <PromptInputTools>
                 <FileUploadTrigger asChild>
                   <PromptInputButton aria-label="Attach file" size="icon-xs">
-                    <PaperclipIcon aria-hidden />
+                    <PaperclipIcon aria-hidden="true" />
                   </PromptInputButton>
                 </FileUploadTrigger>
                 <Combobox
@@ -168,12 +168,12 @@ export const ChatComposer = (props: ChatComposerProps) => {
                     className="data-[state=on]:bg-accent data-[state=on]:text-accent-foreground"
                     size="xs"
                   >
-                    <BrainIcon aria-hidden />
+                    <BrainIcon aria-hidden="true" />
                     Think
                   </PromptInputButton>
                 </Toggle>
                 <PromptInputButton aria-label="Voice input" size="icon-xs">
-                  <MicIcon aria-hidden />
+                  <MicIcon aria-hidden="true" />
                 </PromptInputButton>
               </PromptInputTools>
               <PromptInputSubmit />
@@ -218,7 +218,7 @@ const ComboboxSearch = () => {
         />
       </ArkCombobox.Input>
       <InputGroupAddon>
-        <SearchIcon aria-hidden className="opacity-64" />
+        <SearchIcon aria-hidden="true" className="opacity-64" />
       </InputGroupAddon>
     </InputGroup>
   );

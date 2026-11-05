@@ -10,7 +10,7 @@ import {
 const Example = () => (
   <Attachment className="max-w-sm" state="idle">
     <AttachmentMedia>
-      <ClockIcon aria-hidden />
+      <ClockIcon aria-hidden="true" />
     </AttachmentMedia>
     <AttachmentContent>
       <AttachmentTitle>invoice.pdf</AttachmentTitle>

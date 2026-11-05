@@ -20,13 +20,15 @@ import { Status } from "@/registry/react/components/status";
 import { type Email, getSenderAvatar } from "../_data/mail";
 import { getInitials } from "../_utils/get-initials";
 
-export const MailListItem = (props: {
+interface MailListItemProps {
   email: Email;
   isSelected: boolean;
   isStarred: boolean;
   onSelect: (emailId: string) => void;
   onToggleFavorite: (emailId: string) => void;
-}) => {
+}
+
+export const MailListItem = (props: MailListItemProps) => {
   const { email, isSelected, isStarred, onSelect, onToggleFavorite } = props;
 
   return (
@@ -77,7 +79,7 @@ export const MailListItem = (props: {
           variant="ghost"
         >
           <StarIcon
-            aria-hidden
+            aria-hidden="true"
             className={
               isStarred ? "text-primary fill-current" : "text-muted-foreground"
             }

@@ -120,7 +120,10 @@ export const StepsIndicator = (
       {...rest}
     >
       <span className="group-data-complete/step:hidden">{children}</span>
-      <CheckIcon className="hidden group-data-complete/step:block" />
+      <CheckIcon
+        aria-hidden="true"
+        className="hidden group-data-complete/step:block"
+      />
     </ArkSteps.Indicator>
   );
 };
@@ -132,7 +135,7 @@ export const StepsSeparator = (
 
   return (
     <ArkSteps.Separator
-      aria-hidden
+      aria-hidden="true"
       className={cn(
         "shrink-0",
         "bg-border rounded-full",

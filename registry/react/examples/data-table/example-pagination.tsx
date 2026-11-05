@@ -118,9 +118,11 @@ interface InventoryItem {
 
 const columnHelper = createColumnHelper<DataTableFeatures, InventoryItem>();
 
-const SelectAllCheckbox = (props: {
+interface SelectAllCheckboxProps {
   table: TanStackTable<DataTableFeatures, InventoryItem>;
-}) => {
+}
+
+const SelectAllCheckbox = (props: SelectAllCheckboxProps) => {
   const { table } = props;
 
   return (
@@ -137,9 +139,11 @@ const SelectAllCheckbox = (props: {
   );
 };
 
-const SelectRowCheckbox = (props: {
+interface SelectRowCheckboxProps {
   row: Row<DataTableFeatures, InventoryItem>;
-}) => {
+}
+
+const SelectRowCheckbox = (props: SelectRowCheckboxProps) => {
   const { row } = props;
 
   return (

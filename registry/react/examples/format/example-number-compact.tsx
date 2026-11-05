@@ -17,7 +17,7 @@ const Example = () => (
       return (
         <Item key={metric.label} variant="outline">
           <ItemMedia variant="icon">
-            <Icon aria-hidden />
+            <Icon aria-hidden="true" />
           </ItemMedia>
           <ItemContent>
             <ItemTitle>{metric.label}</ItemTitle>

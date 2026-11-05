@@ -79,7 +79,7 @@ const Article = () => (
           {item.label}
         </h2>
         <SkeletonText
-          aria-hidden
+          aria-hidden="true"
           className="animate-none **:[div]:h-2"
           lines={item.lines}
         />

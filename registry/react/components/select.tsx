@@ -28,9 +28,9 @@ export const Select: ArkSelect.RootComponent = (props) => {
   const {
     lazyMount = true,
     unmountOnExit = true,
+    scrollToIndexFn,
     className,
     children,
-    scrollToIndexFn,
     ...rest
   } = props;
 
@@ -170,12 +170,12 @@ export const SelectTrigger = (props: SelectTriggerProps) => {
           <div className={cn("flex items-center gap-1", "ms-auto")}>
             {showClear ? (
               <SelectClearTrigger>
-                <XIcon />
+                <XIcon aria-hidden="true" />
               </SelectClearTrigger>
             ) : null}
             {showTrigger ? (
               <ArkSelect.Indicator data-slot="select-indicator">
-                <ChevronsUpDownIcon className="size-4" />
+                <ChevronsUpDownIcon aria-hidden="true" className="size-4" />
               </ArkSelect.Indicator>
             ) : null}
           </div>
@@ -297,7 +297,7 @@ export const SelectItem = (
   props: React.ComponentProps<typeof ArkSelect.Item>
 ) => {
   const { className, children, ...rest } = props;
-  
+
   const { item, indicator } = menuItemIndicatorVariants();
 
   return (
@@ -329,7 +329,7 @@ export const SelectItem = (
         className={indicator()}
         data-slot="select-item-indicator"
       >
-        <CheckIcon />
+        <CheckIcon aria-hidden="true" />
       </ArkSelect.ItemIndicator>
     </ArkSelect.Item>
   );

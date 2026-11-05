@@ -36,7 +36,7 @@ const Example = () => (
                 size="icon-sm"
                 variant="outline"
               >
-                <ZoomOutIcon aria-hidden />
+                <ZoomOutIcon aria-hidden="true" />
               </Button>
               <Button
                 aria-label="Zoom in"
@@ -44,7 +44,7 @@ const Example = () => (
                 size="icon-sm"
                 variant="outline"
               >
-                <ZoomInIcon aria-hidden />
+                <ZoomInIcon aria-hidden="true" />
               </Button>
             </ButtonGroup>
 
@@ -55,7 +55,7 @@ const Example = () => (
                 size="icon-sm"
                 variant="outline"
               >
-                <RotateCcwIcon aria-hidden />
+                <RotateCcwIcon aria-hidden="true" />
               </Button>
               <Button
                 aria-label="Rotate clockwise"
@@ -63,7 +63,7 @@ const Example = () => (
                 size="icon-sm"
                 variant="outline"
               >
-                <RotateCwIcon aria-hidden />
+                <RotateCwIcon aria-hidden="true" />
               </Button>
             </ButtonGroup>
 
@@ -74,7 +74,7 @@ const Example = () => (
                 size="icon-sm"
                 variant="outline"
               >
-                <FlipHorizontalIcon aria-hidden />
+                <FlipHorizontalIcon aria-hidden="true" />
               </Button>
               <Button
                 aria-label="Flip vertically"
@@ -82,12 +82,12 @@ const Example = () => (
                 size="icon-sm"
                 variant="outline"
               >
-                <FlipVerticalIcon aria-hidden />
+                <FlipVerticalIcon aria-hidden="true" />
               </Button>
             </ButtonGroup>
 
             <Button onClick={cropper.reset} size="sm" variant="outline">
-              <Undo2Icon aria-hidden />
+              <Undo2Icon aria-hidden="true" />
               Reset
             </Button>
           </div>

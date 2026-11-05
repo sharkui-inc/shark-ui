@@ -4,12 +4,14 @@ import { HeartIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import type { Track } from "../_data/music";
 
-export const MusicNowPlaying = (props: {
+interface MusicNowPlayingProps {
   isFavorite: boolean;
   onToggleFavorite: () => void;
   track: Track;
-}) => {
-  const { isFavorite, onToggleFavorite, track } = props;
+}
+
+export const MusicNowPlaying = (props: MusicNowPlayingProps) => {
+  const { isFavorite, track, onToggleFavorite } = props;
 
   return (
     <div className="flex min-w-0 items-center gap-3">
@@ -30,7 +32,10 @@ export const MusicNowPlaying = (props: {
         size="icon-sm"
         variant="ghost"
       >
-        <HeartIcon aria-hidden fill={isFavorite ? "currentColor" : "none"} />
+        <HeartIcon
+          aria-hidden="true"
+          fill={isFavorite ? "currentColor" : "none"}
+        />
       </Button>
     </div>
   );

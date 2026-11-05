@@ -11,14 +11,18 @@ import {
   StateTitle,
 } from "@/registry/react/components/state";
 
-export const MailEmpty = (props: { onCompose: () => void }) => {
+interface MailEmptyProps {
+  onCompose: () => void;
+}
+
+export const MailEmpty = (props: MailEmptyProps) => {
   const { onCompose } = props;
 
   return (
     <State className="bg-muted/16 border-0">
       <StateHeader>
         <StateMedia variant="icon">
-          <InboxIcon aria-hidden />
+          <InboxIcon aria-hidden="true" />
         </StateMedia>
         <StateTitle asChild>
           <h2>No email selected</h2>
@@ -29,7 +33,7 @@ export const MailEmpty = (props: { onCompose: () => void }) => {
       </StateHeader>
       <StateContent>
         <Button onClick={onCompose} size="sm" variant="outline">
-          <PenLineIcon aria-hidden />
+          <PenLineIcon aria-hidden="true" />
           New message
         </Button>
       </StateContent>

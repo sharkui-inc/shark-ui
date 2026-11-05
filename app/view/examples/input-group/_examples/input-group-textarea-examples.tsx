@@ -62,7 +62,10 @@ const InputGroupTextareaExamples = () => (
         <InputGroupTextarea />
         <InputGroupAddon align="block-start">
           <InputGroupText>Ask, Search or Chat...</InputGroupText>
-          <InfoIcon aria-hidden className="text-muted-foreground ml-auto" />
+          <InfoIcon
+            aria-hidden="true"
+            className="text-muted-foreground ms-auto"
+          />
         </InputGroupAddon>
       </InputGroup>
       <FieldDescription>
@@ -77,7 +80,7 @@ const InputGroupTextareaExamples = () => (
           <InputGroupText>0/280 characters</InputGroupText>
           <InputGroupButton
             aria-label="Send"
-            className="ml-auto rounded-full"
+            className="ms-auto rounded-full"
             size="icon-xs"
           >
             <ArrowUpIcon />
@@ -93,7 +96,7 @@ const InputGroupTextareaExamples = () => (
           placeholder="Share your thoughts..."
         />
         <InputGroupAddon align="block-end">
-          <InputGroupButton className="ml-auto" size="sm" variant="ghost">
+          <InputGroupButton className="ms-auto" size="sm" variant="ghost">
             Cancel
           </InputGroupButton>
           <InputGroupButton size="sm">Post Comment</InputGroupButton>
@@ -109,12 +112,12 @@ const InputGroupTextareaExamples = () => (
         />
         <InputGroupAddon align="block-start" className="border-b">
           <InputGroupText className="font-mono font-medium">
-            <CodeIcon aria-hidden />
+            <CodeIcon aria-hidden="true" />
             script.js
           </InputGroupText>
           <InputGroupButton
             aria-label="Refresh"
-            className="ml-auto"
+            className="ms-auto"
             size="icon-xs"
           >
             <RefreshCwIcon />
@@ -125,7 +128,7 @@ const InputGroupTextareaExamples = () => (
         </InputGroupAddon>
         <InputGroupAddon align="block-end" className="border-t">
           <InputGroupText>Line 1, Column 1</InputGroupText>
-          <InputGroupText className="ml-auto">JavaScript</InputGroupText>
+          <InputGroupText className="ms-auto">JavaScript</InputGroupText>
         </InputGroupAddon>
       </InputGroup>
     </Field>

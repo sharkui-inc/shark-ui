@@ -13,7 +13,7 @@ const Example = () => (
   <State className="from-muted/48 to-background h-full bg-gradient-to-b from-30%">
     <StateHeader>
       <StateMedia variant="icon">
-        <BellIcon aria-hidden />
+        <BellIcon aria-hidden="true" />
       </StateMedia>
       <StateTitle asChild>
         <h2>No Notifications</h2>
@@ -24,7 +24,7 @@ const Example = () => (
     </StateHeader>
     <StateContent>
       <Button size="sm" variant="outline">
-        <RefreshCcwIcon aria-hidden data-icon="inline-start" />
+        <RefreshCcwIcon aria-hidden="true" data-icon="inline-start" />
         Refresh
       </Button>
     </StateContent>

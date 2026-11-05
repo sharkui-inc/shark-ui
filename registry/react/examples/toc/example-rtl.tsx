@@ -51,7 +51,11 @@ interface TocItemProps {
   value: string;
 }
 
-const Article = (props: { items: TocItemProps[] }) => {
+interface ArticleProps {
+  items: TocItemProps[];
+}
+
+const Article = (props: ArticleProps) => {
   const { items } = props;
 
   return (
@@ -62,7 +66,7 @@ const Article = (props: { items: TocItemProps[] }) => {
             {item.label}
           </h2>
           <SkeletonText
-            aria-hidden
+            aria-hidden="true"
             className="animate-none **:[div]:h-2"
             lines={item.lines}
           />

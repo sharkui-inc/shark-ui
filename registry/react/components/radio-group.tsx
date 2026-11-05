@@ -62,7 +62,7 @@ export const RadioGroupItem = (
           "data-focus-visible:border-ring/64 data-focus-visible:ring-ring/24 data-focus-visible:ring-2",
           "data-[state=checked]:data-focus-visible:border-background",
           "data-invalid:border-destructive data-invalid:text-destructive data-invalid:ring-destructive/24 data-invalid:ring-[3px]",
-          "dark:data-invalid:border-destructive-foreground dark:data-invalid:text-destructive dark:data-invalid:ring-destructive-foreground/24 dark:data-invalid:ring-[3px]",
+          "dark:data-invalid:border-destructive-foreground dark:data-invalid:ring-destructive-foreground/24",
           "data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:before:bg-primary-foreground data-[state=checked]:shadow-none",
           "data-invalid:data-[state=checked]:border-destructive data-invalid:data-[state=checked]:before:bg-destructive-foreground data-invalid:data-[state=checked]:bg-transparent",
           "dark:data-invalid:data-[state=checked]:border-destructive-foreground"

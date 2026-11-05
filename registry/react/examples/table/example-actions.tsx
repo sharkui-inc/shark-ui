@@ -31,7 +31,7 @@ const Example = () => (
       <TableRow>
         <TableHead>Name</TableHead>
         <TableHead>Email</TableHead>
-        <TableHead className="text-right">Actions</TableHead>
+        <TableHead className="text-end">Actions</TableHead>
       </TableRow>
     </TableHeader>
     <TableBody>
@@ -39,7 +39,7 @@ const Example = () => (
         <TableRow key={user.id}>
           <TableCell className="font-medium">{user.name}</TableCell>
           <TableCell>{user.email}</TableCell>
-          <TableCell className="text-right">
+          <TableCell className="text-end">
             <Menu positioning={{ placement: "left-end" }}>
               <MenuTrigger asChild>
                 <Button
@@ -47,7 +47,7 @@ const Example = () => (
                   size="icon-xs"
                   variant="outline"
                 >
-                  <EllipsisVerticalIcon aria-hidden />
+                  <EllipsisVerticalIcon aria-hidden="true" />
                 </Button>
               </MenuTrigger>
               <MenuContent className="min-w-40">

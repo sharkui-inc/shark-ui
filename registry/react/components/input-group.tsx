@@ -134,7 +134,7 @@ interface InputGroupAddonProps
     VariantProps<typeof inputGroupAddonVariants> {}
 
 export const InputGroupAddon = (props: InputGroupAddonProps) => {
-  const { className, align = "inline-start", onMouseDown, ...rest } = props;
+  const { align = "inline-start", onMouseDown, className, ...rest } = props;
 
   return (
     <ark.div
@@ -167,7 +167,7 @@ export const InputGroupAddon = (props: InputGroupAddonProps) => {
 };
 
 export const InputGroupButton = (props: ButtonProps) => {
-  const { className, variant = "ghost", size = "xs", ...rest } = props;
+  const { variant = "ghost", size = "xs", className, ...rest } = props;
 
   return (
     <Button

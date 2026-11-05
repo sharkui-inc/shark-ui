@@ -72,18 +72,18 @@ const EcommerceTemplate = () => (
         </Link>
         <div className="relative max-w-sm flex-1">
           <SearchIcon
-            aria-hidden
-            className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2"
+            aria-hidden="true"
+            className="text-muted-foreground absolute start-3 top-1/2 size-4 -translate-y-1/2"
           />
           <Input
-            className="pl-9"
+            className="ps-9"
             placeholder="Search products..."
             type="search"
           />
         </div>
         <Button asChild size="icon-md" variant="ghost">
           <Link aria-label="Shopping cart" href="#">
-            <ShoppingCartIcon aria-hidden />
+            <ShoppingCartIcon aria-hidden="true" />
           </Link>
         </Button>
       </div>

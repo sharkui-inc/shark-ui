@@ -8,7 +8,7 @@ const ChartTooltipDemo = () => (
         Label
       </div>
       <svg
-        aria-hidden
+        aria-hidden="true"
         className="absolute top-[50px] left-[5px] z-10"
         fill="none"
         height="12"
@@ -42,7 +42,7 @@ const ChartTooltipDemo = () => (
         Name
       </div>
       <svg
-        aria-hidden
+        aria-hidden="true"
         className="absolute top-[10px] left-[85px] z-10 -scale-x-100"
         fill="none"
         height="42"
@@ -93,7 +93,7 @@ const ChartTooltipDemo = () => (
         payload={[{ fill: "var(--chart-1)", name: "Chrome", value: 1286 }]}
       />
       <svg
-        aria-hidden
+        aria-hidden="true"
         className="absolute top-[38px] left-[30px] z-10 rotate-[-40deg]"
         fill="none"
         height="34"
@@ -117,7 +117,7 @@ const ChartTooltipDemo = () => (
   </div>
 );
 
-const TooltipDemo = (props: {
+interface TooltipDemoProps {
   className?: string;
   hideIndicator?: boolean;
   hideLabel?: boolean;
@@ -128,14 +128,16 @@ const TooltipDemo = (props: {
     name: string;
     value: number;
   }[];
-}) => {
+}
+
+const TooltipDemo = (props: TooltipDemoProps) => {
   const {
-    className,
     hideLabel,
     indicator = "dot",
     label,
     payload,
     hideIndicator,
+    className,
   } = props;
   if (!payload.length) {
     return null;

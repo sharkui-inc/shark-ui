@@ -48,7 +48,7 @@ export const BookAppointmentExample = (props: React.ComponentProps<"div">) => {
   return (
     <Card data-slot="example-book-appointment" {...props}>
       <CardHeader className="flex flex-row items-center gap-3">
-        <IconTile aria-hidden size="lg">
+        <IconTile aria-hidden="true" size="lg">
           <CalendarDaysIcon />
         </IconTile>
         <div className="flex min-w-0 flex-col gap-0.5">
@@ -124,7 +124,7 @@ export const BookAppointmentExample = (props: React.ComponentProps<"div">) => {
             setIsBooked(true);
           }}
         >
-          <CalendarCheckIcon aria-hidden />
+          <CalendarCheckIcon aria-hidden="true" />
           {isBooked ? "Booked" : "Confirm"}
         </Button>
       </CardFooter>

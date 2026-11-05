@@ -46,7 +46,7 @@ const Example = () => (
     </StateHeader>
     <StateContent>
       <Button size="sm">
-        <PlusIcon aria-hidden data-icon="inline-start" />
+        <PlusIcon aria-hidden="true" data-icon="inline-start" />
         Invite Members
       </Button>
     </StateContent>

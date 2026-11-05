@@ -22,17 +22,17 @@ interface MailToolbarButtonProps {
 
 export const MailToolbarButton = (props: MailToolbarButtonProps) => {
   const {
-    children,
     form,
     label,
-    onClick,
     pressed,
     size = "icon-sm",
     tooltip = true,
     type = "button",
     variant,
+    onClick,
+    children,
   } = props;
-  
+
   const button = (
     <Button
       aria-label={label}

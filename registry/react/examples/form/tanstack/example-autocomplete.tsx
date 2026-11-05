@@ -127,8 +127,6 @@ const initialItems = [
   { label: "Rust", value: "rust" },
 ];
 
-export default Example;
-
 const formSchema = z.object({
   stack: z
     .array(z.string())
@@ -138,3 +136,5 @@ const formSchema = z.object({
       "Pick a suggestion or type your primary technology."
     ),
 });
+
+export default Example;

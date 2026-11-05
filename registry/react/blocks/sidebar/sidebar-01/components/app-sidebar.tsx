@@ -48,7 +48,7 @@ export const AppSidebar = () => (
       <SidebarMenu>
         <SidebarMenuItem>
           <SidebarMenuButton className="font-semibold" size="lg">
-            <IconTile aria-hidden size="sm">
+            <IconTile aria-hidden="true" size="sm">
               S
             </IconTile>
             <span>Onda</span>
@@ -74,7 +74,7 @@ export const AppSidebar = () => (
                     isActive={item.label === "Introduction"}
                   >
                     <a href="#">
-                      <item.icon aria-hidden />
+                      <item.icon aria-hidden="true" />
                       <span>{item.label}</span>
                     </a>
                   </SidebarMenuButton>
@@ -90,7 +90,7 @@ export const AppSidebar = () => (
         <SidebarMenuItem>
           <SidebarMenuButton asChild>
             <a href="#">
-              <LifeBuoyIcon aria-hidden />
+              <LifeBuoyIcon aria-hidden="true" />
               <span>Support</span>
             </a>
           </SidebarMenuButton>

@@ -151,7 +151,7 @@ export const AvatarBadge = (props: AvatarBadgeProps) => {
 };
 
 export const AvatarGroup = (props: React.ComponentProps<typeof ark.div>) => {
-  const { className, style, ...rest } = props;
+  const { style, className, ...rest } = props;
 
   return (
     <ark.div

@@ -22,7 +22,7 @@ const TooltipDemo = () => (
           size="icon-md"
           variant="outline"
         >
-          <BoldIcon aria-hidden />
+          <BoldIcon aria-hidden="true" />
         </Button>
       </TooltipTrigger>
       <TooltipContent>Bold</TooltipContent>
@@ -36,7 +36,7 @@ const TooltipDemo = () => (
           size="icon-md"
           variant="outline"
         >
-          <ItalicIcon aria-hidden />
+          <ItalicIcon aria-hidden="true" />
         </Button>
       </TooltipTrigger>
       <TooltipContent>Italic</TooltipContent>
@@ -50,7 +50,7 @@ const TooltipDemo = () => (
           size="icon-md"
           variant="outline"
         >
-          <UnderlineIcon aria-hidden />
+          <UnderlineIcon aria-hidden="true" />
         </Button>
       </TooltipTrigger>
       <TooltipContent>Underline</TooltipContent>
@@ -64,7 +64,7 @@ const TooltipDemo = () => (
           size="icon-md"
           variant="outline"
         >
-          <StrikethroughIcon aria-hidden />
+          <StrikethroughIcon aria-hidden="true" />
         </Button>
       </TooltipTrigger>
       <TooltipContent>Strikethrough</TooltipContent>

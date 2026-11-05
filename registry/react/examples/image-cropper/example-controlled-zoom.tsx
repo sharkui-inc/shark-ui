@@ -28,7 +28,7 @@ const Example = () => {
           size="icon-sm"
           variant="outline"
         >
-          <ZoomOutIcon aria-hidden />
+          <ZoomOutIcon aria-hidden="true" />
         </Button>
         <Button
           aria-label="Zoom in"
@@ -36,7 +36,7 @@ const Example = () => {
           size="icon-sm"
           variant="outline"
         >
-          <ZoomInIcon aria-hidden />
+          <ZoomInIcon aria-hidden="true" />
         </Button>
       </div>
     </div>

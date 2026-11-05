@@ -41,9 +41,9 @@ export const InputOTP = (props: InputOTPProps) => {
     size = "md",
     placeholder,
     otp = true,
+    tabIndex,
     className,
     children,
-    tabIndex,
     ...rest
   } = props;
 

@@ -69,7 +69,7 @@ const Example = () => {
         value={value}
       >
         <ApprovalCardHeader>
-          <ListChecksIcon aria-hidden />
+          <ListChecksIcon aria-hidden="true" />
           <ApprovalCardTitle>Ready to implement?</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent>

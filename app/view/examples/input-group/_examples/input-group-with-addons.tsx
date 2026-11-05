@@ -31,7 +31,7 @@ const InputGroupWithAddons = () => (
       <InputGroup>
         <InputGroupInput />
         <InputGroupAddon>
-          <SearchIcon aria-hidden />
+          <SearchIcon aria-hidden="true" />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -40,7 +40,7 @@ const InputGroupWithAddons = () => (
       <InputGroup>
         <InputGroupInput />
         <InputGroupAddon align="inline-end">
-          <EyeOffIcon aria-hidden />
+          <EyeOffIcon aria-hidden="true" />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -49,10 +49,13 @@ const InputGroupWithAddons = () => (
       <InputGroup>
         <InputGroupInput />
         <InputGroupAddon>
-          <MicIcon aria-hidden />
+          <MicIcon aria-hidden="true" />
         </InputGroupAddon>
         <InputGroupAddon align="inline-end">
-          <RadioIcon aria-hidden className="text-destructive animate-pulse" />
+          <RadioIcon
+            aria-hidden="true"
+            className="text-destructive animate-pulse"
+          />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -62,7 +65,10 @@ const InputGroupWithAddons = () => (
         <InputGroupInput />
         <InputGroupAddon align="block-start">
           <InputGroupText>First Name</InputGroupText>
-          <InfoIcon aria-hidden className="text-muted-foreground ml-auto" />
+          <InfoIcon
+            aria-hidden="true"
+            className="text-muted-foreground ms-auto"
+          />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -72,7 +78,10 @@ const InputGroupWithAddons = () => (
         <InputGroupInput />
         <InputGroupAddon align="block-end">
           <InputGroupText>20/240 characters</InputGroupText>
-          <InfoIcon aria-hidden className="text-muted-foreground ml-auto" />
+          <InfoIcon
+            aria-hidden="true"
+            className="text-muted-foreground ms-auto"
+          />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -81,7 +90,7 @@ const InputGroupWithAddons = () => (
       <InputGroup>
         <InputGroupInput />
         <InputGroupAddon align="inline-end">
-          <StarIcon aria-hidden />
+          <StarIcon aria-hidden="true" />
           <InputGroupButton
             aria-label="Copy to clipboard"
             onClick={() => toast.create({ title: "Copied to clipboard" })}
@@ -91,7 +100,10 @@ const InputGroupWithAddons = () => (
           </InputGroupButton>
         </InputGroupAddon>
         <InputGroupAddon>
-          <RadioIcon aria-hidden className="text-destructive animate-pulse" />
+          <RadioIcon
+            aria-hidden="true"
+            className="text-destructive animate-pulse"
+          />
         </InputGroupAddon>
       </InputGroup>
     </Field>
@@ -100,7 +112,7 @@ const InputGroupWithAddons = () => (
       <InputGroup>
         <InputGroupInput />
         <InputGroupAddon align="inline-end">
-          <InfoIcon aria-hidden />
+          <InfoIcon aria-hidden="true" />
         </InputGroupAddon>
       </InputGroup>
       <FieldDescription>

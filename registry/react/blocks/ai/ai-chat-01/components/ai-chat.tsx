@@ -249,22 +249,22 @@ const accessCollection = createListCollection({
 
 const promptActions = [
   {
-    icon: <PaperclipIcon aria-hidden />,
+    icon: <PaperclipIcon aria-hidden="true" />,
     label: "Attach files and folders",
     value: "files",
   },
   {
-    icon: <ImagePlusIcon aria-hidden />,
+    icon: <ImagePlusIcon aria-hidden="true" />,
     label: "Add image or screenshot",
     value: "screenshot",
   },
   {
-    icon: <GlobeIcon aria-hidden />,
+    icon: <GlobeIcon aria-hidden="true" />,
     label: "Add web page",
     value: "web-page",
   },
   {
-    icon: <FileTextIcon aria-hidden />,
+    icon: <FileTextIcon aria-hidden="true" />,
     label: "Add project instructions",
     value: "instructions",
   },
@@ -272,32 +272,34 @@ const promptActions = [
 
 const emptyStateSuggestions = [
   {
-    icon: <CodeXmlIcon aria-hidden className="size-4" />,
+    icon: <CodeXmlIcon aria-hidden="true" className="size-4" />,
     label: "Understand",
     text: "Help me understand the structure of this project.",
   },
   {
-    icon: <HammerIcon aria-hidden className="size-4" />,
+    icon: <HammerIcon aria-hidden="true" className="size-4" />,
     label: "Build",
     text: "Help me plan a new feature for this project.",
   },
   {
-    icon: <RefreshCwIcon aria-hidden className="size-4" />,
+    icon: <RefreshCwIcon aria-hidden="true" className="size-4" />,
     label: "Review",
     text: "Review this project and suggest the most valuable improvements.",
   },
   {
-    icon: <BugIcon aria-hidden className="size-4" />,
+    icon: <BugIcon aria-hidden="true" className="size-4" />,
     label: "Fix",
     text: "Help me diagnose and fix an issue in this project.",
   },
 ] as const;
 
-const FollowLatestMessage = (props: {
+interface FollowLatestMessageProps {
   enabled: boolean;
   messageCount: number;
   streamedText: string;
-}) => {
+}
+
+const FollowLatestMessage = (props: FollowLatestMessageProps) => {
   const { enabled, messageCount, streamedText } = props;
 
   const previousMessageCount = React.useRef(messageCount);
@@ -333,16 +335,18 @@ const toPromptStatus = (status: string): PromptInputStatus => {
   }
 };
 
-const EmptyConversation = (props: {
+interface EmptyConversationProps {
   onSuggestion: (text: string) => void;
   welcomeTitle: string;
-}) => {
-  const { onSuggestion, welcomeTitle } = props;
+}
+
+const EmptyConversation = (props: EmptyConversationProps) => {
+  const { welcomeTitle, onSuggestion } = props;
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-3xl flex-col items-center justify-center px-4 py-10 text-center sm:px-6">
-      <IconTile aria-hidden size="lg">
-        <WavesHorizontalIcon aria-hidden />
+      <IconTile aria-hidden="true" size="lg">
+        <WavesHorizontalIcon aria-hidden="true" />
       </IconTile>
       <h2 className="mt-7 max-w-3xl text-2xl font-medium tracking-tight text-balance">
         {welcomeTitle}
@@ -381,19 +385,23 @@ const AssistantActions = () => (
   <MessageFooter>
     <MessageActions>
       <MessageAction>
-        <CopyIcon aria-hidden />
+        <CopyIcon aria-hidden="true" />
       </MessageAction>
       <MessageAction>
-        <ThumbsUpIcon aria-hidden />
+        <ThumbsUpIcon aria-hidden="true" />
       </MessageAction>
       <MessageAction>
-        <ThumbsDownIcon aria-hidden />
+        <ThumbsDownIcon aria-hidden="true" />
       </MessageAction>
     </MessageActions>
   </MessageFooter>
 );
 
-const MessageExtras = (props: { extras: DemoMessageExtras }) => {
+interface MessageExtrasProps {
+  extras: DemoMessageExtras;
+}
+
+const MessageExtras = (props: MessageExtrasProps) => {
   const { extras } = props;
 
   const added = extras.diff?.lines.filter((line) => line.type === "add").length;
@@ -513,7 +521,7 @@ const MessageExtras = (props: { extras: DemoMessageExtras }) => {
       {extras.attachment ? (
         <Attachment size="sm">
           <AttachmentMedia>
-            <FileTextIcon aria-hidden />
+            <FileTextIcon aria-hidden="true" />
           </AttachmentMedia>
           <AttachmentContent>
             <AttachmentTitle>{extras.attachment.name}</AttachmentTitle>
@@ -536,7 +544,7 @@ interface ChatMessageItemProps {
 
 const ChatMessageItem = (props: ChatMessageItemProps) => {
   const { assistantName, extras, isStreaming = false, message } = props;
- 
+
   const isUser = message.role === "user";
   const text = message.content;
   const firstSource = extras?.sources?.[0];
@@ -548,7 +556,7 @@ const ChatMessageItem = (props: ChatMessageItemProps) => {
           <MessageAvatar>
             <Avatar size="sm">
               <AvatarFallback>
-                <BotIcon aria-hidden className="size-4" />
+                <BotIcon aria-hidden="true" className="size-4" />
               </AvatarFallback>
             </Avatar>
           </MessageAvatar>
@@ -558,7 +566,7 @@ const ChatMessageItem = (props: ChatMessageItemProps) => {
           {isUser || !isStreaming ? null : (
             <Marker className="bg-muted w-fit rounded-lg px-3 py-2">
               <MarkerIcon>
-                <BotIcon aria-hidden />
+                <BotIcon aria-hidden="true" />
               </MarkerIcon>
               <MarkerContent className="shimmer">Thinking</MarkerContent>
             </Marker>
@@ -600,10 +608,10 @@ interface ChatSessionProps {
 const ChatSession = (props: ChatSessionProps) => {
   const {
     assistantName,
-    className,
     headerAction,
     showDemoArtifacts,
     welcomeTitle,
+    className,
   } = props;
 
   const [model, setModel] = React.useState<string[]>([MODEL_OPTIONS[0].value]);
@@ -709,7 +717,7 @@ const ChatSession = (props: ChatSessionProps) => {
                       <QueueItemContent>{turn.label}</QueueItemContent>
                       <QueueItemActions>
                         <QueueItemAction aria-label={`Remove ${turn.label}`}>
-                          <Trash2Icon aria-hidden />
+                          <Trash2Icon aria-hidden="true" />
                         </QueueItemAction>
                       </QueueItemActions>
                     </QueueItem>
@@ -741,7 +749,7 @@ const ChatSession = (props: ChatSessionProps) => {
               <Menu positioning={{ placement: "top-start" }}>
                 <MenuTrigger asChild>
                   <PromptInputButton aria-label="Add to prompt" size="icon-sm">
-                    <PlusIcon aria-hidden />
+                    <PlusIcon aria-hidden="true" />
                   </PromptInputButton>
                 </MenuTrigger>
                 <MenuContent className="min-w-52">
@@ -760,7 +768,7 @@ const ChatSession = (props: ChatSessionProps) => {
                 value={access}
               >
                 <SelectTrigger showTrigger={false} size="sm" variant="ghost">
-                  <ShieldAlertIcon aria-hidden />
+                  <ShieldAlertIcon aria-hidden="true" />
                   <SelectValue placeholder="Full access" />
                 </SelectTrigger>
                 <SelectContent>
@@ -817,7 +825,7 @@ const ChatSession = (props: ChatSessionProps) => {
               </SelectContent>
             </Select>
             <PromptInputButton aria-label="Voice input" size="icon-sm">
-              <MicIcon aria-hidden />
+              <MicIcon aria-hidden="true" />
             </PromptInputButton>
             <PromptInputSubmit className="ms-2" size="icon-sm" />
           </PromptInputFooter>
@@ -827,7 +835,7 @@ const ChatSession = (props: ChatSessionProps) => {
               size="sm"
               variant="ghost"
             >
-              <FolderIcon aria-hidden />
+              <FolderIcon aria-hidden="true" />
               shark-ui
             </Button>
             <Button
@@ -835,7 +843,7 @@ const ChatSession = (props: ChatSessionProps) => {
               size="sm"
               variant="ghost"
             >
-              <MonitorIcon aria-hidden />
+              <MonitorIcon aria-hidden="true" />
               Local
             </Button>
             <Button
@@ -843,7 +851,7 @@ const ChatSession = (props: ChatSessionProps) => {
               size="sm"
               variant="ghost"
             >
-              <GitBranchIcon aria-hidden />
+              <GitBranchIcon aria-hidden="true" />
               main
             </Button>
             <div className="ms-auto">
@@ -884,13 +892,13 @@ const ChatSession = (props: ChatSessionProps) => {
 export const AiChat = (props: AiChatProps) => {
   const {
     assistantName = "Onda Assistant",
-    className,
     headerAction,
     rightSidebar,
     showDemoArtifacts = true,
     welcomeTitle = "What should we build in shark-ui?",
+    className,
   } = props;
-  
+
   const [session, setSession] = React.useState(0);
 
   const sessionContent = (

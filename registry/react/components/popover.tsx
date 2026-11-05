@@ -118,7 +118,7 @@ export const PopoverContent = (props: PopoverContentProps) => {
                 size="icon-sm"
                 variant="ghost"
               >
-                <XIcon />
+                <XIcon aria-hidden="true" />
               </Button>
             </PopoverClose>
           )}
@@ -142,7 +142,7 @@ interface PopoverHeaderProps extends React.ComponentProps<typeof ark.div> {
 }
 
 export const PopoverHeader = (props: PopoverHeaderProps) => {
-  const { title, description, children, className, ...rest } = props;
+  const { title, description, className, children, ...rest } = props;
 
   return (
     <ark.div

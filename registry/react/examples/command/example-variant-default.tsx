@@ -30,12 +30,20 @@ const Example = () => {
     initialItems,
   });
 
-  const onOpenChange = (props: { open: boolean }) => {
+  interface onOpenChangeProps {
+    open: boolean;
+  }
+
+  const onOpenChange = (props: onOpenChangeProps) => {
     const { open: nextOpen } = props;
     setOpen(nextOpen);
   };
 
-  const onInputValueChange = (props: { inputValue: string }) => {
+  interface onInputValueChangeProps {
+    inputValue: string;
+  }
+
+  const onInputValueChange = (props: onInputValueChangeProps) => {
     const { inputValue } = props;
     filter(inputValue);
   };

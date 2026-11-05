@@ -198,7 +198,7 @@ interface TeamSwitcherProps {
 
 const TeamSwitcher = (props: TeamSwitcherProps) => {
   const { teams } = props;
-  
+
   const [activeTeam, setActiveTeam] = React.useState(teams[0]);
 
   if (!activeTeam) {
@@ -218,10 +218,10 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               size="lg"
             >
-              <IconTile aria-hidden size="md">
+              <IconTile aria-hidden="true" size="md">
                 <activeTeam.logo className="size-4" />
               </IconTile>
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              <div className="grid flex-1 text-start text-sm leading-tight">
                 <span className="truncate font-medium">{activeTeam.name}</span>
                 <span className="truncate text-xs">{activeTeam.plan}</span>
               </div>
@@ -240,7 +240,7 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
                   onClick={() => setActiveTeam(team)}
                   value={team.name}
                 >
-                  <IconTile aria-hidden size="xs" variant="secondary">
+                  <IconTile aria-hidden="true" size="xs" variant="secondary">
                     <team.logo className="size-3.5 shrink-0" />
                   </IconTile>
                   {team.name}
@@ -251,7 +251,7 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
             <MenuSeparator />
             <MenuGroup>
               <MenuItem className="gap-2" value="add-team">
-                <IconTile aria-hidden size="xs">
+                <IconTile aria-hidden="true" size="xs">
                   <PlusIcon className="size-4" />
                 </IconTile>
                 <div className="text-muted-foreground font-medium">
@@ -413,7 +413,7 @@ const NavUser = (props: NavUserProps) => {
                 <AvatarImage alt={user.name} src={user.avatar} />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              <div className="grid flex-1 text-start text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
                 <span className="truncate text-xs">{user.email}</span>
               </div>
@@ -423,12 +423,12 @@ const NavUser = (props: NavUserProps) => {
           <MenuContent className="w-full sm:w-64">
             <MenuGroup>
               <MenuGroupLabel className="p-0 font-normal">
-                <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                <div className="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
                   <Avatar className="size-8 rounded-lg">
                     <AvatarImage alt={user.name} src={user.avatar} />
                     <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                   </Avatar>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
+                  <div className="grid flex-1 text-start text-sm leading-tight">
                     <span className="truncate font-medium">{user.name}</span>
                     <span className="truncate text-xs">{user.email}</span>
                   </div>

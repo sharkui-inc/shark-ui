@@ -117,7 +117,7 @@ const DataTableRtl = () => {
           <MenuTrigger asChild>
             <Button className="ms-auto" variant="outline">
               {t.columns}
-              <ChevronDownIcon aria-hidden data-icon="inline-end" />
+              <ChevronDownIcon aria-hidden="true" data-icon="inline-end" />
             </Button>
           </MenuTrigger>
           <MenuContent>
@@ -257,9 +257,11 @@ const data: Payment[] = [
   },
 ];
 
-const SelectAllCheckbox = (props: {
+interface SelectAllCheckboxProps {
   table: TanStackTable<typeof features, Payment>;
-}) => {
+}
+
+const SelectAllCheckbox = (props: SelectAllCheckboxProps) => {
   const { table } = props;
 
   return (
@@ -276,7 +278,11 @@ const SelectAllCheckbox = (props: {
   );
 };
 
-const SelectRowCheckbox = (props: { row: Row<typeof features, Payment> }) => {
+interface SelectRowCheckboxProps {
+  row: Row<typeof features, Payment>;
+}
+
+const SelectRowCheckbox = (props: SelectRowCheckboxProps) => {
   const { row } = props;
 
   return (
@@ -290,14 +296,20 @@ const SelectRowCheckbox = (props: { row: Row<typeof features, Payment> }) => {
   );
 };
 
-const StatusCell = (props: { status: Payment["status"] }) => {
+interface StatusCellProps {
+  status: Payment["status"];
+}
+
+const StatusCell = (props: StatusCellProps) => {
   const { status } = props;
   return <div className="capitalize">{t.statuses[status]}</div>;
 };
 
-const EmailSortHeader = (props: {
+interface EmailSortHeaderProps {
   column: Column<typeof features, Payment, string>;
-}) => {
+}
+
+const EmailSortHeader = (props: EmailSortHeaderProps) => {
   const { column } = props;
 
   return (
@@ -306,19 +318,23 @@ const EmailSortHeader = (props: {
       variant="ghost"
     >
       {t.email}
-      <ArrowUpDownIcon aria-hidden data-icon="inline-end" />
+      <ArrowUpDownIcon aria-hidden="true" data-icon="inline-end" />
     </Button>
   );
 };
 
-const PaymentActions = (props: { payment: Payment }) => {
+interface PaymentActionsProps {
+  payment: Payment;
+}
+
+const PaymentActions = (props: PaymentActionsProps) => {
   const { payment } = props;
 
   return (
     <Menu>
       <MenuTrigger asChild>
         <Button aria-label={t.openMenu} size="icon-md" variant="ghost">
-          <MoreHorizontalIcon aria-hidden />
+          <MoreHorizontalIcon aria-hidden="true" />
         </Button>
       </MenuTrigger>
       <MenuContent className="min-w-44">
@@ -342,9 +358,11 @@ const PaymentActions = (props: { payment: Payment }) => {
   );
 };
 
-const ColumnVisibilityItem = (props: {
+interface ColumnVisibilityItemProps {
   column: Column<typeof features, Payment, unknown>;
-}) => {
+}
+
+const ColumnVisibilityItem = (props: ColumnVisibilityItemProps) => {
   const { column } = props;
 
   return (

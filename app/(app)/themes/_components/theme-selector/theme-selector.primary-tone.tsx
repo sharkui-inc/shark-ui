@@ -82,7 +82,7 @@ export const ThemeSelectorPrimaryTone = () => {
             >
               <SegmentGroupItemText className="absolute inset-0 z-1 flex items-center justify-center">
                 <CircleIcon
-                  aria-hidden
+                  aria-hidden="true"
                   className={cn(
                     "size-4",
                     tone.value === "dark" && "fill-current"

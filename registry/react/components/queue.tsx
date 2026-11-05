@@ -206,10 +206,10 @@ export const QueueItemActions = (
 
 export const QueueItemAction = (props: React.ComponentProps<typeof Button>) => {
   const {
-    className,
     size = "icon-xs",
     type = "button",
     variant = "ghost",
+    className,
     ...rest
   } = props;
 

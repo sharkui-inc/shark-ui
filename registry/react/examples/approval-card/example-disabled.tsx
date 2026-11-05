@@ -52,7 +52,7 @@ const Example = () => {
         onSubmit={handleSubmit}
       >
         <ApprovalCardHeader>
-          <CircleOffIcon aria-hidden />
+          <CircleOffIcon aria-hidden="true" />
           <ApprovalCardTitle>Choose a workspace</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent>

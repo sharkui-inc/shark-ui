@@ -119,7 +119,7 @@ const positionItems = (
 };
 
 export const Masonry = (props: MasonryProps) => {
-  const { className, reflow = "stable", ref, ...rest } = props;
+  const { reflow = "stable", ref, className, ...rest } = props;
 
   const masonryRef = React.useRef<HTMLUListElement | null>(null);
 

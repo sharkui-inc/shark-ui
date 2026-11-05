@@ -31,7 +31,7 @@ const InputGroupBlockEnd = () => (
         <InputGroupTextarea placeholder="Write a comment..." />
         <InputGroupAddon align="block-end">
           <InputGroupText>0/280</InputGroupText>
-          <InputGroupButton className="ml-auto" size="sm" variant="ghost">
+          <InputGroupButton className="ms-auto" size="sm" variant="ghost">
             Post
           </InputGroupButton>
         </InputGroupAddon>

@@ -67,7 +67,7 @@ const Example = () => {
         shortcuts="numbers"
       >
         <ApprovalCardHeader>
-          <GlobeIcon aria-hidden />
+          <GlobeIcon aria-hidden="true" />
           <ApprovalCardTitle>
             Allow access to the package registry?
           </ApprovalCardTitle>

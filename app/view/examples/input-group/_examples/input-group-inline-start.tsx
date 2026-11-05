@@ -16,7 +16,7 @@ const InputGroupInlineStart = () => (
     <InputGroup>
       <InputGroupInput placeholder="Search..." />
       <InputGroupAddon align="inline-start">
-        <SearchIcon aria-hidden />
+        <SearchIcon aria-hidden="true" />
       </InputGroupAddon>
     </InputGroup>
     <FieldDescription>Icon positioned at the start.</FieldDescription>

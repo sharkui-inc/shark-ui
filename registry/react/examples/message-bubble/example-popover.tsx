@@ -27,7 +27,7 @@ const Example = () => (
               size="icon-xs"
               variant="ghost"
             >
-              <InfoIcon aria-hidden />
+              <InfoIcon aria-hidden="true" />
             </Button>
           </ToggleTooltipTrigger>
           <ToggleTooltipContent className="max-w-64">

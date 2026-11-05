@@ -48,7 +48,12 @@ const questionnaireSchema = z
 type QuestionnaireItemName = keyof z.infer<typeof questionnaireSchema>;
 type QuestionnaireErrors = Partial<Record<QuestionnaireItemName, string>>;
 
-const ValidationProgress = (props: { index: number; total: number }) => {
+interface ValidationProgressProps {
+  index: number;
+  total: number;
+}
+
+const ValidationProgress = (props: ValidationProgressProps) => {
   const { index, total } = props;
 
   return (

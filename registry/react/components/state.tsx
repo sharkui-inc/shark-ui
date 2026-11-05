@@ -70,7 +70,7 @@ interface StateMediaProps
     VariantProps<typeof stateMediaVariants> {}
 
 export const StateMedia = (props: StateMediaProps) => {
-  const { className, variant = "default", ...rest } = props;
+  const { variant = "default", className, ...rest } = props;
 
   return (
     <ark.div

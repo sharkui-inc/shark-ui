@@ -79,7 +79,7 @@ export const ComponentResizer = (props: ComponentResizerProps) => {
               className="size-7 px-0"
               value="desktop"
             >
-              <ComputerIcon aria-hidden />
+              <ComputerIcon aria-hidden="true" />
             </ToggleGroupItem>
 
             <ToggleGroupItem
@@ -87,7 +87,7 @@ export const ComponentResizer = (props: ComponentResizerProps) => {
               className="size-7 px-0"
               value="tablet"
             >
-              <TabletIcon aria-hidden />
+              <TabletIcon aria-hidden="true" />
             </ToggleGroupItem>
 
             <ToggleGroupItem
@@ -95,7 +95,7 @@ export const ComponentResizer = (props: ComponentResizerProps) => {
               className="size-7 px-0"
               value="mobile"
             >
-              <PhoneIcon aria-hidden />
+              <PhoneIcon aria-hidden="true" />
             </ToggleGroupItem>
           </ToggleGroup>
 
@@ -107,7 +107,7 @@ export const ComponentResizer = (props: ComponentResizerProps) => {
               variant="outline"
             >
               <Link href={url} target="_blank">
-                <FullscreenIcon aria-hidden />
+                <FullscreenIcon aria-hidden="true" />
               </Link>
             </Button>
 

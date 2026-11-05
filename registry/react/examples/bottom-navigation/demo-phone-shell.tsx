@@ -6,7 +6,7 @@ interface DemoPhoneShellProps extends React.ComponentProps<"div"> {
 }
 
 export const DemoPhoneShell = (props: DemoPhoneShellProps) => {
-  const { children, className } = props;
+  const { className, children } = props;
 
   return (
     <div

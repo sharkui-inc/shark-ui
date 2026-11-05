@@ -137,7 +137,7 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
                       size="icon-sm"
                       variant="ghost"
                     >
-                      <InfoIcon aria-hidden />
+                      <InfoIcon aria-hidden="true" />
                     </Button>
                   </DialogTrigger>
                 </span>
@@ -209,7 +209,7 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
                 disabled={isTyping}
                 type="submit"
               >
-                <ArrowUpIcon aria-hidden />
+                <ArrowUpIcon aria-hidden="true" />
               </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>
@@ -219,9 +219,13 @@ export const ChatCardExample = (props: React.ComponentProps<"div">) => {
   );
 };
 
-const FollowThread = (props: { threadSize: number }) => {
+interface FollowThreadProps {
+  threadSize: number;
+}
+
+const FollowThread = (props: FollowThreadProps) => {
   const { threadSize } = props;
-  
+
   const { scrollToEdge } = useScrollAreaContext();
 
   const followThread = React.useEffectEvent((size: number) => {

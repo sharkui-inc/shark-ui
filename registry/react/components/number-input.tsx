@@ -108,7 +108,7 @@ export const NumberInputDecrement = (
         )}
         variant="ghost"
       >
-        <MinusIcon aria-hidden />
+        <MinusIcon aria-hidden="true" />
       </Button>
     </ArkNumberInput.DecrementTrigger>
   );
@@ -143,7 +143,7 @@ export const NumberInputIncrement = (
         )}
         variant="ghost"
       >
-        <PlusIcon aria-hidden />
+        <PlusIcon aria-hidden="true" />
       </Button>
     </ArkNumberInput.IncrementTrigger>
   );

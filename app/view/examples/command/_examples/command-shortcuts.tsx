@@ -71,21 +71,21 @@ const CommandShortcuts = () => {
 const initialItems = [
   {
     group: "Settings",
-    icon: <UserIcon aria-hidden />,
+    icon: <UserIcon aria-hidden="true" />,
     label: "Profile",
     shortcut: "⌘P",
     value: "profile",
   },
   {
     group: "Settings",
-    icon: <CreditCardIcon aria-hidden />,
+    icon: <CreditCardIcon aria-hidden="true" />,
     label: "Billing",
     shortcut: "⌘B",
     value: "billing",
   },
   {
     group: "Settings",
-    icon: <SettingsIcon aria-hidden />,
+    icon: <SettingsIcon aria-hidden="true" />,
     label: "Settings",
     shortcut: "⌘S",
     value: "settings",

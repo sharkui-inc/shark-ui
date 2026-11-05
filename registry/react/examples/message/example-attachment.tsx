@@ -51,7 +51,7 @@ const Example = () => (
           </AttachmentContent>
           <AttachmentActions>
             <AttachmentAction aria-label="Download sales-dashboard.pdf">
-              <DownloadIcon aria-hidden />
+              <DownloadIcon aria-hidden="true" />
             </AttachmentAction>
           </AttachmentActions>
         </Attachment>

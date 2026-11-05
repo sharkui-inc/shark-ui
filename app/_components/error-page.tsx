@@ -19,10 +19,12 @@ export type ErrorPageProps =
   | (RuntimeErrorProps & { kind: "error" })
   | { kind: "not-found" };
 
-const ErrorActionButton = (props: {
+interface ErrorActionButtonProps {
   action: ErrorAction;
   variant?: "default" | "outline";
-}) => {
+}
+
+const ErrorActionButton = (props: ErrorActionButtonProps) => {
   const { action, variant = "default" } = props;
 
   if ("onClick" in action) {
@@ -53,7 +55,11 @@ const ErrorActionButton = (props: {
   );
 };
 
-const ErrorIllustration = (props: { code: string }) => {
+interface ErrorIllustrationProps {
+  code: string;
+}
+
+const ErrorIllustration = (props: ErrorIllustrationProps) => {
   const { code } = props;
 
   return (

@@ -26,7 +26,7 @@ const Example = () => {
             size="icon-md"
             variant="outline"
           >
-            <BoldIcon aria-hidden />
+            <BoldIcon aria-hidden="true" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>Bold</TooltipContent>

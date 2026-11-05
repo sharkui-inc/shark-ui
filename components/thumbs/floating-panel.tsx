@@ -7,11 +7,11 @@ export const FloatingPanelThumb = (props: ThumbCardProps) => (
       <div className="border-input bg-muted flex items-center justify-between gap-2 border-b px-3 py-2">
         <div className="bg-primary h-2 w-1/3 min-w-0 rounded-full" />
         <div className="flex items-center gap-2">
-          <span aria-hidden className="text-muted-foreground/64">
+          <span aria-hidden="true" className="text-muted-foreground/64">
             <MinusIcon className="text-muted-foreground/64 size-3" />
           </span>
 
-          <span aria-hidden className="text-muted-foreground/64">
+          <span aria-hidden="true" className="text-muted-foreground/64">
             <XIcon className="text-muted-foreground/64 size-3" />
           </span>
         </div>

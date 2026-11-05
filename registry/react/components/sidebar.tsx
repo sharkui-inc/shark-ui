@@ -80,9 +80,9 @@ export const SidebarProvider = (props: SidebarProviderProps) => {
     defaultOpen = true,
     defaultOpenMobile = false,
     open: openProp,
+    style,
     onOpenChange: setOpenProp,
     className,
-    style,
     ...rest
   } = props;
 
@@ -314,7 +314,7 @@ export const Sidebar = (props: SidebarProps) => {
 };
 
 export const SidebarTrigger = (props: React.ComponentProps<typeof Button>) => {
-  const { className, onClick, ...rest } = props;
+  const { onClick, className, ...rest } = props;
 
   const { toggleSidebar } = useSidebar();
 
@@ -334,14 +334,14 @@ export const SidebarTrigger = (props: React.ComponentProps<typeof Button>) => {
         toggleSidebar();
       }}
     >
-      <PanelLeftIcon className="rtl:rotate-180" />
+      <PanelLeftIcon aria-hidden="true" className="rtl:rotate-180" />
       <ark.span className="sr-only">Toggle Sidebar</ark.span>
     </Button>
   );
 };
 
 export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
-  const { className, onClick, ...rest } = props;
+  const { onClick, className, ...rest } = props;
 
   const { toggleSidebar } = useSidebar();
 
@@ -714,7 +714,7 @@ interface SidebarMenuActionProps extends React.ComponentProps<typeof Button> {
 }
 
 export const SidebarMenuAction = (props: SidebarMenuActionProps) => {
-  const { className, showOnHover = false, ...rest } = props;
+  const { showOnHover = false, className, ...rest } = props;
 
   return (
     <Button
@@ -784,7 +784,7 @@ interface SidebarMenuSkeletonProps
 }
 
 export const SidebarMenuSkeleton = (props: SidebarMenuSkeletonProps) => {
-  const { className, showIcon = false, ...rest } = props;
+  const { showIcon = false, className, ...rest } = props;
 
   const [width] = React.useState(
     () => `${Math.floor(Math.random() * 40) + 50}%` // random between 50-90%

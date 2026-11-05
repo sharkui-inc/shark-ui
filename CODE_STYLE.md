@@ -10,7 +10,7 @@ Conflict order: explicit user or system instructions → `biome.json` → this f
 
 ## Component body
 
-- Props: `interface ${Name}Props`, declared above the component. No inline object or `React.ComponentProps<…>` on the parameter. When `{...rest}` spreads onto an element or component, `extends React.ComponentProps<typeof Target>` (`ark.div`, `Button`, `Collapsible`). Own fields go on the interface. `export` only if another module imports it.
+- Props: `interface ${Name}Props`, declared above the component, when it adds its own fields. No inline object type on the parameter. When `{...rest}` spreads onto an element or component, `extends React.ComponentProps<typeof Target>` (`ark.div`, `Button`, `Collapsible`). Own fields go on the interface. An interface that only `extends` and declares no fields may be omitted: write that base type inline (`props: React.ComponentProps<typeof Dialog>`). `export` only if another module imports it.
 - `(props: T)`, then `const { …, ...rest } = props` in the body — never in the parameter list. Blank line after `= props`. Blank line before `return (` when a statement precedes it; none when `return (` is the first line after `{` or a `case` label.
 - Destructure order: data props, then functions (`onValueChange`), then `className`, then `children`, then `...rest`.
 - Blank line between groups: `= props`; value hooks (`useState`, `useReducer`, `useRef`, `useId`, context/`useX`); derived consts, plain functions, `useMemo`; `useCallback` / `useEffectEvent`; `useEffect` / `useLayoutEffect` / `useImperativeHandle`; `return`. Declare before use inside a group. Every hook stays above any conditional `return`.

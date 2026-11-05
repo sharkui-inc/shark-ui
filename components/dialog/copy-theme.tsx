@@ -48,13 +48,15 @@ export const CopyThemeCodeDialog = (
   );
 };
 
-const ThemeCodeFigure = (props: {
+interface ThemeCodeFigureProps {
   code: string;
   language: string;
   title: string;
-}) => {
+}
+
+const ThemeCodeFigure = (props: ThemeCodeFigureProps) => {
   const { code, language, title } = props;
-  
+
   const lines = code.split("\n");
 
   return (

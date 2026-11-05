@@ -77,7 +77,7 @@ export const PaginationFirst = (props: PaginationFirstProps) => {
       data-slot="pagination-first"
       {...rest}
     >
-      <ChevronFirstIcon className="rtl:rotate-180" />
+      <ChevronFirstIcon aria-hidden="true" className="rtl:rotate-180" />
       <span className={cn({ "sr-only": !withLabel })}>
         {children ?? "First"}
       </span>
@@ -108,7 +108,7 @@ export const PaginationPrevious = (props: PaginationPreviousProps) => {
       data-slot="pagination-previous"
       {...rest}
     >
-      <ChevronLeftIcon className="rtl:rotate-180" />
+      <ChevronLeftIcon aria-hidden="true" className="rtl:rotate-180" />
       <span className={cn({ "sr-only": !withLabel })}>
         {children ?? "Previous"}
       </span>
@@ -142,7 +142,7 @@ export const PaginationNext = (props: PaginationNextProps) => {
       <span className={cn({ "sr-only": !withLabel })}>
         {children ?? "Next"}
       </span>
-      <ChevronRightIcon className="rtl:rotate-180" />
+      <ChevronRightIcon aria-hidden="true" className="rtl:rotate-180" />
     </ArkPagination.NextTrigger>
   );
 };
@@ -173,7 +173,7 @@ export const PaginationLast = (props: PaginationLastProps) => {
       <span className={cn({ "sr-only": !withLabel })}>
         {children ?? "Last"}
       </span>
-      <ChevronLastIcon className="rtl:rotate-180" />
+      <ChevronLastIcon aria-hidden="true" className="rtl:rotate-180" />
     </ArkPagination.LastTrigger>
   );
 };
@@ -202,10 +202,11 @@ export const PaginationItem = (
   );
 };
 
-type PaginationItemsProps = Omit<
-  React.ComponentProps<typeof ArkPagination.Context>,
-  "children"
->;
+interface PaginationItemsProps
+  extends Omit<
+    React.ComponentProps<typeof ArkPagination.Context>,
+    "children"
+  > {}
 
 export const PaginationItems = (props: PaginationItemsProps) => (
   <ArkPagination.Context data-slot="pagination-items" {...props}>
@@ -246,7 +247,7 @@ export const PaginationEllipsis = (
       data-slot="pagination-ellipsis"
       {...rest}
     >
-      <EllipsisIcon />
+      <EllipsisIcon aria-hidden="true" />
     </ArkPagination.Ellipsis>
   );
 };

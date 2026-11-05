@@ -22,7 +22,11 @@ const Example = () => (
   </Card>
 );
 
-const Countdown = (props: { live?: boolean }) => {
+interface CountdownProps {
+  live?: boolean;
+}
+
+const Countdown = (props: CountdownProps) => {
   const { live = false } = props;
 
   const date = live ? daysFromNow(7) : null;

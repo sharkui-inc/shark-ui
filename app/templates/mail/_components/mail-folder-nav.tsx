@@ -8,10 +8,12 @@ import {
 } from "@/registry/react/components/sidebar";
 import { FOLDERS, getFolderCount, type Mailbox } from "../_data/mail";
 
-export const MailFolderNav = (props: {
+interface MailFolderNavProps {
   activeFolder: Mailbox;
   onFolderChange: (folder: Mailbox) => void;
-}) => {
+}
+
+export const MailFolderNav = (props: MailFolderNavProps) => {
   const { activeFolder, onFolderChange } = props;
 
   return (
@@ -25,7 +27,7 @@ export const MailFolderNav = (props: {
               isActive={activeFolder === label}
               onClick={() => onFolderChange(label)}
             >
-              <Icon aria-hidden />
+              <Icon aria-hidden="true" />
               <span>{label}</span>
             </SidebarMenuButton>
             {count > 0 ? <SidebarMenuBadge>{count}</SidebarMenuBadge> : null}

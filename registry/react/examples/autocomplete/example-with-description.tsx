@@ -38,7 +38,7 @@ const Example = () => {
 
             return (
               <AutocompleteItem item={item} key={item.value}>
-                <Icon aria-hidden />
+                <Icon aria-hidden="true" />
                 <span className="flex min-w-0 flex-col gap-0.5">
                   <span>{item.label}</span>
                   <MenuItemDescription>{item.description}</MenuItemDescription>

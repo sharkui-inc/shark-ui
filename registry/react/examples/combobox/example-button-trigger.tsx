@@ -84,7 +84,7 @@ const ComboboxSearch = () => {
         />
       </ArkCombobox.Input>
       <InputGroupAddon>
-        <SearchIcon aria-hidden className="opacity-64" />
+        <SearchIcon aria-hidden="true" className="opacity-64" />
       </InputGroupAddon>
     </InputGroup>
   );

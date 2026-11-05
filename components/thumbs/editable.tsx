@@ -8,7 +8,10 @@ export const EditableThumb = (props: ThumbCardProps) => (
         <div className="bg-muted-foreground/24 h-2 w-2/3 rounded-full" />
       </div>
       <div className="bg-primary flex size-8 shrink-0 items-center justify-center rounded-lg shadow-sm/4">
-        <CheckIcon aria-hidden className="text-primary-foreground size-3" />
+        <CheckIcon
+          aria-hidden="true"
+          className="text-primary-foreground size-3"
+        />
       </div>
     </div>
   </ThumbCard>

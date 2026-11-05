@@ -18,7 +18,7 @@ const Example = () => (
     <InputGroup>
       <InputGroupInput placeholder="Search..." />
       <InputGroupAddon align="inline-start">
-        <FilterIcon aria-hidden />
+        <FilterIcon aria-hidden="true" />
       </InputGroupAddon>
     </InputGroup>
     <FieldDescription>Icon positioned at the start.</FieldDescription>

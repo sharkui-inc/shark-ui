@@ -11,7 +11,7 @@ export const ChartThumb = (props: ThumbCardProps) => (
         <div className="bg-primary h-full min-w-0 flex-1 rounded-t-sm" />
         <div className="bg-muted-foreground/16 h-2/3 min-w-0 flex-1 rounded-t-sm" />
       </div>
-      <div aria-hidden className="bg-input h-px w-full shrink-0" />
+      <div aria-hidden="true" className="bg-input h-px w-full shrink-0" />
     </div>
   </ThumbCard>
 );

@@ -163,7 +163,7 @@ export const FloatingPanelMinimize = (
   return (
     <ArkFloatingPanel.StageTrigger {...rest} asChild stage="minimized">
       <Button aria-label="Minimize" size={size} variant={variant}>
-        <MinusIcon />
+        <MinusIcon aria-hidden="true" />
       </Button>
     </ArkFloatingPanel.StageTrigger>
   );
@@ -177,7 +177,7 @@ export const FloatingPanelMaximize = (
   return (
     <ArkFloatingPanel.StageTrigger {...rest} asChild stage="maximized">
       <Button aria-label="Maximize" size={size} variant={variant}>
-        <MaximizeIcon />
+        <MaximizeIcon aria-hidden="true" />
       </Button>
     </ArkFloatingPanel.StageTrigger>
   );
@@ -190,9 +190,11 @@ export const FloatingPanelRestore = (props: FloatingPanelStageTriggerProps) => {
     <ArkFloatingPanel.StageTrigger {...rest} asChild stage="default">
       <Button aria-label="Restore" size={size} variant={variant}>
         <MinimizeIcon
+          aria-hidden="true"
           className={cn("hidden", "group-data-maximized/floating-panel:block")}
         />
         <MaximizeIcon
+          aria-hidden="true"
           className={cn("hidden", "group-data-minimized/floating-panel:block")}
         />
       </Button>

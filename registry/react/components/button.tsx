@@ -173,9 +173,9 @@ export const Button = (props: ButtonProps) => {
     pill = false,
     isLoading = false,
     disabled,
+    "aria-disabled": ariaDisabled,
     className,
     children,
-    "aria-disabled": ariaDisabled,
     ...rest
   } = props;
 
@@ -197,7 +197,7 @@ export const Button = (props: ButtonProps) => {
     >
       {isLoading ? (
         <>
-          <span aria-hidden className="invisible">
+          <span aria-hidden="true" className="invisible">
             {children}
           </span>
 
@@ -209,7 +209,7 @@ export const Button = (props: ButtonProps) => {
               "flex items-center justify-center"
             )}
           >
-            <Spinner aria-hidden />
+            <Spinner aria-hidden="true" />
           </span>
         </>
       ) : (

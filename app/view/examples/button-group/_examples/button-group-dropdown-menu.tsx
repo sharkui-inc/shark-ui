@@ -26,7 +26,7 @@ const ButtonGroupDropdownMenuExample = () => (
     <Button variant="outline">Follow</Button>
     <Menu positioning={{ placement: "bottom-end" }}>
       <MenuTrigger asChild>
-        <Button className="pl-2" variant="outline">
+        <Button className="ps-2" variant="outline">
           <ChevronDownIcon />
         </Button>
       </MenuTrigger>

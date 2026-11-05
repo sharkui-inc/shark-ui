@@ -59,7 +59,7 @@ export const MarkerIcon = (props: React.ComponentProps<typeof ark.span>) => {
       )}
       data-slot="marker-icon"
       {...rest}
-      aria-hidden
+      aria-hidden="true"
     />
   );
 };

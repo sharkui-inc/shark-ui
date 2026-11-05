@@ -208,7 +208,7 @@ export const FieldRequiredIndicator = (
       )}
       data-slot="field-required-indicator"
       {...rest}
-      aria-hidden
+      aria-hidden="true"
     >
       {children ?? "*"}
     </ArkField.RequiredIndicator>

@@ -44,8 +44,8 @@ const swapIndicatorVariants = tv({
       },
       rotate: {
         indicator: [
-          "data-[state=open]:spin-in-[-90deg] data-[state=open]:fade-in-0 data-[state=open]:animate-in data-[state=open]:duration-250",
-          "data-[state=closed]:spin-out-[90deg] data-[state=closed]:fade-out-0 data-[state=closed]:animate-out data-[state=closed]:duration-100",
+          "data-[state=open]:-spin-in-90 data-[state=open]:fade-in-0 data-[state=open]:animate-in data-[state=open]:duration-250",
+          "data-[state=closed]:spin-out-90 data-[state=closed]:fade-out-0 data-[state=closed]:animate-out data-[state=closed]:duration-100",
         ],
       },
       scale: {
@@ -58,22 +58,21 @@ const swapIndicatorVariants = tv({
   },
 });
 
-type SwapBaseProps = React.ComponentProps<typeof ArkSwap.Root> &
-  VariantProps<typeof swapIndicatorVariants>;
-
-type SwapProps = SwapBaseProps & {
+interface SwapProps
+  extends React.ComponentProps<typeof ArkSwap.Root>,
+    VariantProps<typeof swapIndicatorVariants> {
   off: React.ReactNode;
   on: React.ReactNode;
-};
+}
 
 export const Swap = (props: SwapProps) => {
   const {
     variant = "fade",
     lazyMount = true,
     unmountOnExit = true,
-    className,
-    on,
     off,
+    on,
+    className,
     ...rest
   } = props;
 

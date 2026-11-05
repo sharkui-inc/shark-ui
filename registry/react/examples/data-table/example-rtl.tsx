@@ -100,7 +100,7 @@ const Example = () => {
           <MenuTrigger asChild>
             <Button className="ms-auto" variant="outline">
               {values.columns}
-              <ChevronDownIcon aria-hidden data-icon="inline-end" />
+              <ChevronDownIcon aria-hidden="true" data-icon="inline-end" />
             </Button>
           </MenuTrigger>
           <MenuContent>
@@ -243,9 +243,11 @@ const data: Payment[] = [
   },
 ];
 
-const SelectAllCheckbox = (props: {
+interface SelectAllCheckboxProps {
   table: TanStackTable<typeof features, Payment>;
-}) => {
+}
+
+const SelectAllCheckbox = (props: SelectAllCheckboxProps) => {
   const { table } = props;
 
   const { values } = useRtlValues();
@@ -324,7 +326,7 @@ const EmailSortHeader = (props: EmailSortHeaderProps) => {
       variant="ghost"
     >
       {values.email}
-      <ArrowUpDownIcon aria-hidden data-icon="inline-end" />
+      <ArrowUpDownIcon aria-hidden="true" data-icon="inline-end" />
     </Button>
   );
 };
@@ -362,7 +364,7 @@ const PaymentActions = (props: PaymentActionsProps) => {
     <Menu>
       <MenuTrigger asChild>
         <Button aria-label={values.openMenu} size="icon-md" variant="ghost">
-          <MoreHorizontalIcon aria-hidden />
+          <MoreHorizontalIcon aria-hidden="true" />
         </Button>
       </MenuTrigger>
       <MenuContent>

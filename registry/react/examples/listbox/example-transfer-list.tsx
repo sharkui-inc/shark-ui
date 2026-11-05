@@ -51,7 +51,7 @@ const Example = () => {
           size="icon-md"
           title="Add to project"
         >
-          <PlusIcon aria-hidden />
+          <PlusIcon aria-hidden="true" />
         </Button>
         <Button
           aria-label="Remove selected people from the project"
@@ -66,7 +66,7 @@ const Example = () => {
           title="Remove from project"
           variant="outline"
         >
-          <MinusIcon aria-hidden />
+          <MinusIcon aria-hidden="true" />
         </Button>
       </div>
       <MemberList
@@ -87,7 +87,7 @@ interface MemberListProps {
 }
 
 const MemberList = (props: MemberListProps) => {
-  const { collection, label, onValueChange, value } = props;
+  const { collection, label, value, onValueChange } = props;
 
   return (
     <Item

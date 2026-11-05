@@ -34,7 +34,7 @@ interface KbdProps
     VariantProps<typeof kbdVariants> {}
 
 export const Kbd = (props: KbdProps) => {
-  const { variant = "default", className, style, ...rest } = props;
+  const { variant = "default", style, className, ...rest } = props;
 
   return (
     <ark.kbd
@@ -48,7 +48,7 @@ export const Kbd = (props: KbdProps) => {
 };
 
 export const KbdGroup = (props: React.ComponentProps<typeof ark.div>) => {
-  const { className, style, ...rest } = props;
+  const { style, className, ...rest } = props;
 
   return (
     <ark.div

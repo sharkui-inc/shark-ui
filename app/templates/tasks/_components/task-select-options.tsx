@@ -32,25 +32,36 @@ const typeIconMap = {
 
 export const TaskAllOption = () => (
   <>
-    <ListFilterIcon aria-hidden className="text-muted-foreground size-4" />
+    <ListFilterIcon
+      aria-hidden="true"
+      className="text-muted-foreground size-4"
+    />
     All
   </>
 );
 
-export const TaskTypeOption = (props: { type: TaskType }) => {
+interface TaskTypeOptionProps {
+  type: TaskType;
+}
+
+export const TaskTypeOption = (props: TaskTypeOptionProps) => {
   const { type } = props;
 
   const TypeIcon = typeIconMap[type];
 
   return (
     <>
-      <TypeIcon aria-hidden className="text-muted-foreground size-4" />
+      <TypeIcon aria-hidden="true" className="text-muted-foreground size-4" />
       {type}
     </>
   );
 };
 
-export const TaskPriorityOption = (props: { priority: TaskPriority }) => {
+interface TaskPriorityOptionProps {
+  priority: TaskPriority;
+}
+
+export const TaskPriorityOption = (props: TaskPriorityOptionProps) => {
   const { priority } = props;
 
   const PriorityIcon = priorityIconMap[priority];
@@ -58,7 +69,7 @@ export const TaskPriorityOption = (props: { priority: TaskPriority }) => {
   return (
     <>
       <PriorityIcon
-        aria-hidden
+        aria-hidden="true"
         className={cn("size-4", priorityIconVariants({ priority }))}
       />
       {priority}
@@ -66,7 +77,11 @@ export const TaskPriorityOption = (props: { priority: TaskPriority }) => {
   );
 };
 
-export const TaskStatusOption = (props: { status: TaskStatus }) => {
+interface TaskStatusOptionProps {
+  status: TaskStatus;
+}
+
+export const TaskStatusOption = (props: TaskStatusOptionProps) => {
   const { status } = props;
 
   return (
@@ -77,9 +92,13 @@ export const TaskStatusOption = (props: { status: TaskStatus }) => {
   );
 };
 
-export const TaskAssigneeOption = (props: { assigneeId: TaskAssigneeId }) => {
+interface TaskAssigneeOptionProps {
+  assigneeId: TaskAssigneeId;
+}
+
+export const TaskAssigneeOption = (props: TaskAssigneeOptionProps) => {
   const { assigneeId } = props;
-  
+
   const assignee = ASSIGNEES[assigneeId];
 
   return (
@@ -104,7 +123,13 @@ export const TaskTypeSelectValue = () => (
   </SelectValue>
 );
 
-export const TaskPrioritySelectValue = (props: { placeholder?: string }) => {
+interface TaskPrioritySelectValueProps {
+  placeholder?: string;
+}
+
+export const TaskPrioritySelectValue = (
+  props: TaskPrioritySelectValueProps
+) => {
   const { placeholder = "Select a priority" } = props;
 
   return (
@@ -124,7 +149,11 @@ export const TaskPrioritySelectValue = (props: { placeholder?: string }) => {
   );
 };
 
-export const TaskStatusSelectValue = (props: { placeholder?: string }) => {
+interface TaskStatusSelectValueProps {
+  placeholder?: string;
+}
+
+export const TaskStatusSelectValue = (props: TaskStatusSelectValueProps) => {
   const { placeholder = "Select a status" } = props;
 
   return (

@@ -68,7 +68,7 @@ interface ChatPromptComposerProps {
 }
 
 export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
-  const { onStop, onSubmit, status, usedTokens, value } = props;
+  const { status, usedTokens, value, onStop, onSubmit } = props;
 
   const [model, setModel] = React.useState<string[]>([MODEL_OPTIONS[0].value]);
   const [effort, setEffort] = React.useState(["medium"]);
@@ -91,7 +91,7 @@ export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
             <Menu positioning={{ placement: "top-start" }}>
               <MenuTrigger asChild>
                 <PromptInputButton aria-label="Add to prompt" size="icon-sm">
-                  <PlusIcon aria-hidden />
+                  <PlusIcon aria-hidden="true" />
                 </PromptInputButton>
               </MenuTrigger>
               <MenuContent className="min-w-52">
@@ -100,7 +100,7 @@ export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
 
                   return (
                     <MenuItem key={action.value} value={action.value}>
-                      <Icon aria-hidden />
+                      <Icon aria-hidden="true" />
                       {action.label}
                     </MenuItem>
                   );
@@ -114,7 +114,7 @@ export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
               value={access}
             >
               <SelectTrigger showTrigger={false} size="sm" variant="ghost">
-                <ShieldAlertIcon aria-hidden />
+                <ShieldAlertIcon aria-hidden="true" />
                 <SelectValue placeholder="Full access" />
               </SelectTrigger>
               <SelectContent>
@@ -171,21 +171,21 @@ export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
             </SelectContent>
           </Select>
           <PromptInputButton aria-label="Voice input" size="icon-sm">
-            <MicIcon aria-hidden />
+            <MicIcon aria-hidden="true" />
           </PromptInputButton>
           <PromptInputSubmit className="ms-2" size="icon-sm" />
         </PromptInputFooter>
         <PromptInputBottom>
           <Button className="text-muted-foreground" size="sm" variant="ghost">
-            <FolderIcon aria-hidden />
+            <FolderIcon aria-hidden="true" />
             shark-ui
           </Button>
           <Button className="text-muted-foreground" size="sm" variant="ghost">
-            <MonitorIcon aria-hidden />
+            <MonitorIcon aria-hidden="true" />
             Local
           </Button>
           <Button className="text-muted-foreground" size="sm" variant="ghost">
-            <GitBranchIcon aria-hidden />
+            <GitBranchIcon aria-hidden="true" />
             main
           </Button>
           <div className="ms-auto">

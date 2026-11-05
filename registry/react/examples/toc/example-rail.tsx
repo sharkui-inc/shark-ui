@@ -105,7 +105,7 @@ interface RailProps {
 
 const Rail = (props: RailProps) => {
   const { depth, prevDepth = depth, nextDepth = depth } = props;
-  
+
   const line = lineOffset(depth);
   const prevLine = lineOffset(prevDepth);
   const nextLine = lineOffset(nextDepth);
@@ -113,7 +113,7 @@ const Rail = (props: RailProps) => {
 
   return (
     <svg
-      aria-hidden
+      aria-hidden="true"
       className="in-data-active:stroke-foreground stroke-border pointer-events-none absolute inset-s-0 -z-10 overflow-visible stroke-1 transition-[stroke]"
       style={{
         height: line === nextLine ? `calc(100% + ${BRIDGE}px)` : "100%",
@@ -158,7 +158,7 @@ const Article = () => (
             {item.label}
           </Heading>
           <SkeletonText
-            aria-hidden
+            aria-hidden="true"
             className="animate-none **:[div]:h-2"
             lines={item.lines}
           />

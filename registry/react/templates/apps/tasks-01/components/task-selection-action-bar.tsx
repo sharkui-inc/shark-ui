@@ -38,12 +38,12 @@ interface TaskSelectionActionBarProps {
 
 export const TaskSelectionActionBar = (props: TaskSelectionActionBarProps) => {
   const {
-    children,
+    selectedCount,
     onClearSelection,
     onDelete,
     onDuplicate,
     onMove,
-    selectedCount,
+    children,
   } = props;
 
   return (
@@ -68,7 +68,7 @@ export const TaskSelectionActionBar = (props: TaskSelectionActionBarProps) => {
             size="icon-sm"
             variant="ghost"
           >
-            <CopyIcon aria-hidden />
+            <CopyIcon aria-hidden="true" />
           </Button>
           <Button
             aria-label="Mark selected tasks as done"
@@ -76,7 +76,7 @@ export const TaskSelectionActionBar = (props: TaskSelectionActionBarProps) => {
             size="icon-sm"
             variant="ghost"
           >
-            <CheckIcon aria-hidden />
+            <CheckIcon aria-hidden="true" />
           </Button>
           <Menu positioning={{ placement: "top" }}>
             <MenuTrigger asChild>
@@ -85,7 +85,7 @@ export const TaskSelectionActionBar = (props: TaskSelectionActionBarProps) => {
                 size="icon-sm"
                 variant="ghost"
               >
-                <EllipsisIcon aria-hidden />
+                <EllipsisIcon aria-hidden="true" />
               </Button>
             </MenuTrigger>
             <MenuContent>
@@ -93,14 +93,14 @@ export const TaskSelectionActionBar = (props: TaskSelectionActionBarProps) => {
                 onClick={() => onMove("In Progress")}
                 value="move-to-active"
               >
-                <ArrowRightIcon aria-hidden />
+                <ArrowRightIcon aria-hidden="true" />
                 Move to active
               </MenuItem>
               <MenuItem
                 onClick={() => onMove("Backlog")}
                 value="move-to-backlog"
               >
-                <ListRestartIcon aria-hidden />
+                <ListRestartIcon aria-hidden="true" />
                 Move to backlog
               </MenuItem>
               <MenuItem
@@ -108,7 +108,7 @@ export const TaskSelectionActionBar = (props: TaskSelectionActionBarProps) => {
                 value="cancel-tasks"
                 variant="destructive"
               >
-                <XIcon aria-hidden />
+                <XIcon aria-hidden="true" />
                 Cancel tasks
               </MenuItem>
             </MenuContent>
@@ -120,13 +120,13 @@ export const TaskSelectionActionBar = (props: TaskSelectionActionBarProps) => {
             size="icon-sm"
             variant="destructive"
           >
-            <Trash2Icon aria-hidden />
+            <Trash2Icon aria-hidden="true" />
           </Button>
         </ActionBarBody>
         <ActionBarSeparator />
         <ActionBarClose asChild onClick={onClearSelection}>
           <Button aria-label="Clear selection" size="icon-sm" variant="ghost">
-            <XIcon aria-hidden />
+            <XIcon aria-hidden="true" />
           </Button>
         </ActionBarClose>
       </ActionBarContent>

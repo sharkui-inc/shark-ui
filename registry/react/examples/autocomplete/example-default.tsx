@@ -25,7 +25,7 @@ const AutocompleteDemo = (props: AutocompleteDemoProps) => {
     label = "Search fruits",
     placeholder = "e.g. Apple",
   } = props;
-  
+
   const { contains } = useFilter({ sensitivity: "base" });
 
   const { collection, filter } = useListCollection({

@@ -28,7 +28,7 @@ const Example = () => (
             size="icon-xs"
             variant="ghost"
           >
-            <InfoIcon aria-hidden />
+            <InfoIcon aria-hidden="true" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>Enter a username for your account</TooltipContent>

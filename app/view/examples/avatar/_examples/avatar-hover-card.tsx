@@ -73,11 +73,11 @@ const AvatarHoverCard = () => (
             <Separator />
             <div className="text-muted-foreground flex flex-col gap-1.5 text-xs">
               <p className="flex items-center gap-1.5">
-                <MapPinIcon aria-hidden className="size-3.5" />
+                <MapPinIcon aria-hidden="true" className="size-3.5" />
                 {profile.location}
               </p>
               <p className="flex items-center gap-1.5">
-                <CalendarIcon aria-hidden className="size-3.5" />
+                <CalendarIcon aria-hidden="true" className="size-3.5" />
                 {profile.joined}
               </p>
             </div>

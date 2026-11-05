@@ -30,11 +30,11 @@ export const MusicLibraryPodcasts = () => (
           </div>
           <div className="flex items-center justify-between gap-3">
             <span className="text-muted-foreground flex items-center gap-1 text-sm">
-              <Clock3Icon aria-hidden className="size-3.5" />
+              <Clock3Icon aria-hidden="true" className="size-3.5" />
               {podcast.time}
             </span>
             <Button aria-label={`Play ${podcast.episode}`} pill size="sm">
-              <PlayIcon aria-hidden /> Play episode
+              <PlayIcon aria-hidden="true" /> Play episode
             </Button>
           </div>
         </CardContent>

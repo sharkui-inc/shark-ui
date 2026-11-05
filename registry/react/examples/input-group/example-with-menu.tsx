@@ -25,7 +25,7 @@ const Example = () => (
             size="icon-xs"
             variant="ghost"
           >
-            <EllipsisIcon aria-hidden />
+            <EllipsisIcon aria-hidden="true" />
           </InputGroupButton>
         </MenuTrigger>
         <MenuContent className="min-w-48">

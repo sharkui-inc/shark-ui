@@ -46,7 +46,7 @@ const Example = () => {
       </FloatingPanelTrigger>
       <FloatingPanelContent>
         <FloatingPanelHeader>
-          <TypeIcon aria-hidden />
+          <TypeIcon aria-hidden="true" />
           <FloatingPanelTitle>{values.title}</FloatingPanelTitle>
           <FloatingPanelControl>
             <FloatingPanelMinimize />
@@ -54,7 +54,7 @@ const Example = () => {
             <FloatingPanelRestore />
             <FloatingPanelCloseTrigger asChild>
               <Button aria-label={values.close} size="icon-xs">
-                <XIcon aria-hidden />
+                <XIcon aria-hidden="true" />
               </Button>
             </FloatingPanelCloseTrigger>
           </FloatingPanelControl>

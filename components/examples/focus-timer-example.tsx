@@ -60,7 +60,7 @@ interface FocusTimerSessionProps {
 }
 
 const FocusTimerSession = (props: FocusTimerSessionProps) => {
-  const { autoStart = false, onSkip, session } = props;
+  const { autoStart = false, session, onSkip } = props;
 
   const isFocus = session === "focus";
 
@@ -74,7 +74,11 @@ const FocusTimerSession = (props: FocusTimerSessionProps) => {
       startMs={isFocus ? focusMs : breakMs}
     >
       <Badge variant={isFocus ? "default" : "secondary"}>
-        {isFocus ? <TimerIcon aria-hidden /> : <CoffeeIcon aria-hidden />}
+        {isFocus ? (
+          <TimerIcon aria-hidden="true" />
+        ) : (
+          <CoffeeIcon aria-hidden="true" />
+        )}
         {isFocus ? "Focus" : "Break"}
       </Badge>
       <TimerArea>
@@ -95,7 +99,7 @@ const FocusTimerSession = (props: FocusTimerSessionProps) => {
             <span className="inline-flex">
               <TimerReset asChild hidden={false}>
                 <Button aria-label="Reset" size="icon-md" variant="ghost">
-                  <RotateCcwIcon aria-hidden />
+                  <RotateCcwIcon aria-hidden="true" />
                 </Button>
               </TimerReset>
             </span>
@@ -108,7 +112,7 @@ const FocusTimerSession = (props: FocusTimerSessionProps) => {
               <span className="inline-flex">
                 <TimerPause asChild>
                   <Button aria-label="Pause" pill size="icon-lg">
-                    <PauseIcon aria-hidden />
+                    <PauseIcon aria-hidden="true" />
                   </Button>
                 </TimerPause>
               </span>
@@ -120,7 +124,7 @@ const FocusTimerSession = (props: FocusTimerSessionProps) => {
               <span className="inline-flex">
                 <TimerPlay asChild>
                   <Button aria-label="Play" pill size="icon-lg">
-                    <PlayIcon aria-hidden className="translate-x-px" />
+                    <PlayIcon aria-hidden="true" className="translate-x-px" />
                   </Button>
                 </TimerPlay>
               </span>
@@ -136,7 +140,7 @@ const FocusTimerSession = (props: FocusTimerSessionProps) => {
               size="icon-md"
               variant="ghost"
             >
-              <SkipForwardIcon aria-hidden />
+              <SkipForwardIcon aria-hidden="true" />
             </Button>
           </TooltipTrigger>
           <TooltipContent>

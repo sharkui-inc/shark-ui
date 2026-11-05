@@ -18,7 +18,7 @@ export const DashboardTraffic = () => (
     >
       <CardAction>
         <Badge className="gap-1" size="sm" variant="success">
-          <TrendingUpIcon aria-hidden />
+          <TrendingUpIcon aria-hidden="true" />
           {trafficSummary.change}
         </Badge>
       </CardAction>

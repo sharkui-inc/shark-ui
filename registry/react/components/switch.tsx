@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 export const useSwitchContext = useArkSwitchContext;
 
 export const Switch = (props: React.ComponentProps<typeof ArkSwitch.Root>) => {
-  const { className, tabIndex, ...rest } = props;
+  const { tabIndex, className, ...rest } = props;
 
   return (
     <ArkSwitch.Root

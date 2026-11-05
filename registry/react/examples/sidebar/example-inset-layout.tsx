@@ -30,7 +30,7 @@ const Example = () => (
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <IconTile aria-hidden size="xs">
+              <IconTile aria-hidden="true" size="xs">
                 <WavesHorizontalIcon />
               </IconTile>
               <span>Onda</span>
@@ -57,7 +57,7 @@ const Example = () => (
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <IconTile aria-hidden size="sm" variant="secondary">
+              <IconTile aria-hidden="true" size="sm" variant="secondary">
                 <UserRoundIcon />
               </IconTile>
               <span>

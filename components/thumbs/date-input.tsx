@@ -7,7 +7,7 @@ export const DateInputThumb = (props: ThumbCardProps) => (
       <div className="bg-muted-foreground/16 flex h-2 min-w-5 items-center justify-center rounded-sm" />
 
       <span
-        aria-hidden
+        aria-hidden="true"
         className="text-muted-foreground/64 px-1 text-[0.5625rem]"
       >
         /
@@ -16,7 +16,7 @@ export const DateInputThumb = (props: ThumbCardProps) => (
       <div className="bg-muted-foreground/16 flex h-2 min-w-5 items-center justify-center rounded-sm" />
 
       <span
-        aria-hidden
+        aria-hidden="true"
         className="text-muted-foreground/64 px-1 text-[0.5625rem]"
       >
         /
@@ -25,7 +25,7 @@ export const DateInputThumb = (props: ThumbCardProps) => (
       <div className="bg-primary flex h-2 min-w-5 items-center justify-center rounded-sm" />
 
       <CalendarIcon
-        aria-hidden
+        aria-hidden="true"
         className="text-muted-foreground/64 ms-auto size-3 shrink-0"
       />
     </div>

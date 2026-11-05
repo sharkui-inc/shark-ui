@@ -47,18 +47,22 @@ const toolResultStatusVariants = tv({
   },
 });
 
-const ToolResultStatusIcon = (props: { status: ToolResultStatus }) => {
+interface ToolResultStatusIconProps {
+  status: ToolResultStatus;
+}
+
+const ToolResultStatusIcon = (props: ToolResultStatusIconProps) => {
   const { status } = props;
 
   switch (status) {
     case "cancelled":
-      return <BanIcon aria-hidden className="size-3" />;
+      return <BanIcon aria-hidden="true" className="size-3" />;
     case "error":
-      return <CircleXIcon aria-hidden className="size-3" />;
+      return <CircleXIcon aria-hidden="true" className="size-3" />;
     case "running":
-      return <Spinner aria-hidden className="size-3" />;
+      return <Spinner aria-hidden="true" className="size-3" />;
     case "success":
-      return <CircleCheckIcon aria-hidden className="size-3" />;
+      return <CircleCheckIcon aria-hidden="true" className="size-3" />;
     default: {
       const _exhaustive: never = status;
       return _exhaustive;
@@ -182,7 +186,7 @@ export const ToolResultMeta = (
 export const ToolResultName = (
   props: React.ComponentProps<typeof ark.span>
 ) => {
-  const { className, style, ...rest } = props;
+  const { style, className, ...rest } = props;
 
   return (
     <ark.span

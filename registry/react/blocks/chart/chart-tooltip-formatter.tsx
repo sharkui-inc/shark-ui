@@ -77,7 +77,7 @@ const ChartTooltipFormatter = () => (
                   <div className="text-muted-foreground flex min-w-[130px] items-center text-xs">
                     {chartConfig[name as keyof typeof chartConfig]?.label ||
                       name}
-                    <div className="text-foreground ml-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums">
+                    <div className="text-foreground ms-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums">
                       {value}
                       <span className="text-muted-foreground font-normal">
                         kcal

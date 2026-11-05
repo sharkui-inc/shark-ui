@@ -220,7 +220,7 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               size="lg"
             >
-              <IconTile aria-hidden size="md">
+              <IconTile aria-hidden="true" size="md">
                 <activeTeam.logo className="size-4" />
               </IconTile>
               <div className="grid flex-1 text-start text-sm leading-tight">
@@ -242,7 +242,7 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
                   onClick={() => setActiveTeam(team)}
                   value={team.name}
                 >
-                  <IconTile aria-hidden size="xs" variant="secondary">
+                  <IconTile aria-hidden="true" size="xs" variant="secondary">
                     <team.logo className="size-3.5 shrink-0" />
                   </IconTile>
                   {team.name}
@@ -253,7 +253,7 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
             <MenuSeparator />
             <MenuGroup>
               <MenuItem className="gap-2" value="add-team">
-                <IconTile aria-hidden size="xs">
+                <IconTile aria-hidden="true" size="xs">
                   <PlusIcon className="size-4" />
                 </IconTile>
                 <div className="text-muted-foreground font-medium">
@@ -396,7 +396,7 @@ interface NavUserProps {
 
 const NavUser = (props: NavUserProps) => {
   const { user } = props;
-  
+
   const { isMobile } = useSidebar();
 
   return (

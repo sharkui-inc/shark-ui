@@ -25,8 +25,8 @@ export const Calendar = (
   const {
     lazyMount = true,
     unmountOnExit = true,
-    className,
     timeZone = getLocalTimeZone(),
+    className,
     ...rest
   } = props;
 
@@ -100,7 +100,7 @@ export const CalendarTodayTrigger = (
   props: React.ComponentProps<typeof Button>
 ) => {
   const { variant = "outline", size = "lg", onClick, ...rest } = props;
-  
+
   const calendar = useCalendarContext();
 
   return (
@@ -142,6 +142,7 @@ export const CalendarYearSelect = (
         {...rest}
       />
       <ChevronDownIcon
+        aria-hidden="true"
         className={cn(
           "absolute inset-e-2.5 top-1/2",
           "size-4",
@@ -171,6 +172,7 @@ export const CalendarMonthSelect = (
         {...rest}
       />
       <ChevronDownIcon
+        aria-hidden="true"
         className={cn(
           "absolute inset-e-2.5 top-1/2",
           "size-4",
@@ -224,7 +226,7 @@ export const CalendarPrevTrigger = (
 ) => (
   <ArkCalendar.PrevTrigger asChild data-slot="calendar-prev-trigger" {...props}>
     <Button className="me-auto" size="icon-md" variant="ghost">
-      <ChevronLeftIcon aria-hidden className="rtl:rotate-180" />
+      <ChevronLeftIcon aria-hidden="true" className="rtl:rotate-180" />
     </Button>
   </ArkCalendar.PrevTrigger>
 );
@@ -234,7 +236,7 @@ export const CalendarNextTrigger = (
 ) => (
   <ArkCalendar.NextTrigger asChild data-slot="calendar-next-trigger" {...props}>
     <Button className="ms-auto" size="icon-md" variant="ghost">
-      <ChevronRightIcon aria-hidden className="rtl:rotate-180" />
+      <ChevronRightIcon aria-hidden="true" className="rtl:rotate-180" />
     </Button>
   </ArkCalendar.NextTrigger>
 );
@@ -242,8 +244,8 @@ export const CalendarNextTrigger = (
 export const CalendarTable = (
   props: React.ComponentProps<typeof ArkCalendar.Table>
 ) => {
-  const { className, "aria-labelledby": ariaLabelledBy, ...rest } = props;
- 
+  const { "aria-labelledby": ariaLabelledBy, className, ...rest } = props;
+
   const calendar = useCalendarContext();
   const labelId = calendar.getLabelProps().id;
   const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");

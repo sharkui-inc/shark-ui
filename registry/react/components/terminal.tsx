@@ -32,7 +32,7 @@ interface TerminalProps extends React.ComponentProps<typeof ark.div> {
 }
 
 export const Terminal = (props: TerminalProps) => {
-  const { autoScroll = true, className, output = "", ...rest } = props;
+  const { autoScroll = true, output = "", className, ...rest } = props;
 
   const value = React.useMemo(
     () => ({
@@ -61,9 +61,13 @@ export const Terminal = (props: TerminalProps) => {
   );
 };
 
-const TerminalFollow = (props: { followKey: string }) => {
+interface TerminalFollowProps {
+  followKey: string;
+}
+
+const TerminalFollow = (props: TerminalFollowProps) => {
   const { followKey } = props;
-  
+
   const { autoScroll } = _useTerminal();
   const { scrollToEdge } = useScrollAreaContext();
 
@@ -162,7 +166,7 @@ interface TerminalContentProps extends React.ComponentProps<typeof ark.div> {
 }
 
 export const TerminalContent = (props: TerminalContentProps) => {
-  const { className, output: outputProp, children, ...rest } = props;
+  const { output: outputProp, className, children, ...rest } = props;
 
   const { output: outputFromContext } = _useTerminal();
   const output = outputProp ?? outputFromContext;

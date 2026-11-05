@@ -12,7 +12,7 @@ const Example = () => (
       <Badge>Latest update</Badge>
       <AnnouncementTitle>
         New feature added
-        <ArrowUpRightIcon aria-hidden />
+        <ArrowUpRightIcon aria-hidden="true" />
       </AnnouncementTitle>
     </Link>
   </Announcement>

@@ -48,7 +48,7 @@ export const ThemeSelectorHeading = (props: ThemeSelectorHeadingProps) => {
               size="icon-xs"
               variant="ghost"
             >
-              <InfoIcon aria-hidden className="text-muted-foreground" />
+              <InfoIcon aria-hidden="true" className="text-muted-foreground" />
             </Button>
           </ToggleTooltipTrigger>
           <ToggleTooltipContent className="max-w-56 text-pretty">
@@ -81,7 +81,7 @@ export const ThemeSelectorHeading = (props: ThemeSelectorHeadingProps) => {
               size="icon-xs"
               variant="ghost"
             >
-              <LockGlyph aria-hidden />
+              <LockGlyph aria-hidden="true" />
             </Button>
           </TooltipTrigger>
           <TooltipContent>

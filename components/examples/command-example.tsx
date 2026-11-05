@@ -30,7 +30,7 @@ export const CommandExample = (props: React.ComponentProps<"div">) => {
   const { className, ...rest } = props;
 
   const rootRef = React.useRef<HTMLDivElement>(null);
-  
+
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
     filter: contains,
@@ -77,7 +77,7 @@ export const CommandExample = (props: React.ComponentProps<"div">) => {
 
                   return (
                     <CommandItem item={item} key={item.value}>
-                      <Icon aria-hidden />
+                      <Icon aria-hidden="true" />
                       {item.label}
                       <CommandShortcut>{item.shortcut}</CommandShortcut>
                     </CommandItem>

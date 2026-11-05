@@ -222,7 +222,7 @@ export const TagsInputItemDeleteTrigger = (
         size="icon-xs"
         variant="ghost"
       >
-        {children ?? <XIcon aria-hidden />}
+        {children ?? <XIcon aria-hidden="true" />}
       </InputGroupButton>
     </ArkTagsInput.ItemDeleteTrigger>
   );
@@ -269,7 +269,7 @@ export const TagsInputClearTrigger = (
         size="icon-xs"
         variant="ghost"
       >
-        {children ?? <XIcon aria-hidden />}
+        {children ?? <XIcon aria-hidden="true" />}
       </InputGroupButton>
     </ArkTagsInput.ClearTrigger>
   );

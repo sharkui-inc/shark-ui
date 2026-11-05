@@ -7,7 +7,7 @@ import {
 
 const AlertVariantInfo = () => (
   <Alert className="max-w-md" variant="info">
-    <HistoryIcon aria-hidden />
+    <HistoryIcon aria-hidden="true" />
     <AlertTitle>New update available</AlertTitle>
     <AlertDescription>
       A new update is available. Check it out now.

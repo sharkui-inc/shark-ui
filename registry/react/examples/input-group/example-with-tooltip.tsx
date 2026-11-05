@@ -20,7 +20,7 @@ const Example = () => (
       <Tooltip>
         <TooltipTrigger asChild>
           <Button aria-label="More info" size="icon-xs" variant="ghost">
-            <InfoIcon aria-hidden />
+            <InfoIcon aria-hidden="true" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>Additional information about this field</TooltipContent>

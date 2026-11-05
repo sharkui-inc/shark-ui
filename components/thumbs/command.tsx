@@ -7,7 +7,7 @@ export const CommandThumb = (props: ThumbCardProps) => (
       <div className="border-input bg-muted flex h-8 items-center rounded-lg border px-3 shadow-sm/4">
         <div className="flex w-full items-center gap-3">
           <SearchIcon
-            aria-hidden
+            aria-hidden="true"
             className="text-muted-foreground/64 size-3 shrink-0"
           />
           <div className="bg-muted-foreground/24 h-2 w-1/3 rounded-full" />

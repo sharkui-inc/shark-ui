@@ -30,7 +30,7 @@ const InputGroupSpinner = () => (
     <InputGroup>
       <InputGroupInput placeholder="Refreshing data..." />
       <InputGroupAddon>
-        <Spinner aria-hidden />
+        <Spinner aria-hidden="true" />
       </InputGroupAddon>
       <InputGroupAddon align="inline-end">
         <InputGroupText>Please wait...</InputGroupText>

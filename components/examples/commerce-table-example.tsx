@@ -32,7 +32,7 @@ import {
 
 export const CommerceTableExample = (props: React.ComponentProps<"div">) => {
   const { className, ...rest } = props;
-  
+
   const [refund, setRefund] = React.useState<(typeof DATA)[number] | null>(
     null
   );
@@ -68,7 +68,7 @@ export const CommerceTableExample = (props: React.ComponentProps<"div">) => {
                         size="icon-sm"
                         variant="outline"
                       >
-                        <EllipsisIcon aria-hidden />
+                        <EllipsisIcon aria-hidden="true" />
                       </Button>
                     </MenuTrigger>
                     <MenuContent>

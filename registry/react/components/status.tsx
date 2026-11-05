@@ -54,7 +54,7 @@ export const Status = (props: StatusProps) => {
       data-size={size}
       data-slot="status-indicator"
       {...rest}
-      aria-hidden
+      aria-hidden="true"
     />
   );
 };

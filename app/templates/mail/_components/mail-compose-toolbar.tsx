@@ -6,15 +6,17 @@ import type { MailComposeMode } from "../_data/mail";
 import { MailComposeTools } from "./mail-compose-tools";
 import { MailToolbarButton } from "./mail-toolbar-button";
 
-export const MailComposeToolbar = (props: {
+interface MailComposeToolbarProps {
   onComposeChange: (mode: MailComposeMode) => void;
-}) => {
+}
+
+export const MailComposeToolbar = (props: MailComposeToolbarProps) => {
   const { onComposeChange } = props;
 
   return (
     <>
       <MailToolbarButton label="Back" onClick={() => onComposeChange(null)}>
-        <ArrowLeftIcon aria-hidden />
+        <ArrowLeftIcon aria-hidden="true" />
       </MailToolbarButton>
       <MailComposeTools />
       <ButtonGroup aria-label="Compose" className="ms-auto shrink-0">
@@ -22,10 +24,10 @@ export const MailComposeToolbar = (props: {
           label="Discard"
           onClick={() => onComposeChange(null)}
         >
-          <XIcon aria-hidden />
+          <XIcon aria-hidden="true" />
         </MailToolbarButton>
         <MailToolbarButton form="mail-compose-form" label="Send" type="submit">
-          <SendIcon aria-hidden />
+          <SendIcon aria-hidden="true" />
         </MailToolbarButton>
       </ButtonGroup>
     </>

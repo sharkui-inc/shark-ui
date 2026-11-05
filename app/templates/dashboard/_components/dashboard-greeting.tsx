@@ -11,7 +11,7 @@ export const DashboardGreeting = () => (
       <p className="text-muted-foreground mt-1 text-sm">{greeting.subtitle}</p>
     </div>
     <Badge className="gap-1" variant="secondary">
-      <TrendingUpIcon aria-hidden />
+      <TrendingUpIcon aria-hidden="true" />
       Updated just now
     </Badge>
   </div>

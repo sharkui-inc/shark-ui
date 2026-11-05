@@ -30,7 +30,7 @@ const Example = () => {
             size="icon-md"
             variant="outline"
           >
-            <BoldIcon aria-hidden />
+            <BoldIcon aria-hidden="true" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>{values.bold}</TooltipContent>
@@ -44,7 +44,7 @@ const Example = () => {
             size="icon-md"
             variant="outline"
           >
-            <ItalicIcon aria-hidden />
+            <ItalicIcon aria-hidden="true" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>{values.italic}</TooltipContent>
@@ -58,7 +58,7 @@ const Example = () => {
             size="icon-md"
             variant="outline"
           >
-            <UnderlineIcon aria-hidden />
+            <UnderlineIcon aria-hidden="true" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>{values.underline}</TooltipContent>
@@ -72,7 +72,7 @@ const Example = () => {
             size="icon-md"
             variant="outline"
           >
-            <StrikethroughIcon aria-hidden />
+            <StrikethroughIcon aria-hidden="true" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>{values.strikethrough}</TooltipContent>

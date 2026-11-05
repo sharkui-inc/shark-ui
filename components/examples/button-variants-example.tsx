@@ -92,7 +92,7 @@ export const ButtonVariantsExample = (props: React.ComponentProps<"div">) => (
           <Button variant="outline">Outline</Button>
           <DialogTrigger asChild>
             <Button aria-label="Add" size="icon-md" variant="outline">
-              <PlusIcon aria-hidden />
+              <PlusIcon aria-hidden="true" />
             </Button>
           </DialogTrigger>
         </ButtonGroup>
@@ -138,7 +138,7 @@ export const ButtonVariantsExample = (props: React.ComponentProps<"div">) => (
       </Clipboard>
       <Button variant="ghost">Ghost</Button>
       <Button variant="link">
-        Link <ArrowUpRightIcon aria-hidden />
+        Link <ArrowUpRightIcon aria-hidden="true" />
       </Button>
     </CardContent>
   </Card>

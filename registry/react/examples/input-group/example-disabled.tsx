@@ -11,7 +11,7 @@ const Example = () => (
   <InputGroup className="max-w-64">
     <InputGroupInput aria-label="Search" disabled placeholder="Search..." />
     <InputGroupAddon>
-      <SearchIcon aria-hidden />
+      <SearchIcon aria-hidden="true" />
     </InputGroupAddon>
   </InputGroup>
 );

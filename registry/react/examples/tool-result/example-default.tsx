@@ -60,7 +60,7 @@ const ToolResultDemo = () => {
         size="sm"
         variant="ghost"
       >
-        <RotateCwIcon aria-hidden data-icon="inline-start" />
+        <RotateCwIcon aria-hidden="true" data-icon="inline-start" />
         Replay
       </Button>
       <ToolResult

@@ -52,7 +52,7 @@ const Example = () => {
               size="icon-md"
               variant="ghost"
             >
-              <XIcon aria-hidden />
+              <XIcon aria-hidden="true" />
             </Button>
           </DialogClose>
         </div>
@@ -77,9 +77,9 @@ const Example = () => {
                     >
                       <span className="bg-muted text-muted-foreground flex size-10 shrink-0 items-center justify-center rounded-xl">
                         {airport.value === "nearby" ? (
-                          <MapPinIcon aria-hidden />
+                          <MapPinIcon aria-hidden="true" />
                         ) : (
-                          <PlaneIcon aria-hidden />
+                          <PlaneIcon aria-hidden="true" />
                         )}
                       </span>
                       <span className="flex min-w-0 flex-1 flex-col gap-0.5">

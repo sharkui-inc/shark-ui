@@ -43,7 +43,7 @@ const Example = () => {
             id="tour-events-started"
           >
             <PlayIcon
-              aria-hidden
+              aria-hidden="true"
               className="text-muted-foreground size-4 shrink-0"
             />
             Started
@@ -53,7 +53,7 @@ const Example = () => {
             id="tour-events-advanced"
           >
             <ArrowRightIcon
-              aria-hidden
+              aria-hidden="true"
               className="text-muted-foreground size-4 shrink-0 rtl:rotate-180"
             />
             Advanced
@@ -63,7 +63,7 @@ const Example = () => {
             id="tour-events-finished"
           >
             <CircleCheckIcon
-              aria-hidden
+              aria-hidden="true"
               className="text-muted-foreground size-4 shrink-0"
             />
             Finished

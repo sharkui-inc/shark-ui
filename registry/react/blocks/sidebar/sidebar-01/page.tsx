@@ -21,7 +21,7 @@ export default function Sidebar01Page() {
               Documentation
             </span>
             <span
-              aria-hidden
+              aria-hidden="true"
               className="text-muted-foreground hidden sm:inline"
             >
               /

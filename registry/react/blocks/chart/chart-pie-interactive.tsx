@@ -100,7 +100,7 @@ const ChartPieInteractive = () => {
         >
           <SelectTrigger
             aria-label="Select a value"
-            className="ml-auto h-7 w-[130px] rounded-lg pl-2.5"
+            className="ms-auto h-7 w-[130px] rounded-lg ps-2.5"
           >
             <SelectValue placeholder="Select month" />
           </SelectTrigger>

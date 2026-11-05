@@ -247,7 +247,7 @@ export const ColorPickerEyeDropperTrigger = (
       asChild
     >
       <Button size={size} variant={variant}>
-        {children ?? <PipetteIcon />}
+        {children ?? <PipetteIcon aria-hidden="true" />}
       </Button>
     </ArkColorPicker.EyeDropperTrigger>
   );
@@ -336,7 +336,7 @@ export const ColorPickerSwatchIndicator = (
       data-slot="color-picker-swatch-indicator"
       {...rest}
     >
-      {children ?? <CheckIcon />}
+      {children ?? <CheckIcon aria-hidden="true" />}
     </ArkColorPicker.SwatchIndicator>
   );
 };
@@ -384,7 +384,7 @@ interface ColorPickerAreaProps
 }
 
 export const ColorPickerArea = (props: ColorPickerAreaProps) => {
-  const { className, showDots = false, children, ...rest } = props;
+  const { showDots = false, className, children, ...rest } = props;
 
   return (
     <ArkColorPicker.Area
@@ -416,7 +416,7 @@ export const ColorPickerAreaThumb = (
   props: React.ComponentProps<typeof ArkColorPicker.AreaThumb>
 ) => {
   const { className, ...rest } = props;
-  
+
   const { dragging } = useColorPickerContext();
 
   return (

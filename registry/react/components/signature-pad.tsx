@@ -15,7 +15,7 @@ export const useSignaturePadContext = useArkSignaturePadContext;
 export const SignaturePad = (
   props: React.ComponentProps<typeof ArkSignaturePad.Root>
 ) => {
-  const { children, className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ArkSignaturePad.Root
@@ -113,7 +113,7 @@ const SignaturePadClear = (
       {...rest}
     >
       <Button size="icon-md" variant="ghost">
-        <RotateCcwIcon />
+        <RotateCcwIcon aria-hidden="true" />
       </Button>
     </ArkSignaturePad.ClearTrigger>
   );

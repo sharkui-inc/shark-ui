@@ -4,7 +4,11 @@ import { PlusIcon } from "lucide-react";
 import { Badge } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
 
-export const TaskHeader = (props: { onNewTask: () => void }) => {
+interface TaskHeaderProps {
+  onNewTask: () => void;
+}
+
+export const TaskHeader = (props: TaskHeaderProps) => {
   const { onNewTask } = props;
 
   return (
@@ -18,7 +22,7 @@ export const TaskHeader = (props: { onNewTask: () => void }) => {
         </Badge>
       </div>
       <Button className="ms-auto" onClick={onNewTask}>
-        <PlusIcon aria-hidden />
+        <PlusIcon aria-hidden="true" />
         New task
       </Button>
     </header>

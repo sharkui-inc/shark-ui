@@ -112,13 +112,15 @@ interface SnippetProps
   value?: string;
 }
 
-const SnippetCommand = (props: {
+interface SnippetCommandProps {
   isEmpty: boolean;
   isMultiline: boolean;
   lines: string[];
   placeholder?: string;
   prompt?: React.ReactNode;
-}) => {
+}
+
+const SnippetCommand = (props: SnippetCommandProps) => {
   const { isEmpty, isMultiline, lines, placeholder, prompt } = props;
 
   const displayLines = lines.map(formatShadcnCommandDisplay);
@@ -160,15 +162,15 @@ export const Snippet = (props: SnippetProps) => {
     items,
     placeholder,
     copyText,
+    size = "md",
+    translations,
+    value,
+    defaultValue,
     onCopy,
     onStatusChange,
     onValueChange,
-    size = "md",
     className,
-    translations,
     children,
-    value,
-    defaultValue,
     ...rest
   } = props;
 
@@ -252,7 +254,11 @@ export const Snippet = (props: SnippetProps) => {
   );
 };
 
-const SnippetMenuItem = (props: { item: SnippetOption }) => {
+interface SnippetMenuItemProps {
+  item: SnippetOption;
+}
+
+const SnippetMenuItem = (props: SnippetMenuItemProps) => {
   const { item } = props;
 
   const { selectedValue, setSelectedValue } = _useSnippet();
@@ -287,7 +293,7 @@ interface SnippetSelectProps {
 }
 
 export const SnippetSelect = (props: SnippetSelectProps) => {
-  const { className, triggerLabel = "Choose command" } = props;
+  const { triggerLabel = "Choose command", className } = props;
 
   const { items, selectedOption } = _useSnippet();
 
@@ -324,14 +330,14 @@ export const SnippetSelect = (props: SnippetSelectProps) => {
           ))}
         </MenuContent>
       </Menu>
-      <span aria-hidden className="bg-border h-4 w-px shrink-0" />
+      <span aria-hidden="true" className="bg-border h-4 w-px shrink-0" />
     </InputGroupAddon>
   );
 };
 
 export const SnippetPrompt = () => (
   <span
-    aria-hidden
+    aria-hidden="true"
     className="text-muted-foreground"
     data-slot="snippet-prompt"
   >
@@ -343,7 +349,7 @@ const isSnippetPrompt = (child: React.ReactNode) =>
   React.isValidElement(child) && child.type === SnippetPrompt;
 
 export const SnippetCode = (props: React.ComponentProps<"div">) => {
-  const { children, className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   const { fallbackLines, selectedOption, placeholder } = _useSnippet();
 

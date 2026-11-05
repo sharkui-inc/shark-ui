@@ -68,7 +68,11 @@ const CreateChatDemo = () => {
   );
 };
 
-const ChatThread = (props: { onReset: () => void }) => {
+interface ChatThreadProps {
+  onReset: () => void;
+}
+
+const ChatThread = (props: ChatThreadProps) => {
   const { onReset } = props;
 
   const { canSendNext, messages, nextMessage, sendNext, status, stop } =
@@ -96,7 +100,7 @@ const ChatThread = (props: { onReset: () => void }) => {
             size="icon-sm"
             variant="outline"
           >
-            <RefreshCwIcon aria-hidden />
+            <RefreshCwIcon aria-hidden="true" />
           </Button>
         </CardAction>
       </CardHeader>
@@ -165,7 +169,7 @@ const ChatThread = (props: { onReset: () => void }) => {
               <Menu positioning={{ placement: "top-start" }}>
                 <MenuTrigger asChild>
                   <PromptInputButton aria-label="Add to prompt" size="icon-xs">
-                    <PlusIcon aria-hidden />
+                    <PlusIcon aria-hidden="true" />
                   </PromptInputButton>
                 </MenuTrigger>
                 <MenuContent className="min-w-52">
@@ -186,13 +190,15 @@ const ChatThread = (props: { onReset: () => void }) => {
   );
 };
 
-const FollowLatestMessage = (props: {
+interface FollowLatestMessageProps {
   enabled: boolean;
   messageCount: number;
   streamedText: string;
-}) => {
+}
+
+const FollowLatestMessage = (props: FollowLatestMessageProps) => {
   const { enabled, messageCount, streamedText } = props;
-  
+
   const previousMessageCount = React.useRef(messageCount);
   const scrollArea = useMessageScroller();
 
@@ -247,33 +253,38 @@ const chat = createChat({ adapter: "ai-sdk" })
 
 const promptActions = [
   {
-    icon: <PaperclipIcon aria-hidden />,
+    icon: <PaperclipIcon aria-hidden="true" />,
     label: "Attach files",
     value: "files",
   },
   {
-    icon: <ImagePlusIcon aria-hidden />,
+    icon: <ImagePlusIcon aria-hidden="true" />,
     label: "Add screenshot",
     value: "screenshot",
   },
   {
-    icon: <GlobeIcon aria-hidden />,
+    icon: <GlobeIcon aria-hidden="true" />,
     label: "Add web page",
     value: "web-page",
   },
   {
-    icon: <FileTextIcon aria-hidden />,
+    icon: <FileTextIcon aria-hidden="true" />,
     label: "Add project instructions",
     value: "instructions",
   },
   {
-    icon: <ListTodoIcon aria-hidden />,
+    icon: <ListTodoIcon aria-hidden="true" />,
     label: "Plan implementation",
     value: "plan",
   },
 ];
 
-const MessageText = (props: { isStreaming?: boolean; text: string }) => {
+interface MessageTextProps {
+  isStreaming?: boolean;
+  text: string;
+}
+
+const MessageText = (props: MessageTextProps) => {
   const { isStreaming = false, text } = props;
 
   if (!text) {

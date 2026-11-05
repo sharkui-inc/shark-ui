@@ -281,7 +281,7 @@ export const TreeViewBranchIndicator = (
       data-slot="tree-view-branch-indicator"
       {...rest}
     >
-      <ChevronRightIcon className="size-3.5" />
+      <ChevronRightIcon aria-hidden="true" className="size-3.5" />
     </ArkTreeView.BranchIndicator>
   );
 };
@@ -448,8 +448,10 @@ export const TreeViewCheckbox = (
           data-slot="tree-view-checkbox"
           {...rest}
         >
-          <ArkTreeView.NodeCheckboxIndicator indeterminate={<MinusIcon />}>
-            <CheckIcon />
+          <ArkTreeView.NodeCheckboxIndicator
+            indeterminate={<MinusIcon aria-hidden="true" />}
+          >
+            <CheckIcon aria-hidden="true" />
           </ArkTreeView.NodeCheckboxIndicator>
         </ArkTreeView.NodeCheckbox>
       )}

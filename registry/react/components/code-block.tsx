@@ -67,10 +67,10 @@ interface CodeBlockProps extends React.ComponentProps<typeof ark.div> {
 
 export const CodeBlock = (props: CodeBlockProps) => {
   const {
-    className,
     code = "",
     isStreaming = false,
     language = "tsx",
+    className,
     children,
     ...rest
   } = props;
@@ -105,8 +105,6 @@ export const CodeBlock = (props: CodeBlockProps) => {
     </CodeBlockProvider>
   );
 };
-
-
 
 export const CodeBlockTitle = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
@@ -164,7 +162,7 @@ export const CodeBlockHeader = (props: CodeBlockHeaderProps) => {
 export const CodeBlockFilename = (
   props: React.ComponentProps<typeof ark.span>
 ) => {
-  const { className, style, ...rest } = props;
+  const { style, className, ...rest } = props;
 
   return (
     <ark.span
@@ -448,7 +446,7 @@ const renderCodeLine = (line: CodeLine, lineNumber: number) => {
 const CodeBlockPre = (props: CodeBlockPreProps) => {
   const { className, highlightedLines, lines, showLineNumbers, ...rest } =
     props;
-    
+
   const highlightedLineSet = React.useMemo(
     () => new Set(highlightedLines),
     [highlightedLines]
@@ -498,7 +496,7 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
             >
               {showLineNumbers ? (
                 <span
-                  aria-hidden
+                  aria-hidden="true"
                   className={cn(
                     "sticky inset-s-0 z-10",
                     "w-full min-w-0",
@@ -552,12 +550,12 @@ const CodeBlockPre = (props: CodeBlockPreProps) => {
 
 export const CodeBlockContent = (props: CodeBlockContentProps) => {
   const {
-    children,
     code: codeProp,
     highlightedLines = [],
     isStreaming: isStreamingProp,
     language: languageProp,
     showLineNumbers = false,
+    children,
     ...rest
   } = props;
 

@@ -76,7 +76,7 @@ export const TimerItemGroup = (props: TimerItemGroupProps) => {
 export const TimerItem = (
   props: React.ComponentProps<typeof ArkTimer.Item>
 ) => {
-  const { className, type, ...rest } = props;
+  const { type, className, ...rest } = props;
 
   const timer = useTimerContext();
   const value = timer.formattedTime[type];

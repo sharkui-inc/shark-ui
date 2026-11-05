@@ -5,9 +5,9 @@ const Example = () => (
   <PasswordInput
     aria-label="Password"
     className="w-full max-w-64"
-    hiddenIcon={<LockIcon aria-hidden />}
+    hiddenIcon={<LockIcon aria-hidden="true" />}
     placeholder="Enter password"
-    visibleIcon={<UnlockIcon aria-hidden />}
+    visibleIcon={<UnlockIcon aria-hidden="true" />}
   />
 );
 

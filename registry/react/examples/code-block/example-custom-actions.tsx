@@ -32,7 +32,7 @@ const Example = () => {
             pressed={showLineNumbers}
             size="sm"
           >
-            <ListOrderedIcon aria-hidden />
+            <ListOrderedIcon aria-hidden="true" />
           </Toggle>
           <CodeBlockCopy />
         </CodeBlockActions>

@@ -16,7 +16,7 @@ const Example = () => (
     <InputGroupAddon align="block-start">
       <FileCodeIcon className="text-muted-foreground" />
       <InputGroupText className="font-mono">script.js</InputGroupText>
-      <InputGroupButton aria-label="Copy" className="ml-auto" size="icon-xs">
+      <InputGroupButton aria-label="Copy" className="ms-auto" size="icon-xs">
         <CopyIcon />
       </InputGroupButton>
     </InputGroupAddon>

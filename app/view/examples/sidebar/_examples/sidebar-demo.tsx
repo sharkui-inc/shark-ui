@@ -136,7 +136,7 @@ interface TeamSwitcherProps {
 
 const TeamSwitcher = (props: TeamSwitcherProps) => {
   const { teams } = props;
-  
+
   const [activeTeam, setActiveTeam] = React.useState(teams[0]);
 
   if (!activeTeam) {
@@ -152,14 +152,17 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               size="lg"
             >
-              <IconTile aria-hidden size="lg">
+              <IconTile aria-hidden="true" size="lg">
                 <activeTeam.logo className="size-4" />
               </IconTile>
               <div className="grid flex-1 text-start text-sm leading-tight">
                 <span className="truncate font-medium">{activeTeam.name}</span>
                 <span className="truncate text-xs">{activeTeam.plan}</span>
               </div>
-              <ChevronsUpDownIcon aria-hidden className="ms-auto size-4" />
+              <ChevronsUpDownIcon
+                aria-hidden="true"
+                className="ms-auto size-4"
+              />
             </SidebarMenuButton>
           </MenuTrigger>
           <MenuContent className="w-(--reference-width) min-w-56">
@@ -175,7 +178,7 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
                   value={team.name}
                 >
                   <IconTile
-                    aria-hidden
+                    aria-hidden="true"
                     className="border-input rounded-md bg-transparent shadow-none"
                     size="xs"
                   >
@@ -189,7 +192,7 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
             <MenuSeparator />
             <MenuGroup>
               <MenuItem className="gap-2" value="add-team">
-                <IconTile aria-hidden size="xs">
+                <IconTile aria-hidden="true" size="xs">
                   <PlusIcon className="size-4" />
                 </IconTile>
                 <div className="text-muted-foreground font-medium">
@@ -229,7 +232,7 @@ const NavMain = (props: NavMainProps) => {
             <SidebarMenuItem>
               <CollapsibleTrigger asChild>
                 <SidebarMenuButton tooltip={item.title}>
-                  {item.icon ? <item.icon aria-hidden /> : null}
+                  {item.icon ? <item.icon aria-hidden="true" /> : null}
                   <span>{item.title}</span>
                   <CollapsibleIndicator />
                 </SidebarMenuButton>
@@ -274,32 +277,32 @@ const NavProjects = (props: NavProjectsProps) => {
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
               <a href={item.url}>
-                <item.icon aria-hidden />
+                <item.icon aria-hidden="true" />
                 <span>{item.name}</span>
               </a>
             </SidebarMenuButton>
             <Menu positioning={{ placement: "right-start" }}>
               <MenuTrigger asChild>
                 <SidebarMenuAction showOnHover>
-                  <MoreHorizontalIcon aria-hidden />
+                  <MoreHorizontalIcon aria-hidden="true" />
                   <span className="sr-only">More</span>
                 </SidebarMenuAction>
               </MenuTrigger>
               <MenuContent className="min-w-48">
                 <MenuGroup>
                   <MenuItem value={`${item.name}-view`}>
-                    <FolderIcon aria-hidden />
+                    <FolderIcon aria-hidden="true" />
                     View Project
                   </MenuItem>
                   <MenuItem value={`${item.name}-share`}>
-                    <ForwardIcon aria-hidden />
+                    <ForwardIcon aria-hidden="true" />
                     Share Project
                   </MenuItem>
                 </MenuGroup>
                 <MenuSeparator />
                 <MenuGroup>
                   <MenuItem value={`${item.name}-delete`} variant="destructive">
-                    <Trash2Icon aria-hidden />
+                    <Trash2Icon aria-hidden="true" />
                     Delete Project
                   </MenuItem>
                 </MenuGroup>
@@ -310,7 +313,7 @@ const NavProjects = (props: NavProjectsProps) => {
         <SidebarMenuItem>
           <SidebarMenuButton className="text-sidebar-foreground">
             <MoreHorizontalIcon
-              aria-hidden
+              aria-hidden="true"
               className="text-sidebar-foreground"
             />
             <span>More</span>
@@ -354,7 +357,10 @@ const NavUser = (props: NavUserProps) => {
                 <span className="truncate font-medium">{user.name}</span>
                 <span className="truncate text-xs">{user.email}</span>
               </div>
-              <ChevronsUpDownIcon aria-hidden className="ms-auto size-4" />
+              <ChevronsUpDownIcon
+                aria-hidden="true"
+                className="ms-auto size-4"
+              />
             </SidebarMenuButton>
           </MenuTrigger>
           <MenuContent className="w-full sm:w-64">
@@ -375,29 +381,29 @@ const NavUser = (props: NavUserProps) => {
             <MenuSeparator />
             <MenuGroup>
               <MenuItem value="upgrade">
-                <CrownIcon aria-hidden />
+                <CrownIcon aria-hidden="true" />
                 Upgrade to Pro
               </MenuItem>
             </MenuGroup>
             <MenuSeparator />
             <MenuGroup>
               <MenuItem value="account">
-                <BadgeCheckIcon aria-hidden />
+                <BadgeCheckIcon aria-hidden="true" />
                 Account
               </MenuItem>
               <MenuItem value="billing">
-                <CreditCardIcon aria-hidden />
+                <CreditCardIcon aria-hidden="true" />
                 Billing
               </MenuItem>
               <MenuItem value="notifications">
-                <BellIcon aria-hidden />
+                <BellIcon aria-hidden="true" />
                 Notifications
               </MenuItem>
             </MenuGroup>
             <MenuSeparator />
             <MenuGroup>
               <MenuItem value="logout">
-                <LogOutIcon aria-hidden />
+                <LogOutIcon aria-hidden="true" />
                 Log out
               </MenuItem>
             </MenuGroup>

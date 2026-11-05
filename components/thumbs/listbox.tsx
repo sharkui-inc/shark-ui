@@ -9,7 +9,10 @@ export const ListboxThumb = (props: ThumbCardProps) => (
       </div>
       <div className="bg-primary flex h-6 items-center justify-between gap-2 rounded-md px-2 py-1.5">
         <div className="bg-primary-foreground h-1.5 w-1/2 rounded-full" />
-        <CheckIcon aria-hidden className="text-primary-foreground size-3" />
+        <CheckIcon
+          aria-hidden="true"
+          className="text-primary-foreground size-3"
+        />
       </div>
       <div className="flex h-6 items-center gap-2 rounded-md px-2 py-1.5">
         <div className="bg-muted-foreground/24 h-1.5 w-1/2 rounded-full" />

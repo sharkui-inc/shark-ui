@@ -11,7 +11,7 @@ import {
 const Example = () => (
   <Item className="w-full max-w-sm" variant="outline">
     <ItemMedia variant="icon">
-      <FileTextIcon aria-hidden />
+      <FileTextIcon aria-hidden="true" />
     </ItemMedia>
     <ItemContent>
       <ItemTitle>Q3 roadmap.md</ItemTitle>

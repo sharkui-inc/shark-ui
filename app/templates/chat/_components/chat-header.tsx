@@ -38,7 +38,7 @@ const AppsPanelToggle = () => {
       size="icon-sm"
       variant="ghost"
     >
-      <PanelRightIcon aria-hidden />
+      <PanelRightIcon aria-hidden="true" />
     </Button>
   );
 };
@@ -47,30 +47,30 @@ const EnvironmentMenu = () => (
   <Menu positioning={{ placement: "bottom-end" }}>
     <MenuTrigger asChild>
       <Button aria-label="Open environment menu" size="icon-sm" variant="ghost">
-        <SlidersHorizontalIcon aria-hidden />
+        <SlidersHorizontalIcon aria-hidden="true" />
       </Button>
     </MenuTrigger>
     <MenuContent className="min-w-80">
       <MenuGroup heading="Environment">
         <MenuItem value="changes">
-          <GitBranchIcon aria-hidden />
+          <GitBranchIcon aria-hidden="true" />
           <span className="min-w-0 flex-1">Changes</span>
           <DiffStats added={78_040} removed={14_605} />
         </MenuItem>
         <MenuItem value="local">
-          <MonitorIcon aria-hidden />
+          <MonitorIcon aria-hidden="true" />
           <span>Local</span>
         </MenuItem>
         <MenuItem value="branch">
-          <GitBranchIcon aria-hidden />
+          <GitBranchIcon aria-hidden="true" />
           <span>feat/new-components</span>
         </MenuItem>
         <MenuItem value="commit">
-          <GitBranchIcon aria-hidden />
+          <GitBranchIcon aria-hidden="true" />
           <span>Commit or push</span>
         </MenuItem>
         <MenuItem value="pull-request">
-          <GitPullRequestIcon aria-hidden />
+          <GitPullRequestIcon aria-hidden="true" />
           <span>Create pull request</span>
         </MenuItem>
       </MenuGroup>
@@ -78,12 +78,12 @@ const EnvironmentMenu = () => (
       <MenuGroup heading="Sources">
         {environmentSources.map((source) => (
           <MenuItem key={source} value={source}>
-            <FileIcon aria-hidden />
+            <FileIcon aria-hidden="true" />
             <span className="truncate">{source}</span>
           </MenuItem>
         ))}
         <MenuItem value="view-all">
-          <GitBranchIcon aria-hidden />
+          <GitBranchIcon aria-hidden="true" />
           <span>View all</span>
         </MenuItem>
       </MenuGroup>

@@ -67,7 +67,7 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
     onProjectsSelect,
     onViewChange,
   } = props;
-  
+
   const [query, setQuery] = React.useState("");
 
   const filtered = React.useMemo(() => {
@@ -110,8 +110,8 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
               size="lg"
               tooltip="Onda Assistant"
             >
-              <IconTile aria-hidden size="sm">
-                <BotIcon aria-hidden className="size-4" />
+              <IconTile aria-hidden="true" size="sm">
+                <BotIcon aria-hidden="true" className="size-4" />
               </IconTile>
               <span>Onda Assistant</span>
             </SidebarMenuButton>
@@ -127,7 +127,7 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
             value={query}
           />
           <InputGroupAddon align="inline-start">
-            <SearchIcon aria-hidden />
+            <SearchIcon aria-hidden="true" />
           </InputGroupAddon>
         </InputGroup>
 
@@ -140,7 +140,7 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
                 onNewChat();
               }}
             >
-              <PlusIcon aria-hidden className="size-4" />
+              <PlusIcon aria-hidden="true" className="size-4" />
               <span>New chat</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -149,20 +149,20 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
               isActive={activeView === "projects"}
               onClick={handleProjectsClick}
             >
-              <FolderIcon aria-hidden className="size-4" />
+              <FolderIcon aria-hidden="true" className="size-4" />
               <span>Projects</span>
               <ChevronRightIcon
-                aria-hidden
+                aria-hidden="true"
                 className="ms-auto size-4 opacity-0 group-hover/menu-item:opacity-100"
               />
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton onClick={() => onViewChange("chat")}>
-              <BookOpenIcon aria-hidden className="size-4" />
+              <BookOpenIcon aria-hidden="true" className="size-4" />
               <span>Library</span>
               <ChevronRightIcon
-                aria-hidden
+                aria-hidden="true"
                 className="ms-auto size-4 opacity-0 group-hover/menu-item:opacity-100"
               />
             </SidebarMenuButton>
@@ -178,10 +178,10 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
               {PINNED_PROJECTS.map((project) => (
                 <SidebarMenuItem key={project.id}>
                   <SidebarMenuButton onClick={handleProjectsClick}>
-                    <FolderIcon aria-hidden className="size-4" />
+                    <FolderIcon aria-hidden="true" className="size-4" />
                     <span>{project.title}</span>
                     <ChevronRightIcon
-                      aria-hidden
+                      aria-hidden="true"
                       className="ms-auto size-4 opacity-0 group-hover/menu-item:opacity-100"
                     />
                   </SidebarMenuButton>
@@ -217,7 +217,7 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
                       aria-label={`More options for ${conversation.title}`}
                       showOnHover
                     >
-                      <EllipsisIcon aria-hidden />
+                      <EllipsisIcon aria-hidden="true" />
                     </SidebarMenuAction>
                   </SidebarMenuItem>
                 ))}

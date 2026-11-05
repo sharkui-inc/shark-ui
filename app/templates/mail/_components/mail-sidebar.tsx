@@ -24,8 +24,8 @@ export const MailSidebar = () => {
       <Sidebar className="h-full w-full" collapsible="none">
         <SidebarHeader className="h-14 min-h-14 shrink-0 border-b py-0">
           <div className="flex h-full items-center gap-2">
-            <IconTile aria-hidden size="xs">
-              <MailIcon aria-hidden />
+            <IconTile aria-hidden="true" size="xs">
+              <MailIcon aria-hidden="true" />
             </IconTile>
             <p className="truncate text-sm font-semibold">Onda Mail</p>
           </div>

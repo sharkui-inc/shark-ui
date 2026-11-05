@@ -10,9 +10,9 @@ const UseMediaQueryDemo = () => {
     <div className="flex items-center gap-3">
       <div className="bg-muted/48 [&_svg]:text-muted-foreground flex size-10 items-center justify-center rounded-xl border [&_svg]:size-4">
         {isMobile ? (
-          <SmartphoneIcon aria-hidden />
+          <SmartphoneIcon aria-hidden="true" />
         ) : (
-          <MonitorIcon aria-hidden />
+          <MonitorIcon aria-hidden="true" />
         )}
       </div>
       <div className="flex flex-col gap-1">

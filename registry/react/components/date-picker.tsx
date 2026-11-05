@@ -28,8 +28,8 @@ export const DatePicker = (
     lazyMount = true,
     unmountOnExit = true,
     positioning,
-    className,
     timeZone = getLocalTimeZone(),
+    className,
     ...rest
   } = props;
 
@@ -74,12 +74,12 @@ export const DatePickerTrigger = (
   props: React.ComponentProps<typeof ArkDatePicker.Trigger>
 ) => {
   const {
+    "aria-labelledby": ariaLabelledBy,
     className,
     children,
-    "aria-labelledby": ariaLabelledBy,
     ...rest
   } = props;
-  
+
   const datePicker = useDatePickerContext();
   const labelId = datePicker.getLabelProps().id;
   const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
@@ -122,7 +122,10 @@ export const DatePickerInput = (props: DatePickerInputProps) => {
         <InputGroupAddon align="inline-end">
           <ArkDatePicker.Trigger asChild data-slot="date-picker-trigger">
             <InputGroupButton size="icon-xs" variant="ghost">
-              <CalendarIcon aria-hidden className="text-muted-foreground" />
+              <CalendarIcon
+                aria-hidden="true"
+                className="text-muted-foreground"
+              />
             </InputGroupButton>
           </ArkDatePicker.Trigger>
         </InputGroupAddon>

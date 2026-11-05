@@ -12,7 +12,7 @@ import {
 const Example = () => (
   <ToolResult className="max-w-lg" defaultOpen status="success">
     <ToolResultTrigger>
-      <GlobeIcon aria-hidden />
+      <GlobeIcon aria-hidden="true" />
       <ToolResultTitle>Fetched docs</ToolResultTitle>
       <ToolResultName>WebFetch</ToolResultName>
       <ToolResultAction>

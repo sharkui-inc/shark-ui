@@ -53,7 +53,7 @@ const Example = () => (
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" tooltip="Onda">
-              <IconTile aria-hidden size="md">
+              <IconTile aria-hidden="true" size="md">
                 <WavesHorizontalIcon />
               </IconTile>
               <span>Onda</span>

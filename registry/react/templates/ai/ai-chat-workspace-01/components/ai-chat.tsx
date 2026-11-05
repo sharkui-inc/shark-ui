@@ -321,7 +321,7 @@ export const AIChat = () => {
                   size="icon-xs"
                   variant="ghost"
                 >
-                  <EllipsisIcon aria-hidden />
+                  <EllipsisIcon aria-hidden="true" />
                 </Button>
               </div>
             </header>
@@ -361,7 +361,7 @@ export const AIChat = () => {
                                   );
                                 }}
                               >
-                                <Trash2Icon aria-hidden />
+                                <Trash2Icon aria-hidden="true" />
                               </QueueItemAction>
                             </QueueItemActions>
                           </QueueItem>

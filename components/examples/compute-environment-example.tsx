@@ -28,7 +28,7 @@ export const ComputeEnvironmentExample = (
   props: React.ComponentProps<"div">
 ) => {
   const { className, ...rest } = props;
-  
+
   const [isSaving, setIsSaving] = React.useState(false);
 
   return (

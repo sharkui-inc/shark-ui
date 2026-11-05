@@ -7,7 +7,7 @@ export const LinkOverlayThumb = (props: ThumbCardProps) => (
       <div className="relative flex h-16 w-full items-center justify-center p-3">
         <div className="bg-muted-foreground/24 size-full rounded-md" />
         <div
-          aria-hidden
+          aria-hidden="true"
           className="border-input absolute inset-0 flex items-center justify-center rounded-md border border-dashed"
         >
           <ArrowUpRightIcon className="text-muted-foreground/64 size-4" />

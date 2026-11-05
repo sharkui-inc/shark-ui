@@ -99,7 +99,7 @@ export const DashboardEmployees = () => {
               value={query}
             />
             <InputGroupAddon>
-              <SearchIcon aria-hidden />
+              <SearchIcon aria-hidden="true" />
             </InputGroupAddon>
           </InputGroup>
         </CardAction>
@@ -118,7 +118,11 @@ export const DashboardEmployees = () => {
   );
 };
 
-const EmployeeActions = (props: { employee: Employee }) => {
+interface EmployeeActionsProps {
+  employee: Employee;
+}
+
+const EmployeeActions = (props: EmployeeActionsProps) => {
   const { employee } = props;
 
   return (
@@ -129,7 +133,7 @@ const EmployeeActions = (props: { employee: Employee }) => {
           size="icon-xs"
           variant="ghost"
         >
-          <MoreHorizontalIcon aria-hidden />
+          <MoreHorizontalIcon aria-hidden="true" />
         </Button>
       </MenuTrigger>
       <MenuContent>

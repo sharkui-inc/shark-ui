@@ -8,11 +8,17 @@ export const ComboboxThumb = (props: ThumbCardProps) => (
         <div className="flex items-center gap-1">
           <div className="border-input bg-background flex h-4.5 items-center gap-1 rounded-lg border px-1.5">
             <div className="bg-muted-foreground/24 h-1.5 w-4 rounded-lg" />
-            <XIcon aria-hidden className="text-muted-foreground size-2" />
+            <XIcon
+              aria-hidden="true"
+              className="text-muted-foreground size-2"
+            />
           </div>
           <div className="border-input bg-background flex h-4.5 items-center gap-1 rounded-lg border px-1.5">
             <div className="bg-muted-foreground/24 h-1.5 w-6 rounded-lg" />
-            <XIcon aria-hidden className="text-muted-foreground size-2" />
+            <XIcon
+              aria-hidden="true"
+              className="text-muted-foreground size-2"
+            />
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ const InputGroupBlockStart = () => (
         <InputGroupAddon align="block-start">
           <FileCodeIcon className="text-muted-foreground" />
           <InputGroupText className="font-mono">script.js</InputGroupText>
-          <InputGroupButton className="ml-auto" size="icon-xs">
+          <InputGroupButton className="ms-auto" size="icon-xs">
             <CopyIcon />
             <span className="sr-only">Copy</span>
           </InputGroupButton>

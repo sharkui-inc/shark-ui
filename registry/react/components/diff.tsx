@@ -57,7 +57,7 @@ interface DiffHeaderProps extends React.ComponentProps<typeof ark.div> {
 }
 
 export const DiffFile = (props: React.ComponentProps<typeof ark.span>) => {
-  const { className, style, ...rest } = props;
+  const { style, className, ...rest } = props;
 
   return (
     <ark.span
@@ -132,7 +132,7 @@ interface DiffStatsProps extends React.ComponentProps<typeof ark.span> {
 }
 
 export const DiffStats = (props: DiffStatsProps) => {
-  const { className, added = 0, removed = 0, ...rest } = props;
+  const { added = 0, removed = 0, className, ...rest } = props;
 
   return (
     <ark.span
@@ -196,11 +196,11 @@ const diffLineVariants = tv({
       "text-muted-foreground whitespace-pre",
     ],
     gutter: [
-      "sticky left-0 z-1",
+      "sticky start-0 z-1",
       "w-full min-w-0",
       "flex items-center",
       "bg-card",
-      "before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:w-0.75 before:content-['']",
+      "before:pointer-events-none before:absolute before:inset-y-0 before:start-0 before:w-0.75 before:content-['']",
     ],
     number: [
       "w-full",
@@ -251,7 +251,7 @@ interface DiffLineProps
 }
 
 export const DiffLine = (props: DiffLineProps) => {
-  const { className, type = "context", children, line, ...rest } = props;
+  const { type = "context", line, className, children, ...rest } = props;
 
   const lineType: DiffLineType = type ?? "context";
   const { code, gutter, number, root } = diffLineVariants({ type: lineType });

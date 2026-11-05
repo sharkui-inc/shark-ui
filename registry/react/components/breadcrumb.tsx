@@ -91,7 +91,7 @@ export const BreadcrumbPage = (
 export const BreadcrumbSeparator = (
   props: React.ComponentProps<typeof ark.li>
 ) => {
-  const { children, className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <Separator
@@ -107,11 +107,14 @@ export const BreadcrumbSeparator = (
       <ark.li
         data-slot="breadcrumb-separator"
         {...rest}
-        aria-hidden
+        aria-hidden="true"
         role="presentation"
       >
         {children ?? (
-          <ChevronRightIcon className={cn("size-4", "rtl:rotate-180")} />
+          <ChevronRightIcon
+            aria-hidden="true"
+            className={cn("size-4", "rtl:rotate-180")}
+          />
         )}
       </ark.li>
     </Separator>
@@ -124,9 +127,9 @@ export const BreadcrumbEllipsis = (
   <ark.span
     data-slot="breadcrumb-ellipsis"
     {...props}
-    aria-hidden
+    aria-hidden="true"
     role="presentation"
   >
-    <MoreHorizontalIcon className="size-4" />
+    <MoreHorizontalIcon aria-hidden="true" className="size-4" />
   </ark.span>
 );

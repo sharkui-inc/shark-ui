@@ -120,7 +120,7 @@ interface DemoAppContentProps {
 }
 
 export const DemoAppContent = (props: DemoAppContentProps) => {
-  const { className, labels = defaultLabels } = props;
+  const { labels = defaultLabels, className } = props;
 
   return (
     <div

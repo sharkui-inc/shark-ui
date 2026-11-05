@@ -43,7 +43,7 @@ interface ChatRowProps {
 
 const ChatRow = (props: ChatRowProps) => {
   const { align = "start", text, variant = "default" } = props;
-  
+
   const [open, setOpen] = React.useState(false);
   const [reaction, setReaction] = React.useState<string[]>([]);
   const emoji = collection.items.find((item) =>
@@ -101,11 +101,13 @@ const ChatRow = (props: ChatRowProps) => {
   );
 };
 
-const EmojiPicker = (props: {
+interface EmojiPickerProps {
   onValueChange: (value: string[]) => void;
   value: string[];
-}) => {
-  const { onValueChange, value } = props;
+}
+
+const EmojiPicker = (props: EmojiPickerProps) => {
+  const { value, onValueChange } = props;
 
   return (
     <Listbox

@@ -12,21 +12,23 @@ import { Slider } from "@/registry/react/components/slider";
 import type { Track } from "../_data/music";
 import { MusicQueue } from "./music-queue";
 
-export const MusicPlayerExtras = (props: {
+interface MusicPlayerExtrasProps {
   isMuted: boolean;
   onToggleMute: () => void;
   onTrackSelect: (track: Track) => void;
   onVolumeChange: (value: number) => void;
   track: Track;
   volume: number;
-}) => {
+}
+
+export const MusicPlayerExtras = (props: MusicPlayerExtrasProps) => {
   const {
     isMuted,
+    track,
+    volume,
     onToggleMute,
     onTrackSelect,
     onVolumeChange,
-    track,
-    volume,
   } = props;
 
   return (
@@ -34,7 +36,7 @@ export const MusicPlayerExtras = (props: {
       <Sheet closeOnInteractOutside modal={false}>
         <SheetTrigger asChild>
           <Button aria-label="Open play queue" size="icon-md" variant="ghost">
-            <ListMusicIcon aria-hidden />
+            <ListMusicIcon aria-hidden="true" />
           </Button>
         </SheetTrigger>
         <MusicQueue currentTrack={track} onTrackSelect={onTrackSelect} />
@@ -48,9 +50,9 @@ export const MusicPlayerExtras = (props: {
             variant="ghost"
           >
             {isMuted ? (
-              <VolumeXIcon aria-hidden />
+              <VolumeXIcon aria-hidden="true" />
             ) : (
-              <Volume2Icon aria-hidden />
+              <Volume2Icon aria-hidden="true" />
             )}
           </Button>
         </HoverCardTrigger>

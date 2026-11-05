@@ -32,7 +32,7 @@ const getLanguageFromPath = (path: string) => path.split(".").pop() ?? "tsx";
 
 export const CompositionCodeViewer = (props: CompositionCodeViewerProps) => {
   const { files, label, tree } = props;
-  
+
   const [activePath, setActivePath] = React.useState(
     files[0]?.displayPath ?? ""
   );
@@ -81,7 +81,7 @@ export const CompositionCodeViewer = (props: CompositionCodeViewerProps) => {
           >
             <SheetTrigger asChild>
               <Button className="lg:hidden" size="icon-sm" variant="ghost">
-                <FilesIcon aria-hidden />
+                <FilesIcon aria-hidden="true" />
                 <span className="sr-only">Browse files</span>
               </Button>
             </SheetTrigger>

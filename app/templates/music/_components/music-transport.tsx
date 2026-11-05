@@ -12,21 +12,23 @@ import { Button } from "@/registry/react/components/button";
 import { Slider } from "@/registry/react/components/slider";
 import type { Track } from "../_data/music";
 
-export const MusicTransport = (props: {
+interface MusicTransportProps {
   isPlaying: boolean;
   onMoveTrack: (direction: -1 | 1) => void;
   onProgressChange: (value: number) => void;
   onTogglePlaying: () => void;
   progress: number;
   track: Track;
-}) => {
+}
+
+export const MusicTransport = (props: MusicTransportProps) => {
   const {
     isPlaying,
+    progress,
+    track,
     onMoveTrack,
     onProgressChange,
     onTogglePlaying,
-    progress,
-    track,
   } = props;
 
   return (
@@ -38,7 +40,7 @@ export const MusicTransport = (props: {
           size="icon-sm"
           variant="ghost"
         >
-          <ShuffleIcon aria-hidden />
+          <ShuffleIcon aria-hidden="true" />
         </Button>
         <Button
           aria-label="Previous track"
@@ -46,7 +48,7 @@ export const MusicTransport = (props: {
           size="icon-sm"
           variant="ghost"
         >
-          <SkipBackIcon aria-hidden />
+          <SkipBackIcon aria-hidden="true" />
         </Button>
         <Button
           aria-label={isPlaying ? "Pause" : "Play"}
@@ -54,7 +56,11 @@ export const MusicTransport = (props: {
           size="icon-sm"
           variant="ghost"
         >
-          {isPlaying ? <PauseIcon aria-hidden /> : <PlayIcon aria-hidden />}
+          {isPlaying ? (
+            <PauseIcon aria-hidden="true" />
+          ) : (
+            <PlayIcon aria-hidden="true" />
+          )}
         </Button>
         <Button
           aria-label="Next track"
@@ -62,7 +68,7 @@ export const MusicTransport = (props: {
           size="icon-sm"
           variant="ghost"
         >
-          <SkipForwardIcon aria-hidden />
+          <SkipForwardIcon aria-hidden="true" />
         </Button>
         <Button
           aria-label="Repeat queue"
@@ -70,7 +76,7 @@ export const MusicTransport = (props: {
           size="icon-sm"
           variant="ghost"
         >
-          <Repeat2Icon aria-hidden />
+          <Repeat2Icon aria-hidden="true" />
         </Button>
       </div>
       <div className="flex items-center gap-2">

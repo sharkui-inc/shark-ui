@@ -5,7 +5,7 @@ export const StatusThumb = (props: ThumbCardProps) => (
     <div className="flex w-full max-w-40 min-w-0 flex-1 flex-col gap-2">
       <div className="flex items-center gap-2">
         <span
-          aria-hidden
+          aria-hidden="true"
           className="bg-primary size-2.5 shrink-0 rounded-full"
         />
         <div className="border-input bg-muted flex-1 rounded-md border border-dashed p-1.5 shadow-sm/4">
@@ -14,7 +14,7 @@ export const StatusThumb = (props: ThumbCardProps) => (
       </div>
       <div className="flex items-center gap-2">
         <span
-          aria-hidden
+          aria-hidden="true"
           className="bg-muted-foreground/24 size-2.5 shrink-0 rounded-full"
         />
         <div className="border-input bg-muted flex-1 rounded-md border border-dashed p-1.5 shadow-sm/4">

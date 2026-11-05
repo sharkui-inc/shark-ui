@@ -87,7 +87,7 @@ export const FileUploadDropzoneIcon = (
       data-slot="file-upload-dropzone-icon"
       {...rest}
     >
-      {children ?? <UploadIcon />}
+      {children ?? <UploadIcon aria-hidden="true" />}
     </ark.div>
   );
 };
@@ -208,7 +208,7 @@ export const FileUploadList = (props: FileUploadListProps) => {
                       size="icon-xs"
                       variant="ghost"
                     >
-                      <XIcon />
+                      <XIcon aria-hidden="true" />
                     </Button>
                   </FileUploadItemDeleteTrigger>
                 </FileUploadItem>

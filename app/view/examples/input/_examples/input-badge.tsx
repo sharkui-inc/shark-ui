@@ -6,7 +6,7 @@ const InputBadge = () => (
   <Field className="w-full max-w-64">
     <FieldLabel>
       Webhook URL{" "}
-      <Badge className="ml-auto" variant="secondary">
+      <Badge className="ms-auto" variant="secondary">
         Beta
       </Badge>
     </FieldLabel>

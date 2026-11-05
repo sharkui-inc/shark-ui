@@ -2,7 +2,7 @@ import { FolderIcon } from "lucide-react";
 import { IconTile } from "@/registry/react/components/icon-tile";
 
 const Example = () => (
-  <IconTile aria-hidden size="md">
+  <IconTile aria-hidden="true" size="md">
     <FolderIcon />
   </IconTile>
 );

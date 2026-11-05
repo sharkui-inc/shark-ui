@@ -57,7 +57,7 @@ export const ListboxLabel = (
 
 export const ListboxInput = (props: React.ComponentProps<typeof Input>) => {
   const { "aria-labelledby": ariaLabelledBy, ...rest } = props;
- 
+
   const listbox = useListboxContext();
   const labelId = listbox.getLabelProps().id;
   const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
@@ -276,7 +276,7 @@ export const ListboxItemIndicator = (
   props: React.ComponentProps<typeof ArkListbox.ItemIndicator>
 ) => {
   const { className, children, ...rest } = props;
-  
+
   const { indicator } = menuItemIndicatorVariants();
 
   return (
@@ -285,7 +285,7 @@ export const ListboxItemIndicator = (
       data-slot="listbox-item-indicator"
       {...rest}
     >
-      {children ?? <CheckIcon />}
+      {children ?? <CheckIcon aria-hidden="true" />}
     </ArkListbox.ItemIndicator>
   );
 };

@@ -24,7 +24,7 @@ const BreadcrumbRtl = () => (
         <BreadcrumbLink href="/">الرئيسية</BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator>
-        <DotIcon aria-hidden />
+        <DotIcon aria-hidden="true" />
       </BreadcrumbSeparator>
       <BreadcrumbItem>
         <Menu positioning={{ placement: "bottom-start" }}>
@@ -48,7 +48,7 @@ const BreadcrumbRtl = () => (
         </Menu>
       </BreadcrumbItem>
       <BreadcrumbSeparator>
-        <DotIcon aria-hidden />
+        <DotIcon aria-hidden="true" />
       </BreadcrumbSeparator>
       <BreadcrumbItem>
         <BreadcrumbPage>مسار التنقل</BreadcrumbPage>

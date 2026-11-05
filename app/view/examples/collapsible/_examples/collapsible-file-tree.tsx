@@ -75,11 +75,11 @@ const CollapsibleFileTree = () => {
               variant="ghost"
             >
               <CollapsibleIndicator />
-              <FolderIcon aria-hidden data-icon="inline-start" />
+              <FolderIcon aria-hidden="true" data-icon="inline-start" />
               {fileItem.name}
             </Button>
           </CollapsibleTrigger>
-          <CollapsibleContent className="mt-1 ml-5">
+          <CollapsibleContent className="ms-5 mt-1">
             <div className="flex flex-col gap-1">
               {fileItem.items.map((child) => renderItem(child))}
             </div>
@@ -95,7 +95,7 @@ const CollapsibleFileTree = () => {
         size="sm"
         variant="link"
       >
-        <FileIcon aria-hidden data-icon="inline-start" />
+        <FileIcon aria-hidden="true" data-icon="inline-start" />
         <span>{fileItem.name}</span>
       </Button>
     );

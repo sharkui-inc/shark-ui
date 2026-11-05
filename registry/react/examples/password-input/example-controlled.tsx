@@ -15,7 +15,7 @@ const Example = () => {
         placeholder="Enter password"
         value={password}
       />
-      <FieldDescription className="text-right">
+      <FieldDescription className="text-end">
         Character count: {password.length}
       </FieldDescription>
     </Field>

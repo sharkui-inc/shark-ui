@@ -17,7 +17,7 @@ const resizableRegistry = ArkSplitter.createRegistry({
 export const Resizable = (
   props: React.ComponentProps<typeof ArkSplitter.Root>
 ) => {
-  const { className, registry = resizableRegistry, ...rest } = props;
+  const { registry = resizableRegistry, className, ...rest } = props;
 
   return (
     <ArkSplitter.Root
@@ -82,7 +82,7 @@ export const ResizableResizeTrigger = (props: ResizableResizeTriggerProps) => {
             "data-[orientation=vertical]:rotate-90"
           )}
         >
-          <GripVerticalIcon className="size-2.5" />
+          <GripVerticalIcon aria-hidden="true" className="size-2.5" />
         </ArkSplitter.ResizeTriggerIndicator>
       ) : null}
     </ArkSplitter.ResizeTrigger>

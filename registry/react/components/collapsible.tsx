@@ -97,6 +97,7 @@ export const CollapsibleIndicator = (
       {...rest}
     >
       <ChevronDownIcon
+        aria-hidden="true"
         className={cn(
           "size-full shrink-0",
           "transition-transform duration-150 ease-out",

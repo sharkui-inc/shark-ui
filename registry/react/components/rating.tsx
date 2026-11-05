@@ -24,9 +24,9 @@ export const Rating = (props: RatingProps) => {
   const {
     allowHalf = false,
     count = 5,
+    icon = StarIcon,
     className,
     children,
-    icon = StarIcon,
     ...rest
   } = props;
 

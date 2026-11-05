@@ -12,10 +12,12 @@ import {
 } from "@/registry/react/components/table";
 import { TRACKS } from "../_data/music";
 
-export const MusicLibrarySongs = (props: {
+interface MusicLibrarySongsProps {
   favoriteTitles: string[];
   onToggleFavorite: (title: string) => void;
-}) => {
+}
+
+export const MusicLibrarySongs = (props: MusicLibrarySongsProps) => {
   const { favoriteTitles, onToggleFavorite } = props;
 
   return (
@@ -26,7 +28,7 @@ export const MusicLibrarySongs = (props: {
           <TableHead>Title</TableHead>
           <TableHead className="hidden sm:table-cell">Album</TableHead>
           <TableHead className="w-24 text-end">
-            <Clock3Icon aria-hidden className="ms-auto size-3.5" />
+            <Clock3Icon aria-hidden="true" className="ms-auto size-3.5" />
             <span className="sr-only">Duration</span>
           </TableHead>
         </TableRow>
@@ -48,7 +50,7 @@ export const MusicLibrarySongs = (props: {
                   variant={isCurrent ? "default" : "ghost"}
                 >
                   {isCurrent ? (
-                    <AudioWaveformIcon aria-hidden />
+                    <AudioWaveformIcon aria-hidden="true" />
                   ) : (
                     <span>{index + 1}</span>
                   )}
@@ -85,7 +87,7 @@ export const MusicLibrarySongs = (props: {
                     variant="ghost"
                   >
                     <HeartIcon
-                      aria-hidden
+                      aria-hidden="true"
                       fill={isFavorite ? "currentColor" : "none"}
                     />
                   </Button>

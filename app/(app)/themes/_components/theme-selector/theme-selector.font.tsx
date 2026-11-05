@@ -34,7 +34,11 @@ const collections = {
   }),
 };
 
-export const ThemeSelectorFont = (props: { slot: ThemeFontSlot }) => {
+interface ThemeSelectorFontProps {
+  slot: ThemeFontSlot;
+}
+
+export const ThemeSelectorFont = (props: ThemeSelectorFontProps) => {
   const { slot } = props;
 
   const {
@@ -91,7 +95,7 @@ export const ThemeSelectorFont = (props: { slot: ThemeFontSlot }) => {
       trigger={
         <>
           <span
-            aria-hidden
+            aria-hidden="true"
             className="w-4 shrink-0 text-center text-sm"
             style={{ fontFamily: selectedFont.family }}
           >

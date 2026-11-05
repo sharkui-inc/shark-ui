@@ -78,8 +78,8 @@ export const PromptInput = (props: PromptInputProps) => {
   const {
     status = "ready",
     onStop,
-    className,
     onSubmit,
+    className,
     children,
     ...rest
   } = props;
@@ -256,13 +256,13 @@ export const PromptInputSubmit = (
   props: React.ComponentProps<typeof InputGroupButton>
 ) => {
   const {
-    className,
-    children,
     disabled,
-    onClick,
     size = "icon-sm",
     type,
     variant = "default",
+    onClick,
+    className,
+    children,
     ...rest
   } = props;
 
@@ -272,13 +272,13 @@ export const PromptInputSubmit = (
   const isSubmitted = status === "submitted";
   const isDisabled = disabled ?? (isSubmitted || !(isStreaming || hasText));
 
-  let submitIcon = <ArrowUpIcon aria-hidden className="size-4" />;
-  
+  let submitIcon = <ArrowUpIcon aria-hidden="true" className="size-4" />;
+
   if (isSubmitted) {
     submitIcon = <Spinner />;
   } else if (isStreaming) {
     submitIcon = (
-      <SquareIcon aria-hidden className={cn("size-3", "fill-current")} />
+      <SquareIcon aria-hidden="true" className={cn("size-3", "fill-current")} />
     );
   }
 

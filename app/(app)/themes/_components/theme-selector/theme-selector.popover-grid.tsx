@@ -33,16 +33,16 @@ export const ThemeSelectorPopoverGrid = (
   props: ThemeSelectorPopoverGridProps
 ) => {
   const {
-    children,
     collection,
     contentClassName,
     description,
     label,
     lockKey,
-    onPreview,
-    onValueChange,
     trigger,
     value,
+    onPreview,
+    onValueChange,
+    children,
   } = props;
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -94,7 +94,10 @@ export const ThemeSelectorPopoverGrid = (
             <span className="flex min-w-0 flex-1 items-center justify-start gap-2 text-start">
               {trigger}
             </span>
-            <ChevronsUpDownIcon aria-hidden className="text-muted-foreground" />
+            <ChevronsUpDownIcon
+              aria-hidden="true"
+              className="text-muted-foreground"
+            />
           </Button>
         </PopoverTrigger>
 

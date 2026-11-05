@@ -7,7 +7,7 @@ import {
 
 const AlertVariantSuccess = () => (
   <Alert className="max-w-md" variant="success">
-    <CheckCircleIcon aria-hidden />
+    <CheckCircleIcon aria-hidden="true" />
     <AlertTitle>Payment successful</AlertTitle>
     <AlertDescription>
       Your payment has been processed successfully. You will receive a receipt

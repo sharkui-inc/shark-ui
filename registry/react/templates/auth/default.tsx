@@ -22,8 +22,8 @@ const AuthTemplate = () => (
     <div className="flex flex-col gap-4 p-6 md:p-10">
       <div className="flex justify-center gap-2 md:justify-start">
         <a className="flex items-center gap-2 font-medium" href="#">
-          <IconTile aria-hidden size="xs">
-            <WavesHorizontalIcon aria-hidden className="size-4" />
+          <IconTile aria-hidden="true" size="xs">
+            <WavesHorizontalIcon aria-hidden="true" className="size-4" />
           </IconTile>
           Onda Inc.
         </a>
@@ -47,7 +47,7 @@ const AuthTemplate = () => (
                 <div className="flex items-center">
                   <FieldLabel>Password</FieldLabel>
                   <a
-                    className="ml-auto text-sm underline-offset-4 hover:underline"
+                    className="ms-auto text-sm underline-offset-4 hover:underline"
                     href="#"
                   >
                     Forgot your password?

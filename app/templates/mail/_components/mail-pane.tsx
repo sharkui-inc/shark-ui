@@ -9,14 +9,16 @@ import { MailToolbar } from "./mail-toolbar";
 
 const [selectedEmail] = EMAILS;
 
-export const MailPane = (props: {
+interface MailPaneProps {
   composeMode: MailComposeMode;
   onComposeChange: (mode: MailComposeMode) => void;
   onSearchChange: (query: string) => void;
   query: string;
-}) => {
-  const { composeMode, onComposeChange, onSearchChange, query } = props;
-  
+}
+
+export const MailPane = (props: MailPaneProps) => {
+  const { composeMode, query, onComposeChange, onSearchChange } = props;
+
   const [isStarred, setIsStarred] = React.useState(
     selectedEmail ? STARRED_IDS.includes(selectedEmail.id) : false
   );
@@ -50,11 +52,13 @@ export const MailPane = (props: {
   );
 };
 
-const MailPaneBody = (props: {
+interface MailPaneBodyProps {
   composeMode: MailComposeMode;
   onCompose: () => void;
   onSend: (event: React.SubmitEvent<HTMLFormElement>) => void;
-}) => {
+}
+
+const MailPaneBody = (props: MailPaneBodyProps) => {
   const { composeMode, onCompose, onSend } = props;
   if (composeMode) {
     return (

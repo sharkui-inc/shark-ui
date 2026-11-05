@@ -18,7 +18,7 @@ export interface ThumbCardProps extends React.ComponentProps<typeof Card> {
 }
 
 export const ThumbCard = (props: ThumbCardProps) => {
-  const { title, description, children, className, ...rest } = props;
+  const { title, description, className, children, ...rest } = props;
 
   return (
     <Card
@@ -34,7 +34,7 @@ export const ThumbCard = (props: ThumbCardProps) => {
       {...rest}
     >
       <CardHeader
-        aria-hidden
+        aria-hidden="true"
         className={cn(
           "flex h-auto min-h-18 flex-col pb-4",
           "**:data-[slot=card-title]:tracking-tight",
@@ -45,7 +45,7 @@ export const ThumbCard = (props: ThumbCardProps) => {
       />
 
       <CardContent
-        aria-hidden
+        aria-hidden="true"
         className={cn(
           "min-h-40 w-full flex-1",
           "flex items-center justify-center",

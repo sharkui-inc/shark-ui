@@ -102,7 +102,7 @@ const Example = () => {
                   >
                     {label}
                     <Icon
-                      aria-hidden
+                      aria-hidden="true"
                       className="size-3.5"
                       data-icon="inline-end"
                     />
@@ -115,7 +115,7 @@ const Example = () => {
         <TableBody>
           {list.loading
             ? skeletons.map((key) => (
-                <TableRow aria-hidden key={key}>
+                <TableRow aria-hidden="true" key={key}>
                   <TableCell>
                     <div className="flex items-center gap-2">
                       <SkeletonCircle className="size-6" />

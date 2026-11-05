@@ -24,22 +24,24 @@ const AssistantActions = () => (
   <MessageFooter>
     <MessageActions>
       <MessageAction>
-        <CopyIcon aria-hidden />
+        <CopyIcon aria-hidden="true" />
       </MessageAction>
       <MessageAction>
-        <ThumbsUpIcon aria-hidden />
+        <ThumbsUpIcon aria-hidden="true" />
       </MessageAction>
       <MessageAction>
-        <ThumbsDownIcon aria-hidden />
+        <ThumbsDownIcon aria-hidden="true" />
       </MessageAction>
     </MessageActions>
   </MessageFooter>
 );
 
-export const ChatMessageItem = (props: {
+interface ChatMessageItemProps {
   isStreaming?: boolean;
   message: ChatMessage;
-}) => {
+}
+
+export const ChatMessageItem = (props: ChatMessageItemProps) => {
   const { isStreaming = false, message } = props;
 
   const isUser = message.role === "user";
@@ -52,7 +54,7 @@ export const ChatMessageItem = (props: {
           {!isUser && isStreaming && !text ? (
             <Marker role="status">
               <MarkerIcon>
-                <BotIcon aria-hidden />
+                <BotIcon aria-hidden="true" />
               </MarkerIcon>
               <MarkerContent className="shimmer">Thinking</MarkerContent>
             </Marker>

@@ -49,8 +49,8 @@ const Example = () => {
             "bg-muted text-sm",
             "rounded-md border",
             "origin-top",
-            "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-[98%] data-[state=closed]:animate-out",
-            "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[98%] data-[state=open]:animate-in",
+            "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-98 data-[state=closed]:animate-out",
+            "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-98 data-[state=open]:animate-in",
             "motion-reduce:animate-none"
           )}
         >
@@ -61,9 +61,13 @@ const Example = () => {
   );
 };
 
-const TickingTimer = (props: { onTick: () => void }) => {
+interface TickingTimerProps {
+  onTick: () => void;
+}
+
+const TickingTimer = (props: TickingTimerProps) => {
   const { onTick } = props;
-  
+
   const notifyTick = React.useEffectEvent(onTick);
 
   React.useEffect(() => {

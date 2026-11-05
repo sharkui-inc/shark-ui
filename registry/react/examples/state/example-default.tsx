@@ -13,7 +13,7 @@ const StateDemo = () => (
   <State>
     <StateHeader>
       <StateMedia variant="icon">
-        <FolderCodeIcon aria-hidden />
+        <FolderCodeIcon aria-hidden="true" />
       </StateMedia>
       <StateTitle asChild>
         <h2>No Projects Yet</h2>
@@ -31,7 +31,8 @@ const StateDemo = () => (
     </StateContent>
     <Button asChild className="text-muted-foreground" size="sm" variant="link">
       <a aria-label="Learn more about creating projects" href="#">
-        Learn More <ArrowUpRightIcon aria-hidden data-icon="inline-end" />
+        Learn More{" "}
+        <ArrowUpRightIcon aria-hidden="true" data-icon="inline-end" />
       </a>
     </Button>
   </State>

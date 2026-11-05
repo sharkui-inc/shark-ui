@@ -125,7 +125,7 @@ export const BottomNavigationItemIcon = (
       className={cn("flex items-center justify-center", className)}
       data-slot="bottom-navigation-item-icon"
       {...rest}
-      aria-hidden
+      aria-hidden="true"
     />
   );
 };

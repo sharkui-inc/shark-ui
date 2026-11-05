@@ -55,10 +55,10 @@ export const Reasoning = (props: ReasoningProps) => {
   const {
     defaultOpen,
     open,
-    onOpenChange,
     duration,
     isStreaming = false,
     translations,
+    onOpenChange,
     className,
     ...rest
   } = props;

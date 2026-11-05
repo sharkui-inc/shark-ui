@@ -78,7 +78,7 @@ export const DateInput = (props: DateInputProps) => {
         {selectionMode === "range" && (
           <>
             <span
-              aria-hidden
+              aria-hidden="true"
               className={cn(
                 "text-muted-foreground",
                 "pointer-events-none select-none",
@@ -149,7 +149,7 @@ const DateInputControl = (props: DateInputControlProps) => {
               size="icon-xs"
               variant="ghost"
             >
-              <XIcon aria-hidden />
+              <XIcon aria-hidden="true" />
             </InputGroupButton>
           </InputGroupAddon>
         )}
@@ -198,7 +198,7 @@ const DateInputSegment = (
         "group-data-invalid/date-input:text-destructive",
         "not-data-[type=literal]:focus:group-data-invalid/date-input:bg-destructive not-data-[type=literal]:focus:group-data-invalid/date-input:text-white",
         "dark:group-data-invalid/date-input:text-destructive-foreground dark:group-aria-invalid/date-input:text-destructive-foreground",
-        "dark:not-data-[type=literal]:focus:group-data-invalid/date-input:bg-destructive-foreground dark:not-data-[type=literal]:focus:group-data-invalid/date-input:text-white",
+        "dark:not-data-[type=literal]:focus:group-data-invalid/date-input:bg-destructive-foreground",
         className
       )}
       data-slot="date-input-segment"

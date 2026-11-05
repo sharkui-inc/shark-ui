@@ -16,12 +16,14 @@ import {
 } from "@/registry/react/components/sheet";
 import { TRACKS, type Track } from "../_data/music";
 
-export const MusicQueue = (props: {
+interface MusicQueueProps {
   currentTrack: Track;
   onTrackSelect: (track: Track) => void;
-}) => {
+}
+
+export const MusicQueue = (props: MusicQueueProps) => {
   const { currentTrack, onTrackSelect } = props;
-  
+
   const upcoming = TRACKS.filter((track) => track.title !== currentTrack.title);
 
   return (
@@ -46,7 +48,7 @@ export const MusicQueue = (props: {
               </ItemMedia>
               <ItemContent>
                 <ItemTitle className="text-primary">
-                  <AudioWaveformIcon aria-hidden />
+                  <AudioWaveformIcon aria-hidden="true" />
                   {currentTrack.title}
                 </ItemTitle>
                 <ItemDescription>{currentTrack.artist}</ItemDescription>

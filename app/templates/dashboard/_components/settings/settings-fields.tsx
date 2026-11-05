@@ -9,12 +9,14 @@ import {
 import { Input } from "@/registry/react/components/input";
 import { Switch } from "@/registry/react/components/switch";
 
-export const SettingsSwitchField = (props: {
+interface SettingsSwitchFieldProps {
   checked: boolean;
   description: string;
   label: string;
   onCheckedChange: (checked: boolean) => void;
-}) => {
+}
+
+export const SettingsSwitchField = (props: SettingsSwitchFieldProps) => {
   const { checked, description, label, onCheckedChange } = props;
 
   return (
@@ -31,14 +33,16 @@ export const SettingsSwitchField = (props: {
   );
 };
 
-export const SettingsTextField = (props: {
+interface SettingsTextFieldProps {
   description: string;
   label: string;
   onChange: (value: string) => void;
   type?: "email" | "text";
   value: string;
-}) => {
-  const { description, label, onChange, type = "text", value } = props;
+}
+
+export const SettingsTextField = (props: SettingsTextFieldProps) => {
+  const { description, label, type = "text", value, onChange } = props;
 
   return (
     <Field>

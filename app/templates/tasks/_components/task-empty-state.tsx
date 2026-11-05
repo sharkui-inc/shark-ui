@@ -11,18 +11,20 @@ import {
   StateTitle,
 } from "@/registry/react/components/state";
 
-export const TaskEmptyState = (props: {
+interface TaskEmptyStateProps {
   hasFilters: boolean;
   onClearFilters: () => void;
   onCreate: () => void;
-}) => {
+}
+
+export const TaskEmptyState = (props: TaskEmptyStateProps) => {
   const { hasFilters, onClearFilters, onCreate } = props;
 
   return (
     <State className="bg-muted/8 min-h-88 border px-6 py-12 shadow-xs/4">
       <StateHeader>
         <StateMedia variant="icon">
-          <ClipboardListIcon aria-hidden />
+          <ClipboardListIcon aria-hidden="true" />
         </StateMedia>
         <StateTitle asChild>
           <h2>

@@ -65,8 +65,7 @@ const commandDialogContentVariants = tv({
     "max-sm:row-start-1",
     "max-sm:**:data-[slot=command-content]:min-h-0 max-sm:**:data-[slot=command-content]:flex-1",
     "max-sm:**:data-[slot=scroll-area]:min-h-0 max-sm:**:data-[slot=scroll-area]:flex-1",
-    "data-[state=closed]:animate-none",
-    "data-[state=open]:animate-none",
+    "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
   ],
   defaultVariants: {
     fill: false,
@@ -142,12 +141,7 @@ export const CommandDialogContent = (props: CommandDialogContentProps) => {
 
   return (
     <Portal>
-      <DialogOverlay
-        className={cn(
-          "data-[state=closed]:animate-none",
-          "data-[state=open]:animate-none"
-        )}
-      />
+      <DialogOverlay className="motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none" />
 
       <DialogPositioner
         className={commandDialogPositionerVariants({ variant })}
@@ -218,7 +212,7 @@ interface CommandInputProps
 export const CommandContent = (
   props: React.ComponentProps<typeof ArkCombobox.Content>
 ) => {
-  const { children, className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ArkCombobox.Content
@@ -242,9 +236,9 @@ export const CommandContent = (
 export const CommandInput = (props: CommandInputProps) => {
   const {
     size = "lg",
-    className,
     autoFocus = true,
     "aria-label": ariaLabel = "Search commands",
+    className,
     ...rest
   } = props;
 
@@ -260,7 +254,7 @@ export const CommandInput = (props: CommandInputProps) => {
         size={size}
       >
         <InputGroupAddon>
-          <SearchIcon aria-hidden className="opacity-64" />
+          <SearchIcon aria-hidden="true" className="opacity-64" />
         </InputGroupAddon>
         <ArkCombobox.Input asChild data-slot="command-input">
           <InputGroupInput

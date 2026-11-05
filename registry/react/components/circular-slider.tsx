@@ -34,14 +34,14 @@ export interface CircularSliderProps
 
 export const CircularSlider = (props: CircularSliderProps) => {
   const {
-    className,
-    children,
     size = 100,
     thickness = 6,
     markers,
     markersAtSteps = false,
     step = 1,
     style,
+    className,
+    children,
     ...rest
   } = props;
 
@@ -127,7 +127,7 @@ const CircularSliderProgressRing = () => {
 
   return (
     <svg
-      aria-hidden
+      aria-hidden="true"
       className="pointer-events-none"
       height={size}
       viewBox={`0 0 ${size} ${size}`}
@@ -176,7 +176,7 @@ export const CircularSliderLabel = (
 export const CircularSliderThumb = (
   props: React.ComponentProps<typeof ArkAngleSlider.Thumb>
 ) => {
-  const { className, style, ...rest } = props;
+  const { style, className, ...rest } = props;
 
   const { dragging } = useCircularSliderContext();
   const { thumbSize, ringRadius } = _useCircularSlider();
@@ -280,7 +280,7 @@ export const CircularSliderMarkerGroup = (
 export const CircularSliderMarker = (
   props: React.ComponentProps<typeof ArkAngleSlider.Marker>
 ) => {
-  const { className, style, ...rest } = props;
+  const { style, className, ...rest } = props;
 
   const { size, thickness } = _useCircularSlider();
 

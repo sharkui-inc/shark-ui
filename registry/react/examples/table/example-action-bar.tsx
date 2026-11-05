@@ -222,8 +222,6 @@ const Example = () => {
   );
 };
 
-export default Example;
-
 const orders = [
   {
     amount: "245,12 $",
@@ -262,3 +260,5 @@ const statusVariants: Record<string, BadgeVariant> = {
   progress: "info",
   transit: "success",
 };
+
+export default Example;

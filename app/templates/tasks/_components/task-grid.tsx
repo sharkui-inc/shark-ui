@@ -30,8 +30,8 @@ interface TaskGridProps {
 }
 
 export const TaskGrid = (props: TaskGridProps) => {
-  const { hasFilters, onClearFilters, onCreate, table } = props;
-  
+  const { hasFilters, table, onClearFilters, onCreate } = props;
+
   const hasTasks = table.getFilteredRowModel().rows.length > 0;
 
   if (!hasTasks) {

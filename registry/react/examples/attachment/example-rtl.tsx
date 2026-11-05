@@ -18,7 +18,7 @@ const Example = () => {
   return (
     <Attachment state="done">
       <AttachmentMedia>
-        <FileTextIcon aria-hidden />
+        <FileTextIcon aria-hidden="true" />
       </AttachmentMedia>
       <AttachmentContent>
         <AttachmentTitle>{values.fileName}</AttachmentTitle>

@@ -46,7 +46,7 @@ const Example = () => {
         onSubmit={handleSubmit}
       >
         <ApprovalCardHeader>
-          <ShieldCheckIcon aria-hidden />
+          <ShieldCheckIcon aria-hidden="true" />
           <ApprovalCardTitle>Grant repository access?</ApprovalCardTitle>
         </ApprovalCardHeader>
         <ApprovalCardContent>

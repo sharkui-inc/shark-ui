@@ -44,7 +44,7 @@ const Example = () => {
               {headerGroup.headers.map((header) => (
                 <TableHead
                   className={
-                    header.column.id === "total" ? "text-right" : undefined
+                    header.column.id === "total" ? "text-end" : undefined
                   }
                   key={header.id}
                 >
@@ -64,7 +64,7 @@ const Example = () => {
                   {row.getAllCells().map((cell) => (
                     <TableCell
                       className={
-                        cell.column.id === "total" ? "text-right" : undefined
+                        cell.column.id === "total" ? "text-end" : undefined
                       }
                       key={cell.id}
                     >
@@ -120,7 +120,11 @@ const formatCurrency = (amount: number) =>
     style: "currency",
   }).format(amount);
 
-const ExpandToggle = (props: { row: Row<typeof features, Order> }) => {
+interface ExpandToggleProps {
+  row: Row<typeof features, Order>;
+}
+
+const ExpandToggle = (props: ExpandToggleProps) => {
   const { row } = props;
 
   return (
@@ -132,9 +136,9 @@ const ExpandToggle = (props: { row: Row<typeof features, Order> }) => {
       variant="ghost"
     >
       {row.getIsExpanded() ? (
-        <ChevronDownIcon aria-hidden />
+        <ChevronDownIcon aria-hidden="true" />
       ) : (
-        <ChevronRightIcon aria-hidden />
+        <ChevronRightIcon aria-hidden="true" />
       )}
     </Button>
   );
@@ -158,7 +162,7 @@ const columns = columnHelper.columns([
         {formatCurrency(getValue())}
       </span>
     ),
-    header: () => <div className="text-right">Total</div>,
+    header: () => <div className="text-end">Total</div>,
   }),
 ]);
 
@@ -183,7 +187,11 @@ const data: Order[] = [
   },
 ];
 
-const OrderDetail = (props: { order: Order }) => {
+interface OrderDetailProps {
+  order: Order;
+}
+
+const OrderDetail = (props: OrderDetailProps) => {
   const { order } = props;
 
   return (
@@ -196,8 +204,8 @@ const OrderDetail = (props: { order: Order }) => {
           <TableRow>
             <TableHead>Product</TableHead>
             <TableHead className="w-20">Qty</TableHead>
-            <TableHead className="w-28 text-right">Unit</TableHead>
-            <TableHead className="w-28 text-right">Line</TableHead>
+            <TableHead className="w-28 text-end">Unit</TableHead>
+            <TableHead className="w-28 text-end">Line</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -205,10 +213,10 @@ const OrderDetail = (props: { order: Order }) => {
             <TableRow key={`${order.id}-${item.product}`}>
               <TableCell>{item.product}</TableCell>
               <TableCell className="tabular-nums">{item.qty}</TableCell>
-              <TableCell className="text-right tabular-nums">
+              <TableCell className="text-end tabular-nums">
                 {formatCurrency(item.unitPrice)}
               </TableCell>
-              <TableCell className="text-right font-medium tabular-nums">
+              <TableCell className="text-end font-medium tabular-nums">
                 {formatCurrency(item.qty * item.unitPrice)}
               </TableCell>
             </TableRow>

@@ -35,12 +35,12 @@ export const ThemeSelectorField = <T extends CollectionItem>(
     description,
     label,
     lockKey,
-    onPreview,
-    onValueChange,
     placeholder,
     renderItem,
     trigger,
     value,
+    onPreview,
+    onValueChange,
   } = props;
 
   const preview = useThemeHighlightPreview(onPreview);

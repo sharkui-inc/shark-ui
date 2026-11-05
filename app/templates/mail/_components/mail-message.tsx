@@ -9,7 +9,11 @@ import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { type Email, getSenderAvatar } from "../_data/mail";
 import { getInitials } from "../_utils/get-initials";
 
-export const MailMessage = (props: { email: Email }) => {
+interface MailMessageProps {
+  email: Email;
+}
+
+export const MailMessage = (props: MailMessageProps) => {
   const { email } = props;
 
   return (

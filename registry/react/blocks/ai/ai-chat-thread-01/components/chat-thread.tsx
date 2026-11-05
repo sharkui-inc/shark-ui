@@ -136,17 +136,22 @@ interface ChatThreadProps {
 
 const noop = () => undefined;
 
-const EmptyConversation = (props: {
+interface EmptyConversationProps {
   onSuggestion: (text: string) => void;
   userName: string;
-}) => {
-  const { onSuggestion, userName } = props;
+}
+
+const EmptyConversation = (props: EmptyConversationProps) => {
+  const { userName, onSuggestion } = props;
 
   return (
     <State className="min-h-full px-6 py-16 md:px-6 md:py-16">
       <StateHeader>
         <StateMedia>
-          <BotIcon aria-hidden className="text-muted-foreground size-8" />
+          <BotIcon
+            aria-hidden="true"
+            className="text-muted-foreground size-8"
+          />
         </StateMedia>
         <StateTitle asChild>
           <h2>Hello {userName}</h2>
@@ -173,7 +178,11 @@ const EmptyConversation = (props: {
   );
 };
 
-const MessageSources = (props: { sources: ChatMessageSource[] }) => {
+interface MessageSourcesProps {
+  sources: ChatMessageSource[];
+}
+
+const MessageSources = (props: MessageSourcesProps) => {
   const { sources } = props;
 
   return (
@@ -188,7 +197,12 @@ const MessageSources = (props: { sources: ChatMessageSource[] }) => {
   );
 };
 
-const MessageReasoning = (props: { content: string; duration: number }) => {
+interface MessageReasoningProps {
+  content: string;
+  duration: number;
+}
+
+const MessageReasoning = (props: MessageReasoningProps) => {
   const { content, duration } = props;
 
   return (
@@ -199,11 +213,13 @@ const MessageReasoning = (props: { content: string; duration: number }) => {
   );
 };
 
-const MessageTool = (props: {
+interface MessageToolProps {
   file: string;
   name: string;
   pathLabel?: string;
-}) => {
+}
+
+const MessageTool = (props: MessageToolProps) => {
   const { file, name } = props;
 
   return (
@@ -219,7 +235,11 @@ const MessageTool = (props: {
   );
 };
 
-const MessageConfirmation = (props: { title: string }) => {
+interface MessageConfirmationProps {
+  title: string;
+}
+
+const MessageConfirmation = (props: MessageConfirmationProps) => {
   const { title } = props;
 
   return (
@@ -243,7 +263,7 @@ const MessageApprovalPlan = (
   return (
     <ApprovalCard onApprove={noop} onReject={noop}>
       <ApprovalCardHeader>
-        <ListTodoIcon aria-hidden />
+        <ListTodoIcon aria-hidden="true" />
         <ApprovalCardTitle>{title}</ApprovalCardTitle>
       </ApprovalCardHeader>
       <ApprovalCardContent>
@@ -306,7 +326,7 @@ const MessageAttachmentBlock = (props: ChatMessageAttachment) => {
   return (
     <Attachment size="sm">
       <AttachmentMedia>
-        <FileTextIcon aria-hidden />
+        <FileTextIcon aria-hidden="true" />
       </AttachmentMedia>
       <AttachmentContent>
         <AttachmentTitle>{name}</AttachmentTitle>
@@ -320,16 +340,16 @@ const AssistantActions = () => (
   <MessageFooter>
     <MessageActions>
       <MessageAction tooltip="Copy">
-        <CopyIcon aria-hidden />
+        <CopyIcon aria-hidden="true" />
       </MessageAction>
       <MessageAction tooltip="Regenerate">
-        <RefreshCcwIcon aria-hidden />
+        <RefreshCcwIcon aria-hidden="true" />
       </MessageAction>
       <MessageAction tooltip="Good response">
-        <ThumbsUpIcon aria-hidden />
+        <ThumbsUpIcon aria-hidden="true" />
       </MessageAction>
       <MessageAction tooltip="Bad response">
-        <ThumbsDownIcon aria-hidden />
+        <ThumbsDownIcon aria-hidden="true" />
       </MessageAction>
     </MessageActions>
   </MessageFooter>
@@ -352,7 +372,7 @@ const ChatMessageItem = (props: ChatMessageItemProps) => {
           <MessageAvatar>
             <Avatar size="sm">
               <AvatarFallback>
-                <BotIcon aria-hidden className="size-4" />
+                <BotIcon aria-hidden="true" className="size-4" />
               </AvatarFallback>
             </Avatar>
           </MessageAvatar>
@@ -408,7 +428,7 @@ const ChatMessageItem = (props: ChatMessageItemProps) => {
 };
 
 export const ChatThread = (props: ChatThreadProps) => {
-  const { messages, onSuggestion, userName = "James" } = props;
+  const { messages, userName = "James", onSuggestion } = props;
 
   return (
     <MessageScroller className="min-h-0 flex-1">

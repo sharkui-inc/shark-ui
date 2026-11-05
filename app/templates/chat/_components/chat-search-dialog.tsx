@@ -15,13 +15,15 @@ import {
 } from "@/registry/react/components/command";
 import { commandItems } from "../_data/chat";
 
-export const ChatSearchDialog = (props: {
+interface ChatSearchDialogProps {
   onNewChat: () => void;
   onOpenChange: (open: boolean) => void;
   onSelectConversation: (conversation: string) => void;
   open: boolean;
-}) => {
-  const { onNewChat, onOpenChange, onSelectConversation, open } = props;
+}
+
+export const ChatSearchDialog = (props: ChatSearchDialogProps) => {
+  const { open, onNewChat, onOpenChange, onSelectConversation } = props;
 
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
@@ -74,7 +76,7 @@ export const ChatSearchDialog = (props: {
 
                     return (
                       <CommandItem item={item} key={item.value}>
-                        <Icon aria-hidden />
+                        <Icon aria-hidden="true" />
                         <span className="truncate">{item.label}</span>
                         {item.shortcut ? (
                           <CommandShortcut>{item.shortcut}</CommandShortcut>

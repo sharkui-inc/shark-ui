@@ -27,7 +27,7 @@ export const DashboardMetrics = () => (
         <CardHeader description={metric.label} title={metric.value}>
           <CardAction>
             <Badge className="gap-1" size="sm" variant="success">
-              <TrendingUpIcon aria-hidden />
+              <TrendingUpIcon aria-hidden="true" />
               {metric.change}
             </Badge>
           </CardAction>
@@ -49,12 +49,17 @@ export const DashboardMetrics = () => (
   </div>
 );
 
-const MetricSparkline = (props: { data: number[]; label: string }) => {
+interface MetricSparklineProps {
+  data: number[];
+  label: string;
+}
+
+const MetricSparkline = (props: MetricSparklineProps) => {
   const { data, label } = props;
 
   return (
     <ChartContainer
-      aria-hidden
+      aria-hidden="true"
       className="aspect-auto! h-12 w-full"
       config={metricChartConfig}
     >

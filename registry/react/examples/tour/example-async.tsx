@@ -69,7 +69,10 @@ const Example = () => {
                 size="sm"
               >
                 Next
-                <ChevronRightIcon aria-hidden className="rtl:rotate-180" />
+                <ChevronRightIcon
+                  aria-hidden="true"
+                  className="rtl:rotate-180"
+                />
               </Button>
             </TourFooter>
           ) : (
@@ -90,10 +93,12 @@ interface Profile {
 
 type ProfileStatus = "idle" | "loading" | "ready" | "error";
 
-const ProfileCard = (props: {
+interface ProfileCardProps {
   profile: Profile | null;
   status: ProfileStatus;
-}) => {
+}
+
+const ProfileCard = (props: ProfileCardProps) => {
   const { profile, status } = props;
 
   switch (status) {
@@ -140,7 +145,7 @@ const ProfileCard = (props: {
       return (
         <>
           <span className="bg-muted text-muted-foreground flex size-12 shrink-0 items-center justify-center rounded-md">
-            <CircleAlertIcon aria-hidden className="size-4" />
+            <CircleAlertIcon aria-hidden="true" className="size-4" />
           </span>
           <div className="flex min-w-0 flex-col">
             <span className="truncate text-sm font-medium">
@@ -164,7 +169,7 @@ const ProfileCard = (props: {
 const ProfilePlaceholder = () => (
   <>
     <span className="bg-muted text-muted-foreground flex size-12 shrink-0 items-center justify-center rounded-md">
-      <WavesHorizontalIcon aria-hidden className="size-4" />
+      <WavesHorizontalIcon aria-hidden="true" className="size-4" />
     </span>
     <div className="flex min-w-0 flex-col">
       <span className="truncate text-sm font-medium">Waiting for GitHub</span>

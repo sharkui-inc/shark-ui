@@ -87,21 +87,21 @@ const TreeNode = (props: NodeProviderProps) => {
             </ContextMenuTrigger>
             <ContextMenuContent className="min-w-40">
               <ContextMenuItem value="add-folder">
-                <FolderPlusIcon aria-hidden />
+                <FolderPlusIcon aria-hidden="true" />
                 Add folder
               </ContextMenuItem>
               <ContextMenuItem value="add-file">
-                <FilePlusIcon aria-hidden />
+                <FilePlusIcon aria-hidden="true" />
                 Add file
               </ContextMenuItem>
               <ContextMenuSeparator />
               <ContextMenuItem value="rename">
-                <PencilIcon aria-hidden />
+                <PencilIcon aria-hidden="true" />
                 Rename
               </ContextMenuItem>
               <ContextMenuSeparator />
               <ContextMenuItem value="delete" variant="destructive">
-                <Trash2Icon aria-hidden />
+                <Trash2Icon aria-hidden="true" />
                 Delete
               </ContextMenuItem>
             </ContextMenuContent>
@@ -125,12 +125,12 @@ const TreeNode = (props: NodeProviderProps) => {
           </ContextMenuTrigger>
           <ContextMenuContent className="min-w-40">
             <ContextMenuItem value="add-file">
-              <PencilIcon aria-hidden />
+              <PencilIcon aria-hidden="true" />
               Rename
             </ContextMenuItem>
             <ContextMenuSeparator />
             <ContextMenuItem value="delete" variant="destructive">
-              <Trash2Icon aria-hidden />
+              <Trash2Icon aria-hidden="true" />
               Delete
             </ContextMenuItem>
           </ContextMenuContent>

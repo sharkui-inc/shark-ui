@@ -57,7 +57,7 @@ const InputGroupWithTooltip = () => {
                   className="rounded-full"
                   size="icon-xs"
                 >
-                  <InfoIcon aria-hidden />
+                  <InfoIcon aria-hidden="true" />
                 </InputGroupButton>
               </TooltipTrigger>
               <TooltipContent>This is content in a tooltip.</TooltipContent>
@@ -83,7 +83,7 @@ const InputGroupWithTooltip = () => {
               <MenuTrigger asChild>
                 <InputGroupButton className="text-muted-foreground tabular-nums">
                   {country}
-                  <ChevronDownIcon aria-hidden />
+                  <ChevronDownIcon aria-hidden="true" />
                 </InputGroupButton>
               </MenuTrigger>
               <MenuContent className="min-w-16">
@@ -116,7 +116,7 @@ const InputGroupWithTooltip = () => {
                   size="icon-xs"
                   variant="secondary"
                 >
-                  <InfoIcon aria-hidden />
+                  <InfoIcon aria-hidden="true" />
                 </InputGroupButton>
               </InputGroupAddon>
             </PopoverTrigger>
@@ -139,7 +139,7 @@ const InputGroupWithTooltip = () => {
               onClick={() => toast.create({ title: "Added to favorites" })}
               size="icon-xs"
             >
-              <StarIcon aria-hidden />
+              <StarIcon aria-hidden="true" />
             </InputGroupButton>
           </InputGroupAddon>
         </InputGroup>
@@ -155,7 +155,7 @@ const InputGroupWithTooltip = () => {
           <InputGroup>
             <InputGroupInput />
             <InputGroupAddon align="inline-end">
-              <InfoIcon aria-hidden />
+              <InfoIcon aria-hidden="true" />
             </InputGroupAddon>
           </InputGroup>
           <ButtonGroupText>.com</ButtonGroupText>

@@ -22,7 +22,7 @@ const TableActions = () => (
       <TableRow>
         <TableHead>Product</TableHead>
         <TableHead>Price</TableHead>
-        <TableHead className="text-right">Actions</TableHead>
+        <TableHead className="text-end">Actions</TableHead>
       </TableRow>
     </TableHeader>
     <TableBody>
@@ -30,11 +30,11 @@ const TableActions = () => (
         <TableRow key={product.id}>
           <TableCell className="font-medium">{product.name}</TableCell>
           <TableCell>{product.price}</TableCell>
-          <TableCell className="text-right">
+          <TableCell className="text-end">
             <Menu>
               <MenuTrigger asChild>
                 <Button aria-label="Open menu" size="icon-md" variant="ghost">
-                  <MoreHorizontalIcon aria-hidden />
+                  <MoreHorizontalIcon aria-hidden="true" />
                 </Button>
               </MenuTrigger>
               <MenuContent>

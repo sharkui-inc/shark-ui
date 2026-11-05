@@ -16,14 +16,18 @@ import {
 } from "@/registry/react/components/state";
 import { emptyStateSuggestions } from "../_data/chat-demo";
 
-export const EmptyConversation = (props: { onSelect: () => void }) => {
+interface EmptyConversationProps {
+  onSelect: () => void;
+}
+
+export const EmptyConversation = (props: EmptyConversationProps) => {
   const { onSelect } = props;
 
   return (
     <State className="min-h-full">
       <StateHeader>
-        <IconTile aria-hidden size="sm">
-          <SharkIcon aria-hidden />
+        <IconTile aria-hidden="true" size="sm">
+          <SharkIcon aria-hidden="true" />
         </IconTile>
         <StateTitle asChild>
           <h2>What are we building?</h2>
@@ -42,7 +46,7 @@ export const EmptyConversation = (props: { onSelect: () => void }) => {
             >
               <button onClick={onSelect} type="button">
                 <ItemMedia className="text-primary" variant="icon">
-                  <Icon aria-hidden />
+                  <Icon aria-hidden="true" />
                 </ItemMedia>
                 <ItemContent>
                   <ItemTitle>{item.label}</ItemTitle>

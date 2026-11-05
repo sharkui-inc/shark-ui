@@ -16,8 +16,8 @@ const SwapDemo = () => {
       variant="outline"
     >
       <Swap
-        off={<SunIcon aria-hidden />}
-        on={<MoonIcon aria-hidden />}
+        off={<SunIcon aria-hidden="true" />}
+        on={<MoonIcon aria-hidden="true" />}
         swap={swap}
       />
     </Button>

@@ -18,7 +18,7 @@ import {
 
 export const CopyButton = (props: React.ComponentProps<typeof Clipboard>) => {
   const { className, children, ...rest } = props;
-  
+
   const actionsElement = useCodeCollapsibleActions();
 
   const button = (

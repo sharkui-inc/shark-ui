@@ -6,7 +6,7 @@ interface PreviewFrameProps extends React.PropsWithChildren {
 }
 
 export const PreviewFrame = (props: PreviewFrameProps) => {
-  const { children, dir, scrollable = true } = props;
+  const { dir, scrollable = true, children } = props;
 
   return (
     <div

@@ -42,7 +42,12 @@ const Example = () => {
   );
 };
 
-const EventValue = (props: { label: string; value: string }) => {
+interface EventValueProps {
+  label: string;
+  value: string;
+}
+
+const EventValue = (props: EventValueProps) => {
   const { label, value } = props;
 
   return (

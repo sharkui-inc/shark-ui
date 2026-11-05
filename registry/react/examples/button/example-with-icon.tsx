@@ -10,24 +10,24 @@ import { Button } from "@/registry/react/components/button";
 const Example = () => (
   <div className="flex flex-wrap gap-2">
     <Button>
-      <PlusIcon aria-hidden data-icon="inline-start" />
+      <PlusIcon aria-hidden="true" data-icon="inline-start" />
       Add
     </Button>
     <Button variant="outline">
-      <SettingsIcon aria-hidden data-icon="inline-start" />
+      <SettingsIcon aria-hidden="true" data-icon="inline-start" />
       Settings
     </Button>
     <Button variant="secondary">
-      <HeartIcon aria-hidden data-icon="inline-start" />
+      <HeartIcon aria-hidden="true" data-icon="inline-start" />
       Favorite
     </Button>
     <Button variant="ghost">
-      <DownloadIcon aria-hidden data-icon="inline-start" />
+      <DownloadIcon aria-hidden="true" data-icon="inline-start" />
       Download
     </Button>
     <Button variant="link">
       Visit website
-      <ArrowUpRightIcon aria-hidden data-icon="inline-end" />
+      <ArrowUpRightIcon aria-hidden="true" data-icon="inline-end" />
     </Button>
   </div>
 );

@@ -20,7 +20,7 @@ const Example = () => (
       <InputGroupInput placeholder="Your best email" type="email" />
       <InputGroupAddon align="inline-end">
         <InputGroupButton aria-label="Subscribe" size="icon-xs" variant="ghost">
-          <ArrowRightIcon aria-hidden />
+          <ArrowRightIcon aria-hidden="true" />
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>

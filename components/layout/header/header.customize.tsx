@@ -98,8 +98,8 @@ interface FontPickerProps {
 }
 
 const FontPicker = (props: FontPickerProps) => {
-  const { fonts, label, onValueChange, value } = props;
-  
+  const { fonts, label, value, onValueChange } = props;
+
   const collection = React.useMemo(
     () => createListCollection({ items: [...fonts] }),
     [fonts]
@@ -125,7 +125,7 @@ const FontPicker = (props: FontPickerProps) => {
         <SelectTrigger className="w-full">
           <span className="flex min-w-0 items-center gap-2">
             <span
-              aria-hidden
+              aria-hidden="true"
               className="w-4 text-center text-sm font-medium"
               style={{ fontFamily: selectedFont?.family }}
             >
@@ -138,7 +138,7 @@ const FontPicker = (props: FontPickerProps) => {
           {collection.items.map((item) => (
             <SelectItem item={item} key={item.value}>
               <span
-                aria-hidden
+                aria-hidden="true"
                 className="w-4 text-center text-sm font-medium"
                 style={{ fontFamily: item.family }}
               >
@@ -257,7 +257,7 @@ export const HeaderCustomize = () => {
                             )}
                           >
                             <CheckIcon
-                              aria-hidden
+                              aria-hidden="true"
                               className="relative z-10 size-4 text-white opacity-0 transition-opacity group-data-[state=checked]:opacity-100"
                             />
                           </span>
@@ -307,7 +307,7 @@ export const HeaderCustomize = () => {
                             }}
                           >
                             <CheckIcon
-                              aria-hidden
+                              aria-hidden="true"
                               className="relative z-10 size-4 text-white opacity-0 transition-opacity group-data-[state=checked]:opacity-100"
                             />
                           </span>
@@ -346,7 +346,7 @@ export const HeaderCustomize = () => {
                       >
                         <SegmentGroupItemText className="absolute inset-0 z-1 flex items-center justify-center">
                           <CircleIcon
-                            aria-hidden
+                            aria-hidden="true"
                             className={cn(
                               "size-4",
                               tone.value === "dark" && "fill-current"
@@ -399,7 +399,7 @@ export const HeaderCustomize = () => {
                     value={radius.value}
                   >
                     <span
-                      aria-hidden
+                      aria-hidden="true"
                       className="bg-primary size-9"
                       style={{ borderRadius: radius.cssVars.radius }}
                     />
@@ -421,7 +421,7 @@ export const HeaderCustomize = () => {
                   className="max-md:order-1 md:order-2"
                   variant={isMobile ? "outline" : "default"}
                 >
-                  <ClipboardIcon aria-hidden data-icon="inline-start" />
+                  <ClipboardIcon aria-hidden="true" data-icon="inline-start" />
                   Copy
                 </Button>
               </DialogTrigger>
@@ -431,7 +431,7 @@ export const HeaderCustomize = () => {
               onClick={randomize}
               variant={isMobile ? "default" : "outline"}
             >
-              <ShuffleIcon aria-hidden data-icon="inline-start" />
+              <ShuffleIcon aria-hidden="true" data-icon="inline-start" />
               Shuffle
             </Button>
           </div>

@@ -20,7 +20,7 @@ import {
 import type { MailComposeMode } from "../_data/mail";
 import { MailToolbarButton } from "./mail-toolbar-button";
 
-export const MailReadToolbar = (props: {
+interface MailReadToolbarProps {
   isStarred: boolean;
   isUnread: boolean;
   onComposeChange: (mode: MailComposeMode) => void;
@@ -28,15 +28,17 @@ export const MailReadToolbar = (props: {
   onToggleFavorite: () => void;
   onToggleUnread: () => void;
   query: string;
-}) => {
+}
+
+export const MailReadToolbar = (props: MailReadToolbarProps) => {
   const {
     isStarred,
     isUnread,
+    query,
     onComposeChange,
     onSearchChange,
     onToggleFavorite,
     onToggleUnread,
-    query,
   } = props;
 
   return (
@@ -44,13 +46,13 @@ export const MailReadToolbar = (props: {
       <ButtonGroup aria-label="Message actions" className="min-w-0">
         <ButtonGroup aria-label="Mailbox">
           <MailToolbarButton label="Archive message">
-            <ArchiveIcon aria-hidden />
+            <ArchiveIcon aria-hidden="true" />
           </MailToolbarButton>
           <MailToolbarButton label="Delete message">
-            <Trash2Icon aria-hidden />
+            <Trash2Icon aria-hidden="true" />
           </MailToolbarButton>
           <MailToolbarButton label="Mark as junk">
-            <CircleAlertIcon aria-hidden />
+            <CircleAlertIcon aria-hidden="true" />
           </MailToolbarButton>
         </ButtonGroup>
         <ButtonGroup aria-label="Flags">
@@ -59,7 +61,11 @@ export const MailReadToolbar = (props: {
             onClick={onToggleUnread}
             pressed={isUnread}
           >
-            {isUnread ? <EyeIcon aria-hidden /> : <EyeOffIcon aria-hidden />}
+            {isUnread ? (
+              <EyeIcon aria-hidden="true" />
+            ) : (
+              <EyeOffIcon aria-hidden="true" />
+            )}
           </MailToolbarButton>
           <MailToolbarButton
             label={`${isStarred ? "Remove" : "Add"} message ${isStarred ? "from" : "to"} favorites`}
@@ -67,7 +73,7 @@ export const MailReadToolbar = (props: {
             pressed={isStarred}
           >
             <StarIcon
-              aria-hidden
+              aria-hidden="true"
               className={isStarred ? "text-primary fill-current" : undefined}
             />
           </MailToolbarButton>
@@ -77,13 +83,13 @@ export const MailReadToolbar = (props: {
             label="Reply"
             onClick={() => onComposeChange("reply")}
           >
-            <ReplyIcon aria-hidden />
+            <ReplyIcon aria-hidden="true" />
           </MailToolbarButton>
           <MailToolbarButton
             label="Reply all"
             onClick={() => onComposeChange("reply-all")}
           >
-            <ReplyAllIcon aria-hidden />
+            <ReplyAllIcon aria-hidden="true" />
           </MailToolbarButton>
         </ButtonGroup>
       </ButtonGroup>
@@ -96,7 +102,7 @@ export const MailReadToolbar = (props: {
           value={query}
         />
         <InputGroupAddon>
-          <SearchIcon aria-hidden />
+          <SearchIcon aria-hidden="true" />
         </InputGroupAddon>
       </InputGroup>
     </>

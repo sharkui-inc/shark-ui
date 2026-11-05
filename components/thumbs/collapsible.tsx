@@ -7,7 +7,7 @@ export const CollapsibleThumb = (props: ThumbCardProps) => (
       <div className="border-input flex items-center justify-between gap-3 border-b px-3 py-2.5">
         <div className="bg-primary h-2 w-1/2 rounded-full" />
         <ChevronDownIcon
-          aria-hidden
+          aria-hidden="true"
           className="text-primary size-3 shrink-0 rotate-180"
         />
       </div>

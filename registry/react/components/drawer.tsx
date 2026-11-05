@@ -499,10 +499,10 @@ export const DrawerContent = (props: DrawerContentProps) => {
     container,
     showBar,
     showCloseButton = false,
-    className,
-    children,
     ref,
     onPointerDown,
+    className,
+    children,
     ...rest
   } = props;
 
@@ -565,7 +565,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
                 size="icon-sm"
                 variant="ghost"
               >
-                <XIcon aria-hidden />
+                <XIcon aria-hidden="true" />
               </Button>
             </DrawerClose>
           )}
@@ -634,7 +634,7 @@ interface DrawerHeaderProps extends React.ComponentProps<typeof ark.div> {
 }
 
 export const DrawerHeader = (props: DrawerHeaderProps) => {
-  const { className, title, description, children, ...rest } = props;
+  const { title, description, className, children, ...rest } = props;
 
   return (
     <ark.div
@@ -776,7 +776,7 @@ interface DrawerMenuItemProps
     VariantProps<typeof menuItemVariants> {}
 
 export const DrawerMenuItem = (props: DrawerMenuItemProps) => {
-  const { className, type = "button", variant = "default", ...rest } = props;
+  const { type = "button", variant = "default", className, ...rest } = props;
 
   return (
     <button
@@ -849,6 +849,7 @@ export const DrawerMenuTrigger = (
     >
       {children}
       <ChevronRightIcon
+        aria-hidden="true"
         className={cn("size-3.5", "ms-auto", "rtl:rotate-180")}
       />
     </ArkDrawer.Trigger>
@@ -858,7 +859,7 @@ export const DrawerMenuTrigger = (
 export const DrawerMenuCheckboxItem = (
   props: React.ComponentProps<typeof ArkCheckbox.Root>
 ) => {
-  const {className, children,  ...rest } = props;
+  const { className, children, ...rest } = props;
 
   const { item, indicator } = menuItemIndicatorVariants();
 
@@ -875,6 +876,7 @@ export const DrawerMenuCheckboxItem = (
     >
       <ArkCheckbox.Indicator className={indicator()}>
         <CheckIcon
+          aria-hidden="true"
           className="size-4 md:size-3.5"
           data-slot="menu-item-check-icon"
         />
@@ -904,8 +906,8 @@ export const DrawerMenuRadioGroup = (
 export const DrawerMenuRadioItem = (
   props: React.ComponentProps<typeof ArkRadioGroup.Item>
 ) => {
-  const { children, className, ...rest } = props;
-  
+  const { className, children, ...rest } = props;
+
   const { item, indicator } = menuItemIndicatorVariants();
 
   return (
@@ -927,6 +929,7 @@ export const DrawerMenuRadioItem = (
         )}
       >
         <CheckIcon
+          aria-hidden="true"
           className="size-4 md:size-3.5"
           data-slot="menu-item-check-icon"
         />

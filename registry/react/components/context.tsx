@@ -67,16 +67,19 @@ export const Context = (props: ContextProps) => {
   );
 };
 
-export const ContextIcon = (props: { className?: string }) => {
+interface ContextIconProps {
+  className?: string;
+}
+
+export const ContextIcon = (props: ContextIconProps) => {
   const { className } = props;
 
   const { usedPercent } = _useContextValue();
 
   return (
     <CircularProgress
-      aria-hidden
+      aria-hidden="true"
       className={cn("size-4 shrink-0", className)}
-      size={16}
       thickness={2}
       value={usedPercent * 100}
     />
@@ -170,7 +173,7 @@ interface ContextTitleProps extends React.ComponentProps<typeof PopoverTitle> {
 }
 
 export const ContextTitle = (props: ContextTitleProps) => {
-  const { className, showCloseButton = false, ...rest } = props;
+  const { showCloseButton = false, className, ...rest } = props;
 
   return (
     <ark.div
@@ -190,7 +193,7 @@ export const ContextTitle = (props: ContextTitleProps) => {
             size="icon-xs"
             variant="ghost"
           >
-            <XIcon aria-hidden />
+            <XIcon aria-hidden="true" />
           </Button>
         </PopoverClose>
       )}
@@ -252,7 +255,7 @@ interface ContextFooterProps
 }
 
 export const ContextFooter = (props: ContextFooterProps) => {
-  const { children, className, title = "Total cost", ...rest } = props;
+  const { title = "Total cost", className, children, ...rest } = props;
 
   const { costLabel } = _useContextValue();
 
@@ -292,7 +295,7 @@ export interface ContextUsageRowProps
 }
 
 export const ContextUsageRow = (props: ContextUsageRowProps) => {
-  const { className, title, value, ...rest } = props;
+  const { title, value, className, ...rest } = props;
 
   return (
     <ark.div

@@ -34,7 +34,7 @@ const InputGroupInCard = () => (
           <InputGroup>
             <InputGroupInput placeholder="you@example.com" type="email" />
             <InputGroupAddon align="inline-end">
-              <MailIcon aria-hidden />
+              <MailIcon aria-hidden="true" />
             </InputGroupAddon>
           </InputGroup>
         </Field>
@@ -46,7 +46,7 @@ const InputGroupInCard = () => (
             </InputGroupAddon>
             <InputGroupInput placeholder="example.com" />
             <InputGroupAddon align="inline-end">
-              <ExternalLinkIcon aria-hidden />
+              <ExternalLinkIcon aria-hidden="true" />
             </InputGroupAddon>
           </InputGroup>
         </Field>

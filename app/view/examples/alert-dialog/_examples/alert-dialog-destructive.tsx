@@ -20,7 +20,7 @@ const AlertDialogDestructive = () => (
     </AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>
-        <Trash2Icon aria-hidden />
+        <Trash2Icon aria-hidden="true" />
         <AlertDialogTitle>Delete Chat</AlertDialogTitle>
         <AlertDialogDescription>
           This action cannot be undone. This will permanently delete the chat

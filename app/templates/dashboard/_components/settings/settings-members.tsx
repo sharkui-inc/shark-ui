@@ -29,7 +29,11 @@ import {
 } from "../../_data/dashboard";
 import { getInitials } from "../../_utils/get-initials";
 
-export const SettingsMembersPage = (props: { onSave: () => void }) => {
+interface SettingsMembersPageProps {
+  onSave: () => void;
+}
+
+export const SettingsMembersPage = (props: SettingsMembersPageProps) => {
   const { onSave } = props;
 
   return (

@@ -25,7 +25,7 @@ interface ThemePresetPickerProps {
 }
 
 export const ThemePresetPicker = (props: ThemePresetPickerProps) => {
-  const { onSelect, variant = "grid" } = props;
+  const { variant = "grid", onSelect } = props;
 
   switch (variant) {
     case "bar":
@@ -39,7 +39,11 @@ export const ThemePresetPicker = (props: ThemePresetPickerProps) => {
   }
 };
 
-const ThemePresetBar = (props: { onSelect?: () => void }) => {
+interface ThemePresetBarProps {
+  onSelect?: () => void;
+}
+
+const ThemePresetBar = (props: ThemePresetBarProps) => {
   const { onSelect } = props;
 
   const { applyPreset, config } = useThemeCustomization();
@@ -88,7 +92,7 @@ const ThemePresetBar = (props: { onSelect?: () => void }) => {
                   )}
                 >
                   <CheckIcon
-                    aria-hidden
+                    aria-hidden="true"
                     className="relative z-10 size-4 text-white opacity-0 transition-opacity group-data-[state=checked]:opacity-100"
                   />
                 </span>
@@ -102,7 +106,11 @@ const ThemePresetBar = (props: { onSelect?: () => void }) => {
   );
 };
 
-const ThemePresetGrid = (props: { onSelect?: () => void }) => {
+interface ThemePresetGridProps {
+  onSelect?: () => void;
+}
+
+const ThemePresetGrid = (props: ThemePresetGridProps) => {
   const { onSelect } = props;
 
   const { applyPreset, config } = useThemeCustomization();

@@ -28,16 +28,16 @@ const Example = () => (
         <MessageFooter>
           <MessageActions>
             <MessageAction tooltip="Copy">
-              <CopyIcon aria-hidden />
+              <CopyIcon aria-hidden="true" />
             </MessageAction>
             <MessageAction tooltip="Regenerate">
-              <RefreshCcwIcon aria-hidden />
+              <RefreshCcwIcon aria-hidden="true" />
             </MessageAction>
             <MessageAction tooltip="Good response">
-              <ThumbsUpIcon aria-hidden />
+              <ThumbsUpIcon aria-hidden="true" />
             </MessageAction>
             <MessageAction tooltip="Bad response">
-              <ThumbsDownIcon aria-hidden />
+              <ThumbsDownIcon aria-hidden="true" />
             </MessageAction>
           </MessageActions>
         </MessageFooter>

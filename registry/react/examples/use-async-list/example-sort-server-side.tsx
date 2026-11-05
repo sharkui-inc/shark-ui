@@ -57,9 +57,9 @@ const Example = () => {
         <Button disabled={list.loading} onClick={handleSort} variant="outline">
           Sort products
           {descending ? (
-            <ArrowDownIcon aria-hidden data-icon="inline-end" />
+            <ArrowDownIcon aria-hidden="true" data-icon="inline-end" />
           ) : (
-            <ArrowUpIcon aria-hidden data-icon="inline-end" />
+            <ArrowUpIcon aria-hidden="true" data-icon="inline-end" />
           )}
         </Button>
       </div>
@@ -72,7 +72,7 @@ const Example = () => {
         {list.loading
           ? skeletons.map((key) => (
               <Item
-                aria-hidden
+                aria-hidden="true"
                 className="[--space:--spacing(2)]"
                 key={key}
                 variant="outline"

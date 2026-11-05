@@ -13,7 +13,7 @@ const Example = () => (
   <ItemGroup className="w-full max-w-sm gap-2">
     <Item variant="outline">
       <ItemMedia variant="icon">
-        <ClockIcon aria-hidden />
+        <ClockIcon aria-hidden="true" />
       </ItemMedia>
       <ItemContent>
         <ItemTitle>24-hour</ItemTitle>
@@ -24,7 +24,7 @@ const Example = () => (
     </Item>
     <Item variant="outline">
       <ItemMedia variant="icon">
-        <ClockIcon aria-hidden />
+        <ClockIcon aria-hidden="true" />
       </ItemMedia>
       <ItemContent>
         <ItemTitle>12-hour</ItemTitle>

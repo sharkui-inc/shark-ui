@@ -122,7 +122,7 @@ const columns = columnHelper.columns([
         <Menu>
           <MenuTrigger asChild>
             <Button aria-label="Open" size="icon-md" variant="ghost">
-              <MoreHorizontalIcon aria-hidden />
+              <MoreHorizontalIcon aria-hidden="true" />
             </Button>
           </MenuTrigger>
 

@@ -23,7 +23,7 @@ const InputGroupDropdown = () => (
         <Menu positioning={{ placement: "bottom-end" }}>
           <MenuTrigger asChild>
             <InputGroupButton aria-label="More" size="icon-xs" variant="ghost">
-              <EllipsisIcon aria-hidden />
+              <EllipsisIcon aria-hidden="true" />
             </InputGroupButton>
           </MenuTrigger>
           <MenuContent className="min-w-40">
@@ -42,9 +42,9 @@ const InputGroupDropdown = () => (
       <InputGroupAddon align="inline-end">
         <Menu positioning={{ placement: "bottom-end" }}>
           <MenuTrigger asChild>
-            <InputGroupButton className="pr-1.5 text-xs" variant="ghost">
+            <InputGroupButton className="pe-1.5 text-xs" variant="ghost">
               Search In...
-              <ChevronDownIcon aria-hidden className="size-3" />
+              <ChevronDownIcon aria-hidden="true" className="size-3" />
             </InputGroupButton>
           </MenuTrigger>
           <MenuContent className="min-w-40">

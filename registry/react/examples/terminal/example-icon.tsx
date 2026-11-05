@@ -8,7 +8,7 @@ import {
 const Example = () => (
   <Terminal className="max-w-lg" output={output}>
     <TerminalHeader>
-      <TerminalIcon aria-hidden />
+      <TerminalIcon aria-hidden="true" />
       zsh · pnpm test
     </TerminalHeader>
     <TerminalContent />

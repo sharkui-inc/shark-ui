@@ -67,7 +67,7 @@ const Example = () => {
           />
         ) : (
           <div className="text-muted-foreground flex size-full flex-col items-center justify-center gap-2 text-center">
-            <ImageIcon aria-hidden className="size-5" />
+            <ImageIcon aria-hidden="true" className="size-5" />
             <span className="text-xs">Preview appears here</span>
           </div>
         )}

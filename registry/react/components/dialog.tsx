@@ -237,7 +237,7 @@ export const DialogContent = (props: DialogContentProps) => {
                 size="icon-sm"
                 variant="ghost"
               >
-                <XIcon />
+                <XIcon aria-hidden="true" />
               </Button>
             </DialogClose>
           )}
@@ -295,7 +295,7 @@ interface DialogHeaderProps extends React.ComponentProps<typeof ark.div> {
 }
 
 export const DialogHeader = (props: DialogHeaderProps) => {
-  const { className, title, description, children, ...rest } = props;
+  const { title, description, className, children, ...rest } = props;
 
   return (
     <ark.div

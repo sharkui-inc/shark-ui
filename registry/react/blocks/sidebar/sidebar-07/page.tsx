@@ -19,7 +19,7 @@ export default function Sidebar07Page() {
           <div className="flex min-w-0 items-center gap-2 text-sm">
             <span className="text-muted-foreground hidden sm:inline">Onda</span>
             <span
-              aria-hidden
+              aria-hidden="true"
               className="text-muted-foreground hidden sm:inline"
             >
               /

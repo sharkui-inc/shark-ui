@@ -48,7 +48,7 @@ const Example = () => (
           <FloatingPanelRestore />
           <FloatingPanelCloseTrigger asChild>
             <Button aria-label="Close" size="icon-xs">
-              <XIcon aria-hidden />
+              <XIcon aria-hidden="true" />
             </Button>
           </FloatingPanelCloseTrigger>
         </FloatingPanelControl>

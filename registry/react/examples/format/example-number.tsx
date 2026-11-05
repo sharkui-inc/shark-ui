@@ -11,7 +11,7 @@ import {
 const Example = () => (
   <Item className="w-full max-w-sm" variant="outline">
     <ItemMedia variant="icon">
-      <DownloadIcon aria-hidden />
+      <DownloadIcon aria-hidden="true" />
     </ItemMedia>
     <ItemContent>
       <ItemTitle>onda</ItemTitle>

@@ -109,7 +109,7 @@ export const NativeSelect = (props: NativeSelectProps) => {
       />
       {showTrigger ? (
         <ChevronsUpDownIcon
-          aria-hidden
+          aria-hidden="true"
           className={cn(
             "absolute inset-e-2.5 top-1/2",
             "-translate-y-1/2",

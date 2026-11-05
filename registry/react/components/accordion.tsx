@@ -74,6 +74,7 @@ export const AccordionTrigger = (
 
       <ArkAccordion.ItemIndicator data-slot="accordion-indicator">
         <ChevronDownIcon
+          aria-hidden="true"
           className={cn(
             "translate-y-0.5",
             "size-4",

@@ -89,7 +89,7 @@ export const ReasoningCardExample = (props: React.ComponentProps<"div">) => {
           <PromptInputFooter>
             <PromptInputTools>
               <PromptInputButton aria-label="Attach file" size="icon-xs">
-                <PaperclipIcon aria-hidden />
+                <PaperclipIcon aria-hidden="true" />
               </PromptInputButton>
             </PromptInputTools>
             <PromptInputSubmit />

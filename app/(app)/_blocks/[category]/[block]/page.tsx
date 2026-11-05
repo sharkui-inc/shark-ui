@@ -24,9 +24,13 @@ export const generateStaticParams = async () => {
   }));
 };
 
-export const generateMetadata = async (props: {
+interface BlockPageParams {
   params: Promise<{ block: string; category: string }>;
-}): Promise<Metadata> => {
+}
+
+export const generateMetadata = async (
+  props: BlockPageParams
+): Promise<Metadata> => {
   const { block: name, category: slug } = await props.params;
   const item = await getPublishedComposition("blocks", slug, name);
 
@@ -41,9 +45,7 @@ export const generateMetadata = async (props: {
   });
 };
 
-const BlockPage = async (props: {
-  params: Promise<{ block: string; category: string }>;
-}) => {
+const BlockPage = async (props: BlockPageParams) => {
   const { block: name, category: slug } = await props.params;
   const [item, blocks] = await Promise.all([
     getPublishedComposition("blocks", slug, name),
