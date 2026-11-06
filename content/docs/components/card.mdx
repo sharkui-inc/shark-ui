@@ -1,7 +1,11 @@
 ---
 title: Card
-description: Displays content about a single subject.
+description: Container for grouped content.
+seo:
+  description: Card shell for media, headers, content, and actions.
 ---
+
+import manifest from "@/registry/manifest/card";
 
 <ComponentPreview componentName="card" />
 
@@ -28,9 +32,7 @@ npx shadcn@latest add @shark/card
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -60,13 +62,13 @@ Card
 ## Usage
 
 ```tsx
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle, 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
   CardAction,
   CardMedia,
 } from "@/components/ui/card";
@@ -91,7 +93,7 @@ import {
 
 ### Using props
 
-Pass `title` and `description` props directly to `CardHeader`. 
+Pass `title` and `description` props directly to `CardHeader`.
 
 ```tsx showLineNumbers
 <CardHeader title="Card Title" description="Card description">
@@ -113,21 +115,32 @@ Use `CardTitle` and `CardDescription` as children for more control.
 </CardHeader>
 ```
 
-## Examples
+## Variants
 
-### Product card
+`CardMedia` supports `default`, `icon`, and `image` variants.
 
-<ComponentPreview componentName="card" fileName="example-product" />
+### Default
 
-### Icon card
+Use the default variant for inline media content, such as a badge and metadata.
+
+<ComponentPreview componentName="card" fileName="example-media-default" />
+
+### Icon
+
 
 <ComponentPreview componentName="card" fileName="example-icon" />
 
+### Image
+
+Use the image variant for full-width media at the top of the card.
+
+<ComponentPreview componentName="card" fileName="example-product" />
+
+## Examples
+
 ### Custom spacing
 
-The `[--space:--spacing("value")]` on `Card` controls the internal spacing.
-
-Default spacing is `--spacing(6)`.
+The `[--space:--spacing("value")]` controls the internal spacing.
 
 <ComponentPreview componentName="card" fileName="example-custom-spacing" />
 
@@ -137,83 +150,91 @@ Default spacing is `--spacing(6)`.
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
 
+For a whole-card destination, use [Link Overlay](/docs/components/link-overlay) with `LinkBox` rather than making the Card primitive itself a link.
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="card" />
+
 ## API Reference
 
 ### Card
 
 Root wrapper for card layout.
 
-| Prop | Type | Default | 
-| --- | --- | --- | 
-| `className` | `string` | `-` | 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
-| CSS Variable | Default |
-| --- | --- |
-| `--space` | `--spacing(6)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(6)` |
 
 ### CardMedia
 
 Image, video, or media area. Often full-width at top.
 
-| Prop | Type | Default | 
-| --- | --- | --- | 
+| Prop | Type | Default |
+| --- | --- | --- |
 | `variant` | `"default" \| "icon" \| "image"` | `"default"` |
-| `className` | `string` | `-` | 
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CardHeader
 
 Header area. Typically holds title and optional actions.
 
-| Prop | Type | Default | 
-| --- | --- | --- | 
-| `title` | `string` | `-` | 
-| `description` | `string` | `-` | 
-| `className` | `string` | `-` | 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` | `-` |
+| `description` | `string` | `-` |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CardTitle
 
 Card title or heading. Bold by default.
 
-| Prop | Type | Default | 
-| --- | --- | --- | 
-| `className` | `string` | `-` | 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CardDescription
 
 Card description or body text. Muted foreground for hierarchy.
 
-| Prop | Type | Default | 
-| --- | --- | --- | 
-| `className` | `string` | `-` | 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CardAction
 
 Action button or link in the card header.
 
-| Prop | Type | Default | 
-| --- | --- | --- | 
-| `className` | `string` | `-` | 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CardContent
 
 Main body content of the card.
 
-| Prop | Type | Default | 
-| --- | --- | --- | 
-| `className` | `string` | `-` | 
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### CardFooter
 
 Footer area. Typically holds secondary actions or metadata.
 
-| Prop | Type | Default | 
-| --- | --- | --- | 
+| Prop | Type | Default |
+| --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |

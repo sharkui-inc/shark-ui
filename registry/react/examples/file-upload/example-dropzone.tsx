@@ -1,9 +1,9 @@
 "use client";
 
+import { CloudUploadIcon } from "lucide-react";
 import {
   FileUpload,
   FileUploadDropzone,
-  FileUploadDropzoneIcon,
   FileUploadList,
   FileUploadTitle,
 } from "@/registry/react/components/file-upload";
@@ -11,7 +11,11 @@ import {
 const Example = () => (
   <FileUpload className="w-full max-w-xs">
     <FileUploadDropzone>
-      <FileUploadDropzoneIcon />
+      <CloudUploadIcon
+        aria-hidden="true"
+        className="text-muted-foreground group-data-dragging/file-upload:text-primary size-8"
+        strokeWidth={1.5}
+      />
       <FileUploadTitle>Drop your files here</FileUploadTitle>
     </FileUploadDropzone>
     <FileUploadList />

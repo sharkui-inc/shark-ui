@@ -7,7 +7,6 @@ import {
   type SubmitHandler,
   useForm,
 } from "@formisch/react";
-import { toast } from "@registry/react/components/toast";
 import * as v from "valibot";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -26,34 +25,23 @@ import {
   FieldLabel,
 } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
-
-const formSchema = v.object({
-  username: v.pipe(
-    v.string(),
-    v.minLength(3, "Username must be at least 3 characters."),
-    v.maxLength(10, "Username must be at most 10 characters."),
-    v.regex(
-      /^[a-zA-Z0-9_]+$/,
-      "Username can only contain letters, numbers, and underscores."
-    )
-  ),
-});
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: { username: "" },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "username-submitted",
-      title: "Username submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "username-submitted",
+      title: "Username submitted",
     });
   };
 
@@ -99,5 +87,17 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  username: v.pipe(
+    v.string(),
+    v.minLength(3, "Username must be at least 3 characters."),
+    v.maxLength(10, "Username must be at most 10 characters."),
+    v.regex(
+      /^[a-zA-Z0-9_]+$/u,
+      "Username can only contain letters, numbers, and underscores."
+    )
+  ),
+});
 
 export default Example;

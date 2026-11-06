@@ -8,8 +8,6 @@ import {
   type SubmitHandler,
   useForm,
 } from "@formisch/react";
-import { toast } from "@registry/react/components/toast";
-import { CalendarIcon } from "lucide-react";
 import * as v from "valibot";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -33,33 +31,24 @@ import {
 import {
   DatePicker,
   DatePickerContent,
-  DatePickerTrigger,
-  DatePickerValue,
+  DatePickerInput,
+  DatePickerLabel,
 } from "@/registry/react/components/date-picker";
 import {
   Field,
   FieldError,
   FieldGroup,
-  FieldLabel,
 } from "@/registry/react/components/field";
-
-const formSchema = v.object({
-  interviewDate: v.custom<DateValue[]>(
-    (val) => Array.isArray(val) && val.length >= 1,
-    "Please choose your preferred interview date."
-  ),
-});
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: { interviewDate: [] as DateValue[] },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "interview-date-submitted",
-      title: "Interview preference saved",
       description: (
         <pre className="mt-2">
           <code>
@@ -71,6 +60,8 @@ const Example = () => {
           </code>
         </pre>
       ),
+      id: "interview-date-submitted",
+      title: "Interview preference saved",
     });
   };
 
@@ -88,20 +79,25 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["interviewDate"]}>
               {(field) => {
-                const value = (field.input as DateValue[]) ?? [];
+                const value = field.input as DateValue[];
+
                 return (
-                  <Field invalid={Boolean(field.errors?.length)}>
-                    <FieldLabel>Preferred interview date</FieldLabel>
+                  <Field
+                    invalid={Boolean(field.errors?.length)}
+                    onBlur={field.props.onBlur}
+                    onFocus={field.props.onFocus}
+                  >
                     <DatePicker
-                      onValueChange={({ value }) => field.onChange(value)}
+                      className="w-full"
+                      onValueChange={({ value: nextValue }) =>
+                        field.onChange(nextValue)
+                      }
                       value={value}
                     >
-                      <DatePickerTrigger asChild>
-                        <Button className="w-full" variant="outline">
-                          <CalendarIcon />
-                          <DatePickerValue placeholder="Pick a date" />
-                        </Button>
-                      </DatePickerTrigger>
+                      <DatePickerLabel>
+                        Preferred interview date
+                      </DatePickerLabel>
+                      <DatePickerInput placeholder="Pick a date" />
                       <DatePickerContent>
                         <CalendarViewControl>
                           <CalendarPrevTrigger />
@@ -123,7 +119,7 @@ const Example = () => {
           </FieldGroup>
         </CardContent>
         <CardFooter>
-          <Button onClick={() => reset(form)} type="button" variant="outline">
+          <Button onClick={() => reset(form)} variant="outline">
             Reset
           </Button>
           <Button type="submit">Save</Button>
@@ -132,5 +128,12 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  interviewDate: v.custom<DateValue[]>(
+    (val) => Array.isArray(val) && val.length >= 1,
+    "Please choose your preferred interview date."
+  ),
+});
 
 export default Example;

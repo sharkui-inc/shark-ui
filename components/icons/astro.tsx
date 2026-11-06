@@ -1,3 +1,4 @@
+import type React from "react";
 export const AstroIcon = (props: React.ComponentProps<"svg">) => (
   <svg fill="currentColor" viewBox="0 0 24 24" {...props} aria-hidden="true">
     <path

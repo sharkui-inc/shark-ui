@@ -1,7 +1,7 @@
 import { Highlight } from "@/registry/react/components/highlight";
 
 const HighlightDemo = () => (
-  <p className="text-base text-foreground leading-relaxed">
+  <p className="text-foreground text-base leading-relaxed">
     <Highlight
       query="component"
       text="Shark UI is a component library for building accessible web applications."

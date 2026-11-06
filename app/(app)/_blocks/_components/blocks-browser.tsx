@@ -1,0 +1,240 @@
+"use client";
+
+import { PanelLeftIcon, SearchXIcon } from "lucide-react";
+import Link from "next/link";
+import React from "react";
+import { CompositionViewer } from "@/components/registry-compositions/composition-viewer";
+import type {
+  BlockCategory,
+  BlockFileTreeNode,
+  PublishedBlock,
+} from "@/lib/registry";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/registry/react/components/accordion";
+import { Button } from "@/registry/react/components/button";
+import {
+  Sheet,
+  SheetBody,
+  SheetContent,
+  SheetHeader,
+  SheetTrigger,
+} from "@/registry/react/components/sheet";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+} from "@/registry/react/components/sidebar";
+import {
+  State,
+  StateDescription,
+  StateHeader,
+  StateMedia,
+  StateTitle,
+} from "@/registry/react/components/state";
+
+export interface BrowserBlock {
+  block: PublishedBlock;
+  tree: BlockFileTreeNode[];
+}
+
+interface BlocksBrowserProps {
+  activeBlockName?: string;
+  blocks: BrowserBlock[];
+  categories: readonly BlockCategory[];
+  categorySlug?: string;
+  isDetailPage?: boolean;
+}
+
+interface CatalogNavigationProps {
+  activeBlockCategory?: string;
+  activeBlockName?: string;
+  blocks: BrowserBlock[];
+  categories: readonly BlockCategory[];
+  getBlockHref: (entry: BrowserBlock) => string;
+  onNavigate?: () => void;
+}
+
+const CatalogNavigation = (props: CatalogNavigationProps) => {
+  const {
+    activeBlockCategory,
+    activeBlockName,
+    blocks,
+    categories,
+    getBlockHref,
+    onNavigate,
+  } = props;
+
+  const visibleCategories = categories.map((category) => ({
+    category,
+    categoryBlocks: blocks.filter(
+      (entry) => entry.block.category === category.slug
+    ),
+    categoryCount: blocks.filter(
+      (entry) => entry.block.category === category.slug
+    ).length,
+  }));
+
+  return (
+    <SidebarContent className="px-4 py-2" scrollFade>
+      <div className="shrink-0" />
+      <SidebarGroup className="gap-1">
+        <SidebarGroupLabel className="text-sidebar-accent-foreground h-7 px-0">
+          Categories
+        </SidebarGroupLabel>
+        <SidebarGroupContent>
+          <Accordion
+            className="w-full"
+            defaultValue={
+              activeBlockCategory ? [activeBlockCategory] : undefined
+            }
+          >
+            {visibleCategories.map(
+              ({ category, categoryBlocks, categoryCount }) => (
+                <AccordionItem
+                  className="border-0"
+                  key={category.slug}
+                  value={category.slug}
+                >
+                  <AccordionTrigger className="text-muted-foreground hover:bg-muted hover:text-foreground [&_[data-slot=accordion-indicator]_svg]:text-muted-foreground w-full justify-start gap-2 rounded-lg px-3 py-2 text-xs font-medium [&_[data-slot=accordion-indicator]_svg]:size-3.5 [&_[data-slot=accordion-indicator]_svg]:translate-y-0">
+                    <span className="min-w-0 truncate">{category.label}</span>
+                    <span className="ms-auto text-xs font-normal tabular-nums">
+                      {categoryCount}
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="[&>div]:pb-0">
+                    <SidebarMenu className="gap-0.5 pb-2">
+                      {categoryBlocks.map((entry) => (
+                        <SidebarMenuItem key={entry.block.name}>
+                          <SidebarMenuButton
+                            asChild
+                            className="text-muted-foreground hover:bg-muted data-[active=true]:bg-muted data-[active=true]:text-foreground h-8 px-3 py-2 ps-5 text-sm font-normal data-[active=true]:font-medium"
+                            isActive={activeBlockName === entry.block.name}
+                          >
+                            <Link
+                              href={getBlockHref(entry)}
+                              onClick={onNavigate}
+                            >
+                              <span>{entry.block.title}</span>
+                            </Link>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      ))}
+                    </SidebarMenu>
+                  </AccordionContent>
+                </AccordionItem>
+              )
+            )}
+          </Accordion>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+  );
+};
+
+export const BlocksBrowser = (props: BlocksBrowserProps) => {
+  const {
+    blocks,
+    categories,
+    activeBlockName,
+    categorySlug,
+    isDetailPage = false,
+  } = props;
+
+  const [navigationOpen, setNavigationOpen] = React.useState(false);
+
+  const visibleBlocks = blocks.filter(
+    (entry) => !categorySlug || entry.block.category === categorySlug
+  );
+  const activeEntry =
+    visibleBlocks.find((entry) => entry.block.name === activeBlockName) ??
+    visibleBlocks[0];
+
+  const navigationProps: CatalogNavigationProps = {
+    activeBlockCategory: activeEntry?.block.category,
+    activeBlockName: activeEntry?.block.name,
+    blocks,
+    categories,
+    getBlockHref: (entry) =>
+      `/blocks/${entry.block.category}/${entry.block.name}`,
+  };
+  const heading = activeEntry?.block.title ?? "Blocks";
+
+  return (
+    <main id="blocks-catalog">
+      <SidebarProvider className="container min-h-[calc(100svh-var(--header-height))] px-0 [--sidebar-width:17rem] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:border-x">
+        <Sidebar
+          className="sticky top-(--header-height) z-30 hidden h-[calc(100svh-var(--header-height))] border-e bg-transparent lg:flex"
+          collapsible="none"
+        >
+          <CatalogNavigation {...navigationProps} />
+        </Sidebar>
+
+        <div className="min-w-0">
+          <div className="bg-background/96 sticky top-(--header-height) z-20 flex items-center gap-3 border-b px-4 py-2 backdrop-blur lg:hidden">
+            <Sheet
+              onOpenChange={({ open }) => setNavigationOpen(open)}
+              open={navigationOpen}
+            >
+              <SheetTrigger asChild>
+                <Button variant="outline">
+                  <PanelLeftIcon aria-hidden="true" />
+                  Browse
+                </Button>
+              </SheetTrigger>
+              <SheetContent placement="left">
+                <SheetHeader title="Blocks" />
+                <SheetBody className="min-h-0 p-0">
+                  <div className="flex h-full min-h-0 flex-col">
+                    <CatalogNavigation
+                      {...navigationProps}
+                      onNavigate={() => setNavigationOpen(false)}
+                    />
+                  </div>
+                </SheetBody>
+              </SheetContent>
+            </Sheet>
+            <p className="min-w-0 truncate text-sm font-medium">{heading}</p>
+          </div>
+
+          <div className="flex flex-col gap-4 p-4 sm:p-6">
+            {isDetailPage ? null : <h1 className="sr-only">{heading}</h1>}
+            {activeEntry ? (
+              <CompositionViewer
+                compact
+                headingLevel={isDetailPage ? "h1" : "h2"}
+                item={activeEntry.block}
+                kind="blocks"
+                showDescription={isDetailPage}
+                tree={activeEntry.tree}
+              />
+            ) : (
+              <State className="min-h-80 border border-dashed">
+                <StateHeader>
+                  <StateMedia variant="icon">
+                    <SearchXIcon aria-hidden="true" />
+                  </StateMedia>
+                  <StateTitle asChild>
+                    <h2>No blocks in this category</h2>
+                  </StateTitle>
+                  <StateDescription>
+                    Choose another category from the sidebar.
+                  </StateDescription>
+                </StateHeader>
+              </State>
+            )}
+          </div>
+        </div>
+      </SidebarProvider>
+    </main>
+  );
+};

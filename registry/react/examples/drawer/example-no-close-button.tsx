@@ -1,6 +1,7 @@
 import { Button } from "@/registry/react/components/button";
 import {
   Drawer,
+  DrawerBody,
   DrawerClose,
   DrawerContent,
   DrawerFooter,
@@ -16,10 +17,16 @@ const Example = () => (
 
     <DrawerContent showCloseButton={false}>
       <DrawerHeader
-        description="You can only close this drawer using the button in the footer, by pressing Escape, or by swiping down."
+        description="There is no corner button. Use the footer, Escape, or a downward swipe."
         title="No close button"
       />
-
+      <DrawerBody>
+        <div className="mx-auto w-full max-w-xs">
+          <p className="text-muted-foreground text-sm">
+            The corner stays empty. Close lives in the footer.
+          </p>
+        </div>
+      </DrawerBody>
       <DrawerFooter>
         <div className="mx-auto w-full max-w-xs">
           <DrawerClose asChild>

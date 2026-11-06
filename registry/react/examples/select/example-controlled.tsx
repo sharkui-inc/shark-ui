@@ -5,6 +5,7 @@ import React from "react";
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -19,15 +20,18 @@ const Example = () => {
       onValueChange={(e) => setValue(e.value)}
       value={value}
     >
-      <SelectTrigger className="w-48">
+      <SelectTrigger aria-label="Select a framework" className="min-w-48">
         <SelectValue placeholder="Select a framework" />
       </SelectTrigger>
       <SelectContent>
-        {collection.items.map((item) => (
-          <SelectItem item={item} key={item.value}>
-            {item.label}
-          </SelectItem>
-        ))}
+        <SelectList>
+          {collection.items.map((item) => (
+            <SelectItem item={item} key={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
+
+        </SelectList>
       </SelectContent>
     </Select>
   );

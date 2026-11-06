@@ -9,11 +9,9 @@ import {
 
 const Example = () => (
   <InputGroup className="max-w-80">
-    <InputGroupInput placeholder="Your email" type="email" />
+    <InputGroupInput aria-label="Email" placeholder="Your email" type="email" />
     <InputGroupAddon align="inline-end">
-      <InputGroupButton size="xs" variant="ghost">
-        Subscribe
-      </InputGroupButton>
+      <InputGroupButton>Subscribe</InputGroupButton>
     </InputGroupAddon>
   </InputGroup>
 );

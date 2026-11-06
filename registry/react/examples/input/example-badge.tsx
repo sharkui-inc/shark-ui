@@ -6,7 +6,7 @@ const Example = () => (
   <Field className="w-full max-w-64">
     <FieldLabel className="flex items-center gap-2">
       Webhook URL
-      <Badge className="ml-auto" variant="info">
+      <Badge className="ms-auto" variant="info">
         Beta
       </Badge>
     </FieldLabel>

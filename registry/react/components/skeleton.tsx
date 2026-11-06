@@ -1,6 +1,7 @@
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
+import type React from "react";
 import { cn } from "@/lib/utils";
 
 export const Skeleton = (props: React.ComponentProps<typeof ark.div>) => {
@@ -9,9 +10,10 @@ export const Skeleton = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "rounded-md bg-muted",
+        "bg-muted",
+        "rounded-md",
         "animate-pulse",
-        "motion-reduce:animate-none!",
+        "motion-reduce:animate-none",
         className
       )}
       data-slot="skeleton"
@@ -31,7 +33,7 @@ export const SkeletonCircle = (props: React.ComponentProps<typeof ark.div>) => {
         "bg-muted",
         "rounded-full",
         "animate-pulse",
-        "motion-reduce:animate-none!",
+        "motion-reduce:animate-none",
         className
       )}
       data-slot="skeleton-circle"
@@ -50,7 +52,7 @@ interface SkeletonTextProps extends React.ComponentProps<typeof ark.div> {
 }
 
 export const SkeletonText = (props: SkeletonTextProps) => {
-  const { className, lines = 2, ...rest } = props;
+  const { lines = 2, className, ...rest } = props;
 
   return (
     <ark.div
@@ -59,7 +61,7 @@ export const SkeletonText = (props: SkeletonTextProps) => {
         "flex flex-col gap-2",
         "animate-pulse",
         "**:[div]:h-4",
-        "motion-reduce:animate-none!",
+        "motion-reduce:animate-none",
         className
       )}
       data-slot="skeleton-text"
@@ -69,7 +71,11 @@ export const SkeletonText = (props: SkeletonTextProps) => {
         const key = `skeleton-text-${index}`;
 
         return (
-          <div className="w-full rounded-md bg-muted last:w-3/4" key={key} />
+          <div
+            className={cn("w-full", "bg-muted", "rounded-md", "last:w-3/4")}
+            data-slot="skeleton-text-line"
+            key={key}
+          />
         );
       })}
     </ark.div>

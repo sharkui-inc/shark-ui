@@ -11,9 +11,12 @@ import {
   DialogFooter,
   DialogHeader,
 } from "@/registry/react/components/dialog";
+import { Field, FieldLabel } from "@/registry/react/components/field";
+import { Input } from "@/registry/react/components/input";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -28,39 +31,42 @@ const Example = () => {
           <Button variant="outline">Open</Button>
         </MenuTrigger>
         <MenuContent>
-          <MenuItem onSelect={() => setIsOpen(true)} value="settings">
-            <SettingsIcon />
-            Open settings
-          </MenuItem>
-          <MenuItem disabled value="profile">
-            <UserIcon />
-            View profile
-          </MenuItem>
-          <MenuItem disabled value="help">
-            <InfoIcon />
-            Help
-          </MenuItem>
+          <MenuList>
+            <MenuItem onSelect={() => setIsOpen(true)} value="settings">
+              <SettingsIcon />
+              Open settings
+            </MenuItem>
+            <MenuItem disabled value="profile">
+              <UserIcon />
+              View profile
+            </MenuItem>
+            <MenuItem disabled value="help">
+              <InfoIcon />
+              Help
+            </MenuItem>
+
+          </MenuList>
         </MenuContent>
       </Menu>
 
       <Dialog onOpenChange={({ open }) => setIsOpen(open)} open={isOpen}>
         <DialogContent>
           <DialogHeader
-            description="This dialog was opened from a menu item"
+            description="Update how your name appears."
             title="Settings"
           />
           <DialogBody>
-            <p className="text-muted-foreground text-sm">
-              You can open dialogs imperatively from menu items using the
-              onSelect handler.
-            </p>
+            <Field>
+              <FieldLabel>Display name</FieldLabel>
+              <Input defaultValue="Ada Lovelace" />
+            </Field>
           </DialogBody>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button>Save</Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button>Save</Button>
+              <Button variant="outline">Cancel</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>

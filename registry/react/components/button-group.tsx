@@ -1,36 +1,47 @@
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
+import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/registry/react/components/separator";
 
 const buttonGroupVariants = tv({
   base: [
-    "flex w-fit items-stretch",
-    "*:not([class*='w-']):w-fit",
-    "*:not([class*='flex-']):flex-1",
+    "w-fit",
+    "flex items-stretch",
+    "[&>*:not([class*='w-'])]:w-fit",
+    "[&>*:not([class*='flex-'])]:flex-1",
     "*:focus-visible:relative *:focus-visible:z-10",
     "has-[>[data-slot=button-group]]:gap-2",
     "has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-e-md",
   ],
+  defaultVariants: {
+    orientation: "horizontal",
+  },
   variants: {
     orientation: {
       horizontal: [
-        "[&>*:not(:first-child)]:rounded-l-none",
+        "pointer-coarse:*:after:min-w-auto",
+        "[&>*:not(:first-child)]:rounded-s-none",
         "[&>*:not(:first-child)]:border-s-0",
         "[&>*:not(:last-child)]:rounded-e-none",
+        "[&>:not(:first-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:rounded-s-none",
+        "[&>:not(:first-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:border-s-0",
+        "[&>:not(:last-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:rounded-e-none",
       ],
       vertical: [
         "flex-col",
+        "pointer-coarse:*:after:min-h-auto",
         "[&>*:not(:first-child)]:rounded-t-none",
         "[&>*:not(:first-child)]:border-t-0",
         "[&>*:not(:last-child)]:rounded-b-none [&>*:not(:last-child)]:shadow-none",
+        "[&>:not(:first-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:rounded-t-none",
+        "[&>:not(:first-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:border-t-0",
+        "[&>:not(:last-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:rounded-b-none",
+        "[&>:not(:last-child):not([data-slot=button-group])_:is([data-slot=button],[data-slot=input],[data-slot=select-trigger],[data-slot=clipboard-trigger])]:shadow-none",
       ],
     },
-  },
-  defaultVariants: {
-    orientation: "horizontal",
   },
 });
 
@@ -39,7 +50,7 @@ interface ButtonGroupProps
     VariantProps<typeof buttonGroupVariants> {}
 
 export const ButtonGroup = (props: ButtonGroupProps) => {
-  const { className, orientation, ...rest } = props;
+  const { orientation, className, ...rest } = props;
 
   return (
     <ark.fieldset
@@ -59,10 +70,12 @@ export const ButtonGroupText = (
   return (
     <ark.div
       className={cn(
-        "flex items-center gap-2 px-4",
-        "font-medium text-sm",
-        "rounded-md border bg-muted shadow-xs",
-        "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
+        "flex items-center gap-2",
+        "px-4",
+        "text-sm font-medium",
+        "bg-muted",
+        "rounded-md border shadow-xs/4",
+        "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       data-slot="button-group-text"
@@ -83,7 +96,7 @@ export const ButtonGroupSeparator = (
         "self-stretch",
         "bg-input",
         "data-[orientation=vertical]:h-auto",
-        "m-0!",
+        "m-0",
         className
       )}
       data-slot="button-group-separator"

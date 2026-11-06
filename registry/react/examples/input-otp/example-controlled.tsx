@@ -10,17 +10,20 @@ const Example = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         Enter the code 1234
       </p>
-      <InputOTP onValueChange={({ value }) => setValue(value)} value={value}>
+      <InputOTP
+        onValueChange={({ value: nextValue }) => setValue(nextValue)}
+        value={value}
+      >
         <InputOTPSlot index={0} />
         <InputOTPSlot index={1} />
         <InputOTPSlot index={2} />
         <InputOTPSlot index={3} />
       </InputOTP>
 
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         {isCorrect ? "✅" : "❌"}
       </p>
     </div>

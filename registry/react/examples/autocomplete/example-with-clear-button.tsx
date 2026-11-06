@@ -25,7 +25,11 @@ const Example = () => {
       defaultValue={["apple"]}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <AutocompleteInput placeholder="Select a fruit..." showClear />
+      <AutocompleteInput
+        aria-label="Select a fruit"
+        placeholder="Select a fruit..."
+        showClear
+      />
       <AutocompleteContent>
         <AutocompleteEmpty>No items found.</AutocompleteEmpty>
         <AutocompleteList>

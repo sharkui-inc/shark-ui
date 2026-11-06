@@ -11,6 +11,7 @@ import { ButtonGroup } from "@/registry/react/components/button-group";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuSeparator,
@@ -20,7 +21,7 @@ import {
 const Example = () => (
   <ButtonGroup>
     <Button variant="outline">
-      <StarIcon />
+      <StarIcon data-icon="inline-start" />
       Subscribe
     </Button>
     <Menu positioning={{ placement: "bottom-end" }}>
@@ -29,23 +30,26 @@ const Example = () => (
           <MoreHorizontalIcon />
         </Button>
       </MenuTrigger>
-      <MenuContent className="w-48">
-        <MenuGroup>
-          <MenuItem value="share">
-            <Share2Icon /> Share
-          </MenuItem>
-          <MenuItem value="watch-later">
-            <BookmarkIcon /> Watch later
-          </MenuItem>
-          <MenuItem value="download">
-            <CloudDownloadIcon /> Download
-          </MenuItem>
-          <MenuSeparator />
-          <MenuItem value="report" variant="destructive">
-            <BanIcon />
-            Report
-          </MenuItem>
-        </MenuGroup>
+      <MenuContent className="min-w-48">
+        <MenuList>
+          <MenuGroup>
+            <MenuItem value="share">
+              <Share2Icon /> Share
+            </MenuItem>
+            <MenuItem value="watch-later">
+              <BookmarkIcon /> Watch later
+            </MenuItem>
+            <MenuItem value="download">
+              <CloudDownloadIcon /> Download
+            </MenuItem>
+            <MenuSeparator />
+            <MenuItem value="report" variant="destructive">
+              <BanIcon />
+              Report
+            </MenuItem>
+          </MenuGroup>
+
+        </MenuList>
       </MenuContent>
     </Menu>
   </ButtonGroup>

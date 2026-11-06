@@ -1,10 +1,16 @@
 ---
 title: Select
-description: Displays a list of options.
+description: Select an option from a list.
+aliases:
+  - Dropdown
+seo:
+  description: Popup select for one option from a scrollable list.
 links:
   doc: https://ark-ui.com/docs/components/select
   api: https://ark-ui.com/docs/components/select#api-reference
 ---
+
+import manifest from "@/registry/manifest/select";
 
 <ComponentPreview componentName="select" />
 
@@ -29,13 +35,11 @@ npx shadcn@latest add @shark/select
 
 <Steps>
 
-<Step>This component depends on [Separator](/docs/components/separator) and [Input](/docs/components/input). Install them first if you haven't already.</Step>
+<Step>This component depends on [Field](/docs/components/field), [Input](/docs/components/input), [Scroll Area](/docs/components/scroll-area), and [Separator](/docs/components/separator). Install them first if you haven't already.</Step>
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -53,15 +57,16 @@ npm install @ark-ui/react lucide-react tailwind-variants
 
 ```text
 Select
+├── SelectLabel
 ├── SelectTrigger
 │   └── SelectValue
 └── SelectContent
-    ├── SelectEmpty
-    ├── SelectClearTrigger
-    ├── SelectGroup
-    │   ├── SelectGroupLabel
-    │   └── SelectItem
-    └── SelectItem
+    └── SelectList
+        ├── SelectEmpty
+        ├── SelectGroup
+        │   ├── SelectGroupLabel
+        │   └── SelectItem
+        └── SelectItem
 ```
 
 ## Usage
@@ -72,6 +77,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -87,20 +93,50 @@ const collection = createListCollection({
     <SelectValue placeholder="Select an option" />
   </SelectTrigger>
   <SelectContent>
-    {collection.items.map((item) => (
-      <SelectItem item={item} key={item}>
-        {item}
-      </SelectItem>
-    ))}
+    <SelectList>
+      {collection.items.map((item) => (
+        <SelectItem item={item} key={item}>
+          {item}
+        </SelectItem>
+      ))}
+    </SelectList>
   </SelectContent>
 </Select>
 ```
+
+## With Field
+
+Use `FieldLabel` to name the control. 
+
+<ComponentPreview componentName="select" fileName="example-with-field" />
 
 ## Controlled
 
 Use `value` and `onValueChange` to control the selected items.
 
 <ComponentPreview componentName="select" fileName="example-controlled" />
+
+## States
+
+### Disabled
+
+<ComponentPreview componentName="select" fileName="example-disabled" />
+
+### Invalid
+
+<ComponentPreview componentName="select" fileName="example-invalid" />
+
+## Variants
+
+Control trigger appearance with the `variant` prop on SelectTrigger.
+
+### Default
+
+<ComponentPreview componentName="select" fileName="example-variant-default" />
+
+### Ghost
+
+<ComponentPreview componentName="select" fileName="example-variant-ghost" />
 
 ## Size
 
@@ -118,17 +154,17 @@ Control trigger size with the `size` prop on SelectTrigger.
 
 <ComponentPreview componentName="select" fileName="example-size-lg" />
 
-## States
-
-### Disabled
-
-<ComponentPreview componentName="select" fileName="example-disabled" />
-
-### Invalid
-
-<ComponentPreview componentName="select" fileName="example-invalid" />
-
 ## Examples
+
+### With Icon
+
+Pass the collection item type to `SelectContext` so custom fields such as `icon` are typed.
+
+<ComponentPreview componentName="select" fileName="example-with-icon" />
+
+### With Description
+
+<ComponentPreview componentName="select" fileName="example-with-description" />
 
 ### Multiple
 
@@ -142,13 +178,9 @@ Organize options into groups using `groupBy` and `SelectGroup`.
 
 <ComponentPreview componentName="select" fileName="example-grouping" />
 
-### With Field
-
-Use `Field` for labels, helper text, and error handling.
-
-<ComponentPreview componentName="select" fileName="example-with-field" />
-
 ### Max Selection
+
+Cap how many items can be selected.
 
 <ComponentPreview componentName="select" fileName="example-max-selection" />
 
@@ -162,6 +194,22 @@ Use `SelectEmpty` to display a message when the collection has no items.
 
 <ComponentPreview componentName="select" fileName="example-empty" />
 
+### Without trigger
+
+Hide the chevron with `showTrigger={false}`.
+
+<ComponentPreview componentName="select" fileName="example-without-trigger" />
+
+### Form Integration
+
+<ComponentPreview componentName="select" fileName="example-form" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="select" />
+
 ## API Reference
 
 ### Select
@@ -170,30 +218,34 @@ Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `ListCollection<T>` | - |
-| `value` | `string[]` | - |
-| `defaultValue` | `string[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
+| `collection` | `ListCollection<T>` | `-` |
+| `value` | `string[]` | `-` |
+| `defaultValue` | `string[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | `-` |
 | `multiple` | `boolean` | `false` |
-| `disabled` | `boolean` | - |
-| `invalid` | `boolean` | - |
-| `name` | `string` | - |
-| `required` | `boolean` | - |
-| `positioning` | `PositioningOptions` | - |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
+| `name` | `string` | `-` |
+| `required` | `boolean` | `-` |
+| `autoComplete` | `string` | `-` |
+| `onSelect` | `(details: SelectionDetails) => void` | `-` |
+| `positioning` | `PositioningOptions` | `-` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### SelectTrigger
 
-Opens the dropdown on click. Displays the selected value or placeholder.
+Opens the menu on click. Displays the selected value or placeholder.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `variant` | `"default" \| "ghost"` | `"default"` |
 | `showClear` | `boolean` | `false` |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `showTrigger` | `boolean` | `true` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectValue
 
@@ -201,18 +253,27 @@ Shows the selected value or placeholder. Use `SelectContext` as children for cus
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `placeholder` | `string` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `placeholder` | `string` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectContent
 
-Holds the dropdown options. Displayed in a portal.
+Holds the menu options. Displayed in a portal.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+
+### SelectList
+
+Scrollable list of options inside `SelectContent`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectClearTrigger
 
@@ -220,8 +281,8 @@ Button to clear the selected value. Shown when `showClear` is true on `SelectTri
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectGroup
 
@@ -229,9 +290,9 @@ Groups related options under an optional heading.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string` \| `ReactNode` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `heading` | `string \| ReactNode` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectGroupLabel
 
@@ -239,26 +300,43 @@ Label for an option group.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectItem
 
-A single selectable option in the dropdown.
+A single selectable option in the menu.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `item` | `T` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `item` | `T` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### SelectEmpty
 
-Shown when the collection has no items (`collection.size === 0`). Place inside `SelectContent`.
+Shown when the collection has no items (`collection.size === 0`). 
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
+
+### SelectContext
+
+Render-prop access to the surrounding component API. Pass the collection item type (`SelectContext<Item>`) to read fields beyond the default item.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `(api: UseSelectContext<Item>) => React.ReactNode` | `required` |
+
+### SelectSeparator
+
+Public SelectSeparator component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

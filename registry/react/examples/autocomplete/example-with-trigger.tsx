@@ -24,7 +24,11 @@ const Example = () => {
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <AutocompleteInput placeholder="Select a fruit..." showTrigger />
+      <AutocompleteInput
+        aria-label="Select a fruit"
+        placeholder="Select a fruit..."
+        showTrigger
+      />
       <AutocompleteContent>
         <AutocompleteEmpty />
         <AutocompleteList>

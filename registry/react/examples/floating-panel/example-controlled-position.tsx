@@ -46,12 +46,12 @@ const Example = () => {
               <FloatingPanelRestore />
               <FloatingPanelCloseTrigger asChild>
                 <Button aria-label="Close" size="icon-sm">
-                  <XIcon aria-hidden />
+                  <XIcon aria-hidden="true" />
                 </Button>
               </FloatingPanelCloseTrigger>
             </FloatingPanelControl>
           </FloatingPanelHeader>
-          <FloatingPanelBody className="text-center text-muted-foreground text-sm">
+          <FloatingPanelBody className="text-muted-foreground text-center text-sm">
             <p>
               Position: ({position.x}, {position.y}).
             </p>
@@ -67,7 +67,7 @@ const Example = () => {
                   size="icon-md"
                   variant="outline"
                 >
-                  <ChevronUpIcon aria-hidden />
+                  <ChevronUpIcon aria-hidden="true" />
                 </Button>
               </div>
 
@@ -80,7 +80,7 @@ const Example = () => {
                   size="icon-md"
                   variant="outline"
                 >
-                  <ChevronLeftIcon aria-hidden />
+                  <ChevronLeftIcon aria-hidden="true" />
                 </Button>
                 <Button
                   aria-label="Move down"
@@ -90,7 +90,7 @@ const Example = () => {
                   size="icon-md"
                   variant="outline"
                 >
-                  <ChevronDownIcon aria-hidden />
+                  <ChevronDownIcon aria-hidden="true" />
                 </Button>
                 <Button
                   aria-label="Move right"
@@ -100,7 +100,7 @@ const Example = () => {
                   size="icon-md"
                   variant="outline"
                 >
-                  <ChevronRightIcon aria-hidden />
+                  <ChevronRightIcon aria-hidden="true" />
                 </Button>
               </div>
             </div>

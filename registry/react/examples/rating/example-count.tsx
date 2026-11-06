@@ -1,5 +1,9 @@
-import { Rating } from "@/registry/react/components/rating";
+import { Rating, RatingStars } from "@/registry/react/components/rating";
 
-const Example = () => <Rating count={3} defaultValue={3} />;
+const Example = () => (
+  <Rating count={3} defaultValue={3}>
+    <RatingStars />
+  </Rating>
+);
 
 export default Example;

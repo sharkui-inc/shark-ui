@@ -11,22 +11,47 @@ import { ButtonGroup } from "@/registry/react/components/button-group";
 const Example = () => (
   <ButtonGroup>
     <ButtonGroup>
-      <Button clickEffect={false} size="icon-md" variant="outline">
+      <Button
+        aria-label="Italic"
+        clickEffect={false}
+        size="icon-md"
+        variant="outline"
+      >
         <ItalicIcon />
       </Button>
-      <Button clickEffect={false} size="icon-md" variant="outline">
+      <Button
+        aria-label="Bold"
+        clickEffect={false}
+        size="icon-md"
+        variant="outline"
+      >
         <BoldIcon />
       </Button>
-      <Button clickEffect={false} size="icon-md" variant="outline">
+      <Button
+        aria-label="Underline"
+        clickEffect={false}
+        size="icon-md"
+        variant="outline"
+      >
         <UnderlineIcon />
       </Button>
     </ButtonGroup>
 
     <ButtonGroup>
-      <Button clickEffect={false} size="icon-md" variant="outline">
+      <Button
+        aria-label="Add image"
+        clickEffect={false}
+        size="icon-md"
+        variant="outline"
+      >
         <ImagePlusIcon />
       </Button>
-      <Button clickEffect={false} size="icon-md" variant="outline">
+      <Button
+        aria-label="Insert code"
+        clickEffect={false}
+        size="icon-md"
+        variant="outline"
+      >
         <BracesIcon />
       </Button>
     </ButtonGroup>

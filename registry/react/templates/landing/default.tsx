@@ -1,15 +1,7 @@
 import { ArrowRightIcon } from "lucide-react";
 import type { Metadata } from "next";
-import { createMetadata } from "@/lib/metadata";
-
-export const metadata: Metadata = createMetadata({
-  title: "Landing Template",
-  description:
-    "Marketing landing page with hero, features, pricing, and CTA sections. Optimized for conversions.",
-  url: "/templates/landing",
-});
-
 import Link from "next/link";
+import { createMetadata } from "@/lib/metadata";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -20,52 +12,57 @@ import {
 } from "@/registry/react/components/card";
 import { Separator } from "@/registry/react/components/separator";
 
+export const metadata: Metadata = createMetadata({
+  title: "Landing Template",
+  url: "/templates/landing",
+});
+
 const FEATURES = [
   {
-    title: "Fast",
     description:
       "Built for performance. Ship quickly with pre-optimized components.",
+    title: "Fast",
   },
   {
-    title: "Accessible",
     description:
       "Follows WCAG guidelines. Keyboard navigable and screen-reader friendly.",
+    title: "Accessible",
   },
   {
-    title: "Customizable",
     description:
       "Tailwind-based styling. Themes and tokens for consistent design.",
+    title: "Customizable",
   },
 ];
 
 const PRICING = [
   {
-    name: "Starter",
-    price: "$0",
     description: "For side projects and experiments",
     features: ["5 projects", "Basic components", "Community support"],
+    name: "Starter",
+    price: "$0",
   },
   {
-    name: "Pro",
-    price: "$29",
     description: "For teams and professionals",
     features: ["Unlimited projects", "All components", "Priority support"],
+    name: "Pro",
+    price: "$29",
   },
 ];
 
 const LandingTemplate = () => (
   <div className="flex min-h-svh flex-col">
     <header className="container flex h-16 items-center justify-between">
-      <span className="font-semibold">Acme</span>
+      <span className="font-semibold">Onda</span>
       <nav className="flex gap-4">
         <Link
-          className="text-muted-foreground text-sm hover:text-foreground"
+          className="text-muted-foreground hover:text-foreground text-sm"
           href="#features"
         >
           Features
         </Link>
         <Link
-          className="text-muted-foreground text-sm hover:text-foreground"
+          className="text-muted-foreground hover:text-foreground text-sm"
           href="#pricing"
         >
           Pricing
@@ -78,10 +75,10 @@ const LandingTemplate = () => (
 
     <main className="flex flex-1 flex-col">
       <section className="container flex flex-col items-center gap-6 py-24 text-center">
-        <h1 className="font-bold text-4xl tracking-tight sm:text-5xl">
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
           Build your product faster
         </h1>
-        <p className="max-w-xl text-lg text-muted-foreground">
+        <p className="text-muted-foreground max-w-xl text-lg">
           A complete set of components to build modern web apps. Accessible,
           customizable, and ready to ship.
         </p>
@@ -89,7 +86,7 @@ const LandingTemplate = () => (
           <Button asChild size="lg">
             <Link href="#">
               Get Started
-              <ArrowRightIcon aria-hidden className="size-4" />
+              <ArrowRightIcon aria-hidden="true" />
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline">
@@ -102,8 +99,8 @@ const LandingTemplate = () => (
 
       <section className="container flex flex-col gap-12 py-24" id="features">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-semibold text-2xl">Features</h2>
-          <p className="mt-2 text-muted-foreground">
+          <h2 className="text-2xl font-semibold">Features</h2>
+          <p className="text-muted-foreground mt-2">
             Everything you need to build a modern application.
           </p>
         </div>
@@ -123,8 +120,8 @@ const LandingTemplate = () => (
 
       <section className="container flex flex-col gap-12 py-24" id="pricing">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-semibold text-2xl">Pricing</h2>
-          <p className="mt-2 text-muted-foreground">
+          <h2 className="text-2xl font-semibold">Pricing</h2>
+          <p className="text-muted-foreground mt-2">
             Simple, transparent pricing for teams of all sizes.
           </p>
         </div>
@@ -135,7 +132,7 @@ const LandingTemplate = () => (
                 <CardTitle>{plan.name}</CardTitle>
                 <CardDescription>{plan.description}</CardDescription>
                 <div className="mt-4">
-                  <span className="font-bold text-3xl">{plan.price}</span>
+                  <span className="text-3xl font-bold">{plan.price}</span>
                   <span className="text-muted-foreground text-sm">/month</span>
                 </div>
               </CardHeader>
@@ -159,8 +156,8 @@ const LandingTemplate = () => (
       <Separator />
 
       <section className="container flex flex-col items-center gap-6 py-24 text-center">
-        <h2 className="font-semibold text-2xl">Ready to get started?</h2>
-        <p className="max-w-md text-muted-foreground">
+        <h2 className="text-2xl font-semibold">Ready to get started?</h2>
+        <p className="text-muted-foreground max-w-md">
           Join thousands of developers building with our components.
         </p>
         <Button asChild size="lg">
@@ -172,7 +169,7 @@ const LandingTemplate = () => (
     <footer className="border-t">
       <div className="container flex h-16 items-center justify-between">
         <span className="text-muted-foreground text-sm">
-          © {new Date().getFullYear()} Acme. All rights reserved.
+          © {new Date().getFullYear()} Onda. All rights reserved.
         </span>
       </div>
     </footer>

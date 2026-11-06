@@ -19,12 +19,6 @@ import {
   TableRow,
 } from "@/registry/react/components/table";
 
-const users = Array.from({ length: 48 }, (_, i) => ({
-  id: `user-${i + 1}`,
-  name: `User ${i + 1}`,
-  email: `user${i + 1}@example.com`,
-}));
-
 const Example = () => {
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(2);
@@ -51,22 +45,27 @@ const Example = () => {
       </Table>
       <div className="flex items-center justify-between gap-22">
         <div className="flex shrink-0 items-center gap-2">
-          <div className="text-muted-foreground text-sm">Items per page:</div>
           <NativeSelect
+            aria-label="Items per page"
             onChange={(e) => setPageSize(Number(e.target.value))}
+            size="sm"
             value={pageSize}
           >
             <NativeSelectOption value="2">2</NativeSelectOption>
             <NativeSelectOption value="3">3</NativeSelectOption>
             <NativeSelectOption value="4">4</NativeSelectOption>
           </NativeSelect>
+          <div className="text-muted-foreground text-sm">Items per page</div>
         </div>
 
         <Pagination
+          aria-label="Table pagination"
           className="flex-1 justify-end"
           count={users.length}
-          onPageChange={({ page }) => setPage(page)}
-          onPageSizeChange={({ pageSize }) => setPageSize(pageSize)}
+          onPageChange={({ page: nextPage }) => setPage(nextPage)}
+          onPageSizeChange={({ pageSize: nextPageSize }) =>
+            setPageSize(nextPageSize)
+          }
           page={page}
           pageSize={pageSize}
         >
@@ -77,5 +76,11 @@ const Example = () => {
     </div>
   );
 };
+
+const users = Array.from({ length: 48 }, (_, i) => ({
+  email: `user${i + 1}@example.com`,
+  id: `user-${i + 1}`,
+  name: `User ${i + 1}`,
+}));
 
 export default Example;

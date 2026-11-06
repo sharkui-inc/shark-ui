@@ -1,7 +1,6 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { toast } from "@registry/react/components/toast";
 import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -24,39 +23,31 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
-
-const formSchema = z.object({
-  language: z
-    .array(z.string())
-    .refine((val) => val[0] !== "", "Please select your spoken language.")
-    .refine((val) => !val.includes("auto"), {
-      message:
-        "Auto-detection is not allowed. Please select a specific language.",
-    }),
-});
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
     defaultValues: {
       language: [""],
     },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "language-submitted",
-        title: "Language submitted",
         description: (
           <pre className="mt-2">
             <code>{JSON.stringify(value, null, 2)}</code>
           </pre>
         ),
+        id: "language-submitted",
+        title: "Language submitted",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -97,6 +88,7 @@ const Example = () => {
                   <Select
                     collection={collection}
                     name={field.name}
+                    onInteractOutside={field.handleBlur}
                     onValueChange={({ value }) => field.handleChange(value)}
                     value={field.state.value}
                   >
@@ -104,11 +96,14 @@ const Example = () => {
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>
-                      {collection.items.map((item) => (
-                        <SelectItem item={item} key={item.value}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
+                      <SelectList>
+                        {collection.items.map((item) => (
+                          <SelectItem item={item} key={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+
+                      </SelectList>
                     </SelectContent>
                   </Select>
                 </Field>
@@ -127,6 +122,16 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  language: z
+    .array(z.string())
+    .refine((val) => val[0] !== "", "Please select your spoken language.")
+    .refine((val) => !val.includes("auto"), {
+      message:
+        "Auto-detection is not allowed. Please select a specific language.",
+    }),
+});
 
 const collection = createListCollection({
   items: [

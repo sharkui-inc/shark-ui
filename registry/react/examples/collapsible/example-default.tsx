@@ -14,10 +14,10 @@ import {
 } from "@/registry/react/components/collapsible";
 
 const CollapsibleDemo = () => (
-  <Card className="w-96">
+  <Card className="w-full max-w-96 [--space:--spacing(4)]">
     <Collapsible>
       <CardHeader title="Total visits">
-        <CardDescription>
+        <CardDescription className="pt-2">
           <div className="flex items-center gap-1">
             <Badge variant="success">22.3%</Badge>
             <Badge variant="info">10.1%</Badge>
@@ -37,27 +37,27 @@ const CollapsibleDemo = () => (
       </CardHeader>
 
       <CollapsibleContent className="text-sm">
-        <div className="mt-(--space) grid gap-3 px-(--space)">
+        <div className="grid gap-3 px-(--space) pt-(--space)">
           <div className="grid grid-cols-3 items-center gap-4">
-            <div className="col-span-2 text-muted-foreground">Google</div>
+            <div className="text-muted-foreground col-span-2">Google</div>
             <div className="place-self-end">
               <Badge variant="success">22.3%</Badge>
             </div>
           </div>
           <div className="grid grid-cols-3 items-center gap-4">
-            <div className="col-span-2 text-muted-foreground">Facebook</div>
+            <div className="text-muted-foreground col-span-2">Facebook</div>
             <div className="place-self-end">
               <Badge variant="destructive">-10.1%</Badge>
             </div>
           </div>
           <div className="grid grid-cols-3 items-center gap-4">
-            <div className="col-span-2 text-muted-foreground">TikTok</div>
+            <div className="text-muted-foreground col-span-2">TikTok</div>
             <div className="place-self-end">
               <Badge variant="warning">6.8%</Badge>
             </div>
           </div>
           <div className="grid grid-cols-3 items-center gap-4">
-            <div className="col-span-2 text-muted-foreground">Instagram</div>
+            <div className="text-muted-foreground col-span-2">Instagram</div>
             <div className="place-self-end">
               <Badge variant="info">1.4%</Badge>
             </div>

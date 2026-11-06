@@ -28,17 +28,14 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
 
-const collection = createListCollection({
-  items: ["Inter", "Roboto", "Helvetica", "Geist"],
-});
-
 const Example = () => (
-  <FloatingPanel defaultSize={{ width: 360, height: 300 }}>
+  <FloatingPanel defaultSize={{ height: 300, width: 360 }}>
     <FloatingPanelTrigger asChild>
       <Button variant="outline">Open</Button>
     </FloatingPanelTrigger>
@@ -52,7 +49,7 @@ const Example = () => (
           <FloatingPanelRestore />
           <FloatingPanelCloseTrigger asChild>
             <Button aria-label="Close" size="icon-xs">
-              <XIcon aria-hidden />
+              <XIcon aria-hidden="true" />
             </Button>
           </FloatingPanelCloseTrigger>
         </FloatingPanelControl>
@@ -65,11 +62,14 @@ const Example = () => (
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {collection.items.map((item) => (
-                <SelectItem item={item} key={item}>
-                  {item}
-                </SelectItem>
-              ))}
+              <SelectList>
+                {collection.items.map((item) => (
+                  <SelectItem item={item} key={item}>
+                    {item}
+                  </SelectItem>
+                ))}
+
+              </SelectList>
             </SelectContent>
           </Select>
         </Field>
@@ -90,5 +90,9 @@ const Example = () => (
     </FloatingPanelContent>
   </FloatingPanel>
 );
+
+const collection = createListCollection({
+  items: ["Inter", "Roboto", "Helvetica", "Geist"],
+});
 
 export default Example;

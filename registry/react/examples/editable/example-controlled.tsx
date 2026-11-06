@@ -38,11 +38,11 @@ const Example = () => {
           >
             {isEditing ? (
               <>
-                <CheckIcon /> Save
+                <CheckIcon data-icon="inline-start" /> Save
               </>
             ) : (
               <>
-                <PencilIcon /> Edit
+                <PencilIcon data-icon="inline-start" /> Edit
               </>
             )}
           </Button>

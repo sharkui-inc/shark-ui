@@ -5,6 +5,8 @@ links:
   doc: https://ark-ui.com/docs/components/presence
 ---
 
+import manifest from "@/registry/manifest/presence";
+
 <ComponentPreview componentName="presence" />
 
 ## Installation
@@ -26,9 +28,7 @@ npx shadcn@latest add @shark/presence
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -55,25 +55,38 @@ const [visible, setVisible] = React.useState(false);
 
 ## Lazy
 
-Setting `lazyMount` and `unmountOnExit` to `true` lazy mounts and unmounts the content.
+`lazyMount` and `unmountOnExit`: mount on first open, unmount on close.
 
-It will remove the element from the DOM when it is not present.
+<ComponentPreview
+  autoHeight
+  componentName="presence"
+  fileName="example-lazy"
+/>
 
-```tsx showLineNumbers
-<Presence lazyMount unmountOnExit {...}>
-  {/** content */}
-</Presence>
-```
+## Hide mode
+
+When `unmountOnExit` is `false`, `hideMode` chooses how closed content is hidden:
+
+- `"display-none"`: HTML `hidden`. Effects stay alive.
+- `"activity"`: React 19 Activity. Effects pause.
+
+Ignored when `unmountOnExit` is `true`.
+
+<ComponentPreview
+  autoHeight
+  componentName="presence"
+  fileName="example-hide-mode"
+/>
 
 ## States
 
-Presence automatically manages the attribute `data-state` to `open` and `closed`. This enables styling and animations based on visibility state.
+Sets `data-state` to `open` or `closed` for enter and exit styles.
 
-
-```tsx showLineNumbers
-<Presence present={true} /> // <div data-state="open" />
-<Presence present={false} /> // <div data-state="closed" />
-```
+<ComponentPreview
+  autoHeight
+  componentName="presence"
+  fileName="example-state"
+/>
 
 ## API Reference
 
@@ -84,6 +97,9 @@ Presence automatically manages the attribute `data-state` to `open` and `closed`
 | `present` | `boolean` | `false` |
 | `unmountOnExit` | `boolean` | `true` |
 | `lazyMount` | `boolean` | `true` |
+| `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
+| `onEnterComplete` | `() => void` | `-` |
+| `onExitComplete` | `() => void` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ---

@@ -1,10 +1,17 @@
 ---
 title: Number Input
-description: Numeric input for entering values.
+description: Numeric input with steppers.
+aliases:
+  - Numeric input
+  - Spinbutton
+seo:
+  description: Numeric field with steppers for discrete increments.
 links:
   doc: https://ark-ui.com/docs/components/number-input
   api: https://ark-ui.com/docs/components/number-input#api-reference
 ---
+
+import manifest from "@/registry/manifest/number-input";
 
 <ComponentPreview componentName="number-input" />
 
@@ -33,9 +40,7 @@ npx shadcn@latest add @shark/number-input
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -63,12 +68,12 @@ NumberInput
 ## Usage
 
 ```tsx
-import { 
-  NumberInput, 
-  NumberInputGroup, 
-  NumberInputInput, 
-  NumberInputIncrement, 
-  NumberInputDecrement 
+import {
+  NumberInput,
+  NumberInputGroup,
+  NumberInputInput,
+  NumberInputIncrement,
+  NumberInputDecrement
 } from "@/comopnents/ui/number-input";
 ```
 
@@ -82,6 +87,12 @@ import {
 </NumberInput>
 ```
 
+## With Field
+
+Use [Field](/docs/components/field) for a label and description.
+
+<ComponentPreview componentName="number-input" fileName="example-with-field" />
+
 ## Controlled
 
 Use `value` and `onValueChange` to control the number input. Keep the value as a string when using `formatOptions` to preserve locale formatting.
@@ -92,17 +103,13 @@ Use `value` and `onValueChange` to control the number input. Keep the value as a
 
 ### Disabled
 
-Use the `disabled` prop to disable the number input.
-
 <ComponentPreview componentName="number-input" fileName="example-disabled" />
 
 ### Invalid
 
-Use the `invalid` prop to mark the number input as invalid.
-
 <ComponentPreview componentName="number-input" fileName="example-invalid" />
 
-## Sizes
+## Size
 
 Use the `size` prop to change the input height.
 
@@ -123,12 +130,6 @@ Use the `size` prop to change the input height.
 ### Field Only
 
 <ComponentPreview componentName="number-input" fileName="example-field-only" />
-
-### With Field
-
-Use [Field](/docs/components/field) components for a labeled number input with helper text.
-
-<ComponentPreview componentName="number-input" fileName="example-with-field" />
 
 ### With Input Group
 
@@ -162,11 +163,27 @@ Use the `step` prop to set the increment/decrement amount.
 
 <ComponentPreview componentName="number-input" fileName="example-step" />
 
+### Keyboard step
+
+Hold `Shift` for `largeStep` and `Alt` for `smallStep`.
+
+<ComponentPreview componentName="number-input" fileName="example-keyboard-step" />
+
 ### Mouse Wheel
 
 Use the `allowMouseWheel` prop to increment or decrement the value with the mouse wheel.
 
 <ComponentPreview componentName="number-input" fileName="example-mouse-wheel" />
+
+### Form Integration
+
+<ComponentPreview componentName="number-input" fileName="example-form" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="number-input" />
 
 ## API Reference
 
@@ -178,19 +195,22 @@ Root component. Manages numeric value and stepper controls.
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `scrubber` | `boolean` | `false` |
-| `defaultValue` | `string` | - |
-| `value` | `string` | - |
+| `defaultValue` | `string` | `-` |
+| `value` | `string` | `-` |
 | `min` | `number` | `Number.MIN_SAFE_INTEGER` |
 | `max` | `number` | `Number.MAX_SAFE_INTEGER` |
 | `step` | `number` | `1` |
-| `formatOptions` | `Intl.NumberFormatOptions` | - |
-| `disabled` | `boolean` | - |
-| `invalid` | `boolean` | - |
+| `largeStep` | `number` | `10 * step` |
+| `smallStep` | `number` | `step / 10` |
+| `formatOptions` | `Intl.NumberFormatOptions` | `-` |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
 | `focusInputOnChange` | `boolean` | `true` |
 | `clampValueOnBlur` | `boolean` | `true` |
 | `allowMouseWheel` | `boolean` | `false` |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
-| `className` | `string` | - |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
+| `onValueCommit` | `(details: ValueChangeDetails) => void` | `-` |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### NumberInputGroup
@@ -199,7 +219,7 @@ Wraps the input and increment/decrement buttons.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### NumberInputDecrement
@@ -208,7 +228,7 @@ Decreases the value by the step amount.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### NumberInputIncrement
@@ -217,7 +237,7 @@ Increases the value by the step amount.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### NumberInputInput
@@ -227,7 +247,7 @@ Numeric input. Accepts number or direct typing.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### NumberInputScrubber
@@ -236,9 +256,8 @@ Drag area for scrubbing the value.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/number-input#api-reference).

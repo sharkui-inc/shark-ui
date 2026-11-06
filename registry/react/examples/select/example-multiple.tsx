@@ -4,6 +4,7 @@ import { createListCollection } from "@ark-ui/react";
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectContext,
   SelectItem,
   SelectTrigger,
@@ -16,17 +17,20 @@ const Example = () => (
     defaultValue={["javascript", "typescript"]}
     multiple
   >
-    <SelectTrigger className="w-full max-w-64">
+    <SelectTrigger aria-label="Select frameworks" className="w-full max-w-64">
       <SelectValue className="capitalize">
         <SelectContext>{({ value }) => renderValue(value)}</SelectContext>
       </SelectValue>
     </SelectTrigger>
     <SelectContent>
-      {collection.items.map((item) => (
-        <SelectItem item={item} key={item.value}>
-          {item.label}
-        </SelectItem>
-      ))}
+      <SelectList>
+        {collection.items.map((item) => (
+          <SelectItem item={item} key={item.value}>
+            {item.label}
+          </SelectItem>
+        ))}
+
+      </SelectList>
     </SelectContent>
   </Select>
 );
@@ -36,11 +40,19 @@ const renderValue = (value: string[]) => {
     return "Select languages…";
   }
 
-  const firstValue = value?.at(0) ?? "";
-  const additionalValues =
-    value.length > 1 ? ` (+${value.length - 1} more)` : "";
+  const firstValue = value.at(0) ?? "";
+  const remaining = value.length - 1;
 
-  return firstValue + additionalValues;
+  return (
+    <>
+      {firstValue}
+      {remaining > 0 ? (
+        <span className="text-muted-foreground text-xs">
+          {` (+${remaining} more)`}
+        </span>
+      ) : null}
+    </>
+  );
 };
 
 const collection = createListCollection({

@@ -21,6 +21,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -131,29 +132,29 @@ const chartData = [
 ];
 
 const chartConfig = {
+  desktop: {
+    color: "var(--chart-1)",
+    label: "Desktop",
+  },
+  mobile: {
+    color: "var(--chart-2)",
+    label: "Mobile",
+  },
   visitors: {
     label: "Visitors",
   },
-  desktop: {
-    label: "Desktop",
-    color: "var(--chart-1)",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "var(--chart-2)",
-  },
 } satisfies ChartConfig;
 
-function ChartAreaInteractive() {
-  const [timeRange, setTimeRange] = React.useState("90d");
+const ChartAreaInteractive = () => {
+  const [timeRange, setTimeRange] = React.useState(["90d"]);
 
   const filteredData = chartData.filter((item) => {
     const date = new Date(item.date);
     const referenceDate = new Date("2024-06-30");
     let daysToSubtract = 90;
-    if (timeRange === "30d") {
+    if (timeRange.includes("30d")) {
       daysToSubtract = 30;
-    } else if (timeRange === "7d") {
+    } else if (timeRange.includes("7d")) {
       daysToSubtract = 7;
     }
     const startDate = new Date(referenceDate);
@@ -163,7 +164,7 @@ function ChartAreaInteractive() {
 
   return (
     <Card className="pt-0">
-      <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
+      <CardHeader className="flex items-center gap-2 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
           <CardTitle>Area Chart - Interactive</CardTitle>
           <CardDescription>
@@ -172,27 +173,30 @@ function ChartAreaInteractive() {
         </div>
         <Select
           collection={timeRangeCollection}
-          onValueChange={(e) => setTimeRange(e.value[0] ?? "90d")}
-          value={[timeRange]}
+          onValueChange={({ value }) => setTimeRange(value)}
+          value={timeRange}
         >
           <SelectTrigger
             aria-label="Select a value"
-            className="hidden w-[160px] rounded-lg sm:ml-auto sm:flex"
+            className="hidden w-40 rounded-lg sm:ml-auto sm:flex"
           >
             <SelectValue placeholder="Last 3 months" />
           </SelectTrigger>
           <SelectContent className="rounded-xl">
-            {timeRangeCollection.items.map((item) => (
-              <SelectItem className="rounded-lg" item={item} key={item.value}>
-                {item.label}
-              </SelectItem>
-            ))}
+            <SelectList>
+              {timeRangeCollection.items.map((item) => (
+                <SelectItem item={item} key={item.value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+
+            </SelectList>
           </SelectContent>
         </Select>
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
         <ChartContainer
-          className="aspect-auto h-[250px] w-full"
+          className="aspect-auto h-62.5 w-full"
           config={chartConfig}
         >
           <AreaChart data={filteredData}>
@@ -230,8 +234,8 @@ function ChartAreaInteractive() {
               tickFormatter={(value) => {
                 const date = new Date(value);
                 return date.toLocaleDateString("en-US", {
-                  month: "short",
                   day: "numeric",
+                  month: "short",
                 });
               }}
               tickLine={false}
@@ -242,9 +246,9 @@ function ChartAreaInteractive() {
                 <ChartTooltipContent
                   indicator="dot"
                   labelFormatter={(value) =>
-                    new Date(value).toLocaleDateString("en-US", {
-                      month: "short",
+                    new Date(String(value)).toLocaleDateString("en-US", {
                       day: "numeric",
+                      month: "short",
                     })
                   }
                 />
@@ -271,6 +275,6 @@ function ChartAreaInteractive() {
       </CardContent>
     </Card>
   );
-}
+};
 
 export default ChartAreaInteractive;

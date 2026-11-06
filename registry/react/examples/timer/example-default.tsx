@@ -9,7 +9,7 @@ import {
   TimerSeparator,
 } from "@/registry/react/components/timer";
 
-const Example = () => (
+const TimerDemo = () => (
   <Timer autoStart>
     <TimerArea>
       <TimerItemGroup>
@@ -35,4 +35,4 @@ const Example = () => (
   </Timer>
 );
 
-export default Example;
+export default TimerDemo;

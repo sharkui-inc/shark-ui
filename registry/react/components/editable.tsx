@@ -2,7 +2,7 @@
 
 import {
   Editable as ArkEditable,
-  useEditableContext,
+  useEditableContext as useArkEditableContext,
 } from "@ark-ui/react/editable";
 import type React from "react";
 import { cn } from "@/lib/utils";
@@ -11,7 +11,7 @@ import {
   buttonVariants,
 } from "@/registry/react/components/button";
 
-export const useEditable = useEditableContext;
+export const useEditableContext = useArkEditableContext;
 
 export interface EditableProps
   extends React.ComponentProps<typeof ArkEditable.Root> {
@@ -48,7 +48,7 @@ export const EditableArea = (
 
   return (
     <ArkEditable.Area
-      className={cn("w-full", className)}
+      className={cn("w-full", "grid", "*:col-start-1 *:row-start-1", className)}
       data-slot="editable-area"
       {...rest}
     />
@@ -63,20 +63,8 @@ export const EditableInput = (props: EditableInputProps) => (
 );
 
 interface EditablePreviewProps
-  extends React.ComponentProps<typeof ArkEditable.Preview> {
-  /**
-   * The size of the preview
-   *
-   * @default "md"
-   */
-  size?: ButtonProps["size"];
-  /**
-   * The variant of the preview
-   *
-   * @default "outline"
-   */
-  variant?: ButtonProps["variant"];
-}
+  extends React.ComponentProps<typeof ArkEditable.Preview>,
+    Pick<ButtonProps, "size" | "variant"> {}
 
 export const EditablePreview = (props: EditablePreviewProps) => {
   const { variant = "outline", size = "md", className, ...rest } = props;
@@ -84,13 +72,16 @@ export const EditablePreview = (props: EditablePreviewProps) => {
   return (
     <ArkEditable.Preview
       className={cn(
-        buttonVariants({ variant, size, clickEffect: false }),
-        "w-full justify-start",
+        buttonVariants({ clickEffect: false, size, variant }),
+        "w-full",
+        "justify-start",
         "px-3",
-        "whitespace-pre-wrap font-normal text-base sm:text-sm",
+        "text-base font-normal whitespace-pre-wrap sm:text-sm",
         "dark:hover:bg-input/32",
         "data-placeholder-shown:text-muted-foreground",
+        "in-[[data-slot=editable-area]:has(textarea)]:h-auto",
         "in-[[data-slot=editable-area]:has(textarea)]:items-start",
+        "in-[[data-slot=editable-area]:has(textarea)]:py-2",
         className
       )}
       data-slot="editable-preview"

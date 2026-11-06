@@ -23,19 +23,19 @@ const Example = () => (
       </TabsTrigger>
     </TabsList>
     <TabsContent
-      className="p-4 text-center text-muted-foreground text-xs"
+      className="text-muted-foreground rounded-md border p-4 text-center"
       value="tab-1"
     >
       Profile content
     </TabsContent>
     <TabsContent
-      className="p-4 text-center text-muted-foreground text-xs"
+      className="text-muted-foreground rounded-md border p-4 text-center"
       value="tab-2"
     >
       Settings content
     </TabsContent>
     <TabsContent
-      className="p-4 text-center text-muted-foreground text-xs"
+      className="text-muted-foreground rounded-md border p-4 text-center"
       value="tab-3"
     >
       Security content

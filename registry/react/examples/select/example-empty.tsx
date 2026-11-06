@@ -4,6 +4,7 @@ import { createListCollection } from "@ark-ui/react";
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectEmpty,
   SelectTrigger,
   SelectValue,
@@ -11,11 +12,14 @@ import {
 
 const Example = () => (
   <Select collection={collection}>
-    <SelectTrigger className="w-48">
+    <SelectTrigger aria-label="Select an option" className="min-w-48">
       <SelectValue placeholder="Select an option" />
     </SelectTrigger>
     <SelectContent>
-      <SelectEmpty>No items to display</SelectEmpty>
+      <SelectList>
+        <SelectEmpty>No items to display</SelectEmpty>
+
+      </SelectList>
     </SelectContent>
   </Select>
 );

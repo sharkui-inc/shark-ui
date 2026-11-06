@@ -6,7 +6,6 @@ import {
   Listbox,
   ListboxContent,
   ListboxItem,
-  ListboxItemIndicator,
   ListboxItemText,
 } from "@/registry/react/components/listbox";
 
@@ -16,9 +15,8 @@ const Example = () => (
       <ListboxContent>
         {collection.items.map((item) => (
           <ListboxItem item={item} key={item.value}>
-            {item.icon}
+            <span>{item.icon}</span>
             <ListboxItemText>{item.label}</ListboxItemText>
-            <ListboxItemIndicator />
           </ListboxItem>
         ))}
       </ListboxContent>
@@ -28,9 +26,9 @@ const Example = () => (
 
 const collection = createListCollection({
   items: [
-    { label: "Brazil", value: "brazil", icon: "🇧🇷" },
-    { label: "Mexico", value: "mexico", icon: "🇲🇽" },
-    { label: "Ireland", value: "ireland", icon: "🇮🇪" },
+    { icon: "🇧🇷", label: "Brazil", value: "brazil" },
+    { icon: "🇲🇽", label: "Mexico", value: "mexico" },
+    { icon: "🇮🇪", label: "Ireland", value: "ireland" },
   ],
 });
 

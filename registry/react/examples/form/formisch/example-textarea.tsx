@@ -7,7 +7,6 @@ import {
   type SubmitHandler,
   useForm,
 } from "@formisch/react";
-import { toast } from "@registry/react/components/toast";
 import * as v from "valibot";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -26,30 +25,23 @@ import {
   FieldLabel,
 } from "@/registry/react/components/field";
 import { Textarea } from "@/registry/react/components/textarea";
-
-const formSchema = v.object({
-  about: v.pipe(
-    v.string(),
-    v.minLength(10, "Please provide at least 10 characters."),
-    v.maxLength(200, "Please keep it under 200 characters.")
-  ),
-});
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: { about: "" },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "about-submitted",
-      title: "About submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "about-submitted",
+      title: "About submitted",
     });
   };
 
@@ -70,7 +62,7 @@ const Example = () => {
                   <FieldLabel>More about you</FieldLabel>
                   <Textarea
                     {...field.props}
-                    className="min-h-[120px]"
+                    className="min-h-30"
                     placeholder="I'm a software engineer..."
                     value={field.input}
                   />
@@ -94,5 +86,13 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  about: v.pipe(
+    v.string(),
+    v.minLength(10, "Please provide at least 10 characters."),
+    v.maxLength(200, "Please keep it under 200 characters.")
+  ),
+});
 
 export default Example;

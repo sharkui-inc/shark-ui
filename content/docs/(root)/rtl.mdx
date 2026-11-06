@@ -1,63 +1,204 @@
 ---
 title: RTL
-description: Right-to-left support for Arabic, Hebrew, Persian, and other RTL languages.
-links:
-  doc: https://ark-ui.com/docs/utilities/locale
+description: Set direction, use logical properties, and test directional controls.
 ---
 
-import { RTLExample } from "@/components/examples/rtl-example";
+import manifest from "@/registry/manifest/locale";
 
-<RTLExample />
+<RTLComponentPreview componentName="rtl" fileName="example-default" autoHeight />
 
-## Setup
+## Installation
 
-Wrap your app with `LocaleProvider` and pass an RTL locale. Use this when you know the user’s language ahead of time or when the app switches locale dynamically.
+<CodeTabs>
 
-```tsx showLineNumbers {4,6}
-import { LocaleProvider } from "@/components/ui/locale";
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
 
-export const App = () => (
-  <LocaleProvider locale="ar-BH">
-    {/* Your app */}
-  </LocaleProvider>
-);
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx shadcn@latest add @shark/locale
 ```
 
-Common RTL locales include `ar-BH`, `ar-SA`, `he-IL`, and `fa-IR`.
+<Step>Add the LocaleProvider component.</Step>
 
-> **Note:** If no `LocaleProvider` is set up, the default locale is `en-US` and the direction stays `ltr`.
+```tsx title="app/layout.tsx" showLineNumbers {8,10}
+import type React from "react"
+import { LocaleProvider } from "@/components/ui/locale"
 
-## Applying Direction
+const locale = "ar-SA"
 
-Read the current `dir` from `useLocale` and pass it to your root element—usually `<html>`—so the layout renders correctly and child components inherit the right text direction.
+export default function RootLayout(props: { children: React.ReactNode }) {
+  return (
+    <html dir="rtl" lang={locale}>
+      <body>
+        <LocaleProvider locale={locale}>{props.children}</LocaleProvider>
+      </body>
+    </html>
+  )
+}
+```
 
-```tsx
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/locale.tsx" src="/locale.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+<Step>Add the LocaleProvider component.</Step>
+
+```tsx title="app/layout.tsx" showLineNumbers {8,10}
+import type React from "react"
+import { LocaleProvider } from "@/components/ui/locale"
+
+const locale = "ar-SA"
+
+export default function RootLayout(props: { children: React.ReactNode }) {
+  return (
+    <html dir="rtl" lang={locale}>
+      <body>
+        <LocaleProvider locale={locale}>{props.children}</LocaleProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Overview
+
+Shark components ship RTL-ready. This page covers enabling and testing direction.
+
+RTL flips reading order, alignment, and some controls. It does not mirror every icon or layout.
+
+## Set the document direction
+
+If you know the locale when the document renders, set `lang` and `dir` on `<html>`. `lang` names the language; it does not choose text direction for you.
+
+Common RTL locales include `ar-SA`, `ar-BH`, `he-IL`, and `fa-IR`. Without `LocaleProvider`, the default is `en-US` and `ltr`.
+
+## Change direction in a client subtree
+
+For a client-side locale switcher, put `dir` and `lang` on the localized subtree. Do not render `<html>` from an application component.
+
+```tsx title="settings-panel.tsx"
+"use client";
+
+import React from "react";
 import { LocaleProvider, useLocale } from "@/components/ui/locale";
 
-const AppContent = () => {
+const LocalizedContent = (props: { children: React.ReactNode }) => {
   const { locale, dir } = useLocale();
 
   return (
-    <html dir={dir} lang={locale}>
-      {/* Your app content */}
-    </html>
+    <section dir={dir} lang={locale}>
+      {props.children}
+    </section>
+  );
+};
+
+export const SettingsPanel = (props: { children: React.ReactNode }) => {
+  const [locale, setLocale] = React.useState("ar-SA");
+
+  return (
+    <LocaleProvider locale={locale}>
+      <select onChange={(event) => setLocale(event.target.value)} value={locale}>
+        <option value="en-US">English</option>
+        <option value="ar-SA">Arabic</option>
+        <option value="he-IL">Hebrew</option>
+      </select>
+      <LocalizedContent>{props.children}</LocalizedContent>
+    </LocaleProvider>
   );
 };
 ```
 
-## How it works
+`LocaleProvider` holds the active locale. `useLocale` returns `locale` and `dir`.
 
-Shark UI components rely on logical CSS properties wherever possible. That means spacing and layout use `ms-*`, `me-*`, `ps-*`, `pe-*`, and `start-*` / `end-*` instead of physical ones like `ml-*`, `mr-*`, `left-*`, or `right-*`. When you flip `dir` to `rtl`, the layout adapts automatically because those utilities follow the text direction.
+## Use logical properties
 
-Setting `dir={dir}` on the root ensures that direction propagates down. Ark UI’s overlays, tooltips, and menus respect the document direction, so they position themselves correctly whether the user reads left-to-right or right-to-left.
+Prefer utilities that follow reading order instead of physical left and right.
 
-## Animations
+| Avoid | Use instead |
+| --- | --- |
+| `text-left`, `text-right` | `text-start`, `text-end` |
+| `ml-*`, `mr-*` | `ms-*`, `me-*` |
+| `pl-*`, `pr-*` | `ps-*`, `pe-*` |
+| `left-*`, `right-*` | `start-*`, `end-*`, `inset-s-*`, `inset-e-*` |
+| `border-left-*`, `border-right-*` | `border-s-*`, `border-e-*` |
+| `rounded-l-*`, `rounded-r-*` | `rounded-s-*`, `rounded-e-*` |
+| `slide-in-from-left/right` | `slide-in-from-start/end` |
 
-Animations should follow the reading direction. Physical utilities like `slide-in-from-right` will slide the wrong way in RTL. Use logical alternatives so motion stays consistent:
+If a centered element still needs a horizontal transform that depends on the inline axis, add an `rtl:` translation variant beside the logical placement.
 
-- `slide-in-from-end` / `slide-out-to-end` instead of `slide-in-from-right` / `slide-out-to-right`
-- `slide-in-from-start` / `slide-out-to-start` instead of `slide-in-from-left` / `slide-out-to-left`
+## What to mirror
 
----
+Mirror controls that track reading order or horizontal movement:
 
-For the full API reference, see the [Ark UI documentation](https://ark-ui.com/docs/utilities/locale).
+- Back and forward navigation
+- Steppers and directional arrows
+- Reading-progress fills and illustrated sequences
+
+Keep these physical:
+
+- Media playback controls, clocks, and circular progress
+- Checkmarks, numbers, URLs, code, charts, and graphs
+- Image cropper handles and other visual coordinates
+- Images that need a separate RTL asset when direction matters
+
+## Format dates, translate copy separately
+
+`useDateFormatter` localizes dates and numbers. It does not translate labels or messages.
+
+```tsx
+import { useDateFormatter } from "@/components/ui/locale";
+
+const LaunchDate = () => {
+  const formatter = useDateFormatter({
+    dateStyle: "long",
+    timeZone: "UTC",
+  });
+
+  const date = new Date("2026-03-15T00:00:00Z");
+
+  return <time dateTime="2026-03-15">{formatter.format(date)}</time>;
+};
+```
+
+## Test overlays and inputs
+
+Check components in the open state:
+
+- Open `Dialog`, `Menu`, `Popover`, and `Select`. Verify placement, focus order, and Escape.
+- Exercise `Date Input`, `Date Picker`, ranges, and clear controls in both directions.
+- Confirm directional icons, keyboard navigation, and horizontal control order.
+
+## RTL review checklist
+
+- Switch between an LTR and RTL locale at desktop and narrow widths.
+- Scan alignment, padding, borders, and transforms for leftover physical `left`/`right` values.
+- Open overlays and walk Tab, arrow keys, and Escape.
+- Check dates, ranges, emails, URLs, IDs, and mixed RTL and Latin text.

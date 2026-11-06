@@ -1,7 +1,11 @@
 ---
-title: Table  
-description: A responsive table component.
+title: Table
+description: Table for structured data.
+seo:
+  description: Table primitives for structured data in responsive layouts.
 ---
+
+import manifest from "@/registry/manifest/table";
 
 <ComponentPreview componentName="table" />
 
@@ -28,9 +32,7 @@ npx shadcn@latest add @shark/table
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -63,13 +65,13 @@ Table
 ## Usage
 
 ```tsx
-import { 
-  Table, 
-  TableBody, 
-  TableCaption, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
   TableRow,
   TableFooter,
 } from "@/components/ui/table";
@@ -96,9 +98,7 @@ import {
 
 ## Accessibility
 
-Always use a `TableCaption` to help assistive technologies announce what the table represents. 
-
-Use with the `sr-only` class to make the caption screen-reader only if you don't want to show it.
+Use `TableCaption`. Add `sr-only` to hide it visually.
 
 ```tsx showLineNumbers
 <Table>
@@ -108,6 +108,22 @@ Use with the `sr-only` class to make the caption screen-reader only if you don't
   {/* ... */}
 </Table>
 ```
+
+## Size
+
+The `size` prop controls row spacing.
+
+### Compact
+
+<ComponentPreview componentName="table" fileName="example-size-compact" />
+
+### Default
+
+<ComponentPreview componentName="table" fileName="example-size-default" />
+
+### Comfortable
+
+<ComponentPreview componentName="table" fileName="example-size-comfortable" />
 
 ## Examples
 
@@ -131,21 +147,33 @@ Add an actions column with buttons per row.
 
 ### With action bar
 
-Use checkboxes for row selection and an action bar that appears when one or more rows are selected. See the [action bar](/docs/components/action-bar) component.
+Row selection with [action bar](/docs/components/action-bar).
 
 <ComponentPreview componentName="table" fileName="example-action-bar" />
-
-### With context menu
-
-Wrap each row with `ContextMenuTrigger` so right-clicking shows a context menu with row actions.
-
-<ComponentPreview componentName="table" fileName="example-context-menu" />
 
 ### Disable row hover
 
 Set `isHoverable={false}` on `Table` to disable the hover background on body rows.
 
 <ComponentPreview componentName="table" fileName="example-not-hoverable" />
+
+### Custom spacing
+
+The `[--space:--spacing("value")]` controls the internal spacing.
+
+<ComponentPreview componentName="table" fileName="example-custom-spacing" />
+
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
+
+```css
+  md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
+```
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="table" />
 
 ## API Reference
 
@@ -156,9 +184,14 @@ Scrollable wrapper around a native table. Supports striped and hover variants.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `variant` | `"plain" \| "striped"` | `"plain"` |
+| `size` | `"compact" \| "comfortable" \| "default"` | `"default"` |
 | `isHoverable` | `boolean` | `true` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(2)` |
 
 ### TableHeader
 
@@ -216,7 +249,7 @@ Data cell for body or footer rows.
 
 ### TableCaption
 
-Accessible caption describing the table. Use `sr-only` for screen-reader only.
+Accessible caption describing the table.
 
 | Prop | Type | Default |
 | --- | --- | --- |

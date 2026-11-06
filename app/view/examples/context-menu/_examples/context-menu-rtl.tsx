@@ -1,0 +1,117 @@
+"use client";
+
+import { ArrowLeftIcon, ArrowRightIcon, RotateCwIcon } from "lucide-react";
+import React from "react";
+import {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuGroup,
+  ContextMenuItem,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+  ContextMenuList,
+} from "@/registry/react/components/context-menu";
+
+const ContextMenuRtl = () => {
+  const [people, setPeople] = React.useState("pedro");
+
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger className="flex aspect-video items-center justify-center rounded-2xl border border-dashed p-20 text-sm">
+        <span className="hidden pointer-fine:inline-block">
+          انقر بزر الماوس الأيمن هنا
+        </span>
+        <span className="hidden pointer-coarse:inline-block">
+          اضغط مطولاً هنا
+        </span>
+      </ContextMenuTrigger>
+      <ContextMenuContent className="min-w-48">
+        <ContextMenuList>
+          <ContextMenuGroup>
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>التنقل</ContextMenuSubTrigger>
+              <ContextMenuSubContent className="min-w-44">
+                <ContextMenuList>
+                  <ContextMenuGroup>
+                    <ContextMenuItem value="back">
+                      <ArrowLeftIcon />
+                      رجوع
+                      <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+                    </ContextMenuItem>
+                    <ContextMenuItem disabled value="forward">
+                      <ArrowRightIcon />
+                      تقدم
+                      <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+                    </ContextMenuItem>
+                    <ContextMenuItem value="reload">
+                      <RotateCwIcon />
+                      إعادة تحميل
+                      <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+                    </ContextMenuItem>
+                  </ContextMenuGroup>
+                </ContextMenuList>
+              </ContextMenuSubContent>
+            </ContextMenuSub>
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>المزيد من الأدوات</ContextMenuSubTrigger>
+              <ContextMenuSubContent className="min-w-44">
+                <ContextMenuList>
+                  <ContextMenuGroup>
+                    <ContextMenuItem value="save-page">
+                      حفظ الصفحة...
+                    </ContextMenuItem>
+                    <ContextMenuItem value="create-shortcut">
+                      إنشاء اختصار...
+                    </ContextMenuItem>
+                    <ContextMenuItem value="name-window">
+                      تسمية النافذة...
+                    </ContextMenuItem>
+                  </ContextMenuGroup>
+                  <ContextMenuSeparator />
+                  <ContextMenuGroup>
+                    <ContextMenuItem value="developer-tools">
+                      أدوات المطور
+                    </ContextMenuItem>
+                  </ContextMenuGroup>
+                  <ContextMenuSeparator />
+                  <ContextMenuGroup>
+                    <ContextMenuItem value="delete" variant="destructive">
+                      حذف
+                    </ContextMenuItem>
+                  </ContextMenuGroup>
+                </ContextMenuList>
+              </ContextMenuSubContent>
+            </ContextMenuSub>
+          </ContextMenuGroup>
+          <ContextMenuSeparator />
+          <ContextMenuCheckboxItem checked value="show-bookmarks">
+            إظهار الإشارات المرجعية
+          </ContextMenuCheckboxItem>
+          <ContextMenuCheckboxItem checked={false} value="show-full-urls">
+            إظهار عناوين URL الكاملة
+          </ContextMenuCheckboxItem>
+          <ContextMenuSeparator />
+          <ContextMenuRadioGroup
+            heading="الأشخاص"
+            onValueChange={({ value }) => setPeople(value)}
+            value={people}
+          >
+            <ContextMenuRadioItem value="pedro">
+              Pedro Duarte
+            </ContextMenuRadioItem>
+            <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
+          </ContextMenuRadioGroup>
+        </ContextMenuList>
+      </ContextMenuContent>
+    </ContextMenu>
+  );
+};
+
+export default ContextMenuRtl;

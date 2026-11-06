@@ -8,6 +8,8 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/registry/react/components/dialog";
+import { Field, FieldLabel } from "@/registry/react/components/field";
+import { Input } from "@/registry/react/components/input";
 
 const Example = () => (
   <Dialog modal={false}>
@@ -16,19 +18,19 @@ const Example = () => (
     </DialogTrigger>
 
     <DialogContent>
-      <DialogHeader
-        description="This is a non-modal dialog. You can interact with elements outside the dialog."
-        title="Non-Modal Dialog"
-      />
+      <DialogHeader description="Choose a new name." title="Rename" />
       <DialogBody>
-        <p className="text-muted-foreground text-sm">
-          Non-modal dialogs allow interaction with elements outside the dialog.
-          Focus trapping and scroll prevention are disabled.
-        </p>
+        <Field>
+          <FieldLabel>Name</FieldLabel>
+          <Input defaultValue="notes.md" />
+        </Field>
       </DialogBody>
       <DialogFooter>
         <DialogClose asChild>
-          <Button variant="outline">Close</Button>
+          <Button>Save</Button>
+        </DialogClose>
+        <DialogClose asChild>
+          <Button variant="outline">Cancel</Button>
         </DialogClose>
       </DialogFooter>
     </DialogContent>

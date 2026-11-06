@@ -1,0 +1,212 @@
+"use client";
+
+import {
+  createColumnHelper,
+  type Row,
+  type RowSelectionState,
+  type Table as TanStackTable,
+  useTable,
+} from "@tanstack/react-table";
+import React from "react";
+import { Checkbox } from "@/registry/react/components/checkbox";
+import {
+  type DataTableFeatures,
+  DataTablePagination,
+  DataTablePaginationControls,
+  DataTablePaginationNavigation,
+  DataTablePaginationPageInfo,
+  DataTablePaginationRowsPerPage,
+  DataTablePaginationSelectedCount,
+  dataTableFeatures,
+} from "@/registry/react/components/data-table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/registry/react/components/table";
+
+const Example = () => {
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
+
+  const table = useTable({
+    columns,
+    data,
+    features: dataTableFeatures,
+    getRowId: (row) => row.id,
+    initialState: {
+      pagination: {
+        pageIndex: 0,
+        pageSize: 5,
+      },
+    },
+    onRowSelectionChange: setRowSelection,
+    state: {
+      rowSelection,
+    },
+  });
+
+  return (
+    <div className="flex w-full max-w-2xl flex-col gap-4">
+      <div className="overflow-hidden rounded-md border">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead
+                    colSpan={header.colSpan}
+                    key={header.id}
+                    rowSpan={header.rowSpan}
+                  >
+                    {header.isPlaceholder ? null : (
+                      <table.FlexRender header={header} />
+                    )}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  data-state={row.getIsSelected() ? "selected" : undefined}
+                  key={row.id}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      <table.FlexRender cell={cell} />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  className="h-24 text-center"
+                  colSpan={Math.max(table.getVisibleLeafColumns().length, 1)}
+                >
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <DataTablePagination table={table}>
+        <DataTablePaginationSelectedCount />
+        <DataTablePaginationControls>
+          <DataTablePaginationRowsPerPage />
+          <DataTablePaginationPageInfo />
+          <DataTablePaginationNavigation aria-label="Payments pagination" />
+        </DataTablePaginationControls>
+      </DataTablePagination>
+    </div>
+  );
+};
+
+interface InventoryItem {
+  id: string;
+  location: string;
+  quantity: number;
+  sku: string;
+  status: "in-stock" | "low" | "backorder";
+}
+
+const columnHelper = createColumnHelper<DataTableFeatures, InventoryItem>();
+
+interface SelectAllCheckboxProps {
+  table: TanStackTable<DataTableFeatures, InventoryItem>;
+}
+
+const SelectAllCheckbox = (props: SelectAllCheckboxProps) => {
+  const { table } = props;
+
+  return (
+    <Checkbox
+      aria-label="Select all"
+      checked={
+        table.getIsAllPageRowsSelected() ||
+        (table.getIsSomePageRowsSelected() && "indeterminate")
+      }
+      onCheckedChange={({ checked }) => {
+        table.toggleAllPageRowsSelected(!!checked);
+      }}
+    />
+  );
+};
+
+interface SelectRowCheckboxProps {
+  row: Row<DataTableFeatures, InventoryItem>;
+}
+
+const SelectRowCheckbox = (props: SelectRowCheckboxProps) => {
+  const { row } = props;
+
+  return (
+    <Checkbox
+      aria-label="Select row"
+      checked={row.getIsSelected()}
+      onCheckedChange={({ checked }) => {
+        row.toggleSelected(!!checked);
+      }}
+    />
+  );
+};
+
+const columns = columnHelper.columns([
+  columnHelper.accessor("sku", {
+    cell: ({ row }) => (
+      <div className="flex items-center gap-2">
+        <SelectRowCheckbox row={row} />
+        {row.getValue("sku")}
+      </div>
+    ),
+    header: ({ table }) => (
+      <div className="flex items-center gap-2">
+        <SelectAllCheckbox table={table} />
+        SKU
+      </div>
+    ),
+  }),
+  columnHelper.accessor("location", {
+    header: "Location",
+  }),
+  columnHelper.accessor("quantity", {
+    cell: ({ getValue }) => <span className="tabular-nums">{getValue()}</span>,
+    header: "Qty",
+  }),
+  columnHelper.accessor("status", {
+    cell: ({ getValue }) => (
+      <span className="capitalize">{getValue().replace("-", " ")}</span>
+    ),
+    header: "Status",
+  }),
+]);
+
+const locations = [
+  "Aisle A",
+  "Aisle B",
+  "Aisle C",
+  "Dock",
+  "Overflow",
+] as const;
+
+const statuses: InventoryItem["status"][] = ["in-stock", "low", "backorder"];
+
+const data: InventoryItem[] = Array.from({ length: 24 }, (_, index) => {
+  const n = index + 1;
+
+  return {
+    id: `inv-${n}`,
+    location: locations[index % locations.length] ?? "Aisle A",
+    quantity: (n * 7) % 120,
+    sku: `SKU-${String(1000 + n)}`,
+    status: statuses[index % statuses.length] ?? "in-stock",
+  };
+});
+
+export default Example;

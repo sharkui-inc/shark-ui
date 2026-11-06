@@ -1,7 +1,13 @@
 ---
 title: Skip Nav
-description: Lets keyboard users skip to main content.
+description: Skip link to main content.
+aliases:
+  - Skip link
+seo:
+  description: Skip link so keyboard users jump to main content.
 ---
+
+import manifest from "@/registry/manifest/skip-nav";
 
 <ComponentPreview componentName="skip-nav" />
 
@@ -16,9 +22,35 @@ description: Lets keyboard users skip to main content.
 </TabsList>
 <TabsContent value="cli">
 
+<Steps>
+
+<Step>Run the following command:</Step>
+
 ```bash
 npx shadcn@latest add @shark/skip-nav
 ```
+
+<Step>Add SkipNavLink and SkipNavContent to your layout.</Step>
+
+```tsx title="app/layout.tsx"
+import { SkipNavContent, SkipNavLink } from "@/components/ui/skip-nav"
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <SkipNavLink />
+        <nav>...</nav>
+        <SkipNavContent asChild>
+          <main>{children}</main>
+        </SkipNavContent>
+      </body>
+    </html>
+  )
+}
+```
+
+</Steps>
 
 </TabsContent>
 <TabsContent value="manual">
@@ -26,15 +58,34 @@ npx shadcn@latest add @shark/skip-nav
 <Steps>
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
   <ComponentSource title="components/ui/skip-nav.tsx" src="/skip-nav.tsx" />
 
 <Step>Update the import paths to match your project setup.</Step>
+
+<Step>Add SkipNavLink and SkipNavContent to your layout.</Step>
+
+```tsx title="app/layout.tsx"
+import { SkipNavContent, SkipNavLink } from "@/components/ui/skip-nav"
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <SkipNavLink />
+        <nav>...</nav>
+        <SkipNavContent asChild>
+          <main>{children}</main>
+        </SkipNavContent>
+      </body>
+    </html>
+  )
+}
+```
+
 </Steps>
 
 </TabsContent>
@@ -43,18 +94,25 @@ npm install @ark-ui/react
 ## Usage
 
 - Place `SkipNavLink` as one of the first focusable elements on the page.
-- Use `SkipNavContent` to wrap your main content. It renders a div with an id that the link targets.
+- Use `SkipNavContent` with `asChild` on the main element. It sets the id that the link targets.
 
 ```tsx
-import { SkipNavContent, SkipNavLink } from "@/components/ui/skip-nav";
+import { SkipNavContent, SkipNavLink } from "@/components/ui/skip-nav"
 ```
 
 ```tsx
 <SkipNavLink />
 <nav>...</nav>
-<SkipNavContent />
-<main>Your main content</main>
+<SkipNavContent asChild>
+  <main>Your main content</main>
+</SkipNavContent>
 ```
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="skip-nav" />
 
 ## API Reference
 
@@ -62,8 +120,8 @@ import { SkipNavContent, SkipNavLink } from "@/components/ui/skip-nav";
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `id` | `string` | `"skip-nav-content"` |
-| `className` | `string` | - |
+| `contentId` | `string` | `"skip-nav-content"` |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
 ### SkipNavContent
@@ -71,5 +129,5 @@ import { SkipNavContent, SkipNavLink } from "@/components/ui/skip-nav";
 | Prop | Type | Default |
 | --- | --- | --- |
 | `id` | `string` | `"skip-nav-content"` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |

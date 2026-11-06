@@ -12,14 +12,25 @@
       },
       "performance": {
         "noBarrelFile": "off",
-        "noImgElement": "off"
+        "noImgElement": "off",
+        "noJsxPropsBind": "off"
       },
       "suspicious": {
+        "noDocumentCookie": "off",
         "noDuplicateCustomProperties": "off"
       }
     }
   },
   "overrides": [
+    {
+      "includes": ["public/r/**"],
+      "formatter": {
+        "enabled": false
+      },
+      "linter": {
+        "enabled": false
+      }
+    },
     {
       "includes": ["registry/react/examples/form/**"],
       "linter": {
@@ -34,6 +45,19 @@
             "noArrayIndexKey": "off",
             "noEmptyBlockStatements": "off",
             "useAwait": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "registry/react/examples/hitbox/example-custom.tsx",
+        "registry/react/examples/shimmer/example-color.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "useTailwindSortedClasses": "off"
           }
         }
       }

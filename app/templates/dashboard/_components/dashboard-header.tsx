@@ -1,0 +1,53 @@
+"use client";
+
+import { ChevronDownIcon, DownloadIcon } from "lucide-react";
+import React from "react";
+import { Button } from "@/registry/react/components/button";
+import {
+  Menu,
+  MenuContent,
+  MenuList,
+  MenuItem,
+  MenuTrigger,
+} from "@/registry/react/components/menu";
+import { SidebarTrigger } from "@/registry/react/components/sidebar";
+import { type DateRange, dateRanges } from "../_data/dashboard";
+import { DashboardNotifications } from "./dashboard-notifications";
+
+export const DashboardHeader = () => {
+  const [dateRange, setDateRange] = React.useState<DateRange>("Last 30 days");
+
+  return (
+    <header className="flex h-14 shrink-0 items-center gap-3 border-b px-4">
+      <SidebarTrigger />
+      <p className="min-w-0 flex-1 truncate text-sm font-medium">Dashboard</p>
+      <DashboardNotifications />
+      <Menu positioning={{ gutter: 16 }}>
+        <MenuTrigger asChild>
+          <Button size="sm" variant="outline">
+            {dateRange}
+            <ChevronDownIcon aria-hidden="true" />
+          </Button>
+        </MenuTrigger>
+        <MenuContent>
+          <MenuList>
+            {dateRanges.map((range) => (
+              <MenuItem
+                key={range}
+                onClick={() => setDateRange(range)}
+                value={range}
+              >
+                {range}
+              </MenuItem>
+            ))}
+
+          </MenuList>
+        </MenuContent>
+      </Menu>
+      <Button size="sm">
+        <DownloadIcon aria-hidden="true" />
+        <span className="sr-only sm:not-sr-only">Download</span>
+      </Button>
+    </header>
+  );
+};

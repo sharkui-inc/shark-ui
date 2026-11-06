@@ -14,7 +14,7 @@ const Example = () => {
         placeholder="Type your message here"
         value={message}
       />
-      <FieldDescription className="text-right">
+      <FieldDescription className="text-end">
         Character count: {message.length}
       </FieldDescription>
     </Field>

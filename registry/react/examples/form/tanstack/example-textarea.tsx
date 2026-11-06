@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "@registry/react/components/toast";
 import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -20,32 +19,26 @@ import {
   FieldLabel,
 } from "@/registry/react/components/field";
 import { Textarea } from "@/registry/react/components/textarea";
-
-const formSchema = z.object({
-  about: z
-    .string()
-    .min(10, "Please provide at least 10 characters.")
-    .max(200, "Please keep it under 200 characters."),
-});
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
     defaultValues: {
       about: "",
     },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "about-submitted",
-        title: "About submitted",
         description: (
           <pre className="mt-2">
             <code>{JSON.stringify(value, null, 2)}</code>
           </pre>
         ),
+        id: "about-submitted",
+        title: "About submitted",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -71,7 +64,7 @@ const Example = () => {
                 <Field invalid={!field.state.meta.isValid}>
                   <FieldLabel>More about you</FieldLabel>
                   <Textarea
-                    className="min-h-[120px]"
+                    className="min-h-30"
                     name={field.name}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
@@ -101,5 +94,12 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  about: z
+    .string()
+    .min(10, "Please provide at least 10 characters.")
+    .max(200, "Please keep it under 200 characters."),
+});
 
 export default Example;

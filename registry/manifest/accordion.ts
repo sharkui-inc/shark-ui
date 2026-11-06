@@ -4,28 +4,28 @@ const dependencies = ["@ark-ui/react", "lucide-react"];
 
 const cssVars = {
   theme: {
-    "--animate-slide-up": "slideUp 0.2s ease-out",
-    "--animate-slide-down": "slideDown 0.2s ease-out",
+    "--animate-collapse-down": "collapse-down 200ms ease-out",
+    "--animate-collapse-up": "collapse-up 200ms ease-out",
   },
 };
 
 const css = {
-  "@keyframes slideUp": {
-    from: { height: "var(--height)" },
-    to: { height: "0" },
-  },
-  "@keyframes slideDown": {
-    from: { height: "0" },
+  "@keyframes collapse-down": {
+    from: { height: "var(--collapsed-height, 0)" },
     to: { height: "var(--height)" },
+  },
+  "@keyframes collapse-up": {
+    from: { height: "var(--height)" },
+    to: { height: "var(--collapsed-height, 0)" },
   },
 };
 
 const manifest: RegistryItemType = {
+  css,
+  cssVars,
+  dependencies,
   name: "accordion",
   type: "registry:ui",
-  dependencies,
-  cssVars,
-  css,
 };
 
 export default manifest;

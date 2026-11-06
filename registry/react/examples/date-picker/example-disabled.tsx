@@ -1,0 +1,43 @@
+import { CalendarIcon } from "lucide-react";
+import { Button } from "@/registry/react/components/button";
+import {
+  CalendarMonthSelect,
+  CalendarNextTrigger,
+  CalendarPrevTrigger,
+  CalendarTable,
+  CalendarTableDays,
+  CalendarViewControl,
+  CalendarWeekDays,
+  CalendarYearSelect,
+} from "@/registry/react/components/calendar";
+import {
+  DatePicker,
+  DatePickerContent,
+  DatePickerTrigger,
+  DatePickerValue,
+} from "@/registry/react/components/date-picker";
+
+const Example = () => (
+  <DatePicker disabled>
+    <DatePickerTrigger asChild>
+      <Button className="min-w-56" disabled variant="outline">
+        <CalendarIcon />
+        <DatePickerValue placeholder="Pick a date" />
+      </Button>
+    </DatePickerTrigger>
+    <DatePickerContent>
+      <CalendarViewControl>
+        <CalendarPrevTrigger />
+        <CalendarMonthSelect />
+        <CalendarYearSelect />
+        <CalendarNextTrigger />
+      </CalendarViewControl>
+      <CalendarTable>
+        <CalendarWeekDays />
+        <CalendarTableDays />
+      </CalendarTable>
+    </DatePickerContent>
+  </DatePicker>
+);
+
+export default Example;

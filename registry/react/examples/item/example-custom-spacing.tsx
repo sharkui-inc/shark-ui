@@ -1,4 +1,4 @@
-import { User } from "lucide-react";
+import { UserIcon } from "lucide-react";
 import {
   Item,
   ItemContent,
@@ -11,7 +11,7 @@ const Example = () => (
   <div className="flex w-full max-w-md flex-col gap-4">
     <Item className="w-full [--space:--spacing(2)]" variant="outline">
       <ItemMedia variant="icon">
-        <User />
+        <UserIcon />
       </ItemMedia>
       <ItemContent>
         <ItemTitle>Compact spacing</ItemTitle>
@@ -26,7 +26,7 @@ const Example = () => (
       variant="outline"
     >
       <ItemMedia variant="icon">
-        <User />
+        <UserIcon />
       </ItemMedia>
       <ItemContent>
         <ItemTitle>Responsive spacing</ItemTitle>

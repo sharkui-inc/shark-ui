@@ -3,6 +3,7 @@ import {
   FieldContent,
   FieldDescription,
   FieldLabel,
+  FieldTitle,
 } from "@/registry/react/components/field";
 import {
   RadioGroup,
@@ -12,27 +13,39 @@ import {
 const Example = () => (
   <RadioGroup className="w-full max-w-sm" defaultValue="r-1">
     <FieldLabel>
-      <Field>
+      <Field orientation="horizontal">
         <FieldContent>
-          <RadioGroupItem value="r-1">Plus</RadioGroupItem>
+          <FieldTitle>Plus</FieldTitle>
           <FieldDescription>For individuals and small teams.</FieldDescription>
         </FieldContent>
+        <RadioGroupItem
+          className="**:data-[slot=radio-group-item-text]:hidden"
+          value="r-1"
+        />
       </Field>
     </FieldLabel>
     <FieldLabel>
-      <Field>
+      <Field orientation="horizontal">
         <FieldContent>
-          <RadioGroupItem value="r-2">Pro</RadioGroupItem>
+          <FieldTitle>Pro</FieldTitle>
           <FieldDescription>For growing businesses.</FieldDescription>
         </FieldContent>
+        <RadioGroupItem
+          className="**:data-[slot=radio-group-item-text]:hidden"
+          value="r-2"
+        />
       </Field>
     </FieldLabel>
     <FieldLabel>
-      <Field>
+      <Field orientation="horizontal">
         <FieldContent>
-          <RadioGroupItem value="r-3">Enterprise</RadioGroupItem>
+          <FieldTitle>Enterprise</FieldTitle>
           <FieldDescription>For large teams and enterprises.</FieldDescription>
         </FieldContent>
+        <RadioGroupItem
+          className="**:data-[slot=radio-group-item-text]:hidden"
+          value="r-3"
+        />
       </Field>
     </FieldLabel>
   </RadioGroup>

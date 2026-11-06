@@ -3,6 +3,7 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuSeparator,
   MenuShortcut,
@@ -14,28 +15,31 @@ const Example = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-40">
-      <MenuItem value="profile">
-        <UserIcon />
-        Profile
-        <MenuShortcut>⌘P</MenuShortcut>
-      </MenuItem>
-      <MenuItem value="settings">
-        <SettingsIcon />
-        Settings
-        <MenuShortcut>⌘S</MenuShortcut>
-      </MenuItem>
-      <MenuItem value="copy">
-        <CopyIcon />
-        Copy
-        <MenuShortcut>⌘C</MenuShortcut>
-      </MenuItem>
-      <MenuSeparator />
-      <MenuItem value="logout">
-        <LogOutIcon />
-        Log out
-        <MenuShortcut>⌘Q</MenuShortcut>
-      </MenuItem>
+    <MenuContent className="min-w-40">
+      <MenuList>
+        <MenuItem value="profile">
+          <UserIcon />
+          Profile
+          <MenuShortcut className="hidden sm:inline-flex">⌘P</MenuShortcut>
+        </MenuItem>
+        <MenuItem value="settings">
+          <SettingsIcon />
+          Settings
+          <MenuShortcut className="hidden sm:inline-flex">⌘S</MenuShortcut>
+        </MenuItem>
+        <MenuItem value="copy">
+          <CopyIcon />
+          Copy
+          <MenuShortcut className="hidden sm:inline-flex">⌘C</MenuShortcut>
+        </MenuItem>
+        <MenuSeparator />
+        <MenuItem value="logout">
+          <LogOutIcon />
+          Log out
+          <MenuShortcut className="hidden sm:inline-flex">⌘Q</MenuShortcut>
+        </MenuItem>
+
+      </MenuList>
     </MenuContent>
   </Menu>
 );

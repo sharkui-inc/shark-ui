@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "@registry/react/components/toast";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -21,31 +20,23 @@ import {
   FieldLabel,
 } from "@/registry/react/components/field";
 import { InputOTP, InputOTPSlot } from "@/registry/react/components/input-otp";
-
-const formSchema = z.object({
-  backupCode: z
-    .array(z.string())
-    .length(6)
-    .refine((digits) => digits.every((d) => d.length === 1), {
-      message: "Enter all 6 digits of your backup code.",
-    }),
-});
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: { backupCode: ["", "", "", "", "", ""] },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "backup-code-submitted",
-      title: "Backup code verified",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "backup-code-submitted",
+      title: "Backup code verified",
     });
   };
 
@@ -96,5 +87,14 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  backupCode: z
+    .array(z.string())
+    .length(6)
+    .refine((digits) => digits.every((d) => d.length === 1), {
+      message: "Enter all 6 digits of your backup code.",
+    }),
+});
 
 export default Example;

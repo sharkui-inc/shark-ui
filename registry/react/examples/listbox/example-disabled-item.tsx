@@ -1,28 +1,23 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { Item } from "@/registry/react/components/item";
 import {
   Listbox,
   ListboxContent,
   ListboxItem,
-  ListboxItemIndicator,
   ListboxItemText,
 } from "@/registry/react/components/listbox";
 
 const Example = () => (
-  <Item className="w-full max-w-64 p-1" variant="outline">
-    <Listbox collection={collection}>
-      <ListboxContent>
-        {collection.items.map((item) => (
-          <ListboxItem item={item} key={item.value}>
-            <ListboxItemText>{item.label}</ListboxItemText>
-            <ListboxItemIndicator />
-          </ListboxItem>
-        ))}
-      </ListboxContent>
-    </Listbox>
-  </Item>
+  <Listbox className="w-full max-w-64" collection={collection}>
+    <ListboxContent>
+      {collection.items.map((item) => (
+        <ListboxItem item={item} key={item.value}>
+          <ListboxItemText>{item.label}</ListboxItemText>
+        </ListboxItem>
+      ))}
+    </ListboxContent>
+  </Listbox>
 );
 
 const collection = createListCollection({
@@ -30,9 +25,9 @@ const collection = createListCollection({
     { label: "Free", value: "free" },
     { label: "Pro", value: "pro" },
     {
+      disabled: true,
       label: "Enterprise",
       value: "enterprise",
-      disabled: true,
     },
     { label: "Custom", value: "custom" },
   ],

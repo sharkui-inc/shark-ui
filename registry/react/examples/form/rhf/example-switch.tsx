@@ -1,7 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@registry/react/components/button";
+import { Controller, useForm } from "react-hook-form";
+import * as z from "zod";
+import { Button } from "@/registry/react/components/button";
 import {
   Card,
   CardContent,
@@ -9,7 +11,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@registry/react/components/card";
+} from "@/registry/react/components/card";
 import {
   Field,
   FieldContent,
@@ -17,35 +19,27 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@registry/react/components/field";
-import { Switch } from "@registry/react/components/switch";
-import { toast } from "@registry/react/components/toast";
-import { Controller, useForm } from "react-hook-form";
-import * as z from "zod";
+} from "@/registry/react/components/field";
+import { Switch } from "@/registry/react/components/switch";
+import { toast } from "@/registry/react/components/toast";
 
-const formSchema = z.object({
-  twoFactor: z.boolean().refine((val) => val === true, {
-    message: "It is highly recommended to enable two-factor authentication.",
-  }),
-});
-
-export const Example = () => {
+const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: {
       twoFactor: false,
     },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "about-submitted",
-      title: "About submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "about-submitted",
+      title: "About submitted",
     });
   };
 
@@ -92,5 +86,11 @@ export const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  twoFactor: z.boolean().refine((val) => val === true, {
+    message: "It is highly recommended to enable two-factor authentication.",
+  }),
+});
 
 export default Example;

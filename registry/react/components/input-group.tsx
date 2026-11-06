@@ -4,51 +4,83 @@ import { ark } from "@ark-ui/react/factory";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/react/components/button";
-import { Input } from "@/registry/react/components/input";
+import { Button, type ButtonProps } from "@/registry/react/components/button";
+import { Input, inputHeightVars } from "@/registry/react/components/input";
 import { Textarea } from "@/registry/react/components/textarea";
 
-const inpuGroupVariants = tv({
+const inputGroupVariants = tv({
   base: [
+    "[--input-group-px:calc(--spacing(3)-1px)]",
+    "[--input-group-inset:calc(--spacing(1)-1px)]",
+    "[--input-group-radius:var(--radius)]",
+    "[--input-group-textarea-pb:var(--input-group-px)] [--input-group-textarea-pt:var(--input-group-px)]",
+    "has-[>[data-align=block-start]_:is(button,a,[role=button])]:[--input-group-textarea-pt:--spacing(1)]",
+    "has-[>[data-align=block-end]_:is(button,a,[role=button])]:[--input-group-textarea-pb:--spacing(1)]",
     "group/input-group",
     "relative",
-    "w-full min-w-0",
+    "h-(--field-height) min-h-(--field-height) w-full min-w-0",
     "flex items-center",
-    "bg-background dark:bg-input/30",
-    "rounded-lg border border-input shadow-xs/5",
+    "px-(--input-group-px)",
+    "text-base font-normal md:text-sm",
+    "bg-background",
+    "dark:bg-input/32",
+    "rounded-lg",
+    "border-input border shadow-xs/4",
     "transition-[color,box-shadow]",
     "has-[>textarea]:h-auto",
-    "has-[>[data-align=inline-start]]:[&>input]:ps-2",
-    "has-[>[data-align=inline-end]]:[&>input]:pe-2",
-    "has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-start]]:[&>input]:pb-3",
-    "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3",
-    "outline-none focus-within:border-primary focus-within:ring-[3px] focus-within:ring-ring/32",
-    "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-[3px] has-[[data-slot][aria-invalid=true]]:ring-destructive/24",
-    "dark:has-[[data-slot][aria-invalid=true]]:border-destructive-foreground dark:has-[[data-slot][aria-invalid=true]]:ring-destructive-foreground/40",
-    "motion-reduce:transition-none!",
+    "has-[>[data-align^=block]]:h-auto has-[>[data-align^=block]]:flex-col",
+    "has-[>[data-align=block-start]]:[&>input]:pb-3",
+    "has-[>[data-align=block-end]]:[&>input]:pt-3",
+    "[&_[data-inline=true]_:is(button,a,[role=button],kbd)]:rounded-[max(var(--radius-sm),calc(var(--input-group-radius)-var(--input-group-inset)))]",
+    "data-[pill=true]:[&_[data-inline=true]_:is(button,a,[role=button],kbd)]:rounded-full",
+    "focus-within:border-ring/64 focus-within:ring-ring/24 focus-within:ring-2",
+    "pointer-coarse:[&>:is(button,a,[role=button])]:min-h-11 pointer-coarse:[&>:is(button,a,[role=button])]:min-w-11",
+    "pointer-coarse:[&>[data-slot=input-group-addon]_:is(button,a,[role=button])]:min-h-11 pointer-coarse:[&>[data-slot=input-group-addon]_:is(button,a,[role=button])]:min-w-11",
+    "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-destructive/24 has-[[data-slot][aria-invalid=true]]:ring-[3px]",
+    "dark:has-[[data-slot][aria-invalid=true]]:border-destructive-foreground dark:has-[[data-slot][aria-invalid=true]]:ring-destructive-foreground/32",
+    "has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:opacity-64",
+    "data-disabled:pointer-events-none data-disabled:opacity-64",
+    "motion-reduce:transition-none",
   ],
-  variants: {
-    size: {
-      sm: ["h-7"],
-      md: ["h-8"],
-      lg: ["h-9"],
+  compoundVariants: [
+    {
+      class: "rounded-full",
+      pill: true,
     },
-  },
+  ],
   defaultVariants: {
+    pill: false,
     size: "md",
+  },
+  variants: {
+    pill: {
+      false: "",
+      true: "",
+    },
+    size: {
+      lg: inputHeightVars.lg,
+      md: inputHeightVars.md,
+      sm: [
+        inputHeightVars.sm,
+        "[--input-group-px:calc(--spacing(2)-1px)]",
+        "[--input-group-radius:calc(var(--radius)*0.75)]",
+        "rounded-md",
+      ],
+    },
   },
 });
 
 export interface InputGroupProps
   extends React.ComponentProps<typeof ark.div>,
-    VariantProps<typeof inpuGroupVariants> {}
+    VariantProps<typeof inputGroupVariants> {}
 
 export const InputGroup = (props: InputGroupProps) => {
-  const { size = "md", className, ...rest } = props;
+  const { size = "md", pill = false, className, ...rest } = props;
 
   return (
     <ark.div
-      className={cn(inpuGroupVariants({ size }), className)}
+      className={cn(inputGroupVariants({ pill, size }), className)}
+      data-pill={pill || undefined}
       data-size={size}
       data-slot="input-group"
       role="group"
@@ -59,41 +91,41 @@ export const InputGroup = (props: InputGroupProps) => {
 
 const inputGroupAddonVariants = tv({
   base: [
-    "h-auto",
+    "[--input-group-addon-py:var(--input-group-px)]",
+    "has-[:is(button,a,[role=button])]:[--input-group-addon-py:var(--input-group-inset)]",
+    "h-full",
     "flex items-center justify-center gap-2",
-    "py-1.5",
-    "select-none font-medium text-muted-foreground text-sm",
+    "text-muted-foreground text-xs font-medium",
+    "select-none",
     "cursor-text",
-    "group-data-[disabled=true]/input-group:opacity-64",
-    "[&>kbd]:rounded-[calc(var(--radius)-5px)]",
     "[&_svg:not([class*='size-'])]:size-4",
   ],
-  variants: {
-    align: {
-      "inline-start": [
-        "order-first ps-3",
-        "has-[>button]:ms-[-0.45rem]",
-        "has-[>kbd]:ms-[-0.35rem]",
-      ],
-      "inline-end": [
-        "order-last pe-3",
-        "has-[>button]:me-[-0.45rem]",
-        "has-[>kbd]:me-[-0.35rem]",
-      ],
-      "block-start": [
-        "order-first w-full justify-start px-3 pt-3",
-        "group-has-[>input]/input-group:pt-2.5",
-        "[.border-b]:pb-3",
-      ],
-      "block-end": [
-        "order-last w-full justify-start px-3 pb-3",
-        "group-has-[>input]/input-group:pb-2.5",
-        "[.border-t]:pt-3",
-      ],
-    },
-  },
   defaultVariants: {
     align: "inline-start",
+  },
+  variants: {
+    align: {
+      "block-end": [
+        "w-full",
+        "order-last justify-start",
+        "pb-(--input-group-addon-py) [.border-t]:pt-(--input-group-px)",
+      ],
+      "block-start": [
+        "w-full",
+        "order-first justify-start",
+        "pt-(--input-group-addon-py) [.border-b]:pb-(--input-group-px)",
+      ],
+      "inline-end": [
+        "order-last",
+        "ps-2 pe-0",
+        "has-[:is(button,a,[role=button])]:-me-[calc(var(--input-group-px)-var(--input-group-inset))]",
+      ],
+      "inline-start": [
+        "order-first",
+        "ps-0 pe-2",
+        "has-[:is(button,a,[role=button])]:-ms-[calc(var(--input-group-px)-var(--input-group-inset))]",
+      ],
+    },
   },
 });
 
@@ -102,77 +134,46 @@ interface InputGroupAddonProps
     VariantProps<typeof inputGroupAddonVariants> {}
 
 export const InputGroupAddon = (props: InputGroupAddonProps) => {
-  const { className, align = "inline-start", ...rest } = props;
+  const { align = "inline-start", onMouseDown, className, ...rest } = props;
 
   return (
     <ark.div
       className={cn(inputGroupAddonVariants({ align }), className)}
       data-align={align}
+      data-inline={align.startsWith("inline") || undefined}
       data-slot="input-group-addon"
-      onClick={(e) => {
-        if ((e.target as HTMLElement).closest("button")) {
-          return;
-        }
-        e.currentTarget.parentElement?.querySelector("input")?.focus();
-      }}
       role="group"
       {...rest}
+      onMouseDown={(event) => {
+        onMouseDown?.(event);
+        if (
+          event.defaultPrevented ||
+          (event.target as HTMLElement).closest(
+            "a, button, input, select, textarea, [role=button]"
+          )
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+        event.currentTarget.parentElement
+          ?.querySelector<HTMLElement>(
+            "input:not(:focus), textarea:not(:focus)"
+          )
+          ?.focus();
+      }}
     />
   );
 };
 
-const inputGroupButtonVariants = tv({
-  base: [
-    "relative",
-    "flex items-center gap-2",
-    "text-sm",
-    "shadow-none",
-    "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
-  ],
-  variants: {
-    size: {
-      xs: [
-        "h-6",
-        "gap-1",
-        "px-2",
-        "rounded-[calc(var(--radius)-5px)]",
-        "has-[>svg]:px-2",
-        "[&_svg:not([class*='size-'])]:size-3.5",
-      ],
-      sm: ["h-8", "gap-1.5", "px-2.5", "rounded-md", "has-[>svg]:px-2.5"],
-      "icon-xs": [
-        "size-6",
-        "rounded-[calc(var(--radius)-5px)]",
-        "p-0",
-        "has-[>svg]:p-0",
-      ],
-      "icon-sm": ["size-8", "p-0", "has-[>svg]:p-0"],
-    },
-  },
-  defaultVariants: {
-    size: "xs",
-  },
-});
-
-interface InputGroupButtonProps
-  extends Omit<React.ComponentProps<typeof Button>, "size">,
-    VariantProps<typeof inputGroupButtonVariants> {}
-
-export const InputGroupButton = (props: InputGroupButtonProps) => {
-  const {
-    className,
-    type = "button",
-    variant = "ghost",
-    size = "xs",
-    ...rest
-  } = props;
+export const InputGroupButton = (props: ButtonProps) => {
+  const { variant = "ghost", size = "xs", className, ...rest } = props;
 
   return (
     <Button
-      className={cn(inputGroupButtonVariants({ size }), className)}
-      data-size={size}
+      className={cn("text-sm", "shadow-none", className)}
       data-slot="input-group-button"
-      type={type}
+      size={size}
       variant={variant}
       {...rest}
     />
@@ -188,8 +189,8 @@ export const InputGroupText = (
     <ark.span
       className={cn(
         "flex items-center gap-2",
-        "text-muted-foreground text-sm",
-        "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
+        "text-muted-foreground text-xs font-medium",
+        "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       data-slot="input-group-text"
@@ -204,11 +205,14 @@ export const InputGroupInput = (props: React.ComponentProps<typeof Input>) => {
   return (
     <Input
       className={cn(
-        "flex-1",
+        "h-full flex-1",
+        "px-0",
         "bg-transparent",
         "rounded-none border-0 shadow-none",
-        "focus-visible:ring-0",
-        "disabled:bg-transparent aria-invalid:ring-0 data-invalid:ring-0",
+        "focus-visible:border-0 focus-visible:ring-0",
+        "disabled:bg-transparent disabled:opacity-100",
+        "aria-invalid:ring-0",
+        "data-invalid:ring-0",
         "dark:bg-transparent dark:disabled:bg-transparent",
         className
       )}
@@ -227,11 +231,15 @@ export const InputGroupTextarea = (
     <Textarea
       className={cn(
         "flex-1",
-        "py-3",
+        "px-0",
         "bg-transparent",
-        "resize-none rounded-none border-0 shadow-none",
-        "focus-visible:ring-0",
-        "disabled:bg-transparent aria-invalid:ring-0 data-invalid:ring-0",
+        "pt-(--input-group-textarea-pt) pb-(--input-group-textarea-pb)",
+        "rounded-none border-0 shadow-none",
+        "resize-none",
+        "focus-visible:border-0 focus-visible:ring-0",
+        "disabled:bg-transparent disabled:opacity-100",
+        "aria-invalid:ring-0",
+        "data-invalid:ring-0",
         "dark:bg-transparent dark:disabled:bg-transparent",
         className
       )}

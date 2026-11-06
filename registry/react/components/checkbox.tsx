@@ -2,14 +2,14 @@
 
 import {
   Checkbox as ArkCheckbox,
-  useCheckboxContext,
+  useCheckboxContext as useArkCheckboxContext,
 } from "@ark-ui/react/checkbox";
 import { CheckIcon, MinusIcon } from "lucide-react";
 import type React from "react";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 
-export const useCheckbox = useCheckboxContext;
+export const useCheckboxContext = useArkCheckboxContext;
 
 export const CheckboxGroup = (
   props: React.ComponentProps<typeof ArkCheckbox.Group>
@@ -28,41 +28,43 @@ export const CheckboxGroup = (
 export const checkboxVariants = tv({
   base: [
     "relative",
-    "inline-flex shrink-0 items-center justify-center",
+    "shrink-0",
+    "inline-flex items-center justify-center",
+    "touch-manipulation",
+    "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
     "size-4",
     "bg-transparent",
-    "rounded-sm border border-input shadow-xs/5",
+    "border-input rounded-sm border shadow-xs/4",
     "transition-shadow",
-    "data-focus-visible:border-primary data-focus-visible:ring-[3px] data-focus-visible:ring-ring/32 data-focus-visible:ring-offset-1 data-focus-visible:ring-offset-background",
-    "dark:data-focus-visible:data-invalid:border-destructive-foreground/64 dark:data-focus-visible:data-invalid:ring-destructive-foreground/48",
+    "data-focus-visible:border-ring/64 data-focus-visible:ring-ring/24 data-focus-visible:ring-2",
+    "data-checked:data-focus-visible:border-background",
     "data-disabled:opacity-64",
     "[[data-disabled],[data-checked],[data-invalid]]:shadow-none",
-    "data-invalid:border-destructive data-invalid:ring-[3px] data-invalid:ring-destructive/24",
-    "dark:data-invalid:border-destructive-foreground dark:data-invalid:text-destructive-foreground dark:data-invalid:ring-destructive-foreground/20",
+    "data-invalid:border-destructive data-invalid:ring-destructive/24 data-invalid:ring-[3px]",
+    "dark:data-invalid:border-destructive-foreground dark:data-invalid:text-destructive-foreground dark:data-invalid:ring-destructive-foreground/24",
     "dark:not-data-checked:bg-input/32 dark:data-invalid:ring-destructive-foreground/24",
-    "motion-reduce:transition-none!",
+    "motion-reduce:transition-none",
   ],
 });
 
 export const Checkbox = (
   props: React.ComponentProps<typeof ArkCheckbox.Root>
 ) => {
-  const { className, tabIndex, ...rest } = props;
+  const { tabIndex, className, ...rest } = props;
 
   return (
     <ArkCheckbox.Root
       className={cn(checkboxVariants(), className)}
       data-slot="checkbox"
-      role="checkbox"
       {...rest}
     >
       <ArkCheckbox.Control data-slot="checkbox-control">
         <CheckboxIndicator>
-          <CheckIcon />
+          <CheckIcon aria-hidden="true" />
         </CheckboxIndicator>
 
         <CheckboxIndicator indeterminate>
-          <MinusIcon />
+          <MinusIcon aria-hidden="true" />
         </CheckboxIndicator>
       </ArkCheckbox.Control>
 

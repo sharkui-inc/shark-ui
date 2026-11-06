@@ -2,12 +2,12 @@
 
 import {
   TagsInput as ArkTagsInput,
-  useTagsInput as useArkTagsInput,
   useTagsInputContext as useArkTagsInputContext,
 } from "@ark-ui/react/tags-input";
 import { XIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import {
   InputGroup,
   InputGroupButton,
@@ -15,17 +15,38 @@ import {
   type InputGroupProps,
 } from "@/registry/react/components/input-group";
 
-export const useTagsInput = useArkTagsInput;
 export const useTagsInputContext = useArkTagsInputContext;
+
 export const TagsInputContext = ArkTagsInput.Context;
+
+export const TagsInputLabel = (
+  props: React.ComponentProps<typeof ArkTagsInput.Label>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
+    <ArkTagsInput.Label
+      className={cn(fieldLabelVariants(), "basis-full", className)}
+      data-slot="tags-input-label"
+      {...rest}
+    />
+  );
+};
 
 interface TagsInputProps
   extends React.ComponentProps<typeof ArkTagsInput.Root>,
     Pick<InputGroupProps, "size"> {
   /**
+   * Placeholder text for the root input.
+   *
+   * @default ""
+   */
+  placeholder?: string;
+  /**
    * Whether to show the clear button.
    *
-   * @default true
+   * @default false
    */
   showClear?: boolean;
 }
@@ -33,7 +54,8 @@ interface TagsInputProps
 export const TagsInput = (props: TagsInputProps) => {
   const {
     size = "md",
-    showClear,
+    showClear = false,
+    placeholder = "",
     editable = false,
     tabIndex,
     className,
@@ -45,7 +67,8 @@ export const TagsInput = (props: TagsInputProps) => {
     <ArkTagsInput.Root
       className={cn(
         "group/tags-input",
-        "flex w-full flex-col gap-2",
+        "w-full",
+        "flex flex-col gap-2",
         className
       )}
       data-size={size}
@@ -53,10 +76,10 @@ export const TagsInput = (props: TagsInputProps) => {
       editable={editable}
       {...rest}
     >
-      <TagsInputControl showClear={showClear}>
+      <TagsInputControl showClear={showClear} size={size}>
         {children}
 
-        <TagsInputInput placeholder="Add framework" />
+        <TagsInputInput placeholder={placeholder} />
       </TagsInputControl>
 
       <ArkTagsInput.HiddenInput tabIndex={tabIndex} />
@@ -70,13 +93,13 @@ interface TagsInputControlProps
   /**
    * Whether to show the clear button.
    *
-   * @default true
+   * @default false
    */
   showClear?: boolean;
 }
 
 export const TagsInputControl = (props: TagsInputControlProps) => {
-  const { size, showClear = true, className, children, ...rest } = props;
+  const { size, showClear = false, className, children, ...rest } = props;
 
   const api = useTagsInputContext();
 
@@ -84,19 +107,19 @@ export const TagsInputControl = (props: TagsInputControlProps) => {
     <ArkTagsInput.Control asChild data-slot="tags-input-control">
       <InputGroup
         className={cn(
-          "h-auto in-data-[size=lg]:min-h-9 in-data-[size=sm]:min-h-7 min-h-8",
-          "p-1",
-          "flex-wrap content-start items-center gap-1",
+          "h-auto",
+          "[--input-group-inset:--spacing(1)]",
+          "py-1",
+          "flex-wrap content-center items-center gap-1",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
+          "has-data-[slot=tags-input-item]:px-1",
           className
         )}
         size={size}
         {...rest}
       >
         {children}
-        {showClear && api.value.length > 0 && (
-          <TagsInputClearTrigger aria-label="Clear all tags" />
-        )}
+        {showClear && api.value.length > 0 && <TagsInputClearTrigger />}
       </InputGroup>
     </ArkTagsInput.Control>
   );
@@ -119,13 +142,19 @@ export const TagsInputItem = (props: TagsInputItemProps) => {
   return (
     <ArkTagsInput.Item
       className={cn(
-        "h-6 in-data-[size=lg]:h-7 in-data-[size=sm]:h-5 max-w-full",
-        "pr-0.5 in-data-[size=lg]:pl-2 in-data-[size=sm]:pl-1 pl-1.5",
-        "inline-flex shrink-0 items-center gap-1",
+        "h-5.5 max-w-full",
+        "in-data-[size=lg]:h-6.5 in-data-[size=sm]:h-4.5",
+        "ps-1.5 pe-0.5",
+        "in-data-[size=lg]:ps-2 in-data-[size=sm]:ps-1",
+        "shrink-0",
+        "inline-flex items-center gap-1",
         "bg-secondary",
-        "in-data-[size=lg]:text-sm text-secondary-foreground text-xs",
-        "rounded-md border outline-none",
-        "data-highlighted:border-primary/30 data-highlighted:bg-primary/10",
+        "text-secondary-foreground text-xs",
+        "in-data-[size=lg]:text-sm",
+        "[--input-group-inset:--spacing(0.5)]",
+        "rounded-md border",
+        "outline-hidden",
+        "data-highlighted:border-primary/32 data-highlighted:bg-primary/8",
         className
       )}
       data-slot="tags-input-item"
@@ -133,7 +162,7 @@ export const TagsInputItem = (props: TagsInputItemProps) => {
     >
       <TagsInputItemPreview>
         <TagsInputItemText>{children}</TagsInputItemText>
-        {showDelete && <TagsInputItemDeleteTrigger />}
+        {!!showDelete && <TagsInputItemDeleteTrigger />}
       </TagsInputItemPreview>
       <TagsInputItemInput />
     </ArkTagsInput.Item>
@@ -147,7 +176,7 @@ export const TagsInputItemPreview = (
 
   return (
     <ArkTagsInput.ItemPreview
-      className={cn("inline-flex max-w-full items-center gap-1", className)}
+      className={cn("max-w-full", "inline-flex items-center gap-1", className)}
       data-slot="tags-input-item-preview"
       {...rest}
     />
@@ -181,18 +210,19 @@ export const TagsInputItemDeleteTrigger = (
     >
       <InputGroupButton
         className={cn(
-          "in-data-[size=lg]:size-6 in-data-[size=sm]:size-4 size-5",
+          "size-4 md:size-4",
+          "in-data-[size=lg]:size-5 in-data-[size=sm]:size-3 md:in-data-[size=lg]:size-5 md:in-data-[size=sm]:size-3",
+          "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
           "shrink-0",
           "text-muted-foreground",
-          "rounded-[calc(var(--radius)-5px)]",
-          "[&_svg:not([class*='size-'])]:size-3",
+          "[&_svg:not([class*='size-'])]:size-2 in-data-[size=lg]:[&_svg:not([class*='size-'])]:size-2.5 in-data-[size=sm]:[&_svg:not([class*='size-'])]:size-1.5",
           "hover:text-foreground",
           className
         )}
         size="icon-xs"
         variant="ghost"
       >
-        {children ?? <XIcon aria-hidden />}
+        {children ?? <XIcon aria-hidden="true" />}
       </InputGroupButton>
     </ArkTagsInput.ItemDeleteTrigger>
   );
@@ -202,12 +232,7 @@ export const TagsInputItemInput = (
   props: React.ComponentProps<typeof ArkTagsInput.ItemInput>
 ) => (
   <ArkTagsInput.ItemInput asChild data-slot="tags-input-item-input" {...props}>
-    <InputGroupInput
-      className={cn(
-        "px-1 text-xs",
-        "h-6 in-data-[size=lg]:h-7 in-data-[size=sm]:h-5"
-      )}
-    />
+    <InputGroupInput className={cn("px-1", "text-xs")} />
   </ArkTagsInput.ItemInput>
 );
 
@@ -215,12 +240,7 @@ export const TagsInputInput = (
   props: React.ComponentProps<typeof ArkTagsInput.Input>
 ) => (
   <ArkTagsInput.Input asChild data-slot="tags-input-input" {...props}>
-    <InputGroupInput
-      className={cn(
-        "w-auto min-w-18 max-w-full flex-auto shrink basis-auto",
-        "h-7 in-data-[size=lg]:h-8 in-data-[size=sm]:h-6"
-      )}
-    />
+    <InputGroupInput className="w-auto max-w-full min-w-18 flex-auto shrink basis-auto" />
   </ArkTagsInput.Input>
 );
 
@@ -237,45 +257,20 @@ export const TagsInputClearTrigger = (
     >
       <InputGroupButton
         className={cn(
-          "ms-auto shrink-0 self-center text-muted-foreground hover:text-foreground",
+          "size-5.5",
+          "in-data-[size=lg]:size-6.5 in-data-[size=sm]:size-4.5",
+          "shrink-0",
+          "self-center",
+          "ms-auto",
+          "text-muted-foreground",
+          "hover:text-foreground",
           className
         )}
         size="icon-xs"
         variant="ghost"
       >
-        {children ?? <XIcon aria-hidden />}
+        {children ?? <XIcon aria-hidden="true" />}
       </InputGroupButton>
     </ArkTagsInput.ClearTrigger>
-  );
-};
-
-interface TagsInputRootProviderProps
-  extends React.ComponentProps<typeof ArkTagsInput.RootProvider>,
-    Pick<InputGroupProps, "size"> {
-  /**
-   * Whether to show the clear button.
-   *
-   * @default true
-   */
-  showClear?: boolean;
-}
-
-export const TagsInputRootProvider = (props: TagsInputRootProviderProps) => {
-  const { size = "md", showClear, className, children, ...rest } = props;
-
-  return (
-    <ArkTagsInput.RootProvider
-      className={cn(
-        "group/tags-input",
-        "flex w-full flex-col gap-2",
-        className
-      )}
-      data-size={size}
-      data-slot="tags-input-root-provider"
-      {...rest}
-    >
-      <TagsInputControl showClear={showClear}>{children}</TagsInputControl>
-      <ArkTagsInput.HiddenInput />
-    </ArkTagsInput.RootProvider>
   );
 };

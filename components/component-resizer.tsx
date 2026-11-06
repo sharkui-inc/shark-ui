@@ -17,6 +17,10 @@ import {
   ResizablePanel,
   ResizableResizeTrigger,
 } from "@/registry/react/components/resizable";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@/registry/react/components/toggle-group";
 
 interface ComponentResizerProps extends React.ComponentProps<"figure"> {
   /**
@@ -30,9 +34,9 @@ interface ComponentResizerProps extends React.ComponentProps<"figure"> {
 }
 
 const MEDIA_QUERY = {
+  desktop: "(min-width: 1025px)",
   mobile: "(max-width: 768px)",
   tablet: "(max-width: 1024px)",
-  desktop: "(min-width: 1025px)",
 };
 
 type MediaQuery = keyof typeof MEDIA_QUERY;
@@ -47,43 +51,55 @@ export const ComponentResizer = (props: ComponentResizerProps) => {
   return (
     <figure
       className={cn(
-        "h-[600px] w-full gap-4 overflow-hidden rounded-md border bg-card",
+        "bg-card h-150 w-full gap-4 overflow-hidden rounded-md border",
         className
       )}
       {...rest}
     >
-      <figcaption className="flex h-14 items-center justify-between bg-muted px-4">
-        <div className="font-medium text-sm">{title}</div>
+      <figcaption className="bg-muted flex h-14 items-center justify-between px-4">
+        <div className="text-sm font-medium">{title}</div>
 
         <div className="flex items-center gap-2">
-          <ButtonGroup>
-            <Button
+          <ToggleGroup
+            deselectable={false}
+            multiple={false}
+            onValueChange={({ value }) => {
+              const next = value[0] as MediaQuery | undefined;
+
+              if (next) {
+                setMediaQuery(next);
+              }
+            }}
+            size="sm"
+            value={[mediaQuery]}
+            variant="outline"
+          >
+            <ToggleGroupItem
               aria-label="Desktop"
-              onClick={() => setMediaQuery("desktop")}
-              size="icon-sm"
-              variant="outline"
+              className="size-7 px-0"
+              value="desktop"
             >
-              <ComputerIcon aria-hidden />
-            </Button>
+              <ComputerIcon aria-hidden="true" />
+            </ToggleGroupItem>
 
-            <Button
+            <ToggleGroupItem
               aria-label="Tablet"
-              onClick={() => setMediaQuery("tablet")}
-              size="icon-sm"
-              variant="outline"
+              className="size-7 px-0"
+              value="tablet"
             >
-              <TabletIcon aria-hidden />
-            </Button>
+              <TabletIcon aria-hidden="true" />
+            </ToggleGroupItem>
 
-            <Button
+            <ToggleGroupItem
               aria-label="Phone"
-              onClick={() => setMediaQuery("mobile")}
-              size="icon-sm"
-              variant="outline"
+              className="size-7 px-0"
+              value="mobile"
             >
-              <PhoneIcon aria-hidden />
-            </Button>
+              <PhoneIcon aria-hidden="true" />
+            </ToggleGroupItem>
+          </ToggleGroup>
 
+          <ButtonGroup>
             <Button
               aria-label="Fullscreen"
               asChild
@@ -91,7 +107,7 @@ export const ComponentResizer = (props: ComponentResizerProps) => {
               variant="outline"
             >
               <Link href={url} target="_blank">
-                <FullscreenIcon aria-hidden />
+                <FullscreenIcon aria-hidden="true" />
               </Link>
             </Button>
 
@@ -119,7 +135,7 @@ export const ComponentResizer = (props: ComponentResizerProps) => {
 
         <ResizableResizeTrigger id="1:2" withHandle />
         <ResizablePanel
-          className="relative z-10 flex size-full after:absolute after:inset-0 after:inset-e-3 after:z-0 after:bg-muted/48"
+          className="after:bg-muted/48 relative z-10 flex size-full after:absolute after:inset-0 after:inset-e-3 after:z-0"
           id="2"
         />
       </Resizable>

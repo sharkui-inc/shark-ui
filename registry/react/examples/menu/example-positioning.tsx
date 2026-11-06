@@ -2,11 +2,10 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
-
-const placements = ["left", "top", "bottom", "right"] as const;
 
 const Example = () => (
   <div className="flex flex-wrap justify-center gap-2">
@@ -17,14 +16,19 @@ const Example = () => (
             {placement}
           </Button>
         </MenuTrigger>
-        <MenuContent className="w-36">
-          <MenuItem value="edit">Edit</MenuItem>
-          <MenuItem value="copy">Copy</MenuItem>
-          <MenuItem value="share">Share</MenuItem>
+        <MenuContent>
+          <MenuList>
+            <MenuItem value="edit">Edit</MenuItem>
+            <MenuItem value="copy">Copy</MenuItem>
+            <MenuItem value="share">Share</MenuItem>
+
+          </MenuList>
         </MenuContent>
       </Menu>
     ))}
   </div>
 );
+
+const placements = ["left", "top", "bottom", "right"] as const;
 
 export default Example;

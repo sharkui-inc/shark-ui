@@ -26,7 +26,10 @@ const Example = () => {
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <AutocompleteInput placeholder="Search fruits...">
+      <AutocompleteInput
+        aria-label="Search fruits"
+        placeholder="Search fruits..."
+      >
         <InputGroupAddon align="inline-start">
           <AppleIcon />
         </InputGroupAddon>

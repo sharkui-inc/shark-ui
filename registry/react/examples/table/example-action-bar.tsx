@@ -7,11 +7,15 @@ import {
   PencilIcon,
   SendIcon,
   Trash2Icon,
+  XIcon,
 } from "lucide-react";
 import React from "react";
 import {
   ActionBar,
+  ActionBarBody,
+  ActionBarClose,
   ActionBarContent,
+  ActionBarSeparator,
   ActionBarValue,
 } from "@/registry/react/components/action-bar";
 import {
@@ -31,6 +35,7 @@ import { Checkbox } from "@/registry/react/components/checkbox";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -73,21 +78,26 @@ const Example = () => {
 
   return (
     <div className="w-full max-w-2xl rounded-lg border">
-      <ActionBar onOpenChange={(open) => !open && handleClose()} open={isOpen}>
+      <ActionBar
+        onOpenChange={({ open }) => !open && handleClose()}
+        open={isOpen}
+      >
         <Table>
           <TableCaption className="sr-only">
             Orders with checkbox selection and action bar.
           </TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-12">
-                <Checkbox
-                  aria-label="Select all orders"
-                  checked={allSelected}
-                  onCheckedChange={({ checked }) => handleSelectAll(checked)}
-                />
+              <TableHead>
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    aria-label="Select all orders"
+                    checked={allSelected}
+                    onCheckedChange={({ checked }) => handleSelectAll(checked)}
+                  />
+                  ID
+                </div>
               </TableHead>
-              <TableHead>ID</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Amount</TableHead>
@@ -102,16 +112,18 @@ const Example = () => {
                   data-state={isSelected ? "selected" : undefined}
                   key={order.id}
                 >
-                  <TableCell className="w-12">
-                    <Checkbox
-                      aria-label={`Select order ${order.id}`}
-                      checked={isSelected}
-                      onCheckedChange={({ checked }) =>
-                        handleSelectRow(order.id, checked)
-                      }
-                    />
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        aria-label={`Select order ${order.id}`}
+                        checked={isSelected}
+                        onCheckedChange={({ checked }) =>
+                          handleSelectRow(order.id, checked)
+                        }
+                      />
+                      <span className="font-medium">{order.id}</span>
+                    </div>
                   </TableCell>
-                  <TableCell className="font-medium">{order.id}</TableCell>
                   <TableCell>{order.name}</TableCell>
                   <TableCell>
                     <Badge
@@ -128,39 +140,45 @@ const Example = () => {
           </TableBody>
         </Table>
 
-        <ActionBarContent className="w-full max-w-xl">
+        <ActionBarContent aria-label="Actions for selected orders">
           <ActionBarValue count={selectedIds.length} />
-          <div className="ml-auto flex gap-2">
-            <Button size="sm" variant="secondary">
-              <SendIcon />
-              Send
+          <ActionBarSeparator />
+          <ActionBarBody>
+            <Button variant="ghost">
+              <SendIcon data-icon="inline-start" />
+              <span className="max-sm:sr-only">Send</span>
             </Button>
-            <Button size="sm" variant="secondary">
-              <PencilIcon />
-              Edit
+            <Button variant="ghost">
+              <PencilIcon data-icon="inline-start" />
+              <span className="max-sm:sr-only">Edit</span>
             </Button>
             <Menu positioning={{ placement: "top" }}>
               <MenuTrigger asChild>
-                <Button size="sm" variant="secondary">
-                  <EllipsisIcon />
+                <Button variant="ghost">
+                  <EllipsisIcon data-icon="inline-start" />
+                  <span className="max-sm:sr-only">More</span>
                 </Button>
               </MenuTrigger>
               <MenuContent>
-                <MenuItem value="archive">
-                  <ArchiveIcon />
-                  Archive
-                </MenuItem>
-                <MenuItem value="duplicate">
-                  <CopyIcon />
-                  Duplicate
-                </MenuItem>
+                <MenuList>
+                  <MenuItem value="archive">
+                    <ArchiveIcon />
+                    Archive
+                  </MenuItem>
+                  <MenuItem value="duplicate">
+                    <CopyIcon />
+                    Duplicate
+                  </MenuItem>
+
+                </MenuList>
               </MenuContent>
             </Menu>
+            <ActionBarSeparator />
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button size="sm" variant="destructive">
-                  <Trash2Icon />
-                  Delete
+                <Button variant="destructive">
+                  <Trash2Icon data-icon="inline-start" />
+                  <span className="max-sm:sr-only">Delete</span>
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
@@ -195,50 +213,56 @@ const Example = () => {
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
-          </div>
+          </ActionBarBody>
+          <ActionBarSeparator />
+          <ActionBarClose asChild>
+            <Button size="icon-md" variant="ghost">
+              <XIcon />
+            </Button>
+          </ActionBarClose>
         </ActionBarContent>
       </ActionBar>
     </div>
   );
 };
 
-export default Example;
-
 const orders = [
   {
+    amount: "245,12 $",
     id: "SO-01",
     name: "Macbook Pro 16",
     status: "progress",
-    amount: "245,12 $",
   },
   {
+    amount: "122,18 $",
     id: "SO-02",
     name: "Apple Watch Series 9",
     status: "transit",
-    amount: "122,18 $",
   },
   {
+    amount: "89,50 $",
     id: "SO-03",
     name: "AirPods Max",
     status: "pending",
-    amount: "89,50 $",
   },
   {
+    amount: "310,00 $",
     id: "SO-04",
     name: "iPad Pro 13",
     status: "pending",
-    amount: "310,00 $",
   },
   {
+    amount: "156,75 $",
     id: "SO-05",
     name: "iPhone 15 Pro Max",
     status: "transit",
-    amount: "156,75 $",
   },
 ];
 
 const statusVariants: Record<string, BadgeVariant> = {
-  transit: "success",
   pending: "warning",
   progress: "info",
+  transit: "success",
 };
+
+export default Example;

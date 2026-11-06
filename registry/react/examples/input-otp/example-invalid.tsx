@@ -11,7 +11,7 @@ const Example = () => {
   return (
     <InputOTP
       invalid={!isCorrect}
-      onValueChange={({ value }) => setValue(value)}
+      onValueChange={({ value: nextValue }) => setValue(nextValue)}
       value={value}
     >
       <InputOTPSlot index={0} />

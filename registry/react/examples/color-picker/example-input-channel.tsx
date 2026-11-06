@@ -1,12 +1,12 @@
 "use client";
 
+import { parseColor } from "@ark-ui/react";
 import {
   ColorPicker,
   ColorPickerControl,
   ColorPickerInput,
   ColorPickerSwatchPreview,
   ColorPickerView,
-  parseColor,
 } from "@/registry/react/components/color-picker";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";

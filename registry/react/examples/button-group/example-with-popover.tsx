@@ -12,7 +12,7 @@ import { Separator } from "@/registry/react/components/separator";
 const Example = () => (
   <ButtonGroup>
     <Button variant="outline">
-      <GitForkIcon /> Fork
+      <GitForkIcon data-icon="inline-start" /> Fork
       <Badge size="sm" variant="secondary">
         42
       </Badge>
@@ -24,9 +24,9 @@ const Example = () => (
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full max-w-80">
-        <h4 className="px-3 py-1.5 font-medium text-sm">Existing forks</h4>
+        <h4 className="px-3 py-1.5 text-sm font-medium">Existing forks</h4>
         <Separator className="my-0" />
-        <p className="px-3 py-1.5 text-muted-foreground text-xs">
+        <p className="text-muted-foreground px-3 py-1.5 text-xs">
           You don't have any forks of this repository.
         </p>
         <Separator className="my-0" />
@@ -35,7 +35,7 @@ const Example = () => (
           clickEffect={false}
           variant="ghost"
         >
-          <PlusIcon />
+          <PlusIcon data-icon="inline-start" />
           Create a new fork
         </Button>
       </PopoverContent>

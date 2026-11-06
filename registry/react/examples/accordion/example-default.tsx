@@ -8,8 +8,10 @@ import {
 const AccordionDemo = () => (
   <Accordion className="w-full max-w-lg" defaultValue={["item-1"]}>
     <AccordionItem value="item-1">
-      <AccordionTrigger>Product Information</AccordionTrigger>
-      <AccordionContent className="flex flex-col gap-4 text-muted-foreground">
+      <AccordionTrigger aria-label="Product Information, default accordion example">
+        Product Information
+      </AccordionTrigger>
+      <AccordionContent className="text-muted-foreground flex flex-col gap-4">
         <p>
           Our flagship product combines cutting-edge technology with sleek
           design. Built with premium materials, it offers unparalleled
@@ -25,7 +27,7 @@ const AccordionDemo = () => (
 
     <AccordionItem value="item-2">
       <AccordionTrigger>Shipping Details</AccordionTrigger>
-      <AccordionContent className="flex flex-col gap-4 text-muted-foreground">
+      <AccordionContent className="text-muted-foreground flex flex-col gap-4">
         <p>
           We offer worldwide shipping through trusted courier partners. Standard
           delivery takes 3-5 business days, while express shipping ensures
@@ -41,7 +43,7 @@ const AccordionDemo = () => (
 
     <AccordionItem value="item-3">
       <AccordionTrigger>Return Policy</AccordionTrigger>
-      <AccordionContent className="flex flex-col gap-4 text-muted-foreground">
+      <AccordionContent className="text-muted-foreground flex flex-col gap-4">
         <p>
           We stand behind our products with a comprehensive 30-day return
           policy. If you&apos;re not completely satisfied, simply return the

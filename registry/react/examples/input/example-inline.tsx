@@ -5,7 +5,7 @@ import { Input } from "@/registry/react/components/input";
 
 const Example = () => (
   <Field className="w-full max-w-64" orientation="horizontal">
-    <Input placeholder="Search..." />
+    <Input aria-label="Search" placeholder="Search..." />
     <Button aria-label="Search" size="icon-md">
       <SearchIcon />
     </Button>

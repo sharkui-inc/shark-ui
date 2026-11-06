@@ -1,11 +1,11 @@
-import { Star } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import { Badge } from "@/registry/react/components/badge";
 
-const Example = () => (
+const BadgeDemo = () => (
   <Badge>
-    <Star />
+    <StarIcon data-icon="inline-start" />
     Favorite
   </Badge>
 );
 
-export default Example;
+export default BadgeDemo;

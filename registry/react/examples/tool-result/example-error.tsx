@@ -1,0 +1,44 @@
+import {
+  Terminal,
+  TerminalContent,
+} from "@/registry/react/components/terminal";
+import {
+  ToolResult,
+  ToolResultAction,
+  ToolResultContent,
+  ToolResultName,
+  ToolResultStatus,
+  ToolResultTitle,
+  ToolResultTrigger,
+} from "@/registry/react/components/tool-result";
+
+const Example = () => (
+  <ToolResult className="max-w-lg" defaultOpen status="error">
+    <ToolResultTrigger>
+      <ToolResultTitle>Fetch session</ToolResultTitle>
+      <ToolResultName>api.getSession</ToolResultName>
+      <ToolResultAction>
+        <ToolResultStatus />
+      </ToolResultAction>
+    </ToolResultTrigger>
+    <ToolResultContent>
+      <Terminal output={output}>
+        <TerminalContent />
+      </Terminal>
+    </ToolResultContent>
+  </ToolResult>
+);
+
+const output = [
+  "GET /api/session",
+  "",
+  "\u001B[31m401 Unauthorized\u001B[0m",
+  "www-authenticate: Bearer",
+  "",
+  "{",
+  '  "error": "unauthorized",',
+  '  "message": "Session cookie expired. Sign in again."',
+  "}",
+].join("\n");
+
+export default Example;

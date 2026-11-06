@@ -8,7 +8,7 @@ import {
 } from "@/registry/react/components/breadcrumb";
 
 const Example = () => (
-  <Breadcrumb>
+  <Breadcrumb aria-label="Breadcrumb with custom separators">
     <BreadcrumbList>
       <BreadcrumbItem>
         <BreadcrumbLink href="#">Home</BreadcrumbLink>

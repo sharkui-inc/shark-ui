@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { Bar, BarChart, XAxis } from "recharts";
 
 import {
@@ -29,16 +30,16 @@ const chartData = [
 
 const chartConfig = {
   running: {
-    label: "Running",
     color: "var(--chart-1)",
+    label: "Running",
   },
   swimming: {
-    label: "Swimming",
     color: "var(--chart-2)",
+    label: "Swimming",
   },
 } satisfies ChartConfig;
 
-function ChartTooltipAdvanced() {
+const ChartTooltipAdvanced = () => {
   return (
     <Card>
       <CardHeader>
@@ -76,11 +77,11 @@ function ChartTooltipAdvanced() {
             <ChartTooltip
               content={
                 <ChartTooltipContent
-                  className="w-[180px]"
+                  className="w-44"
                   formatter={(value, name, item, index) => (
                     <>
                       <div
-                        className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
+                        className="size-2.5 shrink-0 rounded-sm bg-(--color-bg)"
                         style={
                           {
                             "--color-bg": `var(--color-${name})`,
@@ -89,19 +90,19 @@ function ChartTooltipAdvanced() {
                       />
                       {chartConfig[name as keyof typeof chartConfig]?.label ||
                         name}
-                      <div className="ml-auto flex items-baseline gap-0.5 font-medium font-mono text-foreground tabular-nums">
+                      <div className="text-foreground ms-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums">
                         {value}
-                        <span className="font-normal text-muted-foreground">
+                        <span className="text-muted-foreground font-normal">
                           kcal
                         </span>
                       </div>
                       {/* Add this after the last item */}
                       {index === 1 && (
-                        <div className="mt-1.5 flex basis-full items-center border-t pt-1.5 font-medium text-foreground text-xs">
+                        <div className="text-foreground mt-1.5 flex basis-full items-center border-t pt-1.5 text-xs font-medium">
                           Total
-                          <div className="ml-auto flex items-baseline gap-0.5 font-medium font-mono text-foreground tabular-nums">
+                          <div className="text-foreground ms-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums">
                             {item.payload.running + item.payload.swimming}
-                            <span className="font-normal text-muted-foreground">
+                            <span className="text-muted-foreground font-normal">
                               kcal
                             </span>
                           </div>
@@ -120,6 +121,6 @@ function ChartTooltipAdvanced() {
       </CardContent>
     </Card>
   );
-}
+};
 
 export default ChartTooltipAdvanced;

@@ -2,9 +2,9 @@
 
 import { createListCollection } from "@ark-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@registry/react/components/button";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
+import { Button } from "@/registry/react/components/button";
 import {
   Card,
   CardContent,
@@ -24,40 +24,30 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
 import { toast } from "@/registry/react/components/toast";
 
-const formSchema = z.object({
-  language: z
-    .array(z.string())
-    .min(1, "Please select your spoken language.")
-    .refine((val) => val[0] !== "", "Please select your spoken language.")
-    .refine(
-      (val) => !val.includes("auto"),
-      "Auto-detection is not allowed. Please select a specific language."
-    ),
-});
-
 const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: {
       language: [""],
     },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "language-submitted",
-      title: "Language submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "language-submitted",
+      title: "Language submitted",
     });
   };
 
@@ -94,11 +84,14 @@ const Example = () => {
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>
-                      {collection.items.map((item) => (
-                        <SelectItem item={item} key={item.value}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
+                      <SelectList>
+                        {collection.items.map((item) => (
+                          <SelectItem item={item} key={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+
+                      </SelectList>
                     </SelectContent>
                   </Select>
                 </Field>
@@ -116,6 +109,17 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  language: z
+    .array(z.string())
+    .min(1, "Please select your spoken language.")
+    .refine((val) => val[0] !== "", "Please select your spoken language.")
+    .refine(
+      (val) => !val.includes("auto"),
+      "Auto-detection is not allowed. Please select a specific language."
+    ),
+});
 
 const collection = createListCollection({
   items: [

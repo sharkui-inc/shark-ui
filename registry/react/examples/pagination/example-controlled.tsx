@@ -14,6 +14,7 @@ const Example = () => {
   return (
     <div className="flex flex-col gap-4">
       <Pagination
+        aria-label="Controlled pagination"
         count={50}
         onPageChange={(details) => setPage(details.page)}
         page={page}
@@ -24,7 +25,7 @@ const Example = () => {
         <PaginationNext />
       </Pagination>
 
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         Page {page} of 5
       </p>
     </div>

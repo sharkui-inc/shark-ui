@@ -1,10 +1,16 @@
 ---
 title: Marquee
-description: Scrolls items in a horizontal container.
+description: Scroll items in a horizontal strip.
+aliases:
+  - Ticker
+seo:
+  description: Horizontal scrolling strip for logos and highlights.
 links:
   doc: https://ark-ui.com/docs/components/marquee
   api: https://ark-ui.com/docs/components/marquee#api-reference
 ---
+
+import manifest from "@/registry/manifest/marquee";
 
 <ComponentPreview componentName="marquee" />
 
@@ -31,13 +37,11 @@ npx shadcn@latest add @shark/marquee
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Add the following animations to your `globals.css`.</Step>
+<Step>Import the following rules into your CSS file:</Step>
 
-```css title="globals.css" showLineNumbers
+```css showLineNumbers
 @theme inline {
   --animate-marquee-x: marqueeX var(--marquee-duration) linear infinite var(--marquee-delay);
   --animate-marquee-y: marqueeY var(--marquee-duration) linear infinite var(--marquee-delay);
@@ -76,9 +80,9 @@ Marquee
 ## Usage
 
 ```tsx
-import { 
-  Marquee, 
-  MarqueeContent, 
+import {
+  Marquee,
+  MarqueeContent,
   MarqueeItem,
 } from "@/components/ui/marquee";
 ```
@@ -131,17 +135,23 @@ Use the `spacing` prop to control the gap between items.
 
 <ComponentPreview componentName="marquee" fileName="example-spacing" />
 
-### Fade
+### Without fade
 
-Use the `showEdges` prop to show or hide the gradient fade at the start and end of the marquee.
+Use `fade={false}` to disable the edge mask fade.
 
-<ComponentPreview componentName="marquee" fileName="example-fade" />
+<ComponentPreview componentName="marquee" fileName="example-without-fade" />
 
 ### Custom speed
 
 Use the `speed` prop (pixels per second) to control scroll speed.
 
 <ComponentPreview componentName="marquee" fileName="example-custom-speed" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="marquee" />
 
 ## API Reference
 
@@ -154,20 +164,20 @@ Root component. Manages the scrolling viewport and animation.
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `speed` | `number` | `50` |
 | `spacing` | `string` | `"16px"` |
-| `showEdges` | `boolean` | `true` |
+| `fade` | `boolean` | `true` |
 | `autoFill` | `boolean` | `false` |
 | `pauseOnInteraction` | `boolean` | `false` |
 | `reverse` | `boolean` | `false` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### MarqueeContent
 
-Viewport wrapper. Wrap `MarqueeItem` children with this. Animates content horizontally.
+Viewport wrapper.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### MarqueeItem
 
@@ -175,9 +185,9 @@ Single item in the scrolling marquee.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ---
 
-For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/marquee#api-reference). 
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/marquee#api-reference).

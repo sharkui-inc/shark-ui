@@ -3,12 +3,13 @@
 import { createListCollection } from "@ark-ui/react";
 import {
   Field,
-  FieldDescription,
+  FieldHelper,
   FieldLabel,
 } from "@/registry/react/components/field";
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -22,14 +23,17 @@ const Example = () => (
         <SelectValue placeholder="Select a country" />
       </SelectTrigger>
       <SelectContent>
-        {collection.items.map((item) => (
-          <SelectItem item={item} key={item}>
-            {item}
-          </SelectItem>
-        ))}
+        <SelectList>
+          {collection.items.map((item) => (
+            <SelectItem item={item} key={item}>
+              {item}
+            </SelectItem>
+          ))}
+
+        </SelectList>
       </SelectContent>
     </Select>
-    <FieldDescription>Used for shipping estimates</FieldDescription>
+    <FieldHelper>Used for shipping estimates</FieldHelper>
   </Field>
 );
 

@@ -23,7 +23,7 @@ const Example = () => {
       <Card className="[--space:--spacing(2)]">
         <CardContent>
           <Calendar
-            onValueChange={({ value }) => setValue(value)}
+            onValueChange={({ value: nextValue }) => setValue(nextValue)}
             value={value}
           >
             <CalendarViewControl>
@@ -39,7 +39,7 @@ const Example = () => {
           </Calendar>
         </CardContent>
       </Card>
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         {value.map((date) => date.toString())}
       </p>
     </div>

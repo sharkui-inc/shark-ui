@@ -6,7 +6,7 @@ import {
 } from "@/registry/react/components/item";
 
 const Example = () => (
-  <Item className="w-full max-w-md" variant="default">
+  <Item className="w-full max-w-md">
     <ItemContent>
       <ItemTitle>Default Variant</ItemTitle>
       <ItemDescription>Transparent background with no border.</ItemDescription>

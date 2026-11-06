@@ -2,7 +2,6 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
-  AlertDialogClose,
   AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
@@ -22,9 +21,7 @@ const AlertDialogDemo = () => (
       />
       <AlertDialogFooter>
         <AlertDialogCancel>Don't allow</AlertDialogCancel>
-        <AlertDialogClose asChild>
-          <AlertDialogAction>Allow</AlertDialogAction>
-        </AlertDialogClose>
+        <AlertDialogAction>Allow</AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

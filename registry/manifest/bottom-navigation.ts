@@ -1,13 +1,13 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react"];
 
 const manifest: RegistryItemType = {
-  name: "bottom-navigation",
-  type: "registry:ui",
   dependencies,
-  registryDependencies: [absoluteUrl("/r/tabs.json")],
+  name: "bottom-navigation",
+  registryDependencies: [registryUrl("/r/tabs.json")],
+  type: "registry:ui",
 };
 
 export default manifest;

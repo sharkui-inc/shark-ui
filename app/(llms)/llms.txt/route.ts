@@ -1,29 +1,34 @@
-import { buildLLMIndex } from "@/lib/llms";
+import { SITE_CONFIG } from "@/config/site";
 
 export const dynamic = "force-static";
 export const revalidate = false;
 
-export const GET = () => {
-  const intro = `# Shark UI Documentation
+const base = SITE_CONFIG.url;
 
-> Documentation for Shark UI component library.
+const llmsTxt = `# Shark UI
 
-Shark UI is a component library built on [Tailwind CSS](https://tailwindcss.com/) and [Ark UI](https://ark-ui.com/). Components are accessible, customizable, and ready to use with your preferred framework.
+> Machine-readable guidance for building correct, visually coherent Shark UI interfaces.
 
-**Key Features:**
+Shark UI is a copy-and-own React registry built with Ark UI and Tailwind CSS v4. Use the registry or CLI to add components; do not substitute Radix UI or Base UI APIs.
 
-- Beautiful by default - Professional look out of the box
-- Accessible - Built with accessibility best practices
-- Flexible - Customizable components with predictable patterns
-- Developer-friendly - Fully typed APIs and excellent autocompletion
+How agents should use Shark UI:
+1. Read Foundations first.
+2. Load the smallest index for the task, then only the linked Markdown pages needed to implement it.
+3. Read the design contract before changing UI; use the handbook only when rationale or an extension decision is needed.
 
-## Documentation Index
+## Core workflow
 
-`;
+- [Foundations](${base}/llms/foundations.txt): Copy-and-own architecture, Ark UI composition, Tailwind v4, tokens, RTL, and Skills.
+- [Installation](${base}/llms/installation.txt): Setup for supported frameworks and manual installation.
+- [Components](${base}/llms/components.txt): Component APIs, installation, and examples.
+- [Patterns](${base}/llms/patterns.txt): AI Components, form integrations, helpers, hooks, utilities, and migrations.
+- [Design contract](${base}/design.md): Prescriptive visual rules and composition recipes for generated Shark UI interfaces.
 
-  const index = buildLLMIndex();
-  const content = `${intro}${index}
-`;
+## Optional
 
-  return new Response(content);
-};
+- [Changelog](${base}/llms/changelog.txt): Release notes and migration-relevant changes.`;
+
+export const GET = () =>
+  new Response(llmsTxt, {
+    headers: { "Content-Type": "text/plain; charset=utf-8" },
+  });

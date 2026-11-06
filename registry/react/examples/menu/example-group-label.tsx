@@ -2,6 +2,7 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuGroupLabel,
   MenuItem,
@@ -14,17 +15,20 @@ const Example = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-40">
-      <MenuGroup heading="Account">
-        <MenuItem value="profile">Profile</MenuItem>
-        <MenuItem value="billing">Billing</MenuItem>
-      </MenuGroup>
-      <MenuSeparator />
-      <MenuGroup>
-        <MenuGroupLabel>Support</MenuGroupLabel>
-        <MenuItem value="docs">Docs</MenuItem>
-        <MenuItem value="contact">Contact</MenuItem>
-      </MenuGroup>
+    <MenuContent className="min-w-40">
+      <MenuList>
+        <MenuGroup heading="Account">
+          <MenuItem value="profile">Profile</MenuItem>
+          <MenuItem value="billing">Billing</MenuItem>
+        </MenuGroup>
+        <MenuSeparator />
+        <MenuGroup>
+          <MenuGroupLabel>Support</MenuGroupLabel>
+          <MenuItem value="docs">Docs</MenuItem>
+          <MenuItem value="contact">Contact</MenuItem>
+        </MenuGroup>
+
+      </MenuList>
     </MenuContent>
   </Menu>
 );

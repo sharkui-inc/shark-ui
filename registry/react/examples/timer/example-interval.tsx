@@ -1,5 +1,5 @@
-import { Button } from "@registry/react/components/button";
 import { PauseIcon, PlayIcon } from "lucide-react";
+import { Button } from "@/registry/react/components/button";
 import { Card, CardContent } from "@/registry/react/components/card";
 import {
   Timer,
@@ -30,12 +30,12 @@ const Example = () => (
         </TimerArea>
         <TimerControl className="w-full justify-center">
           <TimerPlay asChild>
-            <Button size="icon-sm" variant="ghost">
+            <Button aria-label="Play timer" size="icon-sm" variant="ghost">
               <PlayIcon />
             </Button>
           </TimerPlay>
           <TimerPause asChild>
-            <Button size="icon-sm" variant="ghost">
+            <Button aria-label="Pause timer" size="icon-sm" variant="ghost">
               <PauseIcon />
             </Button>
           </TimerPause>

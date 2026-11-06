@@ -1,18 +1,17 @@
 ---
 title: Context Menu
-description: A menu shown on right-click.
+description: Menu shown on right-click.
+aliases:
+  - Right-click menu
+seo:
+  description: Menu that opens on right-click or long-press.
 links:
   doc: https://ark-ui.com/docs/components/menu
   api: https://ark-ui.com/docs/components/menu#api-reference
 ---
 
-<Alert>
-  <InfoIcon />
-  <AlertDescription>
-    Context Menu is built on top of the [Menu](/docs/components/menu) component. Check it out for more examples.
-  </AlertDescription>
-</Alert>
- 
+import manifest from "@/registry/manifest/context-menu";
+
 <ComponentPreview componentName="context-menu" />
 
 ## Installation
@@ -40,9 +39,7 @@ npx shadcn@latest add @shark/context-menu
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -62,27 +59,32 @@ npm install @ark-ui/react tailwind-variants lucide-react
 ContextMenu
 ├── ContextMenuTrigger
 └── ContextMenuContent
-    ├── ContextMenuGroup
-    ├── ContextMenuItem
-    ├── ContextMenuCheckboxItem
-    ├── ContextMenuRadioGroup
-    │   └── ContextMenuRadioItem
-    ├── ContextMenuSub
-    │   ├── ContextMenuSubTrigger
-    │   └── ContextMenuSubContent
-    ├── ContextMenuSeparator
-    └── ContextMenuShortcut
+    └── ContextMenuList
+        ├── ContextMenuGroup
+        │   └── ContextMenuGroupLabel
+        ├── ContextMenuItem
+        ├── ContextMenuItemDescription
+        ├── ContextMenuQuickItem
+        ├── ContextMenuCheckboxItem
+        ├── ContextMenuRadioGroup
+        │   └── ContextMenuRadioItem
+        ├── ContextMenuSub
+        │   ├── ContextMenuSubTrigger
+        │   └── ContextMenuSubContent
+        │       └── ContextMenuList
+        ├── ContextMenuSeparator
+        └── ContextMenuShortcut
 ```
 
 ## Usage
 
 ```tsx
-import { 
-  ContextMenu, 
-  ContextMenuTrigger, 
-  ContextMenuContent, 
-  ContextMenuItemGroup,
-  ContextMenuItemGroupLabel,
+import {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuList,
+  ContextMenuGroup,
   ContextMenuItem,
 } from "@/components/ui/context-menu";
 ```
@@ -91,18 +93,52 @@ import {
 <ContextMenu>
   <ContextMenuTrigger>Right click here</ContextMenuTrigger>
   <ContextMenuContent>
-    <ContextMenuItemGroup>
-      <ContextMenuItem value="action-1">Action 1</ContextMenuItem>
-      <ContextMenuItem value="action-2">Action 2</ContextMenuItem>
-      <ContextMenuItem value="action-3">Action 3</ContextMenuItem>
-    </ContextMenuItemGroup>
+    <ContextMenuList>
+      <ContextMenuGroup>
+        <ContextMenuItem value="action-1">Action 1</ContextMenuItem>
+        <ContextMenuItem value="action-2">Action 2</ContextMenuItem>
+        <ContextMenuItem value="action-3">Action 3</ContextMenuItem>
+      </ContextMenuGroup>
+    </ContextMenuList>
   </ContextMenuContent>
 </ContextMenu>
 ```
 
+## Examples
+
+<Alert>
+  <InfoIcon />
+  <AlertDescription>
+    Context Menu is built on top of the [Menu](/docs/components/menu) component. Check it out for more examples.
+  </AlertDescription>
+</Alert>
+
+### Responsive
+
+[Drawer](/docs/components/drawer#responsive-context-menu) below the mobile breakpoint. `ContextMenu` on larger screens.
+
+<ComponentPreview componentName="drawer" fileName="example-responsive-context-menu" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="context-menu" />
+
 ## API Reference
 
-### ContextTrigger
+### ContextMenu
+
+Root element for a context menu. It accepts the same state and positioning props as `Menu`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `positioning` | `PositioningOptions` | `-` |
+| `open` | `boolean` | `-` |
+| `defaultOpen` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
+
+### ContextMenuTrigger
 
 Trigger component for the context menu.
 
@@ -111,6 +147,147 @@ Trigger component for the context menu.
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
+### ContextMenuContent
+
+Holds context-menu items in a portal.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
+### ContextMenuList
+
+Scrollable list of options inside `ContextMenuContent` or `ContextMenuSubContent`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
+### ContextMenuGroup
+
+Groups related context-menu items.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `heading` | `string` | `-` |
+
+### ContextMenuGroupLabel
+
+Label for a group.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
+### ContextMenuSeparator
+
+Visual divider between groups of context-menu items.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
+### ContextMenuItem
+
+A selectable context-menu option.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `required` |
+| `variant` | `"default" \| "destructive"` | `"default"` |
+| `disabled` | `boolean` | `-` |
+
+### ContextMenuItemDescription
+
+Secondary line under a context-menu item label.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ContextMenuQuickItem
+
+A context-menu option with icon-above-text layout for quick actions.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `required` |
+| `asChild` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
+| `closeOnSelect` | `boolean` | `-` |
+| `onSelect` | `VoidFunction` | `-` |
+
+### ContextMenuCheckboxItem
+
+A context-menu option with a checkbox.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `required` |
+| `checked` | `boolean` | `-` |
+| `onCheckedChange` | `(checked: boolean) => void` | `-` |
+| `disabled` | `boolean` | `-` |
+
+### ContextMenuRadioGroup
+
+Group of mutually exclusive options.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
+| `heading` | `string` | `-` |
+
+### ContextMenuRadioItem
+
+A single option in a radio group.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `required` |
+| `disabled` | `boolean` | `-` |
+
+### ContextMenuSub
+
+Root element for a nested context menu.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `open` | `boolean` | `-` |
+| `defaultOpen` | `boolean` | `-` |
+| `onOpenChange` | `(details: OpenChangeDetails) => void` | `-` |
+
+### ContextMenuSubTrigger
+
+Menu item that opens the nested context menu.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | `required` |
+| `disabled` | `boolean` | `-` |
+| `asChild` | `boolean` | `-` |
+
+### ContextMenuSubContent
+
+Holds the nested context-menu items.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
+### ContextMenuShortcut
+
+Optional keyboard shortcut hint displayed next to an item.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
 ---
 
-For a complete list of props, see the [Menu API Reference](/docs/components/menu#api-reference).
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/menu#api-reference).

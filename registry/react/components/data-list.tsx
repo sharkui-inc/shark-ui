@@ -39,7 +39,8 @@ export const DataListItem = (props: React.ComponentProps<typeof ark.div>) => {
   return (
     <ark.div
       className={cn(
-        "flex gap-4 py-2",
+        "flex gap-4",
+        "py-2",
         "group-data-[orientation=horizontal]/data-list:flex-row group-data-[orientation=horizontal]/data-list:items-center",
         "group-data-[orientation=vertical]/data-list:flex-col group-data-[orientation=vertical]/data-list:gap-1",
         className
@@ -59,7 +60,7 @@ export const DataListItemLabel = (
     <ark.dt
       className={cn(
         "min-w-24 shrink-0",
-        "font-medium text-muted-foreground",
+        "text-muted-foreground font-medium",
         "group-data-[orientation=vertical]/data-list:min-w-0",
         className
       )}

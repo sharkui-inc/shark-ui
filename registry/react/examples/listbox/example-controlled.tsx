@@ -7,7 +7,6 @@ import {
   Listbox,
   ListboxContent,
   ListboxItem,
-  ListboxItemIndicator,
   ListboxItemText,
 } from "@/registry/react/components/listbox";
 
@@ -18,7 +17,7 @@ const Example = () => {
 
   return (
     <div className="flex w-full max-w-64 flex-col gap-4">
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         Selected the Large size
       </p>
       <Item className="p-1" variant="outline">
@@ -31,13 +30,12 @@ const Example = () => {
             {collection.items.map((item) => (
               <ListboxItem item={item} key={item.value}>
                 <ListboxItemText>{item.label}</ListboxItemText>
-                <ListboxItemIndicator />
               </ListboxItem>
             ))}
           </ListboxContent>
         </Listbox>
       </Item>
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         {isLarge ? "✅" : "❌"}
       </p>
     </div>

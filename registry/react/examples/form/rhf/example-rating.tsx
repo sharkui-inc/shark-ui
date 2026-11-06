@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "@registry/react/components/toast";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -18,32 +17,29 @@ import {
   FieldDescription,
   FieldError,
   FieldGroup,
-  FieldLabel,
 } from "@/registry/react/components/field";
-import { Rating } from "@/registry/react/components/rating";
-
-const formSchema = z.object({
-  recommendScore: z
-    .number()
-    .min(1, "Please rate how likely you are to recommend us.")
-    .max(5),
-});
+import {
+  Rating,
+  RatingLabel,
+  RatingStars,
+} from "@/registry/react/components/rating";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: { recommendScore: 0 },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "rating-submitted",
-      title: "Feedback saved",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "rating-submitted",
+      title: "Feedback saved",
     });
   };
 
@@ -64,12 +60,14 @@ const Example = () => {
               name="recommendScore"
               render={({ field, fieldState }) => (
                 <Field invalid={fieldState.invalid}>
-                  <FieldLabel>How useful is this project?</FieldLabel>
                   <Rating
                     count={5}
                     onValueChange={(e) => field.onChange(e.value ?? 0)}
                     value={field.value ?? 0}
-                  />
+                  >
+                    <RatingLabel>How useful is this project?</RatingLabel>
+                    <RatingStars />
+                  </Rating>
                   <FieldDescription>
                     1 = not likely, 5 = very likely.
                   </FieldDescription>
@@ -89,5 +87,12 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  recommendScore: z
+    .number()
+    .min(1, "Please rate how likely you are to recommend us.")
+    .max(5),
+});
 
 export default Example;

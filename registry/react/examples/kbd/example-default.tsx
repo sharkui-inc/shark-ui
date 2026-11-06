@@ -1,6 +1,6 @@
 import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
 
-const Example = () => (
+const KbdDemo = () => (
   <div className="flex flex-col items-center gap-4">
     <div className="flex gap-2">
       <Kbd>K</Kbd>
@@ -18,4 +18,4 @@ const Example = () => (
   </div>
 );
 
-export default Example;
+export default KbdDemo;

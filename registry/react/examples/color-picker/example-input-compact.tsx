@@ -1,5 +1,6 @@
 "use client";
 
+import { parseColor } from "@ark-ui/react";
 import { PercentIcon } from "lucide-react";
 import {
   ColorPicker,
@@ -13,7 +14,6 @@ import {
   ColorPickerTransparencyGrid,
   ColorPickerTrigger,
   ColorPickerView,
-  parseColor,
 } from "@/registry/react/components/color-picker";
 import {
   InputGroup,
@@ -32,7 +32,7 @@ const Example = () => (
       <InputGroup>
         <ColorPickerTrigger asChild>
           <InputGroupAddon>
-            <ColorPickerSwatchPreview aria-hidden />
+            <ColorPickerSwatchPreview aria-hidden="true" />
           </InputGroupAddon>
         </ColorPickerTrigger>
         <ColorPickerInput asChild channel="hex" className="flex-1">
@@ -42,11 +42,11 @@ const Example = () => (
         <ColorPickerInput asChild channel="alpha">
           <InputGroupInput
             aria-label="Opacity percentage"
-            className="max-w-1/4 text-right"
+            className="max-w-1/4 text-end"
           />
         </ColorPickerInput>
         <InputGroupAddon align="inline-end">
-          <PercentIcon aria-hidden />
+          <PercentIcon aria-hidden="true" />
         </InputGroupAddon>
       </InputGroup>
     </ColorPickerControl>

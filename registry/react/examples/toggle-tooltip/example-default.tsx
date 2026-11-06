@@ -6,7 +6,7 @@ import {
   ToggleTooltipTrigger,
 } from "@/registry/react/components/toggle-tooltip";
 
-const Example = () => (
+const ToggleTooltipDemo = () => (
   <ToggleTooltip>
     <ToggleTooltipTrigger asChild>
       <Button aria-label="More information" size="icon-md" variant="outline">
@@ -19,4 +19,4 @@ const Example = () => (
   </ToggleTooltip>
 );
 
-export default Example;
+export default ToggleTooltipDemo;

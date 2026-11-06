@@ -1,14 +1,14 @@
-import { Badge } from "@registry/react/components/badge";
-import { SparklesIcon } from "lucide-react";
+import { RocketIcon } from "lucide-react";
 import {
   Announcement,
   AnnouncementTitle,
 } from "@/registry/react/components/announcement";
+import { Badge } from "@/registry/react/components/badge";
 
 const Example = () => (
   <Announcement>
     <Badge variant="info">
-      <SparklesIcon />
+      <RocketIcon data-icon="inline-start" />
       New features
     </Badge>
     <AnnouncementTitle>

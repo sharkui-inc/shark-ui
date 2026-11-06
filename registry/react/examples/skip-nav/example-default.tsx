@@ -5,12 +5,11 @@ import {
 
 const SkipNavDemo = () => (
   <>
-    <SkipNavLink className="focus:absolute" id="demo-content" />
+    <SkipNavLink className="focus:absolute" contentId="demo-content" />
 
     <SkipNavContent
-      className="max-w-sm rounded-lg border bg-card p-4 focus:ring-2"
+      className="bg-card max-w-sm rounded-lg border border-transparent p-4"
       id="demo-content"
-      tabIndex={undefined}
     >
       <h2 className="mb-2 font-semibold">Main Content</h2>
       <p className="text-muted-foreground text-sm">

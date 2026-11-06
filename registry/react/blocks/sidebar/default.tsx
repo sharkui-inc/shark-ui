@@ -1,29 +1,27 @@
 "use client";
 
 import {
-  BadgeCheck,
-  Bell,
-  BookOpen,
-  Bot,
-  ChevronRight,
-  ChevronsUpDown,
-  CreditCard,
-  Folder,
-  Forward,
-  Frame,
-  GalleryVerticalEnd,
-  LogOut,
-  Map as MapIcon,
-  MoreHorizontal,
-  PieChart,
-  Plus,
-  Settings2,
-  Sparkles,
-  SquareTerminal,
-  Trash2,
+  BadgeCheckIcon,
+  BellIcon,
+  BookOpenIcon,
+  BotIcon,
+  ChevronsUpDownIcon,
+  CreditCardIcon,
+  CrownIcon,
+  FolderIcon,
+  ForwardIcon,
+  FrameIcon,
+  LogOutIcon,
+  MapIcon,
+  MoreHorizontalIcon,
+  PieChartIcon,
+  PlusIcon,
+  Settings2Icon,
+  SquareTerminalIcon,
+  Trash2Icon,
+  WavesHorizontalIcon,
 } from "lucide-react";
 import React from "react";
-import { SharkIcon } from "@/components/icons/shark";
 import {
   Avatar,
   AvatarFallback,
@@ -32,11 +30,14 @@ import {
 import {
   Collapsible,
   CollapsibleContent,
+  CollapsibleIndicator,
   CollapsibleTrigger,
 } from "@/registry/react/components/collapsible";
+import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuGroupLabel,
   MenuItem,
@@ -62,32 +63,12 @@ import {
   SidebarProvider,
   SidebarRail,
   SidebarTrigger,
-  useSidebar,
 } from "@/registry/react/components/sidebar";
 
 const data = {
-  user: {
-    name: "vini",
-    email: "m@example.com",
-    avatar: "https://github.com/vinihvc.png",
-  },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Shark Corp.",
-      logo: SharkIcon,
-      plan: "Startup",
-    },
-  ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
+      icon: SquareTerminalIcon,
       isActive: true,
       items: [
         {
@@ -103,11 +84,11 @@ const data = {
           url: "#",
         },
       ],
+      title: "Playground",
+      url: "#",
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
+      icon: BotIcon,
       items: [
         {
           title: "Genesis",
@@ -122,11 +103,11 @@ const data = {
           url: "#",
         },
       ],
+      title: "Models",
+      url: "#",
     },
     {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
+      icon: BookOpenIcon,
       items: [
         {
           title: "Introduction",
@@ -145,11 +126,11 @@ const data = {
           url: "#",
         },
       ],
+      title: "Documentation",
+      url: "#",
     },
     {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
+      icon: Settings2Icon,
       items: [
         {
           title: "General",
@@ -168,25 +149,44 @@ const data = {
           url: "#",
         },
       ],
+      title: "Settings",
+      url: "#",
     },
   ],
   projects: [
     {
+      icon: FrameIcon,
       name: "Design Engineering",
       url: "#",
-      icon: Frame,
     },
     {
+      icon: PieChartIcon,
       name: "Sales & Marketing",
       url: "#",
-      icon: PieChart,
     },
     {
+      icon: MapIcon,
       name: "Travel",
       url: "#",
-      icon: MapIcon,
     },
   ],
+  teams: [
+    {
+      logo: WavesHorizontalIcon,
+      name: "Onda Inc.",
+      plan: "Enterprise",
+    },
+    {
+      logo: WavesHorizontalIcon,
+      name: "Onda Labs",
+      plan: "Startup",
+    },
+  ],
+  user: {
+    avatar: "https://github.com/vinihvc.png",
+    email: "m@example.com",
+    name: "vini",
+  },
 };
 
 interface TeamSwitcherProps {
@@ -197,7 +197,9 @@ interface TeamSwitcherProps {
   }[];
 }
 
-const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
+const TeamSwitcher = (props: TeamSwitcherProps) => {
+  const { teams } = props;
+
   const [activeTeam, setActiveTeam] = React.useState(teams[0]);
 
   if (!activeTeam) {
@@ -217,47 +219,50 @@ const TeamSwitcher = ({ teams }: TeamSwitcherProps) => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               size="lg"
             >
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+              <IconTile aria-hidden="true" size="md">
                 <activeTeam.logo className="size-4" />
-              </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              </IconTile>
+              <div className="grid flex-1 text-start text-sm leading-tight">
                 <span className="truncate font-medium">{activeTeam.name}</span>
                 <span className="truncate text-xs">{activeTeam.plan}</span>
               </div>
-              <ChevronsUpDown className="ms-auto" />
+              <ChevronsUpDownIcon className="ms-auto size-4" />
             </SidebarMenuButton>
           </MenuTrigger>
-          <MenuContent className="w-(--reference-width) min-w-56 rounded-lg">
-            <MenuGroup>
-              <MenuGroupLabel className="text-muted-foreground text-xs">
-                Teams
-              </MenuGroupLabel>
-              {teams.map((team, index) => (
-                <MenuItem
-                  className="gap-2 p-2"
-                  key={team.name}
-                  onClick={() => setActiveTeam(team)}
-                  value={team.name}
-                >
-                  <div className="flex size-6 items-center justify-center rounded-md border border-input">
-                    <team.logo className="size-3.5 shrink-0" />
+          <MenuContent className="min-w-56">
+            <MenuList>
+              <MenuGroup>
+                <MenuGroupLabel className="text-muted-foreground text-xs">
+                  Teams
+                </MenuGroupLabel>
+                {teams.map((team, index) => (
+                  <MenuItem
+                    className="gap-2"
+                    key={team.name}
+                    onClick={() => setActiveTeam(team)}
+                    value={team.name}
+                  >
+                    <IconTile aria-hidden="true" size="xs" variant="secondary">
+                      <team.logo className="size-3.5 shrink-0" />
+                    </IconTile>
+                    {team.name}
+                    <MenuShortcut>⌘{index + 1}</MenuShortcut>
+                  </MenuItem>
+                ))}
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem className="gap-2" value="add-team">
+                  <IconTile aria-hidden="true" size="xs">
+                    <PlusIcon className="size-4" />
+                  </IconTile>
+                  <div className="text-muted-foreground font-medium">
+                    Add team
                   </div>
-                  {team.name}
-                  <MenuShortcut>⌘{index + 1}</MenuShortcut>
                 </MenuItem>
-              ))}
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem className="gap-2 p-2" value="add-team">
-                <div className="flex size-6 items-center justify-center rounded-md border border-input bg-transparent">
-                  <Plus className="size-4" />
-                </div>
-                <div className="font-medium text-muted-foreground">
-                  Add team
-                </div>
-              </MenuItem>
-            </MenuGroup>
+              </MenuGroup>
+
+            </MenuList>
           </MenuContent>
         </Menu>
       </SidebarMenuItem>
@@ -278,44 +283,43 @@ interface NavMainProps {
   }[];
 }
 
-const NavMain = ({ items }: NavMainProps) => (
-  <SidebarGroup>
-    <SidebarGroupLabel>Platform</SidebarGroupLabel>
-    <SidebarMenu>
-      {items.map((item) => (
-        <Collapsible
-          asChild
-          className="group/collapsible"
-          defaultOpen={item.isActive}
-          key={item.title}
-        >
-          <SidebarMenuItem>
-            <CollapsibleTrigger asChild>
-              <SidebarMenuButton tooltip={item.title}>
-                {item.icon && <item.icon />}
-                <span>{item.title}</span>
-                <ChevronRight className="ms-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-              </SidebarMenuButton>
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <SidebarMenuSub>
-                {item.items?.map((subItem) => (
-                  <SidebarMenuSubItem key={subItem.title}>
-                    <SidebarMenuSubButton asChild>
-                      <a href={subItem.url}>
-                        <span>{subItem.title}</span>
-                      </a>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                ))}
-              </SidebarMenuSub>
-            </CollapsibleContent>
-          </SidebarMenuItem>
-        </Collapsible>
-      ))}
-    </SidebarMenu>
-  </SidebarGroup>
-);
+const NavMain = (props: NavMainProps) => {
+  const { items } = props;
+
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarMenu>
+        {items.map((item) => (
+          <Collapsible asChild defaultOpen={item.isActive} key={item.title}>
+            <SidebarMenuItem>
+              <CollapsibleTrigger asChild>
+                <SidebarMenuButton tooltip={item.title}>
+                  {item.icon ? <item.icon /> : null}
+                  <span>{item.title}</span>
+                  <CollapsibleIndicator />
+                </SidebarMenuButton>
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <SidebarMenuSub>
+                  {item.items?.map((subItem) => (
+                    <SidebarMenuSubItem key={subItem.title}>
+                      <SidebarMenuSubButton asChild>
+                        <a href={subItem.url}>
+                          <span>{subItem.title}</span>
+                        </a>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  ))}
+                </SidebarMenuSub>
+              </CollapsibleContent>
+            </SidebarMenuItem>
+          </Collapsible>
+        ))}
+      </SidebarMenu>
+    </SidebarGroup>
+  );
+};
 
 interface NavProjectsProps {
   projects: {
@@ -325,60 +329,67 @@ interface NavProjectsProps {
   }[];
 }
 
-const NavProjects = ({ projects }: NavProjectsProps) => (
-  <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-    <SidebarGroupLabel>Projects</SidebarGroupLabel>
-    <SidebarMenu>
-      {projects.map((item) => (
-        <SidebarMenuItem key={item.name}>
-          <SidebarMenuButton asChild>
-            <a href={item.url}>
-              <item.icon />
-              <span>{item.name}</span>
-            </a>
+const NavProjects = (props: NavProjectsProps) => {
+  const { projects } = props;
+
+  return (
+    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+      <SidebarGroupLabel>Projects</SidebarGroupLabel>
+      <SidebarMenu>
+        {projects.map((item) => (
+          <SidebarMenuItem key={item.name}>
+            <SidebarMenuButton asChild>
+              <a href={item.url}>
+                <item.icon />
+                <span>{item.name}</span>
+              </a>
+            </SidebarMenuButton>
+            <Menu
+              positioning={{
+                placement: "right-start",
+              }}
+            >
+              <MenuTrigger asChild>
+                <SidebarMenuAction showOnHover>
+                  <MoreHorizontalIcon />
+                  <span className="sr-only">More</span>
+                </SidebarMenuAction>
+              </MenuTrigger>
+              <MenuContent className="min-w-48">
+                <MenuList>
+                  <MenuGroup>
+                    <MenuItem value={`${item.name}-view`}>
+                      <FolderIcon />
+                      View Project
+                    </MenuItem>
+                    <MenuItem value={`${item.name}-share`}>
+                      <ForwardIcon />
+                      Share Project
+                    </MenuItem>
+                  </MenuGroup>
+                  <MenuSeparator />
+                  <MenuGroup>
+                    <MenuItem value={`${item.name}-delete`} variant="destructive">
+                      <Trash2Icon />
+                      Delete Project
+                    </MenuItem>
+                  </MenuGroup>
+
+                </MenuList>
+              </MenuContent>
+            </Menu>
+          </SidebarMenuItem>
+        ))}
+        <SidebarMenuItem>
+          <SidebarMenuButton className="text-sidebar-foreground">
+            <MoreHorizontalIcon className="text-sidebar-foreground" />
+            <span>More</span>
           </SidebarMenuButton>
-          <Menu
-            positioning={{
-              placement: "right-start",
-            }}
-          >
-            <MenuTrigger asChild>
-              <SidebarMenuAction showOnHover>
-                <MoreHorizontal />
-                <span className="sr-only">More</span>
-              </SidebarMenuAction>
-            </MenuTrigger>
-            <MenuContent className="w-48 rounded-lg">
-              <MenuGroup>
-                <MenuItem value={`${item.name}-view`}>
-                  <Folder />
-                  View Project
-                </MenuItem>
-                <MenuItem value={`${item.name}-share`}>
-                  <Forward />
-                  Share Project
-                </MenuItem>
-              </MenuGroup>
-              <MenuSeparator />
-              <MenuGroup>
-                <MenuItem value={`${item.name}-delete`} variant="destructive">
-                  <Trash2 />
-                  Delete Project
-                </MenuItem>
-              </MenuGroup>
-            </MenuContent>
-          </Menu>
         </SidebarMenuItem>
-      ))}
-      <SidebarMenuItem>
-        <SidebarMenuButton className="text-sidebar-foreground/70">
-          <MoreHorizontal className="text-sidebar-foreground/70" />
-          <span>More</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-    </SidebarMenu>
-  </SidebarGroup>
-);
+      </SidebarMenu>
+    </SidebarGroup>
+  );
+};
 
 interface NavUserProps {
   user: {
@@ -388,15 +399,16 @@ interface NavUserProps {
   };
 }
 
-const NavUser = ({ user }: NavUserProps) => {
-  const { isMobile } = useSidebar();
+const NavUser = (props: NavUserProps) => {
+  const { user } = props;
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <Menu
           positioning={{
-            placement: isMobile ? "bottom-end" : "right-end",
+            gutter: 16,
+            placement: "right-end",
           }}
         >
           <MenuTrigger asChild>
@@ -408,57 +420,60 @@ const NavUser = ({ user }: NavUserProps) => {
                 <AvatarImage alt={user.name} src={user.avatar} />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              <div className="grid flex-1 text-start text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
                 <span className="truncate text-xs">{user.email}</span>
               </div>
-              <ChevronsUpDown className="ms-auto size-4" />
+              <ChevronsUpDownIcon className="ms-auto size-4" />
             </SidebarMenuButton>
           </MenuTrigger>
-          <MenuContent className="w-full rounded-lg sm:w-64">
-            <MenuGroup>
-              <MenuGroupLabel className="p-0 font-normal">
-                <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                  <Avatar className="size-8 rounded-lg">
-                    <AvatarImage alt={user.name} src={user.avatar} />
-                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                  </Avatar>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-medium">{user.name}</span>
-                    <span className="truncate text-xs">{user.email}</span>
+          <MenuContent className="w-full sm:w-64">
+            <MenuList>
+              <MenuGroup>
+                <MenuGroupLabel className="p-0 font-normal">
+                  <div className="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
+                    <Avatar className="size-8 rounded-lg">
+                      <AvatarImage alt={user.name} src={user.avatar} />
+                      <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                    </Avatar>
+                    <div className="grid flex-1 text-start text-sm leading-tight">
+                      <span className="truncate font-medium">{user.name}</span>
+                      <span className="truncate text-xs">{user.email}</span>
+                    </div>
                   </div>
-                </div>
-              </MenuGroupLabel>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="upgrade">
-                <Sparkles />
-                Upgrade to Pro
-              </MenuItem>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="account">
-                <BadgeCheck />
-                Account
-              </MenuItem>
-              <MenuItem value="billing">
-                <CreditCard />
-                Billing
-              </MenuItem>
-              <MenuItem value="notifications">
-                <Bell />
-                Notifications
-              </MenuItem>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="logout">
-                <LogOut />
-                Log out
-              </MenuItem>
-            </MenuGroup>
+                </MenuGroupLabel>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="upgrade">
+                  <CrownIcon />
+                  Upgrade to Pro
+                </MenuItem>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="account">
+                  <BadgeCheckIcon />
+                  Account
+                </MenuItem>
+                <MenuItem value="billing">
+                  <CreditCardIcon />
+                  Billing
+                </MenuItem>
+                <MenuItem value="notifications">
+                  <BellIcon />
+                  Notifications
+                </MenuItem>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="logout">
+                  <LogOutIcon />
+                  Log out
+                </MenuItem>
+              </MenuGroup>
+
+            </MenuList>
           </MenuContent>
         </Menu>
       </SidebarMenuItem>
@@ -467,8 +482,8 @@ const NavUser = ({ user }: NavUserProps) => {
 };
 
 const AppSidebar = () => (
-  <SidebarProvider>
-    <Sidebar collapsible="icon" defaultOpen>
+  <SidebarProvider defaultOpenMobile>
+    <Sidebar collapsible="icon">
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
@@ -482,10 +497,8 @@ const AppSidebar = () => (
       <SidebarRail />
     </Sidebar>
     <SidebarInset>
-      <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-        <div className="flex items-center gap-2 px-4">
-          <SidebarTrigger className="-ms-1" />
-        </div>
+      <header className="flex h-16 shrink-0 items-center gap-2 px-4 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 motion-reduce:transition-none">
+        <SidebarTrigger className="-ms-1" />
       </header>
     </SidebarInset>
   </SidebarProvider>

@@ -11,7 +11,7 @@ const Example = () => (
     <PopoverTrigger asChild>
       <Button variant="outline">Open</Button>
     </PopoverTrigger>
-    <PopoverContent className="w-72" showCloseButton>
+    <PopoverContent className="min-w-72" showCloseButton>
       <PopoverHeader
         description="You are all caught up!"
         title="Notifications"

@@ -19,7 +19,7 @@ const Example = () => (
       <Button variant="outline">Open</Button>
     </PopoverTrigger>
 
-    <PopoverContent className="w-80 [--space:--spacing(2)] sm:[--space:--spacing(5)]">
+    <PopoverContent className="min-w-80 [--space:--spacing(2)] sm:[--space:--spacing(5)]">
       <PopoverHeader
         description="Set the dimensions for the layer."
         title="Dimensions"

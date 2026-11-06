@@ -1,21 +1,22 @@
 import {
-  Archive,
-  ArchiveX,
-  Bell,
-  CirclePlus,
-  FolderInput,
-  MailX,
-  Reply,
-  Send,
-  SquarePen,
-  Trash,
-  Trash2,
+  ArchiveIcon,
+  ArchiveXIcon,
+  BellIcon,
+  CirclePlusIcon,
+  FolderInputIcon,
+  MailXIcon,
+  ReplyIcon,
+  SendIcon,
+  SquarePenIcon,
+  Trash2Icon,
+  TrashIcon,
 } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuRadioGroup,
@@ -33,68 +34,74 @@ const MenuDemo = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-40">
-      <MenuGroup>
-        <MenuItem value="forward">
-          <Send /> Forward
-          <MenuShortcut>⌘F</MenuShortcut>
-        </MenuItem>
-        <MenuItem value="reply">
-          <Reply /> Reply
-          <MenuShortcut>⌘R</MenuShortcut>
-        </MenuItem>
-        <MenuItem value="archive">
-          <Archive /> Archive
-          <MenuShortcut>⌘Z</MenuShortcut>
-        </MenuItem>
-        <MenuSub>
-          <MenuSubTrigger>
-            <FolderInput /> Move to
-          </MenuSubTrigger>
-          <MenuSubContent>
-            <MenuItem value="move-to-folder-1">
-              <ArchiveX /> Junk
-            </MenuItem>
-            <MenuItem value="move-to-folder-2">
-              <Trash /> Trash
-            </MenuItem>
-            <MenuItem value="move-to-folder-3">
-              <Bell /> Reminders
-            </MenuItem>
-            <MenuSub>
-              <MenuSubTrigger>
-                <CirclePlus />
-                More
-              </MenuSubTrigger>
-              <MenuSubContent>
-                <MenuItem value="move-to-folder-4">
-                  <SquarePen />
-                  Drafts
+    <MenuContent className="min-w-40">
+      <MenuList>
+        <MenuGroup>
+          <MenuItem value="forward">
+            <SendIcon /> Forward
+            <MenuShortcut className="hidden sm:inline-flex">⌘F</MenuShortcut>
+          </MenuItem>
+          <MenuItem value="reply">
+            <ReplyIcon /> Reply
+            <MenuShortcut className="hidden sm:inline-flex">⌘R</MenuShortcut>
+          </MenuItem>
+          <MenuItem value="archive">
+            <ArchiveIcon /> Archive
+            <MenuShortcut className="hidden sm:inline-flex">⌘Z</MenuShortcut>
+          </MenuItem>
+          <MenuSub>
+            <MenuSubTrigger>
+              <FolderInputIcon /> Move to
+            </MenuSubTrigger>
+            <MenuSubContent>
+              <MenuList>
+                <MenuItem value="move-to-folder-1">
+                  <ArchiveXIcon /> Junk
                 </MenuItem>
-                <MenuItem value="move-to-folder-6">
-                  <MailX />
-                  Spam
+                <MenuItem value="move-to-folder-2">
+                  <TrashIcon /> Trash
                 </MenuItem>
-              </MenuSubContent>
-            </MenuSub>
-          </MenuSubContent>
-        </MenuSub>
-        <MenuSeparator />
-        <MenuRadioGroup heading="Priority" value="medium">
-          <MenuRadioItem value="low">Low</MenuRadioItem>
-          <MenuRadioItem value="medium">Medium</MenuRadioItem>
-          <MenuRadioItem value="high">High</MenuRadioItem>
-        </MenuRadioGroup>
-        <MenuSeparator />
-        <MenuCheckboxItem checked value="block">
-          Block sender
-        </MenuCheckboxItem>
-        <MenuSeparator />
-        <MenuItem value="delete" variant="destructive">
-          <Trash2 /> Delete
-          <MenuShortcut>⌘ ⌫</MenuShortcut>
-        </MenuItem>
-      </MenuGroup>
+                <MenuItem value="move-to-folder-3">
+                  <BellIcon /> Reminders
+                </MenuItem>
+                <MenuSub>
+                  <MenuSubTrigger>
+                    <CirclePlusIcon />
+                    More
+                  </MenuSubTrigger>
+                  <MenuSubContent>
+                    <MenuItem value="move-to-folder-4">
+                      <SquarePenIcon />
+                      Drafts
+                    </MenuItem>
+                    <MenuItem value="move-to-folder-6">
+                      <MailXIcon />
+                      Spam
+                    </MenuItem>
+                  </MenuSubContent>
+                </MenuSub>
+
+              </MenuList>
+            </MenuSubContent>
+          </MenuSub>
+          <MenuSeparator />
+          <MenuRadioGroup heading="Priority" value="medium">
+            <MenuRadioItem value="low">Low</MenuRadioItem>
+            <MenuRadioItem value="medium">Medium</MenuRadioItem>
+            <MenuRadioItem value="high">High</MenuRadioItem>
+          </MenuRadioGroup>
+          <MenuSeparator />
+          <MenuCheckboxItem checked value="block">
+            Block sender
+          </MenuCheckboxItem>
+          <MenuSeparator />
+          <MenuItem value="delete" variant="destructive">
+            <Trash2Icon /> Delete
+            <MenuShortcut className="hidden sm:inline-flex">⌘ ⌫</MenuShortcut>
+          </MenuItem>
+        </MenuGroup>
+
+      </MenuList>
     </MenuContent>
   </Menu>
 );

@@ -8,7 +8,7 @@ import {
 
 const Example = () => (
   <SegmentGroup
-    className="rounded-lg *:data-[slot=segment-group-indicator]:bg-primary/40"
+    className="*:data-[slot=segment-group-indicator]:bg-primary/32 rounded-lg"
     defaultValue="Profile"
   >
     {items.map((item) => (

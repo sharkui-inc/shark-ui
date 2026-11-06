@@ -1,0 +1,30 @@
+"use client";
+
+import { MonitorIcon, SmartphoneIcon } from "lucide-react";
+import { useMediaQuery } from "@/registry/react/hooks/use-media-query";
+
+const UseMediaQueryDemo = () => {
+  const isMobile = useMediaQuery("(max-width: 767px)");
+
+  return (
+    <div className="flex items-center gap-3">
+      <div className="bg-muted/48 [&_svg]:text-muted-foreground flex size-10 items-center justify-center rounded-xl border [&_svg]:size-4">
+        {isMobile ? (
+          <SmartphoneIcon aria-hidden="true" />
+        ) : (
+          <MonitorIcon aria-hidden="true" />
+        )}
+      </div>
+      <div className="flex flex-col gap-1">
+        <p className="text-sm font-medium">
+          {isMobile ? "Mobile layout" : "Desktop layout"}
+        </p>
+        <p className="text-muted-foreground text-xs">
+          Narrow or widen the window to see it change
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default UseMediaQueryDemo;

@@ -9,7 +9,6 @@ import {
   SheetContent,
   SheetFooter,
   SheetHeader,
-  SheetTrigger,
 } from "@/registry/react/components/sheet";
 
 const Example = () => {
@@ -18,13 +17,10 @@ const Example = () => {
   return (
     <div className="flex items-center gap-4">
       <Button onClick={() => setOpen(true)} variant="outline">
-        Open Controlled
+        Open
       </Button>
 
       <Sheet onOpenChange={({ open: isOpen }) => setOpen(isOpen)} open={open}>
-        <SheetTrigger asChild>
-          <Button variant="outline">Open Uncontrolled</Button>
-        </SheetTrigger>
         <SheetContent>
           <SheetHeader
             description="The open state is managed with open and onOpenChange."
@@ -32,7 +28,7 @@ const Example = () => {
           />
           <SheetBody>
             <p className="text-muted-foreground text-sm">
-              Use external buttons or the trigger to open and close this sheet.
+              Use the external button or the close button to control this sheet.
             </p>
           </SheetBody>
           <SheetFooter>

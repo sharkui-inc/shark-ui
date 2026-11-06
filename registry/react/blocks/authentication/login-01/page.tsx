@@ -1,0 +1,49 @@
+import { WavesIcon } from "lucide-react";
+import { IconTile } from "@/registry/react/components/icon-tile";
+import { LoginForm } from "./components/login-form";
+
+const LoginPage = () => (
+  <main className="bg-muted/32 grid min-h-svh lg:grid-cols-[minmax(0,1.05fr)_minmax(28rem,0.95fr)]">
+    <section className="bg-foreground text-background relative hidden overflow-hidden border-e lg:flex lg:flex-col lg:justify-between lg:p-12">
+      <div className="flex items-center gap-2 font-semibold">
+        <IconTile
+          aria-hidden="true"
+          className="bg-background text-foreground size-9 border-transparent shadow-none"
+          size="sm"
+        >
+          <WavesIcon aria-hidden="true" className="size-5" />
+        </IconTile>
+        Northstar
+      </div>
+      <div className="max-w-xl">
+        <p className="text-3xl leading-tight font-medium tracking-tight text-balance xl:text-4xl">
+          Bring your team, priorities, and progress into one clear view.
+        </p>
+        <p className="text-background/64 mt-4 max-w-lg">
+          Make better decisions with a workspace that stays useful from the
+          first task to the quarterly review.
+        </p>
+      </div>
+      <p className="text-background/64 text-sm">
+        Trusted by product teams at Northstar, Helix, and Cove.
+      </p>
+    </section>
+
+    <section className="flex min-h-svh items-center justify-center px-5 py-10 sm:px-8">
+      <div className="w-full max-w-md">
+        <a
+          className="mb-8 flex items-center gap-2 font-semibold lg:hidden"
+          href="#"
+        >
+          <IconTile aria-hidden="true" size="sm">
+            <WavesIcon aria-hidden="true" className="size-4" />
+          </IconTile>
+          Northstar
+        </a>
+        <LoginForm />
+      </div>
+    </section>
+  </main>
+);
+
+export default LoginPage;

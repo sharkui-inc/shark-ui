@@ -1,25 +1,36 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "lucide-react", "tailwind-variants"];
 
+const cssVars = {
+  theme: {
+    "--animate-collapse-down": "collapse-down 200ms ease-out",
+    "--animate-collapse-up": "collapse-up 200ms ease-out",
+  },
+};
+
 const css = {
-  "@keyframes expand": {
+  "@keyframes collapse-down": {
     from: { height: "var(--collapsed-height, 0)" },
     to: { height: "var(--height)" },
   },
-  "@keyframes collapse": {
+  "@keyframes collapse-up": {
     from: { height: "var(--height)" },
     to: { height: "var(--collapsed-height, 0)" },
   },
 };
 
 const manifest: RegistryItemType = {
-  name: "tree-view",
-  type: "registry:ui",
-  dependencies,
   css,
-  registryDependencies: [absoluteUrl("/r/checkbox.json")],
+  cssVars,
+  dependencies,
+  name: "tree-view",
+  registryDependencies: [
+    registryUrl("/r/checkbox.json"),
+    registryUrl("/r/field.json"),
+  ],
+  type: "registry:ui",
 };
 
 export default manifest;

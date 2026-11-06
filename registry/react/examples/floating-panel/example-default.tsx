@@ -1,7 +1,7 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { Settings2Icon, XIcon } from "lucide-react";
+import { TypeIcon, XIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import { Field, FieldLabel } from "@/registry/react/components/field";
 import {
@@ -28,19 +28,20 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
 
 const FloatingPanelDemo = () => (
-  <FloatingPanel defaultSize={{ width: 360, height: 300 }}>
+  <FloatingPanel defaultSize={{ height: 300, width: 360 }}>
     <FloatingPanelTrigger asChild>
       <Button variant="outline">Open</Button>
     </FloatingPanelTrigger>
     <FloatingPanelContent>
       <FloatingPanelHeader>
-        <Settings2Icon />
+        <TypeIcon aria-hidden="true" />
         <FloatingPanelTitle>Settings</FloatingPanelTitle>
         <FloatingPanelControl>
           <FloatingPanelMinimize />
@@ -48,7 +49,7 @@ const FloatingPanelDemo = () => (
           <FloatingPanelRestore />
           <FloatingPanelCloseTrigger asChild>
             <Button aria-label="Close" size="icon-xs">
-              <XIcon aria-hidden />
+              <XIcon aria-hidden="true" />
             </Button>
           </FloatingPanelCloseTrigger>
         </FloatingPanelControl>
@@ -61,11 +62,14 @@ const FloatingPanelDemo = () => (
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {collection.items.map((item) => (
-                <SelectItem item={item} key={item}>
-                  {item}
-                </SelectItem>
-              ))}
+              <SelectList>
+                {collection.items.map((item) => (
+                  <SelectItem item={item} key={item}>
+                    {item}
+                  </SelectItem>
+                ))}
+
+              </SelectList>
             </SelectContent>
           </Select>
         </Field>

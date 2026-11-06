@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "@registry/react/components/toast";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -25,36 +24,26 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from "@/registry/react/components/input-group";
+import { toast } from "@/registry/react/components/toast";
 
-const formSchema = z.object({
-  title: z
-    .string()
-    .min(5, "Bug title must be at least 5 characters.")
-    .max(32, "Bug title must be at most 32 characters."),
-  description: z
-    .string()
-    .min(20, "Description must be at least 20 characters.")
-    .max(100, "Description must be at most 100 characters."),
-});
-
-export const BugReportForm = () => {
+const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
       description: "",
+      title: "",
     },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "bug-report-submitted",
-      title: "Bug submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "bug-report-submitted",
+      title: "Bug submitted",
     });
   };
 
@@ -122,4 +111,15 @@ export const BugReportForm = () => {
   );
 };
 
-export default BugReportForm;
+const formSchema = z.object({
+  description: z
+    .string()
+    .min(20, "Description must be at least 20 characters.")
+    .max(100, "Description must be at most 100 characters."),
+  title: z
+    .string()
+    .min(5, "Bug title must be at least 5 characters.")
+    .max(32, "Bug title must be at most 32 characters."),
+});
+
+export default Example;

@@ -1,10 +1,16 @@
 ---
 title: Textarea
-description: Form textarea or textarea-styled component.
+description: Multi-line text field.
+aliases:
+  - Text area
+seo:
+  description: Multi-line text field for longer notes and messages.
 links:
   doc: https://ark-ui.com/docs/components/field#textarea
   api: https://ark-ui.com/docs/components/field#api-reference
 ---
+
+import manifest from "@/registry/manifest/textarea";
 
 <ComponentPreview componentName="textarea" />
 
@@ -31,9 +37,7 @@ npx shadcn@latest add @shark/textarea
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -57,6 +61,12 @@ import { Textarea } from "@/components/ui/textarea";
 <Textarea />
 ```
 
+## With Field
+
+Use [Field](/docs/components/field) for a label and description.
+
+<ComponentPreview componentName="textarea" fileName="example-with-field" />
+
 ## Controlled
 
 Control the value with `value` and `onChange`.
@@ -67,13 +77,9 @@ Control the value with `value` and `onChange`.
 
 ### Disabled
 
-Disable the textarea with the `disabled` prop. Use `Field` with `disabled` to disable the whole field (label + textarea).
-
 <ComponentPreview componentName="textarea" fileName="example-disabled" />
 
 ### Invalid
-
-Use the `invalid` prop on `Field` or `Textarea` to show invalid state.
 
 <ComponentPreview componentName="textarea" fileName="example-invalid" />
 
@@ -85,21 +91,21 @@ Use `autoresize` to make the textarea grow with content.
 
 <ComponentPreview componentName="textarea" fileName="example-autoresize" />
 
-### With Field
-
-Wrap the textarea in a `Field` and add `FieldLabel` and `FieldDescription`.
-
-<ComponentPreview componentName="textarea" fileName="example-with-field" />
-
 ### With Input Group
 
 Use `FieldGroup` to group multiple `Field` blocks. Combine textarea with other inputs and action buttons.
 
-<ComponentPreview componentName="input-group" fileName="example-input-group" />
+<ComponentPreview componentName="input-group" fileName="example-code-file" />
 
 ### Form Integration
 
 <ComponentPreview componentName="textarea" fileName="example-form" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="textarea" />
 
 ## API Reference
 
@@ -109,7 +115,7 @@ Multi-line text input. Accepts all native textarea attributes.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `autoresize` | `boolean` | `true` | 
+| `autoresize` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
 ---

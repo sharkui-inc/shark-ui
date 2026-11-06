@@ -14,6 +14,7 @@ const Example = () => (
       className="w-full"
       defaultValue={["React", "Solid", "Vue"]}
       disabled
+      placeholder="Add framework"
     >
       <TagsInputContext>
         {({ value }) =>

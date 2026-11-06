@@ -2,14 +2,13 @@
 
 import {
   SegmentGroup as ArkSegmentGroup,
-  useSegmentGroupContext,
+  useSegmentGroupContext as useArkSegmentGroupContext,
 } from "@ark-ui/react/segment-group";
 import type React from "react";
 import { cn } from "@/lib/utils";
+import { buttonControlVariants } from "@/registry/react/components/button";
 
-export const useSegmentGroup = useSegmentGroupContext;
-
-type SegmentGroupVariant = "default" | "underline";
+export const useSegmentGroupContext = useArkSegmentGroupContext;
 
 interface SegmentGroupProps
   extends React.ComponentProps<typeof ArkSegmentGroup.Root> {
@@ -18,7 +17,7 @@ interface SegmentGroupProps
    *
    * @default "default"
    */
-  variant?: SegmentGroupVariant;
+  variant?: "default" | "underline";
 }
 
 export const SegmentGroup = (props: SegmentGroupProps) => {
@@ -33,14 +32,15 @@ export const SegmentGroup = (props: SegmentGroupProps) => {
   return (
     <ArkSegmentGroup.Root
       className={cn(
-        "group/segment-group relative",
+        "group/segment-group",
+        "relative",
         "flex gap-2",
         "isolate",
         "data-[orientation=vertical]:flex-col",
         "data-disabled:opacity-64",
-        "data-[variant=underline]:gap-1 data-[variant=underline]:border-input",
+        "data-[variant=underline]:border-input data-[variant=underline]:gap-1",
         "data-[orientation=horizontal]:data-[variant=underline]:border-b",
-        "data-[orientation=vertical]:data-[variant=underline]:border-l",
+        "data-[orientation=vertical]:data-[variant=underline]:border-s",
         className
       )}
       data-slot="segment-group"
@@ -64,10 +64,15 @@ export const SegmentGroupItem = (
     <ArkSegmentGroup.Item
       className={cn(
         "relative",
+        buttonControlVariants(),
+        "h-8",
+        "gap-2",
+        "px-[calc(--spacing(3)-1px)]",
         "cursor-pointer",
         "data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
         "rounded-[inherit] border border-transparent",
-        "outline-none data-focus-visible:border-primary data-focus-visible:ring-[3px] data-focus-visible:ring-ring/32",
+        "outline-hidden",
+        "data-focus-visible:border-ring/64 data-focus-visible:ring-ring/24 data-focus-visible:ring-2",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
         className
       )}
@@ -76,7 +81,8 @@ export const SegmentGroupItem = (
     >
       {children}
 
-      <ArkSegmentGroup.ItemControl />
+      <ArkSegmentGroup.ItemControl className="hidden" />
+
       <ArkSegmentGroup.ItemHiddenInput />
     </ArkSegmentGroup.Item>
   );
@@ -108,7 +114,7 @@ export const SegmentGroupIndicator = (
         "h-(--height) w-(--width)",
         "rounded-[inherit]",
         "bg-input",
-        "transition-[width,height,left,top] duration-150 ease-out",
+        "transition-[width,height,left,top] duration-150 ease-in-out",
         "[transition-property:var(--transition-property,width,height,left,top)]",
         "group-data-[variant=underline]/segment-group:bg-primary",
         "data-[orientation=horizontal]:group-data-[variant=underline]/segment-group:top-[calc(var(--top)+var(--height)-1px)]",
@@ -116,7 +122,7 @@ export const SegmentGroupIndicator = (
         "data-[orientation=vertical]:group-data-[variant=underline]/segment-group:-translate-x-px",
         "data-[orientation=horizontal]:group-data-[variant=underline]/segment-group:h-0.5",
         "data-[orientation=vertical]:group-data-[variant=underline]/segment-group:w-0.5",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="segment-group-indicator"

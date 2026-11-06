@@ -1,0 +1,157 @@
+"use client";
+
+import {
+  CalendarCheckIcon,
+  CalendarClockIcon,
+  ChevronDownIcon,
+  ClockArrowUpIcon,
+  FileIcon,
+  ImageIcon,
+  ListIcon,
+  PaperclipIcon,
+  SmileIcon,
+  Undo2Icon,
+  WandSparklesIcon,
+} from "lucide-react";
+import type React from "react";
+import { Button } from "@/registry/react/components/button";
+import { ButtonGroup } from "@/registry/react/components/button-group";
+import {
+  Menu,
+  MenuContent,
+  MenuList,
+  MenuGroup,
+  MenuItem,
+  MenuTrigger,
+} from "@/registry/react/components/menu";
+import { MailToolbarButton } from "./mail-toolbar-button";
+
+interface ComposeMenuItem {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+}
+
+const TEMPLATE_ITEMS: ComposeMenuItem[] = [
+  {
+    icon: <ListIcon aria-hidden="true" />,
+    label: "Follow-up",
+    value: "follow-up",
+  },
+  {
+    icon: <ListIcon aria-hidden="true" />,
+    label: "Introduction",
+    value: "intro",
+  },
+  {
+    icon: <ListIcon aria-hidden="true" />,
+    label: "Meeting notes",
+    value: "notes",
+  },
+];
+
+const ATTACHMENT_ITEMS: ComposeMenuItem[] = [
+  {
+    icon: <FileIcon aria-hidden="true" />,
+    label: "Attach file",
+    value: "file",
+  },
+  {
+    icon: <ImageIcon aria-hidden="true" />,
+    label: "Insert image",
+    value: "image",
+  },
+];
+
+const SEND_ITEMS: ComposeMenuItem[] = [
+  {
+    icon: <ClockArrowUpIcon aria-hidden="true" />,
+    label: "Send now",
+    value: "now",
+  },
+  {
+    icon: <CalendarClockIcon aria-hidden="true" />,
+    label: "Schedule send",
+    value: "schedule",
+  },
+  {
+    icon: <CalendarCheckIcon aria-hidden="true" />,
+    label: "Send when I'm next free",
+    value: "later",
+  },
+];
+
+interface ComposeMenuProps {
+  icon: React.ReactNode;
+  items: readonly ComposeMenuItem[];
+  label: string;
+}
+
+const ComposeMenu = (props: ComposeMenuProps) => {
+  const { icon, items, label } = props;
+
+  return (
+    <Menu positioning={{ placement: "bottom-start" }}>
+      <MenuTrigger asChild>
+        <Button aria-label={label} size="sm" variant="outline">
+          {icon}
+          <ChevronDownIcon aria-hidden="true" />
+        </Button>
+      </MenuTrigger>
+      <MenuContent className="min-w-44">
+        <MenuList>
+          <MenuGroup>
+            {items.map((item) => (
+              <MenuItem key={item.value} value={item.value}>
+                {item.icon}
+                {item.label}
+              </MenuItem>
+            ))}
+          </MenuGroup>
+
+        </MenuList>
+      </MenuContent>
+    </Menu>
+  );
+};
+
+export const MailComposeTools = () => (
+  <ButtonGroup aria-label="Compose tools" className="min-w-0 shrink-0">
+    <ButtonGroup aria-label="Writing tools">
+      <MailToolbarButton label="Undo">
+        <Undo2Icon aria-hidden="true" />
+      </MailToolbarButton>
+      <MailToolbarButton label="Formatting">
+        <span
+          aria-hidden="true"
+          className="text-[0.625rem] leading-none font-medium"
+        >
+          Aa
+        </span>
+      </MailToolbarButton>
+      <MailToolbarButton label="Emoji">
+        <SmileIcon aria-hidden="true" />
+      </MailToolbarButton>
+      <MailToolbarButton label="Write with AI">
+        <WandSparklesIcon aria-hidden="true" />
+      </MailToolbarButton>
+    </ButtonGroup>
+    <ButtonGroup aria-label="Insert">
+      <ComposeMenu
+        icon={<ListIcon aria-hidden="true" />}
+        items={TEMPLATE_ITEMS}
+        label="Templates"
+      />
+      <ComposeMenu
+        icon={<PaperclipIcon aria-hidden="true" />}
+        items={ATTACHMENT_ITEMS}
+        label="Attach"
+      />
+      <ComposeMenu
+        icon={<ClockArrowUpIcon aria-hidden="true" />}
+        items={SEND_ITEMS}
+        label="Send options"
+      />
+    </ButtonGroup>
+  </ButtonGroup>
+);
