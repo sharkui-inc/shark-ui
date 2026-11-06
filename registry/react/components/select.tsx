@@ -373,9 +373,9 @@ export const SelectClearTrigger = (
 export const SelectEmpty = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
 
-  const { collection } = useSelectContext();
+  const { empty } = useSelectContext();
 
-  if (collection.size === 0) {
+  if (empty) {
     return (
       <ark.div
         className={cn(menuEmptyVariants(), className)}
