@@ -35,6 +35,7 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuSeparator,
@@ -95,12 +96,15 @@ const DataTableDemo = () => {
             </Button>
           </MenuTrigger>
           <MenuContent>
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => (
-                <ColumnVisibilityItem column={column} key={column.id} />
-              ))}
+            <MenuList>
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => (
+                  <ColumnVisibilityItem column={column} key={column.id} />
+                ))}
+
+            </MenuList>
           </MenuContent>
         </Menu>
       </div>
@@ -302,17 +306,20 @@ const PaymentActions = (props: PaymentActionsProps) => {
         </Button>
       </MenuTrigger>
       <MenuContent>
-        <MenuGroup heading="Actions">
-          <MenuItem
-            onClick={() => navigator.clipboard.writeText(payment.id)}
-            value="copy-payment-id"
-          >
-            Copy payment ID
-          </MenuItem>
-          <MenuSeparator />
-          <MenuItem value="view-customer">View customer</MenuItem>
-          <MenuItem value="view-payment-details">View payment details</MenuItem>
-        </MenuGroup>
+        <MenuList>
+          <MenuGroup heading="Actions">
+            <MenuItem
+              onClick={() => navigator.clipboard.writeText(payment.id)}
+              value="copy-payment-id"
+            >
+              Copy payment ID
+            </MenuItem>
+            <MenuSeparator />
+            <MenuItem value="view-customer">View customer</MenuItem>
+            <MenuItem value="view-payment-details">View payment details</MenuItem>
+          </MenuGroup>
+
+        </MenuList>
       </MenuContent>
     </Menu>
   );

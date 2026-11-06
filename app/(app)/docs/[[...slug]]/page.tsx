@@ -9,9 +9,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DocsCopyPage } from "@/components/layout/docs-copy-page";
 import { DocsTableOfContents } from "@/components/layout/docs-toc";
+import { DocsViewDebug } from "@/components/layout/docs-view-debug";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getDocSeo } from "@/lib/doc-aliases";
 import { source } from "@/lib/fumadocs";
+import { humanizeSlug } from "@/lib/humanize-slug";
 import {
   getBreadcrumbJsonLd,
   getChangelogTechArticleJsonLd,
@@ -30,9 +32,6 @@ export const dynamic = "force-static";
 export const dynamicParams = false;
 
 export const generateStaticParams = () => source.generateParams();
-
-const humanizeSlug = (slug: string) =>
-  slug.replaceAll("-", " ").replace(/\b\w/gu, (letter) => letter.toUpperCase());
 
 export const generateMetadata = async (
   props: PageProps<"/docs/[[...slug]]">
@@ -148,7 +147,10 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                         {page.data.title}
                       </h1>
                       {!isIndexPage && (
-                        <DocsCopyPage data={rawContent} url={page.url} />
+                        <div className="flex items-center gap-2">
+                          <DocsCopyPage data={rawContent} url={page.url} />
+                          <DocsViewDebug slugs={page.slugs} />
+                        </div>
                       )}
                     </div>
 

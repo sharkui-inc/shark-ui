@@ -44,7 +44,7 @@ const ChartRadialStacked = () => {
       </CardHeader>
       <CardContent className="flex flex-1 items-center pb-0">
         <ChartContainer
-          className="mx-auto aspect-square w-full max-w-[250px]"
+          className="mx-auto aspect-square w-full max-w-62.5"
           config={chartConfig}
         >
           <RadialBarChart

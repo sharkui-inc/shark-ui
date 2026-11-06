@@ -13,6 +13,7 @@ import { DiffStats } from "@/registry/react/components/diff";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuSeparator,
@@ -51,42 +52,45 @@ const EnvironmentMenu = () => (
       </Button>
     </MenuTrigger>
     <MenuContent className="min-w-80">
-      <MenuGroup heading="Environment">
-        <MenuItem value="changes">
-          <GitBranchIcon aria-hidden="true" />
-          <span className="min-w-0 flex-1">Changes</span>
-          <DiffStats added={78_040} removed={14_605} />
-        </MenuItem>
-        <MenuItem value="local">
-          <MonitorIcon aria-hidden="true" />
-          <span>Local</span>
-        </MenuItem>
-        <MenuItem value="branch">
-          <GitBranchIcon aria-hidden="true" />
-          <span>feat/new-components</span>
-        </MenuItem>
-        <MenuItem value="commit">
-          <GitBranchIcon aria-hidden="true" />
-          <span>Commit or push</span>
-        </MenuItem>
-        <MenuItem value="pull-request">
-          <GitPullRequestIcon aria-hidden="true" />
-          <span>Create pull request</span>
-        </MenuItem>
-      </MenuGroup>
-      <MenuSeparator />
-      <MenuGroup heading="Sources">
-        {environmentSources.map((source) => (
-          <MenuItem key={source} value={source}>
-            <FileIcon aria-hidden="true" />
-            <span className="truncate">{source}</span>
+      <MenuList>
+        <MenuGroup heading="Environment">
+          <MenuItem value="changes">
+            <GitBranchIcon aria-hidden="true" />
+            <span className="min-w-0 flex-1">Changes</span>
+            <DiffStats added={78_040} removed={14_605} />
           </MenuItem>
-        ))}
-        <MenuItem value="view-all">
-          <GitBranchIcon aria-hidden="true" />
-          <span>View all</span>
-        </MenuItem>
-      </MenuGroup>
+          <MenuItem value="local">
+            <MonitorIcon aria-hidden="true" />
+            <span>Local</span>
+          </MenuItem>
+          <MenuItem value="branch">
+            <GitBranchIcon aria-hidden="true" />
+            <span>feat/new-components</span>
+          </MenuItem>
+          <MenuItem value="commit">
+            <GitBranchIcon aria-hidden="true" />
+            <span>Commit or push</span>
+          </MenuItem>
+          <MenuItem value="pull-request">
+            <GitPullRequestIcon aria-hidden="true" />
+            <span>Create pull request</span>
+          </MenuItem>
+        </MenuGroup>
+        <MenuSeparator />
+        <MenuGroup heading="Sources">
+          {environmentSources.map((source) => (
+            <MenuItem key={source} value={source}>
+              <FileIcon aria-hidden="true" />
+              <span className="truncate">{source}</span>
+            </MenuItem>
+          ))}
+          <MenuItem value="view-all">
+            <GitBranchIcon aria-hidden="true" />
+            <span>View all</span>
+          </MenuItem>
+        </MenuGroup>
+
+      </MenuList>
     </MenuContent>
   </Menu>
 );

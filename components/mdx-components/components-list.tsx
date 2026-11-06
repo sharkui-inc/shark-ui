@@ -108,6 +108,7 @@ import { TooltipThumb } from "@/components/thumbs/tooltip";
 import { TourThumb } from "@/components/thumbs/tour";
 import { TreeViewThumb } from "@/components/thumbs/tree-view";
 import { source } from "@/lib/fumadocs";
+import { humanizeSlug } from "@/lib/humanize-slug";
 import { cn } from "@/lib/utils";
 
 const THUMB_MAP: Record<string, React.ComponentType<ThumbCardProps>> = {
@@ -251,7 +252,7 @@ export const ComponentsList = (props: ComponentsListProps) => {
               }
 
               const page = source.getNodePage(item);
-              const title = page?.data.title ?? slug;
+              const title = page?.data.title ?? humanizeSlug(slug);
               const description = page?.data.description ?? "";
 
               return (

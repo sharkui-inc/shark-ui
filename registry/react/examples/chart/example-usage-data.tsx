@@ -9,7 +9,7 @@ import {
 } from "@/registry/react/components/chart";
 
 const Example = () => (
-  <ChartContainer className="h-[240px] w-full max-w-sm" config={chartConfig}>
+  <ChartContainer className="h-60 w-full max-w-sm" config={chartConfig}>
     <AreaChart accessibilityLayer data={chartData}>
       <CartesianGrid vertical={false} />
       <XAxis axisLine={false} dataKey="month" tickLine={false} />

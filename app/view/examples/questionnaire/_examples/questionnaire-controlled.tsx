@@ -51,7 +51,7 @@ const QuestionnaireControlled = () => {
   return (
     <div className="relative mx-auto flex h-full w-full max-w-md flex-col">
       <p
-        className="text-muted-foreground absolute end-0 top-0 text-sm"
+        className="text-muted-foreground absolute inset-e-0 top-0 text-sm"
         role="status"
       >
         Current checkpoint: {itemLabels[item]}

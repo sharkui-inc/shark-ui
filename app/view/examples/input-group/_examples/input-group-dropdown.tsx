@@ -12,6 +12,7 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -27,11 +28,13 @@ const InputGroupDropdown = () => (
             </InputGroupButton>
           </MenuTrigger>
           <MenuContent className="min-w-40">
-            <MenuGroup>
-              <MenuItem value="settings">Settings</MenuItem>
-              <MenuItem value="copy-path">Copy path</MenuItem>
-              <MenuItem value="open-location">Open location</MenuItem>
-            </MenuGroup>
+            <MenuList>
+              <MenuGroup>
+                <MenuItem value="settings">Settings</MenuItem>
+                <MenuItem value="copy-path">Copy path</MenuItem>
+                <MenuItem value="open-location">Open location</MenuItem>
+              </MenuGroup>
+            </MenuList>
           </MenuContent>
         </Menu>
       </InputGroupAddon>
@@ -48,11 +51,13 @@ const InputGroupDropdown = () => (
             </InputGroupButton>
           </MenuTrigger>
           <MenuContent className="min-w-40">
-            <MenuGroup>
-              <MenuItem value="documentation">Documentation</MenuItem>
-              <MenuItem value="blog-posts">Blog Posts</MenuItem>
-              <MenuItem value="changelog">Changelog</MenuItem>
-            </MenuGroup>
+            <MenuList>
+              <MenuGroup>
+                <MenuItem value="documentation">Documentation</MenuItem>
+                <MenuItem value="blog-posts">Blog Posts</MenuItem>
+                <MenuItem value="changelog">Changelog</MenuItem>
+              </MenuGroup>
+            </MenuList>
           </MenuContent>
         </Menu>
       </InputGroupAddon>

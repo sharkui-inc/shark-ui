@@ -29,6 +29,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -137,8 +138,11 @@ const EmployeeActions = (props: EmployeeActionsProps) => {
         </Button>
       </MenuTrigger>
       <MenuContent>
-        <MenuItem value="view-profile">View profile</MenuItem>
-        <MenuItem value="message">Send message</MenuItem>
+        <MenuList>
+          <MenuItem value="view-profile">View profile</MenuItem>
+          <MenuItem value="message">Send message</MenuItem>
+
+        </MenuList>
       </MenuContent>
     </Menu>
   );

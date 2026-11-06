@@ -47,7 +47,12 @@ export const Table = (props: TableProps) => {
 
   return (
     <div
-      className={cn("relative", "w-full", "overflow-auto")}
+      className={cn(
+        "relative",
+        "w-full",
+        "overflow-auto",
+        "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent"
+      )}
       data-slot="table-wrapper"
     >
       <ark.table

@@ -4,6 +4,7 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuShortcut,
   MenuTrigger,
@@ -15,17 +16,20 @@ const Example = () => (
       <Button variant="outline">Open</Button>
     </MenuTrigger>
     <MenuContent className="min-w-40">
-      <MenuItem asChild value="docs">
-        <a href="#">
-          External link
-          <MenuShortcut className="hidden sm:inline-flex">
-            <ArrowUpRightIcon />
-          </MenuShortcut>
-        </a>
-      </MenuItem>
-      <MenuItem asChild value="components">
-        <Link href="#">View docs</Link>
-      </MenuItem>
+      <MenuList>
+        <MenuItem asChild value="docs">
+          <a href="#">
+            External link
+            <MenuShortcut className="hidden sm:inline-flex">
+              <ArrowUpRightIcon />
+            </MenuShortcut>
+          </a>
+        </MenuItem>
+        <MenuItem asChild value="components">
+          <Link href="#">View docs</Link>
+        </MenuItem>
+
+      </MenuList>
     </MenuContent>
   </Menu>
 );

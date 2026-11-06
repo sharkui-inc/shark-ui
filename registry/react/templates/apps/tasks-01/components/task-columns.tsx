@@ -18,6 +18,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -99,25 +100,28 @@ export const TaskRowMenu = (props: TaskTableActions & { task: Task }) => {
         </Button>
       </MenuTrigger>
       <MenuContent>
-        <MenuItem onClick={() => onEdit(task)} value={`edit-${task.id}`}>
-          <PencilIcon aria-hidden="true" />
-          Edit task
-        </MenuItem>
-        <MenuItem
-          onClick={() => onDuplicate(task)}
-          value={`duplicate-${task.id}`}
-        >
-          <CopyIcon aria-hidden="true" />
-          Duplicate task
-        </MenuItem>
-        <MenuItem
-          onClick={() => onDelete(task)}
-          value={`delete-${task.id}`}
-          variant="destructive"
-        >
-          <Trash2Icon aria-hidden="true" />
-          Delete task
-        </MenuItem>
+        <MenuList>
+          <MenuItem onClick={() => onEdit(task)} value={`edit-${task.id}`}>
+            <PencilIcon aria-hidden="true" />
+            Edit task
+          </MenuItem>
+          <MenuItem
+            onClick={() => onDuplicate(task)}
+            value={`duplicate-${task.id}`}
+          >
+            <CopyIcon aria-hidden="true" />
+            Duplicate task
+          </MenuItem>
+          <MenuItem
+            onClick={() => onDelete(task)}
+            value={`delete-${task.id}`}
+            variant="destructive"
+          >
+            <Trash2Icon aria-hidden="true" />
+            Delete task
+          </MenuItem>
+
+        </MenuList>
       </MenuContent>
     </Menu>
   );

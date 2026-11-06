@@ -23,6 +23,7 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import {
@@ -87,15 +88,17 @@ const InputGroupWithTooltip = () => {
                 </InputGroupButton>
               </MenuTrigger>
               <MenuContent className="min-w-16">
-                <MenuItem onClick={() => setCountry("+1")} value="+1">
-                  +1
-                </MenuItem>
-                <MenuItem onClick={() => setCountry("+44")} value="+44">
-                  +44
-                </MenuItem>
-                <MenuItem onClick={() => setCountry("+46")} value="+46">
-                  +46
-                </MenuItem>
+                <MenuList>
+                  <MenuItem onClick={() => setCountry("+1")} value="+1">
+                    +1
+                  </MenuItem>
+                  <MenuItem onClick={() => setCountry("+44")} value="+44">
+                    +44
+                  </MenuItem>
+                  <MenuItem onClick={() => setCountry("+46")} value="+46">
+                    +46
+                  </MenuItem>
+                </MenuList>
               </MenuContent>
             </Menu>
           </InputGroupAddon>

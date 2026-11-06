@@ -66,7 +66,7 @@ const BlockPage = async (props: BlockPageParams) => {
   return (
     <SkipNavContent>
       <React.Suspense
-        fallback={<Skeleton className="container h-[900px] w-full" />}
+        fallback={<Skeleton className="container h-225 w-full" />}
       >
         <BlocksBrowser
           activeBlockName={item.name}

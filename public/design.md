@@ -130,7 +130,7 @@ Motion is tactile, contained, and local to the owning component.
 | Live Ark geometry | `duration-150 ease-in-out` only for documented geometry exceptions. |
 | Drawer | Ark swipe variables; panel `duration-300 ease-out`; backdrop `duration-[450ms] ease-out`. |
 
-Anchored overlays use `origin-(--transform-origin)`, 98% scale, fade, and placement-aware travel. Centered dialogs and coordinate-positioned panels use `origin-center`. Compose all motion from local Tailwind and `tw-animate-css` utilities.
+List overlays (Menu, Combobox, Autocomplete, Select, ColorPicker, DatePicker) have no exit animation — see `CODE_STYLE.md`. Other anchored overlays (Popover, Tooltip, HoverCard, and similar) use `origin-(--transform-origin)`, 98% scale, fade, and placement-aware travel. Centered dialogs and coordinate-positioned panels use `origin-center`. Compose all motion from local Tailwind and `tw-animate-css` utilities.
 
 Do not add interface keyframes, shared duration tokens, or shared easing curves to `styles/globals.css`. Do not use `transition-all`, `ease-in`, `ease-linear`, `scale(0)`, or arbitrary easing functions. Under reduced motion, keep a short fade and remove travel, scale, rotation, and blur. Gate hover transforms behind fine-pointer and hover capability.
 

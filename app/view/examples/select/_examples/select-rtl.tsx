@@ -6,6 +6,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -16,13 +17,15 @@ const SelectRtl = () => (
       <SelectValue placeholder="اختر فاكهة" />
     </SelectTrigger>
     <SelectContent>
-      <SelectGroup heading="الفواكه">
-        {collection.items.map((item) => (
-          <SelectItem item={item} key={item}>
-            {item}
-          </SelectItem>
-        ))}
-      </SelectGroup>
+      <SelectList>
+        <SelectGroup heading="الفواكه">
+          {collection.items.map((item) => (
+            <SelectItem item={item} key={item}>
+              {item}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectList>
     </SelectContent>
   </Select>
 );

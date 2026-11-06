@@ -54,7 +54,7 @@ export const CompositionCodeViewer = (props: CompositionCodeViewerProps) => {
 
   return (
     <div
-      className="bg-background text-foreground grid min-h-[32rem] overflow-hidden lg:grid-cols-[13.75rem_minmax(0,1fr)]"
+      className="bg-background text-foreground grid min-h-128 overflow-hidden lg:grid-cols-[13.75rem_minmax(0,1fr)]"
       data-slot="composition-code-viewer"
     >
       <aside className="border-border hidden min-h-0 border-e lg:flex lg:flex-col">
@@ -73,7 +73,7 @@ export const CompositionCodeViewer = (props: CompositionCodeViewerProps) => {
         </ScrollArea>
       </aside>
 
-      <div className="flex min-h-[32rem] min-w-0 flex-col">
+      <div className="flex min-h-128 min-w-0 flex-col">
         <header className="border-border flex h-10 shrink-0 items-center gap-2 border-b px-3">
           <Sheet
             onOpenChange={({ open }) => setSheetOpen(open)}

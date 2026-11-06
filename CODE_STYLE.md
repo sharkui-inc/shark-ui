@@ -23,12 +23,13 @@ Conflict order: explicit user or system instructions → `biome.json` → this f
 - `flex` / `grid` + `gap-*` (not `space-x-*` / `space-y-*`). `size-*` for squares and icons. `truncate`.
 - Overlay stacking stays on the backdrop or positioner that defines the layer. No local `z-index`.
 - Lucide: `Icon` export (`ArchiveIcon`). Size with Tailwind, never numeric `size`. Decorative: `aria-hidden="true"`. Keep a semantic icon exposed unless equivalent text exists.
-- Logical utils (`ms-*`, `me-*`, `ps-*`, `pe-*`, `start-*`, `end-*`) and `slide-*-from-start|end`. Inherit `dir`. Physical direction only for explicit LTR, visual coordinates, or non-reading-order geometry.
+- Logical utils (`ms-*`, `me-*`, `ps-*`, `pe-*`, `inset-s-*`, `inset-e-*`) and `slide-*-from-start|end`. Prefer Tailwind canonical forms (`inset-s-0` not `start-0`, `bg-linear-to-*` not `bg-gradient-to-*`, important as `util!` not `!util`, `**:data-*` for deep descendants). Inherit `dir`. Physical direction only for explicit LTR, visual coordinates, or non-reading-order geometry.
 
 ## Motion
 
 - Duration and easing live with the animation, not in `styles/globals.css`.
 - Enter/exit uses `data-[state=open|closed]`.
+- List overlays (Menu, Combobox, Autocomplete, Select, ColorPicker, DatePicker): no close animation. Never `data-[state=closed]:animate-out` / closed fade / closed zoom. Unmount must be instant.
 - Reduced motion uses the `motion-reduce:` prefix. A bare `data-[state=open|closed]:animate-none` disables motion for everyone.
 - No `transition-all`.
 - Gate hover transforms with `(hover: hover)` and `(pointer: fine)`.

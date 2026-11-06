@@ -6,7 +6,7 @@ import {
 const Example = () => (
   <NativeSelect
     aria-label="Select an option"
-    className="min-w-[180px]"
+    className="min-w-45"
     size="sm"
   >
     <NativeSelectOption value="">Select an option</NativeSelectOption>

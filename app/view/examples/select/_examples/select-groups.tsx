@@ -6,6 +6,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectList,
   SelectSeparator,
   SelectTrigger,
   SelectValue,
@@ -35,25 +36,27 @@ const SelectGroups = () => (
     defaultValue={["banana"]}
     positioning={{ fitViewport: true }}
   >
-    <SelectTrigger className="w-[200px]">
+    <SelectTrigger className="w-50">
       <SelectValue placeholder="Select a fruit or vegetable" />
     </SelectTrigger>
     <SelectContent>
-      <SelectGroup heading={grouped[0][0]}>
-        {grouped[0][1].map((item) => (
-          <SelectItem item={item} key={item.value}>
-            {item.label}
-          </SelectItem>
-        ))}
-      </SelectGroup>
-      <SelectSeparator />
-      <SelectGroup heading={grouped[1][0]}>
-        {grouped[1][1].map((item) => (
-          <SelectItem item={item} key={item.value}>
-            {item.label}
-          </SelectItem>
-        ))}
-      </SelectGroup>
+      <SelectList>
+        <SelectGroup heading={grouped[0][0]}>
+          {grouped[0][1].map((item) => (
+            <SelectItem item={item} key={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+        <SelectSeparator />
+        <SelectGroup heading={grouped[1][0]}>
+          {grouped[1][1].map((item) => (
+            <SelectItem item={item} key={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectList>
     </SelectContent>
   </Select>
 );

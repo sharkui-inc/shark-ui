@@ -7,6 +7,7 @@ import ExampleCustomDelimiter from "@/registry/react/examples/tags-input/example
 import ExampleDefault from "@/registry/react/examples/tags-input/example-default";
 import ExampleDisableEditing from "@/registry/react/examples/tags-input/example-disable-editing";
 import ExampleDisabled from "@/registry/react/examples/tags-input/example-disabled";
+import ExampleForm from "@/registry/react/examples/tags-input/example-form";
 import ExampleInvalid from "@/registry/react/examples/tags-input/example-invalid";
 import ExampleMaxLength from "@/registry/react/examples/tags-input/example-max-length";
 import ExampleMaxTags from "@/registry/react/examples/tags-input/example-max-tags";
@@ -18,7 +19,8 @@ import ExampleSizeLg from "@/registry/react/examples/tags-input/example-size-lg"
 import ExampleSizeMd from "@/registry/react/examples/tags-input/example-size-md";
 import ExampleSizeSm from "@/registry/react/examples/tags-input/example-size-sm";
 import ExampleValidation from "@/registry/react/examples/tags-input/example-validation";
-import ExampleField from "@/registry/react/examples/tags-input/example-with-field";
+import ExampleWithClearButton from "@/registry/react/examples/tags-input/example-with-clear-button";
+import ExampleWithField from "@/registry/react/examples/tags-input/example-with-field";
 
 const TagsInputExamplePage = () => (
   <PreviewLocaleProvider>
@@ -34,7 +36,7 @@ const TagsInputExamplePage = () => (
           >
             Default
           </h1>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleDefault />
           </div>
         </section>
@@ -62,8 +64,22 @@ const TagsInputExamplePage = () => (
           >
             Combobox
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleCombobox />
+          </div>
+        </section>
+        <section
+          aria-labelledby="controlled-input-value-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="controlled-input-value-heading"
+          >
+            Controlled Input Value
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleControlledInputValue />
           </div>
         </section>
         <section
@@ -78,20 +94,6 @@ const TagsInputExamplePage = () => (
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleControlled />
-          </div>
-        </section>
-        <section
-          aria-labelledby="input-value-heading"
-          className="flex flex-col gap-5"
-        >
-          <h2
-            className="text-muted-foreground font-medium"
-            id="input-value-heading"
-          >
-            Input Value
-          </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
-            <ExampleControlledInputValue />
           </div>
         </section>
         <section
@@ -118,7 +120,7 @@ const TagsInputExamplePage = () => (
           >
             Disable Editing
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleDisableEditing />
           </div>
         </section>
@@ -136,15 +138,12 @@ const TagsInputExamplePage = () => (
             <ExampleDisabled />
           </div>
         </section>
-        <section
-          aria-labelledby="field-heading"
-          className="flex flex-col gap-5"
-        >
-          <h2 className="text-muted-foreground font-medium" id="field-heading">
-            Field
+        <section aria-labelledby="form-heading" className="flex flex-col gap-5">
+          <h2 className="text-muted-foreground font-medium" id="form-heading">
+            Form
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
-            <ExampleField />
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleForm />
           </div>
         </section>
         <section
@@ -171,7 +170,7 @@ const TagsInputExamplePage = () => (
           >
             Max Length
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleMaxLength />
           </div>
         </section>
@@ -199,7 +198,7 @@ const TagsInputExamplePage = () => (
           >
             Max With Overflow
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleMaxWithOverflow />
           </div>
         </section>
@@ -235,7 +234,7 @@ const TagsInputExamplePage = () => (
           >
             Sanitize Value
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSanitizeValue />
           </div>
         </section>
@@ -263,7 +262,7 @@ const TagsInputExamplePage = () => (
           >
             Size MD
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSizeMd />
           </div>
         </section>
@@ -291,8 +290,36 @@ const TagsInputExamplePage = () => (
           >
             Validation
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleValidation />
+          </div>
+        </section>
+        <section
+          aria-labelledby="with-clear-button-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="with-clear-button-heading"
+          >
+            With Clear Button
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleWithClearButton />
+          </div>
+        </section>
+        <section
+          aria-labelledby="with-field-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="with-field-heading"
+          >
+            With Field
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleWithField />
           </div>
         </section>
       </div>

@@ -20,6 +20,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -325,9 +326,12 @@ export const SnippetSelect = (props: SnippetSelectProps) => {
           </InputGroupButton>
         </MenuTrigger>
         <MenuContent className="min-w-40">
-          {items.map((item) => (
-            <SnippetMenuItem item={item} key={item.value} />
-          ))}
+          <MenuList>
+            {items.map((item) => (
+              <SnippetMenuItem item={item} key={item.value} />
+            ))}
+
+          </MenuList>
         </MenuContent>
       </Menu>
       <span aria-hidden="true" className="bg-border h-4 w-px shrink-0" />

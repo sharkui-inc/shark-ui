@@ -29,7 +29,7 @@ const Example = () => {
 
   return (
     <ChartContainer
-      className="min-h-[200px] w-full max-w-sm"
+      className="min-h-50 w-full max-w-sm"
       config={chartConfig}
     >
       <BarChart accessibilityLayer data={chartData}>

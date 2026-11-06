@@ -75,7 +75,7 @@ export const ComponentPreviewFrame = (props: ComponentPreviewFrameProps) => {
         <TabsTrigger value="code">Code</TabsTrigger>
       </TabsList>
 
-      <div className="group/stage relative min-h-[450px] overflow-hidden rounded-2xl border">
+      <div className="group/stage relative min-h-112.5 overflow-hidden rounded-2xl border">
         <TabsContent className="m-0" data-slot="tab-preview" value="preview">
           <div
             className={cn("relative w-full", "bg-code flex flex-col")}
@@ -85,7 +85,7 @@ export const ComponentPreviewFrame = (props: ComponentPreviewFrameProps) => {
             <div
               className={cn(
                 "relative",
-                autoHeight ? "min-h-[450px]" : "h-[450px] min-h-0",
+                autoHeight ? "min-h-112.5" : "h-112.5 min-h-0",
                 "flex items-center justify-center",
                 autoHeight ? "px-4 py-8 sm:px-10 sm:py-16" : "p-4 sm:p-10",
                 "overflow-y-auto"

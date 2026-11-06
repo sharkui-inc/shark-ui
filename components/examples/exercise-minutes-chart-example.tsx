@@ -80,7 +80,7 @@ export const ExerciseMinutesChartExample = (
         </CardAction>
       </CardHeader>
       <CardContent>
-        <ChartContainer className="w-full md:h-[200px]" config={chartConfig}>
+        <ChartContainer className="w-full md:h-50" config={chartConfig}>
           <LineChart
             accessibilityLayer={false}
             data={data}

@@ -27,7 +27,7 @@ const Example = () => {
         <ListboxContent className="bg-muted overflow-visible rounded-2xl">
           {collection.items.map((item) => (
             <ListboxItem
-              className="hover:bg-accent/64 data-[selected]:border-input data-[selected]:bg-background relative flex w-full flex-row items-center gap-3 rounded-xl border border-transparent bg-transparent px-3 py-3 text-start transition-[background-color,border-color,box-shadow] duration-150 ease-out data-[selected]:shadow-xs/4"
+              className="hover:bg-accent/64 data-selected:border-input data-selected:bg-background relative flex w-full flex-row items-center gap-3 rounded-xl border border-transparent bg-transparent px-3 py-3 text-start transition-[background-color,border-color,box-shadow] duration-150 ease-out data-selected:shadow-xs/4"
               data-selected={value.includes(item.value) || undefined}
               item={item}
               key={item.value}

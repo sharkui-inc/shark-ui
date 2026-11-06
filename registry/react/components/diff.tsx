@@ -196,11 +196,11 @@ const diffLineVariants = tv({
       "text-muted-foreground whitespace-pre",
     ],
     gutter: [
-      "sticky start-0 z-1",
+      "sticky inset-s-0 z-1",
       "w-full min-w-0",
       "flex items-center",
       "bg-card",
-      "before:pointer-events-none before:absolute before:inset-y-0 before:start-0 before:w-0.75 before:content-['']",
+      "before:pointer-events-none before:absolute before:inset-y-0 before:inset-s-0 before:w-0.75 before:content-['']",
     ],
     number: [
       "w-full",

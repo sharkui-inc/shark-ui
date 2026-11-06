@@ -20,6 +20,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -100,34 +101,37 @@ const ChartPieInteractive = () => {
         >
           <SelectTrigger
             aria-label="Select a value"
-            className="ms-auto h-7 w-[130px] rounded-lg ps-2.5"
+            className="ms-auto h-7 w-32.5 rounded-lg ps-2.5"
           >
             <SelectValue placeholder="Select month" />
           </SelectTrigger>
           <SelectContent className="rounded-xl">
-            {monthCollection.items.map((item) => (
-              <SelectItem
-                className="[&_span]:flex"
-                item={item}
-                key={item.value}
-              >
-                <div className="flex items-center gap-2 text-xs">
-                  <span
-                    className="flex size-3 shrink-0 rounded-xs"
-                    style={{
-                      backgroundColor: `var(--color-${item.value})`,
-                    }}
-                  />
-                  {item.label}
-                </div>
-              </SelectItem>
-            ))}
+            <SelectList>
+              {monthCollection.items.map((item) => (
+                <SelectItem
+                  className="[&_span]:flex"
+                  item={item}
+                  key={item.value}
+                >
+                  <div className="flex items-center gap-2 text-xs">
+                    <span
+                      className="flex size-3 shrink-0 rounded-xs"
+                      style={{
+                        backgroundColor: `var(--color-${item.value})`,
+                      }}
+                    />
+                    {item.label}
+                  </div>
+                </SelectItem>
+              ))}
+
+            </SelectList>
           </SelectContent>
         </Select>
       </CardHeader>
       <CardContent className="flex flex-1 justify-center pb-0">
         <ChartContainer
-          className="mx-auto aspect-square w-full max-w-[300px]"
+          className="mx-auto aspect-square w-full max-w-75"
           config={chartConfig}
           id={id}
         >

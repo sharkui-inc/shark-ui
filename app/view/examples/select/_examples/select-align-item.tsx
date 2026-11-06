@@ -6,6 +6,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -33,17 +34,19 @@ const SelectAlignItem = () => {
         defaultValue={["banana"]}
         positioning={{ fitViewport: true }}
       >
-        <SelectTrigger className="w-[240px]">
+        <SelectTrigger className="w-60">
           <SelectValue />
         </SelectTrigger>
         <SelectContent
           data-align-item={alignItemWithTrigger ? "true" : undefined}
         >
-          {items.map((item) => (
-            <SelectItem item={item} key={item.value}>
-              {item.label}
-            </SelectItem>
-          ))}
+          <SelectList>
+            {items.map((item) => (
+              <SelectItem item={item} key={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
+          </SelectList>
         </SelectContent>
       </Select>
     </div>

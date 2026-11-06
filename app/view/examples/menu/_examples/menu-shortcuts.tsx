@@ -4,6 +4,7 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuShortcut,
   MenuTrigger,
@@ -15,25 +16,27 @@ const MenuShortcuts = () => (
       <Button variant="outline">Open</Button>
     </MenuTrigger>
     <MenuContent>
-      <MenuGroup heading="My Account">
-        <MenuItem value="profile">
-          Profile
-          <MenuShortcut>⇧⌘P</MenuShortcut>
+      <MenuList>
+        <MenuGroup heading="My Account">
+          <MenuItem value="profile">
+            Profile
+            <MenuShortcut>⇧⌘P</MenuShortcut>
+          </MenuItem>
+          <MenuItem value="billing">
+            Billing
+            <MenuShortcut>⌘B</MenuShortcut>
+          </MenuItem>
+          <MenuItem value="settings">
+            Settings
+            <MenuShortcut>⌘S</MenuShortcut>
+          </MenuItem>
+        </MenuGroup>
+        <MenuSeparator />
+        <MenuItem value="logout">
+          Log out
+          <MenuShortcut>⇧⌘Q</MenuShortcut>
         </MenuItem>
-        <MenuItem value="billing">
-          Billing
-          <MenuShortcut>⌘B</MenuShortcut>
-        </MenuItem>
-        <MenuItem value="settings">
-          Settings
-          <MenuShortcut>⌘S</MenuShortcut>
-        </MenuItem>
-      </MenuGroup>
-      <MenuSeparator />
-      <MenuItem value="logout">
-        Log out
-        <MenuShortcut>⇧⌘Q</MenuShortcut>
-      </MenuItem>
+      </MenuList>
     </MenuContent>
   </Menu>
 );

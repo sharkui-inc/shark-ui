@@ -10,6 +10,7 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuQuickItem,
@@ -23,35 +24,38 @@ const Example = () => (
       <Button variant="outline">Open</Button>
     </MenuTrigger>
     <MenuContent className="min-w-44">
-      <MenuGroup heading="Actions">
-        <MenuItem value="edit">
-          <PencilIcon />
-          Edit
-        </MenuItem>
-        <MenuItem value="add-action">
-          <RotateCwIcon />
-          Add Action
-        </MenuItem>
-        <MenuItem value="key-point">
-          <HandIcon />
-          Key Point
-        </MenuItem>
-        <MenuItem value="comment">
-          <MessageCircleIcon />
-          Comment
-        </MenuItem>
-      </MenuGroup>
-      <MenuSeparator />
-      <div className="flex w-full gap-1">
-        <MenuQuickItem className="min-w-0 flex-1" value="copy">
-          <CopyIcon />
-          Copy
-        </MenuQuickItem>
-        <MenuQuickItem className="min-w-0 flex-1" value="share">
-          <ShareIcon />
-          Share
-        </MenuQuickItem>
-      </div>
+      <MenuList>
+        <MenuGroup heading="Actions">
+          <MenuItem value="edit">
+            <PencilIcon />
+            Edit
+          </MenuItem>
+          <MenuItem value="add-action">
+            <RotateCwIcon />
+            Add Action
+          </MenuItem>
+          <MenuItem value="key-point">
+            <HandIcon />
+            Key Point
+          </MenuItem>
+          <MenuItem value="comment">
+            <MessageCircleIcon />
+            Comment
+          </MenuItem>
+        </MenuGroup>
+        <MenuSeparator />
+        <div className="flex w-full gap-1">
+          <MenuQuickItem className="min-w-0 flex-1" value="copy">
+            <CopyIcon />
+            Copy
+          </MenuQuickItem>
+          <MenuQuickItem className="min-w-0 flex-1" value="share">
+            <ShareIcon />
+            Share
+          </MenuQuickItem>
+        </div>
+
+      </MenuList>
     </MenuContent>
   </Menu>
 );

@@ -21,6 +21,7 @@ import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuSeparator,
   MenuShortcut,
@@ -111,31 +112,34 @@ export const DashboardSidebar = () => {
                   </SidebarMenuButton>
                 </MenuTrigger>
                 <MenuContent className="w-(--reference-width)">
-                  <MenuItem value="profile">
-                    <UserRoundIcon aria-hidden="true" />
-                    Profile
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => setSettingsOpen(true)}
-                    value="settings"
-                  >
-                    <SettingsIcon aria-hidden="true" />
-                    Settings
-                  </MenuItem>
-                  <MenuItem value="keyboard-shortcuts">
-                    <KeyboardIcon aria-hidden="true" />
-                    Keyboard shortcuts
-                    <MenuShortcut>⌘/</MenuShortcut>
-                  </MenuItem>
-                  <MenuItem value="help-center">
-                    <CircleHelpIcon aria-hidden="true" />
-                    Help center
-                  </MenuItem>
-                  <MenuSeparator />
-                  <MenuItem value="sign-out" variant="destructive">
-                    <LogOutIcon aria-hidden="true" />
-                    Sign out
-                  </MenuItem>
+                  <MenuList>
+                    <MenuItem value="profile">
+                      <UserRoundIcon aria-hidden="true" />
+                      Profile
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => setSettingsOpen(true)}
+                      value="settings"
+                    >
+                      <SettingsIcon aria-hidden="true" />
+                      Settings
+                    </MenuItem>
+                    <MenuItem value="keyboard-shortcuts">
+                      <KeyboardIcon aria-hidden="true" />
+                      Keyboard shortcuts
+                      <MenuShortcut>⌘/</MenuShortcut>
+                    </MenuItem>
+                    <MenuItem value="help-center">
+                      <CircleHelpIcon aria-hidden="true" />
+                      Help center
+                    </MenuItem>
+                    <MenuSeparator />
+                    <MenuItem value="sign-out" variant="destructive">
+                      <LogOutIcon aria-hidden="true" />
+                      Sign out
+                    </MenuItem>
+
+                  </MenuList>
                 </MenuContent>
               </Menu>
             </SidebarMenuItem>

@@ -51,7 +51,7 @@ export const ComponentResizer = (props: ComponentResizerProps) => {
   return (
     <figure
       className={cn(
-        "bg-card h-[600px] w-full gap-4 overflow-hidden rounded-md border",
+        "bg-card h-150 w-full gap-4 overflow-hidden rounded-md border",
         className
       )}
       {...rest}

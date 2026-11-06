@@ -14,6 +14,7 @@ import {
   MenuGroupLabel,
   MenuItem,
   MenuItemDescription,
+  MenuList,
   MenuQuickItem,
   MenuRadioGroup,
   MenuRadioItem,
@@ -26,9 +27,17 @@ import {
 
 export const useContextMenuContext = useArkMenuContext;
 
-export const ContextMenu = (props: React.ComponentProps<typeof Menu>) => (
-  <Menu data-slot="context-menu" {...props} />
-);
+export const ContextMenu = (props: React.ComponentProps<typeof Menu>) => {
+  const { positioning, ...rest } = props;
+
+  return (
+    <Menu
+      data-slot="context-menu"
+      positioning={{ strategy: "fixed", ...positioning }}
+      {...rest}
+    />
+  );
+};
 
 export const ContextMenuTrigger = (
   props: React.ComponentProps<typeof ArkMenu.ContextTrigger>
@@ -60,6 +69,10 @@ export const ContextMenuContent = (
     />
   );
 };
+
+export const ContextMenuList = (
+  props: React.ComponentProps<typeof MenuList>
+) => <MenuList data-slot="context-menu-list" {...props} />;
 
 export const ContextMenuGroup = (
   props: React.ComponentProps<typeof MenuGroup>

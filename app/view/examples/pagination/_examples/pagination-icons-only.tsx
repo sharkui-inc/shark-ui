@@ -12,6 +12,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -34,13 +35,15 @@ const PaginationIconsOnly = () => (
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectGroup>
-            {rowsPerPage.items.map((item) => (
-              <SelectItem item={item} key={item.value}>
-                {item.label}
-              </SelectItem>
-            ))}
-          </SelectGroup>
+          <SelectList>
+            <SelectGroup>
+              {rowsPerPage.items.map((item) => (
+                <SelectItem item={item} key={item.value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectList>
         </SelectContent>
       </Select>
     </Field>

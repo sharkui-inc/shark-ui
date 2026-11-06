@@ -21,6 +21,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -177,22 +178,25 @@ const ChartAreaInteractive = () => {
         >
           <SelectTrigger
             aria-label="Select a value"
-            className="hidden w-[160px] rounded-lg sm:ml-auto sm:flex"
+            className="hidden w-40 rounded-lg sm:ml-auto sm:flex"
           >
             <SelectValue placeholder="Last 3 months" />
           </SelectTrigger>
           <SelectContent className="rounded-xl">
-            {timeRangeCollection.items.map((item) => (
-              <SelectItem item={item} key={item.value}>
-                {item.label}
-              </SelectItem>
-            ))}
+            <SelectList>
+              {timeRangeCollection.items.map((item) => (
+                <SelectItem item={item} key={item.value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+
+            </SelectList>
           </SelectContent>
         </Select>
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
         <ChartContainer
-          className="aspect-auto h-[250px] w-full"
+          className="aspect-auto h-62.5 w-full"
           config={chartConfig}
         >
           <AreaChart data={filteredData}>

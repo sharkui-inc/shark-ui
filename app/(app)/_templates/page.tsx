@@ -33,7 +33,7 @@ const TemplatesPage = async () => {
       <main>
         <section className="overflow-hidden border-b">
           <div className="container px-0">
-            <div className="flex min-h-[calc(100svh-var(--header-height)-5rem)] flex-col items-center justify-center border-x px-4 py-16 text-center sm:min-h-[42rem] sm:px-8 sm:py-20 lg:min-h-[46rem]">
+            <div className="flex min-h-[calc(100svh-var(--header-height)-5rem)] flex-col items-center justify-center border-x px-4 py-16 text-center sm:min-h-168 sm:px-8 sm:py-20 lg:min-h-184">
               <h1
                 aria-label="Start with a complete product, not a blank page."
                 className="font-heading max-w-5xl text-5xl leading-[0.98] font-semibold tracking-[-0.04em] text-balance sm:text-6xl lg:text-7xl xl:text-8xl"
@@ -82,7 +82,7 @@ const TemplatesPage = async () => {
             <div className="flex flex-col gap-16">
               {templates.map((item) => (
                 <React.Suspense
-                  fallback={<Skeleton className="h-[820px] w-full" />}
+                  fallback={<Skeleton className="h-205 w-full" />}
                   key={item.name}
                 >
                   <CompositionViewer

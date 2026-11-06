@@ -4,6 +4,7 @@ import {
   ContextMenuGroup,
   ContextMenuItem,
   ContextMenuTrigger,
+  ContextMenuList,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuSides = () => (
@@ -18,11 +19,13 @@ const ContextMenuSides = () => (
         </span>
       </ContextMenuTrigger>
       <ContextMenuContent>
-        <ContextMenuGroup>
-          <ContextMenuItem value="back">Back</ContextMenuItem>
-          <ContextMenuItem value="forward">Forward</ContextMenuItem>
-          <ContextMenuItem value="reload">Reload</ContextMenuItem>
-        </ContextMenuGroup>
+        <ContextMenuList>
+          <ContextMenuGroup>
+            <ContextMenuItem value="back">Back</ContextMenuItem>
+            <ContextMenuItem value="forward">Forward</ContextMenuItem>
+            <ContextMenuItem value="reload">Reload</ContextMenuItem>
+          </ContextMenuGroup>
+        </ContextMenuList>
       </ContextMenuContent>
     </ContextMenu>
     <ContextMenu positioning={{ placement: "right" }}>
@@ -35,11 +38,13 @@ const ContextMenuSides = () => (
         </span>
       </ContextMenuTrigger>
       <ContextMenuContent>
-        <ContextMenuGroup>
-          <ContextMenuItem value="back">Back</ContextMenuItem>
-          <ContextMenuItem value="forward">Forward</ContextMenuItem>
-          <ContextMenuItem value="reload">Reload</ContextMenuItem>
-        </ContextMenuGroup>
+        <ContextMenuList>
+          <ContextMenuGroup>
+            <ContextMenuItem value="back">Back</ContextMenuItem>
+            <ContextMenuItem value="forward">Forward</ContextMenuItem>
+            <ContextMenuItem value="reload">Reload</ContextMenuItem>
+          </ContextMenuGroup>
+        </ContextMenuList>
       </ContextMenuContent>
     </ContextMenu>
     <ContextMenu positioning={{ placement: "bottom" }}>
@@ -52,11 +57,13 @@ const ContextMenuSides = () => (
         </span>
       </ContextMenuTrigger>
       <ContextMenuContent>
-        <ContextMenuGroup>
-          <ContextMenuItem value="back">Back</ContextMenuItem>
-          <ContextMenuItem value="forward">Forward</ContextMenuItem>
-          <ContextMenuItem value="reload">Reload</ContextMenuItem>
-        </ContextMenuGroup>
+        <ContextMenuList>
+          <ContextMenuGroup>
+            <ContextMenuItem value="back">Back</ContextMenuItem>
+            <ContextMenuItem value="forward">Forward</ContextMenuItem>
+            <ContextMenuItem value="reload">Reload</ContextMenuItem>
+          </ContextMenuGroup>
+        </ContextMenuList>
       </ContextMenuContent>
     </ContextMenu>
     <ContextMenu positioning={{ placement: "left" }}>
@@ -69,11 +76,13 @@ const ContextMenuSides = () => (
         </span>
       </ContextMenuTrigger>
       <ContextMenuContent>
-        <ContextMenuGroup>
-          <ContextMenuItem value="back">Back</ContextMenuItem>
-          <ContextMenuItem value="forward">Forward</ContextMenuItem>
-          <ContextMenuItem value="reload">Reload</ContextMenuItem>
-        </ContextMenuGroup>
+        <ContextMenuList>
+          <ContextMenuGroup>
+            <ContextMenuItem value="back">Back</ContextMenuItem>
+            <ContextMenuItem value="forward">Forward</ContextMenuItem>
+            <ContextMenuItem value="reload">Reload</ContextMenuItem>
+          </ContextMenuGroup>
+        </ContextMenuList>
       </ContextMenuContent>
     </ContextMenu>
   </div>

@@ -12,6 +12,7 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuSeparator,
@@ -54,25 +55,28 @@ const Example = () => {
         ))}
       </div>
       <MenuContent className="min-w-40">
-        <MenuGroup heading={activeMessage?.sender ?? "Actions"}>
-          <MenuItem value="reply">
-            <ReplyIcon />
-            Reply
-          </MenuItem>
-          <MenuItem value="forward">
-            <SendIcon />
-            Forward
-          </MenuItem>
-          <MenuItem value="archive">
-            <ArchiveIcon />
-            Archive
-          </MenuItem>
-          <MenuSeparator />
-          <MenuItem value="delete" variant="destructive">
-            <Trash2Icon />
-            Delete
-          </MenuItem>
-        </MenuGroup>
+        <MenuList>
+          <MenuGroup heading={activeMessage?.sender ?? "Actions"}>
+            <MenuItem value="reply">
+              <ReplyIcon />
+              Reply
+            </MenuItem>
+            <MenuItem value="forward">
+              <SendIcon />
+              Forward
+            </MenuItem>
+            <MenuItem value="archive">
+              <ArchiveIcon />
+              Archive
+            </MenuItem>
+            <MenuSeparator />
+            <MenuItem value="delete" variant="destructive">
+              <Trash2Icon />
+              Delete
+            </MenuItem>
+          </MenuGroup>
+
+        </MenuList>
       </MenuContent>
     </Menu>
   );

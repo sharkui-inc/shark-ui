@@ -50,7 +50,7 @@ const ChartRadarMultiple = () => (
     </CardHeader>
     <CardContent className="pb-0">
       <ChartContainer
-        className="mx-auto aspect-square max-h-[250px]"
+        className="mx-auto aspect-square max-h-62.5"
         config={chartConfig}
       >
         <RadarChart data={chartData}>

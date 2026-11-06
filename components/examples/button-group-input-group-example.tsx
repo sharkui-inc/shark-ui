@@ -11,6 +11,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -60,22 +61,25 @@ export const ButtonGroupInputGroupExample = () => {
             </InputGroupButton>
           </MenuTrigger>
           <MenuContent>
-            <MenuItem value="add-new-item">
-              <PlusIcon />
-              Upload file
-            </MenuItem>
-            <MenuItem value="upload-image">
-              <ImageIcon />
-              Upload image
-            </MenuItem>
-            <MenuItem value="upload-video">
-              <VideoIcon />
-              Upload video
-            </MenuItem>
-            <MenuItem value="upload-audio">
-              <AudioLinesIcon />
-              Upload audio
-            </MenuItem>
+            <MenuList>
+              <MenuItem value="add-new-item">
+                <PlusIcon />
+                Upload file
+              </MenuItem>
+              <MenuItem value="upload-image">
+                <ImageIcon />
+                Upload image
+              </MenuItem>
+              <MenuItem value="upload-video">
+                <VideoIcon />
+                Upload video
+              </MenuItem>
+              <MenuItem value="upload-audio">
+                <AudioLinesIcon />
+                Upload audio
+              </MenuItem>
+
+            </MenuList>
           </MenuContent>
         </InputGroupAddon>
       </Menu>

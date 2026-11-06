@@ -10,6 +10,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -23,7 +24,7 @@ const items = [
 const collection = createListCollection({ items });
 
 const SelectInvalid = () => (
-  <Field className="w-[180px]" invalid>
+  <Field className="w-45" invalid>
     <FieldLabel>Fruits</FieldLabel>
     <Select
       collection={collection}
@@ -35,11 +36,13 @@ const SelectInvalid = () => (
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        {items.map((item) => (
-          <SelectItem item={item} key={item.value}>
-            {item.label}
-          </SelectItem>
-        ))}
+        <SelectList>
+          {items.map((item) => (
+            <SelectItem item={item} key={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
+        </SelectList>
       </SelectContent>
     </Select>
     <FieldDescription>Select a fruit to continue.</FieldDescription>

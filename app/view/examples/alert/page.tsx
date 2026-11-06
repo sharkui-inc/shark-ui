@@ -1,94 +1,156 @@
-import AlertBasic from "./_examples/alert-basic";
-import AlertCustomColor from "./_examples/alert-custom-color";
-import AlertRtl from "./_examples/alert-rtl";
-import AlertVariantDefault from "./_examples/alert-variant-default";
-import AlertVariantDestructive from "./_examples/alert-variant-destructive";
-import AlertVariantInfo from "./_examples/alert-variant-info";
-import AlertVariantSuccess from "./_examples/alert-variant-success";
-import AlertVariantWarning from "./_examples/alert-variant-warning";
-import AlertWithAction from "./_examples/alert-with-action";
-import AlertWithIcon from "./_examples/alert-with-icon";
+import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
+import ExampleCustomColor from "@/registry/react/examples/alert/example-custom-color";
+import ExampleDefault from "@/registry/react/examples/alert/example-default";
+import ExampleRtl from "@/registry/react/examples/alert/example-rtl";
+import ExampleVariantDefault from "@/registry/react/examples/alert/example-variant-default";
+import ExampleVariantDestructive from "@/registry/react/examples/alert/example-variant-destructive";
+import ExampleVariantInfo from "@/registry/react/examples/alert/example-variant-info";
+import ExampleVariantSuccess from "@/registry/react/examples/alert/example-variant-success";
+import ExampleVariantWarning from "@/registry/react/examples/alert/example-variant-warning";
+import ExampleWithAction from "@/registry/react/examples/alert/example-with-action";
+import ExampleWithIcon from "@/registry/react/examples/alert/example-with-icon";
 
 const AlertExamplePage = () => (
-  <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
-    <section aria-labelledby="basic-heading" className="flex flex-col gap-5">
-      <h1 className="text-muted-foreground font-medium" id="basic-heading">
-        Basic
-      </h1>
-      <div className="bg-muted rounded-3xl p-6 sm:p-10">
-        <AlertBasic />
+  <PreviewLocaleProvider>
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
+      <div className="grid min-w-0 grid-cols-1 gap-16 sm:grid-cols-2 [&>section]:min-w-0">
+        <section
+          aria-labelledby="default-heading"
+          className="flex flex-col gap-5"
+        >
+          <h1
+            className="text-muted-foreground font-medium"
+            id="default-heading"
+          >
+            Default
+          </h1>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleDefault />
+          </div>
+        </section>
+        <section
+          aria-labelledby="custom-color-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="custom-color-heading"
+          >
+            Custom Color
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleCustomColor />
+          </div>
+        </section>
+        <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
+          <h2 className="text-muted-foreground font-medium" id="rtl-heading">
+            RTL
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleRtl />
+          </div>
+        </section>
+        <section
+          aria-labelledby="variant-default-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="variant-default-heading"
+          >
+            Variant Default
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleVariantDefault />
+          </div>
+        </section>
+        <section
+          aria-labelledby="variant-destructive-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="variant-destructive-heading"
+          >
+            Variant Destructive
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleVariantDestructive />
+          </div>
+        </section>
+        <section
+          aria-labelledby="variant-info-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="variant-info-heading"
+          >
+            Variant Info
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleVariantInfo />
+          </div>
+        </section>
+        <section
+          aria-labelledby="variant-success-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="variant-success-heading"
+          >
+            Variant Success
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleVariantSuccess />
+          </div>
+        </section>
+        <section
+          aria-labelledby="variant-warning-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="variant-warning-heading"
+          >
+            Variant Warning
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleVariantWarning />
+          </div>
+        </section>
+        <section
+          aria-labelledby="with-action-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="with-action-heading"
+          >
+            With Action
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleWithAction />
+          </div>
+        </section>
+        <section
+          aria-labelledby="with-icon-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="with-icon-heading"
+          >
+            With Icon
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleWithIcon />
+          </div>
+        </section>
       </div>
-    </section>
-
-    <section aria-labelledby="icon-heading" className="flex flex-col gap-5">
-      <h2 className="text-muted-foreground font-medium" id="icon-heading">
-        With Icon
-      </h2>
-      <div className="bg-card rounded-3xl border p-6 sm:p-10">
-        <AlertWithIcon />
-      </div>
-    </section>
-
-    <section
-      aria-labelledby="destructive-heading"
-      className="flex flex-col gap-5"
-    >
-      <h2
-        className="text-muted-foreground font-medium"
-        id="destructive-heading"
-      >
-        Destructive
-      </h2>
-      <div className="bg-muted rounded-3xl p-6 sm:p-10">
-        <AlertVariantDestructive />
-      </div>
-    </section>
-
-    <section aria-labelledby="action-heading" className="flex flex-col gap-5">
-      <h2 className="text-muted-foreground font-medium" id="action-heading">
-        With Action
-      </h2>
-      <div className="bg-card rounded-3xl border p-6 sm:p-10">
-        <AlertWithAction />
-      </div>
-    </section>
-
-    <section aria-labelledby="variants-heading" className="flex flex-col gap-5">
-      <h2 className="text-muted-foreground font-medium" id="variants-heading">
-        Variants
-      </h2>
-      <div className="bg-muted flex flex-col gap-4 rounded-3xl p-6 sm:p-10">
-        <AlertVariantDefault />
-        <AlertVariantInfo />
-        <AlertVariantWarning />
-        <AlertVariantSuccess />
-      </div>
-    </section>
-
-    <section
-      aria-labelledby="custom-color-heading"
-      className="flex flex-col gap-5"
-    >
-      <h2
-        className="text-muted-foreground font-medium"
-        id="custom-color-heading"
-      >
-        Custom Color
-      </h2>
-      <div className="bg-card rounded-3xl border p-6 sm:p-10">
-        <AlertCustomColor />
-      </div>
-    </section>
-
-    <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
-      <h2 className="text-muted-foreground font-medium" id="rtl-heading">
-        RTL
-      </h2>
-      <div className="bg-muted rounded-3xl p-6 sm:p-10">
-        <AlertRtl />
-      </div>
-    </section>
-  </div>
+    </div>
+  </PreviewLocaleProvider>
 );
 
 export default AlertExamplePage;

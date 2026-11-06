@@ -57,19 +57,21 @@ npx shadcn@latest add @shark/menu
 Menu
 ├── MenuTrigger
 └── MenuContent
-    ├── MenuGroup
-    │   └── MenuGroupLabel
-    ├── MenuItem
-    ├── MenuItemDescription
-    ├── MenuQuickItem
-    ├── MenuCheckboxItem
-    ├── MenuRadioGroup
-    │   └── MenuRadioItem
-    ├── MenuSub
-    │   ├── MenuSubTrigger
-    │   └── MenuSubContent
-    ├── MenuSeparator
-    └── MenuShortcut
+    └── MenuList
+        ├── MenuGroup
+        │   └── MenuGroupLabel
+        ├── MenuItem
+        ├── MenuItemDescription
+        ├── MenuQuickItem
+        ├── MenuCheckboxItem
+        ├── MenuRadioGroup
+        │   └── MenuRadioItem
+        ├── MenuSub
+        │   ├── MenuSubTrigger
+        │   └── MenuSubContent
+        │       └── MenuList
+        ├── MenuSeparator
+        └── MenuShortcut
 ```
 
 ## Usage
@@ -79,6 +81,7 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuQuickItem,
@@ -97,22 +100,26 @@ import {
 <Menu>
   <MenuTrigger />
   <MenuContent>
-    <MenuItemGroup>
-      <MenuItemGroupLabel />
-      <MenuItem />
-      <MenuSub>
-        <MenuSubTrigger />
-        <MenuSubContent>
-          <MenuItem />
-        </MenuSubContent>
-      </MenuSub>
-      <MenuSeparator />
+    <MenuList>
       <MenuItemGroup>
-        <MenuRadioItem />
+        <MenuItemGroupLabel />
+        <MenuItem />
+        <MenuSub>
+          <MenuSubTrigger />
+          <MenuSubContent>
+            <MenuList>
+              <MenuItem />
+            </MenuList>
+          </MenuSubContent>
+        </MenuSub>
+        <MenuSeparator />
+        <MenuItemGroup>
+          <MenuRadioItem />
+        </MenuItemGroup>
+        <MenuSeparator />
+        <MenuCheckboxItem />
       </MenuItemGroup>
-      <MenuSeparator />
-      <MenuCheckboxItem />
-    </MenuItemGroup>
+    </MenuList>
   </MenuContent>
 </Menu>
 ```
@@ -270,6 +277,15 @@ Positions the menu content relative to its trigger.
 ### MenuContent
 
 Holds menu options. Displayed in a portal, positioned relative to the trigger.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
+### MenuList
+
+Scrollable list of options inside `MenuContent` or `MenuSubContent`.
 
 | Prop | Type | Default |
 | --- | --- | --- |

@@ -12,6 +12,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuSeparator,
@@ -35,19 +36,22 @@ const Example = () => (
         </MenuTrigger>
       </MessageBubble>
       <MenuContent className="min-w-48">
-        <MenuGroup>
-          {actions.map((action) => (
-            <MenuItem key={action.value} value={action.value}>
-              <action.icon aria-hidden="true" />
-              {action.label}
+        <MenuList>
+          <MenuGroup>
+            {actions.map((action) => (
+              <MenuItem key={action.value} value={action.value}>
+                <action.icon aria-hidden="true" />
+                {action.label}
+              </MenuItem>
+            ))}
+            <MenuSeparator />
+            <MenuItem value="delete" variant="destructive">
+              <Trash2Icon aria-hidden="true" />
+              Delete
             </MenuItem>
-          ))}
-          <MenuSeparator />
-          <MenuItem value="delete" variant="destructive">
-            <Trash2Icon aria-hidden="true" />
-            Delete
-          </MenuItem>
-        </MenuGroup>
+          </MenuGroup>
+
+        </MenuList>
       </MenuContent>
     </Menu>
   </div>

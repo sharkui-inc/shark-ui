@@ -245,7 +245,7 @@ const ChartTooltipItem = (props: ChartTooltipItemProps) => {
         className={cn(
           "shrink-0",
           "bg-(--color-bg)",
-          "rounded-sm border-(--color-border)",
+          "rounded-sm border-border",
           {
             "my-0.5": nestLabel && indicator === "dashed",
             "size-2.5": indicator === "dot",

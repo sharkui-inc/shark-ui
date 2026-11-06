@@ -74,7 +74,7 @@ const ChartTooltipFormatter = () => (
             content={
               <ChartTooltipContent
                 formatter={(value, name) => (
-                  <div className="text-muted-foreground flex min-w-[130px] items-center text-xs">
+                  <div className="text-muted-foreground flex min-w-32.5 items-center text-xs">
                     {chartConfig[name as keyof typeof chartConfig]?.label ||
                       name}
                     <div className="text-foreground ms-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums">

@@ -322,7 +322,7 @@
   }
 
   body {
-    @apply relative bg-background min-h-svh text-foreground flex flex-col scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20 font-sans;
+    @apply relative bg-background min-h-svh text-foreground flex flex-col scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/24 font-sans;
   }
 
   main {
@@ -336,5 +336,5 @@
 }
 
 @utility container {
-  @apply mx-auto max-w-[1400px] px-4;
+  @apply mx-auto max-w-350 px-4;
 }

@@ -85,6 +85,7 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import {
@@ -147,6 +148,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -753,12 +755,14 @@ const ChatSession = (props: ChatSessionProps) => {
                   </PromptInputButton>
                 </MenuTrigger>
                 <MenuContent className="min-w-52">
-                  {promptActions.map((action) => (
-                    <MenuItem key={action.value} value={action.value}>
-                      {action.icon}
-                      {action.label}
-                    </MenuItem>
-                  ))}
+                  <MenuList>
+                    {promptActions.map((action) => (
+                      <MenuItem key={action.value} value={action.value}>
+                        {action.icon}
+                        {action.label}
+                      </MenuItem>
+                    ))}
+                  </MenuList>
                 </MenuContent>
               </Menu>
               <Select
@@ -772,16 +776,18 @@ const ChatSession = (props: ChatSessionProps) => {
                   <SelectValue placeholder="Full access" />
                 </SelectTrigger>
                 <SelectContent>
-                  {accessCollection.items.map((item) => (
-                    <SelectItem item={item} key={item.value}>
-                      <span className="flex min-w-0 flex-col gap-0.5">
-                        <span>{item.label}</span>
-                        <span className="text-muted-foreground text-xs">
-                          {item.description}
+                  <SelectList>
+                    {accessCollection.items.map((item) => (
+                      <SelectItem item={item} key={item.value}>
+                        <span className="flex min-w-0 flex-col gap-0.5">
+                          <span>{item.label}</span>
+                          <span className="text-muted-foreground text-xs">
+                            {item.description}
+                          </span>
                         </span>
-                      </span>
-                    </SelectItem>
-                  ))}
+                      </SelectItem>
+                    ))}
+                  </SelectList>
                 </SelectContent>
               </Select>
             </PromptInputTools>
@@ -817,11 +823,13 @@ const ChatSession = (props: ChatSessionProps) => {
                 <SelectValue placeholder="Medium" />
               </SelectTrigger>
               <SelectContent>
-                {effortCollection.items.map((item) => (
-                  <SelectItem item={item} key={item.value}>
-                    {item.label}
-                  </SelectItem>
-                ))}
+                <SelectList>
+                  {effortCollection.items.map((item) => (
+                    <SelectItem item={item} key={item.value}>
+                      {item.label}
+                    </SelectItem>
+                  ))}
+                </SelectList>
               </SelectContent>
             </Select>
             <PromptInputButton aria-label="Voice input" size="icon-sm">

@@ -6,7 +6,7 @@ import {
 
 const ResizableHandle = () => (
   <Resizable
-    className="min-h-[200px] max-w-sm rounded-lg border"
+    className="min-h-50 max-w-sm rounded-lg border"
     defaultSize={[25, 75]}
     panels={[
       { id: "1", minSize: 10 },

@@ -39,6 +39,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectGroup,
   SelectItem,
   SelectTrigger,
@@ -141,13 +142,16 @@ export const TeamMembersCardExample = (props: React.ComponentProps<"div">) => {
                           <SelectValue placeholder="Select a role" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectGroup heading="Role">
-                            {collection.items.map((role) => (
-                              <SelectItem item={role} key={role.value}>
-                                {role.value}
-                              </SelectItem>
-                            ))}
-                          </SelectGroup>
+                          <SelectList>
+                            <SelectGroup heading="Role">
+                              {collection.items.map((role) => (
+                                <SelectItem item={role} key={role.value}>
+                                  {role.value}
+                                </SelectItem>
+                              ))}
+                            </SelectGroup>
+
+                          </SelectList>
                         </SelectContent>
                       </Select>
                     </Field>
@@ -187,18 +191,21 @@ export const TeamMembersCardExample = (props: React.ComponentProps<"div">) => {
                 </SelectTrigger>
 
                 <SelectContent>
-                  <SelectGroup heading="Role">
-                    {collection.items.map((role) => (
-                      <SelectItem item={role} key={role.value}>
-                        <div className="flex flex-col">
-                          <p className="text-sm font-medium">{role.value}</p>
-                          <p className="text-muted-foreground">
-                            {role.description}
-                          </p>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
+                  <SelectList>
+                    <SelectGroup heading="Role">
+                      {collection.items.map((role) => (
+                        <SelectItem item={role} key={role.value}>
+                          <div className="flex flex-col">
+                            <p className="text-sm font-medium">{role.value}</p>
+                            <p className="text-muted-foreground">
+                              {role.description}
+                            </p>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+
+                  </SelectList>
                 </SelectContent>
               </Select>
             </ItemActions>

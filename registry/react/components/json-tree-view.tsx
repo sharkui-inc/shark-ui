@@ -30,6 +30,7 @@ export const JsonTreeView = (props: JsonTreeViewProps) => {
         "text-foreground font-mono text-xs leading-6",
         "rounded-xl border shadow-xs/4",
         "overflow-x-auto",
+        "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
         "**:data-[part=branch-content]:relative",
         "**:data-[part=branch-indent-guide]:bg-border/64 **:data-[part=branch-indent-guide]:absolute **:data-[part=branch-indent-guide]:inset-s-[calc((var(--depth)-1)*var(--json-tree-indent)+1.125rem)] **:data-[part=branch-indent-guide]:h-full **:data-[part=branch-indent-guide]:w-px",
         "[&_:is([data-part=branch],[data-part=item]):not(:last-child)]:mb-0.5",

@@ -10,6 +10,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectGroup,
   SelectItem,
   SelectTrigger,
@@ -32,13 +33,16 @@ export const StateSelectExample = (props: React.ComponentProps<"div">) => {
           <SelectValue placeholder="Select a state" />
         </SelectTrigger>
         <SelectContent>
-          <SelectGroup heading="States">
-            {collection.items.map((item) => (
-              <SelectItem item={item} key={item}>
-                {item}
-              </SelectItem>
-            ))}
-          </SelectGroup>
+          <SelectList>
+            <SelectGroup heading="States">
+              {collection.items.map((item) => (
+                <SelectItem item={item} key={item}>
+                  {item}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+
+          </SelectList>
         </SelectContent>
       </Select>
       <FieldDescription>

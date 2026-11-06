@@ -2,6 +2,7 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -16,9 +17,12 @@ const Example = () => (
           </Button>
         </MenuTrigger>
         <MenuContent>
-          <MenuItem value="edit">Edit</MenuItem>
-          <MenuItem value="copy">Copy</MenuItem>
-          <MenuItem value="share">Share</MenuItem>
+          <MenuList>
+            <MenuItem value="edit">Edit</MenuItem>
+            <MenuItem value="copy">Copy</MenuItem>
+            <MenuItem value="share">Share</MenuItem>
+
+          </MenuList>
         </MenuContent>
       </Menu>
     ))}

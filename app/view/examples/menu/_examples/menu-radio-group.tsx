@@ -6,6 +6,7 @@ import {
   Menu,
   MenuContent,
   MenuGroup,
+  MenuList,
   MenuRadioGroup,
   MenuRadioItem,
   MenuTrigger,
@@ -20,16 +21,18 @@ const MenuRadioGroupDemo = () => {
         <Button variant="outline">Open</Button>
       </MenuTrigger>
       <MenuContent>
-        <MenuGroup heading="Panel Position">
-          <MenuRadioGroup
-            onValueChange={({ value }) => setPosition(value)}
-            value={position}
-          >
-            <MenuRadioItem value="top">Top</MenuRadioItem>
-            <MenuRadioItem value="bottom">Bottom</MenuRadioItem>
-            <MenuRadioItem value="right">Right</MenuRadioItem>
-          </MenuRadioGroup>
-        </MenuGroup>
+        <MenuList>
+          <MenuGroup heading="Panel Position">
+            <MenuRadioGroup
+              onValueChange={({ value }) => setPosition(value)}
+              value={position}
+            >
+              <MenuRadioItem value="top">Top</MenuRadioItem>
+              <MenuRadioItem value="bottom">Bottom</MenuRadioItem>
+              <MenuRadioItem value="right">Right</MenuRadioItem>
+            </MenuRadioGroup>
+          </MenuGroup>
+        </MenuList>
       </MenuContent>
     </Menu>
   );

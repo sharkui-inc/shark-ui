@@ -5,6 +5,7 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import {
@@ -36,15 +37,17 @@ const SidebarFooterDemo = () => (
                 </SidebarMenuButton>
               </MenuTrigger>
               <MenuContent className="w-(--reference-width)">
-                <MenuItem value="account">
-                  <span>Account</span>
-                </MenuItem>
-                <MenuItem value="billing">
-                  <span>Billing</span>
-                </MenuItem>
-                <MenuItem value="sign-out">
-                  <span>Sign out</span>
-                </MenuItem>
+                <MenuList>
+                  <MenuItem value="account">
+                    <span>Account</span>
+                  </MenuItem>
+                  <MenuItem value="billing">
+                    <span>Billing</span>
+                  </MenuItem>
+                  <MenuItem value="sign-out">
+                    <span>Sign out</span>
+                  </MenuItem>
+                </MenuList>
               </MenuContent>
             </Menu>
           </SidebarMenuItem>

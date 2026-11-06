@@ -7,6 +7,7 @@ import {
   Menu,
   MenuContent,
   MenuGroup,
+  MenuList,
   MenuRadioGroup,
   MenuRadioItem,
   MenuTrigger,
@@ -21,25 +22,27 @@ const MenuRadioIcons = () => {
         <Button variant="outline">Payment Method</Button>
       </MenuTrigger>
       <MenuContent className="min-w-56">
-        <MenuGroup heading="Select Payment Method">
-          <MenuRadioGroup
-            onValueChange={({ value }) => setPaymentMethod(value)}
-            value={paymentMethod}
-          >
-            <MenuRadioItem value="card">
-              <CreditCardIcon />
-              Credit Card
-            </MenuRadioItem>
-            <MenuRadioItem value="paypal">
-              <WalletIcon />
-              PayPal
-            </MenuRadioItem>
-            <MenuRadioItem value="bank">
-              <Building2Icon />
-              Bank Transfer
-            </MenuRadioItem>
-          </MenuRadioGroup>
-        </MenuGroup>
+        <MenuList>
+          <MenuGroup heading="Select Payment Method">
+            <MenuRadioGroup
+              onValueChange={({ value }) => setPaymentMethod(value)}
+              value={paymentMethod}
+            >
+              <MenuRadioItem value="card">
+                <CreditCardIcon />
+                Credit Card
+              </MenuRadioItem>
+              <MenuRadioItem value="paypal">
+                <WalletIcon />
+                PayPal
+              </MenuRadioItem>
+              <MenuRadioItem value="bank">
+                <Building2Icon />
+                Bank Transfer
+              </MenuRadioItem>
+            </MenuRadioGroup>
+          </MenuGroup>
+        </MenuList>
       </MenuContent>
     </Menu>
   );

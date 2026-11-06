@@ -1,3 +1,4 @@
+import { humanizeSlug } from "@/lib/humanize-slug";
 import type { BlockDefinition } from "@/lib/registry";
 import { registryUrl } from "@/lib/url";
 
@@ -91,29 +92,22 @@ const toggleGroupCharts = new Set([
 
 const CHART_PREFIX_PATTERN = /^chart-/u;
 
-const titleCase = (value: string) =>
-  value.replace(
-    /(?<separator>^|-)(?<letter>[a-z])/gu,
-    (_match, separator: string, letter: string) =>
-      `${separator ? " " : ""}${letter.toUpperCase()}`
-  );
-
 const getChartCopy = (name: string) => {
   const [family = "chart", ...variantParts] = name
     .replace(CHART_PREFIX_PATTERN, "")
     .split("-");
   const variant = variantParts.join("-");
-  const familyTitle = titleCase(family);
+  const familyTitle = humanizeSlug(family);
 
   return {
     description:
       variant === "default"
         ? `A ready-to-use ${family} chart built with Shark UI and Recharts.`
-        : `A ${family} chart example with ${titleCase(variant).toLowerCase()}.`,
+        : `A ${family} chart example with ${humanizeSlug(variant).toLowerCase()}.`,
     title:
       variant === "default"
         ? `${familyTitle} Chart`
-        : `${familyTitle} Chart: ${titleCase(variant)}`,
+        : `${familyTitle} Chart: ${humanizeSlug(variant)}`,
   };
 };
 

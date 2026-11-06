@@ -73,7 +73,7 @@ const EcommerceTemplate = () => (
         <div className="relative max-w-sm flex-1">
           <SearchIcon
             aria-hidden="true"
-            className="text-muted-foreground absolute start-3 top-1/2 size-4 -translate-y-1/2"
+            className="text-muted-foreground absolute inset-s-3 top-1/2 size-4 -translate-y-1/2"
           />
           <Input
             className="ps-9"

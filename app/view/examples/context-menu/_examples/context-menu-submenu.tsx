@@ -9,6 +9,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
+  ContextMenuList,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuSubmenu = () => (
@@ -20,42 +21,48 @@ const ContextMenuSubmenu = () => (
       </span>
     </ContextMenuTrigger>
     <ContextMenuContent>
-      <ContextMenuGroup>
-        <ContextMenuItem value="copy">
-          Copy
-          <ContextMenuShortcut>⌘C</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem value="cut">
-          Cut
-          <ContextMenuShortcut>⌘X</ContextMenuShortcut>
-        </ContextMenuItem>
-      </ContextMenuGroup>
-      <ContextMenuSub>
-        <ContextMenuSubTrigger>More Tools</ContextMenuSubTrigger>
-        <ContextMenuSubContent>
-          <ContextMenuGroup>
-            <ContextMenuItem value="save-page">Save Page...</ContextMenuItem>
-            <ContextMenuItem value="create-shortcut">
-              Create Shortcut...
-            </ContextMenuItem>
-            <ContextMenuItem value="name-window">
-              Name Window...
-            </ContextMenuItem>
-          </ContextMenuGroup>
-          <ContextMenuSeparator />
-          <ContextMenuGroup>
-            <ContextMenuItem value="developer-tools">
-              Developer Tools
-            </ContextMenuItem>
-          </ContextMenuGroup>
-          <ContextMenuSeparator />
-          <ContextMenuGroup>
-            <ContextMenuItem value="delete" variant="destructive">
-              Delete
-            </ContextMenuItem>
-          </ContextMenuGroup>
-        </ContextMenuSubContent>
-      </ContextMenuSub>
+      <ContextMenuList>
+        <ContextMenuGroup>
+          <ContextMenuItem value="copy">
+            Copy
+            <ContextMenuShortcut>⌘C</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem value="cut">
+            Cut
+            <ContextMenuShortcut>⌘X</ContextMenuShortcut>
+          </ContextMenuItem>
+        </ContextMenuGroup>
+        <ContextMenuSub>
+          <ContextMenuSubTrigger>More Tools</ContextMenuSubTrigger>
+          <ContextMenuSubContent>
+            <ContextMenuList>
+              <ContextMenuGroup>
+                <ContextMenuItem value="save-page">
+                  Save Page...
+                </ContextMenuItem>
+                <ContextMenuItem value="create-shortcut">
+                  Create Shortcut...
+                </ContextMenuItem>
+                <ContextMenuItem value="name-window">
+                  Name Window...
+                </ContextMenuItem>
+              </ContextMenuGroup>
+              <ContextMenuSeparator />
+              <ContextMenuGroup>
+                <ContextMenuItem value="developer-tools">
+                  Developer Tools
+                </ContextMenuItem>
+              </ContextMenuGroup>
+              <ContextMenuSeparator />
+              <ContextMenuGroup>
+                <ContextMenuItem value="delete" variant="destructive">
+                  Delete
+                </ContextMenuItem>
+              </ContextMenuGroup>
+            </ContextMenuList>
+          </ContextMenuSubContent>
+        </ContextMenuSub>
+      </ContextMenuList>
     </ContextMenuContent>
   </ContextMenu>
 );

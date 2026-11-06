@@ -6,6 +6,7 @@ import {
   ContextMenuItem,
   ContextMenuSeparator,
   ContextMenuTrigger,
+  ContextMenuList,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuDestructive = () => (
@@ -17,23 +18,25 @@ const ContextMenuDestructive = () => (
       </span>
     </ContextMenuTrigger>
     <ContextMenuContent>
-      <ContextMenuGroup>
-        <ContextMenuItem value="edit">
-          <PencilIcon />
-          Edit
-        </ContextMenuItem>
-        <ContextMenuItem value="share">
-          <ShareIcon />
-          Share
-        </ContextMenuItem>
-      </ContextMenuGroup>
-      <ContextMenuSeparator />
-      <ContextMenuGroup>
-        <ContextMenuItem value="delete" variant="destructive">
-          <TrashIcon />
-          Delete
-        </ContextMenuItem>
-      </ContextMenuGroup>
+      <ContextMenuList>
+        <ContextMenuGroup>
+          <ContextMenuItem value="edit">
+            <PencilIcon />
+            Edit
+          </ContextMenuItem>
+          <ContextMenuItem value="share">
+            <ShareIcon />
+            Share
+          </ContextMenuItem>
+        </ContextMenuGroup>
+        <ContextMenuSeparator />
+        <ContextMenuGroup>
+          <ContextMenuItem value="delete" variant="destructive">
+            <TrashIcon />
+            Delete
+          </ContextMenuItem>
+        </ContextMenuGroup>
+      </ContextMenuList>
     </ContextMenuContent>
   </ContextMenu>
 );

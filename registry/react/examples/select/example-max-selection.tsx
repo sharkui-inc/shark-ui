@@ -10,6 +10,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectContext,
   SelectItem,
   SelectTrigger,
@@ -42,11 +43,14 @@ const Example = () => {
           </SelectValue>
         </SelectTrigger>
         <SelectContent>
-          {collection.items.map((item) => (
-            <SelectItem item={item} key={item.value}>
-              {item.label}
-            </SelectItem>
-          ))}
+          <SelectList>
+            {collection.items.map((item) => (
+              <SelectItem item={item} key={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
+
+          </SelectList>
         </SelectContent>
       </Select>
       <FieldDescription>Select up to 3.</FieldDescription>

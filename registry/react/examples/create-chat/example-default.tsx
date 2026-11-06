@@ -22,6 +22,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -86,7 +87,7 @@ const ChatThread = (props: ChatThreadProps) => {
   const latestText = messages.at(-1)?.content ?? "";
 
   return (
-    <Card className="h-[32rem] w-full gap-0 overflow-hidden rounded-3xl py-0">
+    <Card className="h-128 w-full gap-0 overflow-hidden rounded-3xl py-0">
       <CardHeader
         className="shrink-0 border-b py-4"
         description="Weekend pop-up in Lisbon"
@@ -173,12 +174,15 @@ const ChatThread = (props: ChatThreadProps) => {
                   </PromptInputButton>
                 </MenuTrigger>
                 <MenuContent className="min-w-52">
-                  {promptActions.map((action) => (
-                    <MenuItem key={action.value} value={action.value}>
-                      {action.icon}
-                      {action.label}
-                    </MenuItem>
-                  ))}
+                  <MenuList>
+                    {promptActions.map((action) => (
+                      <MenuItem key={action.value} value={action.value}>
+                        {action.icon}
+                        {action.label}
+                      </MenuItem>
+                    ))}
+
+                  </MenuList>
                 </MenuContent>
               </Menu>
             </PromptInputTools>

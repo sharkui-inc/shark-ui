@@ -92,7 +92,7 @@ const InputGroupTextareaExamples = () => (
       <FieldLabel>Addon (Buttons)</FieldLabel>
       <InputGroup>
         <InputGroupTextarea
-          className="min-h-[120px]"
+          className="min-h-30"
           placeholder="Share your thoughts..."
         />
         <InputGroupAddon align="block-end">
@@ -107,7 +107,7 @@ const InputGroupTextareaExamples = () => (
       <FieldLabel>Code Editor</FieldLabel>
       <InputGroup>
         <InputGroupTextarea
-          className="min-h-[300px] py-3"
+          className="min-h-75 py-3"
           placeholder="console.log('Hello, world!');"
         />
         <InputGroupAddon align="block-start" className="border-b">

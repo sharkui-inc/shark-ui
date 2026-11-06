@@ -11,6 +11,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectList,
   SelectTrigger,
 } from "@/registry/react/components/select";
 
@@ -35,14 +36,16 @@ const ButtonGroupSelectExample = () => {
         >
           <SelectTrigger className="font-mono">{currency}</SelectTrigger>
           <SelectContent>
-            <SelectGroup>
-              {currencies.items.map((item) => (
-                <SelectItem item={item} key={item.value}>
-                  {item.value}{" "}
-                  <span className="text-muted-foreground">{item.label}</span>
-                </SelectItem>
-              ))}
-            </SelectGroup>
+            <SelectList>
+              <SelectGroup>
+                {currencies.items.map((item) => (
+                  <SelectItem item={item} key={item.value}>
+                    {item.value}{" "}
+                    <span className="text-muted-foreground">{item.label}</span>
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectList>
           </SelectContent>
         </Select>
         <Input pattern="[0-9]*" placeholder="10.00" />

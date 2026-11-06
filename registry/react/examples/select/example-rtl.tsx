@@ -5,6 +5,7 @@ import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectGroup,
   SelectItem,
   SelectTrigger,
@@ -25,13 +26,16 @@ const Example = () => {
       </SelectTrigger>
 
       <SelectContent>
-        <SelectGroup heading={values.heading}>
-          {collection.items.map((item) => (
-            <SelectItem item={item} key={item}>
-              {item}
-            </SelectItem>
-          ))}
-        </SelectGroup>
+        <SelectList>
+          <SelectGroup heading={values.heading}>
+            {collection.items.map((item) => (
+              <SelectItem item={item} key={item}>
+                {item}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+
+        </SelectList>
       </SelectContent>
     </Select>
   );

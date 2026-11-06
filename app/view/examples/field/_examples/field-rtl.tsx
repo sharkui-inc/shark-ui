@@ -18,6 +18,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -50,13 +51,15 @@ const FieldRtl = () => (
                     <SelectValue placeholder="ش.ش" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectGroup>
-                      {monthCollection.items.map((item) => (
-                        <SelectItem item={item} key={item.value}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
+                    <SelectList>
+                      <SelectGroup>
+                        {monthCollection.items.map((item) => (
+                          <SelectItem item={item} key={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectList>
                   </SelectContent>
                 </Select>
               </Field>
@@ -67,13 +70,15 @@ const FieldRtl = () => (
                     <SelectValue placeholder="YYYY" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectGroup>
-                      {yearCollection.items.map((item) => (
-                        <SelectItem item={item} key={item.value}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
+                    <SelectList>
+                      <SelectGroup>
+                        {yearCollection.items.map((item) => (
+                          <SelectItem item={item} key={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectList>
                   </SelectContent>
                 </Select>
               </Field>

@@ -4,6 +4,7 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -14,17 +15,19 @@ const MenuBasic = () => (
       <Button variant="outline">Open</Button>
     </MenuTrigger>
     <MenuContent className="min-w-40">
-      <MenuGroup heading="My Account">
-        <MenuItem value="profile">Profile</MenuItem>
-        <MenuItem value="billing">Billing</MenuItem>
-        <MenuItem value="settings">Settings</MenuItem>
-      </MenuGroup>
-      <MenuSeparator />
-      <MenuItem value="github">GitHub</MenuItem>
-      <MenuItem value="support">Support</MenuItem>
-      <MenuItem disabled value="api">
-        API
-      </MenuItem>
+      <MenuList>
+        <MenuGroup heading="My Account">
+          <MenuItem value="profile">Profile</MenuItem>
+          <MenuItem value="billing">Billing</MenuItem>
+          <MenuItem value="settings">Settings</MenuItem>
+        </MenuGroup>
+        <MenuSeparator />
+        <MenuItem value="github">GitHub</MenuItem>
+        <MenuItem value="support">Support</MenuItem>
+        <MenuItem disabled value="api">
+          API
+        </MenuItem>
+      </MenuList>
     </MenuContent>
   </Menu>
 );

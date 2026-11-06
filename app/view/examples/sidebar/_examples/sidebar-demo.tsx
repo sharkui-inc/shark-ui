@@ -40,6 +40,7 @@ import {
   MenuGroup,
   MenuGroupLabel,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuShortcut,
   MenuTrigger,
@@ -166,40 +167,42 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
             </SidebarMenuButton>
           </MenuTrigger>
           <MenuContent className="w-(--reference-width) min-w-56">
-            <MenuGroup>
-              <MenuGroupLabel className="text-muted-foreground text-xs">
-                Teams
-              </MenuGroupLabel>
-              {teams.map((team, index) => (
-                <MenuItem
-                  className="gap-2"
-                  key={team.name}
-                  onClick={() => setActiveTeam(team)}
-                  value={team.name}
-                >
-                  <IconTile
-                    aria-hidden="true"
-                    className="border-input rounded-md bg-transparent shadow-none"
-                    size="xs"
+            <MenuList>
+              <MenuGroup>
+                <MenuGroupLabel className="text-muted-foreground text-xs">
+                  Teams
+                </MenuGroupLabel>
+                {teams.map((team, index) => (
+                  <MenuItem
+                    className="gap-2"
+                    key={team.name}
+                    onClick={() => setActiveTeam(team)}
+                    value={team.name}
                   >
-                    <team.logo className="size-3.5 shrink-0" />
+                    <IconTile
+                      aria-hidden="true"
+                      className="border-input rounded-md bg-transparent shadow-none"
+                      size="xs"
+                    >
+                      <team.logo className="size-3.5 shrink-0" />
+                    </IconTile>
+                    {team.name}
+                    <MenuShortcut>⌘{index + 1}</MenuShortcut>
+                  </MenuItem>
+                ))}
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem className="gap-2" value="add-team">
+                  <IconTile aria-hidden="true" size="xs">
+                    <PlusIcon className="size-4" />
                   </IconTile>
-                  {team.name}
-                  <MenuShortcut>⌘{index + 1}</MenuShortcut>
+                  <div className="text-muted-foreground font-medium">
+                    Add team
+                  </div>
                 </MenuItem>
-              ))}
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem className="gap-2" value="add-team">
-                <IconTile aria-hidden="true" size="xs">
-                  <PlusIcon className="size-4" />
-                </IconTile>
-                <div className="text-muted-foreground font-medium">
-                  Add team
-                </div>
-              </MenuItem>
-            </MenuGroup>
+              </MenuGroup>
+            </MenuList>
           </MenuContent>
         </Menu>
       </SidebarMenuItem>
@@ -289,23 +292,28 @@ const NavProjects = (props: NavProjectsProps) => {
                 </SidebarMenuAction>
               </MenuTrigger>
               <MenuContent className="min-w-48">
-                <MenuGroup>
-                  <MenuItem value={`${item.name}-view`}>
-                    <FolderIcon aria-hidden="true" />
-                    View Project
-                  </MenuItem>
-                  <MenuItem value={`${item.name}-share`}>
-                    <ForwardIcon aria-hidden="true" />
-                    Share Project
-                  </MenuItem>
-                </MenuGroup>
-                <MenuSeparator />
-                <MenuGroup>
-                  <MenuItem value={`${item.name}-delete`} variant="destructive">
-                    <Trash2Icon aria-hidden="true" />
-                    Delete Project
-                  </MenuItem>
-                </MenuGroup>
+                <MenuList>
+                  <MenuGroup>
+                    <MenuItem value={`${item.name}-view`}>
+                      <FolderIcon aria-hidden="true" />
+                      View Project
+                    </MenuItem>
+                    <MenuItem value={`${item.name}-share`}>
+                      <ForwardIcon aria-hidden="true" />
+                      Share Project
+                    </MenuItem>
+                  </MenuGroup>
+                  <MenuSeparator />
+                  <MenuGroup>
+                    <MenuItem
+                      value={`${item.name}-delete`}
+                      variant="destructive"
+                    >
+                      <Trash2Icon aria-hidden="true" />
+                      Delete Project
+                    </MenuItem>
+                  </MenuGroup>
+                </MenuList>
               </MenuContent>
             </Menu>
           </SidebarMenuItem>
@@ -364,49 +372,51 @@ const NavUser = (props: NavUserProps) => {
             </SidebarMenuButton>
           </MenuTrigger>
           <MenuContent className="w-full sm:w-64">
-            <MenuGroup>
-              <MenuGroupLabel className="p-0 font-normal">
-                <div className="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
-                  <Avatar className="size-8 rounded-lg">
-                    <AvatarImage alt={user.name} src={user.avatar} />
-                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                  </Avatar>
-                  <div className="grid flex-1 text-start text-sm leading-tight">
-                    <span className="truncate font-medium">{user.name}</span>
-                    <span className="truncate text-xs">{user.email}</span>
+            <MenuList>
+              <MenuGroup>
+                <MenuGroupLabel className="p-0 font-normal">
+                  <div className="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
+                    <Avatar className="size-8 rounded-lg">
+                      <AvatarImage alt={user.name} src={user.avatar} />
+                      <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                    </Avatar>
+                    <div className="grid flex-1 text-start text-sm leading-tight">
+                      <span className="truncate font-medium">{user.name}</span>
+                      <span className="truncate text-xs">{user.email}</span>
+                    </div>
                   </div>
-                </div>
-              </MenuGroupLabel>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="upgrade">
-                <CrownIcon aria-hidden="true" />
-                Upgrade to Pro
-              </MenuItem>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="account">
-                <BadgeCheckIcon aria-hidden="true" />
-                Account
-              </MenuItem>
-              <MenuItem value="billing">
-                <CreditCardIcon aria-hidden="true" />
-                Billing
-              </MenuItem>
-              <MenuItem value="notifications">
-                <BellIcon aria-hidden="true" />
-                Notifications
-              </MenuItem>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="logout">
-                <LogOutIcon aria-hidden="true" />
-                Log out
-              </MenuItem>
-            </MenuGroup>
+                </MenuGroupLabel>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="upgrade">
+                  <CrownIcon aria-hidden="true" />
+                  Upgrade to Pro
+                </MenuItem>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="account">
+                  <BadgeCheckIcon aria-hidden="true" />
+                  Account
+                </MenuItem>
+                <MenuItem value="billing">
+                  <CreditCardIcon aria-hidden="true" />
+                  Billing
+                </MenuItem>
+                <MenuItem value="notifications">
+                  <BellIcon aria-hidden="true" />
+                  Notifications
+                </MenuItem>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="logout">
+                  <LogOutIcon aria-hidden="true" />
+                  Log out
+                </MenuItem>
+              </MenuGroup>
+            </MenuList>
           </MenuContent>
         </Menu>
       </SidebarMenuItem>

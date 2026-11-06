@@ -71,7 +71,7 @@ export const BrowserShareExample = (props: React.ComponentProps<"div">) => {
       </CardHeader>
       <CardContent>
         <ChartContainer
-          className="mx-auto aspect-square max-h-[190px]"
+          className="mx-auto aspect-square max-h-47.5"
           config={chartConfig}
         >
           <PieChart accessibilityLayer={false}>

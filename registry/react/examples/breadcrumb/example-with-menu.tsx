@@ -13,6 +13,7 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -36,15 +37,18 @@ const Example = () => (
             </Button>
           </MenuTrigger>
           <MenuContent className="min-w-40">
-            <MenuItem asChild value="docs">
-              <a href="#">Documentation</a>
-            </MenuItem>
-            <MenuItem asChild value="components">
-              <a href="#">Components</a>
-            </MenuItem>
-            <MenuItem asChild value="hooks">
-              <a href="#">Hooks</a>
-            </MenuItem>
+            <MenuList>
+              <MenuItem asChild value="docs">
+                <a href="#">Documentation</a>
+              </MenuItem>
+              <MenuItem asChild value="components">
+                <a href="#">Components</a>
+              </MenuItem>
+              <MenuItem asChild value="hooks">
+                <a href="#">Hooks</a>
+              </MenuItem>
+
+            </MenuList>
           </MenuContent>
         </Menu>
       </BreadcrumbItem>

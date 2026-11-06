@@ -157,7 +157,7 @@ const AITemplatePage = () => (
                 rows={3}
               />
               <Button
-                className="absolute end-2 top-2"
+                className="absolute inset-e-2 top-2"
                 size="icon-sm"
                 type="submit"
                 variant="ghost"

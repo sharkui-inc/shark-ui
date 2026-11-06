@@ -18,6 +18,7 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -39,18 +40,21 @@ const Example = () => (
             </Button>
           </MenuTrigger>
           <MenuContent>
-            <MenuItem value="archive">
-              <ArchiveIcon />
-              Archive
-            </MenuItem>
-            <MenuItem value="duplicate">
-              <CopyIcon />
-              Duplicate
-            </MenuItem>
-            <MenuItem value="delete" variant="destructive">
-              <Trash2Icon />
-              Delete
-            </MenuItem>
+            <MenuList>
+              <MenuItem value="archive">
+                <ArchiveIcon />
+                Archive
+              </MenuItem>
+              <MenuItem value="duplicate">
+                <CopyIcon />
+                Duplicate
+              </MenuItem>
+              <MenuItem value="delete" variant="destructive">
+                <Trash2Icon />
+                Delete
+              </MenuItem>
+
+            </MenuList>
           </MenuContent>
         </Menu>
       </ActionBarBody>

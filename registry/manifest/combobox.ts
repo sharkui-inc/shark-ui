@@ -11,7 +11,6 @@ const manifest: RegistryItemType = {
     registryUrl("/r/input.json"),
     registryUrl("/r/input-group.json"),
     registryUrl("/r/menu.json"),
-    registryUrl("/r/scroll-area.json"),
   ],
   type: "registry:ui",
 };

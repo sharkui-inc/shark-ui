@@ -16,7 +16,7 @@ const LoginPage = () => (
         Northstar
       </div>
       <div className="max-w-xl">
-        <p className="text-3xl leading-tight font-medium tracking-[-0.025em] text-balance xl:text-4xl">
+        <p className="text-3xl leading-tight font-medium tracking-tight text-balance xl:text-4xl">
           Bring your team, priorities, and progress into one clear view.
         </p>
         <p className="text-background/64 mt-4 max-w-lg">

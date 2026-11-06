@@ -14,6 +14,7 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -35,15 +36,17 @@ const BreadcrumbRtl = () => (
             </Button>
           </MenuTrigger>
           <MenuContent className="min-w-44">
-            <MenuItem asChild value="documentation">
-              <a href="#">التوثيق</a>
-            </MenuItem>
-            <MenuItem asChild value="themes">
-              <a href="#">السمات</a>
-            </MenuItem>
-            <MenuItem asChild value="github">
-              <a href="#">جيت هاب</a>
-            </MenuItem>
+            <MenuList>
+              <MenuItem asChild value="documentation">
+                <a href="#">التوثيق</a>
+              </MenuItem>
+              <MenuItem asChild value="themes">
+                <a href="#">السمات</a>
+              </MenuItem>
+              <MenuItem asChild value="github">
+                <a href="#">جيت هاب</a>
+              </MenuItem>
+            </MenuList>
           </MenuContent>
         </Menu>
       </BreadcrumbItem>

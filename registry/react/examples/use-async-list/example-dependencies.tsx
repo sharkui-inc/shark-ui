@@ -132,7 +132,7 @@ const Example = () => {
                 </ItemMedia>
                 <ItemContent>
                   <SkeletonText
-                    className="gap-1.5 **:[div]:h-[1.125rem]"
+                    className="gap-1.5 **:[div]:h-4.5"
                     lines={2}
                   />
                 </ItemContent>

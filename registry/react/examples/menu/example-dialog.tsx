@@ -15,6 +15,7 @@ import { Input } from "@/registry/react/components/input";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -29,9 +30,12 @@ const Example = () => {
           <Button variant="outline">Open</Button>
         </MenuTrigger>
         <MenuContent className="min-w-40">
-          <MenuItem onSelect={() => setDialogOpen(true)} value="dialog">
-            Settings
-          </MenuItem>
+          <MenuList>
+            <MenuItem onSelect={() => setDialogOpen(true)} value="dialog">
+              Settings
+            </MenuItem>
+
+          </MenuList>
         </MenuContent>
       </Menu>
       <Dialog onOpenChange={(e) => setDialogOpen(e.open)} open={dialogOpen}>

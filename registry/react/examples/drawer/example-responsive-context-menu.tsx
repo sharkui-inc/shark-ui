@@ -17,6 +17,7 @@ import {
 import {
   ContextMenu,
   ContextMenuContent,
+  ContextMenuList,
   ContextMenuGroup,
   ContextMenuItem,
   ContextMenuSeparator,
@@ -173,71 +174,77 @@ const DesktopContextMenu = () => (
       </span>
     </ContextMenuTrigger>
     <ContextMenuContent className="min-w-40">
-      <ContextMenuGroup>
-        <ContextMenuItem value="forward">
-          <SendIcon /> Forward
-          <ContextMenuShortcut className="hidden sm:inline-flex">
-            ⌘F
-          </ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem value="reply">
-          <ReplyIcon /> Reply
-          <ContextMenuShortcut className="hidden sm:inline-flex">
-            ⌘R
-          </ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem value="reply-all">
-          <ReplyAllIcon /> Reply all
-          <ContextMenuShortcut className="hidden sm:inline-flex">
-            ⌘A
-          </ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem value="archive">
-          <ArchiveIcon /> Archive
-          <ContextMenuShortcut className="hidden sm:inline-flex">
-            ⌘Z
-          </ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuSub>
-          <ContextMenuSubTrigger>
-            <FolderInputIcon /> Move to
-          </ContextMenuSubTrigger>
-          <ContextMenuSubContent>
-            <ContextMenuItem value="move-to-folder-1">
-              <ArchiveXIcon /> Junk
-            </ContextMenuItem>
-            <ContextMenuItem value="move-to-folder-2">
-              <TrashIcon /> Trash
-            </ContextMenuItem>
-            <ContextMenuItem value="move-to-folder-3">
-              <BellIcon /> Reminders
-            </ContextMenuItem>
-            <ContextMenuSub>
-              <ContextMenuSubTrigger>
-                <CirclePlusIcon />
-                More
-              </ContextMenuSubTrigger>
-              <ContextMenuSubContent>
-                <ContextMenuItem value="move-to-folder-4">
-                  <SquarePenIcon />
-                  Drafts
+      <ContextMenuList>
+        <ContextMenuGroup>
+          <ContextMenuItem value="forward">
+            <SendIcon /> Forward
+            <ContextMenuShortcut className="hidden sm:inline-flex">
+              ⌘F
+            </ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem value="reply">
+            <ReplyIcon /> Reply
+            <ContextMenuShortcut className="hidden sm:inline-flex">
+              ⌘R
+            </ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem value="reply-all">
+            <ReplyAllIcon /> Reply all
+            <ContextMenuShortcut className="hidden sm:inline-flex">
+              ⌘A
+            </ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem value="archive">
+            <ArchiveIcon /> Archive
+            <ContextMenuShortcut className="hidden sm:inline-flex">
+              ⌘Z
+            </ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuSub>
+            <ContextMenuSubTrigger>
+              <FolderInputIcon /> Move to
+            </ContextMenuSubTrigger>
+            <ContextMenuSubContent>
+              <ContextMenuList>
+                <ContextMenuItem value="move-to-folder-1">
+                  <ArchiveXIcon /> Junk
                 </ContextMenuItem>
-                <ContextMenuItem value="move-to-folder-6">
-                  <MailXIcon />
-                  Spam
+                <ContextMenuItem value="move-to-folder-2">
+                  <TrashIcon /> Trash
                 </ContextMenuItem>
-              </ContextMenuSubContent>
-            </ContextMenuSub>
-          </ContextMenuSubContent>
-        </ContextMenuSub>
-        <ContextMenuSeparator />
-        <ContextMenuItem value="delete" variant="destructive">
-          <Trash2Icon /> Delete
-          <ContextMenuShortcut className="hidden sm:inline-flex">
-            ⌘ ⌫
-          </ContextMenuShortcut>
-        </ContextMenuItem>
-      </ContextMenuGroup>
+                <ContextMenuItem value="move-to-folder-3">
+                  <BellIcon /> Reminders
+                </ContextMenuItem>
+                <ContextMenuSub>
+                  <ContextMenuSubTrigger>
+                    <CirclePlusIcon />
+                    More
+                  </ContextMenuSubTrigger>
+                  <ContextMenuSubContent>
+                    <ContextMenuItem value="move-to-folder-4">
+                      <SquarePenIcon />
+                      Drafts
+                    </ContextMenuItem>
+                    <ContextMenuItem value="move-to-folder-6">
+                      <MailXIcon />
+                      Spam
+                    </ContextMenuItem>
+                  </ContextMenuSubContent>
+                </ContextMenuSub>
+
+              </ContextMenuList>
+            </ContextMenuSubContent>
+          </ContextMenuSub>
+          <ContextMenuSeparator />
+          <ContextMenuItem value="delete" variant="destructive">
+            <Trash2Icon /> Delete
+            <ContextMenuShortcut className="hidden sm:inline-flex">
+              ⌘ ⌫
+            </ContextMenuShortcut>
+          </ContextMenuItem>
+        </ContextMenuGroup>
+
+      </ContextMenuList>
     </ContextMenuContent>
   </ContextMenu>
 );

@@ -62,7 +62,7 @@ const Example = () => {
                   <FieldLabel>More about you</FieldLabel>
                   <Textarea
                     {...field.props}
-                    className="min-h-[120px]"
+                    className="min-h-30"
                     placeholder="I'm a software engineer..."
                     value={field.input}
                   />

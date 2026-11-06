@@ -20,6 +20,7 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -41,24 +42,24 @@ export const DocsCopyPage = (props: DocsCopyPageProps) => {
 
   return (
     <ButtonGroup className={cn("hidden sm:flex", className)} {...rest}>
-      <ButtonGroup>
-        <Clipboard value={data}>
-          <ClipboardTrigger asChild>
-            <Button size="sm" variant="outline">
-              <ClipboardIndicator />
-              Copy Markdown
-            </Button>
-          </ClipboardTrigger>
-        </Clipboard>
+      <Clipboard value={data}>
+        <ClipboardTrigger asChild>
+          <Button size="sm" variant="outline">
+            <ClipboardIndicator />
+            Copy Markdown
+          </Button>
+        </ClipboardTrigger>
+      </Clipboard>
 
-        <Menu positioning={{ placement: "bottom-end" }}>
-          <MenuTrigger asChild>
-            <Button aria-label="Open" size="icon-sm" variant="outline">
-              <ChevronDownIcon aria-hidden="true" />
-            </Button>
-          </MenuTrigger>
+      <Menu positioning={{ placement: "bottom-end" }}>
+        <MenuTrigger asChild>
+          <Button aria-label="Open" size="icon-sm" variant="outline">
+            <ChevronDownIcon aria-hidden="true" />
+          </Button>
+        </MenuTrigger>
 
-          <MenuContent>
+        <MenuContent>
+          <MenuList>
             <MenuGroup>
               <MenuItem asChild value="chatgpt">
                 <a
@@ -136,9 +137,9 @@ export const DocsCopyPage = (props: DocsCopyPageProps) => {
                 </a>
               </MenuItem>
             </MenuGroup>
-          </MenuContent>
-        </Menu>
-      </ButtonGroup>
+          </MenuList>
+        </MenuContent>
+      </Menu>
     </ButtonGroup>
   );
 };

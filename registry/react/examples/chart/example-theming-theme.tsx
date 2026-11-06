@@ -11,7 +11,7 @@ import {
 } from "@/registry/react/components/chart";
 
 const Example = () => (
-  <ChartContainer className="h-[250px] w-full max-w-sm" config={chartConfig}>
+  <ChartContainer className="h-62.5 w-full max-w-sm" config={chartConfig}>
     <LineChart accessibilityLayer data={chartData}>
       <CartesianGrid vertical={false} />
       <XAxis axisLine={false} dataKey="month" tickLine={false} />

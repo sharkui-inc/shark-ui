@@ -2,14 +2,14 @@ import type React from "react";
 import { cn } from "@/lib/utils";
 
 const ChartTooltipDemo = () => (
-  <div className="text-foreground grid aspect-video w-full max-w-md justify-center md:grid-cols-2 [&>div]:relative [&>div]:flex [&>div]:h-[137px] [&>div]:w-[224px] [&>div]:items-center [&>div]:justify-center [&>div]:p-4">
+  <div className="text-foreground grid aspect-video w-full max-w-md justify-center md:grid-cols-2 [&>div]:relative [&>div]:flex [&>div]:h-34.25 [&>div]:w-56 [&>div]:items-center [&>div]:justify-center [&>div]:p-4">
     <div>
-      <div className="absolute top-[45px] left-[-35px] z-10 text-sm font-medium">
+      <div className="absolute top-11.25 -left-8.75 z-10 text-sm font-medium">
         Label
       </div>
       <svg
         aria-hidden="true"
-        className="absolute top-[50px] left-[5px] z-10"
+        className="absolute top-12.5 left-1.25 z-10"
         fill="none"
         height="12"
         viewBox="0 0 193 40"
@@ -29,7 +29,7 @@ const ChartTooltipDemo = () => (
         </defs>
       </svg>
       <TooltipDemo
-        className="w-[8rem]"
+        className="w-32"
         label="Page Views"
         payload={[
           { fill: "var(--chart-1)", name: "Desktop", value: 186 },
@@ -38,12 +38,12 @@ const ChartTooltipDemo = () => (
       />
     </div>
     <div className="items-end">
-      <div className="absolute top-[0px] left-[122px] z-10 text-sm font-medium">
+      <div className="absolute top-0 left-30.5 z-10 text-sm font-medium">
         Name
       </div>
       <svg
         aria-hidden="true"
-        className="absolute top-[10px] left-[85px] z-10 -scale-x-100"
+        className="absolute top-2.5 left-21.25 z-10 -scale-x-100"
         fill="none"
         height="42"
         viewBox="0 0 122 148"
@@ -63,7 +63,7 @@ const ChartTooltipDemo = () => (
         </defs>
       </svg>
       <TooltipDemo
-        className="w-[8rem]"
+        className="w-32"
         hideLabel
         indicator="dashed"
         label="Browser"
@@ -75,18 +75,18 @@ const ChartTooltipDemo = () => (
     </div>
     <div className="hidden! md:flex!">
       <TooltipDemo
-        className="w-[9rem]"
+        className="w-36"
         indicator="line"
         label="Page Views"
         payload={[{ fill: "var(--chart-3)", name: "Desktop", value: 12_486 }]}
       />
     </div>
     <div className="items-start! justify-start!">
-      <div className="absolute top-[60px] left-[50px] z-10 text-sm font-medium">
+      <div className="absolute top-15 left-12.5 z-10 text-sm font-medium">
         Indicator
       </div>
       <TooltipDemo
-        className="w-[8rem]"
+        className="w-32"
         hideLabel
         indicator="dot"
         label="Browser"
@@ -94,7 +94,7 @@ const ChartTooltipDemo = () => (
       />
       <svg
         aria-hidden="true"
-        className="absolute top-[38px] left-[30px] z-10 rotate-[-40deg]"
+        className="absolute top-9.5 left-7.5 z-10 rotate-[-40deg]"
         fill="none"
         height="34"
         viewBox="0 0 75 175"
@@ -148,7 +148,7 @@ const TooltipDemo = (props: TooltipDemoProps) => {
   return (
     <div
       className={cn(
-        "min-w-[8rem]",
+        "min-w-32",
         "grid items-start gap-1.5",
         "bg-background px-2.5 py-1.5",
         "text-xs",
@@ -176,7 +176,7 @@ const TooltipDemo = (props: TooltipDemoProps) => {
               {!hideIndicator && (
                 <div
                   className={cn(
-                    "shrink-0 rounded-xs border-(--color-border) bg-(--color-bg)",
+                    "border-border shrink-0 rounded-xs bg-(--color-bg)",
                     {
                       "my-0.5": nestLabel && indicator === "dashed",
                       "size-2.5": indicator === "dot",

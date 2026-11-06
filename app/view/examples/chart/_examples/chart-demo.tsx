@@ -112,7 +112,7 @@ const ChartDemo = () => {
       </CardHeader>
       <CardContent className="px-2 sm:p-6">
         <ChartContainer
-          className="aspect-auto h-[250px] w-full"
+          className="aspect-auto h-62.5 w-full"
           config={chartConfig}
         >
           <BarChart
@@ -142,7 +142,7 @@ const ChartDemo = () => {
             <ChartTooltip
               content={
                 <ChartTooltipContent
-                  className="w-[150px]"
+                  className="w-37.5"
                   labelFormatter={(value) =>
                     new Date(String(value)).toLocaleDateString("en-US", {
                       day: "numeric",

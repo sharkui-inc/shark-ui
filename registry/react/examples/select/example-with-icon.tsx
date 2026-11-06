@@ -8,6 +8,7 @@ import { ViteIcon } from "@/components/icons/vite";
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectContext,
   SelectItem,
   SelectTrigger,
@@ -32,16 +33,19 @@ const Example = () => (
       <SelectValue placeholder="Select framework" />
     </SelectTrigger>
     <SelectContent>
-      {collection.items.map((item) => {
-        const Icon = item.icon;
+      <SelectList>
+        {collection.items.map((item) => {
+          const Icon = item.icon;
 
-        return (
-          <SelectItem item={item} key={item.value}>
-            <Icon aria-hidden="true" />
-            {item.label}
-          </SelectItem>
-        );
-      })}
+          return (
+            <SelectItem item={item} key={item.value}>
+              <Icon aria-hidden="true" />
+              {item.label}
+            </SelectItem>
+          );
+        })}
+
+      </SelectList>
     </SelectContent>
   </Select>
 );

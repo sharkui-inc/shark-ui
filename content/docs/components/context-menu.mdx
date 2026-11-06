@@ -59,19 +59,21 @@ npx shadcn@latest add @shark/context-menu
 ContextMenu
 ├── ContextMenuTrigger
 └── ContextMenuContent
-    ├── ContextMenuGroup
-    │   └── ContextMenuGroupLabel
-    ├── ContextMenuItem
-    ├── ContextMenuItemDescription
-    ├── ContextMenuQuickItem
-    ├── ContextMenuCheckboxItem
-    ├── ContextMenuRadioGroup
-    │   └── ContextMenuRadioItem
-    ├── ContextMenuSub
-    │   ├── ContextMenuSubTrigger
-    │   └── ContextMenuSubContent
-    ├── ContextMenuSeparator
-    └── ContextMenuShortcut
+    └── ContextMenuList
+        ├── ContextMenuGroup
+        │   └── ContextMenuGroupLabel
+        ├── ContextMenuItem
+        ├── ContextMenuItemDescription
+        ├── ContextMenuQuickItem
+        ├── ContextMenuCheckboxItem
+        ├── ContextMenuRadioGroup
+        │   └── ContextMenuRadioItem
+        ├── ContextMenuSub
+        │   ├── ContextMenuSubTrigger
+        │   └── ContextMenuSubContent
+        │       └── ContextMenuList
+        ├── ContextMenuSeparator
+        └── ContextMenuShortcut
 ```
 
 ## Usage
@@ -81,8 +83,8 @@ import {
   ContextMenu,
   ContextMenuTrigger,
   ContextMenuContent,
-  ContextMenuItemGroup,
-  ContextMenuItemGroupLabel,
+  ContextMenuList,
+  ContextMenuGroup,
   ContextMenuItem,
 } from "@/components/ui/context-menu";
 ```
@@ -91,11 +93,13 @@ import {
 <ContextMenu>
   <ContextMenuTrigger>Right click here</ContextMenuTrigger>
   <ContextMenuContent>
-    <ContextMenuItemGroup>
-      <ContextMenuItem value="action-1">Action 1</ContextMenuItem>
-      <ContextMenuItem value="action-2">Action 2</ContextMenuItem>
-      <ContextMenuItem value="action-3">Action 3</ContextMenuItem>
-    </ContextMenuItemGroup>
+    <ContextMenuList>
+      <ContextMenuGroup>
+        <ContextMenuItem value="action-1">Action 1</ContextMenuItem>
+        <ContextMenuItem value="action-2">Action 2</ContextMenuItem>
+        <ContextMenuItem value="action-3">Action 3</ContextMenuItem>
+      </ContextMenuGroup>
+    </ContextMenuList>
   </ContextMenuContent>
 </ContextMenu>
 ```
@@ -146,6 +150,15 @@ Trigger component for the context menu.
 ### ContextMenuContent
 
 Holds context-menu items in a portal.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
+
+### ContextMenuList
+
+Scrollable list of options inside `ContextMenuContent` or `ContextMenuSubContent`.
 
 | Prop | Type | Default |
 | --- | --- | --- |

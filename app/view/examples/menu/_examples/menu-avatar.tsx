@@ -15,6 +15,7 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -30,25 +31,27 @@ const MenuAvatar = () => (
       </Button>
     </MenuTrigger>
     <MenuContent>
-      <MenuGroup>
-        <MenuItem value="account">
-          <BadgeCheckIcon />
-          Account
+      <MenuList>
+        <MenuGroup>
+          <MenuItem value="account">
+            <BadgeCheckIcon />
+            Account
+          </MenuItem>
+          <MenuItem value="billing">
+            <CreditCardIcon />
+            Billing
+          </MenuItem>
+          <MenuItem value="notifications">
+            <BellIcon />
+            Notifications
+          </MenuItem>
+        </MenuGroup>
+        <MenuSeparator />
+        <MenuItem value="sign-out">
+          <LogOutIcon />
+          Sign Out
         </MenuItem>
-        <MenuItem value="billing">
-          <CreditCardIcon />
-          Billing
-        </MenuItem>
-        <MenuItem value="notifications">
-          <BellIcon />
-          Notifications
-        </MenuItem>
-      </MenuGroup>
-      <MenuSeparator />
-      <MenuItem value="sign-out">
-        <LogOutIcon />
-        Sign Out
-      </MenuItem>
+      </MenuList>
     </MenuContent>
   </Menu>
 );

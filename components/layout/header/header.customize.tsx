@@ -64,6 +64,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -135,18 +136,21 @@ const FontPicker = (props: FontPickerProps) => {
           </span>
         </SelectTrigger>
         <SelectContent>
-          {collection.items.map((item) => (
-            <SelectItem item={item} key={item.value}>
-              <span
-                aria-hidden="true"
-                className="w-4 text-center text-sm font-medium"
-                style={{ fontFamily: item.family }}
-              >
-                Ag
-              </span>
-              {item.label}
-            </SelectItem>
-          ))}
+          <SelectList>
+            {collection.items.map((item) => (
+              <SelectItem item={item} key={item.value}>
+                <span
+                  aria-hidden="true"
+                  className="w-4 text-center text-sm font-medium"
+                  style={{ fontFamily: item.family }}
+                >
+                  Ag
+                </span>
+                {item.label}
+              </SelectItem>
+            ))}
+
+          </SelectList>
         </SelectContent>
       </Select>
     </Field>

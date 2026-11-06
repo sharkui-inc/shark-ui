@@ -14,6 +14,7 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -35,15 +36,17 @@ const BreadcrumbDropdown = () => (
             </Button>
           </MenuTrigger>
           <MenuContent className="min-w-44">
-            <MenuItem asChild value="documentation">
-              <a href="#">Documentation</a>
-            </MenuItem>
-            <MenuItem asChild value="themes">
-              <a href="#">Themes</a>
-            </MenuItem>
-            <MenuItem asChild value="github">
-              <a href="#">GitHub</a>
-            </MenuItem>
+            <MenuList>
+              <MenuItem asChild value="documentation">
+                <a href="#">Documentation</a>
+              </MenuItem>
+              <MenuItem asChild value="themes">
+                <a href="#">Themes</a>
+              </MenuItem>
+              <MenuItem asChild value="github">
+                <a href="#">GitHub</a>
+              </MenuItem>
+            </MenuList>
           </MenuContent>
         </Menu>
       </BreadcrumbItem>

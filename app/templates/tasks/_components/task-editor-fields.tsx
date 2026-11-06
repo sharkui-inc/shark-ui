@@ -11,6 +11,7 @@ import { Input } from "@/registry/react/components/input";
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
 } from "@/registry/react/components/select";
@@ -66,11 +67,14 @@ const TaskEditorSelect: ArkSelect.RootComponent<TaskEditorSelectProps> = (
       >
         <SelectTrigger className="w-full">{selectValue}</SelectTrigger>
         <SelectContent>
-          {collection.items.map((item) => (
-            <SelectItem item={item} key={itemKey(item)}>
-              {renderItem(item)}
-            </SelectItem>
-          ))}
+          <SelectList>
+            {collection.items.map((item) => (
+              <SelectItem item={item} key={itemKey(item)}>
+                {renderItem(item)}
+              </SelectItem>
+            ))}
+
+          </SelectList>
         </SelectContent>
       </Select>
     </Field>

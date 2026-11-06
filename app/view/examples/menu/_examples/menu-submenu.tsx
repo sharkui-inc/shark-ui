@@ -4,6 +4,7 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuShortcut,
   MenuSub,
@@ -18,31 +19,35 @@ const MenuSubmenu = () => (
       <Button variant="outline">Open</Button>
     </MenuTrigger>
     <MenuContent>
-      <MenuGroup>
-        <MenuItem value="team">Team</MenuItem>
-        <MenuSub>
-          <MenuSubTrigger>Invite users</MenuSubTrigger>
-          <MenuSubContent>
-            <MenuItem value="email">Email</MenuItem>
-            <MenuItem value="message">Message</MenuItem>
-            <MenuSub>
-              <MenuSubTrigger>More options</MenuSubTrigger>
-              <MenuSubContent>
-                <MenuItem value="calendly">Calendly</MenuItem>
-                <MenuItem value="slack">Slack</MenuItem>
+      <MenuList>
+        <MenuGroup>
+          <MenuItem value="team">Team</MenuItem>
+          <MenuSub>
+            <MenuSubTrigger>Invite users</MenuSubTrigger>
+            <MenuSubContent>
+              <MenuList>
+                <MenuItem value="email">Email</MenuItem>
+                <MenuItem value="message">Message</MenuItem>
+                <MenuSub>
+                  <MenuSubTrigger>More options</MenuSubTrigger>
+                  <MenuSubContent>
+                    <MenuItem value="calendly">Calendly</MenuItem>
+                    <MenuItem value="slack">Slack</MenuItem>
+                    <MenuSeparator />
+                    <MenuItem value="webhook">Webhook</MenuItem>
+                  </MenuSubContent>
+                </MenuSub>
                 <MenuSeparator />
-                <MenuItem value="webhook">Webhook</MenuItem>
-              </MenuSubContent>
-            </MenuSub>
-            <MenuSeparator />
-            <MenuItem value="advanced">Advanced...</MenuItem>
-          </MenuSubContent>
-        </MenuSub>
-        <MenuItem value="new-team">
-          New Team
-          <MenuShortcut>⌘T</MenuShortcut>
-        </MenuItem>
-      </MenuGroup>
+                <MenuItem value="advanced">Advanced...</MenuItem>
+              </MenuList>
+            </MenuSubContent>
+          </MenuSub>
+          <MenuItem value="new-team">
+            New Team
+            <MenuShortcut>⌘T</MenuShortcut>
+          </MenuItem>
+        </MenuGroup>
+      </MenuList>
     </MenuContent>
   </Menu>
 );

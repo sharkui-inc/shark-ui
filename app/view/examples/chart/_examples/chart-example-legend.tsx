@@ -31,10 +31,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const ChartExampleLegend = () => (
-  <ChartContainer
-    className="min-h-[200px] w-full max-w-sm"
-    config={chartConfig}
-  >
+  <ChartContainer className="min-h-50 w-full max-w-sm" config={chartConfig}>
     <BarChart accessibilityLayer data={chartData}>
       <CartesianGrid vertical={false} />
       <XAxis

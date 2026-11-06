@@ -20,6 +20,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuSeparator,
@@ -127,19 +128,22 @@ const columns = columnHelper.columns([
           </MenuTrigger>
 
           <MenuContent>
-            <MenuGroup heading="Actions">
-              <MenuItem
-                onClick={() => navigator.clipboard.writeText(payment.id)}
-                value="copy-payment-id"
-              >
-                Copy payment ID
-              </MenuItem>
-              <MenuSeparator />
-              <MenuItem value="view-customer">View customer</MenuItem>
-              <MenuItem value="view-payment-details">
-                View payment details
-              </MenuItem>
-            </MenuGroup>
+            <MenuList>
+              <MenuGroup heading="Actions">
+                <MenuItem
+                  onClick={() => navigator.clipboard.writeText(payment.id)}
+                  value="copy-payment-id"
+                >
+                  Copy payment ID
+                </MenuItem>
+                <MenuSeparator />
+                <MenuItem value="view-customer">View customer</MenuItem>
+                <MenuItem value="view-payment-details">
+                  View payment details
+                </MenuItem>
+              </MenuGroup>
+
+            </MenuList>
           </MenuContent>
         </Menu>
       );

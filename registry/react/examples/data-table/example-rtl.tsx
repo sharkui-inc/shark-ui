@@ -36,6 +36,7 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuSeparator,
@@ -104,12 +105,15 @@ const Example = () => {
             </Button>
           </MenuTrigger>
           <MenuContent>
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => (
-                <ColumnVisibilityItem column={column} key={column.id} />
-              ))}
+            <MenuList>
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => (
+                  <ColumnVisibilityItem column={column} key={column.id} />
+                ))}
+
+            </MenuList>
           </MenuContent>
         </Menu>
       </div>
@@ -368,19 +372,22 @@ const PaymentActions = (props: PaymentActionsProps) => {
         </Button>
       </MenuTrigger>
       <MenuContent>
-        <MenuGroup heading={values.actions}>
-          <MenuItem
-            onClick={() => navigator.clipboard.writeText(payment.id)}
-            value="copy-payment-id"
-          >
-            {values.copyPaymentId}
-          </MenuItem>
-          <MenuSeparator />
-          <MenuItem value="view-customer">{values.viewCustomer}</MenuItem>
-          <MenuItem value="view-payment-details">
-            {values.viewPaymentDetails}
-          </MenuItem>
-        </MenuGroup>
+        <MenuList>
+          <MenuGroup heading={values.actions}>
+            <MenuItem
+              onClick={() => navigator.clipboard.writeText(payment.id)}
+              value="copy-payment-id"
+            >
+              {values.copyPaymentId}
+            </MenuItem>
+            <MenuSeparator />
+            <MenuItem value="view-customer">{values.viewCustomer}</MenuItem>
+            <MenuItem value="view-payment-details">
+              {values.viewPaymentDetails}
+            </MenuItem>
+          </MenuGroup>
+
+        </MenuList>
       </MenuContent>
     </Menu>
   );

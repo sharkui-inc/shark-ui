@@ -1,69 +1,90 @@
-import AspectRatioBasic from "./_examples/aspect-ratio-basic";
-import AspectRatioPortrait from "./_examples/aspect-ratio-portrait";
-import AspectRatioResponsive from "./_examples/aspect-ratio-responsive";
-import AspectRatioRtl from "./_examples/aspect-ratio-rtl";
-import AspectRatioSquare from "./_examples/aspect-ratio-square";
-import AspectRatioVideo from "./_examples/aspect-ratio-video";
+import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
+import ExampleDefault from "@/registry/react/examples/aspect-ratio/example-default";
+import ExamplePortrait from "@/registry/react/examples/aspect-ratio/example-portrait";
+import ExampleResponsive from "@/registry/react/examples/aspect-ratio/example-responsive";
+import ExampleRtl from "@/registry/react/examples/aspect-ratio/example-rtl";
+import ExampleSquare from "@/registry/react/examples/aspect-ratio/example-square";
+import ExampleVideo from "@/registry/react/examples/aspect-ratio/example-video";
 
 const AspectRatioExamplePage = () => (
-  <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
-    <section aria-labelledby="basic-heading" className="flex flex-col gap-5">
-      <h1 className="text-muted-foreground font-medium" id="basic-heading">
-        Basic
-      </h1>
-      <div className="bg-muted rounded-3xl p-6 sm:p-10">
-        <AspectRatioBasic />
+  <PreviewLocaleProvider>
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
+      <div className="grid min-w-0 grid-cols-1 gap-16 sm:grid-cols-2 [&>section]:min-w-0">
+        <section
+          aria-labelledby="default-heading"
+          className="flex flex-col gap-5"
+        >
+          <h1
+            className="text-muted-foreground font-medium"
+            id="default-heading"
+          >
+            Default
+          </h1>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleDefault />
+          </div>
+        </section>
+        <section
+          aria-labelledby="portrait-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="portrait-heading"
+          >
+            Portrait
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExamplePortrait />
+          </div>
+        </section>
+        <section
+          aria-labelledby="responsive-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="responsive-heading"
+          >
+            Responsive
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleResponsive />
+          </div>
+        </section>
+        <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
+          <h2 className="text-muted-foreground font-medium" id="rtl-heading">
+            RTL
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleRtl />
+          </div>
+        </section>
+        <section
+          aria-labelledby="square-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2 className="text-muted-foreground font-medium" id="square-heading">
+            Square
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleSquare />
+          </div>
+        </section>
+        <section
+          aria-labelledby="video-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2 className="text-muted-foreground font-medium" id="video-heading">
+            Video
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleVideo />
+          </div>
+        </section>
       </div>
-    </section>
-
-    <section aria-labelledby="square-heading" className="flex flex-col gap-5">
-      <h2 className="text-muted-foreground font-medium" id="square-heading">
-        Square
-      </h2>
-      <div className="bg-card rounded-3xl border p-6 sm:p-10">
-        <AspectRatioSquare />
-      </div>
-    </section>
-
-    <section aria-labelledby="portrait-heading" className="flex flex-col gap-5">
-      <h2 className="text-muted-foreground font-medium" id="portrait-heading">
-        Portrait
-      </h2>
-      <div className="bg-muted rounded-3xl p-6 sm:p-10">
-        <AspectRatioPortrait />
-      </div>
-    </section>
-
-    <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
-      <h2 className="text-muted-foreground font-medium" id="rtl-heading">
-        RTL
-      </h2>
-      <div className="bg-card rounded-3xl border p-6 sm:p-10">
-        <AspectRatioRtl />
-      </div>
-    </section>
-
-    <section aria-labelledby="video-heading" className="flex flex-col gap-5">
-      <h2 className="text-muted-foreground font-medium" id="video-heading">
-        Video
-      </h2>
-      <div className="bg-card rounded-3xl border p-6 sm:p-10">
-        <AspectRatioVideo />
-      </div>
-    </section>
-
-    <section
-      aria-labelledby="responsive-heading"
-      className="flex flex-col gap-5"
-    >
-      <h2 className="text-muted-foreground font-medium" id="responsive-heading">
-        Responsive
-      </h2>
-      <div className="bg-muted rounded-3xl p-6 sm:p-10">
-        <AspectRatioResponsive />
-      </div>
-    </section>
-  </div>
+    </div>
+  </PreviewLocaleProvider>
 );
 
 export default AspectRatioExamplePage;

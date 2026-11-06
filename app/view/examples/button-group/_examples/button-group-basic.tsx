@@ -19,6 +19,7 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuRadioGroup,
   MenuRadioItem,
   MenuSeparator,
@@ -51,54 +52,58 @@ const ButtonGroupBasic = () => {
             </Button>
           </MenuTrigger>
           <MenuContent className="min-w-40">
-            <MenuGroup>
-              <MenuItem value="mark-as-read">
-                <MailCheckIcon />
-                Mark as Read
-              </MenuItem>
-              <MenuItem value="archive">
-                <ArchiveIcon />
-                Archive
-              </MenuItem>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="snooze">
-                <ClockIcon />
-                Snooze
-              </MenuItem>
-              <MenuItem value="add-to-calendar">
-                <CalendarPlusIcon />
-                Add to Calendar
-              </MenuItem>
-              <MenuItem value="add-to-list">
-                <ListFilterIcon />
-                Add to List
-              </MenuItem>
-              <MenuSub>
-                <MenuSubTrigger>
-                  <TagIcon />
-                  Label As...
-                </MenuSubTrigger>
-                <MenuSubContent>
-                  <MenuRadioGroup
-                    onValueChange={({ value }) => setLabel(value)}
-                    value={label}
-                  >
-                    <MenuRadioItem value="personal">Personal</MenuRadioItem>
-                    <MenuRadioItem value="work">Work</MenuRadioItem>
-                    <MenuRadioItem value="other">Other</MenuRadioItem>
-                  </MenuRadioGroup>
-                </MenuSubContent>
-              </MenuSub>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="trash" variant="destructive">
-                <Trash2Icon />
-                Trash
-              </MenuItem>
-            </MenuGroup>
+            <MenuList>
+              <MenuGroup>
+                <MenuItem value="mark-as-read">
+                  <MailCheckIcon />
+                  Mark as Read
+                </MenuItem>
+                <MenuItem value="archive">
+                  <ArchiveIcon />
+                  Archive
+                </MenuItem>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="snooze">
+                  <ClockIcon />
+                  Snooze
+                </MenuItem>
+                <MenuItem value="add-to-calendar">
+                  <CalendarPlusIcon />
+                  Add to Calendar
+                </MenuItem>
+                <MenuItem value="add-to-list">
+                  <ListFilterIcon />
+                  Add to List
+                </MenuItem>
+                <MenuSub>
+                  <MenuSubTrigger>
+                    <TagIcon />
+                    Label As...
+                  </MenuSubTrigger>
+                  <MenuSubContent>
+                    <MenuList>
+                      <MenuRadioGroup
+                        onValueChange={({ value }) => setLabel(value)}
+                        value={label}
+                      >
+                        <MenuRadioItem value="personal">Personal</MenuRadioItem>
+                        <MenuRadioItem value="work">Work</MenuRadioItem>
+                        <MenuRadioItem value="other">Other</MenuRadioItem>
+                      </MenuRadioGroup>
+                    </MenuList>
+                  </MenuSubContent>
+                </MenuSub>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="trash" variant="destructive">
+                  <Trash2Icon />
+                  Trash
+                </MenuItem>
+              </MenuGroup>
+            </MenuList>
           </MenuContent>
         </Menu>
       </ButtonGroup>

@@ -6,6 +6,7 @@ import { MenuItemDescription } from "@/registry/react/components/menu";
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -17,19 +18,22 @@ const Example = () => (
       <SelectValue placeholder="Select a status" />
     </SelectTrigger>
     <SelectContent>
-      {collection.items.map((item) => {
-        const Icon = item.icon;
+      <SelectList>
+        {collection.items.map((item) => {
+          const Icon = item.icon;
 
-        return (
-          <SelectItem item={item} key={item.value}>
-            <Icon aria-hidden="true" />
-            <span className="flex min-w-0 flex-col gap-0.5">
-              <span>{item.label}</span>
-              <MenuItemDescription>{item.description}</MenuItemDescription>
-            </span>
-          </SelectItem>
-        );
-      })}
+          return (
+            <SelectItem item={item} key={item.value}>
+              <Icon aria-hidden="true" />
+              <span className="flex min-w-0 flex-col gap-0.5">
+                <span>{item.label}</span>
+                <MenuItemDescription>{item.description}</MenuItemDescription>
+              </span>
+            </SelectItem>
+          );
+        })}
+
+      </SelectList>
     </SelectContent>
   </Select>
 );

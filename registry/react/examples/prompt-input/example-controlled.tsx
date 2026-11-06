@@ -13,6 +13,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -48,11 +49,14 @@ const Example = () => {
             <SelectValue placeholder="Ask first" />
           </SelectTrigger>
           <SelectContent>
-            {accessCollection.items.map((item) => (
-              <SelectItem item={item} key={item.value}>
-                {item.label}
-              </SelectItem>
-            ))}
+            <SelectList>
+              {accessCollection.items.map((item) => (
+                <SelectItem item={item} key={item.value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+
+            </SelectList>
           </SelectContent>
         </Select>
         <PromptInputSubmit className="ms-1" size="icon-sm" />

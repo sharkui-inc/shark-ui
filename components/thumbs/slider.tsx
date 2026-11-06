@@ -5,7 +5,7 @@ export const SliderThumb = (props: ThumbCardProps) => (
     <div className="flex w-56 items-center gap-1.5">
       <div className="bg-primary h-2 min-w-0 flex-1 rounded-full" />
       <div className="bg-primary h-4.5 w-[calc(--spacing(4.5)*1.375)] shrink-0 rounded-full" />
-      <div className="bg-muted-foreground/24 h-2 min-w-0 flex-[2] rounded-full" />
+      <div className="bg-muted-foreground/24 h-2 min-w-0 flex-2 rounded-full" />
     </div>
   </ThumbCard>
 );

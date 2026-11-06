@@ -14,6 +14,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -52,13 +53,15 @@ const InputForm = () => (
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectGroup>
-                {collection.items.map((country) => (
-                  <SelectItem item={country} key={country.value}>
-                    {country.label}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
+              <SelectList>
+                <SelectGroup>
+                  {collection.items.map((country) => (
+                    <SelectItem item={country} key={country.value}>
+                      {country.label}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectList>
             </SelectContent>
           </Select>
         </Field>

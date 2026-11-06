@@ -35,6 +35,7 @@ import { Checkbox } from "@/registry/react/components/checkbox";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -155,14 +156,17 @@ const Example = () => {
                 </Button>
               </MenuTrigger>
               <MenuContent>
-                <MenuItem value="archive">
-                  <ArchiveIcon />
-                  Archive
-                </MenuItem>
-                <MenuItem value="duplicate">
-                  <CopyIcon />
-                  Duplicate
-                </MenuItem>
+                <MenuList>
+                  <MenuItem value="archive">
+                    <ArchiveIcon />
+                    Archive
+                  </MenuItem>
+                  <MenuItem value="duplicate">
+                    <CopyIcon />
+                    Duplicate
+                  </MenuItem>
+
+                </MenuList>
               </MenuContent>
             </Menu>
             <ActionBarSeparator />

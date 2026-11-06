@@ -157,7 +157,7 @@ Components own anatomy, variants, state, and focus. Layouts own placement and sp
 
 **Inputs / fields:** `Field` owns label ↔ control ↔ description ↔ error. Invalid state is semantic and not color-only.
 
-**Overlays:** Own stacking and positioning; no local `z-index`. Require a title part. Anchored: `origin-(--transform-origin)`, 98% scale, fade, placement-aware travel. Centered: `origin-center`. Motion timings and reduced-motion rules live in the [design contract](public/design.md).
+**Overlays:** Own stacking and positioning; no local `z-index`. Require a title part. List overlays (Menu, Combobox, Autocomplete, Select, ColorPicker, DatePicker): no exit animation — see [`CODE_STYLE.md`](CODE_STYLE.md). Other anchored (Popover, Tooltip, HoverCard, …): `origin-(--transform-origin)`, 98% scale, fade, placement-aware travel. Centered: `origin-center`. Motion timings and reduced-motion rules live in the [design contract](public/design.md).
 
 **Selection vs action:** `accent` for contextual hover/selection; `primary` for durable emphasis. Status colors encode real outcomes and include a non-color cue.
 

@@ -13,7 +13,7 @@ const floatVariants = tv({
   variants: {
     placement: {
       "bottom-center": [
-        "start-1/2 bottom-0",
+        "inset-s-1/2 bottom-0",
         "-translate-x-1/2 translate-y-1/2",
         "rtl:translate-x-1/2",
       ],
@@ -28,7 +28,7 @@ const floatVariants = tv({
         "rtl:translate-x-1/2",
       ],
       "middle-center": [
-        "start-1/2 top-1/2",
+        "inset-s-1/2 top-1/2",
         "-translate-x-1/2 -translate-y-1/2",
         "rtl:translate-x-1/2",
       ],
@@ -43,7 +43,7 @@ const floatVariants = tv({
         "rtl:translate-x-1/2",
       ],
       "top-center": [
-        "start-1/2 top-0",
+        "inset-s-1/2 top-0",
         "-translate-x-1/2 -translate-y-1/2",
         "rtl:translate-x-1/2",
       ],

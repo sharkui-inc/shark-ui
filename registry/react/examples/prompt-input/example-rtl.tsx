@@ -39,6 +39,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuSeparator,
@@ -57,6 +58,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -107,23 +109,26 @@ const Example = () => {
                 </PromptInputButton>
               </MenuTrigger>
               <MenuContent className="min-w-80">
-                <MenuGroup heading={values.actionSections.context}>
-                  {contextActions.map((action) => (
-                    <MenuItem key={action.value} value={action.value}>
-                      {action.icon}
-                      {values.actionLabels[action.value]}
-                    </MenuItem>
-                  ))}
-                </MenuGroup>
-                <MenuSeparator />
-                <MenuGroup heading={values.actionSections.agent}>
-                  {agentActions.map((action) => (
-                    <MenuItem key={action.value} value={action.value}>
-                      {action.icon}
-                      {values.actionLabels[action.value]}
-                    </MenuItem>
-                  ))}
-                </MenuGroup>
+                <MenuList>
+                  <MenuGroup heading={values.actionSections.context}>
+                    {contextActions.map((action) => (
+                      <MenuItem key={action.value} value={action.value}>
+                        {action.icon}
+                        {values.actionLabels[action.value]}
+                      </MenuItem>
+                    ))}
+                  </MenuGroup>
+                  <MenuSeparator />
+                  <MenuGroup heading={values.actionSections.agent}>
+                    {agentActions.map((action) => (
+                      <MenuItem key={action.value} value={action.value}>
+                        {action.icon}
+                        {values.actionLabels[action.value]}
+                      </MenuItem>
+                    ))}
+                  </MenuGroup>
+
+                </MenuList>
               </MenuContent>
             </Menu>
             <Select
@@ -137,16 +142,19 @@ const Example = () => {
                 <SelectValue placeholder={values.accessLevels[0].label} />
               </SelectTrigger>
               <SelectContent>
-                {accessCollection.items.map((item) => (
-                  <SelectItem item={item} key={item.value}>
-                    <span className="flex min-w-0 flex-col gap-0.5">
-                      <span>{item.label}</span>
-                      <span className="text-muted-foreground text-xs">
-                        {item.description}
+                <SelectList>
+                  {accessCollection.items.map((item) => (
+                    <SelectItem item={item} key={item.value}>
+                      <span className="flex min-w-0 flex-col gap-0.5">
+                        <span>{item.label}</span>
+                        <span className="text-muted-foreground text-xs">
+                          {item.description}
+                        </span>
                       </span>
-                    </span>
-                  </SelectItem>
-                ))}
+                    </SelectItem>
+                  ))}
+
+                </SelectList>
               </SelectContent>
             </Select>
           </PromptInputTools>
@@ -182,11 +190,14 @@ const Example = () => {
               <SelectValue placeholder={values.efforts[1].label} />
             </SelectTrigger>
             <SelectContent>
-              {effortCollection.items.map((item) => (
-                <SelectItem item={item} key={item.value}>
-                  {item.label}
-                </SelectItem>
-              ))}
+              <SelectList>
+                {effortCollection.items.map((item) => (
+                  <SelectItem item={item} key={item.value}>
+                    {item.label}
+                  </SelectItem>
+                ))}
+
+              </SelectList>
             </SelectContent>
           </Select>
           <PromptInputButton

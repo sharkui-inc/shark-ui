@@ -4,6 +4,7 @@ import { createListCollection } from "@ark-ui/react";
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectGroup,
   SelectItem,
   SelectTrigger,
@@ -17,13 +18,16 @@ const SelectDemo = () => (
     </SelectTrigger>
 
     <SelectContent>
-      <SelectGroup heading="Fruits">
-        {collection.items.map((item) => (
-          <SelectItem item={item} key={item}>
-            {item}
-          </SelectItem>
-        ))}
-      </SelectGroup>
+      <SelectList>
+        <SelectGroup heading="Fruits">
+          {collection.items.map((item) => (
+            <SelectItem item={item} key={item}>
+              {item}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+
+      </SelectList>
     </SelectContent>
   </Select>
 );

@@ -61,12 +61,12 @@ Select
 ├── SelectTrigger
 │   └── SelectValue
 └── SelectContent
-    ├── SelectEmpty
-    ├── SelectClearTrigger
-    ├── SelectGroup
-    │   ├── SelectGroupLabel
-    │   └── SelectItem
-    └── SelectItem
+    └── SelectList
+        ├── SelectEmpty
+        ├── SelectGroup
+        │   ├── SelectGroupLabel
+        │   └── SelectItem
+        └── SelectItem
 ```
 
 ## Usage
@@ -77,6 +77,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -92,11 +93,13 @@ const collection = createListCollection({
     <SelectValue placeholder="Select an option" />
   </SelectTrigger>
   <SelectContent>
-    {collection.items.map((item) => (
-      <SelectItem item={item} key={item}>
-        {item}
-      </SelectItem>
-    ))}
+    <SelectList>
+      {collection.items.map((item) => (
+        <SelectItem item={item} key={item}>
+          {item}
+        </SelectItem>
+      ))}
+    </SelectList>
   </SelectContent>
 </Select>
 ```
@@ -185,6 +188,12 @@ Cap how many items can be selected.
 
 <ComponentPreview componentName="select" fileName="example-with-scroll" />
 
+### With Search
+
+Filter options with `useListCollection`, `useFilter`, and an `Input` inside `SelectContent`.
+
+<ComponentPreview componentName="select" fileName="example-with-search" />
+
 ### Empty
 
 Use `SelectEmpty` to display a message when the collection has no items.
@@ -257,6 +266,15 @@ Shows the selected value or placeholder. Use `SelectContext` as children for cus
 ### SelectContent
 
 Holds the menu options. Displayed in a portal.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+
+### SelectList
+
+Scrollable list of options inside `SelectContent`.
 
 | Prop | Type | Default |
 | --- | --- | --- |

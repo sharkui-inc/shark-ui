@@ -19,6 +19,7 @@ import { ButtonGroup } from "@/registry/react/components/button-group";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuTrigger,
@@ -98,14 +99,17 @@ const ComposeMenu = (props: ComposeMenuProps) => {
         </Button>
       </MenuTrigger>
       <MenuContent className="min-w-44">
-        <MenuGroup>
-          {items.map((item) => (
-            <MenuItem key={item.value} value={item.value}>
-              {item.icon}
-              {item.label}
-            </MenuItem>
-          ))}
-        </MenuGroup>
+        <MenuList>
+          <MenuGroup>
+            {items.map((item) => (
+              <MenuItem key={item.value} value={item.value}>
+                {item.icon}
+                {item.label}
+              </MenuItem>
+            ))}
+          </MenuGroup>
+
+        </MenuList>
       </MenuContent>
     </Menu>
   );

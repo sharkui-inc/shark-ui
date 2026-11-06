@@ -9,6 +9,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -22,11 +23,14 @@ const Example = () => (
         <SelectValue placeholder="Select a country" />
       </SelectTrigger>
       <SelectContent>
-        {collection.items.map((item) => (
-          <SelectItem item={item} key={item}>
-            {item}
-          </SelectItem>
-        ))}
+        <SelectList>
+          {collection.items.map((item) => (
+            <SelectItem item={item} key={item}>
+              {item}
+            </SelectItem>
+          ))}
+
+        </SelectList>
       </SelectContent>
     </Select>
     <FieldHelper>Used for shipping estimates</FieldHelper>

@@ -6,7 +6,7 @@ import {
 import { Switch } from "@/registry/react/components/switch";
 
 const SwitchSizes = () => (
-  <FieldGroup className="w-full max-w-[10rem]">
+  <FieldGroup className="w-full max-w-40">
     <Field orientation="horizontal">
       <Switch className="[--size:--spacing(4)]" />
       <FieldLabel>Small</FieldLabel>

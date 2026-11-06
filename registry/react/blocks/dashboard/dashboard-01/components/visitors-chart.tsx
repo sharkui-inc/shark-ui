@@ -22,7 +22,7 @@ export const VisitorsChart = () => (
       <CardDescription>Unique visitors over the last 30 days</CardDescription>
     </CardHeader>
     <CardContent>
-      <ChartContainer className="h-[300px] w-full" config={chartConfig}>
+      <ChartContainer className="h-75 w-full" config={chartConfig}>
         <AreaChart
           accessibilityLayer
           data={chartData}

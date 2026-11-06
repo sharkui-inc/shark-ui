@@ -28,7 +28,7 @@ const BlocksPage = async () => {
   return (
     <SkipNavContent>
       <React.Suspense
-        fallback={<Skeleton className="container h-[900px] w-full" />}
+        fallback={<Skeleton className="container h-225 w-full" />}
       >
         <BlocksBrowser
           blocks={browserBlocks}

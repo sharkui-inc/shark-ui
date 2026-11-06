@@ -11,6 +11,7 @@ import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import {
   ContextMenu,
   ContextMenuContent,
+  ContextMenuList,
   ContextMenuGroup,
   ContextMenuItem,
   ContextMenuSeparator,
@@ -31,47 +32,53 @@ const Example = () => {
         {values.hint}
       </ContextMenuTrigger>
       <ContextMenuContent className="min-w-40">
-        <ContextMenuGroup>
-          <ContextMenuItem value="forward">
-            <SendIcon />
-            {values.forward}
-            <ContextMenuShortcut className="hidden sm:inline-flex">
-              {values.shortcutForward}
-            </ContextMenuShortcut>
-          </ContextMenuItem>
-          <ContextMenuItem value="reply">
-            <ReplyIcon />
-            {values.reply}
-            <ContextMenuShortcut className="hidden sm:inline-flex">
-              {values.shortcutReply}
-            </ContextMenuShortcut>
-          </ContextMenuItem>
-          <ContextMenuItem value="archive">
-            <ArchiveIcon />
-            {values.archive}
-            <ContextMenuShortcut className="hidden sm:inline-flex">
-              {values.shortcutArchive}
-            </ContextMenuShortcut>
-          </ContextMenuItem>
-          <ContextMenuSub>
-            <ContextMenuSubTrigger>
-              <FolderInputIcon />
-              {values.moveTo}
-            </ContextMenuSubTrigger>
-            <ContextMenuSubContent>
-              <ContextMenuItem value="junk">{values.junk}</ContextMenuItem>
-              <ContextMenuItem value="trash">{values.trash}</ContextMenuItem>
-            </ContextMenuSubContent>
-          </ContextMenuSub>
-          <ContextMenuSeparator />
-          <ContextMenuItem value="delete" variant="destructive">
-            <Trash2Icon />
-            {values.delete}
-            <ContextMenuShortcut className="hidden sm:inline-flex">
-              {values.shortcutDelete}
-            </ContextMenuShortcut>
-          </ContextMenuItem>
-        </ContextMenuGroup>
+        <ContextMenuList>
+          <ContextMenuGroup>
+            <ContextMenuItem value="forward">
+              <SendIcon />
+              {values.forward}
+              <ContextMenuShortcut className="hidden sm:inline-flex">
+                {values.shortcutForward}
+              </ContextMenuShortcut>
+            </ContextMenuItem>
+            <ContextMenuItem value="reply">
+              <ReplyIcon />
+              {values.reply}
+              <ContextMenuShortcut className="hidden sm:inline-flex">
+                {values.shortcutReply}
+              </ContextMenuShortcut>
+            </ContextMenuItem>
+            <ContextMenuItem value="archive">
+              <ArchiveIcon />
+              {values.archive}
+              <ContextMenuShortcut className="hidden sm:inline-flex">
+                {values.shortcutArchive}
+              </ContextMenuShortcut>
+            </ContextMenuItem>
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>
+                <FolderInputIcon />
+                {values.moveTo}
+              </ContextMenuSubTrigger>
+              <ContextMenuSubContent>
+                <ContextMenuList>
+                  <ContextMenuItem value="junk">{values.junk}</ContextMenuItem>
+                  <ContextMenuItem value="trash">{values.trash}</ContextMenuItem>
+
+                </ContextMenuList>
+              </ContextMenuSubContent>
+            </ContextMenuSub>
+            <ContextMenuSeparator />
+            <ContextMenuItem value="delete" variant="destructive">
+              <Trash2Icon />
+              {values.delete}
+              <ContextMenuShortcut className="hidden sm:inline-flex">
+                {values.shortcutDelete}
+              </ContextMenuShortcut>
+            </ContextMenuItem>
+          </ContextMenuGroup>
+
+        </ContextMenuList>
       </ContextMenuContent>
     </ContextMenu>
   );

@@ -54,7 +54,7 @@ const InputGroupInCard = () => (
           <FieldLabel>Feedback &amp; Comments</FieldLabel>
           <InputGroup>
             <InputGroupTextarea
-              className="min-h-[100px]"
+              className="min-h-25"
               placeholder="Share your thoughts..."
             />
             <InputGroupAddon align="block-end">

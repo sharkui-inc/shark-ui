@@ -13,6 +13,7 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuRadioGroup,
@@ -35,57 +36,63 @@ const Example = () => {
         <Button variant="outline">{values.open}</Button>
       </MenuTrigger>
       <MenuContent className="min-w-40">
-        <MenuGroup>
-          <MenuItem value="forward">
-            <SendIcon />
-            {values.forward}
-            <MenuShortcut className="hidden sm:inline-flex">
-              {values.shortcutForward}
-            </MenuShortcut>
-          </MenuItem>
-          <MenuItem value="reply">
-            <ReplyIcon />
-            {values.reply}
-            <MenuShortcut className="hidden sm:inline-flex">
-              {values.shortcutReply}
-            </MenuShortcut>
-          </MenuItem>
-          <MenuItem value="archive">
-            <ArchiveIcon />
-            {values.archive}
-            <MenuShortcut className="hidden sm:inline-flex">
-              {values.shortcutArchive}
-            </MenuShortcut>
-          </MenuItem>
-          <MenuSub>
-            <MenuSubTrigger>
-              <FolderInputIcon />
-              {values.moveTo}
-            </MenuSubTrigger>
-            <MenuSubContent>
-              <MenuItem value="junk">{values.junk}</MenuItem>
-              <MenuItem value="trash">{values.trash}</MenuItem>
-            </MenuSubContent>
-          </MenuSub>
-          <MenuSeparator />
-          <MenuRadioGroup heading={values.priority} value="medium">
-            <MenuRadioItem value="low">{values.low}</MenuRadioItem>
-            <MenuRadioItem value="medium">{values.medium}</MenuRadioItem>
-            <MenuRadioItem value="high">{values.high}</MenuRadioItem>
-          </MenuRadioGroup>
-          <MenuSeparator />
-          <MenuCheckboxItem checked value="block">
-            {values.block}
-          </MenuCheckboxItem>
-          <MenuSeparator />
-          <MenuItem value="delete" variant="destructive">
-            <Trash2Icon />
-            {values.delete}
-            <MenuShortcut className="hidden sm:inline-flex">
-              {values.shortcutDelete}
-            </MenuShortcut>
-          </MenuItem>
-        </MenuGroup>
+        <MenuList>
+          <MenuGroup>
+            <MenuItem value="forward">
+              <SendIcon />
+              {values.forward}
+              <MenuShortcut className="hidden sm:inline-flex">
+                {values.shortcutForward}
+              </MenuShortcut>
+            </MenuItem>
+            <MenuItem value="reply">
+              <ReplyIcon />
+              {values.reply}
+              <MenuShortcut className="hidden sm:inline-flex">
+                {values.shortcutReply}
+              </MenuShortcut>
+            </MenuItem>
+            <MenuItem value="archive">
+              <ArchiveIcon />
+              {values.archive}
+              <MenuShortcut className="hidden sm:inline-flex">
+                {values.shortcutArchive}
+              </MenuShortcut>
+            </MenuItem>
+            <MenuSub>
+              <MenuSubTrigger>
+                <FolderInputIcon />
+                {values.moveTo}
+              </MenuSubTrigger>
+              <MenuSubContent>
+                <MenuList>
+                  <MenuItem value="junk">{values.junk}</MenuItem>
+                  <MenuItem value="trash">{values.trash}</MenuItem>
+
+                </MenuList>
+              </MenuSubContent>
+            </MenuSub>
+            <MenuSeparator />
+            <MenuRadioGroup heading={values.priority} value="medium">
+              <MenuRadioItem value="low">{values.low}</MenuRadioItem>
+              <MenuRadioItem value="medium">{values.medium}</MenuRadioItem>
+              <MenuRadioItem value="high">{values.high}</MenuRadioItem>
+            </MenuRadioGroup>
+            <MenuSeparator />
+            <MenuCheckboxItem checked value="block">
+              {values.block}
+            </MenuCheckboxItem>
+            <MenuSeparator />
+            <MenuItem value="delete" variant="destructive">
+              <Trash2Icon />
+              {values.delete}
+              <MenuShortcut className="hidden sm:inline-flex">
+                {values.shortcutDelete}
+              </MenuShortcut>
+            </MenuItem>
+          </MenuGroup>
+
+        </MenuList>
       </MenuContent>
     </Menu>
   );

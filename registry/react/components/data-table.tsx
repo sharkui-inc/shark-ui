@@ -39,6 +39,7 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuSeparator,
@@ -245,32 +246,35 @@ export const DataTableColumnHeader = <TData extends RowData, TValue>(
         </MenuTrigger>
 
         <MenuContent>
-          <MenuItem
-            onClick={() => column.toggleSorting(false)}
-            value="sort-ascending"
-          >
-            <ArrowUpIcon aria-hidden="true" />
-            Ascending
-          </MenuItem>
-          <MenuItem
-            onClick={() => column.toggleSorting(true)}
-            value="sort-descending"
-          >
-            <ArrowDownIcon aria-hidden="true" />
-            Descending
-          </MenuItem>
-          {column.getCanHide() && (
-            <>
-              <MenuSeparator />
-              <MenuItem
-                onClick={() => column.toggleVisibility(false)}
-                value="hide"
-              >
-                <EyeOffIcon aria-hidden="true" />
-                Hide
-              </MenuItem>
-            </>
-          )}
+          <MenuList>
+            <MenuItem
+              onClick={() => column.toggleSorting(false)}
+              value="sort-ascending"
+            >
+              <ArrowUpIcon aria-hidden="true" />
+              Ascending
+            </MenuItem>
+            <MenuItem
+              onClick={() => column.toggleSorting(true)}
+              value="sort-descending"
+            >
+              <ArrowDownIcon aria-hidden="true" />
+              Descending
+            </MenuItem>
+            {column.getCanHide() && (
+              <>
+                <MenuSeparator />
+                <MenuItem
+                  onClick={() => column.toggleVisibility(false)}
+                  value="hide"
+                >
+                  <EyeOffIcon aria-hidden="true" />
+                  Hide
+                </MenuItem>
+              </>
+            )}
+
+          </MenuList>
         </MenuContent>
       </Menu>
     </ark.div>
@@ -536,11 +540,14 @@ export const DataTableViewOptions = <TData extends RowData>(
       </MenuTrigger>
 
       <MenuContent>
-        <MenuGroup heading="Toggle columns">
-          {columns.map((column) => (
-            <DataTableViewOption column={column} key={column.id} />
-          ))}
-        </MenuGroup>
+        <MenuList>
+          <MenuGroup heading="Toggle columns">
+            {columns.map((column) => (
+              <DataTableViewOption column={column} key={column.id} />
+            ))}
+          </MenuGroup>
+
+        </MenuList>
       </MenuContent>
     </Menu>
   );

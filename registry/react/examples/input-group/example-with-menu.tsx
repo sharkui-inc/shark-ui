@@ -10,6 +10,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -29,18 +30,21 @@ const Example = () => (
           </InputGroupButton>
         </MenuTrigger>
         <MenuContent className="min-w-48">
-          <MenuItem value="file">
-            <FileIcon />
-            Select file
-          </MenuItem>
-          <MenuItem value="folder">
-            <FolderIcon />
-            Select folder
-          </MenuItem>
-          <MenuItem value="copy-path">
-            <CopyIcon />
-            Copy path
-          </MenuItem>
+          <MenuList>
+            <MenuItem value="file">
+              <FileIcon />
+              Select file
+            </MenuItem>
+            <MenuItem value="folder">
+              <FolderIcon />
+              Select folder
+            </MenuItem>
+            <MenuItem value="copy-path">
+              <CopyIcon />
+              Copy path
+            </MenuItem>
+
+          </MenuList>
         </MenuContent>
       </Menu>
     </InputGroupAddon>

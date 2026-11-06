@@ -2,7 +2,6 @@
 
 import {
   Combobox as ArkCombobox,
-  type ComboboxList as ArkComboboxList,
   useComboboxContext as useArkComboboxContext,
 } from "@ark-ui/react/combobox";
 import { ark } from "@ark-ui/react/factory";
@@ -25,7 +24,6 @@ import {
   menuItemControlVariants,
   menuItemIndicatorVariants,
 } from "@/registry/react/components/menu";
-import { ScrollArea } from "@/registry/react/components/scroll-area";
 
 export const useComboboxContext = useArkComboboxContext;
 
@@ -35,7 +33,6 @@ export const Combobox: ArkCombobox.RootComponent = (props) => {
   const {
     allowCustomValue = false,
     openOnClick = true,
-    scrollToIndexFn,
     lazyMount = true,
     unmountOnExit = true,
     onInputValueChange,
@@ -57,14 +54,6 @@ export const Combobox: ArkCombobox.RootComponent = (props) => {
         });
       }}
       openOnClick={openOnClick}
-      scrollToIndexFn={(details) => {
-        if (scrollToIndexFn) {
-          scrollToIndexFn(details);
-          return;
-        }
-
-        details.getElement()?.scrollIntoView({ block: "nearest" });
-      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     />
@@ -366,7 +355,6 @@ export const ComboboxPositioner = (
 export const comboboxContentVariants = tv({
   base: [
     "relative z-[calc(50+var(--layer-index,0))]",
-    "p-1.5",
     "origin-(--transform-origin)",
     "bg-popover",
     "text-popover-foreground",
@@ -378,9 +366,8 @@ export const comboboxContentVariants = tv({
     "data-[placement^=left]:slide-in-from-right-2",
     "data-[placement^=right]:slide-in-from-left-2",
     "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in",
-    "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out",
     "motion-reduce:animate-none",
-    "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+    "motion-reduce:data-[state=open]:animate-none",
   ],
 });
 
@@ -395,8 +382,8 @@ export const ComboboxContent = (
         <ArkCombobox.Content
           className={cn(
             comboboxContentVariants(),
-            "max-h-96 min-w-48",
-            "overflow-hidden",
+            "flex max-h-96 min-w-48 flex-col",
+            "p-1.5",
             className
           )}
           data-slot="combobox-content"
@@ -517,25 +504,21 @@ export const ComboboxEmpty = (
 };
 
 export const ComboboxList = (
-  props: React.ComponentProps<typeof ArkComboboxList>
+  props: React.ComponentProps<typeof ArkCombobox.List>
 ) => {
   const { className, ...rest } = props;
 
   return (
-    <ScrollArea
+    <ArkCombobox.List
       className={cn(
-        "h-auto max-h-[inherit]",
-        "**:data-[slot=scroll-area-viewport]:h-auto"
+        "min-h-0 flex-1",
+        "flex flex-col",
+        "overflow-x-hidden overflow-y-auto overscroll-y-contain",
+        "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
+        className
       )}
-      orientation="vertical"
-      overscrollContain
-      scrollFade
-    >
-      <ArkCombobox.List
-        className={cn("flex flex-col", className)}
-        data-slot="combobox-list"
-        {...rest}
-      />
-    </ScrollArea>
+      data-slot="combobox-list"
+      {...rest}
+    />
   );
 };

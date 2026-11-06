@@ -4,6 +4,7 @@ import {
   ContextMenuGroup,
   ContextMenuItem,
   ContextMenuTrigger,
+  ContextMenuList,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuBasic = () => (
@@ -15,13 +16,15 @@ const ContextMenuBasic = () => (
       </span>
     </ContextMenuTrigger>
     <ContextMenuContent>
-      <ContextMenuGroup>
-        <ContextMenuItem value="back">Back</ContextMenuItem>
-        <ContextMenuItem disabled value="forward">
-          Forward
-        </ContextMenuItem>
-        <ContextMenuItem value="reload">Reload</ContextMenuItem>
-      </ContextMenuGroup>
+      <ContextMenuList>
+        <ContextMenuGroup>
+          <ContextMenuItem value="back">Back</ContextMenuItem>
+          <ContextMenuItem disabled value="forward">
+            Forward
+          </ContextMenuItem>
+          <ContextMenuItem value="reload">Reload</ContextMenuItem>
+        </ContextMenuGroup>
+      </ContextMenuList>
     </ContextMenuContent>
   </ContextMenu>
 );

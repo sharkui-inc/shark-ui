@@ -70,7 +70,7 @@ export const HomeShowcase = (props: React.PropsWithChildren) => {
         </div>
       </div>
 
-      <div className={cn("relative", template && "min-h-[40rem]")}>
+      <div className={cn("relative", template && "min-h-160")}>
         <TemplatePreviewHost
           activeSlug={template?.slug ?? null}
           className={template ? "absolute inset-0" : undefined}

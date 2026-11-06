@@ -2,6 +2,7 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -12,11 +13,14 @@ const Example = () => (
       <Button variant="outline">Open</Button>
     </MenuTrigger>
     <MenuContent className="max-h-60 min-w-40">
-      {items.map((label, index) => (
-        <MenuItem key={label} value={`item-${index + 1}`}>
-          {label}
-        </MenuItem>
-      ))}
+      <MenuList>
+        {items.map((label, index) => (
+          <MenuItem key={label} value={`item-${index + 1}`}>
+            {label}
+          </MenuItem>
+        ))}
+
+      </MenuList>
     </MenuContent>
   </Menu>
 );

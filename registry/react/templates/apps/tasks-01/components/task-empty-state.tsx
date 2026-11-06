@@ -37,7 +37,7 @@ export const TaskEmptyState = (props: TaskEmptyStateProps) => {
             : "Create the first task to turn this sprint into a focused plan."}
         </StateDescription>
       </StateHeader>
-      <StateContent className="!flex-row flex-wrap justify-center">
+      <StateContent className="flex-row! flex-wrap justify-center">
         {hasFilters ? (
           <Button onClick={onClearFilters} size="sm" variant="outline">
             Reset filters

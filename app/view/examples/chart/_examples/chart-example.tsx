@@ -27,10 +27,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const ChartExample = () => (
-  <ChartContainer
-    className="min-h-[200px] w-full max-w-sm"
-    config={chartConfig}
-  >
+  <ChartContainer className="min-h-50 w-full max-w-sm" config={chartConfig}>
     <BarChart accessibilityLayer data={chartData}>
       <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
       <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />

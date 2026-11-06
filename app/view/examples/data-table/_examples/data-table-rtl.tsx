@@ -37,6 +37,7 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -121,14 +122,16 @@ const DataTableRtl = () => {
             </Button>
           </MenuTrigger>
           <MenuContent>
-            <MenuGroup>
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => (
-                  <ColumnVisibilityItem column={column} key={column.id} />
-                ))}
-            </MenuGroup>
+            <MenuList>
+              <MenuGroup>
+                {table
+                  .getAllColumns()
+                  .filter((column) => column.getCanHide())
+                  .map((column) => (
+                    <ColumnVisibilityItem column={column} key={column.id} />
+                  ))}
+              </MenuGroup>
+            </MenuList>
           </MenuContent>
         </Menu>
       </div>
@@ -338,21 +341,23 @@ const PaymentActions = (props: PaymentActionsProps) => {
         </Button>
       </MenuTrigger>
       <MenuContent className="min-w-44">
-        <MenuGroup heading={t.actions}>
-          <MenuItem
-            onClick={() => navigator.clipboard.writeText(payment.id)}
-            value="copy-payment-id"
-          >
-            {t.copyPaymentId}
-          </MenuItem>
-        </MenuGroup>
-        <MenuSeparator />
-        <MenuGroup>
-          <MenuItem value="view-customer">{t.viewCustomer}</MenuItem>
-          <MenuItem value="view-payment-details">
-            {t.viewPaymentDetails}
-          </MenuItem>
-        </MenuGroup>
+        <MenuList>
+          <MenuGroup heading={t.actions}>
+            <MenuItem
+              onClick={() => navigator.clipboard.writeText(payment.id)}
+              value="copy-payment-id"
+            >
+              {t.copyPaymentId}
+            </MenuItem>
+          </MenuGroup>
+          <MenuSeparator />
+          <MenuGroup>
+            <MenuItem value="view-customer">{t.viewCustomer}</MenuItem>
+            <MenuItem value="view-payment-details">
+              {t.viewPaymentDetails}
+            </MenuItem>
+          </MenuGroup>
+        </MenuList>
       </MenuContent>
     </Menu>
   );

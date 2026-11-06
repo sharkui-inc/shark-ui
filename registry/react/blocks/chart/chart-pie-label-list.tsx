@@ -62,7 +62,7 @@ const ChartPieLabelList = () => (
     </CardHeader>
     <CardContent className="flex-1 pb-0">
       <ChartContainer
-        className="[&_.recharts-text]:fill-background mx-auto aspect-square max-h-[250px]"
+        className="[&_.recharts-text]:fill-background mx-auto aspect-square max-h-62.5"
         config={chartConfig}
       >
         <PieChart>

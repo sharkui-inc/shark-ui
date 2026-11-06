@@ -11,7 +11,7 @@ const Example = () => {
 
   return (
     <div className="overflow-hidden">
-      <ScrollArea className="h-[350px] rounded-xl border">
+      <ScrollArea className="h-87.5 rounded-xl border">
         <Prose className="max-w-full p-8">
           <h1>{values.title}</h1>
           <p>{values.p1}</p>

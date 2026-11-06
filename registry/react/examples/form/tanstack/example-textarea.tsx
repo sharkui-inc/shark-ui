@@ -64,7 +64,7 @@ const Example = () => {
                 <Field invalid={!field.state.meta.isValid}>
                   <FieldLabel>More about you</FieldLabel>
                   <Textarea
-                    className="min-h-[120px]"
+                    className="min-h-30"
                     name={field.name}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}

@@ -7,6 +7,7 @@ import { Field } from "@/registry/react/components/field";
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -74,11 +75,14 @@ export const ThemeSelectorField = <T extends CollectionItem>(
           onKeyDownCapture={preview.onKeyDownCapture}
           onPointerLeave={preview.onPointerLeaveContent}
         >
-          {collection.items.map((item) => (
-            <SelectItem item={item} key={collection.getItemValue(item)}>
-              {renderItem(item)}
-            </SelectItem>
-          ))}
+          <SelectList>
+            {collection.items.map((item) => (
+              <SelectItem item={item} key={collection.getItemValue(item)}>
+                {renderItem(item)}
+              </SelectItem>
+            ))}
+
+          </SelectList>
         </SelectContent>
       </Select>
     </Field>

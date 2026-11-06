@@ -52,7 +52,7 @@ const ChartRadarLegend = () => (
     </CardHeader>
     <CardContent>
       <ChartContainer
-        className="mx-auto aspect-square max-h-[250px]"
+        className="mx-auto aspect-square max-h-62.5"
         config={chartConfig}
       >
         <RadarChart

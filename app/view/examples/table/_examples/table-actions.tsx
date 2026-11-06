@@ -4,6 +4,7 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -38,12 +39,14 @@ const TableActions = () => (
                 </Button>
               </MenuTrigger>
               <MenuContent>
-                <MenuItem value="edit">Edit</MenuItem>
-                <MenuItem value="duplicate">Duplicate</MenuItem>
-                <MenuSeparator />
-                <MenuItem value="delete" variant="destructive">
-                  Delete
-                </MenuItem>
+                <MenuList>
+                  <MenuItem value="edit">Edit</MenuItem>
+                  <MenuItem value="duplicate">Duplicate</MenuItem>
+                  <MenuSeparator />
+                  <MenuItem value="delete" variant="destructive">
+                    Delete
+                  </MenuItem>
+                </MenuList>
               </MenuContent>
             </Menu>
           </TableCell>

@@ -16,6 +16,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuSeparator,
@@ -64,14 +65,17 @@ export const MusicHeader = () => (
           </Button>
         </MenuTrigger>
         <MenuContent className="min-w-52">
-          <MenuGroup heading="Mira Vale">
-            <MenuItem value="profile">Profile</MenuItem>
-            <MenuItem value="followers">Friends activity</MenuItem>
-          </MenuGroup>
-          <MenuSeparator />
-          <MenuGroup>
-            <MenuItem value="settings">Account settings</MenuItem>
-          </MenuGroup>
+          <MenuList>
+            <MenuGroup heading="Mira Vale">
+              <MenuItem value="profile">Profile</MenuItem>
+              <MenuItem value="followers">Friends activity</MenuItem>
+            </MenuGroup>
+            <MenuSeparator />
+            <MenuGroup>
+              <MenuItem value="settings">Account settings</MenuItem>
+            </MenuGroup>
+
+          </MenuList>
         </MenuContent>
       </Menu>
     </div>

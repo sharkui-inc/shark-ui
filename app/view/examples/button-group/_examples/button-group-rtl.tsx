@@ -19,6 +19,7 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuRadioGroup,
   MenuRadioItem,
   MenuSeparator,
@@ -51,54 +52,58 @@ const ButtonGroupRtl = () => {
             </Button>
           </MenuTrigger>
           <MenuContent className="min-w-40">
-            <MenuGroup>
-              <MenuItem value="mark-as-read">
-                <MailCheckIcon />
-                وضع علامة كمقروء
-              </MenuItem>
-              <MenuItem value="archive">
-                <ArchiveIcon />
-                أرشفة
-              </MenuItem>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="snooze">
-                <ClockIcon />
-                تأجيل
-              </MenuItem>
-              <MenuItem value="add-to-calendar">
-                <CalendarPlusIcon />
-                إضافة إلى التقويم
-              </MenuItem>
-              <MenuItem value="add-to-list">
-                <ListFilterIcon />
-                إضافة إلى القائمة
-              </MenuItem>
-              <MenuSub>
-                <MenuSubTrigger>
-                  <TagIcon />
-                  تصنيف كـ...
-                </MenuSubTrigger>
-                <MenuSubContent>
-                  <MenuRadioGroup
-                    onValueChange={({ value }) => setLabel(value)}
-                    value={label}
-                  >
-                    <MenuRadioItem value="personal">شخصي</MenuRadioItem>
-                    <MenuRadioItem value="work">عمل</MenuRadioItem>
-                    <MenuRadioItem value="other">آخر</MenuRadioItem>
-                  </MenuRadioGroup>
-                </MenuSubContent>
-              </MenuSub>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="trash" variant="destructive">
-                <Trash2Icon />
-                سلة المهملات
-              </MenuItem>
-            </MenuGroup>
+            <MenuList>
+              <MenuGroup>
+                <MenuItem value="mark-as-read">
+                  <MailCheckIcon />
+                  وضع علامة كمقروء
+                </MenuItem>
+                <MenuItem value="archive">
+                  <ArchiveIcon />
+                  أرشفة
+                </MenuItem>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="snooze">
+                  <ClockIcon />
+                  تأجيل
+                </MenuItem>
+                <MenuItem value="add-to-calendar">
+                  <CalendarPlusIcon />
+                  إضافة إلى التقويم
+                </MenuItem>
+                <MenuItem value="add-to-list">
+                  <ListFilterIcon />
+                  إضافة إلى القائمة
+                </MenuItem>
+                <MenuSub>
+                  <MenuSubTrigger>
+                    <TagIcon />
+                    تصنيف كـ...
+                  </MenuSubTrigger>
+                  <MenuSubContent>
+                    <MenuList>
+                      <MenuRadioGroup
+                        onValueChange={({ value }) => setLabel(value)}
+                        value={label}
+                      >
+                        <MenuRadioItem value="personal">شخصي</MenuRadioItem>
+                        <MenuRadioItem value="work">عمل</MenuRadioItem>
+                        <MenuRadioItem value="other">آخر</MenuRadioItem>
+                      </MenuRadioGroup>
+                    </MenuList>
+                  </MenuSubContent>
+                </MenuSub>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="trash" variant="destructive">
+                  <Trash2Icon />
+                  سلة المهملات
+                </MenuItem>
+              </MenuGroup>
+            </MenuList>
           </MenuContent>
         </Menu>
       </ButtonGroup>

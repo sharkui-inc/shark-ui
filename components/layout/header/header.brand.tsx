@@ -12,6 +12,7 @@ import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
+  ContextMenuList,
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from "@/registry/react/components/context-menu";
@@ -50,35 +51,37 @@ export const HeaderBrand = (
         {...rest}
       />
       <ContextMenuContent>
-        <Clipboard value={sharkSvg}>
-          <ContextMenuItem asChild value="copy-mark-as-svg">
-            <ClipboardTrigger>
-              <SharkIcon className="size-3.5" />
-              Copy mark as SVG
-            </ClipboardTrigger>
+        <ContextMenuList>
+          <Clipboard className="w-full" value={sharkSvg}>
+            <ContextMenuItem asChild value="copy-mark-as-svg">
+              <ClipboardTrigger>
+                <SharkIcon className="size-3.5" />
+                Copy mark as SVG
+              </ClipboardTrigger>
+            </ContextMenuItem>
+          </Clipboard>
+          <ContextMenuSeparator />
+          <ContextMenuItem asChild value="download-mark-as-png">
+            <DownloadTrigger
+              data={downloadPng}
+              fileName="shark.png"
+              mimeType="image/png"
+            >
+              <DownloadIcon />
+              Download mark as PNG
+            </DownloadTrigger>
           </ContextMenuItem>
-        </Clipboard>
-        <ContextMenuSeparator />
-        <ContextMenuItem asChild value="download-mark-as-png">
-          <DownloadTrigger
-            data={downloadPng}
-            fileName="shark.png"
-            mimeType="image/png"
-          >
-            <DownloadIcon />
-            Download mark as PNG
-          </DownloadTrigger>
-        </ContextMenuItem>
-        <ContextMenuItem asChild value="download-mark-as-webp">
-          <DownloadTrigger
-            data={downloadWebp}
-            fileName="shark.webp"
-            mimeType="image/webp"
-          >
-            <DownloadIcon />
-            Download mark as WEBP
-          </DownloadTrigger>
-        </ContextMenuItem>
+          <ContextMenuItem asChild value="download-mark-as-webp">
+            <DownloadTrigger
+              data={downloadWebp}
+              fileName="shark.webp"
+              mimeType="image/webp"
+            >
+              <DownloadIcon />
+              Download mark as WEBP
+            </DownloadTrigger>
+          </ContextMenuItem>
+        </ContextMenuList>
       </ContextMenuContent>
     </ContextMenu>
   );

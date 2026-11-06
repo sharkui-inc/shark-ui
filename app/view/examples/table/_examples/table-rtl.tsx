@@ -31,7 +31,7 @@ const TableRtl = () => (
     <TableCaption>{t.caption}</TableCaption>
     <TableHeader>
       <TableRow>
-        <TableHead className="w-[100px]">{t.invoice}</TableHead>
+        <TableHead className="w-25">{t.invoice}</TableHead>
         <TableHead>{t.status}</TableHead>
         <TableHead>{t.method}</TableHead>
         <TableHead className="text-end">{t.amount}</TableHead>

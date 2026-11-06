@@ -6,6 +6,7 @@ import React from "react";
 import {
   ContextMenu,
   ContextMenuContent,
+  ContextMenuList,
   ContextMenuGroup,
   ContextMenuItem,
   ContextMenuSeparator,
@@ -80,22 +81,25 @@ const ChatRow = (props: ChatRowProps) => {
         </Message>
       </ContextMenuTrigger>
       <ContextMenuContent className="min-w-48">
-        <EmojiPicker onValueChange={handleReactionChange} value={reaction} />
-        <ContextMenuSeparator />
-        <ContextMenuGroup>
-          <ContextMenuItem value="copy">
-            <CopyIcon />
-            Copy
-          </ContextMenuItem>
-          <ContextMenuItem value="reply">
-            <ReplyIcon />
-            Reply
-          </ContextMenuItem>
-          <ContextMenuItem value="delete" variant="destructive">
-            <Trash2Icon />
-            Delete
-          </ContextMenuItem>
-        </ContextMenuGroup>
+        <ContextMenuList>
+          <EmojiPicker onValueChange={handleReactionChange} value={reaction} />
+          <ContextMenuSeparator />
+          <ContextMenuGroup>
+            <ContextMenuItem value="copy">
+              <CopyIcon />
+              Copy
+            </ContextMenuItem>
+            <ContextMenuItem value="reply">
+              <ReplyIcon />
+              Reply
+            </ContextMenuItem>
+            <ContextMenuItem value="delete" variant="destructive">
+              <Trash2Icon />
+              Delete
+            </ContextMenuItem>
+          </ContextMenuGroup>
+
+        </ContextMenuList>
       </ContextMenuContent>
     </ContextMenu>
   );

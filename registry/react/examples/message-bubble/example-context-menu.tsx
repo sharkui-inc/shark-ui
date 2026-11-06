@@ -12,6 +12,7 @@ import {
 import {
   ContextMenu,
   ContextMenuContent,
+  ContextMenuList,
   ContextMenuTrigger,
 } from "@/registry/react/components/context-menu";
 import {
@@ -19,6 +20,7 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -38,7 +40,9 @@ const Example = () => (
           </MessageBubbleContent>
         </ContextMenuTrigger>
         <ContextMenuContent className="min-w-48">
-          <MessageActions />
+          <ContextMenuList>
+            <MessageActions />
+          </ContextMenuList>
         </ContextMenuContent>
       </ContextMenu>
       <Menu>
@@ -46,7 +50,9 @@ const Example = () => (
           <MessageBubbleTrigger />
         </MenuTrigger>
         <MenuContent className="min-w-48">
-          <MessageActions />
+          <MenuList>
+            <MessageActions />
+          </MenuList>
         </MenuContent>
       </Menu>
     </MessageBubble>

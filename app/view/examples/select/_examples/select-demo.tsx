@@ -5,6 +5,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -23,15 +24,17 @@ const SelectDemo = () => (
     defaultValue={["banana"]}
     positioning={{ fitViewport: true }}
   >
-    <SelectTrigger className="w-[180px]">
+    <SelectTrigger className="w-45">
       <SelectValue placeholder="Select a fruit" />
     </SelectTrigger>
     <SelectContent>
-      {items.map((item) => (
-        <SelectItem item={item} key={item.value}>
-          {item.label}
-        </SelectItem>
-      ))}
+      <SelectList>
+        {items.map((item) => (
+          <SelectItem item={item} key={item.value}>
+            {item.label}
+          </SelectItem>
+        ))}
+      </SelectList>
     </SelectContent>
   </Select>
 );

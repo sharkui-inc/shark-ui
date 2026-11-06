@@ -28,7 +28,6 @@ export const Select: ArkSelect.RootComponent = (props) => {
   const {
     lazyMount = true,
     unmountOnExit = true,
-    scrollToIndexFn,
     className,
     children,
     ...rest
@@ -39,14 +38,6 @@ export const Select: ArkSelect.RootComponent = (props) => {
       className={cn("flex flex-col gap-2", className)}
       data-slot="select"
       lazyMount={lazyMount}
-      scrollToIndexFn={(details) => {
-        if (scrollToIndexFn) {
-          scrollToIndexFn(details);
-          return;
-        }
-
-        details.getElement()?.scrollIntoView({ block: "nearest" });
-      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     >
@@ -229,11 +220,9 @@ export const SelectContent = (
           className={cn(
             "z-[calc(50+var(--layer-index,0))]",
             "relative",
-            "max-h-96 min-w-(--reference-width)",
+            "flex max-h-96 min-w-(--reference-width) flex-col",
             "p-1.5",
-            "overflow-x-hidden overflow-y-auto overscroll-y-contain",
-            "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
-            "bg-popover",
+            "bg-popover bg-clip-padding",
             "text-popover-foreground",
             "rounded-xl border shadow-lg/4",
             "origin-(--transform-origin)",
@@ -244,9 +233,8 @@ export const SelectContent = (
             "data-[placement^=left]:slide-in-from-right-2",
             "data-[placement^=right]:slide-in-from-left-2",
             "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in",
-            "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out",
             "motion-reduce:animate-none",
-            "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+            "motion-reduce:data-[state=open]:animate-none",
             className
           )}
           data-slot="select-content"
@@ -256,6 +244,26 @@ export const SelectContent = (
         </ArkSelect.Content>
       </ArkSelect.Positioner>
     </Portal>
+  );
+};
+
+export const SelectList = (
+  props: React.ComponentProps<typeof ArkSelect.List>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkSelect.List
+      className={cn(
+        "min-h-0 flex-1",
+        "flex flex-col",
+        "overflow-x-hidden overflow-y-auto overscroll-y-contain",
+        "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
+        className
+      )}
+      data-slot="select-list"
+      {...rest}
+    />
   );
 };
 
@@ -365,9 +373,9 @@ export const SelectClearTrigger = (
 export const SelectEmpty = (props: React.ComponentProps<typeof ark.div>) => {
   const { className, ...rest } = props;
 
-  const { empty } = useSelectContext();
+  const { collection } = useSelectContext();
 
-  if (empty) {
+  if (collection.size === 0) {
     return (
       <ark.div
         className={cn(menuEmptyVariants(), className)}

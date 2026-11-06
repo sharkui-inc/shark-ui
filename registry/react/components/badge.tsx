@@ -19,7 +19,7 @@ export const badgeVariants = tv({
     "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
     "[&_svg]:pointer-events-none [&_svg]:size-3 [&_svg]:shrink-0",
     "has-[>[data-icon=inline-end]]:pe-[calc(var(--badge-px)-(--spacing(0.5)))] has-[>[data-icon=inline-start]]:ps-[calc(var(--badge-px)-(--spacing(0.5)))]",
-    "[&_[data-icon=inline-end]]:order-last [&_[data-icon=inline-start]]:order-first",
+    "**:data-[icon=inline-end]:order-last **:data-[icon=inline-start]:order-first",
     "[button&,a&]:cursor-pointer",
     "motion-reduce:transition-none",
   ],

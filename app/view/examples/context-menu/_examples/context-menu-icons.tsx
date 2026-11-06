@@ -11,6 +11,7 @@ import {
   ContextMenuItem,
   ContextMenuSeparator,
   ContextMenuTrigger,
+  ContextMenuList,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuIcons = () => (
@@ -22,27 +23,29 @@ const ContextMenuIcons = () => (
       </span>
     </ContextMenuTrigger>
     <ContextMenuContent>
-      <ContextMenuGroup>
-        <ContextMenuItem value="copy">
-          <CopyIcon />
-          Copy
-        </ContextMenuItem>
-        <ContextMenuItem value="cut">
-          <ScissorsIcon />
-          Cut
-        </ContextMenuItem>
-        <ContextMenuItem value="paste">
-          <ClipboardPasteIcon />
-          Paste
-        </ContextMenuItem>
-      </ContextMenuGroup>
-      <ContextMenuSeparator />
-      <ContextMenuGroup>
-        <ContextMenuItem value="delete" variant="destructive">
-          <TrashIcon />
-          Delete
-        </ContextMenuItem>
-      </ContextMenuGroup>
+      <ContextMenuList>
+        <ContextMenuGroup>
+          <ContextMenuItem value="copy">
+            <CopyIcon />
+            Copy
+          </ContextMenuItem>
+          <ContextMenuItem value="cut">
+            <ScissorsIcon />
+            Cut
+          </ContextMenuItem>
+          <ContextMenuItem value="paste">
+            <ClipboardPasteIcon />
+            Paste
+          </ContextMenuItem>
+        </ContextMenuGroup>
+        <ContextMenuSeparator />
+        <ContextMenuGroup>
+          <ContextMenuItem value="delete" variant="destructive">
+            <TrashIcon />
+            Delete
+          </ContextMenuItem>
+        </ContextMenuGroup>
+      </ContextMenuList>
     </ContextMenuContent>
   </ContextMenu>
 );

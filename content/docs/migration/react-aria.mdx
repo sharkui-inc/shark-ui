@@ -51,6 +51,7 @@ import { createListCollection } from "@ark-ui/react";
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -63,11 +64,14 @@ const animals = createListCollection({ items: ["Cat", "Dog"] });
     <SelectValue placeholder="Favorite animal" />
   </SelectTrigger>
   <SelectContent>
-    {animals.items.map((item) => (
-      <SelectItem item={item} key={item}>
-        {item}
-      </SelectItem>
-    ))}
+    <SelectList>
+      {animals.items.map((item) => (
+        <SelectItem item={item} key={item}>
+          {item}
+        </SelectItem>
+      ))}
+  
+    </SelectList>
   </SelectContent>
 </Select>;
 ```

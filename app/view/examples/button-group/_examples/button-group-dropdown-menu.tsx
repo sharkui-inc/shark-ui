@@ -17,6 +17,7 @@ import {
   MenuContent,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -31,39 +32,41 @@ const ButtonGroupDropdownMenuExample = () => (
         </Button>
       </MenuTrigger>
       <MenuContent className="min-w-44">
-        <MenuGroup>
-          <MenuItem value="mute-conversation">
-            <VolumeOffIcon />
-            Mute Conversation
-          </MenuItem>
-          <MenuItem value="mark-as-read">
-            <CheckIcon />
-            Mark as Read
-          </MenuItem>
-          <MenuItem value="report-conversation">
-            <AlertTriangleIcon />
-            Report Conversation
-          </MenuItem>
-          <MenuItem value="block-user">
-            <UserRoundXIcon />
-            Block User
-          </MenuItem>
-          <MenuItem value="share-conversation">
-            <ShareIcon />
-            Share Conversation
-          </MenuItem>
-          <MenuItem value="copy-conversation">
-            <CopyIcon />
-            Copy Conversation
-          </MenuItem>
-        </MenuGroup>
-        <MenuSeparator />
-        <MenuGroup>
-          <MenuItem value="delete-conversation" variant="destructive">
-            <TrashIcon />
-            Delete Conversation
-          </MenuItem>
-        </MenuGroup>
+        <MenuList>
+          <MenuGroup>
+            <MenuItem value="mute-conversation">
+              <VolumeOffIcon />
+              Mute Conversation
+            </MenuItem>
+            <MenuItem value="mark-as-read">
+              <CheckIcon />
+              Mark as Read
+            </MenuItem>
+            <MenuItem value="report-conversation">
+              <AlertTriangleIcon />
+              Report Conversation
+            </MenuItem>
+            <MenuItem value="block-user">
+              <UserRoundXIcon />
+              Block User
+            </MenuItem>
+            <MenuItem value="share-conversation">
+              <ShareIcon />
+              Share Conversation
+            </MenuItem>
+            <MenuItem value="copy-conversation">
+              <CopyIcon />
+              Copy Conversation
+            </MenuItem>
+          </MenuGroup>
+          <MenuSeparator />
+          <MenuGroup>
+            <MenuItem value="delete-conversation" variant="destructive">
+              <TrashIcon />
+              Delete Conversation
+            </MenuItem>
+          </MenuGroup>
+        </MenuList>
       </MenuContent>
     </Menu>
   </ButtonGroup>

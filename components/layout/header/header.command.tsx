@@ -320,14 +320,14 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
                         {item.label}
                         {DOCS_UPDATED_ITEMS.includes(item.url) && (
                           <>
-                            <Status className="ms-auto" size="sm" />
+                            <Status className="ms-auto self-center" size="sm" />
                             <span className="sr-only">Updated</span>
                           </>
                         )}
                         {DOCS_NEW_ITEMS.includes(item.url) && (
                           <>
                             <Status
-                              className="ms-auto"
+                              className="ms-auto self-center"
                               size="sm"
                               variant="info"
                             />

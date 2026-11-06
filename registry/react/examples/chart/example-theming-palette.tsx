@@ -12,7 +12,7 @@ import {
 
 const Example = () => (
   <ChartContainer
-    className="h-[250px] w-full max-w-sm [--chart-1:var(--color-cyan-600)] [--chart-2:var(--color-amber-600)]"
+    className="h-62.5 w-full max-w-sm [--chart-1:var(--color-cyan-600)] [--chart-2:var(--color-amber-600)]"
     config={chartConfig}
   >
     <BarChart accessibilityLayer data={chartData}>

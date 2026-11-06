@@ -57,11 +57,9 @@ export const MenuPositioner = (
 export const menuContentVariants = tv({
   base: [
     "z-[calc(50+var(--layer-index,0))]",
-    "max-h-(--available-height) min-w-40",
+    "flex max-h-(--available-height) min-w-40 flex-col",
     "p-1.5",
-    "overflow-x-hidden overflow-y-auto overscroll-y-contain",
-    "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
-    "bg-popover",
+    "bg-popover bg-clip-padding",
     "text-popover-foreground",
     "rounded-xl border shadow-lg/4",
     "origin-(--transform-origin)",
@@ -72,9 +70,8 @@ export const menuContentVariants = tv({
     "data-[placement^=left]:slide-in-from-right-2",
     "data-[placement^=right]:slide-in-from-left-2",
     "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in",
-    "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out",
     "motion-reduce:animate-none",
-    "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+    "motion-reduce:data-[state=open]:animate-none",
   ],
 });
 
@@ -95,6 +92,24 @@ export const MenuContent = (
         </ArkMenu.Content>
       </MenuPositioner>
     </Portal>
+  );
+};
+
+export const MenuList = (props: React.ComponentProps<typeof ark.div>) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn(
+        "min-h-0 flex-1",
+        "flex flex-col",
+        "overflow-x-hidden overflow-y-auto overscroll-y-contain",
+        "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
+        className
+      )}
+      data-slot="menu-list"
+      {...rest}
+    />
   );
 };
 

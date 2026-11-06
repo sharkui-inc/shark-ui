@@ -16,6 +16,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
+  ContextMenuList,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuRtl = () => {
@@ -32,76 +33,82 @@ const ContextMenuRtl = () => {
         </span>
       </ContextMenuTrigger>
       <ContextMenuContent className="min-w-48">
-        <ContextMenuGroup>
-          <ContextMenuSub>
-            <ContextMenuSubTrigger>التنقل</ContextMenuSubTrigger>
-            <ContextMenuSubContent className="min-w-44">
-              <ContextMenuGroup>
-                <ContextMenuItem value="back">
-                  <ArrowLeftIcon />
-                  رجوع
-                  <ContextMenuShortcut>⌘[</ContextMenuShortcut>
-                </ContextMenuItem>
-                <ContextMenuItem disabled value="forward">
-                  <ArrowRightIcon />
-                  تقدم
-                  <ContextMenuShortcut>⌘]</ContextMenuShortcut>
-                </ContextMenuItem>
-                <ContextMenuItem value="reload">
-                  <RotateCwIcon />
-                  إعادة تحميل
-                  <ContextMenuShortcut>⌘R</ContextMenuShortcut>
-                </ContextMenuItem>
-              </ContextMenuGroup>
-            </ContextMenuSubContent>
-          </ContextMenuSub>
-          <ContextMenuSub>
-            <ContextMenuSubTrigger>المزيد من الأدوات</ContextMenuSubTrigger>
-            <ContextMenuSubContent className="min-w-44">
-              <ContextMenuGroup>
-                <ContextMenuItem value="save-page">
-                  حفظ الصفحة...
-                </ContextMenuItem>
-                <ContextMenuItem value="create-shortcut">
-                  إنشاء اختصار...
-                </ContextMenuItem>
-                <ContextMenuItem value="name-window">
-                  تسمية النافذة...
-                </ContextMenuItem>
-              </ContextMenuGroup>
-              <ContextMenuSeparator />
-              <ContextMenuGroup>
-                <ContextMenuItem value="developer-tools">
-                  أدوات المطور
-                </ContextMenuItem>
-              </ContextMenuGroup>
-              <ContextMenuSeparator />
-              <ContextMenuGroup>
-                <ContextMenuItem value="delete" variant="destructive">
-                  حذف
-                </ContextMenuItem>
-              </ContextMenuGroup>
-            </ContextMenuSubContent>
-          </ContextMenuSub>
-        </ContextMenuGroup>
-        <ContextMenuSeparator />
-        <ContextMenuCheckboxItem checked value="show-bookmarks">
-          إظهار الإشارات المرجعية
-        </ContextMenuCheckboxItem>
-        <ContextMenuCheckboxItem checked={false} value="show-full-urls">
-          إظهار عناوين URL الكاملة
-        </ContextMenuCheckboxItem>
-        <ContextMenuSeparator />
-        <ContextMenuRadioGroup
-          heading="الأشخاص"
-          onValueChange={({ value }) => setPeople(value)}
-          value={people}
-        >
-          <ContextMenuRadioItem value="pedro">
-            Pedro Duarte
-          </ContextMenuRadioItem>
-          <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
-        </ContextMenuRadioGroup>
+        <ContextMenuList>
+          <ContextMenuGroup>
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>التنقل</ContextMenuSubTrigger>
+              <ContextMenuSubContent className="min-w-44">
+                <ContextMenuList>
+                  <ContextMenuGroup>
+                    <ContextMenuItem value="back">
+                      <ArrowLeftIcon />
+                      رجوع
+                      <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+                    </ContextMenuItem>
+                    <ContextMenuItem disabled value="forward">
+                      <ArrowRightIcon />
+                      تقدم
+                      <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+                    </ContextMenuItem>
+                    <ContextMenuItem value="reload">
+                      <RotateCwIcon />
+                      إعادة تحميل
+                      <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+                    </ContextMenuItem>
+                  </ContextMenuGroup>
+                </ContextMenuList>
+              </ContextMenuSubContent>
+            </ContextMenuSub>
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>المزيد من الأدوات</ContextMenuSubTrigger>
+              <ContextMenuSubContent className="min-w-44">
+                <ContextMenuList>
+                  <ContextMenuGroup>
+                    <ContextMenuItem value="save-page">
+                      حفظ الصفحة...
+                    </ContextMenuItem>
+                    <ContextMenuItem value="create-shortcut">
+                      إنشاء اختصار...
+                    </ContextMenuItem>
+                    <ContextMenuItem value="name-window">
+                      تسمية النافذة...
+                    </ContextMenuItem>
+                  </ContextMenuGroup>
+                  <ContextMenuSeparator />
+                  <ContextMenuGroup>
+                    <ContextMenuItem value="developer-tools">
+                      أدوات المطور
+                    </ContextMenuItem>
+                  </ContextMenuGroup>
+                  <ContextMenuSeparator />
+                  <ContextMenuGroup>
+                    <ContextMenuItem value="delete" variant="destructive">
+                      حذف
+                    </ContextMenuItem>
+                  </ContextMenuGroup>
+                </ContextMenuList>
+              </ContextMenuSubContent>
+            </ContextMenuSub>
+          </ContextMenuGroup>
+          <ContextMenuSeparator />
+          <ContextMenuCheckboxItem checked value="show-bookmarks">
+            إظهار الإشارات المرجعية
+          </ContextMenuCheckboxItem>
+          <ContextMenuCheckboxItem checked={false} value="show-full-urls">
+            إظهار عناوين URL الكاملة
+          </ContextMenuCheckboxItem>
+          <ContextMenuSeparator />
+          <ContextMenuRadioGroup
+            heading="الأشخاص"
+            onValueChange={({ value }) => setPeople(value)}
+            value={people}
+          >
+            <ContextMenuRadioItem value="pedro">
+              Pedro Duarte
+            </ContextMenuRadioItem>
+            <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
+          </ContextMenuRadioGroup>
+        </ContextMenuList>
       </ContextMenuContent>
     </ContextMenu>
   );

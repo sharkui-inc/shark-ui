@@ -80,11 +80,15 @@ const frameworks = [
     <SelectValue placeholder="Framework" />
   </SelectTrigger>
   <SelectContent>
-    {frameworks.map((item) => (
-      <SelectItem key={item.value} value={item.value}>
-        {item.label}
-      </SelectItem>
-    ))}
+    <SelectList>
+      {frameworks.map((item) => (
+        <SelectItem key={item.value} value={item.value}>
+          {item.label}
+        </SelectItem>
+      ))}
+
+
+    </SelectList>
   </SelectContent>
 </Select>;
 ```
@@ -96,6 +100,7 @@ import { createListCollection } from "@ark-ui/react";
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -110,11 +115,14 @@ const frameworks = createListCollection({
     <SelectValue placeholder="Framework" />
   </SelectTrigger>
   <SelectContent>
-    {frameworks.items.map((item) => (
-      <SelectItem item={item} key={item}>
-        {item}
-      </SelectItem>
-    ))}
+    <SelectList>
+      {frameworks.items.map((item) => (
+        <SelectItem item={item} key={item}>
+          {item}
+        </SelectItem>
+      ))}
+  
+    </SelectList>
   </SelectContent>
 </Select>;
 ```

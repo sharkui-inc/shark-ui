@@ -8,6 +8,7 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuShortcut,
   MenuTrigger,
@@ -51,27 +52,30 @@ const Example = () => (
                 </Button>
               </MenuTrigger>
               <MenuContent className="min-w-40">
-                <MenuItem value="view">
-                  <EyeIcon />
-                  View
-                  <MenuShortcut className="hidden sm:inline-flex">
-                    ⌘ V
-                  </MenuShortcut>
-                </MenuItem>
-                <MenuItem value="edit">
-                  <PencilIcon />
-                  Edit
-                  <MenuShortcut className="hidden sm:inline-flex">
-                    ⌘ E
-                  </MenuShortcut>
-                </MenuItem>
-                <MenuItem value="delete" variant="destructive">
-                  <Trash2Icon />
-                  Delete
-                  <MenuShortcut className="hidden sm:inline-flex">
-                    ⌘ ⌫
-                  </MenuShortcut>
-                </MenuItem>
+                <MenuList>
+                  <MenuItem value="view">
+                    <EyeIcon />
+                    View
+                    <MenuShortcut className="hidden sm:inline-flex">
+                      ⌘ V
+                    </MenuShortcut>
+                  </MenuItem>
+                  <MenuItem value="edit">
+                    <PencilIcon />
+                    Edit
+                    <MenuShortcut className="hidden sm:inline-flex">
+                      ⌘ E
+                    </MenuShortcut>
+                  </MenuItem>
+                  <MenuItem value="delete" variant="destructive">
+                    <Trash2Icon />
+                    Delete
+                    <MenuShortcut className="hidden sm:inline-flex">
+                      ⌘ ⌫
+                    </MenuShortcut>
+                  </MenuItem>
+
+                </MenuList>
               </MenuContent>
             </Menu>
           </TableCell>

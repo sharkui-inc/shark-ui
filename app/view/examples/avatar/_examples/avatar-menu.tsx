@@ -8,6 +8,7 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -23,12 +24,14 @@ const AvatarMenu = () => (
       </Button>
     </MenuTrigger>
     <MenuContent className="min-w-40">
-      <MenuItem value="profile">Profile</MenuItem>
-      <MenuItem value="settings">Settings</MenuItem>
-      <MenuSeparator />
-      <MenuItem value="signout" variant="destructive">
-        Sign out
-      </MenuItem>
+      <MenuList>
+        <MenuItem value="profile">Profile</MenuItem>
+        <MenuItem value="settings">Settings</MenuItem>
+        <MenuSeparator />
+        <MenuItem value="signout" variant="destructive">
+          Sign out
+        </MenuItem>
+      </MenuList>
     </MenuContent>
   </Menu>
 );

@@ -22,6 +22,7 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -89,28 +90,31 @@ export const TaskSelectionActionBar = (props: TaskSelectionActionBarProps) => {
               </Button>
             </MenuTrigger>
             <MenuContent>
-              <MenuItem
-                onClick={() => onMove("In Progress")}
-                value="move-to-active"
-              >
-                <ArrowRightIcon aria-hidden="true" />
-                Move to active
-              </MenuItem>
-              <MenuItem
-                onClick={() => onMove("Backlog")}
-                value="move-to-backlog"
-              >
-                <ListRestartIcon aria-hidden="true" />
-                Move to backlog
-              </MenuItem>
-              <MenuItem
-                onClick={() => onMove("Canceled")}
-                value="cancel-tasks"
-                variant="destructive"
-              >
-                <XIcon aria-hidden="true" />
-                Cancel tasks
-              </MenuItem>
+              <MenuList>
+                <MenuItem
+                  onClick={() => onMove("In Progress")}
+                  value="move-to-active"
+                >
+                  <ArrowRightIcon aria-hidden="true" />
+                  Move to active
+                </MenuItem>
+                <MenuItem
+                  onClick={() => onMove("Backlog")}
+                  value="move-to-backlog"
+                >
+                  <ListRestartIcon aria-hidden="true" />
+                  Move to backlog
+                </MenuItem>
+                <MenuItem
+                  onClick={() => onMove("Canceled")}
+                  value="cancel-tasks"
+                  variant="destructive"
+                >
+                  <XIcon aria-hidden="true" />
+                  Cancel tasks
+                </MenuItem>
+
+              </MenuList>
             </MenuContent>
           </Menu>
           <ActionBarSeparator />

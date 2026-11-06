@@ -15,6 +15,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
 } from "@/registry/react/components/select";
@@ -90,15 +91,18 @@ export const TaskFilters = (props: TaskFiltersProps) => {
             <TaskStatusSelectValue placeholder="All" />
           </SelectTrigger>
           <SelectContent>
-            {statusFilterCollection.items.map((item) => (
-              <SelectItem item={item} key={item}>
-                {item === FILTER_ALL ? (
-                  <TaskAllOption />
-                ) : (
-                  <TaskStatusOption status={item as TaskStatus} />
-                )}
-              </SelectItem>
-            ))}
+            <SelectList>
+              {statusFilterCollection.items.map((item) => (
+                <SelectItem item={item} key={item}>
+                  {item === FILTER_ALL ? (
+                    <TaskAllOption />
+                  ) : (
+                    <TaskStatusOption status={item as TaskStatus} />
+                  )}
+                </SelectItem>
+              ))}
+
+            </SelectList>
           </SelectContent>
         </Select>
         <Select
@@ -117,15 +121,18 @@ export const TaskFilters = (props: TaskFiltersProps) => {
             <TaskPrioritySelectValue placeholder="All" />
           </SelectTrigger>
           <SelectContent>
-            {priorityFilterCollection.items.map((item) => (
-              <SelectItem item={item} key={item}>
-                {item === FILTER_ALL ? (
-                  <TaskAllOption />
-                ) : (
-                  <TaskPriorityOption priority={item as TaskPriority} />
-                )}
-              </SelectItem>
-            ))}
+            <SelectList>
+              {priorityFilterCollection.items.map((item) => (
+                <SelectItem item={item} key={item}>
+                  {item === FILTER_ALL ? (
+                    <TaskAllOption />
+                  ) : (
+                    <TaskPriorityOption priority={item as TaskPriority} />
+                  )}
+                </SelectItem>
+              ))}
+
+            </SelectList>
           </SelectContent>
         </Select>
         {hasFilters ? (

@@ -7,6 +7,7 @@ import {
   ContextMenuContent,
   ContextMenuGroup,
   ContextMenuTrigger,
+  ContextMenuList,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuCheckboxes = () => {
@@ -25,29 +26,31 @@ const ContextMenuCheckboxes = () => {
         </span>
       </ContextMenuTrigger>
       <ContextMenuContent>
-        <ContextMenuGroup>
-          <ContextMenuCheckboxItem
-            checked={showBookmarks}
-            onCheckedChange={setShowBookmarks}
-            value="show-bookmarks"
-          >
-            Show Bookmarks Bar
-          </ContextMenuCheckboxItem>
-          <ContextMenuCheckboxItem
-            checked={showFullUrls}
-            onCheckedChange={setShowFullUrls}
-            value="show-full-urls"
-          >
-            Show Full URLs
-          </ContextMenuCheckboxItem>
-          <ContextMenuCheckboxItem
-            checked={showDeveloperTools}
-            onCheckedChange={setShowDeveloperTools}
-            value="show-developer-tools"
-          >
-            Show Developer Tools
-          </ContextMenuCheckboxItem>
-        </ContextMenuGroup>
+        <ContextMenuList>
+          <ContextMenuGroup>
+            <ContextMenuCheckboxItem
+              checked={showBookmarks}
+              onCheckedChange={setShowBookmarks}
+              value="show-bookmarks"
+            >
+              Show Bookmarks Bar
+            </ContextMenuCheckboxItem>
+            <ContextMenuCheckboxItem
+              checked={showFullUrls}
+              onCheckedChange={setShowFullUrls}
+              value="show-full-urls"
+            >
+              Show Full URLs
+            </ContextMenuCheckboxItem>
+            <ContextMenuCheckboxItem
+              checked={showDeveloperTools}
+              onCheckedChange={setShowDeveloperTools}
+              value="show-developer-tools"
+            >
+              Show Developer Tools
+            </ContextMenuCheckboxItem>
+          </ContextMenuGroup>
+        </ContextMenuList>
       </ContextMenuContent>
     </ContextMenu>
   );

@@ -6,6 +6,7 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -29,15 +30,18 @@ export const DashboardHeader = () => {
           </Button>
         </MenuTrigger>
         <MenuContent>
-          {dateRanges.map((range) => (
-            <MenuItem
-              key={range}
-              onClick={() => setDateRange(range)}
-              value={range}
-            >
-              {range}
-            </MenuItem>
-          ))}
+          <MenuList>
+            {dateRanges.map((range) => (
+              <MenuItem
+                key={range}
+                onClick={() => setDateRange(range)}
+                value={range}
+              >
+                {range}
+              </MenuItem>
+            ))}
+
+          </MenuList>
         </MenuContent>
       </Menu>
       <Button size="sm">

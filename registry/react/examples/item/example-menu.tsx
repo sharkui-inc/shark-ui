@@ -16,6 +16,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -26,22 +27,25 @@ const Example = () => (
       <Button variant="outline">Open</Button>
     </MenuTrigger>
     <MenuContent className="min-w-72">
-      {people.map((person) => (
-        <MenuItem key={person.username} value={person.username}>
-          <Item className="[--space:--spacing(2)]">
-            <ItemMedia>
-              <Avatar size="sm">
-                <AvatarImage alt="" src={person.avatar} />
-                <AvatarFallback>{person.username.charAt(0)}</AvatarFallback>
-              </Avatar>
-            </ItemMedia>
-            <ItemContent>
-              <ItemTitle>{person.username}</ItemTitle>
-              <ItemDescription>{person.email}</ItemDescription>
-            </ItemContent>
-          </Item>
-        </MenuItem>
-      ))}
+      <MenuList>
+        {people.map((person) => (
+          <MenuItem key={person.username} value={person.username}>
+            <Item className="[--space:--spacing(2)]">
+              <ItemMedia>
+                <Avatar size="sm">
+                  <AvatarImage alt="" src={person.avatar} />
+                  <AvatarFallback>{person.username.charAt(0)}</AvatarFallback>
+                </Avatar>
+              </ItemMedia>
+              <ItemContent>
+                <ItemTitle>{person.username}</ItemTitle>
+                <ItemDescription>{person.email}</ItemDescription>
+              </ItemContent>
+            </Item>
+          </MenuItem>
+        ))}
+
+      </MenuList>
     </MenuContent>
   </Menu>
 );

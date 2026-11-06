@@ -30,22 +30,6 @@ export const SheetTrigger = (
   props: React.ComponentProps<typeof ArkDialog.Trigger>
 ) => <ArkDialog.Trigger data-slot="sheet-trigger" {...props} />;
 
-const sheetOverlayMotion = [
-  "duration-150 ease-out",
-  "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
-  "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
-  "motion-reduce:animate-none motion-reduce:transition-none",
-  "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
-] as const;
-
-const sheetContentMotion = [
-  "duration-200 ease-in-out",
-  "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
-  "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
-  "motion-reduce:animate-none motion-reduce:transition-none",
-  "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
-] as const;
-
 export const SheetOverlay = (
   props: React.ComponentProps<typeof DialogOverlay>
 ) => {
@@ -56,7 +40,6 @@ export const SheetOverlay = (
       className={cn(
         "peer-data-[slot=dialog-overlay]:block!",
         "peer-data-[slot=sheet-overlay]:hidden",
-        sheetOverlayMotion,
         className
       )}
       data-slot="sheet-overlay"
@@ -77,10 +60,10 @@ const sheetPositionerVariants = tv({
   },
   variants: {
     placement: {
-      bottom: ["grid grid-rows-[1fr_auto]", "not-data-[variant=inset]:pt-12"],
+      bottom: ["grid-rows-[1fr_auto]", "not-data-[variant=inset]:pt-12"],
       left: "flex justify-start",
       right: "flex justify-end",
-      top: ["grid grid-rows-[auto_1fr]", "not-data-[variant=inset]:pb-12"],
+      top: ["grid-rows-[auto_1fr]", "not-data-[variant=inset]:pb-12"],
     },
     variant: {
       default: "",
@@ -110,15 +93,22 @@ export const SheetPositioner = (props: SheetPositionerProps) => {
 const sheetContentVariants = tv({
   base: [
     "[--space:--spacing(6)]",
+    "[--nested-n:var(--nested-layer-count,0)]",
     "relative",
     "max-h-full min-h-0 w-full min-w-0",
     "flex flex-col",
-    "bg-popover",
+    "bg-popover bg-clip-padding",
     "text-popover-foreground",
     "shadow-lg/4",
     "outline-hidden",
-    "origin-center",
-    ...sheetContentMotion,
+    "opacity-[calc(1-0.1*var(--nested-n))]",
+    "scale-[calc(1-var(--nested-scale,0)*var(--nested-n))]",
+    "data-[has-nested=dialog]:overflow-hidden data-[has-nested=dialog]:rounded-2xl data-[has-nested=dialog]:border-y",
+    "transition duration-200 ease-in-out",
+    "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
+    "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
+    "motion-reduce:animate-none motion-reduce:transition-none",
+    "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
   ],
   defaultVariants: {
     placement: "right",
@@ -130,14 +120,21 @@ const sheetContentVariants = tv({
         "row-start-2",
         "pb-[env(safe-area-inset-bottom,0px)]",
         "border-t",
+        "origin-bottom",
+        "[--nested-scale:0.05]",
+        "data-[has-nested=dialog]:border-x",
+        "translate-y-[calc(-1*(1.25rem+6svh+5%)*var(--nested-n))]",
         "data-[state=closed]:slide-out-to-bottom-10",
         "data-[state=open]:slide-in-from-bottom-10",
       ],
       left: [
         "w-[calc(100%-(--spacing(12)))] max-w-md",
         "ps-[env(safe-area-inset-left,0px)]",
-        "col-start-2",
         "border-e",
+        "origin-left rtl:origin-right",
+        "[--nested-scale:0.1]",
+        "translate-x-[calc((1.25rem+10%)*var(--nested-n))]",
+        "rtl:translate-x-[calc(-1*(1.25rem+10%)*var(--nested-n))]",
         "data-[state=closed]:slide-out-to-left-10",
         "data-[state=open]:slide-in-from-left-10",
         "rtl:data-[state=closed]:slide-out-to-right-10 rtl:data-[state=open]:slide-in-from-right-10 rtl:ps-[env(safe-area-inset-right,0px)]",
@@ -145,8 +142,11 @@ const sheetContentVariants = tv({
       right: [
         "w-[calc(100%-(--spacing(12)))] max-w-md",
         "pe-[env(safe-area-inset-right,0px)]",
-        "col-start-2",
         "border-s",
+        "origin-right rtl:origin-left",
+        "[--nested-scale:0.1]",
+        "translate-x-[calc(-1*(1.25rem+10%)*var(--nested-n))]",
+        "rtl:translate-x-[calc((1.25rem+10%)*var(--nested-n))]",
         "data-[state=closed]:slide-out-to-right-10",
         "data-[state=open]:slide-in-from-right-10",
         "rtl:data-[state=closed]:slide-out-to-left-10 rtl:data-[state=open]:slide-in-from-left-10 rtl:pe-[env(safe-area-inset-left,0px)]",
@@ -154,6 +154,10 @@ const sheetContentVariants = tv({
       top: [
         "pt-[env(safe-area-inset-top,0px)]",
         "border-b",
+        "origin-top",
+        "[--nested-scale:0.05]",
+        "data-[has-nested=dialog]:border-x",
+        "translate-y-[calc((1.25rem+6svh+5%)*var(--nested-n))]",
         "data-[state=closed]:slide-out-to-top-10",
         "data-[state=open]:slide-in-from-top-10",
       ],

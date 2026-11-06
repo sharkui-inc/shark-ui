@@ -12,7 +12,7 @@ import {
 
 const Example = () => (
   <ChartContainer
-    className="mx-auto aspect-square max-h-[260px] w-full max-w-sm"
+    className="mx-auto aspect-square max-h-65 w-full max-w-sm"
     config={chartConfig}
   >
     <PieChart accessibilityLayer>

@@ -56,7 +56,7 @@ export const ActivityGoalExample = (props: React.ComponentProps<"div">) => {
           </Tooltip>
 
           <CircularProgress
-            className="size-[11.5rem]"
+            className="size-46"
             max={maxGoal}
             min={minGoal}
             size={184}

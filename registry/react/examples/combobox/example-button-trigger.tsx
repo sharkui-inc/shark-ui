@@ -61,7 +61,7 @@ const ComboboxSearch = () => {
   const { setInputValue } = useComboboxContext();
 
   return (
-    <InputGroup className="bg-input/32 mb-2 rounded-xl" size="md">
+    <InputGroup className="bg-input/32 rounded-xl" size="md">
       <ArkCombobox.Input asChild>
         <InputGroupInput
           aria-label="Search options"

@@ -5,6 +5,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -18,15 +19,17 @@ const collection = createListCollection({ items });
 
 const SelectScrollable = () => (
   <Select collection={collection} positioning={{ fitViewport: true }}>
-    <SelectTrigger className="w-[280px]">
+    <SelectTrigger className="w-70">
       <SelectValue placeholder="Select an item" />
     </SelectTrigger>
     <SelectContent className="max-h-56">
-      {collection.items.map((item) => (
-        <SelectItem item={item} key={item.value}>
-          {item.label}
-        </SelectItem>
-      ))}
+      <SelectList>
+        {collection.items.map((item) => (
+          <SelectItem item={item} key={item.value}>
+            {item.label}
+          </SelectItem>
+        ))}
+      </SelectList>
     </SelectContent>
   </Select>
 );

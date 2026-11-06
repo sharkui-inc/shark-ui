@@ -12,6 +12,7 @@ import {
 import {
   ContextMenu,
   ContextMenuContent,
+  ContextMenuList,
   ContextMenuItem,
   ContextMenuSeparator,
   ContextMenuTrigger,
@@ -86,24 +87,27 @@ const TreeNode = (props: NodeProviderProps) => {
               </TreeViewBranchItem>
             </ContextMenuTrigger>
             <ContextMenuContent className="min-w-40">
-              <ContextMenuItem value="add-folder">
-                <FolderPlusIcon aria-hidden="true" />
-                Add folder
-              </ContextMenuItem>
-              <ContextMenuItem value="add-file">
-                <FilePlusIcon aria-hidden="true" />
-                Add file
-              </ContextMenuItem>
-              <ContextMenuSeparator />
-              <ContextMenuItem value="rename">
-                <PencilIcon aria-hidden="true" />
-                Rename
-              </ContextMenuItem>
-              <ContextMenuSeparator />
-              <ContextMenuItem value="delete" variant="destructive">
-                <Trash2Icon aria-hidden="true" />
-                Delete
-              </ContextMenuItem>
+              <ContextMenuList>
+                <ContextMenuItem value="add-folder">
+                  <FolderPlusIcon aria-hidden="true" />
+                  Add folder
+                </ContextMenuItem>
+                <ContextMenuItem value="add-file">
+                  <FilePlusIcon aria-hidden="true" />
+                  Add file
+                </ContextMenuItem>
+                <ContextMenuSeparator />
+                <ContextMenuItem value="rename">
+                  <PencilIcon aria-hidden="true" />
+                  Rename
+                </ContextMenuItem>
+                <ContextMenuSeparator />
+                <ContextMenuItem value="delete" variant="destructive">
+                  <Trash2Icon aria-hidden="true" />
+                  Delete
+                </ContextMenuItem>
+
+              </ContextMenuList>
             </ContextMenuContent>
           </ContextMenu>
           <TreeViewBranchContent>
@@ -124,15 +128,18 @@ const TreeNode = (props: NodeProviderProps) => {
             </TreeViewContent>
           </ContextMenuTrigger>
           <ContextMenuContent className="min-w-40">
-            <ContextMenuItem value="add-file">
-              <PencilIcon aria-hidden="true" />
-              Rename
-            </ContextMenuItem>
-            <ContextMenuSeparator />
-            <ContextMenuItem value="delete" variant="destructive">
-              <Trash2Icon aria-hidden="true" />
-              Delete
-            </ContextMenuItem>
+            <ContextMenuList>
+              <ContextMenuItem value="add-file">
+                <PencilIcon aria-hidden="true" />
+                Rename
+              </ContextMenuItem>
+              <ContextMenuSeparator />
+              <ContextMenuItem value="delete" variant="destructive">
+                <Trash2Icon aria-hidden="true" />
+                Delete
+              </ContextMenuItem>
+
+            </ContextMenuList>
           </ContextMenuContent>
         </ContextMenu>
       )}

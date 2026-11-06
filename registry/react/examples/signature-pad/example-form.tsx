@@ -52,14 +52,14 @@ const Example = () => {
           <SignaturePad
             className={cn(
               "h-auto min-h-0 gap-0",
-              "[&_[data-slot=signature-pad-control]]:order-2",
-              "[&_[data-slot=signature-pad-control]]:h-40",
-              "[&_[data-slot=signature-pad-control]]:min-h-40",
-              "[&_[data-slot=signature-pad-control]]:rounded-none",
-              "[&_[data-slot=signature-pad-control]]:border-x-0",
-              "[&_[data-slot=signature-pad-control]]:border-b-0",
-              "[&_[data-slot=signature-pad-control]]:shadow-none",
-              "[&_[data-slot=signature-pad-clear]]:hidden"
+              "**:data-[slot=signature-pad-control]:order-2",
+              "**:data-[slot=signature-pad-control]:h-40",
+              "**:data-[slot=signature-pad-control]:min-h-40",
+              "**:data-[slot=signature-pad-control]:rounded-none",
+              "**:data-[slot=signature-pad-control]:border-x-0",
+              "**:data-[slot=signature-pad-control]:border-b-0",
+              "**:data-[slot=signature-pad-control]:shadow-none",
+              "**:data-[slot=signature-pad-clear]:hidden"
             )}
             onDraw={({ paths }) => {
               if (signatureInputRef.current) {

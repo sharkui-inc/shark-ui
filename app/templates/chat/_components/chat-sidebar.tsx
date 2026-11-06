@@ -21,6 +21,7 @@ import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuRadioGroup,
@@ -189,21 +190,24 @@ const WorkspaceSwitcher = () => {
             </SidebarMenuButton>
           </MenuTrigger>
           <MenuContent>
-            <MenuRadioGroup
-              onValueChange={({ value }) => setWorkspaceValue(value)}
-              value={workspaceValue}
-            >
-              {workspaces.map(({ description, name, value }) => (
-                <MenuRadioItem key={value} value={value}>
-                  <span className="flex min-w-0 flex-col gap-0.5">
-                    <span className="truncate font-medium">{name}</span>
-                    <span className="text-muted-foreground truncate">
-                      {description}
+            <MenuList>
+              <MenuRadioGroup
+                onValueChange={({ value }) => setWorkspaceValue(value)}
+                value={workspaceValue}
+              >
+                {workspaces.map(({ description, name, value }) => (
+                  <MenuRadioItem key={value} value={value}>
+                    <span className="flex min-w-0 flex-col gap-0.5">
+                      <span className="truncate font-medium">{name}</span>
+                      <span className="text-muted-foreground truncate">
+                        {description}
+                      </span>
                     </span>
-                  </span>
-                </MenuRadioItem>
-              ))}
-            </MenuRadioGroup>
+                  </MenuRadioItem>
+                ))}
+              </MenuRadioGroup>
+
+            </MenuList>
           </MenuContent>
         </Menu>
       </SidebarMenuItem>
@@ -230,21 +234,24 @@ const AccountMenu = () => {
           <MenuContent
             className={state === "collapsed" ? "w-56" : "w-(--reference-width)"}
           >
-            <MenuGroup heading={account.name}>
-              <MenuItem value="account">
-                <CreditCardIcon aria-hidden="true" />
-                Account & billing
+            <MenuList>
+              <MenuGroup heading={account.name}>
+                <MenuItem value="account">
+                  <CreditCardIcon aria-hidden="true" />
+                  Account & billing
+                </MenuItem>
+                <MenuItem value="settings">
+                  <Settings2Icon aria-hidden="true" />
+                  Settings
+                </MenuItem>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuItem value="sign-out">
+                <LogOutIcon aria-hidden="true" />
+                Sign out
               </MenuItem>
-              <MenuItem value="settings">
-                <Settings2Icon aria-hidden="true" />
-                Settings
-              </MenuItem>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuItem value="sign-out">
-              <LogOutIcon aria-hidden="true" />
-              Sign out
-            </MenuItem>
+
+            </MenuList>
           </MenuContent>
         </Menu>
       </SidebarMenuItem>

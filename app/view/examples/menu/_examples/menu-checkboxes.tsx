@@ -7,6 +7,7 @@ import {
   MenuCheckboxItem,
   MenuContent,
   MenuGroup,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -21,30 +22,32 @@ const MenuCheckboxes = () => {
         <Button variant="outline">Open</Button>
       </MenuTrigger>
       <MenuContent className="min-w-40">
-        <MenuGroup heading="Appearance">
-          <MenuCheckboxItem
-            checked={showStatusBar}
-            onCheckedChange={setShowStatusBar}
-            value="status-bar"
-          >
-            Status Bar
-          </MenuCheckboxItem>
-          <MenuCheckboxItem
-            checked={showActivityBar}
-            disabled
-            onCheckedChange={setShowActivityBar}
-            value="activity-bar"
-          >
-            Activity Bar
-          </MenuCheckboxItem>
-          <MenuCheckboxItem
-            checked={showPanel}
-            onCheckedChange={setShowPanel}
-            value="panel"
-          >
-            Panel
-          </MenuCheckboxItem>
-        </MenuGroup>
+        <MenuList>
+          <MenuGroup heading="Appearance">
+            <MenuCheckboxItem
+              checked={showStatusBar}
+              onCheckedChange={setShowStatusBar}
+              value="status-bar"
+            >
+              Status Bar
+            </MenuCheckboxItem>
+            <MenuCheckboxItem
+              checked={showActivityBar}
+              disabled
+              onCheckedChange={setShowActivityBar}
+              value="activity-bar"
+            >
+              Activity Bar
+            </MenuCheckboxItem>
+            <MenuCheckboxItem
+              checked={showPanel}
+              onCheckedChange={setShowPanel}
+              value="panel"
+            >
+              Panel
+            </MenuCheckboxItem>
+          </MenuGroup>
+        </MenuList>
       </MenuContent>
     </Menu>
   );

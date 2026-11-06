@@ -111,6 +111,16 @@ export const DocsSidebar = (props: DocsSidebarProps) => {
             </ArkToc.Root>
           );
         })}
+        <p className="text-muted-foreground mt-10 flex items-center justify-center gap-3 pb-6 text-xs">
+          <span className="inline-flex items-center gap-1.5">
+            <Status size="sm" variant="info" />
+            New
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <Status size="sm" />
+            Updated
+          </span>
+        </p>
       </SidebarContent>
     </Sidebar>
   );

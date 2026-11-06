@@ -11,6 +11,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -36,13 +37,15 @@ const FieldSelect = () => (
         <SelectValue placeholder="Choose department" />
       </SelectTrigger>
       <SelectContent>
-        <SelectGroup>
-          {collection.items.map((item) => (
-            <SelectItem item={item} key={item.value}>
-              {item.label}
-            </SelectItem>
-          ))}
-        </SelectGroup>
+        <SelectList>
+          <SelectGroup>
+            {collection.items.map((item) => (
+              <SelectItem item={item} key={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectList>
       </SelectContent>
     </Select>
     <FieldHelper>Select your department or area of work.</FieldHelper>

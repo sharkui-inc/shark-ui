@@ -48,7 +48,7 @@ const QuestionnaireShortcuts = () => {
     <div className="relative mx-auto flex h-full w-full max-w-md flex-col">
       <NativeSelect
         aria-label="Shortcut style"
-        className="absolute end-0 top-0"
+        className="absolute inset-e-0 top-0"
         onChange={({ target }) => {
           const { value } = target;
           setShortcuts(

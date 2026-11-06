@@ -9,6 +9,7 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -19,23 +20,25 @@ const MenuIcons = () => (
       <Button variant="outline">Open</Button>
     </MenuTrigger>
     <MenuContent>
-      <MenuItem value="profile">
-        <UserIcon />
-        Profile
-      </MenuItem>
-      <MenuItem value="billing">
-        <CreditCardIcon />
-        Billing
-      </MenuItem>
-      <MenuItem value="settings">
-        <SettingsIcon />
-        Settings
-      </MenuItem>
-      <MenuSeparator />
-      <MenuItem value="logout" variant="destructive">
-        <LogOutIcon />
-        Log out
-      </MenuItem>
+      <MenuList>
+        <MenuItem value="profile">
+          <UserIcon />
+          Profile
+        </MenuItem>
+        <MenuItem value="billing">
+          <CreditCardIcon />
+          Billing
+        </MenuItem>
+        <MenuItem value="settings">
+          <SettingsIcon />
+          Settings
+        </MenuItem>
+        <MenuSeparator />
+        <MenuItem value="logout" variant="destructive">
+          <LogOutIcon />
+          Log out
+        </MenuItem>
+      </MenuList>
     </MenuContent>
   </Menu>
 );

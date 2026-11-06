@@ -23,7 +23,7 @@ const Example = () => {
 
   return (
     <Steps
-      className="mx-auto h-[300px] w-full max-w-xl"
+      className="mx-auto h-75 w-full max-w-xl"
       count={values.steps.length}
     >
       <StepsList>

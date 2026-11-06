@@ -35,6 +35,7 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuRadioGroup,
@@ -179,67 +180,73 @@ const DesktopMenu = () => (
       <Button variant="outline">Open</Button>
     </MenuTrigger>
     <MenuContent className="min-w-40">
-      <MenuGroup>
-        <MenuItem value="forward">
-          <SendIcon /> Forward
-          <MenuShortcut className="hidden sm:inline-flex">⌘F</MenuShortcut>
-        </MenuItem>
-        <MenuItem value="reply">
-          <ReplyIcon /> Reply
-          <MenuShortcut className="hidden sm:inline-flex">⌘R</MenuShortcut>
-        </MenuItem>
-        <MenuItem value="archive">
-          <ArchiveIcon /> Archive
-          <MenuShortcut className="hidden sm:inline-flex">⌘Z</MenuShortcut>
-        </MenuItem>
-        <MenuSub>
-          <MenuSubTrigger>
-            <FolderInputIcon /> Move to
-          </MenuSubTrigger>
-          <MenuSubContent>
-            <MenuItem value="move-to-folder-1">
-              <ArchiveXIcon /> Junk
-            </MenuItem>
-            <MenuItem value="move-to-folder-2">
-              <TrashIcon /> Trash
-            </MenuItem>
-            <MenuItem value="move-to-folder-3">
-              <BellIcon /> Reminders
-            </MenuItem>
-            <MenuSub>
-              <MenuSubTrigger>
-                <CirclePlusIcon />
-                More
-              </MenuSubTrigger>
-              <MenuSubContent>
-                <MenuItem value="move-to-folder-4">
-                  <SquarePenIcon />
-                  Drafts
+      <MenuList>
+        <MenuGroup>
+          <MenuItem value="forward">
+            <SendIcon /> Forward
+            <MenuShortcut className="hidden sm:inline-flex">⌘F</MenuShortcut>
+          </MenuItem>
+          <MenuItem value="reply">
+            <ReplyIcon /> Reply
+            <MenuShortcut className="hidden sm:inline-flex">⌘R</MenuShortcut>
+          </MenuItem>
+          <MenuItem value="archive">
+            <ArchiveIcon /> Archive
+            <MenuShortcut className="hidden sm:inline-flex">⌘Z</MenuShortcut>
+          </MenuItem>
+          <MenuSub>
+            <MenuSubTrigger>
+              <FolderInputIcon /> Move to
+            </MenuSubTrigger>
+            <MenuSubContent>
+              <MenuList>
+                <MenuItem value="move-to-folder-1">
+                  <ArchiveXIcon /> Junk
                 </MenuItem>
-                <MenuItem value="move-to-folder-6">
-                  <MailXIcon />
-                  Spam
+                <MenuItem value="move-to-folder-2">
+                  <TrashIcon /> Trash
                 </MenuItem>
-              </MenuSubContent>
-            </MenuSub>
-          </MenuSubContent>
-        </MenuSub>
-        <MenuSeparator />
-        <MenuRadioGroup heading="Priority" value="medium">
-          <MenuRadioItem value="low">Low</MenuRadioItem>
-          <MenuRadioItem value="medium">Medium</MenuRadioItem>
-          <MenuRadioItem value="high">High</MenuRadioItem>
-        </MenuRadioGroup>
-        <MenuSeparator />
-        <MenuCheckboxItem checked value="block">
-          Block sender
-        </MenuCheckboxItem>
-        <MenuSeparator />
-        <MenuItem value="delete" variant="destructive">
-          <Trash2Icon /> Delete
-          <MenuShortcut className="hidden sm:inline-flex">⌘ ⌫</MenuShortcut>
-        </MenuItem>
-      </MenuGroup>
+                <MenuItem value="move-to-folder-3">
+                  <BellIcon /> Reminders
+                </MenuItem>
+                <MenuSub>
+                  <MenuSubTrigger>
+                    <CirclePlusIcon />
+                    More
+                  </MenuSubTrigger>
+                  <MenuSubContent>
+                    <MenuItem value="move-to-folder-4">
+                      <SquarePenIcon />
+                      Drafts
+                    </MenuItem>
+                    <MenuItem value="move-to-folder-6">
+                      <MailXIcon />
+                      Spam
+                    </MenuItem>
+                  </MenuSubContent>
+                </MenuSub>
+
+              </MenuList>
+            </MenuSubContent>
+          </MenuSub>
+          <MenuSeparator />
+          <MenuRadioGroup heading="Priority" value="medium">
+            <MenuRadioItem value="low">Low</MenuRadioItem>
+            <MenuRadioItem value="medium">Medium</MenuRadioItem>
+            <MenuRadioItem value="high">High</MenuRadioItem>
+          </MenuRadioGroup>
+          <MenuSeparator />
+          <MenuCheckboxItem checked value="block">
+            Block sender
+          </MenuCheckboxItem>
+          <MenuSeparator />
+          <MenuItem value="delete" variant="destructive">
+            <Trash2Icon /> Delete
+            <MenuShortcut className="hidden sm:inline-flex">⌘ ⌫</MenuShortcut>
+          </MenuItem>
+        </MenuGroup>
+
+      </MenuList>
     </MenuContent>
   </Menu>
 );

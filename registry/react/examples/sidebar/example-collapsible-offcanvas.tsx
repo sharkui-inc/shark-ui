@@ -23,6 +23,7 @@ import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuGroupLabel,
   MenuItem,
@@ -130,49 +131,52 @@ const NavUser = (props: NavUserProps) => {
             </SidebarMenuButton>
           </MenuTrigger>
           <MenuContent className="w-full sm:w-64">
-            <MenuGroup>
-              <MenuGroupLabel className="p-0 font-normal">
-                <div className="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
-                  <Avatar className="size-8 rounded-lg">
-                    <AvatarImage alt={account.name} src={account.avatar} />
-                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                  </Avatar>
-                  <div className="grid flex-1 text-start text-sm leading-tight">
-                    <span className="truncate font-medium">{account.name}</span>
-                    <span className="truncate text-xs">{account.email}</span>
+            <MenuList>
+              <MenuGroup>
+                <MenuGroupLabel className="p-0 font-normal">
+                  <div className="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
+                    <Avatar className="size-8 rounded-lg">
+                      <AvatarImage alt={account.name} src={account.avatar} />
+                      <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                    </Avatar>
+                    <div className="grid flex-1 text-start text-sm leading-tight">
+                      <span className="truncate font-medium">{account.name}</span>
+                      <span className="truncate text-xs">{account.email}</span>
+                    </div>
                   </div>
-                </div>
-              </MenuGroupLabel>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="upgrade">
-                <CrownIcon aria-hidden="true" />
-                Upgrade to Pro
-              </MenuItem>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="account">
-                <BadgeCheckIcon aria-hidden="true" />
-                Account
-              </MenuItem>
-              <MenuItem value="billing">
-                <CreditCardIcon aria-hidden="true" />
-                Billing
-              </MenuItem>
-              <MenuItem value="notifications">
-                <BellIcon aria-hidden="true" />
-                Notifications
-              </MenuItem>
-            </MenuGroup>
-            <MenuSeparator />
-            <MenuGroup>
-              <MenuItem value="logout">
-                <LogOutIcon aria-hidden="true" />
-                Log out
-              </MenuItem>
-            </MenuGroup>
+                </MenuGroupLabel>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="upgrade">
+                  <CrownIcon aria-hidden="true" />
+                  Upgrade to Pro
+                </MenuItem>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="account">
+                  <BadgeCheckIcon aria-hidden="true" />
+                  Account
+                </MenuItem>
+                <MenuItem value="billing">
+                  <CreditCardIcon aria-hidden="true" />
+                  Billing
+                </MenuItem>
+                <MenuItem value="notifications">
+                  <BellIcon aria-hidden="true" />
+                  Notifications
+                </MenuItem>
+              </MenuGroup>
+              <MenuSeparator />
+              <MenuGroup>
+                <MenuItem value="logout">
+                  <LogOutIcon aria-hidden="true" />
+                  Log out
+                </MenuItem>
+              </MenuGroup>
+
+            </MenuList>
           </MenuContent>
         </Menu>
       </SidebarMenuItem>

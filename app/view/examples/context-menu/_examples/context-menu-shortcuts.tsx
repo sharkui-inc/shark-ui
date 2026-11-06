@@ -6,6 +6,7 @@ import {
   ContextMenuSeparator,
   ContextMenuShortcut,
   ContextMenuTrigger,
+  ContextMenuList,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuShortcuts = () => (
@@ -17,31 +18,33 @@ const ContextMenuShortcuts = () => (
       </span>
     </ContextMenuTrigger>
     <ContextMenuContent>
-      <ContextMenuGroup>
-        <ContextMenuItem value="back">
-          Back
-          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem disabled value="forward">
-          Forward
-          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem value="reload">
-          Reload
-          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
-        </ContextMenuItem>
-      </ContextMenuGroup>
-      <ContextMenuSeparator />
-      <ContextMenuGroup>
-        <ContextMenuItem value="save">
-          Save
-          <ContextMenuShortcut>⌘S</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem value="save-as">
-          Save As...
-          <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
-        </ContextMenuItem>
-      </ContextMenuGroup>
+      <ContextMenuList>
+        <ContextMenuGroup>
+          <ContextMenuItem value="back">
+            Back
+            <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem disabled value="forward">
+            Forward
+            <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem value="reload">
+            Reload
+            <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+          </ContextMenuItem>
+        </ContextMenuGroup>
+        <ContextMenuSeparator />
+        <ContextMenuGroup>
+          <ContextMenuItem value="save">
+            Save
+            <ContextMenuShortcut>⌘S</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem value="save-as">
+            Save As...
+            <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
+          </ContextMenuItem>
+        </ContextMenuGroup>
+      </ContextMenuList>
     </ContextMenuContent>
   </ContextMenu>
 );

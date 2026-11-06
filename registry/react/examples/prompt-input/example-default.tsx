@@ -38,6 +38,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuGroup,
   MenuItem,
   MenuSeparator,
@@ -56,6 +57,7 @@ import {
 import {
   Select,
   SelectContent,
+  SelectList,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -96,23 +98,26 @@ const PromptInputDemo = () => {
                 </PromptInputButton>
               </MenuTrigger>
               <MenuContent>
-                <MenuGroup heading="Add context">
-                  {contextActions.map((action) => (
-                    <MenuItem key={action.value} value={action.value}>
-                      {action.icon}
-                      {action.label}
-                    </MenuItem>
-                  ))}
-                </MenuGroup>
-                <MenuSeparator />
-                <MenuGroup heading="Agent actions">
-                  {agentActions.map((action) => (
-                    <MenuItem key={action.value} value={action.value}>
-                      {action.icon}
-                      {action.label}
-                    </MenuItem>
-                  ))}
-                </MenuGroup>
+                <MenuList>
+                  <MenuGroup heading="Add context">
+                    {contextActions.map((action) => (
+                      <MenuItem key={action.value} value={action.value}>
+                        {action.icon}
+                        {action.label}
+                      </MenuItem>
+                    ))}
+                  </MenuGroup>
+                  <MenuSeparator />
+                  <MenuGroup heading="Agent actions">
+                    {agentActions.map((action) => (
+                      <MenuItem key={action.value} value={action.value}>
+                        {action.icon}
+                        {action.label}
+                      </MenuItem>
+                    ))}
+                  </MenuGroup>
+
+                </MenuList>
               </MenuContent>
             </Menu>
             <Select
@@ -126,16 +131,19 @@ const PromptInputDemo = () => {
                 <SelectValue placeholder="Full access" />
               </SelectTrigger>
               <SelectContent>
-                {accessCollection.items.map((item) => (
-                  <SelectItem item={item} key={item.value}>
-                    <span className="flex min-w-0 flex-col gap-0.5">
-                      <span>{item.label}</span>
-                      <span className="text-muted-foreground text-xs">
-                        {item.description}
+                <SelectList>
+                  {accessCollection.items.map((item) => (
+                    <SelectItem item={item} key={item.value}>
+                      <span className="flex min-w-0 flex-col gap-0.5">
+                        <span>{item.label}</span>
+                        <span className="text-muted-foreground text-xs">
+                          {item.description}
+                        </span>
                       </span>
-                    </span>
-                  </SelectItem>
-                ))}
+                    </SelectItem>
+                  ))}
+
+                </SelectList>
               </SelectContent>
             </Select>
           </PromptInputTools>
@@ -171,11 +179,14 @@ const PromptInputDemo = () => {
               <SelectValue placeholder="Medium" />
             </SelectTrigger>
             <SelectContent>
-              {effortCollection.items.map((item) => (
-                <SelectItem item={item} key={item.value}>
-                  {item.label}
-                </SelectItem>
-              ))}
+              <SelectList>
+                {effortCollection.items.map((item) => (
+                  <SelectItem item={item} key={item.value}>
+                    {item.label}
+                  </SelectItem>
+                ))}
+
+              </SelectList>
             </SelectContent>
           </Select>
           <PromptInputButton aria-label="Voice input" size="icon-sm">

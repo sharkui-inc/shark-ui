@@ -201,6 +201,7 @@ export const PromptInputTextarea = (
         "pt-2 pb-1",
         "leading-6",
         "overflow-y-auto",
+        "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
         className
       )}
       data-slot="prompt-input-textarea"

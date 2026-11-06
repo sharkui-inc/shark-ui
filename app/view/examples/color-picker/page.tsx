@@ -4,6 +4,7 @@ import ExampleAreaDots from "@/registry/react/examples/color-picker/example-area
 import ExampleAreaRtl from "@/registry/react/examples/color-picker/example-area-rtl";
 import ExampleCustomSpacing from "@/registry/react/examples/color-picker/example-custom-spacing";
 import ExampleDefault from "@/registry/react/examples/color-picker/example-default";
+import ExampleForm from "@/registry/react/examples/color-picker/example-form";
 import ExampleInputChannel from "@/registry/react/examples/color-picker/example-input-channel";
 import ExampleInputCompact from "@/registry/react/examples/color-picker/example-input-compact";
 import ExampleInputControlled from "@/registry/react/examples/color-picker/example-input-controlled";
@@ -48,7 +49,7 @@ const ColorPickerExamplePage = () => (
           >
             Default
           </h1>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleDefault />
           </div>
         </section>
@@ -76,7 +77,7 @@ const ColorPickerExamplePage = () => (
           >
             Area Dots
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleAreaDots />
           </div>
         </section>
@@ -95,6 +96,28 @@ const ColorPickerExamplePage = () => (
           </div>
         </section>
         <section
+          aria-labelledby="custom-spacing-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="custom-spacing-heading"
+          >
+            Custom Spacing
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleCustomSpacing />
+          </div>
+        </section>
+        <section aria-labelledby="form-heading" className="flex flex-col gap-5">
+          <h2 className="text-muted-foreground font-medium" id="form-heading">
+            Form
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleForm />
+          </div>
+        </section>
+        <section
           aria-labelledby="input-channel-heading"
           className="flex flex-col gap-5"
         >
@@ -104,7 +127,7 @@ const ColorPickerExamplePage = () => (
           >
             Input Channel
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleInputChannel />
           </div>
         </section>
@@ -132,7 +155,7 @@ const ColorPickerExamplePage = () => (
           >
             Input Controlled
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleInputControlled />
           </div>
         </section>
@@ -160,7 +183,7 @@ const ColorPickerExamplePage = () => (
           >
             Input Invalid
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleInputInvalid />
           </div>
         </section>
@@ -188,7 +211,7 @@ const ColorPickerExamplePage = () => (
           >
             Input With Popover
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleInputWithPopover />
           </div>
         </section>
@@ -204,20 +227,6 @@ const ColorPickerExamplePage = () => (
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleInputWithSwatchPreview />
-          </div>
-        </section>
-        <section
-          aria-labelledby="custom-spacing-heading"
-          className="flex flex-col gap-5"
-        >
-          <h2
-            className="text-muted-foreground font-medium"
-            id="custom-spacing-heading"
-          >
-            Custom Spacing
-          </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
-            <ExampleCustomSpacing />
           </div>
         </section>
         <section
@@ -244,7 +253,7 @@ const ColorPickerExamplePage = () => (
           >
             Popover RTL
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExamplePopoverRtl />
           </div>
         </section>
@@ -272,7 +281,7 @@ const ColorPickerExamplePage = () => (
           >
             Popover With Channel Editing
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExamplePopoverWithChannelEditing />
           </div>
         </section>
@@ -300,7 +309,7 @@ const ColorPickerExamplePage = () => (
           >
             Slider Alpha Channel
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSliderAlphaChannel />
           </div>
         </section>
@@ -328,7 +337,7 @@ const ColorPickerExamplePage = () => (
           >
             Slider Disabled
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSliderDisabled />
           </div>
         </section>
@@ -340,7 +349,7 @@ const ColorPickerExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="slider-hsba-channels-heading"
           >
-            Slider HSBA Channels
+            Slider Hsba Channels
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSliderHsbaChannels />
@@ -354,9 +363,9 @@ const ColorPickerExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="slider-hsl-channels-heading"
           >
-            Slider HSL Channels
+            Slider Hsl Channels
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSliderHslChannels />
           </div>
         </section>
@@ -368,7 +377,7 @@ const ColorPickerExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="slider-rgb-channels-heading"
           >
-            Slider RGB Channels
+            Slider Rgb Channels
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSliderRgbChannels />
@@ -384,7 +393,7 @@ const ColorPickerExamplePage = () => (
           >
             Slider RTL
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSliderRtl />
           </div>
         </section>
@@ -400,20 +409,6 @@ const ColorPickerExamplePage = () => (
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSliderVertical />
-          </div>
-        </section>
-        <section
-          aria-labelledby="swatch-picker-heading"
-          className="flex flex-col gap-5"
-        >
-          <h2
-            className="text-muted-foreground font-medium"
-            id="swatch-picker-heading"
-          >
-            Swatch Picker
-          </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
-            <ExampleSwatchPicker />
           </div>
         </section>
         <section
@@ -440,7 +435,7 @@ const ColorPickerExamplePage = () => (
           >
             Swatch Picker Custom Indicator
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSwatchPickerCustomIndicator />
           </div>
         </section>
@@ -468,7 +463,7 @@ const ColorPickerExamplePage = () => (
           >
             Swatch Picker Custom Size
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSwatchPickerCustomSize />
           </div>
         </section>
@@ -496,8 +491,22 @@ const ColorPickerExamplePage = () => (
           >
             Swatch Picker RTL
           </h2>
-          <div className="bg-muted rounded-3xl p-6 sm:p-10">
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSwatchPickerRtl />
+          </div>
+        </section>
+        <section
+          aria-labelledby="swatch-picker-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="swatch-picker-heading"
+          >
+            Swatch Picker
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleSwatchPicker />
           </div>
         </section>
         <section

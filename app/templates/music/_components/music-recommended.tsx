@@ -14,6 +14,7 @@ import {
 import {
   Menu,
   MenuContent,
+  MenuList,
   MenuItem,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -65,15 +66,18 @@ export const MusicRecommended = () => {
                     </Button>
                   </MenuTrigger>
                   <MenuContent>
-                    <MenuItem value={`${track.title}-play`}>Play now</MenuItem>
-                    <MenuItem
-                      onClick={() => toggleFavorite(track.title)}
-                      value={`${track.title}-favorite`}
-                    >
-                      {isFavorite
-                        ? "Remove from favorites"
-                        : "Add to favorites"}
-                    </MenuItem>
+                    <MenuList>
+                      <MenuItem value={`${track.title}-play`}>Play now</MenuItem>
+                      <MenuItem
+                        onClick={() => toggleFavorite(track.title)}
+                        value={`${track.title}-favorite`}
+                      >
+                        {isFavorite
+                          ? "Remove from favorites"
+                          : "Add to favorites"}
+                      </MenuItem>
+
+                    </MenuList>
                   </MenuContent>
                 </Menu>
               </ItemActions>

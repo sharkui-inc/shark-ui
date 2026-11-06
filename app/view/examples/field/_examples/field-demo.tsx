@@ -18,6 +18,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -73,13 +74,15 @@ const FieldDemo = () => (
                     <SelectValue placeholder="MM" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectGroup>
-                      {monthCollection.items.map((item) => (
-                        <SelectItem item={item} key={item}>
-                          {item}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
+                    <SelectList>
+                      <SelectGroup>
+                        {monthCollection.items.map((item) => (
+                          <SelectItem item={item} key={item}>
+                            {item}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectList>
                   </SelectContent>
                 </Select>
               </Field>
@@ -90,13 +93,15 @@ const FieldDemo = () => (
                     <SelectValue placeholder="YYYY" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectGroup>
-                      {yearCollection.items.map((item) => (
-                        <SelectItem item={item} key={item}>
-                          {item}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
+                    <SelectList>
+                      <SelectGroup>
+                        {yearCollection.items.map((item) => (
+                          <SelectItem item={item} key={item}>
+                            {item}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectList>
                   </SelectContent>
                 </Select>
               </Field>
