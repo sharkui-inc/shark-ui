@@ -32,12 +32,13 @@ export type ChartConfig = Record<
 >;
 
 interface ChartTooltipContentProps
-  extends Omit<React.ComponentProps<typeof Tooltip>, "content">,
-    Omit<React.ComponentProps<"div">, "content">,
+  extends Omit<React.ComponentProps<"div">, "content">,
     Omit<
       DefaultTooltipContentProps<TooltipValueType, TooltipNameType>,
-      "accessibilityLayer" | "content"
+      "accessibilityLayer"
     > {
+  active?: boolean;
+  color?: string;
   hideIndicator?: boolean;
   hideLabel?: boolean;
   indicator?: "dashed" | "dot" | "line";
@@ -47,7 +48,7 @@ interface ChartTooltipContentProps
 
 interface ChartLegendContentProps
   extends React.ComponentProps<"div">,
-    DefaultLegendContentProps {
+    Pick<DefaultLegendContentProps, "payload" | "verticalAlign"> {
   hideIcon?: boolean;
   nameKey?: string;
 }
