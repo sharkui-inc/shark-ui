@@ -452,7 +452,6 @@ export const comboboxItemVariants = tv({
     "outline-hidden",
     "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
-    "[&_svg:not([class*='text-'])]:text-muted-foreground",
   ],
 });
 
@@ -479,7 +478,11 @@ export const ComboboxItem = (props: ComboboxItemProps) => {
       persistFocus
     >
       <ArkCombobox.ItemText
-        className={cn("min-w-0 flex-1", "flex items-start gap-2")}
+        className={cn(
+          "min-w-0 flex-1",
+          "flex items-start gap-2",
+          "[&_svg:not([class*='text-'])]:text-muted-foreground"
+        )}
         data-slot="combobox-item-text"
       >
         {children}

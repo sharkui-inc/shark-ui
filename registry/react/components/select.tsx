@@ -311,7 +311,6 @@ export const SelectItem = (
         "in-[[data-slot=select-content]:has([data-slot=select-group-label])]:ps-4",
         "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
-        "[&_svg:not([class*='text-'])]:text-muted-foreground",
         className,
         item()
       )}
@@ -319,7 +318,11 @@ export const SelectItem = (
       {...rest}
     >
       <ArkSelect.ItemText
-        className={cn("min-w-0", "flex items-start gap-2")}
+        className={cn(
+          "min-w-0",
+          "flex items-start gap-2",
+          "[&_svg:not([class*='text-'])]:text-muted-foreground"
+        )}
         data-slot="select-item-text"
       >
         {children}

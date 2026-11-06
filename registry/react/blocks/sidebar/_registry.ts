@@ -25,6 +25,7 @@ export const sidebarBlocks = [
     preview: () => import("./sidebar-01/page"),
     registryDependencies: [
       registryUrl("/r/icon-tile.json"),
+      registryUrl("/r/input.json"),
       registryUrl("/r/separator.json"),
       registryUrl("/r/sidebar.json"),
     ],

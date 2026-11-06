@@ -104,7 +104,6 @@ const listboxItemVariants = tv({
     "cursor-pointer",
     "outline-hidden",
     "data-disabled:pointer-events-none data-disabled:opacity-64",
-    "[&_svg:not([class*='text-'])]:text-muted-foreground",
   ],
   defaultVariants: {
     variant: "default",
@@ -164,7 +163,13 @@ export const ListboxItem = (props: ListboxItemProps) => {
       highlightOnHover={highlightOnHover}
       {...rest}
     >
-      <span className={cn("min-w-0 flex-1", "flex items-start gap-2")}>
+      <span
+        className={cn(
+          "min-w-0 flex-1",
+          "flex items-start gap-2",
+          "[&_svg:not([class*='text-'])]:text-muted-foreground"
+        )}
+      >
         {children}
       </span>
 

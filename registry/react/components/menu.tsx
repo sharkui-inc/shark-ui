@@ -227,7 +227,7 @@ export const menuItemIndicatorVariants = tv({
       "absolute inset-e-2 top-1.5",
       "h-lh w-4 shrink-0 md:w-3.5",
       "flex items-center justify-center",
-      "[&_svg]:text-muted-foreground",
+      "[&_svg]:text-foreground",
     ],
     item: "pe-8",
   },
