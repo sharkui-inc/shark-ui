@@ -1,11 +1,9 @@
 "use client";
 
-import { CheckIcon } from "lucide-react";
 import React from "react";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
 } from "@/registry/react/components/dialog";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
@@ -38,22 +36,19 @@ export const DashboardSettings = (props: DashboardSettingsProps) => {
   const { open, onOpenChange } = props;
 
   const [page, setPage] = React.useState<SettingsPage>("general");
-  const [lastSaved, setLastSaved] = React.useState("All changes saved");
-
-  const saveSettings = () => setLastSaved("Saved just now");
 
   const renderPage = () => {
     switch (page) {
       case "general":
-        return <SettingsGeneralPage onSave={saveSettings} />;
+        return <SettingsGeneralPage />;
       case "notifications":
-        return <SettingsNotificationsPage onSave={saveSettings} />;
+        return <SettingsNotificationsPage />;
       case "appearance":
-        return <SettingsAppearancePage onSave={saveSettings} />;
+        return <SettingsAppearancePage />;
       case "members":
-        return <SettingsMembersPage onSave={saveSettings} />;
+        return <SettingsMembersPage />;
       case "billing":
-        return <SettingsBillingPage onSave={saveSettings} />;
+        return <SettingsBillingPage />;
       default: {
         const exhaustive: never = page;
         return exhaustive;
@@ -79,7 +74,7 @@ export const DashboardSettings = (props: DashboardSettingsProps) => {
           className="min-h-0 min-w-0 flex-1"
           style={{ "--sidebar-width": "13rem" } as React.CSSProperties}
         >
-          <Sidebar className="border-e bg-transparent" collapsible="none">
+          <Sidebar collapsible="none">
             <SidebarContent>
               <SidebarGroup>
                 <SidebarGroupContent>
@@ -100,10 +95,7 @@ export const DashboardSettings = (props: DashboardSettingsProps) => {
               </SidebarGroup>
             </SidebarContent>
           </Sidebar>
-          <SidebarInset
-            asChild
-            className="min-h-0 overflow-hidden bg-transparent"
-          >
+          <SidebarInset asChild className="min-h-0 overflow-hidden">
             <div>
               <ScrollArea>
                 <div className="p-(--space)">{renderPage()}</div>
@@ -111,10 +103,6 @@ export const DashboardSettings = (props: DashboardSettingsProps) => {
             </div>
           </SidebarInset>
         </SidebarProvider>
-        <DialogFooter className="sm:justify-start">
-          <CheckIcon aria-hidden="true" className="text-primary h-lh w-3.5" />
-          <span className="text-muted-foreground text-sm">{lastSaved}</span>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

@@ -104,7 +104,7 @@ const sheetContentVariants = tv({
     "opacity-[calc(1-0.1*var(--nested-n))]",
     "scale-[calc(1-var(--nested-scale,0)*var(--nested-n))]",
     "data-[has-nested=dialog]:overflow-hidden data-[has-nested=dialog]:rounded-2xl data-[has-nested=dialog]:border-y",
-    "transition duration-200 ease-in-out",
+    "transition duration-200 ease-out",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
     "motion-reduce:animate-none motion-reduce:transition-none",

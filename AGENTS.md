@@ -1,6 +1,6 @@
 # Shark UI
 
-Ark UI, Tailwind CSS v4, Next.js. https://shark-ui.com. Style: [`CODE_STYLE.md`](CODE_STYLE.md). Composition: [`skills/shark-ui/SKILL.md`](skills/shark-ui/SKILL.md). Lint: `biome.json`.
+Ark UI, Tailwind CSS v4, Next.js. https://shark-ui.com. Product: [`PRODUCT.md`](PRODUCT.md). Visual: [`DESIGN.md`](DESIGN.md) / [`public/design.md`](public/design.md). Style: [`CODE_STYLE.md`](CODE_STYLE.md). Composition: [`skills/shark-ui/SKILL.md`](skills/shark-ui/SKILL.md). Lint: `biome.json`.
 
 ## Map
 

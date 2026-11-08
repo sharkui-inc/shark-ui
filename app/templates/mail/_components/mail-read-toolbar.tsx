@@ -74,7 +74,8 @@ export const MailReadToolbar = (props: MailReadToolbarProps) => {
           >
             <StarIcon
               aria-hidden="true"
-              className={isStarred ? "text-primary fill-current" : undefined}
+              className="text-muted-foreground data-starred:fill-current data-starred:text-primary"
+              data-starred={isStarred || undefined}
             />
           </MailToolbarButton>
         </ButtonGroup>

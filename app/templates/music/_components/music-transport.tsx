@@ -34,12 +34,7 @@ export const MusicTransport = (props: MusicTransportProps) => {
   return (
     <div className="flex min-w-0 flex-col gap-1">
       <div className="flex items-center justify-center gap-1">
-        <Button
-          aria-label="Shuffle queue"
-          className="text-muted-foreground"
-          size="icon-sm"
-          variant="ghost"
-        >
+        <Button aria-label="Shuffle queue" size="icon-sm" variant="ghost">
           <ShuffleIcon aria-hidden="true" />
         </Button>
         <Button
@@ -70,12 +65,7 @@ export const MusicTransport = (props: MusicTransportProps) => {
         >
           <SkipForwardIcon aria-hidden="true" />
         </Button>
-        <Button
-          aria-label="Repeat queue"
-          className="text-muted-foreground"
-          size="icon-sm"
-          variant="ghost"
-        >
+        <Button aria-label="Repeat queue" size="icon-sm" variant="ghost">
           <Repeat2Icon aria-hidden="true" />
         </Button>
       </div>

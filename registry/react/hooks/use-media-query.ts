@@ -23,5 +23,25 @@ export const useMediaQuery = (query: string) => {
   return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 };
 
-export const useIsMobile = () =>
-  useMediaQuery(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+/** Matches shadcn: first paint is always desktop (`false`), then updates after mount. */
+export const useIsMobile = () => {
+  const [isMobile, setIsMobile] = React.useState<boolean | undefined>(
+    undefined
+  );
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia(
+      `(max-width: ${MOBILE_BREAKPOINT - 1}px)`
+    );
+    const onChange = () => {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    };
+
+    mediaQuery.addEventListener("change", onChange);
+    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+
+    return () => mediaQuery.removeEventListener("change", onChange);
+  }, []);
+
+  return Boolean(isMobile);
+};

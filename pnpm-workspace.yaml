@@ -48,7 +48,6 @@ minimumReleaseAgeExclude:
   - "@tailwindcss/oxide-win32-x64-msvc@4.3.4"
   - "@tailwindcss/oxide@4.3.4"
   - "@tailwindcss/postcss@4.3.4"
-  - "@tanstack/redact@0.3.0"
   - "@tsrs/darwin-arm64@0.21.0-ts7.1.0-beta"
   - "@tsrs/darwin-x64@0.21.0-ts7.1.0-beta"
   - "@tsrs/linux-arm64-gnu@0.21.0-ts7.1.0-beta"

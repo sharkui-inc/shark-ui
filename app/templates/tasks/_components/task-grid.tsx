@@ -69,9 +69,8 @@ export const TaskGrid = (props: TaskGridProps) => {
               <TableRow className="h-13" key={row.id}>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
-                    className={
-                      cell.column.id === "title" ? "min-w-0" : undefined
-                    }
+                    className="data-[column=title]:min-w-0"
+                    data-column={cell.column.id}
                     key={cell.id}
                   >
                     <table.FlexRender cell={cell} />

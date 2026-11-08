@@ -41,18 +41,28 @@ export const MusicQueue = (props: MusicQueueProps) => {
           >
             Now playing
           </h2>
-          <Item asChild className="hover:bg-muted mt-3">
-            <button onClick={() => onTrackSelect(currentTrack)} type="button">
+          <Item asChild className="mt-3" variant="muted">
+            <button
+              aria-current="true"
+              onClick={() => onTrackSelect(currentTrack)}
+              type="button"
+            >
               <ItemMedia variant="image">
-                <img alt="" height={64} src={currentTrack.image} width={64} />
+                <img alt="" height={40} src={currentTrack.image} width={40} />
               </ItemMedia>
               <ItemContent>
-                <ItemTitle className="text-primary">
-                  <AudioWaveformIcon aria-hidden="true" />
-                  {currentTrack.title}
-                </ItemTitle>
+                <ItemTitle>{currentTrack.title}</ItemTitle>
                 <ItemDescription>{currentTrack.artist}</ItemDescription>
               </ItemContent>
+              <ItemActions>
+                <AudioWaveformIcon
+                  aria-hidden="true"
+                  className="text-primary size-4"
+                />
+                <span className="text-muted-foreground text-xs tabular-nums">
+                  {currentTrack.duration}
+                </span>
+              </ItemActions>
             </button>
           </Item>
         </section>
@@ -65,7 +75,7 @@ export const MusicQueue = (props: MusicQueueProps) => {
           </h2>
           <div className="mt-3 flex flex-col gap-1">
             {upcoming.map((track) => (
-              <Item asChild className="hover:bg-muted" key={track.title}>
+              <Item asChild key={track.title}>
                 <button onClick={() => onTrackSelect(track)} type="button">
                   <ItemMedia variant="image">
                     <img alt="" height={48} src={track.image} width={48} />

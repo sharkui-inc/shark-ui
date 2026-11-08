@@ -125,14 +125,14 @@ Motion is tactile, contained, and local to the owning component.
 | Context | Motion |
 | --- | --- |
 | Button press | `duration-150 ease-out`, with a 98% press scale when motion is allowed. |
-| Controls and anchored overlays | `duration-150 ease-out`. |
+| Controls and anchored overlays | `duration-100 ease-out`. |
 | Dialogs and sheets | `duration-200 ease-out`. |
-| Live Ark geometry | `duration-150 ease-in-out` only for documented geometry exceptions. |
-| Drawer | Ark swipe variables; panel `duration-300 ease-out`; backdrop `duration-[450ms] ease-out`. |
+| Live Ark geometry | `duration-150`–`200 ease-in-out` for documented geometry (segment indicator, toc, sidebar collapse width/padding). |
+| Drawer | Ark swipe variables; panel and backdrop `duration-250` with `ease-[cubic-bezier(0.32,0.72,0,1)]` (approved iOS drawer curve). |
 
-List overlays (Menu, Combobox, Autocomplete, Select, ColorPicker, DatePicker) have no exit animation — see `CODE_STYLE.md`. Other anchored overlays (Popover, Tooltip, HoverCard, and similar) use `origin-(--transform-origin)`, 98% scale, fade, and placement-aware travel. Centered dialogs and coordinate-positioned panels use `origin-center`. Compose all motion from local Tailwind and `tw-animate-css` utilities.
+List overlays (Menu, Combobox, Autocomplete, Select, ColorPicker, DatePicker) have no exit animation — see `CODE_STYLE.md`. Other anchored overlays (Popover, Tooltip, HoverCard, and similar) use `origin-(--transform-origin)`, 95–98% scale, fade, and placement-aware travel. Tooltip content must honor Ark `data-instant` (skip duration/animation when moving across grouped triggers). Centered dialogs and coordinate-positioned panels use `origin-center`. Compose all motion from local Tailwind and `tw-animate-css` utilities.
 
-Do not add interface keyframes, shared duration tokens, or shared easing curves to `styles/globals.css`. Do not use `transition-all`, `ease-in`, `ease-linear`, `scale(0)`, or arbitrary easing functions. Under reduced motion, keep a short fade and remove travel, scale, rotation, and blur. Gate hover transforms behind fine-pointer and hover capability.
+Do not add interface keyframes, shared duration tokens, or shared easing curves to `styles/globals.css`. Do not use `transition-all`, `ease-in`, `ease-linear`, or `scale(0)`. The drawer cubic-bezier above is the only approved arbitrary easing. Under reduced motion, keep a short fade and remove travel, scale, rotation, and blur. Gate hover transforms behind fine-pointer and hover capability.
 
 ## Component ownership and composition
 

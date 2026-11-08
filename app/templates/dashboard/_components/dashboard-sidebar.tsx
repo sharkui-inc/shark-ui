@@ -21,8 +21,8 @@ import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuShortcut,
   MenuTrigger,
@@ -57,16 +57,7 @@ export const DashboardSidebar = () => {
             <p className="truncate text-sm font-semibold">Onda</p>
           </div>
 
-          <Button
-            aria-label="Search employees"
-            onClick={() =>
-              document
-                .querySelector<HTMLElement>("#dashboard-employee-search")
-                ?.focus()
-            }
-            size="icon-xs"
-            variant="ghost"
-          >
+          <Button aria-label="Search" size="icon-xs" variant="ghost">
             <SearchIcon aria-hidden="true" />
           </Button>
         </SidebarHeader>
@@ -98,7 +89,7 @@ export const DashboardSidebar = () => {
           </SidebarGroup>
         </SidebarContent>
 
-        <SidebarFooter className="border-t">
+        <SidebarFooter>
           <SidebarMenu>
             <SidebarMenuItem>
               <Menu>
@@ -138,7 +129,6 @@ export const DashboardSidebar = () => {
                       <LogOutIcon aria-hidden="true" />
                       Sign out
                     </MenuItem>
-
                   </MenuList>
                 </MenuContent>
               </Menu>

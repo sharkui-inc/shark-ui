@@ -14,8 +14,8 @@ import {
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import { TRACKS } from "../_data/music";
@@ -34,7 +34,10 @@ export const MusicRecommended = () => {
   };
 
   return (
-    <section aria-labelledby="recommended-tracks-heading">
+    <section
+      aria-labelledby="recommended-tracks-heading"
+      className="[contain-intrinsic-size:auto_20rem] [content-visibility:auto]"
+    >
       <h2
         className="font-heading text-xl font-semibold tracking-[-0.02em]"
         id="recommended-tracks-heading"
@@ -46,7 +49,7 @@ export const MusicRecommended = () => {
           const isFavorite = favoriteTitles.includes(track.title);
 
           return (
-            <Item className="hover:bg-muted" key={track.title}>
+            <Item key={track.title}>
               <ItemMedia variant="image">
                 <img alt="" height={56} src={track.image} width={56} />
               </ItemMedia>
@@ -67,7 +70,9 @@ export const MusicRecommended = () => {
                   </MenuTrigger>
                   <MenuContent>
                     <MenuList>
-                      <MenuItem value={`${track.title}-play`}>Play now</MenuItem>
+                      <MenuItem value={`${track.title}-play`}>
+                        Play now
+                      </MenuItem>
                       <MenuItem
                         onClick={() => toggleFavorite(track.title)}
                         value={`${track.title}-favorite`}
@@ -76,7 +81,6 @@ export const MusicRecommended = () => {
                           ? "Remove from favorites"
                           : "Add to favorites"}
                       </MenuItem>
-
                     </MenuList>
                   </MenuContent>
                 </Menu>

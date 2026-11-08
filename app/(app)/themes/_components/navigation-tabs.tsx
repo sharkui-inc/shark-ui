@@ -19,7 +19,7 @@ export const NavigationTabs = () => {
 
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col gap-4">
-      <fieldset className="text-muted-foreground hidden w-fit shrink-0 items-center gap-x-0.5 lg:flex">
+      <fieldset className="text-muted-foreground hidden w-fit shrink-0 items-center gap-x-1.5 lg:flex">
         <legend className="sr-only">Preview template</legend>
         {TABS.map((item) => {
           const selected = visibleTab === item.slug;

@@ -65,7 +65,7 @@ export const MailList = (props: MailListProps) => {
             />
           ))
         ) : (
-          <State className="min-h-52 border-0">
+          <State className="min-h-52">
             <StateHeader>
               <StateMedia variant="icon">
                 <InboxIcon aria-hidden="true" />

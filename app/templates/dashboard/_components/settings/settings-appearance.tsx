@@ -19,13 +19,7 @@ import {
 } from "../../_data/dashboard";
 import { SettingsSwitchField } from "./settings-fields";
 
-interface SettingsAppearancePageProps {
-  onSave: () => void;
-}
-
-export const SettingsAppearancePage = (props: SettingsAppearancePageProps) => {
-  const { onSave } = props;
-
+export const SettingsAppearancePage = () => {
   const [systemPreference, setSystemPreference] = React.useState(true);
   const [compactNavigation, setCompactNavigation] = React.useState(true);
   const [appearance, setAppearance] = React.useState<AppearanceOption[]>([
@@ -43,10 +37,9 @@ export const SettingsAppearancePage = (props: SettingsAppearancePageProps) => {
           <FieldLabel>Color preference</FieldLabel>
           <ToggleGroup
             multiple={false}
-            onValueChange={({ value }) => {
-              setAppearance(value as AppearanceOption[]);
-              onSave();
-            }}
+            onValueChange={({ value }) =>
+              setAppearance(value as AppearanceOption[])
+            }
             value={appearance}
             variant="outline"
           >
@@ -61,19 +54,13 @@ export const SettingsAppearancePage = (props: SettingsAppearancePageProps) => {
           checked={systemPreference}
           description="Automatically adapt when your device changes theme."
           label="Follow system preference"
-          onCheckedChange={(checked) => {
-            setSystemPreference(checked);
-            onSave();
-          }}
+          onCheckedChange={(checked) => setSystemPreference(checked)}
         />
         <SettingsSwitchField
           checked={compactNavigation}
           description="Use a denser sidebar layout on larger screens."
           label="Compact navigation"
-          onCheckedChange={(checked) => {
-            setCompactNavigation(checked);
-            onSave();
-          }}
+          onCheckedChange={(checked) => setCompactNavigation(checked)}
         />
       </FieldSet>
     </FieldGroup>

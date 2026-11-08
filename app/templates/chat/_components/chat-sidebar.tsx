@@ -21,9 +21,9 @@ import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuRadioGroup,
   MenuRadioItem,
   MenuSeparator,
@@ -79,7 +79,7 @@ export const ChatSidebar = () => {
             </IconTile>
             <SidebarTrigger
               aria-label="Expand sidebar"
-              className="col-start-1 row-start-1 size-6 opacity-0 transition-opacity group-focus-within/brand-toggle:opacity-100 group-hover/brand-toggle:opacity-100 [&_svg]:mx-0"
+              className="col-start-1 row-start-1 size-6 md:size-6 opacity-0 transition-opacity group-focus-within/brand-toggle:opacity-100 group-hover/brand-toggle:opacity-100 [&_svg]:mx-0"
               size="icon-xs"
             />
           </div>
@@ -133,8 +133,8 @@ export const ChatSidebar = () => {
           </SidebarGroup>
         </SidebarContent>
 
-        <SidebarFooter className="overflow-hidden">
-          <Card className="w-[calc(var(--sidebar-width)-(--spacing(4)))] shrink-0 gap-2 [--space:--spacing(3)] group-data-[collapsible=icon]:hidden">
+        <SidebarFooter>
+          <Card className="gap-2 [--space:--spacing(3)] group-data-[collapsible=icon]:hidden">
             <CardContent className="flex flex-col gap-2">
               <div className="text-xs text-nowrap">Monthly token usage</div>
               <Progress
@@ -206,7 +206,6 @@ const WorkspaceSwitcher = () => {
                   </MenuRadioItem>
                 ))}
               </MenuRadioGroup>
-
             </MenuList>
           </MenuContent>
         </Menu>
@@ -224,7 +223,7 @@ const AccountMenu = () => {
         <Menu positioning={{ placement: "top-end" }}>
           <MenuTrigger asChild>
             <SidebarMenuButton size="lg">
-              <Avatar size="sm">
+              <Avatar className="size-8 rounded-lg">
                 <AvatarImage alt={account.name} src={account.avatar} />
                 <AvatarFallback>{account.initials}</AvatarFallback>
               </Avatar>
@@ -232,7 +231,8 @@ const AccountMenu = () => {
             </SidebarMenuButton>
           </MenuTrigger>
           <MenuContent
-            className={state === "collapsed" ? "w-56" : "w-(--reference-width)"}
+            className="w-(--reference-width) data-collapsed:w-56"
+            data-collapsed={state === "collapsed" || undefined}
           >
             <MenuList>
               <MenuGroup heading={account.name}>
@@ -250,7 +250,6 @@ const AccountMenu = () => {
                 <LogOutIcon aria-hidden="true" />
                 Sign out
               </MenuItem>
-
             </MenuList>
           </MenuContent>
         </Menu>

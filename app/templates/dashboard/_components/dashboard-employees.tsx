@@ -72,8 +72,12 @@ const employeeColumns = employeeColumnHelper.columns([
     id: "type",
   }),
   employeeColumnHelper.display({
-    cell: ({ row }) => <EmployeeActions employee={row.original} />,
-    header: "Actions",
+    cell: ({ row }) => (
+      <div className="flex justify-end">
+        <EmployeeActions employee={row.original} />
+      </div>
+    ),
+    header: () => <div className="text-end">Actions</div>,
     id: "actions",
   }),
 ]);
@@ -93,7 +97,6 @@ export const DashboardEmployees = () => {
           <InputGroup className="sm:w-56">
             <InputGroupInput
               aria-label="Search employees"
-              id="dashboard-employee-search"
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search..."
               type="search"

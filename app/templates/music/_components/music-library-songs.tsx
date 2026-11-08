@@ -1,6 +1,6 @@
 "use client";
 
-import { AudioWaveformIcon, Clock3Icon, HeartIcon } from "lucide-react";
+import { Clock3Icon, HeartIcon, PlayIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   Table,
@@ -21,7 +21,7 @@ export const MusicLibrarySongs = (props: MusicLibrarySongsProps) => {
   const { favoriteTitles, onToggleFavorite } = props;
 
   return (
-    <Table>
+    <Table isHoverable={false}>
       <TableHeader>
         <TableRow>
           <TableHead className="w-10">#</TableHead>
@@ -35,26 +35,20 @@ export const MusicLibrarySongs = (props: MusicLibrarySongsProps) => {
       </TableHeader>
       <TableBody>
         {TRACKS.map((track, index) => {
-          const isCurrent = track.title === TRACKS[0].title;
           const isFavorite = favoriteTitles.includes(track.title);
 
           return (
-            <TableRow
-              data-state={isCurrent ? "selected" : undefined}
-              key={track.title}
-            >
+            <TableRow className="group/track" key={track.title}>
               <TableCell>
-                <Button
-                  aria-label={`Play ${track.title}`}
-                  size="icon-sm"
-                  variant={isCurrent ? "default" : "ghost"}
-                >
-                  {isCurrent ? (
-                    <AudioWaveformIcon aria-hidden="true" />
-                  ) : (
-                    <span>{index + 1}</span>
-                  )}
-                </Button>
+                <span className="relative flex size-8 items-center justify-center">
+                  <span className="text-muted-foreground text-sm tabular-nums group-hover/track:invisible">
+                    {index + 1}
+                  </span>
+                  <PlayIcon
+                    aria-hidden="true"
+                    className="absolute size-4 opacity-0 group-hover/track:opacity-100"
+                  />
+                </span>
               </TableCell>
               <TableCell>
                 <div className="flex min-w-0 items-center gap-3">

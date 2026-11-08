@@ -21,14 +21,14 @@ export const SettingsSwitchField = (props: SettingsSwitchFieldProps) => {
 
   return (
     <Field orientation="horizontal">
-      <Switch
-        checked={checked}
-        onCheckedChange={({ checked: next }) => onCheckedChange(Boolean(next))}
-      />
       <FieldContent>
         <FieldLabel>{label}</FieldLabel>
         <FieldDescription>{description}</FieldDescription>
       </FieldContent>
+      <Switch
+        checked={checked}
+        onCheckedChange={({ checked: next }) => onCheckedChange(Boolean(next))}
+      />
     </Field>
   );
 };

@@ -53,7 +53,7 @@ export const MusicSidebar = () => {
           </IconTile>
           <SidebarTrigger
             aria-label="Expand sidebar"
-            className="col-start-1 row-start-1 size-6 opacity-0 transition-opacity group-focus-within/brand-toggle:opacity-100 group-hover/brand-toggle:opacity-100 [&_svg]:mx-0"
+            className="col-start-1 row-start-1 size-6 md:size-6 opacity-0 transition-opacity group-focus-within/brand-toggle:opacity-100 group-hover/brand-toggle:opacity-100 [&_svg]:mx-0"
             size="icon-xs"
           />
         </div>
@@ -84,9 +84,9 @@ export const MusicSidebar = () => {
         ))}
       </SidebarContent>
       <SidebarFooter className="group-data-[collapsible=icon]:hidden">
-        <Item asChild className="hover:bg-muted" variant="muted">
-          <button onClick={() => setActiveNavigation("Home")} type="button">
-            <ItemMedia variant="image">
+        <Item asChild variant="muted">
+          <a href="#">
+            <ItemMedia className="rounded-lg" variant="image">
               <img
                 alt=""
                 height={44}
@@ -98,10 +98,10 @@ export const MusicSidebar = () => {
               <ItemDescription>Fresh this week</ItemDescription>
               <ItemTitle>{TRACKS.length} new tracks for you</ItemTitle>
             </ItemContent>
-            <ItemActions className="text-primary">
-              <ArrowUpRightIcon aria-hidden="true" />
+            <ItemActions>
+              <ArrowUpRightIcon aria-hidden="true" className="size-4" />
             </ItemActions>
-          </button>
+          </a>
         </Item>
       </SidebarFooter>
     </Sidebar>

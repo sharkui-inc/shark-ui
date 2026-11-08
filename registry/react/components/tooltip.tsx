@@ -32,6 +32,7 @@ export const tooltipContentVariants = tv({
     "data-[placement^=right]:slide-in-from-left-2",
     "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
     "data-[state=closed]:animate-out",
+    "data-instant:animate-none data-instant:duration-0",
     "motion-reduce:animate-none",
     "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
   ],

@@ -1,7 +1,6 @@
 "use client";
 
 import { StarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
 import {
   Avatar,
   AvatarFallback,
@@ -33,10 +32,9 @@ export const MailListItem = (props: MailListItemProps) => {
 
   return (
     <Item
-      className={cn(
-        "rounded-none border-x-0 border-t-0 [--space:--spacing(4)]",
-        isSelected ? "bg-muted" : "hover:bg-muted"
-      )}
+      className="rounded-none border-x-0 border-t-0 transition-none data-selected:bg-muted [--space:--spacing(4)]"
+      data-selected={isSelected || undefined}
+      data-unread={email.unread || undefined}
     >
       <button
         className="flex min-w-0 flex-1 items-start gap-3 text-start outline-hidden"
@@ -50,12 +48,10 @@ export const MailListItem = (props: MailListItemProps) => {
           </Avatar>
         </ItemMedia>
         <ItemContent>
-          <ItemTitle className={email.unread ? "font-semibold" : undefined}>
+          <ItemTitle className="in-data-unread:font-semibold">
             {email.sender}
           </ItemTitle>
-          <ItemDescription
-            className={email.unread ? "text-foreground" : undefined}
-          >
+          <ItemDescription className="in-data-unread:text-foreground">
             {email.subject}
           </ItemDescription>
           <ItemDescription>{email.preview}</ItemDescription>
@@ -74,15 +70,14 @@ export const MailListItem = (props: MailListItemProps) => {
         <Button
           aria-label={`${isStarred ? "Remove" : "Add"} ${email.subject} ${isStarred ? "from" : "to"} favorites`}
           aria-pressed={isStarred}
+          data-starred={isStarred || undefined}
           onClick={() => onToggleFavorite(email.id)}
           size="icon-xs"
           variant="ghost"
         >
           <StarIcon
             aria-hidden="true"
-            className={
-              isStarred ? "text-primary fill-current" : "text-muted-foreground"
-            }
+            className="text-muted-foreground in-data-starred:fill-current in-data-starred:text-primary"
           />
         </Button>
       </ItemActions>

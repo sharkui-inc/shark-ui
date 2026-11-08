@@ -23,7 +23,7 @@ const MusicTemplatePage = () => (
   <div className="absolute inset-0 overflow-hidden">
     <SidebarProvider className="h-full min-h-0">
       <MusicSidebar />
-      <SidebarInset className="flex min-w-0 flex-col">
+      <SidebarInset className="flex min-h-0 min-w-0 flex-col">
         <h1 className="sr-only">Music preview</h1>
         <MusicHeader />
         <ScrollArea className="flex-1">

@@ -28,7 +28,7 @@ export const MusicLibraryPlaylists = () => (
           </div>
         </CardMedia>
         <CardHeader>
-          <CardTitle className="text-base">{playlist.title}</CardTitle>
+          <CardTitle>{playlist.title}</CardTitle>
           <CardDescription>{playlist.subtitle}</CardDescription>
         </CardHeader>
       </Card>

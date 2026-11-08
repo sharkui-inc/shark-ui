@@ -134,7 +134,7 @@ export const dialogContentVariants = tv({
       "overflow-hidden",
       "outline-hidden",
       "translate-y-[calc(-1.25rem*var(--nested-layer-count))]",
-      "origin-center transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform",
+      "origin-center transition-[scale,opacity,translate] duration-200 ease-out will-change-transform",
       "data-[nested=dialog]:data-[state=closed]:slide-in-from-bottom-10 data-[nested=dialog]:data-[state=open]:slide-in-from-bottom-10",
       "data-[has-nested=dialog]:origin-top",
       "scale-[calc(1-0.1*var(--nested-layer-count))] opacity-[calc(1-0.1*var(--nested-layer-count))]",

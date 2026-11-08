@@ -186,7 +186,11 @@
   --input: color-mix(in srgb, var(--color-neutral-950) 12%, var(--background));
   --ring: var(--color-neutral-600);
 
-  --sidebar: var(--color-neutral-50);
+  --sidebar: color-mix(
+    in srgb,
+    var(--color-neutral-950) 4%,
+    var(--background)
+  );
   --sidebar-foreground: color-mix(
     in srgb,
     var(--color-neutral-800) 80%,
@@ -207,11 +211,11 @@
   );
   --sidebar-ring: var(--color-neutral-600);
 
-  --chart-1: var(--color-blue-600);
-  --chart-2: var(--color-emerald-600);
-  --chart-3: var(--color-amber-600);
-  --chart-4: var(--color-purple-600);
-  --chart-5: var(--color-rose-600);
+  --chart-1: var(--color-blue-700);
+  --chart-2: var(--color-emerald-500);
+  --chart-3: var(--color-amber-500);
+  --chart-4: var(--color-purple-500);
+  --chart-5: var(--color-rose-500);
 
   --code: var(--background);
   --code-foreground: var(--foreground);
@@ -274,7 +278,7 @@
 
   --sidebar: color-mix(
     in srgb,
-    var(--color-neutral-950) 97%,
+    var(--background) 98%,
     var(--color-neutral-50)
   );
   --sidebar-foreground: color-mix(

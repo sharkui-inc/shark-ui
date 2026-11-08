@@ -49,45 +49,15 @@ const ViewExamplePage = async (
     return (
       <PreviewLocaleProvider>
         <LocaleProvider locale="ar-SA">
-          <div
-            className={
-              component === "bottom-navigation"
-                ? "bg-background grid min-h-svh w-full place-items-center"
-                : "min-h-svh"
-            }
-            dir="rtl"
-            lang="ar-SA"
-          >
-            {component === "sidebar" ? (
-              <Preview />
-            ) : (
-              <main>
-                <Preview />
-              </main>
-            )}
+          <div className="min-h-svh" dir="rtl" lang="ar-SA">
+            <Preview />
           </div>
         </LocaleProvider>
       </PreviewLocaleProvider>
     );
   }
 
-  if (component === "bottom-navigation" && example !== "example-default") {
-    return (
-      <div className="bg-background grid min-h-svh w-full place-items-center">
-        <Preview />
-      </div>
-    );
-  }
-
-  if (component === "sidebar") {
-    return <Preview />;
-  }
-
-  return (
-    <main>
-      <Preview />
-    </main>
-  );
+  return <Preview />;
 };
 
 export default ViewExamplePage;

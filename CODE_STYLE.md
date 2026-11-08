@@ -28,6 +28,9 @@ Conflict order: explicit user or system instructions → `biome.json` → this f
 ## Motion
 
 - Duration and easing live with the animation, not in `styles/globals.css`.
+- Timings: [`public/design.md`](public/design.md) Motion.
+- Enter/exit → `ease-out`. Morph/geometry on-screen → `ease-in-out`. Constant motion → `linear`. Hover/color → no transition (or short `ease` only if needed).
+- Never: `ease-in`, `ease-linear` on UI, `scale(0)` / `zoom-in-0` (use ~95–98%).
 - Enter/exit uses `data-[state=open|closed]`.
 - List overlays (Menu, Combobox, Autocomplete, Select, ColorPicker, DatePicker): no close animation. Never `data-[state=closed]:animate-out` / closed fade / closed zoom. Unmount must be instant.
 - Reduced motion uses the `motion-reduce:` prefix. A bare `data-[state=open|closed]:animate-none` disables motion for everyone.

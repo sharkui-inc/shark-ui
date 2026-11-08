@@ -29,7 +29,7 @@ export const HomeShowcase = (props: React.PropsWithChildren) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <fieldset className="text-muted-foreground hidden min-w-0 items-center gap-x-0.5 lg:flex">
+        <fieldset className="text-muted-foreground hidden min-w-0 items-center gap-x-1.5 lg:flex">
           <legend className="sr-only">Preview template</legend>
           {[
             { label: "Preview", slug: COMPONENTS_SLUG },

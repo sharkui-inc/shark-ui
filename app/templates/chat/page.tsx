@@ -21,14 +21,14 @@ const ChatTemplatePage = () => (
   <div className="absolute inset-0 overflow-hidden">
     <SidebarProvider className="h-full min-h-0">
       <ChatSidebar />
-      <SidebarInset className="bg-background min-w-0">
+      <SidebarInset className="bg-background flex min-h-0 min-w-0 flex-col">
         <h1 className="sr-only">Chat preview</h1>
         <SidebarProvider
-          className="h-full min-h-0"
+          className="min-h-0 min-w-0 flex-1"
           defaultOpen={false}
           style={{ "--sidebar-width": "20rem" } as React.CSSProperties}
         >
-          <SidebarInset asChild className="min-w-0">
+          <SidebarInset asChild className="min-h-0 min-w-0">
             <div>
               <ChatConversation />
             </div>

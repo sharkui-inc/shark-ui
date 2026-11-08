@@ -13,9 +13,9 @@ import { DiffStats } from "@/registry/react/components/diff";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -89,7 +89,6 @@ const EnvironmentMenu = () => (
             <span>View all</span>
           </MenuItem>
         </MenuGroup>
-
       </MenuList>
     </MenuContent>
   </Menu>

@@ -209,8 +209,8 @@ export const baseThemeTokens = (palette: string, mode: "light" | "dark") => {
   const foreground = `var(--color-${palette}-${light ? "800" : "100"})`;
   const foregroundSurface = `var(--color-${palette}-${light ? "50" : "800"})`;
   const sidebar = light
-    ? `var(--color-${palette}-50)`
-    : `color-mix(in srgb, var(--color-${palette}-950) 97%, var(--color-${palette}-50))`;
+    ? `color-mix(in srgb, ${surface} 4%, var(--background))`
+    : `color-mix(in srgb, var(--background) 98%, var(--color-${palette}-50))`;
 
   return {
     accent: `color-mix(in srgb, ${surface} 8%, var(--background))`,
@@ -352,12 +352,16 @@ export const withDefaultFirst = <T extends { value: string }>(
   ...items.filter(({ value }) => value !== defaultValue),
 ];
 
+const CHART_COLORS = {
+  "chart-1": "var(--color-blue-700)",
+  "chart-2": "var(--color-emerald-500)",
+  "chart-3": "var(--color-amber-500)",
+  "chart-4": "var(--color-purple-500)",
+  "chart-5": "var(--color-rose-500)",
+} as const;
+
 export const STATUS_LIGHT = {
-  "chart-1": "var(--color-blue-600)",
-  "chart-2": "var(--color-emerald-600)",
-  "chart-3": "var(--color-amber-600)",
-  "chart-4": "var(--color-purple-600)",
-  "chart-5": "var(--color-rose-600)",
+  ...CHART_COLORS,
   destructive: "var(--color-red-600)",
   "destructive-foreground": "var(--color-red-800)",
   info: "var(--color-blue-500)",
@@ -369,11 +373,7 @@ export const STATUS_LIGHT = {
 } as const;
 
 export const STATUS_DARK = {
-  "chart-1": "var(--color-blue-700)",
-  "chart-2": "var(--color-emerald-500)",
-  "chart-3": "var(--color-amber-500)",
-  "chart-4": "var(--color-purple-500)",
-  "chart-5": "var(--color-rose-500)",
+  ...CHART_COLORS,
   destructive: "var(--color-red-600)",
   "destructive-foreground": "var(--color-red-400)",
   info: "var(--color-blue-500)",

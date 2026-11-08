@@ -9,15 +9,7 @@ import {
 } from "@/registry/react/components/field";
 import { SettingsSwitchField } from "./settings-fields";
 
-interface SettingsNotificationsPageProps {
-  onSave: () => void;
-}
-
-export const SettingsNotificationsPage = (
-  props: SettingsNotificationsPageProps
-) => {
-  const { onSave } = props;
-
+export const SettingsNotificationsPage = () => {
   const [weeklySummary, setWeeklySummary] = React.useState(true);
   const [customerAlerts, setCustomerAlerts] = React.useState(true);
   const [securityAlerts, setSecurityAlerts] = React.useState(true);
@@ -33,28 +25,19 @@ export const SettingsNotificationsPage = (
           checked={weeklySummary}
           description="A concise snapshot every Monday morning."
           label="Weekly performance summary"
-          onCheckedChange={(checked) => {
-            setWeeklySummary(checked);
-            onSave();
-          }}
+          onCheckedChange={(checked) => setWeeklySummary(checked)}
         />
         <SettingsSwitchField
           checked={customerAlerts}
           description="Receive an alert when a customer joins."
           label="New customer alerts"
-          onCheckedChange={(checked) => {
-            setCustomerAlerts(checked);
-            onSave();
-          }}
+          onCheckedChange={(checked) => setCustomerAlerts(checked)}
         />
         <SettingsSwitchField
           checked={securityAlerts}
           description="Always notify workspace owners about new sign-ins."
           label="Security alerts"
-          onCheckedChange={(checked) => {
-            setSecurityAlerts(checked);
-            onSave();
-          }}
+          onCheckedChange={(checked) => setSecurityAlerts(checked)}
         />
       </FieldSet>
     </FieldGroup>

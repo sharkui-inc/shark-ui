@@ -18,13 +18,7 @@ import {
 import { Progress } from "@/registry/react/components/progress";
 import { SettingsTextField } from "./settings-fields";
 
-interface SettingsBillingPageProps {
-  onSave: () => void;
-}
-
-export const SettingsBillingPage = (props: SettingsBillingPageProps) => {
-  const { onSave } = props;
-
+export const SettingsBillingPage = () => {
   const [billingEmail, setBillingEmail] = React.useState("billing@onda.io");
 
   return (
@@ -51,16 +45,11 @@ export const SettingsBillingPage = (props: SettingsBillingPageProps) => {
         <SettingsTextField
           description="Invoices and payment confirmations are sent here."
           label="Billing email"
-          onChange={(value) => {
-            setBillingEmail(value);
-            onSave();
-          }}
+          onChange={(value) => setBillingEmail(value)}
           type="email"
           value={billingEmail}
         />
-        <Button onClick={onSave} variant="outline">
-          Manage plan
-        </Button>
+        <Button variant="outline">Manage plan</Button>
       </FieldSet>
     </FieldGroup>
   );

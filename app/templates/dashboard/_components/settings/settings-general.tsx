@@ -9,13 +9,7 @@ import {
 } from "@/registry/react/components/field";
 import { SettingsTextField } from "./settings-fields";
 
-interface SettingsGeneralPageProps {
-  onSave: () => void;
-}
-
-export const SettingsGeneralPage = (props: SettingsGeneralPageProps) => {
-  const { onSave } = props;
-
+export const SettingsGeneralPage = () => {
   const [workspaceName, setWorkspaceName] = React.useState("Onda");
   const [workspaceUrl, setWorkspaceUrl] = React.useState("onda");
 
@@ -29,19 +23,13 @@ export const SettingsGeneralPage = (props: SettingsGeneralPageProps) => {
         <SettingsTextField
           description="Used in navigation, invitations, and reports."
           label="Workspace name"
-          onChange={(value) => {
-            setWorkspaceName(value);
-            onSave();
-          }}
+          onChange={(value) => setWorkspaceName(value)}
           value={workspaceName}
         />
         <SettingsTextField
           description={`onda.shark-ui.com/${workspaceUrl}`}
           label="Workspace URL"
-          onChange={(value) => {
-            setWorkspaceUrl(value);
-            onSave();
-          }}
+          onChange={(value) => setWorkspaceUrl(value)}
           value={workspaceUrl}
         />
       </FieldSet>

@@ -51,11 +51,12 @@ export const MusicHeader = () => (
         <MenuTrigger asChild>
           <Button
             aria-label="Open profile menu"
+            className="p-0"
             pill
             size="icon-sm"
             variant="ghost"
           >
-            <Avatar size="sm">
+            <Avatar className="size-full" size="sm">
               <AvatarImage
                 alt=""
                 src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=Mira+Vale&waveColor=e11d48"

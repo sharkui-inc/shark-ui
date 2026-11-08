@@ -45,7 +45,7 @@ export const EmptyConversation = (props: EmptyConversationProps) => {
               variant="outline"
             >
               <button onClick={onSelect} type="button">
-                <ItemMedia className="text-primary" variant="icon">
+                <ItemMedia variant="icon">
                   <Icon aria-hidden="true" />
                 </ItemMedia>
                 <ItemContent>

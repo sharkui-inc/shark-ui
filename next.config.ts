@@ -1,4 +1,3 @@
-import { withRedact } from "@tanstack/redact/next";
 import { codeInspectorPlugin } from "code-inspector-plugin";
 import { createMDX } from "fumadocs-mdx/next";
 import type { NextConfig } from "next";
@@ -44,4 +43,4 @@ const config: NextConfig = {
   },
 };
 
-export default withRedact(withMDX(config));
+export default withMDX(config);

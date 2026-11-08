@@ -42,12 +42,12 @@ export const TaskEditorDialog = (props: TaskEditorDialogProps) => {
             <TaskEditorFields draft={draft} onDraftChange={onDraftChange} />
           </DialogBody>
           <DialogFooter>
+            <Button type="submit">
+              {isCreating ? "Create task" : "Save changes"}
+            </Button>
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button disabled={!draft.title.trim()} type="submit">
-              {isCreating ? "Create task" : "Save changes"}
-            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

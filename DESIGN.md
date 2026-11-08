@@ -69,6 +69,7 @@ Shark UI is a copy-and-own React registry (Ark UI + Tailwind CSS v4). Consumers 
 
 | Need | Source of truth |
 | --- | --- |
+| Product intent, users, and constraints | [`PRODUCT.md`](PRODUCT.md) |
 | Theme values and semantic colors | `lib/theme/catalog.ts` → generated theme CSS |
 | Component API and anatomy | Component docs + `registry/react/components/` |
 | Shipped compositions | `registry/react/examples/` |

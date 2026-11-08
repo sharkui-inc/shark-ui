@@ -54,7 +54,6 @@
     "@tanstack/ai-react": "^1.0.1",
     "@tanstack/react-form": "^1.33.5",
     "@tanstack/react-table": "^9.3.1",
-    "@tanstack/redact": "^0.3.0",
     "@teispace/next-themes": "^3.1.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",

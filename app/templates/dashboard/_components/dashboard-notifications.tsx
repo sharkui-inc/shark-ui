@@ -2,7 +2,6 @@
 
 import { BellIcon } from "lucide-react";
 import React from "react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
   Item,
@@ -70,16 +69,14 @@ export const DashboardNotifications = () => {
               return (
                 <Item asChild key={notification.id}>
                   <button
+                    data-unread={unread || undefined}
                     onClick={() => markRead(notification.id)}
                     type="button"
                   >
                     <ItemMedia>
                       <span
                         aria-hidden="true"
-                        className={cn(
-                          "size-1.5 rounded-full",
-                          unread ? "bg-primary" : "bg-transparent"
-                        )}
+                        className="size-1.5 rounded-full bg-transparent in-data-unread:bg-primary"
                       />
                     </ItemMedia>
                     <ItemContent>

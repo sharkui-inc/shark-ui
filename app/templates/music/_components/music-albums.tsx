@@ -42,7 +42,7 @@ export const MusicAlbums = () => (
       <CarouselContent>
         {FEATURED_CHARTS.map((album, index) => (
           <CarouselItem
-            className="basis-[82%]! sm:basis-[calc(50%-0.5rem)]! lg:basis-[calc(33.333%-0.667rem)]! xl:basis-[calc(20%-0.8rem)]!"
+            className="w-56 shrink-0 sm:w-60 lg:w-56 xl:w-52"
             index={index}
             key={album.title}
           >
@@ -64,7 +64,7 @@ export const MusicAlbums = () => (
                 </div>
               </CardMedia>
               <CardHeader>
-                <CardTitle className="text-base">{album.title}</CardTitle>
+                <CardTitle>{album.title}</CardTitle>
                 <CardDescription>{album.artist}</CardDescription>
               </CardHeader>
             </Card>

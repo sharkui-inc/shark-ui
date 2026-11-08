@@ -268,7 +268,7 @@ export const Sidebar = (props: SidebarProps) => {
           "w-(--sidebar-width)",
           "hidden md:flex",
           "h-svh",
-          "transition-[inset-inline,width] duration-200 ease-linear",
+          "transition-[inset-inline,width] duration-200 ease-in-out",
           "motion-reduce:transition-none",
           placement === "left"
             ? cn(
@@ -363,7 +363,7 @@ export const SidebarRail = (props: React.ComponentProps<typeof ark.button>) => {
         "[[data-placement=left][data-state=collapsed]_&]:cursor-e-resize",
         "[[data-placement=right][data-state=collapsed]_&]:cursor-w-resize",
         "rtl:[[data-placement=left][data-state=collapsed]_&]:cursor-w-resize rtl:[[data-placement=right][data-state=collapsed]_&]:cursor-e-resize",
-        "transition-[inset-inline,translate,background-color] duration-200 ease-linear",
+        "transition-[inset-inline,translate,background-color] duration-200 ease-in-out",
         "motion-reduce:transition-none",
         "group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:inset-s-full",
         "hover:group-data-[collapsible=offcanvas]:bg-sidebar",
@@ -415,7 +415,7 @@ export const SidebarHeader = (props: React.ComponentProps<typeof ark.div>) => {
 
   return (
     <ark.div
-      className={cn("flex flex-col gap-2", "p-2", className)}
+      className={cn("flex flex-col gap-2", "p-2", "overflow-hidden", className)}
       data-sidebar="header"
       data-slot="sidebar-header"
       {...rest}
@@ -424,15 +424,28 @@ export const SidebarHeader = (props: React.ComponentProps<typeof ark.div>) => {
 };
 
 export const SidebarFooter = (props: React.ComponentProps<typeof ark.div>) => {
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ark.div
-      className={cn("flex flex-col gap-2", "p-2", className)}
+      className={cn("overflow-hidden", "p-2", className)}
       data-sidebar="footer"
       data-slot="sidebar-footer"
       {...rest}
-    />
+    >
+      <ark.div
+        className={cn(
+          "flex flex-col gap-2",
+          "w-[calc(var(--sidebar-width)-(--spacing(4)))]",
+          "shrink-0",
+          "group-data-[collapsible=icon]:w-auto",
+          "group-data-[collapsible=icon]:min-w-0"
+        )}
+        data-slot="sidebar-footer-inner"
+      >
+        {children}
+      </ark.div>
+    </ark.div>
   );
 };
 
@@ -489,6 +502,7 @@ export const SidebarContent = (props: SidebarContentProps) => {
         className={cn(
           "min-h-full",
           "flex flex-col gap-0",
+          "group-data-[collapsible=icon]:gap-1",
           "group-data-[collapsible=icon]:overflow-hidden",
           className
         )}
@@ -537,7 +551,7 @@ export const SidebarGroupLabel = (
         "flex items-center",
         "text-sidebar-foreground text-xs font-medium",
         "rounded-md",
-        "transition-[margin,opacity] duration-200 ease-linear",
+        "transition-[margin,opacity] duration-200 ease-in-out",
         "motion-reduce:transition-none",
         "[&_svg]:size-4 [&_svg]:shrink-0",
         "*:data-[slot=collapsible-indicator]:ms-auto [&>svg:last-child]:ms-auto",
@@ -562,7 +576,7 @@ export const SidebarGroupAction = (
         "absolute inset-e-3 top-3",
         "size-6 md:size-6",
         "text-sidebar-foreground",
-        "transition-transform duration-200 ease-linear",
+        "transition-transform duration-200 ease-in-out",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         "[&_svg]:size-4",
         "after:absolute after:-inset-2 md:after:hidden",
@@ -664,7 +678,7 @@ export const SidebarMenuButton = (props: SidebarMenuButtonProps) => {
         "h-8 md:h-8",
         "p-2",
         "overflow-hidden",
-        "transition-[width,height,padding,background-color,border-color,color,box-shadow,opacity,scale] duration-200 ease-linear",
+        "transition-[width,height,padding] duration-200 ease-in-out",
         "motion-reduce:transition-none",
         "data-[size=sm]:h-7 data-[size=sm]:text-xs",
         "data-[size=lg]:h-12",
@@ -710,6 +724,11 @@ export const SidebarMenuButton = (props: SidebarMenuButtonProps) => {
 };
 
 interface SidebarMenuActionProps extends React.ComponentProps<typeof Button> {
+  /**
+   * Whether to show the action on hover.
+   *
+   * @default false
+   */
   showOnHover?: boolean;
 }
 
@@ -887,6 +906,7 @@ export const SidebarMenuSubButton = (props: SidebarMenuSubButtonProps) => {
         "px-2",
         "text-sidebar-foreground",
         "overflow-hidden",
+        "transition-none",
         "ltr:-translate-x-px",
         "rtl:translate-x-px",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",

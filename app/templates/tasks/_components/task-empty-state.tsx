@@ -21,7 +21,7 @@ export const TaskEmptyState = (props: TaskEmptyStateProps) => {
   const { hasFilters, onClearFilters, onCreate } = props;
 
   return (
-    <State className="bg-muted/8 min-h-88 border px-6 py-12 shadow-xs/4">
+    <State className="min-h-88">
       <StateHeader>
         <StateMedia variant="icon">
           <ClipboardListIcon aria-hidden="true" />

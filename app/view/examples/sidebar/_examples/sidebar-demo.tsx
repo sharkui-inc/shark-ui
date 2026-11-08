@@ -440,7 +440,7 @@ const SidebarDemo = () => (
       <SidebarRail />
     </Sidebar>
     <SidebarInset>
-      <header className="flex h-16 shrink-0 items-center gap-2 px-4 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 motion-reduce:transition-none">
+      <header className="flex h-16 shrink-0 items-center gap-2 px-4 transition-[width,height] ease-in-out group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 motion-reduce:transition-none">
         <SidebarTrigger className="-ms-1" />
       </header>
     </SidebarInset>

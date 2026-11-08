@@ -712,7 +712,7 @@ body.primary-tone-dark.theme-rose {
   --accent-foreground: var(--theme-color-800);
   --border: color-mix(in srgb, var(--theme-color-950) 10%, var(--background));
   --input: color-mix(in srgb, var(--theme-color-950) 12%, var(--background));
-  --sidebar: var(--theme-color-50);
+  --sidebar: color-mix(in srgb, var(--theme-color-950) 4%, var(--background));
   --sidebar-foreground: color-mix(
     in srgb,
     var(--theme-color-800) 80%,
@@ -729,11 +729,11 @@ body.primary-tone-dark.theme-rose {
     var(--theme-color-950) 6%,
     var(--sidebar)
   );
-  --chart-1: var(--color-blue-600);
-  --chart-2: var(--color-emerald-600);
-  --chart-3: var(--color-amber-600);
-  --chart-4: var(--color-purple-600);
-  --chart-5: var(--color-rose-600);
+  --chart-1: var(--color-blue-700);
+  --chart-2: var(--color-emerald-500);
+  --chart-3: var(--color-amber-500);
+  --chart-4: var(--color-purple-500);
+  --chart-5: var(--color-rose-500);
   --code: color-mix(in srgb, var(--background) 99%, var(--theme-color-950));
   --code-highlight: color-mix(in srgb, var(--theme-color-950) 4%, var(--code));
 
@@ -764,11 +764,7 @@ body.primary-tone-dark.theme-rose {
     --accent-foreground: var(--theme-color-100);
     --border: color-mix(in srgb, var(--theme-color-50) 8%, var(--background));
     --input: color-mix(in srgb, var(--theme-color-50) 10%, var(--background));
-    --sidebar: color-mix(
-      in srgb,
-      var(--theme-color-950) 97%,
-      var(--theme-color-50)
-    );
+    --sidebar: color-mix(in srgb, var(--background) 98%, var(--theme-color-50));
     --sidebar-foreground: color-mix(
       in srgb,
       var(--theme-color-100) 80%,

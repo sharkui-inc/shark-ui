@@ -31,8 +31,8 @@ import {
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import {
@@ -48,8 +48,8 @@ import {
 import {
   Select,
   SelectContent,
-  SelectList,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -108,7 +108,6 @@ export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
                       </MenuItem>
                     );
                   })}
-
                 </MenuList>
               </MenuContent>
             </Menu>
@@ -134,7 +133,6 @@ export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
                       </span>
                     </SelectItem>
                   ))}
-
                 </SelectList>
               </SelectContent>
             </Select>
@@ -177,7 +175,6 @@ export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
                     {item.label}
                   </SelectItem>
                 ))}
-
               </SelectList>
             </SelectContent>
           </Select>
@@ -187,15 +184,15 @@ export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
           <PromptInputSubmit className="ms-2" size="icon-sm" />
         </PromptInputFooter>
         <PromptInputBottom>
-          <Button className="text-muted-foreground" size="sm" variant="ghost">
+          <Button size="sm" variant="ghost">
             <FolderIcon aria-hidden="true" />
             shark-ui
           </Button>
-          <Button className="text-muted-foreground" size="sm" variant="ghost">
+          <Button size="sm" variant="ghost">
             <MonitorIcon aria-hidden="true" />
             Local
           </Button>
-          <Button className="text-muted-foreground" size="sm" variant="ghost">
+          <Button size="sm" variant="ghost">
             <GitBranchIcon aria-hidden="true" />
             main
           </Button>
@@ -208,7 +205,6 @@ export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
               <ContextTrigger asChild>
                 <Button
                   aria-label="Context usage"
-                  className="text-muted-foreground font-normal"
                   size="icon-sm"
                   variant="ghost"
                 >
