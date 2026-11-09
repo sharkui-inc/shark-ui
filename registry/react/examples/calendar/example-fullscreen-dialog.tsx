@@ -32,34 +32,37 @@ const Example = () => {
   const [value, setValue] = React.useState<DateValue[]>([]);
 
   return (
-    <Dialog
-      onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)}
-      open={open}
-    >
-      <DialogTrigger asChild>
-        <Button variant="outline">{formatRangeLabel(value)}</Button>
-      </DialogTrigger>
+    <div className="grid min-h-svh place-items-center p-6">
+      <Dialog
+        onOpenChange={({ open: nextOpen }) => setOpen(nextOpen)}
+        open={open}
+      >
+        <DialogTrigger asChild>
+          <Button variant="outline">{formatRangeLabel(value)}</Button>
+        </DialogTrigger>
 
-      <DialogContent bottomStickOnMobile={false} size="fullscreen">
-        <DialogHeader title="Select dates" />
+        <DialogContent bottomStickOnMobile={false} size="fullscreen">
+          <DialogHeader title="Select dates" />
 
-        <Calendar
-          className="flex min-h-0 w-full flex-1 flex-col **:data-[slot=calendar-table-cell-trigger]:data-outside-range:invisible"
-          numOfMonths={MONTH_COUNT}
-          onValueChange={({ value: nextValue }) => setValue(nextValue)}
-          selectionMode="range"
-          value={value}
-        >
-          <WeekdayStrip />
+          <Calendar
+            className="flex min-h-0 w-full flex-1 flex-col"
+            numOfMonths={MONTH_COUNT}
+            onValueChange={({ value: nextValue }) => setValue(nextValue)}
+            selectionMode="range"
+            showOutsideDays={false}
+            value={value}
+          >
+            <WeekdayStrip />
 
-          <DialogBody className="px-(--space)">
-            <MonthList />
-          </DialogBody>
+            <DialogBody className="px-(--space)">
+              <MonthList />
+            </DialogBody>
 
-          <SelectionFooter />
-        </Calendar>
-      </DialogContent>
-    </Dialog>
+            <SelectionFooter />
+          </Calendar>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 };
 

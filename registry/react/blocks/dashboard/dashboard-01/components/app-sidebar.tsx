@@ -11,7 +11,11 @@ import {
   UsersIcon,
   WavesIcon,
 } from "lucide-react";
-import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/react/components/avatar";
 import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Sidebar,
@@ -100,17 +104,16 @@ export const AppSidebar = () => (
       <SidebarMenu>
         <SidebarMenuItem>
           <SidebarMenuButton className="text-foreground" size="lg">
-            <Avatar className="size-8 rounded-lg">
+            <Avatar className="rounded-lg">
+              <AvatarImage
+                alt="Maya Chen"
+                src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=Maya+Chen&waveColor=7c3aed"
+              />
               <AvatarFallback className="text-foreground rounded-lg">
                 MC
               </AvatarFallback>
             </Avatar>
-            <span className="grid min-w-0 flex-1 text-start text-sm leading-tight">
-              <span className="truncate font-medium">Maya Chen</span>
-              <span className="text-foreground/64 truncate text-xs">
-                maya@northstar.dev
-              </span>
-            </span>
+            <span className="truncate font-medium">Maya Chen</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
         <SidebarMenuItem>

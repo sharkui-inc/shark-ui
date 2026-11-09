@@ -118,9 +118,21 @@ import {
 
 <ComponentPreview componentName="calendar" fileName="example-multiple-months" />
 
+<blockquote className="sm:hidden">
+ Best viewed on desktop.
+ </blockquote>
+
+Set `showOutsideDays={false}` to hide days from adjacent months.
+
 ### Fullscreen Dialog
 
-<ComponentPreview componentName="calendar" fileName="example-fullscreen-dialog" autoHeight />
+Useful for mobile date range selection.
+
+<PreviewIframe
+  height={640}
+  src="/view/examples/calendar/example-fullscreen-dialog"
+  title="Fullscreen Dialog"
+/>
 
 ### Min and Max
 
@@ -194,6 +206,7 @@ Root component. Manages date view, selection, and navigation.
 | `isDateUnavailable` | `(date: DateValue) => boolean` | `-` |
 | `fixedWeeks` | `boolean` | `false` |
 | `outsideDaySelectable` | `boolean` | `false` |
+| `showOutsideDays` | `boolean` | `true` |
 | `numOfMonths` | `number` | `1` |
 | `required` | `boolean` | `-` |
 | `invalid` | `boolean` | `-` |

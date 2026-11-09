@@ -121,9 +121,9 @@ const data = {
     { logo: WavesHorizontalIcon, name: "Onda Labs", plan: "Free" },
   ],
   user: {
-    avatar: "https://github.com/shadcn.png",
-    email: "m@example.com",
-    name: "shadcn",
+    avatar:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Mina+Alves&waveColor=2b6cb0",
+    name: "Mina Alves",
   },
 };
 
@@ -335,7 +335,6 @@ const NavProjects = (props: NavProjectsProps) => {
 interface NavUserProps {
   user: {
     name: string;
-    email: string;
     avatar: string;
   };
 }
@@ -357,14 +356,11 @@ const NavUser = (props: NavUserProps) => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               size="lg"
             >
-              <Avatar className="size-8 rounded-lg">
+              <Avatar className="rounded-lg">
                 <AvatarImage alt={user.name} src={user.avatar} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarFallback className="rounded-lg">MA</AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-start text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
-              </div>
+              <span className="truncate font-medium">{user.name}</span>
               <ChevronsUpDownIcon
                 aria-hidden="true"
                 className="ms-auto size-4"
@@ -376,14 +372,11 @@ const NavUser = (props: NavUserProps) => {
               <MenuGroup>
                 <MenuGroupLabel className="p-0 font-normal">
                   <div className="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
-                    <Avatar className="size-8 rounded-lg">
+                    <Avatar className="rounded-lg">
                       <AvatarImage alt={user.name} src={user.avatar} />
-                      <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                      <AvatarFallback className="rounded-lg">MA</AvatarFallback>
                     </Avatar>
-                    <div className="grid flex-1 text-start text-sm leading-tight">
-                      <span className="truncate font-medium">{user.name}</span>
-                      <span className="truncate text-xs">{user.email}</span>
-                    </div>
+                    <span className="truncate font-medium">{user.name}</span>
                   </div>
                 </MenuGroupLabel>
               </MenuGroup>

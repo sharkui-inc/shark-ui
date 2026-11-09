@@ -200,6 +200,7 @@ export const Sidebar = (props: SidebarProps) => {
   if (isMobile) {
     return (
       <Sheet
+        initialFocusEl={() => false}
         onOpenChange={({ open: nextOpen }) => {
           setOpenMobile(nextOpen);
         }}

@@ -2,6 +2,7 @@ import { ThemeProvider } from "@teispace/next-themes";
 import { Provider as JotaiProvider } from "jotai";
 import type React from "react";
 import { IframeHotkeys } from "@/components/layout/iframe-hotkeys";
+import { ThemeBootstrapScript } from "@/components/theme-bootstrap-script";
 import { ThemeConfigurationProvider } from "@/lib/theme/provider";
 
 export const Providers = (props: React.PropsWithChildren) => {
@@ -9,6 +10,7 @@ export const Providers = (props: React.PropsWithChildren) => {
 
   return (
     <JotaiProvider>
+      <ThemeBootstrapScript />
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <ThemeConfigurationProvider>
           {children}

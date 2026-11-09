@@ -3,7 +3,6 @@ import { access, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { SITE_CONFIG } from "../config/site";
-import { getRegistryArtifacts } from "../lib/composition-catalog";
 import {
   type CompositionArtifact,
   type RegistryItemType,
@@ -69,11 +68,6 @@ const REGISTRY_ITEM_URL_RE = /\/r\/(?<item>[^/]+)\.json$/u;
 const CWD = process.cwd();
 const PUBLIC_DIR = join(CWD, "public", "r");
 const TRAILING_SLASH = /\/$/u;
-
-const COMPOSITION_GROUPS = [
-  { emoji: "🧱", kind: "blocks", label: "blocks" },
-  { emoji: "🖥️", kind: "templates", label: "templates" },
-] as const;
 
 /** Pick the best source file per item, honoring SOURCE_EXTS priority. */
 export const pickSourceFiles = (files: string[]) => {
@@ -341,27 +335,6 @@ const processKind = async (kind: RegistryKind, framework = "react") => {
   console.log(`🎉 Successfully processed all ${chosen.size} ${label}!\n`);
 };
 
-const processCompositions = async () => {
-  await Promise.all(
-    COMPOSITION_GROUPS.map(async ({ emoji, kind, label }) => {
-      const items = (await getRegistryArtifacts(kind)) as CompositionArtifact[];
-      console.log(`Found ${items.length} ${label} to process:`);
-
-      await Promise.all(
-        items.map(async (composition) => {
-          console.log(`${emoji} Processing ${composition.name}...`);
-          await writeArtifact(
-            composition.name,
-            toCompositionRegistryItem(composition)
-          );
-        })
-      );
-
-      console.log(`🎉 Successfully processed all ${items.length} ${label}!\n`);
-    })
-  );
-};
-
 const processStandaloneManifests = async () => {
   await Promise.all(
     STANDALONE_MANIFESTS.map(async (itemName) => {
@@ -408,7 +381,7 @@ const assertUiBundleCompleteness = async () => {
 const main = async () => {
   await mkdir(PUBLIC_DIR, { recursive: true });
   await Promise.all(REGISTRY_KINDS.map((kind) => processKind(kind)));
-  await processCompositions();
+  // Blocks/templates are not published yet — skip composition artifacts.
   await processStandaloneManifests();
   await assertUiBundleCompleteness();
   await assertPublishedRegistryUrls();

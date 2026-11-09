@@ -11,7 +11,6 @@ import {
   getSoftwareApplicationJsonLd,
   getWebSiteJsonLd,
 } from "@/lib/json-ld";
-import { themeBootstrapScript } from "@/lib/theme/apply";
 import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/registry/react/components/toast";
@@ -73,10 +72,6 @@ const RootLayout = (props: LayoutProps<"/">) => {
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
-        <script
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: The script is generated exclusively from local, allowlisted theme metadata.
-          dangerouslySetInnerHTML={{ __html: themeBootstrapScript }}
-        />
         <JsonLd data={getOrganizationJsonLd()} />
         <JsonLd data={getWebSiteJsonLd()} />
         <JsonLd data={getSoftwareApplicationJsonLd()} />

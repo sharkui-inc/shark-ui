@@ -4,7 +4,6 @@ import {
   BlocksIcon,
   BotIcon,
   ChevronsUpDownIcon,
-  CircleUserRoundIcon,
   CommandIcon,
   FolderIcon,
   LifeBuoyIcon,
@@ -12,6 +11,11 @@ import {
   SquareTerminalIcon,
   WavesHorizontalIcon,
 } from "lucide-react";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/react/components/avatar";
 import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Sidebar,
@@ -100,18 +104,15 @@ export const AppSidebar = () => (
           </SidebarMenuButton>
         </SidebarMenuItem>
         <SidebarMenuItem>
-          <SidebarMenuButton size="lg" tooltip="vini@example.com">
-            <IconTile
-              aria-hidden="true"
-              className="bg-sidebar-accent text-sidebar-foreground border-transparent shadow-none"
-              size="sm"
-            >
-              <CircleUserRoundIcon aria-hidden="true" className="size-4" />
-            </IconTile>
-            <span className="grid flex-1 text-start text-sm leading-tight">
-              <span className="truncate font-medium">Vini</span>
-              <span className="truncate text-xs">vini@example.com</span>
-            </span>
+          <SidebarMenuButton size="lg" tooltip="Mina Alves">
+            <Avatar className="rounded-lg">
+              <AvatarImage
+                alt="Mina Alves"
+                src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Mina+Alves&waveColor=2b6cb0"
+              />
+              <AvatarFallback className="rounded-lg">MA</AvatarFallback>
+            </Avatar>
+            <span className="truncate font-medium">Mina Alves</span>
             <CommandIcon aria-hidden="true" className="ms-auto" />
           </SidebarMenuButton>
         </SidebarMenuItem>

@@ -8,7 +8,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Bar, BarChart } from "recharts";
-import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/react/components/avatar";
 import { Badge } from "@/registry/react/components/badge";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -134,14 +138,13 @@ const DashboardTemplate = () => (
       <SidebarFooter className="border-t">
         <div className="flex items-center gap-3 px-2 py-2">
           <Avatar size="sm">
+            <AvatarImage
+              alt="James Brown"
+              src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=James+Brown&waveColor=2b6cb0"
+            />
             <AvatarFallback>JB</AvatarFallback>
           </Avatar>
-          <div className="flex flex-1 flex-col gap-0 overflow-hidden">
-            <span className="truncate text-sm font-medium">James Brown</span>
-            <span className="text-muted-foreground truncate text-xs">
-              james@example.com
-            </span>
-          </div>
+          <span className="truncate text-sm font-medium">James Brown</span>
         </div>
       </SidebarFooter>
     </SidebarRoot>

@@ -19,20 +19,36 @@ import { nativeSelectVariants } from "@/registry/react/components/native-select"
 
 export const useCalendarContext = useArkDatePickerContext;
 
-export const Calendar = (
-  props: Omit<React.ComponentProps<typeof ArkCalendar.Root>, "inline">
-) => {
+interface CalendarProps
+  extends Omit<React.ComponentProps<typeof ArkCalendar.Root>, "inline"> {
+  /**
+   * Show days from adjacent months.
+   *
+   * @default true
+   */
+  showOutsideDays?: boolean;
+}
+
+export const Calendar = (props: CalendarProps) => {
   const {
     lazyMount = true,
     unmountOnExit = true,
     timeZone = getLocalTimeZone(),
+    showOutsideDays = true,
     className,
     ...rest
   } = props;
 
   return (
     <ArkCalendar.Root
-      className={cn("[--cell-size:--spacing(9)]", "w-fit", className)}
+      className={cn(
+        "[--cell-size:--spacing(9)]",
+        "w-fit",
+        !showOutsideDays &&
+          "**:data-[slot=calendar-table-cell-trigger]:data-outside-range:invisible",
+        className
+      )}
+      data-hide-outside={showOutsideDays ? undefined : true}
       data-slot="calendar"
       lazyMount={lazyMount}
       unmountOnExit={unmountOnExit}
@@ -499,12 +515,10 @@ export const CalendarTableCell = (
           "data-selected:hover:bg-primary data-selected:hover:text-primary-foreground data-selected:hover:border-transparent",
           "data-selected:data-focus:not-data-today:bg-primary data-selected:data-focus:not-data-today:text-primary-foreground data-selected:data-focus:not-data-today:border-transparent data-selected:data-focus:not-data-today:ring-0",
           "data-selected:focus-visible:not-data-today:border-transparent data-selected:focus-visible:not-data-today:ring-0",
-          "data-outside-range:data-in-range:bg-transparent",
-          "data-outside-range:data-selected:text-muted-foreground data-outside-range:data-selected:bg-transparent",
-          "data-outside-range:data-selected:hover:text-muted-foreground data-outside-range:data-selected:hover:bg-transparent",
-          "data-outside-range:data-selected:data-focus:not-data-today:text-muted-foreground data-outside-range:data-selected:data-focus:not-data-today:bg-transparent data-outside-range:data-selected:data-focus:not-data-today:ring-0",
-          "data-[view=day]:[[data-slot=calendar-table-cell]:has([data-slot=calendar-table-cell-trigger]:not([data-outside-range]))+[data-slot=calendar-table-cell]>&]:data-in-range:not-data-range-start:not-data-hover-range-start:rounded-s-none",
-          "data-[view=day]:[[data-slot=calendar-table-cell]:has(+[data-slot=calendar-table-cell]_[data-slot=calendar-table-cell-trigger]:not([data-outside-range]))>&]:data-in-range:not-data-range-end:not-data-hover-range-end:rounded-e-none",
+          "in-[:is([data-slot=calendar]:not([data-hide-outside]),[data-slot=date-picker-content])]:data-[view=day]:[[data-slot=calendar-table-cell]:not(:first-child):not([data-slot=calendar-week-number-cell]+[data-slot=calendar-table-cell])>&]:data-in-range:not-data-range-start:not-data-hover-range-start:rounded-s-none",
+          "in-[:is([data-slot=calendar]:not([data-hide-outside]),[data-slot=date-picker-content])]:data-[view=day]:[[data-slot=calendar-table-cell]:not(:last-child)>&]:data-in-range:not-data-range-end:not-data-hover-range-end:rounded-e-none",
+          "in-[[data-slot=calendar][data-hide-outside]]:data-[view=day]:[[data-slot=calendar-table-cell]:has([data-slot=calendar-table-cell-trigger]:not([data-outside-range]))+[data-slot=calendar-table-cell]>&]:data-in-range:not-data-range-start:not-data-hover-range-start:rounded-s-none",
+          "in-[[data-slot=calendar][data-hide-outside]]:data-[view=day]:[[data-slot=calendar-table-cell]:has(+[data-slot=calendar-table-cell]_[data-slot=calendar-table-cell-trigger]:not([data-outside-range]))>&]:data-in-range:not-data-range-end:not-data-hover-range-end:rounded-e-none",
           "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
           className
         )}

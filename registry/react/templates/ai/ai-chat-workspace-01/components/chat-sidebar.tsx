@@ -10,7 +10,11 @@ import {
   SearchIcon,
 } from "lucide-react";
 import React from "react";
-import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/react/components/avatar";
 import { Badge } from "@/registry/react/components/badge";
 import { IconTile } from "@/registry/react/components/icon-tile";
 import {
@@ -236,18 +240,17 @@ export const ChatSidebar = (props: ChatSidebarProps) => {
           <SidebarMenuItem>
             <SidebarMenuButton className="text-foreground" size="lg">
               <Avatar className="size-10 rounded-full">
+                <AvatarImage
+                  alt="James Brown"
+                  src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=James+Brown&waveColor=2b6cb0"
+                />
                 <AvatarFallback className="rounded-full">JB</AvatarFallback>
               </Avatar>
-              <span className="grid min-w-0 flex-1 text-start text-sm leading-tight">
-                <span className="flex items-center gap-1.5 truncate font-medium">
-                  James Brown
-                  <Badge className="uppercase" variant="secondary">
-                    Pro
-                  </Badge>
-                </span>
-                <span className="text-muted-foreground truncate text-xs">
-                  james@northstar.dev
-                </span>
+              <span className="flex min-w-0 flex-1 items-center gap-1.5 truncate text-sm font-medium">
+                James Brown
+                <Badge className="uppercase" variant="secondary">
+                  Pro
+                </Badge>
               </span>
             </SidebarMenuButton>
           </SidebarMenuItem>

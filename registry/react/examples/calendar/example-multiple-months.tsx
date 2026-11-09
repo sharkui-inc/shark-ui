@@ -25,6 +25,7 @@ const Example = () => {
           numOfMonths={2}
           onValueChange={({ value: nextValue }) => setValue(nextValue)}
           selectionMode="range"
+          showOutsideDays={false}
           value={value}
         >
           <CalendarViewControl>

@@ -102,8 +102,7 @@ const storage = {
 export const configAtom = atomWithStorage<Config>(
   "config",
   defaultConfig,
-  storage,
-  { getOnInit: true }
+  storage
 );
 
 export const updateConfigAtom = atom(null, (get, set, update: ConfigUpdate) => {

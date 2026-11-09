@@ -4,9 +4,13 @@ import {
   InboxIcon,
   type LucideIcon,
   Settings2Icon,
-  UserRoundIcon,
   WavesHorizontalIcon,
 } from "lucide-react";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/react/components/avatar";
 import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Sidebar,
@@ -56,14 +60,12 @@ const Example = () => (
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton>
-              <IconTile aria-hidden="true" size="sm" variant="secondary">
-                <UserRoundIcon />
-              </IconTile>
-              <span>
-                <span>Mina Alves</span>
-                <span>mina@onda.dev</span>
-              </span>
+            <SidebarMenuButton size="lg">
+              <Avatar className="rounded-lg">
+                <AvatarImage alt={user.name} src={user.avatar} />
+                <AvatarFallback className="rounded-lg">MA</AvatarFallback>
+              </Avatar>
+              <span className="truncate font-medium">{user.name}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -81,6 +83,12 @@ const Example = () => (
     </SidebarInset>
   </SidebarProvider>
 );
+
+const user = {
+  avatar:
+    "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Mina+Alves&waveColor=2b6cb0",
+  name: "Mina Alves",
+};
 
 const links: { active?: boolean; icon: LucideIcon; label: string }[] = [
   { active: true, icon: HomeIcon, label: "Overview" },
