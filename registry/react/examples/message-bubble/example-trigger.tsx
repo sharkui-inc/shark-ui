@@ -12,9 +12,9 @@ import {
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -50,7 +50,6 @@ const Example = () => (
               Delete
             </MenuItem>
           </MenuGroup>
-
         </MenuList>
       </MenuContent>
     </Menu>

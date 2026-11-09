@@ -6,8 +6,8 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
-  MenuList,
   MenuGroup,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -55,7 +55,6 @@ const Example = () => {
               Panel
             </MenuCheckboxItem>
           </MenuGroup>
-
         </MenuList>
       </MenuContent>
     </Menu>

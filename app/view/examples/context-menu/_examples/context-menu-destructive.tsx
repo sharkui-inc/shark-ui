@@ -4,9 +4,9 @@ import {
   ContextMenuContent,
   ContextMenuGroup,
   ContextMenuItem,
+  ContextMenuList,
   ContextMenuSeparator,
   ContextMenuTrigger,
-  ContextMenuList,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuDestructive = () => (

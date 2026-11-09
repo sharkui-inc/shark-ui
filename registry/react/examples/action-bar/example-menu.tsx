@@ -18,8 +18,8 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -53,7 +53,6 @@ const Example = () => (
                 <Trash2Icon />
                 Delete
               </MenuItem>
-
             </MenuList>
           </MenuContent>
         </Menu>

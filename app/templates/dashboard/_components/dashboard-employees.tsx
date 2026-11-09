@@ -29,8 +29,8 @@ import {
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import { type Employee, employeeAvatars, employees } from "../_data/dashboard";
@@ -144,7 +144,6 @@ const EmployeeActions = (props: EmployeeActionsProps) => {
         <MenuList>
           <MenuItem value="view-profile">View profile</MenuItem>
           <MenuItem value="message">Send message</MenuItem>
-
         </MenuList>
       </MenuContent>
     </Menu>

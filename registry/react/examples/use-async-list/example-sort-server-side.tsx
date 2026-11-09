@@ -81,10 +81,7 @@ const Example = () => {
                   <Skeleton className="size-10 rounded-xl" />
                 </ItemMedia>
                 <ItemContent>
-                  <SkeletonText
-                    className="gap-1.5 **:[div]:h-4.5"
-                    lines={2}
-                  />
+                  <SkeletonText className="gap-1.5 **:[div]:h-4.5" lines={2} />
                 </ItemContent>
               </Item>
             ))

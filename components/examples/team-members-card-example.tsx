@@ -39,9 +39,9 @@ import {
 import {
   Select,
   SelectContent,
-  SelectList,
   SelectGroup,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -150,7 +150,6 @@ export const TeamMembersCardExample = (props: React.ComponentProps<"div">) => {
                                 </SelectItem>
                               ))}
                             </SelectGroup>
-
                           </SelectList>
                         </SelectContent>
                       </Select>
@@ -204,7 +203,6 @@ export const TeamMembersCardExample = (props: React.ComponentProps<"div">) => {
                         </SelectItem>
                       ))}
                     </SelectGroup>
-
                   </SelectList>
                 </SelectContent>
               </Select>

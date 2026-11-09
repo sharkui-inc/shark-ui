@@ -11,9 +11,9 @@ import { ButtonGroup } from "@/registry/react/components/button-group";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -48,7 +48,6 @@ const Example = () => (
               Report
             </MenuItem>
           </MenuGroup>
-
         </MenuList>
       </MenuContent>
     </Menu>

@@ -23,10 +23,10 @@ import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuGroupLabel,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -140,7 +140,9 @@ const NavUser = (props: NavUserProps) => {
                       <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-start text-sm leading-tight">
-                      <span className="truncate font-medium">{account.name}</span>
+                      <span className="truncate font-medium">
+                        {account.name}
+                      </span>
                       <span className="truncate text-xs">{account.email}</span>
                     </div>
                   </div>
@@ -175,7 +177,6 @@ const NavUser = (props: NavUserProps) => {
                   Log out
                 </MenuItem>
               </MenuGroup>
-
             </MenuList>
           </MenuContent>
         </Menu>

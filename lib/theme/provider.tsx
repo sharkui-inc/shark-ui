@@ -17,6 +17,8 @@ import {
   resetThemeConfig,
   type ThemeLockKey,
   type ThemePreset,
+  type VisualThemePick,
+  visualThemeEquals,
 } from "./config";
 import type { ThemeFontName } from "./fonts";
 import {
@@ -72,8 +74,10 @@ export const ThemeConfigurationProvider = ({
     primaryTone,
   } = visual;
 
+  const appliedVisualRef = React.useRef<VisualThemePick | null>(null);
+
   React.useEffect(() => {
-    const nextVisual = {
+    const nextVisual: VisualThemePick = {
       baseColor,
       borderRadius,
       fontHeading,
@@ -82,6 +86,14 @@ export const ThemeConfigurationProvider = ({
       primaryTone,
     };
 
+    if (
+      appliedVisualRef.current !== null &&
+      visualThemeEquals(appliedVisualRef.current, nextVisual)
+    ) {
+      return;
+    }
+
+    appliedVisualRef.current = nextVisual;
     applyThemeVisual(nextVisual);
 
     if (!isEmbeddedThemeFrame()) {

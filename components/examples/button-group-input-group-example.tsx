@@ -11,8 +11,8 @@ import {
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import { Toggle } from "@/registry/react/components/toggle";
@@ -78,7 +78,6 @@ export const ButtonGroupInputGroupExample = () => {
                 <AudioLinesIcon />
                 Upload audio
               </MenuItem>
-
             </MenuList>
           </MenuContent>
         </InputGroupAddon>

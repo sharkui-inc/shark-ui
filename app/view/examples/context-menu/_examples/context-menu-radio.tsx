@@ -5,11 +5,11 @@ import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuGroup,
+  ContextMenuList,
   ContextMenuRadioGroup,
   ContextMenuRadioItem,
   ContextMenuSeparator,
   ContextMenuTrigger,
-  ContextMenuList,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuRadio = () => {

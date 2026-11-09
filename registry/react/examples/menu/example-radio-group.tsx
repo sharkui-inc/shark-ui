@@ -29,7 +29,6 @@ const Example = () => {
             <MenuRadioItem value="dark">Dark</MenuRadioItem>
             <MenuRadioItem value="system">System</MenuRadioItem>
           </MenuRadioGroup>
-
         </MenuList>
       </MenuContent>
     </Menu>

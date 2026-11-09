@@ -13,8 +13,8 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -47,7 +47,6 @@ const Example = () => (
               <MenuItem asChild value="hooks">
                 <a href="#">Hooks</a>
               </MenuItem>
-
             </MenuList>
           </MenuContent>
         </Menu>

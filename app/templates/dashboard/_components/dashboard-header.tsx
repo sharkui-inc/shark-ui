@@ -6,8 +6,8 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import { SidebarTrigger } from "@/registry/react/components/sidebar";
@@ -40,7 +40,6 @@ export const DashboardHeader = () => {
                 {range}
               </MenuItem>
             ))}
-
           </MenuList>
         </MenuContent>
       </Menu>

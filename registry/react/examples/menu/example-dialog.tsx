@@ -15,8 +15,8 @@ import { Input } from "@/registry/react/components/input";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -34,7 +34,6 @@ const Example = () => {
             <MenuItem onSelect={() => setDialogOpen(true)} value="dialog">
               Settings
             </MenuItem>
-
           </MenuList>
         </MenuContent>
       </Menu>

@@ -2,8 +2,8 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuSub,
   MenuSubContent,
   MenuSubTrigger,
@@ -24,12 +24,10 @@ const Example = () => (
             <MenuList>
               <MenuItem value="sub-a">Sub item A</MenuItem>
               <MenuItem value="sub-b">Sub item B</MenuItem>
-
             </MenuList>
           </MenuSubContent>
         </MenuSub>
         <MenuItem value="item-two">Item two</MenuItem>
-
       </MenuList>
     </MenuContent>
   </Menu>

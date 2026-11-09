@@ -14,7 +14,7 @@ export const useToggle = useArkToggle;
 export const useToggleContext = useArkToggleContext;
 
 export const toggleVariants = tv({
-  base: ["data-[state=on]:bg-input", "dark:data-[state=on]:bg-input"],
+  base: ["data-[state=on]:bg-accent", "dark:data-[state=on]:bg-accent"],
   defaultVariants: {
     size: "md",
   },

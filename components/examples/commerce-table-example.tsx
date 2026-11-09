@@ -18,8 +18,8 @@ import { Card, CardContent } from "@/registry/react/components/card";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import {
@@ -75,10 +75,12 @@ export const CommerceTableExample = (props: React.ComponentProps<"div">) => {
                     <MenuContent>
                       <MenuList>
                         <MenuItem value="view">View</MenuItem>
-                        <MenuItem onSelect={() => setRefund(row)} value="refund">
+                        <MenuItem
+                          onSelect={() => setRefund(row)}
+                          value="refund"
+                        >
                           Refund
                         </MenuItem>
-
                       </MenuList>
                     </MenuContent>
                   </Menu>

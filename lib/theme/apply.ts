@@ -14,6 +14,7 @@ import {
   type VisualThemePick,
 } from "./config";
 import {
+  buildGoogleFontCssUrl,
   getThemeFont,
   THEME_FONTS,
   THEME_FONTS_PREVIEW_CSS_URL,
@@ -29,10 +30,6 @@ const managedThemeClasses = new Set([
 
 export const isManagedThemeClass = (className: string) =>
   managedThemeClasses.has(className);
-
-export const hasManagedBodyThemeClass = () =>
-  typeof document !== "undefined" &&
-  Array.from(document.body.classList).some(isManagedThemeClass);
 
 export const applyBodyThemeClasses = (
   input: Pick<
@@ -80,15 +77,20 @@ export const getDynamicThemeFonts = (
   return [...fonts];
 };
 
-const ensureActiveFontLink = (name: ThemeFontName, href: string) => {
+export const injectThemeFontStylesheet = (name: string, href: string) => {
   if (document.querySelector(`link[data-shark-theme-font="${name}"]`)) {
     return;
   }
 
   const link = document.createElement("link");
   link.dataset.sharkThemeFont = name;
-  link.href = href;
   link.rel = "stylesheet";
+  link.href = href;
+  link.media = "print";
+  link.onload = () => {
+    link.media = "all";
+    link.onload = null;
+  };
   document.head.appendChild(link);
 };
 
@@ -111,7 +113,7 @@ export const applyThemeFonts = (
   }
 
   for (const name of dynamicFonts) {
-    ensureActiveFontLink(name, getThemeFont(name).cssUrl);
+    injectThemeFontStylesheet(name, getThemeFont(name).cssUrl);
   }
 
   const html = document.documentElement;
@@ -148,21 +150,31 @@ export const loadThemeFontPreviews = () => {
 
   const link = document.createElement("link");
   link.dataset.sharkThemeFontPreview = "";
-  link.href = THEME_FONTS_PREVIEW_CSS_URL;
   link.rel = "stylesheet";
+  link.href = THEME_FONTS_PREVIEW_CSS_URL;
+  link.media = "print";
+  link.onload = () => {
+    link.media = "all";
+    link.onload = null;
+  };
   document.head.appendChild(link);
 };
 
 const visualThemeLists = createVisualThemeLists(DEFAULT_THEME_CONFIG);
 
 const themeBootstrapFonts = Object.fromEntries(
-  THEME_FONTS.map(({ cssUrl, family, value }) => [value, { cssUrl, family }])
+  THEME_FONTS.map(({ axes, family, label, value }) => [
+    value,
+    axes === undefined ? { family, label } : { axes, family, label },
+  ])
 );
 
 export const themeBootstrapScript = `
 (() => {
   try {
     const pickVisualTheme = ${pickVisualTheme.toString()};
+    const buildGoogleFontCssUrl = ${buildGoogleFontCssUrl.toString()};
+    const injectThemeFontStylesheet = ${injectThemeFontStylesheet.toString()};
     const lists = ${JSON.stringify(visualThemeLists)};
     const fonts = ${JSON.stringify(themeBootstrapFonts)};
     const stored = window.localStorage.getItem("config");
@@ -197,6 +209,7 @@ export const themeBootstrapScript = `
         html.style.setProperty(property, fonts[name].family);
       }
     }
+
     const activeFonts = new Set(
       selectedFonts
         .filter(([name, _property, defaultFont]) => name !== defaultFont)
@@ -205,19 +218,10 @@ export const themeBootstrapScript = `
 
     for (const name of activeFonts) {
       const font = fonts[name];
-
-      if (
-        document.querySelector(
-          'link[data-shark-theme-font="' + name + '"]'
-        )
-      ) continue;
-
-      const link = document.createElement("link");
-
-      link.dataset.sharkThemeFont = name;
-      link.href = font.cssUrl;
-      link.rel = "stylesheet";
-      document.head.appendChild(link);
+      injectThemeFontStylesheet(
+        name,
+        buildGoogleFontCssUrl(font.label, font.axes)
+      );
     }
   } catch {
     // An unavailable or malformed localStorage value must not block rendering.

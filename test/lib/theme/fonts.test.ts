@@ -13,8 +13,9 @@ import {
   THEME_FONTS,
 } from "@/lib/theme/fonts";
 
-const NEWSREADER_CSS_AXES = /family=Newsreader:ital,wght@/u;
+const NEWSREADER_CSS_AXES = /family=Newsreader:wght@/u;
 const WEIGHT_AXIS = /wght@/u;
+const ITALIC_AXIS = /ital,/u;
 
 describe("theme fonts", () => {
   it("keeps Shark UI's active fonts as the defaults", () => {
@@ -37,23 +38,26 @@ describe("theme fonts", () => {
     assert.equal(getThemeFont("inter").family, "'Inter', sans-serif");
   });
 
-  it("requests each family's real weight axis and italic", () => {
+  it("requests UI weight axes without italic", () => {
     assert.equal(
       getThemeFont("ibm-plex-sans").cssUrl,
-      "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400..700&display=swap"
     );
     assert.equal(
       getThemeFont("source-sans-3").cssUrl,
-      "https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400..800;1,400..800&display=swap"
+      "https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400..700&display=swap"
     );
     assert.equal(
       getThemeFont("lora").cssUrl,
-      "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+      "https://fonts.googleapis.com/css2?family=Lora:wght@400..700&display=swap"
     );
     assert.match(getThemeFont("newsreader").cssUrl, NEWSREADER_CSS_AXES);
+    assert.equal(getThemeFont("ibm-plex-sans").axes, "wght@400..700");
+    assert.equal(getThemeFont("dm-mono").axes, "wght@400;500");
 
     for (const font of THEME_FONTS) {
       assert.match(font.cssUrl, WEIGHT_AXIS);
+      assert.equal(ITALIC_AXIS.test(font.cssUrl), false);
     }
   });
 
@@ -80,10 +84,16 @@ describe("theme fonts", () => {
       fontSans: "inter",
     });
 
-    assert.equal(
-      document.querySelectorAll("link[data-shark-theme-font]").length,
-      2
+    const fontLinks = document.querySelectorAll<HTMLLinkElement>(
+      "link[data-shark-theme-font]"
     );
+
+    assert.equal(fontLinks.length, 2);
+
+    for (const link of fontLinks) {
+      assert.equal(link.rel, "stylesheet");
+      assert.equal(link.media, "print");
+    }
     assert.equal(
       document.documentElement.style.getPropertyValue("--font-sans"),
       "'Inter', sans-serif"

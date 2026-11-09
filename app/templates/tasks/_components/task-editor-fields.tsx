@@ -11,8 +11,8 @@ import { Input } from "@/registry/react/components/input";
 import {
   Select,
   SelectContent,
-  SelectList,
   SelectItem,
+  SelectList,
   SelectTrigger,
 } from "@/registry/react/components/select";
 import {
@@ -73,7 +73,6 @@ const TaskEditorSelect: ArkSelect.RootComponent<TaskEditorSelectProps> = (
                 {renderItem(item)}
               </SelectItem>
             ))}
-
           </SelectList>
         </SelectContent>
       </Select>

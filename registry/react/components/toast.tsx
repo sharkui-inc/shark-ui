@@ -46,7 +46,9 @@ export const Toaster = (props: ToasterProps) => {
     <Portal>
       <ArkToaster
         className={cn(
-          "w-[calc(100vw-var(--viewport-offset-left)-var(--viewport-offset-right)-env(safe-area-inset-left,0px)-env(safe-area-inset-right,0px))]",
+          "max-sm:!inset-inline-start-[calc(env(safe-area-inset-left,0px)+var(--viewport-offset-left))]",
+          "max-sm:!inset-inline-end-[calc(env(safe-area-inset-right,0px)+var(--viewport-offset-right))]",
+          "max-sm:w-auto",
           "sm:w-(--width)",
           "sm:data-[align=center]:w-full",
           className
@@ -94,6 +96,7 @@ export const ToastItem = (props: ToastItemProps) => {
         "translate-x-(--x) translate-y-(--y)",
         "relative",
         "w-full max-w-(--width)",
+        "max-sm:inset-inline-0 max-sm:w-full max-sm:max-w-none",
         "px-3.5 py-3",
         "flex items-start justify-between gap-1.5",
         "bg-popover",

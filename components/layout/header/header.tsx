@@ -45,6 +45,7 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
         "border-b",
         className
       )}
+      data-slot="site-header"
       {...rest}
     >
       <div className="container flex h-full items-center gap-2">

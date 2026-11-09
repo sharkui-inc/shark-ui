@@ -39,9 +39,9 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -273,7 +273,6 @@ export const DataTableColumnHeader = <TData extends RowData, TValue>(
                 </MenuItem>
               </>
             )}
-
           </MenuList>
         </MenuContent>
       </Menu>
@@ -546,7 +545,6 @@ export const DataTableViewOptions = <TData extends RowData>(
               <DataTableViewOption column={column} key={column.id} />
             ))}
           </MenuGroup>
-
         </MenuList>
       </MenuContent>
     </Menu>

@@ -12,8 +12,8 @@ import {
 import {
   Select,
   SelectContent,
-  SelectList,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -52,7 +52,6 @@ const Example = () => {
                     {item.label}
                   </SelectItem>
                 ))}
-
               </SelectList>
             </SelectContent>
           </Select>

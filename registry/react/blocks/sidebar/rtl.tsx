@@ -38,10 +38,10 @@ import { LocaleProvider } from "@/registry/react/components/locale";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuGroupLabel,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuShortcut,
   MenuTrigger,
@@ -263,7 +263,6 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
                   </div>
                 </MenuItem>
               </MenuGroup>
-
             </MenuList>
           </MenuContent>
         </Menu>
@@ -371,12 +370,14 @@ const NavProjects = (props: NavProjectsProps) => {
                   </MenuGroup>
                   <MenuSeparator />
                   <MenuGroup>
-                    <MenuItem value={`${item.name}-delete`} variant="destructive">
+                    <MenuItem
+                      value={`${item.name}-delete`}
+                      variant="destructive"
+                    >
                       <Trash2Icon />
                       حذف المشروع
                     </MenuItem>
                   </MenuGroup>
-
                 </MenuList>
               </MenuContent>
             </Menu>
@@ -475,7 +476,6 @@ const NavUser = (props: NavUserProps) => {
                   تسجيل الخروج
                 </MenuItem>
               </MenuGroup>
-
             </MenuList>
           </MenuContent>
         </Menu>

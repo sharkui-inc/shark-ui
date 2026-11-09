@@ -3,10 +3,10 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
   MenuItemDescription,
+  MenuList,
   MenuSeparator,
   MenuShortcut,
   MenuTrigger,
@@ -48,7 +48,6 @@ const Example = () => (
             <MenuShortcut className="hidden sm:inline-flex">⌘D</MenuShortcut>
           </MenuItem>
         </MenuGroup>
-
       </MenuList>
     </MenuContent>
   </Menu>

@@ -3,7 +3,6 @@ import { afterEach, beforeEach, describe, it } from "node:test";
 import {
   applyBodyThemeClasses,
   applyThemeFonts,
-  hasManagedBodyThemeClass,
   isManagedThemeClass,
   themeBootstrapScript,
 } from "@/lib/theme/apply";
@@ -17,6 +16,7 @@ import {
   pickVisualTheme,
   THEME_PRESETS,
 } from "@/lib/theme/config";
+import { getThemeFont } from "@/lib/theme/fonts";
 
 const storageKey = "config";
 
@@ -90,16 +90,6 @@ describe("isManagedThemeClass", () => {
     assert.equal(document.body.classList.contains("theme-neutral"), false);
     assert.equal(document.body.classList.contains("bg-slate"), true);
   });
-
-  it("detects classes supplied by the static bootstrap", () => {
-    document.body.className = "bg-zinc theme-rose radius-lg primary-tone-dark";
-
-    assert.equal(hasManagedBodyThemeClass(), true);
-
-    document.body.className = "bg-grid relative";
-
-    assert.equal(hasManagedBodyThemeClass(), false);
-  });
 });
 
 describe("themeBootstrapScript", () => {
@@ -134,10 +124,16 @@ describe("themeBootstrapScript", () => {
       document.documentElement.style.getPropertyValue("--font-mono"),
       ""
     );
-    assert.equal(
-      document.querySelectorAll("link[data-shark-theme-font]").length,
-      2
+    const fontLinks = document.querySelectorAll<HTMLLinkElement>(
+      "link[data-shark-theme-font]"
     );
+
+    assert.equal(fontLinks.length, 2);
+
+    for (const link of fontLinks) {
+      assert.equal(link.rel, "stylesheet");
+      assert.equal(link.media, "print");
+    }
   });
 
   it("migrates grayColor and ignores unknown values", () => {
@@ -177,6 +173,34 @@ describe("themeBootstrapScript", () => {
       document.querySelectorAll("link[data-shark-theme-font]").length,
       2
     );
+  });
+
+  it("rebuilds google css urls in bootstrap without embedding every cssUrl", () => {
+    assert.equal(
+      themeBootstrapScript.includes("fonts.googleapis.com/css2?"),
+      true
+    );
+    assert.equal(
+      themeBootstrapScript.includes(getThemeFont("inter").cssUrl),
+      false
+    );
+
+    window.localStorage.setItem(
+      storageKey,
+      JSON.stringify({ fontHeading: "inter", fontSans: "lora" })
+    );
+
+    runBootstrap();
+
+    const inter = document.querySelector<HTMLLinkElement>(
+      'link[data-shark-theme-font="inter"]'
+    );
+    const lora = document.querySelector<HTMLLinkElement>(
+      'link[data-shark-theme-font="lora"]'
+    );
+
+    assert.equal(inter?.href, getThemeFont("inter").cssUrl);
+    assert.equal(lora?.href, getThemeFont("lora").cssUrl);
   });
 
   it("fails open when storage contains malformed JSON", () => {

@@ -28,10 +28,7 @@ const Example = () => {
   } satisfies ChartConfig;
 
   return (
-    <ChartContainer
-      className="min-h-50 w-full max-w-sm"
-      config={chartConfig}
-    >
+    <ChartContainer className="min-h-50 w-full max-w-sm" config={chartConfig}>
       <BarChart accessibilityLayer data={chartData}>
         <CartesianGrid
           orientation={dir === "rtl" ? "right" : "left"}

@@ -171,7 +171,10 @@ export const dialogContentVariants = tv({
       "4xl": { content: ["max-w-5xl"] },
       "5xl": { content: ["max-w-6xl"] },
       "6xl": { content: ["max-w-7xl"] },
-      fullscreen: { content: ["size-full"] },
+      fullscreen: {
+        content: ["size-full", "max-h-svh", "rounded-none"],
+        positioner: ["p-0"],
+      },
       lg: { content: ["max-w-xl"] },
       md: { content: ["max-w-lg"] },
       sm: { content: ["max-w-md"] },

@@ -16,9 +16,9 @@ import {
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -75,7 +75,6 @@ export const MusicHeader = () => (
             <MenuGroup>
               <MenuItem value="settings">Account settings</MenuItem>
             </MenuGroup>
-
           </MenuList>
         </MenuContent>
       </Menu>

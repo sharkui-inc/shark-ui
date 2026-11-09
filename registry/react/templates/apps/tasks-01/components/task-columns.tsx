@@ -18,8 +18,8 @@ import {
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import { Status } from "@/registry/react/components/status";
@@ -120,7 +120,6 @@ export const TaskRowMenu = (props: TaskTableActions & { task: Task }) => {
             <Trash2Icon aria-hidden="true" />
             Delete task
           </MenuItem>
-
         </MenuList>
       </MenuContent>
     </Menu>

@@ -3,10 +3,10 @@ import {
   ContextMenuContent,
   ContextMenuGroup,
   ContextMenuItem,
+  ContextMenuList,
   ContextMenuSeparator,
   ContextMenuShortcut,
   ContextMenuTrigger,
-  ContextMenuList,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuShortcuts = () => (

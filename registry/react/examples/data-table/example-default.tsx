@@ -35,9 +35,9 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -103,7 +103,6 @@ const DataTableDemo = () => {
                 .map((column) => (
                   <ColumnVisibilityItem column={column} key={column.id} />
                 ))}
-
             </MenuList>
           </MenuContent>
         </Menu>
@@ -316,9 +315,10 @@ const PaymentActions = (props: PaymentActionsProps) => {
             </MenuItem>
             <MenuSeparator />
             <MenuItem value="view-customer">View customer</MenuItem>
-            <MenuItem value="view-payment-details">View payment details</MenuItem>
+            <MenuItem value="view-payment-details">
+              View payment details
+            </MenuItem>
           </MenuGroup>
-
         </MenuList>
       </MenuContent>
     </Menu>

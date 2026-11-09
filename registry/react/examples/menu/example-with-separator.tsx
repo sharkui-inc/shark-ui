@@ -2,8 +2,8 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -23,7 +23,6 @@ const Example = () => (
         <MenuItem value="paste">Paste</MenuItem>
         <MenuSeparator />
         <MenuItem value="preferences">Preferences</MenuItem>
-
       </MenuList>
     </MenuContent>
   </Menu>

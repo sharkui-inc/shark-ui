@@ -3,8 +3,8 @@ import {
   ContextMenuContent,
   ContextMenuGroup,
   ContextMenuItem,
-  ContextMenuTrigger,
   ContextMenuList,
+  ContextMenuTrigger,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuBasic = () => (

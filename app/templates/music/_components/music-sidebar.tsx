@@ -53,7 +53,7 @@ export const MusicSidebar = () => {
           </IconTile>
           <SidebarTrigger
             aria-label="Expand sidebar"
-            className="col-start-1 row-start-1 size-6 md:size-6 opacity-0 transition-opacity group-focus-within/brand-toggle:opacity-100 group-hover/brand-toggle:opacity-100 [&_svg]:mx-0"
+            className="col-start-1 row-start-1 size-6 opacity-0 transition-opacity group-focus-within/brand-toggle:opacity-100 group-hover/brand-toggle:opacity-100 md:size-6 [&_svg]:mx-0"
             size="icon-xs"
           />
         </div>

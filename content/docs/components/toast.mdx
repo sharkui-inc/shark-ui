@@ -159,9 +159,9 @@ const baseToaster = createToaster({
 
 ## Max toasts
 
-Extra toasts queue until one is dismissed, ordered by `priority` (`1` highest, `8` lowest) with `error` ahead of `info`.
+Displays up to 3 toasts by default. Extra toasts queue until one is dismissed.
 
-By default, the toaster displays up to 3 toasts. Update the `max` option in `createToaster()` to change the maximum number of visible toasts.
+Update the `max` option in `createToaster()` to change the maximum.
 
 ```tsx title="components/ui/toast.tsx" {4} showLineNumbers
 const baseToaster = createToaster({
@@ -175,11 +175,16 @@ const baseToaster = createToaster({
 
 ### Variants
 
-Use `success`, `error`, `warning`, and `info` for the matching icon and accent color.
-
-You can also pass `type` on `toast.create`.
-
 <ComponentPreview componentName="toast" fileName="example-variants" />
+
+You can also write it like this:
+
+```tsx
+toast.success({ // or toast.error(), toast.warning(), toast.info()
+  title: "Awesome!",
+  description: "You've done it!",
+})
+```
 
 ### Promise
 

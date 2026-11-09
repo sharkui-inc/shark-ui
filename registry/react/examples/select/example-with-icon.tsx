@@ -8,9 +8,9 @@ import { ViteIcon } from "@/components/icons/vite";
 import {
   Select,
   SelectContent,
-  SelectList,
   SelectContext,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -44,7 +44,6 @@ const Example = () => (
             </SelectItem>
           );
         })}
-
       </SelectList>
     </SelectContent>
   </Select>

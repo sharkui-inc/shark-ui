@@ -7,8 +7,8 @@ import { Field } from "@/registry/react/components/field";
 import {
   Select,
   SelectContent,
-  SelectList,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -81,7 +81,6 @@ export const ThemeSelectorField = <T extends CollectionItem>(
                 {renderItem(item)}
               </SelectItem>
             ))}
-
           </SelectList>
         </SelectContent>
       </Select>

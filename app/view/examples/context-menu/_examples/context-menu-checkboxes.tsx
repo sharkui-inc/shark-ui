@@ -6,8 +6,8 @@ import {
   ContextMenuCheckboxItem,
   ContextMenuContent,
   ContextMenuGroup,
-  ContextMenuTrigger,
   ContextMenuList,
+  ContextMenuTrigger,
 } from "@/registry/react/components/context-menu";
 
 const ContextMenuCheckboxes = () => {

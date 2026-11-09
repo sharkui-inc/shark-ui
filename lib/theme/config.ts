@@ -100,31 +100,21 @@ export interface VisualThemeLists {
   baseColors: readonly string[];
   borderRadii: readonly string[];
   defaultConfig: VisualThemePick;
-  fontSlots: {
-    heading: readonly string[];
-    sans: readonly string[];
-  };
+  fontValues: readonly string[];
   primaryColors: readonly string[];
   primaryTones: readonly string[];
 }
 
 export const createVisualThemeLists = (
   defaultConfig: VisualThemePick
-): VisualThemeLists => {
-  const fontValues = THEME_FONTS.map(({ value }) => value);
-
-  return {
-    baseColors: BASE_COLORS.map(({ value }) => value),
-    borderRadii: BORDER_RADIUS.map(({ value }) => value),
-    defaultConfig,
-    fontSlots: {
-      heading: fontValues,
-      sans: fontValues,
-    },
-    primaryColors: PRIMARY_COLORS.map(({ value }) => value),
-    primaryTones: PRIMARY_TONES.map(({ value }) => value),
-  };
-};
+): VisualThemeLists => ({
+  baseColors: BASE_COLORS.map(({ value }) => value),
+  borderRadii: BORDER_RADIUS.map(({ value }) => value),
+  defaultConfig,
+  fontValues: THEME_FONTS.map(({ value }) => value),
+  primaryColors: PRIMARY_COLORS.map(({ value }) => value),
+  primaryTones: PRIMARY_TONES.map(({ value }) => value),
+});
 
 export const pickVisualTheme = (
   value: unknown,
@@ -167,14 +157,14 @@ export const pickVisualTheme = (
 
   if (
     typeof stored.fontHeading === "string" &&
-    lists.fontSlots.heading.includes(stored.fontHeading)
+    lists.fontValues.includes(stored.fontHeading)
   ) {
     picked.fontHeading = stored.fontHeading as VisualThemePick["fontHeading"];
   }
 
   if (
     typeof stored.fontSans === "string" &&
-    lists.fontSlots.sans.includes(stored.fontSans)
+    lists.fontValues.includes(stored.fontSans)
   ) {
     picked.fontSans = stored.fontSans as VisualThemePick["fontSans"];
   }

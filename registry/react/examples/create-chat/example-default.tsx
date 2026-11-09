@@ -22,8 +22,8 @@ import {
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import { Message, MessageContent } from "@/registry/react/components/message";
@@ -181,7 +181,6 @@ const ChatThread = (props: ChatThreadProps) => {
                         {action.label}
                       </MenuItem>
                     ))}
-
                   </MenuList>
                 </MenuContent>
               </Menu>

@@ -37,10 +37,10 @@ import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuGroupLabel,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuShortcut,
   MenuTrigger,
@@ -261,7 +261,6 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
                   </div>
                 </MenuItem>
               </MenuGroup>
-
             </MenuList>
           </MenuContent>
         </Menu>
@@ -369,12 +368,14 @@ const NavProjects = (props: NavProjectsProps) => {
                   </MenuGroup>
                   <MenuSeparator />
                   <MenuGroup>
-                    <MenuItem value={`${item.name}-delete`} variant="destructive">
+                    <MenuItem
+                      value={`${item.name}-delete`}
+                      variant="destructive"
+                    >
                       <Trash2Icon />
                       Delete Project
                     </MenuItem>
                   </MenuGroup>
-
                 </MenuList>
               </MenuContent>
             </Menu>
@@ -472,7 +473,6 @@ const NavUser = (props: NavUserProps) => {
                   Log out
                 </MenuItem>
               </MenuGroup>
-
             </MenuList>
           </MenuContent>
         </Menu>

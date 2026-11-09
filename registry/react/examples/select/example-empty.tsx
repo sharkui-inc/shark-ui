@@ -4,8 +4,8 @@ import { createListCollection } from "@ark-ui/react";
 import {
   Select,
   SelectContent,
-  SelectList,
   SelectEmpty,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -18,7 +18,6 @@ const Example = () => (
     <SelectContent>
       <SelectList>
         <SelectEmpty>No items to display</SelectEmpty>
-
       </SelectList>
     </SelectContent>
   </Select>

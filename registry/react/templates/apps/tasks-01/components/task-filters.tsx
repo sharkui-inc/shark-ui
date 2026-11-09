@@ -15,8 +15,8 @@ import {
 import {
   Select,
   SelectContent,
-  SelectList,
   SelectItem,
+  SelectList,
   SelectTrigger,
 } from "@/registry/react/components/select";
 import {
@@ -98,7 +98,6 @@ export const TaskFilters = (props: TaskFiltersProps) => {
                   )}
                 </SelectItem>
               ))}
-
             </SelectList>
           </SelectContent>
         </Select>
@@ -125,7 +124,6 @@ export const TaskFilters = (props: TaskFiltersProps) => {
                   )}
                 </SelectItem>
               ))}
-
             </SelectList>
           </SelectContent>
         </Select>

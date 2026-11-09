@@ -35,8 +35,8 @@ import { Checkbox } from "@/registry/react/components/checkbox";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import {
@@ -169,7 +169,6 @@ const Example = () => {
                     <CopyIcon />
                     Duplicate
                   </MenuItem>
-
                 </MenuList>
               </MenuContent>
             </Menu>

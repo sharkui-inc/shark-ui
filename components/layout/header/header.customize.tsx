@@ -64,8 +64,8 @@ import {
 import {
   Select,
   SelectContent,
-  SelectList,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -149,7 +149,6 @@ const FontPicker = (props: FontPickerProps) => {
                 {item.label}
               </SelectItem>
             ))}
-
           </SelectList>
         </SelectContent>
       </Select>
@@ -174,17 +173,19 @@ export const HeaderCustomize = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const isMobile = useIsMobile();
 
+  const setCustomizeOpen = (open: boolean) => {
+    setIsOpen(open);
+
+    if (open) {
+      loadThemeFontPreviews();
+    }
+  };
+
   useHotkey({
-    action: () => setIsOpen((open) => !open),
+    action: () => setCustomizeOpen(!isOpen),
     hotkey: "c",
     options: { preventDefault: true },
   });
-
-  React.useEffect(() => {
-    if (isOpen) {
-      loadThemeFontPreviews();
-    }
-  }, [isOpen]);
 
   const primaryTone = config.primaryTone ?? DEFAULT_PRIMARY_TONE;
 
@@ -192,7 +193,7 @@ export const HeaderCustomize = () => {
     <Sheet
       closeOnInteractOutside
       modal={false}
-      onOpenChange={({ open }) => setIsOpen(open)}
+      onOpenChange={({ open }) => setCustomizeOpen(open)}
       open={isOpen}
     >
       <Tooltip>

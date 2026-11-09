@@ -16,8 +16,8 @@ import { Input } from "@/registry/react/components/input";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -44,7 +44,6 @@ const Example = () => {
               <InfoIcon />
               Help
             </MenuItem>
-
           </MenuList>
         </MenuContent>
       </Menu>

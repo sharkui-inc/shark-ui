@@ -3,8 +3,8 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuShortcut,
   MenuTrigger,
@@ -38,7 +38,6 @@ const Example = () => (
           Log out
           <MenuShortcut className="hidden sm:inline-flex">⌘Q</MenuShortcut>
         </MenuItem>
-
       </MenuList>
     </MenuContent>
   </Menu>

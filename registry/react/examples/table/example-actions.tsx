@@ -8,8 +8,8 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuShortcut,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -74,7 +74,6 @@ const Example = () => (
                       ⌘ ⌫
                     </MenuShortcut>
                   </MenuItem>
-
                 </MenuList>
               </MenuContent>
             </Menu>

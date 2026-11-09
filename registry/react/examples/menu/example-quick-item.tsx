@@ -10,9 +10,9 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuQuickItem,
   MenuSeparator,
   MenuTrigger,
@@ -54,7 +54,6 @@ const Example = () => (
             Share
           </MenuQuickItem>
         </div>
-
       </MenuList>
     </MenuContent>
   </Menu>

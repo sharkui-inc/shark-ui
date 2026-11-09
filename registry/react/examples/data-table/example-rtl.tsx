@@ -36,9 +36,9 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -112,7 +112,6 @@ const Example = () => {
                 .map((column) => (
                   <ColumnVisibilityItem column={column} key={column.id} />
                 ))}
-
             </MenuList>
           </MenuContent>
         </Menu>
@@ -386,7 +385,6 @@ const PaymentActions = (props: PaymentActionsProps) => {
               {values.viewPaymentDetails}
             </MenuItem>
           </MenuGroup>
-
         </MenuList>
       </MenuContent>
     </Menu>

@@ -38,9 +38,9 @@ import {
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuSeparator,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -57,8 +57,8 @@ import {
 import {
   Select,
   SelectContent,
-  SelectList,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -116,7 +116,6 @@ const PromptInputDemo = () => {
                       </MenuItem>
                     ))}
                   </MenuGroup>
-
                 </MenuList>
               </MenuContent>
             </Menu>
@@ -142,7 +141,6 @@ const PromptInputDemo = () => {
                       </span>
                     </SelectItem>
                   ))}
-
                 </SelectList>
               </SelectContent>
             </Select>
@@ -185,7 +183,6 @@ const PromptInputDemo = () => {
                     {item.label}
                   </SelectItem>
                 ))}
-
               </SelectList>
             </SelectContent>
           </Select>

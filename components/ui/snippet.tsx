@@ -20,8 +20,8 @@ import {
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -330,7 +330,6 @@ export const SnippetSelect = (props: SnippetSelectProps) => {
             {items.map((item) => (
               <SnippetMenuItem item={item} key={item.value} />
             ))}
-
           </MenuList>
         </MenuContent>
       </Menu>

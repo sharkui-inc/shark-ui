@@ -16,8 +16,8 @@ import {
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -44,7 +44,6 @@ const Example = () => (
             </Item>
           </MenuItem>
         ))}
-
       </MenuList>
     </MenuContent>
   </Menu>

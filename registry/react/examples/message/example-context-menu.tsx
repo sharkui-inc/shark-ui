@@ -6,9 +6,9 @@ import React from "react";
 import {
   ContextMenu,
   ContextMenuContent,
-  ContextMenuList,
   ContextMenuGroup,
   ContextMenuItem,
+  ContextMenuList,
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from "@/registry/react/components/context-menu";
@@ -98,7 +98,6 @@ const ChatRow = (props: ChatRowProps) => {
               Delete
             </ContextMenuItem>
           </ContextMenuGroup>
-
         </ContextMenuList>
       </ContextMenuContent>
     </ContextMenu>

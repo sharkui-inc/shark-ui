@@ -22,8 +22,8 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import type { TaskStatus } from "../_data/tasks";
@@ -113,7 +113,6 @@ export const TaskSelectionActionBar = (props: TaskSelectionActionBarProps) => {
                   <XIcon aria-hidden="true" />
                   Cancel tasks
                 </MenuItem>
-
               </MenuList>
             </MenuContent>
           </Menu>

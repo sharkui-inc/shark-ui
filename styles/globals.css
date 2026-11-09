@@ -186,11 +186,7 @@
   --input: color-mix(in srgb, var(--color-neutral-950) 12%, var(--background));
   --ring: var(--color-neutral-600);
 
-  --sidebar: color-mix(
-    in srgb,
-    var(--color-neutral-950) 4%,
-    var(--background)
-  );
+  --sidebar: color-mix(in srgb, var(--color-neutral-950) 4%, var(--background));
   --sidebar-foreground: color-mix(
     in srgb,
     var(--color-neutral-800) 80%,
@@ -276,11 +272,7 @@
   --input: color-mix(in srgb, var(--color-neutral-50) 10%, var(--background));
   --ring: var(--color-neutral-400);
 
-  --sidebar: color-mix(
-    in srgb,
-    var(--background) 98%,
-    var(--color-neutral-50)
-  );
+  --sidebar: color-mix(in srgb, var(--background) 98%, var(--color-neutral-50));
   --sidebar-foreground: color-mix(
     in srgb,
     var(--color-neutral-100) 80%,

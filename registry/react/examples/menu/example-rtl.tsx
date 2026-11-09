@@ -13,9 +13,9 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuRadioGroup,
   MenuRadioItem,
   MenuSeparator,
@@ -68,7 +68,6 @@ const Example = () => {
                 <MenuList>
                   <MenuItem value="junk">{values.junk}</MenuItem>
                   <MenuItem value="trash">{values.trash}</MenuItem>
-
                 </MenuList>
               </MenuSubContent>
             </MenuSub>
@@ -91,7 +90,6 @@ const Example = () => {
               </MenuShortcut>
             </MenuItem>
           </MenuGroup>
-
         </MenuList>
       </MenuContent>
     </Menu>

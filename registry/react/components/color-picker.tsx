@@ -305,7 +305,7 @@ export const ColorPickerSwatch = (
         "overflow-hidden",
         "rounded-[inherit]",
         "transition-transform duration-150 ease-out will-change-transform",
-        "data-[state=checked]:scale-[0.8]",
+        "data-[state=checked]:scale-[0.875]",
         "motion-reduce:transition-none",
         className
       )}

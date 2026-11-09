@@ -15,9 +15,9 @@ import {
 import {
   ContextMenu,
   ContextMenuContent,
-  ContextMenuList,
   ContextMenuGroup,
   ContextMenuItem,
+  ContextMenuList,
   ContextMenuSeparator,
   ContextMenuShortcut,
   ContextMenuSub,
@@ -104,7 +104,6 @@ const ContextMenuDemo = () => (
                     </ContextMenuItem>
                   </ContextMenuSubContent>
                 </ContextMenuSub>
-
               </ContextMenuList>
             </ContextMenuSubContent>
           </ContextMenuSub>
@@ -117,7 +116,6 @@ const ContextMenuDemo = () => (
             </ContextMenuShortcut>
           </ContextMenuItem>
         </ContextMenuGroup>
-
       </ContextMenuList>
     </ContextMenuContent>
   </ContextMenu>

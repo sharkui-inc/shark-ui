@@ -5,9 +5,9 @@ import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import {
   Select,
   SelectContent,
-  SelectList,
   SelectGroup,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -34,7 +34,6 @@ const Example = () => {
               </SelectItem>
             ))}
           </SelectGroup>
-
         </SelectList>
       </SelectContent>
     </Select>

@@ -10,8 +10,8 @@ import {
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -43,7 +43,6 @@ const Example = () => (
               <CopyIcon />
               Copy path
             </MenuItem>
-
           </MenuList>
         </MenuContent>
       </Menu>

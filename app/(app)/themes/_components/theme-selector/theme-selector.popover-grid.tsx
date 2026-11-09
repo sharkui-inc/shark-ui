@@ -23,6 +23,7 @@ interface ThemeSelectorPopoverGridProps {
   description?: string;
   label: string;
   lockKey?: ThemeLockKey;
+  onOpen?: () => void;
   onPreview: (value: string | null) => void;
   onValueChange: (details: { value: string[] }) => void;
   trigger: React.ReactNode;
@@ -40,6 +41,7 @@ export const ThemeSelectorPopoverGrid = (
     lockKey,
     trigger,
     value,
+    onOpen,
     onPreview,
     onValueChange,
     children,
@@ -56,6 +58,7 @@ export const ThemeSelectorPopoverGrid = (
     const { open } = details;
     if (open) {
       setHighlightedValue(value);
+      onOpen?.();
     } else {
       preview.clearPreview();
     }

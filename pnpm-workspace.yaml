@@ -3,12 +3,12 @@ allowBuilds:
   node-pty: true
   sharp: true
 minimumReleaseAgeExclude:
-  - "@ai-sdk/gateway@4.0.76 || 4.0.89 || 4.0.92 || 4.0.100 || 4.0.135"
-  - "@ai-sdk/mcp@2.0.46 || 2.0.58 || 2.0.62 || 2.0.90"
-  - "@ai-sdk/provider-utils@5.0.37 || 5.0.47 || 5.0.51 || 5.0.74"
-  - "@ai-sdk/provider@4.0.11 || 4.0.19"
-  - "@ai-sdk/react@4.0.98 || 4.0.114 || 4.0.117 || 4.0.125 || 4.0.166"
-  - ai@7.0.95 || 7.0.111 || 7.0.114 || 7.0.122 || 7.0.162
+  - "@ai-sdk/gateway@4.0.76 || 4.0.89 || 4.0.92 || 4.0.100 || 4.0.135 || 4.0.138"
+  - "@ai-sdk/mcp@2.0.46 || 2.0.58 || 2.0.62 || 2.0.90 || 2.0.93"
+  - "@ai-sdk/provider-utils@5.0.37 || 5.0.47 || 5.0.51 || 5.0.74 || 5.0.76"
+  - "@ai-sdk/provider@4.0.11 || 4.0.19 || 4.0.37"
+  - "@ai-sdk/react@4.0.98 || 4.0.114 || 4.0.117 || 4.0.125 || 4.0.166 || 4.0.169"
+  - ai@7.0.95 || 7.0.111 || 7.0.114 || 7.0.122 || 7.0.162 || 7.0.165
   - ultracite@7.11.1
   - valibot@1.5.0
   - "@ark-ui/react@5.39.2"
@@ -26,11 +26,11 @@ minimumReleaseAgeExclude:
   - "@next/swc-linux-x64-musl@16.3.6 || 16.4.5"
   - "@next/swc-win32-arm64-msvc@16.3.6 || 16.4.5"
   - "@next/swc-win32-x64-msvc@16.3.6 || 16.4.5"
-  - fumadocs-core@16.15.13 || 16.15.14 || 16.15.18
-  - fumadocs-ui@16.15.13 || 16.15.14 || 16.15.18
+  - fumadocs-core@16.15.13 || 16.15.14 || 16.15.18 || 16.18.3
+  - fumadocs-ui@16.15.13 || 16.15.14 || 16.15.18 || 16.18.3
   - next@16.3.6 || 16.4.5
   - "@tanstack/ai-event-client@0.13.0"
-  - fumadocs-mdx@15.4.4 || 15.4.6
+  - fumadocs-mdx@15.4.4 || 15.4.6 || 15.5.2
   - "@types/node@26.6.4"
   - "@hookform/resolvers@7.0.2"
   - "@tailwindcss/node@4.3.4"

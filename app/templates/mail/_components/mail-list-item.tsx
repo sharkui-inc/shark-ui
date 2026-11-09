@@ -32,7 +32,7 @@ export const MailListItem = (props: MailListItemProps) => {
 
   return (
     <Item
-      className="rounded-none border-x-0 border-t-0 transition-none data-selected:bg-muted [--space:--spacing(4)]"
+      className="data-selected:bg-muted rounded-none border-x-0 border-t-0 transition-none [--space:--spacing(4)]"
       data-selected={isSelected || undefined}
       data-unread={email.unread || undefined}
     >
@@ -77,7 +77,7 @@ export const MailListItem = (props: MailListItemProps) => {
         >
           <StarIcon
             aria-hidden="true"
-            className="text-muted-foreground in-data-starred:fill-current in-data-starred:text-primary"
+            className="text-muted-foreground in-data-starred:text-primary in-data-starred:fill-current"
           />
         </Button>
       </ItemActions>

@@ -11,9 +11,9 @@ import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import {
   ContextMenu,
   ContextMenuContent,
-  ContextMenuList,
   ContextMenuGroup,
   ContextMenuItem,
+  ContextMenuList,
   ContextMenuSeparator,
   ContextMenuShortcut,
   ContextMenuSub,
@@ -63,8 +63,9 @@ const Example = () => {
               <ContextMenuSubContent>
                 <ContextMenuList>
                   <ContextMenuItem value="junk">{values.junk}</ContextMenuItem>
-                  <ContextMenuItem value="trash">{values.trash}</ContextMenuItem>
-
+                  <ContextMenuItem value="trash">
+                    {values.trash}
+                  </ContextMenuItem>
                 </ContextMenuList>
               </ContextMenuSubContent>
             </ContextMenuSub>
@@ -77,7 +78,6 @@ const Example = () => {
               </ContextMenuShortcut>
             </ContextMenuItem>
           </ContextMenuGroup>
-
         </ContextMenuList>
       </ContextMenuContent>
     </ContextMenu>

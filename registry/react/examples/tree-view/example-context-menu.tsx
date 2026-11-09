@@ -12,8 +12,8 @@ import {
 import {
   ContextMenu,
   ContextMenuContent,
-  ContextMenuList,
   ContextMenuItem,
+  ContextMenuList,
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from "@/registry/react/components/context-menu";
@@ -106,7 +106,6 @@ const TreeNode = (props: NodeProviderProps) => {
                   <Trash2Icon aria-hidden="true" />
                   Delete
                 </ContextMenuItem>
-
               </ContextMenuList>
             </ContextMenuContent>
           </ContextMenu>
@@ -138,7 +137,6 @@ const TreeNode = (props: NodeProviderProps) => {
                 <Trash2Icon aria-hidden="true" />
                 Delete
               </ContextMenuItem>
-
             </ContextMenuList>
           </ContextMenuContent>
         </ContextMenu>

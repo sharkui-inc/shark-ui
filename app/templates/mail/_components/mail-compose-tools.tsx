@@ -19,9 +19,9 @@ import { ButtonGroup } from "@/registry/react/components/button-group";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 import { MailToolbarButton } from "./mail-toolbar-button";
@@ -108,7 +108,6 @@ const ComposeMenu = (props: ComposeMenuProps) => {
               </MenuItem>
             ))}
           </MenuGroup>
-
         </MenuList>
       </MenuContent>
     </Menu>

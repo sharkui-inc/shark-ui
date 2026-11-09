@@ -2,8 +2,8 @@ import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
-  MenuList,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -21,7 +21,6 @@ const Example = () => (
             <MenuItem value="edit">Edit</MenuItem>
             <MenuItem value="copy">Copy</MenuItem>
             <MenuItem value="share">Share</MenuItem>
-
           </MenuList>
         </MenuContent>
       </Menu>

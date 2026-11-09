@@ -76,7 +76,7 @@ export const DashboardNotifications = () => {
                     <ItemMedia>
                       <span
                         aria-hidden="true"
-                        className="size-1.5 rounded-full bg-transparent in-data-unread:bg-primary"
+                        className="in-data-unread:bg-primary size-1.5 rounded-full bg-transparent"
                       />
                     </ItemMedia>
                     <ItemContent>

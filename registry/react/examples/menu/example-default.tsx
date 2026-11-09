@@ -16,9 +16,9 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
-  MenuList,
   MenuGroup,
   MenuItem,
+  MenuList,
   MenuRadioGroup,
   MenuRadioItem,
   MenuSeparator,
@@ -80,7 +80,6 @@ const MenuDemo = () => (
                     </MenuItem>
                   </MenuSubContent>
                 </MenuSub>
-
               </MenuList>
             </MenuSubContent>
           </MenuSub>
@@ -100,7 +99,6 @@ const MenuDemo = () => (
             <MenuShortcut className="hidden sm:inline-flex">⌘ ⌫</MenuShortcut>
           </MenuItem>
         </MenuGroup>
-
       </MenuList>
     </MenuContent>
   </Menu>

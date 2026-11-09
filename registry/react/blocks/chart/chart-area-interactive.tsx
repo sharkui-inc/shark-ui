@@ -21,8 +21,8 @@ import {
 import {
   Select,
   SelectContent,
-  SelectList,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
@@ -189,7 +189,6 @@ const ChartAreaInteractive = () => {
                   {item.label}
                 </SelectItem>
               ))}
-
             </SelectList>
           </SelectContent>
         </Select>

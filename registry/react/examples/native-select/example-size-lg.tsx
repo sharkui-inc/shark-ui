@@ -4,11 +4,7 @@ import {
 } from "@/registry/react/components/native-select";
 
 const Example = () => (
-  <NativeSelect
-    aria-label="Select an option"
-    className="min-w-45"
-    size="lg"
-  >
+  <NativeSelect aria-label="Select an option" className="min-w-45" size="lg">
     <NativeSelectOption value="">Select an option</NativeSelectOption>
     <NativeSelectOption value="banana">Banana</NativeSelectOption>
     <NativeSelectOption value="apple">Apple</NativeSelectOption>

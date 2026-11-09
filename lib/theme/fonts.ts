@@ -2,6 +2,7 @@ export type ThemeFontCategory = "mono" | "sans" | "serif";
 export type ThemeFontSlot = "heading" | "sans";
 
 export interface ThemeFont {
+  axes?: string;
   category: ThemeFontCategory;
   cssUrl: string;
   family: string;
@@ -35,12 +36,17 @@ const googleFontFamilyParam = (label: string, axes?: string) =>
     ? `family=${toGoogleFamily(label)}:${axes}`
     : `family=${toGoogleFamily(label)}`;
 
-const googleFontCssUrl = (label: string, axes?: string) =>
-  `https://fonts.googleapis.com/css2?${googleFontFamilyParam(label, axes)}&display=swap`;
+export const buildGoogleFontCssUrl = (label: string, axes?: string) => {
+  const family = label.trim().replaceAll(" ", "+");
+  const param = axes ? `family=${family}:${axes}` : `family=${family}`;
+
+  return `https://fonts.googleapis.com/css2?${param}&display=swap`;
+};
 
 const defineThemeFont = (input: ThemeFontInput): ThemeFont => ({
+  axes: input.axes,
   category: input.category,
-  cssUrl: googleFontCssUrl(input.label, input.axes),
+  cssUrl: buildGoogleFontCssUrl(input.label, input.axes),
   family: `'${input.label}', ${CATEGORY_FALLBACK[input.category]}`,
   label: input.label,
   value: toKebabCase(input.label),
@@ -48,112 +54,112 @@ const defineThemeFont = (input: ThemeFontInput): ThemeFont => ({
 
 const THEME_FONT_INPUTS = [
   {
-    axes: "wght@400..800",
+    axes: "wght@400..700",
     category: "sans",
     label: "Bricolage Grotesque",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400..700",
     category: "serif",
     label: "Newsreader",
   },
   {
-    axes: "ital,wght@0,400;0,500;1,400;1,500",
+    axes: "wght@400;500",
     category: "mono",
     label: "DM Mono",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400..700",
     category: "sans",
     label: "DM Sans",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400..700",
     category: "serif",
     label: "EB Garamond",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400..700",
     category: "sans",
     label: "Figtree",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400..700",
     category: "serif",
     label: "Fraunces",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400..700",
     category: "sans",
     label: "Geist",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400;500;600;700",
     category: "mono",
     label: "Geist Mono",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400..700",
     category: "sans",
     label: "Hanken Grotesk",
   },
   {
-    axes: "ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700",
+    axes: "wght@400;500;600;700",
     category: "mono",
     label: "IBM Plex Mono",
   },
   {
-    axes: "ital,wght@0,400..700;1,400..700",
+    axes: "wght@400..700",
     category: "sans",
     label: "IBM Plex Sans",
   },
   {
-    axes: "ital,wght@0,400..700;1,400..700",
+    axes: "wght@400..700",
     category: "sans",
     label: "Instrument Sans",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400..700",
     category: "sans",
     label: "Inter",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400;500;600;700",
     category: "mono",
     label: "JetBrains Mono",
   },
   {
-    axes: "ital,wght@0,400..700;1,400..700",
+    axes: "wght@400..700",
     category: "serif",
     label: "Lora",
   },
   {
-    axes: "wght@400..800",
+    axes: "wght@400..700",
     category: "sans",
     label: "Manrope",
   },
   {
-    axes: "wght@400..800",
+    axes: "wght@400..700",
     category: "sans",
     label: "Outfit",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400..700",
     category: "sans",
     label: "Public Sans",
   },
   {
-    axes: "wght@400..800",
+    axes: "wght@400..700",
     category: "serif",
     label: "Roboto Slab",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400;500;600;700",
     category: "mono",
     label: "Source Code Pro",
   },
   {
-    axes: "ital,wght@0,400..800;1,400..800",
+    axes: "wght@400..700",
     category: "sans",
     label: "Source Sans 3",
   },

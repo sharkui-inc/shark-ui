@@ -1,7 +1,6 @@
 "use client";
 
 import { createGridCollection } from "@ark-ui/react/collection";
-import React from "react";
 import { loadThemeFontPreviews } from "@/lib/theme/apply";
 import { withDefaultFirst } from "@/lib/theme/catalog";
 import { THEME_FONT_SLOTS } from "@/lib/theme/config";
@@ -67,10 +66,6 @@ export const ThemeSelectorFont = (props: ThemeSelectorFontProps) => {
 
   const selectedFont = getThemeFont(slotApi.value);
 
-  React.useEffect(() => {
-    loadThemeFontPreviews();
-  }, []);
-
   return (
     <ThemeSelectorPopoverGrid
       collection={collection}
@@ -78,6 +73,7 @@ export const ThemeSelectorFont = (props: ThemeSelectorFontProps) => {
       description={detail.description}
       label={detail.label}
       lockKey={detail.lockKey}
+      onOpen={loadThemeFontPreviews}
       onPreview={(next) => {
         if (!next) {
           clearThemePreview();
