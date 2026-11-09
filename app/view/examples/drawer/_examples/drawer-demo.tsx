@@ -25,7 +25,15 @@ import {
   RadioGroupItem,
 } from "@/registry/react/components/radio-group";
 
-const deliveryTimes = [
+interface DeliveryTime {
+  badge?: string;
+  description: string;
+  id: string;
+  label: string;
+  value: string;
+}
+
+const deliveryTimes: DeliveryTime[] = [
   {
     badge: "Fastest",
     description: "25–35 min · Driver assigned now",

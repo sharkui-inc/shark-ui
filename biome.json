@@ -17,11 +17,22 @@
       },
       "suspicious": {
         "noDocumentCookie": "off",
-        "noDuplicateCustomProperties": "off"
+        "noDuplicateCustomProperties": "off",
+        "useBaseline": "off"
       }
     }
   },
   "overrides": [
+    {
+      "includes": ["styles/hitbox.css"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noDuplicateSelectors": "off"
+          }
+        }
+      }
+    },
     {
       "includes": ["public/r/**"],
       "formatter": {

@@ -75,7 +75,15 @@ const DrawerRtl = () => {
   );
 };
 
-const deliveryTimes = [
+interface DeliveryTime {
+  badge?: string;
+  description: string;
+  id: string;
+  label: string;
+  value: string;
+}
+
+const deliveryTimes: DeliveryTime[] = [
   {
     badge: "الأسرع",
     description: "25–35 دقيقة · تم تعيين السائق الآن",
