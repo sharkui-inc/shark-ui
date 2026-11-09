@@ -275,13 +275,13 @@ export const CommandList = (
 
   return (
     <ScrollArea
-      className="max-h-72 flex-1"
+      className={cn("max-h-72 flex-1", className)}
       orientation="vertical"
       overscrollContain
       scrollFade
     >
       <ArkCombobox.List
-        className={cn("flex flex-col", "not-empty:pb-2", className)}
+        className={cn("flex flex-col", "not-empty:pb-2")}
         data-slot="command-list"
         {...rest}
       />

@@ -3,7 +3,6 @@
 import { createListCollection } from "@ark-ui/react";
 import {
   CheckIcon,
-  CircleIcon,
   ClipboardIcon,
   ShuffleIcon,
   WandSparklesIcon,
@@ -12,20 +11,19 @@ import React from "react";
 import { tv } from "tailwind-variants";
 import { CopyThemeCodeDialog } from "@/components/dialog/copy-theme";
 import { ThemePresetPicker } from "@/components/theme-preset-picker";
+import { ThemePrimaryToneSwitch } from "@/components/theme-primary-tone-switch";
 import { loadThemeFontPreviews } from "@/lib/theme/apply";
 import {
   BASE_COLORS,
   BORDER_RADIUS,
   getPrimaryFillCss,
   PRIMARY_COLORS,
-  PRIMARY_TONES,
 } from "@/lib/theme/catalog";
 import {
   type BaseColor,
   type BorderRadius,
   DEFAULT_PRIMARY_TONE,
   type PrimaryColor,
-  type PrimaryTone,
   THEME_FIELDS,
   THEME_FONT_SLOTS,
 } from "@/lib/theme/config";
@@ -56,11 +54,6 @@ import {
   RadioGroupItem,
   RadioGroupLabel,
 } from "@/registry/react/components/radio-group";
-import {
-  SegmentGroup,
-  SegmentGroupItem,
-  SegmentGroupItemText,
-} from "@/registry/react/components/segment-group";
 import {
   Select,
   SelectContent,
@@ -327,41 +320,11 @@ export const HeaderCustomize = () => {
                 <span className="text-muted-foreground text-xs font-medium">
                   {THEME_FIELDS.primaryTone.label}
                 </span>
-                <div className="border-input has-focus-visible:border-ring/64 has-focus-visible:ring-ring/24 h-8 w-40 overflow-hidden rounded-lg border shadow-xs/4 transition-[color,box-shadow] has-focus-visible:ring-2">
-                  <SegmentGroup
-                    aria-label="Primary tone"
-                    className={cn(
-                      "dark:bg-input/32 size-full gap-0 bg-transparent",
-                      "*:data-[slot=segment-group-indicator]:rounded-none",
-                      "*:data-[slot=segment-group-indicator]:bg-primary"
-                    )}
-                    onValueChange={(details) => {
-                      if (details.value) {
-                        setPrimaryTone(details.value as PrimaryTone);
-                      }
-                    }}
-                    value={primaryTone}
-                  >
-                    {PRIMARY_TONES.map((tone) => (
-                      <SegmentGroupItem
-                        aria-label={tone.label}
-                        className="text-muted-foreground data-[state=checked]:text-primary-foreground relative h-auto min-w-0 flex-1 gap-0 rounded-none p-0 data-focus-visible:border-transparent data-focus-visible:ring-0"
-                        key={tone.value}
-                        value={tone.value}
-                      >
-                        <SegmentGroupItemText className="absolute inset-0 z-1 flex items-center justify-center">
-                          <CircleIcon
-                            aria-hidden="true"
-                            className={cn(
-                              "size-4",
-                              tone.value === "dark" && "fill-current"
-                            )}
-                          />
-                        </SegmentGroupItemText>
-                      </SegmentGroupItem>
-                    ))}
-                  </SegmentGroup>
-                </div>
+                <ThemePrimaryToneSwitch
+                  className="h-8 w-40 rounded-lg"
+                  onValueChange={setPrimaryTone}
+                  value={primaryTone}
+                />
               </div>
             </Field>
 

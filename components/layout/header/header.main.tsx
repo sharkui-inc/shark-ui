@@ -30,7 +30,7 @@ export const MainNav = (props: MainNavProps) => {
               "px-2",
               "text-muted-foreground",
               "hover:text-foreground",
-              "aria-[current=page]:bg-muted aria-[current=page]:text-foreground"
+              "aria-[current=page]:bg-transparent aria-[current=page]:text-foreground"
             )}
             href={item.href}
           >

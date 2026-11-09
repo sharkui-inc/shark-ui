@@ -86,10 +86,14 @@ export const ThemeConfigurationProvider = ({
       primaryTone,
     };
 
-    if (
-      appliedVisualRef.current !== null &&
-      visualThemeEquals(appliedVisualRef.current, nextVisual)
-    ) {
+    // First pass: bootstrap already painted from localStorage; config is still
+    // the Jotai default until atomWithStorage mounts — do not clobber the DOM.
+    if (appliedVisualRef.current === null) {
+      appliedVisualRef.current = nextVisual;
+      return;
+    }
+
+    if (visualThemeEquals(appliedVisualRef.current, nextVisual)) {
       return;
     }
 

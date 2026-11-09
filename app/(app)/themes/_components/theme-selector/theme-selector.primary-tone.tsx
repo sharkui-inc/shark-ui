@@ -1,23 +1,12 @@
 "use client";
 
-import { CircleIcon } from "lucide-react";
 import React from "react";
-import { PRIMARY_TONES } from "@/lib/theme/catalog";
-import {
-  DEFAULT_PRIMARY_TONE,
-  type PrimaryTone,
-  THEME_FIELDS,
-} from "@/lib/theme/config";
+import { ThemePrimaryToneSwitch } from "@/components/theme-primary-tone-switch";
+import { DEFAULT_PRIMARY_TONE, THEME_FIELDS } from "@/lib/theme/config";
 import { canPointerPreview } from "@/lib/theme/preview";
 import { useThemeCustomization } from "@/lib/theme/provider";
-import { cn } from "@/lib/utils";
 import { Field } from "@/registry/react/components/field";
 import { useHotkey } from "@/registry/react/components/hotkeys";
-import {
-  SegmentGroup,
-  SegmentGroupItem,
-  SegmentGroupItemText,
-} from "@/registry/react/components/segment-group";
 import { ThemeSelectorHeading } from "./theme-selector.heading";
 
 export const ThemeSelectorPrimaryTone = () => {
@@ -47,52 +36,21 @@ export const ThemeSelectorPrimaryTone = () => {
         lockKey="primaryTone"
         title={THEME_FIELDS.primaryTone.label}
       />
-      <div
-        className="border-input has-focus-visible:border-ring/64 has-focus-visible:ring-ring/24 dark:bg-input/32 h-9 max-h-9 min-h-9 w-fit overflow-hidden rounded-md border bg-transparent shadow-xs/4 transition-[color,box-shadow] has-focus-visible:ring-2 md:h-8 md:max-h-8 md:min-h-8"
+      <ThemePrimaryToneSwitch
+        className="h-9 max-h-9 min-h-9 w-[4.5rem] rounded-md md:h-8 md:max-h-8 md:min-h-8 md:w-16"
+        onPointerEnterTone={(tone) => {
+          if (canPointerPreview()) {
+            previewTheme({ primaryTone: tone });
+          }
+        }}
         onPointerLeave={() => {
           if (canPointerPreview()) {
             clearThemePreview();
           }
         }}
-      >
-        <SegmentGroup
-          className={cn(
-            "h-full min-h-0 w-full gap-0 bg-transparent",
-            "*:data-[slot=segment-group-indicator]:rounded-none",
-            "*:data-[slot=segment-group-indicator]:bg-primary"
-          )}
-          onValueChange={({ value }) => {
-            if (value) {
-              setPrimaryTone(value as PrimaryTone);
-            }
-          }}
-          value={primaryTone}
-        >
-          {PRIMARY_TONES.map((tone) => (
-            <SegmentGroupItem
-              aria-label={tone.label}
-              className="text-muted-foreground data-[state=checked]:text-primary-foreground relative h-full min-h-0 w-9 min-w-9 flex-1 gap-0 rounded-none p-0 data-focus-visible:border-transparent data-focus-visible:ring-0 md:w-8 md:min-w-8"
-              key={tone.value}
-              onPointerEnter={() => {
-                if (canPointerPreview()) {
-                  previewTheme({ primaryTone: tone.value });
-                }
-              }}
-              value={tone.value}
-            >
-              <SegmentGroupItemText className="absolute inset-0 z-1 flex items-center justify-center">
-                <CircleIcon
-                  aria-hidden="true"
-                  className={cn(
-                    "size-4",
-                    tone.value === "dark" && "fill-current"
-                  )}
-                />
-              </SegmentGroupItemText>
-            </SegmentGroupItem>
-          ))}
-        </SegmentGroup>
-      </div>
+        onValueChange={setPrimaryTone}
+        value={primaryTone}
+      />
     </Field>
   );
 };

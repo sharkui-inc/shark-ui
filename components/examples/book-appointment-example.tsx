@@ -22,11 +22,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/registry/react/components/card";
-import {
-  Field,
-  FieldGroup,
-  FieldLabel,
-} from "@/registry/react/components/field";
+import { Field, FieldGroup } from "@/registry/react/components/field";
 import { IconTile } from "@/registry/react/components/icon-tile";
 import { Separator } from "@/registry/react/components/separator";
 import {
@@ -82,7 +78,6 @@ export const BookAppointmentExample = (props: React.ComponentProps<"div">) => {
         <Separator />
         <FieldGroup>
           <Field>
-            <FieldLabel>Available times</FieldLabel>
             <ToggleGroup
               className="grid w-full grid-cols-2 items-stretch"
               disabled={isBooked}

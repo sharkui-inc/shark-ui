@@ -282,7 +282,7 @@ export const ColorPickerSwatchTrigger = (
         "outline-hidden",
         "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
         "data-disabled:pointer-events-none data-disabled:opacity-64",
-        "data-[state=checked]:ring-foreground/24 data-[state=checked]:shadow-sm/4 data-[state=checked]:ring-2",
+        "data-[state=checked]:shadow-sm/4 data-[state=checked]:ring-2 data-[state=checked]:ring-(--color)",
         "motion-reduce:transition-none",
         className
       )}
@@ -365,7 +365,7 @@ export const ColorPickerValueSwatch = (
         "relative",
         "size-8 shrink-0",
         "overflow-hidden",
-        "rounded-full border",
+        "rounded-full border border-(--color)",
         className
       )}
       data-slot="color-picker-value-swatch"
@@ -453,7 +453,8 @@ export const ColorPickerInput = (
 export const ColorPickerSwatchPreview = (
   props: React.ComponentProps<typeof ark.div>
 ) => {
-  const { className, ...rest } = props;
+  const { className, style, ...rest } = props;
+  const { value } = useColorPickerContext();
 
   return (
     <ark.div
@@ -461,7 +462,7 @@ export const ColorPickerSwatchPreview = (
         "relative",
         "size-8",
         "shrink-0",
-        "rounded-full border",
+        "rounded-full border border-(--color)",
         "overflow-hidden",
         "pointer-events-none",
         "group-data-[size=lg]/input-group:size-5",
@@ -471,6 +472,12 @@ export const ColorPickerSwatchPreview = (
         className
       )}
       data-slot="color-picker-input-swatch"
+      style={
+        {
+          "--color": value.toString("css"),
+          ...style,
+        } as React.CSSProperties
+      }
       {...rest}
     >
       <ColorPickerTransparencyGrid />

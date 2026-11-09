@@ -305,9 +305,11 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
           placeholder="Search docs…"
         >
           <CommandInput />
-          <CommandContent>
-            <CommandEmpty>No results found.</CommandEmpty>
-            <CommandList>
+          <CommandContent className="relative h-72 max-h-72 flex-none">
+            <CommandEmpty className="absolute inset-0 z-10 flex items-center justify-center">
+              No results found.
+            </CommandEmpty>
+            <CommandList className="h-full max-h-full">
               {collection.group().map(([group, items]) => (
                 <CommandGroup heading={group} key={group}>
                   {items.map((item) => {
