@@ -21,13 +21,18 @@ const SquiggleHighlight = (props: { query: string; text: string }) => {
   const { query, text } = props;
   const chunks = useHighlight({ query, text });
 
+  let offset = 0;
+
   return (
     <>
-      {chunks.map((chunk) =>
-        chunk.match ? (
+      {chunks.map((chunk) => {
+        const key = offset;
+        offset += chunk.text.length;
+
+        return chunk.match ? (
           <mark
             className="text-primary relative mx-1.5 bg-transparent px-0 font-semibold"
-            key={chunk.text}
+            key={key}
           >
             {chunk.text}
             <svg
@@ -43,9 +48,9 @@ const SquiggleHighlight = (props: { query: string; text: string }) => {
             </svg>
           </mark>
         ) : (
-          <Fragment key={chunk.text}>{chunk.text}</Fragment>
-        )
-      )}
+          <Fragment key={key}>{chunk.text}</Fragment>
+        );
+      })}
     </>
   );
 };
