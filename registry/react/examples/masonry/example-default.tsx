@@ -32,19 +32,19 @@ const MasonryDemo = () => (
 const photos = [
   {
     alt: "Tall coastal waves at dawn",
-    aspectRatio: "aspect-[9/16]",
+    aspectRatio: "aspect-9/16",
     image:
       "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=Coast+dawn&waveColor=7c3aed",
   },
   {
     alt: "Wide open water horizon",
-    aspectRatio: "aspect-[21/9]",
+    aspectRatio: "aspect-21/9",
     image:
       "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Open+horizon&waveColor=2b6cb0",
   },
   {
     alt: "Studio desk moodboard tile",
-    aspectRatio: "aspect-[4/5]",
+    aspectRatio: "aspect-4/5",
     image:
       "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=Studio+desk&waveColor=ea580c",
   },
@@ -56,31 +56,31 @@ const photos = [
   },
   {
     alt: "Portrait garden path light",
-    aspectRatio: "aspect-[2/3]",
+    aspectRatio: "aspect-2/3",
     image:
       "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Garden+path&waveColor=1a6b5c",
   },
   {
     alt: "Landscape golden hour wash",
-    aspectRatio: "aspect-[16/9]",
+    aspectRatio: "aspect-video",
     image:
       "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=Golden+hour&waveColor=ca8a04",
   },
   {
     alt: "Compact warm light sample",
-    aspectRatio: "aspect-[5/4]",
+    aspectRatio: "aspect-5/4",
     image:
       "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=Warm+light&waveColor=ea580c",
   },
   {
     alt: "Tall blue hour panel",
-    aspectRatio: "aspect-[3/4]",
+    aspectRatio: "aspect-3/4",
     image:
       "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Blue+hour&waveColor=2b6cb0",
   },
   {
     alt: "Wide morning tide strip",
-    aspectRatio: "aspect-[16/10]",
+    aspectRatio: "aspect-16/10",
     image:
       "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=Morning+tide&waveColor=7c3aed",
   },

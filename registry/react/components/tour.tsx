@@ -415,13 +415,13 @@ export const TourClose = (
 
 const tourActionLayoutClassName = [
   "grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2",
-  "[&>[data-tour-action]]:row-start-1",
-  "[&>[data-tour-action=prev]]:col-start-1 [&>[data-tour-action=prev]]:justify-self-start",
-  "[&>[data-tour-action=next]]:col-start-3 [&>[data-tour-action=next]]:justify-self-end",
-  "[&>[data-tour-action=skip]]:col-start-2 [&>[data-tour-action=skip]]:justify-self-end",
-  "[&>[data-tour-action=custom]]:col-start-2 [&>[data-tour-action=custom]]:justify-self-end",
-  "[&>[data-tour-action=dismiss]]:col-start-3 [&>[data-tour-action=dismiss]]:justify-self-end",
-  "has-[[data-tour-action=next]]:[&>[data-tour-action=dismiss]]:col-start-2",
+  "*:data-tour-action:row-start-1",
+  "*:data-[tour-action=prev]:col-start-1 *:data-[tour-action=prev]:justify-self-start",
+  "*:data-[tour-action=next]:col-start-3 *:data-[tour-action=next]:justify-self-end",
+  "*:data-[tour-action=skip]:col-start-2 *:data-[tour-action=skip]:justify-self-end",
+  "*:data-[tour-action=custom]:col-start-2 *:data-[tour-action=custom]:justify-self-end",
+  "*:data-[tour-action=dismiss]:col-start-3 *:data-[tour-action=dismiss]:justify-self-end",
+  "has-data-[tour-action=next]:*:data-[tour-action=dismiss]:col-start-2",
 ];
 
 export const TourFooter = (

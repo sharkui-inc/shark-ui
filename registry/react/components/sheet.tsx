@@ -50,7 +50,7 @@ export const SheetOverlay = (
 
 const sheetPositionerVariants = tv({
   base: [
-    "fixed inset-0 z-[var(--z-index,50)]",
+    "fixed inset-0 z-(--z-index,50)",
     "h-svh w-screen",
     "grid",
     "overflow-hidden",

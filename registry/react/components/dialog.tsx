@@ -104,7 +104,7 @@ export const DialogPositioner = (
   return (
     <ArkDialog.Positioner
       className={cn(
-        "fixed inset-0 z-[var(--z-index,50)]",
+        "fixed inset-0 z-(--z-index,50)",
         "h-svh w-screen",
         "grid grid-rows-[1fr_auto_3fr] justify-items-center",
         "p-4",

@@ -172,7 +172,7 @@ export const DrawerOverlay = (
 const drawerPositionerVariants = tv({
   base: [
     "[--bleed:--spacing(12)]",
-    "fixed inset-0 z-[var(--z-index,50)]",
+    "fixed inset-0 z-(--z-index,50)",
     "overflow-hidden",
     "w-screen",
     "flex items-end justify-center",

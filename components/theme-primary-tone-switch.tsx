@@ -68,7 +68,7 @@ export const ThemePrimaryToneSwitch = (props: ThemePrimaryToneSwitchProps) => {
       <span
         aria-hidden="true"
         className={cn(
-          "bg-primary absolute inset-y-0 start-0 w-1/2",
+          "bg-primary absolute inset-y-0 inset-s-0 w-1/2",
           "pointer-events-none",
           "transition-transform duration-200 ease-out",
           "motion-reduce:transition-none",

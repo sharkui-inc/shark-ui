@@ -37,7 +37,7 @@ export const ThemeSelectorPrimaryTone = () => {
         title={THEME_FIELDS.primaryTone.label}
       />
       <ThemePrimaryToneSwitch
-        className="h-9 max-h-9 min-h-9 w-[4.5rem] rounded-md md:h-8 md:max-h-8 md:min-h-8 md:w-16"
+        className="h-9 max-h-9 min-h-9 w-18 rounded-md md:h-8 md:max-h-8 md:min-h-8 md:w-16"
         onPointerEnterTone={(tone) => {
           if (canPointerPreview()) {
             previewTheme({ primaryTone: tone });
