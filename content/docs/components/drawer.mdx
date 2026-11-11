@@ -171,13 +171,13 @@ Use `DrawerTitle` and `DrawerDescription` as children for more control.
 
 <ComponentPreview componentName="drawer" fileName="example-non-modal" />
 
-### Indent background
+### Indent Background
 
 `DrawerProvider` wraps the page. An open drawer scales that page and reveals the background behind it.
 
 <ComponentPreview componentName="drawer" fileName="example-indent-background" />
 
-### Multiple triggers
+### Multiple Triggers
 
 `value` on each `DrawerTrigger`. `onTriggerValueChange` tracks which button opened the drawer.
 
@@ -189,11 +189,17 @@ Nest a `Drawer` inside another.
 
 <ComponentPreview componentName="drawer" fileName="example-nested" />
 
-### Close button
+### Close Button
 
 `showCloseButton` on `DrawerContent`.
 
 <ComponentPreview componentName="drawer" fileName="example-close-button" />
+
+### Close Behavior
+
+Control dismissal with `closeOnInteractOutside` and `closeOnEscape`.
+
+<ComponentPreview componentName="drawer" fileName="example-close-behavior" />
 
 ### No Drag Area
 
@@ -225,7 +231,7 @@ Use `Drawer` on small screens and [ContextMenu](/docs/components/context-menu#re
 
 <ComponentPreview componentName="drawer" fileName="example-responsive-context-menu" />
 
-### Custom spacing
+### Custom Spacing
 
 The `[--space:--spacing("value")]` controls the internal spacing.
 

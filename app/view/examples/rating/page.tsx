@@ -8,7 +8,7 @@ import ExampleDefault from "@/registry/react/examples/rating/example-default";
 import ExampleDisabled from "@/registry/react/examples/rating/example-disabled";
 import ExampleForm from "@/registry/react/examples/rating/example-form";
 import ExampleHalfStar from "@/registry/react/examples/rating/example-half-star";
-import ExampleReadonly from "@/registry/react/examples/rating/example-readonly";
+import ExampleReadOnly from "@/registry/react/examples/rating/example-read-only";
 import ExampleRtl from "@/registry/react/examples/rating/example-rtl";
 import ExampleTestimonial from "@/registry/react/examples/rating/example-testimonial";
 import ExampleWithField from "@/registry/react/examples/rating/example-with-field";
@@ -114,7 +114,7 @@ const RatingExamplePage = () => (
         </section>
         <section aria-labelledby="form-heading" className="flex flex-col gap-5">
           <h2 className="text-muted-foreground font-medium" id="form-heading">
-            Form
+            Form Integration
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleForm />
@@ -135,17 +135,17 @@ const RatingExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="readonly-heading"
+          aria-labelledby="read-only-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="readonly-heading"
+            id="read-only-heading"
           >
-            Readonly
+            Read-only
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleReadonly />
+            <ExampleReadOnly />
           </div>
         </section>
         <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">

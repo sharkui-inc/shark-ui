@@ -1,6 +1,7 @@
 import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
 import ExampleAcceptedFileTypes from "@/registry/react/examples/file-upload/example-accepted-file-types";
 import ExampleClearTrigger from "@/registry/react/examples/file-upload/example-clear-trigger";
+import ExampleControlled from "@/registry/react/examples/file-upload/example-controlled";
 import ExampleCustomPreview from "@/registry/react/examples/file-upload/example-custom-preview";
 import ExampleCustomSpacing from "@/registry/react/examples/file-upload/example-custom-spacing";
 import ExampleDefault from "@/registry/react/examples/file-upload/example-default";
@@ -11,7 +12,7 @@ import ExampleForm from "@/registry/react/examples/file-upload/example-form";
 import ExampleInvalid from "@/registry/react/examples/file-upload/example-invalid";
 import ExampleMediaCapture from "@/registry/react/examples/file-upload/example-media-capture";
 import ExampleMultipleFiles from "@/registry/react/examples/file-upload/example-multiple-files";
-import ExampleReadonly from "@/registry/react/examples/file-upload/example-readonly";
+import ExampleReadOnly from "@/registry/react/examples/file-upload/example-read-only";
 import ExampleRtl from "@/registry/react/examples/file-upload/example-rtl";
 import ExampleTrigger from "@/registry/react/examples/file-upload/example-trigger";
 import ExampleWithField from "@/registry/react/examples/file-upload/example-with-field";
@@ -134,7 +135,7 @@ const FileUploadExamplePage = () => (
         </section>
         <section aria-labelledby="form-heading" className="flex flex-col gap-5">
           <h2 className="text-muted-foreground font-medium" id="form-heading">
-            Form
+            Form Integration
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleForm />
@@ -183,17 +184,17 @@ const FileUploadExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="readonly-heading"
+          aria-labelledby="read-only-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="readonly-heading"
+            id="read-only-heading"
           >
-            Readonly
+            Read-only
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleReadonly />
+            <ExampleReadOnly />
           </div>
         </section>
         <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">
@@ -230,6 +231,20 @@ const FileUploadExamplePage = () => (
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleWithField />
+          </div>
+        </section>
+        <section
+          aria-labelledby="controlled-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="controlled-heading"
+          >
+            Controlled
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleControlled />
           </div>
         </section>
       </div>

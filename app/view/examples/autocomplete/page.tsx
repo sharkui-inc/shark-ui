@@ -6,6 +6,7 @@ import ExampleForm from "@/registry/react/examples/autocomplete/example-form";
 import ExampleGroup from "@/registry/react/examples/autocomplete/example-group";
 import ExampleInvalid from "@/registry/react/examples/autocomplete/example-invalid";
 import ExampleRtl from "@/registry/react/examples/autocomplete/example-rtl";
+import ExampleScrollable from "@/registry/react/examples/autocomplete/example-scrollable";
 import ExampleSizeLg from "@/registry/react/examples/autocomplete/example-size-lg";
 import ExampleSizeMd from "@/registry/react/examples/autocomplete/example-size-md";
 import ExampleSizeSm from "@/registry/react/examples/autocomplete/example-size-sm";
@@ -14,7 +15,6 @@ import ExampleVariantGhost from "@/registry/react/examples/autocomplete/example-
 import ExampleWithClearButton from "@/registry/react/examples/autocomplete/example-with-clear-button";
 import ExampleWithDescription from "@/registry/react/examples/autocomplete/example-with-description";
 import ExampleWithField from "@/registry/react/examples/autocomplete/example-with-field";
-import ExampleWithScroll from "@/registry/react/examples/autocomplete/example-with-scroll";
 import ExampleWithStartIcon from "@/registry/react/examples/autocomplete/example-with-start-icon";
 import ExampleWithTrigger from "@/registry/react/examples/autocomplete/example-with-trigger";
 
@@ -66,7 +66,7 @@ const AutocompleteExamplePage = () => (
         </section>
         <section aria-labelledby="form-heading" className="flex flex-col gap-5">
           <h2 className="text-muted-foreground font-medium" id="form-heading">
-            Form
+            Form Integration
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleForm />
@@ -218,17 +218,17 @@ const AutocompleteExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="with-scroll-heading"
+          aria-labelledby="scrollable-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="with-scroll-heading"
+            id="scrollable-heading"
           >
-            With Scroll
+            Scrollable
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleWithScroll />
+            <ExampleScrollable />
           </div>
         </section>
         <section

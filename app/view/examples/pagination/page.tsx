@@ -107,7 +107,7 @@ const PaginationExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="local-icons-only-heading"
           >
-            Icons Only
+            Icon Only
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <PaginationIconsOnly />

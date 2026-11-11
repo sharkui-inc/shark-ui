@@ -3,7 +3,6 @@ import ExampleBothDirections from "@/registry/react/examples/scroll-area/example
 import ExampleClampContentMinWidth from "@/registry/react/examples/scroll-area/example-clamp-content-min-width";
 import ExampleDefault from "@/registry/react/examples/scroll-area/example-default";
 import ExampleFill from "@/registry/react/examples/scroll-area/example-fill";
-import ExampleHideThumb from "@/registry/react/examples/scroll-area/example-hide-thumb";
 import ExampleHorizontal from "@/registry/react/examples/scroll-area/example-horizontal";
 import ExampleNested from "@/registry/react/examples/scroll-area/example-nested";
 import ExampleOverscrollContain from "@/registry/react/examples/scroll-area/example-overscroll-contain";
@@ -11,6 +10,7 @@ import ExampleRtl from "@/registry/react/examples/scroll-area/example-rtl";
 import ExampleScrollFade from "@/registry/react/examples/scroll-area/example-scroll-fade";
 import ExampleScrollbarGutter from "@/registry/react/examples/scroll-area/example-scrollbar-gutter";
 import ExampleVertical from "@/registry/react/examples/scroll-area/example-vertical";
+import ExampleWithoutThumb from "@/registry/react/examples/scroll-area/example-without-thumb";
 
 const ScrollAreaExamplePage = () => (
   <PreviewLocaleProvider>
@@ -67,17 +67,17 @@ const ScrollAreaExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="hide-thumb-heading"
+          aria-labelledby="without-thumb-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="hide-thumb-heading"
+            id="without-thumb-heading"
           >
-            Hide Thumb
+            Without Thumb
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleHideThumb />
+            <ExampleWithoutThumb />
           </div>
         </section>
         <section

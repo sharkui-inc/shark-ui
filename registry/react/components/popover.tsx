@@ -21,6 +21,7 @@ export const Popover = (
     lazyMount = true,
     unmountOnExit = true,
     modal = true,
+    positioning,
     ...rest
   } = props;
 
@@ -29,6 +30,11 @@ export const Popover = (
       data-slot="popover"
       lazyMount={lazyMount}
       modal={modal}
+      positioning={{
+        flip: ["bottom", "top", "left", "right"],
+        placement: "bottom",
+        ...positioning,
+      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     />

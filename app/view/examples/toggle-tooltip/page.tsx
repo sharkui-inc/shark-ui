@@ -2,8 +2,8 @@ import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
 import ExampleControlled from "@/registry/react/examples/toggle-tooltip/example-controlled";
 import ExampleDefault from "@/registry/react/examples/toggle-tooltip/example-default";
 import ExampleInfoIcon from "@/registry/react/examples/toggle-tooltip/example-info-icon";
+import ExamplePositioning from "@/registry/react/examples/toggle-tooltip/example-positioning";
 import ExampleRtl from "@/registry/react/examples/toggle-tooltip/example-rtl";
-import ExampleSide from "@/registry/react/examples/toggle-tooltip/example-side";
 import ExampleWithLink from "@/registry/react/examples/toggle-tooltip/example-with-link";
 import ExampleWithoutArrow from "@/registry/react/examples/toggle-tooltip/example-without-arrow";
 
@@ -61,12 +61,18 @@ const ToggleTooltipExamplePage = () => (
             <ExampleRtl />
           </div>
         </section>
-        <section aria-labelledby="side-heading" className="flex flex-col gap-5">
-          <h2 className="text-muted-foreground font-medium" id="side-heading">
-            Side
+        <section
+          aria-labelledby="positioning-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="positioning-heading"
+          >
+            Positioning
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleSide />
+            <ExamplePositioning />
           </div>
         </section>
         <section

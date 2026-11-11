@@ -1,7 +1,7 @@
 import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
-import ExampleCollapsible from "@/registry/react/examples/masonry/example-collapsible";
 import ExampleColumns from "@/registry/react/examples/masonry/example-columns";
 import ExampleDefault from "@/registry/react/examples/masonry/example-default";
+import ExampleExpandableItems from "@/registry/react/examples/masonry/example-expandable-items";
 import ExampleReflowBalanced from "@/registry/react/examples/masonry/example-reflow-balanced";
 import ExampleReflowStable from "@/registry/react/examples/masonry/example-reflow-stable";
 import ExampleRtl from "@/registry/react/examples/masonry/example-rtl";
@@ -26,17 +26,17 @@ const MasonryExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="collapsible-heading"
+          aria-labelledby="expandable-items-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="collapsible-heading"
+            id="expandable-items-heading"
           >
-            Collapsible
+            Expandable Items
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleCollapsible />
+            <ExampleExpandableItems />
           </div>
         </section>
         <section

@@ -10,7 +10,7 @@ import ExampleNested from "@/registry/react/examples/popover/example-nested";
 import ExampleNonModal from "@/registry/react/examples/popover/example-non-modal";
 import ExamplePositioning from "@/registry/react/examples/popover/example-positioning";
 import ExampleRtl from "@/registry/react/examples/popover/example-rtl";
-import ExampleScrollArea from "@/registry/react/examples/popover/example-scroll-area";
+import ExampleScrollable from "@/registry/react/examples/popover/example-scrollable";
 import ExampleTooltip from "@/registry/react/examples/popover/example-tooltip";
 import ExampleWithArrow from "@/registry/react/examples/popover/example-with-arrow";
 import ExampleWithDialog from "@/registry/react/examples/popover/example-with-dialog";
@@ -135,7 +135,7 @@ const PopoverExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="non-modal-heading"
           >
-            Non Modal
+            Non-Modal
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleNonModal />
@@ -164,17 +164,17 @@ const PopoverExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="scroll-area-heading"
+          aria-labelledby="scrollable-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="scroll-area-heading"
+            id="scrollable-heading"
           >
-            Scroll Area
+            Scrollable
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleScrollArea />
+            <ExampleScrollable />
           </div>
         </section>
         <section
@@ -241,7 +241,7 @@ const PopoverExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="local-form-heading"
           >
-            Form
+            Form Integration
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <PopoverForm />

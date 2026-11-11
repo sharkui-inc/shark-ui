@@ -30,6 +30,7 @@ export const Select: ArkSelect.RootComponent = (props) => {
     unmountOnExit = true,
     className,
     children,
+    positioning,
     ...rest
   } = props;
 
@@ -38,6 +39,11 @@ export const Select: ArkSelect.RootComponent = (props) => {
       className={cn("flex flex-col gap-2", className)}
       data-slot="select"
       lazyMount={lazyMount}
+      positioning={{
+        flip: ["bottom", "top", "left", "right"],
+        placement: "bottom-start",
+        ...positioning,
+      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     >

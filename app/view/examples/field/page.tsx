@@ -13,7 +13,7 @@ import ExampleOrientationHorizontal from "@/registry/react/examples/field/exampl
 import ExampleOrientationResponsive from "@/registry/react/examples/field/example-orientation-responsive";
 import ExampleOrientationVertical from "@/registry/react/examples/field/example-orientation-vertical";
 import ExampleRadioGroup from "@/registry/react/examples/field/example-radio-group";
-import ExampleReadonly from "@/registry/react/examples/field/example-readonly";
+import ExampleReadOnly from "@/registry/react/examples/field/example-read-only";
 import ExampleRequired from "@/registry/react/examples/field/example-required";
 import ExampleRtl from "@/registry/react/examples/field/example-rtl";
 import ExampleSelect from "@/registry/react/examples/field/example-select";
@@ -225,17 +225,17 @@ const FieldExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="readonly-heading"
+          aria-labelledby="read-only-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="readonly-heading"
+            id="read-only-heading"
           >
-            Readonly
+            Read-only
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleReadonly />
+            <ExampleReadOnly />
           </div>
         </section>
         <section

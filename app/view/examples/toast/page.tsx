@@ -4,7 +4,7 @@ import ExampleClosable from "@/registry/react/examples/toast/example-closable";
 import ExampleDedupe from "@/registry/react/examples/toast/example-dedupe";
 import ExampleDefault from "@/registry/react/examples/toast/example-default";
 import ExampleDuration from "@/registry/react/examples/toast/example-duration";
-import ExamplePlacement from "@/registry/react/examples/toast/example-placement";
+import ExamplePositioning from "@/registry/react/examples/toast/example-positioning";
 import ExamplePromise from "@/registry/react/examples/toast/example-promise";
 import ExampleRtl from "@/registry/react/examples/toast/example-rtl";
 import ExampleVariants from "@/registry/react/examples/toast/example-variants";
@@ -78,17 +78,17 @@ const ToastExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="placement-heading"
+          aria-labelledby="positioning-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="placement-heading"
+            id="positioning-heading"
           >
-            Placement
+            Positioning
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExamplePlacement />
+            <ExamplePositioning />
           </div>
         </section>
         <section

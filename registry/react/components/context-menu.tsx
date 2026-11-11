@@ -30,7 +30,7 @@ export const useContextMenuContext = useArkMenuContext;
 export const ContextMenu = (props: React.ComponentProps<typeof Menu>) => {
   const { positioning, ...rest } = props;
 
-  return <Menu data-slot="context-menu" {...rest} />;
+  return <Menu data-slot="context-menu" positioning={positioning} {...rest} />;
 };
 
 export const ContextMenuTrigger = (
@@ -109,7 +109,9 @@ export const ContextMenuRadioItem = (
 export const ContextMenuSub = (props: React.ComponentProps<typeof MenuSub>) => {
   const { positioning, ...rest } = props;
 
-  return <MenuSub data-slot="context-menu-sub" {...rest} />;
+  return (
+    <MenuSub data-slot="context-menu-sub" positioning={positioning} {...rest} />
+  );
 };
 
 export const ContextMenuSubContent = (

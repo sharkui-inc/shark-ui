@@ -100,11 +100,11 @@ Use `open` and `onOpenChange` on the root to control the sheet state.
 
 <ComponentPreview componentName="sheet" fileName="example-controlled" />
 
-## Sides
+## Positioning
 
-Control which side the sheet slides in from using the `side` prop.
+Control which side the sheet slides in from using the `placement` prop.
 
-<ComponentPreview componentName="sheet" fileName="example-sides" />
+<ComponentPreview componentName="sheet" fileName="example-positioning" />
 
 ## Variants
 
@@ -124,7 +124,7 @@ Use `variant="inset"` to give the sheet an inset from the screen edge.
 
 Use `SheetBody` to make the content area scrollable while keeping header and footer fixed.
 
-<ComponentPreview componentName="sheet" fileName="example-scroll-area" />
+<ComponentPreview componentName="sheet" fileName="example-scrollable" />
 
 ### No Close Button
 
@@ -132,7 +132,7 @@ Use the `showCloseButton={false}` prop to hide the close button in the top right
 
 <ComponentPreview componentName="sheet" fileName="example-no-close-button" />
 
-### Close behavior
+### Close Behavior
 
 Use `closeOnInteractOutside` and `closeOnEscape` props to prevent closing on outside click and escape.
 
@@ -144,7 +144,7 @@ Use `modal={false}` to allow interaction with elements outside the sheet.
 
 <ComponentPreview componentName="sheet" fileName="example-non-modal" />
 
-### Multiple triggers
+### Multiple Triggers
 
 `value` on each `SheetTrigger`. `onTriggerValueChange` tracks which button opened the sheet.
 
@@ -156,7 +156,7 @@ Nest sheets within one another.
 
 <ComponentPreview componentName="sheet" fileName="example-nested" />
 
-### Custom spacing
+### Custom Spacing
 
 The `[--space:--spacing("value")]` controls the internal spacing.
 

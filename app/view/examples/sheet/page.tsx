@@ -14,9 +14,9 @@ import ExampleMultipleTriggers from "@/registry/react/examples/sheet/example-mul
 import ExampleNested from "@/registry/react/examples/sheet/example-nested";
 import ExampleNoCloseButton from "@/registry/react/examples/sheet/example-no-close-button";
 import ExampleNonModal from "@/registry/react/examples/sheet/example-non-modal";
+import ExamplePositioning from "@/registry/react/examples/sheet/example-positioning";
 import ExampleRtl from "@/registry/react/examples/sheet/example-rtl";
-import ExampleScrollArea from "@/registry/react/examples/sheet/example-scroll-area";
-import ExampleSides from "@/registry/react/examples/sheet/example-sides";
+import ExampleScrollable from "@/registry/react/examples/sheet/example-scrollable";
 import ExampleVariantDefault from "@/registry/react/examples/sheet/example-variant-default";
 
 const SheetExamplePage = () => (
@@ -221,7 +221,7 @@ const SheetExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="non-modal-heading"
           >
-            Non Modal
+            Non-Modal
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleNonModal />
@@ -236,28 +236,31 @@ const SheetExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="scroll-area-heading"
+          aria-labelledby="scrollable-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="scroll-area-heading"
+            id="scrollable-heading"
           >
-            Scroll Area
+            Scrollable
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleScrollArea />
+            <ExampleScrollable />
           </div>
         </section>
         <section
-          aria-labelledby="sides-heading"
+          aria-labelledby="positioning-heading"
           className="flex flex-col gap-5"
         >
-          <h2 className="text-muted-foreground font-medium" id="sides-heading">
-            Sides
+          <h2
+            className="text-muted-foreground font-medium"
+            id="positioning-heading"
+          >
+            Positioning
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleSides />
+            <ExamplePositioning />
           </div>
         </section>
         <section

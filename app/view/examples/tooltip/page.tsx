@@ -3,13 +3,12 @@ import ExampleControlled from "@/registry/react/examples/tooltip/example-control
 import ExampleDefault from "@/registry/react/examples/tooltip/example-default";
 import ExampleDisabledButton from "@/registry/react/examples/tooltip/example-disabled-button";
 import ExampleMultipleTriggers from "@/registry/react/examples/tooltip/example-multiple-triggers";
+import ExamplePositioning from "@/registry/react/examples/tooltip/example-positioning";
 import ExampleRtl from "@/registry/react/examples/tooltip/example-rtl";
-import ExampleSide from "@/registry/react/examples/tooltip/example-side";
 import ExampleWithShortcut from "@/registry/react/examples/tooltip/example-with-shortcut";
 import ExampleWithoutArrow from "@/registry/react/examples/tooltip/example-without-arrow";
 import TooltipDisabled from "./_examples/tooltip-disabled";
 import TooltipKeyboard from "./_examples/tooltip-keyboard";
-import TooltipSides from "./_examples/tooltip-sides";
 
 const TooltipExamplePage = () => (
   <PreviewLocaleProvider>
@@ -79,12 +78,18 @@ const TooltipExamplePage = () => (
             <ExampleRtl />
           </div>
         </section>
-        <section aria-labelledby="side-heading" className="flex flex-col gap-5">
-          <h2 className="text-muted-foreground font-medium" id="side-heading">
-            Side
+        <section
+          aria-labelledby="positioning-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="positioning-heading"
+          >
+            Positioning
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleSide />
+            <ExamplePositioning />
           </div>
         </section>
         <section
@@ -141,20 +146,6 @@ const TooltipExamplePage = () => (
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <TooltipKeyboard />
-          </div>
-        </section>
-        <section
-          aria-labelledby="local-sides-heading"
-          className="flex flex-col gap-5"
-        >
-          <h2
-            className="text-muted-foreground font-medium"
-            id="local-sides-heading"
-          >
-            Sides
-          </h2>
-          <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <TooltipSides />
           </div>
         </section>
       </div>

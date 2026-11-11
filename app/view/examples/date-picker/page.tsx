@@ -5,8 +5,12 @@ import ExampleDefault from "@/registry/react/examples/date-picker/example-defaul
 import ExampleDisabled from "@/registry/react/examples/date-picker/example-disabled";
 import ExampleForm from "@/registry/react/examples/date-picker/example-form";
 import ExampleInvalid from "@/registry/react/examples/date-picker/example-invalid";
+import ExamplePositioning from "@/registry/react/examples/date-picker/example-positioning";
 import ExampleRange from "@/registry/react/examples/date-picker/example-range";
 import ExampleRtl from "@/registry/react/examples/date-picker/example-rtl";
+import ExampleSizeLg from "@/registry/react/examples/date-picker/example-size-lg";
+import ExampleSizeMd from "@/registry/react/examples/date-picker/example-size-md";
+import ExampleSizeSm from "@/registry/react/examples/date-picker/example-size-sm";
 import ExampleWithField from "@/registry/react/examples/date-picker/example-with-field";
 import ExampleWithInput from "@/registry/react/examples/date-picker/example-with-input";
 import ExampleWithPresets from "@/registry/react/examples/date-picker/example-with-presets";
@@ -76,7 +80,7 @@ const DatePickerExamplePage = () => (
         </section>
         <section aria-labelledby="form-heading" className="flex flex-col gap-5">
           <h2 className="text-muted-foreground font-medium" id="form-heading">
-            Form
+            Form Integration
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleForm />
@@ -94,6 +98,62 @@ const DatePickerExamplePage = () => (
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleInvalid />
+          </div>
+        </section>
+        <section
+          aria-labelledby="size-sm-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="size-sm-heading"
+          >
+            Size SM
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleSizeSm />
+          </div>
+        </section>
+        <section
+          aria-labelledby="size-md-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="size-md-heading"
+          >
+            Size MD
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleSizeMd />
+          </div>
+        </section>
+        <section
+          aria-labelledby="size-lg-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="size-lg-heading"
+          >
+            Size LG
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleSizeLg />
+          </div>
+        </section>
+        <section
+          aria-labelledby="positioning-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="positioning-heading"
+          >
+            Positioning
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExamplePositioning />
           </div>
         </section>
         <section

@@ -38,6 +38,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarRail,
 } from "@/registry/react/components/sidebar";
 import { dashboardNavigation, owner } from "../_data/dashboard";
 import { getInitials } from "../_utils/get-initials";
@@ -135,6 +136,7 @@ export const DashboardSidebar = () => {
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarFooter>
+        <SidebarRail />
       </Sidebar>
       <DashboardSettings onOpenChange={setSettingsOpen} open={settingsOpen} />
     </>

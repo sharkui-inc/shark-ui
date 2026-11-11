@@ -13,7 +13,7 @@ import ExampleNoCloseButton from "@/registry/react/examples/dialog/example-no-cl
 import ExampleNonModal from "@/registry/react/examples/dialog/example-non-modal";
 import ExampleOpenFromMenu from "@/registry/react/examples/dialog/example-open-from-menu";
 import ExampleRtl from "@/registry/react/examples/dialog/example-rtl";
-import ExampleScrollArea from "@/registry/react/examples/dialog/example-scroll-area";
+import ExampleScrollable from "@/registry/react/examples/dialog/example-scrollable";
 import ExampleSidebar from "@/registry/react/examples/dialog/example-sidebar";
 import ExampleSize from "@/registry/react/examples/dialog/example-size";
 import ExampleSizeRtl from "@/registry/react/examples/dialog/example-size-rtl";
@@ -183,7 +183,7 @@ const DialogExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="non-modal-heading"
           >
-            Non Modal
+            Non-Modal
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleNonModal />
@@ -212,17 +212,17 @@ const DialogExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="scroll-area-heading"
+          aria-labelledby="scrollable-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="scroll-area-heading"
+            id="scrollable-heading"
           >
-            Scroll Area
+            Scrollable
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleScrollArea />
+            <ExampleScrollable />
           </div>
         </section>
         <section

@@ -76,7 +76,7 @@ Alphas only: `0`, `4`, `8`, `16`, `24`, `32`, `48`, `64`, `80`, `96`, `100` (mod
 
 - kebab-case: `registry/react/components/select.tsx`, `registry/manifest/select.ts`, `content/docs/components/select.mdx`.
 - Examples: `registry/react/examples/<component>/example-<topic>.tsx`. Forms: `registry/react/examples/form/<rhf|tanstack|formisch>/example-<topic>.tsx`.
-- Topics: `default`, `controlled`, `disabled` / `invalid`, `size-sm`, `variant-ghost`.
+- Topics: `default`, `controlled`, `disabled` / `invalid`, `size-sm`, `variant-ghost`, `positioning`, `scrollable`, `form`, `non-modal`, `without-arrow`, `without-backdrop`, `no-close-button`, `with-icon`, `custom-spacing`, `read-only`, `expandable-items`.
 
 ### Example modules
 
@@ -105,6 +105,37 @@ Skip a section that does not apply. API Reference is last; only the Ark UI link 
 A blurb is at most one objective sentence. Skip Ark internals and any default the API table already lists. A self-explanatory heading gets no blurb.
 
 1. Installation → 2. Anatomy → 3. Usage → 4. Controlled → 5. States (`## States`, then `### Disabled` / `### Invalid` …) → 6. Variant axes (`## Size` / `## Variants`, then `###` per value) → 7. Examples → 8. API Reference
+
+Shared example headings use Title Case. MDX headings, `/view/examples` labels, and example slugs must agree (`Positioning` ↔ `example-positioning`). Do not invent synonyms (`Placement`, `Side`/`Sides`, `Hide Arrow`, `Sizes`, `With Scroll`, `Scroll Area`, `Non Modal`, `Hide Backdrop`). Galleries must match MDX headings (including hyphens).
+
+| Concept | Heading | Example slug |
+|--------|---------|--------------|
+| Overlay / edge location | `Positioning` | `example-positioning` (+ `-left` / `-rtl` when needed) |
+| Overflow body | `Scrollable` | `example-scrollable` |
+| Form libraries | `Form Integration` | `example-form` (short form) |
+| Non-modal overlay | `Non-Modal` | `example-non-modal` |
+| Multi-trigger open | `Multiple Triggers` | `example-multiple-triggers` |
+| Close interactions | `Close Behavior` | `example-close-behavior` |
+| Chevron-less control | `Without Trigger` | `example-without-trigger` |
+| Size axis | `Size` (never `Sizes`) | `example-size` / `example-size-*` |
+| Variant axis | `Variants` | `example-variant-*` |
+| Icon added to control | `With Icon` / `With Icons` (plural only when the demo shows multiple) | `example-with-icon(s)` |
+| Icon-only control | `Icon Only` | `example-icon-only` |
+| Multi-icon showcase | `Icons` | `example-icons` |
+| Hide UI chrome | `Without …` (e.g. `Without Arrow`, `Without Backdrop`, `Without Thumb`) | `example-without-*` |
+| Omit dismiss control | `No Close Button` | `example-no-close-button` |
+| Non-dismissible toast | `Not Closable` | keep (distinct from omitting the button) |
+| Show close UI | `Close Button` | `example-close-button` |
+| Action-bar close part | `Close Trigger` | `example-close-trigger` (Ark part name) |
+| Spacing override | `Custom Spacing` | `example-custom-spacing` |
+| Custom size override | `Custom Size` | `example-custom-size` / contextual |
+| Read-only state | `Read-only` | `example-read-only` |
+| Turn off a capability | `Disable …` (e.g. `Disable Resize`) | prefer `example-disabled-*` when already used |
+| Disabled control state | `Disabled` under `## States` | `example-disabled` |
+| Row/item expansion | `Expandable …` | `example-expandable-*` |
+| Collapsible primitive | `Collapsible …` | `example-collapsible-*` (when the part is Collapsible) |
+
+Exceptions (do not rename to `Positioning`): floating-panel `Controlled Position` (x/y coords); hitbox sides / `Individual sides` (hit area). `With Field` is the Field wrapper section — not a synonym of `Form Integration`.
 
 `## Usage` snippets omit `className`, except a utility whose API is the class.
 

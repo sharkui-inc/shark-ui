@@ -118,7 +118,7 @@ const TagsInputExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="disable-editing-heading"
           >
-            Disable Editing
+            Disabled Editing
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleDisableEditing />
@@ -140,7 +140,7 @@ const TagsInputExamplePage = () => (
         </section>
         <section aria-labelledby="form-heading" className="flex flex-col gap-5">
           <h2 className="text-muted-foreground font-medium" id="form-heading">
-            Form
+            Form Integration
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleForm />

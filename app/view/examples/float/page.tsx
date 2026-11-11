@@ -1,7 +1,7 @@
 import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
 import ExampleDefault from "@/registry/react/examples/float/example-default";
-import ExamplePlacement from "@/registry/react/examples/float/example-placement";
-import ExamplePlacementRtl from "@/registry/react/examples/float/example-placement-rtl";
+import ExamplePositioning from "@/registry/react/examples/float/example-positioning";
+import ExamplePositioningRtl from "@/registry/react/examples/float/example-positioning-rtl";
 import ExampleRtl from "@/registry/react/examples/float/example-rtl";
 
 const FloatExamplePage = () => (
@@ -23,31 +23,31 @@ const FloatExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="placement-rtl-heading"
+          aria-labelledby="positioning-rtl-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="placement-rtl-heading"
+            id="positioning-rtl-heading"
           >
-            Placement RTL
+            Positioning RTL
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExamplePlacementRtl />
+            <ExamplePositioningRtl />
           </div>
         </section>
         <section
-          aria-labelledby="placement-heading"
+          aria-labelledby="positioning-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="placement-heading"
+            id="positioning-heading"
           >
-            Placement
+            Positioning
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExamplePlacement />
+            <ExamplePositioning />
           </div>
         </section>
         <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">

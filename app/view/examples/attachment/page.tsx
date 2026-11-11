@@ -6,11 +6,11 @@ import ExampleImage from "@/registry/react/examples/attachment/example-image";
 import ExampleOrientationHorizontal from "@/registry/react/examples/attachment/example-orientation-horizontal";
 import ExampleOrientationVertical from "@/registry/react/examples/attachment/example-orientation-vertical";
 import ExampleRtl from "@/registry/react/examples/attachment/example-rtl";
+import ExampleSize from "@/registry/react/examples/attachment/example-size";
 import ExampleSizeDefault from "@/registry/react/examples/attachment/example-size-default";
 import ExampleSizeLg from "@/registry/react/examples/attachment/example-size-lg";
 import ExampleSizeSm from "@/registry/react/examples/attachment/example-size-sm";
 import ExampleSizeXs from "@/registry/react/examples/attachment/example-size-xs";
-import ExampleSizes from "@/registry/react/examples/attachment/example-sizes";
 import ExampleStateDone from "@/registry/react/examples/attachment/example-state-done";
 import ExampleStateError from "@/registry/react/examples/attachment/example-state-error";
 import ExampleStateIdle from "@/registry/react/examples/attachment/example-state-idle";
@@ -168,15 +168,12 @@ const AttachmentExamplePage = () => (
             <ExampleSizeXs />
           </div>
         </section>
-        <section
-          aria-labelledby="sizes-heading"
-          className="flex flex-col gap-5"
-        >
-          <h2 className="text-muted-foreground font-medium" id="sizes-heading">
-            Sizes
+        <section aria-labelledby="size-heading" className="flex flex-col gap-5">
+          <h2 className="text-muted-foreground font-medium" id="size-heading">
+            Size
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleSizes />
+            <ExampleSize />
           </div>
         </section>
         <section

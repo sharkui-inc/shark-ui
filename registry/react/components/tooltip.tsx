@@ -57,6 +57,7 @@ export const Tooltip = (
       lazyMount={lazyMount}
       openDelay={openDelay}
       positioning={{
+        flip: ["top", "bottom", "left", "right"],
         placement: "top",
         ...positioning,
       }}

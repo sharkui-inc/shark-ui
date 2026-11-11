@@ -36,7 +36,7 @@ export const HeaderBrand = (
   };
 
   return (
-    <ContextMenu>
+    <ContextMenu positioning={{ strategy: "fixed" }}>
       <ContextMenuTrigger
         className={cn(
           "hitbox-2",

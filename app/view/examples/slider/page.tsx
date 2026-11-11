@@ -63,7 +63,7 @@ const SliderExamplePage = () => (
         </section>
         <section aria-labelledby="form-heading" className="flex flex-col gap-5">
           <h2 className="text-muted-foreground font-medium" id="form-heading">
-            Form
+            Form Integration
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleForm />
@@ -102,7 +102,7 @@ const SliderExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="min-max-heading"
           >
-            Min Max
+            Min and Max
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleMinMax />

@@ -121,14 +121,14 @@ const ContextMenuExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="local-sides-heading"
+          aria-labelledby="local-positioning-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="local-sides-heading"
+            id="local-positioning-heading"
           >
-            Sides
+            Positioning
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ContextMenuSides />

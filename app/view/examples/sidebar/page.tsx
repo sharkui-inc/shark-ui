@@ -14,8 +14,8 @@ import ExampleMenuAction from "@/registry/react/examples/sidebar/example-menu-ac
 import ExampleMenuBadge from "@/registry/react/examples/sidebar/example-menu-badge";
 import ExampleMenuSkeleton from "@/registry/react/examples/sidebar/example-menu-skeleton";
 import ExampleMenuSub from "@/registry/react/examples/sidebar/example-menu-sub";
-import ExamplePlacement from "@/registry/react/examples/sidebar/example-placement";
-import ExamplePlacementLeft from "@/registry/react/examples/sidebar/example-placement-left";
+import ExamplePositioning from "@/registry/react/examples/sidebar/example-positioning";
+import ExamplePositioningLeft from "@/registry/react/examples/sidebar/example-positioning-left";
 import ExampleProviderWidth from "@/registry/react/examples/sidebar/example-provider-width";
 import ExampleRail from "@/registry/react/examples/sidebar/example-rail";
 import ExampleState from "@/registry/react/examples/sidebar/example-state";
@@ -231,31 +231,31 @@ const SidebarExamplePage = () => (
         </div>
       </section>
       <section
-        aria-labelledby="placement-left-heading"
+        aria-labelledby="positioning-left-heading"
         className="flex flex-col gap-5 sm:col-span-2"
       >
         <h2
           className="text-muted-foreground font-medium"
-          id="placement-left-heading"
+          id="positioning-left-heading"
         >
-          Placement Left
+          Positioning Left
         </h2>
         <div className="bg-card rounded-3xl border p-6 sm:p-10">
-          <ExamplePlacementLeft />
+          <ExamplePositioningLeft />
         </div>
       </section>
       <section
-        aria-labelledby="placement-heading"
+        aria-labelledby="positioning-heading"
         className="flex flex-col gap-5 sm:col-span-2"
       >
         <h2
           className="text-muted-foreground font-medium"
-          id="placement-heading"
+          id="positioning-heading"
         >
-          Placement
+          Positioning
         </h2>
         <div className="bg-card rounded-3xl border p-6 sm:p-10">
-          <ExamplePlacement />
+          <ExamplePositioning />
         </div>
       </section>
       <section

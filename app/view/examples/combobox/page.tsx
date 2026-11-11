@@ -1,5 +1,5 @@
 import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
-import ExampleAutohighlight from "@/registry/react/examples/combobox/example-autohighlight";
+import ExampleAutoHighlight from "@/registry/react/examples/combobox/example-auto-highlight";
 import ExampleButtonTrigger from "@/registry/react/examples/combobox/example-button-trigger";
 import ExampleControlled from "@/registry/react/examples/combobox/example-controlled";
 import ExampleDefault from "@/registry/react/examples/combobox/example-default";
@@ -10,7 +10,9 @@ import ExampleGroup from "@/registry/react/examples/combobox/example-group";
 import ExampleInvalid from "@/registry/react/examples/combobox/example-invalid";
 import ExampleMultiple from "@/registry/react/examples/combobox/example-multiple";
 import ExamplePopup from "@/registry/react/examples/combobox/example-popup";
+import ExamplePositioning from "@/registry/react/examples/combobox/example-positioning";
 import ExampleRtl from "@/registry/react/examples/combobox/example-rtl";
+import ExampleScrollable from "@/registry/react/examples/combobox/example-scrollable";
 import ExampleSizeLg from "@/registry/react/examples/combobox/example-size-lg";
 import ExampleSizeMd from "@/registry/react/examples/combobox/example-size-md";
 import ExampleSizeSm from "@/registry/react/examples/combobox/example-size-sm";
@@ -19,7 +21,6 @@ import ExampleVariantGhost from "@/registry/react/examples/combobox/example-vari
 import ExampleWithClearButton from "@/registry/react/examples/combobox/example-with-clear-button";
 import ExampleWithDescription from "@/registry/react/examples/combobox/example-with-description";
 import ExampleWithField from "@/registry/react/examples/combobox/example-with-field";
-import ExampleWithScroll from "@/registry/react/examples/combobox/example-with-scroll";
 import ExampleWithStartIcon from "@/registry/react/examples/combobox/example-with-start-icon";
 import ExampleWithoutOpenOnClick from "@/registry/react/examples/combobox/example-without-open-on-click";
 import ExampleWithoutTrigger from "@/registry/react/examples/combobox/example-without-trigger";
@@ -45,17 +46,17 @@ const ComboboxExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="autohighlight-heading"
+          aria-labelledby="auto-highlight-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="autohighlight-heading"
+            id="auto-highlight-heading"
           >
-            Autohighlight
+            Auto Highlight
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleAutohighlight />
+            <ExampleAutoHighlight />
           </div>
         </section>
         <section
@@ -102,7 +103,7 @@ const ComboboxExamplePage = () => (
         </section>
         <section aria-labelledby="form-heading" className="flex flex-col gap-5">
           <h2 className="text-muted-foreground font-medium" id="form-heading">
-            Form
+            Form Integration
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleForm />
@@ -192,6 +193,20 @@ const ComboboxExamplePage = () => (
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSizeLg />
+          </div>
+        </section>
+        <section
+          aria-labelledby="positioning-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="positioning-heading"
+          >
+            Positioning
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExamplePositioning />
           </div>
         </section>
         <section
@@ -293,17 +308,17 @@ const ComboboxExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="with-scroll-heading"
+          aria-labelledby="scrollable-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="with-scroll-heading"
+            id="scrollable-heading"
           >
-            With Scroll
+            Scrollable
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleWithScroll />
+            <ExampleScrollable />
           </div>
         </section>
         <section

@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import {
   Popover,
   PopoverArrow,
+  PopoverPositioner,
   PopoverTrigger,
 } from "@/registry/react/components/popover";
 import { tooltipContentVariants } from "@/registry/react/components/tooltip";
@@ -33,6 +34,7 @@ export const ToggleTooltip = (
       lazyMount={lazyMount}
       modal={modal}
       positioning={{
+        flip: ["top", "bottom", "left", "right"],
         placement: "top",
         ...positioning,
       }}
@@ -61,7 +63,7 @@ export const ToggleTooltipContent = (props: ToggleTooltipContentProps) => {
 
   return (
     <Portal>
-      <ArkPopover.Positioner data-slot="toggle-tooltip-positioner">
+      <PopoverPositioner data-slot="toggle-tooltip-positioner">
         <ArkPopover.Content
           className={cn(tooltipContentVariants(), className)}
           data-slot="toggle-tooltip-content"
@@ -71,7 +73,7 @@ export const ToggleTooltipContent = (props: ToggleTooltipContentProps) => {
 
           {showArrow ? <ToggleTooltipArrow /> : null}
         </ArkPopover.Content>
-      </ArkPopover.Positioner>
+      </PopoverPositioner>
     </Portal>
   );
 };

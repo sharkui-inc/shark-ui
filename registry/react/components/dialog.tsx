@@ -64,7 +64,7 @@ export const DialogTrigger = (
 
 export const dialogOverlayVariants = tv({
   base: [
-    "fixed inset-0 z-[calc(50+var(--layer-index,0))]",
+    "fixed inset-0 z-[calc(var(--z-index,50)-1)]",
     "bg-black/32 backdrop-blur-xs",
     "duration-100 ease-out",
     "peer",
@@ -104,7 +104,7 @@ export const DialogPositioner = (
   return (
     <ArkDialog.Positioner
       className={cn(
-        "fixed inset-0 z-[calc(50+var(--layer-index,0)+1)]",
+        "fixed inset-0 z-[var(--z-index,50)]",
         "h-svh w-screen",
         "grid grid-rows-[1fr_auto_3fr] justify-items-center",
         "p-4",

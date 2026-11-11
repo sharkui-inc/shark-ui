@@ -5,7 +5,6 @@ import ExampleCustomProgress from "@/registry/react/examples/tour/example-custom
 import ExampleCustomSpacing from "@/registry/react/examples/tour/example-custom-spacing";
 import ExampleDefault from "@/registry/react/examples/tour/example-default";
 import ExampleEvents from "@/registry/react/examples/tour/example-events";
-import ExampleHideBackdrop from "@/registry/react/examples/tour/example-hide-backdrop";
 import ExampleKeyboardNavigation from "@/registry/react/examples/tour/example-keyboard-navigation";
 import ExampleRtl from "@/registry/react/examples/tour/example-rtl";
 import ExampleSkip from "@/registry/react/examples/tour/example-skip";
@@ -14,6 +13,7 @@ import ExampleWaitForClick from "@/registry/react/examples/tour/example-wait-for
 import ExampleWaitForElement from "@/registry/react/examples/tour/example-wait-for-element";
 import ExampleWaitForInput from "@/registry/react/examples/tour/example-wait-for-input";
 import ExampleWithoutArrow from "@/registry/react/examples/tour/example-without-arrow";
+import ExampleWithoutBackdrop from "@/registry/react/examples/tour/example-without-backdrop";
 
 const TourExamplePage = () => (
   <PreviewLocaleProvider>
@@ -98,17 +98,17 @@ const TourExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="hide-backdrop-heading"
+          aria-labelledby="without-backdrop-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="hide-backdrop-heading"
+            id="without-backdrop-heading"
           >
-            Hide Backdrop
+            Without Backdrop
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleHideBackdrop />
+            <ExampleWithoutBackdrop />
           </div>
         </section>
         <section

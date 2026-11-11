@@ -36,6 +36,7 @@ export const Combobox: ArkCombobox.RootComponent = (props) => {
     lazyMount = true,
     unmountOnExit = true,
     onInputValueChange,
+    positioning,
     ...rest
   } = props;
 
@@ -54,6 +55,11 @@ export const Combobox: ArkCombobox.RootComponent = (props) => {
         });
       }}
       openOnClick={openOnClick}
+      positioning={{
+        flip: ["bottom", "top", "left", "right"],
+        placement: "bottom",
+        ...positioning,
+      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     />
@@ -354,7 +360,8 @@ export const ComboboxPositioner = (
 
 export const comboboxContentVariants = tv({
   base: [
-    "relative z-[calc(50+var(--layer-index,0))]",
+    "z-[calc(50+var(--layer-index,0))]",
+    "relative",
     "origin-(--transform-origin)",
     "bg-popover",
     "text-popover-foreground",

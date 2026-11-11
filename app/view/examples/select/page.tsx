@@ -10,7 +10,9 @@ import ExampleGrouping from "@/registry/react/examples/select/example-grouping";
 import ExampleInvalid from "@/registry/react/examples/select/example-invalid";
 import ExampleMaxSelection from "@/registry/react/examples/select/example-max-selection";
 import ExampleMultiple from "@/registry/react/examples/select/example-multiple";
+import ExamplePositioning from "@/registry/react/examples/select/example-positioning";
 import ExampleRtl from "@/registry/react/examples/select/example-rtl";
+import ExampleScrollable from "@/registry/react/examples/select/example-scrollable";
 import ExampleSizeLg from "@/registry/react/examples/select/example-size-lg";
 import ExampleSizeMd from "@/registry/react/examples/select/example-size-md";
 import ExampleSizeSm from "@/registry/react/examples/select/example-size-sm";
@@ -19,7 +21,6 @@ import ExampleVariantGhost from "@/registry/react/examples/select/example-varian
 import ExampleWithDescription from "@/registry/react/examples/select/example-with-description";
 import ExampleWithField from "@/registry/react/examples/select/example-with-field";
 import ExampleWithIcon from "@/registry/react/examples/select/example-with-icon";
-import ExampleWithScroll from "@/registry/react/examples/select/example-with-scroll";
 import ExampleWithoutTrigger from "@/registry/react/examples/select/example-without-trigger";
 
 const SelectExamplePage = () => (
@@ -95,7 +96,7 @@ const SelectExamplePage = () => (
         </section>
         <section aria-labelledby="form-heading" className="flex flex-col gap-5">
           <h2 className="text-muted-foreground font-medium" id="form-heading">
-            Form
+            Form Integration
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleForm />
@@ -191,6 +192,20 @@ const SelectExamplePage = () => (
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleSizeLg />
+          </div>
+        </section>
+        <section
+          aria-labelledby="positioning-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="positioning-heading"
+          >
+            Positioning
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExamplePositioning />
           </div>
         </section>
         <section
@@ -292,17 +307,17 @@ const SelectExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="with-scroll-heading"
+          aria-labelledby="scrollable-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="with-scroll-heading"
+            id="scrollable-heading"
           >
-            With Scroll
+            Scrollable
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleWithScroll />
+            <ExampleScrollable />
           </div>
         </section>
         <section

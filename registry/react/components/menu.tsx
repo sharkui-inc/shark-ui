@@ -27,6 +27,7 @@ export const Menu = (props: React.ComponentProps<typeof ArkMenu.Root>) => {
       data-slot="menu"
       lazyMount={lazyMount}
       positioning={{
+        flip: ["bottom", "top", "left", "right"],
         placement: "bottom-end",
         ...positioning,
       }}

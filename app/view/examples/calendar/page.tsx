@@ -5,6 +5,7 @@ import ExampleCustomCellSize from "@/registry/react/examples/calendar/example-cu
 import ExampleDefault from "@/registry/react/examples/calendar/example-default";
 import ExampleFixedWeeks from "@/registry/react/examples/calendar/example-fixed-weeks";
 import ExampleForm from "@/registry/react/examples/calendar/example-form";
+import ExampleInvalid from "@/registry/react/examples/calendar/example-invalid";
 import ExampleMaxSelected from "@/registry/react/examples/calendar/example-max-selected";
 import ExampleMinMax from "@/registry/react/examples/calendar/example-min-max";
 import ExampleMonthYearSelector from "@/registry/react/examples/calendar/example-month-year-selector";
@@ -67,6 +68,20 @@ const CalendarExamplePage = () => (
           </div>
         </section>
         <section
+          aria-labelledby="invalid-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="invalid-heading"
+          >
+            Invalid
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleInvalid />
+          </div>
+        </section>
+        <section
           aria-labelledby="custom-cell-size-heading"
           className="flex flex-col gap-5"
         >
@@ -96,7 +111,7 @@ const CalendarExamplePage = () => (
         </section>
         <section aria-labelledby="form-heading" className="flex flex-col gap-5">
           <h2 className="text-muted-foreground font-medium" id="form-heading">
-            Form
+            Form Integration
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleForm />
@@ -124,7 +139,7 @@ const CalendarExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="min-max-heading"
           >
-            Min Max
+            Min and Max
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleMinMax />

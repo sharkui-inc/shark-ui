@@ -126,7 +126,7 @@ const NavUser = (props: NavUserProps) => {
               <ChevronsUpDownIcon aria-hidden="true" className="ms-auto" />
             </SidebarMenuButton>
           </MenuTrigger>
-          <MenuContent className="w-full sm:w-64">
+          <MenuContent className="w-(--reference-width) min-w-56">
             <MenuList>
               <MenuGroup>
                 <MenuGroupLabel className="p-0 font-normal">

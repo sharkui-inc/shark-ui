@@ -175,9 +175,22 @@ export const HeaderCustomize = () => {
   };
 
   useHotkey({
-    action: () => setCustomizeOpen(!isOpen),
+    action: () => {
+      setIsOpen((open) => {
+        const next = !open;
+        if (next) {
+          loadThemeFontPreviews();
+        }
+        return next;
+      });
+    },
     hotkey: "c",
-    options: { preventDefault: true },
+    options: {
+      // When open, focus sits on RadioGroup hidden <input>s; allow "c" only
+      // then so it still toggles closed without stealing "c" from search inputs.
+      enableOnFormTags: isOpen,
+      preventDefault: true,
+    },
   });
 
   const primaryTone = config.primaryTone ?? DEFAULT_PRIMARY_TONE;

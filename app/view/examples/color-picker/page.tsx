@@ -18,6 +18,7 @@ import ExamplePopoverRtl from "@/registry/react/examples/color-picker/example-po
 import ExamplePopoverSlidersOnly from "@/registry/react/examples/color-picker/example-popover-sliders-only";
 import ExamplePopoverWithChannelEditing from "@/registry/react/examples/color-picker/example-popover-with-channel-editing";
 import ExamplePopoverWithSwatchPicker from "@/registry/react/examples/color-picker/example-popover-with-swatch-picker";
+import ExamplePositioning from "@/registry/react/examples/color-picker/example-positioning";
 import ExampleSliderAlphaChannel from "@/registry/react/examples/color-picker/example-slider-alpha-channel";
 import ExampleSliderControlled from "@/registry/react/examples/color-picker/example-slider-controlled";
 import ExampleSliderDisabled from "@/registry/react/examples/color-picker/example-slider-disabled";
@@ -111,7 +112,7 @@ const ColorPickerExamplePage = () => (
         </section>
         <section aria-labelledby="form-heading" className="flex flex-col gap-5">
           <h2 className="text-muted-foreground font-medium" id="form-heading">
-            Form
+            Form Integration
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleForm />
@@ -241,6 +242,20 @@ const ColorPickerExamplePage = () => (
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExamplePopoverDisabled />
+          </div>
+        </section>
+        <section
+          aria-labelledby="positioning-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="positioning-heading"
+          >
+            Positioning
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExamplePositioning />
           </div>
         </section>
         <section

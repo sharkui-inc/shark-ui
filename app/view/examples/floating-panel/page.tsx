@@ -75,7 +75,7 @@ const FloatingPanelExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="disabled-resize-heading"
           >
-            Disabled Resize
+            Disable Resize
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleDisabledResize />

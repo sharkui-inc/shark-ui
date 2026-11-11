@@ -47,6 +47,7 @@ Pair card, popover, sidebar, code, and feedback surfaces with their matching for
 
 - Use configured `font-sans` and `font-heading` roles. Hanken Grotesk is the interface and display family; JetBrains Mono is for code, commands, file paths, and technical metadata.
 - Establish hierarchy through the configured type scale, weight, leading, and restrained tracking. Do not introduce arbitrary type sizes or a one-off font family.
+- Title ladder: `font-heading` only for Dialog family + Card (`text-xl`). State: sans `text-lg`. Popover: sans `text-base`. Chrome `*Title`: sans `sm`/`xs`. Descriptions: `text-sm text-muted-foreground`. Full table: [DESIGN.md](https://github.com/sharkui-inc/shark-ui/blob/main/DESIGN.md) Typography.
 - Treat `--radius` as the source of truth. Use its derived scale: controls are `rounded-lg` at medium and large sizes, `rounded-md` at small sizes, and cards are one step rounder. Pills are explicit variants.
 - Use `flex` or `grid` with `gap-*`; do not use `space-x-*` or `space-y-*` for component layout.
 - Use the tightest spacing inside controls, a moderate gap inside a related component, and the widest gap between independent regions.

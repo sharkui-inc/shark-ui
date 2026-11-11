@@ -14,9 +14,9 @@ import ExamplePositioning from "@/registry/react/examples/menu/example-positioni
 import ExampleQuickItem from "@/registry/react/examples/menu/example-quick-item";
 import ExampleRadioGroup from "@/registry/react/examples/menu/example-radio-group";
 import ExampleRtl from "@/registry/react/examples/menu/example-rtl";
+import ExampleScrollable from "@/registry/react/examples/menu/example-scrollable";
 import ExampleShortcuts from "@/registry/react/examples/menu/example-shortcuts";
 import ExampleWithDescription from "@/registry/react/examples/menu/example-with-description";
-import ExampleWithScroll from "@/registry/react/examples/menu/example-with-scroll";
 import ExampleWithSeparator from "@/registry/react/examples/menu/example-with-separator";
 import MenuAvatar from "./_examples/menu-avatar";
 import MenuCheckboxes from "./_examples/menu-checkboxes";
@@ -190,7 +190,7 @@ const MenuExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="quick-item-heading"
           >
-            Quick Item
+            Quick Items
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleQuickItem />
@@ -247,17 +247,17 @@ const MenuExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="with-scroll-heading"
+          aria-labelledby="scrollable-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="with-scroll-heading"
+            id="scrollable-heading"
           >
-            With Scroll
+            Scrollable
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleWithScroll />
+            <ExampleScrollable />
           </div>
         </section>
         <section

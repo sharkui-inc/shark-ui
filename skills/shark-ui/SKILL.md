@@ -54,6 +54,7 @@ Never `--overwrite` without an explicit ask. Do not invent CLI flags. Do not han
 - Combobox: `useFilter` + `useListCollection`; filter from `onInputValueChange`.
 - `invalid` on `Field` (it forwards to the control). No manual `id` / `htmlFor` inside Field.
 - Overlays need `DialogTitle` / `SheetTitle` / `DrawerTitle` (`className="sr-only"` if hidden).
+- Title type: `font-heading` only on Dialog family + Card. State, Popover, and chrome `*Title` stay sans. See `DESIGN.md` Title ladder.
 - `TabsTrigger` lives in `TabsList`.
 - No `InputOTPGroup`. One `InputOTPSlot` per character with `index`.
 - Radix `DropdownMenu` is Shark `Menu`.

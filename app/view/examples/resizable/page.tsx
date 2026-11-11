@@ -45,7 +45,7 @@ const ResizableExamplePage = () => (
             className="text-muted-foreground font-medium"
             id="min-max-heading"
           >
-            Min Max
+            Min and Max
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleMinMax />

@@ -7,7 +7,6 @@ import ExamplePositioning from "@/registry/react/examples/hover-card/example-pos
 import ExampleRtl from "@/registry/react/examples/hover-card/example-rtl";
 import ExampleTriggersDelays from "@/registry/react/examples/hover-card/example-triggers-delays";
 import ExampleWithoutArrow from "@/registry/react/examples/hover-card/example-without-arrow";
-import HoverCardSides from "./_examples/hover-card-sides";
 
 const HoverCardExamplePage = () => (
   <PreviewLocaleProvider>
@@ -117,20 +116,6 @@ const HoverCardExamplePage = () => (
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleWithoutArrow />
-          </div>
-        </section>
-        <section
-          aria-labelledby="local-sides-heading"
-          className="flex flex-col gap-5"
-        >
-          <h2
-            className="text-muted-foreground font-medium"
-            id="local-sides-heading"
-          >
-            Sides
-          </h2>
-          <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <HoverCardSides />
           </div>
         </section>
       </div>

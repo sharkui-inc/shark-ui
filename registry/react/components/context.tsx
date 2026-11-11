@@ -58,6 +58,7 @@ export const Context = (props: ContextProps) => {
         data-slot="context"
         modal={modal}
         positioning={{
+          flip: ["top", "bottom", "left", "right"],
           placement: "top",
           ...positioning,
         }}

@@ -14,10 +14,10 @@ const Example = () => (
         <Button variant="outline">Right</Button>
       </SheetTrigger>
       <SheetContent placement="right">
-        <SheetHeader title="Right Placement Sheet" />
+        <SheetHeader title="Right Positioning Sheet" />
         <SheetBody>
           <p className="text-muted-foreground text-sm">
-            This sheet slides in from the right placement.
+            This sheet slides in from the right.
           </p>
         </SheetBody>
       </SheetContent>
@@ -28,10 +28,10 @@ const Example = () => (
         <Button variant="outline">Left</Button>
       </SheetTrigger>
       <SheetContent placement="left">
-        <SheetHeader title="Left Placement Sheet" />
+        <SheetHeader title="Left Positioning Sheet" />
         <SheetBody>
           <p className="text-muted-foreground text-sm">
-            This sheet slides in from the left placement.
+            This sheet slides in from the left.
           </p>
         </SheetBody>
       </SheetContent>
@@ -42,10 +42,10 @@ const Example = () => (
         <Button variant="outline">Top</Button>
       </SheetTrigger>
       <SheetContent placement="top">
-        <SheetHeader title="Top Placement Sheet" />
+        <SheetHeader title="Top Positioning Sheet" />
         <SheetBody>
           <p className="text-muted-foreground text-sm">
-            This sheet slides in from the top placement.
+            This sheet slides in from the top.
           </p>
         </SheetBody>
       </SheetContent>
@@ -56,7 +56,7 @@ const Example = () => (
         <Button variant="outline">Bottom</Button>
       </SheetTrigger>
       <SheetContent placement="bottom">
-        <SheetHeader title="Bottom Placement Sheet" />
+        <SheetHeader title="Bottom Positioning Sheet" />
         <SheetBody>
           <p className="text-muted-foreground text-sm">
             This sheet slides in from the bottom.

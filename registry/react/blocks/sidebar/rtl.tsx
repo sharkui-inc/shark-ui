@@ -64,7 +64,6 @@ import {
   SidebarProvider,
   SidebarRail,
   SidebarTrigger,
-  useSidebar,
 } from "@/registry/react/components/sidebar";
 
 const data = {
@@ -231,7 +230,7 @@ const TeamSwitcher = (props: TeamSwitcherProps) => {
               <ChevronsUpDownIcon className="ms-auto size-4" />
             </SidebarMenuButton>
           </MenuTrigger>
-          <MenuContent className="min-w-56">
+          <MenuContent className="w-(--reference-width) min-w-56">
             <MenuList>
               <MenuGroup>
                 <MenuGroupLabel className="text-muted-foreground text-xs">
@@ -404,14 +403,12 @@ interface NavUserProps {
 const NavUser = (props: NavUserProps) => {
   const { user } = props;
 
-  const { isMobile } = useSidebar();
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <Menu
           positioning={{
-            placement: isMobile ? "bottom-end" : "right-end",
+            placement: "right-end",
           }}
         >
           <MenuTrigger asChild>
@@ -427,7 +424,7 @@ const NavUser = (props: NavUserProps) => {
               <ChevronsUpDownIcon className="ms-auto size-4" />
             </SidebarMenuButton>
           </MenuTrigger>
-          <MenuContent className="w-full sm:w-64">
+          <MenuContent className="w-(--reference-width) min-w-56">
             <MenuList>
               <MenuGroup>
                 <MenuGroupLabel className="p-0 font-normal">

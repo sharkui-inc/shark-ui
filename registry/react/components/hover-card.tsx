@@ -29,6 +29,7 @@ export const HoverCard = (
       lazyMount={lazyMount}
       openDelay={openDelay}
       positioning={{
+        flip: ["top", "bottom", "left", "right"],
         placement: "top",
         ...positioning,
       }}

@@ -116,6 +116,21 @@ Rules:
 
 Hierarchy comes from the configured scale, weight, and leading, not one-off font sizes or decorative mono. Do not add an isolated display family for product UI.
 
+### Title ladder
+
+`font-heading` = region titles only (not every `*Title`). Overlay/Card descriptions: `text-sm text-muted-foreground`.
+
+| Tier | Recipe | Where |
+| --- | --- | --- |
+| A | `font-heading text-xl font-semibold` | Dialog, Sheet, Drawer, AlertDialog, Tour, Card |
+| B | sans `text-lg font-medium tracking-tight` | State |
+| C | sans `text-base font-semibold` | Popover |
+| D | sans `text-sm font-medium` (or inherit) | control / chrome titles |
+| E | sans `text-sm` muted | CodeBlock, Terminal, Queue, ApprovalCardTitle |
+| F | sans `text-xs` muted | ContextTitle |
+
+Do not: Popover=Dialog size/heading; `font-heading` on chrome or State; State at `text-xl`.
+
 ## Layout
 
 - Page container: centered, max `1400px`, `1rem` inline padding. Major bands: `2.5-4rem` vertical padding.

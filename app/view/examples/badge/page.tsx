@@ -265,14 +265,14 @@ const BadgeExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="local-sizes-heading"
+          aria-labelledby="local-size-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="local-sizes-heading"
+            id="local-size-heading"
           >
-            Sizes
+            Size
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <BadgeSizes />

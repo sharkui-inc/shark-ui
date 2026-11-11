@@ -131,7 +131,7 @@ export const DrawerSwipeArea = (
 
 const drawerOverlayVariants = tv({
   base: [
-    "fixed inset-0 z-[calc(50+var(--layer-index,0))]",
+    "fixed inset-0 z-[calc(var(--z-index,50)-1)]",
     "peer",
     "peer-data-[slot=drawer-backdrop]:hidden",
     "bg-[rgb(0_0_0/0.32)] backdrop-blur-[calc(4px*(1-max(0,var(--drawer-swipe-progress,0))))]",
@@ -172,7 +172,7 @@ export const DrawerOverlay = (
 const drawerPositionerVariants = tv({
   base: [
     "[--bleed:--spacing(12)]",
-    "fixed inset-0 z-[calc(50+var(--layer-index,0)+1)]",
+    "fixed inset-0 z-[var(--z-index,50)]",
     "overflow-hidden",
     "w-screen",
     "flex items-end justify-center",
@@ -220,6 +220,7 @@ const drawerContentVariants = tv({
     "[--stack-height:var(--drawer-frontmost-height,var(--drawer-height,0px))]",
     "[--stack-x:0px] [--stack-y:0px]",
     "group/drawer",
+    "z-[calc(50+var(--layer-index,0))]",
     "relative",
     "min-h-0 w-full",
     "flex flex-col",

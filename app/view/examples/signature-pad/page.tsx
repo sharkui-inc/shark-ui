@@ -1,9 +1,10 @@
 import { PreviewLocaleProvider } from "@/hooks/use-preview-locale";
+import ExampleControlled from "@/registry/react/examples/signature-pad/example-controlled";
 import ExampleDefault from "@/registry/react/examples/signature-pad/example-default";
 import ExampleDisabled from "@/registry/react/examples/signature-pad/example-disabled";
 import ExampleForm from "@/registry/react/examples/signature-pad/example-form";
 import ExampleImagePreview from "@/registry/react/examples/signature-pad/example-image-preview";
-import ExampleReadonly from "@/registry/react/examples/signature-pad/example-readonly";
+import ExampleReadOnly from "@/registry/react/examples/signature-pad/example-read-only";
 import ExampleRtl from "@/registry/react/examples/signature-pad/example-rtl";
 import ExampleWithField from "@/registry/react/examples/signature-pad/example-with-field";
 
@@ -26,6 +27,20 @@ const SignaturePadExamplePage = () => (
           </div>
         </section>
         <section
+          aria-labelledby="controlled-heading"
+          className="flex flex-col gap-5"
+        >
+          <h2
+            className="text-muted-foreground font-medium"
+            id="controlled-heading"
+          >
+            Controlled
+          </h2>
+          <div className="bg-card rounded-3xl border p-6 sm:p-10">
+            <ExampleControlled />
+          </div>
+        </section>
+        <section
           aria-labelledby="disabled-heading"
           className="flex flex-col gap-5"
         >
@@ -41,7 +56,7 @@ const SignaturePadExamplePage = () => (
         </section>
         <section aria-labelledby="form-heading" className="flex flex-col gap-5">
           <h2 className="text-muted-foreground font-medium" id="form-heading">
-            Form
+            Form Integration
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
             <ExampleForm />
@@ -62,17 +77,17 @@ const SignaturePadExamplePage = () => (
           </div>
         </section>
         <section
-          aria-labelledby="readonly-heading"
+          aria-labelledby="read-only-heading"
           className="flex flex-col gap-5"
         >
           <h2
             className="text-muted-foreground font-medium"
-            id="readonly-heading"
+            id="read-only-heading"
           >
-            Readonly
+            Read-only
           </h2>
           <div className="bg-card rounded-3xl border p-6 sm:p-10">
-            <ExampleReadonly />
+            <ExampleReadOnly />
           </div>
         </section>
         <section aria-labelledby="rtl-heading" className="flex flex-col gap-5">

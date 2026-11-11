@@ -66,6 +66,7 @@ export const ColorPicker = (props: ColorPickerProps) => {
       lazyMount={lazyMount}
       onValueChange={onValueChange}
       positioning={{
+        flip: ["top", "bottom", "left", "right"],
         placement: "top-start",
         ...positioning,
       }}
@@ -127,8 +128,8 @@ export const ColorPickerContent = (
       <ArkColorPicker.Positioner data-slot="color-picker-positioner">
         <ArkColorPicker.Content
           className={cn(
-            "[--space:--spacing(3)]",
             "z-[calc(50+var(--layer-index,0))]",
+            "[--space:--spacing(3)]",
             "relative",
             "w-full min-w-56",
             "flex flex-col gap-4",

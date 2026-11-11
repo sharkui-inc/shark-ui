@@ -159,19 +159,25 @@ Control input appearance with the `variant` prop on `ComboboxInput`.
 
 <ComponentPreview componentName="combobox" fileName="example-size-lg" />
 
+## Positioning
+
+Control the position of the combobox relative to the trigger using the `positioning` prop.
+
+<ComponentPreview componentName="combobox" fileName="example-positioning" />
+
 ## Examples
 
-### Trigger with search
+### Button Trigger
 
 Use a button trigger to open a searchable list without a chevron indicator.
 
 <ComponentPreview componentName="combobox" fileName="example-button-trigger" />
 
-### Auto highlight
+### Auto Highlight
 
 Automatically highlight the first matching item as the user types.
 
-<ComponentPreview componentName="combobox" fileName="example-autohighlight" />
+<ComponentPreview componentName="combobox" fileName="example-auto-highlight" />
 
 ### Group
 
@@ -181,7 +187,7 @@ Automatically highlight the first matching item as the user types.
 
 Long lists scroll, and the selected option is shown when reopened.
 
-<ComponentPreview componentName="combobox" fileName="example-with-scroll" />
+<ComponentPreview componentName="combobox" fileName="example-scrollable" />
 
 ### Multiple
 
@@ -189,25 +195,25 @@ Use `multiple` to select more than one option.
 
 <ComponentPreview componentName="combobox" fileName="example-multiple" />
 
-### With clear button
+### With Clear Button
 
 Pass `showClear` to `ComboboxInput` to show a clear button.
 
 <ComponentPreview componentName="combobox" fileName="example-with-clear-button" />
 
-### Without trigger
+### Without Trigger
 
 Hide the chevron with `showTrigger={false}`.
 
 <ComponentPreview componentName="combobox" fileName="example-without-trigger" />
 
-### Open on typing
+### Open On Typing
 
 Set `openOnClick={false}` to open the list only when typing or using the trigger.
 
 <ComponentPreview componentName="combobox" fileName="example-without-open-on-click" />
 
-### With start icon
+### With Start Icon
 
 <ComponentPreview componentName="combobox" fileName="example-with-start-icon" />
 
@@ -243,6 +249,7 @@ Root component.
 | `disabled` | `boolean` | `-` |
 | `openOnClick` | `boolean` | `true` |
 | `alwaysSubmitOnEnter` | `boolean` | `-` |
+| `positioning` | `PositioningOptions` | `-` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
 | `className` | `string` | `-` |
