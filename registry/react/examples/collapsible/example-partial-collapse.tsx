@@ -7,7 +7,7 @@ import {
 } from "@/registry/react/components/collapsible";
 
 const Example = () => (
-  <Collapsible className="w-96" collapsedHeight="50px">
+  <Collapsible className="w-full max-w-96" collapsedHeight="50px">
     <CollapsibleTrigger asChild>
       <Button className="w-full" clickEffect={false} variant="outline">
         Read more
@@ -15,7 +15,7 @@ const Example = () => (
       </Button>
     </CollapsibleTrigger>
 
-    <CollapsibleContent className="space-y-2 p-2">
+    <CollapsibleContent className="flex flex-col gap-2 p-2">
       <p className="text-muted-foreground text-sm">
         This is the first paragraph of content. When collapsed, only a portion
         of this content will be visible.

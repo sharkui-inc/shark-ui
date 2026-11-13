@@ -1,16 +1,8 @@
 import { SearchIcon, ShoppingCartIcon } from "lucide-react";
 import type { Metadata } from "next";
-import { createMetadata } from "@/lib/metadata";
-
-export const metadata: Metadata = createMetadata({
-  title: "Ecommerce Template",
-  description:
-    "Online store with product grid, cart, checkout, and product detail pages.",
-  url: "/templates/ecommerce",
-});
-
 import Image from "next/image";
 import Link from "next/link";
+import { createMetadata } from "@/lib/metadata";
 import { Button } from "@/registry/react/components/button";
 import {
   Card,
@@ -21,66 +13,77 @@ import {
 import { Input } from "@/registry/react/components/input";
 import { Separator } from "@/registry/react/components/separator";
 
+export const metadata: Metadata = createMetadata({
+  title: "Ecommerce Template",
+  url: "/templates/ecommerce",
+});
+
 const PRODUCTS = [
   {
     id: "1",
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=eef4e6&scale=1.2&seed=Wireless+Headphones&waveColor=1a6b5c",
     name: "Wireless Headphones",
     price: "$99",
-    image: "/images/placeholder.svg",
   },
   {
     id: "2",
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=Smart+Watch&waveColor=2b6cb0",
     name: "Smart Watch",
     price: "$249",
-    image: "/images/placeholder.svg",
   },
   {
     id: "3",
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f3e8fb&scale=1.2&seed=Portable+Speaker&waveColor=7c3aed",
     name: "Portable Speaker",
     price: "$79",
-    image: "/images/placeholder.svg",
   },
   {
     id: "4",
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf0e4&scale=1.2&seed=USB-C+Hub&waveColor=ea580c",
     name: "USB-C Hub",
     price: "$45",
-    image: "/images/placeholder.svg",
   },
   {
     id: "5",
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=f8e8ee&scale=1.2&seed=Mechanical+Keyboard&waveColor=e11d48",
     name: "Mechanical Keyboard",
     price: "$149",
-    image: "/images/placeholder.svg",
   },
   {
     id: "6",
+    image:
+      "https://api.dicebear.com/10.x/waves/svg?backgroundColor=faf6e0&scale=1.2&seed=Ergonomic+Mouse&waveColor=ca8a04",
     name: "Ergonomic Mouse",
     price: "$59",
-    image: "/images/placeholder.svg",
   },
 ];
 
 const EcommerceTemplate = () => (
   <div className="flex min-h-svh flex-col">
-    <header className="sticky top-0 z-10 border-b bg-background">
+    <header className="bg-background sticky top-0 z-10 border-b">
       <div className="container flex h-16 items-center gap-6">
         <Link className="font-semibold" href="#">
           Store
         </Link>
         <div className="relative max-w-sm flex-1">
           <SearchIcon
-            aria-hidden
-            className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
+            aria-hidden="true"
+            className="text-muted-foreground absolute inset-s-3 top-1/2 size-4 -translate-y-1/2"
           />
           <Input
-            className="pl-9"
+            className="ps-9"
             placeholder="Search products..."
             type="search"
           />
         </div>
         <Button asChild size="icon-md" variant="ghost">
           <Link aria-label="Shopping cart" href="#">
-            <ShoppingCartIcon aria-hidden className="size-5" />
+            <ShoppingCartIcon aria-hidden="true" />
           </Link>
         </Button>
       </div>
@@ -88,8 +91,8 @@ const EcommerceTemplate = () => (
 
     <main className="container flex flex-1 flex-col gap-8 py-8">
       <div>
-        <h1 className="font-bold text-2xl tracking-tight">Products</h1>
-        <p className="mt-1 text-muted-foreground">
+        <h1 className="text-2xl font-bold tracking-tight">Products</h1>
+        <p className="text-muted-foreground mt-1">
           Browse our collection of premium products.
         </p>
       </div>
@@ -112,7 +115,7 @@ const EcommerceTemplate = () => (
             </CardMedia>
             <CardContent className="flex flex-col gap-2 pt-4">
               <h3 className="font-semibold">{product.name}</h3>
-              <span className="font-medium text-primary">{product.price}</span>
+              <span className="text-primary font-medium">{product.price}</span>
             </CardContent>
             <CardFooter className="pt-0">
               <Button asChild className="w-full">

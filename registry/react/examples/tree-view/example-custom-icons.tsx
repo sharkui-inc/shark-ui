@@ -1,6 +1,13 @@
 "use client";
 
-import { FileCodeIcon, FileJsonIcon, FileTextIcon } from "lucide-react";
+import {
+  FileCodeIcon,
+  FileJsonIcon,
+  FileTextIcon,
+  FolderIcon,
+  FolderOpenIcon,
+} from "lucide-react";
+import type React from "react";
 import {
   createFileIcons,
   createTreeCollection,
@@ -14,12 +21,6 @@ import {
   TreeViewTree,
 } from "@/registry/react/components/tree-view";
 
-const fileIcons = createFileIcons({
-  ".tsx": FileCodeIcon,
-  ".json": FileJsonIcon,
-  ".md": FileTextIcon,
-});
-
 const Example = () => (
   <div className="w-full max-w-48">
     <TreeView collection={collection} fileIcons={fileIcons}>
@@ -32,30 +33,36 @@ const Example = () => (
   </div>
 );
 
+const fileIcons = createFileIcons({
+  ".json": FileJsonIcon,
+  ".md": FileTextIcon,
+  ".tsx": FileCodeIcon,
+});
+
 const collection = createTreeCollection({
   rootNode: {
-    id: "ROOT",
-    name: "",
     children: [
       {
-        id: "app",
-        name: "app",
         children: [
           { id: "app/page.tsx", name: "page.tsx" },
           { id: "app/layout.tsx", name: "layout.tsx" },
         ],
+        id: "app",
+        name: "app",
       },
       {
-        id: "components",
-        name: "components",
         children: [
           { id: "components/button.tsx", name: "button.tsx" },
           { id: "components/input.tsx", name: "input.tsx" },
         ],
+        id: "components",
+        name: "components",
       },
       { id: "package.json", name: "package.json" },
       { id: "readme.md", name: "README.md" },
     ],
+    id: "ROOT",
+    name: "",
   },
 });
 
@@ -66,7 +73,13 @@ const TreeNode = (props: React.ComponentProps<typeof TreeViewNode>) => {
     <TreeViewNode indexPath={indexPath} node={node} {...rest}>
       {node.children ? (
         <TreeViewBranch>
-          <TreeViewBranchItem>{node.name}</TreeViewBranchItem>
+          <TreeViewBranchItem
+            expandedIcon={FolderOpenIcon}
+            icon={FolderIcon}
+            showIndicator
+          >
+            {node.name}
+          </TreeViewBranchItem>
 
           <TreeViewBranchContent>
             {node.children.map((child, index) => (

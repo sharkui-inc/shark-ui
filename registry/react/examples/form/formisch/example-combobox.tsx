@@ -8,7 +8,6 @@ import {
   type SubmitHandler,
   useForm,
 } from "@formisch/react";
-import { toast } from "@registry/react/components/toast";
 import * as v from "valibot";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -22,6 +21,7 @@ import {
 import {
   Combobox,
   ComboboxContent,
+  ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
@@ -33,39 +33,29 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/registry/react/components/field";
-
-const formSchema = v.object({
-  department: v.pipe(
-    v.array(v.string()),
-    v.minLength(1, "Select the department that best matches your role."),
-    v.check(
-      (val) => val[0] !== "",
-      "Select the department that best matches your role."
-    )
-  ),
-});
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter } = useListCollection({
-    initialItems,
     filter: contains,
+    initialItems,
   });
 
   const form = useForm({
-    schema: formSchema,
     initialInput: { department: [""] },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "department-submitted",
-      title: "Team preference saved",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "department-submitted",
+      title: "Team preference saved",
     });
   };
 
@@ -82,12 +72,18 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["department"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldLabel>Primary department</FieldLabel>
                   <Combobox
                     collection={collection}
                     onInputValueChange={({ inputValue }) => filter(inputValue)}
-                    onValueChange={(e) => field.onChange(e.value)}
+                    onValueChange={(e) => {
+                      field.onChange(e.value);
+                    }}
                     value={field.input}
                   >
                     <ComboboxInput
@@ -95,6 +91,7 @@ const Example = () => {
                       showClear
                     />
                     <ComboboxContent>
+                      <ComboboxEmpty />
                       <ComboboxList>
                         {collection.items.map((item) => (
                           <ComboboxItem item={item} key={item.value}>
@@ -123,6 +120,17 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  department: v.pipe(
+    v.array(v.string()),
+    v.minLength(1, "Select the department that best matches your role."),
+    v.check(
+      (val) => val[0] !== "",
+      "Select the department that best matches your role."
+    )
+  ),
+});
 
 const initialItems = [
   { label: "Engineering", value: "engineering" },

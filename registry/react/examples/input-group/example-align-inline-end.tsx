@@ -18,7 +18,7 @@ const Example = () => (
     <InputGroup>
       <InputGroupInput placeholder="Enter password" />
       <InputGroupAddon align="inline-end">
-        <EyeIcon aria-hidden />
+        <EyeIcon aria-hidden="true" />
       </InputGroupAddon>
     </InputGroup>
     <FieldDescription>Icon positioned at the end.</FieldDescription>

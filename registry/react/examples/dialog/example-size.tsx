@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/registry/react/components/dialog";
 
-const DialogSizeDemo = () => (
+const Example = () => (
   <div className="grid grid-cols-5 gap-2">
     {sizes.map((size) => (
       <Dialog key={size}>
@@ -51,4 +51,4 @@ const sizes = [
   "fullscreen",
 ] as const;
 
-export default DialogSizeDemo;
+export default Example;

@@ -1,10 +1,16 @@
 ---
 title: Date Picker
 description: Input with a built-in calendar.
+aliases:
+  - Datepicker
+seo:
+  description: Text field plus calendar for choosing dates.
 links:
   doc: https://ark-ui.com/docs/components/date-picker
   api: https://ark-ui.com/docs/components/date-picker#api-reference
 ---
+
+import manifest from "@/registry/manifest/date-picker";
 
 <ComponentPreview componentName="date-picker" />
 
@@ -29,13 +35,13 @@ npx shadcn@latest add @shark/date-picker
 
 <Steps>
 
-<Step>This component depends on [Button](/docs/components/button), [Calendar](/docs/components/calendar), [Input](/docs/components/input), and [Input Group](/docs/components/input-group). Install them first if you haven't already.</Step>
+<Step>This component depends on [Button](/docs/components/button), [Calendar](/docs/components/calendar), [Field](/docs/components/field), [Input](/docs/components/input), and [Input Group](/docs/components/input-group). Install them first if you haven't already.</Step>
+
+<RegistryDependencies registryDependencies={manifest.registryDependencies} />
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -53,9 +59,12 @@ npm install @ark-ui/react lucide-react
 
 ```text
 DatePicker
+├── DatePickerLabel
 ├── DatePickerTrigger
+│   └── DatePickerValue
 └── DatePickerContent
-    ── (Calendar components)
+    ├── CalendarViewControl
+    └── CalendarTable
 ```
 
 ## Usage
@@ -92,25 +101,63 @@ import {
 </DatePicker>
 ```
 
+## Controlled
+
+Control the selected date with `value` and `onValueChange`.
+
+<ComponentPreview componentName="date-picker" fileName="example-controlled" />
+
+## States
+
+### Disabled
+
+<ComponentPreview componentName="date-picker" fileName="example-disabled" />
+
+### Invalid
+
+<ComponentPreview componentName="date-picker" fileName="example-invalid" />
+
+## Size
+
+Control input size with the `size` prop on DatePickerInput.
+
+### Small
+
+<ComponentPreview componentName="date-picker" fileName="example-size-sm" />
+
+### Medium
+
+<ComponentPreview componentName="date-picker" fileName="example-size-md" />
+
+### Large
+
+<ComponentPreview componentName="date-picker" fileName="example-size-lg" />
+
+## Positioning
+
+Control the position of the date picker relative to the trigger using the `positioning` prop.
+
+<ComponentPreview componentName="date-picker" fileName="example-positioning" />
+
 ## Examples
 
-### Input
+### With Field
 
-Use `DatePickerInput` for a text input with calendar icon that opens the date picker.
+Use `DatePickerLabel` inside [Field](/docs/components/field) to name the input.
 
-<ComponentPreview componentName="date-picker" fileName="example-input" />
+<ComponentPreview componentName="date-picker" fileName="example-with-field" />
+
+### With Input
+
+Open the date picker from a text field with `DatePickerInput`.
+
+<ComponentPreview componentName="date-picker" fileName="example-with-input" />
 
 ### Range
 
 Select a date range with `selectionMode="range"`.
 
 <ComponentPreview componentName="date-picker" fileName="example-range" />
-
-### Time
-
-Use `DatePickerTimer` for time selection.
-
-<ComponentPreview componentName="date-picker" fileName="example-time" />
 
 ### With Presets
 
@@ -120,9 +167,19 @@ Add quick single-date presets in a side panel.
 
 ### Custom format
 
-Customize the format of the presets using external date formatting library like `date-fns`.
+Customize the format of the presets using external date formatting library.
 
 <ComponentPreview componentName="date-picker" fileName="example-custom-format" />
+
+### Form Integration
+
+<ComponentPreview componentName="date-picker" fileName="example-form" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="date-picker" />
 
 ## API Reference
 
@@ -132,13 +189,28 @@ Root element. Extends [Calendar](/docs/components/calendar#api-reference).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `DateValue[]` | - |
-| `defaultValue` | `DateValue[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `value` | `DateValue[]` | `-` |
+| `defaultValue` | `DateValue[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `selectionMode` | `"single" \| "range" \| "multiple"` | `"single"` |
+| `createCalendar` | `(identifier: string) => Calendar` | `-` |
+| `showWeekNumbers` | `boolean` | `-` |
+| `maxSelectedDates` | `number` | `-` |
+| `openOnClick` | `boolean` | `-` |
+| `required` | `boolean` | `-` |
+| `disabled` | `boolean` | `-` |
+| `invalid` | `boolean` | `-` |
 | `positioning` | `PositioningOptions` | `{ placement: "top" }` |
-| `lazyMount` | `boolean` | - |
-| `unmountOnExit` | `boolean` | - |
+| `lazyMount` | `boolean` | `true` |
+| `unmountOnExit` | `boolean` | `true` |
+
+### DatePickerLabel
+
+Accessible label. Render as a child of `DatePicker`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
 
 ### DatePickerTrigger
 
@@ -146,8 +218,8 @@ Button that opens the date picker. `button`
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `asChild` | `boolean` | - |
-| `className` | `string` | - |
+| `asChild` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### DatePickerInput
 
@@ -155,43 +227,32 @@ Input with calendar icon that opens the date picker on click. `input`
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `placeholder` | `string` | - |
-| `index` | `number` | - |
-| `size` | `"sm" \| "md" \| "lg"` | - |
-| `className` | `string` | - |
+| `placeholder` | `string` | `-` |
+| `index` | `number` | `-` |
+| `size` | `"sm" \| "md" \| "lg"` | `-` |
+| `className` | `string` | `-` |
 
 ### DatePickerContent
 
-Wraps the calendar. Inherits `--cell-size` from calendar for date cell sizing.
+Wraps the calendar. Sets `--cell-size` for date cell sizing (same default as Calendar).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--cell-size` | `--spacing(8)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--cell-size` | `string` | `--spacing(9)` |
 
 ### DatePickerValue
 
-Displays the selected date(s) as text. Use inside `DatePickerTrigger`. `span`
+Displays the selected date(s) as text.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `placeholder` | `string` | - |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
-
-### DatePickerTimer
-
-Time input for selecting hour and minute. Use alongside the calendar for date-time selection. `input`
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `string` | - |
-| `defaultValue` | `string` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
-| `className` | `string` | - |
+| `placeholder` | `string` | `-` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### DatePickerPresetTrigger
 
@@ -199,10 +260,9 @@ Quick preset button for dates. `button`
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `value` | `DateValue[]` | - |
-| `asChild` | `boolean` | - |
-
+| `className` | `string` | `-` |
+| `value` | `DateValue[]` | `-` |
+| `asChild` | `boolean` | `-` |
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/date-picker#api-reference).

@@ -4,20 +4,20 @@ import { Portal } from "@ark-ui/react";
 import { ark } from "@ark-ui/react/factory";
 import {
   Menu as ArkMenu,
-  type MenuContentProps,
-  useMenuContext,
+  useMenuContext as useArkMenuContext,
 } from "@ark-ui/react/menu";
-import { CheckIcon, ChevronRight } from "lucide-react";
+import { CheckIcon, ChevronRightIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
+import { Separator } from "@/registry/react/components/separator";
 
-export const useMenu = useMenuContext;
+export const useMenuContext = useArkMenuContext;
 
 export const Menu = (props: React.ComponentProps<typeof ArkMenu.Root>) => {
   const {
     lazyMount = true,
-    positioning = { placement: "bottom-end" },
+    positioning,
     unmountOnExit = true,
     ...rest
   } = props;
@@ -26,7 +26,11 @@ export const Menu = (props: React.ComponentProps<typeof ArkMenu.Root>) => {
     <ArkMenu.Root
       data-slot="menu"
       lazyMount={lazyMount}
-      positioning={positioning}
+      positioning={{
+        flip: ["bottom", "top", "left", "right"],
+        placement: "bottom-end",
+        ...positioning,
+      }}
       unmountOnExit={unmountOnExit}
       {...rest}
     />
@@ -44,7 +48,7 @@ export const MenuPositioner = (
 
   return (
     <ArkMenu.Positioner
-      className={cn("outline-none", className)}
+      className={cn("outline-hidden", className)}
       data-slot="menu-positioner"
       {...rest}
     />
@@ -53,28 +57,28 @@ export const MenuPositioner = (
 
 export const menuContentVariants = tv({
   base: [
-    "z-[calc(50+var(--nested-layer-count,0))]",
-    "max-h-(--available-height) not-[class*='w-']:min-w-32",
-    "p-1",
-    "bg-popover",
+    "z-[calc(50+var(--layer-index,0))]",
+    "flex max-h-(--available-height) min-w-40 flex-col",
+    "p-1.5",
+    "bg-popover bg-clip-padding",
     "text-popover-foreground",
-    "rounded-xl border shadow-lg/5",
+    "rounded-xl border shadow-lg/4",
     "origin-(--transform-origin)",
-    "outline-none",
-    "overflow-y-auto",
-    "duration-100",
-    "data-[state=open]:animate-in",
-    "data-[state=open]:fade-in-0",
-    "data-[state=open]:zoom-in-[98%]",
-    "data-[placement=bottom]:slide-in-from-top-2",
-    "data-[placement=left]:slide-in-from-end-2",
-    "data-[placement=right]:slide-in-from-start-2",
-    "data-[placement=top]:slide-in-from-bottom-2",
-    "motion-reduce:animate-none!",
+    "outline-hidden",
+    "duration-100 ease-out",
+    "data-[placement^=bottom]:slide-in-from-top-2",
+    "data-[placement^=top]:slide-in-from-bottom-2",
+    "data-[placement^=left]:slide-in-from-right-2",
+    "data-[placement^=right]:slide-in-from-left-2",
+    "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in",
+    "motion-reduce:animate-none",
+    "motion-reduce:data-[state=open]:animate-none",
   ],
 });
 
-export const MenuContent = (props: MenuContentProps) => {
+export const MenuContent = (
+  props: React.ComponentProps<typeof ArkMenu.Content>
+) => {
   const { className, children, ...rest } = props;
 
   return (
@@ -89,6 +93,24 @@ export const MenuContent = (props: MenuContentProps) => {
         </ArkMenu.Content>
       </MenuPositioner>
     </Portal>
+  );
+};
+
+export const MenuList = (props: React.ComponentProps<typeof ark.div>) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.div
+      className={cn(
+        "min-h-0 flex-1",
+        "flex flex-col",
+        "overflow-x-hidden overflow-y-auto overscroll-y-contain",
+        "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
+        className
+      )}
+      data-slot="menu-list"
+      {...rest}
+    />
   );
 };
 
@@ -118,42 +140,47 @@ export const MenuSeparator = (
   const { className, ...rest } = props;
 
   return (
-    <ArkMenu.Separator
-      className={cn("my-1 h-px bg-border", className)}
-      data-slot="menu-separator"
-      {...rest}
-    />
+    <Separator asChild className={cn("my-1", "border-0", className)}>
+      <ArkMenu.Separator data-slot="menu-separator" {...rest} />
+    </Separator>
   );
 };
 
-const menuItemVariants = tv({
+export const menuItemControlVariants = tv({
   base: [
-    "group/menu-item",
     "relative",
-    "w-full",
-    "px-2.5 py-1.5",
-    "flex items-center gap-2",
-    "select-none text-sm",
+    "min-h-10 w-full md:min-h-8",
+    "flex items-start gap-2",
     "rounded-lg",
-    "outline-hidden",
-    "group-data-[date=open]/trigger-item:bg-accent group-data-[date=open]/trigger-item:text-accent-foreground",
-    "data-disabled:pointer-events-none data-disabled:opacity-64",
-    "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    "px-[calc(--spacing(3)-1px)] py-2 md:py-1.5",
+    "[&_svg:not([data-slot=menu-item-check-icon])]:pointer-events-none [&_svg:not([data-slot=menu-item-check-icon])]:h-lh [&_svg:not([data-slot=menu-item-check-icon])]:w-3.5 [&_svg:not([data-slot=menu-item-check-icon])]:shrink-0",
   ],
-  variants: {
-    variant: {
-      default: [
-        "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
-      ],
-      destructive: [
-        "text-destructive dark:text-destructive-foreground",
-        "data-highlighted:bg-destructive/10 dark:data-highlighted:bg-destructive-foreground/10",
-        "**:[svg]:text-destructive! dark:**:[svg]:text-destructive-foreground!",
-      ],
-    },
-  },
+});
+
+export const menuItemVariants = tv({
+  base: [
+    menuItemControlVariants(),
+    "group/menu-item",
+    "text-base font-medium md:text-sm",
+    "touch-manipulation select-none",
+    "outline-hidden",
+    "data-disabled:pointer-events-none data-disabled:opacity-64",
+  ],
   defaultVariants: {
     variant: "default",
+  },
+  variants: {
+    variant: {
+      default:
+        "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
+      destructive: [
+        "text-destructive",
+        "dark:text-destructive-foreground",
+        "data-highlighted:bg-destructive/8",
+        "dark:data-highlighted:bg-destructive-foreground/8",
+        "**:[svg]:text-destructive dark:**:[svg]:text-destructive-foreground",
+      ],
+    },
   },
 });
 
@@ -162,13 +189,15 @@ interface MenuItemProps
     VariantProps<typeof menuItemVariants> {}
 
 export const MenuItem = (props: MenuItemProps) => {
-  const { variant = "default", className, ...rest } = props;
+  const { variant = "default", tabIndex = -1, className, ...rest } = props;
 
   return (
     <ArkMenu.Item
       className={cn(menuItemVariants({ variant }), className)}
+      data-slot="menu-item"
       data-variant={variant}
       {...rest}
+      tabIndex={tabIndex}
     />
   );
 };
@@ -180,8 +209,8 @@ export const MenuQuickItem = (props: MenuItemProps) => {
     <ArkMenu.Item
       className={cn(
         menuItemVariants({ variant }),
-        "flex-col gap-1",
-        "[&_svg:not([class*='size-'])]:size-4.5",
+        "flex-col gap-1 py-2.5",
+        "[&_svg]:size-4.5",
         className
       )}
       {...rest}
@@ -189,33 +218,103 @@ export const MenuQuickItem = (props: MenuItemProps) => {
   );
 };
 
+export const menuItemDescriptionVariants = tv({
+  base: "text-muted-foreground text-xs",
+});
+
+export const MenuItemDescription = (
+  props: React.ComponentProps<typeof ark.span>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ark.span
+      className={cn(menuItemDescriptionVariants(), className)}
+      data-slot="menu-item-description"
+      {...rest}
+    />
+  );
+};
+
+export const menuItemIndicatorVariants = tv({
+  slots: {
+    indicator: [
+      "pointer-events-none",
+      "absolute inset-e-2 top-1.5",
+      "h-lh w-4 shrink-0 md:w-3.5",
+      "flex items-center justify-center",
+      "[&_svg]:text-foreground",
+    ],
+    item: "pe-8",
+  },
+});
+
 export const MenuCheckboxItem = (
   props: React.ComponentProps<typeof ArkMenu.CheckboxItem>
 ) => {
   const { className, children, ...rest } = props;
 
+  const { item, indicator } = menuItemIndicatorVariants();
+
   return (
     <ArkMenu.CheckboxItem
       className={cn(
         menuItemVariants({ variant: "default" }),
-        "ps-8",
-        className
+        className,
+        item()
       )}
       {...rest}
     >
-      <ArkMenu.ItemIndicator
-        className={cn(
-          "absolute inset-s-2",
-          "size-3.5",
-          "flex items-center justify-center",
-          "pointer-events-none"
-        )}
-      >
-        <CheckIcon />
+      <ArkMenu.ItemIndicator className={indicator()}>
+        <CheckIcon
+          aria-hidden="true"
+          className="size-4 md:size-3.5"
+          data-slot="menu-item-check-icon"
+        />
       </ArkMenu.ItemIndicator>
 
-      <ArkMenu.ItemText>{children}</ArkMenu.ItemText>
+      <ArkMenu.ItemText
+        className={cn("min-w-0 flex-1", "flex items-start gap-2")}
+        data-slot="menu-checkbox-item-text"
+      >
+        {children}
+      </ArkMenu.ItemText>
     </ArkMenu.CheckboxItem>
+  );
+};
+
+export const MenuRadioItem = (
+  props: React.ComponentProps<typeof ArkMenu.RadioItem>
+) => {
+  const { className, children, ...rest } = props;
+
+  const { item, indicator } = menuItemIndicatorVariants();
+
+  return (
+    <ArkMenu.RadioItem
+      className={cn(
+        menuItemVariants({ variant: "default" }),
+        className,
+        item()
+      )}
+      data-slot="menu-radio-item"
+      {...rest}
+    >
+      <ArkMenu.ItemIndicator className={indicator()}>
+        <CheckIcon
+          aria-hidden="true"
+          className="size-4 md:size-3.5"
+          data-slot="menu-item-check-icon"
+        />
+      </ArkMenu.ItemIndicator>
+
+      <ArkMenu.ItemText
+        className={cn("min-w-0 flex-1", "flex items-start gap-2")}
+        data-slot="menu-radio-item-text"
+      >
+        {children}
+      </ArkMenu.ItemText>
+    </ArkMenu.RadioItem>
   );
 };
 
@@ -239,6 +338,14 @@ export const MenuRadioGroup = (props: MenuRadioGroupProps) => {
   );
 };
 
+export const menuGroupLabelVariants = tv({
+  base: [
+    "px-2 py-1.5",
+    "text-muted-foreground text-xs font-medium",
+    "pointer-events-none",
+  ],
+});
+
 export const MenuGroupLabel = (
   props: React.ComponentProps<typeof ArkMenu.ItemGroupLabel>
 ) => {
@@ -246,52 +353,33 @@ export const MenuGroupLabel = (
 
   return (
     <ArkMenu.ItemGroupLabel
-      className={cn(
-        "px-2 py-1.5",
-        "font-medium text-muted-foreground text-sm",
-        "pointer-events-none",
-        className
-      )}
+      className={cn(menuGroupLabelVariants(), className)}
       data-slot="menu-group-label"
       {...rest}
     />
   );
 };
 
-export const MenuRadioItem = (
-  props: React.ComponentProps<typeof ArkMenu.RadioItem>
-) => {
-  const { className, children, ...rest } = props;
+export const MenuSub = (props: React.ComponentProps<typeof Menu>) => {
+  const { positioning, ...rest } = props;
 
   return (
-    <ArkMenu.RadioItem
-      className={cn(
-        menuItemVariants({ variant: "default" }),
-        "ps-8",
-        className
-      )}
-      data-slot="menu-radio-item"
+    <Menu
+      data-slot="menu-sub"
+      positioning={{
+        flip: ["right", "left", "bottom", "top"],
+        placement: "right-start",
+        ...positioning,
+      }}
       {...rest}
-    >
-      <ArkMenu.ItemIndicator className="pointer-events-none absolute inset-s-2 flex size-3.5 items-center justify-center">
-        <CheckIcon />
-      </ArkMenu.ItemIndicator>
-
-      <ArkMenu.ItemText data-slot="menu-radio-item-text">
-        {children}
-      </ArkMenu.ItemText>
-    </ArkMenu.RadioItem>
+    />
   );
 };
-
-export const MenuSub = (props: React.ComponentProps<typeof Menu>) => (
-  <Menu data-slot="menu-sub" {...props} />
-);
 
 export const MenuSubContent = (
   props: React.ComponentProps<typeof ArkMenu.Content>
 ) => {
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <Portal>
@@ -300,7 +388,9 @@ export const MenuSubContent = (
           className={cn(menuContentVariants(), className)}
           data-slot="menu-sub-content"
           {...rest}
-        />
+        >
+          {children}
+        </ArkMenu.Content>
       </MenuPositioner>
     </Portal>
   );
@@ -313,54 +403,48 @@ export const MenuSubTrigger = (
 
   return (
     <ArkMenu.TriggerItem
-      className={cn(menuItemVariants({ variant: "default" }), className)}
+      className={cn(
+        menuItemVariants({ variant: "default" }),
+        "data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
+        className
+      )}
       data-slot="menu-sub-trigger"
       {...rest}
     >
       {children}
 
       <MenuShortcut>
-        <ChevronRight />
+        <ChevronRightIcon
+          aria-hidden="true"
+          className={cn("size-3.5", "rtl:rotate-180")}
+        />
       </MenuShortcut>
     </ArkMenu.TriggerItem>
   );
 };
 
 export const MenuShortcut = (props: React.ComponentProps<typeof ark.span>) => {
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ark.span
       className={cn(
-        "ms-auto rtl:me-auto",
-        "text-muted-foreground text-xs tracking-widest",
-        "group-data-highlighted/menu-item:group-data-[variant=destructive]/menu-item:text-destructive dark:group-data-highlighted/menu-item:group-data-[variant=destructive]/menu-item:text-destructive-foreground",
+        "ms-auto self-center",
+        "text-muted-foreground text-xs font-medium tracking-widest",
+        "group-data-highlighted/menu-item:group-data-[variant=destructive]/menu-item:text-destructive",
+        "dark:group-data-highlighted/menu-item:group-data-[variant=destructive]/menu-item:text-destructive-foreground",
         className
       )}
       data-slot="menu-shortcut"
       {...rest}
-    />
-  );
-};
-
-export const MenuArrow = (
-  props: React.ComponentProps<typeof ArkMenu.Arrow>
-) => {
-  const { style, ...rest } = props;
-
-  return (
-    <ArkMenu.Arrow
-      style={
-        {
-          "--arrow-background": "var(--popover)",
-          "--arrow-size": "calc(1.5 * var(--spacing))",
-          ...style,
-          left: "20px",
-        } as React.CSSProperties
-      }
-      {...rest}
     >
-      <ArkMenu.ArrowTip className="border-s border-t" />
-    </ArkMenu.Arrow>
+      <span dir="ltr" style={{ unicodeBidi: "isolate" }}>
+        {children}
+      </span>
+    </ark.span>
   );
 };
+
+export const menuEmptyVariants = tv({
+  base: ["px-2 py-1.5", "text-muted-foreground text-center text-sm"],
+});

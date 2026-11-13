@@ -16,7 +16,7 @@ import {
 
 const Example = () => (
   <InputGroup className="max-w-64">
-    <InputGroupInput placeholder="John Doe" />
+    <InputGroupInput aria-label="Username" placeholder="John Doe" />
     <InputGroupAddon align="block-start">
       <FieldLabel>Username</FieldLabel>
 
@@ -28,7 +28,7 @@ const Example = () => (
             size="icon-xs"
             variant="ghost"
           >
-            <InfoIcon aria-hidden />
+            <InfoIcon aria-hidden="true" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>Enter a username for your account</TooltipContent>

@@ -1,4 +1,4 @@
-import { ShieldAlert } from "lucide-react";
+import { ShieldAlertIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   Item,
@@ -12,7 +12,7 @@ import {
 const Example = () => (
   <Item className="w-full max-w-md" variant="outline">
     <ItemMedia variant="icon">
-      <ShieldAlert />
+      <ShieldAlertIcon />
     </ItemMedia>
     <ItemContent>
       <ItemTitle>Security Alert</ItemTitle>

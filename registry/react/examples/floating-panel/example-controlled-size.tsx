@@ -18,7 +18,7 @@ import {
 } from "@/registry/react/components/floating-panel";
 
 const Example = () => {
-  const [size, setSize] = React.useState({ width: 360, height: 200 });
+  const [size, setSize] = React.useState({ height: 200, width: 360 });
 
   return (
     <FloatingPanel
@@ -38,12 +38,12 @@ const Example = () => {
             <FloatingPanelRestore />
             <FloatingPanelCloseTrigger asChild>
               <Button aria-label="Close" size="icon-sm">
-                <XIcon aria-hidden />
+                <XIcon aria-hidden="true" />
               </Button>
             </FloatingPanelCloseTrigger>
           </FloatingPanelControl>
         </FloatingPanelHeader>
-        <FloatingPanelBody className="text-center text-muted-foreground text-sm">
+        <FloatingPanelBody className="text-muted-foreground text-center text-sm">
           <p>
             Size: {size.width} × {size.height}.
           </p>
@@ -56,8 +56,8 @@ const Example = () => {
               onClick={() =>
                 setSize((prev) => ({
                   ...prev,
-                  width: prev.width - 50,
                   height: prev.height - 40,
+                  width: prev.width - 50,
                 }))
               }
               variant="outline"
@@ -69,8 +69,8 @@ const Example = () => {
               onClick={() =>
                 setSize((prev) => ({
                   ...prev,
-                  width: prev.width + 50,
                   height: prev.height + 40,
+                  width: prev.width + 50,
                 }))
               }
               variant="outline"

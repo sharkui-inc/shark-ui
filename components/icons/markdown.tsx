@@ -1,3 +1,4 @@
+import type React from "react";
 export const MarkdownIcon = (props: React.ComponentProps<"svg">) => (
   <svg fill="currentColor" viewBox="0 0 22 16" {...props} aria-hidden="true">
     <path

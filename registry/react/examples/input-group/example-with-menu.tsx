@@ -11,12 +11,13 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
 const Example = () => (
   <InputGroup className="max-w-64">
-    <InputGroupInput placeholder="Select file..." />
+    <InputGroupInput aria-label="File" placeholder="Select file..." />
     <InputGroupAddon align="inline-end">
       <Menu>
         <MenuTrigger asChild>
@@ -25,22 +26,24 @@ const Example = () => (
             size="icon-xs"
             variant="ghost"
           >
-            <EllipsisIcon aria-hidden />
+            <EllipsisIcon aria-hidden="true" />
           </InputGroupButton>
         </MenuTrigger>
-        <MenuContent className="w-48">
-          <MenuItem value="file">
-            <FileIcon />
-            Select file
-          </MenuItem>
-          <MenuItem value="folder">
-            <FolderIcon />
-            Select folder
-          </MenuItem>
-          <MenuItem value="copy-path">
-            <CopyIcon />
-            Copy path
-          </MenuItem>
+        <MenuContent className="min-w-48">
+          <MenuList>
+            <MenuItem value="file">
+              <FileIcon />
+              Select file
+            </MenuItem>
+            <MenuItem value="folder">
+              <FolderIcon />
+              Select folder
+            </MenuItem>
+            <MenuItem value="copy-path">
+              <CopyIcon />
+              Copy path
+            </MenuItem>
+          </MenuList>
         </MenuContent>
       </Menu>
     </InputGroupAddon>

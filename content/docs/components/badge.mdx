@@ -1,7 +1,13 @@
 ---
 title: Badge
 description: A badge or an element styled as a badge.
+aliases:
+  - Chip
+seo:
+  description: Small chips for labels, counts, and status.
 ---
+
+import manifest from "@/registry/manifest/badge";
 
 <ComponentPreview componentName="badge" />
 
@@ -28,11 +34,9 @@ npx shadcn@latest add @shark/badge
 
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
-<Step>Import the following variables into your CSS file</Step>
+<Step>Import the following variables into your CSS file:</Step>
 
 <CodeCollapsibleWrapper>
 ```css
@@ -47,10 +51,10 @@ npm install @ark-ui/react tailwind-variants
 }
 
 :root {
-  --destructive-foreground: var(--color-red-700);
+  --destructive-foreground: var(--color-red-800);
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-700);
-  --success: var(--color-emerald-500);
+  --success: var(--color-emerald-600);
   --success-foreground: var(--color-emerald-700);
   --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-700);
@@ -60,7 +64,7 @@ npm install @ark-ui/react tailwind-variants
   --destructive-foreground: var(--color-red-400);
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-400);
-  --success: var(--color-emerald-500);
+  --success: var(--color-emerald-600);
   --success-foreground: var(--color-emerald-400);
   --warning: var(--color-amber-500);
   --warning-foreground: var(--color-amber-400);
@@ -120,7 +124,7 @@ import { Badge } from "@/components/ui/badge";
 
 <ComponentPreview componentName="badge" fileName="example-variant-destructive" />
 
-## Sizes
+## Size
 
 The `size` prop controls the badge dimensions.
 
@@ -142,25 +146,54 @@ The `pill` prop creates fully rounded badges.
 
 <ComponentPreview componentName="badge" fileName="example-pill" />
 
+## Icons
+
+Mark inline icons with `data-icon` so they follow the reading direction.
+
+```tsx
+import { CheckIcon, StarIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+
+<Badge>
+  <StarIcon data-icon="inline-start" />
+  Favorite
+</Badge>
+
+<Badge>
+  Verified
+  <CheckIcon data-icon="inline-end" />
+</Badge>
+```
+
 ## Examples
 
-### With link
+### With Link
 
 The `asChild` prop renders another element with badge styling.
 
 <ComponentPreview componentName="badge" fileName="example-with-link" />
 
-### With icon
+### With Icon
 
 <ComponentPreview componentName="badge" fileName="example-with-icon" />
 
-### With spinner
+### With Spinner
 
 <ComponentPreview componentName="badge" fileName="example-with-spinner" />
 
-### Custom color
+### With Status
+
+<ComponentPreview componentName="badge" fileName="example-with-status" />
+
+### Custom Color
 
 <ComponentPreview componentName="badge" fileName="example-custom-color" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="badge" />
 
 ## API Reference
 
@@ -168,9 +201,10 @@ The `asChild` prop renders another element with badge styling.
 
 Label, count, or status badge. Supports variants.
 
-| Prop | Type | Default | 
-| --- | --- | --- | 
+| Prop | Type | Default |
+| --- | --- | --- |
 | `variant` | `"default" \| "secondary" \| "outline" \| "success" \| "info" \| "warning" \| "destructive"` | `"default"` |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
-| `className` | `string` | `-` | 
+| `pill` | `boolean` | `false` |
+| `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |

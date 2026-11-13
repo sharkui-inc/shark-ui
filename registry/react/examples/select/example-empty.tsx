@@ -5,17 +5,20 @@ import {
   Select,
   SelectContent,
   SelectEmpty,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
 
 const Example = () => (
   <Select collection={collection}>
-    <SelectTrigger className="w-48">
+    <SelectTrigger aria-label="Select an option" className="min-w-48">
       <SelectValue placeholder="Select an option" />
     </SelectTrigger>
     <SelectContent>
-      <SelectEmpty>No items to display</SelectEmpty>
+      <SelectList>
+        <SelectEmpty>No items to display</SelectEmpty>
+      </SelectList>
     </SelectContent>
   </Select>
 );

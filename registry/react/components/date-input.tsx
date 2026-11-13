@@ -2,12 +2,12 @@
 
 import {
   DateInput as ArkDateInput,
-  useDateInput as useArkDateInput,
   useDateInputContext as useArkDateInputContext,
 } from "@ark-ui/react/date-input";
 import { XIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 import type { InputProps } from "@/registry/react/components/input";
 import {
   InputGroup,
@@ -16,7 +16,6 @@ import {
   type InputGroupProps,
 } from "@/registry/react/components/input-group";
 
-export const useDateInput = useArkDateInput;
 export const useDateInputContext = useArkDateInputContext;
 
 interface DateInputProps
@@ -55,6 +54,7 @@ export const DateInput = (props: DateInputProps) => {
     shouldForceLeadingZeros = true,
     separator = "-",
     className,
+    children,
     ...rest
   } = props;
 
@@ -62,7 +62,8 @@ export const DateInput = (props: DateInputProps) => {
     <ArkDateInput.Root
       className={cn(
         "group/date-input",
-        "flex w-full flex-col items-start gap-2",
+        "w-full",
+        "flex flex-col items-start gap-2",
         className
       )}
       data-size={size}
@@ -71,13 +72,18 @@ export const DateInput = (props: DateInputProps) => {
       shouldForceLeadingZeros={shouldForceLeadingZeros}
       {...rest}
     >
+      {children}
       <DateInputControl showClear={showClear} size={size}>
         <DateInputSegmentGroup index={0} />
         {selectionMode === "range" && (
           <>
             <span
-              aria-hidden
-              className="pointer-events-none select-none text-muted-foreground [&_svg]:size-3 [&_svg]:shrink-0"
+              aria-hidden="true"
+              className={cn(
+                "text-muted-foreground",
+                "pointer-events-none select-none",
+                "[&_svg]:size-3 [&_svg]:shrink-0"
+              )}
             >
               {separator}
             </span>
@@ -93,6 +99,21 @@ export const DateInput = (props: DateInputProps) => {
   );
 };
 
+export const DateInputLabel = (
+  props: React.ComponentProps<typeof ArkDateInput.Label>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
+    <ArkDateInput.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="date-input-label"
+      {...rest}
+    />
+  );
+};
+
 const DateInputControl = (props: DateInputControlProps) => {
   const { size = "md", showClear, children } = props;
 
@@ -103,18 +124,30 @@ const DateInputControl = (props: DateInputControlProps) => {
     <ArkDateInput.Control asChild data-slot="date-input-control">
       <InputGroup
         className={cn(
-          "px-3",
-          "data-disabled:pointer-events-none data-disabled:opacity-64",
-          "has-data-[slot=date-input-clear]:pr-0"
+          "has-focus-visible:border-ring/64 has-focus-visible:ring-ring/24 has-focus-visible:ring-2",
+          "data-disabled:pointer-events-none data-disabled:opacity-64"
         )}
+        onMouseDown={(event) => {
+          if (
+            dateInput.disabled ||
+            (event.target as HTMLElement).closest(
+              "[data-slot=date-input-segment][data-editable], button, a, [role=button]"
+            )
+          ) {
+            return;
+          }
+          event.preventDefault();
+          dateInput.focus();
+        }}
         size={size}
       >
         <div
           aria-invalid={dateInput.invalid || undefined}
           className={cn(
             "min-w-0",
-            "flex flex-1 items-center gap-2",
-            "text-base md:text-sm"
+            "flex-1",
+            "flex items-center gap-2",
+            "text-base font-normal md:text-sm"
           )}
           data-slot="date-input-field"
         >
@@ -129,7 +162,7 @@ const DateInputControl = (props: DateInputControlProps) => {
               size="icon-xs"
               variant="ghost"
             >
-              <XIcon aria-hidden />
+              <XIcon aria-hidden="true" />
             </InputGroupButton>
           </InputGroupAddon>
         )}
@@ -145,7 +178,7 @@ const DateInputSegmentGroup = (
 
   return (
     <ArkDateInput.SegmentGroup
-      className={cn("flex min-w-0 grow items-center gap-px", className)}
+      className={cn("min-w-0", "flex items-center gap-px", className)}
       data-slot="date-input-segment-group"
       index={index}
       {...rest}
@@ -165,18 +198,20 @@ const DateInputSegment = (
   return (
     <ArkDateInput.Segment
       className={cn(
+        "not-data-[type=literal]:inline-flex not-data-[type=literal]:min-h-6 not-data-[type=literal]:min-w-6 not-data-[type=literal]:items-center not-data-[type=literal]:justify-center",
         "tabular-nums",
         "rounded-sm border-0 shadow-none ring-0",
         "not-data-[type=literal]:px-0.5",
         "not-data-[type=literal]:focus:bg-primary not-data-[type=literal]:focus:text-primary-foreground",
-        "data-[type=literal]:select-none data-[type=literal]:px-px data-[type=literal]:text-muted-foreground/64",
-        "data-placeholder-shown:text-muted-foreground/64",
-        "outline-none",
+        "data-[type=literal]:text-muted-foreground data-[type=literal]:px-px data-[type=literal]:select-none",
+        "data-placeholder-shown:text-muted-foreground",
+        "outline-hidden",
         "data-readonly:cursor-default",
-        "group-aria-invalid/date-input:text-destructive group-data-invalid/date-input:text-destructive",
+        "group-aria-invalid/date-input:text-destructive",
+        "group-data-invalid/date-input:text-destructive",
         "not-data-[type=literal]:focus:group-data-invalid/date-input:bg-destructive not-data-[type=literal]:focus:group-data-invalid/date-input:text-white",
         "dark:group-data-invalid/date-input:text-destructive-foreground dark:group-aria-invalid/date-input:text-destructive-foreground",
-        "dark:not-data-[type=literal]:focus:group-data-invalid/date-input:bg-destructive-foreground dark:not-data-[type=literal]:focus:group-data-invalid/date-input:text-white",
+        "dark:not-data-[type=literal]:focus:group-data-invalid/date-input:bg-destructive-foreground",
         className
       )}
       data-slot="date-input-segment"

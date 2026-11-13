@@ -4,10 +4,20 @@ import { ButtonGroup } from "@/registry/react/components/button-group";
 
 const Example = () => (
   <ButtonGroup orientation="vertical">
-    <Button clickEffect={false} size="icon-md" variant="outline">
+    <Button
+      aria-label="Increase value"
+      clickEffect={false}
+      size="icon-md"
+      variant="outline"
+    >
       <PlusIcon />
     </Button>
-    <Button clickEffect={false} size="icon-md" variant="outline">
+    <Button
+      aria-label="Decrease value"
+      clickEffect={false}
+      size="icon-md"
+      variant="outline"
+    >
       <MinusIcon />
     </Button>
   </ButtonGroup>

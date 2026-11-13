@@ -12,7 +12,10 @@ const Example = () => {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <ToggleGroup onValueChange={({ value }) => setValue(value)} value={value}>
+      <ToggleGroup
+        onValueChange={({ value: nextValue }) => setValue(nextValue)}
+        value={value}
+      >
         <ToggleGroupItem aria-label="Toggle bold" value="bold">
           <BoldIcon />
         </ToggleGroupItem>
@@ -24,7 +27,7 @@ const Example = () => {
         </ToggleGroupItem>
       </ToggleGroup>
 
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         {value.length > 0 ? value.join(", ") : "None"}
       </p>
     </div>

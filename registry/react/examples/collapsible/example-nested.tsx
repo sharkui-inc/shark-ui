@@ -13,7 +13,7 @@ import {
 } from "@/registry/react/components/collapsible";
 
 const Example = () => (
-  <Card className="w-80">
+  <Card className="w-full max-w-80 [--space:--spacing(6)]">
     <CardHeader
       description="We'll help you get started"
       title="Getting started"
@@ -46,7 +46,7 @@ const Example = () => (
                 Copy the following code:
               </p>
 
-              <pre className="relative rounded-md bg-muted p-2 text-muted-foreground text-xs">
+              <pre className="bg-muted text-muted-foreground relative rounded-md p-2 text-xs">
                 <code>npm install @shark-ui</code>
 
                 <CopyButton

@@ -1,12 +1,11 @@
 "use client";
 
-import { Trash2Icon } from "lucide-react";
+import { CloudUploadIcon, Trash2Icon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   FileUpload,
   FileUploadClearTrigger,
   FileUploadDropzone,
-  FileUploadDropzoneIcon,
   FileUploadList,
   FileUploadTitle,
 } from "@/registry/react/components/file-upload";
@@ -19,7 +18,11 @@ const Example = () => (
       </Button>
     </FileUploadClearTrigger>
     <FileUploadDropzone className="w-full">
-      <FileUploadDropzoneIcon />
+      <CloudUploadIcon
+        aria-hidden="true"
+        className="text-muted-foreground group-data-dragging/file-upload:text-primary size-8"
+        strokeWidth={1.5}
+      />
       <FileUploadTitle>Drop files here</FileUploadTitle>
     </FileUploadDropzone>
     <FileUploadList />

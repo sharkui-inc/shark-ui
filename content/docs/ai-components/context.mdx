@@ -1,0 +1,358 @@
+---
+title: Context
+description: Context-window token usage, breakdown, and cost.
+aliases:
+  - Token usage
+seo:
+  description: Show context-window token usage, breakdown, and cost.
+---
+
+import manifest from "@/registry/manifest/context";
+
+<ComponentPreview componentName="context" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/context
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>This component depends on [Popover](/docs/components/popover), [Circular Progress](/docs/components/circular-progress), and [Format](/docs/utilities/format). Install required dependencies first if you haven&apos;t already.</Step>
+
+<RegistryDependencies registryDependencies={manifest.registryDependencies} />
+
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/context.tsx" src="/context.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Anatomy
+
+```text
+Context
+├── ContextTrigger
+│   └── Button
+│       └── ContextTriggerLabel
+└── ContextContent
+    ├── ContextHeader
+    │   ├── ContextTitle
+    │   └── ContextMeter
+    ├── ContextBody
+    └── ContextFooter
+```
+
+## Usage
+
+```tsx
+import { Button } from "@/components/ui/button";
+import {
+  Context,
+  ContextContent,
+  ContextFooter,
+  ContextHeader,
+  ContextMeter,
+  ContextTitle,
+  ContextTrigger,
+  ContextTriggerLabel,
+} from "@/components/ui/context";
+```
+
+```tsx
+const segments = [
+  { title: "Input", value: 42_000, color: "var(--chart-1)" },
+  { title: "Output", value: 18_500, color: "var(--chart-2)" },
+  { title: "Reasoning", value: 12_800, color: "var(--chart-3)" },
+  { title: "Cache", value: 6200, color: "var(--chart-4)" },
+];
+
+<Context maxTokens={128000} usedTokens={79500} costLabel="$0.18">
+  <ContextTrigger asChild>
+    <Button size="sm" variant="ghost">
+      <ContextTriggerLabel />
+    </Button>
+  </ContextTrigger>
+  <ContextContent>
+    <ContextHeader title="Context Usage">
+      <ContextMeter segments={segments} />
+    </ContextHeader>
+    <ContextFooter />
+  </ContextContent>
+</Context>
+```
+
+### Custom meter
+
+Omit summary or legend by composing meter parts:
+
+```tsx showLineNumbers
+<ContextMeter segments={segments}>
+  <ContextMeterBar />
+</ContextMeter>
+```
+
+## Title
+
+`ContextHeader` supports two title patterns:
+
+### Using props
+
+Pass the `title` prop directly to `ContextHeader`.
+
+```tsx showLineNumbers
+<ContextHeader title="Context Usage">
+  <ContextMeter />
+</ContextHeader>
+```
+
+> This approach does not require the `ContextTitle` component.
+
+### Using components
+
+Use `ContextTitle` as a child when you need more control, such as a close
+button.
+
+```tsx showLineNumbers
+<ContextHeader>
+  <ContextTitle showCloseButton>Context Usage</ContextTitle>
+  <ContextMeter />
+</ContextHeader>
+```
+
+## Examples
+
+<Alert>
+  <InfoIcon />
+  <AlertDescription>
+  Context is built on top of the [Popover](/docs/components/popover) component. Check it out for more examples.
+  </AlertDescription>
+</Alert>
+
+### Without Cost
+
+<ComponentPreview componentName="context" fileName="example-without-cost" />
+
+### Icon Only Trigger
+
+<ComponentPreview componentName="context" fileName="example-icon-only-trigger" />
+
+### Title and Close Button
+
+Use with `showCloseButton` for an identifiable, dismissible
+context panel.
+
+<ComponentPreview componentName="context" fileName="example-title-close-button" />
+
+### Custom Meter
+
+Compose `ContextMeter` children to show only the bar.
+
+<ComponentPreview componentName="context" fileName="example-custom-meter" />
+
+### Usage Rows
+
+Mono meter with a separate breakdown list in `ContextBody`.
+
+<ComponentPreview componentName="context" fileName="example-usage-rows" />
+
+### Tooltip
+
+<ComponentPreview componentName="context" fileName="example-tooltip" />
+
+### Custom Spacing
+
+The `[--space:--spacing("value")]` controls the internal spacing.
+
+Default spacing is `--spacing(3)`.
+
+<ComponentPreview componentName="context" fileName="example-custom-spacing" />
+
+> You can use breakpoint utilities to change the internal spacing at different screen sizes.
+
+```css
+sm:[--space:--spacing(3)]
+```
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="context" />
+
+## API Reference
+
+### Context
+
+Root [Popover](/docs/components/popover). Provides token usage to child parts.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `usedTokens` | `number` | `required` |
+| `maxTokens` | `number` | `required` |
+| `costLabel` | `string` | `-` |
+| `className` | `string` | `-` |
+
+### useContextValue
+
+Hook for custom parts. Returns `{ usedTokens, maxTokens, usedPercent, costLabel }`.
+
+### ContextTrigger
+
+Opens the popover on click. Use `asChild` with a single `Button`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `required` |
+| `className` | `string` | `-` |
+
+### ContextTriggerLabel
+
+Percent label and usage icon for the trigger. Pass `children` to replace the
+default content.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ContextIcon
+
+Displays context usage as a circular progress icon.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ContextContent
+
+Holds the usage panel. Forwards [PopoverContent](/docs/components/popover) props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(3)` |
+
+### ContextHeader
+
+Layout container for `ContextTitle` and `ContextMeter`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` | `-` |
+| `className` | `string` | `-` |
+
+### ContextTitle
+
+Title for the context panel.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `showCloseButton` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### ContextClose
+
+Dismiss control for the panel. Used by `ContextTitle` when
+`showCloseButton` is set.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ContextMeter
+
+Layout for usage summary, bar, and legend. With no `children`, renders
+`ContextMeterSummary`, `ContextMeterBar`, and (when `segments` is set)
+`ContextMeterLegend`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `segments` | `ContextSegment[]` | `-` |
+| `className` | `string` | `-` |
+
+`ContextSegment`: `{ title: string; value: number; color: string }`. Prefer
+theme chart tokens such as `var(--chart-1)`.
+
+### ContextMeterSummary
+
+Percent and used/max token counts.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ContextMeterBar
+
+Mono `Progress` bar, or segmented track when `segments` is set on
+`ContextMeter`. The segmented fill matches `usedTokens`; segment values
+only set relative widths inside that used portion. Remaining track is
+`maxTokens - usedTokens`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ContextMeterLegend
+
+Category rows from `segments`, rendered with `ContextUsageRow`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ContextBody
+
+Body for token breakdown rows when not using meter `segments`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `className` | `string` | `-` |
+
+### ContextFooter
+
+Footer with total cost.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` | `Total cost` |
+| `className` | `string` | `-` |
+
+### ContextUsageRow
+
+Usage row with a user-defined title and value. Optional `color` shows a
+swatch before the title.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` | `required` |
+| `value` | `number` | `required` |
+| `color` | `string` | `-` |
+| `className` | `string` | `-` |

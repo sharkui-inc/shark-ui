@@ -1,16 +1,16 @@
 import type { RegistryItemType } from "@/lib/registry";
-import { absoluteUrl } from "@/lib/url";
+import { registryUrl } from "@/lib/url";
 
 const dependencies = ["@ark-ui/react", "lucide-react", "tailwind-variants"];
 
 const manifest: RegistryItemType = {
-  name: "autocomplete",
-  type: "registry:ui",
   dependencies,
+  name: "autocomplete",
   registryDependencies: [
-    absoluteUrl("/r/combobox.json"),
-    absoluteUrl("/r/separator.json"),
+    registryUrl("/r/combobox.json"),
+    registryUrl("/r/separator.json"),
   ],
+  type: "registry:ui",
 };
 
 export default manifest;

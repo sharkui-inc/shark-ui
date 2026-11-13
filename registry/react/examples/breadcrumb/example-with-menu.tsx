@@ -14,11 +14,12 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
 const Example = () => (
-  <Breadcrumb>
+  <Breadcrumb aria-label="Breadcrumb with collapsed menu">
     <BreadcrumbList>
       <BreadcrumbItem>
         <BreadcrumbLink href="#">Home</BreadcrumbLink>
@@ -35,16 +36,18 @@ const Example = () => (
               <BreadcrumbEllipsis />
             </Button>
           </MenuTrigger>
-          <MenuContent className="w-40">
-            <MenuItem asChild value="docs">
-              <a href="#">Documentation</a>
-            </MenuItem>
-            <MenuItem asChild value="components">
-              <a href="#">Components</a>
-            </MenuItem>
-            <MenuItem asChild value="hooks">
-              <a href="#">Hooks</a>
-            </MenuItem>
+          <MenuContent className="min-w-40">
+            <MenuList>
+              <MenuItem asChild value="docs">
+                <a href="#">Documentation</a>
+              </MenuItem>
+              <MenuItem asChild value="components">
+                <a href="#">Components</a>
+              </MenuItem>
+              <MenuItem asChild value="hooks">
+                <a href="#">Hooks</a>
+              </MenuItem>
+            </MenuList>
           </MenuContent>
         </Menu>
       </BreadcrumbItem>

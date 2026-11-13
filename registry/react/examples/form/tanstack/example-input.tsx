@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "@registry/react/components/toast";
 import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -20,36 +19,26 @@ import {
   FieldLabel,
 } from "@/registry/react/components/field";
 import { Input } from "@/registry/react/components/input";
-
-const formSchema = z.object({
-  username: z
-    .string()
-    .min(3, "Username must be at least 3 characters.")
-    .max(10, "Username must be at most 10 characters.")
-    .regex(
-      /^[a-zA-Z0-9_]+$/,
-      "Username can only contain letters, numbers, and underscores."
-    ),
-});
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
     defaultValues: {
       username: "",
     },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "username-submitted",
-        title: "Username submitted",
         description: (
           <pre className="mt-2">
             <code>{JSON.stringify(value, null, 2)}</code>
           </pre>
         ),
+        id: "username-submitted",
+        title: "Username submitted",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -106,5 +95,16 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  username: z
+    .string()
+    .min(3, "Username must be at least 3 characters.")
+    .max(10, "Username must be at most 10 characters.")
+    .regex(
+      /^[a-zA-Z0-9_]+$/u,
+      "Username can only contain letters, numbers, and underscores."
+    ),
+});
 
 export default Example;

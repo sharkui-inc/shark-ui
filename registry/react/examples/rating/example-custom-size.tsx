@@ -1,7 +1,9 @@
-import { Rating } from "@/registry/react/components/rating";
+import { Rating, RatingStars } from "@/registry/react/components/rating";
 
 const Example = () => (
-  <Rating className="**:data-[slot=rating-item-indicator]:size-8" />
+  <Rating>
+    <RatingStars className="**:data-[slot=rating-item-indicator]:size-8" />
+  </Rating>
 );
 
 export default Example;

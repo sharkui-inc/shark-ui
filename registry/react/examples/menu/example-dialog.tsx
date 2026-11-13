@@ -4,15 +4,19 @@ import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Dialog,
+  DialogBody,
   DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
 } from "@/registry/react/components/dialog";
+import { Field, FieldLabel } from "@/registry/react/components/field";
+import { Input } from "@/registry/react/components/input";
 import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -25,10 +29,12 @@ const Example = () => {
         <MenuTrigger asChild>
           <Button variant="outline">Open</Button>
         </MenuTrigger>
-        <MenuContent className="w-40">
-          <MenuItem onSelect={() => setDialogOpen(true)} value="dialog">
-            Open dialog
-          </MenuItem>
+        <MenuContent className="min-w-40">
+          <MenuList>
+            <MenuItem onSelect={() => setDialogOpen(true)} value="dialog">
+              Settings
+            </MenuItem>
+          </MenuList>
         </MenuContent>
       </Menu>
       <Dialog onOpenChange={(e) => setDialogOpen(e.open)} open={dialogOpen}>
@@ -37,9 +43,18 @@ const Example = () => {
             description="Change your preferences."
             title="Settings"
           />
+          <DialogBody>
+            <Field>
+              <FieldLabel>Email</FieldLabel>
+              <Input defaultValue="ada@example.com" type="email" />
+            </Field>
+          </DialogBody>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Close</Button>
+              <Button>Save</Button>
+            </DialogClose>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>

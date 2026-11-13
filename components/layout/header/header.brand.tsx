@@ -1,20 +1,22 @@
 "use client";
 
+import { DownloadIcon } from "lucide-react";
+import type React from "react";
+import { SharkIcon } from "@/components/icons/shark";
+import { cn } from "@/lib/utils";
 import {
   Clipboard,
   ClipboardTrigger,
-} from "@registry/react/components/clipboard";
+} from "@/registry/react/components/clipboard";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
+  ContextMenuList,
   ContextMenuSeparator,
   ContextMenuTrigger,
-} from "@registry/react/components/context-menu";
-import { DownloadTrigger } from "@registry/react/components/download-trigger";
-import { DownloadIcon } from "lucide-react";
-import { SharkIcon } from "@/components/icons/shark";
-import { cn } from "@/lib/utils";
+} from "@/registry/react/components/context-menu";
+import { DownloadTrigger } from "@/registry/react/components/download-trigger";
 
 export const HeaderBrand = (
   props: React.ComponentProps<typeof ContextMenuTrigger>
@@ -34,48 +36,52 @@ export const HeaderBrand = (
   };
 
   return (
-    <ContextMenu>
+    <ContextMenu positioning={{ strategy: "fixed" }}>
       <ContextMenuTrigger
         className={cn(
+          "hitbox-2",
           "flex gap-2",
-          "font-bold font-heading text-base",
+          "-m-1 p-1",
+          "text-base font-bold",
           "rounded-md border border-transparent",
           "cursor-pointer",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/32 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2 focus-visible:outline-hidden",
           className
         )}
         {...rest}
       />
       <ContextMenuContent>
-        <Clipboard value={sharkSvg}>
-          <ContextMenuItem asChild value="copy-mark-as-svg">
-            <ClipboardTrigger>
-              <SharkIcon className="size-3.5" />
-              Copy mark as SVG
-            </ClipboardTrigger>
+        <ContextMenuList>
+          <Clipboard className="w-full" value={sharkSvg}>
+            <ContextMenuItem asChild value="copy-mark-as-svg">
+              <ClipboardTrigger>
+                <SharkIcon className="size-3.5" />
+                Copy mark as SVG
+              </ClipboardTrigger>
+            </ContextMenuItem>
+          </Clipboard>
+          <ContextMenuSeparator />
+          <ContextMenuItem asChild value="download-mark-as-png">
+            <DownloadTrigger
+              data={downloadPng}
+              fileName="shark.png"
+              mimeType="image/png"
+            >
+              <DownloadIcon />
+              Download mark as PNG
+            </DownloadTrigger>
           </ContextMenuItem>
-        </Clipboard>
-        <ContextMenuSeparator />
-        <ContextMenuItem asChild value="download-mark-as-png">
-          <DownloadTrigger
-            data={downloadPng}
-            fileName="shark.png"
-            mimeType="image/png"
-          >
-            <DownloadIcon />
-            Download mark as PNG
-          </DownloadTrigger>
-        </ContextMenuItem>
-        <ContextMenuItem asChild value="download-mark-as-webp">
-          <DownloadTrigger
-            data={downloadWebp}
-            fileName="shark.webp"
-            mimeType="image/webp"
-          >
-            <DownloadIcon />
-            Download mark as WEBP
-          </DownloadTrigger>
-        </ContextMenuItem>
+          <ContextMenuItem asChild value="download-mark-as-webp">
+            <DownloadTrigger
+              data={downloadWebp}
+              fileName="shark.webp"
+              mimeType="image/webp"
+            >
+              <DownloadIcon />
+              Download mark as WEBP
+            </DownloadTrigger>
+          </ContextMenuItem>
+        </ContextMenuList>
       </ContextMenuContent>
     </ContextMenu>
   );

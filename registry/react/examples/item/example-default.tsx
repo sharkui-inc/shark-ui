@@ -1,4 +1,4 @@
-import { BadgeCheck, ChevronRight, Ellipsis } from "lucide-react";
+import { BadgeCheckIcon, ChevronRightIcon, EllipsisIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
 import {
   Item,
@@ -19,20 +19,20 @@ const ItemDemo = () => (
         </ItemDescription>
       </ItemContent>
       <ItemActions>
-        <Button size="icon-sm" variant="outline">
-          <Ellipsis />
+        <Button aria-label="More item actions" size="icon-sm" variant="outline">
+          <EllipsisIcon />
         </Button>
       </ItemActions>
     </Item>
     <Item variant="outline">
       <ItemMedia>
-        <BadgeCheck className="size-5" />
+        <BadgeCheckIcon className="size-5" />
       </ItemMedia>
       <ItemContent>
         <ItemTitle>Your profile has been verified.</ItemTitle>
       </ItemContent>
       <ItemActions>
-        <ChevronRight className="size-4" />
+        <ChevronRightIcon className="size-4" />
       </ItemActions>
     </Item>
   </div>

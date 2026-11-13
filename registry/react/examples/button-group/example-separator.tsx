@@ -7,11 +7,21 @@ import {
 
 const Example = () => (
   <ButtonGroup>
-    <Button clickEffect={false} size="icon-md" variant="secondary">
+    <Button
+      aria-label="Decrease value"
+      clickEffect={false}
+      size="icon-md"
+      variant="secondary"
+    >
       <MinusIcon />
     </Button>
     <ButtonGroupSeparator />
-    <Button clickEffect={false} size="icon-md" variant="secondary">
+    <Button
+      aria-label="Increase value"
+      clickEffect={false}
+      size="icon-md"
+      variant="secondary"
+    >
       <PlusIcon />
     </Button>
   </ButtonGroup>

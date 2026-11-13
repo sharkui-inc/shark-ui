@@ -11,17 +11,17 @@ import {
 import { Input } from "@/registry/react/components/input";
 
 const Example = () => (
-  <ColorPicker className="w-full max-w-64" defaultValue="#eb5e41">
-    <Field>
-      <FieldLabel>Color</FieldLabel>
+  <Field className="w-full max-w-64">
+    <FieldLabel>Color</FieldLabel>
+    <ColorPicker defaultValue="#eb5e41">
       <ColorPickerControl>
         <ColorPickerInput asChild>
           <Input />
         </ColorPickerInput>
       </ColorPickerControl>
-      <FieldHelper>Enter your brand's primary color</FieldHelper>
-    </Field>
-  </ColorPicker>
+    </ColorPicker>
+    <FieldHelper>Enter your brand's primary color</FieldHelper>
+  </Field>
 );
 
 export default Example;

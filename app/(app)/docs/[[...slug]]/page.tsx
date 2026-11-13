@@ -1,4 +1,3 @@
-import { buttonVariants } from "@registry/react/components/button";
 import { findNeighbour } from "fumadocs-core/page-tree";
 import {
   ArrowUpRightIcon,
@@ -10,12 +9,21 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DocsCopyPage } from "@/components/layout/docs-copy-page";
 import { DocsTableOfContents } from "@/components/layout/docs-toc";
-import { SITE_FEATURES } from "@/config/features";
+import { DocsViewDebug } from "@/components/layout/docs-view-debug";
+import { JsonLd } from "@/components/seo/json-ld";
+import { getDocSeo } from "@/lib/doc-aliases";
 import { source } from "@/lib/fumadocs";
-import { createMetadata, createOgImageUrl } from "@/lib/metadata";
+import { humanizeSlug } from "@/lib/humanize-slug";
+import {
+  getBreadcrumbJsonLd,
+  getChangelogTechArticleJsonLd,
+} from "@/lib/json-ld";
+import { createMetadata } from "@/lib/metadata";
+import { absoluteUrl } from "@/lib/url";
 import { cn } from "@/lib/utils";
 import { mdxComponents } from "@/mdx-components";
 import { Badge } from "@/registry/react/components/badge";
+import { buttonVariants } from "@/registry/react/components/button";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 import { SkipNavContent } from "@/registry/react/components/skip-nav";
 
@@ -42,16 +50,13 @@ export const generateMetadata = async (
     notFound();
   }
 
+  const seo = getDocSeo(doc);
+
   return createMetadata({
+    description: seo.description,
+    markdownUrl: `${page.url}.md`,
     title: doc.title,
-    description: doc.description,
     url: page.url,
-    imageUrl: SITE_FEATURES.dynamicOgImages
-      ? createOgImageUrl({
-          title: doc.title,
-          description: doc.description,
-        })
-      : undefined,
   });
 };
 
@@ -69,48 +74,95 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
   const isIndexPage = params.slug?.[0] === undefined;
 
   const isChangelog = params.slug?.[0] === "changelog";
+  const changelogDate =
+    isChangelog && page.data.date ? new Date(page.data.date) : null;
+
+  const { description } = page.data;
+
+  const breadcrumbItems = [
+    { name: "Home", url: absoluteUrl("/") },
+    { name: "Documentation", url: absoluteUrl("/docs") },
+    ...(page.slugs.length === 0
+      ? []
+      : page.slugs.map((slug, index) => ({
+          name:
+            index === page.slugs.length - 1
+              ? page.data.title
+              : humanizeSlug(slug),
+          url: absoluteUrl(`/docs/${page.slugs.slice(0, index + 1).join("/")}`),
+        }))),
+  ];
+
   const neighbours = isChangelog
-    ? { previous: null, next: null }
+    ? { next: null, previous: null }
     : findNeighbour(source.pageTree, page.url);
 
   const MDX = page.data.body;
 
-  const links = page.data.links;
+  const { links } = page.data;
 
   return (
     <div className="size-full">
+      <JsonLd data={getBreadcrumbJsonLd(breadcrumbItems)} />
+      {isChangelog && page.slugs.length > 1 && changelogDate ? (
+        <JsonLd
+          data={getChangelogTechArticleJsonLd({
+            datePublished: changelogDate,
+            description: description ?? page.data.title,
+            title: page.data.title,
+            url: absoluteUrl(page.url),
+          })}
+        />
+      ) : null}
       <div className="flex items-stretch xl:w-full" data-slot="docs">
         <div className="relative flex w-full min-w-0 flex-1 flex-col lg:me-4 lg:mt-8">
-          <div className="relative flex w-full flex-col border bg-white text-card-foreground shadow-lg/5 max-lg:border-none lg:rounded-2xl dark:bg-card">
+          <div
+            className={cn(
+              "relative",
+              "w-full",
+              "flex flex-col",
+              "dark:bg-card bg-white",
+              "text-card-foreground",
+              "border shadow-lg/4 max-lg:border-none lg:rounded-2xl"
+            )}
+          >
             <div className="flex-1 px-4 py-6 sm:px-6 lg:p-8">
               <div
                 className={cn("mx-auto w-full", {
-                  "max-w-3xl": page.data.toc.length > 0,
+                  // Sidebar previews are a full-width iframe. The desktop
+                  // sidebar starts at 768px, and max-w-3xl leaves the iframe
+                  // viewport just under that.
+                  "max-w-3xl":
+                    page.data.toc.length > 0 &&
+                    page.slugs.join("/") !== "components/sidebar",
                 })}
               >
                 <div className="flex min-w-0 flex-col gap-8">
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between gap-2">
                       <h1
-                        className="scroll-m-20 font-heading font-semibold text-3xl"
+                        className="font-heading scroll-m-20 text-3xl font-semibold"
                         id="page-title"
                       >
                         {page.data.title}
                       </h1>
                       {!isIndexPage && (
-                        <DocsCopyPage data={rawContent} url={page.url} />
+                        <div className="flex items-center gap-2">
+                          <DocsCopyPage data={rawContent} url={page.url} />
+                          <DocsViewDebug slugs={page.slugs} />
+                        </div>
                       )}
                     </div>
 
-                    {page.data.description && (
-                      <p className="text-[1.05rem] text-muted-foreground sm:text-base md:max-w-[80%]">
+                    {page.data.description ? (
+                      <p className="text-muted-foreground text-[1.05rem] sm:text-base md:max-w-[80%]">
                         {page.data.description}
                       </p>
-                    )}
+                    ) : null}
 
-                    {links && (
+                    {links ? (
                       <div className="flex items-center gap-2 pt-4">
-                        {links?.doc && (
+                        {links.doc ? (
                           <Badge asChild size="lg" variant="outline">
                             <a
                               href={links.doc}
@@ -120,9 +172,9 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                               Docs <ArrowUpRightIcon />
                             </a>
                           </Badge>
-                        )}
+                        ) : null}
 
-                        {links?.api && (
+                        {links.api ? (
                           <Badge asChild size="lg" variant="outline">
                             <a
                               href={links.api}
@@ -132,9 +184,9 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
                               API <ArrowUpRightIcon />
                             </a>
                           </Badge>
-                        )}
+                        ) : null}
                       </div>
-                    )}
+                    ) : null}
                   </div>
 
                   <SkipNavContent className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
@@ -144,24 +196,24 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
               </div>
             </div>
           </div>
-          <div className="grid w-full min-w-0 grid-cols-1 gap-4 pt-4 pb-8 max-lg:container max-lg:bg-white sm:grid-cols-2 max-lg:dark:bg-card">
+          <div className="max-lg:dark:bg-card grid w-full min-w-0 grid-cols-1 gap-4 pt-4 pb-8 max-lg:container max-lg:bg-white sm:grid-cols-2">
             {neighbours.previous ? (
               <Link
                 className={cn(
-                  buttonVariants({ variant: "outline", clickEffect: false }),
-                  "h-auto w-full min-w-0",
+                  buttonVariants({ clickEffect: false, variant: "outline" }),
+                  "h-auto w-full min-w-0 md:h-auto",
                   "p-4",
                   "flex flex-col items-start",
-                  "bg-white dark:bg-card",
+                  "dark:bg-card bg-white",
                   "lg:rounded-2xl"
                 )}
                 href={neighbours.previous.url}
               >
-                <p className="text-muted-foreground text-xs uppercase tracking-wide">
+                <p className="text-muted-foreground text-xs tracking-wide uppercase">
                   Previous page
                 </p>
                 <div className="flex items-center gap-2">
-                  <ChevronLeftIcon className="rtl:rotate-180" />
+                  <ChevronLeftIcon className="size-4 rtl:rotate-180" />
                   <span className="text-base">{neighbours.previous.name}</span>
                 </div>
               </Link>
@@ -172,21 +224,21 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
             {neighbours.next ? (
               <Link
                 className={cn(
-                  buttonVariants({ variant: "outline", clickEffect: false }),
-                  "h-auto w-full min-w-0",
+                  buttonVariants({ clickEffect: false, variant: "outline" }),
+                  "h-auto w-full min-w-0 md:h-auto",
                   "p-4",
                   "flex flex-col items-end",
-                  "bg-white dark:bg-card",
+                  "dark:bg-card bg-white",
                   "lg:rounded-2xl"
                 )}
                 href={neighbours.next.url}
               >
-                <p className="text-muted-foreground text-xs uppercase tracking-wide">
+                <p className="text-muted-foreground text-xs tracking-wide uppercase">
                   Next page
                 </p>
                 <div className="flex items-center gap-2">
                   <span className="text-base">{neighbours.next.name}</span>
-                  <ChevronRightIcon className="rtl:rotate-180" />
+                  <ChevronRightIcon className="size-4 rtl:rotate-180" />
                 </div>
               </Link>
             ) : null}
@@ -197,10 +249,11 @@ const DocsPage = async (props: PageProps<"/docs/[[...slug]]">) => {
           <div className="sticky top-(--header-height) z-30 ms-auto hidden h-[calc(100svh-var(--header-height))] w-64 flex-col overflow-hidden xl:flex">
             <ScrollArea
               className="[--fade-size:3rem] **:data-[slot=scroll-area-scrollbar]:hidden"
+              orientation="vertical"
               scrollFade
             >
-              <div className="flex min-h-0 flex-col gap-2 overflow-auto py-2">
-                <div className="h-(--top-spacing) shrink-0" />
+              <div className="flex min-h-0 min-w-0 flex-col py-2">
+                <div className="shrink-0" />
                 <DocsTableOfContents data={page.data.toc} />
               </div>
             </ScrollArea>

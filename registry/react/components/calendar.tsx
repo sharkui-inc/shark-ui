@@ -1,6 +1,10 @@
 "use client";
 
-import { DatePicker as ArkCalendar } from "@ark-ui/react/date-picker";
+import {
+  DatePicker as ArkCalendar,
+  useDatePickerContext as useArkDatePickerContext,
+} from "@ark-ui/react/date-picker";
+import { getLocalTimeZone } from "@internationalized/date";
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
@@ -9,44 +13,80 @@ import {
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
+import { fieldLabelVariants } from "@/registry/react/components/field";
+import { FormatNumber } from "@/registry/react/components/format";
 import { nativeSelectVariants } from "@/registry/react/components/native-select";
 
-export const Calendar = (
-  props: React.ComponentProps<typeof ArkCalendar.Root>
-) => {
-  const { lazyMount = true, unmountOnExit = true, className, ...rest } = props;
+export const useCalendarContext = useArkDatePickerContext;
+
+interface CalendarProps
+  extends Omit<React.ComponentProps<typeof ArkCalendar.Root>, "inline"> {
+  /**
+   * Show days from adjacent months.
+   *
+   * @default true
+   */
+  showOutsideDays?: boolean;
+}
+
+export const Calendar = (props: CalendarProps) => {
+  const {
+    lazyMount = true,
+    unmountOnExit = true,
+    timeZone = getLocalTimeZone(),
+    showOutsideDays = true,
+    className,
+    ...rest
+  } = props;
 
   return (
     <ArkCalendar.Root
-      className={cn("[--cell-size:--spacing(9)]", "w-fit", className)}
+      className={cn(
+        "[--cell-size:--spacing(9)]",
+        "w-fit",
+        !showOutsideDays &&
+          "**:data-[slot=calendar-table-cell-trigger]:data-outside-range:invisible",
+        className
+      )}
+      data-hide-outside={showOutsideDays ? undefined : true}
       data-slot="calendar"
-      inline
       lazyMount={lazyMount}
       unmountOnExit={unmountOnExit}
       {...rest}
+      inline
+      timeZone={timeZone}
     />
   );
 };
 
 export const CalendarControl = (
   props: React.ComponentProps<typeof ArkCalendar.Control>
-) => (
-  <ArkCalendar.Control
-    className="inline-flex items-center gap-2"
-    data-slot="calendar-control"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkCalendar.Control
+      className={cn("inline-flex items-center gap-2", className)}
+      data-slot="calendar-control"
+      {...rest}
+    />
+  );
+};
 
 export const CalendarLabel = (
   props: React.ComponentProps<typeof ArkCalendar.Label>
-) => (
-  <ArkCalendar.Label
-    className="font-medium text-sm"
-    data-slot="calendar-label"
-    {...props}
-  />
-);
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
+    <ArkCalendar.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="calendar-label"
+      {...rest}
+    />
+  );
+};
 
 export const CalendarTrigger = (
   props: React.ComponentProps<typeof ArkCalendar.Trigger>
@@ -65,7 +105,7 @@ export const CalendarViewDate = (
 
   return (
     <ArkCalendar.RangeText
-      className={cn("font-medium text-sm", className)}
+      className={cn("text-sm font-medium", className)}
       data-slot="calendar-range-text"
       {...rest}
     />
@@ -75,22 +115,26 @@ export const CalendarViewDate = (
 export const CalendarTodayTrigger = (
   props: React.ComponentProps<typeof Button>
 ) => {
-  const { variant = "outline", size = "lg", ...rest } = props;
+  const { variant = "outline", size = "lg", onClick, ...rest } = props;
+
+  const calendar = useCalendarContext();
 
   return (
-    <CalendarContext>
-      {(calendar) => (
-        <Button
-          data-slot="calendar-today-trigger"
-          onClick={() => calendar.selectToday()}
-          size={size}
-          variant={variant}
-          {...rest}
-        >
-          Today
-        </Button>
-      )}
-    </CalendarContext>
+    <Button
+      data-slot="calendar-today-trigger"
+      size={size}
+      variant={variant}
+      {...rest}
+      onClick={(event) => {
+        onClick?.(event);
+        if (event.defaultPrevented) {
+          return;
+        }
+        calendar.selectToday();
+      }}
+    >
+      Today
+    </Button>
   );
 };
 
@@ -105,20 +149,22 @@ export const CalendarYearSelect = (
 
   return (
     <div
-      className={cn("relative w-fit has-[select:disabled]:opacity-64")}
+      className={cn("relative", "w-fit", "has-[select:disabled]:opacity-64")}
       data-slot="calendar-year-select-wrapper"
     >
       <ArkCalendar.YearSelect
-        className={cn(nativeSelectVariants())}
+        className={cn(nativeSelectVariants(), className)}
         data-slot="calendar-year-select"
         {...rest}
       />
       <ChevronDownIcon
+        aria-hidden="true"
         className={cn(
-          "absolute inset-e-2.5 top-1/2 -translate-y-1/2",
+          "absolute inset-e-2.5 top-1/2",
           "size-4",
-          "select-none text-muted-foreground",
-          "pointer-events-none"
+          "text-muted-foreground",
+          "pointer-events-none select-none",
+          "-translate-y-1/2"
         )}
         data-slot="calendar-year-select-icon"
       />
@@ -133,7 +179,7 @@ export const CalendarMonthSelect = (
 
   return (
     <div
-      className={cn("relative w-fit has-[select:disabled]:opacity-64")}
+      className={cn("relative", "w-fit", "has-[select:disabled]:opacity-64")}
       data-slot="calendar-month-select-wrapper"
     >
       <ArkCalendar.MonthSelect
@@ -142,11 +188,13 @@ export const CalendarMonthSelect = (
         {...rest}
       />
       <ChevronDownIcon
+        aria-hidden="true"
         className={cn(
-          "absolute inset-e-2.5 top-1/2 -translate-y-1/2",
+          "absolute inset-e-2.5 top-1/2",
           "size-4",
-          "select-none text-muted-foreground",
-          "pointer-events-none"
+          "text-muted-foreground",
+          "pointer-events-none select-none",
+          "-translate-y-1/2"
         )}
         data-slot="calendar-month-select-icon"
       />
@@ -168,9 +216,7 @@ export const CalendarView = (
   );
 };
 
-export const CalendarContext = (
-  props: React.ComponentProps<typeof ArkCalendar.Context>
-) => <ArkCalendar.Context data-slot="calendar-context" {...props} />;
+export const CalendarContext = ArkCalendar.Context;
 
 export const CalendarViewControl = (
   props: React.ComponentProps<typeof ArkCalendar.ViewControl>
@@ -196,7 +242,7 @@ export const CalendarPrevTrigger = (
 ) => (
   <ArkCalendar.PrevTrigger asChild data-slot="calendar-prev-trigger" {...props}>
     <Button className="me-auto" size="icon-md" variant="ghost">
-      <ChevronLeftIcon aria-hidden className="rtl:rotate-180" />
+      <ChevronLeftIcon aria-hidden="true" className="rtl:rotate-180" />
     </Button>
   </ArkCalendar.PrevTrigger>
 );
@@ -206,7 +252,7 @@ export const CalendarNextTrigger = (
 ) => (
   <ArkCalendar.NextTrigger asChild data-slot="calendar-next-trigger" {...props}>
     <Button className="ms-auto" size="icon-md" variant="ghost">
-      <ChevronRightIcon aria-hidden className="rtl:rotate-180" />
+      <ChevronRightIcon aria-hidden="true" className="rtl:rotate-180" />
     </Button>
   </ArkCalendar.NextTrigger>
 );
@@ -214,10 +260,15 @@ export const CalendarNextTrigger = (
 export const CalendarTable = (
   props: React.ComponentProps<typeof ArkCalendar.Table>
 ) => {
-  const { className, ...rest } = props;
+  const { "aria-labelledby": ariaLabelledBy, className, ...rest } = props;
+
+  const calendar = useCalendarContext();
+  const labelId = calendar.getLabelProps().id;
+  const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
 
   return (
     <ArkCalendar.Table
+      aria-labelledby={labelledBy || undefined}
       className={cn("group", "w-full min-w-60", "border-collapse", className)}
       data-slot="calendar-table"
       {...rest}
@@ -243,6 +294,7 @@ export const CalendarWeekDays = (props: CalendarWeekDaysProps) => {
       {(calendar) => (
         <CalendarTableHead data-slot="calendar-table-head" {...rest}>
           <CalendarTableRow>
+            {calendar.showWeekNumbers ? <CalendarWeekNumberHeaderCell /> : null}
             {calendar.weekDays.map((weekDay) => (
               <CalendarTableHeader key={weekDay.short}>
                 {weekDay[format]}
@@ -259,19 +311,28 @@ export const CalendarTableDays = (
   props: React.ComponentProps<typeof CalendarTableBody>
 ) => {
   const { tabIndex, ...rest } = props;
+
   return (
     <CalendarContext>
       {(calendar) => (
         <CalendarTableBody {...rest}>
           {calendar.weeks.map((week, index) => (
-            <CalendarTableRow key={index}>
+            <CalendarTableRow key={week[0].toString()}>
+              {calendar.showWeekNumbers ? (
+                <CalendarWeekNumberCell week={week} weekIndex={index}>
+                  <FormatNumber
+                    useGrouping={false}
+                    value={calendar.getWeekNumber(week)}
+                  />
+                </CalendarWeekNumberCell>
+              ) : null}
               {week.map((day) => (
                 <CalendarTableCell
                   key={day.day}
                   tabIndex={tabIndex ?? undefined}
                   value={day}
                 >
-                  {day.day}
+                  <FormatNumber useGrouping={false} value={day.day} />
                 </CalendarTableCell>
               ))}
             </CalendarTableRow>
@@ -303,7 +364,15 @@ export const CalendarTableNextMonth = (props: CalendarTableNextMonthProps) => {
         return (
           <CalendarTableBody {...rest}>
             {offset.weeks.map((week, index) => (
-              <CalendarTableRow key={index}>
+              <CalendarTableRow key={week[0].toString()}>
+                {calendar.showWeekNumbers ? (
+                  <CalendarWeekNumberCell week={week} weekIndex={index}>
+                    <FormatNumber
+                      useGrouping={false}
+                      value={calendar.getWeekNumber(week)}
+                    />
+                  </CalendarWeekNumberCell>
+                ) : null}
                 {week.map((day) => (
                   <CalendarTableCell
                     key={day.day}
@@ -311,7 +380,7 @@ export const CalendarTableNextMonth = (props: CalendarTableNextMonthProps) => {
                     value={day}
                     visibleRange={offset.visibleRange}
                   >
-                    {day.day}
+                    <FormatNumber useGrouping={false} value={day.day} />
                   </CalendarTableCell>
                 ))}
               </CalendarTableRow>
@@ -323,6 +392,48 @@ export const CalendarTableNextMonth = (props: CalendarTableNextMonthProps) => {
   );
 };
 
+export const CalendarWeekNumberHeaderCell = (
+  props: React.ComponentProps<typeof ArkCalendar.WeekNumberHeaderCell>
+) => {
+  const { className, children, ...rest } = props;
+
+  return (
+    <ArkCalendar.WeekNumberHeaderCell
+      className={cn(
+        "h-(--cell-size) w-full min-w-(--cell-size)",
+        "flex items-center justify-center",
+        "text-muted-foreground text-xs font-medium",
+        "select-none",
+        className
+      )}
+      data-slot="calendar-week-number-header"
+      {...rest}
+    >
+      {children}
+    </ArkCalendar.WeekNumberHeaderCell>
+  );
+};
+
+export const CalendarWeekNumberCell = (
+  props: React.ComponentProps<typeof ArkCalendar.WeekNumberCell>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <ArkCalendar.WeekNumberCell
+      className={cn(
+        "h-(--cell-size) w-full min-w-(--cell-size)",
+        "flex items-center justify-center",
+        "text-muted-foreground text-xs font-medium tabular-nums",
+        "select-none",
+        className
+      )}
+      data-slot="calendar-week-number-cell"
+      {...rest}
+    />
+  );
+};
+
 export const CalendarTableHead = (
   props: React.ComponentProps<typeof ArkCalendar.TableHead>
 ) => <ArkCalendar.TableHead data-slot="calendar-table-head" {...props} />;
@@ -331,9 +442,10 @@ export const CalendarTableRow = (
   props: React.ComponentProps<typeof ArkCalendar.TableRow>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <ArkCalendar.TableRow
-      className={cn("mt-1 flex w-full", className)}
+      className={cn("w-full", "flex", "mt-1", className)}
       data-slot="calendar-table-row"
       {...rest}
     />
@@ -350,7 +462,8 @@ export const CalendarTableHeader = (
       className={cn(
         "h-(--cell-size) w-full",
         "flex items-center justify-center",
-        "select-none font-medium text-muted-foreground/64 text-xs",
+        "text-muted-foreground text-xs font-medium",
+        "select-none",
         "rounded-lg",
         className
       )}
@@ -374,9 +487,8 @@ export const CalendarTableCell = (
       className={cn(
         "relative",
         "h-(--cell-size) w-full",
-        "select-none text-center",
-        "[&:first-child[aria-selected=true]_div]:rounded-l-lg",
-        "[&:last-child[aria-selected=true]_div]:rounded-r-lg"
+        "text-center",
+        "select-none"
       )}
       data-slot="calendar-table-cell"
       value={value}
@@ -385,20 +497,29 @@ export const CalendarTableCell = (
       <ArkCalendar.TableCellTrigger
         className={cn(
           "inline-flex items-center justify-center gap-1",
-          "h-(--cell-size) w-full min-w-(--cell-size) data-[view=day]:h-(--cell-size)",
-          "select-none whitespace-nowrap font-normal text-base text-foreground leading-none sm:text-sm",
+          "h-(--cell-size) w-full min-w-(--cell-size)",
+          "data-[view=day]:h-(--cell-size)",
+          "text-foreground text-base leading-none font-normal whitespace-nowrap sm:text-sm",
+          "select-none",
           "rounded-lg border border-transparent",
           "hover:bg-accent hover:text-accent-foreground",
-          "data-today:data-selected:after:bg-background data-today:after:absolute data-today:after:bottom-1 data-today:after:left-1/2 data-today:after:size-1 data-today:after:-translate-x-1/2 data-today:after:rounded-full data-today:after:bg-primary",
-          "data-focus:border-primary data-focus:bg-accent/30 data-focus:text-primary data-focus:ring-[3px] data-focus:ring-ring/32",
-          "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+          "data-today:data-selected:after:bg-background data-today:after:bg-primary data-today:after:absolute data-today:after:bottom-1 data-today:after:left-1/2 data-today:after:size-1 data-today:after:-translate-x-1/2 data-today:after:rounded-full",
+          "data-focus:not-data-today:border-ring/64 data-focus:not-data-today:bg-accent data-focus:not-data-today:text-foreground data-focus:not-data-today:ring-ring/24 data-focus:not-data-today:ring-2",
+          "outline-hidden",
+          "focus-visible:not-data-today:border-ring/64 focus-visible:not-data-today:ring-ring/24 focus-visible:not-data-today:ring-2",
           "data-disabled:pointer-events-none data-disabled:opacity-64",
           "data-unavailable:pointer-events-none data-unavailable:line-through data-unavailable:opacity-64",
-          "data-[view=day]:data-in-range:rounded-none data-[view=day]:data-in-range:not-[data-selected]:bg-primary/10",
-          "data-selected:bg-primary! data-selected:text-primary-foreground!",
-          "data-hover-range-start:rounded-l-lg! data-range-start:rounded-l-lg!",
-          "data-hover-range-end:rounded-r-lg! data-range-end:rounded-r-lg!",
-          "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+          "data-outside-range:text-muted-foreground",
+          "data-[view=day]:data-in-range:not-data-selected:bg-primary/8",
+          "data-selected:bg-primary data-selected:text-primary-foreground data-selected:border-transparent data-selected:ring-0",
+          "data-selected:hover:bg-primary data-selected:hover:text-primary-foreground data-selected:hover:border-transparent",
+          "data-selected:data-focus:not-data-today:bg-primary data-selected:data-focus:not-data-today:text-primary-foreground data-selected:data-focus:not-data-today:border-transparent data-selected:data-focus:not-data-today:ring-0",
+          "data-selected:focus-visible:not-data-today:border-transparent data-selected:focus-visible:not-data-today:ring-0",
+          "in-[:is([data-slot=calendar]:not([data-hide-outside]),[data-slot=date-picker-content])]:data-[view=day]:[[data-slot=calendar-table-cell]:not(:first-child):not([data-slot=calendar-week-number-cell]+[data-slot=calendar-table-cell])>&]:data-in-range:not-data-range-start:not-data-hover-range-start:rounded-s-none",
+          "in-[:is([data-slot=calendar]:not([data-hide-outside]),[data-slot=date-picker-content])]:data-[view=day]:[[data-slot=calendar-table-cell]:not(:last-child)>&]:data-in-range:not-data-range-end:not-data-hover-range-end:rounded-e-none",
+          "in-[[data-slot=calendar][data-hide-outside]]:data-[view=day]:[[data-slot=calendar-table-cell]:has([data-slot=calendar-table-cell-trigger]:not([data-outside-range]))+[data-slot=calendar-table-cell]>&]:data-in-range:not-data-range-start:not-data-hover-range-start:rounded-s-none",
+          "in-[[data-slot=calendar][data-hide-outside]]:data-[view=day]:[[data-slot=calendar-table-cell]:has(+[data-slot=calendar-table-cell]_[data-slot=calendar-table-cell-trigger]:not([data-outside-range]))>&]:data-in-range:not-data-range-end:not-data-hover-range-end:rounded-e-none",
+          "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
           className
         )}
         data-slot="calendar-table-cell-trigger"

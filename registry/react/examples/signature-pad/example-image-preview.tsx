@@ -16,8 +16,8 @@ const Example = () => {
         }
       />
       <FieldDescription>Image preview</FieldDescription>
-      <div className="relative h-40 w-full rounded-lg border bg-muted">
-        {imageUrl && (
+      <div className="bg-muted relative h-40 w-full rounded-lg border">
+        {imageUrl ? (
           <Image
             alt="Your signature as captured from the pad above"
             className="size-full dark:invert"
@@ -25,7 +25,7 @@ const Example = () => {
             src={imageUrl}
             unoptimized
           />
-        )}
+        ) : null}
       </div>
     </Field>
   );

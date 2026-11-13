@@ -8,7 +8,6 @@ import {
   type SubmitHandler,
   useForm,
 } from "@formisch/react";
-import { toast } from "@registry/react/components/toast";
 import * as v from "valibot";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -39,52 +38,28 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
 import { Switch } from "@/registry/react/components/switch";
-
-const formSchema = v.object({
-  plan: v.picklist(["basic", "pro"], "Please select a subscription plan."),
-  billingPeriod: v.pipe(
-    v.array(v.string()),
-    v.minLength(1, "Please select a billing period."),
-    v.check((val) => val[0] !== "", "Please select a billing period.")
-  ),
-  addons: v.pipe(
-    v.array(v.string()),
-    v.minLength(1, "Please select at least one add-on."),
-    v.maxLength(3, "You can select up to 3 add-ons."),
-    v.check(
-      (value) => value.every((addon) => addons.some((a) => a.id === addon)),
-      "You selected an invalid add-on."
-    )
-  ),
-  emailNotifications: v.boolean(),
-});
-
-const initialInput = {
-  plan: "basic" as "basic" | "pro",
-  billingPeriod: [""],
-  addons: [] as string[],
-  emailNotifications: false,
-};
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput,
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "rhf-complex-submitted",
-      title: "Preferences saved",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "rhf-complex-submitted",
+      title: "Preferences saved",
     });
   };
 
@@ -101,7 +76,11 @@ const Example = () => {
           <FieldGroup>
             <FormischField of={form} path={["plan"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldSet>
                     <FieldLegend variant="label">Subscription plan</FieldLegend>
                     <FieldDescription>
@@ -145,7 +124,11 @@ const Example = () => {
             <FieldSeparator />
             <FormischField of={form} path={["billingPeriod"]}>
               {(field) => (
-                <Field invalid={Boolean(field.errors?.length)}>
+                <Field
+                  invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
+                >
                   <FieldLabel>Billing period</FieldLabel>
                   <Select
                     collection={collection}
@@ -157,11 +140,13 @@ const Example = () => {
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>
-                      {collection.items.map((item) => (
-                        <SelectItem item={item} key={item.value}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
+                      <SelectList>
+                        {collection.items.map((item) => (
+                          <SelectItem item={item} key={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectList>
                     </SelectContent>
                   </Select>
                   <FieldDescription>
@@ -175,8 +160,13 @@ const Example = () => {
             <FormischField of={form} path={["addons"]}>
               {(field) => {
                 const list = Array.isArray(field.input) ? field.input : [];
+
                 return (
-                  <Field invalid={Boolean(field.errors?.length)}>
+                  <Field
+                    invalid={Boolean(field.errors?.length)}
+                    onBlur={field.props.onBlur}
+                    onFocus={field.props.onFocus}
+                  >
                     <FieldSet>
                       <FieldLegend variant="label">Add-ons</FieldLegend>
                       <FieldDescription>
@@ -195,7 +185,7 @@ const Example = () => {
                               onCheckedChange={({ checked }) => {
                                 const next = checked
                                   ? [...list, addon.id]
-                                  : list.filter((v) => v !== addon.id);
+                                  : list.filter((id) => id !== addon.id);
                                 field.onChange(next);
                               }}
                             />
@@ -249,6 +239,32 @@ const Example = () => {
   );
 };
 
+const formSchema = v.object({
+  addons: v.pipe(
+    v.array(v.string()),
+    v.minLength(1, "Please select at least one add-on."),
+    v.maxLength(3, "You can select up to 3 add-ons."),
+    v.check(
+      (value) => value.every((addon) => addons.some((a) => a.id === addon)),
+      "You selected an invalid add-on."
+    )
+  ),
+  billingPeriod: v.pipe(
+    v.array(v.string()),
+    v.minLength(1, "Please select a billing period."),
+    v.check((val) => val[0] !== "", "Please select a billing period.")
+  ),
+  emailNotifications: v.boolean(),
+  plan: v.picklist(["basic", "pro"], "Please select a subscription plan."),
+});
+
+const initialInput = {
+  addons: [] as string[],
+  billingPeriod: [""],
+  emailNotifications: false,
+  plan: "basic" as "basic" | "pro",
+};
+
 const collection = createListCollection({
   items: [
     { label: "Monthly", value: "monthly" },
@@ -258,19 +274,19 @@ const collection = createListCollection({
 
 const addons = [
   {
+    description: "Advanced analytics and reporting",
     id: "analytics",
     title: "Analytics",
-    description: "Advanced analytics and reporting",
   },
   {
+    description: "Automated daily backups",
     id: "backup",
     title: "Backup",
-    description: "Automated daily backups",
   },
   {
+    description: "24/7 premium customer support",
     id: "support",
     title: "Priority Support",
-    description: "24/7 premium customer support",
   },
 ] as const;
 

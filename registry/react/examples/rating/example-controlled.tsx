@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Rating } from "@/registry/react/components/rating";
+import { Rating, RatingStars } from "@/registry/react/components/rating";
 
 const Example = () => {
   const [value, setValue] = React.useState(0);
@@ -14,7 +14,9 @@ const Example = () => {
       <Rating
         onValueChange={(details) => setValue(details.value ?? 0)}
         value={value}
-      />
+      >
+        <RatingStars />
+      </Rating>
       <p className="text-center">{isCorrectRating ? "✅" : "❌"}</p>
     </div>
   );

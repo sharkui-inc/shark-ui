@@ -1,28 +1,27 @@
 "use client";
 
 import { createListCollection } from "@ark-ui/react";
-import { Item } from "@/registry/react/components/item";
 import {
   Listbox,
   ListboxContent,
   ListboxItem,
-  ListboxItemIndicator,
   ListboxItemText,
 } from "@/registry/react/components/listbox";
 
 const Example = () => (
-  <Item className="w-full max-w-64 p-1" variant="outline">
-    <Listbox collection={collection} selectionMode="multiple">
-      <ListboxContent>
-        {collection.items.map((item) => (
-          <ListboxItem item={item} key={item.value}>
-            <ListboxItemText>{item.label}</ListboxItemText>
-            <ListboxItemIndicator />
-          </ListboxItem>
-        ))}
-      </ListboxContent>
-    </Listbox>
-  </Item>
+  <Listbox
+    className="w-full max-w-64"
+    collection={collection}
+    selectionMode="multiple"
+  >
+    <ListboxContent>
+      {collection.items.map((item) => (
+        <ListboxItem item={item} key={item.value}>
+          <ListboxItemText>{item.label}</ListboxItemText>
+        </ListboxItem>
+      ))}
+    </ListboxContent>
+  </Listbox>
 );
 
 const collection = createListCollection({

@@ -28,10 +28,10 @@ const Example = () => (
       </SheetBody>
       <SheetFooter>
         <SheetClose asChild>
-          <Button variant="outline">Cancel</Button>
+          <Button>Confirm</Button>
         </SheetClose>
         <SheetClose asChild>
-          <Button>Confirm</Button>
+          <Button variant="outline">Cancel</Button>
         </SheetClose>
       </SheetFooter>
     </SheetContent>

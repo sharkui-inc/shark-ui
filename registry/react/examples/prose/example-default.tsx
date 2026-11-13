@@ -1,9 +1,9 @@
 import { Prose } from "@/registry/react/components/prose";
 import { ScrollArea } from "@/registry/react/components/scroll-area";
 
-const TypographyDemo = () => (
+const ProseDemo = () => (
   <div className="overflow-hidden">
-    <ScrollArea className="h-[350px] rounded-xl border">
+    <ScrollArea className="h-87.5 rounded-xl border">
       <Prose className="max-w-full p-8">
         <h1>Taxing Laughter: The Joke Tax Chronicles</h1>
         <p>
@@ -92,4 +92,4 @@ const TypographyDemo = () => (
   </div>
 );
 
-export default TypographyDemo;
+export default ProseDemo;

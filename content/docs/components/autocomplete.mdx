@@ -1,10 +1,17 @@
 ---
 title: Autocomplete
-description: Displays a searchable list of options.
+description: Filter options as you type.
+aliases:
+  - Typeahead
+  - Autosuggest
+seo:
+  description: Searchable input that filters a list of options as you type.
 links:
   doc: https://ark-ui.com/docs/components/combobox
   api: https://ark-ui.com/docs/components/combobox#api-reference
 ---
+
+import manifest from "@/registry/manifest/autocomplete";
 
 <ComponentPreview componentName="autocomplete" />
 
@@ -31,11 +38,11 @@ npx shadcn@latest add @shark/autocomplete
 
 <Step>This component depends on [Combobox](/docs/components/combobox), and [Separator](/docs/components/separator). Install them first if you haven't already.</Step>
 
+<RegistryDependencies registryDependencies={manifest.registryDependencies} />
+
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react tailwind-variants lucide-react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -105,6 +112,14 @@ const { collection, filter } = useListCollection({
 </Autocomplete>
 ```
 
+Click to focus, then type to open and filter the list.
+
+## With Field
+
+Use [Field](/docs/components/field) for a label, helper text, and error.
+
+<ComponentPreview componentName="autocomplete" fileName="example-with-field" />
+
 ## Controlled
 
 Control the selected value with `value` and `onValueChange` props.
@@ -121,7 +136,19 @@ Control the selected value with `value` and `onValueChange` props.
 
 <ComponentPreview componentName="autocomplete" fileName="example-disabled" />
 
-## Sizes
+## Variants
+
+Control input appearance with the `variant` prop on `AutocompleteInput`.
+
+### Default
+
+<ComponentPreview componentName="autocomplete" fileName="example-variant-default" />
+
+### Ghost
+
+<ComponentPreview componentName="autocomplete" fileName="example-variant-ghost" />
+
+## Size
 
 ### Small
 
@@ -141,29 +168,43 @@ Control the selected value with `value` and `onValueChange` props.
 
 <ComponentPreview componentName="autocomplete" fileName="example-group" />
 
-### With Field
+### Scrollable
 
-Use [Field](/docs/components/field) components to style with the field components.
+Long lists scroll, and the selected option is shown when reopened.
 
-<ComponentPreview componentName="autocomplete" fileName="example-with-field" />
+<ComponentPreview componentName="autocomplete" fileName="example-scrollable" />
 
-### With clear button
+### With Clear Button
 
 Pass `showClear` to `AutocompleteInput` to show a clear button.
 
 <ComponentPreview componentName="autocomplete" fileName="example-with-clear-button" />
 
-### With trigger
+### With Trigger
 
-Pass `showTrigger` to `AutocompleteInput` to show the dropdown trigger button.
+Pass `showTrigger` to `AutocompleteInput` to show the menu trigger button.
 
 <ComponentPreview componentName="autocomplete" fileName="example-with-trigger" />
 
-### With start icon
+### With Start Icon
 
 Use `InputGroupAddon` to add a start icon to the input.
 
 <ComponentPreview componentName="autocomplete" fileName="example-with-start-icon" />
+
+### With Description
+
+<ComponentPreview componentName="autocomplete" fileName="example-with-description" />
+
+### Form Integration
+
+<ComponentPreview componentName="autocomplete" fileName="example-form" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="autocomplete" />
 
 ## API Reference
 
@@ -173,37 +214,38 @@ Root component.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `collection` | `ListCollection<T>` | **required** |
-| `value` | `string[]` | - |
-| `defaultValue` | `string[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | - |
-| `onInputValueChange` | `(details: InputValueChangeDetails) => void` | - |
-| `disabled` | `boolean` | - |
-| `openOnClick` | `boolean` | `true` |
+| `collection` | `ListCollection<T>` | `required` |
+| `value` | `string[]` | `-` |
+| `defaultValue` | `string[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails<T>) => void` | `-` |
+| `onInputValueChange` | `(details: InputValueChangeDetails) => void` | `-` |
+| `disabled` | `boolean` | `-` |
+| `openOnClick` | `boolean` | `false` |
 | `lazyMount` | `boolean` | `true` |
 | `unmountOnExit` | `boolean` | `true` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### AutocompleteInput
 
-Input with dropdown trigger and clear button.
+Input with menu trigger and clear button.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `variant` | `"ghost"` | `-` |
 | `showTrigger` | `boolean` | `false` |
 | `showClear` | `boolean` | `false` |
-| `disabled` | `boolean` | - |
-| `className` | `string` | - |
+| `disabled` | `boolean` | `-` |
+| `className` | `string` | `-` |
 
 ### AutocompleteContent
 
-Holds the dropdown options. Displayed in a portal.
+Holds the menu options. Displayed in a portal.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### AutocompleteGroup
 
@@ -211,27 +253,27 @@ Groups related items. Use with `groupBy` on the collection.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `heading` | `string \| ReactNode` | - |
-| `className` | `string` | - |
+| `heading` | `string \| ReactNode` | `-` |
+| `className` | `string` | `-` |
 
 ### AutocompleteGroupLabel
 
-Label for a group of options. Use inside `AutocompleteGroup`.
+Label for a group of options.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### AutocompleteItem
 
-Single selectable option in the dropdown list.
+Single selectable option in the menu list.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `item` | `T` | **required** |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `item` | `T` | `required` |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
 
 ### AutocompleteEmpty
 
@@ -239,8 +281,62 @@ Shown when no options match the current filter. Use for empty state.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-| `asChild` | `boolean` | - |
+| `className` | `string` | `-` |
+| `asChild` | `boolean` | `-` |
+
+### AutocompleteControl
+
+Public AutocompleteControl component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AutocompleteTrigger
+
+Public AutocompleteTrigger component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AutocompleteClear
+
+Public AutocompleteClear component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AutocompleteList
+
+Public AutocompleteList component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AutocompleteCollection
+
+Public AutocompleteCollection component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
+
+### AutocompleteSeparator
+
+Public AutocompleteSeparator component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `className` | `string` | `-` |
 
 ---
 

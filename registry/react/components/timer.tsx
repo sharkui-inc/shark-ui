@@ -3,18 +3,13 @@
 import { ark } from "@ark-ui/react/factory";
 import {
   Timer as ArkTimer,
-  useTimerContext as useArkTimer,
+  useTimerContext as useArkTimerContext,
 } from "@ark-ui/react/timer";
 import type React from "react";
 import { cn } from "@/lib/utils";
+import { Separator } from "@/registry/react/components/separator";
 
-export const useTimer = useArkTimer;
-
-export const remainingMsUntilDate = (date: Date): number => {
-  const end = new Date(date).getTime();
-
-  return Math.max(0, end - Date.now());
-};
+export const useTimerContext = useArkTimerContext;
 
 export const Timer = (props: React.ComponentProps<typeof ArkTimer.Root>) => {
   const { className, ...rest } = props;
@@ -81,18 +76,33 @@ export const TimerItemGroup = (props: TimerItemGroupProps) => {
 export const TimerItem = (
   props: React.ComponentProps<typeof ArkTimer.Item>
 ) => {
-  const { className, ...rest } = props;
+  const { type, className, ...rest } = props;
+
+  const timer = useTimerContext();
+  const value = timer.formattedTime[type];
 
   return (
-    <ArkTimer.Item
+    <ark.div
+      {...timer.getItemProps({ type })}
       className={cn(
-        "w-fit min-w-[2.5ch]",
-        "text-center font-semibold text-3xl text-foreground tabular-nums tracking-wider",
+        "shrink-0",
+        "inline-flex items-center gap-[0.05em]",
+        "text-foreground text-center text-3xl font-semibold tabular-nums",
         className
       )}
       data-slot="timer-item"
       {...rest}
-    />
+    >
+      {value.split("").map((digit, index) => {
+        const key = `${type}-${index}`;
+
+        return (
+          <span className="w-[1ch] shrink-0 text-center" key={key}>
+            {digit}
+          </span>
+        );
+      })}
+    </ark.div>
   );
 };
 
@@ -114,13 +124,19 @@ export const TimerSeparator = (
   const { className, children, ...rest } = props;
 
   return (
-    <ArkTimer.Separator
-      className={cn("font-semibold text-2xl text-muted-foreground", className)}
-      data-slot="timer-separator"
-      {...rest}
+    <Separator
+      asChild
+      className={cn(
+        "bg-transparent",
+        "text-muted-foreground text-2xl font-semibold",
+        "data-[orientation=horizontal]:h-auto data-[orientation=horizontal]:w-auto",
+        className
+      )}
     >
-      {children ?? ":"}
-    </ArkTimer.Separator>
+      <ArkTimer.Separator data-slot="timer-separator" {...rest}>
+        {children ?? ":"}
+      </ArkTimer.Separator>
+    </Separator>
   );
 };
 
@@ -191,11 +207,17 @@ export const TimerRestart = (props: TimerActionProps) => (
 );
 
 export const TimerPlay = (props: TimerActionProps) => {
-  const { paused } = useArkTimer();
+  const { paused } = useArkTimerContext();
 
   if (paused) {
     return <TimerResume {...props} />;
   }
 
   return <TimerStart {...props} />;
+};
+
+export const remainingMsUntilDate = (date: Date): number => {
+  const end = new Date(date).getTime();
+
+  return Math.max(0, end - Date.now());
 };

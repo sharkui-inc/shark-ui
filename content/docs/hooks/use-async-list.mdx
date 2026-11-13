@@ -1,0 +1,133 @@
+---
+title: useAsyncList
+description: Load, filter, sort, and paginate asynchronous lists.
+links:
+  doc: https://ark-ui.com/docs/collections/async-list
+  api: https://ark-ui.com/docs/collections/async-list#api-reference
+---
+
+import manifest from "@/registry/manifest/use-async-list";
+
+<ComponentPreview componentName="use-async-list" autoHeight />
+
+## Installation
+
+<CodeTabs>
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/use-async-list
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="hooks/use-async-list.ts" src="../hooks/use-async-list.ts" />
+
+<Step>Update the import paths to match your project setup.</Step>
+</Steps>
+
+</TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { useAsyncList } from "@/hooks/use-async-list";
+```
+
+```tsx
+const list = useAsyncList<User>({
+  autoReload: true,
+
+  async load({ signal }) {
+    const response = await fetch("/api/users", { signal });
+    const items: User[] = await response.json();
+
+    return { items };
+  },
+});
+```
+
+## Examples
+
+### Infinite loading
+
+Return a `cursor` from `load`, then call `loadMore()`.
+
+<ComponentPreview componentName="use-async-list" fileName="example-infinite-loading" autoHeight />
+
+### Filtering
+
+Use `setFilterText` to filter the list.
+
+<ComponentPreview componentName="use-async-list" fileName="example-filter" autoHeight />
+
+### Client-side sorting
+
+Pass `sort` to sort items after they load.
+
+<ComponentPreview componentName="use-async-list" fileName="example-sort-client-side" autoHeight />
+
+### Server-side sorting
+
+Read `sortDescriptor` in `load` to sort on the server.
+
+<ComponentPreview componentName="use-async-list" fileName="example-sort-server-side" autoHeight />
+
+### Dependencies
+
+Pass `dependencies` to reload when those values change.
+
+<ComponentPreview componentName="use-async-list" fileName="example-dependencies" autoHeight />
+
+## API Reference
+
+### useAsyncList
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `load` | `(details) => Promise<{ items: T[]; cursor?: C }>` | `required` |
+| `sort` | `(details) => { items: T[] } \| Promise<{ items: T[] }>` | `-` |
+| `initialItems` | `T[]` | `[]` |
+| `initialFilterText` | `string` | `""` |
+| `initialSortDescriptor` | `{ column: keyof T; direction: "ascending" \| "descending" }` | `-` |
+| `dependencies` | `(string \| number \| boolean \| null \| undefined)[]` | `[]` |
+| `autoReload` | `boolean` | `false` |
+| `onSuccess` | `(details: { items: T[] }) => void` | `-` |
+| `onError` | `(details: { error: Error }) => void` | `-` |
+
+### Return value
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `items` | `T[]` | `-` |
+| `loading` | `boolean` | `-` |
+| `sorting` | `boolean` | `-` |
+| `empty` | `boolean` | `-` |
+| `hasMore` | `boolean` | `-` |
+| `error` | `Error \| undefined` | `-` |
+| `filterText` | `string` | `-` |
+| `sortDescriptor` | `{ column: keyof T; direction: "ascending" \| "descending" } \| undefined` | `-` |
+| `cursor` | `C \| undefined` | `-` |
+| `abort` | `() => void` | `-` |
+| `reload` | `() => void` | `-` |
+| `loadMore` | `() => void` | `-` |
+| `sort` | `(descriptor) => void` | `-` |
+| `setFilterText` | `(text: string) => void` | `-` |
+| `clearFilter` | `() => void` | `-` |
+
+---
+
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/collections/async-list#api-reference).

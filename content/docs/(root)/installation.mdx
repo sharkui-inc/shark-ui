@@ -1,50 +1,65 @@
 ---
 title: Installation
-description: Get Shark UI running in your project.
+description: How to install and set up Shark UI in your project.
 ---
 
+import { CopySetupPrompt } from "@/components/mdx-components/copy-setup-prompt";
 import { FrameworksList } from "@/components/mdx-components/frameworks-list";
 
 ## Prerequisites
 
-Components require [Tailwind CSS v4](https://tailwindcss.com). Before you begin, make sure you have a project set up with Tailwind CSS installed.
-
-## Adding components
-
-### CLI
-
-```bash
-npx shadcn@latest add @shark/<component>
-```
-
-### Manual
-
-Copy component source from the component docs via the Manual tab.
-
-### All at once
-
-```bash
-npx shadcn@latest add @shark/ui
-```
+Use a React project with [Tailwind CSS v4](https://tailwindcss.com).
 
 ## New Project Setup
 
-For new projects, you have the `CLI` and `Manual` setup.
+Initialize a new project with the theme, every component, and visual utilities.
 
-### CLI
+<Steps>
+
+<Step>Initialize with Starter:</Step>
+
+```bash
+npx shadcn@latest init @shark/starter
+```
+
+</Steps>
+
+## Existing Project
+
+In an existing React project, add the theme first, then install the full catalog or only the components you need.
+
+<Steps>
+
+<Step>Install theme, utils, and animations:</Step>
 
 ```bash
 npx shadcn@latest init @shark/style
 ```
 
-### Manual
+<Step>Install all components at once (optional):</Step>
+
+```bash
+npx shadcn@latest add @shark/ui
+```
+
+Or install individual components from the [component docs](/docs/components).
+
+</Steps>
+
+## Set up with an agent
+
+Copy the setup prompt into your agent, and it sets up Shark UI for you.
+
+<CopySetupPrompt />
+
+## Framework setup
 
 <FrameworksList />
 
-## Styling
+## Theming
 
-For theming and layout setup, see [Styling](/docs/styling).
+Theme tokens land with `@shark/style` or the starter. Customize them here:
 
-## Color system
-
-See [Colors](/docs/colors) for the full palette and variable reference.
+1. [Styling](/docs/styling) — `globals.css`, tokens, radius, and layout
+2. [Colors](/docs/colors) — neutral scales, semantic roles (`primary`, `muted`, status), and CSS variables
+3. [Theme editor](/themes) — preview primary, gray, fonts, and radius without editing CSS by hand

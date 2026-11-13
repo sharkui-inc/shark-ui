@@ -8,14 +8,14 @@ import {
   CarouselPrevious,
 } from "@/registry/react/components/carousel";
 
-const Example = () => {
-  const slides = Array.from({ length: 16 });
-
-  return (
+const Example = () => (
+  <div className="w-full px-12">
     <Carousel
-      className="w-full max-w-48 sm:max-w-80"
+      aria-label="Carousel with multiple slides per page"
+      className="mx-auto w-full max-w-lg"
       slideCount={slides.length}
       slidesPerPage={3}
+      spacing="16px"
     >
       <CarouselControl>
         <CarouselPrevious>Previous</CarouselPrevious>
@@ -23,18 +23,20 @@ const Example = () => {
       </CarouselControl>
 
       <CarouselContent>
-        {slides.map((_, index) => (
-          <CarouselItem index={index} key={index}>
+        {slides.map((slide, index) => (
+          <CarouselItem index={index} key={slide.id}>
             <Card>
-              <CardContent className="flex h-40 items-center justify-center">
-                <span className="font-semibold text-2xl">{index + 1}</span>
+              <CardContent className="flex aspect-square items-center justify-center">
+                <span className="text-2xl font-semibold">{index + 1}</span>
               </CardContent>
             </Card>
           </CarouselItem>
         ))}
       </CarouselContent>
     </Carousel>
-  );
-};
+  </div>
+);
+
+const slides = Array.from({ length: 16 }, (_, id) => ({ id }));
 
 export default Example;

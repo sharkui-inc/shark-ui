@@ -2,7 +2,7 @@
 
 import {
   Editable as ArkEditable,
-  useEditableContext,
+  useEditableContext as useArkEditableContext,
 } from "@ark-ui/react/editable";
 import type React from "react";
 import { cn } from "@/lib/utils";
@@ -11,7 +11,7 @@ import {
   buttonVariants,
 } from "@/registry/react/components/button";
 
-export const useEditable = useEditableContext;
+export const useEditableContext = useArkEditableContext;
 
 export interface EditableProps
   extends React.ComponentProps<typeof ArkEditable.Root> {
@@ -22,7 +22,7 @@ export interface EditableProps
 }
 
 export const Editable = (props: EditableProps) => {
-  const { orientation = "horizontal", className, ...rest } = props;
+  const { orientation = "horizontal", className, children, ...rest } = props;
 
   return (
     <ArkEditable.Root
@@ -30,6 +30,7 @@ export const Editable = (props: EditableProps) => {
         "group/editable",
         "relative",
         "w-full",
+        "has-data-autoresize:w-fit has-data-autoresize:max-w-full",
         "data-[orientation=vertical]:items-end",
         "flex items-center gap-2",
         className
@@ -37,7 +38,9 @@ export const Editable = (props: EditableProps) => {
       data-orientation={orientation}
       data-slot="editable"
       {...rest}
-    />
+    >
+      {children}
+    </ArkEditable.Root>
   );
 };
 
@@ -48,7 +51,17 @@ export const EditableArea = (
 
   return (
     <ArkEditable.Area
-      className={cn("w-full", className)}
+      className={cn(
+        "w-full",
+        "grid",
+        "*:col-start-1 *:row-start-1",
+        "has-data-autoresize:w-fit has-data-autoresize:max-w-full",
+        "has-data-autoresize:justify-items-stretch",
+        "has-data-autoresize:**:data-[slot=input]:w-full",
+        "has-data-autoresize:**:data-[slot=input]:min-w-0",
+        "has-data-autoresize:**:data-[slot=input]:max-w-full",
+        className
+      )}
       data-slot="editable-area"
       {...rest}
     />
@@ -63,20 +76,8 @@ export const EditableInput = (props: EditableInputProps) => (
 );
 
 interface EditablePreviewProps
-  extends React.ComponentProps<typeof ArkEditable.Preview> {
-  /**
-   * The size of the preview
-   *
-   * @default "md"
-   */
-  size?: ButtonProps["size"];
-  /**
-   * The variant of the preview
-   *
-   * @default "outline"
-   */
-  variant?: ButtonProps["variant"];
-}
+  extends React.ComponentProps<typeof ArkEditable.Preview>,
+    Pick<ButtonProps, "size" | "variant"> {}
 
 export const EditablePreview = (props: EditablePreviewProps) => {
   const { variant = "outline", size = "md", className, ...rest } = props;
@@ -84,13 +85,17 @@ export const EditablePreview = (props: EditablePreviewProps) => {
   return (
     <ArkEditable.Preview
       className={cn(
-        buttonVariants({ variant, size, clickEffect: false }),
-        "w-full justify-start",
+        buttonVariants({ clickEffect: false, size, variant }),
+        "w-full",
+        "justify-start",
         "px-3",
-        "whitespace-pre-wrap font-normal text-base sm:text-sm",
+        "text-base font-normal sm:text-sm",
+        "whitespace-pre-wrap data-autoresize:whitespace-nowrap",
         "dark:hover:bg-input/32",
         "data-placeholder-shown:text-muted-foreground",
+        "in-[[data-slot=editable-area]:has(textarea)]:h-auto",
         "in-[[data-slot=editable-area]:has(textarea)]:items-start",
+        "in-[[data-slot=editable-area]:has(textarea)]:py-2",
         className
       )}
       data-slot="editable-preview"

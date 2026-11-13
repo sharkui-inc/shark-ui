@@ -15,10 +15,10 @@ const Example = () => {
   return (
     <div className="flex max-w-sm flex-col gap-2">
       <Clipboard value={value}>
-        <ClipboardInput />
+        <ClipboardInput aria-label="URL to copy" />
 
         <ClipboardTrigger asChild>
-          <Button size="icon-md">
+          <Button aria-label="Copy URL" size="icon-md">
             <ClipboardIndicator />
           </Button>
         </ClipboardTrigger>

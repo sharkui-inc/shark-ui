@@ -7,25 +7,25 @@ import {
 
 const Example = () => (
   <Tabs className="w-full max-w-48" defaultValue="tab-1" orientation="vertical">
-    <TabsList variant="default">
+    <TabsList>
       <TabsTrigger value="tab-1">Tab 1</TabsTrigger>
       <TabsTrigger value="tab-2">Tab 2</TabsTrigger>
       <TabsTrigger value="tab-3">Tab 3</TabsTrigger>
     </TabsList>
     <TabsContent
-      className="p-4 text-center text-muted-foreground text-xs"
+      className="text-muted-foreground rounded-md border p-4 text-center"
       value="tab-1"
     >
       Content 1
     </TabsContent>
     <TabsContent
-      className="p-4 text-center text-muted-foreground text-xs"
+      className="text-muted-foreground rounded-md border p-4 text-center"
       value="tab-2"
     >
       Content 2
     </TabsContent>
     <TabsContent
-      className="p-4 text-center text-muted-foreground text-xs"
+      className="text-muted-foreground rounded-md border p-4 text-center"
       value="tab-3"
     >
       Content 3

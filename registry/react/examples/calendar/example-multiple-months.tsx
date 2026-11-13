@@ -23,8 +23,9 @@ const Example = () => {
       <CardContent>
         <Calendar
           numOfMonths={2}
-          onValueChange={({ value }) => setValue(value)}
+          onValueChange={({ value: nextValue }) => setValue(nextValue)}
           selectionMode="range"
+          showOutsideDays={false}
           value={value}
         >
           <CalendarViewControl>

@@ -1,6 +1,9 @@
 "use client";
 
-import { Dialog as ArkDialog, useDialogContext } from "@ark-ui/react/dialog";
+import {
+  Dialog as ArkDialog,
+  useDialogContext as useArkDialogContext,
+} from "@ark-ui/react/dialog";
 import { Portal } from "@ark-ui/react/portal";
 import { XIcon } from "lucide-react";
 import type React from "react";
@@ -17,7 +20,7 @@ import {
   DialogTitle,
 } from "@/registry/react/components/dialog";
 
-export const useSheet = useDialogContext;
+export const useSheetContext = useArkDialogContext;
 
 export const Sheet = (props: React.ComponentProps<typeof Dialog>) => (
   <Dialog data-slot="sheet" {...props} />
@@ -29,36 +32,43 @@ export const SheetTrigger = (
 
 export const SheetOverlay = (
   props: React.ComponentProps<typeof DialogOverlay>
-) => <DialogOverlay data-slot="sheet-overlay" {...props} />;
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <DialogOverlay
+      className={cn(
+        "peer-data-[slot=dialog-overlay]:block!",
+        "peer-data-[slot=sheet-overlay]:hidden",
+        className
+      )}
+      data-slot="sheet-overlay"
+      {...rest}
+    />
+  );
+};
 
 const sheetPositionerVariants = tv({
   base: [
-    "[--inset:--spacing(0)]",
-    "fixed inset-0 z-50",
+    "fixed inset-0 z-(--z-index,50)",
     "h-svh w-screen",
     "grid",
     "overflow-hidden",
   ],
+  defaultVariants: {
+    variant: "default",
+  },
   variants: {
     placement: {
-      bottom: "grid grid-rows-[1fr_auto] not-data-[variant=inset]:pt-12",
-      top: "grid grid-rows-[auto_1fr] not-data-[variant=inset]:pb-12",
+      bottom: ["grid-rows-[1fr_auto]", "not-data-[variant=inset]:pt-12"],
       left: "flex justify-start",
       right: "flex justify-end",
+      top: ["grid-rows-[auto_1fr]", "not-data-[variant=inset]:pb-12"],
     },
     variant: {
       default: "",
-      inset: [
-        "px-(--inset) sm:[--inset:--spacing(4)]",
-        "data-[placement=bottom]:pb-(--inset)",
-        "data-[placement=top]:pt-(--inset)",
-        "data-[placement=left]:pt-(--inset) data-[placement=left]:pb-(--inset)",
-        "data-[placement=right]:pt-(--inset) data-[placement=right]:pb-(--inset)",
-      ],
+      inset: ["p-3 sm:p-4"],
     },
-  },
-  defaultVariants: {
-    variant: "default",
   },
 });
 
@@ -83,51 +93,83 @@ export const SheetPositioner = (props: SheetPositionerProps) => {
 const sheetContentVariants = tv({
   base: [
     "[--space:--spacing(6)]",
+    "[--nested-n:var(--nested-layer-count,0)]",
+    "z-[calc(50+var(--layer-index,0))]",
     "relative",
     "max-h-full min-h-0 w-full min-w-0",
     "flex flex-col",
-    "bg-popover",
+    "bg-popover bg-clip-padding",
     "text-popover-foreground",
-    "shadow-lg/5",
-    "transition-[opacity,translate] duration-200 ease-in-out will-change-transform",
+    "shadow-lg/4",
+    "outline-hidden",
+    "opacity-[calc(1-0.1*var(--nested-n))]",
+    "scale-[calc(1-var(--nested-scale,0)*var(--nested-n))]",
+    "data-[has-nested=dialog]:overflow-hidden data-[has-nested=dialog]:rounded-2xl data-[has-nested=dialog]:border-y",
+    "transition duration-200 ease-out",
     "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
     "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
-    "motion-reduce:animate-none! motion-reduce:transition-none!",
+    "motion-reduce:animate-none motion-reduce:transition-none",
+    "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
   ],
+  defaultVariants: {
+    placement: "right",
+    variant: "default",
+  },
   variants: {
     placement: {
       bottom: [
-        "row-start-2 border-t",
-        "data-[state=closed]:slide-in-from-bottom-10 data-[state=open]:slide-in-from-bottom-10",
-      ],
-      top: [
-        "border-b",
-        "data-[state=closed]:slide-out-to-top-10 data-[state=open]:slide-in-from-top-10",
+        "row-start-2",
+        "pb-[env(safe-area-inset-bottom,0px)]",
+        "border-t",
+        "origin-bottom",
+        "[--nested-scale:0.05]",
+        "data-[has-nested=dialog]:border-x",
+        "translate-y-[calc(-1*(1.25rem+6svh+5%)*var(--nested-n))]",
+        "data-[state=closed]:slide-out-to-bottom-10",
+        "data-[state=open]:slide-in-from-bottom-10",
       ],
       left: [
         "w-[calc(100%-(--spacing(12)))] max-w-md",
-        "col-start-2",
+        "ps-[env(safe-area-inset-left,0px)]",
         "border-e",
-        "data-[state=closed]:slide-out-to-start-10 data-[state=open]:slide-in-from-start-10",
+        "origin-left rtl:origin-right",
+        "[--nested-scale:0.1]",
+        "translate-x-[calc((1.25rem+10%)*var(--nested-n))]",
+        "rtl:translate-x-[calc(-1*(1.25rem+10%)*var(--nested-n))]",
+        "data-[state=closed]:slide-out-to-left-10",
+        "data-[state=open]:slide-in-from-left-10",
+        "rtl:data-[state=closed]:slide-out-to-right-10 rtl:data-[state=open]:slide-in-from-right-10 rtl:ps-[env(safe-area-inset-right,0px)]",
       ],
       right: [
         "w-[calc(100%-(--spacing(12)))] max-w-md",
-        "col-start-2",
+        "pe-[env(safe-area-inset-right,0px)]",
         "border-s",
-        "data-[state=closed]:slide-out-to-end-10 data-[state=open]:slide-in-from-end-10",
+        "origin-right rtl:origin-left",
+        "[--nested-scale:0.1]",
+        "translate-x-[calc(-1*(1.25rem+10%)*var(--nested-n))]",
+        "rtl:translate-x-[calc((1.25rem+10%)*var(--nested-n))]",
+        "data-[state=closed]:slide-out-to-right-10",
+        "data-[state=open]:slide-in-from-right-10",
+        "rtl:data-[state=closed]:slide-out-to-left-10 rtl:data-[state=open]:slide-in-from-left-10 rtl:pe-[env(safe-area-inset-left,0px)]",
+      ],
+      top: [
+        "pt-[env(safe-area-inset-top,0px)]",
+        "border-b",
+        "origin-top",
+        "[--nested-scale:0.05]",
+        "data-[has-nested=dialog]:border-x",
+        "translate-y-[calc((1.25rem+6svh+5%)*var(--nested-n))]",
+        "data-[state=closed]:slide-out-to-top-10",
+        "data-[state=open]:slide-in-from-top-10",
       ],
     },
     variant: {
       default: "",
       inset: [
-        "sm:rounded-2xl sm:border",
-        "sm:**:data-[slot=sheet-footer]:rounded-b-[calc(var(--radius-2xl)-1px)]",
+        "rounded-2xl border",
+        "**:data-[slot=sheet-footer]:rounded-b-2xl",
       ],
     },
-  },
-  defaultVariants: {
-    placement: "right",
-    variant: "default",
   },
 });
 
@@ -171,11 +213,15 @@ export const SheetContent = (props: SheetContentProps) => {
             <SheetClose asChild>
               <Button
                 aria-label="Close"
-                className="absolute inset-e-2 top-2 opacity-64 hover:opacity-100"
+                className={cn(
+                  "absolute inset-e-2 top-2",
+                  "opacity-64",
+                  "hover:opacity-100"
+                )}
                 size="icon-sm"
                 variant="ghost"
               >
-                <XIcon />
+                <XIcon aria-hidden="true" />
               </Button>
             </SheetClose>
           )}
@@ -187,7 +233,21 @@ export const SheetContent = (props: SheetContentProps) => {
 
 export const SheetHeader = (
   props: React.ComponentProps<typeof DialogHeader>
-) => <DialogHeader data-slot="sheet-header" {...props} />;
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    <DialogHeader
+      className={cn(
+        "in-[[data-slot=sheet-content]:has([data-slot=sheet-body])]:pb-3",
+        "max-sm:pb-4",
+        className
+      )}
+      data-slot="sheet-header"
+      {...rest}
+    />
+  );
+};
 
 export const SheetTitle = (props: React.ComponentProps<typeof DialogTitle>) => (
   <DialogTitle data-slot="sheet-title" {...props} />
@@ -203,7 +263,7 @@ export const SheetBody = (props: React.ComponentProps<typeof DialogBody>) => {
   return (
     <DialogBody
       className={cn(
-        "in-[[data-slot=sheet-content]:has([data-slot=sheet-header])]:pt-0",
+        "in-[[data-slot=sheet-content]:has([data-slot=sheet-header]:not(.sr-only))]:pt-1",
         className
       )}
       data-slot="sheet-body"

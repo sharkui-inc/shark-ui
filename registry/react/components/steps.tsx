@@ -1,12 +1,15 @@
 "use client";
 
 import { ark } from "@ark-ui/react/factory";
-import { Steps as ArkSteps, useStepsContext } from "@ark-ui/react/steps";
+import {
+  Steps as ArkSteps,
+  useStepsContext as useArkStepsContext,
+} from "@ark-ui/react/steps";
 import { CheckIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useSteps = useStepsContext;
+export const useStepsContext = useArkStepsContext;
 
 export const Steps = (props: React.ComponentProps<typeof ArkSteps.Root>) => {
   const { className, ...rest } = props;
@@ -53,10 +56,13 @@ export const StepsItem = (
     <ArkSteps.Item
       className={cn(
         "group/step",
-        "relative flex flex-1",
+        "relative",
+        "flex-1",
+        "flex",
         "data-[orientation=vertical]:items-start",
         "data-[orientation=horizontal]:items-center",
-        "last:flex-initial last:**:data-[slot=steps-separator]:hidden",
+        "last:flex-initial",
+        "last:*:data-[slot=steps-separator]:hidden",
         className
       )}
       data-slot="steps-item"
@@ -75,7 +81,7 @@ export const StepsTrigger = (props: StepsTriggerProps) => {
     <ArkSteps.Trigger
       className={cn(
         "inline-flex items-center gap-3",
-        "cursor-pointer rounded-full outline-none",
+        "cursor-pointer outline-hidden",
         "disabled:pointer-events-none disabled:opacity-64",
         className
       )}
@@ -93,24 +99,31 @@ export const StepsIndicator = (
   return (
     <ArkSteps.Indicator
       className={cn(
-        "flex shrink-0 items-center justify-center tabular-nums",
+        "shrink-0",
+        "flex items-center justify-center",
+        "tabular-nums",
         "size-(--steps-size)",
-        "bg-muted text-muted-foreground",
-        "font-medium text-sm",
+        "bg-muted",
+        "text-muted-foreground",
+        "text-sm font-medium",
         "rounded-full border",
         "transition-colors",
-        "in-focus-visible:ring-[3px] in-focus-visible:ring-ring/32",
+        "in-focus-visible:border-ring/64 in-focus-visible:ring-ring/24 in-focus-visible:ring-2",
+        "data-complete:in-focus-visible:border-background data-current:in-focus-visible:border-background",
         "data-current:border-primary data-current:bg-primary data-current:text-primary-foreground",
         "data-complete:border-primary data-complete:bg-primary data-complete:text-primary-foreground",
         "[&_svg]:size-(--steps-icon-size) [&_svg]:shrink-0",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="steps-indicator"
       {...rest}
     >
       <span className="group-data-complete/step:hidden">{children}</span>
-      <CheckIcon className="hidden group-data-complete/step:block" />
+      <CheckIcon
+        aria-hidden="true"
+        className="hidden group-data-complete/step:block"
+      />
     </ArkSteps.Indicator>
   );
 };
@@ -122,15 +135,15 @@ export const StepsSeparator = (
 
   return (
     <ArkSteps.Separator
+      aria-hidden="true"
       className={cn(
-        "flex-1",
-        "bg-border",
-        "rounded-full",
+        "shrink-0",
+        "bg-border rounded-full",
         "transition-colors",
         "data-complete:bg-primary",
-        "data-[orientation=horizontal]:mx-(--steps-gutter) data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:w-full",
-        "data-[orientation=vertical]:absolute data-[orientation=vertical]:top-[calc(var(--steps-size)+var(--steps-gutter))] data-[orientation=vertical]:left-[calc(var(--steps-size)/2-1px)] data-[orientation=vertical]:h-full data-[orientation=vertical]:max-h-[calc(100%-(var(--steps-size)+var(--steps-gutter)*2))] data-[orientation=vertical]:w-0.5",
-        "motion-reduce:transition-none!",
+        "data-[orientation=horizontal]:mx-(--steps-gutter) data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:flex-1 data-[orientation=horizontal]:self-center",
+        "data-[orientation=vertical]:absolute data-[orientation=vertical]:inset-s-[calc(var(--steps-size)/2)] data-[orientation=vertical]:top-[calc(var(--steps-size)+var(--steps-gutter))] data-[orientation=vertical]:bottom-(--steps-gutter) data-[orientation=vertical]:-ms-px data-[orientation=vertical]:w-0.5",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="steps-separator"
@@ -144,7 +157,7 @@ export const StepsTitle = (props: React.ComponentProps<typeof ark.span>) => {
 
   return (
     <ark.span
-      className={cn("font-medium text-sm leading-none", className)}
+      className={cn("text-sm leading-none font-medium", className)}
       data-slot="steps-title"
       {...rest}
     />
@@ -172,7 +185,11 @@ export const StepsContent = (
 
   return (
     <ArkSteps.Content
-      className={cn("data-[orientation=vertical]:flex-1", className)}
+      className={cn(
+        "outline-hidden",
+        "data-[orientation=vertical]:flex-1",
+        className
+      )}
       data-slot="steps-content"
       {...rest}
     />

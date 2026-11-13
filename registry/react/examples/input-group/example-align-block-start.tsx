@@ -1,11 +1,7 @@
 "use client";
 
 import { CopyIcon, FileCodeIcon } from "lucide-react";
-import {
-  Field,
-  FieldDescription,
-  FieldLabel,
-} from "@/registry/react/components/field";
+import { Field, FieldLabel } from "@/registry/react/components/field";
 import {
   InputGroup,
   InputGroupAddon,
@@ -25,13 +21,12 @@ const Example = () => (
       <InputGroupAddon align="block-start">
         <FileCodeIcon className="text-muted-foreground" />
         <InputGroupText className="font-mono">script.js</InputGroupText>
-        <InputGroupButton className="ml-auto" size="icon-xs">
+        <InputGroupButton className="ms-auto" size="icon-xs">
           <CopyIcon />
           <span className="sr-only">Copy</span>
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>
-    <FieldDescription>Header positioned above the textarea.</FieldDescription>
   </Field>
 );
 

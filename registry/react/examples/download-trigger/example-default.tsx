@@ -16,7 +16,7 @@ const DownloadTriggerDemo = () => (
       mimeType="text/plain"
     >
       <Button size="lg" variant="outline">
-        <DownloadIcon />
+        <DownloadIcon data-icon="inline-start" />
         Download
       </Button>
     </DownloadTrigger>

@@ -1,4 +1,6 @@
 import { Button } from "@/registry/react/components/button";
+import { Field, FieldLabel } from "@/registry/react/components/field";
+import { Input } from "@/registry/react/components/input";
 import {
   Sheet,
   SheetBody,
@@ -16,18 +18,21 @@ const Example = () => (
     </SheetTrigger>
     <SheetContent>
       <SheetHeader
-        description="This is a non-modal sheet. You can interact with elements outside the sheet."
-        title="Non-Modal Sheet"
+        description="Shown next to your comments."
+        title="Edit profile"
       />
       <SheetBody>
-        <p className="text-muted-foreground text-sm">
-          Non-modal sheets allow interaction with elements outside. Focus
-          trapping and scroll prevention are disabled.
-        </p>
+        <Field>
+          <FieldLabel>Display name</FieldLabel>
+          <Input defaultValue="Ada Lovelace" />
+        </Field>
       </SheetBody>
       <SheetFooter>
         <SheetClose asChild>
-          <Button variant="outline">Close</Button>
+          <Button>Save</Button>
+        </SheetClose>
+        <SheetClose asChild>
+          <Button variant="outline">Cancel</Button>
         </SheetClose>
       </SheetFooter>
     </SheetContent>

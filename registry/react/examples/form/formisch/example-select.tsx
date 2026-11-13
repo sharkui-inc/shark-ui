@@ -8,9 +8,8 @@ import {
   type SubmitHandler,
   useForm,
 } from "@formisch/react";
-import { Button } from "@registry/react/components/button";
-import { toast } from "@registry/react/components/toast";
 import * as v from "valibot";
+import { Button } from "@/registry/react/components/button";
 import {
   Card,
   CardContent,
@@ -31,36 +30,27 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
-
-const formSchema = v.object({
-  language: v.pipe(
-    v.array(v.string()),
-    v.check((val) => val[0] !== "", "Please select your spoken language."),
-    v.check(
-      (val) => !val.includes("auto"),
-      "Auto-detection is not allowed. Please select a specific language."
-    )
-  ),
-});
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
-    schema: formSchema,
     initialInput: { language: [""] },
+    schema: formSchema,
   });
 
   const onSubmit: SubmitHandler<typeof formSchema> = (output) => {
     toast.info({
-      id: "language-submitted",
-      title: "Language submitted",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(output, null, 2)}</code>
         </pre>
       ),
+      id: "language-submitted",
+      title: "Language submitted",
     });
   };
 
@@ -79,6 +69,8 @@ const Example = () => {
               {(field) => (
                 <Field
                   invalid={Boolean(field.errors?.length)}
+                  onBlur={field.props.onBlur}
+                  onFocus={field.props.onFocus}
                   orientation="responsive"
                 >
                   <FieldContent>
@@ -98,11 +90,13 @@ const Example = () => {
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>
-                      {collection.items.map((item) => (
-                        <SelectItem item={item} key={item.value}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
+                      <SelectList>
+                        {collection.items.map((item) => (
+                          <SelectItem item={item} key={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectList>
                     </SelectContent>
                   </Select>
                 </Field>
@@ -120,6 +114,17 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = v.object({
+  language: v.pipe(
+    v.array(v.string()),
+    v.check((val) => val[0] !== "", "Please select your spoken language."),
+    v.check(
+      (val) => !val.includes("auto"),
+      "Auto-detection is not allowed. Please select a specific language."
+    )
+  ),
+});
 
 const collection = createListCollection({
   items: [

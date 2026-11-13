@@ -2,13 +2,13 @@
 
 import {
   Accordion as ArkAccordion,
-  useAccordionContext,
+  useAccordionContext as useArkAccordionContext,
 } from "@ark-ui/react/accordion";
 import { ChevronDownIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
-export const useAccordion = useAccordionContext;
+export const useAccordionContext = useArkAccordionContext;
 
 export const Accordion = (
   props: React.ComponentProps<typeof ArkAccordion.Root>
@@ -38,7 +38,7 @@ export const AccordionItem = (
 
   return (
     <ArkAccordion.Item
-      className={cn("flex flex-col border-b last:border-b-0", className)}
+      className={cn("flex flex-col", "border-b", "last:border-b-0", className)}
       data-slot="accordion-item"
       {...rest}
     />
@@ -53,16 +53,18 @@ export const AccordionTrigger = (
   return (
     <ArkAccordion.ItemTrigger
       className={cn(
-        "flex flex-1 items-center justify-between gap-3",
+        "flex-1",
+        "flex items-center justify-between gap-3",
+        "touch-manipulation",
         "py-4",
-        "text-left font-medium text-sm",
+        "text-start text-sm font-medium",
         "rounded-md border border-transparent",
-        "outline-none",
-        "transition-all",
+        "outline-hidden",
+        "transition-[border-color,box-shadow,opacity]",
         "disabled:pointer-events-none disabled:opacity-64 disabled:grayscale",
-        "focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
         "[&_[data-state=open]>svg]:rotate-180",
-        "motion-reduce:transition-none!",
+        "motion-reduce:transition-none",
         className
       )}
       data-slot="accordion-trigger"
@@ -72,14 +74,15 @@ export const AccordionTrigger = (
 
       <ArkAccordion.ItemIndicator data-slot="accordion-indicator">
         <ChevronDownIcon
+          aria-hidden="true"
           className={cn(
             "translate-y-0.5",
             "size-4",
             "shrink-0",
             "text-muted-foreground",
             "pointer-events-none",
-            "transition-transform duration-300",
-            "motion-reduce:transition-none!"
+            "transition-transform duration-150 ease-out",
+            "motion-reduce:transition-none"
           )}
         />
       </ArkAccordion.ItemIndicator>
@@ -95,10 +98,13 @@ export const AccordionContent = (
   return (
     <ArkAccordion.ItemContent
       className={cn(
-        "overflow-hidden rounded-md text-sm",
-        "data-[state=open]:animate-slide-down",
-        "data-[state=closed]:animate-slide-up",
-        "motion-reduce:animate-none!",
+        "text-sm",
+        "rounded-md",
+        "overflow-hidden",
+        "data-[state=open]:animate-collapse-down",
+        "data-[state=closed]:animate-collapse-up",
+        "motion-reduce:animate-none",
+        "motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
         className
       )}
       data-slot="accordion-content"

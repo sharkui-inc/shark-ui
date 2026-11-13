@@ -1,0 +1,174 @@
+"use client";
+
+import { ChevronDownIcon, InfoIcon, StarIcon } from "lucide-react";
+import React from "react";
+import {
+  ButtonGroup,
+  ButtonGroupText,
+} from "@/registry/react/components/button-group";
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+} from "@/registry/react/components/field";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+} from "@/registry/react/components/input-group";
+import {
+  Menu,
+  MenuContent,
+  MenuItem,
+  MenuList,
+  MenuTrigger,
+} from "@/registry/react/components/menu";
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/registry/react/components/popover";
+import { toast } from "@/registry/react/components/toast";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/registry/react/components/tooltip";
+
+const InputGroupWithTooltip = () => {
+  const [country, setCountry] = React.useState("+1");
+
+  return (
+    <FieldGroup>
+      <Field>
+        <FieldLabel>Tooltip</FieldLabel>
+        <InputGroup>
+          <InputGroupInput />
+          <InputGroupAddon align="inline-end">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <InputGroupButton
+                  aria-label="Info"
+                  className="rounded-full"
+                  size="icon-xs"
+                >
+                  <InfoIcon aria-hidden="true" />
+                </InputGroupButton>
+              </TooltipTrigger>
+              <TooltipContent>This is content in a tooltip.</TooltipContent>
+            </Tooltip>
+          </InputGroupAddon>
+        </InputGroup>
+        <FieldDescription>
+          This is a description of the input group.
+        </FieldDescription>
+      </Field>
+
+      <Field>
+        <FieldLabel>Dropdown</FieldLabel>
+        <InputGroup>
+          <InputGroupInput />
+          <InputGroupAddon>
+            <Menu
+              positioning={{
+                offset: { crossAxis: -8, mainAxis: 10 },
+                placement: "bottom-start",
+              }}
+            >
+              <MenuTrigger asChild>
+                <InputGroupButton className="text-muted-foreground tabular-nums">
+                  {country}
+                  <ChevronDownIcon aria-hidden="true" />
+                </InputGroupButton>
+              </MenuTrigger>
+              <MenuContent className="min-w-16">
+                <MenuList>
+                  <MenuItem onClick={() => setCountry("+1")} value="+1">
+                    +1
+                  </MenuItem>
+                  <MenuItem onClick={() => setCountry("+44")} value="+44">
+                    +44
+                  </MenuItem>
+                  <MenuItem onClick={() => setCountry("+46")} value="+46">
+                    +46
+                  </MenuItem>
+                </MenuList>
+              </MenuContent>
+            </Menu>
+          </InputGroupAddon>
+        </InputGroup>
+        <FieldDescription>
+          This is a description of the input group.
+        </FieldDescription>
+      </Field>
+
+      <Field>
+        <FieldLabel>Popover</FieldLabel>
+        <InputGroup>
+          <Popover positioning={{ placement: "bottom-start" }}>
+            <PopoverTrigger asChild>
+              <InputGroupAddon>
+                <InputGroupButton
+                  aria-label="Security info"
+                  size="icon-xs"
+                  variant="secondary"
+                >
+                  <InfoIcon aria-hidden="true" />
+                </InputGroupButton>
+              </InputGroupAddon>
+            </PopoverTrigger>
+            <PopoverContent className="min-w-64">
+              <PopoverHeader>
+                <PopoverTitle>Your connection is not secure.</PopoverTitle>
+                <PopoverDescription>
+                  You should not enter any sensitive information on this site.
+                </PopoverDescription>
+              </PopoverHeader>
+            </PopoverContent>
+          </Popover>
+          <InputGroupAddon>
+            <InputGroupText>https://</InputGroupText>
+          </InputGroupAddon>
+          <InputGroupInput />
+          <InputGroupAddon align="inline-end">
+            <InputGroupButton
+              aria-label="Add to favorites"
+              onClick={() => toast.create({ title: "Added to favorites" })}
+              size="icon-xs"
+            >
+              <StarIcon aria-hidden="true" />
+            </InputGroupButton>
+          </InputGroupAddon>
+        </InputGroup>
+        <FieldDescription>
+          This is a description of the input group.
+        </FieldDescription>
+      </Field>
+
+      <Field>
+        <FieldLabel>Button Group</FieldLabel>
+        <ButtonGroup>
+          <ButtonGroupText>https://</ButtonGroupText>
+          <InputGroup>
+            <InputGroupInput />
+            <InputGroupAddon align="inline-end">
+              <InfoIcon aria-hidden="true" />
+            </InputGroupAddon>
+          </InputGroup>
+          <ButtonGroupText>.com</ButtonGroupText>
+        </ButtonGroup>
+        <FieldDescription>
+          This is a description of the input group.
+        </FieldDescription>
+      </Field>
+    </FieldGroup>
+  );
+};
+
+export default InputGroupWithTooltip;

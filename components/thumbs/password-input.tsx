@@ -3,16 +3,16 @@ import { ThumbCard, type ThumbCardProps } from "./thumb-card";
 
 export const PasswordInputThumb = (props: ThumbCardProps) => (
   <ThumbCard {...props}>
-    <div className="relative flex h-8 w-48 items-center justify-between overflow-hidden rounded-lg border border-input bg-muted px-3 shadow-md/5">
+    <div className="border-input bg-muted relative flex h-8 w-48 items-center justify-between overflow-hidden rounded-lg border px-3 shadow-sm/4">
       <div className="flex flex-1 items-center">
         <span
-          aria-hidden
-          className="relative mt-2 select-none text-muted-foreground/64 text-xl leading-none"
+          aria-hidden="true"
+          className="text-muted-foreground/64 relative mt-2 text-xl leading-none select-none"
         >
           ********
         </span>
       </div>
-      <EyeIcon aria-hidden className="size-3 text-muted-foreground/64" />
+      <EyeIcon aria-hidden="true" className="text-muted-foreground/64 size-3" />
     </div>
   </ThumbCard>
 );

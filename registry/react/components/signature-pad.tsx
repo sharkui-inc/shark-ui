@@ -2,19 +2,20 @@
 
 import {
   SignaturePad as ArkSignaturePad,
-  useSignaturePadContext,
+  useSignaturePadContext as useArkSignaturePadContext,
 } from "@ark-ui/react/signature-pad";
-import { RotateCcw } from "lucide-react";
+import { RotateCcwIcon } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
+import { fieldLabelVariants } from "@/registry/react/components/field";
 
-export const useSignaturePad = useSignaturePadContext;
+export const useSignaturePadContext = useArkSignaturePadContext;
 
 export const SignaturePad = (
   props: React.ComponentProps<typeof ArkSignaturePad.Root>
 ) => {
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
 
   return (
     <ArkSignaturePad.Root
@@ -27,6 +28,7 @@ export const SignaturePad = (
       data-slot="signature-pad"
       {...rest}
     >
+      {children}
       <SignaturePadControl>
         <SignaturePadSegment />
         <SignaturePadClear />
@@ -36,10 +38,26 @@ export const SignaturePad = (
   );
 };
 
+export const SignaturePadLabel = (
+  props: React.ComponentProps<typeof ArkSignaturePad.Label>
+) => {
+  const { className, ...rest } = props;
+
+  return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
+    <ArkSignaturePad.Label
+      className={cn(fieldLabelVariants(), className)}
+      data-slot="signature-pad-label"
+      {...rest}
+    />
+  );
+};
+
 const SignaturePadControl = (
   props: React.ComponentProps<typeof ArkSignaturePad.Control>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <ArkSignaturePad.Control
       className={cn(
@@ -47,7 +65,8 @@ const SignaturePadControl = (
         "size-full min-h-0 min-w-0",
         "flex flex-col",
         "bg-muted/64",
-        "rounded-xl border shadow-xs/5",
+        "rounded-xl border shadow-xs/4",
+        "outline-hidden",
         "data-disabled:cursor-not-allowed",
         className
       )}
@@ -61,6 +80,7 @@ const SignaturePadSegment = (
   props: React.ComponentProps<typeof ArkSignaturePad.Segment>
 ) => {
   const { className, ...rest } = props;
+
   return (
     <ArkSignaturePad.Segment
       className={cn(
@@ -94,7 +114,7 @@ const SignaturePadClear = (
       {...rest}
     >
       <Button size="icon-md" variant="ghost">
-        <RotateCcw />
+        <RotateCcwIcon aria-hidden="true" />
       </Button>
     </ArkSignaturePad.ClearTrigger>
   );

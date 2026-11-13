@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "@registry/react/components/toast";
+import { CloudUploadIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -23,26 +23,18 @@ import {
 import {
   FileUpload,
   FileUploadDropzone,
-  FileUploadDropzoneIcon,
   FileUploadList,
 } from "@/registry/react/components/file-upload";
-
-const formSchema = z.object({
-  resume: z
-    .array(z.instanceof(File))
-    .min(1, "Please upload at least one PDF or Word document."),
-});
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: { resume: [] as File[] },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "resume-submitted",
-      title: "Resume uploaded",
       description: (
         <div className="mt-2 flex flex-col gap-2">
           <p className="text-muted-foreground text-sm">
@@ -64,6 +56,8 @@ const Example = () => {
           </pre>
         </div>
       ),
+      id: "resume-submitted",
+      title: "Resume uploaded",
     });
   };
 
@@ -88,7 +82,11 @@ const Example = () => {
                     onFileAccept={(e) => field.onChange(e.files)}
                   >
                     <FileUploadDropzone>
-                      <FileUploadDropzoneIcon />
+                      <CloudUploadIcon
+                        aria-hidden="true"
+                        className="text-muted-foreground group-data-dragging/file-upload:text-primary size-8"
+                        strokeWidth={1.5}
+                      />
                     </FileUploadDropzone>
                     <FileUploadList />
                   </FileUpload>
@@ -111,5 +109,11 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  resume: z
+    .array(z.instanceof(File))
+    .min(1, "Please upload at least one PDF or Word document."),
+});
 
 export default Example;

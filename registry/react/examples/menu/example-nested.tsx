@@ -3,6 +3,7 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuSub,
   MenuSubContent,
   MenuSubTrigger,
@@ -14,16 +15,20 @@ const Example = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-40">
-      <MenuItem value="item-one">Item one</MenuItem>
-      <MenuSub>
-        <MenuSubTrigger>More</MenuSubTrigger>
-        <MenuSubContent>
-          <MenuItem value="sub-a">Sub item A</MenuItem>
-          <MenuItem value="sub-b">Sub item B</MenuItem>
-        </MenuSubContent>
-      </MenuSub>
-      <MenuItem value="item-two">Item two</MenuItem>
+    <MenuContent className="min-w-40">
+      <MenuList>
+        <MenuItem value="item-one">Item one</MenuItem>
+        <MenuSub>
+          <MenuSubTrigger>More</MenuSubTrigger>
+          <MenuSubContent>
+            <MenuList>
+              <MenuItem value="sub-a">Sub item A</MenuItem>
+              <MenuItem value="sub-b">Sub item B</MenuItem>
+            </MenuList>
+          </MenuSubContent>
+        </MenuSub>
+        <MenuItem value="item-two">Item two</MenuItem>
+      </MenuList>
     </MenuContent>
   </Menu>
 );

@@ -1,10 +1,17 @@
 ---
 title: Dialog
-description: A dialog for displaying content.
+description: Modal dialog for focused content.
+aliases:
+  - Modal
+  - Popup
+seo:
+  description: Modal for confirmations and focused tasks.
 links:
   doc: https://ark-ui.com/docs/components/dialog
   api: https://ark-ui.com/docs/components/dialog#api-reference
 ---
+
+import manifest from "@/registry/manifest/dialog";
 
 <ComponentPreview componentName="dialog" />
 
@@ -31,11 +38,11 @@ npx shadcn@latest add @shark/dialog
 
 <Step>This component depends on [Button](/docs/components/button) and [Scroll Area](/docs/components/scroll-area). Install them first if you haven't already.</Step>
 
+<RegistryDependencies registryDependencies={manifest.registryDependencies} />
+
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react lucide-react tailwind-variants
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -66,13 +73,13 @@ Dialog
 ## Usage
 
 ```tsx
-import { 
-  Dialog, 
-  DialogTrigger, 
-  DialogContent, 
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
   DialogHeader,
-  DialogTitle, 
-  DialogDescription, 
+  DialogTitle,
+  DialogDescription,
   DialogBody,
   DialogFooter,
   DialogClose,
@@ -109,7 +116,7 @@ Use `open` and `onOpenChange` on the root to control the dialog state.
 
 ### Using props
 
-Pass `title` and `description` props directly to `DialogHeader`. 
+Pass `title` and `description` props directly to `DialogHeader`.
 
 ```tsx showLineNumbers
 <DialogHeader title="Dialog Title" description="Dialog description" />
@@ -140,7 +147,7 @@ Use the `size` prop on `DialogContent` to control the maximum width of the panel
 
 Use `DialogBody` to make the content area scrollable while keeping header and footer fixed.
 
-<ComponentPreview componentName="dialog" fileName="example-scroll-area" />
+<ComponentPreview componentName="dialog" fileName="example-scrollable" />
 
 ### No Close Button
 
@@ -148,13 +155,13 @@ Use the `showCloseButton={false}` prop to hide the close button in the top right
 
 <ComponentPreview componentName="dialog" fileName="example-no-close-button" />
 
-### Close behavior
+### Close Behavior
 
 Use `closeOnInteractOutside` and `closeOnEscape` props to prevent closing on outside click and escape.
 
 <ComponentPreview componentName="dialog" fileName="example-close-behavior" />
 
-### Open from Menu
+### Open From Menu
 
 Open a dialog imperatively from a menu item using the `onSelect` handler.
 
@@ -166,11 +173,23 @@ Use `modal={false}` to allow interaction with elements outside the dialog.
 
 <ComponentPreview componentName="dialog" fileName="example-non-modal" />
 
-### Initial Focus
+### Final Focus
 
-Use `initialFocusEl` to control which element receives focus when the dialog opens.
+Use `finalFocusEl` to move focus to a specific element when the dialog closes.
 
-<ComponentPreview componentName="dialog" fileName="example-initial-focus" />
+<ComponentPreview componentName="dialog" fileName="example-final-focus" />
+
+### Autofocus
+
+Use `data-autofocus` to focus an element when the dialog opens.
+
+<ComponentPreview componentName="dialog" fileName="example-autofocus" />
+
+### Multiple Triggers
+
+`value` on each `DialogTrigger`. `onTriggerValueChange` tracks which button opened the dialog.
+
+<ComponentPreview componentName="dialog" fileName="example-multiple-triggers" />
 
 ### Nested
 
@@ -178,11 +197,25 @@ Nest dialogs within one another.
 
 <ComponentPreview componentName="dialog" fileName="example-nested" />
 
-### Custom spacing
+### Centered On Mobile
 
-Use `[--space:--spacing("value")]` on `DialogContent` to adjust internal padding.
+Set `bottomStickOnMobile={false}` to keep the dialog centered on mobile.
 
-Default spacing is `--spacing(6)`.
+<ComponentPreview componentName="dialog" fileName="example-centered-on-mobile" />
+
+### Sidebar
+
+<ComponentPreview componentName="dialog" fileName="example-sidebar" />
+
+### Responsive
+
+Use [Drawer](/docs/components/drawer#responsive-dialog) below the mobile breakpoint and `Dialog` on larger screens for the same form.
+
+<ComponentPreview componentName="drawer" fileName="example-responsive-dialog" />
+
+### Custom Spacing
+
+The `[--space:--spacing("value")]` controls the internal spacing.
 
 <ComponentPreview componentName="dialog" fileName="example-custom-spacing" />
 
@@ -191,6 +224,12 @@ Default spacing is `--spacing(6)`.
 ```css
   md:[--space:--spacing(6)] lg:[--space:--spacing(8)]
 ```
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="dialog" />
 
 ## API Reference
 
@@ -203,37 +242,44 @@ Root context provider. Controls open state and modal behavior.
 | `open` | `boolean` | `-` |
 | `defaultOpen` | `boolean` | `false` |
 | `onOpenChange` | `({ open }: OpenChangeDetails) => void` | `-` |
+| `onTriggerValueChange` | `(details: TriggerValueChangeDetails) => void` | `-` |
 | `modal` | `boolean` | `true` |
 | `closeOnEscape` | `boolean` | `true` |
 | `closeOnInteractOutside` | `boolean` | `true` |
 | `initialFocusEl` | `() => MaybeElement` | `-` |
 | `finalFocusEl` | `() => MaybeElement` | `-` |
+| `lazyMount` | `boolean` | `true` |
+| `unmountOnExit` | `boolean` | `true` |
+| `hideMode` | `"display-none" \| "activity"` | `"display-none"` |
+| `onEnterComplete` | `() => void` | `-` |
 | `onEscapeKeyDown` | `(event: KeyboardEvent) => void` | `-` |
 | `onInteractOutside` | `(event: InteractOutsideEvent) => void` | `-` |
 | `className` | `string` | `-` |
 
 ### DialogTrigger
 
-Opens the dialog on click. Use `asChild` for custom trigger elements. 
+Opens the dialog on click. Use `asChild` for custom trigger elements.
 
 | Prop | Type | Default |
 |------|------|---------|
 | `asChild` | `boolean` | `false` |
+| `value` | `string` | `-` |
 | `className` | `string` | `-` |
 
 ### DialogContent
 
-Holds the dialog panel. Supports size variants from sm to fullscreen. 
+Holds the dialog panel. Supports size variants from sm to fullscreen.
 
 | Prop | Type | Default |
 |------|------|---------|
 | `size` | `"sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "3xl" \| "4xl" \| "5xl" \| "6xl" \| "fullscreen"` | `"md"` |
 | `showCloseButton` | `boolean` | `true` |
+| `bottomStickOnMobile` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
-| Attribute | Default |
-| --- | --- |
-| `--space` | `--spacing(6)` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| `--space` | `string` | `--spacing(6)` |
 
 ### DialogHeader
 
@@ -247,15 +293,18 @@ Header area for title and description. Accepts props or children.
 
 ### DialogBody
 
-Scrollable body content. Uses [ScrollArea](/docs/components/scroll-area) for overflow.
+Scrollable body content.
 
 | Prop | Type | Default |
 |------|------|---------|
+| `scrollFade` | `boolean` | `true` |
 | `className` | `string` | `-` |
 
 ### DialogFooter
 
 Footer area for action buttons.
+
+Put the primary action **first in the DOM**, then Cancel. The footer uses `flex-col` / `sm:flex-row-reverse` so the visual order stays Cancel on the left and Confirm on the right (Confirm on top on mobile). That way Tab and initial focus hit Confirm when there is no earlier field.
 
 | Prop | Type | Default |
 |------|------|---------|
@@ -272,7 +321,7 @@ Accessible title for the dialog. Announced to screen readers.
 
 ### DialogDescription
 
-Accessible description for the dialog. Announced to screen readers. 
+Accessible description for the dialog. Announced to screen readers.
 
 | Prop | Type | Default |
 |------|------|---------|
@@ -281,7 +330,7 @@ Accessible description for the dialog. Announced to screen readers.
 
 ### DialogClose
 
-Closes the dialog on click. Use `asChild` for custom close elements. 
+Closes the dialog on click. Use `asChild` for custom close elements.
 
 | Prop | Type | Default |
 |------|------|---------|
@@ -294,6 +343,15 @@ Dimmed overlay behind the dialog panel.
 
 | Prop | Type | Default |
 |------|------|---------|
+| `className` | `string` | `-` |
+
+### DialogPositioner
+
+Public DialogPositioner component. It forwards the underlying primitive props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
 | `className` | `string` | `-` |
 
 ---

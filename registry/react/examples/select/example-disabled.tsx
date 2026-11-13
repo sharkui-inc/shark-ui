@@ -5,21 +5,24 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectList,
   SelectTrigger,
   SelectValue,
 } from "@/registry/react/components/select";
 
 const Example = () => (
   <Select collection={collection} disabled>
-    <SelectTrigger className="w-48">
+    <SelectTrigger aria-label="Select a framework" className="min-w-48">
       <SelectValue placeholder="Select framework" />
     </SelectTrigger>
     <SelectContent>
-      {collection.items.map((item) => (
-        <SelectItem item={item} key={item.value}>
-          {item.label}
-        </SelectItem>
-      ))}
+      <SelectList>
+        {collection.items.map((item) => (
+          <SelectItem item={item} key={item.value}>
+            {item.label}
+          </SelectItem>
+        ))}
+      </SelectList>
     </SelectContent>
   </Select>
 );

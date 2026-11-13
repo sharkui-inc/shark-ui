@@ -9,42 +9,34 @@ export const announcementVariants = tv({
   base: [
     "group/announcement",
     "relative",
-    "inline-flex min-w-0 max-w-full items-center gap-2",
+    "max-w-full min-w-0",
+    "inline-flex items-center gap-2",
     "py-0.5 ps-3 pe-3",
-    "bg-input/4",
-    "rounded-2xl border border-input",
+    "bg-input/8",
+    "border-input rounded-2xl border",
     "transition-colors",
-    "outline-none focus-visible:border-primary focus-visible:ring-[3px] focus-visible:ring-ring/32",
+    "outline-hidden",
+    "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
     "[&_svg]:size-3.5 [&_svg]:shrink-0",
     "has-data-[slot=badge]:ps-0.5",
-    "[button&,a&]:cursor-pointer",
+    "[button&,a&]:hover:bg-accent [button&,a&]:cursor-pointer",
     "[&>svg]:text-muted-foreground",
-    "[a&]:hover:bg-input/12",
     "**:data-[slot=badge]:h-6.5 **:data-[slot=badge]:rounded-xl **:data-[slot=badge]:px-2 **:data-[slot=badge]:sm:text-xs",
-    "[button&,a&]:pointer-coarse:after:absolute [button&,a&]:pointer-coarse:after:size-full [button&,a&]:pointer-coarse:after:min-h-11 [button&,a&]:pointer-coarse:after:min-w-11",
-    "motion-reduce:transition-none!",
+    "motion-reduce:transition-none",
   ],
 });
 
 interface AnnouncementProps
-  extends React.ComponentProps<typeof ark.div>,
-    VariantProps<typeof announcementVariants> {
-  /**
-   * The ARIA role of the announcement.
-   *
-   * @default "status"
-   */
-  role?: "status" | "alert";
-}
+  extends Omit<React.ComponentProps<typeof ark.div>, "role">,
+    VariantProps<typeof announcementVariants> {}
 
 export const Announcement = (props: AnnouncementProps) => {
-  const { className, role = "status", ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
     <ark.div
       className={cn(announcementVariants(), className)}
       data-slot="announcement"
-      role={role}
       {...rest}
     />
   );
@@ -59,8 +51,10 @@ export const AnnouncementTitle = (
     <ark.span
       className={cn(
         "min-w-0",
-        "inline-flex flex-1 items-center gap-1",
-        "select-none truncate font-medium text-sm",
+        "flex-1",
+        "inline-flex items-center gap-1",
+        "truncate text-sm font-medium",
+        "select-none",
         className
       )}
       data-slot="announcement-title"

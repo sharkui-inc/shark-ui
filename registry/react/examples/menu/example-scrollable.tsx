@@ -1,0 +1,29 @@
+import { Button } from "@/registry/react/components/button";
+import {
+  Menu,
+  MenuContent,
+  MenuItem,
+  MenuList,
+  MenuTrigger,
+} from "@/registry/react/components/menu";
+
+const Example = () => (
+  <Menu>
+    <MenuTrigger asChild>
+      <Button variant="outline">Open</Button>
+    </MenuTrigger>
+    <MenuContent className="max-h-60 min-w-40">
+      <MenuList>
+        {items.map((label, index) => (
+          <MenuItem key={label} value={`item-${index + 1}`}>
+            {label}
+          </MenuItem>
+        ))}
+      </MenuList>
+    </MenuContent>
+  </Menu>
+);
+
+const items = Array.from({ length: 40 }, (_, i) => `Item ${i + 1}`);
+
+export default Example;

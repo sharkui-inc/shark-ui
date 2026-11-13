@@ -7,7 +7,7 @@ const Example = () => (
   <DateInput
     className="w-full max-w-64"
     selectionMode="range"
-    separator={<ArrowRightIcon aria-hidden />}
+    separator={<ArrowRightIcon aria-hidden="true" />}
   />
 );
 

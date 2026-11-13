@@ -1,10 +1,16 @@
 ---
 title: Slider
-description: A slider for selecting a value from a range.
+description: Select a value from a range.
+aliases:
+  - Range
+seo:
+  description: Range slider for continuous or stepped values.
 links:
   doc: https://ark-ui.com/docs/components/slider
   api: https://ark-ui.com/docs/components/slider#api-reference
 ---
+
+import manifest from "@/registry/manifest/slider";
 
 <ComponentPreview componentName="slider" />
 
@@ -31,11 +37,11 @@ npx shadcn@latest add @shark/slider
 
 <Step>This component depends on [Field](/docs/components/field). Install it first if you haven't already.</Step>
 
+<RegistryDependencies registryDependencies={manifest.registryDependencies} />
+
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -49,6 +55,17 @@ npm install @ark-ui/react
 
 </CodeTabs>
 
+## Anatomy
+
+```text
+Slider
+├── SliderLabel
+└── SliderControl (rendered automatically)
+    ├── SliderTrack
+    ├── SliderRange
+    └── SliderThumb (rendered automatically)
+```
+
 ## Usage
 
 ```tsx
@@ -59,17 +76,27 @@ import { Slider } from "@/components/ui/slider";
 <Slider />
 ```
 
+## With Field
+
+Use `SliderLabel` inside [Field](/docs/components/field) to name a single slider. Clicking it focuses the thumb.
+
+<ComponentPreview componentName="slider" fileName="example-with-field" />
+
 ## Controlled
 
 Control the value with `value` and `onValueChange` for a controlled slider.
 
 <ComponentPreview componentName="slider" fileName="example-controlled" />
 
+## States
+
+### Disabled
+
+<ComponentPreview componentName="slider" fileName="example-disabled" />
+
 ## Examples
 
-### With label and value
-
-Use `<Field>`, `<SliderLabel>`, and `<SliderValue>` for accessible labelling and to show the current value.
+### With Label And Value
 
 <ComponentPreview componentName="slider" fileName="example-with-label" />
 
@@ -85,13 +112,7 @@ Use `orientation="vertical"` for a vertical slider.
 
 <ComponentPreview componentName="slider" fileName="example-vertical" />
 
-### Disabled
-
-Use the `disabled` prop to disable the slider.
-
-<ComponentPreview componentName="slider" fileName="example-disabled" />
-
-### Min and max
+### Min and Max
 
 Set `min` and `max` to constrain the slider's value range.
 
@@ -111,12 +132,27 @@ Use with `showMarkers` and `markerLabels` to show custom labels on the markers.
 
 <ComponentPreview componentName="slider" fileName="example-step" />
 
-<Alert>
-  <InfoIcon />
-  <AlertDescription>
-    Marks are only supported for `horizontal` sliders.
-  </AlertDescription>
-</Alert>
+### Large Step
+
+Focus the thumb, then hold `Shift` + Arrow keys.
+
+<ComponentPreview componentName="slider" fileName="example-large-step" />
+
+### Thumb collision
+
+Use `thumbCollisionBehavior` to control what happens when thumbs meet: `none`, `push`, or `swap`.
+
+<ComponentPreview componentName="slider" fileName="example-thumb-collision" />
+
+### Form Integration
+
+<ComponentPreview componentName="slider" fileName="example-form" />
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<RTLComponentPreview componentName="slider" />
 
 ## API Reference
 
@@ -126,18 +162,20 @@ Root component. Manages value, track, range, and thumb(s).
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `number[]` | - |
-| `defaultValue` | `number[]` | - |
-| `onValueChange` | `(details: ValueChangeDetails) => void` | - |
+| `value` | `number[]` | `-` |
+| `defaultValue` | `number[]` | `-` |
+| `onValueChange` | `(details: ValueChangeDetails) => void` | `-` |
 | `min` | `number` | `0` |
 | `max` | `number` | `100` |
 | `step` | `number` | `1` |
+| `largeStep` | `number` | `10 * step` |
+| `thumbCollisionBehavior` | `"none" \| "push" \| "swap"` | `-` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `disabled` | `boolean` | `false` |
 | `showMarkers` | `boolean` | `false` |
 | `markerInterval` | `number` | `1` |
 | `markerLabels` | `string[]` | `[]` |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### SliderLabel
 
@@ -145,7 +183,7 @@ Label for the slider. Required for accessibility.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
+| `className` | `string` | `-` |
 
 ### SliderValue
 
@@ -153,8 +191,7 @@ Shows the current value. Useful for numeric display or formatting.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `className` | `string` | - |
-
+| `className` | `string` | `-` |
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/slider#api-reference).

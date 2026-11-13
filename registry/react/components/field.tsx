@@ -21,21 +21,30 @@ const fieldVariants = tv({
     "data-invalid:text-destructive",
     "dark:data-invalid:text-destructive-foreground",
   ],
+  defaultVariants: {
+    orientation: "vertical",
+    reverse: false,
+  },
   variants: {
     orientation: {
-      vertical: ["flex-col *:w-full [&>.sr-only]:w-auto"],
       horizontal: [
         "flex-row items-center",
         "*:data-[slot=field-label]:flex-auto",
-        "has-[>[data-slot=field-content]]:items-start has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+        "has-[>[data-slot=field-content]]:items-start",
+        "has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:leading-snug",
+        "has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-[calc((1lh-1rem)/2)]",
       ],
       responsive: [
-        "flex-col *:w-full [&>.sr-only]:w-auto",
-        "@md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto",
+        "flex-col",
+        "*:w-full [&>.sr-only]:w-auto",
+        "@md/field-group:flex-row @md/field-group:items-center",
+        "@md/field-group:*:w-auto",
         "@md/field-group:*:data-[slot=field-label]:flex-auto",
         "@md/field-group:has-[>[data-slot=field-content]]:items-start",
-        "@md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+        "@md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:leading-snug",
+        "@md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-[calc((1lh-1rem)/2)]",
       ],
+      vertical: ["flex-col", "*:w-full [&>.sr-only]:w-auto"],
     },
     reverse: {
       true: [
@@ -45,10 +54,6 @@ const fieldVariants = tv({
         "data-[orientation=responsive]:@md/field-group:flex-row-reverse",
       ],
     },
-  },
-  defaultVariants: {
-    orientation: "vertical",
-    reverse: false,
   },
 });
 
@@ -83,7 +88,7 @@ export const FieldSet = (
     <ArkFieldset.Root
       className={cn(
         "flex flex-col gap-6",
-        "has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3",
+        "has-[>:is([data-slot=checkbox-group],[data-slot=radio-group])]:gap-3",
         className
       )}
       data-slot="field-set"
@@ -106,7 +111,8 @@ export const FieldLegend = (props: FieldLegendProps) => {
   return (
     <ArkFieldset.Legend
       className={cn(
-        "mb-3 font-medium",
+        "mb-3",
+        "font-medium",
         "data-[variant=legend]:text-base",
         "data-[variant=label]:text-sm",
         className
@@ -125,8 +131,9 @@ export const FieldGroup = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn(
         "group/field-group @container/field-group",
-        "flex w-full flex-col gap-4",
-        "data-[data-slot=checkbox-group]:gap-3",
+        "w-full",
+        "flex flex-col gap-4",
+        "data-[slot=checkbox-group]:gap-3",
         "*:data-[slot=field-group]:gap-4",
         className
       )}
@@ -143,7 +150,8 @@ export const FieldContent = (props: React.ComponentProps<typeof ark.div>) => {
     <ark.div
       className={cn(
         "group/field-content",
-        "flex flex-1 flex-col gap-1.5",
+        "flex-1",
+        "flex flex-col gap-1.5",
         "leading-snug",
         className
       )}
@@ -153,23 +161,32 @@ export const FieldContent = (props: React.ComponentProps<typeof ark.div>) => {
   );
 };
 
+export const fieldLabelVariants = tv({
+  base: [
+    "group/field-label peer/field-label",
+    "text-sm leading-snug font-medium",
+    "select-none",
+    "w-fit",
+    "flex gap-1",
+    "has-[>[data-slot=field]]:w-full",
+    "has-[>[data-slot=field]]:flex-col",
+    "has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border",
+    "*:data-[slot=field]:p-2.5",
+    "has-data-[state=checked]:bg-primary/8",
+    "has-data-[state=checked]:border-primary",
+    "group-data-disabled/field:opacity-64",
+  ],
+});
+
 export const FieldLabel = (
   props: React.ComponentProps<typeof ArkField.Label>
 ) => {
   const { className, ...rest } = props;
 
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Ark UI label is associated with its field through context
     <ArkField.Label
-      className={cn(
-        "group/field-label peer/field-label",
-        "select-none font-medium text-sm leading-snug",
-        "flex w-fit gap-1",
-        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-2.5",
-        "has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/5",
-        "group-data-disabled/field:opacity-64",
-        "dark:has-data-[state=checked]:bg-primary/10",
-        className
-      )}
+      className={cn(fieldLabelVariants(), className)}
       data-slot="field-label"
       {...rest}
     />
@@ -183,14 +200,15 @@ export const FieldRequiredIndicator = (
 
   return (
     <ArkField.RequiredIndicator
-      aria-hidden
       className={cn(
-        "select-none text-destructive text-sm",
+        "text-destructive text-sm",
+        "select-none",
         "dark:text-destructive-foreground",
         className
       )}
       data-slot="field-required-indicator"
       {...rest}
+      aria-hidden="true"
     >
       {children ?? "*"}
     </ArkField.RequiredIndicator>
@@ -205,7 +223,7 @@ export const FieldTitle = (props: React.ComponentProps<typeof ark.div>) => {
       className={cn(
         "w-fit",
         "flex items-center gap-2",
-        "font-medium text-sm leading-snug",
+        "text-sm leading-snug font-medium",
         "group-data-[disabled=true]/field:opacity-64",
         className
       )}
@@ -222,11 +240,13 @@ export const FieldDescription = (props: React.ComponentProps<typeof ark.p>) => {
     <ark.p
       className={cn(
         "pointer-events-none",
-        "font-normal text-muted-foreground text-sm leading-normal",
+        "text-muted-foreground text-sm leading-normal font-normal",
         "group-has-data-[orientation=horizontal]/field:text-balance",
         "@md/field-group:group-data-[orientation=responsive]/field:text-balance",
-        "nth-last-2:-mt-1 last:mt-0 [[data-variant=legend]+&]:-mt-1.5",
-        "in-[[data-slot=field]:has([data-slot=radio-group-item])]:ms-6 in-[[data-slot=field]:has([data-slot=radio-group-item])]:-mt-1.5!",
+        "nth-last-2:-mt-1",
+        "last:mt-0",
+        "[[data-variant=legend]+&]:-mt-1.5",
+        "[[data-slot=radio-group-item]+&]:ms-6 [[data-slot=radio-group-item]+&]:-mt-1.5",
         "[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4",
         className
       )}
@@ -244,7 +264,8 @@ export const FieldSeparator = (props: React.ComponentProps<typeof ark.div>) => {
       className={cn(
         "relative",
         "h-5",
-        "-my-2 group-data-[variant=outline]/field-group:-mb-2",
+        "-my-2",
+        "group-data-[variant=outline]/field-group:-mb-2",
         "text-sm",
         className
       )}
@@ -257,7 +278,8 @@ export const FieldSeparator = (props: React.ComponentProps<typeof ark.div>) => {
       {!!children && (
         <span
           className={cn(
-            "relative block",
+            "relative",
+            "block",
             "w-fit",
             "mx-auto px-2",
             "bg-background",
@@ -293,7 +315,7 @@ export const FieldError = (
   return (
     <ArkField.ErrorText
       className={cn(
-        "font-normal text-destructive text-sm",
+        "text-destructive text-sm font-normal",
         "dark:text-destructive-foreground",
         className
       )}

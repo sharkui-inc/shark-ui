@@ -17,7 +17,7 @@ const Example = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <ActionBar onOpenChange={setIsOpen} open={isOpen}>
+    <ActionBar onOpenChange={({ open }) => setIsOpen(open)} open={isOpen}>
       <ActionBarTrigger asChild>
         <Button variant="outline">Open</Button>
       </ActionBarTrigger>
@@ -29,12 +29,12 @@ const Example = () => {
         <ActionBarSeparator />
         <ActionBarBody>
           <Button variant="ghost">
-            <PencilIcon />
+            <PencilIcon data-icon="inline-start" />
             <span className="max-sm:sr-only">Edit</span>
           </Button>
           <ActionBarSeparator />
           <Button variant="destructive">
-            <Trash2Icon />
+            <Trash2Icon data-icon="inline-start" />
             <span className="max-sm:sr-only">Delete</span>
           </Button>
         </ActionBarBody>

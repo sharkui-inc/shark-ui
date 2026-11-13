@@ -1,0 +1,89 @@
+---
+title: Focus Trap
+description: Keep keyboard focus inside a container while it is active.
+links:
+  doc: https://ark-ui.com/docs/utilities/focus-trap
+  api: https://ark-ui.com/docs/utilities/focus-trap#api-reference
+---
+
+import manifest from "@/registry/manifest/focus-trap";
+
+<ComponentPreview componentName="focus-trap" />
+
+## Installation
+
+<CodeTabs>
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/focus-trap
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="components/ui/focus-trap.tsx" src="/focus-trap.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+</Steps>
+
+</TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { FocusTrap } from "@/components/ui/focus-trap";
+```
+
+```tsx
+<FocusTrap disabled={!active}>
+  <Input aria-label="Name" type="text" />
+  <Button onClick={endTrap}>End trap</Button>
+</FocusTrap>
+```
+
+## Examples
+
+### Autofocus
+
+Mount the trap after activation and put `autoFocus` on a child. Use `setReturnFocus` to restore focus when it unmounts.
+
+<ComponentPreview componentName="focus-trap" fileName="example-autofocus" />
+
+### Initial focus
+
+Pass `initialFocus` to set which control receives focus when the trap activates.
+
+<ComponentPreview componentName="focus-trap" fileName="example-initial-focus" />
+
+## API Reference
+
+### FocusTrap
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `disabled` | `boolean` | `-` |
+| `asChild` | `boolean` | `-` |
+| `initialFocus` | `FocusTargetOrFalse` | `-` |
+| `fallbackFocus` | `FocusTarget` | `-` |
+| `returnFocusOnDeactivate` | `boolean` | `true` |
+| `setReturnFocus` | `FocusTargetValueOrFalse \| ((node: HTMLElement \| SVGElement) => FocusTargetValueOrFalse)` | `-` |
+| `persistentElements` | `(() => Element \| null)[]` | `-` |
+| `onActivate` | `() => void` | `-` |
+| `onDeactivate` | `() => void` | `-` |
+
+---
+
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/utilities/focus-trap#api-reference).

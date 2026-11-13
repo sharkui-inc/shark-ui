@@ -9,13 +9,18 @@ const Example = () => {
     text: "Endless scale, powered by real humans.",
   });
 
+  let offset = 0;
+
   return (
-    <p className="font-medium text-foreground text-lg leading-relaxed">
-      {chunks.map((chunk, index) =>
-        chunk.match ? (
+    <p className="text-foreground text-lg leading-relaxed">
+      {chunks.map((chunk) => {
+        const key = offset;
+        offset += chunk.text.length;
+
+        return chunk.match ? (
           <mark
-            className="relative bg-transparent px-0 font-semibold text-primary"
-            key={`${chunk.text}-${index}`}
+            className="text-primary relative bg-transparent px-0 font-semibold"
+            key={key}
           >
             {chunk.text}
             <svg
@@ -31,11 +36,9 @@ const Example = () => {
             </svg>
           </mark>
         ) : (
-          <React.Fragment key={`${chunk.text}-${index}`}>
-            {chunk.text}
-          </React.Fragment>
-        )
-      )}
+          <React.Fragment key={key}>{chunk.text}</React.Fragment>
+        );
+      })}
     </p>
   );
 };

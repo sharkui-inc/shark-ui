@@ -1,0 +1,42 @@
+import { Button } from "@/registry/react/components/button";
+import {
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTrigger,
+} from "@/registry/react/components/dialog";
+
+const Example = () => (
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button variant="outline">Open</Button>
+    </DialogTrigger>
+
+    <DialogContent size="lg">
+      <DialogHeader title="Terms & Conditions" />
+      <DialogBody scrollFade>
+        <div className="flex flex-col gap-2">
+          {Array.from({ length: 96 }, (_, i) => `box-${i}`).map((key) => (
+            <div
+              className="bg-muted h-12 shrink-0 rounded-xl border"
+              key={key}
+            />
+          ))}
+        </div>
+      </DialogBody>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button>I Agree</Button>
+        </DialogClose>
+        <DialogClose asChild>
+          <Button variant="ghost">Cancel</Button>
+        </DialogClose>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+);
+
+export default Example;

@@ -1,0 +1,56 @@
+import { PencilIcon, SquarePlusIcon, Trash2Icon } from "lucide-react";
+import { Button } from "@/registry/react/components/button";
+import {
+  Menu,
+  MenuContent,
+  MenuGroup,
+  MenuItem,
+  MenuItemDescription,
+  MenuList,
+  MenuSeparator,
+  MenuShortcut,
+  MenuTrigger,
+} from "@/registry/react/components/menu";
+
+const Example = () => (
+  <Menu>
+    <MenuTrigger asChild>
+      <Button variant="outline">Open</Button>
+    </MenuTrigger>
+    <MenuContent className="min-w-72">
+      <MenuList>
+        <MenuGroup heading="Actions">
+          <MenuItem value="new-file">
+            <SquarePlusIcon aria-hidden="true" />
+            <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+              <span>New file</span>
+              <MenuItemDescription>Create a new file</MenuItemDescription>
+            </span>
+            <MenuShortcut className="hidden sm:inline-flex">⌘N</MenuShortcut>
+          </MenuItem>
+          <MenuItem value="edit-file">
+            <PencilIcon aria-hidden="true" />
+            <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+              <span>Edit file</span>
+              <MenuItemDescription>Make changes</MenuItemDescription>
+            </span>
+            <MenuShortcut className="hidden sm:inline-flex">⌘E</MenuShortcut>
+          </MenuItem>
+        </MenuGroup>
+        <MenuSeparator />
+        <MenuGroup heading="Danger zone">
+          <MenuItem value="delete-file" variant="destructive">
+            <Trash2Icon aria-hidden="true" />
+            <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+              <span>Delete file</span>
+              <MenuItemDescription>Move to trash</MenuItemDescription>
+            </span>
+            <MenuShortcut className="hidden sm:inline-flex">⌘D</MenuShortcut>
+          </MenuItem>
+        </MenuGroup>
+      </MenuList>
+    </MenuContent>
+  </Menu>
+);
+
+export default Example;

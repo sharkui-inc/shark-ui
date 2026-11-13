@@ -2,6 +2,6 @@
 
 import { DateInput } from "@/registry/react/components/date-input";
 
-const Example = () => <DateInput className="w-full max-w-64" />;
+const DateInputDemo = () => <DateInput className="w-full max-w-64" />;
 
-export default Example;
+export default DateInputDemo;

@@ -13,7 +13,7 @@ import {
   CommandList,
   CommandShortcut,
 } from "@/registry/react/components/command";
-import { Kbd } from "@/registry/react/components/kbd";
+import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
 
 const Example = () => {
   const { contains } = useFilter({ sensitivity: "base" });
@@ -30,7 +30,7 @@ const Example = () => {
       collection={collection}
       onInputValueChange={({ inputValue }) => filter(inputValue)}
     >
-      <CommandInput placeholder="Search..." />
+      <CommandInput autoFocus={false} placeholder="Search..." />
       <CommandContent>
         <CommandEmpty />
         <CommandList>
@@ -47,20 +47,28 @@ const Example = () => {
         </CommandList>
       </CommandContent>
       <CommandFooter>
-        <div className="flex items-center gap-2">
-          <Kbd variant="outline">
-            <CornerDownLeftIcon className="size-3" />
-          </Kbd>
-          <span>Select</span>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <KbdGroup>
+              <Kbd variant="outline">
+                <ArrowUpIcon />
+              </Kbd>
+              <Kbd variant="outline">
+                <ArrowDownIcon />
+              </Kbd>
+            </KbdGroup>
+            <span>Navigate</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Kbd variant="outline">
+              <CornerDownLeftIcon />
+            </Kbd>
+            <span>Open</span>
+          </div>
         </div>
         <div className="flex items-center gap-2">
-          <Kbd variant="outline">
-            <ArrowUpIcon className="size-3" />
-          </Kbd>
-          <Kbd variant="outline">
-            <ArrowDownIcon className="size-3" />
-          </Kbd>
-          <span>Navigate</span>
+          <Kbd variant="outline">Esc</Kbd>
+          <span>Close</span>
         </div>
       </CommandFooter>
     </Command>
@@ -68,14 +76,14 @@ const Example = () => {
 };
 
 const initialItems = [
-  { label: "Settings", shortcut: "⌘,", value: "settings", group: "App" },
+  { group: "App", label: "Settings", shortcut: "⌘,", value: "settings" },
   {
+    group: "App",
     label: "Keyboard Shortcuts",
     shortcut: "⌘K",
     value: "shortcuts",
-    group: "App",
   },
-  { label: "Help", shortcut: "⌘?", value: "help", group: "App" },
+  { group: "App", label: "Help", shortcut: "⌘⇧/", value: "help" },
 ];
 
 export default Example;

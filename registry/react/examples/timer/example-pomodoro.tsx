@@ -1,8 +1,8 @@
 "use client";
 
-import { Card, CardContent } from "@registry/react/components/card";
 import { PauseIcon, PlayIcon, RotateCcwIcon, SettingsIcon } from "lucide-react";
 import { Button } from "@/registry/react/components/button";
+import { Card, CardContent } from "@/registry/react/components/card";
 import {
   Timer,
   TimerArea,
@@ -29,7 +29,7 @@ const Example = () => (
           <TimerItem className="text-5xl" type="seconds" />
         </TimerArea>
 
-        <span className="mt-0.5 font-medium text-[10px] text-muted-foreground uppercase tracking-[0.22em]">
+        <span className="text-muted-foreground mt-0.5 text-[0.5625rem] font-medium tracking-[0.22em] uppercase">
           Focus
         </span>
 

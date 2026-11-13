@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "@registry/react/components/toast";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
@@ -18,42 +17,29 @@ import {
   FieldDescription,
   FieldError,
   FieldGroup,
-  FieldLabel,
 } from "@/registry/react/components/field";
-import { Slider, SliderLabel } from "@/registry/react/components/slider";
-
-const PRICE_MIN = 200;
-const PRICE_MAX = 10_000;
-
-const formSchema = z.object({
-  priceRange: z
-    .array(z.number())
-    .length(2)
-    .refine(([low, high]) => low < high, {
-      message: "The minimum price must be less than the maximum.",
-    })
-    .refine(([low, high]) => low >= PRICE_MIN && high <= PRICE_MAX, {
-      message: `Keep both values between $${PRICE_MIN.toLocaleString()} and $${PRICE_MAX.toLocaleString()}.`,
-    }),
-});
-
-const defaultRange = [0, PRICE_MAX];
+import {
+  Slider,
+  SliderLabel,
+  SliderValue,
+} from "@/registry/react/components/slider";
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: { priceRange: defaultRange },
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     toast.info({
-      id: "price-range-submitted",
-      title: "Price filter saved",
       description: (
         <pre className="mt-2">
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+      id: "price-range-submitted",
+      title: "Price filter saved",
     });
   };
 
@@ -82,9 +68,9 @@ const Example = () => {
                   >
                     <div className="flex items-center justify-between gap-4">
                       <SliderLabel>Price range</SliderLabel>
-                      <FieldLabel>
+                      <SliderValue>
                         {`$${field.value?.[0]}`} - {`$${field.value?.[1]}`}
-                      </FieldLabel>
+                      </SliderValue>
                     </div>
                   </Slider>
                   <FieldDescription>
@@ -106,5 +92,23 @@ const Example = () => {
     </Card>
   );
 };
+
+const PRICE_MIN = 200;
+
+const PRICE_MAX = 10_000;
+
+const formSchema = z.object({
+  priceRange: z
+    .array(z.number())
+    .length(2)
+    .refine(([low, high]) => low < high, {
+      message: "The minimum price must be less than the maximum.",
+    })
+    .refine(([low, high]) => low >= PRICE_MIN && high <= PRICE_MAX, {
+      message: `Keep both values between $${PRICE_MIN.toLocaleString()} and $${PRICE_MAX.toLocaleString()}.`,
+    }),
+});
+
+const defaultRange = [0, PRICE_MAX];
 
 export default Example;

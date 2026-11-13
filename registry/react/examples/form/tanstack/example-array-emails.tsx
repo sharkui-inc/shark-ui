@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "@registry/react/components/toast";
 import { useForm } from "@tanstack/react-form";
 import { XIcon } from "lucide-react";
 import * as z from "zod";
@@ -28,36 +27,26 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/registry/react/components/input-group";
-
-const formSchema = z.object({
-  emails: z
-    .array(
-      z.object({
-        address: z.string().email("Enter a valid email address."),
-      })
-    )
-    .min(1, "Add at least one email address.")
-    .max(5, "You can add up to 5 email addresses."),
-});
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
     defaultValues: {
       emails: [{ address: "" }],
     },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "rhf-array-emails-submitted",
-        title: "Contact emails saved",
         description: (
           <pre className="mt-2">
             <code>{JSON.stringify(value, null, 2)}</code>
           </pre>
         ),
+        id: "rhf-array-emails-submitted",
+        title: "Contact emails saved",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -101,6 +90,7 @@ const Example = () => {
                             <FieldContent>
                               <InputGroup>
                                 <InputGroupInput
+                                  aria-label={`Email address ${index + 1}`}
                                   autoComplete="email"
                                   name={subField.name}
                                   onBlur={subField.handleBlur}
@@ -121,7 +111,10 @@ const Example = () => {
                                       size="icon-xs"
                                       variant="ghost"
                                     >
-                                      <XIcon aria-hidden className="size-4" />
+                                      <XIcon
+                                        aria-hidden="true"
+                                        className="size-4"
+                                      />
                                     </InputGroupButton>
                                   </InputGroupAddon>
                                 ) : null}
@@ -169,5 +162,16 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  emails: z
+    .array(
+      z.object({
+        address: z.string().email("Enter a valid email address."),
+      })
+    )
+    .min(1, "Add at least one email address.")
+    .max(5, "You can add up to 5 email addresses."),
+});
 
 export default Example;

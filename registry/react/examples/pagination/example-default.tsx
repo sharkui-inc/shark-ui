@@ -8,7 +8,7 @@ import {
 } from "@/registry/react/components/pagination";
 
 const PaginationDemo = () => (
-  <Pagination count={50} pageSize={10}>
+  <Pagination aria-label="Default pagination" count={50} pageSize={10}>
     <PaginationPrevious />
     <PaginationItems />
     <PaginationNext />

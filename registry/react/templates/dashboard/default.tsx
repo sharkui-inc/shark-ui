@@ -1,9 +1,20 @@
 "use client";
 
+import {
+  BellIcon,
+  LayoutDashboardIcon,
+  SettingsIcon,
+  WavesIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { Bar, BarChart } from "recharts";
-import { Avatar, AvatarFallback } from "@/registry/react/components/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/registry/react/components/avatar";
 import { Badge } from "@/registry/react/components/badge";
+import { Button } from "@/registry/react/components/button";
 import {
   Card,
   CardContent,
@@ -15,6 +26,7 @@ import {
   type ChartConfig,
   ChartContainer,
 } from "@/registry/react/components/chart";
+import { IconTile } from "@/registry/react/components/icon-tile";
 import {
   SidebarContent,
   SidebarFooter,
@@ -39,16 +51,11 @@ import {
 } from "@/registry/react/components/table";
 
 const DASHBOARD_NAV = [
-  { label: "Overview", href: "#" },
-  { label: "Analytics", href: "#" },
-  { label: "Products", href: "#" },
-  { label: "Orders", href: "#" },
+  { href: "#", icon: LayoutDashboardIcon, label: "Overview" },
+  { href: "#", icon: BellIcon, label: "Notifications" },
 ];
 
-const DASHBOARD_OTHER = [
-  { label: "Settings", href: "#" },
-  { label: "Support", href: "#" },
-];
+const DASHBOARD_OTHER = [{ href: "#", icon: SettingsIcon, label: "Settings" }];
 
 const CHANNEL_DATA = [
   { channels: "Facebook", percent: "28%", total: "6,958" },
@@ -68,8 +75,8 @@ const CHART_DATA = [
 
 const chartConfig = {
   value: {
+    color: "var(--chart-1)",
     label: "Sales",
-    color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
 
@@ -80,19 +87,30 @@ const DashboardTemplate = () => (
       collapsible="none"
     >
       <SidebarHeader className="border-b">
-        <div className="flex items-center gap-2 px-2 py-3">
-          <span className="font-semibold">Catalyst</span>
+        <div className="flex items-center gap-3 px-2 py-3">
+          <IconTile aria-hidden="true" size="sm">
+            <WavesIcon aria-hidden="true" className="size-4" />
+          </IconTile>
+          <div className="grid min-w-0 gap-0.5">
+            <span className="truncate text-sm font-semibold">Catalyst</span>
+            <span className="text-muted-foreground truncate text-xs">
+              Analytics workspace
+            </span>
+          </div>
         </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Main</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
-              {DASHBOARD_NAV.map(({ label, href }) => (
+            <SidebarMenu>
+              {DASHBOARD_NAV.map(({ icon: Icon, label, href }) => (
                 <SidebarMenuItem key={label}>
                   <SidebarMenuButton asChild isActive={label === "Overview"}>
-                    <Link href={href}>{label}</Link>
+                    <Link href={href}>
+                      <Icon aria-hidden="true" className="size-4" />
+                      {label}
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -102,11 +120,14 @@ const DashboardTemplate = () => (
         <SidebarGroup>
           <SidebarGroupLabel>Others</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
-              {DASHBOARD_OTHER.map(({ label, href }) => (
+            <SidebarMenu>
+              {DASHBOARD_OTHER.map(({ icon: Icon, label, href }) => (
                 <SidebarMenuItem key={label}>
                   <SidebarMenuButton asChild>
-                    <Link href={href}>{label}</Link>
+                    <Link href={href}>
+                      <Icon aria-hidden="true" className="size-4" />
+                      {label}
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -117,65 +138,80 @@ const DashboardTemplate = () => (
       <SidebarFooter className="border-t">
         <div className="flex items-center gap-3 px-2 py-2">
           <Avatar size="sm">
+            <AvatarImage
+              alt="James Brown"
+              src="https://api.dicebear.com/10.x/waves/svg?backgroundColor=e8f1fb&scale=1.2&seed=James+Brown&waveColor=2b6cb0"
+            />
             <AvatarFallback>JB</AvatarFallback>
           </Avatar>
-          <div className="flex flex-1 flex-col gap-0 overflow-hidden">
-            <span className="truncate font-medium text-sm">James Brown</span>
-            <span className="truncate text-muted-foreground text-xs">
-              james@example.com
-            </span>
-          </div>
+          <span className="truncate text-sm font-medium">James Brown</span>
         </div>
       </SidebarFooter>
     </SidebarRoot>
     <SidebarInset>
+      <header className="flex h-14 items-center gap-3 border-b px-6">
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-sm font-semibold">Dashboard</p>
+          <p className="text-muted-foreground text-xs">Performance overview</p>
+        </div>
+        <Button size="sm" variant="outline">
+          Last 30 days
+        </Button>
+      </header>
       <div className="flex flex-col gap-6 p-6">
-        <div>
-          <h1 className="font-semibold text-2xl">Welcome back to Catalyst</h1>
-          <p className="text-muted-foreground">Filter by 1D 1W 1M 3M 1Y</p>
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h1 className="text-2xl font-semibold tracking-[-0.03em]">
+              Welcome back to Catalyst
+            </h1>
+            <p className="text-muted-foreground mt-1 text-sm">
+              A concise view of your business performance.
+            </p>
+          </div>
+          <Badge variant="secondary">Updated just now</Badge>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between gap-2 pb-2">
-              <CardTitle className="font-medium text-sm">Total Sales</CardTitle>
+              <CardTitle className="text-sm font-medium">Total Sales</CardTitle>
               <Badge variant="secondary">+2%</Badge>
             </CardHeader>
             <CardContent>
-              <span className="font-semibold text-2xl">$128.32</span>
+              <span className="text-2xl font-semibold">$128.32</span>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between gap-2 pb-2">
-              <CardTitle className="font-medium text-sm">
+              <CardTitle className="text-sm font-medium">
                 Online Store
               </CardTitle>
               <Badge variant="secondary">+4.5%</Badge>
             </CardHeader>
             <CardContent>
-              <span className="font-semibold text-2xl">$52.12</span>
+              <span className="text-2xl font-semibold">$52.12</span>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between gap-2 pb-2">
-              <CardTitle className="font-medium text-sm">
+              <CardTitle className="text-sm font-medium">
                 Total Visitors
               </CardTitle>
               <Badge variant="destructive">-1.4%</Badge>
             </CardHeader>
             <CardContent>
-              <span className="font-semibold text-2xl">237,456</span>
+              <span className="text-2xl font-semibold">237,456</span>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between gap-2 pb-2">
-              <CardTitle className="font-medium text-sm">
+              <CardTitle className="text-sm font-medium">
                 Conversion Rate
               </CardTitle>
               <Badge variant="secondary">+2.1%</Badge>
             </CardHeader>
             <CardContent>
-              <span className="font-semibold text-2xl">16.9%</span>
+              <span className="text-2xl font-semibold">16.9%</span>
             </CardContent>
           </Card>
         </div>

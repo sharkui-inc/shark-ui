@@ -14,7 +14,10 @@ const Example = () => {
   return (
     <div className="flex flex-col items-center gap-4 text-center text-sm">
       <p>Select the option comfortable</p>
-      <RadioGroup onValueChange={({ value }) => setValue(value)} value={value}>
+      <RadioGroup
+        onValueChange={({ value: nextValue }) => setValue(nextValue)}
+        value={value}
+      >
         <RadioGroupItem value="default">Default</RadioGroupItem>
         <RadioGroupItem value="comfortable">Comfortable</RadioGroupItem>
         <RadioGroupItem value="compact">Compact</RadioGroupItem>

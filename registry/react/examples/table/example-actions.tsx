@@ -9,6 +9,7 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuShortcut,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -31,7 +32,7 @@ const Example = () => (
       <TableRow>
         <TableHead>Name</TableHead>
         <TableHead>Email</TableHead>
-        <TableHead className="text-right">Actions</TableHead>
+        <TableHead className="text-end">Actions</TableHead>
       </TableRow>
     </TableHeader>
     <TableBody>
@@ -39,29 +40,41 @@ const Example = () => (
         <TableRow key={user.id}>
           <TableCell className="font-medium">{user.name}</TableCell>
           <TableCell>{user.email}</TableCell>
-          <TableCell className="text-right">
+          <TableCell className="text-end">
             <Menu positioning={{ placement: "left-end" }}>
               <MenuTrigger asChild>
-                <Button size="icon-sm" variant="outline">
-                  <EllipsisVerticalIcon />
+                <Button
+                  aria-label={`Actions for ${user.name}`}
+                  size="icon-xs"
+                  variant="outline"
+                >
+                  <EllipsisVerticalIcon aria-hidden="true" />
                 </Button>
               </MenuTrigger>
               <MenuContent className="min-w-40">
-                <MenuItem value="view">
-                  <EyeIcon />
-                  View
-                  <MenuShortcut>⌘ V</MenuShortcut>
-                </MenuItem>
-                <MenuItem value="edit">
-                  <PencilIcon />
-                  Edit
-                  <MenuShortcut>⌘ E</MenuShortcut>
-                </MenuItem>
-                <MenuItem value="delete" variant="destructive">
-                  <Trash2Icon />
-                  Delete
-                  <MenuShortcut>⌘ ⌫</MenuShortcut>
-                </MenuItem>
+                <MenuList>
+                  <MenuItem value="view">
+                    <EyeIcon />
+                    View
+                    <MenuShortcut className="hidden sm:inline-flex">
+                      ⌘ V
+                    </MenuShortcut>
+                  </MenuItem>
+                  <MenuItem value="edit">
+                    <PencilIcon />
+                    Edit
+                    <MenuShortcut className="hidden sm:inline-flex">
+                      ⌘ E
+                    </MenuShortcut>
+                  </MenuItem>
+                  <MenuItem value="delete" variant="destructive">
+                    <Trash2Icon />
+                    Delete
+                    <MenuShortcut className="hidden sm:inline-flex">
+                      ⌘ ⌫
+                    </MenuShortcut>
+                  </MenuItem>
+                </MenuList>
               </MenuContent>
             </Menu>
           </TableCell>
@@ -72,9 +85,9 @@ const Example = () => (
 );
 
 const users = [
-  { id: "1", name: "Alice Johnson", email: "alice@example.com" },
-  { id: "2", name: "Bruno Silva", email: "bruno@example.com" },
-  { id: "3", name: "Clara Mendes", email: "clara@example.com" },
+  { email: "alice@example.com", id: "1", name: "Alice Johnson" },
+  { email: "bruno@example.com", id: "2", name: "Bruno Silva" },
+  { email: "clara@example.com", id: "3", name: "Clara Mendes" },
 ];
 
 export default Example;

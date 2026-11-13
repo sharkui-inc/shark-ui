@@ -1,0 +1,71 @@
+---
+title: useCopyToClipboard
+description: Copy text to the clipboard and track copied state.
+aliases:
+  - Clipboard hook
+seo:
+  description: Hook for copying text to the clipboard with a copied timeout.
+links:
+  doc: https://ark-ui.com/docs/utilities/clipboard
+  api: https://ark-ui.com/docs/utilities/clipboard#api-reference
+---
+
+import manifest from "@/registry/manifest/use-copy-to-clipboard";
+
+<ComponentPreview componentName="use-copy-to-clipboard" autoHeight />
+
+## Installation
+
+<CodeTabs>
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shark/use-copy-to-clipboard
+```
+
+</TabsContent>
+<TabsContent value="manual">
+
+<Steps>
+<Step>Install the following dependencies:</Step>
+
+<RegistryDependencies dependencies={manifest.dependencies} />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource title="hooks/use-copy-to-clipboard.ts" src="../hooks/use-copy-to-clipboard.ts" />
+
+<Step>Update the import paths to match your project setup.</Step>
+</Steps>
+
+</TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+```
+
+```tsx
+const clipboard = useCopyToClipboard({
+  defaultValue: "https://shark-ui.com",
+  timeout: 2000,
+});
+
+return (
+  <Button onClick={() => clipboard.copy()}>
+    {clipboard.copied ? "Copied" : "Copy"}
+  </Button>
+);
+```
+
+`useCopyToClipboard` re-exports Ark UI `useClipboard`. Pass `value` for controlled copy text, or `defaultValue` for uncontrolled. `timeout` clears `copied` after the delay.
+
+## API Reference
+
+For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/utilities/clipboard#api-reference).

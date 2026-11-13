@@ -1,7 +1,7 @@
 import { Prose } from "@/registry/react/components/prose";
 
 const Example = () => (
-  <Prose className="space-y-10">
+  <Prose className="flex flex-col gap-10">
     <div>
       <h1>Davy Jones' locker</h1>
 

@@ -19,7 +19,7 @@ const Example = () => (
         title="Get 15% OFF"
       />
       <CardContent>
-        <pre className="rounded-md bg-muted p-2 text-center font-medium text-sm">
+        <pre className="bg-muted rounded-md p-2 text-center text-sm font-medium">
           <code>15OFF</code>
         </pre>
       </CardContent>

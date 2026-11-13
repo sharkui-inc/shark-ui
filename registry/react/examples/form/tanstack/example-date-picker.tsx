@@ -1,9 +1,7 @@
 "use client";
 
 import type { DateValue } from "@ark-ui/react";
-import { toast } from "@registry/react/components/toast";
 import { useForm } from "@tanstack/react-form";
-import { CalendarIcon } from "lucide-react";
 import * as z from "zod";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -27,36 +25,23 @@ import {
 import {
   DatePicker,
   DatePickerContent,
-  DatePickerTrigger,
-  DatePickerValue,
+  DatePickerInput,
+  DatePickerLabel,
 } from "@/registry/react/components/date-picker";
 import {
   Field,
   FieldError,
   FieldGroup,
-  FieldLabel,
 } from "@/registry/react/components/field";
-
-const formSchema = z.object({
-  interviewDate: z
-    .array(z.custom<DateValue>((val) => val != null && typeof val === "object"))
-    .min(1, {
-      message: "Please choose your preferred interview date.",
-    }),
-});
+import { toast } from "@/registry/react/components/toast";
 
 const Example = () => {
   const form = useForm({
     defaultValues: {
       interviewDate: [] as DateValue[],
     },
-    validators: {
-      onSubmit: formSchema,
-    },
     onSubmit: ({ value }) => {
       toast.info({
-        id: "interview-date-submitted",
-        title: "Interview preference saved",
         description: (
           <pre className="mt-2">
             <code>
@@ -68,7 +53,12 @@ const Example = () => {
             </code>
           </pre>
         ),
+        id: "interview-date-submitted",
+        title: "Interview preference saved",
       });
+    },
+    validators: {
+      onSubmit: formSchema,
     },
   });
 
@@ -93,17 +83,13 @@ const Example = () => {
             <form.Field
               children={(field) => (
                 <Field invalid={!field.state.meta.isValid}>
-                  <FieldLabel>Preferred interview date</FieldLabel>
                   <DatePicker
+                    className="w-full"
                     onValueChange={({ value }) => field.handleChange(value)}
                     value={field.state.value}
                   >
-                    <DatePickerTrigger asChild>
-                      <Button className="w-full" variant="outline">
-                        <CalendarIcon />
-                        <DatePickerValue placeholder="Pick a date" />
-                      </Button>
-                    </DatePickerTrigger>
+                    <DatePickerLabel>Preferred interview date</DatePickerLabel>
+                    <DatePickerInput placeholder="Pick a date" />
                     <DatePickerContent>
                       <CalendarViewControl>
                         <CalendarPrevTrigger />
@@ -127,7 +113,7 @@ const Example = () => {
           </FieldGroup>
         </CardContent>
         <CardFooter>
-          <Button onClick={() => form.reset()} type="button" variant="outline">
+          <Button onClick={() => form.reset()} variant="outline">
             Reset
           </Button>
           <Button type="submit">Save</Button>
@@ -136,5 +122,15 @@ const Example = () => {
     </Card>
   );
 };
+
+const formSchema = z.object({
+  interviewDate: z
+    .array(
+      z.custom<DateValue>((val) => val !== null && typeof val === "object")
+    )
+    .min(1, {
+      message: "Please choose your preferred interview date.",
+    }),
+});
 
 export default Example;

@@ -1,10 +1,11 @@
-import { ExternalLink } from "lucide-react";
+import { ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/registry/react/components/button";
 import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuShortcut,
   MenuTrigger,
 } from "@/registry/react/components/menu";
@@ -14,22 +15,20 @@ const Example = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-40">
-      <MenuItem asChild value="docs">
-        <a
-          href="https://x.com/vinihvc"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          External link
-          <MenuShortcut>
-            <ExternalLink />
-          </MenuShortcut>
-        </a>
-      </MenuItem>
-      <MenuItem asChild value="components">
-        <Link href="/docs/components">View docs</Link>
-      </MenuItem>
+    <MenuContent className="min-w-40">
+      <MenuList>
+        <MenuItem asChild value="docs">
+          <a href="#">
+            External link
+            <MenuShortcut className="hidden sm:inline-flex">
+              <ArrowUpRightIcon />
+            </MenuShortcut>
+          </a>
+        </MenuItem>
+        <MenuItem asChild value="components">
+          <Link href="#">View docs</Link>
+        </MenuItem>
+      </MenuList>
     </MenuContent>
   </Menu>
 );

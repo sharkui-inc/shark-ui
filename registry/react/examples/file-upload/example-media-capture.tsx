@@ -13,7 +13,7 @@ const Example = () => (
     <div className="flex justify-center">
       <FileUploadTrigger asChild>
         <Button variant="outline">
-          <CameraIcon />
+          <CameraIcon data-icon="inline-start" />
           Take a picture
         </Button>
       </FileUploadTrigger>

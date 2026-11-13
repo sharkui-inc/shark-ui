@@ -2,9 +2,7 @@
 /node_modules
 .playwright-mcp
 
-# generated content
-.contentlayer
-.content-collections
+# generated content (fumadocs-mdx)
 .source
 
 # test & build
@@ -17,15 +15,28 @@
 # misc
 .DS_Store
 *.pem
-/.pnp
-.pnp.js
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
+
+# env
+.env
+.env*.local
 
 # others
-.env*.local
 .vercel
 next-env.d.ts
 # next-agents-md
 .next-docs/
+
+# improve skill plans
+/plans/
+/advisor-plans/
+
+# impeccable — keep shared config/sidecar; ignore session artifacts
+.impeccable/*
+!.impeccable/config.json
+!.impeccable/design.json

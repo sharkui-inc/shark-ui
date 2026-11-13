@@ -1,12 +1,23 @@
 ---
 title: Bottom Navigation
-description: Fixed bottom nav for mobile-first apps.
+description: Bottom bar for primary destinations.
+aliases:
+  - Tab bar
+  - Bottom bar
+seo:
+  description: Fixed or floating bottom nav for primary destinations on small screens.
 links:
   doc: https://ark-ui.com/docs/components/tabs
   api: https://ark-ui.com/docs/components/tabs#api-reference
 ---
 
-<ComponentPreview componentName="bottom-navigation" />
+import manifest from "@/registry/manifest/bottom-navigation";
+
+<PreviewIframe
+  height={640}
+  src="/view/examples/bottom-navigation/example-default"
+  title="Bottom Navigation"
+/>
 
 ## Installation
 
@@ -31,11 +42,11 @@ npx shadcn@latest add @shark/bottom-navigation
 
 <Step>This component depends on [Tabs](/docs/components/tabs). Install it first if you haven't already.</Step>
 
+<RegistryDependencies registryDependencies={manifest.registryDependencies} />
+
 <Step>Install the following dependencies:</Step>
 
-```bash
-npm install @ark-ui/react
-```
+<RegistryDependencies dependencies={manifest.dependencies} />
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -73,7 +84,7 @@ import {
 
 ```tsx
 <BottomNavigation defaultValue="home">
-  <BottomNavigationList>
+  <BottomNavigationList aria-label="Main navigation">
     <BottomNavigationItem value="home">
       <BottomNavigationItemIcon>
         <HomeIcon />
@@ -90,23 +101,141 @@ import {
 </BottomNavigation>
 ```
 
-## Disclaimer
+## Controlled
 
-> Don't include `position: absolute` on the `BottomNavigationList`. It's just for the examples.
+Control the active item with `value` and `onValueChange`.
+
+<PreviewIframe
+  height={400}
+  src="/view/examples/bottom-navigation/example-controlled"
+  title="Bottom Navigation Controlled"
+/>
+
+```tsx
+const [value, setValue] = React.useState("home");
+
+<BottomNavigation
+  onValueChange={(details) => setValue(details.value)}
+  value={value}
+>
+  <BottomNavigationList>
+    <BottomNavigationItem value="home">
+      <BottomNavigationItemIcon>
+        <HomeIcon />
+      </BottomNavigationItemIcon>
+      <BottomNavigationItemLabel>Home</BottomNavigationItemLabel>
+    </BottomNavigationItem>
+  </BottomNavigationList>
+</BottomNavigation>
+```
+
+## States
+
+### Disabled
+
+Disable an item with the `disabled` prop.
+
+<PreviewIframe
+  height={400}
+  src="/view/examples/bottom-navigation/example-disabled"
+  title="Bottom Navigation Disabled"
+/>
+
+```tsx
+<BottomNavigationItem disabled value="news">
+  <BottomNavigationItemIcon>
+    <BellIcon />
+  </BottomNavigationItemIcon>
+  <BottomNavigationItemLabel>News</BottomNavigationItemLabel>
+</BottomNavigationItem>
+```
+
+## Variants
+
+Use the prop `variant` to change the appearance.
+
+### Default
+
+<PreviewIframe
+  height={400}
+  src="/view/examples/bottom-navigation/example-variant-default"
+  title="Bottom Navigation Default"
+/>
+
+```tsx
+<BottomNavigationList>
+  {/* ... */}
+</BottomNavigationList>
+```
+
+### Inset
+
+<PreviewIframe
+  height={400}
+  src="/view/examples/bottom-navigation/example-variant-inset"
+  title="Bottom Navigation Inset"
+/>
+
+```tsx
+<BottomNavigationList variant="inset">
+  {/* ... */}
+</BottomNavigationList>
+```
 
 ## Examples
 
-### Icon only
+### Icon Only
 
 Use `aria-label` on the `BottomNavigationItem` to give the item a label for screen readers.
 
-<ComponentPreview componentName="bottom-navigation" fileName="example-icon-only" />
+<PreviewIframe
+  height={400}
+  src="/view/examples/bottom-navigation/example-icon-only"
+  title="Bottom Navigation Icon Only"
+/>
 
-### With links
+```tsx
+<BottomNavigationItem aria-label="Home" value="home">
+  <BottomNavigationItemIcon>
+    <HomeIcon />
+  </BottomNavigationItemIcon>
+</BottomNavigationItem>
+```
 
-Use the `asChild` prop on `BottomNavigationItem` with `Link`. 
+### With Links
 
-<ComponentPreview componentName="bottom-navigation" fileName="example-with-links" />
+Use `asChild` on `BottomNavigationItem` with a `Link`.
+
+<PreviewIframe
+  height={400}
+  src="/view/examples/bottom-navigation/example-with-links"
+  title="Bottom Navigation With Links"
+/>
+
+```tsx
+<BottomNavigation value={pathname}>
+  <BottomNavigationList aria-label="Main navigation">
+    <BottomNavigationItem asChild value="/docs">
+      <Link href="/docs">
+        <BottomNavigationItemIcon>
+          <BookOpenIcon />
+        </BottomNavigationItemIcon>
+        <BottomNavigationItemLabel>Docs</BottomNavigationItemLabel>
+      </Link>
+    </BottomNavigationItem>
+  </BottomNavigationList>
+</BottomNavigation>
+```
+
+## RTL
+
+To enable RTL support, see the [RTL configuration guide](/docs/rtl).
+
+<PreviewIframe
+  height={640}
+  src="/view/examples/bottom-navigation/example-rtl"
+  title="Bottom Navigation RTL"
+/>
 
 ## API Reference
 
@@ -128,6 +257,8 @@ Fixed bar at the bottom. Typically holds nav items.
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `aria-label` | `string` | `"Bottom navigation"` |
+| `variant` | `"default" \| "inset"` | `"default"` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
@@ -137,7 +268,7 @@ Single navigation link or button.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `string` | **required** |
+| `value` | `string` | `required` |
 | `disabled` | `boolean` | `false` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
@@ -159,7 +290,6 @@ Holds the item label text.
 | --- | --- | --- |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
-
 ---
 
 For a complete list of props, see the [Ark UI documentation](https://ark-ui.com/docs/components/tabs#api-reference).

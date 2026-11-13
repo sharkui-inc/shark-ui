@@ -17,7 +17,10 @@ const Example = () => {
     <div className="flex w-full max-w-xs flex-col gap-4">
       <p className="text-center text-sm">Greater than 80</p>
       <Field>
-        <Slider onValueChange={({ value }) => setValue(value)} value={value}>
+        <Slider
+          onValueChange={({ value: nextValue }) => setValue(nextValue)}
+          value={value}
+        >
           <div className="flex items-center justify-between">
             <SliderLabel>Temperature</SliderLabel>
             <SliderValue />

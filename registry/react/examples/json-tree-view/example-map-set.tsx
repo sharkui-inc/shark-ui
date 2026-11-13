@@ -1,18 +1,29 @@
 import { JsonTreeView } from "@/registry/react/components/json-tree-view";
 
-const preferences = new Map([
-  ["theme", "dark"],
-  ["language", "en"],
-  ["notifications", "enabled"],
+const Example = () => (
+  <JsonTreeView
+    className="w-full max-w-xl"
+    data={data}
+    defaultExpandedDepth={1}
+  />
+);
+
+const notificationPreferences = new Map([
+  ["order_updates", "email"],
+  ["product_news", "disabled"],
+  ["weekly_summary", "in_app"],
 ]);
 
-const visitedPages = new Set(["/home", "/profile", "/settings"]);
+const enabledFeatures = new Set([
+  "express-checkout",
+  "order-tracking",
+  "saved-payment-methods",
+]);
 
 const data = {
-  preferences,
-  visitedPages,
+  enabledFeatures,
+  notificationPreferences,
+  workspace: "Onda Commerce",
 };
-
-const Example = () => <JsonTreeView data={data} defaultExpandedDepth={1} />;
 
 export default Example;

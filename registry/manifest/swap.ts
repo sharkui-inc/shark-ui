@@ -4,8 +4,8 @@ const dependencies = ["@ark-ui/react", "tailwind-variants"];
 
 const cssVars = {
   theme: {
-    "--animate-flip-in": "flip-in 0.2s ease-out",
-    "--animate-flip-out": "flip-out 0.2s ease-out",
+    "--animate-flip-in": "flip-in 400ms ease",
+    "--animate-flip-out": "flip-out 200ms ease",
   },
 };
 
@@ -21,11 +21,11 @@ const css = {
 };
 
 const manifest: RegistryItemType = {
+  css,
+  cssVars,
+  dependencies,
   name: "swap",
   type: "registry:ui",
-  dependencies,
-  cssVars,
-  css,
 };
 
 export default manifest;

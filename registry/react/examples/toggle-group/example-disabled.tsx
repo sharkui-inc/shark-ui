@@ -1,19 +1,19 @@
-import { Bold, Italic, Underline } from "lucide-react";
+import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react";
 import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/registry/react/components/toggle-group";
 
 const Example = () => (
-  <ToggleGroup defaultValue={["bold"]} disabled multiple>
+  <ToggleGroup defaultValue={["bold"]} disabled>
     <ToggleGroupItem aria-label="Toggle bold" value="bold">
-      <Bold />
+      <BoldIcon />
     </ToggleGroupItem>
     <ToggleGroupItem aria-label="Toggle italic" value="italic">
-      <Italic />
+      <ItalicIcon />
     </ToggleGroupItem>
     <ToggleGroupItem aria-label="Toggle underline" value="underline">
-      <Underline />
+      <UnderlineIcon />
     </ToggleGroupItem>
   </ToggleGroup>
 );

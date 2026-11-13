@@ -1,0 +1,59 @@
+"use client";
+
+import React from "react";
+import {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuGroup,
+  ContextMenuList,
+  ContextMenuTrigger,
+} from "@/registry/react/components/context-menu";
+
+const ContextMenuCheckboxes = () => {
+  const [showBookmarks, setShowBookmarks] = React.useState(true);
+  const [showFullUrls, setShowFullUrls] = React.useState(false);
+  const [showDeveloperTools, setShowDeveloperTools] = React.useState(true);
+
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger className="flex aspect-video items-center justify-center rounded-2xl border border-dashed p-20 text-sm">
+        <span className="hidden pointer-fine:inline-block">
+          Right click here
+        </span>
+        <span className="hidden pointer-coarse:inline-block">
+          Long press here
+        </span>
+      </ContextMenuTrigger>
+      <ContextMenuContent>
+        <ContextMenuList>
+          <ContextMenuGroup>
+            <ContextMenuCheckboxItem
+              checked={showBookmarks}
+              onCheckedChange={setShowBookmarks}
+              value="show-bookmarks"
+            >
+              Show Bookmarks Bar
+            </ContextMenuCheckboxItem>
+            <ContextMenuCheckboxItem
+              checked={showFullUrls}
+              onCheckedChange={setShowFullUrls}
+              value="show-full-urls"
+            >
+              Show Full URLs
+            </ContextMenuCheckboxItem>
+            <ContextMenuCheckboxItem
+              checked={showDeveloperTools}
+              onCheckedChange={setShowDeveloperTools}
+              value="show-developer-tools"
+            >
+              Show Developer Tools
+            </ContextMenuCheckboxItem>
+          </ContextMenuGroup>
+        </ContextMenuList>
+      </ContextMenuContent>
+    </ContextMenu>
+  );
+};
+
+export default ContextMenuCheckboxes;

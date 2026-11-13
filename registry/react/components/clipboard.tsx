@@ -2,15 +2,20 @@
 
 import {
   Clipboard as ArkClipboard,
-  useClipboardContext,
+  useClipboardContext as useArkClipboardContext,
 } from "@ark-ui/react/clipboard";
 import { CheckIcon, ClipboardIcon } from "lucide-react";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/lib/utils";
-import { inputVariants } from "@/registry/react/components/input";
+import {
+  inputHeightVars,
+  inputVariants,
+} from "@/registry/react/components/input";
 
-export const useClipboard = useClipboardContext;
+export const useClipboardContext = useArkClipboardContext;
+
+export const ClipboardContext = ArkClipboard.Context;
 
 interface ClipboardProps
   extends React.ComponentProps<typeof ArkClipboard.Root> {
@@ -25,12 +30,12 @@ export const Clipboard = (props: ClipboardProps) => {
 
   return (
     <ArkClipboard.Root
-      className={cn(rootClassName)}
+      className={cn("w-fit flex-none", rootClassName, className)}
       data-slot="clipboard"
       {...rest}
     >
       <ArkClipboard.Control
-        className={cn("flex items-center gap-2", className)}
+        className="flex w-full items-center gap-2"
         data-slot="clipboard-control"
       >
         {children}
@@ -59,23 +64,30 @@ export const ClipboardInput = (
 
 const clipboardValueVariants = tv({
   base: [
+    "h-(--field-height)",
     "inline-flex items-center",
-    "px-3",
-    "bg-transparent dark:bg-input/30",
-    "text-base md:text-sm",
-    "rounded-lg border border-input shadow-sm/5",
+    "text-base font-normal md:text-sm",
+    "bg-transparent",
+    "dark:bg-input/32",
+    "border-input rounded-lg border shadow-xs/4",
   ],
-  variants: {
-    size: {
-      xs: "h-6",
-      sm: "h-7",
-      md: "h-8",
-      lg: "h-9",
-      xl: "h-10",
-    },
-  },
   defaultVariants: {
     size: "md",
+  },
+  variants: {
+    size: {
+      lg: [inputHeightVars.lg, "px-[calc(--spacing(3.5)-1px)]"],
+      md: [inputHeightVars.md, "px-[calc(--spacing(3)-1px)]"],
+      sm: [inputHeightVars.sm, "px-[calc(--spacing(2.5)-1px)]"],
+      xl: [
+        "[--field-height:--spacing(12)] md:[--field-height:--spacing(11)]",
+        "px-[calc(--spacing(3)-1px)]",
+      ],
+      xs: [
+        "[--field-height:--spacing(8)] md:[--field-height:--spacing(7)]",
+        "px-[calc(--spacing(3)-1px)]",
+      ],
+    },
   },
 });
 
@@ -98,16 +110,27 @@ export const ClipboardValue = (props: ClipboardValueProps) => {
 export const ClipboardIndicator = (
   props: React.ComponentProps<typeof ArkClipboard.Indicator>
 ) => {
-  const { copied = <CheckIcon />, className, children, ...rest } = props;
+  const {
+    asChild: _asChild,
+    copied = <CheckIcon aria-hidden="true" />,
+    className,
+    children,
+    ...rest
+  } = props;
+
+  const clipboard = useClipboardContext();
 
   return (
-    <ArkClipboard.Indicator
+    <span
+      {...clipboard.getIndicatorProps({ copied: clipboard.copied })}
       className={cn("pointer-events-none", className)}
-      copied={copied}
       data-slot="clipboard-indicator"
       {...rest}
+      aria-hidden="true"
     >
-      {children || <ClipboardIcon />}
-    </ArkClipboard.Indicator>
+      {clipboard.copied
+        ? copied
+        : (children ?? <ClipboardIcon aria-hidden="true" />)}
+    </span>
   );
 };

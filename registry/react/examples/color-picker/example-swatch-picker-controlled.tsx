@@ -1,5 +1,6 @@
 "use client";
 
+import { parseColor } from "@ark-ui/react";
 import React from "react";
 import {
   ColorPicker,
@@ -7,10 +8,7 @@ import {
   ColorPickerSwatchGroup,
   ColorPickerSwatchIndicator,
   ColorPickerSwatchTrigger,
-  parseColor,
 } from "@/registry/react/components/color-picker";
-
-const swatches = ["#0485F7", "#EF4444", "#F59E0B", "#10B981"];
 
 const Example = () => {
   const [value, setValue] = React.useState("#0485F7");
@@ -33,11 +31,13 @@ const Example = () => {
         </ColorPickerSwatchGroup>
       </ColorPicker>
 
-      <p className="text-center text-muted-foreground text-sm">
+      <p className="text-muted-foreground text-center text-sm">
         {parseColor(value).toString("hex")}
       </p>
     </div>
   );
 };
+
+const swatches = ["#0485F7", "#EF4444", "#F59E0B", "#10B981"];
 
 export default Example;

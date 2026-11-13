@@ -15,12 +15,7 @@ const Example = () => (
     </ToggleTooltipTrigger>
     <ToggleTooltipContent>
       This is a popover, so it can contain interactive content like{" "}
-      <a
-        className="underline underline-offset-2"
-        href="https://ark-ui.com"
-        rel="noopener"
-        target="_blank"
-      >
+      <a className="underline underline-offset-2" href="#">
         this link
       </a>
       .

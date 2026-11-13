@@ -1,0 +1,10 @@
+/* Ark Presence waits for animations before unmounting; keep this off its transform. */
+@utility animate-drawer-exit {
+  animation: drawer-exit 250ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@keyframes drawer-exit {
+  to {
+    opacity: 0;
+  }
+}

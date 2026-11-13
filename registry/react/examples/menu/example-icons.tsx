@@ -4,6 +4,7 @@ import {
   Menu,
   MenuContent,
   MenuItem,
+  MenuList,
   MenuTrigger,
 } from "@/registry/react/components/menu";
 
@@ -12,19 +13,21 @@ const Example = () => (
     <MenuTrigger asChild>
       <Button variant="outline">Open</Button>
     </MenuTrigger>
-    <MenuContent className="w-40">
-      <MenuItem value="edit">
-        <PencilIcon />
-        Edit
-      </MenuItem>
-      <MenuItem value="copy">
-        <CopyIcon />
-        Copy
-      </MenuItem>
-      <MenuItem value="share">
-        <ShareIcon />
-        Share
-      </MenuItem>
+    <MenuContent className="min-w-40">
+      <MenuList>
+        <MenuItem value="edit">
+          <PencilIcon />
+          Edit
+        </MenuItem>
+        <MenuItem value="copy">
+          <CopyIcon />
+          Copy
+        </MenuItem>
+        <MenuItem value="share">
+          <ShareIcon />
+          Share
+        </MenuItem>
+      </MenuList>
     </MenuContent>
   </Menu>
 );

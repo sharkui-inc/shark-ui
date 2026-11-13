@@ -3,18 +3,25 @@
 import { useFilter, useListCollection } from "@ark-ui/react";
 import type { LucideIcon } from "lucide-react";
 import {
-  ArrowRightIcon,
+  ArrowLeftRightIcon,
+  BlocksIcon,
   CheckIcon,
-  CircleDashed,
-  CircleDotDashed,
+  CircleDashedIcon,
+  CircleDotDashedIcon,
   CornerDownLeftIcon,
+  FileTextIcon,
+  SquarePenIcon,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { DOCS_NEW_ITEMS, DOCS_UPDATED_ITEMS } from "@/config/docs-nav";
 import type { NavItem } from "@/config/navigation";
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import { useIsMac } from "@/hooks/use-is-mac";
+import type { CommandCompositionItem } from "@/lib/composition-catalog";
 import type { source } from "@/lib/fumadocs";
+import {
+  createShadcnAddCommand,
+  formatShadcnCommandDisplay,
+} from "@/lib/installation-command";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/react/components/button";
 import {
@@ -30,27 +37,83 @@ import {
   CommandItem,
   CommandList,
 } from "@/registry/react/components/command";
+import {
+  useFormatHotkey,
+  useHotkey,
+} from "@/registry/react/components/hotkeys";
 import { Kbd, KbdGroup } from "@/registry/react/components/kbd";
+import { Status } from "@/registry/react/components/status";
+import { useCopyToClipboard } from "@/registry/react/hooks/use-copy-to-clipboard";
 import { useConfig } from "@/store/config";
 
 interface PageItem {
   group: string;
+  installName?: string;
   isComponent: boolean;
+  keywords?: string;
   label: string;
   url: string;
   value: string;
 }
 
 const GROUP_ICON_MAP: Record<string, LucideIcon> = {
-  sections: ArrowRightIcon,
-  components: CircleDashed,
-  utilities: CircleDotDashed,
+  "ai components": CircleDashedIcon,
+  blocks: BlocksIcon,
+  components: CircleDashedIcon,
+  forms: SquarePenIcon,
+  helpers: CircleDotDashedIcon,
+  hooks: CircleDotDashedIcon,
+  migration: ArrowLeftRightIcon,
+  pages: FileTextIcon,
+  utilities: CircleDotDashedIcon,
 };
 
-const DEFAULT_GROUP_ICON = ArrowRightIcon;
+const COMPONENT_PAGE_PATHS = [
+  "/components/",
+  "/ai-components/",
+  "/helpers/",
+  "/utilities/",
+  "/hooks/",
+];
+
+const isComponentPage = (url: string) =>
+  COMPONENT_PAGE_PATHS.some((path) => url.includes(path));
+
+const isFormFieldFocused = () => {
+  const target = document.activeElement;
+
+  return (
+    (target instanceof HTMLElement && target.isContentEditable) ||
+    target instanceof HTMLInputElement ||
+    target instanceof HTMLTextAreaElement ||
+    target instanceof HTMLSelectElement
+  );
+};
+
+const rankItem = (
+  item: PageItem,
+  query: string,
+  startsWith: (string: string, substring: string) => boolean
+) => {
+  if (startsWith(item.label, query) && startsWith(query, item.label)) {
+    return 2;
+  }
+  if (startsWith(item.label, query)) {
+    return 1;
+  }
+  return 0;
+};
 
 interface HeaderCommandProps
   extends React.ComponentProps<typeof CommandDialog> {
+  /**
+   * Blocks indexed for search
+   */
+  compositionItems: CommandCompositionItem[];
+  /**
+   * Search keywords keyed by docs URL (aliases, description, seo.description).
+   */
+  keywordsByUrl: Record<string, string>;
   /**
    * The navigation items to display in the command menu
    */
@@ -63,130 +126,127 @@ interface HeaderCommandProps
   tree: typeof source.pageTree;
 }
 
-const getAddCommand = (packageManager: string) => {
-  switch (packageManager) {
-    case "pnpm":
-      return "pnpm dlx shadcn@latest add";
-    case "bun":
-      return "bunx --bun shadcn@latest add";
-    case "yarn":
-      return "yarn dlx shadcn@latest add";
-    default:
-      return "npx shadcn@latest add";
-  }
+const getCommandItems = (
+  props: Pick<
+    HeaderCommandProps,
+    "compositionItems" | "keywordsByUrl" | "navItems" | "tree"
+  >
+): PageItem[] => {
+  const { compositionItems, keywordsByUrl, navItems, tree } = props;
+
+  return [
+    ...navItems.map((item) => ({
+      group: "Pages",
+      isComponent: false,
+      label: item.label,
+      url: item.href,
+      value: item.href,
+    })),
+    ...tree.children.flatMap((group) => {
+      if (group.type !== "folder") {
+        return [];
+      }
+
+      const groupName =
+        String(group.name) === "Sections" ? "Pages" : String(group.name);
+
+      return group.children.flatMap((item) => {
+        if (item.type !== "page") {
+          return [];
+        }
+
+        return {
+          group: groupName,
+          isComponent: isComponentPage(item.url),
+          keywords: keywordsByUrl[item.url],
+          label: item.name?.toString() || "",
+          url: item.url,
+          value: item.url,
+        };
+      });
+    }),
+    ...compositionItems,
+  ];
 };
 
 export const HeaderCommand = (props: HeaderCommandProps) => {
-  const { navItems, tree, ...rest } = props;
+  const { compositionItems, keywordsByUrl, navItems, tree, ...rest } = props;
 
   const router = useRouter();
 
-  const isMac = useIsMac();
-  const [{ packageManager }] = useConfig();
-  const { copyToClipboard, isCopied } = useCopyToClipboard({ timeout: 400 });
+  const formatHotkey = useFormatHotkey();
+  const { packageManager } = useConfig();
+  const clipboard = useCopyToClipboard({ timeout: 400 });
 
   const [isOpen, setIsOpen] = React.useState(false);
-  const [copyPayload, setCopyPayload] = React.useState("");
 
-  const { contains } = useFilter({ sensitivity: "base" });
+  const { contains, startsWith } = useFilter({ sensitivity: "base" });
 
-  React.useEffect(() => {
-    if (!isOpen) {
-      setCopyPayload("");
-    }
-  }, [isOpen]);
+  const groupedItems = React.useMemo(
+    () => getCommandItems({ compositionItems, keywordsByUrl, navItems, tree }),
+    [compositionItems, keywordsByUrl, navItems, tree]
+  );
 
-  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: it's a simple grouping of items
-  const groupedItems = React.useMemo<PageItem[]>(() => {
-    const allItems: PageItem[] = [];
-
-    for (const navItem of navItems) {
-      allItems.push({
-        group: "Sections",
-        isComponent: false,
-        label: navItem.label,
-        url: navItem.href,
-        value: navItem.href,
-      });
-    }
-
-    for (const group of tree.children) {
-      if (group.type === "folder") {
-        for (const item of group.children) {
-          if (item.type === "page") {
-            const isComponent =
-              ["/components/", "/utilities/", "/hooks/"].some((path) =>
-                item.url.includes(path)
-              ) ?? false;
-            const itemName = item.name?.toString() || "";
-
-            allItems.push({
-              isComponent,
-              label: itemName,
-              url: item.url,
-              value: item.url,
-              group:
-                typeof group.name === "string"
-                  ? group.name
-                  : String(group.name),
-            });
-          }
-        }
-      }
-    }
-
-    return allItems;
-  }, [navItems, tree]);
-
-  const { collection, filter } = useListCollection({
-    filter: contains,
-    initialItems: groupedItems,
+  const { collection, reset, set } = useListCollection({
     groupBy: (item) => item.group,
+    initialItems: groupedItems,
   });
 
-  const handleHighlightChange = React.useCallback(
-    (details: { highlightedValue: string | null }) => {
-      if (!details.highlightedValue) {
-        setCopyPayload("");
+  const filterAndRank = React.useCallback(
+    (inputValue: string) => {
+      if (!inputValue) {
+        reset();
         return;
       }
-      const item = groupedItems.find((i) => i.url === details.highlightedValue);
-      if (!item?.isComponent) {
-        setCopyPayload("");
-        return;
-      }
-      const componentName = item.url.split("/").at(-1) ?? "";
-      const addCmd = getAddCommand(packageManager);
-      setCopyPayload(`${addCmd} @shark/${componentName}`);
+
+      const matched = groupedItems
+        .filter((item) =>
+          contains(
+            [item.label, item.keywords ?? "", item.url].join(" "),
+            inputValue
+          )
+        )
+        .sort(
+          (a, b) =>
+            rankItem(b, inputValue, startsWith) -
+            rankItem(a, inputValue, startsWith)
+        );
+
+      set(matched);
     },
-    [groupedItems, packageManager]
+    [contains, groupedItems, reset, set, startsWith]
   );
 
   React.useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || e.key === "/") {
-        if (
-          (e.target instanceof HTMLElement && e.target.isContentEditable) ||
-          e.target instanceof HTMLInputElement ||
-          e.target instanceof HTMLTextAreaElement ||
-          e.target instanceof HTMLSelectElement
-        ) {
-          return;
-        }
+    if (!isOpen) {
+      clipboard.setValue("");
+      reset();
+    }
+  }, [clipboard.setValue, isOpen, reset]);
 
-        e.preventDefault();
-        setIsOpen((open) => !open);
-      }
+  const toggleOpen = React.useCallback(() => {
+    setIsOpen((open) => !open);
+  }, []);
 
-      if (e.key === "c" && (e.metaKey || e.ctrlKey) && isOpen && copyPayload) {
-        e.preventDefault();
-        copyToClipboard(copyPayload);
-      }
-    };
+  useHotkey({
+    action: toggleOpen,
+    enabled: () => !isFormFieldFocused(),
+    hotkey: "mod+K",
+    options: { preventDefault: true },
+  });
 
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
-  }, [copyPayload, copyToClipboard, isOpen]);
+  useHotkey({
+    action: toggleOpen,
+    hotkey: "/",
+    options: { preventDefault: true },
+  });
+
+  useHotkey({
+    action: () => clipboard.copy(),
+    enabled: () => isOpen && Boolean(clipboard.value),
+    hotkey: "mod+C",
+    options: { preventDefault: true },
+  });
 
   return (
     <CommandDialog
@@ -198,46 +258,84 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
         <Button
           className={cn(
             "justify-between",
-            "bg-white dark:bg-input/48",
-            "h-8 w-full md:w-48 lg:w-40"
+            "dark:bg-input/32 bg-white",
+            "w-full md:w-48 lg:w-40",
+            "[anchor-name:--site-search]"
           )}
-          clickEffect={false}
+          id="site-search-trigger"
+          size="sm"
           variant="outline"
         >
           <span className="inline-flex">Search...</span>
           <KbdGroup>
-            <Kbd variant="outline">⌘</Kbd>
-            <Kbd variant="outline">K</Kbd>
+            <Kbd variant="outline">{formatHotkey("mod")}</Kbd>
+            <Kbd variant="outline">{formatHotkey("K")}</Kbd>
           </KbdGroup>
         </Button>
       </CommandDialogTrigger>
-      <CommandDialogContent>
+      <CommandDialogContent variant="inset">
         <Command
           collection={collection}
-          onHighlightChange={handleHighlightChange}
-          onInputValueChange={({ inputValue }) => filter(inputValue)}
+          onHighlightChange={(details) => {
+            if (!details.highlightedValue) {
+              clipboard.setValue("");
+              return;
+            }
+            const item = groupedItems.find(
+              (i) => i.url === details.highlightedValue
+            );
+            if (!item?.isComponent) {
+              clipboard.setValue("");
+              return;
+            }
+            const componentName =
+              item.installName ??
+              item.url.split("/").at(-1)?.split("?")[0] ??
+              "";
+            const addCmd = createShadcnAddCommand(packageManager);
+            clipboard.setValue(`${addCmd} @shark/${componentName}`);
+          }}
+          onInputValueChange={({ inputValue }) => filterAndRank(inputValue)}
           onValueChange={(e) => {
             router.push(e.items[0].url);
             requestAnimationFrame(() => {
               setIsOpen(false);
             });
           }}
-          placeholder="Search documentation…"
+          placeholder="Search docs…"
         >
           <CommandInput />
-          <CommandContent>
-            <CommandEmpty>No results found.</CommandEmpty>
-            <CommandList>
+          <CommandContent className="relative h-72 max-h-72 flex-none">
+            <CommandEmpty className="absolute inset-0 z-10 flex items-center justify-center">
+              No results found.
+            </CommandEmpty>
+            <CommandList className="h-full max-h-full">
               {collection.group().map(([group, items]) => (
                 <CommandGroup heading={group} key={group}>
                   {items.map((item) => {
                     const ItemIcon =
-                      GROUP_ICON_MAP[item.group.toLowerCase()] ??
-                      DEFAULT_GROUP_ICON;
+                      GROUP_ICON_MAP[item.group.toLowerCase()] ?? FileTextIcon;
+
                     return (
                       <CommandItem item={item} key={item.value}>
-                        <ItemIcon />
+                        <ItemIcon aria-hidden="true" className="size-3.5" />
                         {item.label}
+                        {DOCS_UPDATED_ITEMS.includes(item.url) && (
+                          <>
+                            <Status className="ms-auto self-center" size="sm" />
+                            <span className="sr-only">Updated</span>
+                          </>
+                        )}
+                        {DOCS_NEW_ITEMS.includes(item.url) && (
+                          <>
+                            <Status
+                              className="ms-auto self-center"
+                              size="sm"
+                              variant="info"
+                            />
+                            <span className="sr-only">New</span>
+                          </>
+                        )}
                       </CommandItem>
                     );
                   })}
@@ -252,19 +350,18 @@ export const HeaderCommand = (props: HeaderCommandProps) => {
               </Kbd>
               <span className="whitespace-nowrap">Go to Page</span>
             </div>
-            {copyPayload &&
-              (isCopied ? (
+            {Boolean(clipboard.value) &&
+              (clipboard.copied ? (
                 <div className="flex items-center gap-2">
                   <CheckIcon className="size-3" />
                   <span className="whitespace-nowrap">Copied to clipboard</span>
                 </div>
               ) : (
                 <div className="flex min-w-0 items-center gap-2">
-                  <span className="truncate font-mono">{copyPayload}</span>
-                  <KbdGroup>
-                    <Kbd variant="outline">{isMac ? "⌘" : "Ctrl"}</Kbd>
-                    <Kbd variant="outline">C</Kbd>
-                  </KbdGroup>
+                  <span className="truncate font-mono">
+                    {formatShadcnCommandDisplay(clipboard.value)}
+                  </span>
+                  <Kbd variant="outline">{formatHotkey("mod+C")}</Kbd>
                 </div>
               ))}
           </CommandFooter>
