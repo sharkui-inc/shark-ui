@@ -185,7 +185,11 @@ export const StepsContent = (
 
   return (
     <ArkSteps.Content
-      className={cn("data-[orientation=vertical]:flex-1", className)}
+      className={cn(
+        "outline-hidden",
+        "data-[orientation=vertical]:flex-1",
+        className
+      )}
       data-slot="steps-content"
       {...rest}
     />

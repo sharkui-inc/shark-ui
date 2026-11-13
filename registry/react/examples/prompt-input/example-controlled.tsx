@@ -58,7 +58,11 @@ const Example = () => {
             </SelectList>
           </SelectContent>
         </Select>
-        <PromptInputSubmit className="ms-1" size="icon-sm" />
+        <PromptInputSubmit
+          className="ms-1"
+          disabled={!value.trim()}
+          size="icon-sm"
+        />
       </PromptInputFooter>
     </PromptInput>
   );

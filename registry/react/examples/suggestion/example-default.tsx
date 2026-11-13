@@ -5,9 +5,9 @@ import {
 
 const SuggestionDemo = () => (
   <Suggestions>
-    <Suggestion suggestion="Summarize this brief" />
-    <Suggestion suggestion="Draft a launch checklist" />
-    <Suggestion suggestion="Find risks in the plan" />
+    <Suggestion>Summarize this brief</Suggestion>
+    <Suggestion>Draft a launch checklist</Suggestion>
+    <Suggestion>Find risks in the plan</Suggestion>
   </Suggestions>
 );
 

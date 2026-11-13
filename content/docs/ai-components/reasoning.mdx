@@ -35,6 +35,8 @@ npx shadcn@latest add @shark/reasoning
 
 <Step>This component depends on [Collapsible](/docs/components/collapsible) and [Shimmer](/docs/utilities/shimmer). Install them first if you haven't already.</Step>
 
+<RegistryDependencies registryDependencies={manifest.registryDependencies} />
+
 <Step>Install the following dependencies:</Step>
 
 <RegistryDependencies dependencies={manifest.dependencies} />
@@ -82,13 +84,15 @@ Control expand state with `open` and `onOpenChange`.
 
 <ComponentPreview componentName="reasoning" fileName="example-controlled" />
 
-## Streaming
+## Examples
+
+### Streaming
 
 Set `isStreaming` on `Reasoning` so its trigger uses the [shimmer](/docs/utilities/shimmer) class.
 
 <ComponentPreview componentName="reasoning" fileName="example-streaming" />
 
-## Translations
+### Translations
 
 <ComponentPreview componentName="reasoning" fileName="example-translations" />
 

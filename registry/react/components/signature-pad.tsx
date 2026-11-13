@@ -66,6 +66,7 @@ const SignaturePadControl = (
         "flex flex-col",
         "bg-muted/64",
         "rounded-xl border shadow-xs/4",
+        "outline-hidden",
         "data-disabled:cursor-not-allowed",
         className
       )}

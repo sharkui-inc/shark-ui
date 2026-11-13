@@ -4,7 +4,7 @@ Chat UI is composed from these primitives. APIs live in `content/docs/ai-compone
 
 ## Transcript
 
-`MessageScroller` owns conversation scroll, edge fades, and jump-to-end. Do not hand-roll a stick-to-bottom container.
+`MessageScroller` owns conversation scroll, edge fades, and jump-to-end. Mount `MessageScrollerStick` with `itemCount` (and optional `layoutKey`) for stick-to-bottom. Do not hand-roll a stick-to-bottom container.
 
 Rows go in `MessageScrollerItem`. Structure a turn with `Message` (avatar, header, footer) and `MessageBubble` (alignment, reactions). Stack same-sender turns in `MessageGroup`.
 

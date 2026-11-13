@@ -1,18 +1,16 @@
 import { Button } from "@/registry/react/components/button";
 import {
   Context,
-  ContextBody,
   ContextContent,
   ContextHeader,
   ContextMeter,
   ContextTrigger,
   ContextTriggerLabel,
-  ContextUsageRow,
 } from "@/registry/react/components/context";
 
 const Example = () => (
   <div className="flex justify-center">
-    <Context maxTokens={128_000} usedTokens={18_420}>
+    <Context maxTokens={128_000} usedTokens={61_300}>
       <ContextTrigger asChild>
         <Button
           className="text-muted-foreground font-normal"
@@ -24,23 +22,18 @@ const Example = () => (
       </ContextTrigger>
       <ContextContent>
         <ContextHeader>
-          <ContextMeter />
+          <ContextMeter segments={contextUsage} />
         </ContextHeader>
-        <ContextBody>
-          {contextUsage.map((usage) => (
-            <ContextUsageRow key={usage.title} {...usage} />
-          ))}
-        </ContextBody>
       </ContextContent>
     </Context>
   </div>
 );
 
 const contextUsage = [
-  { title: "Input", value: 4200 },
-  { title: "Output", value: 860 },
-  { title: "Reasoning", value: 640 },
-  { title: "Cache", value: 1200 },
+  { color: "var(--chart-1)", title: "Input", value: 28_400 },
+  { color: "var(--chart-2)", title: "Output", value: 14_200 },
+  { color: "var(--chart-3)", title: "Reasoning", value: 9600 },
+  { color: "var(--chart-4)", title: "Cache", value: 9100 },
 ];
 
 export default Example;

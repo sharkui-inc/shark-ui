@@ -60,9 +60,9 @@ export const HeroSection = (props: HeroSectionProps) => {
 
   return (
     <section className={cn("relative", className)} {...rest}>
-      <div className="flex w-full max-w-5xl flex-col items-start gap-6">
+      <div className="flex w-full max-w-5xl flex-col items-center gap-6 text-center lg:items-start lg:text-start">
         <Announcement asChild className="bg-background">
-          <Link href="/docs/changelog/26-08">
+          <Link href="/ai">
             <Badge>
               <BotIcon aria-hidden="true" />
             </Badge>
@@ -71,24 +71,21 @@ export const HeroSection = (props: HeroSectionProps) => {
           </Link>
         </Announcement>
 
-        <h1 className="font-heading max-w-5xl text-5xl leading-[0.98] font-semibold tracking-[-0.04em] sm:text-6xl lg:text-7xl xl:text-8xl">
-          <span className="block">Build your own</span>
-          <span className="block lg:whitespace-nowrap">component library</span>
-        </h1>
+        <div className="flex w-full flex-col items-center gap-5 sm:gap-6 lg:items-start lg:gap-8">
+          <h1 className="font-heading max-w-5xl text-4xl leading-[0.98] font-semibold tracking-[-0.04em] text-balance sm:text-6xl lg:text-7xl xl:text-8xl">
+            <span className="block lg:inline">Build your own</span>
+            <span className="block lg:inline"> component library</span>
+          </h1>
 
-        <p className="text-muted-foreground max-w-xl text-base leading-relaxed sm:text-xl lg:max-w-3xl">
-          <span className="block lg:whitespace-nowrap">
+          <p className="text-muted-foreground max-w-2xl text-base leading-relaxed text-balance sm:text-xl lg:max-w-4xl">
             <SquiggleHighlight
               query={`${count}+ components`}
-              text={`An accessible set of ${count}+ components`}
+              text={`An accessible set of ${count}+ components built on Ark UI and styled with Tailwind CSS. Copy the source into your project and customize it there.`}
             />
-          </span>
-          <span className="block lg:whitespace-nowrap">
-            built on Ark UI. Copy the source into your project.
-          </span>
-        </p>
+          </p>
+        </div>
 
-        <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:gap-4">
+        <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:justify-center sm:gap-4 lg:justify-start">
           <Button asChild className="w-full sm:w-auto" size="lg">
             <Link href="/docs">Get Started</Link>
           </Button>

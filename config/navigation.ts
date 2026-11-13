@@ -10,6 +10,11 @@ export const NAV_ITEMS = [
     showOnHeader: true,
   },
   {
+    href: "/ai",
+    label: "AI",
+    showOnHeader: true,
+  },
+  {
     href: "/themes",
     label: "Themes",
     showOnHeader: true,

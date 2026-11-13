@@ -44,7 +44,7 @@ const Example = () => {
           value={value}
         />
         <PromptInputFooter>
-          <PromptInputSubmit size="icon-sm" />
+          <PromptInputSubmit disabled={!value.trim()} size="icon-sm" />
         </PromptInputFooter>
       </PromptInput>
     </div>

@@ -26,14 +26,12 @@ import {
 } from "@/registry/react/components/combobox";
 import {
   Context,
-  ContextBody,
   ContextContent,
   ContextHeader,
   ContextIcon,
   ContextMeter,
   ContextTitle,
   ContextTrigger,
-  ContextUsageRow,
 } from "@/registry/react/components/context";
 import {
   Menu,
@@ -189,7 +187,11 @@ const PromptInputDemo = () => {
           <PromptInputButton aria-label="Voice input" size="icon-sm">
             <MicIcon aria-hidden="true" />
           </PromptInputButton>
-          <PromptInputSubmit className="ms-2" size="icon-sm" />
+          <PromptInputSubmit
+            className="ms-2"
+            disabled={!value.trim()}
+            size="icon-sm"
+          />
         </PromptInputFooter>
         <PromptInputBottom>
           <Button
@@ -220,7 +222,7 @@ const PromptInputDemo = () => {
             <Context
               maxTokens={128_000}
               positioning={{ placement: "top-end" }}
-              usedTokens={18_420}
+              usedTokens={84_600}
             >
               <ContextTrigger asChild>
                 <Button
@@ -235,13 +237,8 @@ const PromptInputDemo = () => {
               <ContextContent>
                 <ContextHeader>
                   <ContextTitle showCloseButton>Context Usage</ContextTitle>
-                  <ContextMeter />
+                  <ContextMeter segments={contextUsage} />
                 </ContextHeader>
-                <ContextBody>
-                  {contextUsage.map((usage) => (
-                    <ContextUsageRow key={usage.title} {...usage} />
-                  ))}
-                </ContextBody>
               </ContextContent>
             </Context>
           </div>
@@ -332,10 +329,10 @@ const contextActions = actionItems.filter(
 const agentActions = actionItems.filter((action) => action.group === "agent");
 
 const contextUsage = [
-  { title: "Input", value: 4200 },
-  { title: "Output", value: 860 },
-  { title: "Reasoning", value: 640 },
-  { title: "Cache", value: 1200 },
+  { color: "var(--chart-1)", title: "Input", value: 46_000 },
+  { color: "var(--chart-2)", title: "Output", value: 21_000 },
+  { color: "var(--chart-3)", title: "Reasoning", value: 10_800 },
+  { color: "var(--chart-4)", title: "Cache", value: 6800 },
 ];
 
 export default PromptInputDemo;

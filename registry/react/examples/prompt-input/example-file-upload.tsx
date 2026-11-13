@@ -54,7 +54,7 @@ const Example = () => {
                 <PaperclipIcon aria-hidden="true" />
               </PromptInputButton>
             </FileUploadTrigger>
-            <PromptInputSubmit size="icon-sm" />
+            <PromptInputSubmit disabled={!value.trim()} size="icon-sm" />
           </PromptInputFooter>
         </PromptInput>
       </FileUploadDropzone>

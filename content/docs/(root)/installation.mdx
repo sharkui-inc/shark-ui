@@ -3,6 +3,7 @@ title: Installation
 description: How to install and set up Shark UI in your project.
 ---
 
+import { CopySetupPrompt } from "@/components/mdx-components/copy-setup-prompt";
 import { FrameworksList } from "@/components/mdx-components/frameworks-list";
 
 ## Prerequisites
@@ -45,14 +46,20 @@ Or install individual components from the [component docs](/docs/components).
 
 </Steps>
 
+## Set up with an agent
+
+Copy the setup prompt into your agent, and it sets up Shark UI for you.
+
+<CopySetupPrompt />
+
 ## Framework setup
 
 <FrameworksList />
 
-## Styling
+## Theming
 
-Theme tokens, `globals.css` setup, and how to customize layout and appearance. See [Styling](/docs/styling).
+Theme tokens land with `@shark/style` or the starter. Customize them here:
 
-## Color system
-
-Neutral scales, semantic tokens (`primary`, `muted`, status colors), and the full CSS variable reference. See [Colors](/docs/colors).
+1. [Styling](/docs/styling) — `globals.css`, tokens, radius, and layout
+2. [Colors](/docs/colors) — neutral scales, semantic roles (`primary`, `muted`, status), and CSS variables
+3. [Theme editor](/themes) — preview primary, gray, fonts, and radius without editing CSS by hand

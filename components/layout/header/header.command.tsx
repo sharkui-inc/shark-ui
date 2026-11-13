@@ -111,7 +111,7 @@ interface HeaderCommandProps
    */
   compositionItems: CommandCompositionItem[];
   /**
-   * Alternate names keyed by docs URL, so "modal" finds Dialog.
+   * Search keywords keyed by docs URL (aliases, description, seo.description).
    */
   keywordsByUrl: Record<string, string>;
   /**

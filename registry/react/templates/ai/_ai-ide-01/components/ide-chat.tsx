@@ -153,7 +153,7 @@ export const IdeChat = () => {
             value={draft}
           />
           <PromptInputFooter>
-            <PromptInputSubmit />
+            <PromptInputSubmit disabled={!draft.trim()} />
           </PromptInputFooter>
         </PromptInput>
       </div>

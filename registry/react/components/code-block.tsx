@@ -48,22 +48,20 @@ type CodeHighlighter = Awaited<ReturnType<typeof getSingletonHighlighter>>;
 
 export type CodeBlockLanguage = BundledLanguage | "text";
 
-interface CodeBlockContextValue {
-  code: string;
-  isStreaming: boolean;
-  language: CodeBlockLanguage;
-}
-
-const [CodeBlockProvider, useCodeBlock] = createContext<CodeBlockContextValue>({
-  name: "CodeBlockContext",
-  providerName: "CodeBlock",
-});
-
 interface CodeBlockProps extends React.ComponentProps<typeof ark.div> {
   code?: string;
   isStreaming?: boolean;
   language?: CodeBlockLanguage;
 }
+
+type CodeBlockContextValue = Required<
+  Pick<CodeBlockProps, "code" | "isStreaming" | "language">
+>;
+
+const [CodeBlockProvider, useCodeBlock] = createContext<CodeBlockContextValue>({
+  name: "CodeBlockContext",
+  providerName: "CodeBlock",
+});
 
 export const CodeBlock = (props: CodeBlockProps) => {
   const {

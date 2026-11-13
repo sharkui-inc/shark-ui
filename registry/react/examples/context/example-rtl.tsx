@@ -4,7 +4,6 @@ import { usePreviewLocale } from "@/hooks/use-preview-locale";
 import { Button } from "@/registry/react/components/button";
 import {
   Context,
-  ContextBody,
   ContextContent,
   ContextFooter,
   ContextHeader,
@@ -12,7 +11,6 @@ import {
   ContextTitle,
   ContextTrigger,
   ContextTriggerLabel,
-  ContextUsageRow,
 } from "@/registry/react/components/context";
 
 const Example = () => {
@@ -20,12 +18,18 @@ const Example = () => {
 
   const { values } = translations[locale];
 
+  const segments = contextUsage.map((usage) => ({
+    color: usage.color,
+    title: values.rows[usage.key],
+    value: usage.value,
+  }));
+
   return (
     <div className="flex justify-center">
       <Context
         costLabel={values.costLabel}
         maxTokens={128_000}
-        usedTokens={18_420}
+        usedTokens={74_400}
       >
         <ContextTrigger asChild>
           <Button
@@ -39,17 +43,8 @@ const Example = () => {
         <ContextContent>
           <ContextHeader>
             <ContextTitle showCloseButton>{values.title}</ContextTitle>
-            <ContextMeter />
+            <ContextMeter segments={segments} />
           </ContextHeader>
-          <ContextBody>
-            {contextUsage.map((usage) => (
-              <ContextUsageRow
-                key={usage.key}
-                title={values.rows[usage.key]}
-                value={usage.value}
-              />
-            ))}
-          </ContextBody>
           <ContextFooter title={values.footerTitle} />
         </ContextContent>
       </Context>
@@ -58,16 +53,16 @@ const Example = () => {
 };
 
 const contextUsage = [
-  { key: "input", value: 4200 },
-  { key: "output", value: 860 },
-  { key: "reasoning", value: 640 },
-  { key: "cache", value: 1200 },
+  { color: "var(--chart-1)", key: "input", value: 38_000 },
+  { color: "var(--chart-2)", key: "output", value: 19_200 },
+  { color: "var(--chart-3)", key: "reasoning", value: 9800 },
+  { color: "var(--chart-4)", key: "cache", value: 7400 },
 ] as const;
 
 const translations = {
   ar: {
     values: {
-      costLabel: "$٠٫٠٤٢",
+      costLabel: "$٠٫١٦",
       footerTitle: "التكلفة الإجمالية",
       rows: {
         cache: "الذاكرة المؤقتة",
@@ -80,7 +75,7 @@ const translations = {
   },
   en: {
     values: {
-      costLabel: "$0.042",
+      costLabel: "$0.16",
       footerTitle: "Total cost",
       rows: {
         cache: "Cache",
@@ -93,7 +88,7 @@ const translations = {
   },
   he: {
     values: {
-      costLabel: "$0.042",
+      costLabel: "$0.16",
       footerTitle: "עלות כוללת",
       rows: {
         cache: "מטמון",

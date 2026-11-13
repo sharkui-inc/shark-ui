@@ -13,9 +13,9 @@ const Example = () => {
 
   return (
     <Suggestions>
-      <Suggestion suggestion={values.summarize} />
-      <Suggestion suggestion={values.checklist} />
-      <Suggestion suggestion={values.risks} />
+      <Suggestion>{values.summarize}</Suggestion>
+      <Suggestion>{values.checklist}</Suggestion>
+      <Suggestion>{values.risks}</Suggestion>
     </Suggestions>
   );
 };

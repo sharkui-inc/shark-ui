@@ -170,9 +170,11 @@ export const mdxComponents = {
         {...props}
         className={cn(
           "mt-10 scroll-m-28",
+          "flex items-center gap-3",
           "font-heading text-xl font-medium tracking-tight",
           "first:mt-0",
           "lg:mt-12",
+          "after:bg-border after:h-px after:flex-1 after:content-['']",
           "[&+.steps>h3]:mt-4",
           "[&+.steps]:mt-0",
           "[&+h3]:mt-6",
@@ -432,7 +434,7 @@ const HeadingAnchor = ({ id, children }: React.ComponentProps<"a">) => {
       className={cn(
         "group",
         "relative",
-        "max-w-full",
+        "max-w-full shrink-0",
         "inline-block",
         "-mx-1 px-1",
         "rounded-md border border-transparent",
@@ -447,7 +449,7 @@ const HeadingAnchor = ({ id, children }: React.ComponentProps<"a">) => {
       </span>
       <span
         aria-hidden
-        className="text-muted-foreground ml-2 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+        className="text-muted-foreground absolute top-1/2 left-full ms-1 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
       >
         #
       </span>

@@ -12,13 +12,24 @@ export interface ThumbCardProps extends React.ComponentProps<typeof Card> {
    */
   description: string;
   /**
+   * When true, the preview stays interactive (click, type, focus).
+   */
+  interactive?: boolean;
+  /**
    * The title of the card
    */
   title: string;
 }
 
 export const ThumbCard = (props: ThumbCardProps) => {
-  const { title, description, className, children, ...rest } = props;
+  const {
+    title,
+    description,
+    interactive = false,
+    className,
+    children,
+    ...rest
+  } = props;
 
   return (
     <Card
@@ -34,7 +45,7 @@ export const ThumbCard = (props: ThumbCardProps) => {
       {...rest}
     >
       <CardHeader
-        aria-hidden="true"
+        aria-hidden={interactive ? undefined : true}
         className={cn(
           "flex h-auto min-h-18 flex-col pb-4",
           "**:data-[slot=card-title]:tracking-tight",
@@ -45,18 +56,18 @@ export const ThumbCard = (props: ThumbCardProps) => {
       />
 
       <CardContent
-        aria-hidden="true"
+        aria-hidden={interactive ? undefined : true}
         className={cn(
           "min-h-40 w-full flex-1",
           "flex items-center justify-center",
           "px-10 py-4",
           "bg-card",
-          "select-none",
+          !interactive && "select-none",
           "rounded-b-xl border-t",
           "overflow-hidden",
           "[&>div:not([class^='w-'],[class*='_w-'])]:w-full"
         )}
-        role="img"
+        role={interactive ? undefined : "img"}
       >
         {children}
       </CardContent>

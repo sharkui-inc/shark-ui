@@ -15,6 +15,23 @@ Examples assume you install the Shark components you need from the registry. The
 
 Shark UI follows the copy-and-own model: components land in your repository through the CLI or by copying source from the docs. You edit the files directly. There is no opaque package layer between your app and the implementation.
 
+## Component map
+
+Equivalent Shark pages. API differences are in each [library guide](#migrate-from).
+
+| You may know | Shark UI |
+| --- | --- |
+| Dialog / Modal | [Dialog](/docs/components/dialog) |
+| Dropdown Menu | [Menu](/docs/components/menu) |
+| Select | [Select](/docs/components/select) |
+| Combobox | [Combobox](/docs/components/combobox) |
+| Accordion | [Accordion](/docs/components/accordion) |
+| Sheet / Drawer | [Sheet](/docs/components/sheet), [Drawer](/docs/components/drawer) |
+| Toast / Sonner | [Toast](/docs/components/toast) |
+| Label | [Field](/docs/components/field) |
+| Command / cmdk | [Command](/docs/components/command) |
+| Sidebar | [Sidebar](/docs/components/sidebar) |
+
 ## Colors and styling
 
 Shark adds `success`, `warning`, and `info` on top of the usual semantic set. Radius scales from a single `--radius` variable.
@@ -22,3 +39,10 @@ Shark adds `success`, `warning`, and `info` on top of the usual semantic set. Ra
 - [Colors](/docs/colors): token reference and neutral scale
 - [Styling](/docs/styling): `globals.css` setup, token convention, radius scale
 - [Theme editor](/themes): preview primary, gray, and radius without editing CSS by hand
+
+## Checklist
+
+1. Install theme tokens (`@shark/style` or starter) and verify light/dark.
+2. Replace primitives one surface at a time; use the guide for that library.
+3. Switch collection APIs to Ark `collection` / `useListCollection` where the guide says so.
+4. Confirm focus, keyboard, and RTL on overlays and forms ([Accessibility](/docs/accessibility), [RTL](/docs/rtl)).

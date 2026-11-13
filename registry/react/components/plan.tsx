@@ -142,31 +142,19 @@ const planStatusIconVariants = tv({
   },
 });
 
-interface PlanContextValue {
-  status: PlanStatus;
-}
-
-const [PlanProvider, usePlan] = createContext<PlanContextValue>({
-  name: "PlanContext",
-  providerName: "Plan",
-});
-
-interface PlanItemContextValue {
-  collapsible: boolean;
-  status: PlanItemStatus;
-}
-
-const [PlanItemProvider, usePlanItem] = createContext<PlanItemContextValue>({
-  name: "PlanItemContext",
-  providerName: "PlanItem",
-});
-
 interface PlanProps extends React.ComponentProps<typeof Collapsible> {
   /**
    * The current state of the agent plan.
    */
   status?: PlanStatus;
 }
+
+type PlanContextValue = Required<Pick<PlanProps, "status">>;
+
+const [PlanProvider, usePlan] = createContext<PlanContextValue>({
+  name: "PlanContext",
+  providerName: "Plan",
+});
 
 export const Plan = (props: PlanProps) => {
   const {
@@ -289,6 +277,15 @@ interface PlanItemProps extends React.ComponentProps<typeof Collapsible> {
    */
   status?: PlanItemStatus;
 }
+
+type PlanItemContextValue = Required<
+  Pick<PlanItemProps, "collapsible" | "status">
+>;
+
+const [PlanItemProvider, usePlanItem] = createContext<PlanItemContextValue>({
+  name: "PlanItemContext",
+  providerName: "PlanItem",
+});
 
 export const PlanItem = (props: PlanItemProps) => {
   const {

@@ -10,16 +10,6 @@ import {
   useScrollAreaContext,
 } from "@/registry/react/components/scroll-area";
 
-interface TerminalContextValue {
-  autoScroll: boolean;
-  output: string;
-}
-
-const [TerminalProvider, _useTerminal] = createContext<TerminalContextValue>({
-  name: "TerminalContext",
-  providerName: "Terminal",
-});
-
 interface TerminalProps extends React.ComponentProps<typeof ark.div> {
   /**
    * Follow new output in the viewport.
@@ -30,6 +20,15 @@ interface TerminalProps extends React.ComponentProps<typeof ark.div> {
    */
   output?: string;
 }
+
+type TerminalContextValue = Required<
+  Pick<TerminalProps, "autoScroll" | "output">
+>;
+
+const [TerminalProvider, _useTerminal] = createContext<TerminalContextValue>({
+  name: "TerminalContext",
+  providerName: "Terminal",
+});
 
 export const Terminal = (props: TerminalProps) => {
   const { autoScroll = true, output = "", className, ...rest } = props;

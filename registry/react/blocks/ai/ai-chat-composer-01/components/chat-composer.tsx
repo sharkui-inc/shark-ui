@@ -176,7 +176,7 @@ export const ChatComposer = (props: ChatComposerProps) => {
                   <MicIcon aria-hidden="true" />
                 </PromptInputButton>
               </PromptInputTools>
-              <PromptInputSubmit />
+              <PromptInputSubmit disabled={!draft.trim()} />
             </PromptInputFooter>
           </PromptInput>
         </FileUpload>

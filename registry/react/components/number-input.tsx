@@ -34,7 +34,7 @@ export const NumberInput = (props: NumberInputProps) => {
         "group/number-field",
         "w-full",
         "flex flex-col items-start gap-2",
-        "has-data-[slot=number-field-increment]:has-data-[slot=number-field-decrement]:**:data-[slot=number-field-input]:text-center",
+        "has-data-[slot=number-field-increment]:has-data-[slot=number-field-decrement]:**:data-[slot=input]:text-center",
         className
       )}
       data-size={size}

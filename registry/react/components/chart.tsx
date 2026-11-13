@@ -57,16 +57,6 @@ type TooltipPayloadItem = NonNullable<
   ChartTooltipContentProps["payload"]
 >[number];
 
-interface ChartContextProps {
-  config: ChartConfig;
-}
-
-const [ChartProvider, useChart] = createContext<ChartContextProps>({
-  hookName: "useChart",
-  name: "ChartContext",
-  providerName: "ChartContainer",
-});
-
 interface ChartContainerProps extends React.ComponentProps<typeof ark.div> {
   children: React.ComponentProps<typeof ResponsiveContainer>["children"];
   config: ChartConfig;
@@ -75,6 +65,14 @@ interface ChartContainerProps extends React.ComponentProps<typeof ark.div> {
     width: number;
   };
 }
+
+type ChartContextProps = Pick<ChartContainerProps, "config">;
+
+const [ChartProvider, useChart] = createContext<ChartContextProps>({
+  hookName: "useChart",
+  name: "ChartContext",
+  providerName: "ChartContainer",
+});
 
 export const ChartContainer = (props: ChartContainerProps) => {
   const {

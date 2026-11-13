@@ -27,14 +27,12 @@ import {
 } from "@/registry/react/components/combobox";
 import {
   Context,
-  ContextBody,
   ContextContent,
   ContextHeader,
   ContextIcon,
   ContextMeter,
   ContextTitle,
   ContextTrigger,
-  ContextUsageRow,
 } from "@/registry/react/components/context";
 import {
   Menu,
@@ -203,7 +201,11 @@ const Example = () => {
           >
             <MicIcon aria-hidden="true" />
           </PromptInputButton>
-          <PromptInputSubmit className="ms-2" size="icon-sm" />
+          <PromptInputSubmit
+            className="ms-2"
+            disabled={!value.trim()}
+            size="icon-sm"
+          />
         </PromptInputFooter>
         <PromptInputBottom>
           <Button
@@ -234,7 +236,7 @@ const Example = () => {
             <Context
               maxTokens={128_000}
               positioning={{ placement: "top-end" }}
-              usedTokens={18_420}
+              usedTokens={72_800}
             >
               <ContextTrigger asChild>
                 <Button
@@ -251,17 +253,14 @@ const Example = () => {
                   <ContextTitle showCloseButton>
                     {values.contextTitle}
                   </ContextTitle>
-                  <ContextMeter />
+                  <ContextMeter
+                    segments={contextUsage.map((usage) => ({
+                      color: usage.color,
+                      title: values.contextRows[usage.key],
+                      value: usage.value,
+                    }))}
+                  />
                 </ContextHeader>
-                <ContextBody>
-                  {contextUsage.map((usage) => (
-                    <ContextUsageRow
-                      key={usage.key}
-                      title={values.contextRows[usage.key]}
-                      value={usage.value}
-                    />
-                  ))}
-                </ContextBody>
               </ContextContent>
             </Context>
           </div>
@@ -319,10 +318,10 @@ const agentActions = actionItemsByValue.filter(
 );
 
 const contextUsage = [
-  { key: "input", value: 4200 },
-  { key: "output", value: 860 },
-  { key: "reasoning", value: 640 },
-  { key: "cache", value: 1200 },
+  { color: "var(--chart-1)", key: "input", value: 39_500 },
+  { color: "var(--chart-2)", key: "output", value: 17_200 },
+  { color: "var(--chart-3)", key: "reasoning", value: 9100 },
+  { color: "var(--chart-4)", key: "cache", value: 7000 },
 ] as const;
 
 const translations = {

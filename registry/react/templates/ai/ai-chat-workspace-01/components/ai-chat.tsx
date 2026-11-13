@@ -12,14 +12,12 @@ import {
 import { Button } from "@/registry/react/components/button";
 import {
   Context,
-  ContextBody,
   ContextContent,
   ContextFooter,
   ContextHeader,
   ContextMeter,
   ContextTrigger,
   ContextTriggerLabel,
-  ContextUsageRow,
 } from "@/registry/react/components/context";
 import {
   Queue,
@@ -60,10 +58,10 @@ const MODEL_OPTIONS = [
 ] as const;
 
 const CONTEXT_USAGE = [
-  { title: "Input", value: 4200 },
-  { title: "Output", value: 860 },
-  { title: "Reasoning", value: 640 },
-  { title: "Cache", value: 1200 },
+  { color: "var(--chart-1)", title: "Input", value: 56_000 },
+  { color: "var(--chart-2)", title: "Output", value: 24_000 },
+  { color: "var(--chart-3)", title: "Reasoning", value: 14_000 },
+  { color: "var(--chart-4)", title: "Cache", value: 9000 },
 ];
 
 const conversations: readonly Conversation[] = [
@@ -197,7 +195,7 @@ export const AIChat = () => {
   );
   const [thinkMode, setThinkMode] = React.useState(true);
   const [model, setModel] = React.useState(["gpt-4"]);
-  const [usedTokens, setUsedTokens] = React.useState(18_420);
+  const [usedTokens, setUsedTokens] = React.useState(103_000);
   const [queueItems, setQueueItems] = React.useState(() => [...INITIAL_QUEUE]);
 
   const activeConversation = activeConversationId
@@ -306,13 +304,8 @@ export const AIChat = () => {
                   </ContextTrigger>
                   <ContextContent>
                     <ContextHeader>
-                      <ContextMeter />
+                      <ContextMeter segments={CONTEXT_USAGE} />
                     </ContextHeader>
-                    <ContextBody>
-                      {CONTEXT_USAGE.map((usage) => (
-                        <ContextUsageRow key={usage.title} {...usage} />
-                      ))}
-                    </ContextBody>
                     <ContextFooter />
                   </ContextContent>
                 </Context>

@@ -34,6 +34,8 @@ npx shadcn@latest add @shark/suggestion
 
 <Step>This component depends on [Button](/docs/components/button). Install required dependencies first if you haven&apos;t already.</Step>
 
+<RegistryDependencies registryDependencies={manifest.registryDependencies} />
+
 <Step>Install the following dependencies:</Step>
 
 <RegistryDependencies dependencies={manifest.dependencies} />
@@ -65,11 +67,15 @@ import { Suggestion, Suggestions } from "@/components/ui/suggestion";
 
 ```tsx
 <Suggestions>
-  <Suggestion suggestion="Summarize this brief" onClick={send} />
+  <Suggestion onClick={() => send("Summarize this brief")}>
+    Summarize this brief
+  </Suggestion>
 </Suggestions>
 ```
 
-## Pill
+## Examples
+
+### Pill
 
 The `pill` prop creates fully rounded suggestion chips.
 
@@ -94,14 +100,14 @@ Container for suggestion chips.
 
 ### Suggestion
 
-Prompt chip built on [Button](/docs/components/button).
+Prompt chip built on [Button](/docs/components/button). Pass the prompt text as `children`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `suggestion` | `string` | `required` |
 | `pill` | `boolean` | `true` |
-| `variant` | `"default" \| "outline" \| "secondary" \| "ghost" \| "link" \| "destructive"` | `"outline"` |
+| `variant` | `"default" \| "outline" \| "secondary" \| "ghost" \| "link" \| "destructive"` | `"secondary"` |
 | `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon-xs" \| "icon-sm" \| "icon-md" \| "icon-lg" \| "icon-xl"` | `"sm"` |
-| `onClick` | `(suggestion: string) => void` | `-` |
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
+
+All other [Button](/docs/components/button) props are supported.

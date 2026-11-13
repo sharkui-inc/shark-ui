@@ -22,6 +22,7 @@ const rawCount = source
   .filter(
     (p) =>
       p.slugs[0] === "components" ||
+      p.slugs[0] === "ai-components" ||
       p.slugs[0] === "helpers" ||
       p.slugs[0] === "utilities"
   ).length;
@@ -33,7 +34,7 @@ const HomePage = () => {
     <SkipNavContent asChild>
       <main className="relative w-full min-w-0 overflow-x-clip">
         <HeroAtmosphere />
-        <div className="container flex flex-col gap-8 pt-12 pb-10 sm:gap-10 sm:pt-16 lg:pt-20">
+        <div className="container flex flex-col gap-8 pt-8 pb-10 sm:gap-10 sm:pt-10 lg:pt-20">
           <HeroSection count={componentsCount} />
         </div>
 

@@ -36,8 +36,8 @@ import {
   MessageScrollerButton,
   MessageScrollerContent,
   MessageScrollerItem,
+  MessageScrollerStick,
   MessageScrollerViewport,
-  useMessageScroller,
 } from "@/registry/react/components/message-scroller";
 import {
   PromptInput,
@@ -108,10 +108,9 @@ const ChatThread = (props: ChatThreadProps) => {
       <CardContent className="flex min-h-0 flex-1 flex-col px-0">
         <MessageScroller className="min-h-0 flex-1">
           <MessageScrollerViewport className="px-(--space) py-4">
-            <FollowLatestMessage
-              enabled={isBusy}
-              messageCount={messages.length}
-              streamedText={latestText}
+            <MessageScrollerStick
+              itemCount={messages.length}
+              layoutKey={latestText}
             />
             <MessageScrollerContent className="gap-4">
               {messages.map((message, index) => {
@@ -185,41 +184,12 @@ const ChatThread = (props: ChatThreadProps) => {
                 </MenuContent>
               </Menu>
             </PromptInputTools>
-            <PromptInputSubmit />
+            <PromptInputSubmit disabled={!nextText.trim()} />
           </PromptInputFooter>
         </PromptInput>
       </CardFooter>
     </Card>
   );
-};
-
-interface FollowLatestMessageProps {
-  enabled: boolean;
-  messageCount: number;
-  streamedText: string;
-}
-
-const FollowLatestMessage = (props: FollowLatestMessageProps) => {
-  const { enabled, messageCount, streamedText } = props;
-
-  const previousMessageCount = React.useRef(messageCount);
-  const scrollArea = useMessageScroller();
-
-  React.useLayoutEffect(() => {
-    const startedTurn = messageCount > previousMessageCount.current;
-    const isFirstStreamFrame = streamedText.length === 0;
-
-    if (
-      enabled &&
-      (startedTurn || isFirstStreamFrame || scrollArea.isAtBottom)
-    ) {
-      scrollArea.scrollToEdge({ behavior: "auto", edge: "bottom" });
-    }
-
-    previousMessageCount.current = messageCount;
-  }, [enabled, messageCount, scrollArea, streamedText]);
-
-  return null;
 };
 
 const chat = createChat({ adapter: "ai-sdk" })

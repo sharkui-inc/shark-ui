@@ -83,8 +83,12 @@ export const MusicSidebar = () => {
           </SidebarGroup>
         ))}
       </SidebarContent>
-      <SidebarFooter className="group-data-[collapsible=icon]:hidden">
-        <Item asChild variant="muted">
+      <SidebarFooter className="overflow-hidden group-data-[collapsible=icon]:hidden">
+        <Item
+          asChild
+          className="w-[calc(var(--sidebar-width)-(--spacing(4)))] max-w-none shrink-0 flex-nowrap"
+          variant="muted"
+        >
           <a href="#">
             <ItemMedia className="rounded-lg" variant="image">
               <img
@@ -94,11 +98,15 @@ export const MusicSidebar = () => {
                 width={44}
               />
             </ItemMedia>
-            <ItemContent>
-              <ItemDescription>Fresh this week</ItemDescription>
-              <ItemTitle>{TRACKS.length} new tracks for you</ItemTitle>
+            <ItemContent className="min-w-0">
+              <ItemDescription className="truncate">
+                Fresh this week
+              </ItemDescription>
+              <ItemTitle className="truncate">
+                {TRACKS.length} new tracks for you
+              </ItemTitle>
             </ItemContent>
-            <ItemActions>
+            <ItemActions className="shrink-0">
               <ArrowUpRightIcon aria-hidden="true" className="size-4" />
             </ItemActions>
           </a>

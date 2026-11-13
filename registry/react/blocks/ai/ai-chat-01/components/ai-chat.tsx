@@ -58,13 +58,11 @@ import {
 } from "@/registry/react/components/combobox";
 import {
   Context,
-  ContextBody,
   ContextContent,
   ContextHeader,
   ContextIcon,
   ContextMeter,
   ContextTrigger,
-  ContextUsageRow,
 } from "@/registry/react/components/context";
 import {
   Diff,
@@ -106,8 +104,8 @@ import {
   MessageScrollerButton,
   MessageScrollerContent,
   MessageScrollerItem,
+  MessageScrollerStick,
   MessageScrollerViewport,
-  useMessageScroller,
 } from "@/registry/react/components/message-scroller";
 import {
   Plan,
@@ -294,35 +292,6 @@ const emptyStateSuggestions = [
     text: "Help me diagnose and fix an issue in this project.",
   },
 ] as const;
-
-interface FollowLatestMessageProps {
-  enabled: boolean;
-  messageCount: number;
-  streamedText: string;
-}
-
-const FollowLatestMessage = (props: FollowLatestMessageProps) => {
-  const { enabled, messageCount, streamedText } = props;
-
-  const previousMessageCount = React.useRef(messageCount);
-  const scrollArea = useMessageScroller();
-
-  React.useLayoutEffect(() => {
-    const startedTurn = messageCount > previousMessageCount.current;
-    const isFirstStreamFrame = streamedText.length === 0;
-
-    if (
-      enabled &&
-      (startedTurn || isFirstStreamFrame || scrollArea.isAtBottom)
-    ) {
-      scrollArea.scrollToEdge({ behavior: "auto", edge: "bottom" });
-    }
-
-    previousMessageCount.current = messageCount;
-  }, [enabled, messageCount, scrollArea, streamedText]);
-
-  return null;
-};
 
 const toPromptStatus = (status: string): PromptInputStatus => {
   switch (status) {
@@ -635,7 +604,7 @@ const ChatSession = (props: ChatSessionProps) => {
   const queuedTurns = USER_TURNS.filter(
     (turn) => !messageIds.has(turn.id) && turn.id !== nextMessage?.id
   );
-  const usedTokens = Math.min(18_420 + messages.length * 640, 128_000);
+  const usedTokens = Math.min(72_000 + messages.length * 640, 128_000);
   const isBusy = status === "submitted" || status === "streaming";
   const hasMessages = messages.length > 0;
   const latestAssistantMessage = [...messages]
@@ -667,10 +636,9 @@ const ChatSession = (props: ChatSessionProps) => {
 
       <MessageScroller className="min-h-0 flex-1">
         <MessageScrollerViewport aria-live="polite">
-          <FollowLatestMessage
-            enabled={isBusy}
-            messageCount={messages.length}
-            streamedText={latestMessageText}
+          <MessageScrollerStick
+            itemCount={messages.length}
+            layoutKey={latestMessageText}
           />
           {messages.length === 0 ? (
             <EmptyConversation
@@ -835,7 +803,11 @@ const ChatSession = (props: ChatSessionProps) => {
             <PromptInputButton aria-label="Voice input" size="icon-sm">
               <MicIcon aria-hidden="true" />
             </PromptInputButton>
-            <PromptInputSubmit className="ms-2" size="icon-sm" />
+            <PromptInputSubmit
+              className="ms-2"
+              disabled={!prompt.trim()}
+              size="icon-sm"
+            />
           </PromptInputFooter>
           <PromptInputBottom>
             <Button
@@ -880,13 +852,8 @@ const ChatSession = (props: ChatSessionProps) => {
                 </ContextTrigger>
                 <ContextContent>
                   <ContextHeader>
-                    <ContextMeter />
+                    <ContextMeter segments={[...CONTEXT_USAGE]} />
                   </ContextHeader>
-                  <ContextBody>
-                    {CONTEXT_USAGE.map((usage) => (
-                      <ContextUsageRow key={usage.title} {...usage} />
-                    ))}
-                  </ContextBody>
                 </ContextContent>
               </Context>
             </div>

@@ -6,12 +6,12 @@ import {
   MessageScrollerButton,
   MessageScrollerContent,
   MessageScrollerItem,
+  MessageScrollerStick,
   MessageScrollerViewport,
 } from "@/registry/react/components/message-scroller";
 import { useChatHelper } from "@/registry/react/hooks/use-chat-helper";
 import { chat, toPromptStatus } from "../_data/chat-demo";
 import { EmptyConversation } from "./chat-empty-state";
-import { FollowLatestMessage } from "./chat-follow-latest";
 import { ChatHeader } from "./chat-header";
 import { ChatMessageItem } from "./chat-message-item";
 import { ChatPromptComposer } from "./chat-prompt-composer";
@@ -25,7 +25,7 @@ export const ChatConversation = () => {
     });
   const promptStatus = toPromptStatus(status);
   const nextText = nextMessage?.content ?? "";
-  const usedTokens = Math.min(18_420 + messages.length * 640, 128_000);
+  const usedTokens = Math.min(82_500 + messages.length * 640, 128_000);
   const isBusy = status === "submitted" || status === "streaming";
   const latestAssistantMessage = [...messages]
     .reverse()
@@ -51,10 +51,9 @@ export const ChatConversation = () => {
           aria-live="polite"
           className="overscroll-y-auto"
         >
-          <FollowLatestMessage
-            enabled={isBusy}
-            messageCount={messages.length}
-            streamedText={latestMessageText}
+          <MessageScrollerStick
+            itemCount={messages.length}
+            layoutKey={latestMessageText}
           />
           {messages.length === 0 ? (
             <MessageScrollerContent className="w-full">

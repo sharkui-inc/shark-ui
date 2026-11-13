@@ -4,13 +4,11 @@ import React from "react";
 import { Button } from "@/registry/react/components/button";
 import {
   Context,
-  ContextBody,
   ContextContent,
   ContextHeader,
   ContextIcon,
   ContextMeter,
   ContextTrigger,
-  ContextUsageRow,
 } from "@/registry/react/components/context";
 import {
   Tooltip,
@@ -25,8 +23,8 @@ const Example = () => {
     <div className="flex justify-center">
       <Context
         ids={{ trigger: triggerId }}
-        maxTokens={128_000}
-        usedTokens={18_420}
+        maxTokens={200_000}
+        usedTokens={110_000}
       >
         <Tooltip ids={{ trigger: triggerId }}>
           <TooltipTrigger asChild>
@@ -45,13 +43,8 @@ const Example = () => {
         </Tooltip>
         <ContextContent>
           <ContextHeader>
-            <ContextMeter />
+            <ContextMeter segments={contextUsage} />
           </ContextHeader>
-          <ContextBody>
-            {contextUsage.map((usage) => (
-              <ContextUsageRow key={usage.title} {...usage} />
-            ))}
-          </ContextBody>
         </ContextContent>
       </Context>
     </div>
@@ -59,10 +52,10 @@ const Example = () => {
 };
 
 const contextUsage = [
-  { title: "Input", value: 4200 },
-  { title: "Output", value: 860 },
-  { title: "Reasoning", value: 640 },
-  { title: "Cache", value: 1200 },
+  { color: "var(--chart-1)", title: "Input", value: 64_000 },
+  { color: "var(--chart-2)", title: "Output", value: 24_000 },
+  { color: "var(--chart-3)", title: "Reasoning", value: 12_500 },
+  { color: "var(--chart-4)", title: "Cache", value: 9500 },
 ];
 
 export default Example;

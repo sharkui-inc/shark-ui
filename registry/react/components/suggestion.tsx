@@ -21,28 +21,12 @@ export const Suggestions = (props: React.ComponentProps<typeof ark.div>) => {
   );
 };
 
-interface SuggestionProps
-  extends Omit<React.ComponentProps<typeof Button>, "onClick"> {
-  /**
-   * The function to call when the suggestion is clicked.
-   */
-  onClick?: (suggestion: string) => void;
-  /**
-   * The suggestion to display.
-   */
-  suggestion: string;
-}
-
-export const Suggestion = (props: SuggestionProps) => {
+export const Suggestion = (props: React.ComponentProps<typeof Button>) => {
   const {
-    suggestion,
-    type = "button",
-    variant = "outline",
+    variant = "secondary",
     size = "sm",
     pill = true,
-    onClick,
     className,
-    children,
     ...rest
   } = props;
 
@@ -50,14 +34,10 @@ export const Suggestion = (props: SuggestionProps) => {
     <Button
       className={cn("font-normal", className)}
       data-slot="suggestion"
-      onClick={() => onClick?.(suggestion)}
       pill={pill}
       size={size}
-      type={type}
       variant={variant}
       {...rest}
-    >
-      {children ?? suggestion}
-    </Button>
+    />
   );
 };

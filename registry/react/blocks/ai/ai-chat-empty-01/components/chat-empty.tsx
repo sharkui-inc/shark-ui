@@ -39,17 +39,20 @@ export const ChatEmpty = (props: ChatEmptyProps) => {
       <StateContent className="max-w-lg">
         <Suggestions>
           <Suggestion
-            onClick={onSuggestion}
-            suggestion="Turn this launch brief into a plan"
-          />
+            onClick={() => onSuggestion?.("Turn this launch brief into a plan")}
+          >
+            Turn this launch brief into a plan
+          </Suggestion>
           <Suggestion
-            onClick={onSuggestion}
-            suggestion="Summarize research themes"
-          />
+            onClick={() => onSuggestion?.("Summarize research themes")}
+          >
+            Summarize research themes
+          </Suggestion>
           <Suggestion
-            onClick={onSuggestion}
-            suggestion="Draft a release checklist"
-          />
+            onClick={() => onSuggestion?.("Draft a release checklist")}
+          >
+            Draft a release checklist
+          </Suggestion>
         </Suggestions>
       </StateContent>
     </State>

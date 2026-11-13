@@ -28,7 +28,7 @@ export const HomeShowcase = (props: React.PropsWithChildren) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col items-center gap-3 lg:flex-row lg:items-center lg:justify-between">
         <fieldset className="text-muted-foreground hidden min-w-0 items-center gap-x-1.5 lg:flex">
           <legend className="sr-only">Preview template</legend>
           {[
@@ -55,17 +55,17 @@ export const HomeShowcase = (props: React.PropsWithChildren) => {
           })}
         </fieldset>
 
-        <div className="flex shrink-0 items-center gap-2 self-center sm:self-auto">
+        <div className="flex shrink-0 items-center justify-center gap-0.5">
           <HomeThemePicker />
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button asChild pill size="icon-sm" variant="outline">
+              <Button asChild pill size="icon-xs" variant="outline">
                 <Link aria-label="Open theme builder" href="/themes">
                   <PaletteIcon aria-hidden="true" />
                 </Link>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>View more themes</TooltipContent>
+            <TooltipContent>View themes</TooltipContent>
           </Tooltip>
         </div>
       </div>
@@ -94,7 +94,7 @@ const HomeThemePicker = () => {
   return (
     <fieldset className="min-w-0 border-0 p-0">
       <legend className="sr-only">Theme</legend>
-      <div className="flex flex-nowrap items-center gap-2">
+      <div className="flex flex-nowrap items-center gap-0.5">
         {THEME_PRESETS.map((preset) => {
           const selected = activePreset === preset;
 
@@ -105,12 +105,12 @@ const HomeThemePicker = () => {
                   aria-label={`Apply ${preset.label} theme`}
                   aria-pressed={selected}
                   className={cn(
-                    "relative size-6 shrink-0 rounded-full border border-transparent",
+                    "relative flex size-7 shrink-0 items-center justify-center rounded-full",
                     "cursor-pointer outline-hidden",
                     "transition-shadow duration-100 ease-out",
                     "motion-reduce:transition-none!",
-                    "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
-                    selected && "ring-primary ring-2"
+                    "focus-visible:ring-ring/40 focus-visible:ring-2 focus-visible:ring-inset",
+                    selected && "ring-primary ring-2 ring-inset"
                   )}
                   onClick={() => {
                     applyPreset(preset);
@@ -120,7 +120,7 @@ const HomeThemePicker = () => {
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "absolute inset-0 rounded-full",
+                      "absolute inset-[3px] rounded-full",
                       preset.swatchClass,
                       selected &&
                         "before:absolute before:inset-0 before:rounded-full before:bg-black/32"

@@ -31,10 +31,10 @@ export const MODEL_OPTIONS = [
 ] as const;
 
 export const CONTEXT_USAGE = [
-  { title: "Input", value: 4200 },
-  { title: "Output", value: 860 },
-  { title: "Reasoning", value: 640 },
-  { title: "Cache", value: 1200 },
+  { color: "var(--chart-1)", title: "Input", value: 44_000 },
+  { color: "var(--chart-2)", title: "Output", value: 19_000 },
+  { color: "var(--chart-3)", title: "Reasoning", value: 11_500 },
+  { color: "var(--chart-4)", title: "Cache", value: 8000 },
 ] as const;
 
 export const effortCollection = createListCollection({

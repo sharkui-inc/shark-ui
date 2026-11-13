@@ -221,12 +221,20 @@ const THUMB_MAP: Record<string, React.ComponentType<ThumbCardProps>> = {
   "tree-view": TreeViewThumb,
 };
 
-interface ComponentsListProps extends React.ComponentProps<"div"> {}
+interface ComponentsListProps extends React.ComponentProps<"div"> {
+  /**
+   * Docs section folder to list. Defaults to primitive components.
+   *
+   * @default "components"
+   */
+  section?: "ai-components" | "components";
+}
 
 export const ComponentsList = (props: ComponentsListProps) => {
-  const { className, ...rest } = props;
+  const { section = "components", className, ...rest } = props;
 
   const { pageTree } = source;
+  const sectionPrefix = `/docs/${section}/`;
 
   return (
     <div
@@ -241,6 +249,10 @@ export const ComponentsList = (props: ComponentsListProps) => {
           {group.type === "folder" &&
             group.children.map((item) => {
               if (item.type !== "page") {
+                return null;
+              }
+
+              if (!item.url.startsWith(sectionPrefix)) {
                 return null;
               }
 

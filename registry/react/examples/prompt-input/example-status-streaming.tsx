@@ -11,6 +11,7 @@ import {
 
 const Example = () => {
   const [status, setStatus] = React.useState<PromptInputStatus>("streaming");
+  const [value, setValue] = React.useState("Summarize the latest deploy.");
 
   return (
     <PromptInput
@@ -21,11 +22,12 @@ const Example = () => {
     >
       <PromptInputTextarea
         aria-label="Follow-up prompt"
-        defaultValue="Summarize the latest deploy."
+        onChange={(event) => setValue(event.target.value)}
         placeholder="Add a follow-up…"
+        value={value}
       />
       <PromptInputFooter>
-        <PromptInputSubmit size="icon-sm" />
+        <PromptInputSubmit disabled={!value.trim()} size="icon-sm" />
       </PromptInputFooter>
     </PromptInput>
   );

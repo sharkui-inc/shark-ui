@@ -22,7 +22,7 @@ export interface EditableProps
 }
 
 export const Editable = (props: EditableProps) => {
-  const { orientation = "horizontal", className, ...rest } = props;
+  const { orientation = "horizontal", className, children, ...rest } = props;
 
   return (
     <ArkEditable.Root
@@ -30,6 +30,7 @@ export const Editable = (props: EditableProps) => {
         "group/editable",
         "relative",
         "w-full",
+        "has-data-autoresize:w-fit has-data-autoresize:max-w-full",
         "data-[orientation=vertical]:items-end",
         "flex items-center gap-2",
         className
@@ -37,7 +38,9 @@ export const Editable = (props: EditableProps) => {
       data-orientation={orientation}
       data-slot="editable"
       {...rest}
-    />
+    >
+      {children}
+    </ArkEditable.Root>
   );
 };
 
@@ -48,7 +51,17 @@ export const EditableArea = (
 
   return (
     <ArkEditable.Area
-      className={cn("w-full", "grid", "*:col-start-1 *:row-start-1", className)}
+      className={cn(
+        "w-full",
+        "grid",
+        "*:col-start-1 *:row-start-1",
+        "has-data-autoresize:w-fit has-data-autoresize:max-w-full",
+        "has-data-autoresize:justify-items-stretch",
+        "has-data-autoresize:**:data-[slot=input]:w-full",
+        "has-data-autoresize:**:data-[slot=input]:min-w-0",
+        "has-data-autoresize:**:data-[slot=input]:max-w-full",
+        className
+      )}
       data-slot="editable-area"
       {...rest}
     />
@@ -76,7 +89,8 @@ export const EditablePreview = (props: EditablePreviewProps) => {
         "w-full",
         "justify-start",
         "px-3",
-        "text-base font-normal whitespace-pre-wrap sm:text-sm",
+        "text-base font-normal sm:text-sm",
+        "whitespace-pre-wrap data-autoresize:whitespace-nowrap",
         "dark:hover:bg-input/32",
         "data-placeholder-shown:text-muted-foreground",
         "in-[[data-slot=editable-area]:has(textarea)]:h-auto",

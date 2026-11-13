@@ -31,6 +31,7 @@ export const messageBubbleVariants = tv({
     "data-[variant=ghost]:max-w-full",
     "has-[[data-slot=message-bubble-reactions][data-side=bottom]]:mb-5",
     "has-[[data-slot=message-bubble-reactions][data-side=top]]:mt-5",
+    "has-data-[slot=message-bubble-trigger]:*:data-[slot=message-bubble-content]:min-w-20",
     "[&:where([data-variant=ghost],[data-variant=outline])>[data-slot=message-bubble-content]:is(button,a):hover]:bg-muted",
     "[&:where([data-variant=ghost],[data-variant=outline])>[data-slot=message-bubble-content]:is(button,a):hover]:text-foreground",
   ],
@@ -137,7 +138,7 @@ export const MessageBubbleTrigger = (
       className={cn(
         "group/message-bubble-trigger",
         "absolute inset-e-0 top-0 z-10",
-        "h-8 w-16 shrink-0",
+        "h-8 w-12 shrink-0",
         "hidden items-center justify-end",
         "pe-2",
         "overflow-hidden",

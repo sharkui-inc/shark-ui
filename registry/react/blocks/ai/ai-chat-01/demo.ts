@@ -72,10 +72,10 @@ export const MODEL_OPTIONS = [
 ] as const;
 
 export const CONTEXT_USAGE = [
-  { title: "Input", value: 4200 },
-  { title: "Output", value: 860 },
-  { title: "Reasoning", value: 640 },
-  { title: "Cache", value: 1200 },
+  { color: "var(--chart-1)", title: "Input", value: 38_000 },
+  { color: "var(--chart-2)", title: "Output", value: 16_500 },
+  { color: "var(--chart-3)", title: "Reasoning", value: 10_200 },
+  { color: "var(--chart-4)", title: "Cache", value: 7300 },
 ] as const;
 
 export const USER_TURNS: readonly DemoUserTurn[] = [

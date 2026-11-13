@@ -32,6 +32,8 @@ npx shadcn@latest add @shark/message-scroller
 
 <Step>This component depends on [Button](/docs/components/button) and [Scroll Area](/docs/components/scroll-area). Install them first if you haven't already.</Step>
 
+<RegistryDependencies registryDependencies={manifest.registryDependencies} />
+
 <Step>Install the following dependencies:</Step>
 
 <RegistryDependencies dependencies={manifest.dependencies} />
@@ -53,6 +55,7 @@ npx shadcn@latest add @shark/message-scroller
 ```text
 MessageScroller
 ├── MessageScrollerViewport
+│   ├── MessageScrollerStick
 │   └── MessageScrollerContent
 │       └── MessageScrollerItem
 └── MessageScrollerButton
@@ -66,6 +69,7 @@ import {
   MessageScrollerButton,
   MessageScrollerContent,
   MessageScrollerItem,
+  MessageScrollerStick,
   MessageScrollerViewport,
 } from "@/components/ui/message-scroller";
 ```
@@ -73,6 +77,7 @@ import {
 ```tsx
 <MessageScroller>
   <MessageScrollerViewport>
+    <MessageScrollerStick itemCount={messages.length} layoutKey={latestText} />
     <MessageScrollerContent>
       <MessageScrollerItem />
     </MessageScrollerContent>
@@ -81,7 +86,9 @@ import {
 </MessageScroller>
 ```
 
-## Jump controls
+## Examples
+
+### Jump controls
 
 Use `direction` to jump to the `start` or `end` of the thread.
 
@@ -132,9 +139,20 @@ A single message row.
 | `className` | `string` | `-` |
 | `asChild` | `boolean` | `false` |
 
+### MessageScrollerStick
+
+Pins the viewport to the latest content while the user stays near the bottom. Mount inside `MessageScrollerViewport`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `itemCount` | `number` | `-` |
+| `layoutKey` | `string \| number` | `-` |
+| `enabled` | `boolean` | `true` |
+| `paused` | `boolean` | `false` |
+
 ### MessageScrollerButton
 
-Jump control.
+Jump control. When `MessageScrollerStick` is mounted, jump visibility uses a 64px near-bottom threshold instead of Ark’s exact edge.
 
 | Prop | Type | Default |
 | --- | --- | --- |

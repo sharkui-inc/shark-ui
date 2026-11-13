@@ -162,7 +162,7 @@ export const TabsContent = (
 
   return (
     <ArkTabs.Content
-      className={cn("flex-1", className)}
+      className={cn("flex-1 outline-hidden", className)}
       data-slot="tabs-content"
       {...rest}
     />

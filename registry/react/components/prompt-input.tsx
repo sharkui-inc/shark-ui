@@ -16,29 +16,40 @@ import { Spinner } from "@/registry/react/components/spinner";
 export type PromptInputStatus = "error" | "ready" | "streaming" | "submitted";
 
 export interface PromptInputSubmitDetail {
+  /**
+   * The form submission event.
+   */
   event: React.SubmitEvent<HTMLFormElement>;
+  /**
+   * The text of the prompt input.
+   */
   text: string;
 }
 
-interface PromptInputContextValue {
-  hasText: boolean;
+interface PromptInputProps
+  extends Omit<React.ComponentProps<typeof ark.form>, "onSubmit"> {
+  /**
+   * The function to call when the prompt input is stopped.
+   */
   onStop?: () => void;
-  setHasText: (hasText: boolean) => void;
-  status: PromptInputStatus;
+  /**
+   * The function to call when the prompt input is submitted.
+   */
+  onSubmit?: (detail: PromptInputSubmitDetail) => void;
+  /**
+   * The status of the prompt input.
+   */
+  status?: PromptInputStatus;
 }
+
+type PromptInputContextValue = Pick<PromptInputProps, "onStop"> &
+  Required<Pick<PromptInputProps, "status">>;
 
 const [PromptInputProvider, usePromptInput] =
   createContext<PromptInputContextValue>({
     name: "PromptInputContext",
     providerName: "PromptInput",
   });
-
-interface PromptInputProps
-  extends Omit<React.ComponentProps<typeof ark.form>, "onSubmit"> {
-  onStop?: () => void;
-  onSubmit?: (detail: PromptInputSubmitDetail) => void;
-  status?: PromptInputStatus;
-}
 
 export const PromptInputBottom = (
   props: React.ComponentProps<typeof ark.div>
@@ -50,28 +61,13 @@ export const PromptInputBottom = (
       className={cn(
         "w-full",
         "flex items-center gap-2",
-        "px-6 py-2",
+        "px-6 pt-2",
         className
       )}
       data-slot="prompt-input-bottom"
       {...rest}
     />
   );
-};
-
-const getHasTextFromChildren = (children: React.ReactNode) => {
-  for (const child of React.Children.toArray(children)) {
-    if (React.isValidElement(child) && child.type === PromptInputTextarea) {
-      const { defaultValue, value } = child.props as {
-        defaultValue?: unknown;
-        value?: unknown;
-      };
-
-      return Boolean(String(value ?? defaultValue ?? "").trim());
-    }
-  }
-
-  return false;
 };
 
 export const PromptInput = (props: PromptInputProps) => {
@@ -84,9 +80,6 @@ export const PromptInput = (props: PromptInputProps) => {
     ...rest
   } = props;
 
-  const [hasText, setHasText] = React.useState(() =>
-    getHasTextFromChildren(children)
-  );
   const promptInputChildren = React.Children.toArray(children);
 
   const bottomChildren = promptInputChildren.filter(
@@ -98,7 +91,7 @@ export const PromptInput = (props: PromptInputProps) => {
   );
 
   return (
-    <PromptInputProvider value={{ hasText, onStop, setHasText, status }}>
+    <PromptInputProvider value={{ onStop, status }}>
       <ark.form
         className={cn("w-full", "flex flex-col", className)}
         data-slot="prompt-input"
@@ -185,14 +178,9 @@ export const PromptInputTools = (
 export const PromptInputTextarea = (
   props: React.ComponentProps<typeof InputGroupTextarea>
 ) => {
-  const { className, defaultValue, onChange, onKeyDown, value, ...rest } =
-    props;
+  const { className, onKeyDown, ...rest } = props;
 
-  const { setHasText, status } = usePromptInput();
-
-  React.useLayoutEffect(() => {
-    setHasText(Boolean(String(value ?? defaultValue ?? "").trim()));
-  }, [defaultValue, setHasText, value]);
+  const { status } = usePromptInput();
 
   return (
     <InputGroupTextarea
@@ -204,12 +192,6 @@ export const PromptInputTextarea = (
         "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
         className
       )}
-      data-slot="prompt-input-textarea"
-      defaultValue={defaultValue}
-      onChange={(event) => {
-        setHasText(Boolean(event.target.value.trim()));
-        onChange?.(event);
-      }}
       onKeyDown={(event) => {
         onKeyDown?.(event);
 
@@ -233,7 +215,6 @@ export const PromptInputTextarea = (
         event.preventDefault();
         event.currentTarget.form?.requestSubmit();
       }}
-      value={value}
       {...rest}
     />
   );
@@ -267,11 +248,11 @@ export const PromptInputSubmit = (
     ...rest
   } = props;
 
-  const { hasText, onStop, status } = usePromptInput();
+  const { onStop, status } = usePromptInput();
 
   const isStreaming = status === "streaming";
   const isSubmitted = status === "submitted";
-  const isDisabled = disabled ?? (isSubmitted || !(isStreaming || hasText));
+  const isDisabled = isStreaming ? false : Boolean(disabled ?? isSubmitted);
 
   let submitIcon = <ArrowUpIcon aria-hidden="true" className="size-4" />;
 

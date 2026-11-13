@@ -37,6 +37,8 @@ npx shadcn@latest add @shark/editable
 
 <Step>This component depends on [Button](/docs/components/button). Install it first if you haven't already.</Step>
 
+<RegistryDependencies registryDependencies={manifest.registryDependencies} />
+
 <Step>Install the following dependencies:</Step>
 
 <RegistryDependencies dependencies={manifest.dependencies} />
@@ -171,6 +173,12 @@ Edit without control buttons. Press Enter to save, Escape to cancel.
 
 <ComponentPreview componentName="editable" fileName="example-without-controls" />
 
+### Auto Resize
+
+Size the editable to its text. Ark UI keeps the input the same width as the preview while editing.
+
+<ComponentPreview componentName="editable" fileName="example-auto-resize" />
+
 ### Form Integration
 
 <ComponentPreview componentName="editable" fileName="example-form" />
@@ -190,6 +198,7 @@ Root component. Manages edit mode and value.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `activationMode` | `focus \| dblclick \| click \| none` | `'focus'` |
+| `autoResize` | `boolean` | `false` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `submitMode` | `both \| enter \| blur \| none` | `'both'` |
 | `asChild` | `boolean` | `-` |

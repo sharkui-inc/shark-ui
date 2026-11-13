@@ -108,7 +108,7 @@ export const selectTriggerVariants = tv({
         "bg-transparent",
         "dark:bg-input/32",
         "border-input border shadow-xs/4",
-        "group-focus-within:border-ring/64 group-focus-within:ring-ring/24 group-focus-within:ring-2",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
         "data-[state=open]:border-ring/64 data-[state=open]:ring-ring/24 data-[state=open]:ring-2",
         "aria-invalid:border-destructive aria-invalid:text-destructive aria-invalid:ring-destructive/24 aria-invalid:ring-[3px]",
         "data-invalid:border-destructive data-invalid:text-destructive data-invalid:ring-destructive/24 data-invalid:ring-[3px]",
@@ -118,7 +118,7 @@ export const selectTriggerVariants = tv({
       ghost: [
         "border border-transparent",
         "hover:bg-accent hover:text-accent-foreground",
-        "group-focus-within:border-ring/64 group-focus-within:ring-ring/24 group-focus-within:ring-2",
+        "focus-visible:border-ring/64 focus-visible:ring-ring/24 focus-visible:ring-2",
       ],
     },
   },
@@ -221,7 +221,10 @@ export const SelectContent = (
 
   return (
     <Portal>
-      <ArkSelect.Positioner data-slot="select-positioner">
+      <ArkSelect.Positioner
+        className="outline-hidden"
+        data-slot="select-positioner"
+      >
         <ArkSelect.Content
           className={cn(
             "z-[calc(50+var(--layer-index,0))]",
@@ -265,6 +268,7 @@ export const SelectList = (
         "flex flex-col",
         "overflow-x-hidden overflow-y-auto overscroll-y-contain",
         "scrollbar-thumb-foreground/24 scrollbar-thin scrollbar-track-transparent",
+        "outline-hidden",
         className
       )}
       data-slot="select-list"

@@ -360,9 +360,21 @@ export const MenuGroupLabel = (
   );
 };
 
-export const MenuSub = (props: React.ComponentProps<typeof Menu>) => (
-  <Menu data-slot="menu-sub" {...props} />
-);
+export const MenuSub = (props: React.ComponentProps<typeof Menu>) => {
+  const { positioning, ...rest } = props;
+
+  return (
+    <Menu
+      data-slot="menu-sub"
+      positioning={{
+        flip: ["right", "left", "bottom", "top"],
+        placement: "right-start",
+        ...positioning,
+      }}
+      {...rest}
+    />
+  );
+};
 
 export const MenuSubContent = (
   props: React.ComponentProps<typeof ArkMenu.Content>

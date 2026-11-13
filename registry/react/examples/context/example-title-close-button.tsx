@@ -1,14 +1,12 @@
 import { Button } from "@/registry/react/components/button";
 import {
   Context,
-  ContextBody,
   ContextContent,
   ContextHeader,
   ContextMeter,
   ContextTitle,
   ContextTrigger,
   ContextTriggerLabel,
-  ContextUsageRow,
 } from "@/registry/react/components/context";
 
 const Example = () => (
@@ -26,23 +24,18 @@ const Example = () => (
       <ContextContent>
         <ContextHeader>
           <ContextTitle showCloseButton>Context Usage</ContextTitle>
-          <ContextMeter />
+          <ContextMeter segments={contextUsage} />
         </ContextHeader>
-        <ContextBody>
-          {contextUsage.map((usage) => (
-            <ContextUsageRow key={usage.title} {...usage} />
-          ))}
-        </ContextBody>
       </ContextContent>
     </Context>
   </div>
 );
 
 const contextUsage = [
-  { title: "Input", value: 41_300 },
-  { title: "Output", value: 25_600 },
-  { title: "Reasoning", value: 36_100 },
-  { title: "Cache", value: 13_200 },
+  { color: "var(--chart-1)", title: "Input", value: 41_300 },
+  { color: "var(--chart-2)", title: "Output", value: 25_600 },
+  { color: "var(--chart-3)", title: "Reasoning", value: 36_100 },
+  { color: "var(--chart-4)", title: "Cache", value: 13_200 },
 ];
 
 export default Example;

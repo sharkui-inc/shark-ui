@@ -35,6 +35,8 @@ npx shadcn@latest add @shark/prompt-input
 
 <Step>This component depends on [Input Group](/docs/components/input-group). Install it first if you haven't already.</Step>
 
+<RegistryDependencies registryDependencies={manifest.registryDependencies} />
+
 <Step>Install the following dependencies:</Step>
 
 <RegistryDependencies dependencies={manifest.dependencies} />
@@ -78,11 +80,18 @@ import {
 ```
 
 ```tsx
+const [text, setText] = React.useState("");
+const canSend = text.trim().length > 0;
+
 <PromptInput onSubmit={({ text }) => send(text)} onStop={stop}>
-  <PromptInputTextarea aria-label="Prompt" />
+  <PromptInputTextarea
+    aria-label="Prompt"
+    onChange={(event) => setText(event.target.value)}
+    value={text}
+  />
   <PromptInputFooter>
     <PromptInputTools />
-    <PromptInputSubmit />
+    <PromptInputSubmit disabled={!canSend} />
   </PromptInputFooter>
   <PromptInputBottom>Project context</PromptInputBottom>
 </PromptInput>
@@ -214,10 +223,11 @@ Tool button.
 
 ### PromptInputSubmit
 
-Send control. Uses an up arrow when ready, a spinner for `"submitted"`, and a stop control for `"streaming"`. Disabled while the textarea is empty unless streaming.
+Send control. Uses an up arrow when ready, a spinner for `"submitted"`, and a stop control for `"streaming"`. Pass `disabled={!text.trim()}` when the prompt is empty; stays enabled while streaming so stop works.
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `disabled` | `boolean` | `-` |
 | `variant` | `"default" \| "outline" \| "secondary" \| "ghost" \| "link" \| "destructive"` | `"default"` |
 | `size` | `"xs" \| "sm" \| "icon-xs" \| "icon-sm"` | `"icon-sm"` |
 | `className` | `string` | `-` |

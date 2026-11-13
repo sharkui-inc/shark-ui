@@ -124,8 +124,21 @@ const DateInputControl = (props: DateInputControlProps) => {
     <ArkDateInput.Control asChild data-slot="date-input-control">
       <InputGroup
         className={cn(
+          "has-focus-visible:border-ring/64 has-focus-visible:ring-ring/24 has-focus-visible:ring-2",
           "data-disabled:pointer-events-none data-disabled:opacity-64"
         )}
+        onMouseDown={(event) => {
+          if (
+            dateInput.disabled ||
+            (event.target as HTMLElement).closest(
+              "[data-slot=date-input-segment][data-editable], button, a, [role=button]"
+            )
+          ) {
+            return;
+          }
+          event.preventDefault();
+          dateInput.focus();
+        }}
         size={size}
       >
         <div

@@ -92,7 +92,7 @@ export const ReasoningCardExample = (props: React.ComponentProps<"div">) => {
                 <PaperclipIcon aria-hidden="true" />
               </PromptInputButton>
             </PromptInputTools>
-            <PromptInputSubmit />
+            <PromptInputSubmit disabled={!nextText.trim()} />
           </PromptInputFooter>
         </PromptInput>
       </CardFooter>

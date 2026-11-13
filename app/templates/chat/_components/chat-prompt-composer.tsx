@@ -20,13 +20,11 @@ import {
 } from "@/registry/react/components/combobox";
 import {
   Context,
-  ContextBody,
   ContextContent,
   ContextHeader,
   ContextIcon,
   ContextMeter,
   ContextTrigger,
-  ContextUsageRow,
 } from "@/registry/react/components/context";
 import {
   Menu,
@@ -181,7 +179,11 @@ export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
           <PromptInputButton aria-label="Voice input" size="icon-sm">
             <MicIcon aria-hidden="true" />
           </PromptInputButton>
-          <PromptInputSubmit className="ms-2" size="icon-sm" />
+          <PromptInputSubmit
+            className="ms-2"
+            disabled={!value.trim()}
+            size="icon-sm"
+          />
         </PromptInputFooter>
         <PromptInputBottom>
           <Button size="sm" variant="ghost">
@@ -213,13 +215,8 @@ export const ChatPromptComposer = (props: ChatPromptComposerProps) => {
               </ContextTrigger>
               <ContextContent>
                 <ContextHeader>
-                  <ContextMeter />
+                  <ContextMeter segments={[...CONTEXT_USAGE]} />
                 </ContextHeader>
-                <ContextBody>
-                  {CONTEXT_USAGE.map((usage) => (
-                    <ContextUsageRow key={usage.title} {...usage} />
-                  ))}
-                </ContextBody>
               </ContextContent>
             </Context>
           </div>

@@ -1,7 +1,6 @@
 import { Button } from "@/registry/react/components/button";
 import {
   Context,
-  ContextBody,
   ContextContent,
   ContextFooter,
   ContextHeader,
@@ -9,12 +8,11 @@ import {
   ContextTitle,
   ContextTrigger,
   ContextTriggerLabel,
-  ContextUsageRow,
 } from "@/registry/react/components/context";
 
 const ContextDemo = () => (
   <div className="flex justify-center">
-    <Context costLabel="$0.042" maxTokens={128_000} usedTokens={18_420}>
+    <Context costLabel="$0.18" maxTokens={128_000} usedTokens={79_500}>
       <ContextTrigger asChild>
         <Button
           className="text-muted-foreground font-normal"
@@ -27,13 +25,8 @@ const ContextDemo = () => (
       <ContextContent>
         <ContextHeader>
           <ContextTitle showCloseButton>Context Usage</ContextTitle>
-          <ContextMeter />
+          <ContextMeter segments={contextUsage} />
         </ContextHeader>
-        <ContextBody>
-          {contextUsage.map((usage) => (
-            <ContextUsageRow key={usage.title} {...usage} />
-          ))}
-        </ContextBody>
         <ContextFooter />
       </ContextContent>
     </Context>
@@ -41,10 +34,10 @@ const ContextDemo = () => (
 );
 
 const contextUsage = [
-  { title: "Input", value: 4200 },
-  { title: "Output", value: 860 },
-  { title: "Reasoning", value: 640 },
-  { title: "Cache", value: 1200 },
+  { color: "var(--chart-1)", title: "Input", value: 42_000 },
+  { color: "var(--chart-2)", title: "Output", value: 18_500 },
+  { color: "var(--chart-3)", title: "Reasoning", value: 12_800 },
+  { color: "var(--chart-4)", title: "Cache", value: 6200 },
 ];
 
 export default ContextDemo;

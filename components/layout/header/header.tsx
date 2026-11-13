@@ -25,13 +25,19 @@ export const SiteHeader = (props: React.ComponentProps<"header">) => {
 
   const keywordsByUrl = Object.fromEntries(
     source.getPages().flatMap((page) => {
-      const { aliases } = page.data;
+      const { aliases, description, seo } = page.data;
 
-      if (!aliases?.length) {
+      const keywords = [
+        ...(aliases ?? []),
+        description,
+        seo?.description,
+      ].filter((value): value is string => Boolean(value));
+
+      if (!keywords.length) {
         return [];
       }
 
-      return [[page.url, aliases.join(" ")]];
+      return [[page.url, keywords.join(" ")]];
     })
   );
 

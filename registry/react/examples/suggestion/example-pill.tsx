@@ -5,10 +5,10 @@ import {
 
 const Example = () => (
   <Suggestions>
-    <Suggestion pill suggestion="Summarize this brief" />
-    <Suggestion pill suggestion="Draft a launch checklist" />
-    <Suggestion pill suggestion="Find risks in the plan" />
-    <Suggestion pill={false} suggestion="Square chip" />
+    <Suggestion pill>Summarize this brief</Suggestion>
+    <Suggestion pill>Draft a launch checklist</Suggestion>
+    <Suggestion pill>Find risks in the plan</Suggestion>
+    <Suggestion pill={false}>Square chip</Suggestion>
   </Suggestions>
 );
 

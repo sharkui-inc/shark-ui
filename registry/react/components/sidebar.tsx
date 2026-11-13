@@ -416,7 +416,7 @@ export const SidebarHeader = (props: React.ComponentProps<typeof ark.div>) => {
 
   return (
     <ark.div
-      className={cn("flex flex-col gap-2", "p-2", "overflow-hidden", className)}
+      className={cn("flex flex-col gap-2", "p-2", className)}
       data-sidebar="header"
       data-slot="sidebar-header"
       {...rest}
@@ -425,28 +425,15 @@ export const SidebarHeader = (props: React.ComponentProps<typeof ark.div>) => {
 };
 
 export const SidebarFooter = (props: React.ComponentProps<typeof ark.div>) => {
-  const { className, children, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
     <ark.div
-      className={cn("overflow-hidden", "p-2", className)}
+      className={cn("flex flex-col gap-2", "p-2", className)}
       data-sidebar="footer"
       data-slot="sidebar-footer"
       {...rest}
-    >
-      <ark.div
-        className={cn(
-          "flex flex-col gap-2",
-          "w-[calc(var(--sidebar-width)-(--spacing(4)))]",
-          "shrink-0",
-          "group-data-[collapsible=icon]:w-auto",
-          "group-data-[collapsible=icon]:min-w-0"
-        )}
-        data-slot="sidebar-footer-inner"
-      >
-        {children}
-      </ark.div>
-    </ark.div>
+    />
   );
 };
 
