@@ -54,7 +54,7 @@ export const useDemoPlayback = <TEvent>(
     threshold = 0.5,
   } = options;
 
-  const ref = React.useRef<HTMLElement>(null);
+  const ref = React.useRef<HTMLDivElement>(null);
   const nextStep = React.useRef(0);
   const stopped = React.useRef(false as boolean);
   const [available, setAvailable] = React.useState(false);

@@ -144,7 +144,6 @@ export const AiComponentsIdeChat = () => {
   const replyIndex = React.useRef(0);
   const playbackMessageId = React.useRef<number | null>(null);
   const timers = React.useRef<number[]>([]);
-  const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const addContextTriggerId = React.useId();
   const modeTriggerId = React.useId();
   const modelTriggerId = React.useId();
@@ -268,15 +267,7 @@ export const AiComponentsIdeChat = () => {
   const liveCount = messages.length + (typing ? 1 : 0);
 
   return (
-    <div
-      className="flex h-full min-h-0 flex-col"
-      onFocusCapture={(event) => {
-        if (event.target === inputRef.current) {
-          stopPlayback();
-        }
-      }}
-      ref={playback.ref}
-    >
+    <div className="flex h-full min-h-0 flex-col" ref={playback.ref}>
       <MessageScroller className="min-h-0 flex-1">
         <MessageScrollerViewport className="overscroll-y-auto px-4 pt-4 pb-14">
           <MessageScrollerStick itemCount={liveCount} />
@@ -476,12 +467,12 @@ export const AiComponentsIdeChat = () => {
                   stopPlayback();
                   setDraft(event.target.value);
                 }}
+                onFocus={stopPlayback}
                 placeholder={
                   queueItems.length > 0
                     ? "Add a follow-up"
                     : "Describe a task or ask a question."
                 }
-                ref={inputRef}
                 value={draft}
               />
               <PromptInputFooter>
