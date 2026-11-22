@@ -1,0 +1,91 @@
+---
+title: Shimmer
+description: Utilities for adding a shimmer effect to text elements.
+---
+
+<ComponentPreview componentName="shimmer" />
+
+## Installation
+
+The `shimmer` utility is included when you initialize Shark UI styles:
+
+```bash
+pnpm dlx shadcn@latest init @shark/style
+```
+
+The CLI adds the utility to the Tailwind CSS file configured in `components.json`.
+
+## Usage
+
+Add `shimmer` to a text element to animate a highlight across the text.
+
+```tsx
+<p className="shimmer text-muted-foreground">Generating response&hellip;</p>
+```
+
+The highlight is derived from `currentColor`, so it adapts to the text color and automatically brightens in dark mode.
+
+## Examples
+
+### Custom highlight color
+
+Use a theme color, optional opacity modifier, or arbitrary color value.
+
+<ComponentPreview componentName="shimmer" fileName="example-color" />
+
+### Animation duration
+
+`shimmer-duration-<number>` sets the sweep duration in milliseconds. The default is `2000` (2 seconds).
+
+<ComponentPreview componentName="shimmer" fileName="example-duration" />
+
+### Spread
+
+`shimmer-spread-<number>` sets the highlight width using the spacing scale.
+
+<ComponentPreview componentName="shimmer" fileName="example-spread" />
+
+### Angle
+
+`shimmer-angle-<number>` sets the angle of the highlight.
+
+<ComponentPreview componentName="shimmer" fileName="example-angle" />
+
+### Reverse and play once
+
+Use `shimmer-reverse` to reverse the sweep, and `shimmer-once` to play it once.
+
+<ComponentPreview componentName="shimmer" fileName="example-options" />
+
+<ComponentPreview componentName="shimmer" fileName="example-once" />
+
+### Disable the effect
+
+Use `shimmer-none` to render text normally, including in responsive variants.
+
+```tsx
+<p className="shimmer md:shimmer-none">Generating response&hellip;</p>
+```
+
+<ComponentPreview componentName="shimmer" fileName="example-none" />
+
+### RTL
+
+The sweep follows reading direction automatically: left to right in LTR and right to left in RTL.
+
+<ComponentPreview componentName="shimmer" fileName="example-rtl" />
+
+## API Reference
+
+| Class | Effect |
+| --- | --- |
+| `shimmer` | Animate a highlight across text |
+| `shimmer-once` | Run the animation once |
+| `shimmer-reverse` | Reverse animation direction |
+| `shimmer-none` | Disable the effect and restore text color |
+| `shimmer-color-*` | Set highlight color and optional opacity |
+| `shimmer-duration-*` | Set duration in milliseconds |
+| `shimmer-spread-*` | Set highlight width |
+| `shimmer-angle-*` | Set highlight angle |
+
+The sweep follows reading direction and reverses automatically in RTL. When reduced motion is enabled, the animation and highlight are disabled and the text renders normally.

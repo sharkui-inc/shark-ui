@@ -250,7 +250,7 @@ export const FloatingPanelBody = (props: FloatingPanelBodyProps) => {
         className={cn(
           "flex flex-col gap-4",
           "p-(--space)",
-          "overflow-auto",
+          "scroll-fade overflow-auto",
           "in-[[data-slot=floating-panel-content]:has([data-slot=floating-panel-footer]:not(.border-t))]:pb-1",
           className
         )}

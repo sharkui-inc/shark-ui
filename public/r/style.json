@@ -4,9 +4,17 @@
   "name": "style",
   "type": "registry:style",
   "description": "Complete Shark theme: colors, sidebar, fonts, and base styles. Use with the shadcn CLI after `init` (e.g. `npx shadcn@latest init @shark/style`).",
-  "dependencies": ["@base-ui/react", "tailwind-variants", "lucide-react"],
-  "devDependencies": ["tw-animate-css"],
-  "registryDependencies": ["http://localhost:3000/r/utils.json"],
+  "dependencies": [
+    "@base-ui/react",
+    "tailwind-variants",
+    "lucide-react"
+  ],
+  "devDependencies": [
+    "tw-animate-css"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/utils.json"
+  ],
   "cssVars": {
     "theme": {
       "font-sans": "var(--font-sans, ui-sans-serif, system-ui, sans-serif)",
@@ -96,6 +104,327 @@
     }
   },
   "css": {
+    "@property --scroll-fade-t": {
+      "syntax": "\"<length-percentage>\"",
+      "inherits": "false",
+      "initial-value": "0px"
+    },
+    "@property --scroll-fade-b": {
+      "syntax": "\"<length-percentage>\"",
+      "inherits": "false",
+      "initial-value": "0px"
+    },
+    "@property --scroll-fade-s": {
+      "syntax": "\"<length-percentage>\"",
+      "inherits": "false",
+      "initial-value": "0px"
+    },
+    "@property --scroll-fade-e": {
+      "syntax": "\"<length-percentage>\"",
+      "inherits": "false",
+      "initial-value": "0px"
+    },
+    "@property --scroll-fade-mask": {
+      "syntax": "\"*\"",
+      "inherits": "false"
+    },
+    "@theme inline": {
+      "@keyframes tw-shimmer": {
+        "from": {
+          "background-position": "100% 0"
+        },
+        "to": {
+          "background-position": "0 0"
+        }
+      }
+    },
+    "@utility scroll-fade": {
+      "--_scroll-fade-size-t": "var(\n    --scroll-fade-t-size,\n    var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))\n  )",
+      "--_scroll-fade-size-b": "var(\n    --scroll-fade-b-size,\n    var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))\n  )",
+      "--scroll-fade-block": "linear-gradient(\n    to bottom,\n    transparent 0,\n    #000 var(--scroll-fade-t, 0px),\n    #000 calc(100% - var(--scroll-fade-b, 0px)),\n    transparent 100%\n  )",
+      "-webkit-mask-image": "var(--scroll-fade-mask, var(--scroll-fade-block))",
+      "mask-image": "var(--scroll-fade-mask, var(--scroll-fade-block))",
+      "-webkit-mask-repeat": "no-repeat",
+      "mask-repeat": "no-repeat",
+      "-webkit-mask-composite": "source-in",
+      "mask-composite": "intersect",
+      "@supports (animation-timeline: scroll())": {
+        "animation": "scroll-fade-reveal-t 1ms ease-in-out,\n      scroll-fade-reveal-b 1ms ease-in-out",
+        "animation-timeline": "scroll(self y), scroll(self y)",
+        "animation-range": "0 var(--scroll-fade-reveal, calc(var(--spacing) * 24)),\n      calc(100% - var(--scroll-fade-reveal, calc(var(--spacing) * 24))) 100%",
+        "animation-fill-mode": "both"
+      },
+      "@supports not (animation-timeline: scroll())": {
+        "--scroll-fade-t": "var(--_scroll-fade-size-t)",
+        "--scroll-fade-b": "var(--_scroll-fade-size-b)"
+      }
+    },
+    "@utility scroll-fade-y": {
+      "--_scroll-fade-size-t": "var(\n    --scroll-fade-t-size,\n    var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))\n  )",
+      "--_scroll-fade-size-b": "var(\n    --scroll-fade-b-size,\n    var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))\n  )",
+      "--scroll-fade-block": "linear-gradient(\n    to bottom,\n    transparent 0,\n    #000 var(--scroll-fade-t, 0px),\n    #000 calc(100% - var(--scroll-fade-b, 0px)),\n    transparent 100%\n  )",
+      "-webkit-mask-image": "var(--scroll-fade-mask, var(--scroll-fade-block))",
+      "mask-image": "var(--scroll-fade-mask, var(--scroll-fade-block))",
+      "-webkit-mask-repeat": "no-repeat",
+      "mask-repeat": "no-repeat",
+      "-webkit-mask-composite": "source-in",
+      "mask-composite": "intersect",
+      "@supports (animation-timeline: scroll())": {
+        "animation": "scroll-fade-reveal-t 1ms ease-in-out,\n      scroll-fade-reveal-b 1ms ease-in-out",
+        "animation-timeline": "scroll(self y), scroll(self y)",
+        "animation-range": "0 var(--scroll-fade-reveal, calc(var(--spacing) * 24)),\n      calc(100% - var(--scroll-fade-reveal, calc(var(--spacing) * 24))) 100%",
+        "animation-fill-mode": "both"
+      },
+      "@supports not (animation-timeline: scroll())": {
+        "--scroll-fade-t": "var(--_scroll-fade-size-t)",
+        "--scroll-fade-b": "var(--_scroll-fade-size-b)"
+      }
+    },
+    "@utility scroll-fade-x": {
+      "--_scroll-fade-size-s": "var(\n    --scroll-fade-s-size,\n    var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))\n  )",
+      "--_scroll-fade-size-e": "var(\n    --scroll-fade-e-size,\n    var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))\n  )",
+      "--scroll-fade-inline": "linear-gradient(\n    to right,\n    transparent 0,\n    #000 var(--scroll-fade-s, 0px),\n    #000 calc(100% - var(--scroll-fade-e, 0px)),\n    transparent 100%\n  )",
+      "-webkit-mask-image": "var(--scroll-fade-mask, var(--scroll-fade-inline))",
+      "mask-image": "var(--scroll-fade-mask, var(--scroll-fade-inline))",
+      "-webkit-mask-repeat": "no-repeat",
+      "mask-repeat": "no-repeat",
+      "-webkit-mask-composite": "source-in",
+      "mask-composite": "intersect",
+      "&:where([dir=\"rtl\"], [dir=\"rtl\"] *)": {
+        "--scroll-fade-inline": "linear-gradient(\n      to left,\n      transparent 0,\n      #000 var(--scroll-fade-s, 0px),\n      #000 calc(100% - var(--scroll-fade-e, 0px)),\n      transparent 100%\n    )"
+      },
+      "@supports (animation-timeline: scroll())": {
+        "animation": "scroll-fade-reveal-s 1ms ease-in-out,\n      scroll-fade-reveal-e 1ms ease-in-out",
+        "animation-timeline": "scroll(self inline), scroll(self inline)",
+        "animation-range": "0 var(--scroll-fade-reveal, calc(var(--spacing) * 24)),\n      calc(100% - var(--scroll-fade-reveal, calc(var(--spacing) * 24))) 100%",
+        "animation-fill-mode": "both"
+      },
+      "@supports not (animation-timeline: scroll())": {
+        "--scroll-fade-s": "var(--_scroll-fade-size-s)",
+        "--scroll-fade-e": "var(--_scroll-fade-size-e)"
+      }
+    },
+    "@utility scroll-fade-t": {
+      "--_scroll-fade-size-t": "var(\n    --scroll-fade-t-size,\n    var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))\n  )",
+      "--scroll-fade-mask": "linear-gradient(\n    to bottom,\n    transparent 0,\n    #000 var(--scroll-fade-t, 0px),\n    #000 100%\n  )",
+      "-webkit-mask-image": "var(--scroll-fade-mask)",
+      "mask-image": "var(--scroll-fade-mask)",
+      "-webkit-mask-repeat": "no-repeat",
+      "mask-repeat": "no-repeat",
+      "-webkit-mask-composite": "source-in",
+      "mask-composite": "intersect",
+      "@supports (animation-timeline: scroll())": {
+        "animation": "scroll-fade-reveal-t 1ms ease-in-out",
+        "animation-timeline": "scroll(self y)",
+        "animation-range": "0 var(--scroll-fade-reveal, calc(var(--spacing) * 24))",
+        "animation-fill-mode": "both"
+      },
+      "@supports not (animation-timeline: scroll())": {
+        "--scroll-fade-t": "var(--_scroll-fade-size-t)"
+      }
+    },
+    "@utility scroll-fade-b": {
+      "--_scroll-fade-size-b": "var(\n    --scroll-fade-b-size,\n    var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))\n  )",
+      "--scroll-fade-mask": "linear-gradient(\n    to bottom,\n    #000 0,\n    #000 calc(100% - var(--scroll-fade-b, 0px)),\n    transparent 100%\n  )",
+      "-webkit-mask-image": "var(--scroll-fade-mask)",
+      "mask-image": "var(--scroll-fade-mask)",
+      "-webkit-mask-repeat": "no-repeat",
+      "mask-repeat": "no-repeat",
+      "-webkit-mask-composite": "source-in",
+      "mask-composite": "intersect",
+      "@supports (animation-timeline: scroll())": {
+        "animation": "scroll-fade-reveal-b 1ms ease-in-out",
+        "animation-timeline": "scroll(self y)",
+        "animation-range": "calc(\n        100% -\n        var(--scroll-fade-reveal, calc(var(--spacing) * 24))\n      )\n      100%",
+        "animation-fill-mode": "both"
+      },
+      "@supports not (animation-timeline: scroll())": {
+        "--scroll-fade-b": "var(--_scroll-fade-size-b)"
+      }
+    },
+    "@utility scroll-fade-l": {
+      "--_scroll-fade-size-s": "var(\n    --scroll-fade-s-size,\n    var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))\n  )",
+      "--scroll-fade-mask": "linear-gradient(\n    to right,\n    transparent 0,\n    #000 var(--scroll-fade-s, 0px),\n    #000 100%\n  )",
+      "-webkit-mask-image": "var(--scroll-fade-mask)",
+      "mask-image": "var(--scroll-fade-mask)",
+      "-webkit-mask-repeat": "no-repeat",
+      "mask-repeat": "no-repeat",
+      "-webkit-mask-composite": "source-in",
+      "mask-composite": "intersect",
+      "@supports (animation-timeline: scroll())": {
+        "animation": "scroll-fade-reveal-s 1ms ease-in-out",
+        "animation-timeline": "scroll(self x)",
+        "animation-range": "0 var(--scroll-fade-reveal, calc(var(--spacing) * 24))",
+        "animation-fill-mode": "both"
+      },
+      "@supports not (animation-timeline: scroll())": {
+        "--scroll-fade-s": "var(--_scroll-fade-size-s)"
+      }
+    },
+    "@utility scroll-fade-r": {
+      "--_scroll-fade-size-e": "var(\n    --scroll-fade-e-size,\n    var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))\n  )",
+      "--scroll-fade-mask": "linear-gradient(\n    to right,\n    #000 0,\n    #000 calc(100% - var(--scroll-fade-e, 0px)),\n    transparent 100%\n  )",
+      "-webkit-mask-image": "var(--scroll-fade-mask)",
+      "mask-image": "var(--scroll-fade-mask)",
+      "-webkit-mask-repeat": "no-repeat",
+      "mask-repeat": "no-repeat",
+      "-webkit-mask-composite": "source-in",
+      "mask-composite": "intersect",
+      "@supports (animation-timeline: scroll())": {
+        "animation": "scroll-fade-reveal-e 1ms ease-in-out",
+        "animation-timeline": "scroll(self x)",
+        "animation-range": "calc(\n        100% -\n        var(--scroll-fade-reveal, calc(var(--spacing) * 24))\n      )\n      100%",
+        "animation-fill-mode": "both"
+      },
+      "@supports not (animation-timeline: scroll())": {
+        "--scroll-fade-e": "var(--_scroll-fade-size-e)"
+      }
+    },
+    "@utility scroll-fade-s": {
+      "--_scroll-fade-size-s": "var(\n    --scroll-fade-s-size,\n    var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))\n  )",
+      "--scroll-fade-mask": "linear-gradient(\n    to right,\n    transparent 0,\n    #000 var(--scroll-fade-s, 0px),\n    #000 100%\n  )",
+      "-webkit-mask-image": "var(--scroll-fade-mask)",
+      "mask-image": "var(--scroll-fade-mask)",
+      "-webkit-mask-repeat": "no-repeat",
+      "mask-repeat": "no-repeat",
+      "-webkit-mask-composite": "source-in",
+      "mask-composite": "intersect",
+      "&:where([dir=\"rtl\"], [dir=\"rtl\"] *)": {
+        "--scroll-fade-mask": "linear-gradient(\n      to left,\n      transparent 0,\n      #000 var(--scroll-fade-s, 0px),\n      #000 100%\n    )"
+      },
+      "@supports (animation-timeline: scroll())": {
+        "animation": "scroll-fade-reveal-s 1ms ease-in-out",
+        "animation-timeline": "scroll(self inline)",
+        "animation-range": "0 var(--scroll-fade-reveal, calc(var(--spacing) * 24))",
+        "animation-fill-mode": "both"
+      },
+      "@supports not (animation-timeline: scroll())": {
+        "--scroll-fade-s": "var(--_scroll-fade-size-s)"
+      }
+    },
+    "@utility scroll-fade-e": {
+      "--_scroll-fade-size-e": "var(\n    --scroll-fade-e-size,\n    var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))\n  )",
+      "--scroll-fade-mask": "linear-gradient(\n    to right,\n    #000 0,\n    #000 calc(100% - var(--scroll-fade-e, 0px)),\n    transparent 100%\n  )",
+      "-webkit-mask-image": "var(--scroll-fade-mask)",
+      "mask-image": "var(--scroll-fade-mask)",
+      "-webkit-mask-repeat": "no-repeat",
+      "mask-repeat": "no-repeat",
+      "-webkit-mask-composite": "source-in",
+      "mask-composite": "intersect",
+      "&:where([dir=\"rtl\"], [dir=\"rtl\"] *)": {
+        "--scroll-fade-mask": "linear-gradient(\n      to left,\n      #000 0,\n      #000 calc(100% - var(--scroll-fade-e, 0px)),\n      transparent 100%\n    )"
+      },
+      "@supports (animation-timeline: scroll())": {
+        "animation": "scroll-fade-reveal-e 1ms ease-in-out",
+        "animation-timeline": "scroll(self inline)",
+        "animation-range": "calc(\n        100% -\n        var(--scroll-fade-reveal, calc(var(--spacing) * 24))\n      )\n      100%",
+        "animation-fill-mode": "both"
+      },
+      "@supports not (animation-timeline: scroll())": {
+        "--scroll-fade-e": "var(--_scroll-fade-size-e)"
+      }
+    },
+    "@utility scroll-fade-*": {
+      "--scroll-fade-size": "--spacing(--value(number, [*]))"
+    },
+    "@utility scroll-fade-t-*": {
+      "--scroll-fade-t-size": "--spacing(--value(number, [*]))"
+    },
+    "@utility scroll-fade-b-*": {
+      "--scroll-fade-b-size": "--spacing(--value(number, [*]))"
+    },
+    "@utility scroll-fade-s-*": {
+      "--scroll-fade-s-size": "--spacing(--value(number, [*]))"
+    },
+    "@utility scroll-fade-e-*": {
+      "--scroll-fade-e-size": "--spacing(--value(number, [*]))"
+    },
+    "@utility scroll-fade-none": {
+      "--scroll-fade-mask": "none"
+    },
+    "@property --shimmer-angle": {
+      "syntax": "\"<angle>\"",
+      "inherits": "true",
+      "initial-value": "20deg"
+    },
+    "@property --shimmer-image": {
+      "syntax": "\"*\"",
+      "inherits": "false"
+    },
+    "@property --shimmer-text-fill": {
+      "syntax": "\"*\"",
+      "inherits": "false"
+    },
+    "@utility shimmer": {
+      "--_spread": "var(--shimmer-spread, calc(3ch + 40px))",
+      "--_base": "currentColor",
+      "--_highlight": "var(\n    --shimmer-color,\n    oklch(from currentColor l c h / calc(alpha * 0.2))\n  )",
+      "-webkit-text-fill-color": "var(--shimmer-text-fill, transparent)",
+      "background-image": "var(\n    --shimmer-image,\n    linear-gradient(\n      calc(90deg + var(--shimmer-angle)),\n      var(--_base) calc(50% - var(--_spread)),\n      color-mix(in oklch, var(--_highlight), var(--_base) 50%)\n        calc(50% - var(--_spread) * 0.5),\n      var(--_highlight) 50%,\n      color-mix(in oklch, var(--_highlight), var(--_base) 50%)\n        calc(50% + var(--_spread) * 0.5),\n      var(--_base) calc(50% + var(--_spread))\n    )\n  )",
+      "background-repeat": "no-repeat",
+      "background-position": "0 0",
+      "-webkit-background-clip": "text",
+      "background-clip": "text",
+      "background-size": "calc(200% + var(--_spread) * 2) 100%",
+      "animation": "tw-shimmer var(--shimmer-duration, 2s) linear infinite",
+      "@variant dark": {
+        "--_highlight": "var(\n      --shimmer-color,\n      oklch(from currentColor max(0.8, calc(l + 0.4)) c h / calc(alpha + 0.4))\n    )"
+      },
+      "&:where([dir=\"rtl\"], [dir=\"rtl\"] *)": {
+        "animation-direction": "reverse"
+      },
+      "@media (prefers-reduced-motion: reduce)": {
+        "-webkit-text-fill-color": "currentColor",
+        "background-image": "none",
+        "animation": "none"
+      }
+    },
+    "@utility shimmer-once": {
+      "animation-iteration-count": "1"
+    },
+    "@utility shimmer-reverse": {
+      "animation-direction": "reverse"
+    },
+    "@utility shimmer-none": {
+      "--shimmer-image": "none",
+      "--shimmer-text-fill": "currentColor"
+    },
+    "@utility shimmer-color-*": {
+      "--shimmer-color": "--value(--color, [color])",
+      "&:where([class*=\"/\"])": {
+        "--shimmer-color": "color-mix(\n      in oklch,\n      --value(--color, [color]) calc(--modifier(integer) * 1%),\n      transparent\n    )"
+      }
+    },
+    "@utility shimmer-duration-*": {
+      "--shimmer-duration": "calc(--value(integer) * 1ms)"
+    },
+    "@utility shimmer-spread-*": {
+      "--shimmer-spread": "--spacing(--value(number, [*]))"
+    },
+    "@utility shimmer-angle-*": {
+      "--shimmer-angle": "calc(--value(integer) * 1deg)"
+    },
+    "@media (prefers-reduced-motion: reduce)": {
+      ".shimmer": {
+        "-webkit-text-fill-color": "currentColor",
+        "background-image": "none",
+        "animation": "none"
+      }
+    },
+    "@utility no-scrollbar": {
+      "-ms-overflow-style": "none",
+      "scrollbar-width": "none",
+      "&::-webkit-scrollbar": {
+        "display": "none"
+      }
+    },
+    "@utility scrollbar-none": {
+      "-ms-overflow-style": "none",
+      "scrollbar-width": "none",
+      "&::-webkit-scrollbar": {
+        "display": "none"
+      }
+    },
     "@layer base": {
       "::selection": {
         "@apply bg-primary/80 text-primary-foreground": {}

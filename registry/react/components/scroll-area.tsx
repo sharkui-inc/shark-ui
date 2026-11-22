@@ -20,14 +20,7 @@ const scrollAreaVariants = tv({
   ],
   variants: {
     scrollFade: {
-      true: [
-        "mask-t-from-[calc(100%-var(--fade-size))]",
-        "mask-b-from-[calc(100%-var(--fade-size))]",
-        "data-at-top:mask-t-from-100%",
-        "data-at-bottom:mask-b-from-100%",
-        "transition-shadow",
-        "motion-reduce:transition-none!",
-      ],
+      true: ["scroll-fade-y"],
     },
   },
   defaultVariants: {

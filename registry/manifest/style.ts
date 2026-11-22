@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import postcss, { type ChildNode, type Container } from "postcss";
 import type { RegistryItemType } from "@/lib/registry";
 import { absoluteUrl } from "@/lib/url";
 
@@ -113,6 +116,9 @@ const cssVars = {
 };
 
 const css = {
+  ...readUtilityCss("scroll-fade.css"),
+  ...readUtilityCss("shimmer.css"),
+  ...readUtilityCss("scrollbar.css"),
   "@layer base": {
     "::selection": {
       "@apply bg-primary/80 text-primary-foreground": {},
@@ -135,6 +141,39 @@ const css = {
     },
   },
 };
+
+function readUtilityCss(fileName: string): Record<string, unknown> {
+  const source = readFileSync(join(process.cwd(), "styles", fileName), "utf8");
+  const root = postcss.parse(source);
+
+  return serializeNodes(root.nodes);
+}
+
+function serializeNodes(nodes: readonly ChildNode[]): Record<string, unknown> {
+  const result: Record<string, unknown> = {};
+
+  for (const node of nodes) {
+    if (node.type === "comment") {
+      continue;
+    }
+
+    if (node.type === "decl") {
+      if (node.prop in result) {
+        throw new Error(`Duplicate CSS declaration: ${node.prop}`);
+      }
+      result[node.prop] = node.value;
+      continue;
+    }
+
+    const key =
+      node.type === "rule"
+        ? node.selector
+        : `@${node.name}${node.params ? ` ${node.params}` : ""}`;
+    result[key] = serializeNodes((node as Container).nodes ?? []);
+  }
+
+  return result;
+}
 
 const manifest: RegistryItemType = {
   extends: "none",

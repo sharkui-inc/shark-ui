@@ -143,7 +143,7 @@ export const CommandContent = (
         "max-h-(--available-height) min-h-0",
         "-mr-2",
         "outline-none",
-        "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20 overflow-auto overscroll-contain",
+        "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-foreground/20 scroll-fade overflow-auto overscroll-contain",
         "[:not(.has-[+[data-slot=command-footer]])]:rounded-b-2xl [:not(.has-[+[data-slot=command-footer]])]:border-b",
         className
       )}

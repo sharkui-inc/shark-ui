@@ -1,0 +1,100 @@
+---
+title: Scroll Fade
+description: Utilities for adding a fade effect to the edges of a scroll container.
+---
+
+<ComponentPreview componentName="scroll-fade" />
+
+## Installation
+
+The `scroll-fade` utilities are included when you initialize Shark UI styles:
+
+```bash
+pnpm dlx shadcn@latest init @shark/style
+```
+
+The CLI adds the utilities to the Tailwind CSS file configured in `components.json`.
+
+## Usage
+
+Apply `scroll-fade` to the element that scrolls vertically. The fade follows the scroll position, and disappears automatically when the content does not overflow.
+
+```tsx
+<div className="h-72 overflow-y-auto scroll-fade">
+  {/* Scrollable content */}
+</div>
+```
+
+Put the background and border on a wrapper when the scroll area is inside a card. The mask is applied to the scroller's content.
+
+`ScrollArea` also supports the `scrollFade` prop to apply the fade to its viewport.
+
+```tsx
+<ScrollArea className="h-64" scrollFade>
+  {/* Scrollable content */}
+</ScrollArea>
+```
+
+## Examples
+
+### Vertical scroll
+
+Use `scroll-fade` or `scroll-fade-y` on the element with `overflow-y-auto`.
+
+<ComponentPreview componentName="scroll-fade" fileName="example-default" />
+
+### No overflow
+
+The fade only appears when the content overflows, so the same class works for short lists.
+
+<ComponentPreview componentName="scroll-fade" fileName="example-no-overflow" />
+
+### Horizontal scroll
+
+Use `scroll-fade-x` on the element with `overflow-x-auto`. The fade follows inline direction and mirrors automatically in RTL.
+
+<ComponentPreview componentName="scroll-fade" fileName="example-horizontal" />
+
+### One edge at a time
+
+Use `scroll-fade-t`, `scroll-fade-b`, `scroll-fade-l`, or `scroll-fade-r` for physical edges. Use `scroll-fade-s` and `scroll-fade-e` for logical inline edges that mirror in RTL.
+
+<ComponentPreview componentName="scroll-fade" fileName="example-edges" />
+
+### Fade size
+
+The default size is `min(12%, 10 * --spacing)`. Set a shared size with `scroll-fade-<number>` or an arbitrary value such as `scroll-fade-[15%]`. Per-edge modifiers (`scroll-fade-t-*`, `scroll-fade-b-*`, `scroll-fade-s-*`, and `scroll-fade-e-*`) override the shared size.
+
+<ComponentPreview componentName="scroll-fade" fileName="example-size" />
+
+### Disable the fade
+
+Use `scroll-fade-none` to remove the mask, including in responsive variants.
+
+```tsx
+<div className="scroll-fade overflow-y-auto md:scroll-fade-none">
+  {/* Scrollable content */}
+</div>
+```
+
+<ComponentPreview componentName="scroll-fade" fileName="example-none" />
+
+### RTL
+
+`scroll-fade-x` follows the reading direction. In RTL, the start edge is on the right and the end fade is on the left.
+
+<ComponentPreview componentName="scroll-fade" fileName="example-rtl" />
+
+## API Reference
+
+| Class | Effect |
+| --- | --- |
+| `scroll-fade`, `scroll-fade-y` | Scroll-aware top and bottom fades |
+| `scroll-fade-x` | Scroll-aware inline start and end fades |
+| `scroll-fade-t/b/l/r` | Scroll-aware fade on one physical edge |
+| `scroll-fade-s/e` | Scroll-aware fade on one logical inline edge |
+| `scroll-fade-*` | Set the shared fade size |
+| `scroll-fade-{t,b,s,e}-*` | Set one edge's fade size |
+| `scroll-fade-none` | Disable the mask |
+
+The animation uses CSS scroll-driven animations without JavaScript. Browsers that do not support them show a static fade. A visible scrollbar fades along with its content; pair the utility with `scrollbar-none` (or `no-scrollbar`) to hide it.

@@ -3,6 +3,9 @@
 @import "./themes.css";
 @import "./prose.css";
 @import "./hitbox.css";
+@import "./scroll-fade.css";
+@import "./shimmer.css";
+@import "./scrollbar.css";
 
 @custom-variant dark (&:is(.dark *));
 
