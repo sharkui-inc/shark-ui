@@ -5,24 +5,7 @@
 @import "./hitbox.css";
 @import "./scroll-fade.css";
 @import "./shimmer.css";
-
-@utility no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-@utility scrollbar-none {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
+@import "./scrollbar.css";
 
 @custom-variant dark (&:is(.dark *));
 

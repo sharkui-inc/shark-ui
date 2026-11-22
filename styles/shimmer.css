@@ -86,11 +86,14 @@
 
 @utility shimmer-color-* {
   --shimmer-color: --value(--color, [color]);
-  --shimmer-color: color-mix(
-    in oklch,
-    --value(--color, [color]) calc(--modifier(integer) * 1%),
-    transparent
-  );
+
+  &:where([class*="/"]) {
+    --shimmer-color: color-mix(
+      in oklch,
+      --value(--color, [color]) calc(--modifier(integer) * 1%),
+      transparent
+    );
+  }
 }
 
 @utility shimmer-duration-* {
@@ -98,8 +101,7 @@
 }
 
 @utility shimmer-spread-* {
-  --shimmer-spread: calc(var(--spacing) * --value(integer));
-  --shimmer-spread: --value([length], [percentage]);
+  --shimmer-spread: --spacing(--value(number, [*]));
 }
 
 @utility shimmer-angle-* {
