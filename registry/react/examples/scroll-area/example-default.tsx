@@ -5,7 +5,7 @@ import { Separator } from "@/registry/react/components/separator";
 const tags = Array.from({ length: 50 }, (_, i) => `v1.0.0-beta.${i}`);
 
 const ScrollAreaDemo = () => (
-  <ScrollArea className="h-64 w-48 rounded-md border">
+  <ScrollArea className="h-64 w-48 rounded-md border" scrollFade>
     <div className="p-4">
       <h4 className="mb-4 font-medium text-sm leading-none">Tags</h4>
       {tags.map((tag) => (

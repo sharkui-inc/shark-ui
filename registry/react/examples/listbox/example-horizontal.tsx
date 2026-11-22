@@ -14,7 +14,7 @@ const Example = () => (
   <Field className="w-full max-w-xl">
     <FieldLabel>Favorite album</FieldLabel>
     <Listbox collection={collection} orientation="horizontal">
-      <ListboxContent className="overflow-x-auto">
+      <ListboxContent className="scroll-fade-x overflow-x-auto">
         {collection.items.map((item) => (
           <ListboxItem
             className="w-full flex-col items-start"

@@ -179,7 +179,7 @@ export const PopoverBody = (props: React.ComponentProps<typeof ark.div>) => {
         className={cn(
           "flex-1",
           "p-(--space)",
-          "overflow-auto",
+          "scroll-fade overflow-auto",
           "in-[[data-slot=popover-content]:has([data-slot=popover-header])]:pt-1",
           "in-[[data-slot=popover-content]:has([data-slot=popover-footer]:not(.border-t))]:pb-1",
           className

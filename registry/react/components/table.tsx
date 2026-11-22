@@ -23,7 +23,10 @@ export const Table = (props: TableProps) => {
   const { variant = "plain", isHoverable = true, className, ...rest } = props;
 
   return (
-    <div className="relative w-full overflow-auto" data-slot="table-wrapper">
+    <div
+      className="scroll-fade relative w-full overflow-auto"
+      data-slot="table-wrapper"
+    >
       <ark.table
         className={cn(
           "group/table",

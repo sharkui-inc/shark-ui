@@ -24,7 +24,7 @@ const Example = () => {
         onValueChange={(e) => setValue(e.value)}
         value={value}
       >
-        <ListboxContent className="overflow-auto max-sm:flex-row">
+        <ListboxContent className="scroll-fade overflow-auto max-sm:flex-row">
           {collection.items.map((item) => (
             <ListboxItem item={item} key={item.value}>
               <ListboxItemText>{item.label}</ListboxItemText>

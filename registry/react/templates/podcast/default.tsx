@@ -180,7 +180,7 @@ const PodcastTemplate = () => (
               <h2 className="mb-4 font-semibold text-xl">
                 Today&apos;s biggest hits
               </h2>
-              <div className="flex gap-4 overflow-x-auto pb-2">
+              <div className="scroll-fade-x flex gap-4 overflow-x-auto pb-2">
                 {TRACKS.map((track) => (
                   <Card
                     className="min-w-40 shrink-0 cursor-pointer transition-colors hover:bg-muted/50"

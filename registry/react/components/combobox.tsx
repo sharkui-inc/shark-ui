@@ -178,7 +178,7 @@ export const ComboboxContent = (
             "bg-popover",
             "text-popover-foreground",
             "rounded-xl border shadow-lg/5",
-            "overflow-y-auto",
+            "scroll-fade-y overflow-y-auto",
             "outline-none",
             "data-[state=closed]:animate-out data-[state=open]:animate-in",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",

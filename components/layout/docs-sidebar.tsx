@@ -26,6 +26,8 @@ interface DocsSidebarProps extends React.ComponentProps<typeof Sidebar> {
 
 const NEW_ITEMS = [
   "/docs/components/date-input",
+  "/docs/utilities/scroll-fade",
+  "/docs/utilities/shimmer",
   //
 ];
 

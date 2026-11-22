@@ -135,7 +135,7 @@ export const SelectContent = (
             "rounded-xl border shadow-lg/5",
             "origin-(--transform-origin)",
             "outline-none",
-            "overflow-y-auto",
+            "scroll-fade-y overflow-y-auto",
             "duration-100",
             "data-[state=open]:animate-in",
             "data-[state=open]:fade-in-0",
